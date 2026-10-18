@@ -2,7 +2,7 @@
 id: lem-bem-half-order-bessel-slobodeckij-equivalence
 kind: lemma
 title: Bessel and Slobodeckij norms agree at order one half
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

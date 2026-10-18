@@ -2,7 +2,7 @@
 id: thm-pe03-ideal-gas-llf-branch-preserves-positivity
 kind: theorem
 title: Symmetric HLL speeds preserve ideal-gas density and internal-energy positivity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

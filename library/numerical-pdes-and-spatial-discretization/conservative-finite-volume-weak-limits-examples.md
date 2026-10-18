@@ -1,7 +1,7 @@
 ---
 page: conservative-finite-volume-weak-limits-examples
 title: Conservative finite-volume weak limits — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-godunov-fv-captures-burgers-shock-speed

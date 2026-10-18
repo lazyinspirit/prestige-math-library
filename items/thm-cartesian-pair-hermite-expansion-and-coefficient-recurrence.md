@@ -2,7 +2,7 @@
 id: thm-cartesian-pair-hermite-expansion-and-coefficient-recurrence
 kind: theorem
 title: Finite Hermite expansion and coefficient recurrences for a Cartesian Gaussian pair
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

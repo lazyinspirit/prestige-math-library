@@ -2,7 +2,7 @@
 id: lem-schwarz-p1-product-cutoff-interpolation-energy-estimate
 kind: lemma
 title: "Elementwise P1 product-cutoff energy estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

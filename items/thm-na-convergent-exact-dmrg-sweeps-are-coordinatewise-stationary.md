@@ -2,7 +2,7 @@
 id: thm-na-convergent-exact-dmrg-sweeps-are-coordinatewise-stationary
 kind: theorem
 title: "Convergent fixed-rank exact sweeps are coordinatewise stationary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

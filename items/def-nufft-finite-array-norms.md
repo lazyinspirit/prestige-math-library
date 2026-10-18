@@ -2,7 +2,7 @@
 id: def-nufft-finite-array-norms
 kind: definition
 title: Finite complex-array norms used by the NUFFT certificates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

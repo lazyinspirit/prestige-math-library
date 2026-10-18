@@ -2,7 +2,7 @@
 id: ex-scalar-care-two-stabilizing-branches
 kind: example
 title: "A scalar CARE has two real roots but only one stabilizing branch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

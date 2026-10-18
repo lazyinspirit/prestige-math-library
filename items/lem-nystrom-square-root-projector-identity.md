@@ -2,7 +2,7 @@
 id: lem-nystrom-square-root-projector-identity
 kind: lemma
 title: "Nyström is a square-root orthogonal-projection compression"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

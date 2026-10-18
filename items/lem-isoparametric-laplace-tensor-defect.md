@@ -2,7 +2,7 @@
 id: lem-isoparametric-laplace-tensor-defect
 kind: lemma
 title: "Derivative geometry error controls the Laplace tensor defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

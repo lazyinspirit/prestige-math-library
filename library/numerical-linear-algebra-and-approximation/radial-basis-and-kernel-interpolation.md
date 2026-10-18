@@ -1,7 +1,7 @@
 ---
 page: radial-basis-and-kernel-interpolation
 title: "Radial basis and kernel interpolation"
-status: draft
+status: published
 requires:
   - finite-precision-direct-factorizations
   - polynomial-interpolation-and-remainder

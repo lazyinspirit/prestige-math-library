@@ -2,7 +2,7 @@
 id: lem-bem-smooth-trace-and-helmholtz-layer-extension
 kind: lemma
 title: Smooth-boundary trace lifts and Sobolev Helmholtz layer extensions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

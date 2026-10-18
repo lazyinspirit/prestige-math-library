@@ -2,7 +2,7 @@
 id: thm-hp-galerkin-energy-error-on-fixed-mesh
 kind: theorem
 title: Cea transfers the fixed-mesh analytic p rate to the energy error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

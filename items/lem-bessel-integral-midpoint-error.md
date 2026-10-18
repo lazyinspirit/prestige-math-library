@@ -2,7 +2,7 @@
 id: lem-bessel-integral-midpoint-error
 kind: lemma
 title: Composite midpoint enclosure for the integer Bessel integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

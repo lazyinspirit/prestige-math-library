@@ -2,7 +2,7 @@
 id: thm-signorini-nodal-contact-vi-falk-error
 kind: theorem
 title: "Falk error bound for nodal Signorini contact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

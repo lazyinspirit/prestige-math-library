@@ -2,7 +2,7 @@
 id: lem-natural-cubic-spline-second-derivative-perturbation
 kind: lemma
 title: Nodal second-derivative perturbations bound the natural spline error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

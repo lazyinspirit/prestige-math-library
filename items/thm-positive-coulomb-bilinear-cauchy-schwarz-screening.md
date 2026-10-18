@@ -2,7 +2,7 @@
 id: thm-positive-coulomb-bilinear-cauchy-schwarz-screening
 kind: theorem
 title: Positive Coulomb bilinear form, Cauchy–Schwarz, and screening bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

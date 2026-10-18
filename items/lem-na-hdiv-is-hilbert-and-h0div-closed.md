@@ -2,7 +2,7 @@
 id: lem-na-hdiv-is-hilbert-and-h0div-closed
 kind: lemma
 title: H(div) is Hilbert and H0(div) is closed
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

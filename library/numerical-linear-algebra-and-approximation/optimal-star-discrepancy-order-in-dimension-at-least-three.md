@@ -1,7 +1,7 @@
 ---
 page: optimal-star-discrepancy-order-in-dimension-at-least-three
 title: "Optimal star-discrepancy order in dimension at least three"
-status: draft
+status: published
 requires:
   - quasi-monte-carlo-discrepancy-and-rules
 items:

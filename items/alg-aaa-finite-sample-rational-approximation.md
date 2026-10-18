@@ -2,7 +2,7 @@
 id: alg-aaa-finite-sample-rational-approximation
 kind: algorithm
 title: Finite-sample AAA rational approximation with exact SVD
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

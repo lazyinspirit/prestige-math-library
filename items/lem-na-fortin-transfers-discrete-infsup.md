@@ -2,7 +2,7 @@
 id: lem-na-fortin-transfers-discrete-infsup
 kind: lemma
 title: "Fortin operators transfer the continuous inf-sup bound"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

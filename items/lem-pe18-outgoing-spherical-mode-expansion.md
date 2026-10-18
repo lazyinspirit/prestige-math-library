@@ -2,7 +2,7 @@
 id: lem-pe18-outgoing-spherical-mode-expansion
 kind: lemma
 title: Every outgoing spherical Helmholtz mode is an outgoing Hankel mode
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

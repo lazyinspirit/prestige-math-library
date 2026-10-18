@@ -2,7 +2,7 @@
 id: lem-gauss-jacobi-weight-finite-moment-measure
 kind: lemma
 title: The Jacobi weight defines a finite positive measure with full support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

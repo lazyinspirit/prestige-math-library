@@ -2,7 +2,7 @@
 id: def-pe04-upwind-sbp-sat-transport-discretization
 kind: definition
 title: Upwind SBP-SAT discretization of constant transport
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

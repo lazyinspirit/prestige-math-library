@@ -2,7 +2,7 @@
 id: ex-supg-vms-two-scale-closure-defect-sharp
 kind: example
 title: "A two-scale VMS closure attains its Schur defect bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

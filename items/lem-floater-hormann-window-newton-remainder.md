@@ -2,7 +2,7 @@
 id: lem-floater-hormann-window-newton-remainder
 kind: lemma
 title: Newton remainder for a Floater–Hormann window polynomial
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

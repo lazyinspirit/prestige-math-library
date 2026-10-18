@@ -2,7 +2,7 @@
 id: def-ale-moving-domain-map
 kind: definition
 title: "ALE moving-domain map and mesh velocity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

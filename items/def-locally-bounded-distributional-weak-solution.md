@@ -2,7 +2,7 @@
 id: def-locally-bounded-distributional-weak-solution
 kind: definition
 title: Locally bounded distributional weak solutions of scalar laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

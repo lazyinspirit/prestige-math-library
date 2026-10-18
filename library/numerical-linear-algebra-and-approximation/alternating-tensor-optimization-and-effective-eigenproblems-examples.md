@@ -1,7 +1,7 @@
 ---
 page: alternating-tensor-optimization-and-effective-eigenproblems-examples
 title: "Alternating tensor optimization and effective eigenproblems — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-na-two-site-spin-chain-exact-local-solve

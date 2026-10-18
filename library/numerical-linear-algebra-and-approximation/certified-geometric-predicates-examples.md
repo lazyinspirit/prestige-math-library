@@ -1,7 +1,7 @@
 ---
 page: certified-geometric-predicates-examples
 title: Certified geometric predicates — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-uncertain-coordinate-interval-with-ambiguous-sign

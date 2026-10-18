@@ -1,7 +1,7 @@
 ---
 page: tensor-train-compression-and-truncation-error-examples
 title: Tensor train compression and truncation error — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-best-rank-two-cp-approximation-may-not-exist

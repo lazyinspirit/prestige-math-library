@@ -1,7 +1,7 @@
 ---
 page: least-squares-fem-and-practical-dpg
 title: First-order least-squares FEM and practical DPG
-status: draft
+status: published
 items:
   - lem-na-ultraweak-poisson-rotation-trace-2d
   - def-na-least-squares-poisson-first-order

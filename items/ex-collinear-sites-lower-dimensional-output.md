@@ -2,7 +2,7 @@
 id: ex-collinear-sites-lower-dimensional-output
 kind: example
 title: "Collinear and duplicate sites return a canonical chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation-examples

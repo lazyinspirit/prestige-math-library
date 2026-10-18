@@ -2,7 +2,7 @@
 id: def-na-hybridized-rt0-darcy-system
 kind: definition
 title: Hybridized no-flow RT0/P0 Darcy system
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

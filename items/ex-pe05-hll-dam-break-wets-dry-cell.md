@@ -2,7 +2,7 @@
 id: ex-pe05-hll-dam-break-wets-dry-cell
 kind: example
 title: A first HLL step wets a dry cell without negative depth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

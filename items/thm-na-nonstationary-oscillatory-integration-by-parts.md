@@ -2,7 +2,7 @@
 id: thm-na-nonstationary-oscillatory-integration-by-parts
 kind: theorem
 title: Repeated integration by parts for a nonstationary oscillatory integral
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

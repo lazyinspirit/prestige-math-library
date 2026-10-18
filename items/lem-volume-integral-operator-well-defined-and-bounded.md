@@ -2,7 +2,7 @@
 id: lem-volume-integral-operator-well-defined-and-bounded
 kind: lemma
 title: The volume integral operator is well defined and bounded on L2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

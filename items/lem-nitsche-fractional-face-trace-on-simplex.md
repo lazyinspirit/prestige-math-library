@@ -2,7 +2,7 @@
 id: lem-nitsche-fractional-face-trace-on-simplex
 kind: lemma
 title: Fractional Bessel-potential traces on simplex facets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

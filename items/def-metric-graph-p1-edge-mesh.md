@@ -2,7 +2,7 @@
 id: def-metric-graph-p1-edge-mesh
 kind: definition
 title: "Conforming P1 edge mesh on an anchored metric graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

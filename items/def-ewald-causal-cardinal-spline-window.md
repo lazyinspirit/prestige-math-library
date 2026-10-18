@@ -2,7 +2,7 @@
 id: def-ewald-causal-cardinal-spline-window
 kind: definition
 title: "Causal cardinal spline window"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: phase-field-and-energy-dissipative-discretization
 title: Phase-field and dissipative gradient-flow computation
-status: draft
+status: published
 items:
   - def-phase-field-gradient-flow-and-double-well
   - def-phase-field-discrete-realizations

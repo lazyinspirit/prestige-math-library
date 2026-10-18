@@ -2,7 +2,7 @@
 id: lem-normalized-complex-gaussian-block-affine-spectral-second-moments
 kind: lemma
 title: Affine second-moment bounds for normalized complex Gaussian block products
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

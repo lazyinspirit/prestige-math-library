@@ -2,7 +2,7 @@
 id: lem-hp-simplex-p-explicit-conforming-interpolant
 kind: lemma
 title: Constructive varying-degree triangle interpolation in unweighted H1
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

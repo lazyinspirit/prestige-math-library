@@ -2,7 +2,7 @@
 id: thm-isogeometric-poisson-galerkin-quasioptimality
 kind: theorem
 title: Exact-geometry isogeometric Poisson Galerkin estimate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

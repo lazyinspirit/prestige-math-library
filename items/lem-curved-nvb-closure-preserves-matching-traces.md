@@ -2,7 +2,7 @@
 id: lem-curved-nvb-closure-preserves-matching-traces
 kind: lemma
 title: "Conforming NVB closure preserves curved shared traces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

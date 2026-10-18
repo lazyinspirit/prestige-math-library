@@ -2,7 +2,7 @@
 id: "lem-na-least-squares-poisson-residual-norm-equivalence"
 kind: "lemma"
 title: "Least-squares residual norm is equivalent to H(div) x H1_0 error"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 5

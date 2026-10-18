@@ -2,7 +2,7 @@
 id: ex-aaa-small-sample-error-does-not-control-off-grid
 kind: example
 title: Zero AAA sample residual can coexist with arbitrary off-grid error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

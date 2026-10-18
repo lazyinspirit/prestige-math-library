@@ -2,7 +2,7 @@
 id: thm-half-order-product-integration-fredholm-error
 kind: theorem
 title: Fredholm error bound for half-order product integration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -3,7 +3,7 @@ id: lem-matern-native-space-fourier-identity-and-positive-definiteness
 kind: lemma
 title: "The Matérn native space has its weighted Fourier norm and strict Gram
   positivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

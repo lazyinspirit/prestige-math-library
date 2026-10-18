@@ -2,7 +2,7 @@
 id: lem-nufft-gaussian-image-tail-bound
 kind: lemma
 title: Explicit tail for the periodized Gaussian image sum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

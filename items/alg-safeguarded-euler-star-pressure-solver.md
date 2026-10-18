@@ -2,7 +2,7 @@
 id: alg-safeguarded-euler-star-pressure-solver
 kind: algorithm
 title: "Finite-budget safeguarded Newton–bisection for Euler star pressure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

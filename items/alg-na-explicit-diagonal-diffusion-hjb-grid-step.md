@@ -2,7 +2,7 @@
 id: alg-na-explicit-diagonal-diffusion-hjb-grid-step
 kind: algorithm
 title: Explicit monotone diagonal-diffusion Bellman grid update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-periodic-diagonal-controlled-diffusion-hjb-problem, def-na-periodic-grid-and-tensor-multilinear-interpolation, lem-finite-set-has-max]

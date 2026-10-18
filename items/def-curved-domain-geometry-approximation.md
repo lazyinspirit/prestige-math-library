@@ -2,7 +2,7 @@
 id: def-curved-domain-geometry-approximation
 kind: definition
 title: "Curved-domain geometry approximation errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

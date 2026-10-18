@@ -2,7 +2,7 @@
 id: thm-one-dimensional-ideal-gas-euler-eigenstructure
 kind: theorem
 title: "Eigenstructure of the admissible ideal-gas Euler system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

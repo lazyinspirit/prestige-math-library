@@ -2,7 +2,7 @@
 id: ex-na-two-site-spin-chain-exact-local-solve
 kind: example
 title: "A two-site spin-chain local solve reaches the exact ground state"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

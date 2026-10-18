@@ -2,7 +2,7 @@
 id: alg-strong-rrqr-interpolative-decomposition
 kind: algorithm
 title: "Strong-RRQR interpolative decomposition with explicit statuses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

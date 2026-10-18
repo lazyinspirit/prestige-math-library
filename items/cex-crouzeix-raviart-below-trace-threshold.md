@@ -2,7 +2,7 @@
 id: cex-crouzeix-raviart-below-trace-threshold
 kind: counterexample
 title: A zero-boundary solution below the CR trace regularity threshold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

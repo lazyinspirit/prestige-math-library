@@ -2,7 +2,7 @@
 id: lem-na-mini-be-scheme-is-well-defined
 kind: lemma
 title: "Well-definedness of the finite-dimensional mini backward Euler equations"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

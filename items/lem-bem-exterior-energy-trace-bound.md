@@ -2,7 +2,7 @@
 id: lem-bem-exterior-energy-trace-bound
 kind: lemma
 title: Exterior finite-energy functions have a trace controlled by their gradient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

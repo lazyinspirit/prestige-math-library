@@ -2,7 +2,7 @@
 id: def-supg-general-residual-form
 kind: definition
 title: "Multidimensional P1 SUPG residual form and parameter scaling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

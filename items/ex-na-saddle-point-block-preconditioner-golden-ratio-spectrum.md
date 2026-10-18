@@ -2,7 +2,7 @@
 id: ex-na-saddle-point-block-preconditioner-golden-ratio-spectrum
 kind: example
 title: "A scalar saddle system has golden-ratio preconditioned eigenvalues"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

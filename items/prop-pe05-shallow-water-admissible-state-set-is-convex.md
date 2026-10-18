@@ -2,7 +2,7 @@
 id: prop-pe05-shallow-water-admissible-state-set-is-convex
 kind: proposition
 title: The shallow-water wet/dry state set is convex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

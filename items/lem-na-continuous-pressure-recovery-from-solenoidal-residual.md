@@ -2,7 +2,7 @@
 id: lem-na-continuous-pressure-recovery-from-solenoidal-residual
 kind: lemma
 title: "Mean-zero pressure recovery from a solenoidal residual"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

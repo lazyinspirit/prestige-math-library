@@ -2,7 +2,7 @@
 id: thm-maxwell-periodic-yee-smooth-solution-error
 kind: theorem
 title: Finite-time Yee error for smooth homogeneous periodic Maxwell fields
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

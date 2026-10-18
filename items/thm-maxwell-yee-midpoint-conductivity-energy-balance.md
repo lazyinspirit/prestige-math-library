@@ -2,7 +2,7 @@
 id: thm-maxwell-yee-midpoint-conductivity-energy-balance
 kind: theorem
 title: Midpoint conductivity dissipates the Yee discrete energy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

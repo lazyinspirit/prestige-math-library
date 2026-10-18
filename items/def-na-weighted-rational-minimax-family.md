@@ -2,7 +2,7 @@
 id: def-na-weighted-rational-minimax-family
 kind: definition
 title: "Weighted rational minimax families and defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

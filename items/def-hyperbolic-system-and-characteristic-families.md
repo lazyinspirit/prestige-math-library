@@ -2,7 +2,7 @@
 id: def-hyperbolic-system-and-characteristic-families
 kind: definition
 title: "Strictly hyperbolic conservation systems and characteristic families"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

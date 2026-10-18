@@ -2,7 +2,7 @@
 id: thm-sketch-and-solve-exact-minimizer
 kind: theorem
 title: A converged exact sketch-and-solve run returns a sketch minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings

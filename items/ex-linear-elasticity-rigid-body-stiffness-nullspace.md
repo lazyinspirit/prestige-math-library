@@ -2,7 +2,7 @@
 id: ex-linear-elasticity-rigid-body-stiffness-nullspace
 kind: example
 title: "Rigid motions in a free-body stiffness nullspace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-ewald-source-collision-field-singularity
 kind: example
 title: "A point-source potential is singular at a source"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

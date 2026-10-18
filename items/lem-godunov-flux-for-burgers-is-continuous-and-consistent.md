@@ -2,7 +2,7 @@
 id: lem-godunov-flux-for-burgers-is-continuous-and-consistent
 kind: lemma
 title: The Burgers Godunov flux is continuous and consistent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

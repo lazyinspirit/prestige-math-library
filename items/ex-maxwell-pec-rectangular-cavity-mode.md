@@ -2,7 +2,7 @@
 id: ex-maxwell-pec-rectangular-cavity-mode
 kind: example
 title: A smooth Maxwell eigenmode in a rectangular PEC cavity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

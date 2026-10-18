@@ -2,7 +2,7 @@
 id: prop-pe26-bddc-constrained-local-minimization
 kind: proposition
 title: BDDC is the constrained partial-energy minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

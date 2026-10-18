@@ -2,7 +2,7 @@
 id: def-finite-planar-quadtree-fmm-pair-lists
 kind: definition
 title: Finite planar quadtree and separated interaction lists
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

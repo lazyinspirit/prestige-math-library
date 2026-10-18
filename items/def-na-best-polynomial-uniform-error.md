@@ -2,7 +2,7 @@
 id: def-na-best-polynomial-uniform-error
 kind: definition
 title: "Best uniform polynomial error on a compact interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

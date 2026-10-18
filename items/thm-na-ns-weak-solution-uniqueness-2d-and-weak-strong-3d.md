@@ -3,7 +3,7 @@ id: thm-na-ns-weak-solution-uniqueness-2d-and-weak-strong-3d
 kind: theorem
 title: "Two-dimensional uniqueness and conditional three-dimensional
   weak–strong uniqueness"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: thm-curved-isoparametric-strang-error-bound
 kind: theorem
 title: "Strang error bound for a parabolic isoparametric P1 family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: prop-circulants-are-unitarily-diagonalized-by-the-canonical-dft
 kind: proposition
 title: "The canonical finite DFT diagonalizes every circulant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

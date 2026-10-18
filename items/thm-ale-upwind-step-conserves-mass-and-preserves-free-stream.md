@@ -2,7 +2,7 @@
 id: thm-ale-upwind-step-conserves-mass-and-preserves-free-stream
 kind: theorem
 title: "The upwind ALE step conserves mass and preserves constants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

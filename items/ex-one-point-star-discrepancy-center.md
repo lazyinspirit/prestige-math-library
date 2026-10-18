@@ -2,7 +2,7 @@
 id: ex-one-point-star-discrepancy-center
 kind: example
 title: "Exact star discrepancy of the center point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

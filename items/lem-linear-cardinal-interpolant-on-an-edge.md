@@ -2,7 +2,7 @@
 id: lem-linear-cardinal-interpolant-on-an-edge
 kind: lemma
 title: "The affine edge interpolant is the unique degree-at-most-one cardinal polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

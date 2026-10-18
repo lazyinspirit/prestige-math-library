@@ -2,7 +2,7 @@
 id: def-hlr-cluster-trees-and-geometric-admissibility
 kind: definition
 title: "Finite cluster trees and geometric admissibility"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

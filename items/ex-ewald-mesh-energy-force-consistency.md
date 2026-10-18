@@ -2,7 +2,7 @@
 id: ex-ewald-mesh-energy-force-consistency
 kind: example
 title: "The energy-gradient mesh force matches the differentiated mesh energy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

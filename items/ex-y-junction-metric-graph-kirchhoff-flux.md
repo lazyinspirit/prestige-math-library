@@ -2,7 +2,7 @@
 id: ex-y-junction-metric-graph-kirchhoff-flux
 kind: example
 title: "A Y-junction satisfies Kirchhoff flux balance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

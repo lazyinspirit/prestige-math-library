@@ -2,7 +2,7 @@
 id: def-nurbs-patch-map-and-rational-spline-space
 kind: definition
 title: Tensor-product NURBS patch maps and rational spline spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-native-interpolation-projection-and-power-function
 kind: theorem
 title: "Native Matérn interpolation is an orthogonal projection with power function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

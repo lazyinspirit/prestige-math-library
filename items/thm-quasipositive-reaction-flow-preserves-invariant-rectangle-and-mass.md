@@ -2,7 +2,7 @@
 id: thm-quasipositive-reaction-flow-preserves-invariant-rectangle-and-mass
 kind: theorem
 title: Inward reaction fields preserve rectangles and stoichiometric mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

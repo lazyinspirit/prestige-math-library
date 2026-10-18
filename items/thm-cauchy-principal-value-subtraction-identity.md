@@ -2,7 +2,7 @@
 id: thm-cauchy-principal-value-subtraction-identity
 kind: theorem
 title: The Cauchy principal-value subtraction identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

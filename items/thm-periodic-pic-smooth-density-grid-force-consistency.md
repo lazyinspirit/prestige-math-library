@@ -2,7 +2,7 @@
 id: thm-periodic-pic-smooth-density-grid-force-consistency
 kind: theorem
 title: Fixed-regularization periodic PIC force consistency on a smooth density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

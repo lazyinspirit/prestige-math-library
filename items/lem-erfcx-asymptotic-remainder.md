@@ -2,7 +2,7 @@
 id: lem-erfcx-asymptotic-remainder
 kind: lemma
 title: Signed finite remainder for the erfcx asymptotic expansion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

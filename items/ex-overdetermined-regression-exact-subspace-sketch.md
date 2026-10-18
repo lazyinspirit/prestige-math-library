@@ -2,7 +2,7 @@
 id: ex-overdetermined-regression-exact-subspace-sketch
 kind: example
 title: An exact two-row sketch for a three-row regression problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings-examples

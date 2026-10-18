@@ -1,7 +1,7 @@
 ---
 page: supg-and-residual-based-stabilized-finite-elements-examples
 title: "SUPG, residual stabilization and variational multiscale methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-supg-q1-equal-order-pressure-checkerboard

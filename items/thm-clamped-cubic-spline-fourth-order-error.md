@@ -3,7 +3,7 @@ id: thm-clamped-cubic-spline-fourth-order-error
 kind: theorem
 title: Boundary-compatible clamped cubic interpolation is fourth order in the
   maximum norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

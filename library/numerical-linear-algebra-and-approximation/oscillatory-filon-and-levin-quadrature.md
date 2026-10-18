@@ -1,7 +1,7 @@
 ---
 page: oscillatory-filon-and-levin-quadrature
 title: Oscillatory integrals and filon levin methods
-status: draft
+status: published
 items:
   - def-na-finite-interval-oscillatory-integral
   - lem-na-lagrange-interpolation-on-distinct-nodes

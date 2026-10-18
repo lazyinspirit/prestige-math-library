@@ -2,7 +2,7 @@
 id: thm-nurbs-p1-tensor-spline-h1-error-rate
 kind: theorem
 title: Smooth compactly supported data have a degree-one NURBS energy rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

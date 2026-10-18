@@ -1,7 +1,7 @@
 ---
 page: numerical-algebraic-riccati-equations-and-stabilizing-branches
 title: Numerical algebraic Riccati equations and stabilizing branches
-status: draft
+status: published
 requires:
   - generalized-eigenvalue-pencils-and-qz-methods
   - matrix-functions-and-scaling-squaring

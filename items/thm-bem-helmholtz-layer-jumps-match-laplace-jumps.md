@@ -2,7 +2,7 @@
 id: thm-bem-helmholtz-layer-jumps-match-laplace-jumps
 kind: theorem
 title: The Helmholtz single-layer and double-layer traces have the Laplace jump signs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

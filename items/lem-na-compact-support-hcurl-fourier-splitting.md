@@ -2,7 +2,7 @@
 id: lem-na-compact-support-hcurl-fourier-splitting
 kind: lemma
 title: A whole-space Fourier splitting for compactly supported H(curl) fields
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

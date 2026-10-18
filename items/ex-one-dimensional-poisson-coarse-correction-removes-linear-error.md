@@ -2,7 +2,7 @@
 id: ex-one-dimensional-poisson-coarse-correction-removes-linear-error
 kind: example
 title: "A linear error on the one-dimensional Poisson coarse space is removed exactly"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

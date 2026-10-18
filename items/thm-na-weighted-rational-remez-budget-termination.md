@@ -2,7 +2,7 @@
 id: thm-na-weighted-rational-remez-budget-termination
 kind: theorem
 title: "A budgeted weighted rational Remez exchange terminates within its finite cap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

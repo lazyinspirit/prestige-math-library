@@ -1,7 +1,7 @@
 ---
 page: reaction-diffusion-invariants-and-pattern-discretization
 title: Reaction-diffusion systems, invariants and pattern computation
-status: draft
+status: published
 items:
   - def-reaction-vector-field-and-quasipositivity
   - def-periodic-reaction-diffusion-grid

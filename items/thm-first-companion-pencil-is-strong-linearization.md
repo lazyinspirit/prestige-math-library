@@ -2,7 +2,7 @@
 id: thm-first-companion-pencil-is-strong-linearization
 kind: theorem
 title: "The first Frobenius companion pencil preserves the finite and infinite polynomial spectrum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

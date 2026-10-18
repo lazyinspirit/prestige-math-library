@@ -2,7 +2,7 @@
 id: def-reaction-vector-field-and-quasipositivity
 kind: definition
 title: Reaction vector fields and quasi-positivity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

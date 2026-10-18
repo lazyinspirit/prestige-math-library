@@ -2,7 +2,7 @@
 id: thm-symbolic-geometric-determinant-tie-break-consistent
 kind: theorem
 title: The formal determinant tie-break is nondegenerate and consistent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

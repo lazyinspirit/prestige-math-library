@@ -2,7 +2,7 @@
 id: def-supg-general-convection-diffusion-reaction-model
 kind: definition
 title: "Stationary multidimensional convection–diffusion–reaction P1 model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

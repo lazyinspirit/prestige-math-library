@@ -2,7 +2,7 @@
 id: thm-pe03-convex-scaling-limiter-preserves-mean-and-node-positivity
 kind: theorem
 title: Convex scaling preserves the cell mean and positive-margin node states
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

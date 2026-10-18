@@ -2,7 +2,7 @@
 id: lem-na-bogovskii-fourier-ray-and-derivative-ltwo-bound
 kind: lemma
 title: "Elementary Fourier ray and derivative L2 bounds"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

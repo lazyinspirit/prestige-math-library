@@ -2,7 +2,7 @@
 id: ex-supg-q1-equal-order-pressure-checkerboard
 kind: example
 title: "A periodic Q1/Q1 checkerboard pressure mode is invisible to divergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

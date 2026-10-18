@@ -1,7 +1,7 @@
 ---
 page: nonuniform-fast-fourier-transforms-examples
 title: Nonuniform fast fourier transforms — Examples
-status: draft
+status: published
 requires:
   - nonuniform-fast-fourier-transforms
 items: []

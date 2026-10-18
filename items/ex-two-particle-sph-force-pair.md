@@ -2,7 +2,7 @@
 id: ex-two-particle-sph-force-pair
 kind: example
 title: "Two SPH particles receive equal and opposite pressure forces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

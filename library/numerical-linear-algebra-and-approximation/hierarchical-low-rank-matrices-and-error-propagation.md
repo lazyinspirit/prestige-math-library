@@ -1,7 +1,7 @@
 ---
 page: hierarchical-low-rank-matrices-and-error-propagation
 title: Hierarchical low rank matrices and error propagation
-status: draft
+status: published
 items:
   - def-hlr-cluster-trees-and-geometric-admissibility
   - lem-hlr-balanced-cluster-tree-size-and-depth

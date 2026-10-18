@@ -2,7 +2,7 @@
 id: thm-pe11-edge-maxwell-spectral-approximation
 kind: theorem
 title: Spectral convergence and no nonzero pollution for PEC edge elements
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

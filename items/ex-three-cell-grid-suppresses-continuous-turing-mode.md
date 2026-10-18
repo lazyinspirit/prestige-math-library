@@ -2,7 +2,7 @@
 id: ex-three-cell-grid-suppresses-continuous-turing-mode
 kind: example
 title: A three-cell periodic grid suppresses the Brusselator's unstable continuous mode
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-randomized-rangefinder-deterministic-svd-partition-error
 kind: lemma
 title: Deterministic SVD-partition error bound for the range finder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

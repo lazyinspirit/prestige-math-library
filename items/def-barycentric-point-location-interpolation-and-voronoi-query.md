@@ -2,7 +2,7 @@
 id: def-barycentric-point-location-interpolation-and-voronoi-query
 kind: definition
 title: "Barycentric point location, affine interpolation, and nearest-site queries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

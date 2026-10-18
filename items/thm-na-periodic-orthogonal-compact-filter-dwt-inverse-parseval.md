@@ -2,7 +2,7 @@
 id: thm-na-periodic-orthogonal-compact-filter-dwt-inverse-parseval
 kind: theorem
 title: Inverse and Parseval identity for a periodic orthogonal compact-filter transform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

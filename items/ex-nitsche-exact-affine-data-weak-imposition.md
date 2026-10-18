@@ -2,7 +2,7 @@
 id: ex-nitsche-exact-affine-data-weak-imposition
 kind: example
 title: Exact affine data under weak imposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

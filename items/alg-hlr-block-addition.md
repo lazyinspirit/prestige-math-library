@@ -2,7 +2,7 @@
 id: alg-hlr-block-addition
 kind: algorithm
 title: "Tolerance-controlled H-matrix block addition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

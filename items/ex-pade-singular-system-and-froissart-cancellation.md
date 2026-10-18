@@ -2,7 +2,7 @@
 id: ex-pade-singular-system-and-froissart-cancellation
 kind: example
 title: Padé matching can be singular or create a Froissart doublet
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

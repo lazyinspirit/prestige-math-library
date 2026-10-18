@@ -1,7 +1,7 @@
 ---
 page: semi-lagrangian-characteristic-transport
 title: "Semi-Lagrangian characteristic transport"
-status: draft
+status: published
 items:
   - def-semilagrangian-periodic-grid-and-interpolant
   - thm-periodic-c1-velocity-has-global-characteristic-flow

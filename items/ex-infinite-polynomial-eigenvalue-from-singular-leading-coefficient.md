@@ -2,7 +2,7 @@
 id: ex-infinite-polynomial-eigenvalue-from-singular-leading-coefficient
 kind: example
 title: "A singular leading coefficient gives an infinite polynomial eigenvalue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

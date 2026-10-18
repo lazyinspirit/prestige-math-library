@@ -2,7 +2,7 @@
 id: def-na-wavelet-coefficient-besov-quasinorm
 kind: definition
 title: Finite wavelet-coefficient Besov quasi-norm on a dyadic multilevel transform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

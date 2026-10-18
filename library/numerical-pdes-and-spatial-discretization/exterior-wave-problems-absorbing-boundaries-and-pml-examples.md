@@ -1,7 +1,7 @@
 ---
 page: exterior-wave-problems-absorbing-boundaries-and-pml-examples
 title: Exterior waves, absorbing boundaries and PML — Examples
-status: draft
+status: published
 items:
   - ex-pe18-pml-angle-dependent-attenuation
   - ex-pe18-impedance-normal-and-grazing-incidence

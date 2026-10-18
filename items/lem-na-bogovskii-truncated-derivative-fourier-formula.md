@@ -2,7 +2,7 @@
 id: lem-na-bogovskii-truncated-derivative-fourier-formula
 kind: lemma
 title: "Truncated Fourier formula for derivatives of the Bogovskii operator"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

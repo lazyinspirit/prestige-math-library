@@ -2,7 +2,7 @@
 id: thm-hlr-separated-cauchy-block-rank-bound
 kind: theorem
 title: "A separated Cauchy block has a geometric rank bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

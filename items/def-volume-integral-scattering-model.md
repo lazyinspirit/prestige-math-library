@@ -2,7 +2,7 @@
 id: def-volume-integral-scattering-model
 kind: definition
 title: The three-dimensional volume integral scattering model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-crouzeix-raviart-global-face-basis
 kind: lemma
 title: Interior face means form the global Crouzeix–Raviart degrees of freedom
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

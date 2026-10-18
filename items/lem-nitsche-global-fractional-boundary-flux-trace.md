@@ -2,7 +2,7 @@
 id: lem-nitsche-global-fractional-boundary-flux-trace
 kind: lemma
 title: Mesh-uniform fractional boundary flux trace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

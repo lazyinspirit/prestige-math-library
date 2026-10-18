@@ -3,7 +3,7 @@ id: lem-bem-panel-pair-duffy-certificates
 kind: lemma
 title: Certified touching-panel and disjoint-panel quadrature for the Laplace P0
   matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

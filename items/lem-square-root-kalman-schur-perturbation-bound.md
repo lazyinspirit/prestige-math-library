@@ -2,7 +2,7 @@
 id: lem-square-root-kalman-schur-perturbation-bound
 kind: lemma
 title: "Innovation, gain, and posterior errors follow from joint covariance perturbations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

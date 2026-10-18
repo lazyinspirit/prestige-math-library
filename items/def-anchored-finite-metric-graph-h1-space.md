@@ -2,7 +2,7 @@
 id: def-anchored-finite-metric-graph-h1-space
 kind: definition
 title: "Anchored finite metric graph and its H1 energy space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

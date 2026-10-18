@@ -1,7 +1,7 @@
 ---
 page: ewald-periodic-potentials-and-particle-mesh-error-examples
 title: "Ewald periodic potentials and particle mesh error — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ewald-nonneutral-zero-mode-obstruction

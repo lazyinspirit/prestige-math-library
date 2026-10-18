@@ -2,7 +2,7 @@
 id: cex-standard-midpoint-nystrom-not-operator-norm-convergent
 kind: counterexample
 title: Standard midpoint Nyström operators need not converge in operator norm on C
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

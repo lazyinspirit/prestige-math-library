@@ -2,7 +2,7 @@
 id: lem-na-sup-convolution-semiconvexity-and-jet-transfer
 kind: lemma
 title: Quadratic sup convolution and transfer of upper jets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

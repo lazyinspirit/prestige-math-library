@@ -2,7 +2,7 @@
 id: def-semilinear-reaction-diffusion-system
 kind: definition
 title: Semilinear vector reaction-diffusion systems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

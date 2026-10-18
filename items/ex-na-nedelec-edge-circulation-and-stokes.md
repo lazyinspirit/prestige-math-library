@@ -2,7 +2,7 @@
 id: ex-na-nedelec-edge-circulation-and-stokes
 kind: example
 title: An oriented Nedelec edge circulation on one tetrahedron
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

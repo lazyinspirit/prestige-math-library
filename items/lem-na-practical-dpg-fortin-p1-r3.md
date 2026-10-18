@@ -2,7 +2,7 @@
 id: "lem-na-practical-dpg-fortin-p1-r3"
 kind: "lemma"
 title: "A uniformly bounded Fortin map for the practical P1/R3 DPG family"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 7

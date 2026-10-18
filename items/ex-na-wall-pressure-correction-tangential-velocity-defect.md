@@ -2,7 +2,7 @@
 id: ex-na-wall-pressure-correction-tangential-velocity-defect
 kind: example
 title: "A Neumann pressure correction can break tangential no-slip"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

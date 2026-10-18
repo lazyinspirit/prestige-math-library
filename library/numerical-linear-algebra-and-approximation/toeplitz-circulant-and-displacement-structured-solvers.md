@@ -1,7 +1,7 @@
 ---
 page: toeplitz-circulant-and-displacement-structured-solvers
 title: Toeplitz circulant and displacement structured solvers
-status: draft
+status: published
 items:
   - def-toeplitz-circulant-and-displacement-notation
   - thm-realified-dense-residual-certificate

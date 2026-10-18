@@ -2,7 +2,7 @@
 id: thm-two-level-p1-poisson-stable-decomposition
 kind: theorem
 title: "Stable two-level P1 decomposition for structured Poisson meshes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

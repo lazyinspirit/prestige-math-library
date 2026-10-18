@@ -2,7 +2,7 @@
 id: thm-bem-single-layer-galerkin-wellposed-and-quasioptimal
 kind: theorem
 title: P0 Galerkin BEM for the single layer is well posed and quasioptimal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: thm-tensor-train-exact-ranks-and-root-sum-square-truncation-error
 kind: theorem
 title: Exact TT ranks and root-sum-square truncation error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

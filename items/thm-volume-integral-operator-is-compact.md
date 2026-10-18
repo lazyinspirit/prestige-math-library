@@ -2,7 +2,7 @@
 id: thm-volume-integral-operator-is-compact
 kind: theorem
 title: The volume integral scattering operator is compact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

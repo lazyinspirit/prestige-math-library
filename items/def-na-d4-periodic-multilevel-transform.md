@@ -2,7 +2,7 @@
 id: def-na-d4-periodic-multilevel-transform
 kind: definition
 title: Periodic multilevel transform using the four-tap Daubechies filter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

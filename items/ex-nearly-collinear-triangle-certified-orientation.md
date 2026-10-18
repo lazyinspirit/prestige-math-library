@@ -2,7 +2,7 @@
 id: ex-nearly-collinear-triangle-certified-orientation
 kind: example
 title: A nearly collinear dyadic triangle falls through to the exact sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates-examples

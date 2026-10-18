@@ -2,7 +2,7 @@
 id: def-oblivious-l2-subspace-embedding
 kind: definition
 title: Oblivious squared-norm subspace embeddings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings

@@ -2,7 +2,7 @@
 id: ex-unstabilizable-or-undetectable-mode-breaks-stability
 kind: example
 title: "Unstabilizable and undetectable unstable modes break the CARE conclusion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

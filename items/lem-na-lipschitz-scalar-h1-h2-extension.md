@@ -2,7 +2,7 @@
 id: lem-na-lipschitz-scalar-h1-h2-extension
 kind: lemma
 title: Scalar H1 and H2 extension across a bounded Lipschitz boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

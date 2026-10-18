@@ -2,7 +2,7 @@
 id: lem-phase-field-interval-p1-projector-stability
 kind: lemma
 title: Uniform interval stability of the phase-field L2 projector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

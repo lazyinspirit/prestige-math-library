@@ -2,7 +2,7 @@
 id: lem-divided-difference-lagrange-formula-and-symmetry
 kind: lemma
 title: Divided differences are symmetric leading coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

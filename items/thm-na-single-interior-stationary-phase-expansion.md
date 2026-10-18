@@ -2,7 +2,7 @@
 id: thm-na-single-interior-stationary-phase-expansion
 kind: theorem
 title: Stationary-phase expansion at one simple interior critical point
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

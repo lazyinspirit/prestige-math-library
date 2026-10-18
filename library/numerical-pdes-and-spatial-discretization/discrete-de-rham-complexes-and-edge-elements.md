@@ -1,7 +1,7 @@
 ---
 page: discrete-de-rham-complexes-and-edge-elements
 title: Discrete de Rham complexes and edge-element foundations
-status: draft
+status: published
 items:
   - def-na-hcurl-space
   - lem-na-contractible-lipschitz-polyhedron-boundary-connected

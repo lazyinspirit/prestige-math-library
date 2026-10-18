@@ -2,7 +2,7 @@
 id: ex-bem-sphere-constant-density
 kind: example
 title: A constant density on the sphere gives a constant trace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

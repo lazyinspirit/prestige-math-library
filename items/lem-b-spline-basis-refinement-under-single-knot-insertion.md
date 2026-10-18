@@ -2,7 +2,7 @@
 id: lem-b-spline-basis-refinement-under-single-knot-insertion
 kind: lemma
 title: A single new knot refines the B-spline basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

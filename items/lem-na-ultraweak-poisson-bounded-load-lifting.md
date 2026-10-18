@@ -2,7 +2,7 @@
 id: lem-na-ultraweak-poisson-bounded-load-lifting
 kind: lemma
 title: A topology-free bounded lifting of every ultraweak Poisson load
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

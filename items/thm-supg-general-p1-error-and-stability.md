@@ -2,7 +2,7 @@
 id: thm-supg-general-p1-error-and-stability
 kind: theorem
 title: "Multidimensional P1 SUPG consistency, coercivity, and error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

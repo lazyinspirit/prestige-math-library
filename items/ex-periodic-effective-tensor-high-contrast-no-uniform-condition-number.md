@@ -2,7 +2,7 @@
 id: ex-periodic-effective-tensor-high-contrast-no-uniform-condition-number
 kind: example
 title: "High contrast destroys contrast-independent conditioning"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

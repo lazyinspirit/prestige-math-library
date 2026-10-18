@@ -1,7 +1,7 @@
 ---
 page: compressible-viscous-flow-and-entropy-stable-fluxes
 title: "Compressible viscous flow and entropy-stable viscous fluxes"
-status: draft
+status: published
 items:
   - def-compressible-navier-stokes-fourier-model
   - lem-compressible-admissible-state-set-open-convex

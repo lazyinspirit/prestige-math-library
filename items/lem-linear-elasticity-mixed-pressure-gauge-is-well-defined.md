@@ -2,7 +2,7 @@
 id: lem-linear-elasticity-mixed-pressure-gauge-is-well-defined
 kind: lemma
 title: "The mixed pressure has the mean-zero gauge"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

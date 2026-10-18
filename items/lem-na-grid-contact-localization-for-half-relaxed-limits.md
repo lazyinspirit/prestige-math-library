@@ -2,7 +2,7 @@
 id: lem-na-grid-contact-localization-for-half-relaxed-limits
 kind: lemma
 title: Localization of strict half-relaxed contacts to periodic mesh nodes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-periodic-grid-and-tensor-multilinear-interpolation, lem-na-multilinear-interpolation-positive-and-second-order-accurate, def-half-relaxed-limits, def-countable-choice, thm-euclidean-semicontinuous-extreme-value-theorem, thm-heine-borel-rn, def-metric-compactness, lem-finite-set-has-max]

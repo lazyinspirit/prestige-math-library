@@ -1,7 +1,7 @@
 ---
 page: substructuring-feti-dp-and-bddc-preconditioners-examples
 title: "Substructuring, FETI-DP and BDDC — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-pe26-missing-primal-corner

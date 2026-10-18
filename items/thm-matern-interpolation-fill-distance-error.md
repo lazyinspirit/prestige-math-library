@@ -2,7 +2,7 @@
 id: thm-matern-interpolation-fill-distance-error
 kind: theorem
 title: "Matérn interpolation and its power function converge at rate h^ν"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

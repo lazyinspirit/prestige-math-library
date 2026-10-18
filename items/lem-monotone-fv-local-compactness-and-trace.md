@@ -2,7 +2,7 @@
 id: lem-monotone-fv-local-compactness-and-trace
 kind: lemma
 title: Local compactness and initial trace for BV finite-volume states
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: alg-finite-budget-stable-block-reordering-for-schur-and-qz
 kind: algorithm
 title: "Finite-budget stable block reordering for Schur and QZ forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

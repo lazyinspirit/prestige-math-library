@@ -2,7 +2,7 @@
 id: lem-na-d4-multilevel-detail-support-and-moments
 kind: lemma
 title: Local support, affine cancellation, and normalization of multilevel D4 detail rows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

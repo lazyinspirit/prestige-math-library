@@ -2,7 +2,7 @@
 id: thm-boys-branch-evaluation-enclosures-are-sound
 kind: theorem
 title: Soundness of every successful finite-budget Boys enclosure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

@@ -1,7 +1,7 @@
 ---
 page: mixed-finite-elements-and-stokes-stability-examples
 title: "Mixed finite elements and Stokes stability — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-na-taylor-hood-pressure-mode

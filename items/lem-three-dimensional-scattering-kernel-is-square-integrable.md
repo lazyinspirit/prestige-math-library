@@ -2,7 +2,7 @@
 id: lem-three-dimensional-scattering-kernel-is-square-integrable
 kind: lemma
 title: The three-dimensional free-space scattering kernel is square integrable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: alternating-tensor-optimization-and-effective-eigenproblems
 title: "Alternating tensor optimization and effective eigenproblems"
-status: draft
+status: published
 items:
   - lem-na-finite-hermitian-ground-vector-with-deterministic-tie
   - lem-na-normalized-rayleigh-energy-perturbation

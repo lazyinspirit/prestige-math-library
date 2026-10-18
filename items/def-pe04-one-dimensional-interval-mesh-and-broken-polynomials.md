@@ -2,7 +2,7 @@
 id: def-pe04-one-dimensional-interval-mesh-and-broken-polynomials
 kind: definition
 title: Oriented interval meshes and broken polynomial spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-scalar-convex-entropy-admissibility
 kind: definition
 title: "Convex entropy admissibility for a scalar conservation law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

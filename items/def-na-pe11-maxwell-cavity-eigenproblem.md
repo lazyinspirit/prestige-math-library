@@ -2,7 +2,7 @@
 id: def-na-pe11-maxwell-cavity-eigenproblem
 kind: definition
 title: PEC Maxwell cavity eigenproblem and full-kernel gauge
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

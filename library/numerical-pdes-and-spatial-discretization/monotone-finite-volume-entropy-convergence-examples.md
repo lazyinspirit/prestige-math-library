@@ -1,7 +1,7 @@
 ---
 page: monotone-finite-volume-entropy-convergence-examples
 title: Monotone finite-volume entropy convergence — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-nonmonotone-fv-scheme-selects-expansion-shock

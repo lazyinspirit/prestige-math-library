@@ -2,7 +2,7 @@
 id: lem-cartesian-gaussian-moments-and-parameter-derivatives
 kind: lemma
 title: Cartesian Gaussian moments and exponent-parameter derivatives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

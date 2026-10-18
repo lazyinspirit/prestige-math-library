@@ -2,7 +2,7 @@
 id: def-ideal-gas-euler-state-and-pressure
 kind: definition
 title: "Admissible states and pressure for one-dimensional ideal-gas Euler"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

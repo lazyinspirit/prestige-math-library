@@ -3,7 +3,7 @@ id: thm-dare-local-residual-ball-certificate
 kind: theorem
 title: "A DARE residual, Stein inverse bound, and Lyapunov margin certify a
   stabilizing root"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

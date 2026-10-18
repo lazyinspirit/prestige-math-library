@@ -2,7 +2,7 @@
 id: ex-supg-grad-div-does-not-fix-pressure-kernel
 kind: example
 title: "Grad-div alone does not remove the Q1 checkerboard pressure kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

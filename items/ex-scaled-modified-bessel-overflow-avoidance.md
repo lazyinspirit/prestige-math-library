@@ -2,7 +2,7 @@
 id: ex-scaled-modified-bessel-overflow-avoidance
 kind: example
 title: Scaling keeps the modified Bessel value bounded as the unscaled value grows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

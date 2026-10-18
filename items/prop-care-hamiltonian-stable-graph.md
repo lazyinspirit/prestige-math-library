@@ -2,7 +2,7 @@
 id: prop-care-hamiltonian-stable-graph
 kind: proposition
 title: "The stabilizing CARE solution is the Hamiltonian stable invariant graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

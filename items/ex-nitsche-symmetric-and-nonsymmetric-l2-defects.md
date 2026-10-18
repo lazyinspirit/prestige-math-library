@@ -2,7 +2,7 @@
 id: ex-nitsche-symmetric-and-nonsymmetric-l2-defects
 kind: example
 title: Symmetric cancellation and the nonsymmetric L2 boundary defect
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

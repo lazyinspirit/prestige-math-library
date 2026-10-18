@@ -2,7 +2,7 @@
 id: thm-ewald-alpha-independent-energy-and-potential
 kind: theorem
 title: "The alpha-independent Ewald potential and renormalized energy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

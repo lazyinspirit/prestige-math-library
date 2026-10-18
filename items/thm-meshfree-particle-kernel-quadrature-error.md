@@ -2,7 +2,7 @@
 id: thm-meshfree-particle-kernel-quadrature-error
 kind: theorem
 title: "Explicit cellwise error for kernel value and gradient quadrature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: "lem-na-hdiv-normal-trace-surjectivity"
 kind: "lemma"
 title: "Weak H(div) normal trace surjects onto the scalar trace dual"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: alg-certified-dyadic-geometric-predicate
 kind: algorithm
 title: Certified predicate for exact dyadic geometric inputs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

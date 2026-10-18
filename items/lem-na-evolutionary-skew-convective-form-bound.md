@@ -2,7 +2,7 @@
 id: lem-na-evolutionary-skew-convective-form-bound
 kind: lemma
 title: "Continuity, energy cancellation, and Sobolev bounds for skew convection"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

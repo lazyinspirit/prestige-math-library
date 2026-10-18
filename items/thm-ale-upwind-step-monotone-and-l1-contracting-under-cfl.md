@@ -2,7 +2,7 @@
 id: thm-ale-upwind-step-monotone-and-l1-contracting-under-cfl
 kind: theorem
 title: "CFL monotonicity and weighted L1 contraction for the ALE step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

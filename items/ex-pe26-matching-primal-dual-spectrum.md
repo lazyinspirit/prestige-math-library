@@ -2,7 +2,7 @@
 id: ex-pe26-matching-primal-dual-spectrum
 kind: example
 title: A finite-dimensional BDDC/FETI-DP spectral match
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

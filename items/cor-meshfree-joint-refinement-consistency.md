@@ -2,7 +2,7 @@
 id: cor-meshfree-joint-refinement-consistency
 kind: corollary
 title: "Joint fill-distance and kernel-width refinement for value and derivative consistency"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

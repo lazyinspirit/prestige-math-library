@@ -3,7 +3,7 @@ id: cex-na-q1-p0-checkerboard-pressure-mode
 kind: counterexample
 title: "The alternating Q1/P0 checkerboard pressure defeats the discrete inf-sup
   condition"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

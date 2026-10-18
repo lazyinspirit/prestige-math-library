@@ -2,7 +2,7 @@
 id: lem-signorini-contact-set-closed-convex-nonempty
 kind: lemma
 title: "The Signorini contact set is nonempty, closed, and convex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

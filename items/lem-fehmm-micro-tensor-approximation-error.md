@@ -2,7 +2,7 @@
 id: lem-fehmm-micro-tensor-approximation-error
 kind: lemma
 title: Energy identity for FE-HMM micro tensor error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

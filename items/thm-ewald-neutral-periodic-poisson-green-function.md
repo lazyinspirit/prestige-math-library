@@ -3,7 +3,7 @@ id: thm-ewald-neutral-periodic-poisson-green-function
 kind: theorem
 title: "The mean-zero Fourier distribution solves the neutral periodic Poisson
   equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-small-fill-distance-can-have-poor-rbf-conditioning
 kind: example
 title: "A small fill distance can coexist with poor separation and conditioning"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

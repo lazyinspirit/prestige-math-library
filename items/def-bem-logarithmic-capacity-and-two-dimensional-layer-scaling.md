@@ -2,7 +2,7 @@
 id: def-bem-logarithmic-capacity-and-two-dimensional-layer-scaling
 kind: definition
 title: Logarithmic capacity and the two-dimensional Laplace layer kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-integer-order-bessel-recurrences-and-ode
 kind: lemma
 title: Bessel differential equations and order recurrences from the series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

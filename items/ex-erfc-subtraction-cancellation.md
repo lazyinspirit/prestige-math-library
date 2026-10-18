@@ -2,7 +2,7 @@
 id: ex-erfc-subtraction-cancellation
 kind: example
 title: Subtracting erf from one amplifies absolute input errors in the tail
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

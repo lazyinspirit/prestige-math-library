@@ -2,7 +2,7 @@
 id: cex-pe12-linear-ritz-does-not-commute
 kind: counterexample
 title: The linear Ritz projection need not preserve the nonlinear p-Laplacian residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

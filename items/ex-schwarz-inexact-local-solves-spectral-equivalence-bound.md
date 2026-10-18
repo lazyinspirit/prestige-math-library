@@ -2,7 +2,7 @@
 id: ex-schwarz-inexact-local-solves-spectral-equivalence-bound
 kind: example
 title: "Inexact local solves enter through spectral-equivalence constants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

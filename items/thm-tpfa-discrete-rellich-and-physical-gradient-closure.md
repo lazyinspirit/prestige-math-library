@@ -2,7 +2,7 @@
 id: thm-tpfa-discrete-rellich-and-physical-gradient-closure
 kind: theorem
 title: "Discrete TPFA Rellich compactness and physical weak gradients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

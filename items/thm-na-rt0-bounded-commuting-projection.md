@@ -2,7 +2,7 @@
 id: thm-na-rt0-bounded-commuting-projection
 kind: theorem
 title: Bounded commuting projection onto the zero-normal RT0 space
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 10

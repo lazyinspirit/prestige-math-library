@@ -2,7 +2,7 @@
 id: ex-signorini-one-dimensional-obstacle-free-boundary
 kind: example
 title: "A one-dimensional obstacle with an explicit free boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

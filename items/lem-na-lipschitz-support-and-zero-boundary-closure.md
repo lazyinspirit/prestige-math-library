@@ -2,7 +2,7 @@
 id: lem-na-lipschitz-support-and-zero-boundary-closure
 kind: lemma
 title: Whole-space support and the zero-boundary Sobolev closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

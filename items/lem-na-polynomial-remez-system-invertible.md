@@ -2,7 +2,7 @@
 id: lem-na-polynomial-remez-system-invertible
 kind: lemma
 title: "The Remez alternation linear system has a unique solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

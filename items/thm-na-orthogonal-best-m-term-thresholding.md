@@ -2,7 +2,7 @@
 id: thm-na-orthogonal-best-m-term-thresholding
 kind: theorem
 title: Hard m-term retention is optimal for an orthonormal coefficient basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

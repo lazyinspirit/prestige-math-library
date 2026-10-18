@@ -2,7 +2,7 @@
 id: lem-na-periodic-mps-to-open-tt
 kind: lemma
 title: "A periodic finite MPS has an exact open-boundary TT conversion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

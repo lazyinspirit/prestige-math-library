@@ -2,7 +2,7 @@
 id: alg-ewald-certified-particle-mesh-evaluator
 kind: algorithm
 title: "Certified three-dimensional particle-mesh Ewald evaluator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

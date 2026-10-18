@@ -2,7 +2,7 @@
 id: lem-crouzeix-raviart-face-jump-estimate
 kind: lemma
 title: Face jumps are controlled by the broken gradient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

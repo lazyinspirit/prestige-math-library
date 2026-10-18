@@ -1,7 +1,7 @@
 ---
 page: curved-mesh-geometry-and-conservative-mesh-transfer
 title: "Curved geometry, mesh generation and conservative transfer"
-status: draft
+status: published
 items:
   - def-intersection-volume-conservative-remapping
   - def-isoparametric-curved-cell-map

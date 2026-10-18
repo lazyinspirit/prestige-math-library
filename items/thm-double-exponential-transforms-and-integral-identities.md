@@ -2,7 +2,7 @@
 id: thm-double-exponential-transforms-and-integral-identities
 kind: theorem
 title: The double-exponential maps and their change-of-variable identities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

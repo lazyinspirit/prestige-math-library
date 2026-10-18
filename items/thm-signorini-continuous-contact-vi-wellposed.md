@@ -2,7 +2,7 @@
 id: thm-signorini-continuous-contact-vi-wellposed
 kind: theorem
 title: "Continuous frictionless elasticity contact is well posed"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

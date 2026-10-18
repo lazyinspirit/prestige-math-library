@@ -2,7 +2,7 @@
 id: thm-ewald-pme-reciprocal-energy-force-error-bound
 kind: theorem
 title: "Deterministic reciprocal particle-mesh Ewald potential, energy, and force bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: def-airy-initial-value-series
 kind: definition
 title: Airy initial-value series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

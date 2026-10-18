@@ -2,7 +2,7 @@
 id: "lem-na-least-squares-poisson-space-conformity"
 kind: "lemma"
 title: "The RT0/P1 least-squares family is conforming"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 7

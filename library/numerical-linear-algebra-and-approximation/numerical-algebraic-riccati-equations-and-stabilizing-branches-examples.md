@@ -1,7 +1,7 @@
 ---
 page: numerical-algebraic-riccati-equations-and-stabilizing-branches-examples
 title: Numerical algebraic Riccati equations and stabilizing branches — Examples
-status: draft
+status: published
 requires:
   - numerical-algebraic-riccati-equations-and-stabilizing-branches
 items: []

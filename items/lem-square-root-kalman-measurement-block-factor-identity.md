@@ -2,7 +2,7 @@
 id: lem-square-root-kalman-measurement-block-factor-identity
 kind: lemma
 title: "The block QR measurement update gives the canonical Kalman update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

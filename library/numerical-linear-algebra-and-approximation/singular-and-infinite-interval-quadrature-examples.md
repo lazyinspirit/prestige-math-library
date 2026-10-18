@@ -1,7 +1,7 @@
 ---
 page: singular-and-infinite-interval-quadrature-examples
 title: "Singular and infinite interval quadrature — Examples"
-status: draft
+status: published
 requires:
   - singular-and-infinite-interval-quadrature
 items:

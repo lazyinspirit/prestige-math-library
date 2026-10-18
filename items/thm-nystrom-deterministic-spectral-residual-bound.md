@@ -2,7 +2,7 @@
 id: thm-nystrom-deterministic-spectral-residual-bound
 kind: theorem
 title: "Nyström deterministic spectral residual bound under a full-row-rank leading sketch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

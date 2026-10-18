@@ -2,7 +2,7 @@
 id: lem-na-normalized-rayleigh-energy-perturbation
 kind: lemma
 title: "Rayleigh energy perturbation for normalized finite states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

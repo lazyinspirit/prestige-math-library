@@ -2,7 +2,7 @@
 id: lem-gaussian-matrix-law-normalization-and-second-moments
 kind: lemma
 title: Normalization and second moments of the Gaussian matrix laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

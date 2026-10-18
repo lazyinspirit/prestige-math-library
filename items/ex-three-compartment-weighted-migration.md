@@ -2,7 +2,7 @@
 id: ex-three-compartment-weighted-migration
 kind: example
 title: "Three-compartment migration conserves weighted mass"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

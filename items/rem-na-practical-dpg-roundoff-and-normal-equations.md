@@ -2,7 +2,7 @@
 id: "rem-na-practical-dpg-roundoff-and-normal-equations"
 kind: "remark"
 title: "Exact DPG stability does not certify quadrature or algebraic solve errors"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 6

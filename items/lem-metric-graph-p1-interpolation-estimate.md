@@ -2,7 +2,7 @@
 id: lem-metric-graph-p1-interpolation-estimate
 kind: lemma
 title: "P1 edge interpolation estimate with junction compatibility"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

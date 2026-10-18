@@ -3,7 +3,7 @@ id: lem-strong-rrqr-interpolative-decomposition-returns-a-status
 kind: lemma
 title: "Capped RRQR interpolation returns a status and its direct certificate
   bounds the actual residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

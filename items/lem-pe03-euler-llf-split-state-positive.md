@@ -2,7 +2,7 @@
 id: lem-pe03-euler-llf-split-state-positive
 kind: lemma
 title: Ideal-gas Euler states remain positive under Lax–Friedrichs flux splitting
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

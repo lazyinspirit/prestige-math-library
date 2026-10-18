@@ -2,7 +2,7 @@
 id: ex-x-minus-half-log-x-gauss-jacobi
 kind: example
 title: Gauss–Jacobi regularization for x to the minus one half times log x
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

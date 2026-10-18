@@ -2,7 +2,7 @@
 id: alg-na-minimax-approximation-and-remez-algorithms
 kind: algorithm
 title: "Finite-budget polynomial Remez exchange with an exact extrema oracle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-reaction-invariant-rectangle
 kind: definition
 title: Inward reaction rectangles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

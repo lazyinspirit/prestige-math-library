@@ -2,7 +2,7 @@
 id: thm-pchip-third-order-away-from-extrema
 kind: theorem
 title: PCHIP has third-order value accuracy on uniform nonstationary grids
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

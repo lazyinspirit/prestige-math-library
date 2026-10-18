@@ -2,7 +2,7 @@
 id: ex-pchip-flat-monotone-data
 kind: example
 title: PCHIP preserves a flat part of monotone data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: def-piecewise-cubic-hermite-interpolant
 kind: definition
 title: Piecewise cubic Hermite interpolant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

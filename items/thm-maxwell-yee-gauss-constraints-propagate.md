@@ -2,7 +2,7 @@
 id: thm-maxwell-yee-gauss-constraints-propagate
 kind: theorem
 title: Compatible discrete charge and magnetic divergence propagate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

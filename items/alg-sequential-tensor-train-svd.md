@@ -2,7 +2,7 @@
 id: alg-sequential-tensor-train-svd
 kind: algorithm
 title: Sequential tensor-train SVD
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

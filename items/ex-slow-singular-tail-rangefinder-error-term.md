@@ -2,7 +2,7 @@
 id: ex-slow-singular-tail-rangefinder-error-term
 kind: example
 title: A slowly decaying singular tail makes the Frobenius term dominate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

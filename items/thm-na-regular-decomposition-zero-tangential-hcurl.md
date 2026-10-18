@@ -2,7 +2,7 @@
 id: thm-na-regular-decomposition-zero-tangential-hcurl
 kind: theorem
 title: Regular decomposition of zero-tangential H(curl) fields
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

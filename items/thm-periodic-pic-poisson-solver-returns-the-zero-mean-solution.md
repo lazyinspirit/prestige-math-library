@@ -2,7 +2,7 @@
 id: thm-periodic-pic-poisson-solver-returns-the-zero-mean-solution
 kind: theorem
 title: The periodic PIC Poisson algorithm returns the unique gauged solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

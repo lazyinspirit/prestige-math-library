@@ -2,7 +2,7 @@
 id: def-pe26-feti-dp-dual-system-and-preconditioner
 kind: definition
 title: FETI-DP dual system and preconditioner
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

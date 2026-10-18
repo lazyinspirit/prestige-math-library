@@ -1,7 +1,7 @@
 ---
 page: homogenization-and-multiscale-finite-element-methods-examples
 title: "Homogenization, multiscale FEM and heterogeneous media — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-layered-periodic-effective-tensor

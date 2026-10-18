@@ -2,7 +2,7 @@
 id: ex-schwarz-overlap-shrinking-decomposition-bound
 kind: example
 title: "The stable-splitting guarantee worsens as overlap shrinks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

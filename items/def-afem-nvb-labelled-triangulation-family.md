@@ -2,7 +2,7 @@
 id: "def-afem-nvb-labelled-triangulation-family"
 kind: "definition"
 title: "Compatible 2D newest-vertex-bisection meshes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 0

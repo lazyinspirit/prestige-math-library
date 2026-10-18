@@ -2,7 +2,7 @@
 id: thm-fixed-mesh-forward-euler-error-for-compressible-sbp
 kind: theorem
 title: Conditional fixed-grid forward-Euler error bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

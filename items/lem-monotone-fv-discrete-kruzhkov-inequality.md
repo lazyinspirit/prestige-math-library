@@ -2,7 +2,7 @@
 id: lem-monotone-fv-discrete-kruzhkov-inequality
 kind: lemma
 title: Discrete Kruzhkov inequality for a monotone finite-volume scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

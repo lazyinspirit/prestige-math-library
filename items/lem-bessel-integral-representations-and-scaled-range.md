@@ -2,7 +2,7 @@
 id: lem-bessel-integral-representations-and-scaled-range
 kind: lemma
 title: Integral representations and a range bound for integer Bessel functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

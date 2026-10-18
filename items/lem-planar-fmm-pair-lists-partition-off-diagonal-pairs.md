@@ -2,7 +2,7 @@
 id: lem-planar-fmm-pair-lists-partition-off-diagonal-pairs
 kind: lemma
 title: Planar FMM lists partition all ordered off-diagonal particle pairs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

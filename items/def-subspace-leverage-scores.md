@@ -2,7 +2,7 @@
 id: def-subspace-leverage-scores
 kind: definition
 title: Row leverage scores of a finite-dimensional subspace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings

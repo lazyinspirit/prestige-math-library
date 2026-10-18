@@ -2,7 +2,7 @@
 id: lem-sipdg-discrete-flux-inverse-bound
 kind: lemma
 title: Discrete inverse-trace bound for SIPDG coefficient fluxes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

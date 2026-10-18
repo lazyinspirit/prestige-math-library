@@ -2,7 +2,7 @@
 id: lem-pe11-gauge-space-infinite-dimensional
 kind: lemma
 title: The PEC full-kernel gauge is infinite-dimensional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

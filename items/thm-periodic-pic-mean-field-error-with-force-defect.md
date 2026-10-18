@@ -2,7 +2,7 @@
 id: thm-periodic-pic-mean-field-error-with-force-defect
 kind: theorem
 title: Periodic PIC particle and force errors under a prescribed initial coupling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

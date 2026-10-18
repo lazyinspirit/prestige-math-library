@@ -2,7 +2,7 @@
 id: "alg-na-ultraweak-poisson-ideal-trial-to-test"
 kind: "algorithm"
 title: "Ideal Poisson DPG trial-to-test Riesz map"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 8

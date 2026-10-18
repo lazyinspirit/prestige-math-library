@@ -2,7 +2,7 @@
 id: def-hlr-and-h2-block-matrix-representations
 kind: definition
 title: "H-matrix block representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

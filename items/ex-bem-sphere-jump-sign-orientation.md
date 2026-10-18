@@ -2,7 +2,7 @@
 id: ex-bem-sphere-jump-sign-orientation
 kind: example
 title: A unit sphere checks both layer jump signs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

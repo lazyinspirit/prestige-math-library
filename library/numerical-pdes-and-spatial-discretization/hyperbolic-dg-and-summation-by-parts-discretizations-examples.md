@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-dg-and-summation-by-parts-discretizations-examples
 title: Hyperbolic DG and summation-by-parts methods — Examples
-status: draft
+status: published
 requires:
   - hyperbolic-dg-and-summation-by-parts-discretizations
 items: []

@@ -2,7 +2,7 @@
 id: thm-signorini-mortar-contact-kkt-and-complementarity
 kind: theorem
 title: "The dual mortar contact system is stable and exactly complementary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

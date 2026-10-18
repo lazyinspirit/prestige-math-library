@@ -2,7 +2,7 @@
 id: ex-bem-logarithmic-capacity-and-scale-on-a-circle
 kind: example
 title: The logarithmic single layer on a circle changes by a scale term of rank at most one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-schwartz-dense-in-fourier-bessel-potential-space
 kind: lemma
 title: "Schwartz functions are dense in the Fourier Bessel-potential norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

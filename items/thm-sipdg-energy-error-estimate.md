@@ -2,7 +2,7 @@
 id: thm-sipdg-energy-error-estimate
 kind: theorem
 title: A direct Strang-type energy error estimate for SIPDG
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

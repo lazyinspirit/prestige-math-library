@@ -2,7 +2,7 @@
 id: def-tensor-train-cores-bond-ranks-and-canonical-gauges
 kind: definition
 title: Tensor train cores, bond ranks, and canonical gauges
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

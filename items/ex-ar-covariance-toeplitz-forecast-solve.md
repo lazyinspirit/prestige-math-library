@@ -2,7 +2,7 @@
 id: ex-ar-covariance-toeplitz-forecast-solve
 kind: example
 title: "An AR(1) covariance forecast and general-RHS Toeplitz solve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

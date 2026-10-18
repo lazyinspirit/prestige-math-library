@@ -2,7 +2,7 @@
 id: alg-hlr-block-matvec
 kind: algorithm
 title: "H-matrix block matrix-vector multiplication"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-standard-real-and-normalized-complex-gaussian-matrix-law
 kind: definition
 title: Standard real and normalized complex Gaussian matrix laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

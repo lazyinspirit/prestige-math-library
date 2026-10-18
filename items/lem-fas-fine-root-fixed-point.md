@@ -2,7 +2,7 @@
 id: lem-fas-fine-root-fixed-point
 kind: lemma
 title: "An exact fine root is fixed by the FAS V/W cycle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

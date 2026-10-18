@@ -2,7 +2,7 @@
 id: "def-na-ultraweak-poisson-dpg-formulation"
 kind: "definition"
 title: "Ultraweak Poisson DPG spaces and plan-consistent bilinear form"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 4

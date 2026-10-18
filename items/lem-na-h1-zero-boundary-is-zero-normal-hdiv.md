@@ -2,7 +2,7 @@
 id: lem-na-h1-zero-boundary-is-zero-normal-hdiv
 kind: lemma
 title: H1-zero fields have zero weak H(div) normal trace
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

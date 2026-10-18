@@ -2,7 +2,7 @@
 id: def-bem-lipschitz-polyhedral-boundary-and-trace-spaces
 kind: definition
 title: Lipschitz polyhedral boundary, orientation, and trace spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

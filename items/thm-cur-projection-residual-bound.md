@@ -2,7 +2,7 @@
 id: thm-cur-projection-residual-bound
 kind: theorem
 title: "Projected CUR has a two-sided Frobenius residual bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

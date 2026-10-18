@@ -2,7 +2,7 @@
 id: thm-barycentric-interpolation-and-nearest-neighbor-query-correct
 kind: theorem
 title: "Barycentric interpolation and nearest-site queries are correct"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

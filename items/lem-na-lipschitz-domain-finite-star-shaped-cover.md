@@ -2,7 +2,7 @@
 id: lem-na-lipschitz-domain-finite-star-shaped-cover
 kind: lemma
 title: "Finite star-shaped cover of a bounded Lipschitz domain"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

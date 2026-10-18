@@ -2,7 +2,7 @@
 id: ex-same-center-s-orbital-integrals
 kind: example
 title: Exact same-center s-orbital overlap, kinetic, attraction, and Coulomb integrals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

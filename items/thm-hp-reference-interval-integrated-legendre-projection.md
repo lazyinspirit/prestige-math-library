@@ -2,7 +2,7 @@
 id: thm-hp-reference-interval-integrated-legendre-projection
 kind: theorem
 title: Integrated Legendre projection gives an explicit p-rate in H1
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

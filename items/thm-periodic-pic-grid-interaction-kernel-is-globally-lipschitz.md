@@ -2,7 +2,7 @@
 id: thm-periodic-pic-grid-interaction-kernel-is-globally-lipschitz
 kind: theorem
 title: Fixed-regularization periodic PIC kernels are globally Lipschitz
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

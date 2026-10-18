@@ -2,7 +2,7 @@
 id: ex-uncertain-coordinate-interval-with-ambiguous-sign
 kind: example
 title: An uncertain coordinate interval does not decide orientation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates-examples

@@ -1,7 +1,7 @@
 ---
 page: overlapping-schwarz-and-stable-subspace-decompositions
 title: "Overlapping Schwarz and stable subspace decompositions"
-status: draft
+status: published
 items:
   - lem-schwarz-p1-product-cutoff-interpolation-energy-estimate
   - def-overlapping-schwarz-subspace-correction-data

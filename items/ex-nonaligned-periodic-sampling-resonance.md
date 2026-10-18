@@ -2,7 +2,7 @@
 id: ex-nonaligned-periodic-sampling-resonance
 kind: example
 title: "A nonaligned one-dimensional micro window has resonance error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

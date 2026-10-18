@@ -2,7 +2,7 @@
 id: def-transient-maxwell-system-with-material-interfaces
 kind: definition
 title: Transient Maxwell system with piecewise materials and boundary conditions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-conservative-fv-face-fluxes-converge-in-l1loc
 kind: lemma
 title: Strong local convergence of consistent finite-volume face fluxes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

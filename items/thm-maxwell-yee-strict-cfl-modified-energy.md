@@ -2,7 +2,7 @@
 id: thm-maxwell-yee-strict-cfl-modified-energy
 kind: theorem
 title: Strict spectral CFL positivity and Yee modified energy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

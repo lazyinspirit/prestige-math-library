@@ -1,7 +1,7 @@
 ---
 page: interpolative-cur-and-nystrom-decompositions-examples
 title: Interpolative cur and nystrom decompositions — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-arbitrary-selected-columns-miss-dominant-direction

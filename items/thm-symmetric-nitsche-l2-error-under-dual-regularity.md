@@ -2,7 +2,7 @@
 id: thm-symmetric-nitsche-l2-error-under-dual-regularity
 kind: theorem
 title: Symmetric Nitsche L2 estimate under dual regularity and Nitsche approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

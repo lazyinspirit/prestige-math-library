@@ -2,7 +2,7 @@
 id: lem-finite-volume-discrete-summation-by-parts
 kind: lemma
 title: Discrete weak identity for a conservative finite-volume update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

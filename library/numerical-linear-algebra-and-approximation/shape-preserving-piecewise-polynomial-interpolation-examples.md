@@ -1,7 +1,7 @@
 ---
 page: shape-preserving-piecewise-polynomial-interpolation-examples
 title: Shape preserving piecewise polynomial interpolation — Examples
-status: draft
+status: published
 requires:
   - shape-preserving-piecewise-polynomial-interpolation
 items: []

@@ -2,7 +2,7 @@
 id: ex-highly-contracted-gaussian-coefficients-amplify-error
 kind: example
 title: Highly contracted Gaussian coefficients amplify primitive integral error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

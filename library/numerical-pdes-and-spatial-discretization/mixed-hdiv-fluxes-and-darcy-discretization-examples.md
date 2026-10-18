@@ -1,7 +1,7 @@
 ---
 page: mixed-hdiv-fluxes-and-darcy-discretization-examples
 title: "Mixed H(div) fluxes, Darcy flow and local conservation — Examples"
-status: draft
+status: published
 examples:
   - ex-na-primal-p1-flux-is-not-locally-conservative
   - ex-na-constant-flux-reference-triangle

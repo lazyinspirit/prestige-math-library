@@ -2,7 +2,7 @@
 id: thm-floater-hormann-error-rate-c2
 kind: theorem
 title: Floater–Hormann C^(d+2) parity error bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

@@ -2,7 +2,7 @@
 id: lem-nitsche-local-polynomial-flux-inverse-trace
 kind: lemma
 title: Local inverse trace bound for a polynomial normal flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

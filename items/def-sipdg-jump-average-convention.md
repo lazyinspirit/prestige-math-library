@@ -2,7 +2,7 @@
 id: def-sipdg-jump-average-convention
 kind: definition
 title: Jump and average conventions for symmetric interior-penalty DG
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

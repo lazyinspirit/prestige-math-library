@@ -2,7 +2,7 @@
 id: def-periodic-pic-separable-hamiltonian-grid-model
 kind: definition
 title: Matched variational Hamiltonian branch for periodic PIC
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-na-degenerate-local-ground-state-tie-break
 kind: example
 title: "A degenerate local ground eigenspace has a deterministic tie choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

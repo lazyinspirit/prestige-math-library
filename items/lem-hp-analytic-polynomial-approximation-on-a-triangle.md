@@ -3,7 +3,7 @@ id: lem-hp-analytic-polynomial-approximation-on-a-triangle
 kind: lemma
 title: Analytic derivative bounds give exponential polynomial approximation on a
   triangle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

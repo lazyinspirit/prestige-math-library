@@ -2,7 +2,7 @@
 id: lem-hermite-genocchi-simplex-integral
 kind: lemma
 title: Hermite–Genocchi simplex formula for divided differences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

@@ -2,7 +2,7 @@
 id: prop-na-exact-local-dmrg-update-does-not-increase-energy
 kind: proposition
 title: "An exact local DMRG ground solve does not increase Rayleigh energy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

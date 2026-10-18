@@ -2,7 +2,7 @@
 id: thm-metric-graph-weak-elliptic-problem
 kind: theorem
 title: "Well-posed weak elliptic diffusion on an anchored metric graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-na-finite-periodic-haar-transform
 kind: definition
 title: Finite periodic Haar transform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

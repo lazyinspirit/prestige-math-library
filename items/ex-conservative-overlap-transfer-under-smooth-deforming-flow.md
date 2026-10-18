@@ -2,7 +2,7 @@
 id: ex-conservative-overlap-transfer-under-smooth-deforming-flow
 kind: example
 title: "A smooth deforming flow remaps two cell averages conservatively"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

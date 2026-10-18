@@ -2,7 +2,7 @@
 id: thm-natural-cubic-spline-tridiagonal-residual-transfer
 kind: theorem
 title: A natural-spline tridiagonal residual bounds the spline value error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

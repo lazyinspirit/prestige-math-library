@@ -2,7 +2,7 @@
 id: lem-reference-jacobi-weighted-endpoint-kernel
 kind: lemma
 title: Weighted Jacobi endpoint kernel on the reference interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

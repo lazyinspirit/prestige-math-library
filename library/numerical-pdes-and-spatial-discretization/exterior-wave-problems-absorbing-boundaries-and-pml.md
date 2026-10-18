@@ -1,7 +1,7 @@
 ---
 page: exterior-wave-problems-absorbing-boundaries-and-pml
 title: Exterior waves, absorbing boundaries and PML
-status: draft
+status: published
 items:
   - def-pe18-cartesian-complex-stretch-pml
   - def-pe18-local-impedance-absorbing-boundary

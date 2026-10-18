@@ -1,7 +1,7 @@
 ---
 page: supg-and-residual-based-stabilized-finite-elements
 title: "SUPG, residual stabilization and variational multiscale methods"
-status: draft
+status: published
 items:
   - def-supg-one-dimensional-convection-diffusion-model
   - def-supg-general-convection-diffusion-reaction-model

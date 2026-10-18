@@ -2,7 +2,7 @@
 id: thm-na-polynomial-remez-budget-termination
 kind: theorem
 title: "A budgeted polynomial Remez exchange terminates within its finite cap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: substructuring-feti-dp-and-bddc-preconditioners
 title: "Substructuring, FETI-DP and BDDC"
-status: draft
+status: published
 items:
   - def-pe26-scalar-substructuring-model
   - lem-pe26-preconditioned-operator-norm-bound

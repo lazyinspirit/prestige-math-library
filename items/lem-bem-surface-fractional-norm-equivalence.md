@@ -2,7 +2,7 @@
 id: lem-bem-surface-fractional-norm-equivalence
 kind: lemma
 title: The chart and chordal surface H1/2 norms are equivalent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

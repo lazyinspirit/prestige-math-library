@@ -2,7 +2,7 @@
 id: lem-fresnel-series-geometric-tail
 kind: lemma
 title: Fresnel series geometric tail bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

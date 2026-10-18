@@ -1,7 +1,7 @@
 ---
 page: sketched-least-squares-and-subspace-embeddings-examples
 title: Sketched least squares and subspace embeddings — Examples
-status: draft
+status: published
 requires:
   - sketched-least-squares-and-subspace-embeddings
 items: []

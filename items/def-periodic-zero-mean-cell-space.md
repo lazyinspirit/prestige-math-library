@@ -2,7 +2,7 @@
 id: def-periodic-zero-mean-cell-space
 kind: definition
 title: Zero-mean periodic Sobolev cell space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

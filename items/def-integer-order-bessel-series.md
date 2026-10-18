@@ -2,7 +2,7 @@
 id: def-integer-order-bessel-series
 kind: definition
 title: Integer-order Bessel series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

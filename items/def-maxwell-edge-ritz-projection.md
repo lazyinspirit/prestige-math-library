@@ -2,7 +2,7 @@
 id: def-maxwell-edge-ritz-projection
 kind: definition
 title: Maxwell curl-energy Ritz projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

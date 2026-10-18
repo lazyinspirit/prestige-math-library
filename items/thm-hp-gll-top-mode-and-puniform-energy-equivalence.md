@@ -2,7 +2,7 @@
 id: thm-hp-gll-top-mode-and-puniform-energy-equivalence
 kind: theorem
 title: GLL quadrature changes only the top Legendre modes and is p-uniformly equivalent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

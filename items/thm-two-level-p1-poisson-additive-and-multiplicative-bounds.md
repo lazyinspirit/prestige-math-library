@@ -2,7 +2,7 @@
 id: thm-two-level-p1-poisson-additive-and-multiplicative-bounds
 kind: theorem
 title: "Two-level overlapping P1 Poisson bounds with explicit H-overlap dependence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

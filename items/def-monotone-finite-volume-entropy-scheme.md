@@ -2,7 +2,7 @@
 id: def-monotone-finite-volume-entropy-scheme
 kind: definition
 title: Monotone finite-volume scheme and invariant-interval CFL
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

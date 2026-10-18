@@ -2,7 +2,7 @@
 id: thm-three-dimensional-delaunay-output-size-quadratic
 kind: theorem
 title: "Three-dimensional Delaunay and regular output size is quadratic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

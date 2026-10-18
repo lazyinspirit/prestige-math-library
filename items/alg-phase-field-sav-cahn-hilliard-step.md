@@ -2,7 +2,7 @@
 id: alg-phase-field-sav-cahn-hilliard-step
 kind: algorithm
 title: First-order scalar-auxiliary-variable Cahn–Hilliard step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

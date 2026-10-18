@@ -2,7 +2,7 @@
 id: lem-pe05-hll-dry-face-direction-and-zero-flux
 kind: lemma
 title: A dry HLL face sends water only into the dry side
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

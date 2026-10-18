@@ -2,7 +2,7 @@
 id: lem-nufft-gaussian-spread-truncation-tail
 kind: lemma
 title: Explicit periodized Gaussian spread-tail bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

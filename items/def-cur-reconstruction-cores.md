@@ -2,7 +2,7 @@
 id: def-cur-reconstruction-cores
 kind: definition
 title: "Skeleton and projected least-squares CUR cores"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

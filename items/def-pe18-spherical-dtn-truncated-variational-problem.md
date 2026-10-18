@@ -2,7 +2,7 @@
 id: def-pe18-spherical-dtn-truncated-variational-problem
 kind: definition
 title: Exact-DtN truncated modal variational formulation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

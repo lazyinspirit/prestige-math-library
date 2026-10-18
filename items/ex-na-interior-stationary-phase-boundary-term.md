@@ -2,7 +2,7 @@
 id: ex-na-interior-stationary-phase-boundary-term
 kind: example
 title: An interior stationary point adds a Fresnel-scale term
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps:

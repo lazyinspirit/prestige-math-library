@@ -2,7 +2,7 @@
 id: thm-certified-gamma-loggamma-enclosures
 kind: theorem
 title: Soundness of finite Gamma and log-Gamma enclosures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

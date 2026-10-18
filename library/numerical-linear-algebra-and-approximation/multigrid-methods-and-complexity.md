@@ -1,7 +1,7 @@
 ---
 page: multigrid-methods-and-complexity
 title: "Multigrid methods and complexity"
-status: draft
+status: published
 items:
   - def-galerkin-coarse-grid-correction
   - lem-zero-boundary-piecewise-affine-functions-lie-in-h1zero

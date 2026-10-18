@@ -2,7 +2,7 @@
 id: ex-inverted-isoparametric-map-detection
 kind: example
 title: "An orientation-reversing cell fails the Jacobian certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

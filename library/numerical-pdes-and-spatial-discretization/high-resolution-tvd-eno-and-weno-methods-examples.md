@@ -1,7 +1,7 @@
 ---
 page: high-resolution-tvd-eno-and-weno-methods-examples
 title: High-resolution TVD, ENO and WENO reconstruction — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-na-minmod-extremum-clipping

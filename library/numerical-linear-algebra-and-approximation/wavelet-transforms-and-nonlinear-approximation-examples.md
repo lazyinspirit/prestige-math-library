@@ -1,7 +1,7 @@
 ---
 page: wavelet-transforms-and-nonlinear-approximation-examples
 title: "Wavelet transforms and nonlinear approximation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-na-boundary-extension-changes-haar-coefficients

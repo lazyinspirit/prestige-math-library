@@ -2,7 +2,7 @@
 id: lem-na-shrinking-boundary-stream-corrector
 kind: lemma
 title: A shrinking clamped-stream correction on the square
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

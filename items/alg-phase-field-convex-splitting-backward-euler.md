@@ -2,7 +2,7 @@
 id: alg-phase-field-convex-splitting-backward-euler
 kind: algorithm
 title: Backward-Euler convex splitting for Allen–Cahn and Cahn–Hilliard
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

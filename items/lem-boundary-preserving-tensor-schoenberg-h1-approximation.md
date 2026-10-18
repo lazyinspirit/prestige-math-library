@@ -2,7 +2,7 @@
 id: lem-boundary-preserving-tensor-schoenberg-h1-approximation
 kind: lemma
 title: Greville comparison splines preserve faces and give an explicit H1 estimate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

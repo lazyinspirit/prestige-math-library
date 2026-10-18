@@ -2,7 +2,7 @@
 id: "lem-afem-residual-estimator-reduction"
 kind: "lemma"
 title: "Reduction of the P1 residual estimator after marked refinement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 3

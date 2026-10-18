@@ -2,7 +2,7 @@
 id: cor-na-mini-element-pressure-mass-block-spectrum
 kind: corollary
 title: "MINI Stokes block-preconditioned spectral intervals"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

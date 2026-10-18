@@ -2,7 +2,7 @@
 id: cex-conservative-sph-can-clump-under-positive-pressure
 kind: counterexample
 title: "A conservative positive-pressure SPH system can close a particle gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

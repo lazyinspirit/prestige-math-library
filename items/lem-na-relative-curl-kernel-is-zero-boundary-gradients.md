@@ -2,7 +2,7 @@
 id: lem-na-relative-curl-kernel-is-zero-boundary-gradients
 kind: lemma
 title: The relative curl kernel on a contractible Lipschitz polyhedron
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

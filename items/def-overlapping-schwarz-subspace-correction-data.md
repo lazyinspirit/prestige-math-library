@@ -2,7 +2,7 @@
 id: def-overlapping-schwarz-subspace-correction-data
 kind: definition
 title: "Finite-dimensional Schwarz subspace-correction data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

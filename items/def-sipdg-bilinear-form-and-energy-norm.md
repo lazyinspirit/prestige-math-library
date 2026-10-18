@@ -2,7 +2,7 @@
 id: def-sipdg-bilinear-form-and-energy-norm
 kind: definition
 title: Symmetric interior-penalty DG form and energy seminorm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

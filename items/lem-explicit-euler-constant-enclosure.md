@@ -2,7 +2,7 @@
 id: lem-explicit-euler-constant-enclosure
 kind: lemma
 title: Finite harmonic enclosure for Euler's constant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

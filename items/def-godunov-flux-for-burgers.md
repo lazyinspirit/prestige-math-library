@@ -2,7 +2,7 @@
 id: def-godunov-flux-for-burgers
 kind: definition
 title: Godunov numerical flux for Burgers' equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-maxwell-yee-periodic-plane-wave-dispersion
 kind: example
 title: Periodic Yee plane-wave dispersion and the cubic CFL limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

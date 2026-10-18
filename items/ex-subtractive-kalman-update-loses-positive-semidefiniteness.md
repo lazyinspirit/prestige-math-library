@@ -2,7 +2,7 @@
 id: ex-subtractive-kalman-update-loses-positive-semidefiniteness
 kind: example
 title: "A rounded subtractive covariance update can become indefinite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

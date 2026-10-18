@@ -2,7 +2,7 @@
 id: alg-hlr-bottom-up-recompression
 kind: algorithm
 title: "Bottom-up low-rank recompression of block contributions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

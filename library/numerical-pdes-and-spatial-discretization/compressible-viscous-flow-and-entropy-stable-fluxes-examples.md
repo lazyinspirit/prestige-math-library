@@ -1,7 +1,7 @@
 ---
 page: compressible-viscous-flow-and-entropy-stable-fluxes-examples
 title: "Compressible viscous flow and entropy-stable viscous fluxes — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-compressible-entropy-variable-blowup-near-vacuum

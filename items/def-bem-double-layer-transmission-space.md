@@ -2,7 +2,7 @@
 id: def-bem-double-layer-transmission-space
 kind: definition
 title: The finite-energy double-layer transmission space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

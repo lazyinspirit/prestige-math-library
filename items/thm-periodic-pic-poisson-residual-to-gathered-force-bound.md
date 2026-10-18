@@ -2,7 +2,7 @@
 id: thm-periodic-pic-poisson-residual-to-gathered-force-bound
 kind: theorem
 title: Periodic Poisson residual controls the gathered particle force
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

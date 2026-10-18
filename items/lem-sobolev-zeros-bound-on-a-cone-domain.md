@@ -2,7 +2,7 @@
 id: lem-sobolev-zeros-bound-on-a-cone-domain
 kind: lemma
 title: "A Sobolev function vanishing on scattered sites has an h^ν bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

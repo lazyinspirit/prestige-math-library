@@ -2,7 +2,7 @@
 id: "lem-afem-dorfler-marking-cardinality"
 kind: "lemma"
 title: "Dorfler marking is cardinality-optimal up to mesh closure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 3

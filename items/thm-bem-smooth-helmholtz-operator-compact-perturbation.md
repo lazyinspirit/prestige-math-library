@@ -3,7 +3,7 @@ id: thm-bem-smooth-helmholtz-operator-compact-perturbation
 kind: theorem
 title: The smooth Helmholtz combined field is a compact perturbation of half the
   identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

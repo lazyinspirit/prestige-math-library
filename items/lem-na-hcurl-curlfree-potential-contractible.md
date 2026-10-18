@@ -2,7 +2,7 @@
 id: lem-na-hcurl-curlfree-potential-contractible
 kind: lemma
 title: Weak curl-free fields on a contractible polyhedron are gradients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

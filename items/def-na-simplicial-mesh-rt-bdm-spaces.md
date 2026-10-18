@@ -2,7 +2,7 @@
 id: def-na-simplicial-mesh-rt-bdm-spaces
 kind: definition
 title: Affine simplicial meshes and RT/BDM spaces
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

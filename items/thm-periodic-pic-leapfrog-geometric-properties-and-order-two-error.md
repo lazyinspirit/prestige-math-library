@@ -2,7 +2,7 @@
 id: thm-periodic-pic-leapfrog-geometric-properties-and-order-two-error
 kind: theorem
 title: Leapfrog geometry and finite-time order for the matched periodic PIC Hamiltonian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

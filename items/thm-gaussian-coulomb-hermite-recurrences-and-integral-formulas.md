@@ -2,7 +2,7 @@
 id: thm-gaussian-coulomb-hermite-recurrences-and-integral-formulas
 kind: theorem
 title: Hermite recurrence formulas for Gaussian nuclear-attraction and two-electron Coulomb integrals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

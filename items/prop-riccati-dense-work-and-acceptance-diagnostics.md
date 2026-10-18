@@ -3,7 +3,7 @@ id: prop-riccati-dense-work-and-acceptance-diagnostics
 kind: proposition
 title: "Dense Riccati work counts and numerical acceptance require
   equation-level diagnostics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

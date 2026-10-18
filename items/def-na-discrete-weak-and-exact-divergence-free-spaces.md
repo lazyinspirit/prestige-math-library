@@ -2,7 +2,7 @@
 id: def-na-discrete-weak-and-exact-divergence-free-spaces
 kind: definition
 title: "Weak and pointwise divergence-free discrete velocities"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

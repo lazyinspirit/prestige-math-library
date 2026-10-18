@@ -2,7 +2,7 @@
 id: lem-pe11-zero-eigenvalue-is-curl-kernel
 kind: lemma
 title: The unquotiented zero eigenspace is the PEC curl kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: maxwell-eigenproblems-and-compatible-vector-waves
 title: Maxwell eigenproblems and compatible vector wave approximation
-status: draft
+status: published
 items:
   - lem-pe11-compact-self-adjoint-spectral-approximation
   - lem-pe11-hcurl-weak-limit

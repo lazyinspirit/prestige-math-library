@@ -2,7 +2,7 @@
 id: def-na-first-order-hjb-cauchy-problem
 kind: definition
 title: Periodic first-order controlled Hamilton–Jacobi Cauchy problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-hamilton-jacobi-cauchy-problem, def-viscosity-subsolution-and-supersolution, def-na-periodic-grid-and-tensor-multilinear-interpolation, thm-euclidean-semicontinuous-extreme-value-theorem]

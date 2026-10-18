@@ -2,7 +2,7 @@
 id: thm-pe12-discrete-aubin-lions-compactness
 kind: theorem
 title: Piecewise-constant discrete Aubin–Lions compactness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

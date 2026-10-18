@@ -2,7 +2,7 @@
 id: def-spherical-bessel-evaluation-contract
 kind: definition
 title: Scaled spherical Bessel evaluation on positive real arguments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

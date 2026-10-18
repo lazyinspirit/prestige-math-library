@@ -2,7 +2,7 @@
 id: thm-exact-cp-als-block-updates-are-monotone
 kind: theorem
 title: Exact CP-ALS block updates do not increase the objective
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

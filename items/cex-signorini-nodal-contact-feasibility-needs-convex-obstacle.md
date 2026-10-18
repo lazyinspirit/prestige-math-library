@@ -2,7 +2,7 @@
 id: cex-signorini-nodal-contact-feasibility-needs-convex-obstacle
 kind: counterexample
 title: "Nodal feasibility can miss a nonconvex obstacle between vertices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

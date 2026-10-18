@@ -2,7 +2,7 @@
 id: thm-planar-fmm-global-potential-force-error
 kind: theorem
 title: Global planar FMM potential and derivative error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: reaction-diffusion-invariants-and-pattern-discretization-examples
 title: Reaction-diffusion systems, invariants and pattern computation — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-consistent-mass-p1-fem-diffusion-fails-positivity

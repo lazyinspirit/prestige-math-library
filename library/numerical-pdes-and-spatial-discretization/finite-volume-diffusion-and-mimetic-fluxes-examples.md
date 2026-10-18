@@ -1,7 +1,7 @@
 ---
 page: finite-volume-diffusion-and-mimetic-fluxes-examples
 title: Finite-volume diffusion on admissible meshes — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-orthogonal-voronoi-harmonic-diffusion

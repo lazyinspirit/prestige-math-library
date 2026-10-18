@@ -2,7 +2,7 @@
 id: lem-local-characteristic-shock-curve
 kind: lemma
 title: "Local shock curve by an augmented Rankine–Hugoniot equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

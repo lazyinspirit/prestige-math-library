@@ -2,7 +2,7 @@
 id: thm-na-uniformly-bounded-commuting-cochain-projection
 kind: theorem
 title: Uniformly bounded commuting projection for lowest-order Nedelec spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

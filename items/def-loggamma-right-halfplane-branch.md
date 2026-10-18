@@ -2,7 +2,7 @@
 id: def-loggamma-right-halfplane-branch
 kind: definition
 title: Log-Gamma branch on the right half-plane
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

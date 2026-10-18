@@ -2,7 +2,7 @@
 id: def-volume-product-integration-scheme
 kind: definition
 title: Cell-volume product integration for the scattering kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

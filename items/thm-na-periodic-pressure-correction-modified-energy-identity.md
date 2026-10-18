@@ -2,7 +2,7 @@
 id: thm-na-periodic-pressure-correction-modified-energy-identity
 kind: theorem
 title: "Modified velocity-pressure energy identity for periodic pressure correction"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: "ex-na-ideal-and-practical-dpg-test-vectors"
 kind: "example"
 title: "An explicit finite model separates ideal and practical test vectors"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 9

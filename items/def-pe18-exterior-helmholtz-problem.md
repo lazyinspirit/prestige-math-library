@@ -2,7 +2,7 @@
 id: def-pe18-exterior-helmholtz-problem
 kind: definition
 title: Sound-soft exterior Helmholtz problem for a spherical obstacle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

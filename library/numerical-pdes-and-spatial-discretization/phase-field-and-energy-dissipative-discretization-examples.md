@@ -1,7 +1,7 @@
 ---
 page: phase-field-and-energy-dissipative-discretization-examples
 title: Phase-field and dissipative gradient-flow computation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-phase-field-allen-cahn-stationary-front

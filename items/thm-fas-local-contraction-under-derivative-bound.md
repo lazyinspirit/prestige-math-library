@@ -2,7 +2,7 @@
 id: thm-fas-local-contraction-under-derivative-bound
 kind: theorem
 title: "A smooth FAS cycle converges locally under its actual derivative bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

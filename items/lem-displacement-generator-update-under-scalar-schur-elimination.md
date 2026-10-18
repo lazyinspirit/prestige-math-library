@@ -2,7 +2,7 @@
 id: lem-displacement-generator-update-under-scalar-schur-elimination
 kind: lemma
 title: "One exact scalar elimination step updates a displacement generator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

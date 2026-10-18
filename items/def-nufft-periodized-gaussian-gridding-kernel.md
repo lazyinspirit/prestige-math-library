@@ -2,7 +2,7 @@
 id: def-nufft-periodized-gaussian-gridding-kernel
 kind: definition
 title: Periodized Gaussian gridding kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

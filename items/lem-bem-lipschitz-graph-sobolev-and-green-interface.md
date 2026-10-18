@@ -2,7 +2,7 @@
 id: lem-bem-lipschitz-graph-sobolev-and-green-interface
 kind: lemma
 title: Sobolev pullback and Green identity on Lipschitz graphs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

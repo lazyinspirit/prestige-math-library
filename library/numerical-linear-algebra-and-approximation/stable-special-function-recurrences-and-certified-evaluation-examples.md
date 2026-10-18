@@ -1,7 +1,7 @@
 ---
 page: stable-special-function-recurrences-and-certified-evaluation-examples
 title: Stable special function recurrences and certified evaluation — Examples
-status: draft
+status: published
 requires:
   - stable-special-function-recurrences-and-certified-evaluation
 items: []

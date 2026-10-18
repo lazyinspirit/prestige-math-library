@@ -2,7 +2,7 @@
 id: thm-pe12-backward-euler-galerkin-existence-energy
 kind: theorem
 title: Nonlinear backward Euler Galerkin existence and energy bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

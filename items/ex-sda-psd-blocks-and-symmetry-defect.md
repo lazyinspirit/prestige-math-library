@@ -3,7 +3,7 @@ id: ex-sda-psd-blocks-and-symmetry-defect
 kind: example
 title: "SDA preserves PSD blocks exactly and exposes a finite-precision symmetry
   defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

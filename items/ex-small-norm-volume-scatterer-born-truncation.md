@@ -2,7 +2,7 @@
 id: ex-small-norm-volume-scatterer-born-truncation
 kind: example
 title: A small-norm ball scatterer has a certified Born tail
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

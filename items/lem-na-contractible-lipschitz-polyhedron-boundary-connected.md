@@ -2,7 +2,7 @@
 id: lem-na-contractible-lipschitz-polyhedron-boundary-connected
 kind: lemma
 title: The boundary of a bounded contractible Lipschitz polyhedron is connected
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

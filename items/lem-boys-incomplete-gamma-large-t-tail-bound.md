@@ -2,7 +2,7 @@
 id: lem-boys-incomplete-gamma-large-t-tail-bound
 kind: lemma
 title: A scaled incomplete-gamma tail bound for large Boys arguments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-natural-cubic-x-squared-endpoint-caveat
 kind: example
 title: The natural interpolant of x squared has a second-order endpoint error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

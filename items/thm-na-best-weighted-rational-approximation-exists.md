@@ -2,7 +2,7 @@
 id: thm-na-best-weighted-rational-approximation-exists
 kind: theorem
 title: "Best weighted rational approximants exist"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-metric-graph-p1-fem-cea-and-energy-rate
 kind: theorem
 title: "Cea and O(h) energy error for conforming metric graph P1 FEM"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

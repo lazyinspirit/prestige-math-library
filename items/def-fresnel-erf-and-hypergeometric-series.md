@@ -2,7 +2,7 @@
 id: def-fresnel-erf-and-hypergeometric-series
 kind: definition
 title: Fresnel, error, and Gauss hypergeometric series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

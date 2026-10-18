@@ -2,7 +2,7 @@
 id: def-periodic-pic-regularized-grid-interaction-kernel
 kind: definition
 title: Fixed-regularization periodic PIC pair kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

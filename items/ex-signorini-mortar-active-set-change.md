@@ -2,7 +2,7 @@
 id: ex-signorini-mortar-active-set-change
 kind: example
 title: "A two-gap contact model changes its active set with the load"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

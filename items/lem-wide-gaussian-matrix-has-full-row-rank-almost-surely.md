@@ -2,7 +2,7 @@
 id: lem-wide-gaussian-matrix-has-full-row-rank-almost-surely
 kind: lemma
 title: A wide Gaussian matrix has full row rank almost surely
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

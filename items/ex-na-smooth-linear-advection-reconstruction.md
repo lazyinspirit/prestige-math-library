@@ -2,7 +2,7 @@
 id: ex-na-smooth-linear-advection-reconstruction
 kind: example
 title: MUSCL and WENO reconstruct a translating affine profile exactly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

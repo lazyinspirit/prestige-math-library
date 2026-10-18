@@ -2,7 +2,7 @@
 id: lem-na-scott-zhang-boundary-preserving-p1-interpolant
 kind: lemma
 title: "Boundary-preserving face-average P1 interpolation"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

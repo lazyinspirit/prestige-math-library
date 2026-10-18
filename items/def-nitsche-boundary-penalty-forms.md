@@ -2,7 +2,7 @@
 id: def-nitsche-boundary-penalty-forms
 kind: definition
 title: Symmetric and nonsymmetric Nitsche boundary forms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

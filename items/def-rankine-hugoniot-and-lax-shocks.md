@@ -2,7 +2,7 @@
 id: def-rankine-hugoniot-and-lax-shocks
 kind: definition
 title: "Rankine–Hugoniot jumps and Lax shocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

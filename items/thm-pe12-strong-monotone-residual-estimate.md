@@ -2,7 +2,7 @@
 id: thm-pe12-strong-monotone-residual-estimate
 kind: theorem
 title: Quantitative residual error under strong monotonicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

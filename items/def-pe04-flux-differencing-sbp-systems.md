@@ -2,7 +2,7 @@
 id: def-pe04-flux-differencing-sbp-systems
 kind: definition
 title: Conservative flux-differencing SBP method for nonlinear systems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

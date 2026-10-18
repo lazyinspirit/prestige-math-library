@@ -1,7 +1,7 @@
 ---
 page: maxwell-eigenproblems-and-compatible-vector-waves-examples
 title: Maxwell eigenproblems and compatible vector wave approximation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-pe11-spherical-shell-pec-zero-mode

@@ -2,7 +2,7 @@
 id: lem-na-piola-divergence-and-flux-identities
 kind: lemma
 title: Piola divergence and facet-flux identities
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

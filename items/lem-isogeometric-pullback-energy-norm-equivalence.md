@@ -2,7 +2,7 @@
 id: lem-isogeometric-pullback-energy-norm-equivalence
 kind: lemma
 title: Bi-Lipschitz NURBS maps preserve H1 and energy norms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

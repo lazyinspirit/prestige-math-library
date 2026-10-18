@@ -2,7 +2,7 @@
 id: lem-nurbs-homogeneous-data-perturbation-geometry-bounds
 kind: lemma
 title: Homogeneous NURBS data errors generate geometry and metric error bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

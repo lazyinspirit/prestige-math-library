@@ -2,7 +2,7 @@
 id: lem-unit-cube-h01-separability-and-l2-compactness
 kind: lemma
 title: Separable H1-zero space and compact L2 inclusion on a cube
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

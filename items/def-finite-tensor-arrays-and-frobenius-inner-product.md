@@ -2,7 +2,7 @@
 id: def-finite-tensor-arrays-and-frobenius-inner-product
 kind: definition
 title: Finite tensor arrays and the Frobenius inner product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

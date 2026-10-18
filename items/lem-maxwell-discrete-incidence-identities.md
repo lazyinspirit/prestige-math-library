@@ -2,7 +2,7 @@
 id: lem-maxwell-discrete-incidence-identities
 kind: lemma
 title: Incidence curl has zero discrete divergence and gradient curl
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

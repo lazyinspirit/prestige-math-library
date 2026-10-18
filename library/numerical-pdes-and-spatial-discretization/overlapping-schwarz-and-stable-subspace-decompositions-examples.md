@@ -1,7 +1,7 @@
 ---
 page: overlapping-schwarz-and-stable-subspace-decompositions-examples
 title: "Overlapping Schwarz and stable subspace decompositions — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-schwarz-overlap-shrinking-decomposition-bound

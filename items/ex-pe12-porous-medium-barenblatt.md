@@ -2,7 +2,7 @@
 id: ex-pe12-porous-medium-barenblatt
 kind: example
 title: A Barenblatt profile has finite propagation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-ewald-three-dimensional-periodic-source-data
 kind: definition
 title: "Neutral point sources and Fourier data on a three-dimensional torus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

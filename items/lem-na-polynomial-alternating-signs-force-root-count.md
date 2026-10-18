@@ -2,7 +2,7 @@
 id: lem-na-polynomial-alternating-signs-force-root-count
 kind: lemma
 title: "Alternating polynomial signs force the Haar zero-count contradiction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

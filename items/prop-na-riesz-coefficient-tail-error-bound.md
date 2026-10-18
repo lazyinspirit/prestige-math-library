@@ -2,7 +2,7 @@
 id: prop-na-riesz-coefficient-tail-error-bound
 kind: proposition
 title: Biorthogonal coefficient truncation error is controlled by Riesz bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

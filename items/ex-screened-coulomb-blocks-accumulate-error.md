@@ -2,7 +2,7 @@
 id: ex-screened-coulomb-blocks-accumulate-error
 kind: example
 title: Coulomb screening must accumulate every discarded-block bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 10

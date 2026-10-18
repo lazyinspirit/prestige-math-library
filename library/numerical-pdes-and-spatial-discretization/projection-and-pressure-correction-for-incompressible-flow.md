@@ -1,7 +1,7 @@
 ---
 page: projection-and-pressure-correction-for-incompressible-flow
 title: "Projection, pressure correction and saddle-point solvers"
-status: draft
+status: published
 items:
   - def-na-periodic-staggered-grid-stokes-operators
   - def-na-symmetric-saddle-point-system-and-block-preconditioners

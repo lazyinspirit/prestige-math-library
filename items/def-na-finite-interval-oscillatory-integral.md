@@ -2,7 +2,7 @@
 id: def-na-finite-interval-oscillatory-integral
 kind: definition
 title: Finite-interval oscillatory integral and phase convention
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

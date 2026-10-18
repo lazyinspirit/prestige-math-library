@@ -2,7 +2,7 @@
 id: def-hermite-gaussian-coulomb-auxiliary-functions
 kind: definition
 title: Hermite Gaussian and Boys Coulomb auxiliary functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: rem-pe26-conditioning-and-work-are-separate
 kind: remark
 title: Conditioning and solver work are separate claims
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

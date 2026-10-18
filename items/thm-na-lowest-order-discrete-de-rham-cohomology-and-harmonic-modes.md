@@ -2,7 +2,7 @@
 id: thm-na-lowest-order-discrete-de-rham-cohomology-and-harmonic-modes
 kind: theorem
 title: Discrete de Rham cohomology and contractible-mesh exactness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

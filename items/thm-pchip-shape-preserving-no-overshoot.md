@@ -2,7 +2,7 @@
 id: thm-pchip-shape-preserving-no-overshoot
 kind: theorem
 title: PCHIP is C1, monotone on each data segment, and has no interval overshoot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

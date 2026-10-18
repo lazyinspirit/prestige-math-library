@@ -2,7 +2,7 @@
 id: ex-hp-reentrant-corner-h-versus-hp
 kind: example
 title: A reentrant-corner mode separates fixed-degree h error from hp error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-pe18-modal-trace-and-form-continuity
 kind: lemma
 title: Modal trace bound and continuity of the exact-DtN variational form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

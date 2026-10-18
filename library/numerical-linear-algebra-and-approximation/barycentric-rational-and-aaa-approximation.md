@@ -1,7 +1,7 @@
 ---
 page: barycentric-rational-and-aaa-approximation
 title: "Barycentric rational and aaa approximation"
-status: draft
+status: published
 requires:
   - computed-singular-values-and-rank-revealing-factorizations
   - minimax-approximation-and-remez-algorithms

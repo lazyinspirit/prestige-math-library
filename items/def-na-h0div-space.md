@@ -2,7 +2,7 @@
 id: def-na-h0div-space
 kind: definition
 title: Zero-normal-trace H(div) space
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

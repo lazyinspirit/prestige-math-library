@@ -2,7 +2,7 @@
 id: cex-truncated-kernel-loses-boundary-constant-reproduction
 kind: counterexample
 title: "A normalized kernel loses constant reproduction when truncated at a boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

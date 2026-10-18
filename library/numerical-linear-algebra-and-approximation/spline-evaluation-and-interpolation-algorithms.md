@@ -1,7 +1,7 @@
 ---
 page: spline-evaluation-and-interpolation-algorithms
 title: Spline evaluation and interpolation algorithms
-status: draft
+status: published
 requires:
   - finite-precision-direct-factorizations
   - polynomial-interpolation-and-remainder

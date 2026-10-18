@@ -1,7 +1,7 @@
 ---
 page: multigrid-methods-and-complexity-examples
 title: "Multigrid methods and complexity — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-one-dimensional-poisson-coarse-correction-removes-linear-error

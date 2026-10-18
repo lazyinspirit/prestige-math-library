@@ -2,7 +2,7 @@
 id: def-pe18-local-impedance-absorbing-boundary
 kind: definition
 title: First-order local impedance condition at an artificial plane
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

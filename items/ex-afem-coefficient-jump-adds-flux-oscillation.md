@@ -2,7 +2,7 @@
 id: "ex-afem-coefficient-jump-adds-flux-oscillation"
 kind: "example"
 title: "A coefficient jump creates nonzero edge-flux oscillation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 1

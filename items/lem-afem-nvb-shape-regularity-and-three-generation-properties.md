@@ -2,7 +2,7 @@
 id: "lem-afem-nvb-shape-regularity-and-three-generation-properties"
 kind: "lemma"
 title: "Shape regularity and local reduction under 2D newest-vertex bisection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-roe-flux-is-consistent-and-conservative
 kind: theorem
 title: "The Roe flux is consistent and conservative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

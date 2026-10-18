@@ -2,7 +2,7 @@
 id: lem-gauss-jacobi-rule-data-well-defined
 kind: lemma
 title: Gauss–Jacobi nodes and weights are well-defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

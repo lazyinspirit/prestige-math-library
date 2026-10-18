@@ -2,7 +2,7 @@
 id: thm-hlr-core-svd-recompression-is-best-rank-tolerance
 kind: theorem
 title: "Core-SVD recompression is best at the declared Frobenius tolerance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

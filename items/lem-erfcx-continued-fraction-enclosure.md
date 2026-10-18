@@ -2,7 +2,7 @@
 id: lem-erfcx-continued-fraction-enclosure
 kind: lemma
 title: Finite continued-fraction enclosure for erfcx
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

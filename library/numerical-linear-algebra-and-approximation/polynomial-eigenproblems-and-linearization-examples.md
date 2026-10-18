@@ -1,7 +1,7 @@
 ---
 page: polynomial-eigenproblems-and-linearization-examples
 title: "Polynomial eigenproblems and linearization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-quadratic-damped-vibration-first-companion-pencil

@@ -2,7 +2,7 @@
 id: ex-hp-gll-mass-top-mode-correction
 kind: example
 title: The degree-two GLL mass matrix changes only its highest Legendre mode
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

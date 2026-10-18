@@ -2,7 +2,7 @@
 id: alg-na-fourier-polynomial-moments
 kind: algorithm
 title: Exact recurrence for polynomial Fourier moments
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

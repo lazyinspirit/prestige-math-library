@@ -2,7 +2,7 @@
 id: thm-nearly-incompressible-elasticity-mini-uniform-stability-and-error
 kind: theorem
 title: "Uniform mini-element stability through the incompressible limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

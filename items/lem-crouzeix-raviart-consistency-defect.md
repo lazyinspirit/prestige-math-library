@@ -2,7 +2,7 @@
 id: lem-crouzeix-raviart-consistency-defect
 kind: lemma
 title: Consistency bounds for the Crouzeix–Raviart Poisson method
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

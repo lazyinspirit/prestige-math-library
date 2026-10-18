@@ -2,7 +2,7 @@
 id: lem-pe05-source-quadrature-consistency
 kind: lemma
 title: Hydrostatic pressure corrections converge to the smooth-bed source
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

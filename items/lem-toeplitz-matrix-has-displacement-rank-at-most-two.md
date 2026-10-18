@@ -2,7 +2,7 @@
 id: lem-toeplitz-matrix-has-displacement-rank-at-most-two
 kind: lemma
 title: "A Toeplitz matrix has lower-shift displacement rank at most two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

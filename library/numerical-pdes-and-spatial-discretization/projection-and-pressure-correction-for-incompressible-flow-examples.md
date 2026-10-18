@@ -1,7 +1,7 @@
 ---
 page: projection-and-pressure-correction-for-incompressible-flow-examples
 title: "Projection, pressure correction and saddle-point solvers — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-na-wall-pressure-correction-tangential-velocity-defect

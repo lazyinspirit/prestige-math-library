@@ -2,7 +2,7 @@
 id: lem-bem-p0-negative-half-order-approximation
 kind: lemma
 title: P0 averages approximate smooth densities in H negative one half
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: "cex-na-least-squares-boundary-omission-nonunique"
 kind: "counterexample"
 title: "Dropping the H1-zero boundary condition makes least squares nonunique"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: def-bem-surface-mesh-and-piecewise-constant-density-space
 kind: definition
 title: Shape-regular surface meshes and conforming P0 densities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

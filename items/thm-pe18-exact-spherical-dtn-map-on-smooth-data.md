@@ -2,7 +2,7 @@
 id: thm-pe18-exact-spherical-dtn-map-on-smooth-data
 kind: theorem
 title: The spherical modal DtN map is well-defined and exact for smooth data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

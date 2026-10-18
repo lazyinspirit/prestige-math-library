@@ -2,7 +2,7 @@
 id: alg-floating-filter-for-geometric-determinants
 kind: algorithm
 title: Outward-bounded floating determinant filter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

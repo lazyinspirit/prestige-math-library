@@ -1,7 +1,7 @@
 ---
 page: mixed-hdiv-fluxes-and-darcy-discretization
 title: "Mixed H(div) fluxes, Darcy flow and local conservation"
-status: draft
+status: published
 items:
   - def-na-contravariant-piola-map
   - def-na-hdiv-space

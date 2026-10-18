@@ -2,7 +2,7 @@
 id: alg-natural-cubic-tridiagonal-cholesky-with-residual-certificate
 kind: algorithm
 title: Natural-cubic tridiagonal Cholesky solve with a residual certificate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

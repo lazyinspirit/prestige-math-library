@@ -2,7 +2,7 @@
 id: ex-nufft-clustered-sources-l1-error
 kind: example
 title: Clustered sources and absolute l1 error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms-examples

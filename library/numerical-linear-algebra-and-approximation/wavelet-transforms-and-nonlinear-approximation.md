@@ -1,7 +1,7 @@
 ---
 page: wavelet-transforms-and-nonlinear-approximation
 title: "Wavelet transforms and nonlinear approximation"
-status: draft
+status: published
 items:
   - def-na-finite-periodic-haar-transform
   - def-na-periodic-orthogonal-compact-filter-dwt

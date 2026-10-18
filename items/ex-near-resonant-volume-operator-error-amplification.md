@@ -2,7 +2,7 @@
 id: ex-near-resonant-volume-operator-error-amplification
 kind: example
 title: A near-unit volume-operator mode amplifies forcing error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

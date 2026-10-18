@@ -2,7 +2,7 @@
 id: lem-pe05-hll-depth-flux-decomposition
 kind: lemma
 title: HLL depth flux is a bounded outflow/inflow combination
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

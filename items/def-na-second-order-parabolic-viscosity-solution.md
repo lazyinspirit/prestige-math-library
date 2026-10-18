@@ -2,7 +2,7 @@
 id: def-na-second-order-parabolic-viscosity-solution
 kind: definition
 title: Second-order parabolic viscosity subsolutions and supersolutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-periodic-diagonal-controlled-diffusion-hjb-problem, def-viscosity-subsolution-and-supersolution]

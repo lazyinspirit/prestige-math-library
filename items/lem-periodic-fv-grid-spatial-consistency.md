@@ -2,7 +2,7 @@
 id: lem-periodic-fv-grid-spatial-consistency
 kind: lemma
 title: Second-order spatial consistency of the periodic FV heat stencil
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

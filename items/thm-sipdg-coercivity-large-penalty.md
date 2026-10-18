@@ -2,7 +2,7 @@
 id: thm-sipdg-coercivity-large-penalty
 kind: theorem
 title: SIPDG coercivity above the discrete inverse-trace threshold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

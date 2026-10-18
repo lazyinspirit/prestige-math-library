@@ -2,7 +2,7 @@
 id: lem-loggamma-shift-independent
 kind: lemma
 title: Shifted log-Gamma branch is independent of the shift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

@@ -2,7 +2,7 @@
 id: ex-ale-two-domain-heat-interface-flux-balance
 kind: example
 title: "A two-domain heat trace balances outward fluxes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

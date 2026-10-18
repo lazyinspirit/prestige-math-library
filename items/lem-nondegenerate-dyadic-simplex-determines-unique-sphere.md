@@ -2,7 +2,7 @@
 id: lem-nondegenerate-dyadic-simplex-determines-unique-sphere
 kind: lemma
 title: A nondegenerate dyadic simplex determines a unique sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

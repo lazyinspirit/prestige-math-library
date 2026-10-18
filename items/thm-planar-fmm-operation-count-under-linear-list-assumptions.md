@@ -2,7 +2,7 @@
 id: thm-planar-fmm-operation-count-under-linear-list-assumptions
 kind: theorem
 title: Planar FMM operation count under explicit linear-size tree and list bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

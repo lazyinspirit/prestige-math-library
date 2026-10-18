@@ -2,7 +2,7 @@
 id: ex-ewald-nonneutral-zero-mode-obstruction
 kind: example
 title: "A nonneutral periodic source has no periodic Poisson solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

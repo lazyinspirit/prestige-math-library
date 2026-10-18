@@ -1,7 +1,7 @@
 ---
 page: minimax-approximation-and-remez-algorithms-examples
 title: "Minimax approximation and Remez algorithms — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-na-remez-zero-degree-equioscillation-certificate

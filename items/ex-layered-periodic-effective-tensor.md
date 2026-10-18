@@ -2,7 +2,7 @@
 id: ex-layered-periodic-effective-tensor
 kind: example
 title: "Layered medium: harmonic normal and arithmetic tangential means"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

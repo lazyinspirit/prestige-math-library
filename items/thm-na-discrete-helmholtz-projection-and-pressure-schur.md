@@ -2,7 +2,7 @@
 id: thm-na-discrete-helmholtz-projection-and-pressure-schur
 kind: theorem
 title: "Discrete Helmholtz projection and pressure Schur identities"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

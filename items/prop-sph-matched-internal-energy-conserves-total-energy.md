@@ -2,7 +2,7 @@
 id: prop-sph-matched-internal-energy-conserves-total-energy
 kind: proposition
 title: "The matched internal-energy equation conserves total semidiscrete energy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-ewald-screened-coulomb-kernel-and-self-limit
 kind: lemma
 title: "Gaussian screened Coulomb kernel and its self limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

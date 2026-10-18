@@ -1,7 +1,7 @@
 ---
 page: delaunay-triangulations-and-voronoi-computation
 title: "Delaunay triangulations and voronoi computation"
-status: draft
+status: published
 requires:
   - certified-geometric-predicates
   - polynomial-interpolation-and-remainder

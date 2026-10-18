@@ -2,7 +2,7 @@
 id: thm-pchip-normalized-slopes-in-square
 kind: theorem
 title: PCHIP endpoint slopes lie in the Hermite monotonicity square
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

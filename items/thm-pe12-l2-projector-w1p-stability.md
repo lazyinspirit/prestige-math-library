@@ -2,7 +2,7 @@
 id: thm-pe12-l2-projector-w1p-stability
 kind: theorem
 title: L2 projections are uniformly W1p-stable on quasi-uniform conforming meshes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

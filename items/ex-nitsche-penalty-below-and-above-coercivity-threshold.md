@@ -2,7 +2,7 @@
 id: ex-nitsche-penalty-below-and-above-coercivity-threshold
 kind: example
 title: Penalties below and above the Nitsche coercivity threshold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

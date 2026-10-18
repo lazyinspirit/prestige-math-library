@@ -2,7 +2,7 @@
 id: thm-pe26-local-energy-kernel-and-interior-spd
 kind: theorem
 title: Floating local kernels and positive interior blocks
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: op-optimal-star-discrepancy-order-dimension-at-least-three
 kind: open-problem
 title: "Optimal star-discrepancy order at fixed dimension at least three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

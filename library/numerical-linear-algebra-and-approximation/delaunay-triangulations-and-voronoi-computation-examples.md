@@ -1,7 +1,7 @@
 ---
 page: delaunay-triangulations-and-voronoi-computation-examples
 title: "Delaunay triangulations and voronoi computation — Examples"
-status: draft
+status: published
 requires:
   - delaunay-triangulations-and-voronoi-computation
 items: []

@@ -2,7 +2,7 @@
 id: alg-aggregation-based-algebraic-multigrid-hierarchy
 kind: algorithm
 title: "Finite strength-graph aggregation and Galerkin hierarchy with explicit statuses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

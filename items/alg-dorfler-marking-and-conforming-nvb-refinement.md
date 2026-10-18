@@ -2,7 +2,7 @@
 id: "alg-dorfler-marking-and-conforming-nvb-refinement"
 kind: "algorithm"
 title: "Dorfler marking and conforming newest-vertex refinement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 1

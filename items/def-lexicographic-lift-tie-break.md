@@ -2,7 +2,7 @@
 id: def-lexicographic-lift-tie-break
 kind: definition
 title: "Stable-id lexicographic lift perturbation for cocircular and power ties"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

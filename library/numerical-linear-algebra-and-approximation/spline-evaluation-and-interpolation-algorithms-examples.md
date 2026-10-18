@@ -1,7 +1,7 @@
 ---
 page: spline-evaluation-and-interpolation-algorithms-examples
 title: Spline evaluation and interpolation algorithms — Examples
-status: draft
+status: published
 requires:
   - spline-evaluation-and-interpolation-algorithms
 items: []

@@ -2,7 +2,7 @@
 id: lem-smooth-simple-characteristic-eigenpairs
 kind: lemma
 title: "Smooth local eigenpairs for a simple characteristic spectrum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

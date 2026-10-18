@@ -2,7 +2,7 @@
 id: lem-nitsche-fractional-weak-green-and-flux-cancellation
 kind: lemma
 title: Fractional weak Green identity and interior flux cancellation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

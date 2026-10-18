@@ -2,7 +2,7 @@
 id: lem-na-halfline-heat-logarithmic-mass-loss
 kind: lemma
 title: Logarithmic halfline heat mass loss at the pressure endpoint
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

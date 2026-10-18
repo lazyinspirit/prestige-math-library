@@ -1,7 +1,7 @@
 ---
 page: discontinuous-galerkin-methods
 title: "Symmetric interior-penalty discontinuous Galerkin"
-status: draft
+status: published
 items:
   - lem-sipdg-physical-simplex-trace-green
   - def-sipdg-jump-average-convention

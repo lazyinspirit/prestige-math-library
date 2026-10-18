@@ -2,7 +2,7 @@
 id: lem-schwarz-local-corrections-are-energy-orthogonal-projections
 kind: lemma
 title: "Exact Schwarz local corrections are energy-orthogonal projections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

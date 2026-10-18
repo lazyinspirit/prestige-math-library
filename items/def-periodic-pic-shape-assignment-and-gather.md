@@ -2,7 +2,7 @@
 id: def-periodic-pic-shape-assignment-and-gather
 kind: definition
 title: Periodic PIC deposition shape and gather operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

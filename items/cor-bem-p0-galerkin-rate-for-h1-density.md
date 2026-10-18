@@ -2,7 +2,7 @@
 id: cor-bem-p0-galerkin-rate-for-h1-density
 kind: corollary
 title: An H1-density rate for P0 single-layer Galerkin BEM
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

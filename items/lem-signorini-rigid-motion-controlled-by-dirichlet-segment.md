@@ -2,7 +2,7 @@
 id: lem-signorini-rigid-motion-controlled-by-dirichlet-segment
 kind: lemma
 title: "A planar rigid motion is controlled by its trace on a segment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

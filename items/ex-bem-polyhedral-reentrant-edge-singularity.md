@@ -2,7 +2,7 @@
 id: ex-bem-polyhedral-reentrant-edge-singularity
 kind: example
 title: A reentrant polyhedral edge has an H1 harmonic singularity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

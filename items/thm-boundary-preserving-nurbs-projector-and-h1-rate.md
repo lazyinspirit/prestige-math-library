@@ -2,7 +2,7 @@
 id: thm-boundary-preserving-nurbs-projector-and-h1-rate
 kind: theorem
 title: Boundary-preserving NURBS projection and matching-patch energy approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

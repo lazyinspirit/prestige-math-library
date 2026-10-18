@@ -2,7 +2,7 @@
 id: lem-nitsche-scaled-fractional-simplex-trace
 kind: lemma
 title: Scaled fractional traces on shape-regular simplices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

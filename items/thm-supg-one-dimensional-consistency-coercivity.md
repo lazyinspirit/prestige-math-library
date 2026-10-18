@@ -2,7 +2,7 @@
 id: thm-supg-one-dimensional-consistency-coercivity
 kind: theorem
 title: "One-dimensional P1 SUPG is consistent and coercive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-na-quadratic-phase-amplitude-bound
 kind: lemma
 title: One-dimensional quadratic oscillatory amplitude bound
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

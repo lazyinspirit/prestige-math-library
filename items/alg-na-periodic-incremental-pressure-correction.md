@@ -2,7 +2,7 @@
 id: alg-na-periodic-incremental-pressure-correction
 kind: algorithm
 title: "Backward-Euler incremental pressure correction on a periodic staggered grid"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: interpolative-cur-and-nystrom-decompositions
 title: Interpolative cur and nystrom decompositions
-status: draft
+status: published
 items:
   - alg-strong-rrqr-interpolative-decomposition
   - lem-moore-penrose-products-are-orthogonal-projectors

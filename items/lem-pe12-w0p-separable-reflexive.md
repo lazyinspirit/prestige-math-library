@@ -2,7 +2,7 @@
 id: lem-pe12-w0p-separable-reflexive
 kind: lemma
 title: The zero-boundary W1p space is separable and reflexive
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-na-discounted-control-switching-policy-iteration
 kind: example
 title: A two-state switching example for discounted Howard iteration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-finite-state-discounted-bellman-system, alg-na-finite-control-howard-policy-iteration, thm-na-howard-policy-iteration-monotone-improvement-termination]

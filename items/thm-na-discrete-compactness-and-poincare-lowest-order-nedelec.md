@@ -2,7 +2,7 @@
 id: thm-na-discrete-compactness-and-poincare-lowest-order-nedelec
 kind: theorem
 title: Discrete compactness and uniform Poincare inequality for Nedelec fields
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

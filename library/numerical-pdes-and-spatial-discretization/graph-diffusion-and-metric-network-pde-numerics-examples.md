@@ -1,7 +1,7 @@
 ---
 page: graph-diffusion-and-metric-network-pde-numerics-examples
 title: "Graph diffusion and metric network pde numerics — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-density-continuity-fails-unequal-speed-routing

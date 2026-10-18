@@ -2,7 +2,7 @@
 id: thm-pe04-first-order-upwind-forward-euler-conservation-and-entropy
 kind: theorem
 title: The degree-zero upwind forward-Euler step preserves mass and convex entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

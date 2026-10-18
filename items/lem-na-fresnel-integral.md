@@ -2,7 +2,7 @@
 id: lem-na-fresnel-integral
 kind: lemma
 title: Fresnel whole-line moment from the damped complex Gaussian
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

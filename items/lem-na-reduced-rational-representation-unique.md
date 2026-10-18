@@ -2,7 +2,7 @@
 id: lem-na-reduced-rational-representation-unique
 kind: lemma
 title: "Reduced real rational representations are unique up to scale"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

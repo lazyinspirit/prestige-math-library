@@ -2,7 +2,7 @@
 id: lem-pe05-discrete-weak-identity-with-source
 kind: lemma
 title: Exact space-time weak identity for the hydrostatic update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

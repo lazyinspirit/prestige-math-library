@@ -2,7 +2,7 @@
 id: lem-supg-one-dimensional-optimal-parameter
 kind: lemma
 title: "The one-dimensional SUPG parameter is positive and bounded"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

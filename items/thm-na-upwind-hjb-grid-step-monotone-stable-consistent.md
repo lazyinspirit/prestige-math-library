@@ -2,7 +2,7 @@
 id: thm-na-upwind-hjb-grid-step-monotone-stable-consistent
 kind: theorem
 title: Monotonicity, L-infinity stability, and consistency of the upwind HJB step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [alg-na-upwind-hjb-grid-step, def-na-first-order-hjb-cauchy-problem, cor-taylor-remainder-bound]

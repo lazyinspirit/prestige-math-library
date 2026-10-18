@@ -2,7 +2,7 @@
 id: lem-pe11-gauge-conforming-edge-approximation
 kind: lemma
 title: Kernel projection gives dense conforming gauge approximants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

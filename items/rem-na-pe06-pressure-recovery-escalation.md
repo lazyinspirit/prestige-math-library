@@ -2,7 +2,7 @@
 id: rem-na-pe06-pressure-recovery-escalation
 kind: remark
 title: "PE06 instantaneous pressure refutations and retained primitive estimates"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 12

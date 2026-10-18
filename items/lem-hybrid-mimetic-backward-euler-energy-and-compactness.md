@@ -2,7 +2,7 @@
 id: lem-hybrid-mimetic-backward-euler-energy-and-compactness
 kind: lemma
 title: "Energy and computed-state compactness for hybrid mimetic backward Euler"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

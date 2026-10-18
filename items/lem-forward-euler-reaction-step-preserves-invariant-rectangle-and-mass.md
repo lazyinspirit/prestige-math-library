@@ -2,7 +2,7 @@
 id: lem-forward-euler-reaction-step-preserves-invariant-rectangle-and-mass
 kind: lemma
 title: A bounded forward-Euler reaction step preserves an inward rectangle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

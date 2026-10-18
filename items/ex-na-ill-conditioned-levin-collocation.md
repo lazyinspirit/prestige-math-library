@@ -2,7 +2,7 @@
 id: ex-na-ill-conditioned-levin-collocation
 kind: example
 title: A small Levin collocation residual can hide a large endpoint error
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

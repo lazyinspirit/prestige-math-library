@@ -2,7 +2,7 @@
 id: def-floater-hormann-local-mesh-ratio
 kind: definition
 title: Local mesh ratio for degree-zero Floater–Hormann interpolation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

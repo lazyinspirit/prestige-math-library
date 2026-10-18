@@ -2,7 +2,7 @@
 id: thm-square-root-kalman-finite-procedure-status
 kind: theorem
 title: "The square-root Kalman procedure terminates with a finite status and operation-count bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

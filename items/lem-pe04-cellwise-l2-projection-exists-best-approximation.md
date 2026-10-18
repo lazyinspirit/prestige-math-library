@@ -2,7 +2,7 @@
 id: lem-pe04-cellwise-l2-projection-exists-best-approximation
 kind: lemma
 title: The cellwise L2 projection exists uniquely and is best approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

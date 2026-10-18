@@ -2,7 +2,7 @@
 id: thm-na-finite-periodic-haar-transform-orthogonality
 kind: theorem
 title: Orthogonality, inverse, and Parseval identity for the finite periodic Haar transform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

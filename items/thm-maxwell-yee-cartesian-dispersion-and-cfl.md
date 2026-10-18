@@ -2,7 +2,7 @@
 id: thm-maxwell-yee-cartesian-dispersion-and-cfl
 kind: theorem
 title: Cartesian Yee symbol, numerical dispersion, and grid CFL bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

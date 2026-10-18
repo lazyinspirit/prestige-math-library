@@ -2,7 +2,7 @@
 id: ex-bem-inexact-assembly-error-ledger
 kind: example
 title: A two-by-two inexact assembly ledger
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 10

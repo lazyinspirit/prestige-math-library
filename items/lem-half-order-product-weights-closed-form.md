@@ -2,7 +2,7 @@
 id: lem-half-order-product-weights-closed-form
 kind: lemma
 title: Closed forms for the half-order piecewise-linear product weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

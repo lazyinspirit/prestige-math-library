@@ -2,7 +2,7 @@
 id: lem-finite-miller-terminal-error-identity
 kind: lemma
 title: Exact finite terminal-contamination error identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

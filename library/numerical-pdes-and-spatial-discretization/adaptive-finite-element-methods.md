@@ -1,7 +1,7 @@
 ---
 page: adaptive-finite-element-methods
 title: "Adaptive finite-element methods"
-status: draft
+status: published
 items:
   - cor-afem-constant-convection-weak-wellposedness
   - def-afem-local-moment-interpolant

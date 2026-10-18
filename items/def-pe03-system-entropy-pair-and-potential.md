@@ -2,7 +2,7 @@
 id: def-pe03-system-entropy-pair-and-potential
 kind: definition
 title: Convex entropy pairs, entropy variables, and entropy potentials for systems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

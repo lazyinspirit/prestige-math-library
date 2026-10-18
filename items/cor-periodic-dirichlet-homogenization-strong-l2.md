@@ -2,7 +2,7 @@
 id: cor-periodic-dirichlet-homogenization-strong-l2
 kind: corollary
 title: Strong L2 convergence in periodic Dirichlet homogenization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

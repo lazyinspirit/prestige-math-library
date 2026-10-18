@@ -2,7 +2,7 @@
 id: thm-pe18-planar-impedance-reflection-coefficient
 kind: theorem
 title: Exact plane-wave reflection coefficient of the local impedance condition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -3,7 +3,7 @@ id: thm-hybrid-mimetic-parabolic-weak-flux-limit
 kind: theorem
 title: "Computed hybrid mimetic states and numerical fluxes converge to monotone
   diffusion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

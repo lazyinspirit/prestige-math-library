@@ -3,7 +3,7 @@ id: thm-dare-stabilizing-psd-solution-and-value
 kind: theorem
 title: "Stabilizability and detectability give the unique stabilizing
   positive-semidefinite DARE solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

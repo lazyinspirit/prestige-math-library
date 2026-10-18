@@ -2,7 +2,7 @@
 id: alg-duffy-weighted-product-gauss-quadrature
 kind: algorithm
 title: Weighted product Gauss quadrature after the Duffy transform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

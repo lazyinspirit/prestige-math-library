@@ -2,7 +2,7 @@
 id: lem-floater-hormann-weight-and-blend-identity
 kind: lemma
 title: Floater–Hormann weights equal the local-polynomial blend weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

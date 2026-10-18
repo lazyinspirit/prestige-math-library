@@ -2,7 +2,7 @@
 id: cex-hp-degree-independent-sipdg-penalty-loses-coercivity
 kind: counterexample
 title: A degree-independent SIPDG penalty loses coercivity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

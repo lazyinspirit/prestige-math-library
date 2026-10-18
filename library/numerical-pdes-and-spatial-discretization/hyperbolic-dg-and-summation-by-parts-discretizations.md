@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-dg-and-summation-by-parts-discretizations
 title: Hyperbolic DG and summation-by-parts methods
-status: draft
+status: published
 requires:
   - finite-element-meshes-and-interpolation
   - invariant-domain-and-entropy-stable-conservative-schemes

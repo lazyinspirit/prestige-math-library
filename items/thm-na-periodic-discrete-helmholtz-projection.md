@@ -3,7 +3,7 @@ id: thm-na-periodic-discrete-helmholtz-projection
 kind: theorem
 title: "Mass-orthogonal periodic discrete Helmholtz projection and exact
   incompressibility"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

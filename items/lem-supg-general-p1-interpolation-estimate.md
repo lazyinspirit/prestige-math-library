@@ -2,7 +2,7 @@
 id: lem-supg-general-p1-interpolation-estimate
 kind: lemma
 title: "Shape-regular affine P1 interpolation estimates for C2 functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

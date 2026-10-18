@@ -2,7 +2,7 @@
 id: lem-periodic-tensor-interpolation-hessian-error
 kind: lemma
 title: "Tensor multilinear interpolation has a second-derivative error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

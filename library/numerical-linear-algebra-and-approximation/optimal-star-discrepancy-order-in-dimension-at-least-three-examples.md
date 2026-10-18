@@ -1,7 +1,7 @@
 ---
 page: optimal-star-discrepancy-order-in-dimension-at-least-three-examples
 title: "Optimal star-discrepancy order in dimension at least three — Examples"
-status: draft
+status: published
 requires:
   - optimal-star-discrepancy-order-in-dimension-at-least-three
 items: []

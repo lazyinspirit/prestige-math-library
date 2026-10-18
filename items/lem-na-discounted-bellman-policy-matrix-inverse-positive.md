@@ -2,7 +2,7 @@
 id: lem-na-discounted-bellman-policy-matrix-inverse-positive
 kind: lemma
 title: Inverse positivity of discounted finite-state policy matrices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-finite-state-discounted-bellman-system, thm-invertible-matrix-theorem, lem-finite-set-has-max]

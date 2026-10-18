@@ -2,7 +2,7 @@
 id: ex-na-diagonal-diffusion-manufactured-solution
 kind: example
 title: A periodic manufactured solution for the diagonal-diffusion HJB stencil
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [alg-na-explicit-diagonal-diffusion-hjb-grid-step, def-na-periodic-diagonal-controlled-diffusion-hjb-problem, thm-na-diagonal-diffusion-stencil-consistency]

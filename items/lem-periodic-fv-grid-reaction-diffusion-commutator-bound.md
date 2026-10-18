@@ -2,7 +2,7 @@
 id: lem-periodic-fv-grid-reaction-diffusion-commutator-bound
 kind: lemma
 title: Mesh-uniform reaction-diffusion commutator bound on a periodic grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

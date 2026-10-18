@@ -2,7 +2,7 @@
 id: ex-forward-bessel-recurrence-loses-sign
 kind: example
 title: An arbitrarily small seed perturbation flips a later Bessel sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

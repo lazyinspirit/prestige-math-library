@@ -2,7 +2,7 @@
 id: thm-pe04-upwind-dg-l2-energy-stability
 kind: theorem
 title: Upwind DG transport satisfies the semidiscrete L2 energy identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-fisher-kpp-forward-reaction-euler-bound
 kind: example
 title: A forward-Euler Fisher–KPP reaction step preserves its interval under a sharp simple bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

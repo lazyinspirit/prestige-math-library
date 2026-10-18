@@ -2,7 +2,7 @@
 id: lem-square-root-kalman-prediction-factor-identity
 kind: lemma
 title: "QR prediction preserves the canonical covariance factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

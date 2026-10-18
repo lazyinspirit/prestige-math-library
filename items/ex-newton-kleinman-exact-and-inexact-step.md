@@ -3,7 +3,7 @@ id: ex-newton-kleinman-exact-and-inexact-step
 kind: example
 title: "Exact Newton-Kleinman decreases the cost while an unchecked inexact step
   can lose stability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

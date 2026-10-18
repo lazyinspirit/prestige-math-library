@@ -2,7 +2,7 @@
 id: thm-crouzeix-raviart-discrete-poincare
 kind: theorem
 title: Discrete Poincare inequality for homogeneous Crouzeix–Raviart functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

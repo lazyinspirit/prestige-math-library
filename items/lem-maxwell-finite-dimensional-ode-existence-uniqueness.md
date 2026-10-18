@@ -2,7 +2,7 @@
 id: lem-maxwell-finite-dimensional-ode-existence-uniqueness
 kind: lemma
 title: Existence and uniqueness for the finite-dimensional Maxwell ODE
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: "ex-na-least-squares-poisson-residual-certificate"
 kind: "example"
 title: "An exact polynomial Poisson solution has a zero residual certificate"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 5

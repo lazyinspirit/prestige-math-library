@@ -2,7 +2,7 @@
 id: lem-wide-gaussian-pseudoinverse-frobenius-moments
 kind: lemma
 title: Exact Frobenius moments of wide Gaussian pseudoinverses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-leibniz-determinant-forward-error-bound
 kind: lemma
 title: A left-to-right Leibniz determinant has an explicit forward error bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

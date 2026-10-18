@@ -2,7 +2,7 @@
 id: thm-aggregation-amg-hierarchy-preserves-spd-and-terminates
 kind: theorem
 title: "Finite aggregation AMG preserves the SPD matrix class and returns a status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

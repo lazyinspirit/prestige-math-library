@@ -1,7 +1,7 @@
 ---
 page: mixed-finite-elements-and-stokes-stability
 title: "Mixed finite elements and Stokes stability"
-status: draft
+status: published
 items:
   - lem-na-zero-mean-of-zero-boundary-divergence
   - lem-na-homogeneous-dirichlet-poincare

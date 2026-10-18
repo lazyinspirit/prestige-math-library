@@ -2,7 +2,7 @@
 id: ex-na-taylor-hood-pressure-mode
 kind: example
 title: "A Taylor-Hood local pressure mode on a right triangle"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

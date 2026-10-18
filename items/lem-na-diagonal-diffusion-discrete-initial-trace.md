@@ -2,7 +2,7 @@
 id: lem-na-diagonal-diffusion-discrete-initial-trace
 kind: lemma
 title: Initial trace for the explicit diagonal-diffusion HJB scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [alg-na-explicit-diagonal-diffusion-hjb-grid-step, def-na-periodic-diagonal-controlled-diffusion-hjb-problem, def-na-periodic-grid-and-tensor-multilinear-interpolation, thm-heine-borel-rn, thm-heine-cantor-metric]

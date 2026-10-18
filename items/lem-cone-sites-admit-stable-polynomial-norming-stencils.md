@@ -2,7 +2,7 @@
 id: lem-cone-sites-admit-stable-polynomial-norming-stencils
 kind: lemma
 title: "Uniform cone domains admit stable polynomial norming stencils"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

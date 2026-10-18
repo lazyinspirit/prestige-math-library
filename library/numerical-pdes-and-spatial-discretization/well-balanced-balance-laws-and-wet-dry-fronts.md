@@ -1,7 +1,7 @@
 ---
 page: well-balanced-balance-laws-and-wet-dry-fronts
 title: Well-balanced balance laws and wet/dry fronts
-status: draft
+status: published
 items:
   - def-pe05-shallow-water-balance-law
   - def-pe05-hydrostatic-hll-scheme

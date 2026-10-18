@@ -2,7 +2,7 @@
 id: lem-pe05-hll-flux-reconstruction-converges-under-strong-primitive-l1
 kind: lemma
 title: Hydrostatic HLL face fluxes converge under strong state and velocity convergence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

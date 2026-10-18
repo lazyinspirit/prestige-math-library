@@ -2,7 +2,7 @@
 id: def-certified-geometric-predicate-determinants
 kind: definition
 title: Dyadic orientation and lifted sphere determinants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

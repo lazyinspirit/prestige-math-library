@@ -2,7 +2,7 @@
 id: lem-complete-ordered-field-is-archimedean
 kind: lemma
 title: "A complete ordered field has cofinal canonical integers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

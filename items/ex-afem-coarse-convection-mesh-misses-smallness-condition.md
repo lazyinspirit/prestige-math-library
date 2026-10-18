@@ -2,7 +2,7 @@
 id: "ex-afem-coarse-convection-mesh-misses-smallness-condition"
 kind: "example"
 title: "A coarse mesh can miss the convection smallness condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 2

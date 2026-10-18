@@ -2,7 +2,7 @@
 id: thm-na-polynomial-equioscillation-certificate
 kind: theorem
 title: "Exact polynomial equioscillation certifies best approximation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

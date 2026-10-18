@@ -3,7 +3,7 @@ id: lem-bem-polyhedral-edge-kernel-representation
 kind: lemma
 title: Finite-energy transmission pairs have the double-layer kernel
   representation across polyhedral edges
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

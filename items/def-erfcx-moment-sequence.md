@@ -2,7 +2,7 @@
 id: def-erfcx-moment-sequence
 kind: definition
 title: Scaled complementary error function and its moments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

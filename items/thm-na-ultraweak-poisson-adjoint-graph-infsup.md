@@ -2,7 +2,7 @@
 id: thm-na-ultraweak-poisson-adjoint-graph-infsup
 kind: theorem
 title: Adjoint graph inf-sup for ultraweak Poisson on connected Lipschitz polyhedra
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

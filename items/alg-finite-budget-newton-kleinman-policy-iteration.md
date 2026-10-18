@@ -2,7 +2,7 @@
 id: alg-finite-budget-newton-kleinman-policy-iteration
 kind: algorithm
 title: "Finite-budget exact or safeguarded inexact Newton-Kleinman policy iteration"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

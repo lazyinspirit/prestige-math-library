@@ -2,7 +2,7 @@
 id: def-supg-variational-multiscale-block-closure
 kind: definition
 title: "Finite-dimensional resolved–unresolved VMS split and residual closure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

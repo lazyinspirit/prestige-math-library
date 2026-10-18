@@ -2,7 +2,7 @@
 id: thm-planar-triangle-and-edge-count
 kind: theorem
 title: "A planar triangulation has linearly many triangles and edges"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

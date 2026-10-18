@@ -2,7 +2,7 @@
 id: ex-half-order-midpoint-order-loss
 kind: example
 title: Direct midpoint quadrature loses order on a half-order singularity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

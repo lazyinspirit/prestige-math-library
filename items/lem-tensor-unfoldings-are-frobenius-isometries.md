@@ -2,7 +2,7 @@
 id: lem-tensor-unfoldings-are-frobenius-isometries
 kind: lemma
 title: Tensor unfoldings preserve the Frobenius inner product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

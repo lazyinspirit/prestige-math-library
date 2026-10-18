@@ -3,7 +3,7 @@ id: prop-inexact-newton-kleinman-safeguard
 kind: proposition
 title: "Verified Lyapunov residual, descent, and stability checks make an
   inexact Newton-Kleinman step safe"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

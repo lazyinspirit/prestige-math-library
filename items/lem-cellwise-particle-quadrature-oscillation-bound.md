@@ -2,7 +2,7 @@
 id: lem-cellwise-particle-quadrature-oscillation-bound
 kind: lemma
 title: "Cellwise oscillation bound for particle quadrature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

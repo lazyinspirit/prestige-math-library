@@ -2,7 +2,7 @@
 id: ex-na-eikonal-kink-monotone-hjb-updates
 kind: example
 title: An eikonal kink and its monotone HJB grid updates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-first-order-hjb-cauchy-problem, alg-na-positive-interpolation-semilagrangian-hjb-step, alg-na-upwind-hjb-grid-step, thm-na-first-order-hjb-scheme-convergence]

@@ -2,7 +2,7 @@
 id: def-floater-hormann-window-polynomial
 kind: definition
 title: Local polynomial in a Floater–Hormann window
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

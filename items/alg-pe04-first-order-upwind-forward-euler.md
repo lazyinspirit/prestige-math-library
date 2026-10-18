@@ -2,7 +2,7 @@
 id: alg-pe04-first-order-upwind-forward-euler
 kind: algorithm
 title: Forward-Euler step for degree-zero upwind DG transport
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

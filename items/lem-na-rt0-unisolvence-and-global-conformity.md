@@ -2,7 +2,7 @@
 id: lem-na-rt0-unisolvence-and-global-conformity
 kind: lemma
 title: RT0 facet-flux unisolvence and global H(div) conformity
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-full-column-rank-matrix-least-squares-solution
 kind: lemma
 title: Full-column-rank matrix least squares has a unique minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

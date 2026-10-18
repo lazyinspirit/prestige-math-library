@@ -2,7 +2,7 @@
 id: alg-gaussian-randomized-range-finder
 kind: algorithm
 title: Exact Gaussian randomized range finder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

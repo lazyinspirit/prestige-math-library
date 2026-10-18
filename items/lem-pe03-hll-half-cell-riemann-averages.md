@@ -2,7 +2,7 @@
 id: lem-pe03-hll-half-cell-riemann-averages
 kind: lemma
 title: First-order HLL updates are averages of adjacent half-cell fan averages
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

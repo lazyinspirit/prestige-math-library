@@ -2,7 +2,7 @@
 id: lem-na-two-dimensional-solenoidal-energy-velocity-uniqueness
 kind: lemma
 title: Uniqueness and strong trace for two-dimensional solenoidal energy velocities
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

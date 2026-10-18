@@ -2,7 +2,7 @@
 id: lem-pe12-w1p-compact-l2-embedding
 kind: lemma
 title: The subcritical W0 one p embedding into L2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

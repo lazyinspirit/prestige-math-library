@@ -2,7 +2,7 @@
 id: ex-na-mini-backward-euler-energy-budget
 kind: example
 title: Zero-forcing discrete energy budget
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

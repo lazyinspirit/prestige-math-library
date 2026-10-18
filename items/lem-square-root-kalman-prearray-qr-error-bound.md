@@ -2,7 +2,7 @@
 id: lem-square-root-kalman-prearray-qr-error-bound
 kind: lemma
 title: "Product and Householder QR errors bound the represented joint covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

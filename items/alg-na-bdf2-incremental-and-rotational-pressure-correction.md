@@ -2,7 +2,7 @@
 id: alg-na-bdf2-incremental-and-rotational-pressure-correction
 kind: algorithm
 title: "BDF2 standard and rotational incremental pressure-correction variants"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -3,7 +3,7 @@ id: thm-care-local-residual-ball-certificate
 kind: theorem
 title: "A CARE residual and Lyapunov margin certify a unique stabilizing root in
   a matrix ball"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

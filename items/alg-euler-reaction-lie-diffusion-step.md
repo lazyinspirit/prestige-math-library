@@ -2,7 +2,7 @@
 id: alg-euler-reaction-lie-diffusion-step
 kind: algorithm
 title: Forward-Euler reaction followed by exact FV or periodic diffusion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

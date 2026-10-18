@@ -1,7 +1,7 @@
 ---
 page: fast-multipole-expansions-and-error
 title: Fast multipole expansions and error
-status: draft
+status: published
 items:
   - def-finite-planar-quadtree-fmm-pair-lists
   - def-three-dimensional-spherical-harmonic-space

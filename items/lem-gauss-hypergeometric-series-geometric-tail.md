@@ -2,7 +2,7 @@
 id: lem-gauss-hypergeometric-series-geometric-tail
 kind: lemma
 title: Gauss hypergeometric series geometric tail bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

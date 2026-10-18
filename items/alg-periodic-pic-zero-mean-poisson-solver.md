@@ -2,7 +2,7 @@
 id: alg-periodic-pic-zero-mean-poisson-solver
 kind: algorithm
 title: Fourier diagonal solver for the periodic centered-difference Poisson equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-floater-hormann-error-rate-bv
 kind: theorem
 title: Floater–Hormann error bounds for a bounded-variation highest derivative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

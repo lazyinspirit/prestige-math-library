@@ -1,7 +1,7 @@
 ---
 page: barycentric-rational-and-aaa-approximation-examples
 title: "Barycentric rational and aaa approximation — Examples"
-status: draft
+status: published
 requires:
   - barycentric-rational-and-aaa-approximation
 items: []

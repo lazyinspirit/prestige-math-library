@@ -2,7 +2,7 @@
 id: ex-crouzeix-raviart-broken-gradient-norm
 kind: example
 title: A nonzero CR function on a two-triangle square
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

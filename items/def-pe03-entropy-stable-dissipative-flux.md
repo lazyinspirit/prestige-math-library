@@ -2,7 +2,7 @@
 id: def-pe03-entropy-stable-dissipative-flux
 kind: definition
 title: Entropy-stable flux from positive-semidefinite entropy-variable dissipation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

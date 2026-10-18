@@ -2,7 +2,7 @@
 id: lem-sph-pair-forces-antisymmetric-and-central
 kind: lemma
 title: "SPH pressure forces are equal-opposite and central"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

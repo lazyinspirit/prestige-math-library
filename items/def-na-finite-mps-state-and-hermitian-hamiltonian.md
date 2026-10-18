@@ -2,7 +2,7 @@
 id: def-na-finite-mps-state-and-hermitian-hamiltonian
 kind: definition
 title: "Finite matrix-product states and Hermitian Hamiltonians"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

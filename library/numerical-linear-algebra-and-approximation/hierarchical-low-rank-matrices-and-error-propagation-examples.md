@@ -1,7 +1,7 @@
 ---
 page: hierarchical-low-rank-matrices-and-error-propagation-examples
 title: Hierarchical low rank matrices and error propagation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-hlr-nearfield-block-requires-full-rank

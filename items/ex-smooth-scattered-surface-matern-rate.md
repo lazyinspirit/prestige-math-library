@@ -2,7 +2,7 @@
 id: ex-smooth-scattered-surface-matern-rate
 kind: example
 title: "A smooth scattered surface inherits the Matérn fill-distance rate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: def-na-mini-navier-stokes-backward-euler-scheme
 kind: definition
 title: "The mixed mini-element backward Euler Navier–Stokes scheme"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

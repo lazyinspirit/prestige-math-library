@@ -1,7 +1,7 @@
 ---
 page: nonlinear-parabolic-compactness-and-monotone-evolution-examples
 title: "Nonlinear parabolic compactness and monotone evolution — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-pe12-porous-medium-barenblatt

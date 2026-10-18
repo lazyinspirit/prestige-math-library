@@ -2,7 +2,7 @@
 id: lem-na-rt0-h1-interpolation-bounded-and-commuting
 kind: lemma
 title: Boundedness and divergence commutation of RT0 interpolation
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

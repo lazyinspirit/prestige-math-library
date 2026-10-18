@@ -2,7 +2,7 @@
 id: lem-compressible-ideal-gas-entropy-pair-and-variables
 kind: lemma
 title: Strict convexity and entropy variables for the ideal-gas Euler flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

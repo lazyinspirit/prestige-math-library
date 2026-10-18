@@ -2,7 +2,7 @@
 id: alg-fas-two-grid-cycle
 kind: algorithm
 title: "Finite-budget nonlinear FAS two-grid cycle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

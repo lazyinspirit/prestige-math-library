@@ -2,7 +2,7 @@
 id: thm-randomized-history-dag-expected-location-cost
 kind: theorem
 title: "Uniform random insertion gives expected O(n log n) location work"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

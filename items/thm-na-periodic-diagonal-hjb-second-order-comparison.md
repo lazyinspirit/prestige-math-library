@@ -2,7 +2,7 @@
 id: thm-na-periodic-diagonal-hjb-second-order-comparison
 kind: theorem
 title: Comparison for periodic diagonal controlled-diffusion HJB equations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

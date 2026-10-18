@@ -2,7 +2,7 @@
 id: thm-forward-euler-global-error-on-controlled-sph-tube
 kind: theorem
 title: "Forward Euler has first-order global error and preserves a margin tube for the regularized SPH ODE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

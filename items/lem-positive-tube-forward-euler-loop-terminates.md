@@ -2,7 +2,7 @@
 id: lem-positive-tube-forward-euler-loop-terminates
 kind: lemma
 title: Termination of the finite-budget guarded forward-Euler loop
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

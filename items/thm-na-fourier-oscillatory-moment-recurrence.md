@@ -2,7 +2,7 @@
 id: thm-na-fourier-oscillatory-moment-recurrence
 kind: theorem
 title: Exact polynomial moments for the linear Fourier phase
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

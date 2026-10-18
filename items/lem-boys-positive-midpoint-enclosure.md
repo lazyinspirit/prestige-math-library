@@ -2,7 +2,7 @@
 id: lem-boys-positive-midpoint-enclosure
 kind: lemma
 title: A positive midpoint enclosure for Boys functions on bounded arguments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

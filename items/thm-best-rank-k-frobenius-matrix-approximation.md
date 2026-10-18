@@ -2,7 +2,7 @@
 id: thm-best-rank-k-frobenius-matrix-approximation
 kind: theorem
 title: Best rank-k matrix approximation in Frobenius norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

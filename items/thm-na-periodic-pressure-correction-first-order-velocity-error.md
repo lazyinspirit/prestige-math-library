@@ -2,7 +2,7 @@
 id: thm-na-periodic-pressure-correction-first-order-velocity-error
 kind: theorem
 title: "First-order velocity accuracy for smooth periodic Stokes data"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

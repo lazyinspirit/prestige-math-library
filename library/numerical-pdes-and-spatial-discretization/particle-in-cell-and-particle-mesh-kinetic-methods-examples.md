@@ -1,7 +1,7 @@
 ---
 page: particle-in-cell-and-particle-mesh-kinetic-methods-examples
 title: Particle in cell and particle mesh kinetic methods — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-periodic-high-frequency-pic-sampling-alias

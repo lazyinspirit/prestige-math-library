@@ -1,7 +1,7 @@
 ---
 page: square-root-covariance-update-error-and-stability
 title: Square root covariance update error and stability
-status: draft
+status: published
 requires:
   - numerical-algebraic-riccati-equations-and-stabilizing-branches
   - kalman-filtering

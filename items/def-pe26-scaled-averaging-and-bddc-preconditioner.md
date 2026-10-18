@@ -2,7 +2,7 @@
 id: def-pe26-scaled-averaging-and-bddc-preconditioner
 kind: definition
 title: Coefficient-scaled averaging and BDDC
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

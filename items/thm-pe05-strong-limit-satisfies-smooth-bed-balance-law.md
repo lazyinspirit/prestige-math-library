@@ -2,7 +2,7 @@
 id: thm-pe05-strong-limit-satisfies-smooth-bed-balance-law
 kind: theorem
 title: A strong limit of hydrostatic HLL updates solves the smooth-bed balance law weakly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-harmonic-transmissibility-material-interface
 kind: example
 title: Harmonic transmissibility across a one-dimensional material interface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

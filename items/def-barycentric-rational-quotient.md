@@ -2,7 +2,7 @@
 id: def-barycentric-rational-quotient
 kind: definition
 title: Barycentric rational quotient with support values and reduced poles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

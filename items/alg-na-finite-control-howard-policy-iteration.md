@@ -2,7 +2,7 @@
 id: alg-na-finite-control-howard-policy-iteration
 kind: algorithm
 title: Finite-budget Howard policy iteration for a discounted generator Bellman system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-finite-state-discounted-bellman-system, lem-na-discounted-bellman-policy-matrix-inverse-positive, lem-finite-set-has-max]

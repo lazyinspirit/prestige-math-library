@@ -2,7 +2,7 @@
 id: thm-certified-dyadic-geometric-predicate-sound-and-terminates
 kind: theorem
 title: The filtered exact dyadic predicate is sound and terminates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

@@ -1,7 +1,7 @@
 ---
 page: invariant-domain-and-entropy-stable-conservative-schemes-examples
 title: Positivity, invariant domains and entropy-stable systems fluxes — Examples
-status: draft
+status: published
 requires: [ invariant-domain-and-entropy-stable-conservative-schemes ]
 items: []
 examples:

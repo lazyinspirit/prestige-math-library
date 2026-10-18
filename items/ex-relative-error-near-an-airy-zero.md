@@ -2,7 +2,7 @@
 id: ex-relative-error-near-an-airy-zero
 kind: example
 title: Relative error becomes unavailable at an Airy zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

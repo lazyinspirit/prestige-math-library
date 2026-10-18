@@ -2,7 +2,7 @@
 id: def-periodic-sbp-compressible-viscous-scheme
 kind: definition
 title: Periodic diagonal-norm SBP compressible viscous scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

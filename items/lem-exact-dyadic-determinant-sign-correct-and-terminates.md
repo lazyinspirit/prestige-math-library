@@ -2,7 +2,7 @@
 id: lem-exact-dyadic-determinant-sign-correct-and-terminates
 kind: lemma
 title: The integer-clearance determinant-sign algorithm is correct and terminates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

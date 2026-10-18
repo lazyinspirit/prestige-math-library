@@ -2,7 +2,7 @@
 id: thm-pe26-primal-constraints-remove-floating-kernels
 kind: theorem
 title: Primal constraints remove local floating kernels
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: crouzeix-raviart-finite-elements
 title: "Crouzeix–Raviart finite elements"
-status: draft
+status: published
 items:
   - def-crouzeix-raviart-local-p1-element
   - def-crouzeix-raviart-fractional-sobolev-regularity

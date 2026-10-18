@@ -2,7 +2,7 @@
 id: ex-lax-friedrichs-fv-monotone-under-cfl
 kind: example
 title: Lax–Friedrichs flux under the invariant-interval CFL bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-three-dimensional-lower-hull-coverage-empty-sphere-and-termination
 kind: theorem
 title: "Exact 3D lower-hull insertion covers the hull and terminates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

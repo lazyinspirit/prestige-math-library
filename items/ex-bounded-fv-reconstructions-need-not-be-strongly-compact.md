@@ -2,7 +2,7 @@
 id: ex-bounded-fv-reconstructions-need-not-be-strongly-compact
 kind: example
 title: Uniformly bounded cell reconstructions need not have a strong local limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

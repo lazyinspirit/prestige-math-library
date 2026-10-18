@@ -2,7 +2,7 @@
 id: thm-na-diagonal-diffusion-stencil-consistency
 kind: theorem
 title: Smooth consistency of the diagonal-diffusion Bellman stencil
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [alg-na-explicit-diagonal-diffusion-hjb-grid-step, def-na-periodic-diagonal-controlled-diffusion-hjb-problem, cor-taylor-remainder-bound]

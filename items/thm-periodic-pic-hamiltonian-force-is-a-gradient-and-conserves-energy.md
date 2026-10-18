@@ -2,7 +2,7 @@
 id: thm-periodic-pic-hamiltonian-force-is-a-gradient-and-conserves-energy
 kind: theorem
 title: The matched periodic PIC grid force is a gradient and its ODE conserves energy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-signorini-partial-dirichlet-korn-coercivity
 kind: lemma
 title: "Korn coercivity with a partial Dirichlet segment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

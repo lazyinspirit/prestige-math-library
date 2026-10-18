@@ -2,7 +2,7 @@
 id: alg-planar-laplace-fmm-fixed-order
 kind: algorithm
 title: Fixed-order planar Laplace fast multipole procedure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-parabolic-curved-domain-linear-geometry-approximation
 kind: example
 title: "A parabolic shear has certified linear geometry approximations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

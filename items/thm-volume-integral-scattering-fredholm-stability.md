@@ -2,7 +2,7 @@
 id: thm-volume-integral-scattering-fredholm-stability
 kind: theorem
 title: Fredholm solvability and residual stability for volume scattering
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

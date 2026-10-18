@@ -2,7 +2,7 @@
 id: thm-na-filon-interpolation-error-bound
 kind: theorem
 title: Nonstationary error bound for endpoint Filon interpolation
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps:

@@ -2,7 +2,7 @@
 id: prop-dare-stable-deflating-subspace-perturbation-bound
 kind: proposition
 title: "Separated DARE pencils have quantitatively stable deflating graphs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

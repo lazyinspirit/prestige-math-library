@@ -2,7 +2,7 @@
 id: def-pe12-monotone-diffusion-flux
 kind: definition
 title: Coercive monotone p-growth diffusion fluxes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

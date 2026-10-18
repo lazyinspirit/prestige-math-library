@@ -2,7 +2,7 @@
 id: ex-phase-field-allen-cahn-stationary-front
 kind: example
 title: The one-dimensional Allen–Cahn double-well front
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

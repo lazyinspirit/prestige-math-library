@@ -2,7 +2,7 @@
 id: thm-hp-simplex-weighted-spectral-projection
 kind: theorem
 title: Weighted simplex polynomial projection has explicit p-rates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-hll-two-wave-flux
 kind: definition
 title: "HLL two-wave approximate flux"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

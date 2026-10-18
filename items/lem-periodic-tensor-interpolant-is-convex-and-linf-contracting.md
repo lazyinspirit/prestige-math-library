@@ -2,7 +2,7 @@
 id: lem-periodic-tensor-interpolant-is-convex-and-linf-contracting
 kind: lemma
 title: "Periodic multilinear interpolation is convex and L-infinity contractive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

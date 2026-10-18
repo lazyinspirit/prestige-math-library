@@ -2,7 +2,7 @@
 id: ex-pe03-conservative-positivity-rescaling
 kind: example
 title: Two Euler quadrature nodes rescaled to a positive margin
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

@@ -3,7 +3,7 @@ id: prop-graph-basis-yields-care-or-dare-solution
 kind: proposition
 title: "An invertible graph block converts an exact stable Schur or QZ basis
   into a Riccati solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

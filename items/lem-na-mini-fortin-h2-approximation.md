@@ -2,7 +2,7 @@
 id: lem-na-mini-fortin-h2-approximation
 kind: lemma
 title: Second-order L2 approximation by the MINI Fortin map
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

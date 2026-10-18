@@ -2,7 +2,7 @@
 id: ex-psd-nystrom-residual-is-psd
 kind: example
 title: "A PSD Nyström residual remains positive semidefinite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

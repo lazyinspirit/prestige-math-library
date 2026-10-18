@@ -2,7 +2,7 @@
 id: lem-regularized-sph-vector-field-lipschitz-on-positive-density-tube
 kind: lemma
 title: "Explicit local Lipschitz bound for the regularized SPH vector field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: "thm-na-ideal-ultraweak-poisson-energy-best-approximation"
 kind: "theorem"
 title: "Ideal ultraweak Poisson DPG is the energy best approximation"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 9

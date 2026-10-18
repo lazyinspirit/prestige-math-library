@@ -2,7 +2,7 @@
 id: ex-fmm-clustered-points-require-depth-sensitive-work
 kind: example
 title: A clustered point set makes tree depth enter the work
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

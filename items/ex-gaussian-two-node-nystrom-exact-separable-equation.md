@@ -2,7 +2,7 @@
 id: ex-gaussian-two-node-nystrom-exact-separable-equation
 kind: example
 title: A two-node Gaussian Nyström rule solves a rank-two separable equation exactly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

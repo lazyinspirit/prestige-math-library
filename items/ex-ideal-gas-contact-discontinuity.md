@@ -2,7 +2,7 @@
 id: ex-ideal-gas-contact-discontinuity
 kind: example
 title: "A contact discontinuity with equal velocity and pressure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

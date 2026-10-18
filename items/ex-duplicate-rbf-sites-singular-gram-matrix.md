@@ -2,7 +2,7 @@
 id: ex-duplicate-rbf-sites-singular-gram-matrix
 kind: example
 title: "Duplicate sites make the kernel Gram matrix singular"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

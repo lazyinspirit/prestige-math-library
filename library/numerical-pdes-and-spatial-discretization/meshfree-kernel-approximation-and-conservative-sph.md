@@ -1,7 +1,7 @@
 ---
 page: meshfree-kernel-approximation-and-conservative-sph
 title: "Meshfree kernel approximation and conservative sph"
-status: draft
+status: published
 requires: [ interacting-particle-mean-field-and-vortex-blob-error ]
 items:
   - def-meshfree-cell-quadrature-and-fill-radius

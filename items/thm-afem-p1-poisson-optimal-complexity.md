@@ -2,7 +2,7 @@
 id: "thm-afem-p1-poisson-optimal-complexity"
 kind: "theorem"
 title: "Optimal P1 AFEM complexity for the Laplacian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 5

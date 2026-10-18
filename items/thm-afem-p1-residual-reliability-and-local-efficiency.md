@@ -2,7 +2,7 @@
 id: "thm-afem-p1-residual-reliability-and-local-efficiency"
 kind: "theorem"
 title: "Residual reliability and local efficiency for P1 AFEM"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 2

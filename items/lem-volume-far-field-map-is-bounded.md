@@ -2,7 +2,7 @@
 id: lem-volume-far-field-map-is-bounded
 kind: lemma
 title: The volume far-field map is bounded and is the uniform far-field limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

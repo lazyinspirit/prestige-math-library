@@ -1,7 +1,7 @@
 ---
 page: energy-stable-incompressible-navier-stokes-discretization
 title: "Evolutionary incompressible flow discretization"
-status: draft
+status: published
 items:
   - lem-na-halfline-heat-logarithmic-mass-loss
   - lem-na-shrinking-boundary-stream-corrector

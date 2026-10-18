@@ -2,7 +2,7 @@
 id: thm-certified-airy-enclosures
 kind: theorem
 title: Soundness of finite Airy enclosures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

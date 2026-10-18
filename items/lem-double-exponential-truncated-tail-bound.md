@@ -2,7 +2,7 @@
 id: lem-double-exponential-truncated-tail-bound
 kind: lemma
 title: A double-exponential envelope bounds the omitted trapezoid tails
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

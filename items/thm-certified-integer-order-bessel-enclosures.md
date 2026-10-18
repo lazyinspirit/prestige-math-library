@@ -2,7 +2,7 @@
 id: thm-certified-integer-order-bessel-enclosures
 kind: theorem
 title: Soundness of finite integer-order Bessel enclosures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

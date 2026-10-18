@@ -2,7 +2,7 @@
 id: ex-periodic-one-dimensional-pic-cic-charge-deposition
 kind: example
 title: One-dimensional periodic CIC deposition and adjoint potential gather
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

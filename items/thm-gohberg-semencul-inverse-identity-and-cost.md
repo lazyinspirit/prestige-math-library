@@ -3,7 +3,7 @@ id: thm-gohberg-semencul-inverse-identity-and-cost
 kind: theorem
 title: "The Hermitian positive-definite Gohberg–Semencul formula is exact and
   quadratic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

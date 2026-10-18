@@ -2,7 +2,7 @@
 id: lem-euler-backward-characteristic-foot-error
 kind: lemma
 title: "Explicit Euler gives a second-order local backward-foot defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

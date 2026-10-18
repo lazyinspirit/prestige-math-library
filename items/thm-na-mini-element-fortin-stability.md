@@ -2,7 +2,7 @@
 id: thm-na-mini-element-fortin-stability
 kind: theorem
 title: "Uniform Fortin stability of the mini element"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: thm-de-boor-coefficient-evaluation-work
 kind: theorem
 title: de Boor evaluation uses quadratic work in the degree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

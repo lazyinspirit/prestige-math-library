@@ -2,7 +2,7 @@
 id: thm-pe04-dg-smooth-solution-l2-error-bound
 kind: theorem
 title: Smooth-solution L2 error bound for upwind DG transport
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

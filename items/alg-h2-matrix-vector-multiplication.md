@@ -2,7 +2,7 @@
 id: alg-h2-matrix-vector-multiplication
 kind: algorithm
 title: "Nested-basis H² matrix-vector multiplication"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

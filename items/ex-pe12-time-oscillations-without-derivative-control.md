@@ -2,7 +2,7 @@
 id: ex-pe12-time-oscillations-without-derivative-control
 kind: example
 title: Time oscillations defeat compactness without derivative control
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: semi-lagrangian-characteristic-transport-examples
 title: "Semi-Lagrangian characteristic transport — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-semilagrangian-constant-speed-crosses-many-cells

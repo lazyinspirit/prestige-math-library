@@ -2,7 +2,7 @@
 id: lem-erfcx-moment-recurrence
 kind: lemma
 title: Moment recurrence for the scaled complementary error function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

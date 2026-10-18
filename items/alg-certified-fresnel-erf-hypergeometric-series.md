@@ -2,7 +2,7 @@
 id: alg-certified-fresnel-erf-hypergeometric-series
 kind: algorithm
 title: Finite certified power-series evaluation for Fresnel, erf, and Gauss functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

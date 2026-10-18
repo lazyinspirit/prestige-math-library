@@ -2,7 +2,7 @@
 id: lem-loggamma-product-tail-bound
 kind: lemma
 title: Explicit tail bound for the log-Gamma product series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

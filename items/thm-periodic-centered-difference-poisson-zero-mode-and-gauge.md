@@ -2,7 +2,7 @@
 id: thm-periodic-centered-difference-poisson-zero-mode-and-gauge
 kind: theorem
 title: Periodic centered-difference Poisson solvability and zero-mean gauge
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

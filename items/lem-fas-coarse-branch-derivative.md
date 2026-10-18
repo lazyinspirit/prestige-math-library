@@ -2,7 +2,7 @@
 id: lem-fas-coarse-branch-derivative
 kind: lemma
 title: "Derivative of the exact-branch FAS two-grid cycle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

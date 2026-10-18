@@ -1,7 +1,7 @@
 ---
 page: ale-interface-and-partitioned-multiphysics-discretization
 title: "ALE, interfaces and partitioned multiphysics coupling"
-status: draft
+status: published
 items:
   - cor-ale-exact-splitting-residual-orders
   - def-ale-linear-diffusion-transmission-model

@@ -2,7 +2,7 @@
 id: thm-na-haar-cell-average-w1inf-error-bound
 kind: theorem
 title: Haar cell averages approximate smooth bounded-derivative data at first order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

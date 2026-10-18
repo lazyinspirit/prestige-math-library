@@ -2,7 +2,7 @@
 id: alg-endpoint-power-regularized-jacobi-quadrature
 kind: algorithm
 title: Finite endpoint power substitution followed by Gauss–Jacobi quadrature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

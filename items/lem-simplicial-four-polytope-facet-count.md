@@ -2,7 +2,7 @@
 id: lem-simplicial-four-polytope-facet-count
 kind: lemma
 title: "A convex 4-polytope has at most m(m−3)/2 facets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

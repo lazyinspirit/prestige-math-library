@@ -2,7 +2,7 @@
 id: def-nystrom-quadrature-and-finite-rank-operators
 kind: definition
 title: Nyström quadrature operators and their reconstructed equations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

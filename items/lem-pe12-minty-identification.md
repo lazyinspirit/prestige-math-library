@@ -2,7 +2,7 @@
 id: lem-pe12-minty-identification
 kind: lemma
 title: Minty identification for a monotone Carathéodory flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-psd-nystrom-order-and-exactness
 kind: theorem
 title: "Nyström is positive semidefinite, dominated by A, and exact when it captures the range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

@@ -2,7 +2,7 @@
 id: def-loggamma-slit-plane-branch
 kind: definition
 title: Log-Gamma branch on the slit plane
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

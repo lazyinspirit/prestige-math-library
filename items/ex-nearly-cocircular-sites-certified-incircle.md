@@ -2,7 +2,7 @@
 id: ex-nearly-cocircular-sites-certified-incircle
 kind: example
 title: A nearly cocircular quadruple has a certified lifted sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates-examples

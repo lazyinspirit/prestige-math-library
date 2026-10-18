@@ -2,7 +2,7 @@
 id: thm-hp-galerkin-h-p-regularity-energy-bound
 kind: theorem
 title: "Galerkin energy error with local h, trace degree and Sobolev regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

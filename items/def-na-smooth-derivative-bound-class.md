@@ -2,7 +2,7 @@
 id: def-na-smooth-derivative-bound-class
 kind: definition
 title: Smooth functions on the unit interval with bounded derivative data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

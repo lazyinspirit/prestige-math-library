@@ -2,7 +2,7 @@
 id: lem-pe11-smooth-nedelec-approximation
 kind: lemma
 title: Smooth fields are approximated by the lowest-order edge family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

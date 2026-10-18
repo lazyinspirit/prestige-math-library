@@ -2,7 +2,7 @@
 id: thm-na-musc-minmod-forward-euler-tvd-under-sharp-cfl
 kind: theorem
 title: Direct forward-Euler MUSCL/minmod is TVD under the sharp two-thirds CFL bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

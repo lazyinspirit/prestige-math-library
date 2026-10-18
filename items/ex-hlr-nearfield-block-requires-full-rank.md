@@ -2,7 +2,7 @@
 id: ex-hlr-nearfield-block-requires-full-rank
 kind: example
 title: "A nearfield identity block requires full rank for subunit spectral error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

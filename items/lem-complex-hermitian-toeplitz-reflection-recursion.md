@@ -3,7 +3,7 @@ id: lem-complex-hermitian-toeplitz-reflection-recursion
 kind: lemma
 title: "Complex Hermitian Toeplitz bordering yields reflection coefficients and
   positive pivots"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

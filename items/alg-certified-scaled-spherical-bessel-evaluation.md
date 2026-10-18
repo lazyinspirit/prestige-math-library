@@ -2,7 +2,7 @@
 id: alg-certified-scaled-spherical-bessel-evaluation
 kind: algorithm
 title: Finite exact-interval evaluation of scaled spherical Bessel values
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

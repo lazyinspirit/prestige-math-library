@@ -2,7 +2,7 @@
 id: ex-fmm-two-separated-charge-clusters
 kind: example
 title: Two separated planar charge clusters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

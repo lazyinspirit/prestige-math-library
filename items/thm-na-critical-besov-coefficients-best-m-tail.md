@@ -2,7 +2,7 @@
 id: thm-na-critical-besov-coefficients-best-m-tail
 kind: theorem
 title: Critical Besov coefficient control implies a best m-term squared-error rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

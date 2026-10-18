@@ -1,7 +1,7 @@
 ---
 page: energy-stable-incompressible-navier-stokes-discretization-examples
 title: "Evolutionary incompressible flow discretization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-na-periodic-taylor-green-vortex

@@ -2,7 +2,7 @@
 id: prop-two-species-continuous-and-discrete-turing-criterion
 kind: proposition
 title: Two-species continuous and discrete dispersion criteria
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

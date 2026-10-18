@@ -1,7 +1,7 @@
 ---
 page: yee-fdtd-and-transient-maxwell-discretization-examples
 title: "Yee FDTD and transient Maxwell finite elements — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-maxwell-pec-rectangular-cavity-mode

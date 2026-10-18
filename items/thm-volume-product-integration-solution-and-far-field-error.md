@@ -2,7 +2,7 @@
 id: thm-volume-product-integration-solution-and-far-field-error
 kind: theorem
 title: Fredholm convergence and far-field error for cell-volume product integration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

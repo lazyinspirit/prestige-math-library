@@ -2,7 +2,7 @@
 id: lem-compressible-viscous-flux-entropy-variable-factorization
 kind: lemma
 title: Positive-semidefinite entropy-variable factorization of viscous flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

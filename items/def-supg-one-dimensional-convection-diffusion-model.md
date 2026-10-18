@@ -2,7 +2,7 @@
 id: def-supg-one-dimensional-convection-diffusion-model
 kind: definition
 title: "One-dimensional stationary convection–diffusion model and uniform P1 space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

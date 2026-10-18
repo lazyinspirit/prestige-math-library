@@ -2,7 +2,7 @@
 id: ex-single-new-knot-insertion-preserves-linear-curve
 kind: example
 title: Inserting a knot leaves a linear B-spline curve fixed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

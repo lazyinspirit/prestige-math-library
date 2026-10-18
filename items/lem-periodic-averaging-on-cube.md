@@ -2,7 +2,7 @@
 id: lem-periodic-averaging-on-cube
 kind: lemma
 title: Periodic averaging and rescaling bounds on the unit cube
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

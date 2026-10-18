@@ -2,7 +2,7 @@
 id: thm-leverage-score-row-sampling-subspace-embedding
 kind: theorem
 title: Leverage-score row sampling embeds the column space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings

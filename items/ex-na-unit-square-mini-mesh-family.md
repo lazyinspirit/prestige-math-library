@@ -2,7 +2,7 @@
 id: ex-na-unit-square-mini-mesh-family
 kind: example
 title: A matching shape-regular MINI mesh family on the unit square
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

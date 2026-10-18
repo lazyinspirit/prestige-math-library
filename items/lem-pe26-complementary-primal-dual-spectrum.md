@@ -2,7 +2,7 @@
 id: lem-pe26-complementary-primal-dual-spectrum
 kind: lemma
 title: Complementary primal and dual projections share nonunit spectrum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

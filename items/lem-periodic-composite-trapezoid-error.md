@@ -2,7 +2,7 @@
 id: lem-periodic-composite-trapezoid-error
 kind: lemma
 title: Composite periodic trapezoidal error in a uniform tensor grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

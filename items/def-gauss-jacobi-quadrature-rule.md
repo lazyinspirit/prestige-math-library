@@ -2,7 +2,7 @@
 id: def-gauss-jacobi-quadrature-rule
 kind: definition
 title: The Gauss–Jacobi quadrature rule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

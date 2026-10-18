@@ -3,7 +3,7 @@ id: cex-na-polyhedral-energy-ns-pressure-endpoint
 kind: counterexample
 title: An energy Navier–Stokes velocity on the square without
   endpoint-integrable pressure
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 11

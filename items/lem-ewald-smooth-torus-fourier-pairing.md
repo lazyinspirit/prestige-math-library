@@ -2,7 +2,7 @@
 id: lem-ewald-smooth-torus-fourier-pairing
 kind: lemma
 title: "Smooth torus test functions have rapidly convergent Fourier pairings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

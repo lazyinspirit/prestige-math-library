@@ -2,7 +2,7 @@
 id: thm-na-pressure-schur-spectral-equivalence-from-infsup
 kind: theorem
 title: "Pressure Schur equivalence from inf-sup, continuity, and stiffness scaling"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-ideal-gas-entropy-conservative-flux-properties
 kind: lemma
 title: Properties of the explicit entropy-conservative flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

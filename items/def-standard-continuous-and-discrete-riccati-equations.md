@@ -2,7 +2,7 @@
 id: def-standard-continuous-and-discrete-riccati-equations
 kind: definition
 title: "Standard CARE and DARE data, equations, and conventions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

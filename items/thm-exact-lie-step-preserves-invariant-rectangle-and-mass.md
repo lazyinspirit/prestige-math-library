@@ -2,7 +2,7 @@
 id: thm-exact-lie-step-preserves-invariant-rectangle-and-mass
 kind: theorem
 title: Exact reaction-diffusion Lie steps preserve rectangles and mass balance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

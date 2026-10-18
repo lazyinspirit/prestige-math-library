@@ -2,7 +2,7 @@
 id: ex-fas-linear-cycle-equivalence
 kind: example
 title: "A one-level linear FAS correction is the Galerkin correction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

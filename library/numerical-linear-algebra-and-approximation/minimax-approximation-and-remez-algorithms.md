@@ -1,7 +1,7 @@
 ---
 page: minimax-approximation-and-remez-algorithms
 title: "Minimax approximation and Remez algorithms"
-status: draft
+status: published
 items:
   - def-na-best-polynomial-uniform-error
   - lem-na-extrema-sign-block-polynomial

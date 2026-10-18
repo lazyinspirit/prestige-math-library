@@ -2,7 +2,7 @@
 id: lem-ewald-pme-derivative-window-alias-bound
 kind: lemma
 title: "Derivative-window alias bounds including the P=2 knot branch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

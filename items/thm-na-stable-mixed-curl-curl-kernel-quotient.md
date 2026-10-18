@@ -2,7 +2,7 @@
 id: thm-na-stable-mixed-curl-curl-kernel-quotient
 kind: theorem
 title: Stable mixed curl-curl formulation with kernel gauge
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

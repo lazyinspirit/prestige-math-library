@@ -2,7 +2,7 @@
 id: lem-na-diagonal-diffusion-stencil-is-monotone
 kind: lemma
 title: Nonnegative row weights for the diagonal-diffusion HJB stencil
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [alg-na-explicit-diagonal-diffusion-hjb-grid-step]

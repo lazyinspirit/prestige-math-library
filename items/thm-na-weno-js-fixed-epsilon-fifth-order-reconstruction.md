@@ -2,7 +2,7 @@
 id: thm-na-weno-js-fixed-epsilon-fifth-order-reconstruction
 kind: theorem
 title: Fixed-epsilon WENO-JS and WENO-Z face reconstructions are fifth order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

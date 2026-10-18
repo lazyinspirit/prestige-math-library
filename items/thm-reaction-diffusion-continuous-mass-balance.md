@@ -2,7 +2,7 @@
 id: thm-reaction-diffusion-continuous-mass-balance
 kind: theorem
 title: Continuous reaction-diffusion mass balance on boxes, tori, and piecewise C1 domains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

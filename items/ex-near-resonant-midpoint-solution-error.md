@@ -2,7 +2,7 @@
 id: ex-near-resonant-midpoint-solution-error
 kind: example
 title: A near-resonant Nyström equation amplifies midpoint quadrature error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

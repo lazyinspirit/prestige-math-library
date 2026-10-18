@@ -2,7 +2,7 @@
 id: thm-periodic-pic-charge-conservation-and-neutralized-source
 kind: theorem
 title: Periodic PIC deposition conserves charge and satisfies Poisson compatibility
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

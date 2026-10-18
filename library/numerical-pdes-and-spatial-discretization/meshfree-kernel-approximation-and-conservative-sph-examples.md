@@ -1,7 +1,7 @@
 ---
 page: meshfree-kernel-approximation-and-conservative-sph-examples
 title: "Meshfree kernel approximation and conservative sph — Examples"
-status: draft
+status: published
 requires: [ meshfree-kernel-approximation-and-conservative-sph ]
 items: []
 examples:

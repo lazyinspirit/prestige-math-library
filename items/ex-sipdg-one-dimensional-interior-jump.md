@@ -2,7 +2,7 @@
 id: ex-sipdg-one-dimensional-interior-jump
 kind: example
 title: One-dimensional SIPDG jump and penalty calculation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

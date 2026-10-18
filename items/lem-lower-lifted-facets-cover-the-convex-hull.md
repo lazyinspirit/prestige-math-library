@@ -2,7 +2,7 @@
 id: lem-lower-lifted-facets-cover-the-convex-hull
 kind: lemma
 title: "Generic lower lifted facets project to a triangulation of the convex hull"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

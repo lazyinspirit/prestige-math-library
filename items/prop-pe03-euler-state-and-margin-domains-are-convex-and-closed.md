@@ -2,7 +2,7 @@
 id: prop-pe03-euler-state-and-margin-domains-are-convex-and-closed
 kind: proposition
 title: Euler positive states are convex and positive-margin sets are closed convex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

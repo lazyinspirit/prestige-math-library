@@ -2,7 +2,7 @@
 id: thm-cell-centered-no-flux-reaction-diffusion-lie-error
 kind: theorem
 title: No-flux rectangular TPFA Lie error by even reflection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

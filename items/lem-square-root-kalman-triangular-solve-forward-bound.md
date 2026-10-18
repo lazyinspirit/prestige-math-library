@@ -2,7 +2,7 @@
 id: lem-square-root-kalman-triangular-solve-forward-bound
 kind: lemma
 title: "An innovation solve residual gives a singular-value forward bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

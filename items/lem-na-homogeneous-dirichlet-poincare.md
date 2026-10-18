@@ -2,7 +2,7 @@
 id: lem-na-homogeneous-dirichlet-poincare
 kind: lemma
 title: "A bounded-domain Poincare inequality for H1-zero fields"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

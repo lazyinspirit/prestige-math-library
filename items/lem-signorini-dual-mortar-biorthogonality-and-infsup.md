@@ -2,7 +2,7 @@
 id: lem-signorini-dual-mortar-biorthogonality-and-infsup
 kind: lemma
 title: "The dual mortar basis is biorthogonal and uniformly stable on the trace space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

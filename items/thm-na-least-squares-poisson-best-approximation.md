@@ -3,7 +3,7 @@ id: "thm-na-least-squares-poisson-best-approximation"
 kind: "theorem"
 title: "The conforming RT0/P1 least-squares Poisson minimizer is unique and best
   approximating"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 8

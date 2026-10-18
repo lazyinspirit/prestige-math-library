@@ -2,7 +2,7 @@
 id: lem-crouzeix-raviart-broken-gradient-is-a-norm
 kind: lemma
 title: The broken gradient is a norm on the homogeneous Crouzeix–Raviart space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

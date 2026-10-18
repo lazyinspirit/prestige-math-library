@@ -2,7 +2,7 @@
 id: alg-single-new-b-spline-knot-insertion
 kind: algorithm
 title: Single new-knot insertion for a B-spline curve
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

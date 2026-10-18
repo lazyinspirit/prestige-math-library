@@ -2,7 +2,7 @@
 id: ex-godunov-fv-captures-burgers-shock-speed
 kind: example
 title: Godunov finite volumes preserve the Burgers shock speed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

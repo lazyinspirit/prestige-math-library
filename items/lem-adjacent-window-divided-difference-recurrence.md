@@ -2,7 +2,7 @@
 id: lem-adjacent-window-divided-difference-recurrence
 kind: lemma
 title: Adjacent-window divided-difference recurrence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

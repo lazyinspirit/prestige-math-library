@@ -3,7 +3,7 @@ id: prop-riccati-sensitivity-and-graph-subspace-conditioning
 kind: proposition
 title: "Riccati residual sensitivity and invariant graph conditioning retain
   spectral separation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

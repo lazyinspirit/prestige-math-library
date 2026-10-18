@@ -2,7 +2,7 @@
 id: thm-bem-exterior-helmholtz-dirichlet-uniqueness
 kind: theorem
 title: Outgoing exterior Dirichlet uniqueness for the smooth combined-field geometry
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

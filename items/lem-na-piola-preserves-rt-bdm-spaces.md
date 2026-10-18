@@ -2,7 +2,7 @@
 id: lem-na-piola-preserves-rt-bdm-spaces
 kind: lemma
 title: Piola maps RT and BDM polynomial families onto the physical cell
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

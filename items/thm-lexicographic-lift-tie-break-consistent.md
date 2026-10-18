@@ -2,7 +2,7 @@
 id: thm-lexicographic-lift-tie-break-consistent
 kind: theorem
 title: "The finite lexicographic lift tie-break is coherent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

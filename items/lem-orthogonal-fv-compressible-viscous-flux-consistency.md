@@ -2,7 +2,7 @@
 id: lem-orthogonal-fv-compressible-viscous-flux-consistency
 kind: lemma
 title: Second-order face-flux consistency for the one-dimensional viscous operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

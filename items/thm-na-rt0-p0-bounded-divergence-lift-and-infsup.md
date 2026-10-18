@@ -2,7 +2,7 @@
 id: thm-na-rt0-p0-bounded-divergence-lift-and-infsup
 kind: theorem
 title: Uniform RT0/P0 divergence lift and inf-sup bound
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

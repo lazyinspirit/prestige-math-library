@@ -2,7 +2,7 @@
 id: thm-na-dmrg-sweep-truncation-energy-increase-bound
 kind: theorem
 title: "TT discarded weights bound the post-sweep DMRG energy increase"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: ex-fmm-near-far-potential-and-force-error
 kind: example
 title: Near/far split with exact near evaluation and truncated far error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

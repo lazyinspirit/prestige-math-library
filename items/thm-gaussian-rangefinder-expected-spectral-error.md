@@ -2,7 +2,7 @@
 id: thm-gaussian-rangefinder-expected-spectral-error
 kind: theorem
 title: Expected spectral error for real and normalized complex Gaussian range finders
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

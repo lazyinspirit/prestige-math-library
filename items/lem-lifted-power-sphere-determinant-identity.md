@@ -2,7 +2,7 @@
 id: lem-lifted-power-sphere-determinant-identity
 kind: lemma
 title: "The lifted determinant records a power-sphere side"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

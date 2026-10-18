@@ -2,7 +2,7 @@
 id: lem-compressible-viscous-smooth-entropy-identity
 kind: lemma
 title: Smooth ideal-gas Navier–Stokes–Fourier entropy identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

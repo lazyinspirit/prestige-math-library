@@ -2,7 +2,7 @@
 id: thm-fv-and-periodic-diffusion-flow-preserves-rectangles-and-mass
 kind: theorem
 title: Finite-volume and periodic diffusion preserve intervals and weighted mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

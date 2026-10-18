@@ -2,7 +2,7 @@
 id: ex-interior-constant-and-affine-kernel-reproduction
 kind: example
 title: "Interior constant and affine reproduction by a symmetric kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

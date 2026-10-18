@@ -2,7 +2,7 @@
 id: def-orthogonal-fv-compressible-viscous-scheme
 kind: definition
 title: One-dimensional orthogonal finite-volume viscous scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

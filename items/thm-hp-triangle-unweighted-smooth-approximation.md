@@ -2,7 +2,7 @@
 id: thm-hp-triangle-unweighted-smooth-approximation
 kind: theorem
 title: Constructive ordinary Sobolev polynomial approximation on triangles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

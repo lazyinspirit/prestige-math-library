@@ -2,7 +2,7 @@
 id: thm-galerkin-v-cycle-work-recurrence-master-regimes
 kind: theorem
 title: "Work recurrence for fixed-coarsening multigrid cycles in all three regimes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

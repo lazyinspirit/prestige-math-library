@@ -2,7 +2,7 @@
 id: thm-na-rt0-p0-darcy-error-estimate
 kind: theorem
 title: RT0/P0 Darcy stability and flux/pressure error bound
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 10

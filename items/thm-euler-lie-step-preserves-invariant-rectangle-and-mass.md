@@ -2,7 +2,7 @@
 id: thm-euler-lie-step-preserves-invariant-rectangle-and-mass
 kind: theorem
 title: A bounded Euler-reaction Lie step preserves rectangles and mass balance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: def-tpfa-harmonic-face-scheme
 kind: definition
 title: Orthogonal TPFA diffusion with harmonic face transmissibility
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

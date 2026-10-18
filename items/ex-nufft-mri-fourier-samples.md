@@ -2,7 +2,7 @@
 id: ex-nufft-mri-fourier-samples
 kind: example
 title: Exact MRI Fourier samples from a two-point object
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms-examples

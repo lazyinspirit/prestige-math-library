@@ -1,7 +1,7 @@
 ---
 page: toeplitz-circulant-and-displacement-structured-solvers-examples
 title: Toeplitz circulant and displacement structured solvers — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-circulant-periodic-poisson-zero-mode

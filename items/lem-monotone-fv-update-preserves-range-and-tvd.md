@@ -2,7 +2,7 @@
 id: lem-monotone-fv-update-preserves-range-and-tvd
 kind: lemma
 title: Invariant range, TVD and time increments for a monotone finite-volume update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

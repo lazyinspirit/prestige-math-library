@@ -1,7 +1,7 @@
 ---
 page: tensor-train-compression-and-truncation-error
 title: Tensor train compression and truncation error
-status: draft
+status: published
 items:
   - def-finite-tensor-arrays-and-frobenius-inner-product
   - lem-tensor-unfoldings-are-frobenius-isometries

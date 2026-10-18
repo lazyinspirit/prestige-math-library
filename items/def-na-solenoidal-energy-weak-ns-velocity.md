@@ -2,7 +2,7 @@
 id: def-na-solenoidal-energy-weak-ns-velocity
 kind: definition
 title: "Solenoidal energy weak velocity for incompressible Navier–Stokes"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

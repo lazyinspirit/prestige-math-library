@@ -2,7 +2,7 @@
 id: lem-fehmm-micro-cell-solves-wellposedness
 kind: lemma
 title: Well-posedness of the finite FE-HMM micro solves
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

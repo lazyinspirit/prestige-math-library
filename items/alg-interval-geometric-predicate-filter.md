@@ -2,7 +2,7 @@
 id: alg-interval-geometric-predicate-filter
 kind: algorithm
 title: Certified geometric predicate for interval-valued coordinates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

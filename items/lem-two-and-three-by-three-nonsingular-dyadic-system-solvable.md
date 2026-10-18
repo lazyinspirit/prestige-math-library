@@ -2,7 +2,7 @@
 id: lem-two-and-three-by-three-nonsingular-dyadic-system-solvable
 kind: lemma
 title: A nonzero 2-by-2 or 3-by-3 dyadic determinant gives a unique real solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

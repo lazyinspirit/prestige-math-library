@@ -2,7 +2,7 @@
 id: def-pe18-exact-spherical-dtn-map
 kind: definition
 title: Exact modal Dirichlet-to-Neumann map on a sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

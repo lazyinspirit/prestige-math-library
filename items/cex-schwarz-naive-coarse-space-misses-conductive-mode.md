@@ -2,7 +2,7 @@
 id: cex-schwarz-naive-coarse-space-misses-conductive-mode
 kind: counterexample
 title: "A one-node coarse space misses a high-conductance channel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

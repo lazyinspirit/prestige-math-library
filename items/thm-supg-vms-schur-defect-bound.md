@@ -2,7 +2,7 @@
 id: thm-supg-vms-schur-defect-bound
 kind: theorem
 title: "Finite-dimensional VMS residual closure has an explicit Schur defect bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

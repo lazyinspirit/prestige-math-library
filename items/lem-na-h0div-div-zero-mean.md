@@ -2,7 +2,7 @@
 id: lem-na-h0div-div-zero-mean
 kind: lemma
 title: Zero mean of the divergence under zero normal trace
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: randomized-low-rank-approximation
 title: Randomized low-rank approximation
-status: draft
+status: published
 items:
   - def-standard-real-and-normalized-complex-gaussian-matrix-law
   - lem-orthogonal-projector-power-error-inequality

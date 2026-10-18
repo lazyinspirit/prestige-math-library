@@ -2,7 +2,7 @@
 id: lem-fas-vw-cycle-work-and-status
 kind: lemma
 title: "A finite FAS V/W cycle terminates with bounded stated work"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

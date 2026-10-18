@@ -2,7 +2,7 @@
 id: ex-pe18-insufficient-damping-near-resonant-cavity
 kind: example
 title: A weakly damped truncated layer can produce a resonant cavity response
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: nystrom-product-integration-and-fredholm-error-examples
 title: Nystrom product integration and fredholm error — Examples
-status: draft
+status: published
 requires: [ nystrom-product-integration-and-fredholm-error ]
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: ex-semilagrangian-fixed-grid-time-refinement-keeps-interpolation-error
 kind: example
 title: "Refining time alone leaves interpolation diffusion on a fixed grid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

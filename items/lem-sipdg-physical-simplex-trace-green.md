@@ -2,7 +2,7 @@
 id: lem-sipdg-physical-simplex-trace-green
 kind: lemma
 title: Sobolev traces and Gauss–Green formula on physical simplices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

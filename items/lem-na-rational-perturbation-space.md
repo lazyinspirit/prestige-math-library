@@ -2,7 +2,7 @@
 id: lem-na-rational-perturbation-space
 kind: lemma
 title: "The rational first-variation space has dimension set by defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

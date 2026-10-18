@@ -2,7 +2,7 @@
 id: lem-ewald-pme-spline-alias-and-dft-normalization
 kind: lemma
 title: "Exact three-dimensional spline assignment aliases and FFT normalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

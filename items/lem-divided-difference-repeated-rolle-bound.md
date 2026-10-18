@@ -2,7 +2,7 @@
 id: lem-divided-difference-repeated-rolle-bound
 kind: lemma
 title: Rolle bound for a divided difference
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

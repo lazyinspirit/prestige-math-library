@@ -2,7 +2,7 @@
 id: lem-bem-far-panel-quadrature-residual
 kind: lemma
 title: A positive far-panel quadrature residual and normalized cluster combination
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

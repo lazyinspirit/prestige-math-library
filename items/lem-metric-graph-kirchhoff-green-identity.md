@@ -2,7 +2,7 @@
 id: lem-metric-graph-kirchhoff-green-identity
 kind: lemma
 title: "Green identity and Kirchhoff flux cancellation on a metric graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

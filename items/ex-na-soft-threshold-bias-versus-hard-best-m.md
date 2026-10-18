@@ -2,7 +2,7 @@
 id: ex-na-soft-threshold-bias-versus-hard-best-m
 kind: example
 title: Soft thresholding shrinks a retained coefficient while hard best-m retention does not
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation-examples

@@ -2,7 +2,7 @@
 id: lem-na-elliptic-spacetime-jets-imply-parabolic-hjb-inequalities
 kind: lemma
 title: Closed elliptic space-time jets test the parabolic diagonal HJB inequality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

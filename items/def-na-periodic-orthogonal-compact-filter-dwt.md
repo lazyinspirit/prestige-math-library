@@ -2,7 +2,7 @@
 id: def-na-periodic-orthogonal-compact-filter-dwt
 kind: definition
 title: Periodic finite orthogonal compact-filter wavelet transform
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

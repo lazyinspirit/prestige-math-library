@@ -2,7 +2,7 @@
 id: lem-floater-hormann-gap-partial-sums-positive
 kind: lemma
 title: Floater–Hormann blend partial sums are positive in each node gap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

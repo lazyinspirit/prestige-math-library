@@ -2,7 +2,7 @@
 id: def-coefficientwise-weighted-backward-error-for-matrix-polynomial
 kind: definition
 title: "Coefficientwise weighted Frobenius backward error for a polynomial eigenpair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: finite-volume-diffusion-and-mimetic-fluxes
 title: Finite-volume diffusion on admissible meshes
-status: draft
+status: published
 items:
   - def-fv-admissible-cell-face-mesh
   - def-tpfa-harmonic-face-scheme

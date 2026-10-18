@@ -2,7 +2,7 @@
 id: thm-zero-padded-fft-toeplitz-matvec-is-exact-and-costs-nlogn
 kind: theorem
 title: "A zero-padded circulant embedding computes a Toeplitz product in O(N log N)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

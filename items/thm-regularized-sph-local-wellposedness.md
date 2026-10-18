@@ -2,7 +2,7 @@
 id: thm-regularized-sph-local-wellposedness
 kind: theorem
 title: "Local well-posedness of the regularized finite-particle SPH system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

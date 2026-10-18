@@ -2,7 +2,7 @@
 id: thm-hlr-approximate-factorization-residual-and-inverse-error
 kind: theorem
 title: "Compressed block LU factors have a residual and inverse certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

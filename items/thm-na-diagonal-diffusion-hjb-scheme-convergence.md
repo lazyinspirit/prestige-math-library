@@ -3,7 +3,7 @@ id: thm-na-diagonal-diffusion-hjb-scheme-convergence
 kind: theorem
 title: Unconditional convergence and existence for the periodic
   diagonal-diffusion HJB scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

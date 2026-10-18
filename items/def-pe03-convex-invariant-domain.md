@@ -2,7 +2,7 @@
 id: def-pe03-convex-invariant-domain
 kind: definition
 title: Convex invariant domains for a one-step update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-phase-field-sav-modified-energy-law
 kind: theorem
 title: The SAV step is uniquely solvable and dissipates a modified energy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

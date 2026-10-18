@@ -2,7 +2,7 @@
 id: cex-fas-zero-tau-breaks-fine-root
 kind: counterexample
 title: "Omitting tau can move an exact fine root"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

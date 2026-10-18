@@ -2,7 +2,7 @@
 id: lem-ale-jacobi-geometric-conservation-identity
 kind: lemma
 title: "Jacobi identity for the ALE mesh Jacobian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

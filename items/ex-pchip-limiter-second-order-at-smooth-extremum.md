@@ -2,7 +2,7 @@
 id: ex-pchip-limiter-second-order-at-smooth-extremum
 kind: example
 title: PCHIP loses third-order value accuracy next to a smooth extremum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

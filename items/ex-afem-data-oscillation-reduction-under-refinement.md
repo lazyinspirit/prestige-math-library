@@ -2,7 +2,7 @@
 id: "ex-afem-data-oscillation-reduction-under-refinement"
 kind: "example"
 title: "Projected data oscillation on a reference triangle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 3

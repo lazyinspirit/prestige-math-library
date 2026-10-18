@@ -2,7 +2,7 @@
 id: lem-periodic-flow-departure-cells-have-positive-finite-volume
 kind: lemma
 title: "Characteristic departure cells are measurable and have positive finite volume"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

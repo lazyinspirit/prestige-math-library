@@ -2,7 +2,7 @@
 id: lem-pe11-hcurl-weak-limit
 kind: lemma
 title: Weak graph limits preserve zero tangential H(curl)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

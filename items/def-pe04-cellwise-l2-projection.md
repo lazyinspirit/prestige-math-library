@@ -2,7 +2,7 @@
 id: def-pe04-cellwise-l2-projection
 kind: definition
 title: Cellwise L2 projection relation onto broken polynomials
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

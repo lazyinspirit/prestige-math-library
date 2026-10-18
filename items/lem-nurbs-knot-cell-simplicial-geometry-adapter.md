@@ -2,7 +2,7 @@
 id: lem-nurbs-knot-cell-simplicial-geometry-adapter
 kind: lemma
 title: Matching simplex subdivisions give a NURBS knot-cell geometry interface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

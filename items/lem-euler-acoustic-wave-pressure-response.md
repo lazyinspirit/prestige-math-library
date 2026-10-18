@@ -2,7 +2,7 @@
 id: lem-euler-acoustic-wave-pressure-response
 kind: lemma
 title: "Ideal-gas acoustic wave curves have the stated pressure response"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

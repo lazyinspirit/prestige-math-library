@@ -2,7 +2,7 @@
 id: ex-crouzeix-raviart-one-face-degree-of-freedom
 kind: example
 title: One shared face-average degree of freedom
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

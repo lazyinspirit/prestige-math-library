@@ -2,7 +2,7 @@
 id: lem-fas-inexact-coarse-solve-residual-defect
 kind: lemma
 title: "An inexact FAS coarse solve contributes a bounded correction defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: def-crouzeix-raviart-fractional-sobolev-regularity
 kind: definition
 title: Fractional Sobolev regularity on a simplex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-periodic-pic-smooth-assignment-weights
 kind: lemma
 title: Smooth periodic PIC assignment weights have bounded derivatives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

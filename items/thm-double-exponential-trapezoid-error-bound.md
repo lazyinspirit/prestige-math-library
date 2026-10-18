@@ -2,7 +2,7 @@
 id: thm-double-exponential-trapezoid-error-bound
 kind: theorem
 title: A finite double-exponential trapezoid has separate strip and tail errors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: monotone-hjb-schemes-and-policy-iteration
 title: "Monotone Hamilton–Jacobi–Bellman schemes and policy iteration"
-status: draft
+status: published
 items:
   - def-na-finite-state-discounted-bellman-system
   - def-na-second-order-elliptic-semijets-and-closure

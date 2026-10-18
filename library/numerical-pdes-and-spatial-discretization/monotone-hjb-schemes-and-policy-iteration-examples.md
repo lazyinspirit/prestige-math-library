@@ -1,7 +1,7 @@
 ---
 page: monotone-hjb-schemes-and-policy-iteration-examples
 title: "Monotone Hamilton–Jacobi–Bellman schemes and policy iteration — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-na-centered-hjb-update-is-not-monotone

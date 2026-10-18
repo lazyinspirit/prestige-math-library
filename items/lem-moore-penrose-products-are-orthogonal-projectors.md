@@ -2,7 +2,7 @@
 id: lem-moore-penrose-products-are-orthogonal-projectors
 kind: lemma
 title: "The Moore-Penrose products are orthogonal projectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

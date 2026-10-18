@@ -1,7 +1,7 @@
 ---
 page: nonlinear-full-approximation-multigrid
 title: "Nonlinear full-approximation multigrid"
-status: draft
+status: published
 items:
   - alg-fas-two-grid-cycle
   - lem-fas-second-derivative-of-composed-cycle-map

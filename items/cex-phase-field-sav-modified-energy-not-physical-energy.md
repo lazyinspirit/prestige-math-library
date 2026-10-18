@@ -2,7 +2,7 @@
 id: cex-phase-field-sav-modified-energy-not-physical-energy
 kind: counterexample
 title: Modified-energy decay alone does not imply physical-energy decay
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

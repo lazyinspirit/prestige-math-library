@@ -2,7 +2,7 @@
 id: cex-roe-jump-property-does-not-imply-entropy-admissibility
 kind: counterexample
 title: "A Roe jump property does not imply entropy admissibility"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

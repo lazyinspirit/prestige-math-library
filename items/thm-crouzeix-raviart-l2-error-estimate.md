@@ -2,7 +2,7 @@
 id: thm-crouzeix-raviart-l2-error-estimate
 kind: theorem
 title: L2 error estimate under a Dirichlet Poisson smoothing index
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

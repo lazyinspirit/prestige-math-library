@@ -2,7 +2,7 @@
 id: alg-exact-lie-reaction-diffusion-step
 kind: algorithm
 title: Exact reaction-then-diffusion Lie step on FV or periodic grids
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

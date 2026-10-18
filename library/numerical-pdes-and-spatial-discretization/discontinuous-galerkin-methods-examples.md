@@ -1,7 +1,7 @@
 ---
 page: discontinuous-galerkin-methods-examples
 title: "Symmetric interior-penalty discontinuous Galerkin — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-sipdg-broken-function-is-not-h1

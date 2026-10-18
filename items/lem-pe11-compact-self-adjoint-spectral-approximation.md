@@ -2,7 +2,7 @@
 id: lem-pe11-compact-self-adjoint-spectral-approximation
 kind: lemma
 title: Spectral convergence under collectively compact positive approximations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

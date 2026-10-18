@@ -2,7 +2,7 @@
 id: thm-pe18-rellich-uniqueness-for-a-spherical-obstacle
 kind: theorem
 title: Rellich uniqueness for the sound-soft spherical obstacle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-monotone-finite-volume-entropy-convergence
 kind: theorem
 title: Strong entropy convergence of monotone finite-volume schemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

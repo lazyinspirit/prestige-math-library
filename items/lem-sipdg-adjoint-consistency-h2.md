@@ -2,7 +2,7 @@
 id: lem-sipdg-adjoint-consistency-h2
 kind: lemma
 title: SIPDG adjoint consistency for piecewise H2 dual solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

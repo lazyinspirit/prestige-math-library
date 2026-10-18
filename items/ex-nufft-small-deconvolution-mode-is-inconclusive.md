@@ -2,7 +2,7 @@
 id: ex-nufft-small-deconvolution-mode-is-inconclusive
 kind: example
 title: A positive mode multiplier too small to certify
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms-examples

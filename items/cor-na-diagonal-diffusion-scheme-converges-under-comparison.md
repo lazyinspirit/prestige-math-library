@@ -2,7 +2,7 @@
 id: cor-na-diagonal-diffusion-scheme-converges-under-comparison
 kind: corollary
 title: Conditional convergence of the diagonal-diffusion scheme under comparison
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [thm-na-diagonal-diffusion-scheme-half-relaxed-limits, def-half-relaxed-limits, def-na-periodic-diagonal-controlled-diffusion-hjb-problem, def-na-second-order-parabolic-viscosity-solution, thm-heine-borel-rn]

@@ -2,7 +2,7 @@
 id: alg-na-alternating-tensor-optimization-and-effective-eigenproblems
 kind: algorithm
 title: "Finite alternating tensor optimization with effective eigenproblems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

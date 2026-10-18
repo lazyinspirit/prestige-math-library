@@ -2,7 +2,7 @@
 id: cex-density-continuity-fails-unequal-speed-routing
 kind: counterexample
 title: "Density continuity can violate conservative advection balance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

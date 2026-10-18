@@ -2,7 +2,7 @@
 id: ex-pe18-impedance-normal-and-grazing-incidence
 kind: example
 title: Normal, oblique, and grazing impedance reflection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

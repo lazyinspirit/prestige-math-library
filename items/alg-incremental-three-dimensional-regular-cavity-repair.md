@@ -2,7 +2,7 @@
 id: alg-incremental-three-dimensional-regular-cavity-repair
 kind: algorithm
 title: "Finite exact 3D Delaunay and regular lower-hull cavity repair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

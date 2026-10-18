@@ -2,7 +2,7 @@
 id: "ex-afem-dorfler-marking-three-cells"
 kind: "example"
 title: "A deterministic Dörfler mark on three cells"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 2

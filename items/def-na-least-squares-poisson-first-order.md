@@ -2,7 +2,7 @@
 id: "def-na-least-squares-poisson-first-order"
 kind: "definition"
 title: "First-order least-squares formulation of the Dirichlet Poisson problem"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 4

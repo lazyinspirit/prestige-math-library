@@ -3,7 +3,7 @@ id: lem-na-full-dirichlet-hcurl-regular-decomposition
 kind: lemma
 title: A bounded regular decomposition with both summands satisfying full
   Dirichlet conditions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

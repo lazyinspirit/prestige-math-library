@@ -2,7 +2,7 @@
 id: thm-tensor-train-storage-and-inner-product-cost
 kind: theorem
 title: Tensor-train storage and inner-product costs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

@@ -1,7 +1,7 @@
 ---
 page: isogeometric-galerkin-methods
 title: "Isogeometric Galerkin discretization"
-status: draft
+status: published
 items:
   - def-nurbs-patch-map-and-rational-spline-space
   - lem-compactly-supported-h1-belongs-to-h-zero

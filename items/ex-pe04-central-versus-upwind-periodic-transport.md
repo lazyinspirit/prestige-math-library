@@ -2,7 +2,7 @@
 id: ex-pe04-central-versus-upwind-periodic-transport
 kind: example
 title: Central and upwind fluxes have different periodic dissipation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

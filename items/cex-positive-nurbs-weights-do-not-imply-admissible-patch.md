@@ -2,7 +2,7 @@
 id: cex-positive-nurbs-weights-do-not-imply-admissible-patch
 kind: counterexample
 title: Positive NURBS weights do not imply an admissible patch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

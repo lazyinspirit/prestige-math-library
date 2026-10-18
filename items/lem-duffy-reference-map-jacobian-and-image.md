@@ -2,7 +2,7 @@
 id: lem-duffy-reference-map-jacobian-and-image
 kind: lemma
 title: The reference-triangle Duffy map has the stated image and Jacobian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

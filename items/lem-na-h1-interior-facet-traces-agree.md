@@ -2,7 +2,7 @@
 id: lem-na-h1-interior-facet-traces-agree
 kind: lemma
 title: H1 traces agree across interior mesh facets
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

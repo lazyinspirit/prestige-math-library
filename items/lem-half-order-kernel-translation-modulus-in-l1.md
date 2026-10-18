@@ -2,7 +2,7 @@
 id: lem-half-order-kernel-translation-modulus-in-l1
 kind: lemma
 title: Translations of the half-order kernel are continuous in the improper L1 norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

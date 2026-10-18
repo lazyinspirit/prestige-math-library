@@ -2,7 +2,7 @@
 id: ex-sbp-inviscid-versus-viscous-entropy-budget
 kind: example
 title: An exact three-node inviscid-versus-viscous SBP entropy budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

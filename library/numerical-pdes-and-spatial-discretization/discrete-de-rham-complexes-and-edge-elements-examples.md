@@ -1,7 +1,7 @@
 ---
 page: discrete-de-rham-complexes-and-edge-elements-examples
 title: Discrete de Rham complexes and edge-element foundations — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-na-nedelec-edge-circulation-and-stokes

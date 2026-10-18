@@ -2,7 +2,7 @@
 id: lem-two-scale-gradient-decomposition-for-h01
 kind: lemma
 title: Two-scale structure of bounded H1-zero gradients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

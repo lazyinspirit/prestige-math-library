@@ -2,7 +2,7 @@
 id: thm-na-rademacher-euclidean
 kind: theorem
 title: "Rademacher differentiability in Euclidean space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

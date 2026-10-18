@@ -2,7 +2,7 @@
 id: lem-compact-kernel-derivative-moment-identities
 kind: lemma
 title: "Derivative moments of a compact radial kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-overlap-near-linear-dependence
 kind: example
 title: Nearly duplicate Gaussian primitives produce an ill-conditioned overlap matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

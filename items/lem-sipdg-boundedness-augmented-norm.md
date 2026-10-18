@@ -2,7 +2,7 @@
 id: lem-sipdg-boundedness-augmented-norm
 kind: lemma
 title: Boundedness of the SIPDG form in the augmented norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

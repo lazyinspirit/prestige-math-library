@@ -2,7 +2,7 @@
 id: def-pe05-shallow-water-balance-law
 kind: definition
 title: One-dimensional shallow-water balance law with a dry-state convention
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

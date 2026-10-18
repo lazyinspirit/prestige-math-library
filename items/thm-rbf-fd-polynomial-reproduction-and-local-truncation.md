@@ -2,7 +2,7 @@
 id: thm-rbf-fd-polynomial-reproduction-and-local-truncation
 kind: theorem
 title: "Augmented RBF-FD weights reproduce polynomials and obey a local Taylor bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

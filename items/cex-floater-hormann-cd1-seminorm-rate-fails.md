@@ -2,7 +2,7 @@
 id: cex-floater-hormann-cd1-seminorm-rate-fails
 kind: counterexample
 title: Uniform meshes refute the C^(d+1)-seminorm-only Floater–Hormann rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

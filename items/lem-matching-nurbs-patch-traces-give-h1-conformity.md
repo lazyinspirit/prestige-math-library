@@ -2,7 +2,7 @@
 id: lem-matching-nurbs-patch-traces-give-h1-conformity
 kind: lemma
 title: Matching NURBS patch traces give global H1 conformity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

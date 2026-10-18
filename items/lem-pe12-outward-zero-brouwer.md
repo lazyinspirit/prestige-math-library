@@ -2,7 +2,7 @@
 id: lem-pe12-outward-zero-brouwer
 kind: lemma
 title: An outward-pointing finite-dimensional map has a zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

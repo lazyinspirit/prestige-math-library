@@ -2,7 +2,7 @@
 id: thm-na-weak-stokes-solvability-lipschitz-domain
 kind: theorem
 title: "Weak Stokes solvability on bounded connected Lipschitz domains"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

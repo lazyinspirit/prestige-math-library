@@ -2,7 +2,7 @@
 id: def-crouzeix-raviart-poisson-smoothing-index
 kind: definition
 title: A Dirichlet Poisson smoothing index
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

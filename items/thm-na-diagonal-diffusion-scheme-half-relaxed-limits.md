@@ -2,7 +2,7 @@
 id: thm-na-diagonal-diffusion-scheme-half-relaxed-limits
 kind: theorem
 title: Half-relaxed limits of the monotone diagonal-diffusion HJB scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [alg-na-explicit-diagonal-diffusion-hjb-grid-step, lem-na-diagonal-diffusion-stencil-is-monotone, thm-na-diagonal-diffusion-stencil-consistency, lem-na-diagonal-diffusion-discrete-initial-trace, lem-na-grid-contact-localization-for-half-relaxed-limits, lem-na-smooth-tests-suffice-for-first-and-second-order-hjb-viscosity, def-half-relaxed-limits, def-na-second-order-parabolic-viscosity-solution, def-countable-choice]

@@ -2,7 +2,7 @@
 id: thm-hermite-monotonicity-for-normalized-slopes-in-square
 kind: theorem
 title: A sufficient monotonicity square for cubic Hermite interpolation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

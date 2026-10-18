@@ -2,7 +2,7 @@
 id: thm-euler-star-pressure-root-and-vacuum-criterion
 kind: theorem
 title: "The ideal-gas star-pressure root exists uniquely exactly below vacuum threshold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

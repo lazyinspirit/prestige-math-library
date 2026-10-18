@@ -3,7 +3,7 @@ id: lem-hp-weighted-analytic-corner-pointwise-control
 kind: lemma
 title: Weighted analytic polygon functions have corner decay and scaled analytic
   bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-volume-integral-scattering-born-neumann-error
 kind: theorem
 title: Born truncation error for a small-norm volume integral operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

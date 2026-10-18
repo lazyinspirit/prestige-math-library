@@ -2,7 +2,7 @@
 id: lem-nufft-gaussian-periodization-converges
 kind: lemma
 title: Local uniform convergence of the periodized Gaussian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

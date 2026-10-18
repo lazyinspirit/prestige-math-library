@@ -2,7 +2,7 @@
 id: thm-na-symmetrically-preconditioned-saddle-point-spectrum
 kind: theorem
 title: "Spectrum of a symmetrically pressure-mass-preconditioned saddle system"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

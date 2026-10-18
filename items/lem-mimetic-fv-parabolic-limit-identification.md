@@ -2,7 +2,7 @@
 id: lem-mimetic-fv-parabolic-limit-identification
 kind: lemma
 title: Conditional monotone finite-volume parabolic limit identification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

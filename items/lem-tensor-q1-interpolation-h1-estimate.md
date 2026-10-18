@@ -2,7 +2,7 @@
 id: lem-tensor-q1-interpolation-h1-estimate
 kind: lemma
 title: Tensor Q1 nodal interpolation has a first-order H1 error bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

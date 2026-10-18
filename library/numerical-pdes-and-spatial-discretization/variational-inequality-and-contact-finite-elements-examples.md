@@ -1,7 +1,7 @@
 ---
 page: variational-inequality-and-contact-finite-elements-examples
 title: "Variational inequalities and spatial contact discretization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-signorini-one-dimensional-obstacle-free-boundary

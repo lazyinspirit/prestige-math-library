@@ -2,7 +2,7 @@
 id: ex-pe05-lake-at-rest-over-a-dry-crest
 kind: example
 title: A lake at rest over a bump with a dry crest
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

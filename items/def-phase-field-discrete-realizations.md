@@ -2,7 +2,7 @@
 id: def-phase-field-discrete-realizations
 kind: definition
 title: No-flux finite-volume and conforming realizations for phase fields
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

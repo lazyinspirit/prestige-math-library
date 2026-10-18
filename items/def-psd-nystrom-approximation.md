@@ -2,7 +2,7 @@
 id: def-psd-nystrom-approximation
 kind: definition
 title: "The positive-semidefinite Nyström approximation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

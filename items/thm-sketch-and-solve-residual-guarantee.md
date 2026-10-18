@@ -2,7 +2,7 @@
 id: thm-sketch-and-solve-residual-guarantee
 kind: theorem
 title: Embedding span(A,b) gives the sketch-and-solve residual factor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings

@@ -2,7 +2,7 @@
 id: thm-finite-gaussian-integral-evaluator-soundness-and-screening-error
 kind: theorem
 title: Soundness and accumulated error bounds for the finite Gaussian integral evaluator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

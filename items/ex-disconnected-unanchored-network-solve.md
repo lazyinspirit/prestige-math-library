@@ -2,7 +2,7 @@
 id: ex-disconnected-unanchored-network-solve
 kind: example
 title: "A disconnected unanchored network gives a singular steady solve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-fv-conforming-companion-and-test-recovery
 kind: lemma
 title: "Finite-volume companions, mean tests and weak-gradient closure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-crouzeix-raviart-simplex-traces-and-green-identity
 kind: lemma
 title: Fractional face traces and cellwise Green identity on a simplex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

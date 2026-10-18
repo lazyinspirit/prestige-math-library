@@ -2,7 +2,7 @@
 id: lem-ale-schur-complement-positive-and-minimizes-energy
 kind: lemma
 title: "The diffusion Schur complement is positive and minimizes energy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

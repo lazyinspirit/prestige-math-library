@@ -2,7 +2,7 @@
 id: def-mixed-characteristic-wave-curve
 kind: definition
 title: "Mixed local wave curve for a genuinely nonlinear or linearly degenerate family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

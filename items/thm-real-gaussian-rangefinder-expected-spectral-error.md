@@ -2,7 +2,7 @@
 id: thm-real-gaussian-rangefinder-expected-spectral-error
 kind: theorem
 title: Expected spectral error of the real Gaussian range finder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

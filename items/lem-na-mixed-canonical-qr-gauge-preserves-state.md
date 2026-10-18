@@ -2,7 +2,7 @@
 id: lem-na-mixed-canonical-qr-gauge-preserves-state
 kind: lemma
 title: "Rank-revealing QR sweeps give exact mixed canonical gauge"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

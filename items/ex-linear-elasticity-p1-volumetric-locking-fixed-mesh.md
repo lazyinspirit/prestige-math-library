@@ -2,7 +2,7 @@
 id: ex-linear-elasticity-p1-volumetric-locking-fixed-mesh
 kind: example
 title: "A fixed-mesh P1 volumetric-locking obstruction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

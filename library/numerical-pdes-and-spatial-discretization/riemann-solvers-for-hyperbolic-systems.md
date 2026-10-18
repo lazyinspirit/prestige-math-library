@@ -1,7 +1,7 @@
 ---
 page: riemann-solvers-for-hyperbolic-systems
 title: "Riemann solvers for hyperbolic systems"
-status: draft
+status: published
 items:
   - def-hyperbolic-system-and-characteristic-families
   - def-rankine-hugoniot-and-lax-shocks

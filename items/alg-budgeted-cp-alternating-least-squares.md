@@ -2,7 +2,7 @@
 id: alg-budgeted-cp-alternating-least-squares
 kind: algorithm
 title: Budgeted CP alternating least squares
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

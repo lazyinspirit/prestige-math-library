@@ -1,7 +1,7 @@
 ---
 page: monotone-finite-volume-entropy-convergence
 title: Monotone finite-volume entropy convergence
-status: draft
+status: published
 items:
   - def-bounded-bv-data-on-line
   - def-monotone-finite-volume-entropy-scheme

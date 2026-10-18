@@ -2,7 +2,7 @@
 id: def-na-hcurl-space
 kind: definition
 title: The real H(curl) graph space on a polyhedron
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

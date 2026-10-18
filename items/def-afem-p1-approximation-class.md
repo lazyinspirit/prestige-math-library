@@ -2,7 +2,7 @@
 id: "def-afem-p1-approximation-class"
 kind: "definition"
 title: "The P1 AFEM approximation class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 1

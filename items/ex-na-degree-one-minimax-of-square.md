@@ -2,7 +2,7 @@
 id: ex-na-degree-one-minimax-of-square
 kind: example
 title: "The degree-one minimax approximation to x squared"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

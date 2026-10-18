@@ -2,7 +2,7 @@
 id: lem-na-sampled-smooth-d4-coefficient-decay
 kind: lemma
 title: Two D4 vanishing moments give a local coefficient bound for smooth periodic samples
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

@@ -2,7 +2,7 @@
 id: alg-incremental-planar-delaunay-edge-flips
 kind: algorithm
 title: "Incremental planar Delaunay insertion with exact edge flips"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

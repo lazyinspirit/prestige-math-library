@@ -2,7 +2,7 @@
 id: ex-gaussian-integral-on-infinite-line-by-tanh-sinh
 kind: example
 title: The Gaussian integral on the line with a certified sinh-sinh truncation tail
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

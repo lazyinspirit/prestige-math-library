@@ -2,7 +2,7 @@
 id: lem-na-multilinear-interpolation-positive-and-second-order-accurate
 kind: lemma
 title: Positive partition of unity and interpolation error for periodic multilinear interpolation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-periodic-grid-and-tensor-multilinear-interpolation, lem-periodic-tensor-interpolant-is-convex-and-linf-contracting, cor-taylor-remainder-bound]

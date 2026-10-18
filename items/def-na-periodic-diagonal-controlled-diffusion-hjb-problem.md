@@ -2,7 +2,7 @@
 id: def-na-periodic-diagonal-controlled-diffusion-hjb-problem
 kind: definition
 title: Periodic diagonal controlled-diffusion HJB Cauchy problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-viscosity-subsolution-and-supersolution, def-na-periodic-grid-and-tensor-multilinear-interpolation, lem-finite-set-has-max]

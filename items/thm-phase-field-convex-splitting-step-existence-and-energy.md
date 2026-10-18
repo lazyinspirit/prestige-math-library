@@ -2,7 +2,7 @@
 id: thm-phase-field-convex-splitting-step-existence-and-energy
 kind: theorem
 title: Existence, uniqueness, mass conservation, and energy decay of a convex-splitting step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-periodic-sbp-compressible-viscous-conservation-and-entropy
 kind: theorem
 title: Conservation and entropy dissipation of the periodic SBP scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: def-na-finite-state-discounted-bellman-system
 kind: definition
 title: Finite-state discounted generator Bellman system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-natural-numbers, def-real-numbers, lem-finite-set-has-max]

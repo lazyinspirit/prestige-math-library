@@ -2,7 +2,7 @@
 id: ex-diagonal-tensor-has-large-minimal-tt-ranks
 kind: example
 title: A diagonal tensor has large minimal TT ranks
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 generation:

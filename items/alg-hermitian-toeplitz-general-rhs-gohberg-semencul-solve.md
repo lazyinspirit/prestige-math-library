@@ -2,7 +2,7 @@
 id: alg-hermitian-toeplitz-general-rhs-gohberg-semencul-solve
 kind: algorithm
 title: "General-RHS Hermitian Toeplitz solve by reflection recursion and Gohberg–Semencul"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

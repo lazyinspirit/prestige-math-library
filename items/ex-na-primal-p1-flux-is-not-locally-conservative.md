@@ -2,7 +2,7 @@
 id: ex-na-primal-p1-flux-is-not-locally-conservative
 kind: example
 title: A continuous P1 pressure gives a nonconservative primal flux
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

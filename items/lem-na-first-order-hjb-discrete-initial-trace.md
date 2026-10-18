@@ -2,7 +2,7 @@
 id: lem-na-first-order-hjb-discrete-initial-trace
 kind: lemma
 title: Initial trace for the positive-interpolation and upwind HJB schemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [alg-na-positive-interpolation-semilagrangian-hjb-step, alg-na-upwind-hjb-grid-step, lem-na-multilinear-interpolation-positive-and-second-order-accurate, def-na-first-order-hjb-cauchy-problem, def-na-periodic-grid-and-tensor-multilinear-interpolation, thm-heine-cantor-metric, thm-heine-borel-rn]

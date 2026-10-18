@@ -1,7 +1,7 @@
 ---
 page: radial-basis-and-kernel-interpolation-examples
 title: "Radial basis and kernel interpolation — Examples"
-status: draft
+status: published
 requires:
   - radial-basis-and-kernel-interpolation
 items: []

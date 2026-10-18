@@ -2,7 +2,7 @@
 id: ex-isogeometric-quarter-annulus-nurbs-patch
 kind: example
 title: A tensor NURBS patch exactly covers a quarter annulus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

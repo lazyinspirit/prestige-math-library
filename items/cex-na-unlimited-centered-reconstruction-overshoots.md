@@ -2,7 +2,7 @@
 id: cex-na-unlimited-centered-reconstruction-overshoots
 kind: counterexample
 title: Unlimited centered reconstruction creates new extrema on a step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

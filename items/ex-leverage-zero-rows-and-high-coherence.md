@@ -2,7 +2,7 @@
 id: ex-leverage-zero-rows-and-high-coherence
 kind: example
 title: Zero leverage rows and a maximally coherent one-dimensional design
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings-examples

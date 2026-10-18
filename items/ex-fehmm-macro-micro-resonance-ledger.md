@@ -2,7 +2,7 @@
 id: ex-fehmm-macro-micro-resonance-ledger
 kind: example
 title: "FE-HMM energy error ledger with distinct components"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-mixed-wave-curves-are-c1
 kind: lemma
 title: "Mixed shock–rarefaction wave curves are continuously differentiable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

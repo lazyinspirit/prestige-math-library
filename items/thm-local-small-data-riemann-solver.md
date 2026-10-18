@@ -2,7 +2,7 @@
 id: thm-local-small-data-riemann-solver
 kind: theorem
 title: "Local small-data Riemann solver near a strictly hyperbolic state"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

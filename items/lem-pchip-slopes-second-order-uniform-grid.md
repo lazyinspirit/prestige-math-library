@@ -2,7 +2,7 @@
 id: lem-pchip-slopes-second-order-uniform-grid
 kind: lemma
 title: PCHIP slopes are second-order accurate on uniform nonstationary grids
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

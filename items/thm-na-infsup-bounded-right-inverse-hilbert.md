@@ -2,7 +2,7 @@
 id: thm-na-infsup-bounded-right-inverse-hilbert
 kind: theorem
 title: "Hilbert inf-sup gives a bounded constraint right inverse"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

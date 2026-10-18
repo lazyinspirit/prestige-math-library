@@ -2,7 +2,7 @@
 id: thm-nurbs-tensor-product-l2-approximation
 kind: theorem
 title: Tensorized spline quasi-interpolation gives a NURBS L2 rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

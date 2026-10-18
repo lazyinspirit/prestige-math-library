@@ -2,7 +2,7 @@
 id: thm-na-mini-element-h1-pressure-error
 kind: theorem
 title: "Mini-element H1 velocity and L2 pressure error estimate"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

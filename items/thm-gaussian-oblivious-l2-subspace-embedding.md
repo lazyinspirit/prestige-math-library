@@ -2,7 +2,7 @@
 id: thm-gaussian-oblivious-l2-subspace-embedding
 kind: theorem
 title: Gaussian sketches embed a fixed subspace at the additive dimension rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings

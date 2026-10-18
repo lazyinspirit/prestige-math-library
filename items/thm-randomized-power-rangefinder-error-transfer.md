@@ -2,7 +2,7 @@
 id: thm-randomized-power-rangefinder-error-transfer
 kind: theorem
 title: Power-rangefinder error transfer under finite expected powered error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

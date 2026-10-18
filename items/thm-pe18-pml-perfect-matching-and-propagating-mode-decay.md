@@ -2,7 +2,7 @@
 id: thm-pe18-pml-perfect-matching-and-propagating-mode-decay
 kind: theorem
 title: Perfect matching and attenuation for non-grazing propagating modes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

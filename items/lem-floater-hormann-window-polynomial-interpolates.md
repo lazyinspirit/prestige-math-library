@@ -2,7 +2,7 @@
 id: lem-floater-hormann-window-polynomial-interpolates
 kind: lemma
 title: Floater–Hormann window polynomials interpolate their local data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

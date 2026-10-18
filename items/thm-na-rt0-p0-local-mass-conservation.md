@@ -2,7 +2,7 @@
 id: thm-na-rt0-p0-local-mass-conservation
 kind: theorem
 title: Exact RT0/P0 element mass balance and normal continuity
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

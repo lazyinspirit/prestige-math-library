@@ -3,7 +3,7 @@ id: thm-pbh-stabilizability-and-detectability-equivalence
 kind: theorem
 title: "Closed-region PBH rank tests characterize continuous and discrete
   stabilizability and detectability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

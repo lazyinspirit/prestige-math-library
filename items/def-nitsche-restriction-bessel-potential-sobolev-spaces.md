@@ -2,7 +2,7 @@
 id: def-nitsche-restriction-bessel-potential-sobolev-spaces
 kind: definition
 title: Restriction Bessel-potential spaces on polyhedral domains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

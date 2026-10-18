@@ -2,7 +2,7 @@
 id: thm-periodic-pic-rk4-finite-time-error-on-a-controlled-tube
 kind: theorem
 title: Fourth-order RK4 trajectory error for the fixed-grid periodic PIC ODE
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

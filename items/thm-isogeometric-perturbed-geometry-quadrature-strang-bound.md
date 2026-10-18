@@ -2,7 +2,7 @@
 id: thm-isogeometric-perturbed-geometry-quadrature-strang-bound
 kind: theorem
 title: Isogeometric geometry and quadrature defects enter through Strang's bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

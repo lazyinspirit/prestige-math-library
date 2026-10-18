@@ -2,7 +2,7 @@
 id: def-conservative-finite-volume-scheme
 kind: definition
 title: Conservative two-point finite-volume schemes for scalar laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

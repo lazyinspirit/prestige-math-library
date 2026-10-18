@@ -2,7 +2,7 @@
 id: lem-spherical-harmonics-form-complete-basis-and-addition-formula
 kind: lemma
 title: Spherical harmonics form a complete basis with the addition formula
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

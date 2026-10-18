@@ -2,7 +2,7 @@
 id: alg-augmented-rbf-finite-difference-weights
 kind: algorithm
 title: "Exact augmented RBF-FD weights for a local differential functional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

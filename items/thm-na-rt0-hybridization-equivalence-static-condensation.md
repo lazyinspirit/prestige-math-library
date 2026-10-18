@@ -2,7 +2,7 @@
 id: thm-na-rt0-hybridization-equivalence-static-condensation
 kind: theorem
 title: Hybridization, static condensation, and pressure gauge
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 11

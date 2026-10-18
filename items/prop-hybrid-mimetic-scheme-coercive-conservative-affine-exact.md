@@ -3,7 +3,7 @@ id: prop-hybrid-mimetic-scheme-coercive-conservative-affine-exact
 kind: proposition
 title: Coercivity, monotonicity, conservation, and affine exactness of the
   mimetic schemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

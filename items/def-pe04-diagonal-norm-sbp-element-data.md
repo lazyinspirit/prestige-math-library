@@ -2,7 +2,7 @@
 id: def-pe04-diagonal-norm-sbp-element-data
 kind: definition
 title: Diagonal-norm summation-by-parts element data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

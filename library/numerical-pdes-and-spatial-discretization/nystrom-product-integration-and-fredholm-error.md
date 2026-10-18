@@ -1,7 +1,7 @@
 ---
 page: nystrom-product-integration-and-fredholm-error
 title: Nystrom product integration and fredholm error
-status: draft
+status: published
 requires:
   [
     composite-quadrature-rules,

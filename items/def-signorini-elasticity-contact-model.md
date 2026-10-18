@@ -2,7 +2,7 @@
 id: def-signorini-elasticity-contact-model
 kind: definition
 title: "Small-strain elasticity with a frictionless contact gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

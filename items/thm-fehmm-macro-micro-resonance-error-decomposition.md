@@ -2,7 +2,7 @@
 id: thm-fehmm-macro-micro-resonance-error-decomposition
 kind: theorem
 title: FE-HMM macro, micro, and sampling error separation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

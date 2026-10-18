@@ -2,7 +2,7 @@
 id: thm-two-scale-compactness-for-l2-bounded-sequences
 kind: theorem
 title: Two-scale compactness for bounded L2 sequences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

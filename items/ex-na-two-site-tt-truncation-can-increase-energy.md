@@ -2,7 +2,7 @@
 id: ex-na-two-site-tt-truncation-can-increase-energy
 kind: example
 title: "A two-site TT truncation can increase energy after an exact solve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

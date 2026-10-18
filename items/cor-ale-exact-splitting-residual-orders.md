@@ -2,7 +2,7 @@
 id: cor-ale-exact-splitting-residual-orders
 kind: corollary
 title: "Conditional finite-dimensional Lie and Strang splitting residual orders"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

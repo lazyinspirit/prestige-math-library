@@ -2,7 +2,7 @@
 id: lem-semilagrangian-transverse-first-hit-error
 kind: lemma
 title: "A transverse backward boundary hit has a certified time and trace error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

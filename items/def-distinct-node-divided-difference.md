@@ -2,7 +2,7 @@
 id: def-distinct-node-divided-difference
 kind: definition
 title: Divided differences on distinct nodes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: []

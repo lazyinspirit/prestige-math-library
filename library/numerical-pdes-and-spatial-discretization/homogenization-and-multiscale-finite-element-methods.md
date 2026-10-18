@@ -1,7 +1,7 @@
 ---
 page: homogenization-and-multiscale-finite-element-methods
 title: "Homogenization, multiscale FEM and heterogeneous media"
-status: draft
+status: published
 items:
   - def-periodic-scalar-diffusion-data
   - def-periodic-zero-mean-cell-space

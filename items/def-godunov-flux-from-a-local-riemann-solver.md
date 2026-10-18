@@ -2,7 +2,7 @@
 id: def-godunov-flux-from-a-local-riemann-solver
 kind: definition
 title: "Godunov flux from the local Riemann solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

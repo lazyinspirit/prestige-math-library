@@ -3,7 +3,7 @@ id: ex-hlr-accumulated-truncation-can-destroy-positive-definiteness
 kind: example
 title: "Two accepted local truncations can destroy positive definiteness after
   accumulation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

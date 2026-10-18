@@ -2,7 +2,7 @@
 id: ex-na-weno-js-critical-point-epsilon-scaling
 kind: example
 title: A first-order critical point exposes WENO-JS epsilon scaling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: yee-fdtd-and-transient-maxwell-discretization
 title: "Yee FDTD and transient Maxwell finite elements"
-status: draft
+status: published
 items:
   - lem-maxwell-rectangular-stokes-identity
   - def-transient-maxwell-system-with-material-interfaces

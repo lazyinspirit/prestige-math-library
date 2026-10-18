@@ -2,7 +2,7 @@
 id: ex-na-large-frequency-fourier-filon-versus-midpoint-sample
 kind: example
 title: A Fourier integral missed by one sample but captured by Filon moments
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps:

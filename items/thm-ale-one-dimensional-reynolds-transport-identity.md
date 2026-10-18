@@ -2,7 +2,7 @@
 id: thm-ale-one-dimensional-reynolds-transport-identity
 kind: theorem
 title: "Choice-free one-dimensional ALE Reynolds transport identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

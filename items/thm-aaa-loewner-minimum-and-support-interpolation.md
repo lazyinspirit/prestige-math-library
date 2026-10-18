@@ -2,7 +2,7 @@
 id: thm-aaa-loewner-minimum-and-support-interpolation
 kind: theorem
 title: AAA weights minimize the Loewner residual and interpolate support data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

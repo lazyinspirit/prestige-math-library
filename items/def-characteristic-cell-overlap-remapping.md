@@ -2,7 +2,7 @@
 id: def-characteristic-cell-overlap-remapping
 kind: definition
 title: "Characteristic-cell overlap remapping for a conservative density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

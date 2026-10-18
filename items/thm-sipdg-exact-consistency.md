@@ -2,7 +2,7 @@
 id: thm-sipdg-exact-consistency
 kind: theorem
 title: Exact consistency of the symmetric interior-penalty DG form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

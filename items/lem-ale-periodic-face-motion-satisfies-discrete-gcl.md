@@ -2,7 +2,7 @@
 id: lem-ale-periodic-face-motion-satisfies-discrete-gcl
 kind: lemma
 title: "Moving faces satisfy the one-dimensional discrete GCL"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

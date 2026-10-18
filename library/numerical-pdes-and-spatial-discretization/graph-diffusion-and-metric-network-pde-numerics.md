@@ -1,7 +1,7 @@
 ---
 page: graph-diffusion-and-metric-network-pde-numerics
 title: "Graph diffusion and metric network pde numerics"
-status: draft
+status: published
 items:
   - def-anchored-finite-metric-graph-h1-space
   - def-conservative-network-advection-routing

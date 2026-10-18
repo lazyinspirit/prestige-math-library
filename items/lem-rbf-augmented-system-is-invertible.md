@@ -3,7 +3,7 @@ id: lem-rbf-augmented-system-is-invertible
 kind: lemma
 title: "Strict positive and conditionally positive augmented interpolation
   systems are invertible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

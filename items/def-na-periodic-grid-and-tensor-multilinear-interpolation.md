@@ -2,7 +2,7 @@
 id: def-na-periodic-grid-and-tensor-multilinear-interpolation
 kind: definition
 title: Periodic Cartesian grids and tensor-product multilinear interpolation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-natural-numbers, def-real-numbers, def-semilagrangian-periodic-grid-and-interpolant]

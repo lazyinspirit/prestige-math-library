@@ -2,7 +2,7 @@
 id: thm-certified-polygon-overlap-correctness
 kind: theorem
 title: "Certified clipping returns the exact convex polygon overlap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

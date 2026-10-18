@@ -2,7 +2,7 @@
 id: thm-linear-elasticity-displacement-wellposedness-and-galerkin-bound
 kind: theorem
 title: "Dirichlet elasticity energy bound and Galerkin estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

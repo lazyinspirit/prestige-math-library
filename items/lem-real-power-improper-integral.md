@@ -2,7 +2,7 @@
 id: lem-real-power-improper-integral
 kind: lemma
 title: The improper integral of a power at zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

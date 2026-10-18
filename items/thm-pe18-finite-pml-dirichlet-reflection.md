@@ -2,7 +2,7 @@
 id: thm-pe18-finite-pml-dirichlet-reflection
 kind: theorem
 title: Exact reflected-mode error from a finite Dirichlet-terminated PML
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

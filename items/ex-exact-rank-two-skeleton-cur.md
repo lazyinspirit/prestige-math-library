@@ -2,7 +2,7 @@
 id: ex-exact-rank-two-skeleton-cur
 kind: example
 title: "An exact rank-two CUR reconstruction from a nonsingular cross"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

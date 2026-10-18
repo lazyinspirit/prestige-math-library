@@ -2,7 +2,7 @@
 id: cex-multipatch-trace-mismatch-not-h1
 kind: counterexample
 title: Matching patch geometry does not repair a field trace jump
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

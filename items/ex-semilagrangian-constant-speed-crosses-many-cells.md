@@ -2,7 +2,7 @@
 id: ex-semilagrangian-constant-speed-crosses-many-cells
 kind: example
 title: "A constant-speed foot can cross many cells in one stable update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

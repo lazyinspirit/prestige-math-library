@@ -2,7 +2,7 @@
 id: lem-lifted-determinant-sign-matches-sphere-side
 kind: lemma
 title: The orientation-normalized lifted determinant records the side of a sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

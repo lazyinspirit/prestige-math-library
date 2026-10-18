@@ -3,7 +3,7 @@ id: lem-sda-doubling-composition-and-psd-invariants
 kind: lemma
 title: "The DARE doubling recurrence composes two Riccati steps and preserves
   positive semidefiniteness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

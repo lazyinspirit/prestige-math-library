@@ -1,7 +1,7 @@
 ---
 page: gaussian-basis-integral-recurrences-and-boys-error
 title: Gaussian basis integral recurrences and boys error
-status: draft
+status: published
 requires:
   - stable-special-function-recurrences-and-certified-evaluation
 items:

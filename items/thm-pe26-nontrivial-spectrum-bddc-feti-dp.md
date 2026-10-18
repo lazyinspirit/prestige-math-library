@@ -2,7 +2,7 @@
 id: thm-pe26-nontrivial-spectrum-bddc-feti-dp
 kind: theorem
 title: BDDC and FETI-DP have matching nontrivial spectra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

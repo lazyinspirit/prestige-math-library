@@ -2,7 +2,7 @@
 id: cor-matern-mesh-ratio-conditioning-bound
 kind: corollary
 title: "Bounded mesh ratio gives an h^{-2s} exact condition-number bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

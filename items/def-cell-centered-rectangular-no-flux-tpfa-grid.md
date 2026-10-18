@@ -2,7 +2,7 @@
 id: def-cell-centered-rectangular-no-flux-tpfa-grid
 kind: definition
 title: Cell-centered rectangular TPFA grid with homogeneous no-flux boundaries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

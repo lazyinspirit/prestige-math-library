@@ -2,7 +2,7 @@
 id: ex-duffy-weak-singularity-on-reference-triangle
 kind: example
 title: A 1 over r singularity on the reference triangle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

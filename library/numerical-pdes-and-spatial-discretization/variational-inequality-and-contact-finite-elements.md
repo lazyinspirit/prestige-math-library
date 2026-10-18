@@ -1,7 +1,7 @@
 ---
 page: variational-inequality-and-contact-finite-elements
 title: "Variational inequalities and spatial contact discretization"
-status: draft
+status: published
 items:
   - def-signorini-partial-trace-space
   - lem-signorini-partial-trace-space-bounded

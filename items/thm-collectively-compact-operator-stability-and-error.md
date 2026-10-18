@@ -3,7 +3,7 @@ id: thm-collectively-compact-operator-stability-and-error
 kind: theorem
 title: Collective compactness gives eventual Fredholm invertibility and solution
   error bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

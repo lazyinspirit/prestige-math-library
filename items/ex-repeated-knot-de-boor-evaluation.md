@@ -2,7 +2,7 @@
 id: ex-repeated-knot-de-boor-evaluation
 kind: example
 title: de Boor evaluation with a double knot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

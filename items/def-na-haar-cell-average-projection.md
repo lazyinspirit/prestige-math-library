@@ -2,7 +2,7 @@
 id: def-na-haar-cell-average-projection
 kind: definition
 title: Haar cell-average projection on the unit interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

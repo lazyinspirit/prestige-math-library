@@ -2,7 +2,7 @@
 id: ex-na-constant-flux-reference-triangle
 kind: example
 title: A constant Darcy flux on the reference triangle
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

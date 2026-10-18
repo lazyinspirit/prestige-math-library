@@ -2,7 +2,7 @@
 id: ex-rational-transfer-function-pole-is-a-spurious-cleared-root
 kind: example
 title: "A transfer-function pole becomes a spurious root after denominator clearing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

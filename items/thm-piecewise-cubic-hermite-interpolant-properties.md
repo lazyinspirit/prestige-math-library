@@ -2,7 +2,7 @@
 id: thm-piecewise-cubic-hermite-interpolant-properties
 kind: theorem
 title: Interpolation, C1 matching, and cubic reproduction for Hermite pieces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

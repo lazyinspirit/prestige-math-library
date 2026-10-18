@@ -2,7 +2,7 @@
 id: ex-fas-reaction-poisson-tau-cancellation
 kind: example
 title: "The tau term recovers the restricted root in reaction Poisson"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

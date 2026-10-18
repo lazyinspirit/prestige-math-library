@@ -2,7 +2,7 @@
 id: def-na-daubechies-d4-filter
 kind: definition
 title: Explicit four-tap Daubechies filter and its high-pass partner
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

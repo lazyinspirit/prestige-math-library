@@ -2,7 +2,7 @@
 id: alg-ale-upwind-finite-volume-step
 kind: algorithm
 title: "Conservative upwind ALE finite-volume step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

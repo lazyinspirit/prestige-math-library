@@ -2,7 +2,7 @@
 id: ex-positive-endpoint-samples-negative-between
 kind: example
 title: Positive endpoint samples do not ensure a positive interpolant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

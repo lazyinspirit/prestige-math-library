@@ -2,7 +2,7 @@
 id: ex-na-compact-control-quantization-hamiltonian-error
 kind: example
 title: Uniform Hamiltonian error for an evenly spaced compact-control grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-first-order-hjb-cauchy-problem, alg-na-positive-interpolation-semilagrangian-hjb-step, thm-na-first-order-hjb-scheme-convergence]

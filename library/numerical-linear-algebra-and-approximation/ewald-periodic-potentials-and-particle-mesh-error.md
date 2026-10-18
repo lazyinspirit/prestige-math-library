@@ -1,7 +1,7 @@
 ---
 page: ewald-periodic-potentials-and-particle-mesh-error
 title: "Ewald periodic potentials and particle mesh error"
-status: draft
+status: published
 items:
   - def-ewald-causal-cardinal-spline-window
   - def-ewald-three-dimensional-periodic-source-data

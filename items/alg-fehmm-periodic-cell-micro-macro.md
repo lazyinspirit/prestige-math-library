@@ -2,7 +2,7 @@
 id: alg-fehmm-periodic-cell-micro-macro
 kind: algorithm
 title: Periodic FE-HMM with simplicial macro and periodic P1 micro meshes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

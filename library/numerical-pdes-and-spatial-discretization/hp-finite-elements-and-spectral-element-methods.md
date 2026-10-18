@@ -1,7 +1,7 @@
 ---
 page: hp-finite-elements-and-spectral-element-methods
 title: hp finite elements and spectral elements
-status: draft
+status: published
 items:
   - def-hp-integrated-legendre-projector
   - def-hp-variable-degree-spaces-on-matching-meshes

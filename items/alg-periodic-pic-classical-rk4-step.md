@@ -2,7 +2,7 @@
 id: alg-periodic-pic-classical-rk4-step
 kind: algorithm
 title: Classical RK4 step for the fixed-grid regularized PIC particle ODE
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

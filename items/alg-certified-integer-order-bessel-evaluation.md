@@ -2,7 +2,7 @@
 id: alg-certified-integer-order-bessel-evaluation
 kind: algorithm
 title: Finite certified evaluation of integer-order Bessel functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

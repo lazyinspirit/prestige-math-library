@@ -2,7 +2,7 @@
 id: lem-outgoing-helmholtz-kernel-is-a-fundamental-solution
 kind: lemma
 title: The outgoing three-dimensional Helmholtz kernel is a fundamental solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

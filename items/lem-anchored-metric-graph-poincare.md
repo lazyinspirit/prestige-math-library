@@ -2,7 +2,7 @@
 id: lem-anchored-metric-graph-poincare
 kind: lemma
 title: "Path Poincare inequality on an anchored finite metric graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

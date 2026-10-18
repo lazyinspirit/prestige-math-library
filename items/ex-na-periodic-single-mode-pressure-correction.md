@@ -2,7 +2,7 @@
 id: ex-na-periodic-single-mode-pressure-correction
 kind: example
 title: "One staggered Fourier mode is removed exactly by pressure correction"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

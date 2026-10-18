@@ -2,7 +2,7 @@
 id: lem-na-jensen-maximum-principle-semiconvex
 kind: lemma
 title: Jensen maximum principle for locally semiconvex functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

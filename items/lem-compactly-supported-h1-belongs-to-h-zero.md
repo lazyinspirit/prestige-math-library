@@ -2,7 +2,7 @@
 id: lem-compactly-supported-h1-belongs-to-h-zero
 kind: lemma
 title: Compactly supported H1 functions lie in H1_0
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

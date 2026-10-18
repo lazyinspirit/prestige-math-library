@@ -2,7 +2,7 @@
 id: lem-maxwell-yee-step-matrix-is-positive-definite
 kind: lemma
 title: The midpoint-conductivity Yee electric solve is well defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

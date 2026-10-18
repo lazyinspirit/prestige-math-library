@@ -1,7 +1,7 @@
 ---
 page: least-squares-fem-and-practical-dpg-examples
 title: First-order least-squares FEM and practical DPG — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-na-least-squares-boundary-omission-nonunique

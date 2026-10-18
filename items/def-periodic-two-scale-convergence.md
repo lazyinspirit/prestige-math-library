@@ -2,7 +2,7 @@
 id: def-periodic-two-scale-convergence
 kind: definition
 title: Two-scale weak convergence for periodic tests
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

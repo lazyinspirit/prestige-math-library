@@ -1,7 +1,7 @@
 ---
 page: boundary-integral-equations-and-galerkin-bem-examples
 title: Boundary-integral equations and Galerkin BEM — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-bem-sphere-constant-density

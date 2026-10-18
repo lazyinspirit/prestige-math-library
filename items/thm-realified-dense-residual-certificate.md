@@ -2,7 +2,7 @@
 id: thm-realified-dense-residual-certificate
 kind: theorem
 title: "A specified realified dense residual check bounds the exact residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: invariant-domain-and-entropy-stable-conservative-schemes
 title: Positivity, invariant domains and entropy-stable systems fluxes
-status: draft
+status: published
 requires:
   - conservative-finite-volume-weak-limits
   - riemann-solvers-for-hyperbolic-systems

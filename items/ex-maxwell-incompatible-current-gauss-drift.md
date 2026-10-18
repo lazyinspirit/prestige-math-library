@@ -2,7 +2,7 @@
 id: ex-maxwell-incompatible-current-gauss-drift
 kind: example
 title: A current violating discrete continuity creates Gauss-law drift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

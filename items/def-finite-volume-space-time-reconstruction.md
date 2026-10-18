@@ -2,7 +2,7 @@
 id: def-finite-volume-space-time-reconstruction
 kind: definition
 title: Piecewise-constant finite-volume state and face-flux reconstructions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

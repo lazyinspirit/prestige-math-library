@@ -3,7 +3,7 @@ id: thm-multiplicative-schwarz-exact-sweep-contraction
 kind: theorem
 title: "Multiplicative Schwarz projection sweeps contract with explicit overlap
   constants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

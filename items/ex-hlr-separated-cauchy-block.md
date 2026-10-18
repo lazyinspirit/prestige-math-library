@@ -2,7 +2,7 @@
 id: ex-hlr-separated-cauchy-block
 kind: example
 title: "A rank-one approximation of a separated Cauchy block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

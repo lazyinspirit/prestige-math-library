@@ -2,7 +2,7 @@
 id: lem-na-weak-local-potentials-and-continuation
 kind: lemma
 title: Local weak scalar potentials and continuation on a simply connected open set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-na-lipschitz-critical-image-null
 kind: lemma
 title: "Critical images of Euclidean Lipschitz maps are null"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

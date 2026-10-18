@@ -2,7 +2,7 @@
 id: prop-sph-conserves-linear-and-angular-momentum
 kind: proposition
 title: "Linear and angular momentum are conserved by semidiscrete SPH"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

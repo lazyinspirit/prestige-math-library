@@ -1,7 +1,7 @@
 ---
 page: elasticity-near-incompressibility-and-locking-free-discretization-examples
 title: "Linear elasticity, nearly incompressible limits and locking — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-linear-elasticity-rigid-body-stiffness-nullspace

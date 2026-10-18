@@ -2,7 +2,7 @@
 id: lem-floater-hormann-denominator-lower-bound
 kind: lemma
 title: Floater–Hormann barycentric denominator lower bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

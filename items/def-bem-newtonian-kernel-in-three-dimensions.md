@@ -2,7 +2,7 @@
 id: def-bem-newtonian-kernel-in-three-dimensions
 kind: definition
 title: The three-dimensional Laplace Newton kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

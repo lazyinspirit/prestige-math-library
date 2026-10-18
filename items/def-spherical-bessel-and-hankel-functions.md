@@ -2,7 +2,7 @@
 id: def-spherical-bessel-and-hankel-functions
 kind: definition
 title: Spherical Bessel and outgoing Hankel function conventions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-pe05-hydrostatic-update-preserves-water-and-dry-admissibility
 kind: theorem
 title: The hydrostatic HLL step conserves water and preserves dry admissibility
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

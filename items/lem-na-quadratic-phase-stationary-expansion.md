@@ -2,7 +2,7 @@
 id: lem-na-quadratic-phase-stationary-expansion
 kind: lemma
 title: Local stationary expansion for a quadratic phase
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:

@@ -2,7 +2,7 @@
 id: thm-overlap-remap-l2-projection-conservation-positivity
 kind: theorem
 title: "Overlap remapping is an L2 projection, conservative and positive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

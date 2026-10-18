@@ -2,7 +2,7 @@
 id: lem-maxwell-rectangular-stokes-identity
 kind: lemma
 title: Stokes identity on a rectangular Yee face
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

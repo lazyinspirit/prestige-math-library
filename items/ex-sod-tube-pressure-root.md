@@ -2,7 +2,7 @@
 id: ex-sod-tube-pressure-root
 kind: example
 title: "Sod tube: a unique star-pressure root between the initial pressures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

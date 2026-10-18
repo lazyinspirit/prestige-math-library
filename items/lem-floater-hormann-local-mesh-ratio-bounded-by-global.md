@@ -2,7 +2,7 @@
 id: lem-floater-hormann-local-mesh-ratio-bounded-by-global
 kind: lemma
 title: A global mesh ratio bounds the local degree-zero ratio
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

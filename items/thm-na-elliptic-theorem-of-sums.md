@@ -2,7 +2,7 @@
 id: thm-na-elliptic-theorem-of-sums
 kind: theorem
 title: Elliptic theorem of sums with the full block matrix bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

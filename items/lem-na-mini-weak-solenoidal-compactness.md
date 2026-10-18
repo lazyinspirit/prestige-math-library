@@ -2,7 +2,7 @@
 id: lem-na-mini-weak-solenoidal-compactness
 kind: lemma
 title: "Strong L2 compactness for weakly solenoidal MINI trajectories"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

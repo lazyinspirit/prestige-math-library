@@ -2,7 +2,7 @@
 id: "thm-afem-local-moment-interpolation-estimates"
 kind: "theorem"
 title: "Local approximation and reproduction of the P1 moment interpolant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 1

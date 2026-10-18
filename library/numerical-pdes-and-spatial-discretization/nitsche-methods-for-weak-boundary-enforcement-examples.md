@@ -1,7 +1,7 @@
 ---
 page: nitsche-methods-for-weak-boundary-enforcement-examples
 title: "Nitsche methods for weak boundary enforcement — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-nitsche-exact-affine-data-weak-imposition

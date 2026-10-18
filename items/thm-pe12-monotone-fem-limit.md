@@ -2,7 +2,7 @@
 id: thm-pe12-monotone-fem-limit
 kind: theorem
 title: Conditional monotone finite-element convergence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

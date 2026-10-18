@@ -2,7 +2,7 @@
 id: alg-na-upwind-hjb-grid-step
 kind: algorithm
 title: CFL-monotone upwind update for first-order HJB equations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-first-order-hjb-cauchy-problem, def-na-periodic-grid-and-tensor-multilinear-interpolation, def-periodic-one-way-advection-schemes, lem-finite-set-has-max]

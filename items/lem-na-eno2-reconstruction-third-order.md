@@ -2,7 +2,7 @@
 id: lem-na-eno2-reconstruction-third-order
 kind: lemma
 title: The selected nodal ENO2 quadratic reconstructs the face to third order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

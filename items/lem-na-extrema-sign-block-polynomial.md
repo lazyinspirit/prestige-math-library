@@ -2,7 +2,7 @@
 id: lem-na-extrema-sign-block-polynomial
 kind: lemma
 title: "A polynomial with the sign pattern of the active extrema"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

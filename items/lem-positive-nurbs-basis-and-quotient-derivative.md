@@ -2,7 +2,7 @@
 id: lem-positive-nurbs-basis-and-quotient-derivative
 kind: lemma
 title: Positive weights give a bounded partition-of-unity NURBS basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

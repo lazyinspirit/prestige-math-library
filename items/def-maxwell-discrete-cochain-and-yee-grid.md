@@ -2,7 +2,7 @@
 id: def-maxwell-discrete-cochain-and-yee-grid
 kind: definition
 title: Oriented Maxwell cochains, masses, and the Yee grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

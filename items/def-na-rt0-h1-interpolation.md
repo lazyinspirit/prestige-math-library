@@ -2,7 +2,7 @@
 id: def-na-rt0-h1-interpolation
 kind: definition
 title: Canonical RT0 interpolation on H1 fields
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: thm-ale-robin-robin-iteration-contracts-and-certifies-stop
 kind: theorem
 title: "Robin-Robin iteration contracts to the monolithic trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

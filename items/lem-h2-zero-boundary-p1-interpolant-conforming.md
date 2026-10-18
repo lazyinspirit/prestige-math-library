@@ -2,7 +2,7 @@
 id: lem-h2-zero-boundary-p1-interpolant-conforming
 kind: lemma
 title: The nodal P1 interpolant preserves homogeneous boundary values
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

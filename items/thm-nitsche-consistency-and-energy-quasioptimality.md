@@ -2,7 +2,7 @@
 id: thm-nitsche-consistency-and-energy-quasioptimality
 kind: theorem
 title: Nitsche consistency and energy quasi-optimality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

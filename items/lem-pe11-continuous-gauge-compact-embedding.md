@@ -2,7 +2,7 @@
 id: lem-pe11-continuous-gauge-compact-embedding
 kind: lemma
 title: Compact embedding and curl Poincare inequality for the continuous PEC quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

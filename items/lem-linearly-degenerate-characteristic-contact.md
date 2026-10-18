@@ -2,7 +2,7 @@
 id: lem-linearly-degenerate-characteristic-contact
 kind: lemma
 title: "A linearly-degenerate characteristic curve is a contact wave"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

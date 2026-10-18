@@ -2,7 +2,7 @@
 id: lem-separated-sites-matern-gram-bound
 kind: lemma
 title: "Separated Matérn sites have a positive Gram lower bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

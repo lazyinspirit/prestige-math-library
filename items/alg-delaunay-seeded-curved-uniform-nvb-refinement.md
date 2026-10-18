@@ -2,7 +2,7 @@
 id: alg-delaunay-seeded-curved-uniform-nvb-refinement
 kind: algorithm
 title: "Delaunay-seeded curved uniform NVB refinement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

@@ -1,7 +1,7 @@
 ---
 page: adaptive-finite-element-methods-examples
 title: "Adaptive finite-element methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-afem-coefficient-jump-adds-flux-oscillation

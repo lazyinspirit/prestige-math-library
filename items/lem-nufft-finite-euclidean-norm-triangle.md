@@ -2,7 +2,7 @@
 id: lem-nufft-finite-euclidean-norm-triangle
 kind: lemma
 title: Triangle inequality for the finite NUFFT Euclidean norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

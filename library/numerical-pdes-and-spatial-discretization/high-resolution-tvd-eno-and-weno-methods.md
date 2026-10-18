@@ -1,7 +1,7 @@
 ---
 page: high-resolution-tvd-eno-and-weno-methods
 title: High-resolution TVD, ENO and WENO reconstruction
-status: draft
+status: published
 items:
   - def-na-high-resolution-reconstruction
   - thm-na-linear-monotone-first-order-barrier

@@ -2,7 +2,7 @@
 id: thm-na-howard-policy-iteration-monotone-improvement-termination
 kind: theorem
 title: Monotone improvement and finite termination of exact Howard iteration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [alg-na-finite-control-howard-policy-iteration, lem-na-discounted-bellman-policy-matrix-inverse-positive, def-na-finite-state-discounted-bellman-system, lem-finite-set-has-max]

@@ -3,7 +3,7 @@ id: lem-riccati-finite-budget-wrappers-return-a-status
 kind: lemma
 title: "Finite Riccati candidate, Newton-Kleinman, and doubling wrappers return
   a status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

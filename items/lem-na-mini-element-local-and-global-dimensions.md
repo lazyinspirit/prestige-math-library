@@ -2,7 +2,7 @@
 id: lem-na-mini-element-local-and-global-dimensions
 kind: lemma
 title: "Local and global dimensions of the mini element"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

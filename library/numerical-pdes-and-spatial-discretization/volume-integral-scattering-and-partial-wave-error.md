@@ -1,7 +1,7 @@
 ---
 page: volume-integral-scattering-and-partial-wave-error
 title: Volume integral scattering and partial wave error
-status: draft
+status: published
 requires:
   [
     nystrom-product-integration-and-fredholm-error,

@@ -1,7 +1,7 @@
 ---
 page: conservative-finite-volume-weak-limits
 title: Conservative finite-volume weak limits
-status: draft
+status: published
 items:
   - def-locally-bounded-distributional-weak-solution
   - def-conservative-finite-volume-scheme

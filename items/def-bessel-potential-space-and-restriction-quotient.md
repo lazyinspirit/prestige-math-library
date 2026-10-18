@@ -2,7 +2,7 @@
 id: def-bessel-potential-space-and-restriction-quotient
 kind: definition
 title: "Fourier Bessel-potential and restriction-quotient Sobolev spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-na-bounded-lipschitz-domain-divergence-right-inverse
 kind: theorem
 title: "Divergence right inverse on bounded connected Lipschitz domains"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

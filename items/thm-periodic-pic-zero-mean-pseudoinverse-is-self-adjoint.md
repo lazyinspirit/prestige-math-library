@@ -2,7 +2,7 @@
 id: thm-periodic-pic-zero-mean-pseudoinverse-is-self-adjoint
 kind: theorem
 title: The periodic Poisson mean-zero pseudoinverse is linear and self-adjoint
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

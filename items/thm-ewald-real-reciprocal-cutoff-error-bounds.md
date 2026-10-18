@@ -2,7 +2,7 @@
 id: thm-ewald-real-reciprocal-cutoff-error-bounds
 kind: theorem
 title: "Explicit real and reciprocal Ewald potential, energy, and force tail bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

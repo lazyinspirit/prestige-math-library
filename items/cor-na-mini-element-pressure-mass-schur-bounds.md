@@ -2,7 +2,7 @@
 id: cor-na-mini-element-pressure-mass-schur-bounds
 kind: corollary
 title: "Steady MINI Stokes pressure-mass Schur bounds"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

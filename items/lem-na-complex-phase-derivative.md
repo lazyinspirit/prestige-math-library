@@ -2,7 +2,7 @@
 id: lem-na-complex-phase-derivative
 kind: lemma
 title: Derivative of a complex oscillatory phase
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

@@ -2,7 +2,7 @@
 id: thm-bem-logarithmic-capacity-homothety-and-layer-scale
 kind: theorem
 title: Logarithmic capacity and single-layer scaling under homothety
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

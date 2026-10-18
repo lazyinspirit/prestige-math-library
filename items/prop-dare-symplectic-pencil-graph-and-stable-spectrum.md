@@ -3,7 +3,7 @@ id: prop-dare-symplectic-pencil-graph-and-stable-spectrum
 kind: proposition
 title: "The stabilizing DARE solution is the stable deflating graph of a regular
   symplectic pencil"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

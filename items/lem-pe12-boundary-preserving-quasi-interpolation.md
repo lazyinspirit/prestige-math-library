@@ -2,7 +2,7 @@
 id: lem-pe12-boundary-preserving-quasi-interpolation
 kind: lemma
 title: Boundary-preserving quasi-interpolation is stable and strongly approximating
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-nufft-gaussian-grid-alias-identity-and-bound
 kind: lemma
 title: Exact Gaussian grid alias identity and explicit alias bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

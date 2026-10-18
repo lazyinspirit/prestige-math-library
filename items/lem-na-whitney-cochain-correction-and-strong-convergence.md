@@ -2,7 +2,7 @@
 id: lem-na-whitney-cochain-correction-and-strong-convergence
 kind: lemma
 title: Finite element correction and strong convergence of Whitney cochain projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

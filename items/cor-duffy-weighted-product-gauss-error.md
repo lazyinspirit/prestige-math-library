@@ -2,7 +2,7 @@
 id: cor-duffy-weighted-product-gauss-error
 kind: corollary
 title: The Duffy weighted product rule has an explicit bound using pure coordinate derivatives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

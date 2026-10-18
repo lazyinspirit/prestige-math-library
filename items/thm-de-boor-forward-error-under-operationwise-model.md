@@ -2,7 +2,7 @@
 id: thm-de-boor-forward-error-under-operationwise-model
 kind: theorem
 title: A successful rounded de Boor evaluation has a degree-dependent forward bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

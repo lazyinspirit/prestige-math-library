@@ -2,7 +2,7 @@
 id: ex-periodic-pic-leapfrog-energy-drift-for-a-harmonic-mode
 kind: example
 title: Leapfrog changes the energy of an exact harmonic test mode
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: def-na-neumann-darcy-mixed-problem
 kind: definition
 title: No-flow mixed Darcy problem and coefficient norms
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

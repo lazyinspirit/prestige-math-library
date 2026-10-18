@@ -2,7 +2,7 @@
 id: alg-na-filon-nodal-moment-quadrature
 kind: algorithm
 title: Filon quadrature from nodal interpolation and phase moments
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

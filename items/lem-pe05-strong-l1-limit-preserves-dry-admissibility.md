@@ -2,7 +2,7 @@
 id: lem-pe05-strong-l1-limit-preserves-dry-admissibility
 kind: lemma
 title: A strong local L1 limit preserves shallow-water dry admissibility
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

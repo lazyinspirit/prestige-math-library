@@ -3,7 +3,7 @@ id: lem-continuous-kernel-integral-operator-is-compact-on-c
 aliases: [ lem-continuous-kernel-integral-operator-is-compact-on-C ]
 kind: lemma
 title: A continuous kernel defines a compact integral operator on C of an interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

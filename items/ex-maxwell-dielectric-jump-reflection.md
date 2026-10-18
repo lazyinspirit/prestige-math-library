@@ -2,7 +2,7 @@
 id: ex-maxwell-dielectric-jump-reflection
 kind: example
 title: Normal-incidence reflection at a planar dielectric interface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

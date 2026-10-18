@@ -2,7 +2,7 @@
 id: thm-floating-filter-sign-is-exact
 kind: theorem
 title: A certified floating determinant filter returns only the exact sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

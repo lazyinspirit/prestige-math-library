@@ -2,7 +2,7 @@
 id: lem-weighted-network-energy-kernel-and-mass-balance
 kind: lemma
 title: "Energy, kernel, and weighted mass balance for a finite network"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

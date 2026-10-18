@@ -2,7 +2,7 @@
 id: lem-ale-schur-residual-controls-interface-energy-error
 kind: lemma
 title: "Schur residual controls trace and reconstruction energy error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

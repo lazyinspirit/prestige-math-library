@@ -2,7 +2,7 @@
 id: lem-pe12-space-time-gradient-weak-compactness
 kind: lemma
 title: Weak compactness of bounded space-time Sobolev gradients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

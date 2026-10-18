@@ -2,7 +2,7 @@
 id: thm-three-dimensional-laplace-expansion-error-and-work
 kind: theorem
 title: Three-dimensional Laplace cluster expansion error and work
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

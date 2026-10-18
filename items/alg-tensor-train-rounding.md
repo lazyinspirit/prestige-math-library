@@ -2,7 +2,7 @@
 id: alg-tensor-train-rounding
 kind: algorithm
 title: Tensor-train rounding
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

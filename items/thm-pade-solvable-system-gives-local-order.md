@@ -2,7 +2,7 @@
 id: thm-pade-solvable-system-gives-local-order
 kind: theorem
 title: A solvable Padé moment system gives the stated Taylor order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

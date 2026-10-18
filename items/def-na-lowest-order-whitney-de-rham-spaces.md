@@ -2,7 +2,7 @@
 id: def-na-lowest-order-whitney-de-rham-spaces
 kind: definition
 title: Lowest-order Whitney and Nedelec de Rham spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

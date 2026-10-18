@@ -2,7 +2,7 @@
 id: ex-isogeometric-k-refinement-of-the-identity-patch
 kind: example
 title: Degree elevation and simple-knot insertion preserve the identity patch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

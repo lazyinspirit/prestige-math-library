@@ -2,7 +2,7 @@
 id: ex-compressible-entropy-variable-blowup-near-vacuum
 kind: example
 title: Entropy variables leave compact positive-state tubes near vacuum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

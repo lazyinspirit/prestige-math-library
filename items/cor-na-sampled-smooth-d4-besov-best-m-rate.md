@@ -2,7 +2,7 @@
 id: cor-na-sampled-smooth-d4-besov-best-m-rate
 kind: corollary
 title: Smooth periodic samples have a best m-term D4 Besov-tail rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

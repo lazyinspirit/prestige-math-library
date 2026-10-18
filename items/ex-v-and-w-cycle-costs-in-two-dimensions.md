@@ -2,7 +2,7 @@
 id: ex-v-and-w-cycle-costs-in-two-dimensions
 kind: example
 title: "V- and W-cycle work under two-dimensional four-to-one coarsening"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

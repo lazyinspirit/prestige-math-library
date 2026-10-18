@@ -2,7 +2,7 @@
 id: prop-barycentric-rational-quotient-well-defined
 kind: proposition
 title: Barycentric rational quotients are defined and interpolate at support nodes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

@@ -3,7 +3,7 @@ id: thm-na-mini-navier-stokes-be-subsequential-limit
 kind: theorem
 title: "MINI backward Euler converges subsequentially to a solenoidal energy
   weak velocity"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 10

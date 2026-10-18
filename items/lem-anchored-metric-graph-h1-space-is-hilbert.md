@@ -2,7 +2,7 @@
 id: lem-anchored-metric-graph-h1-space-is-hilbert
 kind: lemma
 title: "The anchored metric graph H1 space is a closed Hilbert subspace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

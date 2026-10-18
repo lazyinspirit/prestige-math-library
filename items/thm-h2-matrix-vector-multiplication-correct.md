@@ -2,7 +2,7 @@
 id: thm-h2-matrix-vector-multiplication-correct
 kind: theorem
 title: "Nested-basis H² multiplication is exact for its represented matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

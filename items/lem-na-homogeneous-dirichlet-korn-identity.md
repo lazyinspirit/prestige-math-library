@@ -2,7 +2,7 @@
 id: lem-na-homogeneous-dirichlet-korn-identity
 kind: lemma
 title: "The homogeneous Dirichlet strain identity"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

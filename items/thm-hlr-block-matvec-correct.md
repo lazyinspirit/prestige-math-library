@@ -2,7 +2,7 @@
 id: thm-hlr-block-matvec-correct
 kind: theorem
 title: "H-matrix block multiplication returns the represented matrix action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

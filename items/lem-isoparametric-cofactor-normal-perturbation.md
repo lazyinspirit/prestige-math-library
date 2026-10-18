@@ -2,7 +2,7 @@
 id: lem-isoparametric-cofactor-normal-perturbation
 kind: lemma
 title: Cofactor, surface-Jacobian, and normal perturbation bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

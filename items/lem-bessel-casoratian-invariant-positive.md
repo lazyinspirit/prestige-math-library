@@ -2,7 +2,7 @@
 id: lem-bessel-casoratian-invariant-positive
 kind: lemma
 title: Positive discrete Wronskian for the Bessel recurrence pair
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

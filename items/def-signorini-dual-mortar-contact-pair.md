@@ -2,7 +2,7 @@
 id: def-signorini-dual-mortar-contact-pair
 kind: definition
 title: "Dual P1 mortar multipliers for boundary contact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

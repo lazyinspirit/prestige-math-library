@@ -2,7 +2,7 @@
 id: thm-periodic-pic-deposition-potential-gather-adjointness
 kind: theorem
 title: Periodic PIC deposition and potential gather are adjoint
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

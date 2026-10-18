@@ -2,7 +2,7 @@
 id: ex-na-two-triangle-hybrid-static-condensation
 kind: example
 title: Two-triangle hybrid RT0 local elimination
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 12

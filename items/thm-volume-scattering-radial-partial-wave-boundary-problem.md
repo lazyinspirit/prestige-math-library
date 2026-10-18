@@ -2,7 +2,7 @@
 id: thm-volume-scattering-radial-partial-wave-boundary-problem
 kind: theorem
 title: Radial volume scattering separates into matched partial-wave boundary problems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

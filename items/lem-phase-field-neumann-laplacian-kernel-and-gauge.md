@@ -2,7 +2,7 @@
 id: lem-phase-field-neumann-laplacian-kernel-and-gauge
 kind: lemma
 title: Kernel, range, and mean-zero inverse for the no-flux Laplacian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

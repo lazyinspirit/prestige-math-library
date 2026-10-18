@@ -2,7 +2,7 @@
 id: thm-pe04-ssprk33-first-order-upwind-entropy-preservation
 kind: theorem
 title: SSPRK(3,3) preserves the degree-zero upwind entropy bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

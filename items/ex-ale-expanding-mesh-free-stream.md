@@ -2,7 +2,7 @@
 id: ex-ale-expanding-mesh-free-stream
 kind: example
 title: "An expanding cell preserves a constant state"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

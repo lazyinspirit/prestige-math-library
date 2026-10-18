@@ -2,7 +2,7 @@
 id: ex-pe03-entropy-stable-underresolved-shock
 kind: example
 title: An entropy-stable Burgers flux still smears an under-resolved shock
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

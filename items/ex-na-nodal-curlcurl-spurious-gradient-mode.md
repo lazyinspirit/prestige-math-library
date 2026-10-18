@@ -2,7 +2,7 @@
 id: ex-na-nodal-curlcurl-spurious-gradient-mode
 kind: example
 title: A nodal curl-free mode outside the compatible gradient image
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

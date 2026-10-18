@@ -2,7 +2,7 @@
 id: thm-hlr-blockwise-error-propagation
 kind: theorem
 title: "Blockwise Frobenius errors propagate by disjoint block sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

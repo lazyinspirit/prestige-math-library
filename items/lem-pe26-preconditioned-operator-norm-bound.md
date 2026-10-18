@@ -2,7 +2,7 @@
 id: lem-pe26-preconditioned-operator-norm-bound
 kind: lemma
 title: Eigenvalue bounds from a left-inverse preconditioner
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

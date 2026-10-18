@@ -1,7 +1,7 @@
 ---
 page: well-balanced-balance-laws-and-wet-dry-fronts-examples
 title: Well-balanced balance laws and wet/dry fronts — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-pe05-centered-source-produces-spurious-current

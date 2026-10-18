@@ -2,7 +2,7 @@
 id: thm-gaussian-contraction-error-energy-gradient-bounds
 kind: theorem
 title: Explicit finite-dimensional contraction error bounds for energy and gradient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

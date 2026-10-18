@@ -1,7 +1,7 @@
 ---
 page: curved-mesh-geometry-and-conservative-mesh-transfer-examples
 title: "Curved geometry, mesh generation and conservative transfer — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-inverted-isoparametric-map-detection

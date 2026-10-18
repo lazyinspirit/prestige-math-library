@@ -2,7 +2,7 @@
 id: def-na-symmetric-saddle-point-system-and-block-preconditioners
 kind: definition
 title: "Symmetric saddle-point system, Schur complement, and block preconditioners"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

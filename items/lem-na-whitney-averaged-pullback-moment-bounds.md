@@ -2,7 +2,7 @@
 id: lem-na-whitney-averaged-pullback-moment-bounds
 kind: lemma
 title: Averaged pullback Whitney moments and uniform near identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

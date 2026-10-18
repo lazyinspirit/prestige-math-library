@@ -2,7 +2,7 @@
 id: def-cartesian-gaussian-primitives-and-contractions
 kind: definition
 title: Cartesian Gaussian primitives, contractions, and integral conventions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-ewald-neutral-dipole-cell
 kind: example
 title: "A neutral dipole cell and its reciprocal modes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

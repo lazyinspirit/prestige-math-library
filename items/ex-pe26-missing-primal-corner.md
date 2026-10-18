@@ -2,7 +2,7 @@
 id: ex-pe26-missing-primal-corner
 kind: example
 title: A floating component without a constant-detecting primal constraint remains singular
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

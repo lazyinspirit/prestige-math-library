@@ -2,7 +2,7 @@
 id: alg-double-exponential-trapezoid
 kind: algorithm
 title: Finite truncated tanh–sinh, exp–sinh, and sinh–sinh trapezoid rules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-exact-coefficientwise-weighted-backward-error
 kind: theorem
 title: "Exact minimum formula for a fixed polynomial eigenpair's weighted backward error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

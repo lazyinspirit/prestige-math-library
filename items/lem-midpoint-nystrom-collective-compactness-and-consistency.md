@@ -2,7 +2,7 @@
 id: lem-midpoint-nystrom-collective-compactness-and-consistency
 kind: lemma
 title: Composite midpoint Nyström operators are collectively compact and consistent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

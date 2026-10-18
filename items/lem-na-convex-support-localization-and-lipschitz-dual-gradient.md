@@ -2,7 +2,7 @@
 id: lem-na-convex-support-localization-and-lipschitz-dual-gradient
 kind: lemma
 title: "Convex supports, localization, and the Lipschitz dual gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

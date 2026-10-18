@@ -2,7 +2,7 @@
 id: ex-pe03-burgers-entropy-residual
 kind: example
 title: Exact Tadmor entropy residual for a dissipative Burgers flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

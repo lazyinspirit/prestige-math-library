@@ -2,7 +2,7 @@
 id: ex-pe18-pml-angle-dependent-attenuation
 kind: example
 title: PML attenuation vanishes at grazing and excludes evanescent modes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

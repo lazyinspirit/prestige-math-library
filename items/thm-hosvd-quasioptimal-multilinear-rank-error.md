@@ -2,7 +2,7 @@
 id: thm-hosvd-quasioptimal-multilinear-rank-error
 kind: theorem
 title: HOSVD quasioptimality for multilinear rank
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

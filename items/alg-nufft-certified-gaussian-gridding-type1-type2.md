@@ -2,7 +2,7 @@
 id: alg-nufft-certified-gaussian-gridding-type1-type2
 kind: algorithm
 title: Certified Gaussian gridding for type 1 and type 2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

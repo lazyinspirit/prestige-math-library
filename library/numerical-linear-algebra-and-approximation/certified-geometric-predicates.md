@@ -1,7 +1,7 @@
 ---
 page: certified-geometric-predicates
 title: Certified geometric predicates
-status: draft
+status: published
 items:
   - def-certified-geometric-predicate-determinants
   - alg-interval-geometric-predicate-filter

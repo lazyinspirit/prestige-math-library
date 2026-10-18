@@ -2,7 +2,7 @@
 id: thm-gauss-jacobi-exactness-and-derivative-error
 kind: theorem
 title: Gauss–Jacobi exactness and the derivative remainder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

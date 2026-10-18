@@ -2,7 +2,7 @@
 id: lem-spherical-bessel-and-hankel-radial-solutions
 kind: lemma
 title: Spherical Bessel and outgoing Hankel recurrences solve the radial Helmholtz equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

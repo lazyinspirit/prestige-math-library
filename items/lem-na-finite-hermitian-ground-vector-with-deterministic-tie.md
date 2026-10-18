@@ -2,7 +2,7 @@
 id: lem-na-finite-hermitian-ground-vector-with-deterministic-tie
 kind: lemma
 title: "Finite Hermitian ground vectors and a deterministic tie rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 proof_strategy: direct

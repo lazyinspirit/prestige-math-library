@@ -2,7 +2,7 @@
 id: def-spherical-harmonic-partial-wave-conventions
 kind: definition
 title: Spherical harmonics and partial-wave conventions in three dimensions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

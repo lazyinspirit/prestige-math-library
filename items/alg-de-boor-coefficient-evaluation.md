@@ -2,7 +2,7 @@
 id: alg-de-boor-coefficient-evaluation
 kind: algorithm
 title: de Boor coefficient evaluation on a specified knot span
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

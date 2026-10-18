@@ -2,7 +2,7 @@
 id: lem-crouzeix-raviart-local-interpolation-estimates
 kind: lemma
 title: Local approximation by the face-average Crouzeix–Raviart interpolant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

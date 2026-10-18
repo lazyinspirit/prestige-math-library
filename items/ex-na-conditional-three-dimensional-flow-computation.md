@@ -2,7 +2,7 @@
 id: ex-na-conditional-three-dimensional-flow-computation
 kind: example
 title: A conditional three-dimensional computation with no uniqueness claim
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 10

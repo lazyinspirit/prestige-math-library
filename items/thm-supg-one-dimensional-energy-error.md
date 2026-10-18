@@ -2,7 +2,7 @@
 id: thm-supg-one-dimensional-energy-error
 kind: theorem
 title: "One-dimensional SUPG energy error bound with explicit tau dependence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-na-saddle-point-exact-schur-solve
 kind: theorem
 title: "Exact Schur solve for a full-row-rank symmetric saddle system"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

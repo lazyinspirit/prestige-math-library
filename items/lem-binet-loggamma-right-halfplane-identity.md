@@ -2,7 +2,7 @@
 id: lem-binet-loggamma-right-halfplane-identity
 kind: lemma
 title: Binet integral identity for the right-half-plane log-Gamma branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

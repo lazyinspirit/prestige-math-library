@@ -2,7 +2,7 @@
 id: lem-pe18-spherical-hankel-radial-identities
 kind: lemma
 title: Outgoing spherical Hankel modes have positive flux and no positive-real zeros
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

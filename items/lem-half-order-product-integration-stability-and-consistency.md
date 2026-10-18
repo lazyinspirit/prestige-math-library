@@ -2,7 +2,7 @@
 id: lem-half-order-product-integration-stability-and-consistency
 kind: lemma
 title: Stability, collective compactness, and consistency of half-order product integration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -3,7 +3,7 @@ id: thm-newton-kleinman-exact-global-and-local-quadratic-convergence
 kind: theorem
 title: "Exact Newton-Kleinman iteration preserves stability, decreases cost
   matrices, and converges quadratically locally"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

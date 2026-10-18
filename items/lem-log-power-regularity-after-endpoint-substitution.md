@@ -2,7 +2,7 @@
 id: lem-log-power-regularity-after-endpoint-substitution
 kind: lemma
 title: A sufficiently high power regularizes finite logarithmic endpoint factors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

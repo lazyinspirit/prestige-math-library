@@ -2,7 +2,7 @@
 id: ex-periodic-smooth-density-poisson-grid-force-error
 kind: example
 title: A manufactured smooth periodic density for the PIC grid-force estimate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

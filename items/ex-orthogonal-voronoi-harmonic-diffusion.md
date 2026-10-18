@@ -2,7 +2,7 @@
 id: ex-orthogonal-voronoi-harmonic-diffusion
 kind: example
 title: Harmonic TPFA flux on a rectangular Voronoï mesh
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: "alg-na-practical-dpg-finite-riesz-solves"
 kind: "algorithm"
 title: "Exact local finite Riesz solves for practical DPG tests"
-status: "draft"
+status: "published"
 origin: "session"
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 5

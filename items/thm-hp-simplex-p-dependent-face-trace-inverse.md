@@ -2,7 +2,7 @@
 id: thm-hp-simplex-p-dependent-face-trace-inverse
 kind: theorem
 title: Degree-explicit polynomial trace inverse inequality on simplices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

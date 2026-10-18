@@ -2,7 +2,7 @@
 id: lem-airy-series-coefficient-recurrence-and-tail
 kind: lemma
 title: Airy coefficient recurrence and geometric tail bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

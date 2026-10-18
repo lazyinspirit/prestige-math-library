@@ -2,7 +2,7 @@
 id: thm-phase-field-convex-splitting-mesh-time-convergence
 kind: theorem
 title: One-dimensional mesh and time convergence of convex-splitting phase flows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

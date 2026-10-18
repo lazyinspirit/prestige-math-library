@@ -2,7 +2,7 @@
 id: ex-pe18-spherical-monopole-exterior-field
 kind: example
 title: The outgoing monopole field of a sound-soft sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

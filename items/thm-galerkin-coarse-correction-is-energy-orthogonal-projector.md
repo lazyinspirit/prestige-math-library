@@ -2,7 +2,7 @@
 id: thm-galerkin-coarse-correction-is-energy-orthogonal-projector
 kind: theorem
 title: "The Galerkin coarse correction is an energy-orthogonal projector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

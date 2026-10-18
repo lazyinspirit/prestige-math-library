@@ -2,7 +2,7 @@
 id: thm-na-mini-be-step-existence-energy
 kind: theorem
 title: "Backward Euler MINI step existence and discrete energy bound"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

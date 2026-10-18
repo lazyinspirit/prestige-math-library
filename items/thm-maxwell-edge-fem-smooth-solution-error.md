@@ -2,7 +2,7 @@
 id: thm-maxwell-edge-fem-smooth-solution-error
 kind: theorem
 title: Smooth PEC edge finite element Maxwell error from compatible projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

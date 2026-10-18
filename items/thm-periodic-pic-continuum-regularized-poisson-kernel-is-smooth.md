@@ -2,7 +2,7 @@
 id: thm-periodic-pic-continuum-regularized-poisson-kernel-is-smooth
 kind: theorem
 title: Periodic PIC regularization gives a smooth compatible Poisson solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

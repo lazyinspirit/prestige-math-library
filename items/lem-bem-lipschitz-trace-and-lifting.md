@@ -2,7 +2,7 @@
 id: lem-bem-lipschitz-trace-and-lifting
 kind: lemma
 title: The H1 trace and lifting theorem on a compact Lipschitz boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

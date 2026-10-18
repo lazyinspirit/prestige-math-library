@@ -2,7 +2,7 @@
 id: def-supg-pspg-grad-div-stokes-forms
 kind: definition
 title: "Residual PSPG and grad-div terms for equal-order flow spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

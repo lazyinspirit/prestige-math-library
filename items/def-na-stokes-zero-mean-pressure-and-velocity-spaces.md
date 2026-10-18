@@ -2,7 +2,7 @@
 id: def-na-stokes-zero-mean-pressure-and-velocity-spaces
 kind: definition
 title: "Stokes velocity and pressure spaces and weak forms"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

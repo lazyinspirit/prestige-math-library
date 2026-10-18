@@ -2,7 +2,7 @@
 id: ex-pe26-coarse-solve-work-bottleneck
 kind: example
 title: A dense coarse solve can dominate local work
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: ex-supg-convection-boundary-layer-coarse-mesh
 kind: example
 title: "A two-cell SUPG mesh misses the interior shape of an outflow layer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-periodic-effective-tensor-symmetric-elliptic
 kind: theorem
 title: Symmetry and uniform ellipticity of the effective tensor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

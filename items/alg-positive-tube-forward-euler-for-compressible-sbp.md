@@ -2,7 +2,7 @@
 id: alg-positive-tube-forward-euler-for-compressible-sbp
 kind: algorithm
 title: Finite-budget positive-tube forward Euler loop
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

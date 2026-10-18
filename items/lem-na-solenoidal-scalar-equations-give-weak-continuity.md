@@ -2,7 +2,7 @@
 id: lem-na-solenoidal-scalar-equations-give-weak-continuity
 kind: lemma
 title: Scalar weak equations give a weakly continuous Hilbert-space representative
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

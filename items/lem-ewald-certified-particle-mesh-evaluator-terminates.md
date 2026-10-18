@@ -3,7 +3,7 @@ id: lem-ewald-certified-particle-mesh-evaluator-terminates
 kind: lemma
 title: "The certified particle-mesh Ewald evaluator terminates with finite
   outputs or an explicit status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

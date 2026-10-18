@@ -2,7 +2,7 @@
 id: def-na-second-order-elliptic-semijets-and-closure
 kind: definition
 title: Second-order elliptic semijets and their value-sensitive closures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

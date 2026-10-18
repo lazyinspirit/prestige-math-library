@@ -2,7 +2,7 @@
 id: thm-phase-field-convex-splitting-ac-ch-time-error
 kind: theorem
 title: First-order time error under smooth fixed-mesh solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

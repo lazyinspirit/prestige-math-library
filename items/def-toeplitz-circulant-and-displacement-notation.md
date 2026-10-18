@@ -2,7 +2,7 @@
 id: def-toeplitz-circulant-and-displacement-notation
 kind: definition
 title: "Toeplitz, circulant, and finite-index conventions for structured solvers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

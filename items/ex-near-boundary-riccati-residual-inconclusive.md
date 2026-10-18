@@ -2,7 +2,7 @@
 id: ex-near-boundary-riccati-residual-inconclusive
 kind: example
 title: "A tiny CARE residual is inconclusive near the stability boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

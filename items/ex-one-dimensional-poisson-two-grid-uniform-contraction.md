@@ -2,7 +2,7 @@
 id: ex-one-dimensional-poisson-two-grid-uniform-contraction
 kind: example
 title: "One high-frequency mode in the finite one-dimensional Poisson two-grid cycle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

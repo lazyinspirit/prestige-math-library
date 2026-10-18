@@ -2,7 +2,7 @@
 id: alg-na-levin-collocation-quadrature
 kind: algorithm
 title: Levin collocation for a nonstationary oscillatory integral
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

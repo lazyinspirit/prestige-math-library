@@ -2,7 +2,7 @@
 id: lem-stabilizability-and-detectability-pbh-necessary-conditions
 kind: lemma
 title: "Stabilizability and detectability imply the closed-region PBH rank tests"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

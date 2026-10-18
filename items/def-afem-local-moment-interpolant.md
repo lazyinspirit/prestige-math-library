@@ -2,7 +2,7 @@
 id: "def-afem-local-moment-interpolant"
 kind: "definition"
 title: "A local moment interpolant for conforming P1 meshes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 0

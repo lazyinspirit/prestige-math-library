@@ -1,7 +1,7 @@
 ---
 page: isogeometric-galerkin-methods-examples
 title: "Isogeometric Galerkin discretization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-positive-nurbs-weights-do-not-imply-admissible-patch

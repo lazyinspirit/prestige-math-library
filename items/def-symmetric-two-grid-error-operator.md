@@ -2,7 +2,7 @@
 id: def-symmetric-two-grid-error-operator
 kind: definition
 title: "The symmetric two-grid error map from a pre-smoother and Galerkin correction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

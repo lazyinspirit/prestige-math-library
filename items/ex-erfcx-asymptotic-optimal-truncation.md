@@ -2,7 +2,7 @@
 id: ex-erfcx-asymptotic-optimal-truncation
 kind: example
 title: Least-term truncation of the erfcx asymptotic expansion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

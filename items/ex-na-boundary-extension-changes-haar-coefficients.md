@@ -2,7 +2,7 @@
 id: ex-na-boundary-extension-changes-haar-coefficients
 kind: example
 title: Periodic and symmetric padding give different Haar coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation-examples

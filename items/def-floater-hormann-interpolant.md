@@ -2,7 +2,7 @@
 id: def-floater-hormann-interpolant
 kind: definition
 title: Floater–Hormann barycentric interpolant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

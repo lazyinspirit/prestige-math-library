@@ -2,7 +2,7 @@
 id: lem-subspace-leverage-score-identities
 kind: lemma
 title: Leverage scores are basis-independent and sum to the dimension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings

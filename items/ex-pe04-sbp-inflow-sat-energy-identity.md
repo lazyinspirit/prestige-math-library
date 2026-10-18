@@ -2,7 +2,7 @@
 id: ex-pe04-sbp-inflow-sat-energy-identity
 kind: example
 title: The SBP inflow SAT produces the boundary energy term
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

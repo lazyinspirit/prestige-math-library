@@ -2,7 +2,7 @@
 id: cex-delaunay-tetrahedral-sliver
 kind: counterexample
 title: "An empty-sphere tetrahedron can be arbitrarily flat"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

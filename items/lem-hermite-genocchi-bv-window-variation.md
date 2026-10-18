@@ -2,7 +2,7 @@
 id: lem-hermite-genocchi-bv-window-variation
 kind: lemma
 title: Bounded variation controls adjacent Hermite–Genocchi windows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

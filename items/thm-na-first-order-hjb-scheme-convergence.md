@@ -2,7 +2,7 @@
 id: thm-na-first-order-hjb-scheme-convergence
 kind: theorem
 title: Convergence of the positive-interpolation and upwind first-order HJB schemes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [alg-na-positive-interpolation-semilagrangian-hjb-step, alg-na-upwind-hjb-grid-step, lem-na-multilinear-interpolation-positive-and-second-order-accurate, thm-na-positive-interpolation-hjb-step-monotone-stable-consistent, thm-na-upwind-hjb-grid-step-monotone-stable-consistent, lem-na-first-order-hjb-discrete-initial-trace, lem-na-grid-contact-localization-for-half-relaxed-limits, lem-na-smooth-tests-suffice-for-first-and-second-order-hjb-viscosity, def-na-first-order-hjb-cauchy-problem, def-half-relaxed-limits, def-viscosity-subsolution-and-supersolution, def-countable-choice, thm-comparison-for-first-order-hamilton-jacobi-equations, thm-heine-borel-rn, thm-heine-cantor-metric]

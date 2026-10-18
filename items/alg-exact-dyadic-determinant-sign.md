@@ -2,7 +2,7 @@
 id: alg-exact-dyadic-determinant-sign
 kind: algorithm
 title: Exact dyadic determinant sign by integer clearance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

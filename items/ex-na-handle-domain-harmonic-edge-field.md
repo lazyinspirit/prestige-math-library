@@ -2,7 +2,7 @@
 id: ex-na-handle-domain-harmonic-edge-field
 kind: example
 title: A handle-domain harmonic field with nonzero circulation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

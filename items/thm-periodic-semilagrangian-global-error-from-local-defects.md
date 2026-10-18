@@ -2,7 +2,7 @@
 id: thm-periodic-semilagrangian-global-error-from-local-defects
 kind: theorem
 title: "Periodic semi-Lagrangian error is controlled by local foot and interpolation defects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

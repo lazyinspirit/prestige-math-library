@@ -2,7 +2,7 @@
 id: def-certified-evaluation-result-contract
 kind: definition
 title: Certified special-function enclosure result
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

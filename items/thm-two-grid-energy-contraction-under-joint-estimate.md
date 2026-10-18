@@ -2,7 +2,7 @@
 id: thm-two-grid-energy-contraction-under-joint-estimate
 kind: theorem
 title: "A joint smoothing-correction estimate gives symmetric two-grid energy contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

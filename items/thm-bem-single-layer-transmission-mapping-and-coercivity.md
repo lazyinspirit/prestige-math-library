@@ -2,7 +2,7 @@
 id: thm-bem-single-layer-transmission-mapping-and-coercivity
 kind: theorem
 title: The three-dimensional single layer is bounded and coercive
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

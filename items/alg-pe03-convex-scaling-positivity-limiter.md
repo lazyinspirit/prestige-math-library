@@ -2,7 +2,7 @@
 id: alg-pe03-convex-scaling-positivity-limiter
 kind: algorithm
 title: Maximal convex scaling toward an admissible cell mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

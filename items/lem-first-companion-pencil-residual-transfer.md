@@ -2,7 +2,7 @@
 id: lem-first-companion-pencil-residual-transfer
 kind: lemma
 title: "A companion-pencil residual transfers to the polynomial residual through explicit block factors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

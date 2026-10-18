@@ -2,7 +2,7 @@
 id: lem-na-smooth-tests-suffice-for-first-and-second-order-hjb-viscosity
 kind: lemma
 title: Smooth test functions suffice for the first- and second-order HJB viscosity notions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-first-order-hjb-cauchy-problem, def-na-periodic-diagonal-controlled-diffusion-hjb-problem, def-na-second-order-parabolic-viscosity-solution, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, lem-smooth-bump-between-concentric-euclidean-balls, thm-euclidean-semicontinuous-extreme-value-theorem, thm-heine-cantor-metric, thm-ftc-first-part, thm-continuous-implies-integrable]

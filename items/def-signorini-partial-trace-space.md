@@ -2,7 +2,7 @@
 id: def-signorini-partial-trace-space
 kind: definition
 title: "Partial-trace displacement space on a polygon"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

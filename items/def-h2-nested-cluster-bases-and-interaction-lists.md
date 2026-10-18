@@ -2,7 +2,7 @@
 id: def-h2-nested-cluster-bases-and-interaction-lists
 kind: definition
 title: "Nested H² cluster bases and interaction lists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

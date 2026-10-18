@@ -2,7 +2,7 @@
 id: lem-c1-divided-difference-extends-continuously
 kind: lemma
 title: The first divided difference of a C1 function extends continuously
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

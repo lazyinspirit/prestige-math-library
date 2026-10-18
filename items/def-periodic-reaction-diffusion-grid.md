@@ -2,7 +2,7 @@
 id: def-periodic-reaction-diffusion-grid
 kind: definition
 title: Periodic rectangular reaction-diffusion grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

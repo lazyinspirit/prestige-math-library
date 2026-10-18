@@ -2,7 +2,7 @@
 id: alg-certified-airy-evaluation
 kind: algorithm
 title: Finite certified Airy power-series evaluation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

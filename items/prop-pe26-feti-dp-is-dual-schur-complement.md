@@ -2,7 +2,7 @@
 id: prop-pe26-feti-dp-is-dual-schur-complement
 kind: proposition
 title: FETI-DP is the exact dual Schur system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

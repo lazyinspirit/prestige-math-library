@@ -2,7 +2,7 @@
 id: lem-sectorial-stirling-explicit-remainder-bound
 kind: lemma
 title: Explicit sectorial remainder bound for the right-half-plane log-Gamma branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

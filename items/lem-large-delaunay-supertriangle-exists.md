@@ -3,7 +3,7 @@ id: lem-large-delaunay-supertriangle-exists
 kind: lemma
 title: "A dyadic supertriangle contains the sites and excludes every input
   circumcircle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

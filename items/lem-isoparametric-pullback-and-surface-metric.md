@@ -2,7 +2,7 @@
 id: lem-isoparametric-pullback-and-surface-metric
 kind: lemma
 title: "Pullback gradients and induced surface metrics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

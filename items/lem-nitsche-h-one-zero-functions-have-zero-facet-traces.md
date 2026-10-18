@@ -2,7 +2,7 @@
 id: lem-nitsche-h-one-zero-functions-have-zero-facet-traces
 kind: lemma
 title: Zero facet traces of functions in H1_0 on an affine mesh
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

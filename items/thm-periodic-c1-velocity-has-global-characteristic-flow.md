@@ -2,7 +2,7 @@
 id: thm-periodic-c1-velocity-has-global-characteristic-flow
 kind: theorem
 title: "A periodic C1 velocity has a global characteristic flow on a finite horizon"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

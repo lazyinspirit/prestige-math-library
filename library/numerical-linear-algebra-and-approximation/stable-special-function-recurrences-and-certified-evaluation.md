@@ -1,7 +1,7 @@
 ---
 page: stable-special-function-recurrences-and-certified-evaluation
 title: Stable special function recurrences and certified evaluation
-status: draft
+status: published
 requires:
   - composite-quadrature-rules
   - gaussian-quadrature

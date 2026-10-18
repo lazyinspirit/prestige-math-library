@@ -2,7 +2,7 @@
 id: def-three-dimensional-delaunay-and-weighted-regular-lower-hull
 kind: definition
 title: "Three-dimensional Delaunay and weighted regular triangulations by lifting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

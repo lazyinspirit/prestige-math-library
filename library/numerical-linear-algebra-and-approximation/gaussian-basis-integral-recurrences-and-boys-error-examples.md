@@ -1,7 +1,7 @@
 ---
 page: gaussian-basis-integral-recurrences-and-boys-error-examples
 title: Gaussian basis integral recurrences and boys error — Examples
-status: draft
+status: published
 requires:
   - gaussian-basis-integral-recurrences-and-boys-error
 items: []

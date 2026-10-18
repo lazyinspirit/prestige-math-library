@@ -1,7 +1,7 @@
 ---
 page: particle-in-cell-and-particle-mesh-kinetic-methods
 title: Particle in cell and particle mesh kinetic methods
-status: draft
+status: published
 items:
   - def-periodic-pic-grid-and-inner-product
   - lem-periodic-composite-trapezoid-error

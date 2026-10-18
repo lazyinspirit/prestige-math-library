@@ -2,7 +2,7 @@
 id: alg-sketch-and-solve-least-squares
 kind: algorithm
 title: Rank-aware sketch-and-solve least squares
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings

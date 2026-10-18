@@ -2,7 +2,7 @@
 id: def-ewald-pme-cardinal-assignment-model
 kind: definition
 title: "Periodic cardinal-spline assignment and unitary mesh transform"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

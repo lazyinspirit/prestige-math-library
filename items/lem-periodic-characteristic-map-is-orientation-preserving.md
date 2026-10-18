@@ -2,7 +2,7 @@
 id: lem-periodic-characteristic-map-is-orientation-preserving
 kind: lemma
 title: "A periodic C1 characteristic map is an orientation-preserving diffeomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

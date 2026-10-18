@@ -1,7 +1,7 @@
 ---
 page: boundary-integral-equations-and-galerkin-bem
 title: Boundary-integral equations and Galerkin BEM
-status: draft
+status: published
 items:
   - def-bem-logarithmic-capacity-and-two-dimensional-layer-scaling
   - lem-bem-half-order-bessel-slobodeckij-equivalence

@@ -2,7 +2,7 @@
 id: lem-na-periodic-staggered-grid-smooth-sampling-consistency
 kind: lemma
 title: "Second-order consistency of staggered periodic sampling"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

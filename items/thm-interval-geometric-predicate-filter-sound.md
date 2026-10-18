@@ -2,7 +2,7 @@
 id: thm-interval-geometric-predicate-filter-sound
 kind: theorem
 title: The interval geometric filter certifies only uniform signs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: certified-geometric-predicates

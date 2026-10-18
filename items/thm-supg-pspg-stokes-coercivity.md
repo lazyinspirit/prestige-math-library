@@ -2,7 +2,7 @@
 id: thm-supg-pspg-stokes-coercivity
 kind: theorem
 title: "P1 PSPG Stokes form is coercive in its stabilization norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

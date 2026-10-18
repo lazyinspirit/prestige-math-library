@@ -1,7 +1,7 @@
 ---
 page: square-root-covariance-update-error-and-stability-examples
 title: Square root covariance update error and stability — Examples
-status: draft
+status: published
 requires:
   - square-root-covariance-update-error-and-stability
 items: []

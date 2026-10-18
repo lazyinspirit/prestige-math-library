@@ -2,7 +2,7 @@
 id: lem-supg-one-dimensional-l2-interpolation-estimate
 kind: lemma
 title: "One-dimensional P1 interpolation has an L2 error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

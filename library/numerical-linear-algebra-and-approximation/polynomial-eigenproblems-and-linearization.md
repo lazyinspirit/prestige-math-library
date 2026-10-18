@@ -1,7 +1,7 @@
 ---
 page: polynomial-eigenproblems-and-linearization
 title: "Polynomial eigenproblems and linearization"
-status: draft
+status: published
 items:
   - def-matrix-polynomial-and-homogeneous-eigenpairs
   - def-first-frobenius-companion-pencil

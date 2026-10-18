@@ -2,7 +2,7 @@
 id: lem-airy-functions-have-negative-real-zeros
 kind: lemma
 title: The Airy Ai function has a negative real zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

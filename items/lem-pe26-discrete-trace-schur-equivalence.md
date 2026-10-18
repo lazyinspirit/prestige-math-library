@@ -2,7 +2,7 @@
 id: lem-pe26-discrete-trace-schur-equivalence
 kind: lemma
 title: Discrete Schur energy and the fractional trace norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: alg-finite-budget-square-root-kalman-filter
 kind: algorithm
 title: "Finite-horizon square-root Kalman filter by rectangular factors and QR"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

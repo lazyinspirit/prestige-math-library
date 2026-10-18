@@ -2,7 +2,7 @@
 id: ex-square-root-kalman-singular-prior-positive-innovation
 kind: example
 title: "A singular prior factor with a positive innovation remains admissible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

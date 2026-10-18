@@ -2,7 +2,7 @@
 id: alg-na-nonstationary-moment-expansion
 kind: algorithm
 title: Bounded integration-by-parts expansion for an oscillatory moment
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:

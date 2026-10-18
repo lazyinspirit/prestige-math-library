@@ -2,7 +2,7 @@
 id: lem-reachable-decomposition-and-state-feedback-pole-placement
 kind: lemma
 title: "Reachable block decomposition and same-field state-feedback pole placement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

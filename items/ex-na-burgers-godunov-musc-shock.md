@@ -2,7 +2,7 @@
 id: ex-na-burgers-godunov-musc-shock
 kind: example
 title: Positive-state Burgers shock and the monotone finite-volume baseline
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

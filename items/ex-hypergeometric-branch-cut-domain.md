@@ -2,7 +2,7 @@
 id: ex-hypergeometric-branch-cut-domain
 kind: example
 title: The Gauss series disk and a continued logarithmic branch have different domains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

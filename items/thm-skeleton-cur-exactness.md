@@ -2,7 +2,7 @@
 id: thm-skeleton-cur-exactness
 kind: theorem
 title: "Skeleton CUR is exact for a full-rank cross"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

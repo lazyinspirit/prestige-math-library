@@ -1,7 +1,7 @@
 ---
 page: nonlinear-parabolic-compactness-and-monotone-evolution
 title: "Nonlinear parabolic compactness and monotone evolution"
-status: draft
+status: published
 items:
   - def-pe12-gelfand-triple
   - lem-pe12-w1p-compact-l2-embedding

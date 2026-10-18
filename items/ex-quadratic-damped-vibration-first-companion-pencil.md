@@ -2,7 +2,7 @@
 id: ex-quadratic-damped-vibration-first-companion-pencil
 kind: example
 title: "A damped oscillator and its first companion pencil"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

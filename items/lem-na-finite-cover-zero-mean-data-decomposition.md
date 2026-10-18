@@ -2,7 +2,7 @@
 id: lem-na-finite-cover-zero-mean-data-decomposition
 kind: lemma
 title: "Zero-mean L2 decomposition over a finite cover"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

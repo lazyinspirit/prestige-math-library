@@ -2,7 +2,7 @@
 id: cex-na-defective-rational-approximation-naive-count
 kind: counterexample
 title: "A defective rational minimizer can have fewer than m+n+2 extrema"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: cor-weighted-network-gauged-cg-applicability
 kind: corollary
 title: "Exact-arithmetic CG after grounding or a Neumann gauge"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

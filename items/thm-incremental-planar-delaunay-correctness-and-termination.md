@@ -2,7 +2,7 @@
 id: thm-incremental-planar-delaunay-correctness-and-termination
 kind: theorem
 title: "Exact planar insertion terminates with a weak empty-circle triangulation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

@@ -2,7 +2,7 @@
 id: ex-pe03-near-vacuum-euler-hll-update
 kind: example
 title: A near-vacuum Euler state remains positive under symmetric HLL speeds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

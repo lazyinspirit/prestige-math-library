@@ -3,7 +3,7 @@ id: ex-singular-a-dare-infinite-pencil-eigenvalue
 kind: example
 title: "A singular A can give a stable DARE solution and an infinite pencil
   eigenvalue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

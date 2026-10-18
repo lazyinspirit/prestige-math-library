@@ -2,7 +2,7 @@
 id: thm-certified-fresnel-erf-hypergeometric-enclosures
 kind: theorem
 title: Soundness of the finite Fresnel, erf, and Gauss-series enclosures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

@@ -2,7 +2,7 @@
 id: lem-na-periodic-grid-pressure-laplacian-zero-mode-and-poincare
 kind: lemma
 title: "Periodic pressure Laplacian gauge, solvability, and uniform Poincare bound"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

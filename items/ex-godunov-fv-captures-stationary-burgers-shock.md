@@ -2,7 +2,7 @@
 id: ex-godunov-fv-captures-stationary-burgers-shock
 kind: example
 title: Godunov scheme captures a stationary Burgers entropy shock
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

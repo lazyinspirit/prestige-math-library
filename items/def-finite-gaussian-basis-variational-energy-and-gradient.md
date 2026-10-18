@@ -2,7 +2,7 @@
 id: def-finite-gaussian-basis-variational-energy-and-gradient
 kind: definition
 title: Finite tensor contractions and their variational energy and gradient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-na-mini-be-smooth-velocity-error
 kind: theorem
 title: "Smooth-branch velocity error for backward Euler MINI"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 10

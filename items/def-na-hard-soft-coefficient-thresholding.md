@@ -2,7 +2,7 @@
 id: def-na-hard-soft-coefficient-thresholding
 kind: definition
 title: Hard m-term retention and soft thresholding of finite coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

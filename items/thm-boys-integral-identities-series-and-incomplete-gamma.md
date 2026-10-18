@@ -2,7 +2,7 @@
 id: thm-boys-integral-identities-series-and-incomplete-gamma
 kind: theorem
 title: Boys integral, power series, recurrence, and incomplete-gamma representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

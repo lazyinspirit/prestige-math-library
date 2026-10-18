@@ -2,7 +2,7 @@
 id: def-isogeometric-galerkin-patch-space-and-refinement
 kind: definition
 title: Conforming isogeometric Galerkin spaces and h/p/k refinement
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

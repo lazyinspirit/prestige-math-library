@@ -2,7 +2,7 @@
 id: ex-signorini-contact-patch-test
 kind: example
 title: "An affine shear field passes the frictionless contact patch test"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 8

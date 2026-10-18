@@ -2,7 +2,7 @@
 id: def-compressible-navier-stokes-fourier-model
 kind: definition
 title: Ideal-gas compressible Navier–Stokes–Fourier model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

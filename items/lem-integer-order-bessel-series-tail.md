@@ -2,7 +2,7 @@
 id: lem-integer-order-bessel-series-tail
 kind: lemma
 title: Convergence and geometric tails for integer-order Bessel series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

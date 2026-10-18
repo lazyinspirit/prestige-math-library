@@ -2,7 +2,7 @@
 id: def-ideal-gas-entropy-conservative-pair-flux
 kind: definition
 title: Explicit entropy-conservative two-point Euler flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-nonsymmetric-nitsche-l2-error-with-boundary-defect
 kind: theorem
 title: Nonsymmetric Nitsche L2 estimate with its boundary consistency defect
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

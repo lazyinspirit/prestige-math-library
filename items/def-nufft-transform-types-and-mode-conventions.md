@@ -2,7 +2,7 @@
 id: def-nufft-transform-types-and-mode-conventions
 kind: definition
 title: Type-1, type-2, and type-3 nonuniform Fourier transforms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

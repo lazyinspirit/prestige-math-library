@@ -2,7 +2,7 @@
 id: lem-scaled-kernel-moments-and-derivative-bounds
 kind: lemma
 title: "Scaling identities for kernel moments and derivatives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

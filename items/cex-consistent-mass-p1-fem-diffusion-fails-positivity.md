@@ -2,7 +2,7 @@
 id: cex-consistent-mass-p1-fem-diffusion-fails-positivity
 kind: counterexample
 title: Consistent-mass P1 diffusion can leave the nonnegative cone
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

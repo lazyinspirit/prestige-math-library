@@ -2,7 +2,7 @@
 id: ex-power-rangefinder-loses-small-mode-without-qr
 kind: example
 title: A small mode is lost by an unorthogonalized power pass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-three-dimensional-spherical-harmonic-space
 kind: definition
 title: Degree-indexed spherical harmonic spaces in three dimensions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

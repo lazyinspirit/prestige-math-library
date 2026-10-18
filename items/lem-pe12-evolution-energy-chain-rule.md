@@ -2,7 +2,7 @@
 id: lem-pe12-evolution-energy-chain-rule
 kind: lemma
 title: The Banach evolution-space energy identity and H trace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

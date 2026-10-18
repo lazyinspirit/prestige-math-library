@@ -2,7 +2,7 @@
 id: lem-wide-gaussian-pseudoinverse-spectral-moments-and-tail
 kind: lemma
 title: Spectral moments and integrable tails for wide Gaussian pseudoinverses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

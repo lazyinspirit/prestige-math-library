@@ -2,7 +2,7 @@
 id: thm-cartesian-gaussian-raising-lowering-and-kinetic-recurrences
 kind: theorem
 title: Cartesian Gaussian raising, lowering, and kinetic-energy recurrences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

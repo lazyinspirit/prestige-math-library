@@ -2,7 +2,7 @@
 id: thm-real-gaussian-power-rangefinder-expected-error
 kind: theorem
 title: Expected real Gaussian power-rangefinder error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

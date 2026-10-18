@@ -2,7 +2,7 @@
 id: def-na-mini-element-p1-bubble-p1-spaces
 kind: definition
 title: "The conforming P1-bubble/P1 mini element"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

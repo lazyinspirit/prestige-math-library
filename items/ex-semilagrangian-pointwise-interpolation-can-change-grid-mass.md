@@ -2,7 +2,7 @@
 id: ex-semilagrangian-pointwise-interpolation-can-change-grid-mass
 kind: example
 title: "Variable-foot pointwise interpolation can change the grid sum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

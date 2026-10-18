@@ -2,7 +2,7 @@
 id: thm-periodic-dirichlet-homogenization-on-unit-cube
 kind: theorem
 title: Periodic scalar Dirichlet homogenization on the unit cube
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

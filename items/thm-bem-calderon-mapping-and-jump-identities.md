@@ -2,7 +2,7 @@
 id: thm-bem-calderon-mapping-and-jump-identities
 kind: theorem
 title: Bounded Calderon maps and signed jump identities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: alg-finite-budget-structure-preserving-doubling-for-dare
 kind: algorithm
 title: "Finite-budget structure-preserving doubling iteration for the DARE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

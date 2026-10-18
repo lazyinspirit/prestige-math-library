@@ -2,7 +2,7 @@
 id: thm-certified-scaled-spherical-bessel-enclosures
 kind: theorem
 title: Soundness and eventual absolute precision for spherical Bessel enclosures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

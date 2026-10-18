@@ -2,7 +2,7 @@
 id: cex-na-centered-hjb-update-is-not-monotone
 kind: counterexample
 title: A centered HJB update can fail monotonicity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-periodic-grid-and-tensor-multilinear-interpolation, def-na-first-order-hjb-cauchy-problem, alg-na-upwind-hjb-grid-step]

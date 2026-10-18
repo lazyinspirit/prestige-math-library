@@ -1,7 +1,7 @@
 ---
 page: oscillatory-filon-and-levin-quadrature-examples
 title: Oscillatory integrals and filon levin methods — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-na-ill-conditioned-levin-collocation

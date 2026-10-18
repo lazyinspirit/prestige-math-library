@@ -2,7 +2,7 @@
 id: lem-bem-newtonian-kernel-is-fundamental-solution
 kind: lemma
 title: The three-dimensional Newton kernel is a fundamental solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

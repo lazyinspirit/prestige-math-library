@@ -2,7 +2,7 @@
 id: lem-bem-helmholtz-double-layer-conormal-jump
 kind: lemma
 title: The Helmholtz double layer has a common weak conormal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

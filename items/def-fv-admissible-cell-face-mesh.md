@@ -2,7 +2,7 @@
 id: def-fv-admissible-cell-face-mesh
 kind: definition
 title: Finite-volume cell-face meshes and geometric regularity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

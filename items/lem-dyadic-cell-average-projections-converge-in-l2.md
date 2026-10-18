@@ -2,7 +2,7 @@
 id: lem-dyadic-cell-average-projections-converge-in-l2
 kind: lemma
 title: Dyadic cell-average projections converge strongly in L2 of a bounded set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

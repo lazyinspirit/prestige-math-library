@@ -2,7 +2,7 @@
 id: lem-na-simplex-h1-facet-trace-bound
 kind: lemma
 title: H1 facet trace inequality on shape-regular simplices
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

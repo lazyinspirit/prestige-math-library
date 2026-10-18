@@ -2,7 +2,7 @@
 id: lem-na-evolutionary-ns-weak-form-is-well-defined
 kind: lemma
 title: "Integrability of the energy weak Navier–Stokes formulation"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

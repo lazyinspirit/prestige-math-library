@@ -1,7 +1,7 @@
 ---
 page: nonuniform-fast-fourier-transforms
 title: Nonuniform fast fourier transforms
-status: draft
+status: published
 requires:
   - computed-fast-transforms-and-convolution
 items:

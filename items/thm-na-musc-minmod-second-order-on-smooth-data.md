@@ -2,7 +2,7 @@
 id: thm-na-musc-minmod-second-order-on-smooth-data
 kind: theorem
 title: MUSCL/minmod face states are second order on smooth monotone data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

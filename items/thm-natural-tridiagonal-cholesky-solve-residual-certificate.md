@@ -2,7 +2,7 @@
 id: thm-natural-tridiagonal-cholesky-solve-residual-certificate
 kind: theorem
 title: A successful natural-cubic tridiagonal Cholesky solve has a certified residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: ale-interface-and-partitioned-multiphysics-discretization-examples
 title: "ALE, interfaces and partitioned multiphysics coupling — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-ale-added-mass-toy-recurrence-instability

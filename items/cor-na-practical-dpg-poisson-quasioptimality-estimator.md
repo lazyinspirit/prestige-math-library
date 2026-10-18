@@ -2,7 +2,7 @@
 id: cor-na-practical-dpg-poisson-quasioptimality-estimator
 kind: corollary
 title: P1/R3 practical DPG quasi-optimality and residual estimator for Poisson
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 10

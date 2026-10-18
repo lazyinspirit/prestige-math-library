@@ -2,7 +2,7 @@
 id: lem-fas-linear-vw-cycle-translation
 kind: lemma
 title: "A linear Galerkin V/W cycle is translation-covariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

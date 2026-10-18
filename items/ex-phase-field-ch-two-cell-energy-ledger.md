@@ -2,7 +2,7 @@
 id: ex-phase-field-ch-two-cell-energy-ledger
 kind: example
 title: A two-cell Cahn–Hilliard mass and energy ledger
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

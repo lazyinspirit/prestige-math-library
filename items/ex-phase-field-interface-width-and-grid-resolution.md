@@ -2,7 +2,7 @@
 id: ex-phase-field-interface-width-and-grid-resolution
 kind: example
 title: Interface width and a grid that misses the transition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

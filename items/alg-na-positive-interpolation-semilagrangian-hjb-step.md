@@ -2,7 +2,7 @@
 id: alg-na-positive-interpolation-semilagrangian-hjb-step
 kind: algorithm
 title: Positive-interpolation semi-Lagrangian update for first-order HJB equations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps: [def-na-first-order-hjb-cauchy-problem, def-na-periodic-grid-and-tensor-multilinear-interpolation, lem-na-multilinear-interpolation-positive-and-second-order-accurate, lem-finite-set-has-max]

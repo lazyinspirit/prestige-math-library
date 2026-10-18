@@ -2,7 +2,7 @@
 id: lem-half-order-singular-integral-exists
 kind: lemma
 title: The half-order diagonal singularity defines a bounded improper integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

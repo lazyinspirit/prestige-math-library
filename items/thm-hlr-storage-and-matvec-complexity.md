@@ -2,7 +2,7 @@
 id: thm-hlr-storage-and-matvec-complexity
 kind: theorem
 title: "Balanced H and H² storage and matvec complexity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

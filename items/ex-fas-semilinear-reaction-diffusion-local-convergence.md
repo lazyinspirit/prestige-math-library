@@ -2,7 +2,7 @@
 id: ex-fas-semilinear-reaction-diffusion-local-convergence
 kind: example
 title: "A two-node semilinear diffusion FAS cycle has an explicit local rate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: cex-best-rank-two-cp-approximation-may-not-exist
 kind: counterexample
 title: A best rank-two CP approximation need not exist
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 generation:

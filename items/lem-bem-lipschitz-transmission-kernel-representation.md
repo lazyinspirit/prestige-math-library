@@ -2,7 +2,7 @@
 id: lem-bem-lipschitz-transmission-kernel-representation
 kind: lemma
 title: Lipschitz finite-energy transmission pairs have the double-layer kernel representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 deps:

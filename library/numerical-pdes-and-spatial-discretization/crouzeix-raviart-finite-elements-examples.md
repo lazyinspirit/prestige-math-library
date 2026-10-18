@@ -1,7 +1,7 @@
 ---
 page: crouzeix-raviart-finite-elements-examples
 title: "Crouzeix–Raviart finite elements — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-crouzeix-raviart-below-trace-threshold

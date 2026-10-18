@@ -2,7 +2,7 @@
 id: def-semilagrangian-periodic-grid-and-interpolant
 kind: definition
 title: "Periodic tensor grids and multilinear interpolation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

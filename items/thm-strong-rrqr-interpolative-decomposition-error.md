@@ -2,7 +2,7 @@
 id: thm-strong-rrqr-interpolative-decomposition-error
 kind: theorem
 title: "Strong-RRQR interpolative decomposition error and coefficient bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

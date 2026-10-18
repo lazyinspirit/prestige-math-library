@@ -2,7 +2,7 @@
 id: def-phase-field-gradient-flow-and-double-well
 kind: definition
 title: Allen–Cahn and Cahn–Hilliard double-well gradient flows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

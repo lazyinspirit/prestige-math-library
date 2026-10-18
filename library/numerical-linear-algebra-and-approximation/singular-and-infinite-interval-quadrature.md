@@ -1,7 +1,7 @@
 ---
 page: singular-and-infinite-interval-quadrature
 title: "Singular and infinite interval quadrature"
-status: draft
+status: published
 requires:
   - gaussian-quadrature
   - clenshaw-curtis-and-extrapolation-quadrature

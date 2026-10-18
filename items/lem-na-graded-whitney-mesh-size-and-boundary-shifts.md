@@ -2,7 +2,7 @@
 id: lem-na-graded-whitney-mesh-size-and-boundary-shifts
 kind: lemma
 title: Graded Whitney mesh size and inward and outward boundary shifts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: "lem-afem-nvb-conforming-closure-and-cumulative-counting"
 kind: "lemma"
 title: "Termination and cumulative complexity of NVB conformity closure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 2

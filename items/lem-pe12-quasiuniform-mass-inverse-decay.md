@@ -2,7 +2,7 @@
 id: lem-pe12-quasiuniform-mass-inverse-decay
 kind: lemma
 title: Quasi-uniform finite-element mass inverses have summable graph decay
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

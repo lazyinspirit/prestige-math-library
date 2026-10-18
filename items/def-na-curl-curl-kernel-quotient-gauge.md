@@ -2,7 +2,7 @@
 id: def-na-curl-curl-kernel-quotient-gauge
 kind: definition
 title: Kernel quotient and gauge for discrete curl-curl
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

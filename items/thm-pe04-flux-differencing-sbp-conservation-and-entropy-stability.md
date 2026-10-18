@@ -2,7 +2,7 @@
 id: thm-pe04-flux-differencing-sbp-conservation-and-entropy-stability
 kind: theorem
 title: Flux-differencing SBP is conservative and semidiscretely entropy stable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

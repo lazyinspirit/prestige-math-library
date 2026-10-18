@@ -2,7 +2,7 @@
 id: def-galerkin-coarse-grid-correction
 kind: definition
 title: "Galerkin coarse matrices and the exact coarse-correction error map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

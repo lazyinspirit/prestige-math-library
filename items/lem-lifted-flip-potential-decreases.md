@@ -3,7 +3,7 @@ id: lem-lifted-flip-potential-decreases
 kind: lemma
 title: "An illegal planar Delaunay flip strictly decreases lifted interpolation
   volume"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

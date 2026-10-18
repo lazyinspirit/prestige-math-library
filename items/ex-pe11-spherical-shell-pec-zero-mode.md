@@ -2,7 +2,7 @@
 id: ex-pe11-spherical-shell-pec-zero-mode
 kind: example
 title: A topological PEC zero mode on a spherical shell
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

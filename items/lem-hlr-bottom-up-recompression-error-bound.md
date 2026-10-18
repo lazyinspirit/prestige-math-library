@@ -3,7 +3,7 @@ id: lem-hlr-bottom-up-recompression-error-bound
 kind: lemma
 title: "Bottom-up factor-sum recompression has the reported rank and Frobenius
   error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

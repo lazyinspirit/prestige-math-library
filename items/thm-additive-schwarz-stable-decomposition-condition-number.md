@@ -2,7 +2,7 @@
 id: thm-additive-schwarz-stable-decomposition-condition-number
 kind: theorem
 title: "Additive Schwarz condition bound from stable decomposition and synthesis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

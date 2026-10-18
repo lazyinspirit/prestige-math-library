@@ -2,7 +2,7 @@
 id: "lem-afem-p1-residual-representation"
 kind: "lemma"
 title: "Element and edge residual representation for P1 Galerkin errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 1

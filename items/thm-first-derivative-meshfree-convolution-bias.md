@@ -2,7 +2,7 @@
 id: thm-first-derivative-meshfree-convolution-bias
 kind: theorem
 title: "Second-order bias for the kernel particle gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

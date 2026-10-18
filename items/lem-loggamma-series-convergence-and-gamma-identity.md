@@ -2,7 +2,7 @@
 id: lem-loggamma-series-convergence-and-gamma-identity
 kind: lemma
 title: Weierstrass log-Gamma series converges to a Gamma branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

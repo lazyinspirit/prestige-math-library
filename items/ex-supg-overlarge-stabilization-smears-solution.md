@@ -2,7 +2,7 @@
 id: ex-supg-overlarge-stabilization-smears-solution
 kind: example
 title: "Overlarge streamline stabilization suppresses a two-cell solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

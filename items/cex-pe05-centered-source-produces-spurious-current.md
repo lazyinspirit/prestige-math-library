@@ -2,7 +2,7 @@
 id: cex-pe05-centered-source-produces-spurious-current
 kind: counterexample
 title: A centered pressure flux and centered bed source move a discrete lake
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: "thm-afem-error-and-oscillation-contraction"
 kind: "theorem"
 title: "Linear contraction of AFEM energy error and oscillation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-path-certified-fv-discrete-poincare
 kind: theorem
 title: Discrete Poincaré inequality from boundary paths
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

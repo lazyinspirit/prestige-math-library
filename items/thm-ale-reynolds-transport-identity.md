@@ -2,7 +2,7 @@
 id: thm-ale-reynolds-transport-identity
 kind: theorem
 title: "Reynolds transport identity on an ALE moving domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

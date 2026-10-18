@@ -2,7 +2,7 @@
 id: lem-euler-pressure-solver-bracket-and-termination
 kind: lemma
 title: "The safeguarded Euler pressure solver preserves its root bracket and terminates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

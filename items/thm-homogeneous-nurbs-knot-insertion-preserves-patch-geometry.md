@@ -2,7 +2,7 @@
 id: thm-homogeneous-nurbs-knot-insertion-preserves-patch-geometry
 kind: theorem
 title: Homogeneous knot insertion preserves an admissible NURBS patch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: prop-clearing-a-common-denominator-away-from-poles
 kind: proposition
 title: "Clearing a common denominator preserves rational eigenpairs only away from poles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

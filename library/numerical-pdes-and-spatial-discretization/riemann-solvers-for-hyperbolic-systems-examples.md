@@ -1,7 +1,7 @@
 ---
 page: riemann-solvers-for-hyperbolic-systems-examples
 title: "Riemann solvers for hyperbolic systems — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-roe-jump-property-does-not-imply-entropy-admissibility

@@ -2,7 +2,7 @@
 id: ex-principal-value-subtraction-with-interior-pole
 kind: example
 title: An interior Cauchy principal value reduces to a regular integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

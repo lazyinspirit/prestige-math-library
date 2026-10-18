@@ -1,7 +1,7 @@
 ---
 page: nonlinear-full-approximation-multigrid-examples
 title: "Nonlinear full-approximation multigrid — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-fas-reaction-poisson-tau-cancellation

@@ -3,7 +3,7 @@ id: alg-finite-budget-schur-qz-riccati-candidate-extraction
 kind: algorithm
 title: "Finite-budget CARE and DARE candidate extraction from ordered Schur and
   QZ forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-na-levin-conditioned-residual-bound
 kind: theorem
 title: Levin endpoint identity and conditioned residual bound
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:

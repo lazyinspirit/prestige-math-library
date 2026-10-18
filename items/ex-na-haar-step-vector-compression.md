@@ -2,7 +2,7 @@
 id: ex-na-haar-step-vector-compression
 kind: example
 title: Exact two-coefficient Haar compression of a four-entry step vector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation-examples

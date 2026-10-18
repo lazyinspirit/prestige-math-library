@@ -2,7 +2,7 @@
 id: ex-cocircular-four-site-lexicographic-tie
 kind: example
 title: "A cocircular four-site tie selects the stable-id diagonal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation-examples

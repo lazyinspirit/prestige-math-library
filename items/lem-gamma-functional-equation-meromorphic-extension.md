@@ -2,7 +2,7 @@
 id: lem-gamma-functional-equation-meromorphic-extension
 kind: lemma
 title: Gamma functional equation away from the poles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

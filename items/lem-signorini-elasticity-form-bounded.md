@@ -2,7 +2,7 @@
 id: lem-signorini-elasticity-form-bounded
 kind: lemma
 title: "The isotropic contact elasticity form is well defined and bounded"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

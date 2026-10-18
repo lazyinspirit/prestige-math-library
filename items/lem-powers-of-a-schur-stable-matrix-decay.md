@@ -2,7 +2,7 @@
 id: lem-powers-of-a-schur-stable-matrix-decay
 kind: lemma
 title: "Powers of a Schur-stable matrix decay geometrically up to a polynomial factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

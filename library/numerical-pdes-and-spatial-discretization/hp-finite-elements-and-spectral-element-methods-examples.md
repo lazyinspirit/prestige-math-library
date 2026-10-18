@@ -1,7 +1,7 @@
 ---
 page: hp-finite-elements-and-spectral-element-methods-examples
 title: hp finite elements and spectral elements — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-hp-degree-independent-sipdg-penalty-loses-coercivity

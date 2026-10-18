@@ -2,7 +2,7 @@
 id: def-sketch-qr-right-preconditioner
 kind: definition
 title: Right preconditioner from the reduced QR factor of a sketch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings

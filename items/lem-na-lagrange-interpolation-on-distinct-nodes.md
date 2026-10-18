@@ -2,7 +2,7 @@
 id: lem-na-lagrange-interpolation-on-distinct-nodes
 kind: lemma
 title: Lagrange interpolation at distinct real nodes
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

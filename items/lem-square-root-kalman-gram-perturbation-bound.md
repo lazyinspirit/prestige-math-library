@@ -2,7 +2,7 @@
 id: lem-square-root-kalman-gram-perturbation-bound
 kind: lemma
 title: "A factor perturbation gives an explicit Gram-matrix error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

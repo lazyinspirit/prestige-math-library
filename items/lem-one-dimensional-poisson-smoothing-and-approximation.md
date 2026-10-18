@@ -2,7 +2,7 @@
 id: lem-one-dimensional-poisson-smoothing-and-approximation
 kind: lemma
 title: "Level-uniform 1D Poisson smoothing and approximation bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

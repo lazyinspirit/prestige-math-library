@@ -2,7 +2,7 @@
 id: lem-boys-upward-downward-recurrence-error-amplification
 kind: lemma
 title: Upward and downward Boys recurrence error amplification bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

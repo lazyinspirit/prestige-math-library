@@ -2,7 +2,7 @@
 id: ex-sipdg-broken-function-is-not-h1
 kind: example
 title: A broken polynomial with a nonzero jump is not globally H1
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

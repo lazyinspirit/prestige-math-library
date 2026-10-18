@@ -2,7 +2,7 @@
 id: lem-fehmm-period-aligned-sampling-has-zero-resonance
 kind: lemma
 title: No sampling resonance for period-aligned periodic micro cells
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

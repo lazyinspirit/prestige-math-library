@@ -2,7 +2,7 @@
 id: thm-hll-flux-is-consistent-and-conservative
 kind: theorem
 title: "The HLL flux follows from the conservative two-wave model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

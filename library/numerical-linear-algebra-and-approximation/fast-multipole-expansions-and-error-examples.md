@@ -1,7 +1,7 @@
 ---
 page: fast-multipole-expansions-and-error-examples
 title: Fast multipole expansions and error — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-fmm-clustered-points-require-depth-sensitive-work

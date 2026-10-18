@@ -2,7 +2,7 @@
 id: ex-two-tt-truncations-realise-root-sum-squares-bound
 kind: example
 title: Two TT truncations realize the root-sum-square bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 generation:

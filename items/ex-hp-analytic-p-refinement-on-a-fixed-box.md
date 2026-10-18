@@ -2,7 +2,7 @@
 id: ex-hp-analytic-p-refinement-on-a-fixed-box
 kind: example
 title: An analytic box solution has exponential Galerkin p convergence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-gaussian-product-rule-error-bound
 kind: theorem
 title: A tensor product of two positive Gaussian rules has a derivative error bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

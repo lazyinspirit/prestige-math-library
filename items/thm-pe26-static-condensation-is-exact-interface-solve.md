@@ -2,7 +2,7 @@
 id: thm-pe26-static-condensation-is-exact-interface-solve
 kind: theorem
 title: Static condensation is the exact interface problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

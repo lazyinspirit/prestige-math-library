@@ -2,7 +2,7 @@
 id: lem-orthogonal-projector-power-error-inequality
 kind: lemma
 title: Orthogonal-projector power error inequality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

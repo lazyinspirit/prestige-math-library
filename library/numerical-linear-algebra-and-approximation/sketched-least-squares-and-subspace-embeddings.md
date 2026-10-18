@@ -1,7 +1,7 @@
 ---
 page: sketched-least-squares-and-subspace-embeddings
 title: Sketched least squares and subspace embeddings
-status: draft
+status: published
 requires:
   - randomized-low-rank-approximation
   - computed-fast-transforms-and-convolution

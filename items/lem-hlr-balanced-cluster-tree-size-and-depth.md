@@ -2,7 +2,7 @@
 id: lem-hlr-balanced-cluster-tree-size-and-depth
 kind: lemma
 title: "Size and depth of a balanced cluster tree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: alg-randomized-history-dag-point-location
 kind: algorithm
 title: "Randomized planar point location by a history DAG"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: delaunay-triangulations-and-voronoi-computation

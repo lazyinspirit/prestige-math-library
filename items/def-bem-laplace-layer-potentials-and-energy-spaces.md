@@ -2,7 +2,7 @@
 id: def-bem-laplace-layer-potentials-and-energy-spaces
 kind: definition
 title: Weak Laplace single-layer potentials and energy spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

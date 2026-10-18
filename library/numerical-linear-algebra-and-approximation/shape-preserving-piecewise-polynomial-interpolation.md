@@ -1,7 +1,7 @@
 ---
 page: shape-preserving-piecewise-polynomial-interpolation
 title: Shape preserving piecewise polynomial interpolation
-status: draft
+status: published
 requires:
   - spline-evaluation-and-interpolation-algorithms
 items:

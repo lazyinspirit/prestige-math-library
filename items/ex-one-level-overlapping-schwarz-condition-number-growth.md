@@ -2,7 +2,7 @@
 id: ex-one-level-overlapping-schwarz-condition-number-growth
 kind: example
 title: "One-level point-patch Schwarz loses uniformity on 1D Poisson"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

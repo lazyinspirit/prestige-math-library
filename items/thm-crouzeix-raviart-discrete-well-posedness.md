@@ -2,7 +2,7 @@
 id: thm-crouzeix-raviart-discrete-well-posedness
 kind: theorem
 title: Well-posedness of the homogeneous Poisson and CR problems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

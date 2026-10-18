@@ -2,7 +2,7 @@
 id: ex-fas-bifurcation-shrinks-contraction-ball
 kind: example
 title: "The certified FAS contraction radius shrinks at a pitchfork"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

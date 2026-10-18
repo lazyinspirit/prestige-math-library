@@ -2,7 +2,7 @@
 id: def-crouzeix-raviart-poisson-method
 kind: definition
 title: The Crouzeix–Raviart method for the homogeneous Poisson problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

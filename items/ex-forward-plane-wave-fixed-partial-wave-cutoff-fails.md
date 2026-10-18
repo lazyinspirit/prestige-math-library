@@ -2,7 +2,7 @@
 id: ex-forward-plane-wave-fixed-partial-wave-cutoff-fails
 kind: example
 title: A fixed partial-wave cutoff misses the forward high-frequency plane wave
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

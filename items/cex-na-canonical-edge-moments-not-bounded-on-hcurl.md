@@ -2,7 +2,7 @@
 id: cex-na-canonical-edge-moments-not-bounded-on-hcurl
 kind: counterexample
 title: Canonical edge moments are not bounded on H(curl)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

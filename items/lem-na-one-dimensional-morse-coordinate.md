@@ -2,7 +2,7 @@
 id: lem-na-one-dimensional-morse-coordinate
 kind: lemma
 title: Local quadratic coordinate at a simple stationary point
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

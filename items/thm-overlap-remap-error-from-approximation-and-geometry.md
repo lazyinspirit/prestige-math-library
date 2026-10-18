@@ -2,7 +2,7 @@
 id: thm-overlap-remap-error-from-approximation-and-geometry
 kind: theorem
 title: "Remap error separates source, target and geometry approximation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

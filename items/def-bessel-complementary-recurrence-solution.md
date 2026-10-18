@@ -2,7 +2,7 @@
 id: def-bessel-complementary-recurrence-solution
 kind: definition
 title: Complementary solution for the integer Bessel recurrence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

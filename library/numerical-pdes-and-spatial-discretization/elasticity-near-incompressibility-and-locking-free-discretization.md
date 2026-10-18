@@ -1,7 +1,7 @@
 ---
 page: elasticity-near-incompressibility-and-locking-free-discretization
 title: "Linear elasticity, nearly incompressible limits and locking"
-status: draft
+status: published
 items:
   - alg-linear-elasticity-rigid-body-nullspace-gauge
   - lem-linear-elasticity-rigid-body-gauge-system-is-nonsingular

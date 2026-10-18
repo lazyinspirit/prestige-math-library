@@ -2,7 +2,7 @@
 id: def-lqr-stabilizability-and-detectability
 kind: definition
 title: "Stabilizability and detectability for continuous and discrete linear systems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

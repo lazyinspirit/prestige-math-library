@@ -1,7 +1,7 @@
 ---
 page: randomized-low-rank-approximation-examples
 title: Randomized low-rank approximation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-power-rangefinder-loses-small-mode-without-qr

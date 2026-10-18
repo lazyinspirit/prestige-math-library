@@ -2,7 +2,7 @@
 id: "cor-afem-constant-convection-weak-wellposedness"
 kind: "corollary"
 title: "Weak well-posedness for constant divergence-free convection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: "numerical-analysis-remaining-71-2026-10-17"
 dependency_level: 0

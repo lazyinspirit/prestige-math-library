@@ -2,7 +2,7 @@
 id: lem-planar-fmm-multipole-local-translation-identities
 kind: lemma
 title: Planar Laplace multipole and local translation identities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

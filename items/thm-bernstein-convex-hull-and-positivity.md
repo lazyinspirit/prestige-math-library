@@ -2,7 +2,7 @@
 id: thm-bernstein-convex-hull-and-positivity
 kind: theorem
 title: Bernstein control values bound a piecewise polynomial
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

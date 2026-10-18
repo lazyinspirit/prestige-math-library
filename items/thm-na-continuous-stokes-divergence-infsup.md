@@ -2,7 +2,7 @@
 id: thm-na-continuous-stokes-divergence-infsup
 kind: theorem
 title: "Continuous Stokes divergence inf-sup on a Lipschitz domain"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-nufft-certified-gaussian-gridding-returns-a-status
 kind: lemma
 title: Certified Gaussian gridding terminates with a defined status
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

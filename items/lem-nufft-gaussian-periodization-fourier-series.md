@@ -2,7 +2,7 @@
 id: lem-nufft-gaussian-periodization-fourier-series
 kind: lemma
 title: Fourier series of the periodized Gaussian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: nonuniform-fast-fourier-transforms

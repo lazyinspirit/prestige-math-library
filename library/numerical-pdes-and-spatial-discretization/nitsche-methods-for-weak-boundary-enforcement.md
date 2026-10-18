@@ -1,7 +1,7 @@
 ---
 page: nitsche-methods-for-weak-boundary-enforcement
 title: "Nitsche methods for weak boundary enforcement"
-status: draft
+status: published
 items:
   - def-nitsche-restriction-bessel-potential-sobolev-spaces
   - lem-nitsche-h-one-zero-functions-have-zero-facet-traces

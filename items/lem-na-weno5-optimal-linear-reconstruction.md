@@ -2,7 +2,7 @@
 id: lem-na-weno5-optimal-linear-reconstruction
 kind: lemma
 title: The WENO5 ideal linear weights reproduce quartics at the right face
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

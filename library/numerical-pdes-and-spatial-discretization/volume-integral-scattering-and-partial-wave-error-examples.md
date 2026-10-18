@@ -1,7 +1,7 @@
 ---
 page: volume-integral-scattering-and-partial-wave-error-examples
 title: Volume integral scattering and partial wave error — Examples
-status: draft
+status: published
 requires: [ volume-integral-scattering-and-partial-wave-error ]
 items: []
 examples:

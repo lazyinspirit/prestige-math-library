@@ -2,7 +2,7 @@
 id: ex-pe04-upwind-transport-with-inflow
 kind: example
 title: A constant upwind DG state with inflow data on one interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

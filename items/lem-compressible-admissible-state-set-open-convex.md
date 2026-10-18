@@ -2,7 +2,7 @@
 id: lem-compressible-admissible-state-set-open-convex
 kind: lemma
 title: The ideal-gas admissible state set is open and convex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-na-fortin-operator
 kind: definition
 title: "Fortin operator for a discrete constraint"
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

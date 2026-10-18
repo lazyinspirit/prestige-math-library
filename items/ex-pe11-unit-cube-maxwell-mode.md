@@ -2,7 +2,7 @@
 id: ex-pe11-unit-cube-maxwell-mode
 kind: example
 title: An explicit PEC standing wave in the unit cube
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 10

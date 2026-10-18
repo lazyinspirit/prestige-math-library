@@ -2,7 +2,7 @@
 id: def-pe26-primal-interface-spaces-and-jumps
 kind: definition
 title: Primal interface spaces and jump convention
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

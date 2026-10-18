@@ -2,7 +2,7 @@
 id: thm-second-order-meshfree-convolution-bias
 kind: theorem
 title: "Second-order convolution bias for an interior C² field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

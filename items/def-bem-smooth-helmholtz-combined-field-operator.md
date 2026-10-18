@@ -2,7 +2,7 @@
 id: def-bem-smooth-helmholtz-combined-field-operator
 kind: definition
 title: The combined-field operator for smooth-boundary Helmholtz scattering
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

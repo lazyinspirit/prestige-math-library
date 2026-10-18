@@ -2,7 +2,7 @@
 id: thm-nystrom-operator-norm-perturbation-error
 kind: theorem
 title: The operator-norm Nyström perturbation bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

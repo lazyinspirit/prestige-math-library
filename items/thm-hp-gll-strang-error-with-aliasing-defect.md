@@ -2,7 +2,7 @@
 id: thm-hp-gll-strang-error-with-aliasing-defect
 kind: theorem
 title: GLL spectral-element energy error retains the quadrature defect
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3

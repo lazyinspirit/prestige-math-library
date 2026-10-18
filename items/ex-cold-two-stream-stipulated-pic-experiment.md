@@ -2,7 +2,7 @@
 id: ex-cold-two-stream-stipulated-pic-experiment
 kind: example
 title: A stipulated cold two-stream periodic PIC experiment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 5

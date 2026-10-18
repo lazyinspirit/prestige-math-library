@@ -2,7 +2,7 @@
 id: cex-embedding-the-column-space-alone-does-not-control-ls-residual
 kind: counterexample
 title: Embedding Ran(A) alone does not control the sketch-and-solve residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings-examples

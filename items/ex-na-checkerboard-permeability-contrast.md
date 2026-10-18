@@ -2,7 +2,7 @@
 id: ex-na-checkerboard-permeability-contrast
 kind: example
 title: Checkerboard permeability and the explicit contrast factor
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 11

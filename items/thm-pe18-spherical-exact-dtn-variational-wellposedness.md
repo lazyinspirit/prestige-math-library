@@ -2,7 +2,7 @@
 id: thm-pe18-spherical-exact-dtn-variational-wellposedness
 kind: theorem
 title: Existence and uniqueness for the spherical exact-DtN variational problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 7

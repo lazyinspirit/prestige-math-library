@@ -2,7 +2,7 @@
 id: def-ale-toy-added-mass-recurrence
 kind: definition
 title: "Scalar added-mass staggered recurrence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 0

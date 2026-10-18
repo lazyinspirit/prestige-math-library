@@ -2,7 +2,7 @@
 id: lem-na-rt0-p0-kernel-is-divergencefree
 kind: lemma
 title: The RT0/P0 discrete kernel is exactly divergence-free
-status: draft
+status: published
 origin: session
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 4

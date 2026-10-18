@@ -2,7 +2,7 @@
 id: def-tucker-multilinear-rank-and-mode-products
 kind: definition
 title: Tucker format, multilinear rank, and mode products
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 provenance:

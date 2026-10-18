@@ -2,7 +2,7 @@
 id: thm-sketch-qr-right-preconditioner-conditioned-spectrum
 kind: theorem
 title: An embedded QR right preconditioner has controlled singular values
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: sketched-least-squares-and-subspace-embeddings

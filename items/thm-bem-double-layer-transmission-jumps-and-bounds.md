@@ -2,7 +2,7 @@
 id: thm-bem-double-layer-transmission-jumps-and-bounds
 kind: theorem
 title: The double-layer potential has the stated jumps and bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 6

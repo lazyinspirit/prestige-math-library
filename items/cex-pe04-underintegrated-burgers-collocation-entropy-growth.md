@@ -2,7 +2,7 @@
 id: cex-pe04-underintegrated-burgers-collocation-entropy-growth
 kind: counterexample
 title: Underintegrated Burgers collocation can increase quadratic entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 2

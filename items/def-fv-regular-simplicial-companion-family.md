@@ -2,7 +2,7 @@
 id: def-fv-regular-simplicial-companion-family
 kind: definition
 title: "Finite-volume families with a regular simplicial companion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 1

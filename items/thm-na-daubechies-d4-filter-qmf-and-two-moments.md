@@ -2,7 +2,7 @@
 id: thm-na-daubechies-d4-filter-qmf-and-two-moments
 kind: theorem
 title: The explicit four-tap Daubechies pair satisfies the orthogonal filter and two-moment conditions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 page: wavelet-transforms-and-nonlinear-approximation

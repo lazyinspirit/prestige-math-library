@@ -2,7 +2,7 @@
 id: cor-na-best-polynomial-approximation-unique
 kind: corollary
 title: "The best uniform polynomial approximant is unique"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-analysis-remaining-71-2026-10-17
 dependency_level: 3
