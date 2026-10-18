@@ -133,29 +133,52 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
       const keys=(value,wanted)=>value&&typeof value==='object'&&!Array.isArray(value)
         &&same(Object.keys(value).sort(),wanted.sort());
       const fields=['ledger','action','id','route','locus','finding','minimality','uncertain','source_urls','familiar'];
-      need(origin&&Number.isSafeInteger(index)&&index>=0&&Number.isSafeInteger(entry.output_finding_index)&&entry.output_finding_index>=0
-        &&same(finding,entry.finding)&&same(summary,entry.output_finding)&&keys(finding,fields)
-        &&(keys(summary,fields)||keys(summary,fields.filter(key=>key!=='locus')))
-        &&finding.ledger==='canonical-defect-ledger'&&finding.action==='record-open-finding'&&finding.id===id
-        &&finding.route==='frontier-owner'&&finding.locus===`items/${id}.md#Definition`
-        &&summary.ledger===finding.ledger&&summary.action===finding.action&&summary.id===id&&summary.route===finding.route
+      const richFields=['ledger','action','id','severity','defect_type','status','route','affected_path','source_excerpt','affected_use','invalidated_claim','minimality','reason','uncertain','source_urls','familiar'];
+      const rich=entry.finding_shape==='classified-definition',plural=entry.finding_shape==='plural-report-reference';
+      need(entry.finding_shape===undefined||rich||plural,'unknown typed open-finding shape');
+      const ordinary=keys(finding,fields)&&(keys(summary,fields)||keys(summary,fields.filter(key=>key!=='locus')))
+        &&finding.locus===`items/${id}.md#Definition`
         &&(!Object.hasOwn(summary,'locus')||summary.locus===finding.locus)
-        &&finding.uncertain===false&&summary.uncertain===false&&finding.familiar===true&&summary.familiar===true
-        &&same(finding.source_urls,[])&&same(summary.source_urls,[])&&entry.route==='frontier-owner'
+        &&same(finding.source_urls,[])&&same(summary.source_urls,[])
         &&[finding.finding,finding.minimality,summary.finding,summary.minimality]
-          .every(text=>typeof text==='string'&&text.trim().length>=40)
+          .every(text=>typeof text==='string'&&text.trim().length>=40);
+      const classified=keys(finding,richFields)&&keys(summary,richFields)
+        &&finding.severity==='fatal'&&finding.defect_type==='logic'&&finding.status==='open'
+        &&finding.affected_path===`items/${id}.md`&&same(finding,summary)
+        &&Array.isArray(finding.source_urls)&&finding.source_urls.length>0
+        &&finding.source_urls.every(url=>typeof url==='string'&&/^https:\/\/[^\s]+$/.test(url))
+        &&['source_excerpt','affected_use','invalidated_claim','minimality','reason']
+          .every(key=>typeof finding[key]==='string'&&finding[key].trim().length>=40);
+      const pluralFields=['ledger','path','action','id','status','route','affected_use','reason','uncertain','source_urls','familiar'];
+      const pluralReference=keys(finding,pluralFields)
+        &&finding.path==='research/defect-ledger.jsonl'&&finding.status==='open'
+        &&same(finding.source_urls,[])
+        &&['affected_use','reason'].every(key=>typeof finding[key]==='string'&&finding[key].trim().length>=40)
+        &&keys(summary,['ledger','action','route','reason'])
+        &&summary.ledger==='canonical-defect-ledger'&&summary.action==='record-open-findings'
+        &&summary.route==='frontier-owner'&&typeof summary.reason==='string'&&summary.reason.trim().length>=80
+        &&origin.output.repair_notes?.report===relative(root,origin.reportPath);
+      need(origin&&Number.isSafeInteger(index)&&index>=0&&Number.isSafeInteger(entry.output_finding_index)&&entry.output_finding_index>=0
+        &&same(finding,entry.finding)&&same(summary,entry.output_finding)&&(rich?classified:plural?pluralReference:ordinary)
+        &&finding.ledger==='canonical-defect-ledger'&&finding.action==='record-open-finding'&&finding.id===id
+        &&finding.route==='frontier-owner'
+        &&(plural||(summary.ledger===finding.ledger&&summary.action===finding.action&&summary.id===id&&summary.route===finding.route))
+        &&finding.uncertain===false&&finding.familiar===true&&(plural||(summary.uncertain===false&&summary.familiar===true))
+        &&entry.route==='frontier-owner'
         &&!Object.hasOwn(entry,'alert')&&!Object.hasOwn(entry,'output_alert')
         &&!Object.hasOwn(entry,'outside_alert_index')&&!Object.hasOwn(entry,'output_alert_index'),
-        'not the exact unclassified original frontier-owner open finding');
+        'not the exact typed original frontier-owner open finding');
       const witness=review?.open_finding_correspondence,classification=review?.classification;
+      const prose=rich?['affected_use','invalidated_claim','minimality','reason']:plural?['affected_use','reason']:['finding','minimality'];
       need(witness?.confirmed_same_finding===true&&typeof witness.reason==='string'&&witness.reason.trim().length>=80
         &&typeof witness.report_excerpt==='string'&&witness.report_excerpt.length>=20
-        &&[finding.finding,finding.minimality].some(text=>text.includes(witness.report_excerpt))
+        &&prose.some(key=>finding[key].includes(witness.report_excerpt))
         &&typeof witness.output_excerpt==='string'&&witness.output_excerpt.length>=20
-        &&[summary.finding,summary.minimality].some(text=>text.includes(witness.output_excerpt))
+        &&(plural?summary.reason.includes(witness.output_excerpt):prose.some(key=>summary[key].includes(witness.output_excerpt)))
         &&['fatal','nonfatal'].includes(classification?.severity)&&classification.defect_type==='logic'
+        &&(!rich||classification.severity===finding.severity)
         &&typeof classification.reason==='string'&&classification.reason.trim().length>=40,
-        'missing separate root correspondence and classification of unclassified finding');
+        'missing separate root correspondence and classification of typed finding');
     }else{
     need(origin&&Number.isSafeInteger(index)&&index>=0&&same(finding,entry.finding)
       &&finding.ledger==='canonical-defect-ledger'&&finding.action==='record-open-finding'&&finding.id===id
@@ -181,6 +204,7 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
     const text=readFileSync(source,'utf8');
     need(/^status:\s*draft\s*$/m.test(text)&&text.match(/^id:\s*(\S+)\s*$/m)?.[1]===id
       &&typeof baseline[id]==='string'&&initial.before[id]===baseline[id]&&itemHashGuard(text)===entry.current_guard_sha256, 'not a current draft original frontier carrier');
+    if(unclassified&&entry.finding_shape==='classified-definition')need(text.includes(finding.source_excerpt),'classified finding excerpt is absent from current original source');
     if(ownerSource){
       const observation=entry.source_read;
       need(/^kind:\s*definition\s*$/m.test(text)&&itemHashGuard(text)===baseline[id]&&observation?.mode==='owner-current-source-confirmation'
