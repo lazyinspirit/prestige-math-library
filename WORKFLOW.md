@@ -173,6 +173,15 @@ Finite-smoke obligations use named deterministic computations in `tools/finite-s
 
 Numerical finite-smoke families are composed by `tools/finite-smoke-numerical.mjs` from domain modules and the shared `tools/finite-smoke-numerical-core.mjs`. They independently recompute bounded, fixed finite models using their authored selectors and input restrictions; these checks do not establish asymptotic rates or general convergence, stability, or existence theorems. Each contract row must name a registered check and include an exact assertion excerpt from the current item source. Duplicate numerical check names are rejected. Integrate row changes with their current per-row guards so concurrent boundary metadata is preserved, and validate the installed registry through the authorized native scoped full battery; do not run unrelated registry self-tests.
 
+The three `finite-smoke-frontier81-*.mjs` domain modules add 49 fixed classical,
+quantum and Temperley–Lieb/Cherednik fixtures. They compute finite probability
+laws, diagram products, polynomial operators, incidence matrices and small
+quantum models independently of the claimed result. Selectors must match each
+fixture's documented bounds; contract assertions remain exact source excerpts.
+These checks establish no infinite-dimensional, asymptotic or general categorical
+claim. Their focused regression tests include invalid selectors and deliberately
+broken mathematical kernels.
+
 Four finite Gaussian checks cover normal-normal posterior moments, working-normal coverage calibration, a truncated-normal support/TV witness, and one Gaussian-sequence coordinate's posterior and predictive law. `normal-normal-finite-n-posterior` uses n=1,2,5, tau=1/2,1,2 and sample means -2,0,3; `normal-working-model-calibration-boundary` uses z=1,2 and sigma=1/2,1,2, with alpha defined by the quantile relation; `boundary-posterior-support-and-tv-witness` uses n=1,4,16 and Delta=-2,0,2; `gaussian-sequence-one-coordinate-posterior` uses n=i=alpha=kappa_i=1 and observations -2,0,3. These fixed models use independent numerical integration of original Gaussian density products or interval probabilities, 4,096-panel Simpson quadrature, ten-standard-deviation moment windows and tolerance 1e-8. They do not verify CLTs, asymptotic posterior convergence, infinite products, or square-summable support. Their contract assertions must be exact source excerpts; fixture lists are fixed by the registry rather than contract parameters.
 
 The `anisotropic-real-norm-complex-homogeneity-witness` check uses exact Gaussian-integer pairs `[real, imaginary]`, positive integer weights `[1,2]`, vector `[1,0]` and scalar `[0,1]` to recompute `N(1)=1`, `N(i)=2` and `|i|=1`. It rejects a witness satisfying complex homogeneity, a different source normalization, or incorrect claimed values. This is finite counterexample sanity evidence; it does not verify the real norm axioms for all real coordinates.
