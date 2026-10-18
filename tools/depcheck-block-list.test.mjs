@@ -14,7 +14,7 @@ test('depcheck rejects draft items listed by block-form published pages', () => 
     mkdirSync(join(root, 'items'));
     mkdirSync(join(root, 'research')); 
     mkdirSync(join(root, 'library', 'test'), { recursive: true });
-    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs', 'item-hash.mjs', 'physics-math-context-import.mjs', 'pathway-lib.mjs', 'paths.mjs'])
+    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs', 'item-hash.mjs', 'physics-math-context-import.mjs', 'physics-math-context-history.mjs', 'pathway-lib.mjs', 'paths.mjs'])
       copyFileSync(join(HERE, file), join(root, 'tools', file));
     for (const id of ['lem-indented', 'lem-indentless', 'ex-next-line-flow']) {
       writeFileSync(join(root, 'items', `${id}.md`),

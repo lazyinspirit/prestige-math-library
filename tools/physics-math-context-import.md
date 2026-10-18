@@ -94,3 +94,29 @@ Run focused tooling tests with:
 ```sh
 node --test tools/physics-math-context-import.test.mjs
 ```
+
+## Recorded root repairs of imported publication
+
+The immutable import pin and physics source remain unchanged. A necessary root
+correction may use the ordinary explicit pre-edit ownership claim and
+`recorded-local-published-repair` receipt. When the original has no root audit
+or root Git carrier, add `prior_publication_commit` from its import file row
+and `prior_publication_context: {path, sha256, source_path}`: the exact run's
+immutable import receipt path/raw SHA-256 and `physics/items/ID.md`.
+
+The policy authenticates the complete existing import history, source, focused
+review and owner acceptance; exact root/source path and ID; complete original
+bytes; original ancestor commit identity and time; and import time no later
+than the ownership claim. This is historical publication provenance, not an
+audit, publication, adoption recovery or native execution credit. All ordinary
+before/current hashes, ownership, ledger and successful local checks remain
+required. Supplying an invalid explicit context reference fails even if another
+publication basis exists. Adoption and unchanged-claim protocols are unchanged.
+
+The context validator accepts a changed root copy only through that current
+policy-valid ordinary repair, whose before archive is the exact original import
+pin. It retains the immutable import receipt and adds repair receipt, before
+archive, claim and ledger paths to reached-context evidence. It never refreshes
+`files`, `owned_paths`, `context_sha256`, original review or physics bytes.
+Changed or missing historical inputs, unsupported current edits, missing local
+checks or capture as a frontier subject still fail closed.

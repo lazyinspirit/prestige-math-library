@@ -20,7 +20,7 @@ function fixture(t, physics = false) {
   const root = mkdtempSync(join(tmpdir(), 'open-problems-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
   for (const dir of ['tools', 'items', 'library/test', 'research']) mkdirSync(join(root,dir),{recursive:true});
   const sourceTools = physics ? join(tools,'physics-support') : tools;
-  for (const name of ['depcheck.mjs','extcheck.mjs','content-policy.mjs','content-policy-lib.mjs','paths.mjs','facts-block.mjs','frontmatter-list.mjs','item-scope.mjs','published-repair-policy.mjs','item-hash.mjs']) copyFileSync(join(sourceTools,name),join(root,'tools',name));
+  for (const name of ['depcheck.mjs','extcheck.mjs','content-policy.mjs','content-policy-lib.mjs','paths.mjs','facts-block.mjs','frontmatter-list.mjs','item-scope.mjs','published-repair-policy.mjs','item-hash.mjs', ...(!physics ? ['physics-math-context-history.mjs','physics-math-context-import.mjs','pathway-lib.mjs'] : [])]) copyFileSync(join(sourceTools,name),join(root,'tools',name));
   writeFileSync(join(root,'research/b-leaf-legacy-allowlist.json'),JSON.stringify({version:1,edges:[]}));
   const pages = [{id:'questions',kind:'A',category:'test',library:'mathematics',order:1,companion:'questions-examples',requires:[],items:[problem]},{id:'questions-examples',kind:'B',category:'test',library:'mathematics',order:2,companion:'questions',requires:['questions'],items:[]}];
   writeFileSync(join(root,'research/plan-spec.json'),JSON.stringify({pages}));
@@ -29,7 +29,7 @@ function fixture(t, physics = false) {
   writeFileSync(join(root,'library/test/questions.md'),'---\npage: questions\nstatus: draft\nitems: [op-question]\nexamples: []\n---\n');
   if (!physics) copyFileSync(join(tools, 'published-repair-adoption.mjs'), join(root, 'tools/published-repair-adoption.mjs'));
   if (physics) {
-    for (const name of ['published-repair-adoption.mjs','published-repair-policy.mjs','item-hash.mjs']) copyFileSync(join(tools,name),join(root,name));
+    for (const name of ['published-repair-adoption.mjs','published-repair-policy.mjs','physics-math-context-history.mjs','physics-math-context-import.mjs','pathway-lib.mjs','paths.mjs','item-hash.mjs']) copyFileSync(join(tools,name),join(root,name));
     copyFileSync(join(sourceTools,'run-manifest-pages.mjs'),join(root,'tools/run-manifest-pages.mjs'));
   }
   const env = {...process.env,PRESTIGE_APP_DIR:APP_DIR,PHYSICS_REPO:root};

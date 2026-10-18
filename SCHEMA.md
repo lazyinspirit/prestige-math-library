@@ -104,6 +104,12 @@
   carrier, committed before the pre-edit ownership claim; it records historical
   publication provenance and grants no new audit coverage. Its hash and owner
   must match the actual run's pre-edit published ownership claim.
+  An exact physics-to-root mathematical context import may instead supply
+  `prior_publication_context: {path, sha256, source_path}` together with its
+  `prior_publication_commit`; see [the strict import lineage protocol](tools/physics-math-context-import.md#recorded-root-repairs-of-imported-publication).
+  It authenticates the original published physics carrier and immutable import
+  before the explicit pre-edit claim, without changing either or supplying an
+  audit. The current root successor still owes every ordinary local repair guard.
   `ledger_marker` and `ledger_sha256` bind the exact text between unique
   `<!-- local-published-repair:MARKER:begin -->` and corresponding `:end`
   markers in the canonical published ledger; that text identifies the item and

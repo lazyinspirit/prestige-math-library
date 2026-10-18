@@ -7,6 +7,7 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { itemHashGuard } from './item-hash.mjs';
 import { ADOPTION_KIND, authenticateAdoption, hasCommittedPriorPublication } from './published-repair-adoption.mjs';
+import { hasPhysicsContextPriorPublication } from './physics-math-context-history.mjs';
 
 const sha = (text) => createHash('sha256').update(text).digest('hex');
 const frontmatter = (text) => /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(text)?.[1] ?? '';
@@ -80,7 +81,13 @@ export function recordedPublishedRepair(root, id, text, receiptPath) {
     } else if (claim.adoption_receipt !== undefined || claim.adoption_sha256 !== undefined) {
       return fail('adoption evidence requires its explicit ownership claim kind');
     }
-    if (claim.claim_kind !== ADOPTION_KIND && !hasPriorPublicationAudit(before)
+    if (receipt.prior_publication_context !== undefined) {
+      // Explicit imported lineage is checked even if an audit or root Git
+      // carrier would otherwise suffice. It never extends adoption recovery.
+      if (claim.claim_kind === ADOPTION_KIND || !hasPhysicsContextPriorPublication(root, id, before,
+        receipt.prior_publication_commit, claim.claimed_at, receipt.run, receipt.prior_publication_context))
+        return fail('invalid prior physics mathematics context publication');
+    } else if (claim.claim_kind !== ADOPTION_KIND && !hasPriorPublicationAudit(before)
       && !hasCommittedPriorPublication(root, id, before, receipt.prior_publication_commit, claim.claimed_at))
       return fail('pre-edit carrier lacks an audit or authenticated prior publication');
     if (!/^[a-zA-Z0-9:_-]+$/.test(receipt.ledger_marker ?? '')) return fail('invalid ledger marker');

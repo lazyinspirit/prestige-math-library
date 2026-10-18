@@ -59,7 +59,7 @@ function fixture(t: any, before = auditedBefore) {
     return git('rev-parse', 'HEAD');
   };
   const depcheck = (...args: string[]) => {
-    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'item-hash.mjs', 'published-repair-policy.mjs', 'published-repair-adoption.mjs'])
+    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'item-hash.mjs', 'published-repair-policy.mjs', 'published-repair-adoption.mjs', 'physics-math-context-import.mjs', 'physics-math-context-history.mjs', 'pathway-lib.mjs', 'paths.mjs'])
       copyFileSync(join(REPO, 'tools', file), join(root, 'tools', file));
     return spawnSync(process.execPath, [join(root, 'tools/depcheck.mjs'), '--json', ...args], { encoding: 'utf8' });
   };

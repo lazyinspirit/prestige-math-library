@@ -61,3 +61,86 @@ test('immutable receipt rejects local drift, upstream drift, ownership lies and 
  const r=JSON.parse(readFileSync(join(f.root,receipt)));f.put(receipt,JSON.stringify({...r,owned_paths:[]}));assert.throws(()=>verifyContextReceipt(f.root,receipt),/ownership paths/);f.put(receipt,JSON.stringify(r));
  f.put('physics/items/lem-local.md',source('lem-local',['def-local'])+'upstream changed');assert.throws(()=>verifyContextReceipt(f.root,receipt),/authenticated publication/);
 });
+
+
+// Synthetic local receipts below test provenance mechanics, not mathematics or
+// real precheck/render execution. All production checks remain owner duties.
+import {recordedPublishedRepair} from './published-repair-policy.mjs';
+import {itemHashGuard} from './item-hash.mjs';
+function repairedImportFixture(t) {
+ const f=fixture(t),e=evidence(f);importSelectedContext(f.root,run,selection,e);
+ const before=readFileSync(join(f.root,'items/lem-local.md'),'utf8');
+ const importRaw=readFileSync(join(f.root,receipt));const imported=JSON.parse(importRaw);
+ const row=imported.files.find(row=>row.id==='lem-local');
+ const repairPath=`research/${run}-repair.json`, now=new Date().toISOString();
+ const current=before.replace('---\n\n## Statement',`verification:\n  repair: ${repairPath}\n---\n\n## Statement`).replace('A mathematical test carrier.','A corrected mathematical test carrier.');
+ chmodSync(join(f.root,'items/lem-local.md'),0o644);f.put('items/lem-local.md',current);
+ const pre=itemHashGuard(before),content=itemHashGuard(current);
+ const claim={version:1,run,id:'lem-local',group:'owner-fixture',pre_sha256:pre,claimed_at:now};
+ const ledger=`\nlem-local local fixture repair ${content}\n`;
+ const repair={version:1,kind:'recorded-local-published-repair',run,id:'lem-local',group:claim.group,
+  correction:'Synthetic recorded correction of imported root carrier.',content_sha256:content,
+  before_file:`research/${run}-before.md`,before_raw_sha256:rawHash(before),pre_sha256:pre,
+  recorded_at:now,prior_publication_commit:row.publication_commit,
+  prior_publication_context:{path:receipt,sha256:rawHash(importRaw),source_path:row.source_path},
+  ledger_marker:'fixture-import',ledger_sha256:rawHash(ledger),local_checks:Object.fromEntries(['precheck','rendercheck'].map(tool=>[tool,{
+   checked_at:now,content_sha256:content,exit_code:0,command:['node',`tools/${tool}${tool==='precheck'?'.mts':'.mjs'}`,'items/lem-local.md'],
+   output:tool==='precheck'?'PASS items/lem-local.md\n1 checked, 0 failing':'OK — 1 file(s)'}]))};
+ f.put(repair.before_file,before);f.put(`research/${run}-step3-published-claims.jsonl`,JSON.stringify(claim)+'\n');
+ f.put('research/published-consumer-supplier-ledger.md',`<!-- local-published-repair:fixture-import:begin -->${ledger}<!-- local-published-repair:fixture-import:end -->`);
+ const putRepair=()=>f.put(repairPath,JSON.stringify(repair));putRepair();
+ return {...f,before,current,claim,repair,repairPath,imported,importRaw,row,putRepair,
+  check:()=>recordedPublishedRepair(f.root,'lem-local',readFileSync(join(f.root,'items/lem-local.md'),'utf8'),repairPath),
+  putClaim:()=>f.put(`research/${run}-step3-published-claims.jsonl`,JSON.stringify(claim)+'\n')};
+}
+test('ordinary root repair authenticates original physics publication and preserves immutable import',t=>{
+ const f=repairedImportFixture(t);assert.equal(f.check().ok,true);
+ const verified=verifyContextReceipt(f.root,receipt);assert.ok(verified.paths.includes(f.repairPath));assert.ok(verified.paths.includes(f.repair.before_file));
+ assert.deepEqual(readFileSync(join(f.root,receipt)),f.importRaw);
+ assert.equal(readFileSync(join(f.root,f.row.source_path),'utf8'),f.before);
+ assert.throws(()=>f.git('show',`${f.row.publication_commit}:items/lem-local.md`),'no original root Git carrier');
+ assert.doesNotMatch(f.current,/audited:|verified:/);assert.equal(reachedPhysicsMathContext(f.root,['lem-local']).bindings.length,1);
+ assert.throws(()=>verifyContextReceipt(f.root,receipt,{selectedIds:['lem-local']}),/cannot be a selected/);
+});
+for(const defect of ['missing-reference','reference-hash','reference-path','source-path','source-id','missing-commit','wrong-commit',
+ 'wrong-run','wrong-owner','pre-import-claim','changed-before','changed-physics','changed-import-pin','changed-owned-paths',
+ 'changed-review','changed-acceptance','missing-local-check','stale-check','failed-render','changed-ledger','changed-current','adoption-kind']) {
+ test(`imported root repair rejects ${defect}`,t=>{
+  const f=repairedImportFixture(t),r=f.repair;assert.equal(f.check().ok,true);
+  if(defect==='missing-reference')delete r.prior_publication_context;
+  if(defect==='reference-hash')r.prior_publication_context.sha256='0'.repeat(64);
+  if(defect==='reference-path')r.prior_publication_context.path=`research/${run}-other-import.json`;
+  if(defect==='source-path')r.prior_publication_context.source_path='items/lem-local.md';
+  if(defect==='source-id')r.prior_publication_context.source_path='physics/items/def-local.md';
+  if(defect==='missing-commit')delete r.prior_publication_commit;
+  if(defect==='wrong-commit')r.prior_publication_commit='0'.repeat(40);
+  if(defect==='wrong-run')r.run='other';
+  if(defect==='wrong-owner')r.group='other';
+  if(defect==='pre-import-claim'){f.claim.claimed_at='2000-01-01T00:00:00Z';f.putClaim();}
+  if(defect==='changed-before'){
+   const before=f.before+'fabricated original\n';f.put(r.before_file,before);r.before_raw_sha256=rawHash(before);
+   r.pre_sha256=itemHashGuard(before);f.claim.pre_sha256=r.pre_sha256;f.putClaim();
+  }
+  if(defect==='changed-physics')f.put(f.row.source_path,f.before+'changed physics\n');
+  if(defect==='changed-import-pin'||defect==='changed-owned-paths'){
+   const imported=structuredClone(f.imported);
+   if(defect==='changed-import-pin')imported.files.find(row=>row.id==='lem-local').sha256='0'.repeat(64);
+   else imported.owned_paths=[];
+   const raw=JSON.stringify(imported);f.put(receipt,raw);r.prior_publication_context.sha256=rawHash(raw);
+  }
+  if(defect==='changed-review')f.put(f.imported.review.path,'{}');
+  if(defect==='changed-acceptance')f.put(f.imported.acceptance.path,'{}');
+  if(defect==='missing-local-check')delete r.local_checks.precheck;
+  if(defect==='stale-check')r.local_checks.precheck.content_sha256='0'.repeat(64);
+  if(defect==='failed-render')r.local_checks.rendercheck.exit_code=1;
+  if(defect==='changed-ledger')f.put('research/published-consumer-supplier-ledger.md','changed ledger');
+  if(defect==='changed-current')f.put('items/lem-local.md',f.current+'unsupported current change\n');
+  if(defect==='adoption-kind'){f.claim.claim_kind='owner-adopted-delegated-repair';f.putClaim();}
+  f.putRepair();assert.equal(f.check().ok,false);assert.throws(()=>verifyContextReceipt(f.root,receipt));
+ });
+}
+test('imported publication must remain an ancestor, not merely an available Git object',t=>{
+ const f=repairedImportFixture(t);f.git('checkout','--orphan','unrelated');
+ f.git('rm','-rf','--cached','.');f.put('unrelated.txt','Unrelated branch\n');f.git('add','unrelated.txt');f.git('commit','-qm','Unrelated root');
+ assert.equal(f.check().ok,false);assert.throws(()=>verifyContextReceipt(f.root,receipt));
+});

@@ -13,7 +13,7 @@ function fixture(t) {
   const repo = mkdtempSync(join(tmpdir(), 'frontier-gates-test-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   for (const dir of ['tools', 'items', 'research', 'library/test']) mkdirSync(join(repo, dir), { recursive: true });
-  for (const file of ['extcheck.mjs', 'content-policy-lib.mjs', 'depsource.mjs', 'pathcheck.mjs', 'pathway-lib.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'run-manifest-pages.mjs', 'depcheck.mjs', 'facts-block.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs', 'item-hash.mjs'])
+  for (const file of ['extcheck.mjs', 'content-policy-lib.mjs', 'depsource.mjs', 'pathcheck.mjs', 'pathway-lib.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'run-manifest-pages.mjs', 'depcheck.mjs', 'facts-block.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs','physics-math-context-history.mjs','physics-math-context-import.mjs', 'item-hash.mjs'])
     copyFileSync(join(tools, file), join(repo, 'tools', file));
   const write = (path, text) => writeFileSync(join(repo, path), text);
   const item = (id, deps = '[]', extra = '') => `---\nid: ${id}\nkind: theorem\nstatus: draft\ndeps: ${deps}\n${extra}---\n`;
