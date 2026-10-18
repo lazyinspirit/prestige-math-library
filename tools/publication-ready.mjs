@@ -17,6 +17,7 @@ import { REPO } from './paths.mjs';
 import { runContentHash, runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
 import { scopedReadinessTree } from './step6-scoped-tree.mjs';
 import { step6OwnedInputs } from './step6-owned-inputs.mjs';
+import { unchangedPublishedPageRelocation } from './publication-baseline.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : null; };
@@ -64,7 +65,8 @@ const publishedBaseline = typeof baseline === 'string' && /^[a-f0-9]{40,64}$/.te
   && git('merge-base', '--is-ancestor', baseline, 'HEAD').status === 0 ? baseline : null;
 if (scope) {
   for (const row of [...scope.pages, ...scope.items]) {
-    const { frontmatter } = splitFrontmatter(readFileSync(join(root, row.file), 'utf8'));
+    const current = readFileSync(join(root, row.file));
+    const { frontmatter } = splitFrontmatter(current.toString('utf8'));
     // YAML permits either a plain or quoted scalar here. Authoring templates
     // use both forms, so compare the decoded scalar rather than its spelling.
     const status = frontmatter.match(/^status:\s*(\S+)\s*$/m)?.[1]
@@ -78,6 +80,8 @@ if (scope) {
         if (identity === row.id && /^status:\s*published\s*$/m.test(fm)) continue;
       }
     }
+    if (status === 'published' && publishedBaseline
+      && unchangedPublishedPageRelocation(root, publishedBaseline, row, current)) continue;
     if (status !== 'draft') blockers.push(`${row.file}: expected status:draft pending owner approval, found ${status ?? 'missing'}`);
   }
 }

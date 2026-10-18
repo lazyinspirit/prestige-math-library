@@ -298,3 +298,15 @@ to each base separately and preserves every original base byte, its ordering and
 the unchanged working file. Preparation, cutover, scope validation and all
 commit residual checks use the same explicit parser mode. V1/default paragraph
 ownership and its unique-record retention rules are unchanged.
+
+
+Publication readiness retains an already published selected page after an exact
+category relocation when its current path is genuinely absent at the pinned
+ancestor `baseline_commit`. The baseline must contain exactly one regular page
+blob at `library/<category>/<same-page-id>.md`, with matching frontmatter page
+identity and published status, and its entire bytes must equal the current page.
+A baseline draft or existing current path, duplicate original basename, changed
+body or metadata, nonancestor commit, or item path does not qualify. This narrow
+historical identity check neither publishes nor adds audit/review credit; all
+current scope, readiness, preparation and gate requirements still apply. Existing
+same-path published reuse and draft-default behavior remain unchanged.
