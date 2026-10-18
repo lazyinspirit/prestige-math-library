@@ -5,7 +5,8 @@ import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {createHash} from 'node:crypto';
 import {freezeFrontier} from './step5-rounds.mjs';
-import {itemHashGuard} from './item-hash.mjs';
+import {spawnSync} from 'node:child_process';
+import {itemHashGuard,itemHashJudge,shortHash} from './item-hash.mjs';
 import {statementHash} from './step5-statement.mjs';
 import {MODELS} from './models.mjs';
 import {recordedPublishedRepair} from './published-repair-policy.mjs';
@@ -307,4 +308,24 @@ test('real verifyWave keeps actual current native consumer item and supplier con
  const item={id:consumer,guard_sha256:itemHashGuard(f.draft),item_sha256:'a'.repeat(64),context_sha256:'b'.repeat(64)};
  writeCurrentCompatibilityCertificate(f,[item]);
  assert.throws(()=>verifyWave(f.root,run,{contextHasher:()=>new Map([[consumer,{item_sha256:item.item_sha256,context_sha256:'c'.repeat(64)}]])}),new RegExp('stale Step 5 certification context '+consumer));
+});
+
+function ordinaryBaselineGuardFixture(t){
+ const f=fixture(t);originalOrdinaryCertificate(f);const {certificate}=writeCurrentCompatibilityCertificate(f);
+ const threshold=join(f.root,dir,'threshold-1.json');f.put(join(dir,'threshold-1.json'),{belowThreshold:true,fatalCount:0,errors:[]});certificate.latest_adjudication_round=1;certificate.evidence[threshold]=hash(readFileSync(threshold,'utf8'));delete certificate.sha256;certificate.sha256=hash(certificate);f.put(join(dir,'certification.json'),certificate);
+ f.put('guard-touches.json',{snapshots:[{label:'pre-step5',hashes:Object.fromEntries(Object.entries(f.baseline).map(([id,h])=>[id,shortHash(h)]))}]});f.put('guard-scope.json',{run,by_item:Object.fromEntries(f.frontier.ids.map(id=>[id,'fixture']))});
+ const guard=()=>spawnSync(process.execPath,[new URL('./step5-guard.mjs',import.meta.url).pathname,'--touches',join(f.root,'guard-touches.json'),'--baseline','pre-step5','--scope',join(f.root,'guard-scope.json'),'--items-dir',join(f.root,'items'),'--workflow-root',f.root,'--judge-ledger',join(f.root,'unused-judge.jsonl'),'--adjudications',join(f.root,'unused-adjudications.jsonl'),'--json'],{encoding:'utf8',maxBuffer:8*1024*1024});return {...f,certificate,guard};
+}
+test('real step5 guard honors only authenticated historical ordinary baseline exclusion with zero native credit',t=>{
+ const f=ordinaryBaselineGuardFixture(t),r=f.guard();assert.equal(r.status,0,r.stdout+r.stderr);const out=JSON.parse(r.stdout);assert.equal(out.summary.historical_ordinary_published_exclusions,1);assert.equal(out.summary.licensed_by_centralized_certification,0);assert.equal(out.summary.frontier_changed,1);assert.deepEqual(out.errors,[]);
+});
+for(const mode of ['source','status','receipt','forged-id','missing-record','unlicensed-published','deletion'])test(`real step5 guard rejects historical-exclusion ${mode} misuse`,t=>{
+ const f=ordinaryBaselineGuardFixture(t);
+ if(mode==='source')f.put(`items/${id}.md`,f.after+'\nA later real proof edit.\n');
+ if(mode==='status')f.put(`items/${id}.md`,f.after.replace('status: published','status: draft'));
+ if(mode==='receipt')f.put(f.currentPath,{...f.successor,correction:'Mutated after original frozen evidence.'});
+ if(mode==='forged-id'||mode==='missing-record'){if(mode==='forged-id')f.certificate.ordinary_published_baseline_exclusions.entries[0].id=consumer;else delete f.certificate.ordinary_published_baseline_exclusions;delete f.certificate.sha256;f.certificate.sha256=hash(f.certificate);f.put(join(dir,'certification.json'),f.certificate);}
+ if(mode==='unlicensed-published')f.put(`items/${consumer}.md`,f.draft.replace('status: draft','status: published'));
+ if(mode==='deletion')rmSync(join(f.root,`items/${id}.md`));
+ const r=f.guard();assert.equal(r.status,1,r.stdout+r.stderr);assert.ok(JSON.parse(r.stdout).errors.length>0);
 });

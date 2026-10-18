@@ -41,6 +41,7 @@ import { loadStep5JudgeEvidence, rejectionKey } from './step5-evidence.mjs';
 import { permittedNewLemmas } from './step5-new-lemmas.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
+import { verifyInitialPublishedBaselineExclusions } from './step5-initial-published-maintenance.mjs';
 import { checkWorkflow, workflowDir } from './step5-workflow.mjs';
 import { validateFrontier } from './step5-rounds.mjs';
 
@@ -139,7 +140,7 @@ if (existsSync(workflowDirectory)) {
   const deleted = Object.keys(baseline.hashes ?? {}).filter(id => !Object.hasOwn(now, id));
   const excluded = { changed: [], created: [], deleted: [], reason: 'Outside frozen frontier: observed, excluded from Step-5 certification, not passed' };
   let scopedChanged = [], scopedCreated = [], scopedDeleted = [];
-  let licensed = 0;
+  let licensed = 0, historicalOrdinary = 0;
   try {
     const frontier = validateFrontier(JSON.parse(readFileSync(join(workflowDirectory, 'frontier.json'), 'utf8')));
     if (frontier.run !== workflowScope.run
@@ -183,8 +184,14 @@ if (existsSync(workflowDirectory)) {
     if (JSON.stringify(Object.keys(original).sort()) !== JSON.stringify(Object.keys(baseline.hashes ?? {}).sort())
       || Object.entries(original).some(([id, hash]) => !/^[a-f0-9]{64}$/.test(hash) || shortHash(hash) !== baseline.hashes[id]))
       throw Error('workflow baseline does not exactly match the original touchlog baseline');
+    // The same exact historical contract used by verifyWave; never a blanket
+    // published skip, a native review, or a license for later source changes.
+    verifyInitialPublishedBaselineExclusions(workflowRoot,workflowScope.run,certificate,{current:true});
+    const ordinaryPublished = new Map((certificate.ordinary_published_baseline_exclusions?.entries??[]).map(row=>[row.id,row]));
     const certified = new Map(certificate.items.map(row => [row.id, row]));
+
     for (const id of scopedChanged) {
+      if (shortHash(ordinaryPublished.get(id)?.guard_sha256 ?? '') === now[id]) { historicalOrdinary++; continue; }
       if (shortHash(certified.get(id)?.guard_sha256 ?? '') !== now[id])
         error('step5-certification-unlicensed', `${id}: changed item lacks an exact current centralized certification`, id);
       else licensed++;
@@ -200,6 +207,7 @@ if (existsSync(workflowDirectory)) {
   const summary = { baseline: baselineLabel, baseline_at: baseline.at ?? null,
     compared_against: againstLabel ?? 'working tree', items_at_baseline: Object.keys(baseline.hashes ?? {}).length,
     changed: changed.length, licensed_by_centralized_certification: licensed,
+    historical_ordinary_published_exclusions: historicalOrdinary,
     frontier_changed: scopedChanged.length, frontier_created: scopedCreated.length,
     protected_deleted: scopedDeleted.length,
     excluded_outside: excluded.changed.length + excluded.created.length + excluded.deleted.length,
@@ -208,10 +216,11 @@ if (existsSync(workflowDirectory)) {
   else {
     console.log(`step5-guard: baseline "${baselineLabel}" vs ${summary.compared_against}`);
     console.log(`  ${summary.items_at_baseline} item(s) at baseline; ${changed.length} changed, ${created.length} created, ${deleted.length} deleted`);
-    console.log(`  ${licensed}/${scopedChanged.length + scopedCreated.length} frontier changed/created item(s) licensed by centralized Step-5 certification`);
+    console.log(`  ${licensed}/${scopedChanged.length + scopedCreated.length - historicalOrdinary} current native frontier changed/created item(s) licensed by centralized Step-5 certification`);
+    if(historicalOrdinary)console.log(`  ${historicalOrdinary} exact historical ordinary-published baseline change(s); no native review/audit credit`);
     console.log(`  Outside observations excluded, not passed: ${JSON.stringify(excluded)}`);
     for (const entry of errors) console.log(`  ERROR ${entry.code}: ${entry.message}`);
-    console.log(errors.length ? `FAIL — ${errors.length} error(s)` : 'OK — every frontier Step-5 edit has exact centralized certification');
+    console.log(errors.length ? `FAIL — ${errors.length} error(s)` : 'OK — frontier edits have exact certification or authenticated historical ordinary maintenance');
   }
   process.exit(errors.length ? 1 : 0);
 }

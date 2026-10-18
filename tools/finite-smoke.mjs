@@ -34,27 +34,28 @@ if (argv.includes('--self-test')) {
   else {
     for (const outcome of outcomes) console.log(`${outcome.ok ? 'PASS' : 'FAIL'} ${outcome.name}: ${outcome.summary}`);
   }
-  process.exit(failures.length ? 1 : 0);
+  process.exitCode = failures.length ? 1 : 0;
 }
 
+const errors = [], outcomes = [];
+let document, ids = [];
+if(!argv.includes('--self-test')) runContract();
+function runContract(){
 const contractPath = argv.find((arg) => !arg.startsWith('--') && arg !== option('--items'));
 if (!contractPath) usage();
 
-const errors = [];
-const outcomes = [];
-let document;
 try {
   document = JSON.parse(readFileSync(resolvePath(contractPath), 'utf8'));
 } catch (cause) {
   errors.push({ code: 'contract-read', message: `${contractPath}: ${cause.message}` });
-  finish();
+  return finish();
 }
 if (document?.version !== 1 || !Array.isArray(document?.scope) || typeof document?.contracts !== 'object') {
   errors.push({ code: 'contract-shape', message: 'expected a version-1 proof contract with scope and contracts' });
-  finish();
+  return finish();
 }
 
-const ids = requested ? document.scope.filter((id) => requested.includes(id)) : document.scope;
+ids = requested ? document.scope.filter((id) => requested.includes(id)) : document.scope;
 for (const id of requested ?? []) if (!document.scope.includes(id)) errors.push({ code: 'selection-outside-scope', message: `${id} is outside the contract scope`, id });
 
 for (const id of ids) {
@@ -62,6 +63,8 @@ for (const id of ids) {
   for (const smoke of contract?.finite_smoke ?? []) runSmoke(id, smoke);
 }
 finish();
+
+}
 
 function runSmoke(id, smoke) {
   if (!smoke || typeof smoke !== 'object' || Array.isArray(smoke)) {
@@ -1707,5 +1710,6 @@ function finish() {
       ? ids.filter((id) => (document.contracts?.[id]?.finite_smoke ?? []).length).length : 0;
     console.log(`finite-smoke: ${errors.length} error(s), ${outcomes.length} check(s) over ${withChecks}/${scoped} item(s) carrying obligations`);
   }
-  process.exit(errors.length ? 1 : 0);
+  // Preserve early error returns while allowing all JSON bytes to flush.
+  process.exitCode = errors.length ? 1 : 0;
 }

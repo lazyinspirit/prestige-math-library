@@ -277,4 +277,5 @@ if (asJson) {
   console.log('\nEvery line above is a candidate for a human read, not a verdict.');
 }
 
-process.exit(failOnMissingQuote && missingQuotes.length ? 1 : 0);
+// Let the complete piped report drain; strict exit semantics remain unchanged.
+process.exitCode = failOnMissingQuote && missingQuotes.length ? 1 : 0;

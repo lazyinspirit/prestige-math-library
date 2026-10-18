@@ -587,4 +587,5 @@ if (asJson) {
   }
 }
 
-process.exit(errors.length ? 1 : 0);
+// Let the complete piped report drain; strict exit semantics remain unchanged.
+process.exitCode = errors.length ? 1 : 0;
