@@ -1,0 +1,931 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-quasi-bialgebra-modules-form-a-monoidal-category",
+    "lem-weak-bialgebra-source-and-target-bases",
+    "prop-weak-bialgebra-module-tensor-product-is-delta-one-image",
+    "cex-a-quasi-bialgebra-need-not-be-quasi-hopf",
+    "ex-quasi-hopf-algebra-from-the-nontrivial-3-cocycle-on-c2",
+    "ex-two-object-discrete-groupoid-is-a-weak-hopf-algebra"
+  ],
+  "contracts": {
+    "thm-quasi-bialgebra-modules-form-a-monoidal-category": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-quasi-bialgebra-and-quasi-hopf-algebra",
+          "source_section": "Definition",
+          "quote": "Fix a field $k$ and use algebraic tensor products over $k$ as in [[def-hh-scalar-and-tensor-conventions]]. A **quasi-bialgebra** is an associative unital $k$-algebra $H$ (in the sense of [[def-algebra-over-a-commutative-ring]]) with unital algebra maps $\\Delta:H\\to H\\otimes H$ and $\\varepsilon:H\\to k$, and an invertible element $\\Phi\\in H^{\\otimes 3}$, satisfying the counit identities $(\\varepsilon\\otimes\\mathrm{id})\\Delta=\\mathrm{id}=(\\mathrm{id}\\otimes\\varepsilon)\\Delta$, the quasi-coassociativity identity\n$$(\\mathrm{id}\\otimes\\Delta)\\Delta(h)=\\Phi\\,(\\Delta\\otimes\\mathrm{id})\\Delta(h)\\,\\Phi^{-1}\\qquad(h\\in H),$$\nthe pentagon identity\n$$(1\\otimes\\Phi)(\\mathrm{id}\\otimes\\Delta\\otimes\\mathrm{id})(\\Phi)(\\Phi\\otimes1)=(\\mathrm{id}\\otimes\\mathrm{id}\\otimes\\Delta)(\\Phi)(\\Delta\\otimes\\mathrm{id}\\otimes\\mathrm{id})(\\Phi),$$\nand the normalization $(\\mathrm{id}\\otimes\\varepsilon\\otimes\\mathrm{id})(\\Phi)=1\\otimes1$. Here $\\Phi$ is the **reassociator**. With this convention, $\\Phi$ acts from the left-parenthesized tensor product to the right-parenthesized one. When $\\Phi=1$, these conditions give the ordinary bialgebra axioms of [[def-hh-bialgebra-and-bialgebra-map]].\n\nA **quasi-antipode** for a quasi-bialgebra is a triple $(S,\\alpha,\\beta)$ where $S:H\\to H$ is a unital algebra antihomomorphism and $\\alpha,\\beta\\in H$ satisfy\n$$\\sum S(h_{(1)})\\alpha h_{(2)}=\\varepsilon(h)\\alpha,\\qquad \\sum h_{(1)}\\beta S(h_{(2)})=\\varepsilon(h)\\beta,$$\n$$\\sum X^1\\beta S(X^2)\\alpha X^3=1,\\qquad \\sum S(x^1)\\alpha x^2\\beta S(x^3)=1,$$\nwhere $\\Delta(h)=\\sum h_{(1)}\\otimes h_{(2)}$, $\\Phi=\\sum X^1\\otimes X^2\\otimes X^3$, and $\\Phi^{-1}=\\sum x^1\\otimes x^2\\otimes x^3$. A **quasi-Hopf algebra** is a quasi-bialgebra with a quasi-antipode whose map $S$ is bijective. A quasi-bialgebra need not have a quasi-antipode, and a quasi-antipode is additional data rather than part of the quasi-bialgebra structure.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-left-and-right-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring. A **left $R$-module** is an abelian group $(M,+,0_M)$ with a\nscalar action $R\\times M\\to M$, $(r,m)\\mapsto rm$, satisfying\n\n$$r(m+n)=rm+rn,\\quad (r+s)m=rm+sm,\\quad (rs)m=r(sm),\\quad 1_Rm=m.$$\n\nA **right $R$-module** has an action $M\\times R\\to M$, $(m,r)\\mapsto mr$, with\nthe analogous right-handed axioms. Unless \u201cright\u201d is stated, **module** means a\nunital left module.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hh-scalar-and-tensor-conventions",
+          "source_section": "Definition",
+          "quote": "Fix the following conventions, used on this page and by the later Hopf and Hecke pages.\n\n- $k$ is a field ([[def-field]]) and every vector space is a $k$-vector space ([[def-vector-space]]); $\\otimes$ means $\\otimes_k$.\n- $V\\otimes W$ is the tensor product of [[def-tensor-product-of-modules-by-generators-and-relations]], with the $k$-vector-space structure of [[thm-commutative-ring-module-structure-on-a-tensor-product]] and unit and universal property as in [[thm-universal-property-of-module-tensor-products]]. Every element of $V\\otimes W$ is a finite sum of elementary tensors $v\\otimes w$.\n- Tensor powers are left-associated: $V^{\\otimes 0}:=k$, $V^{\\otimes 1}:=V$ and $V^{\\otimes n}:=(V^{\\otimes(n-1)})\\otimes V$ for $n\\ge2$. The empty tensor $k$ is identified with the tensor unit through the isomorphisms of [[thm-unit-isomorphisms-for-module-tensor-products]].\n- For an algebra $A$ over a commutative ring ([[def-algebra-over-a-commutative-ring]]) the opposite algebra $A^{\\mathrm{op}}$ has the same underlying set and structure map and product $a\\cdot b:=ba$ ([[def-opposite-ring]]).\n- Finite sums $\\sum_{i\\in I}x_i$ follow [[def-finite-sum-in-a-commutative-monoid]]; an empty sum is $0$.\n\nParentheses in iterated tensor products may be dropped only after [[lem-hh-tensor-coherence-on-elementary-tensors]] has been proved.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-universal-property-of-module-tensor-products",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a unital ring, $M$ a right $R$-module, $N$ a left $R$-module, and\n\n$$\\tau:M\\times N\\longrightarrow M\\otimes_RN,\\qquad \\tau(m,n)=m\\otimes n.$$\n\nThe map $\\tau$ is balanced ([[def-balanced-and-bilinear-maps]]). For every abelian group $A$ and every balanced map $b:M\\times N\\to A$, there is a unique group homomorphism\n\n$$\\overline b:M\\otimes_RN\\longrightarrow A$$\n\nsuch that $\\overline b(m\\otimes n)=b(m,n)$ for all $m,n$. Consequently composition with $\\tau$ is a bijection\n\n$$\\operatorname{Hom}_{\\mathbf{Ab}}(M\\otimes_RN,A)\\cong\\operatorname{Bal}_R(M,N;A).$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $L,M,N$ be $R$-modules. There are natural $R$-module isomorphisms\n\n$$\\sigma_{M,N}:M\\otimes_RN\\longrightarrow N\\otimes_RM,\\qquad \\sigma_{M,N}(m\\otimes n)=n\\otimes m,$$\n\nand\n\n$$\\alpha_{L,M,N}:(L\\otimes_RM)\\otimes_RN\\longrightarrow L\\otimes_R(M\\otimes_RN),\\qquad \\alpha((l\\otimes m)\\otimes n)=l\\otimes(m\\otimes n).$$\n\nMoreover $\\sigma_{N,M}\\sigma_{M,N}$ is the identity.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **monoidal category** is a category $\\mathcal C$ equipped with:\n\n- a bifunctor $\\otimes:\\mathcal C\\times\\mathcal C\\to\\mathcal C$\n  ([[def-product-category]], [[def-functor-and-contravariant-functor]]);\n- an object $\\mathbf 1$ of $\\mathcal C$;\n- natural isomorphisms ([[def-natural-isomorphism]])\n  $$\\alpha_{X,Y,Z}:((X\\otimes Y)\\otimes Z)\\longrightarrow X\\otimes(Y\\otimes Z),$$\n  $$\\lambda_X:(\\mathbf 1\\otimes X)\\longrightarrow X,\\qquad \\rho_X:(X\\otimes\\mathbf 1)\\longrightarrow X,$$\n\nsuch that the following two equations hold for all objects\n$W,X,Y,Z\\in\\mathcal C$.\n\nThe **pentagon axiom** is\n\n$$\\alpha_{W,X,Y\\otimes Z}\\circ\\alpha_{W\\otimes X,Y,Z}=(1_W\\otimes\\alpha_{X,Y,Z})\\circ\\alpha_{W,X\\otimes Y,Z}\\circ(\\alpha_{W,X,Y}\\otimes1_Z).$$\n\nThe **triangle axiom** is\n\n$$(1_X\\otimes\\lambda_Y)\\circ\\alpha_{X,\\mathbf 1,Y}=\\rho_X\\otimes1_Y.$$\n\nThis page imposes no further axiom. In particular, the equality\n$\\lambda_{\\mathbf 1}=\\rho_{\\mathbf 1}$ is not built into the definition; it is\nderived later on this page.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For left $H$-modules $V,W$, the formula in the Statement is a unital left action: its unit acts as $\\Delta(1_H)=1_H\\otimes1_H$, and on every elementary tensor the two sides of the module associativity law are respectively $\\Delta(h)\\Delta(g)$ and $\\Delta(hg)$ acting on that tensor. They agree because $\\Delta$ is an algebra map. The tensor maps induced by $H$-linear maps are $H$-linear by the same formula on elementary tensors, and preserve identities and compositions.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The map $a_{U,V,W}$ is invertible because $\\Phi$ is invertible; its inverse is the canonical rebracketing followed by $\\Phi^{-1}$. It is $H$-linear since, on the underlying triple tensor,\n$$\\Phi(\\Delta\\otimes\\mathrm{id})\\Delta(h)=(\\mathrm{id}\\otimes\\Delta)\\Delta(h)\\Phi,$$\nwhich is the quasi-coassociativity identity in [F1] multiplied on the right by $\\Phi$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "The associator is natural: for module maps $f,g,j$, both composites send an elementary tensor to the same tensor with $f,g,j$ applied to the three components, because these maps commute with each $H$-action. The unit object $k_\\varepsilon$ is a left module since $\\varepsilon$ is a unital algebra map. The canonical left and right unit maps are $H$-linear by the two counit equations: their values on $c\\otimes v$ and $v\\otimes c$ reduce respectively to $\\sum\\varepsilon(h_{(1)})c\\,h_{(2)}v=c\\,hv$ and $\\sum h_{(1)}v\\,\\varepsilon(h_{(2)})c=c\\,hv$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In the pentagon diagram, the short composite acts on $U\\otimes V\\otimes W\\otimes X$ by $(\\mathrm{id}\\otimes\\mathrm{id}\\otimes\\Delta)(\\Phi)(\\Delta\\otimes\\mathrm{id}\\otimes\\mathrm{id})(\\Phi)$. The long composite acts by $(1\\otimes\\Phi)(\\mathrm{id}\\otimes\\Delta\\otimes\\mathrm{id})(\\Phi)(\\Phi\\otimes1)$. These are equal by [F1], so the pentagon commutes as an equality of $H$-linear maps.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "In the triangle equation, $a_{U,k_\\varepsilon,V}$ acts by $(\\mathrm{id}\\otimes\\varepsilon\\otimes\\mathrm{id})(\\Phi)=1\\otimes1$, so both composites are the same canonical map $U\\otimes V\\to U\\otimes V$. Thus the triangle commutes.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Steps 1.1\u20132.2 provide the bifunctor, unit, natural isomorphisms, pentagon, and triangle required by [F6]; hence $H\\text{-}\\mathrm{Mod}$ is monoidal with the stated convention.",
+          "inputs": [
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input family or empty tensor power occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 are identities on elementary tensors and remain valid for a zero module."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.2 check the unit object k_epsilon and the canonical unit constraints."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 specialize to Phi=1, the strict associator, and the ordinary triangle."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use arbitrary elementary tensors and make no basis selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts monoidal structure, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts monoidal structure, not a biconditional."
+        }
+      ]
+    },
+    "lem-weak-bialgebra-source-and-target-bases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-weak-bialgebra-and-weak-hopf-algebra",
+          "source_section": "Definition",
+          "quote": "Fix a field $k$, an associative unital $k$-algebra $H$ (as in [[def-algebra-over-a-commutative-ring]]), and a coassociative counital coalgebra structure $(\\Delta,\\varepsilon)$ as in [[def-hh-coalgebra-and-coalgebra-map]]. Write $\\Delta(h)=\\sum h_{(1)}\\otimes h_{(2)}$ and suppress the finite Sweedler sums. A **weak bialgebra** is these structures with multiplicative coproduct $\\Delta(ab)=\\Delta(a)\\Delta(b)$, not necessarily a unital algebra map, and with the following weak unit and weak counit identities:\n$$ (\\Delta\\otimes\\mathrm{id})\\Delta(1)=(\\Delta(1)\\otimes1)(1\\otimes\\Delta(1))=(1\\otimes\\Delta(1))(\\Delta(1)\\otimes1), $$\n$$ \\varepsilon(abc)=\\sum\\varepsilon(ab_{(1)})\\varepsilon(b_{(2)}c)=\\sum\\varepsilon(ab_{(2)})\\varepsilon(b_{(1)}c)\\qquad(a,b,c\\in H). $$\nIn general $\\Delta(1)\\ne1\\otimes1$ and $\\varepsilon$ is not multiplicative.\n\nFor $\\Delta(1)=\\sum1_{(1)}\\otimes1_{(2)}$, define the **target** and **source counital maps**\n$$ \\varepsilon_t(h)=\\sum\\varepsilon(1_{(1)}h)1_{(2)},\\qquad \\varepsilon_s(h)=\\sum1_{(1)}\\varepsilon(h1_{(2)}). $$\nWrite $H_t=\\varepsilon_t(H)$ and $H_s=\\varepsilon_s(H)$. The source-and-target-bases lemma below proves these ranges are commuting unital subalgebras. We also use the variant\n$$ \\varepsilon_s'(h)=\\sum1_{(1)}\\varepsilon(1_{(2)}h). $$\nThe same lemma proves that its restriction to $H_t$ is the inverse anti-isomorphism to $\\varepsilon_t|_{H_s}$.\n\nA **weak Hopf algebra** is a weak bialgebra with a linear map $S:H\\to H$ satisfying\n$$ \\sum h_{(1)}S(h_{(2)})=\\varepsilon_t(h),\\qquad \\sum S(h_{(1)})h_{(2)}=\\varepsilon_s(h),\\qquad \\sum S(h_{(1)})h_{(2)}S(h_{(3)})=S(h). $$\nNo bijectivity of $S$ is imposed in this definition. The module tensor product below uses the source-target maps and does not require an antipode.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "3.2",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Taking the middle argument to be $1$ in the weak counit identity gives $\\varepsilon(gh)=\\sum\\varepsilon(g1_{(2)})\\varepsilon(1_{(1)}h)=\\varepsilon(g\\varepsilon_t(h))$. Substitution into the definition of $\\varepsilon_t$ yields $\\varepsilon_t(gh)=\\varepsilon_t(g\\varepsilon_t(h))$. Coalgebra counitality gives $\\varepsilon_t(1)=1$; setting $g=1$ in the displayed identity gives $\\varepsilon_t^2=\\varepsilon_t$. The corresponding identities for $\\varepsilon_s$ follow by reversing the tensor factors.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The weak unit identity and multiplicativity of $\\Delta$ give, for every $h\\in H$, $\\Delta(\\varepsilon_t(h))=\\varepsilon_t(h)1_{(1)}\\otimes1_{(2)}=1_{(1)}\\varepsilon_t(h)\\otimes1_{(2)}$; reversing tensor factors gives $\\Delta(\\varepsilon_s(h))=1_{(1)}\\otimes\\varepsilon_s(h)1_{(2)}=1_{(1)}\\otimes1_{(2)}\\varepsilon_s(h)$. In particular $\\Delta(1)\\in H_s\\otimes H_t$, and for $x\\in H_t$ the same identities yield $\\Delta(x)=x1_{(1)}\\otimes1_{(2)}=1_{(1)}x\\otimes1_{(2)}$. The counital identities imply $x\\varepsilon_t(h)=\\varepsilon_t(xh)$ for $x\\in H_t$; hence, if $x=\\varepsilon_t(a)$ and $y=\\varepsilon_t(b)$, then $xy=\\varepsilon_t(xb)\\in H_t$. Also $1\\in H_t$. The factor-reversed argument proves that $H_s$ is a unital subalgebra.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Expanding the counital maps and applying the two equal weak-unit products shows $\\varepsilon_t(g)\\varepsilon_s(h)=\\varepsilon_s(h)\\varepsilon_t(g)$ for all $g,h\\in H$. The same identities give $\\varepsilon_t(yh)=\\varepsilon_t(y\\varepsilon_t(h))=\\varepsilon_t(\\varepsilon_t(h)y)=\\varepsilon_t(h)\\varepsilon_t(y)$ for $y\\in H_s$. Thus $\\varepsilon_t|_{H_s}$ reverses products. Substituting the formulas for $\\varepsilon_s'$ and $\\varepsilon_t$ into the weak-unit and weak-counit identities gives $\\varepsilon_t\\varepsilon_s'(z)=z$ for $z\\in H_t$ and $\\varepsilon_s'\\varepsilon_t(y)=y$ for $y\\in H_s$, so the restrictions are inverse anti-isomorphisms. Finally, for $x,z\\in H_t$, $z$ commutes with $\\varepsilon_s'(x)\\in H_s$, and step 2.1 gives $\\varepsilon_t(\\varepsilon_s'(x)z)=\\varepsilon_t(z\\varepsilon_s'(x))=z\\varepsilon_t(\\varepsilon_s'(x))=zx$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "First prove sum epsilon_t(y1)y2=y directly from Delta(1)Delta(y)=Delta(y) and coalgebra counitality. Then Delta(hx)=sum h1 x tensor h2 for x in H_t gives the left unit identity.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Put $e=(\\varepsilon_t\\otimes\\mathrm{id})\\Delta(1)$. The identities in step 2.1 put both legs in $H_t$. Substitution of $e^1=\\varepsilon(1'_{(1)}1_{(1)})1'_{(2)}$ and $e^2=1_{(2)}$ into the counit formulas gives $\\sum\\varepsilon(xe^1)e^2=x$ and $\\sum e^1\\varepsilon(e^2x)=x$ for $x\\in H_t$; the weak-unit and weak-counit identities give $\\sum e^1e^2=1$. The first reconstruction identity makes $(y,x)\\mapsto\\varepsilon(yx)$ nondegenerate: if $\\varepsilon(yx)=0$ for every $y\\in H_t$, then $x=\\sum e^1\\varepsilon(e^2x)=0$. For $x,y\\in H_t$, both contractions $(\\varepsilon(y\\,\\cdot)\\otimes\\mathrm{id})(xe)$ and $(\\varepsilon(y\\,\\cdot)\\otimes\\mathrm{id})(ex)$ equal $yx$ by the first reconstruction identity, so nondegeneracy gives $xe=ex$. Finally $\\Delta(1)\\in H_s\\otimes H_t$ and $\\varepsilon_s'\\varepsilon_t|_{H_s}=\\mathrm{id}_{H_s}$ give $\\Delta(1)=\\sum\\varepsilon_s'(e^1)\\otimes e^2$.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Use Delta(hq)=sum h1 tensor h2 q for q in H_s, coalgebra counitality and the weak counit with middle1 to derive sum h1 epsilon(h2 x)=h epsilon_s-prime(x). Expand epsilon_s-prime epsilon_t=epsilon_s-prime and Delta(1)Delta(h)=Delta(h) to prove the correctly ordered right-unit identity with epsilon_s-prime preceding h1.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty family or tensor power occurs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no numerical parameter or zero case in the structural hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 compute epsilon_t(1)=1 and the Frobenius-system product mu(e)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 specializes the Frobenius base element to the ordinary bialgebra case e=1 tensor 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no endpoint or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 5.1 use only finite Sweedler sums; no choice principle occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts identities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts identities, not a biconditional."
+        }
+      ]
+    },
+    "prop-weak-bialgebra-module-tensor-product-is-delta-one-image": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-weak-bialgebra-and-weak-hopf-algebra",
+          "source_section": "Definition",
+          "quote": "Fix a field $k$, an associative unital $k$-algebra $H$ (as in [[def-algebra-over-a-commutative-ring]]), and a coassociative counital coalgebra structure $(\\Delta,\\varepsilon)$ as in [[def-hh-coalgebra-and-coalgebra-map]]. Write $\\Delta(h)=\\sum h_{(1)}\\otimes h_{(2)}$ and suppress the finite Sweedler sums. A **weak bialgebra** is these structures with multiplicative coproduct $\\Delta(ab)=\\Delta(a)\\Delta(b)$, not necessarily a unital algebra map, and with the following weak unit and weak counit identities:\n$$ (\\Delta\\otimes\\mathrm{id})\\Delta(1)=(\\Delta(1)\\otimes1)(1\\otimes\\Delta(1))=(1\\otimes\\Delta(1))(\\Delta(1)\\otimes1), $$\n$$ \\varepsilon(abc)=\\sum\\varepsilon(ab_{(1)})\\varepsilon(b_{(2)}c)=\\sum\\varepsilon(ab_{(2)})\\varepsilon(b_{(1)}c)\\qquad(a,b,c\\in H). $$\nIn general $\\Delta(1)\\ne1\\otimes1$ and $\\varepsilon$ is not multiplicative.\n\nFor $\\Delta(1)=\\sum1_{(1)}\\otimes1_{(2)}$, define the **target** and **source counital maps**\n$$ \\varepsilon_t(h)=\\sum\\varepsilon(1_{(1)}h)1_{(2)},\\qquad \\varepsilon_s(h)=\\sum1_{(1)}\\varepsilon(h1_{(2)}). $$\nWrite $H_t=\\varepsilon_t(H)$ and $H_s=\\varepsilon_s(H)$. The source-and-target-bases lemma below proves these ranges are commuting unital subalgebras. We also use the variant\n$$ \\varepsilon_s'(h)=\\sum1_{(1)}\\varepsilon(1_{(2)}h). $$\nThe same lemma proves that its restriction to $H_t$ is the inverse anti-isomorphism to $\\varepsilon_t|_{H_s}$.\n\nA **weak Hopf algebra** is a weak bialgebra with a linear map $S:H\\to H$ satisfying\n$$ \\sum h_{(1)}S(h_{(2)})=\\varepsilon_t(h),\\qquad \\sum S(h_{(1)})h_{(2)}=\\varepsilon_s(h),\\qquad \\sum S(h_{(1)})h_{(2)}S(h_{(3)})=S(h). $$\nNo bijectivity of $S$ is imposed in this definition. The module tensor product below uses the source-target maps and does not require an antipode.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-weak-bialgebra-source-and-target-bases",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a weak bialgebra over a field $k$, with counital maps $\\varepsilon_t,\\varepsilon_s$ and images $H_t,H_s$ as in [[def-weak-bialgebra-and-weak-hopf-algebra]]. Then $\\varepsilon_t$ and $\\varepsilon_s$ are idempotent projections, $H_t$ and $H_s$ are unital subalgebras that commute elementwise, and $\\varepsilon_t|_{H_s}:H_s\\to H_t$ is an algebra anti-isomorphism whose inverse is $\\varepsilon_s'|_{H_t}$. For $g,h\\in H$ and $x,z\\in H_t$,\n$$\\varepsilon_t(gh)=\\varepsilon_t(g\\varepsilon_t(h)),\\qquad \\varepsilon_t(xh)=x\\varepsilon_t(h),\\qquad \\varepsilon_t(\\varepsilon_s'(x)z)=zx.$$\nThe element\n$$e=(\\varepsilon_t\\otimes\\mathrm{id})\\Delta(1)=\\sum e^1\\otimes e^2\\in H_t\\otimes H_t$$\nis a separability idempotent for $H_t$, meaning that its product is $1$ and it centralizes $H_t$; for every $x\\in H_t$ it also satisfies\n$$\\sum\\varepsilon(xe^1)e^2=x,\\qquad \\sum e^1\\varepsilon(e^2x)=x,\\qquad \\sum e^1e^2=1,\\qquad \\sum xe^1\\otimes e^2=\\sum e^1\\otimes e^2x.$$\nMoreover, $\\Delta(1)=\\sum\\varepsilon_s'(e^1)\\otimes e^2$. For $h\\in H$ and $x\\in H_t$ the identities\n$$\\sum\\varepsilon_t(h_{(1)}x)h_{(2)}=hx,\\qquad \\sum\\varepsilon_s'(\\varepsilon_t(h_{(2)}x))h_{(1)}=h\\varepsilon_s'(x)$$\nhold. These are the counital-base identities used for the relative tensor product and its unit maps.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-left-and-right-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring. A **left $R$-module** is an abelian group $(M,+,0_M)$ with a\nscalar action $R\\times M\\to M$, $(r,m)\\mapsto rm$, satisfying\n\n$$r(m+n)=rm+rn,\\quad (r+s)m=rm+sm,\\quad (rs)m=r(sm),\\quad 1_Rm=m.$$\n\nA **right $R$-module** has an action $M\\times R\\to M$, $(m,r)\\mapsto mr$, with\nthe analogous right-handed axioms. Unless \u201cright\u201d is stated, **module** means a\nunital left module.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hh-scalar-and-tensor-conventions",
+          "source_section": "Definition",
+          "quote": "Fix the following conventions, used on this page and by the later Hopf and Hecke pages.\n\n- $k$ is a field ([[def-field]]) and every vector space is a $k$-vector space ([[def-vector-space]]); $\\otimes$ means $\\otimes_k$.\n- $V\\otimes W$ is the tensor product of [[def-tensor-product-of-modules-by-generators-and-relations]], with the $k$-vector-space structure of [[thm-commutative-ring-module-structure-on-a-tensor-product]] and unit and universal property as in [[thm-universal-property-of-module-tensor-products]]. Every element of $V\\otimes W$ is a finite sum of elementary tensors $v\\otimes w$.\n- Tensor powers are left-associated: $V^{\\otimes 0}:=k$, $V^{\\otimes 1}:=V$ and $V^{\\otimes n}:=(V^{\\otimes(n-1)})\\otimes V$ for $n\\ge2$. The empty tensor $k$ is identified with the tensor unit through the isomorphisms of [[thm-unit-isomorphisms-for-module-tensor-products]].\n- For an algebra $A$ over a commutative ring ([[def-algebra-over-a-commutative-ring]]) the opposite algebra $A^{\\mathrm{op}}$ has the same underlying set and structure map and product $a\\cdot b:=ba$ ([[def-opposite-ring]]).\n- Finite sums $\\sum_{i\\in I}x_i$ follow [[def-finite-sum-in-a-commutative-monoid]]; an empty sum is $0$.\n\nParentheses in iterated tensor products may be dropped only after [[lem-hh-tensor-coherence-on-elementary-tensors]] has been proved.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-universal-property-of-module-tensor-products",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a unital ring, $M$ a right $R$-module, $N$ a left $R$-module, and\n\n$$\\tau:M\\times N\\longrightarrow M\\otimes_RN,\\qquad \\tau(m,n)=m\\otimes n.$$\n\nThe map $\\tau$ is balanced ([[def-balanced-and-bilinear-maps]]). For every abelian group $A$ and every balanced map $b:M\\times N\\to A$, there is a unique group homomorphism\n\n$$\\overline b:M\\otimes_RN\\longrightarrow A$$\n\nsuch that $\\overline b(m\\otimes n)=b(m,n)$ for all $m,n$. Consequently composition with $\\tau$ is a bijection\n\n$$\\operatorname{Hom}_{\\mathbf{Ab}}(M\\otimes_RN,A)\\cong\\operatorname{Bal}_R(M,N;A).$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-monoidal-category",
+          "source_section": "Definition",
+          "quote": "A **monoidal category** is a category $\\mathcal C$ equipped with:\n\n- a bifunctor $\\otimes:\\mathcal C\\times\\mathcal C\\to\\mathcal C$\n  ([[def-product-category]], [[def-functor-and-contravariant-functor]]);\n- an object $\\mathbf 1$ of $\\mathcal C$;\n- natural isomorphisms ([[def-natural-isomorphism]])\n  $$\\alpha_{X,Y,Z}:((X\\otimes Y)\\otimes Z)\\longrightarrow X\\otimes(Y\\otimes Z),$$\n  $$\\lambda_X:(\\mathbf 1\\otimes X)\\longrightarrow X,\\qquad \\rho_X:(X\\otimes\\mathbf 1)\\longrightarrow X,$$\n\nsuch that the following two equations hold for all objects\n$W,X,Y,Z\\in\\mathcal C$.\n\nThe **pentagon axiom** is\n\n$$\\alpha_{W,X,Y\\otimes Z}\\circ\\alpha_{W\\otimes X,Y,Z}=(1_W\\otimes\\alpha_{X,Y,Z})\\circ\\alpha_{W,X\\otimes Y,Z}\\circ(\\alpha_{W,X,Y}\\otimes1_Z).$$\n\nThe **triangle axiom** is\n\n$$(1_X\\otimes\\lambda_Y)\\circ\\alpha_{X,\\mathbf 1,Y}=\\rho_X\\otimes1_Y.$$\n\nThis page imposes no further axiom. In particular, the equality\n$\\lambda_{\\mathbf 1}=\\rho_{\\mathbf 1}$ is not built into the definition; it is\nderived later on this page.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $L,M,N$ be $R$-modules. There are natural $R$-module isomorphisms\n\n$$\\sigma_{M,N}:M\\otimes_RN\\longrightarrow N\\otimes_RM,\\qquad \\sigma_{M,N}(m\\otimes n)=n\\otimes m,$$\n\nand\n\n$$\\alpha_{L,M,N}:(L\\otimes_RM)\\otimes_RN\\longrightarrow L\\otimes_R(M\\otimes_RN),\\qquad \\alpha((l\\otimes m)\\otimes n)=l\\otimes(m\\otimes n).$$\n\nMoreover $\\sigma_{N,M}\\sigma_{M,N}$ is the identity.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $E=\\Delta(1)$. Multiplicativity gives $E^2=E$, $\\Delta(h)E=\\Delta(h)$, and $E\\Delta(h)=\\Delta(h)$. Thus the diagonal action on $V\\otimes W$ restricts to a unital action on $\\operatorname{im}P$: $1_H$ acts there as $P$, and the action law follows from $\\Delta(hg)=\\Delta(h)\\Delta(g)$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The restriction $\\varepsilon_s'|_{H_t}$ is an anti-isomorphism, so $v\\triangleleft x=\\varepsilon_s'(x)v$ is a right $H_t$-module action. For the separability idempotent $e=\\sum e^1\\otimes e^2$ of [F2], define $P_e(v\\otimes w)=\\sum(v\\triangleleft e^1)\\otimes e^2w$. The identity $\\Delta(1)=\\sum\\varepsilon_s'(e^1)\\otimes e^2$ gives $P_e=P$. The relation $\\sum xe^1\\otimes e^2=\\sum e^1\\otimes e^2x$ implies $P_e((v\\triangleleft x)\\otimes w)=P_e(v\\otimes xw)$, so $P$ kills every balancing relation.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In the balanced quotient, $qP_e(v\\otimes w)=\\sum[v\\triangleleft e^1\\otimes e^2w]=\\sum[v\\otimes e^1e^2w]=[v\\otimes w]$, because $\\sum e^1e^2=1$. Since $P=P_e$ is idempotent, $q|_{\\operatorname{im}P}$ is inverse to the map $[v\\otimes w]\\mapsto P(v\\otimes w)$; hence it is an isomorphism. Transporting the image action through this isomorphism gives $h\\cdot[v\\otimes w]=\\sum[h_{(1)}v\\otimes h_{(2)}w]$, since $P\\Delta(h)=\\Delta(h)P=\\Delta(h)$. Naturality follows on elementary tensors from $H$-linearity of module maps.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "The weak-unit identities give $(\\Delta\\otimes\\mathrm{id})E=(\\mathrm{id}\\otimes\\Delta)E=(E\\otimes1)(1\\otimes E)=(1\\otimes E)(E\\otimes1)$. Thus the two projections used for either parenthesization of three factors commute and have common image; the canonical rebracketing restricts to an isomorphism of these images, and is $H$-linear because $\\Delta$ is coassociative. For four factors, repeated use of this identity shows that each of the five parenthesized tensor products is the image of the same iterated coproduct $D_4=(\\Delta\\otimes\\Delta)\\Delta(1)$ on $U\\otimes V\\otimes W\\otimes X$; coassociativity makes every iterated coproduct equal to $D_4$. Each associator is the restriction of canonical vector-space rebracketing, so the two pentagon composites send every elementary quadruple tensor to the same rebracketed tensor. Elementary tensors span, hence the pentagon commutes.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The target base acts by epsilon_t(hx); the relative unit maps and inverses are balanced. Compute lambda(h[x tensor v])=sum epsilon_t(h1 x)h2 v=hxv and rho(h[v tensor x])=sum epsilon_s-prime(epsilon_t(h2 x))h1 v=h epsilon_s-prime(x)v using the correctly ordered proved identities.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The triangle maps agree on every elementary balanced class: both send $[(v\\otimes x)\\otimes w]$ to $v\\triangleleft x\\otimes w=[v\\otimes xw]$. Naturality of the unit maps and associator also follows on elementary classes from their defining formulas. Thus the tensor product, unit, associator, and unit maps satisfy the requirements of [F6], proving the monoidal assertion.",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty index family or empty module is part of the claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 is the zero action on the zero module, and the quotient and image are both zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the target-base unit and canonical unit maps."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the case Delta(1)=1 tensor 1, where the image projection is the identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use elementary tensors and finite sums without selecting a basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition asserts an isomorphism and monoidal structure, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition asserts an isomorphism and monoidal structure, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Image/quotient maps",
+          "domain": "elementary v tensor w and x in H_t",
+          "calculation": "Steps 1.2 and 2.1 verify balancing, qP=q, and that the quotient/image restrictions are inverse."
+        }
+      ]
+    },
+    "cex-a-quasi-bialgebra-need-not-be-quasi-hopf": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-quasi-bialgebra-and-quasi-hopf-algebra",
+          "source_section": "Definition",
+          "quote": "Fix a field $k$ and use algebraic tensor products over $k$ as in [[def-hh-scalar-and-tensor-conventions]]. A **quasi-bialgebra** is an associative unital $k$-algebra $H$ (in the sense of [[def-algebra-over-a-commutative-ring]]) with unital algebra maps $\\Delta:H\\to H\\otimes H$ and $\\varepsilon:H\\to k$, and an invertible element $\\Phi\\in H^{\\otimes 3}$, satisfying the counit identities $(\\varepsilon\\otimes\\mathrm{id})\\Delta=\\mathrm{id}=(\\mathrm{id}\\otimes\\varepsilon)\\Delta$, the quasi-coassociativity identity\n$$(\\mathrm{id}\\otimes\\Delta)\\Delta(h)=\\Phi\\,(\\Delta\\otimes\\mathrm{id})\\Delta(h)\\,\\Phi^{-1}\\qquad(h\\in H),$$\nthe pentagon identity\n$$(1\\otimes\\Phi)(\\mathrm{id}\\otimes\\Delta\\otimes\\mathrm{id})(\\Phi)(\\Phi\\otimes1)=(\\mathrm{id}\\otimes\\mathrm{id}\\otimes\\Delta)(\\Phi)(\\Delta\\otimes\\mathrm{id}\\otimes\\mathrm{id})(\\Phi),$$\nand the normalization $(\\mathrm{id}\\otimes\\varepsilon\\otimes\\mathrm{id})(\\Phi)=1\\otimes1$. Here $\\Phi$ is the **reassociator**. With this convention, $\\Phi$ acts from the left-parenthesized tensor product to the right-parenthesized one. When $\\Phi=1$, these conditions give the ordinary bialgebra axioms of [[def-hh-bialgebra-and-bialgebra-map]].\n\nA **quasi-antipode** for a quasi-bialgebra is a triple $(S,\\alpha,\\beta)$ where $S:H\\to H$ is a unital algebra antihomomorphism and $\\alpha,\\beta\\in H$ satisfy\n$$\\sum S(h_{(1)})\\alpha h_{(2)}=\\varepsilon(h)\\alpha,\\qquad \\sum h_{(1)}\\beta S(h_{(2)})=\\varepsilon(h)\\beta,$$\n$$\\sum X^1\\beta S(X^2)\\alpha X^3=1,\\qquad \\sum S(x^1)\\alpha x^2\\beta S(x^3)=1,$$\nwhere $\\Delta(h)=\\sum h_{(1)}\\otimes h_{(2)}$, $\\Phi=\\sum X^1\\otimes X^2\\otimes X^3$, and $\\Phi^{-1}=\\sum x^1\\otimes x^2\\otimes x^3$. A **quasi-Hopf algebra** is a quasi-bialgebra with a quasi-antipode whose map $S$ is bijective. A quasi-bialgebra need not have a quasi-antipode, and a quasi-antipode is additional data rather than part of the quasi-bialgebra structure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hh-bialgebra-and-bialgebra-map",
+          "source_section": "Definition",
+          "quote": "Fix a field $k$. A **bialgebra over $k$** is a $k$-vector space $H$ with a unital associative $k$-algebra structure $(m,u)$ and a counital coassociative $k$-coalgebra structure $(\\Delta,\\varepsilon)$ in the sense of [[def-hh-coalgebra-and-coalgebra-map]], where $m:H\\otimes H\\to H$, $u:k\\to H$, $\\Delta:H\\to H\\otimes H$, and $\\varepsilon:H\\to k$. Explicitly, the algebra equations are $m(m\\otimes\\mathrm{id})=m(\\mathrm{id}\\otimes m)$ and $m(u\\otimes\\mathrm{id})=\\mathrm{id}=m(\\mathrm{id}\\otimes u)$ under the canonical identifications; the coalgebra equations are those of [[def-hh-coalgebra-and-coalgebra-map]].\n\nRequire $\\Delta:H\\to H\\otimes H$ and $\\varepsilon:H\\to k$ to be unital algebra homomorphisms. The algebra on $H\\otimes H$ is the one with $(a\\otimes b)(c\\otimes d)=ac\\otimes bd$ and unit $1_H\\otimes1_H$; the algebra on $k$ is its field algebra. A **bialgebra map** $f:H\\to K$ is a $k$-linear map preserving multiplication, unit, comultiplication, and counit: $f m_H=m_K(f\\otimes f)$, $fu_H=u_K$, $\\Delta_Kf=(f\\otimes f)\\Delta_H$, and $\\varepsilon_Kf=\\varepsilon_H$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hh-hopf-algebra-and-antipode",
+          "source_section": "Definition",
+          "quote": "A **Hopf algebra over $k$** is a bialgebra $H$ together with a $k$-linear map $S:H\\to H$, called its **antipode**, such that\n\n$$S*\\mathrm{id}_H=u\\varepsilon=\\mathrm{id}_H*S,$$\n\nwhere $*$ is the convolution product on $\\operatorname{Hom}_k(H,H)$, $u:k\\to H$ is the unit, and $\\varepsilon:H\\to k$ is the counit. Equivalently, $m(S\\otimes\\mathrm{id})\\Delta=u\\varepsilon=m(\\mathrm{id}\\otimes S)\\Delta$. Thus $S$ is the two-sided inverse of $\\mathrm{id}_H$ in the convolution algebra. This definition imposes no compositional bijectivity condition on $S$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The monoid laws make multiplication associative and unital. On basis elements, $\\Delta(mn)=mn\\otimes mn=(m\\otimes m)(n\\otimes n)$, $\\Delta(1)=1\\otimes1$, $\\varepsilon(mn)=1=\\varepsilon(m)\\varepsilon(n)$, and coassociativity and the counit equations hold. Thus $H$ is a bialgebra and, with $\\Phi=1$, a quasi-bialgebra.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Suppose $(S,\\alpha,\\beta)$ is a quasi-antipode. With $\\Phi=1$, its normalization equations give $\\beta\\alpha=1=\\alpha\\beta$, so $\\alpha^{-1}=\\beta$. Define $S'(h)=\\alpha^{-1}S(h)\\alpha$. The quasi-antipode equations imply $\\sum S'(h_{(1)})h_{(2)}=\\varepsilon(h)1$ and $\\sum h_{(1)}S'(h_{(2)})=\\varepsilon(h)1$; thus $S'$ is an ordinary Hopf antipode of the bialgebra in step 1.1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The basis element $e$ is group-like: $\\Delta(e)=e\\otimes e$ and $\\varepsilon(e)=1$. The antipode equations in [F3] would make $e$ invertible, since $S'(e)e=1=eS'(e)$. But an invertible idempotent is $1$ (multiply $e^2=e$ by $e^{-1}$), contradicting $e\\ne1$. Hence no quasi-antipode exists, refuting the statement.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The monoid has the two specified elements 1 and e."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No scalar or zero-parameter case occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the monoid identity 1 and induced bialgebra unit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the trivial reassociator Phi=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint hypothesis occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the explicit finite monoid basis; no choice principle occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refutation contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refutation contains no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Monoid basis",
+          "domain": "m,n in {1,e}",
+          "calculation": "Step 1.1 checks the multiplication table and structure-map identities on each basis pair."
+        },
+        {
+          "check": "Antipode obstruction",
+          "domain": "the element e",
+          "calculation": "Step 3.1 forces S'(e)e=eS'(e)=1; combined with e^2=e this forces e=1."
+        }
+      ]
+    },
+    "ex-quasi-hopf-algebra-from-the-nontrivial-3-cocycle-on-c2": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-quasi-bialgebra-and-quasi-hopf-algebra",
+          "source_section": "Definition",
+          "quote": "Fix a field $k$ and use algebraic tensor products over $k$ as in [[def-hh-scalar-and-tensor-conventions]]. A **quasi-bialgebra** is an associative unital $k$-algebra $H$ (in the sense of [[def-algebra-over-a-commutative-ring]]) with unital algebra maps $\\Delta:H\\to H\\otimes H$ and $\\varepsilon:H\\to k$, and an invertible element $\\Phi\\in H^{\\otimes 3}$, satisfying the counit identities $(\\varepsilon\\otimes\\mathrm{id})\\Delta=\\mathrm{id}=(\\mathrm{id}\\otimes\\varepsilon)\\Delta$, the quasi-coassociativity identity\n$$(\\mathrm{id}\\otimes\\Delta)\\Delta(h)=\\Phi\\,(\\Delta\\otimes\\mathrm{id})\\Delta(h)\\,\\Phi^{-1}\\qquad(h\\in H),$$\nthe pentagon identity\n$$(1\\otimes\\Phi)(\\mathrm{id}\\otimes\\Delta\\otimes\\mathrm{id})(\\Phi)(\\Phi\\otimes1)=(\\mathrm{id}\\otimes\\mathrm{id}\\otimes\\Delta)(\\Phi)(\\Delta\\otimes\\mathrm{id}\\otimes\\mathrm{id})(\\Phi),$$\nand the normalization $(\\mathrm{id}\\otimes\\varepsilon\\otimes\\mathrm{id})(\\Phi)=1\\otimes1$. Here $\\Phi$ is the **reassociator**. With this convention, $\\Phi$ acts from the left-parenthesized tensor product to the right-parenthesized one. When $\\Phi=1$, these conditions give the ordinary bialgebra axioms of [[def-hh-bialgebra-and-bialgebra-map]].\n\nA **quasi-antipode** for a quasi-bialgebra is a triple $(S,\\alpha,\\beta)$ where $S:H\\to H$ is a unital algebra antihomomorphism and $\\alpha,\\beta\\in H$ satisfy\n$$\\sum S(h_{(1)})\\alpha h_{(2)}=\\varepsilon(h)\\alpha,\\qquad \\sum h_{(1)}\\beta S(h_{(2)})=\\varepsilon(h)\\beta,$$\n$$\\sum X^1\\beta S(X^2)\\alpha X^3=1,\\qquad \\sum S(x^1)\\alpha x^2\\beta S(x^3)=1,$$\nwhere $\\Delta(h)=\\sum h_{(1)}\\otimes h_{(2)}$, $\\Phi=\\sum X^1\\otimes X^2\\otimes X^3$, and $\\Phi^{-1}=\\sum x^1\\otimes x^2\\otimes x^3$. A **quasi-Hopf algebra** is a quasi-bialgebra with a quasi-antipode whose map $S$ is bijective. A quasi-bialgebra need not have a quasi-antipode, and a quasi-antipode is additional data rather than part of the quasi-bialgebra structure.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-quasi-bialgebra-modules-form-a-monoidal-category",
+          "source_section": "Statement",
+          "quote": "Let $(H,\\Delta,\\varepsilon,\\Phi)$ be a quasi-bialgebra over a field $k$ in the convention of [[def-quasi-bialgebra-and-quasi-hopf-algebra]]. The category $H\\text{-}\\mathrm{Mod}$ of unital left $H$-modules, with $H$-linear maps, is monoidal. Its tensor product has underlying vector space $V\\otimes_k W$ and action\n$$h\\cdot(v\\otimes w)=\\sum h_{(1)}v\\otimes h_{(2)}w.$$\nIts unit object is $k_\\varepsilon=k$ with $h\\cdot c=\\varepsilon(h)c$. The associator from $(U\\otimes V)\\otimes W$ to $U\\otimes(V\\otimes W)$ is the canonical vector-space rebracketing followed by the action of $\\Phi$:\n$$a_{U,V,W}((u\\otimes v)\\otimes w)=\\sum \\Phi^1u\\otimes(\\Phi^2v\\otimes\\Phi^3w),\\qquad \\Phi=\\sum\\Phi^1\\otimes\\Phi^2\\otimes\\Phi^3.$$\nThe left and right unit constraints are the canonical vector-space maps. No quasi-antipode is needed for this monoidal structure.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The pointwise idempotents are orthogonal and sum to $1$. The formula for $\\Delta$ is multiplicative because $\\Delta(p_g)\\Delta(p_h)=0$ for $g\\ne h$ and equals $\\Delta(p_g)$ for $g=h$; it is unital since $\\Delta(p_0+p_1)=(p_0+p_1)\\otimes(p_0+p_1)$. Both iterated coproducts send $p_g$ to $\\sum_{a+b+c=g}p_a\\otimes p_b\\otimes p_c$, and the two counit equations hold on each $p_g$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Each coefficient of $\\Phi$ is $1$ or $-1$ on an orthogonal idempotent, so $\\Phi^{-1}=\\Phi$. The algebra $H^{\\otimes3}$ is commutative and $\\Delta$ is coassociative, hence $\\Phi$ commutes with $(\\Delta\\otimes\\mathrm{id})\\Delta(h)$ and quasi-coassociativity follows. The normalization holds because $\\omega(a,0,c)=1$. The pentagon, evaluated at $(a,b,c,d)$, is the scalar identity\n$$\\omega(b,c,d)\\omega(a,b+c,d)\\omega(a,b,c)=\\omega(a+b,c,d)\\omega(a,b,c+d).$$\nWriting all sums modulo $2$, both exponents are $bcd+abd+acd+abc$, so the identity holds for all sixteen quadruples.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $g\\in C_2$, $\\Delta(p_g)=\\sum_{x+y=g}p_x\\otimes p_y$. In the first quasi-antipode equation, a product $p_x\\alpha p_y$ vanishes unless $x=y$; this happens for both pairs when $g=0$ and for neither pair when $g=1$. The sum is therefore $\\alpha$ for $g=0$ and $0$ for $g=1$, exactly $\\varepsilon(p_g)\\alpha$. The second equation has the same two cases with $\\beta=1$, and yields $\\varepsilon(p_g)\\beta$.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In $\\Phi$ and $\\Phi^{-1}$, a product of three basis idempotents is nonzero only when $a=b=c$. For $a=0$ its coefficient times $\\alpha_0$ is $1$; for $a=1$ it is $(-1)(-1)=1$. Hence both normalization sums are $p_0+p_1=1$. The map $S$ is the identity and is bijective, so all quasi-Hopf axioms hold.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The one-dimensional module $V_1$ on which $p_1$ acts as $1$ and $p_0$ as $0$ has reassociator scalar $\\omega(1,1,1)=-1$ by [F2]. Since that coefficient of $\\Phi$ is not the coefficient of $1^{\\otimes3}$, $\\Phi\\ne1$. The calculation establishes only the stated associator and makes no claim about twist equivalence.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has a fixed two-element group and no empty tensor power."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 check the identity degree 0 and both counit values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 check p_0 and the normalized cocycle entries containing 0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies invertibility of Phi and the full pentagon equation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, limit, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use the explicit two-element basis and finite cocycle checks."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a structure, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts a structure, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Pentagon",
+          "domain": "(a,b,c,d) in C2^4 (16 cases)",
+          "calculation": "Both exponents reduce modulo 2 to bcd+abd+acd+abc, so all sixteen sign equalities hold (step 1.2)."
+        },
+        {
+          "check": "Quasi-antipode",
+          "domain": "h=p_0,p_1 and diagonal triples in Phi",
+          "calculation": "Steps 2.1 and 3.1 check the basis equations and both normalization equations."
+        }
+      ]
+    },
+    "ex-two-object-discrete-groupoid-is-a-weak-hopf-algebra": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-weak-bialgebra-and-weak-hopf-algebra",
+          "source_section": "Definition",
+          "quote": "Fix a field $k$, an associative unital $k$-algebra $H$ (as in [[def-algebra-over-a-commutative-ring]]), and a coassociative counital coalgebra structure $(\\Delta,\\varepsilon)$ as in [[def-hh-coalgebra-and-coalgebra-map]]. Write $\\Delta(h)=\\sum h_{(1)}\\otimes h_{(2)}$ and suppress the finite Sweedler sums. A **weak bialgebra** is these structures with multiplicative coproduct $\\Delta(ab)=\\Delta(a)\\Delta(b)$, not necessarily a unital algebra map, and with the following weak unit and weak counit identities:\n$$ (\\Delta\\otimes\\mathrm{id})\\Delta(1)=(\\Delta(1)\\otimes1)(1\\otimes\\Delta(1))=(1\\otimes\\Delta(1))(\\Delta(1)\\otimes1), $$\n$$ \\varepsilon(abc)=\\sum\\varepsilon(ab_{(1)})\\varepsilon(b_{(2)}c)=\\sum\\varepsilon(ab_{(2)})\\varepsilon(b_{(1)}c)\\qquad(a,b,c\\in H). $$\nIn general $\\Delta(1)\\ne1\\otimes1$ and $\\varepsilon$ is not multiplicative.\n\nFor $\\Delta(1)=\\sum1_{(1)}\\otimes1_{(2)}$, define the **target** and **source counital maps**\n$$ \\varepsilon_t(h)=\\sum\\varepsilon(1_{(1)}h)1_{(2)},\\qquad \\varepsilon_s(h)=\\sum1_{(1)}\\varepsilon(h1_{(2)}). $$\nWrite $H_t=\\varepsilon_t(H)$ and $H_s=\\varepsilon_s(H)$. The source-and-target-bases lemma below proves these ranges are commuting unital subalgebras. We also use the variant\n$$ \\varepsilon_s'(h)=\\sum1_{(1)}\\varepsilon(1_{(2)}h). $$\nThe same lemma proves that its restriction to $H_t$ is the inverse anti-isomorphism to $\\varepsilon_t|_{H_s}$.\n\nA **weak Hopf algebra** is a weak bialgebra with a linear map $S:H\\to H$ satisfying\n$$ \\sum h_{(1)}S(h_{(2)})=\\varepsilon_t(h),\\qquad \\sum S(h_{(1)})h_{(2)}=\\varepsilon_s(h),\\qquad \\sum S(h_{(1)})h_{(2)}S(h_{(3)})=S(h). $$\nNo bijectivity of $S$ is imposed in this definition. The module tensor product below uses the source-target maps and does not require an antipode.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Multiplication is associative and unital. The coproduct is coassociative, and $(\\varepsilon\\otimes\\mathrm{id})\\Delta(e_i)=e_i=(\\mathrm{id}\\otimes\\varepsilon)\\Delta(e_i)$. Also $\\Delta(e_i)\\Delta(e_j)=\\delta_{ij}e_i\\otimes e_i=\\Delta(e_ie_j)$, so $\\Delta$ is multiplicative.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Put $E=\\Delta(1)=\\sum_i e_i\\otimes e_i$. Both iterated coproducts of $E$ equal $\\sum_i e_i\\otimes e_i\\otimes e_i$, and $(E\\otimes1)(1\\otimes E)=(1\\otimes E)(E\\otimes1)=\\sum_i e_i\\otimes e_i\\otimes e_i$ by orthogonality. For basis triples $e_i,e_j,e_k$, each weak-counit product equals $1$ exactly when $i=j=k$ and is $0$ otherwise; trilinearity proves both weak-counit identities. The counital-map formulas give $\\varepsilon_t(e_i)=e_i=\\varepsilon_s(e_i)$. Finally, $S(e_i)=e_i$ gives $e_iS(e_i)=\\varepsilon_t(e_i)$, $S(e_i)e_i=\\varepsilon_s(e_i)$, and $S(e_i)e_iS(e_i)=S(e_i)$. Thus all weak Hopf axioms hold by linearity.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The counital formulas also give $\\varepsilon_s'(e_i)=\\sum_j e_j\\varepsilon(e_je_i)=e_i$, hence $H_t=H_s=H$. Since $E$ has no off-diagonal terms whereas $1\\otimes1$ has them, $\\Delta(1)\\ne1\\otimes1$. Moreover $\\varepsilon(e_0e_1)=0$ but $\\varepsilon(e_0)\\varepsilon(e_1)=1$, so the structure is not an ordinary bialgebra.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Orthogonal idempotents summing to $1$ give direct sums $V=e_0V\\oplus e_1V$ and $W=e_0W\\oplus e_1W$. On each elementary summand $e_iV\\otimes e_jW$, $E$ acts as multiplication by $\\delta_{ij}$, so its image is $(e_0V\\otimes e_0W)\\oplus(e_1V\\otimes e_1W)$. Also $v\\triangleleft e_i=e_iv$. The balancing relation for $x=e_i$ kills $e_iV\\otimes e_jW$ when $i\\ne j$, while for $i=j$ the left and right actions agree. For $v_i=e_iv$ and $w_j=e_jw$, the relation for $x=a_0e_0+a_1e_1$ is $(a_i-a_j)v_i\\otimes w_j$. It vanishes when $i=j$; when $i\\ne j$, choosing $x=e_i$ generates the whole summand $e_iV\\otimes e_jW$. Thus the relation subspace is exactly the sum of the two off-diagonal summands.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "The quotient and image are both the direct sum of the diagonal summands by step 4.1, and the quotient map and its inverse are the identity on each such summand. On each diagonal summand $e_jV\\otimes e_jW$, both the image and quotient actions of $e_i$ are multiplication by $\\delta_{ij}$; hence the isomorphism is $H$-linear. If $f:V\\to V'$ and $g:W\\to W'$ are $H$-linear, then $(f\\otimes g)$ preserves each diagonal summand, so the isomorphism is natural in $V,W$.",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has a fixed two-object basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 computes epsilon(e_0e_1)=0 and shows epsilon is not multiplicative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 verify the algebra unit 1=e_0+e_1 and the weak-Hopf basis equations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 shows Delta(1) differs from 1 tensor 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 use the explicit two-idempotent basis and direct-sum decomposition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts equations and an isomorphism, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts equations and an isomorphism, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Weak-bialgebra equations",
+          "domain": "basis triples (e_i,e_j,e_k), i,j,k in {0,1}",
+          "calculation": "Both weak-counit products are 1 exactly when i=j=k and 0 otherwise; weak-unit and coassociativity tensors are expanded in step 2.1."
+        },
+        {
+          "check": "Weak antipode",
+          "domain": "basis elements e_0,e_1",
+          "calculation": "Step 2.1 checks e_iS(e_i)=epsilon_t(e_i)=e_i, S(e_i)e_i=epsilon_s(e_i)=e_i, and S(e_i)e_iS(e_i)=S(e_i)."
+        },
+        {
+          "check": "Balanced quotient",
+          "domain": "four summands e_iV tensor e_jW",
+          "calculation": "Steps 4.1\u20135.1 show the relation subspace is precisely the two off-diagonal summands."
+        }
+      ]
+    }
+  }
+}

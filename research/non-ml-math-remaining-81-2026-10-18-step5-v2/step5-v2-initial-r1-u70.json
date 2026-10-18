@@ -1,0 +1,125 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "initial",
+  "round": 1,
+  "unit": "70",
+  "input_sha256": "5a7686cf6af281fffc281470b9fd4d1b4497cd3e88649ffa4676dd5e748ac1b1",
+  "decisions": [
+    {
+      "id": "def-unequal-parameter-weight-function-and-coefficient-order",
+      "model": "gpt-6-luna",
+      "context_sha256": "fc1ed515bda8d4420c6a2912b34227034716de2255879eeb052837c72baa8b9e",
+      "outcome": "false_positive",
+      "reason": "SCHEMA.md explicitly permits a forward justified_by discharge whose target depends on the definition through deps; tools/depcheck.mjs excludes that forward edge from prerequisite cycle detection. Here the definition supplies finite-support group-algebra operations and length-additivity directly, and the extension lemma proves the separate odd-edge existence/uniqueness criterion without being used as a defining premise. Its proof uses finite-support Matsumoto moves and the reduced odd dihedral braid, so the alleged circularity is absent.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity",
+      "model": "gpt-6-luna",
+      "context_sha256": "b8ac9f3634edba0f340f9ca64837ad868b03ba503fffed1b993d089e5a8c7f57",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F6 correctly states the cited theorem\u2019s arbitrary-subword equivalence, but adds a deletion procedure not stated in its exported Statement. The deletion assertion is true (the cited item\u2019s F3 and proof 1.2 invoke the separate exchange/deletion supplier), yet the contract binds only its Statement. Step 4.1 uses the arbitrary-subword equivalence directly and never uses deletion, so this is a nonfatal citation overstatement, repaired by removing only the unused final clause.",
+      "uncertain": false,
+      "source_urls": [
+        "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-unequal-parameter-weight-function-and-coefficient-order",
+      "disposition": "unaffected",
+      "post_sha256": "b6ba0fa209ad0ce016ffb50113d175ef48fd1e8fd79f97ee5c49f62d190518ef",
+      "review_context_sha256": "a67ea6e8e8c5413fdf7f0dee87055c86b6ea3e7707e23e26620e249cd5d35c55",
+      "reason": "Checked the full definition, the extension lemma, its owning contract and the page parameter conventions. Finite sums define the group algebra, inversion of exponents defines its involution, and v^L(s) has inverse v^-L(s), independently of any extension theorem. Zero labels, the trivial ordered group, and empty S remain admitted. The page correctly delegates the odd-edge restriction to the proved lemma. The item guard equals the assignment before guard; no edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity",
+      "disposition": "repaired",
+      "post_sha256": "0bc797e47319f3147c01803cce042ef25c570c5e699308f19c3a2f71c4219a8c",
+      "review_context_sha256": "33bc2cc61cbad0f4e5f1d0ddf41243960bc53bb38bd7411bf7f8005812ed7c80",
+      "reason": "Checked every proof step, the actual finite-parabolic and finite-Hecke supplier interfaces, the full subword supplier argument, contract and owning page. Odd-edge constancy permits the universal coefficient map; arbitrary base change gives finite-support spanning and independence, including finite relation-ideal witnesses. The quadratic and reversed braid identities give bar, and simple multiplication preserves subsequence labels. The cited arbitrary-subword criterion puts those labels below w; a proper subsequence has length at most length(w)-1, while the full reduced word contributes T_w once. Removed only F6\u2019s unused deletion-process overstatement. Statement, dependencies, contract and page remain unchanged; no AC or positivity is needed. This is the repair author\u2019s focused review, not independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "def-unequal-parameter-weight-function-and-coefficient-order",
+      "outcome": "false_positive",
+      "evidence": "The permitted forward justified_by discharge does not form a logical prerequisite cycle; the definition uses no premise supplied by the extension lemma."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "locus": "facts-block",
+      "evidence": "F6 included an unused two-letter-deletion procedure absent from the cited exported Statement. Removed that clause, retaining the complete arbitrary-subword equivalence used by step 4.1. No Statement/Definition changed."
+    }
+  ],
+  "repair_notes": [
+    {
+      "id": "def-unequal-parameter-weight-function-and-coefficient-order",
+      "claim_and_conventions": "Arbitrary S; totally ordered abelian Gamma; finite-support Z[Gamma], exponent-reversal involution, no sign restriction on a length-additive weight function.",
+      "dependencies": [
+        "def-arbitrary-rank-coxeter-system-and-bruhat-order"
+      ],
+      "source_evidence": [
+        "SCHEMA.md, Items: justified_by is a forward discharge, with its target depending on the definition through deps.",
+        "tools/depcheck.mjs:456-485 explicitly excludes justified_by from prerequisite cycle detection and verifies forward reachability.",
+        "items/lem-simple-generator-weights-extend-to-a-weight-function.md, proof 1.1, 2.1 and 3.1: finite-support braid invariance and necessary odd-edge equality."
+      ],
+      "edit": "None. False-positive circularity claim; unchanged assignment guard.",
+      "unresolved_obligations": []
+    },
+    {
+      "id": "lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity",
+      "claim_and_conventions": "Arbitrary-rank standard basis over Z[Gamma], semilinear involutive algebra bar, and strict Bruhat support, for arbitrary signs of L(s).",
+      "dependencies": [
+        "def-arbitrary-rank-coxeter-system-and-bruhat-order",
+        "def-unequal-parameter-weight-function-and-coefficient-order",
+        "lem-simple-generator-weights-extend-to-a-weight-function",
+        "def-unequal-parameter-coxeter-hecke-algebra",
+        "thm-arbitrary-rank-finite-parabolics-and-bruhat-subword",
+        "def-hh-universal-coxeter-hecke-parameters-and-presentation",
+        "thm-hh-generic-coxeter-hecke-standard-basis",
+        "lem-hh-reduced-word-independence-and-length-multiplication",
+        "thm-cg-bruhat-subword-characterization"
+      ],
+      "source_evidence": [
+        "items/thm-cg-bruhat-subword-characterization.md, Statement (1): arbitrary-subword equivalence; F3 and proof 1.2: separate two-letter deletion invocation.",
+        "Bjorner\u2013Brenti, Combinatorics of Coxeter Groups, complete Proposition 1.4.7 proof and Corollary 1.4.8(i), printed pp. 17\u201318 (PDF index 26\u201327), and complete Theorem 2.2.2 proof, printed p. 34 (PDF index 42), actually consulted at https://sites.math.washington.edu/~billey/classes/reflection.groups/references/EntireBook.pdf"
+      ],
+      "edit": "Deleted only the semicolon clause in F6 asserting that the chosen subsequence can be reduced by two-letter deletion. The Statement and all six proof steps are byte-for-byte unchanged; no downstream interface event. Existing contract quotations and derivations still match, so no shared metadata edit is necessary. No judge stamp was present or written.",
+      "validation": {
+        "precheck": "Exit 0: 2 files, 1 proof checked, 0 failures; definition not applicable.",
+        "rendercheck": "Exit 0: 3 files checked (both items and owning page), no errors or warnings.",
+        "proof_contract": "Exit 0: both assigned entries checked with --strict, no errors or warnings.",
+        "proof_layout": "Exit 0: explicit changed item only, 1 item, 6 steps, 0 defects.",
+        "depcheck": "Exit 0: exactly the two assigned items and their owning page checked; 779 prerequisite items and 369 prerequisite pages in cycle context; no errors or warnings.",
+        "interface_comparison": "Reinserted the exact removed clause to reconstruct the original assignment guard 321421bef80367caaf66707ff5157eb9aa7a9c47e5b1946519b7533bb3c3fe85. Direct Statement and Proof section comparisons are identical. Both final item guards match the recorded reviews, and both interface hashes equal the frozen before hashes."
+      },
+      "unresolved_obligations": []
+    },
+    {
+      "published_consumer_ledger": "No proposed updates: no published defect or supplier-interface change was found.",
+      "completion": "Both assigned rejected tuples resolved; no new items, shared metadata edits, downstream interface events, assigned gate diagnostics or unresolved mathematical obligations. Ready for engine collection; no independent review, judgment or certification is claimed."
+    }
+  ],
+  "gate_resolutions": []
+}

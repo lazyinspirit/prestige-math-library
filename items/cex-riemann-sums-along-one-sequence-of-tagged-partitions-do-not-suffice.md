@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-recording/receipts/cex-riemann-sums-along-one-sequence-of-tagged-partitions-do-not-suffice.json
 sources:
   scraped: []
   references:
@@ -36,6 +37,8 @@ pipeline_run: null
 
 ## Statement refuted
 
+Throughout, $\mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R}$ denotes the canonical copies. Natural numbers, integers and rationals are written directly when used in real arithmetic.
+
 **Refuted:** that a bounded $f$ on $[a,b]$ is Riemann integrable with integral
 $I$ as soon as there is **one** sequence $(P_N,\xi^N)$ of tagged partitions with
 $\|P_N\| \to 0$ and $S(f,P_N,\xi^N) \to I$
@@ -44,9 +47,9 @@ $\|P_N\| \to 0$ and $S(f,P_N,\xi^N) \to I$
 The witness is again the Dirichlet function on $[0,1]$
 ([[def-dirichlet-and-thomae-functions]]). Take $P_N := U_N$, the uniform
 partition into $N \ge 1$ parts, and tag each subinterval by its left endpoint
-$\xi^N_i := \iota(i)/\iota(N)$, a rational. Then
+$\xi^N_i := i/N$, a rational. Then
 
-$$\|U_N\| = \frac{1}{\iota(N)} \longrightarrow 0, \qquad S(\mathbf{1}_{\mathbb{Q}}, U_N, \xi^N) = 1 \ \text{ for every } N \ge 1,$$
+$$\|U_N\| = \frac{1}{N} \longrightarrow 0, \qquad S(\mathbf{1}_{\mathbb{Q}}, U_N, \xi^N) = 1 \ \text{ for every } N \ge 1,$$
 
 so the Riemann sums converge, to $1$; and yet
 $\mathbf{1}_{\mathbb{Q}}$ is not Riemann integrable on $[0,1]$
@@ -61,19 +64,19 @@ number is within $1/2$ of both.
 
 ## Facts & Assumptions
 
-**Given:** $g : [0,1] \to \mathbb{R}$ with $g(x) = 1$ for rational $x$ and $g(x) = 0$ for irrational $x$; for $N \ge 1$ the uniform partition $U_N = (N,t)$ of $[0,1]$ with $t_i = \iota(i)/\iota(N)$ and $\Delta_i = 1/\iota(N)$; and the tagging $\xi^N$ with $\xi^N_i := t_i$ for $i < N$.
+**Given:** $g : [0,1] \to \mathbb{R}$ with $g(x) = 1$ for rational $x$ and $g(x) = 0$ for irrational $x$; for $N \ge 1$ the uniform partition $U_N = (N,t)$ of $[0,1]$ with $t_i = i/N$ and $\Delta_i = 1/N$; and the tagging $\xi^N$ with $\xi^N_i := t_i$ for $i < N$.
 
 [A1] The refuted claim: if some sequence of tagged partitions of $[0,1]$ has meshes tending to $0$ and Riemann sums tending to $I$, then $g$ is Riemann integrable with integral $I$.
 
-[L1] For $U_N$: $t_i = \iota(i)/\iota(N) \in [0,1]$, $t_i < t_{i+1}$, $\Delta_i = 1/\iota(N)$, $\sum_{i<N}\Delta_i = 1$, and $\|U_N\| = 1/\iota(N)$ ([[def-partition-and-refinement]], [[def-interval]]).
+[L1] For $U_N$: $t_i = i/N \in [0,1]$, $t_i < t_{i+1}$, $\Delta_i = 1/N$, $\sum_{i<N}\Delta_i = 1$, and $\|U_N\| = 1/N$ ([[def-partition-and-refinement]], [[def-interval]]).
 
 [L2] $\xi^N_i := t_i \in I_i$ defines a tagging of $U_N$, and $S(g,U_N,\xi^N) = \sum_{i<N}g(\xi^N_i)\Delta_i$ ([[def-tagged-partition-and-riemann-sum]]).
 
-[L3] Each $t_i = \iota(i)/\iota(N)$ is rational, being a quotient of canonical naturals with $\iota(N) > 0$; hence $g(t_i) = 1$ ([[def-canonical-natural]], [[lem-of-naturals-positive]], [[def-dirichlet-and-thomae-functions]]).
+[L3] Each $t_i = i/N$ is rational, being a quotient of canonical naturals with $N > 0$; hence $g(t_i) = 1$ ([[def-canonical-natural]], [[lem-of-naturals-positive]], [[def-dirichlet-and-thomae-functions]]).
 
 [L4] Finite sums: scaling and $\sum_{i<N}1 \cdot \Delta_i = \sum_{i<N}\Delta_i$ ([[def-finite-sum]], [[lem-finite-sum-laws]]).
 
-[L5] A constant sequence converges to its value; and for every real $\eta > 0$ there is $N \ge 1$ with $1/\iota(N) < \eta$, so the sequence $N \mapsto 1/\iota(N)$ converges to $0$, its terms being positive and decreasing below every positive bound ([[def-real-limit]], [[def-sequence]], [[cor-archimedean-reciprocal]], [[thm-of-archimedean]], [[lem-of-naturals-positive]], [[lem-of-abs-value]]).
+[L5] A constant sequence converges to its value; and for every real $\eta > 0$ there is $N \ge 1$ with $1/N < \eta$, so the sequence $N \mapsto 1/N$ converges to $0$, its terms being positive and decreasing below every positive bound ([[def-real-limit]], [[def-sequence]], [[cor-archimedean-reciprocal]], [[thm-of-archimedean]], [[lem-of-naturals-positive]], [[lem-of-abs-value]]).
 
 [L6] $g$ is not Riemann integrable on $[0,1]$; its lower Darboux integral is $0$ and its upper Darboux integral is $1$ ([[cex-dirichlet-is-not-riemann-integrable]], [[def-darboux-integral]]).
 
@@ -81,17 +84,17 @@ number is within $1/2$ of both.
 
 [L8] The Riemann condition of [[thm-darboux-equals-riemann]] requires, for each $\varepsilon > 0$, a $\delta > 0$ such that **every** tagged partition of mesh below $\delta$ has its Riemann sum within $\varepsilon$ of the integral.
 
-[L9] Ordered-field arithmetic: the order is total and transitive, $\iota(N) > 0$ for $N \ge 1$, and $0 \ne 1$ ([[lem-of-add-order]], [[lem-of-sign-rules]], [[def-ordered-field]], [[def-complete-ordered-field]]). These order-arithmetic facts are stated by their sources for the strict order only; the nonstrict forms used below follow by adjoining the equality case, in which the two sides coincide.
+[L9] Ordered-field arithmetic: the order is total and transitive, $N > 0$ for $N \ge 1$, and $0 \ne 1$ ([[lem-of-add-order]], [[lem-of-sign-rules]], [[def-ordered-field]], [[def-complete-ordered-field]]). These order-arithmetic facts are stated by their sources for the strict order only; the nonstrict forms used below follow by adjoining the equality case, in which the two sides coincide.
 
 ## Counterexample
 
 **Proof technique:** direct.
 
-1.1 For each $N \ge 1$, $(U_N,\xi^N)$ is a tagged partition of $[0,1]$ of mesh $1/\iota(N)$, by [L1] and [L2]. [given, L1, L2]
+1.1 For each $N \ge 1$, $(U_N,\xi^N)$ is a tagged partition of $[0,1]$ of mesh $1/N$, by [L1] and [L2]. [given, L1, L2]
 
 1.2 By [L3] every tag $\xi^N_i = t_i$ is rational, so $g(\xi^N_i) = 1$; hence by [L2], [L4] and [L1], $S(g,U_N,\xi^N) = \sum_{i<N}1\cdot\Delta_i = \sum_{i<N}\Delta_i = 1$. [given, L1, L2, L3, L4]
 
-2.1 The sequence $N \mapsto \|U_N\| = 1/\iota(N)$ converges to $0$ and the sequence $N \mapsto S(g,U_N,\xi^N)$ is constantly $1$, hence converges to $1$, by [L5]. [step 1.1, step 1.2, L5]
+2.1 The sequence $N \mapsto \|U_N\| = 1/N$ converges to $0$ and the sequence $N \mapsto S(g,U_N,\xi^N)$ is constantly $1$, hence converges to $1$, by [L5]. [step 1.1, step 1.2, L5]
 
 3.1 So the hypothesis of [A1] is met with $I := 1$; but $g$ is not Riemann integrable on $[0,1]$ by [L6]. [A1] is therefore refuted. [step 2.1, A1, L6]
 

@@ -1,0 +1,34 @@
+---
+page: temperley-lieb-cellularity-and-representation-theory
+title: "Temperley–Lieb Link-State Modules and Cellularity"
+status: draft
+requires:
+  - temperley-lieb-diagram-algebra-and-catalan-basis
+  - type-a-hecke-specht-modules-and-cellular-bases
+items:
+  - def-temperley-lieb-link-state-standard-modules
+  - lem-temperley-lieb-link-state-module-action-is-well-defined
+  - thm-temperley-lieb-link-state-dimension-formula
+  - lem-temperley-lieb-link-state-gram-form-is-invariant
+  - prop-temperley-lieb-link-state-form-vanishes-exactly-at-zero-loop-without-defects
+  - lem-temperley-lieb-link-state-restriction-filtration
+  - thm-temperley-lieb-link-state-diagram-basis-is-cellular
+  - cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules
+examples: []
+---
+
+For each finite rank $n$, this page constructs the right link-state modules $W_{n,t}$ over a commutative ring with loop value $\delta$. The label $t$ is the number of defects or propagating strands; sources that use $p$ for the number of arcs have $t=n-2p$. The module is the quotient of the half-diagram module by terms with fewer than $t$ propagating strands. Its link-state basis has ballot-number size, and reflection-gluing defines a symmetric invariant Gram form.
+
+The A-page proves the two-step restriction filtration and the Temperley–Lieb-specific cellular basis over the stated ring, then applies the general cellular simple-head theorem only over fields. A zero cell form gives a zero cell-form quotient; it does not by itself imply that the underlying link-state module has zero head. Over every nonzero commutative coefficient ring, the form is identically zero precisely for $t=0$, $n>0$ and $\delta=0$. Over $\mathbb C$, restriction splits when $\delta=q+q^{-1}$ and $q^{2(t+1)}\ne1$. No semisimplicity, Gram determinant, root-of-unity classification, trace descent, Jones–Wenzl, or physical claim is made here.
+
+## Results
+
+- [[def-temperley-lieb-link-state-standard-modules]] and [[lem-temperley-lieb-link-state-module-action-is-well-defined]] define the half-diagram modules and prove the action descends.
+- [[thm-temperley-lieb-link-state-dimension-formula]] counts the basis by a ballot reflection argument.
+- [[lem-temperley-lieb-link-state-gram-form-is-invariant]] constructs the reflection/capping Gram form; [[prop-temperley-lieb-link-state-form-vanishes-exactly-at-zero-loop-without-defects]] proves the identically-zero boundary case.
+- [[lem-temperley-lieb-link-state-restriction-filtration]] gives the restriction short exact sequence over commutative rings and proves the complex noncritical splitting by separating central eigenvalues.
+- [[thm-temperley-lieb-link-state-diagram-basis-is-cellular]] verifies the finite diagram basis and both cellular axioms; [[cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules]] records exactly what the nonzero and zero forms imply over a field.
+
+## Reading route
+
+The diagram operations consume [[temperley-lieb-diagram-algebra-and-catalan-basis]]. The cellular definitions and simple-head result come from the published [[type-a-hecke-specht-modules-and-cellular-bases]] page; its generic cellular theorem is used only after the TL-specific basis and cell form have been proved here.

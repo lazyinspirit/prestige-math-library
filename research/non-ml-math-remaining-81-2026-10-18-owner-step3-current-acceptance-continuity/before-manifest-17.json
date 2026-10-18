@@ -1,0 +1,275 @@
+[
+  {
+    "order": 2526,
+    "id": "lossy-source-coding-with-side-information",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Lossy Source Coding with Side Information",
+    "companion": "lossy-source-coding-with-side-information-examples",
+    "requires": [
+      "rate-distortion-and-lossy-source-coding",
+      "distributed-source-coding",
+      "cost-constrained-gaussian-and-feedback-channels"
+    ],
+    "items": [
+      {
+        "id": "def-it-finite-strongly-typical-set",
+        "kind": "definition",
+        "title": "Finite strongly typical sets with support restriction",
+        "statement": "Defines relative empirical typicality for finite laws, including exact exclusion of zero-probability letters and the conditional typical set for a fixed source block.",
+        "strategy": "State the empirical-frequency convention, support rule, and conditional-set notation used by the finite random-coding lemmas.",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-it-finite-type-class-cardinality-bounds",
+        "kind": "lemma",
+        "title": "Finite type-class cardinality bounds",
+        "statement": "For every attainable type q on a finite alphabet of size m and blocklength n, proves (n+1)^(-m) exp(nH(q)) <= |T_q| <= exp(nH(q)), including zero coordinates.",
+        "strategy": "Use the probability of one type under its own product law, prove that the type q is a mode, and count at most (n+1)^m types.",
+        "deps": [
+          "def-it-finite-strongly-typical-set",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-it-finite-codebook-covering-selection-law",
+        "kind": "lemma",
+        "title": "Finite random-codebook covering and selected-codeword law",
+        "statement": "For a finite test channel P(U|X), a typical x^n, and an iid P_U codebook with rate above I(X;U), proves the failure probability tends to zero and the first successful codeword has the P_U^n law conditioned on the conditional typical set, uniformly within each conditional type.",
+        "strategy": "Approximate P(U|X) by an attainable conditional type, apply the two-sided type-class bounds, and use the independent-codeword failure product.",
+        "deps": [
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-mutual-information",
+          "def-it-finite-strongly-typical-set",
+          "def-it-information-units-and-logarithm-base",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-it-finite-type-class-cardinality-bounds"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-it-finite-random-bin-packing-bound",
+        "kind": "lemma",
+        "title": "Finite joint-typicality packing bound for independent random bins",
+        "statement": "Fix $k\\ge1$, finite alphabets $\\mathcal U_1,\\ldots,\\mathcal U_k,\\mathcal S$, and a joint law $P_{U_1\\cdots U_kS}$. Let the source-selection data $Z^n$ and decoder side-information block $S^n$ have any joint law. Independently of $(Z^n,S^n)$, generate mutually independent codebooks whose $M_i$ codewords each have law $P_{U_i}^{\\otimes n}$. Generate independent uniform bin labels from $[B_i]$ for every codeword, independently of the source and codebooks. Let the selected true indices $L_i$ be functions of $Z^n$ and codebooks but not the bin labels. In addition, for every nonempty proper $J\\subset[k]$, require the complementary selected codewords at indices in $J^c$ to be determined by $Z^n$ and codebooks indexed by $J^c$ alone; this condition is automatic when each terminal selects using its own codebook, and is vacuous for $k=1$. For a fixed positive typicality tolerance, a joint-typicality decoder looks for the unique tuple in the received bins whose codewords and $S^n$ are jointly typical for $P_{U_1\\cdots U_kS}$. Suppose there is a common $\\eta>0$ such that for every nonempty $J\\subseteq[k],$\n$$\\sum_{i\\in J}\\frac1n\\ln\\frac{M_i}{B_i}<\\sum_{i\\in J}H(U_i)-H(U_J\\mid U_{J^c},S)-\\eta.$$\nThen there is $\\epsilon_0>0$ such that, for every fixed typicality tolerance $0<\\epsilon\\le\\epsilon_0$, writing $E_n$ for the event that the selected true tuple and $S^n$ are jointly typical, the expected number of wrong jointly typical tuples in its received bins, multiplied by $\\mathbf1_{E_n}$, tends to zero as $n\\to\\infty$. Consequently the probability that $E_n$ holds and a wrong jointly typical tuple exists tends to zero. The case of no side information is represented by a singleton $\\mathcal S$.",
+        "strategy": "For each nonempty changed subset, bound the conditional typical-set size by conditional entropy, multiply by product-marginal codeword masses and independent bin-collision probabilities, then sum over the finite subsets.",
+        "deps": [
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-strongly-typical-set",
+          "def-it-information-units-and-logarithm-base",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-it-finite-type-class-cardinality-bounds"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-it-finite-selected-codeword-markov-typicality",
+        "kind": "lemma",
+        "title": "Markov typicality for independently selected finite codewords",
+        "statement": "If X,Y,U are finite with U-X-Y and x^n,y^n are sufficiently typical, proves that a codeword selected by the first-match iid marginal-codebook rule is jointly typical with (x^n,y^n), conditional on successful selection.",
+        "strategy": "Condition on each attainable conditional type; uniform assignments within source-symbol classes produce hypergeometric counts whose variances are O(n), and a finite union bound gives joint typicality.",
+        "deps": [
+          "def-it-finite-strongly-typical-set",
+          "lem-it-finite-codebook-covering-selection-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-it-finite-wyner-ziv-code",
+        "kind": "definition",
+        "title": "Finite-alphabet lossy source coding with decoder-only side information",
+        "statement": "Defines the finite IID source model, encoder and decoder maps, normalized bounded distortion, operational rate-distortion function, and its single-letter finite auxiliary test-channel expression.",
+        "strategy": "Specify finite alphabets, the memoryless joint law, the decoder-only side-information interface, natural-log rates, and the finite auxiliary variables U-X-Y and reconstruction map g(Y,U).",
+        "deps": [
+          "def-it-finite-conditional-mutual-information",
+          "def-it-finite-iid-multisource",
+          "def-it-information-units-and-logarithm-base",
+          "def-it-single-letter-distortion-and-block-distortion"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "def-it-finite-multiterminal-lossy-code",
+        "kind": "definition",
+        "title": "Finite-alphabet multiterminal lossy source code",
+        "statement": "Defines a finite IID k-source, separate deterministic encoders, one common decoder, per-terminal finite bounded additive distortions, rate conventions, and operational achievability.",
+        "strategy": "State each encoder's observation, each reconstruction and distortion criterion, the common decoder, and nats per source symbol.",
+        "deps": [
+          "def-it-finite-iid-multisource",
+          "def-it-information-units-and-logarithm-base",
+          "def-it-single-letter-distortion-and-block-distortion"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-it-wyner-ziv-auxiliary-cardinality-bound",
+        "kind": "lemma",
+        "title": "Cardinality bound for the finite Wyner-Ziv auxiliary",
+        "statement": "Every finite Wyner-Ziv test channel and reconstruction map can be replaced by one with no larger conditional mutual information, identical source marginal and distortion, and |U| <= |X|+1; consequently the finite single-letter minimum is attained.",
+        "strategy": "Represent each auxiliary value by its posterior on X, its conditional distortion, and H(X|Y,U=u); use a finite linear-dependence perturbation preserving the source law and distortion while not decreasing conditional entropy.",
+        "deps": [
+          "def-it-finite-wyner-ziv-code",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-it-finite-wyner-ziv-function-convexity-continuity",
+        "kind": "lemma",
+        "title": "Convexity, monotonicity, and continuity of finite Wyner-Ziv rate",
+        "statement": "The finite single-letter Wyner-Ziv function is nonincreasing and convex on its feasible distortion interval and continuous at both finite endpoints.",
+        "strategy": "Use nested feasible sets, finite time sharing, compact attainment under the cardinality bound, and endpoint mixtures with a minimum-distortion test channel and a zero-rate decoder-only reconstruction.",
+        "deps": [
+          "def-it-finite-wyner-ziv-code",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-it-wyner-ziv-auxiliary-cardinality-bound",
+          "thm-heine-borel-rn",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-it-berger-tung-finite-multiterminal-inner-bound",
+        "kind": "theorem",
+        "title": "Finite-alphabet Berger-Tung multiterminal lossy inner bound",
+        "statement": "For a finite IID k-source and product test channels P(U_i|X_i), every rate vector satisfying sum_{i in S} R_i >= I(X_S;U_S|U_{S^c}) for every nonempty S, together with finite per-terminal reconstruction maps and distortion constraints, is achievable; this is an inner bound and no general exactness claim is made.",
+        "strategy": "Use independent marginal codebooks, covering at each encoder, the finite selected-codeword Markov lemma, random binning, the all-nonempty-subset packing bound, bounded distortion, and finite deterministic selection.",
+        "deps": [
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-conditional-mutual-information",
+          "def-it-finite-iid-multisource",
+          "def-it-finite-multiterminal-lossy-code",
+          "def-it-finite-mutual-information",
+          "def-it-finite-strongly-typical-set",
+          "def-it-jointly-typical-multisource-blocks",
+          "lem-it-finite-codebook-covering-selection-law",
+          "lem-it-finite-random-bin-packing-bound",
+          "lem-it-finite-selected-codeword-markov-typicality",
+          "lem-it-finite-type-class-cardinality-bounds",
+          "lem-it-multisource-typicality-probability",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-it-finite-alphabet-wyner-ziv-rate-distortion",
+        "kind": "theorem",
+        "title": "Finite-alphabet memoryless Wyner-Ziv theorem",
+        "statement": "For finite alphabets, iid (X,Y), finite bounded distortion d(x,xhat) independent of Y, and side information Y available only at the decoder, the operational rate-distortion function equals min I(X;U|Y) over finite U-X-Y and xhat=g(Y,U), with |U| <= |X|+1 and the expected-distortion constraint.",
+        "strategy": "Prove the converse by finite conditional-mutual-information single-letterization; prove achievability with a typical codebook of rate I(X;U), binning at I(X;U)-I(Y;U)=I(X;U|Y), selected-codeword Markov typicality, packing, bounded distortion, and a diagonal limit.",
+        "deps": [
+          "def-it-finite-conditional-mutual-information",
+          "def-it-finite-iid-multisource",
+          "def-it-finite-mutual-information",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-it-finite-strongly-typical-set",
+          "def-it-finite-wyner-ziv-code",
+          "def-it-jointly-typical-multisource-blocks",
+          "lem-it-finite-codebook-covering-selection-law",
+          "lem-it-finite-random-bin-packing-bound",
+          "lem-it-finite-selected-codeword-markov-typicality",
+          "lem-it-finite-type-class-cardinality-bounds",
+          "lem-it-finite-wyner-ziv-function-convexity-continuity",
+          "lem-it-multisource-typicality-probability",
+          "lem-it-wyner-ziv-auxiliary-cardinality-bound",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      }
+    ],
+    "summary": "Prove the exact finite-alphabet memoryless Wyner-Ziv theorem with decoder-only side information and the |U| <= |X|+1 cardinality bound. Distinguish this exact single-encoder region from the finite-alphabet Berger-Tung inner bound, without claiming a general multiterminal lossy region.",
+    "scaffold": "research/plan-information-theory-track.md"
+  },
+  {
+    "order": 2527,
+    "id": "lossy-source-coding-with-side-information-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Lossy Source Coding with Side Information \u2014 Examples",
+    "companion": "lossy-source-coding-with-side-information",
+    "requires": [
+      "lossy-source-coding-with-side-information"
+    ],
+    "items": [
+      {
+        "id": "ex-it-wyner-ziv-with-no-side-information",
+        "kind": "example",
+        "title": "No side information reduces Wyner-Ziv to ordinary rate distortion",
+        "statement": "When Y is constant, verifies that the decoder-only side-information single-letter minimum equals the ordinary finite-alphabet information rate-distortion function.",
+        "strategy": "Compare every auxiliary U and reconstruction g(U) with the induced reproduction channel, then use the admissible choice U=Xhat.",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "def-it-finite-wyner-ziv-code",
+          "thm-it-finite-alphabet-wyner-ziv-rate-distortion",
+          "thm-it-finite-markov-data-processing"
+        ],
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-it-wyner-ziv-lossless-slepian-wolf-endpoint",
+        "kind": "example",
+        "title": "Lossless Wyner-Ziv endpoint is the Slepian-Wolf rate",
+        "statement": "For finite (X,Y) and Hamming distortion at D=0, computes the Wyner-Ziv expression as H(X|Y), agreeing with the exact one-encoder Slepian-Wolf specialization when the decoder knows Y.",
+        "strategy": "A feasible zero-distortion reconstruction is a deterministic function of (Y,U), so H(X|Y,U)=0; choosing U=X attains H(X|Y).",
+        "deps": [
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-iid-multisource",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-it-finite-wyner-ziv-code",
+          "def-it-multiterminal-lossless-code",
+          "def-it-single-letter-distortion-and-block-distortion",
+          "thm-it-finite-alphabet-wyner-ziv-rate-distortion",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality",
+          "thm-it-slepian-wolf-rate-region"
+        ],
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-it-berger-tung-lossless-slepian-wolf-special-case",
+        "kind": "example",
+        "title": "Berger-Tung inner bound contains the Slepian-Wolf region",
+        "statement": "With U_i=X_i and Hamming distortion zero, computes the k-source Berger-Tung subset inequalities as the exact Slepian-Wolf inequalities.",
+        "strategy": "Substitute the identity auxiliaries, simplify the conditional mutual informations, and invoke the complete finite-IID Slepian-Wolf theorem for exactness in this lossless special case.",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-iid-multisource",
+          "def-it-finite-multiterminal-lossy-code",
+          "def-it-multiterminal-lossless-code",
+          "thm-it-berger-tung-finite-multiterminal-inner-bound",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-slepian-wolf-rate-region"
+        ],
+        "justified_by": [],
+        "dependency_level": 8
+      }
+    ],
+    "summary": "Work the no-side-information and lossless decoder-side-information endpoints, and exhibit the exact Slepian-Wolf special case inside the Berger-Tung inner bound. The general multiterminal lossy region remains explicitly an inner-bound-only statement.",
+    "scaffold": "research/plan-information-theory-track.md"
+  }
+]

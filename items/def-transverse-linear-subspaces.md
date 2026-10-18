@@ -3,6 +3,7 @@ id: def-transverse-linear-subspaces
 kind: definition
 title: "Transverse linear subspaces"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: literature-derived
@@ -13,12 +14,12 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-09-01
   precheck: n/a
   judge:
-    model: "gpt-5.6-terra"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-31
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/def-transverse-linear-subspaces.json
 sources:
   scraped: []
   references:

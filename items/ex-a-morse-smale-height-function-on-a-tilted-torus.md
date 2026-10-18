@@ -5,6 +5,7 @@ title: "A Morse--Smale height function on a tilted torus"
 status: published
 verification:
   audited: 2026-09-07
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/ex-a-morse-smale-height-function-on-a-tilted-torus.json
 origin: pipeline
 provenance:
   statement: literature-derived
@@ -31,7 +32,7 @@ For the induced metric $g=(2+\cos v)^2du^2+dv^2$, the pair $(f,g)$ is Morse--Sma
 
 [F1] The metric Morse--Smale condition is transversality of all backward-/forward-limit manifolds for the complete negative gradient ([[def-morse-smale-pair]]).
 
-[F2] A transverse stable--unstable intersection has dimension equal to the index drop ([[prop-parametrized-morse-trajectory-space-is-a-manifold]]).
+[F2] A nonempty transverse stable--unstable intersection has dimension equal to the index drop ([[prop-parametrized-morse-trajectory-space-is-a-manifold]]).
 
 [F3] A regular intermediate level represents each time-translation class exactly once ([[lem-evaluation-on-a-regular-level-identifies-unparametrized-trajectories]]).
 

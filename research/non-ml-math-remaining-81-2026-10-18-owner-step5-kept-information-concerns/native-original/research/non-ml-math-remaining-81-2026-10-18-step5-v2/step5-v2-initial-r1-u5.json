@@ -1,0 +1,660 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "initial",
+  "round": 1,
+  "unit": "5",
+  "input_sha256": "5a7686cf6af281fffc281470b9fd4d1b4497cd3e88649ffa4676dd5e748ac1b1",
+  "decisions": [
+    {
+      "id": "lem-same-marginal-conditional-product-law-well-defined",
+      "model": "gpt-6-luna",
+      "context_sha256": "afa70161c9c5e51652300729784044a0ecb124fbbed68aae2bc6dcb64dd3fe03",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The rectangle identity gives the Z marginal by setting A=E_X and B=E_Y with C arbitrary, not C=E_Z. Repaired that immediate marginal calculation. The supplied simultaneous-uniqueness lemma explicitly requires AC, already in Given/A1; made that hypothesis visible in the Statement. Product-kernel composition and equality outside the union of the two null sets then prove existence and version independence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-standard-borel-conditional-mutual-information",
+      "model": "gpt-6-luna",
+      "context_sha256": "e6988c09f06463b18cef2909405342714fea0400442d71e8c8e9ebac52e5cd42",
+      "outcome": "confirmed_fatal",
+      "reason": "The original KL compares P_XYZ on X×Y×Z to R on Z×X×Y, so it is undefined for distinct carriers. Both laws now explicitly use Z,X,Y and P_ZXY. Rectangle construction supplies a probability reference independent of kernel versions; explicit AC carries the conditional-law and KL interfaces. MIT 6.441 Chapter 2 Definition 2.4 confirms the product-of-conditional-marginals construction; this repair uses the local joint-law lemma rather than assuming a joint density.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"
+      ],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "ex-finite-deterministic-copy-has-mutual-information-equal-to-entropy",
+      "model": "gpt-6-luna",
+      "context_sha256": "62dad09384414a3c2fd5192b695c1b8bc3c18824035256475c869311a966695f",
+      "outcome": "confirmed_fatal",
+      "reason": "The finite-KL bridge explicitly assumes AC for the measurable-space KL interface. Added that existing Given/A1 assumption to the Statement. At p=0 or 1 both laws are the same point mass. For 0<p<1 the diagonal ratios are 1/p and 1/(1-p), giving exactly the asserted finite entropy; no arbitrary finite density selection is needed. Also removed the premature internal tag in step 1.2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "id": "thm-finite-alphabet-conditional-entropy-version-and-chain-rule",
+      "model": "gpt-6-luna",
+      "context_sha256": "13db64f34e706904dc29575034e7b4a52000754d9a39b8713faf05b68f1ee125",
+      "outcome": "confirmed_fatal",
+      "reason": "Disintegration and simultaneous uniqueness explicitly assume AC, which the original Statement omitted. Added AC. For finite i,j, the two disintegrations give equality of the event integrals of p_i m_ij and p_ij; testing strict discrepancy sets proves their almost-everywhere equality on one common finite-union null set. The finite rowwise logarithm identity integrates to the chain rule, including zero rows. Version invariance now explicitly covers (X,U)|Z, and finiteness uses the supplied |alphabet|/e bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "id": "thm-law-entropy-countable-support-characterization",
+      "model": "gpt-6-luna",
+      "context_sha256": "a3e3b1e81a349506d12ba06e29a840c30920f789071a608d890b9b6f1b2bd016",
+      "outcome": "confirmed_fatal",
+      "reason": "The countable determining-algebra supplier assumes AC, and countable union of arbitrary finite atom sets uses it; made this hypothesis explicit in the Statement and A1. Each mass-threshold set is finite. On countable full support the explicit diagonal density is 1/p_i and monotone convergence gives the entropy sum. Otherwise the measurable diagonal outside S×S has positive joint mass and zero product mass by its singleton sections, so KL is infinite. MIT Chapter 2 Theorem 2.4(1) supplies the same complete diagonal-null-set argument.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"
+      ],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "id": "thm-mutual-information-and-conditional-mutual-information-equality-conditions",
+      "model": "gpt-6-luna",
+      "context_sha256": "fbe136e39dabcd8a1d63f6a28033413c1c7f7364044466a0a738c7eb510f7732",
+      "outcome": "confirmed_fatal",
+      "reason": "The original equality criterion compared P_XYZ to a Z,X,Y law and concluded equality on C×A×B without a coordinate permutation. Repaired both directions to use P_ZXY. KL=0 iff equality of probability measures gives the law criterion; conditioning-event tests give the indicator factorization, and bounded simple approximation gives all bounded f,g. The reverse indicator identity determines the entire law by pi-lambda. AC is now explicit as required by KL and conditional independence.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"
+      ],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "ex-uniform-law-has-infinite-self-information-entropy",
+      "model": "gpt-6-luna",
+      "context_sha256": "1312fe5af95077dd48f7535b1ebc9de9622cb4a73898cf074130534b0ab11416",
+      "outcome": "confirmed_fatal",
+      "reason": "The Lebesgue definition explicitly postpones countable additivity to its complete-measure theorem. Added that existing published theorem to deps and F1, so restriction to Borel subsets is a countably additive measure, and the box theorem normalizes it and makes every singleton null. Explicit AC supplies countable choice and the repaired law-entropy theorem. The empty atomic set gives infinite self-MI, while the density 1_[0,1] has identically zero f ln f and differential entropy zero.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-same-marginal-conditional-product-law-well-defined",
+      "reason": "The rectangle identity gives the Z marginal by setting A=E_X and B=E_Y with C arbitrary, not C=E_Z. Repaired that immediate marginal calculation. The supplied simultaneous-uniqueness lemma explicitly requires AC, already in Given/A1; made that hypothesis visible in the Statement. Product-kernel composition and equality outside the union of the two null sets then prove existence and version independence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "e6709591d2b8eb89c35cd005bd4266d0ef26c18cb52ddddce6c8384beef34ed3",
+      "review_context_sha256": "4de53f1f8dd43ce1f89f047321740299fcc89d4d6171988cd1397d4212cf4a05"
+    },
+    {
+      "id": "def-standard-borel-conditional-mutual-information",
+      "reason": "The original KL compares P_XYZ on X×Y×Z to R on Z×X×Y, so it is undefined for distinct carriers. Both laws now explicitly use Z,X,Y and P_ZXY. Rectangle construction supplies a probability reference independent of kernel versions; explicit AC carries the conditional-law and KL interfaces. MIT 6.441 Chapter 2 Definition 2.4 confirms the product-of-conditional-marginals construction; this repair uses the local joint-law lemma rather than assuming a joint density.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"
+      ],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "0548f3097d9d1423a5b22704c297e1eb25d7e18b80a209895dd0408d9a2da042",
+      "review_context_sha256": "63cbfb8ec7b5f0e91ba9b75a8ea2991ee4ec56b386a6357d415786dfd054e500"
+    },
+    {
+      "id": "ex-finite-deterministic-copy-has-mutual-information-equal-to-entropy",
+      "reason": "The finite-KL bridge explicitly assumes AC for the measurable-space KL interface. Added that existing Given/A1 assumption to the Statement. At p=0 or 1 both laws are the same point mass. For 0<p<1 the diagonal ratios are 1/p and 1/(1-p), giving exactly the asserted finite entropy; no arbitrary finite density selection is needed. Also removed the premature internal tag in step 1.2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "457d2e12344ea02761503ab9f761beee65fc2489a82f03376da193d098af00b6",
+      "review_context_sha256": "b03bbe103142bbac97f1d9f173f4e8327b217b92c49d783b3ded10b4516bb638"
+    },
+    {
+      "id": "thm-finite-alphabet-conditional-entropy-version-and-chain-rule",
+      "reason": "Disintegration and simultaneous uniqueness explicitly assume AC, which the original Statement omitted. Added AC. For finite i,j, the two disintegrations give equality of the event integrals of p_i m_ij and p_ij; testing strict discrepancy sets proves their almost-everywhere equality on one common finite-union null set. The finite rowwise logarithm identity integrates to the chain rule, including zero rows. Version invariance now explicitly covers (X,U)|Z, and finiteness uses the supplied |alphabet|/e bound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "8c952e37c2f03be65248a294016911ac8c44f31a2a6178e024a98cc7836f2644",
+      "review_context_sha256": "1a8fb7f4e8b75b044f5c3e043c5033e89e5b72330ee651aee2de39b5344e6061"
+    },
+    {
+      "id": "thm-law-entropy-countable-support-characterization",
+      "reason": "The countable determining-algebra supplier assumes AC, and countable union of arbitrary finite atom sets uses it; made this hypothesis explicit in the Statement and A1. Each mass-threshold set is finite. On countable full support the explicit diagonal density is 1/p_i and monotone convergence gives the entropy sum. Otherwise the measurable diagonal outside S×S has positive joint mass and zero product mass by its singleton sections, so KL is infinite. MIT Chapter 2 Theorem 2.4(1) supplies the same complete diagonal-null-set argument.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"
+      ],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "e13a8c4f3812603fd671e7fba001626cbe06fbbcaf7b0408ebf837c62ab0bde9",
+      "review_context_sha256": "3e94efa0254c41ca34d216fae02c9dfa06292c341228e30894e926f5e2ef6eb4"
+    },
+    {
+      "id": "thm-mutual-information-and-conditional-mutual-information-equality-conditions",
+      "reason": "The original equality criterion compared P_XYZ to a Z,X,Y law and concluded equality on C×A×B without a coordinate permutation. Repaired both directions to use P_ZXY. KL=0 iff equality of probability measures gives the law criterion; conditioning-event tests give the indicator factorization, and bounded simple approximation gives all bounded f,g. The reverse indicator identity determines the entire law by pi-lambda. AC is now explicit as required by KL and conditional independence.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"
+      ],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "08b4a4e84b010304757d75befb6b069e6025f35631774ad55104dd078114502e",
+      "review_context_sha256": "f93ba73eb91b9da826825bc43ded8764e04e742d911401d9abdc5646906ab532"
+    },
+    {
+      "id": "ex-uniform-law-has-infinite-self-information-entropy",
+      "reason": "The Lebesgue definition explicitly postpones countable additivity to its complete-measure theorem. Added that existing published theorem to deps and F1, so restriction to Borel subsets is a countably additive measure, and the box theorem normalizes it and makes every singleton null. Explicit AC supplies countable choice and the repaired law-entropy theorem. The empty atomic set gives infinite self-MI, while the density 1_[0,1] has identically zero f ln f and differential entropy zero.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "disposition": "repaired",
+      "post_sha256": "4af489dcc10233d154fcedf44bd92986e0cb6749b5ef778c227f3282b30179c6",
+      "review_context_sha256": "e627b2b87690d2065528935b4471df915fd04c75884dda5a2d0b2ad21b0c0794"
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-standard-borel-conditional-mutual-information",
+    "thm-mutual-information-and-conditional-mutual-information-equality-conditions",
+    "thm-mutual-information-chain-rule",
+    "ex-null-conditional-kernel-version-does-not-change-information",
+    "ex-coarsening-conditioning-can-increase-conditional-mutual-information",
+    "thm-mutual-information-and-conditional-mutual-information-quantization",
+    "lem-it-random-cut-ergodic-block-channel-approximation",
+    "lem-standard-borel-memoryless-channel-mutual-information-tensorization",
+    "thm-it-gaussian-vector-squared-error-rate-distortion",
+    "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing",
+    "ex-uniform-law-has-infinite-self-information-entropy"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "lem-same-marginal-conditional-product-law-well-defined",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "stage": "5-adjudicate",
+      "locus": "proof-step",
+      "reason": "The rectangle identity gives the Z marginal by setting A=E_X and B=E_Y with C arbitrary, not C=E_Z. Repaired that immediate marginal calculation. The supplied simultaneous-uniqueness lemma explicitly requires AC, already in Given/A1; made that hypothesis visible in the Statement. Product-kernel composition and equality outside the union of the two null sets then prove existence and version independence.",
+      "source_urls": [],
+      "familiar": true,
+      "uncertain": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "def-standard-borel-conditional-mutual-information",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "stage": "5-adjudicate",
+      "locus": "definition",
+      "reason": "The original KL compares P_XYZ on X×Y×Z to R on Z×X×Y, so it is undefined for distinct carriers. Both laws now explicitly use Z,X,Y and P_ZXY. Rectangle construction supplies a probability reference independent of kernel versions; explicit AC carries the conditional-law and KL interfaces. MIT 6.441 Chapter 2 Definition 2.4 confirms the product-of-conditional-marginals construction; this repair uses the local joint-law lemma rather than assuming a joint density.",
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"
+      ],
+      "familiar": true,
+      "uncertain": false,
+      "defect_type": "logic"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "ex-finite-deterministic-copy-has-mutual-information-equal-to-entropy",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "stage": "5-adjudicate",
+      "locus": "statement",
+      "reason": "The finite-KL bridge explicitly assumes AC for the measurable-space KL interface. Added that existing Given/A1 assumption to the Statement. At p=0 or 1 both laws are the same point mass. For 0<p<1 the diagonal ratios are 1/p and 1/(1-p), giving exactly the asserted finite entropy; no arbitrary finite density selection is needed. Also removed the premature internal tag in step 1.2.",
+      "source_urls": [],
+      "familiar": true,
+      "uncertain": false,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "thm-finite-alphabet-conditional-entropy-version-and-chain-rule",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "stage": "5-adjudicate",
+      "locus": "statement",
+      "reason": "Disintegration and simultaneous uniqueness explicitly assume AC, which the original Statement omitted. Added AC. For finite i,j, the two disintegrations give equality of the event integrals of p_i m_ij and p_ij; testing strict discrepancy sets proves their almost-everywhere equality on one common finite-union null set. The finite rowwise logarithm identity integrates to the chain rule, including zero rows. Version invariance now explicitly covers (X,U)|Z, and finiteness uses the supplied |alphabet|/e bound.",
+      "source_urls": [],
+      "familiar": true,
+      "uncertain": false,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "thm-law-entropy-countable-support-characterization",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "stage": "5-adjudicate",
+      "locus": "statement",
+      "reason": "The countable determining-algebra supplier assumes AC, and countable union of arbitrary finite atom sets uses it; made this hypothesis explicit in the Statement and A1. Each mass-threshold set is finite. On countable full support the explicit diagonal density is 1/p_i and monotone convergence gives the entropy sum. Otherwise the measurable diagonal outside S×S has positive joint mass and zero product mass by its singleton sections, so KL is infinite. MIT Chapter 2 Theorem 2.4(1) supplies the same complete diagonal-null-set argument.",
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"
+      ],
+      "familiar": true,
+      "uncertain": false,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "thm-mutual-information-and-conditional-mutual-information-equality-conditions",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "stage": "5-adjudicate",
+      "locus": "proof-step",
+      "reason": "The original equality criterion compared P_XYZ to a Z,X,Y law and concluded equality on C×A×B without a coordinate permutation. Repaired both directions to use P_ZXY. KL=0 iff equality of probability measures gives the law criterion; conditioning-event tests give the indicator factorization, and bounded simple approximation gives all bounded f,g. The reverse indicator identity determines the entire law by pi-lambda. AC is now explicit as required by KL and conditional independence.",
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"
+      ],
+      "familiar": true,
+      "uncertain": false,
+      "defect_type": "logic"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "ex-uniform-law-has-infinite-self-information-entropy",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "stage": "5-adjudicate",
+      "locus": "facts-block",
+      "reason": "The Lebesgue definition explicitly postpones countable additivity to its complete-measure theorem. Added that existing published theorem to deps and F1, so restriction to Borel subsets is a countably additive measure, and the box theorem normalizes it and makes every singleton null. Explicit AC supplies countable choice and the repaired law-entropy theorem. The empty atomic set gives infinite self-MI, while the density 1_[0,1] has identically zero f ln f and differential entropy zero.",
+      "source_urls": [],
+      "familiar": true,
+      "uncertain": false,
+      "defect_type": "dependency_citation"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-open-finding",
+      "id": "thm-mutual-information-chain-rule",
+      "status": "open",
+      "route": "frontier-owner",
+      "affected_use": "Proof 1.1 constructs the common-Z-marginal law on Z,X,Y; 4.1 identifies the integrated conditional-product divergence with I(X;Y|Z).",
+      "reason": "The actual reference-law calculations already use P_ZXY and remain valid. Given/A1 assumes AC but Statement does not; the minimal necessary repair is to state AC, then inspect only its direct consumers.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-open-finding",
+      "id": "ex-null-conditional-kernel-version-does-not-change-information",
+      "status": "open",
+      "route": "frontier-owner",
+      "affected_use": "Proof 3.1 explicitly compares P_ZXY to its reference, using equality of K and K-prime off the P_Z-null singleton.",
+      "reason": "The coordinate and version-independence argument remains sound under Given AC. Statement omits AC. In addition F2 and Proof 1.1 infer that restricted Lebesgue measure is a probability without citing the complete-measure theorem; add that existing dependency and citation. No claim needs narrowing.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-open-finding",
+      "id": "ex-coarsening-conditioning-can-increase-conditional-mutual-information",
+      "status": "open",
+      "route": "frontier-owner",
+      "affected_use": "Proof 1.1 compares the law of (Z,X,Y) to the product reference; 1.2 computes the law of (W,X,Y) against that reference.",
+      "reason": "Both computations already use conditioning-first order, so the coordinate correction preserves their values. Given/A1 assumes AC but Statement omits it; explicitly state the existing assumption.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-open-finding",
+      "id": "thm-mutual-information-and-conditional-mutual-information-quantization",
+      "status": "open",
+      "route": "frontier-owner",
+      "affected_use": "Proof 2.2 retains Z and pushes the reference to rectangles C×A-prime×B-prime using the product of the quantized kernels.",
+      "reason": "This is exactly the corrected Z,X,Y reference and its push-forward. Given/A1 supplies AC for generating algebras and conditional laws but Statement omits it; add the actual hypothesis, with no change to either limit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-open-finding",
+      "id": "lem-it-random-cut-ergodic-block-channel-approximation",
+      "status": "open",
+      "route": "frontier-owner",
+      "affected_use": "Facts F5 and Proof 4.2 use symmetry, chain rules and nonnegativity of conditional information given the marker process E; coordinate-swap invariance is explicit.",
+      "reason": "The CMI use remains sound: Statement assumes AC, and swapping both laws preserves KL. Separately F4 calls unit-interval Lebesgue restriction a probability using only the box normalization; add thm-lebesgue-measure-is-a-complete-measure for countable additivity. This is an outside-lane frontier alert, not an adjudication of that item.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-open-finding",
+      "id": "def-measure-theoretic-mutual-information",
+      "status": "open",
+      "route": "frontier-owner",
+      "affected_use": "Definition defines measurable-space KL of the joint law and marginal product without stating AC; its axiom_use field says AC is inherited.",
+      "reason": "Outside assigned item scope. The local explicit-choice convention requires the actual inherited AC assumption in this defining interface; the minimal repair is to expose it, preserving the entire definition, and examine direct consumers only if that Definition changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-open-finding",
+      "id": "def-law-entropy-as-self-mutual-information",
+      "status": "open",
+      "route": "frontier-owner",
+      "affected_use": "Definition defines the self-MI through measurable-space KL without stating AC; its axiom_use field says AC is inherited.",
+      "reason": "Outside assigned item scope. The local explicit-choice convention requires the actual inherited AC assumption in this defining interface; the minimal repair is to expose it, preserving the entire definition, and examine direct consumers only if that Definition changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-open-finding",
+      "id": "def-finite-alphabet-conditional-entropy-given-observation",
+      "status": "open",
+      "route": "frontier-owner",
+      "affected_use": "Definition asserts version independence using simultaneous standard-Borel conditional-law uniqueness without stating AC; its uniqueness supplier explicitly assumes AC.",
+      "reason": "Outside assigned item scope. The local explicit-choice convention requires the actual inherited AC assumption in this defining interface; the minimal repair is to expose it, preserving the entire definition, and examine direct consumers only if that Definition changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-supplier-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update",
+      "reason": "All eleven discovered direct item consumers are draft members of the frozen frontier. No published consumer was found for any changed assigned interface, and no published item was edited or adjudicated. The published Lebesgue complete-measure supplier is sound for the cited countable-additivity claim under countable choice.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "repair_notes": [
+    {
+      "id": "lem-same-marginal-conditional-product-law-well-defined",
+      "reason": "The rectangle identity gives the Z marginal by setting A=E_X and B=E_Y with C arbitrary, not C=E_Z. Repaired that immediate marginal calculation. The supplied simultaneous-uniqueness lemma explicitly requires AC, already in Given/A1; made that hypothesis visible in the Statement. Product-kernel composition and equality outside the union of the two null sets then prove existence and version independence.",
+      "next_action": "Assigned item repair and focused checks complete; controller owns downstream work and renewed independent judgment."
+    },
+    {
+      "id": "def-standard-borel-conditional-mutual-information",
+      "reason": "The original KL compares P_XYZ on X×Y×Z to R on Z×X×Y, so it is undefined for distinct carriers. Both laws now explicitly use Z,X,Y and P_ZXY. Rectangle construction supplies a probability reference independent of kernel versions; explicit AC carries the conditional-law and KL interfaces. MIT 6.441 Chapter 2 Definition 2.4 confirms the product-of-conditional-marginals construction; this repair uses the local joint-law lemma rather than assuming a joint density.",
+      "next_action": "Assigned item repair and focused checks complete; controller owns downstream work and renewed independent judgment."
+    },
+    {
+      "id": "ex-finite-deterministic-copy-has-mutual-information-equal-to-entropy",
+      "reason": "The finite-KL bridge explicitly assumes AC for the measurable-space KL interface. Added that existing Given/A1 assumption to the Statement. At p=0 or 1 both laws are the same point mass. For 0<p<1 the diagonal ratios are 1/p and 1/(1-p), giving exactly the asserted finite entropy; no arbitrary finite density selection is needed. Also removed the premature internal tag in step 1.2.",
+      "next_action": "Assigned item repair and focused checks complete; controller owns downstream work and renewed independent judgment."
+    },
+    {
+      "id": "thm-finite-alphabet-conditional-entropy-version-and-chain-rule",
+      "reason": "Disintegration and simultaneous uniqueness explicitly assume AC, which the original Statement omitted. Added AC. For finite i,j, the two disintegrations give equality of the event integrals of p_i m_ij and p_ij; testing strict discrepancy sets proves their almost-everywhere equality on one common finite-union null set. The finite rowwise logarithm identity integrates to the chain rule, including zero rows. Version invariance now explicitly covers (X,U)|Z, and finiteness uses the supplied |alphabet|/e bound.",
+      "next_action": "Assigned item repair and focused checks complete; controller owns downstream work and renewed independent judgment."
+    },
+    {
+      "id": "thm-law-entropy-countable-support-characterization",
+      "reason": "The countable determining-algebra supplier assumes AC, and countable union of arbitrary finite atom sets uses it; made this hypothesis explicit in the Statement and A1. Each mass-threshold set is finite. On countable full support the explicit diagonal density is 1/p_i and monotone convergence gives the entropy sum. Otherwise the measurable diagonal outside S×S has positive joint mass and zero product mass by its singleton sections, so KL is infinite. MIT Chapter 2 Theorem 2.4(1) supplies the same complete diagonal-null-set argument.",
+      "next_action": "Assigned item repair and focused checks complete; controller owns downstream work and renewed independent judgment."
+    },
+    {
+      "id": "thm-mutual-information-and-conditional-mutual-information-equality-conditions",
+      "reason": "The original equality criterion compared P_XYZ to a Z,X,Y law and concluded equality on C×A×B without a coordinate permutation. Repaired both directions to use P_ZXY. KL=0 iff equality of probability measures gives the law criterion; conditioning-event tests give the indicator factorization, and bounded simple approximation gives all bounded f,g. The reverse indicator identity determines the entire law by pi-lambda. AC is now explicit as required by KL and conditional independence.",
+      "next_action": "Assigned item repair and focused checks complete; controller owns downstream work and renewed independent judgment."
+    },
+    {
+      "id": "ex-uniform-law-has-infinite-self-information-entropy",
+      "reason": "The Lebesgue definition explicitly postpones countable additivity to its complete-measure theorem. Added that existing published theorem to deps and F1, so restriction to Borel subsets is a countably additive measure, and the box theorem normalizes it and makes every singleton null. Explicit AC supplies countable choice and the repaired law-entropy theorem. The empty atomic set gives infinite self-MI, while the density 1_[0,1] has identically zero f ln f and differential entropy zero.",
+      "next_action": "Assigned item repair and focused checks complete; controller owns downstream work and renewed independent judgment."
+    },
+    {
+      "consumer_examination": [
+        {
+          "id": "def-standard-borel-conditional-mutual-information",
+          "suppliers": [
+            "lem-same-marginal-conditional-product-law-well-defined"
+          ],
+          "path": "items/def-standard-borel-conditional-mutual-information.md",
+          "affected_use": "Definition constructs R from K,L on C×A×B and now explicitly assumes AC.",
+          "disposition": "repaired_here",
+          "reason": "The Z,X,Y order and AC hypothesis now agree with the supplier; version independence is unchanged.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        },
+        {
+          "id": "thm-mutual-information-and-conditional-mutual-information-equality-conditions",
+          "suppliers": [
+            "lem-same-marginal-conditional-product-law-well-defined",
+            "def-standard-borel-conditional-mutual-information"
+          ],
+          "path": "items/thm-mutual-information-and-conditional-mutual-information-equality-conditions.md",
+          "affected_use": "Proof 1.2 and 2.1 use equality of the joint law and conditional-product reference on C×A×B.",
+          "disposition": "repaired_here",
+          "reason": "P_ZXY is used in both directions, and AC is now explicit. No conclusion is dropped.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        },
+        {
+          "id": "thm-mutual-information-chain-rule",
+          "suppliers": [
+            "lem-same-marginal-conditional-product-law-well-defined",
+            "def-standard-borel-conditional-mutual-information"
+          ],
+          "path": "items/thm-mutual-information-chain-rule.md",
+          "affected_use": "Proof 1.1 constructs the common-Z-marginal law on Z,X,Y; 4.1 identifies the integrated conditional-product divergence with I(X;Y|Z).",
+          "disposition": "owner_repair_needed",
+          "reason": "The actual reference-law calculations already use P_ZXY and remain valid. Given/A1 assumes AC but Statement does not; the minimal necessary repair is to state AC, then inspect only its direct consumers.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        },
+        {
+          "id": "ex-null-conditional-kernel-version-does-not-change-information",
+          "suppliers": [
+            "lem-same-marginal-conditional-product-law-well-defined",
+            "def-standard-borel-conditional-mutual-information"
+          ],
+          "path": "items/ex-null-conditional-kernel-version-does-not-change-information.md",
+          "affected_use": "Proof 3.1 explicitly compares P_ZXY to its reference, using equality of K and K-prime off the P_Z-null singleton.",
+          "disposition": "owner_repair_needed",
+          "reason": "The coordinate and version-independence argument remains sound under Given AC. Statement omits AC. In addition F2 and Proof 1.1 infer that restricted Lebesgue measure is a probability without citing the complete-measure theorem; add that existing dependency and citation. No claim needs narrowing.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        },
+        {
+          "id": "ex-coarsening-conditioning-can-increase-conditional-mutual-information",
+          "suppliers": [
+            "lem-same-marginal-conditional-product-law-well-defined",
+            "def-standard-borel-conditional-mutual-information"
+          ],
+          "path": "items/ex-coarsening-conditioning-can-increase-conditional-mutual-information.md",
+          "affected_use": "Proof 1.1 compares the law of (Z,X,Y) to the product reference; 1.2 computes the law of (W,X,Y) against that reference.",
+          "disposition": "owner_repair_needed",
+          "reason": "Both computations already use conditioning-first order, so the coordinate correction preserves their values. Given/A1 assumes AC but Statement omits it; explicitly state the existing assumption.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        },
+        {
+          "id": "thm-mutual-information-and-conditional-mutual-information-quantization",
+          "suppliers": [
+            "lem-same-marginal-conditional-product-law-well-defined",
+            "def-standard-borel-conditional-mutual-information"
+          ],
+          "path": "items/thm-mutual-information-and-conditional-mutual-information-quantization.md",
+          "affected_use": "Proof 2.2 retains Z and pushes the reference to rectangles C×A-prime×B-prime using the product of the quantized kernels.",
+          "disposition": "owner_repair_needed",
+          "reason": "This is exactly the corrected Z,X,Y reference and its push-forward. Given/A1 supplies AC for generating algebras and conditional laws but Statement omits it; add the actual hypothesis, with no change to either limit.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        },
+        {
+          "id": "lem-it-random-cut-ergodic-block-channel-approximation",
+          "suppliers": [
+            "def-standard-borel-conditional-mutual-information"
+          ],
+          "path": "items/lem-it-random-cut-ergodic-block-channel-approximation.md",
+          "affected_use": "Facts F5 and Proof 4.2 use symmetry, chain rules and nonnegativity of conditional information given the marker process E; coordinate-swap invariance is explicit.",
+          "disposition": "owner_alert",
+          "reason": "The CMI use remains sound: Statement assumes AC, and swapping both laws preserves KL. Separately F4 calls unit-interval Lebesgue restriction a probability using only the box normalization; add thm-lebesgue-measure-is-a-complete-measure for countable additivity. This is an outside-lane frontier alert, not an adjudication of that item.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        },
+        {
+          "id": "lem-standard-borel-memoryless-channel-mutual-information-tensorization",
+          "suppliers": [
+            "def-standard-borel-conditional-mutual-information"
+          ],
+          "path": "items/lem-standard-borel-memoryless-channel-mutual-information-tensorization.md",
+          "affected_use": "Facts F3 and Proof 1.2-1.3 set conditional information to zero when the conditional product is the actual joint law.",
+          "disposition": "unchanged_sound",
+          "reason": "Statement explicitly assumes AC. Equality of probability laws is taken on the same conditioning-first product, so the repaired definition preserves these zero values and inequalities.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        },
+        {
+          "id": "thm-it-gaussian-vector-squared-error-rate-distortion",
+          "suppliers": [
+            "def-standard-borel-conditional-mutual-information"
+          ],
+          "path": "items/thm-it-gaussian-vector-squared-error-rate-distortion.md",
+          "affected_use": "Facts F3 and Proof 1.1 and 2.1 use nonnegative conditional information to drop a term in an extended nonnegative chain-rule sum.",
+          "disposition": "unchanged_sound",
+          "reason": "Statement explicitly assumes AC. A common coordinate order makes the KL nonnegative; the change does not alter any scalar information value or bit conversion.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        },
+        {
+          "id": "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing",
+          "suppliers": [
+            "def-standard-borel-conditional-mutual-information"
+          ],
+          "path": "items/lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing.md",
+          "affected_use": "Facts F3 and Proof 1.1 integrate conditional information and Proof 3.1 uses zero conditional information under the asserted conditional factorization.",
+          "disposition": "unchanged_sound",
+          "reason": "Statement explicitly assumes AC. The corrected full-law KL definition has the same reference product and these uses require no coordinate-specific alteration.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        },
+        {
+          "id": "ex-uniform-law-has-infinite-self-information-entropy",
+          "suppliers": [
+            "thm-law-entropy-countable-support-characterization"
+          ],
+          "path": "items/ex-uniform-law-has-infinite-self-information-entropy.md",
+          "affected_use": "Proof 2.1 applies the positive non-atomic-mass branch to the empty atomic set of the uniform Borel probability.",
+          "disposition": "repaired_here",
+          "reason": "Explicit AC satisfies the repaired theorem; the added complete-measure dependency establishes that the restriction is actually a probability before the entropy theorem is applied.",
+          "uncertain": false,
+          "source_urls": [],
+          "familiar": true
+        }
+      ],
+      "propagation": "Compared each original and current Statement/Definition directly. All seven assigned items now state their actual AC hypothesis; the conditional-information definition also changes P_XYZ to P_ZXY. Direct ID/dependency/reference searches found exactly the eleven consumers listed. The remaining four changed assigned interfaces have no direct item consumers. No aliases are declared. No unassigned item was edited and no second-hop expansion was performed."
+    },
+    {
+      "page_interfaces": [
+        {
+          "path": "library/information-theory/measure-theoretic-information-and-conditioning.md",
+          "disposition": "unchanged_sound",
+          "reason": "The summary promises the same entropy, zero-information, chain-rule and quantization results and makes no coordinate-order assertion. Explicit AC restores the intended supplier hypotheses without altering the promised results."
+        },
+        {
+          "path": "library/information-theory/measure-theoretic-information-and-conditioning-examples.md",
+          "disposition": "unchanged_sound",
+          "reason": "The four examples remain the same computations, and the summary makes no claim that these measurable-space KL interfaces are choice-free."
+        }
+      ]
+    },
+    {
+      "formatting": "The first scoped precheck found an untagged step opening and proposed renumbering in the two repaired proofs. Adopted canonical numbering and placed each affected step on one source paragraph with inline mathematics. Rechecked the same arguments after these formatting changes and captured the two final review hashes immediately. No later item edits followed the successful final proof-layout.",
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-same-marginal-conditional-product-law-well-defined.md items/def-standard-borel-conditional-mutual-information.md items/ex-finite-deterministic-copy-has-mutual-information-equal-to-entropy.md items/thm-finite-alphabet-conditional-entropy-version-and-chain-rule.md items/thm-law-entropy-countable-support-characterization.md items/thm-mutual-information-and-conditional-mutual-information-equality-conditions.md items/ex-uniform-law-has-infinite-self-information-entropy.md",
+          "exit_code": 0,
+          "result": "6 checked, 0 failing; definition has no phase proof."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/lem-same-marginal-conditional-product-law-well-defined.md items/def-standard-borel-conditional-mutual-information.md items/ex-finite-deterministic-copy-has-mutual-information-equal-to-entropy.md items/thm-finite-alphabet-conditional-entropy-version-and-chain-rule.md items/thm-law-entropy-countable-support-characterization.md items/thm-mutual-information-and-conditional-mutual-information-equality-conditions.md items/ex-uniform-law-has-infinite-self-information-entropy.md",
+          "exit_code": 0,
+          "result": "7 files; no math, delimiter, wikilink-in-math or frontmatter errors."
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/lem-same-marginal-conditional-product-law-well-defined.md items/def-standard-borel-conditional-mutual-information.md items/ex-finite-deterministic-copy-has-mutual-information-equal-to-entropy.md items/thm-finite-alphabet-conditional-entropy-version-and-chain-rule.md items/thm-law-entropy-countable-support-characterization.md items/thm-mutual-information-and-conditional-mutual-information-equality-conditions.md items/ex-uniform-law-has-infinite-self-information-entropy.md",
+          "exit_code": 0,
+          "result": "7 items, 19 steps, 0 defects."
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/non-ml-math-remaining-81-2026-10-18-batch-5.proof-contracts.json --strict --items lem-same-marginal-conditional-product-law-well-defined,def-standard-borel-conditional-mutual-information,ex-finite-deterministic-copy-has-mutual-information-equal-to-entropy,thm-finite-alphabet-conditional-entropy-version-and-chain-rule,thm-law-entropy-countable-support-characterization,thm-mutual-information-and-conditional-mutual-information-equality-conditions,ex-uniform-law-has-infinite-self-information-entropy",
+          "exit_code": 0,
+          "result": "0 errors, 0 warnings, 7/7 items checked."
+        }
+      ]
+    },
+    {
+      "metadata_integration": "Only the seven assigned manifest item rows and their owning proof-contract entries were synchronized. Each update used acquire/reread/edit/JSON-parse-check/release with tools/step5-shared-write-lock.mjs. Existing independent risk_review records and historical round evidence were preserved. The new Lebesgue supplier was added to the uniform example contract and manifest dependency list; no new item was authored.",
+      "source_reading": "Consulted MIT 6.441 Chapter 2 Definition 2.4 (PDF page 7) for the conditional-marginal product and the complete proof of Theorem 2.4(1) (PDF page 4) for diagonal self-information. The latter establishes the countable-support/singular-residual dichotomy. Local standard-Borel algebra, product section integration, monotone convergence and the explicit density calculation supply the detailed library proof. No source reading is claimed for the other bibliography entries.",
+      "unresolved_assigned_obligations": []
+    },
+    {
+      "status": "assigned_repairs_complete",
+      "handoff": "Seven rejected tuples adjudicated; all seven assigned carriers repaired. Six assigned fatal findings and one nonfatal marginal slip are recorded. Unassigned frontier findings remain explicit owner work. These self-checked repairs carry no independent review or certification claim; the engine owns renewed judgment, downstream closure and convergence."
+    }
+  ],
+  "gate_resolutions": [],
+  "downstream_uses": {
+    "def-standard-borel-conditional-mutual-information": "items/def-standard-borel-conditional-mutual-information.md: Definition constructs R from K,L on C×A×B and now explicitly assumes AC.",
+    "thm-mutual-information-and-conditional-mutual-information-equality-conditions": "items/thm-mutual-information-and-conditional-mutual-information-equality-conditions.md: Proof 1.2 and 2.1 use equality of the joint law and conditional-product reference on C×A×B.",
+    "thm-mutual-information-chain-rule": "items/thm-mutual-information-chain-rule.md: Proof 1.1 constructs the common-Z-marginal law on Z,X,Y; 4.1 identifies the integrated conditional-product divergence with I(X;Y|Z).",
+    "ex-null-conditional-kernel-version-does-not-change-information": "items/ex-null-conditional-kernel-version-does-not-change-information.md: Proof 3.1 explicitly compares P_ZXY to its reference, using equality of K and K-prime off the P_Z-null singleton.",
+    "ex-coarsening-conditioning-can-increase-conditional-mutual-information": "items/ex-coarsening-conditioning-can-increase-conditional-mutual-information.md: Proof 1.1 compares the law of (Z,X,Y) to the product reference; 1.2 computes the law of (W,X,Y) against that reference.",
+    "thm-mutual-information-and-conditional-mutual-information-quantization": "items/thm-mutual-information-and-conditional-mutual-information-quantization.md: Proof 2.2 retains Z and pushes the reference to rectangles C×A-prime×B-prime using the product of the quantized kernels.",
+    "lem-it-random-cut-ergodic-block-channel-approximation": "items/lem-it-random-cut-ergodic-block-channel-approximation.md: Facts F5 and Proof 4.2 use symmetry, chain rules and nonnegativity of conditional information given the marker process E; coordinate-swap invariance is explicit.",
+    "lem-standard-borel-memoryless-channel-mutual-information-tensorization": "items/lem-standard-borel-memoryless-channel-mutual-information-tensorization.md: Facts F3 and Proof 1.2-1.3 set conditional information to zero when the conditional product is the actual joint law.",
+    "thm-it-gaussian-vector-squared-error-rate-distortion": "items/thm-it-gaussian-vector-squared-error-rate-distortion.md: Facts F3 and Proof 1.1 and 2.1 use nonnegative conditional information to drop a term in an extended nonnegative chain-rule sum.",
+    "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing": "items/lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing.md: Facts F3 and Proof 1.1 integrate conditional information and Proof 3.1 uses zero conditional information under the asserted conditional factorization.",
+    "ex-uniform-law-has-infinite-self-information-entropy": "items/ex-uniform-law-has-infinite-self-information-entropy.md: Proof 2.1 applies the positive non-atomic-mass branch to the empty atomic set of the uniform Borel probability."
+  }
+}

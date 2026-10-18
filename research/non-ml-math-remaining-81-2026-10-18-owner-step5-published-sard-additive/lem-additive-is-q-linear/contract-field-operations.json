@@ -1,0 +1,448 @@
+{
+  "contract_path": "research/non-ml-math-remaining-81-2026-10-18-batch-2.proof-contracts.json",
+  "operations": [
+    {
+      "pointer": "/contracts/lem-additive-is-q-linear/citations",
+      "original": [
+        {
+          "fact": "A1",
+          "source": "def-additive-function",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb{R}$ be the complete ordered field ([[def-complete-ordered-field]],\n[[def-ordered-field]], [[def-field]]). A function $f : \\mathbb{R} \\to \\mathbb{R}$\nis **additive** when it satisfies **Cauchy's functional equation**\n\n$$f(x + y) \\;=\\; f(x) + f(y) \\qquad \\text{for all } x, y \\in \\mathbb{R}.$$\n\nEquivalently, $f$ is a homomorphism of the additive group of $\\mathbb{R}$ into\nitself.\n\n**The linear maps are additive.** For a fixed real $c$ the function\n$x \\mapsto cx$ satisfies $c(x+y) = cx + cy$ by distributivity, so it is\nadditive. Cauchy's question is whether these are the only additive functions,\nand the answer is a genuine dichotomy: with any one of a short list of\nregularity conditions the answer is yes\n([[thm-cauchy-functional-equation-regularity]]), and without any of them it is\nno ([[fs-additive-implies-linear]]).\n\n**No continuity, no monotonicity and no measurability is part of the\ndefinition.** The equation is purely algebraic, and every regularity hypothesis\nbelow is stated explicitly where it is used.\n\n**A first consequence, recorded here because it is used immediately.** An\nadditive $f$ satisfies $f(0) = 0$: putting $x = y = 0$ gives\n$f(0) = f(0) + f(0)$, and subtracting $f(0)$ gives $f(0) = 0$. The remaining\nelementary consequences, including $f(-x) = -f(x)$ and $\\mathbb{Q}$-homogeneity,\nare collected in [[lem-additive-is-q-linear]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n([[def-natural-numbers]], [[thm-recursion]]):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natural-numbers]]), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-integer-multiples-agree-with-canonical-natural",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), which is a ring by\n[[lem-field-is-a-commutative-ring]]. Two functions $\\mathbb{N} \\to F$ are in\nplay:\n\n- $\\iota$, the **canonical natural** of [[def-canonical-natural]], defined by\n  $\\iota(0) = 0_F$ and $\\iota(n+1) = \\iota(n) + 1_F$;\n- $n \\mapsto n \\cdot 1_F$, the **additive natural power** of the element $1_F$ in\n  the abelian group $(F,+,0_F)$, defined by [[def-group-power]] read additively:\n  $0 \\cdot 1_F = 0_F$ and $\\sigma(n)\\cdot 1_F = n \\cdot 1_F + 1_F$.\n\nThese are the same function: $\\iota(n) = n \\cdot 1_F$ for every\n$n \\in \\mathbb{N}$. In particular the notation $n \\cdot 1_F$ used by\n[[def-canonical-natural]] and the notation $n \\cdot 1_F$ used by\n[[def-group-power]] denote the same element of $F$, and no second notion is in\nplay.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-nat-embeds-int",
+          "source_section": "Statement",
+          "quote": "The map $\\iota(n) = [(n,0)]$ is injective and preserves addition,\nmultiplication, and order. Its image is exactly the set of nonnegative\nintegers, so every $x \\ge 0$ in $\\mathbb{Z}$ is $\\iota(k)$ for a unique\nnatural $k$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-int-embeds-rat",
+          "source_section": "Statement",
+          "quote": "The map $j(k) = [(k,1)]$ is injective and preserves addition, multiplication,\nand order. Composing with [[lem-nat-embeds-int]] embeds $\\mathbb{N}$ in\n$\\mathbb{Q}$; we write $k$ for $j(k)$ throughout.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-integers",
+          "source_section": "Definition",
+          "quote": "On the set $\\mathbb{N} \\times \\mathbb{N}$ of pairs of natural numbers, define\n\n$$(a,b) \\sim (c,d) \\iff a + d = b + c.$$\n\nThis is an equivalence relation ([[lem-int-equivalence]]). The **integers** are\nthe quotient\n\n$$\\mathbb{Z} := (\\mathbb{N} \\times \\mathbb{N}) / \\sim,$$\n\nand we write $[(a,b)]$ for the equivalence class of $(a,b)$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.\n\n- $u \\in F$ is an **upper bound** of $S$ if $s \\le u$ for all $s \\in S$; $S$ is\n  **bounded above** if it has an upper bound.\n- $u \\in F$ is a **least upper bound** (or **supremum**, $\\sup S$) of $S$ if $u$\n  is an upper bound of $S$ and $u \\le u'$ for every upper bound $u'$ of $S$.\n\n$F$ is a **complete ordered field** (equivalently, $F$ has the\n**least-upper-bound property**, or is **Dedekind complete**) if every nonempty\n$S \\subseteq F$ that is bounded above has a least upper bound in $F$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "5.1"
+          ]
+        }
+      ],
+      "proposed": [
+        {
+          "fact": "A1",
+          "source": "def-additive-function",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb{R}$ be the complete ordered field ([[def-complete-ordered-field]],\n[[def-ordered-field]], [[def-field]]). A function $f : \\mathbb{R} \\to \\mathbb{R}$\nis **additive** when it satisfies **Cauchy's functional equation**\n\n$$f(x + y) \\;=\\; f(x) + f(y) \\qquad \\text{for all } x, y \\in \\mathbb{R}.$$\n\nEquivalently, $f$ is a homomorphism of the additive group of $\\mathbb{R}$ into\nitself.\n\n**The linear maps are additive.** For a fixed real $c$ the function\n$x \\mapsto cx$ satisfies $c(x+y) = cx + cy$ by distributivity, so it is\nadditive. Cauchy's question is whether these are the only additive functions,\nand the answer is a genuine dichotomy: with any one of a short list of\nregularity conditions the answer is yes\n([[thm-cauchy-functional-equation-regularity]]), and without any of them it is\nno ([[fs-additive-implies-linear]]).\n\n**No continuity, no monotonicity and no measurability is part of the\ndefinition.** The equation is purely algebraic, and every regularity hypothesis\nbelow is stated explicitly where it is used.\n\n**A first consequence, recorded here because it is used immediately.** An\nadditive $f$ satisfies $f(0) = 0$: putting $x = y = 0$ gives\n$f(0) = f(0) + f(0)$, and subtracting $f(0)$ gives $f(0) = 0$. The remaining\nelementary consequences, including $f(-x) = -f(x)$ and $\\mathbb{Q}$-homogeneity,\nare collected in [[lem-additive-is-q-linear]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-canonical-natural",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) with additive identity $0_F$ and\nmultiplicative identity $1_F$. Define\n$\\iota : \\mathbb{N} \\to F$ by recursion on $\\mathbb{N}$\n([[def-natural-numbers]], [[thm-recursion]]):\n\n$$\\iota(0) \\;:=\\; 0_F, \\qquad \\iota(n+1) \\;:=\\; \\iota(n) + 1_F .$$\n\n$\\iota(n)$ is the **canonical natural** of $n$ in $F$. It is also written\n$n \\cdot 1_F$, and for $n \\ge 1$ it is $1_F$ added to itself $n$ times.\n\n**Why the notation is needed at all.** A natural number in this library is a von\nNeumann natural, that is a set ([[def-natural-numbers]]), and a set is not an\nelement of $F$. So $1/n$, $n^{\\alpha}$ and $x/n$ are not expressions of $F$ when\n$n$ is a natural: what they mean is $1/\\iota(n)$, $\\iota(n)^{\\alpha}$ and\n$x/\\iota(n)$. The map $\\iota$ is what carries a counting number into the field,\nand writing it is the whole reason a reader meets $1/\\iota(k+1)$ where an\ninformal text would write $1/(k+1)$.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-integer-multiples-agree-with-canonical-natural",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), which is a ring by\n[[lem-field-is-a-commutative-ring]]. Two functions $\\mathbb{N} \\to F$ are in\nplay:\n\n- $\\iota$, the **canonical natural** of [[def-canonical-natural]], defined by\n  $\\iota(0) = 0_F$ and $\\iota(n+1) = \\iota(n) + 1_F$;\n- $n \\mapsto n \\cdot 1_F$, the **additive natural power** of the element $1_F$ in\n  the abelian group $(F,+,0_F)$, defined by [[def-group-power]] read additively:\n  $0 \\cdot 1_F = 0_F$ and $\\sigma(n)\\cdot 1_F = n \\cdot 1_F + 1_F$.\n\nThese are the same function: $\\iota(n) = n \\cdot 1_F$ for every\n$n \\in \\mathbb{N}$. In particular the notation $n \\cdot 1_F$ used by\n[[def-canonical-natural]] and the notation $n \\cdot 1_F$ used by\n[[def-group-power]] denote the same element of $F$, and no second notion is in\nplay.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-nat-embeds-int",
+          "source_section": "Statement",
+          "quote": "The map $\\iota(n) = [(n,0)]$ is injective and preserves addition,\nmultiplication, and order. Its image is exactly the set of nonnegative\nintegers, so every $x \\ge 0$ in $\\mathbb{Z}$ is $\\iota(k)$ for a unique\nnatural $k$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-int-embeds-rat",
+          "source_section": "Statement",
+          "quote": "The map $j(k) = [(k,1)]$ is injective and preserves addition, multiplication,\nand order. Composing with [[lem-nat-embeds-int]] embeds $\\mathbb{N}$ in\n$\\mathbb{Q}$; we write $k$ for $j(k)$ throughout.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-rationals",
+          "source_section": "Definition",
+          "quote": "On the set of pairs $(a,b)$ with $a, b \\in \\mathbb{Z}$ and $b \\ne 0$, define\n\n$$(a,b) \\sim (c,d) \\iff ad = cb \\quad \\text{in } \\mathbb{Z}.$$\n\nThis is an equivalence relation ([[lem-rat-equivalence]]). The **rationals** are\nthe quotient $\\mathbb{Q}$, and $[(a,b)]$ is written $a/b$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-rat-operations",
+          "source_section": "Definition",
+          "quote": "On $\\mathbb{Q}$ ([[def-rationals]]) define, on representatives,\n\n$$[(a,b)] + [(c,d)] := [(ad + cb,\\; bd)], \\qquad [(a,b)] \\cdot [(c,d)] := [(ac,\\; bd)],$$\n$$-[(a,b)] := [(-a, b)], \\qquad 0 := [(0,1)], \\qquad 1 := [(1,1)],$$\n\nand, for $[(a,b)] \\ne 0$ (equivalently $a \\ne 0$), the inverse\n$[(a,b)]^{-1} := [(b,a)]$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-int-ordered-ring",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-int-order]] is well defined and is a total order on\n$\\mathbb{Z}$; it is compatible with addition ($x \\le y$ implies\n$x + z \\le y + z$) and positives are closed under multiplication\n($0 < x$ and $0 < y$ imply $0 < xy$). Thus $\\mathbb{Z}$ is a totally\nordered commutative ring.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.\n\n- $u \\in F$ is an **upper bound** of $S$ if $s \\le u$ for all $s \\in S$; $S$ is\n  **bounded above** if it has an upper bound.\n- $u \\in F$ is a **least upper bound** (or **supremum**, $\\sup S$) of $S$ if $u$\n  is an upper bound of $S$ and $u \\le u'$ for every upper bound $u'$ of $S$.\n\n$F$ is a **complete ordered field** (equivalently, $F$ has the\n**least-upper-bound property**, or is **Dedekind complete**) if every nonempty\n$S \\subseteq F$ that is bounded above has a least upper bound in $F$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.3",
+            "5.1"
+          ]
+        }
+      ]
+    },
+    {
+      "pointer": "/contracts/lem-additive-is-q-linear/derivations",
+      "original": [
+        {
+          "id": "derive-1-1",
+          "claim": "Claim 1: taking $x = y = 0$ in the functional equation gives $f(0) = f(0) + f(0)$, and adding $-f(0)$ to both sides gives $f(0) = 0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Claim 3, inductive hypothesis: suppose $f(nx) = nf(x)$ for a given $n \\in \\mathbb{N}$ and every real $x$.",
+          "step": "1.2",
+          "inputs": [
+            "ih"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Claim 2: taking $y = -x$ gives $0 = f(0) = f(x) + f(-x)$, so $f(-x) = -f(x)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "Claim 3, base case $n = 0$: $f(0x) = f(0) = 0 = 0f(x)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "base"
+          ]
+        },
+        {
+          "id": "derive-2-3",
+          "claim": "Claim 3, inductive step: $(n+1)x = nx + x$, so $f((n+1)x) = f(nx) + f(x) = nf(x) + f(x) = (n+1)f(x)$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.2",
+            "A1",
+            "L2",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Claim 3 holds for every $n \\in \\mathbb{N}$ and every real $x$, by induction on $n$ from steps 2.2 and 2.3.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "step 2.3",
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Claim 4: an integer $m$ is $n$ or $-n$ for some natural $n$. In the first case claim 3 applies directly. In the second, $f(mx) = f(-(nx)) = -f(nx) = -nf(x) = m f(x)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Claim 5: let $q$ be rational and write $q = m/n$ with $m$ an integer and $n$ a natural $\\ge 1$, so $n \\ne 0$. Applying claim 4 with the integer $n$ to the real $qx$ gives $n f(qx) = f(n q x) = f(mx) = m f(x)$, and dividing by $n$ gives $f(qx) = (m/n) f(x) = q f(x)$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-6-1",
+          "claim": "Taking $x = 1$ in claim 5 gives $f(q) = q f(1)$ for every rational $q$, and all five claims are proved.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "proposed": [
+        {
+          "id": "derive-1-1",
+          "claim": "Claim 1: taking $x = y = 0$ in the functional equation gives $f(0) = f(0) + f(0)$, and adding $-f(0)$ to both sides gives $f(0) = 0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Claim 3, inductive hypothesis: suppose $f(nx) = nf(x)$ for a given $n \\in \\mathbb{N}$ and every real $x$.",
+          "step": "1.2",
+          "inputs": [
+            "ih"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Claim 2: taking $y = -x$ gives $0 = f(0) = f(x) + f(-x)$, so $f(-x) = -f(x)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "Claim 3, base case $n = 0$: $f(0x) = f(0) = 0 = 0f(x)$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "base"
+          ]
+        },
+        {
+          "id": "derive-2-3",
+          "claim": "Claim 3, inductive step: $(n+1)x = nx + x$, so $f((n+1)x) = f(nx) + f(x) = nf(x) + f(x) = (n+1)f(x)$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.2",
+            "A1",
+            "L2",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Claim 3 holds for every $n \\in \\mathbb{N}$ and every real $x$, by induction on $n$ from steps 2.2 and 2.3.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "step 2.3",
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Claim 4: by the total order and addition compatibility in [L6], either $m\\ge0$ or $-m\\ge0$; by [L3] the nonnegative one is the image of some natural $n$. Thus $m=n$ or $m=-n$. In the first case claim 3 applies directly. In the second, $f(mx)=f(-(nx))=-f(nx)=-nf(x)=mf(x)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L3",
+            "L6"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Claim 5: by [L5], write $q=[(a,b)]$ with $a,b\\in\\mathbb Z$ and $b\\ne0$. By [L6], either $b>0$ or $-b>0$; in the second case replace $(a,b)$ by $(-a,-b)$, which represents the same rational because $a(-b)=(-a)b$. The resulting positive denominator is the image of a natural $n\\ge1$ by [L3]; call the resulting numerator $m$. The pair formulas in [L5] give $[(m,n)]=[(m,1)]\\,[(1,n)]=j(m)j(n)^{-1}$, where $j$ is the integer embedding, so after the field embedding into $\\mathbb R$ this is $q=m/n$. By [L3], $n\\ne0$. Applying claim 4 with the integer $n$ to the real $qx$ gives $nf(qx)=f(nqx)=f(mx)=mf(x)$, and division by $n$ gives $f(qx)=(m/n)f(x)=qf(x)$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-6-1",
+          "claim": "Taking $x = 1$ in claim 5 gives $f(q) = q f(1)$ for every rational $q$, and all five claims are proved.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "discharge-induction"
+          ]
+        }
+      ]
+    }
+  ],
+  "guard_policy": "Guard each exact field/selected boundary row independently; never overwrite the full contract file. Existing independent reviews and all unrelated boundary annotations remain untouched. Root owns hashes and final synchronization."
+}

@@ -1,0 +1,209 @@
+
+ITEM lem-qc-tqc-determinant-character-phase
+
+
+## Statement
+
+Fix the Fibonacci convention with common exchange scalar $R_1$. Let
+$e:B_n\to\mathbb Z$ be exponent sum, sending each Artin generator $\sigma_i$
+to $1$. If $\widetilde\rho$ is the generator-normalized representation
+$\widetilde\rho(\sigma_i)=R_1^{-1}\rho(\sigma_i)$, then for every braid $b$
+and every total-charge block,
+$$\rho(b)=R_1^{e(b)}\widetilde\rho(b).$$
+The scalar is the same on every total-charge block and every spectator
+multiplicity. It is a global phase for an uncontrolled fixed-sector
+computation; under coherent control it is a relative phase and must be
+tracked.
+
+## Facts & Assumptions
+
+**Given:** The fixed-chirality Fibonacci $F/R$ data and the Artin presentation.
+
+[A1] Assume every generator has the same scalar $R_1$ on all fusion
+channels; its relative channel phases define the normalized generator. The
+actual Fibonacci data carrier fixes $R_1=e^{-4\pi i/5}$ and
+$R_\tau=e^{3\pi i/5}$ in its stated gauge.
+[[ex-qc-tqc-fibonacci-data]]
+
+[F2] Standalone unit-modulus phases leave pure-state measurement
+probabilities unchanged.
+[[thm-qc-standalone-global-phase-invariance]]
+
+[F3] A separately controlled scalar phase can change measurement
+probabilities by becoming relative to the control branch.
+[[thm-qc-controlled-global-phase-is-relative-phase]]
+
+## Proof
+
+1.1 Exponent sum is well defined on the Artin group: both sides of every adjacent braid relation have sum $3$, both sides of every distant commutation relation have sum $2$, and inverse cancellation changes the sum by $0$. Thus $e:B_n\to\mathbb Z$ is a homomorphism. [given, algebra]
+
+2.1 For a word $b=\sigma_{i_1}^{\epsilon_1}\cdots\sigma_{i_k}^{\epsilon_k}$, each positive generator contributes $R_1$ and each inverse contributes $R_1^{-1}$ to the scalar, by [A1]. The scalar product is therefore $R_1^{\epsilon_1+\cdots+\epsilon_k}=R_1^{e(b)}$, while the remaining normalized matrices multiply to $\widetilde\rho(b)$. Since every relation preserves exponent sum, this factorization is independent of the word representative. [A1, step 1.1, algebra]
+
+3.1 The same scalar multiplies every charge block, so [F2] applies to an uncontrolled isolated sector. Under coherent control the scalar multiplies only the active branch, and [F3] shows it becomes a relative phase; it cannot be discarded without recording or correcting it. [F2, F3, step 2.1] ∎
+
+ITEM lem-qc-tqc-fibonacci-b6-path-projectors-and-artin
+
+
+## Statement
+
+Use the Fibonacci fusion rule $\tau\otimes\tau=1\oplus\tau$ and the
+fixed-chirality data
+$F^{\tau\tau\tau}_\tau=\begin{pmatrix}\phi^{-1}&\phi^{-1/2}\\
+\phi^{-1/2}&-\phi^{-1}\end{pmatrix}$ and
+$r=R_\tau/R_1=e^{-3\pi i/5}$. The fixed-total-charge B6 path bases are
+
+$$\mathcal P_1=\{0101010,0101110,0110110,0111010,0111110\},$$
+
+$$\mathcal P_\tau=\{0101011,0101101,0101111,0110101,0110111,0111011,0111101,0111111\},$$
+
+where each path is $(x_0,\ldots,x_6)$, $x_0=0$ is the unit label,
+$x_1=1$ is $\tau$, and adjacent labels obey the fusion rule. For
+$d_0=1,d_1=\phi$, define $E_i$ on either path basis by
+$$(E_i)_{x,y}= \begin{cases} \sqrt{d_{x_i}d_{y_i}}/d_{x_{i-1}}, &x_j=y_j\ (j\ne i),\ x_{i-1}=x_{i+1}=y_{i-1}=y_{i+1},\\ 0,&\text{otherwise,} \end{cases} \qquad P_i:=\phi^{-1}E_i.$$
+Then $P_i$ are orthogonal projections, have ranks $2$ on $\mathcal P_1$
+and $3$ on $\mathcal P_\tau$, satisfy
+$P_iP_{i+1}P_i=\phi^{-2}P_i$ and commute at separation at least two.
+Consequently $B_i=rI+(1-r)P_i$ are unitary matrices satisfying the Artin
+relations of $B_6$, with
+$\det B_i=r^3$ on $V(\tau^6\to1)$ and $\det B_i=r^5$ on
+$V(\tau^6\to\tau)$.
+
+## Facts & Assumptions
+
+**Given:** The fixed Fibonacci fusion rule, the unitary fusion-tree bases, and
+the chiral $F/R$ coordinates displayed in the Statement.
+
+[F2] A fusion-tree basis retains each admissible intermediate charge and
+vertex multiplicity index. The current supplier body was inspected.
+[[def-qc-tqc-fusion-tree-basis]]
+
+[A1] Assume the Fibonacci fusion rule and the fixed-chirality data displayed
+in the Statement: the normalized pair-channel eigenvalues are $1,r$, and
+the nontrivial recoupling block is the displayed $F$ matrix. The actual
+Fibonacci data carrier states this fusion rule and these fixed sector
+matrices. [[ex-qc-tqc-fibonacci-data]]
+
+## Proof
+
+1.1 Starting with $(x_0,x_1)=(0,1)$, the fusion rule permits only $x_{j+1}=1$ when $x_j=0$, and permits $x_{j+1}\in\{0,1\}$ when $x_j=1$. Enumerating the five remaining transitions with endpoint $x_6=0$ or $1$ gives exactly the two path sets displayed in the Statement; hence the block dimensions are $5$ and $8$. Also $r^5=-1$ and $r\ne-1$, so $r^4-r^3+r^2-r+1=0$. For $y=r+r^{-1}$, division by $r^2$ gives $y^2-y-1=0$; since $y=2\cos(3\pi/5)<0$, $y=-\phi^{-1}$. Thus $r^2+\phi^{-1}r+1=0$. [given, A1, F2, construct, algebra]
+
+1.2 In a fixed left-tree basis, $P_i$ is the projection onto pair channel $1$. The $F$-move gives the only nontrivial local block, on the two intermediate channels $(1,\tau)$: $$\begin{pmatrix}\phi^{-2}&\phi^{-3/2}\\ \phi^{-3/2}&\phi^{-1}\end{pmatrix}.$$ Its square equals itself because $\phi^{-4}+\phi^{-3}=\phi^{-2}$, $\phi^{-3/2}(\phi^{-2}+\phi^{-1})=\phi^{-3/2}$, and $\phi^{-3}+\phi^{-2}=\phi^{-1}$; its entries are real symmetric. When the surrounding charge is the unit, the only allowed pair-channel block is $[1]$. Thus each $P_i=P_i^*=P_i^2$. Counting the diagonal entries of these blocks on the listed paths gives $\operatorname{tr}P_i=2$ on $\mathcal P_1$ and $3$ on $\mathcal P_\tau$, so these are the ranks. [given, A1, F2, algebra]
+
+1.3 On the nontrivial three-strand total-$\tau$ block, the adjacent projections are $P=|e_1\rangle\langle e_1|$ and $Q=|f_1\rangle\langle f_1|$, where $f_1=(\phi^{-1},\phi^{-1/2})$ is the first column of $F$. Therefore $PQP=|\langle e_1,f_1\rangle|^2P=\phi^{-2}P$ and symmetrically $QPQ=\phi^{-2}Q$. In the one-dimensional total-$1$ block both adjacent projections are zero, so the same identities hold. Tensoring with spectator path factors leaves these identities unchanged. Operators on disjoint pairs commute by the interchange law for tensor products. [A1, algebra]
+
+2.1 Put $q_0=\phi^{-2}$. For adjacent $P=P_i,Q=P_{i+1}$ and $s=1-r$, direct expansion using $P^2=P$, $Q^2=Q$, $PQP=q_0P$, and $QPQ=q_0Q$ gives $$[rI+sP][rI+sQ][rI+sP]-[rI+sQ][rI+sP][rI+sQ] =s\bigl(r+q_0s^2\bigr)(P-Q).$$ Because $r+r^{-1}=-\phi^{-1}$, $\bigl(r+q_0(1-r)^2\bigr)/r =1+\phi^{-2}(r+r^{-1}-2) =1-\phi^{-2}(\phi^{-1}+2)=0$; here $\phi^{-1}+2=\phi^2$. Thus the adjacent braid relation holds. [A1, step 1.3, algebra]
+
+3.1 Since $P_i$ is an orthogonal projection and $|r|=1$, $B_i$ acts by $1$ on $\operatorname{ran}P_i$ and by $r$ on its orthogonal complement, so it is unitary. The distant commutation and adjacent relation from steps 1.3 and 2.1 are the defining Artin relations, hence the matrices represent $B_6$. The rank table gives rank $2$ on the five-dimensional block and rank $3$ on the eight-dimensional block, so $\det B_i=r^{5-2}=r^3$ and $\det B_i=r^{8-3}=r^5$, respectively. [given, step 1.2, step 1.3, step 2.1, algebra] ∎
+
+ITEM lem-qc-tqc-fibonacci-coefficient-ring-specialization
+
+
+## Statement
+
+Let $r=e^{-3\pi i/5}$, $\phi=(1+\sqrt5)/2=1-r-r^{-1}$, and
+$s=\sqrt\phi>0$. Then
+$$\mathbb Z[r,s]\cong \mathbb Z[x,y]\big/\bigl(x^4-x^3+x^2-x+1,\ y^2-(1-x-x^{-1})\bigr),$$
+where $x^{-1}=x^9$. The assignment
+$$r\mapsto15,\qquad r^{-1}\mapsto29,\qquad \phi\mapsto19,\qquad s\mapsto9$$
+defines a ring homomorphism to $\mathbb F_{31}$. The elements $r$ and
+$\phi$ map to nonzero units, and conjugation of coefficients is handled by
+$r\mapsto r^{-1}$ before reduction.
+
+## Facts & Assumptions
+
+**Given:** The fixed Fibonacci root $r$, the golden ratio $\phi$, and the
+positive square root $s=\sqrt\phi$.
+
+[A1] Assume the fixed-chirality root $r=R_\tau/R_1=e^{-3\pi i/5}$ from the
+actual Fibonacci data carrier; the positive square root $s=\sqrt\phi$ is
+fixed in the Statement. The carrier states the phases
+$R_1=e^{-4\pi i/5}$ and $R_\tau=e^{3\pi i/5}$.
+[[ex-qc-tqc-fibonacci-data]]
+
+## Proof
+
+1.1 The number $r$ is a primitive tenth root of unity, so its minimal polynomial is $\Phi_{10}(x)=x^4-x^3+x^2-x+1$ and $[\mathbb Q(r):\mathbb Q]=4$. Its maximal real subfield is $\mathbb Q(\sqrt5)$, and the nontrivial conjugate of $\phi$ is $(1-\sqrt5)/2=-\phi^{-1}$; hence the field norm of $\phi$ from $\mathbb Q(\sqrt5)$ to $\mathbb Q$ is $-1$. Therefore $\phi$ is not a square in that real subfield, since the norm of a square would be a nonnegative rational square. [given, A1, algebra]
+
+2.1 If $u\in\mathbb Q(r)$ satisfied $u^2=\phi$, complex conjugation would give $\bar u^2=\phi$, hence $\bar u=u$ or $\bar u=-u$. In the first case $u\in\mathbb Q(\sqrt5)$, contradicting step 1.1. In the second case $u$ is purely imaginary in the chosen embedding, so $u^2$ is nonpositive real, contrary to $\phi>0$. Thus $Y^2-\phi$ is irreducible over $\mathbb Q(r)$ and $[\mathbb Q(r,s):\mathbb Q]=8$. The displayed monic relations therefore give the full degree-eight presentation; no additional relation is being assumed. [given, step 1.1, algebra]
+
+3.1 In $\mathbb F_{31}$, $15^{-1}=29$, $\Phi_{10}(15)=0$, $1-15-29=19$, and $9^2=19$. Thus the assignments satisfy both defining relations and extend to the stated ring homomorphism. The images $15$ and $19$ are nonzero, so $r,\phi$ and their powers are units; all denominators in the path projectors and normalized braid matrices are therefore invertible after specialization. [given, A1, step 2.1, algebra]
+
+4.1 In the number field, complex conjugation fixes $\phi,s$ and sends $r$ to $r^{-1}$. Therefore a coefficient involving conjugation is first rewritten with $r^{-1}$ and only then reduced by $r^{-1}\mapsto29$. No conjugation operation on $\mathbb F_{31}$ is required. [given, step 3.1, algebra] ∎
+
+ITEM lem-qc-tqc-leakage-logical-error-accumulation
+
+
+## Statement
+
+Let $P$ be a code projection on a finite-dimensional Hilbert space $V$. Let
+$W_1,\ldots,W_G$ be ideal unitaries preserving $\operatorname{ran}P$, and let
+$V_1,\ldots,V_G$ be physical unitaries with
+$\|V_j-W_j\|_{\mathrm{op}}\le\delta_j$. If
+$V_{\mathrm{tot}}=V_G\cdots V_1$ and $W_{\mathrm{tot}}=W_G\cdots W_1$,
+then, with empty products equal to $I$ and empty sums equal to $0$,
+$$\|V_{\mathrm{tot}}-W_{\mathrm{tot}}\|_{\mathrm{op}} \le\sum_{j=1}^{G}\delta_j.$$
+Consequently the logical block error and leakage amplitude relative to the
+code action of $W_{\mathrm{tot}}$ are each at most $\sum_j\delta_j$.
+
+## Facts & Assumptions
+
+**Given:** The code projection, the two finite lists of unitaries, and the
+individual bounds $\delta_j\ge0$.
+
+[F1] If $W$ preserves the code, the logical block error and leakage amplitude
+are the compression and off-diagonal block norms.
+[[def-qc-tqc-logical-error-and-leakage]]
+
+[F2] A full-space operator approximation of size $\delta$ bounds both
+compressed logical error and leakage by $\delta$.
+[[thm-qc-tqc-block-approximation-error]]
+
+## Proof
+
+1.1 If $G=0$, both products are the empty product $I$ and the sum of errors is $0$, so the full-space error is $0$; [F2] then gives zero logical block error and zero leakage. [given, F2, algebra]
+
+1.2 For $G\ge1$, insert and subtract the mixed products to obtain the exact telescoping identity $$V_G\cdots V_1-W_G\cdots W_1 =\sum_{j=1}^{G}V_G\cdots V_{j+1}(V_j-W_j)W_{j-1}\cdots W_1.$$ It follows by expanding the sum: consecutive terms cancel, leaving only $V_G\cdots V_1-W_G\cdots W_1$. Every outer product is unitary, so its operator norm is one and each summand has norm at most $\delta_j$. The triangle inequality proves the displayed sum bound. [given, algebra]
+
+2.1 The product $W_{\mathrm{tot}}$ preserves the code because each factor does. Apply [F2] with $\delta=\|V_{\mathrm{tot}}-W_{\mathrm{tot}}\|_{\mathrm{op}}$; step 1.1 bounds this by $\sum_j\delta_j$ using step 1.2 when $G\ge1$ and step 1.1 when $G=0$. This gives the claimed logical error and leakage bounds, including on arbitrary ambient states before projection. [F1, F2, step 1.1, step 1.2, algebra] ∎
+
+ITEM thm-qc-tqc-braid-action-unitary-and-artin
+
+
+## Statement
+
+For a unitary braided fusion category $\mathcal C$, simple representatives
+$x,c\in\operatorname{Irr}(\mathcal C)$ as in
+[[def-qc-tqc-fusion-tree-basis]], $n\ge2$, and a nonzero fixed-total fusion
+space, the operators in
+[[def-qc-tqc-braid-action-from-fusion-data]] define a unitary group
+homomorphism
+$$\rho_c:B_n\longrightarrow U(V(x^n\to c)).$$
+In particular, the adjacent Artin relations and distant commutation relations
+hold in each fixed-charge block.
+
+## Facts & Assumptions
+
+**Given:** A unitary fusion category with a specified unitary braiding, the
+simple representatives $x,c$, the nonzero fixed-charge fusion space $V(x^n\to c)$, and the
+generator matrices $T_i^{-1}R_iT_i$.
+
+[F1] In a braided monoidal category, the local braidings on $X^{\otimes n}$
+give a canonical homomorphism from the Artin group; the associator transports
+the action to a fixed parenthesization.
+[[cor-an-object-of-a-braided-category-carries-canonical-braid-actions]]
+
+[F2] The current QC25 bodies define finite semisimple orthogonal fusion-tree
+spaces, unitary associators and braidings, and unitary F/R coordinates; their
+pentagon and hexagon coordinate identities match the categorical coherence
+maps. The fusion-tree dimension lemma supplies complete bases.
+[[def-qc-tqc-unitary-fusion-category]]
+[[def-qc-tqc-fusion-tree-basis]]
+[[lem-qc-tqc-fusion-tree-dimension]] [[def-braiding]]
+[[thm-qc-tqc-f-symbol-unitary]] [[thm-qc-tqc-r-symbol-unitary]]
+[[thm-qc-tqc-pentagon-coordinates]] [[thm-qc-tqc-hexagon-coordinates]]
+
+## Proof
+
+1.1 By [F2], each generator matrix is a product of unitary operators: $T_i$ and $T_i^{-1}$ are unitary changes of orthonormal fusion-tree basis, and $R_i$ is unitary on every orthogonal pair-charge summand. Therefore $\rho_c(\sigma_i)^*\rho_c(\sigma_i)=I$ and every generator, as well as its inverse, is unitary. [given, F2, algebra]
+
+2.1 By [F1], the local categorical braidings on the full tensor power satisfy the Artin relations and define a homomorphism for the fixed parenthesization. Finite semisimplicity and orthogonality in [F2] decompose that tensor power into total-charge blocks; naturality of the braiding makes each block invariant, so restriction to $V(x^n\to c)$ preserves the same relations. In the fusion-tree basis, these restricted operators are exactly $T_i^{-1}R_iT_i$ by the definition in [[def-qc-tqc-braid-action-from-fusion-data]]. The pentagon and hexagon coordinate identities in [F2] identify those matrices with the same parenthesized composites; distant generators commute because they act on disjoint tensor factors. Hence the restricted assignment is a unitary representation of the Artin presentation. [F1, F2, given, algebra] ∎

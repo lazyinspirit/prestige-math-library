@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-recording/receipts/cex-nonnegative-integrable-with-zero-integral-need-not-vanish.json
 sources:
   scraped: []
   references:
@@ -33,6 +34,8 @@ pipeline_run: null
 ---
 
 ## Statement refuted
+
+Throughout, $\mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R}$ denotes the canonical copies. Natural numbers, integers and rationals are written directly when used in real arithmetic.
 
 **Refuted:** that a nonnegative Riemann integrable function on $[a,b]$ with
 $\int_a^b f = 0$ vanishes identically
@@ -57,11 +60,11 @@ point in the reading order.
 
 ## Facts & Assumptions
 
-**Given:** Thomae's function $t : [0,1] \to \mathbb{R}$, with $t(x) = 1/\iota(q(x))$ at a rational $x$ of least denominator $q(x) \ge 1$ and $t(x) = 0$ at an irrational $x$ ([[def-dirichlet-and-thomae-functions]], [[def-canonical-natural]]).
+**Given:** Thomae's function $t : [0,1] \to \mathbb{R}$, with $t(x) = 1/q(x)$ at a rational $x$ of least denominator $q(x) \ge 1$ and $t(x) = 0$ at an irrational $x$ ([[def-dirichlet-and-thomae-functions]], [[def-canonical-natural]]).
 
 [A1] The refuted claim: a nonnegative Riemann integrable function on a closed bounded interval with distinct endpoints whose integral is $0$ vanishes identically.
 
-[L1] $0 \le t(x) \le 1$ for every $x \in [0,1]$, and $t(x) = 1/\iota(q(x)) > 0$ at every rational $x$, since $\iota(q(x)) \ge 1 > 0$ ([[def-dirichlet-and-thomae-functions]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
+[L1] $0 \le t(x) \le 1$ for every $x \in [0,1]$, and $t(x) = 1/q(x) > 0$ at every rational $x$, since $q(x) \ge 1 > 0$ ([[def-dirichlet-and-thomae-functions]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
 
 [L2] $t$ is Riemann integrable on $[0,1]$ and $\int_0^1 t = 0$ ([[ex-thomae-is-riemann-integrable-with-integral-zero]], [[def-darboux-integral]]).
 

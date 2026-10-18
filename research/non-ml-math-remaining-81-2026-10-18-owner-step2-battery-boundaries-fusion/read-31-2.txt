@@ -1,0 +1,179 @@
+
+ITEM def-qa-37-fusion-measurement
+
+
+## Definition
+
+Let $H$ be a fixed finite fusion space with an orthonormal fusion-tree basis
+in the category and simple-representative domain of
+[[def-qa-37-fusion-input-encoding]]. For a colored task, $H$ is the
+currently occupied ordered-list summand tracked by the task record.
+For an adjacent pair of leaves or a declared adjacent pair of subtrees, recouple
+the tree by its specified unitary $F$-moves so that the pair fuses first. For
+each allowed simple total charge $a$ of that pair, let $P_a$ be the orthogonal
+projection onto the span of basis vectors whose pair label is $a$, transported
+back by the inverse recoupling unitary. Distinct channel subspaces are
+orthogonal and their direct sum is $H$, so $(P_a)_a$ is a finite projective
+measurement in the sense of [[def-qc-projective-measurement]]. Its outcome is
+$a$, its unnormalized branch vector on input $\psi$ is $P_a\psi$, and the
+recoupling follows the inverse-precomposition F convention of
+[[def-qc-tqc-f-symbol]], whose unitarity is proved in
+[[thm-qc-tqc-f-symbol-unitary]]. The branch vector is unnormalized until its probability is checked.
+
+ITEM def-qa-37-n-triple-fusion-code
+
+## Statement
+
+Let $n\ge1$ and $c\in\{1,\tau\}$ with $V(\tau^n\to c)\ne0$, using the
+left-associated tree for both fixed-charge spaces. In the ordered list of
+$3n$ Fibonacci $\tau$ charges, group consecutive leaves into $n$ triples;
+within each triple fuse its first two charges and then its third, and fuse the
+$n$ triple outputs by the left-associated $n$-leaf tree to total $c$. Restrict
+each triple output to $\tau$; its two local paths are indexed by the charge
+$x\in\{1,\tau\}$ after the first two leaves. Fix a rebracketing sequence
+of associators from this grouped tree to the fixed left-associated $3n$-leaf
+tree, and let $R_{n,c}$ be the induced composite unitary. For each tensor
+basis vector $e_{x_1}\otimes\cdots\otimes e_{x_n}\otimes v_\lambda$, where
+$e_1,e_\tau$ are the local triple paths and $v_\lambda$ is a basis vector of
+$V(\tau^n\to c)$, map it to its grouped fusion-tree basis vector, then
+apply $R_{n,c}$. Extend linearly and call the resulting map $J_{n,c}$. Its
+image is the code $\mathcal C_{n,c}$ and it is an isometry; set
+$P_{n,c}=J_{n,c}J_{n,c}^*$ for the code projector.
+The factor $V(\tau^n\to c)$ retains all spectator fusion paths and is not a
+physical preparation at zero cost.
+
+## Facts & Assumptions
+
+**Given:** The Fibonacci fusion rule $\tau\otimes\tau=1\oplus\tau$ with
+multiplicity one, the orthonormal fusion-tree basis and dimension recurrence,
+and unitary associator moves.
+
+[F1] The Fibonacci rule has the only nontrivial fusion channels
+$\tau\otimes\tau=1\oplus\tau$, each of multiplicity one.
+[[ex-qc-tqc-fibonacci-data]]
+
+[F2] Fusion-tree vectors form an orthonormal basis, with dimension computed
+by the finite multiplicity recurrence. [[lem-qc-tqc-fusion-tree-dimension]]
+
+[F3] The fixed-charge code projector associated with an isometry is
+$JJ^*$. [[def-qc-tqc-fixed-charge-encoding]]
+
+[F4] The associator and its induced F-matrices are unitary, so rebracketing
+preserves the fusion-space inner product. [[thm-qc-tqc-f-symbol-unitary]]
+
+## Proof
+
+1.1 Write $m_k(a)=\dim V(\tau^k\to a)$. The Fibonacci rule [F1] and the fusion-tree recurrence [F2] give $m_2(1)=m_2(\tau)=1$ from the two channels of $\tau\otimes\tau$. Applying the same recurrence once more gives $m_3(1)=m_2(\tau)=1$ and $m_3(\tau)=m_2(1)+m_2(\tau)=2$. Thus the local total-$\tau$ triple has exactly the two orthogonal paths labelled $x=1,\tau$ used as one logical basis. [F1, F2, given, algebra]
+
+2.1 Choose the fusion-tree basis of the finite spectator space $V(\tau^n\to c)$. Tensoring its basis with the $n$ local two-path bases from step 1.1 gives an orthonormal basis of the domain. By [F2], its grouped-tree images are precisely an orthonormal family in $V(\tau^{3n}\to c)$. The specified associator rebracketing is unitary by [F4], so their images in the fixed tree remain orthonormal; the linear map $J_{n,c}$ sending the tensor basis to these vectors is therefore an isometry. Applying [F3] gives the orthogonal projector $P_{n,c}=J_{n,c}J_{n,c}^*$. All choices are from fixed finite bases, and no choice axiom is used. [F2, F3, F4, step 1.1, algebra] ∎
+
+ITEM def-qa-37-phase-reference-cost
+
+
+## Definition
+
+For the fixed Fibonacci convention, write $\rho(b)$ for the physical braid
+matrix and $B(b)$ for the normalized word matrix obtained by removing the
+common exchange scalar $R_1$ from each Artin generator, as in
+[[lem-qc-tqc-determinant-character-phase]]. If $e(b)$ is exponent sum, then
+$$\rho(b)=R_1^{e(b)}B(b).$$
+On the three-anyon total-$\tau$ block the SK alphabet instead uses the
+special-unitary lifts $zB_j$ with $z=e^{3\pi i/10}$, so a word of exponent sum
+$k$ satisfies
+$$\rho(b)=(R_1z^{-1})^k\widehat B(b),\qquad \widehat B(b)=z^kB(b).$$
+A **phase reference record** stores the exact generator scalar, exponent sum,
+which normalized convention was compiled, the resulting scalar on each
+coherently used branch, and any correction operation and its declared cost
+under [[def-qc-circuit-cost-model]]. A standalone fixed-sector computation
+may report its output projectively using the metric of
+[[def-qc-tqc-projective-gate-and-metric]]. In coherent control the active
+branch scalar is relative to the inactive branch and must remain in the
+record. No phase correction is assigned zero cost unless its interface says
+so. This ledger distinguishes the common $R_1^{e(b)}$ phase from the
+additional $z^{-e(b)}$ needed when the compiled alphabet is the SU(2) lift.
+
+ITEM lem-qa-37-local-braid-acts-trivially-on-spectators
+
+## Statement
+
+Let $n\ge1$, $c\in\{1,\tau\}$, and consider the fixed fusion space
+$V(\tau^{3n}\to c)$ with its grouped tree of $n$ consecutive triples and
+outer triple-charge tree. Its orthogonal decomposition is indexed by local
+triple outputs $a_i\in\{1,\tau\}$ and has factors
+$$\left(\bigotimes_{i=1}^n V(\tau^3\to a_i)\right) \otimes V(a_1\otimes\cdots\otimes a_n\to c),$$
+with zero-dimensional summands omitted. A braid word supported on the
+internal three strands of the $i$th triple acts on this summand as
+$\rho_{a_i}(b)$ on $V(\tau^3\to a_i)$ and the identity on every other local
+triple factor and on the outer spectator factor. Reassociating to the fixed
+left-associated $3n$-leaf tree conjugates this operator by a unitary; its
+operator norm and the stated local-factor action are preserved.
+
+## Facts & Assumptions
+
+**Given:** The multiplicity-aware fusion-tree basis, the fixed grouped tree,
+and a braid word acting only on the strands internal to one triple.
+
+[F1] A fusion-tree basis composes orthonormal local vertex morphisms and is
+complete; its basis labels include every internal charge and multiplicity
+index. [[def-qc-tqc-fusion-tree-basis]]
+
+[F2] A fixed-charge braid acts by precomposition with the inverse object
+braid on the corresponding fusion morphism, and defines a unitary
+representation. [[def-qc-tqc-braid-action-from-fusion-data]]
+[[thm-qc-tqc-braid-action-unitary-and-artin]]
+
+[F3] Rebracketing and its F-matrix are unitary. [[thm-qc-tqc-f-symbol-unitary]]
+
+## Proof
+
+1.1 In the grouped tree, choose an admissible local fusion-tree basis vector $f_i\in V(\tau^3\to a_i)$ for each triple and a basis vector $g\in V(a_1\otimes\cdots\otimes a_n\to c)$ for the outer fusion. The composites obtained by inserting $f_1,\ldots,f_n$ into $g$ are exactly the grouped fusion-tree vectors. By completeness and orthonormality [F1], their orthogonal direct sum over $(a_1,\ldots,a_n)$ is the full grouped fusion space, which gives the displayed tensor/direct-sum decomposition. [F1, given, algebra]
+
+2.1 A braid word supported inside triple $i$ changes only the local morphism $f_i$, by $f_i\mapsto f_i\circ b^{-1}$ under [F2]; every $f_j$ with $j\ne i$ and the outer morphism $g$ are unchanged. Thus on the grouped basis its matrix is $\rho_{a_i}(b)$ tensored with identities. Rebracketing to the fixed tree conjugates this matrix by the unitary in [F3], proving the same operator statement in that convention. Tensoring an operator $A$ with an identity does not increase its norm: expand a vector in an orthonormal basis of the spectator factor and sum $\|A\xi_j\|^2\le\|A\|^2\sum\|\xi_j\|^2$. The norm of a finite orthogonal direct sum is at most the maximum of its block norms by the same squared-norm decomposition. These finite identities justify uniform spectator bounds. [F1, F2, F3, step 1.1, algebra] ∎
+
+ITEM thm-qa-37-fusion-branch-validity
+
+
+## Statement
+
+Let $(P_a)_{a\in\mathcal A}$ be the finite fusion-channel projectors of
+[[def-qa-37-fusion-measurement]] on a finite-dimensional fusion space $H$,
+and let $\psi\in H$ be a unit vector. The channel probabilities
+$p_a=\|P_a\psi\|^2$ are nonnegative and sum to one. If $p_a>0$, the
+conditional branch is the unit vector $P_a\psi/\sqrt{p_a}$. If $p_a=0$,
+then $P_a\psi=0$ and no normalized conditional state is defined.
+
+## Facts & Assumptions
+
+**Given:** A finite orthogonal resolution $(P_a)$ of the identity and a unit
+input vector $\psi$.
+
+[F1] The channel family is a finite projective measurement: its projections
+are pairwise orthogonal and sum to identity.
+[[def-qa-37-fusion-measurement]]
+
+[F2] The projective measurement outcome law assigns probability
+$p_a=\operatorname{tr}(|\psi\rangle\langle\psi|P_a)$ to outcome $a$.
+[[thm-qc-projective-measurement-outcome-law]]
+
+[F3] A unit vector defines a pure-state ray whose rank-one projector is a
+density operator. [[def-qc-pure-state-and-ray]]
+[[thm-qc-rank-one-density-operator]]
+
+[F4] On an outcome of positive probability, the conditional density operator
+is $P_a\rho P_a/p_a$. [[thm-qc-projective-conditional-state]]
+
+[F5] The Dirac outer product acts by $|x\rangle\langle y|z=
+\langle z,y\rangle_{\rm root}x$; trace is the sum of diagonal entries, and
+$\|x\|^2=\langle x,x\rangle_{\rm root}$.
+[[def-qc-dirac-notation-conversion]]
+[[def-trace-of-an-endomorphism]] [[def-inner-product-norm]]
+
+[F6] In orthonormal coordinates, $|x\rangle\langle y|$ has matrix
+$[x][y]^\dagger$, so its trace is $\langle x,y\rangle_{\rm root}$.
+[[thm-qc-dirac-notation-coordinate-identity]]
+
+## Proof
+
+1.1 Set $\rho=|\psi\rangle\langle\psi|$, a density operator by [F3]. The Dirac rule and $P_a=P_a^*=P_a^2$ give $|\psi\rangle\langle\psi|P_a=|\psi\rangle\langle P_a\psi|$, whose trace is $\langle\psi,P_a\psi\rangle_{\rm root}$ by [F6]. By self-adjointness and idempotence this equals $\langle P_a\psi,P_a\psi\rangle_{\rm root}=\|P_a\psi\|^2$ by [F5]. Thus [F2] identifies $p_a=\|P_a\psi\|^2\ge0$ as the outcome probability. The resolution identity gives $\sum_a p_a=\langle\psi,(\sum_aP_a)\psi\rangle_{\rm root}=\|\psi\|^2=1$. [F1, F2, F3, F5, F6, given, algebra]
+
+2.1 If $p_a>0$, then $\rho_a=P_a\rho P_a/p_a$ is the conditional density operator by [F4]. The Dirac rule and self-adjointness give $P_a\rho P_a=|P_a\psi\rangle\langle P_a\psi|$; using step 1.1, $\rho_a$ is the rank-one projector of the unit vector $P_a\psi/\sqrt{p_a}$. If $p_a=0$, step 1.1 gives $\|P_a\psi\|=0$, hence $P_a\psi=0$. The zero-probability convention is that this branch is omitted and no normalized conditional vector or state is assigned; division by $\sqrt{p_a}=0$ is undefined. [F1, F4, F5, step 1.1, algebra] ∎

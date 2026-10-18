@@ -1,0 +1,1583 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-it-weighted-centroid-squared-error-identity",
+    "lem-it-point-density-cumulative-map-is-c2-diffeomorphism",
+    "lem-it-nearest-center-quantizer-is-borel-and-finite-distortion",
+    "lem-it-compact-compander-quantizer-is-borel-and-finite-distortion",
+    "thm-it-finite-data-lloyd-termination-and-fixed-point",
+    "thm-it-exhaustive-global-empirical-quantizer-is-optimal",
+    "thm-it-compact-compander-high-rate-distortion",
+    "thm-it-optimal-compact-compander-density",
+    "cex-it-lloyd-fixed-point-need-not-be-global",
+    "ex-it-uniform-compact-compander"
+  ],
+  "contracts": {
+    "lem-it-weighted-centroid-squared-error-identity": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $S$ is nonempty and each $w_i>0$, $W_S>0$, so $\\mu_S$ is defined and $\\sum_{i\\in S}w_i(x_i-\\mu_S)=0$ by its formula.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $x_i-c=(x_i-\\mu_S)+(\\mu_S-c)$ and expand the squared norm using [A1]. Summing over $S$, the cross term is $2\\langle\\sum_{i\\in S}w_i(x_i-\\mu_S),\\mu_S-c\\rangle=0$ by step 1.1; the remaining terms give the displayed identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The last term in step 2.1 is nonnegative and vanishes exactly when $c=\\mu_S$, because $W_S>0$ and a Euclidean squared norm vanishes exactly at the zero vector. Thus $\\mu_S$ uniquely minimizes the cost. For empty $S$, the sum has no terms and equals zero for every $c$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1: The empty cluster has zero cost for every center."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: The excess term vanishes exactly at the centroid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: For a singleton, the centroid is its sole datum and the identity reduces directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: The identity allows repeated data and arbitrary centers; the zero norm criterion remains exact."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint or boundary-value assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The finite weighted sum defining the centroid is explicit; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1: Equality of cost with the minimum forces the squared norm term to vanish."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1: At c=mu_S the excess term is zero, so the minimum cost is attained."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "singleton and empty cluster",
+          "claim": "For S={1}, the formula is w_1||x_1-c||^2=0+w_1||c-x_1||^2; for S=empty, both costs are 0 for all c.",
+          "evidence": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "lemma",
+      "risk": "Local author proof; supplier acceptance and independent review are not inferred.",
+      "unresolved_suppliers": [
+        "rate-distortion-and-lossy-source-coding"
+      ],
+      "unresolved_assumptions": [
+        "The assigned A-page prerequisite rate-distortion-and-lossy-source-coding is still draft; its body was read, but current native run status has not recorded batch-11 acceptance."
+      ]
+    },
+    "lem-it-point-density-cumulative-map-is-c2-diffeomorphism": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-point-density-cumulative-map",
+          "source_section": "Definition",
+          "quote": "Let $a<b$ and let $g:[a,b]\\to(0,\\infty)$ be a continuously differentiable function with $\\int_a^b g(t)\\,dt=1$. Its cumulative point-density coordinate is\n\n$$G_g(x):=\\int_a^x g(t)\\,dt,\\qquad x\\in[a,b].$$\n\nThe integrals here are the ordinary Riemann integrals of continuous functions. The supplier [[cor-primitives-of-a-continuous-function]] guarantees that they are defined and that $G_g$ is a primitive of $g$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-primitives-of-a-continuous-function",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$\n([[def-continuity-real]]). Call $G : I \\to \\mathbb{R}$ a **primitive of $f$ on\n$I$** when $G$ is differentiable at every point of $I$ as a function on $I$ with\n$G' = f$ there ([[def-derivative]]). Then:\n\n1. **Existence.** Fix $c_0 \\in I$. The function\n   $$F : I \\to \\mathbb{R}, \\qquad F(x) \\;:=\\; \\int_{c_0}^x f$$\n   is defined at every $x \\in I$ ([[def-oriented-integral]],\n   [[def-the-integral-function]]) and is a primitive of $f$ on $I$.\n2. **Uniqueness up to a constant.** If $G_1$ and $G_2$ are primitives of $f$ on\n   $I$ then there is a real $k$ with $G_1(x) = G_2(x) + k$ for every $x \\in I$.\n3. **Evaluation.** If $a, b \\in I$ with $a < b$ and $G$ is any primitive of $f$\n   on $I$, then\n   $$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**The scope is exactly the continuous case, and that is not a limitation of the\nproof.** An integrable function need not have a primitive, and a function with a\nprimitive need not be integrable; this corollary is precisely the intersection\nwhere both fundamental theorems apply, and both witnesses are on the companion\npage.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $G_g$ is continuous and $G_g'=g$ on $(a,b)$, so it is $C^2$ because $g$ is $C^1$; also $G_g(a)=0$ and $G_g(b)=1$ by [F1]. Since $g$ is positive and continuous on compact $[a,b]$, [F7] gives a positive minimum, and in particular $G_g'(x)>0$ at every interior point.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x<y$ in $[a,b]$, [F3] applied to $G_g$ gives $G_g(y)-G_g(x)=g(c)(y-x)>0$. Thus $G_g$ is strictly increasing; [F4] and step 1.1 show its image is all of $[0,1]$. Strict increase makes each preimage unique, so an inverse $\\phi:[0,1]\\to[a,b]$ exists.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $u_0\\in[0,1]$ and set $x_0=\\phi(u_0)$. For $\\varepsilon>0$ put $x_-=\\max(a,x_0-\\varepsilon)$ and $x_+=\\min(b,x_0+\\varepsilon)$. At least one of $x_-<x_0$ and $x_0<x_+$ holds because $a<b$. Whenever $x_-<x_0$ or $x_0<x_+$, strict increase gives respectively $u_0-G_g(x_-)>0$ or $G_g(x_+)-u_0>0$. Choose $\\delta>0$ smaller than each of the positive margins that exists. For $u\\in[0,1]$ with $|u-u_0|<\\delta$, monotonicity gives $x_-\\le\\phi(u)\\le x_+$; at a missing margin $x_-=x_0=a$ or $x_+=x_0=b$, the domain endpoint supplies that inequality. Hence $|\\phi(u)-x_0|<\\varepsilon$, proving continuity of $\\phi$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "construct",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix $u\\in(0,1)$, let $x=\\phi(u)$, and for nonzero $h$ with $u+h\\in[0,1]$ let $x_h=\\phi(u+h)$. Continuity from step 3.1 gives $x_h\\to x$, and injectivity gives $x_h\\ne x$. By [F3], for some $\\xi_h$ between $x$ and $x_h$, $(\\phi(u+h)-\\phi(u))/h=1/g(\\xi_h)$. As $h\\to0$, $\\xi_h\\to x$ and $g(\\xi_h)\\to g(x)>0$, so $\\phi'(u)=1/g(\\phi(u))$. The same one-sided quotient argument applies at $u=0,1$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The formula for $\\phi'$ is continuous on $[0,1]$ because $g\\circ\\phi$ is continuous and positive. Differentiating it on $(0,1)$ using [F5] and [F6] gives $\\phi''(u)=-g'(\\phi(u))/g(\\phi(u))^3$. The right-hand side extends continuously to $[0,1]$ because $g'$ and $\\phi$ are continuous and the denominator stays positive. Applying [F3] to $\\phi'$ on intervals with an endpoint at $0$ or $1$ shows its one-sided difference quotient tends to that continuous extension. Together with step 4.1, this proves the stated $C^2$ regularity and formulas.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F6",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-input case; its hypotheses require a nonempty interval, set or sample."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated domain or positivity hypotheses exclude a zero-valued parameter in this boundary case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: The unit density on [0,1] gives G(x)=x and inverse phi(u)=u; the formulas reduce to phi'=1 and phi''=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The relevant theorem assumes a nondegenerate interval or makes no degenerate-object assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1: One-sided inverse difference quotients are treated at u=0 and u=1; step 5.1 extends the second derivative."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: The inverse is defined by the unique preimage under a strictly increasing surjection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no forward biconditional direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no reverse biconditional direction is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "unit density on [0,1]",
+          "claim": "g=1 gives G_g(x)=x, phi(u)=u, phi'(u)=1, and phi''(u)=0.",
+          "evidence": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "lemma",
+      "risk": "Local author proof; supplier acceptance and independent review are not inferred.",
+      "unresolved_suppliers": [
+        "rate-distortion-and-lossy-source-coding"
+      ],
+      "unresolved_assumptions": [
+        "The assigned A-page prerequisite rate-distortion-and-lossy-source-coding is still draft; its body was read, but current native run status has not recorded batch-11 acceptance."
+      ]
+    },
+    "lem-it-nearest-center-quantizer-is-borel-and-finite-distortion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-squared-error-quantizer",
+          "source_section": "Definition",
+          "quote": "Let $d,k\\ge1$, let $X\\subseteq\\mathbb R^d$ be Borel, and give $X$ the relative Borel sigma algebra $\\mathcal B(X)=\\{X\\cap B:B\\text{ is in the sigma algebra generated by Euclidean open sets in }\\mathbb R^d\\}$. Let $\\mu$ be a probability measure on $\\mathcal B(X)$ with $\\int_X\\|x\\|_2^2\\,d\\mu(x)<\\infty$, and let $c_1,\\ldots,c_k\\in\\mathbb R^d$ be reproduction points, where $\\|x\\|_2^2:=\\sum_{\\ell=1}^d x_\\ell^2$. A finite squared-error quantizer is a measurable map $Q:X\\to\\{1,\\ldots,k\\}$, with the finite index set given its discrete sigma algebra; its reproduction at $x$ is $c_{Q(x)}$ and its distortion is\n\n$$D_\\mu(Q;c_1,\\ldots,c_k):=\\int_X\\|x-c_{Q(x)}\\|_2^2\\,d\\mu(x).$$\n\nThis is the expected single-letter distortion of [[def-it-single-letter-distortion-and-block-distortion]] for the measurable distortion $d(x,c)=\\|x-c\\|_2^2$. For a fixed ordered center tuple $c=(c_1,\\ldots,c_k)$, the nearest-center rule assigns $x$ to the least index minimizing $\\|x-c_j\\|_2^2$. Its cell at index $i$ is\n\n$$C_i(c):=X\\cap\\bigcap_{j<i}\\{x:\\|x-c_i\\|_2^2<\\|x-c_j\\|_2^2\\}\\cap\\bigcap_{j>i}\\{x:\\|x-c_i\\|_2^2\\le\\|x-c_j\\|_2^2\\}.$$\n\nThe convention assigns every tie to the smallest index. A general finite measurable quantizer need not use this nearest-center partition; in particular, a compander partition below is specified by its own interval boundaries. When $X=\\mathbb R^d$, this is the ordinary full-domain nearest-center quantizer.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $i,j$, the difference $\\|x-c_i\\|_2^2-\\|x-c_j\\|_2^2$ is a continuous polynomial in the coordinates of $x$. Therefore its strict-negative set is open and its nonpositive set is closed; the finite intersections defining each $C_i(c)$ in [F1] are Borel.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite list of distances has a minimum at each $x\\in X$, and the least minimizing index is unique. The tie inequalities in [F1] therefore make the cells a disjoint partition of $X$; the inverse image of each singleton index is relatively Borel by step 1.1, so the finite-valued index map is Borel.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "construct",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each coordinate, $(x_\\ell-c_{i,\\ell})^2\\le2x_\\ell^2+2c_{i,\\ell}^2$, since $-2x_\\ell c_{i,\\ell}\\le x_\\ell^2+c_{i,\\ell}^2$. Summing coordinates and integrating over the partition gives $D_\\mu(Q_c;c)\\le2\\int\\|x\\|_2^2\\,d\\mu(x)+2\\max_{1\\le i\\le k}\\|c_i\\|_2^2<\\infty$, so the distortion is well-defined and finite.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1: Empty nearest-center cells are allowed; the cells still form a partition and contribute no integral."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: The squared-error integrand is nonnegative and the displayed bound also covers zero error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: For k=1 the only cell is X, so the least-index assignment is constant."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: Coincident centers obey the same tie inequalities, assigning ties to the least index."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint or boundary-value assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: The least minimizing index is selected from a finite ordered set, without choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no forward biconditional direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no reverse biconditional direction is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "coincident centers",
+          "claim": "For k=2 with c_1=c_2, C_2 is empty and C_1=X by the least-index tie rule; the finite distortion bound remains unchanged.",
+          "evidence": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "lemma",
+      "risk": "Local author proof; supplier acceptance and independent review are not inferred.",
+      "unresolved_suppliers": [
+        "def-it-single-letter-distortion-and-block-distortion",
+        "rate-distortion-and-lossy-source-coding"
+      ],
+      "unresolved_assumptions": [
+        "Native Batch 11 acceptance remains pending; current supplier body defines measurable nonnegative d and expected distortion E[d_n], specialized here to n=1 and d(x,c)=||x-c||_2^2.",
+        "The assigned A-page prerequisite rate-distortion-and-lossy-source-coding is still draft; its body was read, but current native run status has not recorded batch-11 acceptance."
+      ]
+    },
+    "lem-it-compact-compander-quantizer-is-borel-and-finite-distortion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-compact-one-dimensional-compander",
+          "source_section": "Definition",
+          "quote": "Let $a<b$. Let $f,g:[a,b]\\to(0,\\infty)$ be $C^1$ probability densities, so $\\int_a^bf=\\int_a^bg=1$. Write $G_g$ for [[def-it-point-density-cumulative-map]] and $\\phi=G_g^{-1}$ for the $C^2$ inverse established by [[lem-it-point-density-cumulative-map-is-c2-diffeomorphism]]. For each integer $N\\ge1$, define boundaries\n\n$$\\beta_j:=\\phi(j/N)\\quad(0\\le j\\le N),$$\n\nand reproduction points\n\n$$r_j:=\\phi((j-\\tfrac12)/N)\\quad(1\\le j\\le N).$$\n\nThe cells are $[\\beta_{j-1},\\beta_j)$ for $j<N$ and $[\\beta_{N-1},b]$ for $j=N$. The compander quantizer maps every point in cell $j$ to $r_j$. It is a finite measurable quantizer in the sense of [[def-it-finite-squared-error-quantizer]], with source law of density $f$ on $[a,b]$ and squared-error distortion\n\n$$D_N(f,g):=\\sum_{j=1}^N\\int_{\\beta_{j-1}}^{\\beta_j}f(x)(x-r_j)^2\\,dx.$$\n\nIts cells are uniform in the cumulative coordinate of $g$; the definition does not assert that they are nearest-center cells in the original $x$ coordinate. Since the source is supported on the fixed compact interval and the cells cover it, there is no overload region in this model.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-point-density-cumulative-map-is-c2-diffeomorphism",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and let $g:[a,b]\\to(0,\\infty)$ be $C^1$ with $\\int_a^b g=1$, and let $G_g$ be as in [[def-it-point-density-cumulative-map]]. Then $G_g$ is a strictly increasing $C^2$ bijection from $[a,b]$ onto $[0,1]$. Its inverse $\\phi:[0,1]\\to[a,b]$ is $C^2$ (with one-sided derivatives at the endpoints), and\n\n$$\\phi'(u)=\\frac{1}{g(\\phi(u))},\\qquad \\phi''(u)=-\\frac{g'(\\phi(u))}{g(\\phi(u))^3}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-squared-error-quantizer",
+          "source_section": "Definition",
+          "quote": "Let $d,k\\ge1$, let $X\\subseteq\\mathbb R^d$ be Borel, and give $X$ the relative Borel sigma algebra $\\mathcal B(X)=\\{X\\cap B:B\\text{ is in the sigma algebra generated by Euclidean open sets in }\\mathbb R^d\\}$. Let $\\mu$ be a probability measure on $\\mathcal B(X)$ with $\\int_X\\|x\\|_2^2\\,d\\mu(x)<\\infty$, and let $c_1,\\ldots,c_k\\in\\mathbb R^d$ be reproduction points, where $\\|x\\|_2^2:=\\sum_{\\ell=1}^d x_\\ell^2$. A finite squared-error quantizer is a measurable map $Q:X\\to\\{1,\\ldots,k\\}$, with the finite index set given its discrete sigma algebra; its reproduction at $x$ is $c_{Q(x)}$ and its distortion is\n\n$$D_\\mu(Q;c_1,\\ldots,c_k):=\\int_X\\|x-c_{Q(x)}\\|_2^2\\,d\\mu(x).$$\n\nThis is the expected single-letter distortion of [[def-it-single-letter-distortion-and-block-distortion]] for the measurable distortion $d(x,c)=\\|x-c\\|_2^2$. For a fixed ordered center tuple $c=(c_1,\\ldots,c_k)$, the nearest-center rule assigns $x$ to the least index minimizing $\\|x-c_j\\|_2^2$. Its cell at index $i$ is\n\n$$C_i(c):=X\\cap\\bigcap_{j<i}\\{x:\\|x-c_i\\|_2^2<\\|x-c_j\\|_2^2\\}\\cap\\bigcap_{j>i}\\{x:\\|x-c_i\\|_2^2\\le\\|x-c_j\\|_2^2\\}.$$\n\nThe convention assigns every tie to the smallest index. A general finite measurable quantizer need not use this nearest-center partition; in particular, a compander partition below is specified by its own interval boundaries. When $X=\\mathbb R^d$, this is the ordinary full-domain nearest-center quantizer.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The boundary sequence $\\beta_0<\\cdots<\\beta_N$ is strictly increasing by [F2], with $\\beta_0=a$ and $\\beta_N=b$. Thus the intervals in [F1] are pairwise disjoint Borel sets whose union is $[a,b]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each index preimage is one of those Borel intervals, so the finite-valued index map is Borel and defines a quantizer as in [F3]. Each reproduction point lies in $[a,b]$ by [F1] and [F2], so $|x-r_j|\\le b-a$ on cell $j$; hence $0\\le D_N(f,g)\\le(b-a)^2\\int_a^bf(x)\\,dx=(b-a)^2<\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: Strict increase of phi makes each consecutive cell nonempty; the cells partition the compact interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: The squared-error distortion is nonnegative and bounded above by the stated finite quantity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: For N=1 the single cell is [a,b] and the reconstruction is phi(1/2)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The relevant theorem assumes a nondegenerate interval or makes no degenerate-object assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: The endpoint values satisfy beta_0=a and beta_N=b; the last half-open convention includes b."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The cell boundaries and index map are defined by explicit formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no forward biconditional direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no reverse biconditional direction is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "single cell N=1",
+          "claim": "beta_0=a, beta_1=b, r_1=phi(1/2), so the sole cell is [a,b] and D_1 is bounded by (b-a)^2.",
+          "evidence": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "lemma",
+      "risk": "Local author proof; supplier acceptance and independent review are not inferred.",
+      "unresolved_suppliers": [
+        "def-it-single-letter-distortion-and-block-distortion",
+        "rate-distortion-and-lossy-source-coding"
+      ],
+      "unresolved_assumptions": [
+        "Native Batch 11 acceptance remains pending; current supplier body defines measurable nonnegative d and expected distortion E[d_n], specialized here to n=1 and d(x,c)=||x-c||_2^2.",
+        "The assigned A-page prerequisite rate-distortion-and-lossy-source-coding is still draft; its body was read, but current native run status has not recorded batch-11 acceptance."
+      ]
+    },
+    "thm-it-finite-data-lloyd-termination-and-fixed-point": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-it-finite-data-lloyd-quantizer",
+          "source_section": "Definition",
+          "quote": "Input: integers $N,d,k\\ge1$, indexed data $x_1,\\ldots,x_N\\in\\mathbb R^d$, exact positive weights $w_i$ with $\\sum_iw_i=1$, and an ordered initial center tuple $c^0=(c_1^0,\\ldots,c_k^0)\\in(\\mathbb R^d)^k$. At each pass $t$:\n\n1. Assign index $i$ to the least $j\\in\\{1,\\ldots,k\\}$ minimizing $\\|x_i-c_j^t\\|_2^2$. Let $S_j^t$ be the indices assigned to $j$.\n2. If $S_j^t\\ne\\varnothing$, set $c_j^{t+1}:=(\\sum_{i\\in S_j^t}w_ix_i)/(\\sum_{i\\in S_j^t}w_i)$. If $S_j^t=\\varnothing$, set $c_j^{t+1}:=c_j^t$.\n3. If $c^{t+1}=c^t$ coordinatewise, return $c^t$ and the assignments from this pass. Otherwise begin the next pass with $c^{t+1}$.\n\nAll distance comparisons and arithmetic are exact. Rational input coordinates, weights and initial centers give a rational implementation using exact rational operations. For arbitrary real data this is an exact-real operation model; no bit-complexity claim is part of the procedure.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-weighted-centroid-squared-error-identity",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\ldots,x_N\\in\\mathbb R^d$, let $w_i>0$ with $\\sum_{i=1}^Nw_i=1$, and let $S\\subseteq\\{1,\\ldots,N\\}$ be nonempty. Put $W_S:=\\sum_{i\\in S}w_i$ and $\\mu_S:=W_S^{-1}\\sum_{i\\in S}w_ix_i$. For every $c\\in\\mathbb R^d$,\n\n$$\\sum_{i\\in S}w_i\\|x_i-c\\|_2^2=\\sum_{i\\in S}w_i\\|x_i-\\mu_S\\|_2^2+W_S\\|c-\\mu_S\\|_2^2.$$\n\nConsequently, $\\mu_S$ is the unique minimizer of the cluster's weighted squared error. If $S$ is empty, its cost is zero for every center and no centroid is required.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-squared-error-quantizer",
+          "source_section": "Definition",
+          "quote": "Let $d,k\\ge1$, let $X\\subseteq\\mathbb R^d$ be Borel, and give $X$ the relative Borel sigma algebra $\\mathcal B(X)=\\{X\\cap B:B\\text{ is in the sigma algebra generated by Euclidean open sets in }\\mathbb R^d\\}$. Let $\\mu$ be a probability measure on $\\mathcal B(X)$ with $\\int_X\\|x\\|_2^2\\,d\\mu(x)<\\infty$, and let $c_1,\\ldots,c_k\\in\\mathbb R^d$ be reproduction points, where $\\|x\\|_2^2:=\\sum_{\\ell=1}^d x_\\ell^2$. A finite squared-error quantizer is a measurable map $Q:X\\to\\{1,\\ldots,k\\}$, with the finite index set given its discrete sigma algebra; its reproduction at $x$ is $c_{Q(x)}$ and its distortion is\n\n$$D_\\mu(Q;c_1,\\ldots,c_k):=\\int_X\\|x-c_{Q(x)}\\|_2^2\\,d\\mu(x).$$\n\nThis is the expected single-letter distortion of [[def-it-single-letter-distortion-and-block-distortion]] for the measurable distortion $d(x,c)=\\|x-c\\|_2^2$. For a fixed ordered center tuple $c=(c_1,\\ldots,c_k)$, the nearest-center rule assigns $x$ to the least index minimizing $\\|x-c_j\\|_2^2$. Its cell at index $i$ is\n\n$$C_i(c):=X\\cap\\bigcap_{j<i}\\{x:\\|x-c_i\\|_2^2<\\|x-c_j\\|_2^2\\}\\cap\\bigcap_{j>i}\\{x:\\|x-c_i\\|_2^2\\le\\|x-c_j\\|_2^2\\}.$$\n\nThe convention assigns every tie to the smallest index. A general finite measurable quantizer need not use this nearest-center partition; in particular, a compander partition below is specified by its own interval boundaries. When $X=\\mathbb R^d$, this is the ordinary full-domain nearest-center quantizer.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At pass $t$, the assignments in [F1] minimize each point's squared distance for the fixed tuple $c^t$, so their assigned cost is exactly $J(c^t)$ from [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Replacing the centers by cluster centroids changes the assigned cost by subtracting $\\sum_{j:S_j^t\\ne\\varnothing}W_{S_j^t}\\|c_j^t-\\mu_{S_j^t}\\|_2^2$, by [F2]; empty clusters contribute no cost and their centers are unchanged by [F1]. If any center changes, one nonempty-cluster term is positive. Reassigning to nearest centers cannot increase cost, so $J(c^{t+1})<J(c^t)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Every center value occurring in the iteration is either its own initial value or the centroid of one of the at most $2^N-1$ nonempty indexed subsets of the data; thus each center has at most $2^N$ possible values and there are at most $2^{Nk}$ possible ordered center tuples.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A changed pass cannot revisit a previous center tuple, because $J$ is a function of that tuple and strictly decreases at every changed pass by step 1.2. Hence at most $2^{Nk}-1$ passes change the tuple; the next pass leaves it unchanged and the algorithm stops, for at most $2^{Nk}$ passes.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the stopping pass, the tuple is unchanged. The deterministic nearest-center rule therefore gives the same assignments on the next evaluation, and the update formula in [F1] already made every nonempty center its assigned centroid. Thus the returned pair is an assignment/centroid fixed point.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "One pass evaluates $Nk$ squared distances in $d$ coordinates and performs at most $O(Nd+kd)$ accumulation/update work, which is $O(Nkd)$ since $N,d,k\\ge1$. Multiplying by the pass bound gives $O(2^{Nk}Nkd)$ exact operations; this exponential bound makes no polynomial-time claim.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2: Empty clusters retain their centers and have zero assigned cost."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2: A changed pass would strictly lower a nonnegative distortion, so zero distortion cannot be followed by a changed pass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3: For N=k=1, the possible center tuple count is at most two and the algorithm stops within two passes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: Coincident centers are permitted; least-index tie assignment remains deterministic."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint or boundary-value assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3: Only the finitely many indexed subsets and deterministic centroids are used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no forward biconditional direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no reverse biconditional direction is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "N=k=1",
+          "claim": "A single datum is assigned to the sole center; one update moves the center to x_1 and the next pass is unchanged, so at most two passes occur.",
+          "evidence": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "theorem",
+      "risk": "Local author proof; supplier acceptance and independent review are not inferred.",
+      "unresolved_suppliers": [
+        "def-it-single-letter-distortion-and-block-distortion",
+        "rate-distortion-and-lossy-source-coding"
+      ],
+      "unresolved_assumptions": [
+        "Native Batch 11 acceptance remains pending; current supplier body defines measurable nonnegative d and expected distortion E[d_n], specialized here to n=1 and d(x,c)=||x-c||_2^2.",
+        "The assigned A-page prerequisite rate-distortion-and-lossy-source-coding is still draft; its body was read, but current native run status has not recorded batch-11 acceptance."
+      ]
+    },
+    "thm-it-exhaustive-global-empirical-quantizer-is-optimal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-it-exhaustive-global-empirical-quantizer",
+          "source_section": "Definition",
+          "quote": "Input: integers $N,d,k\\ge1$, indexed data $x_1,\\ldots,x_N\\in\\mathbb R^d$, and exact positive weights $w_i$ with $\\sum_iw_i=1$. Enumerate all assignments $a=(a_1,\\ldots,a_N)\\in\\{1,\\ldots,k\\}^N$ in lexicographic order. For each assignment, let $S_j(a)=\\{i:a_i=j\\}$. For a nonempty $S_j(a)$ set\n\n$$c_j(a):=\\frac{\\sum_{i\\in S_j(a)}w_ix_i}{\\sum_{i\\in S_j(a)}w_i};$$\n\nfor an empty $S_j(a)$ set $c_j(a):=x_1$. Compute the exact assigned cost $L(a):=\\sum_iw_i\\|x_i-c_{a_i}(a)\\|_2^2$. Retain the first assignment with minimal cost and its center tuple. Return that tuple together with the least-index nearest-center assignment for it. The finite enumeration, tie rule and empty-cluster convention are part of the algorithm.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-weighted-centroid-squared-error-identity",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\ldots,x_N\\in\\mathbb R^d$, let $w_i>0$ with $\\sum_{i=1}^Nw_i=1$, and let $S\\subseteq\\{1,\\ldots,N\\}$ be nonempty. Put $W_S:=\\sum_{i\\in S}w_i$ and $\\mu_S:=W_S^{-1}\\sum_{i\\in S}w_ix_i$. For every $c\\in\\mathbb R^d$,\n\n$$\\sum_{i\\in S}w_i\\|x_i-c\\|_2^2=\\sum_{i\\in S}w_i\\|x_i-\\mu_S\\|_2^2+W_S\\|c-\\mu_S\\|_2^2.$$\n\nConsequently, $\\mu_S$ is the unique minimizer of the cluster's weighted squared error. If $S$ is empty, its cost is zero for every center and no centroid is required.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-squared-error-quantizer",
+          "source_section": "Definition",
+          "quote": "Let $d,k\\ge1$, let $X\\subseteq\\mathbb R^d$ be Borel, and give $X$ the relative Borel sigma algebra $\\mathcal B(X)=\\{X\\cap B:B\\text{ is in the sigma algebra generated by Euclidean open sets in }\\mathbb R^d\\}$. Let $\\mu$ be a probability measure on $\\mathcal B(X)$ with $\\int_X\\|x\\|_2^2\\,d\\mu(x)<\\infty$, and let $c_1,\\ldots,c_k\\in\\mathbb R^d$ be reproduction points, where $\\|x\\|_2^2:=\\sum_{\\ell=1}^d x_\\ell^2$. A finite squared-error quantizer is a measurable map $Q:X\\to\\{1,\\ldots,k\\}$, with the finite index set given its discrete sigma algebra; its reproduction at $x$ is $c_{Q(x)}$ and its distortion is\n\n$$D_\\mu(Q;c_1,\\ldots,c_k):=\\int_X\\|x-c_{Q(x)}\\|_2^2\\,d\\mu(x).$$\n\nThis is the expected single-letter distortion of [[def-it-single-letter-distortion-and-block-distortion]] for the measurable distortion $d(x,c)=\\|x-c\\|_2^2$. For a fixed ordered center tuple $c=(c_1,\\ldots,c_k)$, the nearest-center rule assigns $x$ to the least index minimizing $\\|x-c_j\\|_2^2$. Its cell at index $i$ is\n\n$$C_i(c):=X\\cap\\bigcap_{j<i}\\{x:\\|x-c_i\\|_2^2<\\|x-c_j\\|_2^2\\}\\cap\\bigcap_{j>i}\\{x:\\|x-c_i\\|_2^2\\le\\|x-c_j\\|_2^2\\}.$$\n\nThe convention assigns every tie to the smallest index. A general finite measurable quantizer need not use this nearest-center partition; in particular, a compander partition below is specified by its own interval boundaries. When $X=\\mathbb R^d$, this is the ordinary full-domain nearest-center quantizer.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The assignment set $\\{1,\\ldots,k\\}^N$ has exactly $k^N$ elements, so the finite ordered loop in [F1] terminates and retains an assignment $a^*$ of minimum centroid-adjusted assigned cost $L_*$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix any center tuple $c$ and assign each point to its least-index nearest center, obtaining $a(c)$. By [F2], the centroid-adjusted cost of this assignment is at most its cost at $c$, so $L_*\\le L(a(c))\\le J(c)$ by [F3].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $c^*$ be the tuple retained for $a^*$. Reassigning $a^*$ to nearest centers cannot increase its cost, hence $J(c^*)\\le L_*$. Step 1.2 gives $L_*\\le J(c)$ for every $c$, in particular $L_*\\le J(c^*)$; therefore $J(c^*)=L_*$ and $J(c^*)\\le J(c)$ for every $k$-center tuple. The returned tuple is globally minimizing.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F3",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each of the $k^N$ assignments can be grouped, centered and costed in $O((N+k)d)$ exact operations; the final nearest reassignment costs $O(Nkd)$, which is bounded by $O(k^N(N+k)d)$ for $N,k\\ge1$. This proves the stated operation count without a bit-complexity claim.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2: The algorithm supplies x_1 for empty clusters, so every assignment has a complete center tuple."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: If an assignment attains zero cost, the comparison still gives a global minimum because all distortions are nonnegative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: For N=k=1 the assignment set has one element and the centroid is x_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: Repeated data or centers do not affect nearest assignments or the centroid cost inequality."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint or boundary-value assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The lexicographically ordered assignment set is finite and the first minimum is retained."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no forward biconditional direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no reverse biconditional direction is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "N=k=1",
+          "claim": "The only assignment has centroid x_1 and zero distortion, attaining the global lower bound 0.",
+          "evidence": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "theorem",
+      "risk": "Local author proof; supplier acceptance and independent review are not inferred.",
+      "unresolved_suppliers": [
+        "def-it-single-letter-distortion-and-block-distortion",
+        "rate-distortion-and-lossy-source-coding"
+      ],
+      "unresolved_assumptions": [
+        "Native Batch 11 acceptance remains pending; current supplier body defines measurable nonnegative d and expected distortion E[d_n], specialized here to n=1 and d(x,c)=||x-c||_2^2.",
+        "The assigned A-page prerequisite rate-distortion-and-lossy-source-coding is still draft; its body was read, but current native run status has not recorded batch-11 acceptance."
+      ]
+    },
+    "thm-it-compact-compander-high-rate-distortion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-compact-one-dimensional-compander",
+          "source_section": "Definition",
+          "quote": "Let $a<b$. Let $f,g:[a,b]\\to(0,\\infty)$ be $C^1$ probability densities, so $\\int_a^bf=\\int_a^bg=1$. Write $G_g$ for [[def-it-point-density-cumulative-map]] and $\\phi=G_g^{-1}$ for the $C^2$ inverse established by [[lem-it-point-density-cumulative-map-is-c2-diffeomorphism]]. For each integer $N\\ge1$, define boundaries\n\n$$\\beta_j:=\\phi(j/N)\\quad(0\\le j\\le N),$$\n\nand reproduction points\n\n$$r_j:=\\phi((j-\\tfrac12)/N)\\quad(1\\le j\\le N).$$\n\nThe cells are $[\\beta_{j-1},\\beta_j)$ for $j<N$ and $[\\beta_{N-1},b]$ for $j=N$. The compander quantizer maps every point in cell $j$ to $r_j$. It is a finite measurable quantizer in the sense of [[def-it-finite-squared-error-quantizer]], with source law of density $f$ on $[a,b]$ and squared-error distortion\n\n$$D_N(f,g):=\\sum_{j=1}^N\\int_{\\beta_{j-1}}^{\\beta_j}f(x)(x-r_j)^2\\,dx.$$\n\nIts cells are uniform in the cumulative coordinate of $g$; the definition does not assert that they are nearest-center cells in the original $x$ coordinate. Since the source is supported on the fixed compact interval and the cells cover it, there is no overload region in this model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-point-density-cumulative-map-is-c2-diffeomorphism",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and let $g:[a,b]\\to(0,\\infty)$ be $C^1$ with $\\int_a^b g=1$, and let $G_g$ be as in [[def-it-point-density-cumulative-map]]. Then $G_g$ is a strictly increasing $C^2$ bijection from $[a,b]$ onto $[0,1]$. Its inverse $\\phi:[0,1]\\to[a,b]$ is $C^2$ (with one-sided derivatives at the endpoints), and\n\n$$\\phi'(u)=\\frac{1}{g(\\phi(u))},\\qquad \\phi''(u)=-\\frac{g'(\\phi(u))}{g(\\phi(u))^3}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-it-compact-compander-quantizer-is-borel-and-finite-distortion",
+          "source_section": "Statement",
+          "quote": "For the data in [[def-it-compact-one-dimensional-compander]], every cell is Borel, the cells partition $[a,b]$, the index map is measurable, and $D_N(f,g)$ is finite for each $N\\ge1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-primitives-of-a-continuous-function",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$\n([[def-continuity-real]]). Call $G : I \\to \\mathbb{R}$ a **primitive of $f$ on\n$I$** when $G$ is differentiable at every point of $I$ as a function on $I$ with\n$G' = f$ there ([[def-derivative]]). Then:\n\n1. **Existence.** Fix $c_0 \\in I$. The function\n   $$F : I \\to \\mathbb{R}, \\qquad F(x) \\;:=\\; \\int_{c_0}^x f$$\n   is defined at every $x \\in I$ ([[def-oriented-integral]],\n   [[def-the-integral-function]]) and is a primitive of $f$ on $I$.\n2. **Uniqueness up to a constant.** If $G_1$ and $G_2$ are primitives of $f$ on\n   $I$ then there is a real $k$ with $G_1(x) = G_2(x) + k$ for every $x \\in I$.\n3. **Evaluation.** If $a, b \\in I$ with $a < b$ and $G$ is any primitive of $f$\n   on $I$, then\n   $$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**The scope is exactly the continuous case, and that is not a limitation of the\nproof.** An integrable function need not have a primitive, and a function with a\nprimitive need not be integrable; this corollary is precisely the intersection\nwhere both fundamental theorems apply, and both witnesses are on the companion\npage.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $v_j=(j-\\tfrac12)/N$, $I_j=[(j-1)/N,j/N]$, and $F(u)=f(\\phi(u))/g(\\phi(u))$. For $h_j(x)=f(x)(x-\\phi(v_j))^2$, its primitive $A_j(x)=\\int_a^xh_j(s)\\,ds$ satisfies $A_j'=h_j$ by [F4]. The chain rule [F5] applied to $A_j\\circ\\phi$ on $I_j$, followed by endpoint evaluation using [F4], gives $D_N(f,g)=\\sum_{j=1}^N\\int_{I_j}F(u)(\\phi(u)-\\phi(v_j))^2\\,du$, because [F2] gives $\\phi'=1/(g\\circ\\phi)$ and [F1] gives the reproduction point $\\phi(v_j)$. The distortion is well-defined by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By the chain rule [F5] and quotient rule [F6], $F$ is $C^1$; the functions $\\phi'$, $\\phi''$, $F$ and $F'$ are continuous on compact $[0,1]$, so [F8] gives finite bounds $M_1=\\|\\phi'\\|_\\infty$, $M_2=\\|\\phi''\\|_\\infty$, $M_F=\\|F\\|_\\infty$, and $M_{F'}=\\|F'\\|_\\infty$, independent of $N,j$. If $\\delta=u-v_j$ and $e=\\phi(u)-\\phi(v_j)-\\phi'(v_j)\\delta$, [F7] applied to $\\phi'$ and $F$, together with [F4], gives $|e|\\le M_2|\\delta|^2/2$ and $|F(u)-F(v_j)|\\le M_{F'}|\\delta|$. Expanding the square therefore bounds the absolute difference under consideration by $M_{F'}M_1^2|\\delta|^3+M_F(M_1M_2|\\delta|^3+M_2^2|\\delta|^4/4)$. Since $|\\delta|\\le1/(2N)\\le1/2$, this is at most $C|\\delta|^3$ for $C=M_{F'}M_1^2+M_FM_1M_2+M_FM_2^2/8$, which is independent of $N,j$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra",
+            "step 1.2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $I_j$, direct integration gives $\\int_{I_j}\\delta^2\\,du=1/(12N^3)$ and $\\int_{I_j}|\\delta|^3\\,du=1/(32N^4)$. Thus step 1.2 gives $D_N(f,g)=\\frac{1}{12N^3}\\sum_{j=1}^NH(v_j)+E_N$ with $|E_N|\\le C/(32N^3)$, where $H(u):=F(u)\\phi'(u)^2=f(\\phi(u))/g(\\phi(u))^3$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiplying by $N^2$ gives $N^2D_N(f,g)=\\frac1{12N}\\sum_{j=1}^NH(v_j)+N^2E_N$, with $|N^2E_N|\\le C/(32N)\\to0$. By [F9], $H$ is uniformly continuous on $[0,1]$; therefore its midpoint Riemann sums converge to $\\int_0^1H(u)\\,du$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F9",
+            "algebra",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let $P(x)=\\int_a^x f(s)/g(s)^2\\,ds$. The integrand is continuous because $g$ is positive on the compact interval, so [F4] gives $P'=f/g^2$. By [F5] and [F2], $(P\\circ\\phi)'(u)=f(\\phi(u))/g(\\phi(u))^3=H(u)$. Evaluating this primitive at $0,1$ by [F4], using $\\phi(0)=a$ and $\\phi(1)=b$, gives $\\int_0^1H(u)\\,du=\\int_a^bf(x)/g(x)^2\\,dx$.",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 2.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 3.1 and 3.2 identify the limit of $N^2D_N(f,g)$ with the displayed integral, proving the theorem.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: Since phi is strictly increasing, the cumulative-coordinate cells have positive width and cover the source interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: The limiting coefficient is a strictly positive integral under the stated positive-density hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: At N=1 the midpoint cell integral identity gives D_1 in the transformed coordinate exactly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The relevant theorem assumes a nondegenerate interval or makes no degenerate-object assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: The transformed integral uses all cumulative cells including u=0 and u=1; step 3.2 evaluates phi(0)=a and phi(1)=b."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2: Uniform bounds follow from compactness; the proof uses no selection from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no forward biconditional direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no reverse biconditional direction is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "unit density exact cells",
+          "claim": "For f=g=1 on [0,1], each cell has width 1/N and midpoint reproduction, hence D_N=1/(12N^2) exactly and the coefficient is 1/12.",
+          "evidence": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "theorem",
+      "risk": "Local author proof; supplier acceptance and independent review are not inferred.",
+      "unresolved_suppliers": [
+        "def-it-single-letter-distortion-and-block-distortion",
+        "rate-distortion-and-lossy-source-coding"
+      ],
+      "unresolved_assumptions": [
+        "Native Batch 11 acceptance remains pending; current supplier body defines measurable nonnegative d and expected distortion E[d_n], specialized here to n=1 and d(x,c)=||x-c||_2^2.",
+        "The assigned A-page prerequisite rate-distortion-and-lossy-source-coding is still draft; its body was read, but current native run status has not recorded batch-11 acceptance."
+      ]
+    },
+    "thm-it-optimal-compact-compander-density": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-compact-one-dimensional-compander",
+          "source_section": "Definition",
+          "quote": "Let $a<b$. Let $f,g:[a,b]\\to(0,\\infty)$ be $C^1$ probability densities, so $\\int_a^bf=\\int_a^bg=1$. Write $G_g$ for [[def-it-point-density-cumulative-map]] and $\\phi=G_g^{-1}$ for the $C^2$ inverse established by [[lem-it-point-density-cumulative-map-is-c2-diffeomorphism]]. For each integer $N\\ge1$, define boundaries\n\n$$\\beta_j:=\\phi(j/N)\\quad(0\\le j\\le N),$$\n\nand reproduction points\n\n$$r_j:=\\phi((j-\\tfrac12)/N)\\quad(1\\le j\\le N).$$\n\nThe cells are $[\\beta_{j-1},\\beta_j)$ for $j<N$ and $[\\beta_{N-1},b]$ for $j=N$. The compander quantizer maps every point in cell $j$ to $r_j$. It is a finite measurable quantizer in the sense of [[def-it-finite-squared-error-quantizer]], with source law of density $f$ on $[a,b]$ and squared-error distortion\n\n$$D_N(f,g):=\\sum_{j=1}^N\\int_{\\beta_{j-1}}^{\\beta_j}f(x)(x-r_j)^2\\,dx.$$\n\nIts cells are uniform in the cumulative coordinate of $g$; the definition does not assert that they are nearest-center cells in the original $x$ coordinate. Since the source is supported on the fixed compact interval and the cells cover it, there is no overload region in this model.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-compact-compander-high-rate-distortion",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and let $f,g:[a,b]\\to(0,\\infty)$ be $C^1$ probability densities. For the compander of [[def-it-compact-one-dimensional-compander]], the distortions satisfy\n\n$$\\lim_{N\\to\\infty}N^2D_N(f,g)=\\frac1{12}\\int_a^b\\frac{f(x)}{g(x)^2}\\,dx.$$\n\nThis is an exact limit for the specified compact construction. It assumes neither an unbounded source nor negligible overload, and it makes no claim about unrestricted optimal quantizers or dimensions greater than one.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-primitives-of-a-continuous-function",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$\n([[def-continuity-real]]). Call $G : I \\to \\mathbb{R}$ a **primitive of $f$ on\n$I$** when $G$ is differentiable at every point of $I$ as a function on $I$ with\n$G' = f$ there ([[def-derivative]]). Then:\n\n1. **Existence.** Fix $c_0 \\in I$. The function\n   $$F : I \\to \\mathbb{R}, \\qquad F(x) \\;:=\\; \\int_{c_0}^x f$$\n   is defined at every $x \\in I$ ([[def-oriented-integral]],\n   [[def-the-integral-function]]) and is a primitive of $f$ on $I$.\n2. **Uniqueness up to a constant.** If $G_1$ and $G_2$ are primitives of $f$ on\n   $I$ then there is a real $k$ with $G_1(x) = G_2(x) + k$ for every $x \\in I$.\n3. **Evaluation.** If $a, b \\in I$ with $a < b$ and $G$ is any primitive of $f$\n   on $I$, then\n   $$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**The scope is exactly the continuous case, and that is not a limitation of the\nproof.** An integrable function need not have a primitive, and a function with a\nprimitive need not be integrable; this corollary is precisely the intersection\nwhere both fundamental theorems apply, and both witnesses are on the companion\npage.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $A:=\\int_a^bf(x)^{1/3}\\,dx$, $B(g):=\\int_a^bf(x)/g(x)^2\\,dx$, and $z(x):=f(x)/(B(g)g(x)^3)$. Positivity and continuity on compact $[a,b]$ make $A,B(g)$ finite and strictly positive by [F3], [F4] and [F6]. Using $\\int g=1$, direct cancellation gives $\\int_a^bz(x)g(x)\\,dx=1$ and $\\int_a^bz(x)^{1/3}g(x)\\,dx=A/B(g)^{1/3}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $x$, $z(x)+2-3z(x)^{1/3}=(z(x)^{1/3}-1)^2(z(x)^{1/3}+2)\\ge0$ by the positive real-power convention [F3]. Multiply by $g(x)>0$ and integrate; step 1.1 and $\\int g=1$ give $3A/B(g)^{1/3}\\le3$, hence $B(g)\\ge A^3$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Equality $B(g)=A^3$ makes the integral of $(z^{1/3}-1)^2(z^{1/3}+2)$ against $g(x)\\,dx$ equal $1+2-3A/B(g)^{1/3}=0$, by step 1.1. By [F3] the root is positive; by [F6], $g$ has a positive minimum. If the continuous integrand were positive at any point, it would be bounded below by a positive number on a one-sided or two-sided interval of positive length, so that integral would be positive. Therefore the integrand vanishes everywhere, and its factorization gives $z=1$ and $f/g^3=B(g)$ on $[a,b]$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 3.1 gives $g=f^{1/3}/B(g)^{1/3}$; integrating and using $\\int g=1$ gives $B(g)^{1/3}=A$, hence $g=g_*$. Conversely, [F3] and [F5] show $f^{1/3}$ is positive and $C^1$, so $g_*$ is an admissible positive normalized $C^1$ density; direct substitution gives $B(g_*)=A^3$. Thus $g_*$ is the unique minimizer of the coefficient in [F2], with minimum $A^3/12$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 3.1",
+            "algebra",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-input case; its hypotheses require a nonempty interval, set or sample."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated domain or positivity hypotheses exclude a zero-valued parameter in this boundary case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1: For f=1 on [0,1], g_*=1 is positive normalized C1 and gives coefficient 1/12."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: The equality factorization also covers the case g=f^(1/3)/A, where z is identically one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1: Continuity and positivity hold on the closed interval, so the equality argument includes both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: All integrals and pointwise functions are explicitly defined; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1: If an admissible g attains equality in the coefficient bound, the continuous factor vanishes everywhere and g=g_*."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1: Substitution of g_* gives equality in the coefficient bound, proving it attains the minimum."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "uniform density optimum",
+          "claim": "For f=1 on [0,1], g_*=1 gives A=1 and B(g_*)=1. The admissible g(x)=x+1/2 has B(g)=integral_0^1(x+1/2)^(-2)dx=4/3>1, confirming strict inequality away from the optimizer.",
+          "evidence": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "theorem",
+      "risk": "Local author proof; supplier acceptance and independent review are not inferred.",
+      "unresolved_suppliers": [
+        "def-it-single-letter-distortion-and-block-distortion",
+        "rate-distortion-and-lossy-source-coding"
+      ],
+      "unresolved_assumptions": [
+        "Native Batch 11 acceptance remains pending; current supplier body defines measurable nonnegative d and expected distortion E[d_n], specialized here to n=1 and d(x,c)=||x-c||_2^2.",
+        "The assigned A-page prerequisite rate-distortion-and-lossy-source-coding is still draft; its body was read, but current native run status has not recorded batch-11 acceptance."
+      ]
+    },
+    "cex-it-lloyd-fixed-point-need-not-be-global": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-it-finite-data-lloyd-quantizer",
+          "source_section": "Definition",
+          "quote": "Input: integers $N,d,k\\ge1$, indexed data $x_1,\\ldots,x_N\\in\\mathbb R^d$, exact positive weights $w_i$ with $\\sum_iw_i=1$, and an ordered initial center tuple $c^0=(c_1^0,\\ldots,c_k^0)\\in(\\mathbb R^d)^k$. At each pass $t$:\n\n1. Assign index $i$ to the least $j\\in\\{1,\\ldots,k\\}$ minimizing $\\|x_i-c_j^t\\|_2^2$. Let $S_j^t$ be the indices assigned to $j$.\n2. If $S_j^t\\ne\\varnothing$, set $c_j^{t+1}:=(\\sum_{i\\in S_j^t}w_ix_i)/(\\sum_{i\\in S_j^t}w_i)$. If $S_j^t=\\varnothing$, set $c_j^{t+1}:=c_j^t$.\n3. If $c^{t+1}=c^t$ coordinatewise, return $c^t$ and the assignments from this pass. Otherwise begin the next pass with $c^{t+1}$.\n\nAll distance comparisons and arithmetic are exact. Rational input coordinates, weights and initial centers give a rational implementation using exact rational operations. For arbitrary real data this is an exact-real operation model; no bit-complexity claim is part of the procedure.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-weighted-centroid-squared-error-identity",
+          "source_section": "Statement",
+          "quote": "Let $x_1,\\ldots,x_N\\in\\mathbb R^d$, let $w_i>0$ with $\\sum_{i=1}^Nw_i=1$, and let $S\\subseteq\\{1,\\ldots,N\\}$ be nonempty. Put $W_S:=\\sum_{i\\in S}w_i$ and $\\mu_S:=W_S^{-1}\\sum_{i\\in S}w_ix_i$. For every $c\\in\\mathbb R^d$,\n\n$$\\sum_{i\\in S}w_i\\|x_i-c\\|_2^2=\\sum_{i\\in S}w_i\\|x_i-\\mu_S\\|_2^2+W_S\\|c-\\mu_S\\|_2^2.$$\n\nConsequently, $\\mu_S$ is the unique minimizer of the cluster's weighted squared error. If $S$ is empty, its cost is zero for every center and no centroid is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-squared-error-quantizer",
+          "source_section": "Definition",
+          "quote": "Let $d,k\\ge1$, let $X\\subseteq\\mathbb R^d$ be Borel, and give $X$ the relative Borel sigma algebra $\\mathcal B(X)=\\{X\\cap B:B\\text{ is in the sigma algebra generated by Euclidean open sets in }\\mathbb R^d\\}$. Let $\\mu$ be a probability measure on $\\mathcal B(X)$ with $\\int_X\\|x\\|_2^2\\,d\\mu(x)<\\infty$, and let $c_1,\\ldots,c_k\\in\\mathbb R^d$ be reproduction points, where $\\|x\\|_2^2:=\\sum_{\\ell=1}^d x_\\ell^2$. A finite squared-error quantizer is a measurable map $Q:X\\to\\{1,\\ldots,k\\}$, with the finite index set given its discrete sigma algebra; its reproduction at $x$ is $c_{Q(x)}$ and its distortion is\n\n$$D_\\mu(Q;c_1,\\ldots,c_k):=\\int_X\\|x-c_{Q(x)}\\|_2^2\\,d\\mu(x).$$\n\nThis is the expected single-letter distortion of [[def-it-single-letter-distortion-and-block-distortion]] for the measurable distortion $d(x,c)=\\|x-c\\|_2^2$. For a fixed ordered center tuple $c=(c_1,\\ldots,c_k)$, the nearest-center rule assigns $x$ to the least index minimizing $\\|x-c_j\\|_2^2$. Its cell at index $i$ is\n\n$$C_i(c):=X\\cap\\bigcap_{j<i}\\{x:\\|x-c_i\\|_2^2<\\|x-c_j\\|_2^2\\}\\cap\\bigcap_{j>i}\\{x:\\|x-c_i\\|_2^2\\le\\|x-c_j\\|_2^2\\}.$$\n\nThe convention assigns every tie to the smallest index. A general finite measurable quantizer need not use this nearest-center partition; in particular, a compander partition below is specified by its own interval boundaries. When $X=\\mathbb R^d$, this is the ordinary full-domain nearest-center quantizer.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Give each point weight $1/5$ and initialize centers at $(5/2,9)$. The squared distances to these centers, in point order $0,1,4,5,9$, are $(25/4,81)$, $(9/4,64)$, $(9/4,25)$, $(25/4,16)$, and $(169/4,0)$; each comparison is strict, so the clusters are $\\{0,1,4,5\\}$ and $\\{9\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The alternative centers $(1/2,6)$ assign $0,1$ to $1/2$ and $4,5,9$ to $6$, with strict comparisons: the respective squared-distance pairs are $(1/4,36)$, $(1/4,25)$, $(49/4,4)$, $(81/4,1)$, and $(289/4,9)$. Their total squared error is $(1/2)+(4+1+9)=29/2$, hence their average distortion is $29/10$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two weighted centroids are $(0+1+4+5)/4=5/2$ and $9$, so the center update leaves $(5/2,9)$ unchanged by [F2]. The nearest assignment is unchanged as well by step 1.1, so [F1] stops at this tuple. Its distortion is $(25/4+9/4+9/4+25/4)/5=17/5$ by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $29/10<17/5$, the alternative two-center quantizer has strictly lower distortion than the stopped Lloyd output in step 2.1. Thus that exact fixed point is not globally optimal, refuting the statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "algebra",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement has no empty-input case; its hypotheses require a nonempty interval, set or sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: The witness includes the datum 0, and all nearest-distance comparisons are computed exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: One cluster is a singleton, whose centroid remains 9."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The relevant theorem assumes a nondegenerate interval or makes no degenerate-object assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval endpoint or boundary-value assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: All five assignments and distances are explicitly computed with strict comparisons."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no forward biconditional direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no reverse biconditional direction is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "five-point exact witness",
+          "claim": "The stopped tuple has distortion 17/5, while the alternative tuple has 29/10; since 29/10<17/5, this is a strict suboptimal fixed point.",
+          "evidence": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "counterexample",
+      "risk": "Local author proof; supplier acceptance and independent review are not inferred.",
+      "unresolved_suppliers": [
+        "def-it-single-letter-distortion-and-block-distortion",
+        "rate-distortion-and-lossy-source-coding"
+      ],
+      "unresolved_assumptions": [
+        "Native Batch 11 acceptance remains pending; current supplier body defines measurable nonnegative d and expected distortion E[d_n], specialized here to n=1 and d(x,c)=||x-c||_2^2.",
+        "The assigned A-page prerequisite rate-distortion-and-lossy-source-coding is still draft; its body was read, but current native run status has not recorded batch-11 acceptance."
+      ]
+    },
+    "ex-it-uniform-compact-compander": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-compact-one-dimensional-compander",
+          "source_section": "Definition",
+          "quote": "Let $a<b$. Let $f,g:[a,b]\\to(0,\\infty)$ be $C^1$ probability densities, so $\\int_a^bf=\\int_a^bg=1$. Write $G_g$ for [[def-it-point-density-cumulative-map]] and $\\phi=G_g^{-1}$ for the $C^2$ inverse established by [[lem-it-point-density-cumulative-map-is-c2-diffeomorphism]]. For each integer $N\\ge1$, define boundaries\n\n$$\\beta_j:=\\phi(j/N)\\quad(0\\le j\\le N),$$\n\nand reproduction points\n\n$$r_j:=\\phi((j-\\tfrac12)/N)\\quad(1\\le j\\le N).$$\n\nThe cells are $[\\beta_{j-1},\\beta_j)$ for $j<N$ and $[\\beta_{N-1},b]$ for $j=N$. The compander quantizer maps every point in cell $j$ to $r_j$. It is a finite measurable quantizer in the sense of [[def-it-finite-squared-error-quantizer]], with source law of density $f$ on $[a,b]$ and squared-error distortion\n\n$$D_N(f,g):=\\sum_{j=1}^N\\int_{\\beta_{j-1}}^{\\beta_j}f(x)(x-r_j)^2\\,dx.$$\n\nIts cells are uniform in the cumulative coordinate of $g$; the definition does not assert that they are nearest-center cells in the original $x$ coordinate. Since the source is supported on the fixed compact interval and the cells cover it, there is no overload region in this model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-compact-compander-high-rate-distortion",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and let $f,g:[a,b]\\to(0,\\infty)$ be $C^1$ probability densities. For the compander of [[def-it-compact-one-dimensional-compander]], the distortions satisfy\n\n$$\\lim_{N\\to\\infty}N^2D_N(f,g)=\\frac1{12}\\int_a^b\\frac{f(x)}{g(x)^2}\\,dx.$$\n\nThis is an exact limit for the specified compact construction. It assumes neither an unbounded source nor negligible overload, and it makes no claim about unrestricted optimal quantizers or dimensions greater than one.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $G_g(x)=x$ and $\\phi(u)=u$, so cell $j$ is $[(j-1)/N,j/N)$ (with the final endpoint included) and its reproduction value is $(j-\\tfrac12)/N$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $h=1/N$. On each cell, translation to its midpoint gives $\\int_{(j-1)/N}^{j/N}(x-(j-\\tfrac12)/N)^2\\,dx=\\int_{-h/2}^{h/2}t^2\\,dt=h^3/12$. Summing the $N$ equal cell integrals yields $D_N(1,1)=1/(12N^2)$, including $N=1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore $N^2D_N(1,1)=1/12$ for every $N$, while [F2] gives the same limit coefficient $(1/12)\\int_0^1 1\\,dx=1/12$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: The N uniform intervals cover [0,1] and each has width 1/N."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The stated domain or positivity hypotheses exclude a zero-valued parameter in this boundary case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: The displayed integral formula applies at N=1 and gives 1/12."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The relevant theorem assumes a nondegenerate interval or makes no degenerate-object assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: The last interval includes the right endpoint 1 by the compander convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: Each cell and reproduction point is given by a closed formula in its index."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no forward biconditional direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if statement; no reverse biconditional direction is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "case": "uniform cells",
+          "claim": "For every integer N>=1, integrating squared error around each midpoint yields N copies of (1/N)^3/12, so D_N=1/(12N^2) exactly.",
+          "evidence": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "finite_smoke": [],
+      "kind": "example",
+      "risk": "Local author proof; supplier acceptance and independent review are not inferred.",
+      "unresolved_suppliers": [
+        "def-it-single-letter-distortion-and-block-distortion",
+        "rate-distortion-and-lossy-source-coding"
+      ],
+      "unresolved_assumptions": [
+        "Native Batch 11 acceptance remains pending; current supplier body defines measurable nonnegative d and expected distortion E[d_n], specialized here to n=1 and d(x,c)=||x-c||_2^2.",
+        "The assigned A-page prerequisite rate-distortion-and-lossy-source-coding is still draft; its body was read, but current native run status has not recorded batch-11 acceptance."
+      ]
+    }
+  }
+}

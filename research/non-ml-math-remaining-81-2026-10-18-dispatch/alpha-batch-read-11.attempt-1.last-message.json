@@ -1,0 +1,395 @@
+{
+  "group": "p",
+  "batches": ["11"],
+  "pages_read": [
+    "rate-distortion-and-lossy-source-coding",
+    "rate-distortion-and-lossy-source-coding-examples"
+  ],
+  "items_read": [
+    "def-it-general-mutual-information",
+    "def-it-single-letter-distortion-and-block-distortion",
+    "lem-it-finite-vector-gaussian-water-level-allocation",
+    "def-it-general-rate-distortion-function",
+    "def-it-operational-rate-distortion-function",
+    "lem-it-finite-rate-distortion-minimum-attained",
+    "def-it-information-rate-distortion-function",
+    "def-it-stationary-finite-block-information-rdf",
+    "lem-it-gaussian-reference-kernel-information-lower-bound",
+    "lem-it-rate-distortion-convexity-and-monotonicity",
+    "thm-it-binary-hamming-rate-distortion",
+    "alg-it-finite-alphabet-blahut-arimoto",
+    "lem-it-stationary-block-rdf-limit-and-endpoint-continuity",
+    "thm-it-finite-alphabet-rate-distortion-coding-theorem",
+    "thm-it-gaussian-squared-error-rate-distortion",
+    "thm-it-gaussian-vector-squared-error-rate-distortion",
+    "lem-it-random-cut-ergodic-block-channel-approximation",
+    "thm-it-blahut-arimoto-certified-gap-termination",
+    "thm-it-stationary-ergodic-rate-distortion-bounded-distortion",
+    "ex-it-binary-hamming-rate-distortion-curve",
+    "cex-it-continuous-optimal-reconstruction-need-not-have-a-density",
+    "ex-it-gaussian-distortion-waterline"
+  ],
+  "conventions": [
+    {
+      "convention": "General mutual information is directional joint-law KL in nats, assumes AC, and does not require Lebesgue densities.",
+      "fixed_by": "def-it-general-mutual-information",
+      "matters_for": [
+        "lem-it-gaussian-reference-kernel-information-lower-bound",
+        "thm-it-gaussian-squared-error-rate-distortion",
+        "thm-it-gaussian-vector-squared-error-rate-distortion",
+        "cex-it-continuous-optimal-reconstruction-need-not-have-a-density"
+      ]
+    },
+    {
+      "convention": "The general information rate-distortion function is an infimum over couplings with the fixed source marginal, measured in bits by dividing KL by ln 2; an empty feasible infimum is infinity.",
+      "fixed_by": "def-it-general-rate-distortion-function",
+      "matters_for": [
+        "thm-it-gaussian-squared-error-rate-distortion",
+        "thm-it-gaussian-vector-squared-error-rate-distortion",
+        "cex-it-continuous-optimal-reconstruction-need-not-have-a-density"
+      ]
+    },
+    {
+      "convention": "Block distortion is the normalized additive sum for positive blocklength; coordinate labels may start at zero or one without changing the normalization.",
+      "fixed_by": "def-it-single-letter-distortion-and-block-distortion",
+      "matters_for": [
+        "def-it-operational-rate-distortion-function",
+        "def-it-stationary-finite-block-information-rdf",
+        "thm-it-finite-alphabet-rate-distortion-coding-theorem",
+        "thm-it-stationary-ergodic-rate-distortion-bounded-distortion"
+      ]
+    },
+    {
+      "convention": "Operational codes are deterministic and fixed-length. The excess criterion requires convergence at D + ε for every ε > 0, not at the exact threshold D.",
+      "fixed_by": "def-it-operational-rate-distortion-function",
+      "matters_for": [
+        "thm-it-finite-alphabet-rate-distortion-coding-theorem",
+        "thm-it-stationary-ergodic-rate-distortion-bounded-distortion"
+      ]
+    },
+    {
+      "convention": "Finite-alphabet information rate-distortion uses nonempty finite alphabets, finite nonnegative distortion, and bit mutual information; infeasible budgets below D_min have value infinity.",
+      "fixed_by": "def-it-information-rate-distortion-function",
+      "matters_for": [
+        "lem-it-rate-distortion-convexity-and-monotonicity",
+        "thm-it-binary-hamming-rate-distortion",
+        "thm-it-finite-alphabet-rate-distortion-coding-theorem"
+      ]
+    },
+    {
+      "convention": "Stationary block quantities use two-sided stationary finite-alphabet sources and bits per symbol. R_erg ranges over jointly stationary ergodic pairs with the specified source marginal.",
+      "fixed_by": "def-it-stationary-finite-block-information-rdf",
+      "matters_for": [
+        "lem-it-stationary-block-rdf-limit-and-endpoint-continuity",
+        "lem-it-random-cut-ergodic-block-channel-approximation",
+        "thm-it-stationary-ergodic-rate-distortion-bounded-distortion"
+      ]
+    },
+    {
+      "convention": "Gaussian vector distortion is total squared Euclidean error per vector, not error divided by dimension. Zero-variance coordinates contribute zero, including log-positive at zero.",
+      "fixed_by": "thm-it-gaussian-vector-squared-error-rate-distortion",
+      "matters_for": [
+        "ex-it-gaussian-distortion-waterline"
+      ]
+    },
+    {
+      "convention": "Blahut–Arimoto starts at t = 0 with positive source probabilities and full-support q_0. Its objective and gap tolerance are in nats. Certified interval execution additionally requires rational inputs and positive rational tolerance; no bit-complexity bound is asserted.",
+      "fixed_by": "alg-it-finite-alphabet-blahut-arimoto",
+      "matters_for": [
+        "thm-it-blahut-arimoto-certified-gap-termination"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-it-stationary-block-rdf-limit-and-endpoint-continuity",
+      "statement": "For a stationary finite-alphabet source and bounded additive distortion, R_n(D) converges to inf_n R_n(D) = R_block(D) at every feasible D. R_block is nonincreasing and convex on [D_min, infinity), zero for D ≥ D_c, right-continuous at D_min, and infinite below D_min.",
+      "used_by": [
+        "lem-it-random-cut-ergodic-block-channel-approximation",
+        "thm-it-stationary-ergodic-rate-distortion-bounded-distortion"
+      ]
+    },
+    {
+      "id": "lem-it-random-cut-ergodic-block-channel-approximation",
+      "statement": "Assume AC. For a stationary ergodic finite-alphabet source with bounded distortion, any feasible D ≥ D_min and any r > R_block(D) admit a jointly stationary ergodic source/reconstruction pair with the given source marginal, mean distortion at most D, and limsup bit mutual-information rate strictly below r.",
+      "used_by": [
+        "thm-it-stationary-ergodic-rate-distortion-bounded-distortion"
+      ]
+    },
+    {
+      "id": "lem-it-finite-rate-distortion-minimum-attained",
+      "statement": "For nonempty finite alphabets, a source pmf and finite nonnegative distortion, the feasible channel set is nonempty exactly when D ≥ D_min. Whenever nonempty, mutual information in bits attains its minimum.",
+      "used_by": [
+        "def-it-information-rate-distortion-function",
+        "def-it-stationary-finite-block-information-rdf",
+        "lem-it-rate-distortion-convexity-and-monotonicity",
+        "lem-it-stationary-block-rdf-limit-and-endpoint-continuity",
+        "thm-it-finite-alphabet-rate-distortion-coding-theorem"
+      ]
+    },
+    {
+      "id": "lem-it-gaussian-reference-kernel-information-lower-bound",
+      "statement": "Assume AC. If X has law N(0, σ²), σ² > 0, Y is any jointly distributed real reconstruction, and 0 < D < σ² with E(X − Y)² ≤ D, then I_nat(X;Y) ≥ (1/2) ln(σ²/D), without a density assumption on Y.",
+      "used_by": [
+        "thm-it-gaussian-squared-error-rate-distortion",
+        "thm-it-gaussian-vector-squared-error-rate-distortion"
+      ]
+    },
+    {
+      "id": "lem-it-rate-distortion-convexity-and-monotonicity",
+      "statement": "For finite nonempty source and reproduction alphabets and finite nonnegative distortion, R(D) is finite, nonincreasing and convex on [D_min, infinity), zero for D ≥ D_c, and right-continuous at every feasible distortion, including D_min.",
+      "used_by": [
+        "alg-it-finite-alphabet-blahut-arimoto",
+        "thm-it-finite-alphabet-rate-distortion-coding-theorem",
+        "thm-it-point-to-point-lossy-source-channel-separation"
+      ]
+    },
+    {
+      "id": "lem-it-finite-vector-gaussian-water-level-allocation",
+      "statement": "For m ≥ 1 nonnegative variances λ_i and 0 < D < sum_i λ_i, the unique positive water level solves sum_i min(λ_i, θ) = D; the allocation δ_i = min(λ_i, θ) minimizes the stated coordinate-rate sum. The lemma separately specifies D = 0, zero variances and D ≥ sum_i λ_i.",
+      "used_by": [
+        "thm-it-gaussian-vector-squared-error-rate-distortion",
+        "ex-it-gaussian-distortion-waterline"
+      ]
+    },
+    {
+      "id": "thm-it-finite-alphabet-rate-distortion-coding-theorem",
+      "statement": "For an iid finite-alphabet source, finite nonempty reproduction alphabet and finite nonnegative distortion, both expected-distortion and positive-slack excess-distortion operational rates equal the finite information rate-distortion function for every D ≥ 0, with value infinity below D_min.",
+      "used_by": [
+        "thm-it-point-to-point-lossy-source-channel-separation"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Choice assumptions inherited by general KL, Gaussian laws, disintegration and the random-cut product construction.",
+      "opened": true
+    },
+    {
+      "id": "def-kullback-leibler-divergence",
+      "used_for": "Directional KL, failure of absolute continuity, and integrability of the negative log-density part.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-borel-space",
+      "used_for": "Domains of general mutual information and conditional-law constructions.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Product probability laws, Gaussian product references and independent product extensions.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compactness of finite channel and reproduction simplices.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Attainment of continuous finite-dimensional information objectives.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Gaussian affine laws, densities and degenerate point-mass cases.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Affine Gaussian density calculations, with countable choice supplied by AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-kullback-leibler-is-nonnegative",
+      "used_for": "Gaussian information lower bounds and zero-rate optimality.",
+      "opened": true
+    },
+    {
+      "id": "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+      "used_for": "Regular conditional reconstruction/source laws under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-measurability-of-integration-against-a-kernel",
+      "used_for": "Measurability of the Gaussian reference kernel.",
+      "opened": true
+    },
+    {
+      "id": "lem-prior-and-model-kernel-define-joint-law",
+      "used_for": "Existence and iterated integration for the Gaussian reference joint law.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Product-density and reference-law integration.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+      "used_for": "Equivalence of reference measures having strictly positive densities.",
+      "opened": true
+    },
+    {
+      "id": "lem-real-line-is-standard-borel",
+      "used_for": "Applicability of disintegration to real Gaussian source/reconstruction pairs.",
+      "opened": true
+    },
+    {
+      "id": "alg-certified-elementary-range-evaluation",
+      "used_for": "The actual interval evaluator invoked by the certified Blahut–Arimoto procedure.",
+      "opened": true
+    },
+    {
+      "id": "def-dyadic-floating-point-format-and-directed-rounding",
+      "used_for": "Checking the increasing precision/exponent formats, subnormal treatment and endpoint rounding used by certified iteration.",
+      "opened": true
+    },
+    {
+      "id": "cor-iid-finite-variance-weak-law",
+      "used_for": "Concentration of distortion and information density in finite memoryless random coding.",
+      "opened": true
+    },
+    {
+      "id": "thm-orthogonal-transform-preserves-standard-normal-product-law",
+      "used_for": "Gaussian test-channel source marginals and independence after orthogonal transformations.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "Zero product-measure probability of the Gaussian diagonal at zero distortion.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-euclidean-space-is-standard-borel",
+      "used_for": "Standard-Borel coordinate tuples in the vector Gaussian converse.",
+      "opened": true
+    },
+    {
+      "id": "thm-birkhoff-ergodic-theorem",
+      "used_for": "Bounded ergodic distortion averages and the product-system ergodicity argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+      "used_for": "Existence of the two-sided iid marker-seed process under AC.",
+      "opened": true
+    },
+    {
+      "id": "lem-unit-interval-is-standard-borel",
+      "used_for": "Uniform seed coordinate space.",
+      "opened": true
+    },
+    {
+      "id": "lem-countable-discrete-space-is-standard-borel",
+      "used_for": "Finite marker coordinate spaces.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+      "used_for": "Joint marker-seed coordinate spaces.",
+      "opened": true
+    },
+    {
+      "id": "lem-axiom-of-choice-implies-countable-choice",
+      "used_for": "Choice hypotheses for Polish product and Lebesgue-measure suppliers.",
+      "opened": true
+    },
+    {
+      "id": "cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish",
+      "used_for": "Polish realizations of countable marker-seed path spaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-countable-products-of-second-countable-spaces",
+      "used_for": "Countable cylinder bases identifying product and Borel sigma-algebras.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Normalized Lebesgue law for uniform seeds.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Lebesgue measure one of the unit interval.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Borel structures on the marker-seed path spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Product measurable structures in the random-cut construction.",
+      "opened": true
+    },
+    {
+      "id": "def-product-topology",
+      "used_for": "Product topology and cylinder-basis conventions for path spaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-elementary-range-enclosures",
+      "used_for": "Soundness of finite real interval enclosures returned during certified iteration.",
+      "opened": true
+    },
+    {
+      "id": "lem-directed-dyadic-rounding-enclosure-and-error",
+      "used_for": "Vanishing rounding errors along the algorithm's precision schedule.",
+      "opened": true
+    },
+    {
+      "id": "lem-range-reduced-exp-log-and-arctan-series-enclosures",
+      "used_for": "Explicit exponential and logarithm tails in the fixed-iteration interval convergence argument.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "The counterexample's necessary absolute-continuity condition for a Lebesgue density.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-it-gaussian-distortion-waterline",
+      "concern": "The displayed reconstruction needs X_2 independent of (U,V), which is not explicitly specified. The Statement gives X_1 independent of X_2 and says only that U,V are independent standard normals; step 2.1 then invokes the vector theorem to conclude attainment. Those independence assertions alone do not suffice: take independent standard normals Z_1,Z_2, set X_1=2Z_1, X_2=Z_2, a=√(5/2), b=√(3/2), U=(aZ_1+bZ_2)/2 and V=(bZ_1−aZ_2)/2. Then U,V are independent standard normals and X_1=aU+bV, as written, but Y_1=aU is a nonconstant deterministic continuous function of the full source vector, giving infinite vector mutual information. The intended independent-coordinate test-channel construction is immediate from F2; explicitly choosing X_2 independently of (U,V) closes the gap.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "point-to-point-source-channel-separation",
+      "finding": "The page frontmatter lists 'page: point-to-point-source-channel-separation', 'status: draft', and its items, but contains no requires field. The assigned seam says this page requires rate-distortion-and-lossy-source-coding, and its item thm-it-point-to-point-lossy-source-channel-separation explicitly imports that page's information RDF, attainment, operational coding theorem and right-continuity results in F1, F2 and F5. The mathematical citations are faithful, but the page prerequisite is undeclared.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "rate-distortion-and-lossy-source-coding",
+      "to": "stationary-ergodic-sources-and-universal-coding",
+      "faithful": true,
+      "note": "The source definition uses the same two-sided left shift. The block arguments preserve bit entropy, and the stationary coding theorem uses the ergodic SMB limit and stationary entropy-rate limit under their finite-alphabet hypotheses."
+    },
+    {
+      "from": "point-to-point-source-channel-separation",
+      "to": "rate-distortion-and-lossy-source-coding",
+      "faithful": true,
+      "note": "The information bound and lossy separation theorem preserve finite iid hypotheses, feasible distortion, deterministic fixed-length codes, positive-slack excess criteria and bit-to-nat conversion. The missing page requires declaration is reported separately in alerts."
+    },
+    {
+      "from": "lossy-source-coding-with-side-information",
+      "to": "rate-distortion-and-lossy-source-coding",
+      "faithful": true,
+      "note": "The Wyner–Ziv and multiterminal code definitions use the same normalized finite additive distortion. They explicitly use nats for their own rates and do not import the memoryless RDF theorem as a side-information coding theorem."
+    },
+    {
+      "from": "finite-quantization-lloyd-and-compact-companders",
+      "to": "rate-distortion-and-lossy-source-coding",
+      "faithful": true,
+      "note": "The finite squared-error quantizer definition faithfully identifies its integral as expected single-letter squared-error distortion. The page's empirical optimization and restricted compact high-rate results make no unsupported operational RDF identification."
+    }
+  ]
+}

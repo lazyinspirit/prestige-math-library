@@ -4,7 +4,6 @@ title: Generalized Cohomology and the Atiyah Hirzebruch Spectral Sequence — Ex
 status: published
 items:
   - lem-complexified-tautological-line-resolves-real-projective-k-theory-extensions
-  - lem-reduction-of-the-integral-bockstein-is-the-first-steenrod-square
   - lem-a-bockstein-class-on-rp-two-times-rp-four-has-nonzero-integral-sq-three
   - rem-finite-cw-ahss-convergence-does-not-automatically-extend-to-infinite-cw-complexes
 examples:
@@ -26,7 +25,7 @@ $K^0\cong\mathbb Z^2$ and $K^1\cong\mathbb Z^{2g}$.
 Real projective space exhibits the opposite phenomenon: the page collapses but
 the repeated $\mathbb Z/2$ pieces must be assembled, and the complexified
 tautological line supplies the relation $\alpha^2=-2\alpha$ that turns them into
-one cyclic group of order $2^m$. The local Bockstein lemmas then compute a
+one cyclic group of order $2^m$. The Bockstein identity from the companion page and the local calculation compute a
 nonzero $d_3$ on $\mathbb{RP}^2\times\mathbb{RP}^4$ through
 $\beta_{\mathbb Z}Sq^2\rho_2$, without a $K$-theory Künneth theorem. The final
 remark records that the proved convergence is finite-CW only and that no

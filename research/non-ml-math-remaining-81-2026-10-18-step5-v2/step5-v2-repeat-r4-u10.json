@@ -1,0 +1,87 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "repeat",
+  "round": 4,
+  "unit": "10",
+  "input_sha256": "7f66b489a6becbfbb11557fe873afd395785b914aacb8181f793b929893fd3f8",
+  "decisions": [
+    {
+      "id": "lem-infinite-past-conditional-block-information-rate",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "cc7c753bf5d0fc1e0f7a7c53c8b19e305c10682f1d25e1f64cda8d95e23f53d7",
+      "outcome": "false_positive",
+      "reason": "F1 explicitly cites Proof steps 5.1–6.1 of lem-finite-alphabet-past-information-convergence, rather than claiming that its abbreviated Statement alone supplies the mean identity. Supplier step 5.1 proves integral(g_k) -> integral(g_infinity) by dominated convergence under the integrable envelope. Supplier step 6.1 proves H_n = sum_{k=0}^{n-1} integral(g_k) by the finite entropy chain rule and stationarity, then uses Cesaro convergence and thm-stationary-entropy-rate-limit to conclude integral(g_infinity)=h. These steps are sound and supply precisely the identity used by the assigned item's step 3.1. Birkhoff therefore gives h as asserted; the rejection overlooks an explicitly cited proved conclusion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-infinite-past-conditional-block-information-rate",
+      "disposition": "unaffected",
+      "post_sha256": "81c1e118c7196abeeb7dafbf8408744aad8e9f31168a0b8b4e593c24e69d2771",
+      "review_context_sha256": "286c18b584ee60bf7d95484566555d626e9ecaeab69c6179754368737e340165",
+      "reason": "Reviewed the complete item, its owning proof contract and A-page interface, and the actual finite-past supplier argument. The bounded finite-partition block martingales converge by the stated upcrossing estimate; bounded convergence and the monotone-class theorem give the full-past conditional-law identities. The finite chain rule uses only positive realized prefixes, and at T^i x the conditioning window X_{-(k+i)}^{-1} equals the original X_{-k}^{i-1}, so the factors are p_{k+i}(X_0) composed with T^i. Finite products converge, and positivity of the realized limiting one-symbol mass gives the logarithmic sum. The explicitly cited supplier steps 5.1–6.1 establish integrability and mean h, so the ergodic probability Birkhoff theorem applies with its exact hypotheses. Countably many explicit finite-partition limits require no choice axiom. Null atoms and singleton or zero-entropy sources are covered. No diagrams occur or are required. The source carrier and contract remain unchanged; the guard equals the frozen assignment before guard.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "lem-infinite-past-conditional-block-information-rate",
+      "outcome": "false_positive",
+      "reason": "The rejected mean-identity concern is discharged by the actual supplier Proof steps 5.1–6.1, explicitly cited in F1: dominated convergence gives convergence of the information integrals, and the stationary finite entropy chain rule plus Cesaro convergence identifies their limit with h. No mathematical or metadata repair is necessary.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "review_complete_no_repair_needed",
+    "changed_files": [],
+    "statement_definition_changed": false,
+    "published_ledger_updates": "None: the assigned item is draft, no supplier interface changed, and no potentially defective published use was identified.",
+    "source_evidence": [
+      "items/lem-finite-alphabet-past-information-convergence.md, Proof 3.1–4.1: full-past conditional-law identity and positive realized limiting mass.",
+      "items/lem-finite-alphabet-past-information-convergence.md, Proof 5.1–6.1: integrable envelope, convergence of integrals, entropy chain rule and mean identity.",
+      "items/thm-stationary-entropy-rate-limit.md, Proof 3.1: stationary block-entropy averages equal Cesaro averages of finite-past conditional entropies.",
+      "items/thm-birkhoff-ergodic-probability-case-for-strong-laws.md, Statement and Proof: integrable averages on an ergodic probability system converge to the integral."
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-infinite-past-conditional-block-information-rate.md --json",
+        "exit_code": 0,
+        "result": "One proof checked; zero failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-infinite-past-conditional-block-information-rate.md --json",
+        "exit_code": 0,
+        "result": "One file checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/non-ml-math-remaining-81-2026-10-18-batch-10.proof-contracts.json --strict --items lem-infinite-past-conditional-block-information-rate --json",
+        "exit_code": 0,
+        "result": "Assigned item contract passed with no errors or warnings."
+      },
+      {
+        "command": "node tools/finite-smoke.mjs research/non-ml-math-remaining-81-2026-10-18-batch-10.proof-contracts.json --items lem-infinite-past-conditional-block-information-rate --json",
+        "exit_code": 0,
+        "result": "iid-bernoulli-half-conditional-block passed: 3906 finite atoms for past lengths 0..4 and block lengths 1..6. This finite check does not certify infinite-past convergence."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-infinite-past-conditional-block-information-rate.md",
+        "exit_code": 0,
+        "result": "One item, four steps, zero defects."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection; no worker-launched judging, certification, ledger mutation or round transition."
+  }
+}

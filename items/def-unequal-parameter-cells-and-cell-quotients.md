@@ -1,0 +1,36 @@
+---
+id: def-unequal-parameter-cells-and-cell-quotients
+kind: definition
+title: Unequal-parameter left, right, and two-sided cells and cell quotients
+status: draft
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+dependency_level: 5
+deps: [def-unequal-parameter-coxeter-hecke-algebra, thm-unequal-parameter-kazhdan-lusztig-basis]
+justified_by: [thm-unequal-parameter-cell-quotients-are-modules]
+aliases: []
+landmark: false
+proof_strategy: definition
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+sources:
+  references:
+    - title: "George Lusztig, Hecke Algebras with Unequal Parameters, revised arXiv text (2014)"
+      url: "https://arxiv.org/pdf/math/0208154"
+      locator: "§8.1–8.3, PDF pp. 36–37: weighted cell preorders, cells, ideals, and cell-module quotients."
+verification:
+  precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+---
+
+## Definition
+
+Let $C_w$ be the basis of [[thm-unequal-parameter-kazhdan-lusztig-basis]]. For $x,y\in W$, write $x\leftarrow_L y$ if the coefficient of $C_x$ in $C_sC_y$ is nonzero for some $s\in S$. Write $x\le_L y$ if there is a finite chain $x=w_0,\ldots,w_n=y$ with $w_i\leftarrow_L w_{i+1}$ at every step. Define $x\leftarrow_R y$ from the coefficient of $C_x$ in $C_yC_s$, and define $\le_R$ by finite chains of such steps. Define $x\le_{LR}y$ by finite chains in which each step is either a left or a right step. The length-zero chain makes each relation reflexive, and concatenation makes each transitive. Mutual comparability defines equivalence relations; their classes are the left, right, and two-sided **cells**.
+
+For a left cell $\mathcal C$, define
+$$I^L_{\le\mathcal C}=\operatorname{span}_A\{C_x:x\le_L y\text{ for some }y\in\mathcal C\},\qquad I^L_{<\mathcal C}=\operatorname{span}_A\{C_x:x\le_L y\text{ for some }y\in\mathcal C,\ x\notin\mathcal C\}.$$
+Define $I^R_{\le\mathcal C}, I^R_{<\mathcal C}$ for a right cell and $I^{LR}_{\le\mathcal C}, I^{LR}_{<\mathcal C}$ for a two-sided cell in the same way, using the corresponding preorder. The associated left cell quotient, right cell quotient, and two-sided cell quotient are respectively $I^L_{\le\mathcal C}/I^L_{<\mathcal C}$, $I^R_{\le\mathcal C}/I^R_{<\mathcal C}$, and $I^{LR}_{\le\mathcal C}/I^{LR}_{<\mathcal C}$. [[thm-unequal-parameter-cell-quotients-are-modules]] proves that these quotients inherit the stated module or bimodule actions and have bases indexed by their cells.

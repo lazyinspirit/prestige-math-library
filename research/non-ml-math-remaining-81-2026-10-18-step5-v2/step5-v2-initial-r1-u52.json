@@ -1,0 +1,72 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "initial",
+  "round": 1,
+  "unit": "52",
+  "input_sha256": "5a7686cf6af281fffc281470b9fd4d1b4497cd3e88649ffa4676dd5e748ac1b1",
+  "decisions": [
+    {
+      "id": "cex-naive-triangle-orbit-count-omits-derived-homotopy-weight",
+      "model": "gpt-6-luna",
+      "context_sha256": "c0e2a9e8d4b815d64a20feedc5d4c35c648c91da9521cd66aecd942d98674f4b",
+      "outcome": "false_positive",
+      "reason": "The judge duplicates the source when taking cones of the two components separately. By the cochain cone formula (Stacks, Definition 13.9.1), Cone(f_a) is k^2 -> k in degrees -1,0 with differential (b,c) -> ac. For a nonzero it splits as S[1] plus the contractible complex k --a--> k; for a=0 it is S plus two copies of S[1]. Hence exactly q-1 maps have cone y. Aut(S) has order q-1, and Ext^{-1}(S,z)=k is the only nonzero negative Ext in the coefficient ratio. Toën Proposition 5.1 therefore gives g=1/q whereas n=1, exactly as claimed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://stacks.math.columbia.edu/tag/014D",
+        "https://arxiv.org/pdf/math/0501343v4"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "cex-naive-triangle-orbit-count-omits-derived-homotopy-weight",
+      "disposition": "unaffected",
+      "post_sha256": "1b272e14a386029793436b92e1bf334c773db33bfa4e24859568c5991e819729",
+      "review_context_sha256": "f7cbc408a702d1ca1ccde4c32103eae7df0769112ce3076d32fb4bc785cc8eb1",
+      "reason": "Both proof steps are valid: the nonzero scalar map cancels the source with the degree-zero target summand, leaving S[1]; the higher-Ext correction is q^{-1}. Checked the actual three dependencies, the owning proof contract and both page interfaces. The standard one-object dg category k realizes the stated perfect-complex example and requires no choice axiom. The item guard equals the frozen before guard; no source or metadata repair is necessary.",
+      "uncertain": false,
+      "source_urls": [
+        "https://stacks.math.columbia.edu/tag/014D",
+        "https://arxiv.org/pdf/math/0501343v4"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "review_complete_no_repair_required",
+    "source_evidence": [
+      "Stacks Project, Section 13.9, Definition 13.9.1 (cochain mapping cone).",
+      "Toën, Derived Hall algebras, Section 5, Proposition 5.1 and its complete proof, printed pages 16-17 (PDF indices 15-16)."
+    ],
+    "scope": "Only the assigned draft frontier item was adjudicated. No Statement or Definition changed; no consumer propagation, new prerequisite, published finding or shared-ledger amendment is required.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-naive-triangle-orbit-count-omits-derived-homotopy-weight.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/cex-naive-triangle-orbit-count-omits-derived-homotopy-weight.md --json",
+        "exit_code": 0,
+        "result": "1 item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/cex-naive-triangle-orbit-count-omits-derived-homotopy-weight.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects."
+      },
+      {
+        "command": "Inline Python exhaustive cone kernel/image enumeration over F_2, F_3 and F_5.",
+        "exit_code": 0,
+        "result": "In each field exactly q-1 scalars yield cone S[1]; naive coefficient 1 and derived coefficient 1/q. This finite check supplements the general linear-algebra argument."
+      }
+    ],
+    "unresolved_obligations": []
+  }
+}

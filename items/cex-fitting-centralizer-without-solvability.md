@@ -3,6 +3,7 @@ id: cex-fitting-centralizer-without-solvability
 kind: counterexample
 title: "The Fitting subgroup of $A_5$ does not contain its centralizer"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: ai-altered
@@ -14,10 +15,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/published-receipts/cex-fitting-centralizer-without-solvability.json
 sources:
   scraped: []
   references:

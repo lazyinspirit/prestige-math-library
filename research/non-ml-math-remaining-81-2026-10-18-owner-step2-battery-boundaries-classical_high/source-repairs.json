@@ -1,0 +1,79 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "kind": "isolated draft source repairs; no canonical mutations or check/gate credit",
+  "repairs": [
+    {
+      "id": "lem-it-finite-gaussian-mixture-entropy-bounds",
+      "status_observed": "draft",
+      "before_file": "research/non-ml-math-remaining-81-2026-10-18-owner-step2-battery-boundaries-classical_high/lem-it-finite-gaussian-mixture-entropy-bounds.before.md",
+      "proposed_file": "research/non-ml-math-remaining-81-2026-10-18-owner-step2-battery-boundaries-classical_high/lem-it-finite-gaussian-mixture-entropy-bounds.proposed.md",
+      "before_raw_sha256": "45534c22b16abf65cc164a66cfb1ccb37ec6b823592a3d482951611763efe2f9",
+      "defect": {
+        "confirmed": "Without fresh-noise independence from the side variable, the conditional assertion is false. Set X=0 and S=Z: X has finite conditional second moment but Y|S is a point mass and has no positive-dimensional Lebesgue density.",
+        "minimality": "Retains every unconditional assertion unchanged and states exactly the conditional-noise premise used in 5.1. Does not restrict S to finite alphabets or remove arbitrary finite-power X laws.",
+        "counterexample": "d=1,N=1,X identically 0,S=Z,Y=Z."
+      },
+      "edits": [
+        {
+          "original": "If a side variable $S$ admits a conditional law $P_{X|S=s}$ with finite second moment almost surely, then each conditional Gaussian convolution has finite entropy and",
+          "replacement": "If a side variable $S$ admits a conditional law $P_{X|S=s}$ with finite second moment almost surely and $Z$ is independent of the pair $(X,S)$, then each conditional Gaussian convolution has finite entropy and"
+        },
+        {
+          "original": "5.1 For almost every $s$, repeat steps 1.1 and 2.1 with $P_{X|S=s}$;",
+          "replacement": "5.1 Independence of $Z$ from $(X,S)$ makes the conditional law of $Y$ given $S=s$ the convolution of $P_{X|S=s}$ with the same $N(0,NI_d)$ density. For almost every $s$, repeat steps 1.1 and 2.1 with $P_{X|S=s}$;"
+        }
+      ]
+    },
+    {
+      "id": "ex-it-correlated-source-binary-adder-dm-mac",
+      "status_observed": "draft",
+      "before_file": "research/non-ml-math-remaining-81-2026-10-18-owner-step2-battery-boundaries-classical_high/ex-it-correlated-source-binary-adder-dm-mac.before.md",
+      "proposed_file": "research/non-ml-math-remaining-81-2026-10-18-owner-step2-battery-boundaries-classical_high/ex-it-correlated-source-binary-adder-dm-mac.proposed.md",
+      "before_raw_sha256": "91fbb0d675aac9efa29cf0dfbaa38e2fadce7f9769eee4d0a463a542167e8602",
+      "defect": {
+        "confirmed": "The output under two independent fair bits has masses (1/4,1/2,1/4), not a uniform ternary law. The stated entropy and capacity comparison are correct.",
+        "minimality": "Only fixes the erroneous distribution description in Proof 2.1; Statement and bound unchanged."
+      },
+      "edits": [
+        {
+          "original": "Uniform product inputs $p=q=1/2$ give the uniform ternary output and entropy $\\frac32\\ln2$.",
+          "replacement": "Uniform product inputs $p=q=1/2$ give output probabilities $(1/4,1/2,1/4)$ and entropy $\\frac32\\ln2$."
+        }
+      ]
+    },
+    {
+      "id": "thm-it-two-user-discrete-memoryless-mac-capacity-region",
+      "status_observed": "draft",
+      "before_file": "research/non-ml-math-remaining-81-2026-10-18-owner-step2-battery-boundaries-classical_high/thm-it-two-user-discrete-memoryless-mac-capacity-region.before.md",
+      "proposed_file": "research/non-ml-math-remaining-81-2026-10-18-owner-step2-battery-boundaries-classical_high/thm-it-two-user-discrete-memoryless-mac-capacity-region.proposed.md",
+      "before_raw_sha256": "5b1834d141b3dc77d9d4ca2f33fde213a8f3a1f023c4ec814def7f2637d9d18f",
+      "defect": {
+        "confirmed": "Achievability chose strict thresholds for all three subsets, which is impossible if one user has zero information and rate zero. General finite models and exact capacity Statement include such channels.",
+        "minimality": "Retains Statement and code ensemble; omit empty false-message classes and use singleton-message codes, exactly as the existing Gaussian MAC supplier already does. Closed faces follow by scaling positive-rate coordinates.",
+        "example": "Channel Y=X2 with singleton X1 has region R1=0,0<=R2<=ln|X2|; an I(X1;Y|X2)=0 threshold cannot satisfy 0<tau<0."
+      },
+      "edits": [
+        {
+          "original": "and rates strictly below its three information bounds.",
+          "replacement": "and a nonnegative rate pair satisfying each subset information bound strictly whenever that subset has positive total rate. Use a singleton message set for every zero-rate user."
+        },
+        {
+          "original": "Decode the unique pair for which all three $i_S$ exceed thresholds $n\\tau_S$, with $R(S)<\\tau_S<I(X_S;Y\\mid X_{S^c},Q)$;",
+          "replacement": "For each subset with $R(S)>0$, choose a threshold $n\\tau_S$ with $R(S)<\\tau_S<I(X_S;Y\\mid X_{S^c},Q)$. Decode the unique pair passing all these tests; a subset of zero total rate has no wrong-message candidates and its test is omitted;"
+        },
+        {
+          "original": "For the true pair, the information-density summands",
+          "replacement": "For the true pair and every tested subset, the information-density summands"
+        },
+        {
+          "original": "all three true tests pass",
+          "replacement": "all tested true tests pass"
+        },
+        {
+          "original": "The ensemble-average error tends to zero, and a deterministic codebook with error no larger than that average exists.",
+          "replacement": "The ensemble-average error tends to zero, and a deterministic codebook with error no larger than that average exists. A wrong-message set necessarily has positive total rate, since the zero-rate message sets are singletons. If both rates are zero, the unique message pair is always returned with zero error. Scaling any nonnegative pair in the displayed closed region by $1-\\varepsilon$, with $0<\\varepsilon<1$, makes every positive-total-rate subset inequality strict; letting $\\varepsilon$ decrease to zero therefore gives all closed faces, including cases where a zero-rate subset has zero information."
+        }
+      ]
+    }
+  ]
+}

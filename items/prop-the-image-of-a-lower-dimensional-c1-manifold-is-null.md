@@ -3,6 +3,7 @@ id: prop-the-image-of-a-lower-dimensional-c1-manifold-is-null
 kind: proposition
 title: "The image of a lower-dimensional $C^1$ manifold is null"
 status: published
+dependency_level: 4
 origin: session
 provenance:
   statement: literature-derived
@@ -18,13 +19,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (prop-the-image-of-a-lower-dimensional-c1-manifold-is-null). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/prop-the-image-of-a-lower-dimensional-c1-manifold-is-null.json
 sources:
   scraped: []
   references:

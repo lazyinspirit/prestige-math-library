@@ -1,0 +1,890 @@
+[
+  {
+    "order": 2552,
+    "id": "toric-code-anyons-logical-operators-and-protection",
+    "kind": "A",
+    "category": "quantum-computing",
+    "title": "Toric Code Anyons, Logical Operators, and Protection",
+    "companion": "toric-code-anyons-logical-operators-and-protection-examples",
+    "requires": [
+      "stabilizer-css-codes-syndromes-and-procedures"
+    ],
+    "items": [
+      {
+        "id": "def-qc-tqc-periodic-square-cellulation",
+        "kind": "definition",
+        "title": "Periodic square cellulation of the torus",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Fix an integer $L\\ge3$ and write $\\mathbb Z_L=\\mathbb Z/L\\mathbb Z$. The periodic square cellulation has vertices $q_{i,j}$, horizontal edges $h_{i,j}$ from $q_{i,j}$ to $q_{i+1,j}$, vertical edges $v_{i,j}$ from $q_{i,j}$ to $q_{i,j+1}$, and faces $f_{i,j}$, for $i,j\\in\\mathbb Z_L$. Every index is read modulo $L$. The boundary of $f_{i,j}$ consists of $h_{i,j},v_{i+1,j},h_{i,j+1},v_{i,j}$. Equivalently, this is the quotient of the unit square tiling of $\\mathbb R^2$ by translations in $L\\mathbb Z^2$. The cellulation has $L^2$ vertices, $2L^2$ edges, and $L^2$ faces. The condition $L\\ge3$ ensures that the four edges in each star and face are distinct, and that every edge has two distinct endpoints and two distinct incident faces. The vertex-edge graph joins vertices joined by an edge. The face-adjacency graph joins faces sharing an edge; both graphs are connected.",
+        "proof_obligations": [
+          "Give explicit endpoint/face incidence modulo L and verify each edge has two endpoints and two adjacent faces."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the construction uses fixed finite coordinate sets.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-tqc-finite-square-cycle-is-boundary",
+        "kind": "lemma",
+        "title": "Finite square-lattice cycles are boundaries",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "In the infinite square lattice, every finitely supported edge chain over $\\mathbb F_2$ whose incidence at each vertex is even is the boundary of a finitely supported collection of square faces. The same conclusion holds for the translated dual square lattice.",
+        "proof_obligations": [
+          "Define finite edge chains on Z² and prove the explicit face-filling formula; verify the same under the dual-grid identification."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            },
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the proof is a finite-support calculation over the two-element field.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-tqc-toric-checks",
+        "kind": "definition",
+        "title": "Toric star and plaquette checks",
+        "deps": [
+          "def-qc-tqc-periodic-square-cellulation",
+          "def-qc-pauli-matrices",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-map",
+          "lem-qc-tensor-product-basis-and-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For the periodic cellulation in [[def-qc-tqc-periodic-square-cellulation]], put one qubit on each edge, ordered lexicographically by $(i,j)$ and then with horizontal before vertical edges. The physical Hilbert space is $\\mathcal H_L=(\\mathbb C^2)^{\\otimes E}$, where $E$ is the edge set. For an edge $e$, write $X_e$ and $Z_e$ for the corresponding one-qubit Pauli acting on that tensor factor and as the identity on every other factor. Define the star and plaquette checks by $$A_{i,j}=X_{h_{i-1,j}}X_{h_{i,j}}X_{v_{i,j-1}}X_{v_{i,j}},\\qquad B_{i,j}=Z_{h_{i,j}}Z_{v_{i+1,j}}Z_{h_{i,j+1}}Z_{v_{i,j}}.$$ All indices are in $\\mathbb Z_L$.",
+        "proof_obligations": [
+          "Use the finite tensor-product Pauli definitions and state the check supports explicitly."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; each check is an explicit finite tensor product.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-tqc-contractible-disk-lifts-to-plane",
+        "kind": "lemma",
+        "title": "A contractible toric disk lifts to the square grid",
+        "deps": [
+          "def-qc-tqc-periodic-square-cellulation"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Write the torus as $T_L=\\mathbb R^2/(L\\mathbb Z^2)$ with its periodic square cellulation. Let $D\\subset T_L$ be a nonempty compact embedded topological disk with connected complement. Then the quotient map $\\pi:\\mathbb R^2\\to T_L$ has a lift $\\widetilde D\\subset\\mathbb R^2$ on which it is one-to-one and maps $\\widetilde D$ homeomorphically onto $D$. Consequently every finite primal or dual edge chain supported in $D$ lifts to a finite chain in the infinite square tiling, and cycles lift to cycles.",
+        "proof_obligations": [
+          "Use the explicit quotient map R²→R²/(LZ²), prove path-independent lifting over a simply connected disk, and use compactness/local finiteness to obtain a finite lifted cell subcomplex."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the lift is unique after a basepoint is fixed.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-tqc-toric-incidence-ranks",
+        "kind": "lemma",
+        "title": "Toric incidence maps have exactly one relation each",
+        "deps": [
+          "def-qc-tqc-periodic-square-cellulation",
+          "thm-rank-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For $L\\ge3$, the $L^2$ star-support vectors in $\\mathbb F_2^E$ have span dimension $L^2-1$, and their only relation is their total sum. The $L^2$ face-boundary vectors have the same span dimension and their only relation is their total sum. The dual-face incidence statement has the same rank.",
+        "proof_obligations": [
+          "Prove connected incidence rank V−1 by spanning-tree elimination and prove the sole relation is constant on each connected graph. Apply also to the dual graph."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all support spaces are finite binary vector spaces.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-tqc-toric-excitations",
+        "kind": "definition",
+        "title": "Toric e and m syndromes",
+        "deps": [
+          "def-qc-tqc-toric-checks",
+          "def-qc-stabilizer-syndrome-and-logical-operators"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For a nonzero vector $\\psi$ that is a simultaneous eigenvector of all toric checks, its **e syndrome** is the set of vertices $q$ for which $A_q\\psi=-\\psi$, and its **m syndrome** is the set of faces $f$ for which $B_f\\psi=-\\psi$. A violated star is called an e defect and a violated plaquette is called an m defect. These are finite stabilizer-syndrome labels; the names do not assume that a material contains localized physical quasiparticles. These eigenvalue labels agree with the commutation-sign syndrome of [[def-qc-stabilizer-syndrome-and-logical-operators]] when a Pauli error acts on a common $+1$ check eigenvector, as verified below. The checks are Hermitian involutions, as verified below; thus their eigenvalues on any nonzero simultaneous eigenvector are indeed signs.",
+        "proof_obligations": [
+          "Define simultaneous syndrome projectors and distinguish the finite stabilizer model from physical particle language."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; this item defines finite check eigenvalue labels.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-tqc-toric-check-commutation",
+        "kind": "lemma",
+        "title": "Toric checks commute and have two global relations",
+        "deps": [
+          "def-qc-tqc-periodic-square-cellulation",
+          "def-qc-tqc-toric-checks",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-commutator-is-symplectic-pairing"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "All star and plaquette checks of [[def-qc-tqc-toric-checks]] commute. The product of all stars is the identity, and the product of all plaquettes is the identity.",
+        "proof_obligations": [
+          "Compute Pauli signs from XZ=−ZX and show every edge appears twice in each global product."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the proof counts finite edge incidences modulo two.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-tqc-toric-cycle-quotient",
+        "kind": "lemma",
+        "title": "Toric cycle classes are determined by two winding parities",
+        "deps": [
+          "def-qc-tqc-periodic-square-cellulation",
+          "lem-qc-tqc-toric-incidence-ranks"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $Z_1$ be the space of primal edge chains with even incidence at every vertex, and let $B_1$ be the span of the face boundaries. Then $B_1\\subseteq Z_1$, the quotient $Z_1/B_1$ has dimension two, and the two winding parities give coordinates on that quotient. The same statement holds for dual edge chains, with dual vertex boundaries in place of face boundaries. The horizontal loop $\\gamma_h=\\sum_i h_{i,0}$ has winding pair $(1,0)$, and the vertical loop $\\gamma_v=\\sum_j v_{0,j}$ has pair $(0,1)$; their dual counterparts give the corresponding basis of the dual quotient. The horizontal loop $\\gamma_h=\\sum_i h_{i,0}$ has winding pair $(1,0)$, and the vertical loop $\\gamma_v=\\sum_j v_{0,j}$ has pair $(0,1)$; their dual counterparts give the corresponding basis of the dual quotient.",
+        "proof_obligations": [
+          "Give an explicit spanning tree and cycle basis; establish the boundary subspace rank and show the two winding loops complete the basis."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            },
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all chains and bases are finite over F2.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-tqc-toric-hamiltonian",
+        "kind": "definition",
+        "title": "Finite toric-code Hamiltonian",
+        "deps": [
+          "def-qc-tqc-toric-checks",
+          "lem-qc-tqc-toric-check-commutation",
+          "def-qc-pauli-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For $L\\ge3$ and couplings $J_e,J_m>0$, the finite toric-code Hamiltonian on $\\mathcal H_L$ is $$H_L=-J_e\\sum_{i,j\\in\\mathbb Z_L}A_{i,j}-J_m\\sum_{i,j\\in\\mathbb Z_L}B_{i,j}.$$ The energy unit is fixed by $J_e,J_m$. This is a finite-volume operator defined from the stabilizer checks; its definition makes no claim about a material realization or a thermodynamic phase.",
+        "proof_obligations": [
+          "Check H is Hermitian and commuting from the Pauli relations; state energy units and finite volume."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; this is a finite-dimensional Hermitian operator.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-tqc-toric-joint-check-eigenspaces",
+        "kind": "lemma",
+        "title": "Toric checks decompose into joint syndrome eigenspaces",
+        "deps": [
+          "def-qc-tqc-toric-checks",
+          "def-qc-tqc-toric-excitations",
+          "lem-qc-tqc-toric-check-commutation",
+          "lem-qc-tqc-toric-incidence-ranks",
+          "def-qc-pauli-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Delete the star $A_{0,0}$ and plaquette $B_{0,0}$ from the full check list, and call the remaining $r=2L^2-2$ checks $g_1,\\ldots,g_r$. They are independent commuting Hermitian involutions. For each sign string $s\\in\\mathbb F_2^r$, the operator $$P_s=\\prod_{a=1}^r\\frac{I+(-1)^{s_a}g_a}{2}$$ is the orthogonal projection onto the corresponding joint eigenspace; the $P_s$ are pairwise orthogonal and sum to the identity. The omitted checks are determined by the retained ones, so every nonzero syndrome sector has an even number of e defects and an even number of m defects.",
+        "proof_obligations": [
+          "Use all checks except one fixed star and plaquette as independent generators; construct the sign projectors and prove they are pairwise orthogonal and sum to identity."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; all syndrome projectors are finite products and sums.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qc-tqc-toric-string-syndrome",
+        "kind": "lemma",
+        "title": "Open toric strings have endpoint syndromes",
+        "deps": [
+          "def-qc-tqc-toric-checks",
+          "def-qc-tqc-toric-excitations",
+          "def-qc-pauli-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $P$ be a primal edge trail with no repeated edge and distinct endpoints $q_0,q_1$. The Pauli string $Z(P)$ has commutation syndrome $1$ at exactly the two endpoint stars and $0$ at every other star or plaquette. Let $Q$ be a dual edge trail with no repeated edge and distinct endpoint faces $f_0,f_1$. The string $X(Q)$ has commutation syndrome $1$ at exactly those two endpoint plaquettes and $0$ at every other plaquette or star. If either kind of edge-simple trail is closed, its corresponding string has zero syndrome at every check.",
+        "proof_obligations": [
+          "Count parity of incident path edges at every vertex/face; interior incidences are even and endpoints are odd."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the proof is parity counting on a finite path.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-tqc-toric-code-dimension",
+        "kind": "theorem",
+        "title": "The periodic toric code encodes two qubits",
+        "deps": [
+          "lem-qc-tqc-toric-check-commutation",
+          "lem-qc-tqc-toric-incidence-ranks",
+          "def-qc-tqc-periodic-square-cellulation",
+          "def-qc-stabilizer-code-space",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "thm-qc-stabilizer-projector-and-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For the periodic $L\\times L$ toric checks with $L\\ge3$, the common $+1$ eigenspace is a valid stabilizer code on $n=2L^2$ qubits. Its independent check rank is $r=2L^2-2$, so its dimension is $2^{n-r}=4=2^2$ and it encodes two logical qubits.",
+        "proof_obligations": [
+          "Separate X- and Z-check row spaces; show their ranks add because the Pauli binary symplectic representation has independent X/Z coordinates. Apply the exact stabilizer dimension theorem."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; only finite support counts and the finite stabilizer dimension theorem are used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-tqc-toric-logical-loops",
+        "kind": "definition",
+        "title": "Noncontractible toric logical loops",
+        "deps": [
+          "def-qc-tqc-periodic-square-cellulation",
+          "def-qc-tqc-toric-checks",
+          "lem-qc-tqc-toric-cycle-quotient",
+          "lem-qc-tqc-toric-incidence-ranks",
+          "lem-qc-tqc-toric-check-commutation",
+          "thm-qc-tqc-toric-code-dimension",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "def-qc-stabilizer-syndrome-and-logical-operators"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "On the periodic torus, define four Pauli representatives $$\\bar Z_1=\\prod_{i\\in\\mathbb Z_L}Z_{h_{i,0}},\\qquad \\bar Z_2=\\prod_{j\\in\\mathbb Z_L}Z_{v_{0,j}},\\qquad \\bar X_1=\\prod_{j\\in\\mathbb Z_L}X_{h_{0,j}},\\qquad \\bar X_2=\\prod_{i\\in\\mathbb Z_L}X_{v_{i,0}}.$$ The $\\bar Z$ supports are the two fixed fundamental primal cycles. The $\\bar X$ supports are the dual cycles crossing them. These operators are called the toric logical loops. As verified below, each is a nontrivial logical Pauli class in the periodic toric code.",
+        "proof_obligations": [
+          "State cycle homology classes in H₁(T²;F₂) and dual classes; define the four logical representatives."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; loop representatives are fixed coordinate cycles.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-tqc-toric-gap",
+        "kind": "theorem",
+        "title": "Exact finite-volume toric-code gap",
+        "deps": [
+          "def-qc-tqc-toric-hamiltonian",
+          "def-qc-tqc-toric-excitations",
+          "lem-qc-tqc-toric-joint-check-eigenspaces",
+          "thm-qc-tqc-toric-code-dimension",
+          "lem-qc-tqc-toric-string-syndrome"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "For the finite toric-code Hamiltonian $H_L=-J_e\\sum_q A_q-J_m\\sum_f B_f$ with $J_e,J_m>0$, the ground space is the four-dimensional toric code space and the ground energy is $E_g=-L^2(J_e+J_m)$. The exact spectral gap above it is $\\Delta_L=4\\min(J_e,J_m)$.",
+        "proof_obligations": [
+          "Diagonalize all commuting checks; use the two global relations to require even e and m defect parity; compute each violation cost 2J_a and construct an endpoint pair for the smaller coupling."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the proof uses a finite joint eigenspace decomposition.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-tqc-toric-local-indistinguishability",
+        "kind": "theorem",
+        "title": "Exact indistinguishability in a contractible disk",
+        "deps": [
+          "def-qc-tqc-periodic-square-cellulation",
+          "def-qc-tqc-toric-checks",
+          "lem-qc-tqc-toric-check-commutation",
+          "thm-qc-tqc-toric-code-dimension",
+          "lem-qc-tqc-finite-square-cycle-is-boundary",
+          "lem-qc-tqc-contractible-disk-lifts-to-plane",
+          "def-qc-stabilizer-code-space",
+          "thm-qc-stabilizer-projector-and-dimension",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "def-qc-pauli-matrices",
+          "def-qc-register-and-computational-basis",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-qc-tensor-map",
+          "def-qc-local-operator-support-and-weight",
+          "thm-qc-pauli-commutator-is-symplectic-pairing"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Let $\\mathcal C$ be the periodic toric code and let $\\Pi$ be its orthogonal code projector. Let $D$ be a compact embedded disk in the torus with connected complement. Let $S\\subseteq E_L$ be a set of edge qubits such that $D$ contains both the primal edge segment and its crossing dual edge segment for every $e\\in S$. Then every operator $O$ supported on $S$ has scalar compression to the code: $$\\Pi O\\Pi=c(O)\\Pi$$ for some $c(O)\\in\\mathbb C$.",
+        "proof_obligations": [
+          "Expand O in the finite Pauli basis. A Pauli anticommuting with a check compresses to zero; a Pauli commuting with all checks gives primal and dual cycles in D, which bound 2-chains and hence are stabilizers up to phase. Extend by linearity. State the disk/cellulation hypothesis exactly."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the proof uses finite Pauli expansions and finite mod-two chains.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-tqc-toric-mutual-sign",
+        "kind": "theorem",
+        "title": "A single primal-dual crossing anticommutes",
+        "deps": [
+          "lem-qc-tqc-toric-string-syndrome",
+          "thm-qc-pauli-commutator-is-symplectic-pairing"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Let $P$ be a primal path and $Q$ a dual path whose edge supports share exactly one physical qubit. Then their string Paulis anticommute: $Z(P)X(Q)=-X(Q)Z(P)$. This is the algebraic mutual e/m string sign.",
+        "proof_obligations": [
+          "Use the Pauli relation on the unique shared edge; distinguish the algebraic sign from a dynamical braiding experiment."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; this is a finite Pauli-matrix calculation.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qc-tqc-toric-energy-barrier",
+        "kind": "definition",
+        "title": "Pauli-path energy barrier",
+        "deps": [
+          "def-qc-tqc-toric-hamiltonian",
+          "def-qc-tqc-toric-logical-loops",
+          "thm-qc-tqc-toric-code-dimension",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "def-qc-pauli-matrices",
+          "thm-qc-pauli-commutator-is-symplectic-pairing"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Fix $L\\ge3$, $J_e,J_m>0$, a unit vector $\\psi$ in the toric code space, and a specified nontrivial logical Pauli representative $Q$. An **elementary Pauli path to $Q$** is a finite sequence $E_0,\\ldots,E_T$ with $E_0=I$, $E_T$ a scalar-phase multiple of $Q$, and $E_{r+1}=P_rE_r$, where each $P_r$ is $X$, $Y$, or $Z$ on a single edge and the identity on every other edge. For any prefix Pauli $E$, define its energy excess $\\varepsilon(E):=\\langle E\\psi,H_LE\\psi\\rangle-E_{\\rm code}$, where $E_{\\rm code}:=-L^2(J_e+J_m)$ is the energy of every code vector. The **Pauli-path energy barrier** of $Q$ is $$\\mathcal B_L(Q):=\\min_{(E_0,\\ldots,E_T)}\\max_{0\\le r\\le T}\\varepsilon(E_r),$$ where the minimum ranges over elementary Pauli paths to $Q$. This is a finite-code energy quantity; it is not a thermal lifetime.",
+        "proof_obligations": [
+          "Define path locality, order of single-edge errors and max-minus-ground energy; keep this finite code quantity distinct from thermal lifetime."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; paths and syndrome-energy values are finite data.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-tqc-toric-distance",
+        "kind": "theorem",
+        "title": "Toric code distance is L",
+        "deps": [
+          "def-qc-tqc-toric-checks",
+          "lem-qc-tqc-toric-cycle-quotient",
+          "def-qc-tqc-toric-logical-loops",
+          "thm-qc-tqc-toric-code-dimension",
+          "def-qc-stabilizer-distance",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "def-qc-local-operator-support-and-weight",
+          "thm-qc-pauli-commutator-is-symplectic-pairing"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "For the periodic $L\\times L$ toric stabilizer code with $L\\ge3$, the minimum weight of a normalizer Pauli outside the scalar-phase stabilizer is $d(S)=L$.",
+        "proof_obligations": [
+          "Prove the lower bound by projecting a nontrivial cycle to a nonzero winding in at least one periodic coordinate; prove upper bound with a straight loop. Contractible cycles are stabilizers."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the lower bound counts edges across finitely many disjoint cuts.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-tqc-toric-logical-algebra",
+        "kind": "theorem",
+        "title": "Two anticommuting toric logical Pauli pairs",
+        "deps": [
+          "def-qc-tqc-toric-logical-loops",
+          "thm-qc-tqc-toric-mutual-sign",
+          "thm-qc-pauli-commutator-is-symplectic-pairing",
+          "thm-qc-tqc-toric-code-dimension",
+          "def-qc-stabilizer-syndrome-and-logical-operators",
+          "thm-qc-stabilizer-logical-pauli-quotient-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "The representatives $\\bar Z_1,\\bar Z_2,\\bar X_1,\\bar X_2$ of [[def-qc-tqc-toric-logical-loops]] obey $\\bar Z_i\\bar X_j=(-1)^{\\delta_{ij}}\\bar X_j\\bar Z_i$ and commute within each Z pair and each X pair. Their four classes form a basis of the logical Pauli quotient of the two-qubit toric code.",
+        "proof_obligations": [
+          "Use mod-2 intersection number on the torus and show distinct parallel cycles have zero intersection while dual cycles intersect once."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the logical commutation matrix is a finite binary calculation.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-tqc-toric-constant-barrier",
+        "kind": "theorem",
+        "title": "A toric logical string has constant energy barrier",
+        "deps": [
+          "def-qc-tqc-toric-energy-barrier",
+          "def-qc-tqc-toric-hamiltonian",
+          "thm-qc-tqc-toric-gap",
+          "lem-qc-tqc-toric-string-syndrome",
+          "def-qc-tqc-toric-logical-loops"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "If $J_e\\le J_m$, the horizontal logical string $\\bar Z_1$ has $\\mathcal B_L(\\bar Z_1)\\le4J_e$. If $J_m<J_e$, the dual horizontal logical string $\\bar X_2$ has $\\mathcal B_L(\\bar X_2)\\le4J_m$. In either case a noncontractible logical loop of the cheaper species has barrier at most $4\\min(J_e,J_m)$, independently of $L$.",
+        "proof_obligations": [
+          "Give the explicit sequential path and compute energy after each step. Do not infer a finite-temperature lifetime, self-correction or perturbative stability."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the path applies finitely many single-edge Pauli operators.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qc-tqc-toric-recovery",
+        "kind": "theorem",
+        "title": "Toric code corrects Pauli errors below half the distance",
+        "deps": [
+          "thm-qc-tqc-toric-distance",
+          "thm-qc-tqc-toric-code-dimension",
+          "thm-qc-stabilizer-distance-detection-and-correction"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "Let $t\\in\\mathbb Z_{\\ge0}$ satisfy $2t<L$. Every finite Pauli error channel whose Kraus operators lie in the span of Pauli operators of weight at most $t$ has an exact recovery on the periodic $L\\times L$ toric code. In particular, every unknown Pauli error of weight at most $t$ is exactly correctable.",
+        "proof_obligations": [
+          "Check strict integer-distance inequality and carry the theorem’s Pauli/stabilizer hypotheses without asserting an unproved noisy-hardware procedure."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 7: Quantum Error Correction",
+              "url": "https://www.preskill.caltech.edu/ph219/chap7_26_6A.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the recovery theorem applies to a finite-dimensional stabilizer code.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-qc-tqc-gap-not-physical-protection",
+        "kind": "counterexample",
+        "title": "A finite toric gap does not imply arbitrary perturbation stability",
+        "deps": [
+          "thm-qc-tqc-toric-gap",
+          "thm-qc-tqc-toric-local-indistinguishability",
+          "thm-qc-tqc-toric-constant-barrier",
+          "thm-qc-tqc-toric-code-dimension",
+          "def-qc-tqc-toric-hamiltonian"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "For each finite $L\\ge3$, the toric Hamiltonian has an exact positive gap, contractible-disk local indistinguishability, and a constant upper bound on a logical-string energy barrier. These unperturbed facts alone do not imply stability under arbitrary perturbations: the explicit global-projector perturbation $V_L=-\\Delta_L(I-\\Pi_L)$ closes the gap above the original code space and enlarges the ground space, where $\\Pi_L$ is the ground projector and $\\Delta_L=4\\min(J_e,J_m)$. This does not refute stability theorems for sufficiently small local perturbations, and it makes no claim about thermal dynamics or a material realization.",
+        "proof_obligations": [
+          "Give an explicit perturbation showing that the finite unperturbed properties do not imply stability under arbitrary perturbations; distinguish this from local small-perturbation theorems and from thermal or material claims."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Alexei Kitaev, Fault-tolerant quantum computation by anyons",
+              "url": "https://arxiv.org/pdf/quant-ph/9707021"
+            },
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the counterexample is a finite-dimensional spectral calculation.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2553,
+    "id": "toric-code-anyons-logical-operators-and-protection-examples",
+    "kind": "B",
+    "category": "quantum-computing",
+    "title": "Toric Code Anyons, Logical Operators, and Protection — Examples",
+    "companion": "toric-code-anyons-logical-operators-and-protection",
+    "requires": [
+      "toric-code-anyons-logical-operators-and-protection"
+    ],
+    "items": [
+      {
+        "id": "ex-qc-tqc-l3-toric-checks",
+        "kind": "example",
+        "title": "L=3 torus checks and syndrome calculation",
+        "deps": [
+          "def-qc-tqc-periodic-square-cellulation",
+          "def-qc-tqc-toric-checks",
+          "lem-qc-tqc-toric-check-commutation",
+          "lem-qc-tqc-toric-incidence-ranks",
+          "thm-qc-tqc-toric-code-dimension",
+          "def-qc-tqc-toric-hamiltonian",
+          "def-qc-tqc-toric-logical-loops",
+          "lem-qc-tqc-toric-joint-check-eigenspaces",
+          "def-qc-tqc-toric-excitations",
+          "lem-qc-tqc-toric-string-syndrome",
+          "thm-qc-tqc-toric-gap"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Take $L=3$, with all indices in $\\mathbb Z/3\\mathbb Z$. The edge qubits are the eighteen distinct labels $$\\{h_{i,j}:i,j\\in\\{0,1,2\\}\\}\\sqcup\\{v_{i,j}:i,j\\in\\{0,1,2\\}\\}.$$ There are eighteen checks $A_{i,j},B_{i,j}$, given by the star and plaquette formulas in [[def-qc-tqc-toric-checks]]. The displayed horizontal primal loop is $\\bar Z_1=Z_{h_{0,0}}Z_{h_{1,0}}Z_{h_{2,0}}$.",
+        "proof_obligations": [
+          "Compute the 18 qubits and 18 checks, verify the two global relations and check rank, list both nonzero partial-loop syndromes, and evaluate the finite gap."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; this is a finite coordinate calculation with indices in Z/3Z.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-qc-tqc-planar-is-not-toric",
+        "kind": "counterexample",
+        "title": "Planar and periodic surface-code distances differ",
+        "deps": [
+          "def-qc-square-planar-surface-code",
+          "thm-qc-square-planar-surface-code-distance-and-path-count",
+          "thm-qc-tqc-toric-distance",
+          "def-qc-tqc-toric-logical-loops",
+          "thm-qc-tqc-toric-code-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "At linear size three, the square planar surface code has asymmetric Z and X distances $3$ and $4$, whereas the periodic $3\\times3$ toric code has distance $3$ for both logical species and encodes two qubits. Thus the planar surface-code calculation cannot be used as the periodic torus calculation.",
+        "proof_obligations": [
+          "Specialize the planar and periodic distance and encoding results to size three and identify the distinct boundary conventions."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory",
+              "url": "https://arxiv.org/pdf/quant-ph/0110143"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "None; the comparison applies two finite distance theorems at size three.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

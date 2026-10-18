@@ -1,0 +1,40 @@
+# Capacity route and scheduling reconciliation
+
+The reported batch12 scheduling difference is a historical-versus-current derived-input observation. It does not establish a missing mathematical supplier or an incorrect dispatch. The authentic immutable dispatch prompt names prerequisite batch7 at level3 with input `825ada459eb8a44f2bca9b180e0d40e43ed62d08f26d224468ce63c38b792042`. Current actual batch12 carriers introduce direct batch4 item uses as well as batch7 uses. The native prerequisite function unions declared page routes, manifest item dependencies, and actual source dependencies, so its current projection correctly reports `[4,7]`, still level3.
+
+## Preserved history and actual observations
+
+`before-index.json` preserves166 complete files before any repair decision: original native4/7/12 results and prompts, current scoped manifests/carriers/contracts/notes/readiness, actual route pages, owner directions, current shared schedule and plan inputs. No canonical file was changed. Additional contextual archives retain earlier observations and the existing approved route receipts.
+
+The batch12 native result is a genuine successful immutable attempt1: task completed, not aborted, zero exit code, terminal time2026-10-17T16:44:44.551Z; state endedAt is16:44:44.664Z. Native4 completed15:45:29.511Z and native7 completed15:44:06.615Z, both successful unaborted attempt1, before batch12's native state start16:02:41.792Z and its actual worker start16:03:53.831Z. Thus both current required supplier batches were genuinely authored before this dispatch began. Existing owner readiness records are observations of authoring readiness, not independent proof acceptance.
+
+The earlier archived predispatch batch12 manifest (from the15:56:28 quantum integration archive) has no items and retains only the planned page prerequisite `f-divergences-renyi-and-hypothesis-testing` (batch7). This supports the difference between initial page-only drafting inputs and the subsequently authored direct batch4 uses. It does not reconstruct the complete old825ada hash, which binds the entire run.
+
+The native author notes report seeing shared artifact hash `4836a2dc692b41d7ae72da9e8835da8103ab7bed3d61c4896f751a14ba7c829d`. That exact old artifact was not independently reconstructed here; the statement remains the author's historical observation. The current archived artifact has hash field `6afeb681db572c60a2bb98ee34b4916e8bb7f377810331491da80b19cd004365` and row12 `[4,7]`/level3. A separate read-only invocation of the actual `computeRunBatchDependencyLevels` export with `constructionScheduling:true` produces row12 `[4,7]`/level3 and global input `c13172c505466860a43dcd770a3d7616dabf978813a52c7db090f227daf84eaa`. These are observations of different live run inputs, not interchangeable coverage hashes. The function binds all manifests and the full graph; continued authoring elsewhere can change the global digest without changing row12. Root owns any current artifact refresh/recertification. No old prompt, result, scheduler artifact, or native history was rewritten.
+
+## Current approved reading route
+
+The actual plan, manifests, and page frontmatter agree on the reading route12→7→5→4, with the published hypothesis-testing and conditional-probability prerequisite branches retained:
+
+- Discrete Memoryless Channel Capacity requires F-Divergences, Rényi Information, and Hypothesis Testing.
+- That page requires Measure-Theoretic Information and Conditioning and Finite-Sample Tests/Neyman–Pearson/Valid p-Values.
+- Measure-Theoretic Information and Conditioning requires Finite-Alphabet Entropy and Divergence and Conditional Distributions/Regular Conditional Probability.
+- Finite-Alphabet Entropy and Divergence requires Probability Spaces/Random Variables/Expectation.
+
+The existing owner route-acceptance receipts for the initial route work and the extension5/6/7 explicitly accept these formal routes and actual interfaces only; they do not grant whole-proof approval, publication or native execution coverage. Batch12 imports finite item interfaces directly from4/7. Its finite proofs do not import a regular-conditional-probability or hypothesis-testing theorem merely because those appear in the reading route. Direct batch4 item dependencies are compatible with the already-approved page route through7 and5.
+
+## Focused actual supplier checks
+
+All48 batch12 manifest edges to4/7 equal the48 actual source-frontmatter edges and the48 item rows in its cross-batch record. `interface-comparison.json` records this exact comparison. All24 relevant source quotations in its current contracts match the actual supplier Definition/Statement sections exactly. Nine distinct suppliers were read locally, including the full proof bodies of the four theorem suppliers:
+
+- `def-finite-probability-vector` (7): finite nonempty alphabet; nonnegative entries sum to one; zero coordinates retained. DMC inputs, outputs, simplex arguments and binary examples satisfy this domain.
+- `def-finite-stochastic-kernel` (7): finite nonempty input/output alphabets, row normalization, `K(y|x)` orientation and output `PK`. The DMC definition, product normalization, likelihood sums and random coding use exactly these conventions.
+- `def-finite-kullback-leibler-divergence` (7): natural logarithms; direction P to Q; zero P contributions omitted; positive P over zero Q gives infinity. The capacity-output lemma establishes row support inside Q* before differentiating/evaluating finite row divergences. Its concentration consumer evaluates likelihoods only on row support.
+- `def-it-finite-conditional-entropy` (4): finite conditional distributions formed only at positive conditioning masses; omitted zero conditioning branches; natural-log nats. This matches row-entropy formulas, the n-letter factorization, the converse, and BSC/BEC endpoints.
+- `def-it-finite-mutual-information` (4): joint KL relative to product marginals, with every denominator positive on positive joint support; nats and finite sums. For `P_X(x)W(y|x)`, cancellation gives the actual DMC information density on its joint support. The batch7 and batch4 finite-KL conventions agree where these consumers use them.
+- `thm-it-finite-entropy-chain-rule` (4): actual finite-log expansions prove conditional entropy and MI chain rules; the two entropy-difference forms are finite. Applied to finite word alphabets, these justify the n-letter bound and the deterministic-encoder converse without subtracting infinities.
+- `thm-it-finite-conditional-mutual-information-identities-and-equality` (4): actual proof averages finite conditional KLs over positive conditioning masses and uses finite KL nonnegativity. The n-letter consumer uses only nonnegativity/conditioning reduces entropy; it does not import a stronger general-measure conditional claim.
+- `thm-it-fano-inequality` (4): actual error-indicator proof handles finite alphabets, a decoder generated from finite output, and the singleton-message case separately. Deterministic DMC decoding is a special case; its weaker bound `H(J|Y^n)≤ln2+εlnM` is exactly the converse's use. No randomized-decoder or alphabet hypothesis is lost.
+- `thm-it-finite-kl-nonnegative-equality` (4): actual proof treats singular support first, then applies finite log-sum with both masses one; equality is exactly identical laws including zeros. It supplies nonnegative mutual information for capacity and the entropy bound against uniform binary laws in BSC/BEC.
+
+The suspicious schedule difference therefore requires no source, statement, proof-contract, page-route or cross-record repair. No supplier interface changed, so there is no new statement-change propagation obligation. This is a focused dependency/convention reconciliation, not a whole capacity proof audit or rereading of the native textbooks. The guarded unrelated Poisson carrier was neither read as a mathematical subject nor edited. No gates, readiness, levels, verification stamps, scheduler/state, shared plan or commits were changed.

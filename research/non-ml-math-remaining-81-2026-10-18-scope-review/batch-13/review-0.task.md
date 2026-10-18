@@ -1,0 +1,13 @@
+# Batch 13: review 0
+
+Run: non-ml-math-remaining-81-2026-10-18
+Batch: 13
+Round: 0
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: cost-constrained-gaussian-and-feedback-channels, cost-constrained-gaussian-and-feedback-channels-examples
+Items: def-parallel-gaussian-channel-with-power-constraint, lem-cost-pruned-random-code, lem-density-channel-threshold-random-coding-bound, lem-finite-simplex-entropy-continuity-and-concavity, lem-gaussian-maximum-differential-entropy-under-variance, lem-jensen-for-integrable-cost-random-variable, lem-standard-normal-fourth-moment, lem-water-filling-optimal-allocation, def-countable-dmc-zero-cost-information-capacity, def-parallel-awgn-feedback-code, lem-gaussian-noise-orthogonalization, lem-parallel-awgn-single-use-information-bound, lem-parallel-awgn-information-density-convergence, def-finite-dmc-cost-model, lem-parallel-awgn-cost-constrained-achievability, def-cost-constrained-dmc-code-and-capacity, def-finite-dmc-feedback-code, lem-cost-constrained-dmc-information-capacity-properties, lem-finite-message-fano-for-density-observation, lem-cost-constrained-dmc-achievability, lem-cost-constrained-dmc-mutual-information-under-average-cost, thm-parallel-awgn-feedback-capacity-water-filling, thm-cost-constrained-dmc-capacity-formula, cor-inactive-dmc-cost-constraint-recovers-capacity, thm-feedback-does-not-increase-cost-constrained-dmc-capacity, ex-countable-input-channel-finite-capacity-supremum-not-attained, ex-correlated-gaussian-noise-orthogonal-reduction, ex-two-branch-awgn-water-filling, ex-binary-identity-channel-with-cost-and-feedback
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

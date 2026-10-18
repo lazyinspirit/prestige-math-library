@@ -1,0 +1,111 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "initial",
+  "round": 1,
+  "unit": "27",
+  "input_sha256": "5a7686cf6af281fffc281470b9fd4d1b4497cd3e88649ffa4676dd5e748ac1b1",
+  "decisions": [
+    {
+      "id": "alg-viterbi-max-product-on-finite-trellis",
+      "model": "gpt-6-luna",
+      "context_sha256": "d943f151a02c861c447e903115c29f5b5874c520278784fef5b5bd8733600bd8",
+      "outcome": "false_positive",
+      "reason": "The counterexample violates def-finite-layered-trellis: a path must have alpha(v_1)>0 and beta(v_T)>0. Thus the T=1 tuple with beta(v)=0 is not admissible. All admissible path scores are positive; by the prefix recurrence Q(v)>0 exactly when a full path ends at v, so the all-zero test is correct, including an empty terminal layer.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-hmm-viterbi-sequence-map",
+      "model": "gpt-6-luna",
+      "context_sha256": "ae773c37cd8c5a37787465d1de3a492a03b5984a1e60808ac2f81a6f21f80806",
+      "outcome": "false_positive",
+      "reason": "The proposed T=1 path with pi(s)=0 is not a trellis path: alpha_y(s)=pi(s)B(s,y_1)=0, and def-finite-layered-trellis requires positive initial weight. The initial factor is enforced by endpoint admissibility, while later zero transition/emission factors are excluded by edge construction. Thus every admissible trellis path has positive joint mass; deleting zero-weight vertices is unnecessary.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-viterbi-max-product-on-finite-trellis",
+      "disposition": "unaffected",
+      "post_sha256": "663365036242b193f9746ea3c23f1203c5738ef553fda3ef5d442ba1cd137a07",
+      "review_context_sha256": "13085379349e832bfa3c221c8d917c61e7d82cf2f82fc4b2172467fdfde8a34c",
+      "reason": "Reviewed the full procedure, def-finite-layered-trellis, the prefix recurrence and proof, its contract boundaries, and both owning page interfaces. Positive D_t(v) has an attaining positive predecessor, so every stored pointer needed by a successful traceback exists. Q>0 enforces both endpoint conditions; T=0 returns the unique empty path, T=1 needs no pointers, and empty layers correctly yield no path. Supplied finite orders resolve ties without AC. No carrier or metadata repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-hmm-viterbi-sequence-map",
+      "disposition": "unaffected",
+      "post_sha256": "2fc35c93f6bfad4415cb658ce40c475f5ccba76ba20f714952b5aac094670bad",
+      "review_context_sha256": "01e78061f56abc3c81a12b0a7e5aa67164cfb4c5355b5044abd592c0db540b3a",
+      "reason": "Reviewed the full HMM procedure, both input definitions, the supplier procedure, its contract boundaries and the owning pages. The constructed trellis has positive edge weights and nonnegative initial weights, with beta=1. Its admissible paths are exactly positive-joint-mass hidden sequences, with identical scores. A finite nonnegative evidence sum vanishes exactly when no such sequence exists; otherwise maximizing the score also maximizes posterior mass. T=1 and zero initial/emission factors obey the same endpoint condition. Finite ordered selections require no AC. No carrier or metadata repair is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-viterbi-max-product-on-finite-trellis",
+      "model": "gpt-6-luna",
+      "context_sha256": "d943f151a02c861c447e903115c29f5b5874c520278784fef5b5bd8733600bd8",
+      "reason": "The counterexample violates def-finite-layered-trellis: a path must have alpha(v_1)>0 and beta(v_T)>0. Thus the T=1 tuple with beta(v)=0 is not admissible. All admissible path scores are positive; by the prefix recurrence Q(v)>0 exactly when a full path ends at v, so the all-zero test is correct, including an empty terminal layer.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-hmm-viterbi-sequence-map",
+      "model": "gpt-6-luna",
+      "context_sha256": "ae773c37cd8c5a37787465d1de3a492a03b5984a1e60808ac2f81a6f21f80806",
+      "reason": "The proposed T=1 path with pi(s)=0 is not a trellis path: alpha_y(s)=pi(s)B(s,y_1)=0, and def-finite-layered-trellis requires positive initial weight. The initial factor is enforced by endpoint admissibility, while later zero transition/emission factors are excluded by edge construction. Thus every admissible trellis path has positive joint mass; deleting zero-weight vertices is unnecessary.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_review_complete",
+    "repair_complete": true,
+    "changed_items": [],
+    "evidence_paths": [
+      "items/def-finite-layered-trellis.md: Definition, path endpoint conditions",
+      "items/lem-finite-trellis-prefix-score-recurrence.md: Statement and complete Proof",
+      "items/def-finite-hidden-markov-model-for-sequence-decoding.md: Definition, joint mass and evidence",
+      "items/thm-viterbi-finite-trellis-is-optimal.md: Statement and complete Proof",
+      "items/thm-hmm-viterbi-is-sequence-map.md: Statement and complete Proof",
+      "items/lem-finite-hmm-joint-law-normalizes.md: Statement and complete Proof",
+      "research/non-ml-math-remaining-81-2026-10-18-batch-27.proof-contracts.json: both assigned algorithm contracts",
+      "library/information-theory/finite-trellis-viterbi-and-sequence-decoding.md",
+      "library/information-theory/finite-trellis-viterbi-and-sequence-decoding-examples.md"
+    ],
+    "checks": [
+      {
+        "command": "node tools/rendercheck.mjs --json items/alg-viterbi-max-product-on-finite-trellis.md items/alg-hmm-viterbi-sequence-map.md",
+        "exit_code": 0,
+        "result": "2 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/alg-viterbi-max-product-on-finite-trellis.md items/alg-hmm-viterbi-sequence-map.md",
+        "exit_code": 0,
+        "result": "2 files; 0 phase proofs checked; 0 failures; both algorithms not-applicable."
+      }
+    ],
+    "propagation": "Neither Definition changed, so no downstream examination inventory is triggered. No published-consumer findings or published-ledger updates are proposed.",
+    "proof_layout": "No item was edited or formatted, so there are no changed paths requiring proof-layout.",
+    "source_reading": "Familiar finite dynamic programming and finite probability arguments; no external source reading claimed.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary independent workflow checks; no judgments or certificates written."
+  }
+}

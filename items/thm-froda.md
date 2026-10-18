@@ -3,6 +3,7 @@ id: thm-froda
 kind: theorem
 title: "Froda's theorem: the set of discontinuities of a monotone function on an interval is at most countable, the injection into $\\mathbb{N}$ being built from one fixed enumeration of the rationals by least index, so no choice principle is used"
 status: published
+dependency_level: 3
 origin: session
 provenance:
   statement: literature-derived
@@ -15,12 +16,7 @@ landmark: true
 short: "Froda: countably many discontinuities"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/thm-froda.json
 sources:
   scraped: []
   references:
@@ -45,10 +41,13 @@ $$D \;:=\; \{\, c \in I : f \text{ is discontinuous at } c \,\}$$
 
 More precisely, the proof exhibits an injection $J : D \to \mathbb{N}$
 ([[def-injection-surjection-bijection]]) built from one fixed enumeration of the
-rationals: at a discontinuity $c$ interior to $I$ the value $J(c)$ is read off
-the **least index** of a rational lying in the gap
-$\bigl(\lim_{x \to c^{-}} f(x),\ \lim_{x \to c^{+}} f(x)\bigr)$, which is a
-nonempty open interval by [[thm-monotone-discontinuities-are-jumps]]. The map
+rationals. Write $L^{-}(c):=\lim_{x \to c^{-}}f(x)$ and
+$L^{+}(c):=\lim_{x \to c^{+}}f(x)$. At a discontinuity $c$ interior to $I$,
+the value $J(c)$ is read off the **least index** of a rational in the ordered gap
+$\bigl(\min\{L^{-}(c),L^{+}(c)\},\ \max\{L^{-}(c),L^{+}(c)\}\bigr)$.
+This is nonempty for either direction of monotonicity by
+[[thm-monotone-discontinuities-are-jumps]]; the at most two included endpoints
+of $I$ receive separate even codes as in the proof. The map
 $J$ is therefore determined by $f$ and by the fixed enumeration, and **no choice
 principle is used**: least indices are canonical by
 [[thm-well-ordering-principle]], and nothing anywhere in the proof is selected
@@ -76,7 +75,7 @@ without being determined.
 
 **Proof technique:** direct.
 
-1.1 It is enough to treat a nondecreasing $f$: if $f$ is nonincreasing then $-f$ is nondecreasing and has the same discontinuity set, so the conclusion for $-f$ is the conclusion for $f$. Assume from here on that $f$ is nondecreasing. [L6]
+1.1 First prove the construction for a nondecreasing function and any fixed rational enumeration $e$. For an original nonincreasing $f$, apply that construction to $-f$ with the reflected enumeration $k\mapsto-e(k)$. The one-sided limits of $-f$ are $-L^{-}(c)$ and $-L^{+}(c)$, with their side labels unchanged, directly from the absolute-value limit condition. Hence $-L^{-}(c)<-e(k)<-L^{+}(c)$ holds exactly when $L^{+}(c)<e(k)<L^{-}(c)$. The least indices for the transformed upward gap and the original ordered gap therefore agree. The discontinuity set is unchanged, and the endpoint codes depend only on $I$, so the resulting injection has exactly the stated form. Assume from here on that $f$ is nondecreasing. [L1, L6, algebra]
 
 1.2 Fix once and for all a bijection $e : \mathbb{N} \to \mathbb{Q}_{\mathbb{R}}$; everything below is defined in terms of $f$, $I$ and this one function. [L3, choose]
 

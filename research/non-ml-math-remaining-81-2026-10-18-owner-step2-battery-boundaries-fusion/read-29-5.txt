@@ -1,0 +1,130 @@
+
+ITEM thm-qc-tqc-b6-su8-density
+
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$. In the normalized Fibonacci B6 representation on
+$V(\tau^6\to\tau)\cong\mathbb C^8$, the closure of the braid image in $U(8)$
+contains $SU(8)$.
+
+## Facts & Assumptions
+
+**Given:** The fixed Fibonacci convention, the normalized generators
+$B_i=rI+(1-r)P_i$, the total-charge-$\tau$ fusion-path basis, and
+$\mathrm{AC}_\omega$.
+
+[F1] The path projectors are orthogonal, satisfy the adjacent and distant
+relations, and the normalized matrices are a unitary B6 representation.
+[[lem-qc-tqc-fibonacci-b6-path-projectors-and-artin]]
+
+[F2] The coefficient field $\mathbb Q(r,\sqrt\phi)$ has the stated
+degree-eight presentation and admits the exact $\mathbb F_{31}$
+specialization. [[lem-qc-tqc-fibonacci-coefficient-ring-specialization]]
+
+[F3] Integer powers of a circle rotation with irrational angle are dense.
+[[lem-qc-irrational-rotation-dense-on-circle]]
+
+[F4] Under $\mathrm{AC}_\omega$, closed subgroups of finite-dimensional Lie
+groups are Lie subgroups and their Lie algebras are bracket closed.
+[[thm-cartans-closed-subgroup-theorem]]
+[[prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra]]
+
+[F5] $\mathfrak{su}(n)$ consists of the trace-zero skew-Hermitian matrices.
+A real basis is given by $i(E_{jj}-E_{nn})$ for $j<n$ and, for each $j<k$,
+$E_{jk}-E_{kj}$ and $i(E_{jk}+E_{kj})$. Thus its real dimension is
+$(n-1)+2\binom n2=n^2-1$, which is $63$ for $n=8$.
+[[ex-unitary-and-special-unitary-lie-groups]]
+
+[F6] $SU(8)$ is path connected. [[lem-qc-tqc-special-unitary-connected]]
+
+[F7] Fusion-tree dimensions are counted by summing products of the vertex
+multiplicities over all admissible internal charges.
+[[lem-qc-tqc-fusion-tree-dimension]]
+
+[F8] The current Fibonacci data carrier states $\tau\otimes\tau=1\oplus\tau$
+and fixes $R_\tau/R_1=e^{-3\pi i/5}$ and the displayed unitary $F$ block in
+the stated gauge. [[ex-qc-tqc-fibonacci-data]]
+
+[A1] $\mathrm{AC}_\omega$ is countable choice, the exact axiom in [F4].
+[[def-countable-choice]]
+
+[A2] Assume the Fibonacci fusion rule and the fixed-chirality $F/R$ data
+stated in [[lem-qc-tqc-fibonacci-b6-path-projectors-and-artin]].
+
+## Proof
+
+1.1 The fusion rule and $F/R$ convention in [F8], together with recurrence [F7], give $\dim V(\tau^3\to1)=1$, $\dim V(\tau^3\to\tau)=2$, and $\dim V(\tau^4\to\tau)=3$. The eight paths in $\mathcal P_\tau$ thus decompose by the first-three-charge label: charge $1$ contributes $1\cdot2=2$ dimensions, and charge $\tau$ contributes $V(\tau^3\to\tau)\otimes V(\tau\otimes\tau^3\to\tau)$ of dimension $2\cdot3=6$. The operator $C:=B_1B_2^{-1}$ is identity on the first summand. On the two-dimensional first-three charge-$\tau$ factor it has determinant $1$ and trace $\phi^{-2}$, so the full spectrum of $C$ is $1$ with multiplicity $2$ and $e^{i\theta},e^{-i\theta}$ each with multiplicity $3$, where $2\cos\theta=\phi^{-2}$. [F1, F7, F8, A2, algebra]
+
+2.1 The minimal polynomial of $\phi^{-2}$ is $x^2-3x+1$, whose other root is $\phi^2>2$. If $e^{i\theta}$ were a root of unity, every algebraic conjugate of its trace $e^{i\theta}+e^{-i\theta}$ would be a sum of two roots of unity and have absolute value at most $2$, contradicting the conjugate $\phi^2$. Thus $\theta/(2\pi)$ is irrational. [given, step 1.1, algebra]
+
+3.1 By [F3], powers of $C$ are dense in the circle $T=\operatorname{diag}(I_2,e^{it}I_3,e^{-it}I_3)$ after choosing an eigenbasis. Let $H$ be the closure of the normalized B6 image in $U(8)$. Then $T\subseteq H$, so the nonzero tangent $X=C-C^{-1}$ lies in $\operatorname{Lie}(H)$. [F3, step 2.1, construct]
+
+4.1 Starting with $Z_0=X$, construct a list as follows, all over $\mathbb F_{31}$ for the independence tests: repeatedly scan $\operatorname{Ad}_i(Z_j)=B_iZ_jB_i^{-1}$ in current-list order $j$ and generator order $i=1,\ldots,5$, appending a word exactly when its specialized row is independent of previous rows. Using the resulting list as a snapshot, scan commutators $[Z_j,Z_i]$ in lexicographic order $j>i$, again appending exactly the independent rows. Repeat full rounds until none is appended. Each accepted word is an adjoint or bracket applied to earlier Lie algebra elements, so it lifts to $\operatorname{Lie}(H)$. Unitary conjugation and commutators preserve traceless skew-Hermitian matrices. [F1, F4, step 3.1, construct]
+
+5.1 [F2] makes reduction of every coefficient and denominator in these words well defined. The exact integer-arithmetic certificate `research/scaffold-audit-2026-10-16/topological-quantum-computing/b6-su8-lie-rank-certificate.py` selects 63 words by the procedure of step 4.1 (the script labels them $Y_0,\ldots,Y_{62}$; this proof renames them $Z_0,\ldots,Z_{62}$) and returns determinant $22$ for the $63\times63$ minor formed from the first $63$ row-major coordinates of these matrices. A zero algebraic determinant would map to zero in $\mathbb F_{31}$; since $22\ne0$, the exact determinant is nonzero. The omitted coordinate is the final diagonal entry, determined by trace zero. Thus the selected traceless skew-Hermitian matrices are linearly independent over $\mathbb C$. [F2, step 4.1, algebra]
+
+6.1 By [F5], $\mathfrak{su}(8)$ has real dimension $63$. Step 5.1 supplies $63$ independent elements of $\operatorname{Lie}(H)$, so $\operatorname{Lie}(H)=\mathfrak{su}(8)$. Each $B_i$ has determinant $r^{8-3}=r^5$ by [F1], hence $\det(H)\subseteq\langle r^5\rangle$ is finite. The identity component therefore lies in $SU(8)$ and has full dimension; it is open there. By [F6], $SU(8)$ is connected, so the identity component equals $SU(8)$. Hence the B6 closure contains $SU(8)$. [A1, A2, F1, F4, F5, F6, step 5.1, algebra] ∎
+
+## Remark
+
+The deterministic scan in step 4.1 constructs exactly 63 Lie words from the
+same initial tangent $X=C-C^{-1}$ by conjugations and Lie brackets; the script
+prints their names as $Y_0,\ldots,Y_{62}$, which this proof calls
+$Z_0,\ldots,Z_{62}$. The exact $63\times63$ minor has determinant $22$
+modulo $31$, so these Lie words are independent; each generator has
+ determinant $r^5$. These are the projection data used by the
+joint-closure argument; they do not assert an efficient braid compiler.
+
+ITEM thm-qc-tqc-ising-braids-clifford-only
+
+
+## Statement
+
+Assume a Majorana–Ising exchange interface as defined in
+[[def-qc-tqc-ising-majorana-interface]]. Let
+$\gamma_1,\ldots,\gamma_{2m}$ be Majorana operators on the
+$2^m$-dimensional fermionic Fock space, with
+$\gamma_j^*=\gamma_j$, $\gamma_j^2=I$, and
+$\gamma_j\gamma_k=-\gamma_k\gamma_j$ for $j\ne k$. On either fixed
+eigenspace of the total parity
+$$\Pi=i^m\gamma_1\gamma_2\cdots\gamma_{2m},$$
+the adjacent Ising exchanges, up to their common physical scalar, are
+$$U_j=\exp(-\pi\gamma_j\gamma_{j+1}/4),\qquad 1\le j<2m.$$
+For $m\ge2$ they normalize the logical Pauli group on the $m-1$ encoded
+qubits. Their braid-only projective image is finite and is not dense in
+$PU(2^{m-1})$.
+
+## Facts & Assumptions
+
+**Given:** The Majorana relations, a fixed-parity sector, and the Pauli
+matrices.
+
+[F1] The phase-aware Pauli group is finite and is generated by the single
+qubit $X,Z$ matrices and scalar phases; the Clifford normalizer consists of
+unitaries conjugating that group to itself.
+[[def-qc-pauli-matrices]] [[def-qc-phase-aware-n-qubit-pauli-group]]
+[[def-qc-clifford-normalizer]]
+
+[F2] $PU(V)$ is a Hausdorff metric quotient of $U(V)$ by scalar
+unitaries. [[def-qc-tqc-projective-gate-and-metric]]
+
+[F3] The interface identifies the adjacent-pair channels with
+$Q_1(j)=(I-i\gamma_j\gamma_{j+1})/2$ and
+$Q_\psi(j)=(I+i\gamma_j\gamma_{j+1})/2$, and the exchange with
+$R_1Q_1(j)+R_\psi Q_\psi(j)=R_1e^{i\pi/4}U_j$ for every adjacent pair.
+[[def-qc-tqc-ising-majorana-interface]]
+
+## Proof
+
+1.1 Reordering the $2m$ Majorana factors gives $(\gamma_1\cdots\gamma_{2m})^*=(-1)^m\gamma_1\cdots\gamma_{2m}$ and $(\gamma_1\cdots\gamma_{2m})^2=(-1)^mI$. Therefore $\Pi^*=\Pi$ and $\Pi^2=I$. Also $\Pi\gamma_j=-\gamma_j\Pi$ for each $j$, so $\gamma_1$ bijects the $+1$ and $-1$ eigenspaces; each has dimension $2^{m-1}$. Since each product $\gamma_j\gamma_{j+1}$ commutes with $\Pi$, every $U_j$, being a function of that product, preserves both parity sectors. [given, algebra]
+
+1.2 Put $A_j=i\gamma_j\gamma_{j+1}$. Then $A_j^*=A_j$ and $A_j^2=I$, so $Q_1=(I-A_j)/2$ and $Q_\psi=(I+A_j)/2$ are orthogonal complementary projections. The operator $U_j=2^{-1/2}(I-\gamma_j\gamma_{j+1})$ has eigenvalues $e^{-i\pi/4}$ on $Q_1$ and $e^{i\pi/4}$ on $Q_\psi$, whose ratio is $i$. By [F3], the channel exchange is therefore $(R_1e^{i\pi/4})U_j$; its common scalar has no effect on conjugation. [given, F3, algebra]
+
+2.1 Let $c=s=2^{-1/2}$ and $A=\gamma_j\gamma_{j+1}$, so $U_j=cI-sA$ and $U_j^*=cI+sA$. Multiplication using $\gamma_jA=\gamma_{j+1}$, $A\gamma_j=-\gamma_{j+1}$, $\gamma_{j+1}A=-\gamma_j$, and $A\gamma_{j+1}=\gamma_j$ gives $U_j\gamma_jU_j^*=\gamma_{j+1}$ and $U_j\gamma_{j+1}U_j^*=-\gamma_j$. Every other $\gamma_k$ commutes with $A$, so $U_j\gamma_kU_j^*=\gamma_k$. [given, step 1.2, algebra]
+
+2.2 For $A=\gamma_j\gamma_{j+1}$ and $B=\gamma_{j+1}\gamma_{j+2}$, the Majorana relations give $A^2=B^2=-I$ and $AB=-BA$. Expanding with these identities gives $$U_jU_{j+1}U_j=-(A+B)/\sqrt2=U_{j+1}U_jU_{j+1}.$$ If $|j-k|\ge2$, then the two products $\gamma_j\gamma_{j+1}$ and $\gamma_k\gamma_{k+1}$ commute because moving their four distinct factors past each other contributes sign $(-1)^4=1$; hence $U_jU_k=U_kU_j$. Thus the $U_j$ satisfy the Artin braid relations. The common scalar in step 1.2 preserves these relations, since both sides of each relation have the same number of generators. [given, F3, step 1.2, algebra]
+
+3.1 For $1\le k<m$ define the even Majorana monomials $\bar Z_k=i\gamma_{2k-1}\gamma_{2k}$ and $\bar X_k=\prod_{\ell=k}^{m-1}(i\gamma_{2\ell}\gamma_{2\ell+1})$. Each bilinear is a Hermitian involution; the bilinears in a fixed $\bar X_k$ have disjoint supports and commute, so every $\bar X_k$ is also a Hermitian involution. All these even monomials commute with $\Pi$ and preserve $\mathcal H_\eta$. Their supports show that the $\bar Z_j$ commute with one another, the $\bar X_k$ commute with one another, and $\bar Z_j$ anticommutes with $\bar X_k$ exactly when $j=k$ (their support intersection has odd size exactly in that case). The commuting involutions $\bar Z_1,\ldots,\bar Z_{m-1}$ have joint sign projections $\prod_k(I+\epsilon_k\bar Z_k)/2$ whose sum is identity, so at least one joint eigenspace is nonzero. Applying products of the $\bar X_k$ flips each sign independently; hence all $2^{m-1}$ joint sign eigenspaces are nonzero and orthogonal. Their number equals $\dim\mathcal H_\eta=2^{m-1}$ from step 1.1, so each is one-dimensional. In this basis the $\bar Z_k,\bar X_k$ are the standard logical Pauli generators. To see they exhaust the restrictions of all even Majorana monomials, label $\gamma_j$ by the $j$th standard vector of $\mathbb F_2^{2m}$. Even monomial labels form the $2m-1$ dimensional even-sum subspace, and the all-ones parity label lies in it. The labels of the $2m-2$ operators $\bar Z_k,\bar X_k$ are independent modulo the parity label: no combination uses coordinate $2m$, while the successive coordinates $1,2,3,4,\ldots,2m-1$ force in turn the coefficients of $\bar Z_1,\bar X_1,\bar Z_2,\bar X_2,\ldots,\bar Z_{m-1},\bar X_{m-1}$ to vanish. They therefore form a basis of the quotient of even labels by the parity label. Reordering and cancelling Majorana factors shows that monomials with the same label differ only by a scalar; on $\mathcal H_\eta$ the parity monomial is scalar. Thus every even Majorana monomial restricts to an element of the logical phase-aware Pauli group generated by the $\bar Z_k,\bar X_k$. By step 2.1 each braid sends every Majorana to a signed Majorana, so it maps this finite Pauli group into itself; invertibility and finiteness make the image equal to the group. Hence each exchange normalizes the logical Pauli group. [F1, step 1.1, step 2.1, algebra]
+
+4.1 Conjugation gives a homomorphism from the projective Clifford group to the automorphism group of the phase-aware Pauli group. That Pauli group is finite, so its automorphism group is finite. The kernel consists of unitaries commuting with every logical Pauli; commuting with all logical $Z_k$ makes a unitary diagonal in the computational basis, and commuting with each logical $X_k$ forces every diagonal entry to agree. Thus the kernel is scalar and the projective Clifford group is finite. For $m\ge2$, $PU(2^{m-1})$ is an infinite Hausdorff metric space by [F2]: the classes of $\operatorname{diag}(1,e^{it},1,\ldots,1)$ are distinct as $t$ varies modulo $2\pi$. A finite subgroup is closed in a metric space, so this braid subgroup is not dense. [F1, F2, step 2.2, step 3.1, algebra] ∎

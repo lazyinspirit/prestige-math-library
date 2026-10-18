@@ -3,6 +3,7 @@ id: ex-generator-rank-of-upper-unitriangular-groups
 kind: example
 title: "The $3\\times3$ upper-unitriangular group over a prime field has generator rank two"
 status: published
+dependency_level: 6
 origin: session
 provenance:
   statement: ai-altered
@@ -14,10 +15,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/published-receipts/ex-generator-rank-of-upper-unitriangular-groups.json
 sources:
   scraped: []
   references:

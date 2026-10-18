@@ -1,0 +1,9 @@
+# Direct rank-one check of the actual category convention
+
+The canonical 68 Hopf supplier uses the library formulas `Delta(E)=E tensor K^-1+1 tensor E`, `Delta(F)=F tensor 1+K tensor F`, `S(E)=-EK`, `S(F)=-K^-1F`. It consequently has `S²=Ad(K^-1)` in A1, hence pivot `K_-2rho∨`. A private shorthand message mistakenly gave the opposite-K convention; this was corrected after checking the actual complete canonical supplier. No canonical formula was changed.
+
+For a direct check, let `v+`, `v-` be the fundamental basis with `Kv±=q^(±1)v±`, `Ev-=v+`, `Fv+=v-`. Write `c=q-q^-1`. The quasi-R intertwining identity `Delta(E)Theta=Theta barDelta(E)` on `v- tensor v-` gives `Theta=1+c E tensor F`; the other three basis vectors give the same identity immediately. The degree-two correction vanishes on this module. Thus the actual category's `R=D^-1Theta^-1` is `D^-1(1-c E tensor F)`, with `D(v_a tensor v_b)=q^(ab/2)(v_a tensor v_b)`.
+
+On `v- tensor v-`, `R Delta(E)` has coefficient `q^(1/2)(q-c)=q^(-1/2)` on `v+ tensor v-` and coefficient `q^(1/2)` on `v- tensor v+`. These equal `Delta^op(E) R` exactly. On `v+ tensor v-` both sides equal `q^(-1/2)(v+ tensor v+)`; on `v- tensor v+` both equal `q^(-3/2)(v+ tensor v+)`; on `v+ tensor v+` both vanish. The corresponding F identity follows by the same two basis shifts or follows from exchanging the two weight labels. This confirms the toral inverse and correction sign for this convention.
+
+Sawin's displayed positive-toral R and positive pivot use `Delta(E)=E tensor K+1 tensor E`, `Delta(F)=F tensor 1+K^-1 tensor F`. That is a different Hopf convention on the same presented algebra. Its formulas cannot be copied into the 68 supplier without transport. The independent native TL definition explicitly selects that convention and is guarded for its own owner review.

@@ -1,0 +1,1054 @@
+[
+  {
+    "order": 2520,
+    "id": "finite-blocklength-and-reliability",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Finite-Blocklength Bounds and Reliability",
+    "companion": "finite-blocklength-and-reliability-examples",
+    "requires": [
+      "cost-constrained-gaussian-and-feedback-channels",
+      "concentration-inequalities-and-tail-bounds",
+      "detection-and-quantification-limits"
+    ],
+    "items": [
+      {
+        "id": "lem-it-finite-affine-slice-error-bound",
+        "kind": "lemma",
+        "title": "Error bound for a finite simplex and affine slice",
+        "statement": "Let $d\\ge1$, let $\\Delta_d=\\{p\\in\\mathbb R^d:p_i\\ge0,\\sum_i p_i=1\\}$, let $M:\\mathbb R^d\\to\\mathbb R^r$ be linear, and let $F=\\{q\\in\\Delta_d:Mq=b\\}$ be nonempty. There is a finite $H$ such that\n$$\\operatorname{dist}_2(p,F)\\le H\\|Mp-b\\|_2\\qquad(p\\in\\Delta_d).$$",
+        "deps": [
+          "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_obligations": [
+          "Prove a finite constant exists for every nonempty affine slice of the probability simplex, without invoking a general Hoffman theorem.",
+          "Use the projection variational inequality on each realized support face and handle the whole-simplex slice."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "D. Bertsekas, MIT 6.253 Convex Analysis and Optimization, Lecture 6",
+              "url": "https://ocw.mit.edu/courses/6-253-convex-analysis-and-optimization-spring-2012/6c63c6219c60378bc27d5b4a9167f1bc_MIT6_253S12_lec_comp.pdf",
+              "locator": "Lecture 6, pp. 32–33; existence and variational characterization of Euclidean projections."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; there are finitely many support patterns, and every nearest point is uniquely determined.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "thm-it-berry-essen-independent-array",
+        "kind": "theorem",
+        "title": "Berry–Esseen bound for a finite independent array",
+        "statement": "Assume the Axiom of Choice. Let $X_1,\\ldots,X_n$ be independent, finite-support real random variables with $\\mathbb E X_i=0$ and total variance $\\sigma^2=\\sum_i\\mathbb E X_i^2>0$. If $S=\\sum_iX_i$ and $\\Phi$ is the standard-normal CDF, then\n$$\\sup_{z\\in\\mathbb R}\\left|\\Pr\\{S/\\sigma\\le z\\}-\\Phi(z)\\right|\\le1088\\,\\frac{\\sum_i\\mathbb E|X_i|^3}{\\sigma^3}.$$",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "thm-derivative-of-exponential",
+          "thm-exponential-beats-every-polynomial",
+          "thm-gaussian-integral",
+          "thm-integration-by-parts",
+          "thm-ftc-first-part",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-algebra-of-derivatives"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_obligations": [
+          "Prove the finite-array quantitative CDF bound by smoothing, the Stein equation, an averaged increment estimate, and induction.",
+          "Include arrays with zero-variance summands and make the variance normalization explicit."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Roman Vershynin, Two Friendly Proofs of the Berry–Esseen Theorem, arXiv:1302.4504v2",
+              "url": "https://arxiv.org/pdf/1302.4504",
+              "locator": "Part II, §§6–11, PDF pp. 9–17; smoothing, Stein ODE, averaged increments, and induction."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "The Axiom of Choice is assumed through the repository's standard-normal probability-law interface; no further choice is used in the finite-array argument.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "def-it-one-letter-gallager-exponent-functions",
+        "kind": "definition",
+        "title": "One-letter Gallager and expurgated exponent functions",
+        "statement": "Let $W$ be a finite DMC from finite nonempty $\\mathcal X$ to $\\mathcal Y$, with rates and logarithms in nats. For an input law $P$ and $0\\le\\rho\\le1$, define\n$$E_0(\\rho,P):=-\\ln\\sum_{y\\in\\mathcal Y}\\left(\\sum_{x\\in\\mathcal X}P(x)W(y\\mid x)^{1/(1+\\rho)}\\right)^{1+\\rho}.$$\nFor $\\rho\\ge1$, define $B(x,x'):=\\sum_y\\sqrt{W(y\\mid x)W(y\\mid x')}$ and\n$$E_{0x}(\\rho,P):=-\\rho\\ln\\sum_{x,x'}P(x)P(x')B(x,x')^{1/\\rho}.$$\nFor every $a>0$, $0^a=0$; thus zero channel transitions and zero Bhattacharyya coefficients contribute zero to these sums. These are one-letter functions at a fixed $P$; the global maxima and rate-dependent exponent functions are separate definitions.",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-finite-probability-vector",
+          "def-natural-logarithm",
+          "def-real-power"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "Define the two finite-DMC one-letter exponent functions and every zero-power convention.",
+          "State the parameter ranges and distinguish the one-letter functions from their global input-law maxima."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, complete author-hosted textbook",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.4*, printed pp. 431–434; finite-DMC Gallager and expurgated exponent expressions."
+            },
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 11, Spring 2010",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/10b2f1e66d2d5b1240c92cf51d8b7b8a_MIT6_441S10_lec11.pdf",
+              "locator": "§§4–11, PDF pp. 4–12; Gallager's finite-DMC $E_0$ function and its parameter convention."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; each formula has finitely many terms.",
+        "proof_strategy": "",
+        "aliases": []
+      },
+      {
+        "id": "lem-it-dmc-mutual-information-concave-in-input",
+        "kind": "lemma",
+        "title": "Finite-channel mutual information is concave in the input law",
+        "statement": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets and let $V(y\\mid x)$ be a row-stochastic channel. For an input probability vector $P$, write $I_P(V)$ for the mutual information under the joint law $P(x)V(y\\mid x)$. Then $P\\mapsto I_P(V)$ is concave: for input laws $P_0,P_1$ and $\\lambda\\in[0,1]$,\n$$I_{\\lambda P_0+(1-\\lambda)P_1}(V)\\ge\\lambda I_{P_0}(V)+(1-\\lambda)I_{P_1}(V).$$",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "def-discrete-memoryless-channel",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "thm-logarithm-slower-than-every-positive-power",
+          "cor-mean-value-theorem"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "Derive the output-entropy minus conditional-entropy formula from finite mutual information.",
+          "Prove entropy concavity including probability vectors with zero coordinates.",
+          "Deduce concavity of mutual information from the affine output law and linear conditional entropy."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.5; mutual information as output entropy minus conditional entropy and concavity in the input distribution."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 3, §3.1 and Chapter 19, §19.1; finite mutual-information identities and input concavity for a fixed channel."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all alphabets and sums are finite.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "lem-it-finite-pinsker-euclidean-bound",
+        "kind": "lemma",
+        "title": "Finite Pinsker inequality in Euclidean norm",
+        "statement": "Let $P=(p_i)$ and $Q=(q_i)$ be probability vectors on a finite nonempty set. With natural logarithms and $D(P\\|Q)=+\\infty$ when $P\\not\\ll Q$, one has\n$$D(P\\|Q)\\ge \\tfrac12\\|P-Q\\|_1^2\\ge\\tfrac12\\|P-Q\\|_2^2.$$",
+        "deps": [
+          "lem-it-finite-log-sum-inequality",
+          "def-finite-kullback-leibler-divergence",
+          "def-finite-probability-vector",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "thm-logarithm-slower-than-every-positive-power"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "Reduce finite KL by log-sum to the binary partition where p exceeds q.",
+          "Prove the scalar binary lower bound, including endpoint support cases."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 7, §7.4, Theorem 7.10; full finite Pinsker reduction to the Bernoulli case and its scalar integral proof."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the argument involves finite sums and one-dimensional calculus.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "lem-it-gallager-input-maxima-attained",
+        "kind": "lemma",
+        "title": "Gallager and expurgated input-law maxima are attained",
+        "statement": "For a finite DMC $W$, the functions $P\\mapsto E_0(\\rho,P)$ for each $0\\le\\rho\\le1$ and $P\\mapsto E_{0x}(\\rho,P)$ for each $\\rho\\ge1$, defined in [[def-it-one-letter-gallager-exponent-functions]], are finite and continuous on the input probability simplex. Consequently, each attains a finite maximum there. At $\\rho=0$, $E_0(0,P)=0$ for every $P$.",
+        "deps": [
+          "def-it-one-letter-gallager-exponent-functions",
+          "def-discrete-memoryless-channel",
+          "def-finite-probability-vector",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "def-real-power",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "thm-composition-of-continuous-functions",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "proof_obligations": [
+          "Prove continuity of both one-letter functions on the closed input simplex, including zero coordinates.",
+          "Prove the Gallager objective is positive and the expurgated objective is bounded away from zero.",
+          "Apply compactness only after the objectives are real-valued and continuous."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, complete author-hosted textbook",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.4*, printed pp. 431–434; finite-DMC exponent optimizations over the input simplex."
+            },
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 11, Spring 2010",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/10b2f1e66d2d5b1240c92cf51d8b7b8a_MIT6_441S10_lec11.pdf",
+              "locator": "§§4–11, PDF pp. 4–12; finite-DMC Gallager function and maximization convention."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the finite input simplex is compact and all selections in the positivity argument are from finite nonempty sets.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "def-it-channel-dispersion",
+        "kind": "definition",
+        "title": "Conditional information variance and DMC dispersion",
+        "statement": "Let $P$ be an input probability vector for the finite DMC $W$, and let $P_Y(y)=\\sum_xP(x)W(y\\mid x)$. On cells with $P(x)W(y\\mid x)>0$, define $\\imath_P(x;y)=\\ln[W(y\\mid x)/P_Y(y)]$; the denominator is then positive. Put\n$$V(P,W):=\\sum_{x:P(x)>0}P(x)\\operatorname{Var}_{W(\\cdot\\mid x)}[\\imath_P(x;Y)].$$\nLet $C(W)=\\max_P I(P,W)$ and $\\Pi(W)=\\{P:I(P,W)=C(W)\\}$, the nonempty set of capacity-achieving input distributions. Define\n$$V_{\\min}(W):=\\min_{P\\in\\Pi(W)}V(P,W),\\qquad V_{\\max}(W):=\\max_{P\\in\\Pi(W)}V(P,W).$$\nThe local attainment lemma [[lem-it-dmc-dispersion-attains-minimum]] proves these extrema exist. Dispersion is measured in nats squared. In the normal-approximation theorem on this page only the fixed range $0<\\epsilon<1/2$ and premise $V_{\\min}(W)>0$ are used.",
+        "deps": [
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-discrete-memoryless-channel-information-density"
+        ],
+        "justified_by": [
+          "lem-it-dmc-dispersion-attains-minimum"
+        ],
+        "dependency_level": 5,
+        "proof_obligations": [
+          "Define the conditional variance for every finite-DMC input law with explicit support conventions.",
+          "Define the CAID dispersion minimum and maximum and leave attainment to the justified local lemma."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, H. Vincent Poor, and Sergio Verdú, Channel Coding Rate in the Finite Blocklength Regime",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf",
+              "locator": "§IV, printed pp. 132–134 / PDF pp. 10–12; dispersion and normal-approximation conventions."
+            },
+            {
+              "title": "Masahito Hayashi, Information Spectrum Approach to Second-Order Coding Rate in Channel Coding",
+              "url": "https://arxiv.org/pdf/0801.2242",
+              "locator": "§III and Theorems 1–2; conditional information variance and multiple capacity-achieving input laws."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; all conditional variances are finite sums on the charged support.",
+        "proof_strategy": "",
+        "aliases": []
+      },
+      {
+        "id": "def-it-gallager-and-expurgated-exponent-functions",
+        "kind": "definition",
+        "title": "Gallager, random-coding, expurgated, and sphere-packing functions",
+        "statement": "Let $W$ be a finite unconstrained DMC from finite nonempty $\\mathcal X$ to $\\mathcal Y$, with rates and logarithms in nats. The one-letter functions $E_0(\\rho,P)$ for $0\\le\\rho\\le1$ and $E_{0x}(\\rho,P)$ for $\\rho\\ge1$ are defined in [[def-it-one-letter-gallager-exponent-functions]]. Their maxima over the input simplex are attained and finite by [[lem-it-gallager-input-maxima-attained]]. Define\n$$E_0(\\rho):=\\max_P E_0(\\rho,P),\\qquad E_r(R):=\\sup_{0\\le\\rho\\le1}\\{E_0(\\rho)-\\rho R\\}.$$\nThe expurgated function and sphere-packing expression are\n$$E_{\\rm ex}(R):=\\sup_{\\rho\\ge1}\\left\\{\\max_P E_{0x}(\\rho,P)-\\rho R\\right\\},\\qquad E_{\\rm sp}(R):=\\sup_{\\rho\\ge0}\\{E_0(\\rho)-\\rho R\\}.$$\nThese functions define lower or upper bounds used on this page; they do not assert that an error-exponent limit exists or that the sphere-packing bound applies without its later strict-feasibility hypothesis.",
+        "deps": [
+          "def-it-one-letter-gallager-exponent-functions",
+          "lem-it-gallager-input-maxima-attained",
+          "def-discrete-memoryless-channel",
+          "def-finite-probability-vector",
+          "def-natural-logarithm"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "proof_obligations": [
+          "Define the global Gallager maximum, random-coding function, expurgated function, and sphere-packing expression in nats.",
+          "Cite the one-letter definitions and attainment proof before using maxima over the input simplex.",
+          "State that these are bounds or expressions and do not imply an exact reliability formula."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 6.441 Information Theory, Lectures 11–12, Spring 2010",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/10b2f1e66d2d5b1240c92cf51d8b7b8a_MIT6_441S10_lec11.pdf",
+              "locator": "Lecture 11, §§4–11, PDF pp. 4–12; finite-DMC random-coding exponent and Gallager function."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.4*",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.4*, printed pp. 431–434; random-coding, expurgated, and sphere-packing bounds."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; the input simplex and all sums are finite.",
+        "proof_strategy": "",
+        "aliases": []
+      },
+      {
+        "id": "def-it-reliability-function",
+        "kind": "definition",
+        "title": "Average and maximal error reliability exponents",
+        "statement": "For a finite DMC $W$, $R>0$, and $n\\ge1$, set $M_n=\\lceil e^{nR}\\rceil$. Let $P_k^*(n,M_n)$ be the minimum error probability among length-$n$ deterministic codes of that size under criterion $k\\in\\{\\mathrm{av},\\mathrm{max}\\}$, where the two errors are those of [[def-fixed-length-channel-code-errors]]. This minimum exists because the encoder and decoder range over finite sets. Define\n$$E_k^-(R):=\\liminf_{n\\to\\infty}-\\frac1n\\ln P_k^*(n,M_n),\\qquad E_k^+(R):=\\limsup_{n\\to\\infty}-\\frac1n\\ln P_k^*(n,M_n),$$\nwith $-\\ln0=+\\infty$. An error-exponent limit $E_k(R)$ is used only when the liminf and limsup agree in the extended reals. These are exponents of error probability; the exponent of success probability is a different quantity. No general exact formula for the finite-DMC reliability function is part of this definition.",
+        "deps": [
+          "def-fixed-length-channel-code-errors"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_obligations": [
+          "Fix the code-size rounding, average and maximal criteria, and liminf/limsup conventions.",
+          "Define the error exponent separately from the success exponent, including zero error."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.4*",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.4*, printed pp. 431–434; finite-DMC reliability functions and the low-rate caveat."
+            },
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 12, Spring 2010",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/107335d1797be9009a90467e27d1fd7a_MIT6_441S10_lec12.pdf",
+              "locator": "PDF pp. 1–4; error exponent definition, expurgation, and positivity below capacity."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; each blocklength has a finite set of deterministic codes.",
+        "proof_strategy": "",
+        "aliases": []
+      },
+      {
+        "id": "lem-it-dmc-capacity-output-law-is-unique",
+        "kind": "lemma",
+        "title": "The capacity-achieving output law is unique",
+        "statement": "For a finite DMC $W$, every input law attaining $C(W)=\\max_P I(P,W)$ induces the same output law $Q^*$. This output law is unique even when the capacity-achieving input law is not.",
+        "deps": [
+          "def-discrete-memoryless-channel-information-capacity",
+          "lem-discrete-memoryless-channel-capacity-is-attained",
+          "def-discrete-memoryless-channel",
+          "def-it-finite-mutual-information",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "thm-logarithm-slower-than-every-positive-power"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_obligations": [
+          "Expand finite mutual information as output entropy minus a linear conditional-entropy term.",
+          "Rule out two distinct capacity-achieving output laws by strict concavity, including zero coordinates."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapters 19 and 22",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 19 §19.1 and Chapter 22 §22.1; finite-DMC capacity optimizers and output laws."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the input simplex and all output alphabets are finite.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "lem-it-optimized-constant-composition-gallager-identity",
+        "kind": "lemma",
+        "title": "Globally optimized constant-composition and Gallager functions agree",
+        "statement": "Let $W$ be a finite DMC and fix $\\rho>0$. For each input law $P$, define\n$$E_{0,\\rm cc}(\\rho,P):=\\inf_{V:\\,V(\\cdot\\mid x)\\ll W(\\cdot\\mid x)}\\left\\{\\sum_xP(x)D(V(\\cdot\\mid x)\\|W(\\cdot\\mid x))+\\rho I_P(V)\\right\\},$$\nwhere $I_P(V)$ is the mutual information of $P(x)V(y\\mid x)$ and terms with $P(x)=0$ are omitted. At $\\rho=0$, set $E_{0,\\rm cc}(0,P)=0$. Then\n$$\\max_P E_{0,\\rm cc}(\\rho,P)=\\max_P E_0(\\rho,P),$$\nwith $E_0$ from [[def-it-gallager-and-expurgated-exponent-functions]]. The equality is after optimizing over $P$; it is not asserted for each fixed $P$.",
+        "deps": [
+          "def-it-gallager-and-expurgated-exponent-functions",
+          "def-it-one-letter-gallager-exponent-functions",
+          "def-discrete-memoryless-channel",
+          "def-it-finite-mutual-information",
+          "def-finite-kullback-leibler-divergence",
+          "thm-it-finite-kl-nonnegative-equality",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_obligations": [
+          "Prove the row variational formula with zero transition probabilities and support restrictions.",
+          "Prove equality only after global optimization over the input law; explicitly exclude a pointwise-in-P identity.",
+          "Handle outputs outside the support generated by a minimizing input law."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.4*",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.4*, printed pp. 432–434; constant-composition and Gallager exponent variational formulas."
+            },
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 11, Spring 2010",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/10b2f1e66d2d5b1240c92cf51d8b7b8a_MIT6_441S10_lec11.pdf",
+              "locator": "§§4–11, PDF pp. 4–12; Gallager's finite-DMC E0 function and random-coding exponent."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; optimization is over finite-dimensional compact simplexes and all sums are finite.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "thm-it-one-shot-decision-threshold-achievability",
+        "kind": "theorem",
+        "title": "Finite-DMC dependence-testing achievability bound",
+        "statement": "Let $W^n$ be the block channel of a finite DMC, let $P_{X^n}$ be any input law, and let $M\\ge2$. Define the charged information density $\\imath(x^n;y^n)=\\ln[W^n(y^n\\mid x^n)/(P_{X^n}W^n)(y^n)]$ on the support of $P_{X^n}W^n$. There is a deterministic length-$n$ code with $M$ messages and average error at most\n$$\\mathbb E\\exp\\left(-\\left[\\imath(X^n;Y^n)-\\ln\\frac{M-1}{2}\\right]_+\\right),$$\nwhere $(X^n,Y^n)\\sim P_{X^n}W^n$. For $M=1$, a zero-error code exists. The conclusion is an average-error bound and does not by itself bound every message's error.",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "def-discrete-memoryless-channel-information-density",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "def-finite-probability-vector"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_obligations": [
+          "Use the strict-threshold decoder with a fixed tie rule and derive the average false-alarm term.",
+          "Convert the threshold expression to the dependence-testing expectation, retaining its exact factor one half.",
+          "State that the conclusion controls ensemble-average error only."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, H. Vincent Poor, and Sergio Verdú, Channel Coding Rate in the Finite Blocklength Regime",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf",
+              "locator": "Theorem 17 and its complete proof, printed pp. 15–16 / PDF pp. 14–15."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 18 §18.3",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 18, §18.3; finite-blocklength threshold and dependence-testing bounds."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the codebook ensemble and alphabets are finite.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "thm-it-one-shot-meta-converse",
+        "kind": "theorem",
+        "title": "Finite-DMC hypothesis-testing meta-converse",
+        "statement": "Let a finite-DMC code have $M\\ge1$ messages and average error $\\epsilon$. For any output probability vector $Q_{Y^n}$, let $P_{MY^n}(m,y^n)=M^{-1}W^n(y^n\\mid x_m^n)$ be the true joint law and let $\\widetilde Q_{MY^n}(m,y^n)=M^{-1}Q_{Y^n}(y^n)$. With the type-II testing function $\\beta_\\epsilon$ of [[def-finite-hypothesis-testing-beta]], which constrains rejection under its first argument, one has\n$$\\beta_\\epsilon(P_{MY^n},\\widetilde Q_{MY^n})\\le\\frac1M.$$",
+        "deps": [
+          "def-finite-hypothesis-testing-beta",
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "def-finite-probability-vector"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_obligations": [
+          "State the null/alternative and acceptance/rejection orientation of beta exactly.",
+          "Build the test from the code's decoder and verify both its type-I and type-II errors.",
+          "Permit singular auxiliary output laws without taking likelihood ratios."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.3",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.3; the meta-converse and its finite test orientation."
+            },
+            {
+              "title": "Yury Polyanskiy, H. Vincent Poor, and Sergio Verdú, Channel Coding Rate in the Finite Blocklength Regime",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf",
+              "locator": "Theorem 27 and finite-blocklength hypothesis-testing converse, printed pp. 21–23 / PDF pp. 20–22."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the test and probability vectors are finite.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "lem-it-dmc-caid-conditional-variance-identity",
+        "kind": "lemma",
+        "title": "A CAID's information-density variance equals its conditional dispersion",
+        "statement": "For every CAID $P\\in\\Pi(W)$, let $Q^*=PW$ and let $(X,Y)\\sim P(x)W(y\\mid x)$. For every $x$ with $P(x)>0$,\n$$\\mathbb E[\\ln(W(Y\\mid x)/Q^*(Y))\\mid X=x]=C(W),$$\nand\n$$\\operatorname{Var}[\\ln(W(Y\\mid X)/Q^*(Y))]=V(P,W).$$",
+        "deps": [
+          "def-it-channel-dispersion",
+          "lem-it-dmc-capacity-output-law-is-unique",
+          "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+          "lem-discrete-memoryless-channel-capacity-is-attained",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-it-finite-mutual-information"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_obligations": [
+          "Show each row used by a CAID has divergence exactly C(W), not merely at most C(W).",
+          "Apply the finite conditional variance decomposition with the common conditional mean."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, H. Vincent Poor, and Sergio Verdú, Channel Coding Rate in the Finite Blocklength Regime",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf",
+              "locator": "§IV, printed pp. 132–134 / PDF pp. 10–12; conditional information variance at a capacity-achieving input."
+            },
+            {
+              "title": "Masahito Hayashi, Information Spectrum Approach to Second-Order Coding Rate in Channel Coding",
+              "url": "https://arxiv.org/pdf/0801.2242",
+              "locator": "§III, equations defining $V_{P,W}$ and Theorems 1–2."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; this is a finite law-of-total-variance calculation.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "lem-it-dmc-dispersion-attains-minimum",
+        "kind": "lemma",
+        "title": "DMC minimum and maximum dispersion are attained",
+        "statement": "For every finite DMC, the set $\\Pi(W)$ of capacity-achieving input laws is nonempty and compact, and the function $P\\mapsto V(P,W)$ is continuous on $\\Pi(W)$. Therefore $V_{\\min}(W)$ and $V_{\\max}(W)$ in [[def-it-channel-dispersion]] are attained.",
+        "deps": [
+          "def-it-channel-dispersion",
+          "lem-it-dmc-capacity-output-law-is-unique",
+          "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+          "lem-discrete-memoryless-channel-capacity-is-attained",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-it-finite-mutual-information",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-logarithm-slower-than-every-positive-power",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_obligations": [
+          "Show the capacity-achieving set is a nonempty closed subset of the finite input simplex.",
+          "Use the unique full reachable output law to prove continuity of conditional dispersion on that set."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, H. Vincent Poor, and Sergio Verdú, Channel Coding Rate in the Finite Blocklength Regime",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf",
+              "locator": "§IV, printed pp. 132–134 / PDF pp. 10–12; minimum-dispersion optimizer convention."
+            },
+            {
+              "title": "Masahito Hayashi, Information Spectrum Approach to Second-Order Coding Rate in Channel Coding",
+              "url": "https://arxiv.org/pdf/0801.2242",
+              "locator": "§III, Theorem 2; minimum and maximum conditional variances over multiple capacity-achieving inputs."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the finite-dimensional simplex is compact and the variance function is continuous on the CAID set.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "thm-it-dmc-uniform-quadratic-capacity-decay",
+        "kind": "theorem",
+        "title": "Finite-DMC information deficit controls squared distance to the CAID set",
+        "statement": "Let $W$ be a finite DMC, $C=C(W)$, and $\\Pi=\\{P:I(P,W)=C\\}$. There is $\\alpha>0$, depending on $W$, such that every input law $P$ satisfies\n$$C-I(P,W)\\ge\\alpha\\,\\operatorname{dist}_2(P,\\Pi)^2.$$",
+        "deps": [
+          "lem-it-dmc-capacity-output-law-is-unique",
+          "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+          "lem-discrete-memoryless-channel-capacity-is-attained",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-it-finite-mutual-information",
+          "def-finite-kullback-leibler-divergence",
+          "thm-it-finite-kl-nonnegative-equality",
+          "lem-it-finite-pinsker-euclidean-bound",
+          "lem-it-finite-affine-slice-error-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_obligations": [
+          "Derive the exact KL gap identity and identify the CAID set as a finite affine slice.",
+          "Combine a positive slack on inactive input letters, Pinsker, and the proved affine-slice error bound.",
+          "Treat the whole-simplex CAID case and an empty inactive-input block."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.1; capacity-achieving output divergence and finite-DMC information density."
+            },
+            {
+              "title": "Yury Polyanskiy, H. Vincent Poor, and Sergio Verdú, Channel Coding Rate in the Finite Blocklength Regime",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf",
+              "locator": "Theorem 48 proof, printed pp. 132–133 / PDF pp. 10–11; the local proof uses the separate finite KL/Pinsker/affine-slice route rather than the quadratic-Taylor step."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the proof uses finite KL identities, finite Pinsker, and a finite-dimensional affine-slice bound.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "thm-it-expurgated-error-exponent-lower-bound",
+        "kind": "theorem",
+        "title": "Gallager expurgated exponent lower bound",
+        "statement": "For every finite unconstrained DMC and rate $R>0$, the liminf average- and maximal-error exponents satisfy\n$$E^-_{\\rm av}(R)\\ge E_{\\rm ex}(R),\\qquad E^-_{\\rm max}(R)\\ge E_{\\rm ex}(R),$$\nwhere $E_{\\rm ex}$ is defined in [[def-it-gallager-and-expurgated-exponent-functions]]. This is a lower bound; it is not asserted to equal the general reliability function.",
+        "deps": [
+          "def-it-reliability-function",
+          "def-it-gallager-and-expurgated-exponent-functions",
+          "def-discrete-memoryless-channel",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_obligations": [
+          "Derive the pairwise Bhattacharyya bound on ML error and tensorize it across a DMC block.",
+          "Apply subadditivity for the power 1/rho and expurgate messages with large pairwise sums.",
+          "State the resulting guarantee as a lower bound, not an exact low-rate formula."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 12, Spring 2010",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/107335d1797be9009a90467e27d1fd7a_MIT6_441S10_lec12.pdf",
+              "locator": "PDF pp. 2–4; expurgation and low-rate exponent discussion."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.4*",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.4*, printed pp. 432–433; expurgated exponent and its scope."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the codebook and message set are finite at each blocklength.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "thm-it-random-coding-error-exponent",
+        "kind": "theorem",
+        "title": "Gallager random-coding exponent lower bound",
+        "statement": "For every finite DMC without an input-cost constraint or feedback and every $R>0$,\n$$E^-_{\\rm av}(R)\\ge E_r(R),\\qquad E^-_{\\rm max}(R)\\ge E_r(R),$$\nwhere $E_r$ is the random-coding function in [[def-it-gallager-and-expurgated-exponent-functions]]. If $0<R<C(W)$, then $E_r(R)>0$. This is an achievability lower bound, not an exact general reliability formula.",
+        "deps": [
+          "def-it-reliability-function",
+          "def-it-gallager-and-expurgated-exponent-functions",
+          "def-discrete-memoryless-channel",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "lem-discrete-memoryless-channel-average-to-maximal-expurgation",
+          "thm-finite-jensen-inequality",
+          "def-convex-concave-and-midpoint-convex-functions",
+          "def-it-finite-mutual-information",
+          "def-discrete-memoryless-channel-information-capacity",
+          "lem-discrete-memoryless-channel-capacity-is-attained",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_obligations": [
+          "Derive the Gallager moment bound from the ML error event, Jensen, and the DMC product law.",
+          "Convert the bound to the liminf average-error exponent and then expurgate for maximal error.",
+          "Establish positivity below capacity by differentiating the finite E0 sum at rho zero."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 11, Spring 2010",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/10b2f1e66d2d5b1240c92cf51d8b7b8a_MIT6_441S10_lec11.pdf",
+              "locator": "§§4–11, PDF pp. 4–12; complete random-coding bound calculation for a DMC."
+            },
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 12, Spring 2010",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/107335d1797be9009a90467e27d1fd7a_MIT6_441S10_lec12.pdf",
+              "locator": "PDF pp. 1–4; expurgation, the error-exponent definition, and positivity below capacity."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.4*",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.4*, printed pp. 431–432; Gallager's random-coding exponent."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the random codebook ensemble is finite at each blocklength.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "thm-it-sphere-packing-strict-feasibility-converse",
+        "kind": "theorem",
+        "title": "Sphere-packing converse above the finite-divergence threshold",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $W$ be a finite unconstrained DMC. For $P$ on $\\mathcal X$, let $V$ range over row-stochastic channels satisfying $\\operatorname{supp}V(\\cdot\\mid x)\\subseteq\\operatorname{supp}W(\\cdot\\mid x)$, and define\n$$D_P(V)=\\sum_xP(x)D(V(\\cdot\\mid x)\\|W(\\cdot\\mid x)),\\quad I_P(V)=I(X;Y)\\text{ under }P(x)V(y\\mid x),$$\n$$J(P)=\\min_V I_P(V),\\qquad R_\\infty(W)=\\max_PJ(P).$$\nFor every $R>R_\\infty(W)$, the limsup average- and maximal-error exponents satisfy\n$$E^+_{\\rm av}(R)\\le E_{\\rm sp}(R),\\qquad E^+_{\\rm max}(R)\\le E_{\\rm sp}(R),$$\nwhere $E_{\\rm sp}$ is defined in [[def-it-gallager-and-expurgated-exponent-functions]]. The theorem makes no endpoint assertion at $R=R_\\infty(W)$.",
+        "deps": [
+          "def-it-reliability-function",
+          "def-it-gallager-and-expurgated-exponent-functions",
+          "lem-it-optimized-constant-composition-gallager-identity",
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "thm-it-fano-inequality",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality",
+          "def-it-finite-mutual-information",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-finite-kullback-leibler-divergence",
+          "lem-it-finite-log-sum-inequality",
+          "thm-finite-jensen-inequality",
+          "lem-it-dmc-mutual-information-concave-in-input",
+          "thm-heine-cantor-metric",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-logarithm-slower-than-every-positive-power",
+          "thm-separating-hyperplane-theorem-for-disjoint-convex-sets",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_obligations": [
+          "Define the finite-divergence auxiliary-channel set and the threshold R_infinity; establish compactness and strict feasibility for R>R_infinity.",
+          "Prove the constant-composition converse by Fano, a uniform Chebyshev bound, and an explicit change-of-measure inequality.",
+          "Pass from arbitrary codes to a type subcode and track the polynomial rate/error loss.",
+          "Derive the convex-duality identity only under strict feasibility and keep the AC/CC separation branch explicit.",
+          "Use the global constant-composition/Gallager identity, not a pointwise-in-input identity."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.4*",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.4*, printed pp. 433–434; sphere-packing converse and strict-feasibility variational route."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "This theorem assumes the Axiom of Choice and Countable Choice exactly through the published weak-separation supplier; all finite-DMC and type-class steps are choice-free.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "thm-it-normal-approximation-nondegenerate-dmc",
+        "kind": "theorem",
+        "title": "Nondegenerate normal approximation for finite unconstrained DMCs",
+        "statement": "Assume the Axiom of Choice. Let $W$ be a fixed finite DMC with no feedback or input-cost constraint, let $0<\\epsilon<1/2$ be fixed, and suppose $V_{\\min}(W)>0$. For $k\\in\\{\\mathrm{av},\\mathrm{max}\\}$, let $M_k^*(n,\\epsilon)$ be the largest number of messages in a deterministic length-$n$ code with uniform messages and error criterion $k$ at most $\\epsilon$. Then\n$$\\ln M_k^*(n,\\epsilon)=nC(W)+\\sqrt{nV_{\\min}(W)}\\,\\Phi^{-1}(\\epsilon)+O(\\ln n),\\qquad k\\in\\{\\mathrm{av},\\mathrm{max}\\},$$\nwhere all logarithms are natural, $\\Phi$ is the standard-normal CDF, and the constants may depend on $W,\\epsilon$. This theorem makes no claim for cost constraints, $\\epsilon\\ge1/2$, zero dispersion, or a third-order coefficient.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-standard-normal-cdf-quantiles-and-symmetry",
+          "thm-it-berry-essen-independent-array",
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-discrete-memoryless-channel-information-density",
+          "def-it-finite-mutual-information",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-discrete-memoryless-channel-capacity-is-attained",
+          "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "def-it-channel-dispersion",
+          "lem-it-dmc-dispersion-attains-minimum",
+          "lem-it-dmc-capacity-output-law-is-unique",
+          "lem-it-dmc-caid-conditional-variance-identity",
+          "thm-it-dmc-uniform-quadratic-capacity-decay",
+          "thm-it-one-shot-decision-threshold-achievability",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-logarithm-slower-than-every-positive-power",
+          "cor-mean-value-theorem",
+          "thm-ftc-first-part"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "proof_obligations": [
+          "State deterministic encoders, uniform messages, natural logarithms, fixed 0<epsilon<1/2, and V_min>0.",
+          "Establish uniform local variance/third-moment bounds near the CAID set and a global variance bound.",
+          "Prove the constant-composition testing converse with its decoder-region split, then use uniform Berry–Esseen and quantile inversion for near types.",
+          "Use the quadratic capacity gap to optimize over nearby types and Chebyshev plus a compactness gap for far types.",
+          "Expurgate an arbitrary average-error code to error epsilon+n^{-1/2}, select a type, and track both logarithmic losses.",
+          "Prove DT achievability at the minimum-dispersion CAID, then expurgate to maximal error without claiming third-order precision."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, H. Vincent Poor, and Sergio Verdú, Channel Coding Rate in the Finite Blocklength Regime",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf",
+              "locator": "Theorems 17, 48–49, printed pp. 15–16 and 132–134 / PDF pp. 14–15 and 10–12; DT bound, dispersion, and normal-approximation statement. The local proof does not use the disputed quadratic-Taylor converse route."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §§22.1–22.3",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §§22.1–22.3, printed pp. 424–431; DMC capacity output law, finite-blocklength converse, and achievability."
+            },
+            {
+              "title": "Masahito Hayashi, Information Spectrum Approach to Second-Order Coding Rate in Channel Coding",
+              "url": "https://arxiv.org/pdf/0801.2242",
+              "locator": "§III, Theorems 1–2 and their proofs; minimum/maximum conditional variance for multiple CAIDs."
+            },
+            {
+              "title": "Roman Vershynin, Two Friendly Proofs of the Berry–Esseen Theorem, arXiv:1302.4504v2",
+              "url": "https://arxiv.org/pdf/1302.4504",
+              "locator": "Part II, §§6–11, PDF pp. 9–17; complete Stein-method independent-array proof."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "Assumes the Axiom of Choice through the standard-normal and quantitative Berry–Esseen interfaces; all channel, type, and finite-sum arguments use no further choice.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "thm-it-error-exponent-zero-above-capacity",
+        "kind": "theorem",
+        "title": "The error exponent is zero above finite-DMC capacity",
+        "statement": "For every finite unconstrained DMC and every $R>C(W)$,\n$$E^-_{\\rm av}(R)=E^+_{\\rm av}(R)=E^-_{\\rm max}(R)=E^+_{\\rm max}(R)=0.$$\nThese are error-probability exponents; no success-probability exponent is asserted.",
+        "deps": [
+          "def-it-reliability-function",
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-capacity",
+          "thm-discrete-memoryless-channel-alphabet-scoped-strong-converse",
+          "def-fixed-length-channel-code-errors"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "proof_obligations": [
+          "Apply the actual average-error strong converse to optimal finite-block codes.",
+          "Convert error probability tending to one into both liminf and limsup error exponents equal to zero.",
+          "Keep this error exponent separate from a success-probability exponent."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.1; strong converse for finite DMCs."
+            },
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 11, Spring 2010",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/10b2f1e66d2d5b1240c92cf51d8b7b8a_MIT6_441S10_lec11.pdf",
+              "locator": "§§1–4, PDF pp. 1–4; strong coding theorem and DMC code/error conventions."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the strong converse supplier uses only finite DMC laws and finite sums.",
+        "proof_strategy": "direct",
+        "aliases": []
+      }
+    ]
+  },
+  {
+    "order": 2521,
+    "id": "finite-blocklength-and-reliability-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Finite-Blocklength Bounds and Reliability — Examples",
+    "companion": "finite-blocklength-and-reliability",
+    "requires": [
+      "finite-blocklength-and-reliability"
+    ],
+    "items": [
+      {
+        "id": "cex-it-expected-random-code-error-does-not-give-maximal-error",
+        "kind": "counterexample",
+        "title": "Small expected average code error need not control maximal error",
+        "statement": "For every integer $M\\ge2$, there is a singleton random-code ensemble on a finite noiseless DMC whose expected average error is $1/M$ while the code's maximal error is $1$. Thus a small expected average error alone does not make every message's error small.",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_obligations": [
+          "Give a finite DMC code with one message of error one and all other messages correct.",
+          "Compute both average and maximal error and realize the code as a singleton random ensemble."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 19, §19.2; average and maximal error criteria and expurgation."
+            },
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 12, Spring 2010",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/107335d1797be9009a90467e27d1fd7a_MIT6_441S10_lec12.pdf",
+              "locator": "PDF pp. 1–3; expurgating bad codewords to control maximal error."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the example is a finite deterministic code and a singleton ensemble.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "ex-it-dmc-one-shot-error-bound",
+        "kind": "example",
+        "title": "Exact evaluation of a one-use BSC dependence-testing bound",
+        "statement": "For a one-use BSC with crossover $p=0.1$, uniform input, and $M=2$, the dependence-testing upper bound on achievable average error is exactly $0.35$.",
+        "deps": [
+          "thm-it-one-shot-decision-threshold-achievability",
+          "def-discrete-memoryless-channel"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_obligations": [
+          "Compute the information density on both positive-probability BSC events.",
+          "Evaluate the positive-part threshold expression exactly, including the tie convention."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, H. Vincent Poor, and Sergio Verdú, Channel Coding Rate in the Finite Blocklength Regime",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf",
+              "locator": "Theorem 17, printed pp. 15–16 / PDF pp. 14–15; dependence-testing expression."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the example has two input and two output symbols.",
+        "proof_strategy": "direct",
+        "aliases": []
+      },
+      {
+        "id": "ex-it-meta-converse-binary-channel",
+        "kind": "example",
+        "title": "Exact beta value for a one-use BSC meta-converse test",
+        "statement": "For the one-use BSC$(p)$ with $0<p<1/2$, the identity encoder/decoder with two equiprobable messages has average error $p$. With its true joint law $P_{MY}$ and the uniform-message/uniform-output auxiliary law $\\widetilde Q_{MY}$, the oriented testing value is exactly $\\beta_p(P_{MY},\\widetilde Q_{MY})=1/2=1/M$.",
+        "deps": [
+          "thm-it-one-shot-meta-converse",
+          "def-finite-hypothesis-testing-beta",
+          "def-discrete-memoryless-channel"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "proof_obligations": [
+          "Enumerate true and auxiliary probabilities on all four message-output pairs.",
+          "Verify the beta orientation and prove the finite linear program's optimum, including randomized tests."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.3",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 22, §22.3; meta-converse beta function."
+            },
+            {
+              "title": "Yury Polyanskiy, H. Vincent Poor, and Sergio Verdú, Channel Coding Rate in the Finite Blocklength Regime",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf",
+              "locator": "finite-blocklength hypothesis-testing converse, printed pp. 21–23 / PDF pp. 20–22."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the testing alphabet has four outcomes.",
+        "proof_strategy": "direct",
+        "aliases": []
+      }
+    ]
+  }
+]

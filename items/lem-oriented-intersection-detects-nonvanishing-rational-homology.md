@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/lem-oriented-intersection-detects-nonvanishing-rational-homology.json
 id: lem-oriented-intersection-detects-nonvanishing-rational-homology
 kind: lemma
 title: A co-oriented closed transversal detects nonvanishing rational homology of a compact leaf
@@ -79,7 +81,7 @@ with the positive transverse normal. Then:
 
 [F9] A supplied orientation on a compact boundaryless manifold determines its fundamental class by its local orientation classes, with no arbitrary choice of generator ([[def-fundamental-class-of-a-compact-oriented-manifold]]).
 
-[F10] Under $\mathrm{AC}_\omega$, a smooth evaluation family transverse to an embedded submanifold has a null set of nontransverse parameters. A transverse preimage has the corresponding codimension ([[thm-parametric-transversality]], [[thm-transverse-preimage-theorem]]).
+[F10] Under $\mathrm{AC}_\omega$, a smooth evaluation family transverse to an embedded submanifold has a null set of nontransverse parameters. A smooth map from a $p$-manifold transverse to an embedded submanifold of codimension $c$ has an embedded codimension-$c$ preimage when $c\le p$ (possibly empty), and an empty preimage when $c>p$ ([[thm-parametric-transversality]], [[thm-transverse-preimage-theorem]]).
 
 [F11] The total outward signed boundary count of a compact oriented one-manifold is zero ([[lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count]]).
 

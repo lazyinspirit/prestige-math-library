@@ -1,0 +1,240 @@
+--- a/tools/finite-smoke.mjs
++++ b/tools/finite-smoke.mjs
+@@ -34,27 +34,28 @@
+   else {
+     for (const outcome of outcomes) console.log(`${outcome.ok ? 'PASS' : 'FAIL'} ${outcome.name}: ${outcome.summary}`);
+   }
+-  process.exit(failures.length ? 1 : 0);
++  process.exitCode = failures.length ? 1 : 0;
+ }
+ 
++const errors = [], outcomes = [];
++let document, ids = [];
++if(!argv.includes('--self-test')) runContract();
++function runContract(){
+ const contractPath = argv.find((arg) => !arg.startsWith('--') && arg !== option('--items'));
+ if (!contractPath) usage();
+ 
+-const errors = [];
+-const outcomes = [];
+-let document;
+ try {
+   document = JSON.parse(readFileSync(resolvePath(contractPath), 'utf8'));
+ } catch (cause) {
+   errors.push({ code: 'contract-read', message: `${contractPath}: ${cause.message}` });
+-  finish();
++  return finish();
+ }
+ if (document?.version !== 1 || !Array.isArray(document?.scope) || typeof document?.contracts !== 'object') {
+   errors.push({ code: 'contract-shape', message: 'expected a version-1 proof contract with scope and contracts' });
+-  finish();
++  return finish();
+ }
+ 
+-const ids = requested ? document.scope.filter((id) => requested.includes(id)) : document.scope;
++ids = requested ? document.scope.filter((id) => requested.includes(id)) : document.scope;
+ for (const id of requested ?? []) if (!document.scope.includes(id)) errors.push({ code: 'selection-outside-scope', message: `${id} is outside the contract scope`, id });
+ 
+ for (const id of ids) {
+@@ -63,6 +64,8 @@
+ }
+ finish();
+ 
++}
++
+ function runSmoke(id, smoke) {
+   if (!smoke || typeof smoke !== 'object' || Array.isArray(smoke)) {
+     errors.push({ code: 'smoke-shape', message: 'finite_smoke entries must be objects', id });
+@@ -1707,5 +1710,6 @@
+       ? ids.filter((id) => (document.contracts?.[id]?.finite_smoke ?? []).length).length : 0;
+     console.log(`finite-smoke: ${errors.length} error(s), ${outcomes.length} check(s) over ${withChecks}/${scoped} item(s) carrying obligations`);
+   }
+-  process.exit(errors.length ? 1 : 0);
++  // Preserve early error returns while allowing all JSON bytes to flush.
++  process.exitCode = errors.length ? 1 : 0;
+ }
+--- a/tools/step5-initial-published-maintenance.test.mjs
++++ b/tools/step5-initial-published-maintenance.test.mjs
+@@ -5,7 +5,8 @@
+ import {tmpdir} from 'node:os';
+ import {createHash} from 'node:crypto';
+ import {freezeFrontier} from './step5-rounds.mjs';
+-import {itemHashGuard} from './item-hash.mjs';
++import {spawnSync} from 'node:child_process';
++import {itemHashGuard,itemHashJudge,shortHash} from './item-hash.mjs';
+ import {statementHash} from './step5-statement.mjs';
+ import {MODELS} from './models.mjs';
+ import {recordedPublishedRepair} from './published-repair-policy.mjs';
+@@ -308,3 +309,23 @@
+  writeCurrentCompatibilityCertificate(f,[item]);
+  assert.throws(()=>verifyWave(f.root,run,{contextHasher:()=>new Map([[consumer,{item_sha256:item.item_sha256,context_sha256:'c'.repeat(64)}]])}),new RegExp('stale Step 5 certification context '+consumer));
+ });
++
++function ordinaryBaselineGuardFixture(t){
++ const f=fixture(t);originalOrdinaryCertificate(f);const {certificate}=writeCurrentCompatibilityCertificate(f);
++ const threshold=join(f.root,dir,'threshold-1.json');f.put(join(dir,'threshold-1.json'),{belowThreshold:true,fatalCount:0,errors:[]});certificate.latest_adjudication_round=1;certificate.evidence[threshold]=hash(readFileSync(threshold,'utf8'));delete certificate.sha256;certificate.sha256=hash(certificate);f.put(join(dir,'certification.json'),certificate);
++ f.put('guard-touches.json',{snapshots:[{label:'pre-step5',hashes:Object.fromEntries(Object.entries(f.baseline).map(([id,h])=>[id,shortHash(h)]))}]});f.put('guard-scope.json',{run,by_item:Object.fromEntries(f.frontier.ids.map(id=>[id,'fixture']))});
++ const guard=()=>spawnSync(process.execPath,[new URL('./step5-guard.mjs',import.meta.url).pathname,'--touches',join(f.root,'guard-touches.json'),'--baseline','pre-step5','--scope',join(f.root,'guard-scope.json'),'--items-dir',join(f.root,'items'),'--workflow-root',f.root,'--judge-ledger',join(f.root,'unused-judge.jsonl'),'--adjudications',join(f.root,'unused-adjudications.jsonl'),'--json'],{encoding:'utf8',maxBuffer:8*1024*1024});return {...f,certificate,guard};
++}
++test('real step5 guard honors only authenticated historical ordinary baseline exclusion with zero native credit',t=>{
++ const f=ordinaryBaselineGuardFixture(t),r=f.guard();assert.equal(r.status,0,r.stdout+r.stderr);const out=JSON.parse(r.stdout);assert.equal(out.summary.historical_ordinary_published_exclusions,1);assert.equal(out.summary.licensed_by_centralized_certification,0);assert.equal(out.summary.frontier_changed,1);assert.deepEqual(out.errors,[]);
++});
++for(const mode of ['source','status','receipt','forged-id','missing-record','unlicensed-published','deletion'])test(`real step5 guard rejects historical-exclusion ${mode} misuse`,t=>{
++ const f=ordinaryBaselineGuardFixture(t);
++ if(mode==='source')f.put(`items/${id}.md`,f.after+'\nA later real proof edit.\n');
++ if(mode==='status')f.put(`items/${id}.md`,f.after.replace('status: published','status: draft'));
++ if(mode==='receipt')f.put(f.currentPath,{...f.successor,correction:'Mutated after original frozen evidence.'});
++ if(mode==='forged-id'||mode==='missing-record'){if(mode==='forged-id')f.certificate.ordinary_published_baseline_exclusions.entries[0].id=consumer;else delete f.certificate.ordinary_published_baseline_exclusions;delete f.certificate.sha256;f.certificate.sha256=hash(f.certificate);f.put(join(dir,'certification.json'),f.certificate);}
++ if(mode==='unlicensed-published')f.put(`items/${consumer}.md`,f.draft.replace('status: draft','status: published'));
++ if(mode==='deletion')rmSync(join(f.root,`items/${id}.md`));
++ const r=f.guard();assert.equal(r.status,1,r.stdout+r.stderr);assert.ok(JSON.parse(r.stdout).errors.length>0);
++});
+--- a/tools/large-piped-json-output.test.mjs
++++ b/tools/large-piped-json-output.test.mjs
+@@ -0,0 +1,35 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,copyFileSync,rmSync,existsSync} from 'node:fs';
++import {tmpdir} from 'node:os';
++import {join,dirname,resolve} from 'node:path';
++import {spawn} from 'node:child_process';
++const tools=dirname(new URL(import.meta.url).pathname);
++function fixture(t,entry){
++ const root=mkdtempSync(join(tmpdir(),'large-gate-json-'));t.after(()=>rmSync(root,{recursive:true,force:true}));for(const d of ['tools','items','library','research'])mkdirSync(join(root,d));
++ const copied=new Set(),copy=name=>{if(copied.has(name))return;copied.add(name);const src=join(tools,name),target=join(root,'tools',name);mkdirSync(dirname(target),{recursive:true});copyFileSync(src,target);for(const m of readFileSync(src,'utf8').matchAll(/(?:from\s*|import\s*)['"](\.[^'"]+)['"]/g)){const child=resolve(dirname(src),m[1]);if(existsSync(child))copy(child.slice(tools.length+1));}};copy(entry);return root;
++}
++// Delay consumption until the child encounters backpressure. This is the real
++// pipe behavior behind truncated native JSON, not a text-format snapshot test.
++async function piped(root,entry,args=[]){
++ return await new Promise((resolve,reject)=>{const child=spawn(process.execPath,[join(root,'tools',entry),...args],{cwd:root,stdio:['ignore','pipe','pipe']});let stdout='',stderr='';child.on('error',reject);child.stderr.on('data',b=>stderr+=b);setTimeout(()=>child.stdout.on('data',b=>stdout+=b),60);child.on('close',code=>resolve({code,stdout,stderr}));});
++}
++const source=(id,deps=[])=>`---\nid: ${id}\nkind: lemma\nstatus: draft\ndeps: ${JSON.stringify(deps)}\n---\n\n## Statement\n\nA complete synthetic fixture assertion.\n`;
++test('large depcheck success and error JSON both drain fully through a backpressured native-style pipe',async t=>{
++ const root=fixture(t,'depcheck.mjs'),ids=Array.from({length:3000},(_,i)=>`lem-json-${i}-`+'long-name-'.repeat(15)+'end');
++ for(const id of ids)writeFileSync(join(root,'items',id+'.md'),source(id));writeFileSync(join(root,'scope.json'),JSON.stringify(ids));
++ for(const failed of [false,true]){if(failed)writeFileSync(join(root,'items',ids.at(-1)+'.md'),source(ids.at(-1),['lem-missing-prerequisite']));const r=await piped(root,'depcheck.mjs',['--json','--items-file','scope.json']);assert.equal(r.stderr,'');assert.equal(r.code,failed?1:0);assert.ok(r.stdout.length>400000);const doc=JSON.parse(r.stdout);assert.equal(doc.summary.item_checks.length,ids.length);assert.equal(doc.summary.item_checks.includes(ids.at(-1)),true);assert.equal(doc.summary.errors,failed?1:0);if(failed)assert.equal(doc.errors[0].code,'dep-unresolved');}
++});
++test('large extcheck failure JSON retains every forbidden external dependency',async t=>{
++ const root=fixture(t,'extcheck.mjs'),ids=Array.from({length:5000},(_,i)=>`lem-external-${i}-`+'long-name-'.repeat(8)+'end');writeFileSync(join(root,'items','lem-consumer.md'),source('lem-consumer').replace('deps: []',`deps: []\nexternal_refs: ${JSON.stringify(ids)}`));const r=await piped(root,'extcheck.mjs',['--json']);assert.equal(r.stderr,'');assert.equal(r.code,1);assert.ok(r.stdout.length>500000);const doc=JSON.parse(r.stdout);assert.equal(doc.errors.filter(r=>r.code==='external-dangling').length,ids.length);assert.ok(doc.errors.some(r=>r.msg.includes(ids.at(-1))));
++});
++test('large citation advisory and strict-error JSON keep every exact diagnostic',async t=>{
++ const root=fixture(t,'citation-fidelity.mjs');for(const id of ['lem-consumer','lem-supplier'])writeFileSync(join(root,'items',id+'.md'),source(id));const citations=Array.from({length:6000},(_,i)=>({fact:'F'+i,source:'lem-supplier',source_section:'Statement',quote:`Missing exact fixture excerpt ${i} `+'detailed '.repeat(15)}));writeFileSync(join(root,'contracts.json'),JSON.stringify({contracts:{'lem-consumer':{citations}}}));
++ for(const strict of [false,true]){const r=await piped(root,'citation-fidelity.mjs',['contracts.json','--json',...(strict?['--fail-on-missing-quote']:[])]);assert.equal(r.stderr,'');assert.equal(r.code,strict?1:0);assert.ok(r.stdout.length>1000000);const doc=JSON.parse(r.stdout);assert.equal(doc.quote_not_found.length,citations.length);assert.equal(doc.quote_not_found.at(-1).fact,'F5999');}
++});
++test('large finite-smoke failure JSON keeps all errors without invoking any mathematical checker',async t=>{
++ const root=fixture(t,'finite-smoke.mjs'),finite_smoke=Array.from({length:8000},(_,i)=>({check:'deliberately-unknown-'+i+'-'+'detail-'.repeat(10)}));writeFileSync(join(root,'contracts.json'),JSON.stringify({version:1,scope:['lem-consumer'],contracts:{'lem-consumer':{finite_smoke}}}));const r=await piped(root,'finite-smoke.mjs',['contracts.json','--json']);assert.equal(r.stderr,'');assert.equal(r.code,1);assert.ok(r.stdout.length>1000000);const doc=JSON.parse(r.stdout);assert.equal(doc.errors.length,finite_smoke.length);assert.ok(doc.errors.at(-1).message.includes('7999'));assert.deepEqual(doc.outcomes,[]);
++});
++for(const mode of ['unreadable','bad-shape','empty-success'])test(`finite-smoke flush change preserves ${mode} control flow and exit predicate`,async t=>{
++ const root=fixture(t,'finite-smoke.mjs');writeFileSync(join(root,'contracts.json'),mode==='unreadable'?'not JSON':JSON.stringify(mode==='bad-shape'?null:{version:1,scope:[],contracts:{}}));const r=await piped(root,'finite-smoke.mjs',['contracts.json','--json']);assert.equal(r.stderr,'');assert.equal(r.code,mode==='empty-success'?0:1);const doc=JSON.parse(r.stdout);assert.equal(doc.errors.length,mode==='empty-success'?0:1);if(mode!=='empty-success')assert.equal(doc.errors[0].code,mode==='unreadable'?'contract-read':'contract-shape');
++});
+--- a/tools/gate-json-output.md
++++ b/tools/gate-json-output.md
+@@ -0,0 +1,25 @@
++# Complete piped gate reports and historical ordinary guard exclusions
++
++Gate JSON is machine input. `runGate` transports complete stdout to the strict
++frontier projector. The reporter may bound the human-facing event `output`, while
++`rawOutput` and structured frontier diagnostics retain complete evidence. Never
++parse an intentionally shortened display as if it were the original JSON or
++turn an unreadable document into a pass.
++
++Validators must let stdout/stderr drain after emitting a report. An immediate
++`process.exit()` can truncate even a successful multi-megabyte JSON document in
++a native pipe. Terminal report paths use `process.exitCode` with the identical
++exit predicate. Finite-smoke's early read/shape errors return after emitting one
++report, preserving original control flow; its self-test path remains separate.
++Usage/runtime failures remain strict. No JSON parser or scope partition is relaxed.
++The backpressure fixtures exercise complete success/advisory/error JSON from all
++four formerly affected producers, including every final diagnostic and exit code.
++
++The Step5 guard also honors the exact historical ordinary-published exclusion
++contract already enforced by verifyWave/checkWorkflow. It revalidates that typed
++record against current bytes and original authenticated publication/native
++history. These baseline changes receive no new native review/audit license and
++are counted separately from centralized native certification. No blanket
++published skip is introduced. Unknown or later changed published items, invalid
++receipts, forged exclusions and deletions still fail. Frozen scope, source/context
++checks, prerequisites, ordinary consumer reviews and gates remain unchanged.
+--- a/tools/depcheck.mjs
++++ b/tools/depcheck.mjs
+@@ -587,4 +587,5 @@
+   }
+ }
+ 
+-process.exit(errors.length ? 1 : 0);
++// Let the complete piped report drain; strict exit semantics remain unchanged.
++process.exitCode = errors.length ? 1 : 0;
+--- a/tools/citation-fidelity.mjs
++++ b/tools/citation-fidelity.mjs
+@@ -277,4 +277,5 @@
+   console.log('\nEvery line above is a candidate for a human read, not a verdict.');
+ }
+ 
+-process.exit(failOnMissingQuote && missingQuotes.length ? 1 : 0);
++// Let the complete piped report drain; strict exit semantics remain unchanged.
++process.exitCode = failOnMissingQuote && missingQuotes.length ? 1 : 0;
+--- a/tools/extcheck.mjs
++++ b/tools/extcheck.mjs
+@@ -384,4 +384,5 @@
+   }
+ }
+ 
+-process.exit(errors.length ? 1 : 0);
++// Let the complete piped report drain; strict exit semantics remain unchanged.
++process.exitCode = errors.length ? 1 : 0;
+--- a/tools/step5-guard.mjs
++++ b/tools/step5-guard.mjs
+@@ -41,6 +41,7 @@
+ import { permittedNewLemmas } from './step5-new-lemmas.mjs';
+ import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
+ import { frontmatterList } from './frontmatter-list.mjs';
++import { verifyInitialPublishedBaselineExclusions } from './step5-initial-published-maintenance.mjs';
+ import { checkWorkflow, workflowDir } from './step5-workflow.mjs';
+ import { validateFrontier } from './step5-rounds.mjs';
+ 
+@@ -139,7 +140,7 @@
+   const deleted = Object.keys(baseline.hashes ?? {}).filter(id => !Object.hasOwn(now, id));
+   const excluded = { changed: [], created: [], deleted: [], reason: 'Outside frozen frontier: observed, excluded from Step-5 certification, not passed' };
+   let scopedChanged = [], scopedCreated = [], scopedDeleted = [];
+-  let licensed = 0;
++  let licensed = 0, historicalOrdinary = 0;
+   try {
+     const frontier = validateFrontier(JSON.parse(readFileSync(join(workflowDirectory, 'frontier.json'), 'utf8')));
+     if (frontier.run !== workflowScope.run
+@@ -183,8 +184,14 @@
+     if (JSON.stringify(Object.keys(original).sort()) !== JSON.stringify(Object.keys(baseline.hashes ?? {}).sort())
+       || Object.entries(original).some(([id, hash]) => !/^[a-f0-9]{64}$/.test(hash) || shortHash(hash) !== baseline.hashes[id]))
+       throw Error('workflow baseline does not exactly match the original touchlog baseline');
++    // The same exact historical contract used by verifyWave; never a blanket
++    // published skip, a native review, or a license for later source changes.
++    verifyInitialPublishedBaselineExclusions(workflowRoot,workflowScope.run,certificate,{current:true});
++    const ordinaryPublished = new Map((certificate.ordinary_published_baseline_exclusions?.entries??[]).map(row=>[row.id,row]));
+     const certified = new Map(certificate.items.map(row => [row.id, row]));
++
+     for (const id of scopedChanged) {
++      if (shortHash(ordinaryPublished.get(id)?.guard_sha256 ?? '') === now[id]) { historicalOrdinary++; continue; }
+       if (shortHash(certified.get(id)?.guard_sha256 ?? '') !== now[id])
+         error('step5-certification-unlicensed', `${id}: changed item lacks an exact current centralized certification`, id);
+       else licensed++;
+@@ -200,6 +207,7 @@
+   const summary = { baseline: baselineLabel, baseline_at: baseline.at ?? null,
+     compared_against: againstLabel ?? 'working tree', items_at_baseline: Object.keys(baseline.hashes ?? {}).length,
+     changed: changed.length, licensed_by_centralized_certification: licensed,
++    historical_ordinary_published_exclusions: historicalOrdinary,
+     frontier_changed: scopedChanged.length, frontier_created: scopedCreated.length,
+     protected_deleted: scopedDeleted.length,
+     excluded_outside: excluded.changed.length + excluded.created.length + excluded.deleted.length,
+@@ -208,10 +216,11 @@
+   else {
+     console.log(`step5-guard: baseline "${baselineLabel}" vs ${summary.compared_against}`);
+     console.log(`  ${summary.items_at_baseline} item(s) at baseline; ${changed.length} changed, ${created.length} created, ${deleted.length} deleted`);
+-    console.log(`  ${licensed}/${scopedChanged.length + scopedCreated.length} frontier changed/created item(s) licensed by centralized Step-5 certification`);
++    console.log(`  ${licensed}/${scopedChanged.length + scopedCreated.length - historicalOrdinary} current native frontier changed/created item(s) licensed by centralized Step-5 certification`);
++    if(historicalOrdinary)console.log(`  ${historicalOrdinary} exact historical ordinary-published baseline change(s); no native review/audit credit`);
+     console.log(`  Outside observations excluded, not passed: ${JSON.stringify(excluded)}`);
+     for (const entry of errors) console.log(`  ERROR ${entry.code}: ${entry.message}`);
+-    console.log(errors.length ? `FAIL — ${errors.length} error(s)` : 'OK — every frontier Step-5 edit has exact centralized certification');
++    console.log(errors.length ? `FAIL — ${errors.length} error(s)` : 'OK — frontier edits have exact certification or authenticated historical ordinary maintenance');
+   }
+   process.exit(errors.length ? 1 : 0);
+ }

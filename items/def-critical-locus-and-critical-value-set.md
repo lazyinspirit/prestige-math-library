@@ -3,6 +3,7 @@ id: def-critical-locus-and-critical-value-set
 kind: definition
 title: "The critical locus and critical value set"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: literature-derived
@@ -12,12 +13,12 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-09-01
   precheck: n/a
   judge:
-    model: "gpt-5.6-terra"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-31
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/def-critical-locus-and-critical-value-set.json
 sources:
   scraped: []
   references:

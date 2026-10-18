@@ -1,8 +1,9 @@
 ---
 id: thm-monotone-discontinuities-are-jumps
 kind: theorem
-title: "A monotone function on an interval has no discontinuity of the second kind: at every point both relevant one-sided limits exist, and an interior point $c$ is a discontinuity exactly when $\\lim_{x \\to c^{-}} f(x) < \\lim_{x \\to c^{+}} f(x)$"
+title: "Monotone functions have every relevant finite one-sided limit; interior discontinuities are jumps, with side limits ordered by the direction of monotonicity"
 status: published
+dependency_level: 2
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,7 @@ landmark: false
 short: "monotone discontinuities are jumps"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/thm-monotone-discontinuities-are-jumps.json
 sources:
   scraped: []
   references:
@@ -51,10 +47,17 @@ $I^{-} = I \cap (-\infty,c)$ and $I^{+} = I \cap (c,\infty)$ for $c \in I$.
    and every such discontinuity is a **jump**, of jump
    $\lim_{x \to c^{+}} f(x) - \lim_{x \to c^{-}} f(x) > 0$.
 
-The same three claims hold for a nonincreasing $f$, with the two one-sided
-limits exchanged and all inequalities reversed, by applying the above to $-f$,
-which is nondecreasing ([[def-monotone-function]]) and has exactly the same
-points of continuity, since $|(-f)(x) - (-f)(c)| = |f(x) - f(c)|$.
+For a nonincreasing $f$, every well-posed one-sided limit likewise exists,
+and at an interior point the side labels stay fixed while the order reverses:
+$\lim_{x \to c^{-}} f(x) \ge f(c) \ge \lim_{x \to c^{+}} f(x)$.
+Continuity is still equivalent to equality of the two limits. An interior
+discontinuity is therefore a jump exactly when
+$\lim_{x \to c^{-}} f(x)>\lim_{x \to c^{+}} f(x)$, with signed jump
+$\lim_{x \to c^{+}} f(x)-\lim_{x \to c^{-}} f(x)<0$. Apply the
+nondecreasing claims to $-f$: negation preserves the side of a limit and
+negates its value, and preserves continuity because
+$|(-f)(x)-(-f)(c)|=|f(x)-f(c)|$ ([[def-monotone-function]],
+[[def-one-sided-limits]]).
 
 **A point of $I$ that is not interior is an endpoint, and there are at most
 two.** $I^{-} = \varnothing$ says that $c$ is a least element of $I$ and
@@ -94,6 +97,6 @@ comparison of two one-sided limits is not available there; claim 1 covers them.
 
 ## Remarks
 
-- **Nothing here counts the discontinuities.** Claim 3 says only what a discontinuity of a monotone function looks like at an interior point. That the set of them is at most countable is a further theorem, [[thm-froda]], and its proof is exactly the observation that the open intervals $(\lim_{x \to c^{-}} f(x), \lim_{x \to c^{+}} f(x))$ attached to distinct discontinuities are disjoint.
+- **Nothing here counts the discontinuities.** Claim 3 says only what a discontinuity of a monotone function looks like at an interior point. That the set of them is at most countable is a further theorem, [[thm-froda]], and in the nondecreasing case its proof is exactly the observation that the open intervals $(\lim_{x \to c^{-}} f(x), \lim_{x \to c^{+}} f(x))$ attached to distinct discontinuities are disjoint.
 
 - **Why no interior discontinuity of a monotone function is removable.** Claim 2 rules them out at interior points: there $L^{-} = L^{+}$ already forces continuity, because the inequality $L^{-} \le f(c) \le L^{+}$ pins $f(c)$ between the two one-sided values. That inequality is special to monotone functions, and it is what makes *jump* the only kind of interior discontinuity available. At a point of $I$ that is not interior the inequality is one-sided too and the argument does not apply, so a monotone function may fail to be continuous at an endpoint of $I$ while having its one one-sided limit; that failure is a discontinuity of the first kind and it is not a jump, there being only one side to compare.

@@ -1,0 +1,330 @@
+[
+  {
+    "order": 2522,
+    "id": "point-to-point-source-channel-separation",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Point-to-Point Source–Channel Separation",
+    "companion": "point-to-point-source-channel-separation-examples",
+    "requires": [
+      "discrete-memoryless-channel-capacity",
+      "rate-distortion-and-lossy-source-coding"
+    ],
+    "items": [
+      {
+        "id": "def-it-point-to-point-joint-source-channel-code",
+        "kind": "definition",
+        "title": "Finite-alphabet point-to-point joint source-channel codes",
+        "statement": "Defines a deterministic block encoder from a finite IID source block to a finite DMC input block and a deterministic decoder from the channel output block to a finite reproduction block; fixes the source-symbol/channel-use ratio and distinguishes lossless, expected-distortion, and positive-slack excess-distortion criteria.",
+        "strategy": "Specify finite alphabets, source law, DMC transition law, deterministic maps, induced block law, blocklength ratio, and distinct performance criteria.",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-it-single-letter-distortion-and-block-distortion"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, MIT OpenCourseWare 6.441 Information Theory, Chapter 20: Advanced Channel Coding and Source-Channel Separation",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/dfddd4345fee8dd49420be583be2b952_MIT6_441S16_chapter_20.pdf"
+            },
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, author-hosted full text",
+              "url": "https://ee.stanford.edu/~gray/it.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; all source, channel, and reproduction alphabets are finite."
+      },
+      {
+        "id": "lem-it-finite-iid-source-lossless-code-achievability",
+        "kind": "lemma",
+        "title": "Finite-IID lossless source coding above entropy",
+        "statement": "For a finite IID source with entropy H in nats and every rate R>H, constructs deterministic fixed-length source codes with block error tending to zero and limiting superior log-message rate below R.",
+        "strategy": "Use the finite-alphabet self-information typical set, Chebyshev's inequality proved by a pointwise square bound, a typical-set cardinality estimate, and a deterministic injective labeling.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Show the empirical self-information exceeds H+delta with probability tending to zero, directly from the finite variance and the pointwise square bound.",
+          "Bound the typical-set cardinality by exp(k(H+delta)).",
+          "Construct a deterministic fixed-length encoder/decoder with error at most the atypical probability and rate below R."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, MIT OpenCourseWare 6.441 Information Theory, Chapter 20: Advanced Channel Coding and Source-Channel Separation",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/dfddd4345fee8dd49420be583be2b952_MIT6_441S16_chapter_20.pdf"
+            },
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, author-hosted full text",
+              "url": "https://ee.stanford.edu/~gray/it.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the typical sets and all codebooks are finite."
+      },
+      {
+        "id": "lem-it-finite-iid-rate-distortion-mutual-information-bound",
+        "kind": "lemma",
+        "title": "Finite-IID rate-distortion mutual-information converse",
+        "statement": "For an IID finite-alphabet source and any finite block reconstruction with expected distortion D_k, proves ln(2) times the single-letter information rate-distortion value in bits is at most k^{-1} I(S^k;S-hat^k) in nats, by finite time-sharing and chain-rule single-letterization.",
+        "strategy": "Use the conditional reproduction test channel, the IID chain rule, coordinate projections, a uniform time-sharing index, and explicit bit-to-nat conversion.",
+        "deps": [
+          "def-it-information-rate-distortion-function",
+          "def-it-single-letter-distortion-and-block-distortion",
+          "lem-it-finite-rate-distortion-minimum-attained",
+          "def-it-finite-mutual-information",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-information-unit-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Construct the single-letter conditional reproduction channel induced by a uniformly chosen coordinate, including arbitrary rows on zero-probability source letters.",
+          "Show each coordinate mutual information is bounded by the corresponding chain-rule term using IID independence and nonnegative conditional mutual information.",
+          "Show mutual information of the time-shared pair is no larger than the average coordinate mutual information.",
+          "Apply the feasible-test-channel definition and convert bits to nats."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, MIT OpenCourseWare 6.441 Information Theory, Chapter 20: Advanced Channel Coding and Source-Channel Separation",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/dfddd4345fee8dd49420be583be2b952_MIT6_441S16_chapter_20.pdf"
+            },
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, author-hosted full text",
+              "url": "https://ee.stanford.edu/~gray/it.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all alphabets, conditional laws, and time-sharing variables are finite."
+      },
+      {
+        "id": "thm-it-point-to-point-lossless-source-channel-separation",
+        "kind": "theorem",
+        "title": "Lossless separation for finite IID sources and finite DMCs",
+        "statement": "For a finite IID source of entropy H nats, a finite DMC of capacity C nats/use, and channel-use ratio rho, reliable lossless transmission is achievable if H<rho C (and trivially if H=0); every reliable sequence must satisfy H<=rho C. No positive-entropy equality case is asserted.",
+        "strategy": "Compose a typical-set source compressor with maximal-error DMC codes for achievability; use finite Markov data processing, the n-letter DMC information bound, and Fano's inequality for the converse.",
+        "deps": [
+          "def-it-point-to-point-joint-source-channel-code",
+          "lem-it-finite-iid-source-lossless-code-achievability",
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-discrete-memoryless-channel-operational-capacity",
+          "thm-discrete-memoryless-channel-capacity-formula",
+          "lem-discrete-memoryless-channel-n-letter-information-bound",
+          "thm-it-fano-inequality",
+          "thm-it-finite-markov-data-processing",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Handle the zero-entropy source with a constant decoder, including a zero-capacity channel.",
+          "Choose a source-code rate and maximal-error channel-code rate with strict margin below rho C, align them along the prescribed blocklength sequence, and bound the composite error without assuming a uniform source-code index.",
+          "Apply Fano's inequality to the source block and bound the information across the DMC by nC.",
+          "State explicitly that the positive-entropy equality boundary is not decided."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, MIT OpenCourseWare 6.441 Information Theory, Chapter 20: Advanced Channel Coding and Source-Channel Separation",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/dfddd4345fee8dd49420be583be2b952_MIT6_441S16_chapter_20.pdf"
+            },
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, author-hosted full text",
+              "url": "https://ee.stanford.edu/~gray/it.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all alphabets and codebooks are finite."
+      },
+      {
+        "id": "thm-it-point-to-point-lossy-source-channel-separation",
+        "kind": "theorem",
+        "title": "Lossy separation for finite IID sources and finite DMCs",
+        "statement": "For a finite IID source, finite reproduction alphabet, bounded finite distortion, feasible D, finite DMC capacity C nats/use, and channel-use ratio rho, let r(D)=ln(2)R(D) be the finite information rate-distortion function converted from bits to nats. Expected distortion and positive-slack excess-distortion criteria are separately achievable if r(D)<rho C, and either criterion implies r(D)<=rho C. If R(D)=0 a constant-reproduction code achieves both criteria; the positive-rate equality boundary is not asserted.",
+        "strategy": "Use the finite-alphabet rate-distortion coding theorem and maximal-error channel codes for achievability; use the local single-letter mutual-information converse, the n-letter DMC information bound, bounded distortion, monotonicity, and right-continuity for the converse.",
+        "deps": [
+          "def-it-point-to-point-joint-source-channel-code",
+          "def-it-information-rate-distortion-function",
+          "def-it-operational-rate-distortion-function",
+          "def-it-single-letter-distortion-and-block-distortion",
+          "lem-it-finite-rate-distortion-minimum-attained",
+          "lem-it-rate-distortion-convexity-and-monotonicity",
+          "thm-it-finite-alphabet-rate-distortion-coding-theorem",
+          "lem-it-finite-iid-rate-distortion-mutual-information-bound",
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-discrete-memoryless-channel-operational-capacity",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "thm-discrete-memoryless-channel-capacity-formula",
+          "lem-discrete-memoryless-channel-n-letter-information-bound",
+          "thm-it-finite-markov-data-processing",
+          "thm-it-finite-entropy-chain-rule",
+          "def-it-finite-mutual-information",
+          "thm-it-finite-kl-nonnegative-equality",
+          "thm-it-information-unit-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Treat the zero-rate RDF case by constructing an independent zero-information test channel and a constant reproduction whose expected distortion is at most D.",
+          "For positive RDF strictly below rho C, choose a source-code rate and a maximal-error channel-code rate with strict margin, then align the blocklengths.",
+          "Bound composed expected distortion by the source-code distortion plus d_max times maximal channel error; bound excess probability by a source excess event plus channel error.",
+          "Single-letterize arbitrary block mutual information using the local IID time-sharing lemma and compare it with nC.",
+          "Use bounded distortion to pass from positive-slack excess probability to an expected-distortion bound, then use right-continuity at D."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, MIT OpenCourseWare 6.441 Information Theory, Chapter 20: Advanced Channel Coding and Source-Channel Separation",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/dfddd4345fee8dd49420be583be2b952_MIT6_441S16_chapter_20.pdf"
+            },
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, author-hosted full text",
+              "url": "https://ee.stanford.edu/~gray/it.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all alphabets, conditional laws, and codebooks are finite."
+      }
+    ],
+    "summary": "Define deterministic finite-alphabet joint source-channel block codes and prove lossless and lossy asymptotic separation for finite IID sources, finite DMCs, and feasible rate-distortion budgets. Use maximal-error channel codes because the compressed source index is generally nonuniform. Bounded distortion controls channel-error cost; positive-slack excess distortion remains distinct from expected distortion. No finite-block, zero-delay, or universal matching claim is made.",
+    "scaffold": "research/plan-information-theory-track.md"
+  },
+  {
+    "order": 2523,
+    "id": "point-to-point-source-channel-separation-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Point-to-Point Source–Channel Separation — Examples",
+    "companion": "point-to-point-source-channel-separation",
+    "requires": [
+      "point-to-point-source-channel-separation"
+    ],
+    "items": [
+      {
+        "id": "ex-it-point-to-point-source-channel-rate-budget",
+        "kind": "example",
+        "title": "A finite-alphabet source-channel rate budget",
+        "statement": "For an IID Bernoulli(1/4) source and a BSC(1/4), computes the exact source entropy and channel capacity and verifies that five channel uses per source symbol give a strict asymptotic lossless margin.",
+        "deps": [
+          "thm-it-point-to-point-lossless-source-channel-separation",
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-capacity",
+          "thm-discrete-memoryless-channel-capacity-formula",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "thm-it-finite-entropy-chain-rule",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-it-finite-kl-nonnegative-equality"
+        ],
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Compute I(X;Y) for an arbitrary Bernoulli input to the BSC and maximize it using finite KL nonnegativity.",
+          "Evaluate the source entropy and capacity exactly at crossover/source parameter 1/4.",
+          "Verify the strict rate inequality at ratio five by an exact integer comparison."
+        ],
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, MIT OpenCourseWare 6.441 Information Theory, Chapter 20: Advanced Channel Coding and Source-Channel Separation",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/dfddd4345fee8dd49420be583be2b952_MIT6_441S16_chapter_20.pdf"
+            },
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, author-hosted full text",
+              "url": "https://ee.stanford.edu/~gray/it.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all entropy and capacity calculations are finite.",
+        "justified_by": []
+      },
+      {
+        "id": "cex-it-asymptotic-source-channel-threshold-does-not-give-zero-error-at-finite-blocklength",
+        "kind": "counterexample",
+        "title": "Strict asymptotic separation need not give zero finite-block error",
+        "statement": "Refutes the claim that a strict entropy-capacity inequality guarantees a zero-error code at each finite blocklength ratio: a uniform binary source over a full-support BSC has positive error under every finite deterministic code, even when the asymptotic threshold is strict.",
+        "deps": [
+          "def-it-point-to-point-joint-source-channel-code",
+          "thm-it-point-to-point-lossless-source-channel-separation",
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-capacity",
+          "thm-discrete-memoryless-channel-capacity-formula",
+          "thm-it-finite-entropy-chain-rule",
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-mutual-information",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-it-finite-kl-nonnegative-equality"
+        ],
+        "dependency_level": 10,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Compute the exact positive entropy-capacity gap for the Bernoulli(1/2), BSC(1/4), six-use model.",
+          "For every finite deterministic code, exhibit a positive-probability source/output event on which the decoder is wrong, using full support of the BSC.",
+          "Separate the asymptotic reliability conclusion from finite-block zero error."
+        ],
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy, MIT OpenCourseWare 6.441 Information Theory, Chapter 20: Advanced Channel Coding and Source-Channel Separation",
+              "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/dfddd4345fee8dd49420be583be2b952_MIT6_441S16_chapter_20.pdf"
+            },
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, author-hosted full text",
+              "url": "https://ee.stanford.edu/~gray/it.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the source and channel alphabets are finite.",
+        "justified_by": []
+      }
+    ],
+    "summary": "Calculate a finite rate budget and exhibit why the asymptotic threshold does not promise zero-error finite-block or zero-delay performance.",
+    "scaffold": "research/plan-information-theory-track.md"
+  }
+]

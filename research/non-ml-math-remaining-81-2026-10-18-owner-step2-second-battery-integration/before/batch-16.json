@@ -1,0 +1,1302 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-it-finite-conditional-entropy-continuity",
+    "lem-it-conditional-type-class-cardinality",
+    "lem-it-multisource-block-conditional-law-factorization",
+    "lem-it-multisource-typicality-probability",
+    "lem-it-conditional-typical-fan-cardinality",
+    "thm-it-slepian-wolf-rate-region",
+    "ex-it-binary-symmetric-slepian-wolf-region",
+    "ex-it-shared-random-binning-collision-probability"
+  ],
+  "contracts": {
+    "lem-it-finite-conditional-entropy-continuity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-finite-marginals-and-conditionals-are-pmfs",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal U,\\mathcal V$ be finite nonempty alphabets and let $p_{UV}(u,v)\\ge0$ satisfy $\\sum_{u,v}p_{UV}(u,v)=1$. Define $p_U(u)=\\sum_vp_{UV}(u,v)$ and $p_V(v)=\\sum_up_{UV}(u,v)$. Then both marginals are probability vectors. For each $v$ with $p_V(v)>0$, the conditional vector $p_{U|v}(u):=p_{UV}(u,v)/p_V(v)$ is a probability vector; likewise for conditioning on positive-mass $u$. Consequently, if $p_{UVW}$ is a finite joint pmf, then for every $w$ with $p_W(w)>0$, $p_{UV|w}$ and its two marginals are probability vectors.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-finite-relative-entropy-continuity-on-simplex",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be finite and let $p$ be a probability vector with $p(a)>0$ for every $a\\in\\mathcal A$. Then $q\\mapsto D(q\\|p)$ is finite and continuous on the probability simplex $\\Delta(\\mathcal A)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Let $r$ be a probability vector on an alphabet of size $m\\ge1$, and let $u_m$ be the uniform vector. Expanding the finite sum in [F3] gives $D(r\\Vert u_m)=\\ln m-H(r)$, including zero coordinates by the stated convention. Since $u_m$ has full support, [F4] shows that $r\\mapsto D(r\\Vert u_m)$ is continuous. Therefore finite entropy is continuous on every finite simplex.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For any joint vector $q_{UV}$, [F1] and [F2] give $H_q(U\\mid V)=-\\sum_{(u,v):q_{UV}(u,v)>0}q_{UV}(u,v)\\ln\\frac{q_{UV}(u,v)}{q_V(v)}=H(q_{UV})-H(q_V)$. The ratio is defined on every positive joint atom because then $q_V(v)>0$. The marginal map $q_{UV}\\mapsto q_V$ is linear. By step 1.1, both terms on the right are continuous functions of $q_{UV}$, so their difference is continuous on the joint simplex.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires finite nonempty alphabets, so an empty alphabet is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement requires finite nonempty alphabets, so an empty alphabet is excluded. Independent item review: Entropy is H(qUV)-H(qV); uniform-reference KL proves continuity even at zero coordinates (1.1,2.1).",
+            "item_sha256": "e6bbac0a1f58f1fdab571448f4d0b0207bffb5d779d24baaee9875ef28d9a887",
+            "row_sha256": "d1d9850135e89f1c7082f3de4c73a23de9270ace14ffb012b4cc51fc1d4bfe2c"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the zero-coordinate entropy convention and establish continuity on the whole simplex, including its boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly allows alphabet size m=1, where the uniform vector is still defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 establish continuity at simplex vertices as well as interior points."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include boundary joint laws with zero coordinates."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use finite sums and a fixed uniform vector; no arbitrary selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an iff claim. Independent item review: Entropy is H(qUV)-H(qV); uniform-reference KL proves continuity even at zero coordinates (1.1,2.1).",
+            "item_sha256": "e6bbac0a1f58f1fdab571448f4d0b0207bffb5d779d24baaee9875ef28d9a887",
+            "row_sha256": "34eb67a4b04128866b44e8d9765cd7c3948081295582ac860ec103a98d4b1954"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement is not an iff claim. Independent item review: Entropy is H(qUV)-H(qV); uniform-reference KL proves continuity even at zero coordinates (1.1,2.1).",
+            "item_sha256": "e6bbac0a1f58f1fdab571448f4d0b0207bffb5d779d24baaee9875ef28d9a887",
+            "row_sha256": "b80a08bae6b182f58d634d4c3146e3b39d3b859b6e67aa116ed992896d420f42"
+          }
+        }
+      ]
+    },
+    "lem-it-conditional-type-class-cardinality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet and let $n\\ge1$. A word of length $n$ is $x^n=(x_1,\\ldots,x_n)\\in\\mathcal A^n$. For $a\\in\\mathcal A$, define its count and empirical type by\n$$N(a\\mid x^n):=\\#\\{i\\in\\{1,\\ldots,n\\}:x_i=a\\},\\qquad \\widehat P_{x^n}(a):=\\frac{N(a\\mid x^n)}n.$$\nEvery position contributes to exactly one count, so the coordinates of $\\widehat P_{x^n}$ are nonnegative and sum to one; it is a probability vector in the sense of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. The **set of $n$-types** is $\\mathcal P_n(\\mathcal A):=\\{\\widehat P_{x^n}:x^n\\in\\mathcal A^n\\}$. Thus $q\\in\\mathcal P_n(\\mathcal A)$ exactly when every $nq(a)$ is a nonnegative integer and $\\sum_a nq(a)=n$: the converse is obtained by arranging the prescribed finite number of copies of each letter. For $q\\in\\mathcal P_n(\\mathcal A)$, its **type class** is\n$$T_q:=\\{x^n\\in\\mathcal A^n:\\widehat P_{x^n}=q\\}.$$\nThe map $x^n\\mapsto\\widehat P_{x^n}$ has these type classes as its fibers.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-finite-marginals-and-conditionals-are-pmfs",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal U,\\mathcal V$ be finite nonempty alphabets and let $p_{UV}(u,v)\\ge0$ satisfy $\\sum_{u,v}p_{UV}(u,v)=1$. Define $p_U(u)=\\sum_vp_{UV}(u,v)$ and $p_V(v)=\\sum_up_{UV}(u,v)$. Then both marginals are probability vectors. For each $v$ with $p_V(v)>0$, the conditional vector $p_{U|v}(u):=p_{UV}(u,v)/p_V(v)$ is a probability vector; likewise for conditioning on positive-mass $u$. Consequently, if $p_{UVW}$ is a finite joint pmf, then for every $w$ with $p_W(w)>0$, $p_{UV|w}$ and its two marginals are probability vectors.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-it-type-class-cardinality-bounds",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be a finite alphabet of size $k\\ge1$, let $n\\ge1$, and let $q\\in\\mathcal P_n(\\mathcal A)$. With natural logarithms,\n$$(n+1)^{-(k-1)}e^{nH(q)}\\le |T_q|\\le e^{nH(q)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For each $v$ with $q_V(v)>0$, let $J_v:=\\{j:v_j=v\\}$. The sets $J_v$ partition the positions of $v^n$. A word $u^n$ has joint type $q$ with this fixed $v^n$ exactly when, within each $J_v$, it places $nq(u,v)$ copies of symbol $u$. These counts sum to $nq_V(v)=|J_v|$, and their ratios define the attainable type $q_{U\\mid v}$ of length $|J_v|$. Restriction to each $J_v$ gives a bijection from the joint-type fiber to the Cartesian product of these local type classes, so their cardinalities multiply and give the displayed product. Values with $q_V(v)=0$ have no positions and contribute factor $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Apply [F3] to each factor in step 1.1, with blocklength $nq_V(v)$, to get $|T_{q_{U\\mid v}}|\\le e^{nq_V(v)H(q_{U\\mid v})}$. Multiplying the finite bounds gives $\\exp(n\\sum_{v:q_V(v)>0}q_V(v)H(q_{U\\mid v}))$, which equals $e^{nH_q(U\\mid V)}$ by [F4] and [F5]. The omitted zero-mass rows contribute zero to the entropy sum.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The positive-mass v index set cannot be empty because qV sums to one. Omitted zero-mass rows have empty position sets and contribute the explicitly proved factor 1; empty alphabets and n=0 are excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The positive-mass v index set cannot be empty because qV sums to one. Omitted zero-mass rows have empty position sets and contribute the explicitly proved factor 1; empty alphabets and n=0 are excluded. Independent item review: The fiber factors over positive-mass v rows; zero-mass rows contribute factor 1 and nqV(v)>0 makes each retained blocklength positive (1.1,2.1).",
+            "item_sha256": "4e6116e2648bb2baeb9f542c0e9b769f3974e5f5e16b90e9349ed6ee62ac7a82",
+            "row_sha256": "8cd74f238f8a279fbcf1375181b0975b92b0234900d0055097f394e45f6b6ee0"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats q_V(v)=0 as an empty position set with factor 1; step 2.1 omits its zero entropy contribution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 apply to singleton alphabets and type classes of cardinality one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover types concentrated on a single joint symbol."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 allow zero type counts and omit their zero-mass rows."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs a finite Cartesian-product bijection and makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an iff claim. Independent item review: The fiber factors over positive-mass v rows; zero-mass rows contribute factor 1 and nqV(v)>0 makes each retained blocklength positive (1.1,2.1).",
+            "item_sha256": "4e6116e2648bb2baeb9f542c0e9b769f3974e5f5e16b90e9349ed6ee62ac7a82",
+            "row_sha256": "34eb67a4b04128866b44e8d9765cd7c3948081295582ac860ec103a98d4b1954"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement is not an iff claim. Independent item review: The fiber factors over positive-mass v rows; zero-mass rows contribute factor 1 and nqV(v)>0 makes each retained blocklength positive (1.1,2.1).",
+            "item_sha256": "4e6116e2648bb2baeb9f542c0e9b769f3974e5f5e16b90e9349ed6ee62ac7a82",
+            "row_sha256": "b80a08bae6b182f58d634d4c3146e3b39d3b859b6e67aa116ed992896d420f42"
+          }
+        }
+      ]
+    },
+    "lem-it-multisource-block-conditional-law-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-iid-multisource",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge2$ and finite nonempty alphabets $\\mathcal X_1,\\ldots,\\mathcal X_k$. Let $\\mathcal X:=\\prod_{i=1}^k\\mathcal X_i$, identified with a finite alphabet as in [[def-finite-alphabet-iid-source]]. A **finite-alphabet IID $k$-source** is an IID sequence of vectors\n$$Z_t=(X_{1,t},\\ldots,X_{k,t})\\in\\mathcal X,\\qquad t\\ge1,$$\nwith common joint probability vector $P$ on $\\mathcal X$. Thus for every $n\\ge1$ its block law is $P^{\\otimes n}$, and terminal $i$ observes $X_i^n=(X_{i,1},\\ldots,X_{i,n})$. For $S\\subseteq[k]:=\\{1,\\ldots,k\\}$ write $X_S=(X_i)_{i\\in S}$, let $S^c=[k]\\setminus S$, and define $H_P(X_S\\mid X_{S^c})$ by [[def-it-finite-conditional-entropy]] for the induced finite joint law. When $S=[k]$, $X_{S^c}$ takes values in the singleton empty product, so $H_P(X_S\\mid X_{S^c})=H(P)$ under [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Unmarked logarithms and information rates use nats by [[def-it-information-units-and-logarithm-base]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-it-finite-marginals-and-conditionals-are-pmfs",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal U,\\mathcal V$ be finite nonempty alphabets and let $p_{UV}(u,v)\\ge0$ satisfy $\\sum_{u,v}p_{UV}(u,v)=1$. Define $p_U(u)=\\sum_vp_{UV}(u,v)$ and $p_V(v)=\\sum_up_{UV}(u,v)$. Then both marginals are probability vectors. For each $v$ with $p_V(v)>0$, the conditional vector $p_{U|v}(u):=p_{UV}(u,v)/p_V(v)$ is a probability vector; likewise for conditioning on positive-mass $u$. Consequently, if $p_{UVW}$ is a finite joint pmf, then for every $w$ with $p_W(w)>0$, $p_{UV|w}$ and its two marginals are probability vectors.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For each coordinate $t$, support gives $P_{X_S,X_C}(x_{S,t},x_{C,t})>0$, and the finite marginal sum $P_{X_C}(x_{C,t})=\\sum_{x_S}P_{X_S,X_C}(x_S,x_{C,t})$ is therefore positive by [F3]. Summing the finite product law over all $x_S^n$ and distributing the finite sums gives $P^{\\otimes n}_{X_C^n}(x_C^n)=\\sum_{x_S^n}\\prod_{t=1}^nP_{X_S,X_C}(x_{S,t},x_{C,t})=\\prod_{t=1}^nP_{X_C}(x_{C,t})>0$. Thus the conditional block probability is defined by dividing its joint mass by this positive complement marginal.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Using [F1] for the numerator and step 1.1 for the denominator, that ratio is $\\frac{\\prod_{t=1}^nP_{X_S,X_C}(x_{S,t},x_{C,t})}{\\prod_{t=1}^nP_{X_C}(x_{C,t})}=\\prod_{t=1}^n\\frac{P_{X_S,X_C}(x_{S,t},x_{C,t})}{P_{X_C}(x_{C,t})}=\\prod_{t=1}^nP_{X_S\\mid X_C}(x_{S,t}\\mid x_{C,t})$, where each final factor is the conditional probability in [F2]. This proves the factorization.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "S is nonempty but C=S^c may be empty. Its product alphabet is a singleton, its marginal has mass one, and the conditional formula becomes the unconditional formula; the finite product/counting argument includes S=[k].",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: S is nonempty but C=S^c may be empty. Its product alphabet is a singleton, its marginal has mass one, and the conditional formula becomes the unconditional formula; the finite product/counting argument includes S=[k]. Independent item review: Finite distributivity factors the complement marginal and positivity of the supported joint word permits the coordinatewise ratios (1.1,2.1).",
+            "item_sha256": "8ad48aa860166ad1b4660adee53606eb8bce4c9afcd9604c2efb85cc470ca674",
+            "row_sha256": "ad6e7f351f97669dc958445fa1a719250113e7e2d69929c29f26007b71dfcd18"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses support to show each complement marginal is positive before division, including when unsupported pairs have zero mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover S=[k], where the complement alphabet is the singleton empty product."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 remain valid when the source is concentrated on one supported letter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no scalar endpoint parameter; the support restriction is handled directly in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use finite sums and products only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an iff claim. Independent item review: Finite distributivity factors the complement marginal and positivity of the supported joint word permits the coordinatewise ratios (1.1,2.1).",
+            "item_sha256": "8ad48aa860166ad1b4660adee53606eb8bce4c9afcd9604c2efb85cc470ca674",
+            "row_sha256": "34eb67a4b04128866b44e8d9765cd7c3948081295582ac860ec103a98d4b1954"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement is not an iff claim. Independent item review: Finite distributivity factors the complement marginal and positivity of the supported joint word permits the coordinatewise ratios (1.1,2.1).",
+            "item_sha256": "8ad48aa860166ad1b4660adee53606eb8bce4c9afcd9604c2efb85cc470ca674",
+            "row_sha256": "b80a08bae6b182f58d634d4c3146e3b39d3b859b6e67aa116ed992896d420f42"
+          }
+        }
+      ]
+    },
+    "lem-it-multisource-typicality-probability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-iid-multisource",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge2$ and finite nonempty alphabets $\\mathcal X_1,\\ldots,\\mathcal X_k$. Let $\\mathcal X:=\\prod_{i=1}^k\\mathcal X_i$, identified with a finite alphabet as in [[def-finite-alphabet-iid-source]]. A **finite-alphabet IID $k$-source** is an IID sequence of vectors\n$$Z_t=(X_{1,t},\\ldots,X_{k,t})\\in\\mathcal X,\\qquad t\\ge1,$$\nwith common joint probability vector $P$ on $\\mathcal X$. Thus for every $n\\ge1$ its block law is $P^{\\otimes n}$, and terminal $i$ observes $X_i^n=(X_{i,1},\\ldots,X_{i,n})$. For $S\\subseteq[k]:=\\{1,\\ldots,k\\}$ write $X_S=(X_i)_{i\\in S}$, let $S^c=[k]\\setminus S$, and define $H_P(X_S\\mid X_{S^c})$ by [[def-it-finite-conditional-entropy]] for the induced finite joint law. When $S=[k]$, $X_{S^c}$ takes values in the singleton empty product, so $H_P(X_S\\mid X_{S^c})=H(P)$ under [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Unmarked logarithms and information rates use nats by [[def-it-information-units-and-logarithm-base]].",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-jointly-typical-multisource-blocks",
+          "source_section": "Definition",
+          "quote": "Let $P$ and $Z_t=(X_{1,t},\\ldots,X_{k,t})$ be as in [[def-it-finite-iid-multisource]], and let $\\mathcal X_+:=\\{x\\in\\mathcal X:P(x)>0\\}$. For $z^n\\in\\mathcal X_+^n$, write $\\widehat P_{z^n}$ for its empirical type from [[def-it-empirical-type-and-type-class]], and write $I_n(z^n)$ for its normalized block information from [[def-finite-source-information-density-and-typical-set]] applied to the vector source on $\\mathcal X$. For each nonempty $S\\subseteq[k]$ and supported pair $(x_S^n,x_{S^c}^n)$, define the conditional block information\n$$J_{S,n}(x_S^n\\mid x_{S^c}^n):=-\\frac1n\\ln P^{\\otimes n}(x_S^n\\mid x_{S^c}^n),$$\nwhere the conditional probability is the finite conditional law of the block under $P^{\\otimes n}$. Its positive denominator and coordinatewise factorization on supported tuples are proved in [[lem-it-multisource-block-conditional-law-factorization]].\n\nFor $\\delta,\\epsilon>0$, the **jointly typical set** is\n$$\\mathcal T_n(P,\\delta,\\epsilon):=\\left\\{z^n\\in\\mathcal X_+^n:\\|\\widehat P_{z^n}-P\\|_\\infty\\le\\delta,\\ |I_n(z^n)-H(P)|\\le\\epsilon,\\ |J_{S,n}(x_S^n\\mid x_{S^c}^n)-H_P(X_S\\mid X_{S^c})|\\le\\epsilon\\text{ for every nonempty }S\\subseteq[k]\\right\\}.$$\nHere $\\|q-P\\|_\\infty:=\\max_{x\\in\\mathcal X}|q(x)-P(x)|$, $H(P)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], and each $H_P(X_S\\mid X_{S^c})$ is from [[def-it-finite-conditional-entropy]] under the multisource law.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet and let $n\\ge1$. A word of length $n$ is $x^n=(x_1,\\ldots,x_n)\\in\\mathcal A^n$. For $a\\in\\mathcal A$, define its count and empirical type by\n$$N(a\\mid x^n):=\\#\\{i\\in\\{1,\\ldots,n\\}:x_i=a\\},\\qquad \\widehat P_{x^n}(a):=\\frac{N(a\\mid x^n)}n.$$\nEvery position contributes to exactly one count, so the coordinates of $\\widehat P_{x^n}$ are nonnegative and sum to one; it is a probability vector in the sense of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. The **set of $n$-types** is $\\mathcal P_n(\\mathcal A):=\\{\\widehat P_{x^n}:x^n\\in\\mathcal A^n\\}$. Thus $q\\in\\mathcal P_n(\\mathcal A)$ exactly when every $nq(a)$ is a nonnegative integer and $\\sum_a nq(a)=n$: the converse is obtained by arranging the prescribed finite number of copies of each letter. For $q\\in\\mathcal P_n(\\mathcal A)$, its **type class** is\n$$T_q:=\\{x^n\\in\\mathcal A^n:\\widehat P_{x^n}=q\\}.$$\nThe map $x^n\\mapsto\\widehat P_{x^n}$ has these type classes as its fibers.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-alphabet-iid-information-aep",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\ge1}$ be a finite-alphabet IID source with one-letter law $p$,\nentropy $H(p)$, and surprisal variance $V(p)$ as defined above. For\n$I_n(X^n)=-n^{-1}\\ln p^n(X^n)$, defined almost surely on $A_+^n$, every\n$n\\ge1$ and $\\varepsilon>0$ satisfy\n$$\\mathbb P(|I_n(X^n)-H(p)|\\ge\\varepsilon)\\le\\frac{V(p)}{n\\varepsilon^2}.$$\nConsequently $I_n(X^n)\\to H(p)$ in probability.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-it-multisource-block-conditional-law-factorization",
+          "source_section": "Statement",
+          "quote": "Let $Z_t=(X_{1,t},\\ldots,X_{k,t})$ be a finite-alphabet IID multisource with joint law $P$. For nonempty $S\\subseteq[k]$, put $C=S^c$. If $(x_S^n,x_C^n)$ is supported under $P^{\\otimes n}$, then the conditional block probability obtained from its joint and complement marginal satisfies\n$$P^{\\otimes n}(x_S^n\\mid x_C^n)=\\prod_{t=1}^nP_{X_S\\mid X_C}(x_{S,t}\\mid x_{C,t}).$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Fix $a\\in\\mathcal X$ and put $B_{t,a}:=\\mathbf1_{\\{Z_t=a\\}}$. For any distinct $t_1,\\ldots,t_r$ and sets $E_j\\subseteq\\{0,1\\}$, $\\bigcap_j\\{B_{t_j,a}\\in E_j\\}=\\bigcap_j\\{Z_{t_j}\\in\\phi_a^{-1}(E_j)\\}$, where $\\phi_a(z)=\\mathbf1_{\\{z=a\\}}$. Mutual independence in [F1, F4] factors the probability of this intersection, and the common law $P$ gives every $B_{t,a}$ the same distribution; hence $(B_{t,a})$ are IID. Their mean is $P(a)$ and variance is $P(a)(1-P(a))\\le1/4$. Their sample mean is $\\widehat P_{Z^n}(a)$ by [F3]. Independence gives $\\mathbb E[(\\widehat P_{Z^n}(a)-P(a))^2]=\\operatorname{Var}(B_{1,a})/n\\le1/(4n)$; since a square is at least $\\delta^2$ on the event of deviation at least $\\delta$, that event has probability at most $1/(4n\\delta^2)$. If $P(a)=0$, the probability that $a$ occurs at any of the first $n$ positions is zero. A union bound over the finite alphabet proves that the support and empirical-coordinate requirements in [F2] fail with probability at most $|\\mathcal X|/(4n\\delta^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "By [F5], the full-information requirement in [F2] fails with probability at most $V(P)/(n\\epsilon^2)$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "Fix a nonempty $S\\subseteq[k]$ and write $C=S^c$. On the support of $P$, define $W_t^S:=-\\ln P_{X_S\\mid X_C}(X_{S,t}\\mid X_{C,t})$, and set it to $0$ off the support. This is a finite-valued function $\\psi_S(Z_t)$. For distinct $t_1,\\ldots,t_r$ and Borel sets $B_1,\\ldots,B_r$, $\\bigcap_j\\{W_{t_j}^S\\in B_j\\}=\\bigcap_j\\{Z_{t_j}\\in\\psi_S^{-1}(B_j)\\}$; [F1, F4] therefore give mutual independence and a common law, so $(W_t^S)$ are IID. Its mean is $H_P(X_S\\mid X_C)$ by the finite sum in [F6] and the zero-term convention in [F8], and its variance $\\sigma_S^2$ is finite because its range is finite. By [F7], $J_{S,n}=n^{-1}\\sum_{t=1}^nW_t^S$ almost surely. Independence gives $\\mathbb E[(J_{S,n}-H_P(X_S\\mid X_C))^2]=\\sigma_S^2/n$, so the same squared-deviation argument bounds failure of this conditional requirement by $\\sigma_S^2/(n\\epsilon^2)$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "There are finitely many symbols and finitely many nonempty subsets $S$. The union bound over the failure events in steps 1.1, 1.2, and 1.3 is at most $\\frac{|\\mathcal X|}{4n\\delta^2}+\\frac{V(P)+\\sum_{\\varnothing\\ne S\\subseteq[k]}\\sigma_S^2}{n\\epsilon^2}$, which tends to zero. Its complement is exactly the event in the Statement, proving the claimed limit.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite source law has a nonempty support and k>=2 through the source definition. Subsets in the union are nonempty, while C may be empty at S=[k]; its conditional surprisal is the full surprisal, so the same finite-variance argument applies.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The finite source law has a nonempty support and k>=2 through the source definition. Subsets in the union are nonempty, while C may be empty at S=[k]; its conditional surprisal is the full surprisal, so the same finite-variance argument applies. Independent item review: Indicator Chebyshev bounds and finite union over symbols/nonempty S yield the typicality limit, including zero-probability symbols (1.1–2.1).",
+            "item_sha256": "cf2f35e51313458d09b74ca9d65a0a56462d9fd8a69394104eded1cb5e760b7c",
+            "row_sha256": "372290374150b35b3769e4f2da344ca7a7af65ca83d8de71f3cb67c30c0c0cf1"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 handle zero-probability letters and define conditional surprisal only on supported atoms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 use only finiteness and allow singleton coordinate alphabets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 have zero variance for a point-mass source, so the same deviation bounds apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement assumes strictly positive tolerances δ and ε and has no endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use finite unions and finite sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an iff claim. Independent item review: Indicator Chebyshev bounds and finite union over symbols/nonempty S yield the typicality limit, including zero-probability symbols (1.1–2.1).",
+            "item_sha256": "cf2f35e51313458d09b74ca9d65a0a56462d9fd8a69394104eded1cb5e760b7c",
+            "row_sha256": "34eb67a4b04128866b44e8d9765cd7c3948081295582ac860ec103a98d4b1954"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement is not an iff claim. Independent item review: Indicator Chebyshev bounds and finite union over symbols/nonempty S yield the typicality limit, including zero-probability symbols (1.1–2.1).",
+            "item_sha256": "cf2f35e51313458d09b74ca9d65a0a56462d9fd8a69394104eded1cb5e760b7c",
+            "row_sha256": "b80a08bae6b182f58d634d4c3146e3b39d3b859b6e67aa116ed992896d420f42"
+          }
+        }
+      ]
+    },
+    "lem-it-conditional-typical-fan-cardinality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-jointly-typical-multisource-blocks",
+          "source_section": "Definition",
+          "quote": "Let $P$ and $Z_t=(X_{1,t},\\ldots,X_{k,t})$ be as in [[def-it-finite-iid-multisource]], and let $\\mathcal X_+:=\\{x\\in\\mathcal X:P(x)>0\\}$. For $z^n\\in\\mathcal X_+^n$, write $\\widehat P_{z^n}$ for its empirical type from [[def-it-empirical-type-and-type-class]], and write $I_n(z^n)$ for its normalized block information from [[def-finite-source-information-density-and-typical-set]] applied to the vector source on $\\mathcal X$. For each nonempty $S\\subseteq[k]$ and supported pair $(x_S^n,x_{S^c}^n)$, define the conditional block information\n$$J_{S,n}(x_S^n\\mid x_{S^c}^n):=-\\frac1n\\ln P^{\\otimes n}(x_S^n\\mid x_{S^c}^n),$$\nwhere the conditional probability is the finite conditional law of the block under $P^{\\otimes n}$. Its positive denominator and coordinatewise factorization on supported tuples are proved in [[lem-it-multisource-block-conditional-law-factorization]].\n\nFor $\\delta,\\epsilon>0$, the **jointly typical set** is\n$$\\mathcal T_n(P,\\delta,\\epsilon):=\\left\\{z^n\\in\\mathcal X_+^n:\\|\\widehat P_{z^n}-P\\|_\\infty\\le\\delta,\\ |I_n(z^n)-H(P)|\\le\\epsilon,\\ |J_{S,n}(x_S^n\\mid x_{S^c}^n)-H_P(X_S\\mid X_{S^c})|\\le\\epsilon\\text{ for every nonempty }S\\subseteq[k]\\right\\}.$$\nHere $\\|q-P\\|_\\infty:=\\max_{x\\in\\mathcal X}|q(x)-P(x)|$, $H(P)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], and each $H_P(X_S\\mid X_{S^c})$ is from [[def-it-finite-conditional-entropy]] under the multisource law.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet and let $n\\ge1$. A word of length $n$ is $x^n=(x_1,\\ldots,x_n)\\in\\mathcal A^n$. For $a\\in\\mathcal A$, define its count and empirical type by\n$$N(a\\mid x^n):=\\#\\{i\\in\\{1,\\ldots,n\\}:x_i=a\\},\\qquad \\widehat P_{x^n}(a):=\\frac{N(a\\mid x^n)}n.$$\nEvery position contributes to exactly one count, so the coordinates of $\\widehat P_{x^n}$ are nonnegative and sum to one; it is a probability vector in the sense of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. The **set of $n$-types** is $\\mathcal P_n(\\mathcal A):=\\{\\widehat P_{x^n}:x^n\\in\\mathcal A^n\\}$. Thus $q\\in\\mathcal P_n(\\mathcal A)$ exactly when every $nq(a)$ is a nonnegative integer and $\\sum_a nq(a)=n$: the converse is obtained by arranging the prescribed finite number of copies of each letter. For $q\\in\\mathcal P_n(\\mathcal A)$, its **type class** is\n$$T_q:=\\{x^n\\in\\mathcal A^n:\\widehat P_{x^n}=q\\}.$$\nThe map $x^n\\mapsto\\widehat P_{x^n}$ has these type classes as its fibers.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-it-conditional-type-class-cardinality",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal U,\\mathcal V$ be finite nonempty alphabets, let $n\\ge1$, and let $q$ be an attainable joint $n$-type on $\\mathcal U\\times\\mathcal V$. For $v$ with $q_V(v)>0$, put $q_{U\\mid v}(u):=q(u,v)/q_V(v)$; this is an $nq_V(v)$-type. If $v^n\\in\\mathcal V^n$ has empirical type $q_V$, then\n$$\\left|\\{u^n\\in\\mathcal U^n:\\widehat P_{u^n,v^n}=q\\}\\right|=\\prod_{v:q_V(v)>0}|T_{q_{U\\mid v}}|\\le \\exp\\!\\bigl(nH_q(U\\mid V)\\bigr),$$\nwhere $T_{q_{U\\mid v}}$ is the type class of length $nq_V(v)$ and $H_q(U\\mid V)$ is the finite conditional entropy for joint law $q$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-finite-conditional-entropy-continuity",
+          "source_section": "Statement",
+          "quote": "For fixed finite nonempty alphabets $\\mathcal U,\\mathcal V$, the map from a joint probability vector $q_{UV}$ on $\\mathcal U\\times\\mathcal V$ to its conditional entropy $H_q(U\\mid V)$ is continuous on the joint probability simplex.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [F4], choose $\\delta>0$ so that every joint probability vector $q$ with $\\|q-P\\|_\\infty\\le\\delta$ satisfies $|H_q(X_S\\mid X_C)-H_P(X_S\\mid X_C)|\\le\\eta$. The joint alphabet is identified with $\\mathcal X_S\\times\\mathcal X_C$ by a coordinate permutation, so the same coordinatewise neighborhood applies to the joint type of $(x_S^n,x_C^n)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "For the fixed $x_C^n$, each $x_S^n$ in the set has a unique joint empirical type $q$ by [F2]. There are at most $(n+1)^m$ possible such types, since each of the $m$ joint symbol counts is an integer from $0$ to $n$; the sum constraint can only reduce this count.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For each feasible type $q$ arising from a typical block, [F1] and step 1.1 give $H_q(X_S\\mid X_C)\\le H_P(X_S\\mid X_C)+\\eta$. By [F3], its conditional type class has size at most $\\exp(n(H_P(X_S\\mid X_C)+\\eta))$. Summing this bound over the at most $(n+1)^m$ types from step 1.2 proves the claimed inequality. The empty-complement case uses its singleton alphabet and the same count.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "S is nonempty but C=S^c may be empty. Its product alphabet is a singleton, its marginal has mass one, and the conditional formula becomes the unconditional formula; the finite product/counting argument includes S=[k].",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: S is nonempty but C=S^c may be empty. Its product alphabet is a singleton, its marginal has mass one, and the conditional formula becomes the unconditional formula; the finite product/counting argument includes S=[k]. Independent item review: Continuity chooses one delta; summing at most (n+1)^m conditional-type fans gives the entropy exponent; 2.1 explicitly includes the empty complement.",
+            "item_sha256": "e69123828e8cfd925d9a15f7f5c410da932fbb3af170d8e31786055aee48adc1",
+            "row_sha256": "ad6e7f351f97669dc958445fa1a719250113e7e2d69929c29f26007b71dfcd18"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 retain the zero-mass conditioning convention in conditional entropy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly covers the empty-complement singleton alphabet."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 count the single feasible type when the law is concentrated at one point."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement assumes η>0 and has no additional endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 choose a continuity tolerance and count finite types only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an iff claim. Independent item review: Continuity chooses one delta; summing at most (n+1)^m conditional-type fans gives the entropy exponent; 2.1 explicitly includes the empty complement.",
+            "item_sha256": "e69123828e8cfd925d9a15f7f5c410da932fbb3af170d8e31786055aee48adc1",
+            "row_sha256": "34eb67a4b04128866b44e8d9765cd7c3948081295582ac860ec103a98d4b1954"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement is not an iff claim. Independent item review: Continuity chooses one delta; summing at most (n+1)^m conditional-type fans gives the entropy exponent; 2.1 explicitly includes the empty complement.",
+            "item_sha256": "e69123828e8cfd925d9a15f7f5c410da932fbb3af170d8e31786055aee48adc1",
+            "row_sha256": "b80a08bae6b182f58d634d4c3146e3b39d3b859b6e67aa116ed992896d420f42"
+          }
+        }
+      ]
+    },
+    "thm-it-slepian-wolf-rate-region": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-iid-multisource",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge2$ and finite nonempty alphabets $\\mathcal X_1,\\ldots,\\mathcal X_k$. Let $\\mathcal X:=\\prod_{i=1}^k\\mathcal X_i$, identified with a finite alphabet as in [[def-finite-alphabet-iid-source]]. A **finite-alphabet IID $k$-source** is an IID sequence of vectors\n$$Z_t=(X_{1,t},\\ldots,X_{k,t})\\in\\mathcal X,\\qquad t\\ge1,$$\nwith common joint probability vector $P$ on $\\mathcal X$. Thus for every $n\\ge1$ its block law is $P^{\\otimes n}$, and terminal $i$ observes $X_i^n=(X_{i,1},\\ldots,X_{i,n})$. For $S\\subseteq[k]:=\\{1,\\ldots,k\\}$ write $X_S=(X_i)_{i\\in S}$, let $S^c=[k]\\setminus S$, and define $H_P(X_S\\mid X_{S^c})$ by [[def-it-finite-conditional-entropy]] for the induced finite joint law. When $S=[k]$, $X_{S^c}$ takes values in the singleton empty product, so $H_P(X_S\\mid X_{S^c})=H(P)$ under [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Unmarked logarithms and information rates use nats by [[def-it-information-units-and-logarithm-base]].",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-multiterminal-lossless-code",
+          "source_section": "Definition",
+          "quote": "Fix a finite-alphabet IID multisource from [[def-it-finite-iid-multisource]] and a blocklength $n\\ge1$. Choose positive integers $M_1,\\ldots,M_k$. A **fixed-length multiterminal lossless code** consists of separate deterministic encoders\n$$f_{i,n}:\\mathcal X_i^n\\to[M_i]:=\\{1,\\ldots,M_i\\},\\qquad 1\\le i\\le k,$$\nand one common deterministic decoder\n$$g_n:\\prod_{i=1}^k[M_i]\\to\\prod_{i=1}^k\\mathcal X_i^n.$$\nIts block-error probability is\n$$P_e^{(n)}:=\\mathbb P\\!\\left[g_n\\bigl(f_{1,n}(X_1^n),\\ldots,f_{k,n}(X_k^n)\\bigr)\\ne(X_1^n,\\ldots,X_k^n)\\right].$$\nThe rate of encoder $i$ is $R_{i,n}:=n^{-1}\\ln M_i$ nats per source symbol, with the logarithm convention of [[def-it-information-units-and-logarithm-base]]. A vector $R=(R_1,\\ldots,R_k)\\in[0,\\infty)^k$ is **achievable** if there are strictly increasing blocklengths $n_j\\to\\infty$ and such codes for which $P_e^{(n_j)}\\to0$ and $\\limsup_{j\\to\\infty}R_{i,n_j}\\le R_i$ for every $i$. The encoders do not observe other terminals' source blocks; only the common decoder receives all message indices.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "1.5",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-jointly-typical-multisource-blocks",
+          "source_section": "Definition",
+          "quote": "Let $P$ and $Z_t=(X_{1,t},\\ldots,X_{k,t})$ be as in [[def-it-finite-iid-multisource]], and let $\\mathcal X_+:=\\{x\\in\\mathcal X:P(x)>0\\}$. For $z^n\\in\\mathcal X_+^n$, write $\\widehat P_{z^n}$ for its empirical type from [[def-it-empirical-type-and-type-class]], and write $I_n(z^n)$ for its normalized block information from [[def-finite-source-information-density-and-typical-set]] applied to the vector source on $\\mathcal X$. For each nonempty $S\\subseteq[k]$ and supported pair $(x_S^n,x_{S^c}^n)$, define the conditional block information\n$$J_{S,n}(x_S^n\\mid x_{S^c}^n):=-\\frac1n\\ln P^{\\otimes n}(x_S^n\\mid x_{S^c}^n),$$\nwhere the conditional probability is the finite conditional law of the block under $P^{\\otimes n}$. Its positive denominator and coordinatewise factorization on supported tuples are proved in [[lem-it-multisource-block-conditional-law-factorization]].\n\nFor $\\delta,\\epsilon>0$, the **jointly typical set** is\n$$\\mathcal T_n(P,\\delta,\\epsilon):=\\left\\{z^n\\in\\mathcal X_+^n:\\|\\widehat P_{z^n}-P\\|_\\infty\\le\\delta,\\ |I_n(z^n)-H(P)|\\le\\epsilon,\\ |J_{S,n}(x_S^n\\mid x_{S^c}^n)-H_P(X_S\\mid X_{S^c})|\\le\\epsilon\\text{ for every nonempty }S\\subseteq[k]\\right\\}.$$\nHere $\\|q-P\\|_\\infty:=\\max_{x\\in\\mathcal X}|q(x)-P(x)|$, $H(P)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], and each $H_P(X_S\\mid X_{S^c})$ is from [[def-it-finite-conditional-entropy]] under the multisource law.",
+          "uses": [
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-multisource-typicality-probability",
+          "source_section": "Statement",
+          "quote": "Let $(Z_t)_{t\\ge1}$ be a finite-alphabet IID $k$-source with joint letter law $P$ on $\\mathcal X=\\prod_{i=1}^k\\mathcal X_i$. For every $\\delta,\\epsilon>0$, its jointly typical set from [[def-it-jointly-typical-multisource-blocks]] satisfies\n$$P^{\\otimes n}\\bigl(\\mathcal T_n(P,\\delta,\\epsilon)\\bigr)\\longrightarrow1\\qquad(n\\to\\infty).$$",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-it-conditional-typical-fan-cardinality",
+          "source_section": "Statement",
+          "quote": "Let $P$ be the joint law of a finite-alphabet IID $k$-source on $\\mathcal X=\\prod_{i=1}^k\\mathcal X_i$, and fix nonempty $S\\subseteq[k]$. Put $C=S^c$ and $m:=|\\mathcal X|$. For every $\\eta>0$ there is $\\delta>0$ such that, for every $n\\ge1$, every fixed $x_C^n\\in\\mathcal X_C^n$, and every $\\epsilon>0$,\n$$\\left|\\{x_S^n:(x_S^n,x_C^n)\\in\\mathcal T_n(P,\\delta,\\epsilon)\\}\\right|\\le(n+1)^m\\exp\\!\\bigl(n(H_P(X_S\\mid X_C)+\\eta)\\bigr).$$",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For the converse, suppose $R$ is achievable and fix nonempty $S\\subseteq[k]$. Write $H_S:=H_P(X_S\\mid X_{S^c})$ and $R_S:=\\sum_{i\\in S}R_i$. If $R_S<H_S$, put $\\gamma:=H_S-R_S>0$. By [F2], along the achieving blocklengths and for all sufficiently large $n$, the product message count $M_S:=\\prod_{i\\in S}M_i$ obeys $n^{-1}\\ln M_S\\le R_S+\\gamma/4$, since each of the finitely many coordinate rate limsups is at most $R_i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Fix such a blocklength and a complement word $x_{S^c}^n$ of positive probability. Its complement message indices are then fixed. For each possible $S$-message tuple, the common decoder outputs at most one candidate $x_S^n$, so at most $M_S$ values of $x_S^n$ can be decoded correctly for this complement word.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "For achievability, take any $R\\in\\mathcal R_{\\mathrm{SW}}(P)$ and any slack $a>0$. Put $\\rho_i:=R_i+a$ and $\\eta:=a/2$. Then for every nonempty $S$, $\\sum_{i\\in S}\\rho_i\\ge H_S+|S|a\\ge H_S+a$. Because there are finitely many such $S$, [F5] gives one empirical tolerance $\\delta>0$ that works for every subset. Set $\\epsilon:=a/4$ and use $\\mathcal T_n(P,\\delta,\\epsilon)$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F5",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-4",
+          "claim": "For this $n$, set $M_i:=\\lceil e^{n\\rho_i}\\rceil$. For every encoder $i$, independently assign each word in $\\mathcal X_i^n$ a uniform label in $[M_i]$, with all word-label assignments independent across words and encoders. The decoder returns the unique jointly typical source tuple having the received vector of labels; if there is not exactly one, it returns a fixed default tuple from fixed finite listings of the nonempty alphabets. This defines a finite ensemble of valid codes of the form in [F2].",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-5",
+          "claim": "Fix a true tuple $z^n\\in\\mathcal T_n$ and a distinct jointly typical competitor $\\widetilde z^n$. Let $S$ be exactly the nonempty set of terminals where $\\widetilde x_i^n\\ne x_i^n$. For each $i\\in S$, the two distinct source words receive independent uniform labels, so their collision probability is $1/M_i$; assignments for distinct encoders are also independent. Therefore the probability that all message labels of the competitor equal the true labels is $\\prod_{i\\in S}M_i^{-1}$.",
+          "step": "1.5",
+          "inputs": [
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Choose the typical set $\\mathcal T_n(P,1,\\gamma/4)$. For any supported block in this set, [F3] gives $P^{\\otimes n}(x_S^n\\mid x_{S^c}^n)\\le e^{-n(H_S-\\gamma/4)}$. Summing over at most $M_S$ correctly decoded $S$-blocks from step 1.2 and then averaging over $X_{S^c}^n$ yields $P\\{\\text{correct decode and }Z^n\\in\\mathcal T_n\\}\\le M_Se^{-n(H_S-\\gamma/4)}\\le e^{-n\\gamma/2}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "If the true tuple is typical, decoding error requires at least one distinct typical competitor to share its message vector. For a fixed nonempty difference set $S$ and fixed true complement $x_{S^c}^n$, [F5] bounds the number of possible $S$-parts of such competitors by $(n+1)^m e^{n(H_S+a/2)}$, where $m=|\\mathcal X|$. By step 1.5 and the union bound over all nonempty $S$, the expected error over the finite random-code ensemble is at most $P(Z^n\\notin\\mathcal T_n)+(2^k-1)(n+1)^m e^{-na/2}$. Indeed, $M_i\\ge e^{n(R_i+a)}$ and $\\sum_{i\\in S}(R_i+a)\\ge H_S+|S|a$, leaving exponent at most $-a/2$ for each $S$.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.3",
+            "step 1.5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "By [F4], $P(Z^n\\notin\\mathcal T_n(P,1,\\gamma/4))\\to0$. Step 2.1 therefore implies the probability of correct decoding tends to zero, so the block-error probability tends to one. This contradicts [F2]. Thus every achievable $R$ satisfies $R_S\\ge H_S$ for every nonempty $S$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-2",
+          "claim": "The first term in step 2.2 tends to zero by [F4]. For the second, [F6] and $1/t\\le1/\\sqrt t$ for $t\\ge1$ give $\\ln(n+1)\\le2(\\sqrt{n+1}-1)$, hence $m\\ln(n+1)/n\\to0$ and $(n+1)^me^{-na/2}\\to0$. Since the ensemble is finite, at least one deterministic code has error no larger than the ensemble average; select the first such map tuple in a fixed finite listing. Thus for every fixed $a>0$ and all sufficiently large $n$, there is a deterministic code with error tending to zero and rates $\\frac1n\\ln M_i\\le R_i+a+\\frac{\\ln2}{n}$, using $\\lceil x\\rceil\\le2x$ for $x\\ge1$.",
+          "step": "3.2",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 2.2",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Finally take $a_j:=1/j$ and choose recursively increasing $n_j$ large enough that the selected code's error is at most $1/j$ and $(\\ln2)/n_j\\le1/j$. Step 3.2 then gives coordinate rate limsups at most $R_i$. These codes make $R$ achievable, including boundary points where one or more subset inequalities are equalities.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.2",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "S is nonempty but C=S^c may be empty. Its product alphabet is a singleton, its marginal has mass one, and the conditional formula becomes the unconditional formula; the finite product/counting argument includes S=[k].",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: S is nonempty but C=S^c may be empty. Its product alphabet is a singleton, its marginal has mass one, and the conditional formula becomes the unconditional formula; the finite product/counting argument includes S=[k]. Independent item review: The counting converse uses at most MS correct words per complement; independent per-word/per-encoder bins and diagonal slack achieve every closed subset constraint (1.1–4.1).",
+            "item_sha256": "9a54106b6155d80a8f0f341cd2f758f95bd2a24b1649e1a945735a66f3137c16",
+            "row_sha256": "ad6e7f351f97669dc958445fa1a719250113e7e2d69929c29f26007b71dfcd18"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 2.2 restrict probability calculations to supported blocks; no full-support assumption is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 3.2 require only finite nonempty coordinate alphabets, including singleton alphabets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3–3.2 use typicality and fan bounds for arbitrary finite source laws and do not assume positive entropy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 explicitly includes boundary rate vectors where subset inequalities hold with equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 3.2 select deterministic maps from finite listings, as stated in the axiom-use declaration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 prove every achievable vector satisfies every subset inequality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.3–4.1 construct codes attaining every vector satisfying the subset inequalities."
+        }
+      ]
+    },
+    "ex-it-binary-symmetric-slepian-wolf-region": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-iid-multisource",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge2$ and finite nonempty alphabets $\\mathcal X_1,\\ldots,\\mathcal X_k$. Let $\\mathcal X:=\\prod_{i=1}^k\\mathcal X_i$, identified with a finite alphabet as in [[def-finite-alphabet-iid-source]]. A **finite-alphabet IID $k$-source** is an IID sequence of vectors\n$$Z_t=(X_{1,t},\\ldots,X_{k,t})\\in\\mathcal X,\\qquad t\\ge1,$$\nwith common joint probability vector $P$ on $\\mathcal X$. Thus for every $n\\ge1$ its block law is $P^{\\otimes n}$, and terminal $i$ observes $X_i^n=(X_{i,1},\\ldots,X_{i,n})$. For $S\\subseteq[k]:=\\{1,\\ldots,k\\}$ write $X_S=(X_i)_{i\\in S}$, let $S^c=[k]\\setminus S$, and define $H_P(X_S\\mid X_{S^c})$ by [[def-it-finite-conditional-entropy]] for the induced finite joint law. When $S=[k]$, $X_{S^c}$ takes values in the singleton empty product, so $H_P(X_S\\mid X_{S^c})=H(P)$ under [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Unmarked logarithms and information rates use nats by [[def-it-information-units-and-logarithm-base]].",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-slepian-wolf-rate-region",
+          "source_section": "Statement",
+          "quote": "Let $(Z_t)_{t\\ge1}$ be a finite-alphabet IID $k$-source with joint law $P$ as in [[def-it-finite-iid-multisource]], where $k\\ge2$. The achievable fixed-length lossless rate vectors in the sense of [[def-it-multiterminal-lossless-code]] are exactly\n$$\\mathcal R_{\\mathrm{SW}}(P)=\\left\\{R\\in[0,\\infty)^k:\\sum_{i\\in S}R_i\\ge H_P(X_S\\mid X_{S^c})\\text{ for every nonempty }S\\subseteq[k]\\right\\}.$$\nFor $S=[k]$, the inequality is the total-rate bound $\\sum_iR_i\\ge H(P)$. All logarithms are natural, so rates and entropies are in nats per source symbol.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-gacs-korner-and-wyner-common-information",
+          "source_section": "Definition",
+          "quote": "Let $(X,Y)$ have a joint probability vector $p_{XY}$ on finite nonempty alphabets $\\mathcal X\\times\\mathcal Y$. Its **support bipartite graph** has left vertices $x$ with $p_X(x)>0$, right vertices $y$ with $p_Y(y)>0$, and an edge $x\\!\\text{--}\\!y$ exactly when $p_{XY}(x,y)>0$. Let $\\mathcal K$ be the finite nonempty set of connected components. Define $K_X(x)$ and $K_Y(y)$ to be the component containing the corresponding vertex when that vertex has positive marginal mass; assign any fixed component label to zero-mass symbols, which do not affect the law of the random labels. Along every support edge the two labels agree, so define the finite random variable $K:=K_X(X)=K_Y(Y)$ almost surely. If $f(X)=g(Y)$ almost surely for any other finite-valued deterministic common output, then $f(x)=g(y)$ along every support edge; equality propagates along graph paths, so both functions are constant on each component and the common output is a function of $K$. Thus $K$ is the maximal deterministic common part up to relabeling. Its finite entropy $H(K)$ is the deterministic Gács–Körner common information, using [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]].\n\nA finite auxiliary random variable $U$ is **Wyner-admissible** for $p_{XY}$ when a joint law $p_{XYU}$ has $(X,Y)$-marginal $p_{XY}$ and, for every $u$ with $p_U(u)>0$,\n$$p_{XY\\mid U=u}(x,y)=p_{X\\mid U=u}(x)p_{Y\\mid U=u}(y).$$\nThe finite-alphabet **Wyner common information** is\n$$C_W(X;Y):=\\inf_{U\\text{ finite, Wyner-admissible}} I((X,Y);U),$$\nwhere mutual information and natural-log units are as in [[def-it-finite-mutual-information]] and [[def-it-information-units-and-logarithm-base]]. The Gács–Körner object is a deterministic common output of both terminals; Wyner's quantity optimizes mutual information over an auxiliary variable that makes the terminals conditionally independent. They are distinct definitions. This page does not identify them or use either as a Slepian–Wolf rate coordinate.\n\nThe admissible class is nonempty: $U=(X,Y)$ is finite and makes each positive-mass conditional joint law a product of point masses. Hence the infimum is over a nonempty set of finite real mutual informations.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The one-letter joint masses are $P(0,0)=P(1,1)=(1-p)/2$ and $P(0,1)=P(1,0)=p/2$. Summing rows and columns gives uniform marginals. For either $y$, the conditional law of $X$ given $Y=y$ has masses $1-p$ and $p$; the same holds for $Y$ given $X=x$. Therefore [F2] gives $H_P(X\\mid Y)=H_P(Y\\mid X)=h(p)$, including $p=0$ and $p=1/2$ under the zero-term convention.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Directly summing the four joint entropy terms gives $H_P(X,Y)=\\ln2+h(p)$: the two diagonal terms contribute $-(1-p)\\ln((1-p)/2)$ and the two off-diagonal terms contribute $-p\\ln(p/2)$, with zero terms omitted when $p=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Since $0\\le p\\le1/2$, the binary entropy satisfies $0\\le h(p)\\le\\ln2$. The lower bound follows termwise from $\\ln t\\le0$ for $0<t\\le1$ and [F5], while [F6] applied to $(p,1-p)$ and $(1/2,1/2)$ gives $\\ln2-h(p)\\ge0$. Thus the region from [F3] is $R_1\\ge h(p)$, $R_2\\ge h(p)$, and $R_1+R_2\\ge\\ln2+h(p)$. For $h(p)\\le R_1\\le\\ln2$, the sum constraint gives the boundary $R_2=\\ln2+h(p)-R_1$, joining the stated endpoints; for $R_1\\ge\\ln2$, the coordinate bound $R_2\\ge h(p)$ is the active lower boundary.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "If $p>0$, all four joint masses are positive, so the support bipartite graph in [F4] has every possible edge and is connected. Any common function $K=f(X)=g(Y)$ almost surely must then satisfy $f(0)=g(0)=f(1)=g(1)$, since each of the four pairs has positive probability. Hence the common part is constant and has entropy zero.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires finite nonempty alphabets, so an empty alphabet is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement requires finite nonempty alphabets, so an empty alphabet is excluded. Independent item review: Four explicit masses give conditional entropy h(p), joint entropy ln2+h(p), and the support graph is connected for p>0 (1.1–4.1).",
+            "item_sha256": "abe65f2c7f537675e16111e0390a22d3ac2f6b138350f33a63850118d97d9837",
+            "row_sha256": "d1d9850135e89f1c7082f3de4c73a23de9270ace14ffb012b4cc51fc1d4bfe2c"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 omit zero entropy terms at p=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes binary alphabets throughout."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include p=0, where the noise is degenerate and h(p)=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 check p=0 and p=1/2, the two endpoints of the parameter interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 use finite sums and the finite support graph only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an iff claim. Independent item review: Four explicit masses give conditional entropy h(p), joint entropy ln2+h(p), and the support graph is connected for p>0 (1.1–4.1).",
+            "item_sha256": "abe65f2c7f537675e16111e0390a22d3ac2f6b138350f33a63850118d97d9837",
+            "row_sha256": "34eb67a4b04128866b44e8d9765cd7c3948081295582ac860ec103a98d4b1954"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement is not an iff claim. Independent item review: Four explicit masses give conditional entropy h(p), joint entropy ln2+h(p), and the support graph is connected for p>0 (1.1–4.1).",
+            "item_sha256": "abe65f2c7f537675e16111e0390a22d3ac2f6b138350f33a63850118d97d9837",
+            "row_sha256": "b80a08bae6b182f58d634d4c3146e3b39d3b859b6e67aa116ed992896d420f42"
+          }
+        }
+      ]
+    },
+    "ex-it-shared-random-binning-collision-probability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-iid-multisource",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge2$ and finite nonempty alphabets $\\mathcal X_1,\\ldots,\\mathcal X_k$. Let $\\mathcal X:=\\prod_{i=1}^k\\mathcal X_i$, identified with a finite alphabet as in [[def-finite-alphabet-iid-source]]. A **finite-alphabet IID $k$-source** is an IID sequence of vectors\n$$Z_t=(X_{1,t},\\ldots,X_{k,t})\\in\\mathcal X,\\qquad t\\ge1,$$\nwith common joint probability vector $P$ on $\\mathcal X$. Thus for every $n\\ge1$ its block law is $P^{\\otimes n}$, and terminal $i$ observes $X_i^n=(X_{i,1},\\ldots,X_{i,n})$. For $S\\subseteq[k]:=\\{1,\\ldots,k\\}$ write $X_S=(X_i)_{i\\in S}$, let $S^c=[k]\\setminus S$, and define $H_P(X_S\\mid X_{S^c})$ by [[def-it-finite-conditional-entropy]] for the induced finite joint law. When $S=[k]$, $X_{S^c}$ takes values in the singleton empty product, so $H_P(X_S\\mid X_{S^c})=H(P)$ under [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Unmarked logarithms and information rates use nats by [[def-it-information-units-and-logarithm-base]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-multiterminal-lossless-code",
+          "source_section": "Definition",
+          "quote": "Fix a finite-alphabet IID multisource from [[def-it-finite-iid-multisource]] and a blocklength $n\\ge1$. Choose positive integers $M_1,\\ldots,M_k$. A **fixed-length multiterminal lossless code** consists of separate deterministic encoders\n$$f_{i,n}:\\mathcal X_i^n\\to[M_i]:=\\{1,\\ldots,M_i\\},\\qquad 1\\le i\\le k,$$\nand one common deterministic decoder\n$$g_n:\\prod_{i=1}^k[M_i]\\to\\prod_{i=1}^k\\mathcal X_i^n.$$\nIts block-error probability is\n$$P_e^{(n)}:=\\mathbb P\\!\\left[g_n\\bigl(f_{1,n}(X_1^n),\\ldots,f_{k,n}(X_k^n)\\bigr)\\ne(X_1^n,\\ldots,X_k^n)\\right].$$\nThe rate of encoder $i$ is $R_{i,n}:=n^{-1}\\ln M_i$ nats per source symbol, with the logarithm convention of [[def-it-information-units-and-logarithm-base]]. A vector $R=(R_1,\\ldots,R_k)\\in[0,\\infty)^k$ is **achievable** if there are strictly increasing blocklengths $n_j\\to\\infty$ and such codes for which $P_e^{(n_j)}\\to0$ and $\\limsup_{j\\to\\infty}R_{i,n_j}\\le R_i$ for every $i$. The encoders do not observe other terminals' source blocks; only the common decoder receives all message indices.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-slepian-wolf-rate-region",
+          "source_section": "Statement",
+          "quote": "Let $(Z_t)_{t\\ge1}$ be a finite-alphabet IID $k$-source with joint law $P$ as in [[def-it-finite-iid-multisource]], where $k\\ge2$. The achievable fixed-length lossless rate vectors in the sense of [[def-it-multiterminal-lossless-code]] are exactly\n$$\\mathcal R_{\\mathrm{SW}}(P)=\\left\\{R\\in[0,\\infty)^k:\\sum_{i\\in S}R_i\\ge H_P(X_S\\mid X_{S^c})\\text{ for every nonempty }S\\subseteq[k]\\right\\}.$$\nFor $S=[k]$, the inequality is the total-rate bound $\\sum_iR_i\\ge H(P)$. All logarithms are natural, so rates and entropies are in nats per source symbol.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Under [F1], each of the pairs $(0,0)$ and $(1,1)$ has source probability $1/4$. Under independent maps $F_X,F_Y:\\{0,1\\}\\to[M]$, each equality $F_X(0)=F_X(1)$ and $F_Y(0)=F_Y(1)$ has probability $1/M$, because the two labels in each map are independent and uniform. The two equalities are independent across encoders, so both competing pairs collide in both message coordinates with probability $M^{-2}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Under a shared map $F_X=F_Y=F$, both message-coordinate collision conditions are the same event $F(0)=F(1)$. Its probability is $1/M$, not $1/M^2$. At $M=2$, the two probabilities are $1/4$ and $1/2$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The calculation identifies why the independent-map hypothesis in [F3] permits multiplication of per-encoder collision probabilities. It does not claim that every shared-map code is poor; it shows that this particular product bound cannot be used for the shared ensemble.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires finite nonempty alphabets, so an empty alphabet is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement requires finite nonempty alphabets, so an empty alphabet is excluded. Independent item review: Two independent bin equalities each have probability 1/M; sharing a map makes them the same event, changing M^-2 to M^-1 (1.1–2.1).",
+            "item_sha256": "8f151ac5f2c2e9936d4102861dfbfeedc08330131b1628175fa3236a4a183522",
+            "row_sha256": "d1d9850135e89f1c7082f3de4c73a23de9270ace14ffb012b4cc51fc1d4bfe2c"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The source is uniform with full support and M≥2, so no zero-probability label event is a boundary case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes binary source alphabets and assumes M≥2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The source law is the nondegenerate independent fair binary pair."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 evaluates the smallest allowed bin count M=2 explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 calculate probabilities in finite random-map ensembles."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an iff claim. Independent item review: Two independent bin equalities each have probability 1/M; sharing a map makes them the same event, changing M^-2 to M^-1 (1.1–2.1).",
+            "item_sha256": "8f151ac5f2c2e9936d4102861dfbfeedc08330131b1628175fa3236a4a183522",
+            "row_sha256": "34eb67a4b04128866b44e8d9765cd7c3948081295582ac860ec103a98d4b1954"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement is not an iff claim. Independent item review: Two independent bin equalities each have probability 1/M; sharing a map makes them the same event, changing M^-2 to M^-1 (1.1–2.1).",
+            "item_sha256": "8f151ac5f2c2e9936d4102861dfbfeedc08330131b1628175fa3236a4a183522",
+            "row_sha256": "b80a08bae6b182f58d634d4c3146e3b39d3b859b6e67aa116ed992896d420f42"
+          }
+        }
+      ]
+    }
+  }
+}

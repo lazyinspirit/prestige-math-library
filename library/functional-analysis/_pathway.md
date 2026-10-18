@@ -39,6 +39,9 @@ parts:
       - hilbert-space-geometry-and-riesz-representation
       - compact-operators-and-riesz-schauder-theory
       - measurable-hilbert-fields-and-direct-integral-operators
+  - part: algebra-and-physics-extensions
+    title: Algebra and representation interfaces
+    pages: ["operator-algebraic-states-and-gns-representations"]
 ---
 
 ## foundations
@@ -58,3 +61,7 @@ operator calculi, Gelfand theory; compact self-adjoint spectral theorem with
 Hilbert--Schmidt and trace-class operators; Fréchet calculus; Stone's theorem;
 Fredholm determinants, Lidskii's trace formula; measurable Hilbert fields,
 direct integrals, multiplicity for separable abelian von Neumann algebras.
+
+## algebra-and-physics-extensions
+
+These draft extensions connect the existing foundations to algebraic structures and representation problems motivated by theoretical physics. Each companion supplies the planned examples and boundary cases; exact hypotheses, local proof obligations, and reuse holds remain in its page contract.

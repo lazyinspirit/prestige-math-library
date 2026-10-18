@@ -1,0 +1,282 @@
+--- a/tools/step5-initial-published-maintenance.test.mjs
++++ b/tools/step5-initial-published-maintenance.test.mjs
+@@ -9,8 +9,8 @@
+ import {statementHash} from './step5-statement.mjs';
+ import {MODELS} from './models.mjs';
+ import {recordedPublishedRepair} from './published-repair-policy.mjs';
+-import {recordInitialPublishedMaintenance,loadInitialPublishedMaintenance,isInitialPublishedMaintenance,initialPublishedSupportingHistory} from './step5-initial-published-maintenance.mjs';
+-import {validateReports,collect,prepareImpact,reviewContextHashes,reviewMatchesCurrent} from './step5-workflow.mjs';
++import {recordInitialPublishedMaintenance,loadInitialPublishedMaintenance,isInitialPublishedMaintenance,initialPublishedSupportingHistory,initialPublishedBaselineExclusions,verifyInitialPublishedBaselineExclusions} from './step5-initial-published-maintenance.mjs';
++import {validateReports,collect,prepareImpact,reviewContextHashes,reviewMatchesCurrent,verifyWave} from './step5-workflow.mjs';
+ import {readLibraryItems} from './step5-rounds.mjs';
+ const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
+ const run='test-initial-published',id='thm-published',consumer='lem-consumer',dir=`research/${run}-step5-v2`,dispatch=`research/${run}-dispatch`;
+@@ -216,3 +216,95 @@
+ test('optional normalization never authorizes a nonpublished manifest carrier',t=>{
+  const f=fixture(t),m=f.request.manifests[1],old=JSON.parse(readFileSync(join(f.root,m.archive),'utf8')),before=`research/${run}-nonpublished-before.json`;old[0].items[0].justified_by=[];f.put(before,old);f.files.push(before);f.request.metadata_carriers.push({path:m.path,before_file:before,current_file:m.archive});f.save();assert.throws(f.record,/not an exact old\/current published-source mirror/);
+ });
++
++function originalOrdinaryCertificate(f){
++ f.record();const history=loadInitialPublishedMaintenance(f.root,run),path=join(f.root,dir,'initial-1-collected.json');
++ const collection={version:2,run,phase:'initial',round:1,errors:[],reviews:[],evidence:{...history.evidence},published_maintenance:{path:history.path,ids:[...history.ids],historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false}};
++ writeFileSync(path,JSON.stringify(collection));const certificate={version:2,run,phase:'impact-initial',round:1,at:'2026-10-01T13:00:00Z',items:[],changed:[],evidence:{...collection.evidence,[path]:hash(JSON.stringify(collection))}};
++ const saveCertificate=()=>{const {sha256,...payload}=certificate;certificate.sha256=hash(payload);f.put(join(dir,'certification-impact-initial-1.json'),certificate);};saveCertificate();
++ const dispatchPath=join(dispatch,'tool-step5-v2-certify-impact-initial-r1-all.result.json'),native={run,role:'tool',label:'step5-v2-certify-impact-initial-r1-all',covers:['all'],written_by:'autopilot',ok:true,ended_at:'2026-10-01T13:00:01Z'};f.put(dispatchPath,native);
++ return {history,collection,certificate,path,native,dispatchPath,saveCertificate};
++}
++function laterOrdinaryCertificate(f){const basis=initialPublishedBaselineExclusions(f.root,run);return {basis,certificate:{version:2,run,phase:'impact-repeat',round:1,evidence:{...basis.evidence},ordinary_published_baseline_exclusions:structuredClone(basis.record)}};}
++test('baseline compatibility discharges only original changed guard, not current consumer context or impact scope',t=>{
++ const f=fixture(t);originalOrdinaryCertificate(f);const {basis,certificate}=laterOrdinaryCertificate(f);
++ assert.deepEqual([...basis.ids],[id]);assert.equal(certificate.ordinary_published_baseline_exclusions.native_review_granted,false);
++ verifyInitialPublishedBaselineExclusions(f.root,run,certificate,{current:true});
++ // A real consumer remains discovered even while its supplier's original
++ // baseline change is exempt. No review row is synthesized by the helper.
++ assert.ok(readLibraryItems(f.root,{run}).find(x=>x.id===consumer).deps.includes(id));
++ assert.equal(basis.reviews,undefined);assert.equal(basis.record.mathematical_acceptance,false);
++});
++test('baseline compatibility preserves all-published default without old history',t=>{
++ const f=fixture(t);assert.equal(initialPublishedBaselineExclusions(f.root,run),null);
++ assert.throws(()=>verifyInitialPublishedBaselineExclusions(f.root,run,{phase:'impact-repeat',ordinary_published_baseline_exclusions:{entries:[{id}]}}),/unlicensed/);
++});
++test('baseline compatibility cannot bless new audit before original native certificate',t=>{
++ const f=fixture(t);f.record();assert.equal(initialPublishedBaselineExclusions(f.root,run),null);
++});
++for(const kind of ['body','status','supplier-deps','verification'])test(`baseline compatibility rejects inherited exclusion after ${kind} source edit`,t=>{
++ const f=fixture(t);originalOrdinaryCertificate(f);const {certificate}=laterOrdinaryCertificate(f);
++ const changed=kind==='body'?f.after+'\nA later actual proof repair.\n':kind==='status'?f.after.replace('status: published','status: draft'):kind==='supplier-deps'?f.after.replace('deps: [def-context]','deps: []'):f.after.replace('verification:','verification:\n  unrelated: 2026-10-02');
++ f.put(`items/${id}.md`,changed);assert.equal(initialPublishedBaselineExclusions(f.root,run).ids.size,0);
++ assert.throws(()=>verifyInitialPublishedBaselineExclusions(f.root,run,certificate,{current:true}),/stale ordinary/);
++ // Prior native certification provenance can still be read while a genuine
++ // later repair seeks a new current review; it is not current reuse credit.
++ verifyInitialPublishedBaselineExclusions(f.root,run,certificate);
++});
++test('baseline compatibility rejects deleted source on saved reuse',t=>{
++ const f=fixture(t);originalOrdinaryCertificate(f);const {certificate}=laterOrdinaryCertificate(f);rmSync(join(f.root,`items/${id}.md`));
++ assert.equal(initialPublishedBaselineExclusions(f.root,run).ids.size,0);assert.throws(()=>verifyInitialPublishedBaselineExclusions(f.root,run,certificate,{current:true}),/stale ordinary/);
++});
++for(const key of ['history','frontier','baseline','collection'])test(`baseline compatibility rejects altered original certificate ${key} pin`,t=>{
++ const f=fixture(t),o=originalOrdinaryCertificate(f),path=key==='history'?o.history.path:key==='collection'?o.path:join(f.root,dir,key+'.json');o.certificate.evidence[path]='0'.repeat(64);o.saveCertificate();
++ assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/does not pin/);
++});
++test('baseline compatibility rejects source already assigned/certified by original native lane',t=>{
++ const f=fixture(t),o=originalOrdinaryCertificate(f);o.certificate.items.push({id});o.saveCertificate();assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/native subject/);
++});
++test('baseline compatibility rejects original changed inventory reinterpretation',t=>{
++ const f=fixture(t),o=originalOrdinaryCertificate(f);o.certificate.changed.push(id);o.saveCertificate();assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/native subject/);
++});
++test('baseline compatibility rejects collection marker mutation',t=>{
++ const f=fixture(t),o=originalOrdinaryCertificate(f);o.collection.published_maintenance.current_review_granted=true;writeFileSync(o.path,JSON.stringify(o.collection));o.certificate.evidence[o.path]=hash(JSON.stringify(o.collection));o.saveCertificate();assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/exact published history/);
++});
++test('baseline compatibility rejects unsuccessful controller completion',t=>{
++ const f=fixture(t),o=originalOrdinaryCertificate(f);f.put(o.dispatchPath,{...o.native,ok:false});assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/genuine original/);
++});
++for(const kind of ['unknown-id','guard','receipt','duplicate','grant','missing-evidence','missing-record'])test(`baseline compatibility rejects saved ${kind} forgery`,t=>{
++ const f=fixture(t);originalOrdinaryCertificate(f);const {certificate}=laterOrdinaryCertificate(f),record=certificate.ordinary_published_baseline_exclusions;
++ if(kind==='unknown-id')record.entries[0].id='thm-unlicensed';else if(kind==='guard')record.entries[0].guard_sha256='0'.repeat(64);else if(kind==='receipt')record.entries[0].receipt.path='research/fake.json';else if(kind==='duplicate')record.entries.push(record.entries[0]);else if(kind==='grant')record.native_review_granted=true;else if(kind==='missing-evidence')delete certificate.evidence[record.history.path];else delete certificate.ordinary_published_baseline_exclusions;
++ assert.throws(()=>verifyInitialPublishedBaselineExclusions(f.root,run,certificate),/ordinary published/);
++});
++test('baseline compatibility rejects forged first certificate digest',t=>{
++ const f=fixture(t),o=originalOrdinaryCertificate(f);o.certificate.changed.push('lem-forged');f.put(join(dir,'certification-impact-initial-1.json'),o.certificate);assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/genuine original/);
++});
++test('baseline compatibility retains outside-frontier successors as ordinary context only',t=>{
++ const f=fixture(t);originalOrdinaryCertificate(f);const basis=initialPublishedBaselineExclusions(f.root,run);assert.ok(!basis.ids.has('def-context'));assert.equal(basis.record.entries.length,1);
++});
++
++function writeCurrentCompatibilityCertificate(f,items=[]){
++ const {basis,certificate}=laterOrdinaryCertificate(f);certificate.items=items;certificate.creations=[];
++ certificate.sha256=hash(certificate);f.put(join(dir,'certification.json'),certificate);return {basis,certificate};
++}
++test('real verifyWave accepts authenticated unchanged ordinary baseline without synthetic native item',t=>{
++ const f=fixture(t);originalOrdinaryCertificate(f);writeCurrentCompatibilityCertificate(f);
++ const cert=verifyWave(f.root,run,{contextHasher:()=>new Map()});assert.deepEqual(cert.items,[]);
++ assert.equal(cert.ordinary_published_baseline_exclusions.entries[0].id,id);
++});
++for(const change of ['body','status','receipt'])test(`real verifyWave rejects excluded successor ${change} change`,t=>{
++ const f=fixture(t);originalOrdinaryCertificate(f);writeCurrentCompatibilityCertificate(f);
++ if(change==='receipt')f.put(f.currentPath,{...f.successor,correction:'Altered unsealed receipt.'});
++ else f.put(`items/${id}.md`,change==='status'?f.after.replace('status: published','status: draft'):f.after+'\nLater proof modification.\n');
++ assert.throws(()=>verifyWave(f.root,run,{contextHasher:()=>new Map()}),change==='receipt'?/stale binding/:/stale ordinary/);
++});
++test('real verifyWave still rejects uncovered draft repair beside ordinary exclusion',t=>{
++ const f=fixture(t);originalOrdinaryCertificate(f);writeCurrentCompatibilityCertificate(f);f.put(`items/${consumer}.md`,f.draft+'\nA later draft proof correction.\n');
++ assert.throws(()=>verifyWave(f.root,run,{contextHasher:()=>new Map()}),new RegExp('uncovered Step 5 repair '+consumer));
++});
++test('real verifyWave keeps actual current native consumer item and supplier context checks',t=>{
++ const f=fixture(t);originalOrdinaryCertificate(f);
++ const item={id:consumer,guard_sha256:itemHashGuard(f.draft),item_sha256:'a'.repeat(64),context_sha256:'b'.repeat(64)};
++ writeCurrentCompatibilityCertificate(f,[item]);
++ assert.throws(()=>verifyWave(f.root,run,{contextHasher:()=>new Map([[consumer,{item_sha256:item.item_sha256,context_sha256:'c'.repeat(64)}]])}),new RegExp('stale Step 5 certification context '+consumer));
++});
+--- a/tools/step5-initial-published-maintenance.md
++++ b/tools/step5-initial-published-maintenance.md
+@@ -178,3 +178,28 @@
+ For the optional SCHEMA field `justified_by` only, an absent value and an empty array denote the same empty edge set. Current published manifest mirrors may retain their existing `justified_by: []` when the actual source omits it, or omit it when the actual source explicitly has an empty array. No source field needs to be added just for presence equality.
+ 
+ An explicitly recorded manifest empty/absent normalization remains limited to authenticated published IDs and source-backed empty endpoints; its exact old/current raw archives are preserved. Nulls, strings, objects and nonempty arrays receive no empty normalization. Every other mirrored field, native historical byte/hash, source, receipt, original claim and ordinary publication guard remains exact.
++
++
++## Historical ordinary baseline compatibility
++
++An existing ordinary bridge may have been collected and initially certified
++before selected published subjects entered the general native audit scope.
++Later certification can exclude only that bridge's exact unchanged archived
++published successors from the *original baseline-difference* obligation. The
++bridge, initial collection, original native certificate, successful controller
++result, frozen frontier/baseline pins and current ordinary repair policy must
++all authenticate. A new audit with no such original certificate has no exception.
++
++Later certificates bind `ordinary_published_baseline_exclusions` and all original
++evidence. These are historical ordinary-maintenance records, never native item
++reviews, mathematical acceptance or audit coverage. Saved certificate reuse checks
++the excluded full current bytes; changed/deleted/status-modified sources cannot
++inherit the old exception. A legitimate subsequent change follows ordinary native
++review requirements. The original initial certificate stays immutable.
++
++Only the baseline-change list is filtered. Frozen frontier, impact discovery,
++supplier/consumer propagation, persistent reviewer ownership, current contexts,
++new necessary consumer maintenance, deletion protection, gates and fatal thresholds
++retain their full ordinary scope. A native current consumer review remains a real
++review even when the source also has historical baseline maintenance. Unchanged
++source bytes do not establish that its supplier context is unchanged.
+--- a/tools/step5-initial-published-maintenance.mjs
++++ b/tools/step5-initial-published-maintenance.mjs
+@@ -290,3 +290,67 @@
+  mkdirSync(dir,{recursive:true});for(const [p,text]of virtual){if(existsSync(p))need(readFileSync(p,'utf8')===text,'immutable creation archive conflict');else writeFileSync(p,text,{flag:'wx'});}
+  writeFileSync(target,JSON.stringify(row,null,2)+'\n',{flag:'wx'});return {path:target,ids:row.entries.map(e=>e.id),native_execution_coverage_adopted:false,current_review_granted:false};
+ }
++
++// The old ordinary bridge can discharge only its original baseline-diff
++// obligation. It never removes a subject from impact discovery or review scope.
++export function initialPublishedBaselineExclusions(root,run,{current=true}={}){
++ root=resolve(root);const history=loadInitialPublishedMaintenance(root,run);
++ if(!history)return null;
++ const dir=join(root,'research',`${run}-step5-v2`),certificatePath=join(dir,'certification-impact-initial-1.json');
++ // A newly assigned audit cannot manufacture compatibility before its first
++ // certificate. New/default published subjects retain all native obligations.
++ if(!existsSync(certificatePath))return null;
++ const collectionPath=join(dir,'initial-1-collected.json'),dispatchPath=join(root,'research',`${run}-dispatch`,'tool-step5-v2-certify-impact-initial-r1-all.result.json');
++ const certificate=read(certificatePath),collection=read(collectionPath),dispatch=read(dispatchPath),{sha256,...payload}=certificate;
++ need(certificate.version===2&&certificate.run===run&&certificate.phase==='impact-initial'&&certificate.round===1
++  &&sha256===hash(payload)&&date(certificate.at)&&Array.isArray(certificate.items)&&Array.isArray(certificate.changed)
++  &&collection.run===run&&collection.phase==='initial'&&collection.round===1&&same(collection.errors,[])
++  &&dispatch.run===run&&dispatch.role==='tool'&&dispatch.label==='step5-v2-certify-impact-initial-r1-all'
++  &&dispatch.written_by==='autopilot'&&dispatch.ok===true&&same(dispatch.covers,['all'])
++  &&date(dispatch.ended_at)&&Date.parse(dispatch.ended_at)>=Date.parse(certificate.at),
++  'missing genuine original ordinary native certification');
++ const marker=collection.published_maintenance;
++ need(marker&&resolve(root,marker.path)===history.path&&same([...marker.ids].sort(),[...history.ids].sort())
++  &&marker.historical_only===true&&marker.current_review_granted===false&&marker.native_execution_coverage_adopted===false,
++  'original collection lacks its exact published history');
++ const evidence={...history.evidence};
++ for(const file of [history.path,collectionPath,join(dir,'frontier.json'),join(dir,'baseline.json')]){
++  const expected=hash(readFileSync(file,'utf8'));
++  need(certificate.evidence?.[file]===expected,'original certificate does not pin ordinary history: '+file);
++  if(file!==collectionPath)need(collection.evidence?.[file]===expected,'original collection does not pin ordinary history: '+file);
++  evidence[file]=expected;
++ }
++ for(const file of [certificatePath,dispatchPath])evidence[file]=hash(readFileSync(file,'utf8'));
++ const frontier=new Set(read(join(dir,'frontier.json')).ids),entries=[];
++ for(const entry of history.entries){
++  need(!certificate.items.some(row=>row.id===entry.id)&&!certificate.changed.includes(entry.id),
++   'original certificate already treats published history as a native subject');
++  if(!frontier.has(entry.id))continue;
++  const after=readFileSync(resolve(root,entry.current_file),'utf8'),guard=itemHashGuard(after);
++  need(recordedPublishedRepair(root,entry.id,after,entry.current_receipt.path).ok,'historical ordinary repair policy no longer valid');
++  if(current){const path=join(root,'items',`${entry.id}.md`);if(!existsSync(path))continue;
++   const live=readFileSync(path,'utf8');if(live!==after||!recordedPublishedRepair(root,entry.id,live,entry.current_receipt.path).ok)continue;}
++  entries.push({id:entry.id,guard_sha256:guard,raw_sha256:hash(after),receipt:entry.current_receipt});
++ }
++ entries.sort((a,b)=>a.id.localeCompare(b.id));
++ const record={version:1,kind:'historical-ordinary-published-baseline-exclusions',run,
++  historical_only:true,native_review_granted:false,mathematical_acceptance:false,
++  history:{path:history.path,sha256:evidence[history.path]},initial_collection:{path:collectionPath,sha256:evidence[collectionPath]},
++  initial_certificate:{path:certificatePath,sha256:evidence[certificatePath]},entries};
++ return {ids:new Set(entries.map(row=>row.id)),record,evidence};
++}
++export function verifyInitialPublishedBaselineExclusions(root,run,certificate,{current=false}={}){
++ const basis=initialPublishedBaselineExclusions(root,run,{current:false}),record=certificate.ordinary_published_baseline_exclusions;
++ if(!basis){need(record===undefined,'unlicensed ordinary published exclusions');return;}
++ // The immutable original initial certificate predates this compatibility
++ // record. It is an origin, never retroactively rewritten or granted rows.
++ if(certificate.phase==='impact-initial'&&certificate.round===1){need(record===undefined,'original certificate cannot acquire compatibility metadata');return;}
++ need(record&&Array.isArray(record.entries),'missing ordinary published exclusion provenance');
++ const {entries,...envelope}=record,{entries:originalEntries,...expected}=basis.record;
++ need(same(envelope,expected)&&new Set(entries.map(e=>e.id)).size===entries.length
++  &&same(entries.map(e=>e.id),entries.map(e=>e.id).sort())
++  &&entries.every(entry=>originalEntries.some(old=>same(entry,old))), 'forged ordinary published exclusion provenance');
++ for(const [file,expectedHash]of Object.entries(basis.evidence))need(certificate.evidence?.[file]===expectedHash,'certificate drops ordinary published evidence: '+file);
++ if(current)for(const entry of entries){const path=join(resolve(root),'items',`${entry.id}.md`);
++  need(existsSync(path)&&hash(readFileSync(path,'utf8'))===entry.raw_sha256,'stale ordinary published baseline exclusion: '+entry.id);}
++}
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -27,7 +27,7 @@
+ import { orderedItems, runPages } from './item-dependency-levels.mjs';
+ import { loadReaderConcerns, checkFrozenReaderConcernInput, readerConcernSession } from './step5-reader-concerns.mjs';
+ import { loadInitialScopeFindings, checkFrozenInitialScopeFindingInput, recordInitialScopeFindings } from './step5-initial-scope-findings.mjs';
+-import { loadInitialPublishedMaintenance, recordInitialPublishedMaintenance, isInitialPublishedMaintenance, initialPublishedSupportingHistory } from './step5-initial-published-maintenance.mjs';
++import { loadInitialPublishedMaintenance, recordInitialPublishedMaintenance, isInitialPublishedMaintenance, initialPublishedSupportingHistory, initialPublishedBaselineExclusions, verifyInitialPublishedBaselineExclusions } from './step5-initial-published-maintenance.mjs';
+ export { readerConcernSession };
+ 
+ export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
+@@ -2150,6 +2150,7 @@
+     maintenanceSeen.add(entry.id);
+   }
+   verifyEvidence(row.evidence,{root,run,certificate:row});
++  verifyInitialPublishedBaselineExclusions(root,run,row);
+   return row;
+ }
+ 
+@@ -2157,6 +2158,7 @@
+   const savedPath=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`certification-${phase}-${round}.json`));
+   if(existsSync(savedPath)) {
+     const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence,{root,run});
++    verifyInitialPublishedBaselineExclusions(root,run,saved,{current:true});
+     const frontier=gateFrontier(root,run),maintained=new Set((saved.maintenance_certifications??[]).map(row=>row.id));
+     const scoped=saved.items.filter(row=>frontier.has(row.id)||maintained.has(row.id));
+     const current=hashes(root,run);for(const row of scoped)requireValue(row.guard_sha256===current[row.id],`stale completed certification ${row.id}`);
+@@ -2181,7 +2183,10 @@
+   // native owner review can supply current certification for this target.
+   for(const id of sourceResult?.metadata_history_current_review_targets??[])
+     requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native metadata-target review: ${id}`);
+-  const changed=diff(baseline,current).filter(certifiedScope);
++  const publishedBaseline=initialPublishedBaselineExclusions(root,run);
++  // Only this original baseline difference is historical ordinary maintenance.
++  // Native consumer reviews, contexts, impacts and gates keep the full scope.
++  const changed=diff(baseline,current).filter(id=>certifiedScope(id)&&!publishedBaseline?.ids.has(id));
+   const priorItems=new Map((prior?.items??[]).filter(row=>certifiedScope(row.id)).map(row=>[row.id,row]));
+   const progress=read(impactProgressPath(root,run,phase,round));
+   const impactPack=readPack(root,run,progress.repairBasePhase??phase,round);
+@@ -2210,7 +2215,7 @@
+       `stale root owner review context before certification: ${id}`);
+   }
+   if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
+-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence};
++  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence};
+   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
+   const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??maintenance.basis.get(id)?.reason??priorItems.get(id)?.reason}));
+   const creationRows=[...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])],creationById=new Map();
+@@ -2229,6 +2234,8 @@
+     frozen(join(dir,`threshold-${round}.json`),threshold);
+     const p=join(dir,`threshold-${round}.json`);evidence[p]=digest(readFileSync(p,'utf8'));
+   }
++  if(publishedBaseline)certificate.ordinary_published_baseline_exclusions=publishedBaseline.record;
++  verifyInitialPublishedBaselineExclusions(root,run,certificate,{current:true});
+   certificate.sha256=digest(certificate);
+   frozen(join(dir,`certification-${phase}-${round}.json`),certificate);
+   atomic(join(dir,'certification.json'),certificate);
+@@ -2265,11 +2272,13 @@
+ 
+ export function verifyWave(root,run,{contextHasher=currentHashesMany,frontierOnly=true}={}) {
+   const cert=verifyCertification(root,run,{allowMissing:false}), current=hashes(root,run);
++  verifyInitialPublishedBaselineExclusions(root,run,cert,{current:true});
++  const publishedBaseline=new Set((cert.ordinary_published_baseline_exclusions?.entries??[]).map(row=>row.id));
+   const frontier=frontierOnly?gateFrontier(root,run):null,items=cert.items.filter(row=>!frontier||frontier.has(row.id));
+   const contexts=contextHasher(root,items.map(row=>row.id));
+   for(const row of items)if(row.guard_sha256!==current[row.id])throw Error(`stale Step 5 certification ${row.id}`);
+   for(const row of items){const now=contexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`stale Step 5 certification context ${row.id}`);}
+-  for(const id of diff(read(join(workflowDir(root,run),'baseline.json')),current))if((!frontier||frontier.has(id))&&!items.some(row=>row.id===id))throw Error(`uncovered Step 5 repair ${id}`);
++  for(const id of diff(read(join(workflowDir(root,run),'baseline.json')),current))if((!frontier||frontier.has(id))&&!publishedBaseline.has(id)&&!items.some(row=>row.id===id))throw Error(`uncovered Step 5 repair ${id}`);
+   return cert;
+ }
+ 

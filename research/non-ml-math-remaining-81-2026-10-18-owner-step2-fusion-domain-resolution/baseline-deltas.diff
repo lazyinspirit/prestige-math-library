@@ -1,0 +1,989 @@
+--- passed-step1-baseline/items/alg-qa-37-exhaustive-b6-block-pair-compiler.md
++++ actual-preproposal/items/alg-qa-37-exhaustive-b6-block-pair-compiler.md
+@@ -36,8 +36,9 @@
+ $T_8\in SU(8)$; a positive binary-rational tolerance $\varepsilon$; and the
+ fixed normalized six-strand Fibonacci B6 generators in both total-charge
+ blocks. Enumerate all finite Artin words over the six-strand generators and
+-their inverses, and at stage $s=1,2,\ldots$ inspect every word of length at most $s$ and every
+-precision $p\le s$ not previously inspected, in fixed lexicographic order. For each word $b$ and precision $p$, compute rational complex
++their inverses, and at stage $s=1,2,\ldots$ inspect every word of length at
++most $s$ and every integer precision $1\le p\le s$ not previously inspected,
++in fixed lexicographic order. For each word $b$ and precision $p$, compute rational complex
+ matrix approximants $P_{5,b,p},P_{8,b,p}$ to its exact normalized block
+ matrices and request rational target approximants $Q_{5,p},Q_{8,p}$. Each
+ real and imaginary entry error in these approximants is certified at most
+@@ -55,6 +56,16 @@
+ access. The returned matrices are
+ normalized by the common $R_1$ scalar; their physical phase is recorded by
+ [[def-qa-37-phase-reference-cost]].
++
++For this compiler subroutine's ledger record, $N_{\rm any}=6$,
++$\epsilon_{\rm op}=\varepsilon$, $N_{\rm meas}=B_{\rm out}=0$, and
++$N_{\rm phase}=t_{\rm phase}=0$ because it performs no measurement or phase
++correction. Preparation, ancilla, Hamiltonian-time, transport, measurement-
++implementation and physical-leakage coordinates are “not applicable” because
++this mathematical search supplies no physical realization. $L_{\rm in}$,
++$|b|$, $b_{\max}$, and $t_{\rm cl}$ record the encoded target/compiler inputs,
++returned word, greatest precision request, and measured search/postprocessing
++bit time.
+ 
+ ## Facts & Assumptions
+ 
+
+--- passed-step1-baseline/items/alg-qa-37-su2-solovay-kitaev-compiler.md
++++ actual-preproposal/items/alg-qa-37-su2-solovay-kitaev-compiler.md
+@@ -33,21 +33,28 @@
+ 
+ ## Definition
+ 
+-**Inputs:** a certified Cauchy name for an exact $S\in SU(2)$; a positive
+-binary-rational tolerance $\varepsilon\le\eta_0$; the fixed inverse-closed
+-dense Fibonacci alphabet $G_{\rm Fib}$; and a fixed certified base-net
+-certificate $(\mathcal N_0,\eta_0,L_0)$ with $\eta_0<64^{-2}$. Apply the
+-finite-precision Solovay–Kitaev recursion of
+-[[alg-qc-solovay-kitaev-unitary-compiler]] to this alphabet and target. Return
+-the resulting word in the labels $zB_1,zB_2,(zB_1)^{-1},(zB_2)^{-1}$, its
+-expanded length, and its Artin exponent sum $k$. For a finite Turing interface, also supply the minimal-polynomial and rational
+-isolating-interval descriptions of every real and imaginary gate coordinate
+-required by the finite-precision SK theorem. The exact-real recursion and
+-the finite Turing interface are distinguished: the published SK error theorem
+-uses exact-real comparisons, while the finite bit implementation requires the
+-polynomial-name and algebraic-entry hypotheses stated in
+-[[thm-qc-solovay-kitaev-bit-complexity]]. The base-net list is supplied
+-certificate data; this algorithm does not compute it from density.
++**Inputs:** a positive binary-rational tolerance $0<\varepsilon\le\eta_0$;
++the fixed inverse-closed Fibonacci alphabet $G_{\rm Fib}$; and a fixed
++certified base-net certificate $(\mathcal N_0,\eta_0,L_0)$ with
++$0<\eta_0<64^{-2}$. Select exactly one target interface:
++
++1. **Ideal exact-real interface:** supply an exact-real handle for
++   $S\in SU(2)$ with exact fixed-dimensional matrix operations and exact
++   comparisons. Invoke the ideal recursive procedure
++   [[alg-qc-solovay-kitaev-unitary-compiler]] on $S$ and $\varepsilon$.
++2. **Finite Turing interface:** supply a polynomial-time Cauchy name for
++   $S\in SU(2)$ and the minimal-polynomial and rational isolating-interval
++   descriptions of every real and imaginary gate coordinate required by the
++   finite-precision theorem. Run the deterministic Turing implementation
++   established by [[thm-qc-solovay-kitaev-bit-complexity]] on that name,
++   alphabet, certificate, and tolerance. This branch uses its certified
++   interval decisions and does not invoke exact-real comparisons.
++
++In either branch, return the resulting word in the labels
++$zB_1,zB_2,(zB_1)^{-1},(zB_2)^{-1}$, its expanded length, and its Artin
++exponent sum $k$. The base-net list is supplied certificate data; this
++algorithm does not compute it from density. A Cauchy name alone is not an
++exact-real handle, and the ideal branch makes no finite bit-time claim.
+ 
+ **Output:** a braid word $b$ and ledger scalar $(R_1z^{-1})^k$ such that,
+ when the algorithm's hypotheses hold, the normalized SU(2) matrix of $b$ is
+
+--- passed-step1-baseline/items/cex-qc-tqc-algebraic-braid-not-unitary.md
++++ actual-preproposal/items/cex-qc-tqc-algebraic-braid-not-unitary.md
+@@ -12,6 +12,7 @@
+   - def-braid-group-by-the-artin-presentation
+   - def-generic-type-a-hecke-algebra
+   - def-linear-isometry-and-orthogonal-or-unitary-operator
++  - def-real-and-complex-inner-product-space
+ justified_by: []
+ generation:
+   role: counterexample
+@@ -29,9 +30,9 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** the strict monoidal category of finite-dimensional complex vector
+-spaces, $X=\mathbb C$, $R=2I_{X\otimes X}$, and the three-strand braid group
+-$B_3$.
++**Given:** the monoidal category of finite-dimensional complex vector spaces
++with its usual tensor product, $X=\mathbb C$, $R=2\operatorname{id}_{X\otimes X}$,
++and the three-strand braid group $B_3$.
+ 
+ [F1] [[def-yang-baxter-operator-on-an-object]]: a Yang–Baxter operator is an
+ invertible map $R:X\otimes X\to X\otimes X$ satisfying the cubic braid equation
+@@ -52,12 +53,16 @@
+ operator on a finite-dimensional complex inner-product space is an invertible
+ linear isometry, hence preserves the induced norm.
+ 
++[F6] [[def-real-and-complex-inner-product-space]]: the inner product is
++linear in the first variable, conjugate-linear in the second, and positive
++definite; these axioms give the scalar norm calculation used below.
++
+ ## Counterexample
+-1.1 In this strict monoidal category, the map $R=2I$ is invertible. On $X^{\otimes3}=\mathbb C$, both local operators are $R_1=R_2=2I$, so each side of the Yang–Baxter equation is $8I$. Thus [F1] applies. [given, F1, algebra]
++1.1 The map $R=2\operatorname{id}_{X\otimes X}$ is invertible. In the $\mathbb C$-linear strictification used by [F1], the transported map is $2\operatorname{id}$ on $X'\otimes X'$. Hence both local operators on $X'^{\otimes3}$ are $2\operatorname{id}$, and each side of the Yang–Baxter equation is $8\operatorname{id}$. Thus [F1] applies without identifying the tensor power with the original object $\mathbb C$. [given, F1, algebra]
+ 
+ 2.1 By [F2] and [F3], $\sigma_1$ and $\sigma_2$ act by $2I$ and their braid relator holds, since both sides are $8I$. At the root Hecke parameter $v=2$, the valid specialization $\mathbb Z[v^{\pm1}]\to\mathbb C$ sends each $T_i$ to $2$ and satisfies the root quadratic equation $(2-2)(2+1)=0$. Thus the scalar action also satisfies the Hecke quadratic relation in the stated normalization. [F2, F3, F4, step 1.1, algebra]
+ 
+-3.1 For any positive-definite inner product and any nonzero $z\in\mathbb C$, $\|2z\|=2\|z\|\ne\|z\|$. By [F5], the generator $2I$ is not unitary for any such inner product. Therefore these algebraic braid and Hecke relations do not force unitarity. [F5, given, algebra] ∎
++3.1 For any positive-definite inner product and any nonzero $z\in\mathbb C$, [F6] and nonnegativity of the norm give $\|2z\|=2\|z\|\ne\|z\|$. By [F5], the generator $2I$ is not unitary for any such inner product. Therefore these algebraic braid and Hecke relations do not force unitarity. [F5, F6, given, algebra] ∎
+ ## Remarks
+ 
+ This example uses the repository's $v$-normalization $(T_i-v)(T_i+1)=0$.
+
+--- passed-step1-baseline/items/def-anyonic-fusion-path-space.md
++++ actual-preproposal/items/def-anyonic-fusion-path-space.md
+@@ -25,7 +25,7 @@
+ 
+ ## Definition
+ 
+-Let $\mathcal C$ be a fusion category over $\mathbb C$, so it is finite semisimple, rigid, monoidal, and has simple unit [[def-fusion-and-multifusion-category]]. Let $a,b,c$ be simple objects and let $n\ge0$. Set $T_0=b$ and recursively fix the left-associated parenthesization $T_{j+1}:=T_j\otimes a$. The **fixed-boundary anyonic path space** is
++Let $\mathcal C$ be a fusion category over $\mathbb C$, so it is finite semisimple, rigid, monoidal, and has simple unit [[def-fusion-and-multifusion-category]]. Fix a set $\operatorname{Irr}(\mathcal C)$ containing exactly one representative of each simple isomorphism class, as in [[def-fusion-rules]]. Throughout this definition, $a,b,c,x,y$ and the path labels $x_j$ are elements of this representative set; in particular, distinct labels are nonisomorphic. Let $n\ge0$. Set $T_0=b$ and recursively fix the left-associated parenthesization $T_{j+1}:=T_j\otimes a$. The **fixed-boundary anyonic path space** is
+ 
+ $$H_{a,n;b,c}:=\operatorname{Hom}_{\mathcal C}(c,T_n).$$
+ 
+
+--- passed-step1-baseline/items/def-anyonic-local-channel-projector.md
++++ actual-preproposal/items/def-anyonic-local-channel-projector.md
+@@ -25,7 +25,7 @@
+ 
+ ## Definition
+ 
+-Fix a fusion-path space with repeated simple site charge $a$, a position $i$ with two adjacent $a$-labels, and a simple output $s$ of $a\otimes a$. In the tree basis where this adjacent pair is fused first, let $\Pi_s$ be the projection onto the direct summand with pair output $s$, acting as the identity on every multiplicity index inside that channel and as zero on all other pair outputs. Let $F_i$ be the typed sequence of associator changes carrying the fixed path tree to this pair-first tree; each local matrix is the F-symbol of [[def-qc-tqc-f-symbol]], with rows and columns as in that Definition. Define the **local channel projector** in the fixed path basis by
++Fix a fusion-path space with repeated simple site charge $a$, a position $i$ with two adjacent $a$-labels, and a simple output $s$ of $a\otimes a$. All charge labels, including $s$, are taken from the representative set fixed in [[def-anyonic-fusion-path-space]]. In the tree basis where this adjacent pair is fused first, let $\Pi_s$ be the projection onto the direct summand with pair output $s$, acting as the identity on every multiplicity index inside that channel and as zero on all other pair outputs. Let $F_i$ be the typed sequence of associator changes carrying the fixed path tree to this pair-first tree; each local matrix is the F-symbol of [[def-qc-tqc-f-symbol]], with rows and columns as in that Definition. Define the **local channel projector** in the fixed path basis by
+ 
+ $$P_{i,s}:=F_i^{-1}\Pi_sF_i.$$
+ 
+
+--- passed-step1-baseline/items/def-qa-37-anyon-task-and-promise.md
++++ actual-preproposal/items/def-qa-37-anyon-task-and-promise.md
+@@ -9,6 +9,7 @@
+ deps:
+   - def-qa-task-and-promise-domain
+   - def-qc-tqc-fusion-tree-basis
++  - def-qc-tqc-fixed-charge-encoding
+   - def-qc-tqc-physical-braid-interface
+   - def-qc-circuit-cost-model
+ justified_by: []
+@@ -29,20 +30,29 @@
+ ## Definition
+ 
+ Work in a fixed unitary braided fusion category and fix an ordered finite list
+-of simple charge labels, a parenthesized fusion tree, and a total charge for
++of $n\ge1$ simple charge labels, a parenthesized fusion tree, and a total charge for
+ which the fusion space is nonzero. Simple charges, multiplicity bases, and
+ admissible fusion-tree vectors have the conventions of
+-[[def-qc-tqc-fusion-tree-basis]]. A **finite anyon decision task** is a
+-promise pair $(Y,N)$ of disjoint sets of binary strings with domain
+-$D=Y\cup N$, together with a finite encoding of admissible fusion-tree input
+-labels; a solver must answer yes on $Y$ and no on $N$, with no obligation
+-outside $D$. A **finite anyon search task** is a domain $D$ and a finite-string
+-witness relation, with a valid witness required only for encoded inputs in
+-$D$. The input record states the number and order of strands, the exact Artin
+-word over positive and inverse generators available to the solver, and the
+-finite set of adjacent fusion-measurement locations. Braid action is the
+-mathematical unitary action specified by the fixed physical-interface record
+-[[def-qc-tqc-physical-braid-interface]]; a measurement location is interpreted
+-in the declared fusion-tree basis. This is a finite access model, not a claim
+-that a physical device prepares the input or realizes the braid. Input length
+-and correctness-on-promises follow [[def-qa-task-and-promise-domain]].
++[[def-qc-tqc-fusion-tree-basis]]. An encoded input subspace is specified by a
++fixed-charge isometry as in [[def-qc-tqc-fixed-charge-encoding]]. Each task
++instance supplies either an initial unit vector in that subspace as an abstract
++quantum input, or a finite state-preparation procedure whose specified output
++is that vector and whose preparation operations and ancillas are recorded.
++The instance also gives a nonnegative rational error threshold and specifies
++the correctness relation and metric to which it applies.
++
++A **finite anyon decision task** is a promise pair $(Y,N)$ of disjoint sets of
++binary strings with domain $D=Y\cup N$, together with a finite encoding of
++admissible fusion-tree input labels; a solver must answer yes on $Y$ and no on
++$N$, with no obligation outside $D$. A **finite anyon search task** is a domain
++$D$ and a finite-string witness relation, with a valid witness required only
++for encoded inputs in $D$. The input record states the number and order of
++strands, the finite alphabet of positive and inverse Artin generators
++available to the solver, any prescribed finite braid word, and the finite set
++of adjacent fusion-measurement locations.
++Braid action is the mathematical unitary action specified by the fixed
++physical-interface record [[def-qc-tqc-physical-braid-interface]]; a
++measurement location is interpreted in the declared fusion-tree basis. The
++state-preparation field is an abstract task input and does not assert that a
++physical device prepares the state or realizes the braid. Input length and
++correctness-on-promises follow [[def-qa-task-and-promise-domain]].
+
+--- passed-step1-baseline/items/def-qa-37-finite-adiabatic-braid-input.md
++++ actual-preproposal/items/def-qa-37-finite-adiabatic-braid-input.md
+@@ -41,11 +41,17 @@
+ [[def-qa-36-finite-adiabatic-path-model]]; the output propagator $U_T$ solves
+ $iU_T'(s)=TH(s)U_T(s)$. Also supply an endpoint isometry
+ $A_1:\mathbb C^m\to\operatorname{ran}P(1)$ and a specified Fibonacci braid
+-word $b$ with physical action $\rho(b)$ under the fixed convention of
+-[[ex-qc-tqc-fibonacci-data]]. The **in-band transport condition** is a
+-separate hypothesis
+-$$\|P(1)U_T(1)A_0-A_1\rho(b)\|_{\rm op}\le\epsilon_{\rm tr}.$$
+-The phase of $\rho(b)$ is recorded by
+-[[def-qa-37-phase-reference-cost]]. This condition is not a consequence of a
+-projector-leakage estimate. The model also specifies a finite output
+-measurement and, if needed, its own implementation-variation bound. The JRS expression and leakage consequence are handled as a separate result.
++word $b$ with physical action $\rho(b)$ from
++[[def-qc-tqc-physical-braid-interface]] in the fixed convention of
++[[ex-qc-tqc-fibonacci-data]], and a unitary target
++$\rho_{\rm log}(b)\in U(\mathbb C^m)$ in the declared logical input/output
++frames. The target $\rho_{\rm log}(b)$ is the selected categorical $F/R$
++action written in those frames, including the phase convention recorded by
++[[def-qa-37-phase-reference-cost]]; specifying it does not assert that the
++physical path realizes it. The **in-band transport condition** is the separate
++hypothesis
++$$\|P(1)U_T(1)A_0-A_1\rho_{\rm log}(b)\|_{\rm op}\le\epsilon_{\rm tr}.$$
++This condition is not a consequence of a projector-leakage estimate. The
++model also specifies a finite output measurement and, if needed, its own
++implementation-variation bound. The JRS expression and leakage consequence
++are handled as a separate result.
+
+--- passed-step1-baseline/items/def-qa-37-fusion-input-encoding.md
++++ actual-preproposal/items/def-qa-37-fusion-input-encoding.md
+@@ -37,7 +37,9 @@
+ [[def-qc-tqc-fusion-tree-basis]]. The input encoding uses fixed self-delimiting
+ binary codes for charge labels and nonnegative multiplicity indices, with
+ out-of-range labels rejected as invalid encodings. It also records the total
+-charge and the chosen computational subspace isometry when one is supplied,
+-as in [[def-qc-tqc-fixed-charge-encoding]]. An encoded tree is finite classical
+-data; it does not itself prepare a quantum state or assert a preparation
+-cost.
++charge and the selected computational subspace isometry required by
++[[def-qa-37-anyon-task-and-promise]], as in
++[[def-qc-tqc-fixed-charge-encoding]]. The tree labels and isometry are finite
++classical data; they do not themselves specify or prepare the initial encoded
++quantum state, which is the separate state/preparation field in the task
++record.
+
+--- passed-step1-baseline/items/def-qa-37-physical-locality-boundary.md
++++ actual-preproposal/items/def-qa-37-physical-locality-boundary.md
+@@ -36,8 +36,18 @@
+ $C^2$ Hermitian path and constant-rank uniformly gapped projection; an
+ initial preparation isometry and its cost; a slow-time schedule; an endpoint
+ frame; a separately justified identification of band transport with the
+-chosen Fibonacci $F/R$ action and its phase; a locality model for exchanges;
+-and explicit preparation, excitation, measurement, and control-error terms.
++logical-frame Fibonacci $F/R$ target of
++[[def-qa-37-finite-adiabatic-braid-input]], including its phase; and a
++locality model for exchanges. A local-Hamiltonian model specifies a finite
++lattice $\Lambda$ with its metric, an interaction range $R$, and a uniform
++per-site interaction bound $J$ for a decomposition
++$H(s)=\sum_{X\subseteq\Lambda}h_X(s)$: every $h_X(s)$ is Hermitian and
++supported on $X$, $\operatorname{diam}(X)\le R$, and
++$$\sup_{s\in[0,1],\,x\in\Lambda}\sum_{X\ni x}\|h_X(s)\|\le J.$$
++The record separately states the local-indistinguishability and stability
++criteria, including their region scales, norms, tolerances, and the evidence
++used to establish them. It also supplies explicit preparation, excitation,
++measurement, and control-error terms.
+ The first spectral-path clauses are the finite interface in
+ [[def-qc-tqc-physical-braid-interface]] and
+ [[def-qa-37-finite-adiabatic-braid-input]]. The error ledger is
+@@ -45,3 +55,7 @@
+ density theorem, or JRS leakage estimate supplies none of the material,
+ locality, preparation, or band-holonomy evidence by itself; those are
+ independent record fields, not consequences of the mathematical compiler.
++Only terms appearing as hypotheses in the stated error ledger contribute to
++its measured-output bound; a separately recorded preparation, excitation, or
++control error requires an additional bound before it can be included in a
++total physical error claim.
+
+--- passed-step1-baseline/items/def-qa-37-resource-cost-model.md
++++ actual-preproposal/items/def-qa-37-resource-cost-model.md
+@@ -29,21 +29,38 @@
+ ## Definition
+ 
+ For a finite anyon solver instance and one run, record separately the tuple
+-$$\bigl(L_{\rm in},\ |b|,\ N_{\rm meas},\ b_{\max},\ t_{\rm cl},\ \epsilon_{\rm op},\epsilon_{\rm tr},\ell_{\rm leak},\ p_{\rm leak},\ N_{\rm phase},\ t_{\rm phase}\bigr).$$
+-Here $L_{\rm in}$ is the complete input-description bit length; $|b|$ is the
+-number of braid-generator occurrences (inverse generators count as one);
+-$N_{\rm meas}$ is the number of fusion measurements; $b_{\max}$ is the
+-largest unary precision query to a certified matrix name; $t_{\rm cl}$ is
+-the classical bit time used by search and postprocessing; $\epsilon_{\rm op}$
+-is a stated operator-norm approximation bound; $\epsilon_{\rm tr}$ is a
+-separately assumed in-band transport bound; $\ell_{\rm leak}$ and
+-$p_{\rm leak}$ are leakage amplitude and probability bounds; and
+-$N_{\rm phase},t_{\rm phase}$ count phase corrections and their classical
+-control cost. Circuit description and elementary wire costs follow
+-[[def-qc-circuit-cost-model]], while classical input bit cost follows
+-[[def-qa-classical-bit-cost]] and finite nonoracle gates follow
+-[[def-qa-nonoracle-gate-cost]]. An inapplicable coordinate is marked “not
+-applicable”; it is not assigned value zero. Unless an interface explicitly
+-states a bound, no braid length, matrix precision, measurement, search step,
+-or phase correction is free. The tuple is a bookkeeping convention; it does
+-not assert any of its error or runtime bounds.
++$$\bigl(L_{\rm in},\ N_{\rm any},\ |b|,\ N_{\rm prep},\ N_{\rm anc},\ N_{\rm meas},\ B_{\rm out},\ b_{\max},\ t_{\rm cl},\ T_H,\ \epsilon_{\rm op},\epsilon_{\rm tr},\epsilon_{\rm meas},\ell_{\rm leak},\ p_{\rm leak},\ N_{\rm phase},\ t_{\rm phase}\bigr).$$
++Here $L_{\rm in}$ is the complete finite classical input-description bit
++length, including the declared task, state/preparation descriptions when
++classically encoded, and tolerance descriptions; a directly supplied quantum
++input is not assumed to have a finite classical coordinate description;
++$N_{\rm any}$ is the number of ordered simple-charge strand labels in the
++fusion-space instance; and $|b|$ is the number of braid-generator occurrences
++(inverse generators count as one). $N_{\rm prep}$ counts elementary
++operations in the declared preparation procedure, while $N_{\rm anc}$ counts
++the ancillary anyons or other physical ancilla systems used by preparation or
++computation. If the initial state is supplied directly as an abstract quantum
++input with no preparation interface, $N_{\rm prep}$ is “not applicable”, not
++silently set to zero; $N_{\rm anc}$ still records any declared solver ancillas
++(zero if none, or “not applicable” if no physical ancilla model is supplied).
++$N_{\rm meas}$ is the number of fusion measurements,
++and $B_{\rm out}$ is the total bit length of their classical outcome record
++under its declared finite encoding (zero when no measurement occurs). The
++largest unary precision query to a certified matrix name is $b_{\max}$; $t_{\rm cl}$
++is the classical bit time used by search and postprocessing. $T_H$ is the total
++Hamiltonian evolution time over the run in the declared physical time unit;
++it is “not applicable” for an abstract braid-only model without Hamiltonian
++evolution. The error coordinates $\epsilon_{\rm op},\epsilon_{\rm tr},
++\epsilon_{\rm meas},\ell_{\rm leak},p_{\rm leak}$ are respectively a stated
++operator-norm approximation bound, an independent in-band transport bound,
++an implementation-to-ideal-measurement total-variation bound, and leakage
++amplitude and probability bounds. $N_{\rm phase},t_{\rm phase}$ count phase
++corrections and their classical control cost. Circuit description and
++elementary wire costs follow [[def-qc-circuit-cost-model]], while classical
++input bit cost follows [[def-qa-classical-bit-cost]] and finite nonoracle
++gates follow [[def-qa-nonoracle-gate-cost]]. An inapplicable coordinate is
++marked “not applicable”; it is not assigned value zero. Unless an interface
++explicitly states a bound, no braid length, preparation operation, ancilla,
++matrix precision, measurement, Hamiltonian time, search step, or phase
++correction is free. The tuple is a bookkeeping convention; it does not assert
++any of its error or runtime bounds.
+
+--- passed-step1-baseline/items/def-qc-tqc-fusion-tree-basis.md
++++ actual-preproposal/items/def-qc-tqc-fusion-tree-basis.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: non-ml-math-remaining-81-2026-10-18
+ dependency_level: 3
+-deps: [def-qc-tqc-fusion-multiplicity-space, thm-qc-tqc-fusion-multiplicity-space-is-hilbert]
++deps: [def-qc-tqc-unitary-fusion-category, def-qc-tqc-fusion-multiplicity-space, thm-qc-tqc-fusion-multiplicity-space-is-hilbert]
+ justified_by: [lem-qc-tqc-fusion-tree-dimension]
+ provenance:
+   statement: literature-derived
+@@ -25,21 +25,25 @@
+ 
+ ## Definition
+ 
+-Fix an ordered list of simple charges $a_1,\ldots,a_n$, a simple total charge
+-$d$, and a parenthesized binary fusion tree. At each internal vertex with
+-incoming charges $x,y$ and outgoing charge $z$, choose one vector from an
+-orthonormal basis of $V_{xy}^z$. An **admissible labeling** assigns a simple
+-charge to each internal edge so that each chosen vertex basis is nonempty; a
+-separate multiplicity-basis index is retained at every vertex. Compose the
+-vertex morphisms, inserting the associators required by the chosen tree, to
+-obtain a morphism from the parenthesized input tensor to $d$. These composite
+-morphisms are the **fusion-tree vectors**. The family is called a
+-**fusion-tree basis** when it is an orthonormal basis of the fixed-input,
+-fixed-total fusion space. For the empty input list the tensor is $\mathbf1$
+-and its empty tree vector is $\operatorname{id}_{\mathbf1}$ when $d=\mathbf1$;
+-for one input $a_1$, the only tree vector is $\operatorname{id}_{a_1}$ when
+-$d=a_1$. The next local lemma proves the basis property for every finite input
+-list and includes the dimension recursion ([[lem-qc-tqc-fusion-tree-dimension]]).
++Let $\mathcal C$ be a unitary fusion category and fix a set
++$\operatorname{Irr}(\mathcal C)$ of representatives for the simple
++isomorphism classes. Throughout this definition, the ordered input charges
++$a_1,\ldots,a_n$, total charge $d$, and all internal edge charges are labels
++in $\operatorname{Irr}(\mathcal C)$. Also fix a parenthesized binary fusion
++tree. At each internal vertex with incoming charges $x,y$ and outgoing charge
++$z$, choose one vector from an orthonormal basis of $V_{xy}^z$. An
++**admissible labeling** assigns a representative charge to each internal edge
++so that each chosen vertex basis is nonempty; a separate multiplicity-basis
++index is retained at every vertex. Compose the vertex morphisms, inserting the
++associators required by the chosen tree, to obtain a morphism from the
++parenthesized input tensor to $d$. These composite morphisms are the
++**fusion-tree vectors**. The family is called a **fusion-tree basis** when it
++is an orthonormal basis of the fixed-input, fixed-total fusion space. For the
++empty input list the tensor is $\mathbf1$ and its empty tree vector is
++$\operatorname{id}_{\mathbf1}$ when $d=\mathbf1$; for one input $a_1$, the
++only tree vector is $\operatorname{id}_{a_1}$ when $d=a_1$. The next local
++lemma proves the basis property for every finite input list and includes the
++dimension recursion ([[lem-qc-tqc-fusion-tree-dimension]]).
+ 
+ ## Tree convention
+ 
+
+--- passed-step1-baseline/items/ex-ising-periodic-path-space-and-two-sector-map.md
++++ actual-preproposal/items/ex-ising-periodic-path-space-and-two-sector-map.md
+@@ -31,7 +31,7 @@
+ $$F_D^{DDD}=2^{-1/2}\begin{pmatrix}1&1\\1&-1\end{pmatrix},\quad R_{DD}^0=s^{-1},\quad R_{DD}^\eta=i s^{-1},\quad R_{\eta D}^D=R_{D\eta}^D=-i,\quad R_{\eta\eta}^0=-1.$$
+ The remaining unit entries are one. Its twist is $\theta_D=s^{-1}$, positive dimension $\sqrt2$ and FS sign $+1$. This follows from the ell-four root category by the explicit associator/braiding parity conversion, rather than a vertex gauge; the original root category has negative FS and twist $s^3$.
+ 
+-For reference charge $D$, the full periodic path space is zero at odd length. At length $L=2N$, $N\ge1$, it is $H\oplus\bar H$, each sector of dimension $2^N$, with no total-flux or spin-parity restriction. Encode the group labels by bits, in even positions of $H$ and odd positions of $\bar H$. Under these orthonormal basis maps,
++For each reference charge $D$ and length $L\ge1$, use the same periodic carrier $\mathcal H_L:=\bigoplus_{b\in\{\mathbf1,\eta,D\}}H_{D,L;b,b}$ as in [[thm-ising-periodic-two-sector-and-line-representation]]. Its cyclic path basis is the union of the fixed-boundary path bases, with every elementary fusion index retained. The full periodic path space is zero at odd length. At length $L=2N$, $N\ge1$, it is $H\oplus\bar H$, each sector of dimension $2^N$, with no total-flux or spin-parity restriction. Encode the group labels by bits, in even positions of $H$ and odd positions of $\bar H$. Under these orthonormal basis maps,
+ $$P_{2j-1}|_H=(I+X_j)/2,\quad P_{2j}|_H=(I+Z_jZ_{j+1})/2,$$
+ $$P_{2j-1}|_{\bar H}=(I+Z_jZ_{j+1})/2,\quad P_{2j}|_{\bar H}=(I+X_{j+1})/2.$$
+ Indices are cyclic modulo $N$. Put $C|b_1\cdots b_N\rangle=|b_2\cdots b_Nb_1\rangle$, $Q=\prod_jX_j$, and $K_{c,b}=2^{-N/2}(-1)^{\sum_jc_j(b_{j-1}+b_j)}$. The actual one-step shift and cyclic F-contracted line maps are
+
+--- passed-step1-baseline/items/ex-qa-37-fibonacci-budget.md
++++ actual-preproposal/items/ex-qa-37-fibonacci-budget.md
+@@ -40,8 +40,10 @@
+ $25L_0$. For a finite QSD factor list of size $M>0$, allocate each factor
+ $\delta=\min\{\varepsilon/(2M),\eta_0/2\}$; then the sum of the factor
+ errors is at most $\varepsilon/2$. The two-qubit B6 search, measurement
+-count, phase correction and base-net storage remain separate cost entries;
+-no B6 search-length bound follows from the SK calculation.
++outcomes, preparation and ancilla use, Hamiltonian evolution, and phase
++correction are separate ledger coordinates. The supplied base-net certificate
++is fixed input data counted in $L_{\rm in}$; this example does not compute it.
++No B6 search-length bound follows from the SK calculation.
+ 
+ ## Facts & Assumptions
+ 
+
+--- passed-step1-baseline/items/ex-qc-tqc-fibonacci-data.md
++++ actual-preproposal/items/ex-qc-tqc-fibonacci-data.md
+@@ -34,8 +34,12 @@
+ sums are orthogonal. Define tensor product on simple labels by the fusion rules
+ $\mathbf1\otimes a=a\otimes\mathbf1=a$ and $\tau\otimes\tau=\mathbf1\oplus\tau$,
+ and extend it distributively to direct sums. For each allowed simple fusion
+-channel, use the standard unit-vector inclusion as the orthonormal basis of
+-its one-dimensional multiplicity space. On simple-label blocks, tensor a pair
++channel $c\subset a\otimes b$, let $i_{ab}^c:c\to a\otimes b$ be the
++standard unit-vector isometric inclusion. Since the multiplicity space is
++$V_{ab}^c=\operatorname{Hom}(a\otimes b,c)$, its orthonormal basis vector is
++the adjoint projection $(i_{ab}^c)^\dagger:a\otimes b\to c$; retain
++$i_{ab}^c$ itself for the coevaluation construction below. On simple-label
++blocks, tensor a pair
+ of morphism matrices by their Kronecker product on multiplicity coordinates
+ and by the identity on each simple fusion channel; extend over direct sums.
+ This defines a bifunctor compatible with dagger. Use the strict unit gauge:
+
+--- passed-step1-baseline/items/lem-anyonic-fusion-path-basis.md
++++ actual-preproposal/items/lem-anyonic-fusion-path-basis.md
+@@ -27,21 +27,21 @@
+ 
+ ## Statement
+ 
+-Let $\mathcal C$ be a complex fusion category, let $a,b,c$ be simple objects, and fix a basis $B_{x,a}^y$ of every finite-dimensional split space $W_{x,a}^y=\operatorname{Hom}_{\mathcal C}(y,x\otimes a)$. For every admissible path $x_0=b,\ldots,x_n=c$ and every tuple of vertex indices $\mu_j\in B_{x_{j-1},a}^{x_j}$, the composite maps of [[def-anyonic-fusion-path-space]] form a basis of $H_{a,n;b,c}$. Consequently,
++Let $\mathcal C$ be a complex fusion category, fix a representative set $\operatorname{Irr}(\mathcal C)$ for its simple isomorphism classes as in [[def-fusion-rules]], and take $a,b,c\in\operatorname{Irr}(\mathcal C)$. Fix a basis $B_{x,a}^y$ of every finite-dimensional split space $W_{x,a}^y=\operatorname{Hom}_{\mathcal C}(y,x\otimes a)$ for $x,y\in\operatorname{Irr}(\mathcal C)$. For every admissible path $x_0=b,\ldots,x_n=c$ and every tuple of vertex indices $\mu_j\in B_{x_{j-1},a}^{x_j}$, the composite maps of [[def-anyonic-fusion-path-space]] form a basis of $H_{a,n;b,c}$. Consequently,
+ 
+-$$\dim H_{a,n;b,c}=\sum_{\substack{x_0=b,\ x_n=c\\x_1,\ldots,x_{n-1}\text{ simple}}}\prod_{j=1}^n N_{x_{j-1}a}^{x_j}.$$
++$$\dim H_{a,n;b,c}=\sum_{\substack{x_0=b,\ x_n=c\\x_1,\ldots,x_{n-1}\in\operatorname{Irr}(\mathcal C)}}\prod_{j=1}^n N_{x_{j-1}a}^{x_j}.$$
+ 
+-The empty product is $1$ when $b\cong c$ and $0$ otherwise.
++The empty product is $1$ when $b=c$ (equivalently $b\cong c$ among these representatives) and $0$ otherwise.
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** A complex fusion category $\mathcal C$, simple objects $a,b,c$, $n\ge0$, and the vertex bases in the Statement.
++**Given:** A complex fusion category $\mathcal C$, its representative set $\operatorname{Irr}(\mathcal C)$, labels $a,b,c$ in that set, $n\ge0$, and the vertex bases in the Statement.
+ 
+ [F1] [[def-anyonic-fusion-path-space]]: $T_0=b$, $T_{j+1}=T_j\otimes a$, $H_{a,n;b,c}=\operatorname{Hom}(c,T_n)$, and a path composite is built from inclusions $i_j:x_j\to x_{j-1}\otimes a$.
+ 
+ [F2] [[def-fusion-and-multifusion-category]]: every object of a fusion category is a finite direct sum of simple objects, and tensor product is bilinear and exact on morphisms.
+ 
+-[F3] [[def-fusion-rules]]: $N_{xy}^z$ is the multiplicity of simple $z$ in $x\otimes y$ and equals $\dim_{\mathbb C}\operatorname{Hom}(x\otimes y,z)$.
++[F3] [[def-fusion-rules]]: $N_{xy}^z$ is the multiplicity of representative $z$ in $x\otimes y$, equals $\dim_{\mathbb C}\operatorname{Hom}(x\otimes y,z)$, and uses the chosen representative set of simple isomorphism classes.
+ 
+ [F4] [[def-absolutely-simple-object]]: for simple $z$, $\operatorname{End}(z)=\mathbb C\operatorname{id}_z$; Hom spaces between nonisomorphic simple objects are zero.
+ 
+@@ -49,11 +49,11 @@
+ 
+ **Given:** The category, boundary charges, site charge, and split-space bases above.
+ 
+-1.1 For $n=0$, $T_0=b$ and semisimplicity plus [F4] gives $\operatorname{Hom}(c,b)=0$ when $c\not\cong b$ and $\mathbb C\operatorname{id}_b$ when $c\cong b$. This is exactly the stated empty-path convention. [F1, F2, F4, given, base]
++1.1 For $n=0$, $T_0=b$; since $b,c$ are representatives, $c\cong b$ holds exactly when $c=b$. Semisimplicity and [F4] then give $\operatorname{Hom}(c,b)=0$ when $c\ne b$ and $\mathbb C\operatorname{id}_b$ when $c=b$. This is exactly the stated empty-path convention. [F1, F2, F3, F4, given, base]
+ 
+-1.2 Fix $n\ge0$ and assume for every simple endpoint $x$ that the length-$n$ path composites form a basis of $\operatorname{Hom}(x,T_n)$. [F1, F4, given, ih]
++1.2 Fix $n\ge0$ and assume for every endpoint representative $x\in\operatorname{Irr}(\mathcal C)$ that the length-$n$ path composites form a basis of $\operatorname{Hom}(x,T_n)$. [F1, F3, F4, given, ih]
+ 
+-2.1 By finite semisimplicity, the induction hypothesis decomposes $T_n\cong\bigoplus_{x,\gamma}x$, with one summand for each length-$n$ path $\gamma$ ending at $x$. For each simple $x$, choose the inclusions from a basis of $W_{x,a}^y=\operatorname{Hom}(y,x\otimes a)$; their number is $N_{xa}^y$ by [F3] and absolute simplicity [F4]. [F2, F3, F4, step 1.2, ih, construct]
++2.1 By finite semisimplicity, the induction hypothesis decomposes $T_n\cong\bigoplus_{x,\gamma}x$, with one summand for each length-$n$ path $\gamma$ ending at representative $x$. For each simple representative $x$, choose the inclusions from a basis of $W_{x,a}^y=\operatorname{Hom}(y,x\otimes a)$; their number is $N_{xa}^y$ by [F3] and absolute simplicity [F4]. [F2, F3, F4, step 1.2, ih, construct]
+ 
+ 3.1 Tensoring the decomposition in step 2.1 by $a$ gives $T_{n+1}\cong\bigoplus_{x,\gamma}(x\otimes a)$, and decomposing each factor into its simple summands yields precisely all length-$(n+1)$ path composites from [F1]. Applying $\operatorname{Hom}(c,-)$ selects exactly the summands isomorphic to $c$, each once by [F4], so these composites form a basis of $\operatorname{Hom}(c,T_{n+1})$. [F1, F2, F3, F4, step 1.2, step 2.1, ih, induction]
+ 
+
+--- passed-step1-baseline/items/lem-qc-tqc-b6-joint-su5-su8-density.md
++++ actual-preproposal/items/lem-qc-tqc-b6-joint-su5-su8-density.md
+@@ -54,8 +54,10 @@
+ [[thm-cartans-closed-subgroup-theorem]]
+ [[prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra]]
+ 
+-[F3] $\mathfrak{su}(5)$ and $\mathfrak{su}(8)$ have dimensions $24$ and
+-$63$ and consist of trace-zero skew-Hermitian matrices.
++[F3] $\mathfrak{su}(n)$ consists of the trace-zero skew-Hermitian matrices.
++A real basis is given by $i(E_{jj}-E_{nn})$ for $j<n$ and, for each $j<k$,
++$E_{jk}-E_{kj}$ and $i(E_{jk}+E_{kj})$. Thus its real dimension is
++$(n-1)+2\binom n2=n^2-1$, giving dimensions $24$ and $63$ for $n=5,8$.
+ [[ex-unitary-and-special-unitary-lie-groups]]
+ 
+ [F4] Both $SU(5)$ and $SU(8)$ are connected.
+@@ -70,7 +72,7 @@
+ 
+ 1.1 The common Fibonacci data in [A2] give the same normalized two-dimensional three-strand block for $C=B_1B_2^{-1}$ in both total-charge spaces. Direct multiplication gives determinant $1$, trace $\phi^{-2}$, and eigenvalues $e^{i\theta},e^{-i\theta}$ with $2\cos\theta=\phi^{-2}$ on that factor; the remaining factors contribute eigenvalue $1$. [A2, algebra]
+ 
+-1.2 For $n\ge2$, the complex Lie algebra $\mathfrak{sl}_n(\mathbb C)$ is simple. Let $I$ be a nonzero ideal. If some $X\in I$ has an off-diagonal entry $X_{ij}\ne0$, choose a traceless diagonal matrix $D$ whose ordered differences $\lambda_p-\lambda_q$ ($p\ne q$) are nonzero and pairwise distinct. Such a $D$ exists because each forbidden equality is a proper linear hyperplane in the trace-zero diagonal subspace, and finitely many proper hyperplanes do not cover a vector space over the infinite field $\mathbb C$. The map $\operatorname{ad}_D$ has eigenvectors $E_{pq}$ with these eigenvalues and is zero on diagonal matrices. Lagrange interpolation therefore supplies a polynomial in $\operatorname{ad}_D$ that sends $X$ to $X_{ij}E_{ij}$; since $I$ is an ideal, $E_{ij}\in I$. If instead a nonzero $X\in I$ is diagonal, it is nonscalar because it is traceless. Choose $i\ne j$ with $X_{ii}\ne X_{jj}$; then $[E_{ij},X]=(X_{jj}-X_{ii})E_{ij}\in I$, again giving a matrix unit. From $E_{ij}\in I$, bracketing with $E_{ji}$ gives $E_{ii}-E_{jj}\in I$, and bracketing that diagonal matrix with $E_{ji}$ gives $E_{ji}\in I$. For each $k\notin\{i,j\}$, $[E_{ki},E_{ij}]=E_{kj}$ and $[E_{jk},E_{ij}]=-E_{ik}$, so these units lie in $I$. Then $[E_{ji},E_{ik}]=E_{jk}$ for each such $k$. We now have $E_{kj}$ and $E_{jl}$ for every $k,l\ne j$; for $k\ne l$, $[E_{kj},E_{jl}]=E_{kl}$. Thus every off-diagonal matrix unit lies in $I$, and their brackets give all trace-zero diagonal matrices. Hence $I$ is the whole algebra. This also covers $n=2$, where the steps involving $k$ are empty. The complexification of $\mathfrak{su}(n)$ is $\mathfrak{sl}_n(\mathbb C)$: every traceless complex matrix is uniquely a sum $A+iB$ of traceless skew-Hermitian matrices. A nonzero real ideal of $\mathfrak{su}(n)$ would complexify to a nonzero ideal of $\mathfrak{sl}_n(\mathbb C)$, hence to all of it; equality of dimensions then makes the real ideal all of $\mathfrak{su}(n)$. Therefore $\mathfrak{su}(5)$ and $\mathfrak{su}(8)$ are simple. Their dimensions $24$ and $63$ from [F3] show they are not isomorphic. [F3, algebra]
++1.2 For $n\ge2$, the complex Lie algebra $\mathfrak{sl}_n(\mathbb C)$ is simple. Let $I$ be a nonzero ideal. If some $X\in I$ has an off-diagonal entry $X_{ij}\ne0$, choose a traceless diagonal matrix $D$ whose ordered differences $\lambda_p-\lambda_q$ ($p\ne q$) are nonzero and pairwise distinct. Such a $D$ exists because each forbidden equality is a proper linear hyperplane in the trace-zero diagonal subspace, and finitely many proper hyperplanes do not cover a vector space over the infinite field $\mathbb C$. The map $\operatorname{ad}_D$ has eigenvectors $E_{pq}$ with these eigenvalues and is zero on diagonal matrices. Lagrange interpolation therefore supplies a polynomial in $\operatorname{ad}_D$ that sends $X$ to $X_{ij}E_{ij}$; since $I$ is an ideal, $E_{ij}\in I$. If instead a nonzero $X\in I$ is diagonal, it is nonscalar because it is traceless. Choose $i\ne j$ with $X_{ii}\ne X_{jj}$; then $[E_{ij},X]=(X_{jj}-X_{ii})E_{ij}\in I$, again giving a matrix unit. From $E_{ij}\in I$, bracketing with $E_{ji}$ gives $E_{ii}-E_{jj}\in I$, and bracketing that diagonal matrix with $E_{ji}$ gives $E_{ji}\in I$. For each $k\notin\{i,j\}$, $[E_{ki},E_{ij}]=E_{kj}$ and $[E_{jk},E_{ij}]=-E_{ik}$, so these units lie in $I$. The additional unit $E_{jk}$ follows explicitly from $[E_{ji},E_{ik}]=E_{ji}E_{ik}-E_{ik}E_{ji}=E_{jk}-0=E_{jk}$, since $i,j,k$ are distinct. We now have $E_{kj}$ and $E_{jl}$ for every $k,l\ne j$; for $k\ne l$, $[E_{kj},E_{jl}]=E_{kl}$. Thus every off-diagonal matrix unit lies in $I$, and their brackets give all trace-zero diagonal matrices. Hence $I$ is the whole algebra. If $n=2$, there is no $k\notin\{i,j\}$; the already obtained $E_{ij},E_{ji}$ and $E_{ii}-E_{jj}$ span $\mathfrak{sl}_2$, so this case is complete as well. The complexification of $\mathfrak{su}(n)$ is $\mathfrak{sl}_n(\mathbb C)$: every traceless complex matrix is uniquely a sum $A+iB$ of traceless skew-Hermitian matrices. A nonzero real ideal of $\mathfrak{su}(n)$ would complexify to a nonzero ideal of $\mathfrak{sl}_n(\mathbb C)$, hence to all of it; equality of dimensions then makes the real ideal all of $\mathfrak{su}(n)$. Therefore $\mathfrak{su}(5)$ and $\mathfrak{su}(8)$ are simple. Their dimensions $24$ and $63$ from [F3] show they are not isomorphic. [F3, algebra]
+ 
+ 2.1 The algebraic number $\phi^{-2}$ has minimal polynomial $x^2-3x+1$, whose other root is $\phi^2>2$. If $e^{i\theta}$ were a root of unity, every algebraic conjugate of $e^{i\theta}+e^{-i\theta}$ would be a sum of two roots of unity and have absolute value at most $2$. The conjugate $\phi^2>2$ contradicts this, so $\theta/(2\pi)$ is irrational. [given, step 1.1, algebra]
+ 
+
+--- passed-step1-baseline/items/lem-qc-tqc-fusion-tree-dimension.md
++++ actual-preproposal/items/lem-qc-tqc-fusion-tree-dimension.md
+@@ -24,24 +24,28 @@
+ 
+ ## Statement
+ 
+-Let $a_1,\ldots,a_n$ be simple charges, let $d$ be a simple total charge, and
+-fix any parenthesized binary tree $T$ on the ordered input list. The fusion-tree
+-vectors of [[def-qc-tqc-fusion-tree-basis]] form an orthonormal basis of
++Let $\mathcal C$ be a unitary fusion category, let $\operatorname{Irr}(\mathcal C)$
++be the representative set fixed in [[def-qc-tqc-fusion-tree-basis]], and take
++$a_1,\ldots,a_n,d\in\operatorname{Irr}(\mathcal C)$. Fix any parenthesized
++binary tree $T$ on the ordered input list. The fusion-tree vectors of
++[[def-qc-tqc-fusion-tree-basis]] form an orthonormal basis of
+ $\operatorname{Hom}(T,d)$. Their number is
+ 
+-$$m_T(d)=\sum_{\ell\,\mathrm{admissible}}\;\prod_{v\,\mathrm{internal}}N_{\ell(v_L)\,\ell(v_R)}^{\ell(v)},$$
++$$m_T(d)=\sum_{\substack{\ell\text{ admissible, with every internal label in }\operatorname{Irr}(\mathcal C)}}\;\prod_{v\,\mathrm{internal}}N_{\ell(v_L)\,\ell(v_R)}^{\ell(v)},$$
+ 
+ where the leaves carry the inputs, the root carries $d$, and each internal edge
+-is labeled by a simple charge. For the left-associated tree on $n$ inputs this
+-gives $m_0(d)=1$ if $d=\mathbf1$ and $0$ otherwise,
+-$m_1(d)=1$ if $a_1\cong d$ and $0$ otherwise, and
++is labeled by a representative simple charge. For the left-associated tree on
++$n$ inputs this gives $m_0(d)=1$ if $d=\mathbf1$ and $0$ otherwise,
++$m_1(d)=1$ if $a_1=d$ and $0$ otherwise, and
+ 
+ $$m_n(d)=\sum_e m_{n-1}(e)N_{e a_n}^d\qquad(n\ge2).$$
+ 
+ ## Facts & Assumptions
+ 
+ **Given:** a unitary fusion category $\mathcal C$, a finite ordered list of
+-simple inputs, a simple output $d$, and a parenthesized binary tree $T$.
++input representatives $a_i\in\operatorname{Irr}(\mathcal C)$, a total-charge
++representative $d\in\operatorname{Irr}(\mathcal C)$, and a parenthesized
++binary tree $T$.
+ 
+ [F1] [[def-fusion-and-multifusion-category]]: a fusion category is finite
+ semisimple and rigid; every object is a finite direct sum of simple objects,
+@@ -71,10 +75,10 @@
+ ## Proof
+ **Given:** the category, inputs, output, and tree described above.
+ 
+-1.1 For the empty input list, the tensor is $\mathbf1$. If a nonzero map $\mathbf1\to d$ exists, its kernel is zero and its image is the nonzero subobject $d$, so it is an isomorphism by simplicity [F6]. Hence $\operatorname{Hom}(\mathbf1,d)=0$ unless $d\cong\mathbf1$; in that case it is $\mathbb C\operatorname{id}_{\mathbf1}$ by [F5]. Thus the empty tree has one basis vector precisely for $d=\mathbf1$, giving $m_0(d)$. For one input $a_1$, the same kernel/image argument shows $\operatorname{Hom}(a_1,d)=0$ unless $a_1\cong d$. When they are the same chosen simple representative, $\operatorname{End}(a_1)=\mathbb C\operatorname{id}_{a_1}$ by [F5], and the identity is the unique tree vector. This gives $m_1(d)$. [F1, F5, F6, given, base]
++1.1 For the empty input list, the tensor is $\mathbf1$. If a nonzero map $\mathbf1\to d$ exists, its kernel is zero and its image is the nonzero subobject $d$, so it is an isomorphism by simplicity [F6]. Since all charge labels are fixed representatives, this occurs exactly when $d=\mathbf1$; then $\operatorname{Hom}(\mathbf1,d)=\mathbb C\operatorname{id}_{\mathbf1}$ by [F5], and the identity is the empty tree vector. Thus the empty tree has one basis vector precisely for $d=\mathbf1$, giving $m_0(d)$. For one input $a_1$, the same kernel/image argument shows $\operatorname{Hom}(a_1,d)=0$ unless $a_1=d$. In that case $\operatorname{End}(a_1)=\mathbb C\operatorname{id}_{a_1}$ by [F5], and the identity is the unique tree vector. This gives $m_1(d)$. [F1, F3, F5, F6, given, base]
+ 
+-1.2 Proceed by induction on the number of leaves. Write a nontrivial tree as $T=T_L\otimes T_R$, with left and right input sublists. By induction, for each simple output $e$ the left-tree vectors $t_{e,\lambda}$ form an orthonormal basis of $\operatorname{Hom}(T_L,e)$. Put $i_{e,\lambda}:=t_{e,\lambda}^\dagger:e\to T_L$. If $e=e'$, then $i_{e,\lambda}^\dagger i_{e,\lambda'}=\delta_{\lambda,\lambda'}\operatorname{id}_e$ by [F4]; if $e\not\cong e'$, the same composite is zero because a nonzero map between simple objects is an isomorphism [F1, F6]. Thus these inclusions are orthogonal. A finite semisimple decomposition of $T_L$ exists by [F1], and [F2] makes its inclusions orthogonal with projections summing to $\operatorname{id}_{T_L}$. For each simple $e$, its adjoint projections form an orthonormal family in $\operatorname{Hom}(T_L,e)$. Semisimplicity decomposes this Hom space as the direct sum of $\operatorname{Hom}(f,e)$ over the simple summands $f$ of $T_L$; only $f\cong e$ contributes, and that space has dimension one by [F5]. Thus the projections form a basis. Changing that basis to $t_{e,\lambda}$ multiplies the inclusion columns by a unitary matrix, which preserves orthogonality and the sum-of-projections identity. The same argument applies to $T_R$. Tensoring the child inclusions preserves these relations by [F2]. For each pair of child outputs $e,f$, decompose $e\otimes f$ orthogonally into simple outputs; the number of copies of $d$ is $N_{ef}^d$ by [F1] and [F7]. Composing the child inclusions with an orthonormal basis of each $V_{ef}^d$ gives orthogonal isometric inclusions of $d$ into $T$. Their projections sum to $\operatorname{id}_T$, because the child decompositions and each decomposition of $e\otimes f$ do. Taking adjoints therefore gives a complete orthonormal basis of $\operatorname{Hom}(T,d)$, exactly the fusion-tree vectors of [F3]. [F1, F2, F3, F4, F5, F6, F7, construct, ih]
++1.2 Proceed by induction on the number of leaves. Write a nontrivial tree as $T=T_L\otimes T_R$, with left and right input sublists. By induction, for each simple representative output $e$ the left-tree vectors $t_{e,\lambda}$ form an orthonormal basis of $\operatorname{Hom}(T_L,e)$. Put $i_{e,\lambda}:=t_{e,\lambda}^\dagger:e\to T_L$. If $e=e'$, then $i_{e,\lambda}^\dagger i_{e,\lambda'}=\delta_{\lambda,\lambda'}\operatorname{id}_e$ by [F4]; if $e\ne e'$, the same composite is zero because a nonzero map between nonisomorphic simple objects is an isomorphism [F1, F6]. Thus these inclusions are orthogonal. Choose a finite semisimple decomposition of $T_L$ into simple representatives by [F1], and choose this decomposition orthogonally by [F2], so its inclusions are orthogonal and its adjoint projections sum to $\operatorname{id}_{T_L}$. For each simple representative $e$, its adjoint projections form an orthonormal family in $\operatorname{Hom}(T_L,e)$. Semisimplicity decomposes this Hom space as the direct sum of $\operatorname{Hom}(f,e)$ over the simple representative summands $f$ of $T_L$; only $f=e$ contributes, and that space has dimension one by [F5]. Thus the projections form a basis. Changing that basis to $t_{e,\lambda}$ multiplies the inclusion columns by a unitary matrix, which preserves orthogonality and the sum-of-projections identity. The same argument applies to $T_R$. Tensoring the child inclusions preserves these relations by [F2]. For each pair of child outputs $e,f$, choose an orthogonal finite semisimple decomposition of $e\otimes f$ into simple representatives, as permitted by [F1] and [F2]; the number of copies of $d$ is $N_{ef}^d$ by [F1] and [F7]. Composing the child inclusions with an orthonormal basis of each $V_{ef}^d$ gives orthogonal isometric inclusions of $d$ into $T$. Their projections sum to $\operatorname{id}_T$, because the child decompositions and each decomposition of $e\otimes f$ do. Taking adjoints therefore gives a complete orthonormal basis of $\operatorname{Hom}(T,d)$, exactly the fusion-tree vectors of [F3]. [F1, F2, F3, F4, F5, F6, F7, construct, ih]
+ 
+-2.1 For each pair of child outputs $e,f$, the construction in step 1.2 contributes $m_{T_L}(e)m_{T_R}(f)N_{ef}^d$ tree vectors. Summing over all simple $e,f$ yields the recurrence $m_T(d)=\sum_{e,f}m_{T_L}(e)m_{T_R}(f)N_{ef}^d$. Repeated expansion of this finite recurrence chooses one simple label at each internal edge and one basis index at each vertex, so it equals the displayed sum of products over all admissible labelings. [F1, F3, F4, step 1.2, algebra]
++2.1 For each pair of representative child outputs $e,f$, the construction in step 1.2 contributes $m_{T_L}(e)m_{T_R}(f)N_{ef}^d$ tree vectors. Summing over all representative $e,f$ yields the recurrence $m_T(d)=\sum_{e,f}m_{T_L}(e)m_{T_R}(f)N_{ef}^d$. Repeated expansion of this finite recurrence chooses one representative label at each internal edge and one basis index at each vertex, so it equals the displayed sum of products over all admissible labelings. [F1, F3, F4, step 1.2, algebra]
+ 
+ 3.1 For the left-associated tree, the right subtree at the last vertex is the single input $a_n$. Its only nonzero simple output is $a_n$, with multiplicity one by [F5] and [F6]. Substituting this into the recurrence of step 2.1 gives $m_n(d)=\sum_e m_{n-1}(e)N_{e a_n}^d$ for $n\ge2$, with the empty and one-input values already established in step 1.1. Every sum is finite because the set of simple charges and each multiplicity space are finite. [F1, F4, F5, F6, step 1.1, step 2.1, step 1.2, discharge-induction: step 1.2] ∎
+
+--- passed-step1-baseline/items/thm-anyonic-path-space-is-hilbert-under-unitarity.md
++++ actual-preproposal/items/thm-anyonic-path-space-is-hilbert-under-unitarity.md
+@@ -27,11 +27,11 @@
+ 
+ ## Statement
+ 
+-Let $\mathcal C$ be a unitary fusion category, and use orthonormal bases in each split space $W_{x,a}^y=\operatorname{Hom}(y,x\otimes a)$, equivalently the adjoints of orthonormal bases of $V_{x a}^y=\operatorname{Hom}(x\otimes a,y)$. Give $H_{a,n;b,c}=\operatorname{Hom}(c,T_n)$ the Hom-space inner product linear in the first variable, determined by $g^\dagger f=\langle f,g\rangle\operatorname{id}_c$. Then the path composites of [[def-anyonic-fusion-path-space]] are an orthonormal basis of $H_{a,n;b,c}$.
++Let $\mathcal C$ be a unitary fusion category, fix a representative set $\operatorname{Irr}(\mathcal C)$ for its simple isomorphism classes as in [[def-fusion-rules]], and take $a,b,c\in\operatorname{Irr}(\mathcal C)$. Use orthonormal bases in each split space $W_{x,a}^y=\operatorname{Hom}(y,x\otimes a)$ for $x,y\in\operatorname{Irr}(\mathcal C)$, equivalently the adjoints of orthonormal bases of $V_{x a}^y=\operatorname{Hom}(x\otimes a,y)$. Give $H_{a,n;b,c}=\operatorname{Hom}(c,T_n)$ the Hom-space inner product linear in the first variable, determined by $g^\dagger f=\langle f,g\rangle\operatorname{id}_c$. Then the path composites of [[def-anyonic-fusion-path-space]] are an orthonormal basis of $H_{a,n;b,c}$.
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** A unitary fusion category, simple labels $a,b,c$, fixed $n\ge0$, and orthonormal vertex bases.
++**Given:** A unitary fusion category, its representative set $\operatorname{Irr}(\mathcal C)$, labels $a,b,c$ in that set, fixed $n\ge0$, and orthonormal vertex bases.
+ 
+ [F1] [[def-anyonic-fusion-path-space]]: $H_{a,n;b,c}=\operatorname{Hom}(c,T_n)$ and every path composite is formed from the inclusions $i_j:x_j\to x_{j-1}\otimes a$ by tensoring with identities and composition.
+ 
+@@ -45,9 +45,9 @@
+ 
+ **Given:** The unitary category, the path space, and the vertex bases described above.
+ 
+-1.1 For $n=0$, $T_0=b$. If $b\not\cong c$, simplicity gives $\operatorname{Hom}(c,b)=0$ and there are no paths. If $b=c$, the only path composite is $\operatorname{id}_b$, and $\operatorname{id}_b^\dagger\operatorname{id}_b=\operatorname{id}_b$ shows it has norm one under the stated Hom inner product. Thus the length-zero path family is orthonormal. [F1, F2, F3, given, base]
++1.1 For $n=0$, $T_0=b$. Since the labels are representatives, $b\not\cong c$ means $b\ne c$; then simplicity gives $\operatorname{Hom}(c,b)=0$ and there are no paths. If $b=c$, the only path composite is $\operatorname{id}_b$, and $\operatorname{id}_b^\dagger\operatorname{id}_b=\operatorname{id}_b$ shows it has norm one under the stated Hom inner product. Thus the length-zero path family is orthonormal. [F1, F2, F3, given, base]
+ 
+-1.2 Fix $n\ge0$ and assume that all length-$n$ path composites, for every simple endpoint, are orthonormal in their Hom spaces. [F1, F2, given, ih]
++1.2 Fix $n\ge0$ and assume that all length-$n$ path composites, for every representative endpoint, are orthonormal in their Hom spaces. [F1, F2, given, ih]
+ 
+ 1.3 If $f_\mu:x\otimes a\to y$ are the chosen orthonormal vertex maps, their adjoints $i_\mu=f_\mu^\dagger:y\to x\otimes a$ satisfy $i_\mu^\dagger i_\nu=f_\mu f_\nu^\dagger=\delta_{\mu\nu}\operatorname{id}_y$ by [F3]. Distinct simple outputs are orthogonal, and the orthogonal semisimple decomposition has projections $i_\mu i_\mu^\dagger$ summing to the identity. [F2, F3, algebra]
+ 
+
+--- passed-step1-baseline/items/thm-qa-37-approx-encoded-two-qubit-gate.md
++++ actual-preproposal/items/thm-qa-37-approx-encoded-two-qubit-gate.md
+@@ -38,9 +38,12 @@
+ $$T_1=U\oplus(\det U)^{-1}\in SU(5),\qquad T_\tau=U\oplus\operatorname{diag}((\det U)^{-1},1,1,1)\in SU(8).$$
+ For every $\delta>0$, one normalized six-strand braid word $b$ has both block
+ errors $\|B_1(b)-T_1\|_{\rm op}<\delta$ and
+-$\|B_\tau(b)-T_\tau\|_{\rm op}<\delta$. In either total-charge block, its projective logical block error and leakage
+-amplitude relative to the encoded action of $U$ are at most $\delta$. The physical categorical braid is
+-$R_1^{e(b)}B(b)$; this one common scalar is recorded under
++$\|B_\tau(b)-T_\tau\|_{\rm op}<\delta$. In either total-charge block, the
++normalized braid's logical block error and leakage amplitude relative to the
++encoded action of $U$ are at most $\delta$. The physical categorical braid is
++$\zeta B(b)$ with $\zeta=R_1^{e(b)}$; its logical block error is at most
++$\delta$ relative to the phase-matched target $\zeta U$, and its leakage
++amplitude is unchanged. This common scalar is recorded under
+ [[def-qa-37-phase-reference-cost]] and must be handled under coherent control.
+ When the two determinant-corrected targets are supplied as certified Cauchy
+ inputs, the dovetailed B6 compiler finds such a word. No useful joint-block
+@@ -76,4 +79,4 @@
+ 
+ 2.1 The product of open operator-norm $\delta$-balls around $(T_1,T_\tau)$ is a neighborhood in $SU(5)\times SU(8)$. By [A1] and [F2], it contains the image of one common normalized braid word. This proves both block inequalities at once; the word is not chosen separately for the two sectors. For certified Cauchy targets, [F5] gives a terminating search with rational strict certificates (choose any rational tolerance below $\delta$). [A1, F2, F5, step 1.1, choose]
+ 
+-3.1 Apply [F3] in each charge block to the braid matrix and its code-preserving extension $T_a$. The normalized compression to the code differs from $U$ by at most $\delta$, and the off-diagonal block from code to leakage has norm at most $\delta$. Multiplication by the common unit scalar in [F4] leaves leakage unchanged and gives the same projective logical bound; its exponent-sum record is required under control. [F1, F3, F4, step 2.1, algebra] ∎
++3.1 Apply [F3] in each charge block to the normalized braid matrix and its code-preserving extension $T_a$. The normalized compression to the code differs from $U$ by at most $\delta$, and the off-diagonal block from code to leakage has norm at most $\delta$. Write $\zeta=R_1^{e(b)}$ for the common unit scalar from [F4]. The physical compression differs from the phase-matched target $\zeta U$ by $\|\zeta P B_a(b)P-\zeta\widetilde U\|=\|P B_a(b)P-\widetilde U\|\le\delta$; its leakage amplitude is $\|(I-P)\zeta B_a(b)P\|=\|(I-P)B_a(b)P\|\le\delta$. The exponent-sum phase must still be retained under coherent control. [F1, F3, F4, step 2.1, algebra] ∎
+
+--- passed-step1-baseline/items/thm-qa-37-fusion-branch-validity.md
++++ actual-preproposal/items/thm-qa-37-fusion-branch-validity.md
+@@ -10,7 +10,12 @@
+   - def-qa-37-fusion-measurement
+   - thm-qc-projective-measurement-outcome-law
+   - thm-qc-projective-conditional-state
+-  - thm-qc-zero-probability-branch-has-no-conditioned-state
++  - def-qc-pure-state-and-ray
++  - thm-qc-rank-one-density-operator
++  - def-qc-dirac-notation-conversion
++  - def-inner-product-norm
++  - def-trace-of-an-endomorphism
++  - thm-qc-dirac-notation-coordinate-identity
+ justified_by: []
+ axiom_use: "None; finite projective measurement identities are choice-free."
+ proof_strategy: direct
+@@ -46,18 +51,28 @@
+ [[def-qa-37-fusion-measurement]]
+ 
+ [F2] The projective measurement outcome law assigns probability
+-$\langle\psi,P_a\psi\rangle$ to outcome $a$.
++$p_a=\operatorname{tr}(|\psi\rangle\langle\psi|P_a)$ to outcome $a$.
+ [[thm-qc-projective-measurement-outcome-law]]
+ 
+-[F3] For positive-probability outcomes the conditional pure state is the
+-normalized projection, and for a zero-probability outcome no conditional
+-state is defined. [[thm-qc-projective-conditional-state]]
++[F3] A unit vector defines a pure-state ray whose rank-one projector is a
++density operator. [[def-qc-pure-state-and-ray]]
++[[thm-qc-rank-one-density-operator]]
+ 
+-[F4] The zero-probability case is characterized by a vanishing projected
+-vector. [[thm-qc-zero-probability-branch-has-no-conditioned-state]]
++[F4] On an outcome of positive probability, the conditional density operator
++is $P_a\rho P_a/p_a$. [[thm-qc-projective-conditional-state]]
++
++[F5] The Dirac outer product acts by $|x\rangle\langle y|z=
++\langle z,y\rangle_{\rm root}x$; trace is the sum of diagonal entries, and
++$\|x\|^2=\langle x,x\rangle_{\rm root}$.
++[[def-qc-dirac-notation-conversion]]
++[[def-trace-of-an-endomorphism]] [[def-inner-product-norm]]
++
++[F6] In orthonormal coordinates, $|x\rangle\langle y|$ has matrix
++$[x][y]^\dagger$, so its trace is $\langle x,y\rangle_{\rm root}$.
++[[thm-qc-dirac-notation-coordinate-identity]]
+ 
+ ## Proof
+ 
+-1.1 Since each $P_a$ is an orthogonal projection, $\langle\psi,P_a\psi\rangle=\langle P_a\psi,P_a\psi\rangle=\|P_a\psi\|^2\ge0$. The resolution identity gives $\sum_a p_a=\langle\psi,(\sum_aP_a)\psi\rangle=\|\psi\|^2=1$. The Born rule identifies these numbers as outcome probabilities by [F2]. [F1, F2, given, algebra]
++1.1 Set $\rho=|\psi\rangle\langle\psi|$, a density operator by [F3]. The Dirac rule and $P_a=P_a^*=P_a^2$ give $|\psi\rangle\langle\psi|P_a=|\psi\rangle\langle P_a\psi|$, whose trace is $\langle\psi,P_a\psi\rangle_{\rm root}$ by [F6]. By self-adjointness and idempotence this equals $\langle P_a\psi,P_a\psi\rangle_{\rm root}=\|P_a\psi\|^2$ by [F5]. Thus [F2] identifies $p_a=\|P_a\psi\|^2\ge0$ as the outcome probability. The resolution identity gives $\sum_a p_a=\langle\psi,(\sum_aP_a)\psi\rangle_{\rm root}=\|\psi\|^2=1$. [F1, F2, F3, F5, F6, given, algebra]
+ 
+-2.1 If $p_a>0$, then $\|P_a\psi\|=\sqrt{p_a}$, so division by $\sqrt{p_a}$ gives a vector of norm one and the conditional-state rule [F3] applies. If $p_a=0$, the same norm identity gives $\|P_a\psi\|=0$, hence $P_a\psi=0$; [F4] rules out a normalized conditional state on that branch. [F1, F3, F4, step 1.1, algebra] ∎
++2.1 If $p_a>0$, then $\rho_a=P_a\rho P_a/p_a$ is the conditional density operator by [F4]. The Dirac rule and self-adjointness give $P_a\rho P_a=|P_a\psi\rangle\langle P_a\psi|$; using step 1.1, $\rho_a$ is the rank-one projector of the unit vector $P_a\psi/\sqrt{p_a}$. If $p_a=0$, step 1.1 gives $\|P_a\psi\|=0$, hence $P_a\psi=0$. The zero-probability convention is that this branch is omitted and no normalized conditional vector or state is assigned; division by $\sqrt{p_a}=0$ is undefined. [F1, F4, F5, step 1.1, algebra] ∎
+
+--- passed-step1-baseline/items/thm-qc-tqc-arbitrary-n-register-universality.md
++++ actual-preproposal/items/thm-qc-tqc-arbitrary-n-register-universality.md
+@@ -8,6 +8,11 @@
+ deps:
+   - thm-qc-tqc-fibonacci-single-qubit-density
+   - thm-qc-tqc-spectator-extension
++  - thm-qc-tqc-braid-action-unitary-and-artin
++  - thm-qc-tqc-gauge-covariance
++  - lem-qc-tqc-fusion-tree-dimension
++  - ex-qc-tqc-fibonacci-data
++  - cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases
+   - thm-qc-exact-arbitrary-unitary-qsd-upper-bound
+   - lem-qc-tqc-leakage-logical-error-accumulation
+   - lem-qc-tqc-determinant-character-phase
+@@ -66,6 +71,22 @@
+ [F5] Braid words carry a common scalar phase; it must be tracked under
+ coherent control. [[lem-qc-tqc-determinant-character-phase]]
+ 
++[F6] The Fibonacci data and fusion-tree count give
++$\dim V(\tau^3\to1)=1$ and $\dim V(\tau^3\to\tau)=2$. In an ordered
++fusion-tree decomposition, a braid supported on a contiguous local block
++acts on that block's fixed-charge factor and as the identity on the prefix,
++suffix, and their fusion multiplicities; its fixed-charge action is unitary.
++Dividing the physical action by its common $R_1$ phase retains these
++properties; write $\widetilde\rho$ for the resulting normalized action.
++[[thm-qc-tqc-braid-action-unitary-and-artin]]
++[[thm-qc-tqc-gauge-covariance]]
++[[lem-qc-tqc-fusion-tree-dimension]]
++[[ex-qc-tqc-fibonacci-data]]
++[[lem-qc-tqc-determinant-character-phase]]
++
++[F7] Every finite-dimensional spectator fusion space has an orthonormal
++basis. [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]
++
+ [A1] $\mathrm{AC}_\omega$ is countable choice.
+ [[def-countable-choice]]
+ 
+@@ -75,8 +96,8 @@
+ 
+ 1.2 By [F3], $U$ has a finite exact decomposition into one-qubit gates and CNOT gates. Replace each nonadjacent two-qubit gate by the exact standard sequence of adjacent SWAP targets, the gate on neighboring wires, and the inverse SWAP targets. These are abstract $U(4)$ targets, not assumed to be exact leakage-free braids. The result is a finite list of $G$ one-qubit or adjacent two-qubit targets whose product is $U$. [F3, algebra]
+ 
+-1.3 If $G=0$, then $U=I$ and the empty braid proves the statement. Otherwise put $\delta_j=\epsilon/G$ for $1\le j\le G$. For each one-qubit target $U_j$, projective density [F1] supplies a braid whose two-dimensional matrix is within $\delta_j$ of a phase multiple $z_jU_j$. Extend its ideal action on the local total-$\tau$ sector by $z_jU_j$ tensored with spectator identity, and on the local total-$1$ sector by the actual compiled braid action. This braid-dependent extension is unitary, preserves the code, and differs from the physical braid by at most $\delta_j$ on the full ambient space; the complementary sector agrees exactly, so density on that sector is not assumed. [A1, F1, F2, algebra]
++1.3 If $G=0$, then $U=I$ and the empty braid proves the statement. Otherwise put $\delta_j=\epsilon/G$ for $1\le j\le G$. For a one-qubit target $U_j$ at logical position $j$, let $p=3(j-1)$ and $q=3(n-j)$. Reassociate the ordered $3n$ strands into prefix, this triple, and suffix, without changing their order. The fusion-tree basis gives the orthogonal decomposition $$V(\tau^{3n}\to c)\cong\bigoplus_{\alpha,a,e,d}V(\tau^p\to\alpha)\otimes V(\tau^3\to a)\otimes V_{\alpha a}^{e}\otimes V(\tau^q\to d)\otimes V_{ed}^{c},$$ with zero-dimensional summands omitted and $\tau^0=\mathbf1$. By [F6], a braid word $\beta_j$ on this triple acts on each summand by the normalized block $\widetilde\rho_a(\beta_j)$ on $V(\tau^3\to a)$ and identity on all other factors. The code lies in the local total-$\tau$ summands, where $V(\tau^3\to\tau)\cong\mathbb C^2$ is the logical qubit; total-$1$ summands lie in the orthogonal complement. Projective density [F1] supplies $\beta_j$ and $z_j\in U(1)$ with $\|\widetilde\rho_\tau(\beta_j)-z_jU_j\|_{\rm op}\le\delta_j$. Define a code-preserving ideal unitary on each local total-$\tau$ summand as $z_jU_j$ tensored with identity on the ordered prefix, suffix, and fusion multiplicities; on each local total-$1$ summand define it to equal the normalized $\widetilde\rho_1(\beta_j)$. It is unitary, and its difference from the normalized braid is at most $\delta_j$ on every summand (at most $\delta_j$ on total $\tau$ and zero on total $1$). In a fixed fusion summand, group the factors before the local triple as $S_L$ and those after it as $S_R$. Expanding $\xi=\sum_{k,\ell}e_k\otimes\xi_{k\ell}\otimes f_\ell$ in orthonormal bases of $S_L,S_R$ supplied by [F7] gives $\|(I\otimes A\otimes I)\xi\|^2=\sum_{k,\ell}\|A\xi_{k\ell}\|^2\le\|A\|_{\rm op}^2\sum_{k,\ell}\|\xi_{k\ell}\|^2$ for each local block error $A$. Thus tensoring with the spectator identities does not increase the block error. For the orthogonal direct sum, squared norms add, so its norm is at most the maximum block norm (attained by a maximizing vector in a maximizing block); hence the full ambient error is at most $\delta_j$. [A1, F1, F6, F7, step 1.1, algebra]
+ 
+ 2.1 For each adjacent two-qubit target, [F2] supplies a six-strand braid and a code-preserving ideal extension with full-space error at most $\delta_j$, including all spectator fusion sectors. The ideal one- and two-qubit extensions therefore give a finite code-preserving target sequence whose action on the code is $(\prod_j z_j)U$. [A1, F2, step 1.3, algebra]
+ 
+-3.1 Apply [F4] to the $G$ physical/ideal pairs. Their product differs in operator norm by at most $\sum_j\delta_j=\epsilon$. Compression to the code gives the logical block bound, while projection to its orthogonal complement gives leakage at most $\epsilon$. The product scalar $\prod_jz_j$, together with the common braid phases in [F5], is the single phase removed by the projective infimum; it is not free under coherent control. The proof gives existence only, because [F1] and [F2] supply no useful joint B6 word-length bound. [F1, F2, F4, F5, step 2.1, algebra] ∎+3.1 Apply [F4] to the $G$ physical/ideal pairs. Their product differs in operator norm by at most $\sum_j\delta_j=\epsilon$. Compression to the code gives the logical block bound, while projection to its orthogonal complement gives leakage at most $\epsilon$. The product scalar $\prod_jz_j$, together with the common braid phases in [F5], is the single phase removed by the projective infimum; it is not free under coherent control. The proof gives existence only, because [F1] and [F2] supply no useful joint B6 word-length bound. [F1, F2, F4, F5, step 2.1, algebra] ∎
+
+--- passed-step1-baseline/items/thm-qc-tqc-b6-su5-density.md
++++ actual-preproposal/items/thm-qc-tqc-b6-su5-density.md
+@@ -61,8 +61,10 @@
+ [[thm-cartans-closed-subgroup-theorem]]
+ [[prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra]]
+ 
+-[F5] $\mathfrak{su}(5)$ has real dimension $24$ and consists of the
+-trace-zero skew-Hermitian matrices.
++[F5] $\mathfrak{su}(n)$ consists of the trace-zero skew-Hermitian matrices.
++A real basis is given by $i(E_{jj}-E_{nn})$ for $j<n$ and, for each $j<k$,
++$E_{jk}-E_{kj}$ and $i(E_{jk}+E_{kj})$. Thus its real dimension is
++$(n-1)+2\binom n2=n^2-1$, which is $24$ for $n=5$.
+ [[ex-unitary-and-special-unitary-lie-groups]]
+ 
+ [F6] $SU(5)$ is path connected.
+
+--- passed-step1-baseline/items/thm-qc-tqc-b6-su8-density.md
++++ actual-preproposal/items/thm-qc-tqc-b6-su8-density.md
+@@ -61,8 +61,10 @@
+ [[thm-cartans-closed-subgroup-theorem]]
+ [[prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra]]
+ 
+-[F5] $\mathfrak{su}(8)$ has real dimension $63$ and consists of the
+-trace-zero skew-Hermitian matrices.
++[F5] $\mathfrak{su}(n)$ consists of the trace-zero skew-Hermitian matrices.
++A real basis is given by $i(E_{jj}-E_{nn})$ for $j<n$ and, for each $j<k$,
++$E_{jk}-E_{kj}$ and $i(E_{jk}+E_{kj})$. Thus its real dimension is
++$(n-1)+2\binom n2=n^2-1$, which is $63$ for $n=8$.
+ [[ex-unitary-and-special-unitary-lie-groups]]
+ 
+ [F6] $SU(8)$ is path connected. [[lem-qc-tqc-special-unitary-connected]]
+@@ -97,7 +99,7 @@
+ 
+ ## Remark
+ 
+-The deterministic scan in step 3.1 constructs exactly 63 Lie words from the
++The deterministic scan in step 4.1 constructs exactly 63 Lie words from the
+ same initial tangent $X=C-C^{-1}$ by conjugations and Lie brackets; the script
+ prints their names as $Y_0,\ldots,Y_{62}$, which this proof calls
+ $Z_0,\ldots,Z_{62}$. The exact $63\times63$ minor has determinant $22$
+
+--- passed-step1-baseline/items/thm-qc-tqc-fibonacci-single-qubit-density.md
++++ actual-preproposal/items/thm-qc-tqc-fibonacci-single-qubit-density.md
+@@ -11,6 +11,7 @@
+   - thm-cartans-closed-subgroup-theorem
+   - prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra
+   - lem-qc-tqc-pu2-is-so3
++  - ex-su-two-to-so-three-as-a-covering-homomorphism
+   - def-countable-choice
+   - thm-complex-spectral-theorem-for-normal-endomorphisms
+ dependency_level: 9
+@@ -61,9 +62,13 @@
+ [[thm-cartans-closed-subgroup-theorem]]
+ [[prop-the-lie-algebra-of-a-lie-subgroup-is-a-lie-subalgebra]]
+ 
+-[F4] The quotient map $q:SU(2)\to PU(2)$ is a two-sheeted covering,
+-and $PU(2)$ is isomorphic to the connected Lie group $SO(3)$.
++[F4] The quotient map $q:SU(2)\to PU(2)$ is a two-sheeted covering, and
++$PU(2)$ is topologically isomorphic as a group to $SO(3)$.
+ [[lem-qc-tqc-pu2-is-so3]]
++
++[F6] Quaternionic conjugation $\rho:SU(2)\to SO(3)$ is a smooth local
++diffeomorphism, as shown by its explicit coordinate formula and differential.
++[[ex-su-two-to-so-three-as-a-covering-homomorphism]]
+ 
+ [A1] Assume $\mathrm{AC}_\omega$, exactly the hypothesis of [F3] and [F4].
+ [[def-countable-choice]]
+@@ -74,7 +79,7 @@
+ 
+ 2.1 The number $\phi^{-2}$ has minimal polynomial $x^2-3x+1$, whose other root is $\phi^2>2$. If $e^{i\theta}$ were a root of unity, then $e^{i\theta}+e^{-i\theta}$ would have all algebraic conjugates of absolute value at most $2$, since every such conjugate is a sum of two roots of unity. The conjugate $\phi^2>2$ contradicts this. Hence $\theta/(2\pi)$ is irrational. [given, step 1.1, algebra]
+ 
+-3.1 Since $2\theta/(2\pi)=\theta/\pi$ is irrational, [F2] shows that the projective powers of $C$ are dense in the circle $T=\{[\operatorname{diag}(e^{it},e^{-it})]:t\in\mathbb R\}\subset PU(2)$ after choosing an eigenbasis. This circle is contained in the closure $H$ of the projective braid image. By [A1] and [F3], $H$ is a Lie subgroup. Let $q:SU(2)\to PU(2)$ be the quotient map from [F4]. In an eigenbasis, $C-C^{-1}=\operatorname{diag}(2i\sin\theta,-2i\sin\theta)$, so $dq(C-C^{-1})$ is a nonzero tangent to $T$ and belongs to $\operatorname{Lie}(H)$. [A1, F2, F3, F4, step 2.1, construct]
++3.1 Let $\bar\rho:PU(2)\to SO(3)$ be the topological group isomorphism supplied by [F4], and transport the standard smooth Lie-group structure of $SO(3)$ to $PU(2)$ along $\bar\rho$. This transported structure has exactly the quotient-metric topology. The covering map $\rho:SU(2)\to SO(3)$ from [F6] satisfies $\rho=\bar\rho\circ q$ and is a smooth local diffeomorphism; hence $q=\bar\rho^{-1}\circ\rho$ is a smooth local diffeomorphism too, so $dq_I$ is an isomorphism on tangent spaces. Since $\theta/\pi$ is irrational by step 2.1, [F2] shows that the projective powers of $C$ are dense in the smooth circle $T=\{[\operatorname{diag}(e^{it},e^{-it})]:t\in\mathbb R\}\subset PU(2)$ after choosing an eigenbasis; under $\bar\rho$ this is the ordinary rotation circle about an axis. Thus $T\subseteq H$, the closure of the projective braid image, and $H$ is closed in the transported Lie group. By [A1] and [F3], $H$ is an embedded Lie subgroup. In the eigenbasis, $C-C^{-1}=\operatorname{diag}(2i\sin\theta,-2i\sin\theta)$ is a nonzero tangent vector to the corresponding circle in $SU(2)$, so $dq_I(C-C^{-1})$ is a nonzero tangent to $T$ and lies in $\operatorname{Lie}(H)$. [A1, F2, F3, F4, F6, step 2.1, construct]
+ 
+ 4.1 Write $X=dq(C-C^{-1})\in\operatorname{Lie}(H)$. Conjugation by $[B_1]$ sends $T$ to a circle with tangent $\operatorname{Ad}_{[B_1]}X$. If these circles had the same axis, the rotation in $SO(3)$ induced by $[B_1]$ would either preserve or reverse that axis. A reversing rotation is a half-turn, but this projective generator has angle $3\pi/5\ne\pi$. If it preserved the oriented axis, it would commute projectively with $C$. Choose a determinant-one lift of $[B_1]$ to $SU(2)$, using [F4]. Its conjugate of $C$ would then be either $C$ or $-C$, because the kernel of $q$ is $\{\pm I\}$. The second case contradicts invariance of trace and $\operatorname{tr}C=\phi^{-2}\ne0$, so $B_1$ would commute with $C$, and hence with $B_2$, contrary to [F1]. Therefore the two axes are nonparallel. Under the standard identification of $\mathfrak{so}(3)$ with $\mathbb R^3$, the Lie bracket is the cross product up to a nonzero scalar; the bracket of two nonparallel axes is nonzero and independent of both. Thus $\operatorname{Lie}(H)=\mathfrak{so}(3)$ by [F3]. [A1, F1, F3, F4, step 3.1, algebra]
+ 
+
+--- passed-step1-baseline/items/thm-qc-tqc-gauge-covariance.md
++++ actual-preproposal/items/thm-qc-tqc-gauge-covariance.md
+@@ -18,6 +18,7 @@
+   - def-qc-tqc-unitary-fusion-category
+   - thm-qc-tqc-f-symbol-unitary
+   - thm-qc-tqc-r-symbol-unitary
++  - thm-mac-lane-coherence-in-the-canonical-map-form
+ justified_by: []
+ proof_strategy: direct
+ provenance:
+@@ -63,8 +64,7 @@
+ fixed simple total charge, and unitary multiplicity-basis changes.
+ 
+ [F1] [[def-monoidal-category]]: tensor product is a bifunctor, and the
+-associator satisfies the pentagon axiom; canonical parenthesization maps with
+-the same endpoints agree.
++associator satisfies the pentagon axiom.
+ 
+ [F2] [[def-braiding]]: each $c_{X,Y}$ is a natural isomorphism and satisfies
+ both hexagon identities.
+@@ -86,10 +86,14 @@
+ [[thm-qc-tqc-f-symbol-unitary]], and [[thm-qc-tqc-r-symbol-unitary]]: the
+ braiding and every F/R change of orthonormal fusion basis are unitary maps.
+ 
++[F7] [[thm-mac-lane-coherence-in-the-canonical-map-form]]: any two canonical
++rebracketing maps between the same parenthesized tensor words on the same
++ordered factors are equal.
++
+ ## Proof
+-1.1 For three consecutive charges $A,B,C$, naturality of the braiding in its first variable, applied to $c_{A,B}:A\otimes B\to B\otimes A$, gives $$c_{B\otimes A,C}\circ(c_{A,B}\otimes\operatorname{id}_C) =(\operatorname{id}_C\otimes c_{A,B})\circ c_{A\otimes B,C}.$$ This is an equality from $((A\otimes B)\otimes C)$ to $C\otimes(B\otimes A)$. Reassociating the target by $\alpha_{C,B,A}^{-1}$ and expanding each $c_{X\otimes Y,Z}$ by the second hexagon in [F2] gives the two adjacent Artin composites $$\begin{aligned} L&=(c_{B,C}\otimes\operatorname{id}_A)\circ\alpha_{B,C,A}^{-1} \circ(\operatorname{id}_B\otimes c_{A,C})\circ\alpha_{B,A,C} \circ(c_{A,B}\otimes\operatorname{id}_C),\\ R&=\alpha_{C,B,A}^{-1}\circ(\operatorname{id}_C\otimes c_{A,B}) \circ\alpha_{C,A,B}\circ(c_{A,C}\otimes\operatorname{id}_B) \circ\alpha_{A,C,B}^{-1}\circ(\operatorname{id}_A\otimes c_{B,C}) \circ\alpha_{A,B,C}. \end{aligned}$$ The cancelled factor is $\alpha_{C,B,A}^{-1}\circ\alpha_{C,B,A}=\operatorname{id}$; the remaining factors are exactly the displayed $L$ and $R$. Hence the adjacent braid relation holds as a typed equality of maps. The pentagon [F1] and its coordinate form [F3] make these canonical rebracketings independent of the chosen route when the three factors sit inside a longer tree. [F1, F2, F3, given, algebra]
++1.1 For three consecutive charges $A,B,C$, naturality of the braiding in its first variable, applied to $c_{A,B}:A\otimes B\to B\otimes A$, gives $$c_{B\otimes A,C}\circ(c_{A,B}\otimes\operatorname{id}_C) =(\operatorname{id}_C\otimes c_{A,B})\circ c_{A\otimes B,C}.$$ This is an equality from $((A\otimes B)\otimes C)$ to $C\otimes(B\otimes A)$. Reassociating the target by $\alpha_{C,B,A}^{-1}$ and expanding each $c_{X\otimes Y,Z}$ by the second hexagon in [F2] gives the two adjacent Artin composites $$\begin{aligned} L&=(c_{B,C}\otimes\operatorname{id}_A)\circ\alpha_{B,C,A}^{-1} \circ(\operatorname{id}_B\otimes c_{A,C})\circ\alpha_{B,A,C} \circ(c_{A,B}\otimes\operatorname{id}_C),\\ R&=\alpha_{C,B,A}^{-1}\circ(\operatorname{id}_C\otimes c_{A,B}) \circ\alpha_{C,A,B}\circ(c_{A,C}\otimes\operatorname{id}_B) \circ\alpha_{A,C,B}^{-1}\circ(\operatorname{id}_A\otimes c_{B,C}) \circ\alpha_{A,B,C}. \end{aligned}$$ The cancelled factor is $\alpha_{C,B,A}^{-1}\circ\alpha_{C,B,A}=\operatorname{id}$; the remaining factors are exactly the displayed $L$ and $R$. Hence the adjacent braid relation holds as a typed equality of maps. Coherence [F7] identifies the canonical rebracketings of these three factors when they sit inside a longer tree; [F3] records the resulting equality in every fusion-tree block. [F1, F2, F3, F7, given, algebra]
+ 
+-1.2 If two crossings involve disjoint adjacent pairs, reparenthesize the tree so that the two pairs occupy separate tensor factors. Write $g:A\otimes B\to B\otimes A$ and $h:C\otimes D\to D\otimes C$ for the two crossings. The bifunctor law gives the typed identity $$(\operatorname{id}_{B\otimes A}\otimes h)\circ(g\otimes\operatorname{id}_{C\otimes D}) =g\otimes h =(g\otimes\operatorname{id}_{D\otimes C})\circ(\operatorname{id}_{A\otimes B}\otimes h).$$ Transporting this identity back to the chosen tree uses the canonical associators of [F1], whose path independence is the pentagon in [F3]. Thus distant braid generators commute. [F1, F3, algebra]
++1.2 If two crossings involve disjoint adjacent pairs, reparenthesize the ordered factors as $W_L\otimes(A\otimes B)\otimes M\otimes(C\otimes D)\otimes W_R$, where $W_L,W_R$ collect the outer factors and $M$ is the (possibly empty) intervening tensor product. Let $g:A\otimes B\to B\otimes A$ and $h:C\otimes D\to D\otimes C$ be the two crossings. Suppressing only the canonical parentheses, bifunctoriality gives the typed identity $$(\operatorname{id}_{B\otimes A}\otimes\operatorname{id}_M\otimes h)\circ(g\otimes\operatorname{id}_M\otimes\operatorname{id}_{C\otimes D}) =g\otimes\operatorname{id}_M\otimes h =(g\otimes\operatorname{id}_M\otimes\operatorname{id}_{D\otimes C})\circ(\operatorname{id}_{A\otimes B}\otimes\operatorname{id}_M\otimes h).$$ Tensoring with the outer identities gives the same equality on the full word. Coherence [F7] transports it back to the chosen tree, so distant braid generators commute, including when one or more intervening factors are present. [F1, F7, algebra]
+ 
+ 2.1 For $n$ identical charges $a$, reassociate each object-level crossing $b_i$ to act on factors $i,i+1$, and let its fusion-space operator be $B_i(f)=f\circ b_i^{-1}$. The identity $B_{h\circ g}=B_h\circ B_g$ follows by composition: $B_h(B_g(f))=(f\circ g^{-1})\circ h^{-1}=f\circ(h\circ g)^{-1}$. Consequently the object-level relators proved in steps 1.1–1.2 hold for the $B_i$ as well. By [F5], the generator assignment extends uniquely to $\rho:B_n\to U(V)$. Reassociations are unitary by [F6], and the local exchange matrices are products of unitary F/R blocks from [F6]; hence each $B_i$ and every braid word is unitary. [F5, F6, step 1.1, step 1.2, construct]
+ 
+
+--- passed-step1-baseline/items/thm-qc-tqc-ising-braids-clifford-only.md
++++ actual-preproposal/items/thm-qc-tqc-ising-braids-clifford-only.md
+@@ -45,8 +45,8 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** The Majorana relations, a fixed-parity sector, the
+-Jordan–Wigner representation, and the Pauli matrices.
++**Given:** The Majorana relations, a fixed-parity sector, and the Pauli
++matrices.
+ 
+ [F1] The phase-aware Pauli group is finite and is generated by the single
+ qubit $X,Z$ matrices and scalar phases; the Clifford normalizer consists of
+@@ -73,6 +73,6 @@
+ 
+ 2.2 For $A=\gamma_j\gamma_{j+1}$ and $B=\gamma_{j+1}\gamma_{j+2}$, the Majorana relations give $A^2=B^2=-I$ and $AB=-BA$. Expanding with these identities gives $$U_jU_{j+1}U_j=-(A+B)/\sqrt2=U_{j+1}U_jU_{j+1}.$$ If $|j-k|\ge2$, then the two products $\gamma_j\gamma_{j+1}$ and $\gamma_k\gamma_{k+1}$ commute because moving their four distinct factors past each other contributes sign $(-1)^4=1$; hence $U_jU_k=U_kU_j$. Thus the $U_j$ satisfy the Artin braid relations. The common scalar in step 1.2 preserves these relations, since both sides of each relation have the same number of generators. [given, F3, step 1.2, algebra]
+ 
+-3.1 In the Jordan–Wigner representation, $\gamma_{2k-1}=Z_1\cdots Z_{k-1}X_k$ and $\gamma_{2k}=Z_1\cdots Z_{k-1}Y_k$. Direct multiplication gives $\Pi=(-1)^m Z_1\cdots Z_m$. On a fixed parity eigenspace $\Pi=\eta I$, so $Z_m=(-1)^m\eta Z_1\cdots Z_{m-1}$. The computational basis in this sector is indexed by the first $m-1$ bits. Set $\bar Z_k=Z_k$ and $\bar X_k=X_kX_m$ for $1\le k<m$. Each preserves parity; $\bar Z_k$ reads bit $k$, while $\bar X_k$ flips bit $k$ and bit $m$, so it flips exactly logical bit $k$. Direct multiplication also gives $i\gamma_{2k-1}\gamma_{2k}=-Z_k$ and $\prod_{\ell=k}^{m-1}(i\gamma_{2\ell}\gamma_{2\ell+1}) =(-1)^{m-k}X_kX_m$. Hence the logical Pauli generators are even Majorana monomials up to scalar signs. Projective Pauli labels form $\mathbb F_2^{2m}$. The label of $\Pi$ is $Z_1\cdots Z_m$, and a Pauli string commutes with $\Pi$ exactly when it has an even number of $X$ or $Y$ factors. This centralizer has dimension $2m-1$. The $2m$ Jordan–Wigner Majorana labels form a basis: if a binary sum of them is zero, its $X_k$ coordinate first gives $a_k+b_k=0$ for the odd/even Majorana coefficients at wire $k$; its $Z_k$ coordinate then gives $b_k=0$, so all coefficients vanish. Thus even Majorana products give the codimension-one label subspace commuting with $\Pi$. The labels of $\bar Z_1,\ldots,\bar Z_{m-1},\bar X_1,\ldots,\bar X_{m-1},\Pi$ are independent: the $X_1,\ldots,X_{m-1}$ coordinates force all $\bar X$ exponents to vanish, the $Z_m$ coordinate forces the $\Pi$ exponent to vanish, and then the other $Z$ coordinates force all $\bar Z$ exponents to vanish. They therefore generate the full centralizer. On a fixed-parity eigenspace $\Pi$ is scalar, leaving precisely the projective logical Pauli group generated by $\bar X_k,\bar Z_k$. By step 2.1 each braid sends every Majorana to a signed Majorana; it therefore normalizes that logical Pauli group. [F1, step 1.1, step 2.1, algebra]
++3.1 For $1\le k<m$ define the even Majorana monomials $\bar Z_k=i\gamma_{2k-1}\gamma_{2k}$ and $\bar X_k=\prod_{\ell=k}^{m-1}(i\gamma_{2\ell}\gamma_{2\ell+1})$. Each bilinear is a Hermitian involution; the bilinears in a fixed $\bar X_k$ have disjoint supports and commute, so every $\bar X_k$ is also a Hermitian involution. All these even monomials commute with $\Pi$ and preserve $\mathcal H_\eta$. Their supports show that the $\bar Z_j$ commute with one another, the $\bar X_k$ commute with one another, and $\bar Z_j$ anticommutes with $\bar X_k$ exactly when $j=k$ (their support intersection has odd size exactly in that case). The commuting involutions $\bar Z_1,\ldots,\bar Z_{m-1}$ have joint sign projections $\prod_k(I+\epsilon_k\bar Z_k)/2$ whose sum is identity, so at least one joint eigenspace is nonzero. Applying products of the $\bar X_k$ flips each sign independently; hence all $2^{m-1}$ joint sign eigenspaces are nonzero and orthogonal. Their number equals $\dim\mathcal H_\eta=2^{m-1}$ from step 1.1, so each is one-dimensional. In this basis the $\bar Z_k,\bar X_k$ are the standard logical Pauli generators. To see they exhaust the restrictions of all even Majorana monomials, label $\gamma_j$ by the $j$th standard vector of $\mathbb F_2^{2m}$. Even monomial labels form the $2m-1$ dimensional even-sum subspace, and the all-ones parity label lies in it. The labels of the $2m-2$ operators $\bar Z_k,\bar X_k$ are independent modulo the parity label: no combination uses coordinate $2m$, while the successive coordinates $1,2,3,4,\ldots,2m-1$ force in turn the coefficients of $\bar Z_1,\bar X_1,\bar Z_2,\bar X_2,\ldots,\bar Z_{m-1},\bar X_{m-1}$ to vanish. They therefore form a basis of the quotient of even labels by the parity label. Reordering and cancelling Majorana factors shows that monomials with the same label differ only by a scalar; on $\mathcal H_\eta$ the parity monomial is scalar. Thus every even Majorana monomial restricts to an element of the logical phase-aware Pauli group generated by the $\bar Z_k,\bar X_k$. By step 2.1 each braid sends every Majorana to a signed Majorana, so it maps this finite Pauli group into itself; invertibility and finiteness make the image equal to the group. Hence each exchange normalizes the logical Pauli group. [F1, step 1.1, step 2.1, algebra]
+ 
+ 4.1 Conjugation gives a homomorphism from the projective Clifford group to the automorphism group of the phase-aware Pauli group. That Pauli group is finite, so its automorphism group is finite. The kernel consists of unitaries commuting with every logical Pauli; commuting with all logical $Z_k$ makes a unitary diagonal in the computational basis, and commuting with each logical $X_k$ forces every diagonal entry to agree. Thus the kernel is scalar and the projective Clifford group is finite. For $m\ge2$, $PU(2^{m-1})$ is an infinite Hausdorff metric space by [F2]: the classes of $\operatorname{diag}(1,e^{it},1,\ldots,1)$ are distinct as $t$ varies modulo $2\pi$. A finite subgroup is closed in a metric space, so this braid subgroup is not dense. [F1, F2, step 2.2, step 3.1, algebra] ∎
+
+--- passed-step1-baseline/items/thm-qc-tqc-spectator-extension.md
++++ actual-preproposal/items/thm-qc-tqc-spectator-extension.md
+@@ -61,8 +61,14 @@
+ 
+ [F3] A local braid on a tensor factor acts as its braid operator tensored with
+ the identity on spectator factors; unitary fusion-tree reassociation changes
+-basis by a unitary.
++basis by a unitary. The physical braid phase is common to all charge and
++spectator blocks; write $\widetilde\rho$ for the normalized action obtained by
++removing it, which preserves the same local tensor-factor action.
+ [[thm-qc-tqc-gauge-covariance]]
++[[lem-qc-tqc-determinant-character-phase]]
++
++[F4] Every finite-dimensional spectator multiplicity space has an
++orthonormal basis. [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]
+ 
+ [A1] $\mathrm{AC}_\omega$ is countable choice.
+ [[def-countable-choice]]
+@@ -71,10 +77,10 @@
+ 
+ 1.1 Each triple has fusion factor $V(\tau^3\to\tau)\cong\mathbb C^2$. Associating the $n$ triple charges first gives the code factorization $(\mathbb C^2)^{\otimes n}\otimes V(\tau^n\to c)$; the second factor records all spectator fusion paths. This is an orthogonal fusion-tree decomposition by [F1, F3]. [given, F1, F3, construct]
+ 
+-1.2 Reassociate so the chosen adjacent six strands are first. Their total charge is $a\in\{1,\tau\}$, giving the orthogonal ambient decomposition $$V(\tau^{3n}\to c)\cong \bigoplus_{a=1,\tau}V(\tau^6\to a)\otimes V(a\otimes\tau^{3n-6}\to c).$$ The second factor contains every remaining fusion path and every multiplicity of the spectator triples. By [F3], a local six-strand braid $b$ acts as $\bigoplus_a\rho_a(b)\otimes I$ in this decomposition. [given, F3, algebra]
++1.2 Let the chosen adjacent pair of triples occupy strands $3j-2,\ldots,3j+3$, and put $p=3(j-1)$ and $q=3(n-j-1)$. Reassociate the ordered input only, retaining the prefix of $p$ strands, the selected six-strand block, and the suffix of $q$ strands in that order; no permutation of strands is used. The fusion-tree basis gives the orthogonal decomposition $$V(\tau^{3n}\to c)\cong\bigoplus_{\alpha,a,e,d}V(\tau^p\to\alpha)\otimes V(\tau^6\to a)\otimes V_{\alpha a}^{e}\otimes V(\tau^q\to d)\otimes V_{ed}^{c},$$ where the sums run over simple charges and zero-dimensional summands are omitted (with $\tau^0=\mathbf1$). Every factor other than $V(\tau^6\to a)$ records a prefix, suffix, or fusion-multiplicity spectator. By [F3], a normalized braid word $\beta$ supported on the selected six consecutive strands acts on each summand as the identity on all other factors and $\widetilde\rho_a(\beta)$ on $V(\tau^6\to a)$. [given, F3, algebra]
+ 
+-2.1 For each $a$, let $T_a$ be the target extension in [F1] and define the global ideal unitary $\mathcal W=\bigoplus_aT_a\otimes I_{V(a\otimes\tau^{3n-6}\to c)}$, omitting zero-dimensional summands. It preserves the triple code and acts there as $U$ on the selected adjacent pair and identity on all other logical and spectator factors. Joint density [F1] gives one normalized braid $b$ with $\|\rho_a(b)-T_a\|_{\mathrm{op}}\le\delta$ for both $a=1,\tau$. [A1, F1, step 1.1, step 1.2, choose]
++2.1 For each local total charge $a$, let $T_a$ be the target extension in [F1]. On the decomposition in step 1.2 define $\mathcal W$ on each summand by the identity on every factor other than $V(\tau^6\to a)$ and by $T_a$ on that block. This is a unitary direct sum; it preserves the triple code and acts there as $U$ on the selected adjacent pair and identity on all other logical and spectator factors. Joint density [F1] gives one normalized six-strand braid word $\beta$ with $\|\widetilde\rho_a(\beta)-T_a\|_{\mathrm{op}}\le\delta$ for both $a=1,\tau$. [A1, F1, step 1.1, step 1.2, choose]
+ 
+-3.1 Tensoring an operator $A$ with a spectator identity preserves its norm: expand a vector in an orthonormal spectator basis to get $\|(A\otimes I)\xi\|^2=\sum_j\|A\xi_j\|^2\le\|A\|_{\mathrm{op}}^2\|\xi\|^2$, with equality on a maximizing unit vector tensored with one basis vector. The norm of an orthogonal direct sum is the maximum of the block norms, because the squared norm is the sum of the squared block norms. Hence $\|\rho(b)-\mathcal W\|_{\mathrm{op}}\le\delta$ on the whole ambient space. [F1, F3, step 2.1, algebra]
++3.1 In a summand of step 1.2, group the factors before $V(\tau^6\to a)$ as $S_L$ and those after it as $S_R$. Choose orthonormal bases $(e_k)$ and $(f_\ell)$ of $S_L,S_R$ by [F4] and write $\xi=\sum_{k,\ell}e_k\otimes\xi_{k\ell}\otimes f_\ell$. Then $\|(I\otimes A\otimes I)\xi\|^2=\sum_{k,\ell}\|A\xi_{k\ell}\|^2\le\|A\|_{\mathrm{op}}^2\sum_{k,\ell}\|\xi_{k\ell}\|^2$, with equality on a maximizing vector in the middle factor tensored with basis vectors; hence the operator norm on each tensor summand equals $\|A\|_{\mathrm{op}}$. For an orthogonal direct sum of blocks, squared norms add, so its operator norm is the maximum block norm (equality follows by testing a maximizing vector in a maximizing block). The decomposition in step 1.2 and the bounds in step 2.1 therefore give $\|\widetilde\rho(\beta)-\mathcal W\|_{\mathrm{op}}\le\delta$ on the whole ambient space. [F1, F3, F4, step 2.1, algebra]
+ 
+-4.1 Apply [F2] to $\rho(b)$ and $\mathcal W$. Their compression to the code differs from the target by at most $\delta$, and $(I-P)\mathcal W P=0$, so the leakage amplitude is also at most $\delta$. The norm estimate is on the whole ambient space, so it remains valid for inputs with prior leakage. The physical categorical word has the common phase of [[lem-qc-tqc-determinant-character-phase]], which is harmless only after phase matching or when reported projectively. [F1, F2, step 3.1] ∎
++4.1 Apply [F2] to $\widetilde\rho(\beta)$ and $\mathcal W$. Their compression to the code differs from the target by at most $\delta$, and $(I-P)\mathcal W P=0$, so the leakage amplitude is also at most $\delta$. The norm estimate is on the whole ambient space, so it remains valid for inputs with prior leakage. The physical categorical word has the common phase of [[lem-qc-tqc-determinant-character-phase]], which is harmless only after phase matching or when reported projectively. [F1, F2, step 3.1] ∎
+
+--- passed-step1-baseline/items/thm-ising-periodic-two-sector-and-line-representation.md
++++ actual-preproposal/items/thm-ising-periodic-two-sector-and-line-representation.md
+@@ -8,6 +8,8 @@
+ pipeline_run: non-ml-math-remaining-81-2026-10-18
+ deps:
+   - lem-ising-unitary-normal-data-and-ribbon-coherence
++  - def-anyonic-fusion-path-space
++  - thm-anyonic-path-space-is-hilbert-under-unitarity
+   - def-qc-tqc-unitary-fusion-category
+   - def-qc-tqc-f-symbol
+   - def-qc-tqc-fusion-multiplicity-space
+@@ -32,7 +34,11 @@
+ 
+ ## Statement
+ 
+-Use either coherent $\kappa$ category of [[lem-ising-unitary-normal-data-and-ribbon-coherence]], with reference charge $D$. For $L\ge1$, a periodic path $(x_1,\ldots,x_L)$ obeys $x_iD\supset x_{i+1}$ and $x_{L+1}=x_1$, with every elementary fusion index retained. Odd $L$ gives zero space. For $L=2N$, $N\ge1$, the complete orthonormal path space is $H\oplus\bar H$, each sector of dimension $2^N$, with the explicit bit identifications in the proof. These identifications intertwine every vacuum pair projector, including wraparound:
++Use either coherent $\kappa$ category of [[lem-ising-unitary-normal-data-and-ribbon-coherence]], with reference charge $D$ and representative set $\operatorname{Irr}(\mathcal C)=\{\mathbf1,\eta,D\}$. For $L\ge1$ define the periodic carrier
++
++$$\mathcal H_L:=\bigoplus_{b\in\operatorname{Irr}(\mathcal C)}H_{D,L;b,b},$$
++
++using the fixed-boundary path spaces of [[def-anyonic-fusion-path-space]] and the orthogonal Hilbert direct-sum inner product. The union of their fusion-path bases, supplied as orthonormal bases by [[thm-anyonic-path-space-is-hilbert-under-unitarity]], is the cyclic path basis: a path in the $b$ summand has $x_1=b$, $x_{L+1}=x_1$, and retains every elementary fusion index. Odd $L$ gives the zero space. For $L=2N$, $N\ge1$, this complete orthonormal carrier is $H\oplus\bar H$, each sector of dimension $2^N$, with the explicit bit identifications in the proof. These identifications intertwine every vacuum pair projector, including wraparound:
+ $$P_{2j-1}|_H=(1+X_j)/2,\quad P_{2j}|_H=(1+Z_jZ_{j+1})/2,$$
+ $$P_{2j-1}|_{\bar H}=(1+Z_jZ_{j+1})/2,\quad P_{2j}|_{\bar H}=(1+X_{j+1})/2.$$
+ All bit indices are modulo $N$. For $N=1$ the bond is the identity; no three-distinct-site cyclic TL assertion is made for this length-two identification.
+@@ -45,19 +51,23 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** The full coherent normal-data category, reference charge $D$, a positive periodic length $L$, both parity sectors and their specified orthonormal path bases. All arithmetic in a binary exponent is modulo two.
++**Given:** Either coherent normal-data category, its representative labels and orthonormal fusion vertices, reference charge $D$, and a length $L\ge1$. All arithmetic in a binary exponent is modulo two.
+ 
+ [F1] [[lem-ising-unitary-normal-data-and-ribbon-coherence]] supplies every admissible Ising F block, both FS signs, orthonormal summand vertices, unitarity and full pentagon/hexagon coherence.
+ 
+-[F2] The F coordinate convention retains every intermediate channel and multiplicity coordinate ([[def-qc-tqc-f-symbol]], Definition; [[def-qc-tqc-fusion-multiplicity-space]], Definition).
++[F2] [[def-anyonic-fusion-path-space]] identifies each summand of $\mathcal H_L$ with the typed fixed-boundary Hom space and retains each vertex index.
+ 
+-[F3] Tensor product preserves dagger and orthogonal simple decompositions may be chosen isometrically ([[def-qc-tqc-unitary-fusion-category]], Definition).
++[F3] [[thm-anyonic-path-space-is-hilbert-under-unitarity]] makes the path basis of each summand orthonormal; their finite direct sum is the carrier's orthonormal cyclic path basis.
++
++[F4] The F coordinate convention retains every intermediate channel and multiplicity coordinate ([[def-qc-tqc-f-symbol]], Definition; [[def-qc-tqc-fusion-multiplicity-space]], Definition).
++
++[F5] Tensor product preserves dagger and orthogonal simple decompositions may be chosen isometrically ([[def-qc-tqc-unitary-fusion-category]], Definition).
+ 
+ ## Proof
+ 
+ **Proof technique:** evaluate every local and cyclic F contraction in both periodic sectors, then prove the resulting finite Fourier identities for arbitrary length.
+ 
+-1.1 A periodic length-$L$ path is $(x_1,\ldots,x_L)$ with $x_iD\supset x_{i+1}$ and $x_{L+1}=x_1$. Every elementary fusion index equals one and is retained. Fusion forces alternation between $D$ and $G$, so the space is zero for odd $L$. For $L=2N$, $N\ge1$, it is the orthogonal sum $H\oplus\bar H$, with $H$ given by $x_{2j-1}=D$, $x_{2j}=b_j\in G$ and $\bar H$ by $x_{2j-1}=b_j\in G$, $x_{2j}=D$. The $N$ bits are independent even across the wrap edge, giving dimension $2^N$ in each sector. The maps $\Phi_H,\Phi_{\bar H}$ send the paths to the standard orthonormal basis $|b_1\cdots b_N\rangle$, with inverse obtained by inserting the fixed $D$ labels. This includes both sectors without a total-flux or global-spin-parity projection; at $N=1$ there are four states. [F1, F2, F3, given, construct, algebra]
++1.1 By [F2], the carrier $\mathcal H_L$ is the direct sum of the Hom spaces $H_{D,L;b,b}$, and by [F3] the path composites in each summand form an orthonormal basis. A basis vector in the $b$ summand is exactly a cyclic path with $x_1=b$, $x_{L+1}=x_1$, and all vertex indices retained; conversely every cyclic path belongs to exactly one such summand. Since the Ising fusion rules are $D\otimes D=\mathbf1\oplus\eta$ and $D\otimes g=D$ for $g\in G=\{\mathbf1,\eta\}$, the labels alternate between $D$ and $G$. Thus the cyclic path space is zero for odd $L$. For $L=2N$, $N\ge1$, it is the orthogonal sum $H\oplus\bar H$, with $H$ given by $x_{2j-1}=D$, $x_{2j}=b_j\in G$ and $\bar H$ by $x_{2j-1}=b_j\in G$, $x_{2j}=D$. The $N$ bits are independent even across the wrap edge, giving dimension $2^N$ in each sector. The maps $\Phi_H,\Phi_{\bar H}$ send the paths to the standard orthonormal basis $|b_1\cdots b_N\rangle$, with inverse obtained by inserting the fixed $D$ labels. This includes both sectors without a total-flux or global-spin-parity projection; at $N=1$ there are four states. [F1, F2, F3, F4, F5, given, construct, algebra]
+ 
+ 2.1 Define $P_i$ to project the two reference edges from $x_i$ to $x_{i+2}$ to vacuum, changing only the intermediate label $x_{i+1}$. Its local F matrix is $F_{x_{i+2}}^{x_iDD}$, with source channel $x_{i+1}$ and target $DD$ output. Thus its index differs from a convention naming the intermediate link by one. If both neighbors are $D$, the F matrix is $\kappa$ times Hadamard and $F^{-1}\Pi_0F=(I+X)/2$ on the intermediate bit. If they are group labels $g,h$, the intermediate label is forced to be $D$ and the $DD$ output is $g+h$, so the vacuum projector is $\delta_{g,h}$. The overall $\kappa$ cancels, so both coherent sign conventions give the same projectors. [step 1.1, algebra]
+ 
+
+--- passed-step1-baseline/items/lem-qc-tqc-fibonacci-b6-path-projectors-and-artin.md
++++ actual-preproposal/items/lem-qc-tqc-fibonacci-b6-path-projectors-and-artin.md
+@@ -74,4 +74,4 @@
+ 
+ 2.1 Put $q_0=\phi^{-2}$. For adjacent $P=P_i,Q=P_{i+1}$ and $s=1-r$, direct expansion using $P^2=P$, $Q^2=Q$, $PQP=q_0P$, and $QPQ=q_0Q$ gives $$[rI+sP][rI+sQ][rI+sP]-[rI+sQ][rI+sP][rI+sQ] =s\bigl(r+q_0s^2\bigr)(P-Q).$$ Because $r+r^{-1}=-\phi^{-1}$, $\bigl(r+q_0(1-r)^2\bigr)/r =1+\phi^{-2}(r+r^{-1}-2) =1-\phi^{-2}(\phi^{-1}+2)=0$; here $\phi^{-1}+2=\phi^2$. Thus the adjacent braid relation holds. [A1, step 1.3, algebra]
+ 
+-3.1 Since $P_i$ is an orthogonal projection and $|r|=1$, $B_i$ acts by $1$ on $\operatorname{ran}P_i$ and by $r$ on its orthogonal complement, so it is unitary. The distant commutation and adjacent relation from steps 1.3–2.2 are the defining Artin relations, hence the matrices represent $B_6$. The rank table gives rank $2$ on the five-dimensional block and rank $3$ on the eight-dimensional block, so $\det B_i=r^{5-2}=r^3$ and $\det B_i=r^{8-3}=r^5$, respectively. [given, step 1.2, step 1.3, step 2.1, algebra] ∎
++3.1 Since $P_i$ is an orthogonal projection and $|r|=1$, $B_i$ acts by $1$ on $\operatorname{ran}P_i$ and by $r$ on its orthogonal complement, so it is unitary. The distant commutation and adjacent relation from steps 1.3 and 2.1 are the defining Artin relations, hence the matrices represent $B_6$. The rank table gives rank $2$ on the five-dimensional block and rank $3$ on the eight-dimensional block, so $\det B_i=r^{5-2}=r^3$ and $\det B_i=r^{8-3}=r^5$, respectively. [given, step 1.2, step 1.3, step 2.1, algebra] ∎
+
+--- passed-step1-baseline/items/ex-multiplicity-indexed-anyonic-fusion-path.md
++++ actual-preproposal/items/ex-multiplicity-indexed-anyonic-fusion-path.md
+@@ -29,7 +29,7 @@
+ 
+ ## Example
+ 
+-Assume a finite semisimple fusion category contains simple labels $x,a,y$ with $N_{x a}^y=2$. Fix the labels and basis indices at every other vertex of a path, and suppose the remaining vertex is $x,a\to y$. Choose a basis $i_1,i_2$ of the split space $\operatorname{Hom}(y,x\otimes a)$. The two complete path labels differ only by this vertex index.
++Assume a finite semisimple fusion category $\mathcal C$ has a representative set $\operatorname{Irr}(\mathcal C)$ containing labels $x,a,y$ with $N_{x a}^y=2$. Fix representative labels and basis indices at every other vertex of a path, and suppose the remaining vertex is $x,a\to y$. Choose a basis $i_1,i_2$ of the split space $\operatorname{Hom}(y,x\otimes a)$. The two complete path labels differ only by this vertex index.
+ 
+ ## Facts & Assumptions
+ 
+
+--- passed-step1-baseline/library/quantum-algorithms/topological-quantum-algorithms-and-braid-compilation-examples.md
++++ actual-preproposal/library/quantum-algorithms/topological-quantum-algorithms-and-braid-compilation-examples.md
+@@ -9,3 +9,10 @@
+ These examples instantiate the finite fusion and braid-compilation interfaces: fusion-measurement branches, the distinction between projective equivalence and a controlled operation, a joint six-strand target search, and a complete output-error budget. They use the exact encoding, spectator action and cost conventions of the companion page.
+ 
+ The examples keep mathematical approximation guarantees separate from the stated physical preparation, transport and measurement inputs. In particular a global phase on a fixed sector does not automatically remain irrelevant after adding coherent control.
++
++The Ising braid model supplies a contrasting boundary: under the stated
++Majorana–Ising interface, braid-only gates normalize the logical Pauli group,
++their projective image is finite, and for at least two encoded qubits it is not
++dense in the full projective unitary group
++([[thm-qc-tqc-ising-braids-clifford-only]]). This limitation is conditional on
++that interface and does not change the Fibonacci compilation claims.
+
+--- passed-step1-baseline/library/quantum-algorithms/topological-quantum-algorithms-and-braid-compilation.md
++++ actual-preproposal/library/quantum-algorithms/topological-quantum-algorithms-and-braid-compilation.md
+@@ -13,7 +13,7 @@
+ 
+ ---
+ 
+-This page develops a finite mathematical model of topological computation: fusion inputs and measurements, resource and phase-reference costs, a fixed-charge multi-qubit encoding, and braid compilation with explicit approximation guarantees. The actual Fibonacci representation and its joint six-strand density supply the gate model; locality on spectator factors is proved separately.
++This page develops a finite mathematical model of topological computation: fusion inputs and measurements, an initial encoded state or costed preparation procedure, an explicit error threshold, resource and phase-reference costs, a fixed-charge multi-qubit encoding, and braid compilation with approximation guarantees. The actual Fibonacci representation and its joint six-strand density supply the gate model; locality on spectator factors is proved separately.
+ 
+ The single-qubit compiler uses a supplied finite base-net certificate and distinguishes exact-real operations from the effective bit-cost branch. The joint-block compiler uses a certified exhaustive search with a density margin; termination gives no useful uniform word-length bound. Their errors feed an arbitrary-size encoded circuit and a measured-output bound.
+ 

@@ -3,6 +3,7 @@ id: lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces
 kind: lemma
 title: "An elementary abelian $p$-group has a canonical $\\mathbb F_p$-vector-space structure"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
@@ -12,12 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  precheck: pass
-  judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
-    verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces.json
 sources:
   scraped: []
   references:
@@ -50,4 +46,4 @@ The rule $\bar a\cdot x=x^a$ gives every elementary abelian $p$-group its canoni
 
 2.1 The power laws in [L3] and commutativity give $(\bar a+\bar b)\cdot x=(\bar a\cdot x)(\bar b\cdot x)$, $(\bar a\bar b)\cdot x=\bar a\cdot(\bar b\cdot x)$, $\bar a\cdot(xy)=(\bar a\cdot x)(\bar a\cdot y)$, $\bar1\cdot x=x$, and $\bar0\cdot x=e$. Together with [L1] and [L2], these are the vector-space axioms. [step 1.1, F1, L1, L2, L3, algebra]
 
-3.1 The scalar structure uses the existing abelian group law and does not change its elements. In particular its additive group remains finite, abelian, and of exponent $p$, including the zero-dimensional trivial case. [step 2.1, F1, L1, algebra] ∎
+3.1 The scalar structure uses the existing abelian group law and does not change its elements. In particular its additive group remains finite, abelian, and of exponent dividing $p$, including the zero-dimensional trivial case. [step 2.1, F1, L1, algebra] ∎

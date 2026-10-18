@@ -3,6 +3,7 @@ id: fs-centralizer-of-the-fitting-subgroup-is-always-contained-in-the-fitting-su
 kind: false-statement
 title: "FALSE: the Fitting subgroup always contains its centralizer"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-24
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/published-receipts/fs-centralizer-of-the-fitting-subgroup-is-always-contained-in-the-fitting-subgroup.json
 sources:
   scraped: []
   references:

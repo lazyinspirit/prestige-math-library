@@ -3,6 +3,7 @@ id: thm-whitney-extension-for-finite-order-euclidean-jets
 kind: theorem
 title: Whitney extension for finite-order Euclidean jets
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: literature-derived
@@ -16,14 +17,12 @@ sources:
     - title: "Azagra, Ferrera and Gómez-Gil, The Morse-Sard theorem revisited, Section 2, arXiv:1511.05822"
       url: "https://arxiv.org/pdf/1511.05822"
 verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical new_item review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-10-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/thm-whitney-extension-for-finite-order-euclidean-jets.json
 ---
 
 ## Statement

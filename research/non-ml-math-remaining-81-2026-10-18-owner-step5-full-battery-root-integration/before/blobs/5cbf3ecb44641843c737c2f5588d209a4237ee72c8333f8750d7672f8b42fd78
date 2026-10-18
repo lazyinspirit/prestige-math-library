@@ -1,0 +1,74 @@
+---
+id: def-qc-tqc-toric-logical-loops
+kind: definition
+title: Noncontractible toric logical loops
+status: draft
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+dependency_level: 4
+deps:
+  - def-qc-tqc-periodic-square-cellulation
+  - def-qc-tqc-toric-checks
+  - lem-qc-tqc-toric-cycle-quotient
+  - lem-qc-tqc-toric-incidence-ranks
+  - lem-qc-tqc-toric-check-commutation
+  - thm-qc-tqc-toric-code-dimension
+  - thm-qc-pauli-commutator-is-symplectic-pairing
+  - def-qc-stabilizer-syndrome-and-logical-operators
+justified_by: []
+proof_strategy: direct
+axiom_use: "None; loop representatives are fixed coordinate cycles."
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "Alexei Kitaev, Fault-tolerant quantum computation by anyons"
+      url: https://arxiv.org/pdf/quant-ph/9707021
+    - title: "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory"
+      url: https://arxiv.org/pdf/quant-ph/0110143
+---
+
+## Definition
+
+On the periodic torus, define four Pauli representatives
+
+$$\bar Z_1=\prod_{i\in\mathbb Z_L}Z_{h_{i,0}},\qquad \bar Z_2=\prod_{j\in\mathbb Z_L}Z_{v_{0,j}},\qquad \bar X_1=\prod_{j\in\mathbb Z_L}X_{h_{0,j}},\qquad \bar X_2=\prod_{i\in\mathbb Z_L}X_{v_{i,0}}.$$
+
+The $\bar Z$ supports are the two fixed fundamental primal cycles. The
+$\bar X$ supports are the dual cycles crossing them. These operators are
+called the toric logical loops. As verified below, each is a nontrivial
+logical Pauli class in the periodic toric code.
+
+## Facts & Assumptions
+
+**Given:** The periodic toric checks and the four specified Pauli loop representatives.
+
+[F1] [[def-qc-tqc-toric-checks]]: stars are X on the four incident edges and plaquettes are Z on the four boundary edges.
+
+[F2] [[thm-qc-pauli-commutator-is-symplectic-pairing]]: a Pauli commutes with a check exactly when its binary symplectic pairing with that check is zero; for these pure X/Z checks this is the parity of the shared support.
+
+[F3] [[lem-qc-tqc-toric-cycle-quotient]]: the two primal fundamental loops have winding pairs $(1,0)$ and $(0,1)$; the two dual loops have the corresponding nonzero dual winding classes; a cycle is a boundary exactly when both winding parities vanish.
+
+[F4] [[lem-qc-tqc-toric-incidence-ranks]]: the only star-support relation and the only face-boundary relation are their respective total sums.
+
+[F5] [[thm-qc-tqc-toric-code-dimension]]: the common check eigenspace is nonzero and has dimension four.
+
+[F6] [[def-qc-stabilizer-syndrome-and-logical-operators]]: logical Pauli classes are normalizer elements modulo scalar phases and stabilizers.
+
+[F7] [[def-qc-tqc-periodic-square-cellulation]]: indices are modulo $L$; horizontal edges join consecutive vertices in their first coordinate and vertical edges join consecutive vertices in their second coordinate. The dual edges cross the corresponding primal edges and join the adjacent faces.
+
+[F8] [[lem-qc-tqc-toric-check-commutation]]: the product of all stars and the product of all plaquettes are identity, and all checks commute.
+
+## Verification
+
+1.1 The supports of $\bar Z_1$ and $\bar Z_2$ close because their successive horizontal and vertical edges meet at vertices modulo $L$, by [F7]. The supports of $\bar X_1$ and $\bar X_2$ close on the dual graph because the crossed edges join successive adjacent faces modulo $L$, also by [F7]. By [F1] and [F2], a primal Z cycle commutes with every star and plaquette, and a dual X cycle commutes with every plaquette and star. Their winding pairs are nonzero by [F3], so none is a boundary. If a pure Z loop were in the stabilizer, its X support would be zero; by [F4] the selected star factors would either be empty or the full star family, and [F8] makes that full product $I$. The loop would therefore be a product of plaquettes, contrary to its nonzero winding. Interchanging X and Z gives the same conclusion for the dual loops. Hence all four lie in $N(S)\setminus Z_nS$ and define nontrivial logical classes by [F6]. [given, F1, F2, F3, F4, F6, F7, F8, algebra]
+
+2.1 The code is nonzero by [F5], so these normalizer classes act on its four-dimensional code space. The four formulas fix the representatives whose pairings are calculated in the subsequent logical-algebra result. [F5, step 1.1] ∎
+
+## Remarks
+
+The commutation pairings for these fixed representatives are listed in
+[[thm-qc-tqc-toric-logical-algebra]]. This is an orientation-only forward
+reference; the verification above does not depend on that theorem.
+

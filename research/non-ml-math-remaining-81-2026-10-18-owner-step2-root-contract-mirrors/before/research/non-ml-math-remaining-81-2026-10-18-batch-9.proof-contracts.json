@@ -1,0 +1,847 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-finite-alphabet-iid-information-aep",
+    "cor-aep-typical-set-probability-and-size-bounds",
+    "ex-correlated-bernoulli-source-fails-the-iid-aep",
+    "ex-independent-nonidentical-source-has-no-information-rate-limit",
+    "thm-fixed-length-lossless-source-coding",
+    "ex-bernoulli-aep-and-typical-set-count"
+  ],
+  "contracts": {
+    "lem-finite-alphabet-iid-information-aep": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-alphabet-iid-source",
+          "source_section": "Definition",
+          "quote": "A finite-alphabet IID source consists of random elements $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to A$, $i\\ge1$, on one probability space, which are independent and identically distributed in the sense of [[def-identically-distributed-and-iid-random-variables]] and have common law $p$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-law-self-information-and-entropy",
+          "source_section": "Definition",
+          "quote": "On $A_+$ define self-information $\\imath_p(a):=-\\ln p(a)$; set $\\imath_p(a)=0$ when $p(a)=0$ only to make a finite-valued function on all of $A$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-information-units-and-logarithm-base",
+          "source_section": "Definition",
+          "quote": "Unless a base is displayed, every information quantity on this page uses $\\ln$ and is measured in **nats**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "Its Shannon entropy in natural units is $$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$ with $0\\ln0:=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-source-information-density-and-typical-set",
+          "source_section": "Definition",
+          "quote": "On the positive-probability support $A_+^n$, define normalized block information density using the natural-log/nats convention from [[def-it-information-units-and-logarithm-base]] $$I_n(x^n):=-\\frac1n\\ln p^n(x^n).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-iid-finite-variance-weak-law",
+          "source_section": "Statement",
+          "quote": "Also $\\mathbb P(|S_n/n-\\mu|\\ge\\varepsilon)\\le\\sigma^2/(n\\varepsilon^2)$ for $\\varepsilon>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-convergence-in-probability",
+          "source_section": "Definition",
+          "quote": "write $X_n\\to X$ **in probability** when, for every $\\varepsilon>0$,",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "transform-iid-surprisal",
+          "claim": "Applying the same finite-valued measurable surprisal function to every coordinate preserves the common law and mutual independence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "surprisal-moments",
+          "claim": "Finite summation gives surprisal mean H(p), variance V(p), and square integrability.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "aep-by-weak-law",
+          "claim": "Almost surely the block information is the surprisal sample mean, so the IID weak law gives the quantitative tail bound and convergence.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability law cannot have total mass one on the empty alphabet.",
+          "evidence": "A probability law cannot have total mass one on the empty alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For a point-mass law H(p)=V(p)=0; step 2.1 gives zero surprisal variance and step 3.1 gives a zero tail bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The quantitative estimate is asserted for every n≥1; step 3.1 also applies at n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A singleton support has finite, zero surprisal; the support restriction and finite-sum calculation in steps 2.1 and 3.1 apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Zero-mass symbols are omitted from A_+ and the finite-union argument in step 3.1 keeps all logarithms finite almost surely."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite support sums, measurable coordinate maps, and finite coordinate unions occur in steps 1.1–3.1; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "evidence": ""
+        }
+      ]
+    },
+    "cor-aep-typical-set-probability-and-size-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-source-information-density-and-typical-set",
+          "source_section": "Definition",
+          "quote": "$T_n(\\varepsilon):=\\{x^n\\in A_+^n:|I_n(x^n)-H(p)|\\le\\varepsilon\\}.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-alphabet-iid-information-aep",
+          "source_section": "Statement",
+          "quote": "every $n\\ge1$ and $\\varepsilon>0$ satisfy $$\\mathbb P(|I_n(X^n)-H(p)|\\ge\\varepsilon)\\le\\frac{V(p)}{n\\varepsilon^2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "typical-upper-count",
+          "claim": "Every typical word has probability at least exp(-n(H+epsilon)), which gives the upper cardinality bound.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "typical-lower-count",
+          "claim": "Every typical word has probability at most exp(-n(H-epsilon)), which gives the lower cardinality bound from its total probability.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "typical-tail",
+          "claim": "The AEP tail estimate bounds the atypical probability and makes it tend to zero.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The source law has a nonempty finite support and n is at least one.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When V(p)=0, step 2.1 gives delta_n=0 and steps 1.1–1.2 remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "All three inequalities hold for n=1 by the same finite sums in steps 1.1–1.2 and the tail estimate in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For singleton support, the typical set contains the unique positive-mass word; the lower and upper count inequalities in steps 1.1–1.2 and 2.1 hold with cardinality one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "If H(p)-epsilon is negative, the lower exponential factor is still positive and the rearrangement in step 1.2 remains valid."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite sums in step 1.1 and step 1.2 require no selection from nonempty families."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "evidence": ""
+        }
+      ]
+    },
+    "thm-fixed-length-lossless-source-coding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fixed-length-lossless-block-code",
+          "source_section": "Definition",
+          "quote": "deterministic fixed-length binary block code is a pair of maps",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-alphabet-iid-source",
+          "source_section": "Definition",
+          "quote": "For every $n\\ge1$, the finite vector $X^n=(X_1,\\ldots,X_n)$ then has probability $\\mathbb P(X^n=x^n)=p^n(x^n)$ for each $x^n\\in A^n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-law-self-information-and-entropy",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$ and $x^n=(x_1,\\ldots,x_n)\\in A^n$, define the product law $p^n(x^n):=\\prod_{i=1}^np(x_i)$. On its support $A_+^n$, define block self-information $\\imath_{p^n}(x^n):=-\\ln p^n(x^n)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-information-units-and-logarithm-base",
+          "source_section": "Definition",
+          "quote": "Write $\\ln$ for the natural logarithm $\\log$ of [[def-natural-logarithm]]. Unless a base is displayed, every information quantity on this page uses $\\ln$ and is measured in **nats**. For a base $b>1$ and $t>0$, define $$\\log_b t:=\\frac{\\ln t}{\\ln b}.$$ The denominator is positive: $b>1$, $\\ln$ is strictly increasing, and $\\ln 1=0$ by [[thm-natural-logarithm-laws]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "Its Shannon entropy in natural units is $$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$ with $0\\ln0:=0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-source-information-density-and-typical-set",
+          "source_section": "Definition",
+          "quote": "$T_n(\\varepsilon):=\\{x^n\\in A_+^n:|I_n(x^n)-H(p)|\\le\\varepsilon\\}.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-aep-typical-set-probability-and-size-bounds",
+          "source_section": "Statement",
+          "quote": "Then $$0\\le\\delta_n\\le\\frac{V(p)}{n\\varepsilon^2},\\qquad |T_n(\\varepsilon)|\\le e^{n(H(p)+\\varepsilon)},\\qquad |T_n(\\varepsilon)|\\ge(1-\\delta_n)e^{n(H(p)-\\varepsilon)}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "typical-set-code",
+          "claim": "Injectively label the typical words, reserve one binary string for atypical words, and define encoder and decoder maps on every word and message.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "correct-decoding-count",
+          "claim": "Each message can correctly decode at most one source word; summing the typical-word mass and bounding atypical mass gives the success inequality.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "achievability-bounds",
+          "claim": "The AEP tail, typical-set size bound, nonnegative entropy, and integer bit rounding give the error and rate estimates.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "strong-converse",
+          "claim": "A strict rate gap below H makes the success upper bound tend to zero.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weak-converse",
+          "claim": "A subsequence with rate bounded below H would force error to one along that subsequence, contradicting vanishing error.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The probability law is assumed on a finite nonempty alphabet.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If H(p)=0, step 2.1 gives a rate bound tending to zero; no nonnegative rate sequence can have limsup below zero, so the strong-converse premise in step 2.2 is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction and typical-set estimates are stated for every n≥1; if T_n is empty then M_n=1 and k_n=0, which step 1.1 still defines."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The unique positive-mass source word is handled by the support-restricted typical set in step 1.1; zero-mass words may be encoded arbitrarily and do not affect error."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At H(p)=0 the strong-converse premise is impossible; for H(p)>0 the strict gap in step 2.2 is positive by assumption."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes one a_0 from the finite nonempty alphabet and uses a finite injection into the available binary strings; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs vanishing-error codes with limsup rate at most H(p)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1 prove error tends to one below H(p) and liminf rate at least H(p) for every vanishing-error sequence."
+        }
+      ]
+    },
+    "ex-correlated-bernoulli-source-fails-the-iid-aep": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-law-self-information-and-entropy",
+          "source_section": "Definition",
+          "quote": "On $A_+$ define self-information $\\imath_p(a):=-\\ln p(a)$; set $\\imath_p(a)=0$ when $p(a)=0",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "Its Shannon entropy in natural units is $$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$ with $0\\ln0:=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-alphabet-iid-information-aep",
+          "source_section": "Statement",
+          "quote": "Consequently $I_n(X^n)\\to H(p)$ in probability.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "equal-marginals-dependence",
+          "claim": "The coordinates share one Bernoulli variable, so their marginals agree while their pair law is not a product.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "block-information-zero",
+          "claim": "The two block probabilities are p and 1-p, so normalized block self-information tends to zero on each outcome.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "failure-of-marginal-only-extension",
+          "claim": "The limiting value differs from H(p), so identical marginals without independence do not imply the IID conclusion.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses the fixed alphabet {0,1}.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The stated p is interior; at p=0 or p=1 the process is degenerate and both block information and entropy are zero, so the counterexample disappears."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=1 the block has the Bernoulli law; step 2.1 concerns the limit as n tends to infinity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The endpoint laws p=0,1 are degenerate and are explicitly excluded by the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example requires 0<p<1; step 1.1 uses this to make H(p)>0 and strict dependence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two-point probability space and fixed Z in step 1.1 require no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "evidence": ""
+        }
+      ]
+    },
+    "ex-independent-nonidentical-source-has-no-information-rate-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-law-self-information-and-entropy",
+          "source_section": "Definition",
+          "quote": "On $A_+$ define self-information $\\imath_p(a):=-\\ln p(a)$; set $\\imath_p(a)=0$ when $p(a)=0",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-alphabet-iid-information-aep",
+          "source_section": "Statement",
+          "quote": "Consequently $I_n(X^n)\\to H(p)$ in probability.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-product-laws",
+          "claim": "The explicitly defined finite product laws have total mass one and are consistent under projection.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "deterministic-information-values",
+          "claim": "Every supported fair coordinate contributes ln(2), while each point-mass coordinate contributes zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "alternating-endpoint-rates",
+          "claim": "The newest block dominates all earlier coordinates, producing alternating endpoint limits.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "no-probability-limit",
+          "claim": "The deterministic subsequences approach distinct values, so no constant can be a probability limit.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every block law uses the fixed nonempty alphabet {0,1}.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The deterministic blocks have zero information contribution; step 2.1 includes them exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first coordinate lies in the initial deterministic block, so I_1=0 as step 2.1 states."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Every odd-indexed block is point-mass and is included in the endpoint estimate of step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fair and point-mass endpoint laws are stated explicitly; step 3.1 estimates both block types."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Each finite product law is defined by an explicit finite product in step 1.1; no infinite-product extension or choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "evidence": ""
+        }
+      ]
+    },
+    "ex-bernoulli-aep-and-typical-set-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-law-self-information-and-entropy",
+          "source_section": "Definition",
+          "quote": "V(p):=\\sum_{a\\in A_+}p(a)(\\imath_p(a)-H(p))^2.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-law-self-information-and-entropy",
+          "source_section": "Definition",
+          "quote": "On $A_+$ define self-information $\\imath_p(a):=-\\ln p(a)$; set $\\imath_p(a)=0$ when $p(a)=0",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-source-information-density-and-typical-set",
+          "source_section": "Definition",
+          "quote": "$T_n(\\varepsilon):=\\{x^n\\in A_+^n:|I_n(x^n)-H(p)|\\le\\varepsilon\\}.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-alphabet-iid-source",
+          "source_section": "Definition",
+          "quote": "A finite-alphabet IID source consists of random elements $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to A$, $i\\ge1$, on one probability space, which are independent and identically distributed in the sense of [[def-identically-distributed-and-iid-random-variables]] and have common law $p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "Its Shannon entropy in natural units is $$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$ with $0\\ln0:=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-aep-typical-set-probability-and-size-bounds",
+          "source_section": "Statement",
+          "quote": "Then $$0\\le\\delta_n\\le\\frac{V(p)}{n\\varepsilon^2},\\qquad |T_n(\\varepsilon)|\\le e^{n(H(p)+\\varepsilon)},\\qquad |T_n(\\varepsilon)|\\ge(1-\\delta_n)e^{n(H(p)-\\varepsilon)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bernoulli-information",
+          "claim": "The block information is affine in the empirical fraction q, with slope ln((1-p)/p).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "fair-and-degenerate-endpoints",
+          "claim": "A fair source has every word typical; a point-mass source has exactly one supported word.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "binomial-weight-count",
+          "claim": "The typicality interval for q yields the exact binomial coefficient sum and the p=1/4 finite calculation.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bernoulli-surprisal-variance",
+          "claim": "The two-valued surprisal has variance p(1-p) times the squared difference of its values; the typical bounds follow.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Bernoulli source is defined on the fixed nonempty alphabet {0,1}.",
+          "evidence": ""
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At p=0 or p=1, the only supported word is typical and has cardinality one by step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exact binomial sum in step 2.1 remains valid for n=1, with the endpoint cases in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The p=0 and p=1 laws are handled separately in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 handles p=0, p=1, and p=1/2; step 2.1 covers every other interior p."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The count is a finite sum over weights in step 2.1 and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence.",
+          "evidence": ""
+        }
+      ]
+    }
+  }
+}

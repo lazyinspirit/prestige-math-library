@@ -1,0 +1,17 @@
+# Typed dependency-ledger proposals for consumer batches1–27
+
+This is cycle1 of a bounded ledger-interface repair. All canonical items, pages, manifests, dependency records, runtime, readiness and native artifacts remain unchanged. Root alone serializes canonical inputs, rehashes and recertifies. The proposals contain typed arrays; original raw wrappers/grouped rows and their status attributions remain in complete before archives and sidecar history.
+
+The current actual source+manifest union was independently collected over requires/deps/justified_by/forward_refs, with exact item/page ownership from all current run manifests. For consumer batches1–27 it has595 declared in-run edges and no field-shape errors. The check does not claim a global production-ledger pass; unrelated batches remain outside this owner's authority.
+
+Existing proper rows retain their exact historical contents and attribution. No independent whole-proof audit or publication status is inferred from a ready process record. New `verified` rows mean that the actual consumed interface and hypotheses were inspected. Evidence distinguishes operational proof suppliers, local conventions and retained declared/contextual edges, including nonlogical page routes.
+
+Batches1/4 have no actual declared in-run edges; their formerly missing input proposals are legitimately empty arrays. Batch9 contained two rows reviewing the published outside-run corollary cor-iid-finite-variance-weak-law as consumer. They cannot satisfy typed consumer ownership for batch9. Their complete original reviews remain in external-context-history.json. The owned AEP proof still directly invokes that published weak law at F7/step3.1; no fabricated replacement in-run edge is introduced.
+
+Batches18/20 originally grouped multiple consumers under arrays or semicolon strings. Those groups are expanded to actual owned peredge rows, checked against current Facts/proof uses and supplier exported interfaces. Outside-run supplier contexts may stay as rows when their consumer is actually owned. The nonedge batch20 level-audit observation stays only in history: it is not an item/page edge. Its old labels1/2 are historical; current actual DMC and block-kernel labels are2/3. No level or mathematical body is changed here.
+
+Batches23/24 originally stored page/direct/transitive reviews inside object wrappers. The typed-array proposals preserve their actual inspected interface records and full original wrapper context separately, with current peredge fact/use/hypothesis evidence. Quantum operational proof scope, metrics, conventions and limits remain those already accepted by the prior owner completion; no new quantum claim or proof weakening is authorized or performed.
+
+## Separate unresolved source wording issue at freeze
+
+Root subsequently confirmed that def-it-finite-dmc-feedback-code has a real Definition/F1 wording defect: under feedback, conditioning on a realized input word does not give the DMC product distribution. Its actual recursive proof uses the correct per-history W kernel. The ledger evidence expressly limits itself to that actual causal interface and does not claim the false sentence is repaired. Root authorized a separate isolated feedback-causal-law proposal packet with full consumer ownership. This frozen ledger packet remains observation evidence for the current pre-correction bytes; root must rebind it after the separate source integration.

@@ -1,0 +1,1082 @@
+[
+  {
+    "order": 2554,
+    "id": "topological-quantum-algorithms-and-braid-compilation",
+    "kind": "A",
+    "category": "quantum-algorithms",
+    "title": "Topological Quantum Algorithms and Braid Compilation",
+    "companion": "topological-quantum-algorithms-and-braid-compilation-examples",
+    "requires": [
+      "topological-braid-gates-encodings-and-universality",
+      "toric-code-anyons-logical-operators-and-protection",
+      "adiabatic-computation-and-circuit-equivalence",
+      "computational-problems-promises-and-cost-models",
+      "lcu-oblivious-amplitude-amplification-and-taylor-simulation"
+    ],
+    "items": [
+      {
+        "id": "def-qa-37-certified-matrix-input",
+        "kind": "definition",
+        "title": "Certified fixed-dimensional special-unitary input",
+        "deps": [
+          "def-qc-effective-unitary-matrix-input"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "For fixed d in {2,5,8}, define a Cauchy name for an exact target in SU(d) using rational complex matrices with a certified entrywise error; include a separate optional polynomial query-time promise.",
+        "proof_obligations": [
+          "State target domain, matrix norm convention, approximation error, precision encoding, and optional name running time; distinguish exact targets from rational approximants.",
+          "Uniqueness compares targets satisfying the coordinate bounds against the same entire approximant sequence Q_b."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Christopher M. Dawson and Michael A. Nielsen, The Solovay–Kitaev Algorithm",
+              "url": "https://arxiv.org/pdf/quant-ph/0505030"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; the definition uses fixed finite-dimensional matrix data.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-37-product-error",
+        "kind": "lemma",
+        "title": "Operator error adds under finite unitary products",
+        "deps": [
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "cor-operator-norm-submultiplicative-and-t-star-t-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "For finite unitary lists (Ui),(Vi) with ||Ui−Vi||≤εi, the products differ by at most Σ εi.",
+        "proof_obligations": [
+          "Write the telescoping identity and use unitary invariance, submultiplicativity, and the triangle inequality; include the empty product case."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the finite telescoping estimate is choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-37-output-distribution-error",
+        "kind": "theorem",
+        "title": "Operator error bounds measured output variation",
+        "deps": [
+          "lem-qa-21-pure-state-trace-distance-from-vector-error",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "thm-qc-measurement-variation-at-most-trace-distance",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "def-qc-trace-distance",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-density-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "If U,V are unitaries with ||U−V||≤ε, then any finite POVM has output total-variation distance at most ε on any input density operator.",
+        "proof_obligations": [
+          "Treat pure inputs, decompose a mixed state spectrally, use trace-norm triangle/convexity, and apply the measurement-variation theorem."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "John Preskill, Quantum Computation, Chapter 2: Foundations I: States and Ensembles",
+              "url": "https://www.preskill.caltech.edu/ph219/chap2_15.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; finite-dimensional spectral decomposition and trace-norm inequalities are choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-37-anyon-task-and-promise",
+        "kind": "definition",
+        "title": "Finite anyon task and promise interface",
+        "deps": [
+          "def-qa-task-and-promise-domain",
+          "def-qc-tqc-fusion-tree-basis",
+          "thm-qc-tqc-gauge-covariance",
+          "def-qc-tqc-fixed-charge-encoding",
+          "def-qc-tqc-physical-braid-interface",
+          "def-qc-circuit-cost-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "statement": "A finite decision/search promise on encoded fusion-tree inputs, with braid-word and projective-measurement access and an explicit acceptance/output rule.",
+        "proof_obligations": [
+          "Define finite input/output alphabets, promise domain, braid and fusion-measurement access, and correctness only on promised instances."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; the interface consists of finite strings, matrices, and finite outcome sets.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-37-fusion-input-encoding",
+        "kind": "definition",
+        "title": "Fusion-tree task input encoding",
+        "deps": [
+          "def-qa-37-anyon-task-and-promise",
+          "def-qc-tqc-fusion-tree-basis",
+          "def-qc-tqc-fixed-charge-encoding"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "statement": "A finite admissible fusion tree, its simple-charge edge labels, total charge, multiplicity indices, and a fixed computational basis encoding, with validity determined at every vertex by the fusion rules. An isometry is named through a declared background codebook; an isometry varying as classical input needs an exact finite description language, with no universal finite encoding of arbitrary complex isometries.",
+        "proof_obligations": [
+          "Define encoded labels and local admissibility; include empty/single-leaf boundary conventions or exclude them explicitly; distinguish an encoding from a physical preparation."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; finite labels and fixed trees are used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-37-resource-cost-model",
+        "kind": "definition",
+        "title": "Anyon compiler resource ledger",
+        "deps": [
+          "def-qa-37-anyon-task-and-promise",
+          "def-qc-circuit-cost-model",
+          "def-qa-classical-bit-cost",
+          "def-qa-nonoracle-gate-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "statement": "Record braid length, fusion-measurement count, precision bits, classical search time, logical operator error, leakage amplitude/probability, and phase correction cost as separate coordinates. Also retain the complete applicable QC circuit cost record (including description, gates, depth, wires, ancillas and named oracle queries) and a separate total nonoracle gate count.",
+        "proof_obligations": [
+          "Specify which operations and encodings each coordinate counts; preserve inapplicable versus zero; state no hidden free braid, measurement, oracle, or phase correction."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; this is an explicit finite resource convention.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-37-fusion-measurement",
+        "kind": "definition",
+        "title": "Fusion-channel measurement access",
+        "deps": [
+          "def-qa-37-fusion-input-encoding",
+          "def-qc-projective-measurement",
+          "def-qc-tqc-f-symbol",
+          "thm-qc-tqc-f-symbol-unitary"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "statement": "For an adjacent pair in a fusion tree, define the projectors onto its allowed total-charge channels and the corresponding finite projective measurement, including post-measurement unnormalized vectors.",
+        "proof_obligations": [
+          "Specify mutually orthogonal channel subspaces, zero-probability outcomes, and the chosen fusion-tree basis convention."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; finite-dimensional orthogonal projections are choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-37-n-triple-fusion-code",
+        "kind": "definition",
+        "title": "Arbitrary-n triple-anyon fixed-charge code",
+        "deps": [
+          "def-qc-tqc-fusion-tree-basis",
+          "lem-qc-tqc-fusion-tree-dimension",
+          "ex-qc-tqc-fibonacci-data",
+          "def-qc-tqc-fixed-charge-encoding",
+          "def-qc-tqc-unitary-fusion-category",
+          "thm-qc-tqc-f-symbol-unitary"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "For n≥1 and c∈{1,τ} with V(τ^n→c)≠0, group the 3n ordered τ charges into n consecutive triples, require each triple total to be τ, and then fuse the n triple outputs to c. The grouped-tree coordinates identify this code with (C²)^{⊗n}⊗V(τ^n→c); associator maps transport it to the declared fixed tree and define an isometry J_{n,c} and projector P_{n,c}=J_{n,c}J_{n,c}^*.",
+        "proof_obligations": [
+          "Compute the three-anyon total-τ multiplicity from the Fibonacci fusion recurrence, construct the grouped orthonormal basis including all spectator paths, and verify reassociation preserves the isometry and projector."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak et al., Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the grouped fusion-tree basis, finite tensor products, and unitary reassociation are choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-37-phase-reference-cost",
+        "kind": "definition",
+        "title": "Braid phase reference and correction ledger",
+        "deps": [
+          "lem-qc-tqc-determinant-character-phase",
+          "def-qc-tqc-projective-gate-and-metric",
+          "def-qc-tqc-physical-braid-interface",
+          "def-qc-circuit-cost-model"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "statement": "For a braid word b of exponent sum k, record normalized lift z^kB(b), physical phase λ^k with λ=R1 z^{-1}, and the cost/interface for correcting that phase under coherent control.",
+        "proof_obligations": [
+          "Define exponent sum, scalar character, standalone versus controlled use, and charge-independent phase tracking; do not silently discard a controlled phase."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; this is finite word bookkeeping and unit-modulus scalar algebra.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-37-local-braid-acts-trivially-on-spectators",
+        "kind": "lemma",
+        "title": "A triple braid acts identically on fusion spectators",
+        "deps": [
+          "def-qa-37-n-triple-fusion-code",
+          "def-qc-tqc-fusion-tree-basis",
+          "def-qc-tqc-braid-action-from-fusion-data",
+          "thm-qc-tqc-braid-action-unitary-and-artin",
+          "thm-qc-tqc-f-symbol-unitary"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "statement": "In the grouped fusion-tree decomposition of V(τ^{3n}→c) into local triple spaces V(τ^3→a_i) and the outer spectator space V(a_1⊗⋯⊗a_n→c), a braid word supported in the i-th triple acts as its fixed-total-charge matrix on V(τ^3→a_i) tensored with the identity on every other triple and spectator factor. The rebracketing to the fixed left-associated tree is unitary, so the statement holds there as well.",
+        "proof_obligations": [
+          "Write the grouped orthonormal basis as local triple paths and an outer fusion path; apply the braid action definition to one local morphism factor and prove the tensor/direct-sum norm facts used by consumers."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Chetan Nayak et al., Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            },
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the factorization is a finite orthogonal fusion-tree decomposition and the operator norm calculation is choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-37-fusion-branch-validity",
+        "kind": "theorem",
+        "title": "Fusion measurement branches are normalized exactly when nonzero",
+        "deps": [
+          "def-qa-37-fusion-measurement",
+          "thm-qc-projective-measurement-outcome-law",
+          "thm-qc-projective-conditional-state",
+          "def-qc-pure-state-and-ray",
+          "thm-qc-rank-one-density-operator",
+          "def-qc-dirac-notation-conversion",
+          "def-inner-product-norm",
+          "def-trace-of-an-endomorphism",
+          "thm-qc-dirac-notation-coordinate-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "statement": "For every normalized input, channel probabilities sum to one; a conditional branch vector exists precisely when its projector has nonzero probability, and is the normalized projection.",
+        "proof_obligations": [
+          "Prove orthogonal resolution of identity, Born probabilities, branch norm, normalization, and the zero branch boundary."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; finite projective measurement identities are choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-37-exhaustive-b6-block-pair-compiler",
+        "kind": "algorithm",
+        "title": "Exhaustive certified Fibonacci B6 block-pair search",
+        "deps": [
+          "def-qa-37-certified-matrix-input",
+          "def-qa-37-resource-cost-model",
+          "def-qa-37-anyon-task-and-promise",
+          "lem-qc-tqc-fibonacci-b6-path-projectors-and-artin",
+          "def-qa-37-phase-reference-cost",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "ex-qc-tqc-fibonacci-data"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "statement": "Dovetail all normalized six-strand braid words and precision requests; certify both SU(5) and SU(8) block Frobenius errors below rational ε; return a common word, certificates, length, exponent sum, and phase ledger when found.",
+        "proof_obligations": [
+          "Specify finite word enumeration, Cauchy approximation and rational strict-error certificate; make no word-length or runtime bound; do not claim termination in the definition."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Michael H. Freedman, Michael J. Larsen, and Zhenghan Wang, A Modular Functor Which Is Universal for Quantum Computation",
+              "url": "https://arxiv.org/pdf/quant-ph/0001108"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None for the search instructions; termination depends separately on the ACω density theorem.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-37-finite-adiabatic-braid-input",
+        "kind": "definition",
+        "title": "Finite adiabatic braid compilation input",
+        "deps": [
+          "def-qa-36-finite-adiabatic-path-model",
+          "thm-qa-36-jrs-finite-adiabatic-bound",
+          "def-qc-tqc-physical-braid-interface",
+          "ex-qc-tqc-fibonacci-data",
+          "def-qa-37-phase-reference-cost"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "statement": "Specify a finite C² uniformly gapped path, constant-rank band, preparation isometry, schedule, measurement, a separate in-band transport error εtr identifying the band action with the selected Fibonacci braid, and phase record. Explicit unitary fusion-space coordinates Q0,Q1 define the logical target and both band identifications; categorical action does not assert physical realization.",
+        "proof_obligations": [
+          "State all path hypotheses, exact model assumptions, preparation and measurement inputs, and explicitly separate in-band identification from JRS leakage."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Sabine Jansen, Mary-Beth Ruskai, and Ruedi Seiler, Bounds for the adiabatic approximation with applications to quantum computation",
+              "url": "https://arxiv.org/pdf/quant-ph/0603175"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; uses finite-dimensional spectral and matrix ODE model hypotheses.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-37-fixed-sector-global-phase",
+        "kind": "lemma",
+        "title": "Standalone and controlled phase accounting for a fixed-sector braid",
+        "deps": [
+          "def-qa-37-phase-reference-cost",
+          "thm-qc-standalone-global-phase-invariance",
+          "thm-qc-controlled-global-phase-is-relative-phase",
+          "lem-qc-tqc-determinant-character-phase"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "statement": "The physical Fibonacci braid word differs from its normalized lift by λ^k on every fixed-charge block; this scalar leaves standalone probabilities invariant but becomes relative under coherent control.",
+        "proof_obligations": [
+          "Prove the word scalar by exponent additivity, apply standalone phase invariance, and show a controlled branch acquires a relative phase."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the scalar identity is choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-37-exhaustive-b6-compiler-terminates",
+        "kind": "theorem",
+        "title": "Certified B6 block-pair search terminates",
+        "deps": [
+          "alg-qa-37-exhaustive-b6-block-pair-compiler",
+          "lem-qc-tqc-b6-joint-su5-su8-density",
+          "def-countable-choice",
+          "def-qa-37-certified-matrix-input",
+          "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "statement": "Assume ACω and certified Cauchy inputs for any target pair in SU(5)×SU(8); for every rational ε>0, exhaustive shared-word search halts with both block errors below ε. No useful joint-block word-length or runtime bound follows.",
+        "proof_obligations": [
+          "Use joint density to choose one word with a strict Frobenius margin in both blocks; Cauchy certificates eventually verify it; dovetailing reaches that word and precision."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Michael H. Freedman, Michael J. Larsen, and Zhenghan Wang, A Modular Functor Which Is Universal for Quantum Computation",
+              "url": "https://arxiv.org/pdf/quant-ph/0001108"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Assumes exactly ACω through joint B6 density; no full Axiom of Choice is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-37-jrs-leakage-bound",
+        "kind": "theorem",
+        "title": "Finite JRS leakage amplitude and probability",
+        "deps": [
+          "def-qa-37-finite-adiabatic-braid-input",
+          "thm-qa-36-jrs-finite-adiabatic-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "statement": "For the specified band and schedule, leakage amplitude is at most A_m(1) and leakage probability at most A_m(1)^2, with A_m exactly the JRS expression; the theorem makes no in-band braid-holonomy claim.",
+        "proof_obligations": [
+          "Substitute the finite model into the JRS theorem and derive probability by squaring the amplitude bound; state the no-transport inference."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Sabine Jansen, Mary-Beth Ruskai, and Ruedi Seiler, Bounds for the adiabatic approximation with applications to quantum computation",
+              "url": "https://arxiv.org/pdf/quant-ph/0603175"
+            },
+            {
+              "title": "Andrew M. Childs, Lecture Notes on Quantum Algorithms",
+              "url": "https://www.cs.umd.edu/~amchilds/qa/qa.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the JRS result is finite-dimensional and choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-37-fibonacci-su2-lifts-are-dense",
+        "kind": "lemma",
+        "title": "The generated normalized Fibonacci lifts are dense in SU(2)",
+        "deps": [
+          "lem-qc-tqc-su2-determinant-lifts-dense",
+          "lem-qc-tqc-special-unitary-connected",
+          "ex-qc-tqc-fibonacci-qubit-matrices",
+          "ex-qc-tqc-fibonacci-data",
+          "def-countable-choice",
+          "thm-qc-tqc-fibonacci-single-qubit-density"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "statement": "Under ACω and the fixed Fibonacci convention, the closure of the subgroup generated by zB1,zB2, with z=exp(3πi/10), is SU(2).",
+        "proof_obligations": [
+          "Verify det(zBj)=1; identify the projective subgroup and its full preimage as Λ∪(-Λ); use density of the full preimage and connectedness to prove Λ itself is dense; state ACω uses."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            },
+            {
+              "title": "Michael H. Freedman, Michael J. Larsen, and Zhenghan Wang, A Modular Functor Which Is Universal for Quantum Computation",
+              "url": "https://arxiv.org/pdf/quant-ph/0001108"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Assumes exactly ACω through the projective-density and lift suppliers; no full Axiom of Choice is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-qa-37-total-error-budget",
+        "kind": "lemma",
+        "title": "Finite braid compilation and adiabatic error budget",
+        "deps": [
+          "thm-qa-37-jrs-leakage-bound",
+          "def-qa-37-finite-adiabatic-braid-input",
+          "def-qa-37-phase-reference-cost",
+          "lem-qa-21-pure-state-trace-distance-from-vector-error",
+          "thm-qc-measurement-variation-at-most-trace-distance",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-qc-density-operator"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "statement": "If compiled logical circuit error is εc, independently supplied in-band transport error is εtr, JRS leakage amplitude is A_m(1), and measurement implementation variation is εm, then total output variation is at most εc+εtr+A_m(1)+εm.",
+        "proof_obligations": [
+          "Compare compiled and ideal band outputs, add in-band mismatch and leakage in vector/operator norm, convert to trace distance and measurement variation, then add εm; do not infer εtr from JRS."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Sabine Jansen, Mary-Beth Ruskai, and Ruedi Seiler, Bounds for the adiabatic approximation with applications to quantum computation",
+              "url": "https://arxiv.org/pdf/quant-ph/0603175"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; this is a finite norm and probability estimate.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-37-approx-encoded-two-qubit-gate",
+        "kind": "theorem",
+        "title": "One B6 braid approximates an encoded two-qubit gate",
+        "deps": [
+          "alg-qa-37-exhaustive-b6-block-pair-compiler",
+          "thm-qa-37-exhaustive-b6-compiler-terminates",
+          "def-qc-tqc-six-anyon-encoded-subspace",
+          "thm-qc-tqc-block-approximation-error",
+          "lem-qc-tqc-determinant-character-phase",
+          "def-qa-37-phase-reference-cost",
+          "lem-qc-tqc-b6-joint-su5-su8-density",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "statement": "Assume ACω. For U∈U(4), choose determinant-corrected SU(5) and SU(8) extensions; one normalized B6 word approximates both, giving logical error and leakage at most ε in both fixed-charge blocks, with its common physical phase explicitly recorded.",
+        "proof_obligations": [
+          "Verify the target extensions are special unitary; apply termination; restrict ambient norm error to code and complement; account for one common phase under coherent control."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Michael H. Freedman, Michael J. Larsen, and Zhenghan Wang, A Modular Functor Which Is Universal for Quantum Computation",
+              "url": "https://arxiv.org/pdf/quant-ph/0001108"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Assumes exactly ACω through joint B6 density; no full Axiom of Choice is used.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-37-fibonacci-braid-gate-set",
+        "kind": "definition",
+        "title": "Fixed SU(2) Fibonacci braid gate alphabet",
+        "deps": [
+          "lem-qa-37-fibonacci-su2-lifts-are-dense",
+          "ex-qc-tqc-fibonacci-qubit-matrices",
+          "def-qc-inverse-closed-dense-su2-gate-set",
+          "lem-qc-compact-su2-base-net",
+          "def-qc-tqc-braid-action-from-fusion-data",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "statement": "Let z=exp(3πi/10), define normalized generators zB1,zB2 and include their inverses as a finite alphabet; specify exact labels, matrices, chirality and inverse convention.",
+        "proof_obligations": [
+          "Verify determinant one and unitarity from the local matrix supplier; define inverse-closed alphabet and dense closure; state that this does not supply a concrete base-net table."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            },
+            {
+              "title": "Christopher M. Dawson and Michael A. Nielsen, The Solovay–Kitaev Algorithm",
+              "url": "https://arxiv.org/pdf/quant-ph/0505030"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None beyond the density theorem assumptions carried by the gate-set claim; ACω is an explicit inherited assumption.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-qa-37-physical-locality-boundary",
+        "kind": "definition",
+        "title": "Physical realization boundary for braid compilation",
+        "deps": [
+          "def-qa-37-finite-adiabatic-braid-input",
+          "def-qc-tqc-physical-braid-interface",
+          "lem-qa-37-total-error-budget"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "statement": "A mathematical braid compiler result is physically instantiated only with a separate record for state preparation, Hamiltonian path, gap, schedule, band-to-F/R identification, phase reference, locality and hardware error terms; none is supplied by density or SK alone.",
+        "proof_obligations": [
+          "Define the required physical evidence as independent inputs; state that algebraic compilation and JRS leakage do not establish material realization or locality."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Sabine Jansen, Mary-Beth Ruskai, and Ruedi Seiler, Bounds for the adiabatic approximation with applications to quantum computation",
+              "url": "https://arxiv.org/pdf/quant-ph/0603175"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            },
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None; this is a scope/interface definition.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-qa-37-su2-solovay-kitaev-compiler",
+        "kind": "algorithm",
+        "title": "SU(2) Fibonacci Solovay–Kitaev compiler",
+        "deps": [
+          "def-qa-37-fibonacci-braid-gate-set",
+          "def-qa-37-certified-matrix-input",
+          "def-qc-effective-unitary-matrix-input",
+          "alg-qc-solovay-kitaev-unitary-compiler",
+          "lem-qc-compact-su2-base-net",
+          "def-qc-inverse-closed-dense-su2-gate-set",
+          "def-qa-37-phase-reference-cost",
+          "def-countable-choice",
+          "thm-qc-solovay-kitaev-bit-complexity"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "statement": "Invoke the published SU(2) SK recursion on the fixed inverse-closed dense Fibonacci alphabet, a fixed certified finite base-net certificate, exact target Cauchy input, and rational tolerance.",
+        "proof_obligations": [
+          "List exact inputs and outputs; define the fixed base-net certificate as supplied data; distinguish exact-real and finite-precision interfaces and include phase exponent output."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Christopher M. Dawson and Michael A. Nielsen, The Solovay–Kitaev Algorithm",
+              "url": "https://arxiv.org/pdf/quant-ph/0505030"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None beyond the carried ACω density hypothesis used to establish the gate alphabet; the recursion itself is finite and choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-37-su2-compiler-error-length",
+        "kind": "theorem",
+        "title": "Fibonacci SU(2) compiler error, length, and bit cost",
+        "deps": [
+          "alg-qa-37-su2-solovay-kitaev-compiler",
+          "def-qa-37-fibonacci-braid-gate-set",
+          "thm-qc-solovay-kitaev-error-and-resource-bound",
+          "thm-qc-solovay-kitaev-bit-complexity",
+          "def-qa-37-certified-matrix-input",
+          "def-qa-37-phase-reference-cost",
+          "lem-qa-37-fixed-sector-global-phase",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 14,
+        "statement": "With the fixed base-net certificate and exact published hypotheses, the compiler returns W with ||S-W||≤ε, length at most L0 5^J=O(log^3.97(1/ε)); polynomial-time Cauchy names meet the published bit bound O((N+sε)^(c+10)).",
+        "proof_obligations": [
+          "Instantiate the error recurrence and length bound; state J as the least level; separately state polynomial-name bit-cost assumptions; preserve the algebraic-entry and base-net hypotheses."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Christopher M. Dawson and Michael A. Nielsen, The Solovay–Kitaev Algorithm",
+              "url": "https://arxiv.org/pdf/quant-ph/0505030"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "ACω is inherited only for density of the gate package; the SK recursion/estimate is choice-free.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-qa-37-arbitrary-n-encoded-circuit",
+        "kind": "theorem",
+        "title": "Arbitrary-size triple-encoded projective braid approximation",
+        "deps": [
+          "thm-qa-37-su2-compiler-error-length",
+          "thm-qc-tqc-spectator-extension",
+          "thm-qc-exact-arbitrary-unitary-qsd-upper-bound",
+          "lem-qa-37-product-error",
+          "lem-qc-tqc-leakage-logical-error-accumulation",
+          "lem-qa-37-fixed-sector-global-phase",
+          "def-countable-choice",
+          "def-real-numbers",
+          "cor-cauchy-reals-lub-complete",
+          "thm-of-square-roots",
+          "lem-cauchy-reals-archimedean",
+          "ex-qc-tqc-fibonacci-data",
+          "lem-qc-tqc-fusion-tree-dimension",
+          "def-qa-37-n-triple-fusion-code",
+          "thm-qa-37-exhaustive-b6-compiler-terminates",
+          "thm-qc-tqc-braid-action-unitary-and-artin",
+          "lem-qa-37-local-braid-acts-trivially-on-spectators",
+          "def-qa-37-fibonacci-braid-gate-set"
+        ],
+        "justified_by": [],
+        "dependency_level": 15,
+        "statement": "Assume ACω. Every finite n-qubit unitary and fixed total charge admits a finite Fibonacci braid word with uniform spectator-safe projective logical error and leakage at most ε; the proof composes exact QSD, SK-compiled one-qubit gates, and joint-density two-qubit extensions, with summed error. It gives no useful joint-block word-length/time bound.",
+        "proof_obligations": [
+          "Handle n=1 and empty/trivial decompositions; obtain a finite QSD list; compile each one-qubit SU(2) representative and each two-qubit gate at tolerance ε/M; extend to spectators; telescope; track aggregate phases; avoid the earlier arbitrary-n conclusion as a premise."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Michael H. Freedman, Michael J. Larsen, and Zhenghan Wang, A Modular Functor Which Is Universal for Quantum Computation",
+              "url": "https://arxiv.org/pdf/quant-ph/0001108"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            },
+            {
+              "title": "Vivek V. Shende, Stephen S. Bullock, and Igor L. Markov, Synthesis of Quantum Logic Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            },
+            {
+              "title": "Christopher M. Dawson and Michael A. Nielsen, The Solovay–Kitaev Algorithm",
+              "url": "https://arxiv.org/pdf/quant-ph/0505030"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Assumes exactly ACω through single-qubit projective density and joint B6 density; no full Axiom of Choice is used.",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2555,
+    "id": "topological-quantum-algorithms-and-braid-compilation-examples",
+    "kind": "B",
+    "category": "quantum-algorithms",
+    "title": "Topological Quantum Algorithms and Braid Compilation — Examples",
+    "companion": "topological-quantum-algorithms-and-braid-compilation",
+    "requires": [
+      "topological-quantum-algorithms-and-braid-compilation"
+    ],
+    "items": [
+      {
+        "id": "ex-qa-37-fusion-measurement-branches",
+        "kind": "example",
+        "title": "Fibonacci fusion measurement branches and zero outcomes",
+        "deps": [
+          "def-qa-37-fusion-measurement",
+          "thm-qa-37-fusion-branch-validity",
+          "ex-qc-tqc-fibonacci-data"
+        ],
+        "justified_by": [],
+        "dependency_level": 12,
+        "statement": "For a normalized vector a|1>+b|τ> in a two-channel fusion space, probabilities are |a|² and |b|²; normalize only a nonzero projected branch, and treat a zero coefficient as a zero-probability branch with no conditional state.",
+        "proof_obligations": [
+          "Compute channel projectors, probabilities, normalized branch states, both zero boundary cases, and explain the TikZ measurement circuit convention."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the two-channel example is a finite orthogonal projection calculation.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-qa-37-projective-is-not-controlled",
+        "kind": "counterexample",
+        "title": "A discarded global phase changes a controlled computation",
+        "deps": [
+          "def-qa-37-phase-reference-cost",
+          "lem-qa-37-fixed-sector-global-phase",
+          "thm-qc-controlled-global-phase-is-relative-phase"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "statement": "I and −I have identical standalone action on rays, but controlled-I and controlled-(−I) differ: on |+> they produce |+> and |−>, respectively.",
+        "proof_obligations": [
+          "Compute controlled block matrices and X-basis probabilities; identify standalone projective equality and the relative control phase; include a TikZ circuit."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "John Preskill, Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological Quantum Computation",
+              "url": "https://www.preskill.caltech.edu/ph219/topological.pdf"
+            },
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the witness is a two-dimensional exact matrix calculation.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-37-approximate-b6-target",
+        "kind": "example",
+        "title": "Identity target in the two B6 charge blocks",
+        "deps": [
+          "thm-qa-37-approx-encoded-two-qubit-gate",
+          "alg-qa-37-exhaustive-b6-block-pair-compiler",
+          "lem-qc-tqc-determinant-character-phase"
+        ],
+        "justified_by": [],
+        "dependency_level": 13,
+        "statement": "For U=I4, determinant-corrected targets are I5 and I8; the empty braid certifies exact zero block error, zero leakage and exponent sum zero.",
+        "proof_obligations": [
+          "Evaluate determinants and empty-word action in both blocks; confirm boundary error and physical phase."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Chetan Nayak, Steven H. Simon, Ady Stern, Michael Freedman, and Sankar Das Sarma, Non-Abelian Anyons and Topological Quantum Computation",
+              "url": "https://arxiv.org/pdf/0707.1889"
+            },
+            {
+              "title": "Michael H. Freedman, Michael J. Larsen, and Zhenghan Wang, A Modular Functor Which Is Universal for Quantum Computation",
+              "url": "https://arxiv.org/pdf/quant-ph/0001108"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None; the identity example is an exact finite calculation.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qa-37-fibonacci-budget",
+        "kind": "example",
+        "title": "Fibonacci SK level and symbolic gate budget",
+        "deps": [
+          "thm-qa-37-su2-compiler-error-length",
+          "def-qa-37-resource-cost-model",
+          "thm-qa-37-arbitrary-n-encoded-circuit",
+          "lem-qa-37-product-error",
+          "thm-qc-exact-arbitrary-unitary-qsd-upper-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 16,
+        "statement": "For η0=2^-13 and ε=2^-14, the SK recurrence has first admissible level J=2 and length at most 25L0; for M QSD factors, allocate per-factor tolerance min(ε/(2M),η0/2), while keeping base-net size, B6 search work, measurement and phase costs explicit. Actual factor approximations use the arbitrary-n encoding theorem under ACω on an admissible nonzero-spectator code, and errors are relative to the recorded product phase.",
+        "proof_obligations": [
+          "Calculate η1 and η2 exactly as powers of two; verify minimality of J and sum the per-gate error allocation; flag L0 as a supplied certified net input."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Christopher M. Dawson and Michael A. Nielsen, The Solovay–Kitaev Algorithm",
+              "url": "https://arxiv.org/pdf/quant-ph/0505030"
+            },
+            {
+              "title": "Ronald de Wolf, Quantum Computing: Lecture Notes",
+              "url": "https://arxiv.org/pdf/1907.09415"
+            },
+            {
+              "title": "Vivek V. Shende, Stephen S. Bullock, and Igor L. Markov, Synthesis of Quantum Logic Circuits",
+              "url": "https://arxiv.org/pdf/quant-ph/0406176"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "The numerical recurrence is choice-free; existence of compiled QSD factors inherits exactly ACω from the arbitrary-n encoding theorem.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

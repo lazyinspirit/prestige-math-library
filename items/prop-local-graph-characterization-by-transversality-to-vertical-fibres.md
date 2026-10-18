@@ -3,6 +3,7 @@ id: prop-local-graph-characterization-by-transversality-to-vertical-fibres
 kind: proposition
 title: "An $m$-dimensional submanifold transverse to vertical fibres is locally a graph"
 status: published
+dependency_level: 2
 origin: session
 provenance:
   statement: literature-derived
@@ -14,12 +15,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
   judge:
-    model: "gpt-5.6-terra"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-31
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/prop-local-graph-characterization-by-transversality-to-vertical-fibres.json
 sources:
   scraped: []
   references:
@@ -49,6 +50,6 @@ $$ S\cap(U\times V)=\{(x,f(x)):x\in U\}. $$
 
 1.1 Let $\pi_M:M\times N\to M$ be the first projection. A tangent vector $v\in T_{(x_0,y_0)}S$ lies in the kernel of $d(\pi_M|_S)_{(x_0,y_0)}$ exactly when it is tangent to the vertical fibre $\{x_0\}\times N$. By [F1], transversality gives $$ T_{(x_0,y_0)}S+T_{(x_0,y_0)}(\{x_0\}\times N)=T_{x_0}M\times T_{y_0}N, $$ so $d(\pi_M|_S)_{(x_0,y_0)}$ is surjective. Because $\dim T_{(x_0,y_0)}S=\dim T_{x_0}M$, this surjective linear map is an isomorphism. [F1, given, algebra]
 
-2.1 Therefore [L1] gives neighbourhoods $W\subseteq S$ of $(x_0,y_0)$ and $U\subseteq M$ of $x_0$ such that $\pi_M|_W:W\to U$ is a diffeomorphism. Shrinking in the product if necessary, write $W=S\cap(U\times V)$ for some neighbourhood $V$ of $y_0$. [L1, step 1.1, choose]
+2.1 Therefore [L1] gives neighbourhoods $W\subseteq S$ of $(x_0,y_0)$ and $U_1\subseteq M$ of $x_0$ such that $\pi_M|_W:W\to U_1$ is a diffeomorphism. Since $W$ is open in the embedded submanifold $S$, choose an ambient open set $O\subseteq M\times N$ with $W=S\cap O$, and choose product neighbourhoods $U_0\times V\subseteq O$ of $(x_0,y_0)$. Define $f_1:=\pi_N\circ(\pi_M|_W)^{-1}:U_1\to N$, and shrink the source to $$U:=U_1\cap U_0\cap f_1^{-1}(V).$$ This is an open neighbourhood of $x_0$. Every $x\in U$ has its unique point $(x,f_1(x))\in W$ inside $U\times V$; conversely any point of $S\cap(U\times V)$ lies in $S\cap O=W$, where projection is injective. Hence $S\cap(U\times V)$ is exactly that graph. [L1, step 1.1, given, choose]
 
-3.1 Define $f:=\pi_N\circ(\pi_M|_W)^{-1}:U\to V$. Then $$ W=\{(x,f(x)):x\in U\}, $$ so $S$ is locally the graph of $f$. [step 2.1, construct] ∎
+3.1 Restrict $f_1$ to $U$ and call the restriction $f:U\to V$. Step 2.1 gives $$ S\cap(U\times V)=\{(x,f(x)):x\in U\}, $$ so $S$ is locally the graph of $f$. [step 2.1, construct] ∎

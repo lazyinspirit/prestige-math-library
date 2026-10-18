@@ -1,0 +1,682 @@
+[
+  {
+    "order": 2540,
+    "id": "quantum-channel-capacities-and-entanglement-assistance",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Quantum Channel Capacities and Entanglement Assistance",
+    "companion": "quantum-channel-capacities-and-entanglement-assistance-examples",
+    "requires": [
+      "quantum-source-compression-and-cq-capacity",
+      "knill-laflamme-recovery-and-subsystem-codes",
+      "bell-states-teleportation-and-dense-coding"
+    ],
+    "items": [
+      {
+        "id": "lem-it-finite-mixture-entropy-bounds",
+        "kind": "lemma",
+        "title": "Entropy bounds for a finite mixture of states",
+        "statement": "For states $\\rho_i$ and finite probabilities $p_i$, put $\\bar\\rho=\\sum_i p_i\\rho_i$. Then\n$$0\\le S(\\bar\\rho)-\\sum_i p_iS(\\rho_i)\\le H(p).$$",
+        "strategy": "Finite-dimensional supplier-first proof; exact current carrier is authoritative.",
+        "deps": [
+          "def-it-von-neumann-entropy",
+          "thm-it-quantum-relative-entropy-nonnegative-equality",
+          "thm-qc-schmidt-decomposition",
+          "def-trace-of-an-endomorphism"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-it-exponential-cq-spectral-projectors",
+        "kind": "lemma",
+        "title": "Exponential averaged spectral projectors for a finite cq ensemble",
+        "statement": "For every fixed finite ensemble $p_x,\\rho_x$ and fixed $\\eta>0$, there are constants $C,c>0$ (depending on this ensemble and $\\eta$, not $n$) and projectors $P_n,Q_{x^n}$ such that, writing $\\bar\\rho=\\sum p_x\\rho_x$ and $s=\\sum p_xS(\\rho_x)$,\n$$\\operatorname{rank}P_n\\le e^{n(S(\\bar\\rho)+\\eta)},\\quad P_n\\bar\\rho^{\\otimes n}P_n\\preceq e^{-n(S(\\bar\\rho)-\\eta)}P_n,$$\n$$\\operatorname{rank}Q_{x^n}\\le e^{n(s+\\eta)},\\quad Q_{x^n}\\rho_{x^n}Q_{x^n}\\preceq e^{-n(s-\\eta)}Q_{x^n},$$\nand\n$$\\mathbb E\\operatorname{tr}(\\rho_{X^n}(I-P_n))\\le Ce^{-cn},\\qquad\\mathbb E\\operatorname{tr}(\\rho_{X^n}(I-Q_{X^n}))\\le Ce^{-cn}.$$\nThe second pair of algebraic bounds holds for every word, including words with zero sampling probability; no per-word high-acceptance assertion is required.",
+        "strategy": "Finite-dimensional supplier-first proof; exact current carrier is authoritative.",
+        "deps": [
+          "def-it-von-neumann-entropy",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-it-classical-quantum-state-and-holevo-information",
+          "thm-taylor-schlomilch-roche-remainder",
+          "thm-derivative-of-exponential",
+          "cor-markov-inequality-for-random-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-it-finite-unitary-averaging-decoupling-bound",
+        "kind": "lemma",
+        "title": "Finite unitary averaging and a decoupling second-moment bound",
+        "statement": "Let $D\\ge2$, $1\\le K\\le D$, and $\\omega_{AE}\\succeq0$ with $\\dim A=D$, $\\operatorname{tr}\\omega\\le1$, and $r=\\operatorname{rank}\\omega_E$. For every $\\delta>0$ there is an explicitly specified finite probability ensemble of isometries $W:\\mathbb C^K\\to\\mathbb C^D$ such that, for\n$$\\omega^W_{RE}=\\frac DK(W^T\\otimes I_E)\\omega_{AE}(\\overline W\\otimes I_E),$$\none has\n$$\\mathbb E\\left\\|\\omega^W_{RE}-\\frac{I_R}{K}\\otimes\\omega_E\\right\\|_1\\le\\sqrt{2Kr\\operatorname{tr}(\\omega_{AE}^2)}+\\delta.$$\nAt the same time the ensemble can be required to satisfy, for every Hermitian $Z_{AE}$,\n$$\\mathbb E\\left\\|\\frac DK(W^T\\otimes I)Z(\\overline W\\otimes I)\\right\\|_1\\le(1+\\delta)\\|Z\\|_1.$$\nNo Haar existence or Gaussian-law supplier, and no choice axiom, is used.",
+        "strategy": "Finite-dimensional supplier-first proof; exact current carrier is authoritative.",
+        "deps": [
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "def-trace-of-an-endomorphism",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-it-finite-extension-from-purification-channel",
+        "kind": "lemma",
+        "title": "Every finite extension is obtained from a purification by a channel",
+        "statement": "Let $\\omega_{ZA}$ be any finite-dimensional extension of $\\rho_A$, and let $|\\psi\\rangle_{RA}$ purify $\\rho_A$ with $R$ a copy of $A$. There is a CPTP map $\\Lambda:R\\to Z$ with $(\\Lambda\\otimes\\operatorname{id}_A)(\\psi)=\\omega$.",
+        "strategy": "Finite-dimensional supplier-first proof; exact current carrier is authoritative.",
+        "deps": [
+          "thm-qc-purification-existence-and-unitary-equivalence",
+          "thm-qc-schmidt-decomposition",
+          "def-qc-quantum-channel",
+          "thm-qc-isometry-partial-trace-is-channel"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "def-it-qudit-erasure-channel",
+        "kind": "definition",
+        "title": "Finite-dimensional quantum erasure channel",
+        "deps": [
+          "def-qc-quantum-channel",
+          "def-qc-density-operator",
+          "def-qc-partial-trace",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-qc-tensor-register-and-permutation",
+          "cor-dimension-of-a-direct-sum"
+        ],
+        "justified_by": [
+          "thm-it-qudit-erasure-channel-is-cptp"
+        ],
+        "dependency_level": 0,
+        "statement": "For a d-dimensional input and erasure probability ε∈[0,1], define the flagged erasure channel into the orthogonal sum of the data space and a one-dimensional erasure space.",
+        "source_path": "items/def-it-qudit-erasure-channel.md"
+      },
+      {
+        "id": "lem-it-finite-superadditive-sequence-limit",
+        "kind": "lemma",
+        "title": "Limit formula for linearly bounded superadditive sequences",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "If a real sequence is superadditive and bounded in absolute value by a linear function, then a_n/n converges to sup_n a_n/n.",
+        "source_path": "items/lem-it-finite-superadditive-sequence-limit.md"
+      },
+      {
+        "id": "def-it-quantum-channel-complement-and-coherent-information",
+        "kind": "definition",
+        "title": "Complementary channels and coherent information",
+        "deps": [
+          "def-qc-quantum-channel",
+          "thm-qc-finite-stinespring-dilation",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-it-von-neumann-entropy",
+          "def-qc-ensemble-and-purification",
+          "thm-qc-purification-existence-and-unitary-equivalence",
+          "def-qc-partial-trace",
+          "def-qc-first-factor-partial-trace",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-wire-permutation-is-unitary",
+          "thm-qc-isometry-partial-trace-is-channel",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-qc-channels-compose-and-tensor"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Fix a finite Stinespring isometry for a finite-dimensional channel, define its complementary channel, and define coherent information through a purification with the convention I_c(ρ,N)=S(B)-S(RB).",
+        "source_path": "items/def-it-quantum-channel-complement-and-coherent-information.md"
+      },
+      {
+        "id": "lem-it-flagged-state-entropy-formula",
+        "kind": "lemma",
+        "title": "Entropy of a finite flagged state",
+        "deps": [
+          "def-it-von-neumann-entropy",
+          "def-qc-density-operator",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For a finite state τ and a one-dimensional orthogonal flag, the entropy of pτ⊕(1−p)|e⟩⟨e| is h(p)+pS(τ), including p=0,1.",
+        "source_path": "items/lem-it-flagged-state-entropy-formula.md"
+      },
+      {
+        "id": "thm-it-finite-quantum-mutual-information-data-processing",
+        "kind": "theorem",
+        "title": "Data processing for finite quantum mutual information",
+        "deps": [
+          "def-it-finite-quantum-information-measures",
+          "def-it-von-neumann-entropy",
+          "thm-it-finite-strong-subadditivity",
+          "thm-qc-finite-stinespring-dilation",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "lem-it-partial-traces-of-a-state-are-states",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-wire-permutation-is-unitary",
+          "thm-qc-channels-compose-and-tensor"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "statement": "Applying local finite-dimensional quantum channels to the two registers cannot increase their quantum mutual information.",
+        "source_path": "items/thm-it-finite-quantum-mutual-information-data-processing.md"
+      },
+      {
+        "id": "lem-it-quantum-entropy-maximized-at-maximally-mixed-state",
+        "kind": "lemma",
+        "title": "The maximally mixed state maximizes finite quantum entropy",
+        "deps": [
+          "def-it-von-neumann-entropy",
+          "def-it-finite-dimensional-quantum-relative-entropy",
+          "thm-it-quantum-relative-entropy-nonnegative-equality",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-qc-density-operator",
+          "def-trace-of-an-endomorphism",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "On a d-dimensional state space, S(ρ)≤ln d, with equality exactly for ρ=I/d.",
+        "source_path": "items/lem-it-quantum-entropy-maximized-at-maximally-mixed-state.md"
+      },
+      {
+        "id": "lem-it-dimension-dependent-quantum-entropy-continuity",
+        "kind": "lemma",
+        "title": "Dimension-dependent quantum entropy continuity and Holevo control",
+        "statement": "Write $h(t)=-t\\ln t-(1-t)\\ln(1-t)$ with continuous endpoints. Let $g(t)=(1+t)\\ln(1+t)-t\\ln t$ for $t\\in[0,1]$, with $g(0)=0$. For states $\\rho,\\sigma$ on dimension $d\\ge1$ and $t=\\frac12\\|\\rho-\\sigma\\|_1$, $$|S(\\rho)-S(\\sigma)|\\le t\\ln d+g(t).$$ Moreover, if $\\sigma_1,\\ldots,\\sigma_M$ are states on that space and $a=M^{-1}\\sum_m\\frac12\\|\\sigma_m-\\sigma\\|_1$, their uniform Holevo information is at most $2a\\ln d+2g(a)$. In particular on dimension $d_E^n$, exponential decay of $a$ makes unnormalized Holevo information tend to zero.",
+        "strategy": "Finite-dimensional supplier-first proof; exact current carrier is authoritative.",
+        "deps": [
+          "lem-it-finite-mixture-entropy-bounds",
+          "lem-it-quantum-entropy-maximized-at-maximally-mixed-state",
+          "def-qc-trace-distance",
+          "thm-qc-trace-norm-unitary-invariance-and-positive-formula",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-it-flat-spectral-type-information-approximation",
+        "kind": "lemma",
+        "title": "Exact flat spectral-type reduction of channel information",
+        "statement": "Let $\\rho$ be a state on dimension $d$ and $\\mathcal N$ a finite-dimensional channel. There is an exact decomposition $\\rho^{\\otimes n}=\\sum_t p_t\\tau_t$ into mutually orthogonal flat spectral-type states, with at most $(n+1)^d$ positive-weight types and $H(T)\\le d\\ln(n+1)$. For its fixed complementary channel, $$\\sum_t p_t I_c(\\tau_t,\\mathcal N^{\\otimes n})\\ge nI_c(\\rho,\\mathcal N)-H(T),$$ $$\\sum_t p_t[S(\\tau_t)+I_c(\\tau_t,\\mathcal N^{\\otimes n})]\\ge n[S(\\rho)+I_c(\\rho,\\mathcal N)]-2H(T).$$ Thus in each inequality some flat type state attains at least the displayed lower bound.",
+        "strategy": "Finite-dimensional supplier-first proof; exact current carrier is authoritative.",
+        "deps": [
+          "lem-it-finite-mixture-entropy-bounds",
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-it-flat-input-coherent-information-achievability",
+        "kind": "lemma",
+        "title": "Flat-input coherent information is achievable by subspace codes",
+        "statement": "Let $V:\\mathbb C^d\\to B\\otimes E$ be a Stinespring isometry and $\\tau=I_d/d$. Every $0<R<I_c(\\tau,\\mathcal N)$ is achievable by isometric subspace entanglement transmission. If the coherent information is nonpositive, the lower bound is supplied by the one-dimensional code. Here an $n$-use code has an isometry $W_n:\\mathbb C^{K_n}\\to A^{\\otimes n}$ and a CPTP decoder to $\\mathbb C^{K_n}$; its squared overlap with the maximally entangled target tends to one and $n^{-1}\\ln K_n\\to R$. The same conclusion holds for a flat state on any nonzero input subspace by composing with its embedding.",
+        "strategy": "Finite-dimensional supplier-first proof; exact current carrier is authoritative.",
+        "deps": [
+          "lem-it-finite-unitary-averaging-decoupling-bound",
+          "lem-it-exponential-cq-spectral-projectors",
+          "lem-it-finite-gentle-measurement",
+          "thm-qc-finite-stinespring-dilation",
+          "thm-qc-schmidt-decomposition",
+          "thm-qc-fidelity-purification-characterization",
+          "thm-qc-purification-existence-and-unitary-equivalence",
+          "thm-qc-fuchs-van-de-graaf",
+          "lem-qa-21-partial-trace-contracts-trace-norm-on-hermitians",
+          "thm-it-finite-strong-subadditivity"
+        ],
+        "justified_by": [],
+        "dependency_level": 9
+      },
+      {
+        "id": "thm-it-qudit-erasure-channel-is-cptp",
+        "kind": "theorem",
+        "title": "The finite-dimensional erasure map is a quantum channel",
+        "deps": [
+          "def-it-qudit-erasure-channel",
+          "thm-qc-isometry-partial-trace-is-channel",
+          "def-qc-isometric-stinespring-representation",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-qc-partial-trace",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For each finite input dimension and erasure probability in [0,1], the flagged erasure map is completely positive and trace-preserving.",
+        "source_path": "items/thm-it-qudit-erasure-channel-is-cptp.md"
+      },
+      {
+        "id": "def-it-degradable-channel",
+        "kind": "definition",
+        "title": "Degradable and antidegradable channels",
+        "deps": [
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "def-qc-quantum-channel"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Define a channel as degradable when its complementary output is simulated from the receiver output, and antidegradable when the receiver output is simulated from the complementary output.",
+        "source_path": "items/def-it-degradable-channel.md"
+      },
+      {
+        "id": "lem-it-quantum-coherent-information-complement-identity",
+        "kind": "lemma",
+        "title": "Coherent information equals output entropy minus environment entropy",
+        "deps": [
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "thm-qc-finite-stinespring-dilation",
+          "def-it-von-neumann-entropy",
+          "def-qc-ensemble-and-purification",
+          "thm-qc-purification-existence-and-unitary-equivalence",
+          "thm-qc-schmidt-decomposition",
+          "def-qc-partial-trace",
+          "def-qc-first-factor-partial-trace",
+          "def-qc-tensor-register-and-permutation",
+          "thm-qc-wire-permutation-is-unitary"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For every finite input state and every fixed Stinespring dilation, I_c(ρ,N)=S(N(ρ))-S(N^c(ρ)); hence this entropy difference is independent of the chosen purification and complementary dilation.",
+        "source_path": "items/lem-it-quantum-coherent-information-complement-identity.md"
+      },
+      {
+        "id": "def-it-quantum-channel-private-information",
+        "kind": "definition",
+        "title": "Private information of a finite channel ensemble",
+        "deps": [
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "def-it-classical-quantum-state-and-holevo-information"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For a finite ensemble of input states, define private information as the coherent information of its average input minus the average coherent information of the ensemble members.",
+        "source_path": "items/def-it-quantum-channel-private-information.md"
+      },
+      {
+        "id": "lem-it-finite-cq-wiretap-strong-secrecy-achievability",
+        "kind": "lemma",
+        "title": "Finite cq wiretap achievability with strong Holevo secrecy",
+        "statement": "Fix any finite input ensemble $(p_x,\\rho_x)$ for a finite-dimensional channel $\\mathcal N$ and a complement $\\mathcal N^c$. Let $\\chi_B,\\chi_E$ be the Holevo informations of their output ensembles. Every $0<R<\\chi_B-\\chi_E$ admits uniform $M_n$-message codes with mixed input states, Bob POVMs, $n^{-1}\\ln M_n\\to R$, average error tending to zero, and unnormalized complementary-output Holevo leakage tending to zero. The construction has exponentially decaying average error and average trace distance to a fixed complementary product target; dimension-dependent entropy control converts the latter to strong Holevo secrecy.",
+        "strategy": "Finite-dimensional supplier-first proof; exact current carrier is authoritative.",
+        "deps": [
+          "lem-it-exponential-cq-spectral-projectors",
+          "lem-it-dimension-dependent-quantum-entropy-continuity",
+          "lem-it-finite-gentle-measurement",
+          "lem-it-hayashi-nagaoka-finite-operator-inequality",
+          "def-it-classical-quantum-state-and-holevo-information",
+          "def-qc-quantum-channel",
+          "thm-qc-trace-norm-duality-and-norm-properties",
+          "lem-qa-30-positive-product-trace-nonnegative"
+        ],
+        "justified_by": [],
+        "dependency_level": 9
+      },
+      {
+        "id": "lem-it-flat-input-entanglement-assisted-achievability",
+        "kind": "lemma",
+        "title": "Flat-input entanglement-assisted achievability by Weyl coding",
+        "statement": "Let $\\tau=JJ^*/D$ be the flat state of a nonzero $D$-dimensional input subspace of a finite-dimensional channel $\\mathcal N$. With prior shared maximally entangled states on that subspace, every $0\\le R<S(\\tau)+I_c(\\tau,\\mathcal N)$ is achievable for classical messages with average error tending to zero. The code consists of finite Weyl operations followed by a collective output/reference POVM; it has rate tending to $R$.",
+        "strategy": "Finite-dimensional supplier-first proof; exact current carrier is authoritative.",
+        "deps": [
+          "thm-it-hsw-classical-quantum-channel-capacity",
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "lem-it-quantum-coherent-information-complement-identity",
+          "thm-qc-schmidt-decomposition",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-it-maximum-coherent-information-attained",
+        "kind": "lemma",
+        "title": "Finite channel information maxima are attained",
+        "deps": [
+          "def-qc-quantum-channel",
+          "def-qc-density-operator",
+          "def-it-von-neumann-entropy",
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "lem-it-quantum-coherent-information-complement-identity",
+          "lem-it-finite-quantum-entropy-continuity",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "thm-all-norms-on-rn-are-equivalent",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-non-negative-and-positive-operator",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-trace-of-an-endomorphism",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For every finite-dimensional channel, both ρ↦I_c(ρ,N) and ρ↦S(ρ)+I_c(ρ,N) attain maxima on the input state space.",
+        "source_path": "items/lem-it-maximum-coherent-information-attained.md"
+      },
+      {
+        "id": "lem-it-qudit-erasure-channel-complement-and-degradability",
+        "kind": "lemma",
+        "title": "Complement and degradation maps of the erasure channel",
+        "deps": [
+          "def-it-qudit-erasure-channel",
+          "def-it-degradable-channel",
+          "lem-it-quantum-coherent-information-complement-identity",
+          "thm-it-qudit-erasure-channel-is-cptp",
+          "thm-qc-kraus-map-completely-positive",
+          "thm-qc-trace-preserving-kraus-normalization",
+          "def-qc-quantum-channel",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "The complementary erasure channel has erasure probability 1-ε; the channel is degradable for ε≤1/2 and antidegradable for ε≥1/2.",
+        "source_path": "items/lem-it-qudit-erasure-channel-complement-and-degradability.md"
+      },
+      {
+        "id": "lem-it-private-information-is-coherent-information-difference",
+        "kind": "lemma",
+        "title": "Private information is an average coherent-information difference",
+        "deps": [
+          "def-it-quantum-channel-private-information",
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "def-it-classical-quantum-state-and-holevo-information",
+          "lem-it-quantum-coherent-information-complement-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "For a finite input ensemble, private information equals I_c of the average input minus the ensemble average of I_c, and also equals the receiver Holevo quantity minus the environment Holevo quantity.",
+        "source_path": "items/lem-it-private-information-is-coherent-information-difference.md"
+      },
+      {
+        "id": "lem-it-quantum-and-private-information-product-additivity",
+        "kind": "lemma",
+        "title": "Product additivity of coherent and private information",
+        "deps": [
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "def-it-quantum-channel-private-information",
+          "lem-it-quantum-coherent-information-complement-identity",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-qc-channels-compose-and-tensor"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Coherent information is additive on product inputs and private information is additive on product ensembles for tensor-product channels.",
+        "source_path": "items/lem-it-quantum-and-private-information-product-additivity.md"
+      },
+      {
+        "id": "lem-it-entanglement-assisted-information-is-additive",
+        "kind": "lemma",
+        "title": "Additivity of optimized entanglement-assisted information",
+        "deps": [
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "lem-it-quantum-coherent-information-complement-identity",
+          "def-it-finite-quantum-information-measures",
+          "thm-it-finite-quantum-mutual-information-data-processing",
+          "thm-it-finite-strong-subadditivity",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-qc-channels-compose-and-tensor",
+          "lem-it-quantum-entropy-maximized-at-maximally-mixed-state"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "statement": "The maximum of S(ρ)+I_c(ρ,N), equivalently I(R;B) for a purification, is additive under tensor products of finite-dimensional channels.",
+        "source_path": "items/lem-it-entanglement-assisted-information-is-additive.md"
+      },
+      {
+        "id": "lem-it-qudit-erasure-channel-coherent-information",
+        "kind": "lemma",
+        "title": "Coherent information of a qudit erasure channel",
+        "deps": [
+          "def-it-qudit-erasure-channel",
+          "lem-it-qudit-erasure-channel-complement-and-degradability",
+          "lem-it-quantum-coherent-information-complement-identity",
+          "lem-it-flagged-state-entropy-formula",
+          "def-it-von-neumann-entropy",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "For every input state ρ, I_c(ρ,E_{d,ε})=(1−2ε)S(ρ), including ε=0 and ε=1.",
+        "source_path": "items/lem-it-qudit-erasure-channel-coherent-information.md"
+      },
+      {
+        "id": "def-it-quantum-channel-operational-capacities",
+        "kind": "definition",
+        "title": "Operational quantum, private, and entanglement-assisted capacities",
+        "deps": [
+          "def-qc-quantum-channel",
+          "def-qc-density-operator",
+          "def-qc-povm-and-outcome-law",
+          "def-qc-partial-trace",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-qc-purification-existence-and-unitary-equivalence",
+          "def-qc-tensor-register-and-permutation",
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "thm-qc-channels-compose-and-tensor",
+          "def-it-classical-quantum-state-and-holevo-information",
+          "def-it-von-neumann-entropy",
+          "lem-it-private-information-is-coherent-information-difference"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Define finite-block quantum transmission, strong-secrecy private classical transmission, and classical transmission with prior shared entanglement, and define their asymptotic rates in nats per channel use.",
+        "source_path": "items/def-it-quantum-channel-operational-capacities.md"
+      },
+      {
+        "id": "lem-it-degradable-channel-coherent-information-concavity-and-subadditivity",
+        "kind": "lemma",
+        "title": "Coherent information is concave and additive for degradable channels",
+        "deps": [
+          "def-it-degradable-channel",
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "def-it-quantum-channel-private-information",
+          "def-it-classical-quantum-state-and-holevo-information",
+          "def-it-finite-quantum-information-measures",
+          "lem-it-private-information-is-coherent-information-difference",
+          "lem-it-quantum-and-private-information-product-additivity",
+          "thm-it-finite-quantum-mutual-information-data-processing",
+          "thm-it-quantum-entropy-identities",
+          "thm-qc-channels-compose-and-tensor",
+          "lem-it-quantum-coherent-information-complement-identity",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "statement": "For a finite-dimensional degradable channel, coherent information is concave, nonnegative, and additive across arbitrary correlated inputs to tensor products of degradable channels.",
+        "source_path": "items/lem-it-degradable-channel-coherent-information-concavity-and-subadditivity.md"
+      },
+      {
+        "id": "thm-it-quantum-channel-capacity-regularized-coherent-information",
+        "kind": "theorem",
+        "title": "Regularized coherent-information formula for quantum capacity",
+        "deps": [
+          "def-it-quantum-channel-operational-capacities",
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "lem-it-quantum-and-private-information-product-additivity",
+          "lem-it-finite-superadditive-sequence-limit",
+          "lem-it-quantum-entropy-maximized-at-maximally-mixed-state",
+          "thm-qc-finite-stinespring-dilation",
+          "thm-qc-purification-existence-and-unitary-equivalence",
+          "def-it-von-neumann-entropy",
+          "thm-natural-logarithm-laws",
+          "thm-qc-channels-compose-and-tensor",
+          "thm-qc-schmidt-decomposition",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "lem-it-quantum-coherent-information-complement-identity",
+          "def-qc-density-operator",
+          "lem-it-flat-spectral-type-information-approximation",
+          "lem-it-flat-input-coherent-information-achievability",
+          "lem-it-dimension-dependent-quantum-entropy-continuity",
+          "thm-qc-fuchs-van-de-graaf",
+          "lem-qa-21-partial-trace-contracts-trace-norm-on-hermitians",
+          "thm-it-finite-quantum-mutual-information-data-processing"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "statement": "For every finite-dimensional memoryless quantum channel, its unassisted quantum capacity equals lim_n (1/n) sup_ρ I_c(ρ,N^⊗n), without asserting single-letter additivity in general.",
+        "source_path": "items/thm-it-quantum-channel-capacity-regularized-coherent-information.md"
+      },
+      {
+        "id": "thm-it-quantum-channel-capacity-regularized-private-information",
+        "kind": "theorem",
+        "title": "Regularized private-information formula for private capacity",
+        "deps": [
+          "def-it-quantum-channel-operational-capacities",
+          "def-it-quantum-channel-private-information",
+          "lem-it-private-information-is-coherent-information-difference",
+          "lem-it-quantum-and-private-information-product-additivity",
+          "lem-it-finite-superadditive-sequence-limit",
+          "thm-it-hsw-classical-quantum-channel-capacity",
+          "def-it-finite-quantum-information-measures",
+          "thm-it-finite-strong-subadditivity",
+          "thm-it-quantum-entropy-identities",
+          "lem-it-quantum-entropy-maximized-at-maximally-mixed-state",
+          "def-it-von-neumann-entropy",
+          "thm-natural-logarithm-laws",
+          "thm-qc-channels-compose-and-tensor",
+          "lem-qc-tensor-product-basis-and-dimension",
+          "def-it-classical-quantum-state-and-holevo-information",
+          "lem-it-finite-cq-wiretap-strong-secrecy-achievability",
+          "thm-it-fano-inequality",
+          "thm-it-holevo-measurement-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "statement": "For every finite-dimensional memoryless quantum channel, its strong-secrecy private classical capacity equals lim_n (1/n) sup_ensemble I_p(ensemble,N^⊗n), with no general single-letter claim.",
+        "source_path": "items/thm-it-quantum-channel-capacity-regularized-private-information.md"
+      },
+      {
+        "id": "thm-it-entanglement-assisted-classical-capacity-additive-formula",
+        "kind": "theorem",
+        "title": "Additive formula for entanglement-assisted classical capacity",
+        "deps": [
+          "def-it-quantum-channel-operational-capacities",
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "def-it-finite-quantum-information-measures",
+          "lem-it-entanglement-assisted-information-is-additive",
+          "lem-it-maximum-coherent-information-attained",
+          "thm-it-schumacher-quantum-source-coding",
+          "thm-it-hsw-classical-quantum-channel-capacity",
+          "thm-qc-schmidt-decomposition",
+          "def-it-von-neumann-entropy",
+          "lem-it-flat-input-entanglement-assisted-achievability",
+          "lem-it-flat-spectral-type-information-approximation",
+          "lem-it-finite-extension-from-purification-channel",
+          "thm-it-finite-quantum-mutual-information-data-processing",
+          "thm-it-fano-inequality",
+          "thm-it-holevo-measurement-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "statement": "For every finite-dimensional channel, C_E(N)=max_ρ[S(ρ)+I_c(ρ,N)]=max_ρ I(R;B), and C_E is additive under tensor products.",
+        "source_path": "items/thm-it-entanglement-assisted-classical-capacity-additive-formula.md"
+      },
+      {
+        "id": "thm-it-degradable-channel-single-letter-capacities",
+        "kind": "theorem",
+        "title": "Single-letter quantum and private capacities of degradable channels",
+        "deps": [
+          "def-it-degradable-channel",
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "def-it-quantum-channel-operational-capacities",
+          "def-it-quantum-channel-private-information",
+          "lem-it-degradable-channel-coherent-information-concavity-and-subadditivity",
+          "lem-it-maximum-coherent-information-attained",
+          "thm-it-quantum-channel-capacity-regularized-coherent-information",
+          "thm-it-quantum-channel-capacity-regularized-private-information",
+          "thm-qc-channels-compose-and-tensor",
+          "thm-qc-schmidt-decomposition",
+          "lem-it-private-information-is-coherent-information-difference",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "statement": "For each finite-dimensional degradable channel, Q(N)=P(N)=max_ρ I_c(ρ,N), and tensor-power regularization is unnecessary.",
+        "source_path": "items/thm-it-degradable-channel-single-letter-capacities.md"
+      },
+      {
+        "id": "thm-it-qudit-erasure-channel-exact-capacities",
+        "kind": "theorem",
+        "title": "Exact quantum, private, and entanglement-assisted erasure capacities",
+        "deps": [
+          "def-it-qudit-erasure-channel",
+          "def-it-quantum-channel-operational-capacities",
+          "lem-it-qudit-erasure-channel-complement-and-degradability",
+          "lem-it-qudit-erasure-channel-coherent-information",
+          "thm-it-qudit-erasure-channel-is-cptp",
+          "thm-it-finite-quantum-mutual-information-data-processing",
+          "def-it-finite-quantum-information-measures",
+          "thm-it-quantum-entropy-identities",
+          "lem-it-quantum-entropy-maximized-at-maximally-mixed-state",
+          "thm-it-degradable-channel-single-letter-capacities",
+          "thm-it-quantum-channel-capacity-regularized-coherent-information",
+          "thm-it-quantum-channel-capacity-regularized-private-information",
+          "thm-it-entanglement-assisted-classical-capacity-additive-formula",
+          "thm-qc-channels-compose-and-tensor",
+          "lem-it-private-information-is-coherent-information-difference",
+          "lem-it-quantum-coherent-information-complement-identity",
+          "thm-qc-schmidt-decomposition"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "statement": "For a d-dimensional erasure channel with probability ε, Q=P=max(1-2ε,0)ln d, and C_E=2(1-ε)ln d.",
+        "source_path": "items/thm-it-qudit-erasure-channel-exact-capacities.md"
+      }
+    ],
+    "summary": "Prove the finite-dimensional regularized coherent-information quantum-capacity formula and regularized private-information formula, the additive entanglement-assisted classical-capacity formula, the degradable-channel single-letter case, and exact qudit erasure-channel capacities. General unassisted quantum and private capacities remain regularized; no general single-letter additivity is asserted."
+  },
+  {
+    "order": 2541,
+    "id": "quantum-channel-capacities-and-entanglement-assistance-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Quantum Channel Capacities and Entanglement Assistance — Examples",
+    "companion": "quantum-channel-capacities-and-entanglement-assistance",
+    "requires": [
+      "quantum-channel-capacities-and-entanglement-assistance"
+    ],
+    "items": [
+      {
+        "id": "ex-it-noiseless-qubit-entanglement-assisted-capacity",
+        "kind": "example",
+        "title": "Dense coding attains the entanglement-assisted noiseless-qubit rate",
+        "deps": [
+          "thm-it-entanglement-assisted-classical-capacity-additive-formula",
+          "thm-qc-dense-coding-correctness-and-resource-count",
+          "def-qc-bell-basis",
+          "lem-it-quantum-entropy-maximized-at-maximally-mixed-state",
+          "def-it-quantum-channel-complement-and-coherent-information",
+          "def-it-von-neumann-entropy",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "statement": "The identity channel on a qubit has C_E=2 ln 2, achieved by dense coding with a shared Bell pair.",
+        "source_path": "items/ex-it-noiseless-qubit-entanglement-assisted-capacity.md"
+      },
+      {
+        "id": "ex-it-qudit-erasure-channel-capacity-regimes",
+        "kind": "example",
+        "title": "Capacity regimes of the qudit erasure channel",
+        "deps": [
+          "thm-it-qudit-erasure-channel-exact-capacities",
+          "def-it-qudit-erasure-channel",
+          "lem-it-qudit-erasure-channel-complement-and-degradability",
+          "def-it-information-units-and-logarithm-base"
+        ],
+        "justified_by": [],
+        "dependency_level": 11,
+        "statement": "For d=2 and representative erasure probabilities, compute Q, P, and C_E and identify degradable, self-complementary, and antidegradable regimes.",
+        "source_path": "items/ex-it-qudit-erasure-channel-capacity-regimes.md"
+      }
+    ],
+    "summary": "Compute the noiseless dense-coding endpoint and qudit erasure-channel regimes from the A-page theorems, showing where degradability gives a single-letter answer and where the general capacity formulas remain regularized."
+  }
+]

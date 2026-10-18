@@ -1,0 +1,59 @@
+---
+id: lem-modc-separable-algebra-object-duals
+kind: lemma
+title: Object duals in the separable-algebra model of Mod(C)
+status: draft
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+dependency_level: 3
+deps:
+  - def-separable-algebra-and-bimodule-in-fusion-category
+  - thm-separable-bimodule-relative-tensor-is-associative
+  - def-opposite-algebra-in-braided-fusion-category
+  - def-braided-monoidal-category
+  - lem-braided-tensor-product-of-separable-algebras-is-separable
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Douglas and Reutter, Fusion 2-Categories and a State-Sum Invariant for 4-Manifolds, §2.1.1 and Construction 2.1.19
+      url: https://arxiv.org/pdf/1812.11933
+    - title: Décoppet and Yu, Fiber 2-Functors and Tambara-Yamagami Fusion 2-Categories, §2.3
+      url: https://arxiv.org/pdf/2306.08117
+---
+
+## Statement
+
+For a separable algebra object $A$ in a braided fusion category $\mathcal C$, the object represented by $A$ in the separable-algebra/bimodule monoidal $2$-category has a left dual represented by the opposite algebra $A^{\mathrm{op}}$ of [[def-opposite-algebra-in-braided-fusion-category]]. There are evaluation $A^{\mathrm{op}}\otimes A\to\mathbf1$ and coevaluation $\mathbf1\to A\otimes A^{\mathrm{op}}$ bimodules, with invertible cusp $2$-morphisms identifying both snake composites with the respective regular bimodules. It also has a right dual represented by the positive opposite algebra $A^{\mathrm{op},+}$ with multiplication $m_Ac_{A,A}$; left and right opposites are not identified.
+
+## Facts & Assumptions
+
+**Given:** A separable algebra $A$ in a braided fusion category.
+
+[F1] [[def-opposite-algebra-in-braided-fusion-category]] fixes the negative opposite, and [[lem-braided-tensor-product-of-separable-algebras-is-separable]] gives the admissible tensor-algebra objects.
+
+[F2] [[thm-separable-bimodule-relative-tensor-is-associative]] and [[def-separable-algebra-and-bimodule-in-fusion-category]] give the balanced universal products, split-epimorphic universal maps, action equations and unit equations.
+
+## Proof
+
+1.1 Use the algebra-bimodule orientation: a $1$-morphism $R\to S$ is an $R$-$S$ bimodule, and composition is relative tensoring in the displayed order. For an $R$-$S$ bimodule $X$ and a $T$-$U$ bimodule $Y$, their tensor $X\otimes Y$ is an $(R\otimes T)$-$(S\otimes U)$ bimodule. Its left action is $(l_X\otimes l_Y)(1_R\otimes c_{T,X}\otimes1_Y)$ and its right action is $(r_X\otimes r_Y)(1_X\otimes c_{Y,S}\otimes1_U)$; both shuffles are positive. These exact actions are used in each seven-strand calculation below. Write O=Aop with multiplication m c^-1. It is separable with section $\sigma_O=c_{A,A}\sigma_A$: regard $A$ and its section in the monoidal opposite, then transport through the strong monoidal functor of [F1]. Its tensorator is $c_{Y,X}^{-1}$, so multiplication transports by $c^{-1}$ and the section by $c$. The multiplication/section composite is $m c^{-1}c\sigma_A=1_A$. Both section-linearity diagrams transport by tensorator naturality and its inverse-hexagon coherence, precisely as the transport calculation in the tensor-separability lemma. Thus K=A⊗O and L=O⊗A are separable, both with positive braided tensor multiplication. All associations below are the canonical ones of C; the ordinary associator pentagon ensures the displayed expressions with brackets restored are equal. Denote the iterated multiplication of A by μ_r. For a permutation π let `n_π` mean its negative permutation braid: interchange adjacent U,V by `c_{V,U}^{-1}: UV→VU`, using any reduced expression for π. Independence of reduced expression follows from commuting disjoint crossings and the inverse braid relation, itself obtained by naturality and the two inverse hexagons. No symmetric-braiding relation is used. The construction supplies a left dual with $e:O\otimes A\to\mathbf1$ and $i:\mathbf1\to A\otimes O$. Take e to be underlying A with left L-action `λ=μ_3 c_{A⊗A,A}^{-1}: A⊗(A⊗A)→(A⊗A)⊗A→A`. Take i to be underlying A with right K-action `ρ=μ_3 c_{A,A⊗A}^{-1}: (A⊗A)⊗A→A⊗(A⊗A)→A`. [F1, F2, given, algebra]
+
+1.2 Thus the opposite input moves to the far right in λ and to the far left in ρ. These actions are associative: expand the product of L or K, expand the two inverse crossings past products by the inverse hexagons, and use naturality to move crossings before multiplication. In each action equation the positive crossing in the tensor product algebra cancels the adjacent inverse crossing introduced by the opposite multiplication. What remains is the same negative permutation followed by μ_5. In ordinary word notation both sides for λ on `(a,b,c,d,x)` have word `b d x c a`, and both sides for ρ on `(x,a,b,c,d)` have word `d b x a c`; these words specify the resulting permutation, not an elementwise assumption about C. All residual crossings are negative and have precisely the inversions of these permutations. Units cancel by braiding naturality with η and the unit equations. This proves that the displayed maps really are bimodules. The first snake is `(i⊗1_A)⊗_{A⊗O⊗A}(1_A⊗e)`. Its raw underlying tensor has four A slots `(u,v;w,z)`. Define the cusp to the regular A-bimodule by `P_A=μ_4 n_[2,4,1,3]`, [F1, F2, given, algebra]
+
+1.3 that is `u v w z→v u w z→v u z w→v z u w`, all three interchanges negative. Its inverse is the composite `A→A^4→snake` inserting `(η,1_A;η,η)`. Check balance on the seven slots `(u,v,a,b,c,w,z)`: acting on the right of i⊗1_A or on the left of 1_A⊗e and then applying P_A both yield `μ_7 n_[2,5,7,4,1,3,6]`, [F1, F2, given, algebra]
+
+1.4 with resulting word `v c z b u a w`. To verify this equality, expand the tensor-bimodule action's positive shuffle, λ, ρ, and the opposite product, use naturality to move every crossing before μ, and cancel adjacent positive/inverse pairs. The remaining negative crossings are, respectively, the pairs `(u,v),(u,b),(a,b),(u,c),(a,c),(b,c),(u,z),(a,z),(b,z),(w,z)`, exactly the ten inversions of the displayed permutation. Source and target A-linearity similarly reduce to the negative shuffles with words `a v z u w` and `v z u w a`; no crossing with the external action survives. Hence P_A descends to an A-A-bimodule map. [F1, F2, given, algebra]
+
+1.5 The two inverse equations are actual balanced-map equations. P_A after unit insertion is 1_A. Conversely, on q(u,v;w,z), transfer the first algebra slot w from the second bimodule through the balancing relation, then transfer the resulting first slot uw through the middle opposite algebra, then transfer the resulting second evaluation slot zuw through the last algebra. The outcome is q(1,vzuw;1,1). In C these three transfers mean exactly the three inverse crossings defining n_[2,4,1,3]; multiplication naturality and the unit identities supply the displayed word order. Thus q equals `s_A P_A q`; q is a split epimorphism by the separability-idempotent construction, so `s_A P_A=id`. This proves the first cusp is invertible, not merely a surjection on generators. The second snake is `(1_O⊗i)⊗_{O⊗A⊗O}(e⊗1_O)`. On its raw four slots `(u,v;w,z)` define `P_O=μ_4 n_[4,2,3,1]`, whose word is `z v w u`, with all five inversion crossings negative. The inverse inserts `(η,η;η,1_A)`. On seven slots `(u,v,b,c,d,w,z)` both middle-action composites reduce to `μ_7 n_[7,5,2,4,6,3,1]`, [F1, F2, given, algebra]
+
+1.6 word `z d v c w b u`. The sixteen remaining negative crossings are the inversions of that permutation: z crosses u,v,b,c,d,w; d crosses u,v,b,c; v crosses u; c crosses u,b; w crosses u,b; b crosses u (sixteen in total). The source and target O-actions reduce to μ_5 with the corresponding negative crossing from m_O, proving O-O-linearity. P_O s_O=id follows from units. For the reverse composite, use successively balance in the first O-slot, the central A-slot, and the last O-slot: the word representatives become `(1,v;wu,z)`, `(1,vwu;1,z)`, `(1,1;1,zvwu)`. Restoring the negative crossings gives exactly n_[4,2,3,1]; hence `s_O P_O q=q`, and split epimorphy of q yields the inverse equation. [F1, F2, given, algebra]
+
+1.7 For the right dual put $P=A^{\mathrm{op},+}$ with multiplication $m_Ac_{A,A}$. The same monoidal-opposite transport, now with positive tensorator, makes $P$ separable with section $c_{A,A}^{-1}\sigma_A$. Define evaluation $e_R:A\otimes P\to\mathbf1$ on underlying $A$ by the left action $\lambda_R=\mu_3(1_A\otimes c_{A,A})$, and coevaluation $i_R:\mathbf1\to P\otimes A$ by the right action $\rho_R=\mu_3(c_{A,A}\otimes1_A)$. Thus their words are $a x b$ on inputs $(a,b,x)$ and $b x a$ on inputs $(x,b,a)$. Expanding either associative action equation gives the same positive permutation followed by $\mu_5$; the crossings are the inversions of the words $a c x d b$ and $c b x a d$, respectively. This follows by the two positive hexagons and multiplication naturality, with the tensor-product positive shuffle and positive opposite multiplication retained. Unit coherence follows by naturality with $\eta_A$. [F1, F2, given, algebra]
+
+1.8 Write $p_\pi$ for the positive permutation braid, using $c_{U,V}:UV\to VU$ at each inversion. The first right snake $(1_A\otimes i_R)\otimes_{A\otimes P\otimes A}(e_R\otimes1_A)$ has cusp $\mu_4p_{[1,3,2,4]}$, word $u w v z$, with inverse induced by $(a,1;1,1)$. On the seven inputs $(u,v,a,b,c,w,z)$ its two middle-action composites are the same positive permutation with word $u a w b v c z$. The five remaining crossings are $(v,a),(v,b),(v,w),(b,w),(c,w)$. Source and target linearity follow by cancelling the external action crossing against this shuffle; both act by ordinary multiplication on the outside of the word. The inverse equation follows by units in one direction; in the other direction the successive balance transfers give representatives $(uw,v;1,z)$, $(uw,vz;1,1)$, $(uw,1;vz,1)$ and $(uwvz,1;1,1)$. Each displayed transfer means the corresponding positive crossing in $p_{[1,3,2,4]}$, as follows by naturality before multiplication. Thus equality holds after the universal split epimorphism and proves the reverse inverse equation. [F1, F2, given, algebra]
+
+1.9 The second right snake $(i_R\otimes1_P)\otimes_{P\otimes A\otimes P}(1_P\otimes e_R)$ has cusp $\mu_4p_{[3,1,4,2]}$, word $w u z v$, with inverse induced by $(1,1;a,1)$. On seven inputs $(u,v,b,c,d,w,z)$ both middle-action composites are the positive permutation with word $w b u c z d v$. The remaining crossings are exactly its inversions: $(u,b),(u,w),(v,b),(v,c),(v,d),(v,w),(v,z),(b,w),(c,w),(d,w),(d,z)$. The external source and target $P$ actions contribute the positive crossings of $m_P$, and the resulting composites on both sides have the same positive permutations; hence this cusp is $P$-$P$ linear. The unit insertion is a right inverse. For the other inverse, balance successively in the first $P$, last $P$, central $A$, and first $P$ slot, giving $(1,v;wu,z)$, $(1,1;wu,zv)$, $(zv,1;wu,1)$ and $(1,1;wuzv,1)$. Naturality restores precisely the positive crossings of the displayed shuffle. Equality after the universal split epimorphism proves that this cusp too is invertible. [F1, F2, given, algebra]
+
+2.1 The four displayed invertible cusp maps give a left and a right object dual with their stated orientations. Unit insertions and action maps commute with reassociation because both preserve the same universal balanced tensor. These are the required object-duality data and equations in the weak monoidal $2$-category. [F1, F2, given, algebra] ∎

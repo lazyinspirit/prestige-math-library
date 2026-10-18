@@ -1,0 +1,326 @@
+--- a/tools/level-coverage.mjs
++++ b/tools/level-coverage.mjs
+@@ -27,6 +27,7 @@
+ import { itemHashJudge } from './item-hash.mjs';
+ import { frontmatterList } from './frontmatter-list.mjs';
+ import { loadStep5ClosureCertification, currentStep5Certification } from './step5-certification-consumer.mjs';
++import { verifyInitialPublishedBaselineExclusions } from './step5-initial-published-maintenance.mjs';
+ import { step5JudgePolicy } from './step5-judge-policy.mjs';
+ import { adjudicationTypeResolver } from './step5-adjudication-compat.mjs';
+ import { isPublishedItem } from './published-repair-policy.mjs';
+@@ -517,7 +518,18 @@
+ let step5Certificate = null;
+ try { step5Certificate = loadStep5ClosureCertification(REPO, option('--run'), judgePath ?? ''); }
+ catch (cause) { error('step5-certification-invalid', cause.message); }
++const ordinaryPublishedExclusions = new Set();
++if (selectiveJudgePolicy && step5Certificate) {
++  try {
++    verifyInitialPublishedBaselineExclusions(REPO, selectiveStep5Run, step5Certificate, { current: true });
++    for (const row of step5Certificate.ordinary_published_baseline_exclusions?.entries ?? [])
++      if (judgeScope.includes(row.id)) ordinaryPublishedExclusions.add(row.id);
++  } catch (cause) { error('step5-certification-invalid', cause.message); }
++}
+ for (const id of judgePath ? judgeScope : []) {
++  // Only the authenticated original ordinary-maintenance baseline difference
++  // has no new judgment obligation. This creates no verdict or review row.
++  if (ordinaryPublishedExclusions.has(id)) continue;
+   const itemText = readFileSync(join(REPO, 'items', `${id}.md`), 'utf8');
+   const requiredJudges = selectiveJudgePolicy?.requiredModels(id, itemText) ?? JUDGES;
+   if (selectiveStep5Run && !selectiveJudgePolicy) continue;
+@@ -649,9 +661,9 @@
+   judgeCoverage.push({ id, context_sha256: hash, models });
+ }
+ 
+-const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_scope: judgeScope.length, judge_complete: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
++const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_scope: judgeScope.length - ordinaryPublishedExclusions.size, historical_ordinary_published_exclusions: ordinaryPublishedExclusions.size, judge_complete: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
+ const result = { summary, manifest_sha256: manifestSha256, manifest, judge_coverage: judgeCoverage,
+-  auditor_certified: [...auditorCertified.keys()].sort(), judge_adjudications: judgeAdjudicationsPath ?? null, errors, warnings };
++  historical_ordinary_published_exclusions: [...ordinaryPublishedExclusions].sort(), auditor_certified: [...auditorCertified.keys()].sort(), judge_adjudications: judgeAdjudicationsPath ?? null, errors, warnings };
+ 
+ // The closure receipt. Written whether or not the gate passes — a failing gate
+ // is exactly when the ids it names need to become someone's work.
+@@ -662,6 +674,8 @@
+     judge_lineup: lineupName,
+     verified_against_current_context: verifyCurrent,
+     scope: judgeScope.length,
++    judgment_obligations: judgeScope.length - ordinaryPublishedExclusions.size,
++    historical_ordinary_published_exclusions: [...ordinaryPublishedExclusions].sort(),
+     verdicts_complete: judgeCoverage.length,
+     // Legacy field retained while historical Step-6 receipts remain readable.
+     pairs_complete: judgeCoverage.length,
+--- /dev/null
++++ b/tools/step5-certified-contract-aggregation.md
+@@ -0,0 +1,17 @@
++# Ordinary published closure and native certified aggregation
++
++## Judgment obligations
++
++Native selective Step 5 closure retains the complete frozen manifest, source and prerequisite context. The current certificate's original ordinary-published baseline exclusions are checked with `verifyInitialPublishedBaselineExclusions(..., {current:true})`. Only those authenticated unchanged successors have no new original-baseline judgment obligation. The output lists them separately as `historical_ordinary_published_exclusions`; they never enter `judge_coverage` or its verdict count. `summary.judge_scope` counts actual judgment obligations, while `summary.scope`, the manifest and the receipt's full `scope` retain every subject. Unknown published items and ordinary runs without selective policy retain the existing judgment requirements.
++
++Changed source/status, changed ordinary receipt, missing provenance, or invalid certification removes this compatibility path and fails closure. Existing impact discovery, actual consumer maintenance, current source/context checks, and same-reviewer duties remain active. This is not a general published-item exemption or a new audit/review basis.
++
++## Exact forward aggregation
++
++For a subsequent native gate certification in a run with the existing authenticated gate-1 aggregation record, `certify` first verifies the prior certificate and the completed current native impact work. The new helper stages all 81 current contract inputs, the exact old live cache, the deterministic new cache, and the immutable prior certificate under content-addressed files. It never uses or expands the missing-preimage historical `3bb...` reference. Every old/new cache byte in this forward transition is available and hash-bound.
++
++The NEW immutable certificate contains a typed `contract_aggregation` intent and its evidence, including the new absolute live-cache pin. The original relative historical pin remains untouched. The certificate intent is frozen before the live derivative is replaced; only after the exact cache replacement succeeds does the controller move the live certificate pointer. This is ordinary native certification output, not an owner history registry or a replacement review.
++
++A crash between these writes leaves either the original valid live certificate or an explicitly resumable frozen new intent. The saved-certify path rechecks non-cache evidence, the precise old/new full cache preimage, every staged current contract input, current source guards and contexts, and completed native impact closure before finishing that exact cache write. Arbitrary cache edits and stale source/context/closure/metadata cannot resume. Active certificate verification requires the new exact live cache, never the pending old preimage. Historical input archives remain valid when later ordinary native work changes the mutable batch contracts; a saved-current retry still requires its exact inputs.
++
++The aggregation supplies no source, consumer, audit, judgment, threshold or creation credit. Normal current reviews and all later gates remain required. The next ordinary `merge-contracts` gate reproduces the already certified current cache byte for byte. Default runs without this opt-in historical aggregation basis keep their original behavior.
+--- /dev/null
++++ b/tools/step5-certified-contract-aggregation.mjs
+@@ -0,0 +1,70 @@
++// Native certification stages a complete immutable cache intent before touching
++// the live derivative. A saved certificate can finish that exact interrupted write.
++import {readFileSync,writeFileSync,mkdirSync,existsSync,renameSync,lstatSync,realpathSync} from 'node:fs';
++import {resolve,join} from 'node:path';
++import {createHash} from 'node:crypto';
++const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
++const need=(v,m)=>{if(!v)throw Error('Step 5 certified aggregation: '+m);};
++const read=p=>JSON.parse(readFileSync(p,'utf8'));
++const cache=(root,run)=>join(resolve(root),'research',`${run}-proof-contracts.json`);
++const directory=(root,run,round)=>join(resolve(root),'research',`${run}-step5-v2`,'certified-contract-aggregations',`gate-${round}`);
++function merged(run,inputs){
++ const scope=[],contracts={};
++ for(const bytes of inputs){const d=JSON.parse(bytes);need(d.version===1&&Array.isArray(d.scope)&&d.contracts&&typeof d.contracts==='object'&&!Array.isArray(d.contracts),'invalid contract input');
++  need(Object.keys(d.contracts).every(id=>d.scope.includes(id)),'out-of-scope contract');
++  for(const id of d.scope){need(typeof id==='string'&&!scope.includes(id),'duplicate aggregate subject');scope.push(id);if(d.contracts[id]!=null)contracts[id]=d.contracts[id];}}
++ return JSON.stringify({version:1,level:run,scope,contracts},null,2)+'\n';
++}
++function archive(dir,bytes){mkdirSync(dir,{recursive:true});const path=join(dir,`${hash(bytes)}.json`);if(existsSync(path))need(readFileSync(path,'utf8')===bytes,'immutable archive conflict');else writeFileSync(path,bytes,{flag:'wx'});return {path,sha256:hash(bytes)};}
++export function stageCertifiedContractAggregation(root,run,round,prior){
++ need(prior?.run===run&&prior.phase==='gate'&&prior.round===round-1&&Number.isSafeInteger(round)&&round>=2,'not a consecutive native gate certificate');
++ const path=cache(root,run),before=readFileSync(path,'utf8');need(prior.evidence?.[path]===hash(before),'prior current cache pin does not match actual preimage');
++ const native=join(resolve(root),'research',`${run}-step5-v2`,`certification-${prior.phase}-${prior.round}.json`),nativeBytes=readFileSync(native,'utf8');
++ need(JSON.stringify(read(native))===JSON.stringify(prior),'prior immutable native certificate differs');
++ const frontier=read(join(resolve(root),'research',`${run}-step5-v2`,'frontier.json'));
++ const batches=frontier.batches.map(b=>String(b.id)).sort((a,b)=>Number(a)-Number(b));
++ need(frontier.run===run&&batches.length===81&&batches.every((b,i)=>b===String(i+1)),'not the complete 81-batch frontier');
++ const dir=directory(root,run,round),inputs=batches.map(batch=>{
++  const path=join(resolve(root),'research',`${run}-batch-${batch}.proof-contracts.json`),bytes=readFileSync(path,'utf8');return {path,...archive(dir,bytes),carrier:path};
++ });
++ // Archive.path is deliberately distinct from the mutable carrier.
++ const after=merged(run,inputs.map(i=>readFileSync(i.path,'utf8')));
++ const beforeFile=archive(dir,before),afterFile=archive(dir,after),priorFile=archive(dir,nativeBytes);
++ const record={version:1,kind:'native-certified-contract-aggregation',run,phase:'gate',round,cache_path:path,before:beforeFile,after:afterFile,prior_certificate:{path:native,sha256:hash(nativeBytes),archive:priorFile.path},inputs:inputs.map(i=>({carrier:i.carrier,archive:i.path,sha256:i.sha256})),current_source_review_granted:false};
++ const evidence=Object.fromEntries([beforeFile,afterFile,priorFile,...inputs.map(i=>({path:i.path,sha256:i.sha256})),{path:native,sha256:hash(nativeBytes)}].map(i=>[i.path,i.sha256]));
++ // The snapshot must still be the actual producer input after all archives exist.
++ for(const i of record.inputs)need(hash(readFileSync(i.carrier,'utf8'))===i.sha256,'input changed while staging');
++ return {record,evidence};
++}
++export function validateCertifiedContractAggregation(root,run,certificate,{current=true,installed=false}={}){
++ const r=certificate.contract_aggregation;
++ need(r?.version===1&&r.kind==='native-certified-contract-aggregation'&&r.run===run&&r.phase==='gate'&&certificate.phase==='gate'&&r.round===certificate.round&&r.round>=2
++  &&r.current_source_review_granted===false&&r.cache_path===cache(root,run),'malformed aggregation intent');
++ const dir=directory(root,run,r.round),bytes=entry=>{
++  const p=resolve(entry.path??entry.archive);need(p.startsWith(dir+'/')&&lstatSync(p).isFile()&&!lstatSync(p).isSymbolicLink()&&realpathSync(p).startsWith(realpathSync(dir)+'/'),'outside/nonregular immutable aggregate archive');
++  const value=readFileSync(p,'utf8');need(hash(value)===entry.sha256&&certificate.evidence?.[p]===entry.sha256,'changed/unbound immutable aggregation bytes');return value;
++ };
++ const before=bytes(r.before),after=bytes(r.after),prior=bytes({path:r.prior_certificate.archive,sha256:r.prior_certificate.sha256});
++ const previous=JSON.parse(prior),{sha256,...payload}=previous;
++ need(sha256===hash(payload)&&previous.version===2&&previous.run===run&&previous.phase==='gate'&&previous.round===r.round-1
++  &&previous.evidence?.[r.cache_path]===r.before.sha256&&r.prior_certificate.path===join(resolve(root),'research',`${run}-step5-v2`,`certification-gate-${r.round-1}.json`)
++  &&readFileSync(r.prior_certificate.path,'utf8')===prior&&certificate.evidence?.[r.prior_certificate.path]===r.prior_certificate.sha256,'unbound exact prior native certificate/cache');
++ need(Array.isArray(r.inputs)&&r.inputs.length===81,'missing aggregate inputs');
++ for(const [i,input]of r.inputs.entries())need(input.carrier===join(resolve(root),'research',`${run}-batch-${i+1}.proof-contracts.json`)
++  &&(!current||hash(readFileSync(input.carrier,'utf8'))===input.sha256),'current aggregate input changed');
++ need(merged(run,r.inputs.map(i=>bytes({path:i.archive,sha256:i.sha256})))===after
++  &&certificate.evidence?.[r.cache_path]===r.after.sha256,'non-deterministic output or missing current cache pin');
++ const live=readFileSync(r.cache_path,'utf8');need(installed?live===after:live===before||live===after,'arbitrary cache edit is not a resumable native write');
++ const evidence={...certificate.evidence};delete evidence[r.cache_path];
++ return {record:r,before,after,evidence,alreadyInstalled:live===after};
++}
++export function completeCertifiedContractAggregation(root,run,certificate,{verifyOtherEvidence}={}){
++ const value=validateCertifiedContractAggregation(root,run,certificate);
++ need(typeof verifyOtherEvidence==='function','ordinary evidence verifier is required');verifyOtherEvidence(value.evidence);
++ // The immutable NEW certificate is the write-ahead intent, not a replacement
++ // for source/context/closure checks performed by the caller before this step.
++ const saved=join(resolve(root),'research',`${run}-step5-v2`,`certification-gate-${certificate.round}.json`);
++ need(existsSync(saved)&&JSON.stringify(read(saved))===JSON.stringify(certificate),'missing exact frozen native certificate intent');
++ if(!value.alreadyInstalled){const tmp=`${value.record.cache_path}.${process.pid}.tmp`;writeFileSync(tmp,value.after,{flag:'wx'});renameSync(tmp,value.record.cache_path);}
++ return value.record;
++}
+--- /dev/null
++++ b/tools/step5-certified-contract-aggregation.test.mjs
+@@ -0,0 +1,25 @@
++import test from 'node:test';import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync} from 'node:fs';import {join,dirname} from 'node:path';import {tmpdir} from 'node:os';import {createHash} from 'node:crypto';import {spawnSync} from 'node:child_process';
++import {stageCertifiedContractAggregation,validateCertifiedContractAggregation,completeCertifiedContractAggregation} from './step5-certified-contract-aggregation.mjs';
++const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex'),run='native-cache-fixture';
++function fixture(t){const root=mkdtempSync(join(tmpdir(),'certified-cache-'));t.after(()=>rmSync(root,{recursive:true,force:true}));const put=(p,v)=>{mkdirSync(dirname(p),{recursive:true});writeFileSync(p,typeof v==='string'?v:JSON.stringify(v,null,2)+'\n');};
++ const dir=join(root,'research',`${run}-step5-v2`),cache=join(root,'research',`${run}-proof-contracts.json`),ids=['lem-one'];
++ put(join(dir,'frontier.json'),{run,batches:Array.from({length:81},(_,i)=>({id:String(i+1),items:i?[]:ids}))});
++ const carriers=Array.from({length:81},(_,i)=>join(root,'research',`${run}-batch-${i+1}.proof-contracts.json`));
++ for(const [i,p]of carriers.entries())put(p,{version:1,scope:i?[]:ids,contracts:i?{}:{'lem-one':{kind:'lemma',boundaries:[{case:'empty',evidence:'Old exact reviewed metadata.'}]}}});
++ const before=JSON.stringify({version:1,level:run,scope:ids,contracts:{'lem-one':{kind:'lemma',boundaries:[{case:'empty',evidence:'Old exact reviewed metadata.'}]}}},null,2)+'\n';put(cache,before);
++ const prior={version:2,run,phase:'gate',round:1,items:[],evidence:{[cache]:hash(before)}};prior.sha256=hash(prior);put(join(dir,'certification-gate-1.json'),prior);put(join(dir,'certification.json'),prior);
++ const d=JSON.parse(readFileSync(carriers[0]));d.contracts['lem-one'].boundaries[0].evidence='A genuine native metadata successor with the complete actual focused review.';put(carriers[0],d);
++ const stage=()=>stageCertifiedContractAggregation(root,run,2,prior);
++ const candidate=s=>{const c={version:2,run,phase:'gate',round:2,items:[],evidence:{...prior.evidence,...s.evidence,[cache]:s.record.after.sha256},contract_aggregation:s.record};c.sha256=hash(c);return c;};
++ const freeze=c=>put(join(dir,'certification-gate-2.json'),c),verify=e=>{for(const [p,h]of Object.entries(e))assert.equal(hash(readFileSync(p,'utf8')),h,p);};
++ return {root,dir,cache,carriers,before,prior,put,stage,candidate,freeze,verify};}
++test('native staged aggregation changes no live cache and matches the ordinary merger exactly',t=>{const f=fixture(t),s=f.stage();assert.equal(readFileSync(f.cache,'utf8'),f.before);const out=join(f.root,'ordinary-merged.json');const r=spawnSync(process.execPath,[new URL('./merge-proof-contracts.mjs',import.meta.url).pathname,'--level',run,out,...f.carriers],{encoding:'utf8'});assert.equal(r.status,0,r.stderr);assert.equal(hash(readFileSync(out,'utf8')),s.record.after.sha256);assert.equal(s.record.inputs.length,81);assert.equal(s.record.current_source_review_granted,false);});
++test('frozen intent completes exact cache and is idempotent; live old certificate is untouched',t=>{const f=fixture(t),s=f.stage(),c=f.candidate(s),old=readFileSync(join(f.dir,'certification.json'),'utf8');assert.throws(()=>completeCertifiedContractAggregation(f.root,run,c,{verifyOtherEvidence:f.verify}),/frozen native certificate intent/);f.freeze(c);completeCertifiedContractAggregation(f.root,run,c,{verifyOtherEvidence:f.verify});assert.equal(hash(readFileSync(f.cache,'utf8')),s.record.after.sha256);completeCertifiedContractAggregation(f.root,run,c,{verifyOtherEvidence:f.verify});assert.equal(readFileSync(join(f.dir,'certification.json'),'utf8'),old);});
++test('evidence failure before cache write preserves exact old cache and resumable intent',t=>{const f=fixture(t),s=f.stage(),c=f.candidate(s);f.freeze(c);assert.throws(()=>completeCertifiedContractAggregation(f.root,run,c,{verifyOtherEvidence:()=>{throw Error('ordinary evidence failure');}}),/ordinary evidence failure/);assert.equal(readFileSync(f.cache,'utf8'),f.before);completeCertifiedContractAggregation(f.root,run,c,{verifyOtherEvidence:f.verify});assert.equal(hash(readFileSync(f.cache,'utf8')),s.record.after.sha256);});
++test('arbitrary cache edit before staging is rejected without a new certificate',t=>{const f=fixture(t);f.put(f.cache,'arbitrary');assert.throws(f.stage,/prior current cache pin/);});
++for(const mode of ['cache','input','output-archive','prior','missing-input','missing-current-pin','wrong-round','grant'])test(`native aggregation rejects ${mode} forgery`,t=>{const f=fixture(t),s=f.stage(),c=f.candidate(s);f.freeze(c);
++ if(mode==='cache')f.put(f.cache,'arbitrary');if(mode==='input')f.put(f.carriers[0],'{}');if(mode==='output-archive')f.put(s.record.after.path,'{}');if(mode==='prior')f.put(join(f.dir,'certification-gate-1.json'),'{}');if(mode==='missing-input')c.contract_aggregation.inputs.pop();if(mode==='missing-current-pin')delete c.evidence[f.cache];if(mode==='wrong-round')c.contract_aggregation.round=3;if(mode==='grant')c.contract_aggregation.current_source_review_granted=true;
++ assert.throws(()=>validateCertifiedContractAggregation(f.root,run,c));});
++test('historical aggregation inputs survive later legitimate native metadata, while saved-current retry refuses it',t=>{const f=fixture(t),s=f.stage(),c=f.candidate(s);f.freeze(c);completeCertifiedContractAggregation(f.root,run,c,{verifyOtherEvidence:f.verify});f.put(f.carriers[0],'{}');assert.ok(validateCertifiedContractAggregation(f.root,run,c,{current:false,installed:true}));assert.throws(()=>validateCertifiedContractAggregation(f.root,run,c),/current aggregate input/);});
++test('an active new certificate cannot point at the old preimage',t=>{const f=fixture(t),c=f.candidate(f.stage());assert.throws(()=>validateCertifiedContractAggregation(f.root,run,c,{current:false,installed:true}),/arbitrary cache edit/);});
+--- a/tools/step5-gate-aggregation-history.test.mjs
++++ b/tools/step5-gate-aggregation-history.test.mjs
+@@ -5,9 +5,9 @@
+ import {tmpdir} from 'node:os';
+ import {createHash} from 'node:crypto';
+ import {freezeFrontier} from './step5-rounds.mjs';
+-import {prepareGateRepairPack,verifyCompletedImpact,verifyCertification,reviewContextHashes,collect,workerLabel} from './step5-workflow.mjs';
+-import {itemHashGuard} from './item-hash.mjs';
+-import {validateGateAggregationHistory,recordGateAggregationHistory,gateAggregationEvidenceReference} from './step5-gate-aggregation-history.mjs';
++import {prepareGateRepairPack,verifyCompletedImpact,verifyCertification,reviewContextHashes,collect,workerLabel,advanceImpact,certify} from './step5-workflow.mjs';
++import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
++import {validateGateAggregationHistory,recordGateAggregationHistory,gateAggregationEvidenceReference,loadGateAggregationHistory} from './step5-gate-aggregation-history.mjs';
+ const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
+ const run='test-gate-aggregation';
+ function fixture(){
+@@ -111,3 +111,35 @@
+  for(const unit of pack.units){const label=workerLabel('gate',1,unit);f.put(`research/${run}-step5-v2/${label}.json`,{run,phase:'gate',round:1,unit,input_sha256:hash(pack),decisions:[],reviews:pack.assignments[unit].map(id=>({id,disposition:'unaffected',...contexts[id],reason:'Actual detailed native source and consumer review of the current proof and interfaces.',uncertain:false,source_urls:[],familiar:true})),created_items:[],downstream:[],ledger_updates:[],gate_resolutions:(pack.gateAssignments[unit]??[]).map(d=>({index:d.index,reason:'The actual assigned current contract diagnostic is resolved in this focused fixture without waiving any gate.',uncertain:false,source_urls:[],familiar:true})),supporting_evidence:unit==='1'?{[f.cache]:f.oldHash}:{}});f.put(`research/${run}-dispatch/alpha-repair-${label}.result.json`,{run,role:'alpha-repair',label,covers:[unit],ok:true,model:'gpt-6.1-sol',provider_effort:'high'});}
+  assert.throws(()=>collect(f.root,run,'gate',1),/supporting metadata preimage unavailable/);
+  }finally{process.chdir(cwd);f.cleanup();}});
++
++function nativeGate2Fixture(){
++ const f=fixture(),prefix=`research/${run}-step5-v2/`,text=id=>readFileSync(join(f.root,`items/${id}.md`),'utf8');
++ recordGateAggregationHistory(f.root,run,f.payload);
++ const current=Object.fromEntries(f.ids.map(id=>[id,itemHashGuard(text(id))]));
++ f.put(prefix+'baseline.json',current);f.put(prefix+'step4-verdicts.json',[]);
++ const contextHasher=(_root,ids)=>new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(text(id)),context_sha256:'c'.repeat(64)}]));
++ const evidence={...loadGateAggregationHistory(f.root,run).evidence,[f.cache]:f.oldHash,[join(f.root,f.cache)]:hash(readFileSync(join(f.root,f.cache),'utf8'))};
++ for(const name of ['baseline.json','step4-verdicts.json'])evidence[join(f.root,prefix+name)]=hash(readFileSync(join(f.root,prefix+name),'utf8'));
++ const prior={version:2,run,phase:'gate',round:1,items:f.ids.map(id=>({id,guard_sha256:current[id],...contextHasher(f.root,[id]).get(id)})),changed:[],creations:[],evidence};prior.sha256=hash(prior);f.put(prefix+'certification-gate-1.json',prior);f.put(prefix+'certification.json',prior);
++ const cacheBefore=readFileSync(join(f.root,f.cache),'utf8'),carrier=`research/${run}-batch-1.proof-contracts.json`,contract=JSON.parse(readFileSync(join(f.root,carrier),'utf8'));contract.contracts[f.ids[0]].boundaries[0].reason='An actual native metadata-only successor with current focused source justification.';f.put(carrier,contract);
++ const pack=prepareGateRepairPack(f.root,run,'gate',2,[{id:'proof-contract',code:1,output:'ERROR citation-use-unmapped [lem-supplier]: current citation metadata finding'}]);const contexts=reviewContextHashes(f.root,f.ids);
++ for(const unit of pack.units){const label=workerLabel('gate',2,unit);f.put(prefix+label+'.json',{run,phase:'gate',round:2,unit,input_sha256:hash(pack),decisions:[],reviews:pack.assignments[unit].map(id=>({id,disposition:'unaffected',...contexts[id],reason:'Actual detailed fixture native source and consumer review of the current proof and interfaces.',uncertain:false,source_urls:[],familiar:true})),created_items:[],downstream:[],ledger_updates:[],gate_resolutions:(pack.gateAssignments[unit]??[]).map(d=>({index:d.index,reason:'The actual assigned current metadata diagnostic is resolved without waiving any gate.',uncertain:false,source_urls:[],familiar:true})),supporting_evidence:{}});f.put(`research/${run}-dispatch/alpha-repair-${label}.result.json`,{run,role:'alpha-repair',label,covers:[unit],ok:true,model:'gpt-6.1-sol',provider_effort:'high'});}
++ assert.equal(advanceImpact(f.root,run,'gate',2).complete,true);
++ return {...f,prefix,prior,cacheBefore,contextHasher};
++}
++test('real native certify stages current aggregation; saved retry safely completes a crash before cache/live-pointer writes',()=>{const cwd=process.cwd(),f=nativeGate2Fixture();process.chdir(f.root);try{
++ const c=certify(f.root,run,'gate',2,{contextHasher:f.contextHasher});assert.equal(c.contract_aggregation.inputs.length,81);const after=readFileSync(join(f.root,f.cache),'utf8');assert.notEqual(after,f.cacheBefore);assert.equal(hash(after),c.evidence[join(f.root,f.cache)]);assert.equal(c.evidence[f.cache],f.oldHash);
++ // Simulate process termination after freezing this exact native certificate
++ // intent but before its two final writes. These are fixture files only.
++ f.put(f.cache,f.cacheBefore);f.put(f.prefix+'certification.json',f.prior);
++ const retry=certify(f.root,run,'gate',2,{contextHasher:f.contextHasher});assert.equal(retry.sha256,c.sha256);assert.equal(readFileSync(join(f.root,f.cache),'utf8'),after);assert.equal(verifyCertification(f.root,run).sha256,c.sha256);
++ }finally{process.chdir(cwd);f.cleanup();}});
++for(const mode of ['source','context','closure','cache','metadata'])test(`real saved native certify refuses ${mode} drift before completing staged cache`,()=>{const cwd=process.cwd(),f=nativeGate2Fixture();process.chdir(f.root);try{
++ certify(f.root,run,'gate',2,{contextHasher:f.contextHasher});f.put(f.cache,f.cacheBefore);f.put(f.prefix+'certification.json',f.prior);
++ if(mode==='source')f.put(`items/${f.ids[0]}.md`,readFileSync(join(f.root,`items/${f.ids[0]}.md`),'utf8')+'Later actual source edit.\n');
++ if(mode==='closure'){const p=f.prefix+'gate-2-progress.json',d=JSON.parse(readFileSync(join(f.root,p),'utf8'));d.complete=false;f.put(p,d);}
++ if(mode==='cache')f.put(f.cache,'arbitrary cache edit');
++ if(mode==='metadata')f.put(`research/${run}-batch-1.proof-contracts.json`,'{}');
++ const before=readFileSync(join(f.root,f.cache),'utf8');const contextHasher=mode==='context'?(_r,ids)=>new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(f.root,`items/${id}.md`),'utf8')),context_sha256:'f'.repeat(64)}])):f.contextHasher;
++ assert.throws(()=>certify(f.root,run,'gate',2,{contextHasher}));assert.equal(readFileSync(join(f.root,f.cache),'utf8'),before,'refusal must not write cache');
++ }finally{process.chdir(cwd);f.cleanup();}});
+--- a/tools/step5-initial-published-maintenance.test.mjs
++++ b/tools/step5-initial-published-maintenance.test.mjs
+@@ -1,6 +1,6 @@
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+-import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync} from 'node:fs';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync,readdirSync,copyFileSync} from 'node:fs';
+ import {join} from 'node:path';
+ import {tmpdir} from 'node:os';
+ import {createHash} from 'node:crypto';
+@@ -329,3 +329,28 @@
+  if(mode==='deletion')rmSync(join(f.root,`items/${id}.md`));
+  const r=f.guard();assert.equal(r.status,1,r.stdout+r.stderr);assert.ok(JSON.parse(r.stdout).errors.length>0);
+ });
++
++// CLI fixture context hashes are explicitly mocked; no scientific/native review
++// coverage is claimed. Actual ordinary-publication provenance stays real below.
++function ordinaryClosureFixture(t){
++ const f=fixture(t);originalOrdinaryCertificate(f);
++ writeCurrentCompatibilityCertificate(f,[{id:consumer,guard_sha256:itemHashGuard(f.draft),item_sha256:itemHashJudge(f.draft),context_sha256:'c'.repeat(64)}]);
++ f.put(`research/${run}-judge.jsonl`,JSON.parse(readFileSync(join(f.root,dir,'step4-verdicts.json'),'utf8')).map(x=>JSON.stringify(x)).join('\n')+'\n');
++ const tools=join(f.root,'tools');mkdirSync(tools,{recursive:true});
++ for(const name of readdirSync(new URL('.',import.meta.url)))if(name.endsWith('.mjs'))copyFileSync(new URL(name,import.meta.url),join(tools,name));
++ f.put('tools/context-hash-pool.mjs',`import {readFileSync} from 'node:fs';import {join} from 'node:path';import {itemHashJudge} from './item-hash.mjs';export async function buildCurrentContextHashes(ids,{cwd}){return ids.map(id=>({ok:true,id,item:itemHashJudge(readFileSync(join(cwd,'items',id+'.md'),'utf8')),context:'c'.repeat(64)}));}`);
++ const invoke=(selective=true)=>spawnSync(process.execPath,[join(tools,'level-coverage.mjs'),'--judge-only','--verify-current-context','--run',run,...(selective?['--step5-run',run]:[]),'--judge-ledger',`research/${run}-judge.jsonl`,`research/${run}-batch-1.pages.json`,`research/${run}-batch-2.pages.json`,'--json'],{cwd:f.root,encoding:'utf8',maxBuffer:8*1024*1024});
++ return {...f,invoke};
++}
++test('real closure CLI reports authenticated ordinary maintenance separately with zero invented judge rows',t=>{
++ const f=ordinaryClosureFixture(t),r=f.invoke();assert.equal(r.status,0,r.stdout+r.stderr);const out=JSON.parse(r.stdout);
++ assert.equal(out.summary.scope,2);assert.equal(out.summary.judge_scope,1);assert.equal(out.summary.judge_complete,1);assert.equal(out.summary.historical_ordinary_published_exclusions,1);assert.deepEqual(out.historical_ordinary_published_exclusions,[id]);assert.ok(!out.judge_coverage.some(r=>r.id===id));
++});
++for(const mode of ['source','status','receipt','missing-record','no-selective-policy'])test(`real closure CLI rejects ordinary-maintenance ${mode} misuse`,t=>{
++ const f=ordinaryClosureFixture(t);
++ if(mode==='source')f.put(`items/${id}.md`,f.after+'\nLater source change.\n');
++ if(mode==='status')f.put(`items/${id}.md`,f.after.replace('status: published','status: draft'));
++ if(mode==='receipt')f.put(f.currentPath,{...f.successor,changed:'unlicensed receipt'});
++ if(mode==='missing-record'){const p=join(dir,'certification.json'),c=JSON.parse(readFileSync(join(f.root,p),'utf8'));delete c.ordinary_published_baseline_exclusions;delete c.sha256;c.sha256=hash(c);f.put(p,c);}
++ const r=f.invoke(mode!=='no-selective-policy');assert.notEqual(r.status,0);const out=JSON.parse(r.stdout);assert.ok(!out.historical_ordinary_published_exclusions?.includes(id));assert.ok(out.errors.some(e=>['judge-coverage-missing','step5-certification-invalid','step5-judge-policy-invalid'].includes(e.code)));
++});
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -15,6 +15,7 @@
+ import { loadOwnerReviewWithdrawal, withdrawnOwnerReport, withdrawalAllowsFreshPass, freshWithdrawalEvidence } from './step5-owner-review-withdrawal.mjs';
+ import { loadReportingOwnerRecovery, reportingRecoveryDuties, reportingSessionBinding, assertReportingSessionCompatibility } from './step5-reporting-owner-recovery.mjs';
+ import { supportingQuoteHistory } from './step5-quote-history.mjs';
++import { stageCertifiedContractAggregation, validateCertifiedContractAggregation, completeCertifiedContractAggregation } from './step5-certified-contract-aggregation.mjs';
+ import { loadGateAggregationHistory, gateAggregationEvidenceReference } from './step5-gate-aggregation-history.mjs';
+ import { supportingSiblingContractHistory } from './step5-sibling-contract-history.mjs';
+ import { loadInitialMetadataHistory, loadRepeatMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+@@ -2212,6 +2213,7 @@
+       &&typeof entry.reason==='string'&&entry.reason.trim().length>=40,'malformed created-helper maintenance basis');
+     maintenanceSeen.add(entry.id);
+   }
++  if(row.contract_aggregation)validateCertifiedContractAggregation(root,run,row,{current:false,installed:true});
+   verifyEvidence(row.evidence,{root,run,certificate:row});
+   verifyInitialPublishedBaselineExclusions(root,run,row);
+   return row;
+@@ -2220,7 +2222,9 @@
+ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={}) {
+   const savedPath=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`certification-${phase}-${round}.json`));
+   if(existsSync(savedPath)) {
+-    const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence,{root,run});
++    const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');
++    const staged=saved.contract_aggregation?validateCertifiedContractAggregation(root,run,saved):null;
++    verifyEvidence(staged?.evidence??saved.evidence,{root,run});
+     verifyInitialPublishedBaselineExclusions(root,run,saved,{current:true});
+     const frontier=gateFrontier(root,run),maintained=new Set((saved.maintenance_certifications??[]).map(row=>row.id));
+     const scoped=saved.items.filter(row=>frontier.has(row.id)||maintained.has(row.id));
+@@ -2228,6 +2232,7 @@
+     const contexts=contextHasher(root,scoped.map(row=>row.id));
+     for(const row of scoped){const now=contexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`stale completed certification context ${row.id}`);}
+     verifyCompletedImpact(root,run,phase,round);
++    if(staged){completeCertifiedContractAggregation(root,run,saved,{verifyOtherEvidence:evidence=>verifyEvidence(evidence,{root,run})});verifyEvidence(saved.evidence,{root,run});}
+     atomic(join(workflowDir(root,run),'certification.json'),saved);return saved;
+   }
+   const advanced=advanceImpact(root,run,phase,round);
+@@ -2279,8 +2284,9 @@
+   }
+   if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
+   const aggregation=phase==='gate'?loadGateAggregationHistory(root,run):null;
+-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence,...aggregation?.evidence};
+-  if(aggregation)evidence[resolve(root,aggregation.cache)]=digest(readFileSync(resolve(root,aggregation.cache),'utf8'));
++  const stagedAggregation=aggregation&&round>=2?stageCertifiedContractAggregation(root,run,round,prior):null;
++  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence,...aggregation?.evidence,...stagedAggregation?.evidence};
++  if(aggregation)evidence[resolve(root,aggregation.cache)]=stagedAggregation?.record.after.sha256??digest(readFileSync(resolve(root,aggregation.cache),'utf8'));
+   // Retain the original relative pin as historical evidence; the new exact
+   // current cache pin and immutable transition are separately bound above.
+   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
+@@ -2301,10 +2307,15 @@
+     frozen(join(dir,`threshold-${round}.json`),threshold);
+     const p=join(dir,`threshold-${round}.json`);evidence[p]=digest(readFileSync(p,'utf8'));
+   }
++  if(stagedAggregation)certificate.contract_aggregation=stagedAggregation.record;
+   if(publishedBaseline)certificate.ordinary_published_baseline_exclusions=publishedBaseline.record;
+   verifyInitialPublishedBaselineExclusions(root,run,certificate,{current:true});
+   certificate.sha256=digest(certificate);
++  // The frozen candidate is a write-ahead intent. A failed derivative write
++  // leaves the live old certificate untouched and has a strict saved retry.
++  if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped aggregation staging');
+   frozen(join(dir,`certification-${phase}-${round}.json`),certificate);
++  if(stagedAggregation){completeCertifiedContractAggregation(root,run,certificate,{verifyOtherEvidence:evidence=>verifyEvidence(evidence,{root,run})});verifyEvidence(certificate.evidence,{root,run});}
+   atomic(join(dir,'certification.json'),certificate);
+   return certificate;
+ }

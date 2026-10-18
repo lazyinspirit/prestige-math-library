@@ -1,0 +1,56 @@
+---
+verification:
+  precheck: pass
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/lem-sard-slicing-for-compact-null-sections.json
+id: lem-sard-slicing-for-compact-null-sections
+kind: lemma
+title: "Compact null sections imply a compact set is null"
+status: published
+dependency_level: 0
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-null-and-content-zero-in-rn,
+       thm-lebesgue-number-lemma]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+sources:
+  scraped: []
+  references:
+    - title: "Marco Gualtieri, Topology I: Smooth Manifolds, cumulative notes"
+      url: "https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes.pdf"
+---
+
+## Statement
+
+Let $n\ge 1$, let $a\le b$, and let $K\subseteq [a,b]\times\mathbb R^n$ be compact. For each
+$t\in[a,b]$, write
+
+$$ K_t:=\{y\in\mathbb R^n:(t,y)\in K\}. $$
+
+If every section $K_t$ is a null subset of $\mathbb R^n$, then $K$ is a null
+subset of $\mathbb R^{n+1}$.
+
+## Facts & Assumptions
+
+**Given:** An integer $n\ge 1$, real numbers $a\le b$, and a compact set $K\subseteq [a,b]\times\mathbb R^n$ whose sections $K_t$ are null for every $t\in[a,b]$.
+
+[F1] Euclidean nullity means that for every $\varepsilon>0$ the set can be covered by countably many closed cubes of total volume below $\varepsilon$ ([[def-null-and-content-zero-in-rn]]).
+
+[L1] Every open cover of a compact metric space has a Lebesgue number ([[thm-lebesgue-number-lemma]]).
+
+## Proof
+**Proof technique:** direct.
+
+1.1 If $a=b$, compactness bounds $K$ inside $\{a\}\times[-R,R]^n$ for some $R>0$. Divide the $n$-dimensional base into a finite grid of cubes of side at most $\delta$ and cover each corresponding point of $K$ by an $(n+1)$-cube of side $\delta$ centred in the first coordinate at $a$. The number of grid cubes is at most $(2R/\delta+2)^n$, so their total $(n+1)$-volume is at most $(2R+2\delta)^n\delta\to0$. By [F1], $K$ is null. Assume henceforth that $a<b$. [F1, given, cases]
+
+1.2 Fix $\varepsilon>0$, put $L:=b-a+1$, and set $B:=\varepsilon/(2^{n+2}L)$. For a fixed $t$, nullity [F1] gives a sequence of closed cubes covering $K_t$, with sides $\ell_i$ and total volume below $B/4$. Enlarge cube $i$ concentrically to an open cube of side $\ell_i+2h_i$, where $h_i=\min\{1,B2^{-i-4}/(3^n(1+\ell_i)^{n-1})\}$ for $i\ge0$. The binomial formula gives $(\ell_i+2h_i)^n-\ell_i^n\le3^nh_i(1+\ell_i)^{n-1}\le B2^{-i-4}$. Thus the enlarged open cover has total covering cost below $B/4+B/8<B$, where an open cube of side $s$ has covering cost $s^n$. Compactness of $K_t$ supplies a finite subcover, still of cost below $B$. This proves existence separately for each $t$; no family of chosen covers indexed by $t$ is formed. [F1, given, construct, algebra]
+
+2.1 Let $\mathcal P$ be the set of all pairs $(I,\mathcal Q)$ such that $I$ is an open interval, $\mathcal Q$ is a finite list of open $n$-cubes of total covering cost below $B$, and $K\cap(I\times\mathbb R^n)\subseteq I\times O_{\mathcal Q}$, where $O_{\mathcal Q}$ is their union. Every $t\in[a,b]$ lies in the interval of at least one such pair. Indeed, take just one finite cover of $K_t$ supplied by step 1.2 and write $O$ for its union. The open sets $\mathbb R\times O$ and $\{(x,y):|x-t|>1/r\}$ for positive integers $r$ cover $K$: points over $t$ lie in the first, and every other point lies in one of the latter. A finite subcover exists. Taking $r$ at least as large as its finitely many indices shows that $K\cap((t-1/r,t+1/r)\times\mathbb R^n)$ lies in $\mathbb R\times O$. Thus this interval and the finite cube list belong to $\mathcal P$. This construction proves coverage by the set of all witnessed intervals without selecting one pair for every $t$. [step 1.2, given, construct]
+
+3.1 By [L1], the open cover $\{I:(I,\mathcal Q)\in\mathcal P\}$ of $[a,b]$ has a Lebesgue number. Take a finite partition into closed intervals $J_1,\ldots,J_r$ of positive length smaller than that number. For each of these finitely many intervals take a witnessing pair $(I_j,\mathcal Q_j)\in\mathcal P$ with $J_j\subseteq I_j$. Write $\widetilde Q_{j,1},\ldots,\widetilde Q_{j,m_j}$ for its list. Only finitely many witnesses are used, which needs no choice axiom. Then $\sum_j|J_j|=b-a<L$. For each prism $J_j\times\widetilde Q_{j,\ell}$, use the following subdivision. [L1, step 2.1, choose] Let $\lambda_j:=|J_j|$ and let $s_{j,\ell}$ be the side length of $\widetilde Q_{j,\ell}$. If $\lambda_j\ge s_{j,\ell}$, partition the interval direction into at most $\lceil \lambda_j/s_{j,\ell}\rceil$ pieces of length at most $s_{j,\ell}$; if $\lambda_j\le s_{j,\ell}$, partition each of the $n$ base directions into at most $\lceil s_{j,\ell}/\lambda_j\rceil$ pieces of length at most $\lambda_j$. In either case the prism is covered by finitely many closed $(n+1)$-cubes of total volume at most $$ 2^n\lambda_j s_{j,\ell}^n =2^n|J_j|\,\operatorname{vol}_n(\widetilde Q_{j,\ell}). $$ These cubes cover $K$, and their total volume is at most $$ 2^n\sum_{j=1}^r |J_j| \sum_{\ell=1}^{m_j}\operatorname{vol}_n(\widetilde Q_{j,\ell}) <2^nL\cdot \frac{\varepsilon}{2^{n+2}L}<\varepsilon. $$ By [F1], $K$ is null. [F1, L1, step 2.1, algebra]
+
+4.1 Therefore compact null sections imply the whole compact set is null. [step 1.1, step 3.1] ∎ 

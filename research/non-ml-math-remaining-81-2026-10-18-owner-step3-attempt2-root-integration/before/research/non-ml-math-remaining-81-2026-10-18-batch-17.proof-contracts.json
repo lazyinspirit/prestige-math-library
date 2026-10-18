@@ -1,0 +1,2342 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-it-finite-type-class-cardinality-bounds",
+    "lem-it-finite-codebook-covering-selection-law",
+    "lem-it-finite-random-bin-packing-bound",
+    "lem-it-finite-selected-codeword-markov-typicality",
+    "lem-it-wyner-ziv-auxiliary-cardinality-bound",
+    "lem-it-finite-wyner-ziv-function-convexity-continuity",
+    "thm-it-berger-tung-finite-multiterminal-inner-bound",
+    "thm-it-finite-alphabet-wyner-ziv-rate-distortion",
+    "ex-it-wyner-ziv-with-no-side-information",
+    "ex-it-wyner-ziv-lossless-slepian-wolf-endpoint",
+    "ex-it-berger-tung-lossless-slepian-wolf-special-case"
+  ],
+  "contracts": {
+    "lem-it-finite-type-class-cardinality-bounds": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-strongly-typical-set",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet, let $P$ be a probability vector on $\\mathcal A$ in the sense of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], and let $n\\ge1$. Write $\\operatorname{supp}(P):=\\{a\\in\\mathcal A:P(a)>0\\}$. For $a^n=(a_1,\\ldots,a_n)\\in\\mathcal A^n$, its empirical distribution is $\\widehat P_{a^n}(a):=n^{-1}|\\{t:a_t=a\\}|$. For $\\delta>0$, define the support-restricted strongly typical set by\n$$T_\\delta^{(n)}(P):=\\{a^n\\in\\operatorname{supp}(P)^n:|\\widehat P_{a^n}(a)-P(a)|\\le\\delta P(a)\\text{ for every }a\\text{ with }P(a)>0\\}.$$\nFor a finite joint law $P_{XA}$ and a fixed $x^n$, write $T_\\delta^{(n)}(P_{A|X}\\mid x^n):=\\{a^n:(x^n,a^n)\\in T_\\delta^{(n)}(P_{XA})\\}$. This conditional set is empty if $x^n$ is outside the support of $P_X$. Zero-probability letters are excluded exactly, so no logarithm of zero occurs in likelihood calculations on these sets.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the product law $q^{\\otimes n}$, every $a^n\\in T_q$ has probability $\\prod_a q(a)^{n_a}=\\exp(-nH(q))$, omitting zero-count coordinates. Since the total probability of $T_q$ is at most one, $|T_q|\\exp(-nH(q))\\le1$, which gives the upper bound.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "To bound the probability of $T_q$ below, compare it with an arbitrary attainable type $r$ with counts $m_a=nr(a)$. If $m_a>0=n_a$ for some $a$, then $\\Pr_{q^{\\otimes n}}(T_r)=0$. Otherwise let $k_a=m_a-n_a$ for each $a$ with $n_a>0$. The ratio is $\\frac{\\Pr_{q^{\\otimes n}}(T_r)}{\\Pr_{q^{\\otimes n}}(T_q)}=\\frac{\\prod_a n_a!}{\\prod_a m_a!}\\prod_{a:n_a>0}\\left(\\frac{n_a}{n}\\right)^{k_a}.$ For $k_a\\ge0$, the corresponding factor is at most $n^{-k_a}$ because $(n_a+1)\\cdots(n_a+k_a)\\ge n_a^{k_a}$. For $k_a=-s_a<0$, it is at most $n^{s_a}$ because $n_a(n_a-1)\\cdots(n_a-s_a+1)\\le n_a^{s_a}$. The equal-total-count relation gives $\\sum_{k_a>0}k_a=\\sum_{k_a<0}s_a$, so the product of these bounds is at most one. Thus $T_q$ has maximum probability among all type classes under $q^{\\otimes n}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each of the $m$ counts has at most $n+1$ values, so there are at most $(n+1)^m$ types. Their probabilities sum to one; since $T_q$ is a most probable type class by step 1.2, its probability is at least $(n+1)^{-m}$. Using $\\Pr(T_q)=|T_q|\\exp(-nH(q))$ proves the lower bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded. Independent item review: Under q^n all words of Tq have mass e^-nH(q); the count-factorial comparison makes q a most probable type, yielding the polynomial lower bound (1.1\u20132.1).",
+            "item_sha256": "b168bd9bf0419647cafadc551022ff98627488f127aa9053e6c22917fda48080",
+            "row_sha256": "7ac0b63ed89887bfa846030de1902f90d18f4e59dcb6c5e7cdab673fc0086fc5"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded. Independent item review: Under q^n all words of Tq have mass e^-nH(q); the count-factorial comparison makes q a most probable type, yielding the polynomial lower bound (1.1\u20132.1)."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: Under q^n all words of Tq have mass e^-nH(q); the count-factorial comparison makes q a most probable type, yielding the polynomial lower bound (1.1\u20132.1).",
+            "item_sha256": "b168bd9bf0419647cafadc551022ff98627488f127aa9053e6c22917fda48080",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: Under q^n all words of Tq have mass e^-nH(q); the count-factorial comparison makes q a most probable type, yielding the polynomial lower bound (1.1\u20132.1).",
+            "item_sha256": "b168bd9bf0419647cafadc551022ff98627488f127aa9053e6c22917fda48080",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: Under q^n all words of Tq have mass e^-nH(q); the count-factorial comparison makes q a most probable type, yielding the polynomial lower bound (1.1\u20132.1).",
+            "item_sha256": "b168bd9bf0419647cafadc551022ff98627488f127aa9053e6c22917fda48080",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: Under q^n all words of Tq have mass e^-nH(q); the count-factorial comparison makes q a most probable type, yielding the polynomial lower bound (1.1\u20132.1).",
+            "item_sha256": "b168bd9bf0419647cafadc551022ff98627488f127aa9053e6c22917fda48080",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: Under q^n all words of Tq have mass e^-nH(q); the count-factorial comparison makes q a most probable type, yielding the polynomial lower bound (1.1\u20132.1).",
+            "item_sha256": "b168bd9bf0419647cafadc551022ff98627488f127aa9053e6c22917fda48080",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved. Independent item review: Under q^n all words of Tq have mass e^-nH(q); the count-factorial comparison makes q a most probable type, yielding the polynomial lower bound (1.1\u20132.1).",
+            "item_sha256": "b168bd9bf0419647cafadc551022ff98627488f127aa9053e6c22917fda48080",
+            "row_sha256": "4904007a088ed87caeae39c96baf02986b0b4999879aa469211f5b30474341ab"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no reverse implication claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement makes no reverse implication claim. Independent item review: Under q^n all words of Tq have mass e^-nH(q); the count-factorial comparison makes q a most probable type, yielding the polynomial lower bound (1.1\u20132.1).",
+            "item_sha256": "b168bd9bf0419647cafadc551022ff98627488f127aa9053e6c22917fda48080",
+            "row_sha256": "05db4452faf9e1254b4b8035698d73744b01b358bb3b1af5510529dc7ab6b098"
+          }
+        }
+      ]
+    },
+    "lem-it-finite-codebook-covering-selection-law": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-strongly-typical-set",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet, let $P$ be a probability vector on $\\mathcal A$ in the sense of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], and let $n\\ge1$. Write $\\operatorname{supp}(P):=\\{a\\in\\mathcal A:P(a)>0\\}$. For $a^n=(a_1,\\ldots,a_n)\\in\\mathcal A^n$, its empirical distribution is $\\widehat P_{a^n}(a):=n^{-1}|\\{t:a_t=a\\}|$. For $\\delta>0$, define the support-restricted strongly typical set by\n$$T_\\delta^{(n)}(P):=\\{a^n\\in\\operatorname{supp}(P)^n:|\\widehat P_{a^n}(a)-P(a)|\\le\\delta P(a)\\text{ for every }a\\text{ with }P(a)>0\\}.$$\nFor a finite joint law $P_{XA}$ and a fixed $x^n$, write $T_\\delta^{(n)}(P_{A|X}\\mid x^n):=\\{a^n:(x^n,a^n)\\in T_\\delta^{(n)}(P_{XA})\\}$. This conditional set is empty if $x^n$ is outside the support of $P_X$. Zero-probability letters are excluded exactly, so no logarithm of zero occurs in likelihood calculations on these sets.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-finite-type-class-cardinality-bounds",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet of size $m$, let $n\\ge1$, and let $q$ be an attainable empirical distribution with integer counts $n_a=nq(a)$. Its type class $T_q:=\\{a^n\\in\\mathcal A^n:\\widehat P_{a^n}=q\\}$ satisfies\n$$(n+1)^{-m}\\exp(nH(q))\\le |T_q|\\le \\exp(nH(q)),$$\nwhere $H(q):=-\\sum_{a:q(a)>0}q(a)\\ln q(a)$ and $0\\ln0:=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\rho>0$ be any desired relative accuracy for a constructed joint type. For each positive-mass $x$, let $n_x$ be its count in $x^n$. Choose $\\delta<1/2$; then $n_x/n$ is within relative error $\\delta$ of $P_X(x)$, so for all sufficiently large $n$ every such $n_x$ is positive and grows linearly in $n$, uniformly over $x^n\\in T_\\delta^{(n)}(P_X)$. For each row, take floors of $n_xP_{U|X}(u|x)$ on its positive conditional support and distribute the fewer than $|\\mathcal U|$ remaining counts among those entries; set zero-conditional-probability counts to zero. Every resulting count differs from its target by at most $|\\mathcal U|$. As there are finitely many positive joint atoms, first choose $\\delta$ small and then $n$ large so that the joint type $q_{XU}(x,u)=(n_x/n)q_{U|X}(u|x)$ has relative error at most $\\rho$ on every positive atom of $P_{XU}$. Zero joint atoms receive zero counts. Thus the associated conditional type class is nonempty and its joint type lies in $T_\\rho^{(n)}(P_{XU})$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The conditional type class from step 1.1 has at least $\\prod_{x:P_X(x)>0}(n_x+1)^{-|\\mathcal U|}\\exp(n_xH(q_{U|x}))$ words by [F2]. Every word in it has the same $P_U^{\\otimes n}$ probability. Its marginal type $q_U$ is supported on $\\operatorname{supp}(P_U)$, and this probability is\n$$\\exp\\!\\left(n\\sum_{u:P_U(u)>0}q_U(u)\\ln P_U(u)\\right)=\\exp[-n(H(q_U)+D(q_U\\|P_U))].$$\nFor any finite probability vector, each entropy summand $-t\\ln t$ is continuous at zero because $t\\ln t\\to0$. The finite conditional-entropy sum expands as\n$$H_q(U|X)=-\\sum_{x,u:q(x,u)>0}q(x,u)\\ln\\frac{q(x,u)}{q_X(x)}=H(q_{XU})-H(q_X).$$\nOn $\\operatorname{supp}(P_U)$,\n$$D(r\\|P_U)=\\sum_{u:P_U(u)>0}r(u)\\ln r(u)-\\sum_{u:P_U(u)>0}r(u)\\ln P_U(u),$$\nso $D(r\\|P_U)$ is continuous even when some $r(u)=0$. The displayed identity makes $H_q(U|X)$ continuous in $q_{XU}$. Consequently $\\Phi(q):=H_q(U|X)-H(q_U)-D(q_U\\|P_U)$ is continuous at $P_{XU}$ on the simplex of laws supported by $P_{XU}$, including its boundary. Expanding the finite KL sum [F3] and the entropy formulas [F4]\u2013[F5] gives $I(X;U)=H(U)-H(U|X)$, so $\\Phi(P_{XU})=H(U|X)-H(U)=-I(X;U)$. Choose $\\rho<\\epsilon$ small enough that $\\Phi(q)\\ge-I(X;U)-\\eta/3$ whenever $q$ is within relative tolerance $\\rho$ of $P_{XU}$. The type-class bound and the product probability then give\n$$p_n(x^n)\\ge(n+1)^{-|\\mathcal X||\\mathcal U|}\\exp[-n(I(X;U)+\\eta/3)]$$\nuniformly over $x^n\\in T_\\delta^{(n)}(P_X)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By independence of the codewords, the probability that none of $M_n$ words lies in the conditional typical set is $(1-p_n(x^n))^{M_n}\\le e^{-M_np_n(x^n)}$. Choose the tolerances so that the exponent in step 2.1 leaves a positive gap below $R$; then $M_np_n(x^n)\\to\\infty$ uniformly, and the no-match probability tends to zero.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For a fixed $x^n$, let $A=T_\\epsilon^{(n)}(P_{XU}|x^n)$. The event that index $\\ell$ is the first successful index depends on codewords before $\\ell$ failing and the $\\ell$th codeword lying in $A$; those events are independent across codewords. Consequently, conditional on the first-success event at any $\\ell$, the selected word has law $P_U^{\\otimes n}(\\cdot|A)$, and averaging over $\\ell$ gives the same conditional law given a match. On each joint type class inside $A$, the marginal type of $U^n$ is fixed, so all its words have the same product probability; the conditional law is therefore uniform on that class.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded. Independent item review: Rounding positive conditional counts constructs a supported joint type, and a first successful IID draw has precisely the conditional product law, uniform within type (1.1\u20134.1).",
+            "item_sha256": "1f4eb4e3a777e7ae2c75538160e77297d8f322611e1897cbbc1e041142d2b028",
+            "row_sha256": "7ac0b63ed89887bfa846030de1902f90d18f4e59dcb6c5e7cdab673fc0086fc5"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: Rounding positive conditional counts constructs a supported joint type, and a first successful IID draw has precisely the conditional product law, uniform within type (1.1\u20134.1).",
+            "item_sha256": "1f4eb4e3a777e7ae2c75538160e77297d8f322611e1897cbbc1e041142d2b028",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: Rounding positive conditional counts constructs a supported joint type, and a first successful IID draw has precisely the conditional product law, uniform within type (1.1\u20134.1).",
+            "item_sha256": "1f4eb4e3a777e7ae2c75538160e77297d8f322611e1897cbbc1e041142d2b028",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: Rounding positive conditional counts constructs a supported joint type, and a first successful IID draw has precisely the conditional product law, uniform within type (1.1\u20134.1).",
+            "item_sha256": "1f4eb4e3a777e7ae2c75538160e77297d8f322611e1897cbbc1e041142d2b028",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: Rounding positive conditional counts constructs a supported joint type, and a first successful IID draw has precisely the conditional product law, uniform within type (1.1\u20134.1).",
+            "item_sha256": "1f4eb4e3a777e7ae2c75538160e77297d8f322611e1897cbbc1e041142d2b028",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: Rounding positive conditional counts constructs a supported joint type, and a first successful IID draw has precisely the conditional product law, uniform within type (1.1\u20134.1).",
+            "item_sha256": "1f4eb4e3a777e7ae2c75538160e77297d8f322611e1897cbbc1e041142d2b028",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved. Independent item review: Rounding positive conditional counts constructs a supported joint type, and a first successful IID draw has precisely the conditional product law, uniform within type (1.1\u20134.1).",
+            "item_sha256": "1f4eb4e3a777e7ae2c75538160e77297d8f322611e1897cbbc1e041142d2b028",
+            "row_sha256": "4904007a088ed87caeae39c96baf02986b0b4999879aa469211f5b30474341ab"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no reverse implication claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement makes no reverse implication claim. Independent item review: Rounding positive conditional counts constructs a supported joint type, and a first successful IID draw has precisely the conditional product law, uniform within type (1.1\u20134.1).",
+            "item_sha256": "1f4eb4e3a777e7ae2c75538160e77297d8f322611e1897cbbc1e041142d2b028",
+            "row_sha256": "05db4452faf9e1254b4b8035698d73744b01b358bb3b1af5510529dc7ab6b098"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "All steps reviewed: positive-support row rounding gives uniform conditional-type existence, finite entropy/KL continuity gives the covering exponent, and exponential codebooks dominate polynomial type factors. First-success conditioning has the product law conditioned on a match and is uniform on each conditional type. Zero source/conditional atoms are excluded; singleton alphabets and I=0 are covered by the positive rate gap. No AC or unresolved prerequisite."
+      }
+    },
+    "lem-it-finite-random-bin-packing-bound": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-strongly-typical-set",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet, let $P$ be a probability vector on $\\mathcal A$ in the sense of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], and let $n\\ge1$. Write $\\operatorname{supp}(P):=\\{a\\in\\mathcal A:P(a)>0\\}$. For $a^n=(a_1,\\ldots,a_n)\\in\\mathcal A^n$, its empirical distribution is $\\widehat P_{a^n}(a):=n^{-1}|\\{t:a_t=a\\}|$. For $\\delta>0$, define the support-restricted strongly typical set by\n$$T_\\delta^{(n)}(P):=\\{a^n\\in\\operatorname{supp}(P)^n:|\\widehat P_{a^n}(a)-P(a)|\\le\\delta P(a)\\text{ for every }a\\text{ with }P(a)>0\\}.$$\nFor a finite joint law $P_{XA}$ and a fixed $x^n$, write $T_\\delta^{(n)}(P_{A|X}\\mid x^n):=\\{a^n:(x^n,a^n)\\in T_\\delta^{(n)}(P_{XA})\\}$. This conditional set is empty if $x^n$ is outside the support of $P_X$. Zero-probability letters are excluded exactly, so no logarithm of zero occurs in likelihood calculations on these sets.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-finite-type-class-cardinality-bounds",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet of size $m$, let $n\\ge1$, and let $q$ be an attainable empirical distribution with integer counts $n_a=nq(a)$. Its type class $T_q:=\\{a^n\\in\\mathcal A^n:\\widehat P_{a^n}=q\\}$ satisfies\n$$(n+1)^{-m}\\exp(nH(q))\\le |T_q|\\le \\exp(nH(q)),$$\nwhere $H(q):=-\\sum_{a:q(a)>0}q(a)\\ln q(a)$ and $0\\ln0:=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-it-information-units-and-logarithm-base",
+          "source_section": "Definition",
+          "quote": "Write $\\ln$ for the natural logarithm $\\log$ of [[def-natural-logarithm]]. Unless a base is displayed, every information quantity on this page uses $\\ln$ and is measured in **nats**. For a base $b>1$ and $t>0$, define\n$$\\log_b t:=\\frac{\\ln t}{\\ln b}.$$\nThe denominator is positive: $b>1$, $\\ln$ is strictly increasing, and $\\ln 1=0$ by [[thm-natural-logarithm-laws]]. A base-$b$ entropy or divergence is obtained by replacing each $\\ln$ in the finite formulas below by $\\log_b$; use $0\\log_b0:=0$ and assign $+\\infty$ to a positive numerator over a zero denominator. The case $b=2$ measures **bits**; $b=e$ gives nats.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a nonempty $J\\subseteq[k]$ and a particular typical conditioning block $(u_{J^c}^n,s^n)$. For each attainable joint type of $(U_J,U_{J^c},S)$ compatible with this block, the number of possible $u_J^n$ is a product of conditional type-class sizes, hence at most $\\exp(nH_q(U_J|U_{J^c},S))$ by [F2]. There are at most $(n+1)^m$ such types, where $m=|\\mathcal S|\\prod_i|\\mathcal U_i|$. Expanding the finite conditional-entropy sum gives\n$$H_q(U_J|U_{J^c},S)=-\\sum_{u_J,u_{J^c},s:q>0}q(u_J,u_{J^c},s)\\ln\\frac{q(u_J,u_{J^c},s)}{q(u_{J^c},s)}=H(q_{U_JU_{J^c}S})-H(q_{U_{J^c}S}).$$\nThe finite entropy summands $-t\\ln t$ extend continuously at zero, so this conditional entropy is continuous in the joint law. Choose the typicality tolerance small enough that every such type has $H_q(U_J|U_{J^c},S)\\le H(U_J|U_{J^c},S)+\\eta/3$. Therefore the conditional-typical fan has at most $(n+1)^m\\exp(n(H(U_J|U_{J^c},S)+\\eta/3))$ candidates.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every such candidate tuple has marginal types close to the target $P_{U_i}$: summing the relative errors over the omitted coordinates shows that each positive marginal atom has relative error at most the joint typicality tolerance. For each $i$, the function $q_i\\mapsto\\sum_{u_i:P_{U_i}(u_i)>0}q_i(u_i)\\ln P_{U_i}(u_i)$ is a finite linear function, hence continuous even when some $q_i(u_i)=0$, and its value at $P_{U_i}$ is $-H(U_i)$. Zero-probability letters do not occur in a typical candidate by [F1]. Thus, when the tolerance is sufficiently small, the product-marginal probability of any fixed candidate tuple is at most $\\exp[-n(\\sum_{i\\in J}H(U_i)-\\eta/3)]$. Multiplying by the count in step 1.1 bounds the chance that a fresh independent marginal-codeword tuple is jointly typical with any fixed typical conditioning block by $(n+1)^m\\exp[-n(\\sum_{i\\in J}H(U_i)-H(U_J|U_{J^c},S)-2\\eta/3)]$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A wrong tuple differing from the true tuple on exactly $J$ uses at most $\\prod_{i\\in J}M_i$ candidate index combinations. For each combination, on the event that all changed indices differ from the selected indices, its bin labels collide with the true labels with probability $\\prod_{i\\in J}B_i^{-1}$: after source-selection data and codebooks fix the selected indices, the independent bin assignments give that probability. For every nonempty proper $J$, the selection hypothesis makes the complementary selected block a function only of $Z^n$ and codebooks in $J^c$; because codebooks in $J$ are independent of $(Z^n,S^n)$ and of the codebooks in $J^c$, the pair consisting of the side-information block and complementary selected block is independent of the candidate changed codewords. If $J=[k]$, the complement is just $S^n$, which is independent of all codebooks by assumption, so the same independence holds without a selector restriction. The indicator of a typical true tuple is bounded by the indicator that its complementary block is typical; this latter block is independent of the changed codewords, so step 2.1 bounds candidate typicality. Dropping the additional indicator that candidate indices differ can only increase this probability. Thus the expected number of wrong tuples of this difference set, multiplied by the indicator of a typical true tuple, is at most $(n+1)^m\\exp[-n\\eta/3]$ under the displayed rate condition, using the natural-log rate convention [F5].",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "given",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "There are finitely many nonempty subsets $J$. Summing the bounds from step 3.1 over all of them still tends to zero because a polynomial factor is dominated by $e^{-n\\eta/3}$. Markov's inequality then bounds the probability that the true tuple is typical and at least one wrong jointly typical tuple exists by the same vanishing expectation.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The full changed/terminal subset has empty complement, represented by a singleton variable; its conditional entropy/information is unconditional. The displayed finite-subset argument includes this case, while a probability law still requires nonempty alphabets.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The full changed/terminal subset has empty complement, represented by a singleton variable; its conditional entropy/information is unconditional. The displayed finite-subset argument includes this case, while a probability law still requires nonempty alphabets. Independent item review: Conditional-type fan counts and product-marginal probabilities give the packing exponent; complement-only selection preserves independence of candidate changed codewords (1.1\u20134.1).",
+            "item_sha256": "bfe04aacb43dce1bb58de46d75ff8c2cb6220a7e61d9129588f688e688f393c8",
+            "row_sha256": "b96979b7ba6b6fca13a7da6f456b259b546009b9c90f06d5627b379493675cb0"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: Conditional-type fan counts and product-marginal probabilities give the packing exponent; complement-only selection preserves independence of candidate changed codewords (1.1\u20134.1).",
+            "item_sha256": "bfe04aacb43dce1bb58de46d75ff8c2cb6220a7e61d9129588f688e688f393c8",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: Conditional-type fan counts and product-marginal probabilities give the packing exponent; complement-only selection preserves independence of candidate changed codewords (1.1\u20134.1).",
+            "item_sha256": "bfe04aacb43dce1bb58de46d75ff8c2cb6220a7e61d9129588f688e688f393c8",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: Conditional-type fan counts and product-marginal probabilities give the packing exponent; complement-only selection preserves independence of candidate changed codewords (1.1\u20134.1).",
+            "item_sha256": "bfe04aacb43dce1bb58de46d75ff8c2cb6220a7e61d9129588f688e688f393c8",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: Conditional-type fan counts and product-marginal probabilities give the packing exponent; complement-only selection preserves independence of candidate changed codewords (1.1\u20134.1).",
+            "item_sha256": "bfe04aacb43dce1bb58de46d75ff8c2cb6220a7e61d9129588f688e688f393c8",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: Conditional-type fan counts and product-marginal probabilities give the packing exponent; complement-only selection preserves independence of candidate changed codewords (1.1\u20134.1).",
+            "item_sha256": "bfe04aacb43dce1bb58de46d75ff8c2cb6220a7e61d9129588f688e688f393c8",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved. Independent item review: Conditional-type fan counts and product-marginal probabilities give the packing exponent; complement-only selection preserves independence of candidate changed codewords (1.1\u20134.1).",
+            "item_sha256": "bfe04aacb43dce1bb58de46d75ff8c2cb6220a7e61d9129588f688e688f393c8",
+            "row_sha256": "4904007a088ed87caeae39c96baf02986b0b4999879aa469211f5b30474341ab"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no reverse implication claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement makes no reverse implication claim. Independent item review: Conditional-type fan counts and product-marginal probabilities give the packing exponent; complement-only selection preserves independence of candidate changed codewords (1.1\u20134.1).",
+            "item_sha256": "bfe04aacb43dce1bb58de46d75ff8c2cb6220a7e61d9129588f688e688f393c8",
+            "row_sha256": "05db4452faf9e1254b4b8035698d73744b01b358bb3b1af5510529dc7ab6b098"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "All four steps reviewed. Added the essential sufficiently-small fixed typicality-tolerance quantifier; broad tolerance admits a binary full-support counterexample documented in the report. Fan entropy and marginal likelihood continuity choose one tolerance for finitely many subsets. Complementary-selector hypothesis supplies the needed independence, including J=[k]; after conditioning on codebooks, changed-index bin collisions have probability product B_i^-1. Dropping selected-index and true-event indicators only enlarges bounds. Polynomial times exp(-n eta/3) vanishes. Singleton side information, zero masses and k=1 are covered; no AC.",
+        "repair_confidence": 1,
+        "defect_ids": [
+          "non-ml-math-remaining-81-2026-10-18-b17-3a-packing-tolerance"
+        ]
+      }
+    },
+    "lem-it-finite-selected-codeword-markov-typicality": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-strongly-typical-set",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a finite nonempty alphabet, let $P$ be a probability vector on $\\mathcal A$ in the sense of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], and let $n\\ge1$. Write $\\operatorname{supp}(P):=\\{a\\in\\mathcal A:P(a)>0\\}$. For $a^n=(a_1,\\ldots,a_n)\\in\\mathcal A^n$, its empirical distribution is $\\widehat P_{a^n}(a):=n^{-1}|\\{t:a_t=a\\}|$. For $\\delta>0$, define the support-restricted strongly typical set by\n$$T_\\delta^{(n)}(P):=\\{a^n\\in\\operatorname{supp}(P)^n:|\\widehat P_{a^n}(a)-P(a)|\\le\\delta P(a)\\text{ for every }a\\text{ with }P(a)>0\\}.$$\nFor a finite joint law $P_{XA}$ and a fixed $x^n$, write $T_\\delta^{(n)}(P_{A|X}\\mid x^n):=\\{a^n:(x^n,a^n)\\in T_\\delta^{(n)}(P_{XA})\\}$. This conditional set is empty if $x^n$ is outside the support of $P_X$. Zero-probability letters are excluded exactly, so no logarithm of zero occurs in likelihood calculations on these sets.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-finite-codebook-covering-selection-law",
+          "source_section": "Statement",
+          "quote": "Let $P_{XU}=P_XP_{U|X}$ be a joint law on finite nonempty alphabets, with marginal $P_U$. Fix $\\eta>0$ and a target joint-typicality tolerance $\\epsilon>0$. There are a source-typicality tolerance $\\delta>0$ and an integer $n_0$ such that, for every $n\\ge n_0$, every $x^n\\in T_\\delta^{(n)}(P_X)$, and every $R>I(X;U)+\\eta$, an iid codebook of $M_n=\\lceil e^{nR}\\rceil$ independent $P_U^{\\otimes n}$ words contains a word in $T_\\epsilon^{(n)}(P_{XU}|x^n)$ with probability tending to one uniformly in $x^n$. If the encoder selects the least index with a jointly typical word, then, conditional on a match, its selected word has law $P_U^{\\otimes n}$ conditioned on $T_\\epsilon^{(n)}(P_{XU}|x^n)$; conditional on any particular joint type, this law is uniform on the associated conditional type class.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a conditional type $q_{Z|X}$ that can occur under the stated law. For each $x$ with $n_x:=|\\{t:x_t=x\\}|>0$, there are $n_{xy}$ positions with $(x_t,y_t)=(x,y)$ and $n_{xz}$ positions with $(x_t,Z_t)=(x,z)$. Conditional-type uniformity means that, among the $n_x$ positions with $X=x$, the $z$ labels are assigned uniformly over all arrangements with these counts. Hence $N_{xyz}:=|\\{t:(x_t,y_t,Z_t)=(x,y,z)\\}|$ is hypergeometric, with $\\mathbb E N_{xyz}=\\frac{n_{xy}n_{xz}}{n_x},\\qquad \\operatorname{Var}(N_{xyz})\\le n_x.$ When $n_x=0$, all these counts vanish.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $n_{xy}/n$ and $n_{xz}/n$ are uniformly close to $P_{XY}(x,y)$ and $P_{XZ}(x,z)$, respectively. For $P_X(x)>0$, division by $n_x/n$ shows that $n_{xz}/n_x$ is close to $P_{Z|X}(z|x)$. Thus, after choosing $\\delta$ sufficiently small, the mean frequency $\\mathbb E N_{xyz}/n=(n_{xy}/n)(n_{xz}/n_x)$ is within half the required relative tolerance of $P_{XYZ}(x,y,z)$ for every positive-probability triple. If $P_{XYZ}(x,y,z)=0$, either $(x,y)$ is excluded by the source support condition or $(x,z)$ is excluded by the conditional support condition, so $N_{xyz}=0$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a positive-probability triple, Chebyshev's inequality and step 1.1 give $\\Pr\\{|N_{xyz}-\\mathbb E N_{xyz}|>\\tfrac12 n\\epsilon P_{XYZ}(x,y,z)\\}\\le\\frac{4n_x}{n^2\\epsilon^2P_{XYZ}(x,y,z)^2}\\le\\frac{4}{n\\epsilon^2P_{XYZ}(x,y,z)^2}.$ There are finitely many triples. A union bound makes the probability that any empirical triple frequency misses its required tolerance at most $C/n$ for a finite constant $C$ depending only on the law, alphabets, and $\\epsilon$. This bound is uniform in every admissible conditional type, so it remains valid after mixing over the conditional-type distribution of $Z^n$. The complement event is exactly strong typicality of $(x^n,y^n,Z^n)$, proving the claim.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded. Independent item review: Uniformly permuting conditional counts gives a hypergeometric triple count with variance at most nx; support zeros vanish and a finite Chebyshev union gives C/n (1.1\u20133.1).",
+            "item_sha256": "4cc70a078217362064e2c842c0cd86856450f4c67c6e4cf4023ea613e1e67c84",
+            "row_sha256": "7ac0b63ed89887bfa846030de1902f90d18f4e59dcb6c5e7cdab673fc0086fc5"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: Uniformly permuting conditional counts gives a hypergeometric triple count with variance at most nx; support zeros vanish and a finite Chebyshev union gives C/n (1.1\u20133.1).",
+            "item_sha256": "4cc70a078217362064e2c842c0cd86856450f4c67c6e4cf4023ea613e1e67c84",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: Uniformly permuting conditional counts gives a hypergeometric triple count with variance at most nx; support zeros vanish and a finite Chebyshev union gives C/n (1.1\u20133.1).",
+            "item_sha256": "4cc70a078217362064e2c842c0cd86856450f4c67c6e4cf4023ea613e1e67c84",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: Uniformly permuting conditional counts gives a hypergeometric triple count with variance at most nx; support zeros vanish and a finite Chebyshev union gives C/n (1.1\u20133.1).",
+            "item_sha256": "4cc70a078217362064e2c842c0cd86856450f4c67c6e4cf4023ea613e1e67c84",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: Uniformly permuting conditional counts gives a hypergeometric triple count with variance at most nx; support zeros vanish and a finite Chebyshev union gives C/n (1.1\u20133.1).",
+            "item_sha256": "4cc70a078217362064e2c842c0cd86856450f4c67c6e4cf4023ea613e1e67c84",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: Uniformly permuting conditional counts gives a hypergeometric triple count with variance at most nx; support zeros vanish and a finite Chebyshev union gives C/n (1.1\u20133.1).",
+            "item_sha256": "4cc70a078217362064e2c842c0cd86856450f4c67c6e4cf4023ea613e1e67c84",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved. Independent item review: Uniformly permuting conditional counts gives a hypergeometric triple count with variance at most nx; support zeros vanish and a finite Chebyshev union gives C/n (1.1\u20133.1).",
+            "item_sha256": "4cc70a078217362064e2c842c0cd86856450f4c67c6e4cf4023ea613e1e67c84",
+            "row_sha256": "4904007a088ed87caeae39c96baf02986b0b4999879aa469211f5b30474341ab"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no reverse implication claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement makes no reverse implication claim. Independent item review: Uniformly permuting conditional counts gives a hypergeometric triple count with variance at most nx; support zeros vanish and a finite Chebyshev union gives C/n (1.1\u20133.1).",
+            "item_sha256": "4cc70a078217362064e2c842c0cd86856450f4c67c6e4cf4023ea613e1e67c84",
+            "row_sha256": "05db4452faf9e1254b4b8035698d73744b01b358bb3b1af5510529dc7ab6b098"
+          }
+        }
+      ]
+    },
+    "lem-it-wyner-ziv-auxiliary-cardinality-bound": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-wyner-ziv-code",
+          "source_section": "Definition",
+          "quote": "Let $(X_t,Y_t)_{t\\ge1}$ be an IID pair with joint pmf $P_{XY}$ on finite nonempty alphabets $\\mathcal X\\times\\mathcal Y$, as the $k=2$ instance of [[def-it-finite-iid-multisource]]. Let $\\widehat{\\mathcal X}$ be finite nonempty and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be the finite bounded single-letter distortion from [[def-it-single-letter-distortion-and-block-distortion]]. For $x^n=(x_1,\\ldots,x_n)$ and $\\hat x^n=(\\hat x_1,\\ldots,\\hat x_n)$, define\n\n$$d_n(x^n,\\hat x^n):=\\frac1n\\sum_{t=1}^n d(x_t,\\hat x_t).$$\n\nA length-$n$, $M$-message Wyner-Ziv code consists of a deterministic encoder $f_n:\\mathcal X^n\\to[M]$ and deterministic decoder $g_n:[M]\\times\\mathcal Y^n\\to\\widehat{\\mathcal X}^n$. The encoder observes only $X^n$; the decoder observes both the message and $Y^n$. Its rate is $n^{-1}\\ln M$ nats per source symbol, and its expected distortion is $\\mathbb E[d_n(X^n,g_n(f_n(X^n),Y^n))]$.\n\nA pair $(R,D)$ is operationally achievable if there are increasing blocklengths $n_j\\to\\infty$ and such codes with $\\limsup_j n_j^{-1}\\ln M_j\\le R$ and $\\limsup_j\\mathbb E[d_{n_j}]\\le D$. Define $R_{\\rm WZ}^{\\rm op}(D)$ as the infimum of achievable rates.\n\nFor a finite auxiliary alphabet $\\mathcal U$, a test channel is a stochastic kernel $P_{U|X}$ together with a deterministic map $g:\\mathcal Y\\times\\mathcal U\\to\\widehat{\\mathcal X}$, under the joint law $P_{XYU}=P_{XY}P_{U|X}$. It has $U-X-Y$, expected distortion $\\mathbb E[d(X,g(Y,U))]$, and conditional mutual information $I(X;U|Y)$ from [[def-it-finite-conditional-mutual-information]]. Define the single-letter candidate\n$$R_{\\rm WZ}(D):=\\inf_{\\substack{\\mathcal U\\ {\\rm finite},\\,P_{U|X},\\,g\\\\\\mathbb E[d(X,g(Y,U))]\\le D}} I(X;U|Y),$$\nwith value $+\\infty$ if the feasible set is empty. This definition alone makes no operational equality claim; the following theorem proves it and the cardinality lemma makes the finite minimum explicit.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Remove all zero-probability values of $U$. For each remaining $u$, set $\\pi_u=P_U(u)>0$, $q_u(x)=P(X=x|U=u)$, $a_u=\\mathbb E[d(X,g(Y,u))|U=u]$, and $h_u=H(X|Y,U=u)$. Because $U-X-Y$, the conditional law of $Y$ given $(X,U)$ is $P_{Y|X}$, so $a_u$ is determined by $q_u$ and the fixed decoder map $g(\\cdot,u)$. Also, $P_X(x)=\\sum_u\\pi_uq_u(x),\\quad \\mathbb E d(X,g(Y,U))=\\sum_u\\pi_ua_u,\\quad H(X|Y,U)=\\sum_u\\pi_uh_u.$ These are finite sums.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $m=|\\mathcal X|$. If there are more than $m+1$ positive weights, the vectors $v_u=(q_u(x_1),\\ldots,q_u(x_m),a_u)\\in\\mathbb R^{m+1}$ are linearly dependent. Choose coefficients $c_u$, not all zero, with $\\sum_uc_uv_u=0$. The first $m$ coordinates imply $\\sum_uc_u=0$, so the coefficients have both signs. Choose the sign so that $\\sum_uc_uh_u\\ge0$. Let $t=\\min_{c_u<0}\\pi_u/(-c_u)>0$ and put $\\pi'_u=\\pi_u+tc_u$. Then every $\\pi'_u\\ge0$, at least one is zero, and the source marginal and expected distortion remain unchanged, while $\\sum_u\\pi'_uh_u\\ge\\sum_u\\pi_uh_u$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $U'$ to have the remaining positive weights $\\pi'_u$, conditional posterior $P(X=x|U'=u)=q_u(x)$, and conditional side-information law $P_{Y|X}$. Equivalently set $P_{XYU'}(x,y,u)=P_{XY}(x,y)P(U'=u|X=x)$ with $P(U'=u|X=x):=\\pi'_uq_u(x)/P_X(x)$ for $P_X(x)>0$, and choose any row on zero-mass $x$. The source marginal is preserved by step 1.2, and $\\sum_u\\pi'_uq_u(x)=P_X(x)$ makes each conditional row sum to one. Use the same reconstruction map $g(y,u)$. The distortion is unchanged by step 1.2, and [F2] gives $I(X;U'|Y)=H(X|Y)-\\sum_u\\pi'_uh_u\\le H(X|Y)-\\sum_u\\pi_uh_u=I(X;U|Y).$ At least one positive auxiliary value was removed. Repeating finitely many times leaves at most $m+1$ values and never increases the objective.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For fixed $|\\mathcal U|=m+1$, the stochastic matrices $P_{U|X}$ form a closed bounded subset of a finite-dimensional Euclidean space. Any smaller auxiliary can be embedded in this alphabet by adding zero-probability labels and assigning arbitrary decoder values to them. For each of the finitely many decoder maps $g:\\mathcal Y\\times\\mathcal U\\to\\widehat{\\mathcal X}$, the distortion constraint is closed and $I(X;U|Y)$ is continuous by the finite entropy formulas and [F3]. Thus every nonempty feasible set is compact by [F4], and its objective minimum is attained by [F5]. Every finite auxiliary can be reduced to at most $m+1$ labels by steps 1.2\u20132.1 and then embedded in this fixed alphabet, so this minimum equals the original infimum.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded. Independent item review: A null direction of posterior/distortion vectors removes weights without lowering conditional entropy, preserving distortion and yielding |U|<=|X|+1; compactness over finitely many decoders attains the minimum (1.1\u20133.1).",
+            "item_sha256": "3770fba6e1f03b19ebae3d29d45813d7dadfe105b32ea48de97be4f1b5518833",
+            "row_sha256": "7ac0b63ed89887bfa846030de1902f90d18f4e59dcb6c5e7cdab673fc0086fc5"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: A null direction of posterior/distortion vectors removes weights without lowering conditional entropy, preserving distortion and yielding |U|<=|X|+1; compactness over finitely many decoders attains the minimum (1.1\u20133.1).",
+            "item_sha256": "3770fba6e1f03b19ebae3d29d45813d7dadfe105b32ea48de97be4f1b5518833",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: A null direction of posterior/distortion vectors removes weights without lowering conditional entropy, preserving distortion and yielding |U|<=|X|+1; compactness over finitely many decoders attains the minimum (1.1\u20133.1).",
+            "item_sha256": "3770fba6e1f03b19ebae3d29d45813d7dadfe105b32ea48de97be4f1b5518833",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: A null direction of posterior/distortion vectors removes weights without lowering conditional entropy, preserving distortion and yielding |U|<=|X|+1; compactness over finitely many decoders attains the minimum (1.1\u20133.1).",
+            "item_sha256": "3770fba6e1f03b19ebae3d29d45813d7dadfe105b32ea48de97be4f1b5518833",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: A null direction of posterior/distortion vectors removes weights without lowering conditional entropy, preserving distortion and yielding |U|<=|X|+1; compactness over finitely many decoders attains the minimum (1.1\u20133.1).",
+            "item_sha256": "3770fba6e1f03b19ebae3d29d45813d7dadfe105b32ea48de97be4f1b5518833",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: A null direction of posterior/distortion vectors removes weights without lowering conditional entropy, preserving distortion and yielding |U|<=|X|+1; compactness over finitely many decoders attains the minimum (1.1\u20133.1).",
+            "item_sha256": "3770fba6e1f03b19ebae3d29d45813d7dadfe105b32ea48de97be4f1b5518833",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved. Independent item review: A null direction of posterior/distortion vectors removes weights without lowering conditional entropy, preserving distortion and yielding |U|<=|X|+1; compactness over finitely many decoders attains the minimum (1.1\u20133.1).",
+            "item_sha256": "3770fba6e1f03b19ebae3d29d45813d7dadfe105b32ea48de97be4f1b5518833",
+            "row_sha256": "4904007a088ed87caeae39c96baf02986b0b4999879aa469211f5b30474341ab"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no reverse implication claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement makes no reverse implication claim. Independent item review: A null direction of posterior/distortion vectors removes weights without lowering conditional entropy, preserving distortion and yielding |U|<=|X|+1; compactness over finitely many decoders attains the minimum (1.1\u20133.1).",
+            "item_sha256": "3770fba6e1f03b19ebae3d29d45813d7dadfe105b32ea48de97be4f1b5518833",
+            "row_sha256": "05db4452faf9e1254b4b8035698d73744b01b358bb3b1af5510529dc7ab6b098"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read all steps and exact compactness/extreme-value/finite-chain-rule statements. Linear dependence in R^(|X|+1) preserves q marginal and distortion; normalization forces both coefficient signs. Sign chosen to increase average conditional entropy decreases the objective; boundary perturbation removes labels finitely. Zero-mass source rows admit arbitrary finite stochastic rows. Given feasible test channel ensures nonempty feasible set; finite decoder maps and continuous finite-entropy objective on compact channel simplexes give a minimum. No AC and no unresolved risk."
+      }
+    },
+    "lem-it-finite-wyner-ziv-function-convexity-continuity": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-wyner-ziv-code",
+          "source_section": "Definition",
+          "quote": "Let $(X_t,Y_t)_{t\\ge1}$ be an IID pair with joint pmf $P_{XY}$ on finite nonempty alphabets $\\mathcal X\\times\\mathcal Y$, as the $k=2$ instance of [[def-it-finite-iid-multisource]]. Let $\\widehat{\\mathcal X}$ be finite nonempty and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be the finite bounded single-letter distortion from [[def-it-single-letter-distortion-and-block-distortion]]. For $x^n=(x_1,\\ldots,x_n)$ and $\\hat x^n=(\\hat x_1,\\ldots,\\hat x_n)$, define\n\n$$d_n(x^n,\\hat x^n):=\\frac1n\\sum_{t=1}^n d(x_t,\\hat x_t).$$\n\nA length-$n$, $M$-message Wyner-Ziv code consists of a deterministic encoder $f_n:\\mathcal X^n\\to[M]$ and deterministic decoder $g_n:[M]\\times\\mathcal Y^n\\to\\widehat{\\mathcal X}^n$. The encoder observes only $X^n$; the decoder observes both the message and $Y^n$. Its rate is $n^{-1}\\ln M$ nats per source symbol, and its expected distortion is $\\mathbb E[d_n(X^n,g_n(f_n(X^n),Y^n))]$.\n\nA pair $(R,D)$ is operationally achievable if there are increasing blocklengths $n_j\\to\\infty$ and such codes with $\\limsup_j n_j^{-1}\\ln M_j\\le R$ and $\\limsup_j\\mathbb E[d_{n_j}]\\le D$. Define $R_{\\rm WZ}^{\\rm op}(D)$ as the infimum of achievable rates.\n\nFor a finite auxiliary alphabet $\\mathcal U$, a test channel is a stochastic kernel $P_{U|X}$ together with a deterministic map $g:\\mathcal Y\\times\\mathcal U\\to\\widehat{\\mathcal X}$, under the joint law $P_{XYU}=P_{XY}P_{U|X}$. It has $U-X-Y$, expected distortion $\\mathbb E[d(X,g(Y,U))]$, and conditional mutual information $I(X;U|Y)$ from [[def-it-finite-conditional-mutual-information]]. Define the single-letter candidate\n$$R_{\\rm WZ}(D):=\\inf_{\\substack{\\mathcal U\\ {\\rm finite},\\,P_{U|X},\\,g\\\\\\mathbb E[d(X,g(Y,U))]\\le D}} I(X;U|Y),$$\nwith value $+\\infty$ if the feasible set is empty. This definition alone makes no operational equality claim; the following theorem proves it and the cardinality lemma makes the finite minimum explicit.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-wyner-ziv-auxiliary-cardinality-bound",
+          "source_section": "Statement",
+          "quote": "Let $P_{XY}$ be a finite joint law, let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$, and let $(U,P_{U|X},g)$ be any finite Wyner-Ziv test channel from [[def-it-finite-wyner-ziv-code]] with expected distortion at most $D$. There is another finite test channel $(U',P_{U'|X},g')$ such that\n$$|\\mathcal U'|\\le|\\mathcal X|+1,\\qquad \\mathbb E[d(X,g'(Y,U'))]=\\mathbb E[d(X,g(Y,U))],\\qquad I(X;U'|Y)\\le I(X;U|Y).$$\nConsequently the infimum $R_{\\rm WZ}(D)$ in [[def-it-finite-wyner-ziv-code]] is a minimum and it suffices to optimize over $|\\mathcal U|\\le|\\mathcal X|+1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any map $h:\\mathcal Y\\to\\widehat{\\mathcal X}$ and every $(x,y)$, $d(x,h(y))\\ge\\min_{\\hat x}d(x,\\hat x)$; minimizing over the finite set of maps gives $D_{\\min}\\le D_{\\max}$. The feasible test-channel sets are nested as $D$ increases, so their infima are nonincreasing. For $s>0$, $\\ln s\\le s-1$ because $s-1-\\ln s$ has derivative $1-1/s$ and minimum $0$ at $s=1$. Thus, for pmfs $p,q$, either $D(p\\|q)=+\\infty$ when $p_i>0=q_i$ for some $i$, or $D(p\\|q)\\ge\\sum_{i:p_i>0}(p_i-q_i)=1-\\sum_{i:p_i>0}q_i\\ge0$. By [F1] and [F4], each conditional mutual information is a positive weighted sum of such divergences, so every feasible objective is nonnegative. A constant auxiliary $U$ and a minimizing map $h$ at $D_{\\max}$ have objective zero and distortion $D_{\\max}$, proving $R_{\\rm WZ}(D)=0$ for $D\\ge D_{\\max}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $D_1,D_2\\ge D_{\\min}$ and $0\\le\\lambda\\le1$. By [F2], choose minimizing channels $(U_1,g_1)$ and $(U_2,g_2)$, whose distortions $d_1,d_2$ satisfy $d_j\\le D_j$. Let an independent finite $Q$ select branch 1 with probability $\\lambda$, set $U=(Q,U_Q)$, and use $g(Y,U)=g_Q(Y,U_Q)$. Then $U-X-Y$, the distortion $\\lambda d_1+(1-\\lambda)d_2$ is at most $\\lambda D_1+(1-\\lambda)D_2$, and the finite conditional chain rule gives $I(X;U|Y)=I(X;Q|Y)+I(X;U_Q|Y,Q)=\\lambda R_{\\rm WZ}(D_1)+(1-\\lambda)R_{\\rm WZ}(D_2)$ because $Q$ is independent of $(X,Y)$. Applying [F2] to reduce $U$ if necessary proves convexity.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the interior of $[D_{\\min},D_{\\max}]$, write $s(a,b)=(R_{\\rm WZ}(b)-R_{\\rm WZ}(a))/(b-a)$. Convexity implies $s(a,b)\\le s(b,c)$ whenever $a<b<c$, by writing $b$ as a convex combination of $a,c$. For $D_-<z<D$, this gives $s(D_-,z)\\le s(z,D)$, hence $R_{\\rm WZ}(z)\\le\\frac{D-z}{D-D_-}R_{\\rm WZ}(D_-)+\\frac{z-D_-}{D-D_-}R_{\\rm WZ}(D)$; the right side tends to $R_{\\rm WZ}(D)$ as $z\\uparrow D$, while monotonicity gives $R_{\\rm WZ}(z)\\ge R_{\\rm WZ}(D)$. For $D<z<D_+$, the inequalities $s(D_-,D)\\le s(D,z)\\le s(z,D_+)$ bound $R_{\\rm WZ}(z)$ between two linear interpolations that both tend to $R_{\\rm WZ}(D)$ as $z\\downarrow D$. This proves continuity at $D$. For right continuity at $D_{\\min}<D_{\\max}$, let $r<R_{\\rm WZ}(D_{\\min})$ and let $K_j$ be the set of channels with $|\\mathcal U|=|\\mathcal X|+1$ and decoder maps whose distortion is at most $D_{\\min}+1/j$ and whose objective is at most $r$. The union of the finitely many channel simplexes over decoder maps is compact by [F5]: each simplex is closed and bounded in a finite-dimensional Euclidean space, and a finite union of compact sets is compact. For $0<t\\le1$, $0\\le-t\\ln t=t\\ln(1/t)=t\\int_1^{1/t}\\frac{du}{u}\\le t\\int_1^{1/t}\\frac{du}{\\sqrt u}\\le2\\sqrt t$, so $-t\\ln t$ extends continuously to $0$; hence each finite entropy sum is continuous in its probability coordinates. By [F3], $I(X;U|Y)=H(X,Y)+H(U,Y)-H(Y)-H(X,U,Y)$. Each joint law in this expression depends linearly on the channel entries, and its entropy is continuous by the preceding limit, so the objective is continuous; for each fixed decoder map the expected distortion is also a finite linear function of the channel entries. Therefore each $K_j$ is closed. If every $K_j$ were nonempty, they would be nested closed subsets of this compact space with the finite intersection property: if their total intersection were empty, their open complements would cover the compact space and a finite subcover would force one $K_j$ empty. Thus their intersection is nonempty, yielding a channel feasible at $D_{\\min}$ with objective at most $r$, contrary to $r<R_{\\rm WZ}(D_{\\min})$. It follows that $R_{\\rm WZ}(D)>r$ on some right neighborhood of $D_{\\min}$; since $R_{\\rm WZ}(D)\\le R_{\\rm WZ}(D_{\\min})$ by monotonicity, right continuity follows.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $D_{\\min}\\le D\\le D_{\\max}$ with $D_{\\min}<D_{\\max}$, time-share a minimum-distortion channel at $D_{\\min}$ with the zero-rate channel at $D_{\\max}$. This gives $R_{\\rm WZ}(D)\\le\\frac{D_{\\max}-D}{D_{\\max}-D_{\\min}}R_{\\rm WZ}(D_{\\min})$, so $R_{\\rm WZ}(D)\\to0$ as $D\\uparrow D_{\\max}$. Nonnegativity and the zero-rate branch in step 1.1 prove continuity there. If $D_{\\min}=D_{\\max}$, the zero-rate channel already attains the minimum distortion, so the feasible function is identically zero. For $D<D_{\\min}$, every test channel has distortion at least $D_{\\min}$, so the feasible set is empty and $R_{\\rm WZ}(D)=+\\infty$ by Definition; for $D\\ge D_{\\max}$, step 1.1 gives zero.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded. Independent item review: Time sharing gives convexity; compact nested channel sets give continuity at Dmin, and mixing with a zero-rate decoder proves continuity at Dmax, including Dmin=Dmax (1.1\u20133.1).",
+            "item_sha256": "aa36797a002688aa1201bd5bb19ec8e87afe2562e14df76003eb780d4e28b4e5",
+            "row_sha256": "7ac0b63ed89887bfa846030de1902f90d18f4e59dcb6c5e7cdab673fc0086fc5"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: Time sharing gives convexity; compact nested channel sets give continuity at Dmin, and mixing with a zero-rate decoder proves continuity at Dmax, including Dmin=Dmax (1.1\u20133.1).",
+            "item_sha256": "aa36797a002688aa1201bd5bb19ec8e87afe2562e14df76003eb780d4e28b4e5",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: Time sharing gives convexity; compact nested channel sets give continuity at Dmin, and mixing with a zero-rate decoder proves continuity at Dmax, including Dmin=Dmax (1.1\u20133.1).",
+            "item_sha256": "aa36797a002688aa1201bd5bb19ec8e87afe2562e14df76003eb780d4e28b4e5",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: Time sharing gives convexity; compact nested channel sets give continuity at Dmin, and mixing with a zero-rate decoder proves continuity at Dmax, including Dmin=Dmax (1.1\u20133.1).",
+            "item_sha256": "aa36797a002688aa1201bd5bb19ec8e87afe2562e14df76003eb780d4e28b4e5",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: Time sharing gives convexity; compact nested channel sets give continuity at Dmin, and mixing with a zero-rate decoder proves continuity at Dmax, including Dmin=Dmax (1.1\u20133.1).",
+            "item_sha256": "aa36797a002688aa1201bd5bb19ec8e87afe2562e14df76003eb780d4e28b4e5",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: Time sharing gives convexity; compact nested channel sets give continuity at Dmin, and mixing with a zero-rate decoder proves continuity at Dmax, including Dmin=Dmax (1.1\u20133.1).",
+            "item_sha256": "aa36797a002688aa1201bd5bb19ec8e87afe2562e14df76003eb780d4e28b4e5",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved. Independent item review: Time sharing gives convexity; compact nested channel sets give continuity at Dmin, and mixing with a zero-rate decoder proves continuity at Dmax, including Dmin=Dmax (1.1\u20133.1).",
+            "item_sha256": "aa36797a002688aa1201bd5bb19ec8e87afe2562e14df76003eb780d4e28b4e5",
+            "row_sha256": "4904007a088ed87caeae39c96baf02986b0b4999879aa469211f5b30474341ab"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no reverse implication claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement makes no reverse implication claim. Independent item review: Time sharing gives convexity; compact nested channel sets give continuity at Dmin, and mixing with a zero-rate decoder proves continuity at Dmax, including Dmin=Dmax (1.1\u20133.1).",
+            "item_sha256": "aa36797a002688aa1201bd5bb19ec8e87afe2562e14df76003eb780d4e28b4e5",
+            "row_sha256": "05db4452faf9e1254b4b8035698d73744b01b358bb3b1af5510529dc7ab6b098"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read all steps. Accepted reader correction: infeasible distortions below D_min have +infinity, not zero. Checked KL nonnegativity derivation, independent-Q time sharing and conditional entropy identity, secant bounds at interior points, and nested closed objective/distortion sublevel sets in the finite union of compact channel simplexes at D_min. Entropy-at-zero bound establishes continuity of the objective. Interpolation with constant-U channel gives the D_max endpoint; D_min=D_max is zero everywhere feasible. Zero-mass and one-letter cases valid, finite choices only; no open mathematical risk in this lemma."
+      }
+    },
+    "thm-it-berger-tung-finite-multiterminal-inner-bound": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-multiterminal-lossy-code",
+          "source_section": "Definition",
+          "quote": "Fix $k\\ge2$ and a finite IID source vector $(X_{1,t},\\ldots,X_{k,t})_{t\\ge1}$ with law $P_{X_1\\cdots X_k}$, as in [[def-it-finite-iid-multisource]]. For each $i$, let $\\widehat{\\mathcal X}_i$ be a finite nonempty reproduction alphabet and let $d_i:\\mathcal X_i\\times\\widehat{\\mathcal X}_i\\to[0,d_{i,\\max}]$ be finite and bounded.\n\nA length-$n$ fixed-length multiterminal lossy code consists of separate deterministic encoders\n$$f_{i,n}:\\mathcal X_i^n\\to[M_i]\\quad (1\\le i\\le k)$$\nand one deterministic common decoder\n$$g_n:\\prod_{i=1}^k[M_i]\\to\\prod_{i=1}^k\\widehat{\\mathcal X}_i^n.$$\nWrite $\\widehat X_i^n$ for the $i$th reconstruction and define its expected per-letter distortion by $\\Delta_{i,n}:=\\mathbb E[n^{-1}\\sum_{t=1}^n d_i(X_{i,t},\\widehat X_{i,t})]$. Encoder $i$ has rate $n^{-1}\\ln M_i$ nats per source symbol. A vector $(R_1,\\ldots,R_k)$ is achievable at distortions $(D_1,\\ldots,D_k)$ when there is an increasing sequence of blocklengths with each rate limsup at most $R_i$ and each distortion limsup at most $D_i$. The operational rate-distortion region is the closure of these achievable vectors.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-iid-multisource",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge2$ and finite nonempty alphabets $\\mathcal X_1,\\ldots,\\mathcal X_k$. Let $\\mathcal X:=\\prod_{i=1}^k\\mathcal X_i$, identified with a finite alphabet as in [[def-finite-alphabet-iid-source]]. A **finite-alphabet IID $k$-source** is an IID sequence of vectors\n$$Z_t=(X_{1,t},\\ldots,X_{k,t})\\in\\mathcal X,\\qquad t\\ge1,$$\nwith common joint probability vector $P$ on $\\mathcal X$. Thus for every $n\\ge1$ its block law is $P^{\\otimes n}$, and terminal $i$ observes $X_i^n=(X_{i,1},\\ldots,X_{i,n})$. For $S\\subseteq[k]:=\\{1,\\ldots,k\\}$ write $X_S=(X_i)_{i\\in S}$, let $S^c=[k]\\setminus S$, and define $H_P(X_S\\mid X_{S^c})$ by [[def-it-finite-conditional-entropy]] for the induced finite joint law. When $S=[k]$, $X_{S^c}$ takes values in the singleton empty product, so $H_P(X_S\\mid X_{S^c})=H(P)$ under [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Unmarked logarithms and information rates use nats by [[def-it-information-units-and-logarithm-base]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-jointly-typical-multisource-blocks",
+          "source_section": "Definition",
+          "quote": "Let $P$ and $Z_t=(X_{1,t},\\ldots,X_{k,t})$ be as in [[def-it-finite-iid-multisource]], and let $\\mathcal X_+:=\\{x\\in\\mathcal X:P(x)>0\\}$. For $z^n\\in\\mathcal X_+^n$, write $\\widehat P_{z^n}$ for its empirical type from [[def-it-empirical-type-and-type-class]], and write $I_n(z^n)$ for its normalized block information from [[def-finite-source-information-density-and-typical-set]] applied to the vector source on $\\mathcal X$. For each nonempty $S\\subseteq[k]$ and supported pair $(x_S^n,x_{S^c}^n)$, define the conditional block information\n$$J_{S,n}(x_S^n\\mid x_{S^c}^n):=-\\frac1n\\ln P^{\\otimes n}(x_S^n\\mid x_{S^c}^n),$$\nwhere the conditional probability is the finite conditional law of the block under $P^{\\otimes n}$. Its positive denominator and coordinatewise factorization on supported tuples are proved in [[lem-it-multisource-block-conditional-law-factorization]].\n\nFor $\\delta,\\epsilon>0$, the **jointly typical set** is\n$$\\mathcal T_n(P,\\delta,\\epsilon):=\\left\\{z^n\\in\\mathcal X_+^n:\\|\\widehat P_{z^n}-P\\|_\\infty\\le\\delta,\\ |I_n(z^n)-H(P)|\\le\\epsilon,\\ |J_{S,n}(x_S^n\\mid x_{S^c}^n)-H_P(X_S\\mid X_{S^c})|\\le\\epsilon\\text{ for every nonempty }S\\subseteq[k]\\right\\}.$$\nHere $\\|q-P\\|_\\infty:=\\max_{x\\in\\mathcal X}|q(x)-P(x)|$, $H(P)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], and each $H_P(X_S\\mid X_{S^c})$ is from [[def-it-finite-conditional-entropy]] under the multisource law.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-it-multisource-typicality-probability",
+          "source_section": "Statement",
+          "quote": "Let $(Z_t)_{t\\ge1}$ be a finite-alphabet IID $k$-source with joint letter law $P$ on $\\mathcal X=\\prod_{i=1}^k\\mathcal X_i$. For every $\\delta,\\epsilon>0$, its jointly typical set from [[def-it-jointly-typical-multisource-blocks]] satisfies\n$$P^{\\otimes n}\\bigl(\\mathcal T_n(P,\\delta,\\epsilon)\\bigr)\\longrightarrow1\\qquad(n\\to\\infty).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-it-finite-conditional-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XYZ}$ be a joint probability vector on finite alphabets and write $p_Z(z)$ for its marginal. It is the law of finite coordinate random elements on the canonical finite probability space from [[def-finite-probability-space-and-event]] and [[def-random-element-and-real-random-variable]]. For each $z$ with $p_Z(z)>0$, the conditional law $p_{XY|z}$ and its marginals $p_{X|z},p_{Y|z}$ are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define conditional mutual information in nats by\n\n$$I(X;Y|Z):=\\sum_{z:p_Z(z)>0}p_Z(z)D(p_{XY|z}\\|p_{X|z}\\otimes p_{Y|z}),$$\n\nusing the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], where $(p_{X|z}\\otimes p_{Y|z})(x,y):=p_{X|z}(x)p_{Y|z}(y)$. A positive conditional joint mass forces both conditional marginals to be positive, so each displayed KL term is finite. Zero-mass conditioning values contribute no term. The base-$b$ version replaces $\\ln$ by $\\log_b$ inside the conditional KL sums.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$,\n\n$$I(X;Y|Z)=H(X|Z)+H(Y|Z)-H(X,Y|Z)\\ge0.$$\n\nEquality holds if and only if, for every $z$ with $p_Z(z)>0$, the conditional joint pmf factors as $p_{XY|z}=p_{X|z}p_{Y|z}$; this is conditional independence given $Z$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-it-finite-codebook-covering-selection-law",
+          "source_section": "Statement",
+          "quote": "Let $P_{XU}=P_XP_{U|X}$ be a joint law on finite nonempty alphabets, with marginal $P_U$. Fix $\\eta>0$ and a target joint-typicality tolerance $\\epsilon>0$. There are a source-typicality tolerance $\\delta>0$ and an integer $n_0$ such that, for every $n\\ge n_0$, every $x^n\\in T_\\delta^{(n)}(P_X)$, and every $R>I(X;U)+\\eta$, an iid codebook of $M_n=\\lceil e^{nR}\\rceil$ independent $P_U^{\\otimes n}$ words contains a word in $T_\\epsilon^{(n)}(P_{XU}|x^n)$ with probability tending to one uniformly in $x^n$. If the encoder selects the least index with a jointly typical word, then, conditional on a match, its selected word has law $P_U^{\\otimes n}$ conditioned on $T_\\epsilon^{(n)}(P_{XU}|x^n)$; conditional on any particular joint type, this law is uniform on the associated conditional type class.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-it-finite-selected-codeword-markov-typicality",
+          "source_section": "Statement",
+          "quote": "Let $P_{XYZ}(x,y,z)=P_{XY}(x,y)P_{Z|X}(z|x)$ be a finite-alphabet Markov law. For every $\\epsilon>0$ there are $\\delta>0$ and $n_0$ such that the following holds for $n\\ge n_0$: if $(x^n,y^n)\\in T_\\delta^{(n)}(P_{XY})$ and a random $Z^n$ is supported on $T_\\delta^{(n)}(P_{Z|X}\\mid x^n)$ and, conditional on each joint type of $(x^n,Z^n)$, is uniform on that conditional type class, then\n$$\\Pr\\{(x^n,y^n,Z^n)\\in T_\\epsilon^{(n)}(P_{XYZ})\\}\\ge1-\\frac{C}{n},$$\nwhere $C<\\infty$ depends only on the fixed finite law, alphabets, and $\\epsilon$, not on the particular typical source block or conditional type.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-it-finite-random-bin-packing-bound",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge1$, finite alphabets $\\mathcal U_1,\\ldots,\\mathcal U_k,\\mathcal S$, and a joint law $P_{U_1\\cdots U_kS}$. Let the source-selection data $Z^n$ and decoder side-information block $S^n$ have any joint law. Independently of $(Z^n,S^n)$, generate mutually independent codebooks whose $M_i$ codewords each have law $P_{U_i}^{\\otimes n}$. Generate independent uniform bin labels from $[B_i]$ for every codeword, independently of the source and codebooks. Let the selected true indices $L_i$ be functions of $Z^n$ and codebooks but not the bin labels. In addition, for every nonempty proper $J\\subset[k]$, require the complementary selected codewords at indices in $J^c$ to be determined by $Z^n$ and codebooks indexed by $J^c$ alone; this condition is automatic when each terminal selects using its own codebook, and is vacuous for $k=1$. For a fixed positive typicality tolerance, a joint-typicality decoder looks for the unique tuple in the received bins whose codewords and $S^n$ are jointly typical for $P_{U_1\\cdots U_kS}$. Suppose there is a common $\\eta>0$ such that for every nonempty $J\\subseteq[k],$\n$$\\sum_{i\\in J}\\frac1n\\ln\\frac{M_i}{B_i}<\\sum_{i\\in J}H(U_i)-H(U_J\\mid U_{J^c},S)-\\eta.$$\nThen there is $\\epsilon_0>0$ such that, for every fixed typicality tolerance $0<\\epsilon\\le\\epsilon_0$, writing $E_n$ for the event that the selected true tuple and $S^n$ are jointly typical, the expected number of wrong jointly typical tuples in its received bins, multiplied by $\\mathbf1_{E_n}$, tends to zero as $n\\to\\infty$. Consequently the probability that $E_n$ holds and a wrong jointly typical tuple exists tends to zero. The case of no side information is represented by a singleton $\\mathcal S$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First fix one product test channel and reconstruction tuple. For each encoder $i$, choose $\\widetilde R_i=I(X_i;U_i)+\\alpha/4$ with $\\alpha>0$, generate $M_i=\\lceil e^{n\\widetilde R_i}\\rceil$ independent $P_{U_i}^{\\otimes n}$ codewords, and let encoder $i$ select the first codeword in the conditional typical set using the input and conditional tolerances specified by the following tolerance selection. It sends the selected index's bin, where each codeword is assigned independently and uniformly to $B_i=\\lceil e^{n(R_i+\\alpha)}\\rceil$ bins. If no typical codeword exists, it selects index 1.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a final relative typicality tolerance $\\tau_k>0$ small enough for [F10] and the bounded-distortion estimate below. Work backward for $i=k,k-1,\\ldots,1$: apply [F9] with output tolerance $\\tau_i$ to obtain an input tolerance $\\delta_i>0$, then apply [F8] with target conditional tolerance $\\delta_i$ to obtain a source tolerance $\\sigma_i>0$, and choose $0<\\tau_{i-1}\\le\\min(\\delta_i,\\sigma_i)$. By [F3], the full source block belongs with probability tending to one to a jointly typical set whose empirical tolerance is small enough to ensure membership in the relative typical set $T_{\\tau_0}^{(n)}(P_{X_1\\cdots X_k})$; support is automatic there. Before stage $i$, if the source block together with $U_1^n,\\ldots,U_{i-1}^n$ is in $T_{\\tau_{i-1}}$ for its target law, projection shows that $(X_i^n,\\text{all other source blocks and }U_1^n,\\ldots,U_{i-1}^n)$ is $\\delta_i$-typical and that $X_i^n$ is $\\sigma_i$-typical. Conditional on the source and previous selections, codebook $i$ is independent of them, so [F8] gives a successful first-match selection with probability tending to one, uniformly over these blocks; its selected word is conditionally type-uniform. The product factorization gives $U_i-X_i-\\text{(the other sources and previous auxiliaries)}$, so [F9] puts the enlarged tuple in $T_{\\tau_i}$ except with probability tending to zero. A finite union bound over the $k$ stages proves that the selected full tuple is jointly typical with probability tending to one.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "F9",
+            "choose",
+            "construct",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The decoder searches for a unique tuple of codewords in the received bins whose auxiliary sequences are jointly typical according to $P_{U_1\\cdots U_k}$, so [F10] applies with a singleton side-information alphabet. The true tuple passes by step 1.2. For a nonempty subset $S$ of encoders whose candidate indices differ from the true indices, [F10] makes the expected number of false tuples on the typical-true-tuple event vanish if $\\sum_{i\\in S}(\\widetilde R_i-R_i-\\alpha)<\\sum_{i\\in S}H(U_i)-H(U_S|U_{S^c})-\\eta$ for some $\\eta>0$. The selections in step 1.1 are functions only of the source and their respective codebooks, so they satisfy [F10]'s complementary-selection condition. The product test channel and [F6]\u2013[F7] give $I(X_S;U_S|U_{S^c})=H(U_S|U_{S^c})-\\sum_{i\\in S}H(U_i|X_i),$ because $U_S$ is conditionally independent of $U_{S^c}$ given $X_S$ and the $U_i$ are conditionally independent given their source symbols. Consequently, $\\sum_{i\\in S}I(X_i;U_i)-I(X_S;U_S|U_{S^c})=\\sum_{i\\in S}H(U_i)-H(U_S|U_{S^c}).$ The ceiling inequalities $M_i\\le2e^{n\\widetilde R_i}$ and $B_i\\ge e^{n(R_i+\\alpha)}$ give $n^{-1}\\ln(M_i/B_i)\\le I(X_i;U_i)-R_i-3\\alpha/4+n^{-1}\\ln2$. For all sufficiently large $n$, this is at most $I(X_i;U_i)-R_i-\\alpha/2$. The assumed subset inequality and the preceding entropy identity then leave at least $|S|\\alpha/2$ of margin for every nonempty $S$; taking the packing slack $\\eta=\\alpha/3$ makes the strict hypothesis of [F10] hold for every subset.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F10",
+            "step 1.2",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the event that the source and selected auxiliary tuple are jointly typical and the decoder has no false tuple, decoding succeeds and the relative empirical-frequency bounds give $\\sum_a|\\widehat P(a)-P(a)|\\le\\tau_k\\sum_{a:P(a)>0}P(a)=\\tau_k$; hence every empirical distortion differs from its test-channel expectation by at most $d_{i,\\max}\\tau_k$. The complement event has ensemble probability tending to zero by step 1.2 and step 2.1. For each fixed codebook and bin realization, let $p_n$ be the source probability of this complement event. Its ensemble average tends to zero, so there is a deterministic realization with $p_n$ no larger than that average; choose the first such realization in a fixed finite listing. For that one code, simultaneously for every $i$, expected distortion is at most $D_i+d_{i,\\max}\\tau_k+d_{i,\\max}p_n$. Let $\\alpha,\\tau_k\\downarrow0$ along increasing blocklengths to attain the closed subset inequalities.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "F10",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "A finite convex combination of fixed-test-channel rate-distortion operating points is achieved by splitting a long block into subblocks with integer lengths whose proportions converge to the combination weights, applying the corresponding code on each subblock, and concatenating their reconstructions and message indices. The rounding discrepancy in every rate and expected distortion is $O(1/n)$ because there are finitely many modes and all distortions are bounded. Hence the convex hull of the union of the fixed-test-channel inner regions is achievable. No step identifies this inner bound with the full region.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The full changed/terminal subset has empty complement, represented by a singleton variable; its conditional entropy/information is unconditional. The displayed finite-subset argument includes this case, while a probability law still requires nonempty alphabets.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The full changed/terminal subset has empty complement, represented by a singleton variable; its conditional entropy/information is unconditional. The displayed finite-subset argument includes this case, while a probability law still requires nonempty alphabets. Independent item review: Separate covering/Markov selections and independent bins meet every subset packing exponent; one code controls all bounded distortions, and concatenation gives the convex hull (1.1\u20134.1).",
+            "item_sha256": "509dc8412316cee592eb440b37334ae74de85661b02dbb10d079b0ba67e9cce4",
+            "row_sha256": "b96979b7ba6b6fca13a7da6f456b259b546009b9c90f06d5627b379493675cb0"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: Separate covering/Markov selections and independent bins meet every subset packing exponent; one code controls all bounded distortions, and concatenation gives the convex hull (1.1\u20134.1).",
+            "item_sha256": "509dc8412316cee592eb440b37334ae74de85661b02dbb10d079b0ba67e9cce4",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: Separate covering/Markov selections and independent bins meet every subset packing exponent; one code controls all bounded distortions, and concatenation gives the convex hull (1.1\u20134.1).",
+            "item_sha256": "509dc8412316cee592eb440b37334ae74de85661b02dbb10d079b0ba67e9cce4",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: Separate covering/Markov selections and independent bins meet every subset packing exponent; one code controls all bounded distortions, and concatenation gives the convex hull (1.1\u20134.1).",
+            "item_sha256": "509dc8412316cee592eb440b37334ae74de85661b02dbb10d079b0ba67e9cce4",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: Separate covering/Markov selections and independent bins meet every subset packing exponent; one code controls all bounded distortions, and concatenation gives the convex hull (1.1\u20134.1).",
+            "item_sha256": "509dc8412316cee592eb440b37334ae74de85661b02dbb10d079b0ba67e9cce4",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: Separate covering/Markov selections and independent bins meet every subset packing exponent; one code controls all bounded distortions, and concatenation gives the convex hull (1.1\u20134.1).",
+            "item_sha256": "509dc8412316cee592eb440b37334ae74de85661b02dbb10d079b0ba67e9cce4",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved. Independent item review: Separate covering/Markov selections and independent bins meet every subset packing exponent; one code controls all bounded distortions, and concatenation gives the convex hull (1.1\u20134.1).",
+            "item_sha256": "509dc8412316cee592eb440b37334ae74de85661b02dbb10d079b0ba67e9cce4",
+            "row_sha256": "4904007a088ed87caeae39c96baf02986b0b4999879aa469211f5b30474341ab"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no reverse implication claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement makes no reverse implication claim. Independent item review: Separate covering/Markov selections and independent bins meet every subset packing exponent; one code controls all bounded distortions, and concatenation gives the convex hull (1.1\u20134.1).",
+            "item_sha256": "509dc8412316cee592eb440b37334ae74de85661b02dbb10d079b0ba67e9cce4",
+            "row_sha256": "05db4452faf9e1254b4b8035698d73744b01b358bb3b1af5510529dc7ab6b098"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Reviewed every step and current suppliers. Backward tolerance selection and separately selected codebooks meet uniform covering and conditional-type-uniform Markov lemma. Product factorization gives H(U_S|X_S,U_Sc)=sum H(U_i|X_i), exactly the changed-subset packing exponent. Ceiling error log2/n leaves alpha/3 slack; step 1.2 already restricts packing tolerance. Common exceptional-event probability permits one finite deterministic realization for all bounded distortions. Diagonal blocklengths give closed rates, finite concatenation gives convex hull. Empty complement is singleton; zero-mass/one-letter/zero-rate cases valid. No claim of general optimality or AC."
+      }
+    },
+    "thm-it-finite-alphabet-wyner-ziv-rate-distortion": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-wyner-ziv-code",
+          "source_section": "Definition",
+          "quote": "Let $(X_t,Y_t)_{t\\ge1}$ be an IID pair with joint pmf $P_{XY}$ on finite nonempty alphabets $\\mathcal X\\times\\mathcal Y$, as the $k=2$ instance of [[def-it-finite-iid-multisource]]. Let $\\widehat{\\mathcal X}$ be finite nonempty and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be the finite bounded single-letter distortion from [[def-it-single-letter-distortion-and-block-distortion]]. For $x^n=(x_1,\\ldots,x_n)$ and $\\hat x^n=(\\hat x_1,\\ldots,\\hat x_n)$, define\n\n$$d_n(x^n,\\hat x^n):=\\frac1n\\sum_{t=1}^n d(x_t,\\hat x_t).$$\n\nA length-$n$, $M$-message Wyner-Ziv code consists of a deterministic encoder $f_n:\\mathcal X^n\\to[M]$ and deterministic decoder $g_n:[M]\\times\\mathcal Y^n\\to\\widehat{\\mathcal X}^n$. The encoder observes only $X^n$; the decoder observes both the message and $Y^n$. Its rate is $n^{-1}\\ln M$ nats per source symbol, and its expected distortion is $\\mathbb E[d_n(X^n,g_n(f_n(X^n),Y^n))]$.\n\nA pair $(R,D)$ is operationally achievable if there are increasing blocklengths $n_j\\to\\infty$ and such codes with $\\limsup_j n_j^{-1}\\ln M_j\\le R$ and $\\limsup_j\\mathbb E[d_{n_j}]\\le D$. Define $R_{\\rm WZ}^{\\rm op}(D)$ as the infimum of achievable rates.\n\nFor a finite auxiliary alphabet $\\mathcal U$, a test channel is a stochastic kernel $P_{U|X}$ together with a deterministic map $g:\\mathcal Y\\times\\mathcal U\\to\\widehat{\\mathcal X}$, under the joint law $P_{XYU}=P_{XY}P_{U|X}$. It has $U-X-Y$, expected distortion $\\mathbb E[d(X,g(Y,U))]$, and conditional mutual information $I(X;U|Y)$ from [[def-it-finite-conditional-mutual-information]]. Define the single-letter candidate\n$$R_{\\rm WZ}(D):=\\inf_{\\substack{\\mathcal U\\ {\\rm finite},\\,P_{U|X},\\,g\\\\\\mathbb E[d(X,g(Y,U))]\\le D}} I(X;U|Y),$$\nwith value $+\\infty$ if the feasible set is empty. This definition alone makes no operational equality claim; the following theorem proves it and the cardinality lemma makes the finite minimum explicit.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-iid-multisource",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge2$ and finite nonempty alphabets $\\mathcal X_1,\\ldots,\\mathcal X_k$. Let $\\mathcal X:=\\prod_{i=1}^k\\mathcal X_i$, identified with a finite alphabet as in [[def-finite-alphabet-iid-source]]. A **finite-alphabet IID $k$-source** is an IID sequence of vectors\n$$Z_t=(X_{1,t},\\ldots,X_{k,t})\\in\\mathcal X,\\qquad t\\ge1,$$\nwith common joint probability vector $P$ on $\\mathcal X$. Thus for every $n\\ge1$ its block law is $P^{\\otimes n}$, and terminal $i$ observes $X_i^n=(X_{i,1},\\ldots,X_{i,n})$. For $S\\subseteq[k]:=\\{1,\\ldots,k\\}$ write $X_S=(X_i)_{i\\in S}$, let $S^c=[k]\\setminus S$, and define $H_P(X_S\\mid X_{S^c})$ by [[def-it-finite-conditional-entropy]] for the induced finite joint law. When $S=[k]$, $X_{S^c}$ takes values in the singleton empty product, so $H_P(X_S\\mid X_{S^c})=H(P)$ under [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Unmarked logarithms and information rates use nats by [[def-it-information-units-and-logarithm-base]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-conditional-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XYZ}$ be a joint probability vector on finite alphabets and write $p_Z(z)$ for its marginal. It is the law of finite coordinate random elements on the canonical finite probability space from [[def-finite-probability-space-and-event]] and [[def-random-element-and-real-random-variable]]. For each $z$ with $p_Z(z)>0$, the conditional law $p_{XY|z}$ and its marginals $p_{X|z},p_{Y|z}$ are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define conditional mutual information in nats by\n\n$$I(X;Y|Z):=\\sum_{z:p_Z(z)>0}p_Z(z)D(p_{XY|z}\\|p_{X|z}\\otimes p_{Y|z}),$$\n\nusing the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], where $(p_{X|z}\\otimes p_{Y|z})(x,y):=p_{X|z}(x)p_{Y|z}(y)$. A positive conditional joint mass forces both conditional marginals to be positive, so each displayed KL term is finite. Zero-mass conditioning values contribute no term. The base-$b$ version replaces $\\ln$ by $\\log_b$ inside the conditional KL sums.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$,\n\n$$I(X;Y|Z)=H(X|Z)+H(Y|Z)-H(X,Y|Z)\\ge0.$$\n\nEquality holds if and only if, for every $z$ with $p_Z(z)>0$, the conditional joint pmf factors as $p_{XY|z}=p_{X|z}p_{Y|z}$; this is conditional independence given $Z$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-it-wyner-ziv-auxiliary-cardinality-bound",
+          "source_section": "Statement",
+          "quote": "Let $P_{XY}$ be a finite joint law, let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$, and let $(U,P_{U|X},g)$ be any finite Wyner-Ziv test channel from [[def-it-finite-wyner-ziv-code]] with expected distortion at most $D$. There is another finite test channel $(U',P_{U'|X},g')$ such that\n$$|\\mathcal U'|\\le|\\mathcal X|+1,\\qquad \\mathbb E[d(X,g'(Y,U'))]=\\mathbb E[d(X,g(Y,U))],\\qquad I(X;U'|Y)\\le I(X;U|Y).$$\nConsequently the infimum $R_{\\rm WZ}(D)$ in [[def-it-finite-wyner-ziv-code]] is a minimum and it suffices to optimize over $|\\mathcal U|\\le|\\mathcal X|+1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-it-finite-wyner-ziv-function-convexity-continuity",
+          "source_section": "Statement",
+          "quote": "Let $R_{\\rm WZ}(D)$, $D_{\\min}$, and $D_{\\max}$ be as in [[def-it-finite-wyner-ziv-code]]. Then $D_{\\min}\\le D_{\\max}$, $R_{\\rm WZ}$ is nonincreasing and convex on $[D_{\\min},\\infty)$, $R_{\\rm WZ}(D)=0$ for $D\\ge D_{\\max}$, and $R_{\\rm WZ}$ is continuous at every feasible distortion, including $D_{\\min}$ and $D_{\\max}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-it-finite-codebook-covering-selection-law",
+          "source_section": "Statement",
+          "quote": "Let $P_{XU}=P_XP_{U|X}$ be a joint law on finite nonempty alphabets, with marginal $P_U$. Fix $\\eta>0$ and a target joint-typicality tolerance $\\epsilon>0$. There are a source-typicality tolerance $\\delta>0$ and an integer $n_0$ such that, for every $n\\ge n_0$, every $x^n\\in T_\\delta^{(n)}(P_X)$, and every $R>I(X;U)+\\eta$, an iid codebook of $M_n=\\lceil e^{nR}\\rceil$ independent $P_U^{\\otimes n}$ words contains a word in $T_\\epsilon^{(n)}(P_{XU}|x^n)$ with probability tending to one uniformly in $x^n$. If the encoder selects the least index with a jointly typical word, then, conditional on a match, its selected word has law $P_U^{\\otimes n}$ conditioned on $T_\\epsilon^{(n)}(P_{XU}|x^n)$; conditional on any particular joint type, this law is uniform on the associated conditional type class.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-it-finite-selected-codeword-markov-typicality",
+          "source_section": "Statement",
+          "quote": "Let $P_{XYZ}(x,y,z)=P_{XY}(x,y)P_{Z|X}(z|x)$ be a finite-alphabet Markov law. For every $\\epsilon>0$ there are $\\delta>0$ and $n_0$ such that the following holds for $n\\ge n_0$: if $(x^n,y^n)\\in T_\\delta^{(n)}(P_{XY})$ and a random $Z^n$ is supported on $T_\\delta^{(n)}(P_{Z|X}\\mid x^n)$ and, conditional on each joint type of $(x^n,Z^n)$, is uniform on that conditional type class, then\n$$\\Pr\\{(x^n,y^n,Z^n)\\in T_\\epsilon^{(n)}(P_{XYZ})\\}\\ge1-\\frac{C}{n},$$\nwhere $C<\\infty$ depends only on the fixed finite law, alphabets, and $\\epsilon$, not on the particular typical source block or conditional type.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-it-finite-random-bin-packing-bound",
+          "source_section": "Statement",
+          "quote": "Fix $k\\ge1$, finite alphabets $\\mathcal U_1,\\ldots,\\mathcal U_k,\\mathcal S$, and a joint law $P_{U_1\\cdots U_kS}$. Let the source-selection data $Z^n$ and decoder side-information block $S^n$ have any joint law. Independently of $(Z^n,S^n)$, generate mutually independent codebooks whose $M_i$ codewords each have law $P_{U_i}^{\\otimes n}$. Generate independent uniform bin labels from $[B_i]$ for every codeword, independently of the source and codebooks. Let the selected true indices $L_i$ be functions of $Z^n$ and codebooks but not the bin labels. In addition, for every nonempty proper $J\\subset[k]$, require the complementary selected codewords at indices in $J^c$ to be determined by $Z^n$ and codebooks indexed by $J^c$ alone; this condition is automatic when each terminal selects using its own codebook, and is vacuous for $k=1$. For a fixed positive typicality tolerance, a joint-typicality decoder looks for the unique tuple in the received bins whose codewords and $S^n$ are jointly typical for $P_{U_1\\cdots U_kS}$. Suppose there is a common $\\eta>0$ such that for every nonempty $J\\subseteq[k],$\n$$\\sum_{i\\in J}\\frac1n\\ln\\frac{M_i}{B_i}<\\sum_{i\\in J}H(U_i)-H(U_J\\mid U_{J^c},S)-\\eta.$$\nThen there is $\\epsilon_0>0$ such that, for every fixed typicality tolerance $0<\\epsilon\\le\\epsilon_0$, writing $E_n$ for the event that the selected true tuple and $S^n$ are jointly typical, the expected number of wrong jointly typical tuples in its received bins, multiplied by $\\mathbf1_{E_n}$, tends to zero as $n\\to\\infty$. Consequently the probability that $E_n$ holds and a wrong jointly typical tuple exists tends to zero. The case of no side information is represented by a singleton $\\mathcal S$.",
+          "uses": [
+            "1.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-it-jointly-typical-multisource-blocks",
+          "source_section": "Definition",
+          "quote": "Let $P$ and $Z_t=(X_{1,t},\\ldots,X_{k,t})$ be as in [[def-it-finite-iid-multisource]], and let $\\mathcal X_+:=\\{x\\in\\mathcal X:P(x)>0\\}$. For $z^n\\in\\mathcal X_+^n$, write $\\widehat P_{z^n}$ for its empirical type from [[def-it-empirical-type-and-type-class]], and write $I_n(z^n)$ for its normalized block information from [[def-finite-source-information-density-and-typical-set]] applied to the vector source on $\\mathcal X$. For each nonempty $S\\subseteq[k]$ and supported pair $(x_S^n,x_{S^c}^n)$, define the conditional block information\n$$J_{S,n}(x_S^n\\mid x_{S^c}^n):=-\\frac1n\\ln P^{\\otimes n}(x_S^n\\mid x_{S^c}^n),$$\nwhere the conditional probability is the finite conditional law of the block under $P^{\\otimes n}$. Its positive denominator and coordinatewise factorization on supported tuples are proved in [[lem-it-multisource-block-conditional-law-factorization]].\n\nFor $\\delta,\\epsilon>0$, the **jointly typical set** is\n$$\\mathcal T_n(P,\\delta,\\epsilon):=\\left\\{z^n\\in\\mathcal X_+^n:\\|\\widehat P_{z^n}-P\\|_\\infty\\le\\delta,\\ |I_n(z^n)-H(P)|\\le\\epsilon,\\ |J_{S,n}(x_S^n\\mid x_{S^c}^n)-H_P(X_S\\mid X_{S^c})|\\le\\epsilon\\text{ for every nonempty }S\\subseteq[k]\\right\\}.$$\nHere $\\|q-P\\|_\\infty:=\\max_{x\\in\\mathcal X}|q(x)-P(x)|$, $H(P)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], and each $H_P(X_S\\mid X_{S^c})$ is from [[def-it-finite-conditional-entropy]] under the multisource law.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-it-multisource-typicality-probability",
+          "source_section": "Statement",
+          "quote": "Let $(Z_t)_{t\\ge1}$ be a finite-alphabet IID $k$-source with joint letter law $P$ on $\\mathcal X=\\prod_{i=1}^k\\mathcal X_i$. For every $\\delta,\\epsilon>0$, its jointly typical set from [[def-it-jointly-typical-multisource-blocks]] satisfies\n$$P^{\\otimes n}\\bigl(\\mathcal T_n(P,\\delta,\\epsilon)\\bigr)\\longrightarrow1\\qquad(n\\to\\infty).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a length-$n$ code, put $W=f_n(X^n)$, and write $\\widehat X_i$ for the $i$th decoder output. Let $u_M$ be uniform on $[M]$. By [F13], $$0\\le D(P_W\\|u_M)=\\sum_{w:P_W(w)>0}P_W(w)\\ln\\frac{P_W(w)}{1/M}=\\ln M-H(W),$$ so $\\ln M\\ge H(W)$. The conditional-mutual-information identity and nonnegativity in [F5] give $H(W)-H(W|Y^n)=I(W;Y^n)\\ge0$ and $$I(X^n;W|Y^n)=H(W|Y^n)-H(W|X^n,Y^n)\\le H(W|Y^n),$$ because conditional entropy is nonnegative by its finite-sum definition [F12]. Combining these inequalities gives $\\ln M\\ge H(W)\\ge H(W|Y^n)\\ge I(X^n;W|Y^n)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F12",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F6], choose a minimizing finite test channel $(U,P_{U|X},g)$ with $|\\mathcal U|\\le|\\mathcal X|+1$ and expected distortion at most $D$. Choose a codebook rate $\\widetilde R>I(X;U)$ and a bin rate $R>I(X;U|Y)$ so that $s:=I(U;Y)-(\\widetilde R-R)>0$; this is possible because the test-channel factorization in [F1] gives $I(U;Y|X)=0$ by [F3], and the chain rule [F4]\u2013[F5] yields $I(X;U|Y)=I(X;U)-I(U;Y)$. Put $\\eta=s/2$ and fix a final joint-typicality tolerance $\\epsilon>0$ small enough for [F10] with slack $\\eta$ and for the bounded-distortion estimate, with error $\\omega(\\epsilon)\\to0$ as $\\epsilon\\downarrow0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "choose",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Generate $M_n=\\lceil e^{n\\widetilde R}\\rceil$ independent codewords with law $P_U^{\\otimes n}$ and assign each codeword an independent uniform bin label in $[B_n]$, where $B_n=\\lceil e^{nR}\\rceil$. On a source block $x^n$, the encoder chooses the first codeword in the conditional typical set with the source/conditional tolerances chosen below from [F8]\u2013[F9] and sends its bin; if none exists, it sends the first bin. Given $(m,y^n)$, the decoder finds the unique codeword in bin $m$ jointly typical with $y^n$ at tolerance $\\epsilon$ and applies $g$ coordinatewise, defaulting to a fixed reproduction block if uniqueness fails. These are finite code ensembles and deterministic maps once a realization is fixed.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F8",
+            "construct",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $Y^{-i}$ denote all side-information coordinates except $Y_i$ and define $U_i=(W,Y^{-i})$. Memorylessness gives $H(X^n|Y^n)=\\sum_iH(X_i|Y_i)$, while the conditional entropy chain rule gives $H(X^n|W,Y^n)=\\sum_iH(X_i|X^{i-1},W,Y^n)\\le\\sum_iH(X_i|W,Y^n)$. Subtracting yields $I(X^n;W|Y^n)\\ge\\sum_{i=1}^n I(X_i;W,Y^{-i}|Y_i)=\\sum_{i=1}^n I(X_i;U_i|Y_i).$ Each $U_i-X_i-Y_i$: conditional on $X_i$, the independent pair $(X_i,Y_i)$ is independent of all other source pairs, and $W,Y^{-i}$ are functions of $X^n,Y^{-i}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Apply [F9] with output tolerance $\\epsilon$ from step 1.2 to obtain its input tolerance $\\delta_M$. Apply [F8] with target conditional tolerance $\\delta_M$; it supplies a source tolerance $\\delta_X>0$. Choose a relative source-pair tolerance $\\delta_{XY}\\le\\min(\\delta_M,\\delta_X)$. In [F11], take the empirical tolerance below $\\delta_{XY}\\min_{P_{XY}(x,y)>0}P_{XY}(x,y)$; then the pair block belongs to $T_{\\delta_{XY}}^{(n)}(P_{XY})$ with probability tending to one. Summing relative typicality errors over the $Y$-coordinates shows that its $X^n$ marginal is in $T_{\\delta_X}^{(n)}(P_X)$, so [F8] makes covering failure tend to zero uniformly. Conditional on successful selection, its law is uniform within each conditional type class, and [F9] makes $(X^n,Y^n,U^n)$ jointly typical at tolerance $\\epsilon$ with probability tending to one. Therefore the selected true codeword is jointly typical with $Y^n$, except on an event whose probability tends to zero.",
+          "step": "2.2",
+          "inputs": [
+            "F8",
+            "F9",
+            "F11",
+            "step 1.3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $T$ be uniform on $[n]$ and independent of the source, and put $(X,Y,U,\\widehat X)=(X_T,Y_T,(U_T,T),\\widehat X_T)$. The just-proved Markov property gives $U-X-Y$, the reconstruction is a deterministic function of $(Y,U)$, and its expected distortion is $\\overline D_n:=n^{-1}\\sum_i\\mathbb E d(X_i,\\widehat X_i)$. Since $T$ is independent of $(X_T,Y_T)$, $I(X;U|Y)=n^{-1}\\sum_iI(X_i;U_i|Y_i)$. Thus step 1.1 gives $n^{-1}\\ln M\\ge I(X;U|Y)\\ge R_{\\rm WZ}(\\overline D_n)$. For any operationally achievable sequence with distortion limsup at most $D$, for every $\\varepsilon_D>0$ we eventually have $\\overline D_n\\le D+\\varepsilon_D$; monotonicity and continuity in [F7], followed by $\\varepsilon_D\\downarrow0$, prove $R_{\\rm WZ}^{\\rm op}(D)\\ge R_{\\rm WZ}(D)$. If $D<D_{\\min}$, every reproduction has pointwise distortion at least $\\min_{\\hat x}d(X,\\hat x)$, so no code can meet the target.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The codebook is independent of the source pair, and its bin labels are independent of source and codebook. Apply [F10] with selection data $Z^n=(X^n,Y^n)$, decoder side information $S^n=Y^n$, and $k=1$. The complementary-selection restriction is vacuous, and the changed candidate codeword is independent of $(X^n,Y^n)$; the codebook-to-bin exponent is at most $\\widetilde R-R+n^{-1}\\ln2<I(U;Y)-\\eta$ for all sufficiently large $n$ by the choice of $s$ and $\\eta$ in step 1.2. Thus the probability of a false jointly typical codeword together with a typical true codeword tends to zero. Together with step 2.2, this makes the ensemble probability $\\bar q_n$ of the exceptional event (covering failure, an atypical true $(X^n,Y^n,U^n)$ tuple, or decoding failure) tend to zero. On the complementary event, the joint empirical type is within tolerance $\\epsilon$, so the bounded per-letter distortion of $g(Y,U)$ is at most $D+\\omega(\\epsilon)$ for a deterministic $\\omega(\\epsilon)\\to0$; on the exceptional event it is at most $d_{\\max}$. Hence the ensemble mean distortion is at most $D+\\omega(\\epsilon)+d_{\\max}\\bar q_n$.",
+          "step": "3.2",
+          "inputs": [
+            "F10",
+            "F12",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each fixed codebook and bin realization $C$, let $q_n(C)$ be the source probability of the exceptional event from step 3.2; its ensemble mean is $\\bar q_n$. The finite-ensemble mean of expected distortion plus $d_{\\max}q_n(C)$ is at most $D+\\omega(\\epsilon)+2d_{\\max}\\bar q_n$. Some deterministic realization has this sum no larger than its ensemble mean; choose the first such realization in a fixed finite ordering. Its distortion is therefore at most $D+\\omega(\\epsilon)+2d_{\\max}\\bar q_n$. Letting $\\epsilon$ and the rate slack decrease along an increasing sequence of blocklengths proves $R_{\\rm WZ}^{\\rm op}(D)\\le R_{\\rm WZ}(D)$. Together with step 3.1 this proves equality.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 1.3",
+            "step 2.2",
+            "step 3.2",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded. Independent item review: The converse Ui=(W,Y^-i) is Markov with Xi,Yi and bounds rate by the convex single-letter minimum; covering/Markov selection and bin decoding achieve it via decreasing tolerance (1.1\u20134.1).",
+            "item_sha256": "0c984920ad4376e6459de83cbb98674cd8df10c3d3c8183bfa4c07e592d48734",
+            "row_sha256": "7ac0b63ed89887bfa846030de1902f90d18f4e59dcb6c5e7cdab673fc0086fc5"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: The converse Ui=(W,Y^-i) is Markov with Xi,Yi and bounds rate by the convex single-letter minimum; covering/Markov selection and bin decoding achieve it via decreasing tolerance (1.1\u20134.1).",
+            "item_sha256": "0c984920ad4376e6459de83cbb98674cd8df10c3d3c8183bfa4c07e592d48734",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: The converse Ui=(W,Y^-i) is Markov with Xi,Yi and bounds rate by the convex single-letter minimum; covering/Markov selection and bin decoding achieve it via decreasing tolerance (1.1\u20134.1).",
+            "item_sha256": "0c984920ad4376e6459de83cbb98674cd8df10c3d3c8183bfa4c07e592d48734",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: The converse Ui=(W,Y^-i) is Markov with Xi,Yi and bounds rate by the convex single-letter minimum; covering/Markov selection and bin decoding achieve it via decreasing tolerance (1.1\u20134.1).",
+            "item_sha256": "0c984920ad4376e6459de83cbb98674cd8df10c3d3c8183bfa4c07e592d48734",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: The converse Ui=(W,Y^-i) is Markov with Xi,Yi and bounds rate by the convex single-letter minimum; covering/Markov selection and bin decoding achieve it via decreasing tolerance (1.1\u20134.1).",
+            "item_sha256": "0c984920ad4376e6459de83cbb98674cd8df10c3d3c8183bfa4c07e592d48734",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: The converse Ui=(W,Y^-i) is Markov with Xi,Yi and bounds rate by the convex single-letter minimum; covering/Markov selection and bin decoding achieve it via decreasing tolerance (1.1\u20134.1).",
+            "item_sha256": "0c984920ad4376e6459de83cbb98674cd8df10c3d3c8183bfa4c07e592d48734",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement claims equality; the first direction is established in the converse or lower-bound part of the proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Statement claims equality; the reverse direction is established in the achievability or upper-bound part of the proof."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "All eight steps reviewed. Converse: H(W)<=log M, conditional entropy monotonicity, U_i=(W,Y^-i) with U_i-X_i-Y_i by IID factorization, and independent time index give the single-letter lower bound with actual block-average distortion. Monotonicity/right continuity close the operational limsup at endpoints. Achievability: backward source/conditional tolerances, uniform first-success covering, type-uniform Markov typicality, independent bins and eta slack apply; step 1.2 already chooses small packing tolerance. Ceiling corrections vanish. Finite-ensemble selection and increasing blocklength diagonalization attain the boundary, including I(U;Y)=0 and D_min. Finite alphabets, zero atoms and no AC checked."
+      }
+    },
+    "ex-it-wyner-ziv-with-no-side-information": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-it-finite-alphabet-wyner-ziv-rate-distortion",
+          "source_section": "Statement",
+          "quote": "Let $(X_t,Y_t)_{t\\ge1}$ be IID on finite alphabets $\\mathcal X\\times\\mathcal Y$, let $\\widehat{\\mathcal X}$ be finite, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be a bounded distortion independent of $Y$. With decoder-only side information and the operational convention of [[def-it-finite-wyner-ziv-code]],\n$$R_{\\rm WZ}^{\\rm op}(D)=R_{\\rm WZ}(D)=\\min_{\\substack{|\\mathcal U|\\le|\\mathcal X|+1,\\,P_{U|X},\\,g:\\mathcal Y\\times\\mathcal U\\to\\widehat{\\mathcal X}\\\\U-X-Y,\\,\\mathbb E d(X,g(Y,U))\\le D}} I(X;U|Y)$$\nfor every $D\\ge D_{\\min}$. For $D<D_{\\min}$ no code can attain the distortion. The stated single-encoder formula is exact; the multiterminal lossy statement proved separately on this page is only an inner bound.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-wyner-ziv-code",
+          "source_section": "Definition",
+          "quote": "Let $(X_t,Y_t)_{t\\ge1}$ be an IID pair with joint pmf $P_{XY}$ on finite nonempty alphabets $\\mathcal X\\times\\mathcal Y$, as the $k=2$ instance of [[def-it-finite-iid-multisource]]. Let $\\widehat{\\mathcal X}$ be finite nonempty and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be the finite bounded single-letter distortion from [[def-it-single-letter-distortion-and-block-distortion]]. For $x^n=(x_1,\\ldots,x_n)$ and $\\hat x^n=(\\hat x_1,\\ldots,\\hat x_n)$, define\n\n$$d_n(x^n,\\hat x^n):=\\frac1n\\sum_{t=1}^n d(x_t,\\hat x_t).$$\n\nA length-$n$, $M$-message Wyner-Ziv code consists of a deterministic encoder $f_n:\\mathcal X^n\\to[M]$ and deterministic decoder $g_n:[M]\\times\\mathcal Y^n\\to\\widehat{\\mathcal X}^n$. The encoder observes only $X^n$; the decoder observes both the message and $Y^n$. Its rate is $n^{-1}\\ln M$ nats per source symbol, and its expected distortion is $\\mathbb E[d_n(X^n,g_n(f_n(X^n),Y^n))]$.\n\nA pair $(R,D)$ is operationally achievable if there are increasing blocklengths $n_j\\to\\infty$ and such codes with $\\limsup_j n_j^{-1}\\ln M_j\\le R$ and $\\limsup_j\\mathbb E[d_{n_j}]\\le D$. Define $R_{\\rm WZ}^{\\rm op}(D)$ as the infimum of achievable rates.\n\nFor a finite auxiliary alphabet $\\mathcal U$, a test channel is a stochastic kernel $P_{U|X}$ together with a deterministic map $g:\\mathcal Y\\times\\mathcal U\\to\\widehat{\\mathcal X}$, under the joint law $P_{XYU}=P_{XY}P_{U|X}$. It has $U-X-Y$, expected distortion $\\mathbb E[d(X,g(Y,U))]$, and conditional mutual information $I(X;U|Y)$ from [[def-it-finite-conditional-mutual-information]]. Define the single-letter candidate\n$$R_{\\rm WZ}(D):=\\inf_{\\substack{\\mathcal U\\ {\\rm finite},\\,P_{U|X},\\,g\\\\\\mathbb E[d(X,g(Y,U))]\\le D}} I(X;U|Y),$$\nwith value $+\\infty$ if the feasible set is empty. This definition alone makes no operational equality claim; the following theorem proves it and the cardinality lemma makes the finite minimum explicit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-markov-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $X,Y,Z$ have a joint pmf on finite alphabets and suppose that, for every $y$ with $p_Y(y)>0$,\n\n$$p_{XZ|y}(x,z)=p_{X|y}(x)p_{Z|y}(z).$$\n\nThis is the finite Markov condition $X\\to Y\\to Z$. Then\n\n$$I(X;Z)\\le I(X;Y),$$\n\nwith equality if and only if $I(X;Y|Z)=0$, equivalently $X$ and $Y$ are conditionally independent given every positive-mass value of $Z$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Because $Y$ is constant, any Wyner-Ziv test channel and reconstruction induce a finite channel $P_{\\widehat X|X}$ with $\\widehat X=g(U)$. Its distortion is unchanged and $X-U-\\widehat X$ is a Markov chain. By [F2] and [F4], $R_{X,d}^{\\rm nat}(D)\\le I(X;\\widehat X)\\le I(X;U|Y)=I(X;U)$. Taking the infimum over WZ test channels gives $R_{X,d}^{\\rm nat}(D)\\le R_{\\rm WZ}(D)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, every finite channel $P_{\\widehat X|X}$ feasible for the ordinary infimum in [F2] gives the WZ test channel $U=\\widehat X$ and decoder $g(y,u)=u$. This is feasible with the same mutual information and distortion, by [F3]. Taking infima gives $R_{\\rm WZ}(D)\\le R_{X,d}^{\\rm nat}(D)$. Together with step 1.1 this proves equality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded. Independent item review: Constant Y turns every WZ auxiliary into an ordinary reproduction channel via data processing; U=hatX proves the opposite infimum inequality (1.1,2.1).",
+            "item_sha256": "65eae50eb2537f76c258b083b9901e6060a36f7a807d0f4695ab4232d952068a",
+            "row_sha256": "7ac0b63ed89887bfa846030de1902f90d18f4e59dcb6c5e7cdab673fc0086fc5"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: Constant Y turns every WZ auxiliary into an ordinary reproduction channel via data processing; U=hatX proves the opposite infimum inequality (1.1,2.1).",
+            "item_sha256": "65eae50eb2537f76c258b083b9901e6060a36f7a807d0f4695ab4232d952068a",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: Constant Y turns every WZ auxiliary into an ordinary reproduction channel via data processing; U=hatX proves the opposite infimum inequality (1.1,2.1).",
+            "item_sha256": "65eae50eb2537f76c258b083b9901e6060a36f7a807d0f4695ab4232d952068a",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: Constant Y turns every WZ auxiliary into an ordinary reproduction channel via data processing; U=hatX proves the opposite infimum inequality (1.1,2.1).",
+            "item_sha256": "65eae50eb2537f76c258b083b9901e6060a36f7a807d0f4695ab4232d952068a",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: Constant Y turns every WZ auxiliary into an ordinary reproduction channel via data processing; U=hatX proves the opposite infimum inequality (1.1,2.1).",
+            "item_sha256": "65eae50eb2537f76c258b083b9901e6060a36f7a807d0f4695ab4232d952068a",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: Constant Y turns every WZ auxiliary into an ordinary reproduction channel via data processing; U=hatX proves the opposite infimum inequality (1.1,2.1).",
+            "item_sha256": "65eae50eb2537f76c258b083b9901e6060a36f7a807d0f4695ab4232d952068a",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved. Independent item review: Constant Y turns every WZ auxiliary into an ordinary reproduction channel via data processing; U=hatX proves the opposite infimum inequality (1.1,2.1).",
+            "item_sha256": "65eae50eb2537f76c258b083b9901e6060a36f7a807d0f4695ab4232d952068a",
+            "row_sha256": "4904007a088ed87caeae39c96baf02986b0b4999879aa469211f5b30474341ab"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no reverse implication claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement makes no reverse implication claim. Independent item review: Constant Y turns every WZ auxiliary into an ordinary reproduction channel via data processing; U=hatX proves the opposite infimum inequality (1.1,2.1).",
+            "item_sha256": "65eae50eb2537f76c258b083b9901e6060a36f7a807d0f4695ab4232d952068a",
+            "row_sha256": "05db4452faf9e1254b4b8035698d73744b01b358bb3b1af5510529dc7ab6b098"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Both infimum directions independently checked: constant Y makes hat X=g(U), so finite data processing bounds I(X;hat X)<=I(X;U)=I(X;U|Y); conversely U=hat X embeds every feasible finite reproduction channel. No cardinality restriction is imposed by the defining infimum. Same nats, finite distortion and feasible constraints; infeasible D gives both values +infinity. Deterministic and singleton laws included, no AC. Reader touch is quotation enrichment only."
+      }
+    },
+    "ex-it-wyner-ziv-lossless-slepian-wolf-endpoint": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-it-finite-alphabet-wyner-ziv-rate-distortion",
+          "source_section": "Statement",
+          "quote": "Let $(X_t,Y_t)_{t\\ge1}$ be IID on finite alphabets $\\mathcal X\\times\\mathcal Y$, let $\\widehat{\\mathcal X}$ be finite, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be a bounded distortion independent of $Y$. With decoder-only side information and the operational convention of [[def-it-finite-wyner-ziv-code]],\n$$R_{\\rm WZ}^{\\rm op}(D)=R_{\\rm WZ}(D)=\\min_{\\substack{|\\mathcal U|\\le|\\mathcal X|+1,\\,P_{U|X},\\,g:\\mathcal Y\\times\\mathcal U\\to\\widehat{\\mathcal X}\\\\U-X-Y,\\,\\mathbb E d(X,g(Y,U))\\le D}} I(X;U|Y)$$\nfor every $D\\ge D_{\\min}$. For $D<D_{\\min}$ no code can attain the distortion. The stated single-encoder formula is exact; the multiterminal lossy statement proved separately on this page is only an inner bound.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$,\n\n$$I(X;Y|Z)=H(X|Z)+H(Y|Z)-H(X,Y|Z)\\ge0.$$\n\nEquality holds if and only if, for every $z$ with $p_Z(z)>0$, the conditional joint pmf factors as $p_{XY|z}=p_{X|z}p_{Y|z}$; this is conditional independence given $Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-slepian-wolf-rate-region",
+          "source_section": "Statement",
+          "quote": "Let $(Z_t)_{t\\ge1}$ be a finite-alphabet IID $k$-source with joint law $P$ as in [[def-it-finite-iid-multisource]], where $k\\ge2$. The achievable fixed-length lossless rate vectors in the sense of [[def-it-multiterminal-lossless-code]] are exactly\n$$\\mathcal R_{\\mathrm{SW}}(P)=\\left\\{R\\in[0,\\infty)^k:\\sum_{i\\in S}R_i\\ge H_P(X_S\\mid X_{S^c})\\text{ for every nonempty }S\\subseteq[k]\\right\\}.$$\nFor $S=[k]$, the inequality is the total-rate bound $\\sum_iR_i\\ge H(P)$. All logarithms are natural, so rates and entropies are in nats per source symbol.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-it-multiterminal-lossless-code",
+          "source_section": "Definition",
+          "quote": "Fix a finite-alphabet IID multisource from [[def-it-finite-iid-multisource]] and a blocklength $n\\ge1$. Choose positive integers $M_1,\\ldots,M_k$. A **fixed-length multiterminal lossless code** consists of separate deterministic encoders\n$$f_{i,n}:\\mathcal X_i^n\\to[M_i]:=\\{1,\\ldots,M_i\\},\\qquad 1\\le i\\le k,$$\nand one common deterministic decoder\n$$g_n:\\prod_{i=1}^k[M_i]\\to\\prod_{i=1}^k\\mathcal X_i^n.$$\nIts block-error probability is\n$$P_e^{(n)}:=\\mathbb P\\!\\left[g_n\\bigl(f_{1,n}(X_1^n),\\ldots,f_{k,n}(X_k^n)\\bigr)\\ne(X_1^n,\\ldots,X_k^n)\\right].$$\nThe rate of encoder $i$ is $R_{i,n}:=n^{-1}\\ln M_i$ nats per source symbol, with the logarithm convention of [[def-it-information-units-and-logarithm-base]]. A vector $R=(R_1,\\ldots,R_k)\\in[0,\\infty)^k$ is **achievable** if there are strictly increasing blocklengths $n_j\\to\\infty$ and such codes for which $P_e^{(n_j)}\\to0$ and $\\limsup_{j\\to\\infty}R_{i,n_j}\\le R_i$ for every $i$. The encoders do not observe other terminals' source blocks; only the common decoder receives all message indices.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Any feasible test channel has nonnegative Hamming distortion with expectation zero, so $X=\\widehat X=g(Y,U)$ almost surely. Every positive-mass conditional law of $X$ given $(U,Y)$ is therefore a point mass; [F4] and [F7] give $H(X|U,Y)=0$, and [F2] gives $I(X;U|Y)=H(X|Y)$. The admissible choice $U=X$, $g(y,u)=u$ has zero distortion and the same objective, so the Wyner-Ziv minimum is exactly $H(X|Y)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the two-source Slepian-Wolf region of [F3], the subset $\\{X\\}$ requires $R_X\\ge H(X|Y)$. The rate pair $(R_X,R_Y)=(H(X|Y),H(Y))$ satisfies the other two inequalities because $H(Y)\\ge H(Y|X)$ follows from [F5] and the first identity in [F6], while $H(X|Y)+H(Y)=H(X,Y)$ is the second identity in [F6]. These are the operational rates of the fixed-length code convention in [F8], so the minimum X-encoder rate with the Y-encoder sending its lossless sequence is $H(X|Y)$, matching step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The Statement assumes finite nonempty alphabets, positive blocklength, or an attainable finite law; the empty-domain case is excluded. Independent item review: At D=0 nonnegative Hamming distortion forces X=g(Y,U), so H(X|Y,U)=0; U=X attains H(X|Y), and the SW pair (H(X|Y),H(Y)) is feasible (1.1,2.1).",
+            "item_sha256": "34d8c4edf3cd955008013c2e8e87e9f0e1715d7588f01f3b65a72fef9f8576f5",
+            "row_sha256": "7ac0b63ed89887bfa846030de1902f90d18f4e59dcb6c5e7cdab673fc0086fc5"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: At D=0 nonnegative Hamming distortion forces X=g(Y,U), so H(X|Y,U)=0; U=X attains H(X|Y), and the SW pair (H(X|Y),H(Y)) is feasible (1.1,2.1).",
+            "item_sha256": "34d8c4edf3cd955008013c2e8e87e9f0e1715d7588f01f3b65a72fef9f8576f5",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: At D=0 nonnegative Hamming distortion forces X=g(Y,U), so H(X|Y,U)=0; U=X attains H(X|Y), and the SW pair (H(X|Y),H(Y)) is feasible (1.1,2.1).",
+            "item_sha256": "34d8c4edf3cd955008013c2e8e87e9f0e1715d7588f01f3b65a72fef9f8576f5",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: At D=0 nonnegative Hamming distortion forces X=g(Y,U), so H(X|Y,U)=0; U=X attains H(X|Y), and the SW pair (H(X|Y),H(Y)) is feasible (1.1,2.1).",
+            "item_sha256": "34d8c4edf3cd955008013c2e8e87e9f0e1715d7588f01f3b65a72fef9f8576f5",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: At D=0 nonnegative Hamming distortion forces X=g(Y,U), so H(X|Y,U)=0; U=X attains H(X|Y), and the SW pair (H(X|Y),H(Y)) is feasible (1.1,2.1).",
+            "item_sha256": "34d8c4edf3cd955008013c2e8e87e9f0e1715d7588f01f3b65a72fef9f8576f5",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: At D=0 nonnegative Hamming distortion forces X=g(Y,U), so H(X|Y,U)=0; U=X attains H(X|Y), and the SW pair (H(X|Y),H(Y)) is feasible (1.1,2.1).",
+            "item_sha256": "34d8c4edf3cd955008013c2e8e87e9f0e1715d7588f01f3b65a72fef9f8576f5",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The Statement is not an if-and-only-if assertion; it claims only the implication or bound proved. Independent item review: At D=0 nonnegative Hamming distortion forces X=g(Y,U), so H(X|Y,U)=0; U=X attains H(X|Y), and the SW pair (H(X|Y),H(Y)) is feasible (1.1,2.1).",
+            "item_sha256": "34d8c4edf3cd955008013c2e8e87e9f0e1715d7588f01f3b65a72fef9f8576f5",
+            "row_sha256": "4904007a088ed87caeae39c96baf02986b0b4999879aa469211f5b30474341ab"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no reverse implication claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The Statement makes no reverse implication claim. Independent item review: At D=0 nonnegative Hamming distortion forces X=g(Y,U), so H(X|Y,U)=0; U=X attains H(X|Y), and the SW pair (H(X|Y),H(Y)) is feasible (1.1,2.1).",
+            "item_sha256": "34d8c4edf3cd955008013c2e8e87e9f0e1715d7588f01f3b65a72fef9f8576f5",
+            "row_sha256": "05db4452faf9e1254b4b8035698d73744b01b358bb3b1af5510529dc7ab6b098"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Both steps checked. Nonnegative zero expected Hamming distortion forces a.s. reconstruction, point-mass conditional laws give H(X|UY)=0, and U=X attains H(X|Y). Exact SW point (H(X|Y),H(Y)) is feasible by nonnegative I and entropy chain rule. Rates are compared without asserting that every vanishing symbol-error code has vanishing block error. Degenerate laws, zero conditional entropy and one-letter cases valid; no AC."
+      }
+    },
+    "ex-it-berger-tung-lossless-slepian-wolf-special-case": {
+      "proof_strategy": "direct",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-it-berger-tung-finite-multiterminal-inner-bound",
+          "source_section": "Statement",
+          "quote": "Fix a finite IID $k$-source with $k\\ge2$, per-terminal finite reproduction alphabets, and bounded distortions $d_i$ as in [[def-it-finite-multiterminal-lossy-code]]. Choose finite auxiliary alphabets $\\mathcal U_i$, product test channels\n$$P_{X_1\\cdots X_kU_1\\cdots U_k}=P_{X_1\\cdots X_k}\\prod_{i=1}^kP_{U_i|X_i},$$\nand deterministic reconstruction maps $g_i:\\prod_{j=1}^k\\mathcal U_j\\to\\widehat{\\mathcal X}_i$ whose expected distortions are at most $D_i$. For each nonempty $S\\subseteq[k]$, write $X_S=(X_i)_{i\\in S}$, $U_S=(U_i)_{i\\in S}$, and $S^c=[k]\\setminus S$; when $S=[k]$, $U_{S^c}$ is a constant singleton. Then every nonnegative rate vector satisfying\n$$\\sum_{i\\in S}R_i\\ge I(X_S;U_S|U_{S^c})\\qquad\\text{for every nonempty }S\\subseteq[k]$$\nis achievable at distortions $(D_1,\\ldots,D_k)$. The convex hull of the union of these finite-auxiliary rate regions, over all such product test channels and reconstruction maps, is the finite-alphabet Berger-Tung inner bound and is achievable. This theorem does not assert that the inner bound is the exact general multiterminal lossy rate region.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-slepian-wolf-rate-region",
+          "source_section": "Statement",
+          "quote": "Let $(Z_t)_{t\\ge1}$ be a finite-alphabet IID $k$-source with joint law $P$ as in [[def-it-finite-iid-multisource]], where $k\\ge2$. The achievable fixed-length lossless rate vectors in the sense of [[def-it-multiterminal-lossless-code]] are exactly\n$$\\mathcal R_{\\mathrm{SW}}(P)=\\left\\{R\\in[0,\\infty)^k:\\sum_{i\\in S}R_i\\ge H_P(X_S\\mid X_{S^c})\\text{ for every nonempty }S\\subseteq[k]\\right\\}.$$\nFor $S=[k]$, the inequality is the total-rate bound $\\sum_iR_i\\ge H(P)$. All logarithms are natural, so rates and entropies are in nats per source symbol.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$,\n\n$$I(X;Y|Z)=H(X|Z)+H(Y|Z)-H(X,Y|Z)\\ge0.$$\n\nEquality holds if and only if, for every $z$ with $p_Z(z)>0$, the conditional joint pmf factors as $p_{XY|z}=p_{X|z}p_{Y|z}$; this is conditional independence given $Z$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-it-multiterminal-lossless-code",
+          "source_section": "Definition",
+          "quote": "Fix a finite-alphabet IID multisource from [[def-it-finite-iid-multisource]] and a blocklength $n\\ge1$. Choose positive integers $M_1,\\ldots,M_k$. A **fixed-length multiterminal lossless code** consists of separate deterministic encoders\n$$f_{i,n}:\\mathcal X_i^n\\to[M_i]:=\\{1,\\ldots,M_i\\},\\qquad 1\\le i\\le k,$$\nand one common deterministic decoder\n$$g_n:\\prod_{i=1}^k[M_i]\\to\\prod_{i=1}^k\\mathcal X_i^n.$$\nIts block-error probability is\n$$P_e^{(n)}:=\\mathbb P\\!\\left[g_n\\bigl(f_{1,n}(X_1^n),\\ldots,f_{k,n}(X_k^n)\\bigr)\\ne(X_1^n,\\ldots,X_k^n)\\right].$$\nThe rate of encoder $i$ is $R_{i,n}:=n^{-1}\\ln M_i$ nats per source symbol, with the logarithm convention of [[def-it-information-units-and-logarithm-base]]. A vector $R=(R_1,\\ldots,R_k)\\in[0,\\infty)^k$ is **achievable** if there are strictly increasing blocklengths $n_j\\to\\infty$ and such codes for which $P_e^{(n_j)}\\to0$ and $\\limsup_{j\\to\\infty}R_{i,n_j}\\le R_i$ for every $i$. The encoders do not observe other terminals' source blocks; only the common decoder receives all message indices.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With $U_i=X_i$, every $U_i-X_i$ test channel is the identity and the product factorization is satisfied. The decoder sets $\\widehat X_i=U_i$, so all Hamming distortions vanish. The subset right-hand side in [F1] becomes $I(X_S;X_S|X_{S^c})$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $X_S$ is determined by $(X_S,X_{S^c})$, each positive-mass conditional law of $X_S$ given those variables is a point mass; [F4]\u2013[F5] give $H(X_S|X_S,X_{S^c})=0$. Then [F3] gives $I(X_S;X_S|X_{S^c})=H(X_S|X_{S^c})$. These are exactly the inequalities in [F2], under the lossless fixed-length common-decoder convention [F6]. Therefore the Berger-Tung inner bound contains the exact Slepian-Wolf region for this zero-distortion special case, while its statement remains only an inner bound for general distortions.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Local source sections: Example; Verification. The full changed/terminal subset has empty complement, represented by a singleton variable; its conditional entropy/information is unconditional. The displayed finite-subset argument includes this case, while a probability law still requires nonempty alphabets.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The full changed/terminal subset has empty complement, represented by a singleton variable; its conditional entropy/information is unconditional. The displayed finite-subset argument includes this case, while a probability law still requires nonempty alphabets. Independent item review: Identity auxiliaries Ui=Xi give zero distortions and turn each Berger\u2013Tung subset information into H(XS|XSc), exactly the SW constraints (1.1,2.1).",
+            "item_sha256": "1f834c055f91fffbd6095d68810c67685b8a2c2315fb232f7a0007cf368200c1",
+            "row_sha256": "56c118753fa05174cb42eefb43fc34d31c7a4a7b45c6b22940246c0813ff0599"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "zero: The Statement and finite-support argument include zero-mass coordinates or the stated zero-distortion endpoint. Independent item review: Identity auxiliaries Ui=Xi give zero distortions and turn each Berger\u2013Tung subset information into H(XS|XSc), exactly the SW constraints (1.1,2.1).",
+            "item_sha256": "1f834c055f91fffbd6095d68810c67685b8a2c2315fb232f7a0007cf368200c1",
+            "row_sha256": "657741b6ba7ae22dfc5f5660d8e57ddf71fbc91565853f252b451de5620bfe66"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "one: The Statement and finite-alphabet proof include one-element alphabets when allowed by its hypotheses. Independent item review: Identity auxiliaries Ui=Xi give zero distortions and turn each Berger\u2013Tung subset information into H(XS|XSc), exactly the SW constraints (1.1,2.1).",
+            "item_sha256": "1f834c055f91fffbd6095d68810c67685b8a2c2315fb232f7a0007cf368200c1",
+            "row_sha256": "3d8e9212d48ca22e7e746e0ddf12cfe9f88eba056a9819f350dfb049a5bcb029"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and finite-support proof include deterministic or degenerate probability laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "degenerate: The Statement and finite-support proof include deterministic or degenerate probability laws. Independent item review: Identity auxiliaries Ui=Xi give zero distortions and turn each Berger\u2013Tung subset information into H(XS|XSc), exactly the SW constraints (1.1,2.1).",
+            "item_sha256": "1f834c055f91fffbd6095d68810c67685b8a2c2315fb232f7a0007cf368200c1",
+            "row_sha256": "72ab1bfb681d937c288a3dd245bbc07c16eaf40fa111bc71ada01284981dfc3d"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The Statement and proof address the applicable endpoint or explicitly require positive tolerance/slack. Independent item review: Identity auxiliaries Ui=Xi give zero distortions and turn each Berger\u2013Tung subset information into H(XS|XSc), exactly the SW constraints (1.1,2.1).",
+            "item_sha256": "1f834c055f91fffbd6095d68810c67685b8a2c2315fb232f7a0007cf368200c1",
+            "row_sha256": "3d5cc70295b3372a6b719d584a19f182e0719909d036423e78ba5d892ede7cb6"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is proved using finite sets and finite listings; no choice axiom is invoked.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The Statement is proved using finite sets and finite listings; no choice axiom is invoked. Independent item review: Identity auxiliaries Ui=Xi give zero distortions and turn each Berger\u2013Tung subset information into H(XS|XSc), exactly the SW constraints (1.1,2.1).",
+            "item_sha256": "1f834c055f91fffbd6095d68810c67685b8a2c2315fb232f7a0007cf368200c1",
+            "row_sha256": "9eb1e5ca9b8ce97c0c3ca321fc62f25ed06ebbbf6ac6dee44e8c4df7e7499a1e"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement claims equality; the first direction is established in the converse or lower-bound part of the proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Statement claims equality; the reverse direction is established in the achievability or upper-bound part of the proof."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17",
+        "notes": "Read both verification steps and exact SW/BT suppliers. Identity auxiliaries give zero Hamming distortions and I(X_S;X_S|X_Sc)=H(X_S|X_Sc), including empty complement. Checked reverse matching direction: any zero-distortion auxiliary gives H(X_S|U_all)=0, and U_Sc-X_Sc-X_S implies H(X_S|U_Sc)>=H(X_S|X_Sc); thus no auxiliary or convex combination expands the SW region. Missing immediate reverse inequality in the short verification is nonfatal polish. Singleton and deterministic laws valid; no block-error/letter-error inference or AC."
+      }
+    }
+  }
+}

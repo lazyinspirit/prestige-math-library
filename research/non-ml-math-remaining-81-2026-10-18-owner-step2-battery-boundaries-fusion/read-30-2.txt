@@ -1,0 +1,158 @@
+
+ITEM def-qc-tqc-toric-excitations
+
+
+## Definition
+
+For a nonzero vector $\psi$ that is a simultaneous eigenvector of all toric
+checks, its **e syndrome** is the set of vertices $q$ for which
+$A_q\psi=-\psi$, and its **m syndrome** is the set of faces $f$ for which
+$B_f\psi=-\psi$. A violated star is called an e defect and a violated
+plaquette is called an m defect. These are finite stabilizer-syndrome labels;
+the names do not assume that a material contains localized physical
+quasiparticles.
+
+The word **syndrome** follows the check-eigenvalue convention of
+[[def-qc-stabilizer-syndrome-and-logical-operators]].
+
+The checks are Hermitian involutions, as verified below; thus their
+eigenvalues on any nonzero simultaneous eigenvector are indeed signs.
+
+## Facts & Assumptions
+
+**Given:** The toric checks on the finite edge register and their simultaneous-eigenvalue convention.
+
+[F1] [[def-qc-tqc-toric-checks]]: every toric check is a Hermitian involution.
+
+[F2] [[def-qc-stabilizer-syndrome-and-logical-operators]]: a syndrome bit is $0$ for commutation sign $+1$ and $1$ for sign $-1$.
+
+## Verification
+
+1.1 A Hermitian involution has only eigenvalues $+1$ and $-1$. Therefore each check eigenvalue on the given nonzero simultaneous eigenvector is one of these two signs, so the two sets in the Definition are well-defined finite subsets of vertices and faces. [given, F1, algebra]
+
+2.1 The listed negative-check sets use exactly the same sign-to-bit convention as [F2], with the vertex and face families kept separate. The words e and m are names for these finite syndrome labels; the Definition explicitly makes no material-quasiparticle assumption. [F2, step 1.1] ∎
+
+
+ITEM lem-qc-tqc-toric-check-commutation
+
+
+## Statement
+
+All star and plaquette checks of [[def-qc-tqc-toric-checks]] commute. The
+product of all stars is the identity, and the product of all plaquettes is
+the identity.
+
+## Facts & Assumptions
+
+**Given:** The periodic $L\times L$ torus with $L\ge3$ and its star and plaquette checks.
+
+[F1] [[def-qc-tqc-toric-checks]]: $A_{i,j}$ is $X$ on the four edges incident to $q_{i,j}$, and $B_{i,j}$ is $Z$ on the four edges of $f_{i,j}$.
+
+[F2] [[thm-qc-pauli-commutator-is-symplectic-pairing]]: two Pauli operators commute when the mod-two symplectic pairing of their binary supports is zero; for an $X$-support and a $Z$-support, this pairing is their overlap parity.
+
+[F3] [[def-qc-tqc-periodic-square-cellulation]]: every edge has two distinct endpoints and borders two distinct faces, with all incidences read modulo $L$.
+
+## Proof
+
+1.1 For a fixed vertex $q_{i,j}$, the only faces sharing its incident edges are $f_{i,j}, f_{i-1,j}, f_{i,j-1}, f_{i-1,j-1}$. Their boundaries overlap the star support respectively in $\{h_{i,j},v_{i,j}\}$, $\{h_{i-1,j},v_{i,j}\}$, $\{h_{i,j},v_{i,j-1}\}$, and $\{h_{i-1,j},v_{i,j-1}\}$; every other face has empty overlap. Hence every star-plaquette overlap has even size. By [F2], each star commutes with each plaquette. Two stars commute because all their nonidentity factors are $X$; two plaquettes commute because all their nonidentity factors are $Z$. [given, F1, F2, algebra]
+
+2.1 By [F3], every edge has exactly two endpoints, so in the product of all stars its $X$ factor occurs twice. Since $X^2=I$, the total product is $I$. Every edge borders exactly two faces, so the same argument with $Z^2=I$ gives $\prod_{i,j}B_{i,j}=I$. The first total product is also $\prod_{i,j}A_{i,j}=I$. [F1, F3, algebra] ∎
+
+
+ITEM lem-qc-tqc-toric-cycle-quotient
+
+
+## Statement
+
+Let $Z_1$ be the space of primal edge chains with even incidence at every
+vertex, and let $B_1$ be the span of the face boundaries. Then $B_1\subseteq
+Z_1$, the quotient $Z_1/B_1$ has dimension two, and the two winding
+parities give coordinates on that quotient. The same statement holds for
+dual edge chains, with dual vertex boundaries in place of face boundaries.
+The horizontal loop $\gamma_h=\sum_i h_{i,0}$ has winding pair $(1,0)$,
+and the vertical loop $\gamma_v=\sum_j v_{0,j}$ has pair $(0,1)$; their dual
+counterparts give the corresponding basis of the dual quotient.
+
+## Facts & Assumptions
+
+**Given:** The periodic square cellulation for $L\ge3$. Here $\mathbb F_2=\{0,1\}$ with addition modulo two, and $\mathbb F_2^S$ is the coordinate vector space on a finite set $S$.
+
+[F1] [[def-qc-tqc-periodic-square-cellulation]]: there are $L^2$ vertices and faces and $2L^2$ edges, with horizontal and vertical edges indexed periodically.
+
+[F2] [[lem-qc-tqc-toric-incidence-ranks]]: the span of face boundaries has dimension $L^2-1$, and the vertex-edge and dual incidence graphs are connected.
+
+## Proof
+
+1.1 The primal vertex-edge graph has the explicit spanning tree $T=\{h_{i,0}:0\le i<L-1\}\cup\{v_{i,j}:i\in\mathbb Z_L,\ 0\le j<L-1\}$. The horizontal edges form a path through row zero, and each other row is attached to that path by one vertical column path; hence $T$ is connected and has no cycle. For each edge $e\notin T$, add $e$ to the unique tree path between its endpoints. This gives a cycle $\gamma_e$ containing $e$ and no other edge outside $T$. These cycles are independent because the coefficient of each non-tree edge in a linear combination is its own coefficient. They span $Z_1$: subtract from any cycle the $\gamma_e$ corresponding to its non-tree edges; the remainder is an even-incidence chain supported on the tree, and a nonempty finite forest has a leaf of odd degree, so the remainder is zero. Thus $\dim Z_1=|E|-(|V|-1)=L^2+1$. [given, F1, construct, algebra]
+
+2.1 Every face boundary has even incidence at each vertex, so $B_1\subseteq Z_1$. By [F2], $\dim B_1=L^2-1$. For a cycle $c$, define $w_h^k(c)=\sum_j c(h_{k,j})$ and $w_v^\ell(c)=\sum_i c(v_{i,\ell})$, with all sums in $\mathbb F_2$. Summing the even-incidence equations over column $k$ shows $w_h^k=w_h^{k-1}$; summing over row $\ell$ shows $w_v^\ell=w_v^{\ell-1}$. Thus the two parities $w_h,w_v$ are independent of the chosen cuts. Each face boundary crosses every such cut zero or two times, so both parities vanish on $B_1$. [given, F1, F2, step 1.1, algebra]
+
+3.1 The horizontal fundamental loop $\gamma_h=\sum_i h_{i,0}$ has $(w_h,w_v)=(1,0)$, and the vertical fundamental loop $\gamma_v=\sum_j v_{0,j}$ has $(w_h,w_v)=(0,1)$. Therefore no nonzero combination of these loops lies in $B_1$. A basis of $B_1$ together with $\gamma_h,\gamma_v$ is an independent family of $(L^2-1)+2=L^2+1$ cycles, which is the dimension of $Z_1$ from step 1.1. It is therefore a basis of $Z_1$, proving that the winding map identifies $Z_1/B_1$ with $\mathbb F_2^2$. The dual square cellulation has the same coordinate graph and incidence counts, so the identical argument proves its two winding coordinates. [F1, F2, step 1.1, step 2.1, algebra] ∎
+
+
+ITEM def-qc-tqc-toric-hamiltonian
+
+
+## Definition
+
+For $L\ge3$ and couplings $J_e,J_m>0$, the finite toric-code Hamiltonian on
+$\mathcal H_L$ is
+
+$$H_L=-J_e\sum_{i,j\in\mathbb Z_L}A_{i,j}-J_m\sum_{i,j\in\mathbb Z_L}B_{i,j}.$$
+
+The energy unit is fixed by $J_e,J_m$. This is a finite-volume operator
+defined from the stabilizer checks; its definition makes no claim about a
+material realization or a thermodynamic phase.
+
+## Facts & Assumptions
+
+**Given:** The finite register and commuting checks from [[def-qc-tqc-toric-checks]].
+
+[F1] [[def-qc-tqc-toric-checks]]: every star and plaquette is a Hermitian involution supported on four edges.
+
+[F2] [[lem-qc-tqc-toric-check-commutation]]: all checks commute.
+
+## Verification
+
+1.1 Each coefficient $-J_e$ and $-J_m$ is real, and each summand is self-adjoint by [F1]. Their finite sum is therefore self-adjoint. [given, F1, algebra]
+
+2.1 The terms commute pairwise by [F2], so $H_L$ is a finite sum of commuting local check operators. Its locality follows from the four-edge supports in [F1]. [F1, F2, step 1.1] ∎
+
+
+ITEM lem-qc-tqc-toric-joint-check-eigenspaces
+
+
+## Statement
+
+Delete the star $A_{0,0}$ and plaquette $B_{0,0}$ from the full check list,
+and call the remaining $r=2L^2-2$ checks $g_1,\ldots,g_r$. They are
+independent commuting Hermitian involutions. For each sign string
+$s\in\mathbb F_2^r$, the operator
+
+$$P_s=\prod_{a=1}^r\frac{I+(-1)^{s_a}g_a}{2}$$
+
+is the orthogonal projection onto the corresponding joint eigenspace; the
+$P_s$ are pairwise orthogonal and sum to the identity. The omitted checks
+are determined by the retained ones, so every nonzero syndrome sector has
+an even number of e defects and an even number of m defects.
+
+## Facts & Assumptions
+
+**Given:** The periodic toric checks for $L\ge3$ and the physical Hilbert space on $2L^2$ qubits.
+
+[F1] [[def-qc-tqc-toric-checks]]: every check is a Hermitian involution supported on four distinct edge qubits.
+
+[F2] [[lem-qc-tqc-toric-check-commutation]]: all checks commute, and the product of all stars and the product of all plaquettes are both $I$.
+
+[F3] [[lem-qc-tqc-toric-incidence-ranks]]: after deleting one fixed star and one fixed plaquette, the remaining star and face-boundary supports are independent within their respective X and Z coordinates.
+
+[F4] [[def-qc-tqc-toric-excitations]]: e and m defects are exactly the negative star and plaquette checks, respectively.
+
+## Proof
+
+1.1 A product of retained checks with identity binary support must have zero X support and zero Z support separately. By [F3], this forces the selected star subset and plaquette subset both to be empty, so the retained checks are independent. By [F1] and [F2] they are commuting Hermitian involutions. For a retained check $g_a$ and sign $s_a$, put $p_{a,s_a}=(I+(-1)^{s_a}g_a)/2$. Direct expansion using $g_a^*=g_a$ and $g_a^2=I$ gives $p_{a,s_a}^*=p_{a,s_a}$ and $p_{a,s_a}^2=p_{a,s_a}$. The checks commute, so their factors commute; hence $P_s$ is a self-adjoint idempotent, thus an orthogonal projection. [F1, F2, F3, given, algebra]
+
+2.1 If $s\ne t$, choose an index $a$ with $s_a\ne t_a$. Then $p_{a,s_a}p_{a,t_a}=(I-g_a^2)/4=0$, so $P_sP_t=0$. Summing over all sign strings and distributing the finite product gives $\sum_sP_s=\prod_a(p_{a,0}+p_{a,1})=I$. Thus the ranges are pairwise orthogonal and their direct sum is the whole Hilbert space; zero projections are allowed. [F1, step 1.1, algebra]
+
+3.1 By [F2], the omitted star is the product of all retained stars, so on $\operatorname{ran}P_s$ its eigenvalue is the product of their signs; the product of the eigenvalues over all stars is therefore $+1$. A finite list of signs in $\{+1,-1\}$ has product $+1$ exactly when it contains an even number of minus signs. The same argument for the omitted plaquette gives even parity for the negative plaquette checks. By [F4], these are the e and m defect parities. The projectors therefore decompose the register into the stated full-check syndrome sectors. [F2, F4, step 2.1, algebra] ∎
+

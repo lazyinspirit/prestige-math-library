@@ -3,6 +3,7 @@ id: def-semicontinuity
 kind: definition
 title: "Upper and lower semicontinuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: ai-altered
@@ -14,12 +15,12 @@ aliases: [def-upper-semicontinuous, def-lower-semicontinuous]
 landmark: true
 short: "upper and lower semicontinuity"
 verification:
-  audited: 2026-07-28
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/def-semicontinuity.json
 sources:
   scraped: []
   references:

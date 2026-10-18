@@ -1,0 +1,7 @@
+# Focused citation correction
+
+The integrating owner inspected the actual complete 12-page archived Görtz PDF and extracted text for the citation targets. Read PDF p.6 for Theorem3.1.1; PDF pp.8–9 for §3.3 and Proposition3.3.1, its Bernstein-relation proof and presentation discussion; and PDF p.10 for §3.4 unequal parameters and Lemmas3.4.1–3.4.2. The complete archived text contains those exact numbered statements. It contains no Proposition6.1.1 or Lemmas7.1.1–7.1.2.
+
+Corrected only the PBW theorem's frontmatter locator to “Proposition3.3.1 and §3.4, including Lemmas3.4.1–3.4.2 (PDF pp.8–10).” The mathematical body and every other byte are unchanged. The source's main theorem numbering is not a claim to have newly read the entire PDF outside the stated sections. The original incorrect locator's provenance is unknown; no attribution to Ram or another text is invented.
+
+The signed-gallery supplier's locator already names Theorem3.1.1, Proposition3.2.1 and §3.4 correctly. Actual current batch71 manifest and proof contracts contain no copy of the wrong locator and bind mathematical Statements/Definitions rather than source frontmatter locators, so no mirror edit is needed. The current coverage's Görtz locator already names §§2.1–2.4 and3.1–3.4. Genuine source-fetch stamps, root-source-fetch archive, native history and the original completion repair receipt were untouched. This appendix records the later focused correction rather than replacing earlier evidence.

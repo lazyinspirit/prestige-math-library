@@ -3,6 +3,7 @@ id: def-transverse-embedded-submanifolds
 kind: definition
 title: "Transverse embedded submanifolds"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
@@ -13,8 +14,12 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-09-01
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/def-transverse-embedded-submanifolds.json
 sources:
   scraped: []
   references:

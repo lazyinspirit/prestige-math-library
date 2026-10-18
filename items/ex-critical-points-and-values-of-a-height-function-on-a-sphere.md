@@ -3,6 +3,7 @@ id: ex-critical-points-and-values-of-a-height-function-on-a-sphere
 kind: example
 title: "Critical points and values of a height function on a sphere"
 status: published
+dependency_level: 2
 origin: session
 provenance:
   statement: ai-generated
@@ -16,8 +17,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/ex-critical-points-and-values-of-a-height-function-on-a-sphere.json
 sources:
   scraped: []
   references:

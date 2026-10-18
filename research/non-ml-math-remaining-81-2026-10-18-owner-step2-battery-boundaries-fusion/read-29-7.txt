@@ -1,0 +1,230 @@
+
+ITEM thm-qc-tqc-approximate-encoded-two-qubit-gate
+
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$. Let $U\in U(\mathbb C^4)$ and $\delta>0$.
+There is one normalized six-strand Fibonacci braid word $b$ such that its
+actions $B_1(b)$ and $B_\tau(b)$ on the total-charge-$1$ and total-charge-$\tau$
+blocks are simultaneously within $\delta$ of
+$$T_1=U\oplus(\det U)^{-1}\in SU(5),\qquad T_\tau=U\oplus\operatorname{diag}((\det U)^{-1},1,1,1)\in SU(8).$$
+For the triple-triple computational subspace in either block, the logical
+block error and leakage amplitude are each at most $\delta$. The corresponding
+physical categorical braid differs from the normalized word by the common
+scalar phase specified by
+[[lem-qc-tqc-determinant-character-phase]].
+
+## Facts & Assumptions
+
+**Given:** The four-dimensional code $\mathcal C_a$ in each six-anyon block,
+the same ordered path basis in both blocks, $U\in U(4)$, $\delta>0$, and
+$\mathrm{AC}_\omega$.
+
+[F1] The normalized simultaneous braid closure contains
+$SU(5)\times SU(8)$ under $\mathrm{AC}_\omega$.
+[[lem-qc-tqc-b6-joint-su5-su8-density]]
+
+[F2] The two code blocks have dimensions $4$, and their leakage
+complements have dimensions $1$ and $4$.
+[[def-qc-tqc-six-anyon-encoded-subspace]]
+
+[F3] If a unitary is within $\delta$ of a code-preserving block target, its
+logical block error and leakage are at most $\delta$.
+[[thm-qc-tqc-block-approximation-error]]
+
+[F4] The original categorical word has one common scalar phase across both
+charge blocks. [[lem-qc-tqc-determinant-character-phase]]
+
+
+[A1] $\mathrm{AC}_\omega$ is countable choice. [[def-countable-choice]]
+
+## Proof
+
+1.1 Put $\lambda=(\det U)^{-1}$. Since $|\det U|=1$, $|\lambda|=1$. Therefore $\det(T_1)=\det(U)\lambda=1$ and $\det(T_\tau)=\det(U)\lambda=1$; both targets are unitary by their orthogonal direct-sum definitions. Hence $T_1\in SU(5)$ and $T_\tau\in SU(8)$. [given, F2, algebra]
+
+2.1 The open product of operator-norm $\delta$-balls around $(T_1,T_\tau)$ meets the normalized braid image because its closure contains $SU(5)\times SU(8)$ by [A1] and [F1]. Thus one word $b$ satisfies both block bounds at once. This is simultaneous density; separate choices of words in the two blocks are not used. [A1, F1, step 1.1, choose]
+
+3.1 In each block, $T_a$ acts as $U$ on the four-dimensional code and as a unitary on its orthogonal complement. Apply [F3] to $B_1(b)$ and $T_1$, then to $B_\tau(b)$ and $T_\tau$. The logical block error and leakage amplitude are at most $\delta$ in both blocks. [F2, F3, step 2.1, algebra]
+
+4.1 By [F4], the physical categorical braid is the same scalar multiple of both normalized blocks; multiplying by a unit scalar leaves leakage unchanged and is recorded as a projective phase for uncontrolled computation. It must be tracked under coherent control. [F2, F4, step 3.1] ∎
+
+ITEM thm-qc-tqc-spectator-extension
+
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$, $n\ge2$, and a total-charge label $c\in\{1,\tau\}$ with
+$V(\tau^n\to c)\ne0$. The code in $3n$ $\tau$ anyons factors as
+$\mathcal C_n\cong(\mathbb C^2)^{\otimes n}\otimes V(\tau^n\to c)$.
+For any adjacent pair of encoded triples, any $U\in U(4)$, and any
+$\delta>0$, one normalized six-strand braid induces an ambient operator
+within $\delta$ of the code-preserving ideal extension of $U$ on the entire
+fixed-charge space $V(\tau^{3n}\to c)$. Consequently its logical block error
+and leakage amplitude are each at most $\delta$, uniformly over all
+spectator fusion paths and states that already have a component outside the
+code.
+
+## Facts & Assumptions
+
+**Given:** The triple code, the full fusion space, an adjacent pair of
+triples, $U\in U(4)$, $\delta>0$, and $\mathrm{AC}_\omega$.
+
+[F1] The normalized six-strand image has closure containing
+$SU(5)\times SU(8)$, and for each $U\in U(4)$ there are determinant-one
+extensions $T_1=U\oplus(\det U)^{-1}$ and
+$T_\tau=U\oplus\operatorname{diag}((\det U)^{-1},1,1,1)$.
+[[lem-qc-tqc-b6-joint-su5-su8-density]]
+[[def-qc-tqc-six-anyon-encoded-subspace]]
+
+[F2] A full-space norm bound by $\delta$ bounds logical block error and
+leakage by $\delta$.
+[[thm-qc-tqc-block-approximation-error]]
+
+[F3] A local braid on a tensor factor acts as its braid operator tensored with
+the identity on spectator factors; unitary fusion-tree reassociation changes
+basis by a unitary. The physical braid phase is common to all charge and
+spectator blocks; write $\widetilde\rho$ for the normalized action obtained by
+removing it, which preserves the same local tensor-factor action.
+[[thm-qc-tqc-gauge-covariance]]
+[[lem-qc-tqc-determinant-character-phase]]
+
+[F4] Every finite-dimensional spectator multiplicity space has an
+orthonormal basis. [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]
+
+[A1] $\mathrm{AC}_\omega$ is countable choice.
+[[def-countable-choice]]
+
+## Proof
+
+1.1 Each triple has fusion factor $V(\tau^3\to\tau)\cong\mathbb C^2$. Associating the $n$ triple charges first gives the code factorization $(\mathbb C^2)^{\otimes n}\otimes V(\tau^n\to c)$; the second factor records all spectator fusion paths. This is an orthogonal fusion-tree decomposition by [F1, F3]. [given, F1, F3, construct]
+
+1.2 Let the chosen adjacent pair of triples occupy strands $3j-2,\ldots,3j+3$, and put $p=3(j-1)$ and $q=3(n-j-1)$. Reassociate the ordered input only, retaining the prefix of $p$ strands, the selected six-strand block, and the suffix of $q$ strands in that order; no permutation of strands is used. The fusion-tree basis gives the orthogonal decomposition $$V(\tau^{3n}\to c)\cong\bigoplus_{\alpha,a,e,d}V(\tau^p\to\alpha)\otimes V(\tau^6\to a)\otimes V_{\alpha a}^{e}\otimes V(\tau^q\to d)\otimes V_{ed}^{c},$$ where the sums run over simple charges and zero-dimensional summands are omitted (with $\tau^0=\mathbf1$). Every factor other than $V(\tau^6\to a)$ records a prefix, suffix, or fusion-multiplicity spectator. By [F3], a normalized braid word $\beta$ supported on the selected six consecutive strands acts on each summand as the identity on all other factors and $\widetilde\rho_a(\beta)$ on $V(\tau^6\to a)$. [given, F3, algebra]
+
+2.1 For each local total charge $a$, let $T_a$ be the target extension in [F1]. On the decomposition in step 1.2 define $\mathcal W$ on each summand by the identity on every factor other than $V(\tau^6\to a)$ and by $T_a$ on that block. This is a unitary direct sum; it preserves the triple code and acts there as $U$ on the selected adjacent pair and identity on all other logical and spectator factors. Joint density [F1] gives one normalized six-strand braid word $\beta$ with $\|\widetilde\rho_a(\beta)-T_a\|_{\mathrm{op}}\le\delta$ for both $a=1,\tau$. [A1, F1, step 1.1, step 1.2, choose]
+
+3.1 In a summand of step 1.2, group the factors before $V(\tau^6\to a)$ as $S_L$ and those after it as $S_R$. Choose orthonormal bases $(e_k)$ and $(f_\ell)$ of $S_L,S_R$ by [F4] and write $\xi=\sum_{k,\ell}e_k\otimes\xi_{k\ell}\otimes f_\ell$. Then $\|(I\otimes A\otimes I)\xi\|^2=\sum_{k,\ell}\|A\xi_{k\ell}\|^2\le\|A\|_{\mathrm{op}}^2\sum_{k,\ell}\|\xi_{k\ell}\|^2$, with equality on a maximizing vector in the middle factor tensored with basis vectors; hence the operator norm on each tensor summand equals $\|A\|_{\mathrm{op}}$. For an orthogonal direct sum of blocks, squared norms add, so its operator norm is the maximum block norm (equality follows by testing a maximizing vector in a maximizing block). The decomposition in step 1.2 and the bounds in step 2.1 therefore give $\|\widetilde\rho(\beta)-\mathcal W\|_{\mathrm{op}}\le\delta$ on the whole ambient space. [F1, F3, F4, step 2.1, algebra]
+
+4.1 Apply [F2] to $\widetilde\rho(\beta)$ and $\mathcal W$. Their compression to the code differs from the target by at most $\delta$, and $(I-P)\mathcal W P=0$, so the leakage amplitude is also at most $\delta$. The norm estimate is on the whole ambient space, so it remains valid for inputs with prior leakage. The physical categorical word has the common phase of [[lem-qc-tqc-determinant-character-phase]], which is harmless only after phase matching or when reported projectively. [F1, F2, step 3.1] ∎
+
+ITEM thm-qc-tqc-arbitrary-n-register-universality
+
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$. For every $n\ge1$, every total-charge label $c\in\{1,\tau\}$ with
+$V(\tau^n\to c)\ne0$, every unitary $U$ on $n$ logical qubits, and every
+$\epsilon>0$, the triple-$\tau$ code
+$$(\mathbb C^2)^{\otimes n}\otimes V(\tau^n\to c)$$
+admits a finite normalized braid word $V_b$ such that
+$$\inf_{|z|=1}\|P_{\rm code}V_bP_{\rm code} -zJ(U\otimes I_S)J^*\|_{\mathrm{op}}\le\epsilon,\qquad \|(I-P_{\rm code})V_bP_{\rm code}\|_{\mathrm{op}}\le\epsilon.$$
+Here $S=V(\tau^n\to c)$ is the spectator space, $J:(\mathbb C^2)^{\otimes n}\otimes S\to V(\tau^{3n}\to c)$ is the isometric triple-code inclusion, and the logical target is lifted as $U\otimes I_S$. The bounds are uniform over spectator fusion states. No efficient braid
+word-length, search-time, or finite-precision bound is asserted.
+
+## Facts & Assumptions
+
+**Given:** The finite logical target, the triple code and spectator space,
+$\epsilon>0$, and $\mathrm{AC}_\omega$.
+
+[F1] The Fibonacci braid image on the three-$\tau$, total-$\tau$ space is
+projectively dense in $PU(2)$.
+[[thm-qc-tqc-fibonacci-single-qubit-density]]
+
+[F2] Any adjacent two-logical-qubit target has a spectator-safe extension
+with logical error and leakage at most the requested tolerance.
+[[thm-qc-tqc-spectator-extension]]
+
+[F3] Every finite-dimensional unitary has a finite exact QSD decomposition
+into one-qubit gates and CNOTs; the theorem makes only its stated gate-count
+claim. [[thm-qc-exact-arbitrary-unitary-qsd-upper-bound]]
+
+[F4] Per-gate full-space errors add, and code-preserving ideal targets give
+the same total bounds on logical block error and leakage.
+[[lem-qc-tqc-leakage-logical-error-accumulation]]
+
+[F5] Braid words carry a common scalar phase; it must be tracked under
+coherent control. [[lem-qc-tqc-determinant-character-phase]]
+
+[F6] The Fibonacci data and fusion-tree count give
+$\dim V(\tau^3\to1)=1$ and $\dim V(\tau^3\to\tau)=2$. In an ordered
+fusion-tree decomposition, a braid supported on a contiguous local block
+acts on that block's fixed-charge factor and as the identity on the prefix,
+suffix, and their fusion multiplicities; its fixed-charge action is unitary.
+Dividing the physical action by its common $R_1$ phase retains these
+properties; write $\widetilde\rho$ for the resulting normalized action.
+[[thm-qc-tqc-braid-action-unitary-and-artin]]
+[[thm-qc-tqc-gauge-covariance]]
+[[lem-qc-tqc-fusion-tree-dimension]]
+[[ex-qc-tqc-fibonacci-data]]
+[[lem-qc-tqc-determinant-character-phase]]
+
+[F7] Every finite-dimensional spectator fusion space has an orthonormal
+basis. [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]
+
+[A1] $\mathrm{AC}_\omega$ is countable choice.
+[[def-countable-choice]]
+
+## Proof
+
+1.1 Reassociation of the fusion trees gives the code factor $(\mathbb C^2)^{\otimes n}\otimes V(\tau^n\to c)$, with the second factor retaining every spectator fusion path. The code inclusion is $J$ on this full logical-and-spectator tensor product, and the target on it is $U\otimes I_S$. For $n=1$, only $c=\tau$ occurs and the single triple supplies the one-qubit code. [given, F2, construct]
+
+1.2 By [F3], $U$ has a finite exact decomposition into one-qubit gates and CNOT gates. Replace each nonadjacent two-qubit gate by the exact standard sequence of adjacent SWAP targets, the gate on neighboring wires, and the inverse SWAP targets. These are abstract $U(4)$ targets, not assumed to be exact leakage-free braids. The result is a finite list of $G$ one-qubit or adjacent two-qubit targets whose product is $U$. [F3, algebra]
+
+2.1 If $G=0$, then $U=I$ and the empty braid proves the statement. Otherwise put $\delta_j=\epsilon/G$ for $1\le j\le G$. For a one-qubit target $U_j$ at logical position $j$, let $p=3(j-1)$ and $q=3(n-j)$. Reassociate the ordered $3n$ strands into prefix, this triple, and suffix, without changing their order. The fusion-tree basis gives the orthogonal decomposition $$V(\tau^{3n}\to c)\cong\bigoplus_{\alpha,a,e,d}V(\tau^p\to\alpha)\otimes V(\tau^3\to a)\otimes V_{\alpha a}^{e}\otimes V(\tau^q\to d)\otimes V_{ed}^{c},$$ with zero-dimensional summands omitted and $\tau^0=\mathbf1$. By [F6], a braid word $\beta_j$ on this triple acts on each summand by the normalized block $\widetilde\rho_a(\beta_j)$ on $V(\tau^3\to a)$ and identity on all other factors. The code lies in the local total-$\tau$ summands, where $V(\tau^3\to\tau)\cong\mathbb C^2$ is the logical qubit; total-$1$ summands lie in the orthogonal complement. Projective density [F1] supplies $\beta_j$ and $z_j\in U(1)$ with $\|\widetilde\rho_\tau(\beta_j)-z_jU_j\|_{\rm op}\le\delta_j$. Define a code-preserving ideal unitary on each local total-$\tau$ summand as $z_jU_j$ tensored with identity on the ordered prefix, suffix, and fusion multiplicities; on each local total-$1$ summand define it to equal the normalized $\widetilde\rho_1(\beta_j)$. It is unitary, and its difference from the normalized braid is at most $\delta_j$ on every summand (at most $\delta_j$ on total $\tau$ and zero on total $1$). In a fixed fusion summand, group the factors before the local triple as $S_L$ and those after it as $S_R$. Expanding $\xi=\sum_{k,\ell}e_k\otimes\xi_{k\ell}\otimes f_\ell$ in orthonormal bases of $S_L,S_R$ supplied by [F7] gives $\|(I\otimes A\otimes I)\xi\|^2=\sum_{k,\ell}\|A\xi_{k\ell}\|^2\le\|A\|_{\rm op}^2\sum_{k,\ell}\|\xi_{k\ell}\|^2$ for each local block error $A$. Thus tensoring with the spectator identities does not increase the block error. For the orthogonal direct sum, squared norms add, so its norm is at most the maximum block norm (attained by a maximizing vector in a maximizing block); hence the full ambient error is at most $\delta_j$. [A1, F1, F6, F7, step 1.1, algebra]
+
+3.1 For each adjacent two-qubit target, [F2] supplies a six-strand braid and a code-preserving ideal extension with full-space error at most $\delta_j$, including all spectator fusion sectors. The ideal one- and two-qubit extensions therefore give a finite code-preserving target sequence whose action on the code is $(\prod_j z_j)U$. [A1, F2, step 2.1, algebra]
+
+4.1 Apply [F4] to the $G$ physical/ideal pairs. Their product differs in operator norm by at most $\sum_j\delta_j=\epsilon$. Compression to the code gives the logical block bound, while projection to its orthogonal complement gives leakage at most $\epsilon$. The product scalar $\prod_jz_j$, together with the common braid phases in [F5], is the single phase removed by the projective infimum; it is not free under coherent control. The proof gives existence only, because [F1] and [F2] supply no useful joint B6 word-length bound. [F1, F2, F4, F5, step 3.1, algebra] ∎
+
+
+ITEM ex-qc-tqc-ising-vs-fibonacci
+
+
+## Example
+
+In a Majorana–Ising realization satisfying
+[[def-qc-tqc-ising-majorana-interface]], braid-only gates on a fixed parity
+sector normalize the logical Pauli group and form a finite projective
+Clifford subgroup. In the
+three-$\tau$, total-$\tau$ Fibonacci sector, the two braid generators instead
+generate a subgroup dense in $PU(2)$. The models therefore have different
+projective gate power even though both use unitary braid matrices.
+
+## Facts & Assumptions
+
+**Given:** The fixed Ising and Fibonacci sectors and the countable-choice
+assumption for the Fibonacci density result.
+
+[F1] Even-Ising braid operations in the stated Majorana interface normalize
+the logical Pauli group and have
+finite projective image. [[thm-qc-tqc-ising-braids-clifford-only]]
+
+[F2] Three-Fibonacci-anyon braid generators are dense in $PU(2)$ under
+$\mathrm{AC}_\omega$.
+[[thm-qc-tqc-fibonacci-single-qubit-density]] [[def-countable-choice]]
+
+[F3] The Majorana–Ising interface explicitly assumes the pair-channel
+identification and common relative phase for every adjacent pair.
+[[def-qc-tqc-ising-majorana-interface]]
+
+## Verification
+
+1.1 Under the stated interface [F3], the Ising conclusion is [F1]: signed permutations of the Majorana generators normalize the finite logical Pauli group, so the projective image is finite. [F1, F3]
+
+2.1 The Fibonacci conclusion is [F2]: the two noncommuting generators produce two nonparallel circle subgroups whose Lie bracket spans $\mathfrak{so}(3)$, so their closure is $PU(2)$. A finite projective group cannot equal this dense infinite group. [F1, F2, algebra] ∎
+
+## Remarks
+
+The Ising comparison is conditional on the explicit Majorana–Ising interface.
+The three-anyon Ising supplier supplies the relative phase in its stated
+sector but does not establish the all-$m$ channel identification.
+
+The diagram fixes only the crossing convention; none of the proofs relies on
+the drawing. Time runs from top to bottom, the positive generator is the
+exchange whose channel matrix is $R$, and the continuous strand is drawn over
+the broken strand.
+
+[diagram omitted from reading extract]
+
+The drawn braid is a convention aid for the adjacent generator on strands
+$1,2$; an identical local crossing on strands $2,3$ gives $\sigma_2$.

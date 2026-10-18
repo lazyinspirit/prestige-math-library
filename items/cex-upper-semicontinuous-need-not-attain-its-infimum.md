@@ -3,6 +3,7 @@ id: cex-upper-semicontinuous-need-not-attain-its-infimum
 kind: counterexample
 title: "An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided"
 status: published
+dependency_level: 3
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,12 @@ landmark: false
 short: "usc but no minimum"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/cex-upper-semicontinuous-need-not-attain-its-infimum.json
 sources:
   scraped: []
   references:
@@ -40,17 +41,6 @@ semicontinuous function on a nonempty compact set attains a **maximum**, and a
 **lower** semicontinuous one attains a **minimum**. The refuted claim mixes the
 two, and it is false.
 
-## Counterexample
-
-Define $f : [0,1] \to \mathbb{R}$ ([[def-interval]]) by
-
-$$f(0) := 1, \qquad f(x) := x \quad \text{for } 0 < x \le 1 .$$
-
-Then $f$ is upper semicontinuous on $[0,1]$, bounded below by $0$, with
-$\inf f[\,[0,1]\,] = 0$ ([[def-infimum]]), and $f(x) > 0$ for every
-$x \in [0,1]$: the infimum is not attained, so $f$ has no minimum. It does
-attain a maximum, namely $1$ at $x = 0$, as [[thm-semicontinuous-evt]] requires.
-
 ## Facts & Assumptions
 
 **Given:** The function $f : [0,1] \to \mathbb{R}$ with $f(0) = 1$ and $f(x) = x$ for $0 < x \le 1$.
@@ -65,7 +55,16 @@ attain a maximum, namely $1$ at $x = 0$, as [[thm-semicontinuous-evt]] requires.
 
 [L5] An upper semicontinuous function on a nonempty compact set attains a maximum ([[thm-semicontinuous-evt]]); upper semicontinuity is equivalent to the strict sublevel sets being relatively open ([[thm-semicontinuity-level-set-characterisation]]).
 
-## Verification
+## Counterexample
+
+Define $f : [0,1] \to \mathbb{R}$ ([[def-interval]]) by
+
+$$f(0) := 1, \qquad f(x) := x \quad \text{for } 0 < x \le 1 .$$
+
+Then $f$ is upper semicontinuous on $[0,1]$, bounded below by $0$, with
+$\inf f[\,[0,1]\,] = 0$ ([[def-infimum]]), and $f(x) > 0$ for every
+$x \in [0,1]$: the infimum is not attained, so $f$ has no minimum. It does
+attain a maximum, namely $1$ at $x = 0$, as [[thm-semicontinuous-evt]] requires.
 
 **Proof technique:** direct.
 

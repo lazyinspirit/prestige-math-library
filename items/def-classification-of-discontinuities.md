@@ -1,8 +1,9 @@
 ---
 id: def-classification-of-discontinuities
 kind: definition
-title: "Discontinuity of $f$ at a point of its domain, and its classification: removable discontinuity, jump discontinuity and essential discontinuity, equivalently Rudin's discontinuities of the first and of the second kind"
+title: "Discontinuity at a domain point: removable, jump and essential cases, and the first- and second-kind grouping"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: ai-altered
@@ -14,12 +15,7 @@ aliases: [def-discontinuity, def-jump-discontinuity, def-removable-discontinuity
 landmark: true
 short: "removable, jump, essential discontinuity"
 verification:
-  audited: 2026-07-28
-  precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/def-classification-of-discontinuities.json
 sources:
   scraped: []
   references:
@@ -93,7 +89,11 @@ point the one-sided condition and the continuity condition are the same
 condition; and there is no jump case, there being nothing to compare the value
 with. The endpoints of an interval are the typical instance.
 
-**On the two vocabularies.** *First kind* and *second kind* are Rudin's terms and
-are recorded because the literature uses them; *removable*, *jump* and
-*essential* are the names used in the rest of this library. They name the same
-three cases and no third classification is introduced.
+**On the two vocabularies.** At two-sided points, the first-kind/second-kind
+terminology groups the three cases above: the first kind includes both
+removable and jump discontinuities, and the second kind is essential. Thus the
+two kinds do not name the same three cases individually. At a one-sided point,
+the convention above uses only the available side: a first-kind discontinuity
+can also be removed by replacing $f(c)$ with that finite one-sided limit, but
+it is not a jump, since there are not two sides to compare. This endpoint
+extension is stated separately from the two-sided removable/jump split.

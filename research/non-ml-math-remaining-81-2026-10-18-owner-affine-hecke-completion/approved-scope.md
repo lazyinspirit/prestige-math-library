@@ -1,0 +1,7 @@
+# Binding PA40 scope
+
+Exact original approval file is archived at `approved-proposed-pages.before.json` (SHA-256 1bd8df7e2e309625dc595b8577732e1c4ce0f216b1502710759702c64aad45c8). The controlling row's third proposed claim is: “Separate p-adic Iwahori Hecke algebras from finite type-A quantum-characteristic specializations.” Its smallest missing supplier explicitly says “Explicit equivalence/corner/Morita theorem for the selected group.” The proof obligation says “Do not conflate residue cardinalities and positive real parameters with finite Hecke roots of unity.”
+
+The selected concrete split group is SL2(Q3), whose root datum is simply connected A1. The new theorem proves an ACTUAL convolution corner and its whole affine IM algebra isomorphism by explicit double-coset and tree counts. Thus it fulfills the stated corner alternative; it does not substitute a scalar calculation or conditional corner tautology, and does not narrow the separate arbitrary-root-datum Bernstein PBW or positive-parameter Langlands classification. No whole smooth Iwahori-block equivalence is asserted.
+
+The first approved claim requires the general reduced-root-datum Bernstein relations/PBW in the exact parameter scope, kept separately from existing type A. The second requires central characters, weight temperedness, induction/classification under exact positive-real assumptions. Both are supplied by complete local proofs. Source-report remarks are now contextual links to those actual proved-here draft suppliers. Independent review/readiness remain root-owned.

@@ -1,0 +1,174 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "initial",
+  "round": 1,
+  "unit": "18",
+  "input_sha256": "5a7686cf6af281fffc281470b9fd4d1b4497cd3e88649ffa4676dd5e748ac1b1",
+  "decisions": [
+    {
+      "id": "def-it-two-user-discrete-memoryless-mac",
+      "model": "gpt-6-luna",
+      "context_sha256": "bd74fd4fed909e08ba1bd971552860ff1dd95218ac01dc0753f03485ab4d2d3e",
+      "outcome": "false_positive",
+      "reason": "False positive: the product explicitly uses the n coordinates 1,...,n of a finite channel word, not an infinite real sequence indexed by all natural numbers. The Definition of def-sequence concerns functions N to R; it does not impose zero-based coordinates on finite alphabet products. There are exactly n factors, and summing over all output words yields the product of n row sums, equal to one (also for the empty product at n=0). No off-by-one or normalization defect exists.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-it-two-user-discrete-memoryless-mac-feedback-code",
+      "model": "gpt-6-luna",
+      "context_sha256": "d8be507914c8262f8b25af5284c39635d39b9c9ccddef8f7f3a397b36ba46e73",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "At n=0 and positive message sizes, empty histories and a decoder on the singleton empty output word exist, but n^{-1} ln M_j is undefined. Step 2.1 therefore asserts false well-definedness on an unexcluded case. The repair explicitly requires integer n>=1 and nonempty finite message sets; the proof now uses these hypotheses for finite rates. Explicit encoder indices and empty-history notation preserve causal feedback, and achievability explicitly uses n tending to infinity.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-it-two-user-discrete-memoryless-mac",
+      "disposition": "unaffected",
+      "post_sha256": "b308a286f4dafd40094a2ca6a8d56aabecaa24390f85c57b5ebb76f64489bb23",
+      "review_context_sha256": "411e8c2dd3ac29f59df8092f6bea87939a88a51768b861f0a778e9418d947641",
+      "reason": "False positive: the product explicitly uses the n coordinates 1,...,n of a finite channel word, not an infinite real sequence indexed by all natural numbers. The Definition of def-sequence concerns functions N to R; it does not impose zero-based coordinates on finite alphabet products. There are exactly n factors, and summing over all output words yields the product of n row sums, equal to one (also for the empty product at n=0). No off-by-one or normalization defect exists.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-it-two-user-discrete-memoryless-mac-feedback-code",
+      "disposition": "repaired",
+      "post_sha256": "3f8af218b13883744a86580b4817262679e2462c61a87c086cf88931e74de161",
+      "review_context_sha256": "52117d37e3c8b56efca3c0dd38f2951ca8b63065a1bcea0d822bb0fadb120dbc",
+      "reason": "The repaired Definition requires positive integer blocklength and positive integer message-set sizes, separates message variables from sizes, and specifies causal histories and growing blocklengths. Each stochastic row normalizes the next output conditional on messages and past outputs; finite backward summation normalizes the full causal law. The updated step 2.1 explicitly proves finite nonnegative rates from n>=1 and M_j>=1. Singleton messages and the empty initial history remain valid. This is a repairer review, not independent acceptance of this repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-it-cover-leung-feedback-mac-inner-bound"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-it-two-user-discrete-memoryless-mac-feedback-code",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Definition and proof step 2.1",
+      "finding": "No positive blocklength domain was stated, so the n=0 empty code has undefined rates despite the well-definedness assertion.",
+      "repair": "Require integer n>=1 and M_j>=1; use these hypotheses explicitly to establish finite nonnegative rates. Specify encoder index range, empty history and growing blocklength in achievability.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "def-it-two-user-discrete-memoryless-mac-code",
+      "route": "frontier-owner",
+      "locus": "items/def-it-two-user-discrete-memoryless-mac-code.md#Definition",
+      "finding": "Outside assigned lane: this sibling defines R_j=n^{-1} ln M_j for a length-n code without requiring n>=1. At n=0 the separate maps to singleton empty words and a decoder exist, but the rate formula is undefined.",
+      "minimality": "Owner should require positive integer blocklength and nonempty message sets, then check its direct consumers under the ordinary interface-change rule. No outside-lane item was edited.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "completed": [
+      "def-it-two-user-discrete-memoryless-mac",
+      "def-it-two-user-discrete-memoryless-mac-feedback-code"
+    ],
+    "evidence_paths": [
+      "items/def-finite-stochastic-kernel.md#Definition",
+      "items/def-sequence.md#Definition",
+      "items/def-sequence.md#Remarks",
+      "library/information-theory/multiuser-channel-networks.md",
+      "research/non-ml-math-remaining-81-2026-10-18-batch-18.proof-contracts.json"
+    ],
+    "next_action": "Controller routes the unchanged Cover-Leung consumer for current frontier-owner handling and its F1 contract quote refresh, and routes the separate no-feedback-definition finding to its owner. Certification and rejudgment remain controller-owned.",
+    "unresolved": [],
+    "feedback_repair": {
+      "item": "def-it-two-user-discrete-memoryless-mac-feedback-code",
+      "definition_changed": true,
+      "dependencies": [
+        "def-it-two-user-discrete-memoryless-mac"
+      ],
+      "logical_checks": "Sequential summation of each last output coordinate gives a row sum of one even though future inputs depend on past outputs; induction normalizes the causal law. n>=1 makes both rates finite; M_j=1 yields zero rate; n=1 has a singleton empty history. Finite choices suffice and no AC is needed.",
+      "source_paths": [
+        "items/def-it-two-user-discrete-memoryless-mac-feedback-code.md#Definition",
+        "items/def-it-two-user-discrete-memoryless-mac-feedback-code.md#Proof"
+      ],
+      "consumer_checks": [
+        {
+          "id": "thm-it-cover-leung-feedback-mac-inner-bound",
+          "path": "items/thm-it-cover-leung-feedback-mac-inner-bound.md",
+          "affected_use": "Statement and F1 use the independent-private-message feedback model; steps 1.1 and 4.1 construct b positive-length n blocks and rates (b-1)R_j/b, and step 5.1 takes n to infinity before a diagonal limit.",
+          "invalidated_claim": "None: blocklength bn is positive, ceil(exp(nR_j)) is a positive integer, all encoders use only own messages and previously completed output blocks, and the diagonal sequence has growing total length.",
+          "minimality": "No consumer mathematical edit is needed. Its F1 supplier quotation in the shared batch-18 proof contract must be refreshed by its owner because it quotes the old full Definition paragraph.",
+          "disposition": "mathematically_unaffected_metadata_refresh_required",
+          "route": "frontier-owner"
+        }
+      ],
+      "page_check": {
+        "path": "library/information-theory/multiuser-channel-networks.md",
+        "affected_use": "Page lists the feedback-code item and describes optional noiseless causal output feedback, independent private messages and capacity closures.",
+        "disposition": "unaffected",
+        "reason": "Positive blocklength and empty first history preserve every page claim; diagram Y^{i-1} continues to denote the strictly past output."
+      },
+      "unresolved_math": []
+    },
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-it-two-user-discrete-memoryless-mac.md items/def-it-two-user-discrete-memoryless-mac-feedback-code.md --json",
+        "exit_code": 0,
+        "result": "2 proofs checked; both pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-it-two-user-discrete-memoryless-mac.md items/def-it-two-user-discrete-memoryless-mac-feedback-code.md --json",
+        "exit_code": 0,
+        "result": "2 files checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-it-two-user-discrete-memoryless-mac-feedback-code.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects; run after final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/non-ml-math-remaining-81-2026-10-18-batch-18.proof-contracts.json --strict --items def-it-two-user-discrete-memoryless-mac-feedback-code --json",
+        "exit_code": 0,
+        "result": "ok=true; assigned contract checked; no errors or warnings."
+      }
+    ],
+    "outside_lane_findings": [
+      "The no-feedback sibling has the same omitted positive-blocklength condition; routed explicitly to its frontier owner, without editing or adjudicating it."
+    ],
+    "published_consumer_findings": [],
+    "review_hashes_recorded": true,
+    "contract_repair": {
+      "path": "research/non-ml-math-remaining-81-2026-10-18-batch-18.proof-contracts.json",
+      "rows": [
+        "contracts.def-it-two-user-discrete-memoryless-mac-feedback-code.derivations[0].claim",
+        "contracts.def-it-two-user-discrete-memoryless-mac-feedback-code.derivations[1].claim"
+      ],
+      "reason": "Mirrored the current exact claims of steps 1.1 and 2.1. Existing independent historical boundary evidence was preserved; no new independent acceptance was claimed.",
+      "integration": "tools/step5-shared-write-lock.mjs: acquired, reread, edited assigned rows, strict focused check passed, released."
+    },
+    "definition_comparison": {
+      "id": "def-it-two-user-discrete-memoryless-mac-feedback-code",
+      "before_clause": "a perfect-feedback length-$n$ code has independent uniform messages $M_j\\in[M_j]$",
+      "after_clause": "fix integers $n\\ge1$ and $M_1,M_2\\ge1$, and write $[m]=\\{1,\\ldots,m\\}$",
+      "additional_changes": "Use mathsf M_j for message random variables to distinguish them from integer set sizes; specify j=1,2 and i=1,...,n, the empty first history, and n tending to infinity for achievable sequences.",
+      "propagation": "Literal Definition changed; direct item consumer inventory is the Cover-Leung theorem only. Its Statement remains unchanged, so no further hop is warranted."
+    },
+    "status": "assigned_repair_complete",
+    "repair_complete": true
+  }
+}

@@ -1,0 +1,225 @@
+--- PDF page 26 ---
+Similarly we can consider randomized circuits. These receive, in addition to the n input bits,
+also some random bits (“coin flips”) as input. A randomized circuit computes a function f if it
+successfully outputs the right answer f(x) with probability at least 2/3 for every x (probability
+taken over the values of the random bits). Randomized circuits are equal in power to randomized
+Turing machines: a language L can be decided by a uniformly polynomial randomized circuit
+family iff L ∈BPP, where BPP (“Bounded-error Probabilistic Polynomial time”) is the class of
+languages that can efficiently be recognized by randomized Turing machines with success probability
+at least 2/3. Because we can efficiently reduce the error probability of randomized algorithms (see
+Appendix B.2), the particular value 2/3 doesn’t really matter here and may be replaced by any
+fixed constant in (1/2, 1).
+2.1.2
+Quantum circuits
+A quantum circuit (also called quantum network or quantum gate array) generalizes the idea of
+classical circuit families, replacing the AND, OR, and NOT gates by elementary quantum gates. A
+quantum gate is a unitary transformation on a small (usually 1, 2, or 3) number of qubits. We saw
+a number of examples already in the previous chapter: the bitflip gate X, the phaseflip gate Z,
+the Hadamard gate H. The main 2-qubit gate we have seen is the controlled-NOT (CNOT) gate.
+Adding another control qubit, we get the 3-qubit Toffoli gate, also called controlled-controlled-not
+(CCNOT) gate. This negates the third bit of its input if both of the first two bits are 1. The
+Toffoli gate is important because it is complete for classical reversible computation: any classical
+computation can be implemented by a circuit of Toffoli gates. This is easy to see: using auxiliary
+wires with fixed values, Toffoli can implement AND (fix the 3rd ingoing wire to 0) and NOT (fix the
+1st and 2nd ingoing wire to 1). It is known that AND and NOT-gates together suffice to implement
+any classical Boolean circuit, so if we can apply (or simulate) Toffoli gates, we can implement any
+classical computation in a reversible manner.
+Mathematically, such elementary quantum gates can be composed into bigger unitary operations
+by taking tensor products (if gates are applied in parallel to different parts of the register), and
+ordinary matrix products (if gates are applied sequentially). We have already seen a simple example
+of such a circuit of elementary gates in the previous chapter, namely to implement teleportation.
+For example, if we apply the Hadamard gate H to each qubit in a register of n zeroes, we obtain
+1
+√
+2n
+X
+j∈{0,1}n
+|j⟩,
+which is a superposition of all n-bit strings. More generally, if we apply H⊗n to an initial state |i⟩,
+with i ∈{0, 1}n, we obtain
+H⊗n|i⟩=
+1
+√
+2n
+X
+j∈{0,1}n
+(−1)i·j|j⟩,
+(2.1)
+where i · j = Pn
+k=1 ikjk denotes the inner product of the n-bit strings i, j ∈{0, 1}n. For example:
+H⊗2|01⟩=
+1
+√
+2(|0⟩+ |1⟩) ⊗1
+√
+2(|0⟩−|1⟩) = 1
+2
+X
+j∈{0,1}2
+(−1)01·j|j⟩.
+Note that Hadamard happens to be its own inverse (it’s unitary and Hermitian, hence H = H∗=
+H−1), so applying it once more on the right-hand side of the above equation would give us back
+|01⟩. The n-fold Hadamard transform will be very useful for quantum algorithms.
+14
+
+--- PDF page 27 ---
+As in the classical case, a quantum circuit can be viewed as a finite directed acyclic graph
+of input nodes, gates, and output nodes. The graph needs some annotation to tell us the order
+of the qubits going into a gate.4 There are n nodes that contain the input (as classical bits); in
+addition we may have some more input nodes that are initially |0⟩(“workspace”). The internal
+nodes of the quantum circuit are quantum gates that each operate on at most two or three qubits
+of the state. The gates in the circuit transform the initial state vector into a final state, which will
+generally be a superposition. We measure some or all qubits of this final state in the computational
+basis in order to (probabilistically) obtain a classical output to the algorithm. We can think of the
+measurement of one qubit in the computational basis as one special type of gate. We may assume
+without much loss of generality that such measurements only happen at the very end of the circuit
+(see Exercise 8).
+What about the more general kinds of measurements discussed in Section 1.2.2? If we want
+to apply such a measurement in the circuit model, we will have to implement it using a circuit
+of elementary gates followed by a measurement in the computational basis. For example, suppose
+projectors P0 and P1 form a 2-outcome projective measurement on an n-qubit space (P0+P1 = I2n).
+Assume for simplicity that P0 and P1 both have rank 2n/2. Then there exists a unitary U that
+maps an n-qubit state |ϕ⟩to a state whose first qubit is |0⟩whenever P0|ϕ⟩= |ϕ⟩, and that maps
+n-qubit |ψ⟩to a state whose first qubit is |1⟩whenever P1|ψ⟩= |ψ⟩.
+We can now implement
+the projective measurement by first applying a circuit that implements U, and then measuring
+(in the computational basis) the first qubit of the resulting state. This recovers the measurement
+probabilities of the 2-outcome projective measurement; if we also want to recover the same post-
+measurement state, then we have to multiply by U−1 at the end.
+The minimal-size circuit to
+implement U could be very large (i.e., expensive) if the projective measurement is complicated, but
+that is how it should be.
+To draw quantum circuits, the convention is to let time progress from left to right: we start with
+the initial state on the left. Each qubit is pictured as a horizontal wire, and the circuit prescribes
+which gates are to be applied to which wires. Single-qubit gates like X and H just act on one
+wire, while multi-qubit gates such as the CNOT act on multiple wires simultaneously.5 When one
+qubit “controls” the application of a gate to another qubit, then the controlling wire is drawn with
+a dot linked vertically to the gate that is applied to the target qubit. This happens for instance
+with the CNOT, where the applied single-qubit gate is X, usually drawn as ‘⊕’ in a circuit picture
+(similarly, the Toffoli gate is drawn in a circuit with a dot on the two control wires and an ‘⊕’ on
+the target wire). Figure 2.1 gives a simple example on two qubits, initially in basis state |00⟩: first
+apply H to the 1st qubit, then CNOT to both qubits (with the first qubit acting as the control),
+and then Z to the last qubit. The resulting state is
+1
+√
+2(|00⟩−|11⟩).
+Note that if we have a circuit for unitary U, it is very easy to find a circuit for the inverse U−1
+with the same complexity: just reverse the order of the gates, and take the inverse of each gate.
+For example, if U = U1U2U3, then U−1 = U−1
+3 U−1
+2 U−1
+1 .
+In analogy to the classical class BPP, we will define BQP (“Bounded-error Quantum Poly-
+nomial time”) as the class of languages that can efficiently be computed with success probability
+4E.g., what is the first qubit going into a particular CNOT gate and what is the second qubit.
+Such extra
+information is not necessary for classical circuits with symmetric gates such as AND, OR, and NOT, since the order
+of incoming bits doesn’t affect the output bit there.
+5Note that the number of wires (qubits) going into a unitary must equal the number of wires going out because
+a unitary is always invertible (reversible). This differs from the case of classical circuits, where non-reversible gates
+like AND have more wires going in than out.
+15
+
+--- PDF page 28 ---
+|0⟩
+H
+•
+|0⟩
+Z
+Figure 2.1: Simple circuit for turning |00⟩into an entangled state
+at least 2/3 by (a family of) quantum circuits whose size grows at most polynomially with the
+input-length. We will study this quantum complexity class and its relation with various classical
+complexity classes in more detail in Chapter 13.
+2.2
+Universality of various sets of elementary gates
+Which set of elementary gates should we allow? There are several reasonable choices.
+(1) The set of all 1-qubit operations together with the 2-qubit CNOT gate is universal,
+meaning that any other unitary transformation can be built from these gates.
+Allowing all 1-qubit gates is not very realistic from an implementational point of view, as there are
+continuously many of them, and we cannot expect experimentalists to implement gates to infinite
+precision. However, the model is usually restricted, only allowing a small finite set of 1-qubit gates
+from which all other 1-qubit gates can be efficiently approximated.
+(2) The set consisting of CNOT, Hadamard, and the phase-gate T = Rπ/4 is universal
+in the sense of approximation, meaning that any other unitary can be arbitrarily well
+approximated using circuits of only these gates.
+The Solovay-Kitaev theorem [206, Appendix 3] says that this approximation is quite
+efficient: we can approximate any gate on 1 or 2 qubits up to error ε using a circuit of
+only polylog(1/ε) gates from our small universal set, i.e., polynomial in the logarithm
+of 1/ε. In particular, simulating an arbitrary 2-qubit gate up to exponentially small
+error ε costs only a polynomial number of gates from our small universal set.
+It is often convenient to restrict to real numbers and use an even smaller set of gates:
+(3) The set of Hadamard and Toffoli (CCNOT) is universal for all unitaries with real
+entries in the sense of approximation, meaning that any unitary with only real entries
+can be arbitrarily well approximated using circuits of only these gates.
+2.3
+Quantum parallelism
+One uniquely quantum-mechanical effect that we can use for building quantum algorithms is quan-
+tum parallelism. Suppose we have a classical algorithm that computes some function f : {0, 1}n →
+{0, 1}m.
+Then we can build a quantum circuit U (consisting only of Toffoli gates) that maps
+|z⟩|0⟩→|z⟩|f(z)⟩for every z ∈{0, 1}n. Now suppose we apply U to a superposition of all inputs z
+(which is easy to build using n Hadamard transforms):
+U
+
+1
+√
+2n
+X
+z∈{0,1}n
+|z⟩|0⟩
+
+=
+1
+√
+2n
+X
+z∈{0,1}n
+|z⟩|f(z)⟩.
+16
+
+--- PDF page 29 ---
+We applied U just once, but the final superposition contains f(z) for all 2n input values z! However,
+by itself this is not very useful and does not give more than classical randomization, since observing
+the final superposition will give just one uniformly random |z⟩|f(z)⟩and all other information will
+be lost.
+As we will see below, quantum parallelism needs to be combined with the effects of
+interference and entanglement in order to get something that is better than classical.
+2.4
+The early algorithms
+The two best-known successes of quantum algorithms so far are Shor’s factoring algorithm from
+1994 [241] and Grover’s search algorithm from 1996 [132], which will be explained in later chapters.
+Here we describe some of the earlier quantum algorithms that preceded Shor’s and Grover’s.
+Virtually all quantum algorithms work with queries in some form or other. We will explain
+this model here. It may look contrived at first, but eventually will lead smoothly to Shor’s and
+Grover’s algorithm. We should, however, emphasize that the query complexity model differs from
+the standard model described above, because the input is now given as a “black-box” (also some-
+times called an “oracle”). This means that the exponential quantum-classical separations that we
+describe below do not by themselves give exponential quantum-classical separations in the standard
+circuit model (the same applies to Simon’s algorithm in the next chapter).
+To explain the query setting, consider an N-bit input x = (x0, . . . , xN−1) ∈{0, 1}N. Usually we
+will have N = 2n, so that we can address bit xi using an n-bit index i. One can think of the input
+as an N-bit memory which we can access at any point of our choice (a “Random Access Memory”
+or RAM). For example, a memory of N = 1024 bits can be indexed by addresses i ∈{0, 1}10 of
+n = 10 bits each. A memory access is via a so-called “black-box,” which is equipped to output the
+bit xi on input i. As a quantum operation, this is the following unitary mapping on n + 1 qubits:
+Ox : |i, 0⟩→|i, xi⟩.
+The first n qubits of the state are called the address bits (or address register), while the (n + 1)st
+qubit is called the target bit.6 Since this mapping must be unitary, we also have to specify what
+happens if the initial value of the target bit is 1. Therefore we actually let Ox be the following
+unitary transformation:
+Ox : |i, b⟩→|i, b ⊕xi⟩,
+here i ∈{0, 1}n, b ∈{0, 1}, and ⊕denotes exclusive-or (addition modulo 2). In matrix representa-
+tion, this Ox is now a permutation matrix and hence unitary. Note that a quantum computer can
+apply Ox on a superposition of various i, something a classical computer cannot do. One applica-
+tion of this black-box is called a query, and counting the required number of queries to compute
+this or that function of x is something we will do a lot in the first half of these notes.
+Given the ability to make a query of the above type, we can also make a query of the form
+|i⟩7→(−1)xi|i⟩by setting the target bit to the state |−⟩=
+1
+√
+2(|0⟩−|1⟩) = H|1⟩:
+Ox (|i⟩|−⟩) = |i⟩1
+√
+2(|xi⟩−|1 −xi⟩) = (−1)xi|i⟩|−⟩.
+6It is a common rookie mistake to confuse the N bits of x with the n address bits; don’t fall for this!
+17

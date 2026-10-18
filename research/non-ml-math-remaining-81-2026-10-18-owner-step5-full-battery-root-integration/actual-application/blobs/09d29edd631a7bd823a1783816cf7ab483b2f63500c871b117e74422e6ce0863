@@ -1,0 +1,500 @@
+[
+  {
+    "order": 2530,
+    "id": "relay-and-interference-channel-bounds",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Relay and Interference Channel Bounds",
+    "companion": "relay-and-interference-channel-bounds-examples",
+    "requires": [
+      "multiuser-channel-networks"
+    ],
+    "items": [
+      {
+        "id": "lem-finite-or-euclidean-likelihood-ratio-network-coding",
+        "kind": "lemma",
+        "title": "Likelihood-ratio network coding for finite or Euclidean multicast networks",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-finite-discrete-memoryless-network-and-code",
+          "def-it-finite-conditional-mutual-information",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule",
+          "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing",
+          "cor-iid-finite-variance-weak-law"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-complex-gaussian-interference-entropy-estimates",
+        "kind": "lemma",
+        "title": "Entropy estimates for complex Gaussian interference converses",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-two-user-gaussian-interference-channel",
+          "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing",
+          "def-measure-theoretic-mutual-information",
+          "lem-complex-scalar-gaussian-maximum-differential-entropy",
+          "lem-bounded-density-finite-second-moment-has-finite-differential-entropy"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-gaussian-superposition-nonunique-han-kobayashi-region",
+        "kind": "lemma",
+        "title": "Gaussian superposition Han–Kobayashi region with nonunique decoding and rate moving",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-two-user-gaussian-interference-channel",
+          "cor-iid-finite-variance-weak-law",
+          "lem-scalar-gaussian-channel-mutual-information-power-bound",
+          "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "def-finite-discrete-memoryless-network-and-code",
+        "kind": "definition",
+        "title": "Finite discrete memoryless networks and causal codes",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "A **finite discrete memoryless network (DMN)** has a node set $[N]=\\{1,\\ldots,N\\}$ for an integer $N\\ge1$, finite nonempty input alphabets $\\mathcal X_k$ and output alphabets $\\mathcal Y_k$, and one transition probability vector $W(y_1,\\ldots,y_N\\mid x_1,\\ldots,x_N)$ for each input tuple. At each use, conditional on the current input tuple, the output tuple is drawn from this vector independently of earlier uses.\n\nNode $k$ may have an independent uniform message $M_k$ in a finite nonempty set $\\mathcal M_k$ and a destination set $D_k\\subseteq[N]$. A length-$n$ **causal code** consists of encoders $X_{k,i}=f_{k,i}(M_k,Y_k^{i-1})$ and, for each destination $d\\in D_k$, a decoder $\\widehat M_{kd}=g_{kd}(Y_d^n,M_d)$; here $Y_k^{i-1}=(Y_{k,1},\\ldots,Y_{k,i-1})$, with the empty tuple at $i=1$. The average error is the probability that any required estimate differs from its message. A rate tuple is achievable if a sequence of such codes has error tending to zero and message-set rates tending to at least that tuple; the capacity region is the closure of achievable tuples."
+      },
+      {
+        "id": "def-real-gaussian-multicast-relay-network",
+        "kind": "definition",
+        "title": "Real scalar Gaussian multicast relay network and power constraints",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "A **real scalar Gaussian relay network** has node set $[N]$ for an integer $N\\ge1$, source set $\\mathcal S\\subseteq[N]$, destination set $\\mathcal D\\subseteq[N]$, one real input $X_i$ and output $Y_i$ at each node, and channel equations\n$$Y_j=\\sum_{i=1}^N g_{ji}X_i+Z_j,\\qquad j\\in[N],$$\nwhere the gains $g_{ji}\\in\\mathbb R$ are fixed and the noises $Z_j$ are independent $N(0,1)$ random variables, independent across channel uses and of all source messages. At each use the current noise vector is independent of all past observations and the current inputs; future inputs may depend on past noises through feedback. Each node has a nonnegative power budget $P_i\\ge0$ and average power constraint $\\frac1n\\sum_{t=1}^n\\mathbb E[X_{i,t}^2]\\le P_i$. Each source $i\\in\\mathcal S$ has an independent uniform message $M_i$ in a finite nonempty set $\\mathcal M_i$. For every non-source node $i\\notin\\mathcal S$, set $\\mathcal M_i=\\{*\\}$ and $M_i=*$, so its encoder has no message information. A length-$n$ causal code uses measurable encoders $X_{i,t}=f_{i,t}(M_i,Y_i^{t-1})$ and destination decoders based on $(Y_d^n,M_d)$, where $M_d$ is its own source message when $d\\in\\mathcal S$ and a singleton otherwise; multicast means every destination must decode every other source message, while its own message is already known. The average error probability is the probability that any required destination estimate is wrong. Write $G_{B,A}$ for the matrix with rows indexed by $B$ and columns by $A$ whose entries are $g_{ji}$.\n\nRates in this page's Gaussian formulas are measured in bits per use, $R_i=n^{-1}\\log_2|\\mathcal M_i|$."
+      },
+      {
+        "id": "def-real-two-user-gaussian-interference-channel",
+        "kind": "definition",
+        "title": "Real and complex two-user Gaussian interference channels",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "The two-user Gaussian interference channel has independent messages, separate encoders, and outputs\n$$Y_1=h_{11}X_1+h_{21}X_2+Z_1,\\qquad Y_2=h_{12}X_1+h_{22}X_2+Z_2.$$\nFor the **real model**, $X_i,h_{ji},Z_j$ are real and $Z_j\\sim N(0,1)$. For the **complex model**, the inputs and gains are complex and $Z_j\\sim\\mathcal{CN}(0,1)$ with density $\\pi^{-1}e^{-|z|^2}$. The receiver-noise variables are independent across receivers and channel uses and independent of the messages, so the channel is memoryless. Each power budget satisfies $P_i\\ge0$. A length-$n$ code has independent uniform messages $M_i$ on $[m_i]$ for integers $m_i\\ge1$, deterministic separate encoders $X_i^n=f_i(M_i)$, and decoders $\\widehat M_i=g_i(Y_i^n)$; no feedback is present. The expected average-power constraints are $n^{-1}\\sum_{t=1}^n\\mathbb E[X_{i,t}^2]\\le P_i$ in the real model and $n^{-1}\\sum_{t=1}^n\\mathbb E|X_{i,t}|^2\\le P_i$ in the complex model, with expectations under the uniform message law. The average joint error is $\\Pr\\{(\\widehat M_1,\\widehat M_2)\\ne(M_1,M_2)\\}$. For either model define\n$$\\mathrm{SNR}_1=|h_{11}|^2P_1,\\quad \\mathrm{SNR}_2=|h_{22}|^2P_2,\\quad \\mathrm{INR}_1=|h_{21}|^2P_2,\\quad \\mathrm{INR}_2=|h_{12}|^2P_1.$$\nRates are bits per use, $R_i=n^{-1}\\log_2m_i$. For a scalar unit-noise AWGN link $Y=aX+Z$ with power constraint $P$, the capacity is $\\kappa\\log_2(1+|a|^2P)$, attained by a centered real Gaussian input or a circular complex Gaussian input; $\\kappa=1/2$ in the real model and $\\kappa=1$ in the complex model."
+      },
+      {
+        "id": "lem-real-vector-gaussian-maximum-differential-entropy",
+        "kind": "lemma",
+        "title": "Gaussian maximizes differential entropy at fixed positive-definite covariance",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-kullback-leibler-is-nonnegative"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-finite-discrete-memoryless-relay-channel-and-causal-code",
+        "kind": "definition",
+        "title": "Finite discrete memoryless relay channel and causal code",
+        "deps": [
+          "def-finite-discrete-memoryless-network-and-code"
+        ],
+        "dependency_level": 1,
+        "statement": "A **finite discrete memoryless relay channel** is the three-node instance of [[def-finite-discrete-memoryless-network-and-code]] with source input $X\\in\\mathcal X$, relay input $X_r\\in\\mathcal X_r$, relay observation $Y_r\\in\\mathcal Y_r$, destination observation $Y\\in\\mathcal Y$, and transition law $W(y_r,y\\mid x,x_r)$. For a positive integer message-set size $M$, the one-way message is uniform on $[M]$ and the destination estimates it from $Y^n$.\n\nIn the **relay-only causal model**, $X_i=f_i(M)$ and $X_{r,i}=g_i(Y_r^{i-1})$. In the **full output-feedback model**, both encoders know the past pair $(Y^{i-1},Y_r^{i-1})$, so $X_i=f_i(M,Y^{i-1},Y_r^{i-1})$ and $X_{r,i}=g_i(Y^{i-1},Y_r^{i-1})$. In either model the channel outputs at time $i$ are drawn from $W(\\cdot,\\cdot\\mid X_i,X_{r,i})$; no encoder sees a current-time output before choosing its current input. The rate is $n^{-1}\\ln M$, and achievability uses average error under the uniform message law."
+      },
+      {
+        "id": "def-finite-two-user-interference-channel-and-strong-regime",
+        "kind": "definition",
+        "title": "Finite two-user interference channel and strong-interference regime",
+        "deps": [
+          "def-finite-discrete-memoryless-network-and-code"
+        ],
+        "dependency_level": 1,
+        "statement": "A **finite two-user interference channel** is the two-sender, two-receiver memoryless channel with finite nonempty input alphabets $\\mathcal X_1,\\mathcal X_2$, finite nonempty output alphabets $\\mathcal Y_1,\\mathcal Y_2$, and transition law $W(y_1,y_2|x_1,x_2)$. Independent uniform messages $M_1,M_2$ on finite nonempty sets are encoded separately as $X_1^n=f_1(M_1)$ and $X_2^n=f_2(M_2)$; receiver $i$ estimates $M_i$ from $Y_i^n$. The **strong-interference regime** means that, for every product law $P_{X_1}P_{X_2}$,\n$$I(X_1;Y_1|X_2)\\le I(X_1;Y_2|X_2),\\qquad I(X_2;Y_2|X_1)\\le I(X_2;Y_1|X_1).$$\nThe inequalities are evaluated under the stated product law and the channel. They are universal hypotheses over input laws, not just inequalities at a chosen optimizing distribution."
+      },
+      {
+        "id": "def-finite-two-way-relay-channel-and-causal-code",
+        "kind": "definition",
+        "title": "Finite two-way relay channel and causal code",
+        "deps": [
+          "def-finite-discrete-memoryless-network-and-code"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-bounded-density-finite-second-moment-has-finite-differential-entropy",
+        "kind": "lemma",
+        "title": "Bounded densities with finite second moments have finite differential entropy",
+        "deps": [
+          "def-it-real-differential-entropy"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-complex-scalar-gaussian-maximum-differential-entropy",
+        "kind": "lemma",
+        "title": "Circular complex Gaussian maximizes differential entropy at fixed second moment",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-real-vector-gaussian-maximum-differential-entropy"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-finite-joint-iid-strong-typicality",
+        "kind": "lemma",
+        "title": "Joint strong typicality for a finite IID source",
+        "deps": [
+          "def-it-finite-strongly-typical-set"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-real-gaussian-multicast-noisy-network-coding-inner-bound",
+        "kind": "theorem",
+        "title": "Noise-level noisy-network-coding inner bound for real Gaussian multicast networks",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-gaussian-multicast-relay-network",
+          "lem-finite-or-euclidean-likelihood-ratio-network-coding",
+          "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "def-finite-directed-information-and-causal-conditioning",
+        "kind": "definition",
+        "title": "Finite directed information and causal conditioning",
+        "deps": [
+          "def-it-finite-conditional-mutual-information"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-finite-conditional-codebook-covering",
+        "kind": "lemma",
+        "title": "Conditional random-codebook covering for finite alphabets",
+        "deps": [
+          "def-it-finite-strongly-typical-set",
+          "def-it-finite-conditional-mutual-information"
+        ],
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "lem-finite-conditional-typicality-packing",
+        "kind": "lemma",
+        "title": "Conditional joint-typicality packing bound for finite alphabets",
+        "deps": [
+          "def-it-finite-strongly-typical-set",
+          "def-it-finite-conditional-mutual-information"
+        ],
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "lem-scalar-gaussian-channel-mutual-information-power-bound",
+        "kind": "lemma",
+        "title": "Power bound for real and complex scalar Gaussian channels",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-measure-theoretic-mutual-information",
+          "def-it-real-differential-entropy",
+          "lem-bounded-density-finite-second-moment-has-finite-differential-entropy",
+          "lem-real-vector-gaussian-maximum-differential-entropy",
+          "lem-complex-scalar-gaussian-maximum-differential-entropy"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-real-gaussian-han-kobayashi-inner-region",
+        "kind": "lemma",
+        "title": "Gaussian Han-Kobayashi inner region for a fixed private-power split",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-two-user-gaussian-interference-channel",
+          "cor-iid-finite-variance-weak-law",
+          "lem-scalar-gaussian-channel-mutual-information-power-bound"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-real-gaussian-multiple-access-random-coding-region",
+        "kind": "lemma",
+        "title": "Random coding achieves the finite-dimensional Gaussian multiple-access region",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-two-user-gaussian-interference-channel",
+          "lem-scalar-gaussian-channel-mutual-information-power-bound",
+          "cor-iid-finite-variance-weak-law"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-finite-relay-decode-forward-inner-bound",
+        "kind": "theorem",
+        "title": "Decode-forward inner bound for a finite relay channel",
+        "deps": [
+          "def-finite-discrete-memoryless-relay-channel-and-causal-code",
+          "lem-finite-joint-iid-strong-typicality",
+          "lem-finite-conditional-typicality-packing"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-finite-conditional-channel-mutual-information-concave-input-law",
+        "kind": "lemma",
+        "title": "Conditional mutual information is concave in the channel input law",
+        "deps": [
+          "def-it-finite-conditional-mutual-information",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-finite-directed-information-feedback-decomposition",
+        "kind": "lemma",
+        "title": "Mutual information splits into directed information and feedback",
+        "deps": [
+          "def-finite-directed-information-and-causal-conditioning",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-finite-strong-interference-block-lift",
+        "kind": "lemma",
+        "title": "Strong-interference information inequalities tensorize over product code inputs",
+        "deps": [
+          "def-finite-two-user-interference-channel-and-strong-regime",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-finite-multisource-multicast-noisy-network-coding-inner-bound",
+        "kind": "theorem",
+        "title": "Noisy network coding inner bound for finite multicast networks",
+        "deps": [
+          "def-finite-discrete-memoryless-network-and-code",
+          "lem-finite-or-euclidean-likelihood-ratio-network-coding",
+          "def-it-finite-conditional-mutual-information"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "cor-finite-relay-compress-forward-noisy-network-coding-bound",
+        "kind": "corollary",
+        "title": "Compress-forward and noisy-network-coding bounds for a finite relay channel",
+        "deps": [
+          "def-finite-discrete-memoryless-relay-channel-and-causal-code",
+          "thm-finite-multisource-multicast-noisy-network-coding-inner-bound",
+          "def-it-finite-conditional-mutual-information",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "dependency_level": 9
+      },
+      {
+        "id": "cor-finite-two-way-relay-noisy-network-coding-region",
+        "kind": "corollary",
+        "title": "Noisy-network-coding inner region for the finite two-way relay channel",
+        "deps": [
+          "def-finite-two-way-relay-channel-and-causal-code",
+          "thm-finite-multisource-multicast-noisy-network-coding-inner-bound",
+          "def-it-finite-conditional-mutual-information",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "dependency_level": 9
+      },
+      {
+        "id": "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing",
+        "kind": "lemma",
+        "title": "Conditional mutual-information chain rule and data processing for standard-Borel variables",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-borel-space",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "def-standard-borel-conditional-mutual-information",
+          "thm-general-kl-chain-rule-for-standard-borel-kernels",
+          "thm-mutual-information-chain-rule",
+          "thm-kullback-leibler-is-nonnegative",
+          "lem-kl-invariant-under-measurable-bijections"
+        ],
+        "dependency_level": 6,
+        "statement": "Assume AC. Let $U,V,Y,S$ take values in standard-Borel spaces. Then\n$$I((U,V);Y|S)=I(U;Y|S)+I(V;Y|U,S)$$\nand also\n$$I((U,V);Y|S)=I(V;Y|S)+I(U;Y|V,S),$$\nwhere these are equalities of extended nonnegative quantities. In particular, if the conditional law of $Y$ given $(U,V,S)$ depends only on $(V,S)$, then\n$$I(U;Y|S)\\le I(V;Y|S).$$"
+      },
+      {
+        "id": "lem-standard-borel-memoryless-channel-mutual-information-tensorization",
+        "kind": "lemma",
+        "title": "Mutual information tensorizes over a memoryless vector channel",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-borel-space",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "def-standard-borel-conditional-mutual-information",
+          "thm-general-kl-chain-rule-for-standard-borel-kernels",
+          "thm-mutual-information-chain-rule",
+          "thm-kullback-leibler-is-nonnegative",
+          "lem-kl-invariant-under-measurable-bijections"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-real-gaussian-interference-genie-outer-region",
+        "kind": "lemma",
+        "title": "Genie-aided outer bounds for the two-user Gaussian interference channel",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-two-user-gaussian-interference-channel",
+          "lem-it-fano-for-finite-message-density-observations",
+          "lem-standard-borel-memoryless-channel-mutual-information-tensorization",
+          "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing",
+          "lem-scalar-gaussian-channel-mutual-information-power-bound",
+          "lem-complex-gaussian-interference-entropy-estimates"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-finite-relay-cut-set-outer-bound",
+        "kind": "theorem",
+        "title": "Cut-set outer bound for causal and full-feedback relay channels",
+        "deps": [
+          "def-finite-discrete-memoryless-relay-channel-and-causal-code",
+          "thm-it-fano-inequality",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule",
+          "lem-finite-conditional-channel-mutual-information-concave-input-law"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-real-gaussian-multicast-noisy-network-coding-cut-dependent-gap",
+        "kind": "theorem",
+        "title": "Cut-dependent Gaussian multicast gap to the cut-set bound",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-gaussian-multicast-relay-network",
+          "thm-real-gaussian-multicast-noisy-network-coding-inner-bound",
+          "lem-real-vector-gaussian-maximum-differential-entropy",
+          "lem-it-fano-for-finite-message-density-observations",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing",
+          "lem-bounded-density-finite-second-moment-has-finite-differential-entropy"
+        ],
+        "dependency_level": 9
+      },
+      {
+        "id": "thm-real-gaussian-strong-interference-capacity-region",
+        "kind": "theorem",
+        "title": "Exact strong-interference region for the two-user Gaussian interference channel",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-two-user-gaussian-interference-channel",
+          "lem-real-gaussian-multiple-access-random-coding-region",
+          "lem-it-fano-for-finite-message-density-observations",
+          "lem-standard-borel-memoryless-channel-mutual-information-tensorization",
+          "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing",
+          "lem-scalar-gaussian-channel-mutual-information-power-bound"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-finite-full-feedback-relay-capacity",
+        "kind": "theorem",
+        "title": "Capacity of a finite relay channel with output feedback to source and relay",
+        "deps": [
+          "def-finite-discrete-memoryless-relay-channel-and-causal-code",
+          "thm-finite-relay-cut-set-outer-bound",
+          "thm-finite-relay-decode-forward-inner-bound",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-finite-conditional-channel-mutual-information-concave-input-law"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-finite-strong-interference-channel-capacity",
+        "kind": "theorem",
+        "title": "Capacity region of a finite two-user interference channel under strong interference",
+        "deps": [
+          "def-finite-two-user-interference-channel-and-strong-regime",
+          "lem-finite-strong-interference-block-lift",
+          "thm-it-fano-inequality",
+          "thm-it-two-user-discrete-memoryless-mac-capacity-region",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "thm-real-gaussian-interference-channel-within-one-bit",
+        "kind": "theorem",
+        "title": "The two-user Gaussian interference capacity region to within one bit",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-two-user-gaussian-interference-channel",
+          "thm-real-gaussian-strong-interference-capacity-region",
+          "lem-real-gaussian-han-kobayashi-inner-region",
+          "lem-gaussian-superposition-nonunique-han-kobayashi-region",
+          "lem-real-gaussian-interference-genie-outer-region",
+          "lem-scalar-gaussian-channel-mutual-information-power-bound"
+        ],
+        "dependency_level": 9
+      }
+    ]
+  },
+  {
+    "order": 2531,
+    "id": "relay-and-interference-channel-bounds-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Relay and Interference Channel Bounds — Examples",
+    "companion": "relay-and-interference-channel-bounds",
+    "requires": [
+      "relay-and-interference-channel-bounds"
+    ],
+    "items": [
+      {
+        "id": "ex-real-gaussian-relay-fixed-quantizer-gap",
+        "kind": "example",
+        "title": "A two-hop Gaussian relay with a half-bit quantization penalty",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-gaussian-multicast-relay-network",
+          "thm-real-gaussian-multicast-noisy-network-coding-inner-bound",
+          "lem-real-vector-gaussian-maximum-differential-entropy"
+        ],
+        "dependency_level": 9
+      },
+      {
+        "id": "ex-real-gaussian-strong-interference-region",
+        "kind": "example",
+        "title": "A numerical asymmetric Gaussian channel in the strong regime",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-real-two-user-gaussian-interference-channel",
+          "thm-real-gaussian-strong-interference-capacity-region"
+        ],
+        "dependency_level": 8,
+        "statement": "Use the complex Gaussian channel with $P_1=P_2=1$, unit noise variance, $h_{11}=1$, $h_{22}=3/2$, $h_{21}=2$, and $h_{12}=5/2$ in the convention of [[def-real-two-user-gaussian-interference-channel]]. Then\n$$\\mathrm{SNR}_1=1,\\quad \\mathrm{SNR}_2=\\frac94,\\quad \\mathrm{INR}_1=4,\\quad \\mathrm{INR}_2=\\frac{25}{4},$$\nand the exact capacity region is\n$$R_1\\ge0,\\quad R_2\\ge0,\\quad R_1\\le1,\\quad R_2\\le\\log_2\\frac{13}{4},\\quad R_1+R_2\\le\\log_2 6$$\nbits per use."
+      },
+      {
+        "id": "cex-strong-interference-formula-fails-outside-regime",
+        "kind": "counterexample",
+        "title": "Outside the strong regime, the MAC intersection can be too small",
+        "deps": [
+          "def-finite-two-user-interference-channel-and-strong-regime",
+          "thm-finite-strong-interference-channel-capacity"
+        ],
+        "dependency_level": 9
+      },
+      {
+        "id": "ex-binary-additive-strong-interference-capacity",
+        "kind": "example",
+        "title": "The binary additive interference channel in the strong regime",
+        "deps": [
+          "def-finite-two-user-interference-channel-and-strong-regime",
+          "thm-finite-strong-interference-channel-capacity"
+        ],
+        "dependency_level": 9
+      }
+    ]
+  }
+]

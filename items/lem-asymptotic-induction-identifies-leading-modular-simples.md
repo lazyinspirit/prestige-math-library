@@ -1,0 +1,54 @@
+---
+id: lem-asymptotic-induction-identifies-leading-modular-simples
+kind: lemma
+title: "Asymptotic induction identifies leading modular simples"
+deps: [def-finite-weyl-lusztig-basic-set-data, lem-lusztig-asymptotic-algebra-and-specialization-map, lem-schur-leading-coefficients-and-good-asymptotic-specializations]
+status: draft
+dependency_level: 8
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Meinolf Geck, Modular Representations of Hecke Algebras"
+      url: "https://arxiv.org/abs/math/0511548"
+      locator: "Sections 5–6; local completion, splitting and reciprocity arguments supplied here."
+verification:
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+---
+
+## Statement
+
+In the finite-Weyl setting of [[def-finite-weyl-lusztig-basic-set-data]], assume its specified Lusztig properties and let $\theta:A\to k$ have characteristic zero or satisfy $\theta(f_E)\ne0$ for every generic simple label $E$. Write $H=H_k$, and let $V_E$ be the corresponding simple module of the split asymptotic algebra $J_k$, supported in degree $\alpha_E$. A star denotes restriction through $\phi_k:H\to J_k$.
+
+For each simple $H$-module $M$, let $a_M=\max\{a(w):D_wM\ne0\}$, where $D_w=C_w^\dagger$. There is an injective assignment $M\mapsto E(M)$ such that $\alpha_{E(M)}=a_M$, $M$ occurs once in $*V_{E(M)}$, and all its other simple factors have strictly smaller $a$-value. Moreover $H$ is split: every simple $H$-module remains simple over every field extension.
+
+## Facts & Assumptions
+
+**Given:** The stated finite-Weyl data, exact Lusztig-property hypotheses and good-characteristic specialization.
+
+[F1] The finite filtration $I_i=\langle D_w:a(w)\ge i\rangle$ has two-sided ideals, $I_0=H$, $I_{N+1}=0$, and layers $B_i=I_i/I_{i+1}$ carrying commuting left $J_k$ and right $H$ actions. The original left $H$ action equals restriction through $\phi_k$. The left $J_k$ action on $B_i$ is supported in degree $i$ ([[def-finite-weyl-lusztig-basic-set-data]], [[lem-lusztig-asymptotic-algebra-and-specialization-map]]).
+
+[F2] $J_k$ is split semisimple, with simples $V_E$ supported in degree $\alpha_E$ ([[lem-schur-leading-coefficients-and-good-asymptotic-specializations]]).
+
+## Proof
+
+1.1 Every simple $H$-module $M$ is finite-dimensional, since for $0\ne m\in M$ the map $H\to M$, $h\mapsto hm$, is surjective. Since $D_1=1$, the maximum $a=a_M$ exists; $I_{a+1}M=0$ and $I_aM\ne0$. Set $T(M)=B_a\otimes_HM$. Its map $\pi:T(M)\to M$, $[f]\otimes m\mapsto fm$, is well-defined: changing $f$ by $I_{a+1}$ changes no value, and the tensor balancing relation is respected. It is $H$-linear by multiplication and nonzero by $I_aM\ne0$, so it is surjective. [F1, given, construct, algebra]
+
+2.1 If $x=\sum_j[f_j]\otimes m_j\in\ker\pi$ and $g\in I_a$, then $gx=\sum_j[gf_j]\otimes m_j=[g]\otimes\sum_jf_jm_j=0$ by tensor balancing. Thus $I_a$ annihilates $\ker\pi$. Every simple factor $M'$ of that kernel has $a_{M'}<a$, because all $D_w$ with $a(w)\ge a$ belong to $I_a$. In particular $[*T(M):M]=1$. Every $J_k$-simple factor of $T(M)$ has degree $a$, by the degree support of $B_a$. [F1, F2, step 1.1, algebra]
+
+3.1 Decompose the semisimple $J_k$-module $T(M)=\bigoplus_E V_E^{m_E}$. Restriction preserves the direct sum. The equality $[*T(M):M]=1$ implies that exactly one occurring label $E$ has $M$ as a factor of $*V_E$, and both $m_E$ and $[*V_E:M]$ equal one. Define this label to be $E(M)$. Its degree is $\alpha_{E(M)}=a_M$. The direct-sum inclusion of this $*V_E$ into $*T(M)$ and step 2.1 show that all its other simple factors have strictly smaller $a$-value. If $E(M)=E(M')$, differing $a$-values would contradict their common degree; at equal degree the unique factor just proved forces $M\cong M'$. This proves the assignment's injectivity. [F2, step 2.1, construct, algebra]
+
+4.1 Put $\Delta=\operatorname{End}_H(M)$. A nonzero endomorphism of the simple finite-dimensional module is bijective, so $\Delta$ is a division $k$-algebra. It acts on $T(M)$ by $1\otimes d$, commuting with $J_k$. Consequently it preserves every $J_k$-isotypic component. The $E(M)$-component has multiplicity one, so restriction gives a unital homomorphism $\Delta\to\operatorname{End}_{J_k}(V_{E(M)})=k$. The equality on the right follows from the full matrix block of the split algebra $J_k$. The homomorphism's kernel is zero because $\Delta$ is a division algebra, and its image contains all scalar maps. Thus $\Delta=k$. [F2, step 3.1, algebra]
+
+5.1 We verify explicitly that $\Delta=k$ implies absolute simplicity here. A finite direct sum of copies of a simple module is semisimple: by induction, every submodule has a complement. Indeed, in $S\oplus U$, split its intersection with $U$ by the induction hypothesis, quotient that intersection, and consider its projection to $S$; this is zero or $S$, and in the latter case the remaining submodule is the graph of a homomorphism from $S$ into the remaining summand of $U$. That graph has the remaining $U$ as a complement. Now choose a $k$-basis $m_1,\ldots,m_r$ of $M$. The image of $H\to M^r$, $h\mapsto(hm_1,\ldots,hm_r)$, is a submodule. If it were proper, semisimplicity would give a nonzero map $M^r\to M$ vanishing on that image. Its components belong to $\operatorname{End}_H(M)=k$, so they are scalars $c_i$, not all zero. Evaluating at $h=1$ would give $\sum_i c_im_i=0$, contrary to basis independence. Thus the map is surjective. Every prescribed list of images of the basis is realized by some $h$, proving that $H\to\operatorname{End}_k(M)$ is surjective. After any field extension, its image remains the full matrix algebra acting on the extended vector space; its standard module is simple. Hence every $M$ is absolutely simple, and $H$ is split. [step 4.1, choose, algebra] ∎

@@ -1,0 +1,712 @@
+[
+  {
+    "order": 2532,
+    "id": "secrecy-and-information-privacy",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Secrecy and Information Privacy",
+    "companion": "secrecy-and-information-privacy-examples",
+    "requires": [
+      "discrete-memoryless-channel-capacity",
+      "iid-lossless-source-coding-and-the-aep",
+      "trust-region-and-cubic-regularization-methods"
+    ],
+    "items": [
+      {
+        "id": "thm-it-universal-hashing-leftover-bound",
+        "kind": "theorem",
+        "title": "Classical leftover-hash bound with public side information",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Let $X,Z$ be finite random variables with joint law $P_{XZ}$. Let $M\\ge1$ be an integer and let $\\mathcal H$ be a finite nonempty family of functions $h:\\mathcal X\\to[M]$. Choose $H$ uniformly from $\\mathcal H$ independently of $(X,Z)$, and assume the family is **two-universal**:",
+        "proof_obligations": [
+          "Define two-universality, public-seed total variation, and conditional guessing probability exactly.",
+          "Prove the collision second-moment bound for each positive-mass z.",
+          "Use Cauchy–Schwarz over bins and seed, and handle zero-mass z explicitly.",
+          "State the exact output-size condition M g(X|Z)≤4ε² for TV≤ε; do not infer mutual-information secrecy from TV alone."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Prakash Narayan and Himanshu Tyagi, Multiterminal Secrecy by Public Discussion, Foundations and Trends in Communications and Information Theory 13(2–3), 2016",
+              "url": "https://ece.iisc.ac.in/~htyagi/papers/PN-HT-NOW-final1.pdf",
+              "locator": "Chapter 5, §§5.2–5.3, printed pp. 180–185: universal hashing and the leftover-hash lemma with classical side information."
+            },
+            {
+              "title": "C. H. Bennett, G. Brassard, C. Crépeau, and U. Maurer, Generalized Privacy Amplification, IEEE Transactions on Information Theory 41(6), 1995",
+              "url": "https://crypto.cs.mcgill.ca/~crepeau/PDF/ASPUBLISHED/BBCM95.pdf",
+              "locator": "§IV: universal hashing and privacy amplification against probabilistic side information."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the hash family, alphabets, and all sums are finite.",
+        "source_path": "items/thm-it-universal-hashing-leftover-bound.md",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-it-finite-source-privacy-utility-region",
+        "kind": "definition",
+        "title": "Finite-source privacy–utility region",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "def-finite-stochastic-kernel"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "Let $S$ be a finite sensitive variable and $X$ a finite useful variable with joint law $P_{SX}$. For each finite nonempty release alphabet $\\mathcal Z$, choose a stochastic kernel $K(z\\mid x)$ from $\\mathcal X$ to $\\mathcal Z$ ([[def-finite-stochastic-kernel]]) and form",
+        "proof_obligations": [
+          "Specify the finite source law, release kernel, induced Markov factorization, ordered leakage–utility coordinates, units, and closure.",
+          "Distinguish this chosen mutual-information model from distortion-based or perfect-privacy criteria."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Salman Salamatian, Ali Makhdoumi, Nadia Fawaz, and Muriel Médard, From the Information Bottleneck to the Privacy Funnel, ITW 2014",
+              "url": "https://www.nadiafawaz.com/Publis/ConfPapers/Fawaz-ITW2014.pdf",
+              "locator": "§§II–III: finite privacy mappings, log-loss privacy leakage, mutual-information utility, and the privacy-funnel optimization."
+            },
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-8–23-11: finite probability models and the distinction between wiretap secrecy and source privacy."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; all alphabets, kernels, and distributions are finite.",
+        "source_path": "items/def-it-finite-source-privacy-utility-region.md"
+      },
+      {
+        "id": "def-it-information-leakage-and-equivocation",
+        "kind": "definition",
+        "title": "Information leakage and equivocation for finite observations",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-entropy"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For finite random variables $M,Z$, information leakage is the finite mutual information $I(M;Z)$ in nats, as defined in [[def-it-finite-mutual-information]], and equivocation is the finite conditional entropy $H(M\\mid Z)$, as defined in [[def-it-finite-conditional-entropy]]. For an $n$-use code with Eve's observation $Z^n$, its normalized leakage is $n^{-1}I(M;Z^n)$. When $M$ is uniform on a finite message set $\\mathcal M$, its entropy is $H(M)=\\ln|\\mathcal M|$. Zero-probability symbols are handled by the finite entropy and KL conventions cited above.",
+        "proof_obligations": [
+          "Specify the finite domains, nats convention, conditional entropy and mutual information formulas, and the blocklength normalization."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-8–23-9: uniform message, information leakage rate, and receiver error."
+            },
+            {
+              "title": "Matthieu R. Bloch and J. Nicholas Laneman, Strong Secrecy from Channel Resolvability, arXiv:1105.5419",
+              "url": "https://arxiv.org/pdf/1105.5419",
+              "locator": "§§I and III: normalized information leakage and total information leakage as distinct secrecy measures."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; all probability laws and sums are finite.",
+        "source_path": "items/def-it-information-leakage-and-equivocation.md"
+      },
+      {
+        "id": "lem-it-finite-wiretap-product-kernel-is-stochastic",
+        "kind": "lemma",
+        "title": "The finite wiretap product law is stochastic",
+        "deps": [
+          "def-finite-stochastic-kernel"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For finite nonempty alphabets $\\mathcal X,\\mathcal Y,\\mathcal Z$, a stochastic kernel $W(y,z\\mid x)$ from $\\mathcal X$ to $\\mathcal Y\\times\\mathcal Z$, and every $n\\ge1$, the block formula",
+        "proof_obligations": [
+          "Prove nonnegativity of every product entry.",
+          "Factor the finite output sum and use the row sums of W to obtain one."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF p. 23-8: the joint finite DMC law p(y,z|x)."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; only finite products and sums occur.",
+        "source_path": "items/lem-it-finite-wiretap-product-kernel-is-stochastic.md",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-it-wiretap-channel",
+        "kind": "definition",
+        "title": "Finite discrete memoryless wiretap channel and code model",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-finite-stochastic-kernel",
+          "lem-it-finite-wiretap-product-kernel-is-stochastic"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be finite nonempty alphabets and let $W(y,z\\mid x)$ be a stochastic kernel from $\\mathcal X$ to $\\mathcal Y\\times\\mathcal Z$ ([[def-finite-stochastic-kernel]]). Its Bob and Eve marginals are $W_Y(y\\mid x):=\\sum_z W(y,z\\mid x)$ and $W_Z(z\\mid x):=\\sum_y W(y,z\\mid x)$; each is a finite DMC in the sense of [[def-discrete-memoryless-channel]]. At blocklength $n$, the joint channel law is",
+        "proof_obligations": [
+          "Specify the finite alphabets, joint row-stochastic law, Bob and Eve marginals, product convention, no-feedback resource model, uniform message, decoder and error metrics.",
+          "Record that block product stochasticity is established by the assigned local helper."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-8–23-9: finite DM-WTC, randomized encoder, uniform message, and secrecy capacity statement."
+            },
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 12",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_12.pdf",
+              "locator": "PDF pp. 1–2: finite wiretap converse notation, error/leakage model, and auxiliary-variable formulation."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the alphabets, stochastic matrices, and products are finite.",
+        "source_path": "items/def-it-wiretap-channel.md"
+      },
+      {
+        "id": "thm-it-perfect-privacy-kernel-criterion",
+        "kind": "theorem",
+        "title": "A finite kernel criterion for perfect privacy",
+        "deps": [
+          "def-it-finite-source-privacy-utility-region",
+          "def-it-finite-mutual-information",
+          "thm-it-finite-kl-nonnegative-equality"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "Let $(S,X)$ have a finite joint law and let $K(z\\mid x)$ be a finite release kernel, giving $P_{SXZ}=P_{SX}K_{Z\\mid X}$ as in [[def-it-finite-source-privacy-utility-region]]. Then $I(S;Z)=0$ if and only if, for each $z$ with $P_Z(z)>0$, the conditional mixture",
+        "proof_obligations": [
+          "Use I(S;Z)=D(P_{SZ}||P_S×P_Z) and the exact finite KL equality condition.",
+          "Expand the induced joint law and verify the positive-support and zero-column cases in both directions."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Salman Salamatian, Ali Makhdoumi, Nadia Fawaz, and Muriel Médard, From the Information Bottleneck to the Privacy Funnel, ITW 2014",
+              "url": "https://www.nadiafawaz.com/Publis/ConfPapers/Fawaz-ITW2014.pdf",
+              "locator": "§II: finite sensitive/useful variables and randomized privacy mappings; §III: mutual-information leakage."
+            },
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-8–23-11: finite joint laws and secrecy-related mutual information."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; all variables and sums are finite.",
+        "source_path": "items/thm-it-perfect-privacy-kernel-criterion.md",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-it-degraded-wiretap-channel",
+        "kind": "definition",
+        "title": "Finite degraded wiretap channel",
+        "deps": [
+          "def-it-wiretap-channel",
+          "def-finite-stochastic-kernel"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "A finite wiretap channel [[def-it-wiretap-channel]] is **degraded from Bob to Eve** if there is a finite stochastic kernel $V(z\\mid y)$ from Bob's output alphabet to Eve's output alphabet such that",
+        "proof_obligations": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-9–23-10: physically degraded wiretap channels and their capacity specialization."
+            },
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 11",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_11.pdf",
+              "locator": "PDF pp. 1–2: degraded wiretap channel factorization and capacity formula."
+            }
+          ]
+        },
+        "source_path": "items/def-it-degraded-wiretap-channel.md",
+        "axiom_use": "No choice axiom is used; the degradation kernel and channel alphabets are finite."
+      },
+      {
+        "id": "def-it-weak-and-strong-secrecy",
+        "kind": "definition",
+        "title": "Weak and strong secrecy for wiretap code sequences",
+        "deps": [
+          "def-it-wiretap-channel",
+          "def-it-information-leakage-and-equivocation"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Consider a sequence of finite wiretap codes from [[def-it-wiretap-channel]], with uniform message $M_n$ and Eve's observation $Z^n$. Call it reliable when its average error tends to zero; maximal reliability is the stronger condition that its maximal error tends to zero. Among reliable sequences, **weak secrecy** means",
+        "proof_obligations": [
+          "Specify the sequence, Eve observation, reliability premise, and exact normalized versus unnormalized nats criteria.",
+          "Keep total-variation and per-message notions separately named."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-8–23-9: normalized information leakage rate."
+            },
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 15",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_15.pdf",
+              "locator": "PDF pp. 1–2: weak versus strong secrecy metrics and resolvability-based secrecy."
+            },
+            {
+              "title": "Matthieu R. Bloch and J. Nicholas Laneman, Strong Secrecy from Channel Resolvability, arXiv:1105.5419",
+              "url": "https://arxiv.org/pdf/1105.5419",
+              "locator": "§III: the hierarchy of normalized, unnormalized, and variational-distance secrecy metrics."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the definition concerns finite message and output variables.",
+        "source_path": "items/def-it-weak-and-strong-secrecy.md"
+      },
+      {
+        "id": "lem-it-finite-dmc-information-density-concentration",
+        "kind": "lemma",
+        "title": "Information-density concentration for a fixed finite DMC input law",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "def-it-finite-mutual-information",
+          "def-it-information-units-and-logarithm-base",
+          "def-natural-logarithm",
+          "thm-derivative-of-exponential"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "statement": "Let $W(y\\mid u)$ be a finite DMC and let $P_U$ be any fixed input probability vector. Let $P_Y(y)=\\sum_uP_U(u)W(y\\mid u)$. On the joint support $P_U(u)W(y\\mid u)>0$, define",
+        "proof_obligations": [
+          "Show support positivity and boundedness of J.",
+          "Compute its mean and variance from the finite-mutual-information definition.",
+          "Derive the two-sided Chebyshev bound for the IID sum.",
+          "Use a finite moment-generating function with negative derivative at zero to prove an exponential upper tail."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 12",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_12.pdf",
+              "locator": "PDF pp. 1–2: information-density threshold and memoryless single-letterization."
+            },
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-8–23-10: finite DMC information quantities and the auxiliary-channel convention."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; all random variables have finite support.",
+        "source_path": "items/lem-it-finite-dmc-information-density-concentration.md",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-it-wiretap-secrecy-capacities",
+        "kind": "definition",
+        "title": "Operational weak and strong secrecy capacities",
+        "deps": [
+          "def-it-wiretap-channel",
+          "def-it-information-leakage-and-equivocation",
+          "def-it-weak-and-strong-secrecy"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Fix an error criterion $e\\in\\{\\mathrm{av},\\mathrm{max}\\}$ and a secrecy criterion $s\\in\\{\\mathrm{weak},\\mathrm{strong}\\}$. For each code let $P_{\\rm err}^{(n)}=P_{e,\\rm av}^{(n)}$ when $e=\\mathrm{av}$ and $P_{\\rm err}^{(n)}=P_{e,\\rm max}^{(n)}$ when $e=\\mathrm{max}$. A rate $R\\ge0$ in nats per channel use is $(e,s)$-achievable for a finite wiretap channel [[def-it-wiretap-channel]] if there is a sequence of wiretap codes, one at each blocklength $n\\ge1$, such that",
+        "proof_obligations": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-8–23-9: rate, reliability, normalized leakage, and secrecy capacity."
+            },
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 15",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_15.pdf",
+              "locator": "PDF pp. 1–2: weak and strong secrecy metrics and their unnormalized/normalized definitions."
+            }
+          ]
+        },
+        "source_path": "items/def-it-wiretap-secrecy-capacities.md",
+        "axiom_use": "No choice axiom is used; all message sets and code alphabets are finite."
+      },
+      {
+        "id": "lem-it-channel-resolvability-soft-covering",
+        "kind": "lemma",
+        "title": "Finite DMC resolvability by random codebooks",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "def-it-finite-mutual-information",
+          "def-it-information-units-and-logarithm-base",
+          "def-natural-logarithm",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-it-finite-kl-nonnegative-equality",
+          "lem-it-finite-dmc-information-density-concentration",
+          "lem-natural-logarithm-bounded-by-argument"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Let $W(z\\mid u)$ be a finite DMC, let $P_U$ be an input probability vector, and let $P_Z(z)=\\sum_uP_U(u)W(z\\mid u)$. On the joint support define $J(u,z):=\\ln(W(z\\mid u)/P_Z(z))$ and let $I=I(U;Z)$. Set $B=\\max(0,\\max_{P_U(u)W(z\\mid u)>0}J(u,z))$. For $R_0>I$ and any $\\gamma$ with $0<\\gamma<R_0-I$, draw $L_n=\\lceil e^{nR_0}\\rceil$ independent words $U^n(\\ell)\\sim P_U^n$ and define the induced mixture",
+        "proof_obligations": [
+          "Define the induced mixture, product target, information density and positive support.",
+          "Derive the expected relative-entropy bound by symmetry and finite Jensen from KL nonnegativity.",
+          "Use the information-density exponential tail to bound that KL expectation explicitly.",
+          "Truncate likelihood ratios and prove the expected total-variation bound, including both missing-mass terms and the codebook variance term."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 13",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_13.pdf",
+              "locator": "PDF pp. 1–3: soft covering, likelihood truncation, and total-variation bound."
+            },
+            {
+              "title": "Matthieu R. Bloch and J. Nicholas Laneman, Strong Secrecy from Channel Resolvability, arXiv:1105.5419",
+              "url": "https://arxiv.org/pdf/1105.5419",
+              "locator": "§§III and V: secrecy metrics and resolvability-based strong secrecy for memoryless channels."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; each codebook, alphabet, and output law is finite.",
+        "source_path": "items/lem-it-channel-resolvability-soft-covering.md",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-it-classical-wiretap-auxiliary-cardinality",
+        "kind": "lemma",
+        "title": "The finite wiretap auxiliary has cardinality at most |X|",
+        "deps": [
+          "def-it-wiretap-channel",
+          "def-it-finite-mutual-information",
+          "thm-it-finite-entropy-chain-rule",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-natural-logarithm-bounded-by-argument",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "For every finite joint law $P_{UX}$ on a finite wiretap channel with input alphabet $\\mathcal X$, where $U-X-(Y,Z)$ means $P_{UXYZ}(u,x,y,z)=P_{UX}(u,x)W(y,z\\mid x)$, there is another finite auxiliary $\\widetilde U$ with $|\\widetilde{\\mathcal U}|\\le|\\mathcal X|$ whose value of $I(\\widetilde U;Y)-I(\\widetilde U;Z)$ is at least $I(U;Y)-I(U;Z)$. Consequently",
+        "proof_obligations": [
+          "Express the objective using the posterior laws qᵤ=P_{X|U=u} and a continuous finite-alphabet function F(q).",
+          "Use affine dependence of more than |X| posterior vectors to remove a support point without decreasing the objective.",
+          "Prove continuity and compactness so the reduced-cardinality maximum is attained, including |X|=1."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF p. 23-9: the auxiliary formula and |U|≤|X| statement."
+            },
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 12",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_12.pdf",
+              "locator": "PDF pp. 2–4: auxiliary variable in the nondegraded wiretap converse."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the support reduction is finite-dimensional linear algebra.",
+        "source_path": "items/lem-it-classical-wiretap-auxiliary-cardinality.md",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-it-finite-classical-wiretap-auxiliary-capacity",
+        "kind": "theorem",
+        "title": "Strong-secrecy capacity of a finite DMC wiretap channel",
+        "deps": [
+          "def-it-wiretap-channel",
+          "def-it-wiretap-secrecy-capacities",
+          "lem-it-finite-wiretap-product-kernel-is-stochastic",
+          "def-it-information-leakage-and-equivocation",
+          "def-it-weak-and-strong-secrecy",
+          "def-it-finite-mutual-information",
+          "thm-it-finite-entropy-chain-rule",
+          "cor-it-fano-with-erasure-or-out-of-alphabet-estimates",
+          "lem-it-finite-dmc-information-density-concentration",
+          "lem-it-channel-resolvability-soft-covering",
+          "lem-it-classical-wiretap-auxiliary-cardinality",
+          "thm-it-finite-kl-nonnegative-equality"
+        ],
+        "justified_by": [],
+        "dependency_level": 8,
+        "statement": "Let $W(y,z\\mid x)$ be a finite wiretap DMC as in [[def-it-wiretap-channel]], with no input-cost constraint, feedback, or preshared secret key. Let",
+        "proof_obligations": [
+          "Prove reliability for a fixed auxiliary input law by threshold decoding the message and randomization indices.",
+          "Use resolvability on Eve’s induced U→Z channel and prove the exact average-divergence identity relating per-message KL to I(M;Zⁿ).",
+          "Select one public codebook with small average error and divergence, then expurgate to maximal reliability without losing rate or strong secrecy.",
+          "Converse with erasure-aware Fano, an exact telescoping identity, the no-feedback memoryless Markov property conditioned on past Bob and future Eve outputs, and the auxiliary cardinality lemma.",
+          "Show the converse needs only weak secrecy, so the weak and strong secrecy capacities coincide."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-8–23-11: finite DM-WTC model, weak/strong secrecy capacity formula, converse and degraded specialization."
+            },
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 12",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_12.pdf",
+              "locator": "PDF pp. 1–4: nondegraded wiretap converse, Csiszár sum identity, auxiliary channel and converse bound."
+            },
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 13",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_13.pdf",
+              "locator": "PDF pp. 1–3: finite DMC soft covering and threshold decoding arguments."
+            },
+            {
+              "title": "Matthieu R. Bloch and J. Nicholas Laneman, Strong Secrecy from Channel Resolvability, arXiv:1105.5419",
+              "url": "https://arxiv.org/pdf/1105.5419",
+              "locator": "§§III and V: resolvability, strong secrecy metrics, and memoryless wiretap-channel achievability."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; all auxiliaries, alphabets, codebooks, and probability sums are finite.",
+        "source_path": "items/thm-it-finite-classical-wiretap-auxiliary-capacity.md",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-it-degraded-wiretap-secrecy-capacity",
+        "kind": "theorem",
+        "title": "Secrecy capacity of a finite degraded wiretap channel",
+        "deps": [
+          "def-it-degraded-wiretap-channel",
+          "def-it-wiretap-secrecy-capacities",
+          "def-it-finite-mutual-information",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-markov-data-processing",
+          "lem-it-classical-wiretap-auxiliary-cardinality",
+          "thm-it-finite-classical-wiretap-auxiliary-capacity"
+        ],
+        "justified_by": [],
+        "dependency_level": 9,
+        "statement": "If $W(y,z\\mid x)$ is a finite degraded wiretap channel in the sense of [[def-it-degraded-wiretap-channel]], then all four operational capacities in [[def-it-wiretap-secrecy-capacities]] are equal to",
+        "proof_obligations": [
+          "For every U–X–Y–Z, expand the general auxiliary objective and show the conditional difference I(X;Y|U)−I(X;Z|U) is nonnegative.",
+          "Use U=X for attainment and inherit achievability from the general wiretap theorem."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-9–23-10: physically degraded channel specialization and secrecy capacity formula."
+            },
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 11",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_11.pdf",
+              "locator": "PDF pp. 1–3: degraded wiretap channel and reduction of the auxiliary formula."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the simplex and all channel alphabets are finite.",
+        "source_path": "items/thm-it-degraded-wiretap-secrecy-capacity.md",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2533,
+    "id": "secrecy-and-information-privacy-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Secrecy and Information Privacy — Examples",
+    "companion": "secrecy-and-information-privacy",
+    "requires": [
+      "secrecy-and-information-privacy"
+    ],
+    "items": [
+      {
+        "id": "ex-it-information-bottleneck-finite-model",
+        "kind": "example",
+        "title": "A finite information-bottleneck privacy model",
+        "deps": [
+          "def-it-finite-source-privacy-utility-region",
+          "thm-it-perfect-privacy-kernel-criterion",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "thm-it-finite-entropy-chain-rule",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Let $S$ be a fair bit, let $N\\sim\\operatorname{Bernoulli}(1/10)$ be independent, and set $Y=S\\oplus N$. For every finite stochastic release kernel $K(z\\mid y)$, the induced law is $S-Y-Z$. With $h(p):=-p\\ln p-(1-p)\\ln(1-p)$ and $0\\ln0:=0$,",
+        "proof_obligations": [
+          "Upper-bound the weighted objective for every finite release kernel using the Markov chain and conditional-entropy bounds.",
+          "Compute equality for Z=Y.",
+          "Use the perfect-privacy kernel criterion and the invertible BSC(0.1) matrix to prove that zero leakage forces zero utility."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Salman Salamatian, Ali Makhdoumi, Nadia Fawaz, and Muriel Médard, From the Information Bottleneck to the Privacy Funnel, ITW 2014",
+              "url": "https://www.nadiafawaz.com/Publis/ConfPapers/Fawaz-ITW2014.pdf",
+              "locator": "§§II–III: binary source examples, mutual-information leakage/utility, and the finite privacy-funnel objective."
+            },
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 15",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_15.pdf",
+              "locator": "PDF pp. 1–2: finite information quantities and privacy/secrecy metrics."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the source, release alphabet, and stochastic matrix are finite.",
+        "source_path": "items/ex-it-information-bottleneck-finite-model.md",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-it-weak-secrecy-does-not-imply-strong-secrecy",
+        "kind": "example",
+        "title": "Weak secrecy does not imply strong secrecy",
+        "deps": [
+          "def-it-wiretap-channel",
+          "def-it-information-leakage-and-equivocation",
+          "def-it-weak-and-strong-secrecy",
+          "def-it-finite-mutual-information",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "statement": "Consider the noiseless finite wiretap channel with $\\mathcal X=\\mathcal Y=\\mathcal Z=\\{0,1\\}$ and $W(y,z\\mid x)=1$ exactly when $y=z=x$. At blocklength $n$, let $k_n=\\lfloor\\sqrt n\\rfloor$, let $M_n$ be uniform on $\\{0,1\\}^{k_n}$, and transmit $X^n=(M_n,0^{n-k_n})$. Bob and Eve both observe the transmitted word exactly. This reliable code sequence satisfies weak secrecy but not strong secrecy: its leakage is $I(M_n;Z^n)=k_n\\ln2\\to\\infty$, whereas $n^{-1}I(M_n;Z^n)\\to0$. In general, strong secrecy implies weak secrecy.",
+        "proof_obligations": [
+          "Construct a uniform kₙ-bit message, transmit it followed by fixed padding, and verify zero Bob error.",
+          "Compute I(Mₙ;Zⁿ)=kₙ ln 2 exactly and check both normalizations.",
+          "Prove strong secrecy implies weak secrecy for every sequence by nonnegativity and n≥1."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 15",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_15.pdf",
+              "locator": "PDF pp. 1–2: normalized leakage can vanish while unnormalized leakage does not."
+            },
+            {
+              "title": "Matthieu R. Bloch and J. Nicholas Laneman, Strong Secrecy from Channel Resolvability, arXiv:1105.5419",
+              "url": "https://arxiv.org/pdf/1105.5419",
+              "locator": "§III: normalized, unnormalized, and total-variation secrecy metrics."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the channel, code, and message sets are finite at each blocklength.",
+        "source_path": "items/ex-it-weak-secrecy-does-not-imply-strong-secrecy.md",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-it-degraded-wiretap-capacity",
+        "kind": "example",
+        "title": "A degraded binary erasure wiretap channel",
+        "deps": [
+          "def-it-degraded-wiretap-channel",
+          "thm-it-degraded-wiretap-secrecy-capacity",
+          "def-it-finite-mutual-information",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 10,
+        "statement": "Bob observes a binary erasure channel (BEC) with input alphabet $\\{0,1\\}$, output alphabet $\\{0,1,e\\}$, and erasure probability $1/4$. Eve observes Bob's output after independently erasing each surviving bit with probability $1/3$, while an erasure remains an erasure. This is a finite degraded wiretap channel. Its strong- and weak-secrecy capacities under average or maximal error are all $\\ln2/4$ nats per use. Define $h(p):=-p\\ln p-(1-p)\\ln(1-p)$ with $0\\ln0:=0$. For Bernoulli-$p$ input the single-letter difference is $h(p)/4$, which is zero at $p=0,1$ and maximal at $p=1/2$.",
+        "proof_obligations": [
+          "Verify the extra-erasure cascade gives BEC(1/2) and physical degradation.",
+          "Compute the conditional entropy and mutual information of a BEC under arbitrary Bernoulli(p) input.",
+          "Maximize h(p) including the endpoints p=0,1."
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Abbas El Gamal and Young-Han Kim, Network Information Theory, arXiv:1001.3404v3",
+              "url": "https://arxiv.org/pdf/1001.3404v3",
+              "locator": "The Wiretap Channel, PDF pp. 23-9–23-10: degraded-channel formula and binary erasure specialization."
+            },
+            {
+              "title": "Paul Cuff, Princeton ELE 538: Information Theoretic Security, Lecture 11",
+              "url": "https://www.princeton.edu/~cuff/ele538/files/lecture_11.pdf",
+              "locator": "PDF pp. 1–3: degraded wiretap capacity and erasure-channel illustration."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; the channel and input simplex are finite.",
+        "source_path": "items/ex-it-degraded-wiretap-capacity.md",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "order": 2546,
+    "id": "finite-trellis-viterbi-and-sequence-decoding",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Finite Trellises, Viterbi, and Sequence Decoding",
+    "companion": "finite-trellis-viterbi-and-sequence-decoding-examples",
+    "requires": [
+      "prefix-codes-and-finite-lossless-coding"
+    ],
+    "items": [
+      {
+        "id": "def-finite-layered-trellis",
+        "kind": "definition",
+        "title": "Finite weighted trellises",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "axiom_use": "No choice axiom is used; all path sets and maxima are finite."
+      },
+      {
+        "id": "def-finite-hidden-markov-model-for-sequence-decoding",
+        "kind": "definition",
+        "title": "Finite hidden Markov models for sequence decoding",
+        "deps": [],
+        "justified_by": [
+          "lem-finite-hmm-joint-law-normalizes"
+        ],
+        "dependency_level": 0,
+        "axiom_use": "No choice axiom is used; the joint law is defined on finite sets."
+      },
+      {
+        "id": "lem-finite-trellis-prefix-score-recurrence",
+        "kind": "lemma",
+        "title": "The optimal-prefix recurrence for a finite trellis",
+        "deps": [
+          "def-finite-layered-trellis"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "axiom_use": "No choice axiom is used; the proof uses induction and finite maxima."
+      },
+      {
+        "id": "lem-finite-hmm-joint-law-normalizes",
+        "kind": "lemma",
+        "title": "The finite hidden Markov joint law is normalized",
+        "deps": [
+          "def-finite-hidden-markov-model-for-sequence-decoding"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "axiom_use": "No choice axiom is used; the proof rearranges finite sums."
+      },
+      {
+        "id": "alg-viterbi-max-product-on-finite-trellis",
+        "kind": "algorithm",
+        "title": "Max-product Viterbi decoding on a finite trellis",
+        "deps": [
+          "def-finite-layered-trellis",
+          "lem-finite-trellis-prefix-score-recurrence"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "axiom_use": "No axiom is used; the supplied finite orders resolve ties."
+      },
+      {
+        "id": "thm-viterbi-finite-trellis-is-optimal",
+        "kind": "theorem",
+        "title": "Finite-trellis Viterbi decoding returns a maximum-score path",
+        "deps": [
+          "def-finite-layered-trellis",
+          "lem-finite-trellis-prefix-score-recurrence",
+          "alg-viterbi-max-product-on-finite-trellis"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "axiom_use": "No choice axiom is used; finite maxima are selected by the supplied orders."
+      },
+      {
+        "id": "alg-hmm-viterbi-sequence-map",
+        "kind": "algorithm",
+        "title": "Viterbi sequence decoding for a finite hidden Markov model",
+        "deps": [
+          "def-finite-hidden-markov-model-for-sequence-decoding",
+          "def-finite-layered-trellis",
+          "alg-viterbi-max-product-on-finite-trellis"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "axiom_use": "No axiom is used; the procedure uses finite sets and the supplied state order."
+      },
+      {
+        "id": "thm-hmm-viterbi-is-sequence-map",
+        "kind": "theorem",
+        "title": "Finite-HMM Viterbi decoding is exact sequence MAP",
+        "deps": [
+          "def-finite-hidden-markov-model-for-sequence-decoding",
+          "lem-finite-hmm-joint-law-normalizes",
+          "thm-viterbi-finite-trellis-is-optimal",
+          "alg-hmm-viterbi-sequence-map"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "axiom_use": "No choice axiom is used; state and path sets and all sums are finite."
+      }
+    ]
+  },
+  {
+    "order": 2547,
+    "id": "finite-trellis-viterbi-and-sequence-decoding-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Finite Trellises, Viterbi, and Sequence Decoding — Examples",
+    "companion": "finite-trellis-viterbi-and-sequence-decoding",
+    "requires": [
+      "finite-trellis-viterbi-and-sequence-decoding"
+    ],
+    "items": [
+      {
+        "id": "cex-hmm-zero-evidence-has-no-posterior-map",
+        "kind": "counterexample",
+        "title": "Zero-evidence observations have no conditional MAP path",
+        "deps": [
+          "def-finite-hidden-markov-model-for-sequence-decoding"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "axiom_use": "No choice axiom is used; the counterexample has two hidden paths."
+      },
+      {
+        "id": "cex-hmm-marginal-modes-are-not-sequence-map",
+        "kind": "counterexample",
+        "title": "Coordinatewise posterior modes need not be a sequence MAP",
+        "deps": [
+          "def-finite-hidden-markov-model-for-sequence-decoding"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "axiom_use": "No choice axiom is used; the counterexample has four hidden paths."
+      },
+      {
+        "id": "ex-finite-trellis-viterbi-tie-and-unreachable-state",
+        "kind": "example",
+        "title": "A finite trellis with tied maxima and an unreachable high-score state",
+        "deps": [
+          "def-finite-layered-trellis",
+          "alg-viterbi-max-product-on-finite-trellis",
+          "thm-viterbi-finite-trellis-is-optimal"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "axiom_use": "No choice axiom is used; the example enumerates two finite paths."
+      },
+      {
+        "id": "ex-hmm-viterbi-exact-sequence-map",
+        "kind": "example",
+        "title": "An exact two-state HMM sequence-MAP calculation",
+        "deps": [
+          "def-finite-hidden-markov-model-for-sequence-decoding",
+          "alg-hmm-viterbi-sequence-map",
+          "thm-hmm-viterbi-is-sequence-map"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "axiom_use": "No choice axiom is used; the example enumerates a finite path set."
+      }
+    ]
+  }
+]

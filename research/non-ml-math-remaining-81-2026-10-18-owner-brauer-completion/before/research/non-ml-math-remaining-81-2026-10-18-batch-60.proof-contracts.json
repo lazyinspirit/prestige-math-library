@@ -1,0 +1,1091 @@
+{
+  "version": 1,
+  "level": 1,
+  "scope": [
+    "lem-gram-map-fibers-and-rank-strata",
+    "lem-multilinear-minor-pfaffian-ideal-components",
+    "lem-brauer-and-partition-composition-is-associative",
+    "lem-brauer-and-partition-diagram-basis-ranks",
+    "lem-bmw-cubic-relation-and-hecke-quotient",
+    "thm-partition-diagram-orbit-basis-centralizer",
+    "lem-brauer-contraction-functor-and-bending",
+    "ex-brauer-and-partition-loop-composition",
+    "ex-orthogonal-brauer-centralizer-not-faithful-in-rank-one",
+    "ex-symplectic-brauer-relation-in-dimension-two",
+    "ex-partition-diagram-kernel-below-stable-range",
+    "ex-bmw-cubic-and-hecke-quotient-separate"
+  ],
+  "contracts": {
+    "lem-gram-map-fibers-and-rank-strata": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "A symmetric bilinear form on a finite-dimensional $k$-space has a basis with diagonal matrix: if the form is nonzero, polarization in characteristic different from two gives a vector $v$ with $B(v,v)\\ne0$; scale $v$ to norm one using a square root in $k$, split off $kv$ and induct on its orthogonal complement. For an alternating form, choose nonzero $v$, choose $w$ with $B(v,w)=1$, split off the nondegenerate plane they span, and induct on its orthogonal complement. Applying the same argument after quotienting by the radical shows that any rank-$r$ symmetric matrix is congruent to $\\operatorname{diag}(I_r,0)$ and any rank-$r$ alternating matrix is congruent to $J_r\\oplus0$, with $r$ even in the latter case.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "construct",
+            "induction"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Conversely, every Gram matrix has rank at most $\\dim V$, since it factors through the linear map $k^t\\to V$ whose columns are the chosen vectors. For every canonical rank-$r$ matrix in step 1.1, choose $r$ vectors in $V$ giving that standard form and set the remaining vectors to zero. If $S$ is an invertible $t\\times t$ matrix satisfying $S^\\mathsf{T}GS=C$ for an arbitrary rank-$r$ matrix $G$ and its canonical matrix $C$, multiplying the chosen tuple by $S^{-1}$ gives Gram matrix $G$. This realizes every matrix in the rank-bounded image.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Let $f_1,f_2:k^t\\to V$ be the surjective maps defined by two tuples with the same rank-$m$ Gram matrix $G$. For $c\\in k^t$, $f_i(c)=0$ implies $Gc=0$; conversely $Gc=0$ implies $B(f_i(c),f_i(d))=0$ for every $d$, and surjectivity plus nondegeneracy gives $f_i(c)=0$. Thus $\\ker f_1=\\ker f_2$, so $T(f_1(c))=f_2(c)$ is a well-defined linear isomorphism. The equality of Gram matrices makes $T$ preserve the form. It is the unique isometry carrying the first tuple to the second, and a form-preserving map fixing a spanning tuple is the identity.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "A rank-$r$ symmetric matrix is equivalent to its kernel, a $(t-r)$-plane, and a nondegenerate symmetric form on the $r$-dimensional quotient. The finitely many standard graph charts cover the Grassmannian of $(t-r)$-planes, and each chart has $r(t-r)$ coordinates. Over such a chart, symmetric forms on the quotient have $r(r+1)/2$ free coordinates, and nondegeneracy is the nonvanishing of the determinant, an open condition. Thus this stratum has dimension $r(t-r)+r(r+1)/2=rt-r(r-1)/2$. In the alternating case the form space has dimension $r(r-1)/2$ and nondegeneracy is again open, so the stratum dimension is $r(t-r)+r(r-1)/2=rt-r(r+1)/2$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 realizes the rank-zero canonical Gram matrix using the zero tuple."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes rank zero, so the zero Gram matrix lies in the image."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 include the symmetric rank-one case when m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 cover ranks r<m and describe their strata."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 gives the dimension at r=0 and r=min(m,t), including the top-rank endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs canonical bases by finite-dimensional induction; Step 2.1 realizes each allowed rank."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves every Gram matrix has rank at most min(m,t)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 realizes every symmetric or alternating matrix of an allowed rank."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-multilinear-minor-pfaffian-ideal-components": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Each indicated minor is multihomogeneous, with degree $\\sum_{i\\in I}e_i+\\sum_{j\\in J}e_j$. If $I\\cap J\\ne\\varnothing$, some label has degree at least $2e_i$, so multiplying by any polynomial with nonnegative multidegrees cannot produce degree $(1,\\ldots,1)$. If $I$ and $J$ are disjoint, the complementary multidegree is one copy of $e_a$ for each unused label; its monomials are exactly products of off-diagonal variables over perfect matchings of those labels. Since the ideal component is a sum of homogeneous generator multiples, these are precisely its spanning elements.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "A Pfaffian generator on $S$ already has multidegree $\\sum_{i\\in S}e_i$, because every term uses each label of $S$ once. Its complementary multidegree is therefore one copy of $e_a$ for each label outside $S$, whose monomials are exactly the stated perfect-matching products. Homogeneity of the generated ideal gives both inclusions and proves the Pfaffian assertion.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use the empty product when a complementary matching has no pairs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement defines an empty spanning family as zero, and Steps 1.1–1.2 characterize when the matching family is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers t=1 and m=0: the sole 1-minor has multidegree 2e_1, not (1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles intersecting row and column sets: a repeated label has degree at least 2e_i."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 apply at m=0 and at the largest allowed minor/Pfaffian sizes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The claim classifies monomials in fixed finite multidegrees and makes no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a spanning description, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a spanning description, not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-brauer-and-partition-composition-is-associative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-brauer-and-partition-diagram-categories",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $\\delta\\in R$. A set partition of a finite set is a collection of disjoint nonempty subsets, called blocks, whose union is the whole set; a perfect matching is a set partition whose blocks each have size two. For $a,b\\in\\mathbb N=\\{0,1",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Regard the three diagrams as disjoint finite graphs (for Brauer) or disjoint finite vertex sets carrying partitions (for partition diagrams). Glue both middle interfaces at once, and let $\\sim$ be the least equivalence relation generated by all diagram edges or blocks and both sets of interface identifications. The relation $\\sim$ is independent of the order in which the two interfaces are glued, since the least equivalence relation generated by a fixed set of pairs is unique. Thus both bracketings retain exactly the same equivalence classes meeting the outer boundary.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The classes meeting no outer vertex are also the same for both bracketings. Any class removed when the first two diagrams are composed meets neither of their exposed boundaries, so it contains no vertex of the third diagram; it can never merge with another class in the second composition. Conversely, every final class meeting no outer vertex is either removed at the first composition or is removed at the second. Hence the sum of the two loop counts in either bracketing equals the number of classes of $\\sim$ meeting no outer vertex.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "By [F1], each bracketing therefore has the same outer diagram and coefficient $\\delta^\\ell$, with the same integer $\\ell$. The two bracketings agree on basis diagrams, so bilinearity gives associativity on the free modules. The identity diagrams add no new equivalence identifications and remove no class; they act as left and right units.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies that the empty identity diagrams act as units."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 compares the same loop exponent on both sides and never divides by δ, so δ=0 is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies both left and right identity diagrams."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 accounts for all removed classes, including the case when their count is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Associativity has no ordered endpoint or limiting-parameter convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the unique equivalence relation generated by fixed finite identifications."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an associativity and unit claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an associativity and unit claim, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-brauer-and-partition-diagram-basis-ranks": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-brauer-and-partition-diagram-categories",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $\\delta\\in R$. A set partition of a finite set is a collection of disjoint nonempty subsets, called blocks, whose union is the whole set; a perfect matching is a set partition whose blocks each have size two. For $a,b\\in\\mathbb N=\\{0,1",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Let $M_{2a}$ be the number of perfect matchings of $2a$ labels. For $a=0$ the empty matching gives $M_0=1$. For $a\\ge1$, the first label can be paired with any of the remaining $2a-1$ labels, and deleting that pair leaves an arbitrary matching of $2a-2$ labels. Hence $M_{2a}=(2a-1)M_{2a-2}$, and induction gives $M_{2a}=(2a-1)(2a-3)\\cdots1=(2a-1)!!$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By [F1], partition diagrams are in bijection with set partitions of the $2a$ boundary labels. Their number is $\\operatorname{Bell}(2a)$ by the definition in the Statement, and the module is free on precisely that set.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the a=0 Brauer count using the empty matching."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item counts the fixed diagram basis and asserts no zero-object or zero-scalar equivalence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives one matching for a=1; Step 2.1 counts the two set partitions for 2 labels."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The endomorphism diagrams always have 2a boundary labels, so no odd-boundary case occurs in these algebras."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 include a=0 and arbitrary a≥0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 counts matchings by pairing the least label with each of finitely many remaining labels."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a basis-count claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a basis-count claim, not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-bmw-cubic-relation-and-hecke-quotient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bmw-algebra-with-fixed-kauffman-skein-convention",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring, let $q,\\rho\\in R^\\times$, put $z=q-q^{-1}$, and choose $\\delta\\in R$ with $z(\\delta-1)=\\rho-\\rho^{-1}$. For $n\\ge2$, the BMW algebra $BMW_n(R;q,\\rho,\\delta)$ is the unital associative $R$-algebra generated by invertible $g_i$ and elements $e_",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Fix $i$. Right-multiplying the skein relation by $g_i$ and using $e_i g_i=\\rho^{-1}e_i$ gives $g_i^2-zg_i-1+z\\rho^{-1}e_i=0$. Multiplying this identity on the right by $g_i-\\rho^{-1}$ removes its last term because $e_i(g_i-\\rho^{-1})=0$. Hence $(g_i^2-zg_i-1)(g_i-\\rho^{-1})=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Since $z=q-q^{-1}$, $g_i^2-zg_i-1=(g_i-q)(g_i+q^{-1})$, which proves the cubic. In the quotient $e_i=0$, the skein relation gives $g_i-g_i^{-1}=z$; right-multiplying by the invertible $g_i$ yields $g_i^2-zg_i-1=0$, the Hecke quadratic. The cubic statement did not impose this quadratic on the full BMW algebra.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The defining convention has n≥2 and the claim concerns an existing generator g_i."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses no division by z, so the cubic derivation also covers z=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 are polynomial identities and remain valid when q or ρ specializes to 1 subject to the coefficient relation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 separately treats the quotient e_i=0 and derives the Hecke quadratic there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "For n=2 there is one generator and Step 1.1 applies; the proof is independent of the index."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a nonempty set is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives a cubic and a quotient relation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives a cubic and a quotient relation, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-partition-diagram-orbit-basis-centralizer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-brauer-and-partition-diagram-categories",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $\\delta\\in R$. A set partition of a finite set is a collection of disjoint nonempty subsets, called blocks, whose union is the whole set; a perfect matching is a set partition whose blocks each have size two. For $a,b\\in\\mathbb N=\\{0,1",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-brauer-and-partition-composition-is-associative",
+          "source_section": "Statement",
+          "quote": "For every commutative unital ring $R$, every $\\delta\\in R$, and every composable triple of Brauer diagrams or of partition diagrams, the composition defined in [[def-brauer-and-partition-diagram-categories]] is associative and has the stated identity diagrams as units.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For basis tuples $I,K$ on the external boundary, the matrix coefficient of $\\Phi(E)\\Phi(D)$ is the sum over middle tuples $J$ of $\\Phi(D)_{I,J}\\Phi(E)_{J,K}$. The equalities imposed by the two diagrams generate exactly the blocks of the stacked partition. Each generated block meeting an outer label has its index fixed by that label; each block wholly in the middle has $N$ independent choices. Hence the coefficient is $N^\\ell$ when the outer labels satisfy the stacked partition and zero otherwise, where $\\ell$ is the number of removed middle blocks. By [F1] this equals the coefficient of $\\Phi(E\\circ D)$, so $\\Phi$ respects multiplication; [F2] supplies associativity of the domain algebra.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Index a tensor basis vector by an $r$-tuple $I=(i_1,\\ldots,i_r)\\in\\{1,\\ldots,N\\}^r$. A matrix coefficient of an operator is indexed by a pair $(I,J)$. The operator commutes with all basis permutations exactly when its matrix coefficient is constant on simultaneous $S_N$-orbits of $(I,J)$. Two such pairs lie in the same orbit exactly when they have the same equality pattern on the $2r$ labels: a permutation maps one pair to the other if and only if it maps their distinct used indices block by block. Thus orbit indicator matrices form a basis of the commutant over every field.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For a partition diagram $d$, the matrix coefficient of $\\Phi(d)$ is $1$ exactly when labels joined by a block of $d$ receive equal indices. It is therefore the sum of orbit indicators $E_\\pi$ over exact equality patterns $\\pi$ coarser than $d$ and having at most $N$ blocks. The finite-poset zeta matrix is triangular with diagonal entries one, so its inverse $\\mu$ gives an invertible change of basis from the diagram basis to the elements $x_d$. Möbius inversion therefore gives $\\Phi(x_d)=E_d$ if $d$ is realizable and $0$ otherwise.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "An exact pattern $d$ is realizable precisely when it has at most $N$ blocks, since one can assign distinct indices to its blocks. Its orbit indicator is then nonzero, and different exact patterns have disjoint supports, so these images are linearly independent. Step 2.1 shows they span the image and that every $x_d$ with more than $N$ blocks maps to zero; hence the kernel and image have the stated forms. The full diagram basis is independent in the image exactly when every partition of $2r$ labels has at most $N$ blocks, which is equivalent to $N\\ge2r$. No division by $N!$ was used, so the argument is valid in every characteristic.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 includes r=0, whose tensor basis has the unique empty tuple and equality pattern."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–1.4 use integer Möbius inversion and equality-pattern indicators, not division by the scalar N in k."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies when N=1 and identifies the nonrealizable patterns with more than one block."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 states that the orbit-basis argument remains valid when char(k) divides N!."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 proves injectivity at N=2r and failure when N<2r."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 assigns distinct basis indices to the finitely many blocks whenever their number is at most N."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves all patterns are realizable when N≥2r, hence the map is injective."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the discrete 2r-block pattern when N<2r to show the kernel is nonzero."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-brauer-contraction-functor-and-bending": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-brauer-and-partition-diagram-categories",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $\\delta\\in R$. A set partition of a finite set is a collection of disjoint nonempty subsets, called blocks, whose union is the whole set; a perfect matching is a set partition whose blocks each have size two. For $a,b\\in\\mathbb N=\\{0,1",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-brauer-generator-presentation",
+          "source_section": "Statement",
+          "quote": "In the $R$-linear Brauer category of [[def-brauer-and-partition-diagram-categories]], identity strands $I$, adjacent crossing $X:2\\to2$, cap $A:2\\to0$, and cup $U:0\\to2$ generate every morphism under composition and juxtaposition. They satisfy the identity/interchange relations a",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Choose a basis $b_1,\\ldots,b_m$ and its $B$-dual basis $\\bar b_1,\\ldots,\\bar b_m$, so $B(\\bar b_i,b_j)=\\delta_{ij}$, and set $c=\\sum_i b_i\\otimes\\bar b_i$. Nondegeneracy gives $v=\\sum_i B(v,b_i)\\bar b_i=\\sum_i B(\\bar b_i,v)b_i$, hence $(B\\otimes\\operatorname{id})(\\operatorname{id}\\otimes c)=\\operatorname{id}_V$ and $(\\operatorname{id}\\otimes B)(c\\otimes\\operatorname{id})=\\operatorname{id}_V$. Invariance of $B$ implies invariance of its inverse tensor $c$. Symmetry or alternation gives $BP=\\epsilon B$ and $Pc=\\epsilon c$, while $B(c)=\\sum_iB(b_i,\\bar b_i)=\\epsilon m$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The maps $P$ satisfy $P^2=1$ and the braid relation because they permute tensor factors. Thus $\\epsilon P$ satisfies the crossing-square and braid relations; $B(\\epsilon P)=B$ and $(\\epsilon P)c=c$ give the cap-crossing and cup-crossing relations. On $v\\otimes w\\otimes u$, both sides of the cap-slide relation $(A\\otimes I)(I\\otimes X)=(I\\otimes A)(X\\otimes I)$ equal $\\epsilon B(v,u)w$. The snake identities and $B(c)=\\epsilon m$ give the straightening and loop relations. Therefore the assignments satisfy every relation in [F2] and extend to a monoidal functor with $\\delta=\\epsilon m$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "For a basis multi-index $I=(i_1,\\ldots,i_a)$ write $b_I=b_{i_1}\\otimes\\cdots\\otimes b_{i_a}$ and $\\bar b_I=\\bar b_{i_1}\\otimes\\cdots\\otimes\\bar b_{i_a}$. Map a $G$-equivariant linear map $T:V^{\\otimes a}\\to V^{\\otimes b}$ to $\\sum_I b_I\\otimes T(\\bar b_I)$. The inverse sends a tensor $\\sum_I b_I\\otimes w_I$ to $x\\mapsto\\sum_I B^{\\otimes a}(x,b_I)w_I$; the dual-basis identities in step 1.1 show both composites are identities. The maps commute with $G$ because $B$ and $c$ are invariant, so this restricts to the stated invariant and intertwiner spaces.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 allows a=0 and b=0, where the dual-basis map identifies Hom(k,k) with k."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nondegenerate form and positive dimension (m≥1 or 2n≥2)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the one-dimensional symmetric case and computes δ=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate bilinear forms are explicitly excluded by the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim has no interval or limiting endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses a finite basis and its dual; the construction uses no choice beyond finite-dimensional linear algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts a bending isomorphism, not a biconditional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts a bending isomorphism, not a biconditional characterization."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-brauer-and-partition-loop-composition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-brauer-and-partition-diagram-categories",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $\\delta\\in R$. A set partition of a finite set is a collection of disjoint nonempty subsets, called blocks, whose union is the whole set; a perfect matching is a set partition whose blocks each have size two. For $a,b\\in\\mathbb N=\\{0,1",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Gluing the two vertices of $U$ to the two vertices of $A$ closes one matched component and leaves no outer vertex, so the result is one loop times the empty identity diagram, namely $\\delta\\,1_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "In $d\\circ d$, the two middle singleton blocks are identified with each other and with no outer vertex, so they form exactly one removed class. The outer vertices remain two singleton blocks, giving $\\delta d$. Substituting $\\delta=m$ or $\\delta=-2n$ gives those same loop scalars in the respective classical branches.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the 0-to-0 cup-cap composite as δ times the empty identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 are formal stacking calculations and give zero when δ=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 give the same diagrams with coefficient one when δ=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The examples concern diagram composition and make no nondegeneracy assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint limit is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The diagrams and their stackings are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is a computation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is a computation, not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-orthogonal-brauer-centralizer-not-faithful-in-rank-one": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-brauer-and-partition-diagram-categories",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $\\delta\\in R$. A set partition of a finite set is a collection of disjoint nonempty subsets, called blocks, whose union is the whole set; a perfect matching is a set partition whose blocks each have size two. For $a,b\\in\\mathbb N=\\{0,1",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-brauer-and-partition-diagram-basis-ranks",
+          "source_section": "Statement",
+          "quote": "For $a\\ge0$, the Brauer algebra $B_a(\\delta)$ over any commutative unital ring $R$ is free of rank $(2a-1)!!$, with $(-1)!!=1$. The partition algebra $P_a(\\delta)$ is free of rank $\\operatorname{Bell}(2a)$, where $\\operatorname{Bell}(j)$ denotes the number of set partitions of a ",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-brauer-and-partition-diagram-categories",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $\\delta\\in R$. A set partition of a finite set is a collection of disjoint nonempty subsets, called blocks, whose union is the whole set; a perfect matching is a set partition whose blocks each have size two. For $a,b\\in\\mathbb N=\\{0,1",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Name the three matchings $I$ (through identity), $X$ (crossed through strands), and $E$ (top cup and bottom cap). The orthogonal tensor assignment sends them to $\\operatorname{id}$, $P$, and $cB$, respectively. On $e\\otimes e$, each is the identity because $P(e\\otimes e)=e\\otimes e$ and $cB(e\\otimes e)=e\\otimes e$. Also $O(V)=\\{1,-1\\}$ acts trivially on $V^{\\otimes2}$, whose endomorphism algebra is one-dimensional.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "At $\\delta=1$, stacking any two of $I,X,E$ gives one of these basis diagrams with coefficient $1$ (the possible closed loop also has coefficient $\\delta=1$). Since all three images are the identity, this defines the contraction algebra map and its image is one-dimensional. Its domain has rank three by [F1] and [[lem-brauer-and-partition-diagram-basis-ranks]], so the map has a two-dimensional kernel. For $r=0$ the map is $\\mathbb Q\\to\\operatorname{End}(\\mathbb Q)$ sending identity to identity, and for $r=1$ both $B_1(1)$ and $\\operatorname{End}_{O(V)}(V)$ are one-dimensional with identity mapping to identity. Thus $r=2=m+1$ is the first failure.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes tensor rank r=2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses the positive dimension m=1 and coefficient field Q."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is the boundary m=1 and computes O(V)={1,-1}."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the first failure at r=m+1=2, just outside the orthogonal stable range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example tests the adjacent boundary r=m+1 after the faithful range r≤m."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All three basis diagrams and their one-dimensional images are listed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example exhibits a failure and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example exhibits a failure and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-symplectic-brauer-relation-in-dimension-two": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-brauer-and-partition-diagram-categories",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $\\delta\\in R$. A set partition of a finite set is a collection of disjoint nonempty subsets, called blocks, whose union is the whole set; a perfect matching is a set partition whose blocks each have size two. For $a,b\\in\\mathbb N=\\{0,1",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-brauer-and-partition-diagram-basis-ranks",
+          "source_section": "Statement",
+          "quote": "For $a\\ge0$, the Brauer algebra $B_a(\\delta)$ over any commutative unital ring $R$ is free of rank $(2a-1)!!$, with $(-1)!!=1$. The partition algebra $P_a(\\delta)$ is free of rank $\\operatorname{Bell}(2a)$, where $\\operatorname{Bell}(j)$ denotes the number of set partitions of a ",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-brauer-and-partition-diagram-categories",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $\\delta\\in R$. A set partition of a finite set is a collection of disjoint nonempty subsets, called blocks, whose union is the whole set; a perfect matching is a set partition whose blocks each have size two. For $a,b\\in\\mathbb N=\\{0,1",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Write $v_i=(x_i,y_i)$. Then $p_{ij}=x_i y_j-y_i x_j$. Expanding the left side gives six cancelling pairs of monomials: $x_1x_3y_2y_4$ with $-x_1x_3y_2y_4$, $-x_1x_4y_2y_3$ with $x_1x_4y_2y_3$, $-x_1x_2y_3y_4$ with $x_1x_2y_3y_4$, $-x_2x_3y_1y_4$ with $x_2x_3y_1y_4$, $x_2x_4y_1y_3$ with $-x_2x_4y_1y_3$, and $-x_3x_4y_1y_2$ with $x_3x_4y_1y_2$. Thus the multilinear contraction combination vanishes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Name the three endomorphism diagrams $I,X,E$ as in the companion convention. In the symplectic tensor representation they act as $\\operatorname{id},-P,c\\omega$, where $c=-e_1\\otimes e_2+e_2\\otimes e_1$. The map respects their multiplication table: $X^2=I$, $XE=EX=E$, and $E^2=-2E$, the last equality following from $\\omega(c)=-2$ and [F2]. Moreover $I+X+E$ annihilates $e_1\\otimes e_1$, $e_2\\otimes e_2$, $e_1\\otimes e_2$, and $e_2\\otimes e_1$, so it is the zero operator.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The element $I+X+E$ is nonzero in the free Brauer module because its three coefficients on distinct basis diagrams are nonzero; [F1] gives the matching count three. At $r=0$ the action is $\\mathbb Q\\to\\operatorname{End}(\\mathbb Q)$ and is an isomorphism. At $r=1$, $B_1(-2)$ is spanned by the identity diagram. For a $2\\times2$ matrix $M$, $M^{\\mathsf T}\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}M=(\\det M)\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$, so both $\\operatorname{diag}(2,1/2)$ and $\\begin{pmatrix}1&1\\\\0&1\\end{pmatrix}$ lie in $Sp_2(\\mathbb Q)$. A matrix commuting with the first is diagonal; if it also commutes with the second, its diagonal entries are equal. Hence $\\operatorname{End}_{Sp_2}(V)=\\mathbb Q\\operatorname{id}$ and the rank-one diagram action is an isomorphism. Therefore the nonzero kernel at $r=2=n+1$ is the first failure, exactly outside the symplectic stable range.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four labelled vectors and tensor rank r=2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses a nonzero two-dimensional symplectic space over Q."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses the smallest symplectic rank n=1 and dimension 2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the first failure at r=n+1=2, outside the symplectic stable range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example tests the adjacent boundary r=n+1 after the faithful range r≤n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The four vectors and three pairing diagrams are explicitly listed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example exhibits a failure and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example exhibits a failure and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-partition-diagram-kernel-below-stable-range": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-brauer-and-partition-diagram-categories",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $\\delta\\in R$. A set partition of a finite set is a collection of disjoint nonempty subsets, called blocks, whose union is the whole set; a perfect matching is a set partition whose blocks each have size two. For $a,b\\in\\mathbb N=\\{0,1",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-partition-diagram-orbit-basis-centralizer",
+          "source_section": "Statement",
+          "quote": "Let $k$ be any field, $N\\ge1$, and $r\\ge0$, with the integer $N$ also denoting its scalar image in $k$. Let $W=k^N$ have basis $e_1,\\ldots,e_N$, and let $S_N$ act by permuting this basis and diagonally on $W^{\\otimes r}$. For a set partition diagram $d$ on the $2r$ boundary label",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The discrete partition has two blocks, while the one-block partition coarsens it. Möbius inversion on this two-element interval gives $x_d=d-c$; by [F1] it is nonzero because $d$ and $c$ are distinct basis vectors.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The one-dimensional tensor basis has only the index $1$, so its equality pattern is $c$ and it cannot realize the two-block pattern $d$. Equivalently, both $d$ and $c$ act by the $1\\times1$ matrix $(1)$, so $x_d$ acts by zero. Since $2>N=1$, this is the below-stable-range kernel predicted by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes N=1 and r=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses a one-dimensional vector space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example takes N=1 and computes the two possible diagrams directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the nonrealizable two-block pattern when N<2r."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example is at the first below-threshold pair N=1, 2r=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both diagrams and the only tensor-basis index are fixed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example exhibits a kernel element and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example exhibits a kernel element and asserts no biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-bmw-cubic-and-hecke-quotient-separate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bmw-algebra-with-fixed-kauffman-skein-convention",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring, let $q,\\rho\\in R^\\times$, put $z=q-q^{-1}$, and choose $\\delta\\in R$ with $z(\\delta-1)=\\rho-\\rho^{-1}$. For $n\\ge2$, the BMW algebra $BMW_n(R;q,\\rho,\\delta)$ is the unital associative $R$-algebra generated by invertible $g_i$ and elements $e_",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bmw-cubic-relation-and-hecke-quotient",
+          "source_section": "Statement",
+          "quote": "For the convention in [[def-bmw-algebra-with-fixed-kauffman-skein-convention]], every generator satisfies $(g_i-q)(g_i+q^{-1})(g_i-\\rho^{-1})=0$. In the cup-cap-zero quotient, it instead satisfies the Hecke quadratic $(g_i-q)(g_i+q^{-1})=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For $(g,e)=(2,0)$ and $(-1/2,0)$, $g-g^{-1}=3/2=z(1-e)$ and the loop and untwisting relations hold because $e=0$. For $(g,e)=(1/3,25/9)$, $g-g^{-1}=-8/3=z(1-e)$, $ge=e g=25/27=\\rho^{-1}e$, and $e^2=625/81=\\delta e$. Every $g$ is invertible, and BMW$_2$ has no adjacent-index relations, so these are valid one-dimensional representations.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The three representations evaluate $g_1$ at the distinct numbers $2,-1/2,1/3$. Since the third sends $e_1$ to $25/9\\ne0$, the ideal generated by $e_1$ is nonzero, so the canonical map to the quotient by that ideal is not injective. The quadratic $(g_1-2)(g_1+1/2)$ evaluates to $-25/18\\ne0$ in the third representation, whereas setting $e_1=0$ forces that quadratic by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is in BMW_2 and includes its sole generator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks two representations with e=0, where the skein relation specializes to the Hecke roots."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No parameter is specialized to 1; q=2 and ρ=3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 separate the e=0 quotient from a representation with e=25/9."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The n=2 presentation has no adjacent-index relations, which Step 1.1 explicitly checks."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The three scalar representations are specified individually."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example distinguishes a full BMW representation from its Hecke quotient, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example distinguishes a full BMW representation from its Hecke quotient, not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

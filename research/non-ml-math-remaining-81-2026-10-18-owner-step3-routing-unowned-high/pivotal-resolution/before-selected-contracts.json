@@ -1,0 +1,810 @@
+[
+  {
+    "path": "research/non-ml-math-remaining-81-2026-10-18-batch-61.proof-contracts.json",
+    "json_pointer": "/contracts/lem-negligible-morphisms-form-a-tensor-ideal-by-partial-trace",
+    "record": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-negligible-morphism-in-a-pivotal-category",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be an additive $\\mathbb C$-linear rigid monoidal category with $\\operatorname{End}_{\\mathcal C}(\\mathbf1)=\\mathbb C$, and fix a pivotal structure $j_X:X\\to X^{\\vee\\vee}$ as in [[def-pivotal-structure]]. For $f:X\\to Y$, call $f$ **negligible** if\n\n$$\\operatorname{Tr}_L(j_X\\circ g\\circ f)=0\\qquad\\text{for every }g:Y\\to X,$$\n\nwhere the left trace is [[def-the-categorical-trace-of-a-morphism-into-the-double-dual]]. The negligible morphisms form the intersection of the kernels of these linear functionals; this definition alone does not assert tensor-ideal closure.\n\nFor the complex Temperley\u2013Lieb diagram category, use its cup/cap pivotal structure. The resulting trace is exactly the unnormalized planar closure of [[def-temperley-lieb-closure-trace-and-partial-trace]]. The same definition applies to the complex type-1 tilting category of [[def-temperley-lieb-rank-one-lusztig-tilting-category]] when its stated ribbon pivotal structure is used.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pivotal-structure",
+          "source_section": "Definition",
+          "quote": "Let $(-)^{\\vee\\vee}$ be the monoidal endofunctor of\n[[thm-the-double-dual-is-a-monoidal-functor]].\n\nA **pivotal structure** on a rigid monoidal category is an isomorphism of\nmonoidal functors\n\n$$a:\\operatorname{id}_{\\mathcal C}\\xrightarrow{\\sim}(-)^{\\vee\\vee}.$$\n\nEquivalently, it is a natural family of isomorphisms\n$a_X:X\\xrightarrow{\\sim}X^{\\vee\\vee}$ such that\n\n$$a_{X\\otimes Y}=a_X\\otimes a_Y,\\qquad a_{\\mathbf 1}=1_{\\mathbf 1}$$\n\nafter transporting along the monoidal structure of the double-dual functor.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-basic-properties-of-the-categorical-trace",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a rigid monoidal category, let $a:X\\to X^{\\vee\\vee}$ and $b:Y\\to Y^{\\vee\\vee}$, and suppress the monoidal and chosen-dual comparison maps. For $s\\in\\operatorname{End}(\\mathbf1)$ write $\\ell_Z(s)$ and $r_Z(s)$ for its left and right actions on $Z$, transported from $s\\otimes1_Z$ and $1_Z\\otimes s$ by the unit constraints.\n\n1. $\\operatorname{Tr}_L(a)=\\operatorname{Tr}_R(a^\\vee)$.\n2. If the category is additive, then\n   $\\operatorname{Tr}_L(a\\oplus b)=\\operatorname{Tr}_L(a)+\\operatorname{Tr}_L(b)$.\n3. The general tensor formula is\n   $\\operatorname{Tr}_L(a\\otimes b)=\\operatorname{Tr}_L(r_{X^{\\vee\\vee}}(\\operatorname{Tr}_L(b))a)$.\n   If $r_{X^{\\vee\\vee}}(\\operatorname{Tr}_L(b))=\\ell_{X^{\\vee\\vee}}(\\operatorname{Tr}_L(b))$, this becomes\n   $\\operatorname{Tr}_L(a\\otimes b)=\\operatorname{Tr}_L(a)\\operatorname{Tr}_L(b)$.\n   In particular multiplicativity holds when every unit scalar has equal left and right actions on every object. This condition holds in a braided category, and also in a $k$-linear monoidal category with $k$-bilinear tensor product and $\\operatorname{End}(\\mathbf1)=k$.\n4. For every endomorphism $c:X\\to X$,\n   $\\operatorname{Tr}_L(ac)=\\operatorname{Tr}_L(c^{\\vee\\vee}a)$.\n\nThe corresponding right-trace duality, additivity and cyclicity statements hold. For right-trace inputs $p:X^{\\vee\\vee}\\to X$ and $q:Y^{\\vee\\vee}\\to Y$, the general tensor formula is\n\n$$\\operatorname{Tr}_R(p\\otimes q)=\\operatorname{Tr}_R(q\\ell_{Y^{\\vee\\vee}}(\\operatorname{Tr}_R(p))).$$\n\nIt reduces to multiplicativity under the analogous equality of scalar actions, in particular under either sufficient condition above.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rigid-object-and-rigid-monoidal-category",
+          "source_section": "Definition",
+          "quote": "An object of a monoidal category is **rigid** if it has both a left dual and a\nright dual in the sense of [[def-left-dual-and-right-dual-object]].\n\nA monoidal category is **rigid** if every object in it is rigid.\n\nMuger's notes also use the word **autonomous** for the same condition, and\nJoyal-Street use **compact** in the non-symmetric setting.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-temperley-lieb-closure-trace-and-partial-trace",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, $\\delta\\in R$, and use the noncrossing-pairing diagram category of [[def-temperley-lieb-diagram-category]], with the left factor stacked above the right factor. For a basis diagram $D:n\\to n$, close each top endpoint to the corresponding bottom endpoint outside the rectangle and let $c(D)$ be the number of circles in the resulting finite graph. Define\n\n$$\\operatorname{Tr}_n(D)=\\delta^{c(D)}$$\n\nand extend $R$-linearly to $\\mathrm{TL}_n(R,\\delta)$. This is the **unnormalized closure trace**. In particular, $\\operatorname{Tr}_0(1_0)=1$ and $\\operatorname{Tr}_n(1_n)=\\delta^n$. No unit or nonzero condition on $\\delta$ is required.\n\nLet $\\cup:0\\to2$ and $\\cap:2\\to0$ be the standard cup and cap in the diagram category. For $n\\ge1$ define the **right partial trace** by\n\n$$\\operatorname{ptr}_n(x)=(1_{n-1}\\otimes\\cap)\\circ(x\\otimes1_1)\\circ(1_{n-1}\\otimes\\cup),\\qquad x\\in\\mathrm{TL}_n(R,\\delta).$$\n\nIt is a map $\\mathrm{TL}_n\\to\\mathrm{TL}_{n-1}$. If $\\delta$ is a unit, define $\\tau_n=\\delta^{-n}\\operatorname{Tr}_n$. This agrees with the normalized trace of [[def-temperley-lieb-normalized-markov-trace-by-closure]] over $\\mathbb C$ when $\\delta\\ne0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-temperley-lieb-closure-trace-component-identities",
+          "source_section": "Statement",
+          "quote": "For any commutative ring $R$, loop value $\\delta\\in R$, and $n\\ge0$, the unnormalized trace of [[def-temperley-lieb-closure-trace-and-partial-trace]] satisfies\n\n$$\\operatorname{Tr}_n(xy)=\\operatorname{Tr}_n(yx),\\qquad \\operatorname{Tr}_{n+1}(x\\otimes1)=\\delta\\operatorname{Tr}_n(x)$$\n\nfor $x,y\\in\\mathrm{TL}_n(R,\\delta)$. For $n\\ge1$ and $x\\in\\mathrm{TL}_n(R,\\delta)$, it also satisfies\n\n$$\\operatorname{Tr}_{n+1}((x\\otimes1)U_n)=\\operatorname{Tr}_n(x),$$\n\nwhere $U_n$ is the cup-cap generator on the last two strands of $\\mathrm{TL}_{n+1}$. For $n\\ge1$, $x\\in\\mathrm{TL}_{n-1}$ and $h\\in\\mathrm{TL}_n$,\n\n$$\\operatorname{Tr}_n\\bigl(h(x\\otimes1)\\bigr)=\\operatorname{Tr}_{n-1}\\bigl(\\operatorname{ptr}_n(h)x\\bigr).$$\n\nNo division by $\\delta$ occurs.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For any $a:Y\\to Z$ and any $h:Z\\to X$, the trace of $h(af)$ is $\\operatorname{Tr}_L(j_Xhaf)$. By the different-object cyclicity in [F2] and naturality $j_Yf=f^{\\vee\\vee}j_X$, this equals $\\operatorname{Tr}_L(j_Yfha)$. Since $ha:Y\\to X$, [F1] makes this zero. The same argument with a map $b:W\\to X$ and a test map $g:Y\\to W$ gives $\\operatorname{Tr}_L(j_Xbgf)=0$; hence post- and pre-composition preserve negligibility. Closure under sums and scalar multiples follows from linearity of trace.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Let $Z$ be any object and $h:Y\\otimes Z\\to X\\otimes Z$. Write $\\widetilde{\\operatorname{ev}}_Z=\\operatorname{ev}_{Z^\\vee}(j_Z\\otimes1_{Z^\\vee}):Z\\otimes Z^\\vee\\to\\mathbf1$, the right evaluation determined by the pivotal structure, and define $\\operatorname{ptr}_Z(h)=(1_X\\otimes\\widetilde{\\operatorname{ev}}_Z)(h\\otimes1_{Z^\\vee})(1_Y\\otimes\\operatorname{coev}_Z):Y\\to X$. Expanding the trace of $j_{X\\otimes Z}h(f\\otimes1_Z)$ gives $\\operatorname{ev}_{Z^\\vee\\otimes X^\\vee}(((j_X\\otimes j_Z)h(f\\otimes1_Z))\\otimes1_{Z^\\vee\\otimes X^\\vee})(1_X\\otimes\\operatorname{coev}_Z\\otimes1_{X^\\vee})\\operatorname{coev}_X$. The tensor-evaluation formula factors $\\operatorname{ev}_{Z^\\vee\\otimes X^\\vee}$ by first evaluating the middle $Z^{\\vee\\vee}\\otimes Z^\\vee$ pair and then the outer $X^{\\vee\\vee}\\otimes X^\\vee$ pair; substituting $\\widetilde{\\operatorname{ev}}_Z$ leaves exactly $\\operatorname{Tr}_L(j_X\\operatorname{ptr}_Z(h)f)$. This regrouping uses monoidality of $j$ and the dual zig-zags [F2,F3]. Since $\\operatorname{ptr}_Z(h):Y\\to X$ is an allowed test map in [F1], the value is zero, so $f\\otimes1_Z$ is negligible.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "claim": "For $h:Z\\otimes Y\\to Z\\otimes X$ define $\\widetilde{\\operatorname{coev}}_Z=(1_{Z^\\vee}\\otimes j_Z^{-1})\\operatorname{coev}_{Z^\\vee}:\\mathbf1\\to Z^\\vee\\otimes Z$ and $\\operatorname{ptr}^{L}_Z(h)=(\\operatorname{ev}_Z\\otimes1_X)(1_{Z^\\vee}\\otimes h)(\\widetilde{\\operatorname{coev}}_Z\\otimes1_Y):Y\\to X$. Expanding the trace gives $\\operatorname{ev}_{X^\\vee\\otimes Z^\\vee}(((j_Z\\otimes j_X)h(1_Z\\otimes f))\\otimes1_{X^\\vee\\otimes Z^\\vee})(1_Z\\otimes\\operatorname{coev}_X\\otimes1_{Z^\\vee})\\operatorname{coev}_Z$. The tensor-evaluation formula first evaluates the adjacent $X^{\\vee\\vee}\\otimes X^\\vee$ pair; naturality of $j$ moves $f$ to the $X$ input, and the pivotal zig-zag [F3] identifies the remaining $Z$ cup with $\\widetilde{\\operatorname{coev}}_Z$. The resulting composite is exactly $\\operatorname{Tr}_L(j_X\\operatorname{ptr}^{L}_Z(h)f)$. It vanishes by [F1] since $\\operatorname{ptr}^{L}_Z(h):Y\\to X$ is an allowed test map, proving $1_Z\\otimes f$ negligible without interchanging tensor factors.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "For any $g:Z\\to W$, $f\\otimes g=(1_Y\\otimes g)(f\\otimes1_Z)$ and $g\\otimes f=(g\\otimes1_Y)(1_Z\\otimes f)$. Composition closure from step 1.1 and the two partial-trace arguments in steps 2.1 and 2.2 therefore give closure under tensoring on either side by arbitrary morphisms. In the Temperley\u2013Lieb category, [L1] also verifies the partial-trace identities by counting components of the closed finite stacked graph. Together with linearity this proves tensor-ideal closure.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L1",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Tensoring by the monoidal unit is covered by the same evaluation/coevaluation zig-zags; for TL this includes object0, the empty matching, without a nonexistent last generator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The zero morphism is negligible because every test trace is0; linearity proves closure under sums and scalar0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The proof tensors first by the identity1_Z and then factors an arbitrary g through it; with Z the tensor unit this reduces to the original negligible map."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. A degenerate trace pairing is precisely where nonzero negligible maps may occur; the proof only uses zero test traces and does not assume pairing nondegeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The abstract pivotal Statement has objects and typed maps, not an interval, rank cutoff or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two partial traces are prescribed evaluation/coevaluation composites for a supplied test map; no factorization of arbitrary intertwiners or arbitrary-family choice is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim, so iff-forward is not an independent boundary branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "Cyclicity and explicitly typed left/right partial traces show composition and tensor closure for negligible maps, with arbitrary test intertwiners. This row concerns a forward biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "516a6376b70a575b304f4c9cda365da8cda965898e75a627ebe81e4225f6ad8d",
+            "row_sha256": "93d3db006c42c7b15a7f5510ada44ff0e2fb8fbe8d070be07831dde7ad2dd6ea"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim, so iff-reverse is not an independent boundary branch.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "Cyclicity and explicitly typed left/right partial traces show composition and tensor closure for negligible maps, with arbitrary test intertwiners. This row concerns a reverse biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "516a6376b70a575b304f4c9cda365da8cda965898e75a627ebe81e4225f6ad8d",
+            "row_sha256": "d690815d736db2ae0b51e0763f2d4a6921c860165d5948ba68ae49e52179b067"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "open",
+        "reviewer": "alpha-batch-61",
+        "notes": "ESCALATED: steps 1.1 and 2.1 establish composition and right tensor closure, but step 2.2 changes the outer left pivotal closure to a right closure without a spherical hypothesis. The asserted unqualified regrouping is not a general pivotal trace identity: in finite Z-graded complex vector spaces with pivot j on degree n equal to 2^n, X=Y=1 and h=id on a degree-one Z give outer trace 2 and the displayed ptr^L value 1/2. This diagnoses the claimed identity, not a counterexample with negligible f to the theorem. Chen \u00a75.2 Definition 5.2.1 and EGNO Exercise 8.18.9 (printed p.236, PDF p.253) explicitly assume sphericality; Mueger Tensor Categories \u00a73 states general ideal closure but supplies no proof resolving this calculation. Attempted closure by the existing pivotal zig-zags does not equate these traces. Required owner decision: provide a sound general pivotal argument or authorize adding sphericality together with proof of that property for every actual consumer. Leave risk open; no theorem falsity or completed repair claimed."
+      }
+    }
+  },
+  {
+    "path": "research/non-ml-math-remaining-81-2026-10-18-batch-61.proof-contracts.json",
+    "json_pointer": "/contracts/lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings",
+    "record": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonzero commutative ring with unit, $\\delta\\in R$, and suppose $[2],\\ldots,[n]$ are units. The projector $p_n$ of [[def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators]] has coefficient $1$ on the identity diagram, is nonzero and idempotent, and is annihilated on both sides by each $U_i$ for $1\\le i<n$. Its corner is $p_n\\mathrm{TL}_n p_n=R p_n$, so it is the unique idempotent with identity coefficient $1$ and those two-sided annihilation conditions. For $n\\ge1$,\n\n$$\\operatorname{ptr}_n(p_n)=\\frac{[n+1]}{[n]}p_{n-1},\\qquad \\operatorname{Tr}_n(p_n)=[n+1].$$\n\nOnly the displayed denominator units are assumed; $\\delta$ need not be a unit.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-closure-trace-component-identities",
+          "source_section": "Statement",
+          "quote": "For any commutative ring $R$, loop value $\\delta\\in R$, and $n\\ge0$, the unnormalized trace of [[def-temperley-lieb-closure-trace-and-partial-trace]] satisfies\n\n$$\\operatorname{Tr}_n(xy)=\\operatorname{Tr}_n(yx),\\qquad \\operatorname{Tr}_{n+1}(x\\otimes1)=\\delta\\operatorname{Tr}_n(x)$$\n\nfor $x,y\\in\\mathrm{TL}_n(R,\\delta)$. For $n\\ge1$ and $x\\in\\mathrm{TL}_n(R,\\delta)$, it also satisfies\n\n$$\\operatorname{Tr}_{n+1}((x\\otimes1)U_n)=\\operatorname{Tr}_n(x),$$\n\nwhere $U_n$ is the cup-cap generator on the last two strands of $\\mathrm{TL}_{n+1}$. For $n\\ge1$, $x\\in\\mathrm{TL}_{n-1}$ and $h\\in\\mathrm{TL}_n$,\n\n$$\\operatorname{Tr}_n\\bigl(h(x\\otimes1)\\bigr)=\\operatorname{Tr}_{n-1}\\bigl(\\operatorname{ptr}_n(h)x\\bigr).$$\n\nNo division by $\\delta$ occurs.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit ([[def-algebra-over-a-commutative-ring]]) and let $\\delta\\in R$. The object labels are the nonnegative integers $n=0,1,2,\\ldots$. For labels $m,n$, place bottom points $b_1,\\ldots,b_m$ and top points $t_1,\\ldots,t_n$ along the rectangle from left to right on their respective edges. Their cyclic order is $t_1,\\ldots,t_n,b_m,\\ldots,b_1$. When $m=n=0$, the empty matching is included.\n\nAn $(m,n)$ **diagram** is a perfect matching of these $m+n$ boundary labels which is noncrossing: there are no four labels $a,b,c,d$ in cyclic order whose matched pairs are $\\{a,c\\}$ and $\\{b,d\\}$. A picture consists of disjoint arcs realizing the matching; equality is equality of the matching, so planar deformation that fixes the boundary does not change a diagram. If $m+n$ is odd, there are no such diagrams. Write $\\mathcal D(m,n)$ for this set and define the $R$-module\n\n$$M_R(m,n):=R^{(\\mathcal D(m,n))},$$\n\nthe free $R$-module on the set of diagrams ([[def-free-module-on-a-set-and-standard-basis]]). In particular, its diagram basis is empty when $m+n$ is odd.\n\nFor basis diagrams $D:m\\to n$ and $E:n\\to p$, stack $E$ above $D$ and identify the $n$ matching boundary points. The resulting finite graph has degree two at each identified point, where degree means the number of incident arcs. Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles. Denote this output by $E\\circ D$ and extend the rule $R$-bilinearly to a map $M_R(n,p)\\times M_R(m,n)\\to M_R(m,p)$. A following result proves closure of these operations on the diagram modules and the category axioms.\n\nThe matching $1_n:n\\to n$ pairs each bottom point to the top point directly above it. Horizontal juxtaposition, with the left diagram placed first, defines $m\\otimes m'=m+m'$ on object labels and $D\\otimes D'$ on basis diagrams; extend it $R$-bilinearly to the modules. A following result proves that these operations give a strict monoidal category.\n\nFor $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position. Define $\\mathrm{TL}_n(R,\\delta)$ to be the $R$-module $M_R(n,n)$ with bilinear multiplication $xy:=x\\circ y$ and distinguished element $1_n$. A following result proves that it is a unital associative $R$-algebra and identifies it with the endomorphism algebra at object $n$.\n\nThe left factor is stacked above the right factor. The loop value is $\\delta$; no invertibility or nonzero condition on $\\delta$ is part of these data.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-temperley-lieb-quantum-integers-and-quantum-characteristic",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit and $\\delta\\in R$. Define the quantum integers by\n\n$$[0]_\\delta=0,\\qquad [1]_\\delta=1,\\qquad [r+1]_\\delta=\\delta[r]_\\delta-[r-1]_\\delta\\quad(r\\ge1).$$\n\nThe **quantum characteristic** of $(R,\\delta)$ is the least positive integer $\\ell$ with $[\\ell]_\\delta=0$, if one exists, and $\\ell=\\infty$ otherwise. No element of $R$ is inverted in this definition.\n\nFor $q\\in\\mathbb C^\\times$ and $\\delta=q+q^{-1}$, write $[r]_q=[r]_\\delta$. If $q\\ne\\pm1$, this agrees with $(q^r-q^{-r})/(q-q^{-1})$; at $q=\\pm1$ the recurrence gives $[r]_q=rq^{r-1}$. For complex-parameter classification, write $\\kappa=\\operatorname{ord}(q^2)$, with $\\kappa=\\infty$ when $q^2$ has infinite order. If $q\\ne\\pm1$, the quantum characteristic equals $\\kappa$ when $\\kappa<\\infty$ and is $\\infty$ otherwise. At $q=\\pm1$, $\\kappa=1$ but the complex quantum characteristic is $\\infty$, because $[r]_q=rq^{r-1}\\ne0$ for every positive $r$.\n\nFor a field $K$ of positive characteristic $p$, set $p(0)=1$ and, when $\\ell<\\infty$, set $p(i)=\\ell p^{i-1}$ for $i\\ge1$. In characteristic zero and finite $\\ell$, the finite digit scale is $p(1)=\\ell$; the separate characteristic-zero criterion below uses $a\\ell-1$ for arbitrary positive integers $a$. If $\\ell=\\infty$, every finite index is already in the range $n<\\ell$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-temperley-lieb-general-theta-net-evaluation",
+          "source_section": "Statement",
+          "quote": "Initially let $q$ be an indeterminate, let $[j]=q^{j-1}+q^{j-3}+\\cdots+q^{1-j}$ for $j\\ge1$, let $[0]!=1$, and set $\\delta=q+q^{-1}$. For nonnegative integers $m,n,p$, put\n$$r=m+p,\\qquad s=m+n,\\qquad t=n+p,\\qquad h=m+n+p.$$\nEquivalently, $(r,s,t)$ satisfies the triangle inequalities and even-sum condition, with $m=(r+s-t)/2$, $n=(s+t-r)/2$, and $p=(t+r-s)/2$. All Jones\u2013Wenzl projectors below have identity coefficient one and are unnormalized.\n\nLet $W_m:0\\to2m$ be $m$ nested cups, whose outputs are two consecutive $m$-strand bundles: cup $i$ joins position $i$ of the first bundle to position $m+1-i$ of the second. Let $B_m:2m\\to0$ be its horizontal reflection. Define\n$$A=1_p\\otimes W_m\\otimes1_n:t\\longrightarrow r+s,\\qquad B=1_p\\otimes B_m\\otimes1_n:r+s\\longrightarrow t,$$\n$$\\alpha=(p_r\\otimes p_s)Ap_t,\\qquad \\beta=p_tB(p_r\\otimes p_s),\\qquad \\Theta(m,n,p)=\\operatorname{Tr}_t(\\beta\\alpha).$$\nThus the pairwise bundles at each trivalent vertex have sizes $m,n,p$: there are $m$ strands between arms $r,s$, $n$ between arms $s,t$, and $p$ between arms $t,r$. This fixes the vertex without a further scalar normalization. The theta net has the three JW-labelled edges $r,s,t$, since idempotence collapses the doubled projectors. Its value is\n$$\\Theta(m,n,p)=\\frac{[m]![n]![p]![h+1]!}{[m+n]![n+p]![m+p]!}.$$\nFor $p\\ge1$ the closed-diagram strip recurrence is\n$$[m+p][n+p]\\Theta(m,n,p)=[p][m+n+p+1]\\Theta(m,n,p-1),\\qquad \\Theta(m,n,0)=[m+n+1].$$\n\nThese identities specialize to every complex $q\\ne0$ for which $[j]\\ne0$ for $1\\le j\\le M=\\max(r,s,t)$, using the Laurent-polynomial convention at $q=\\pm1$. These hypotheses construct the three projectors and make every displayed denominator a unit; $[h+1]$ need not be nonzero. In particular, if $q=e^{\\pi i/\\ell}$, $\\ell\\ge3$, and $0\\le r,s,t\\le\\ell-2$, then $\\Theta>0$ when $h\\le\\ell-2$, whereas $\\Theta=0$ when $h\\ge\\ell-1$. The latter vertex has zero trace pairing against every reverse morphism. No undefined higher root projector or $0/0$ convention is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-temperley-lieb-boundary-tensor-ideal-has-the-embedded-components",
+          "source_section": "Statement",
+          "quote": "Let $q=e^{\\pi i/\\ell}$, $\\ell\\ge3$, $\\delta=q+q^{-1}$, $m=\\ell-1$ and $f=p_m$. Put $B_n=\\mathrm{TL}_n(\\mathbb C,\\delta)$ and\n\n$$J_n=\\begin{cases}0,&n<m,\\\\ B_n(f\\otimes1_{n-m})B_n,&n\\ge m.\\end{cases}$$\n\nIf $\\mathcal I$ is the categorical tensor ideal generated by $f$, then $\\mathcal I(n,n)=J_n$ at every rank. Moreover, for $n\\ge1$, $\\operatorname{ptr}_n(J_n)\\subseteq J_{n-1}$. Thus this single embedded two-sided ideal already contains every annular consequence with arbitrary external strands and cups/caps. Below the boundary its component is zero, including contractions given by a partial trace rather than an internal turnback.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-negligible-morphisms-form-a-tensor-ideal-by-partial-trace",
+          "source_section": "Statement",
+          "quote": "In the pivotal setting of [[def-negligible-morphism-in-a-pivotal-category]], the negligible morphisms are closed under addition, scalar multiplication, arbitrary composition on either side, and tensor product on either side. Thus they form a two-sided tensor ideal. The proof uses an explicit partial-trace identity and does not assume that an arbitrary intertwiner of a tensor product factors as a tensor product of intertwiners.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The theta formula and exact vertex convention are [F4]. At a retained triangle/parity triple, its denominator indices are $r,s,t\\le\\ell-2$. If $h=(r+s+t)/2\\le\\ell-2$, every numerator index is at most $\\ell-1$ and [F3] makes the ratio positive. If $h\\ge\\ell-1$, its numerator factorial $[h+1]!$ contains $[\\ell]$, whereas the denominator stays nonzero; its value is zero. These conclusions specialize the generic localization identity, not a ratio of theta values at the root.",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "For $1\\le a\\le k$ set $f_a=p_a\\otimes1$, $X_a=f_aU_af_a$ and $\\lambda_a=[a+1]/[a]$. Define $\\alpha_a=f_a(1_{a-1}\\otimes\\cup)p_{a-1},\\qquad \\beta_a=p_{a-1}(1_{a-1}\\otimes\\cap)f_a.$ Absorption of $p_{a-1}$ next to $p_a$ gives $\\alpha_a\\beta_a=X_a$: insert the cup/cap and remove the absorbed lower projector. Closing the other composite is exactly the right partial trace of $p_a$ in its lower corner, so [F1] gives $\\beta_a\\alpha_a=\\lambda_ap_{a-1}$. Thus $X_a^2=\\lambda_aX_a$. The JW recursion gives $f_a=p_{a+1}+\\lambda_a^{-1}\\alpha_a\\beta_a.$ The two terms are orthogonal because $p_{a+1}$ kills the joining turnback. The down maps are inclusion $\\alpha_a$ and retraction $\\lambda_a^{-1}\\beta_a$; the up maps are the tautological inclusion/retraction of $p_{a+1}$. For $a=0$ there is only $p_1$. Every denominator here has index at most $\\ell-1$ and is nonzero.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "step": "1.3",
+          "claim": "For retained endpoints, $\\operatorname{Hom}(p_a,p_b)=0$ if $a\\ne b$ and is $\\mathbb Cp_a$ if $a=b$. Indeed any matching between unequal boundaries has an innermost adjacent cap or cup at the larger boundary and is killed by its JW projector. Between equal boundaries, every nonidentity matching has such a turnback. The identity corner survives in the quotient: its trace is $[a+1]>0$, while the boundary tensor ideal is negligible. For the latter assertion, $p_{k+1}$ has one-dimensional endomorphism corner and trace $[\\ell]=0$, so every test trace vanishes; tensor-ideal closure in [F5] gives the assertion at all objects. Thus the quotient introduces no extra identification in the retained scalar corners.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "At $a=k$, pass to the categorical quotient and delete $p_{k+1}$ from the decomposition before taking any further normalization. The identity becomes $p_k\\otimes1=\\lambda_k^{-1}\\alpha_k\\beta_k$ with $\\lambda_k=[\\ell-1]/[\\ell-2]\\ne0$. It therefore has only its down summand. In particular at $\\ell=3$, $k=1$, this says that the quotient tensor square is its trivial channel; no retained highest-weight-$2$ summand is asserted. The endomorphism ideal being killed is exactly [F5]'s embedded one.",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Start with the single rank-zero path and tensor its identity decomposition by $1$. Inductively split each endpoint summand $p_a\\otimes1$ by steps 1.2 and 2.1 and compose its up/down maps with the preceding path maps. Cross-composites of the new up/down terms vanish by turnback annihilation; the equal down composite is $\\lambda_a^{-1}\\beta_a\\alpha_a=p_{a-1}$ and the up composite is $p_{a+1}$. Different preceding paths have zero composite by induction. Their new projections sum to the old projection tensored with $1$, because the split is complete; at the boundary only the down term remains. This proves simultaneously $r_ai_b=0$ for distinct paths, $r_ai_a=p_{a_n}$ and $\\sum_a i_ar_a=1_n$ for every rank.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "induction",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "For paths with equal endpoint put $E_{a,b}=i_ar_b$. The composites in step 3.1 give their matrix-unit multiplication. Insert the complete path identity on each side of any morphism and use the corners of step 1.3: these units span all endomorphisms, and the same argument describes unequal-degree Hom spaces. They are independent because multiplying a putative relation by $r_a$ and $i_b$ isolates its coefficient times the nonzero endpoint projector. Closing $i_ar_b$ has the same finite component graph as closing $r_bi_a$, even though the cut occurs at a different object. Thus the trace is zero off the diagonal and $[a_n+1]$ on it. Each matrix block has nonzero weighted ordinary trace pairing, detected by its transposed matrix units. This proves completeness and nondegeneracy at every rank. Together with step 1.1 it proves all assertions without a recoupling division at the boundary.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 3.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 starts with the unique rank-zero path."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 treat zero forbidden-level vertices and boundary deletion before division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 begins with the rank-zero identity and tensors by one strand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves nonzero denominator indices; step 2.1 never divides by the forbidden boundary theta."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles a=k and k=1 (ell=3) by retaining only the down endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The inclusion/retraction maps are prescribed cup/cap formulas and finite path recursion starting at the unique empty path; no independent arbitrary family of splittings is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Allowed theta pairings and recursively normalized up/down maps give complete retained path matrix units with nonzero trace weights, not an iff characterization of categories. No separate logical biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "Allowed theta pairings and recursively normalized up/down maps give complete retained path matrix units with nonzero trace weights, not an iff characterization of categories. This row concerns a forward biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "0368f72d1b2839e1eb1f07258c8ce67d005b9661dc9d84f7d0573f4e967e6012",
+            "row_sha256": "ea0d62d11df2906dc0e5961df419af0623e1dd93ba680f3e9506d018d23e5d89"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Allowed theta pairings and recursively normalized up/down maps give complete retained path matrix units with nonzero trace weights, not an iff characterization of categories. No separate logical biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "Allowed theta pairings and recursively normalized up/down maps give complete retained path matrix units with nonzero trace weights, not an iff characterization of categories. This row concerns a reverse biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "0368f72d1b2839e1eb1f07258c8ce67d005b9661dc9d84f7d0573f4e967e6012",
+            "row_sha256": "00d20bdba4fc9e48f58d6cf1403002d004d31596a91511eab2235c3dc2456b1f"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-61",
+        "notes": "Reviewed six steps and all ten direct suppliers. Theta domain is exactly the previously proved JW localization. Up/down maps have beta alpha=[a+1]/[a] p_(a-1); the lambda inverse is allowed through a=k and no [ell] occurs. Boundary is removed before normalizing; k=1 gives only the trivial tensor-square channel. Innermost turnback argument kills unequal retained corners and reduces equal corners to scalars. For this diagram category negligible tensor closure is directly the component-counting/spherical case (also Chen Lemma 5.2.2), so the unresolved general pivotal identity is not needed. Complete path decompositions give spanning, independence and trace weights including rank zero. No defect confirmed; the general supplier escalation remains separately open."
+      }
+    }
+  },
+  {
+    "path": "research/non-ml-math-remaining-81-2026-10-18-batch-61.proof-contracts.json",
+    "json_pointer": "/contracts/thm-temperley-lieb-root-negligible-quotient-is-semisimple",
+    "record": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings",
+          "source_section": "Statement",
+          "quote": "For generic $q$, or whenever the quantum integers needed for $p_r,p_s,p_t$ are units, the unnormalized trivalent theta pairing satisfies\n\n$$\\Theta(r,s,t)=\\frac{[m]![n']![p]![m+n'+p+1]!}{[m+n']![n'+p]![m+p]!},$$\n\nwhere $m=(r+s-t)/2$, $n'=(s+t-r)/2$, $p=(t+r-s)/2$ are nonnegative integers. The vertices and exact unit domain are those of [[lem-temperley-lieb-general-theta-net-evaluation]]. At $q=e^{\\pi i/\\ell}$, $\\ell\\ge3$, and $0\\le r,s,t\\le\\ell-2$, the pairing is positive when the triangle/parity conditions hold and $r+s+t\\le2\\ell-4$; it is zero for a triangle/parity triple above that level. A triple requiring an undefined root JW projector is not implicitly included.\n\nPut $k=\\ell-2$ and quotient the diagram category by the tensor ideal generated by $p_{k+1}$. A retained path of length $n$ is $a=(a_0,\\ldots,a_n)$ with $a_0=0$, $0\\le a_i\\le k$ and $|a_i-a_{i-1}|=1$. There are inclusions $i_a:p_{a_n}\\to n$ and retractions $r_a:n\\to p_{a_n}$ such that $r_ai_b=0$ for distinct paths, $r_ai_a=p_{a_n}$, and $\\sum_a i_ar_a=1_n$. Consequently the $E_{a,b}=i_ar_b$ at a common endpoint form complete matrix units, with\n\n$$E_{a,b}E_{c,d}=\\delta_{b,c}E_{a,d},\\qquad \\operatorname{Tr}_n(E_{a,b})=\\delta_{a,b}[a_n+1]_q.$$\n\nTheir pairing is nondegenerate. The endpoint $p_{k+1}$ is deleted before normalization; no denominator $[\\ell]$ is used.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-boundary-tensor-ideal-has-the-embedded-components",
+          "source_section": "Statement",
+          "quote": "Let $q=e^{\\pi i/\\ell}$, $\\ell\\ge3$, $\\delta=q+q^{-1}$, $m=\\ell-1$ and $f=p_m$. Put $B_n=\\mathrm{TL}_n(\\mathbb C,\\delta)$ and\n\n$$J_n=\\begin{cases}0,&n<m,\\\\ B_n(f\\otimes1_{n-m})B_n,&n\\ge m.\\end{cases}$$\n\nIf $\\mathcal I$ is the categorical tensor ideal generated by $f$, then $\\mathcal I(n,n)=J_n$ at every rank. Moreover, for $n\\ge1$, $\\operatorname{ptr}_n(J_n)\\subseteq J_{n-1}$. Thus this single embedded two-sided ideal already contains every annular consequence with arbitrary external strands and cups/caps. Below the boundary its component is zero, including contractions given by a partial trace rather than an internal turnback.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonzero commutative ring with unit, $\\delta\\in R$, and suppose $[2],\\ldots,[n]$ are units. The projector $p_n$ of [[def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators]] has coefficient $1$ on the identity diagram, is nonzero and idempotent, and is annihilated on both sides by each $U_i$ for $1\\le i<n$. Its corner is $p_n\\mathrm{TL}_n p_n=R p_n$, so it is the unique idempotent with identity coefficient $1$ and those two-sided annihilation conditions. For $n\\ge1$,\n\n$$\\operatorname{ptr}_n(p_n)=\\frac{[n+1]}{[n]}p_{n-1},\\qquad \\operatorname{Tr}_n(p_n)=[n+1].$$\n\nOnly the displayed denominator units are assumed; $\\delta$ need not be a unit.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-temperley-lieb-closure-trace-component-identities",
+          "source_section": "Statement",
+          "quote": "For any commutative ring $R$, loop value $\\delta\\in R$, and $n\\ge0$, the unnormalized trace of [[def-temperley-lieb-closure-trace-and-partial-trace]] satisfies\n\n$$\\operatorname{Tr}_n(xy)=\\operatorname{Tr}_n(yx),\\qquad \\operatorname{Tr}_{n+1}(x\\otimes1)=\\delta\\operatorname{Tr}_n(x)$$\n\nfor $x,y\\in\\mathrm{TL}_n(R,\\delta)$. For $n\\ge1$ and $x\\in\\mathrm{TL}_n(R,\\delta)$, it also satisfies\n\n$$\\operatorname{Tr}_{n+1}((x\\otimes1)U_n)=\\operatorname{Tr}_n(x),$$\n\nwhere $U_n$ is the cup-cap generator on the last two strands of $\\mathrm{TL}_{n+1}$. For $n\\ge1$, $x\\in\\mathrm{TL}_{n-1}$ and $h\\in\\mathrm{TL}_n$,\n\n$$\\operatorname{Tr}_n\\bigl(h(x\\otimes1)\\bigr)=\\operatorname{Tr}_{n-1}\\bigl(\\operatorname{ptr}_n(h)x\\bigr).$$\n\nNo division by $\\delta$ occurs.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-negligible-morphisms-form-a-tensor-ideal-by-partial-trace",
+          "source_section": "Statement",
+          "quote": "In the pivotal setting of [[def-negligible-morphism-in-a-pivotal-category]], the negligible morphisms are closed under addition, scalar multiplication, arbitrary composition on either side, and tensor product on either side. Thus they form a two-sided tensor ideal. The proof uses an explicit partial-trace identity and does not assume that an arbitrary intertwiner of a tensor product factors as a tensor product of intertwiners.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-temperley-lieb-quantum-integers-and-quantum-characteristic",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit and $\\delta\\in R$. Define the quantum integers by\n\n$$[0]_\\delta=0,\\qquad [1]_\\delta=1,\\qquad [r+1]_\\delta=\\delta[r]_\\delta-[r-1]_\\delta\\quad(r\\ge1).$$\n\nThe **quantum characteristic** of $(R,\\delta)$ is the least positive integer $\\ell$ with $[\\ell]_\\delta=0$, if one exists, and $\\ell=\\infty$ otherwise. No element of $R$ is inverted in this definition.\n\nFor $q\\in\\mathbb C^\\times$ and $\\delta=q+q^{-1}$, write $[r]_q=[r]_\\delta$. If $q\\ne\\pm1$, this agrees with $(q^r-q^{-r})/(q-q^{-1})$; at $q=\\pm1$ the recurrence gives $[r]_q=rq^{r-1}$. For complex-parameter classification, write $\\kappa=\\operatorname{ord}(q^2)$, with $\\kappa=\\infty$ when $q^2$ has infinite order. If $q\\ne\\pm1$, the quantum characteristic equals $\\kappa$ when $\\kappa<\\infty$ and is $\\infty$ otherwise. At $q=\\pm1$, $\\kappa=1$ but the complex quantum characteristic is $\\infty$, because $[r]_q=rq^{r-1}\\ne0$ for every positive $r$.\n\nFor a field $K$ of positive characteristic $p$, set $p(0)=1$ and, when $\\ell<\\infty$, set $p(i)=\\ell p^{i-1}$ for $i\\ge1$. In characteristic zero and finite $\\ell$, the finite digit scale is $p(1)=\\ell$; the separate characteristic-zero criterion below uses $a\\ell-1$ for arbitrary positive integers $a$. If $\\ell=\\infty$, every finite index is already in the range $n<\\ell$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-temperley-lieb-general-theta-net-evaluation",
+          "source_section": "Statement",
+          "quote": "Initially let $q$ be an indeterminate, let $[j]=q^{j-1}+q^{j-3}+\\cdots+q^{1-j}$ for $j\\ge1$, let $[0]!=1$, and set $\\delta=q+q^{-1}$. For nonnegative integers $m,n,p$, put\n$$r=m+p,\\qquad s=m+n,\\qquad t=n+p,\\qquad h=m+n+p.$$\nEquivalently, $(r,s,t)$ satisfies the triangle inequalities and even-sum condition, with $m=(r+s-t)/2$, $n=(s+t-r)/2$, and $p=(t+r-s)/2$. All Jones\u2013Wenzl projectors below have identity coefficient one and are unnormalized.\n\nLet $W_m:0\\to2m$ be $m$ nested cups, whose outputs are two consecutive $m$-strand bundles: cup $i$ joins position $i$ of the first bundle to position $m+1-i$ of the second. Let $B_m:2m\\to0$ be its horizontal reflection. Define\n$$A=1_p\\otimes W_m\\otimes1_n:t\\longrightarrow r+s,\\qquad B=1_p\\otimes B_m\\otimes1_n:r+s\\longrightarrow t,$$\n$$\\alpha=(p_r\\otimes p_s)Ap_t,\\qquad \\beta=p_tB(p_r\\otimes p_s),\\qquad \\Theta(m,n,p)=\\operatorname{Tr}_t(\\beta\\alpha).$$\nThus the pairwise bundles at each trivalent vertex have sizes $m,n,p$: there are $m$ strands between arms $r,s$, $n$ between arms $s,t$, and $p$ between arms $t,r$. This fixes the vertex without a further scalar normalization. The theta net has the three JW-labelled edges $r,s,t$, since idempotence collapses the doubled projectors. Its value is\n$$\\Theta(m,n,p)=\\frac{[m]![n]![p]![h+1]!}{[m+n]![n+p]![m+p]!}.$$\nFor $p\\ge1$ the closed-diagram strip recurrence is\n$$[m+p][n+p]\\Theta(m,n,p)=[p][m+n+p+1]\\Theta(m,n,p-1),\\qquad \\Theta(m,n,0)=[m+n+1].$$\n\nThese identities specialize to every complex $q\\ne0$ for which $[j]\\ne0$ for $1\\le j\\le M=\\max(r,s,t)$, using the Laurent-polynomial convention at $q=\\pm1$. These hypotheses construct the three projectors and make every displayed denominator a unit; $[h+1]$ need not be nonzero. In particular, if $q=e^{\\pi i/\\ell}$, $\\ell\\ge3$, and $0\\le r,s,t\\le\\ell-2$, then $\\Theta>0$ when $h\\le\\ell-2$, whereas $\\Theta=0$ when $h\\ge\\ell-1$. The latter vertex has zero trace pairing against every reverse morphism. No undefined higher root projector or $0/0$ convention is used.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Write $m=\\ell-1$ and $p=p_m$. It is a nonzero idempotent with one-dimensional corner and trace $[\\ell]=0$ by [F3,F4]. For every $x$, cyclic closure gives $\\operatorname{Tr}(px)=\\operatorname{Tr}(pxp)$; the latter is a scalar multiple of $\\operatorname{Tr}(p)=0$. Thus $p$ is negligible. By [F4], the categorical tensor ideal it generates is negligible, and [F2] identifies its endomorphism component as exactly $I_n$. Consequently $I_n\\subseteq\\operatorname{Rad}(\\operatorname{Tr}_n)$ at every rank. The scalar $\\delta^{-n}$ exists and does not change this radical.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "In the quotient by $I_n$, [F1] gives matrix units $E_{a,b}$ for paths ending at each retained $c$, with trace $\\operatorname{Tr}(E_{a,b})=\\delta_{a,b}[c+1]$. If an element has a nonzero coefficient at $E_{a,b}$, multiplying by $E_{b,a}$ detects it in this nonzero weighted matrix-trace pairing. The quotient trace pairing is therefore nondegenerate. Together with step 1.1 this proves $I_n=\\operatorname{Rad}(\\tau_n)$ and the full matrix-block description. Inserting the path decompositions on both ends describes every unequal-degree Hom space as the corresponding rectangular matrix blocks; its pairing with the reverse Hom space is also nondegenerate. Thus the categorical negligible ideal is precisely the boundary tensor ideal, not a larger ideal known only on endomorphisms. The endpoint corners are $\\mathbb Cp_c$, so its additive Karoubi quotient is semisimple with exactly the stated simple labels.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Sandwich a basis matching from $c$ to $a+b$ between $p_c$ and $p_a\\otimes p_b$. Any arc joining two points of the same labelled arm is killed by its innermost adjacent turnback. A remaining matching must have the three bundle sizes $(a+b-c)/2$, $(b+c-a)/2$, $(c+a-b)/2$, so it exists only for a triangle/parity triple and is unique. Thus this projected Hom space is spanned by the vertex of [F5], and its reverse by the reflected vertex. Their trace pairing is the exact theta scalar. When the labels are retained, [F5] makes it positive exactly for $a+b+c\\le2\\ell-4$ and zero above that level. Step 2.1 identifies quotient Hom with this pairing modulo its radical, so its dimension is respectively one or zero. In a semisimple category these are precisely the simple multiplicities in $p_a\\otimes p_b$. The triangle, parity and level inequalities yield the displayed truncated rule. No theta value is divided at a forbidden level.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Finally work at rank $m=\\ell-1$ **before** quotienting. The same up/down path proof as [F1] applies without deleting its final up endpoint $p_m$: a length-$m$ path cannot exceed height $m$, and every split before its final step uses only $[1],\\ldots,[m]$, which are nonzero. All endpoint projectors up to $p_m$ are nonzero by their identity coefficient. The matching-turnback corner calculation gives full matrix units just as before, now including the endpoint $m$; their completeness is the unreduced JW split. Hence $\\mathrm{TL}_m$ is semisimple. The endpoint-$m$ block has the unique all-up path and is $\\mathbb Cp_m$. Its trace weight is $[m+1]=0$, whereas every other endpoint weight is positive. Thus precisely this one-dimensional block is the trace radical, while semisimplicity makes the Jacobson radical zero. This proves the boundary assertion directly, without assuming a later ordinary semisimplicity criterion.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the rank-zero path block."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the boundary ideal is trace radical, while step 2.1 proves the reverse inclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses nonzero [c+1] for each retained matrix block."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 proves unreduced first-boundary semisimplicity without assuming a nonzero boundary trace."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 includes rank m and shows its nonzero boundary projector has zero trace."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The path maps, boundary projector and unique trivalent matching are supplied by explicit finite constructions; the proof does not choose a basis for an arbitrary infinite category."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The exact embedded boundary ideal equals the trace radical, retained paths give full blocks and theta pairing gives truncated fusion; the equality is not an iff Statement. No separate logical biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The exact embedded boundary ideal equals the trace radical, retained paths give full blocks and theta pairing gives truncated fusion; the equality is not an iff Statement. This row concerns a forward biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "4a1e30946eed4ad4b4c35539401b8d8c0b19fd950c76bd96dd4c0882b16192b5",
+            "row_sha256": "cfccc4364a1703083678a8aef8c5e7e47b738b0244ead2b46dd88909a8b80a44"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exact embedded boundary ideal equals the trace radical, retained paths give full blocks and theta pairing gives truncated fusion; the equality is not an iff Statement. No separate logical biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The exact embedded boundary ideal equals the trace radical, retained paths give full blocks and theta pairing gives truncated fusion; the equality is not an iff Statement. This row concerns a reverse biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "4a1e30946eed4ad4b4c35539401b8d8c0b19fd950c76bd96dd4c0882b16192b5",
+            "row_sha256": "54e3be43212605d4edb1064025ec7319c07e29340c8e797b8c8dc756e4ce207f"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-61",
+        "notes": "Checked all four steps with seven already reviewed direct suppliers. Boundary projector has a scalar corner and zero trace; in the actual planar category, component closure proves negligible tensor stability independently of the open general pivotal argument. Retained path matrix units have nonzero trace weights and detect every coefficient, proving equality of trace and embedded boundary ideals, including unequal-degree Hom spaces. Unique vertex/theta pairing gives exactly triangle, parity and level conditions for fusion. At first boundary the unreduced path decomposition uses only units [1] through [ell-1]; the unique all-up block has zero trace but is a nonzero semisimple summand, distinguishing trace radical from Jacobson radical. Includes n=0 and ell=3. No local defect confirmed; general supplier escalation remains open."
+      }
+    }
+  },
+  {
+    "path": "research/non-ml-math-remaining-81-2026-10-18-batch-61.proof-contracts.json",
+    "json_pointer": "/contracts/thm-temperley-lieb-rank-one-tilting-quotient-fusion-category",
+    "record": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-rank-one-lusztig-tilting-category",
+          "source_section": "Definition",
+          "quote": "Fix an integer $\\ell\\ge3$ and set $q=e^{\\pi i/\\ell}$, so the multiplicative order of $q^2$ is $\\ell$. Use the divided-power integral form of [[def-drinfeld-jimbo-quantized-enveloping-algebra]] from [[def-lusztig-divided-power-integral-form]], specialized by $v\\mapsto q$ to $\\mathbb C$. In type $A_1$, write $K=K_h$ and $E,F$ for the rank-one generators. The convention is\n\n$$KEK^{-1}=q^2E,\\qquad KFK^{-1}=q^{-2}F,\\qquad [E,F]=\\frac{K-K^{-1}}{q-q^{-1}},$$\n\n$$\\Delta(K)=K\\otimes K,\\qquad \\Delta(E)=E\\otimes K+1\\otimes E,\\qquad \\Delta(F)=F\\otimes1+K^{-1}\\otimes F.$$\n\nThis is the Sawin coproduct, rather than the inverse-$K$ coproduct in [[thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra]]. Its counit is $\\varepsilon(K)=1$, $\\varepsilon(E)=\\varepsilon(F)=0$ and its antipode is $S(E)=-EK^{-1}$, $S(F)=-KF$, $S(K)=K^{-1}$. The exact integral transport is from the library algebra with opposite coproduct, by $E_{\\rm target}=KE_{\\rm lib}$, $F_{\\rm target}=F_{\\rm lib}K^{-1}$ and $K_{\\rm target}=K_{\\rm lib}$. Substituting these generators gives the displayed coproduct and unchanged mixed relation. On divided powers the formulas are $E_{\\rm target}^{(r)}=v^{-r(r-1)}K^rE_{\\rm lib}^{(r)}$ and $F_{\\rm target}^{(r)}=v^{r(r-1)}F_{\\rm lib}^{(r)}K^{-r}$; the inverse formulas also have Laurent-monomial coefficients, so the integral lattice and toral generators are preserved.\n\nThe Lusztig specialization includes all divided powers $E^{(r)},F^{(r)}$ and the toral quantum binomials; this is the divided-power form, not the small quantum group. A finite-dimensional module is **type 1** when it carries its integral-weight grading $M=\\bigoplus_{m\\in\\mathbb Z}M_m$ with $K|_{M_m}=q^m$, the full toral character $T_{c,t}|_{M_m}=\\begin{bmatrix}m+c\\\\t\\end{bmatrix}_q I$ for every $c\\in\\mathbb Z$ and $t\\ge0$, and $E^{(r)}M_m\\subseteq M_{m+2r}$, $F^{(r)}M_m\\subseteq M_{m-2r}$. The binomial is its Laurent-polynomial specialization, including negative upper indices. The grading is part of the data and is not collapsed when distinct weights have the same $K$ eigenvalue. Every module intertwiner preserves it: for $m<n$, $T_{-m,n-m}$ has eigenvalues $0$ and $1$ on weights $m$ and $n$.\n\nFor $a\\ge0$, the Weyl module $\\Delta(a)$ has basis $v_0,\\ldots,v_a$ and actions\n\n$$Kv_j=q^{a-2j}v_j,\\qquad E^{(r)}v_j=\\begin{bmatrix}a-j+r\\\\r\\end{bmatrix}_qv_{j-r},\\qquad F^{(r)}v_j=\\begin{bmatrix}j+r\\\\r\\end{bmatrix}_qv_{j+r},$$\n\nwhere the Gaussian binomials are the Laurent-polynomial specializations of [[def-quantum-integers-factorials-and-divided-powers-at-q-i]], and $v_j=0$ outside $0\\le j\\le a$. Its dual is the dual Weyl module $\\nabla(a)=\\Delta(a)^\\vee$. A **Weyl filtration** (respectively dual-Weyl filtration) is a finite submodule filtration whose successive quotients are modules $\\Delta(a)$ (respectively $\\nabla(a)$). A **tilting module** is a module with both filtrations.\n\nTake $s=e^{\\pi i/(2\\ell)}$, so $s^2=q$. The ribbon category is the full weight-lattice extension $\\mathcal U_s^\\dagger(\\mathfrak{sl}_2)$ of this Lusztig form, not its root-lattice restriction. Its toral factor is the completed function algebra on the weight lattice $P=\\mathbb Z\\omega$, acting on each weight space by its weight character. Before specialization, the rank-one universal $R$-matrix is the Sawin weight-lattice expression\n\n$R=D\\sum_{r\\ge0}q^{r(r+1)/2}(1-q^{-2})^r[r]_q!E^{(r)}\\otimes F^{(r)},\\qquad D|_{M_m\\otimes N_n}=s^{mn}.$\n\ninterpreted in the completed tensor product; at the root it means the image of the integral completed form, not termwise division by a vanishing $[r]_q!$. In ordinary powers the coefficient is $q^{r(r-1)/2}(q-q^{-1})^r/[r]_q!$; changing to two divided powers multiplies that coefficient by $([r]_q!)^2$. Thus the displayed divided-power coefficient is Laurent integral and vanishes for $r\\ge\\ell$ after specialization. The toral factor is the weight pairing, fixed explicitly by $D$ above. The pivotal map is $j_M(x)(\\varphi)=\\varphi(Kx)$ and the twist is $\\theta=u^{-1}j$ for the Drinfeld map $u$. The object class of this page is the full subcategory of finite-dimensional integrable type-1 tilting modules for this weight-lattice ribbon extension. No assertion about semisimplicity or the trace radical is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-temperley-lieb-rank-one-weyl-and-dual-weyl-filtrations",
+          "source_section": "Statement",
+          "quote": "Use the full integral-weight divided-power category of [[def-temperley-lieb-rank-one-lusztig-tilting-category]], with $q=e^{\\pi i/\\ell}$ and every $\\ell\\ge3$. The displayed strings define $\\Delta(a)$, and $\\nabla(a)=\\Delta(a)^\\vee$. For all $a,b\\ge0$,\n\n$$\\dim\\operatorname{Hom}(\\Delta(a),\\nabla(b))=\\delta_{ab},\\qquad \\operatorname{Ext}^1(\\Delta(a),\\nabla(b))=0.$$\n\nHere Ext vanishing means that every short exact sequence in the finite-dimensional full-weight category with those end terms splits. The tensor product $\\Delta(a)\\otimes\\Delta(b)$ has one Weyl factor of each label $a+b,a+b-2,\\ldots,|a-b|$, and the analogous dual-Weyl assertion holds. Both filtration classes are closed under direct summands. Thus tiltings are closed under tensor products, duals and direct summands. For every $a\\ge0$ there is exactly one indecomposable tilting $T(a)$ of highest weight $a$; its weight-$a$ space is one-dimensional, and it occurs as a summand of $V^{\\otimes a}$, where $V=\\Delta(1)$. Every finite tilting is a finite direct sum of these $T(a)$, so the additive idempotent-complete tensor category generated by $V$ is the entire tilting category.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-rank-one-tilting-character-and-dimension",
+          "source_section": "Statement",
+          "quote": "Let $q=e^{\\pi i/\\ell}$, $\\ell\\ge3$, and use the full-weight category of [[def-temperley-lieb-rank-one-lusztig-tilting-category]]. Write $T(m)$ for the indecomposable tilting of highest weight $m$ and $\\chi(m)=\\sum_{j=0}^m e^{m-2j}$. For $a\\ge1$ and $0\\le b\\le\\ell-2$,\n\n$$\\operatorname{ch}T(a\\ell+b)=\\chi(a\\ell+b)+\\chi(a\\ell-b-2),\\qquad \\operatorname{ch}T(a\\ell-1)=\\chi(a\\ell-1).$$\n\nAlso $T(m)=\\Delta(m)=\\nabla(m)$ for $0\\le m<\\ell$. With the positive $K$ pivotal map, the dimension on a Weyl character is $[m+1]_q$. Consequently every $T(m)$ with $m\\ge\\ell-1$ has zero pivotal trace on **every** endomorphism, so its identity is negligible. In the retained range $0\\le m\\le\\ell-2$, $T(m)$ is simple of nonzero pivotal dimension $[m+1]_q$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-negligible-morphism-in-a-pivotal-category",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be an additive $\\mathbb C$-linear rigid monoidal category with $\\operatorname{End}_{\\mathcal C}(\\mathbf1)=\\mathbb C$, and fix a pivotal structure $j_X:X\\to X^{\\vee\\vee}$ as in [[def-pivotal-structure]]. For $f:X\\to Y$, call $f$ **negligible** if\n\n$$\\operatorname{Tr}_L(j_X\\circ g\\circ f)=0\\qquad\\text{for every }g:Y\\to X,$$\n\nwhere the left trace is [[def-the-categorical-trace-of-a-morphism-into-the-double-dual]]. The negligible morphisms form the intersection of the kernels of these linear functionals; this definition alone does not assert tensor-ideal closure.\n\nFor the complex Temperley\u2013Lieb diagram category, use its cup/cap pivotal structure. The resulting trace is exactly the unnormalized planar closure of [[def-temperley-lieb-closure-trace-and-partial-trace]]. The same definition applies to the complex type-1 tilting category of [[def-temperley-lieb-rank-one-lusztig-tilting-category]] when its stated ribbon pivotal structure is used.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-negligible-morphisms-form-a-tensor-ideal-by-partial-trace",
+          "source_section": "Statement",
+          "quote": "In the pivotal setting of [[def-negligible-morphism-in-a-pivotal-category]], the negligible morphisms are closed under addition, scalar multiplication, arbitrary composition on either side, and tensor product on either side. Thus they form a two-sided tensor ideal. The proof uses an explicit partial-trace identity and does not assume that an arbitrary intertwiner of a tensor product factors as a tensor product of intertwiners.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-temperley-lieb-rank-one-ribbon-structure-from-the-finite-r-series",
+          "source_section": "Statement",
+          "quote": "For every $\\ell\\ge3$, the full tilting category of [[def-temperley-lieb-rank-one-lusztig-tilting-category]] is rigid and braided by $c_{M,N}=\\operatorname{flip}\\circ R_{M,N}$, where\n\n$$R_{M,N}=D\\sum_{r\\ge0}q^{r(r+1)/2}(1-q^{-2})^r[r]_q!E_M^{(r)}\\otimes F_N^{(r)},\\qquad D|_{M_m\\otimes N_n}=s^{mn}.$$\n\nThe sum is finite on every pair of objects. Its pivotal map is $j_M(x)(\\varphi)=\\varphi(Kx)$ and its ribbon twist is $\\theta_M=u_M^{-1}j_M$, with $u$ the Drinfeld map. For $V=\\Delta(1)$, the self-dual cup and cap are\n\n$$w=v_+\\otimes v_- -q^{-1}v_-\\otimes v_+,\\qquad b(v_+\\otimes v_-)=-q,\\quad b(v_-\\otimes v_+)=1,$$\n\nwith $b(v_\\pm\\otimes v_\\pm)=0$. They obey both snakes, $b(w)=-\\delta$ and Frobenius\u2013Schur sign $-1$ for $j$. Nevertheless $\\dim_j V=\\delta$. If $U=-wb$, then $U^2=\\delta U$, the adjacent TL relations hold, and\n\n$$c_{V,V}=sI-s^{-1}U,\\qquad T=qU-I=-s\\,c_{V,V}^{-1}.$$\n\nThe $\\Delta(2)$ and trivial channels have crossing eigenvalues $s,-s^{-3}$ and Hecke eigenvalues $-1,q^2$, respectively. Their twists are $s^8,1$; $\\theta_V=s^3I$. The $\\Delta(2)$ channel is removed in the negligible quotient when $\\ell=3$. More generally $\\theta_{\\Delta(a)}=s^{a(a+2)}I$ for $0\\le a\\le\\ell-1$. These assertions include even $\\ell$ and use no small-quantum-group substitution.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-basic-properties-of-the-categorical-trace",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be a rigid monoidal category, let $a:X\\to X^{\\vee\\vee}$ and $b:Y\\to Y^{\\vee\\vee}$, and suppress the monoidal and chosen-dual comparison maps. For $s\\in\\operatorname{End}(\\mathbf1)$ write $\\ell_Z(s)$ and $r_Z(s)$ for its left and right actions on $Z$, transported from $s\\otimes1_Z$ and $1_Z\\otimes s$ by the unit constraints.\n\n1. $\\operatorname{Tr}_L(a)=\\operatorname{Tr}_R(a^\\vee)$.\n2. If the category is additive, then\n   $\\operatorname{Tr}_L(a\\oplus b)=\\operatorname{Tr}_L(a)+\\operatorname{Tr}_L(b)$.\n3. The general tensor formula is\n   $\\operatorname{Tr}_L(a\\otimes b)=\\operatorname{Tr}_L(r_{X^{\\vee\\vee}}(\\operatorname{Tr}_L(b))a)$.\n   If $r_{X^{\\vee\\vee}}(\\operatorname{Tr}_L(b))=\\ell_{X^{\\vee\\vee}}(\\operatorname{Tr}_L(b))$, this becomes\n   $\\operatorname{Tr}_L(a\\otimes b)=\\operatorname{Tr}_L(a)\\operatorname{Tr}_L(b)$.\n   In particular multiplicativity holds when every unit scalar has equal left and right actions on every object. This condition holds in a braided category, and also in a $k$-linear monoidal category with $k$-bilinear tensor product and $\\operatorname{End}(\\mathbf1)=k$.\n4. For every endomorphism $c:X\\to X$,\n   $\\operatorname{Tr}_L(ac)=\\operatorname{Tr}_L(c^{\\vee\\vee}a)$.\n\nThe corresponding right-trace duality, additivity and cyclicity statements hold. For right-trace inputs $p:X^{\\vee\\vee}\\to X$ and $q:Y^{\\vee\\vee}\\to Y$, the general tensor formula is\n\n$$\\operatorname{Tr}_R(p\\otimes q)=\\operatorname{Tr}_R(q\\ell_{Y^{\\vee\\vee}}(\\operatorname{Tr}_R(p))).$$\n\nIt reduces to multiplicativity under the analogous equality of scalar actions, in particular under either sufficient condition above.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "By [F1] every object decomposes into finitely many indecomposable $T(m)$. By [F2], all $T(m)$ with $m\\ge\\ell-1$ have negligible identities and become zero. For retained $a$, $T(a)=\\Delta(a)=\\nabla(a)$ is simple; Hom orthogonality in [F1] gives $\\operatorname{Hom}(T(a),T(b))=\\delta_{ab}\\mathbb C$. Thus the subcategory of retained sums has rectangular matrix Hom spaces. Its trace on each endomorphism block is $[a+1]$ times the ordinary matrix trace, by [F2,F5]. These nonzero weights make the pairing with the reverse Hom space nondegenerate. Consequently a morphism is negligible exactly when its retained-to-retained block vanishes; all its other blocks factor through negligible summands and are negligible by [F3]. Hence the quotient is precisely the semisimple category of retained sums, with the asserted complete simple list.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The tensor product and composition descend by the tensor-ideal property [F3]. The unit $T(0)$ has scalar endomorphisms and dimension $1$, so is simple and survives. The dual of $T(m)$ is an indecomposable tilting of the same highest weight: its character is symmetric, duality preserves indecomposability, and [F1] classifies it as $T(m)$. Thus duality preserves both the retained and negligible parts of step 1.1; it descends, and the evaluation/coevaluation snakes remain identities in the quotient. The invertible braidings, pivotal maps and dual-compatible twist of [F4] descend by naturality and [F3]. The quotient is therefore rigid and ribbon. Left and right pivotal traces on retained simples are respectively the sums of their $K$ and $K^{-1}$ weight eigenvalues; symmetric strings make them equal to $[a+1]$. Additivity and the matrix-block description prove equality on all endomorphisms, so the quotient is spherical.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Put $k=\\ell-2$, $S_a=[T(a)]$ for $0\\le a\\le k$, and $x=S_1$. The tensor filtration [F1] for $V\\otimes\\Delta(a)$ has factors $\\Delta(a+1),\\Delta(a-1)$, omitting the negative label at $a=0$. For $a\\le k$ these factors are simple tiltings, including $\\Delta(\\ell-1)$ at the boundary, by [F2]. Their extensions split by [F1]'s Ext orthogonality, since each is both Weyl and dual Weyl. Hence in the quotient $xS_a=S_{a-1}+S_{a+1}$ with $S_{-1}=S_{k+1}=0$, $S_0=1$. For $k=1$ this says $x^2=1$. Define integer polynomials $P_0=1$, $P_1=x$, $P_{a+1}=xP_a-P_{a-1}$. Then $S_a=P_a(x)$ and $P_{k+1}(x)=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Induction with this recurrence gives the polynomial identity $P_aP_b=\\sum_{c=|a-b|,\\ |a-b|+2,\\ldots,a+b}P_c$: for $b=0$ it is immediate, and subtracting the preceding $b-1$ identity from $x$ times the $b$ identity cancels its two interior shifted sums and leaves the $b+1$ endpoints. Modulo $P_{k+1}=0$, the same recurrence gives $P_{k+1+j}=-P_{k+1-j}$. The terms above $k$ in the product sum therefore cancel the retained terms from $2k+2-a-b$ upwards, with matching parity; a possible term $P_{k+1}$ is zero. The remaining indices are precisely $|a-b|\\le c\\le\\min(a+b,2k-a-b)$ of parity $a+b$. The simple classes are independent by step 1.1, so this class identity is the actual direct-sum multiplicity rule, not merely a character prediction. Since $2k=2\\ell-4$, it is the displayed formula. All arguments preserve every $\\ell\\ge3$ and complete the theorem.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 3.1",
+            "induction",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 retains the tensor unit T(0) of dimension 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 kills every excluded tilting identity by its full endomorphism trace."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 starts the recurrence with P0=1 and P1=x."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 descends duality and ribbon maps through the actual tensor ideal."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 treats k=1 and boundary a=k; step 4.1 carries out reflection cancellation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. For a given finite tilting, its finite indecomposable decomposition identifies retained and negligible blocks. The classification and finite block argument need no simultaneous arbitrary-family choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The quotient kills every excluded indecomposable via all-endomorphism traces and retains matrix Hom spaces, unit and the truncated fusion/ribbon structure. No separate logical biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The quotient kills every excluded indecomposable via all-endomorphism traces and retains matrix Hom spaces, unit and the truncated fusion/ribbon structure. This row concerns a forward biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "9ce0ae559e980a31f3ba4a359606c9cd69c1dc5c39601c3261d6f4bf51f55367",
+            "row_sha256": "e9e2ae6c65e6d16d9241f109864d777be9bb91d5d282a44757c7b85d09426256"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The exactly-when sentence in proof 1.1 is an auxiliary test for a negligible morphism: zero retained block factors through discarded summands, and a nonzero retained block is detected by the nondegenerate weighted matrix trace. Both implications are performed there; the Statement asserts existence and structure of the quotient, not a separate biconditional theorem."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The quotient kills every excluded indecomposable via all-endomorphism traces and retains matrix Hom spaces, unit and the truncated fusion/ribbon structure. No separate logical biconditional is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The quotient kills every excluded indecomposable via all-endomorphism traces and retains matrix Hom spaces, unit and the truncated fusion/ribbon structure. This row concerns a reverse biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "9ce0ae559e980a31f3ba4a359606c9cd69c1dc5c39601c3261d6f4bf51f55367",
+            "row_sha256": "5271cd2dbed356c4ac8e8977e9775e1f3f167646e1b96b14796579499581a1cf"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The exactly-when sentence in proof 1.1 is an auxiliary test for a negligible morphism: zero retained block factors through discarded summands, and a nonzero retained block is detected by the nondegenerate weighted matrix trace. Both implications are performed there; the Statement asserts existence and structure of the quotient, not a separate biconditional theorem."
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-61",
+        "notes": "Checked all four steps and seven suppliers. Fitting/character results kill all outside identities, while the retained simple matrix blocks have nondegenerate weighted trace. This independently identifies the quotient and dual stability. The general pivotal-ideal supplier has the open step-2.2 issue recorded above; in this actual category its valid right tensor argument plus the independently proved braiding gives left closure by conjugation, so the consuming conclusion is sound without the questionable general identity. Symmetric retained weights prove sphericality of quotient traces. The recurrence and cancellation give the stated level-k fusion sum, including ell=3/k=1 and both endpoints. No local mathematical repair is necessary; owner still owes resolution of the general supplier, which this consumer review does not clear."
+      }
+    }
+  }
+]

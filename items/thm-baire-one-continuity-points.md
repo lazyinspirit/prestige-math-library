@@ -3,25 +3,20 @@ id: thm-baire-one-continuity-points
 kind: theorem
 title: "Baire's theorem: a Baire class one function on a closed bounded interval $[a,b]$ is continuous at the points of a dense subset of $[a,b]$ that is the trace of a $G_\\delta$ set, so its set of discontinuities is meager"
 status: published
+dependency_level: 3
 origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
   evidence: semantic-source
-deps: [def-baire-class-one, def-oscillation, lem-oscillation-superlevel-sets-are-closed, thm-discontinuity-set-is-f-sigma, lem-baire-category-in-a-closed-interval, def-nowhere-dense-meager, def-f-sigma-g-delta, def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, thm-open-set-algebra-r, thm-continuity-preimage-characterisation, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, cor-archimedean-reciprocal, def-real-limit, def-sequence, lem-of-abs-value, def-max-min, def-neighbourhood-r, def-canonical-natural, lem-of-naturals-positive, def-limit-point-r]
+deps: [def-baire-class-one, def-oscillation, lem-oscillation-superlevel-sets-are-closed, thm-discontinuity-set-is-f-sigma, lem-baire-category-in-a-closed-interval, def-nowhere-dense-meager, def-f-sigma-g-delta, def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, thm-open-set-algebra-r, thm-continuity-preimage-characterisation, thm-algebra-of-continuous-functions, def-continuity-real, def-interval, cor-archimedean-reciprocal, def-real-limit, def-sequence, lem-of-abs-value, lem-of-triangle-inequality, def-max-min, def-neighbourhood-r, def-canonical-natural, lem-of-naturals-positive, def-limit-point-r]
 justified_by: []
 aliases: [thm-baire-one-dense-continuity]
 landmark: true
 short: "Baire class one: continuity on a dense $G_\\delta$"
 proof_strategy: direct
 verification:
-  precheck: pass
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-09
-    scope: published-audit
-    delegated_by: owner
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/thm-baire-one-continuity-points.json
 sources:
   scraped: []
   references:
@@ -33,6 +28,8 @@ pipeline_run: null
 ---
 
 ## Statement
+
+Throughout, $\mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R}$ denotes the canonical copies. Natural numbers, integers and rationals are written directly when used in real arithmetic.
 
 Let $a, b \in \mathbb{R}$ with $a < b$ and let $f : [a,b] \to \mathbb{R}$ be of
 Baire class one ([[def-baire-class-one]]). Write
@@ -47,7 +44,7 @@ $$D \;:=\; \{\, x \in [a,b] : f \text{ is discontinuous at } x \,\}, \qquad C :=
    nondegenerate closed interval, hence nowhere dense
    ([[def-nowhere-dense-meager]]);
 2. $D$ is meager, being the union of the sequence
-   $(D_{1/\iota(n+1)})_{n \in \mathbb{N}}$ of nowhere dense sets;
+   $(D_{1/(n+1)})_{n \in \mathbb{N}}$ of nowhere dense sets;
 3. $C$ is dense in $[a,b]$: for every $x \in [a,b]$ and every real $\rho > 0$
    the set $[a,b] \cap N_\rho(x)$ contains a point of $C$;
 4. $C = [a,b] \cap V$ for a $G_\delta$ subset $V \subseteq \mathbb{R}$
@@ -56,9 +53,11 @@ $$D \;:=\; \{\, x \in [a,b] : f \text{ is discontinuous at } x \,\}, \qquad C :=
 **On the phrase "dense $G_\delta$".** Claims 3 and 4 together are what the
 classical statement calls a *dense $G_\delta$ subset of $[a,b]$*: the continuity
 set is dense in $[a,b]$ and it is the trace on $[a,b]$ of a $G_\delta$ subset of
-$\mathbb{R}$. It is not claimed that $C$ is $G_\delta$ as a subset of
-$\mathbb{R}$, nor that it is dense in $\mathbb{R}$; neither is true in general,
-since $C \subseteq [a,b]$.
+$\mathbb{R}$. In fact $C$ is also $G_\delta$ as a subset of $\mathbb{R}$:
+$[a,b]=\bigcap_{n\in\mathbb{N}}(a-1/(n+1),b+1/(n+1))$ is $G_\delta$,
+and intersecting this sequence of open sets with a sequence presenting $V$
+presents $C$ as $G_\delta$. Density is relative to $[a,b]$; the bounded set
+$C\subseteq[a,b]$ is not dense in $\mathbb{R}$.
 
 ## Facts & Assumptions
 
@@ -72,17 +71,17 @@ since $C \subseteq [a,b]$.
 
 [L5] If $a < b$, $(F_n)$ are closed and $[a,b] \subseteq \bigcup_n F_n$, then some $F_n \cap [a,b]$ contains a nondegenerate closed interval ([[lem-baire-category-in-a-closed-interval]]).
 
-[L6] $[a,b]$ and every $[c,d]$ with $c \le d$ are closed; an intersection of a nonempty family of closed sets is closed; a set is closed exactly when its complement is open ([[thm-open-set-algebra-r]], claim 3, [[def-open-and-closed-in-r]], [[def-interval]]).
+[L6] $[a,b]$ and every $[c,d]$ with $c \le d$ are closed; every open interval is open; an intersection of two open sets is open; an intersection of a nonempty family of closed sets is closed; a set is closed exactly when its complement is open ([[thm-open-set-algebra-r]], claims 2 and 3, [[def-open-and-closed-in-r]], [[def-interval]]).
 
 [L7] For a continuous $h$ on $[a,b]$ and a closed $F \subseteq \mathbb{R}$, the preimage $\{x \in [a,b] : h(x) \in F\}$ is $G \cap [a,b]$ for some closed $G$ ([[thm-continuity-preimage-characterisation]]); differences and absolute values of continuous functions are continuous ([[thm-algebra-of-continuous-functions]]).
 
 [L8] A closed set with empty interior is nowhere dense, and a union of a sequence of nowhere dense sets is meager ([[def-nowhere-dense-meager]], [[def-interior-closure-boundary-r]], [[thm-closure-characterisations-r]]).
 
-[L9] The set of continuity points of $f : A \to \mathbb{R}$ is $A \cap V$ for a $G_\delta$ set $V \subseteq \mathbb{R}$, and the discontinuity set is $\{x \in A : \omega_f(x) > 0\} = \bigcup_{n \in \mathbb{N}} \{x \in A : \omega_f(x) \ge 1/\iota(n+1)\}$ ([[thm-discontinuity-set-is-f-sigma]], claims 1 and 2, [[def-f-sigma-g-delta]]).
+[L9] The set of continuity points of $f : A \to \mathbb{R}$ is $A \cap V$ for a $G_\delta$ set $V \subseteq \mathbb{R}$, and the discontinuity set is $\{x \in A : \omega_f(x) > 0\} = \bigcup_{n \in \mathbb{N}} \{x \in A : \omega_f(x) \ge 1/(n+1)\}$ ([[thm-discontinuity-set-is-f-sigma]], claims 1 and 2, [[def-f-sigma-g-delta]]).
 
-[L10] For every real $\eta > 0$ there is a natural $m \ge 1$ with $1/\iota(m) < \eta$; $\iota$ is positive on the naturals $\ge 1$ ([[cor-archimedean-reciprocal]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
+[L10] For every real $\eta > 0$ there is a natural $m \ge 1$ with $1/m < \eta$; every natural number $\ge 1$ is positive in $\mathbb{R}$ ([[cor-archimedean-reciprocal]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
 
-[L11] $|u - w| \le |u - v| + |v - w|$, $|u| \ge 0$, and a real that is $\le \eta$ for every real $\eta > 0$ and $\ge 0$ is $0$ ([[lem-of-abs-value]]).
+[L11] $|u-w|\le|u-v|+|v-w|$ by applying [[lem-of-triangle-inequality]] to $(u-v)+(v-w)=u-w$; $|u|\ge0$ by [[lem-of-abs-value]]. A real $r\ge0$ that satisfies $r\le\eta$ for every real $\eta>0$ is $0$: otherwise $\eta=r/2>0$ gives $r\le r/2<r$.
 
 [L12] $\max$ and $\min$ of two reals exist; $N_\rho(x) = (x-\rho, x+\rho)$; a point interior to a set has a neighbourhood inside it ([[def-max-min]], [[def-neighbourhood-r]], [[def-interior-closure-boundary-r]], [[def-limit-point-r]]).
 
@@ -94,7 +93,7 @@ since $C \subseteq [a,b]$.
 
 1.2 Claim 1. Fix a real $\varepsilon > 0$ and let $D_{\varepsilon} := \{x \in [a,b] : \omega_{f}(x) \ge \varepsilon\}$. It is closed in $\mathbb{R}$, being $[a,b] \cap G$ with $G$ closed and $[a,b]$ closed. [L4, L6]
 
-1.3 Claim 4. The set of continuity points of $f$ on the domain $[a,b]$ is $[a,b] \cap V$ for a $G_\delta$ subset $V \subseteq \mathbb{R}$. [L9]
+1.3 Claim 4. The set of continuity points of $f$ on the domain $[a,b]$ is $C=[a,b]\cap V$ for a $G_\delta$ subset $V\subseteq\mathbb{R}$. Write $V=\bigcap_n U_n$ with every $U_n$ open. Then $C=\bigcap_{n\in\mathbb{N}}(U_n\cap(a-1/(n+1),b+1/(n+1)))$: points of $[a,b]$ lie in every displayed interval, whereas a point outside $[a,b]$ is excluded for some $n$ by the reciprocal Archimedean property. Each intersectand is open, so $C$ is also $G_\delta$ in $\mathbb{R}$. [L6, L9, L10, algebra]
 
 1.4 Claim 3. Let $x \in [a,b]$ and let $\rho > 0$ be real. The set $[a,b] \cap N_{\rho}(x)$ contains a nondegenerate closed interval $[c,d]$ with $c < d$, because $a < b$: taking $c := \max\{a,\ x - \rho/2\}$ and $d := \min\{b,\ x + \rho/2\}$ gives $[c,d] \subseteq [a,b] \cap N_{\rho}(x)$ and $c < d$: if $x = a$ then $c = a$ and $d = \min\{b, a + \rho/2\} > a$; if $x = b$ then $d = b$ and $c = \max\{a, b - \rho/2\} < b$; and if $a < x < b$ then $c < x < d$. [L12]
 
@@ -116,9 +115,9 @@ since $C \subseteq [a,b]$.
 
 8.1 Hence $D_{\varepsilon}$ is nowhere dense: it is closed, so it equals its own closure, and its interior is empty, since an interior point would have a neighbourhood $N_{\rho}(x) \subseteq D_{\varepsilon}$ and then $[x - \rho/2,\ x + \rho/2]$ would be a nondegenerate closed interval inside $D_{\varepsilon}$. [step 1.2, step 7.1, L8, L12]
 
-9.1 Claim 2. $D = \bigcup_{n \in \mathbb{N}} D_{1/\iota(n+1)}$, and each $D_{1/\iota(n+1)}$ is nowhere dense by step 8.1, so $D$ is a union of a sequence of nowhere dense sets, that is, meager. [step 8.1, L8, L9, L10]
+9.1 Claim 2. $D = \bigcup_{n \in \mathbb{N}} D_{1/(n+1)}$, and each $D_{1/(n+1)}$ is nowhere dense by step 8.1, so $D$ is a union of a sequence of nowhere dense sets, that is, meager. [step 8.1, L8, L9, L10]
 
-10.1 Suppose $[c,d] \subseteq D$ with $c < d$ as in step 1.4. Then $[c,d]$ is covered by the sequence $(D_{1/\iota(n+1)})$ of closed sets, so by the interval form of Baire category some $D_{1/\iota(n+1)} \cap [c,d]$ contains a nondegenerate closed interval, contradicting step 7.1. So $[c,d] \not\subseteq D$, and any point of $[c,d] \setminus D$ is a point of $C$ inside $[a,b] \cap N_{\rho}(x)$. [step 7.1, step 9.1, step 1.4, L5, L6]
+10.1 Suppose $[c,d] \subseteq D$ with $c < d$ as in step 1.4. Then $[c,d]$ is covered by the sequence $(D_{1/(n+1)})$ of closed sets, so by the interval form of Baire category some $D_{1/(n+1)} \cap [c,d]$ contains a nondegenerate closed interval, contradicting step 7.1. So $[c,d] \not\subseteq D$, and any point of $[c,d] \setminus D$ is a point of $C$ inside $[a,b] \cap N_{\rho}(x)$. [step 7.1, step 9.1, step 1.4, L5, L6]
 
 11.1 Claims 1, 2, 3 and 4 are therefore proved: claim 1 by steps 1.2, 7.1 and 8.1, claim 2 by step 9.1, claim 3 by steps 1.4 and 10.1, and claim 4 by step 1.3. [step 8.1, step 9.1, step 1.3, step 10.1] ∎
 

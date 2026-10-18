@@ -1,0 +1,9 @@
+# Actual reading and construction limits
+
+Read the complete current 23 batch37 item bodies and both pages, review0/repair1/review1, all eight native deltas against the archived validated Step2 baseline, approved PA06 clause and retained complete spin-index construction direction. Exact before bindings and diff preserve these inputs. The six nonzero native defects are retained on their actual local arguments; this is a bounded owner reconciliation, not a fresh whole-library proof certification.
+
+The complete actual published orientation, signed top-form integral and Riemannian volume Definitions were read. They supply precisely an independent sign at each zero point, integral sum εf and zero-dimensional volume-form value ε versus unsigned density1. Their existing choice assumptions are covered by retained full AC. No published source changes are needed.
+
+No new external PDF was fetched or claimed read for this repair. Existing bibliography is retained, not converted into a new reading or fetch stamp. The repair is explicit finite-dimensional linear algebra using these canonical conventions. Earlier source reading recorded in spin-index/construction.md remains that earlier owner's historical evidence; it is not represented as new reading here.
+
+The reference line has ΓS=εI. Evaluation S tensor Hom(S,V)→V forces ΓW=εΓV, so ch(V/S)=ε sdim(V), while the actual zero Dirac index is sdim(V). Signed integration gives ε²sdim(V). For S tensor even E, W=E even; the index is sum ε rankE. Heat supertrace is a density: multiplication by vol_g=ε converts it to the matching top form. Positive-dimensional proofs, full arbitrary graded-module and arbitrary-twist scope, all inherited AC assumptions, no-boundary/compactness/finite-rank hypotheses and complex-index-only boundary are retained.

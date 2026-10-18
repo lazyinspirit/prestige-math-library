@@ -3,6 +3,7 @@ id: cex-a-tangent-intersection-whose-set-theoretic-intersection-is-not-of-the-ex
 kind: counterexample
 title: "A tangent intersection whose set-theoretic intersection is not of the expected dimension"
 status: published
+dependency_level: 5
 origin: session
 provenance:
   statement: ai-generated
@@ -16,8 +17,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/cex-a-tangent-intersection-whose-set-theoretic-intersection-is-not-of-the-expected-dimension.json
 sources:
   scraped: []
   references:

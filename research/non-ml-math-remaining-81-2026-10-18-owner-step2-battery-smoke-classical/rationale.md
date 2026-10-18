@@ -1,0 +1,30 @@
+# Classical finite-smoke repair proposal
+
+Scope: the eight classical rows in the actual first Step 2 battery failure assignment for `non-ml-math-remaining-81-2026-10-18`. This directory proposes changes only; no canonical item, contract or registry was changed. No native validator, production gate or global registry self-test was run.
+
+The eight existing check names remain unchanged. Their original assertions are authored paraphrases rather than exact source excerpts, which the registry requires. `row-patches.json` supplies exact excerpts, corrected actual proof-step locations and explicit finite restrictions. Each patch guards the whole existing finite_smoke value and records the current source raw SHA-256. Apply these only if the current value still equals its guard; retain unrelated contract metadata. The `check` name selects each fixed fixture; an optional `fixture` must equal that name. Unsupported `parameters` and conflicting selectors fail explicitly. The `finite_restriction` text documents the fixed model rather than accepting arbitrary caller-selected parameters.
+
+No mathematical counterexample or source gap was found in the local assertions inspected. This statement concerns the finite obligations and their local arguments, not independent recertification of entire proofs. Read fully: CLAUDE.md, README.md and SCHEMA.md; relevant WORKFLOW.md finite-smoke controls; all eight item carriers; LZ77 previous-match definition and LZ78 parser supplier. No external full-text inspection is claimed.
+
+| Check | Independent computation and mathematical scope |
+| --- | --- |
+| subprobability-reference-point-mass | Compute sum p_i log2(p_i/q_i), mass constraints, and the stronger natural-log lower bound 1-sum of q on positive p support. In particular p=(1),q=(1/2) gives one bit. Also test q mass one, equal weights, zero p coordinates, and t below/equal/above one for log(t)<=t-1. |
+| two-point-shannon-codes | Test the actual words (0,1) and (0,10) for prefix-freeness; derive codeword lengths, Kraft sums and expected lengths directly, then compare with entropy. Recompute ceiling Shannon lengths. Include singleton p=(1) with empty codeword as explicitly allowed by the item. |
+| symmetric-markov-block-entropy | Enumerate every word for n=1..10 and multiply original transition probabilities, then evaluate entropy by its finite sum. Compare with 1+(n-1)H2(t), entropy increments, and finite normalized remainder (1-H2(t))/n. The authored t=1/4 case remains; endpoints t=0,1 and IID t=1/2 detect zero-probability/log-zero conventions. These endpoints are stationary though not all ergodic; this theorem requires stationarity. |
+| iid-bernoulli-half-conditional-block | Enumerate full joint past/future binary laws, obtain past and prefix marginal masses by summing them, and compute conditional probabilities and successive conditional ratios. Verify the product of ratios equals the block conditional mass and normalized information equals one. k=0..4 and n=1..6. The quoted source assertion is its finite conditional factorization. Finite pasts do not certify the general infinite-past construction or convergence. |
+| singleton-source-recurrence | Compare sequence coordinates at positive offsets to find the first recurrence for n=1..64. Offset zero is excluded, giving R_n=1 rather than zero. Direct entropy of the one-atom law is zero. The source excerpt is its h=0 lower-tail boundary; the singleton specialization uses the actual source definition. No 1/h expression is evaluated or asserted. |
+| first-block-endpoints | Generate L_j=2^(2^j), add the actual coordinate entropies, and check (N,H)=(4,0),(20,16),(276,16), hence ratios 4/5 and 4/69. Independently enumerate all 65,536 positive-mass words in the sixteen fair coordinates and compute their joint entropy. Deterministic coordinates contribute only a single possible value. No enormous 2^276 zero-mass array or asymptotic shortcut. |
+| explicit-lz78-parse | Implement dictionary longest-prefix parsing and independent record decoding. Compare the supplied word's six phrases, six records and dictionary contents, then exhaust all 511 binary words of length 0..8. The final # record is mandatory and is never inserted, including empty input. This tests the record trace, not the separate Elias binary serialization. |
+| four-symbol-block-entropies | Enumerate 16 IID and 16 original Markov word masses; sum their entropy and compare against H4=4 and H4=1+3H2(1/4). Multiply pi by K to verify the chosen initial law is stationary. Expected values H4≈3.4338343733774 and H4/4≈0.85845859334435 are recomputed, not substituted. |
+
+The module uses ordinary double-precision logarithms with absolute/relative comparison tolerance 1e-10. Dyadic masses and integer lengths are exact in these bounds; logarithms are numerical. Checks are bounded falsification evidence and establish no asymptotic theorem, general measure-theoretic result or choice-free provenance.
+
+Integration: copy `finite-smoke-frontier81-classical.mjs` to `tools/`, import `frontier81ClassicalChecks` in `tools/finite-smoke.mjs`, and spread that map into its registry. There are no additional module dependencies. Apply guarded row replacements, then let the owner perform current-input binding and the authorized native scoped full battery after all escalations are resolved.
+
+Actual isolated verification command:
+
+```
+node research/non-ml-math-remaining-81-2026-10-18-owner-step2-battery-smoke-classical/isolated-tests.mjs
+```
+
+Exit code 0. `isolated-test-results.json` records eight passing finite computations, eight exact source/hash/current-row checks, twenty-four invalid-selector/shape rejections, eight supported explicit-selector calls, and eight deliberate implementation mutations detected. Mutation coverage includes invalid reference mass, a non-prefix code, an incorrect block-entropy index, omitted conditional normalization, wrong positive recurrence offset, incorrect super-exponential indexing, terminal dictionary insertion and wrong Markov transition. The tests load only this proposal module; they never invoke the production registry.

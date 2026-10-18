@@ -1,0 +1,1188 @@
+{
+  "version": 1,
+  "scope": [
+    "def-it-point-to-point-joint-source-channel-code",
+    "lem-it-finite-iid-source-lossless-code-achievability",
+    "lem-it-finite-iid-rate-distortion-mutual-information-bound",
+    "thm-it-point-to-point-lossless-source-channel-separation",
+    "thm-it-point-to-point-lossy-source-channel-separation",
+    "ex-it-point-to-point-source-channel-rate-budget",
+    "cex-it-asymptotic-source-channel-threshold-does-not-give-zero-error-at-finite-blocklength"
+  ],
+  "contracts": {
+    "def-it-point-to-point-joint-source-channel-code": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition has explicit nonempty finite alphabet hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition includes zero source/channel probabilities under the referenced finite-law conventions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits singleton alphabets and positive blocklengths k=n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition introduces no separate nondegeneracy hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition has no interval endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The maps and laws are supplied data; the Definition selects no arbitrary object."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "lem-it-finite-iid-source-lossless-code-achievability": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The finite-support self-information has mean H and variance sigma^2; the pointwise squared-deviation bound gives P[Zbar_k>H+delta] <= sigma^2/(k delta^2), hence the atypical probability tends to zero.",
+          "inputs": [
+            "A1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Every typical source word has probability at least exp(-k(H+delta)), so the typical set has size at most exp(k(H+delta)).",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Inject the typical set into M_k messages, map atypical words to a default message, and decode correctly on the typical set; the error is bounded by the atypical probability.",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "The ceiling contributes at most ln(2)/k to normalized log cardinality, so the limsup rate is at most H+delta<R.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires finite nonempty alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: Zero-probability letters are excluded from the information logarithm; their sequences have probability zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: For a singleton source alphabet H=0 and the code can use one message."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: If the source is deterministic, the finite-variance bound has sigma^2=0 and remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: The claim requires strict R>H; it makes no equality-rate claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The typical set and message set are finite; the injection is a finite construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "lem-it-finite-iid-rate-distortion-mutual-information-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-information-rate-distortion-function",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\widehat{\\mathcal X}$ be nonempty finite alphabets, let $p$ be a pmf on $\\mathcal X$, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,\\infty)$ be finite-valued. A test channel is a stochastic matrix $W(\\hat x\\mid x)$, and its expected single-letter distortion is $\\sum_{x,\\hat x}p(x)W(\\hat x\\mid x)d(x,\\hat x)$, with block distortion as in [[def-it-single-letter-distortion-and-block-distortion]]. Put $D_{\\min}=\\sum_xp(x)\\min_{\\hat x}d(x,\\hat x)$. Define, in bits,\n$$\nR_{p,d}(D):=\\begin{cases}\\displaystyle\\min_{W:\\,\\mathbb E d(X,\\hat X)\\le D} I(X;\\hat X),&D\\ge D_{\\min},\\\\[4pt]+\\infty,&D<D_{\\min}. \\end{cases}\n$$\nThe minimum exists by [[lem-it-finite-rate-distortion-minimum-attained]]. Values are not operational code rates; the finite memoryless coding theorem is a separate claim.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-it-finite-rate-distortion-minimum-attained",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X,\\widehat{\\mathcal X}$ be nonempty finite sets, let $p$ be a probability mass function on $\\mathcal X$, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,\\infty)$ be finite-valued. Put\n$$\nD_{\\min}:=\\sum_{x\\in\\mathcal X}p(x)\\min_{\\hat x\\in\\widehat{\\mathcal X}}d(x,\\hat x).\n$$\nFor every $D\\ge0$, the feasible stochastic channels $W(\\hat x\\mid x)$ satisfying $\\sum_{x,\\hat x}p(x)W(\\hat x\\mid x)d(x,\\hat x)\\le D$ form a nonempty set exactly when $D\\ge D_{\\min}$. Whenever nonempty, mutual information in bits attains its minimum over this set.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-single-letter-distortion-and-block-distortion",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ and $(\\widehat{\\mathcal X},\\widehat{\\mathcal A})$ be measurable spaces, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,+\\infty]$ be a measurable single-letter distortion. For a positive integer $n$, define the normalized additive block distortion by\n\n$$d_n(x^n,\\widehat x^n):=\\frac1n\\sum_{i=0}^{n-1}d(x_i,\\widehat x_i).$$\n\nWhen the alphabets are finite and $d$ is finite-valued, define $d_{\\max}:=\\max_{x,\\widehat x}d(x,\\widehat x)$. Expected distortion is $\\mathbb E d_n(X^n,\\widehat X^n)$; the excess-distortion probability at threshold $D$ is $\\mathbb P(d_n(X^n,\\widehat X^n)>D)$. These are distinct criteria: one is an expectation and the other is a tail probability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$,\n\n$$I(X;Y|Z)=H(X|Z)+H(Y|Z)-H(X,Y|Z)\\ge0.$$\n\nEquality holds if and only if, for every $z$ with $p_Z(z)>0$, the conditional joint pmf factors as $p_{XY|z}=p_{X|z}p_{Y|z}$; this is conditional independence given $Z$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-information-unit-conversion",
+          "source_section": "Statement",
+          "quote": "For any $b>1$, define each base-$b$ finite information quantity by replacing $\\ln$ with $\\log_b$ in its defining finite formula. Then\n\n$$H_b(p)=\\frac{H(p)}{\\ln b},\\qquad D_b(p\\|q)=\\frac{D(p\\|q)}{\\ln b},$$\n\nwhere the second equality is in $[0,+\\infty]$ and $+\\infty/\\ln b:=+\\infty$. The same conversion holds for finite conditional entropy, mutual information, and conditional mutual information. In particular, values in bits equal nats divided by $\\ln2$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Uniform time-sharing produces a finite test channel with source marginal P_S and expected distortion D_k.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "The IID mutual-information chain rule and nonnegative conditional mutual information show I(S^k;S-hat^k) >= sum_i I(S_i;S-hat_i).",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Time-sharing and nonnegative conditional mutual information bound the single-letter mutual information by the block value; feasibility and base conversion give ln(2)R(D_k) <= k^{-1}I_nats(S^k;S-hat^k).",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires finite nonempty alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: Zero-probability source letters receive arbitrary channel rows and contribute no mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: The argument includes k=1 and singleton source or reproduction alphabets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: Deterministic source/reconstruction laws are covered by the finite conditional-law construction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: The realized D_k is feasible by the constructed test channel, including D_k=D_min."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: Conditional rows are chosen on finite positive-support sets; zero-mass rows may be any fixed finite probability vector."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "thm-it-point-to-point-lossless-source-channel-separation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-point-to-point-joint-source-channel-code",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal S,\\mathcal X,\\mathcal Y,\\widehat{\\mathcal S}$ be nonempty finite alphabets, let $P_S$ be a probability vector on $\\mathcal S$, and let $W$ be a finite discrete memoryless channel from $\\mathcal X$ to $\\mathcal Y$ as in [[def-discrete-memoryless-channel]]. For positive integers $k,n$, a deterministic **$(k,n)$ joint source-channel code** is a pair of maps\n$$f_k:\\mathcal S^k\\to\\mathcal X^n,\\qquad g_k:\\mathcal Y^n\\to\\widehat{\\mathcal S}^{\\,k}.$$\nThe source block has law $P_S^{\\otimes k}$, the channel output conditional on input $x^n$ has law $W^n(\\cdot\\mid x^n)$, and the reproduction is $\\widehat S^k=g_k(Y^n)$. The code has no feedback.\n\nA **code sequence at channel-use ratio $\\rho$** consists of such codes with source lengths $k\\to\\infty$, channel lengths $n_k$, and $n_k/k\\to\\rho\\in(0,\\infty)$. In the lossless case $\\widehat{\\mathcal S}=\\mathcal S$, its block error is $\\Pr[\\widehat S^k\\ne S^k]$. In the lossy case, for finite nonnegative single-letter distortion $d$, its normalized block distortion is $d_k$ from [[def-it-single-letter-distortion-and-block-distortion]]; expected distortion and the positive-slack excess-distortion probabilities $\\Pr[d_k>D+\\varepsilon]$ for every $\\varepsilon>0$ are distinct criteria.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discrete-memoryless-channel-information-capacity",
+          "source_section": "Definition",
+          "quote": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this joint law, using [[def-it-finite-mutual-information]]. The **single-letter information capacity** is\n$$C(W):=\\sup_{P_X} I(P_X;W),$$\nmeasured in nats per channel use. The finite-dimensional maximum is attained, as proved in [[lem-discrete-memoryless-channel-capacity-is-attained]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-memoryless-channel-operational-capacity",
+          "source_section": "Definition",
+          "quote": "A rate $R\\ge0$ is **average-error achievable** for $W$ if there are length-$n$ codes for all sufficiently large $n$ with\n$$\\liminf_{n\\to\\infty}\\frac{\\ln M_n}{n}\\ge R,\\qquad \\varepsilon_{\\rm av}(n)\\longrightarrow0.$$\nIt is **maximal-error achievable** if the same condition holds with $\\varepsilon_{\\max}(n)\\to0$. Define $C_{\\rm av}(W)$ and $C_{\\max}(W)$ as the suprema of the respective achievable-rate sets. Rates use nats per channel use.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-discrete-memoryless-channel-capacity-formula",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$ with no input-cost constraint,\n$$C_{\\rm av}(W)=C_{\\max}(W)=C(W)=\\max_{P_X}I(P_X;W),$$\nwith rates and mutual information measured in nats per channel use.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-finite-iid-source-lossless-code-achievability",
+          "source_section": "Statement",
+          "quote": "Let $P_S$ be a probability vector on a finite nonempty alphabet $\\mathcal S$, and define its entropy in nats by\n\n$$H(P_S):=-\\sum_{s:P_S(s)>0}P_S(s)\\ln P_S(s).$$\n\nFor every $R>H(P_S)$, there are deterministic fixed-length codes $f_k:\\mathcal S^k\\to[M_k]$, $g_k:[M_k]\\to\\mathcal S^k$ for the IID source $P_S^{\\otimes k}$ such that $\\Pr[g_k(f_k(S^k))\\ne S^k]\\to0$ and $\\limsup_{k\\to\\infty}k^{-1}\\ln M_k<R$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-discrete-memoryless-channel-n-letter-information-bound",
+          "source_section": "Statement",
+          "quote": "For every input probability vector on $\\mathcal X^n$ and output $Y^n$ generated by a finite DMC $W^n$, one has $I(X^n;Y^n)\\le nC(W)$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-fano-inequality",
+          "source_section": "Statement",
+          "quote": "Let $X$ take values in an alphabet $\\mathcal X$ of size $m\\ge2$, let $Y$ be finite, and let $\\widehat X$ be an estimator in the same alphabet generated from $Y$, so the joint pmf factors as $p_{XY\\widehat X}=p_{XY}p_{\\widehat X|Y}$. Put $P_e=\\mathbb P[\\widehat X\\ne X]$ and define\n\n$$h_2(t):=-t\\ln t-(1-t)\\ln(1-t),\\qquad 0\\ln0:=0.$$\n\nThen\n\n$$H(X|Y)\\le h_2(P_e)+P_e\\ln(m-1)\\le \\ln2+P_e\\ln m.$$\n\nFor $m=1$, $X$ is constant and $H(X|Y)=0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-it-finite-markov-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $X,Y,Z$ have a joint pmf on finite alphabets and suppose that, for every $y$ with $p_Y(y)>0$,\n\n$$p_{XZ|y}(x,z)=p_{X|y}(x)p_{Z|y}(z).$$\n\nThis is the finite Markov condition $X\\to Y\\to Z$. Then\n\n$$I(X;Z)\\le I(X;Y),$$\n\nwith equality if and only if $I(X;Y|Z)=0$, equivalently $X$ and $Y$ are conditionally independent given every positive-mass value of $Z$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "A zero-entropy finite source is almost surely constant, so constant encoder/decoder maps give a zero-error code even if C(W)=0.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "A typical-set source code at rate H+eta has vanishing error and a strict rate margin below rho C.",
+          "inputs": [
+            "A1",
+            "F4",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The maximal-error capacity supremum supplies channel codes at a rate above the source-index rate; restricting to M_k messages preserves correct-decoding events and cannot increase maximal error.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Composition errors are contained in source compression error or channel message error, whose probabilities both vanish; maximal error controls the nonuniform index law.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "Data processing, deterministic encoding, the n-letter bound, Fano, and IID entropy give kH <= nC+ln(2)+p_k k ln|S|; divide by k and take limits.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "The separate zero-entropy case and strict-rate construction combine with the converse; the positive-entropy equality boundary is left unasserted.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires finite nonempty alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: The H=0 source is handled separately by a zero-error constant code."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: Singleton source alphabets are included in the H=0 branch; all k,n_k are positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: Zero channel capacity is covered when H=0; for H>0 it cannot satisfy the strict achievability condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: Strict H<rho C gives achievability and H>rho C is impossible; positive-entropy equality is not claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: All codebooks, message sets, and source alphabets are finite; no arbitrary choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "thm-it-point-to-point-lossy-source-channel-separation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-information-rate-distortion-function",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\widehat{\\mathcal X}$ be nonempty finite alphabets, let $p$ be a pmf on $\\mathcal X$, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,\\infty)$ be finite-valued. A test channel is a stochastic matrix $W(\\hat x\\mid x)$, and its expected single-letter distortion is $\\sum_{x,\\hat x}p(x)W(\\hat x\\mid x)d(x,\\hat x)$, with block distortion as in [[def-it-single-letter-distortion-and-block-distortion]]. Put $D_{\\min}=\\sum_xp(x)\\min_{\\hat x}d(x,\\hat x)$. Define, in bits,\n$$\nR_{p,d}(D):=\\begin{cases}\\displaystyle\\min_{W:\\,\\mathbb E d(X,\\hat X)\\le D} I(X;\\hat X),&D\\ge D_{\\min},\\\\[4pt]+\\infty,&D<D_{\\min}. \\end{cases}\n$$\nThe minimum exists by [[lem-it-finite-rate-distortion-minimum-attained]]. Values are not operational code rates; the finite memoryless coding theorem is a separate claim.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-it-finite-rate-distortion-minimum-attained",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal X,\\widehat{\\mathcal X}$ be nonempty finite sets, let $p$ be a probability mass function on $\\mathcal X$, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,\\infty)$ be finite-valued. Put\n$$\nD_{\\min}:=\\sum_{x\\in\\mathcal X}p(x)\\min_{\\hat x\\in\\widehat{\\mathcal X}}d(x,\\hat x).\n$$\nFor every $D\\ge0$, the feasible stochastic channels $W(\\hat x\\mid x)$ satisfying $\\sum_{x,\\hat x}p(x)W(\\hat x\\mid x)d(x,\\hat x)\\le D$ form a nonempty set exactly when $D\\ge D_{\\min}$. Whenever nonempty, mutual information in bits attains its minimum over this set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-operational-rate-distortion-function",
+          "source_section": "Definition",
+          "quote": "Let $X_0,X_1,\\ldots$ be a source over a finite alphabet $\\mathcal X$, let $\\widehat{\\mathcal X}$ be finite, and let $d$ be finite-valued. An $n$-block fixed-length code with $M_n$ messages is a deterministic encoder $f_n:\\mathcal X^n\\to[M_n]$ and decoder $g_n:[M_n]\\to\\widehat{\\mathcal X}^{\\,n}$; its reconstruction is $\\widehat X^n=g_n(f_n(X^n))$, its block distortion is [[def-it-single-letter-distortion-and-block-distortion]], and its rate is $n^{-1}\\log_2M_n$ bits per source symbol.\n\nDefine the expected-distortion operational rate $R_{\\mathrm{op}}^{\\mathrm{avg}}(D)$ as the infimum of $\\limsup_n n^{-1}\\log_2M_n$ over code sequences satisfying $\\limsup_n\\mathbb E d_n(X^n,\\widehat X^n)\\le D$. Define the positive-slack excess-distortion operational rate $R_{\\mathrm{op}}^{\\mathrm{slack}}(D)$ by the same rate infimum over code sequences satisfying\n\n$$\\text{for every }\\varepsilon>0,\\qquad \\mathbb P\\!\\left(d_n(X^n,\\widehat X^n)>D+\\varepsilon\\right)\\longrightarrow0.$$\n\nThe expected and positive-slack excess criteria are separate definitions. An exact-threshold condition $\\mathbb P(d_n>D)\\to0$ is not part of either definition.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-alphabet-rate-distortion-coding-theorem",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\ge0}$ be iid with a pmf on a finite nonempty alphabet $\\mathcal X$, let $\\widehat{\\mathcal X}$ be finite nonempty, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be finite nonnegative distortion. For every $D\\ge0$, the expected-distortion and positive-slack excess-distortion operational rates of [[def-it-operational-rate-distortion-function]] both equal the finite information rate-distortion function of [[def-it-information-rate-distortion-function]], with value $+\\infty$ when $D<D_{\\min}$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-memoryless-channel-operational-capacity",
+          "source_section": "Definition",
+          "quote": "A rate $R\\ge0$ is **average-error achievable** for $W$ if there are length-$n$ codes for all sufficiently large $n$ with\n$$\\liminf_{n\\to\\infty}\\frac{\\ln M_n}{n}\\ge R,\\qquad \\varepsilon_{\\rm av}(n)\\longrightarrow0.$$\nIt is **maximal-error achievable** if the same condition holds with $\\varepsilon_{\\max}(n)\\to0$. Define $C_{\\rm av}(W)$ and $C_{\\max}(W)$ as the suprema of the respective achievable-rate sets. Rates use nats per channel use.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fixed-length-channel-code",
+          "source_section": "Definition",
+          "quote": "For a finite DMC $W$, a **length-$n$ code with $M$ messages** is a pair of maps $e:[M]\\to\\mathcal X^n$ and $d:\\mathcal Y^n\\to[M]$, where $n,M\\ge1$ and $[M]:=\\{1,\\ldots,M\\}$. A message $m$ is encoded as $e(m)$, passed through the block kernel $W^n$ of [[def-discrete-memoryless-channel]], and decoded as $d(Y^n)$. The encoder and decoder are deterministic; there is no feedback, and no input-cost constraint is imposed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fixed-length-channel-code-errors",
+          "source_section": "Definition",
+          "quote": "For a length-$n$ code $(e,d)$, let\n$$e_m:=W^n\\{y^n:d(y^n)\\ne m\\mid e(m)\\}.$$\nIts **average error** is $\\varepsilon_{\\rm av}:=M^{-1}\\sum_{m=1}^M e_m$, corresponding to a uniform message, and its **maximal error** is $\\varepsilon_{\\max}:=\\max_{1\\le m\\le M}e_m$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-discrete-memoryless-channel-capacity-formula",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$ with no input-cost constraint,\n$$C_{\\rm av}(W)=C_{\\max}(W)=C(W)=\\max_{P_X}I(P_X;W),$$\nwith rates and mutual information measured in nats per channel use.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-finite-iid-rate-distortion-mutual-information-bound",
+          "source_section": "Statement",
+          "quote": "Let $S_1,\\ldots,S_k$ be IID with law $P_S$ on a finite nonempty alphabet $\\mathcal S$, let $\\widehat{\\mathcal S}$ be finite nonempty, and let $d:\\mathcal S\\times\\widehat{\\mathcal S}\\to[0,\\infty)$ be finite-valued. For any joint law of $S^k$ and $\\widehat S^k$, put $D_k:=\\mathbb E d_k(S^k,\\widehat S^k)$, using the normalized block distortion of [[def-it-single-letter-distortion-and-block-distortion]]. If $R(D)$ is the finite-alphabet information rate-distortion function in bits from [[def-it-information-rate-distortion-function]], then\n\n$$\\ln2\\,R(D_k)\\le\\frac1k I(S^k;\\widehat S^k),$$\n\nwhere mutual information on the right is in nats. The test channel induced by the joint law is feasible at distortion $D_k$, so the rate-distortion minimum is attained there by [[lem-it-finite-rate-distortion-minimum-attained]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-it-rate-distortion-convexity-and-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let the source and reproduction alphabets be finite nonempty sets and let the distortion be finite-valued and nonnegative. The finite-alphabet information rate-distortion function $R(D)$ of [[def-it-information-rate-distortion-function]] is finite and nonincreasing on $[D_{\\min},\\infty)$, convex there, zero for $D\\ge D_{\\rm c}:=\\min_{\\hat x}\\mathbb E d(X,\\hat x)$, and right-continuous at every feasible distortion, including $D_{\\min}$.",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-discrete-memoryless-channel-n-letter-information-bound",
+          "source_section": "Statement",
+          "quote": "For every input probability vector on $\\mathcal X^n$ and output $Y^n$ generated by a finite DMC $W^n$, one has $I(X^n;Y^n)\\le nC(W)$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-it-finite-markov-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $X,Y,Z$ have a joint pmf on finite alphabets and suppose that, for every $y$ with $p_Y(y)>0$,\n\n$$p_{XZ|y}(x,z)=p_{X|y}(x)p_{Z|y}(z).$$\n\nThis is the finite Markov condition $X\\to Y\\to Z$. Then\n\n$$I(X;Z)\\le I(X;Y),$$\n\nwith equality if and only if $I(X;Y|Z)=0$, equivalently $X$ and $Y$ are conditionally independent given every positive-mass value of $Z$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-it-information-unit-conversion",
+          "source_section": "Statement",
+          "quote": "For any $b>1$, define each base-$b$ finite information quantity by replacing $\\ln$ with $\\log_b$ in its defining finite formula. Then\n\n$$H_b(p)=\\frac{H(p)}{\\ln b},\\qquad D_b(p\\|q)=\\frac{D(p\\|q)}{\\ln b},$$\n\nwhere the second equality is in $[0,+\\infty]$ and $+\\infty/\\ln b:=+\\infty$. The same conversion holds for finite conditional entropy, mutual information, and conditional mutual information. In particular, values in bits equal nats divided by $\\ln2$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-it-single-letter-distortion-and-block-distortion",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A)$ and $(\\widehat{\\mathcal X},\\widehat{\\mathcal A})$ be measurable spaces, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,+\\infty]$ be a measurable single-letter distortion. For a positive integer $n$, define the normalized additive block distortion by\n\n$$d_n(x^n,\\widehat x^n):=\\frac1n\\sum_{i=0}^{n-1}d(x_i,\\widehat x_i).$$\n\nWhen the alphabets are finite and $d$ is finite-valued, define $d_{\\max}:=\\max_{x,\\widehat x}d(x,\\widehat x)$. Expected distortion is $\\mathbb E d_n(X^n,\\widehat X^n)$; the excess-distortion probability at threshold $D$ is $\\mathbb P(d_n(X^n,\\widehat X^n)>D)$. These are distinct criteria: one is an expectation and the other is a tail probability.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "An attained zero-information test channel factors as a product law; some constant reproduction in its finite mixture has distortion at most D, and its IID distortion tail vanishes by the explicit variance bound.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F8",
+            "F9",
+            "given",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Choose a source-code rate within eta bits of R(D); conversion to nats and n_k/k -> rho place its index rate strictly below Rc.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F9",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "A maximal-error code exists above Rc by the capacity supremum, and restricting it to M_k messages preserves correct events; its average error remains bounded by maximal error for any nonuniform source index.",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "On channel success the source reconstruction is unchanged; d_max bounds expected distortion on channel errors, while excess probability is bounded by source excess probability plus channel error.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "Single-letter rate-distortion mutual-information bound, Markov data processing, and the n-letter DMC bound yield r(D_k) <= (n_k/k)C(W).",
+          "inputs": [
+            "A1",
+            "F4",
+            "F6",
+            "F7",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "Expected distortion eventually lies below D+epsilon; monotonicity and right-continuity pass the block information bound to r(D) <= rho C.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-2",
+          "step": "3.2",
+          "claim": "Bounded distortion and the positive-slack excess criterion imply expected distortion is eventually at most D+epsilon; apply the same monotonicity/continuity argument.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.3",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "The zero-rate construction, strict-rate achievability, and expected/excess converses prove the claims while leaving positive-rate equality open.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "step 2.2",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires finite nonempty alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: R(D)=0 is handled by an attained independent test channel and constant reproduction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: Singleton source and reproduction alphabets are covered by the finite formulas."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: The zero-distortion/zero-capacity cases are handled when R(D)=0; d_max=0 is included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: D=D_min is allowed by attainment and right-continuity; positive-rate r(D)=rho C equality is not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: All conditional laws and reproductions are selected from finite sets; no arbitrary choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "ex-it-point-to-point-source-channel-rate-budget": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel-information-capacity",
+          "source_section": "Definition",
+          "quote": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this joint law, using [[def-it-finite-mutual-information]]. The **single-letter information capacity** is\n$$C(W):=\\sup_{P_X} I(P_X;W),$$\nmeasured in nats per channel use. The finite-dimensional maximum is attained, as proved in [[lem-discrete-memoryless-channel-capacity-is-attained]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-discrete-memoryless-channel-capacity-formula",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$ with no input-cost constraint,\n$$C_{\\rm av}(W)=C_{\\max}(W)=C(W)=\\max_{P_X}I(P_X;W),$$\nwith rates and mutual information measured in nats per channel use.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-point-to-point-lossless-source-channel-separation",
+          "source_section": "Statement",
+          "quote": "Let $S_1,S_2,\\ldots$ be IID with probability vector $P_S$ on a finite nonempty alphabet $\\mathcal S$, and let $W$ be a finite DMC with capacity $C(W)$ in nats per channel use. Write $H(P_S):=-\\sum_{s:P_S(s)>0}P_S(s)\\ln P_S(s)$ for source entropy in nats. Fix positive integers $n_k$ with $n_k/k\\to\\rho\\in(0,\\infty)$. A deterministic $(k,n_k)$ joint code is as in [[def-it-point-to-point-joint-source-channel-code]]. If $H(P_S)=0$, a zero-error code sequence exists for every such $W$. If $H(P_S)<\\rho C(W)$, there are codes with block error tending to zero. Conversely, every code sequence with block error tending to zero satisfies $H(P_S)\\le\\rho C(W)$. Thus strict violation $H(P_S)>\\rho C(W)$ rules out reliable transmission; the positive-entropy equality boundary is not asserted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "For Bernoulli(r) input, the BSC output is Bernoulli(q=1/4+r/2), so I(X;Y)=h(q)-h(1/4).",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The binary entropy is maximized at q=1/2 by KL nonnegativity; r=1/2 attains it, giving exact C and source entropy in nats.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The exact gap 5C-H=(9/2)ln3-7ln2 is positive because 3^9>2^14; the lossless theorem then supplies asymptotic reliability.",
+          "inputs": [
+            "A1",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires finite nonempty alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: The displayed Bernoulli probabilities are strictly between zero and one; zero-mass entropy convention is stated for completeness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: Both alphabets have exactly two symbols."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: The chosen source and BSC are nondegenerate interior cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses fixed parameter 1/4 and strict rate headroom; it makes no equality claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The capacity maximizer r=1/2 is an explicit finite distribution."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        }
+      ]
+    },
+    "cex-it-asymptotic-source-channel-threshold-does-not-give-zero-error-at-finite-blocklength": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discrete-memoryless-channel-information-capacity",
+          "source_section": "Definition",
+          "quote": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this joint law, using [[def-it-finite-mutual-information]]. The **single-letter information capacity** is\n$$C(W):=\\sup_{P_X} I(P_X;W),$$\nmeasured in nats per channel use. The finite-dimensional maximum is attained, as proved in [[lem-discrete-memoryless-channel-capacity-is-attained]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-discrete-memoryless-channel-capacity-formula",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$ with no input-cost constraint,\n$$C_{\\rm av}(W)=C_{\\max}(W)=C(W)=\\max_{P_X}I(P_X;W),$$\nwith rates and mutual information measured in nats per channel use.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-point-to-point-lossless-source-channel-separation",
+          "source_section": "Statement",
+          "quote": "Let $S_1,S_2,\\ldots$ be IID with probability vector $P_S$ on a finite nonempty alphabet $\\mathcal S$, and let $W$ be a finite DMC with capacity $C(W)$ in nats per channel use. Write $H(P_S):=-\\sum_{s:P_S(s)>0}P_S(s)\\ln P_S(s)$ for source entropy in nats. Fix positive integers $n_k$ with $n_k/k\\to\\rho\\in(0,\\infty)$. A deterministic $(k,n_k)$ joint code is as in [[def-it-point-to-point-joint-source-channel-code]]. If $H(P_S)=0$, a zero-error code sequence exists for every such $W$. If $H(P_S)<\\rho C(W)$, there are codes with block error tending to zero. Conversely, every code sequence with block error tending to zero satisfies $H(P_S)\\le\\rho C(W)$. Thus strict violation $H(P_S)>\\rho C(W)$ rules out reliable transmission; the positive-entropy equality boundary is not asserted.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Uniform-bit source entropy is ln(2); BSC(1/4) capacity is ln(2)-h(1/4)=3/4 ln(3)-ln(2).",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "At rho=6 the exact gap is (9/2)ln(3)-7ln(2)>0 because 3^9>2^14; the source-channel theorem therefore gives asymptotic reliability.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "For any finite deterministic code choose an output word and a different source word from the decoder output; the uniform source and full-support BSC give that error event positive probability.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The example satisfies the strict asymptotic threshold but has positive error for every finite code, refuting the finite-block zero-error assertion.",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires finite nonempty alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: Every BSC transition probability is 1/4 or 3/4, so the full-support argument has no zero-transition exception."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: For every k>=1 the source has at least two positive-probability words, so the alternate decoded word exists."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The chosen source and channel are nondegenerate; the example makes no claim about noiseless channels."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: The model uses interior crossover 1/4 and strict asymptotic headroom."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The output word is arbitrary and a different source word exists in a finite set of size at least two."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The item is not an if-and-only-if statement."
+        }
+      ]
+    }
+  }
+}

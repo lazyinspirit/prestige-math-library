@@ -1,0 +1,65 @@
+{
+  "purpose": "Actual rules analysis only; no gate/validator was executed.",
+  "current_source_guards": [
+    {
+      "path": "tools/depcheck.mjs",
+      "raw_sha256": "65e645f1088b8893592a8f82f494a7cccef53a75d987c1a8a375f45c5e5f1b2a"
+    },
+    {
+      "path": "tools/fwdcheck.mjs",
+      "raw_sha256": "4f2b8b432193eaa310c4cf4efe700200c7c9c298718f9a1d6856fd9faecf72bf"
+    },
+    {
+      "path": "tools/validate-plan.mjs",
+      "raw_sha256": "a0e429e4b62f80297cc0c94ce3661c8d63cc1a8490a61732ee642d70093076cb"
+    },
+    {
+      "path": "SCHEMA.md",
+      "raw_sha256": "715163e6c3a45e24725d7e2aca38b6c8bf492cafef9300e931698f1b2249f289"
+    }
+  ],
+  "proposal": "Intentionally unhomed, fully proved draft outside prerequisite, retaining selected81pairs/162pages and original frozenStep3/4 inventories.",
+  "findings": [
+    {
+      "tool": "SCHEMA.md",
+      "locations": [
+        "Items",
+        "Pages and categories"
+      ],
+      "actual_rule": "Item status may be draft. Published page may list only published items. A published item without a page draws a warning. No blanket draft-item home requirement stated.",
+      "consequence": "Do not place this new draft on the published Serre page or create a new A/B page. An intentionally unhomed draft item is compatible with these source rules."
+    },
+    {
+      "tool": "tools/depcheck.mjs",
+      "locations": [
+        "lines257\u2013278",
+        "lines280\u2013341",
+        "lines507\u2013525"
+      ],
+      "actual_rule": "Resolution and actual item graph use all canonical items, whether homed or draft. Orphan warning condition explicitly tests status===published. Draft-on-published-page is separate and only fires for a listed draft. Page edges require a truthy target home. No rule prohibits a published item from depending on a proved draft item.",
+      "consequence": "New helper would resolve as a normal proved local supplier and remain in actual item-level cycle/prerequisite checks. It creates no new page edge and no draft-on-published-page violation while unlisted."
+    },
+    {
+      "tool": "tools/fwdcheck.mjs",
+      "locations": [
+        "line184",
+        "line185",
+        "lines268\u2013280"
+      ],
+      "actual_rule": "homeOf is actualHome or plannedHome, and absent page order is Infinity. Resolved links whose target has no home explicitly continue without forward error. For the unhomed helper, all current homed prerequisites have finite earlier order.",
+      "consequence": "No fabricated forward_refs or fake planned home is needed. Actual item dependency and forward-cycle checks still retain logical edges."
+    },
+    {
+      "tool": "tools/validate-plan.mjs",
+      "locations": [
+        "lines147\u2013173",
+        "lines257\u2013280",
+        "lines286\u2013325",
+        "lines404\u2013462"
+      ],
+      "actual_rule": "Existing canonical items include both published and drafted items. Planned deps resolving to existing items are accepted. Existing unhomed dep diagnostic is warn(orphan), not err. Scoped prerequisite context recursively loads actual authored deps, detects unknown targets/open-problem use and actual item SCCs; page edges are added only when a home exists.",
+      "consequence": "The proposed proved outside draft prerequisite does not require new planned page/item enrollment merely for ordinary content resolution. A warning may be emitted where the direct planned-dep orphan branch encounters it; that is not an error waiver. Ordinary current provenance and owner acceptance remain due."
+    }
+  ],
+  "limits": "This is a narrow actual code-reading conclusion, not a claim of passing current gates, stage certification or automatic helper-authorship provenance. Root must record the real current outside prerequisite authorship and choose the valid owner/native repair protocol. No baseline inventory or original native reader output may be altered."
+}

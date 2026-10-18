@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "scope": "classical eight finite-smoke rows only",
+  "patches": [
+    {
+      "id": "lem-finite-kl-nonnegative-choice-free",
+      "contract": "research/non-ml-math-remaining-81-2026-10-18-batch-10.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-finite-kl-nonnegative-choice-free",
+        "finite_smoke"
+      ],
+      "guard": {
+        "equals": [
+          {
+            "check": "subprobability-reference-point-mass",
+            "asserts": "For p=(1) and q=(1/2), the bit divergence sum is log2(2)=1\u22650 and the reference mass is 1/2\u22641.",
+            "claim": "The finite inequality includes strictly subprobability reference weights.",
+            "checked_in": "Proof steps 1.1\u20131.2"
+          }
+        ]
+      },
+      "replacement": [
+        {
+          "check": "subprobability-reference-point-mass",
+          "asserts": "Apply step 1.1 to $t=q_i/p_i$ for every $i$ with $p_i>0$. Then $$\\sum_{i:p_i>0}p_i\\ln(p_i/q_i)=-\\sum_{i:p_i>0}p_i\\ln(q_i/p_i)\\ge\\sum_{i:p_i>0}(p_i-q_i)=1-\\sum_{i:p_i>0}q_i\\ge0.$$ Dividing by $\\ln2>0$ gives the same nonnegativity for the bit-log sum. Thus finite KL nonnegativity against a subprobability reference, as well as the logarithm inequality used to prove it, follows from finite sums and elementary integral bounds; no choice axiom enters.",
+          "claim": "The finite inequality includes strictly subprobability reference weights.",
+          "checked_in": "Proof step 2.1",
+          "finite_restriction": "Fixed p/q fixtures (1)/(1/2), (1)/(1), (1,0)/(1/2,1/2), (1/2,1/2)/(1/4,1/4), (3/4,1/4)/(1/2,1/2); positive-on-support references, total reference mass <=1; t in {1/8,1/2,1,2,8}."
+        }
+      ],
+      "source": "items/lem-finite-kl-nonnegative-choice-free.md",
+      "source_raw_sha256": "4e508adc8c094b2ba56150ac5867227c4bcfdbd4859ebf598eef3234625e1958",
+      "reason": "Preserve check name and intended finite obligation; replace paraphrase with exact current source assertion and state fixed finite restriction. No mathematical item change."
+    },
+    {
+      "id": "lem-prefix-code-entropy-bounds",
+      "contract": "research/non-ml-math-remaining-81-2026-10-18-batch-10.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-prefix-code-entropy-bounds",
+        "finite_smoke"
+      ],
+      "guard": {
+        "equals": [
+          {
+            "check": "two-point-shannon-codes",
+            "asserts": "For p=(1/2,1/2), lengths (1,1) give H2=1 and mean 1. For p=(3/4,1/4), lengths (1,2) have mean 5/4 and Kraft sum 3/4.",
+            "claim": "Finite Kraft and expected-length calculations.",
+            "checked_in": "Proof steps 1.1\u20131.3"
+          }
+        ]
+      },
+      "replacement": [
+        {
+          "check": "two-point-shannon-codes",
+          "asserts": "Assume now that the support has at least two points. Then every positive $p(x)<1$, so $\\ell(x)=\\lceil-\\log_2p(x)\\rceil$ is a positive integer. It satisfies $\\sum_x2^{-\\ell(x)}\\le\\sum_xp(x)=1$, so the finite binary Kraft criterion gives a prefix code. Also $\\ell(x)<-\\log_2p(x)+1$, hence its expected length is less than $H(p)+1$.",
+          "claim": "Finite Kraft and expected-length calculations.",
+          "checked_in": "Proof steps 1.1, 2.1, 3.1",
+          "finite_restriction": "Fixed binary words (0,1) and (0,10), with p=(1/2,1/2) and (3/4,1/4), respectively; singleton p=(1), empty codeword; finite Kraft/entropy only."
+        }
+      ],
+      "source": "items/lem-prefix-code-entropy-bounds.md",
+      "source_raw_sha256": "c941f5c9488ce642b5a7f57bf4ea2dc5ca8612eabc38ed41cc7ef7833b9451c4",
+      "reason": "Preserve check name and intended finite obligation; replace paraphrase with exact current source assertion and state fixed finite restriction. No mathematical item change."
+    },
+    {
+      "id": "thm-stationary-entropy-rate-limit",
+      "contract": "research/non-ml-math-remaining-81-2026-10-18-batch-10.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-stationary-entropy-rate-limit",
+        "finite_smoke"
+      ],
+      "guard": {
+        "equals": [
+          {
+            "check": "symmetric-markov-block-entropy",
+            "asserts": "For stationary symmetric transitions with switch probability 1/4, Hn=1+(n-1)H2(1/4), so Hn/n tends to H2(1/4).",
+            "claim": "Finite block-entropy identity; the general limit follows from the proof.",
+            "checked_in": "Proof steps 1.1\u20131.3"
+          }
+        ]
+      },
+      "replacement": [
+        {
+          "check": "symmetric-markov-block-entropy",
+          "asserts": "For each $k\\ge0$, put $a_k=H(X_0\\mid X_{-k}^{-1})$, with $a_0=H(X_0)$ for the empty past. By the conditioning monotonicity in",
+          "claim": "Finite block-entropy identity; the general limit follows from the proof.",
+          "checked_in": "Proof step 3.1",
+          "finite_restriction": "Stationary symmetric binary Markov laws, uniform initial marginal; switch probabilities 0,1/4,1/2,1 and n=1..10; enumerate all 2^n words. Check finite remainder, not asymptotic convergence."
+        }
+      ],
+      "source": "items/thm-stationary-entropy-rate-limit.md",
+      "source_raw_sha256": "ccebbc6f666cd97ba5330c346399f2b76bce70e88cf5a3521981968917da9da7",
+      "reason": "Preserve check name and intended finite obligation; replace paraphrase with exact current source assertion and state fixed finite restriction. No mathematical item change."
+    },
+    {
+      "id": "lem-infinite-past-conditional-block-information-rate",
+      "contract": "research/non-ml-math-remaining-81-2026-10-18-batch-10.proof-contracts.json",
+      "path": [
+        "contracts",
+        "lem-infinite-past-conditional-block-information-rate",
+        "finite_smoke"
+      ],
+      "guard": {
+        "equals": [
+          {
+            "check": "iid-bernoulli-half-conditional-block",
+            "asserts": "For an IID fair binary source, every length-n block has conditional mass 2^-n given the past, so its normalized conditional information is exactly 1 bit, equal to h.",
+            "claim": "Finite conditional-block factorization and the entropy-rate value in the IID fair case.",
+            "checked_in": "Proof steps 2.1\u20131.4"
+          }
+        ]
+      },
+      "replacement": [
+        {
+          "check": "iid-bernoulli-half-conditional-block",
+          "asserts": "Therefore, almost surely on the realized block, $$q_{k,n}(X_0^{n-1})=\\prod_{i=0}^{n-1}p_{k+i}(X_i).$$",
+          "claim": "Finite conditional-block factorization and the entropy-rate value in the IID fair case.",
+          "checked_in": "Proof steps 1.1, 2.1, 2.2",
+          "finite_restriction": "Fair IID binary product laws; past lengths k=0..4, future block lengths n=1..6, all 2^(k+n) joint atoms. Check finite-past conditional factorization, not construction or convergence given infinite past."
+        }
+      ],
+      "source": "items/lem-infinite-past-conditional-block-information-rate.md",
+      "source_raw_sha256": "3ad3cb3101b258763fb33de606df9490b49337e261f5f31913698a1efcdf9ce8",
+      "reason": "Preserve check name and intended finite obligation; replace paraphrase with exact current source assertion and state fixed finite restriction. No mathematical item change."
+    },
+    {
+      "id": "thm-lz77-phrase-length-entropy-rate",
+      "contract": "research/non-ml-math-remaining-81-2026-10-18-batch-10.proof-contracts.json",
+      "path": [
+        "contracts",
+        "thm-lz77-phrase-length-entropy-rate",
+        "finite_smoke"
+      ],
+      "guard": {
+        "equals": [
+          {
+            "check": "singleton-source-recurrence",
+            "asserts": "On a singleton alphabet h=0 and R_n=1 for every n; the positive-entropy inverse-window conclusion is inapplicable.",
+            "claim": "The zero-entropy boundary of the recurrence-rate statement.",
+            "checked_in": "Proof step 3.1"
+          }
+        ]
+      },
+      "replacement": [
+        {
+          "check": "singleton-source-recurrence",
+          "asserts": "If $h=0$, the lower tail below $h-\\varepsilon$ is impossible because $R_n\\ge1$.",
+          "claim": "The zero-entropy boundary of the recurrence-rate statement.",
+          "checked_in": "Proof step 3.1; def-lz77-previous-match-phrase-length Definition",
+          "finite_restriction": "Singleton alphabet constant two-sided sequence, n=1..64 and positive offsets 1..8, h=0. No inverse 1/h conclusion."
+        }
+      ],
+      "source": "items/thm-lz77-phrase-length-entropy-rate.md",
+      "source_raw_sha256": "b0a4bbd1c7b16cf657d381d681b801638ec5ec8158bba888ac44490b1a1cea7e",
+      "reason": "Preserve check name and intended finite obligation; replace paraphrase with exact current source assertion and state fixed finite restriction. No mathematical item change."
+    },
+    {
+      "id": "ex-nonstationary-block-entropy-rate-oscillation",
+      "contract": "research/non-ml-math-remaining-81-2026-10-18-batch-10.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-nonstationary-block-entropy-rate-oscillation",
+        "finite_smoke"
+      ],
+      "guard": {
+        "equals": [
+          {
+            "check": "first-block-endpoints",
+            "asserts": "L1=4, L2=16, L3=256; N2=20 gives entropy ratio 16/20=4/5, and N3=276 gives 16/276=4/69.",
+            "claim": "Finite block-sum check; not an asymptotic substitute.",
+            "checked_in": "Proof steps 1.1\u20131.2"
+          }
+        ]
+      },
+      "replacement": [
+        {
+          "check": "first-block-endpoints",
+          "asserts": "Partition the coordinates into consecutive blocks of lengths $L_j=2^{2^j}$ for $j\\ge1$. In odd-numbered blocks set $X_i=0$ deterministically; in even-numbered blocks let the $X_i$ be fair independent bits. Independence gives the block law $p_{0:N-1}(x_0^{N-1})=\\prod_{i=0}^{N-1}p_i(x_i)$. Expanding its finite entropy sum over positive-probability words and using $\\log_2\\prod_i p_i(x_i)=\\sum_i\\log_2p_i(x_i)$ yields $$H(X_0^{N-1})=\\sum_{i=0}^{N-1}H(X_i),$$ since each other coordinate probability sums to one. Thus the entropy contribution is zero on odd blocks and one bit per coordinate on even blocks.",
+          "claim": "Finite block-sum check; not an asymptotic substitute.",
+          "checked_in": "Verification steps 1.1, 2.1",
+          "finite_restriction": "First three blocks only: lengths 4,16,256; deterministic odd blocks and fair IID even block. Coordinate entropies and all 2^16 positive-probability endpoint atoms. No asymptotic conclusion."
+        }
+      ],
+      "source": "items/ex-nonstationary-block-entropy-rate-oscillation.md",
+      "source_raw_sha256": "94aa935b9887578945b54d1220b90b920d6ca102b46211618244223e28df24a8",
+      "reason": "Preserve check name and intended finite obligation; replace paraphrase with exact current source assertion and state fixed finite restriction. No mathematical item change."
+    },
+    {
+      "id": "ex-lz78-parse-with-explicit-terminator",
+      "contract": "research/non-ml-math-remaining-81-2026-10-18-batch-10.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-lz78-parse-with-explicit-terminator",
+        "finite_smoke"
+      ],
+      "guard": {
+        "equals": [
+          {
+            "check": "explicit-lz78-parse",
+            "asserts": "0100101001# parses as 0, 1, 00, 10, 100, 1# with records (0,0),(0,1),(1,0),(2,0),(4,0),(2,#); decoding returns the input.",
+            "claim": "Finite parser/decoder trace only.",
+            "checked_in": "Proof steps 1.1 and 2.1"
+          }
+        ]
+      },
+      "replacement": [
+        {
+          "check": "explicit-lz78-parse",
+          "asserts": "Applying the longest-dictionary-prefix rule successively gives phrases $0,1,00,10,100,1\\#$. The records are respectively $(0,0),(0,1),(1,0),(2,0),(4,0),(2,\\#)$; after the first five records the dictionary indices $1$ through $5$ name $0,1,00,10,100$. The sixth record terminates without insertion.",
+          "claim": "Finite parser/decoder trace only.",
+          "checked_in": "Verification steps 1.1, 3.1; alg-lz78-incremental-prefix-code Definition",
+          "finite_restriction": "Exact authored word 0100101001 and every binary word of lengths 0..8; initial empty-root dictionary, explicit # outside alphabet, longest dictionary prefix, stop with no terminal insertion. Record parse/decode only, not binary serialization."
+        }
+      ],
+      "source": "items/ex-lz78-parse-with-explicit-terminator.md",
+      "source_raw_sha256": "be90a8c20b6d8cb975345a5aa3a12116c88ed30dac47aef05a02c4a412aa1901",
+      "reason": "Preserve check name and intended finite obligation; replace paraphrase with exact current source assertion and state fixed finite restriction. No mathematical item change."
+    },
+    {
+      "id": "ex-iid-and-markov-source-entropy-rates",
+      "contract": "research/non-ml-math-remaining-81-2026-10-18-batch-10.proof-contracts.json",
+      "path": [
+        "contracts",
+        "ex-iid-and-markov-source-entropy-rates",
+        "finite_smoke"
+      ],
+      "guard": {
+        "equals": [
+          {
+            "check": "four-symbol-block-entropies",
+            "asserts": "Fair IID bits have H4=4. The stationary symmetric 1/4-switch chain has H4=1+3H2(1/4), and H4/4=(1+3H2(1/4))/4.",
+            "claim": "Finite entropy identity for n=4; asymptotic rates use the stated theorems.",
+            "checked_in": "Proof steps 1.1\u20131.2"
+          }
+        ]
+      },
+      "replacement": [
+        {
+          "check": "four-symbol-block-entropies",
+          "asserts": "For the Markov source, take stationary law $\\pi=(1/2,1/2)$ and transition matrix $K$ with diagonal entries $3/4$ and off-diagonal entries $1/4$; direct multiplication gives $\\pi K=\\pi$. Its length-$n$ block probabilities are $$P(X_0^{n-1}=x_0^{n-1})=\\tfrac12\\prod_{i=1}^{n-1}K_{x_{i-1},x_i}.$$ Expanding the finite entropy sum with this factorization gives $$H_n=H(X_0)+\\sum_{i=1}^{n-1}H(X_i\\mid X_{i-1})=1+(n-1)H_2(1/4),$$ where $H_2(p)=-p\\log_2p-(1-p)\\log_2(1-p)$. Thus $h=H_2(1/4)\\approx0.811278$. The stationary LZ78 expected-rate theorem",
+          "claim": "Finite entropy identity for n=4; asymptotic rates use the stated theorems.",
+          "checked_in": "Verification steps 1.1, 1.2",
+          "finite_restriction": "Fair IID and uniform-initial symmetric 1/4-switch binary Markov laws, block length n=4, enumerate 16 words per law; finite entropy/normalized entropy and stationary marginal only."
+        }
+      ],
+      "source": "items/ex-iid-and-markov-source-entropy-rates.md",
+      "source_raw_sha256": "6efd12bf6c4cb5b54691f137165a4cfe76e4b5f10f0b36b99b127df309c3a5f3",
+      "reason": "Preserve check name and intended finite obligation; replace paraphrase with exact current source assertion and state fixed finite restriction. No mathematical item change."
+    }
+  ]
+}

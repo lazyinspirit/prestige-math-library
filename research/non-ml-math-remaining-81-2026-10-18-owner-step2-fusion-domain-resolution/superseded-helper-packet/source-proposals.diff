@@ -1,0 +1,462 @@
+--- before/items/def-anyonic-fusion-path-space.md
++++ proposal/items/def-anyonic-fusion-path-space.md
+@@ -25,13 +25,15 @@
+ 
+ ## Definition
+ 
+-Let $\mathcal C$ be a fusion category over $\mathbb C$, so it is finite semisimple, rigid, monoidal, and has simple unit [[def-fusion-and-multifusion-category]]. Fix a set $\operatorname{Irr}(\mathcal C)$ containing exactly one representative of each simple isomorphism class, as in [[def-fusion-rules]]. Throughout this definition, $a,b,c,x,y$ and the path labels $x_j$ are elements of this representative set; in particular, distinct labels are nonisomorphic. Let $n\ge0$. Set $T_0=b$ and recursively fix the left-associated parenthesization $T_{j+1}:=T_j\otimes a$. The **fixed-boundary anyonic path space** is
++Let $\mathcal C$ be a fusion category over $\mathbb C$, so it is finite semisimple, rigid, monoidal, and has simple unit [[def-fusion-and-multifusion-category]]. Let $a,b,c$ be simple objects and let $n\ge0$. Fix one representative of each simple isomorphism class for the internal path labels; the external objects $a,b,c$ need not equal their representatives. Set $T_0=b$ and recursively fix the left-associated parenthesization $T_{j+1}:=T_j\otimes a$. The **fixed-boundary anyonic path space** is
+ 
+ $$H_{a,n;b,c}:=\operatorname{Hom}_{\mathcal C}(c,T_n).$$
+ 
+-For simple labels $x,y$, define the split multiplicity space $W_{x,a}^y:=\operatorname{Hom}_{\mathcal C}(y,x\otimes a)$. A fusion path is a sequence of simple labels $x_0=b,x_1,\ldots,x_n=c$ together with, for every $1\le j\le n$, one basis index $\mu_j$ in a chosen basis $B_{x_{j-1},a}^{x_j}$ of $W_{x_{j-1},a}^{x_j}$. The basis index is retained even when distinct indices have the same adjacent labels. Fusion rules are the nonnegative integers $N_{x a}^{y}$ in $[x][a]=\sum_yN_{x a}^{y}[y]$ [[def-fusion-rules]].
++For simple labels $x,y$, define the split multiplicity space $W_{x,a}^y:=\operatorname{Hom}_{\mathcal C}(y,x\otimes a)$. For $n\ge1$, a fusion path is a sequence of simple labels $x_0=b,x_1,\ldots,x_n=c$, with $x_1,\ldots,x_{n-1}$ drawn from the fixed representative set, together with, for every $1\le j\le n$, one basis index $\mu_j$ in a chosen basis $B_{x_{j-1},a}^{x_j}$ of $W_{x_{j-1},a}^{x_j}$. The basis index is retained even when distinct indices have the same adjacent labels. Fusion rules are the nonnegative integers $N_{x a}^{y}$ in $[x][a]=\sum_yN_{x a}^{y}[y]$ [[def-fusion-rules]].
+ 
+-If $i_j\in B_{x_{j-1},a}^{x_j}$ is the selected inclusion $x_j\to x_{j-1}\otimes a$, define the path composite by $\gamma_0:=\operatorname{id}_b$ and $\gamma_j:=(\gamma_{j-1}\otimes\operatorname{id}_a)\circ i_j:x_j\to T_j$. For $x_n=c$, $\gamma_n$ is a vector in $H_{a,n;b,c}$. The next lemma proves these composites form a basis and computes the dimension. No Hilbert-space or physical Hamiltonian structure is part of this definition.
++For $n=0$, there is no path if $b\not\cong c$. If $b\cong c$, fix an isomorphism $u_{c,b}:c\to b$ and take it as the single empty-path vector (use $u_{b,b}=\operatorname{id}_b$ when the objects coincide). In the unitary setting choose this isomorphism unitary.
++
++For $n\ge1$, if $i_j\in B_{x_{j-1},a}^{x_j}$ is the selected inclusion $x_j\to x_{j-1}\otimes a$, define the path composite by $\gamma_0:=\operatorname{id}_b$ and $\gamma_j:=(\gamma_{j-1}\otimes\operatorname{id}_a)\circ i_j:x_j\to T_j$. For $x_n=c$, $\gamma_n$ is a vector in $H_{a,n;b,c}$. The next lemma proves these composites form a basis and computes the dimension. No Hilbert-space or physical Hamiltonian structure is part of this definition.
+ 
+ ## Split-tree convention
+ 
+@@ -51,4 +53,4 @@
+ \end{tikzpicture}
+ ```
+ 
+-Each internal label $x_j$ is simple, and each $\mu_j$ ranges over a basis of the displayed split Hom space. A periodic closed chain is obtained by summing the fixed-boundary spaces over $b=c$; its path labels satisfy the cyclic boundary condition.
++Each internal label $x_j$ is simple, and each $\mu_j$ ranges over a basis of the displayed split Hom space. A periodic closed chain is obtained by summing the fixed-boundary spaces over representative boundary labels $b=c$; its path labels satisfy the cyclic boundary condition.
+
+--- before/items/def-anyonic-local-channel-projector.md
++++ proposal/items/def-anyonic-local-channel-projector.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: non-ml-math-remaining-81-2026-10-18
+ dependency_level: 7
+-deps: [def-anyonic-fusion-path-space, def-monoidal-category, def-qc-tqc-f-symbol, def-qc-tqc-fusion-tree-basis, thm-anyonic-path-space-is-hilbert-under-unitarity, thm-qc-tqc-f-symbol-unitary]
++deps: [def-anyonic-fusion-path-space, def-monoidal-category, lem-anyonic-general-split-tree-recoupling, thm-anyonic-path-space-is-hilbert-under-unitarity]
+ justified_by: []
+ provenance:
+   statement: literature-derived
+@@ -25,11 +25,11 @@
+ 
+ ## Definition
+ 
+-Fix a fusion-path space with repeated simple site charge $a$, a position $i$ with two adjacent $a$-labels, and a simple output $s$ of $a\otimes a$. All charge labels, including $s$, are taken from the representative set fixed in [[def-anyonic-fusion-path-space]]. In the tree basis where this adjacent pair is fused first, let $\Pi_s$ be the projection onto the direct summand with pair output $s$, acting as the identity on every multiplicity index inside that channel and as zero on all other pair outputs. Let $F_i$ be the typed sequence of associator changes carrying the fixed path tree to this pair-first tree; each local matrix is the F-symbol of [[def-qc-tqc-f-symbol]], with rows and columns as in that Definition. Define the **local channel projector** in the fixed path basis by
++Fix a fusion-path space with repeated simple site charge $a$, a position $i$ with two adjacent $a$-labels, and a simple output $s$ of $a\otimes a$, chosen from the fixed internal representative set of [[def-anyonic-fusion-path-space]]. In the tree basis where this adjacent pair is fused first, let $\Pi_s$ be the projection onto the direct summand with pair output $s$, acting as the identity on every multiplicity index inside that channel and as zero on all other pair outputs. Let $A_i:T_{\mathrm{fixed}}\to T_{\mathrm{pair}}$ be a typed composite of associators and their inverses carrying the fixed path tree to this pair-first tree, without permuting the ordered inputs (including the boundary charge). In the split-tree bases of $\operatorname{Hom}(c,T)$, let $F_i$ be the matrix of $h\mapsto A_i\circ h$, with target coordinates as rows and source coordinates as columns. These bases and the invertibility of this general algebraic recoupling map are proved in [[lem-anyonic-general-split-tree-recoupling]]. Define the **local channel projector** in the fixed path basis by
+ 
+ $$P_{i,s}:=F_i^{-1}\Pi_sF_i.$$
+ 
+-This is an idempotent for any fusion category because $F_i$ is invertible. In a unitary fusion category with orthonormal tree bases, $F_i$ is unitary and $P_{i,s}$ is an orthogonal projection. The channel projection includes every multiplicity coordinate; the definition has no multiplicity-free restriction.
++This is an idempotent for any fusion category because $F_i$ is invertible. In a unitary fusion category with orthonormal tree bases, $F_i$ is unitary and $P_{i,s}$ is an orthogonal projection. The channel projection includes every multiplicity coordinate; the definition has no multiplicity-free restriction. The split Hom convention here is $\operatorname{Hom}(c,T)$, as in [[def-anyonic-fusion-path-space]]. In the unitary case with adjoint vertex bases, each local left-to-right split recoupling matrix is the entrywise conjugate of the QC25 inverse-precomposition F matrix, as proved in [[lem-anyonic-general-split-tree-recoupling]]; they agree for the displayed real Fibonacci and Ising blocks.
+ 
+ The coordinate convention is illustrated below: vectors move from the fixed tree to the pair-first tree by $F_i$, the channel projection acts there, and $F_i^{-1}$ returns to the fixed tree. The curved arrow denotes the defined composite, not an additional morphism.
+ 
+
+--- before/items/def-qa-37-anyon-task-and-promise.md
++++ proposal/items/def-qa-37-anyon-task-and-promise.md
+@@ -9,6 +9,7 @@
+ deps:
+   - def-qa-task-and-promise-domain
+   - def-qc-tqc-fusion-tree-basis
++  - thm-qc-tqc-gauge-covariance
+   - def-qc-tqc-fixed-charge-encoding
+   - def-qc-tqc-physical-braid-interface
+   - def-qc-circuit-cost-model
+@@ -29,9 +30,12 @@
+ 
+ ## Definition
+ 
+-Work in a fixed unitary braided fusion category and fix an ordered finite list
+-of $n\ge1$ simple charge labels, a parenthesized fusion tree, and a total charge for
+-which the fusion space is nonzero. Simple charges, multiplicity bases, and
++Work in a fixed unitary braided fusion category $\mathcal C$ with the
++representative set $\operatorname{Irr}(\mathcal C)$ of
++[[def-qc-tqc-fusion-tree-basis]]. Fix ordered inputs
++$a_1,\ldots,a_n\in\operatorname{Irr}(\mathcal C)$, $n\ge1$, a
++parenthesized fusion tree, and a total charge
++$c\in\operatorname{Irr}(\mathcal C)$ for which the fusion space is nonzero. Simple charges, multiplicity bases, and
+ admissible fusion-tree vectors have the conventions of
+ [[def-qc-tqc-fusion-tree-basis]]. An encoded input subspace is specified by a
+ fixed-charge isometry as in [[def-qc-tqc-fixed-charge-encoding]]. Each task
+@@ -50,9 +54,22 @@
+ strands, the finite alphabet of positive and inverse Artin generators
+ available to the solver, any prescribed finite braid word, and the finite set
+ of adjacent fusion-measurement locations.
+-Braid action is the mathematical unitary action specified by the fixed
+-physical-interface record [[def-qc-tqc-physical-braid-interface]]; a
+-measurement location is interpreted in the declared fusion-tree basis. The
++For distinct input charges, an adjacent exchange has the typed unitary
++F/R action from the current ordered-list fusion space to the space for the
++list with those charges exchanged; track that list after every generator.
++These colored maps and their Artin relations are supplied by
++[[thm-qc-tqc-gauge-covariance]]. If a single-space $B_n$ representation is
++required for the physical-interface record
++[[def-qc-tqc-physical-braid-interface]], use the finite orthogonal direct
++sum of fusion spaces over all distinct orderings of the fixed input
++multiset, with the same total $c$. Each generator maps each summand to its
++exchanged-list summand by the typed unitary; its inverse reverses that
++map. The colored Artin relations on each summand give the relations on
++the direct sum, hence a unitary $B_n$ action. Record the occupied summand
++and interpret measurements in its declared fusion-tree basis. Identical
++charges give the usual single fixed-space action. The physical-interface
++record specifies the mathematical action and separately states its
++physical realization hypotheses. The
+ state-preparation field is an abstract task input and does not assert that a
+ physical device prepares the state or realizes the braid. Input length and
+ correctness-on-promises follow [[def-qa-task-and-promise-domain]].
+
+--- before/items/def-qa-37-fusion-input-encoding.md
++++ proposal/items/def-qa-37-fusion-input-encoding.md
+@@ -27,8 +27,13 @@
+ 
+ ## Definition
+ 
+-Fix $n\ge1$, ordered simple charges $a_1,\ldots,a_n$, a total charge $c$,
+-and one parenthesized binary tree. An **encoded fusion input** consists of the
++In the unitary braided fusion category $\mathcal C$ fixed by
++[[def-qa-37-anyon-task-and-promise]], use its fixed representative set
++$\operatorname{Irr}(\mathcal C)$. Fix $n\ge1$, ordered inputs
++$a_1,\ldots,a_n\in\operatorname{Irr}(\mathcal C)$, a total charge
++$c\in\operatorname{Irr}(\mathcal C)$ with nonzero fusion space, and
++one parenthesized binary tree. Every charge label below belongs to this
++same representative set. An **encoded fusion input** consists of the
+ finite tree shape, a simple-charge label on each internal edge, and a
+ multiplicity-basis index at each trivalent vertex. A label is **admissible**
+ exactly when every chosen vertex index belongs to the specified basis of its
+
+--- before/items/def-qa-37-fusion-measurement.md
++++ proposal/items/def-qa-37-fusion-measurement.md
+@@ -9,7 +9,8 @@
+ deps:
+   - def-qa-37-fusion-input-encoding
+   - def-qc-projective-measurement
+-  - def-qc-tqc-braid-action-from-fusion-data
++  - def-qc-tqc-f-symbol
++  - thm-qc-tqc-f-symbol-unitary
+ justified_by: []
+ axiom_use: "None; finite-dimensional orthogonal projections are choice-free."
+ provenance:
+@@ -27,7 +28,10 @@
+ 
+ ## Definition
+ 
+-Let $H$ be a fixed finite fusion space with an orthonormal fusion-tree basis.
++Let $H$ be a fixed finite fusion space with an orthonormal fusion-tree basis
++in the category and simple-representative domain of
++[[def-qa-37-fusion-input-encoding]]. For a colored task, $H$ is the
++currently occupied ordered-list summand tracked by the task record.
+ For an adjacent pair of leaves or a declared adjacent pair of subtrees, recouple
+ the tree by its specified unitary $F$-moves so that the pair fuses first. For
+ each allowed simple total charge $a$ of that pair, let $P_a$ be the orthogonal
+@@ -36,5 +40,6 @@
+ orthogonal and their direct sum is $H$, so $(P_a)_a$ is a finite projective
+ measurement in the sense of [[def-qc-projective-measurement]]. Its outcome is
+ $a$, its unnormalized branch vector on input $\psi$ is $P_a\psi$, and the
+-measurement is specified by the braid/F-matrix action convention in
+-[[def-qc-tqc-braid-action-from-fusion-data]]. The branch vector is unnormalized until its probability is checked.
++recoupling follows the inverse-precomposition F convention of
++[[def-qc-tqc-f-symbol]], whose unitarity is proved in
++[[thm-qc-tqc-f-symbol-unitary]]. The branch vector is unnormalized until its probability is checked.
+
+--- before/items/def-qc-tqc-braid-action-from-fusion-data.md
++++ proposal/items/def-qc-tqc-braid-action-from-fusion-data.md
+@@ -30,9 +30,10 @@
+ 
+ ## Definition
+ 
+-Let $x$ be a simple charge in a unitary braided fusion category, let $n\ge2$,
+-and fix a total charge $c$ with nonzero multiplicity space
+-$V(x^n\to c)$. Use the left-associated fusion-tree basis. For the Artin
++Fix a unitary braided fusion category $\mathcal C$ and the simple-object
++representative set $\operatorname{Irr}(\mathcal C)$ used in
++[[def-qc-tqc-fusion-tree-basis]]. Let $x,c\in\operatorname{Irr}(\mathcal C)$,
++let $n\ge2$, and suppose $V(x^n\to c)\ne0$. Use the left-associated fusion-tree basis. For the Artin
+ generator $\sigma_i$ that exchanges the $i$th and $(i+1)$st strands, let
+ $T_i$ be the specified sequence of $F$-moves that changes from the fixed tree
+ basis to a basis where those two charges fuse first, and let $R_i$ apply the
+
+--- before/items/def-qc-tqc-fixed-charge-encoding.md
++++ proposal/items/def-qc-tqc-fixed-charge-encoding.md
+@@ -8,6 +8,7 @@
+ deps:
+   - def-qc-tqc-fusion-tree-basis
+   - def-fusion-and-multifusion-category
++  - def-qc-tqc-unitary-fusion-category
+   - def-linear-isometry-and-orthogonal-or-unitary-operator
+   - def-adjoint-of-a-linear-map-between-inner-product-spaces
+ dependency_level: 4
+@@ -28,9 +29,14 @@
+ 
+ ## Definition
+ 
+-Let $V=V(x^n\to c)\ne0$ be the finite-dimensional fixed-total-charge fusion
+-space for $n$ identical charges $x$, equipped with the unitary fusion-tree
+-inner product from [[def-qc-tqc-fusion-tree-basis]]. Let
++Fix a unitary fusion category $\mathcal D$ and the representative set
++$\operatorname{Irr}(\mathcal D)$ of [[def-qc-tqc-fusion-tree-basis]].
++For an ordered list $x_1,\ldots,x_n\in\operatorname{Irr}(\mathcal D)$,
++$n\ge1$, a total charge $c\in\operatorname{Irr}(\mathcal D)$, and a
++parenthesized input tensor $T$, let $V=\operatorname{Hom}(T,c)\ne0$,
++equipped with that definition's orthonormal fusion-tree inner product.
++The identical-input case $x_1=\cdots=x_n=x$ retains the notation
++$V=V(x^n\to c)$. Let
+ $\mathcal C=\mathbb C^k$ with its ordered orthonormal computational basis,
+ where $k\ge1$. A **fixed-charge encoding** is an isometry
+ $J:\mathcal C\to V$, so $J^*J=I_{\mathcal C}$. Its code subspace is
+
+--- before/items/lem-anyonic-fusion-path-basis.md
++++ proposal/items/lem-anyonic-fusion-path-basis.md
+@@ -27,21 +27,21 @@
+ 
+ ## Statement
+ 
+-Let $\mathcal C$ be a complex fusion category, fix a representative set $\operatorname{Irr}(\mathcal C)$ for its simple isomorphism classes as in [[def-fusion-rules]], and take $a,b,c\in\operatorname{Irr}(\mathcal C)$. Fix a basis $B_{x,a}^y$ of every finite-dimensional split space $W_{x,a}^y=\operatorname{Hom}_{\mathcal C}(y,x\otimes a)$ for $x,y\in\operatorname{Irr}(\mathcal C)$. For every admissible path $x_0=b,\ldots,x_n=c$ and every tuple of vertex indices $\mu_j\in B_{x_{j-1},a}^{x_j}$, the composite maps of [[def-anyonic-fusion-path-space]] form a basis of $H_{a,n;b,c}$. Consequently,
++Let $\mathcal C$ be a complex fusion category, let $a,b,c$ be simple objects, and fix a basis $B_{x,a}^y$ of every finite-dimensional split space $W_{x,a}^y=\operatorname{Hom}_{\mathcal C}(y,x\otimes a)$. Use the fixed representative set for internal labels and the chosen empty-path isomorphism of [[def-anyonic-fusion-path-space]], retaining arbitrary simple external objects $a,b,c$. For every admissible path $x_0=b,\ldots,x_n=c$ and every tuple of vertex indices $\mu_j\in B_{x_{j-1},a}^{x_j}$, the composite maps of [[def-anyonic-fusion-path-space]] form a basis of $H_{a,n;b,c}$. Consequently,
+ 
+-$$\dim H_{a,n;b,c}=\sum_{\substack{x_0=b,\ x_n=c\\x_1,\ldots,x_{n-1}\in\operatorname{Irr}(\mathcal C)}}\prod_{j=1}^n N_{x_{j-1}a}^{x_j}.$$
++$$\dim H_{a,n;b,c}=\sum_{\substack{x_0=b,\ x_n=c\\x_1,\ldots,x_{n-1}\text{ simple representatives}}}\prod_{j=1}^n N_{x_{j-1}a}^{x_j}.$$
+ 
+-The empty product is $1$ when $b=c$ (equivalently $b\cong c$ among these representatives) and $0$ otherwise.
++At $n=0$ the path count is $1$ when $b\cong c$ and $0$ otherwise, with the chosen isomorphism $u_{c,b}$ as its vector in the first case.
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** A complex fusion category $\mathcal C$, its representative set $\operatorname{Irr}(\mathcal C)$, labels $a,b,c$ in that set, $n\ge0$, and the vertex bases in the Statement.
++**Given:** A complex fusion category $\mathcal C$, simple objects $a,b,c$, $n\ge0$, and the vertex bases in the Statement.
+ 
+ [F1] [[def-anyonic-fusion-path-space]]: $T_0=b$, $T_{j+1}=T_j\otimes a$, $H_{a,n;b,c}=\operatorname{Hom}(c,T_n)$, and a path composite is built from inclusions $i_j:x_j\to x_{j-1}\otimes a$.
+ 
+ [F2] [[def-fusion-and-multifusion-category]]: every object of a fusion category is a finite direct sum of simple objects, and tensor product is bilinear and exact on morphisms.
+ 
+-[F3] [[def-fusion-rules]]: $N_{xy}^z$ is the multiplicity of representative $z$ in $x\otimes y$, equals $\dim_{\mathbb C}\operatorname{Hom}(x\otimes y,z)$, and uses the chosen representative set of simple isomorphism classes.
++[F3] [[def-fusion-rules]]: $N_{xy}^z$ is the multiplicity of simple $z$ in $x\otimes y$ and equals $\dim_{\mathbb C}\operatorname{Hom}(x\otimes y,z)$.
+ 
+ [F4] [[def-absolutely-simple-object]]: for simple $z$, $\operatorname{End}(z)=\mathbb C\operatorname{id}_z$; Hom spaces between nonisomorphic simple objects are zero.
+ 
+@@ -49,12 +49,12 @@
+ 
+ **Given:** The category, boundary charges, site charge, and split-space bases above.
+ 
+-1.1 For $n=0$, $T_0=b$; since $b,c$ are representatives, $c\cong b$ holds exactly when $c=b$. Semisimplicity and [F4] then give $\operatorname{Hom}(c,b)=0$ when $c\ne b$ and $\mathbb C\operatorname{id}_b$ when $c=b$. This is exactly the stated empty-path convention. [F1, F2, F3, F4, given, base]
++1.1 For $n=0$, $T_0=b$ and [F4] gives $\operatorname{Hom}(c,b)=0$ when $c\not\cong b$. If $c\cong b$, composition with the chosen isomorphism $u_{c,b}:c\to b$ identifies $\operatorname{End}(c)=\mathbb C\operatorname{id}_c$ with $\operatorname{Hom}(c,b)$, so the latter has basis $u_{c,b}$. This is exactly the typed empty-path convention of [F1]. For $n=1$, the path vectors are directly the chosen basis $B_{b,a}^{c}$ of $\operatorname{Hom}(c,b\otimes a)$, since the starting map is $\operatorname{id}_b$. This separately proves the positive-length base case without requiring the bases for isomorphic but unequal external objects to coincide. [F1, F2, F4, given, base]
+ 
+-1.2 Fix $n\ge0$ and assume for every endpoint representative $x\in\operatorname{Irr}(\mathcal C)$ that the length-$n$ path composites form a basis of $\operatorname{Hom}(x,T_n)$. [F1, F3, F4, given, ih]
++1.2 Fix $n\ge1$ and assume for every simple endpoint $x$ that the length-$n$ path composites form a basis of $\operatorname{Hom}(x,T_n)$. [F1, F4, given, ih]
+ 
+-2.1 By finite semisimplicity, the induction hypothesis decomposes $T_n\cong\bigoplus_{x,\gamma}x$, with one summand for each length-$n$ path $\gamma$ ending at representative $x$. For each simple representative $x$, choose the inclusions from a basis of $W_{x,a}^y=\operatorname{Hom}(y,x\otimes a)$; their number is $N_{xa}^y$ by [F3] and absolute simplicity [F4]. [F2, F3, F4, step 1.2, ih, construct]
++2.1 By finite semisimplicity, the induction hypothesis decomposes $T_n\cong\bigoplus_{x,\gamma}x$, with one summand for each length-$n$ path $\gamma$ ending at $x$. Here $x$ ranges once over the fixed simple representatives, even when the external endpoints are different isomorphic objects. For each such $x$, choose the inclusions from a basis of $W_{x,a}^y=\operatorname{Hom}(y,x\otimes a)$; their number is $N_{xa}^y$ by [F3] and absolute simplicity [F4]. [F2, F3, F4, step 1.2, ih, construct]
+ 
+-3.1 Tensoring the decomposition in step 2.1 by $a$ gives $T_{n+1}\cong\bigoplus_{x,\gamma}(x\otimes a)$, and decomposing each factor into its simple summands yields precisely all length-$(n+1)$ path composites from [F1]. Applying $\operatorname{Hom}(c,-)$ selects exactly the summands isomorphic to $c$, each once by [F4], so these composites form a basis of $\operatorname{Hom}(c,T_{n+1})$. [F1, F2, F3, F4, step 1.2, step 2.1, ih, induction]
++3.1 Choose retractions $p_{x,\gamma}:T_n\to x$ dual to the path inclusions $\gamma:x\to T_n$ in step 2.1. They exist by taking any semisimple decomposition and changing its inclusion basis to the given basis for each simple $x$; the inverse basis matrix changes its retractions. Thus $\sum_{x,\gamma}\gamma p_{x,\gamma}=\operatorname{id}_{T_n}$ and $p_{x,\gamma}\gamma\prime$ is the appropriate Kronecker identity. Tensoring gives a direct-sum decomposition of $T_n\otimes a$ with inclusions $\gamma\otimes\operatorname{id}_a$ and retractions $p_{x,\gamma}\otimes\operatorname{id}_a$. Applying $\operatorname{Hom}(c,-)$ therefore gives the isomorphism $\bigoplus_{x,\gamma}\operatorname{Hom}(c,x\otimes a)\to\operatorname{Hom}(c,T_{n+1})$ sending $(h_{x,\gamma})$ to $\sum_{x,\gamma}(\gamma\otimes\operatorname{id}_a)h_{x,\gamma}$. Its inverse applies each displayed retraction. Inserting the specified basis $B_{x,a}^{c}$ in each summand gives exactly the length-$(n+1)$ path composites of [F1], so they form a basis, including when the external $c$ differs from its representative. [F1, F2, F3, F4, step 1.2, step 2.1, ih, induction]
+ 
+ 4.1 By step 3.1, each admissible path contributes one basis vector for every tuple of vertex indices, hence contributes $\prod_{j=1}^n\dim W_{x_{j-1},a}^{x_j}=\prod_{j=1}^nN_{x_{j-1}a}^{x_j}$ vectors. Summing over the finitely many internal simple labels gives the displayed dimension; every sum is finite because the category has finitely many simple isomorphism classes and $n$ is finite. Induction from step 1.1 completes the basis proof and count. [F1, F2, F3, step 3.1, induction, discharge-induction: step 1.1, algebra] ∎
+
+--- before/items/lem-anyonic-general-split-tree-recoupling.md
++++ proposal/items/lem-anyonic-general-split-tree-recoupling.md
+@@ -0,0 +1,72 @@
++---
++id: lem-anyonic-general-split-tree-recoupling
++kind: lemma
++title: "Split-tree recoupling in a complex fusion category"
++status: draft
++origin: pipeline
++pipeline_run: non-ml-math-remaining-81-2026-10-18
++deps: [def-fusion-and-multifusion-category, def-absolutely-simple-object, def-qc-tqc-unitary-fusion-category, def-qc-tqc-f-symbol]
++justified_by: []
++proof_strategy: direct
++axiom_use: None; only finite decompositions and finite basis selections are used.
++provenance:
++  statement: literature-derived
++  proof: ai-altered
++sources:
++  references:
++    - title: "P. Etingof, S. Gelaki, D. Nikshych, and V. Ostrik, Tensor Categories"
++      url: "https://math.mit.edu/~etingof/egnobookfinal.pdf"
++      locator: "§§2.1, 4.1: associators and finite semisimple tensor categories."
++    - title: "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes"
++      url: "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf"
++      locator: "§3.5: multiplicity bases and recoupling matrices."
++---
++
++## Statement
++
++Let $\mathcal C$ be a complex fusion category. Fix representatives for internal simple labels,
++a finite ordered list of simple inputs, a simple total charge $c$, and
++bases of every split multiplicity space $\operatorname{Hom}(z,x\otimes y)$
++used in its binary trees. External simple objects may be arbitrary; fix
++isomorphisms to their representatives whenever an endpoint identification
++is needed. Composing these split vertices along any fixed
++tree $T$ gives a basis of $\operatorname{Hom}(c,T)$. If
++$A:T\to T'$ is a composite of associators and their inverses, its
++**split-tree recoupling matrix** is the matrix of
++$h\mapsto A\circ h$ in those bases; it is invertible and retains all
++simple labels and multiplicity indices.
++
++In a unitary fusion category with orthonormal split vertex bases, these
++tree bases are orthonormal and the recoupling matrices are unitary. For a
++local left-to-right associator, if the split bases are the adjoints of the
++fusion bases in [[def-qc-tqc-f-symbol]], its split matrix is
++$\overline{F_c^{xyz}}$, the entrywise conjugate of that item's
++inverse-precomposition matrix. These are two explicitly different Hom
++conventions; neither positivity nor a dagger is needed for the general
++invertibility assertion.
++
++## Facts & Assumptions
++
++**Given:** The category, fixed representative labels, finite trees and vertex bases in the Statement.
++
++[F1] [[def-fusion-and-multifusion-category]]: every object is a finite direct sum of simple objects, and tensor product is bilinear.
++
++[F2] [[def-absolutely-simple-object]]: the endomorphisms of a simple charge are scalar, and Hom spaces between distinct simple representatives vanish.
++
++[F3] [[def-qc-tqc-unitary-fusion-category]]: in the unitary case orthogonal decompositions exist, tensor product preserves dagger, and the associator is unitary.
++
++[F4] [[def-qc-tqc-f-symbol]]: in fusion bases the local associator matrix is defined by $f_j\circ\alpha^{-1}=\sum_kF_{kj}g_k$.
++
++## Proof
++
++**Given:** The data of the Statement, with unitarity assumed only for the last two steps.
++
++1.1 For an object $X$, a semisimple decomposition into representative simples supplies inclusions $i_{s,\mu}:s\to X$ and retractions $p_{s,\mu}:X\to s$ with $p_{s,\mu}i_{t,\nu}=\delta_{st}\delta_{\mu\nu}\operatorname{id}_s$ (zero when the types differ) and $\sum_{s,\mu}i_{s,\mu}p_{s,\mu}=\operatorname{id}_X$. By [F2], the inclusions for a fixed $s$ form a basis of $\operatorname{Hom}(s,X)$. Replacing them by any other basis multiplies their columns by an invertible matrix; multiplying the retractions by its inverse retains both identities. Thus any chosen split basis can be used as the inclusions of a decomposition. [F1, F2, given, construct, algebra]
++
++1.2 Apply step 1.1 recursively up the finite binary tree. A leaf is its input simple object, with its chosen isomorphism from the representative as inclusion (the identity for a representative input). At a vertex, tensor the already constructed decompositions of its two child objects, and then decompose each tensor product $x\otimes y$ using its chosen split basis. The inclusions and retractions of the resulting decomposition are the composites of the child maps and the chosen vertex maps; bilinearity preserves their two identities. This constructs a decomposition at each vertex, hence at the root, after finitely many operations. Applying $\operatorname{Hom}(c,-)$ to the root decomposition selects precisely the copies of the representative isomorphic to $c$ by [F2]; compose their inclusions with the fixed isomorphism from $c$ to that representative. Their inclusion composites are exactly the asserted split-tree basis, with every multiplicity index retained. [F1, F2, step 1.1, construct, algebra]
++
++2.1 Each associator and its inverse is an isomorphism. Hence $h\mapsto A\circ h$ is linear and bijective, with inverse $h'\mapsto A^{-1}\circ h'$. Step 1.2 supplies bases on both sides, so its matrix is invertible. Matrix multiplication sums over the full intermediate tree bases, including every simple and multiplicity label; no multiplicity-free assumption has entered. This proves the general assertion. [F1, step 1.2, given, construct, algebra]
++
++3.1 In the unitary case, start with orthogonal decompositions in step 1.1. An orthonormal change of inclusion basis is unitary and retains $p_{s,\mu}=i_{s,\mu}^\dagger$. Tensor compatibility and composition therefore make the decompositions in step 1.2 orthogonal. Their tree inclusions are orthonormal for the pairing $g^\dagger h=\langle h,g\rangle\operatorname{id}_c$. For unitary $A$ one has $(A g)^\dagger(A h)=g^\dagger A^\dagger A h=g^\dagger h$. Thus the bijection of step 2.1 is unitary in these orthonormal bases. [F2, F3, step 1.1, step 1.2, step 2.1, algebra]
++
++3.2 Taking daggers in [F4] gives $\alpha\circ f_j^\dagger=\sum_k\overline{F_{kj}}g_k^\dagger$, since $\alpha$ is unitary. The maps $f_j^\dagger,g_k^\dagger$ are exactly the adjoint split-tree bases. Thus the local split recoupling matrix is $\overline F$. Together with steps 2.1 and 3.1 this proves the general and unitary claims, including zero-dimensional spaces, whose matrices are the unique empty invertible maps. [F3, F4, step 2.1, step 3.1, algebra] ∎
+
+--- before/items/thm-anyonic-channel-projectors-are-reparenthesization-independent.md
++++ proposal/items/thm-anyonic-channel-projectors-are-reparenthesization-independent.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: non-ml-math-remaining-81-2026-10-18
+ dependency_level: 8
+-deps: [def-anyonic-local-channel-projector, def-qc-tqc-f-symbol, thm-mac-lane-coherence-in-the-canonical-map-form]
++deps: [def-anyonic-local-channel-projector, lem-anyonic-general-split-tree-recoupling, thm-mac-lane-coherence-in-the-canonical-map-form]
+ justified_by: []
+ proof_strategy: direct
+ axiom_use: None; only finite compositions of associators are compared.
+@@ -33,7 +33,7 @@
+ 
+ **Given:** A monoidal category, a fixed ordered list of simple input charges, two parenthesizations, and the fusion-tree bases.
+ 
+-[F1] [[def-qc-tqc-f-symbol]]: an F-move is the coordinate matrix of inverse-precomposition by the corresponding associator, with all intermediate simple and multiplicity labels retained.
++[F1] [[lem-anyonic-general-split-tree-recoupling]] supplies split-tree bases in any complex fusion category and invertible coordinate matrices of $h\mapsto A\circ h$. More generally, in any monoidal category where the Hom spaces and fixed bases in the Given data are available, this same postcomposition rule defines the coordinate map without a semisimplicity or unitarity hypothesis; all intermediate basis indices are retained.
+ 
+ [F2] [[thm-mac-lane-coherence-in-the-canonical-map-form]]: any two canonical morphisms between fixed parenthesized words on the same ordered inputs are equal.
+ 
+@@ -43,7 +43,7 @@
+ 
+ **Given:** The typed parenthesizations, associators, and channel projection in the Statement.
+ 
+-1.1 Each F-move is the matrix of one associator or its inverse by [F1]. Therefore a finite F-move sequence is the matrix of the canonical morphism obtained by composing those associators, tensor products with identities, and inverses. [F1, construct]
++1.1 For a canonical associator map $A:T\to T'$, [F1] defines the split Hom map $A_*:h\mapsto A\circ h$. If $B:T'\to T''$, then $B_*(A_*(h))=(B\circ A)\circ h$. Thus each finite F-move sequence is the matrix of postcomposition by its canonical composite, including tensor products with identities and inverse associators. This argument applies in any monoidal category with the fixed coordinate spaces and bases posited in the Given data. [F1, construct]
+ 
+ 2.1 The two sequences in the Statement have the same source and target parenthesized words, so their canonical morphisms are equal by [F2]. Coordinates of equal morphisms in the fixed fusion-tree bases are equal; hence the two matrix composites agree. [F1, F2, step 1.1, algebra]
+ 
+
+--- before/items/thm-anyonic-local-channel-projectors-are-orthogonal.md
++++ proposal/items/thm-anyonic-local-channel-projectors-are-orthogonal.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: non-ml-math-remaining-81-2026-10-18
+ dependency_level: 8
+-deps: [def-anyonic-local-channel-projector, def-qc-tqc-unitary-fusion-category, thm-qc-tqc-f-symbol-unitary]
++deps: [def-anyonic-local-channel-projector, def-qc-tqc-unitary-fusion-category, lem-anyonic-general-split-tree-recoupling]
+ justified_by: []
+ proof_strategy: direct
+ axiom_use: None; the proof is finite-dimensional linear algebra.
+@@ -37,7 +37,7 @@
+ 
+ [F2] [[def-qc-tqc-unitary-fusion-category]]: the associator is unitary and tensor product preserves daggers.
+ 
+-[F3] [[thm-qc-tqc-f-symbol-unitary]]: every F-symbol in orthonormal fusion-tree bases is unitary; therefore their finite composite $F_i$ is unitary.
++[F3] [[lem-anyonic-general-split-tree-recoupling]]: postcomposition by a unitary associator preserves the split Hom inner product, so every split-tree recoupling matrix in orthonormal bases and its finite composite $F_i$ are unitary.
+ 
+ ## Proof
+ 
+
+--- before/items/thm-anyonic-path-space-is-hilbert-under-unitarity.md
++++ proposal/items/thm-anyonic-path-space-is-hilbert-under-unitarity.md
+@@ -27,15 +27,15 @@
+ 
+ ## Statement
+ 
+-Let $\mathcal C$ be a unitary fusion category, fix a representative set $\operatorname{Irr}(\mathcal C)$ for its simple isomorphism classes as in [[def-fusion-rules]], and take $a,b,c\in\operatorname{Irr}(\mathcal C)$. Use orthonormal bases in each split space $W_{x,a}^y=\operatorname{Hom}(y,x\otimes a)$ for $x,y\in\operatorname{Irr}(\mathcal C)$, equivalently the adjoints of orthonormal bases of $V_{x a}^y=\operatorname{Hom}(x\otimes a,y)$. Give $H_{a,n;b,c}=\operatorname{Hom}(c,T_n)$ the Hom-space inner product linear in the first variable, determined by $g^\dagger f=\langle f,g\rangle\operatorname{id}_c$. Then the path composites of [[def-anyonic-fusion-path-space]] are an orthonormal basis of $H_{a,n;b,c}$.
++Let $\mathcal C$ be a unitary fusion category, and use orthonormal bases in each split space $W_{x,a}^y=\operatorname{Hom}(y,x\otimes a)$, equivalently the adjoints of orthonormal bases of $V_{x a}^y=\operatorname{Hom}(x\otimes a,y)$. Give $H_{a,n;b,c}=\operatorname{Hom}(c,T_n)$ the Hom-space inner product linear in the first variable, determined by $g^\dagger f=\langle f,g\rangle\operatorname{id}_c$. For $n=0$ use the unitary empty-path isomorphism specified in [[def-anyonic-fusion-path-space]]. Then the path composites of [[def-anyonic-fusion-path-space]] are an orthonormal basis of $H_{a,n;b,c}$.
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** A unitary fusion category, its representative set $\operatorname{Irr}(\mathcal C)$, labels $a,b,c$ in that set, fixed $n\ge0$, and orthonormal vertex bases.
++**Given:** A unitary fusion category, simple labels $a,b,c$, fixed $n\ge0$, and orthonormal vertex bases.
+ 
+ [F1] [[def-anyonic-fusion-path-space]]: $H_{a,n;b,c}=\operatorname{Hom}(c,T_n)$ and every path composite is formed from the inclusions $i_j:x_j\to x_{j-1}\otimes a$ by tensoring with identities and composition.
+ 
+-[F2] [[def-qc-tqc-unitary-fusion-category]]: dagger is conjugate-linear and reverses composition; tensor product preserves daggers; finite semisimple decompositions may be chosen orthogonally; associators and unitors are unitary.
++[F2] [[def-qc-tqc-unitary-fusion-category]]: dagger is conjugate-linear and reverses composition; $v^\dagger v$ is positive and is zero only for $v=0$; tensor product preserves daggers; finite semisimple decompositions may be chosen orthogonally; associators and unitors are unitary.
+ 
+ [F3] [[def-qc-tqc-fusion-multiplicity-space]] and [[thm-qc-tqc-fusion-multiplicity-space-is-hilbert]]: for simple output $y$, the pairing on $V_{x a}^y=\operatorname{Hom}(x\otimes a,y)$ is positive definite and the chosen vertex maps are orthonormal.
+ 
+@@ -45,9 +45,9 @@
+ 
+ **Given:** The unitary category, the path space, and the vertex bases described above.
+ 
+-1.1 For $n=0$, $T_0=b$. Since the labels are representatives, $b\not\cong c$ means $b\ne c$; then simplicity gives $\operatorname{Hom}(c,b)=0$ and there are no paths. If $b=c$, the only path composite is $\operatorname{id}_b$, and $\operatorname{id}_b^\dagger\operatorname{id}_b=\operatorname{id}_b$ shows it has norm one under the stated Hom inner product. Thus the length-zero path family is orthonormal. [F1, F2, F3, given, base]
++1.1 For $n=0$, $T_0=b$. If $b\not\cong c$, simplicity gives $\operatorname{Hom}(c,b)=0$ and there are no paths. If $b\cong c$, the only empty-path vector is the chosen unitary isomorphism $u_{c,b}:c\to b$, and $u_{c,b}^\dagger u_{c,b}=\operatorname{id}_c$ shows it has norm one. Such a choice exists: for any isomorphism $v:c\to b$, [F2] and [F3] give $v^\dagger v=\lambda\operatorname{id}_c$ with $\lambda>0$, so $u_{c,b}=\lambda^{-1/2}v$ is a unitary isomorphism. Thus the length-zero path family is orthonormal. For $n=1$, the path family is the given orthonormal split vertex basis $B_{b,a}^{c}$ itself, so the positive-length base case holds independently of the empty-path choice. [F1, F2, F3, given, base]
+ 
+-1.2 Fix $n\ge0$ and assume that all length-$n$ path composites, for every representative endpoint, are orthonormal in their Hom spaces. [F1, F2, given, ih]
++1.2 Fix $n\ge1$ and assume that all length-$n$ path composites, for every simple endpoint, are orthonormal in their Hom spaces. [F1, F2, given, ih]
+ 
+ 1.3 If $f_\mu:x\otimes a\to y$ are the chosen orthonormal vertex maps, their adjoints $i_\mu=f_\mu^\dagger:y\to x\otimes a$ satisfy $i_\mu^\dagger i_\nu=f_\mu f_\nu^\dagger=\delta_{\mu\nu}\operatorname{id}_y$ by [F3]. Distinct simple outputs are orthogonal, and the orthogonal semisimple decomposition has projections $i_\mu i_\mu^\dagger$ summing to the identity. [F2, F3, algebra]
+ 
+
+--- before/items/thm-qc-tqc-arbitrary-n-register-universality.md
++++ proposal/items/thm-qc-tqc-arbitrary-n-register-universality.md
+@@ -38,7 +38,7 @@
+ 
+ ## Statement
+ 
+-Assume $\mathrm{AC}_\omega$. For every $n\ge1$, every total charge $c$ with
++Assume $\mathrm{AC}_\omega$. For every $n\ge1$, every total-charge label $c\in\{1,\tau\}$ with
+ $V(\tau^n\to c)\ne0$, every unitary $U$ on $n$ logical qubits, and every
+ $\epsilon>0$, the triple-$\tau$ code
+ $$(\mathbb C^2)^{\otimes n}\otimes V(\tau^n\to c)$$
+
+--- before/items/thm-qc-tqc-braid-action-unitary-and-artin.md
++++ proposal/items/thm-qc-tqc-braid-action-unitary-and-artin.md
+@@ -35,8 +35,10 @@
+ 
+ ## Statement
+ 
+-For a unitary braided fusion category, a simple charge $x$, and a fixed total
+-charge $c$, the operators in
++For a unitary braided fusion category $\mathcal C$, simple representatives
++$x,c\in\operatorname{Irr}(\mathcal C)$ as in
++[[def-qc-tqc-fusion-tree-basis]], $n\ge2$, and a nonzero fixed-total fusion
++space, the operators in
+ [[def-qc-tqc-braid-action-from-fusion-data]] define a unitary group
+ homomorphism
+ $$\rho_c:B_n\longrightarrow U(V(x^n\to c)).$$
+@@ -46,7 +48,7 @@
+ ## Facts & Assumptions
+ 
+ **Given:** A unitary fusion category with a specified unitary braiding, the
+-charge $x$, the nonzero fixed-charge fusion space $V(x^n\to c)$, and the
++simple representatives $x,c$, the nonzero fixed-charge fusion space $V(x^n\to c)$, and the
+ generator matrices $T_i^{-1}R_iT_i$.
+ 
+ [F1] In a braided monoidal category, the local braidings on $X^{\otimes n}$
+
+--- before/items/thm-qc-tqc-spectator-extension.md
++++ proposal/items/thm-qc-tqc-spectator-extension.md
+@@ -32,7 +32,7 @@
+ 
+ ## Statement
+ 
+-Assume $\mathrm{AC}_\omega$, $n\ge2$, and a total charge $c$ with
++Assume $\mathrm{AC}_\omega$, $n\ge2$, and a total-charge label $c\in\{1,\tau\}$ with
+ $V(\tau^n\to c)\ne0$. The code in $3n$ $\tau$ anyons factors as
+ $\mathcal C_n\cong(\mathbb C^2)^{\otimes n}\otimes V(\tau^n\to c)$.
+ For any adjacent pair of encoded triples, any $U\in U(4)$, and any

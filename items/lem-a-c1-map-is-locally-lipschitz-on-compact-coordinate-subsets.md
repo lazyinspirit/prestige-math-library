@@ -3,6 +3,7 @@ id: lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets
 kind: lemma
 title: "A $C^1$ map is locally Lipschitz on compact coordinate subsets"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: literature-derived
@@ -15,8 +16,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets.json
 sources:
   scraped: []
   references:
@@ -47,6 +52,6 @@ $\psi\circ F\circ\varphi^{-1}$ is Lipschitz on $\varphi(\overline W)$.
 
 1.1 Let $f:=\psi\circ F\circ\varphi^{-1}$. By [F1], $f$ is $C^1$ on the open set $\varphi(U)\subseteq\mathbb R^m$. For each $x\in\varphi(K)$ choose an open Euclidean ball $B_x$ with $\overline{B_x}$ compact and contained in $\varphi(U)$. [F1, given, choose]
 
-2.1 The derivative norm $\|Df\|$ is continuous on each compact ball $\overline{B_x}$, so [L1] gives a finite bound $L_x$ there. Since $\overline{B_x}$ is convex, [L2] makes $f$ $L_x$-Lipschitz on $\overline{B_x}$. [L1, L2, step 1.1]
+2.1 The derivative norm $\|Df\|$ is continuous on the compact ball $\overline{B_x}$, so [L1] gives a finite bound $L_x$ there. Apply [L2] first to the open convex ball $B_x$, where the mean-value inequality's domain hypothesis holds. For $u,v\in\overline{B_x}$, choose sequences $u_i,v_i\in B_x$ tending to them; continuity of $f$ extends $\|f(u_i)-f(v_i)\|\le L_x\|u_i-v_i\|$ to the same inequality for $u,v$. Thus $f$ is $L_x$-Lipschitz on $\overline{B_x}$. [L1, L2, step 1.1, algebra]
 
 3.1 Put $W_x:=\varphi^{-1}(B_x)$. Then $W_x$ is an open neighbourhood of $\varphi^{-1}(x)$ with $\overline{W_x}\subseteq U$, and $f$ is Lipschitz on $\varphi(\overline{W_x})=\overline{B_x}$. Since $x$ was arbitrary in $\varphi(K)$, the claim follows. [step 2.1, construct] ∎

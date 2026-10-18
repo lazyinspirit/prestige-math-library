@@ -15,6 +15,7 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-08-13
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/fs-every-solvable-group-is-abelian.json
 sources:
   scraped: []
   references:
@@ -45,6 +46,6 @@ pipeline_run: null
 
 1.1 By [L1], the derived series $S_3>A_3>1$ reaches $1$, so $S_3$ is solvable by [F1]. [L1, F1]
 
-1.2 The transpositions $(12)$ and $(23)$ do not commute, since $(12)(23)=(123)$ while $(23)(12)=(132)$. [algebra]
+1.2 The transpositions $(0\,1)$ and $(1\,2)$ do not commute, since $(0\,1)(1\,2)=(0\,1\,2)$ while $(1\,2)(0\,1)=(0\,2\,1)$. [algebra]
 
 2.1 Thus the solvable group $S_3$ is nonabelian, refuting the statement. [step 1.1, step 1.2] ∎

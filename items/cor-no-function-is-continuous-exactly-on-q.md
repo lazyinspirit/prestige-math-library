@@ -3,6 +3,7 @@ id: cor-no-function-is-continuous-exactly-on-q
 kind: corollary
 title: "No function $\\mathbb{R} \\to \\mathbb{R}$ is continuous at every rational and discontinuous at every irrational, because $\\mathbb{Q}$ is not $G_\\delta$"
 status: published
+dependency_level: 3
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,12 @@ landmark: true
 short: "nothing is continuous exactly on $\\mathbb{Q}$"
 proof_strategy: contradiction
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/cor-no-function-is-continuous-exactly-on-q.json
 sources:
   scraped: []
   references:

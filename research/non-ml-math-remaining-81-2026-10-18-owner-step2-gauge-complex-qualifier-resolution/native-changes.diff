@@ -1,0 +1,122 @@
+--- validated-step2-baseline/items/def-principal-connection-and-vertical-curvature.md
++++ items/def-principal-connection-and-vertical-curvature.md
+@@ -14,6 +14,7 @@
+   - def-differential-of-a-smooth-map
+   - def-smooth-vector-field-as-a-tangent-bundle-section
+   - def-lie-bracket-of-smooth-vector-fields
++  - thm-vector-fields-form-a-lie-algebra
+   - def-smooth-vector-bundle-rank-fibre-and-trivial-bundle
+ provenance:
+   statement: literature-derived
+@@ -57,14 +58,25 @@
+ **vertical-valued curvature** by
+ $$K_H(X,Y):=-v([hX,hY]),$$
+ where the vector-field bracket is the commutator
+-[[def-lie-bracket-of-smooth-vector-fields]]. This formula is tensorial in
+-$X,Y$: for a smooth function $f$,
++[[def-lie-bracket-of-smooth-vector-fields]]. The bracket definition gives the
++commutator on functions; [[thm-vector-fields-form-a-lie-algebra]] proves that
++it is again a smooth vector field. In a local frame adapted to the smooth
++splitting $TP=VP\oplus H$, the projections $h$ and $v$ are smooth. Therefore
++$v([hX,hY])$ is a smooth vertical vector field whenever $X,Y$ are smooth.
++This formula is tensorial in $X,Y$: for a smooth function $f$,
+ $$v([f hX,hY])=f\,v([hX,hY])-hY(f)\,v(hX)=f\,v([hX,hY]),$$
+ because $v(hX)=0$, and the same calculation in the second input gives
+-$v([hX,f hY])=f\,v([hX,hY])$. It is alternating because the bracket is
+-alternating. Consequently the formula defines a smooth alternating bundle map
+-$TP\times_P TP\to VP$, rather than depending on which local vector-field
+-extensions represent the tangent vectors.
++$v([hX,f hY])=f\,v([hX,hY])$, since $v(hY)=0$. It is alternating because
++the bracket is alternating. To see the induced bundle map is smooth, choose
++local smooth frames $E_1,\ldots,E_n$ of $TP$ and $F_1,\ldots,F_r$ of $VP$.
++Tensoriality gives, for
++$X=\sum_i f_iE_i$ and $Y=\sum_j g_jE_j$,
++$$K_H(X,Y)=\sum_{i,j}f_i g_j K_H(E_i,E_j).$$
++Each $K_H(E_i,E_j)$ is a smooth section of $VP$, so its components in the
++$F_a$ frame are smooth; the displayed formula therefore has smooth local
++coefficient functions. Thus the formula defines a smooth alternating bundle
++map $TP\times_P TP\to VP$, independent of the local vector-field extensions
++representing the tangent vectors.
+ 
+ This item uses the vertical-valued convention. It does not identify $VP$ with a
+ Lie-algebra-valued form or assert a Maurer–Cartan formula. Its axiom base
+--- validated-step2-baseline/items/def-gauge-group-of-a-smooth-principal-bundle.md
++++ items/def-gauge-group-of-a-smooth-principal-bundle.md
+@@ -12,6 +12,7 @@
+   - def-smooth-map-between-manifolds-with-boundary
+   - def-diffeomorphism-and-local-diffeomorphism-of-manifolds
+   - def-group
++  - prop-identity-maps-and-composites-of-smooth-maps-are-smooth
+ provenance:
+   statement: literature-derived
+   proof: not-applicable
+@@ -36,11 +37,18 @@
+ Here diffeomorphism has the meaning of
+ [[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]. The **gauge
+ group** $\mathcal G(P)$ is the set of these transformations under composition.
+-The identity satisfies the two conditions, compositions preserve them, and
+-the inverse of such a $\Phi$ also covers $M$ and commutes with the right
+-$G$-action: writing $q=\Phi(p)$ gives
+-$\Phi^{-1}(qg)=\Phi^{-1}(\Phi(p)g)=\Phi^{-1}(\Phi(pg))=pg$. Hence these maps
+-form a group under the composition law of [[def-group]].
++The identity is a smooth diffeomorphism and composites of smooth maps are
++smooth by
++[[prop-identity-maps-and-composites-of-smooth-maps-are-smooth]]; composites of
++diffeomorphisms are diffeomorphisms because their inverses are composites of
++the smooth inverses. The identity covers $M$ and commutes with the right
++action. If $\Phi,\Psi\in\mathcal G(P)$, then $\Phi\circ\Psi$ covers $M$ and
++$(\Phi\circ\Psi)(pg)=\Phi(\Psi(p)g)=\Phi(\Psi(p))g$, so the conditions are
++closed under composition. The inverse of such a $\Phi$ also covers $M$: if
++$q=\Phi(p)$ then $\pi(\Phi^{-1}(q))=\pi(p)=\pi(q)$. Equivariance gives
++$$\Phi^{-1}(qg)=\Phi^{-1}(\Phi(p)g)=\Phi^{-1}(\Phi(pg))=pg.$$
++Its smoothness is part of the diffeomorphism condition. Hence these maps form a
++group under the composition law of [[def-group]].
+ 
+ The structure group $G$ acts on each fibre of $P$, while $\mathcal G(P)$ acts
+ on the total bundle by automorphisms over the identity map of $M$. They are
+--- validated-step2-baseline/library/lie-theory/gauge-groups-and-representation-theory-interfaces.md
++++ library/lie-theory/gauge-groups-and-representation-theory-interfaces.md
+@@ -24,8 +24,9 @@
+ ## Global groups and representation lattices
+ 
+ The Lie algebra is the tangent space at the identity with its supplied bracket
+-([[def-lie-bracket-on-the-tangent-space-of-a-lie-group]]), while $G$ also has
+-global topology and multiplication. Those data are not interchangeable:
++([[def-lie-bracket-on-the-tangent-space-of-a-lie-group]]); that tangent-bracket
++definition assumes $\mathrm{AC}_\omega$. The group $G$ also has global
++topology and multiplication. Those data are not interchangeable:
+ [[cex-the-circle-and-line-have-isomorphic-one-dimensional-lie-algebras-but-are-not-isomorphic-lie-groups]]
+ compares $(\mathbb R,+)$ and $S^1$. Under countable choice,
+ [[thm-connected-lie-groups-are-central-quotients-of-their-simply-connected-integrations]]
+@@ -37,11 +38,15 @@
+ weight lattice $P$, the Axiom of Choice version of
+ [[prop-central-quotients-correspond-to-intermediate-character-lattices]]
+ identifies its central quotients with intermediate character lattices
+-$Q\subseteq X\subseteq P$. Finite-dimensional continuous irreducible
+-representations of a compact connected group are labelled by dominant
+-characters in the actual $X^*(T)$, and descent along a finite central cover
+-requires the covering kernel to act trivially
+-([[prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights]]).
++$Q\subseteq X\subseteq P$. Assuming AC and fixing a maximal torus $T$ and a
++positive system, the highest-weight classification for a compact connected
++group labels its finite-dimensional continuous irreducible representations
++by dominant characters in the actual $X^*(T)$
++([[thm-highest-weight-classification-for-a-compact-connected-lie-group]]).
++The comparison with the complexified derived Lie algebra and descent along a
++finite central cover, whose kernel must act trivially, is given under those
++same assumptions by
++[[prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights]].
+ Thus the full weight lattice of the simply connected form does not label
+ representations of every central quotient; the $SU(2)\to SO(3)$ example in
+ [[cex-the-full-weight-lattice-does-not-integrate-to-every-central-quotient-group]]
+--- validated-step2-baseline/library/lie-theory/gauge-groups-and-representation-theory-interfaces-examples.md
++++ library/lie-theory/gauge-groups-and-representation-theory-interfaces-examples.md
+@@ -15,7 +15,7 @@
+ 
+ [[ex-gauge-group-and-curvature-of-a-trivial-real-principal-bundle]] computes
+ the full gauge group of $\mathbb R^2\times\mathbb R$ and a nonconstant gauge
+-actions on its principal connection and an associated line bundle. It computes
++action on its principal connection and an associated line bundle. It computes
+ the induced multiplier $e^{u(x,y)}$ on the associated line and verifies
+ directly that the horizontal distribution changes while its vertical curvature
+ is carried by the bundle automorphism.

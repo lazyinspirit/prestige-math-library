@@ -1,0 +1,202 @@
+
+ITEM alg-qa-37-exhaustive-b6-block-pair-compiler
+
+
+## Definition
+
+**Inputs:** certified Cauchy names for targets $T_5\in SU(5)$ and
+$T_8\in SU(8)$; a positive binary-rational tolerance $\varepsilon$; and the
+fixed normalized six-strand Fibonacci B6 generators in both total-charge
+blocks. Enumerate all finite Artin words over the six-strand generators and
+their inverses, and at stage $s=1,2,\ldots$ inspect every word of length at
+most $s$ and every integer precision $1\le p\le s$ not previously inspected,
+in fixed lexicographic order. For each word $b$ and precision $p$, compute rational complex
+matrix approximants $P_{5,b,p},P_{8,b,p}$ to its exact normalized block
+matrices and request rational target approximants $Q_{5,p},Q_{8,p}$. Each
+real and imaginary entry error in these approximants is certified at most
+$2^{-p}$. For $d\in\{5,8\}$ compute the rational number
+$$s_{d,b,p}=\sum_{i,j}\Bigl(|\Re(P_{d,b,p}-Q_{d,p})_{ij}| +|\Im(P_{d,b,p}-Q_{d,p})_{ij}|\Bigr).$$
+Return the first word for which both rational tests
+$$s_{d,b,p}+4d\,2^{-p}<\varepsilon\qquad(d=5,8)$$
+hold. Output the word, its exponent sum, both rational certificates, and the
+measured search/precision costs in the ledger of
+[[def-qa-37-resource-cost-model]]. The braid matrices have computable
+algebraic entries from the fixed Fibonacci $F/R$ data
+[[lem-qc-tqc-fibonacci-b6-path-projectors-and-artin]]. This is a dovetailed
+partial search definition: no cutoff or useful word-length/time bound is
+asserted here. A separate theorem in this pair proves termination under certified target
+access. The returned matrices are
+normalized by the common $R_1$ scalar; their physical phase is recorded by
+[[def-qa-37-phase-reference-cost]].
+
+For this compiler subroutine's ledger record, $N_{\rm any}=6$,
+$\epsilon_{\rm op}=\varepsilon$, $N_{\rm meas}=B_{\rm out}=0$, and
+$N_{\rm phase}=t_{\rm phase}=0$ because it performs no measurement or phase
+correction. Preparation, ancilla, Hamiltonian-time, transport, measurement-
+implementation and physical-leakage coordinates are “not applicable” because
+this mathematical search supplies no physical realization. $L_{\rm in}$,
+$|b|$, $b_{\max}$, and $t_{\rm cl}$ record the encoded target/compiler inputs,
+returned word, greatest precision request, and measured search/postprocessing
+bit time.
+
+## Facts & Assumptions
+
+**Given:** The exact normalized braid matrices, rational approximants with
+entrywise coordinate error at most $2^{-p}$, and the two accepted rational
+tests.
+
+[F1] The certified fixed-dimensional input supplies rational complex matrix
+approximants whose real and imaginary coordinates each have error at most
+$2^{-p}$. [[def-qa-37-certified-matrix-input]]
+
+[F2] For a finite matrix, the operator norm is at most the Frobenius norm.
+[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]]
+
+[F3] The normalized B6 matrices are fixed finite-dimensional algebraic
+matrices in the declared total-charge blocks.
+[[lem-qc-tqc-fibonacci-b6-path-projectors-and-artin]]
+
+## Proof
+
+1.1 For any $d\times d$ complex matrix whose real and imaginary entry coordinates have errors at most $2^{-p}$, the Frobenius norm of the error is at most $d\sqrt2\,2^{-p}$. Apply this to the word approximant and target approximant using [F1]; their two errors total at most $2d\sqrt2\,2^{-p}<3d\,2^{-p}$. The triangle inequality for the Euclidean entry norm therefore gives $\|B_d(b)-T_d\|_F\le\|P_{d,b,p}-Q_{d,p}\|_F+3d2^{-p}$. [F1, F3, given, algebra]
+
+2.1 The sum of the absolute real and imaginary coordinates in $s_{d,b,p}$ dominates the Frobenius norm of $P_{d,b,p}-Q_{d,p}$. By [F2], $\|B_d(b)-T_d\|_{\rm op}\le\|B_d(b)-T_d\|_F\le s_{d,b,p}+3d2^{-p}<s_{d,b,p}+4d2^{-p}<\varepsilon$. Thus each accepted rational test certifies the strict operator-norm bound in its block. [F2, step 1.1, given, algebra] ∎
+
+ITEM def-qa-37-finite-adiabatic-braid-input
+
+
+## Definition
+
+A **finite adiabatic braid input** consists of a finite-dimensional complex
+Hilbert space $V$, a $C^2$ Hermitian path $H(s)$ on $0\le s\le1$, a
+norm-continuous constant-rank orthogonal spectral projection $P(s)$ onto a
+coherently followed band with uniform positive full gap, a slow-time schedule
+$T>0$, and an explicit initial isometry $A_0:\mathbb C^m\to\operatorname{ran}P(0)$.
+These are the path and propagator hypotheses of
+[[def-qa-36-finite-adiabatic-path-model]]; the output propagator $U_T$ solves
+$iU_T'(s)=TH(s)U_T(s)$. Also supply an endpoint isometry
+$A_1:\mathbb C^m\to\operatorname{ran}P(1)$ and a specified Fibonacci braid
+word $b$ with physical action $\rho(b)$ from
+[[def-qc-tqc-physical-braid-interface]] in the fixed convention of
+[[ex-qc-tqc-fibonacci-data]], and a unitary target
+$\rho_{\rm log}(b)\in U(\mathbb C^m)$ in the declared logical input/output
+frames. The target $\rho_{\rm log}(b)$ is the selected categorical $F/R$
+action written in those frames, including the phase convention recorded by
+[[def-qa-37-phase-reference-cost]]; specifying it does not assert that the
+physical path realizes it. The **in-band transport condition** is the separate
+hypothesis
+$$\|P(1)U_T(1)A_0-A_1\rho_{\rm log}(b)\|_{\rm op}\le\epsilon_{\rm tr}.$$
+This condition is not a consequence of a projector-leakage estimate. The
+model also specifies a finite output measurement and, if needed, its own
+implementation-variation bound. The JRS expression and leakage consequence
+are handled as a separate result.
+
+ITEM lem-qa-37-fixed-sector-global-phase
+
+
+## Statement
+
+For every Fibonacci braid word $b$ with exponent sum $k$, its physical
+operator differs from the normalized operator by the common scalar
+$R_1^k$ on every fixed-charge block. On the three-anyon SU(2)-lift alphabet
+$zB_j$, the corresponding scalar is $(R_1z^{-1})^k$. The scalar leaves
+uncontrolled fixed-sector measurement probabilities unchanged; under a
+coherent control it is a relative phase and cannot be discarded without a
+phase-reference correction.
+
+## Facts & Assumptions
+
+**Given:** The fixed Fibonacci $F/R$ convention, a finite Artin word $b$, its
+exponent sum $k$, and either an uncontrolled fixed-sector use or a controlled
+use.
+
+[F1] The Fibonacci determinant-character supplier proves that exponent sum
+records the same $R_1$ scalar on every charge block and that a controlled
+scalar becomes relative. [[lem-qc-tqc-determinant-character-phase]]
+
+[F2] An isolated unit-modulus scalar does not change measurement
+probabilities. [[thm-qc-standalone-global-phase-invariance]]
+
+[F3] A scalar applied only on the active coherent-control branch can change
+measurement probabilities. [[thm-qc-controlled-global-phase-is-relative-phase]]
+
+## Proof
+
+1.1 Let $b=\sigma_{i_1}^{\varepsilon_1}\cdots\sigma_{i_m}^{\varepsilon_m}$, where $\varepsilon_j\in\{1,-1\}$. Each generator contributes $R_1$ and its inverse contributes $R_1^{-1}$, so their scalar product is $R_1^{\sum_j\varepsilon_j}=R_1^k$. The Artin relations preserve exponent sum, hence this factor is independent of the word representative by [F1]. For $\widehat B_j=zB_j$, the normalized product contributes $z^k$; solving for the physical matrix gives $(R_1z^{-1})^k\widehat B(b)$. [given, F1, algebra]
+
+2.1 On a standalone fixed sector the factor $R_1^k$ (or $(R_1z^{-1})^k$ for the lifted alphabet) has modulus one, so [F2] gives identical outcome probabilities. Under coherent control only the active branch receives this scalar, so [F3] shows that the relative phase can change outcomes; the exact scalar and correction cost must therefore be recorded as in the phase-reference definition. [F1, F2, F3, step 1.1] ∎
+
+ITEM thm-qa-37-exhaustive-b6-compiler-terminates
+
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$. For every certified Cauchy input pair
+$(T_5,T_8)\in SU(5)\times SU(8)$ and every positive rational
+$\varepsilon$, the exhaustive compiler of
+[[alg-qa-37-exhaustive-b6-block-pair-compiler]] halts with one six-strand
+Fibonacci braid word whose normalized total-charge-$1$ and total-charge-$\tau$
+matrices are each within operator norm $\varepsilon$ of $T_5,T_8$,
+respectively. Density proves termination, but this result gives no useful
+joint-block word-length or search-time bound.
+
+## Facts & Assumptions
+
+**Given:** The normalized B6 representation, $\mathrm{AC}_\omega$, certified
+Cauchy names for $T_5,T_8$, and rational $\varepsilon>0$.
+
+[F1] The joint closure of the normalized B6 image contains
+$SU(5)\times SU(8)$ under ACω. [[lem-qc-tqc-b6-joint-su5-su8-density]]
+
+[F2] Each target name returns rational complex matrices converging entrywise
+with the stated certified precision. [[def-qa-37-certified-matrix-input]]
+
+[F3] The compiler enumerates every finite B6 word and dovetails all
+precision levels; an accepted certificate implies both operator errors are
+strictly below $\varepsilon$.
+[[alg-qa-37-exhaustive-b6-block-pair-compiler]]
+
+[F4] For a $d\times d$ matrix, $\|A\|_F\le\sqrt d\|A\|_{\rm op}$, and $\|A\|_{\rm op}\le\|A\|_F$.
+[[thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison]]
+
+[A1] Assume exactly $\mathrm{AC}_\omega$ as used by [F1].
+[[def-countable-choice]]
+
+## Proof
+
+1.1 The product of open operator-norm $\varepsilon/128$-balls around $T_5,T_8$ is a neighborhood in $SU(5)\times SU(8)$. By [A1] and [F1], it meets the normalized B6 image, so there is one finite braid word $b_*$ with both block operator errors less than $\varepsilon/128$. For dimension $d\le8$, the real-coordinate $\ell^1$ norm of a complex matrix is at most $\sqrt2 d\|A\|_F\le\sqrt2 d^{3/2}\|A\|_{\rm op}\le32\|A\|_{\rm op}$ by [F4]. Hence the exact coordinate-sum distance in either block is strictly less than $\varepsilon/4$. [A1, F1, F4, given, choose, algebra]
+
+2.1 Fix this finite word. Its exact block matrices and the targets have coordinate approximants converging to their entries by [F2]–[F3]. Therefore $s_{d,b_*,p}$ converges to the real-coordinate $\ell^1$ distance between the exact word block and target; by step 1.1 that limit is less than $\varepsilon/4$. Since $4d2^{-p}\to0$, some finite $p$ makes both certificates strictly below $\varepsilon$. Dovetailing eventually examines $(b_*,p)$, and certificate soundness [F3] ensures acceptance. Thus the procedure halts. ACω enters only through [A1] and [F1]; density gives no search-index bound. [F2, F3, A1, step 1.1, algebra, F1] ∎
+
+ITEM thm-qa-37-jrs-leakage-bound
+
+
+## Statement
+
+For a finite adiabatic braid input with rank-$m$ spectral band and schedule
+$T>0$, define
+$$A_m(s)=\frac1T\left[\frac{m\|H'(0)\|}{g(0)^2} +\frac{m\|H'(s)\|}{g(s)^2} +\int_0^s\left(\frac{m\|H''(r)\|}{g(r)^2} +\frac{7m\sqrt m\|H'(r)\|^2}{g(r)^3}\right)dr\right].$$
+Then
+$\|U_T(s)P(0)U_T(s)^*-P(s)\|\le A_m(s)$, and every unit initial band
+vector has leakage probability at most $A_m(s)^2$. In particular,
+$\|[I-P(1)]U_T(1)A_0\|_{\rm op}\le A_m(1)$ and leakage probability is at
+most $A_m(1)^2$. This result does not prove the separate in-band transport
+condition or identify band transport with Fibonacci $F/R$ data.
+
+## Facts & Assumptions
+
+**Given:** The finite-dimensional $C^2$ Hermitian path, its constant-rank
+uniformly gapped band, preparation isometry, schedule $T>0$, and propagator.
+
+[F1] The JRS theorem gives the displayed rank-dependent projector bound and
+transition-probability bound. [[thm-qa-36-jrs-finite-adiabatic-bound]]
+
+[F2] The preparation isometry maps every unit vector in $\mathbb C^m$ to a
+unit vector in $\operatorname{ran}P(0)$.
+[[def-qa-37-finite-adiabatic-braid-input]]
+
+## Proof
+
+1.1 The hypotheses of [F1] are exactly the finite-path, $C^2$, constant-rank, uniform-gap and $T>0$ clauses in the input definition. Substituting its $H,P,g,m,T$ into the JRS expression gives the displayed $A_m(s)$ and $\|U_T(s)P(0)U_T(s)^*-P(s)\|\le A_m(s)$. [F1, F2, given, algebra]
+
+2.1 Let $v\in\mathbb C^m$ be unit and set $\psi=A_0v$. By [F2], $\psi$ is a unit vector in the initial band, so [F1] gives $\|[I-P(1)]U_T(1)\psi\|^2\le A_m(1)^2$. Taking square roots and then the supremum over unit $v$ gives $\|[I-P(1)]U_T(1)A_0\|_{\rm op}\le A_m(1)$. The squared bound is its leakage probability. No statement in [F1] supplies the in-band comparison $\epsilon_{\rm tr}$; that remains an independent input hypothesis. [F1, F2, step 1.1, algebra] ∎

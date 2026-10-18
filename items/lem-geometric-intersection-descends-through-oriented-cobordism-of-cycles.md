@@ -13,9 +13,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: "gpt-6.1-sol"
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-06
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/lem-geometric-intersection-descends-through-oriented-cobordism-of-cycles.json
 sources:
   references:
     - title: "Ralph L. Cohen, Bundles, Manifolds, and Homotopy (author draft bookR4)"
@@ -40,7 +41,7 @@ If $F$ and its boundary restriction are transverse to $B$, the equality is obtai
 
 **Given:** $M,B,A_0,A_1,W,F$ and $\mathrm{AC}_\omega$ as in the statement.
 
-[F1] A map transverse to a closed submanifold, also on its boundary, has a neat transverse preimage of dimension source dimension minus target codimension ([[thm-transverse-preimage-for-manifolds-with-boundary]]).
+[F1] Suppose a smooth map $F:W^p\to N$ to a boundaryless manifold and its boundary restriction are transverse to a closed embedded submanifold $Z$ of codimension $c$. If $c\le p$, then $F^{-1}(Z)$ is an embedded manifold with boundary of dimension $p-c$ (possibly empty), with boundary $(F|_{\partial W})^{-1}(Z)$; it is neat when $p-c\ge1$, and lies in the interior with empty boundary when $c=p$. If $c>p$, then $F^{-1}(Z)=\varnothing$ ([[thm-transverse-preimage-for-manifolds-with-boundary]]).
 
 [F2] Boundary orientation is outward-normal-first, and the signed boundary count of a compact oriented one-manifold is zero ([[def-induced-boundary-orientation]], [[lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count]]).
 

@@ -1,0 +1,107 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "19",
+  "input_sha256": "c7f3b34dc8a7ef86a37e42498266d95bcbf10fabe5fd5ddee2d4b09e84534d65",
+  "decisions": [
+    {
+      "id": "lem-complex-gaussian-interference-entropy-estimates",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "16a304fc2ec5ecc5e02fa6f07edd7f79a05e21e994b1be3f6a70f1251bdba388",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Steps 1.1 and 2.1 identify natural-log KL mutual information in nats with base-two differential-entropy differences in bits. For independent unit circular Gaussian X,Z, the two quantities are ln(2) and 1, respectively. These are false equalities in the load-bearing degradation argument, a logic defect. Repaired by I(X;BX+Z)=(ln 2)[h(BX+Z)-h(Z)] and by dividing each unconditional and conditional mutual-information term in step 2.1 by ln 2.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/cs/0702045"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-complex-gaussian-interference-entropy-estimates",
+      "disposition": "repaired",
+      "post_sha256": "a5b3f176686441675c2b2131fd2f8a53a0dac07c82d11aca13ca455c37262f4b",
+      "review_context_sha256": "3096ded100a07b2ba702a6b7f5607516aa48a833f9c01b94a0e9dc1726732cc1",
+      "reason": "Checked Gaussian smoothing gives bounded joint/marginal/residual densities, finite entropy and positive-definite real covariance, including singular input laws. The density-ratio integral now converts nats to bits explicitly. The degraded Markov chain gives the corrected conditional-information identity; its residual variance is (1-t/s)(1+sp)/(1+tp), and the increasing concave logarithmic ratio gives Jensen under the average variance bound. Independent-user residual variances and their concavity prove every unconditional/genie bound, including reflected cases, zero gains, t=0 and s=t. Clarified F2 conversion and hypotheses and mirrored the repaired steps in the owning contract. Statement unchanged. This is the repair author assessment, not an independent review.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/cs/0702045"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-complex-gaussian-interference-entropy-estimates",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "location": "Proof steps 1.1 and 2.1",
+      "reason": "Steps 1.1 and 2.1 identify natural-log KL mutual information in nats with base-two differential-entropy differences in bits. For independent unit circular Gaussian X,Z, the two quantities are ln(2) and 1, respectively. These are false equalities in the load-bearing degradation argument, a logic defect. Repaired by I(X;BX+Z)=(ln 2)[h(BX+Z)-h(Z)] and by dividing each unconditional and conditional mutual-information term in step 2.1 by ln 2.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/cs/0702045"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "conventions": "All h quantities in the assigned lemma use bits; the cited measure-theoretic I quantities use natural-log KL in nats. AC remains inherited and unchanged.",
+    "dependencies_checked": [
+      "def-real-two-user-gaussian-interference-channel",
+      "def-measure-theoretic-mutual-information",
+      "lem-complex-scalar-gaussian-maximum-differential-entropy",
+      "lem-bounded-density-finite-second-moment-has-finite-differential-entropy",
+      "lem-standard-borel-conditional-mutual-information-chain-rule-and-data-processing"
+    ],
+    "source_consultation": [
+      {
+        "url": "https://arxiv.org/pdf/cs/0702045",
+        "locator": "Section 3.4, printed page 14, equations (16)-(18) and the complete displayed conditional-entropy estimate with its explanation",
+        "establishes": "Genie-conditioned scalar entropy bounds follow from Gaussian extremality at fixed covariance and Jensen; the unit conversion was verified directly from the local natural-log definition."
+      }
+    ],
+    "statement_comparison": {
+      "unchanged": true,
+      "before_sha256": "253109dd654665d3c06b7242676e4ad5e6f621531709c4a0024cce0377ebc14e",
+      "after_sha256": "253109dd654665d3c06b7242676e4ad5e6f621531709c4a0024cce0377ebc14e",
+      "reason": "The patch modifies only Facts & Assumptions and Proof; the original Statement text was preserved, and its exact section hash matches the frozen assignment."
+    },
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-complex-gaussian-interference-entropy-estimates.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-complex-gaussian-interference-entropy-estimates.md",
+        "exit_code": 0,
+        "result": "1 file; all math parses under real KaTeX and frontmatter parses under renderer YAML"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-complex-gaussian-interference-entropy-estimates.md",
+        "exit_code": 0,
+        "result": "1 item, 4 steps, 0 defects"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/non-ml-math-remaining-81-2026-10-18-batch-19.proof-contracts.json --strict --items lem-complex-gaussian-interference-entropy-estimates",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked"
+      }
+    ],
+    "shared_metadata": "Owning contract reread and edited only after acquiring tools/step5-shared-write-lock.mjs; strict focused check passed before release.",
+    "published_consumer_ledger": "No proposed update: no published carrier changed, no published-consumer defect discovered, and the assigned Statement is unchanged.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and ordinary independent rejudgment; no judgment or certification was written."
+  }
+}

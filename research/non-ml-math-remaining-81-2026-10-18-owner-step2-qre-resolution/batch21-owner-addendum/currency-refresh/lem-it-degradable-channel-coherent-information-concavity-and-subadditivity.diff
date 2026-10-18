@@ -1,0 +1,33 @@
+--- 
++++ 
+@@ -19,6 +19,8 @@
+   - thm-qc-channels-compose-and-tensor
+   - lem-it-quantum-coherent-information-complement-identity
+   - thm-complex-spectral-theorem-for-normal-endomorphisms
++  - thm-qc-schmidt-decomposition
++  - thm-natural-logarithm-laws
+ justified_by: []
+ proof_strategy: direct
+ axiom_use: "No choice axiom is used; all ensembles and spectral decompositions are finite."
+@@ -61,15 +63,19 @@
+ 
+ [F8] [[lem-it-quantum-and-private-information-product-additivity]]: coherent information is additive on product input states for product channels.
+ 
++[F9] [[thm-qc-schmidt-decomposition]]: the receiver and environment marginals of the pure Stinespring output of a pure input have the same positive eigenvalues.
++
++[F10] [[thm-natural-logarithm-laws]]: $\ln(xy)=\ln x+\ln y$ for positive $x,y$; it supports the cq entropy identity stated in [F3].
++
+ ## Proof
+ 
+-1.1 Fix a finite input ensemble $\mathcal E=\{p_x,\rho_x\}$ with average $\bar\rho$. By [F2] and [F3], $I_p(\mathcal E,\mathcal N_i)=I(X;B_i)-I(X;E_i)$, where $B_i$ and $E_i$ denote the receiver and complementary output registers for the ensemble. Since $E_i$ is obtained from $B_i$ by $\mathcal D_i$ in [F1], [F4] gives $I(X;E_i)\le I(X;B_i)$. Thus $I_p(\mathcal E,\mathcal N_i)\ge0$. [F1, F2, F3, F4, given, algebra]
++1.1 Fix a finite input ensemble $\mathcal E=\{p_x,\rho_x\}$ with average $\bar\rho$. By [F2] and [F3], $I_p(\mathcal E,\mathcal N_i)=I(X;B_i)-I(X;E_i)$, where $B_i$ and $E_i$ denote the receiver and complementary output registers for the ensemble. The finite cq entropy calculation uses the block eigenvalues $p_x\lambda_{xj}$ and the logarithm product law [F10]. Since $E_i$ is obtained from $B_i$ by $\mathcal D_i$ in [F1], [F4] gives $I(X;E_i)\le I(X;B_i)$. Thus $I_p(\mathcal E,\mathcal N_i)\ge0$. [F1, F2, F3, F4, F10, given, algebra]
+ 
+ 1.2 For a joint state $\rho_{A_1A_2}$, write $\rho_i$ for its marginals, $\omega_{B_1B_2}=(\mathcal N_1\otimes\mathcal N_2)(\rho)$, and $\eta_{E_1E_2}=(\mathcal N_1^c\otimes\mathcal N_2^c)(\rho)$. Expanding the entropies in [F5] and using [F2], [F6] gives $I_c(\rho,\mathcal N_1\otimes\mathcal N_2)-I_c(\rho_1,\mathcal N_1)-I_c(\rho_2,\mathcal N_2)=-I(B_1:B_2)_\omega+I(E_1:E_2)_\eta$. The tensor product $\mathcal D_1\otimes\mathcal D_2$ maps $\omega$ to $\eta$, so [F4] gives $I(E_1:E_2)_\eta\le I(B_1:B_2)_\omega$. The right side is therefore nonpositive, proving the claimed inequality. [F1, F2, F4, F5, F6, algebra]
+ 
+ 2.1 Rewrite the inequality $I_p(\mathcal E,\mathcal N_i)\ge0$ using [F2]. For every finite ensemble with average $\bar\rho$, this yields $I_c(\bar\rho,\mathcal N_i)\ge\sum_xp_xI_c(\rho_x,\mathcal N_i)$, which is exactly concavity of coherent information on the finite-dimensional state space. [F2, step 1.1, algebra]
+ 
+-3.1 Let $\rho=\sum_j\lambda_j|u_j\rangle\langle u_j|$ be a spectral decomposition from [F7]. For each pure $|u_j\rangle$, an isometric Stinespring dilation produces a pure receiver-environment vector, so the two marginal entropies agree and [F5] gives $I_c(|u_j\rangle\langle u_j|,\mathcal N_i)=0$. Concavity from step 2.1 therefore implies $I_c(\rho,\mathcal N_i)\ge\sum_j\lambda_j\cdot0=0$. [F5, F7, step 2.1, algebra, construct]
++3.1 Let $\rho=\sum_j\lambda_j|u_j\rangle\langle u_j|$ be a spectral decomposition from [F7]. For each pure $|u_j\rangle$, an isometric Stinespring dilation produces a pure receiver-environment vector, so the two marginal entropies agree by [F9] and [F5] gives $I_c(|u_j\rangle\langle u_j|,\mathcal N_i)=0$. Concavity from step 2.1 therefore implies $I_c(\rho,\mathcal N_i)\ge\sum_j\lambda_j\cdot0=0$. [F5, F7, F9, step 2.1, algebra, construct]
+ 
+ 4.1 The inequality in step 1.2 gives the upper bound on the optimized coherent information. Product inputs give equality by [F8]; choosing inputs within arbitrary $\delta>0$ of each finite supremum and letting $\delta\downarrow0$ proves additivity of the supremum. [F8, step 1.2, algebra, choose] ∎
+ 

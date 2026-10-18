@@ -1,0 +1,30 @@
+--- items/lem-finite-message-fano-for-density-observation.md
++++ research/non-ml-math-remaining-81-2026-10-18-owner-step2-dmc-gaussian-resolution/zero-integral/proposed/items/lem-finite-message-fano-for-density-observation.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: non-ml-math-remaining-81-2026-10-18
+ dependency_level: 7
+-deps: [def-natural-logarithm, def-qa-35-finite-probability-entropy-and-stochastic-matrices, thm-it-fano-inequality, thm-it-finite-kl-nonnegative-equality]
++deps: [def-natural-logarithm, def-qa-35-finite-probability-entropy-and-stochastic-matrices, thm-it-fano-inequality, thm-it-finite-kl-nonnegative-equality, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, cor-finite-nonnegative-integral-implies-finite-almost-everywhere, cor-integral-over-a-null-set-vanishes]
+ justified_by: []
+ aliases: []
+ proof_strategy: direct
+@@ -40,10 +40,16 @@
+ 
+ [F4] [[def-natural-logarithm]]: the logarithms are natural, so entropies are in nats.
+ 
++[F5] [[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]]: a nonnegative measurable function with zero integral is zero almost everywhere, on an arbitrary measure space.
++
++[F6] [[cor-finite-nonnegative-integral-implies-finite-almost-everywhere]]: a nonnegative measurable function with finite integral is finite almost everywhere.
++
++[F7] [[cor-integral-over-a-null-set-vanishes]]: the nonnegative integral over a measurable null set is zero, even for an extended-valued integrand.
++
+ ## Proof
+ 
+-1.1 On the set $q(y)>0$, Bayes' formula gives the posterior probability vector $\pi(y)$. Thus $H(M\mid Y)=\int q(y)H(\pi(y))\,d\nu(y)$; the integrand is bounded by $\ln N$, so the conditional entropy is finite. [F1, given, algebra]
++1.1 Since $\int q\,d\nu=N^{-1}\sum_m\int p_m\,d\nu=1$, [F6] makes $B=\{q=+\infty\}$ a measurable $\nu$-null set. Replace every $p_m$ by zero on $B$ and use their new mixture $q$; [F7] shows that all conditional and marginal laws are unchanged. These density versions are finite everywhere, since $p_m\le Nq$ off $B$. Define $\pi_m=p_m/(Nq)$ where $q>0$ and $\pi_m=1/N$ where $q=0$. This is a measurable probability vector everywhere and a posterior version: for every measurable $A$, $\int_A q\pi_m\,d\nu=N^{-1}\int_Ap_m\,d\nu=\Pr(M=m,Y\in A)$. Values on the zero-density set have no effect. Thus $H(M\mid Y)=\int H(\pi)\,dQ$, where $dQ=q\,d\nu$ is the observation probability law. By [F1] and comparison with the uniform vector in [F2], $0\le H(\pi)\le\ln N$, so this conditional entropy is finite. All posterior formulas in the Statement are understood for these almost-everywhere density versions. [F1, F2, F6, F7, given, algebra]
+ 
+-2.1 For each decoder value $j$ with $\alpha_j=\Pr[g(Y)=j]>0$, let $A_j=g^{-1}(j)$ and $r^{(j)}=\alpha_j^{-1}\int_{A_j}q(y)\pi(y)\,d\nu(y)$ be the posterior given that estimate. If $r_m^{(j)}=0$, then $\pi_m(y)=0$ for $q(y)d\nu$-almost every $y\in A_j$. Otherwise expansion gives $\alpha_j^{-1}\int_{A_j}q(y)D(\pi(y)\|r^{(j)})\,d\nu(y)=H(r^{(j)})-\alpha_j^{-1}\int_{A_j}q(y)H(\pi(y))\,d\nu(y)\ge0$ by [F2]. Summing over $j$ proves $H(M\mid g(Y))\ge H(M\mid Y)$. [F1, F2, step 1.1, given, algebra, cases]
++2.1 For each decoder value $j$ with $\alpha_j=Q(A_j)>0$, let $A_j=g^{-1}(j)$ and $r^{(j)}=\alpha_j^{-1}\int_{A_j}\pi\,dQ$; this is the posterior probability vector given that estimate. If $r_m^{(j)}=0$, then $\int_{A_j}\pi_m\,dQ=0$, so [F5], applied to the measure $Q$ restricted to $A_j$, gives $\pi_m=0$ almost everywhere there. Discard the union of these finitely many exceptional null sets. On the remainder, $\pi$ is supported on the positive coordinates of $r^{(j)}$, so $D(\pi\|r^{(j)})$ has no infinite term. The finitely many constants $\ln r_m^{(j)}$ on that support and the bounded entropy in step 1.1 justify termwise integration. Expansion and [F2] give $\alpha_j^{-1}\int_{A_j}D(\pi\|r^{(j)})\,dQ=H(r^{(j)})-\alpha_j^{-1}\int_{A_j}H(\pi)\,dQ\ge0$. Decoder cells of zero $Q$-mass contribute zero; summing over the other cells proves $H(M\mid g(Y))\ge H(M\mid Y)$. [F1, F2, F5, step 1.1, given, algebra, cases]
+ 
+ 3.1 Apply [F3] to the finite pair $(M,g(Y))$. Its sharp and relaxed Fano bounds give both upper inequalities in the Statement; the entropy convention in [F4] makes them nats. Together with step 2.1 this proves the full chain. [F3, F4, step 2.1, given] ∎

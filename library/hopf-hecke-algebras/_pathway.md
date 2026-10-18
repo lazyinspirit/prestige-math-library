@@ -31,6 +31,9 @@ parts:
       - cyclotomic-hecke-quotients-and-ariki-koike-pbw
       - cyclotomic-murphy-bases-and-cellular-module-constructions
       - hecke-symmetries-and-generic-quantum-schur-weyl-duality
+  - part: algebra-and-physics-extensions
+    title: Algebra and representation interfaces
+    pages: ["hopf-hecke-and-quantum-symmetry-interfaces", "quasi-hopf-weak-hopf-and-relative-tensor-products", "affine-hecke-algebras-beyond-type-a", "double-affine-hecke-algebras-and-macdonald-theory"]
 ---
 
 ## foundations
@@ -48,3 +51,7 @@ Prove Coxeter exchange and reduced-word independence before the generic Hecke ba
 ## affine-cyclotomic-and-tensor-actions
 
 Prove affine Laurent divisibility and PBW, then cyclotomic spanning and independence before integral cellular structure. The concrete tensor operator gives a Hecke action; full generic quantum centralizers remain a separately gated proof target.
+
+## algebra-and-physics-extensions
+
+These draft extensions connect the existing foundations to algebraic structures and representation problems motivated by theoretical physics. Each companion supplies the planned examples and boundary cases; exact hypotheses, local proof obligations, and reuse holds remain in its page contract.

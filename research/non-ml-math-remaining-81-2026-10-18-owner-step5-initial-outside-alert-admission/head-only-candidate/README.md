@@ -1,0 +1,24 @@
+# Guarded HEAD-only code commit candidate
+
+These three candidate files contain only this task's v2 admission change applied to HEAD `65e0ef0befb12bcd8726227e0e6983c1e07bfd12`. The full combined foreign+v2 working proposals remain unchanged in the parent packet's `proposed/`. No canonical working file, main index, Git object store, ref or HEAD was changed here. `git hash-object` was used without `-w` only to compute prospective blob IDs.
+
+The requested three-way merge used ours=`proposed`, base=`before` (actual foreign working baseline), theirs=`git show HEAD:PATH`. Documentation merged cleanly; the new test was absent from HEAD, the working tree and index, so its complete new bytes are owned. The module had two mechanical overlap conflicts. They were resolved narrowly:
+
+1. Retain HEAD's exact strict legacy summary clauses; retain only our new branch closure and owner-source guards. Exclude foreign abbreviated-summary handling.
+2. Retain our new owner-current-source branch/wrapper; retain HEAD's exact legacy native_log_record declaration inside the legacy branch. Exclude foreign native_log_span parsing.
+
+The auto-merged candidate also excludes the foreign v1 batch-route alias. No foreign legacy behavior was committed into the candidate. `head-before/` archives HEAD blobs; `foreign-baseline/` archives exact untouched foreign binary diffs. `guards.json` binds HEAD, owned HEAD/index rows and ordinary index flags, original working raw bytes, each foreign diff hash, complete raw main-index hash, candidate raw hashes and computed candidate Git blob IDs. The candidate test still passes all 57 fixtures, including legacy v1/untyped-v2 behavior. See test-results.json and fixture-results.tap.
+
+## Root integration and partial-commit plan
+
+This is a plan, not an executed Git transaction. Root must perform it only at the actual paused/drained5.1 boundary after its code review.
+
+1. Recheck actual HEAD, each of the three owned index rows/flags, empty cached diff for those paths, current working preimage hashes and foreign diff hashes against guards.json. Reject intervening changes. The new test must still have no pre-existing owner, working file or index entry. Preserve the full current main-index raw bytes in a durable/root-controlled backup; do not reset or reconstruct unrelated staged entries.
+2. Apply the combined parent `proposed/` delta to the three canonical working files only after matching their actual `before/` preimages. This retains foreign unstaged legacy hunks alongside the new v2 work. No WORKFLOW or scientific source is included in this code commit. Recheck the resulting working files against the full combined proposals.
+3. Use a fresh separate temporary index, seeded by `git read-tree` of the exact guarded HEAD. Write the three reviewed HEAD-only candidate blobs to the object store, verify their returned IDs against guards.json, and use cacheinfo for exactly those three `100644` paths in the temporary index. Write its tree. Inspect the tree diff against the guarded HEAD: exactly the three owned paths and exactly head-only.patch must differ. The 523k foreign staged paths in the main index must never be used to build this tree.
+4. Create the scoped code commit from that tree with the guarded HEAD as its sole parent, then inspect its actual diff. Before moving a ref, recheck actual HEAD, the exact raw main index, owned rows/flags and the combined working bytes. Update the current branch/HEAD through an atomic compare-and-swap from that exact old HEAD to the inspected commit. If the comparison fails, do not force or rebase over unknown changes; rederive the candidate and guards.
+5. Update only these three owned main-index cacheinfo entries to their reviewed candidate blobs, retaining all unrelated entries and flags. The previously guarded owned entries equal original HEAD, so no foreign owned staged difference is overwritten. Recheck that the main index outside these three paths is byte/entry-equivalent to its saved predecessor; verify only these three intended owned changes occurred. The combined working files remain untouched: their residual unstaged diffs against the new index are exactly the archived foreign legacy module/docs changes, with the necessary wrapper context relocated, and no test residue. Do not reset the index or checkout candidate files over the working tree.
+
+Ref/index changes are separate operations; a failure after ref movement must be reported as a landed commit with pending index alignment, not retried as though nothing happened. Preserve the original index backup and commit identity for explicit recovery. Every check should use the fresh actual boundary state; these historical guards are not permission to overwrite a race.
+
+Root retains actual code integration/testing, scoped commit and ordinary runtime admission. This packet supplies no source acceptance, native review, registry creation, stage transition or gate coverage.

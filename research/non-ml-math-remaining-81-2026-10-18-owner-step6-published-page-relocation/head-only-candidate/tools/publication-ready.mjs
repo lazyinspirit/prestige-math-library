@@ -1,0 +1,131 @@
+#!/usr/bin/env node
+// Structured Step 6 verdict. This does not publish: it proves that workflow-
+// owned work is closed and leaves only the owner's audit/status/push decisions.
+//
+// The receipt also seals the run's subjects, prerequisite context and tools. The expensive final
+// gates run against that sealed tree at 9-readiness-v2; terminal verification
+// recomputes the digest instead of rerunning the same mathematical scans. Files
+// that Step 6 creates after readiness and the context-hash acceleration cache
+// that closure verification refreshes are excluded. The authoritative closure
+// receipt is hashed separately below; mathematical and workflow inputs remain
+// protected.
+
+import { spawnSync } from 'node:child_process';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { REPO } from './paths.mjs';
+import { runContentHash, runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
+import { scopedReadinessTree } from './step6-scoped-tree.mjs';
+import { step6OwnedInputs } from './step6-owned-inputs.mjs';
+import { unchangedPublishedPageRelocation } from './publication-baseline.mjs';
+
+const argv = process.argv.slice(2);
+const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : null; };
+const run = value('--run');
+const root = resolve(value('--root') || REPO);
+const write = argv.includes('--write');
+const verify = argv.includes('--verify');
+const inspect = argv.includes('--inspect');
+const requireReport = argv.includes('--require-report');
+if (!run || write === verify) {
+  console.error('usage: node tools/publication-ready.mjs --run <run> (--write|--verify) [--require-report] [--root <repo>]');
+  process.exit(2);
+}
+
+
+const receiptRel = `research/${run}-publication-readiness.json`;
+const receiptPath = join(root, receiptRel);
+const artifactRels = [
+  `research/${run}-pathway-closure.json`,
+  `research/${run}-judge-closure.json`,
+];
+
+function protectedTreeReceipt(scope) {
+  return scopedReadinessTree(run, root, { scope, includeRows: inspect, ownedPaths: step6OwnedInputs(run, root) });
+}
+
+const blockers = [];
+for (const file of artifactRels) if (!existsSync(join(root, file))) blockers.push(`missing ${file}`);
+
+function runCheck(label, args) {
+  const result = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8' });
+  if (result.status !== 0) blockers.push(`${label}: ${(result.stderr || result.stdout).trim().split('\n').slice(-3).join(' ')}`);
+}
+if (!blockers.length && write) {
+  runCheck('pathway closure', ['tools/pathway-closure.mjs', 'check', '--run', run]);
+}
+
+let scope;
+try { scope = runScope(run, root); } catch (error) { blockers.push(String(error.message ?? error)); }
+// Reused published files retain owner-approved status; new publication still
+// fails. The scope pins an exact pre-run commit; dates cannot establish history.
+const git = (...args) => spawnSync('git', args, { cwd: root, encoding: 'utf8' });
+const baseline = scope && JSON.parse(readFileSync(join(root, scope.ledger), 'utf8')).baseline_commit;
+const publishedBaseline = typeof baseline === 'string' && /^[a-f0-9]{40,64}$/.test(baseline)
+  && git('merge-base', '--is-ancestor', baseline, 'HEAD').status === 0 ? baseline : null;
+if (scope) {
+  for (const row of [...scope.pages, ...scope.items]) {
+    const current = readFileSync(join(root, row.file));
+    const { frontmatter } = splitFrontmatter(current.toString('utf8'));
+    // YAML permits either a plain or quoted scalar here. Authoring templates
+    // use both forms, so compare the decoded scalar rather than its spelling.
+    const status = frontmatter.match(/^status:\s*(\S+)\s*$/m)?.[1]
+      ?.replace(/^['"]|['"]$/g, '');
+    if (status === 'published' && publishedBaseline) {
+      const prior = git('show', `${publishedBaseline}:${row.file}`);
+      if (prior.status === 0) {
+        const fm = splitFrontmatter(prior.stdout).frontmatter;
+        const key = row.file.startsWith('items/') ? 'id' : 'page';
+        const identity = fm.match(new RegExp(`^${key}:\\s*([^\\n]+?)\\s*$`, 'm'))?.[1]?.replace(/^['"]|['"]$/g, '');
+        if (identity === row.id && /^status:\s*published\s*$/m.test(fm)) continue;
+      }
+    }
+    if (status === 'published' && publishedBaseline
+      && unchangedPublishedPageRelocation(root, publishedBaseline, row, current)) continue;
+    if (status !== 'draft') blockers.push(`${row.file}: expected status:draft pending owner approval, found ${status ?? 'missing'}`);
+  }
+}
+
+const inputHashes = Object.fromEntries(artifactRels.filter((file) => existsSync(join(root, file)))
+  .map((file) => [file, sha256(readFileSync(join(root, file)))]));
+const treeReceipt = protectedTreeReceipt(scope);
+const expected = {
+  schema: 2,
+  run,
+  verdict: blockers.length ? 'blocked' : 'publishable-pending-owner-approval',
+  workflow_owned_blockers: blockers,
+  content_sha256: scope ? runContentHash(run, root) : null,
+  input_sha256: inputHashes,
+  published_baseline_commit: publishedBaseline,
+  ...treeReceipt,
+  owner_actions_remaining: ['personal mathematical audit', 'deliberate status:published changes', 'push/deployment'],
+};
+
+if (inspect) {
+  if (write || requireReport) throw new Error('--inspect requires --verify without --require-report');
+  // Piped stdout is asynchronous; finish the diagnostic before exiting.
+  await new Promise((resolve, reject) => process.stdout.write(`${JSON.stringify(expected)}\n`,
+    error => error ? reject(error) : resolve()));
+  process.exit(blockers.length ? 1 : 0);
+}
+
+if (write) {
+  writeFileSync(receiptPath, JSON.stringify({ ...expected, generated_at: new Date().toISOString() }, null, 2) + '\n');
+} else {
+  if (!existsSync(receiptPath)) blockers.push(`missing ${receiptRel}`);
+  else {
+    const saved = JSON.parse(readFileSync(receiptPath, 'utf8'));
+    for (const key of ['schema', 'run', 'verdict', 'content_sha256', 'published_baseline_commit', 'protected_tree_scope', 'protected_tree_files', 'protected_tree_sha256']) {
+      if (saved[key] !== expected[key]) blockers.push(`${receiptRel}: ${key} is stale`);
+    }
+    if (JSON.stringify(saved.input_sha256) !== JSON.stringify(expected.input_sha256)) blockers.push(`${receiptRel}: input hashes are stale`);
+    if ((saved.workflow_owned_blockers ?? []).length) blockers.push(`${receiptRel}: saved verdict contains open blockers`);
+  }
+  if (requireReport && !existsSync(join(root, 'research', `${run}-step6-report.md`))) {
+    blockers.push(`missing research/${run}-step6-report.md`);
+  }
+}
+
+for (const blocker of blockers) console.error(`publication-ready: ${blocker}`);
+if (blockers.length) process.exit(1);
+console.log(`publication-ready: ${run} is publishable pending owner approval; 0 workflow-owned blockers; ${treeReceipt.protected_tree_files} protected files sealed`);

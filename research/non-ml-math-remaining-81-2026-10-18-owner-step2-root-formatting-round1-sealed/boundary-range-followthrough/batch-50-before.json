@@ -1,0 +1,2160 @@
+{
+  "version": 1,
+  "scope": [
+    "def-hall-finitary-abelian-category",
+    "lem-hall-flags-lift-through-a-quotient",
+    "def-jordan-quiver-nilpotent-representation-category",
+    "def-untwisted-hall-algebra",
+    "lem-jordan-quiver-category-is-finitary",
+    "lem-jordan-quiver-isoclasses-are-partition-indexed",
+    "lem-untwisted-hall-product-finiteness",
+    "thm-untwisted-hall-algebra-is-associative-and-unital",
+    "thm-generic-jordan-hall-algebra-is-symmetric-functions",
+    "ex-finite-vector-space-hall-square",
+    "ex-finite-abelian-p-group-hall-square",
+    "ex-jordan-quiver-hall-square",
+    "def-hall-littlewood-scalar-product-and-functions",
+    "lem-jordan-block-automorphism-count",
+    "thm-jordan-hall-pairing-and-hall-littlewood-basis",
+    "ex-jordan-hall-littlewood-degree-two-normalizations"
+  ],
+  "contracts": {
+    "def-hall-finitary-abelian-category": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition quantifies over all object pairs; an abelian category includes its zero object, so the finiteness clauses apply when either endpoint is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition applies the Hom and Yoneda-extension finiteness conditions to every pair, including pairs involving the zero object."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This categorical Definition has no natural-number parameter whose value is one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition explicitly excludes hidden assumptions of F_q-linearity, enough projectives or injectives, and finitely many subobjects."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition fixes the sequence order as 0→N→E→M→0 and identifies the class with YExt^1(M,N)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition permits a supplied small skeleton and says the construction does not select representatives by an unstated choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition makes no biconditional claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-hall-flags-lift-through-a-quotient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subobject-and-quotient-object",
+          "source_section": "Definition",
+          "quote": "Fix an object $C$ of a category $\\mathcal C$. Two monomorphisms $m:A\\to C$ and $n:B\\to C$ ([[def-monomorphism-and-epimorphism]]) **mutually factor** when there are morphisms $u:A\\to B$ and $v:B\\to A$ such that\n$$m=n\\circ u,\\qquad n=m\\circ v.$$\nA **subobject of $C$** is an equivalence class of monomorphisms into $C$ under mutual factorisation. The class represented by $m$ is denoted $[m]$. For representatives, write $[m]\\le[n]$ when $m$ factors through $n$.\n\nDually, two epimorphisms $q:C\\to Q$ and $r:C\\to R$ mutually factor when $r=u\\circ q$ and $q=v\\circ r$ for suitable $u:Q\\to R$ and $v:R\\to Q$. A **quotient object of $C$** is an equivalence class of epimorphisms out of $C$. Quotients are ordered by $[q]\\le[r]$ when $r$ factors through $q$, the orientation dual to that for subobjects.\n\nThe equivalence-relation and representative-independence obligations are discharged by [[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]].\n\n**What $[m]$ is, and what it is not.** The monomorphisms into $C$ generally form a proper class — already in $\\mathbf{Set}$, where every singleton admits a monomorphism into a one-point set — so $[m]$ is a class and not a set. Under this development's convention a class abbreviates a formula and is not an additional entity ([[def-language-of-set-theory]]), so $[m]$ is never a member of anything and the subobjects of $C$ are never gathered into a collection. Every statement written with the bracket notation below is shorthand for a statement about representatives: $[m]\\le[n]$ means that $m$ factors through $n$, which the next two items show depends only on the two classes, and $[m]=[n]$ means that $m$ and $n$ mutually factor. Size conditions on subobjects are likewise stated on representatives later on this page, never by measuring a collection of classes.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-the-quotient-of-an-object-by-a-subobject",
+          "source_section": "Definition",
+          "quote": "Let $[m]$ be a subobject of an object $A$ in an abelian category, represented by\na monomorphism $m:M\\to A$. The **quotient of $A$ by $[m]$** is the quotient\nobject represented by the cokernel of $m$:\n\n$$A/[m]:=\\operatorname{coker}(m).$$\n\nBecause every monomorphism is the kernel of its cokernel\n([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]), this quotient is\nthe object paired with the given subobject by the kernel-cokernel\ncorrespondence. The next item checks that the definition does not depend on the\nchosen representative of the class $[m]$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-the-direct-image-and-inverse-image-of-a-subobject",
+          "source_section": "Definition",
+          "quote": "Let $f:A\\to A'$ be a morphism in an abelian category.\n\nIf $b:B\\rightarrowtail A$ represents a subobject of $A$, its **direct image**\nalong $f$ is the subobject of $A'$ represented by the image inclusion of the\ncomposite\n\n$$B\\rightarrowtail A\\xrightarrow{f}A'.$$\n\nIt is denoted $f_*B$.\n\nIf $c:C\\rightarrowtail A'$ represents a subobject of $A'$, its **inverse image**\nalong $f$ is the subobject of $A$ represented by the pullback of $c$ along $f$\n([[def-pullbacks-and-pushouts]]). It is denoted $f^*C$.\n\nThe representative-independence of these assignments is discharged by\n[[thm-direct-and-inverse-image-of-subobjects-form-a-galois-connection]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-direct-and-inverse-image-of-subobjects-form-a-galois-connection",
+          "source_section": "Statement",
+          "quote": "Let $f:A\\to A'$ be a morphism in an abelian category. Then the direct-image map\n\n$$f_*:\\operatorname{Sub}(A)\\to\\operatorname{Sub}(A')$$\n\nand the inverse-image map\n\n$$f^*:\\operatorname{Sub}(A')\\to\\operatorname{Sub}(A)$$\n\nform a Galois connection:\n\n$$f_*B\\le C\\quad\\Longleftrightarrow\\quad B\\le f^*C.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-pullback-of-an-epimorphism-is-an-epimorphism",
+          "source_section": "Statement",
+          "quote": "In a pullback square in an abelian category\n\n```tikzcd\nP \\arrow[r, \"\\beta\"] \\arrow[d, \"\\alpha\"'] & B \\arrow[d, \"e\"] \\\\\nA \\arrow[r, \"f\"'] & C,\n```\n\nif $e$ is epic, then $\\alpha$ is epic.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-first-isomorphism-theorem-in-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "For every morphism $f:A\\to B$ in an abelian category, there is a canonical\nisomorphism\n\n$$A/\\ker(f)\\;\\cong\\;\\operatorname{im}(f).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-third-isomorphism-theorem-in-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "Let $C\\le B\\le A$ be subobjects in an abelian category. Then there is a\ncanonical isomorphism\n\n$$(A/C)/(B/C)\\;\\cong\\;A/B.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-every-monomorphism-is-the-kernel-of-its-cokernel",
+          "source_section": "Statement",
+          "quote": "In an abelian category, every monomorphism is the kernel of its cokernel, and\ndually every epimorphism is the cokernel of its kernel.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Given a subobject $B\\le L/W$, let $U=q^*B$ be its inverse image. Since $q_*W=0\\le B$, [F3] gives $W\\le U$. The pullback square defining $U$ has a projection $U\\to B$ that is epic by [F4]; its kernel is the kernel $W$ of $q$. By [F5] its image is therefore canonically $U/W\\cong B$, so $q_*U=B$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely let $W\\le U\\le L$. The restriction $q|_U:U\\to L/W$ has kernel $W$, so [F5] identifies its image $q_*U$ with $U/W$. By [F6], the quotient map $L/W\\to (L/W)/(U/W)$, composed with $q$, is the quotient map $L\\to L/U$. Its kernel is $U$ by [F1] and [F7], hence the inverse image of $U/W$ along $q$ is exactly $U$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 show that the two assignments are inverse on subobject classes. Both assignments preserve inclusion by the Galois connection [F3], and [F6] gives the stated quotient identification. Thus inverse image along $q$ is the claimed order isomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs the inverse image for each subobject of L/W and proves that it contains W."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When W=0 the quotient map is the identity, and the inverse-image/direct-image maps in steps 1.1–1.2 reduce to the identity correspondence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 includes both interval endpoints U=W and U=L; their quotients are respectively 0 and L/W."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If W=L, the interval has only U=L and the quotient L/W is zero; steps 1.1–1.2 still give the single-subobject correspondence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 treats U=W and U=L, and identifies (L/W)/(U/W) with L/U at both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses canonical pullbacks, images and cokernels; it does not select representatives globally."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts an order isomorphism and inverse assignments, not a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts an order isomorphism and inverse assignments, not a biconditional theorem."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-jordan-quiver-nilpotent-representation-category": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition allows n=0 and identifies the standard-coordinate model with all finite-dimensional representations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero endomorphism is nilpotent; the Definition explicitly includes S=(k,0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional object S=I_1 is specified in the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition restricts to nilpotent endomorphisms and includes the zero matrix without excluding any block-size degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition specifies the intertwining morphisms and standard-coordinate objects for every n≥0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The small standard-coordinate model is supplied directly, so no global choice of representatives is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a Definition, not a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a Definition, not a biconditional claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-untwisted-hall-algebra": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The direct sum ranges over isomorphism classes, including the zero object, and the coefficient formula includes its zero subobject."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition maps every natural-number count to R, including a zero count, and uses no division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: A count of one maps to 1_R by the stated coefficient convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition explicitly excludes an Euler twist, square root of field size and automorphism denominators."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition states the extension order as 0→N→L→M→0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition works on the supplied small category or small skeleton from the finitary category Definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a Definition, not a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a Definition, not a biconditional claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-jordan-quiver-category-is-finitary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-jordan-quiver-nilpotent-representation-category",
+          "source_section": "Definition",
+          "quote": "The **Jordan quiver** has one vertex and one loop, labelled $t$:\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[circle,draw,inner sep=2.5pt] (v) at (0,0) {$\\bullet$};\n  \\draw[->] (v) edge[loop above] node {$t$} (v);\n\\end{tikzpicture}\n```\n\nA finite-dimensional representation over a field $k$ is a pair\n$(V,x)$, where $V$ is a finite-dimensional $k$-vector space and\n$x:V\\to V$ is nilpotent ([[def-nilpotent-endomorphism]]). A morphism\n$(V,x)\\to(V',x')$ is a linear map $f:V\\to V'$ satisfying\n$fx=x'f$, encoded by the commutative square\n\n```tikzcd\nV \\arrow[r, \"x\"] \\arrow[d, \"f\"'] & V \\arrow[d, \"f\"] \\\\\nV' \\arrow[r, \"x'\"'] & V'\n```\n\nFor this page, $\\mathcal J_k$ denotes the small model whose objects are\n$(k^n,X)$, for $n\\ge0$, with $X$ a nilpotent matrix, and whose\nmorphisms are all matrices intertwining the endomorphisms. Every finite-\ndimensional vector space is isomorphic to a standard $k^n$, so the model\nrepresents all finite-dimensional nilpotent representations. For\n$k=\\mathbb F_q$, write $S=(k,0)$ for the one-dimensional object and\n$I_m=(k^m,J_m(0))$ for the length-$m$ Jordan block, using\n[[def-jordan-block-and-jordan-string]]. For a partition\n$\\lambda=(\\lambda_1,\\ldots,\\lambda_s)$\n([[def-partition-young-diagram-and-conjugate-partition]]), write\n$I_\\lambda$ for the block-diagonal representation with blocks\n$J_{\\lambda_1}(0),\\ldots,J_{\\lambda_s}(0)$.\nUse $S^{\\oplus0}=I_\\varnothing=0$ for the zero object.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hall-finitary-abelian-category",
+          "source_section": "Definition",
+          "quote": "A **small finitary abelian category** for Hall multiplication is a small\nabelian category $\\mathcal A$ (its object and morphism collections are sets,\nby [[def-small-locally-small-and-large-category]]), with abelian structure as\nin [[def-abelian-category]], in which the\nfollowing sets are finite for every pair of objects $M,N$:\n\n1. $\\operatorname{Hom}_{\\mathcal A}(M,N)$;\n2. $\\operatorname{YExt}^{1}_{\\mathcal A}(M,N)$, the set of Yoneda classes of\n   short exact sequences $0\\to N\\to E\\to M\\to0$. Equivalence is the\n   one-fold instance of the generated endpoint-fixed chain-map relation in\n   [[def-equivalence-of-n-fold-extensions]]: chain maps are the identity on\n   $N$ and $M$, and the relation is closed under reflexivity, symmetry and\n   transitivity. A short exact sequence and its endpoint order use\n   [[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]],\n   [[def-extension-of-an-object-by-an-object-in-an-abelian-category]] and\n   [[def-n-fold-yoneda-extension]].\n\nOne may instead supply a small skeleton $\\mathcal A_0$ of an essentially\nsmall abelian category and perform the construction on $\\mathcal A_0$. Here\n“essentially small” means that such a small equivalent category is part of the\ngiven data; the construction does not select representatives by an unstated\nchoice principle. The isomorphism classes $\\operatorname{Iso}(\\mathcal A_0)$\nthen form a set.\n\nNo $\\mathbb F_q$-linear structure, enough projectives or injectives, finite\nnumber of subobjects of every object, or identification with derived\n$\\operatorname{Ext}^{1}$ is included in this definition. Subobjects are the\nmonomorphism classes of [[def-subobject-and-quotient-object]], and quotients\nare the cokernels specified in [[def-the-quotient-of-an-object-by-a-subobject]].",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-abelian-category",
+          "source_section": "Definition",
+          "quote": "An **abelian category** is an additive category ([[def-additive-category]]) in\nwhich every morphism has a kernel and a cokernel, and in which for every\nmorphism $f$ the canonical comparison morphism\n\n$$\\operatorname{coim}(f)\\longrightarrow\\operatorname{im}(f)$$\n\nconstructed in\n[[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]\nis an isomorphism.\n\nThe first two clauses are Grothendieck's AB1, while the invertibility of the\ncanonical map is this page's working form of AB2.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a morphism $f$ intertwining two nilpotent endomorphisms: $\\ker f$ and $\\operatorname{im}f$ are invariant under the induced endomorphisms, and the endomorphism induced on $\\operatorname{coker}f$ remains nilpotent. Finite direct sums and the zero object also remain in the category. Choose bases to identify each kernel, image, and cokernel vector space with a standard $k^d$; transporting the maps along these isomorphisms gives kernels and cokernels in the small model. Their universal properties are preserved by isomorphism. The usual coimage-to-image isomorphism is an intertwiner because the original map commutes with the endomorphisms. This verifies the abelian-category clauses in [F3], using only a finite basis choice for the single map (f).",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F1], $\\mathcal J_k$ uses the standard spaces $k^n$ and their nilpotent matrices. For each $n$, there are finitely many such matrices because $k$ is finite, so their union over $n$ is a set and the category is small. Every finite-dimensional vector space is isomorphic to a standard $k^n$, and each Hom set is a subset of the finite set of linear maps between two finite vector spaces. Thus Hom sets are finite.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix objects $(k^m,x_M)$ and $(k^n,x_N)$. In any short exact sequence $0\\to M\\to E\\to N\\to0$, the middle vector-space dimension is $m+n$. After representing the middle space by $k^{m+n}$, there are only finitely many choices for its nilpotent matrix and for the two endpoint maps, because $k$ is finite. The set of such short exact sequences is finite, so its quotient by Yoneda equivalence is finite.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The small model is abelian by step 1.1 and small by step 1.2, and the Hom and Yoneda extension sets are finite by steps 1.2 and 1.3. These are exactly the finitary conditions in [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 includes n=0, so the zero object and its unique nilpotent matrix belong to the small model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero endomorphisms are among the nilpotent matrices counted in steps 1.1–1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the finite matrix and Hom arguments in step 1.2 apply without change."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies kernels, cokernels and coimage-image isomorphisms for arbitrary intertwining maps, including zero maps."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 include dimensions m=0 or n=0; exact sequences then have the corresponding zero endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 makes only a finite basis choice for a single map; the standard-coordinate model avoids simultaneous choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts finitarity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts finitarity, not an equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-jordan-quiver-isoclasses-are-partition-indexed": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-nilpotent-jordan-string-basis",
+          "source_section": "Statement",
+          "quote": "Every nilpotent endomorphism $N$ of a finite-dimensional vector space $V$ has an ordered basis that is the concatenation of Jordan strings for $N$ at $0$. For $V=0$, this is the empty basis and the empty family of strings.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-jordan-form-uniqueness-from-ranks-of-powers",
+          "source_section": "Statement",
+          "quote": "Let $T$ have split characteristic polynomial. For each eigenvalue $\\lambda$, put\n$$\\rho_k(\\lambda)=\\operatorname{rank}(T-\\lambda I)^k\\qquad(k\\ge0).$$\nThen for every $k\\ge1$, the number of Jordan blocks for $\\lambda$ of size exactly $k$ is\n$$\\rho_{k-1}(\\lambda)-2\\rho_k(\\lambda)+\\rho_{k+1}(\\lambda).$$\nConsequently the ranks of all shifted powers determine the Jordan form uniquely up to permutation of its blocks. On the zero space the rank data and block multiset are empty.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-jordan-block-and-jordan-string",
+          "source_section": "Definition",
+          "quote": "For $m\\ge1$ and $\\lambda\\in F$, the **Jordan block** $J_m(\\lambda)$ is the $m\\times m$ matrix with $\\lambda$ on the diagonal, $1$ on the superdiagonal, and $0$ elsewhere.\n\nLet $T:V\\to V$ be an endomorphism. A **Jordan string of length $m$ for $T$ at $\\lambda$** is an ordered list $(v_1,\\ldots,v_m)$ satisfying\n$$(T-\\lambda I)v_1=0,\\qquad (T-\\lambda I)v_j=v_{j-1}\\quad(2\\le j\\le m).$$\nIts **initial vector** is $v_1$ and its **terminal vector** is $v_m$. The initial vector is required to be nonzero; consequently every vector in the string is nonzero. In the ordered basis $(v_1,\\ldots,v_m)$, the restriction of $T$ to the string's span has matrix $J_m(\\lambda)$ under the coordinate-column convention ([[def-coordinate-column-and-matrix-of-a-linear-map]]).\n\nA Jordan string for a nilpotent endomorphism means a string at $\\lambda=0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-partition-young-diagram-and-conjugate-partition",
+          "source_section": "Definition",
+          "quote": "**Partitions.** Let $n\\ge 0$ be an integer. A **partition of $n$** is a finite\nweakly decreasing sequence $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$ of positive\nintegers with $\\lambda_1+\\cdots+\\lambda_k=n$. Its entries are the **parts** of\n$\\lambda$ and $k$ is the **number of parts**. For $n=0$ the only partition is\nthe **empty partition** $\\varnothing$, the empty sequence with $k=0$; for\n$n\\ge 1$ one has $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_k\\ge 1$ and\n$k\\le n$. We write $\\lambda\\vdash n$. Trailing zeros are not parts: a finite\nsequence of nonnegative integers ending in $0$ is not a partition, so the\nnumber of parts of $\\lambda$ is determined by $\\lambda$ and\n$(\\lambda_1,\\dots,\\lambda_k)$ is a different data type from\n$(\\lambda_1,\\dots,\\lambda_k,0)$.\n\n**English Young diagrams.** The **(English) Young diagram** of a nonempty $\\lambda$ is\n$$[\\lambda]:=\\{\\,(i,j)\\;:\\;1\\le i\\le k,\\ 1\\le j\\le \\lambda_i\\,\\}\\subseteq\\mathbb N\\times\\mathbb N,$$\nwhere $i$ numbers the **rows** downward and $j$ numbers the **columns**\nrightward. An element of $[\\lambda]$ is a **node**, or box, of the diagram. Row\n$i$ of $[\\lambda]$ carries $\\lambda_i$ nodes, and column $j$ carries\n$$\\lambda'_j:=\\#\\{\\,i: \\lambda_i\\ge j\\,\\}$$\nnodes, a quantity that is $0$ beyond the last column (and for every $j\\ge1$ when $\\lambda=\\varnothing$). Since a partition is weakly\ndecreasing, $[\\lambda]$ determines $\\lambda$: if $[\\mu]=[\\lambda]$, then row\n$i$ of $[\\lambda]$ is row $i$ of $[\\mu]$, so $\\mu_i=\\lambda_i$ for every $i$\nand $\\mu=\\lambda$. In particular $[\\varnothing]=\\emptyset$, the empty diagram.\n\n**Conjugation.** The **conjugate partition** of a nonempty $\\lambda$ is\n$$\\lambda':=(\\lambda'_1,\\lambda'_2,\\dots,\\lambda'_{\\lambda_1}),$$\nthe sequence of column heights of $[\\lambda]$, with $\\varnothing':=\\varnothing$\nfor the empty partition. This is again a partition of $n$, and\n$[\\lambda']$ is the transpose of $[\\lambda]$:\nfor $1\\le i\\le\\lambda_1$ and $1\\le j\\le k$,\n$$(i,j)\\in[\\lambda']\\iff j\\le\\lambda'_i\\iff \\lambda_j\\ge i\\iff (j,i)\\in[\\lambda].$$\nOutside these bounds neither diagram contains the corresponding node; for the empty partition both diagrams are empty.\nConjugation is an involution, $\\lambda''=\\lambda$, because\n$\\lambda''_i=\\#\\{j:\\lambda'_j\\ge i\\}$ counts the columns of $[\\lambda]$ of\nheight at least $i$, that is, the columns $j$ with at least $i$ rows of length\n$\\ge j$, which by weak decrease is exactly the set of $j\\le\\lambda_i$. Thus\n$\\lambda\\mapsto\\lambda'$ is a bijection on the partitions of $n$, exchanging\nthe number of parts with the largest part for nonempty partitions.\n\n**Size zero.** The symmetric group of $\\{1,\\dots,n\\}$ is\n$S_n:=\\operatorname{Sym}(\\{1,\\dots,n\\})$ ([[def-symmetric-group]]) for every\n$n\\ge 0$, and we fix\n$$S_0:=\\operatorname{Sym}(\\emptyset)=\\{1\\},$$\nthe trivial group; for $n=0$ the set $\\{1,\\dots,n\\}$ is empty and the group\nacts trivially on every size-zero object below. This is the convention used\nwhenever the constructions of this page are read at $n=0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-jordan-quiver-nilpotent-representation-category",
+          "source_section": "Definition",
+          "quote": "The **Jordan quiver** has one vertex and one loop, labelled $t$:\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[circle,draw,inner sep=2.5pt] (v) at (0,0) {$\\bullet$};\n  \\draw[->] (v) edge[loop above] node {$t$} (v);\n\\end{tikzpicture}\n```\n\nA finite-dimensional representation over a field $k$ is a pair\n$(V,x)$, where $V$ is a finite-dimensional $k$-vector space and\n$x:V\\to V$ is nilpotent ([[def-nilpotent-endomorphism]]). A morphism\n$(V,x)\\to(V',x')$ is a linear map $f:V\\to V'$ satisfying\n$fx=x'f$, encoded by the commutative square\n\n```tikzcd\nV \\arrow[r, \"x\"] \\arrow[d, \"f\"'] & V \\arrow[d, \"f\"] \\\\\nV' \\arrow[r, \"x'\"'] & V'\n```\n\nFor this page, $\\mathcal J_k$ denotes the small model whose objects are\n$(k^n,X)$, for $n\\ge0$, with $X$ a nilpotent matrix, and whose\nmorphisms are all matrices intertwining the endomorphisms. Every finite-\ndimensional vector space is isomorphic to a standard $k^n$, so the model\nrepresents all finite-dimensional nilpotent representations. For\n$k=\\mathbb F_q$, write $S=(k,0)$ for the one-dimensional object and\n$I_m=(k^m,J_m(0))$ for the length-$m$ Jordan block, using\n[[def-jordan-block-and-jordan-string]]. For a partition\n$\\lambda=(\\lambda_1,\\ldots,\\lambda_s)$\n([[def-partition-young-diagram-and-conjugate-partition]]), write\n$I_\\lambda$ for the block-diagonal representation with blocks\n$J_{\\lambda_1}(0),\\ldots,J_{\\lambda_s}(0)$.\nUse $S^{\\oplus0}=I_\\varnothing=0$ for the zero object.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] to $x$. The spans of its Jordan strings are invariant, their concatenation is a basis of $V$, and by [F3] each span is isomorphic as a representation to the block $I_m$ whose length is that string's length. Sorting these finitely many positive lengths weakly decreasing gives a partition $\\lambda$ by [F4] and an isomorphism $(V,x)\\cong I_\\lambda$. The zero space gives the empty partition.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $I_\\lambda\\cong I_\\mu$, the intertwining isomorphism conjugates their nilpotent matrices, so the ranks of every power agree. By [F2], the multiplicities of blocks of each length agree; hence the multisets of parts and the partitions are equal.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If a string has length $m>1$, the span of its initial vector $v_1$ is a nonzero proper invariant subspace, so $I_m$ is not simple. If the length is one, its endomorphism is zero and the underlying one-dimensional vector space has no nonzero proper subspace, so $I_1=S$ is simple. Any nonzero object decomposes as in step 1.1; it is simple only when that decomposition has exactly one length-one summand. Thus $S$ is the unique simple object.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the zero space as the empty partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty partition and its zero object are included in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that S=I_1 is the unique simple object."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles length-one and longer Jordan strings separately; step 1.1 allows any finite multiset of positive lengths."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The nilpotent Jordan-string basis and rank-of-powers uniqueness arguments in steps 1.1–1.2 cover all finite dimensions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: The proof applies the supplied Jordan-string basis separately to an arbitrary fixed object and makes no global basis selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a classification, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a classification, not a biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-untwisted-hall-product-finiteness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hall-finitary-abelian-category",
+          "source_section": "Definition",
+          "quote": "A **small finitary abelian category** for Hall multiplication is a small\nabelian category $\\mathcal A$ (its object and morphism collections are sets,\nby [[def-small-locally-small-and-large-category]]), with abelian structure as\nin [[def-abelian-category]], in which the\nfollowing sets are finite for every pair of objects $M,N$:\n\n1. $\\operatorname{Hom}_{\\mathcal A}(M,N)$;\n2. $\\operatorname{YExt}^{1}_{\\mathcal A}(M,N)$, the set of Yoneda classes of\n   short exact sequences $0\\to N\\to E\\to M\\to0$. Equivalence is the\n   one-fold instance of the generated endpoint-fixed chain-map relation in\n   [[def-equivalence-of-n-fold-extensions]]: chain maps are the identity on\n   $N$ and $M$, and the relation is closed under reflexivity, symmetry and\n   transitivity. A short exact sequence and its endpoint order use\n   [[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]],\n   [[def-extension-of-an-object-by-an-object-in-an-abelian-category]] and\n   [[def-n-fold-yoneda-extension]].\n\nOne may instead supply a small skeleton $\\mathcal A_0$ of an essentially\nsmall abelian category and perform the construction on $\\mathcal A_0$. Here\n“essentially small” means that such a small equivalent category is part of the\ngiven data; the construction does not select representatives by an unstated\nchoice principle. The isomorphism classes $\\operatorname{Iso}(\\mathcal A_0)$\nthen form a set.\n\nNo $\\mathbb F_q$-linear structure, enough projectives or injectives, finite\nnumber of subobjects of every object, or identification with derived\n$\\operatorname{Ext}^{1}$ is included in this definition. Subobjects are the\nmonomorphism classes of [[def-subobject-and-quotient-object]], and quotients\nare the cokernels specified in [[def-the-quotient-of-an-object-by-a-subobject]].",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-untwisted-hall-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a small finitary abelian category in the sense of\n[[def-hall-finitary-abelian-category]], and let $R$ be a commutative ring\nwith unit. Define the free $R$-module\n$$ H_{\\mathcal A,R}:=\\bigoplus_{[M]\\in\\operatorname{Iso}(\\mathcal A)}R[M], $$\nwhere $[M]$ is a basis symbol for the isomorphism class of $M$. For objects $N,L$, let\n$$\\operatorname{Mon}_{\\mathcal A}(N,L):=\\{f\\in\\operatorname{Hom}_{\\mathcal A}(N,L): f\\text{ is monic}\\}.$$\nThis is a finite set by the Hom condition in\n[[def-hall-finitary-abelian-category]]. For $f,g$ in this set, write\n$f\\sim_N g$ when $g=f\\circ u$ for an isomorphism $u:N\\to N$; this is an\nequivalence relation by [[def-isomorphism-groupoid-and-connected-category]].\nThe quotient set $\\operatorname{Mon}_{\\mathcal A}(N,L)/\\sim_N$ represents\nexactly the subobjects of $L$ isomorphic to $N$: each class gives the usual\nsubobject class from [[def-subobject-and-quotient-object]], and the mutual-\nfactorisation theorem says two such monomorphisms give the same subobject\nexactly when they differ by such an isomorphism\n([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).\nEvery subobject class with domain isomorphic to $N$ is represented by composing\nits monomorphism with an isomorphism from $N$, one class at a time. The\ncokernel quotient is independent of that representative by\n[[thm-the-quotient-is-independent-of-the-representing-monomorphism]] and\n[[def-the-quotient-of-an-object-by-a-subobject]]. Define $g^L_{M,N}$ to be the\nnumber of classes $[f]_{\\sim_N}$ for which $\\operatorname{coker}(f)\\cong M$.\nThe finiteness lemma below also proves that the resulting product has finite\nsupport. Extend the operation\n$$ [M]*[N]:=\\sum_{[L]\\in\\operatorname{Iso}(\\mathcal A)}g^L_{M,N}[L] $$\n$R$-bilinearly, mapping each natural number coefficient to its multiple of\n$1_R$. The order is fixed: the counted short exact sequence is\n$$ 0\\longrightarrow N\\longrightarrow L\\longrightarrow M\\longrightarrow0. $$\n\nThis is the **untwisted Hall product**. It does not use an Euler form, a square\nroot of a field size, or division by automorphism cardinalities. The finite\ncoefficient and finite-support claims needed for the operation to define a\nbilinear product are established in\n[[lem-untwisted-hall-product-finiteness]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-short-five-lemma-in-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "Consider a morphism of short exact sequences in an abelian category\n\n```tikzcd\n0 \\arrow[r] & A \\arrow[r, \"i\"] \\arrow[d, \"f\"'] & B \\arrow[r, \"p\"] \\arrow[d, \"g\"'] & C \\arrow[r] \\arrow[d, \"h\"'] & 0 \\\\\n0 \\arrow[r] & A' \\arrow[r, \"i'\"'] & B' \\arrow[r, \"p'\"'] & C' \\arrow[r] & 0.\n```\n\nThen:\n\n1. if $f$ and $h$ are monic, then $g$ is monic;\n2. if $f$ and $h$ are epic, then $g$ is epic;\n3. if $f$ and $h$ are isomorphisms, then $g$ is an isomorphism.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "An isomorphism of middle objects transports subobjects and induces an isomorphism of their cokernel quotients; replacing either endpoint by an isomorphic object preserves the two type conditions. Thus the count in [F2] depends only on $[M],[N],[L]$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For fixed $L$, the equivalence classes counted by [F2] are a quotient of the finite set $\\operatorname{Hom}(N,L)$ from [F1]. The subset whose cokernel is isomorphic to $M$ is therefore finite.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Every elementary map in the generating relation for [F1] preserves the middle-object isomorphism class by [F3], and so does its reflexive, symmetric and transitive closure. Thus taking the middle-object class defines a map from the finite set $\\operatorname{YExt}^1(M,N)$. If $g^L_{M,N}\\ne0$, a counted subobject and quotient give a short exact sequence $0\\to N\\to L\\to M\\to0$ after transporting its endpoints by isomorphisms, so $[L]$ lies in the image. That image is finite, proving finite support without simultaneous choices of extension representatives.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each coefficient is a natural number and the support is finite by steps 1.2–1.3. Mapping an integer $n$ to $n1_R$ therefore gives a well-defined element of the direct sum in [F2], with no automorphism denominator or additional finiteness condition.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.2–1.3 include zero endpoints: the Hom set and Yoneda extension set remain finite for every object pair by [F1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 bounds the coefficient by a finite Hom image, including when M or N is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The finiteness Statement has no natural-number parameter whose value is one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 treats split and nonsplit extension classes uniformly through the finite Yoneda set."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 fixes the exact endpoint order 0→N→L→M→0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3 maps extension classes to middle-object classes without selecting representatives simultaneously."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts finiteness implications, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts finiteness implications, not a biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-untwisted-hall-algebra-is-associative-and-unital": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-untwisted-hall-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a small finitary abelian category in the sense of\n[[def-hall-finitary-abelian-category]], and let $R$ be a commutative ring\nwith unit. Define the free $R$-module\n$$ H_{\\mathcal A,R}:=\\bigoplus_{[M]\\in\\operatorname{Iso}(\\mathcal A)}R[M], $$\nwhere $[M]$ is a basis symbol for the isomorphism class of $M$. For objects $N,L$, let\n$$\\operatorname{Mon}_{\\mathcal A}(N,L):=\\{f\\in\\operatorname{Hom}_{\\mathcal A}(N,L): f\\text{ is monic}\\}.$$\nThis is a finite set by the Hom condition in\n[[def-hall-finitary-abelian-category]]. For $f,g$ in this set, write\n$f\\sim_N g$ when $g=f\\circ u$ for an isomorphism $u:N\\to N$; this is an\nequivalence relation by [[def-isomorphism-groupoid-and-connected-category]].\nThe quotient set $\\operatorname{Mon}_{\\mathcal A}(N,L)/\\sim_N$ represents\nexactly the subobjects of $L$ isomorphic to $N$: each class gives the usual\nsubobject class from [[def-subobject-and-quotient-object]], and the mutual-\nfactorisation theorem says two such monomorphisms give the same subobject\nexactly when they differ by such an isomorphism\n([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).\nEvery subobject class with domain isomorphic to $N$ is represented by composing\nits monomorphism with an isomorphism from $N$, one class at a time. The\ncokernel quotient is independent of that representative by\n[[thm-the-quotient-is-independent-of-the-representing-monomorphism]] and\n[[def-the-quotient-of-an-object-by-a-subobject]]. Define $g^L_{M,N}$ to be the\nnumber of classes $[f]_{\\sim_N}$ for which $\\operatorname{coker}(f)\\cong M$.\nThe finiteness lemma below also proves that the resulting product has finite\nsupport. Extend the operation\n$$ [M]*[N]:=\\sum_{[L]\\in\\operatorname{Iso}(\\mathcal A)}g^L_{M,N}[L] $$\n$R$-bilinearly, mapping each natural number coefficient to its multiple of\n$1_R$. The order is fixed: the counted short exact sequence is\n$$ 0\\longrightarrow N\\longrightarrow L\\longrightarrow M\\longrightarrow0. $$\n\nThis is the **untwisted Hall product**. It does not use an Euler form, a square\nroot of a field size, or division by automorphism cardinalities. The finite\ncoefficient and finite-support claims needed for the operation to define a\nbilinear product are established in\n[[lem-untwisted-hall-product-finiteness]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-untwisted-hall-product-finiteness",
+          "source_section": "Statement",
+          "quote": "For a finitary abelian category, each untwisted Hall coefficient\n$g^L_{M,N}$ is finite and depends only on the isomorphism classes of\n$M,N,L$. For fixed $M,N$, only finitely many isomorphism classes $[L]$\nhave $g^L_{M,N}\\ne0$. Hence the basis formula in\n[[def-untwisted-hall-algebra]] is a finite sum in its direct-sum module.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-hall-flags-lift-through-a-quotient",
+          "source_section": "Statement",
+          "quote": "Let $W\\le L$ be a subobject in an abelian category, and let\n$q:L\\to L/W$ be the quotient map. Inverse image along $q$ is an order\nisomorphism from the subobjects of $L/W$ to the interval of subobjects\n$U\\le L$ with $W\\le U$. Its inverse sends $U$ to the image $q_*U$,\ncanonically isomorphic to $U/W$. Under this correspondence,\n$$ (L/W)/(U/W)\\cong L/U. $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-every-monomorphism-is-the-kernel-of-its-cokernel",
+          "source_section": "Statement",
+          "quote": "In an abelian category, every monomorphism is the kernel of its cokernel, and\ndually every epimorphism is the cokernel of its kernel.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix basis objects $M,N,P,L$. The coefficient of $[L]$ in $([M]*[N])*[P]$ is the sum over isomorphism classes $[X]$ of $g^X_{M,N}g^L_{X,P}$. By [F1], this counts a subobject $W\\le L$ with $W\\cong P$ and $L/W\\cong X$, together with a subobject $\\overline U\\le L/W$ with $\\overline U\\cong N$ and $(L/W)/\\overline U\\cong M$. The quotient class $[X]=[L/W]$ is uniquely determined by $W$, so this sum counts exactly these pairs.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], each such pair $(W,\\overline U)$ corresponds to exactly one flag $W\\le U\\le L$ with $W\\cong P$, $U/W\\cong N$, and $L/U\\cong M$. The coefficient of $[L]$ in $[M]*([N]*[P])$ counts the same flags: first choose $U\\le L$ with $U\\cong Y$, $L/U\\cong M$, then choose $W\\le U$ with $W\\cong P$, $U/W\\cong N$, summing over the uniquely determined class $[Y]=[U]$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The only subobject isomorphic to zero is the zero subobject, and the only subobject with zero quotient is the whole object: in the latter case the inclusion has zero cokernel and hence is an isomorphism by [F4]. Thus $g^L_{M,0}=1$ exactly when $L\\cong M$, while $g^L_{0,M}=1$ exactly when $L\\cong M$. The zero-object symbol is a two-sided unit.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two parenthesizations therefore have the same coefficient at every basis vector $[L]$, so $([M]*[N])*[P]=[M]*([N]*[P])$ for basis elements.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Basis products have finite support by [F2]. Every element of $H_{\\mathcal A,R}$ is a finite linear combination of basis vectors, so bilinearity extends the basis calculation in step 2.1 to all triples and preserves finite support. Step 1.3 supplies the unit, proving the statement.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the zero-object symbol is the two-sided unit, and step 1.3 includes zero subobjects and zero quotients."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The coefficient identities in steps 1.1–3.1 use natural-number counts mapped to the ring unit, including the count one in the unit formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 compare all two-step flags, including flags with equal adjacent subobjects."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the zero and whole subobjects as the two endpoint cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 compare the quotient and subobject endpoint orders in the same flag convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2: The proof counts isomorphism classes and flags and uses canonical quotient correspondence; it does not choose representatives globally."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts associativity and a unit, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts associativity and a unit, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-generic-jordan-hall-algebra-is-symmetric-functions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-untwisted-hall-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a small finitary abelian category in the sense of\n[[def-hall-finitary-abelian-category]], and let $R$ be a commutative ring\nwith unit. Define the free $R$-module\n$$ H_{\\mathcal A,R}:=\\bigoplus_{[M]\\in\\operatorname{Iso}(\\mathcal A)}R[M], $$\nwhere $[M]$ is a basis symbol for the isomorphism class of $M$. For objects $N,L$, let\n$$\\operatorname{Mon}_{\\mathcal A}(N,L):=\\{f\\in\\operatorname{Hom}_{\\mathcal A}(N,L): f\\text{ is monic}\\}.$$\nThis is a finite set by the Hom condition in\n[[def-hall-finitary-abelian-category]]. For $f,g$ in this set, write\n$f\\sim_N g$ when $g=f\\circ u$ for an isomorphism $u:N\\to N$; this is an\nequivalence relation by [[def-isomorphism-groupoid-and-connected-category]].\nThe quotient set $\\operatorname{Mon}_{\\mathcal A}(N,L)/\\sim_N$ represents\nexactly the subobjects of $L$ isomorphic to $N$: each class gives the usual\nsubobject class from [[def-subobject-and-quotient-object]], and the mutual-\nfactorisation theorem says two such monomorphisms give the same subobject\nexactly when they differ by such an isomorphism\n([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).\nEvery subobject class with domain isomorphic to $N$ is represented by composing\nits monomorphism with an isomorphism from $N$, one class at a time. The\ncokernel quotient is independent of that representative by\n[[thm-the-quotient-is-independent-of-the-representing-monomorphism]] and\n[[def-the-quotient-of-an-object-by-a-subobject]]. Define $g^L_{M,N}$ to be the\nnumber of classes $[f]_{\\sim_N}$ for which $\\operatorname{coker}(f)\\cong M$.\nThe finiteness lemma below also proves that the resulting product has finite\nsupport. Extend the operation\n$$ [M]*[N]:=\\sum_{[L]\\in\\operatorname{Iso}(\\mathcal A)}g^L_{M,N}[L] $$\n$R$-bilinearly, mapping each natural number coefficient to its multiple of\n$1_R$. The order is fixed: the counted short exact sequence is\n$$ 0\\longrightarrow N\\longrightarrow L\\longrightarrow M\\longrightarrow0. $$\n\nThis is the **untwisted Hall product**. It does not use an Euler form, a square\nroot of a field size, or division by automorphism cardinalities. The finite\ncoefficient and finite-support claims needed for the operation to define a\nbilinear product are established in\n[[lem-untwisted-hall-product-finiteness]].",
+          "uses": [
+            "1.1",
+            "1.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-untwisted-hall-product-finiteness",
+          "source_section": "Statement",
+          "quote": "For a finitary abelian category, each untwisted Hall coefficient\n$g^L_{M,N}$ is finite and depends only on the isomorphism classes of\n$M,N,L$. For fixed $M,N$, only finitely many isomorphism classes $[L]$\nhave $g^L_{M,N}\\ne0$. Hence the basis formula in\n[[def-untwisted-hall-algebra]] is a finite sum in its direct-sum module.",
+          "uses": [
+            "5.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-untwisted-hall-algebra-is-associative-and-unital",
+          "source_section": "Statement",
+          "quote": "For every small finitary abelian category $\\mathcal A$ and commutative\ncoefficient ring $R$, the operation of\n[[def-untwisted-hall-algebra]] is a well-defined associative $R$-bilinear\nmultiplication on $H_{\\mathcal A,R}$, with unit $[0]$, the basis symbol of\nthe zero object.",
+          "uses": [
+            "5.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-jordan-quiver-category-is-finitary",
+          "source_section": "Statement",
+          "quote": "For every finite field $k$, the small category $\\mathcal J_k$ of\n[[def-jordan-quiver-nilpotent-representation-category]] is abelian, and its Hom sets and Yoneda $\\operatorname{Ext}^1$ sets are finite.\nThus it satisfies the finitary hypotheses of\n[[def-hall-finitary-abelian-category]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-jordan-quiver-isoclasses-are-partition-indexed",
+          "source_section": "Statement",
+          "quote": "Every object of $\\mathcal J_k$ is isomorphic to a unique direct sum\n$I_\\lambda=I_{\\lambda_1}\\oplus\\cdots\\oplus I_{\\lambda_s}$, where\n$\\lambda$ is a partition. The unique simple object is $S=I_1$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-hall-flags-lift-through-a-quotient",
+          "source_section": "Statement",
+          "quote": "Let $W\\le L$ be a subobject in an abelian category, and let\n$q:L\\to L/W$ be the quotient map. Inverse image along $q$ is an order\nisomorphism from the subobjects of $L/W$ to the interval of subobjects\n$U\\le L$ with $W\\le U$. Its inverse sends $U$ to the image $q_*U$,\ncanonically isomorphic to $U/W$. Under this correspondence,\n$$ (L/W)/(U/W)\\cong L/U. $$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-real-polynomial-factor-at-a-root]], [[thm-induction-principle]].",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-partition-young-diagram-and-conjugate-partition",
+          "source_section": "Definition",
+          "quote": "**Partitions.** Let $n\\ge 0$ be an integer. A **partition of $n$** is a finite\nweakly decreasing sequence $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$ of positive\nintegers with $\\lambda_1+\\cdots+\\lambda_k=n$. Its entries are the **parts** of\n$\\lambda$ and $k$ is the **number of parts**. For $n=0$ the only partition is\nthe **empty partition** $\\varnothing$, the empty sequence with $k=0$; for\n$n\\ge 1$ one has $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_k\\ge 1$ and\n$k\\le n$. We write $\\lambda\\vdash n$. Trailing zeros are not parts: a finite\nsequence of nonnegative integers ending in $0$ is not a partition, so the\nnumber of parts of $\\lambda$ is determined by $\\lambda$ and\n$(\\lambda_1,\\dots,\\lambda_k)$ is a different data type from\n$(\\lambda_1,\\dots,\\lambda_k,0)$.\n\n**English Young diagrams.** The **(English) Young diagram** of a nonempty $\\lambda$ is\n$$[\\lambda]:=\\{\\,(i,j)\\;:\\;1\\le i\\le k,\\ 1\\le j\\le \\lambda_i\\,\\}\\subseteq\\mathbb N\\times\\mathbb N,$$\nwhere $i$ numbers the **rows** downward and $j$ numbers the **columns**\nrightward. An element of $[\\lambda]$ is a **node**, or box, of the diagram. Row\n$i$ of $[\\lambda]$ carries $\\lambda_i$ nodes, and column $j$ carries\n$$\\lambda'_j:=\\#\\{\\,i: \\lambda_i\\ge j\\,\\}$$\nnodes, a quantity that is $0$ beyond the last column (and for every $j\\ge1$ when $\\lambda=\\varnothing$). Since a partition is weakly\ndecreasing, $[\\lambda]$ determines $\\lambda$: if $[\\mu]=[\\lambda]$, then row\n$i$ of $[\\lambda]$ is row $i$ of $[\\mu]$, so $\\mu_i=\\lambda_i$ for every $i$\nand $\\mu=\\lambda$. In particular $[\\varnothing]=\\emptyset$, the empty diagram.\n\n**Conjugation.** The **conjugate partition** of a nonempty $\\lambda$ is\n$$\\lambda':=(\\lambda'_1,\\lambda'_2,\\dots,\\lambda'_{\\lambda_1}),$$\nthe sequence of column heights of $[\\lambda]$, with $\\varnothing':=\\varnothing$\nfor the empty partition. This is again a partition of $n$, and\n$[\\lambda']$ is the transpose of $[\\lambda]$:\nfor $1\\le i\\le\\lambda_1$ and $1\\le j\\le k$,\n$$(i,j)\\in[\\lambda']\\iff j\\le\\lambda'_i\\iff \\lambda_j\\ge i\\iff (j,i)\\in[\\lambda].$$\nOutside these bounds neither diagram contains the corresponding node; for the empty partition both diagrams are empty.\nConjugation is an involution, $\\lambda''=\\lambda$, because\n$\\lambda''_i=\\#\\{j:\\lambda'_j\\ge i\\}$ counts the columns of $[\\lambda]$ of\nheight at least $i$, that is, the columns $j$ with at least $i$ rows of length\n$\\ge j$, which by weak decrease is exactly the set of $j\\le\\lambda_i$. Thus\n$\\lambda\\mapsto\\lambda'$ is a bijection on the partitions of $n$, exchanging\nthe number of parts with the largest part for nonempty partitions.\n\n**Size zero.** The symmetric group of $\\{1,\\dots,n\\}$ is\n$S_n:=\\operatorname{Sym}(\\{1,\\dots,n\\})$ ([[def-symmetric-group]]) for every\n$n\\ge 0$, and we fix\n$$S_0:=\\operatorname{Sym}(\\emptyset)=\\{1\\},$$\nthe trivial group; for $n=0$ the set $\\{1,\\dots,n\\}$ is empty and the group\nacts trivially on every size-zero object below. This is the convention used\nwhenever the constructions of this page are read at $n=0$.",
+          "uses": [
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-stable-graded-ring-of-symmetric-functions",
+          "source_section": "Definition",
+          "quote": "For integers $N,d\\ge0$, let $A_N^d$ be the degree-$d$ homogeneous part of\n$\\mathbb Z[x_1,\\ldots,x_N]^{S_N}$, using\n[[def-symmetric-polynomial]] and the convention $A_0^0=\\mathbb Z$ and\n$A_0^d=0$ for $d>0$. For $M\\ge N$, the transition\n$\\pi_{M,N}:A_M^d\\to A_N^d$ sets $x_{N+1},\\ldots,x_M$ equal to zero.\nThese maps compose, so define\n$$\\Lambda^d:=\\varprojlim_{N\\ge0}A_N^d,\\qquad \\Lambda:=\\bigoplus_{d\\ge0}\\Lambda^d.$$\n\nAn element of $\\Lambda^d$ is a compatible sequence of homogeneous\ndegree-$d$ symmetric polynomials, one in each rank. Multiplication of a\ndegree-$a$ sequence and a degree-$b$ sequence is coordinatewise polynomial\nmultiplication and lies in $\\Lambda^{a+b}$; compatibility follows because\neach $\\pi_{M,N}$ is a ring homomorphism. Extend this product distributively\nto $\\Lambda$. The unit is the compatible constant sequence $1$, and each\nelement of $\\Lambda$ has only finitely many nonzero homogeneous components.\n\nThis direct sum is not the ungraded inverse limit of the rings\n$\\mathbb Z[x_1,\\ldots,x_N]^{S_N}$. For example, the compatible sequence\n$\\prod_{i=1}^N(1+x_i)$ belongs to that ungraded inverse limit and has nonzero\nhomogeneous components in every degree, so it is not an element of the direct\nsum $\\Lambda$. The partition notation and empty partition follow\n[[def-partition-young-diagram-and-conjugate-partition]].",
+          "uses": [
+            "10.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-elementary-and-complete-families-freely-generate-the-stable-ring",
+          "source_section": "Statement",
+          "quote": "For each $r\\ge0$, let $e_r,h_r\\in\\Lambda^r$ be the stable sequences obtained\nfrom the finite elementary and complete homogeneous symmetric polynomials\n([[def-elementary-symmetric-polynomials]],\n[[def-power-sum-and-complete-homogeneous-symmetric-polynomials]]) by setting\neach added variable to zero. Set $e_0=h_0=1$, and for a partition\n$\\lambda=(\\lambda_1,\\lambda_2,\\ldots)$ write\n$e_\\lambda=\\prod_i e_{\\lambda_i}$ and $h_\\lambda=\\prod_i h_{\\lambda_i}$.\nThen\n$$\\Lambda=\\mathbb Z[e_1,e_2,\\ldots]=\\mathbb Z[h_1,h_2,\\ldots],$$\neach family of generators is algebraically independent over $\\mathbb Z$, and\nfor every $d\\ge0$ the families $\\{e_\\lambda:\\lambda\\vdash d\\}$ and\n$\\{h_\\lambda:\\lambda\\vdash d\\}$ are $\\mathbb Z$-bases of $\\Lambda^d$.",
+          "uses": [
+            "10.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-euclid-infinitude-of-primes",
+          "source_section": "Statement",
+          "quote": "Write $P := \\{\\, x \\in \\mathbb{Z} : x \\text{ is prime} \\,\\}$ ([[def-prime]]), and\ntake finite products in the commutative monoid $(\\mathbb{Z},\\cdot,1)$ of\n[[lem-units-of-z]] as in [[def-monoid-finite-product]].\n\n1. For every $n \\in \\mathbb{N}$ and every list $p : n \\to \\mathbb{Z}$ of primes\n   there is a prime $q$ with $q \\ne p_i$ for every $i < n$.\n2. Consequently $P$ is **not finite**: there is no $m \\in \\mathbb{N}$ with\n   $P \\approx m$ ([[def-countable]], [[def-equinumerous]]).\n\nClause 1 holds at $n = 0$ as well, where the empty product is $1$ and the witness\nproduced by the proof is a prime divisor of $2$.",
+          "uses": [
+            "8.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\lambda=\\varnothing$, then $I_\\lambda=0$: the coefficient of $[I_\\varnothing]$ in $[I_\\mu]*[S^{\\oplus r}]$ is $1$ when $r=0$ and $\\mu=\\varnothing$, and is $0$ otherwise, so it is a constant polynomial. Now suppose $\\lambda=(1^{l_1}2^{l_2}\\cdots n^{l_n})$ is nonempty, with $n$ its largest part, and let $x$ act on $I_\\lambda$, with $S=I_1$. By [F1], the coefficient of $[I_\\lambda]$ in $[I_\\mu]*[S^{\\oplus r}]$ counts exactly the $r$-dimensional subspaces $R\\subseteq\\ker x$ for which $I_\\lambda/R$ has type $\\mu$: a subobject isomorphic to $S^{\\oplus r}$ is precisely a subspace annihilated by $x$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The Gaussian counts ${a\\brack b}_q$ are polynomial in $q$: for $0<b<a$, fixing a hyperplane gives ${a\\brack b}_q={a-1\\brack b}_q+q^{a-b}{a-1\\brack b-1}_q$, with boundary values ${a\\brack0}_q={a\\brack a}_q=1$. In the second term, after choosing the $(b-1)$-dimensional intersection with the hyperplane, the remaining one-dimensional subspace in the quotient has $q^{a-b}$ choices outside the quotient hyperplane. Induction on $a$ gives polynomials in $\\mathbb Z[q]$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Finite-dimensional duality sends $(V,x)$ to $(V^*,x^*)$. If $U\\subseteq V$ is $x$-invariant, its annihilator $U^\\perp\\subseteq V^*$ is $x^*$-invariant, and dualizing $0\\to U\\to V\\to V/U\\to0$ exchanges the subobject and quotient. A Jordan block is isomorphic to its transpose by reversing its Jordan-string basis, so [F4] gives $I_\\lambda^*\\cong I_\\lambda$. This bijection proves $g^\\lambda_{\\mu,\\nu}(q)=g^\\lambda_{\\nu,\\mu}(q)$; each finite-field Hall algebra is commutative.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the nonempty partition in step 1.1, put $K_i=\\ker x\\cap\\operatorname{im}x^i$ for $i\\ge0$, with $K_0=\\ker x$ and $K_n=0$. Each Jordan block of size $j$ contributes one dimension to $K_i$ exactly when $j>i$, so $\\dim(K_{i-1}/K_i)=l_i$. For a counted subspace set $r_0=r=\\dim R$, $r_i=\\dim(R\\cap K_i)$, and $r_n=0$. Let $y$ be the operator induced by $x$ on $I_\\lambda/R$. Write $x^{-i}(R):=\\{v:x^i(v)\\in R\\}$. The map $x^i:x^{-i}(R)\\to R\\cap\\operatorname{im}x^i$ is onto with kernel $\\ker x^i$; also $R\\subseteq x^{-i}(R)$. Since $R\\cap\\operatorname{im}x^i=R\\cap K_i$, quotienting by $R$ gives $$ \\dim\\ker y^i=\\dim\\ker x^i-r+r_i. $$ For a nilpotent Jordan type with block multiplicities $(l_i)$, the number of blocks of size $i$ is the second difference $2\\dim\\ker x^i-\\dim\\ker x^{i-1}-\\dim\\ker x^{i+1}$. Applying this formula to $y$ shows that its multiplicity of blocks of size $i$ is $$ m_i=l_i+2r_i-r_{i-1}-r_{i+1}, $$ with all $r_i=0$ beyond $n$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $a_i=r_{i-1}-r_i$. For a valid profile, $0\\le a_i\\le l_i$. Choosing the graded subspaces $(R\\cap K_{i-1})/(R\\cap K_i)\\subseteq K_{i-1}/K_i$ contributes $\\prod_{i=1}^n {l_i\\brack a_i}_q$ possibilities. For fixed graded subspaces, build their lifts from the top of the flag down: at level $i<n$, each lift is the graph of a linear map from an $a_i$-dimensional space to $K_i/(R\\cap K_i)$, giving $q^{a_i(\\dim K_i-r_i)}$ choices. Multiplying these independent choices gives $$ q^{\\sum_{i=1}^{n-1}a_i(\\dim K_i-r_i)} =q^{\\sum_{i=1}^{n-1}(r_{i-1}-r_i)(\\sum_{j>i}l_j-r_i)}. $$ Thus this power of $q$ times the displayed product counts all subspaces with the chosen intersection dimensions.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For fixed $\\lambda,\\mu,r$, each profile has integers $r=r_0\\ge r_1\\ge\\cdots\\ge r_n=0$ with $0\\le r_i\\le\\dim K_i$, so there are finitely many profiles. Keep exactly those whose block multiplicities $m_i$ from step 2.1 equal $\\#\\{j:\\mu_j=i\\}$ for every $i$. These constraints are independent of the field by [F3]–[F4]. Summing the polynomial counts from steps 3.1 and 1.2 over the retained profiles proves that every coefficient in $[I_\\mu]*[S^{\\oplus r}]$ is a universal polynomial in $q$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For the empty partition define $X_\\varnothing=[0]$, the empty product; its only nonzero coefficient is the unit coefficient at $[I_\\varnothing]$. For a nonempty partition $\\lambda=(1^{l_1}2^{l_2}\\cdots n^{l_n})$, put $a_i=l_i+l_{i+1}+\\cdots+l_n$ and form $$ X_\\lambda(q)=[S^{\\oplus a_n}]*[S^{\\oplus a_{n-1}}]*\\cdots*[S^{\\oplus a_1}]. $$ By step 4.1 and associativity [F2], every coefficient is a polynomial in $q$. Parenthesize the product as $([S^{\\oplus a_n}]*\\cdots*[S^{\\oplus a_2}])*[S^{\\oplus a_1}]$. For $n=1$ the coefficient is the single one-step flag counted by the basis coefficient. For $n>1$, the induction hypothesis says the inner coefficient counts flags of length $n-1$ in an intermediate object $Y$. The outer product [F1] chooses $V_1\\cong S^{\\oplus a_1}$ with $I_\\eta/V_1\\cong Y$; an isomorphism identifies the inner flags with flags in this quotient, and any such isomorphism induces a bijection, so the count is independent of the isomorphism chosen. By [F5] each quotient flag lifts uniquely to a flag containing $V_1$, and its quotient clause identifies each lifted successive quotient with the corresponding quotient in the quotient flag. Thus the coefficient of $[I_\\eta]$ counts exactly flags $0=V_0\\subset V_1\\subset\\cdots\\subset V_n=I_\\eta$ with $V_i/V_{i-1}\\cong S^{\\oplus a_i}$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 4.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For every such flag, $x(V_i)\\subseteq V_{i-1}$, hence $V_i\\subseteq\\ker x^i$. Each Jordan block of length $j$ contributes $\\min(i,j)$ to $\\dim\\ker x^i$, so $\\dim V_i=\\sum_{h=1}^i a_h=\\sum_{j=1}^n\\min(i,j)l_j=\\dim\\ker x_{I_\\lambda}^i$. For the type $\\lambda$ itself, the kernels $V_i=\\ker x^i$ form a valid flag: each induced endomorphism on $V_i/V_{i-1}$ is zero and the quotient has dimension $a_i$, so it is isomorphic to $S^{\\oplus a_i}$. If all these kernel dimensions agree for another type $\\eta$, their block multiplicities agree by second differences, so $\\eta=\\lambda$; the flag is then forced to be the kernel flag just constructed and is unique. On partitions of a fixed total size, order types by componentwise comparison of these kernel dimensions; antisymmetry follows from the second-difference formula. Therefore $$ X_\\lambda(q)=[I_\\lambda]+\\sum_{\\eta\\prec\\lambda}c_{\\lambda,\\eta}(q)[I_\\eta], $$ where $\\eta\\prec\\lambda$ means all kernel dimensions are at least those of $\\lambda$, with at least one strict inequality.",
+          "step": "6.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "In each fixed total dimension there are finitely many partitions. The transition matrix in step 6.1 is triangular with diagonal entries one and polynomial entries from steps 4.1 and 5.1, so it is invertible over $\\mathbb Z[t]$ by recursive substitution. Thus every $[I_\\lambda]$ is a polynomial combination of monomials in the semisimple classes. For each finite field, use associativity [F2] and commutativity from step 1.3 to parenthesize and reorder a product of two such monomials so that one basis term is successively multiplied by simple-sum factors on the right. Induction on the number of factors and step 4.1 then show that every structure constant $g^\\lambda_{\\mu,\\nu}(q)$ is the value at $q$ of a polynomial $G^\\lambda_{\\mu,\\nu}(t)\\in\\mathbb Z[t]$.",
+          "step": "7.1",
+          "inputs": [
+            "F2",
+            "step 1.3",
+            "step 4.1",
+            "step 5.1",
+            "step 6.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Each coefficient polynomial is unique: the difference of two candidates vanishes at every field cardinality, and by [F9]–[F10] this includes infinitely many distinct prime cardinalities. A nonzero polynomial in $\\mathbb Z[t]$ remains nonzero in $\\mathbb R[t]$ because $\\mathbb Z\\to\\mathbb R$ is injective; by [F6], it cannot have infinitely many distinct real roots. Thus $H_{\\mathrm{gen}}$ is well-defined. Each product is finite because a short exact sequence adds vector-space dimensions, and only finitely many partitions have a fixed size. For a fixed triple of basis classes, the associativity defect is therefore a polynomial in $t$; it vanishes at every field-cardinality specialization by [F2], hence at infinitely many distinct prime cardinalities by [F9]–[F10]. Its coefficients embed injectively from $\\mathbb Z$ into $\\mathbb R$, so [F6] implies that the defect is the zero polynomial. The same argument using step 1.3 proves commutativity. The unit equations likewise hold as polynomial identities because they hold at every field-cardinality specialization by [F2], so $u_\\varnothing$ is the generic unit.",
+          "step": "8.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F9",
+            "F10",
+            "step 1.3",
+            "step 7.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "The monomial $X_\\lambda$ in step 5.1 uses the generators $u_{(1^{a_i})}$ with exponents $a_i$, which are exactly the parts of the conjugate partition $\\lambda'$. Since partition conjugation is a bijection, these $X_\\lambda$ run through every polynomial monomial in the generators $u_{(1^r)}$. Their unitriangular expansions in step 6.1 show that they are also a $\\mathbb Z[t]$-basis. Together with the coefficient polynomials from step 7.1, this proves the natural map from $\\mathbb Z[t][u_{(1)},u_{(1^2)},\\ldots]$ to $H_{\\mathrm{gen}}$ is an isomorphism.",
+          "step": "9.1",
+          "inputs": [
+            "F7",
+            "step 5.1",
+            "step 6.1",
+            "step 7.1",
+            "step 8.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-10-1",
+          "claim": "By [F8], the target symmetric-function ring is the polynomial ring $\\mathbb Z[e_1,e_2,\\ldots]$. After adjoining $t^{-1}$, each scalar $t^{-r(r-1)/2}$ is a unit. Define $\\Phi_t(u_\\varnothing)=1$ and send each free generator $u_{(1^r)}$ to $t^{-r(r-1)/2}e_r$; this defines an isomorphism of polynomial algebras, with inverse sending $e_r$ to $t^{r(r-1)/2}u_{(1^r)}$. Each generator and its image have degree $r$, and $t$ has degree zero, so the isomorphism preserves the grading.",
+          "step": "10.1",
+          "inputs": [
+            "F8",
+            "step 8.1",
+            "step 9.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 5.1 explicitly handle the empty partition, zero object and empty product."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats r=0 and the zero Jordan object; step 10.1 maps u_(1) to e_1 with unit scalar."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For r=1 the normalization scalar in step 10.1 is t^0=1; the generator map is defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 6.1 gives unitriangular expansions for all partitions, including single-row and single-column shapes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the finite-field interpolation uses all prime-power cardinalities; steps 1.2 and 1.4 include Gaussian-binomial endpoint values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 use the fixed partition model and finite-dimensional duality; neither selects a global representative or basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts an algebra isomorphism and generator map, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts an algebra isomorphism and generator map, not a biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-finite-vector-space-hall-square": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abelian-category",
+          "source_section": "Definition",
+          "quote": "An **abelian category** is an additive category ([[def-additive-category]]) in\nwhich every morphism has a kernel and a cokernel, and in which for every\nmorphism $f$ the canonical comparison morphism\n\n$$\\operatorname{coim}(f)\\longrightarrow\\operatorname{im}(f)$$\n\nconstructed in\n[[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]\nis an isomorphism.\n\nThe first two clauses are Grothendieck's AB1, while the invertibility of the\ncanonical map is this page's working form of AB2.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hall-finitary-abelian-category",
+          "source_section": "Definition",
+          "quote": "A **small finitary abelian category** for Hall multiplication is a small\nabelian category $\\mathcal A$ (its object and morphism collections are sets,\nby [[def-small-locally-small-and-large-category]]), with abelian structure as\nin [[def-abelian-category]], in which the\nfollowing sets are finite for every pair of objects $M,N$:\n\n1. $\\operatorname{Hom}_{\\mathcal A}(M,N)$;\n2. $\\operatorname{YExt}^{1}_{\\mathcal A}(M,N)$, the set of Yoneda classes of\n   short exact sequences $0\\to N\\to E\\to M\\to0$. Equivalence is the\n   one-fold instance of the generated endpoint-fixed chain-map relation in\n   [[def-equivalence-of-n-fold-extensions]]: chain maps are the identity on\n   $N$ and $M$, and the relation is closed under reflexivity, symmetry and\n   transitivity. A short exact sequence and its endpoint order use\n   [[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]],\n   [[def-extension-of-an-object-by-an-object-in-an-abelian-category]] and\n   [[def-n-fold-yoneda-extension]].\n\nOne may instead supply a small skeleton $\\mathcal A_0$ of an essentially\nsmall abelian category and perform the construction on $\\mathcal A_0$. Here\n“essentially small” means that such a small equivalent category is part of the\ngiven data; the construction does not select representatives by an unstated\nchoice principle. The isomorphism classes $\\operatorname{Iso}(\\mathcal A_0)$\nthen form a set.\n\nNo $\\mathbb F_q$-linear structure, enough projectives or injectives, finite\nnumber of subobjects of every object, or identification with derived\n$\\operatorname{Ext}^{1}$ is included in this definition. Subobjects are the\nmonomorphism classes of [[def-subobject-and-quotient-object]], and quotients\nare the cokernels specified in [[def-the-quotient-of-an-object-by-a-subobject]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-untwisted-hall-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a small finitary abelian category in the sense of\n[[def-hall-finitary-abelian-category]], and let $R$ be a commutative ring\nwith unit. Define the free $R$-module\n$$ H_{\\mathcal A,R}:=\\bigoplus_{[M]\\in\\operatorname{Iso}(\\mathcal A)}R[M], $$\nwhere $[M]$ is a basis symbol for the isomorphism class of $M$. For objects $N,L$, let\n$$\\operatorname{Mon}_{\\mathcal A}(N,L):=\\{f\\in\\operatorname{Hom}_{\\mathcal A}(N,L): f\\text{ is monic}\\}.$$\nThis is a finite set by the Hom condition in\n[[def-hall-finitary-abelian-category]]. For $f,g$ in this set, write\n$f\\sim_N g$ when $g=f\\circ u$ for an isomorphism $u:N\\to N$; this is an\nequivalence relation by [[def-isomorphism-groupoid-and-connected-category]].\nThe quotient set $\\operatorname{Mon}_{\\mathcal A}(N,L)/\\sim_N$ represents\nexactly the subobjects of $L$ isomorphic to $N$: each class gives the usual\nsubobject class from [[def-subobject-and-quotient-object]], and the mutual-\nfactorisation theorem says two such monomorphisms give the same subobject\nexactly when they differ by such an isomorphism\n([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).\nEvery subobject class with domain isomorphic to $N$ is represented by composing\nits monomorphism with an isomorphism from $N$, one class at a time. The\ncokernel quotient is independent of that representative by\n[[thm-the-quotient-is-independent-of-the-representing-monomorphism]] and\n[[def-the-quotient-of-an-object-by-a-subobject]]. Define $g^L_{M,N}$ to be the\nnumber of classes $[f]_{\\sim_N}$ for which $\\operatorname{coker}(f)\\cong M$.\nThe finiteness lemma below also proves that the resulting product has finite\nsupport. Extend the operation\n$$ [M]*[N]:=\\sum_{[L]\\in\\operatorname{Iso}(\\mathcal A)}g^L_{M,N}[L] $$\n$R$-bilinearly, mapping each natural number coefficient to its multiple of\n$1_R$. The order is fixed: the counted short exact sequence is\n$$ 0\\longrightarrow N\\longrightarrow L\\longrightarrow M\\longrightarrow0. $$\n\nThis is the **untwisted Hall product**. It does not use an Euler form, a square\nroot of a field size, or division by automorphism cardinalities. The finite\ncoefficient and finite-support claims needed for the operation to define a\nbilinear product are established in\n[[lem-untwisted-hall-product-finiteness]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the small model with objects $k^n$ and all matrices between them; every finite-dimensional vector space is isomorphic to one of these. The zero object and finite direct sums exist, and each Hom set is an abelian group under pointwise addition with bilinear composition. For a linear map $f:V\\to W$, its kernel and cokernel $W/\\operatorname{im}f$ are finite-dimensional. Choose bases of these two spaces for this single map and transport them to standard $k^d$ objects; the transported inclusion and projection retain the universal properties, so the model has kernels and cokernels. The canonical map $V/\\ker f\\to\\operatorname{im}f$ is injective because $f(v)=0$ implies $v\\in\\ker f$, and surjective by the definition of image, hence is an isomorphism. Thus [F1] makes the model abelian. Hom sets are finite sets of matrices over $k$. Any short exact sequence $0\\to U\\xrightarrow{i}E\\xrightarrow{p}Q\\to0$ splits: lift a finite basis of $Q$ to $E$ and extend linearly to a section $s:Q\\to E$. The map $U\\oplus Q\\to E$, $(u,q)\\mapsto i(u)+s(q)$, is injective by applying $p$ and then using monicity of $i$; it is surjective because $e-s(p(e))$ lies in $\\ker p=\\operatorname{im}i$. It is an isomorphism fixing the endpoints, so every Yoneda extension is equivalent to the split one and its Yoneda extension set has one class. Therefore the model satisfies [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $g^L_{S,S}\\ne0$, an exact sequence $0\\to S\\to L\\to S\\to0$ gives $\\dim_kL=2$, so the only possible isomorphism class is $k^2$. Every one-dimensional subspace of $k^2$ is counted by [F3], and its quotient is one-dimensional. The nonzero vectors of $k^2$ are partitioned by their spans, each span contains $q-1$ nonzero vectors, and $k^2$ has $q^2-1$ nonzero vectors. Hence the number of lines is $(q^2-1)/(q-1)=q+1$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "There are no other middle-object classes by step 1.2, and the coefficient of $[k^2]$ is the line count from step 1.2. This proves the displayed untwisted product.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero-dimensional object; step 1.2 shows no zero-dimensional middle object contributes to the square."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 counts subobjects by lines, and step 2.1 excludes every other middle-object class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example fixes the one-dimensional simple object S and steps 1.2–2.1 compute its square."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: The smallest finite field has q=2, where the line count is (4−1)/(2−1)=3, agreeing with q+1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles all middle dimensions by exact-sequence dimension additivity; the count has no special endpoint exception."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 counts lines by partitioning the finite set of nonzero vectors; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states one product formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states one product formula, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "F_2 line count",
+          "method": "hand enumeration of the three nonzero vectors in F_2^2",
+          "input": {
+            "field": "F_2",
+            "dimension": 2
+          },
+          "calculation": "The nonzero vectors (1,0), (0,1), (1,1) span the three distinct one-dimensional subspaces; each quotient has dimension one.",
+          "expected": {
+            "coefficient": 3,
+            "formula": "q+1 at q=2"
+          }
+        }
+      ]
+    },
+    "ex-finite-abelian-p-group-hall-square": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abelian-category",
+          "source_section": "Definition",
+          "quote": "An **abelian category** is an additive category ([[def-additive-category]]) in\nwhich every morphism has a kernel and a cokernel, and in which for every\nmorphism $f$ the canonical comparison morphism\n\n$$\\operatorname{coim}(f)\\longrightarrow\\operatorname{im}(f)$$\n\nconstructed in\n[[thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique]]\nis an isomorphism.\n\nThe first two clauses are Grothendieck's AB1, while the invertibility of the\ncanonical map is this page's working form of AB2.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-abelian-groups-form-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "The category $\\mathbf{Ab}$ of abelian groups and homomorphisms is an abelian\ncategory.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-untwisted-hall-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a small finitary abelian category in the sense of\n[[def-hall-finitary-abelian-category]], and let $R$ be a commutative ring\nwith unit. Define the free $R$-module\n$$ H_{\\mathcal A,R}:=\\bigoplus_{[M]\\in\\operatorname{Iso}(\\mathcal A)}R[M], $$\nwhere $[M]$ is a basis symbol for the isomorphism class of $M$. For objects $N,L$, let\n$$\\operatorname{Mon}_{\\mathcal A}(N,L):=\\{f\\in\\operatorname{Hom}_{\\mathcal A}(N,L): f\\text{ is monic}\\}.$$\nThis is a finite set by the Hom condition in\n[[def-hall-finitary-abelian-category]]. For $f,g$ in this set, write\n$f\\sim_N g$ when $g=f\\circ u$ for an isomorphism $u:N\\to N$; this is an\nequivalence relation by [[def-isomorphism-groupoid-and-connected-category]].\nThe quotient set $\\operatorname{Mon}_{\\mathcal A}(N,L)/\\sim_N$ represents\nexactly the subobjects of $L$ isomorphic to $N$: each class gives the usual\nsubobject class from [[def-subobject-and-quotient-object]], and the mutual-\nfactorisation theorem says two such monomorphisms give the same subobject\nexactly when they differ by such an isomorphism\n([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).\nEvery subobject class with domain isomorphic to $N$ is represented by composing\nits monomorphism with an isomorphism from $N$, one class at a time. The\ncokernel quotient is independent of that representative by\n[[thm-the-quotient-is-independent-of-the-representing-monomorphism]] and\n[[def-the-quotient-of-an-object-by-a-subobject]]. Define $g^L_{M,N}$ to be the\nnumber of classes $[f]_{\\sim_N}$ for which $\\operatorname{coker}(f)\\cong M$.\nThe finiteness lemma below also proves that the resulting product has finite\nsupport. Extend the operation\n$$ [M]*[N]:=\\sum_{[L]\\in\\operatorname{Iso}(\\mathcal A)}g^L_{M,N}[L] $$\n$R$-bilinearly, mapping each natural number coefficient to its multiple of\n$1_R$. The order is fixed: the counted short exact sequence is\n$$ 0\\longrightarrow N\\longrightarrow L\\longrightarrow M\\longrightarrow0. $$\n\nThis is the **untwisted Hall product**. It does not use an Euler form, a square\nroot of a field size, or division by automorphism cardinalities. The finite\ncoefficient and finite-support claims needed for the operation to define a\nbilinear product are established in\n[[lem-untwisted-hall-product-finiteness]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hall-finitary-abelian-category",
+          "source_section": "Definition",
+          "quote": "A **small finitary abelian category** for Hall multiplication is a small\nabelian category $\\mathcal A$ (its object and morphism collections are sets,\nby [[def-small-locally-small-and-large-category]]), with abelian structure as\nin [[def-abelian-category]], in which the\nfollowing sets are finite for every pair of objects $M,N$:\n\n1. $\\operatorname{Hom}_{\\mathcal A}(M,N)$;\n2. $\\operatorname{YExt}^{1}_{\\mathcal A}(M,N)$, the set of Yoneda classes of\n   short exact sequences $0\\to N\\to E\\to M\\to0$. Equivalence is the\n   one-fold instance of the generated endpoint-fixed chain-map relation in\n   [[def-equivalence-of-n-fold-extensions]]: chain maps are the identity on\n   $N$ and $M$, and the relation is closed under reflexivity, symmetry and\n   transitivity. A short exact sequence and its endpoint order use\n   [[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]],\n   [[def-extension-of-an-object-by-an-object-in-an-abelian-category]] and\n   [[def-n-fold-yoneda-extension]].\n\nOne may instead supply a small skeleton $\\mathcal A_0$ of an essentially\nsmall abelian category and perform the construction on $\\mathcal A_0$. Here\n“essentially small” means that such a small equivalent category is part of the\ngiven data; the construction does not select representatives by an unstated\nchoice principle. The isomorphism classes $\\operatorname{Iso}(\\mathcal A_0)$\nthen form a set.\n\nNo $\\mathbb F_q$-linear structure, enough projectives or injectives, finite\nnumber of subobjects of every object, or identification with derived\n$\\operatorname{Ext}^{1}$ is included in this definition. Subobjects are the\nmonomorphism classes of [[def-subobject-and-quotient-object]], and quotients\nare the cokernels specified in [[def-the-quotient-of-an-object-by-a-subobject]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Kernels and cokernels of homomorphisms between finite abelian $p$-groups are finite abelian $p$-groups, and finite direct sums remain finite abelian $p$-groups. Transporting each kernel or cokernel along a bijection of its underlying finite set with a standard set gives the required object in the chosen model, with the same universal property. Thus the model is abelian using [F1]. For fixed finite groups $M,N$, Hom is a finite set. Any short exact sequence with endpoints $M,N$ has a middle group of cardinality $|M||N|$; there are finitely many group laws on a finite set of that size and finitely many endpoint maps. Therefore its Yoneda extension set is finite. The stated group-table model is a set of objects, so [F3] applies.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $0\\to C_p\\to L\\to C_p\\to0$ is exact, then $|L|=p^2$. If $L$ contains an element of order $p^2$, then $L\\cong C_{p^2}$. Otherwise every nonzero element has order $p$, so scalar multiplication by $\\mathbb F_p$ makes $L$ a two-dimensional vector space and $L\\cong C_p\\oplus C_p$. Thus these are the only possible middle groups.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In $C_{p^2}$, the unique subgroup of order $p$ is $p\\mathbb Z/p^2\\mathbb Z$, and its quotient is $C_p$, giving coefficient one by [F2]. In $C_p\\oplus C_p$, every one-dimensional subspace is a subgroup isomorphic to $C_p$, and its quotient is $C_p$. The number of such subspaces is $(p^2-1)/(p-1)=p+1$, by partitioning nonzero vectors into lines.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The extension classification and counts of step 2.1 give the formula. Moreover $\\operatorname{End}(C_{p^2})\\cong\\mathbb Z/p^2\\mathbb Z$ additively, which has an element of order $p^2$; it is not an $\\mathbb F_p$-vector space. Thus the category is not $\\mathbb F_p$-linear.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example: The group-table model includes the trivial group at n=0; it cannot be a middle group for an extension of C_p by C_p."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 classify all possible middle groups and count their order-p subgroups."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example fixes the nontrivial simple group C_p and computes its Hall square."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: At p=2, the two contributions are 3 subgroups in C_2⊕C_2 and 1 in C_4, matching p+1 and 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the exact order |L|=p^2 to exhaust middle-object types."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: The finite groups and subgroups are counted by finite sets; no simultaneous representative selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states one product formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states one product formula, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "order-four Hall square at p=2",
+          "method": "hand enumeration of subgroups",
+          "input": {
+            "p": 2
+          },
+          "calculation": "C_4 has one subgroup of order 2; C_2 x C_2 has three one-dimensional subgroups. Their respective quotients are C_2.",
+          "expected": {
+            "coefficient_of_C4": 1,
+            "coefficient_of_C2xC2": 3
+          }
+        }
+      ]
+    },
+    "ex-jordan-quiver-hall-square": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-jordan-quiver-isoclasses-are-partition-indexed",
+          "source_section": "Statement",
+          "quote": "Every object of $\\mathcal J_k$ is isomorphic to a unique direct sum\n$I_\\lambda=I_{\\lambda_1}\\oplus\\cdots\\oplus I_{\\lambda_s}$, where\n$\\lambda$ is a partition. The unique simple object is $S=I_1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-untwisted-hall-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a small finitary abelian category in the sense of\n[[def-hall-finitary-abelian-category]], and let $R$ be a commutative ring\nwith unit. Define the free $R$-module\n$$ H_{\\mathcal A,R}:=\\bigoplus_{[M]\\in\\operatorname{Iso}(\\mathcal A)}R[M], $$\nwhere $[M]$ is a basis symbol for the isomorphism class of $M$. For objects $N,L$, let\n$$\\operatorname{Mon}_{\\mathcal A}(N,L):=\\{f\\in\\operatorname{Hom}_{\\mathcal A}(N,L): f\\text{ is monic}\\}.$$\nThis is a finite set by the Hom condition in\n[[def-hall-finitary-abelian-category]]. For $f,g$ in this set, write\n$f\\sim_N g$ when $g=f\\circ u$ for an isomorphism $u:N\\to N$; this is an\nequivalence relation by [[def-isomorphism-groupoid-and-connected-category]].\nThe quotient set $\\operatorname{Mon}_{\\mathcal A}(N,L)/\\sim_N$ represents\nexactly the subobjects of $L$ isomorphic to $N$: each class gives the usual\nsubobject class from [[def-subobject-and-quotient-object]], and the mutual-\nfactorisation theorem says two such monomorphisms give the same subobject\nexactly when they differ by such an isomorphism\n([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).\nEvery subobject class with domain isomorphic to $N$ is represented by composing\nits monomorphism with an isomorphism from $N$, one class at a time. The\ncokernel quotient is independent of that representative by\n[[thm-the-quotient-is-independent-of-the-representing-monomorphism]] and\n[[def-the-quotient-of-an-object-by-a-subobject]]. Define $g^L_{M,N}$ to be the\nnumber of classes $[f]_{\\sim_N}$ for which $\\operatorname{coker}(f)\\cong M$.\nThe finiteness lemma below also proves that the resulting product has finite\nsupport. Extend the operation\n$$ [M]*[N]:=\\sum_{[L]\\in\\operatorname{Iso}(\\mathcal A)}g^L_{M,N}[L] $$\n$R$-bilinearly, mapping each natural number coefficient to its multiple of\n$1_R$. The order is fixed: the counted short exact sequence is\n$$ 0\\longrightarrow N\\longrightarrow L\\longrightarrow M\\longrightarrow0. $$\n\nThis is the **untwisted Hall product**. It does not use an Euler form, a square\nroot of a field size, or division by automorphism cardinalities. The finite\ncoefficient and finite-support claims needed for the operation to define a\nbilinear product are established in\n[[lem-untwisted-hall-product-finiteness]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-jordan-quiver-category-is-finitary",
+          "source_section": "Statement",
+          "quote": "For every finite field $k$, the small category $\\mathcal J_k$ of\n[[def-jordan-quiver-nilpotent-representation-category]] is abelian, and its Hom sets and Yoneda $\\operatorname{Ext}^1$ sets are finite.\nThus it satisfies the finitary hypotheses of\n[[def-hall-finitary-abelian-category]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The category is finitary by [F3], so its Hall product is defined. Any middle object contributing to $[S]*[S]$ has vector-space dimension two. By [F1], its type is either $(1,1)$ or $(2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In $I_{(1,1)}=S\\oplus S$, the nilpotent operator is zero, so every one-dimensional subspace is an invariant subobject and the quotient is $S$. There are $(q^2-1)/(q-1)=q+1$ such lines.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In $I_2$, an invariant one-dimensional subspace must be annihilated by the nilpotent operator, so it is contained in $\\ker x$. This kernel is one-dimensional, hence it is the unique such subobject, and the quotient is $S$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two possible middle types and their counts from steps 1.1–1.3 yield the displayed Hall product.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Jordan category includes the zero object, and step 1.1 excludes it from a dimension-two extension."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero operator on S⊕S is counted in steps 1.1–1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The simple object S=I_1 is fixed in the Example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–1.3 count both zero and nonzero nilpotent operators in dimension two by their Jordan types."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 exhausts the two partitions of total dimension two, and the line counts cover all subobjects."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 partitions the finite nonzero-vector set into lines; step 1.3 uses the unique kernel line, with no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states one product formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states one product formula, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "dimension-two Hall square over F_2",
+          "method": "hand enumeration of invariant lines",
+          "input": {
+            "field": "F_2",
+            "dimension": 2
+          },
+          "calculation": "The zero operator has three invariant lines. A single size-two nilpotent Jordan block has its one-dimensional kernel as its unique invariant line.",
+          "expected": {
+            "coefficient_of_I11": 3,
+            "coefficient_of_I2": 1
+          }
+        }
+      ]
+    },
+    "def-hall-littlewood-scalar-product-and-functions": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition fixes empty products and unit norm 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition includes the degree-zero component and makes unequal degrees orthogonal."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition gives p_1 norm 1/(1-s)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition works over Q(s); singular real s=1 is outside the stated specialization range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition only specializes at 0<s<1; no assertion at s=0 or s=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition specifies a finite-degree monic orthogonal characterization; no arbitrary-index selection is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition states a construction/calculation, not a biconditional classification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition states a construction/calculation, not a biconditional classification."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-jordan-block-automorphism-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-jordan-quiver-isoclasses-are-partition-indexed",
+          "source_section": "Statement",
+          "quote": "Every object of $\\mathcal J_k$ is isomorphic to a unique direct sum\n$I_\\lambda=I_{\\lambda_1}\\oplus\\cdots\\oplus I_{\\lambda_s}$, where\n$\\lambda$ is a partition. The unique simple object is $S=I_1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-partition-young-diagram-and-conjugate-partition",
+          "source_section": "Definition",
+          "quote": "**Partitions.** Let $n\\ge 0$ be an integer. A **partition of $n$** is a finite\nweakly decreasing sequence $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$ of positive\nintegers with $\\lambda_1+\\cdots+\\lambda_k=n$. Its entries are the **parts** of\n$\\lambda$ and $k$ is the **number of parts**. For $n=0$ the only partition is\nthe **empty partition** $\\varnothing$, the empty sequence with $k=0$; for\n$n\\ge 1$ one has $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_k\\ge 1$ and\n$k\\le n$. We write $\\lambda\\vdash n$. Trailing zeros are not parts: a finite\nsequence of nonnegative integers ending in $0$ is not a partition, so the\nnumber of parts of $\\lambda$ is determined by $\\lambda$ and\n$(\\lambda_1,\\dots,\\lambda_k)$ is a different data type from\n$(\\lambda_1,\\dots,\\lambda_k,0)$.\n\n**English Young diagrams.** The **(English) Young diagram** of a nonempty $\\lambda$ is\n$$[\\lambda]:=\\{\\,(i,j)\\;:\\;1\\le i\\le k,\\ 1\\le j\\le \\lambda_i\\,\\}\\subseteq\\mathbb N\\times\\mathbb N,$$\nwhere $i$ numbers the **rows** downward and $j$ numbers the **columns**\nrightward. An element of $[\\lambda]$ is a **node**, or box, of the diagram. Row\n$i$ of $[\\lambda]$ carries $\\lambda_i$ nodes, and column $j$ carries\n$$\\lambda'_j:=\\#\\{\\,i: \\lambda_i\\ge j\\,\\}$$\nnodes, a quantity that is $0$ beyond the last column (and for every $j\\ge1$ when $\\lambda=\\varnothing$). Since a partition is weakly\ndecreasing, $[\\lambda]$ determines $\\lambda$: if $[\\mu]=[\\lambda]$, then row\n$i$ of $[\\lambda]$ is row $i$ of $[\\mu]$, so $\\mu_i=\\lambda_i$ for every $i$\nand $\\mu=\\lambda$. In particular $[\\varnothing]=\\emptyset$, the empty diagram.\n\n**Conjugation.** The **conjugate partition** of a nonempty $\\lambda$ is\n$$\\lambda':=(\\lambda'_1,\\lambda'_2,\\dots,\\lambda'_{\\lambda_1}),$$\nthe sequence of column heights of $[\\lambda]$, with $\\varnothing':=\\varnothing$\nfor the empty partition. This is again a partition of $n$, and\n$[\\lambda']$ is the transpose of $[\\lambda]$:\nfor $1\\le i\\le\\lambda_1$ and $1\\le j\\le k$,\n$$(i,j)\\in[\\lambda']\\iff j\\le\\lambda'_i\\iff \\lambda_j\\ge i\\iff (j,i)\\in[\\lambda].$$\nOutside these bounds neither diagram contains the corresponding node; for the empty partition both diagrams are empty.\nConjugation is an involution, $\\lambda''=\\lambda$, because\n$\\lambda''_i=\\#\\{j:\\lambda'_j\\ge i\\}$ counts the columns of $[\\lambda]$ of\nheight at least $i$, that is, the columns $j$ with at least $i$ rows of length\n$\\ge j$, which by weak decrease is exactly the set of $j\\le\\lambda_i$. Thus\n$\\lambda\\mapsto\\lambda'$ is a bijection on the partitions of $n$, exchanging\nthe number of parts with the largest part for nonempty partitions.\n\n**Size zero.** The symmetric group of $\\{1,\\dots,n\\}$ is\n$S_n:=\\operatorname{Sym}(\\{1,\\dots,n\\})$ ([[def-symmetric-group]]) for every\n$n\\ge 0$, and we fix\n$$S_0:=\\operatorname{Sym}(\\emptyset)=\\{1\\},$$\nthe trivial group; for $n=0$ the set $\\{1,\\dots,n\\}$ is empty and the group\nacts trivially on every size-zero object below. This is the convention used\nwhenever the constructions of this page are read at $n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "A module homomorphism $k[T]/T^r\\to k[T]/T^h$ is determined by the image of $1$, which may be any vector killed by $T^r$; that space has dimension $\\min(r,h)$. Thus the endomorphism algebra of $I_\\lambda$ has dimension $D=\\sum_{r,h}m_rm_h\\min(r,h)=\\sum_j(\\lambda'_j)^2$. Counting each column's ordered pairs of boxes gives $\\sum_j(\\lambda'_j)^2=|\\lambda|+2\\sum_i(i-1)\\lambda_i$: in a column of height $c$, its square is $c+2\\sum_{i=1}^c(i-1)$.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Consider the induced map of an endomorphism $f$ on $I_\\lambda/TI_\\lambda$. Ordered by block length, its matrix is block triangular: a homomorphism from length $r$ to a larger length $h$ has image of $1$ divisible by $T^{h-r}$ and hence has zero reduction in the target head. Its diagonal blocks are arbitrary matrices $B_r\\in\\operatorname{Mat}_{m_r}(k)$; all choices occur independently by constant matrices between blocks of the same length. The linear map from the $D$-dimensional endomorphism space to these diagonal blocks is onto, with every fiber of size $q^{D-\\sum_r m_r^2}$.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The map $f$ is invertible exactly when all $B_r$ are invertible. Necessity follows from invertibility on the quotient. Conversely those blocks make the triangular head map surjective, so $I_\\lambda=f(I_\\lambda)+TI_\\lambda$. Since $f$ commutes with $T$, iteration gives $I_\\lambda=f(I_\\lambda)+T^NI_\\lambda$ for every $N$, and nilpotence makes the last summand zero for large $N$. Thus $f$ is onto and, on a finite-dimensional vector space, bijective; its inverse commutes with $T$.",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Successively choosing linearly independent columns gives $|\\operatorname{GL}_m(k)|=\\prod_{i=0}^{m-1}(q^m-q^i)=q^{m^2}\\prod_{j=1}^m(1-q^{-j})$, including $m=0$. Hence the two preceding steps count the automorphisms as $q^{D-\\sum_r m_r^2}\\prod_r|\\operatorname{GL}_{m_r}(k)|=q^D\\prod_r\\prod_{j=1}^{m_r}(1-q^{-j})$. Substitute $D$ from step 1.1. For $\\lambda=\\varnothing$ the space is zero and its sole automorphism is the identity.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 counts the empty partition as its single automorphism."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 includes GL_0 and the zero object."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 gives GL_1 cardinality q-1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires a genuine finite field, hence q>1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 permits block length one and no positive blocks in the empty case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only finite block-coordinate choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves invertibility implies invertible diagonal head blocks."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves invertible head blocks give a surjective, hence invertible operator by nilpotence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-jordan-hall-pairing-and-hall-littlewood-basis": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-generic-jordan-hall-algebra-is-symmetric-functions",
+          "source_section": "Statement",
+          "quote": "Let $k=\\mathbb F_q$, and let $I_\\lambda$ denote the nilpotent Jordan-quiver\nrepresentation indexed by a partition $\\lambda$, as in\n[[lem-jordan-quiver-isoclasses-are-partition-indexed]]. For partitions\n$\\mu,\\nu,\\lambda$, let $g^\\lambda_{\\mu,\\nu}(q)$ be the coefficient of\n$[I_\\lambda]$ in the untwisted product $[I_\\mu]*[I_\\nu]$. There are\npolynomials $G^\\lambda_{\\mu,\\nu}(t)\\in\\mathbb Z[t]$, independent of the\nfinite field, with\n$$ g^\\lambda_{\\mu,\\nu}(q)=G^\\lambda_{\\mu,\\nu}(q). $$\nA coefficient is zero unless $|\\lambda|=|\\mu|+|\\nu|$.\n\nDefine the **generic Jordan-quiver Hall algebra** by\n$$ H_{\\mathrm{gen}}:=\\bigoplus_\\lambda\\mathbb Z[t]u_\\lambda, \\qquad u_\\mu*u_\\nu:=\\sum_\\lambda G^\\lambda_{\\mu,\\nu}(t)u_\\lambda, $$\ngiving $u_\\lambda$ degree $|\\lambda|$ and $t$ degree $0$.\nThe size condition above makes this a graded algebra.\nThen $H_{\\mathrm{gen}}$ is a commutative associative unital algebra and a free\npolynomial algebra over $\\mathbb Z[t]$ on the classes\n$u_{(1^r)}$, $r\\ge1$. After extending scalars to\n$\\mathbb Z[t,t^{-1}]$, the assignment\n$$ \\Phi_t(u_{(1^r)})=t^{-r(r-1)/2}e_r $$\nfor every $r\\ge1$, and $\\Phi_t(u_\\varnothing)=1$, extends uniquely to a\ngraded algebra isomorphism\n$$ H_{\\mathrm{gen}}\\otimes_{\\mathbb Z[t]}\\mathbb Z[t,t^{-1}] \\;\\cong\\; \\Lambda\\otimes_{\\mathbb Z}\\mathbb Z[t,t^{-1}], $$\nwhere $\\Lambda$ is the stable graded ring of symmetric functions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1",
+            "6.1",
+            "7.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-jordan-block-automorphism-count",
+          "source_section": "Statement",
+          "quote": "For the nilpotent Jordan representation $I_\\lambda$ over $\\mathbb F_q$,\nwrite $m_r=\\#\\{i:\\lambda_i=r\\}$ and $n(\\lambda)=\\sum_i(i-1)\\lambda_i$.\nThen\n$$ a_\\lambda(q):=|\\operatorname{Aut}(I_\\lambda)|=q^{|\\lambda|+2n(\\lambda)}\\prod_{r\\ge1}\\prod_{j=1}^{m_r}(1-q^{-j}). $$\nIn particular $a_\\varnothing(q)=1$.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "7.1",
+            "8.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-power-sums-form-a-rational-not-integral-stable-basis",
+          "source_section": "Statement",
+          "quote": "For $r\\ge1$, let $p_r\\in\\Lambda^r$ be the compatible sequence of finite\npower-sum polynomials $p_r(x_1,\\ldots,x_N)=\\sum_{i=1}^N x_i^r$\n([[def-stable-graded-ring-of-symmetric-functions]],\n[[def-power-sum-and-complete-homogeneous-symmetric-polynomials]]). For a\npartition $\\lambda$, set $p_\\lambda:=\\prod_i p_{\\lambda_i}$\n([[def-partition-young-diagram-and-conjugate-partition]]). Write\n$\\Lambda_{\\mathbb Q}:=\\mathbb Q\\otimes_{\\mathbb Z}\\Lambda$ and\n$\\Lambda_{\\mathbb Q}^d:=\\mathbb Q\\otimes_{\\mathbb Z}\\Lambda^d$. Then\n$$\\Lambda_{\\mathbb Q}=\\mathbb Q[p_1,p_2,\\ldots],$$\nand for every $d\\ge0$, the family $\\{p_\\lambda:\\lambda\\vdash d\\}$ is a\n$\\mathbb Q$-basis of $\\Lambda_{\\mathbb Q}^d$. These families are not in\ngeneral $\\mathbb Z$-bases of $\\Lambda^d$: in degree two,\n$h_2=\\tfrac12(p_{(1,1)}+p_{(2)})$ has nonintegral coordinates in the power-sum\nbasis.",
+          "uses": [
+            "2.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monomial-symmetric-functions-form-the-integral-stable-basis",
+          "source_section": "Statement",
+          "quote": "For $d\\ge0$ and each partition $\\lambda\\vdash d$, let $m_\\lambda\\in\\Lambda^d$\nbe the compatible sequence whose rank-$N$ projection is the monomial orbit\nsum $m_\\lambda(x_1,\\ldots,x_N)$ when $\\ell(\\lambda)\\le N$, and is zero\notherwise. Then $\\{m_\\lambda:\\lambda\\vdash d\\}$ is a $\\mathbb Z$-basis of\n$\\Lambda^d$.",
+          "uses": [
+            "2.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dominance-order-on-partitions",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda,\\mu\\vdash n$ be partitions of the same integer $n$\n([[def-partition-young-diagram-and-conjugate-partition]]). We say that\n$\\lambda$ **dominates** $\\mu$, and write $\\lambda\\unrhd\\mu$, exactly when\n$$\\sum_{i=1}^{r}\\lambda_i\\;\\ge\\;\\sum_{i=1}^{r}\\mu_i\\qquad\\text{for every }r\\ge1,$$\nwhere each sequence is padded with zeros beyond its number of parts; since both\npartitions have total $n$, both sides equal $n$ for all $r$ at least the number\nof parts of either, so the condition is a finite family of inequalities between\nintegers. We write $\\lambda\\rhd\\mu$ when $\\lambda\\unrhd\\mu$ and\n$\\lambda\\ne\\mu$. The relation $\\unrhd$ is the **dominance order** on the\npartitions of $n$; we call $\\lambda$ and $\\mu$ **incomparable** when neither\n$\\lambda\\unrhd\\mu$ nor $\\mu\\unrhd\\lambda$ holds.\n\nBecause it is defined by a family of non-strict inequalities between integers,\n$\\unrhd$ is reflexive and transitive. It is also antisymmetric: if\n$\\lambda\\unrhd\\mu$ and $\\mu\\unrhd\\lambda$, then the prefix sums of $\\lambda$ and\nof $\\mu$ are equal for every $r\\ge1$, and subtracting consecutive prefix sums\ngives $\\lambda_i=\\mu_i$ for every $i$ (both sequences are eventually zero).\nHence $\\unrhd$ is a partial order on the set of partitions of $n$. For $n\\ge1$,\nthe partition $(n)$ is its unique maximum and the partition $(1^n)$ its unique\nminimum: for every $\\mu\\vdash n$ and every $r\\ge1$ one has\n$$\\min(r,n)=\\sum_{i\\le r}(1^n)_i\\;\\le\\;\\sum_{i\\le r}\\mu_i\\;\\le\\;n=\\sum_{i\\le r}(n)_i .$$\n\nFor $n=0$ the order is the trivial order on the one-element set\n$\\{\\varnothing\\}$.",
+          "uses": [
+            "1.2",
+            "2.3",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-conjugation-reverses-dominance",
+          "source_section": "Statement",
+          "quote": "For all partitions $\\lambda$ and $\\mu$ of the same integer $n$,\n$$\\lambda\\unrhd\\mu\\qquad\\Longleftrightarrow\\qquad\\mu'\\unrhd\\lambda'.$$",
+          "uses": [
+            "1.2",
+            "2.3",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-hall-littlewood-scalar-product-and-functions",
+          "source_section": "Definition",
+          "quote": "Let $s$ be an indeterminate and work in $\\Lambda_{\\mathbb Q(s)}$,\nthe scalar extension of [[def-stable-graded-ring-of-symmetric-functions]].\nFor a partition $\\lambda$, let $m_r(\\lambda)$ be the multiplicity of its\npart $r$, and put\n$$ z_\\lambda=\\prod_{r\\ge1}r^{m_r(\\lambda)}m_r(\\lambda)!,\\qquad b_\\lambda(s)=\\prod_{r\\ge1}\\prod_{j=1}^{m_r(\\lambda)}(1-s^j),\\qquad n(\\lambda)=\\sum_{i\\ge1}(i-1)\\lambda_i. $$\nThe **Hall–Littlewood scalar product** is the symmetric bilinear form with\n$$ \\langle p_\\lambda,p_\\mu\\rangle_s=\\delta_{\\lambda\\mu}z_\\lambda\\prod_i(1-s^{\\lambda_i})^{-1}. $$\nThis defines a nondegenerate form, because the power sums are a rational\nbasis ([[prop-power-sums-form-a-rational-not-integral-stable-basis]]) and\nall displayed diagonal entries are nonzero. Different degrees are orthogonal;\nempty products are $1$, so $\\langle1,1\\rangle_s=1$.\n\nThe **monic Hall–Littlewood functions** $P_\\lambda(x;s)$ are characterized by\n$$ P_\\lambda=m_\\lambda+\\sum_{\\mu\\lhd\\lambda}c_{\\lambda\\mu}(s)m_\\mu,\\qquad \\langle P_\\lambda,P_\\mu\\rangle_s=0\\quad(\\lambda\\ne\\mu), $$\nwhere $\\lhd$ is strict dominance ([[def-dominance-order-on-partitions]])\nand the monomials use [[thm-monomial-symmetric-functions-form-the-integral-stable-basis]].\nExistence, uniqueness, and the norm formula\n$\\langle P_\\lambda,P_\\lambda\\rangle_s=b_\\lambda(s)^{-1}$ are proved in\n[[thm-jordan-hall-pairing-and-hall-littlewood-basis]], rather than assumed\nin this definition. Set $Q_\\lambda=b_\\lambda(s)P_\\lambda$.\nFor a real parameter $0<s<1$ the same formulas specialize wherever used\nbelow; the theorem proves their regularity there. This form differs from\nthe ordinary symmetric-function Hall inner product, whose power-sum norms\nare $z_\\lambda$.",
+          "uses": [
+            "6.1",
+            "8.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-euclid-infinitude-of-primes",
+          "source_section": "Statement",
+          "quote": "Write $P := \\{\\, x \\in \\mathbb{Z} : x \\text{ is prime} \\,\\}$ ([[def-prime]]), and\ntake finite products in the commutative monoid $(\\mathbb{Z},\\cdot,1)$ of\n[[lem-units-of-z]] as in [[def-monoid-finite-product]].\n\n1. For every $n \\in \\mathbb{N}$ and every list $p : n \\to \\mathbb{Z}$ of primes\n   there is a prime $q$ with $q \\ne p_i$ for every $i < n$.\n2. Consequently $P$ is **not finite**: there is no $m \\in \\mathbb{N}$ with\n   $P \\approx m$ ([[def-countable]], [[def-equinumerous]]).\n\nClause 1 holds at $n = 0$ as well, where the empty product is $1$ and the witness\nproduced by the proof is a prime divisor of $2$.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+          "source_section": "Statement",
+          "quote": "A nonzero real polynomial of degree $n$ has at most $n$ distinct real roots. The conventions and prerequisite facts used below are recorded in [[def-real-polynomial-degree-leading-coefficient-and-monic]], [[lem-real-polynomial-factor-at-a-root]], [[thm-induction-principle]].",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-formal-exponential-logarithm-and-powers",
+          "source_section": "Definition",
+          "quote": "A **commutative $\\mathbb Q$-algebra** here means a commutative ring $R$ equipped with a unital ring homomorphism $\\mathbb Q\\to R$. We identify each rational with its image in $R$.\n\nFor $u\\in xR\\llbracket x\\rrbracket$, define\n\n$$\\exp(u):=\\sum_{n\\ge0}\\frac{u^n}{n!},\\qquad \\log(1+u):=\\sum_{n\\ge1}(-1)^{n-1}\\frac{u^n}{n}.$$\n\nFor $c\\in R$, define the **formal binomial power**\n\n$$(1+u)^c:=\\exp\\bigl(c\\log(1+u)\\bigr).$$\n\nSince $\\operatorname{ord}_x(u^n)\\ge n$, each displayed family is summable. The unit criterion makes $1+u$ a unit. These symbols name formal series only; no analytic exponential, logarithm, branch, or convergence is involved.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-formal-exponential-logarithm-identities",
+          "source_section": "Statement",
+          "quote": "In a commutative $\\mathbb Q$-algebra $R$, for $u,v\\in xR\\llbracket x\\rrbracket$ and $c,d\\in R$,\n\n$$\\exp(u+v)=\\exp(u)\\exp(v),$$\n\n$$\\log((1+u)(1+v))=\\log(1+u)+\\log(1+v),$$\n\nand $\\exp:xR\\llbracket x\\rrbracket\\to1+xR\\llbracket x\\rrbracket$ and $\\log:1+xR\\llbracket x\\rrbracket\\to xR\\llbracket x\\rrbracket$ are inverse group homomorphisms. Consequently,\n\n$$(1+u)^{c+d}=(1+u)^c(1+u)^d,\\qquad ((1+u)^c)^d=(1+u)^{cd},$$\n\nand\n\n$$(1+u)^c=\\sum_{n\\ge0}\\frac{c(c-1)\\cdots(c-n+1)}{n!}u^n,$$\n\nwhere the numerator is the empty product $1$ at $n=0$.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a composition $a=(a_1,\\ldots,a_r)$ of $d$, allowing zero parts, let $X_a=\\prod_i u_{(1^{a_i})}$ and $A(a)=\\sum_i\\binom{a_i}{2}$. By the Hall flag formula [F1], the coefficient of $u_\\lambda$ in $X_a$ at $t=q$ counts flags $0=F_0\\subseteq F_1\\subseteq\\cdots\\subseteq F_r=k^d$ with $\\dim(F_i/F_{i-1})=a_i$ and $T(F_i)\\subseteq F_{i-1}$, when $T$ has type $\\lambda$. A repeated subspace is permitted exactly when the corresponding part is zero. Product order reverses the quotient order, but the Jordan Hall algebra is commutative by [F1], so these flags give the stated coefficient.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $Y_\\lambda=t^{n(\\lambda)}\\Phi_t(u_\\lambda)$. The identity $n(\\lambda)=\\sum_j\\binom{\\lambda'_j}{2}$ follows by counting pairs of boxes in each column. The unitriangular Hall relation in [F1], using $\\dim\\ker T^i=\\sum_{j\\le i}\\lambda'_j$, and dominance reversal [F4], gives $$ e_{\\lambda'}=Y_\\lambda+\\sum_{\\mu\\lhd\\lambda}c_{\\lambda\\mu}(t)t^{n(\\lambda)-n(\\mu)}Y_\\mu. $$ Here $e_{\\lambda'}=\\prod_j e_{\\lambda'_j}$, and strict kernel inequalities are exactly strict dominance in the opposite row direction.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Consequently $(X_a,X_b)_G$ at $t=q$ equals $\\sum_\\lambda N_a(T_\\lambda)N_b(T_\\lambda)/a_\\lambda(q)$, where $N_a(T)$ counts all actual flags of type $a$ lowered by a fixed operator $T$, and $T_\\lambda$ is one operator of each Jordan type. To rewrite this as a count of all such triples $(T,F,G)$ on $k^d$, fix $T=T_\\lambda$ and let $H=\\operatorname{GL}_d(k)$ act on its conjugates. The stabilizer of $T$ is $H_T=\\{h\\in H:hT=Th\\}=\\operatorname{Aut}(I_\\lambda)$, of order $a_\\lambda(q)$ by [F2]. The map $H\\to H\\cdot T$, $h\\mapsto hTh^{-1}$, is surjective, and two elements $h_1,h_2$ have the same image exactly when $h_2^{-1}h_1\\in H_T$. Thus each fiber is a coset of $H_T$, so this conjugacy class has $|H|/a_\\lambda(q)$ elements. Conjugation transports the lowered flags bijectively, so $N_a(T)N_b(T)$ is constant on the class. Therefore the weighted sum over Jordan types is exactly $1/|H|$ times the number of all such triples. Lowering either finite flag makes $T$ nilpotent.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Two flags have a common splitting $k^d=\\bigoplus_{i,j}W_{ij}$ with $F_i\\cap G_j=\\bigoplus_{h\\le i,l\\le j}W_{hl}$. Construct this by choosing a complement of $(F_{i-1}\\cap G_j)+(F_i\\cap G_{j-1})$ inside $F_i\\cap G_j$ successively in increasing $i+j$; the intersection of those two summands is $F_{i-1}\\cap G_{j-1}$, so induction verifies the direct-sum description. Put $m_{ij}=\\dim W_{ij}$. These nonnegative integers have row sums $a_i$ and column sums $b_j$. Conversely every such matrix is realized by standard coordinate blocks. Sending adapted bases to one another shows that $\\operatorname{GL}_d(k)$ is transitive on pairs of flags with the same matrix. This is finite-dimensional basis selection only.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Expanding $e_{\\lambda'}$ in monomials gives $m_\\lambda$ with coefficient $1$ and only terms $m_\\mu$ for $\\mu\\lhd\\lambda$ besides it. Indeed each factor $e_{\\lambda'_j}$ selects $\\lambda'_j$ distinct variables. For a resulting exponent vector arranged decreasingly, the sum of its first $r$ exponents is at most $\\sum_j\\min(r,\\lambda'_j)=\\sum_{i\\le r}\\lambda_i$, giving the dominance bound. For the specific monomial $x_1^{\\lambda_1}x_2^{\\lambda_2}\\cdots$, equality holds in this bound for every $r$, so the variables selected in column $j$ must be exactly $x_1,\\ldots,x_{\\lambda'_j}$; this is the unique selection. Inverting the finite unitriangular system in step 1.2 now proves $Y_\\lambda=m_\\lambda+\\sum_{\\mu\\lhd\\lambda}d_{\\lambda\\mu}(t)m_\\mu$.",
+          "step": "2.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix that splitting. The algebra of endomorphisms preserving both flags consists of blocks from $W_{ij}$ to $W_{hl}$ with $h\\le i$ and $l\\le j$. Its off-diagonal blocks form a nilpotent ideal: each nonzero off-diagonal multiplication strictly decreases $i+j$. Thus an element is invertible exactly when every diagonal block is invertible, either by a finite geometric-series inverse after removing its invertible diagonal or by triangularity. If $v=\\sum_{i,j}\\sum_{h\\le i,l\\le j}m_{ij}m_{hl}-\\sum_{i,j}m_{ij}^2$, the stabilizer of the flags has order $q^v\\prod_{ij}|\\operatorname{GL}_{m_{ij}}(k)|$. A map lowering both flags has blocks with $h<i,l<j$, so the space of such maps has dimension $w=\\sum_{i,j}\\sum_{h<i,l<j}m_{ij}m_{hl}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The contribution of this matrix to the mass in step 2.1 is therefore $q^{w-v}/\\prod_{ij}|\\operatorname{GL}_{m_{ij}}(k)|$. Subtracting the block sums gives $v-w=\\sum_i\\sum_{j>l}m_{ij}m_{il}+\\sum_j\\sum_{i>h}m_{ij}m_{hj}=\\frac12(\\sum_i a_i^2+\\sum_j b_j^2-2\\sum_{ij}m_{ij}^2)$. Since $\\Phi_q(X_a)=q^{-A(a)}e_{a_1}\\cdots e_{a_r}$, multiplication by $q^{A(a)+A(b)}$ turns that contribution into $\\prod_{ij}q^{m_{ij}^2-m_{ij}}/|\\operatorname{GL}_{m_{ij}}(k)|$. Using $|\\operatorname{GL}_m(k)|=q^{m^2}\\prod_{h=1}^m(1-q^{-h})$, already proved in [F2], it follows that the transported form $B_q(f,g)=(\\Phi_q^{-1}f,\\Phi_q^{-1}g)_G$ satisfies $$ B_q(e_{a_1}\\cdots e_{a_r},e_{b_1}\\cdots e_{b_l})=\\sum_{m\\,:\\,\\mathrm{row}(m)=a,\\,\\mathrm{col}(m)=b}\\ \\prod_{ij}\\frac{q^{-m_{ij}}}{\\prod_{h=1}^{m_{ij}}(1-q^{-h})}. $$ This includes $d=0$, whose only matrix has zero entries and mass $1$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $C_q(z)=\\sum_{m\\ge0}c_mz^m$, where $c_m=q^{-m}/\\prod_{h=1}^m(1-q^{-h})$. The recurrence $c_m(1-q^{-m})=q^{-1}c_{m-1}$ is equivalent to $C_q(q^{-1}z)=(1-q^{-1}z)C_q(z)$. For $L(z)=\\log C_q(z)$ in $\\mathbb Q\\llbracket z\\rrbracket$, [F7] and substitution give $L(q^{-1}z)-L(z)=\\log(1-q^{-1}z)=-\\sum_{h\\ge1}q^{-h}z^h/h$. Substitution $z\\mapsto q^{-1}z$ commutes with these power-series definitions because every coefficient is a finite sum. Comparing coefficients, using $q>1$, gives $$ \\log C_q(z)=\\sum_{h\\ge1}\\frac{z^h}{h(q^h-1)}. $$ For $E(z)=\\sum_{n\\ge0}e_nz^n$, apply [F7] in the commutative $\\mathbb Q$-algebra $\\mathbb Q[x_1,\\ldots,x_N]$: the logarithm of the finite product $\\prod_i(1+x_i z)$ is $\\sum_{h\\ge1}(-1)^{h-1}(\\sum_i x_i^h)z^h/h$. Applying the inverse exponential and passing coefficientwise through the stable rank projections yields $E(z)=\\exp(\\sum_{h\\ge1}(-1)^{h-1}p_hz^h/h)$ in $\\Lambda_{\\mathbb Q}\\llbracket z\\rrbracket$. Step 4.1 therefore says $$ B_q\\left(\\prod_i E(z_i),\\prod_j E(w_j)\\right)=\\prod_{ij}C_q(z_iw_j)=\\exp\\left(\\sum_{h\\ge1}\\frac{(\\sum_i z_i^h)(\\sum_j w_j^h)}{h(q^h-1)}\\right). $$ Only finitely many $z_i,w_j$ are used. To apply the univariate identities [F7] to this last multivariable expression, replace each $z_i,w_j$ by $vz_i,vw_j$ for an auxiliary variable $v$ and work in $R\\llbracket v\\rrbracket$, with $R$ equal to $\\mathbb Q[z_i,w_j]$ or $\\Lambda_{\\mathbb Q}[z_i,w_j]$ as appropriate. These are commutative $\\mathbb Q$-algebras; all exponential arguments have positive $v$-order and all logarithm arguments have constant term $1$. Each coefficient of $v$ is a finite homogeneous polynomial, so comparison recovers precisely the total-degree formal identities. The same observation applies to the following exponential comparison. All these coefficient-ring hypotheses also hold over $\\mathbb Q(t)$.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F7",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Define a form $D_q$ on the power-sum basis by $D_q(p_\\lambda,p_\\mu)=\\delta_{\\lambda\\mu}z_\\lambda\\prod_i(q^{\\lambda_i}-1)^{-1}$. Expanding the two exponentials for $E$ in step 5.1 and using this diagonal rule yields the same final exponential: for each $h$, the equal multiplicities $m$ contribute $((\\sum_i z_i^h)(\\sum_j w_j^h)/(h(q^h-1)))^m/m!$, since the two signs cancel. Thus $B_q$ and $D_q$ agree on every product of elementary functions in both arguments, which spans by [F1]. They are equal. On degree $d$, the displayed power-sum diagonal of $D_q$ is $q^{-d}$ times that of $\\langle\\ ,\\ \\rangle_{q^{-1}}$.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F7",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "For each fixed degree the entries of the generic transported form are rational functions of $t$: [F1] gives Laurent-polynomial images and inverse generator formulas, and [F2] gives the rational diagonal denominators $a_\\lambda(t)$, none vanishing at $t=q>1$. Step 6.1 proves the desired pairing identity at every finite-field cardinality. Clearing denominators, its difference is a polynomial vanishing at infinitely many prime cardinalities, hence zero by [F6]. It follows that $B_t=t^{-d}\\langle\\ ,\\ \\rangle_{t^{-1}}$ on degree $d$, and the asserted generic power-sum formula holds.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 6.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "The $Y_\\lambda$ are pairwise orthogonal for $B_t$, since the $u_\\lambda$ are so by its definition; step 7.1 makes them orthogonal for the Hall–Littlewood form as well. Their norms are $$ \\langle Y_\\lambda,Y_\\lambda\\rangle_{t^{-1}}=t^{|\\lambda|+2n(\\lambda)}a_\\lambda(t)^{-1}=b_\\lambda(t^{-1})^{-1}, $$ which are nonzero. Replace the indeterminate $t$ by $s^{-1}$ to obtain existence of the basis required in [F5]. For uniqueness, choose a linear extension of dominance in each finite degree, placing dominated partitions first. Inductively two monic triangular orthogonal bases agree on earlier indices; their difference at the next index lies in the span of these earlier basis vectors and is orthogonal to each. Each earlier norm is nonzero, so every coefficient of the difference is zero. This proves uniqueness and identifies $Y_\\lambda=P_\\lambda(x;t^{-1})$.",
+          "step": "8.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 7.1",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "The triangular system in step 1.2 has Laurent-polynomial entries and diagonal $1$, so its finite-degree inverse has Laurent-polynomial entries. Hence the constructed $Y_\\lambda$ and thus $P_\\lambda(x;s)$ have no poles for $s\\ne0$, in particular at $s=q^{-1}$. The pairing denominators also remain nonzero there. All identities therefore specialize as stated. The zero partition is the empty flag, $u_\\varnothing=1$, $n(\\varnothing)=0$, and $a_\\varnothing=b_\\varnothing=1$, so its image and norm are $1$. This proves every asserted normalization and boundary case without assuming a Green coproduct theorem or a physical interpretation.",
+          "step": "9.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 7.1",
+            "step 8.1",
+            "algebra",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 9.1 verifies the empty flag, partition and products have image and norm 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 includes the unique degree-zero matrix with mass 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 at the first coefficient gives the norm factor 1/(q-1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and step 9.1 exclude t=q=1; specialization denominators are nonzero for q>1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement uses formal t and s=t^{-1}; the claimed specializations satisfy 0<s<1, so neither singular endpoint is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 chooses finitely many complements for finite flags only; step 8.1 uses finite-degree linear extensions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 8.1 constructs the triangular orthogonal family and computes its nonzero norms."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 8.1 proves any family satisfying the defining triangularity and orthogonality equals the constructed family."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-jordan-hall-littlewood-degree-two-normalizations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "ex-jordan-quiver-hall-square",
+          "source_section": "Example",
+          "quote": "Let $k=\\mathbb F_q$, let $S=I_1$ be the simple Jordan-quiver\nrepresentation, and let $I_2$ be the indecomposable length-two Jordan block.\nThen\n$$ [S]*[S]=(q+1)[I_{(1,1)}]+[I_2]. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-jordan-hall-pairing-and-hall-littlewood-basis",
+          "source_section": "Statement",
+          "quote": "Extend the generic Jordan Hall algebra of\n[[thm-generic-jordan-hall-algebra-is-symmetric-functions]] to $\\mathbb Q(t)$,\nand use **that theorem's exact map**\n$\\Phi_t(u_{(1^r)})=t^{-\\binom r2}e_r$.\nLet $n(\\lambda)$ and $b_\\lambda(s)$ have the conventions of\n[[def-hall-littlewood-scalar-product-and-functions]], and put\n$$ a_\\lambda(t)=t^{|\\lambda|+2n(\\lambda)}b_\\lambda(t^{-1}). $$\nDefine the Jordan **Green pairing** to be the bilinear form\n$$ (u_\\lambda,u_\\mu)_G=\\delta_{\\lambda\\mu}a_\\lambda(t)^{-1}. $$\nIt is nondegenerate and equals inverse automorphism counting at every\nfinite-field specialization $t=q$.\nThen the Hall–Littlewood functions exist uniquely in the monic\northogonal convention specified there, and\n$$ \\Phi_t(u_\\lambda)=t^{-n(\\lambda)}P_\\lambda(x;t^{-1}),\\qquad \\langle P_\\lambda,P_\\mu\\rangle_s=\\delta_{\\lambda\\mu}b_\\lambda(s)^{-1}. $$\nMore precisely, if $f,g\\in\\Lambda^d_{\\mathbb Q(t)}$, then\n$$ (\\Phi_t^{-1}f,\\Phi_t^{-1}g)_G=t^{-d}\\langle f,g\\rangle_{t^{-1}}. $$\nDifferent degrees are orthogonal. In particular the transported pairing on\npower sums is\n$$ (\\Phi_t^{-1}p_\\lambda,\\Phi_t^{-1}p_\\mu)_G=\\delta_{\\lambda\\mu}z_\\lambda\\prod_i(t^{\\lambda_i}-1)^{-1}. $$\nThe empty partition gives $1$, with norm $1$. All the displayed basis and\npairing identities specialize at $t=q>1$ and at $s=q^{-1}$.\nThe pairing normalization is a degree scaling of the standard\nHall–Littlewood form; it is not the ordinary symmetric-function Hall inner\nproduct.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hall-littlewood-scalar-product-and-functions",
+          "source_section": "Definition",
+          "quote": "Let $s$ be an indeterminate and work in $\\Lambda_{\\mathbb Q(s)}$,\nthe scalar extension of [[def-stable-graded-ring-of-symmetric-functions]].\nFor a partition $\\lambda$, let $m_r(\\lambda)$ be the multiplicity of its\npart $r$, and put\n$$ z_\\lambda=\\prod_{r\\ge1}r^{m_r(\\lambda)}m_r(\\lambda)!,\\qquad b_\\lambda(s)=\\prod_{r\\ge1}\\prod_{j=1}^{m_r(\\lambda)}(1-s^j),\\qquad n(\\lambda)=\\sum_{i\\ge1}(i-1)\\lambda_i. $$\nThe **Hall–Littlewood scalar product** is the symmetric bilinear form with\n$$ \\langle p_\\lambda,p_\\mu\\rangle_s=\\delta_{\\lambda\\mu}z_\\lambda\\prod_i(1-s^{\\lambda_i})^{-1}. $$\nThis defines a nondegenerate form, because the power sums are a rational\nbasis ([[prop-power-sums-form-a-rational-not-integral-stable-basis]]) and\nall displayed diagonal entries are nonzero. Different degrees are orthogonal;\nempty products are $1$, so $\\langle1,1\\rangle_s=1$.\n\nThe **monic Hall–Littlewood functions** $P_\\lambda(x;s)$ are characterized by\n$$ P_\\lambda=m_\\lambda+\\sum_{\\mu\\lhd\\lambda}c_{\\lambda\\mu}(s)m_\\mu,\\qquad \\langle P_\\lambda,P_\\mu\\rangle_s=0\\quad(\\lambda\\ne\\mu), $$\nwhere $\\lhd$ is strict dominance ([[def-dominance-order-on-partitions]])\nand the monomials use [[thm-monomial-symmetric-functions-form-the-integral-stable-basis]].\nExistence, uniqueness, and the norm formula\n$\\langle P_\\lambda,P_\\lambda\\rangle_s=b_\\lambda(s)^{-1}$ are proved in\n[[thm-jordan-hall-pairing-and-hall-littlewood-basis]], rather than assumed\nin this definition. Set $Q_\\lambda=b_\\lambda(s)P_\\lambda$.\nFor a real parameter $0<s<1$ the same formulas specialize wherever used\nbelow; the theorem proves their regularity there. This form differs from\nthe ordinary symmetric-function Hall inner product, whose power-sum norms\nare $z_\\lambda$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hall-inner-product-on-symmetric-functions",
+          "source_section": "Definition",
+          "quote": "The **Hall inner product** is the graded $\\mathbb Z$-bilinear form on the\nstable ring $\\Lambda$ ([[def-stable-graded-ring-of-symmetric-functions]])\ncharacterized by\n$$\\langle h_\\lambda,m_\\mu\\rangle_H=\\delta_{\\lambda\\mu}$$\nfor all partitions $\\lambda,\\mu$ ([[def-partition-young-diagram-and-conjugate-partition]],\n[[thm-elementary-and-complete-families-freely-generate-the-stable-ring]],\n[[thm-monomial-symmetric-functions-form-the-integral-stable-basis]]), where\n$\\delta_{\\lambda\\mu}=1$ if $\\lambda=\\mu$ and $0$ otherwise. In particular,\nhomogeneous components of unequal degrees are orthogonal.\nFor the empty partition, $h_\\varnothing=m_\\varnothing=1$, so\n$\\langle1,1\\rangle_H=1$.\n\nFor each $d\\ge0$, the proven integral bases give unique finite expansions\n$$f_d=\\sum_{\\lambda\\vdash d}a_\\lambda h_\\lambda,\\qquad g_d=\\sum_{\\mu\\vdash d}b_\\mu m_\\mu$$\nfor $f_d,g_d\\in\\Lambda^d$. Define their degree-$d$ pairing by\n$$\\langle f_d,g_d\\rangle_H:=\\sum_{\\lambda,\\mu\\vdash d}a_\\lambda b_\\mu\\delta_{\\lambda\\mu}.$$\nFor $f=\\sum_d f_d$ and $g=\\sum_d g_d$ in the algebraic direct sum $\\Lambda$,\nset $$\\langle f,g\\rangle_H:=\\sum_d\\langle f_d,g_d\\rangle_H.$$\nOnly finitely many $d$ contribute because $f$ and $g$ have finite degree\nsupport. The unique expansions in the two integral bases make this a\nwell-defined $\\mathbb Z$-bilinear form; the displayed basis rule determines it\nuniquely on all of $\\Lambda$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-power-sums-are-orthogonal-for-the-hall-inner-product",
+          "source_section": "Statement",
+          "quote": "Extend the Hall form $\\langle\\ ,\\ \\rangle_H$ on $\\Lambda$\n$\\mathbb Q$-bilinearly to\n$\\Lambda_{\\mathbb Q}:=\\mathbb Q\\otimes_{\\mathbb Z}\\Lambda$. For partitions\n$\\lambda$ and $\\mu$, let\n$$z_\\lambda:=\\prod_{r\\ge1}r^{m_r(\\lambda)}m_r(\\lambda)!,\\qquad m_r(\\lambda):=\\#\\{i:\\lambda_i=r\\}.$$\nThen\n$$\\langle p_\\lambda,p_\\mu\\rangle_H=\\delta_{\\lambda\\mu}z_\\lambda.$$\nIn particular, power sums of unequal degrees are orthogonal.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The normalized generator map gives $\\Phi_q(u_{(1)})=e_1=m_{(1)}$ and $\\Phi_q(u_{(1,1)})=q^{-1}e_2=q^{-1}m_{(1,1)}$. Since $e_1^2=m_{(2)}+2m_{(1,1)}$, applying it to [F1] yields $\\Phi_q(u_{(2)})=e_1^2-(1+q^{-1})e_2=m_{(2)}+(1-q^{-1})m_{(1,1)}$. The exponents are $n((1))=n((2))=0$, $n((1,1))=1$, so [F2] identifies exactly the four asserted $P$ functions, including the unit.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In the power-sum basis, $m_{(2)}=p_2$ and $m_{(1,1)}=(p_1^2-p_2)/2$, hence $P_{(2)}=((1-s)p_1^2+(1+s)p_2)/2$. The diagonal Hall–Littlewood norms are $\\langle p_1^2,p_1^2\\rangle_s=2/(1-s)^2$ and $\\langle p_2,p_2\\rangle_s=2/(1-s^2)$. Substitution gives $\\langle P_{(2)},P_{(1,1)}\\rangle_s=\\frac14((1-s)2/(1-s)^2-(1+s)2/(1-s^2))=0$, $\\langle P_{(2)},P_{(2)}\\rangle_s=1/(1-s)$ and $\\langle P_{(1,1)},P_{(1,1)}\\rangle_s=1/((1-s)(1-s^2))$. These independently check the theorem's degree-two scalar convention.",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The automorphism factors from [F2] are $a_{(2)}=q^2(1-q^{-1})$ and $a_{(1,1)}=q^4(1-q^{-1})(1-q^{-2})$. Since $\\Phi_q(u_{(1,1)})=q^{-1}P_{(1,1)}$, the rule $B_q=q^{-2}\\langle\\ ,\\ \\rangle_{q^{-1}}$ gives exactly $a_{(1,1)}^{-1}$ on that image, and gives $a_{(2)}^{-1}$ on the other image. In particular $B_q(p_2,p_2)=q^{-2}2/(1-q^{-2})=2/(q^2-1)$, whereas [F3] gives the ordinary Hall value $2$. The factors $q^{-1}$ on the column class and $q^{-2}$ on the degree-two form are both necessary.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes P_empty=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example and step 1.1 include degree zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes P_(1)=m_(1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example requires finite-field q>1; denominators in step 2.1 are nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example uses s=q^{-1}, which lies strictly between 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example is a finite symbolic calculation with no representative selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example states a construction/calculation, not a biconditional classification.",
+          "evidence": ""
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This example states a construction/calculation, not a biconditional classification.",
+          "evidence": ""
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

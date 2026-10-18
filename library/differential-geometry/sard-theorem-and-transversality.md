@@ -1,7 +1,7 @@
 ---
 page: sard-theorem-and-transversality
 title: "Sard Theorem and Transversality"
-status: published
+status: draft
 items: [def-null-subset-of-a-smooth-manifold,
         lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets,
         lem-c1-local-diffeomorphisms-preserve-null-sets-locally,
@@ -12,6 +12,7 @@ items: [def-null-subset-of-a-smooth-manifold,
         prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets,
         prop-the-image-of-a-lower-dimensional-c1-manifold-is-null,
         cor-positive-codimension-immersed-submanifolds-are-null,
+        def-c1-critical-locus-and-critical-value-set-in-euclidean-spaces,
         def-critical-locus-and-critical-value-set,
         lem-sard-slicing-for-compact-null-sections,
         thm-whitney-extension-for-finite-order-euclidean-jets,
@@ -44,6 +45,7 @@ items: [def-null-subset-of-a-smooth-manifold,
         prop-transversality-is-stable-on-a-compact-source,
         fs-every-critical-point-is-an-isolated-point,
         fs-the-set-of-critical-values-is-always-closed,
+        lem-a-c1-map-from-r2-to-r-with-an-interval-of-critical-values,
         fs-sard-theorem-holds-for-every-c1-map-between-arbitrary-dimensions,
         fs-two-submanifolds-with-nonempty-intersection-are-transverse,
         fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold,

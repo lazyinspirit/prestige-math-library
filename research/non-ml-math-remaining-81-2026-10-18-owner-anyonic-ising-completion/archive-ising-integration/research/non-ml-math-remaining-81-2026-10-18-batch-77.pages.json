@@ -1,0 +1,494 @@
+[
+  {
+    "order": 2968,
+    "id": "noninvertible-symmetries-and-anyonic-chains",
+    "kind": "A",
+    "category": "hall-algebras-and-tensor-categories",
+    "title": "Noninvertible Symmetries and Anyonic Chains",
+    "companion": "noninvertible-symmetries-and-anyonic-chains-examples",
+    "requires": [
+      "temperley-lieb-jones-wenzl-traces-and-quotients",
+      "hopf-hecke-and-quantum-symmetry-interfaces"
+    ],
+    "items": [
+      {
+        "id": "def-anyonic-fusion-path-space",
+        "kind": "definition",
+        "title": "Fixed-boundary anyonic fusion-path space",
+        "deps": [
+          "def-absolutely-simple-object",
+          "def-fusion-and-multifusion-category",
+          "def-fusion-rules"
+        ],
+        "dependency_level": 0,
+        "statement_or_definition": "For a complex fusion category, a simple site label a, simple boundary labels b,c, and n≥0, fix the left-associated object T_n=(((b⊗a)⊗a)…⊗a) and define H_(a,n;b,c)=Hom(c,T_n). A path is x_0=b,…,x_n=c with a retained basis index in Hom(x_j,x_(j−1)⊗a) at every vertex; no multiplicity index is suppressed.",
+        "strategy": "Define the typed Hom space, parenthesization, split-space bases, and path labels before constructing operators.",
+        "axiom_use": "No choice principle; only finite-dimensional spaces and finite simple-object sets are used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "P. Etingof, S. Gelaki, D. Nikshych, and V. Ostrik, Tensor Categories",
+            "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf",
+            "locator": "§§2.1, 4.1: monoidal and finite semisimple rigid tensor-category definitions."
+          },
+          {
+            "title": "Shu-Heng Shao, What’s Done Cannot Be Undone: TASI Lectures on Non-Invertible Symmetries",
+            "url": "https://arxiv.org/pdf/2308.00747",
+            "locator": "§3.4.1, PDF pp. 34–35: closed periodic fusion-path basis and F-move local channels."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "def-categorical-object-and-operator-invertibility",
+        "kind": "definition",
+        "title": "Tensor-invertible objects, fusion-ring units, and invertible operators",
+        "deps": [
+          "def-fusion-and-multifusion-category",
+          "def-fusion-rules"
+        ],
+        "dependency_level": 0,
+        "statement_or_definition": "Define tensor-invertibility of an object by a two-sided tensor inverse, a fusion-ring unit by an inverse in K_0(C) with integral coefficients, and operator invertibility only relative to a specified vector space and linear map with a two-sided inverse.",
+        "strategy": "Separate the three domains and state the inverse required in each one.",
+        "axiom_use": "No choice principle; only finite direct-sum multiplicities are used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "P. Etingof, S. Gelaki, D. Nikshych, and V. Ostrik, Tensor Categories",
+            "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf",
+            "locator": "§4.5, Remark 4.5.3: the Grothendieck fusion ring and its nonnegative simple-object basis."
+          },
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§3.5, PDF pp. 13–14: fusion rules and fusion algebra."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "lem-anyonic-fusion-path-basis",
+        "kind": "lemma",
+        "title": "Fusion paths give a basis of the fixed-boundary path space",
+        "deps": [
+          "def-anyonic-fusion-path-space",
+          "def-absolutely-simple-object",
+          "def-fusion-and-multifusion-category",
+          "def-fusion-rules"
+        ],
+        "dependency_level": 1,
+        "statement_or_definition": "The path composites indexed by every admissible simple-label sequence and every split-space basis index form a basis of Hom(c,b⊗a^⊗n). Its dimension is the sum over paths of the product of the vertex fusion multiplicities.",
+        "strategy": "Induct on n using the finite semisimple decomposition of T_(n−1)⊗a into simple summands, retaining each inclusion multiplicity.",
+        "axiom_use": "No choice principle; basis selections are finite-dimensional and finite at each fixed n.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§3.5, PDF pp. 14–16: fusion multiplicity spaces and tree-basis expansion."
+          },
+          {
+            "title": "Shu-Heng Shao, What’s Done Cannot Be Undone: TASI Lectures on Non-Invertible Symmetries",
+            "url": "https://arxiv.org/pdf/2308.00747",
+            "locator": "§3.4.1, PDF pp. 34–35: periodic paths constrained by fusion rules."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "thm-anyonic-path-space-is-hilbert-under-unitarity",
+        "kind": "theorem",
+        "title": "Unitary fusion paths form an orthonormal Hilbert basis",
+        "deps": [
+          "def-anyonic-fusion-path-space",
+          "def-qc-tqc-fusion-multiplicity-space",
+          "def-qc-tqc-unitary-fusion-category",
+          "lem-anyonic-fusion-path-basis",
+          "thm-qc-tqc-fusion-multiplicity-space-is-hilbert"
+        ],
+        "dependency_level": 3,
+        "statement_or_definition": "If the fusion category is unitary and every split-space basis is orthonormal, the path composites form an orthonormal basis of H_(a,n;b,c) under the Hom-space inner product induced by the dagger.",
+        "strategy": "Use orthogonal simple decompositions at each fusion vertex and inductively tensor the isometric inclusions.",
+        "axiom_use": "No choice principle; the proof uses only finite orthogonal direct sums.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§§3.2–3.5, PDF pp. 4–16: dagger, orthogonal direct sums, multiplicity inner products, and tree bases."
+          },
+          {
+            "title": "P. Etingof, S. Gelaki, D. Nikshych, and V. Ostrik, Tensor Categories",
+            "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf",
+            "locator": "§4.1, Definition 4.1.1, printed p. 65: finite semisimple rigid tensor categories."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "def-anyonic-frobenius-schur-sign",
+        "kind": "definition",
+        "title": "Frobenius–Schur sign in a normalized anyonic vacuum channel",
+        "deps": [
+          "def-left-dual-and-right-dual-object",
+          "def-the-dimension-of-an-object-relative-to-a-pivotal-structure",
+          "def-pivotal-structure",
+          "def-qc-tqc-f-symbol",
+          "def-qc-tqc-unitary-fusion-category",
+          "def-spherical-structure"
+        ],
+        "dependency_level": 6,
+        "statement_or_definition": "For a self-dual simple a with a one-dimensional vacuum channel, a supplied normalized self-duality datum has coev=√d_a v and ev=κ_a√d_a v† with κ_a∈{+1,−1}; define κ_a as the FS sign in this explicit cup/cap convention. The item does not assert such a datum exists for every category.",
+        "strategy": "Specify the pivotal/cup/cap normalization and the coefficient convention used by the local F-symbol.",
+        "axiom_use": "No choice principle; all duality spaces involved are one-dimensional.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§§3.2–3.5, PDF pp. 4–16: unitary fusion spaces and F-symbol conventions."
+          },
+          {
+            "title": "Claudio Chamon, Mark O. Goerbig, Roderich Moessner, Leticia F. Cugliandolo et al., Topological Aspects of Condensed Matter Physics",
+            "url": "https://math.uniandes.edu.co/~cursillo_gr/escuela2015/abstracts/LectureNotes_LesHouches14_Vietri14_Bogota15_NeupertBernevig.pdf",
+            "locator": "Chapter 4, §4, PDF pp. 54–55, equations (113)–(115): bend coefficient, quantum dimension, and Frobenius–Schur phase/sign."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "def-anyonic-local-channel-projector",
+        "kind": "definition",
+        "title": "Local anyonic channel projector",
+        "deps": [
+          "def-anyonic-fusion-path-space",
+          "def-monoidal-category",
+          "def-qc-tqc-f-symbol",
+          "def-qc-tqc-fusion-tree-basis",
+          "thm-anyonic-path-space-is-hilbert-under-unitarity",
+          "thm-qc-tqc-f-symbol-unitary"
+        ],
+        "dependency_level": 7,
+        "statement_or_definition": "For adjacent copies of a simple site charge a and an allowed fusion output s, let Π_s be the projection onto the s-channel in the tree where this pair is fused first. If F_i is the typed associator change from the fixed path tree to that pair-first tree, define P_(i,s)=F_i^−1 Π_s F_i. In the unitary case, use orthonormal multiplicity bases and interpret Π_s as the orthogonal channel projection.",
+        "strategy": "Fix source/target parenthesizations and the row/column convention of the supplied F-move before defining conjugation.",
+        "axiom_use": "No choice principle; all decompositions and multiplicity spaces are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§3.5, PDF pp. 14–16: orthonormal F-moves between fusion trees."
+          },
+          {
+            "title": "Shu-Heng Shao, What’s Done Cannot Be Undone: TASI Lectures on Non-Invertible Symmetries",
+            "url": "https://arxiv.org/pdf/2308.00747",
+            "locator": "§3.4.1, PDF pp. 34–35, equation (3.68): local recoupling and channel projection."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "lem-anyonic-vacuum-f-symbol-frobenius-schur-normalization",
+        "kind": "lemma",
+        "title": "Vacuum F-coefficient records the Frobenius–Schur sign",
+        "deps": [
+          "def-absolutely-simple-object",
+          "def-anyonic-frobenius-schur-sign",
+          "def-fusion-and-multifusion-category",
+          "def-qc-tqc-f-symbol",
+          "def-qc-tqc-unitary-fusion-category",
+          "thm-qc-tqc-f-symbol-unitary"
+        ],
+        "dependency_level": 7,
+        "statement_or_definition": "In the specified self-dual vacuum normalization, (F_(aaa)^a)_(1,1)=κ_a/d_a, and consequently δ_a:=1/((F_(aaa)^a)^−1)_(1,1)=κ_a d_a.",
+        "strategy": "Write the two vacuum-channel tree vectors as normalized cup insertions, identify their overlap as the F-entry, and apply the typed snake identity.",
+        "axiom_use": "No choice principle; the proof is a one-dimensional cap/cup calculation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Claudio Chamon, Mark O. Goerbig, Roderich Moessner, Leticia F. Cugliandolo et al., Topological Aspects of Condensed Matter Physics",
+            "url": "https://math.uniandes.edu.co/~cursillo_gr/escuela2015/abstracts/LectureNotes_LesHouches14_Vietri14_Bogota15_NeupertBernevig.pdf",
+            "locator": "Chapter 4, §4, PDF pp. 54–55, equation (113) and the following derivation of χ_a/d_a."
+          },
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§§3.2–3.5, PDF pp. 4–16: unitary duality and F-matrix inner-product convention."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "prop-fibonacci-fusion-ring-unit-is-not-tensor-invertible",
+        "kind": "proposition",
+        "title": "The Fibonacci ring class is a unit but its simple object is not tensor-invertible",
+        "deps": [
+          "def-categorical-object-and-operator-invertibility",
+          "def-fusion-rules",
+          "ex-qc-tqc-fibonacci-data"
+        ],
+        "dependency_level": 7,
+        "statement_or_definition": "In the coherent Fibonacci category with simple labels 1,τ and τ²=1+τ, [τ] is a unit in K_0(C) with inverse [τ]−[1], but τ has no tensor-inverse object because every object class has nonnegative integral coefficients.",
+        "strategy": "Compute the ring inverse, then compare its signed coefficients with the nonnegative simple-object decomposition of any candidate inverse object.",
+        "axiom_use": "No choice principle; finite semisimple objects are finite direct sums of simple objects.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§§3.5–3.6, PDF pp. 13–18: fusion rings and the Fibonacci category."
+          },
+          {
+            "title": "Shu-Heng Shao, What’s Done Cannot Be Undone: TASI Lectures on Non-Invertible Symmetries",
+            "url": "https://arxiv.org/pdf/2308.00747",
+            "locator": "§3.4.1, PDF p. 35, equation (3.71): Fibonacci fusion rule."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "thm-anyonic-channel-projectors-are-reparenthesization-independent",
+        "kind": "theorem",
+        "title": "Canonical F-move paths give the same channel operator",
+        "deps": [
+          "def-anyonic-local-channel-projector",
+          "def-qc-tqc-f-symbol",
+          "thm-mac-lane-coherence-in-the-canonical-map-form"
+        ],
+        "dependency_level": 8,
+        "statement_or_definition": "For fixed ordered input charges and fixed source/target parenthesizations, any two sequences of associator F-moves inducing the same canonical rebracketing give the same coordinate map and hence the same conjugated local channel projector.",
+        "strategy": "Identify each F-move sequence with a canonical associator composite and apply Mac Lane coherence in canonical-map form.",
+        "axiom_use": "No choice principle; only finite compositions of associators are compared.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "P. Etingof, S. Gelaki, D. Nikshych, and V. Ostrik, Tensor Categories",
+            "url": "https://math.mit.edu/~etingof/egnobookfinal.pdf",
+            "locator": "§2.1, Definition 2.1.1: pentagon coherence for associators."
+          },
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§3.5, PDF pp. 15–16: associator matrices and coordinate pentagon."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "thm-anyonic-local-channel-projectors-are-orthogonal",
+        "kind": "theorem",
+        "title": "Local channel projections are orthogonal idempotents",
+        "deps": [
+          "def-anyonic-local-channel-projector",
+          "def-qc-tqc-unitary-fusion-category",
+          "thm-qc-tqc-f-symbol-unitary"
+        ],
+        "dependency_level": 8,
+        "statement_or_definition": "For each fixed adjacent pair, the family (P_(i,s))_s consists of pairwise orthogonal self-adjoint idempotents and sums to the identity on the path space.",
+        "strategy": "Conjugate the orthogonal direct-sum channel projections by the unitary F-move and multiply the resulting matrices.",
+        "axiom_use": "No choice principle; only finite-dimensional unitary matrices are used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§§3.2–3.5, PDF pp. 4–16: unitary associators and orthonormal F-matrices."
+          },
+          {
+            "title": "Shu-Heng Shao, What’s Done Cannot Be Undone: TASI Lectures on Non-Invertible Symmetries",
+            "url": "https://arxiv.org/pdf/2308.00747",
+            "locator": "§3.4.1, PDF pp. 34–35, equations (3.68)–(3.70): F-move channel operators."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "prop-anyonic-vacuum-channel-projectors-satisfy-temperley-lieb",
+        "kind": "proposition",
+        "title": "Vacuum-channel anyonic projectors satisfy Temperley–Lieb relations",
+        "deps": [
+          "def-anyonic-frobenius-schur-sign",
+          "def-anyonic-local-channel-projector",
+          "lem-anyonic-vacuum-f-symbol-frobenius-schur-normalization",
+          "thm-anyonic-local-channel-projectors-are-orthogonal",
+          "thm-anyonic-channel-projectors-are-reparenthesization-independent"
+        ],
+        "dependency_level": 9,
+        "statement_or_definition": "For identical self-dual simple sites a with one-dimensional vacuum fusion and the normalized FS sign κ_a, define U_i=δ_aP_(i,1) with δ_a=κ_ad_a. Then U_i²=δ_aU_i, U_iU_(i+1)U_i=U_i, and U_iU_j=U_jU_i for |i−j|>1.",
+        "strategy": "Compute the adjacent triple block from the vacuum F-entry and use tensor functoriality for distant pairs.",
+        "axiom_use": "No choice principle; all operators act on finite-dimensional fusion-path spaces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Shu-Heng Shao, What’s Done Cannot Be Undone: TASI Lectures on Non-Invertible Symmetries",
+            "url": "https://arxiv.org/pdf/2308.00747",
+            "locator": "§3.4.1, PDF pp. 34–35, equations (3.68)–(3.70): local F-move projections and chain Hamiltonians."
+          },
+          {
+            "title": "K. Iohara, G. I. Lehrer, and R. B. Zhang, The Jones Quotients of the Temperley–Lieb Algebras",
+            "url": "https://arxiv.org/pdf/1702.08128",
+            "locator": "§§1–3: Temperley–Lieb/Jones quotient parameter conventions. The local proof does not use their quotient theorem."
+          }
+        ],
+        "justified_by": [],
+        "statement": "Let $a$ be a self-dual simple site charge with one-dimensional vacuum fusion $a\\otimes a\\to\\mathbf1$, and supply the normalized pivotal cup/cap datum of [[def-anyonic-frobenius-schur-sign]]. On a repeated-$a$ path space let $P_i:=P_{i,\\mathbf1}$ and set $U_i:=\\delta_aP_i$, where $\\delta_a=\\kappa_ad_a$ is the signed loop parameter of [[lem-anyonic-vacuum-f-symbol-frobenius-schur-normalization]]. Then, for all applicable interior indices,\n\n$$U_i^2=\\delta_aU_i,\\qquad U_iU_{i+1}U_i=U_i,\\qquad U_iU_j=U_jU_i\\quad(|i-j|>1).$$\n\nThe sign $\\kappa_a$ is retained; replacing it by $+1$ is justified only in examples whose self-duality datum has that sign.\n\nFor the diagram convention, each box $U_i$ has a cup at the top and a cap at the bottom on strands $i,i+1$; multiplication stacks diagrams from top to bottom, and a closed circle evaluates to $\\delta_a$. In the left picture the upper box's cup and the lower box's cap remain on the outside, while the upper cap and lower cup form one closed circle. Thus the picture records $U_i^2=\\delta_aU_i$; the proof below verifies this and the adjacent and distant relations algebraically, without relying on the drawing.\n\n```tikz\n\\begin{tikzpicture}[baseline=(current bounding box.center),scale=.72]\n  % The outer top cup and bottom cap are the remaining U_i diagram.\n  \\draw (0,3) .. controls (0,3.65) and (1,3.65) .. (1,3);\n  \\fill (0,3) circle (1.4pt); \\fill (1,3) circle (1.4pt);\n  \\draw (0,2) .. controls (0,2.65) and (1,2.65) .. (1,2);\n  \\draw (0,2) .. controls (0,1.35) and (1,1.35) .. (1,2);\n  \\draw (0,1) .. controls (0,.35) and (1,.35) .. (1,1);\n  \\fill (0,1) circle (1.4pt); \\fill (1,1) circle (1.4pt);\n  \\node at (1.45,2) {$=\\delta_a$};\n  \\draw (3,3) .. controls (3,3.65) and (4,3.65) .. (4,3);\n  \\draw (3,1) .. controls (3,.35) and (4,.35) .. (4,1);\n  \\fill (3,3) circle (1.4pt); \\fill (4,3) circle (1.4pt);\n  \\fill (3,1) circle (1.4pt); \\fill (4,1) circle (1.4pt);\n\\end{tikzpicture}\n```"
+      }
+    ]
+  },
+  {
+    "order": 2969,
+    "id": "noninvertible-symmetries-and-anyonic-chains-examples",
+    "kind": "B",
+    "category": "hall-algebras-and-tensor-categories",
+    "title": "Noninvertible Symmetries and Anyonic Chains: Examples and Counterexamples",
+    "companion": "noninvertible-symmetries-and-anyonic-chains",
+    "requires": [
+      "noninvertible-symmetries-and-anyonic-chains"
+    ],
+    "items": [
+      {
+        "id": "ex-multiplicity-indexed-anyonic-fusion-path",
+        "kind": "example",
+        "title": "A multiplicity-two fusion vertex contributes two path states",
+        "deps": [
+          "def-anyonic-fusion-path-space",
+          "lem-anyonic-fusion-path-basis"
+        ],
+        "dependency_level": 2,
+        "statement_or_definition": "Given a finite semisimple fusion category and a simple vertex with N_(x,a)^y=2, fix a basis of Hom(y,x⊗a). A fixed surrounding path through this vertex contributes exactly two linearly independent basis states, indexed by μ=1,2; deleting μ collapses a two-dimensional path summand to one coordinate and is not a basis.",
+        "strategy": "Apply the path-basis theorem to the two basis inclusions at the specified vertex and compare dimensions.",
+        "axiom_use": "No choice principle; only one finite two-dimensional multiplicity space is selected.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": [
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§3.5, PDF pp. 14–16: multiplicity spaces and vertex basis indices."
+          },
+          {
+            "title": "Shu-Heng Shao, What’s Done Cannot Be Undone: TASI Lectures on Non-Invertible Symmetries",
+            "url": "https://arxiv.org/pdf/2308.00747",
+            "locator": "§3.4.1, PDF pp. 34–35, footnote 26: the multiplicity-free restriction of the original chain presentation and its later multiplicity-bearing extension."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "ex-ising-periodic-path-space-and-two-sector-map",
+        "kind": "example",
+        "title": "Ising periodic paths split into two spin-chain sectors",
+        "deps": [
+          "def-anyonic-fusion-path-space",
+          "lem-anyonic-fusion-path-basis",
+          "thm-anyonic-path-space-is-hilbert-under-unitarity",
+          "def-anyonic-local-channel-projector",
+          "ex-qc-tqc-ising-data",
+          "def-qc-tqc-unitary-fusion-category"
+        ],
+        "dependency_level": 8,
+        "statement_or_definition": "Assume a coherent unitary Ising fusion category with labels 1,η,D and the usual fusion rules, and the displayed three-D/total-D F/R block. For a closed periodic D-reference path of length L≥1, the path space is zero for odd L and for L=2N with N≥1 is a direct sum of two 2^N-dimensional tensor-product sectors. The one-step cyclic shift gives an explicit basis bijection between sectors; it does not identify their operators with a single-lattice noninvertible translation operator.",
+        "strategy": "Use only the fusion-rule transition graph for the path count, then give the two sector-to-bit maps and check the stated F/R block separately.",
+        "axiom_use": "No choice principle; all path sets are finite. The category-coherence hypothesis is explicit and is not proved by the sector F/R calculation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Shu-Heng Shao, What’s Done Cannot Be Undone: TASI Lectures on Non-Invertible Symmetries",
+            "url": "https://arxiv.org/pdf/2308.00747",
+            "locator": "§3.4.2, PDF pp. 36–38: Ising periodic fusion paths, two sectors, and translated single-lattice comparison."
+          },
+          {
+            "title": "Chetan Nayak et al., Non-Abelian Anyons and Topological Quantum Computation",
+            "url": "https://arxiv.org/pdf/0707.1889",
+            "locator": "§IV.A, PDF pp. 31–32: Ising fusion rules, F block, R phases, and Frobenius–Schur sign."
+          }
+        ],
+        "justified_by": []
+      },
+      {
+        "id": "ex-fibonacci-golden-chain-projectors-and-noninvertibility",
+        "kind": "example",
+        "title": "Fibonacci path projectors and categorical noninvertibility",
+        "deps": [
+          "def-anyonic-fusion-path-space",
+          "lem-anyonic-fusion-path-basis",
+          "thm-anyonic-path-space-is-hilbert-under-unitarity",
+          "def-anyonic-local-channel-projector",
+          "thm-anyonic-local-channel-projectors-are-orthogonal",
+          "def-anyonic-frobenius-schur-sign",
+          "lem-anyonic-vacuum-f-symbol-frobenius-schur-normalization",
+          "prop-anyonic-vacuum-channel-projectors-satisfy-temperley-lieb",
+          "prop-fibonacci-fusion-ring-unit-is-not-tensor-invertible",
+          "def-categorical-object-and-operator-invertibility",
+          "ex-qc-tqc-fibonacci-data"
+        ],
+        "dependency_level": 10,
+        "statement_or_definition": "In the coherent Fibonacci category, the three-τ total-τ path space has two channels, its vacuum-channel projectors have explicit 2×2 matrices with FS sign +1 and loop δ=φ, and [τ] is a ring unit although τ is not tensor-invertible. The identity operator on this space is invertible; this is a separate operator-level fact.",
+        "strategy": "Use the supplied coherent F/R data, compute the two channel projections in the tree basis, and prove the ring/object/operator distinctions directly.",
+        "axiom_use": "No choice principle; all spaces and sums are finite-dimensional.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "David Penneys, Unitary Fusion Categories, Math 8800 lecture notes",
+            "url": "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf",
+            "locator": "§§3.5–3.6, PDF pp. 14–18: F-moves and Fibonacci data."
+          },
+          {
+            "title": "Chetan Nayak et al., Non-Abelian Anyons and Topological Quantum Computation",
+            "url": "https://arxiv.org/pdf/0707.1889",
+            "locator": "§IV.B.c, PDF pp. 53–57: Fibonacci F/R data, fusion paths, and complex braid phases."
+          }
+        ],
+        "justified_by": [],
+        "statement": "Use the coherent Fibonacci category and pullback-R convention of [[ex-qc-tqc-fibonacci-data]]. Write $\\phi=(1+\\sqrt5)/2$, $u=\\phi^{-1}$, and $v=\\phi^{-1/2}$. The simple fusion rule is $\\tau\\otimes\\tau=\\mathbf1\\oplus\\tau$. For three tensor inputs $\\tau,\\tau,\\tau$, comprising the incoming boundary $b=\\tau$ and two sites ($n=2$), with output $c=\\tau$, the path space $H_{\\tau,2;\\tau,\\tau}$ has ordered basis $(\\mathbf1,\\tau)$ according to the intermediate charge. The supplied associator block is\n\n$$F^{\\tau\\tau\\tau}_{\\tau}=\\begin{pmatrix}u&v\\\\v&-u\\end{pmatrix}.$$\n\nOn these three tensor inputs the two adjacent vacuum-channel projectors are $P_1=\\operatorname{diag}(1,0)$ and $P_2=F^{-1}P_1F$; the first pair includes the incoming boundary charge. For the literal three-site problem $n=3$, still with $b=c=\\tau$, the four tensor inputs give a three-dimensional space with path basis $(x_1,x_2)=(\\mathbf1,\\tau),(\\tau,\\mathbf1),(\\tau,\\tau)$. The two adjacent pairs among the three sites have projectors\n\n$$Q_1=\\begin{pmatrix}u^2&0&uv\\\\0&0&0\\\\uv&0&v^2\\end{pmatrix},\\qquad Q_2=\\begin{pmatrix}0&0&0\\\\0&u^2&uv\\\\0&uv&v^2\\end{pmatrix}.$$\n\nBoth are rank-one orthogonal projections and $Q_1Q_2Q_1=\\phi^{-2}Q_1$; hence $\\phi Q_i$ obey the adjacent Temperley–Lieb relation. Thus the two-site $2\\times2$ block and the three-site $3\\times3$ problem are both retained with their correct domains. The object $\\tau$ is not tensor-invertible even though its fusion-ring class is a unit. The identity on this two-dimensional path space is an invertible operator; the local rank-one channel projection is not.",
+        "proof_obligations": [
+          "Retain the two-site/two-dimensional block and prove the literal three-site/three-dimensional fixed-boundary Fibonacci projectors, with exact F-moves and signed TL relations."
+        ]
+      }
+    ]
+  }
+]

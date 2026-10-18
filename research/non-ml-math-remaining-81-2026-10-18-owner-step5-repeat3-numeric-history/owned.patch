@@ -1,0 +1,457 @@
+--- a/tools/step5-initial-metadata-history-v2.test.mjs
++++ b/tools/step5-initial-metadata-history-v2.test.mjs
+@@ -5,37 +5,40 @@
+ import {tmpdir} from 'node:os';
+ import {createHash} from 'node:crypto';
+ import {freezeFrontier} from './step5-rounds.mjs';
+-import {itemHashGuard} from './item-hash.mjs';
++import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
+ import {statementHash} from './step5-statement.mjs';
+ import {MODELS} from './models.mjs';
+-import {recordInitialMetadataHistory,loadInitialMetadataHistory,initialMetadataSupportingHistory} from './step5-initial-metadata-history.mjs';
+-import {collect,prepareImpact} from './step5-workflow.mjs';
++import {recordInitialMetadataHistory,loadInitialMetadataHistory,initialMetadataSupportingHistory,recordRepeatMetadataHistory,loadRepeatMetadataHistory} from './step5-initial-metadata-history.mjs';
++import {collect,prepareImpact,advanceImpact,certify,reviewContextHashes,verifyCompletedImpact} from './step5-workflow.mjs';
+ const run='metadata-fixture',dir=`research/${run}-step5-v2`,dispatch=`research/${run}-dispatch`,nativeId='ex-box-muller-finite-midpoint-tail',unassigned='lem-unassigned',context='def-context',discharged='def-discharged';
+ const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
+ function fixture(t,version=2){
++ const repeat=version===3,phase=repeat?'repeat':'initial',round=repeat?3:1,stage=repeat?'5.5-adjudicate':'5.1-adjudicate';
+  const root=mkdtempSync(join(tmpdir(),'initial-level-history-'));t.after(()=>rmSync(root,{recursive:true,force:true}));for(const p of ['items',dir,dispatch,`.autopilot/${run}`])mkdirSync(join(root,p),{recursive:true});
+  const put=(p,v)=>writeFileSync(join(root,p),typeof v==='string'?v:JSON.stringify(v));
+  const source=(id,kind,level,deps,status='draft',extra='')=>`---\nid: ${id}\nkind: ${kind}\ntitle: ${id}\nstatus: ${status}\ndependency_level: ${level}\ndeps: ${JSON.stringify(deps)}\n${extra}---\n\n## ${kind==='definition'?'Definition':'Statement'}\n\nA fixed complete interface for ${id}.\n\n## Proof\n\n1.1 The original full proof of this fixture. [given] ∎\n`;
+- const nativeOriginal=source(nativeId,'example',version===2?9:2,[context]),nativeBefore=nativeOriginal.replace('original full proof','reviewed repaired proof'),nativeAfter=nativeBefore.replace(`dependency_level: ${version===2?9:2}`,'dependency_level: 1');
+- const unassignedBefore=source(unassigned,'lemma',version===2?9:2,[nativeId]),unassignedAfter=unassignedBefore.replace('dependency_level: 9','dependency_level: 2');
++ const nativeOriginal=source(nativeId,'example',version>=2?9:2,[context]),nativeBefore=repeat?nativeOriginal:nativeOriginal.replace('original full proof','reviewed repaired proof'),nativeAfter=nativeBefore.replace(`dependency_level: ${version>=2?9:2}`,'dependency_level: 1');
++ const unassignedBefore=source(unassigned,'lemma',version>=2?9:2,[nativeId]),unassignedAfter=unassignedBefore.replace('dependency_level: 9','dependency_level: 2');
+  const defOriginal=source(discharged,'definition',0,[]),defAfter=source(discharged,'definition',0,[],'draft',`justified_by: [${nativeId}]\n`),ctx=source(context,'definition',0,[],'published');
+  const current={[nativeId]:nativeAfter,[unassigned]:unassignedAfter,[discharged]:defAfter,[context]:ctx};for(const [id,s]of Object.entries(current))put(`items/${id}.md`,s);
+  const beforeFiles={[nativeId]:`research/${nativeId}-before.md`,[unassigned]:`research/${unassigned}-before.md`};put(beforeFiles[nativeId],nativeBefore);put(beforeFiles[unassigned],unassignedBefore);
+  const frontier=freezeFrontier({run,batches:[{id:'1',items:[nativeId,discharged]},{id:'2',items:[context,unassigned]}]}),baseline={[nativeId]:itemHashGuard(nativeOriginal),[unassigned]:itemHashGuard(unassignedBefore),[discharged]:itemHashGuard(defOriginal),[context]:itemHashGuard(ctx)};
+- const verdicts=frontier.ids.map(id=>({id,model:MODELS.luna.id,keep:![nativeId,discharged].includes(id),item_sha256:baseline[id],context_sha256:'c'.repeat(64)})),rejected=verdicts.filter(v=>!v.keep),pack={version:2,adjudicationSchemaVersion:1,repair_scope:'frontier',run,phase:'initial',round:1,judge_model:MODELS.luna.id,frontier_ids:frontier.ids,units:['1','2'],assignments:{'1':rejected,'2':[]},rejected,before:baseline,before_statements:Object.fromEntries(Object.entries({...current,[nativeId]:nativeOriginal,[discharged]:defOriginal,[unassigned]:unassignedBefore}).map(([id,s])=>[id,statementHash(s)])),input_evidence:{[join(root,dir,'step4-verdicts.json')]:hash(verdicts)}};
+- for(const [name,v]of Object.entries({'frontier.json':frontier,'baseline.json':baseline,'step4-verdicts.json':verdicts,'initial-1.json':pack}))put(`${dir}/${name}`,v);
++ const verdicts=frontier.ids.map(id=>({id,model:repeat?MODELS.sol61.id:MODELS.luna.id,keep:![nativeId,discharged].includes(id),item_sha256:baseline[id],context_sha256:'c'.repeat(64)})),rejected=verdicts.filter(v=>!v.keep),pack={version:2,adjudicationSchemaVersion:1,repair_scope:'frontier',run,phase,round,judge_model:repeat?MODELS.sol61.id:MODELS.luna.id,frontier_ids:frontier.ids,units:['1','2'],assignments:{'1':rejected,'2':[]},rejected,before:baseline,before_statements:Object.fromEntries(Object.entries({...current,[nativeId]:nativeOriginal,[discharged]:defOriginal,[unassigned]:unassignedBefore}).map(([id,s])=>[id,statementHash(s)])),input_evidence:{[join(root,dir,'step4-verdicts.json')]:hash(verdicts)}};
++ for(const [name,v]of Object.entries({'frontier.json':frontier,'baseline.json':baseline,'step4-verdicts.json':verdicts,[`${phase}-${round}.json`]:pack}))put(`${dir}/${name}`,v);
+  const m1=`research/${run}-batch-1.pages.json`,m2=`research/${run}-batch-2.pages.json`,row=(id,kind,level,deps,extra={})=>({id,kind,title:id,deps,dependency_level:level,...extra});
+- const old1=[{id:'page-one',items:[row(nativeId,'example',version===2?9:2,[context]),row(discharged,'definition',0,[],{justified_by:version===2?[]:[nativeId]})]}],new1=structuredClone(old1);new1[0].items[0].dependency_level=1;new1[0].items[1].justified_by=[nativeId];
+- const old2=[{id:'page-two',items:[row(context,'definition',0,[]),row(unassigned,'lemma',version===2?9:2,[nativeId])]}],new2=structuredClone(old2);new2[0].items[1].dependency_level=2;
++ const old1=[{id:'page-one',items:[row(nativeId,'example',version>=2?9:2,[context]),row(discharged,'definition',0,[],{justified_by:version===2?[]:[nativeId]})]}],new1=structuredClone(old1);new1[0].items[0].dependency_level=1;new1[0].items[1].justified_by=[nativeId];
++ const old2=[{id:'page-two',items:[row(context,'definition',0,[]),row(unassigned,'lemma',version>=2?9:2,[nativeId])]}],new2=structuredClone(old2);new2[0].items[1].dependency_level=2;
+  put(m1,new1);put(m2,new2);const mb1='research/manifest-1-before.json',mb2='research/manifest-2-before.json';put(mb1,old1);put(mb2,old2);
+- const report={run,phase:'initial',round:1,unit:'1',input_sha256:hash(pack),decisions:rejected.map(v=>({...v,outcome:'confirmed_nonfatal',reason:'A concrete fixture source defect was actually corrected in the original native wave.',uncertain:false,source_urls:[],familiar:true})),reviews:[{id:nativeId,disposition:'repaired',post_sha256:itemHashGuard(nativeBefore),review_context_sha256:'b'.repeat(64),reason:'The authentic original native post contains the proof correction before its purely numeric label adjustment.',uncertain:false,source_urls:[],familiar:true},{id:discharged,disposition:'repaired',post_sha256:itemHashGuard(defAfter),review_context_sha256:'d'.repeat(64),reason:'The authentic original native source contains its nonempty logical-discharge metadata.',uncertain:false,source_urls:[],familiar:true}],created_items:[],downstream:[],ledger_updates:[],supporting_evidence:{[join(root,m1)]:hash(old1),[join(root,m2)]:hash(old2)}};
+- const empty={run,phase:'initial',round:1,unit:'2',input_sha256:hash(pack),completion:'mechanical-zero-work',written_by:'step5-workflow',mathematical_review:false,reviews:[],decisions:[],created_items:[],downstream:[],ledger_updates:[],gate_resolutions:[]};
+- const label='step5-v2-initial-r1-u1',stem=`${dispatch}/alpha-adjudicate-${label}.attempt-1`,dp=`${dispatch}/alpha-adjudicate-${label}.result.json`,rp=`${dir}/${label}.json`,result={run,role:'alpha-adjudicate',label,runner:'codex',model:MODELS.sol61.id,provider_effort:'high',covers:['1'],ok:true,attempt:1,evidence_tag:'.attempt-1',started_at:'2026-10-01T10:00:00Z',ended_at:'2026-10-01T11:00:00Z',exit_code:0,process_exit_code:0,timed_out:false,terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0},log:`${stem}.log`,prompt:`${stem}.prompt.md`};
+- const output=structuredClone(report),sync=()=>{report.input_sha256=hash(pack);output.input_sha256=hash(pack);empty.input_sha256=hash(pack);put(rp,report);put(`${dir}/step5-v2-initial-r1-u2.json`,empty);put(dp,result);put(`${stem}.result.json`,result);put(`${stem}.log`,`\ncodex\n${JSON.stringify(output)}\ntokens used\n100\n`);put(`${stem}.prompt.md`,`run: ${run}\nrole: alpha-adjudicate\nlabel: ${label}\ncovers: 1\noutput: ${rp}\ninput_sha256:"${hash(pack)}"`);};sync();
+- const zeroLabel='step5-v2-empty-initial-r1-u2';put(`${dispatch}/tool-${zeroLabel}.result.json`,{run,role:'tool',label:zeroLabel,covers:['2'],ok:true,written_by:'autopilot',ended_at:'2026-10-01T11:00:00Z'});
+- const observed=(role,label,covers)=>({stage:'5.1-adjudicate',role,label,covers,attempt:1,lastExitOk:true,startedAt:'2026-10-01T09:59:00Z',endedAt:'2026-10-01T11:01:00Z'}),state={run,stage:'5.1-adjudicate',paused:true,dispatches:{[`5.1-adjudicate:${label}`]:observed('alpha-adjudicate',label,['1']),[`5.1-adjudicate:${zeroLabel}`]:observed('tool',zeroLabel,['2'])}},request={version:1,run,id:'actual-fixture-hold',group:'5.1-adjudicate',stages:['5.1-adjudicate'],at:'2026-10-01T12:00:00Z'};put(`.autopilot/${run}/state.json`,state);put(`.autopilot/${run}/owner-gate-request.json`,request);
+- const payload={version,reason:'The actual fixture completed initial handoffs precede strictly mechanical numeric dependency labels and source-backed manifest mirror correction, with no scientific source-body or original native evidence change.',carriers:[{path:m1,before_file:mb1},...(version===2?[{path:m2,before_file:mb2}]:[])],...(version===2?{source_levels:[{id:nativeId,before:9,after:1,before_file:beforeFiles[nativeId],historical_basis:'native-post'},{id:unassigned,before:9,after:2,before_file:beforeFiles[unassigned],historical_basis:'baseline-keep'}]}:{source_level:{id:nativeId,before:2,after:1,before_file:beforeFiles[nativeId]}})};
+- return {root,put,payload,pack,baseline,verdicts,report,output,empty,result,state,request,stem,dp,rp,current,nativeBefore,nativeAfter,unassignedBefore,unassignedAfter,beforeFiles,new1,new2,old1,old2,m1,m2,mb1,mb2,sync,record:()=>recordInitialMetadataHistory(root,run,payload)};
++ const report={run,phase,round,unit:'1',input_sha256:hash(pack),decisions:rejected.map(v=>({...v,outcome:repeat&&v.id===nativeId?'false_positive':'confirmed_nonfatal',reason:'A concrete fixture source defect was actually corrected in the original native wave.',uncertain:false,source_urls:[],familiar:true})),reviews:[{id:nativeId,disposition:repeat?'unaffected':'repaired',post_sha256:itemHashGuard(nativeBefore),review_context_sha256:'b'.repeat(64),reason:'The authentic original native post contains the proof correction before its purely numeric label adjustment.',uncertain:false,source_urls:[],familiar:true},{id:discharged,disposition:'repaired',post_sha256:itemHashGuard(defAfter),review_context_sha256:'d'.repeat(64),reason:'The authentic original native source contains its nonempty logical-discharge metadata.',uncertain:false,source_urls:[],familiar:true}],created_items:[],downstream:[],ledger_updates:[],supporting_evidence:repeat?{}:{[join(root,m1)]:hash(old1),[join(root,m2)]:hash(old2)}};
++ const empty={run,phase,round,unit:'2',input_sha256:hash(pack),completion:'mechanical-zero-work',written_by:'step5-workflow',mathematical_review:false,reviews:[],decisions:[],created_items:[],downstream:[],ledger_updates:[],gate_resolutions:[]};
++ const label=`step5-v2-${phase}-r${round}-u1`,stem=`${dispatch}/alpha-adjudicate-${label}.attempt-1`,dp=`${dispatch}/alpha-adjudicate-${label}.result.json`,rp=`${dir}/${label}.json`,result={run,role:'alpha-adjudicate',label,runner:'codex',model:MODELS.sol61.id,provider_effort:'high',covers:['1'],ok:true,attempt:1,evidence_tag:'.attempt-1',started_at:'2026-10-01T10:00:00Z',ended_at:'2026-10-01T11:00:00Z',exit_code:0,process_exit_code:0,timed_out:false,terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0},log:`${stem}.log`,prompt:`${stem}.prompt.md`};
++ const output=structuredClone(report),sync=()=>{report.input_sha256=hash(pack);output.input_sha256=hash(pack);empty.input_sha256=hash(pack);put(rp,report);put(`${dir}/step5-v2-${phase}-r${round}-u2.json`,empty);put(dp,result);put(`${stem}.result.json`,result);put(`${stem}.log`,`\ncodex\n${JSON.stringify(output)}\ntokens used\n100\n`);put(`${stem}.prompt.md`,`run: ${run}\nrole: alpha-adjudicate\nlabel: ${label}\ncovers: 1\noutput: ${rp}\ninput_sha256:"${hash(pack)}"`);};sync();
++ const zeroLabel=`step5-v2-empty-${phase}-r${round}-u2`;put(`${dispatch}/tool-${zeroLabel}.result.json`,{run,role:'tool',label:zeroLabel,covers:['2'],ok:true,written_by:'autopilot',ended_at:'2026-10-01T11:00:00Z'});
++ const observed=(role,label,covers)=>({stage,role,label,covers,attempt:1,lastExitOk:true,startedAt:'2026-10-01T09:59:00Z',endedAt:'2026-10-01T11:01:00Z'}),state={run,stage,paused:true,...(repeat?{stageRounds:{[stage]:round}}:{}),dispatches:{[`${stage}:${label}`]:observed('alpha-adjudicate',label,['1']),[`${stage}:${zeroLabel}`]:observed('tool',zeroLabel,['2'])}},request={version:1,run,id:'actual-fixture-hold',group:stage,stages:[stage],at:'2026-10-01T12:00:00Z'};put(`.autopilot/${run}/state.json`,state);put(`.autopilot/${run}/owner-gate-request.json`,request);
++ let priorCertificate;
++ if(repeat){const cert={version:2,run,phase:'impact-repeat',round:2,items:[],creations:[],evidence:{}};cert.sha256=hash(cert);priorCertificate=`${dir}/certification-impact-repeat-2.json`;put(priorCertificate,cert);const judge={version:2,run,round,verdicts,certification_sha256:cert.sha256};put(`${dir}/judge-${round}.json`,judge);pack.input_evidence={[join(root,dir,`judge-${round}.json`)]:hash(judge)};put(`${dir}/${phase}-${round}.json`,pack);sync();}
++ const payload={version,...(repeat?{prior_certificate:priorCertificate}:{}),reason:'The actual fixture completed initial handoffs precede strictly mechanical numeric dependency labels and source-backed manifest mirror correction, with no scientific source-body or original native evidence change.',carriers:[{path:m1,before_file:mb1},...(version>=2?[{path:m2,before_file:mb2}]:[])],...(version>=2?{source_levels:[{id:nativeId,before:9,after:1,before_file:beforeFiles[nativeId],historical_basis:'native-post'},{id:unassigned,before:9,after:2,before_file:beforeFiles[unassigned],historical_basis:repeat?'unassigned-before':'baseline-keep'}]}:{source_level:{id:nativeId,before:2,after:1,before_file:beforeFiles[nativeId]}})};
++ return {root,put,payload,pack,baseline,verdicts,report,output,empty,result,state,request,stem,dp,rp,current,nativeBefore,nativeAfter,unassignedBefore,unassignedAfter,beforeFiles,new1,new2,old1,old2,m1,m2,mb1,mb2,sync,record:()=>repeat?recordRepeatMetadataHistory(root,run,round,payload):recordInitialMetadataHistory(root,run,payload)};
+ }
+ test('v1 sole Box-Muller path retains its original strict behavior',t=>{const f=fixture(t,1),r=f.record();assert.deepEqual(r.current_review_targets,[nativeId]);assert.deepEqual(loadInitialMetadataHistory(f.root,run,{current:true}).sourceIds,[nativeId]);});
+ test('v2 authenticates both genuine native posts and unchanged accepted baseline labels',t=>{
+@@ -95,3 +98,62 @@
+  assert.deepEqual(result.metadata_history_current_review_targets,[nativeId,unassigned]);assert.equal(result.post[nativeId],itemHashGuard(f.nativeAfter));assert.equal(result.post[unassigned],itemHashGuard(f.unassignedAfter));assert.deepEqual(result.historical_metadata_reviews,[f.report.reviews[0]]);assert.equal(result.reviews.some(v=>v.id===nativeId),false);assert.equal(result.reviews.some(v=>v.id===unassigned),false);assert.deepEqual(result.decisions,f.report.decisions);assert.equal(readFileSync(join(f.root,f.rp),'utf8'),nativeBytes);
+  const pack=prepareImpact(f.root,run,'impact-initial',1);assert.ok(Object.values(pack.assignments).flat().includes(nativeId));assert.ok(Object.values(pack.assignments).flat().includes(unassigned));assert.deepEqual(pack.metadata_history_current_review_targets,[nativeId,unassigned]);
+ });
++
++test('v3 repeat numeric history preserves actual FP/unaffected row and unassigned-before without fake keep judgment',t=>{
++ const f=fixture(t,3),old=readFileSync(join(f.root,f.rp),'utf8');f.record();const h=loadRepeatMetadataHistory(f.root,run,3,{current:true});assert.deepEqual(h.sourceIds,[nativeId,unassigned]);assert.equal(h.historicalReviews.length,1);assert.equal(h.historicalReviews[0].disposition,'unaffected');assert.equal(f.report.decisions.find(r=>r.id===nativeId).outcome,'false_positive');assert.equal(readFileSync(join(f.root,f.rp),'utf8'),old);assert.equal(h.row.phase,'repeat');assert.equal(h.row.version,3);
++});
++test('v3 native repeat collection retains FP decision but grants zero current review and freezes both fresh impact targets',t=>{
++ const f=fixture(t,3);f.record();const result=collect(f.root,run,'repeat',3);assert.deepEqual(result.decisions,f.report.decisions);assert.equal(result.reviews.some(r=>r.id===nativeId),false);assert.deepEqual(result.historical_metadata_reviews,[f.report.reviews[0]]);assert.equal(result.post[nativeId],itemHashGuard(f.nativeAfter));assert.deepEqual(result.metadata_history_current_review_targets,[nativeId,unassigned]);const pack=prepareImpact(f.root,run,'impact-repeat',3);assert.ok(Object.values(pack.assignments).flat().includes(nativeId));assert.ok(Object.values(pack.assignments).flat().includes(unassigned));assert.ok(pack.input_evidence[join(f.root,dir,'repeat-3-collected.json')]);assert.equal(Object.hasOwn(pack.input_evidence,join(f.root,dir,'initial-1-collected.json')),false);assert.throws(()=>certify(f.root,run,'impact-repeat',3));
++});
++for(const mode of ['body','interface','deps','title','published','extra-label','wrong-after','wrong-before','unknown-basis','fake-keep-basis','assigned-unassigned-basis','missing-carrier','foreign-carrier-field','active','wrong-stage','wrong-round','after-collect','after-impact','failed-native','bad-native-post','bad-context','bad-final','missing-unit','prior-cert','judge-pin','extra-scope','omitted-label'])test(`v3 repeat numeric history rejects ${mode}`,t=>{
++ const f=fixture(t,3),label=f.payload.source_levels[0];
++ if(mode==='body')f.put(`items/${nativeId}.md`,f.nativeAfter+'Extra proof material.\n');
++ if(mode==='interface')f.put(`items/${nativeId}.md`,f.nativeAfter.replace('A fixed complete interface','A different interface'));
++ if(mode==='deps')f.put(`items/${nativeId}.md`,f.nativeAfter.replace(`deps: ["${context}"]`,'deps: []'));
++ if(mode==='title')f.put(`items/${nativeId}.md`,f.nativeAfter.replace(`title: ${nativeId}`,'title: Forged'));
++ if(mode==='published')f.put(`items/${nativeId}.md`,f.nativeAfter.replace('status: draft','status: published'));
++ if(mode==='extra-label')f.put(`items/${nativeId}.md`,f.nativeAfter.replace('dependency_level: 1','dependency_level: 1\ndependency_level: 1'));
++ if(mode==='wrong-after')label.after=2;if(mode==='wrong-before')label.before=8;if(mode==='unknown-basis')label.historical_basis='invented';
++ if(mode==='fake-keep-basis')f.payload.source_levels[1].historical_basis='baseline-keep';if(mode==='assigned-unassigned-basis')label.historical_basis='unassigned-before';
++ if(mode==='missing-carrier')f.payload.carriers.pop();
++ if(mode==='foreign-carrier-field'){const old=structuredClone(f.old1);old[0].items[0].title='Foreign old title';f.put(f.mb1,old);}
++ if(['active','wrong-stage','wrong-round'].includes(mode)){if(mode==='active')f.state.dispatches.running={startedAt:'2026-10-01T12:01:00Z'};if(mode==='wrong-stage')f.state.stage='5.1-adjudicate';if(mode==='wrong-round')f.state.stageRounds['5.5-adjudicate']=2;f.put(`.autopilot/${run}/state.json`,f.state);}
++ if(mode==='after-collect')f.put(`${dir}/repeat-3-collected.json`,{});if(mode==='after-impact')f.put(`${dir}/impact-repeat-3.json`,{});
++ if(mode==='failed-native'){f.result.ok=false;f.sync();}if(mode==='bad-native-post'){f.report.reviews[0].post_sha256='e'.repeat(64);f.sync();}if(mode==='bad-context'){f.output.reviews[0].review_context_sha256='e'.repeat(64);f.sync();}if(mode==='bad-final'){f.output.phase='initial';f.sync();}
++ if(mode==='missing-unit')rmSync(join(f.root,`${dir}/step5-v2-repeat-r3-u2.json`));
++ if(mode==='prior-cert'){const cert=JSON.parse(readFileSync(join(f.root,f.payload.prior_certificate),'utf8'));cert.creations.push({id:'lem-fabricated'});f.put(f.payload.prior_certificate,cert);}
++ if(mode==='judge-pin'){f.pack.input_evidence={};f.put(`${dir}/repeat-3.json`,f.pack);f.sync();}
++ if(mode==='extra-scope'){f.new2[0].items.push({id:'lem-fabricated',kind:'lemma',title:'lem-fabricated',deps:[],dependency_level:0});f.put(f.m2,f.new2);}
++ if(mode==='omitted-label')f.payload.source_levels.pop();assert.throws(f.record);
++});
++
++function currentRepeatImpactReports(f,pack,{oldPost=false}={}){
++ for(const unit of pack.units){const label=`step5-v2-${pack.phase}-r3-u${unit}`,reviews=pack.assignments[unit].map(id=>({id,disposition:'unaffected',...reviewContextHashes(f.root,[id])[id],reason:'A genuine synthetic fresh owner review checked the complete current source and its actual supplier interfaces after the numeric metadata normalization.',uncertain:false,source_urls:[],familiar:true}));if(oldPost)for(const review of reviews)if(review.id===nativeId)review.post_sha256=itemHashGuard(f.nativeBefore);
++ f.put(`${dir}/${label}.json`,{run,phase:pack.phase,round:3,unit,input_sha256:hash(pack),decisions:[],reviews,created_items:[],downstream:[],ledger_updates:[]});f.put(`${dispatch}/alpha-repair-${label}.result.json`,{run,role:'alpha-repair',label,covers:[unit],ok:true,model:MODELS.sol61.id,provider_effort:'high'});}
++}
++test('v3 all numeric targets need real fresh current impact rows before completed closure and certification',t=>{
++ const f=fixture(t,3),contextNow=reviewContextHashes(f.root,[discharged])[discharged].review_context_sha256;f.report.reviews.find(r=>r.id===discharged).review_context_sha256=contextNow;f.output.reviews.find(r=>r.id===discharged).review_context_sha256=contextNow;f.sync();f.record();const pack=prepareImpact(f.root,run,'impact-repeat',3);currentRepeatImpactReports(f,pack);assert.equal(advanceImpact(f.root,run,'impact-repeat',3).complete,true);const closed=verifyCompletedImpact(f.root,run,'impact-repeat',3);for(const id of [nativeId,unassigned])assert.ok(closed.reviews.some(r=>r.id===id&&r.post_sha256===itemHashGuard(readFileSync(join(f.root,`items/${id}.md`),'utf8'))));
++ const contexts=(root,ids)=>new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(root,`items/${id}.md`),'utf8')),context_sha256:'c'.repeat(64)}]));assert.ok(certify(f.root,run,'impact-repeat',3,{contextHasher:contexts}));
++});
++test('v3 historical FP source review cannot replace fresh current impact row',t=>{
++ const f=fixture(t,3);f.record();const pack=prepareImpact(f.root,run,'impact-repeat',3);currentRepeatImpactReports(f,pack,{oldPost:true});assert.throws(()=>advanceImpact(f.root,run,'impact-repeat',3));assert.throws(()=>certify(f.root,run,'impact-repeat',3));
++});
++
++test('v3 records paused then ordinary native resumed/drained collect succeeds without spoofing paused state',t=>{
++ const f=fixture(t,3);f.record();f.state.paused=false;f.put(`.autopilot/${run}/state.json`,f.state);const result=collect(f.root,run,'repeat',3);assert.equal(result.post[nativeId],itemHashGuard(f.nativeAfter));assert.equal(f.state.paused,false);assert.deepEqual(result.historical_metadata_reviews,[f.report.reviews[0]]);
++});
++for(const defect of ['wrong-stage','active-writer'])test(`v3 first resumed collection rejects ${defect}`,t=>{
++ const f=fixture(t,3);f.record();f.state.paused=false;if(defect==='wrong-stage')f.state.stage='5.6-impact';else f.state.dispatches.running={startedAt:'2026-10-01T12:01:00Z'};f.put(`.autopilot/${run}/state.json`,f.state);assert.throws(()=>collect(f.root,run,'repeat',3));
++});
++
++function addExistingCertifiedCreation(f,{badGuard=false}={}){
++ const id='lem-existing-native-helper',text=`---\nid: ${id}\nkind: lemma\ntitle: ${id}\nstatus: draft\ndependency_level: 0\ndeps: []\n---\n\n## Statement\n\nAn existing native helper conclusion.\n\n## Proof\n\n1.1 A complete original fixture argument. [given] ∎\n`;
++ f.put(`items/${id}.md`,text);const row={id,kind:'lemma',title:id,deps:[],dependency_level:0};f.new2[0].items.push(row);f.old2[0].items.push(row);f.put(f.m2,f.new2);f.put(f.mb2,f.old2);f.pack.before[id]=itemHashGuard(text);f.pack.before_statements[id]=statementHash(text);
++ const cert=JSON.parse(readFileSync(join(f.root,f.payload.prior_certificate),'utf8'));cert.items=[{id,guard_sha256:badGuard?'e'.repeat(64):itemHashGuard(text)}];cert.creations=[{id,author_result:'alpha-repair-existing-helper.result.json'}];const {sha256,...body}=cert;cert.sha256=hash(body);f.put(f.payload.prior_certificate,cert);const judgePath=`${dir}/judge-3.json`,judge=JSON.parse(readFileSync(join(f.root,judgePath),'utf8'));judge.certification_sha256=cert.sha256;f.put(judgePath,judge);f.pack.input_evidence[join(f.root,judgePath)]=hash(judge);f.put(`${dir}/repeat-3.json`,f.pack);f.sync();return id;
++}
++test('v3 complete graph preserves existing certified creation outside original frozen IDs without new scope credit',t=>{
++ const f=fixture(t,3),id=addExistingCertifiedCreation(f);f.record();const history=loadRepeatMetadataHistory(f.root,run,3);assert.ok(history.row.sources.some(s=>s.id===id));assert.ok(!history.sourceIds.includes(id));assert.ok(!f.pack.frontier_ids.includes(id));
++});
++test('v3 existing creation cannot borrow a different prior native certificate guard',t=>{
++ const f=fixture(t,3);addExistingCertifiedCreation(f,{badGuard:true});assert.throws(f.record,/creation scope/);
++});
+--- a/tools/step5-initial-metadata-history.md
++++ b/tools/step5-initial-metadata-history.md
+@@ -111,3 +111,49 @@
+ Collection returns `historicalGuards` only for these drafts, preserves genuine original review rows in `historical_metadata_reviews`, and supplies no new current review. Unassigned baseline items have no invented historical row. The collection post remains actual current source bytes; existing decisions and repair counters retain their original meaning. Every changed draft ID is queued in `metadata_history_current_review_targets` for ordinary fresh native 5.2 review, certification, Sol judgment and gates, even though no public mathematical interface changed.
+ 
+ When published repairs also change mirrors in the same manifest, preserve layering: keep original native manifests for this v2 history, apply draft-only mirrors, archive that intermediate state as the published bridge's metadata preimage, then apply only the authenticated published mirrors. Both receipts capture the same final complete current graph. This v2 carrier may span original-native to final source-backed mirrors; the published carrier remains strictly published-only. Do not overwrite historical pins or rewrite old reports.
++
++
++## V3: repeat-adjudication numeric labels
++
++`recordRepeatMetadataHistory(root, run, round, payload)` is a separate opt-in V3
++lane at the actual paused/drained `5.5-adjudicate` hold for that exact round,
++before its collection or first impact pack/dispatch. Initial V1/V2 APIs and their
++strict original behavior remain unchanged. The V3 marker is
++`research/RUN-step5-v2/repeat-ROUND-owner-metadata-history.json`, with durable
++captures in `repeat-ROUND-metadata-history/`.
++
++The payload has `version:3`, a concrete `reason`, `prior_certificate` path,
++`carriers:[{path,before_file}]`, and `source_levels` with ID, old/computed numeric
++levels, exact `before_file` and typed historical basis. `native-post` requires a
++unique genuinely assigned successful native report/final-output post and context.
++`unassigned-before` requires no assigned/reported review and exact current
++repeat-pack before guard. It does not invent a keep verdict for an item with no
++current judge tuple. Original false-positive decisions/no-edit observations remain
++exact; a numeric change never becomes a mathematical repair or new judgment.
++
++The recorder captures the actual state/request and all successful original unit
++handoffs, immutable native attempts/prompts/terminal outputs, current source and
++manifest graph itself. It validates one numeric dependency_level substitution
++per true draft, exact source-backed numeric-only manifest changes, independent
++complete graph computation and no unexplained source/manifest residual. The
++prior immutable native certificate must be linked by the pack's pinned judge;
++its already-certified creations remain graph context without new scope/creation
++credit. Published/status/body/interface/dependency/title edits are outside this
++lane. Changed native supporting pins require separate authentic treatment; V3
++cannot quietly invent their old bytes or rewrite declarations.
++
++Root first installs the reviewed guarded numeric candidates and records truthful
++application evidence, then calls the recorder against actual current bytes. No
++owner-supplied state/current graph archives or fake historical timestamps are
++accepted. Creation is paused; the subsequent ordinary native first collection can
++run unpaused but drained at the exact same stage/round. Wrong stage, active writers,
++collection/impact already started or altered evidence are rejected.
++
++Collection validates original rows against exact historical guards while `post`
++remains actual current. Original decisions persist, affected old rows move to
++`historical_metadata_reviews` with zero current credit, and every changed numeric
++source becomes a mandatory `metadata_history_current_review_targets` entry. The
++ordinary next impact pack binds the actual source-phase/round collection and
++assigns genuine fresh reviews. Completed closure and certification cannot use old
++source reviews to replace current target rows. Gates, fatal thresholds, published
++maintenance and scientific interface propagation retain their existing rules.
+--- a/tools/step5-initial-metadata-history.mjs
++++ b/tools/step5-initial-metadata-history.mjs
+@@ -11,18 +11,26 @@
+ const need=(v,m)=>{if(!v)throw Error('Step 5 initial metadata history: '+m);};
+ const date=x=>typeof x==='string'&&Number.isFinite(Date.parse(x));
+ const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+-const base=(root,run)=>join(root,'research',`${run}-step5-v2`,'initial-metadata-history');
++const base=(root,run,phase='initial',round=1)=>join(root,'research',`${run}-step5-v2`,phase==='initial'?'initial-metadata-history':`repeat-${round}-metadata-history`);
++export const repeatMetadataHistoryPath=(root,run,round)=>join(root,'research',`${run}-step5-v2`,`repeat-${round}-owner-metadata-history.json`);
+ export const initialMetadataHistoryPath=(root,run)=>join(root,'research',`${run}-step5-v2`,'initial-1-owner-metadata-history.json');
+ const stateDrained=s=>Object.values(s.dispatches??{}).every(x=>!x.startedAt||Boolean(x.endedAt));
+-function beforeImpact(root,run){
++function beforeImpact(root,run,phase='initial',round=1){
++  if(phase==='repeat'){
++    need(!existsSync(join(root,'research',`${run}-step5-v2`,`repeat-${round}-collected.json`))
++      &&!existsSync(join(root,'research',`${run}-step5-v2`,`impact-repeat-${round}.json`))
++      &&!readdirSync(join(root,'research',`${run}-dispatch`)).some(n=>new RegExp(`^alpha-repair-step5-v2-impact-repeat(?:-pass-\\d+)?-r${round}-u`).test(n)),
++      'repeat collection or impact already frozen/dispatched');return;
++  }
+   need(!existsSync(join(root,'research',`${run}-step5-v2`,'impact-initial-1.json'))
+     &&!readdirSync(join(root,'research',`${run}-dispatch`)).some(n=>/^alpha-repair-step5-v2-impact-initial(?:-pass-\d+)?-r1-u/.test(n)),
+     'initial impact already frozen or dispatched');
+ }
+ function validate(root,run,row,{current=false,receiptBytes=null}={}){
+-  const {sha256,...payload}=row,path=initialMetadataHistoryPath(root,run);
+-  need(sha256===sha(payload)&&[1,2].includes(row.version)&&row.kind==='owner-initial-metadata-history'
+-    &&row.run===run&&row.phase==='initial'&&row.round===1&&row.authorized_by==='owner'
++  const repeat=row.version===3,phase=repeat?'repeat':'initial',round=repeat?row.round:1,stage=repeat?'5.5-adjudicate':'5.1-adjudicate';
++  const {sha256,...payload}=row,path=repeat?repeatMetadataHistoryPath(root,run,round):initialMetadataHistoryPath(root,run);
++  need(sha256===sha(payload)&&[1,2,3].includes(row.version)&&row.kind===(repeat?'owner-repeat-numeric-metadata-history':'owner-initial-metadata-history')
++    &&row.run===run&&row.phase===phase&&row.round===round&&Number.isSafeInteger(round)&&round>0&&row.authorized_by==='owner'
+     &&row.owner_identity==='/root'&&row.historical_only===true&&row.current_review_granted===false
+     &&row.native_execution_coverage_adopted===false&&date(row.recorded_at)
+     &&typeof row.reason==='string'&&row.reason.trim().length>=80
+@@ -36,31 +44,31 @@
+   }
+   const bytes=file=>{const p=resolve(root,file);need(Object.hasOwn(evidence,p),'missing binding '+file);return readFileSync(p,'utf8');};
+   const bound=file=>JSON.parse(bytes(file));
+-  const dir=join(root,'research',`${run}-step5-v2`),pack=bound(join(dir,'initial-1.json'));
++  const dir=join(root,'research',`${run}-step5-v2`),pack=bound(join(dir,`${phase}-${round}.json`));
+   const frontier=bound(join(dir,'frontier.json')),baseline=bound(join(dir,'baseline.json'));
+-  need(pack.run===run&&pack.phase==='initial'&&pack.round===1&&pack.adjudicationSchemaVersion===1
++  need(pack.run===run&&pack.phase===phase&&pack.round===round&&pack.adjudicationSchemaVersion===1
+     &&Array.isArray(pack.units)&&pack.units.length>0&&new Set(pack.units).size===pack.units.length
+     &&frontier.run===run&&same([...pack.frontier_ids].sort(),[...frontier.ids].sort()),'wrong frozen initial inventory');
+   const state=bound(row.creation_state),request=bound(row.owner_gate_request);
+-  need(state.run===run&&state.stage==='5.1-adjudicate'&&state.paused===true&&stateDrained(state)
++  need(state.run===run&&state.stage===stage&&state.paused===true&&stateDrained(state)&&(!repeat||state.stageRounds?.[stage]===round)
+     &&request.run===run&&request.version===1&&request.id===row.owner_gate_request_id
+-    &&typeof request.id==='string'&&request.id.length>0&&request.group==='5.1-adjudicate'
+-    &&same(request.stages,['5.1-adjudicate'])&&date(request.at)
++    &&typeof request.id==='string'&&request.id.length>0&&request.group===stage
++    &&same(request.stages,[stage])&&date(request.at)
+     &&Date.parse(request.at)<=Date.parse(row.recorded_at),'not the actual paused/drained native creation hold');
+-  if(row.version===2)need(Array.isArray(frontier.batches)&&pack.units.length===frontier.batches.length
++  if(row.version>=2)need(Array.isArray(frontier.batches)&&pack.units.length===frontier.batches.length
+     &&frontier.batches.every(b=>pack.units.includes(String(b.id)))&&same(pack.frontier_ids,frontier.ids),
+     'v2 requires every original frozen unit');
+   const verdicts=row.version===2?bound(join(dir,'step4-verdicts.json')):null;
+   const reports=[],nativeOutputs=new Map();
+   for(const unit of pack.units){
+-    const label=`step5-v2-initial-r1-u${unit}`,rp=join(dir,`${label}.json`),report=bound(rp);
+-    need(report.run===run&&report.phase==='initial'&&report.round===1&&String(report.unit)===unit
++    const label=`step5-v2-${phase}-r${round}-u${unit}`,rp=join(dir,`${label}.json`),report=bound(rp);
++    need(report.run===run&&report.phase===phase&&report.round===round&&String(report.unit)===unit
+       &&report.input_sha256===sha(pack),'native initial report mismatch');reports.push(report);
+-    const empty=report.completion==='mechanical-zero-work',dispatchLabel=empty?`step5-v2-empty-initial-r1-u${unit}`:label;
++    const empty=report.completion==='mechanical-zero-work',dispatchLabel=empty?`step5-v2-empty-${phase}-r${round}-u${unit}`:label;
+     const dp=join(root,'research',`${run}-dispatch`,`${empty?'tool-':'alpha-adjudicate-'}${dispatchLabel}.result.json`),native=bound(dp);
+-    const observed=state.dispatches?.[`5.1-adjudicate:${dispatchLabel}`];
++    const observed=state.dispatches?.[`${stage}:${dispatchLabel}`];
+     need(native.run===run&&native.ok===true&&native.label===dispatchLabel&&same(native.covers,[unit])
+-      &&observed?.stage==='5.1-adjudicate'&&observed.role===native.role&&observed.label===native.label
++      &&observed?.stage===stage&&observed.role===native.role&&observed.label===native.label
+       &&observed.lastExitOk===true&&same(observed.covers,native.covers)&&date(observed.startedAt)
+       &&date(observed.endedAt)&&date(native.ended_at)
+       &&Date.parse(observed.startedAt)<=Date.parse(native.ended_at)
+@@ -78,14 +86,14 @@
+         &&Date.parse(observed.startedAt)<=Date.parse(native.started_at)
+         &&Date.parse(native.started_at)<=Date.parse(native.ended_at),'not genuine completed native Sol initial work');
+       need(same(native,bound(dp.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`))),'native immutable attempt mismatch');
+-      if(row.version===2){
++      if(row.version>=2){
+         const stem=dp.replace(/\.result\.json$/,`.attempt-${native.attempt}`),logPath=stem+'.log',promptPath=stem+'.prompt.md';
+         need(resolve(root,native.log??'')===logPath&&resolve(root,native.prompt??'')===promptPath,'v2 wrong native log/prompt identity');
+         const log=bytes(logPath),prompt=bytes(promptPath),end=log.lastIndexOf('\ntokens used\n'),start=log.lastIndexOf('\ncodex\n',end);
+         need(start>=0&&end>start&&prompt.includes(`run: ${run}\nrole: alpha-adjudicate\nlabel: ${label}\ncovers: ${unit}\noutput: ${relative(root,rp)}\n`)
+           &&prompt.includes(`input_sha256:"${sha(pack)}"`),'v2 native final output identity missing');
+         const output=JSON.parse(log.slice(start+7,end).trim());
+-        need(output.run===run&&output.phase==='initial'&&output.round===1&&String(output.unit)===unit&&output.input_sha256===sha(pack),'v2 wrong immutable native final identity');
++        need(output.run===run&&output.phase===phase&&output.round===round&&String(output.unit)===unit&&output.input_sha256===sha(pack),'v2 wrong immutable native final identity');
+         nativeOutputs.set(unit,output);
+       }
+     }
+@@ -119,20 +127,36 @@
+       const s=sourceById.get(item.id)?.fm;
+       need(s&&same(item.kind,s.kind)&&same(item.title,s.title)&&Array.isArray(item.deps)&&Array.isArray(s.deps)
+         &&same([...item.deps].sort(),[...s.deps].sort())&&item.dependency_level===s.dependency_level
+-        &&(row.version!==2||optionalJustification(item.justified_by,s.justified_by)),'not a source-to-manifest metadata mirror '+item.id);
++        &&(row.version<2||optionalJustification(item.justified_by,s.justified_by)),'not a source-to-manifest metadata mirror '+item.id);
+     }
+   }
+   const graph=dependencyLevels(graphPages);
+   need(!graph.errors.length&&graph.items.size===sourceById.size
+     &&same([...graph.items.keys()].sort(),[...sourceById.keys()].sort()),'invalid complete repaired in-run dependency graph');
+   if(row.version===2)need(same([...graph.items.keys()].sort(),[...frontier.ids].sort()),'v2 repaired graph differs from full original frontier');
+-  const seen=new Set();need(Array.isArray(row.carriers)&&(row.version===2||row.carriers.length>0),'missing manifest corrections');
++  if(repeat){
++    const judgePath=join(dir,`judge-${round}.json`),judge=bound(judgePath),certificate=bound(row.prior_certificate);
++    const {sha256:certificateHash,...certificatePayload}=certificate;
++    need(pack.input_evidence?.[judgePath]===sha(bytes(judgePath))&&judge.run===run&&judge.round===round
++      &&judge.certification_sha256===certificateHash&&certificateHash===sha(certificatePayload)
++      &&certificate.run===run&&certificate.version===2&&Array.isArray(certificate.creations)
++      &&resolve(root,row.prior_certificate)===join(dir,`certification-${certificate.phase}-${certificate.round}.json`),
++      'v3 lacks exact prior native certification/judge lineage');
++    const created=certificate.creations.map(c=>c.id);
++    need(new Set(created).size===created.length&&created.every(id=>!frontier.ids.includes(id)
++      &&certificate.items.some(item=>item.id===id&&item.guard_sha256===pack.before[id]))
++      &&same([...graph.items.keys()].sort(),[...frontier.ids,...created].sort()),
++      'v3 graph changes original frontier or existing native creation scope');
++  }
++  const seen=new Set();need(Array.isArray(row.carriers)&&(row.version>=2||row.carriers.length>0),'missing manifest corrections');
+   for(const carrier of row.carriers){
+     need(!seen.has(carrier.path)&&manifestByPath.has(carrier.path),'duplicate or foreign corrected manifest');seen.add(carrier.path);
+     const before=bound(carrier.before_file),after=manifestByPath.get(carrier.path),copy=structuredClone(before);let count=0;
+     need(same(before.map(p=>[p.id,p.items.map(x=>x.id)]),after.map(p=>[p.id,p.items.map(x=>x.id)])),'manifest page/item inventory changed');
+-    for(let p=0;p<copy.length;p++)for(let i=0;i<copy[p].items.length;i++)for(const field of (row.version===2?['title','deps','dependency_level','justified_by']:['title','deps','dependency_level'])){
++    for(let p=0;p<copy.length;p++)for(let i=0;i<copy[p].items.length;i++)for(const field of (repeat?['dependency_level']:row.version===2?['title','deps','dependency_level','justified_by']:['title','deps','dependency_level'])){
+       if(!same(copy[p].items[i][field],after[p].items[i][field])){
++        if(repeat){const id=copy[p].items[i].id,label=row.source_levels?.find(x=>x.id===id);
++          need(label&&copy[p].items[i][field]===label.before&&after[p].items[i][field]===label.after,'v3 mirror is not an exact declared numeric source correction');}
+         if(field==='justified_by'){
+           const id=copy[p].items[i].id,source=sourceById.get(id),label=row.source_levels?.find(x=>x.id===id);
+           need(source.fm.status==='draft'&&Array.isArray(source.fm.justified_by)&&source.fm.justified_by.length>0
+@@ -146,10 +170,10 @@
+     need(count>0&&same(copy,after),'manifest repair changed more than source title/deps/level mirrors');
+     for(const report of reports)if(Object.hasOwn(report.supporting_evidence??{},carrier.path))
+       need(report.supporting_evidence[carrier.path]===sha(bytes(carrier.before_file)),'manifest preimage is not actual native supporting bytes');
+-    if(row.version===2)for(const report of reports)for(const [file,hash]of Object.entries(report.supporting_evidence??{}))
+-      if(resolve(root,file)===resolve(root,carrier.path))need(hash===sha(bytes(carrier.before_file)),'v2 manifest preimage differs from exact absolute/relative native supporting bytes');
++    if(row.version>=2)for(const report of reports)for(const [file,hash]of Object.entries(report.supporting_evidence??{}))
++      if(resolve(root,file)===resolve(root,carrier.path)){if(repeat)need(hash===sha(manifestBytes.get(carrier.path)),'v3 changed native supporting pin requires a separate authentic protocol');need(hash===sha(bytes(carrier.before_file)),'v2 manifest preimage differs from exact absolute/relative native supporting bytes');}
+   }
+-  if(row.version===2)for(const report of reports)for(const [file,expected]of Object.entries(report.supporting_evidence??{})){
++  if(row.version>=2)for(const report of reports)for(const [file,expected]of Object.entries(report.supporting_evidence??{})){
+     const canonical=relative(root,resolve(root,file));if(!manifestBytes.has(canonical)||sha(manifestBytes.get(canonical))===expected)continue;
+     const carrier=row.carriers.find(c=>c.path===canonical);
+     need(carrier&&sha(bytes(carrier.before_file))===expected,'v2 missing exact historical supporting manifest carrier '+canonical);
+@@ -193,6 +217,11 @@
+           &&summaries.length===1&&summaries[0].disposition===review.disposition&&summaries[0].post_sha256===guard
+           &&summaries[0].review_context_sha256===review.review_context_sha256&&summaries[0].uncertain===false,
+           'v2 historical source is not the exact assigned native report/final-output post guard');
++      }else if(repeat){
++        need(label.historical_basis==='unassigned-before'&&originals.length===0
++          &&Object.values(pack.assignments).every(rows=>rows.every(x=>(typeof x==='string'?x:x.id)!==label.id))
++          &&frontier.ids.includes(label.id)&&guard===pack.before[label.id],
++          'v3 unassigned numeric source is not its exact frozen repeat before');
+       }else{
+         const matches=verdicts.filter(v=>v.id===label.id);
+         need(label.historical_basis==='baseline-keep'&&originals.length===0
+@@ -201,27 +230,31 @@
+           &&matches.length===1&&matches[0].model==='gpt-6-luna'&&matches[0].keep===true,
+           'v2 unassigned label lacks its unchanged original baseline and accepted Luna verdict');
+       }
+-      need(typeof baseline[label.id]==='string'&&pack.before[label.id]===baseline[label.id],'v2 source is outside original baseline');
++      need(frontier.ids.includes(label.id)&&(repeat?typeof pack.before[label.id]==='string':typeof baseline[label.id]==='string'&&pack.before[label.id]===baseline[label.id]),'numeric source is outside original frozen authority');
+       historicalGuards[label.id]=guard;sourceIds.push(label.id);
+     }
+-    for(const [id,source]of sourceById)if(source.fm.status==='draft'){
++    for(const [id,source]of sourceById)if(source.fm.status==='draft'||repeat){
+       const rows=reports.flatMap(report=>(report.reviews??[]).filter(review=>review.id===id));
+       need(rows.length<=1,'v2 graph has ambiguous original draft review posts');
+       const expected=rows.length?rows[0].post_sha256:pack.before[id];
+       need(typeof expected==='string'&&(itemHashGuard(source.text)===expected||changed.has(id)),
+         'v2 omits a changed draft source or includes unrelated current source changes '+id);
+     }
++    if(repeat)for(const label of row.source_levels)need(row.carriers.filter(carrier=>bound(carrier.before_file).some(page=>(page.items??[]).some(item=>item.id===label.id&&item.dependency_level===label.before))).length===1,'v3 numeric source lacks its exact original manifest mirror');
+     historicalReviews=reports.flatMap(report=>(report.reviews??[]).filter(review=>changed.has(review.id)));
+   }
+   // The archived state is historical-only on later reads. The first collection
+   // also requires real live drained 5.1 or pre-dispatch 5.2 currency.
+-  if(current){beforeImpact(root,run);const live=read(join(root,'.autopilot',run,'state.json'));
+-    need(live.run===run&&stateDrained(live)&&['5.1-adjudicate','5.2-impact'].includes(live.stage),'wrong live initial collection boundary');}
++  if(current){beforeImpact(root,run,phase,round);const live=read(join(root,'.autopilot',run,'state.json'));
++    need(live.run===run&&stateDrained(live)&&(repeat?live.stage===stage&&live.stageRounds?.[stage]===round:['5.1-adjudicate','5.2-impact'].includes(live.stage)),'wrong live adjudication collection boundary');}
+   return {path,evidence,historicalGuards,sourceIds,historicalReviews,row};
+ }
+ export function loadInitialMetadataHistory(root,run,options={}){
+   const path=initialMetadataHistoryPath(root,run);return existsSync(path)?validate(root,run,read(path),options):null;
+ }
++export function loadRepeatMetadataHistory(root,run,round,options={}){
++  const path=repeatMetadataHistoryPath(root,run,round);return existsSync(path)?validate(root,run,read(path),options):null;
++}
+ export function initialMetadataSupportingHistory(history,path,expected){
+   if(!history?.root||!history?.run)return null;
+   const loaded=loadInitialMetadataHistory(history.root,history.run);if(!loaded)return null;
+@@ -231,16 +264,18 @@
+ }
+ // Root invokes this recorder only at the real paused boundary. It captures native
+ // bytes itself and never writes source, reports, packs, verdicts or live state.
+-export function recordInitialMetadataHistory(root,run,payload){
++function recordMetadataHistory(root,run,payload,repeatRound=null){
++  const repeat=repeatRound!==null,phase=repeat?'repeat':'initial',round=repeat?repeatRound:1,stage=repeat?'5.5-adjudicate':'5.1-adjudicate';
++  need(!repeat||payload.version===3&&Number.isSafeInteger(round)&&round>0,'invalid repeat v3 version/round');
+   const statePath=join(root,'.autopilot',run,'state.json'),requestPath=join(root,'.autopilot',run,'owner-gate-request.json');
+   const stateBytes=readFileSync(statePath,'utf8'),requestBytes=readFileSync(requestPath,'utf8');
+-  const state=JSON.parse(stateBytes);need(state.run===run&&state.stage==='5.1-adjudicate'&&state.paused===true&&stateDrained(state),'recording requires actual paused drained 5.1');beforeImpact(root,run);
+-  need(!existsSync(join(root,'research',`${run}-step5-v2`,'initial-1-collected.json')),'original initial collection already exists');
+-  const version=payload.version===2?2:1;
+-  if(version===2)need(!Object.hasOwn(payload,'source_level')&&Array.isArray(payload.source_levels)
++  const state=JSON.parse(stateBytes);need(state.run===run&&state.stage===stage&&state.paused===true&&stateDrained(state)&&(!repeat||state.stageRounds?.[stage]===round),'recording requires actual paused drained adjudication');beforeImpact(root,run,phase,round);
++  need(!existsSync(join(root,'research',`${run}-step5-v2`,`${phase}-${round}-collected.json`)),'original initial collection already exists');
++  const version=repeat?3:payload.version===2?2:1;
++  if(version>=2)need(!Object.hasOwn(payload,'source_level')&&Array.isArray(payload.source_levels)
+     &&['creation_state','owner_gate_request','manifests','sources'].every(k=>!Object.hasOwn(payload,k)),'v2 caller cannot supply creation/current graph archives');
+   const bindings={...payload.bindings},store=(name,bytes)=>{
+-    const path=join(base(root,run),name);mkdirSync(resolve(path,'..'),{recursive:true});
++    const path=join(base(root,run,phase,round),name);mkdirSync(resolve(path,'..'),{recursive:true});
+     if(existsSync(path))need(readFileSync(path,'utf8')===bytes,'immutable archive conflict '+path);else writeFileSync(path,bytes,{flag:'wx'});
+     bindings[relative(root,path)]=sha(bytes);return relative(root,path);
+   },bind=path=>{bindings[relative(root,path)]=sha(readFileSync(path,'utf8'));};
+@@ -252,18 +287,22 @@
+     for(const page of JSON.parse(text))for(const item of page.items??[]){need(!ids.has(item.id),'duplicate owned item');ids.add(item.id);
+       const path=`items/${item.id}.md`;sources.push({id:item.id,path,archive:store('sources/'+item.id+'.md',readFileSync(join(root,path),'utf8'))});}
+   }
+-  const dir=join(root,'research',`${run}-step5-v2`),pack=read(join(dir,'initial-1.json'));
+-  for(const name of ['initial-1.json','frontier.json','baseline.json','step4-verdicts.json'])bind(join(dir,name));
+-  for(const unit of pack.units){const label=`step5-v2-initial-r1-u${unit}`,rp=join(dir,label+'.json');bind(rp);const report=read(rp);
+-    const dp=join(root,'research',`${run}-dispatch`,`${report.completion==='mechanical-zero-work'?'tool-step5-v2-empty-initial-r1-u'+unit:'alpha-adjudicate-'+label}.result.json`);bind(dp);
+-    const native=read(dp);if(report.completion!=='mechanical-zero-work'){bind(dp.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`));if(version===2){bind(resolve(root,native.log));bind(resolve(root,native.prompt));}}}
+-  for(const file of [...payload.carriers.map(x=>x.before_file),...(version===2?payload.source_levels:[payload.source_level]).map(x=>x.before_file)])bind(resolve(root,file));
+-  const row={...payload,version,kind:'owner-initial-metadata-history',run,phase:'initial',round:1,authorized_by:'owner',owner_identity:'/root',historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false,recorded_at:new Date().toISOString(),creation_state,owner_gate_request,owner_gate_request_id:read(requestPath).id,manifests,sources,bindings};
+-  const receipt={...row,sha256:sha(row)},target=initialMetadataHistoryPath(root,run);
++  const dir=join(root,'research',`${run}-step5-v2`),pack=read(join(dir,`${phase}-${round}.json`));
++  for(const name of [`${phase}-${round}.json`,'frontier.json','baseline.json',...(repeat?[`judge-${round}.json`]:['step4-verdicts.json'])])bind(join(dir,name));
++  for(const unit of pack.units){const label=`step5-v2-${phase}-r${round}-u${unit}`,rp=join(dir,label+'.json');bind(rp);const report=read(rp);
++    const dp=join(root,'research',`${run}-dispatch`,`${report.completion==='mechanical-zero-work'?`tool-step5-v2-empty-${phase}-r${round}-u${unit}`:'alpha-adjudicate-'+label}.result.json`);bind(dp);
++    const native=read(dp);if(report.completion!=='mechanical-zero-work'){bind(dp.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`));if(version>=2){bind(resolve(root,native.log));bind(resolve(root,native.prompt));}}}
++  for(const file of [...payload.carriers.map(x=>x.before_file),...(version>=2?payload.source_levels:[payload.source_level]).map(x=>x.before_file)])bind(resolve(root,file));
++  if(repeat)bind(resolve(root,payload.prior_certificate));
++  const row={...payload,version,kind:repeat?'owner-repeat-numeric-metadata-history':'owner-initial-metadata-history',run,phase,round,authorized_by:'owner',owner_identity:'/root',historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false,recorded_at:new Date().toISOString(),creation_state,owner_gate_request,owner_gate_request_id:read(requestPath).id,manifests,sources,bindings};
++  const receipt={...row,sha256:sha(row)},target=repeat?repeatMetadataHistoryPath(root,run,round):initialMetadataHistoryPath(root,run);
+   const receiptBytes=JSON.stringify(receipt,null,2)+'\n';
+   validate(root,run,receipt,{current:true,receiptBytes});
+   need(readFileSync(statePath,'utf8')===stateBytes&&readFileSync(requestPath,'utf8')===requestBytes,
+     'native state or request changed during owner recording');
+   need(!existsSync(target),'metadata history receipt already exists');writeFileSync(target,receiptBytes,{flag:'wx'});
+-  return {path:target,historical_only:true,current_review_targets:(version===2?payload.source_levels:[payload.source_level]).map(x=>x.id)};
++  return {path:target,historical_only:true,current_review_targets:(version>=2?payload.source_levels:[payload.source_level]).map(x=>x.id)};
+ }
++
++export function recordInitialMetadataHistory(root,run,payload){return recordMetadataHistory(root,run,payload);}
++export function recordRepeatMetadataHistory(root,run,round,payload){return recordMetadataHistory(root,run,payload,round);}
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -16,7 +16,7 @@
+ import { loadReportingOwnerRecovery, reportingRecoveryDuties, reportingSessionBinding, assertReportingSessionCompatibility } from './step5-reporting-owner-recovery.mjs';
+ import { supportingQuoteHistory } from './step5-quote-history.mjs';
+ import { supportingSiblingContractHistory } from './step5-sibling-contract-history.mjs';
+-import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
++import { loadInitialMetadataHistory, loadRepeatMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+ import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
+ import { createdMaintenanceBasis } from './step5-created-maintenance-cert.mjs';
+ import { verdictIsCurrent } from './judge-currency.mjs';
+@@ -1338,7 +1338,7 @@
+   const pack=readPack(root,run,phase,round);
+   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
+   const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});
+-  const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):null;
++  const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):phase==='repeat'?loadRepeatMetadataHistory(root,run,round,{current:true}):null;
+   const publishedMaintenance=phase==='initial'&&round===1?loadInitialPublishedMaintenance(root,run,{current:true}):null;
+   // Validate original reviews against exact historical source bytes only.
+   // The collection's post snapshot below always describes actual current bytes.
+@@ -2110,7 +2110,7 @@
+   if(result.metadata_history){
+     pack.metadata_history_current_review_targets=[...result.metadata_history_current_review_targets];
+     pack.input_evidence??={};
+-    const collection=join(workflowDir(root,run),'initial-1-collected.json');
++    const collection=join(workflowDir(root,run),`${source}-${round}-collected.json`);
+     pack.input_evidence[collection]=digest(readFileSync(collection,'utf8'));
+     for(const [file,hash]of Object.entries(result.evidence)){
+       requireValue(!Object.hasOwn(pack.input_evidence,file)||pack.input_evidence[file]===hash,'conflicting initial metadata history evidence');

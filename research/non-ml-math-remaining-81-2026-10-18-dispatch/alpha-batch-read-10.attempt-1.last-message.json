@@ -1,0 +1,380 @@
+{
+  "group": "o",
+  "batches": ["10"],
+  "pages_read": [
+    "stationary-ergodic-sources-and-universal-coding",
+    "stationary-ergodic-sources-and-universal-coding-examples"
+  ],
+  "items_read": [
+    "def-finite-alphabet-stationary-source",
+    "def-finite-block-information-and-entropy",
+    "def-finite-support-binary-prefix-code",
+    "lem-triangular-information-averages",
+    "lem-finite-kl-nonnegative-choice-free",
+    "alg-lz78-incremental-prefix-code",
+    "def-ams-source-and-stationary-mean",
+    "def-finite-block-source-code",
+    "def-finite-state-compressibility",
+    "def-general-process-information-rate",
+    "def-lz77-previous-match-phrase-length",
+    "def-past-information-density-finite-alphabet",
+    "lem-prefix-code-entropy-bounds",
+    "lem-finite-block-entropy-chain-rule",
+    "lem-aep-implies-fixed-rate-lossless-coding",
+    "lem-lz78-distinct-parse-ziv-inequality",
+    "thm-ams-stationary-mean-asymptotic-dominance",
+    "thm-lz78-prefix-code-lossless",
+    "thm-stationary-entropy-rate-limit",
+    "lem-ams-stationary-mean-dominates-tail-events",
+    "thm-lz78-individual-sequence-finite-state-optimality",
+    "lem-finite-alphabet-past-information-convergence",
+    "thm-stationary-expected-prefix-code-rate",
+    "thm-componentwise-shannon-mcmillan-breiman",
+    "thm-lz78-stationary-expected-rate",
+    "lem-infinite-past-conditional-block-information-rate",
+    "cor-ergodic-shannon-mcmillan-breiman",
+    "cor-smb-limit-is-conditional-entropy-under-ac",
+    "cor-fixed-rate-lossless-coding-stationary-ergodic",
+    "thm-ams-ergodic-information-aep",
+    "thm-lz77-phrase-length-entropy-rate",
+    "cor-fixed-rate-lossless-coding-ams-ergodic",
+    "ex-nonstationary-block-entropy-rate-oscillation",
+    "ex-lz78-parse-with-explicit-terminator",
+    "ex-iid-and-markov-source-entropy-rates"
+  ],
+  "conventions": [
+    {
+      "convention": "Stationary sources are probability laws on a finite nonempty alphabet indexed by Z, with left shift T(x)_j=x_{j+1}; ergodicity concerns strictly invariant measurable events.",
+      "fixed_by": "def-finite-alphabet-stationary-source",
+      "matters_for": [
+        "thm-stationary-entropy-rate-limit",
+        "thm-componentwise-shannon-mcmillan-breiman",
+        "thm-lz78-stationary-expected-rate",
+        "thm-lz77-phrase-length-entropy-rate"
+      ]
+    },
+    {
+      "convention": "Information and entropy here use bits: log2(t)=ln(t)/ln(2), and H2=Hnat/ln(2). Zero-probability entropy terms and conditioning values are omitted.",
+      "fixed_by": "def-finite-block-information-and-entropy",
+      "matters_for": [
+        "lem-prefix-code-entropy-bounds",
+        "lem-finite-block-entropy-chain-rule",
+        "thm-stationary-entropy-rate-limit",
+        "thm-componentwise-shannon-mcmillan-breiman",
+        "thm-lz78-stationary-expected-rate",
+        "ex-iid-and-markov-source-entropy-rates"
+      ]
+    },
+    {
+      "convention": "A singleton support may use the empty prefix codeword for one known block or a known message count. Unknown-count concatenation requires nonempty codewords.",
+      "fixed_by": "def-finite-support-binary-prefix-code",
+      "matters_for": [
+        "lem-prefix-code-entropy-bounds",
+        "thm-stationary-expected-prefix-code-rate",
+        "thm-lz78-prefix-code-lossless"
+      ]
+    },
+    {
+      "convention": "A rate-R fixed-length code uses binary messages of length floor(nR), with R≥0. Its success set has at most 2^floor(nR) words.",
+      "fixed_by": "def-finite-block-source-code",
+      "matters_for": [
+        "lem-aep-implies-fixed-rate-lossless-coding",
+        "cor-fixed-rate-lossless-coding-stationary-ergodic",
+        "cor-fixed-rate-lossless-coding-ams-ergodic"
+      ]
+    },
+    {
+      "convention": "LZ78 uses q≥2, Elias-delta encoding of parent index plus one, a fixed-width symbol field, and an explicit terminator. The terminal phrase is an output record but is not inserted into the dictionary.",
+      "fixed_by": "alg-lz78-incremental-prefix-code",
+      "matters_for": [
+        "thm-lz78-prefix-code-lossless",
+        "lem-lz78-distinct-parse-ziv-inequality",
+        "thm-lz78-individual-sequence-finite-state-optimality",
+        "thm-lz78-stationary-expected-rate",
+        "ex-lz78-parse-with-explicit-terminator"
+      ]
+    },
+    {
+      "convention": "AMS means setwise Cesàro convergence to a probability measure. An AMS source is called ergodic when its stationary mean is ergodic.",
+      "fixed_by": "def-ams-source-and-stationary-mean",
+      "matters_for": [
+        "thm-ams-stationary-mean-asymptotic-dominance",
+        "lem-ams-stationary-mean-dominates-tail-events",
+        "thm-ams-ergodic-information-aep",
+        "cor-fixed-rate-lossless-coding-ams-ergodic"
+      ]
+    },
+    {
+      "convention": "Finite-state compressibility takes the infimum of encoder limsup rates, then the infimum over finite state counts. Information losslessness requires injectivity of (output, final state) for every initial state.",
+      "fixed_by": "def-finite-state-compressibility",
+      "matters_for": ["thm-lz78-individual-sequence-finite-state-optimality"]
+    },
+    {
+      "convention": "Backward matches use positive start offsets and permit overlap with the current block. L_W includes the empty match and may be infinite.",
+      "fixed_by": "def-lz77-previous-match-phrase-length",
+      "matters_for": ["thm-lz77-phrase-length-entropy-rate"]
+    },
+    {
+      "convention": "Finite-past probabilities are finite-atom conditional averages, with k=0 denoting the trivial past. Realized information is defined arbitrarily on its null exceptional set.",
+      "fixed_by": "def-past-information-density-finite-alphabet",
+      "matters_for": [
+        "lem-finite-alphabet-past-information-convergence",
+        "thm-componentwise-shannon-mcmillan-breiman",
+        "lem-infinite-past-conditional-block-information-rate"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-finite-alphabet-past-information-convergence",
+      "statement": "Proves p_k(a) converges almost surely for each symbol, g_k converges on realized paths, and sup_k g_k is integrable with an explicit exponential tail bound.",
+      "used_by": [
+        "thm-componentwise-shannon-mcmillan-breiman",
+        "thm-lz78-stationary-expected-rate",
+        "lem-infinite-past-conditional-block-information-rate"
+      ]
+    },
+    {
+      "id": "thm-componentwise-shannon-mcmillan-breiman",
+      "statement": "For every stationary finite-alphabet source, proves -n^{-1}log_2 P(X_0^{n-1}) converges almost surely and in L1 to the invariant Birkhoff limit of infinite-past information density, with mean equal to the entropy rate in bits.",
+      "used_by": [
+        "cor-ergodic-shannon-mcmillan-breiman",
+        "cor-smb-limit-is-conditional-entropy-under-ac"
+      ]
+    },
+    {
+      "id": "lem-finite-block-entropy-chain-rule",
+      "statement": "Proves the finite-alphabet entropy chain rule and that conditioning on additional finite-valued variables cannot increase conditional entropy, in bits.",
+      "used_by": [
+        "thm-stationary-entropy-rate-limit",
+        "lem-finite-alphabet-past-information-convergence",
+        "thm-componentwise-shannon-mcmillan-breiman",
+        "thm-lz78-stationary-expected-rate"
+      ]
+    },
+    {
+      "id": "thm-lz78-prefix-code-lossless",
+      "statement": "Proves the specified parser terminates on every finite input, its ordinary complete phrases are distinct, and its finite-block LZ78 record stream is prefix-free and decodes the original block exactly, including the explicit terminal symbol.",
+      "used_by": [
+        "lem-lz78-distinct-parse-ziv-inequality",
+        "thm-lz78-individual-sequence-finite-state-optimality",
+        "thm-lz78-stationary-expected-rate",
+        "ex-lz78-parse-with-explicit-terminator"
+      ]
+    },
+    {
+      "id": "lem-aep-implies-fixed-rate-lossless-coding",
+      "statement": "For any finite-alphabet source with -n^{-1}log2 P(X^n) converging in probability to h, proves vanishing block error is achievable for R>h and impossible for R<h.",
+      "used_by": [
+        "cor-fixed-rate-lossless-coding-stationary-ergodic",
+        "cor-fixed-rate-lossless-coding-ams-ergodic"
+      ]
+    },
+    {
+      "id": "lem-triangular-information-averages",
+      "statement": "If nonnegative integrable-envelope functions g_k converge μ-almost everywhere to g, the triangular averages of (g_k-g) composed with T^k tend to zero μ-almost everywhere and in L1 on a finite measure-preserving system.",
+      "used_by": ["thm-componentwise-shannon-mcmillan-breiman"]
+    },
+    {
+      "id": "lem-ams-stationary-mean-dominates-tail-events",
+      "statement": "Assume AC. If the stationary mean asymptotically dominates P, proves every future-tail event E with Pbar(E)=0 satisfies P(E)=0.",
+      "used_by": ["thm-ams-ergodic-information-aep"]
+    },
+    {
+      "id": "lem-infinite-past-conditional-block-information-rate",
+      "statement": "For each n≥1, constructs the conditional law of X_0^{n-1} given the full infinite past by finite-past martingale limits, then proves its realized information per symbol converges almost surely to the entropy rate for every stationary ergodic finite-alphabet source, without choice.",
+      "used_by": ["thm-lz77-phrase-length-entropy-rate"]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-measure-preserving-transformation-and-system",
+      "used_for": "Stationarity, shift preservation, and iterated measure preservation.",
+      "opened": true
+    },
+    {
+      "id": "def-ergodic-measure-preserving-system",
+      "used_for": "The strictly invariant-event definition of ergodicity.",
+      "opened": true
+    },
+    {
+      "id": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+      "used_for": "Finite entropy in nats and the zero-term convention.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Natural logarithm and conversion to bits.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Logarithm identities, monotonicity, and positivity of ln(2).",
+      "opened": true
+    },
+    {
+      "id": "thm-birkhoff-ergodic-theorem",
+      "used_for": "Almost-sure invariant limits of integrable time averages.",
+      "opened": true
+    },
+    {
+      "id": "lem-ergodic-averages-converge-in-l-p-on-finite-measure-spaces",
+      "used_for": "L1 convergence of Birkhoff averages on probability spaces.",
+      "opened": true
+    },
+    {
+      "id": "thm-integrals-are-invariant-under-measure-preserving-maps",
+      "used_for": "Integral preservation in triangular-average estimates.",
+      "opened": true
+    },
+    {
+      "id": "thm-integral-triangle-inequality",
+      "used_for": "Passing from L1 convergence to convergence of integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Integrating finite averages.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Envelope convergence, bounded conditional-probability limits, and conversion of almost-sure convergence to convergence in probability.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-logarithm",
+      "used_for": "The elementary integral proof of ln(t)≤t−1.",
+      "opened": true
+    },
+    {
+      "id": "cor-integral-logarithm-agrees-with-natural-logarithm",
+      "used_for": "Identifying the integral logarithm with ln.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Integral bounds above and below one in the logarithm inequality.",
+      "opened": true
+    },
+    {
+      "id": "def-oriented-integral",
+      "used_for": "Reversing integration endpoints when 0<t<1.",
+      "opened": true
+    },
+    {
+      "id": "thm-kraft-inequality",
+      "used_for": "Prefix-code Kraft lower bounds and finite allocations of integer lengths.",
+      "opened": true
+    },
+    {
+      "id": "thm-fatou-lemma",
+      "used_for": "Asymptotic domination of an AMS law by its stationary mean.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit assumptions in tail domination, AMS AEP, and invariant conditional-expectation identification.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures",
+      "used_for": "Countably many finite-measure decompositions in tail domination; its AC assumption is retained.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-concentrated-on-a-measurable-set",
+      "used_for": "Null carriers for singular positive measure parts.",
+      "opened": true
+    },
+    {
+      "id": "def-mutually-singular-measures",
+      "used_for": "The singular-carrier convention in tail domination.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-class",
+      "used_for": "Extending finite-cylinder conditional-probability identities to the generated sigma-algebra.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Upcrossing counts and integrability of the information envelope.",
+      "opened": true
+    },
+    {
+      "id": "thm-conditional-probability-multiplication-and-chain-rules",
+      "used_for": "Finite conditional block factorization before passing to infinite-past limits.",
+      "opened": true
+    },
+    {
+      "id": "thm-birkhoff-ergodic-probability-case-for-strong-laws",
+      "used_for": "The full-past conditional block-information rate under ergodicity.",
+      "opened": true
+    },
+    {
+      "id": "thm-ergodicity-and-invariant-functions",
+      "used_for": "Making the componentwise SMB limit constant under ergodicity.",
+      "opened": true
+    },
+    {
+      "id": "thm-birkhoff-limit-identification-on-finite-measure-spaces",
+      "used_for": "AC-dependent identification with conditional expectation on the strict invariant sigma-algebra.",
+      "opened": true
+    },
+    {
+      "id": "def-strict-and-mod-null-invariant-sigma-algebras",
+      "used_for": "The exact conditioning sigma-algebra in the AC corollary.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Measurability and integral tests defining conditional expectation.",
+      "opened": true
+    },
+    {
+      "id": "thm-first-borel-cantelli",
+      "used_for": "AMS diagonal boundary estimates and likelihood-ratio violations.",
+      "opened": true
+    },
+    {
+      "id": "thm-kac-return-time-formula",
+      "used_for": "The LZ77 recurrence upper tail, applied to positive-probability cylinders under the inverse shift.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "thm-lz77-phrase-length-entropy-rate",
+      "concern": "The source locator says “Chapter 5 §§5.1–5.2, PDF pp.49–56: Theorem 6, Corollary 6(a)”. The linked dissertation instead places the recurrence argument in Chapter 3, §§3.1–3.2, Theorem 3.1 and Corollary 3.1(a); its proof uses the same Kac and conditional-past counting arguments as the local proof. The PDF text extraction has damaged numeral glyphs, but internal section and theorem references consistently identify Chapter 3. Verify and synchronize the locator in the item, A-page source trail, B-page source trail, and coverage evidence. The mathematical argument inspected supports the local claim. Source: [Kontoyiannis dissertation](https://www.dpmms.cam.ac.uk/~ik355/PAPERS/thesis.pdf), recurrence chapter and strong-approximation proof.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "stationary-ergodic-sources-and-universal-coding",
+      "to": "iid-lossless-source-coding-and-the-aep",
+      "faithful": true,
+      "note": "The supplier's IID information and rates use nats. This batch explicitly converts to bits and independently proves the general-process AEP coding criterion; it does not apply an IID theorem to dependent sources. Strict rate inequalities and support conventions agree."
+    },
+    {
+      "from": "stationary-ergodic-sources-and-universal-coding",
+      "to": "measure-theoretic-information-and-conditioning",
+      "faithful": true,
+      "note": "The supplier defines finite-target conditional entropy using a supplied regular conditional law and natural logarithms. Local finite-past ratios and martingale limits supply the conditional probabilities used here; the separate invariant conditional-expectation identification retains AC."
+    },
+    {
+      "from": "stationary-ergodic-sources-and-universal-coding",
+      "to": "prefix-codes-and-finite-lossless-coding",
+      "faithful": true,
+      "note": "Both interfaces use binary lengths and explicit nats-to-bits conversion. The supplier requires nonempty codewords; this batch explicitly introduces its own singleton known-block empty-word convention and handles that case separately."
+    },
+    {
+      "from": "rate-distortion-and-lossy-source-coding",
+      "to": "stationary-ergodic-sources-and-universal-coding",
+      "faithful": true,
+      "note": "The downstream stationary rate-distortion theorem cites the entropy-rate limit and ergodic SMB with their actual finite-alphabet hypotheses. Its source, reproduction, and joint processes are stationary ergodic where SMB is applied; information identities are converted to bits."
+    }
+  ]
+}

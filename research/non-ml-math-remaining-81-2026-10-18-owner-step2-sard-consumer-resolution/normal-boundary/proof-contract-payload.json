@@ -1,0 +1,806 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-transverse-preimage-for-manifolds-with-boundary",
+    "prop-transverse-preimage-carries-a-pulled-back-normal-structure",
+    "lem-normal-bundle-of-the-zero-locus-of-a-transverse-section"
+  ],
+  "contracts": {
+    "thm-transverse-preimage-for-manifolds-with-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-embedded-submanifold-and-slice-chart",
+          "source_section": "Definition",
+          "quote": "Let $M^m$ be a smooth manifold, let $k\\in\\mathbb N$ satisfy $0\\le k\\le m$,\nand let $S\\subseteq M$. One says that $S$ is an **embedded $k$-dimensional\nsubmanifold** of $M$ when for every $p\\in S$ there\nis a smooth chart $\\varphi:U\\to\\varphi(U)\\subseteq\\mathbb R^m$ with $p\\in U$\nsuch that\n\n$$\\varphi(S\\cap U)=\\varphi(U)\\cap(\\mathbb R^k\\times\\{0\\}).$$\n\nSuch a chart is a **slice chart** for $S$ at $p$. The topology on $S$ is the\nsubspace topology inherited from $M$ ([[def-subspace-topology-top]]).\n\nThe next lemma proves that the restricted slice charts define a smooth\n$k$-manifold structure on $S$.",
+          "uses": []
+        },
+        {
+          "fact": "F2",
+          "source": "def-a-smooth-map-transverse-to-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $F:M\\to N$ be smooth, and let $Z\\subseteq N$ be an embedded submanifold.\nThen $F$ is **transverse to $Z$**, written $F\\pitchfork Z$, when for every\n$p\\in F^{-1}(Z)$,\n\n$$dF_p(T_pM)+T_{F(p)}Z=T_{F(p)}N.$$\n\nIf $F(M)\\cap Z=\\varnothing$, this condition is vacuous, so $F\\pitchfork Z$\nstill holds.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary",
+          "source_section": "Definition",
+          "quote": "A boundary chart is a homeomorphism $\\varphi:U\\to V\\subseteq\\mathbb H^n$, where $U\\subseteq M$ is open and $V$ is relatively open. Two charts are compatible if each transition map is smooth in the local-extension sense. A smooth atlas is a compatible covering atlas; its smooth structure is its maximal compatible atlas.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-transverse-preimage-theorem",
+          "source_section": "Statement",
+          "quote": "Let $F:M^m\\to N^n$ be smooth and let $Z\\subseteq N$ be an embedded submanifold\nof codimension $c$, and suppose $F\\pitchfork Z$. If $c\\le m$, then\n$F^{-1}(Z)$ is an embedded submanifold of $M$ of codimension $c$ (possibly empty). If $c>m$,\nthen $F^{-1}(Z)=\\varnothing$. In the first case, for each $p\\in F^{-1}(Z)$,\n\n$$ T_pF^{-1}(Z)=\\{v\\in T_pM:dF_p(v)\\in T_{F(p)}Z\\}. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-neat-submanifold-of-a-manifold-with-boundary",
+          "source_section": "Definition",
+          "quote": "An embedded submanifold with boundary $S\\subseteq M$ is **neat** when $S\\cap\\partial M=\\partial S$ and $S$ is transverse to $\\partial M$. Properness and closedness are not part of the term.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-neat-submanifolds-have-boundary-adapted-slice-charts",
+          "source_section": "Statement",
+          "quote": "A neat $k$-submanifold $S$ of an $n$-manifold with boundary has boundary charts simultaneously straightening $S$ and $\\partial M$; in particular its induced boundary is $S\\cap\\partial M$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-smooth-function-on-a-relatively-open-subset-of-a-half-space",
+          "source_section": "Definition",
+          "quote": "If $U$ is relatively open in $\\mathbb H^n$, a map $f:U\\to\\mathbb R^q$ is **smooth** when every $p\\in U$ has an Euclidean-open neighbourhood $W$ of $p$ and a smooth $F:W\\to\\mathbb R^q$ with $F=f$ on $W\\cap U$. This is a local condition; maps into a relatively open half-space are smooth when their Euclidean coordinate functions are.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-smooth-map-between-manifolds-with-boundary",
+          "source_section": "Definition",
+          "quote": "A continuous map $f:M\\to N$ is smooth if, for every pair of boundary charts around $p$ and $f(p)$, the coordinate representative $\\psi\\circ f\\circ\\varphi^{-1}$ is smooth on a relatively open subset of a half-space in the local-extension sense.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "source_section": "Statement",
+          "quote": "In ZF, let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be smooth, and let $a\\in U$. If $Df(a)$ is invertible, then there are open neighbourhoods $a\\in V\\subseteq U$ and $f(a)\\in W$ such that $f|_V:V\\to W$ is a diffeomorphism. Writing $g=(f|_V)^{-1}$,\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\nNo choice axiom is used.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-topological-manifold-with-boundary",
+          "source_section": "Definition",
+          "quote": "An $n$-dimensional topological manifold with boundary is a Hausdorff, second-countable space $M$ for which every $p\\in M$ has a neighbourhood homeomorphic to a relatively open subset of $\\mathbb H^n$. Dimension $0$ is allowed, using $\\mathbb H^0=\\mathbb R^0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-smooth-immersion-and-embedding-for-manifolds-with-boundary",
+          "source_section": "Definition",
+          "quote": "A smooth $f:M\\to N$ is an immersion if $df_p:T_pM\\to T_{f(p)}N$ is injective for every $p$, using the full tangent spaces. It is an embedding if it is an immersion and a homeomorphism onto its image. No neatness, properness, closed-image, or boundary-preservation condition is included.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-euclidean-upper-half-space-and-its-boundary",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$, put $\\mathbb H^n=\\{(x^1,\\ldots,x^n)\\in\\mathbb R^n:x^n\\ge0\\}$, with the subspace topology, and put $\\partial\\mathbb H^n=\\{x\\in\\mathbb H^n:x^n=0\\}$. Put $\\mathbb H^0=\\mathbb R^0$ and $\\partial\\mathbb H^0=\\varnothing$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Dimension and boundary rank bounds",
+          "inputs": [
+            "F7]",
+            "so no negative-dimensional boundary space is used. Now assume $c\\le n$. If $P$ is empty",
+            "[F7] gives its embedded $(n-c)$-manifold structure with empty boundary and all pointwise conclusions vacuous. Otherwise the following local construction is at actual points of $P$. [F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "Fix $p\\in F^{-1}(Z)$ and put $z:=F(p)$; write $n:=\\dim W$ and $n':=\\dim N$",
+          "inputs": [
+            "F2]. At boundary points",
+            "on the face $\\{x_n=0\\}$ the same computation with $T_q\\partial W$ in place of $T_qW$ is surjective by the transversality of $F|_{\\partial W}$. [F1",
+            "F2",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "(Interior points.) If $p\\in F^{-1}(Z)\\cap\\operatorname{int}W$, then $F|_{\\operatorname{int}W}$ is smooth and transverse to $Z$ on the boundaryless manifold $\\operatorname{int}W$, so",
+          "inputs": [
+            "F4] shows that $F^{-1}(Z)\\cap\\operatorname{int}W$ is an embedded submanifold of $\\operatorname{int}W$ of codimension $c$ with the stated tangent space; in the chart $x$ this exhibits $F^{-1}(Z)$ near $p$ as a coordinate subspace $\\{x^{n-c+1}=\\dots=x^n=0\\}$ intersected with the chart",
+            "so $p$ is an interior point of $F^{-1}(Z)$. [F1",
+            "F4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "(Boundary points.) If $p\\in F^{-1}(Z)\\cap\\partial W$, then in the coordinates of step 1.2 the differential $dG_p:\\mathbb R^n\\to\\mathbb R^c$ is surjective and, by the face part of step 1.2, its restriction to the face $\\mathbb R^{n-1}\\times\\{0\\}$ is surjective",
+          "inputs": [
+            "F6] the components extend smoothly to an open neighbourhood of $p$ in $\\mathbb R^n$",
+            "so the inverse function theorem makes $\\Phi$ a local diffeomorphism at $p$. Since $\\Phi$ has last coordinate $x_n$",
+            "it carries $\\{G=0",
+            "\\ x_n\\ge0\\}=F^{-1}(Z)$ near $p$ onto the relatively open subset $\\{0\\}\\times\\mathbb R^{n-1-c}\\times[0",
+            "\\infty)$ of the half-space $\\mathbb H^{n-c}$; therefore $F^{-1}(Z)$ is near $p$ an embedded $(n-c)$-dimensional submanifold with boundary",
+            "with boundary exactly $F^{-1}(Z)\\cap\\partial W$ and tangent space $\\{v\\in T_pW:dF_p(v)\\in T_zZ\\}$",
+            "and the chart $\\Phi$ simultaneously straightens the preimage and the face. [F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "(Assembly.) The charts produced in 2.1 and 2.2 cover $F^{-1}(Z)$; any two of them are restrictions of charts of $W$, so their transitions are restrictions of smooth half-space transitions and the induced structure is a smooth structure on $F^{-1}(Z)$ making it an embedded submanifold with boundary of $W$, of dimension $n-c=\\dim W-\\operatorname{codim}Z$, with the tangent formula and with interior $F^{-1}(Z)\\cap\\operatorname{int}W$ and boundary $F^{-1}(Z)\\cap\\partial W=(F|_{\\partial W})^{-1}(Z)$",
+          "inputs": [
+            "F5]. If $n-c=0$",
+            "boundary points are impossible because the face differential would have rank $c=n$ on an $(n-1)$-dimensional space. The preimage is discrete",
+            "lies in the interior",
+            "and has empty boundary. The case $n<c$ was disposed of by the rank obstruction in step 1.1 before any local chart construction. The construction uses the charts named at each point and no choice principle; the atlas of the preimage is the set of all charts so obtained. [F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The excessive-codimension case is proved empty before any expected-dimensional chart; any normal identification is the unique empty bundle map over the explicitly stated nonnegative empty base."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Rank/codimension zero and ambient dimension zero are explicit; no negative-dimensional boundary is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The half-slice construction includes one-dimensional preimages and single normal directions; the actual invertible minor is chosen only at a point where the rank bound holds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A non-surjective differential is excluded by the actual transversality hypothesis; r=n has empty source-boundary intersection, and r>n has empty full preimage."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Boundary restriction and tangent/normal compatibility are retained in half-slice coordinates; empty restrictions are the unique empty map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite local coordinate/minor choices occur. Existing countable-choice assumptions are retained where stated; no extra choice is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication/construction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ]
+    },
+    "prop-transverse-preimage-carries-a-pulled-back-normal-structure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-disk-bundle-sphere-bundle-and-thom-space",
+          "source_section": "Definition",
+          "quote": "For a supplied metric $h$ on a finite-rank real vector bundle $E\\to B$, write\n$$D_h(E)=\\{v\\in E:\\|v\\|_h\\leq1\\},\\qquad S_h(E)=\\{v\\in E:\\|v\\|_h=1\\},\\qquad \\operatorname{Th}_h(E)=D_h(E)/S_h(E).$$\nThis is exactly [[def-disk-sphere-and-thom-space-of-a-metric-vector-bundle]], with the same based quotient convention $X/\\varnothing=X_+$. This item supplies DT notation, not a second definition. Quotients are formed in compactly generated Hausdorff spaces; the compact smooth bases of the geometric applications need no change of topology.\n\nThe complement of the Thom basepoint is the image of the open disk bundle $D_h^\\circ(E)=\\{v:\\|v\\|_h<1\\}$: in the quotient where $S_h(E)$ is collapsed, the set $D_h^\\circ(E)=D_h(E)\\setminus S_h(E)$ is saturated and the quotient map restricts to a homeomorphism of it onto the complement of the basepoint; in the case $S_h(E)=\\varnothing$ the complement of the added point is $D_h(E)=D_h^\\circ(E)$. The fiberwise radial expansion\n$$e(v)=\\frac{v}{\\sqrt{1+\\|v\\|_h^2}}\\qquad(v\\in E),$$\nwith inverse $w\\mapsto w/\\sqrt{1-\\|w\\|_h^2}$ on $D_h^\\circ(E)$, is a homeomorphism $E\\to D_h^\\circ(E)$. When $E$ is smooth, transport its smooth structure along this homeomorphism to the nonbasepoint stratum. If $h$ is also smooth, both formulas are smooth in the original bundle coordinates, so this is the usual open-submanifold smooth structure on $D_h^\\circ(E)$. A merely continuous metric does not imply that regularity; smooth tubular applications below supply a smooth metric. No smooth manifold structure at the Thom basepoint is presumed, and in rank zero the expansion is the identity $B\\to D_h^\\circ(E)=E$.",
+          "uses": []
+        },
+        {
+          "fact": "F2",
+          "source": "lem-transversality-is-equivalent-to-surjectivity-on-the-normal-quotient",
+          "source_section": "Statement",
+          "quote": "Let $F:M\\to N$ be smooth, let $Z\\subseteq N$ be an embedded submanifold, and let\n$p\\in F^{-1}(Z)$ with $y=F(p)$. Then $F$ is transverse to $Z$ at $p$ if and\nonly if the composite\n\n$$ T_pM\\xrightarrow{dF_p}T_yN\\twoheadrightarrow T_yN/T_yZ $$\n\nis surjective.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-transverse-preimage-theorem",
+          "source_section": "Statement",
+          "quote": "Let $F:M^m\\to N^n$ be smooth and let $Z\\subseteq N$ be an embedded submanifold\nof codimension $c$, and suppose $F\\pitchfork Z$. If $c\\le m$, then\n$F^{-1}(Z)$ is an embedded submanifold of $M$ of codimension $c$ (possibly empty). If $c>m$,\nthen $F^{-1}(Z)=\\varnothing$. In the first case, for each $p\\in F^{-1}(Z)$,\n\n$$ T_pF^{-1}(Z)=\\{v\\in T_pM:dF_p(v)\\in T_{F(p)}Z\\}. $$",
+          "uses": []
+        },
+        {
+          "fact": "F4",
+          "source": "def-pullback-vector-bundle-and-pullback-section",
+          "source_section": "Definition",
+          "quote": "Given a continuous map $f:X\\to Y$ and a vector bundle $q:E\\to Y$, its **pullback** is\n\n$$f^*E=\\{(x,e)\\in X\\times E:f(x)=q(e)\\},\\qquad (x,e)\\longmapsto x,$$\n\nwith the subspace topology of [[def-subspace-topology-top]] and fiberwise\noperations inherited from $E$. A linear chart\n$q^{-1}(U)\\cong U\\times\\mathbb F^n$ pulls back to\n$f^{-1}(U)\\times\\mathbb F^n$, so this is a vector bundle in the sense of\n[[def-real-and-complex-topological-vector-bundle]].\n\nThe map $(x,e)\\mapsto e$ is the canonical bundle map $f^*E\\to E$ over $f$\nin the sense of [[def-vector-bundle-map-section-subbundle-and-isomorphism]].\nIf $s:Y\\to E$ is a section, its pullback is\n\n$$f^*s:X\\longrightarrow f^*E,\\qquad x\\longmapsto(x,s(f(x))).$$",
+          "uses": []
+        },
+        {
+          "fact": "F5",
+          "source": "prop-normal-and-conormal-bundles-are-smooth-vector-bundles",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. If $S\\subseteq M$ is an embedded submanifold, then the normal bundle\n$\\nu(S)=TM|_S/TS$ and the conormal bundle $N^*S\\subseteq T^*M|_S$ are smooth\nvector bundles over $S$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "source_section": "Statement",
+          "quote": "In ZF, let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be smooth, and let $a\\in U$. If $Df(a)$ is invertible, then there are open neighbourhoods $a\\in V\\subseteq U$ and $f(a)\\in W$ such that $f|_V:V\\to W$ is a diffeomorphism. Writing $g=(f|_V)^{-1}$,\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\nNo choice axiom is used.",
+          "uses": []
+        },
+        {
+          "fact": "F7",
+          "source": "def-smooth-function-on-a-relatively-open-subset-of-a-half-space",
+          "source_section": "Definition",
+          "quote": "If $U$ is relatively open in $\\mathbb H^n$, a map $f:U\\to\\mathbb R^q$ is **smooth** when every $p\\in U$ has an Euclidean-open neighbourhood $W$ of $p$ and a smooth $F:W\\to\\mathbb R^q$ with $F=f$ on $W\\cap U$. This is a local condition; maps into a relatively open half-space are smooth when their Euclidean coordinate functions are.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-neat-submanifold-of-a-manifold-with-boundary",
+          "source_section": "Definition",
+          "quote": "An embedded submanifold with boundary $S\\subseteq M$ is **neat** when $S\\cap\\partial M=\\partial S$ and $S$ is transverse to $\\partial M$. Properness and closedness are not part of the term.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $S\\subseteq M$ be an embedded submanifold.\n\nEquip $S$ with the smooth structure supplied by\n[[lem-slice-chart-restrictions-form-a-smooth-atlas]]. The inclusion\n$i:S\\hookrightarrow M$ is then a smooth embedding by\n[[prop-the-inclusion-of-an-embedded-submanifold-is-a-smooth-embedding]], so its\ndifferential is defined. Identify $T_pS$ with the linear subspace\n$di_p(T_pS)\\subseteq T_pM$. Here the notation\n$$TM|_S:=\\coprod_{p\\in S}T_pM,\\qquad T^*M|_S:=\\coprod_{p\\in S}T_p^*M$$\nmeans the fibrewise restriction of these disjoint unions to base points in\n$S$; it does not invoke restriction to an open subset.\n\nThe **normal-bundle set** of $S$ in $M$ is the fibrewise quotient\n\n$$\\nu(S):=\\coprod_{p\\in S}T_pM/T_pS.$$\n\nThe **conormal-bundle set** of $S$ in $M$ is the fibrewise annihilator\n\n$$N^*S:=\\{\\xi\\in T^*M|_S:\\xi|_{T_pS}=0\\text{ for the base point }p\\}.$$\n\nBoth are intrinsic constructions attached to the embedding $S\\hookrightarrow M$.\nThe next proposition supplies their smooth vector-bundle structures.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-topological-manifold-without-boundary",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$. For $n\\ge1$, put $\\mathbb R^n:=\\prod_{k<n}\\mathbb R$ with its\nusual topology; for $n=0$ put $\\mathbb R^0:=\\{0\\}$, the one-point space. A\n**topological $n$-manifold without boundary** (or briefly an **$n$-manifold**) is\na topological space $M$ satisfying:\n\n1. $M$ is Hausdorff ([[def-hausdorff-space]]);\n2. $M$ is second countable ([[def-second-countable-space]]);\n3. $M$ is **locally Euclidean of dimension $n$**: every $p\\in M$ has an open\n   neighbourhood $U\\subseteq M$ homeomorphic to an open subset of $\\mathbb R^n$\n   ([[def-homeomorphism-and-open-maps]]).\n\nThe empty space satisfies all three conditions vacuously, so $M=\\varnothing$ is\nan $n$-manifold for every $n$; this degenerate instance is kept, and statements\nabout nonempty manifolds name the hypothesis. In dimension zero, condition 3\nforces the one-point neighbourhoods of points to be open singletons, so a\n$0$-manifold is exactly a discrete second-countable space with at most countably\nmany points.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-smooth-fibre-bundle-and-local-trivialization",
+          "source_section": "Definition",
+          "quote": "Let $M$ and $E$ be smooth manifolds, let $F$ be a smooth manifold, and let\n$\\pi:E\\to M$ be a smooth surjection.\n\nA **smooth local trivialization with model fibre $F$** on an open set\n$U\\subseteq M$ is a diffeomorphism\n\n$$\\Phi: \\pi^{-1}(U)\\to U\\times F$$\n\nover $U$, meaning that $\\operatorname{pr}_1\\circ\\Phi=\\pi$.\n\nThe map $\\pi:E\\to M$ is a **smooth fibre bundle with model fibre $F$** when\nthere is an open cover $(U_\\alpha)$ of $M$ such that each restriction\n$\\pi^{-1}(U_\\alpha)\\to U_\\alpha$ admits a smooth local trivialization.\n\nThus each point of $M$ has a neighborhood on which $E$ is smoothly identified\nwith a product over the identity on the base.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "source_section": "Definition",
+          "quote": "Let $\\pi:E\\to M$ be a smooth fibre bundle and let $r\\in\\mathbb N$.\n\nA **smooth vector bundle of rank $r$** is a smooth fibre bundle for which every\nfibre $E_p:=\\pi^{-1}(p)$ is an $r$-dimensional real vector space and there is an\nopen cover $(U_\\alpha)$ of $M$ such that each restriction\n$\\pi^{-1}(U_\\alpha)\\to U_\\alpha$ admits a local trivialization\n\n$$\\Phi_\\alpha: \\pi^{-1}(U_\\alpha)\\to U_\\alpha\\times \\mathbb R^r$$\n\nwhose restriction on each fibre $E_p$ is a linear isomorphism\n$E_p\\to\\mathbb R^r$.\n\nThe fibre over $p\\in M$ is called the **fibre at $p$**. A vector bundle is\n**trivial** when it is globally isomorphic over $M$ to the product bundle\n$M\\times\\mathbb R^r\\to M$.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-vector-bundle-map-over-a-smooth-base-map",
+          "source_section": "Definition",
+          "quote": "Let $\\pi_E:E\\to M$ and $\\pi_F:F\\to N$ be smooth vector bundles, and let\n$f:M\\to N$ be a smooth map.\n\nA **vector bundle map over $f$** is a smooth map $\\Phi:E\\to F$ such that\n$\\pi_F\\circ\\Phi=f\\circ\\pi_E$ and, for every $p\\in M$, the restriction\n$\\Phi|_{E_p}:E_p\\to F_{f(p)}$ is linear.\n\nWhen $f=\\operatorname{id}_M$, one also says that $\\Phi$ is a bundle map **over\nthe identity**.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-vector-bundle-map-section-subbundle-and-isomorphism",
+          "source_section": "Definition",
+          "quote": "For vector bundles $p:E\\to X$ and $p':E'\\to Y$, a **vector-bundle map\nover** $f:X\\to Y$ is a continuous map $T:E\\to E'$ satisfying\n$p'T=fp$ whose restriction $E_x\\to E'_{f(x)}$ is linear for every $x$.\nA **bundle isomorphism** is an invertible bundle map over the identity of the\nbase.\n\nA **section** is a continuous $s:X\\to E$ with $ps=\\operatorname{id}_X$.\nIt is **nowhere zero** if $s(x)\\ne0_x$ for all $x$.\n\nA subset $E'\\subseteq E$ is a **rank-$r$ vector subbundle** when each\n$E'_x$ is an $r$-dimensional linear subspace and every point has a bundle\nchart carrying $E'|_U$ to\n$U\\times(\\mathbb F^r\\times\\{0\\})\\subseteq U\\times\\mathbb F^n$.\nThus constant fiber dimension alone does not replace local triviality.\n\nA sequence\n$$0\\longrightarrow E'\\xrightarrow{i}E\\xrightarrow{q}E''\\longrightarrow0$$\nis **short exact over $X$** when its maps lie over $\\operatorname{id}_X$,\nthe sequence on each fiber is exact, and the kernel and image have the stated\nsubbundle structures. These conventions refine\n[[def-real-and-complex-topological-vector-bundle]].",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-tangent-and-cotangent-bundles-extend-over-a-manifold-boundary",
+          "source_section": "Statement",
+          "quote": "For a smooth $n$-manifold with boundary, derivations of smooth boundary germs form an $n$-dimensional tangent space at every point, and the usual tangent and cotangent bundles have smooth boundary-chart transition maps.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-euclidean-upper-half-space-and-its-boundary",
+          "source_section": "Definition",
+          "quote": "For $n\\ge1$, put $\\mathbb H^n=\\{(x^1,\\ldots,x^n)\\in\\mathbb R^n:x^n\\ge0\\}$, with the subspace topology, and put $\\partial\\mathbb H^n=\\{x\\in\\mathbb H^n:x^n=0\\}$. Put $\\mathbb H^0=\\mathbb R^0$ and $\\partial\\mathbb H^0=\\varnothing$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Around $x\\in P$ choose a bundle chart of $E$ over $U\\subseteq B$ and use",
+          "inputs": [
+            "F1] to view it as a smooth chart of the target near $f(x)$; on a sufficiently small neighbourhood of $x$ in $W$ write $f=(g",
+            "h)$ with $h$ valued in $\\mathbb R^r$ and $g$ valued in $U$",
+            "so that $P\\cap W=h^{-1}(0)$ and the normal space of the zero section at $f(x)$ is identified with the fibre $E_{g(x)}=\\mathbb R^r$. The quotient of the target tangent space by the zero-section tangent space is the fibre",
+            "and the composite of $df_x$ with this quotient is exactly $dh_x$. The linear quotient calculation proved in [F2] identifies transversality with its surjectivity. This calculation uses only full tangent spaces and linear maps",
+            "so it also applies at a source boundary point; it does not invoke a boundaryless preimage theorem there. If another trivialization replaces $h$ by $T(g(x))h(x)$ with $T$ a smooth invertible matrix function",
+            "then at $h=0$ its derivative is $T(g(x))\\",
+            "dh_x$",
+            "so surjectivity is chart-independent and the transition acts on the normal quotient by the same matrix. [F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "If $x\\in P$, step 1.1 makes $dh_x:T_xX\\to\\mathbb R^r$ surjective, so $r\\le n$",
+          "inputs": [
+            "F9] the unique map between them is a smooth bundle isomorphism",
+            "with the specified rank-$r$ empty bundle model; all transition and boundary-restriction formulas are vacuous. For $r\\le n$ the empty preimage can have dimension $n-r$; for $r>n$ use its empty zero-dimensional structure and make no codimension claim. Hence it remains to construct the nonempty local normal identifications. [F9",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Restricted to $W\\cap\\operatorname{Int}X$, the map $f$ takes values in the smooth stratum and, by step 1.1, is transverse to the embedded zero section there",
+          "inputs": [
+            "F3] therefore makes the interior part of $P$ an embedded submanifold of codimension $r$ of that open set",
+            "with $T_xP=\\{v\\in T_xX:df_x(v)\\in T_{f(x)}0_B\\}=\\ker dh_x$. Since the interior points of $P$ are covered by these open sets",
+            "the interior part of $P$ is an embedded submanifold with the asserted tangent space. [F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The differential $dh_x$ factors through the quotient to a linear isomorphism $T_xX/T_xP\\to E_{g(x)}$",
+          "inputs": [
+            "F5]. [F4",
+            "F5",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "If $n=0$, the ambient boundary is empty by",
+          "inputs": [
+            "F10]. Otherwise let $x\\in P\\cap\\partial X$. Boundary transversality makes a map from an $(n-1)$-dimensional space onto $\\mathbb R^r$",
+            "so $r\\le n-1$; the case $r=n$ therefore has no such point. If $r=0$",
+            "the fibre map has its sole value in $\\mathbb R^0$",
+            "so $P$ is locally all of $X$",
+            "its normal quotient is the zero bundle",
+            "and all boundary identifications are the identity on zero fibres. For $r>0$ use boundary coordinates $(u",
+            "t)$ with $t\\ge0$. By [F7]",
+            "the fibre coordinate $h(u",
+            "t)$ extends smoothly across $t=0$ near $x$. Boundary transversality says $d_u h(u",
+            "0)$ is surjective at $x$; hence",
+            "after reordering the $n-1$ tangential coordinates",
+            "an $r\\times r$ minor in the first $r$ coordinates of $u$ is invertible. The map $(u",
+            "t)\\mapsto(h(u",
+            "t)",
+            "u_{r+1}",
+            "\\dots",
+            "u_{n-1}",
+            "t)$ has invertible derivative",
+            "so [F6] makes it a local diffeomorphism. Its last coordinate is exactly the original $t$",
+            "so it maps the source half-space to $\\{t\\ge0\\}$",
+            "without assuming an arbitrary nonlinear image of a half-space is linear. In these coordinates $P$ is precisely $\\{h=0",
+            "t\\ge0\\}$",
+            "with boundary $\\{h=0",
+            "t=0\\}$",
+            "and its tangent space is $\\ker dh$. These charts prove neateness. In these half-slice coordinates the tangent bundle of $P$ is spanned by the free $u$ and $t$ coordinate vectors",
+            "and the classes of the $r$ coordinate vectors in the $h$ directions form a smooth frame for $TX|_P/TP$ by [F10]. This constructs its smooth normal-bundle structure directly at boundary points",
+            "rather than applying the boundaryless supplier [F5] outside its contract. The same local normal quotient map as step 4.1 is consequently a smooth bundle isomorphism at boundary points",
+            "and $T_x\\partial X/T_x\\partial P\\to T_xX/T_xP$ is an isomorphism since $dh|_{T_x\\partial X}$ is surjective. Thus its restriction is exactly the boundary normal identification. The empty boundary restriction is the unique map handled in step 2.1. [F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "derivation-6.1",
+          "step": "6.1",
+          "claim": "For $r>0$ and nonempty $B$, the zero section is closed in $D(E)$ and disjoint from $S(E)$; its saturation under the sphere collapse is itself, so the quotient topology makes its image closed",
+          "inputs": [
+            "F1] uses the based empty-subspace quotient $B/\\varnothing=B_+$",
+            "so $B$ and its added isolated basepoint are separate clopen pieces. Thus $0_B$ is closed for every rank",
+            "and $P=f^{-1}(0_B)$ is closed and therefore compact for compact $X$; in rank zero it is also open. For empty $B$",
+            "$0_B=P=\\varnothing$; the asserted normal structure is the unique empty bundle isomorphism of step 2.1",
+            "while all pointwise conclusions are vacuous. No choice beyond [A1] is used. [F1",
+            "F9",
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The excessive-codimension case is proved empty before any expected-dimensional chart; any normal identification is the unique empty bundle map over the explicitly stated nonnegative empty base."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Rank/codimension zero and ambient dimension zero are explicit; no negative-dimensional boundary is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The half-slice construction includes one-dimensional preimages and single normal directions; the actual invertible minor is chosen only at a point where the rank bound holds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A non-surjective differential is excluded by the actual transversality hypothesis; r=n has empty source-boundary intersection, and r>n has empty full preimage."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Boundary restriction and tangent/normal compatibility are retained in half-slice coordinates; empty restrictions are the unique empty map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite local coordinate/minor choices occur. Existing countable-choice assumptions are retained where stated; no extra choice is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication/construction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ]
+    },
+    "lem-normal-bundle-of-the-zero-locus-of-a-transverse-section": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-the-zero-section-is-a-smooth-embedding",
+          "source_section": "Statement",
+          "quote": "For a smooth vector bundle $\\pi:E\\to M$, the zero section\n$0_M:M\\to E$, $p\\mapsto 0_p$, is a smooth embedding.",
+          "uses": []
+        },
+        {
+          "fact": "F2",
+          "source": "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $S\\subseteq M$ be an embedded submanifold.\n\nEquip $S$ with the smooth structure supplied by\n[[lem-slice-chart-restrictions-form-a-smooth-atlas]]. The inclusion\n$i:S\\hookrightarrow M$ is then a smooth embedding by\n[[prop-the-inclusion-of-an-embedded-submanifold-is-a-smooth-embedding]], so its\ndifferential is defined. Identify $T_pS$ with the linear subspace\n$di_p(T_pS)\\subseteq T_pM$. Here the notation\n$$TM|_S:=\\coprod_{p\\in S}T_pM,\\qquad T^*M|_S:=\\coprod_{p\\in S}T_p^*M$$\nmeans the fibrewise restriction of these disjoint unions to base points in\n$S$; it does not invoke restriction to an open subset.\n\nThe **normal-bundle set** of $S$ in $M$ is the fibrewise quotient\n\n$$\\nu(S):=\\coprod_{p\\in S}T_pM/T_pS.$$\n\nThe **conormal-bundle set** of $S$ in $M$ is the fibrewise annihilator\n\n$$N^*S:=\\{\\xi\\in T^*M|_S:\\xi|_{T_pS}=0\\text{ for the base point }p\\}.$$\n\nBoth are intrinsic constructions attached to the embedding $S\\hookrightarrow M$.\nThe next proposition supplies their smooth vector-bundle structures.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-a-vector-bundle-quotient-by-a-subbundle-is-a-smooth-vector-bundle",
+          "source_section": "Statement",
+          "quote": "If $S\\subseteq E$ is a smooth rank-$k$ subbundle of a smooth rank-$r$ vector\nbundle $E\\to M$, then the fibrewise quotient $E/S\\to M$ is a smooth rank-$(r-k)$\nvector bundle.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-constant-rank-kernels-and-images-of-bundle-maps-over-one-base-are-subbundles",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi:E\\to F$ be a smooth vector bundle map over $\\operatorname{id}_M$, and\nassume that the fibre rank of $\\Phi_p:E_p\\to F_p$ is the same integer $k$ for\nevery $p\\in M$. Then $\\ker\\Phi$ is a smooth vector subbundle of $E$ and\n$\\operatorname{im}\\Phi$ is a smooth vector subbundle of $F$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle",
+          "source_section": "Definition",
+          "quote": "Let $\\pi:E\\to M$ be a smooth fibre bundle and let $r\\in\\mathbb N$.\n\nA **smooth vector bundle of rank $r$** is a smooth fibre bundle for which every\nfibre $E_p:=\\pi^{-1}(p)$ is an $r$-dimensional real vector space and there is an\nopen cover $(U_\\alpha)$ of $M$ such that each restriction\n$\\pi^{-1}(U_\\alpha)\\to U_\\alpha$ admits a local trivialization\n\n$$\\Phi_\\alpha: \\pi^{-1}(U_\\alpha)\\to U_\\alpha\\times \\mathbb R^r$$\n\nwhose restriction on each fibre $E_p$ is a linear isomorphism\n$E_p\\to\\mathbb R^r$.\n\nThe fibre over $p\\in M$ is called the **fibre at $p$**. A vector bundle is\n**trivial** when it is globally isomorphic over $M$ to the product bundle\n$M\\times\\mathbb R^r\\to M$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-transverse-preimage-theorem",
+          "source_section": "Statement",
+          "quote": "Let $F:M^m\\to N^n$ be smooth and let $Z\\subseteq N$ be an embedded submanifold\nof codimension $c$, and suppose $F\\pitchfork Z$. If $c\\le m$, then\n$F^{-1}(Z)$ is an embedded submanifold of $M$ of codimension $c$ (possibly empty). If $c>m$,\nthen $F^{-1}(Z)=\\varnothing$. In the first case, for each $p\\in F^{-1}(Z)$,\n\n$$ T_pF^{-1}(Z)=\\{v\\in T_pM:dF_p(v)\\in T_{F(p)}Z\\}. $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-a-smooth-map-transverse-to-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $F:M\\to N$ be smooth, and let $Z\\subseteq N$ be an embedded submanifold.\nThen $F$ is **transverse to $Z$**, written $F\\pitchfork Z$, when for every\n$p\\in F^{-1}(Z)$,\n\n$$dF_p(T_pM)+T_{F(p)}Z=T_{F(p)}N.$$\n\nIf $F(M)\\cap Z=\\varnothing$, this condition is vacuous, so $F\\pitchfork Z$\nstill holds.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-pullback-vector-bundle-as-a-fibre-product",
+          "source_section": "Definition",
+          "quote": "Let $\\pi:E\\to M$ be a smooth vector bundle and let $f:N\\to M$ be a smooth map.\nThe **pullback set** of $E$ along $f$ is\n\n$$f^*E:=\\{(q,e)\\in N\\times E:f(q)=\\pi(e)\\}.$$\n\nIts projection to $N$ is $(q,e)\\mapsto q$, and its fibre over $q\\in N$ is\ncanonically identified with $E_{f(q)}$. The following theorem shows that this\nset carries a natural smooth vector-bundle structure.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-the-pullback-fibre-product-is-a-smooth-vector-bundle",
+          "source_section": "Statement",
+          "quote": "If $\\pi:E\\to M$ is a smooth rank-$r$ vector bundle and $f:N\\to M$ is smooth,\nthen the fibre product $f^*E$ is a smooth rank-$r$ vector bundle over $N$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-vector-bundle-map-over-a-smooth-base-map",
+          "source_section": "Definition",
+          "quote": "Let $\\pi_E:E\\to M$ and $\\pi_F:F\\to N$ be smooth vector bundles, and let\n$f:M\\to N$ be a smooth map.\n\nA **vector bundle map over $f$** is a smooth map $\\Phi:E\\to F$ such that\n$\\pi_F\\circ\\Phi=f\\circ\\pi_E$ and, for every $p\\in M$, the restriction\n$\\Phi|_{E_p}:E_p\\to F_{f(p)}$ is linear.\n\nWhen $f=\\operatorname{id}_M$, one also says that $\\Phi$ is a bundle map **over\nthe identity**.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. For an embedded submanifold, any two of the orientations of the ambient tangent bundle, tangent bundle, and transverse normal bundle determine the third.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-topological-manifold-without-boundary",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$. For $n\\ge1$, put $\\mathbb R^n:=\\prod_{k<n}\\mathbb R$ with its\nusual topology; for $n=0$ put $\\mathbb R^0:=\\{0\\}$, the one-point space. A\n**topological $n$-manifold without boundary** (or briefly an **$n$-manifold**) is\na topological space $M$ satisfying:\n\n1. $M$ is Hausdorff ([[def-hausdorff-space]]);\n2. $M$ is second countable ([[def-second-countable-space]]);\n3. $M$ is **locally Euclidean of dimension $n$**: every $p\\in M$ has an open\n   neighbourhood $U\\subseteq M$ homeomorphic to an open subset of $\\mathbb R^n$\n   ([[def-homeomorphism-and-open-maps]]).\n\nThe empty space satisfies all three conditions vacuously, so $M=\\varnothing$ is\nan $n$-manifold for every $n$; this degenerate instance is kept, and statements\nabout nonempty manifolds name the hypothesis. In dimension zero, condition 3\nforces the one-point neighbourhoods of points to be open singletons, so a\n$0$-manifold is exactly a discrete second-countable space with at most countably\nmany points.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-smooth-fibre-bundle-and-local-trivialization",
+          "source_section": "Definition",
+          "quote": "Let $M$ and $E$ be smooth manifolds, let $F$ be a smooth manifold, and let\n$\\pi:E\\to M$ be a smooth surjection.\n\nA **smooth local trivialization with model fibre $F$** on an open set\n$U\\subseteq M$ is a diffeomorphism\n\n$$\\Phi: \\pi^{-1}(U)\\to U\\times F$$\n\nover $U$, meaning that $\\operatorname{pr}_1\\circ\\Phi=\\pi$.\n\nThe map $\\pi:E\\to M$ is a **smooth fibre bundle with model fibre $F$** when\nthere is an open cover $(U_\\alpha)$ of $M$ such that each restriction\n$\\pi^{-1}(U_\\alpha)\\to U_\\alpha$ admits a smooth local trivialization.\n\nThus each point of $M$ has a neighborhood on which $E$ is smoothly identified\nwith a product over the identity on the base.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-vector-bundle-map-section-subbundle-and-isomorphism",
+          "source_section": "Definition",
+          "quote": "For vector bundles $p:E\\to X$ and $p':E'\\to Y$, a **vector-bundle map\nover** $f:X\\to Y$ is a continuous map $T:E\\to E'$ satisfying\n$p'T=fp$ whose restriction $E_x\\to E'_{f(x)}$ is linear for every $x$.\nA **bundle isomorphism** is an invertible bundle map over the identity of the\nbase.\n\nA **section** is a continuous $s:X\\to E$ with $ps=\\operatorname{id}_X$.\nIt is **nowhere zero** if $s(x)\\ne0_x$ for all $x$.\n\nA subset $E'\\subseteq E$ is a **rank-$r$ vector subbundle** when each\n$E'_x$ is an $r$-dimensional linear subspace and every point has a bundle\nchart carrying $E'|_U$ to\n$U\\times(\\mathbb F^r\\times\\{0\\})\\subseteq U\\times\\mathbb F^n$.\nThus constant fiber dimension alone does not replace local triviality.\n\nA sequence\n$$0\\longrightarrow E'\\xrightarrow{i}E\\xrightarrow{q}E''\\longrightarrow0$$\nis **short exact over $X$** when its maps lie over $\\operatorname{id}_X$,\nthe sequence on each fiber is exact, and the kernel and image have the stated\nsubbundle structures. These conventions refine\n[[def-real-and-complex-topological-vector-bundle]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The zero section $s_0:M\\to E$ is a smooth embedding",
+          "inputs": [
+            "F1]",
+            "so by [F2] its normal bundle is the quotient $\\nu_{s_0}=TE|_{s_0(M)}/T(s_0(M))$. The canonical splitting $TE|_{s_0(M)}\\cong TM\\oplus E$ along the zero section",
+            "whose vertical summand is the fibre direction",
+            "identifies this quotient with $E$ as smooth bundles over $M$ by [F3] and [F4]; moreover $s_0(M)$ is closed in $E$ because in every bundle chart its complement is the open set of nonzero vectors. [F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The zero section has codimension $r$ by the bundle coordinates in step 1.1",
+          "inputs": [
+            "F6]",
+            "the $r>n$ branch of [F5] gives $Z=\\varnothing$ in that range. Its two normal-bundle sets are then empty: the normal quotient is the empty coproduct and $E|_Z$ is the empty pullback. By [F10] their unique map is a smooth bundle isomorphism with the specified rank-$r$ empty-bundle model; use the empty zero-dimensional structure on $Z$ without asserting codimension $r$. The same empty-map conclusion holds if $Z=\\varnothing$ for $r\\le n$",
+            "now with its allowed dimension $n-r$. In either case $Z$ is closed and all pointwise tangent and orientation statements are vacuous. For $r=0$",
+            "the bundle has one zero vector in every fibre",
+            "so $s=s_0$",
+            "$Z=M$ and the normal identification is the canonical map between zero bundles. It remains to handle $1\\le r\\le n$ at actual zeros. [F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F10",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "In this dimension range,",
+          "inputs": [
+            "F5] makes $Z=s^{-1}(s_0(M))$ an embedded submanifold of codimension $r$; it is closed because $s_0(M)$ is closed and $s$ is continuous",
+            "so $\\dim Z=n-r$. The quotient map $D^vs:TM|_Z\\to E|_Z$ has kernel $TZ$ by [F5] and is surjective by transversality. In bundle charts it is the derivative of the local section components at their zeros",
+            "hence smooth; it induces a smooth fibrewise isomorphism $TM|_Z/TZ\\to E|_Z$",
+            "whose inverse is smooth by the inverse-matrix formula. Here $E|_Z$ is the pullback along the inclusion $Z\\hookrightarrow M$",
+            "not along the section $s:M\\to E$. Combining with step 1.1 gives the canonical isomorphism $\\nu_Z\\cong E|_Z$ of smooth bundles over $Z$. [F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Orientation clause",
+          "inputs": [
+            "F9] applied with the total-space orientation in which a positive tangent basis of $s_0(M)$ followed by a positive fibre basis is positive (the tangent-first convention of this pair). Pullback along $s$ preserves this ordered determinant-line comparison because $ds$ maps the normal directions of the transverse preimage isomorphically onto the normal directions of $s_0(M)$ by [F5] and [F8]",
+            "and the induced orientation of $Z$ in $M$ is the one for which a positive tangent basis of $Z$ followed by a positive normal basis is positive in $M$ [F9]. Hence the orientation of $\\nu_Z$ induced from $M$ and $Z$ corresponds to the supplied fibre orientation of $E|_Z$; over $\\mathbb F_2$ the fibre orientation data at each actual point are canonical. No nonzero global generator is asserted over the empty base. [F5",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The excessive-codimension case is proved empty before any expected-dimensional chart; any normal identification is the unique empty bundle map over the explicitly stated nonnegative empty base."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Rank/codimension zero and ambient dimension zero are explicit; no negative-dimensional boundary is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The half-slice construction includes one-dimensional preimages and single normal directions; the actual invertible minor is chosen only at a point where the rank bound holds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A non-surjective differential is excluded by the actual transversality hypothesis; r=n has empty source-boundary intersection, and r>n has empty full preimage."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Boundary restriction and tangent/normal compatibility are retained in half-slice coordinates; empty restrictions are the unique empty map."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finite local coordinate/minor choices occur. Existing countable-choice assumptions are retained where stated; no extra choice is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication/construction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ]
+    }
+  }
+}

@@ -3,6 +3,7 @@ id: def-oscillation
 kind: definition
 title: "The oscillation $\\omega_f(S) = \\sup\\{\\,|f(x) - f(y)| : x, y \\in S\\,\\}$ of $f$ on a set and the oscillation $\\omega_f(c) = \\inf_{\\delta > 0} \\omega_f(A \\cap N_\\delta(c))$ at a point, both taken in the extended reals"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,11 @@ landmark: true
 short: "oscillation $\\omega_f$"
 verification:
   precheck: n/a
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-09
-    scope: published-audit
-    delegated_by: owner
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/def-oscillation.json
 sources:
   scraped: []
   references:

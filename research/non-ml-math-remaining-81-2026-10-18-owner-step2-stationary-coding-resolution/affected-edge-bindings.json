@@ -1,0 +1,436 @@
+[
+  {
+    "consumer": "alg-lz78-incremental-prefix-code",
+    "supplier": "thm-lz78-prefix-code-lossless",
+    "exact_export": {
+      "section": "Statement",
+      "text": "Proves the specified parser terminates on every finite input, its ordinary complete phrases are distinct, and its finite-block LZ78 record stream is prefix-free and decodes the original block exactly, including the explicit terminal symbol."
+    },
+    "actual_consumer_facts": [],
+    "actual_proof_uses": [],
+    "other_textual_references": [
+      "Ordinary inserted phrases are dictionary entries; the final phrase containing $\\#$ is an output record but is not a dictionary entry. Termination, distinctness of ordinary complete phrases, losslessness, the prefix property and the exact index-length bound are proved in [[thm-lz78-prefix-code-lossless]]."
+    ],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "cor-ergodic-shannon-mcmillan-breiman",
+    "supplier": "thm-componentwise-shannon-mcmillan-breiman",
+    "exact_export": {
+      "section": "Statement",
+      "text": "For every stationary finite-alphabet source, proves -n^{-1}log_2 P(X_0^{n-1}) converges almost surely and in L1 to the invariant Birkhoff limit of infinite-past information density, with mean equal to the entropy rate in bits."
+    },
+    "actual_consumer_facts": [
+      "[F1] [[thm-componentwise-shannon-mcmillan-breiman]]: normalized block self-information converges almost surely to an invariant random variable of mean $h$."
+    ],
+    "actual_proof_uses": [
+      "1.1 By [F1], the normalized block information converges almost surely to an invariant $G^*$ with $E G^*=h$. Since the source is ergodic, [F2] makes $G^*$ a constant almost surely. [F1, F2, given]",
+      "2.1 The expectation of a constant equals that constant, so $G^*=h$ almost surely. Therefore $-n^{-1}\\log_2P(X_0^{n-1})\\to h$ almost surely. For $h=0$ this says the normalized information tends to zero; no positive-rate assumption is used. [F1, step 1.1, algebra] \u220e\n"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "cor-fixed-rate-lossless-coding-ams-ergodic",
+    "supplier": "def-finite-block-source-code",
+    "exact_export": {
+      "section": "Definition",
+      "text": "Consider a finite nonempty alphabet $\\mathcal A$, a positive integer $n$, a probability law $P_n$ on $\\mathcal A^n$, and a rate $R\\ge0$ in bits per symbol. A rate-$R$ fixed-length block code consists of a nonempty message set $M\\subseteq\\{0,1\\}^{\\lfloor nR\\rfloor}$, an encoder $e:\\mathcal A^n\\to M$, and a decoder $d:M\\to\\mathcal A^n$. Thus $|M|\\le2^{\\lfloor nR\\rfloor}$ and every message is a binary word of the same length.\n\nThe code is lossless when $d(e(x))=x$ for every $x\\in\\mathcal A^n$; equivalently, $e$ is injective and $d$ is its inverse on the image. For a code with block error, define its success set by $S=\\{x\\in\\mathcal A^n:d(e(x))=x\\}$ and its error probability by $P_n(S^c)$. The encoder restricted to $S$ is injective, so $|S|\\le|M|\\le 2^{\\lfloor nR\\rfloor}$."
+    },
+    "actual_consumer_facts": [],
+    "actual_proof_uses": [],
+    "other_textual_references": [
+      "**Given:** AC; a finite-alphabet AMS source with ergodic stationary mean and entropy rate $h$; and a target rate $R\\ge0$ with the fixed-length code convention of [[def-finite-block-source-code]]."
+    ],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "cor-fixed-rate-lossless-coding-ams-ergodic",
+    "supplier": "lem-aep-implies-fixed-rate-lossless-coding",
+    "exact_export": {
+      "section": "Statement",
+      "text": "For any finite-alphabet source with -n^{-1}log2 P(X^n) converging in probability to h, proves vanishing block error is achievable for R>h and impossible for R<h."
+    },
+    "actual_consumer_facts": [
+      "[F2] [[lem-aep-implies-fixed-rate-lossless-coding]]: an information AEP gives the fixed-rate achievability and converse.\n[F3] [[thm-dominated-convergence]]: bounded almost-surely convergent indicators converge in expectation."
+    ],
+    "actual_proof_uses": [
+      "2.1 Apply [F2]. Every rate $R>h$ admits fixed-length codes with block error tending to zero, and for every $R<h$ every fixed-length code sequence has success probability tending to zero. This conclusion concerns the AMS source law; no stationarity assumption on that law is added. [F1, F2, step 1.1] \u220e\n"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "cor-fixed-rate-lossless-coding-ams-ergodic",
+    "supplier": "thm-ams-ergodic-information-aep",
+    "exact_export": {
+      "section": "Statement",
+      "text": "Assume AC. For a finite-alphabet AMS source whose stationary mean is ergodic with bit entropy rate h, the normalized self-information -n^{-1}log_2 P(X_0^{n-1}) converges P-almost surely to h."
+    },
+    "actual_consumer_facts": [
+      "[F1] [[thm-ams-ergodic-information-aep]]: normalized self-information under the AMS block law converges almost surely, hence in probability, to $h$."
+    ],
+    "actual_proof_uses": [
+      "1.1 Almost-sure convergence in [F1] implies convergence in probability by [F3] applied to the bounded deviation indicators. [A1, F1, F3, given, algebra]",
+      "2.1 Apply [F2]. Every rate $R>h$ admits fixed-length codes with block error tending to zero, and for every $R<h$ every fixed-length code sequence has success probability tending to zero. This conclusion concerns the AMS source law; no stationarity assumption on that law is added. [F1, F2, step 1.1] \u220e\n"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "cor-fixed-rate-lossless-coding-stationary-ergodic",
+    "supplier": "cor-ergodic-shannon-mcmillan-breiman",
+    "exact_export": {
+      "section": "Statement",
+      "text": "For a stationary ergodic finite-alphabet source, the componentwise information-rate limit is the constant entropy rate."
+    },
+    "actual_consumer_facts": [
+      "[F1] [[cor-ergodic-shannon-mcmillan-breiman]]: $-n^{-1}\\log_2P(X_0^{n-1})\\to h$ almost surely, hence in probability."
+    ],
+    "actual_proof_uses": [
+      "1.1 Almost-sure convergence in [F1] implies convergence in probability: for each $\\epsilon>0$, the indicators of deviations by more than $\\epsilon$ tend almost surely to zero and are bounded by one, so [F3] makes their expectations tend to zero. [F1, F3, given, algebra]",
+      "2.1 Apply [F2] with this AEP limit. For every $R>h$ there are rate-$R$ codes with block error tending to zero; for every $R<h$, every rate-$R$ code sequence has success probability tending to zero. At $R=h$ no boundary conclusion follows from the theorem. [F1, F2, step 1.1] \u220e\n"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "cor-fixed-rate-lossless-coding-stationary-ergodic",
+    "supplier": "def-finite-block-source-code",
+    "exact_export": {
+      "section": "Definition",
+      "text": "Consider a finite nonempty alphabet $\\mathcal A$, a positive integer $n$, a probability law $P_n$ on $\\mathcal A^n$, and a rate $R\\ge0$ in bits per symbol. A rate-$R$ fixed-length block code consists of a nonempty message set $M\\subseteq\\{0,1\\}^{\\lfloor nR\\rfloor}$, an encoder $e:\\mathcal A^n\\to M$, and a decoder $d:M\\to\\mathcal A^n$. Thus $|M|\\le2^{\\lfloor nR\\rfloor}$ and every message is a binary word of the same length.\n\nThe code is lossless when $d(e(x))=x$ for every $x\\in\\mathcal A^n$; equivalently, $e$ is injective and $d$ is its inverse on the image. For a code with block error, define its success set by $S=\\{x\\in\\mathcal A^n:d(e(x))=x\\}$ and its error probability by $P_n(S^c)$. The encoder restricted to $S$ is injective, so $|S|\\le|M|\\le 2^{\\lfloor nR\\rfloor}$."
+    },
+    "actual_consumer_facts": [],
+    "actual_proof_uses": [],
+    "other_textual_references": [
+      "**Given:** A stationary ergodic finite-alphabet source of entropy rate $h$, a target rate $R\\ge0$, and fixed-length binary block codes as in [[def-finite-block-source-code]]."
+    ],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "cor-fixed-rate-lossless-coding-stationary-ergodic",
+    "supplier": "lem-aep-implies-fixed-rate-lossless-coding",
+    "exact_export": {
+      "section": "Statement",
+      "text": "For any finite-alphabet source with -n^{-1}log2 P(X^n) converging in probability to h, proves vanishing block error is achievable for R>h and impossible for R<h."
+    },
+    "actual_consumer_facts": [
+      "[F2] [[lem-aep-implies-fixed-rate-lossless-coding]]: information convergence in probability gives vanishing error above $h$ and vanishing success below $h$.\n[F3] [[thm-dominated-convergence]]: bounded almost-surely convergent indicators converge in expectation."
+    ],
+    "actual_proof_uses": [
+      "2.1 Apply [F2] with this AEP limit. For every $R>h$ there are rate-$R$ codes with block error tending to zero; for every $R<h$, every rate-$R$ code sequence has success probability tending to zero. At $R=h$ no boundary conclusion follows from the theorem. [F1, F2, step 1.1] \u220e\n"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "cor-smb-limit-is-conditional-entropy-under-ac",
+    "supplier": "thm-componentwise-shannon-mcmillan-breiman",
+    "exact_export": {
+      "section": "Statement",
+      "text": "For every stationary finite-alphabet source, proves -n^{-1}log_2 P(X_0^{n-1}) converges almost surely and in L1 to the invariant Birkhoff limit of infinite-past information density, with mean equal to the entropy rate in bits."
+    },
+    "actual_consumer_facts": [
+      "[F1] [[thm-componentwise-shannon-mcmillan-breiman]]: the block information limit is the Birkhoff limit of $g_\\infty$."
+    ],
+    "actual_proof_uses": [
+      "1.1 The function $g_\\infty$ is integrable by [F1]. Apply [F2] to its Birkhoff limit $G^*$ on the probability-preserving shift: $G^*$ has an $\\mathcal I$-measurable representative and $\\int_EG^*\\,dP=\\int_Eg_\\infty\\,dP$ for every $E\\in\\mathcal I$. [A1, F1, F2, F4, given]",
+      "2.1 These are exactly the defining tests in [F3] for $E[g_\\infty\\mid\\mathcal I]$. Hence $G^*=E[g_\\infty\\mid\\mathcal I]$ almost surely, and the componentwise SMB limit has this description by [F1]. AC is used only through [F2]; the componentwise SMB theorem itself does not use this identification. [F1, F2, F3, step 1.1, algebra] \u220e\n"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "ex-iid-and-markov-source-entropy-rates",
+    "supplier": "thm-lz78-stationary-expected-rate",
+    "exact_export": {
+      "section": "Statement",
+      "text": "For every stationary finite-alphabet source, the expected explicit terminated LZ78 code length per source symbol converges to the entropy rate in bits, without an ergodicity assumption."
+    },
+    "actual_consumer_facts": [
+      "[F4] [[thm-lz78-stationary-expected-rate]]: the expected explicit LZ78 rate converges to the stationary entropy rate without ergodicity."
+    ],
+    "actual_proof_uses": [
+      "1.1 For fair IID bits, every length-$n$ word has probability $2^{-n}$; hence $H_n=n$ and $h=1$ bit per symbol. The shift is stationary by product-law invariance, and [F4] gives expected LZ78 rate tending to one. [F1, F2, F4, given, algebra]",
+      "1.2 For the Markov source, take stationary law $\\pi=(1/2,1/2)$ and transition matrix $K$ with diagonal entries $3/4$ and off-diagonal entries $1/4$; direct multiplication gives $\\pi K=\\pi$. Its length-$n$ block probabilities are $$P(X_0^{n-1}=x_0^{n-1})=\\tfrac12\\prod_{i=1}^{n-1}K_{x_{i-1},x_i}.$$ Expanding the finite entropy sum with this factorization gives $$H_n=H(X_0)+\\sum_{i=1}^{n-1}H(X_i\\mid X_{i-1})=1+(n-1)H_2(1/4),$$ where $H_2(p)=-p\\log_2p-(1-p)\\log_2(1-p)$. Thus $h=H_2(1/4)\\approx0.811278$. The stationary LZ78 expected-rate theorem [F4] gives the same limiting rate without an ergodicity assumption. [F1, F2, F3, F4, algebra]"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "ex-lz78-parse-with-explicit-terminator",
+    "supplier": "alg-lz78-incremental-prefix-code",
+    "exact_export": {
+      "section": "Definition",
+      "text": "**Input:** A finite alphabet $\\mathcal A$ of size $q\\ge2$, an integer $n\\ge0$, a word $x_0^{n-1}\\in\\mathcal A^n$ (with $x_0^{-1}$ denoting the empty word when $n=0$), and a terminator $\\#$ not in $\\mathcal A$. Fix an injective $s_q:=\\lceil\\log_2(q+1)\\rceil$-bit symbol field for $\\mathcal A\\cup\\{\\#\\}$. The alphabet convention is that of [[def-finite-alphabet-stationary-source]]. **Output, when the procedure terminates:** a finite terminated binary record stream; prefix codes use [[def-finite-support-binary-prefix-code]].\n\n1. Start with dictionary $D[0]=\\epsilon$ and unread text $x_0^{n-1}\\#$. While text remains, let $w$ be the longest dictionary word prefixing the unread text, let $i$ be its dictionary index, and let $c$ be the next symbol. Output the record $(i,c)$ and remove the prefix $wc$ from the unread text. If $c\\ne\\#$, append $wc$ as the next dictionary entry; if $c=\\#$, stop without inserting the terminal phrase.\n\n2. Serialize each parent index $i\\ge0$ by the Elias-delta code of $m=i+1$. Put $b=\\lfloor\\log_2m\\rfloor+1$ and $d=\\lfloor\\log_2b\\rfloor+1$. Emit $d-1$ zeros, then the $d$-bit binary expansion of $b$, then the final $b-1$ bits of the $b$-bit binary expansion of $m$. Append the fixed-width symbol field for $c$. Concatenate these records in parser order, including the final marker record.\n\n3. To decode an encoded block, start with dictionary $D[0]=\\epsilon$. Count the leading zeros before the first $1$ of an index header as $z$ and set $d=z+1$. Read the following $d-1$ bits; together with that first $1$, these are the $d$-bit binary expansion of $b$. Read the next $b-1$ bits and prepend $1$ to recover $m$; put $i=m-1$. Read the next $s_q$ bits as $c$, and emit $D[i]c$. Append that phrase to the dictionary when $c\\ne\\#$, then read the next record. At the first $c=\\#$, stop without insertion and remove the terminal marker from the decoded text. The decoder is specified on valid encoded streams and is not supplied the source length or record count.\n\nOrdinary inserted phrases are dictionary entries; the final phrase containing $\\#$ is an output record but is not a dictionary entry. Termination, distinctness of ordinary complete phrases, losslessness, the prefix property and the exact index-length bound are proved in [[thm-lz78-prefix-code-lossless]]."
+    },
+    "actual_consumer_facts": [
+      "[F1] [[alg-lz78-incremental-prefix-code]]: output $(i,c)$ appends dictionary word $D[i]c$; the terminator stops parsing and is not added."
+    ],
+    "actual_proof_uses": [
+      "1.1 Applying the longest-dictionary-prefix rule successively gives phrases $0,1,00,10,100,1\\#$. The records are respectively $(0,0),(0,1),(1,0),(2,0),(4,0),(2,\\#)$; after the first five records the dictionary indices $1$ through $5$ name $0,1,00,10,100$. The sixth record terminates without insertion. [F1, given, algebra]",
+      "2.1 The dictionary trie has root index $0$, edges $0$ and $1$ to nodes $1$ and $2$, then edge $0$ from node $1$ to node $3$, edge $0$ from node $2$ to node $4$, and edge $0$ from node $4$ to node $5$. The dashed edge marked $\\#$ from node $2$ is the final output phrase only; it is not a dictionary node. Each node label gives its dictionary index and phrase; each edge label is the symbol appended to the parent's phrase, and the root phrase is empty. The diagram's ordinary nodes are exactly the phrases inserted after the first five records; the terminal edge is drawn dashed because [F1] does not insert it. [F1, step 1.1, construct]",
+      "3.1 Starting with the root, the decoder expands the listed records to the same six phrases; concatenating them yields $0100101001\\#$. It stops at $\\#$, so deleting the marker recovers the input exactly, as guaranteed by [F2]. [F1, F2, step 1.1, step 2.1, algebra] \u220e"
+    ],
+    "other_textual_references": [
+      "**Given:** The LZ78 parser of [[alg-lz78-incremental-prefix-code]], input $0100101001$, and terminal symbol $\\#$."
+    ],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "ex-lz78-parse-with-explicit-terminator",
+    "supplier": "thm-lz78-prefix-code-lossless",
+    "exact_export": {
+      "section": "Statement",
+      "text": "Proves the specified parser terminates on every finite input, its ordinary complete phrases are distinct, and its finite-block LZ78 record stream is prefix-free and decodes the original block exactly, including the explicit terminal symbol."
+    },
+    "actual_consumer_facts": [
+      "[F2] [[thm-lz78-prefix-code-lossless]]: the explicit records decode uniquely, with the terminator ending the codeword."
+    ],
+    "actual_proof_uses": [
+      "3.1 Starting with the root, the decoder expands the listed records to the same six phrases; concatenating them yields $0100101001\\#$. It stops at $\\#$, so deleting the marker recovers the input exactly, as guaranteed by [F2]. [F1, F2, step 1.1, step 2.1, algebra] \u220e"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "lem-aep-implies-fixed-rate-lossless-coding",
+    "supplier": "def-finite-block-source-code",
+    "exact_export": {
+      "section": "Definition",
+      "text": "Consider a finite nonempty alphabet $\\mathcal A$, a positive integer $n$, a probability law $P_n$ on $\\mathcal A^n$, and a rate $R\\ge0$ in bits per symbol. A rate-$R$ fixed-length block code consists of a nonempty message set $M\\subseteq\\{0,1\\}^{\\lfloor nR\\rfloor}$, an encoder $e:\\mathcal A^n\\to M$, and a decoder $d:M\\to\\mathcal A^n$. Thus $|M|\\le2^{\\lfloor nR\\rfloor}$ and every message is a binary word of the same length.\n\nThe code is lossless when $d(e(x))=x$ for every $x\\in\\mathcal A^n$; equivalently, $e$ is injective and $d$ is its inverse on the image. For a code with block error, define its success set by $S=\\{x\\in\\mathcal A^n:d(e(x))=x\\}$ and its error probability by $P_n(S^c)$. The encoder restricted to $S$ is injective, so $|S|\\le|M|\\le 2^{\\lfloor nR\\rfloor}$."
+    },
+    "actual_consumer_facts": [
+      "[F2] [[def-finite-block-source-code]]: a rate-$R$ code has message set $M\\subseteq\\{0,1\\}^{\\lfloor nR\\rfloor}$, encoder $e:\\mathcal A^n\\to M$, decoder $d:M\\to\\mathcal A^n$, and $e$ injective on its success set."
+    ],
+    "actual_proof_uses": [
+      "2.1 For all sufficiently large $n$, $|T_n|\\le2^{\\lfloor nR\\rfloor}$, since $R-h-\\epsilon>0$. Fix an enumeration of the finite alphabet $\\mathcal A$ once, and let $a_0$ be its first symbol. For each such $n$, order $T_n$ lexicographically, take $M_n=\\{0,1\\}^{\\lfloor nR\\rfloor}$ in lexicographic order, and map the $j$th typical block to the $j$th binary word. Define $e_n$ by this assignment on $T_n$ and by $e_n(x)=0^{\\lfloor nR\\rfloor}$ otherwise. Define $d_n$ to return each typical block on its assigned message and $a_0^n$ on all remaining messages. This is a rate-$R$ code in the sense of [F2], and every block in $T_n$ is decoded correctly. Its error is at most $P(X^n\\notin T_n)\\to0$. For the finitely many earlier $n$, take $e_n$ constant at the all-zero message and $d_n$ constant at $a_0^n$. [F2, step 1.1, algebra]",
+      "3.1 Let $0\\le R<h$ and choose $\\epsilon>0$ with $R+\\epsilon<h$. For any rate-$R$ code, its success set $S_n$ has at most $2^{\\lfloor nR\\rfloor}$ words by [F2]. Split it according to whether $I_n(x)>n(R+\\epsilon)$. The probability of successful words in that part is at most $2^{nR}2^{-n(R+\\epsilon)}=2^{-n\\epsilon}$, while the other part has total probability tending to zero by the AEP. Thus success probability tends to zero. At $R=h$ neither conclusion is asserted. [F1, F2, given, algebra] \u220e\n"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "lem-lz78-distinct-parse-ziv-inequality",
+    "supplier": "alg-lz78-incremental-prefix-code",
+    "exact_export": {
+      "section": "Definition",
+      "text": "**Input:** A finite alphabet $\\mathcal A$ of size $q\\ge2$, an integer $n\\ge0$, a word $x_0^{n-1}\\in\\mathcal A^n$ (with $x_0^{-1}$ denoting the empty word when $n=0$), and a terminator $\\#$ not in $\\mathcal A$. Fix an injective $s_q:=\\lceil\\log_2(q+1)\\rceil$-bit symbol field for $\\mathcal A\\cup\\{\\#\\}$. The alphabet convention is that of [[def-finite-alphabet-stationary-source]]. **Output, when the procedure terminates:** a finite terminated binary record stream; prefix codes use [[def-finite-support-binary-prefix-code]].\n\n1. Start with dictionary $D[0]=\\epsilon$ and unread text $x_0^{n-1}\\#$. While text remains, let $w$ be the longest dictionary word prefixing the unread text, let $i$ be its dictionary index, and let $c$ be the next symbol. Output the record $(i,c)$ and remove the prefix $wc$ from the unread text. If $c\\ne\\#$, append $wc$ as the next dictionary entry; if $c=\\#$, stop without inserting the terminal phrase.\n\n2. Serialize each parent index $i\\ge0$ by the Elias-delta code of $m=i+1$. Put $b=\\lfloor\\log_2m\\rfloor+1$ and $d=\\lfloor\\log_2b\\rfloor+1$. Emit $d-1$ zeros, then the $d$-bit binary expansion of $b$, then the final $b-1$ bits of the $b$-bit binary expansion of $m$. Append the fixed-width symbol field for $c$. Concatenate these records in parser order, including the final marker record.\n\n3. To decode an encoded block, start with dictionary $D[0]=\\epsilon$. Count the leading zeros before the first $1$ of an index header as $z$ and set $d=z+1$. Read the following $d-1$ bits; together with that first $1$, these are the $d$-bit binary expansion of $b$. Read the next $b-1$ bits and prepend $1$ to recover $m$; put $i=m-1$. Read the next $s_q$ bits as $c$, and emit $D[i]c$. Append that phrase to the dictionary when $c\\ne\\#$, then read the next record. At the first $c=\\#$, stop without insertion and remove the terminal marker from the decoded text. The decoder is specified on valid encoded streams and is not supplied the source length or record count.\n\nOrdinary inserted phrases are dictionary entries; the final phrase containing $\\#$ is an output record but is not a dictionary entry. Termination, distinctness of ordinary complete phrases, losslessness, the prefix property and the exact index-length bound are proved in [[thm-lz78-prefix-code-lossless]]."
+    },
+    "actual_consumer_facts": [],
+    "actual_proof_uses": [],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "lem-lz78-distinct-parse-ziv-inequality",
+    "supplier": "thm-lz78-prefix-code-lossless",
+    "exact_export": {
+      "section": "Statement",
+      "text": "Proves the specified parser terminates on every finite input, its ordinary complete phrases are distinct, and its finite-block LZ78 record stream is prefix-free and decodes the original block exactly, including the explicit terminal symbol."
+    },
+    "actual_consumer_facts": [
+      "[F1] [[thm-lz78-prefix-code-lossless]]: ordinary complete LZ78 phrases are distinct, and the terminal phrase contains the unique marker."
+    ],
+    "actual_proof_uses": [
+      "1.1 For each phrase start $i$, let $u_i\\in\\mathcal B^k$ be its preceding context, using $s$ for the initial boundary; write $\\ell_i=|y_i|$. For each pair $(\\ell,u)$ let $c_{\\ell,u}$ count phrases of that length and context. Markov factorization gives $Q(y_0^{m-1}\\mid s)=\\prod_iQ(y_i\\mid u_i)$. [F1, F2, given, algebra]",
+      "2.1 Group the logarithm by $(\\ell,u)$ with $c_{\\ell,u}>0$; groups of count zero contribute zero. Concavity of $\\log_2$ gives $$\\sum_{i:(\\ell_i,u_i)=(\\ell,u)}\\log_2Q(y_i\\mid u)\\le c_{\\ell,u}\\log_2\\left(\\frac1{c_{\\ell,u}}\\sum_iQ(y_i\\mid u)\\right).$$ Within this group the phrase strings are distinct by the given parsing hypothesis (supplied by [F1] for the LZ78 specialization), so their conditional probabilities sum to at most one; therefore the group contribution is at most $-c_{\\ell,u}\\log_2c_{\\ell,u}$. [F1, step 1.1, algebra]",
+      "3.1 Summing all groups and negating yields the Ziv inequality $$-\\log_2Q(y_0^{m-1}\\mid s)\\ge\\sum_{\\ell,u}c_{\\ell,u}\\log_2c_{\\ell,u}.$$ For the augmented LZ78 specialization, the terminal phrase has the unique symbol $\\#$ and cannot equal any ordinary phrase; [F1] supplies distinctness of the remaining phrases. For the empty parsing, both sides are zero. Zero kernel probabilities on an observed word make the left side $+\\infty$, and the inequality is then immediate. [F2, step 2.1, algebra] \u220e\n"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-ams-ergodic-information-aep",
+    "supplier": "cor-ergodic-shannon-mcmillan-breiman",
+    "exact_export": {
+      "section": "Statement",
+      "text": "For a stationary ergodic finite-alphabet source, the componentwise information-rate limit is the constant entropy rate."
+    },
+    "actual_consumer_facts": [
+      "[F4] [[cor-ergodic-shannon-mcmillan-breiman]]: under $\\bar P$, normalized cylinder self-information converges almost surely to $h$."
+    ],
+    "actual_proof_uses": [
+      "3.1 For each integer $m$, use the fixed-$k$ limits for $k\\le m$ and both measures to choose a deterministic $N(m)$, increasing with $m$, such that $$P\\left(\\sup_{n\\ge N(m),\\,k\\le m}b^P_{n,k}>1/m\\right)+\\bar P\\left(\\sup_{n\\ge N(m),\\,k\\le m}b^{\\bar P}_{n,k}>1/m\\right)<2^{-m}.$$ Let $k(n)=\\max\\{m:N(m)\\le n,\\ m\\le\\sqrt n\\}$, taking $k(n)=1$ for the finitely many initial $n$ where the set is empty. Then $k(n)\\to\\infty$, $k(n)/n\\to0$, and [F5] implies that the prefix-to-suffix log-probability boundary divided by $n$ tends to zero almost surely under both $P$ and $\\bar P$. In particular, the $\\bar P$ SMB limit [F4] transfers from the length-$n$ prefix to the length-$(n-k(n))$ suffix; its exceptional event is in the future-tail sigma-algebra: for every fixed $j$, all sufficiently large $n$ have $k(n)\\ge j$, so the suffix terms depend only on coordinates from $j$ onward. Thus [F3] gives $$-n^{-1}\\log_2\\bar P(X_{k(n)}^{n-1})\\to h\\quad P\\text{-a.s.}$$ [F1, F3, F4, F5, step 2.1, algebra]",
+      "5.1 Step 3.1 makes the normalized log probability of the P-prefix differ from that of its suffix by a quantity tending to zero; step 4.1 makes the P- and $\\bar P$-suffix log probabilities have the same normalized limit; and step 3.1 identifies the latter as $-h$. Therefore $$-\\frac1n\\log_2P(X_0^{n-1})\\longrightarrow h\\quad P\\text{-almost surely}.$$ The argument includes $h=0$ and makes no claim of an exponential convergence rate. AC is used only through [A1], [F3]. [A1, F1, F3, F4, step 3.1, step 4.1, algebra] \u220e\n"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-componentwise-shannon-mcmillan-breiman",
+    "supplier": "lem-triangular-information-averages",
+    "exact_export": {
+      "section": "Statement",
+      "text": "If nonnegative integrable-envelope functions $g_k$ converge $\\mu$-almost everywhere to $g$, proves the triangular averages of $(g_k-g)\\circ T^k$ tend to zero $\\mu$-almost everywhere and in $L^1(\\mu)$ on a finite measure-preserving system."
+    },
+    "actual_consumer_facts": [
+      "[F2] [[lem-triangular-information-averages]]: under the integrable envelope, $n^{-1}\\sum_{i<n}g_i(T^i x)$ and $n^{-1}\\sum_{i<n}g_\\infty(T^i x)$ have the same almost-sure limit."
+    ],
+    "actual_proof_uses": [
+      "2.1 By [F3]\u2013[F4], $A_ng_\\infty=n^{-1}\\sum_{i<n}g_\\infty(T^iX)$ converges almost surely and in $L^1$ to an invariant random variable $G^*$. By [F2] and step 1.1, the difference between $-n^{-1}\\log_2P(X_0^{n-1})$ and $A_ng_\\infty$ tends to zero almost surely and in $L^1$. This proves both asserted modes of convergence. [F1, F2, F3, F4, step 1.1]"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-it-stationary-ergodic-rate-distortion-bounded-distortion",
+    "supplier": "cor-ergodic-shannon-mcmillan-breiman",
+    "exact_export": {
+      "section": "Statement",
+      "text": "For a stationary ergodic finite-alphabet source, the componentwise information-rate limit is the constant entropy rate."
+    },
+    "actual_consumer_facts": [
+      "[F5] [[cor-ergodic-shannon-mcmillan-breiman]]: for a stationary ergodic finite-alphabet process, normalized block self-information converges almost surely to its entropy rate."
+    ],
+    "actual_proof_uses": [
+      "3.1 Fix a jointly stationary ergodic pair $(X,\\widehat X)$ supplied by step 2.2. By [F8], each of the source, reproduction, and joint-pair normalized block entropies has a limit; [F9] therefore gives convergence of $n^{-1}I_2(X_0^{n-1};\\widehat X_0^{n-1})$ to a finite bit rate $\\bar I\\le\\limsup n^{-1}I_2(X_0^{n-1};\\widehat X_0^{n-1})<r$. By [F5] applied to those three stationary ergodic processes, their normalized negative log probabilities in bits converge almost surely to their entropy rates. Subtracting the three limits shows that the information density $$ i_n(x^n;\\hat x^n):=\\log_2\\frac{P_{\\widehat X^n|X^n}(\\hat x^n|x^n)}{P_{\\widehat X^n}(\\hat x^n)} $$ divided by $n$ converges almost surely to $h(X)+h(\\widehat X)-h(X,\\widehat X)=\\bar I$, with each entropy rate in bits. [F2, F5, F8, F9, step 2.2, given, algebra]"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-lz77-phrase-length-entropy-rate",
+    "supplier": "cor-ergodic-shannon-mcmillan-breiman",
+    "exact_export": {
+      "section": "Statement",
+      "text": "For a stationary ergodic finite-alphabet source, the componentwise information-rate limit is the constant entropy rate."
+    },
+    "actual_consumer_facts": [
+      "[F1] [[cor-ergodic-shannon-mcmillan-breiman]]: $-n^{-1}\\log_2P(X_0^{n-1})\\to h$ almost surely."
+    ],
+    "actual_proof_uses": [
+      "1.1 Fix $\\varepsilon>0$ and put $S_n=\\{w:P(X_0^{n-1}=w)\\ge2^{-n(h+\\varepsilon/2)}\\}$. By [F1], the current block belongs to $S_n$ with probability tending to one, and $|S_n|\\le2^{n(h+\\varepsilon/2)}$ because its word probabilities sum to at most one. For $w\\in S_n$, let $E_w=\\{X_0^{n-1}=w\\}$. On $E_w$, $R_n$ is the first positive return to $E_w$ under the inverse shift, which is also measure-preserving and ergodic. Hence [F2] gives $\\int_{E_w}R_n\\,dP=1$. On $E_w$, $1_{\\{R_n>M\\}}\\le R_n/M$ for $M=2^{n(h+\\varepsilon)}$, so integrating and using [F2] yields $P(E_w\\cap\\{R_n>M\\})\\le1/M=2^{-n(h+\\varepsilon)}$. Summing over $S_n$ and adding the atypical-block probability proves $P(R_n>2^{n(h+\\varepsilon)})\\to0$. [F1, F2, given, algebra]",
+      "3.1 If $h=0$, the lower tail below $h-\\varepsilon$ is impossible because $R_n\\ge1$. If $h>0$, step 2.1 handles $0<\\varepsilon<h$, while larger lower-tail thresholds are also impossible. Together with step 1.1 this proves $n^{-1}\\log_2R_n\\to h$ in probability. Kac recurrence makes $R_n$ finite almost surely for every $n$, after intersecting the countably many full-measure recurrence events. [F1, F2, F4, step 1.1, step 2.1, given, algebra]"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-lz77-phrase-length-entropy-rate",
+    "supplier": "def-lz77-previous-match-phrase-length",
+    "exact_export": {
+      "section": "Definition",
+      "text": "Consider a finite alphabet $\\mathcal A$ and a two-sided sequence $x\\in\\mathcal A^{\\mathbb Z}$.\n\nFor positive integers $n,W$, define the backward recurrence time of the current length-$n$ block by\n$R_n(x)=\\inf\\{j\\ge1:(x_{-j},\\ldots,x_{-j+n-1})=(x_0,\\ldots,x_{n-1})\\},$\nwith $R_n=+\\infty$ if the set is empty. The start offset is positive, so the current block is not counted as its own match.\n\nDefine its previous-match phrase length in a window of width $W$ by\n$L_W(x)=\\max\\bigl(\\{0\\}\\cup\\{n\\ge1:R_n(x)\\le W\\}\\bigr),$\nwhere the maximum is interpreted as $+\\infty$ when the set is unbounded. The empty match of length zero is always allowed. For a periodic sequence, $L_W$ can be infinite; the recurrence-time theorem will only be used to infer the logarithmic inverse relation in probability when $h>0$."
+    },
+    "actual_consumer_facts": [
+      "[F4] [[def-lz77-previous-match-phrase-length]]: $R_n=\\min\\{j\\ge1:X_{-j}^{-j+n-1}=X_0^{n-1}\\}$ and $L_W=\\max(\\{0\\}\\cup\\{n\\ge1:R_n\\le W\\})$, with maximum $+\\infty$ if unbounded; the empty match is allowed."
+    ],
+    "actual_proof_uses": [
+      "1.2 Suppose $h>0$ and choose $0<\\varepsilon<h$. Fix a past $x^-=(\\ldots,x_{-2},x_{-1})$ and a current word $w\\in\\mathcal A^n$. Write $x^-\\frown w$ for their concatenation on coordinates $i<0$ and $0\\le i<n$; every coordinate used in a match of the current block at positive offset lies in this range. For any fixed offset $j\\ge1$, the match equations $w_i=(x^-\\frown w)_{-j+i}$ determine at most one word $w$: for $i<j$ the right side is fixed by the past, and for $i\\ge j$ it equals the already determined letter $w_{i-j}$. Therefore at most $m$ words have $R_n\\le m$ for any positive integer $m$. [F3, F4, given, algebra]",
+      "3.1 If $h=0$, the lower tail below $h-\\varepsilon$ is impossible because $R_n\\ge1$. If $h>0$, step 2.1 handles $0<\\varepsilon<h$, while larger lower-tail thresholds are also impossible. Together with step 1.1 this proves $n^{-1}\\log_2R_n\\to h$ in probability. Kac recurrence makes $R_n$ finite almost surely for every $n$, after intersecting the countably many full-measure recurrence events. [F1, F2, F4, step 1.1, step 2.1, given, algebra]",
+      "4.1 For $h>0$ and all sufficiently large integer $W$, fix $0<\\delta<1/h$ and set $n_-(W)=\\lfloor(1/h-\\delta)\\log_2W\\rfloor$, $n_+(W)=\\lceil(1/h+\\delta)\\log_2W\\rceil$. Step 3.1 implies $P(R_{n_-(W)}\\le W)\\to1$ and $P(R_{n_+(W)}>W)\\to1$: choose $\\eta>0$ with $(h+\\eta)(1/h-\\delta)<1<(h-\\eta)(1/h+\\delta)$ and apply convergence in probability at these indices. Since a match of length $n+1$ is also a match of length $n$, $R_n\\le R_{n+1}$. Thus with probability tending to one, $n_-(W)\\le L_W<n_+(W)$. Divide by $\\log_2W$ and let $\\delta\\downarrow0$ to obtain $L_W/\\log_2W\\to1/h$ in probability. [F4, step 3.1, algebra] \u220e\n"
+    ],
+    "other_textual_references": [
+      "For a stationary ergodic finite-alphabet source with bit entropy rate $h$, define $R_n=\\min\\{j\\ge1:X_{-j}^{-j+n-1}=X_0^{n-1}\\}$ using [[def-lz77-previous-match-phrase-length]]. Then $n^{-1}\\log_2R_n\\to h$ in probability. If $h>0$, the inverse window length satisfies $L_W/\\log_2W\\to1/h$ in probability as integer $W\\to\\infty$.",
+      "**Given:** A stationary ergodic finite-alphabet source with bit entropy rate $h$, the recurrence distance $R_n$ and inverse window phrase length $L_W$ of [[def-lz77-previous-match-phrase-length]]."
+    ],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-lz78-individual-sequence-finite-state-optimality",
+    "supplier": "alg-lz78-incremental-prefix-code",
+    "exact_export": {
+      "section": "Definition",
+      "text": "**Input:** A finite alphabet $\\mathcal A$ of size $q\\ge2$, an integer $n\\ge0$, a word $x_0^{n-1}\\in\\mathcal A^n$ (with $x_0^{-1}$ denoting the empty word when $n=0$), and a terminator $\\#$ not in $\\mathcal A$. Fix an injective $s_q:=\\lceil\\log_2(q+1)\\rceil$-bit symbol field for $\\mathcal A\\cup\\{\\#\\}$. The alphabet convention is that of [[def-finite-alphabet-stationary-source]]. **Output, when the procedure terminates:** a finite terminated binary record stream; prefix codes use [[def-finite-support-binary-prefix-code]].\n\n1. Start with dictionary $D[0]=\\epsilon$ and unread text $x_0^{n-1}\\#$. While text remains, let $w$ be the longest dictionary word prefixing the unread text, let $i$ be its dictionary index, and let $c$ be the next symbol. Output the record $(i,c)$ and remove the prefix $wc$ from the unread text. If $c\\ne\\#$, append $wc$ as the next dictionary entry; if $c=\\#$, stop without inserting the terminal phrase.\n\n2. Serialize each parent index $i\\ge0$ by the Elias-delta code of $m=i+1$. Put $b=\\lfloor\\log_2m\\rfloor+1$ and $d=\\lfloor\\log_2b\\rfloor+1$. Emit $d-1$ zeros, then the $d$-bit binary expansion of $b$, then the final $b-1$ bits of the $b$-bit binary expansion of $m$. Append the fixed-width symbol field for $c$. Concatenate these records in parser order, including the final marker record.\n\n3. To decode an encoded block, start with dictionary $D[0]=\\epsilon$. Count the leading zeros before the first $1$ of an index header as $z$ and set $d=z+1$. Read the following $d-1$ bits; together with that first $1$, these are the $d$-bit binary expansion of $b$. Read the next $b-1$ bits and prepend $1$ to recover $m$; put $i=m-1$. Read the next $s_q$ bits as $c$, and emit $D[i]c$. Append that phrase to the dictionary when $c\\ne\\#$, then read the next record. At the first $c=\\#$, stop without insertion and remove the terminal marker from the decoded text. The decoder is specified on valid encoded streams and is not supplied the source length or record count.\n\nOrdinary inserted phrases are dictionary entries; the final phrase containing $\\#$ is an output record but is not a dictionary entry. Termination, distinctness of ordinary complete phrases, losslessness, the prefix property and the exact index-length bound are proved in [[thm-lz78-prefix-code-lossless]]."
+    },
+    "actual_consumer_facts": [],
+    "actual_proof_uses": [],
+    "other_textual_references": [
+      "**Given:** A one-sided infinite sequence $x\\in\\mathcal A^{\\mathbb N_0}$ over a finite alphabet of size $q\\ge2$, and the block-reset LZ78 code of [[alg-lz78-incremental-prefix-code]]."
+    ],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-lz78-individual-sequence-finite-state-optimality",
+    "supplier": "thm-lz78-prefix-code-lossless",
+    "exact_export": {
+      "section": "Statement",
+      "text": "Proves the specified parser terminates on every finite input, its ordinary complete phrases are distinct, and its finite-block LZ78 record stream is prefix-free and decodes the original block exactly, including the explicit terminal symbol."
+    },
+    "actual_consumer_facts": [
+      "[F1] [[thm-lz78-prefix-code-lossless]]: ordinary complete LZ78 phrases are distinct; the parser terminates with a final phrase containing the unique marker $\\#$.",
+      "[F2] [[thm-lz78-prefix-code-lossless]]: the explicit code has phrase-index cost $\\log_2j+O(\\log\\log(j+2))$ plus a fixed symbol cost."
+    ],
+    "actual_proof_uses": [
+      "1.1 Parse $x_0^{n-1}\\#$ into $N$ phrases. Let $c=N-1$ be the ordinary phrases inserted into the dictionary; they are distinct by [F1]. If the terminal phrase is $w\\#$, its source portion $w$ is an existing dictionary word of depth at most $c$. For $r=\\lfloor\\frac12\\log_q(n+1)\\rfloor$, at most $\\sum_{j=1}^r q^j=O(\\sqrt n)$ distinct ordinary phrases have length at most $r$, while longer phrases consume at least $r+1$ source symbols each. Thus $c=O(n/\\log n)$ and $|w|\\le c=o(n)$. [F1, given, algebra]",
+      "2.1 Fix an information-lossless encoder $E$ with at most $s$ states. For each of the $c$ ordinary phrases $y_i$, record its starting state $S_i$, output word $W_i$, and ending state $S_{i+1}$. The tuples $(S_i,W_i,S_{i+1})$ are distinct: equality for two different phrase strings with the same initial state would contradict injectivity in [F3]. If $J$ is uniform on the $c$ phrases and $L=|W_J|$ has mean $\\mu$, then $$\\log_2c=H_2(S_J,W_J,S_{J+1})\\le2\\log_2s+H_2(L)+E L.$$ The two state entropies are at most $\\log_2s$, by [F4] applied to the uniform law on each state set. Conditional on $L$, there are at most $2^L$ possible binary strings, so $H_2(W_J\\mid L)\\le E L$. [F1, F3, F4, step 1.1, algebra]",
+      "4.1 By [F2], the LZ78 description length is at most $c\\log_2c+O(c\\log\\log(c+2))+O(\\log(c+2))$, including the terminal record. Since $c=O(n/\\log n)$, step 3.1 yields $$\\limsup_n L_{\\rm LZ}(x_0^{n-1})/n\\le\\limsup_n L_E(x_0^{n-1})/n.$$ [F1, F2, F3, step 1.1, step 3.1, algebra]"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-lz78-prefix-code-lossless",
+    "supplier": "alg-lz78-incremental-prefix-code",
+    "exact_export": {
+      "section": "Definition",
+      "text": "**Input:** A finite alphabet $\\mathcal A$ of size $q\\ge2$, an integer $n\\ge0$, a word $x_0^{n-1}\\in\\mathcal A^n$ (with $x_0^{-1}$ denoting the empty word when $n=0$), and a terminator $\\#$ not in $\\mathcal A$. Fix an injective $s_q:=\\lceil\\log_2(q+1)\\rceil$-bit symbol field for $\\mathcal A\\cup\\{\\#\\}$. The alphabet convention is that of [[def-finite-alphabet-stationary-source]]. **Output, when the procedure terminates:** a finite terminated binary record stream; prefix codes use [[def-finite-support-binary-prefix-code]].\n\n1. Start with dictionary $D[0]=\\epsilon$ and unread text $x_0^{n-1}\\#$. While text remains, let $w$ be the longest dictionary word prefixing the unread text, let $i$ be its dictionary index, and let $c$ be the next symbol. Output the record $(i,c)$ and remove the prefix $wc$ from the unread text. If $c\\ne\\#$, append $wc$ as the next dictionary entry; if $c=\\#$, stop without inserting the terminal phrase.\n\n2. Serialize each parent index $i\\ge0$ by the Elias-delta code of $m=i+1$. Put $b=\\lfloor\\log_2m\\rfloor+1$ and $d=\\lfloor\\log_2b\\rfloor+1$. Emit $d-1$ zeros, then the $d$-bit binary expansion of $b$, then the final $b-1$ bits of the $b$-bit binary expansion of $m$. Append the fixed-width symbol field for $c$. Concatenate these records in parser order, including the final marker record.\n\n3. To decode an encoded block, start with dictionary $D[0]=\\epsilon$. Count the leading zeros before the first $1$ of an index header as $z$ and set $d=z+1$. Read the following $d-1$ bits; together with that first $1$, these are the $d$-bit binary expansion of $b$. Read the next $b-1$ bits and prepend $1$ to recover $m$; put $i=m-1$. Read the next $s_q$ bits as $c$, and emit $D[i]c$. Append that phrase to the dictionary when $c\\ne\\#$, then read the next record. At the first $c=\\#$, stop without insertion and remove the terminal marker from the decoded text. The decoder is specified on valid encoded streams and is not supplied the source length or record count.\n\nOrdinary inserted phrases are dictionary entries; the final phrase containing $\\#$ is an output record but is not a dictionary entry. Termination, distinctness of ordinary complete phrases, losslessness, the prefix property and the exact index-length bound are proved in [[thm-lz78-prefix-code-lossless]]."
+    },
+    "actual_consumer_facts": [
+      "[F1] [[alg-lz78-incremental-prefix-code]]: each record is (parent dictionary index, next symbol); the final record contains the unique terminator $\\#$."
+    ],
+    "actual_proof_uses": [
+      "1.1 Every dictionary entry is an ordinary word over $\\mathcal A$. While unread text remains it ends in $\\#$, which no dictionary word contains; the root is a prefix and the finite dictionary therefore has a longest matching prefix with a following symbol. Each iteration removes at least one symbol, so from the finite input followed by $\\#$ the parser terminates after at most $n+1$ records, at a final marker record. If an ordinary phrase $wc$ were already in the dictionary, it would be a longer dictionary prefix than the selected $w$, contradicting the longest-prefix rule. Thus ordinary inserted phrases are distinct; the terminal phrase contains $\\#$ and is distinct from them. [F1, given, algebra]",
+      "2.1 For a parent index $i\\ge0$, put $m=i+1$, $b=\\lfloor\\log_2m\\rfloor+1$ and $d=\\lfloor\\log_2b\\rfloor+1$. The Elias-gamma code of $b$ consists of $d-1$ zeros followed by the $d$-bit binary expansion of $b$. Its first $1$ reveals $d$, after which exactly $d-1$ more bits complete $b$. Append the final $b-1$ bits of the binary expansion of $m$ to form its Elias-delta code; the decoder restores the leading $1$ of $m$ and then returns $i=m-1$. Thus the gamma header determines exactly how many suffix bits to read. No codeword can be a proper prefix of another, because identical headers determine the same suffix length. For $m=1,2,4$ the codes are respectively $1$, $0100$, and $01100$, so the case $b=1$ has an empty suffix but still a nonempty header. Appending a fixed-width $\\lceil\\log_2(q+1)\\rceil$-bit symbol field gives an unambiguously delimited nonempty record. [F1, F2, given, construct]",
+      "3.1 The decoder lookup and dictionary update of [F1] recover each phrase. Since $\\#$ appears exactly once as the final symbol, decoding stops at the first such field, and a valid terminated codeword cannot be a proper prefix of another valid terminated codeword. Thus the concatenated records form a lossless prefix code on finite input words after termination. [F1, F2, step 1.1, step 2.1, algebra]",
+      "4.1 The exact index length is $2d-1+(b-1)=b+2d-2=b+2\\lfloor\\log_2b\\rfloor$. At phrase number $j\\ge1$, the parent satisfies $0\\le i<j$, hence $m\\le j$ and $b\\le\\log_2(j+1)+1$. Since $b\\le2\\log_2(j+2)$, its length is at most $\\log_2(j+1)+2\\log_2\\log_2(j+2)+3$. Thus, writing $s_q=\\lceil\\log_2(q+1)\\rceil$, the $N$ output records, including the final marker record, have total bit length at most $N[\\log_2(N+1)+2\\log_2\\log_2(N+2)+3+s_q]$. This is $O(N\\log(N+1))$, with the same bound valid for every small index including $i=0$. The final record is encoded and counted even though its phrase is not inserted into the dictionary. [F1, step 1.1, step 2.1, algebra] \u220e\n"
+    ],
+    "other_textual_references": [
+      "**Given:** The LZ78 parser and terminated record convention of [[alg-lz78-incremental-prefix-code]], over an alphabet of size $q\\ge2$."
+    ],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-lz78-stationary-expected-rate",
+    "supplier": "alg-lz78-incremental-prefix-code",
+    "exact_export": {
+      "section": "Definition",
+      "text": "**Input:** A finite alphabet $\\mathcal A$ of size $q\\ge2$, an integer $n\\ge0$, a word $x_0^{n-1}\\in\\mathcal A^n$ (with $x_0^{-1}$ denoting the empty word when $n=0$), and a terminator $\\#$ not in $\\mathcal A$. Fix an injective $s_q:=\\lceil\\log_2(q+1)\\rceil$-bit symbol field for $\\mathcal A\\cup\\{\\#\\}$. The alphabet convention is that of [[def-finite-alphabet-stationary-source]]. **Output, when the procedure terminates:** a finite terminated binary record stream; prefix codes use [[def-finite-support-binary-prefix-code]].\n\n1. Start with dictionary $D[0]=\\epsilon$ and unread text $x_0^{n-1}\\#$. While text remains, let $w$ be the longest dictionary word prefixing the unread text, let $i$ be its dictionary index, and let $c$ be the next symbol. Output the record $(i,c)$ and remove the prefix $wc$ from the unread text. If $c\\ne\\#$, append $wc$ as the next dictionary entry; if $c=\\#$, stop without inserting the terminal phrase.\n\n2. Serialize each parent index $i\\ge0$ by the Elias-delta code of $m=i+1$. Put $b=\\lfloor\\log_2m\\rfloor+1$ and $d=\\lfloor\\log_2b\\rfloor+1$. Emit $d-1$ zeros, then the $d$-bit binary expansion of $b$, then the final $b-1$ bits of the $b$-bit binary expansion of $m$. Append the fixed-width symbol field for $c$. Concatenate these records in parser order, including the final marker record.\n\n3. To decode an encoded block, start with dictionary $D[0]=\\epsilon$. Count the leading zeros before the first $1$ of an index header as $z$ and set $d=z+1$. Read the following $d-1$ bits; together with that first $1$, these are the $d$-bit binary expansion of $b$. Read the next $b-1$ bits and prepend $1$ to recover $m$; put $i=m-1$. Read the next $s_q$ bits as $c$, and emit $D[i]c$. Append that phrase to the dictionary when $c\\ne\\#$, then read the next record. At the first $c=\\#$, stop without insertion and remove the terminal marker from the decoded text. The decoder is specified on valid encoded streams and is not supplied the source length or record count.\n\nOrdinary inserted phrases are dictionary entries; the final phrase containing $\\#$ is an output record but is not a dictionary entry. Termination, distinctness of ordinary complete phrases, losslessness, the prefix property and the exact index-length bound are proved in [[thm-lz78-prefix-code-lossless]]."
+    },
+    "actual_consumer_facts": [],
+    "actual_proof_uses": [],
+    "other_textual_references": [
+      "**Given:** A stationary source $X$ on a finite nonempty alphabet, its bit entropy rate $h$, and the explicit terminated LZ78 code of [[alg-lz78-incremental-prefix-code]] and [[thm-lz78-prefix-code-lossless]]. For a singleton source alphabet, adjoin one fixed unused symbol of probability zero before applying the code, with the terminator still distinct; write $\\mathcal A$ for this coding alphabet and $q=|\\mathcal A|\\ge2$."
+    ],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-lz78-stationary-expected-rate",
+    "supplier": "lem-lz78-distinct-parse-ziv-inequality",
+    "exact_export": {
+      "section": "Statement",
+      "text": "For any distinct finite parsing over a finite alphabet and any order-k Markov kernel, proves the finite-block likelihood inequality grouped by phrase length and preceding context."
+    },
+    "actual_consumer_facts": [
+      "[F2] [[lem-lz78-distinct-parse-ziv-inequality]]: for a distinct parsing and any order-$k$ kernel $Q$, $-\\log_2Q(x_0^{n-1}\\#\\mid s)\\ge\\sum_{\\ell,u}c_{\\ell,u}\\log_2c_{\\ell,u}$."
+    ],
+    "actual_proof_uses": [
+      "1.1 Adjoining an unused symbol, if necessary, does not change any block probability, block entropy or entropy rate: every word containing the extra symbol has probability zero. Stationarity is retained under the coordinatewise inclusion. The resulting coding alphabet has $q\\ge2$, so the stated terminated algorithm is defined, including for an originally singleton source with $h=0$. Let $N$ be the number of phrases in parsing $X_0^{n-1}\\#$ over the augmented alphabet $\\mathcal A\\cup\\{\\#\\}$, and let $c_{\\ell,u}$ count phrases of length $\\ell$ and preceding $k$-symbol context $u$. The phrases are distinct. For $r=\\lfloor\\frac12\\log_{q+1}(n+1)\\rfloor$, at most $\\sum_{j=1}^r(q+1)^j=O(\\sqrt n)$ phrases have length at most $r$, while longer phrases use at least $r+1$ symbols. Thus $N=O(n/\\log n)$ uniformly over input words. [F2, given, algebra]",
+      "2.1 Let $\\widehat P(L=\\ell,U=u)=c_{\\ell,u}/N$ be the empirical law of a uniformly selected phrase. Since phrase lengths sum to $n+1$, $E L=(n+1)/N$, and $U$ has at most $q^k$ values. If $\\mu=E L>0$, compare the finite-support law of $L$ with the geometric weights $r_j=(\\mu+1)^{-1}(\\mu/(\\mu+1))^j$, $j\\ge0$, restricted to that finite support. The restricted weights have sum at most one, so nonnegative relative entropy [F5] gives $$H_2(L)\\le-E\\log_2r_L=(\\mu+1)\\log_2(\\mu+1)-\\mu\\log_2\\mu\\le\\log_2(e(\\mu+1)),$$ because $\\ln(1+x)\\le x$ for $x\\ge0$ (the derivative of $x-\\ln(1+x)$ is $x/(1+x)\\ge0$). The case $\\mu=0$ has $H_2(L)=0$. Comparing $U$ with the uniform law on its support and using [F5] gives $H_2(U)\\le k\\log_2q$; [F6] gives $H_2(L,U)\\le H_2(L)+H_2(U)$. Since $N=O(n/\\log n)$, $x\\mapsto x\\log((n+1)/x)$ is increasing on this range for all large $n$, so $$N H_2(L,U)=O\\!\\left(\\frac{n\\log\\log n}{\\log n}\\right)+O\\!\\left(\\frac{kn}{\\log n}\\right)=o(n)$$ for each fixed $k$. [F2, F5, F6, step 1.1, algebra]",
+      "3.1 The explicit code length satisfies $L_n\\le N(\\log_2N+2\\log_2\\log_2(N+2)+C)+N\\lceil\\log_2(q+1)\\rceil$. Since $$N\\log_2N=\\sum_{\\ell,u}c_{\\ell,u}\\log_2c_{\\ell,u}+NH_2(L,U),$$ combine [F2] with step 2.1. The Ziv inequality holds for every fixed initial context, so apply it pointwise with $s=X_{-k}^{-1}$. The index redundancy and symbol fields are $o(n)$ uniformly for fixed $k$, giving $$L_n\\le-\\log_2Q_k(X_0^{n-1}\\#\\mid X_{-k}^{-1})+o(n).$$ [F1, F2, step 1.1, step 2.1, algebra]"
+    ],
+    "other_textual_references": [],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  },
+  {
+    "consumer": "thm-lz78-stationary-expected-rate",
+    "supplier": "thm-lz78-prefix-code-lossless",
+    "exact_export": {
+      "section": "Statement",
+      "text": "Proves the specified parser terminates on every finite input, its ordinary complete phrases are distinct, and its finite-block LZ78 record stream is prefix-free and decodes the original block exactly, including the explicit terminal symbol."
+    },
+    "actual_consumer_facts": [
+      "[F1] [[thm-lz78-prefix-code-lossless]]: the terminated output is a nonempty prefix-free lossless code with no supplied record count; for $N$ output records its length is at most $N[\\log_2(N+1)+2\\log_2\\log_2(N+2)+3+\\lceil\\log_2(q+1)\\rceil]$."
+    ],
+    "actual_proof_uses": [
+      "3.1 The explicit code length satisfies $L_n\\le N(\\log_2N+2\\log_2\\log_2(N+2)+C)+N\\lceil\\log_2(q+1)\\rceil$. Since $$N\\log_2N=\\sum_{\\ell,u}c_{\\ell,u}\\log_2c_{\\ell,u}+NH_2(L,U),$$ combine [F2] with step 2.1. The Ziv inequality holds for every fixed initial context, so apply it pointwise with $s=X_{-k}^{-1}$. The index redundancy and symbol fields are $o(n)$ uniformly for fixed $k$, giving $$L_n\\le-\\log_2Q_k(X_0^{n-1}\\#\\mid X_{-k}^{-1})+o(n).$$ [F1, F2, step 1.1, step 2.1, algebra]",
+      "5.1 By [F1], the LZ78 code is a prefix code, so its expected length is at least the optimal expected prefix-code length for that block. [F4] gives $\\liminf_n E L_n/n\\ge h$. Together with step 4.1 this proves convergence to $h$. The proof uses stationarity but not ergodicity. [F1, F4, step 4.1, algebra] \u220e\n"
+    ],
+    "other_textual_references": [
+      "**Given:** A stationary source $X$ on a finite nonempty alphabet, its bit entropy rate $h$, and the explicit terminated LZ78 code of [[alg-lz78-incremental-prefix-code]] and [[thm-lz78-prefix-code-lossless]]. For a singleton source alphabet, adjoin one fixed unused symbol of probability zero before applying the code, with the terminator still distinct; write $\\mathcal A$ for this coding alphabet and $q=|\\mathcal A|\\ge2$."
+    ],
+    "review": "Actual finite-measure/probability, bits/nats, totality/distinctness, rate-cap and matching-window domains checked. No source quote or independent scientific verification inferred solely from native report."
+  }
+]

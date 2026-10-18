@@ -1,0 +1,13 @@
+# Batch 70: review 0
+
+Run: non-ml-math-remaining-81-2026-10-18
+Batch: 70
+Round: 0
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: unequal-parameter-hecke-cells-and-representations, unequal-parameter-hecke-cells-and-representations-examples
+Items: def-arbitrary-rank-coxeter-system-and-bruhat-order, def-canonical-basic-set-for-hecke-specialization, def-schur-elements-from-a-symmetrizing-trace, rem-general-unequal-parameter-cell-conjectures-are-regime-dependent, lem-complete-local-hecke-modular-systems-and-idempotent-lifting, def-unequal-parameter-weight-function-and-coefficient-order, thm-arbitrary-rank-finite-parabolics-and-bruhat-subword, lem-simple-generator-weights-extend-to-a-weight-function, def-unequal-parameter-coxeter-hecke-algebra, lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity, thm-unequal-parameter-kazhdan-lusztig-basis, def-unequal-parameter-cells-and-cell-quotients, def-finite-weyl-lusztig-basic-set-data, thm-unequal-parameter-cell-quotients-are-modules, lem-lusztig-asymptotic-algebra-and-specialization-map, thm-a1xa1-unequal-parameter-cells-give-a-canonical-basic-set, lem-schur-leading-coefficients-and-good-asymptotic-specializations, lem-asymptotic-induction-identifies-leading-modular-simples, lem-filtered-projectives-prove-canonical-basic-set-reciprocity, thm-finite-weyl-canonical-basic-sets-from-lusztig-properties, cor-weighted-cell-quotients-and-finite-weyl-basic-set-labels, rem-geck-basic-set-theorem-scope-and-proof-status, ex-b2-unequal-parameter-kl-basis-and-cell-edges, cex-modular-specialization-collapses-unequal-parameter-cell-labels, ex-a1-nonsemisimple-good-specialization-has-a-basic-set
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

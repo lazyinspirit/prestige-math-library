@@ -3,6 +3,7 @@ id: cor-nontrivial-finite-p-group-is-cyclic-iff-generator-rank-one
 kind: corollary
 title: "A nontrivial finite $p$-group is cyclic exactly when $d(P)=1$"
 status: published
+dependency_level: 7
 origin: session
 provenance:
   statement: literature-derived
@@ -13,7 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-24
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/published-receipts/cor-nontrivial-finite-p-group-is-cyclic-iff-generator-rank-one.json
 sources:
   scraped: []
   references:

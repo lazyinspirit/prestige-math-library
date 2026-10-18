@@ -1,0 +1,467 @@
+{
+  "version": 1,
+  "scope": [
+    "ex-polynomial-forms-on-the-line-form-a-differential-graded-algebra",
+    "cex-a-degree-one-derivation-need-not-square-to-zero",
+    "ex-a-differential-graded-algebra-is-its-own-left-dg-module"
+  ],
+  "contracts": {
+    "ex-polynomial-forms-on-the-line-form-a-differential-graded-algebra": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-int-comm-ring",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Z}, +, \\cdot, 0, 1)$ with the operations of [[def-int-operations]] is\na commutative ring with multiplicative identity, in which every element has the\nadditive inverse $-[(a,b)] = [(b,a)]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ring",
+          "source_section": "Definition",
+          "quote": "A **ring** is a set $R$ carrying two binary operations ([[def-binary-operation]]),\naddition $+$ and multiplication $\\cdot$, and two distinguished elements $0$ and\n$1$ of $R$, such that\n\n- **(R1)** $(R, +, 0)$ is an abelian group ([[def-group]]): addition is\n  associative and commutative, $0 + x = x = x + 0$ for every $x \\in R$, and every\n  $x \\in R$ has an additive inverse;\n- **(R2)** $(R, \\cdot, 1)$ is a monoid ([[def-semigroup-and-monoid]]):\n  multiplication is associative and $1 \\cdot x = x = x \\cdot 1$ for every\n  $x \\in R$;\n- **(R3)** multiplication distributes over addition **on both sides**: for all\n  $x, y, z \\in R$,\n\n$$x \\cdot (y + z) \\;=\\; x \\cdot y + x \\cdot z, \\qquad (y + z) \\cdot x \\;=\\; y \\cdot x + z \\cdot x .$$\n\nWe write $xy$ for $x \\cdot y$, call $0$ the **zero** and $1$ the **identity** (or\n**unity**) of $R$, write $-x$ for the additive inverse of $x$, and abbreviate\n$x - y := x + (-y)$.\n\n**Why \"the\" zero, \"the\" identity and \"the\" additive inverse are legitimate.**\nEach of $0$ and $1$ is a two-sided identity for its own operation, and a binary\noperation has at most one two-sided identity ([[lem-identity-unique]],\n[[def-identity-element]]), so each is determined by the operation and the\nnotation is single-valued. An additive inverse of $x$ is an inverse in the\nmonoid $(R,+,0)$ ([[def-invertible-element]]), and in a monoid an element has at\nmost one inverse ([[lem-inverse-unique]]); so $-x$ names one element, and a\nsingle equation $y + x = 0$ already forces $y = -x$.\n\n**Convention: a ring has an identity.** Axiom (R2) asks for a *monoid*, so the\nexistence of $1$ is part of the definition and is not an extra hypothesis to be\ncarried around. This is the convention used throughout this library. A structure\nsatisfying (R1), (R3) and the associativity half of (R2), but not required to\nhave a multiplicative identity, is called a **non-unital ring** (also *rng*); it\nis not called a ring here, and where such a structure occurs it is named as a\nnon-unital ring in as many words. The distinction has content: the companion\npage exhibits a subset of $\\mathbb{Z}$ that is closed under addition, additive\ninverses and multiplication and is not a subring, precisely because it misses\nthe identity.\n\nNothing above requires $1 \\ne 0$. A ring in which $1 = 0$ has exactly one\nelement; the companion page records it as the **zero ring**. Definitions that\nneed $1 \\ne 0$ \u2014 integral domain, division ring, field \u2014 say so explicitly.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-commutative-ring",
+          "source_section": "Definition",
+          "quote": "A ring $R$ ([[def-ring]]) is **commutative** when its multiplication is\ncommutative ([[def-binary-operation]]):\n\n$$xy \\;=\\; yx \\qquad \\text{for all } x, y \\in R .$$\n\nAddition is commutative in every ring, by axiom (R1), so the word refers to\nmultiplication alone.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-polynomial-ring-is-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "For every commutative ring $R$, the coefficientwise addition and convolution multiplication of [[def-polynomial-ring-over-a-commutative-ring]] make $R[x]$ a commutative ring. The constant-polynomial map $c\\colon R\\to R[x]$ is an injective unital ring homomorphism ([[def-ring-homomorphism]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-generated-ideal-description-in-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "In a commutative ring, $(S)$ consists of finite sums $\\sum r_i s_i$, and $(a)=Ra$.\n\nThe empty sum is included and equals $0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-quotient-ring-laws",
+          "source_section": "Statement",
+          "quote": "For a two-sided ideal $I$, the additive cosets form a ring $R/I$ with identity $1+I$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-differential-graded-algebra",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit. A **cohomological differential graded\nalgebra over $R$** (cohomological DGA) consists of a $\\mathbb Z$-graded\n$R$-module $A=\\bigoplus_{n\\in\\mathbb Z}A^n$, an $R$-bilinear associative\nmultiplication $A^p\\times A^q\\to A^{p+q}$ with a unit $1\\in A^0$ and central\n$R$-action, and $R$-linear maps $d^n:A^n\\to A^{n+1}$ such that\n$d^{n+1}d^n=0$. The degree convention and square-zero differential are those\nof a cochain complex ([[def-cochain-complex-in-an-abelian-category]]); the\nungraded multiplication and unit satisfy the $R$-algebra convention in\n[[def-algebra-over-a-commutative-ring]].\n\nFor homogeneous $a\\in A^p$ and $b\\in A^q$, require the signed Leibniz rule\n$$d^{p+q}(ab)=d^p(a)b+(-1)^p a d^q(b).$$\nNo symmetry condition $ab=(-1)^{pq}ba$ is imposed on homogeneous elements of\ndegrees $p$ and $q$. In particular, this definition fixes the cohomological\nsign convention and does not assert any formality, derived-category, or\nHochschild-cohomology result.\n\nThe unit is automatically closed: applying the Leibniz rule to $1\\cdot1$\ngives $d(1)=d(1)+d(1)$, so cancellation in the additive group gives $d(1)=0$.",
+          "uses": [
+            "1.1",
+            "5.2",
+            "5.3",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-differential-graded-algebra",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit. A **cohomological differential graded\nalgebra over $R$** (cohomological DGA) consists of a $\\mathbb Z$-graded\n$R$-module $A=\\bigoplus_{n\\in\\mathbb Z}A^n$, an $R$-bilinear associative\nmultiplication $A^p\\times A^q\\to A^{p+q}$ with a unit $1\\in A^0$ and central\n$R$-action, and $R$-linear maps $d^n:A^n\\to A^{n+1}$ such that\n$d^{n+1}d^n=0$. The degree convention and square-zero differential are those\nof a cochain complex ([[def-cochain-complex-in-an-abelian-category]]); the\nungraded multiplication and unit satisfy the $R$-algebra convention in\n[[def-algebra-over-a-commutative-ring]].\n\nFor homogeneous $a\\in A^p$ and $b\\in A^q$, require the signed Leibniz rule\n$$d^{p+q}(ab)=d^p(a)b+(-1)^p a d^q(b).$$\nNo symmetry condition $ab=(-1)^{pq}ba$ is imposed on homogeneous elements of\ndegrees $p$ and $q$. In particular, this definition fixes the cohomological\nsign convention and does not assert any formality, derived-category, or\nHochschild-cohomology result.\n\nThe unit is automatically closed: applying the Leibniz rule to $1\\cdot1$\ngives $d(1)=d(1)+d(1)$, so cancellation in the additive group gives $d(1)=0$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F2], $\\mathbb Z$ with its standard operations is a commutative ring with unit, so it is an admissible base for [F6].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F3] first to $\\mathbb Z$ and then to $\\mathbb Z[t]$ shows that $S=(\\mathbb Z[t])[\\epsilon]$ is a commutative ring. By [F4], $(\\epsilon^2)=S\\epsilon^2$ is a two-sided ideal; [F5] therefore gives the quotient ring $A$ with its associative multiplication and unit. For cosets, $[s][t]=[st]=[ts]=[t][s]$, so $A$ is commutative. The constant classes define a unital ring homomorphism $\\mathbb Z\\to A$; its induced scalar action is central, and associativity and distributivity make multiplication $\\mathbb Z$-bilinear.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every polynomial in $\\epsilon$ with coefficients in $\\mathbb Z[t]$ has a unique form $f_0(t)+f_1(t)\\epsilon+\\epsilon^2 h(t,\\epsilon)$. By [F4], the last term is in $(\\epsilon^2)$, and a polynomial of degree at most one in $\\epsilon$ lies in $(\\epsilon^2)$ only when both its coefficients vanish. Thus every quotient class has a unique representative $f+g\\epsilon$, giving the stated direct sum of $\\mathbb Z$-modules. The quotient multiplication is $(f+g\\epsilon)(h+k\\epsilon)=fh+(fk+gh)\\epsilon$; this preserves the grading and gives $\\epsilon^2=0$ and $t\\epsilon=\\epsilon t$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The unique expression in step 3.1 makes the formula for $d$ well defined. Coefficientwise differentiation is additive and commutes with multiplication by each integer, so $d$ is $\\mathbb Z$-linear; it sends $A^0$ to $A^1$ and $A^1$ to $A^2=0$, hence has degree $+1$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For every $f+g\\epsilon$, $d^2(f+g\\epsilon)=d(f'\\epsilon)=0$, because $d$ vanishes on $A^1$. Thus [F7] holds.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "If $f=\\sum_i a_i t^i$ and $h=\\sum_j b_j t^j$ have degree zero, the finite coefficient sums give $(fh)'=\\sum_{i+j\\ge1}(i+j)a_i b_jt^{i+j-1}=f'h+fh'$. Hence $d(fh)=d(f)h+f\\,d(h)$.",
+          "step": "5.2",
+          "inputs": [
+            "given",
+            "F6",
+            "algebra",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-5-3",
+          "claim": "If $a=f$ and $b=g\\epsilon$ have degrees zero and one, both $d(ab)$ and $d(a)b+a\\,d(b)$ vanish because $d(g\\epsilon)=0$ and $(f'\\epsilon)(g\\epsilon)=0$. If $a=g\\epsilon$ and $b=f$, then both sides of $d(ab)=d(a)b-a\\,d(b)$ vanish because $d(g\\epsilon)=0$ and $(g\\epsilon)(f'\\epsilon)=0$. If both have degree one, their product and both terms on the right vanish. These are all remaining homogeneous degree pairs, so [F6] holds.",
+          "step": "5.3",
+          "inputs": [
+            "F6",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "step 1.1, step 2.1, step 3.1 establish the graded unital associative $\\mathbb Z$-algebra structure, and step 4.1, step 5.1, step 5.2, step 5.3 establish the degree-one, square-zero differential and signed Leibniz rule. Thus all conditions of [F6] hold, so $A$ is a cohomological DGA.",
+          "step": "6.1",
+          "inputs": [
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 5.2",
+            "step 5.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a fixed algebra example, not a construction over an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines a linear map and step 4.1 verifies the identity on every f+g epsilon, including zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 explicitly gives d(1)=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no parameter or rank family with a degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The algebra and differential are explicitly given; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No registered finite-smoke check applies; the proof verifies the polynomial identity symbolically for arbitrary f and g."
+    },
+    "cex-a-degree-one-derivation-need-not-square-to-zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-rat-field",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Q}, +, \\cdot, 0, 1)$ with the operations of [[def-rat-operations]]\nis a field: a commutative ring with $1 \\ne 0$ in which every nonzero element\nhas a multiplicative inverse.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-field-is-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), with addition $+$, multiplication $\\cdot$,\nand distinguished elements $0 \\ne 1$. Then\n\n1. $(F, +, \\cdot, 0, 1)$ is a ring ([[def-ring]]), and it is commutative\n   ([[def-commutative-ring]]), with $1 \\ne 0$;\n2. $F$ is an integral domain ([[def-zero-divisor-and-integral-domain]]);\n3. $F$ is a division ring ([[def-division-ring]]), and hence a commutative\n   division ring.\n\nThe field structure is not changed by this: the ring operations are the field\noperations, and the ring's zero and identity are the field's $0$ and $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-algebra-over-a-commutative-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring ([[def-commutative-ring]]). An **$R$-algebra** is a unital ring $A$ together with a unital ring homomorphism\n\n$$\\eta_A:R\\longrightarrow A$$\n\n([[def-ring-homomorphism]]) whose image is central: $\\eta_A(r)a=a\\eta_A(r)$ for every $r\\in R$ and $a\\in A$. The induced scalar action is $ra:=\\eta_A(r)a$, making $A$ an $R$-module and multiplication $A\\times A\\to A$ bilinear.\n\nAn **$R$-algebra homomorphism** $f:A\\to B$ is a unital ring homomorphism satisfying $f\\circ\\eta_A=\\eta_B$. Such a map is automatically $R$-linear. An $R$-algebra is **commutative** when its underlying ring is commutative.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-differential-graded-algebra",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit. A **cohomological differential graded\nalgebra over $R$** (cohomological DGA) consists of a $\\mathbb Z$-graded\n$R$-module $A=\\bigoplus_{n\\in\\mathbb Z}A^n$, an $R$-bilinear associative\nmultiplication $A^p\\times A^q\\to A^{p+q}$ with a unit $1\\in A^0$ and central\n$R$-action, and $R$-linear maps $d^n:A^n\\to A^{n+1}$ such that\n$d^{n+1}d^n=0$. The degree convention and square-zero differential are those\nof a cochain complex ([[def-cochain-complex-in-an-abelian-category]]); the\nungraded multiplication and unit satisfy the $R$-algebra convention in\n[[def-algebra-over-a-commutative-ring]].\n\nFor homogeneous $a\\in A^p$ and $b\\in A^q$, require the signed Leibniz rule\n$$d^{p+q}(ab)=d^p(a)b+(-1)^p a d^q(b).$$\nNo symmetry condition $ab=(-1)^{pq}ba$ is imposed on homogeneous elements of\ndegrees $p$ and $q$. In particular, this definition fixes the cohomological\nsign convention and does not assert any formality, derived-category, or\nHochschild-cohomology result.\n\nThe unit is automatically closed: applying the Leibniz rule to $1\\cdot1$\ngives $d(1)=d(1)+d(1)$, so cancellation in the additive group gives $d(1)=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F2], $\\mathbb Q$ is a commutative ring with unit, and [F3] is the unital base-algebra convention used in the construction of $B$. The words form a $\\mathbb Q$-basis, so the displayed formula defines a unique linear map. Every nonzero generator image has degree one higher than its input. For homogeneous words $s,t$, the summands replacing letters of $s$ give $\\delta(s)t$, while those replacing letters of $t$ acquire the extra sign $(-1)^{|s|}$; hence $\\delta(st)=\\delta(s)t+(-1)^{|s|}s\\delta(t)$. Bilinearity extends the identity to all homogeneous elements.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the generator rules twice gives $\\delta^2(x)=\\delta(u)=v$. The word $v$ is a nonzero basis element of the free algebra, so $\\delta^2(x)\\ne0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], square-zero is required for a cohomological DGA differential. Thus $\\delta$ is a degree-one graded derivation that is not square-zero, refuting the statement.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses the explicitly defined free algebra."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 extends the word formula linearly, so delta(0)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 sets delta(1)=0 using the empty-word formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No parameter specialization or rank case occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The algebra has an explicit word basis and the proof uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a universal implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a universal implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No finite-smoke check applies; the nonzero square is witnessed exactly by the free-algebra basis element v."
+    },
+    "ex-a-differential-graded-algebra-is-its-own-left-dg-module": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-differential-graded-algebra",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit. A **cohomological differential graded\nalgebra over $R$** (cohomological DGA) consists of a $\\mathbb Z$-graded\n$R$-module $A=\\bigoplus_{n\\in\\mathbb Z}A^n$, an $R$-bilinear associative\nmultiplication $A^p\\times A^q\\to A^{p+q}$ with a unit $1\\in A^0$ and central\n$R$-action, and $R$-linear maps $d^n:A^n\\to A^{n+1}$ such that\n$d^{n+1}d^n=0$. The degree convention and square-zero differential are those\nof a cochain complex ([[def-cochain-complex-in-an-abelian-category]]); the\nungraded multiplication and unit satisfy the $R$-algebra convention in\n[[def-algebra-over-a-commutative-ring]].\n\nFor homogeneous $a\\in A^p$ and $b\\in A^q$, require the signed Leibniz rule\n$$d^{p+q}(ab)=d^p(a)b+(-1)^p a d^q(b).$$\nNo symmetry condition $ab=(-1)^{pq}ba$ is imposed on homogeneous elements of\ndegrees $p$ and $q$. In particular, this definition fixes the cohomological\nsign convention and does not assert any formality, derived-category, or\nHochschild-cohomology result.\n\nThe unit is automatically closed: applying the Leibniz rule to $1\\cdot1$\ngives $d(1)=d(1)+d(1)$, so cancellation in the additive group gives $d(1)=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-differential-graded-algebra",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit. A **cohomological differential graded\nalgebra over $R$** (cohomological DGA) consists of a $\\mathbb Z$-graded\n$R$-module $A=\\bigoplus_{n\\in\\mathbb Z}A^n$, an $R$-bilinear associative\nmultiplication $A^p\\times A^q\\to A^{p+q}$ with a unit $1\\in A^0$ and central\n$R$-action, and $R$-linear maps $d^n:A^n\\to A^{n+1}$ such that\n$d^{n+1}d^n=0$. The degree convention and square-zero differential are those\nof a cochain complex ([[def-cochain-complex-in-an-abelian-category]]); the\nungraded multiplication and unit satisfy the $R$-algebra convention in\n[[def-algebra-over-a-commutative-ring]].\n\nFor homogeneous $a\\in A^p$ and $b\\in A^q$, require the signed Leibniz rule\n$$d^{p+q}(ab)=d^p(a)b+(-1)^p a d^q(b).$$\nNo symmetry condition $ab=(-1)^{pq}ba$ is imposed on homogeneous elements of\ndegrees $p$ and $q$. In particular, this definition fixes the cohomological\nsign convention and does not assert any formality, derived-category, or\nHochschild-cohomology result.\n\nThe unit is automatically closed: applying the Leibniz rule to $1\\cdot1$\ngives $d(1)=d(1)+d(1)$, so cancellation in the additive group gives $d(1)=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-differential-graded-module",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a cohomological DGA over a commutative ring $R$. A **cohomological\nleft differential graded $A$-module** is a graded unital left $A$-module\n$M=\\bigoplus_{q\\in\\mathbb Z}M^q$ (with module action as in\n[[def-left-and-right-modules]]) whose action has degree zero,\n$A^pM^q\\subseteq M^{p+q}$, together with $R$-linear maps\n$d_M^q:M^q\\to M^{q+1}$ satisfying $d_M^{q+1}d_M^q=0$ and, for homogeneous\n$a\\in A^p$ and $m\\in M^q$,\n$$d_M(am)=d_A(a)m+(-1)^p a d_M(m).$$\n\nA **cohomological right differential graded $A$-module** is a graded unital\nright $A$-module $M$ with $M^qA^p\\subseteq M^{q+p}$ and a degree-one\nsquare-zero $R$-linear differential satisfying, for homogeneous $m\\in M^q$\nand $a\\in A^p$,\n$$d_M(ma)=d_M(m)a+(-1)^q m d_A(a).$$\n\nThe left and right conventions are separate. A differential graded bimodule\nuses both actions with the commuting-action condition of\n[[def-bimodule]]; both differential compatibility identities then apply. A\nleft module is not silently identified with a right module when $A$ is\nnoncommutative.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-differential-graded-algebra",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit. A **cohomological differential graded\nalgebra over $R$** (cohomological DGA) consists of a $\\mathbb Z$-graded\n$R$-module $A=\\bigoplus_{n\\in\\mathbb Z}A^n$, an $R$-bilinear associative\nmultiplication $A^p\\times A^q\\to A^{p+q}$ with a unit $1\\in A^0$ and central\n$R$-action, and $R$-linear maps $d^n:A^n\\to A^{n+1}$ such that\n$d^{n+1}d^n=0$. The degree convention and square-zero differential are those\nof a cochain complex ([[def-cochain-complex-in-an-abelian-category]]); the\nungraded multiplication and unit satisfy the $R$-algebra convention in\n[[def-algebra-over-a-commutative-ring]].\n\nFor homogeneous $a\\in A^p$ and $b\\in A^q$, require the signed Leibniz rule\n$$d^{p+q}(ab)=d^p(a)b+(-1)^p a d^q(b).$$\nNo symmetry condition $ab=(-1)^{pq}ba$ is imposed on homogeneous elements of\ndegrees $p$ and $q$. In particular, this definition fixes the cohomological\nsign convention and does not assert any formality, derived-category, or\nHochschild-cohomology result.\n\nThe unit is automatically closed: applying the Leibniz rule to $1\\cdot1$\ngives $d(1)=d(1)+d(1)$, so cancellation in the additive group gives $d(1)=0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The multiplication supplies the regular graded left action with the correct unit and degree.",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "1.2",
+          "claim": "The regular differential is degree one, square-zero, and compatible with left multiplication.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.1",
+          "claim": "The regular action and differential satisfy all left DG module conditions.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example starts with a specified DGA A."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 records that zero acts by zero, as follows from the module distributivity law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that the unit acts as the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no parameter or rank family."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction uses the given multiplication and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No finite-smoke check applies; the module identities follow symbolically from the DGA and module definitions."
+    }
+  }
+}

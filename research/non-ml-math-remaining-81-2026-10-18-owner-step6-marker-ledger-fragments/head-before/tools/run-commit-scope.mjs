@@ -1,0 +1,981 @@
+// Optional owner-authorized closeout. Imported only when a run has a policy.
+// The engine's mathematical/readiness/report gates remain unchanged.
+import { validateFragment, decodeLedger } from './step6-ledger-fragment.mjs';
+import { validatePlanProjection, decodePlan } from './step6-plan-projection.mjs';
+import { spawnSync } from 'node:child_process';
+import { accessSync, constants, copyFileSync, existsSync, lstatSync, mkdirSync,
+  mkdtempSync, readFileSync, readdirSync, readlinkSync, rmSync, statSync,
+  unlinkSync, writeFileSync } from 'node:fs';
+import { dirname, isAbsolute, join, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
+import { runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
+import { verifyProofLayout } from './proof-layout-receipt.mjs';
+import { recordedPublishedRepair, unchangedPublishedClaim } from './published-repair-policy.mjs';
+import { recordedPublishedRepair as recordedPhysicsPublishedRepair } from './physics-support/published-repair-policy.mjs';
+
+const decoder = new TextDecoder('utf-8', { fatal: true });
+const decode = bytes => decoder.decode(bytes);
+const nul = bytes => {
+  if (!bytes.length) return [];
+  if (bytes.at(-1) !== 0) throw Error('closeout: unterminated Git path record');
+  return decode(bytes.subarray(0, -1)).split('\0');
+};
+const pathsInput = paths => Buffer.from(paths.join('\0') + '\0');
+const digest = rows => ({ entries: rows.length, sha256: sha256(JSON.stringify(rows)) });
+// Independently reviewed installed hook: the fixed source exits before
+// graphify whenever this repository directory is absent. This is deliberately
+// not a general hook allowlist or a hook/configuration override.
+const inertHook = Object.freeze({
+  name: 'post-commit',
+  path: '/home/lazyinspirit/.config/git/hooks/post-commit',
+  sha256: 'a9cc684a69d83b0e6b88a43ec490ffb6cea46482c2b7df7ec9c9133914e5cb53',
+  required_absent_path: 'graphify-out',
+});
+
+export function git(root, args, { input, env = {}, optional = false, literalPathspecs = true } = {}) {
+  const result = spawnSync('git', [...(literalPathspecs ? ['--literal-pathspecs'] : []), ...args], {
+    cwd: root, env: { ...process.env, LC_ALL: 'C', ...env }, input,
+    maxBuffer: 256 * 1024 * 1024,
+  });
+  if (optional && result.status === 1) return null;
+  if (result.error || result.status !== 0) throw Error('closeout: git ' + args[0]
+    + ' failed: ' + (result.error?.message || result.stderr?.toString().trim()));
+  return result.stdout;
+}
+export const textGit = (root, args, options) => {
+  const result = git(root, args, options);
+  return result === null ? null : decode(result).trim();
+};
+export const gitPath = (root, name) => resolve(root, textGit(root, ['rev-parse', '--git-path', name]));
+
+export function safePath(path) {
+  if (typeof path !== 'string' || !path || isAbsolute(path) || path.startsWith('-')
+    || /[\x00-\x1f\x7f\\:*?\[\]]/.test(path)
+    || path.split('/').some(part => !part || part === '.' || part === '..'
+      || part === '.git' || part === 'node_modules' || part.startsWith('.autopilot'))) {
+    throw Error('closeout: unsafe exact repository path ' + JSON.stringify(path));
+  }
+  return path;
+}
+export function regularPath(root, path, missingAllowed = false) {
+  safePath(path);
+  let cursor = root;
+  for (const part of path.split('/')) {
+    cursor = join(cursor, part);
+    if (!lstatExists(cursor)) {
+      if (missingAllowed) return false;
+      throw Error('closeout: missing required carrier ' + path);
+    }
+    if (lstatSync(cursor).isSymbolicLink()) throw Error('closeout: symlink in owned path ' + path);
+  }
+  if (!lstatSync(cursor).isFile()) throw Error('closeout: owned carrier is not a regular file ' + path);
+  return true;
+}
+const operationalLog = (run, path) => path.startsWith('research/' + run + '-dispatch/')
+  && /\.log(?:\.gz)?$/.test(path);
+const runResearch = (run, path) => path.startsWith('research/' + run + '-')
+  && !operationalLog(run, path);
+const runtimeExcluded = (run, path) => path.startsWith('physics/.physics-autopilot/')
+  || path === 'physics/.physics-autopilot'
+  || path.split('/').some(part =>
+  part === '.git' || part === 'node_modules' || part.startsWith('.autopilot'))
+  || operationalLog(run, path);
+
+export function treeEntries(root, revision = 'HEAD') {
+  return nul(git(root, ['ls-tree', '-r', '-z', '--full-tree', revision])).map(row => {
+    const tab = row.indexOf('\t'), [mode, type, oid] = row.slice(0, tab).split(' ');
+    if (tab < 0 || !/^[0-7]{6}$/.test(mode) || !/^(blob|commit)$/.test(type)
+      || !/^[a-f0-9]{40,64}$/.test(oid)) throw Error('closeout: malformed Git tree record');
+    return { path: row.slice(tab + 1), mode, oid };
+  });
+}
+export function indexEntries(root) {
+  const path = gitPath(root, 'index');
+  const before = existsSync(path) ? sha256(readFileSync(path)) : null;
+  const rows = nul(git(root, ['ls-files', '--stage', '-z'])).map(row => {
+    const tab = row.indexOf('\t'), [mode, oid, stage] = row.slice(0, tab).split(' ');
+    if (tab < 0 || !/^[0-7]{6}$/.test(mode) || !/^[a-f0-9]{40,64}$/.test(oid)
+      || !/^[0-3]$/.test(stage)) throw Error('closeout: malformed Git index record');
+    return { path: row.slice(tab + 1), mode, oid, stage: Number(stage) };
+  });
+  // Include intent-to-add, assume-unchanged and skip-worktree flags, rather
+  // than claiming preservation from object IDs alone. Stat-cache timestamps
+  // are not staged content and are deliberately not compared.
+  const debug = git(root, ['ls-files', '--debug', '-z']);
+  let offset = 0, index = 0;
+  while (offset < debug.length) {
+    const end = debug.indexOf(0, offset);
+    if (end < 0) throw Error('closeout: malformed index debug path');
+    const name = decode(debug.subarray(offset, end));
+    let last = end;
+    for (let line = 0; line < 5; line++) {
+      last = debug.indexOf(10, last + 1);
+      if (last < 0) throw Error('closeout: unsupported index debug format');
+    }
+    const flags = /flags: ([a-f0-9]+)\n$/i.exec(decode(debug.subarray(end + 1, last + 1)))?.[1];
+    if (!flags || rows[index]?.path !== name) throw Error('closeout: inconsistent index flags');
+    rows[index++].flags = flags.toLowerCase();
+    offset = last + 1;
+  }
+  const after = existsSync(path) ? sha256(readFileSync(path)) : null;
+  if (index !== rows.length || before !== after) throw Error('closeout: index changed while reading preservation state');
+  if (rows.some(row => row.stage !== 0)) throw Error('closeout: unresolved index conflicts; preserve them and resolve before closeout');
+  if (rows.some(row => row.mode === '160000')) throw Error('closeout: submodule index preservation is not supported');
+  Object.defineProperty(rows, 'indexSnapshot', { value: { path, sha256: after } });
+  return rows;
+}
+// Preserve check-ignore's tracked-path exclusion without its per-stdin-path
+// full index scan. Unusual pathspec/case/sparse/index states retain native Git.
+export function ignoredOwnedPaths(root, paths, index) {
+  const original = () => nul(git(root, ['check-ignore', '-z', '--stdin'], {
+    input: pathsInput(paths), optional: true, literalPathspecs: false,
+  }) || Buffer.alloc(0));
+  const literal = path => {
+    try { safePath(path); return true; } catch { return false; }
+  };
+  if (!Array.isArray(index) || !index.indexSnapshot || !paths.length
+    || paths.some(path => !literal(path))
+    || ['GIT_LITERAL_PATHSPECS', 'GIT_GLOB_PATHSPECS', 'GIT_NOGLOB_PATHSPECS', 'GIT_ICASE_PATHSPECS']
+      .some(key => process.env[key] !== undefined)
+    || index.some(row => row.stage !== 0 || row.flags !== '0'
+      || !['100644', '100755', '120000'].includes(row.mode))) return original();
+  const config = () => ['core.ignorecase', 'core.sparsecheckout', 'core.sparsecheckoutcone', 'index.sparse']
+    .map(key => textGit(root, ['config', '--type=bool', '--get', key], { optional: true }));
+  const beforeConfig = config();
+  if (beforeConfig.some(value => value !== null && value !== 'false')) return original();
+  const snapshot = index.indexSnapshot;
+  const currentIndex = () => {
+    const path = gitPath(root, 'index');
+    return { path, sha256: existsSync(path) ? sha256(readFileSync(path)) : null };
+  };
+  const requireCurrent = () => {
+    if (JSON.stringify(currentIndex()) !== JSON.stringify(snapshot)
+      || JSON.stringify(config()) !== JSON.stringify(beforeConfig))
+      throw Error('closeout: index or ignore matching configuration changed during ignore check');
+  };
+  requireCurrent();
+  const names = index.map(row => row.path).sort();
+  const lowerBound = value => {
+    let lo = 0, hi = names.length;
+    while (lo < hi) { const mid = (lo + hi) >>> 1; if (names[mid] < value) lo = mid + 1; else hi = mid; }
+    return lo;
+  };
+  const tracked = path => names[lowerBound(path)] === path
+    || names[lowerBound(path + '/')]?.startsWith(path + '/') === true;
+  // Git also excludes a literal parent path when an indexed descendant matches.
+  // Every other exact original path still receives Git's real ignore evaluation.
+  const remaining = paths.filter(path => !tracked(path));
+  const ignored = remaining.length ? nul(git(root, ['check-ignore', '--no-index', '-z', '--stdin'], {
+    input: pathsInput(remaining), optional: true, literalPathspecs: false,
+  }) || Buffer.alloc(0)) : [];
+  requireCurrent();
+  return ignored;
+}
+
+export function fileState(root, path) {
+  const full = join(root, path);
+  if (!existsSync(full) && !lstatExists(full)) return { path, kind: 'missing' };
+  const stat = lstatSync(full), mode = stat.mode & 0o777;
+  if (stat.isSymbolicLink()) return { path, kind: 'symlink', mode, sha256: sha256(readlinkSync(full, { encoding: 'buffer' })) };
+  if (!stat.isFile()) throw Error('closeout: unsupported working-tree entry ' + path);
+  return { path, kind: 'file', mode, sha256: sha256(readFileSync(full)) };
+}
+const lstatExists = path => { try { lstatSync(path); return true; } catch (error) { if (['ENOENT', 'ENOTDIR'].includes(error.code)) return false; throw error; } };
+
+function workingEntries(root, run, owns) {
+  const rows = [];
+  const walk = (dir, prefix = '') => {
+    for (const entry of readdirSync(dir, { withFileTypes: true, encoding: 'buffer' })) {
+      const name = Buffer.isBuffer(entry.name) ? decode(entry.name) : entry.name;
+      const path = prefix ? prefix + '/' + name : name;
+      if (runtimeExcluded(run, path) || owns(path)) continue;
+      if (entry.isDirectory()) walk(join(dir, name), path);
+      else rows.push(fileState(root, path));
+    }
+  };
+  walk(root);
+  return rows.sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
+}
+export function captureOutsidePreservation(root, run, scope) {
+  return {
+    outside_index: indexEntries(root).filter(row => !scope.owns(row.path)),
+    outside_head: treeEntries(root).filter(row => !scope.owns(row.path)),
+    outside_working: workingEntries(root, run, scope.owns),
+  };
+}
+const preservationDigests = state => Object.fromEntries(Object.entries(state).map(([key, rows]) => [key, digest(rows)]));
+
+export function assertOutsidePreservationSame(actual, expected, label) {
+  const before = preservationDigests(expected), after = preservationDigests(actual);
+  if (JSON.stringify(after) === JSON.stringify(before)) return;
+  const changes = {};
+  for (const key of Object.keys(expected)) {
+    if (JSON.stringify(after[key]) === JSON.stringify(before[key])) continue;
+    const oldRows = new Map(expected[key].map(row => [row.path, row]));
+    const newRows = new Map(actual[key].map(row => [row.path, row]));
+    changes[key] = [...new Set([...oldRows.keys(), ...newRows.keys()])].sort().flatMap(path => {
+      const oldRow = oldRows.get(path) ?? null, newRow = newRows.get(path) ?? null;
+      if (JSON.stringify(oldRow) === JSON.stringify(newRow)) return [];
+      return [{ path, before: oldRow, after: newRow }];
+    });
+  }
+  throw Error('closeout: ' + label + ' preservation mismatch: ' + JSON.stringify({ before, after, changes }));
+}
+
+// Read-only inspection uses precisely the native closeout selectors. It does
+// not validate workflow gates or grant authority to change the captured state.
+export function inspectOutsidePreservation(root, run) {
+  const receipt = 'research/' + run + '-dispatch/tool-close-step6-v2.result.json';
+  return captureOutsidePreservation(root, run, loadScope(root, run, receipt, [], true));
+}
+
+export function assertCurrentOutsidePreserved(root, run, scope, expected, label) {
+  const actual = captureOutsidePreservation(root, run, scope);
+  try { assertOutsidePreservationSame(actual, expected, label); }
+  catch (error) {
+    // Preserve complete metadata if the controller abbreviates tool stderr.
+    // Existing physical runtime directories only; diagnostic failure never
+    // replaces or weakens the original preservation refusal.
+    const runtime = join(root, '.autopilot', run);
+    let evidence = '';
+    try {
+      if (!/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(run)) throw Error('unsafe runtime run');
+      for (const dir of [join(root, '.autopilot'), runtime]) {
+        if (!lstatSync(dir).isDirectory()) throw Error('runtime directory is absent or not physical');
+      }
+      const path = join(runtime, 'run-commit-preservation-failure-' + Date.now() + '-' + process.pid + '.json');
+      writeFileSync(path, JSON.stringify({ version: 1, run, label, recorded_at: new Date().toISOString(),
+        before: preservationDigests(expected), after: preservationDigests(actual),
+        diagnostic: error.message }, null, 2) + '\n', { flag: 'wx' });
+      evidence = '; complete metadata: ' + path;
+    } catch (diagnosticError) {
+      evidence = '; runtime diagnostic unavailable: ' + diagnosticError.message;
+    }
+    throw Error(error.message + evidence);
+  }
+}
+function assertSame(actual, expected, label) {
+  if (JSON.stringify(actual) !== JSON.stringify(expected)) throw Error('closeout: ' + label + ' preservation mismatch');
+}
+
+// Preserve the exact validated bytes, mode and entry kind. Diagnostics expose
+// only metadata, so a concurrent writer can be identified without leaking prose.
+export function assertOwnedWorkingPreserved(root, expected, label) {
+  const actual = expected.map(row => fileState(root, row.path));
+  const changed = actual.flatMap((row, index) => {
+    const before = expected[index];
+    if (JSON.stringify(row) === JSON.stringify(before)) return [];
+    const { path, ...afterState } = row;
+    const beforeState = { ...before };
+    delete beforeState.path;
+    return [{ path, before: beforeState, after: afterState }];
+  });
+  if (changed.length) throw Error('closeout: ' + label + ' preservation mismatch: ' + JSON.stringify(changed));
+}
+
+function verifyReviewedHook(root, reviewedHook, hookDir) {
+  if (!reviewedHook) return;
+  const full = join(hookDir, inertHook.name);
+  if (full !== inertHook.path || !lstatExists(full) || !lstatSync(full).isFile()
+    || sha256(readFileSync(full)) !== inertHook.sha256) {
+    throw Error('closeout: reviewed inert hook path/source changed');
+  }
+  accessSync(full, constants.X_OK);
+  if (lstatExists(join(root, inertHook.required_absent_path))) {
+    throw Error('closeout: reviewed hook requires graphify-out absent');
+  }
+}
+
+// Isolated plumbing does not execute commit hooks. Retain the existing exact
+// source/absence guard for the known inert installation without requiring a
+// run-local ownership policy merely to recognize that same fixed hook.
+export function verifiedInertHook(root) {
+  const configured = textGit(root, ['config', '--path', '--get', 'core.hooksPath'], { optional: true });
+  const hookDir = configured ? resolve(root, configured) : gitPath(root, 'hooks');
+  if (join(hookDir, inertHook.name) !== inertHook.path || !existsSync(inertHook.path)) return null;
+  verifyReviewedHook(root, inertHook, hookDir);
+  return inertHook;
+}
+
+export function refuseGitSideEffects(root, paths, reviewedHook = null) {
+  for (const key of ['GIT_INDEX_FILE', 'GIT_DIR', 'GIT_WORK_TREE', 'GIT_COMMON_DIR',
+    'GIT_OBJECT_DIRECTORY', 'GIT_ALTERNATE_OBJECT_DIRECTORIES', 'GIT_CONFIG',
+    'GIT_CONFIG_GLOBAL', 'GIT_CONFIG_SYSTEM', 'GIT_CONFIG_NOSYSTEM',
+    'GIT_CONFIG_PARAMETERS', 'GIT_CONFIG_COUNT']) {
+    if (process.env[key]) throw Error('closeout: externally redirected Git environment ' + key);
+  }
+  for (const name of ['MERGE_HEAD', 'CHERRY_PICK_HEAD', 'REVERT_HEAD', 'rebase-merge', 'rebase-apply', 'sequencer']) {
+    if (existsSync(gitPath(root, name))) throw Error('closeout: active Git operation ' + name);
+  }
+  const configured = textGit(root, ['config', '--path', '--get', 'core.hooksPath'], { optional: true });
+  const hookDir = configured ? resolve(root, configured) : gitPath(root, 'hooks');
+  verifyReviewedHook(root, reviewedHook, hookDir);
+  for (const hook of ['pre-commit', 'prepare-commit-msg', 'commit-msg', 'post-commit',
+    'post-index-change', 'reference-transaction', 'pre-auto-gc']) {
+    const full = join(hookDir, hook);
+    if (!existsSync(full) || !statSync(full).isFile()) continue;
+    try { accessSync(full, constants.X_OK); }
+    catch (error) { if (error.code === 'EACCES') continue; throw error; }
+    if (reviewedHook && hook === inertHook.name && full === inertHook.path) continue;
+    throw Error('closeout: active Git hook ' + hook + ' at ' + full + '; scoped preservation cannot run this hook safely');
+  }
+  const monitor = textGit(root, ['config', '--get', 'core.fsmonitor'], { optional: true });
+  if (monitor && !/^(?:true|false)$/i.test(monitor)) throw Error('closeout: configured external core.fsmonitor helper');
+  if (textGit(root, ['rev-parse', '--shared-index-path'])) throw Error('closeout: split-index preservation is not supported');
+  // A commit can refresh its temporary index outside the supplied pathspec.
+  // Reject active filters on the entire Git inventory, not just owned paths.
+  const attrs = paths.length
+    ? nul(git(root, ['check-attr', '-z', '--stdin', 'filter'], { input: pathsInput(paths) })) : [];
+  if (attrs.length % 3) throw Error('closeout: incomplete attribute records');
+  for (let i = 0; i < attrs.length; i += 3) {
+    const [path, attribute, driver] = attrs.slice(i, i + 3);
+    if (attribute !== 'filter') throw Error('closeout: malformed attribute record');
+    if (['unspecified', 'unset'].includes(driver)) continue;
+    for (const suffix of ['clean', 'process']) {
+      if (textGit(root, ['config', '--get', 'filter.' + driver + '.' + suffix], { optional: true })) {
+        throw Error('closeout: active Git ' + suffix + ' filter ' + driver + ' applies to ' + path);
+      }
+    }
+  }
+}
+
+function readScopePolicy(root, run) {
+  const policyPath = 'research/' + run + '-closeout-scope.json';
+  regularPath(root, policyPath);
+  const policyText = readFileSync(join(root, policyPath), 'utf8'), policy = JSON.parse(policyText);
+  const keys = new Set(['version', 'run', 'authorized_by', 'authorization', 'additional_paths', 'reviewed_hook', 'shared_fragments', 'plan_projection']);
+  if (Object.keys(policy).some(key => !keys.has(key)) || policy.version !== 1 || policy.run !== run
+    || policy.authorized_by !== 'owner' || typeof policy.authorization !== 'string'
+    || policy.authorization.trim().length < 20 || !Array.isArray(policy.additional_paths)) {
+    throw Error('closeout: invalid owner-authorized run-local scope policy');
+  }
+  if (policy.shared_fragments !== undefined && (!Array.isArray(policy.shared_fragments) || policy.shared_fragments.length > 1))
+    throw Error('closeout: invalid bounded shared-fragment authority');
+  const reviewedHook = policy.reviewed_hook ?? null;
+  if (Object.hasOwn(policy, 'reviewed_hook') && (!reviewedHook
+    || Object.keys(reviewedHook).length !== Object.keys(inertHook).length
+    || Object.entries(inertHook).some(([key, value]) => reviewedHook[key] !== value))) {
+    throw Error('closeout: only the exact reviewed inert post-commit hook policy is supported');
+  }
+  return { policyPath, policyText, policy, reviewedHook };
+}
+
+// Hash operational resolver trees without dereferencing their links. They stay
+// report-protected and outside-preserved even when omitted from the Git commit.
+export function operationalContextState(root, path) {
+  safePath(path);
+  let cursor = root;
+  for (const part of path.split('/')) {
+    cursor = join(cursor, part);
+    if (!lstatSync(cursor).isDirectory() || lstatSync(cursor).isSymbolicLink())
+      throw Error('closeout: operational context root is not a physical directory: ' + path);
+  }
+  const rows = [];
+  const walk = dir => {
+    const state = lstatSync(join(root, dir));
+    rows.push({ path: dir, kind: 'directory', mode: state.mode & 0o777 });
+    for (const name of readdirSync(join(root, dir)).sort()) {
+      const child = dir + '/' + name;
+      safePath(child);
+      if (lstatSync(join(root, child)).isDirectory()) walk(child);
+      else rows.push(fileState(root, child));
+    }
+  };
+  walk(path);
+  return digest(rows);
+}
+
+function operationalContextExclusions(root, run, protectedPaths) {
+  const path = 'research/' + run + '-closeout-operational-contexts.json';
+  if (!existsSync(join(root, path))) return { path: null, sha256: null, excludes: () => false };
+  regularPath(root, path);
+  const text = readFileSync(join(root, path), 'utf8'), evidence = JSON.parse(text);
+  if (evidence.version !== 1 || evidence.run !== run || evidence.authorized_by !== 'owner'
+    || evidence.kind !== 'closeout-operational-context-exclusions'
+    || typeof evidence.authorization !== 'string' || evidence.authorization.trim().length < 20
+    || !Array.isArray(evidence.directories) || !evidence.directories.length)
+    throw Error('closeout: invalid operational context exclusion authority');
+  const seen = new Set();
+  for (const row of evidence.directories) {
+    safePath(row.path);
+    const historicalHHResolver = run === 'hopf-hecke-unfinished-15-2026-10-15'
+      && ['research/' + run + '-owner/authoring-readiness-escalation/cross-batch/local-read-context',
+        'research/' + run + '-owner/authoring-readiness-escalation/cross-batch/final/local-read-context'].includes(row.path);
+    const ordinaryResolver = row.path.startsWith('research/' + run + '-owner-escalation-repairs/')
+      && /\/(?:overlay|shadow)$/.test(row.path);
+    if ((!ordinaryResolver && !historicalHHResolver) || seen.has(row.path)
+      || typeof row.reason !== 'string' || row.reason.trim().length < 20
+      || !Number.isSafeInteger(row.entries) || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')
+      || !Array.isArray(row.evidence) || !row.evidence.length)
+      throw Error('closeout: invalid exact operational context directory');
+    seen.add(row.path);
+    for (const supporting of row.evidence) {
+      if (!runResearch(run, supporting.path) || supporting.path.startsWith(row.path + '/'))
+        throw Error('closeout: operational context evidence is not external run evidence');
+      regularPath(root, supporting.path);
+      if (sha256(readFileSync(join(root, supporting.path))) !== supporting.sha256)
+        throw Error('closeout: operational context evidence changed: ' + supporting.path);
+    }
+    for (const protectedPath of protectedPaths) {
+      if (protectedPath === row.path || protectedPath.startsWith(row.path + '/'))
+        throw Error('closeout: operational context contains authoritative input: ' + protectedPath);
+    }
+    if (JSON.stringify(operationalContextState(root, row.path))
+      !== JSON.stringify({ entries: row.entries, sha256: row.sha256 }))
+      throw Error('closeout: operational context directory changed: ' + row.path);
+  }
+  const directories = [...seen];
+  return { path, sha256: sha256(text), excludes: candidate => directories.some(dir =>
+    candidate === dir || candidate.startsWith(dir + '/')) };
+}
+
+function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingReceipt = false, preflight = false, { physics = false } = {}) {
+  const { policyPath, policyText, policy, reviewedHook } = readScopePolicy(root, run);
+  const selected = runScope(run, root);
+  const imported = new Set();
+  if (physics) {
+    const imports = JSON.parse(readFileSync(join(root, 'research/math-imports.json'), 'utf8'));
+    if (imports.version !== 1 || !Array.isArray(imports.files)) throw Error('closeout: invalid native physics import map');
+    for (const row of imports.files) {
+      if (typeof row.path !== 'string' || row.path.startsWith('/') || row.path.split('/').includes('..')
+        || imported.has(row.path)) throw Error('closeout: invalid or duplicate native physics import pin');
+      imported.add(row.path);
+    }
+  }
+  // Pathway gates govern absent authored pathways. Closeout owns every
+  // existing selected-category carrier; lstat keeps dangling links present
+  // so the regular-path validation below rejects them rather than omitting them.
+  const pathways = selected.categories.map(category => 'library/' + category + '/_pathway.md')
+    .filter(path => lstatExists(join(root, path)));
+  const required = new Set([policyPath, selected.ledger, 'research/plan-spec.json',
+    'research/published-consumer-supplier-ledger.md',
+    ...selected.pages.map(row => row.file), ...selected.items.map(row => row.file),
+    ...pathways,
+    ...['proof-layout.json', 'publication-readiness.json', 'step6-report-integrity.json',
+      'step6-report.response.json', 'step6-report.md', 'step6-evidence.json',
+      'pathway-closure.json', 'judge-closure.json'].map(name => 'research/' + run + '-' + name),
+    finalReceipt]);
+  const claimsPath = 'research/' + run + '-step3-published-claims.jsonl';
+  const claimsText = existsSync(join(root, claimsPath)) ? readFileSync(join(root, claimsPath), 'utf8') : '';
+  const claims = claimsText.split('\n').filter(line => line.trim()).map(line => JSON.parse(line));
+  const seenClaims = new Set(), noopClosures = [], publishedInputs = new Set();
+  for (const claim of claims) {
+    if (claim.version !== 1 || claim.run !== run || !/^[a-z][a-z0-9-]*$/.test(claim.id ?? '')
+      || seenClaims.has(claim.id)) throw Error('closeout: invalid or duplicate published ownership claim');
+    seenClaims.add(claim.id);
+    const path = 'items/' + claim.id + '.md';
+    if (physics && imported.has(path)) throw Error('closeout: imported mathematical pin cannot be owned by physics: ' + path);
+    regularPath(root, path);
+    const current = readFileSync(join(root, path), 'utf8'), fm = splitFrontmatter(current).frontmatter;
+    const receipt = /^ {2}repair:\s*(?:"([^"\n]+)"|'([^'\n]+)'|([^\s'"]+))\s*$/m.exec(fm)?.slice(1).find(Boolean);
+    const recorded = (physics ? recordedPhysicsPublishedRepair : recordedPublishedRepair)(root, claim.id, current, receipt);
+    if (recorded.ok) {
+      // Actual repair receipts and their archived preimages are authoritative,
+      // even if somebody mislabels their directory as a resolver context.
+      publishedInputs.add(recorded.receipt);
+      const repair = JSON.parse(readFileSync(join(root, recorded.receipt), 'utf8'));
+      publishedInputs.add(repair.before_file);
+    }
+    if (!recorded.ok) {
+      if (physics) throw Error('closeout: local physics published claim has no valid native repair receipt; mathematical no-op closure is not physics authority: ' + claim.id + ': ' + recorded.reason);
+      const unchanged = unchangedPublishedClaim(root, run, claim, current);
+      if (!unchanged.ok) throw Error('closeout: unclosed published ownership ' + claim.id
+        + ': ' + recorded.reason + '; unchanged closure: ' + unchanged.reason);
+      regularPath(root, unchanged.receipt);
+      required.add(unchanged.receipt);
+      noopClosures.push({ id: claim.id, sha256: unchanged.receipt_sha256 });
+    }
+    required.add(path);
+  }
+  // Only the fresh v3 transaction composes shared fragments. Legacy git-add
+  // closeout must never acquire this path as whole-file commit authority.
+  const fragments = [];
+  if (policy.shared_fragments?.length) {
+    if (finalReceipt !== `research/${run}-dispatch/tool-step6-finalize-v3.result.json`)
+      throw Error('closeout: shared fragments require the native v3 transaction');
+    const ownedIds = new Set([...selected.items.map(row => row.id), ...selected.pages.map(row => row.id),
+      ...claims.map(row => row.id), ...policy.additional_paths.flatMap(row => /^items\/([^/]+)\.md$/.exec(row.path)?.slice(1) ?? [])]);
+    for (const row of policy.shared_fragments) {
+      if (!row || Object.keys(row).some(key => !['path', 'authority', 'sha256'].includes(key))
+        || row.path !== 'research/published-consumer-supplier-ledger.md'
+        || !runResearch(run, safePath(row.authority)) || !/^[a-f0-9]{64}$/.test(row.sha256 ?? ''))
+        throw Error('closeout: invalid exact shared-fragment binding');
+      regularPath(root, row.authority);
+      const bytes = readFileSync(join(root, row.authority));
+      if (sha256(bytes) !== row.sha256) throw Error('closeout: fragment authority changed');
+      const spec = JSON.parse(decodeLedger(bytes));
+      validateFragment(spec, run, ownedIds, decodeLedger(readFileSync(join(root, row.path))));
+      required.add(row.authority);
+      for (const evidence of spec.evidence) {
+        if (!evidence || Object.keys(evidence).some(key => !['path', 'sha256'].includes(key))
+          || !runResearch(run, safePath(evidence.path)) || !/^[a-f0-9]{64}$/.test(evidence.sha256 ?? ''))
+          throw Error('closeout: invalid fragment supporting evidence');
+        regularPath(root, evidence.path);
+        if (sha256(readFileSync(join(root, evidence.path))) !== evidence.sha256)
+          throw Error('closeout: fragment supporting evidence changed');
+        required.add(evidence.path);
+      }
+      fragments.push({ path: row.path, authority: row.authority, sha256: row.sha256, spec, ownedIds: [...ownedIds].sort() });
+    }
+  }
+  // Plan replacement ownership is separate from the addition-only ledger API.
+  const planProjections = [];
+  if (policy.plan_projection !== undefined) {
+    if (physics) throw Error('closeout: plan projection currently supports mathematics only');
+    const row = policy.plan_projection;
+    if (finalReceipt !== `research/${run}-dispatch/tool-step6-finalize-v3.result.json`
+      || !row || Object.keys(row).some(key => !['path', 'authority', 'sha256'].includes(key))
+      || row.path !== 'research/plan-spec.json' || !runResearch(run, safePath(row.authority))
+      || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')) throw Error('closeout: invalid exact plan-projection binding');
+    regularPath(root, row.authority);
+    const bytes = readFileSync(join(root, row.authority));
+    if (sha256(bytes) !== row.sha256) throw Error('closeout: plan-projection authority changed');
+    const spec = JSON.parse(decodePlan(bytes));
+    if (!/^[a-f0-9]{40,64}$/.test(spec.original_head ?? '')
+      || !/^[a-f0-9]{40,64}$/.test(spec.original_index_blob ?? ''))
+      throw Error('closeout: invalid original plan Git bindings');
+    git(root, ['--no-replace-objects', 'merge-base', '--is-ancestor', spec.original_head, 'HEAD']);
+    const originalHead = decodePlan(git(root, ['--no-replace-objects', 'show', spec.original_head + ':research/plan-spec.json']));
+    const originalIndex = decodePlan(git(root, ['--no-replace-objects', 'cat-file', 'blob', spec.original_index_blob]));
+    validatePlanProjection(spec, run, selected.pages, decodePlan(readFileSync(join(root, row.path))), originalHead, originalIndex, root,
+      { additionalPaths: policy.additional_paths });
+    required.add(row.authority);
+    for (const support of spec.supporting_pages ?? []) required.add(support.ownership_evidence);
+    for (const evidence of spec.evidence) {
+      if (!evidence || Object.keys(evidence).some(key => !['path', 'sha256'].includes(key))
+        || !runResearch(run, safePath(evidence.path)) || !/^[a-f0-9]{64}$/.test(evidence.sha256 ?? ''))
+        throw Error('closeout: invalid plan-projection supporting evidence');
+      regularPath(root, evidence.path);
+      if (sha256(readFileSync(join(root, evidence.path))) !== evidence.sha256)
+        throw Error('closeout: plan-projection supporting evidence changed');
+      required.add(evidence.path);
+    }
+    planProjections.push({ path: row.path, authority: row.authority, sha256: row.sha256, spec });
+  }
+  const additional = new Set();
+  for (const row of policy.additional_paths) {
+    if (!row || Object.keys(row).some(key => !['path', 'sha256', 'reason', 'ownership_evidence'].includes(key))
+      || typeof row.reason !== 'string' || row.reason.trim().length < 20
+      || !(row.sha256 === null || /^[a-f0-9]{64}$/.test(row.sha256 ?? ''))) throw Error('closeout: malformed additional ownership row');
+    safePath(row.path);
+    if (physics && imported.has(row.path)) throw Error('closeout: imported mathematical pin cannot be additional physics ownership: ' + row.path);
+    if (required.has(row.path) || runResearch(run, row.path) || additional.has(row.path) || operationalLog(run, row.path)) {
+      throw Error('closeout: redundant or operational additional path ' + row.path);
+    }
+    if (!runResearch(run, safePath(row.ownership_evidence))) throw Error('closeout: supporting ownership evidence is outside this run');
+    regularPath(root, row.ownership_evidence);
+    const evidence = JSON.parse(readFileSync(join(root, row.ownership_evidence), 'utf8'));
+    if (evidence.run !== run || !Array.isArray(evidence.owned_paths)
+      || !evidence.owned_paths.some(owned => owned.path === row.path && owned.sha256 === row.sha256)) {
+      throw Error('closeout: no exact supporting ownership evidence for ' + row.path);
+    }
+    const state = fileState(root, row.path);
+    if (row.sha256 === null ? state.kind !== 'missing' : state.kind !== 'file' || state.sha256 !== row.sha256) {
+      throw Error('closeout: supporting path bytes differ from owner authorization: ' + row.path);
+    }
+    if (row.sha256 !== null) regularPath(root, row.path);
+    additional.add(row.path);
+  }
+  // Packaging is checked before reporting. Only exact future derived artifacts
+  // may be absent here; authoritative sources and every present path stay strict.
+  const pending = path => preflight && (path === finalReceipt || ['proof-layout.json',
+    'publication-readiness.json', 'step6-report-integrity.json', 'step6-report.response.json',
+    'step6-report.md', 'step6-evidence.json'].some(name => path === `research/${run}-${name}`)
+    // Native v3 authority is sealed before preparation/gates derive closures.
+    // Present carriers stay strict; commitStep6 requires both actual products.
+    || finalReceipt === `research/${run}-dispatch/tool-step6-finalize-v3.result.json`
+      && ['pathway-closure.json', 'judge-closure.json'].some(name => path === `research/${run}-${name}`));
+  for (const path of required) regularPath(root, path, pending(path) || allowMissingReceipt && path === finalReceipt);
+  const index = indexEntries(root), rawTree = treeEntries(root);
+  // ls-tree --full-tree is repository-relative; local item/research selectors
+  // and ls-files records are relative to this workspace cwd.
+  const workspacePrefix = physics ? textGit(root, ['rev-parse', '--show-prefix']) : '';
+  const tree = physics && workspacePrefix ? rawTree.filter(row => row.path.startsWith(workspacePrefix))
+    .map(row => ({ ...row, path: row.path.slice(workspacePrefix.length) })) : rawTree;
+  const isolatedPreflight = preflight && finalReceipt === `research/${run}-dispatch/tool-step6-finalize-v3.result.json`;
+  const others = nul(git(root, ['ls-files', '--others', '--exclude-standard', '-z',
+    ...(isolatedPreflight ? ['--', `:(glob)research/${run}-*`, `:(glob)research/${run}-*/**`] : [])],
+    { literalPathspecs: !isolatedPreflight }));
+  const inventory = [...new Set([...index.map(row => row.path), ...tree.map(row => row.path), ...others])].sort();
+  const closurePath = 'research/' + run + '-step3-closure.json';
+  const frozen = existsSync(join(root, closurePath))
+    ? Object.keys(JSON.parse(readFileSync(join(root, closurePath), 'utf8')).artifacts ?? {}) : [];
+  const exclusions = operationalContextExclusions(root, run,
+    new Set([...required, ...additional, ...historyPaths, ...publishedInputs, ...frozen]));
+  if (exclusions.path) required.add(exclusions.path);
+  const automatic = new Set(inventory.filter(path => runResearch(run, path) && !exclusions.excludes(path)));
+  for (const row of policy.additional_paths) {
+    if (row.sha256 === null && !inventory.includes(row.path) && !historyPaths.includes(row.path)) {
+      throw Error('closeout: deleted supporting path has no Git preimage: ' + row.path);
+    }
+  }
+  for (const path of historyPaths) {
+    if (!required.has(path) && !additional.has(path) && !runResearch(run, path)) {
+      throw Error('closeout: recorded path no longer belongs to this run: ' + path);
+    }
+    automatic.add(path);
+  }
+  const paths = [...new Set([...automatic, ...required, ...additional])].sort();
+  const owned = new Set(paths), owns = path => owned.has(path);
+  for (const path of paths) {
+    if (physics && imported.has(path)) throw Error('closeout: imported mathematical pin cannot enter the physics commit: ' + path);
+    if (!owns(path)) throw Error('closeout: recorded path no longer belongs to this run: ' + path);
+    regularPath(root, path, pending(path) || !required.has(path) || allowMissingReceipt && path === finalReceipt);
+  }
+  const ignored = ignoredOwnedPaths(root, paths, index);
+  if (ignored.length) throw Error('closeout: required/authorized artifact is ignored by Git: ' + ignored[0]);
+  return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook, fragments, planProjections,
+    contextSha256: sha256(JSON.stringify({ ...(physics ? { domain: 'physics' } : {}), selected, required: [...required].sort(),
+      claims: sha256(claimsText), noopClosures, operationalContexts: exclusions.sha256, additional: policy.additional_paths,
+      sharedFragments: fragments.map(({ path, authority, sha256 }) => ({ path, authority, sha256 })),
+      ...(policy.plan_projection !== undefined
+        ? { planProjections: planProjections.map(({ path, authority, sha256 }) => ({ path, authority, sha256 })) }
+        : {}) })) };
+}
+
+// Read-only binding helper for an owner administrative reseal. It does not
+// capture outside rows, write receipts or grant workflow/commit authority.
+export function preflightCloseoutScope(root, run, finalReceipt = `research/${run}-dispatch/tool-close-step6-v2.result.json`, { physics = false } = {}) {
+  if (![ `research/${run}-dispatch/tool-close-step6-v2.result.json`,
+    `research/${run}-dispatch/tool-step6-finalize-v3.result.json` ].includes(finalReceipt))
+    throw Error('closeout: unknown native final receipt selector');
+  if (physics && finalReceipt !== `research/${run}-dispatch/tool-step6-finalize-v3.result.json`)
+    throw Error('closeout: native physics policy support requires the isolated v3 preflight');
+  return loadScope(root, run, finalReceipt, [], true, true, { physics });
+}
+
+export function inspectCloseoutScope(root, run) {
+  const receipt = 'research/' + run + '-dispatch/tool-close-step6-v2.result.json';
+  const previous = existsSync(join(root, receipt)) ? JSON.parse(readFileSync(join(root, receipt), 'utf8')) : null;
+  return loadScope(root, run, receipt, previous?.closeout_scope?.owned_paths ?? [], true);
+}
+
+function refuseCrossScopeRenames(root, scope) {
+  // Only read the working diff after active filters have been refused.
+  // Inspect staged and working renames independently as well as their net
+  // effect; a staged cross-boundary rename must not be hidden by later edits.
+  for (const prefix of [[], ['--cached'], ['HEAD']]) {
+    const rows = nul(git(root, ['diff', '--name-status', '-z', '--find-renames',
+      '--no-ext-diff', '--no-textconv', ...prefix]));
+    const deleted = [], added = [];
+    for (let i = 0; i < rows.length;) {
+      const status = rows[i++], from = rows[i++];
+      if (!status || !from) throw Error('closeout: malformed diff path records');
+      if (/^[RC]/.test(status)) {
+        const to = rows[i++];
+        if (!to) throw Error('closeout: missing rename destination');
+        if (scope.owns(from) !== scope.owns(to)) throw Error('closeout: cross-scope rename/copy ' + from + ' -> ' + to);
+      } else if (status === 'D') deleted.push(from);
+      else if (status === 'A') added.push(from);
+    }
+    // Git's similarity heuristic can classify a moved-and-edited file as D+A;
+    // working diffs also omit untracked destinations. Fail closed on an
+    // ambiguous cross-boundary deletion/addition pair, rather than treating
+    // the absence of an R record as proof that no rename occurred.
+    if (prefix[0] === 'HEAD') {
+      // Corpus-sized inventories exceed V8's variadic argument limit. Append
+      // each exact Git path without changing rename-check order or coverage.
+      for (const path of nul(git(root, ['ls-files', '--others', '--exclude-standard', '-z']))) {
+        added.push(path);
+      }
+    }
+    for (const from of deleted) {
+      const to = added.find(path => scope.owns(from) !== scope.owns(path));
+      if (to) throw Error('closeout: ambiguous cross-scope deletion/addition ' + from + ' -> ' + to + '; reconcile ownership before closeout');
+    }
+  }
+}
+
+function workflowChecks(root, run, proofLayoutAlreadyChecked) {
+  if (!proofLayoutAlreadyChecked) verifyProofLayout(run, root);
+  for (const args of [
+    ['tools/obligations.mjs', 'check', '--run', run, '--terminal'],
+    ['tools/step6-report.mjs', 'check', '--run', run, '--root', root],
+    ['tools/step6-report.mjs', 'check-evidence', '--run', run, '--root', root],
+    ['tools/step6-report.mjs', 'check-response', '--run', run, '--root', root],
+    ['tools/publication-ready.mjs', '--run', run, '--verify', '--require-report', '--root', root],
+  ]) {
+    const result = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+    if (result.error || result.status !== 0) throw Error('closeout: existing workflow gate refused: '
+      + (result.error?.message || (result.stderr || result.stdout).trim()));
+  }
+}
+function committedAndCurrent(root, scope) {
+  const head = new Map(treeEntries(root).map(row => [row.path, row]));
+  const index = new Map(indexEntries(root).map(row => [row.path, row]));
+  const present = scope.paths.filter(path => regularPath(root, path, true));
+  const hashes = present.length ? textGit(root, ['hash-object', '--stdin-paths'],
+    { input: Buffer.from(present.join('\n') + '\n') }).split('\n') : [];
+  if (hashes.length !== present.length) throw Error('closeout: incomplete working-file object hashes');
+  const working = new Map(present.map((path, i) => [path, hashes[i]]));
+  const checkModes = textGit(root, ['config', '--get', 'core.filemode'], { optional: true }) !== 'false';
+  for (const path of scope.paths) {
+    const a = head.get(path), b = index.get(path), oid = working.get(path);
+    if (!a && !b && !oid) continue; // authorized deletion already committed
+    if (!a || !b || !oid || a.oid !== b.oid || a.mode !== b.mode || a.oid !== oid) {
+      throw Error('closeout: owned artifact is not committed/current: ' + path);
+    }
+    if (checkModes
+      && a.mode !== ((lstatSync(join(root, path)).mode & 0o111) ? '100755' : '100644')) {
+      throw Error('closeout: owned working-file mode differs from HEAD: ' + path);
+    }
+  }
+}
+
+const recoveryAdministrativePaths = Object.freeze(['WORKFLOW.md', 'tools/run-commit-scope.mjs']);
+
+// Exact metadata binding helper; these paths remain outside-preserved during
+// every native commit. Only this immutable pair can have an original bridge.
+export function inspectAdministrativeRecoveryStates(root) {
+  const index = new Map(indexEntries(root).map(row => [row.path, row]));
+  const head = new Map(treeEntries(root).map(row => [row.path, row]));
+  return recoveryAdministrativePaths.map(path => ({ path, current: {
+    outside_index: index.get(path), outside_head: head.get(path), outside_working: fileState(root, path),
+  } }));
+}
+
+// Authenticate the preserved original baseline rather than replacing it.
+// Frozen runtime metadata reconstructs its exact original full working digest;
+// only the independently live physics runtime is projected away thereafter.
+function verifyRuntimePreservationRecovery(root, run, scope, previousBytes, outside, expectedEvidence = null) {
+  const path = 'research/' + run + '-closeout-runtime-recovery.json';
+  regularPath(root, path);
+  const bytes = readFileSync(join(root, path)), recovery = JSON.parse(bytes);
+  if (recovery.version !== 1 || recovery.kind !== 'authenticated-runtime-preservation-recovery'
+    || recovery.run !== run || recovery.authorized_by !== 'owner'
+    || typeof recovery.authorization !== 'string' || recovery.authorization.trim().length < 20
+    || recovery.runtime_namespace !== 'physics/.physics-autopilot/'
+    || recovery.current_policy_sha256 !== scope.policySha256
+    || recovery.current_context_sha256 !== scope.contextSha256
+    || !Array.isArray(recovery.original_runtime_rows))
+    throw Error('closeout: invalid current runtime preservation recovery authority');
+  const archive = evidence => {
+    if (!runResearch(run, evidence?.path)) throw Error('closeout: recovery archive is outside this run');
+    regularPath(root, evidence.path);
+    const value = readFileSync(join(root, evidence.path));
+    if (sha256(value) !== evidence.sha256) throw Error('closeout: recovery archive changed');
+    return value;
+  };
+  const originalBytes = archive(recovery.original_receipt), original = JSON.parse(originalBytes);
+  const failure = JSON.parse(archive(recovery.original_failure));
+  if ((expectedEvidence ? expectedEvidence.path !== path || expectedEvidence.sha256 !== sha256(bytes)
+      || expectedEvidence.original_commit !== recovery.original_commit : !previousBytes.equals(originalBytes))
+    || original.run !== run || original.ok !== true
+    || original.written_by !== 'run-commit' || original.label !== 'close-step6-v2'
+    || original.closeout_scope?.version !== 1 || failure.run !== run || failure.label !== 'final outside'
+    || !/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(recovery.original_commit ?? ''))
+    throw Error('closeout: recovery does not bind the original committed closeout');
+  const committed = git(root, ['--no-replace-objects', 'show', recovery.original_commit
+    + ':research/' + run + '-dispatch/tool-close-step6-v2.result.json']);
+  if (!committed.equals(originalBytes)) throw Error('closeout: original receipt is not the committed exact blob');
+  git(root, ['--no-replace-objects', 'merge-base', '--is-ancestor', recovery.original_commit, 'HEAD']);
+  if (!Array.isArray(original.closeout_scope.owned_paths)
+    || original.closeout_scope.owned_paths.some(path => !scope.owns(path)))
+    throw Error('closeout: recovery dropped original owned paths');
+  const baseline = original.closeout_scope.preservation_before;
+  assertSame(failure.before, baseline, 'recovery original failure baseline');
+  const administrative = recovery.administrative_continuity;
+  if (typeof administrative?.authorization !== 'string' || administrative.authorization.trim().length < 20)
+    throw Error('closeout: missing exact administrative bridge authorization');
+  const administrativeArchive = JSON.parse(archive(administrative.archive));
+  if (administrativeArchive.version !== 1
+    || administrativeArchive.kind !== 'authenticated-original-administrative-outside-rows'
+    || administrativeArchive.run !== run || administrativeArchive.original_commit !== recovery.original_commit
+    || !Array.isArray(administrativeArchive.administrative_rows) || !Array.isArray(administrative.current_rows)
+    || JSON.stringify(administrativeArchive.administrative_rows.map(row => row.path)) !== JSON.stringify(recoveryAdministrativePaths)
+    || JSON.stringify(administrative.current_rows.map(row => row.path)) !== JSON.stringify(recoveryAdministrativePaths))
+    throw Error('closeout: invalid exact administrative continuity bridge');
+  const currentAdministrative = new Map(administrative.current_rows.map(row => [row.path, row.current]));
+  const originalAdministrative = new Map(administrativeArchive.administrative_rows.map(row => [row.path, row.original]));
+  const originalOutside = {};
+  for (const key of ['outside_index', 'outside_head', 'outside_working']) {
+    for (const path of recoveryAdministrativePaths) {
+      if (scope.owns(path)) throw Error('closeout: administrative continuity path must remain outside-preserved');
+      const matches = outside[key].filter(row => row.path === path);
+      if (matches.length !== 1 || !currentAdministrative.get(path)?.[key]
+        || !originalAdministrative.get(path)?.[key])
+        throw Error('closeout: missing exact administrative outside row');
+      assertSame(matches[0], currentAdministrative.get(path)[key], 'pinned current administrative ' + path + ' ' + key);
+      if (originalAdministrative.get(path)[key].path !== path)
+        throw Error('closeout: mismatched original administrative outside row');
+    }
+    originalOutside[key] = outside[key].map(row => originalAdministrative.get(row.path)?.[key] ?? row);
+    if (key !== 'outside_working') {
+      assertSame(failure.after[key], baseline[key], 'recovery original ' + key);
+      assertSame(digest(originalOutside[key]), baseline[key], 'reconstructed original full ' + key);
+    }
+  }
+  const seen = new Set();
+  for (const row of recovery.original_runtime_rows) {
+    safePath(row.path);
+    if (!row.path.startsWith(recovery.runtime_namespace) || seen.has(row.path)
+      || !['file', 'symlink'].includes(row.kind) || !Number.isSafeInteger(row.mode)
+      || row.mode < 0 || row.mode > 0o777 || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')
+      || Object.keys(row).join(',') !== 'path,kind,mode,sha256')
+      throw Error('closeout: invalid frozen original runtime row');
+    seen.add(row.path);
+  }
+  const diagnostic = JSON.parse(failure.diagnostic.slice(failure.diagnostic.indexOf('{')));
+  if (Object.keys(diagnostic.changes ?? {}).some(key => key !== 'outside_working')
+    || !Array.isArray(diagnostic.changes?.outside_working)
+    || diagnostic.changes.outside_working.some(change => !seen.has(change.path)
+      || JSON.stringify(recovery.original_runtime_rows.find(row => row.path === change.path))
+        !== JSON.stringify(change.before)))
+    throw Error('closeout: original failure is not confined to authenticated runtime rows');
+  const reconstructed = [...originalOutside.outside_working, ...recovery.original_runtime_rows]
+    .sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
+  assertSame(digest(reconstructed), baseline.outside_working, 'reconstructed original full working');
+  // Existing mathematical carriers and canonical ledgers may not change as an
+  // administrative recovery. Native workflow checks remain mandatory too.
+  const canonical = original.closeout_scope.owned_paths.filter(path =>
+    path.startsWith('items/') || path.startsWith('library/')
+      || ['research/plan-spec.json', 'research/defect-ledger.jsonl',
+        'research/published-consumer-supplier-ledger.md'].includes(path)
+      || /\.(?:pages|proof-contracts)\.json$/.test(path));
+  const originalTree = new Map(treeEntries(root, recovery.original_commit).map(row => [row.path, row]));
+  const hashes = canonical.length ? textGit(root, ['hash-object', '--stdin-paths'],
+    { input: Buffer.from(canonical.join('\n') + '\n') }).split('\n') : [];
+  if (hashes.length !== canonical.length || canonical.some((path, index) =>
+    hashes[index] !== originalTree.get(path)?.oid
+      || ((lstatSync(join(root, path)).mode & 0o111) ? '100755' : '100644') !== originalTree.get(path)?.mode))
+    throw Error('closeout: recovery changed an original canonical mathematical carrier');
+  return { path, sha256: sha256(bytes), original_commit: recovery.original_commit };
+}
+
+export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayoutAlreadyChecked = false }) {
+  const onMain = () => {
+    if (textGit(root, ['symbolic-ref', '--short', 'HEAD']) !== 'main') throw Error('closeout: scoped mode requires main');
+  };
+  const receipt = 'research/' + run + '-dispatch/tool-close-step6-v2.result.json';
+  if (finalReceipt && finalReceipt !== receipt) throw Error('closeout: scoped mode requires the normal final dispatch receipt ' + receipt);
+  const oldReceiptBytes = existsSync(join(root, receipt)) ? readFileSync(join(root, receipt)) : null;
+  const previous = oldReceiptBytes ? JSON.parse(decode(oldReceiptBytes)) : null;
+  if (previous && !previous.closeout_scope) throw Error('closeout: final receipt predates scoped preservation evidence; owner reconciliation required');
+  if (previous && (previous.closeout_scope.version !== 1
+    || !Array.isArray(previous.closeout_scope.owned_paths)
+    || previous.closeout_scope.policy !== 'research/' + run + '-closeout-scope.json')) {
+    throw Error('closeout: malformed scoped final receipt');
+  }
+  // Refuse concrete side-effect configurations before asking Git to refresh
+  // any working-tree state. No hook/filter/config setting is changed.
+  refuseGitSideEffects(root, [], readScopePolicy(root, run).reviewedHook);
+  onMain();
+  const scope = loadScope(root, run, receipt, previous?.closeout_scope?.owned_paths || [], Boolean(finalReceipt));
+  const inspectionPaths = [...new Set([...scope.inventory, ...scope.paths])];
+  refuseGitSideEffects(root, inspectionPaths, scope.reviewedHook);
+  refuseCrossScopeRenames(root, scope);
+  workflowChecks(root, run, proofLayoutAlreadyChecked);
+  const outsideBefore = captureOutsidePreservation(root, run, scope);
+  const before = preservationDigests(outsideBefore);
+  let recoveryEvidence = null;
+  if (previous) {
+    const sameContext = previous.closeout_scope.policy_sha256 === scope.policySha256
+      && previous.closeout_scope.context_sha256 === scope.contextSha256;
+    const sameOutside = JSON.stringify(before) === JSON.stringify(previous.closeout_scope.preservation_before);
+    if (!sameContext || !sameOutside) {
+      recoveryEvidence = verifyRuntimePreservationRecovery(root, run, scope, oldReceiptBytes, outsideBefore);
+    } else {
+      assertSame(before, previous.closeout_scope.preservation_before, 'recorded outside');
+      if (previous.closeout_scope.recovery_evidence) {
+        recoveryEvidence = verifyRuntimePreservationRecovery(root, run, scope, oldReceiptBytes,
+          outsideBefore, previous.closeout_scope.recovery_evidence);
+      }
+    }
+  }
+  if (checkOnly) {
+    if (!previous || previous.ok !== true || previous.run !== run
+      || previous.written_by !== 'run-commit' || previous.label !== 'close-step6-v2') throw Error('closeout: missing scoped final receipt');
+    committedAndCurrent(root, scope);
+    onMain();
+    refuseGitSideEffects(root, inspectionPaths, scope.reviewedHook);
+    console.log('run-commit: ' + scope.paths.length + ' owned artifact(s) committed/current on main; outside index/HEAD/working preservation verified');
+    return;
+  }
+  if (!finalReceipt && !previous) throw Error('closeout: initial scoped closeout requires --final-receipt');
+  const beforeHead = textGit(root, ['rev-parse', 'HEAD']);
+  const ownedBefore = scope.paths.map(path => fileState(root, path));
+  const tmp = mkdtempSync(join(tmpdir(), run + '-closeout-'));
+  const temporaryIndex = join(tmp, 'index'), actualIndex = gitPath(root, 'index');
+  const env = { GIT_INDEX_FILE: temporaryIndex };
+  const checkedMutation = action => {
+    refuseGitSideEffects(root, inspectionPaths, scope.reviewedHook);
+    try { return action(); }
+    finally { refuseGitSideEffects(root, inspectionPaths, scope.reviewedHook); }
+  };
+  let writtenReceipt = null, committed = false;
+  try {
+    checkedMutation(() => {
+      if (existsSync(actualIndex)) copyFileSync(actualIndex, temporaryIndex);
+      else git(root, ['read-tree', 'HEAD'], { env });
+    });
+    mkdirSync(dirname(join(root, receipt)), { recursive: true });
+    writtenReceipt = Buffer.from(JSON.stringify({
+      role: 'tool', label: 'close-step6-v2', run, covers: ['all'], ok: true,
+      written_by: 'run-commit', ended_at: new Date().toISOString(),
+      closeout_scope: {
+        version: 1, policy: scope.policyPath, policy_sha256: scope.policySha256,
+        context_sha256: scope.contextSha256, owned_paths: scope.paths, before_head: beforeHead,
+        preservation_before: before,
+        ...(recoveryEvidence ? { recovery_evidence: recoveryEvidence } : {}),
+        ...(scope.reviewedHook ? { reviewed_hook: scope.reviewedHook } : {}),
+        evidence: 'Baseline recorded before commit; successful tool return and --check verify equality afterward.',
+        exclusions: ['Git metadata', 'node_modules', '.autopilot runtime', 'physics/.physics-autopilot runtime working bytes (index/HEAD remain protected)', 'this run ignored dispatch .log/.log.gz files'],
+      },
+    }, null, 2) + '\n');
+    writeFileSync(join(root, receipt), writtenReceipt);
+    // Retain committed deletion tombstones in receipt/check scope, but do not
+    // hand Git an unmatched pathspec on a later authorized closeout attempt.
+    const stagedPaths = scope.paths.filter(path => path === receipt || scope.inventory.includes(path));
+    const input = pathsInput(stagedPaths);
+    checkedMutation(() => git(root, ['add', '--all', '--pathspec-from-file=-', '--pathspec-file-nul'], { env, input }));
+    assertOwnedWorkingPreserved(root, ownedBefore.filter(row => row.path !== receipt), 'validated owned working bytes');
+    if (!readFileSync(join(root, receipt)).equals(writtenReceipt)) throw Error('closeout: final receipt changed before commit');
+    assertCurrentOutsidePreserved(root, run, scope, outsideBefore, 'pre-commit outside');
+    if (textGit(root, ['rev-parse', 'HEAD']) !== beforeHead) throw Error('closeout: HEAD changed before commit');
+    onMain();
+    const preCommitScope = loadScope(root, run, receipt, scope.paths);
+    assertSame(preCommitScope.paths, scope.paths, 'owned artifact inventory');
+    if (preCommitScope.policySha256 !== scope.policySha256 || preCommitScope.contextSha256 !== scope.contextSha256) {
+      throw Error('closeout: scope changed before commit');
+    }
+    checkedMutation(() => {
+      git(root, ['commit', '--only', '--pathspec-from-file=-', '--pathspec-file-nul',
+      '-m', 'chore(' + run + '): engine close-out — commit owned run artifacts\n\n'
+        + scope.paths.length + ' exact paths; unrelated staged/working files preserved; no push or publication.'], { env, input });
+      committed = true;
+    });
+    assertOwnedWorkingPreserved(root, ownedBefore.filter(row => row.path !== receipt), 'committed owned working bytes');
+    if (!readFileSync(join(root, receipt)).equals(writtenReceipt)) throw Error('closeout: final receipt changed during commit');
+    assertCurrentOutsidePreserved(root, run, scope, outsideBefore, 'post-commit outside');
+    // Integrate only the new owned entries into the real index. Never reset
+    // or checkout the repository; unrelated staged blobs and flags survive.
+    const head = new Map(treeEntries(root).map(row => [row.path, row]));
+    const zero = '0'.repeat(textGit(root, ['rev-parse', 'HEAD']).length);
+    const rows = scope.paths.flatMap(path => {
+      const row = head.get(path);
+      return ['0 ' + zero + '\t' + path, ...(row ? [row.mode + ' ' + row.oid + '\t' + path] : [])];
+    });
+    checkedMutation(() => git(root, ['update-index', '-z', '--index-info'], { input: pathsInput(rows) }));
+    assertCurrentOutsidePreserved(root, run, scope, outsideBefore, 'final outside');
+    const finalScope = loadScope(root, run, receipt, scope.paths);
+    if (finalScope.policySha256 !== scope.policySha256 || finalScope.contextSha256 !== scope.contextSha256) {
+      throw Error('closeout: scope changed during commit');
+    }
+    committedAndCurrent(root, finalScope);
+    onMain();
+    refuseGitSideEffects(root, inspectionPaths, scope.reviewedHook);
+    console.log('run-commit: committed ' + scope.paths.length + ' owned artifact(s) on main ('
+      + textGit(root, ['rev-parse', '--short', 'HEAD']) + '); outside preservation verified');
+  } catch (error) {
+    const headChanged = textGit(root, ['rev-parse', 'HEAD']) !== beforeHead;
+    if (!committed && !headChanged && writtenReceipt
+      && existsSync(join(root, receipt)) && readFileSync(join(root, receipt)).equals(writtenReceipt)) {
+      if (oldReceiptBytes) writeFileSync(join(root, receipt), oldReceiptBytes);
+      else unlinkSync(join(root, receipt));
+    }
+    throw Error(error.message + (committed ? '; commit landed but closeout remains held; no reset/checkout attempted'
+      : headChanged ? '; HEAD changed during failed closeout; owner reconciliation required; no reset/checkout attempted' : ''));
+  } finally {
+    rmSync(tmp, { recursive: true, force: true });
+  }
+}

@@ -1,0 +1,56 @@
+---
+id: lem-nat-mult-cancellative
+kind: lemma
+title: "Cancellation for multiplication by a nonzero factor"
+deps: [def-nat-order, def-nat-multiplication, lem-nat-trichotomy, lem-nat-order-mult-compatible]
+aliases: []
+landmark: false
+short: "$mk=nk,\\ k\\neq0\\Rightarrow m=n$"
+status: published
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+proof_strategy: contradiction
+sources:
+  references:
+    - title: "T. Tao, Analysis I, 3rd ed., §2.1-2.3 (Peano axioms, recursion, arithmetic)"
+      url: "https://terrytao.wordpress.com/books/analysis-i/"
+    - title: "Peano axioms (Wikipedia)"
+      url: "https://en.wikipedia.org/wiki/Peano_axioms"
+    - title: "W. Aitken, MATH 378 Ch. 1: The Peano Axioms (CSU San Marcos)"
+      url: "https://public.csusm.edu/aitken_html/m378_S2016/Ch1PeanoAxioms.pdf"
+verification:
+  precheck: pass
+  verified:
+    model: claude-opus-5
+    verdict: certify
+    date: 2026-08-02
+    scope: published-audit
+    delegated_by: owner
+pipeline_run: null
+---
+
+## Statement
+
+For all $m,n,k\in\mathbb{N}$ with $k\ne 0$: if $m\cdot k=n\cdot k$ then $m=n$.
+
+## Facts & Assumptions
+
+**Given:** multiplication defined by $m\cdot 0=0$ and $m\cdot\sigma(j)=m\cdot j+m$; the order $m\le n\iff\exists j\ (m+j=n)$, with $m<n$ meaning $m\le n$ and $m\ne n$.
+
+[L1] Trichotomy: for all $m,n\in\mathbb{N}$ exactly one of $m<n$, $m=n$, $m>n$ holds ([[lem-nat-trichotomy]]).
+
+[L2] Strict monotonicity: if $k\ne 0$ and $m<n$ then $m\cdot k<n\cdot k$ ([[lem-nat-order-mult-compatible]]).
+
+## Proof
+
+**Proof technique:** contradiction.
+
+1.1 Suppose $m\cdot k=n\cdot k$ with $k\ne 0$ but $m\ne n$. [assume-contra]
+
+2.1 By trichotomy [L1], $m\ne n$ forces $m<n$ or $n<m$. [step 1.1, L1]
+
+3.1 If $m<n$ then $m\cdot k<n\cdot k$ by [L2] (since $k\ne 0$); if $n<m$ then $n\cdot k<m\cdot k$ by [L2]; either way $m\cdot k\ne n\cdot k$. [step 2.1, L2]
+
+4.1 This contradicts $m\cdot k=n\cdot k$, so the assumption $m\ne n$ is impossible and $m=n$. [step 1.1, step 3.1, discharge-contradiction] ∎

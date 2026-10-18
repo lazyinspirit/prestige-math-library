@@ -1,0 +1,60 @@
+---
+page: temperley-lieb-root-of-unity-and-modular-representation-theory
+title: "Temperley–Lieb Root-of-Unity and Modular Representation Theory"
+status: draft
+items:
+  - def-temperley-lieb-complex-critical-labels-and-reflection
+  - lem-temperley-lieb-critical-standard-modules-are-simple
+  - lem-temperley-lieb-zero-loop-perfect-matching-standard-module-is-simple
+  - lem-temperley-lieb-annular-central-element-and-reflection-maps
+  - lem-temperley-lieb-root-gram-rank-and-reflection-dimensions
+  - lem-temperley-lieb-root-noncritical-radicals-and-simple-heads
+  - thm-temperley-lieb-root-interstandard-hom-spaces
+  - thm-temperley-lieb-root-projective-covers
+  - def-temperley-lieb-spencer-digit-support
+  - lem-temperley-lieb-jones-wenzl-ring-descent
+  - def-temperley-lieb-negligible-morphisms
+  - lem-temperley-lieb-negligible-morphisms-form-tensor-ideal
+  - def-temperley-lieb-negligible-quotient-category
+examples: []
+---
+
+This page keeps three separate subjects: complex root-of-unity standard modules, Spencer’s arbitrary-characteristic decomposition theory, and the negligible quotient/TLJ category. A result in one subject is not used to fill a proof gap in another.
+
+Companion: [[temperley-lieb-root-of-unity-and-modular-representation-theory-examples]].
+
+## Reading prerequisite
+
+The controlling plan requires [[temperley-lieb-semisimplicity-and-generic-structure]]. The earlier cellularity page is useful reading context, but the current plan does not declare it as a direct requires edge.
+
+## 1. Complex roots of unity
+
+Fix $q\in\mathbb C^\times$, $\delta=q+q^{-1}$, rank $n\ge0$, and arc count $p$ with $0\le p\le\lfloor n/2\rfloor$; the defect count is $t=n-2p$. The critical parameter is $\kappa=\operatorname{ord}(q^2)$, kept distinct from the recurrence quantum characteristic $\ell$. In particular at $q=\pm1$, $\kappa=1$ but $\ell=\infty$. The exact critical and reflected-label conventions are [[def-temperley-lieb-complex-critical-labels-and-reflection]].
+
+The supplied local results establish that every critical complex standard module has nondegenerate capping form and is simple ([[lem-temperley-lieb-critical-standard-modules-are-simple]]). This includes the $\kappa=1$ case and all critical labels at $\kappa=2$. The exceptional $\delta=0$, $n=2p>0$ perfect-matching standard module has identically zero ordinary form, but its actual module is simple by a separately proved renormalized-pairing and generator argument ([[lem-temperley-lieb-zero-loop-perfect-matching-standard-module-is-simple]]). Its zero form quotient is not used to infer its head.
+
+The full complex classification is supplied by [[lem-temperley-lieb-root-noncritical-radicals-and-simple-heads]]. A noncritical standard has a simple radical at the adjacent reflected label when that label is present; otherwise its radical is zero. The nonsplit radical/head sequence gives the composition factors and reflection linkage. The separate zero-loop perfect-matching result is retained: its ordinary form quotient is zero, while its actual simple module is the neighboring nonzero simple head. The proofs include $\kappa=1,2,3$, all higher finite orders, and the non-root regime.
+
+The explicit annular central element and induced link-state basis construct the reflection maps ([[lem-temperley-lieb-annular-central-element-and-reflection-maps]]), and the regular orthogonal Gram-block calculation gives their exact kernel/image dimensions ([[lem-temperley-lieb-root-gram-rank-and-reflection-dimensions]]). All inter-standard maps are classified in [[thm-temperley-lieb-root-interstandard-hom-spaces]], including the exceptional reverse rank-two map at $\delta=0$. Projective covers and their exact standard filtrations, together with their repeated-induction realization, are proved in [[thm-temperley-lieb-root-projective-covers]]. These are complex-field results; the separate Spencer and tilting-category statements below retain their own hypotheses.
+
+## 2. Arbitrary characteristic and Spencer digits
+
+For a field $K$ of characteristic $P$ (with $P=\infty$ in characteristic zero), a loop value $\delta\in K$, and recurrence quantum characteristic $\ell$, the exact digit and support-set convention is defined in [[def-temperley-lieb-spencer-digit-support]]. The support calculation in [[ex-temperley-lieb-spencer-support-digits-eleven]] is purely arithmetic.
+
+The full Spencer composition claim is retained with its source conventions: write $S(n,m)=W_{n,m}(K,\delta)$, with the left/right convention converted by diagram reflection, for the standard module with $m$ propagating strands, and let $D(n,r)$ denote the nonzero simple cell-form quotient of $W_{n,r}$. Here $m,r$ are admissible defect labels: $0\le m,r\le n$ and $n-m,n-r$ are even. With $\operatorname{Supp}_{\ell,P}(r)$ defined from the digits of $r+1$, the claim is that $D(n,r)$ is a composition factor of $S(n,m)$ exactly when $m\in\operatorname{Supp}_{\ell,P}(r)$, with multiplicity one. This is an authoring obligation, not a consequence of the digit definition or the example.
+
+The separate field-level normalized Jones–Wenzl claim is also retained: over a field, index $N$ has a normalized annihilating Jones–Wenzl idempotent exactly when $N<\ell$, or when $N=a\,s_i-1$ for $i\ge1$ and a finite scale $s_i$ with $1\le a<P$. In characteristic zero this includes every $N=a\ell-1$ with $a\ge1$; when $\ell=\infty$, every finite $N$ lies in the first branch. The field criterion [[thm-temperley-lieb-spencer-jones-wenzl-existence-criterion]] is proved on its owning A page using a split integral diagram representation, the quantum-binomial existence test, and a complete digit reduction; this does not establish the separate full composition-factor classification. The separate coefficient-ring theorem [[lem-temperley-lieb-jones-wenzl-ring-descent]] proves existence over every commutative ring exactly when every polynomial quantum-binomial in the row is a unit. It proves necessity by an explicit word-space kernel and unit descent through a free quadratic extension, and sufficiency by an integral linear retraction followed by coefficient projection of the normalized annihilation equations.
+
+The proposed A-page supplier for the remaining decomposition obligation is **thm-temperley-lieb-spencer-decomposition-numbers**. The separate field-level Jones–Wenzl proof is supplied by its existing owning page. The decomposition supplier must prove Spencer’s Theorem 8.4 under its field and quantum-characteristic hypotheses, with the imported support and candidate-morphism arguments in §§4–8 either proved locally or supplied explicitly. Coefficient-ring Jones–Wenzl descent is supplied separately by [[lem-temperley-lieb-jones-wenzl-ring-descent]]; the full decomposition theorem remains a distinct owner obligation.
+
+## 3. Negligible quotient and root tilting centralizers
+
+For every complex loop value $\delta$, negligible morphisms are defined by the unnormalized closure pairing and are proved to form a two-sided composition ideal and tensor ideal ([[def-temperley-lieb-negligible-morphisms]], [[lem-temperley-lieb-negligible-morphisms-form-tensor-ideal]]). At $q=e^{\pi i/\ell}$, $\ell\ge3$, the locally defined $\mathcal{TLJ}_\ell$ is the additive idempotent completion of the quotient ([[def-temperley-lieb-negligible-quotient-category]]).
+
+The semisimplification claim remains an unresolved local proof obligation: prove that this quotient completion is semisimple, identify all of its simple objects and prove the truncated $\mathrm{SU}(2)$ fusion rules, including the endpoint and negligible-object cases. Proposed supplier: **thm-temperley-lieb-jones-negligible-quotient-is-fusion**, placed here after the ideal proof. Chen’s lecture notes give a source treatment, but a source statement is not a local proof.
+
+At a different root-specific level, Iohara–Lehrer–Zhang state that the Jones quotient $Q_n(\ell)=\mathrm{TL}_n/\operatorname{rad}(\operatorname{Tr}_n)$ is the endomorphism algebra of the $n$th reduced tensor power of $\Delta_q(1)$ in the reduced $U_q(\mathfrak{sl}_2)$ tilting category, for $\ell\ge3$ and $q^2$ a primitive $\ell$th root. Their generators $f_i$ satisfy $f_i^2=-(q+q^{-1})f_i$; the diagram generator $d_i$ used here corresponds to $-f_i$, giving the sign translation for the quotient and trace convention. The source theorem is scoped to the Jones quotient and reduced tilting category; unreduced TL and generic Schur–Weyl have separate hypotheses and proof routes. Its proof uses the tilting-module decomposition and imports Andersen’s fusion-category result. A local supplier must define that category, establish the precise quotient-to-endomorphism map or isomorphism, and prove the required image/kernel statement with those hypotheses. Proposed supplier: **thm-temperley-lieb-jones-quotient-centralizer-in-root-tilting-category**. The current **def-root-of-unity-tilting-and-negligible-quotient-interface** is only a draft interface and does not prove tensor-ideal closure, semisimplicity, fusion, or the centralizer theorem.
+
+## Supplier and proof boundary
+
+The batch dependency file records the actual Batch 59 bodies inspected, their missing manifest entries, and the unresolved page prerequisite. Draft supplier text is not treated as owner acceptance. In particular, the complex-root arguments cite the actual current quantum-integer and Gram-determinant bodies; the modular projector criterion and root-tilting interface are not used as proof premises. The current quantum-integer definition correctly distinguishes $\kappa$ from $\ell$ at $q=\pm1$.

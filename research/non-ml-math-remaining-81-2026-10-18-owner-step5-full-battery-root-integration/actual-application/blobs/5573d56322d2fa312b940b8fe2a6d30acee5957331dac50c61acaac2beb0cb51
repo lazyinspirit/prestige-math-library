@@ -1,0 +1,693 @@
+{
+  "version": 1,
+  "level": "batch-44",
+  "note": "Contracts mirror the final phase-numbered arguments. Supplier quotations are exact current Definition or Statement sections; each proof step has explicit inputs, and all standard boundary cases are disposed. Mathematical readiness and cross-batch reconciliation are separate.",
+  "scope": [
+    "thm-bv-derived-bracket-is-odd-poisson",
+    "thm-classical-lie-action-brst-differential-squares-zero",
+    "thm-classical-master-equation-defines-square-zero-differential",
+    "cex-nonrepresentation-action-breaks-brst-nilpotence",
+    "ex-dilation-action-classical-brst-cohomology",
+    "ex-one-variable-bv-algebra-solves-classical-master-equation"
+  ],
+  "contracts": {
+    "thm-bv-derived-bracket-is-odd-poisson": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bv-algebra-and-degree-plus-one-bracket",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field of characteristic $0$. A unital $\\mathbb Z$-graded associative $k$-algebra\n$A=\\bigoplus_{r\\in\\mathbb Z}A^r$ is **graded commutative** when its unit $1$ has\ndegree $0$ and homogeneous $a,b$ satisfy $ab=(-1)^{|a||b|}ba$. A linear map\n$\\Delta:A^r\\to A^{r+1}$ is a **BV generator of degree $+1$** when\n$\\Delta(1)=0$, $\\Delta^2=0$, and it has order at most two in the following\ngraded-commutator convention. For homogeneous operators $P,Q$, set\n$$[P,Q]=PQ-(-1)^{|P||Q|}QP,$$\nand for homogeneous $a\\in A$ let $m_a(x)=ax$. The order condition is\n$$\\left[\\left[\\left[\\Delta,m_a\\right],m_b\\right],m_c\\right]=0$$\nfor all homogeneous $a,b,c\\in A$. The pair $(A,\\Delta)$ with these data is a\n**BV algebra in the degree-$+1$ convention**. Its derived bracket is the\nbilinear operation of degree $+1$\n$$\\{a,b\\}=(-1)^{|a|}\\bigl(\\Delta(ab)-(\\Delta a)b-(-1)^{|a|}a\\Delta b\\bigr)$$\non homogeneous elements, extended by linearity.\n\nThis item fixes the grading, commutator order condition, and bracket formula.\nIt does not include a separate differential $Q$ or assert compatibility with\none. The associated odd-skew, biderivation, and Jacobi identities are proved in\n[[thm-bv-derived-bracket-is-odd-poisson]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $m=|a|$, $n=|b|$, $\\delta_a=[\\Delta,m_a]$, and $T_{a,b}=[\\delta_a,m_b]$. By [F1], $[T_{a,b},m_c]=0$ for every homogeneous $c$, so $T_{a,b}(c)=(-1)^{|T_{a,b}||c|}cT_{a,b}(1)=T_{a,b}(1)c$; the two signs cancel by graded commutativity, hence $T_{a,b}=m_{T_{a,b}(1)}$. Direct evaluation gives $T_{a,b}(1)=\\Delta(ab)-(-1)^m a\\Delta b-(-1)^{(m+1)n}b\\Delta a=\\Delta(ab)-(-1)^m a\\Delta b-(\\Delta a)b=(-1)^m\\{a,b\\}$. Thus $[\\delta_a,m_b]=m_{(-1)^m\\{a,b\\}}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Graded commutativity expands the defining formula to $\\{b,a\\}=(-1)^{n+mn}\\Delta(ab)-(-1)^{n+mn+m}a\\Delta b-(-1)^{mn+n}(\\Delta a)b$. Multiplication by $-(-1)^{(m+1)(n+1)}$ reduces these coefficients, modulo $2$, to $(-1)^m$, $-1$, and $-(-1)^m$, respectively, giving exactly $\\{a,b\\}$. Each term of the bracket formula has degree $|a|+|b|+1$. This proves odd skew-symmetry and the degree assertion.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $H_a=\\delta_a-m_{\\Delta a}$. Then $H_a(1)=0$ and $[H_a,m_b]=m_{(-1)^m\\{a,b\\}}$ by step 1.1 because multiplication operators gradedly commute. Evaluating at $1$ gives $H_a(b)=(-1)^m\\{a,b\\}$; evaluating at homogeneous $c$ gives $H_a(bc)-(-1)^{(m+1)n}bH_a(c)=H_a(b)c$. Multiplying by $(-1)^m$ proves $\\{a,bc\\}=\\{a,b\\}c+(-1)^{(m+1)n}b\\{a,c\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Expansion of the graded commutators gives $[\\Delta,[\\Delta,m_b]]=[\\Delta^2,m_b]=0$ and $[\\delta_a,\\delta_b]=[\\Delta,[m_a,\\delta_b]]$, because the other graded-Jacobi term is a signed multiple of $[m_a,[\\Delta,\\delta_b]]=0$. By step 1.1 and odd skew-symmetry from step 1.2, $[m_a,\\delta_b]=-(-1)^{m(n+1)}[\\delta_b,m_a]=-m_{\\{a,b\\}}$, so $[\\delta_a,\\delta_b]=-[\\Delta,m_{\\{a,b\\}}]$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Rearranging the defining bracket gives $\\Delta(uv)=(\\Delta u)v+(-1)^{|u|}u\\Delta v+(-1)^{|u|}\\{u,v\\}$. Apply this to $(\\Delta a)b$ and $a(\\Delta b)$ when expanding $\\Delta\\{a,b\\}$; the two $(\\Delta a)(\\Delta b)$ terms cancel and $\\Delta^2=0$ leaves $\\Delta\\{a,b\\}=\\{\\Delta a,b\\}-(-1)^m\\{a,\\Delta b\\}$.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By steps 1.2 and 2.1, express $\\{ab,c\\}=-(-1)^{(|a|+|b|+1)(|c|+1)}\\{c,ab\\}$, expand $\\{c,ab\\}$ by the derivation rule, and use odd skew-symmetry on the two terms; reducing exponents modulo $2$ gives $\\{ab,c\\}=a\\{b,c\\}+(-1)^{|b|(|c|+1)}\\{a,c\\}b$. Hence the bracket is also a derivation in its first argument and is a biderivation.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Expanding $[H_a,H_b]$ using steps 1.1 and 2.2 gives $[H_a,H_b]=-[\\Delta,m_{\\{a,b\\}}]-(-1)^m m_{\\{a,\\Delta b\\}}+(-1)^{(m+1)(n+1)+n}m_{\\{b,\\Delta a\\}}$. By step 1.2, $\\{\\Delta a,b\\}=-(-1)^{m(n+1)}\\{b,\\Delta a\\}$, and the last coefficient equals $-(-1)^{m(n+1)}$; step 2.3 therefore makes the last two terms $m_{\\Delta\\{a,b\\}}$, so $[H_a,H_b]=-H_{\\{a,b\\}}$. Thus $D_a=\\{a,-\\}=(-1)^mH_a$ satisfies $[D_a,D_b]=(-1)^{m+n+1}H_{\\{a,b\\}}=D_{\\{a,b\\}}$; applying this to $c$ and rearranging is the stated odd Jacobi identity.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.2",
+            "step 2.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is over homogeneous algebra elements, not an indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: if any homogeneous input is zero, bilinearity of the defining bracket makes each displayed identity zero on both sides."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: substituting the unit gives {1,b}=\u0394b-\u03941\u00b7b-1\u00b7\u0394b=0, since \u03941=0 and 1 is the unit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No nondegenerate odd symplectic form or other nondegeneracy hypothesis occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or limiting-endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20134.1 quantify over arbitrary homogeneous elements and use algebraic identities only; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proof derives odd skew-symmetry, biderivation and Jacobi from the BV hypotheses using commutators; it asserts no iff characterization of BV operators."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An odd Poisson bracket is not asserted to recover a square-zero second-order BV generator."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Independently checked every current step 1.1\u20134.1 against the BV Definition and Getzler Proposition 1.2 (PDF pp.5\u20136), Seidel Lecture12 equations12.8\u201312.13 (printed/PDF119), and Kosmann-Schwarzbach\u2013Monterde sections1.1/1.3 (arXiv PDF4\u20135). Triple commutator makes T multiplication by T(1); subtracting multiplication by Delta a gives the signed bracket derivation. Checked all parity exponents, [delta_a,delta_b]=-delta_{bracket}, Delta bracket compatibility, and [H_a,H_b]=-H_bracket, hence odd Jacobi with the stated +1 degree. Zero inputs and unit give zero bracket; no nondegeneracy, finite-dimensionality, basis, AC or converse is assumed. Sources have their own conventions; the local commutator proof supplies the conversion. Corrected the Seidel and KSM locators only; proof and Statement unchanged. Reader found no defect; refuter finding is on the separate counterexample."
+      }
+    },
+    "thm-classical-lie-action-brst-differential-squares-zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-classical-lie-action-brst-complex",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a characteristic-zero field, let $\\mathfrak g$ be a Lie algebra over\n$k$, and let $A$ be a unital commutative $k$-algebra. A **classical\nLie-action BRST input** is a Lie algebra homomorphism\n$\\rho:\\mathfrak g\\to\\operatorname{End}_k(A)$ whose values are derivations:\nfor $x\\in\\mathfrak g$ and $a,b\\in A$,\n$$\\rho(x)(ab)=\\rho(x)(a)b+a\\rho(x)(b),\\qquad \\rho(x)(1)=0.$$\nIn particular, $A$ is a $\\mathfrak g$-module, so its Chevalley\u2013Eilenberg\ncochains are\n$$C^n_{\\mathrm{BRST}}(\\mathfrak g,A)=\\operatorname{Hom}_k(\\Lambda^n\\mathfrak g,A)\\quad(n\\geq0),$$\nand are zero for $n<0$. Define the degree-$+1$ **classical Lie-action BRST\noperator** by the fixed zero-based formula\n$$\\begin{aligned}(d_{\\mathrm{BRST}}f)(x_0,\\ldots,x_n)={}&\\sum_{i=0}^n(-1)^i\\rho(x_i)f(x_0,\\ldots,\\widehat{x_i},\\ldots,x_n)\\\\&+\\sum_{0\\leq i<j\\leq n}(-1)^{i+j}f([x_i,x_j],x_0,\\ldots,\\widehat{x_i},\\ldots,\\widehat{x_j},\\ldots,x_n).\\end{aligned}$$\nA hat denotes omission; the bracket is inserted first. This is exactly the\nChevalley\u2013Eilenberg differential for the stated representation, with the\nBRST name reserved here for this classical Lie-action model.\n\nIts square-zero property and the resulting quotient cohomology are established\nin [[thm-classical-lie-action-brst-differential-squares-zero]]. This model does\nnot claim a Koszul\u2013Tate resolution, a BFV charge for arbitrary first-class\nconstraints, reducible or open gauge algebras, field-dependent structure\nfunctions, or quantum BRST cohomology.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-the-chevalley-eilenberg-differential-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "For every $n$ and every $f\\in C^n(\\mathfrak g,M)$, one has\n$d^{n+1}d^n f=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The assumptions in [F1] make $A$ a $\\mathfrak g$-module because $\\rho$ is a Lie algebra homomorphism, so $[\\rho(x),\\rho(y)]=\\rho([x,y])$. The cochain spaces and both signed sums in $d_{\\mathrm{BRST}}$ are term-by-term those in [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore [F2] applies to these exact inputs and gives $d_{\\mathrm{BRST}}^{n+1}d_{\\mathrm{BRST}}^n=0$ for every $n\\geq0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $z\\in\\operatorname{im}(d_{\\mathrm{BRST}}^{n-1})$, write $z=d_{\\mathrm{BRST}}^{n-1}w$. Step 2.1 gives $d_{\\mathrm{BRST}}^n z=d_{\\mathrm{BRST}}^nd_{\\mathrm{BRST}}^{n-1}w=0$, so the image is contained in the kernel and the displayed quotient is well-defined.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: for the zero Lie algebra, C^0=A and C^n=0 for n>0, so d=0 and the quotient is defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: C^{-1}=0 makes im(d^{-1})=0, so H^0=ker(d^0); step 2.1 supplies d\u00b2=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for a one-dimensional Lie algebra, \u039b^n g=0 for n\u22652; the same representation theorem applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No bilinear form or nondegenerate geometric structure is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit, or endpoint appears in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 use the given representation and a quotient construction; no basis or choice is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The specified Lie action makes the BRST operator exactly the Chevalley\u2013Eilenberg differential, giving square zero (1.1\u20132.1), without an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Square zero of an arbitrary cochain operator is not asserted sufficient to recover the BRST Lie-action input."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Opened the current BRST definition and the published CE cochains/differential, Lie algebra, representation, and square-zero theorem. The two signed sums and domains coincide exactly; the Lie homomorphism makes A a module. Read the supplier expansion: two-action terms cancel created-bracket action by the representation identity, mixed three-index terms have opposite parity, disjoint bracket terms cancel by alternation, nested brackets cancel by Jacobi. No finite-dimensionality or basis/AC is needed. n=0 is the representation identity; negative/zero spaces give zero composites; n=0 cohomology uses C^-1=0. Image is contained in kernel, so the quotient exists. Independently inspected Weibel PDF25 image: Corollary7.7.3 and coboundary are on printed240, not241. Corrected only that locator. Published CE definition locators are inaccurate and are reported read-only; their actual defining formulas are sound."
+      }
+    },
+    "thm-classical-master-equation-defines-square-zero-differential": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-classical-and-formal-quantum-master-equations",
+          "source_section": "Definition",
+          "quote": "Let $(A,\\Delta)$ be a BV algebra in the degree-$+1$ convention of\n[[def-bv-algebra-and-degree-plus-one-bracket]], with derived bracket $\\{-,-\\}$.\nFor an element $S\\in A^0$, the **classical master equation** (CME) is\n$$\\{S,S\\}=0.$$\n\nFor a formal version, take $A$ over $\\mathbb C$, let $\\hbar$ be a central\nformal variable of degree $0$, and write $A[\\![\\hbar]\\!]$ for formal power series\nwith the Cauchy product. Extend $\\Delta$ and $\\{-,-\\}$ coefficientwise. For\n$S_\\hbar\\in A^0[\\![\\hbar]\\!]$, the **formal quantum master equation** (QME) in\nthe convention used here is\n$$\\frac12\\{S_\\hbar,S_\\hbar\\}-i\\hbar\\Delta S_\\hbar=0$$\nas an equality in $A^1[\\![\\hbar]\\!]$, checked coefficientwise. Each coefficient\nuses only a finite Cauchy sum, so this is a formal algebraic condition and\nrequires no analytic convergence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bv-derived-bracket-is-odd-poisson",
+          "source_section": "Statement",
+          "quote": "Let $(A,\\Delta)$ be as in [[def-bv-algebra-and-degree-plus-one-bracket]].\nFor homogeneous $a,b,c\\in A$, the derived bracket has degree\n$|\\{a,b\\}|=|a|+|b|+1$ and satisfies\n$$\\{a,b\\}=-(-1)^{(|a|+1)(|b|+1)}\\{b,a\\},$$\n$$\\{a,bc\\}=\\{a,b\\}c+(-1)^{(|a|+1)|b|}b\\{a,c\\},$$\nand\n$$\\{a,\\{b,c\\}\\}=\\{\\{a,b\\},c\\}+(-1)^{(|a|+1)(|b|+1)}\\{b,\\{a,c\\}\\}.$$\nThus it is an odd Poisson bracket, meaning an odd-skew bracket that is a\nderivation in each argument and satisfies the displayed odd Jacobi identity.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since the bracket has degree $+1$ by [F2] and $|S|=0$, the map $d_S(a)=\\{S,a\\}$ sends $A^r$ into $A^{r+1}$ and has degree $+1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply the Jacobi identity [F2] with $a=b=S$ and third entry $x$; its sign is $(-1)^{(0+1)(0+1)}=-1$, so $\\{S,\\{S,x\\}\\}=\\{\\{S,S\\},x\\}-\\{S,\\{S,x\\}\\}$ and therefore $2d_S^2(x)=\\{\\{S,S\\},x\\}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The CME [F1] makes the right side zero. Characteristic zero makes $2$ invertible, hence $d_S^2(x)=0$ for every $x\\in A$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "There is no indexed family or empty-sum branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: S=0 gives d_S=0 by bilinearity of the derived bracket."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scalar parameter or cardinality-one case appears."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No nondegeneracy or symplectic hypothesis occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use only the given element, Jacobi, and characteristic zero; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts one implication from CME to square-zero, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no converse from square-zero to CME."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": []
+    },
+    "cex-nonrepresentation-action-breaks-brst-nilpotence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-classical-lie-action-brst-complex",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a characteristic-zero field, let $\\mathfrak g$ be a Lie algebra over\n$k$, and let $A$ be a unital commutative $k$-algebra. A **classical\nLie-action BRST input** is a Lie algebra homomorphism\n$\\rho:\\mathfrak g\\to\\operatorname{End}_k(A)$ whose values are derivations:\nfor $x\\in\\mathfrak g$ and $a,b\\in A$,\n$$\\rho(x)(ab)=\\rho(x)(a)b+a\\rho(x)(b),\\qquad \\rho(x)(1)=0.$$\nIn particular, $A$ is a $\\mathfrak g$-module, so its Chevalley\u2013Eilenberg\ncochains are\n$$C^n_{\\mathrm{BRST}}(\\mathfrak g,A)=\\operatorname{Hom}_k(\\Lambda^n\\mathfrak g,A)\\quad(n\\geq0),$$\nand are zero for $n<0$. Define the degree-$+1$ **classical Lie-action BRST\noperator** by the fixed zero-based formula\n$$\\begin{aligned}(d_{\\mathrm{BRST}}f)(x_0,\\ldots,x_n)={}&\\sum_{i=0}^n(-1)^i\\rho(x_i)f(x_0,\\ldots,\\widehat{x_i},\\ldots,x_n)\\\\&+\\sum_{0\\leq i<j\\leq n}(-1)^{i+j}f([x_i,x_j],x_0,\\ldots,\\widehat{x_i},\\ldots,\\widehat{x_j},\\ldots,x_n).\\end{aligned}$$\nA hat denotes omission; the bracket is inserted first. This is exactly the\nChevalley\u2013Eilenberg differential for the stated representation, with the\nBRST name reserved here for this classical Lie-action model.\n\nIts square-zero property and the resulting quotient cohomology are established\nin [[thm-classical-lie-action-brst-differential-squares-zero]]. This model does\nnot claim a Koszul\u2013Tate resolution, a BFV charge for arbitrary first-class\nconstraints, reducible or open gauge algebras, field-dependent structure\nfunctions, or quantum BRST cohomology.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The maps $\\partial_x$ and $x\\partial_y$ are derivations by the polynomial product rule, and $[\\partial_x,x\\partial_y]f=\\partial_x(x\\partial_y f)-x\\partial_y(\\partial_x f)=\\partial_y f$. Since $[u,v]=0$ but $\\partial_y\\neq0$, $\\rho$ is not a Lie algebra homomorphism and is not an admissible input in [[def-classical-lie-action-brst-complex]].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the $0$-cochain $f=y$, [F1] gives $(df)(u)=0$ and $(df)(v)=x$. Applying [F1] again gives $d^2f(u,v)=\\rho(u)(x)-\\rho(v)(0)-0=\\partial_x x=1$. Thus the formula fails to square to zero when the representation hypothesis is dropped, refuting the statement.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a nonempty two-dimensional constraint Lie algebra."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Counterexample: the zero action is a representation and its CE differential squares to zero; the exhibited nonrepresentation gives the nonzero value at step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness needs two generators with noncommuting derivations and makes no one-dimensional nonrepresentation claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate form or rank condition is present."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or limiting parameter is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use explicit polynomial derivations and no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not a biconditional."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": []
+    },
+    "ex-dilation-action-classical-brst-cohomology": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-classical-lie-action-brst-complex",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a characteristic-zero field, let $\\mathfrak g$ be a Lie algebra over\n$k$, and let $A$ be a unital commutative $k$-algebra. A **classical\nLie-action BRST input** is a Lie algebra homomorphism\n$\\rho:\\mathfrak g\\to\\operatorname{End}_k(A)$ whose values are derivations:\nfor $x\\in\\mathfrak g$ and $a,b\\in A$,\n$$\\rho(x)(ab)=\\rho(x)(a)b+a\\rho(x)(b),\\qquad \\rho(x)(1)=0.$$\nIn particular, $A$ is a $\\mathfrak g$-module, so its Chevalley\u2013Eilenberg\ncochains are\n$$C^n_{\\mathrm{BRST}}(\\mathfrak g,A)=\\operatorname{Hom}_k(\\Lambda^n\\mathfrak g,A)\\quad(n\\geq0),$$\nand are zero for $n<0$. Define the degree-$+1$ **classical Lie-action BRST\noperator** by the fixed zero-based formula\n$$\\begin{aligned}(d_{\\mathrm{BRST}}f)(x_0,\\ldots,x_n)={}&\\sum_{i=0}^n(-1)^i\\rho(x_i)f(x_0,\\ldots,\\widehat{x_i},\\ldots,x_n)\\\\&+\\sum_{0\\leq i<j\\leq n}(-1)^{i+j}f([x_i,x_j],x_0,\\ldots,\\widehat{x_i},\\ldots,\\widehat{x_j},\\ldots,x_n).\\end{aligned}$$\nA hat denotes omission; the bracket is inserted first. This is exactly the\nChevalley\u2013Eilenberg differential for the stated representation, with the\nBRST name reserved here for this classical Lie-action model.\n\nIts square-zero property and the resulting quotient cohomology are established\nin [[thm-classical-lie-action-brst-differential-squares-zero]]. This model does\nnot claim a Koszul\u2013Tate resolution, a BFV charge for arbitrary first-class\nconstraints, reducible or open gauge algebras, field-dependent structure\nfunctions, or quantum BRST cohomology.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-classical-lie-action-brst-differential-squares-zero",
+          "source_section": "Statement",
+          "quote": "For every classical Lie-action BRST input of\n[[def-classical-lie-action-brst-complex]] and every $n\\geq0$,\n$$d_{\\mathrm{BRST}}^{n+1}d_{\\mathrm{BRST}}^n=0.$$\nConsequently, the quotient\n$$H^n_{\\mathrm{BRST}}(\\mathfrak g,A):=\\ker(d_{\\mathrm{BRST}}^n)/\\operatorname{im}(d_{\\mathrm{BRST}}^{n-1})$$\nis a well-defined vector space, with $C^{-1}_{\\mathrm{BRST}}=0$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The operator $x\\frac{d}{dx}$ is a derivation; for the one-dimensional abelian $\\mathfrak g$, its assignment to $e$ is a representation because $[\\rho(e),\\rho(e)]=0=\\rho([e,e])$. Thus this is an admissible input for [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $\\Lambda^0\\mathfrak g=\\mathbb C$, $\\Lambda^1\\mathfrak g=\\mathfrak g$, and $\\Lambda^n\\mathfrak g=0$ for $n\\geq2$, the only nonzero cochains are $C^0\\cong\\mathbb C[x]$ and $C^1\\cong\\mathbb C[x]$; [F1] gives $df=x f'$ and $d:C^1\\to C^2=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $f=\\sum_{r=0}^N a_r x^r$, $x f'=\\sum_{r=1}^N r a_r x^r$; characteristic zero makes each $r\\geq1$ invertible, so the kernel is $\\mathbb C$ and $H^0_{\\mathrm{BRST}}\\cong\\mathbb C$ by [F2].",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The image of $x\\frac{d}{dx}$ is exactly $x\\mathbb C[x]$: every output has zero constant term and $x^r$ is the image of $x^r/r$ for $r\\geq1$. Hence $H^1_{\\mathrm{BRST}}\\cong\\mathbb C[x]/x\\mathbb C[x]\\cong\\mathbb C$, while $C^n=0$ gives $H^n=0$ for $n\\geq2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a one-dimensional Lie algebra rather than an empty index set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.3: the zero polynomial is closed and represents zero in H^0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: the one-dimensional Lie algebra has C^1\u2245C[x] and C^n=0 for n\u22652."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No bilinear form or nondegenerate geometric structure is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use explicit polynomial coefficients and no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states computations, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states computations, not an equivalence."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Read all Verification steps and the exact BRST definition and reviewed square-zero supplier. The single assigned derivation defines a representation of the one-dimensional abelian Lie algebra, by bilinearity and the zero self-commutator. Exterior powers vanish above degree1; evaluation at e identifies C1 with C[x], with d0(f)=x f-prime and d1=0. Independently coefficientwise checked kernel constants and image exactly x C[x], including explicit preimages x^r/r for r>=1; all coefficients are finite and division is valid over C. Constant/zero polynomial and degree0 negative-space convention are covered; quotient by x C[x] is evaluation at0, so both H0 and H1 are C and all higher groups vanish. No analytic completion, basis choice, AC or positive-characteristic extrapolation is used. Read Weibel Corollary7.7.3 printed240/PDF25 for the exact cochain context; its stated source range contains the formula. No reader/refuter defect or new mathematical defect."
+      }
+    },
+    "ex-one-variable-bv-algebra-solves-classical-master-equation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bv-algebra-and-degree-plus-one-bracket",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field of characteristic $0$. A unital $\\mathbb Z$-graded associative $k$-algebra\n$A=\\bigoplus_{r\\in\\mathbb Z}A^r$ is **graded commutative** when its unit $1$ has\ndegree $0$ and homogeneous $a,b$ satisfy $ab=(-1)^{|a||b|}ba$. A linear map\n$\\Delta:A^r\\to A^{r+1}$ is a **BV generator of degree $+1$** when\n$\\Delta(1)=0$, $\\Delta^2=0$, and it has order at most two in the following\ngraded-commutator convention. For homogeneous operators $P,Q$, set\n$$[P,Q]=PQ-(-1)^{|P||Q|}QP,$$\nand for homogeneous $a\\in A$ let $m_a(x)=ax$. The order condition is\n$$\\left[\\left[\\left[\\Delta,m_a\\right],m_b\\right],m_c\\right]=0$$\nfor all homogeneous $a,b,c\\in A$. The pair $(A,\\Delta)$ with these data is a\n**BV algebra in the degree-$+1$ convention**. Its derived bracket is the\nbilinear operation of degree $+1$\n$$\\{a,b\\}=(-1)^{|a|}\\bigl(\\Delta(ab)-(\\Delta a)b-(-1)^{|a|}a\\Delta b\\bigr)$$\non homogeneous elements, extended by linearity.\n\nThis item fixes the grading, commutator order condition, and bracket formula.\nIt does not include a separate differential $Q$ or assert compatibility with\none. The associated odd-skew, biderivation, and Jacobi identities are proved in\n[[thm-bv-derived-bracket-is-odd-poisson]].",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-classical-and-formal-quantum-master-equations",
+          "source_section": "Definition",
+          "quote": "Let $(A,\\Delta)$ be a BV algebra in the degree-$+1$ convention of\n[[def-bv-algebra-and-degree-plus-one-bracket]], with derived bracket $\\{-,-\\}$.\nFor an element $S\\in A^0$, the **classical master equation** (CME) is\n$$\\{S,S\\}=0.$$\n\nFor a formal version, take $A$ over $\\mathbb C$, let $\\hbar$ be a central\nformal variable of degree $0$, and write $A[\\![\\hbar]\\!]$ for formal power series\nwith the Cauchy product. Extend $\\Delta$ and $\\{-,-\\}$ coefficientwise. For\n$S_\\hbar\\in A^0[\\![\\hbar]\\!]$, the **formal quantum master equation** (QME) in\nthe convention used here is\n$$\\frac12\\{S_\\hbar,S_\\hbar\\}-i\\hbar\\Delta S_\\hbar=0$$\nas an equality in $A^1[\\![\\hbar]\\!]$, checked coefficientwise. Each coefficient\nuses only a finite Cauchy sum, so this is a formal algebraic condition and\nrequires no analytic convergence.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-classical-master-equation-defines-square-zero-differential",
+          "source_section": "Statement",
+          "quote": "Let $(A,\\Delta)$ be as in [[def-bv-algebra-and-degree-plus-one-bracket]], and\nlet $S\\in A^0$ satisfy the classical master equation in\n[[def-classical-and-formal-quantum-master-equations]]. Then\n$d_S:A\\to A$, $d_S(a)=\\{S,a\\}$, has degree $+1$ and satisfies $d_S^2=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every element is $f(x)+\\theta g(x)$ with $f,g\\in\\mathbb C[x]$ and $\\theta^2=0$; the polynomial quotient multiplication is associative and the assigned degrees make it graded commutative. For homogeneous factors, the ordinary product rule gives the Leibniz rule for $\\partial_x$; direct expansion gives $\\partial_\\theta(f\\theta j)=fj$, $\\partial_\\theta(\\theta g h)=gh$, and $\\partial_\\theta((\\theta g)(\\theta h))=0=g(\\theta h)-(\\theta g)h$, so $\\partial_\\theta$ is a degree-$+1$ graded derivation. Thus $\\Delta(f+\\theta g)=g'(x)$ has degree $+1$, $\\Delta(1)=0$, and $\\Delta^2=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a homogeneous derivation $D$, $[D,m_a]=m_{D(a)}$; the composition identity gives $[\\Delta,m_a]=m_{\\Delta a}+m_{\\partial_\\theta a}\\partial_x+(-1)^{|a|}m_{\\partial_x a}\\partial_\\theta$. Commuting once more yields $[[\\Delta,m_a],m_b]=m_{\\partial_\\theta a}m_{\\partial_x b}+(-1)^{|a|}m_{\\partial_x a}m_{\\partial_\\theta b}$, a multiplication operator. Multiplication operators gradedly commute, so the third commutator with $m_c$ is zero and [F1]'s order condition holds.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Direct substitution in [F1] gives $\\{f(x),\\theta g(x)\\}=f'(x)g(x)$ because $\\Delta(f\\theta g)=(fg)'$, $\\Delta f=0$, and $\\Delta(\\theta g)=g'$. Hence $\\{S,\\theta g\\}=x^2g$ and $\\{S,f\\}=0$; also $S$ and $S^2$ depend only on $x$, so $\\{S,S\\}=0$ by the same formula. Thus $S$ satisfies the CME [F2].",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.2 gives $d_S(f+\\theta g)=x^2g$, which is independent of $\\theta$ and is killed by $d_S$. Therefore $d_S^2=0$ directly, in agreement with [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses the nonzero polynomial algebra C[x,\u03b8]/(\u03b8\u00b2)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the element S=0 is also a CME solution in the same algebra and its Hamiltonian operation is zero by bilinearity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 gives {f,\u03b8g}=f'g; setting f=1 verifies that the bracket with the unit is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item asserts an algebraic example and assumes no nondegenerate odd symplectic form."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or limit is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 use explicit polynomial operations only; no choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example is not a biconditional."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-44",
+        "notes": "Read all current Verification steps, every dependency Definition/Statement, and the CME supplier proof. The quotient has unique f+theta g normal form and graded-commutative multiplication with theta degree-1. Direct products in all four parity combinations show partial_theta is a degree+1 graded derivation; partial_x has degree0. Delta(f+theta g)=g-prime annihilates its own output and the unit. Checked the two explicit commutator expansions: after the second commutator only multiplication remains, hence the third vanishes for every homogeneous input. Derived bracket substitution gives {f,theta g}=f-prime g; S=x^3/3 has degree0 and {S,S}=0, and dS=x^2g squares to zero directly and by the reviewed Jacobi/characteristic0 supplier. Zero and unit inputs, theta^2 relation, negative degree and nonhomogeneous linear extension all agree; no AC, symplectic nondegeneracy or analytic claims occur. Sources read: Getzler Proposition1.2 PDF5\u20136 and Schwarz opening odd coordinate model equation1 PDF2 (equation7 PDF3 also checked as context). Actual source conventions are contextual; all example operations and signs are proved locally. Reader/refuter supply no contrary evidence. An inaccurate KSM PDF locator on the unrouted CME theorem dependency is alerted separately, not used to replace its sound local Jacobi proof."
+      }
+    }
+  }
+}

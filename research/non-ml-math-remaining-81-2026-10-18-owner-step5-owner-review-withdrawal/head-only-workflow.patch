@@ -1,0 +1,186 @@
+diff --git a/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-owner-review-withdrawal/head-before/tools/step5-workflow.mjs b/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-owner-review-withdrawal/head-only-candidate/tools/step5-workflow.mjs
+index 0f92d93df9..c14c63a267 100644
+--- a/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-owner-review-withdrawal/head-before/tools/step5-workflow.mjs
++++ b/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-owner-review-withdrawal/head-only-candidate/tools/step5-workflow.mjs
+@@ -11,6 +11,7 @@ import { isPublishedItem } from './published-repair-policy.mjs';
+ import { itemHashGuard } from './item-hash.mjs';
+ import { currentHashesMany } from './step5-terminal-resolution.mjs';
+ import { MODELS } from './models.mjs';
++import { loadOwnerReviewWithdrawal, withdrawnOwnerReport, withdrawalAllowsFreshPass, freshWithdrawalEvidence } from './step5-owner-review-withdrawal.mjs';
+ import { supportingQuoteHistory } from './step5-quote-history.mjs';
+ import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+ import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
+@@ -1338,6 +1339,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
+   // Validate original reviews against exact historical source bytes only.
+   // The collection's post snapshot below always describes actual current bytes.
+   if(metadataHistory)Object.assign(reported,metadataHistory.historicalGuards);
++  const withdrawal=phase==='impact-initial'&&round===1?loadOwnerReviewWithdrawal(root,run,{current:true}):null;
+   const ownerSupplement=loadOwnerSupplement(root,pack,reports,current,items);
+   const currentRepairPath=join(workflowDir(root,run),`${phase}-${round}-owner-current-repairs.json`);
+   const currentRepairs=existsSync(currentRepairPath)?{
+@@ -1357,6 +1359,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
+   if(result.errors.length)throw Error(result.errors.join('\n'));
+   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+   Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{},publishedMaintenance?.evidence??{});
++  for(const [p,h]of Object.entries(withdrawal?.evidence??{})){requireValue(!evidence[p]||evidence[p]===h,'withdrawal evidence collision');evidence[p]=h;}
+   verifyEvidence(evidence);
+   const creationAuthors=new Map();
+   for(const unit of pack.units) {
+@@ -1373,7 +1376,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
+     for(const [path,hash] of Object.entries(supporting)){
+       requireValue(resolve(path).startsWith(resolve(root,'research')+'/')&&/^[a-f0-9]{64}$/.test(hash),`invalid supporting evidence path or hash: ${path}`);
+     }
+-    Object.assign(evidence,frozenSupportingEvidence(root,run,supporting));
++    if(!withdrawnOwnerReport(withdrawal,pack,unit))Object.assign(evidence,frozenSupportingEvidence(root,run,supporting));
+     const report=reports.find(value=>String(value.unit)===unit);
+     if(report.completion==='mechanical-zero-work'){
+       assertEmptyAdjudicationInput(root,run,phase,round,unit,report.input_sha256);
+@@ -1407,6 +1410,13 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
+   // joining them records routing, never an additional mathematical review.
+   const downstream=[...new Set([...reports.flatMap(row=>row.downstream),...result.created_items.flatMap(row=>row.consumers)])];
+   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root,run),downstream,ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
++  if(withdrawal){
++    receipt.review_withdrawal={path:withdrawal.path,unit:'1',targets:[...withdrawal.row.targets],review_credit_granted:false,repair_acceptance_granted:false};
++    receipt.withdrawn_native_reviews=withdrawal.row.original_reviews;
++    receipt.withdrawn_supporting_evidence=withdrawal.row.original_supporting_evidence;
++    receipt.reviews=receipt.reviews.filter(row=>!withdrawal.ids.has(row.id));
++    receipt.withdrawn_physical_changes=receipt.changed.filter(id=>withdrawal.ids.has(id));
++  }
+   if(publishedMaintenance)receipt.published_maintenance={path:publishedMaintenance.path,ids:[...publishedMaintenance.ids],historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false};
+   if(metadataHistory){
+     const historical=new Set(metadataHistory.sourceIds);
+@@ -1520,7 +1530,8 @@ export const maintenancePack=(root,run,id)=>read(join(root,'research',`${run}-co
+ // obligations. A native review belongs to its report lane and persistent session,
+ // never to the last writer or an arbitrarily selected supplier owner.
+ function readerReviewOwnership(root,run,packs,receipts,items,current) {
+-  const obligations=new Map(),originalOwners={},events=[],records=[],contexts=reviewContexts(items);
++  const obligations=new Map(),originalOwners={},events=[],records=[],contexts=reviewContexts(items),evidence={};
++  const withdrawal=packs.some(p=>p.phase==='impact-initial'&&p.round===1)?loadOwnerReviewWithdrawal(root,run):null;
+   const frontier=new Set(packs.flatMap(pack=>pack.frontier_ids??[]));
+   const add=(id,unit)=>{
+     if(!frontier.has(id))return false;
+@@ -1537,7 +1548,8 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
+       originalOwners[concern.id]=unit;add(concern.id,unit);
+     }
+   }
+-  if(!obligations.size)return {originalOwners,obligations,pending:new Map(),coverage:[]};
++  if(withdrawal)for(const id of withdrawal.row.targets){requireValue(!originalOwners[id]||originalOwners[id]==='1','withdrawn original reviewer changed');originalOwners[id]='1';add(id,'1');}
++  if(!obligations.size)return {originalOwners,obligations,pending:new Map(),coverage:[],evidence};
+   const originCache=new Map();
+   const origin=unit=>{
+     if(originCache.has(unit))return originCache.get(unit);
+@@ -1568,14 +1580,15 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
+       const units=pack.units.filter(unit=>pack.assignments[unit]?.includes(event.id)||createdBy(unit));
+       const review=units.length===1?nativeReports.get(units[0]).reviews.find(row=>row.id===event.id):null;
+       requireValue((review?.disposition==='repaired'||review?.disposition==='authored'&&createdBy(units[0]))
+-        &&review.post_sha256===receipt.post[event.id],
++        &&(review.post_sha256===receipt.post[event.id]||withdrawnOwnerReport(withdrawal,pack,units[0],receipt)
++          &&withdrawal.row.original_reviews.some(row=>row.id===event.id&&row.post_sha256===review.post_sha256)),
+         `reader repair event lacks its actual native repairing or creating lane: ${event.id}`);
+       events.push({id:event.id,unit:units[0]});
+     }
+     for(const unit of pack.units){
+       const reportPath=workerReport(root,run,pack.phase,pack.round,unit),report=nativeReports.get(unit);
+       const dispatchPath=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel(pack.phase,pack.round,unit)}.result.json`);
+-      for(const review of report.reviews??[])records.push({id:review.id,unit,review,pack,receipt,reportPath,dispatchPath});
++      if(!withdrawnOwnerReport(withdrawal,pack,unit,receipt))for(const review of report.reviews??[])records.push({id:review.id,unit,review,pack,receipt,reportPath,dispatchPath});
+     }
+   }
+   // Only actual interface changes propagate. If an already affected consumer
+@@ -1624,6 +1637,7 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
+             `reader review continuation lacks its exact original session binding: ${id}/${unit}`);
+         }
+         if(!currentReview)continue;
++        if(withdrawal?.ids.has(id))Object.assign(evidence,freshWithdrawalEvidence(withdrawal,{...record,root,run}));
+         match={id,unit,phase:record.pack.phase,report:record.reportPath,dispatch:record.dispatchPath,
+           session_id:dispatch.session_id,review_sha256:digest(record.review)};
+       }
+@@ -1631,7 +1645,7 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
+       else {if(!pending.has(id))pending.set(id,[]);pending.get(id).push(unit);}
+     }
+   }
+-  return {originalOwners,obligations,pending,coverage};
++  return {originalOwners,obligations,pending,coverage,evidence};
+ }
+ const readerObligationInventory=ownership=>Object.fromEntries([...ownership.obligations]
+   .sort(([a],[b])=>a.localeCompare(b)).map(([id,units])=>[id,[...units].sort()]));
+@@ -1639,6 +1653,7 @@ const readerObligationInventory=ownership=>Object.fromEntries([...ownership.obli
+ // An explicit native pending consumer is an owner-wave duty, even when the
+ // old initial source review still matches an unchanged Statement/Definition.
+ function nativeDownstreamPending(root,run,packs,receipts,items,current) {
++  const withdrawal=packs.some(p=>p.phase==='impact-initial'&&p.round===1)?loadOwnerReviewWithdrawal(root,run):null;
+   const contexts=reviewContexts(items),frontier=gateFrontier(root,run),claims=[],records=[],evidence={};
+   const bound=(receipt,path)=>receipt.evidence?.[path]===digest(readFileSync(path,'utf8'));
+   const success=record=>{
+@@ -1695,7 +1710,7 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current) {
+     let match=null;
+     // A same-wave sibling or later genuine owner review may discharge the
+     // consumer. Initial adjudicator reviews and earlier passes cannot do so.
+-    for(const record of records.filter(row=>row.index>=latest))for(const review of record.report.reviews??[]){
++    for(const record of records.filter(row=>row.index>=latest&&!withdrawnOwnerReport(withdrawal,row.pack,row.unit,row.receipt)))for(const review of record.report.reviews??[]){
+       if(review.id!==id||!record.pack.assignments[record.unit]?.includes(id)
+         ||!contexts.matches(review,current,record.receipt.post))continue;
+       requireValue(record.receipt.reviews.some(row=>digest(row)===digest(review)),
+@@ -1724,7 +1739,7 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current) {
+   return {obligations:claims,pending,coverage,evidence};
+ }
+ 
+-export function assertImpactProgress(packs,pending,current,{items=null,reviewOwners=null}={}) {
++export function assertImpactProgress(packs,pending,current,{items=null,reviewOwners=null,withdrawal=null}={}) {
+   const targets=[...new Set(pending)].sort();
+   for(const pack of packs) {
+     // Pre-statement-policy assignments may legitimately need one migration
+@@ -1734,7 +1749,7 @@ export function assertImpactProgress(packs,pending,current,{items=null,reviewOwn
+     const scoped=items?prerequisiteScope(items,targets):subjectScope(pack);
+     const sameOwners=!reviewOwners||targets.every(id=>!reviewOwners[id]
+       ||(pack.reader_review_owners?.[id]??pack.units.find(unit=>pack.assignments[unit]?.includes(id)))===reviewOwners[id]);
+-    if(JSON.stringify(previous)===JSON.stringify(targets)&&sameOwners&&diff(pack.before,current).filter(id=>!scoped||scoped.has(id)).length===0)
++    if(JSON.stringify(previous)===JSON.stringify(targets)&&sameOwners&&diff(pack.before,current).filter(id=>!scoped||scoped.has(id)).length===0&&!withdrawalAllowsFreshPass(withdrawal,pack,targets,current))
+       throw Error(`Step 5 no-progress hold: ${pack.phase} already assigned the same ${targets.length} pending item(s) at this exact content state. Resolve stale/missing review evidence or the repair oscillation before retry; no duplicate owner wave was launched.`);
+   }
+ }
+@@ -1805,6 +1820,7 @@ export function advanceImpact(root,run,phase,round) {
+     .filter(id=>!scope.targets.includes(id)&&!changed.includes(id));
+   if(operationalIds.length){verifyOperationalCoverage(root,run,operationalIds,current);for(const id of operationalIds)required.delete(id);}
+   const packs=progress.passes.map(pass=>readPack(root,run,pass,round));
++  const withdrawal=phase==='impact-initial'&&round===1?loadOwnerReviewWithdrawal(root,run):null;
+   const ownership=readerReviewOwnership(root,run,packs,completed,items,current);
+   const explicitPending=nativeDownstreamPending(root,run,packs,completed,items,current);
+   const pending=[...new Set([...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id)))
+@@ -1815,7 +1831,7 @@ export function advanceImpact(root,run,phase,round) {
+     const selectedOwners=Object.fromEntries([...ownership.pending].map(([id,units])=>[id,units[0]]));
+     for(const id of pending)if(!selectedOwners[id]&&ownership.obligations.has(id))selectedOwners[id]=[...ownership.obligations.get(id)].sort()[0];
+     for(const [id,unit]of explicitPending.pending)if(!selectedOwners[id])selectedOwners[id]=unit;
+-    assertImpactProgress(packs,pending,current,{items,reviewOwners:selectedOwners});
++    assertImpactProgress(packs,pending,current,{items,reviewOwners:selectedOwners,withdrawal});
+     const nextPhase=nextImpactPhase(phase,progress);
+     const assignments={'1':[],'2':[],'3':[]};
+     const {order,cycles}=orderImpacts(items,pending);
+@@ -1852,6 +1868,10 @@ export function advanceImpact(root,run,phase,round) {
+         pack.input_evidence[file]=hash;
+       }
+     }
++    if(withdrawal){
++      pack.review_withdrawal={path:withdrawal.path,unit:'1',targets:[...withdrawal.row.targets]};
++      pack.input_evidence??={};for(const [p,h]of Object.entries(withdrawal.evidence)){requireValue(!pack.input_evidence[p]||pack.input_evidence[p]===h,'withdrawal evidence collision');pack.input_evidence[p]=h;}
++    }
+     frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
+     progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;atomic(path,progress);
+     return {complete:false,pack,passes:progress.passes};
+@@ -1862,7 +1882,7 @@ export function advanceImpact(root,run,phase,round) {
+     if(!progress.work_order.some(row=>row.kind==='maintenance'&&row.id===outside.pack.id))progress.work_order.push({kind:'maintenance',id:outside.pack.id});
+     atomic(path,progress);return {complete:false,maintenance:outside.pack,passes:progress.passes};
+   }
+-  const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{},explicitPending.evidence);
++  const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{},explicitPending.evidence,ownership.evidence??{});
+   for(const pass of progress.passes){const p=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pass}-${round}-collected.json`));evidence[p]=digest(readFileSync(p,'utf8'));}
+   for(const collection of maintenance.collections.filter(row=>maintenanceIds.has(row.pack)))evidence[join(root,collection.path)]=collection.sha256;
+   const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,restated:seeds,post:current,evidence,downstream:scope.targets,consumer_maintenance:scope.maintenance,maintenance_packs:[...maintenanceIds],ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
+@@ -1929,6 +1949,7 @@ export function verifyCompletedImpact(root,run,phase,round) {
+   const ownership=readerReviewOwnership(root,run,ownerPacks,passes,items,current);
+   requireValue(ownership.pending.size===0,
+     `completed owner collection lacks current same-reviewer obligations: ${[...ownership.pending].map(([id,units])=>`${id}/${units.join(',')}`).join('; ')}`);
++  for(const [p,h]of Object.entries(ownership.evidence??{}))requireValue(result.evidence[p]===h,'completed withdrawal review evidence changed');
+   if(ownership.obligations.size)requireValue(digest(result.reader_review_obligations)===digest(readerObligationInventory(ownership))
+     &&digest(result.reader_owner_reviews)===digest(ownership.coverage),'completed owner reviewer obligations or native provenance changed');
+   return result;

@@ -1,0 +1,33 @@
+# Focused boundary-ledger owner review, cycle 1
+
+The complete assigned worklist has been assessed: 142 current canonical items, all 724 candidate rows, batches 68–72, 74, 76 and 78. `row-patches.json` is an array of exact item/case patches with the original current row, proposed complete row and mathematical evidence. All originals were compared for exact JSON equality against the current per-batch contracts. Every source raw hash matched the assignment at capture and at final packet construction. The source and eight contract preimages are retained under `before/`.
+
+There are 38 corrected disposition/evidence rows and 686 retained rows. Of the retained rows, 683 have specific `template_review` records. Fifteen regex-contradiction candidates are upheld with item/case-specific `reviewed` records; the other four contradiction candidates are corrected genuine biconditionals. Reviews preserve the exact original reasons/evidence on valid repeated rows. They do not rename carriers, quote titles, add arbitrary text to source bodies or paraphrase boilerplate to conceal clustering. Root owns final native review-hash binding, installation and gates: the proposed review objects supply `upheld`, `by` and the actual mathematical `reason`; their required final `item_sha256` and `row_sha256` bindings must be added/rebound by root for the installed rows. Raw current input guards are separately supplied in every patch.
+
+## Actual reading
+
+For items indexed 0–91, I read the current Statement/Definition and complete relevant Proof, Verification or Counterexample. Definitions and context Remarks without a theorem proof were read as such; the actual scope notes were recovered where a generic proof-section extractor omitted them. The concrete C2 weak/quasi examples, B2/A1 examples, DAHA examples/counterexample and matrix-state Verification sections were explicitly read, not inferred from their headings. All relevant complete proof text appeared in bounded tool outputs; no truncated output was treated as a complete read.
+
+For batch78 indices 92–141, genuine earlier complete mathematical-body reading is recorded in the immutable `owner-step2-rt-handle-supplier-owner-review` packet. I compared those exact previously read bodies against CURRENT canonical bodies, normalizing only the leading proof phase labels for this comparison. The entire remaining difference was actually examined: just the already accepted sine phase-reference correction and SO(2)-to-SO(3) TeX arrow correction. I reread every current Statement/Definition and current phase-label list. Thus prior full proofs are reused with an actual bounded delta read, not silently replaced by old snapshots or assertions of a new full read. `current78-vs-genuinely-read-body.diff` preserves that comparison, and the per-item records bind old and current raw bytes. Renumbered phase references were not assumed unchanged blindly.
+
+`item-review-records.json` gives the reading extent, raw guard, relevant mathematics and all reviewed cases for each of the 142 items. `item-notes.json` is the item-specific assessment used alongside the case-specific evidence. No fresh full external-book reading or general new supplier audit is claimed; no external source was needed to decide these local boundary cases. No further delegation occurred.
+
+## Corrected issues
+
+These are ledger defects, with existing current proofs supplying the needed mathematics; no source-science defect was identified.
+
+- The affine closest-pair equality has two directions, proved by folding to its two minimizing points and transporting by the common affine isometry.
+- The Weyl quantum-dimension zero set and retained tilting-label classifications have genuine necessary and sufficient directions, already proved in their root-height/product and negligible/surviving-simple arguments.
+- Parabolic induction preserves temperedness in both directions; the dominant-projection equality and the full tempered Langlands criterion also have proved converses. They cannot remain `not_applicable`.
+- Four choice-free quantum calculations had checked evidence asserting explicitly inherited Choice without such a hypothesis. Their finite actual computations justify precise `not_applicable` choice rows.
+- The general Mackey induction theorem's endpoint reason incorrectly described a fixed-mass/radius example. Its theorem actually has no such parameter. The D2 future-null example explicitly has squared mass zero, although its momentum is nonzero; its zero row is corrected accordingly.
+- Zero homology, zero symplectic spaces, noninjective relation projections, nonzero pivotal/total dimension proofs, the trivial pointed group, and the singular Rep(Z2) kernel are now treated according to their actual proofs.
+- Maslov cocycle/relation identities and the weighted category laws were incorrectly marked checked biconditionals. They are identities and category laws, so those iff rows become precise `not_applicable` entries. The algebraic Verlinde formula has an unordered finite label set, not numerical interval endpoints.
+
+## Upheld candidates
+
+A sum or product is not automatically a missing empty-family branch. The sine range is nonempty because ell is at least three; a fusion-label set contains the unit; fixed C2 sums have two or eight terms; matrix indices are nonempty because n is at least one; the state example's auxiliary average starts only for n at least two. In definitions, empty coefficient support is the defined zero element, lower cell spans may be zero, and the empty parabolic cone is explicitly zero. Nonzero irreducible representations and orbit points do not become empty because a translation character or momentum is zero. These actual domains and local proof cases, not a blanket regex dismissal, justify the recorded dispositions.
+
+The pointed-category `iff` token is inside a linked supplier ID. Its Definition does not assert the separate supplier's modularity criterion, so both corresponding regex flags are upheld. Other repeated rows are upheld only against their actual finite base choices, matrix-unit identities, identity/empty-word cases, allowed singular kernels, fixed collars/terminal maps, or exact parameter exclusions. The proposed reasons preserve inherited AC/countable choice where present; a finite new construction is not used to erase the assumptions of its suppliers.
+
+No canonical source, contract, manifest, native report, state, counter, readiness or runtime history was edited. No validator, production gate or native review was run. The isolated script only checks JSON identities/current guards and assembles this review packet. Root retains integration and final hash binding.

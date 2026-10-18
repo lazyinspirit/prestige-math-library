@@ -3,6 +3,7 @@ id: def-additive-function
 kind: definition
 title: "Cauchy's functional equation $f(x+y) = f(x) + f(y)$, and the additive functions $\\mathbb{R} \\to \\mathbb{R}$"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: literature-derived
@@ -14,12 +15,12 @@ aliases: [def-cauchy-functional-equation]
 landmark: true
 short: "additive function; Cauchy's equation"
 verification:
-  audited: 2026-07-28
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/def-additive-function.json
 sources:
   scraped: []
   references:

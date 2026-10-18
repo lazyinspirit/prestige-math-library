@@ -3,6 +3,7 @@ id: ex-a-map-vacuously-transverse-to-a-submanifold-it-avoids
 kind: example
 title: "A map vacuously transverse to a submanifold it avoids"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: ai-generated
@@ -15,8 +16,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/ex-a-map-vacuously-transverse-to-a-submanifold-it-avoids.json
 sources:
   scraped: []
   references:

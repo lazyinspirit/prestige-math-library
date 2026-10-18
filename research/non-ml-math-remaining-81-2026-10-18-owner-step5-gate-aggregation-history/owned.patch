@@ -1,0 +1,360 @@
+--- /dev/null
++++ b/tools/step5-gate-aggregation-history.md
+@@ -0,0 +1,13 @@
++# Historical Step 5.8 aggregation transition
++
++This opt-in owner record is limited to the first paused, drained Step 5.9 repair wave, before its native pack or collection exists. Ordinary runs and sibling-contract history retain their existing checks.
++
++The prior immutable certificate and genuine successful tool result retain their original bytes. An actual pre-battery preparation pins the old merged-cache hash. The actual engine battery event chain authenticates a successful native merge after that certification. Exact archived before/current copies of all 81 batch contracts reproduce the native-after and owner-after merged caches byte for byte using the ordinary merger's ordering and serialization. The owner's application, approved literal operations, frozen frontier, full source vector, and creation state/request are bound by raw hashes.
++
++The original cache preimage may be unavailable. In that case the record authenticates only its historical certificate reference and the genuine subsequent derived-cache transition; it never claims those missing bytes were recovered or that the old cache can be reconstructed. This reference is used only by `verifyEvidence`. It is **not** a supporting-metadata archive and cannot satisfy `frozenSupportingEvidence`'s exact-preimage requirement.
++
++The application may contain individually guarded boundary reviews, risk-review/citation-use fields, and one separately declared draft scientific repair with its own contract, source mirror, and consumer quote. Replaying the literal operations must account for every metadata difference; every other source byte remains exact. Source repair and all transitive in-scope consumers become mandatory genuine current native gate-review targets, assigned together in dependency order. A completed collection missing any of those reviews fails. Existing context checks still reject stale source/supplier contexts, and ordinary interface propagation and same-reviewer duties remain active. No history entry supplies review, audit, Sol, threshold, creation, or mathematical acceptance credit.
++
++`recordGateAggregationHistory(root, run, payload)` validates the actual paused/drained boundary and exact current inputs, supplies its truthful recording time, and writes the immutable `gate-1-owner-aggregation-history.json` marker. There is no overwrite mode. Later verification reads the archived transition, so ordinary later repairs do not falsify historical source observations. New certification separately pins the actual current merged-cache bytes at an absolute path; the original relative cache pin remains a historical declaration. An arbitrary edit to that fresh current pin still fails verification.
++
++Prepare the payload with the run-owned `prepare-request.mjs` after the controller is stopped or held at the intended recording boundary. It only archives current state/request and emits a proposed payload; it does not activate history or run a gate. Invoke the exported recorder only after code review and installation. Then perform ordinary fresh preparation, owner recertification, native gate-owner reviews, certification, and the full battery. Original certificates, reports, failed gate events, and collection artifacts are never rewritten.
+--- /dev/null
++++ b/tools/step5-gate-aggregation-history.mjs
+@@ -0,0 +1,144 @@
++// Historical derived-cache transition after an actual native Step 5.8 battery.
++// This never supplies a source review or a missing worker metadata preimage.
++import {readFileSync,writeFileSync,existsSync,lstatSync,realpathSync} from 'node:fs';
++import {resolve,join,relative} from 'node:path';
++import {createHash} from 'node:crypto';
++import {frontmatterList} from './frontmatter-list.mjs';
++import {itemHashGuard} from './item-hash.mjs';
++const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
++const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
++const need=(v,m)=>{if(!v)throw Error('Step 5 gate aggregation history: '+m);};
++const read=p=>JSON.parse(readFileSync(p,'utf8'));
++const drained=s=>Object.values(s.dispatches??{}).every(d=>!d.startedAt||Boolean(d.endedAt));
++const dir=(root,run)=>join(root,'research',`${run}-step5-v2`);
++const marker=(root,run)=>join(dir(root,run),'gate-1-owner-aggregation-history.json');
++const cache=run=>`research/${run}-proof-contracts.json`;
++function regular(root,path){
++  const p=resolve(root,path),base=realpathSync(join(root,'research'))+'/';
++  need(p.startsWith(resolve(root,'research')+'/')&&lstatSync(p).isFile()&&!lstatSync(p).isSymbolicLink()&&realpathSync(p).startsWith(base),'nonregular/outside research archive');return p;
++}
++function aggregate(run,contracts){
++  const scope=[],rows={};
++  for(const text of contracts){const d=JSON.parse(text);need(d.version===1&&Array.isArray(d.scope)&&d.contracts&&typeof d.contracts==='object','invalid batch contract');
++    need(Object.keys(d.contracts).every(id=>d.scope.includes(id)),'out-of-scope contract');
++    for(const id of d.scope){need(!scope.includes(id),'duplicate aggregate ID');scope.push(id);if(d.contracts[id]!=null)rows[id]=d.contracts[id];}}
++  return JSON.stringify({version:1,level:run,scope,contracts:rows},null,2)+'\n';
++}
++export function validateGateAggregationHistory(root,run,row,{current=false}={}){
++  const {sha256,...body}=row;
++  need(row.version===1&&row.kind==='owner-gate-aggregation-history'&&row.run===run&&row.root===resolve(root)&&sha256===hash(body)
++    &&row.owner_identity==='/root'&&row.historical_only===true&&row.current_review_granted===false
++    &&row.missing_preimage_claimed===false&&row.round===1&&typeof row.reason==='string'&&row.reason.trim().length>=80,'invalid historical envelope');
++  const evidence={};
++  const bound=path=>{const p=regular(root,path),bytes=readFileSync(p,'utf8');need(row.bindings?.[relative(root,p)]===hash(bytes),'changed/missing binding: '+path);evidence[p]=hash(bytes);return bytes;};
++  for(const p of Object.keys(row.bindings??{}))bound(p);
++  const capture=JSON.parse(bound(row.before_capture)),app=JSON.parse(bound(row.application));
++  const state=JSON.parse(bound(row.creation_state)),request=JSON.parse(bound(row.creation_request));
++  need(capture.run===run&&capture.stage==='5.9-repair'&&capture.paused===true&&app.run===run
++    &&app.before_capture===row.before_capture&&app.performed_by==='/root'&&app.original_certificates_reports_and_native_state_preserved===true
++    &&app.review_or_native_coverage_granted===false&&app.foreign_index_or_head_written===false,'unbound owner application');
++  need(state.run===run&&state.stage==='5.9-repair'&&state.paused===true&&drained(state)
++    &&request.run===run&&request.group==='5.8-gate'&&Array.isArray(request.stages)&&request.stages.includes('5.8-gate')
++    &&Date.parse(request.at)<=Date.parse(app.applied_at)&&Date.parse(app.applied_at)<=Date.parse(app.completed_at)
++    &&Date.parse(app.completed_at)<=Date.parse(row.recorded_at)&&Date.parse(row.recorded_at)<=Date.now(),'wrong boundary/chronology');
++  const files=new Map(capture.files.map(f=>[f.path,f]));need(files.size===capture.files.length,'duplicate before file');
++  const before=path=>{const f=files.get(path);need(f,'missing before archive: '+path);const bytes=bound(f.archive);need(hash(bytes)===f.sha256,'bad before bytes');return bytes;};
++  const certPath=`research/${run}-step5-v2/certification.json`,certificate=JSON.parse(before(certPath)),{sha256:certHash,...certBody}=certificate;
++  need(certificate.version===2&&certificate.run===run&&certificate.phase==='impact-repeat'&&certHash===hash(certBody)
++    &&same(certificate.evidence,capture.prior_cert_evidence)&&before(certPath)===before(`research/${run}-step5-v2/certification-${certificate.phase}-${certificate.round}.json`),'prior certificate changed');
++  const tool=JSON.parse(bound(row.certificate_tool));
++  need(tool.role==='tool'&&tool.run===run&&tool.label===`step5-v2-certify-impact-repeat-r${certificate.round}-all`&&same(tool.covers,['all'])&&tool.ok===true&&tool.written_by==='autopilot'
++    &&Date.parse(certificate.at)<=Date.parse(tool.ended_at),'missing genuine native certification tool result');
++  need(readFileSync(resolve(root,`research/${run}-step5-v2/certification-${certificate.phase}-${certificate.round}.json`),'utf8')===before(certPath),'immutable native certificate differs from owner archive');
++  const original=certificate.evidence[cache(run)];need(/^[a-f0-9]{64}$/.test(original??'')&&row.original_sha256===original,'missing exact prior cache pin');
++  const prep=JSON.parse(bound(row.battery_preparation));
++  need(prep.run===run&&prep.native_execution_coverage===false&&prep.mathematical_review_claimed===false
++    &&prep.guards?.some(g=>g.path===cache(run)&&g.raw_sha256===original),'missing actual pre-battery old cache guard');
++  const events=JSON.parse(bound(capture.native_gate_events)),liveEvents=readFileSync(join(root,'.autopilot',run,'events.jsonl'),'utf8').split(/\r?\n/).filter(Boolean).map(JSON.parse);
++  const actualEventHashes=new Set(liveEvents.map(hash));
++  need(events.length>=22&&events.every(e=>actualEventHashes.has(hash(e))),'events are not actual native battery history');
++  const merges=events.filter(e=>e.id==='merge-contracts');need(merges.length===1,'ambiguous native merge');const merge=merges[0];
++  need(merge.type==='gate-advisory'&&merge.code===0&&merge.ok===true&&merge.why==='exit 0'
++    &&merge.output===`merge-proof-contracts: wrote ${cache(run)} with ${JSON.parse(before(cache(run))).scope.length} scoped item(s) from 81 batch contract(s)\n`
++    &&Date.parse(certificate.at)<=Date.parse(prep.at)&&Date.parse(tool.ended_at)<=Date.parse(prep.at)&&Date.parse(prep.at)<=Date.parse(merge.at)
++    &&Date.parse(merge.at)<=Date.parse(capture.captured_at)&&Date.parse(capture.captured_at)<=Date.parse(app.applied_at)
++    &&events.some(e=>e.type==='gates'&&e.stage==='5.8-gate'||e.type==='gates'&&String(e.message??'').includes('5.8'))
++    &&events.some(e=>e.type==='stage-route'&&JSON.stringify(e).includes('5.9')),'missing successful native merge chain');
++  const frontier=JSON.parse(bound(row.frontier));const {sha256:frontierHash,...frontierBody}=frontier;
++  need(frontier.run===run&&frontierHash===hash(frontierBody)&&frontier.batches.length===81,'wrong frozen frontier');
++  const batches=frontier.batches.map(b=>String(b.id)).sort((a,b)=>Number(a)-Number(b));
++  need(new Set(batches).size===81&&batches.every((b,i)=>b===String(i+1)),'wrong batch graph');
++  const vectors=new Map(app.current_vectors.map(f=>[f.path,f]));need(vectors.size===app.current_vectors.length,'duplicate current vector');
++  const after=path=>{const f=vectors.get(path);need(f,'missing current archive');const bytes=bound(f.after_archive);need(hash(bytes)===f.after_sha256&&f.before_sha256===files.get(path)?.sha256,'bad current binding');if(current)need(readFileSync(resolve(root,path),'utf8')===bytes,'current input changed: '+path);return bytes;};
++  const contracts=batches.map(b=>`research/${run}-batch-${b}.proof-contracts.json`);
++  const pages=batches.map(b=>`research/${run}-batch-${b}.pages.json`);
++  const sourceIds=new Set(capture.sources.map(s=>s.id));
++  need(capture.sources.length===capture.items&&sourceIds.size===capture.items&&capture.items===prep.selected_count
++    &&capture.pages===162,'invalid source vector');
++  // Full source identities come from the actual prepared rows, not verdicts.
++  const prepIds=prep.items.map(x=>typeof x==='string'?x:x.id);
++  need(same([...sourceIds].sort(),prepIds.sort())&&frontier.ids.every(id=>sourceIds.has(id)),'unbound source scope');
++  const expected=[...contracts,...pages,...capture.sources.map(s=>s.path),cache(run)];
++  need(vectors.size===expected.length&&expected.every(p=>vectors.has(p)),'incomplete current graph');
++  for(const p of expected){before(p);after(p);}
++  need(aggregate(run,contracts.map(before))===before(cache(run))&&hash(before(cache(run)))!==original,'native cache is not exact 81-input aggregation transition');
++  need(aggregate(run,contracts.map(after))===after(cache(run))&&app.actual_merged_cache.exit_code===0
++    &&app.actual_merged_cache.before_sha256===hash(before(cache(run)))&&app.actual_merged_cache.after_sha256===hash(after(cache(run)))
++    &&same(app.actual_merged_cache.command,['node','tools/merge-proof-contracts.mjs','--level',run,cache(run),...contracts]),'owner merge is not deterministic actual aggregation');
++  for(const ref of app.approved_proposals??[])need(hash(bound(ref.path))===ref.sha256,'changed approved proposal');
++  const proposal=JSON.parse(bound(app.approved_proposals[0].path)),ops=JSON.parse(bound(app.approved_proposals[1].path));
++  need(proposal.run===run&&proposal.before_capture===row.before_capture&&Array.isArray(ops),'unbound literal operations');
++  const changed=new Set(app.files.map(f=>f.path));need(changed.size===app.files.length,'duplicate changed carrier');
++  const sourceOps=ops.filter(o=>o.kind==='scientific-source');need(sourceOps.length===1&&sourceOps[0].id===app.source_id
++    &&sourceOps[0].path===`items/${app.source_id}.md`&&/^status: draft$/m.test(sourceOps[0].before)&&/^status: draft$/m.test(sourceOps[0].after),'not one explicit draft scientific repair');
++  const source=sourceOps[0];need(before(source.path)===source.before&&after(source.path)===source.after,'source repair is not exact literal approved delta');
++  const required=new Set([source.id]),dependencies=new Map();
++  for(const s of capture.sources){const bytes=after(s.path);need(s.raw_sha256===hash(before(s.path))&&s.guard_sha256===itemHashGuard(before(s.path)),'before source guard differs');need(itemHashGuard(bytes)===vectors.get(s.path).guard_sha256,'source guard differs');
++    dependencies.set(s.id,frontmatterList(bytes,'deps'));
++    if(s.id!==source.id)need(before(s.path)===bytes,'undeclared scientific source change');}
++  let expanded=true;while(expanded){expanded=false;for(const [id,deps]of dependencies)if(!required.has(id)&&deps.some(d=>required.has(d))){required.add(id);expanded=true;}}
++  need(same([...required].sort(),row.current_review_targets),'current source/consumer review floor changed');
++  for(const path of [...contracts,...pages]){
++    const document=JSON.parse(before(path));
++    const selected=ops.filter(o=>(o.contract_path??o.file??(typeof o.path==='string'?o.path:null))===path);
++    for(const op of selected){
++      if(op.kind==='actual-focused-boundary-review'){
++        const rows=document.contracts?.[op.id]?.boundaries;need(Array.isArray(rows)&&typeof op.review_evidence==='string'&&op.review_evidence.trim().length>=40,'invalid individual boundary evidence');
++        const originalRows=JSON.parse(before(path)).contracts[op.id]?.boundaries;
++        need(originalRows?.filter(r=>same(r,op.before)).length===1&&op.before.case===op.after.case,'original boundary identity changed');
++        const indices=rows.flatMap((r,i)=>(same(r,op.before)||(op.id===source.id&&same(r,op.after)))?[i]:[]);
++        need(indices.length===1,'unbound source/boundary overlap');
++        const sourceRow=capture.sources.find(s=>s.id===op.id);need(sourceRow&&op.item_sha256===itemHashGuard(after(sourceRow.path)),'boundary source guard differs');
++        const review=op.after.template_review;if(review)need(review.upheld===true&&review.item_sha256===op.item_sha256&&typeof review.by==='string'&&review.by.startsWith('/root/')&&review.reason?.trim().length>=40&&review.row_sha256===hash({case:op.after.case,status:op.after.status,text:op.after.reason??op.after.evidence??''}),'invalid individual boundary attestation');
++        rows[indices[0]]=op.after;
++      }else if(op.kind==='risk-or-citation-metadata'){
++        const p=op.path;need(Array.isArray(p)&&p[0]==='contracts'&&((p.length===3&&p[2]==='risk_review')||(p.length===5&&p[2]==='citations'&&Number.isInteger(p[3])&&p[4]==='uses')),'non-metadata risk/citation operation');
++        let target=document;for(const k of p.slice(0,-1)){need(target[k]!==undefined,'missing literal path');target=target[k];}const k=p.at(-1);need(same(target[k]??null,op.before),'old literal metadata differs');target[k]=op.value;
++      }else if(op.kind==='source-repair-contract'){
++        need([source.id,...required].includes(op.id),'unrelated source repair contract');
++        if(op.pointer){const p=op.pointer.slice(1).split('/');need(p[0]==='contracts'&&p[1]===op.id&&p[2]==='citations'&&p.length===4,'untyped consumer contract edit');let target=document;for(const k of p.slice(0,-1))target=target[k];need(same(target[p.at(-1)],op.before),'bad old consumer quote');target[p.at(-1)]=op.after;
++        }else{need(op.id===source.id&&same(document.contracts[op.id],op.before),'bad old source contract');document.contracts[op.id]=op.after;}
++      }else if(op.kind==='source-manifest-mirror'){
++        need(op.id===source.id&&Array.isArray(document),'unrelated source manifest edit');const rows=document.find(p=>p.id===op.page_id)?.items;need(Array.isArray(rows),'missing source manifest home');const i=rows.findIndex(r=>r.id===op.id);need(i>=0&&same(rows[i],op.before),'bad old source mirror');rows[i]=op.after;
++      }else need(false,'untyped carrier operation');
++    }
++    need(same(document,JSON.parse(after(path))),'unlicensed metadata/foreign residual: '+path);
++  }
++  need(app.files.every(f=>changed.has(f.path)&&hash(before(f.path))===f.before_sha256&&hash(after(f.path))===f.after_sha256)
++    &&expected.filter(p=>p!==cache(run)&&before(p)!==after(p)).every(p=>changed.has(p)),'application file inventory differs');
++  const target=marker(root,run);if(existsSync(target))evidence[target]=hash(readFileSync(target,'utf8'));
++  return {row,evidence,targets:[...required].sort(),original,cache:cache(run),current_sha256:hash(after(cache(run)))};
++}
++export function loadGateAggregationHistory(root,run){const p=marker(root,run);return existsSync(p)?validateGateAggregationHistory(root,run,read(p)):null;}
++export function gateAggregationEvidenceReference(history,path,expected){
++  if(!history?.root||!history?.run||resolve(history.root,path)!==resolve(history.root,cache(history.run)))return null;
++  const value=loadGateAggregationHistory(history.root,history.run);return value&&value.original===expected?value:null;
++}
++export function recordGateAggregationHistory(root,run,payload){
++  const statePath=join(root,'.autopilot',run,'state.json'),stateBytes=readFileSync(statePath,'utf8'),live=JSON.parse(stateBytes);
++  need(live.run===run&&live.stage==='5.9-repair'&&live.paused===true&&drained(live),'recording requires actual paused drained 5.9');
++  const body={...payload,recorded_at:new Date().toISOString()},row={...body,sha256:hash(body)},value=validateGateAggregationHistory(root,run,row,{current:true});
++  need(readFileSync(resolve(root,row.creation_state),'utf8')===stateBytes&&readFileSync(resolve(root,row.creation_request),'utf8')===readFileSync(join(root,'.autopilot',run,'owner-gate-request.json'),'utf8'),'not exact actual creation boundary');
++  need(!existsSync(join(dir(root,run),'gate-1.json'))&&!existsSync(join(dir(root,run),'gate-1-collected.json'))&&!existsSync(marker(root,run)),'gate recovery already started');
++  need(readFileSync(statePath,'utf8')===stateBytes,'recording boundary changed');writeFileSync(marker(root,run),JSON.stringify(row,null,2)+'\n',{flag:'wx'});return {path:marker(root,run),historical_only:true,current_review_granted:false,current_review_targets:value.targets};
++}
+--- /dev/null
++++ b/tools/step5-gate-aggregation-history.test.mjs
+@@ -0,0 +1,113 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
++import {join,dirname,relative} from 'node:path';
++import {tmpdir} from 'node:os';
++import {createHash} from 'node:crypto';
++import {freezeFrontier} from './step5-rounds.mjs';
++import {prepareGateRepairPack,verifyCompletedImpact,verifyCertification,reviewContextHashes,collect,workerLabel} from './step5-workflow.mjs';
++import {itemHashGuard} from './item-hash.mjs';
++import {validateGateAggregationHistory,recordGateAggregationHistory,gateAggregationEvidenceReference} from './step5-gate-aggregation-history.mjs';
++const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
++const run='test-gate-aggregation';
++function fixture(){
++ const root=mkdtempSync(join(tmpdir(),'gate-aggregation-fixture-')),bindings={};
++ const put=(p,x)=>{mkdirSync(dirname(join(root,p)),{recursive:true});writeFileSync(join(root,p),typeof x==='string'?x:JSON.stringify(x,null,2)+'\n');return p;};
++ const bind=p=>{bindings[p]=hash(readFileSync(join(root,p),'utf8'));return p;};
++ const archive=(p,x)=>bind(put(p,x));
++ const ids=['lem-supplier','lem-consumer','lem-indirect','thm-last'];
++ const text=(id,i,changed=false)=>`---\nid: ${id}\nkind: lemma\nstatus: draft\ndeps: ${i?`[${ids[i-1]}]`:'[]'}\n---\n\n## Statement\n\n${changed?'Assume AC. ':''}A claim.\n\n## Proof\n\n1.1 A proof. ∎\n`;
++ const sources=ids.map((id,i)=>({id,path:`items/${id}.md`,before:text(id,i),after:text(id,i,i===0)}));
++ const documents=new Map(),next=new Map(),files=[],vectors=[];
++ const save=(p,b,a=b)=>{const old=archive(`research/before/${hash(b)}`,b),fresh=archive(`research/after/${hash(a)}`,a);files.push({path:p,sha256:hash(b),archive:old,bytes:b.length});vectors.push({path:p,before_sha256:hash(b),after_sha256:hash(a),after_archive:fresh,...(p.startsWith('items/')?{guard_sha256:itemHashGuard(a)}:{})});put(p,a);};
++ const encode=x=>JSON.stringify(x,null,2)+'\n';
++ const boundary={case:'empty',status:'not_applicable',reason:'The original reviewed empty-input reason remains mathematically unchanged.'};
++ const oldContract={kind:'lemma',boundaries:[boundary],citations:[]};
++ const nextBoundary={...boundary,template_review:{upheld:true,by:'/root/fixture-reviewer',reason:'An actual focused review checks the domain and the empty-input convention.',item_sha256:itemHashGuard(sources[1].after),row_sha256:hash({case:boundary.case,status:boundary.status,text:boundary.reason})}};
++ const risk={status:'complete',reviewer:'/root/fixture-reviewer',notes:'Actual focused contract and source review is retained without claiming a native scientific handoff.'};
++ for(let n=1;n<=81;n++){
++  const scope=n<=4?[ids[n-1]]:[],old={version:1,scope,contracts:n<=4?{[ids[n-1]]:structuredClone(oldContract)}:{}},after=structuredClone(old);
++  if(n===2)after.contracts[ids[1]].boundaries=[nextBoundary];if(n===3)after.contracts[ids[2]].risk_review=risk;
++  documents.set(n,old);next.set(n,after);save(`research/${run}-batch-${n}.proof-contracts.json`,encode(old),encode(after));
++  save(`research/${run}-batch-${n}.pages.json`,encode([{id:`page-${n}`,items:n<=4?[{id:ids[n-1]}]:[]}]));
++ }
++ const aggregate=docs=>encode({version:1,level:run,scope:ids,contracts:Object.fromEntries(ids.map((id,i)=>[id,docs.get(i+1).contracts[id]]))});
++ const cache=`research/${run}-proof-contracts.json`,nativeCache=aggregate(documents),currentCache=aggregate(next);save(cache,nativeCache,currentCache);
++ for(const s of sources)save(s.path,s.before,s.after);
++ const oldHash=hash('The old merged cache bytes are genuinely unavailable; only its exact historical native pin survives.');
++ const certificate={version:2,run,phase:'impact-repeat',round:5,at:'2020-01-01T00:00:01.000Z',items:[],changed:[],evidence:{[cache]:oldHash}};certificate.sha256=hash(certificate);
++ const certText=encode(certificate);save(`research/${run}-step5-v2/certification.json`,certText);save(`research/${run}-step5-v2/certification-impact-repeat-5.json`,certText);
++ const frontier=freezeFrontier({run,batches:Array.from({length:81},(_,i)=>({id:String(i+1),items:i<4?[ids[i]]:[]}))});const frontierPath=archive(`research/${run}-step5-v2/frontier.json`,frontier);
++ const prep=archive('research/preparation.json',{run,at:'2020-01-01T00:00:02.000Z',native_execution_coverage:false,mathematical_review_claimed:false,selected_count:4,items:ids.map(id=>({id})),guards:[{path:cache,raw_sha256:oldHash}]});
++ const events=[{at:'2020-01-01T00:00:03.000Z',type:'gates',message:'5.8-gate: running 22 gate(s)'},...Array.from({length:20},(_,i)=>({at:'2020-01-01T00:00:03.000Z',type:'gate-advisory',id:`diagnostic-${i}`})),{at:'2020-01-01T00:00:04.000Z',type:'gate-advisory',id:'merge-contracts',code:0,ok:true,why:'exit 0',output:`merge-proof-contracts: wrote ${cache} with 4 scoped item(s) from 81 batch contract(s)\n`},{at:'2020-01-01T00:00:05.000Z',type:'stage-route',message:'5.8-gate (failed) → 5.9-repair'}];
++ const eventPath=archive('research/native-events.json',events);put(`.autopilot/${run}/events.jsonl`,events.map(e=>JSON.stringify(e)).join('\n')+'\n');
++ const sourceOp={kind:'scientific-source',id:ids[0],path:sources[0].path,before:sources[0].before,after:sources[0].after};
++ const ops=[sourceOp,{kind:'actual-focused-boundary-review',contract_path:`research/${run}-batch-2.proof-contracts.json`,id:ids[1],case:'empty',before:boundary,after:nextBoundary,item_sha256:itemHashGuard(sources[1].after),review_evidence:'Actual owner focused source and boundary review with a precise current-source guard.'},{kind:'risk-or-citation-metadata',file:`research/${run}-batch-3.proof-contracts.json`,path:['contracts',ids[2],'risk_review'],before:null,value:risk}];
++ const changed=vectors.filter(f=>f.path!==cache&&f.before_sha256!==f.after_sha256).map(f=>({path:f.path,before_sha256:f.before_sha256,after_sha256:f.after_sha256}));
++ const capturePath='research/capture.json',proposalPath=archive('research/proposal.json',{run,before_capture:capturePath}),opsPath=archive('research/operations.json',ops);
++ const capture={run,stage:'5.9-repair',paused:true,captured_at:'2020-01-01T00:00:06.000Z',items:4,pages:162,sources:sources.map(s=>({id:s.id,path:s.path,raw_sha256:hash(s.before),guard_sha256:itemHashGuard(s.before)})),files,prior_cert_evidence:certificate.evidence,native_gate_events:eventPath};archive(capturePath,capture);
++ const app={run,performed_by:'/root',before_capture:capturePath,applied_at:'2020-01-01T00:00:07.000Z',completed_at:'2020-01-01T00:00:08.000Z',original_certificates_reports_and_native_state_preserved:true,review_or_native_coverage_granted:false,foreign_index_or_head_written:false,source_id:ids[0],current_vectors:vectors.filter(f=>!f.path.includes('certification')),approved_proposals:[{path:proposalPath,sha256:bindings[proposalPath]},{path:opsPath,sha256:bindings[opsPath]}],files:changed,actual_merged_cache:{exit_code:0,before_sha256:hash(nativeCache),after_sha256:hash(currentCache),command:['node','tools/merge-proof-contracts.mjs','--level',run,cache,...Array.from({length:81},(_,i)=>`research/${run}-batch-${i+1}.proof-contracts.json`)]}};
++ const appPath=archive('research/application.json',app),state={run,stage:'5.9-repair',paused:true,dispatches:{}},request={run,group:'5.8-gate',stages:['5.8-gate'],at:'2020-01-01T00:00:06.000Z'};
++ const statePath=archive('research/state.json',state),requestPath=archive('research/request.json',request);put(`.autopilot/${run}/state.json`,state);put(`.autopilot/${run}/owner-gate-request.json`,request);
++ const tool=archive('research/native-tool.json',{role:'tool',run,label:'step5-v2-certify-impact-repeat-r5-all',covers:['all'],ok:true,written_by:'autopilot',ended_at:'2020-01-01T00:00:01.100Z'});
++ const payload={version:1,kind:'owner-gate-aggregation-history',run,root,round:1,owner_identity:'/root',historical_only:true,current_review_granted:false,missing_preimage_claimed:false,recorded_at:'2020-01-01T00:00:09.000Z',reason:'The actual native battery generated a deterministic aggregation after certification; this historical transition never supplies native review or missing preimage bytes.',before_capture:capturePath,application:appPath,creation_state:statePath,creation_request:requestPath,battery_preparation:prep,frontier:frontierPath,certificate_tool:tool,original_sha256:oldHash,current_review_targets:[...ids].sort(),bindings};
++ const seal=()=>({...payload,sha256:hash(payload)});
++ const edit=(path,fn)=>{const value=JSON.parse(readFileSync(join(root,path),'utf8'));fn(value);put(path,value);bind(path);};
++ return {root,payload,seal,put,bind,edit,appPath,capturePath,cache,ids,oldHash,cleanup:()=>rmSync(root,{recursive:true,force:true})};
++}
++function check(name,mutate,pattern){test(name,()=>{const f=fixture();try{mutate(f);assert.throws(()=>validateGateAggregationHistory(f.root,run,f.seal(),{current:true}),pattern);}finally{f.cleanup();}});}
++test('real native aggregation reference preserves missing-preimage truth and grants no review',()=>{const f=fixture();try{const v=validateGateAggregationHistory(f.root,run,f.seal(),{current:true});assert.equal(v.original,f.oldHash);assert.deepEqual(v.targets,[...f.ids].sort());assert.equal(v.archive,undefined);recordGateAggregationHistory(f.root,run,f.payload);const ref=gateAggregationEvidenceReference({root:f.root,run},f.cache,f.oldHash);assert.equal(ref.archive,undefined);assert.equal(gateAggregationEvidenceReference({root:f.root,run},'research/other-cache.json',f.oldHash),null);assert.equal(gateAggregationEvidenceReference({root:f.root,run},f.cache,hash('unknown')),null);assert.throws(()=>recordGateAggregationHistory(f.root,run,f.payload),/already started/);}finally{f.cleanup();}});
++check('forged old cache hash rejects',f=>f.payload.original_sha256=hash('forged'),/prior cache pin/);
++check('changed archived certificate rejects even with owner binding refreshed',f=>{const c=JSON.parse(readFileSync(join(f.root,f.capturePath)));const p=c.files.find(x=>x.path.endsWith('/certification.json')).archive;f.edit(p,d=>d.evidence[f.cache]=hash('forged'));},/bad before bytes/);
++check('unavailable old bytes cannot be claimed as an archive',f=>f.payload.missing_preimage_claimed=true,/envelope/);
++check('wrong root rejects',f=>f.payload.root='/tmp/elsewhere',/envelope/);
++check('wrong phase rejects',f=>f.edit(f.payload.creation_state,s=>s.stage='5.6-impact'),/boundary/);
++check('active writer rejects',f=>f.edit(f.payload.creation_state,s=>s.dispatches={u:{startedAt:'now'}}),/boundary/);
++check('unpaused creation rejects',f=>f.edit(f.payload.creation_state,s=>s.paused=false),/boundary/);
++check('pre-request normalization time rejects',f=>f.edit(f.appPath,a=>a.applied_at='2019-01-01T00:00:00.000Z'),/chronology/);
++check('fake successful merge event rejects despite rehashed owner archive',f=>{const c=JSON.parse(readFileSync(join(f.root,f.capturePath)));f.edit(c.native_gate_events,e=>e.find(x=>x.id==='merge-contracts').output='forged');},/actual native battery/);
++check('failed merge rejects',f=>{const c=JSON.parse(readFileSync(join(f.root,f.capturePath)));f.edit(c.native_gate_events,e=>e.find(x=>x.id==='merge-contracts').code=1);},/actual native battery/);
++check('missing graph carrier rejects',f=>f.edit(f.appPath,a=>a.current_vectors.pop()),/incomplete current graph/);
++check('duplicate source graph row rejects',f=>f.edit(f.capturePath,c=>c.sources[1]=c.sources[0]),/source vector/);
++check('undeclared source deletion rejects',f=>f.put('items/lem-consumer.md',''),/current input changed/);
++check('unexplained live metadata edit rejects',f=>f.put(`research/${run}-batch-1.proof-contracts.json`,'{}'),/current input changed/);
++check('unexplained live compiled cache edit rejects',f=>f.put(f.cache,'{}'),/current input changed/);
++check('missing native tool success rejects',f=>f.edit(f.payload.certificate_tool,t=>t.ok=false),/certification tool/);
++check('missing source review target rejects',f=>f.payload.current_review_targets=f.ids.slice(1).sort(),/review floor/);
++check('missing indirect consumer review target rejects',f=>f.payload.current_review_targets=f.ids.slice(0,3).sort(),/review floor/);
++check('extra source review target cannot widen authority',f=>f.payload.current_review_targets.push('lem-unrelated'),/review floor/);
++check('source review credit flag rejects',f=>f.payload.current_review_granted=true,/envelope/);
++check('application review credit flag rejects',f=>f.edit(f.appPath,a=>a.review_or_native_coverage_granted=true),/application/);
++check('wrong literal metadata before rejects',f=>{const a=JSON.parse(readFileSync(join(f.root,f.appPath)));f.edit(a.approved_proposals[1].path,ops=>ops[2].before='invented');f.edit(f.appPath,a=>a.approved_proposals[1].sha256=f.payload.bindings[a.approved_proposals[1].path]);},/old literal metadata/);
++
++test('actual gate planning keeps all four source duties with one owner in dependency order',()=>{const f=fixture();try{recordGateAggregationHistory(f.root,run,f.payload);const pack=prepareGateRepairPack(f.root,run,'gate',1,[{id:'proof-contract',code:1,output:'ERROR citation-use-unmapped [lem-supplier]: real current citation metadata finding'}]);assert.deepEqual(pack.assignments['1'],f.ids);assert.deepEqual(pack.assignments['2'],[]);assert.deepEqual(pack.assignments['3'],[]);assert.deepEqual(pack.owner_aggregation_current_review_targets,[...f.ids].sort());assert.ok(Object.keys(pack.input_evidence).length>0);}finally{f.cleanup();}});
++for(const omit of ['all','supplier','indirect'])test(`real completed-impact barrier refuses missing ${omit} fresh native source rows`,()=>{const f=fixture();try{
++ recordGateAggregationHistory(f.root,run,f.payload);const pack=prepareGateRepairPack(f.root,run,'gate',1,[{id:'proof-contract',code:1,output:'ERROR citation-use-unmapped [lem-supplier]: current citation metadata finding'}]);
++ const prefix=`research/${run}-step5-v2/`,current=Object.fromEntries(f.ids.map(id=>[id,itemHashGuard(readFileSync(join(f.root,`items/${id}.md`),'utf8'))]));
++ const contexts=reviewContextHashes(f.root,f.ids),abs=p=>join(f.root,p),missing=omit==='supplier'?f.ids[0]:f.ids[2];
++ const reviews=omit==='all'?[]:f.ids.filter(id=>id!==missing).map(id=>({id,disposition:'unaffected',...contexts[id],uncertain:false,source_urls:[],familiar:true,reason:'This fixture represents an actual collected current scientific review; omitted rows supply no coverage.'}));
++ const receipt={version:2,run,phase:'gate',round:1,reviews,created_items:[],changed:[],restated:[],downstream:[],post:current,evidence:{},errors:[]};f.put(prefix+'gate-1-collected.json',receipt);
++ const closed={...receipt,evidence:{[abs(prefix+'gate-1-collected.json')]:hash(readFileSync(abs(prefix+'gate-1-collected.json'),'utf8'))}};
++ f.put(prefix+'gate-1-closed.json',closed);f.put(prefix+'gate-1-progress.json',{version:2,run,phase:'gate',round:1,passes:['gate'],complete:true});
++ assert.throws(()=>verifyCompletedImpact(f.root,run,'gate',1),/missing fresh native gate-source review/);
++ }finally{f.cleanup();}});
++
++test('actual certificate verification accepts historical relative pin but rejects changed fresh absolute cache pin',()=>{const f=fixture(),cwd=process.cwd();process.chdir(f.root);try{
++ recordGateAggregationHistory(f.root,run,f.payload);assert.equal(verifyCertification(f.root,run).items.length,0,'history invents no certificate items');
++ const p=`research/${run}-step5-v2/certification.json`,c=JSON.parse(readFileSync(join(f.root,p),'utf8'));c.phase='gate';c.round=1;c.evidence[join(f.root,f.cache)]=hash(readFileSync(join(f.root,f.cache),'utf8'));delete c.sha256;c.sha256=hash(c);f.put(p,c);
++ assert.ok(verifyCertification(f.root,run));f.put(f.cache,'arbitrary later current cache edit');assert.throws(()=>verifyCertification(f.root,run),/Step 5 evidence changed/);
++ }finally{process.chdir(cwd);f.cleanup();}});
++test('historical source archive remains valid after later ordinary source edit without granting its current review',()=>{const f=fixture();try{
++ recordGateAggregationHistory(f.root,run,f.payload);f.put('items/lem-supplier.md',readFileSync(join(f.root,'items/lem-supplier.md'),'utf8')+'A later actual ordinary repair.\n');
++ assert.ok(gateAggregationEvidenceReference({root:f.root,run},f.cache,f.oldHash));assert.throws(()=>validateGateAggregationHistory(f.root,run,JSON.parse(readFileSync(join(f.root,`research/${run}-step5-v2/gate-1-owner-aggregation-history.json`),'utf8')),{current:true}),/current input changed/);
++ }finally{f.cleanup();}});
++check('forged rehashed owner certificate archives cannot replace actual immutable native certificate',f=>{
++ const capture=JSON.parse(readFileSync(join(f.root,f.capturePath),'utf8')),cert=JSON.parse(readFileSync(join(f.root,`research/${run}-step5-v2/certification.json`),'utf8'));cert.evidence[f.cache]=hash('forged');delete cert.sha256;cert.sha256=hash(cert);const text=JSON.stringify(cert,null,2)+'\n';
++ for(const row of capture.files.filter(x=>x.path.includes('/certification'))){f.put(row.archive,text);f.bind(row.archive);row.sha256=hash(text);}capture.prior_cert_evidence=cert.evidence;f.put(f.capturePath,capture);f.bind(f.capturePath);f.payload.original_sha256=cert.evidence[f.cache];
++},/immutable native certificate/);
++
++test('actual native collection cannot adopt unavailable old cache as worker supporting bytes',()=>{const f=fixture(),cwd=process.cwd();process.chdir(f.root);try{
++ recordGateAggregationHistory(f.root,run,f.payload);const pack=prepareGateRepairPack(f.root,run,'gate',1,[{id:'proof-contract',code:1,output:'ERROR citation-use-unmapped [lem-supplier]: current citation metadata finding'}]);const contexts=reviewContextHashes(f.root,f.ids);
++ for(const unit of pack.units){const label=workerLabel('gate',1,unit);f.put(`research/${run}-step5-v2/${label}.json`,{run,phase:'gate',round:1,unit,input_sha256:hash(pack),decisions:[],reviews:pack.assignments[unit].map(id=>({id,disposition:'unaffected',...contexts[id],reason:'Actual detailed native source and consumer review of the current proof and interfaces.',uncertain:false,source_urls:[],familiar:true})),created_items:[],downstream:[],ledger_updates:[],gate_resolutions:(pack.gateAssignments[unit]??[]).map(d=>({index:d.index,reason:'The actual assigned current contract diagnostic is resolved in this focused fixture without waiving any gate.',uncertain:false,source_urls:[],familiar:true})),supporting_evidence:unit==='1'?{[f.cache]:f.oldHash}:{}});f.put(`research/${run}-dispatch/alpha-repair-${label}.result.json`,{run,role:'alpha-repair',label,covers:[unit],ok:true,model:'gpt-6.1-sol',provider_effort:'high'});}
++ assert.throws(()=>collect(f.root,run,'gate',1),/supporting metadata preimage unavailable/);
++ }finally{process.chdir(cwd);f.cleanup();}});
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -15,6 +15,7 @@
+ import { loadOwnerReviewWithdrawal, withdrawnOwnerReport, withdrawalAllowsFreshPass, freshWithdrawalEvidence } from './step5-owner-review-withdrawal.mjs';
+ import { loadReportingOwnerRecovery, reportingRecoveryDuties, reportingSessionBinding, assertReportingSessionCompatibility } from './step5-reporting-owner-recovery.mjs';
+ import { supportingQuoteHistory } from './step5-quote-history.mjs';
++import { loadGateAggregationHistory, gateAggregationEvidenceReference } from './step5-gate-aggregation-history.mjs';
+ import { supportingSiblingContractHistory } from './step5-sibling-contract-history.mjs';
+ import { loadInitialMetadataHistory, loadRepeatMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+ import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
+@@ -301,7 +302,7 @@
+ }
+ const verifyEvidence=(evidence,history=null)=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(
+   existsSync(p)&&(digest(readFileSync(p,'utf8'))===hash
+-    ||history&&(supportingMetadataHistory(history,p,hash)
++    ||history&&(gateAggregationEvidenceReference(history,p,hash)||supportingMetadataHistory(history,p,hash)
+       ||repairedRun44LedgerHistory(history,p,hash)
+       ||restoredLedgerHistory(history.root,history.run,history.certificate??{},p,hash)
+       ||restoredRenderedLedgerHistory(history.root,history.run,history.certificate??{},p,hash))),
+@@ -310,6 +311,8 @@
+   verifyEvidence(supporting,{root,run});
+   const evidence={};
+   for(const [path,hash]of Object.entries(supporting)){
++    requireValue(digest(readFileSync(path,'utf8'))===hash||!gateAggregationEvidenceReference({root,run},path,hash),
++      `supporting metadata preimage unavailable: ${path}`);
+     // Keep ordinary immutable evidence at its original path. Only batch
+     // metadata and shared ledgers need durable historical carriers.
+     if(!new RegExp(`^${run}-batch-\\d+\\.(?:pages|proof-contracts)\\.json$`).test(basename(path))
+@@ -2047,6 +2050,18 @@
+   requireValue((result.operational_carries??[]).every(id=>authorizedOperational.has(id)),'unbound operational carry');
+   const operationalIds=(result.operational_carries??[]).filter(id=>!scope.targets.includes(id)&&!result.changed.includes(id));
+   if(operationalIds.length){verifyOperationalCoverage(root,run,operationalIds,current);for(const id of operationalIds)required.delete(id);}
++  const aggregation=phase==='gate'?loadGateAggregationHistory(root,run):null;
++  for(const id of aggregation?.targets??[]){
++    required.add(id);
++    const native=passes.some(receipt=>readPack(root,run,receipt.phase,receipt.round).units.some(unit=>{
++      const p=workerReport(root,run,receipt.phase,receipt.round,unit);
++      if(!existsSync(p)||receipt.evidence?.[p]!==digest(readFileSync(p,'utf8')))return false;
++      return (read(p).reviews??[]).some(row=>row.id===id&&row.reviewed_by!=='root'&&row.uncertain===false
++        &&row.post_sha256===current[id]&&result.reviews.some(actual=>actual.id===id&&actual.reviewed_by!=='root'
++          &&actual.post_sha256===row.post_sha256&&actual.review_context_sha256===row.review_context_sha256));
++    }));
++    requireValue(native,`missing fresh native gate-source review: ${id}`);
++  }
+   const contexts=reviewContexts(items);
+   for(const id of required)if(frontier.has(id))requireValue(contexts.matches(reviews.get(id),current,snapshots.get(id)),
+     `completed owner collection lacks current review: ${id}`);
+@@ -2155,9 +2170,11 @@
+   }
+   const scoped=diagnostics.filter(row=>row.subjects.length||row.ownerHeld);
+   requireValue(scoped.length>0,'Step 5.9: diagnostics contain only excluded out-of-frontier findings; rerun the frontier-scoped gate instead of launching repairs');
+-  const targets=[...new Set(diagnostics.flatMap(row=>row.subjects))].sort();
++  const aggregation=loadGateAggregationHistory(root,run);
++  const targets=[...new Set([...diagnostics.flatMap(row=>row.subjects),...(aggregation?.targets??[])])].sort();
+   const {order,cycles}=orderImpacts(identity.items,targets),assignments={'1':[],'2':[],'3':[]};
+   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
++  if(aggregation){for(const unit of Object.keys(assignments))assignments[unit]=assignments[unit].filter(id=>!aggregation.targets.includes(id));assignments['1'].push(...aggregation.targets);for(const unit of Object.keys(assignments)){const own=new Set(assignments[unit]);assignments[unit]=order.filter(id=>own.has(id));}}
+   const owner=new Map(Object.entries(assignments).flatMap(([unit,ids])=>ids.map(id=>[id,unit])));
+   const gateAssignments={'1':[],'2':[],'3':[]};
+   let globals=0;
+@@ -2171,6 +2188,7 @@
+   const pack={version:2,gateRoutingVersion:1,repair_scope:'frontier',frontier_ids:[...frontier].sort(),run,phase,basePhase:'gate',round,units:['1','2','3'],assignments,
+     before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
+     impacts:[],seeds:[],failures,excluded_out_of_frontier:excluded,gateAssignments,cycles,ledger_updates:[]};
++  if(aggregation){pack.owner_aggregation_current_review_targets=aggregation.targets;pack.input_evidence=aggregation.evidence;}
+   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
+ }
+ 
+@@ -2260,7 +2278,11 @@
+       `stale root owner review context before certification: ${id}`);
+   }
+   if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
+-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence};
++  const aggregation=phase==='gate'?loadGateAggregationHistory(root,run):null;
++  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence,...aggregation?.evidence};
++  if(aggregation)evidence[resolve(root,aggregation.cache)]=digest(readFileSync(resolve(root,aggregation.cache),'utf8'));
++  // Retain the original relative pin as historical evidence; the new exact
++  // current cache pin and immutable transition are separately bound above.
+   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
+   const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??maintenance.basis.get(id)?.reason??priorItems.get(id)?.reason}));
+   const creationRows=[...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])],creationById=new Map();

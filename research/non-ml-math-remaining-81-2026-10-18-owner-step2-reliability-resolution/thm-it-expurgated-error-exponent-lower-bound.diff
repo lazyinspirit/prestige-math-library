@@ -1,0 +1,28 @@
+--- items/thm-it-expurgated-error-exponent-lower-bound.md
++++ research/non-ml-math-remaining-81-2026-10-18-owner-step2-reliability-resolution/proposed/items/thm-it-expurgated-error-exponent-lower-bound.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: non-ml-math-remaining-81-2026-10-18
+ dependency_level: 7
+-deps: [def-it-reliability-function, def-it-gallager-and-expurgated-exponent-functions, def-discrete-memoryless-channel, def-fixed-length-channel-code, def-fixed-length-channel-code-errors]
++deps: [def-it-reliability-function, def-it-gallager-and-expurgated-exponent-functions, def-discrete-memoryless-channel, def-fixed-length-channel-code, def-fixed-length-channel-code-errors, def-real-power, thm-real-power-continuity-and-derivatives, thm-real-power-laws, thm-chain-rule, thm-algebra-of-derivatives, thm-monotonicity-from-the-derivative]
+ justified_by: []
+ aliases: []
+ proof_strategy: direct
+@@ -44,11 +44,15 @@
+ 
+ [F3] [[def-it-gallager-and-expurgated-exponent-functions]]: $B(x,x')=\sum_y\sqrt{W(y\mid x)W(y\mid x')}$ and $E_{0x}(\rho,P)=-\rho\ln\sum_{x,x'}P(x)P(x')B(x,x')^{1/\rho}$ for $\rho\ge1$.
+ 
++[F4] [[def-real-power]], [[thm-real-power-continuity-and-derivatives]], [[thm-real-power-laws]], [[thm-chain-rule]], and [[thm-algebra-of-derivatives]]: positive-base real powers have derivative $(t^r)'=rt^{r-1}$ and satisfy the power and scaling laws.
++
++[F5] [[thm-monotonicity-from-the-derivative]]: a continuous function on an interval with nonnegative interior derivative is nondecreasing, and with nonpositive derivative is nonincreasing.
++
+ ## Proof
+ 
+ 1.1 For fixed distinct codewords $x^n,x'^n$, if ML decoding chooses the competitor when $x^n$ was sent, then $W^n(y^n\mid x'^n)\ge W^n(y^n\mid x^n)$. On that event $W^n(y^n\mid x^n)\le\sqrt{W^n(y^n\mid x^n)W^n(y^n\mid x'^n)}.$ Summing over outputs and using a union bound over competitors gives message error at most $f_m:=\sum_{j\ne m}B^n(x_m^n,x_j^n)$, where $B^n(x^n,x'^n)=\prod_iB(x_i,x'_i)$. [F1, F2, algebra]
+ 
+-2.1 Draw $M'$ codewords independently from $P^n$. For fixed $m$ and $\rho\ge1$, subadditivity of $t^{1/\rho}$ on nonnegative reals gives; for $r=1/\rho\in(0,1]$, $(a+b)^r\le a^r+b^r$ follows by differentiating $1+t^r-(1+t)^r$ for $t>0$, then scaling and induction handle any finite sum. $\mathbb E f_m^{1/\rho}\le\sum_{j\ne m}\mathbb E B^n(X_m^n,X_j^n)^{1/\rho}=(M'-1)\left(\sum_{x,x'}P(x)P(x')B(x,x')^{1/\rho}\right)^n.$ The last equality follows from independent coordinates and the product form of $B^n$. [F1, F3, step 1.1]
++2.1 Fix $r\in(0,1]$. If $r=1$, $(a+b)^r=a^r+b^r$. If $0<r<1$, then $u\mapsto u^{r-1}$ has derivative $(r-1)u^{r-2}<0$ on $(0,\infty)$ by [F4], so it is nonincreasing by [F5]. For $t>0$, put $g(t)=1+t^r-(1+t)^r$; [F4] gives $g'(t)=r(t^{r-1}-(1+t)^{r-1})\ge0$. Also $t^r\to0$ as $t\downarrow0$: its derivative is positive, and for any $\eta>0$, $0<t<\eta^{1/r}$ gives $t^r<\eta$ by [F4]–[F5]. Thus $g$ extends continuously to $g(0)=0$. By [F5] on $[0,\infty)$, $g(t)\ge0$ for all $t\ge0$. If $a>0$, scale with $t=b/a$ and use [F4] to obtain $(a+b)^r\le a^r+b^r$; if $a=0$, equality holds, including $a=b=0$. Induction gives $(\sum_j a_j)^r\le\sum_j a_j^r$ for every finite nonnegative family (the empty family gives $0=0$). Now draw $M'$ codewords independently from $P^n$ and take $r=1/\rho$ for $\rho\ge1$. The proved finite-sum inequality and step 1.1 yield $\mathbb E f_m^{1/\rho}\le\sum_{j\ne m}\mathbb E B^n(X_m^n,X_j^n)^{1/\rho}=(M'-1)\left(\sum_{x,x'}P(x)P(x')B(x,x')^{1/\rho}\right)^n.$ The equality follows from independent coordinates, the product form of $B^n$, and the power laws in [F4]. [F1, F3, F4, F5, step 1.1, algebra, induction]
+ 
+ 3.1 Averaging [2.1] over messages and codebooks gives a codebook with $M'^{-1}\sum_m f_m^{1/\rho}\le(M'-1)z^n$, where $z=\sum_{x,x'}P(x)P(x')B(x,x')^{1/\rho}$. At least $M'/2$ messages satisfy $f_m^{1/\rho}\le2(M'-1)z^n$; otherwise their sum would exceed $M'(M'-1)z^n$. Restrict the code to $M'/2$ such messages, using ML decoding among the retained words. Removing competitors cannot increase their ML error, so maximal error is at most $[2(M'-1)z^n]^\rho$. [F2, step 2.1]
+ 

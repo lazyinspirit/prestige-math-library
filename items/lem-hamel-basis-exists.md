@@ -3,6 +3,7 @@ id: lem-hamel-basis-exists
 kind: lemma
 title: "Assuming the Axiom of Choice, $\\mathbb{R}$ has a Hamel basis over $\\mathbb{Q}$: there is $B \\subseteq \\mathbb{R}$ such that every real is a finite $\\mathbb{Q}$-linear combination of elements of $B$ in exactly one way, and each basis vector carries a well-defined $\\mathbb{Q}$-linear coefficient map"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,12 @@ landmark: true
 short: "a Hamel basis of $\\mathbb{R}$ over $\\mathbb{Q}$"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/lem-hamel-basis-exists.json
 sources:
   scraped: []
   references:

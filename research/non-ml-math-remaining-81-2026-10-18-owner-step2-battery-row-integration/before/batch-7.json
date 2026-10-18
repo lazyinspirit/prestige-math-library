@@ -1,0 +1,2196 @@
+{
+  "version": 1,
+  "scope": [
+    "def-finite-probability-vector",
+    "lem-convex-generator-boundary-limits-exist",
+    "lem-finite-kl-generator-is-admissible",
+    "lem-finite-renyi-generators-are-convex",
+    "def-finite-f-divergence",
+    "def-finite-hypothesis-testing-beta",
+    "def-finite-stochastic-kernel",
+    "def-finite-kullback-leibler-divergence",
+    "lem-convex-perspective-is-subadditive",
+    "def-finite-renyi-divergence",
+    "lem-finite-iid-log-likelihood-concentrates",
+    "thm-finite-f-divergence-data-processing",
+    "thm-finite-kullback-leibler-data-processing",
+    "thm-finite-renyi-data-processing",
+    "thm-finite-renyi-limit-is-kullback-leibler",
+    "thm-kl-is-iid-type-ii-error-exponent",
+    "ex-binary-neyman-pearson-randomized-threshold",
+    "ex-binary-f-and-renyi-divergences",
+    "ex-disjoint-support-f-and-renyi-divergences"
+  ],
+  "contracts": {
+    "def-finite-probability-vector": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Requires a finite nonempty alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition. Explicitly retains zero coordinates and defines support using p_x>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition. On a one-point alphabet normalization forces the sole coordinate to equal one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition. Keeps zero-mass coordinates in the ambient alphabet."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition. Nonnegative coordinates and sum one include all boundary probability vectors."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition. Uses only a given finite family of coordinates and finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "lem-convex-generator-boundary-limits-exist": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-numbers",
+          "source_section": "Definition",
+          "quote": "The **real numbers** are the quotient ring\n\n$$\\mathbb{R} := \\mathcal{C} / \\mathcal{N}$$\n\nof the ring of Cauchy sequences ([[thm-cauchy-ring]]) by the ideal of null\nsequences ([[lem-null-ideal]]). The class of $(a_n)$ is written\n$[(a_n)]$. Each rational $q$ maps to the class $\\hat q$ of the constant\nsequence $(q, q, q, \\dots)$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-reals-ordered-field",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-real-order]] is well defined and makes $\\mathbb{R}$\n([[thm-reals-field]]) a totally ordered field.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.\n\n- $u \\in F$ is an **upper bound** of $S$ if $s \\le u$ for all $s \\in S$; $S$ is\n  **bounded above** if it has an upper bound.\n- $u \\in F$ is a **least upper bound** (or **supremum**, $\\sup S$) of $S$ if $u$\n  is an upper bound of $S$ and $u \\le u'$ for every upper bound $u'$ of $S$.\n\n$F$ is a **complete ordered field** (equivalently, $F$ has the\n**least-upper-bound property**, or is **Dedekind complete**) if every nonempty\n$S \\subseteq F$ that is bounded above has a least upper bound in $F$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $c>0$ and let $u=c/2$, $a=3c/4$, $b=5c/4$, and $v=3c/2$. For $r<s$, write $m(r,s)=(f(s)-f(r))/(s-r)$. If $a\\le x<y\\le b$, convexity at $a$ between $u,x$, at $x$ between $u,y$, at $y$ between $x,v$, and at $b$ between $y,v$ gives $m(u,a)\\le m(u,x)\\le m(x,y)\\le m(y,v)\\le m(b,v)$ by rearranging the four two-point inequalities in [F1]. All these endpoint slopes are finite. Thus with $M=\\max\\{|m(u,a)|,|m(b,v)|\\}$, one has $|f(y)-f(x)|\\le M|y-x|$ for $x,y\\in[a,b]$, including $x=y$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $a=1/2$ and set $n(x)=(f(a)-f(x))/(a-x)$ for $0<x<a$. If $0<x<y<a$, then $y$ is a convex combination of $x$ and $a$; [F1] gives $f(y)\\le\\frac{a-y}{a-x}f(x)+\\frac{y-x}{a-x}f(a)$. Rearranging yields $n(x)\\le n(y)$. Also $a$ is a convex combination of $x$ and $1$, so another application of [F1] gives $n(x)\\le(f(1)-f(a))/(1-a)$, a finite upper bound. Therefore $L:=\\inf_{0<x<a}n(x)$ is either real or $-\\infty$; the infimum property from [F2] gives $n(x)\\to L$ as $x\\downarrow0$ (if $L$ is finite, approximate it within any $\\varepsilon>0$; if $L=-\\infty$, use any real lower target). Since $f(x)=f(a)-(a-x)n(x)$, its limit is $f(a)-aL$ if $L$ is finite and $+\\infty$ if $L=-\\infty$. Thus $f(0)$ exists and is not $-\\infty$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Given $\\varepsilon>0$, choose $\\delta=\\min\\{c/4,\\varepsilon/(M+1)\\}$. If $|x-c|<\\delta$, then $x,c\\in[a,b]$, and step 1.1 gives $|f(x)-f(c)|\\le M|x-c|<\\varepsilon$. This is continuity at the arbitrary $c>0$, so $f$ is continuous on $(0,\\infty)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $t>1$, put $r(t)=f(t)/(t-1)$. If $1<s<t$, then $s$ is a convex combination of $1$ and $t$. By [F1] and $f(1)=0$, this gives $r(s)\\le r(t)$. Hence $r$ is nondecreasing on $(1,\\infty)$ and bounded below on $[2,\\infty)$ by the finite value $r(2)$. By the supremum property in [F2], its limit is the real supremum $R$ if it is bounded above, and is $+\\infty$ otherwise: for finite $R$, values eventually lie between $R-\\varepsilon$ and $R$; when unbounded, they eventually exceed any prescribed real number. Since $f(t)/t=((t-1)/t)r(t)$ and $(t-1)/t\\to1$, this quotient tends to $R$ if $R$ is finite; if $R=+\\infty$, the factor is at least $1/2$ for $t\\ge2$ and the quotient tends to $+\\infty$. Thus $f_\\infty$ exists and is not $-\\infty$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a function on the nonempty interval (0,\u221e)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.2 and 3.1 show the t\u21930 and recession limits are real or +\u221e, never \u2212\u221e."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement. The normalization f(1)=0 is used in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement. The Statement applies to every finite convex generator, including affine and constant-normalized cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.2 and 3.1 establish the zero and recession limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1\u20133.1 use scalar secant slopes and real infima/suprema only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "lem-finite-kl-generator-is-admissible": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-second-derivative-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "If $f:I\\to\\mathbb R$ is twice differentiable on an open interval, then $f$ is convex if and only if $f''(x)\\ge0$ for every $x\\in I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-slower-than-every-positive-power",
+          "source_section": "Statement",
+          "quote": "For every $\\alpha>0$,\n$$\\lim_{x\\to+\\infty}\\frac{\\log x}{x^\\alpha}=0.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By [F1], $f(1)=\\log1=0$. By [F2], $f'(t)=\\log t+1$ and\n$f''(t)=1/t>0$ for every $t>0$. Thus [F3] gives convexity on\n$(0,\\infty)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Put $s=1/t$. As $t\\downarrow0$, $s\\to+\\infty$ and [F1] gives\n$t\\log t=-\\log(s)/s$. Its limit is zero by [F4], so\n$\\lim_{t\\downarrow0}f(t)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "For $t>0$, $f(t)/t=\\log t$. Since $\\log$ is increasing and onto\n$\\mathbb R$ by [F1], for each real $M$ there exists $a>0$ with\n$\\log a>M$, and every $t>a$ has $\\log t\\ge\\log a>M$. Thus\n$\\lim_{t\\to\\infty}f(t)/t=+\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is a function assertion on (0,\u221e)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement. Step 1.2 proves the zero-boundary limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement. Step 1.1 computes f(1)=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement. Step 1.1 computes derivatives for every t>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.2 and 2.1 prove both boundary limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1\u20132.1 are pointwise and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "lem-finite-renyi-generators-are-convex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-second-derivative-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "If $f:I\\to\\mathbb R$ is twice differentiable on an open interval, then $f$ is convex if and only if $f''(x)\\ge0$ for every $x\\in I$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x)\\to+\\infty\\quad(x\\to+\\infty),\\qquad \\exp(x)\\to0\\quad(x\\to-\\infty),$$\nand the range of $\\exp$ is contained in $(0,\\infty)$ and is unbounded above with infimum $0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\gamma>0$. As $t\\to+\\infty$, $\\log t\\to+\\infty$ because [F4] is increasing and onto. Hence $\\gamma\\log t\\to+\\infty$, so $t^\\gamma=\\exp(\\gamma\\log t)\\to+\\infty$ by [F1, F5].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\gamma>0$ and put $s=1/t$. As $t\\downarrow0$, $s\\to+\\infty$. By [F1], [F4], and [F6], $t^\\gamma=\\exp(-\\gamma\\log s)=1/\\exp(\\gamma\\log s)\\to0$ by [F5].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\alpha>1$, [F2] gives $h_\\alpha''(t)=\\alpha(\\alpha-1)t^{\\alpha-2}>0$, so [F3] proves convexity; also $h_\\alpha(1)=0$. By step 1.2, $h_\\alpha(0+)=0^\\alpha-1=-1$. By step 1.1 with $\\gamma=\\alpha-1$, $t^{\\alpha-1}\\to+\\infty$, and $1/t\\le1$ for $t\\ge1$, so $h_\\alpha(t)/t=t^{\\alpha-1}-1/t\\to+\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $0<\\alpha<1$, [F2] gives $g_\\alpha''(t)=\\alpha(1-\\alpha)t^{\\alpha-2}>0$, so [F3] proves convexity; also $g_\\alpha(1)=0$. By step 1.2, $g_\\alpha(0+)=1$. Put $u=1/t$. As $t\\to+\\infty$, $u\\downarrow0$, and step 1.2 with $\\gamma=1-\\alpha$ gives $u^{1-\\alpha}\\to0$, that is, $t^{-(1-\\alpha)}\\to0$. For $t\\ge1$, $0\\le |g_\\alpha(t)/t|=t^{-(1-\\alpha)}-1/t\\le t^{-(1-\\alpha)}$. Therefore $g_\\alpha(t)/t\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes positive exponents in its two stated ranges."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement. Step 1.2 proves the power limit at zero, used in steps 2.1 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement. Steps 2.1 and 3.1 evaluate each generator at t=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement. The second-derivative calculations apply for every exponent in each open range."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1 and 1.2 prove the infinity and zero power limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1\u20133.1 are scalar arguments and introduce no arbitrary choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "def-finite-f-divergence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Requires a finite nonempty alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition. Assigns f(0) when p_x=0<q_x and zero when p_x=q_x=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition. For P=Q every positive-coordinate ratio is one and f(1)=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition. Adds the recession term for p_x>0=q_x."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition. States both boundary conventions f(0) and f_infty."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition. The Definition is a finite coordinate sum and a specified singular mass."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "def-finite-hypothesis-testing-beta": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Requires a finite nonempty sample alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition. The feasible test phi=0 is stated; zero-error boundary cases remain feasible."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition. On a one-point space the Definition still optimizes over phi\u2208[0,1]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition. Permits all randomized test values in [0,1], including deterministic endpoints."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition. Explicitly includes epsilon=0 and epsilon=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition. The feasible tests form a finite-dimensional cube constrained by one finite sum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "def-finite-stochastic-kernel": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Requires finite nonempty input and output alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition. Permits K(y|x)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition. For a one-point output alphabet the row-sum condition forces K=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition. Rows may contain zero entries while remaining nonnegative and summing to one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition. Includes entries 0 and 1 in each row."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition. Specifies a finite matrix with finite row sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "def-finite-kullback-leibler-divergence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Requires a common finite nonempty alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition. Sets zero-p contributions to zero, including p_x=q_x=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition. If P=Q all positive terms have log 1=0, so divergence is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition. Sets +\u221e when p_x>0=q_x."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition. Separately handles zero numerator and zero denominator."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition. Is a finite sum over the given alphabet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "lem-convex-perspective-is-subadditive": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-f-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on a finite nonempty\nalphabet $\\mathcal X$ ([[def-finite-probability-vector]]). A **convex\ngenerator** is a finite convex function $f:(0,\\infty)\\to\\mathbb R$ with\n$f(1)=0$; convexity uses the two-point inequality of\n[[def-convex-and-strictly-convex-functions-on-euclidean-sets]]. Use its\nextended boundary values\n$$f(0):=\\lim_{t\\downarrow0}f(t),\\qquad f_\\infty:=\\lim_{t\\to\\infty}\\frac{f(t)}t.$$\nThese limits exist in $\\mathbb R\\cup\\{+\\infty\\}$ by\n[[lem-convex-generator-boundary-limits-exist]]. Define the **finite\nf-divergence from $P$ to $Q$**\nby\n$$D_f(P\\|Q):=\\sum_{x:q_x>0}q_x f(p_x/q_x)+ f_\\infty\\sum_{x:q_x=0}p_x.$$\nIn the first sum, if $p_x=0$, the term means $q_x f(0)$. A coordinate with\n$p_x=q_x=0$ contributes zero and is omitted. The second term is defined as\nzero when its coefficient $\\sum_{q_x=0}p_x$ is zero, even if\n$f_\\infty=+\\infty$; if that coefficient is positive and $f_\\infty=+\\infty$,\nthe divergence is $+\\infty$.\n\nThe boundary term is essential when $P\\not\\ll Q$. It is the recession\ncontribution of the generator and is not the value $f(0)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-jensen-inequality-in-euclidean-space",
+          "source_section": "Statement",
+          "quote": "Let $f:C\\to\\mathbb R$ be convex. For a positive finite family of points in $C$ and nonnegative weights summing to one, $f$ of their weighted Euclidean sum is at most the weighted sum of their $f$-values. Explicitly, if $N\\ge1$, $x_1,\\ldots,x_N\\in C$, $\\lambda_j\\ge0$, and $\\sum_{j=1}^N\\lambda_j=1$, then\n\n$$f\\left(\\sum_{j=1}^N\\lambda_jx_j\\right)\\le\\sum_{j=1}^N\\lambda_jf(x_j).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-convex-generator-boundary-limits-exist",
+          "source_section": "Statement",
+          "quote": "Let $f:(0,\\infty)\\to\\mathbb R$ be convex and satisfy $f(1)=0$. Then $f$\nis continuous on $(0,\\infty)$, and both extended-real limits\n$$f(0):=\\lim_{t\\downarrow0}f(t),\\qquad f_\\infty:=\\lim_{t\\to\\infty}\\frac{f(t)}t$$\nexist in $\\mathbb R\\cup\\{+\\infty\\}$; neither limit is $-\\infty$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $A=\\sum_i a_i$ and $B=\\sum_i b_i$. If $B=0$, all $b_i=0$. If $A=0$, every pair is $(0,0)$ and both sides are zero. If $A>0$, both sides equal $A f_\\infty$ by the definition of $\\Pi_f$, including the convention that a positive coefficient times $+\\infty$ is $+\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $B>0$ and no index has $b_i=0<a_i$. If any $b_i>0=a_i$ with $f(0)=+\\infty$, the right side is $+\\infty$ and the inequality holds. If $f(0)$ is finite, extend $f$ to the convex domain $[0,\\infty)$ by that value. This extension is convex at the endpoint too: approximate a zero argument in any convexity inequality by positive arguments and pass to the limit using $f(0)=\\lim_{t\\downarrow0}f(t)$ from [F1] and continuity at positive arguments from [F3]. If $f(0)=+\\infty$, the excluded case shows that every index with $b_i>0$ has $a_i>0$, so all ratios used below lie in the original convex domain $(0,\\infty)$. For indices with $b_i>0$, the weights $b_i/B$ sum to one and $A/B=\\sum_{b_i>0}(b_i/B)(a_i/b_i)$. Applying [F2] gives $Bf(A/B)\\le\\sum_{b_i>0}b_if(a_i/b_i)$; terms $(a_i,b_i)=(0,0)$ contribute zero. This is the asserted inequality.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $B>0$ and $J:=\\{i:b_i=0<a_i\\}$ is nonempty. If $f_\\infty=+\\infty$, the right side is $+\\infty$, so the inequality holds. If any $b_i>0=a_i$ with $f(0)=+\\infty$, the right side is $+\\infty$ and the inequality holds. Otherwise, if $f_\\infty$ is finite, replace each $b_i=0$ with $i\\in J$ by $b_i^{(\\eta)}=\\eta>0$, leaving all other second coordinates unchanged. the finite Jensen inequality [F2] then gives $(B+|J|\\eta)f(A/(B+|J|\\eta))\\le\\sum_{b_i>0}b_if(a_i/b_i)+\\sum_{i\\in J}\\eta f(a_i/\\eta)$. As $\\eta\\downarrow0$, the left side tends to $Bf(A/B)$ by [F3] at the positive number $A/B$, and each last summand tends to $a_i f_\\infty$ by the definition of $f_\\infty$. The resulting inequality is exactly $\\Pi_f(A,B)\\le\\sum_i\\Pi_f(a_i,b_i)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Step 1.1 covers the empty family through A=B=0 and Pi_f(0,0)=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1, 1.2, and 2.1 treat A=0, B=0, f(0)=+\u221e, and zero second coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement. With one input pair the claimed inequality is equality by the definition of Pi_f."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1 and 2.1 explicitly handle zero coordinates and singular pairs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1, 1.2, and 2.1 handle the boundary values f(0) and f_infty."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement. The finite family and Jensen argument use only finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "def-finite-renyi-divergence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Requires a common finite nonempty alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition. Distinguishes p_x=0<q_x and p_x>0=q_x in both order ranges."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition. Assigns order one separately to the KL divergence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition. Assigns +\u221e for alpha>1 when P has mass outside supp Q and states the zero-affinity case for alpha<1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition. Gives alpha\u2208(0,\u221e) except one and defines order one separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition. Uses a finite sum over the given alphabet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "lem-finite-iid-log-likelihood-concentrates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback\u2013Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\n[[def-finite-f-divergence]] by\n[[lem-finite-kl-generator-is-admissible]]. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For $x^n\\in\\operatorname{supp}(P)^n$, every ratio $p_{x_i}/q_{x_i}$\nis positive. By [F3], $L_n(x^n)=\\log\\prod_i(p_{x_i}/q_{x_i})$. Applying\n[F4] and [F5] gives $\\exp(L_n(x^n))=P^n(x^n)/Q^n(x^n)$ and hence\n$Q^n(x^n)=P^n(x^n)\\exp(-L_n(x^n))$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The values $\\ell(x)$ on the finite set $\\operatorname{supp}P$ form a\nbounded finite-valued random variable. Put $Y_i:=\\ell(X_i)-D(P\\|Q)$;\n[F2] and the finite-sum expectation formula [F6] give $E[Y_i]=0$. Let\n$\\sigma^2=E[Y_i^2]<\\infty$, which is independent of $i$ since all $X_i$\nhave law $P$. For $i\\ne j$, expanding the expectation on the product law\n$P^n$ using [F6] gives\n$$E[Y_iY_j]=\\left(\\sum_xp_x(\\ell(x)-D(P\\|Q))\\right)^2\\prod_{k\\ne i,j}\\left(\\sum_xp_x\\right)=0,$$\nwhere the square is zero by\n[F2] and the remaining factors equal one by [F1]. Expanding\n$E[(n^{-1}\\sum_iY_i)^2]$ therefore gives $\\sigma^2/n$.\nFor every $\\delta>0$, the pointwise inequality\n$\\delta^2\\mathbf 1_{\\{|n^{-1}\\sum_iY_i|\\ge\\delta\\}}\n\\le(n^{-1}\\sum_iY_i)^2$ and [F6] imply\n$P^n(|L_n/n-D(P\\|Q)|\\ge\\delta)\\le\\sigma^2/(n\\delta^2)\\to0$, since the\nexpectation of an indicator is the probability of its event.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a finite nonempty alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement. F1 and the Statement define ell on zero-P coordinates; steps 1.1\u20132.1 use supp P."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement. The Statement includes n=1; step 2.1 has no cross terms in that case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement. For a point-mass P the variance is zero and step 2.1 still proves convergence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement. The Statement requires n\u22651 and takes its limit as n\u2192\u221e."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement. The product law and all expectations are finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-finite-f-divergence-data-processing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets. A **stochastic kernel**\nfrom $\\mathcal X$ to $\\mathcal Y$ is a matrix\n$K=(K(y\\mid x))_{x\\in\\mathcal X,y\\in\\mathcal Y}$ such that\n$K(y\\mid x)\\ge0$ and $\\sum_{y\\in\\mathcal Y}K(y\\mid x)=1$ for every\n$x\\in\\mathcal X$. The convention is input first in the condition and output\nfirst in the value $K(y\\mid x)$.\n\nFor a probability vector $P=(p_x)_{x\\in\\mathcal X}$, the output vector\n$PK$ on $\\mathcal Y$ is\n$$(PK)_y:=\\sum_{x\\in\\mathcal X}p_xK(y\\mid x).$$\nIt is a probability vector because its coordinates are nonnegative and\n$\\sum_y(PK)_y=\\sum_xp_x\\sum_yK(y\\mid x)=\\sum_xp_x=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-f-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on a finite nonempty\nalphabet $\\mathcal X$ ([[def-finite-probability-vector]]). A **convex\ngenerator** is a finite convex function $f:(0,\\infty)\\to\\mathbb R$ with\n$f(1)=0$; convexity uses the two-point inequality of\n[[def-convex-and-strictly-convex-functions-on-euclidean-sets]]. Use its\nextended boundary values\n$$f(0):=\\lim_{t\\downarrow0}f(t),\\qquad f_\\infty:=\\lim_{t\\to\\infty}\\frac{f(t)}t.$$\nThese limits exist in $\\mathbb R\\cup\\{+\\infty\\}$ by\n[[lem-convex-generator-boundary-limits-exist]]. Define the **finite\nf-divergence from $P$ to $Q$**\nby\n$$D_f(P\\|Q):=\\sum_{x:q_x>0}q_x f(p_x/q_x)+ f_\\infty\\sum_{x:q_x=0}p_x.$$\nIn the first sum, if $p_x=0$, the term means $q_x f(0)$. A coordinate with\n$p_x=q_x=0$ contributes zero and is omitted. The second term is defined as\nzero when its coefficient $\\sum_{q_x=0}p_x$ is zero, even if\n$f_\\infty=+\\infty$; if that coefficient is positive and $f_\\infty=+\\infty$,\nthe divergence is $+\\infty$.\n\nThe boundary term is essential when $P\\not\\ll Q$. It is the recession\ncontribution of the generator and is not the value $f(0)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-convex-perspective-is-subadditive",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a convex generator from [[def-finite-f-divergence]]. Define its\nclosed perspective on $a,b\\ge0$ by\n$$\\Pi_f(a,b):=\\begin{cases} b f(a/b),&b>0,\\ a>0,\\\\ b f(0),&b>0,\\ a=0,\\\\ a f_\\infty,&b=0,\\ a>0,\\\\ 0,&a=b=0. \\end{cases}$$\nFor every finite family $(a_i,b_i)\\in[0,\\infty)^2$,\n$$\\Pi_f\\!\\left(\\sum_i a_i,\\sum_i b_i\\right)\\le\\sum_i\\Pi_f(a_i,b_i).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For each $y\\in\\mathcal Y$ and $x\\in\\mathcal X$, set\n$a_{x,y}=p_xK(y\\mid x)$ and $b_{x,y}=q_xK(y\\mid x)$. By [F2],\n$(PK)_y=\\sum_xa_{x,y}$ and $(QK)_y=\\sum_xb_{x,y}$. Applying [F4] at each\n$y$ gives $\\Pi_f((PK)_y,(QK)_y)\\le\n\\sum_x\\Pi_f(p_xK(y\\mid x),q_xK(y\\mid x))$.\nSumming this finite family of inequalities over $y$ is valid for extended\nreal terms because no term is $-\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "For any $\\lambda>0$, the definition of $\\Pi_f$ gives\n$\\Pi_f(\\lambda a,\\lambda b)=\\lambda\\Pi_f(a,b)$, including $a=0$ or\n$b=0; when $\\lambda=0$, both sides are interpreted as zero. Thus, for each\n$x$, the row-sum condition in [F2] yields\n$\\sum_y\\Pi_f(p_xK(y\\mid x),q_xK(y\\mid x))\n=\\sum_yK(y\\mid x)\\Pi_f(p_x,q_x)=\\Pi_f(p_x,q_x)$.\nSubstituting these identities into step 1.1 and summing over the finite\nalphabet $\\mathcal X$ proves $D_f(PK\\|QK)\\le D_f(P\\|Q)$ by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty input and output alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1\u20132.1 and the perspective lemma handle zero kernel entries and masses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement. The finite row-sum and perspective calculations include one-point alphabets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement. Step 1.1 delegates all singular and zero-coordinate cases to the closed perspective."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement. There is no real parameter; kernel entries may lie at the endpoints 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement. The proof sums over the two finite alphabets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-finite-kullback-leibler-data-processing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-kl-generator-is-admissible",
+          "source_section": "Statement",
+          "quote": "For $f(t)=t\\log t$ on $t>0$, one has $f(1)=0$, $f$ is convex on\n$(0,\\infty)$, $\\lim_{t\\downarrow0}f(t)=0$, and\n$\\lim_{t\\to\\infty}f(t)/t=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback\u2013Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\n[[def-finite-f-divergence]] by\n[[lem-finite-kl-generator-is-admissible]]. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-f-divergence-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $P,Q$ be probability vectors on a finite nonempty alphabet $\\mathcal X$,\nlet $K$ be a stochastic kernel from $\\mathcal X$ to a finite nonempty\nalphabet $\\mathcal Y$, and let $f$ be a convex generator as in\n[[def-finite-f-divergence]]. Then\n$$D_f(PK\\|QK)\\le D_f(P\\|Q),$$\nwith both divergences interpreted using the zero and singular-support\nconventions of that definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-f-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on a finite nonempty\nalphabet $\\mathcal X$ ([[def-finite-probability-vector]]). A **convex\ngenerator** is a finite convex function $f:(0,\\infty)\\to\\mathbb R$ with\n$f(1)=0$; convexity uses the two-point inequality of\n[[def-convex-and-strictly-convex-functions-on-euclidean-sets]]. Use its\nextended boundary values\n$$f(0):=\\lim_{t\\downarrow0}f(t),\\qquad f_\\infty:=\\lim_{t\\to\\infty}\\frac{f(t)}t.$$\nThese limits exist in $\\mathbb R\\cup\\{+\\infty\\}$ by\n[[lem-convex-generator-boundary-limits-exist]]. Define the **finite\nf-divergence from $P$ to $Q$**\nby\n$$D_f(P\\|Q):=\\sum_{x:q_x>0}q_x f(p_x/q_x)+ f_\\infty\\sum_{x:q_x=0}p_x.$$\nIn the first sum, if $p_x=0$, the term means $q_x f(0)$. A coordinate with\n$p_x=q_x=0$ contributes zero and is omitted. The second term is defined as\nzero when its coefficient $\\sum_{q_x=0}p_x$ is zero, even if\n$f_\\infty=+\\infty$; if that coefficient is positive and $f_\\infty=+\\infty$,\nthe divergence is $+\\infty$.\n\nThe boundary term is essential when $P\\not\\ll Q$. It is the recession\ncontribution of the generator and is not the value $f(0)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By [F1], $f(t)=t\\log t$ is an admissible convex generator with\n$f(1)=0$, $f(0)=0$, and $f_\\infty=+\\infty$. The coordinate formula of [F2]\nand [F4] therefore contributes $p_x\\log(p_x/q_x)$ when $p_x,q_x>0$, zero when\n$p_x=0\\le q_x$, and $+\\infty$ when $p_x>0=q_x$. These are exactly the\nterms and support convention in [F2]; the same identification applies to\n$PK,QK$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "Apply [F3] to this generator and to the given common kernel $K$.\nStep 1.1 identifies the two f-divergences in that inequality with\n$D(PK\\|QK)$ and $D(P\\|Q)$, respectively, and gives the stated result.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement. Step 1.1 identifies zero-numerator and zero-denominator contributions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement. The finite f-divergence theorem includes one-point alphabets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement. Step 1.1 matches singular-support value +\u221e before data processing."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement. F1 gives f(0)=0 and f_infty=+\u221e."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement. The proof uses finite sums and makes no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-finite-renyi-data-processing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-renyi-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on the same finite\nnonempty alphabet. For order $\\alpha\\in(0,\\infty)$ with $\\alpha\\ne1$, put\n$$S_\\alpha(P,Q):=\\sum_{x:q_x>0}p_x^\\alpha q_x^{1-\\alpha}.$$\nIf $\\alpha>1$ and $p_x>0=q_x$ for some $x$, define\n$S_\\alpha(P,Q)=+\\infty$; if $0<\\alpha<1$, such coordinates contribute\nzero. In the displayed sum, $p_x=0<q_x$ contributes zero. If the sum is\nzero, then necessarily $\\alpha<1$ and the logarithmic expression below is\ndefined as $+\\infty$. The **R\u00e9nyi divergence of order $\\alpha$ from $P$ to\n$Q$** is\n$$D_\\alpha(P\\|Q):=\\frac{\\log S_\\alpha(P,Q)}{\\alpha-1}.$$\nAt order one define\n$$D_1(P\\|Q):=D(P\\|Q),$$\nusing [[def-finite-kullback-leibler-divergence]]. All divergences are\nextended-real-valued; the direction is always first argument to second.\n\nFor $0<\\alpha<1$, a point with $p_x>0=q_x$ contributes zero to the affinity\n$S_\\alpha$ rather than infinity. For $\\alpha>1$, the same support mismatch\nmakes $D_\\alpha(P\\|Q)=+\\infty$. The sign of $\\alpha-1$ is part of the\ndefinition and reverses inequalities when $0<\\alpha<1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-f-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on a finite nonempty\nalphabet $\\mathcal X$ ([[def-finite-probability-vector]]). A **convex\ngenerator** is a finite convex function $f:(0,\\infty)\\to\\mathbb R$ with\n$f(1)=0$; convexity uses the two-point inequality of\n[[def-convex-and-strictly-convex-functions-on-euclidean-sets]]. Use its\nextended boundary values\n$$f(0):=\\lim_{t\\downarrow0}f(t),\\qquad f_\\infty:=\\lim_{t\\to\\infty}\\frac{f(t)}t.$$\nThese limits exist in $\\mathbb R\\cup\\{+\\infty\\}$ by\n[[lem-convex-generator-boundary-limits-exist]]. Define the **finite\nf-divergence from $P$ to $Q$**\nby\n$$D_f(P\\|Q):=\\sum_{x:q_x>0}q_x f(p_x/q_x)+ f_\\infty\\sum_{x:q_x=0}p_x.$$\nIn the first sum, if $p_x=0$, the term means $q_x f(0)$. A coordinate with\n$p_x=q_x=0$ contributes zero and is omitted. The second term is defined as\nzero when its coefficient $\\sum_{q_x=0}p_x$ is zero, even if\n$f_\\infty=+\\infty$; if that coefficient is positive and $f_\\infty=+\\infty$,\nthe divergence is $+\\infty$.\n\nThe boundary term is essential when $P\\not\\ll Q$. It is the recession\ncontribution of the generator and is not the value $f(0)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets. A **stochastic kernel**\nfrom $\\mathcal X$ to $\\mathcal Y$ is a matrix\n$K=(K(y\\mid x))_{x\\in\\mathcal X,y\\in\\mathcal Y}$ such that\n$K(y\\mid x)\\ge0$ and $\\sum_{y\\in\\mathcal Y}K(y\\mid x)=1$ for every\n$x\\in\\mathcal X$. The convention is input first in the condition and output\nfirst in the value $K(y\\mid x)$.\n\nFor a probability vector $P=(p_x)_{x\\in\\mathcal X}$, the output vector\n$PK$ on $\\mathcal Y$ is\n$$(PK)_y:=\\sum_{x\\in\\mathcal X}p_xK(y\\mid x).$$\nIt is a probability vector because its coordinates are nonnegative and\n$\\sum_y(PK)_y=\\sum_xp_x\\sum_yK(y\\mid x)=\\sum_xp_x=1$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-f-divergence-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $P,Q$ be probability vectors on a finite nonempty alphabet $\\mathcal X$,\nlet $K$ be a stochastic kernel from $\\mathcal X$ to a finite nonempty\nalphabet $\\mathcal Y$, and let $f$ be a convex generator as in\n[[def-finite-f-divergence]]. Then\n$$D_f(PK\\|QK)\\le D_f(P\\|Q),$$\nwith both divergences interpreted using the zero and singular-support\nconventions of that definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-renyi-generators-are-convex",
+          "source_section": "Statement",
+          "quote": "For $\\alpha>1$, the generator $h_\\alpha(t)=t^\\alpha-1$ is convex on\n$(0,\\infty)$, satisfies $h_\\alpha(1)=0$, has\n$h_\\alpha(0+)=-1$, and has recession limit\n$\\lim_{t\\to\\infty}h_\\alpha(t)/t=+\\infty$. For $0<\\alpha<1$, the generator\n$g_\\alpha(t)=1-t^\\alpha$ is convex on $(0,\\infty)$, satisfies\n$g_\\alpha(1)=0$, has $g_\\alpha(0+)=1$, and has recession limit\n$\\lim_{t\\to\\infty}g_\\alpha(t)/t=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Suppose $\\alpha>1$. If $P\\not\\ll Q$, [F1] gives\n$D_\\alpha(P\\|Q)=+\\infty$, so the claimed inequality holds. If $P\\ll Q$,\nthen $PK\\ll QK$: whenever $(QK)_y=0$, nonnegativity of the summands gives\n$q_xK(y\\mid x)=0$ for every $x$, and $p_x>0$ implies $q_x>0$ and hence\n$K(y\\mid x)=0$. For $f(t)=t^\\alpha-1$, convexity holds,\n$f_\\infty=+\\infty$ by [F5], and direct substitution into [F2] gives\n$D_f(P\\|Q)=S_\\alpha(P,Q)-1$ and the same identity for $PK,QK$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "By [F4], $S_\\alpha(PK,QK)-1\\le S_\\alpha(P,Q)-1$. The logarithm is\nincreasing and $\\alpha-1>0$, so dividing the logarithms by $\\alpha-1$\npreserves the inequality and proves the result for $\\alpha>1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Suppose $0<\\alpha<1$ and take $g(t)=1-t^\\alpha$. By [F5] it is\nconvex, $g(1)=0$, $g(0)=1$, and $g_\\infty=0$. Substitution into [F2] gives\n$D_g(P\\|Q)=1-S_\\alpha(P,Q)$, including when $P$ has mass outside\n$\\operatorname{supp}Q$; likewise $D_g(PK\\|QK)=1-S_\\alpha(PK,QK)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "By [F4], $S_\\alpha(PK,QK)\\ge S_\\alpha(P,Q)$. If the input affinity\nis zero, [F1] gives $D_\\alpha(P\\|Q)=+\\infty$ and the conclusion follows.\nOtherwise both affinities are positive; applying the increasing logarithm\nand then dividing by $\\alpha-1<0$ reverses the inequality. This proves the\nclaim for $0<\\alpha<1$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes finite nonempty alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1 and 1.2 state the zero and singular affinity conventions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement. The f-divergence reduction and kernel theorem include one-point alphabets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement. Step 1.1 handles P not\u226aQ for alpha>1; step 3.1 handles zero affinity for alpha<1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement. The Statement covers every finite alpha>0 except one and treats both open ranges."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement. The proof uses finite sums over the alphabets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-finite-renyi-limit-is-kullback-leibler": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback\u2013Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\n[[def-finite-f-divergence]] by\n[[lem-finite-kl-generator-is-admissible]]. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-renyi-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on the same finite\nnonempty alphabet. For order $\\alpha\\in(0,\\infty)$ with $\\alpha\\ne1$, put\n$$S_\\alpha(P,Q):=\\sum_{x:q_x>0}p_x^\\alpha q_x^{1-\\alpha}.$$\nIf $\\alpha>1$ and $p_x>0=q_x$ for some $x$, define\n$S_\\alpha(P,Q)=+\\infty$; if $0<\\alpha<1$, such coordinates contribute\nzero. In the displayed sum, $p_x=0<q_x$ contributes zero. If the sum is\nzero, then necessarily $\\alpha<1$ and the logarithmic expression below is\ndefined as $+\\infty$. The **R\u00e9nyi divergence of order $\\alpha$ from $P$ to\n$Q$** is\n$$D_\\alpha(P\\|Q):=\\frac{\\log S_\\alpha(P,Q)}{\\alpha-1}.$$\nAt order one define\n$$D_1(P\\|Q):=D(P\\|Q),$$\nusing [[def-finite-kullback-leibler-divergence]]. All divergences are\nextended-real-valued; the direction is always first argument to second.\n\nFor $0<\\alpha<1$, a point with $p_x>0=q_x$ contributes zero to the affinity\n$S_\\alpha$ rather than infinity. For $\\alpha>1$, the same support mismatch\nmakes $D_\\alpha(P\\|Q)=+\\infty$. The sign of $\\alpha-1$ is part of the\ndefinition and reverses inequalities when $0<\\alpha<1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Suppose $P\\ll Q$. On the finite set $\\operatorname{supp}P$, every\n$p_x,q_x$ is positive. Put $r_x=p_x/q_x$. For real $h$,\n$S_{1+h}(P,Q)=\\sum_{p_x>0}p_xr_x^h$ by [F3]. Thus $S_1=1$, and [F4] and [F5]\ngive $\\left.\\frac{d}{dh}S_{1+h}\\right|_{h=0}\n=\\sum_{p_x>0}p_x\\log r_x=D(P\\|Q)$. By [F6], the derivative of\n$\\log S_{1+h}$ at $h=0$ equals $D(P\\|Q)$. Since $\\log S_1=0$, the\ndefinition of this derivative proves the two-sided limit.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Suppose $P\\not\\ll Q$. Let $s:=\\sum_{x:q_x>0}p_x<1$. For $0<\\alpha<1$,\nthe finite sum in [F3] tends to $s$ as $\\alpha\\uparrow1$, because each\nterm with $q_x>0$ tends to $p_x$. If $s=0$, that sum is identically zero\nand $D_\\alpha=+\\infty$. If $s>0$, then $\\log S_\\alpha\\to\\log s<0$ while\n$\\alpha-1\\to0$ through negative values, so $D_\\alpha\\to+\\infty$ from\nbelow order one.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "claim": "For every $\\alpha>1$, the positive $P$-mass at a zero $Q$-coordinate\nmakes $S_\\alpha=+\\infty$, hence $D_\\alpha=+\\infty$ by [F3]. Also\n$D(P\\|Q)=+\\infty$ by [F2]. The left and right limits therefore both equal\nthe stated extended value.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a finite nonempty alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.2\u20132.1 treat singular coordinates and zero affinity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement. Step 1.1 computes S_1=1 on common support; order one is defined as KL."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1\u20132.1 cover both P\u226aQ and P not\u226aQ."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement. Steps 1.1, 1.2, and 2.1 establish both one-sided limits at alpha=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement. The proof uses finite sums over the alphabet."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-kl-is-iid-type-ii-error-exponent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback\u2013Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\n[[def-finite-f-divergence]] by\n[[lem-finite-kl-generator-is-admissible]]. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-hypothesis-testing-beta",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability vectors on a finite nonempty alphabet $\\mathcal X$\n([[def-finite-probability-vector]]). They define finite probability spaces\nwith outcome weights $p_x$ and $q_x$, respectively\n([[def-finite-probability-space-and-event]]). For $h:\\mathcal X\\to\\mathbb R$, write\n$E_Ph:=\\sum_xp_xh(x)$ and $E_Qh:=\\sum_xq_xh(x)$; these are the finite\nexpectations ([[def-expectation-on-a-finite-probability-space]]). Test the\nsimple null $H_0:P$ against the simple alternative $H_1:Q$. A randomized test is a function\n$\\phi:\\mathcal X\\to[0,1]$, where $\\phi(x)$ is the probability of rejecting\n$H_0$ after observing $x$; thus $1-\\phi(x)$ is the probability of accepting\n$H_0$ ([[def-randomized-test]]). Its type-I error is\n$\\sum_xp_x\\phi(x)$, and its type-II error is\n$\\sum_xq_x(1-\\phi(x))$ ([[def-test-size-and-power]]).\n\nFor $\\epsilon\\in[0,1]$, define the oriented type-II testing function\n$$\\beta_\\epsilon(P,Q):=\\inf_{\\substack{\\phi:\\mathcal X\\to[0,1]\\\\\\sum_xp_x\\phi(x)\\le\\epsilon}}\\sum_xq_x(1-\\phi(x)).$$\nHere the first argument is the null law and the second is the alternative\nlaw; $\\epsilon$ bounds rejection under the first law, while the objective is\nacceptance of the null under the second. The feasible set is nonempty because\n$\\phi=0$ is allowed, and every objective value lies in $[0,1]$. Thus the set\nof objective values is nonempty and bounded below in $\\mathbb R$, so it has a\nreal infimum: [[def-real-numbers]] identifies $\\mathbb R$ with the\nCauchy-sequence reals, [[thm-reals-ordered-field]] gives their ordered-field\nstructure, and [[cor-cauchy-reals-lub-complete]] gives their\nleast-upper-bound property. [[def-complete-ordered-field]] gives the\nequivalent infimum property. Since the set also lies in $[0,1]$, that\ninfimum lies in $[0,1]$. In the\nNeyman\u2013Pearson-region convention that constrains null acceptance below by\n$\\gamma$, this is the lower boundary value at $\\gamma=1-\\epsilon$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-iid-log-likelihood-concentrates",
+          "source_section": "Statement",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on a finite nonempty\nalphabet with $P\\ll Q$. For $n\\ge1$, write\n$P^n(x_1,\\ldots,x_n)=\\prod_i p_{x_i}$ and\n$Q^n(x_1,\\ldots,x_n)=\\prod_i q_{x_i}$. Let $X_1,\\ldots,X_n$ be independent\nwith common law $P$, define $\\ell(x)=\\log(p_x/q_x)$ when $p_x>0$ and\n$\\ell(x)=0$ when $p_x=0$, and put $L_n=\\sum_{i=1}^n\\ell(X_i)$. Then\n$L_n/n\\to D(P\\|Q)$ in probability as $n\\to\\infty$. For every\n$x^n\\in\\operatorname{supp}(P)^n$, one also has\n$Q^n(x^n)=P^n(x^n)\\exp(-L_n(x^n))$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "First suppose $P\\not\\ll Q$. The set\n$S:=\\{x:p_x>0=q_x\\}$ has $r:=P(S)>0$. For each $n$, let\n$A_n\\subseteq\\mathcal X^n$ be the event that at least one coordinate lies\nin $S$, and define a test $\\phi_n$ to reject only on $A_n^c$. Then\n$E_{P^n}\\phi_n=P^n(A_n^c)=(1-r)^n\\to0$, while\n$E_{Q^n}[1-\\phi_n]=Q^n(A_n)=0$. For every fixed $\\epsilon>0$ the test is\nfeasible for all sufficiently large $n$, so $\\beta_\\epsilon(P^n,Q^n)=0$\nthere and the exponent is $+\\infty=D(P\\|Q)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Now suppose $P\\ll Q$, put $D=D(P\\|Q)$, and fix $\\delta>0$. On\n$\\operatorname{supp}(P)^n$ write\n$L_n(x_1,\\ldots,x_n)=\\sum_{i=1}^n\\log(p_{x_i}/q_{x_i})$. Define\n$A_n=\\{x\\in\\operatorname{supp}(P)^n:L_n(x)\\ge n(D-\\delta)\\}$ and reject\noutside $A_n$. By [F4], $P^n(A_n)\\to1$, so this test has type-I error at most\n$\\epsilon$ for all sufficiently large $n$. For each $x\\in A_n$,\n$Q^n(x)=P^n(x)e^{-L_n(x)}\\le P^n(x)\\exp(-n(D-\\delta))$; summing gives\n$\\beta_\\epsilon(P^n,Q^n)\\le Q^n(A_n)\\le\\exp(-n(D-\\delta))$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Let $\\psi:\\mathcal X^n\\to[0,1]$ be the acceptance probability of any\ntest feasible for $\\beta_\\epsilon(P^n,Q^n)$, so $E_{P^n}\\psi\\ge1-\\epsilon$.\nSet $B_n=\\{x\\in\\operatorname{supp}(P)^n:L_n(x)\\le n(D+\\delta)\\}$. By [F4],\n$P^n(B_n^c)\\to0$. Since the $Q^n$ expectation includes all terms on\n$\\operatorname{supp}(P)^n$, its nonnegative terms give\n$E_{Q^n}\\psi\\ge E_{P^n}[\\psi e^{-L_n}\\mathbf 1_{B_n}]\n\\ge\\exp(-n(D+\\delta))(1-\\epsilon-P^n(B_n^c))$.\nThis holds for every feasible test, hence also for the infimum\n$\\beta_\\epsilon(P^n,Q^n)$. For all sufficiently large $n$ the last factor\nis positive.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "claim": "Steps 1.2 and 2.1 imply\n$D-\\delta\\le\\liminf_n-\\frac1n\\log\\beta_\\epsilon(P^n,Q^n)\n\\le\\limsup_n-\\frac1n\\log\\beta_\\epsilon(P^n,Q^n)\\le D+\\delta$, because\n$-\\frac1n\\log(1-\\epsilon-P^n(B_n^c))\\to0$. Since $\\delta>0$ was\narbitrary, the limit equals $D$. Together with step 1.1 this proves the\nextended-real statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a finite nonempty alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement. Step 1.1 handles P-mass on Q-zero coordinates; later steps restrict ratios to supp P."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement. The finite-alphabet proof includes a one-point alphabet, where D=0 and the bounds remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement. Step 1.1 proves the singular branch; steps 1.2\u20133.1 prove the dominated branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement. The theorem assumes fixed epsilon\u2208(0,1), needed for its positive lower bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement. Threshold events and tests are defined on finite product alphabets without choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-binary-neyman-pearson-randomized-threshold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-randomized-test",
+          "source_section": "Definition",
+          "quote": "A **randomized test** is a randomized procedure with binary action space\nwhose action set is $\\{0,1\\}$, equipped with its full sigma-algebra\n$2^{\\{0,1\\}}$ (the power set, which is a sigma-algebra by\n[[def-sigma-algebra]]), where $1$ means reject and $0$ means do not reject\n([[def-randomized-procedure-as-a-markov-kernel]]). Its **test function** is\n$$\\varphi(x)=K(x,\\{1\\}),\\qquad x\\in\\mathcal X.$$\nSince $K(x,\\cdot)$ is a probability measure and $\\{0\\},\\{1\\}$ partition the\naction set, $K(x,\\{0\\})+K(x,\\{1\\})=1$. Thus $\\varphi(x)\\in[0,1]$ and\n$1-\\varphi(x)=K(x,\\{0\\})$ is the probability of not rejecting. Give $[0,1]$\nthe trace of the Borel sigma-algebra on $[0,+\\infty]$, namely\n$\\{C\\cap[0,1]:C\\in\\mathcal B([0,+\\infty])\\}$. By\n[[lem-procedure-action-law-is-measurable]], $x\\mapsto K(x,\\{1\\})$ is\nmeasurable; since it has range in $[0,1]$, its preimage of $C\\cap[0,1]$ equals\nits preimage of $C$ and is measurable for every such $C$. Hence $\\varphi$ is a\nmeasurable map in the preimage sense of\n[[def-measurable-function-between-measurable-spaces]]. Its value is the\nrejection probability after observing $x$.\nThe convention $1=\\text{reject}$ is fixed here. No null or alternative\nhypothesis is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-test-size-and-power",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.\n\nFor a randomized test with test function\n$\\varphi:\\mathcal X\\to[0,1]$ ([[def-randomized-test]]), its **power function**\nis\n$$\\beta(\\theta):=E_\\theta[\\varphi(X)]\\qquad(\\theta\\in\\Theta).$$\nIts **size** is\n$$\\sup_{\\theta\\in\\Theta_0}\\beta(\\theta),$$\nand it has **level $\\alpha$** when this supremum is at most\n$\\alpha\\in[0,1]$. The expectations exist and lie in $[0,1]$ because\n$0\\le\\varphi\\le1$ and each $P_\\theta$ is a probability measure\n([[def-probability-measure]],\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).\nThe supremum exists because $\\Theta_0$ is nonempty, the values lie in\n$[0,1]$. Here [[def-real-numbers]] identifies $\\mathbb R$ with the\nCauchy-sequence reals, [[thm-reals-ordered-field]] gives their ordered-field\nstructure, and [[cor-cauchy-reals-lub-complete]] establishes their\nleast-upper-bound property ([[def-complete-ordered-field]]).\n\nFor the binary action $a\\in\\{0,1\\}$, where $1$ means reject, the\n**zero-one error loss** is $1$ when $a=1$ and $\\theta\\in\\Theta_0$, or when\n$a=0$ and $\\theta\\in\\Theta_1$, and is $0$ otherwise. The decision-rule risk\nfrom [[def-loss-function-and-risk]] integrates this loss against the action\nkernel and data law. For each fixed $\\theta$, its section on the binary\naction space is measurable. The risk identities proved in\n[[lem-test-zero-one-loss-risk-identities]] show that risk equals\n$\\beta(\\theta)$ on $\\Theta_0$ and $1-\\beta(\\theta)$ on $\\Theta_1$. Thus size\nis the worst null error risk, and power is the rejection probability under\neach alternative parameter.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-hypothesis-testing-beta",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability vectors on a finite nonempty alphabet $\\mathcal X$\n([[def-finite-probability-vector]]). They define finite probability spaces\nwith outcome weights $p_x$ and $q_x$, respectively\n([[def-finite-probability-space-and-event]]). For $h:\\mathcal X\\to\\mathbb R$, write\n$E_Ph:=\\sum_xp_xh(x)$ and $E_Qh:=\\sum_xq_xh(x)$; these are the finite\nexpectations ([[def-expectation-on-a-finite-probability-space]]). Test the\nsimple null $H_0:P$ against the simple alternative $H_1:Q$. A randomized test is a function\n$\\phi:\\mathcal X\\to[0,1]$, where $\\phi(x)$ is the probability of rejecting\n$H_0$ after observing $x$; thus $1-\\phi(x)$ is the probability of accepting\n$H_0$ ([[def-randomized-test]]). Its type-I error is\n$\\sum_xp_x\\phi(x)$, and its type-II error is\n$\\sum_xq_x(1-\\phi(x))$ ([[def-test-size-and-power]]).\n\nFor $\\epsilon\\in[0,1]$, define the oriented type-II testing function\n$$\\beta_\\epsilon(P,Q):=\\inf_{\\substack{\\phi:\\mathcal X\\to[0,1]\\\\\\sum_xp_x\\phi(x)\\le\\epsilon}}\\sum_xq_x(1-\\phi(x)).$$\nHere the first argument is the null law and the second is the alternative\nlaw; $\\epsilon$ bounds rejection under the first law, while the objective is\nacceptance of the null under the second. The feasible set is nonempty because\n$\\phi=0$ is allowed, and every objective value lies in $[0,1]$. Thus the set\nof objective values is nonempty and bounded below in $\\mathbb R$, so it has a\nreal infimum: [[def-real-numbers]] identifies $\\mathbb R$ with the\nCauchy-sequence reals, [[thm-reals-ordered-field]] gives their ordered-field\nstructure, and [[cor-cauchy-reals-lub-complete]] gives their\nleast-upper-bound property. [[def-complete-ordered-field]] gives the\nequivalent infimum property. Since the set also lies in $[0,1]$, that\ninfimum lies in $[0,1]$. In the\nNeyman\u2013Pearson-region convention that constrains null acceptance below by\n$\\gamma$, this is the lower boundary value at $\\gamma=1-\\epsilon$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Define $\\phi(a)=1/4$ and $\\phi(b)=1$. By [F1], this is a valid randomized\ntest. Its type-I error is $(2/3)(1/4)+(1/3)(1)=1/2$, and its type-II error\nis $(1/3)(3/4)+(2/3)(0)=1/4$ by [F2, F3, F5].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Consider any feasible test and put $u=\\phi(a)$, $v=\\phi(b)$. If\n$u\\le1/4$, then its alternative rejection probability is\n$E_Q\\phi=u/3+2v/3\\le1/12+2/3=3/4$ by [F5]. If $u>1/4$, the constraint\n$2u/3+v/3\\le1/2$ gives $v\\le3/2-2u$, hence\n$E_Q\\phi\\le u/3+(2/3)(3/2-2u)=1-u<3/4$ by [F5]. Thus no feasible test has\nsmaller type-II error than the candidate in step 1.1, proving\n$\\beta_{1/2}(P,Q)=1/4$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The alternative-to-null likelihood ratios are $q_a/p_a=1/2$ and\n$q_b/p_b=2$. The test of step 1.1 rejects fully at the larger ratio $b$\nand randomizes at the smaller ratio $a$ to exhaust the remaining type-I\nbudget. This verifies the threshold direction for $H_0:P$ against $H_1:Q$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes the two-point alphabet {a,b}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example. Both displayed laws have strictly positive coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example. A one-point alphabet is outside the stated binary Example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example. The two laws have full support and the candidate test is checked in steps 1.1\u20132.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example. The type-I level is the interior value epsilon=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example. Step 2.1 compares every feasible pair (u,v) by a direct two-case calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-binary-f-and-renyi-divergences": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback\u2013Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\n[[def-finite-f-divergence]] by\n[[lem-finite-kl-generator-is-admissible]]. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-renyi-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on the same finite\nnonempty alphabet. For order $\\alpha\\in(0,\\infty)$ with $\\alpha\\ne1$, put\n$$S_\\alpha(P,Q):=\\sum_{x:q_x>0}p_x^\\alpha q_x^{1-\\alpha}.$$\nIf $\\alpha>1$ and $p_x>0=q_x$ for some $x$, define\n$S_\\alpha(P,Q)=+\\infty$; if $0<\\alpha<1$, such coordinates contribute\nzero. In the displayed sum, $p_x=0<q_x$ contributes zero. If the sum is\nzero, then necessarily $\\alpha<1$ and the logarithmic expression below is\ndefined as $+\\infty$. The **R\u00e9nyi divergence of order $\\alpha$ from $P$ to\n$Q$** is\n$$D_\\alpha(P\\|Q):=\\frac{\\log S_\\alpha(P,Q)}{\\alpha-1}.$$\nAt order one define\n$$D_1(P\\|Q):=D(P\\|Q),$$\nusing [[def-finite-kullback-leibler-divergence]]. All divergences are\nextended-real-valued; the direction is always first argument to second.\n\nFor $0<\\alpha<1$, a point with $p_x>0=q_x$ contributes zero to the affinity\n$S_\\alpha$ rather than infinity. For $\\alpha>1$, the same support mismatch\nmakes $D_\\alpha(P\\|Q)=+\\infty$. The sign of $\\alpha-1$ is part of the\ndefinition and reverses inequalities when $0<\\alpha<1$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-f-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on a finite nonempty\nalphabet $\\mathcal X$ ([[def-finite-probability-vector]]). A **convex\ngenerator** is a finite convex function $f:(0,\\infty)\\to\\mathbb R$ with\n$f(1)=0$; convexity uses the two-point inequality of\n[[def-convex-and-strictly-convex-functions-on-euclidean-sets]]. Use its\nextended boundary values\n$$f(0):=\\lim_{t\\downarrow0}f(t),\\qquad f_\\infty:=\\lim_{t\\to\\infty}\\frac{f(t)}t.$$\nThese limits exist in $\\mathbb R\\cup\\{+\\infty\\}$ by\n[[lem-convex-generator-boundary-limits-exist]]. Define the **finite\nf-divergence from $P$ to $Q$**\nby\n$$D_f(P\\|Q):=\\sum_{x:q_x>0}q_x f(p_x/q_x)+ f_\\infty\\sum_{x:q_x=0}p_x.$$\nIn the first sum, if $p_x=0$, the term means $q_x f(0)$. A coordinate with\n$p_x=q_x=0$ contributes zero and is omitted. The second term is defined as\nzero when its coefficient $\\sum_{q_x=0}p_x$ is zero, even if\n$f_\\infty=+\\infty$; if that coefficient is positive and $f_\\infty=+\\infty$,\nthe divergence is $+\\infty$.\n\nThe boundary term is essential when $P\\not\\ll Q$. It is the recession\ncontribution of the generator and is not the value $f(0)$.",
+          "uses": [
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $D(P\\|Q)=\\frac34\\log3+\\frac14\\log(1/3) =\\frac12\\log3$. The direction is $P$ to $Q$; reversing the vectors gives the same value here by symmetry.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For order $1/2$, each affinity term is $\\sqrt{p_xq_x}$, so $S_{1/2}=2\\sqrt{3/16}=\\sqrt3/2$ by [F3]. Therefore $D_{1/2}=-2\\log(\\sqrt3/2)=\\log(4/3)$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For order $2$, [F3] gives $S_2=(9/16)/(1/4)+(1/16)/(3/4)=9/4+1/12=7/3$, so $D_2=\\log(7/3)$.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Put $f(t)=\\frac12|t-1|$ for $t>0$. It is finite-valued and $f(1)=0$. For $x,y>0$ and $s\\in[0,1]$, $(1-s)x+sy>0$, so [F5] and [F6] give $$f((1-s)x+sy)=\\frac12|(1-s)(x-1)+s(y-1)|\\le(1-s)f(x)+sf(y).$$ Thus [F7] proves that $f$ is convex, so it is an admissible generator in [F4].",
+          "step": "1.4",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The generator in [F4] now gives $D_f(P\\|Q)=\\frac12\\sum_x|p_x-q_x| =\\frac12(1/2+1/2)=1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes the two-point alphabet {0,1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example. Both displayed laws have strictly positive coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example. The Example uses two points; a singleton alphabet is outside its scope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example. The supports agree and all coordinates are positive, as stated in the Example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example. The Example uses R\u00e9nyi orders 1/2 and 2, with order one supplied by KL."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example. All calculations are finite sums over two coordinates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "ex-disjoint-support-f-and-renyi-divergences": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-f-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on a finite nonempty\nalphabet $\\mathcal X$ ([[def-finite-probability-vector]]). A **convex\ngenerator** is a finite convex function $f:(0,\\infty)\\to\\mathbb R$ with\n$f(1)=0$; convexity uses the two-point inequality of\n[[def-convex-and-strictly-convex-functions-on-euclidean-sets]]. Use its\nextended boundary values\n$$f(0):=\\lim_{t\\downarrow0}f(t),\\qquad f_\\infty:=\\lim_{t\\to\\infty}\\frac{f(t)}t.$$\nThese limits exist in $\\mathbb R\\cup\\{+\\infty\\}$ by\n[[lem-convex-generator-boundary-limits-exist]]. Define the **finite\nf-divergence from $P$ to $Q$**\nby\n$$D_f(P\\|Q):=\\sum_{x:q_x>0}q_x f(p_x/q_x)+ f_\\infty\\sum_{x:q_x=0}p_x.$$\nIn the first sum, if $p_x=0$, the term means $q_x f(0)$. A coordinate with\n$p_x=q_x=0$ contributes zero and is omitted. The second term is defined as\nzero when its coefficient $\\sum_{q_x=0}p_x$ is zero, even if\n$f_\\infty=+\\infty$; if that coefficient is positive and $f_\\infty=+\\infty$,\nthe divergence is $+\\infty$.\n\nThe boundary term is essential when $P\\not\\ll Q$. It is the recession\ncontribution of the generator and is not the value $f(0)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback\u2013Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\n[[def-finite-f-divergence]] by\n[[lem-finite-kl-generator-is-admissible]]. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-renyi-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on the same finite\nnonempty alphabet. For order $\\alpha\\in(0,\\infty)$ with $\\alpha\\ne1$, put\n$$S_\\alpha(P,Q):=\\sum_{x:q_x>0}p_x^\\alpha q_x^{1-\\alpha}.$$\nIf $\\alpha>1$ and $p_x>0=q_x$ for some $x$, define\n$S_\\alpha(P,Q)=+\\infty$; if $0<\\alpha<1$, such coordinates contribute\nzero. In the displayed sum, $p_x=0<q_x$ contributes zero. If the sum is\nzero, then necessarily $\\alpha<1$ and the logarithmic expression below is\ndefined as $+\\infty$. The **R\u00e9nyi divergence of order $\\alpha$ from $P$ to\n$Q$** is\n$$D_\\alpha(P\\|Q):=\\frac{\\log S_\\alpha(P,Q)}{\\alpha-1}.$$\nAt order one define\n$$D_1(P\\|Q):=D(P\\|Q),$$\nusing [[def-finite-kullback-leibler-divergence]]. All divergences are\nextended-real-valued; the direction is always first argument to second.\n\nFor $0<\\alpha<1$, a point with $p_x>0=q_x$ contributes zero to the affinity\n$S_\\alpha$ rather than infinity. For $\\alpha>1$, the same support mismatch\nmakes $D_\\alpha(P\\|Q)=+\\infty$. The sign of $\\alpha-1$ is part of the\ndefinition and reverses inequalities when $0<\\alpha<1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]). The **absolute value** of\n$x \\in F$ is\n\n$$|x| \\;:=\\; \\begin{cases} x & \\text{if } x \\ge 0, \\\\ -x & \\text{if } x < 0. \\end{cases}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $f(t)=\\frac12|t-1|$ for $t>0$. It is finite-valued and $f(1)=0$. For $x,y>0$ and $s\\in[0,1]$, $(1-s)x+sy>0$, so [F5] and [F6] give $$f((1-s)x+sy)=\\frac12|(1-s)(x-1)+s(y-1)|\\le(1-s)f(x)+sf(y).$$ Thus [F7] proves that $f$ is convex, so it is an admissible generator in [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $p_a=1>0=q_a$, [F3] gives $D(P\\|Q)=+\\infty$. This records the singular direction; $D(Q\\|P)$ is also infinite by the same support calculation with $a,b$ exchanged.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $0<t<1$, $f(t)=\\frac12(1-t)$, so $f(0)=\\lim_{t\\downarrow0}f(t)=1/2$. For $t>1$, $f(t)/t=\\frac12(1-1/t)$, so $f_\\infty=\\lim_{t\\to\\infty}f(t)/t=1/2$. The coordinate $a$ contributes $p_af_\\infty=1/2$ by [F2], and coordinate $b$ contributes $q_bf(0)=1/2$. Thus $D_f(P\\|Q)=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $0<\\alpha<1$, the only coordinate with $q_x>0$ is $b$, where $p_b=0$, so $S_\\alpha(P,Q)=0$ and $D_\\alpha(P\\|Q)=+\\infty$ by [F4] and the definition. If $\\alpha>1$, coordinate $a$ gives infinite affinity by [F4]. At $\\alpha=1$, KL is infinite by step 1.2.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes the two-point alphabet {a,b}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example. Steps 1.1, 2.1, 1.2, 3.1 compute all zero-coordinate contributions explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example. The two point masses are distinct; the singleton case is outside the Example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example. The supports are disjoint, and every singular value is computed in steps 1.1, 2.1, 1.2, 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example. Step 3.1 separates alpha<1, alpha>1, and alpha=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example. The Example uses two explicit coordinates and finite sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if assertion."
+        }
+      ]
+    }
+  }
+}

@@ -3,18 +3,23 @@ id: fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold
 kind: false-statement
 title: "A preimage need not be a submanifold without transversality"
 status: published
+dependency_level: 3
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-transverse-preimage-theorem]
+deps: [thm-transverse-preimage-theorem, def-embedded-submanifold-and-slice-chart]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold.json
 sources:
   scraped: []
   references:
@@ -33,11 +38,13 @@ again a submanifold.
 
 [L1] The transverse preimage theorem needs transversality to conclude the preimage is a submanifold ([[thm-transverse-preimage-theorem]]).
 
+[F2] An embedded $k$-submanifold of $\mathbb R^2$ has $0\le k\le2$ and is locally a coordinate slice ([[def-embedded-submanifold-and-slice-chart]]).
+
 ## Refutation
 **Proof technique:** direct.
 
 1.1 The preimage is $$ F^{-1}(0)=\{(x,y):xy=0\}=(\mathbb R\times\{0\})\cup(\{0\}\times\mathbb R), $$ the union of the two coordinate axes. [given, algebra]
 
-2.1 At the origin this set has two distinct tangent directions, so no neighbourhood of $(0,0)$ is diffeomorphic to an open interval or to a point. Hence it is not a $1$-dimensional or $0$-dimensional embedded submanifold there. This is exactly the failure excluded by the hypothesis in [L1]. [L1, step 1.1]
+2.1 Every neighbourhood of the origin contains nonzero points on all four half-axes, and the cross has empty interior in every neighbourhood of the origin. An embedded $0$-submanifold would make the origin isolated, which fails; an embedded $1$-submanifold would have a local arc whose puncture has exactly two local components, unlike these four half-axes; and an embedded $2$-submanifold would be open near the origin by the slice-chart condition [F2], contradicting empty interior. Thus the cross is not embedded as a submanifold of any allowed dimension at the origin. This is exactly the failure excluded by the hypothesis in [L1]. [F2, L1, step 1.1]
 
 3.1 Therefore a preimage need not be a submanifold when transversality is dropped. [step 2.1] ∎

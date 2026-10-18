@@ -3,6 +3,7 @@ id: def-intermediate-value-property
 kind: definition
 title: "The intermediate value property (Darboux property) of a function on an interval: the image of every subinterval is order-convex"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: ai-altered
@@ -14,12 +15,12 @@ aliases: [def-darboux-property]
 landmark: true
 short: "intermediate value property"
 verification:
-  audited: 2026-07-28
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/def-intermediate-value-property.json
 sources:
   scraped: []
   references:

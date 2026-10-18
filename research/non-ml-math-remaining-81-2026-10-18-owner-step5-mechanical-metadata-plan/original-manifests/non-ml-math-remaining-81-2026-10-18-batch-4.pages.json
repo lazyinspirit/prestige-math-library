@@ -1,0 +1,688 @@
+[
+  {
+    "order": 2500,
+    "id": "finite-alphabet-entropy-and-divergence",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Finite-Alphabet Entropy and Divergence",
+    "companion": "finite-alphabet-entropy-and-divergence-examples",
+    "requires": [
+      "probability-spaces-random-variables-and-expectation",
+      "quantum-communication-and-fingerprinting",
+      "minimax-lower-bounds-and-information-theoretic-methods"
+    ],
+    "items": [
+      {
+        "id": "def-it-information-units-and-logarithm-base",
+        "kind": "definition",
+        "title": "Information units and logarithm-base convention",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "def-real-exponential-function-and-e"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.2, printed pp. 18–20; zero convention and nats/bits."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 1, §1.1, printed pp. 9–12; base-2 entropy convention and conversion to nats."
+            }
+          ]
+        },
+        "statement_or_definition": "Use natural logarithms and nats by default. For b>1, log_b(t)=ln(t)/ln(b); base 2 gives bits. Base-b versions replace ln by log_b and retain 0 log 0=0 and +infinity for positive mass over zero reference mass.",
+        "proof_obligations": [
+          "State the domain t>0 and justify ln(b)>0 for b>1 from the published logarithm order law; keep finite support and extended-real conventions explicit."
+        ],
+        "axiom_use": "No choice axiom is used."
+      },
+      {
+        "id": "lem-it-finite-marginals-and-conditionals-are-pmfs",
+        "kind": "lemma",
+        "title": "Marginals and positive-mass conditionals of a finite joint law are probability vectors",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-finite-sum-in-a-commutative-monoid",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §§2.2–2.3, printed pp. 18–24; finite joint pmfs and their marginals."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 1, §1.1, printed pp. 9–12; conditional pmfs and finite entropy."
+            }
+          ]
+        },
+        "statement_or_definition": "For a finite joint pmf p(x,y), its marginals p_X and p_Y are pmfs. If p_Y(y)>0, then x↦p(x,y)/p_Y(y) is a pmf; zero-mass conditioning values are omitted.",
+        "proof_obligations": [
+          "Verify nonnegativity and normalization of marginals and conditionals by finite sums; handle zero conditioning mass explicitly."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; only finite sums are rearranged."
+      },
+      {
+        "id": "lem-it-finite-kl-agrees-with-measurable-kl",
+        "kind": "lemma",
+        "title": "Finite KL divergence agrees with measurable-space KL",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-finite-probability-space-and-event",
+          "thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "def-radon-nikodym-derivative",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.3, printed pp. 21–23; finite divergence; Chapter 5, §5.2, printed pp. 83–89; Radon–Nikodym representation."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 2, §2.1, printed pp. 21–22; discrete KL support convention and RN definition."
+            }
+          ]
+        },
+        "statement_or_definition": "For probability vectors p,q on a finite set, the measurable KL of their full-power-set laws equals the finite sum from def-qa-35, including +infinity exactly when p_i>0=q_i for some i.",
+        "proof_obligations": [
+          "Construct the finite Radon–Nikodym density explicitly in the absolutely continuous case; handle support failure separately; state that AC is invoked only through the current general KL definition."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes AC only to invoke the published general measurable KL definition; the finite density and sum calculation are explicit and choice-free."
+      },
+      {
+        "id": "lem-it-finite-log-sum-inequality",
+        "kind": "lemma",
+        "title": "Finite log-sum inequality with support and equality cases",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "def-it-information-units-and-logarithm-base",
+          "thm-finite-jensen-inequality",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-continuous-functions",
+          "cor-mean-value-theorem",
+          "def-convex-concave-and-midpoint-convex-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.3, printed pp. 21–22; finite divergence inequality and Jensen route; Chapter 5, §5.2, partition/data-processing arguments."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 2, §§2.1 and 2.5, printed pp. 21–22, 31–35; KL support and finite data processing."
+            }
+          ]
+        },
+        "statement_or_definition": "For finite nonnegative vectors a,b, with A=Σa_i and B=Σb_i, Σ_{a_i>0}a_i ln(a_i/b_i)≥A ln(A/B), with 0 log 0=0, positive-over-zero terms +infinity, and right side 0 when A=0. For A,B>0 equality holds exactly when a_i=(A/B)b_i for every i.",
+        "proof_obligations": [
+          "Prove strict convexity of t ln t on [0,infinity), apply finite Jensen after normalization, and handle A=0, B=0, support failure, zero coordinates, and equality explicitly."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; finite Jensen and finite sums are choice-free."
+      },
+      {
+        "id": "def-it-finite-conditional-entropy",
+        "kind": "definition",
+        "title": "Finite conditional entropy",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "def-it-information-units-and-logarithm-base",
+          "lem-it-finite-marginals-and-conditionals-are-pmfs",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-finite-probability-space-and-event",
+          "def-random-element-and-real-random-variable"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.5, printed pp. 35–36; conditional entropy as an average over positive-mass conditional pmfs."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 1, §1.1, printed pp. 9–12; conditional entropy for finite X and discrete Y."
+            }
+          ]
+        },
+        "statement_or_definition": "For finite X,Y with joint pmf p, H(X|Y)=Σ_{y:p_Y(y)>0}p_Y(y)H(p_{X|Y=y}), using def-qa-35 in nats. Terms at zero-mass y are omitted.",
+        "proof_obligations": [
+          "State that the conditional vectors are pmfs by the local marginal/conditional lemma and that all sums are finite; never define conditional entropy by subtracting possibly infinite quantities."
+        ],
+        "axiom_use": "No choice axiom is used; all alphabets are finite."
+      },
+      {
+        "id": "def-it-finite-mutual-information",
+        "kind": "definition",
+        "title": "Finite mutual information",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "def-it-information-units-and-logarithm-base",
+          "lem-it-finite-marginals-and-conditionals-are-pmfs",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-finite-probability-space-and-event",
+          "def-random-element-and-real-random-variable"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.5, printed pp. 36–37; finite mutual information as joint KL and entropy difference."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 3, §3.1, printed pp. 41–43; mutual information as D(P_XY||P_XP_Y)."
+            }
+          ]
+        },
+        "statement_or_definition": "For finite X,Y with joint pmf p, define I(X;Y)=D(p_XY||p_X⊗p_Y)=Σ_{p(x,y)>0}p(x,y)ln[p(x,y)/(p_X(x)p_Y(y))]. The sum is finite because positive joint mass forces positive marginals.",
+        "proof_obligations": [
+          "Use the finite marginal lemma to verify every ratio on positive joint support is positive and finite; prove the entropy identity separately."
+        ],
+        "axiom_use": "No choice axiom is used; all distributions and sums are finite."
+      },
+      {
+        "id": "def-it-finite-conditional-mutual-information",
+        "kind": "definition",
+        "title": "Finite conditional mutual information",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "def-it-information-units-and-logarithm-base",
+          "lem-it-finite-marginals-and-conditionals-are-pmfs",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-finite-probability-space-and-event",
+          "def-random-element-and-real-random-variable"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.5, printed pp. 40–41; finite CMI as conditional-product divergence."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 3, §3.4, printed pp. 50–52; CMI and conditional independence."
+            }
+          ]
+        },
+        "statement_or_definition": "For finite X,Y,Z, define I(X;Y|Z)=Σ_{z:p_Z(z)>0}p_Z(z)D(p_{XY|z}||p_{X|z}⊗p_{Y|z}); zero-mass z terms are omitted.",
+        "proof_obligations": [
+          "Use the local finite conditional-pmf lemma to establish well-defined conditional distributions; prove nonnegativity, the entropy identity, and equality characterization as a separate theorem."
+        ],
+        "axiom_use": "No choice axiom is used; every conditional sum is finite."
+      },
+      {
+        "id": "thm-it-finite-kl-nonnegative-equality",
+        "kind": "theorem",
+        "title": "Finite KL divergence is nonnegative with equality exactly at equal laws",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "lem-it-finite-log-sum-inequality",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.3, printed pp. 21–23, Theorem 2.3.1; finite divergence inequality and equality."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 3, §3.1, printed pp. 42–43; nonnegativity and equality of mutual information via KL."
+            }
+          ]
+        },
+        "statement_or_definition": "For finite probability vectors p,q, D(p||q)≥0 and D(p||q)=0 iff p=q; D(p||q)=+infinity if p is not absolutely continuous with respect to q.",
+        "proof_obligations": [
+          "Apply log-sum with A=B=1 in the absolutely continuous case; use the exact equality case; handle support failure separately."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; the argument is entirely finite."
+      },
+      {
+        "id": "thm-it-information-unit-conversion",
+        "kind": "theorem",
+        "title": "Finite information quantities convert by the logarithm base",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "def-it-information-units-and-logarithm-base",
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-mutual-information",
+          "thm-it-finite-kl-nonnegative-equality",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.2, printed pp. 18–20; nats and bits conventions."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 1, §1.1, printed pp. 9–12; entropy conventions and base-2 units."
+            }
+          ]
+        },
+        "statement_or_definition": "For b>1, H_b(p)=H(p)/ln b and D_b(p||q)=D(p||q)/ln b in extended reals. The same conversion holds for finite conditional entropy, mutual information, and conditional mutual information; b=2 measures bits.",
+        "proof_obligations": [
+          "Derive conversion term by term; prove ln b>0; treat support failure so +infinity remains +infinity and never subtract infinities."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used."
+      },
+      {
+        "id": "thm-it-finite-conditional-mutual-information-identities-and-equality",
+        "kind": "theorem",
+        "title": "Finite conditional mutual information identities and equality",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "def-it-finite-conditional-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "thm-it-finite-kl-nonnegative-equality",
+          "lem-it-finite-marginals-and-conditionals-are-pmfs",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.5, printed pp. 40–41, Lemma 2.5.5; CMI nonnegativity, equality, and conditional independence."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 3, §3.4, printed pp. 50–52; CMI and conditional independence."
+            }
+          ]
+        },
+        "statement_or_definition": "For finite X,Y,Z, I(X;Y|Z)=H(X|Z)+H(Y|Z)-H(X,Y|Z)≥0, with equality iff X and Y are independent under every conditional law given a positive-mass z.",
+        "proof_obligations": [
+          "Expand each conditional KL as a finite sum, apply finite KL equality coordinatewise, and weight only positive-mass z values."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used."
+      },
+      {
+        "id": "thm-it-finite-entropy-chain-rule",
+        "kind": "theorem",
+        "title": "Finite entropy and mutual-information chain rules",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-mutual-information",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "lem-it-finite-marginals-and-conditionals-are-pmfs",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §§2.3 and 2.5, printed pp. 24, 35–42; finite entropy and information chain rules."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 1, §1.1, printed pp. 11–13; entropy chain rule; Chapter 3, §3.4, pp. 50–52, mutual-information chain rule."
+            }
+          ]
+        },
+        "statement_or_definition": "For finite X,Y,Z, H(X,Y|Z)=H(X|Z)+H(Y|X,Z) and I(X;Y,Z)=I(X;Z)+I(X;Y|Z). Also I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X). All terms are finite.",
+        "proof_obligations": [
+          "Factor conditional pmfs only on positive-mass atoms, sum finite logarithms, and derive the mutual-information identities without extended-real subtraction."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; all sums are finite.",
+        "status": "draft",
+        "statement": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite."
+      },
+      {
+        "id": "thm-it-finite-markov-data-processing",
+        "kind": "theorem",
+        "title": "Data processing for a finite Markov chain, with equality condition",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.5, printed pp. 40–42; finite Markov chain identity and information chain rules."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 3, §§3.4–3.5, printed pp. 50–53; Markov chain and mutual-information DPI."
+            }
+          ]
+        },
+        "statement_or_definition": "If finite X,Y,Z satisfy X⊥Z|Y, equivalently p(x,z|y)=p(x|y)p(z|y) for each p_Y(y)>0, then I(X;Z)≤I(X;Y), with equality iff I(X;Y|Z)=0.",
+        "proof_obligations": [
+          "Expand I(X;Y,Z) in both orders, use Markov factorization to make I(X;Z|Y)=0, and use CMI nonnegativity and equality."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used."
+      },
+      {
+        "id": "thm-it-fano-inequality",
+        "kind": "theorem",
+        "title": "Finite-alphabet Fano inequality",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "thm-it-finite-markov-data-processing",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality",
+          "thm-natural-logarithm-laws",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 4, §4.2, printed pp. 71–72, Lemma 4.2.1; the finite error-indicator proof."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 3, §3.6, printed pp. 56–58, Theorem 3.12; randomized finite-alphabet estimators."
+            }
+          ]
+        },
+        "statement_or_definition": "For finite X with alphabet size m≥2, finite observation Y, and any finite estimator Xhat in the same alphabet generated from Y (X→Y→Xhat), let Pe=P[Xhat≠X] and h2(t)=−t ln t−(1−t)ln(1−t), 0 ln0=0. Then H(X|Y)≤h2(Pe)+Pe ln(m−1)≤ln2+Pe ln m. For m=1, H(X|Y)=0.",
+        "proof_obligations": [
+          "Handle randomized estimators through the finite Markov channel; decompose by the error indicator; bound the error-branch entropy by ln(m−1); derive the looser ln2+Pe ln m form; treat Pe=0, Pe=1, and m=1."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; the estimator channel and all alphabets are finite."
+      },
+      {
+        "id": "cor-it-fano-with-erasure-or-out-of-alphabet-estimates",
+        "kind": "corollary",
+        "title": "Fano bound for erasure and out-of-alphabet estimates",
+        "page": "finite-alphabet-entropy-and-divergence",
+        "deps": [
+          "thm-it-fano-inequality",
+          "thm-it-finite-markov-data-processing",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality",
+          "def-it-finite-mutual-information",
+          "thm-natural-logarithm-laws",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 3, §3.6, printed pp. 56–58; error-indicator proof method, extended here to arbitrary finite estimate alphabets."
+            },
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 4, §4.2, printed pp. 71–72; finite Fano error-indicator method."
+            }
+          ]
+        },
+        "statement_or_definition": "For finite X on m symbols, finite Y, and any finite estimator Xhat from Y, including erasure or outputs outside X, H(X|Y)≤h2(Pe)+Pe ln m. If X is uniform, (1−Pe)ln m≤I(X;Y)+h2(Pe).",
+        "proof_obligations": [
+          "Repeat the error-indicator proof with at most m messages on failure; handle m=1, Pe endpoints, and randomized estimators; rearrange the uniform-prior bound."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used."
+      }
+    ]
+  },
+  {
+    "order": 2501,
+    "id": "finite-alphabet-entropy-and-divergence-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Finite-Alphabet Entropy and Divergence — Examples",
+    "companion": "finite-alphabet-entropy-and-divergence",
+    "requires": [
+      "finite-alphabet-entropy-and-divergence"
+    ],
+    "items": [
+      {
+        "id": "ex-it-binary-entropy-and-extremizers",
+        "kind": "example",
+        "title": "Binary entropy and its extremizers",
+        "page": "finite-alphabet-entropy-and-divergence-examples",
+        "deps": [
+          "def-it-information-units-and-logarithm-base",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-it-finite-kl-nonnegative-equality",
+          "thm-natural-logarithm-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §§2.2–2.3, printed pp. 18–23; finite entropy and uniform maximizer."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 1, §1.1, printed pp. 9–12, Example 1.1; binary entropy and extrema."
+            }
+          ]
+        },
+        "statement_or_definition": "For Bernoulli(p), h(p)=−p ln p−(1−p)ln(1−p), with h(0)=h(1)=0. The unique maximum is ln2 at p=1/2; h(p)=0 exactly at p=0 or 1.",
+        "proof_obligations": [
+          "Compute the KL divergence to the uniform binary law to prove the unique maximum; use the zero-term convention and strict negativity of ln on (0,1) to characterize zero entropy."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used."
+      },
+      {
+        "id": "cex-it-kl-is-directional-and-can-be-infinite",
+        "kind": "counterexample",
+        "title": "Finite KL divergence is directional and may be infinite",
+        "page": "finite-alphabet-entropy-and-divergence-examples",
+        "deps": [
+          "thm-it-finite-kl-nonnegative-equality",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.3, printed pp. 21–23; directed finite divergence and support convention."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 2, §2.1, printed pp. 21–22; discrete KL support convention."
+            }
+          ]
+        },
+        "statement_or_definition": "Refute the assertion that finite KL divergence is symmetric: for p=δ0 and q=(ε,1−ε), 0<ε<1, D(p||q)=−ln ε<∞ while D(q||p)=+∞. For disjoint point masses, both directions are +∞.",
+        "proof_obligations": [
+          "Compute both directions from the finite support convention and explicitly verify the disjoint-support boundary."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; all distributions are finite."
+      },
+      {
+        "id": "ex-it-independent-and-deterministic-information",
+        "kind": "example",
+        "title": "Independent and deterministic finite information",
+        "page": "finite-alphabet-entropy-and-divergence-examples",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "thm-it-finite-entropy-chain-rule",
+          "def-it-finite-conditional-entropy",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert M. Gray, Entropy and Information Theory, corrected first edition",
+              "url": "https://ee.stanford.edu/~gray/it.pdf",
+              "locator": "Chapter 2, §2.5, printed pp. 36–37; mutual information and deterministic dependence."
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, author prepublication",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf",
+              "locator": "Chapter 3, §§3.1–3.2, printed pp. 42–45; MI as KL and entropy reduction."
+            }
+          ]
+        },
+        "statement_or_definition": "For finite X,Y, independence gives I(X;Y)=0; if Y=f(X), then I(X;Y)=H(Y).",
+        "proof_obligations": [
+          "For independence substitute the product joint law in finite KL; for a deterministic map sum over each fiber or use H(Y|X)=0 and the finite entropy identity."
+        ],
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used."
+      }
+    ]
+  }
+]

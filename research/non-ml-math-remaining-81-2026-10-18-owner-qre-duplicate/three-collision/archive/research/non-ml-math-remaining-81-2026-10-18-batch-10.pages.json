@@ -1,0 +1,449 @@
+[
+  {
+    "order": 2512,
+    "id": "stationary-ergodic-sources-and-universal-coding",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Stationary Ergodic Sources and Universal Coding",
+    "companion": "stationary-ergodic-sources-and-universal-coding-examples",
+    "requires": [
+      "iid-lossless-source-coding-and-the-aep",
+      "stationary-markov-chains-and-ergodic-limits",
+      "measure-theoretic-information-and-conditioning",
+      "prefix-codes-and-finite-lossless-coding"
+    ],
+    "items": [
+      {
+        "id": "def-finite-alphabet-stationary-source",
+        "kind": "definition",
+        "title": "Finite-alphabet stationary source",
+        "statement": "Defines a source as a probability law on two-sided paths over a finite alphabet, with stationarity and ergodicity expressed through the canonical shift.",
+        "strategy": "Define the path space, coordinate process, canonical shift, stationarity and ergodicity; state the finite-alphabet and two-sided conventions.",
+        "deps": [
+          "def-measure-preserving-transformation-and-system",
+          "def-ergodic-measure-preserving-system"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-finite-block-information-and-entropy",
+        "kind": "definition",
+        "title": "Finite-block information and entropy in bits",
+        "statement": "Defines information -log2 P(x), finite-vector Shannon entropy, conditional entropy, and the zero-probability convention for finite alphabets.",
+        "strategy": "Use the finite probability entropy definition and convert natural units to bits by division by ln 2.",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-triangular-information-averages",
+        "kind": "lemma",
+        "title": "Triangular averages of finite-past information converge to the infinite-past average",
+        "statement": "If integrable g_k converge almost surely to g with an integrable common envelope, proves n^{-1}sum_{i<n}(g_i-g) circ T^i tends to zero almost surely and in L1 on a finite measure-preserving system.",
+        "strategy": "Bound tails by the decreasing integrable envelopes Delta_m; apply Birkhoff and its L1 convergence on each Delta_m, then let m increase.",
+        "deps": [
+          "thm-birkhoff-ergodic-theorem",
+          "lem-ergodic-averages-converge-in-l-p-on-finite-measure-spaces",
+          "def-measure-preserving-transformation-and-system"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-finite-support-binary-prefix-code",
+        "kind": "definition",
+        "title": "Binary prefix codes on finite supports",
+        "statement": "Defines a binary prefix code on a finite support as an injective assignment to finite binary words whose range is prefix-free, and defines its code lengths and expected length.",
+        "strategy": "State the support-only convention; zero-probability source outcomes need not be encoded.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-block-entropy-chain-rule",
+        "kind": "lemma",
+        "title": "Finite entropy chain rule and monotonicity under conditioning",
+        "statement": "Proves the finite-alphabet entropy chain rule and that conditioning on additional finite-valued variables cannot increase conditional entropy.",
+        "strategy": "Expand the finite sums for the chain rule; use concavity of Shannon entropy on each conditioning fiber for monotonicity.",
+        "deps": [
+          "def-finite-block-information-and-entropy"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-general-process-information-rate",
+        "kind": "definition",
+        "title": "Information rate of a general finite-alphabet process",
+        "statement": "For any finite-alphabet process, defines its upper entropy rate as limsup n^{-1} H(X_0,...,X_{n-1}); no stationarity is assumed.",
+        "strategy": "State the block-entropy convention and limsup definition for a process that need not be stationary.",
+        "deps": [
+          "def-finite-alphabet-stationary-source",
+          "def-finite-block-information-and-entropy"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-past-information-density-finite-alphabet",
+        "kind": "definition",
+        "title": "Finite-past information densities",
+        "statement": "Defines p_k(a)=P(X_0=a|X_{-k},...,X_{-1}) on finite partition atoms and g_k=-log2 p_k(X_0), with k=0 the unconditional law.",
+        "strategy": "Specify the conditional-probability convention on positive-probability atoms and the zero-probability null-set convention.",
+        "deps": [
+          "def-finite-alphabet-stationary-source",
+          "def-finite-block-information-and-entropy"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-finite-block-source-code",
+        "kind": "definition",
+        "title": "Fixed-length lossless block codes and error probability",
+        "statement": "Defines an n-block fixed-length encoder as an injection from a decoded subset of A^n into {0,1}^{m_n}, with block error equal to the probability outside that subset and rate m_n/n.",
+        "strategy": "State encoder, decoder, success set, block-error convention and rate explicitly.",
+        "deps": [
+          "def-finite-alphabet-stationary-source"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-prefix-code-entropy-bounds",
+        "kind": "lemma",
+        "title": "Entropy lower and Shannon upper bounds for finite prefix codes",
+        "statement": "For a finite distribution, proves every binary prefix code has expected length at least H and constructs a prefix code with expected length less than H+1 bit.",
+        "strategy": "Use Kraft and nonnegative relative entropy for the lower bound; request lengths ceil(-log2 p(x)) and finite Kraft allocation for the upper bound.",
+        "deps": [
+          "def-finite-block-information-and-entropy",
+          "def-finite-support-binary-prefix-code",
+          "thm-kraft-inequality"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-ams-source-and-stationary-mean",
+        "kind": "definition",
+        "title": "Asymptotically mean stationary sources",
+        "statement": "Defines an AMS source by convergence of Cesaro averages of its shifted path law to a stationary mean and calls it AMS ergodic when that stationary mean is ergodic.",
+        "strategy": "Specify the two-sided path convention, shift direction, setwise cylinder convergence and stationary-mean convention.",
+        "deps": [
+          "def-finite-alphabet-stationary-source"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "alg-lz78-incremental-prefix-code",
+        "kind": "algorithm",
+        "title": "Finite-block LZ78 incremental prefix code",
+        "statement": "Defines a finite-block LZ78 parser, dictionary index records, Elias-delta self-delimiting parent indices, fixed-width symbols, and an explicit terminal symbol.",
+        "strategy": "Specify all parsing, dictionary update, encoding, decoding, block reset and termination steps; distinguish this exact code from implementation-specific variants.",
+        "deps": [
+          "def-finite-alphabet-stationary-source",
+          "def-finite-support-binary-prefix-code"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-finite-state-compressibility",
+        "kind": "definition",
+        "title": "Finite-state compressibility of an individual sequence",
+        "statement": "Defines finite-state information-lossless encoders, their limsup bit rate on a sequence, the infimum for at most s states, and the decreasing limit as s tends to infinity.",
+        "strategy": "Specify encoder states, transitions, output strings, information-losslessness and the limsup/inf conventions; normalize by log2 of the source alphabet size.",
+        "deps": [
+          "def-finite-alphabet-stationary-source"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-lz77-previous-match-phrase-length",
+        "kind": "definition",
+        "title": "LZ77 previous-match length and recurrence time",
+        "statement": "Defines the longest current block matching a previous length-l block in a finite past window and the equivalent first previous recurrence time, with exact overlap and endpoint conventions.",
+        "strategy": "Define R_l and L_n on two-sided finite-alphabet paths and state the equivalence of the events {R_l>n} and {L_n<l} under the selected indexing convention.",
+        "deps": [
+          "def-finite-alphabet-stationary-source"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-stationary-entropy-rate-limit",
+        "kind": "theorem",
+        "title": "Entropy-rate limit for a stationary finite-alphabet source",
+        "statement": "Proves that n^{-1}H(X_0,...,X_{n-1}) converges under stationarity and equals the limit of the finite-past conditional entropies.",
+        "strategy": "Apply the chain rule, stationarity and monotonicity of conditional entropies; identify the limit by Cesaro averaging and subadditivity.",
+        "deps": [
+          "def-finite-alphabet-stationary-source",
+          "def-finite-block-information-and-entropy",
+          "lem-finite-block-entropy-chain-rule",
+          "def-general-process-information-rate"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-finite-alphabet-past-information-convergence",
+        "kind": "lemma",
+        "title": "Convergence and integrable envelope for finite-past information",
+        "statement": "Proves p_k(a) converges almost surely for each symbol, g_k converges on realized paths, and sup_k g_k is integrable with an explicit exponential tail bound.",
+        "strategy": "The p_k(a) are bounded finite-partition martingales; prove their convergence by a finite upcrossing argument and bound information tails by stopping at the first small conditional probability.",
+        "deps": [
+          "def-finite-alphabet-stationary-source",
+          "def-finite-block-information-and-entropy",
+          "def-past-information-density-finite-alphabet"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-aep-implies-fixed-rate-lossless-coding",
+        "kind": "lemma",
+        "title": "AEP criterion for fixed-rate lossless coding",
+        "statement": "For any finite-alphabet source with -n^{-1}log2 P(X^n) converging in probability to h, proves vanishing block error is achievable for R>h and impossible for R<h.",
+        "strategy": "Use the high-probability information typical set for achievability and cardinality of a fixed-rate code for the converse.",
+        "deps": [
+          "def-finite-block-information-and-entropy",
+          "def-finite-block-source-code"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-lz78-prefix-code-lossless",
+        "kind": "theorem",
+        "title": "Losslessness and prefix property of the explicit LZ78 code",
+        "statement": "Proves the specified finite-block LZ78 record stream is prefix-free and decodes the original block exactly, including the explicit terminal symbol.",
+        "strategy": "Use the self-delimiting parent index, fixed-width symbol field, deterministic dictionary recursion, and terminal symbol to show unique parsing and prefix-freeness.",
+        "deps": [
+          "alg-lz78-incremental-prefix-code",
+          "def-finite-support-binary-prefix-code"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-lz78-distinct-parse-ziv-inequality",
+        "kind": "lemma",
+        "title": "Distinct-phrase count and Ziv inequality",
+        "statement": "Proves the deterministic LZ78 phrase-count bound and the inequality relating phrase-count entropy to any finite-order Markov likelihood, including dictionary and termination overhead.",
+        "strategy": "Group distinct phrases by length and k-context; apply concavity of log and the unit-mass bound for distinct words; bound phrase-count overhead by the entropy of phrase length and context.",
+        "deps": [
+          "alg-lz78-incremental-prefix-code",
+          "def-finite-block-information-and-entropy"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-componentwise-shannon-mcmillan-breiman",
+        "kind": "theorem",
+        "title": "Componentwise Shannon–McMillan–Breiman theorem",
+        "statement": "For every stationary finite-alphabet source, proves -n^{-1}log2 P(X_0^{n-1}) converges almost surely and in L1 to the invariant Birkhoff limit of the infinite-past information density; the limit has expectation equal to the entropy rate.",
+        "strategy": "Factor block probabilities by the chain rule, use the triangular-average lemma, then apply Birkhoff and the stationary entropy-rate theorem.",
+        "deps": [
+          "def-finite-alphabet-stationary-source",
+          "def-finite-block-information-and-entropy",
+          "lem-finite-block-entropy-chain-rule",
+          "thm-stationary-entropy-rate-limit",
+          "def-past-information-density-finite-alphabet",
+          "lem-finite-alphabet-past-information-convergence",
+          "lem-triangular-information-averages"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-stationary-expected-prefix-code-rate",
+        "kind": "theorem",
+        "title": "Expected lossless prefix-code rate for stationary sources",
+        "statement": "For every stationary finite-alphabet source, the optimal expected prefix-code length for X^n divided by n converges to the entropy rate.",
+        "strategy": "Apply the finite-block entropy lower and upper bounds and the stationary entropy-rate limit.",
+        "deps": [
+          "thm-stationary-entropy-rate-limit",
+          "lem-prefix-code-entropy-bounds"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-lz78-individual-sequence-finite-state-optimality",
+        "kind": "theorem",
+        "title": "LZ78 finite-state optimality for individual sequences",
+        "statement": "For each individual infinite sequence over a finite alphabet of size at least two, the block-reset LZ78 code rates converge to its finite-state compressibility.",
+        "strategy": "Count distinct parsing phrases, bound their count by O(n/log n), lower-bound any finite-state code through the entropy of its (start state, output word, end state) records, and compare the explicit LZ78 code overhead.",
+        "deps": [
+          "alg-lz78-incremental-prefix-code",
+          "thm-lz78-prefix-code-lossless",
+          "lem-lz78-distinct-parse-ziv-inequality",
+          "def-finite-state-compressibility"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-ergodic-shannon-mcmillan-breiman",
+        "kind": "corollary",
+        "title": "Ergodic Shannon–McMillan–Breiman theorem",
+        "statement": "For a stationary ergodic finite-alphabet source, the componentwise information-rate limit is the constant entropy rate.",
+        "strategy": "The Birkhoff limit is invariant, hence constant under ergodicity; its expectation, already identified with the entropy rate, determines that constant.",
+        "deps": [
+          "thm-componentwise-shannon-mcmillan-breiman",
+          "thm-ergodicity-and-invariant-functions"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-smb-limit-is-conditional-entropy-under-ac",
+        "kind": "corollary",
+        "title": "Invariant conditional-entropy description of the SMB limit",
+        "statement": "Under AC, identifies the componentwise SMB limit with E[g_infinity|I], conditional expectation of infinite-past information given the invariant sigma-algebra.",
+        "strategy": "Apply the finite-measure Birkhoff-limit identification to the stationary observable g_infinity circ T^n; isolate AC as the exact dependency of this identification branch.",
+        "deps": [
+          "thm-componentwise-shannon-mcmillan-breiman",
+          "def-past-information-density-finite-alphabet",
+          "def-axiom-of-choice",
+          "thm-birkhoff-limit-identification-on-finite-measure-spaces",
+          "def-strict-and-mod-null-invariant-sigma-algebras"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-lz78-stationary-expected-rate",
+        "kind": "theorem",
+        "title": "LZ78 expected-rate universality for stationary sources",
+        "statement": "For every stationary finite-alphabet source, the expected explicit LZ78 prefix-code length per symbol converges to the entropy rate, without an ergodicity assumption.",
+        "strategy": "The deterministic Ziv inequality gives an upper bound by every finite-order Markov cross-entropy; let memory grow. The prefix-code entropy lower bound gives the converse.",
+        "deps": [
+          "thm-stationary-entropy-rate-limit",
+          "lem-finite-alphabet-past-information-convergence",
+          "thm-stationary-expected-prefix-code-rate",
+          "alg-lz78-incremental-prefix-code",
+          "thm-lz78-prefix-code-lossless",
+          "lem-lz78-distinct-parse-ziv-inequality"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "cor-fixed-rate-lossless-coding-stationary-ergodic",
+        "kind": "corollary",
+        "title": "Fixed-rate source coding theorem for stationary ergodic sources",
+        "statement": "For a stationary ergodic finite-alphabet source, fixed-rate lossless coding has vanishing block error above the entropy rate and success probability tending to zero below it.",
+        "strategy": "Apply the AEP coding criterion to the ergodic SMB theorem.",
+        "deps": [
+          "cor-ergodic-shannon-mcmillan-breiman",
+          "lem-aep-implies-fixed-rate-lossless-coding"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-ams-ergodic-information-aep",
+        "kind": "theorem",
+        "title": "Shannon–McMillan limit for finite-alphabet AMS ergodic sources",
+        "statement": "For a finite-alphabet AMS source with ergodic stationary mean, proves -n^{-1}log2 P(X_0^{n-1}) converges almost surely to the stationary-mean entropy rate.",
+        "strategy": "Prove a finite-alphabet likelihood-ratio transfer from the stationary mean using finite-future conditional probabilities, a diagonal tail shift, Markov bounds and Borel–Cantelli; combine with stationary ergodic SMB.",
+        "deps": [
+          "def-ams-source-and-stationary-mean",
+          "cor-ergodic-shannon-mcmillan-breiman",
+          "def-finite-block-information-and-entropy"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-lz77-phrase-length-entropy-rate",
+        "kind": "theorem",
+        "title": "Stationary-ergodic LZ77 phrase-length theorem",
+        "statement": "For a stationary ergodic finite-alphabet source with entropy rate h, the normalized previous recurrence time n^{-1}log2 R_n converges in probability to h; equivalently, the greedy LZ77 match length has logarithmic scale (log2 window)/h when h>0.",
+        "strategy": "Owner escalation: the primary Wyner–Ziv full text was unavailable after five recorded retrieval attempts; do not claim a proof or use this item as a supplier until the complete recurrence-time argument is authored and reconciled.",
+        "deps": [
+          "def-lz77-previous-match-phrase-length",
+          "cor-ergodic-shannon-mcmillan-breiman"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-fixed-rate-lossless-coding-ams-ergodic",
+        "kind": "corollary",
+        "title": "Fixed-rate lossless coding for AMS ergodic sources",
+        "statement": "For a finite-alphabet AMS source with ergodic stationary mean, fixed-rate lossless coding has vanishing block error above the stationary-mean entropy rate and success probability tending to zero below it.",
+        "strategy": "Apply the AEP coding criterion to the AMS information limit.",
+        "deps": [
+          "thm-ams-ergodic-information-aep",
+          "lem-aep-implies-fixed-rate-lossless-coding"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 2513,
+    "id": "stationary-ergodic-sources-and-universal-coding-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Stationary Ergodic Sources and Universal Coding — Examples",
+    "companion": "stationary-ergodic-sources-and-universal-coding",
+    "requires": [
+      "stationary-ergodic-sources-and-universal-coding"
+    ],
+    "items": [
+      {
+        "id": "ex-nonstationary-block-entropy-rate-oscillation",
+        "kind": "example",
+        "title": "A nonstationary independent source with no entropy-rate limit",
+        "statement": "Constructs independent binary coordinates whose block entropy per symbol has subsequences tending to zero and one by alternating super-exponentially long deterministic and fair-coin blocks.",
+        "strategy": "Compute H(X_0^{n-1}) as the sum of coordinate entropies and compare at the ends of alternating blocks.",
+        "deps": [
+          "def-finite-block-information-and-entropy",
+          "def-general-process-information-rate"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-lz78-parse-with-explicit-terminator",
+        "kind": "example",
+        "title": "LZ78 parsing of a finite binary word",
+        "statement": "Traces the specified parser and decoder on 0100101001 followed by the explicit terminal symbol, including dictionary indices and exact record sequence.",
+        "strategy": "Apply the algorithm instruction by instruction; display the dictionary trie with every node and edge convention explained.",
+        "deps": [
+          "alg-lz78-incremental-prefix-code",
+          "thm-lz78-prefix-code-lossless"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-iid-and-markov-source-entropy-rates",
+        "kind": "example",
+        "title": "IID and two-state Markov entropy rates",
+        "statement": "Computes h=1 bit/symbol for fair IID bits and h=H2(1/4) for the stationary symmetric two-state Markov source with switch probability 1/4; compares the stationary LZ78 expected rates.",
+        "strategy": "Compute block entropies from the exact finite-dimensional laws and apply the stationary entropy-rate and LZ78 universality theorems.",
+        "deps": [
+          "def-finite-alphabet-stationary-source",
+          "def-finite-block-information-and-entropy",
+          "thm-stationary-entropy-rate-limit",
+          "thm-lz78-stationary-expected-rate",
+          "def-axiom-of-choice",
+          "cor-stationary-irreducible-markov-shift-is-ergodic"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

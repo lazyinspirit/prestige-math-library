@@ -1,0 +1,279 @@
+[
+  {
+    "order": 2502,
+    "id": "measure-theoretic-information-and-conditioning",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Measure-Theoretic Information and Conditioning",
+    "companion": "measure-theoretic-information-and-conditioning-examples",
+    "requires": [
+      "finite-alphabet-entropy-and-divergence",
+      "conditional-distributions-and-regular-conditional-probability"
+    ],
+    "items": [
+      {
+        "id": "def-measure-theoretic-mutual-information",
+        "kind": "definition",
+        "title": "Measure-theoretic mutual information",
+        "statement": "For a joint probability law P on E×F with marginals P_E and P_F, define I(E;F)=D(P||P_E⊗P_F) in nats, allowing +∞.",
+        "deps": ["def-kullback-leibler-divergence", "def-axiom-of-choice", "def-law-or-distribution-of-a-random-element", "def-probability-measure", "def-product-sigma-algebra-and-finite-product-sigma-algebras", "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"],
+        "dependency_level": 0,
+        "strategy": "Define the law functional directly through directional measurable-space KL and the product of the two marginals; keep the value extended nonnegative and do not express it as a difference of entropies.",
+        "axiom_base": "AC is inherited from the published measurable-space KL definition through its Radon–Nikodym density.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §§5.2–5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §§2.1–2.4", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}, {"title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 2 §2.1", "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "thm-finite-kl-equals-measurable-kl",
+        "kind": "theorem",
+        "title": "Finite-alphabet KL agrees with measurable-space KL",
+        "statement": "On a finite measurable alphabet, the published probability-vector KL and the measurable-space KL coincide, including the support-mismatch +∞ convention.",
+        "deps": ["def-qa-35-finite-probability-entropy-and-stochastic-matrices", "def-kullback-leibler-divergence", "def-probability-measure", "def-axiom-of-choice"],
+        "dependency_level": 0,
+        "strategy": "Check the Radon–Nikodym derivative atom by atom when absolute continuity holds; treat a positive-mass atom with zero reference mass separately.",
+        "axiom_base": "AC is required only by the general KL definition and its Radon–Nikodym supplier; the finite sum and atomwise density check are finite.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §§5.2 and 5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 2 §2.1", "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-conditional-kl-for-probability-kernels",
+        "kind": "definition",
+        "title": "Conditional KL for supplied probability kernels",
+        "statement": "For a common probability base μ and probability kernels K,L into one standard Borel target, define D_μ(K||L)=∫D(K_z||L_z)μ(dz), with singular fibers contributing +∞.",
+        "deps": ["def-kullback-leibler-divergence", "def-measure-kernel-and-probability-kernel", "def-standard-borel-space", "def-axiom-of-choice"],
+        "justified_by": ["thm-conditional-kl-is-measurable"],
+        "dependency_level": 0,
+        "strategy": "Use a supplied pair of kernels and common base measure; justify measurability of the fiber divergence by the local variational representation theorem.",
+        "axiom_base": "AC is inherited through general KL and the standard-Borel countable determining-algebra supplier.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §5.3", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §§2.2 and 2.6", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "def-finite-alphabet-conditional-entropy-given-observation",
+        "kind": "definition",
+        "title": "Finite-alphabet conditional entropy given an observation",
+        "statement": "For a finite-valued X and a standard-Borel observation Y, define H(X|Y) as the P_Y average of the finite Shannon entropy of a regular conditional law of X given Y.",
+        "deps": ["def-qa-35-finite-probability-entropy-and-stochastic-matrices", "def-conditional-law-given-a-random-element", "def-regular-conditional-distribution", "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets", "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable", "lem-simultaneous-ae-uniqueness-of-regular-conditional-distributions", "thm-measurability-of-integration-against-a-kernel", "def-standard-borel-space", "def-axiom-of-choice"],
+        "dependency_level": 0,
+        "strategy": "Average the bounded finite-alphabet entropy of a supplied regular conditional law; use standard-Borel disintegration and almost-everywhere uniqueness to justify the version convention.",
+        "axiom_base": "AC is required for standard-Borel regular conditional distributions and their simultaneous almost-everywhere uniqueness.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 2 §2.5 and Chapter 5 §5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 2 §2.1", "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "lem-product-of-two-probability-kernels",
+        "kind": "lemma",
+        "title": "The product of two probability kernels is a probability kernel",
+        "statement": "For probability kernels K_z and L_z into standard-Borel spaces E and F, z↦K_z⊗L_z is a probability kernel into E×F.",
+        "deps": ["def-measure-kernel-and-probability-kernel", "def-product-sigma-algebra-and-finite-product-sigma-algebras", "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique", "thm-dynkin-pi-lambda", "def-axiom-of-choice"],
+        "dependency_level": 0,
+        "strategy": "The product measure exists fiberwise; a pi-lambda argument extends measurable evaluation from rectangles to the full product sigma-algebra.",
+        "axiom_base": "The finite product-measure supplier is choice-free; no choice of versions or measures is made because each product measure is unique.",
+        "sources": {"references": [{"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §§2.2 and 2.6", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}, {"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §5.3", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-law-entropy-as-self-mutual-information",
+        "kind": "definition",
+        "title": "Law entropy as self-mutual information",
+        "statement": "For a random element X, define its measure-theoretic law entropy by H(X)=I(X;X), distinct from differential entropy.",
+        "deps": ["def-measure-theoretic-mutual-information", "def-axiom-of-choice"],
+        "dependency_level": 1,
+        "strategy": "Use the general joint-KL definition on the diagonal joint law of (X,X); do not use differential-entropy subtraction.",
+        "axiom_base": "AC is inherited through measurable-space KL.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 2 §2.1", "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "thm-finite-alphabet-conditional-entropy-version-and-chain-rule",
+        "kind": "theorem",
+        "title": "Finite-alphabet conditional entropy is version-invariant and obeys its chain rule",
+        "statement": "For finite-valued X,U and standard-Borel Z, conditional entropy is version-independent and H(X,U|Z)=H(X|Z)+H(U|X,Z), with all terms finite.",
+        "deps": ["def-finite-alphabet-conditional-entropy-given-observation", "def-qa-35-finite-probability-entropy-and-stochastic-matrices", "def-conditional-law-given-a-random-element", "thm-disintegration-of-a-joint-law-on-standard-borel-spaces", "lem-simultaneous-ae-uniqueness-of-regular-conditional-distributions", "def-axiom-of-choice"],
+        "dependency_level": 1,
+        "strategy": "Use simultaneous almost-everywhere uniqueness for version invariance, then prove the finite chain identity pointwise for each conditioning value and integrate.",
+        "axiom_base": "AC is inherited from the regular-conditional-law existence and uniqueness interfaces.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 2 §2.5 and Chapter 5 §5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 2 §2.1", "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-general-kl-variational-and-partition-formulas",
+        "kind": "theorem",
+        "title": "Variational and finite-partition formulas for measurable-space KL",
+        "statement": "For probability measures P,Q on one measurable space, D(P||Q) is both the supremum of E_P f−log E_Q e^f over bounded measurable f and the supremum of finite-partition KL sums.",
+        "deps": ["def-kullback-leibler-divergence", "thm-kullback-leibler-is-nonnegative", "thm-finite-kl-equals-measurable-kl", "thm-dominated-convergence", "thm-monotone-convergence-for-the-integral", "def-axiom-of-choice"],
+        "dependency_level": 1,
+        "strategy": "Use exponentially tilted measures for the upper bound, clipped log densities or a singular-set witness for the lower bound, then optimize finite-valued functions and uniformly approximate bounded functions by simple functions.",
+        "axiom_base": "AC is used through the Radon–Nikodym definition and the published KL equality theorem.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §5.2, Theorem 5.2.1", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 3 §3.4, Theorem 3.7", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/486b7d83cc428acf75b74323ecafcc11_MIT6_441S16_chapter_3.pdf"}, {"title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 5 §5.1, Theorem 5.1.1", "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-conditional-kl-is-measurable",
+        "kind": "theorem",
+        "title": "Conditional KL is measurable for supplied kernels",
+        "statement": "For probability kernels K,L into a standard-Borel target, z↦D(K_z||L_z) is measurable.",
+        "deps": ["def-conditional-kl-for-probability-kernels", "thm-general-kl-variational-and-partition-formulas", "thm-measurability-of-integration-against-a-kernel", "cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras", "def-axiom-of-choice"],
+        "dependency_level": 2,
+        "strategy": "Reduce the variational supremum to a countable family of simple functions on a countable generating algebra; each candidate integral is measurable by the kernel integration theorem.",
+        "axiom_base": "AC is used by the standard-Borel countable determining-algebra supplier and by measurable-space KL.",
+        "sources": {"references": [{"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §2.6", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}, {"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §5.3", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "lem-same-marginal-conditional-product-law-well-defined",
+        "kind": "lemma",
+        "title": "The same-marginal conditional-product law is well-defined",
+        "statement": "For standard-Borel X,Y,Z and supplied regular conditional laws K=P_{X|Z}, L=P_{Y|Z}, the product kernel K_z⊗L_z integrates against P_Z to a unique probability law, independent of the chosen versions.",
+        "deps": ["lem-product-of-two-probability-kernels", "lem-prior-and-model-kernel-define-joint-law", "def-conditional-law-given-a-random-element", "thm-disintegration-of-a-joint-law-on-standard-borel-spaces", "lem-simultaneous-ae-uniqueness-of-regular-conditional-distributions", "lem-finite-products-of-standard-borel-spaces-are-standard-borel", "def-axiom-of-choice"],
+        "dependency_level": 1,
+        "strategy": "Construct the product kernel and its joint law, then use simultaneous almost-everywhere uniqueness of the supplied conditional kernels and uniqueness of the joint measure.",
+        "axiom_base": "AC is used for standard-Borel conditional-law existence and simultaneous uniqueness; finite product-kernel construction adds no choice.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §§5.3 and 5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §§2.4 and 2.6", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-law-entropy-countable-support-characterization",
+        "kind": "theorem",
+        "title": "Self-mutual-information entropy on countable and non-atomic laws",
+        "statement": "For a standard-Borel law supported on countably many atoms of masses p_i, H(X)=Σ_i p_i log(1/p_i), possibly +∞; if the law has positive non-atomic mass, H(X)=+∞.",
+        "deps": ["def-law-entropy-as-self-mutual-information", "def-measure-theoretic-mutual-information", "def-standard-borel-space", "def-product-sigma-algebra-and-finite-product-sigma-algebras", "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique", "thm-measurability-of-integration-against-a-kernel", "def-qa-35-finite-probability-entropy-and-stochastic-matrices", "def-axiom-of-choice"],
+        "dependency_level": 2,
+        "strategy": "Compute the Radon–Nikodym density on countable diagonal atoms; for non-atomic mass, exhibit a diagonal set of positive joint mass and zero product mass.",
+        "axiom_base": "AC is inherited from self-mutual-information through measurable-space KL; countability and atom calculations are otherwise explicit.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapters 1 and 5 §5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 2 §2.1", "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-standard-borel-conditional-mutual-information",
+        "kind": "definition",
+        "title": "Conditional mutual information by a same-marginal product law",
+        "statement": "For standard-Borel X,Y,Z, define I(X;Y|Z)=D(P_{XYZ}||P_Z⋉(P_{X|Z}⊗P_{Y|Z})), where the reference law has the same Z marginal and conditionally independent X,Y.",
+        "deps": ["def-kullback-leibler-divergence", "def-axiom-of-choice", "lem-same-marginal-conditional-product-law-well-defined", "def-conditional-law-given-a-random-element", "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets", "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable", "thm-disintegration-of-a-joint-law-on-standard-borel-spaces", "def-standard-borel-space", "def-law-or-distribution-of-a-random-element"],
+        "dependency_level": 2,
+        "strategy": "Use the uniquely defined joint law formed from the product of regular conditional marginals; its version independence makes the divergence a function of the joint law.",
+        "axiom_base": "AC is required for standard-Borel regular conditional distributions, simultaneous versions, and measurable-space KL.",
+        "sources": {"references": [{"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §2.4", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}, {"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "thm-general-kl-chain-rule-for-standard-borel-kernels",
+        "kind": "theorem",
+        "title": "KL chain rule for standard-Borel disintegrations",
+        "statement": "For joint laws P(dx,dy)=μ(dx)K_x(dy) and Q(dx,dy)=ν(dx)L_x(dy) with standard-Borel factors, D(P||Q)=D(μ||ν)+∫D(K_x||L_x)μ(dx), as an equality in [0,+∞].",
+        "deps": ["def-kullback-leibler-divergence", "def-conditional-kl-for-probability-kernels", "thm-conditional-kl-is-measurable", "lem-prior-and-model-kernel-define-joint-law", "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality", "thm-integration-against-a-radon-nikodym-derivative", "cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras", "cor-finite-nonnegative-integral-implies-finite-almost-everywhere", "thm-nonnegative-integral-zero-iff-zero-almost-everywhere", "def-standard-borel-space", "def-axiom-of-choice"],
+        "dependency_level": 3,
+        "strategy": "Separate singular marginal and joint cases; in the absolutely continuous case factor the joint density into the marginal density and a jointly measurable conditional density, then integrate the logarithm with finite negative parts.",
+        "axiom_base": "AC supplies marginal and joint Radon–Nikodym densities and the countable determining algebra. Conditional kernels are supplied, not selected in the proof.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §5.3, Lemmas 5.3.1–5.3.2 and Theorem 5.3.2", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §2.2", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-mutual-information-and-conditional-mutual-information-equality-conditions",
+        "kind": "theorem",
+        "title": "Zero information is exactly independence",
+        "statement": "For standard-Borel variables, I(X;Y)=0 iff X,Y are independent, and I(X;Y|Z)=0 iff X,Y are conditionally independent given σ(Z).",
+        "deps": ["def-measure-theoretic-mutual-information", "def-standard-borel-conditional-mutual-information", "thm-kullback-leibler-is-nonnegative", "def-conditional-independence-given-a-sigma-algebra", "lem-same-marginal-conditional-product-law-well-defined", "def-product-sigma-algebra-and-finite-product-sigma-algebras", "thm-dynkin-pi-lambda", "def-axiom-of-choice"],
+        "dependency_level": 3,
+        "strategy": "Apply the zero-equality criterion for KL; identify equality with the product law by checking generating rectangles and the conditional-independence factorization.",
+        "axiom_base": "AC is inherited from KL, conditional-law existence and the conditional-independence class convention.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 2 §2.5 and Chapter 5 §5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §2.4, Theorem 2.5", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-mutual-information-and-conditional-mutual-information-quantization",
+        "kind": "theorem",
+        "title": "Mutual information is approximated by finite coordinate quantizations",
+        "statement": "Increasing finite quantizers that generate the standard-Borel coordinate sigma-algebras recover I(X;Y) and I(X;Y|Z); the conditioning variable Z is kept unchanged.",
+        "deps": ["def-measure-theoretic-mutual-information", "def-standard-borel-conditional-mutual-information", "thm-general-kl-variational-and-partition-formulas", "cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras", "lem-same-marginal-conditional-product-law-well-defined", "def-product-sigma-algebra-and-finite-product-sigma-algebras", "def-axiom-of-choice"],
+        "dependency_level": 3,
+        "strategy": "Apply the variational KL formula on an increasing sequence of generated sigma-algebras and show that bounded measurable functions are approximable in the finite measure P+Q.",
+        "axiom_base": "AC is used only for the countable generating-algebra and standard-Borel conditional-law suppliers.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §5.5, Lemmas 5.5.5 and 5.5.7", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 3 §3.4", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/486b7d83cc428acf75b74323ecafcc11_MIT6_441S16_chapter_3.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "rem-general-law-entropy-versus-differential-entropy",
+        "kind": "remark",
+        "title": "Law entropy and differential entropy are different quantities",
+        "statement": "Law entropy is self-mutual information; differential entropy is −∫f log f for a specified Euclidean density when the integral is defined, and may be finite or negative while law entropy is infinite.",
+        "deps": ["def-law-entropy-as-self-mutual-information"],
+        "dependency_level": 2,
+        "strategy": "State the two definitions and their distinct domains; use the uniform distribution example as the concrete contrast.",
+        "sources": {"references": [{"title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 2 §2.1", "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf"}, {"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 1 and Chapter 5 §5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "thm-mutual-information-chain-rule",
+        "kind": "theorem",
+        "title": "Mutual information chain rule without subtracting infinities",
+        "statement": "For standard-Borel X,Y,Z, I(X;(Y,Z))=I(X;Z)+I(X;Y|Z), with the right side an extended sum of nonnegative quantities.",
+        "deps": ["def-measure-theoretic-mutual-information", "def-standard-borel-conditional-mutual-information", "thm-general-kl-chain-rule-for-standard-borel-kernels", "lem-same-marginal-conditional-product-law-well-defined", "lem-product-of-two-probability-kernels", "thm-disintegration-of-a-joint-law-on-standard-borel-spaces", "def-axiom-of-choice"],
+        "dependency_level": 4,
+        "strategy": "Disintegrate against Z, apply the KL chain rule within each fiber, and integrate nonnegative KL terms; never rearrange an ∞−∞ expression.",
+        "axiom_base": "AC is inherited from measurable-space KL and standard-Borel disintegration.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §§5.3 and 5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 2 §2.1", "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf"}]},
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      }
+    ]
+  },
+  {
+    "order": 2503,
+    "id": "measure-theoretic-information-and-conditioning-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Measure-Theoretic Information and Conditioning — Examples",
+    "companion": "measure-theoretic-information-and-conditioning",
+    "requires": ["measure-theoretic-information-and-conditioning"],
+    "items": [
+      {
+        "id": "ex-uniform-law-has-infinite-self-information-entropy",
+        "kind": "example",
+        "title": "A uniform law has infinite self-information entropy and zero differential entropy",
+        "statement": "For X uniform on [0,1], H(X)=+∞ while its differential entropy is 0.",
+        "deps": ["thm-law-entropy-countable-support-characterization", "rem-general-law-entropy-versus-differential-entropy"],
+        "dependency_level": 3,
+        "strategy": "Apply the non-countable-support clause and evaluate the density integral directly.",
+        "sources": {"references": [{"title": "John Duchi, Lecture Notes on Statistics and Information Theory, Chapter 2 §2.1", "url": "https://web.stanford.edu/class/stats311/lecture-notes.pdf"}, {"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 1 and Chapter 5 §5.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}]},
+        "provenance": {"statement": "ai-generated", "proof": "ai-generated"},
+        "generation": {"role": "example"}
+      },
+      {
+        "id": "ex-finite-deterministic-copy-has-mutual-information-equal-to-entropy",
+        "kind": "example",
+        "title": "A finite deterministic copy has mutual information equal to entropy",
+        "statement": "If X is Bernoulli(p) and Y=X, then I(X;Y)=H(X), including p=0 and p=1.",
+        "deps": ["def-measure-theoretic-mutual-information", "def-law-entropy-as-self-mutual-information", "thm-law-entropy-countable-support-characterization", "thm-finite-kl-equals-measurable-kl", "def-finite-alphabet-conditional-entropy-given-observation"],
+        "dependency_level": 3,
+        "strategy": "Compute the joint and product masses on their two diagonal atoms and check the deterministic conditional law.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 2 §2.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §§2.3–2.4", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}]},
+        "provenance": {"statement": "ai-generated", "proof": "ai-generated"},
+        "generation": {"role": "example"}
+      },
+      {
+        "id": "ex-coarsening-conditioning-can-increase-conditional-mutual-information",
+        "kind": "example",
+        "title": "Coarsening the conditioning variable can increase conditional mutual information",
+        "statement": "For X=Y fair Bernoulli and Z=(X,Y), I(X;Y|Z)=0, while conditioning on the constant coarsening of Z gives ln 2.",
+        "deps": ["def-measure-theoretic-mutual-information", "def-standard-borel-conditional-mutual-information", "thm-mutual-information-and-conditional-mutual-information-equality-conditions"],
+        "dependency_level": 4,
+        "strategy": "Compute the point-mass conditional product law when Z=(X,Y), then compute the ordinary fair-bit mutual information after replacing Z by a constant.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 2 §2.5", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §2.4", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}]},
+        "provenance": {"statement": "ai-generated", "proof": "ai-generated"},
+        "generation": {"role": "example"}
+      },
+      {
+        "id": "ex-null-conditional-kernel-version-does-not-change-information",
+        "kind": "example",
+        "title": "Changing a conditional kernel on a null value does not change information",
+        "statement": "Changing a regular conditional law at one null conditioning value can change the pointwise conditional KL there from 0 to +∞ without changing the integrated conditional mutual information.",
+        "deps": ["def-standard-borel-conditional-mutual-information", "def-conditional-kl-for-probability-kernels", "thm-conditional-kl-is-measurable", "lem-same-marginal-conditional-product-law-well-defined"],
+        "dependency_level": 3,
+        "strategy": "Verify that the modified kernel is still a regular conditional law and that the integrated reference measure is unchanged on the null fiber.",
+        "sources": {"references": [{"title": "Robert M. Gray, Entropy and Information Theory, corrected author-hosted first edition, Chapter 5 §5.3", "url": "https://ee-www.stanford.edu/~gray/it.pdf"}, {"title": "Yury Polyanskiy and Yihong Wu, MIT 6.441 Information Theory, Chapter 2 §§2.2 and 2.6", "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/184197ca5d5418da2415d37e929860b9_MIT6_441S16_chapter_2.pdf"}]},
+        "provenance": {"statement": "ai-generated", "proof": "ai-generated"},
+        "generation": {"role": "example"}
+      }
+    ]
+  }
+]

@@ -1,0 +1,699 @@
+[
+  {
+    "order": 2506,
+    "id": "f-divergences-renyi-and-hypothesis-testing",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "F-Divergences, Rényi Information, and Hypothesis Testing",
+    "companion": "f-divergences-renyi-and-hypothesis-testing-examples",
+    "requires": [
+      "measure-theoretic-information-and-conditioning",
+      "finite-sample-tests-neyman-pearson-and-valid-p-values"
+    ],
+    "items": [
+      {
+        "id": "def-finite-probability-vector",
+        "kind": "definition",
+        "title": "Finite probability vectors",
+        "deps": [],
+        "dependency_level": 0,
+        "proof_obligations": [
+          "Specify the finite nonempty alphabet, nonnegative coordinates, normalization, and zero coordinates."
+        ],
+        "statement": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on\n$\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of real numbers such that\n$p_x\\ge 0$ for every $x$ and $\\sum_{x\\in\\mathcal X}p_x=1$. Its support is\n$\\operatorname{supp}P:=\\{x\\in\\mathcal X:p_x>0\\}$. Coordinates outside the\nsupport are retained as zeros; they are not deleted from the alphabet.\n\nFor another probability vector $Q=(q_x)_{x\\in\\mathcal X}$, the notation\n$P\\ll Q$ means $\\operatorname{supp}P\\subseteq\\operatorname{supp}Q$. All\nfinite sums over $\\mathcal X$ use the displayed alphabet and ordinary finite\nreal arithmetic, extended to $+\\infty$ only where a later definition says so.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 1, §1.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Tim van Erven and Peter Harremoës, Rényi Divergence and Kullback-Leibler Divergence, §I-A",
+              "url": "https://arxiv.org/pdf/1206.2459"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-convex-generator-boundary-limits-exist",
+        "kind": "lemma",
+        "title": "Boundary limits of a normalized finite convex generator exist",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-complete-ordered-field"
+        ],
+        "dependency_level": 0,
+        "proof_obligations": [
+          "Prove existence of the zero boundary value and recession limit as extended-real limits, excluding negative infinity."
+        ],
+        "statement": "Let $f:(0,\\infty)\\to\\mathbb R$ be convex and satisfy $f(1)=0$. Then $f$\nis continuous on $(0,\\infty)$, and both extended-real limits\n$$f(0):=\\lim_{t\\downarrow0}f(t),\\qquad f_\\infty:=\\lim_{t\\to\\infty}\\frac{f(t)}t$$\nexist in $\\mathbb R\\cup\\{+\\infty\\}$; neither limit is $-\\infty$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §7.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Igal Sason and Sergio Verdú, f-Divergence Inequalities, §II-B, equations (35)–(39)",
+              "url": "https://arxiv.org/pdf/1508.00335"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-finite-kl-generator-is-admissible",
+        "kind": "lemma",
+        "title": "The finite KL generator has the required convex boundary extension",
+        "statement": "For $f(t)=t\\log t$ on $t>0$, one has $f(1)=0$, $f$ is convex on\n$(0,\\infty)$, $\\lim_{t\\downarrow0}f(t)=0$, and\n$\\lim_{t\\to\\infty}f(t)/t=+\\infty$.",
+        "deps": [
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "cor-second-derivative-characterises-convexity",
+          "thm-logarithm-slower-than-every-positive-power",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Use logarithm differentiability and the second-derivative convexity criterion on (0,∞).",
+          "Verify the 0+ boundary limit with log t/t→0 and the recession limit from log monotonicity and surjectivity."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §7.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Igal Sason and Sergio Verdú, f-Divergence Inequalities, §II-B, equations (43)–(45)",
+              "url": "https://arxiv.org/pdf/1508.00335"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-finite-renyi-generators-are-convex",
+        "kind": "lemma",
+        "title": "The finite Rényi generators are convex with stated boundary values",
+        "statement": "For $\\alpha>1$, the generator $h_\\alpha(t)=t^\\alpha-1$ is convex on\n$(0,\\infty)$, satisfies $h_\\alpha(1)=0$, has\n$h_\\alpha(0+)=-1$, and has recession limit\n$\\lim_{t\\to\\infty}h_\\alpha(t)/t=+\\infty$. For $0<\\alpha<1$, the generator\n$g_\\alpha(t)=1-t^\\alpha$ is convex on $(0,\\infty)$, satisfies\n$g_\\alpha(1)=0$, has $g_\\alpha(0+)=1$, and has recession limit\n$\\lim_{t\\to\\infty}g_\\alpha(t)/t=0$.",
+        "deps": [
+          "def-real-power",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-algebra-of-derivatives",
+          "cor-second-derivative-characterises-convexity",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-limits-and-range",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Derive convexity from the second derivatives for each order range.",
+          "Prove endpoint and recession limits with the positive-power representation and log/exponential limits."
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §§7.1 and 7.12",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Tim van Erven and Peter Harremoës, Rényi Divergence and Kullback-Leibler Divergence, §II-A",
+              "url": "https://arxiv.org/pdf/1206.2459"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-finite-f-divergence",
+        "kind": "definition",
+        "title": "Finite f-divergence with support conventions",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "lem-convex-generator-boundary-limits-exist"
+        ],
+        "dependency_level": 1,
+        "proof_obligations": [
+          "State the convex generator class and both boundary limits.",
+          "Define zero and singular-support contributions without an ambiguous 0 times infinity."
+        ],
+        "statement": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on a finite nonempty\nalphabet $\\mathcal X$ ([[def-finite-probability-vector]]). A **convex\ngenerator** is a finite convex function $f:(0,\\infty)\\to\\mathbb R$ with\n$f(1)=0$; convexity uses the two-point inequality of\n[[def-convex-and-strictly-convex-functions-on-euclidean-sets]]. Use its\nextended boundary values\n$$f(0):=\\lim_{t\\downarrow0}f(t),\\qquad f_\\infty:=\\lim_{t\\to\\infty}\\frac{f(t)}t.$$\nThese limits exist in $\\mathbb R\\cup\\{+\\infty\\}$ by\n[[lem-convex-generator-boundary-limits-exist]]. Define the **finite\nf-divergence from $P$ to $Q$**\nby\n$$D_f(P\\|Q):=\\sum_{x:q_x>0}q_x f(p_x/q_x)+\nf_\\infty\\sum_{x:q_x=0}p_x.$$\nIn the first sum, if $p_x=0$, the term means $q_x f(0)$. A coordinate with\n$p_x=q_x=0$ contributes zero and is omitted. The second term is defined as\nzero when its coefficient $\\sum_{q_x=0}p_x$ is zero, even if\n$f_\\infty=+\\infty$; if that coefficient is positive and $f_\\infty=+\\infty$,\nthe divergence is $+\\infty$.\n\nThe boundary term is essential when $P\\not\\ll Q$. It is the recession\ncontribution of the generator and is not the value $f(0)$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §7.1, Definition 7.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Igal Sason and Sergio Verdú, f-Divergence Inequalities, §II-B, Definition 3 and equations (35)–(39)",
+              "url": "https://arxiv.org/pdf/1508.00335"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-finite-hypothesis-testing-beta",
+        "kind": "definition",
+        "title": "Finite type-II testing function with explicit orientation",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-probability-space-and-event",
+          "def-randomized-test",
+          "def-test-size-and-power",
+          "def-expectation-on-a-finite-probability-space"
+        ],
+        "dependency_level": 1,
+        "proof_obligations": [
+          "Fix P as the null and Q as the alternative.",
+          "Define the rejection function, type-I constraint, and type-II objective; show the infimum is a real number."
+        ],
+        "statement": "Let $P,Q$ be probability vectors on a finite nonempty alphabet $\\mathcal X$\n([[def-finite-probability-vector]]). They define finite probability spaces\nwith outcome weights $p_x$ and $q_x$, respectively\n([[def-finite-probability-space-and-event]]). For $h:\\mathcal X\\to\\mathbb R$, write\n$E_Ph:=\\sum_xp_xh(x)$ and $E_Qh:=\\sum_xq_xh(x)$; these are the finite\nexpectations ([[def-expectation-on-a-finite-probability-space]]). Test the\nsimple null $H_0:P$ against the simple alternative $H_1:Q$. A randomized test is a function\n$\\phi:\\mathcal X\\to[0,1]$, where $\\phi(x)$ is the probability of rejecting\n$H_0$ after observing $x$; thus $1-\\phi(x)$ is the probability of accepting\n$H_0$ ([[def-randomized-test]]). Its type-I error is\n$\\sum_xp_x\\phi(x)$, and its type-II error is\n$\\sum_xq_x(1-\\phi(x))$ ([[def-test-size-and-power]]).\n\nFor $\\epsilon\\in[0,1]$, define the oriented type-II testing function\n$$\\beta_\\epsilon(P,Q):=\\inf_{\\substack{\\phi:\\mathcal X\\to[0,1]\\\\\\sum_xp_x\\phi(x)\\le\\epsilon}}\\sum_xq_x(1-\\phi(x)).$$\nHere the first argument is the null law and the second is the alternative\nlaw; $\\epsilon$ bounds rejection under the first law, while the objective is\nacceptance of the null under the second. The feasible set is nonempty\nbecause $\\phi=0$ is allowed, and every objective value lies in $[0,1]$, so\nthe infimum is a real number in that interval. In the\nNeyman–Pearson-region convention that constrains null acceptance below by\n$\\gamma$, this is the lower boundary value at $\\gamma=1-\\epsilon$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 14, §14.1, Definition 14.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Finite-sample tests, Neyman–Pearson and Valid P-values, definitions of randomized test and test size/power",
+              "url": "https://www.stats.ox.ac.uk/~deligian/pdf/sb21/sb21_notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-finite-stochastic-kernel",
+        "kind": "definition",
+        "title": "Finite stochastic kernels",
+        "deps": [
+          "def-finite-probability-vector"
+        ],
+        "dependency_level": 1,
+        "proof_obligations": [
+          "Fix the input/output alphabets and the row-stochastic convention.",
+          "Define the induced output law with the input-first kernel convention."
+        ],
+        "statement": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets. A **stochastic kernel**\nfrom $\\mathcal X$ to $\\mathcal Y$ is a matrix\n$K=(K(y\\mid x))_{x\\in\\mathcal X,y\\in\\mathcal Y}$ such that\n$K(y\\mid x)\\ge0$ and $\\sum_{y\\in\\mathcal Y}K(y\\mid x)=1$ for every\n$x\\in\\mathcal X$. The convention is input first in the condition and output\nfirst in the value $K(y\\mid x)$.\n\nFor a probability vector $P=(p_x)_{x\\in\\mathcal X}$, the output vector\n$PK$ on $\\mathcal Y$ is\n$$(PK)_y:=\\sum_{x\\in\\mathcal X}p_xK(y\\mid x).$$\nIt is a probability vector because its coordinates are nonnegative and\n$\\sum_y(PK)_y=\\sum_xp_x\\sum_yK(y\\mid x)=\\sum_xp_x=1$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §§7.1–7.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Tim van Erven and Peter Harremoës, Rényi Divergence and Kullback-Leibler Divergence, §II-B",
+              "url": "https://arxiv.org/pdf/1206.2459"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-finite-kullback-leibler-divergence",
+        "kind": "definition",
+        "title": "Finite Kullback–Leibler divergence",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-f-divergence",
+          "def-natural-logarithm",
+          "lem-finite-kl-generator-is-admissible"
+        ],
+        "dependency_level": 2,
+        "proof_obligations": [
+          "State the natural-log convention and the p-positive/q-zero infinity branch.",
+          "Identify KL with the f-divergence generated by t log t."
+        ],
+        "statement": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback–Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\n[[def-finite-f-divergence]] by\n[[lem-finite-kl-generator-is-admissible]]. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §7.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Tim van Erven and Peter Harremoës, Rényi Divergence and Kullback-Leibler Divergence, §I-A and Theorem 5",
+              "url": "https://arxiv.org/pdf/1206.2459"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-convex-perspective-is-subadditive",
+        "kind": "lemma",
+        "title": "The closed convex perspective is subadditive",
+        "deps": [
+          "def-finite-f-divergence",
+          "thm-finite-jensen-inequality-in-euclidean-space",
+          "lem-convex-generator-boundary-limits-exist"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Define the perspective at (0,0), on the positive b-axis, and on the singular boundary b=0.",
+          "Prove the finite-sum inequality for both positive total second coordinate and total second coordinate zero."
+        ],
+        "statement": "Let $f$ be a convex generator from [[def-finite-f-divergence]]. Define its\nclosed perspective on $a,b\\ge0$ by\n$$\n\\Pi_f(a,b):=\\begin{cases}\nb f(a/b),&b>0,\\ a>0,\\\\\nb f(0),&b>0,\\ a=0,\\\\\na f_\\infty,&b=0,\\ a>0,\\\\\n0,&a=b=0.\n\\end{cases}\n$$\nFor every finite family $(a_i,b_i)\\in[0,\\infty)^2$,\n$$\\Pi_f\\!\\left(\\sum_i a_i,\\sum_i b_i\\right)\\le\\sum_i\\Pi_f(a_i,b_i).$$",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §7.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Igal Sason and Sergio Verdú, f-Divergence Inequalities, §II-B, equations (35)–(39)",
+              "url": "https://arxiv.org/pdf/1508.00335"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-finite-renyi-divergence",
+        "kind": "definition",
+        "title": "Finite Rényi divergence",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-kullback-leibler-divergence",
+          "def-natural-logarithm",
+          "def-real-power"
+        ],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "State the order range, the order-one value, and support/zero conventions for orders below and above one.",
+          "Define the zero-affinity case as extended value +infinity."
+        ],
+        "statement": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on the same finite\nnonempty alphabet. For order $\\alpha\\in(0,\\infty)$ with $\\alpha\\ne1$, put\n$$S_\\alpha(P,Q):=\\sum_{x:q_x>0}p_x^\\alpha q_x^{1-\\alpha}.$$\nIf $\\alpha>1$ and $p_x>0=q_x$ for some $x$, define\n$S_\\alpha(P,Q)=+\\infty$; if $0<\\alpha<1$, such coordinates contribute\nzero. In the displayed sum, $p_x=0<q_x$ contributes zero. If the sum is\nzero, then necessarily $\\alpha<1$ and the logarithmic expression below is\ndefined as $+\\infty$. The **Rényi divergence of order $\\alpha$ from $P$ to\n$Q$** is\n$$D_\\alpha(P\\|Q):=\\frac{\\log S_\\alpha(P,Q)}{\\alpha-1}.$$\nAt order one define\n$$D_1(P\\|Q):=D(P\\|Q),$$\nusing [[def-finite-kullback-leibler-divergence]]. All divergences are\nextended-real-valued; the direction is always first argument to second.\n\nFor $0<\\alpha<1$, a point with $p_x>0=q_x$ contributes zero to the affinity\n$S_\\alpha$ rather than infinity. For $\\alpha>1$, the same support mismatch\nmakes $D_\\alpha(P\\|Q)=+\\infty$. The sign of $\\alpha-1$ is part of the\ndefinition and reverses inequalities when $0<\\alpha<1$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §7.12, Definition 7.22",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Tim van Erven and Peter Harremoës, Rényi Divergence and Kullback-Leibler Divergence, §II-A, Definition 2",
+              "url": "https://arxiv.org/pdf/1206.2459"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-finite-iid-log-likelihood-concentrates",
+        "kind": "lemma",
+        "title": "Finite iid log-likelihood averages concentrate",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-kullback-leibler-divergence",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-expectation-on-a-finite-probability-space"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Assume P is absolutely continuous with respect to Q on the finite alphabet.",
+          "Use boundedness on supp(P), independence, variance additivity, and Chebyshev's inequality."
+        ],
+        "statement": "Let $P=(p_x)$ and $Q=(q_x)$ be probability vectors on a finite nonempty\nalphabet with $P\\ll Q$. For $n\\ge1$, write\n$P^n(x_1,\\ldots,x_n)=\\prod_i p_{x_i}$ and\n$Q^n(x_1,\\ldots,x_n)=\\prod_i q_{x_i}$. Let $X_1,\\ldots,X_n$ be independent\nwith common law $P$, define $\\ell(x)=\\log(p_x/q_x)$ when $p_x>0$ and\n$\\ell(x)=0$ when $p_x=0$, and put $L_n=\\sum_{i=1}^n\\ell(X_i)$. Then\n$L_n/n\\to D(P\\|Q)$ in probability as $n\\to\\infty$. For every\n$x^n\\in\\operatorname{supp}(P)^n$, one also has\n$Q^n(x^n)=P^n(x^n)\\exp(-L_n(x^n))$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 14, §14.5, proof of Theorem 14.13",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-finite-f-divergence-data-processing",
+        "kind": "theorem",
+        "title": "Finite data processing for f-divergences",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-stochastic-kernel",
+          "def-finite-f-divergence",
+          "lem-convex-perspective-is-subadditive"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Apply perspective subadditivity at each output symbol.",
+          "Use positive homogeneity and the row-sum-one kernel identity.",
+          "Retain singular support terms."
+        ],
+        "statement": "Let $P,Q$ be probability vectors on a finite nonempty alphabet $\\mathcal X$,\nlet $K$ be a stochastic kernel from $\\mathcal X$ to a finite nonempty\nalphabet $\\mathcal Y$, and let $f$ be a convex generator as in\n[[def-finite-f-divergence]]. Then\n$$D_f(PK\\|QK)\\le D_f(P\\|Q),$$\nwith both divergences interpreted using the zero and singular-support\nconventions of that definition.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §7.2, Theorems 7.3–7.4",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Igal Sason and Sergio Verdú, f-Divergence Inequalities, §II-B, Definition 3 and support extension (35)–(39)",
+              "url": "https://arxiv.org/pdf/1508.00335"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-finite-kullback-leibler-data-processing",
+        "kind": "theorem",
+        "title": "Finite data processing for Kullback–Leibler divergence",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-stochastic-kernel",
+          "def-finite-f-divergence",
+          "def-finite-kullback-leibler-divergence",
+          "thm-finite-f-divergence-data-processing",
+          "lem-finite-kl-generator-is-admissible"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Use the t log t generator and check its recession term at infinity.",
+          "Show the f-divergence specialization is exactly the stated KL convention."
+        ],
+        "statement": "For probability vectors $P,Q$ on a finite nonempty alphabet and a stochastic\nkernel $K$ to another finite nonempty alphabet,\n$$D(PK\\|QK)\\le D(P\\|Q).$$",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §§7.1–7.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Igal Sason and Sergio Verdú, f-Divergence Inequalities, §II-B, equations (43)–(45)",
+              "url": "https://arxiv.org/pdf/1508.00335"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-finite-renyi-data-processing",
+        "kind": "theorem",
+        "title": "Finite data processing for Rényi divergence",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-stochastic-kernel",
+          "def-finite-f-divergence",
+          "def-finite-renyi-divergence",
+          "thm-finite-f-divergence-data-processing",
+          "lem-finite-renyi-generators-are-convex"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Treat 0<alpha<1 and alpha>1 separately because division by alpha−1 reverses order below one.",
+          "Use the convex generators 1−t^alpha and t^alpha−1 respectively.",
+          "Handle infinite divergences and zero affinity explicitly."
+        ],
+        "statement": "Let $P,Q$ be probability vectors on a finite nonempty alphabet $\\mathcal X$\nand let $K$ be a stochastic kernel from $\\mathcal X$ to a finite nonempty\nalphabet $\\mathcal Y$. For every $\\alpha\\in(0,\\infty)\\setminus\\{1\\}$,\n$$D_\\alpha(PK\\|QK)\\le D_\\alpha(P\\|Q),$$\nwith Rényi divergence as defined in [[def-finite-renyi-divergence]].",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §§7.1–7.2 and §7.12",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Tim van Erven and Peter Harremoës, Rényi Divergence and Kullback-Leibler Divergence, §§II-A, II-B, III-A",
+              "url": "https://arxiv.org/pdf/1206.2459"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-finite-renyi-limit-is-kullback-leibler",
+        "kind": "theorem",
+        "title": "The finite Rényi divergence limit is KL",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-kullback-leibler-divergence",
+          "def-finite-renyi-divergence",
+          "def-natural-logarithm",
+          "def-real-power",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Handle P not absolutely continuous with respect to Q on both sides of order one.",
+          "For P absolutely continuous with respect to Q, differentiate the finite positive-support sum at one."
+        ],
+        "statement": "For probability vectors $P,Q$ on a finite nonempty alphabet,\n$$\\lim_{\\alpha\\to1}D_\\alpha(P\\|Q)=D(P\\|Q)$$\nas a two-sided extended-real limit.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Tim van Erven and Peter Harremoës, Rényi Divergence and Kullback-Leibler Divergence, §II-C, Theorem 5 and proof",
+              "url": "https://arxiv.org/pdf/1206.2459"
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §7.12",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-kl-is-iid-type-ii-error-exponent",
+        "kind": "theorem",
+        "title": "KL is the iid type-II testing exponent",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-kullback-leibler-divergence",
+          "def-finite-hypothesis-testing-beta",
+          "lem-finite-iid-log-likelihood-concentrates"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "For P not absolutely continuous with respect to Q, construct an eventually feasible zero-type-II test.",
+          "For P absolutely continuous with respect to Q, prove both exponent bounds using the explicit likelihood ratio.",
+          "Use the named testing orientation P=null, Q=alternative and epsilon as the type-I upper bound."
+        ],
+        "statement": "Let $P,Q$ be probability vectors on a finite nonempty alphabet $\\mathcal X$.\nFor $n\\ge1$, write $P^n,Q^n$ for the product vectors on $\\mathcal X^n$,\nwith $P^n(x_1,\\ldots,x_n)=\\prod_{i=1}^np_{x_i}$ and similarly for $Q^n$.\nFor every fixed $\\epsilon\\in(0,1)$, with $\\beta_\\epsilon$ oriented as in\n[[def-finite-hypothesis-testing-beta]],\n$$\\lim_{n\\to\\infty}-\\frac1n\\log\\beta_\\epsilon(P^n,Q^n)=D(P\\|Q),$$\nwhere $-\\log0:=+\\infty$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 14, §14.5, Theorem 14.13 and full proof",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 2507,
+    "id": "f-divergences-renyi-and-hypothesis-testing-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "F-Divergences, Rényi Information, and Hypothesis Testing — Examples",
+    "companion": "f-divergences-renyi-and-hypothesis-testing",
+    "requires": [
+      "f-divergences-renyi-and-hypothesis-testing"
+    ],
+    "items": [
+      {
+        "id": "ex-binary-neyman-pearson-randomized-threshold",
+        "kind": "example",
+        "title": "A binary Neyman–Pearson boundary randomization",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-probability-space-and-event",
+          "def-finite-hypothesis-testing-beta",
+          "def-randomized-test",
+          "def-test-size-and-power",
+          "def-expectation-on-a-finite-probability-space"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Specify null and alternative orientation and the type-I/type-II conventions.",
+          "Verify exact boundary randomization and prove the finite optimization directly.",
+          "Show the likelihood-ratio threshold uses Q/P, consistent with rejecting the null P in favor of Q."
+        ],
+        "statement": "Let the null law be $P=(2/3,1/3)$ and the alternative law be $Q=(1/3,2/3)$\non $\\mathcal X=\\{a,b\\}$. For the type-I bound $\\epsilon=1/2$, the optimal\ntest rejects with probability $1/4$ at $a$ and probability $1$ at $b$.",
+        "justified_by": [],
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 14, §§14.1–14.2 and §14.4",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-binary-f-and-renyi-divergences",
+        "kind": "example",
+        "title": "Binary f-, KL-, and Rényi divergences",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-f-divergence",
+          "def-finite-kullback-leibler-divergence",
+          "def-finite-renyi-divergence",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Compute KL, order-1/2 and order-2 Rényi values for the stated binary laws.",
+          "Check the total-variation generator with the repository's one-half normalization."
+        ],
+        "statement": "On $\\mathcal X=\\{0,1\\}$, take $P=(3/4,1/4)$ and $Q=(1/4,3/4)$. Their\nsupports agree and all coordinates are positive.",
+        "justified_by": [],
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §§7.1 and 7.12",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Tim van Erven and Peter Harremoës, Rényi Divergence and Kullback-Leibler Divergence, §§I-A and II-A",
+              "url": "https://arxiv.org/pdf/1206.2459"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-disjoint-support-f-and-renyi-divergences",
+        "kind": "example",
+        "title": "Disjoint supports and singular divergence values",
+        "deps": [
+          "def-finite-probability-vector",
+          "def-finite-f-divergence",
+          "def-finite-kullback-leibler-divergence",
+          "def-finite-renyi-divergence"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Evaluate zero-support terms for total variation, KL, and all positive Rényi orders.",
+          "Explain why no 0 times infinity contribution is introduced."
+        ],
+        "statement": "Let $\\mathcal X=\\{a,b\\}$, $P=(1,0)$, and $Q=(0,1)$. The two laws have\ndisjoint supports.",
+        "justified_by": [],
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 7, §§7.1 and 7.12",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-2022.pdf"
+            },
+            {
+              "title": "Tim van Erven and Peter Harremoës, Rényi Divergence and Kullback-Leibler Divergence, §II-A",
+              "url": "https://arxiv.org/pdf/1206.2459"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  }
+]

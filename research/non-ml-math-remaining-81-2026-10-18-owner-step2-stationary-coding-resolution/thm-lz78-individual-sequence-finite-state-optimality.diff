@@ -1,0 +1,20 @@
+--- BASELINE/items/thm-lz78-individual-sequence-finite-state-optimality.md
++++ CURRENT/items/thm-lz78-individual-sequence-finite-state-optimality.md
+@@ -35,7 +35,7 @@
+ 
+ **Given:** A one-sided infinite sequence $x\in\mathcal A^{\mathbb N_0}$ over a finite alphabet of size $q\ge2$, and the block-reset LZ78 code of [[alg-lz78-incremental-prefix-code]].
+ 
+-[F1] [[alg-lz78-incremental-prefix-code]]: ordinary complete incremental phrases are distinct; the terminal phrase contains the unique marker $\#$.
++[F1] [[thm-lz78-prefix-code-lossless]]: ordinary complete LZ78 phrases are distinct; the parser terminates with a final phrase containing the unique marker $\#$.
+ 
+ [F2] [[thm-lz78-prefix-code-lossless]]: the explicit code has phrase-index cost $\log_2j+O(\log\log(j+2))$ plus a fixed symbol cost.
+ 
+@@ -51,7 +51,7 @@
+ 
+ 2.1 Fix an information-lossless encoder $E$ with at most $s$ states. For each of the $c$ ordinary phrases $y_i$, record its starting state $S_i$, output word $W_i$, and ending state $S_{i+1}$. The tuples $(S_i,W_i,S_{i+1})$ are distinct: equality for two different phrase strings with the same initial state would contradict injectivity in [F3]. If $J$ is uniform on the $c$ phrases and $L=|W_J|$ has mean $\mu$, then $$\log_2c=H_2(S_J,W_J,S_{J+1})\le2\log_2s+H_2(L)+E L.$$ The two state entropies are at most $\log_2s$, by [F4] applied to the uniform law on each state set. Conditional on $L$, there are at most $2^L$ possible binary strings, so $H_2(W_J\mid L)\le E L$. [F1, F3, F4, step 1.1, algebra]
+ 
+-3.1 If $\mu=0$, then $H_2(L)=0$. If $\mu>0$, compare with the geometric law $r_j=(\mu+1)^{-1}(\mu/(\mu+1))^j$. Nonnegative relative entropy [F4] gives $$H_2(L)\le-E\log_2r_L=(\mu+1)\log_2(\mu+1)-\mu\log_2\mu\le\log_2(e(\mu+1)),$$ because $\ln(1+x)\le x$ for $x\ge0$, as the derivative of $x-\ln(1+x)$ is nonnegative. The same upper bound holds when $\mu=0$. Thus $\mu\ge\log_2c-2\log_2s-\log_2(e(\mu+1))$. If $\mu<\log_2c$, this error is $O_s(\log\log(c+2))$; if $\mu\ge\log_2c$, the same lower bound is immediate. The $E$ output on these $c$ phrases is at most its total block output, so $$c\log_2c\le L_E(x_0^{n-1})+O_s(c\log\log(c+2)).$$ [F3, F4, step 2.1, algebra]
++3.1 If $\mu=0$, then $H_2(L)=0$. If $\mu>0$, compare the finite-support law of $L$ with the geometric weights $r_j=(\mu+1)^{-1}(\mu/(\mu+1))^j$ restricted to that support. The reference weights sum to at most one, so nonnegative relative entropy [F4] gives $$H_2(L)\le-E\log_2r_L=(\mu+1)\log_2(\mu+1)-\mu\log_2\mu\le\log_2(e(\mu+1)),$$ because $\ln(1+x)\le x$ for $x\ge0$, as the derivative of $x-\ln(1+x)$ is nonnegative. The same upper bound holds when $\mu=0$. Thus $\mu\ge\log_2c-2\log_2s-\log_2(e(\mu+1))$. If $\mu<\log_2c$, this error is $O_s(\log\log(c+2))$; if $\mu\ge\log_2c$, the same lower bound is immediate. The $E$ output on these $c$ phrases is at most its total block output, so $$c\log_2c\le L_E(x_0^{n-1})+O_s(c\log\log(c+2)).$$ [F3, F4, step 2.1, algebra]
+ 
+ 4.1 By [F2], the LZ78 description length is at most $c\log_2c+O(c\log\log(c+2))+O(\log(c+2))$, including the terminal record. Since $c=O(n/\log n)$, step 3.1 yields $$\limsup_n L_{\rm LZ}(x_0^{n-1})/n\le\limsup_n L_E(x_0^{n-1})/n.$$ [F1, F2, F3, step 1.1, step 3.1, algebra]
+ 

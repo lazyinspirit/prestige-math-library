@@ -1,0 +1,251 @@
+{
+  "group": "t",
+  "batches": ["25"],
+  "pages_read": [
+    "quantum-key-distribution-and-composable-secrecy",
+    "quantum-key-distribution-and-composable-secrecy-examples"
+  ],
+  "items_read": [
+    "def-qkd-finite-authenticated-protocol",
+    "lem-qkd-classical-key-copy-map-is-channel",
+    "lem-qkd-trace-norm-adds-over-classical-blocks",
+    "def-qkd-abort-aware-composable-security",
+    "lem-qkd-copy-replacement-distance-is-correctness-error",
+    "lem-qkd-abort-aware-ideal-output-is-state",
+    "thm-qkd-composable-secrecy-sum-bound",
+    "ex-qkd-abort-weighted-secrecy-distance",
+    "ex-qkd-secrecy-and-correctness-are-independent"
+  ],
+  "conventions": [
+    {
+      "convention": "Key and transcript alphabets are finite, nonempty, and ordered; quantum registers are nonzero and finite-dimensional. Tensor factors retain the displayed A,B,T,E order.",
+      "fixed_by": "def-qkd-finite-authenticated-protocol",
+      "matters_for": [
+        "def-qkd-abort-aware-composable-security",
+        "lem-qkd-abort-aware-ideal-output-is-state",
+        "thm-qkd-composable-secrecy-sum-bound"
+      ]
+    },
+    {
+      "convention": "Public communication is ideally authenticated and visible to Eve. Abort is common to both parties, with no unilateral-abort output blocks.",
+      "fixed_by": "def-qkd-finite-authenticated-protocol",
+      "matters_for": [
+        "def-qkd-abort-aware-composable-security",
+        "lem-qkd-abort-aware-ideal-output-is-state",
+        "thm-qkd-composable-secrecy-sum-bound",
+        "ex-qkd-abort-weighted-secrecy-distance"
+      ]
+    },
+    {
+      "convention": "The ideal output preserves the real abort blocks and accepted transcript-adversary marginal, replacing accepted keys by a uniform shared key independent of both transcript and Eve.",
+      "fixed_by": "def-qkd-abort-aware-composable-security",
+      "matters_for": [
+        "lem-qkd-abort-aware-ideal-output-is-state",
+        "thm-qkd-composable-secrecy-sum-bound",
+        "ex-qkd-abort-weighted-secrecy-distance",
+        "ex-qkd-secrecy-and-correctness-are-independent"
+      ]
+    },
+    {
+      "convention": "Correctness is unconditional mismatch probability. Secrecy is acceptance probability times conditional trace distance; it is zero at zero acceptance, where conditional accepted states are not defined. Protocol error bounds quantify uniformly over allowed strategies.",
+      "fixed_by": "def-qkd-abort-aware-composable-security",
+      "matters_for": [
+        "thm-qkd-composable-secrecy-sum-bound",
+        "ex-qkd-abort-weighted-secrecy-distance",
+        "ex-qkd-secrecy-and-correctness-are-independent"
+      ]
+    },
+    {
+      "convention": "State trace distance is half the trace norm.",
+      "fixed_by": "def-qc-trace-distance",
+      "matters_for": [
+        "def-qkd-abort-aware-composable-security",
+        "lem-qkd-copy-replacement-distance-is-correctness-error",
+        "thm-qkd-composable-secrecy-sum-bound",
+        "ex-qkd-abort-weighted-secrecy-distance",
+        "ex-qkd-secrecy-and-correctness-are-independent"
+      ]
+    },
+    {
+      "convention": "The key-copy channel copies computational-basis classical blocks and does not clone arbitrary quantum states.",
+      "fixed_by": "lem-qkd-classical-key-copy-map-is-channel",
+      "matters_for": [
+        "lem-qkd-copy-replacement-distance-is-correctness-error",
+        "thm-qkd-composable-secrecy-sum-bound"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-qkd-abort-aware-composable-security",
+      "statement": "Defines the abort-preserving ideal output, δ_id as its trace distance from the real output, ε_cor as unconditional mismatch probability, and ε_sec as acceptance-weighted conditional secrecy distance, with ε_sec=0 when p_acc=0.",
+      "used_by": [
+        "lem-qkd-abort-aware-ideal-output-is-state",
+        "thm-qkd-composable-secrecy-sum-bound",
+        "ex-qkd-abort-weighted-secrecy-distance",
+        "ex-qkd-secrecy-and-correctness-are-independent"
+      ]
+    },
+    {
+      "id": "lem-qkd-trace-norm-adds-over-classical-blocks",
+      "statement": "For a finite nonempty ordered set I, a nonzero finite-dimensional complex inner-product space H_E, and self-adjoint blocks X_i on H_E, the classical block operator X has ||X||₁=Σ_i||X_i||₁.",
+      "used_by": [
+        "lem-qkd-copy-replacement-distance-is-correctness-error",
+        "thm-qkd-composable-secrecy-sum-bound"
+      ]
+    },
+    {
+      "id": "lem-qkd-classical-key-copy-map-is-channel",
+      "statement": "For the finite ordered key alphabet and nonzero finite-dimensional transcript and adversary spaces in the Statement, C(X)=Σ_k L_k X L_k† is a quantum channel and sends each classical key block k to the shared-key block (k,k).",
+      "used_by": [
+        "lem-qkd-copy-replacement-distance-is-correctness-error",
+        "thm-qkd-composable-secrecy-sum-bound"
+      ]
+    },
+    {
+      "id": "lem-qkd-copy-replacement-distance-is-correctness-error",
+      "statement": "For the normalized finite classical A,B,T block state in the Statement, γ=C(ρ_ATE) satisfies D(ρ_ABTE,γ_ABTE)=Pr[K_A≠K_B]=Σ_{a≠b,t}tr(R_E^{a,b,t}).",
+      "used_by": [
+        "thm-qkd-composable-secrecy-sum-bound"
+      ]
+    },
+    {
+      "id": "lem-qkd-abort-aware-ideal-output-is-state",
+      "statement": "The real and ideal full outputs are density operators; positive-acceptance normalized states and the displayed marginals and uniform products are density operators. At zero acceptance the ideal output equals the real abort-only state.",
+      "used_by": [
+        "thm-qkd-composable-secrecy-sum-bound"
+      ]
+    },
+    {
+      "id": "thm-qkd-composable-secrecy-sum-bound",
+      "statement": "For every finite authenticated key-distribution protocol and each fixed allowed adversarial strategy, δ_id≤ε_cor+ε_sec. Uniform bounds on correctness and secrecy give the corresponding uniform sum bound.",
+      "used_by": [
+        "ex-qkd-abort-weighted-secrecy-distance",
+        "ex-qkd-secrecy-and-correctness-are-independent"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-qc-register-and-computational-basis",
+      "used_for": "Ordered computational bases and positive-dimensional finite registers.",
+      "opened": true
+    },
+    {
+      "id": "def-qc-tensor-register-and-permutation",
+      "used_for": "Ordered tensor factors and orthonormal product bases.",
+      "opened": true
+    },
+    {
+      "id": "def-qc-density-operator",
+      "used_for": "Nonnegativity and trace-one requirements for all states.",
+      "opened": true
+    },
+    {
+      "id": "def-qc-quantum-channel",
+      "used_for": "Complete positivity and trace preservation on the full operator space.",
+      "opened": true
+    },
+    {
+      "id": "def-qc-completely-positive-map",
+      "used_for": "Finite ancilla amplification and positivity at ancilla dimension one.",
+      "opened": true
+    },
+    {
+      "id": "def-qc-instrument-and-conditional-state",
+      "used_for": "Finite protocol operations and positive-probability conditional states.",
+      "opened": true
+    },
+    {
+      "id": "thm-qc-instrument-outcome-law-normalizes",
+      "used_for": "Normalization of finite instrument outcome weights.",
+      "opened": true
+    },
+    {
+      "id": "thm-qc-instrument-conditional-state-is-density",
+      "used_for": "Density of positive-probability instrument branches.",
+      "opened": true
+    },
+    {
+      "id": "thm-qc-kraus-map-completely-positive",
+      "used_for": "Complete positivity of the explicit finite key-copy Kraus sum.",
+      "opened": true
+    },
+    {
+      "id": "def-qc-trace-norm",
+      "used_for": "Trace norm as the finite sum of singular values.",
+      "opened": true
+    },
+    {
+      "id": "def-qc-trace-distance",
+      "used_for": "The half-trace-norm state-distance convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-qc-trace-norm-spectral-formula",
+      "used_for": "Spectral calculation of classical block norms and example distances.",
+      "opened": true
+    },
+    {
+      "id": "thm-qc-trace-norm-unitary-invariance-and-positive-formula",
+      "used_for": "Trace norm equals trace on nonnegative blocks.",
+      "opened": true
+    },
+    {
+      "id": "thm-qc-trace-norm-duality-and-norm-properties",
+      "used_for": "Absolute homogeneity and triangle inequality.",
+      "opened": true
+    },
+    {
+      "id": "def-real-and-complex-inner-product-space",
+      "used_for": "Linear-first complex inner-product convention and real eigenvalue calculation.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+      "used_for": "Adjoint identities for copy operators and self-adjoint blocks.",
+      "opened": true
+    },
+    {
+      "id": "def-self-adjoint-and-normal-endomorphism",
+      "used_for": "Self-adjoint blocks are normal and admit the cited spectral argument.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Finite diagonal-sum trace calculations and normalization.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-of-ab-equals-trace-of-ba",
+      "used_for": "Rectangular cyclic trace identity establishing copy-map trace preservation.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-operator-characterisations",
+      "used_for": "Nonnegative eigenvalues and the implication that a nonnegative trace-zero block vanishes.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Orthonormal eigenbases of finite self-adjoint blocks.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "quantum-key-distribution-and-composable-secrecy",
+      "to": "secrecy-and-information-privacy",
+      "faithful": true,
+      "note": "Checked the prerequisite page and its leakage, weak/strong secrecy, and privacy-region definitions against the QKD page and actual item uses. This is background navigation: no classical mutual-information criterion is identified with acceptance-weighted quantum trace-distance secrecy, and no reverse implication is asserted."
+    },
+    {
+      "from": "quantum-key-distribution-and-composable-secrecy",
+      "to": "quantum-relative-entropy-data-processing-and-strong-subadditivity",
+      "faithful": true,
+      "note": "The prerequisite page supplies finite quantum-information background. The QKD items invoke neither relative-entropy data processing nor strong subadditivity; their proof uses explicit classical blocks and published trace-norm results. Neither page asserts an unsupported implication between these criteria. The sum-bound argument also agrees with [Portmann–Renner, §§4.2–4.3](https://arxiv.org/pdf/1409.3525)."
+    }
+  ]
+}

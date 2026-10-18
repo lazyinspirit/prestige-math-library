@@ -1,0 +1,21 @@
+# Fixed-target regular value: focused owner proposal, cycle 1
+
+Both native obligations `reader:3:7` and `refuter:3:7` concern a real title/final-proof wording defect. The current Statement is sound and remains exactly unchanged. No new 126-item audit, external source reading, native final review, installed repair or closed native escalation is claimed.
+
+I read the complete current corollary, both exact authored suppliers, both regular-value/transversality Definitions, and the complete owning page. I separately read the two exact native decisions and the target manifest/contract entries. Current source and all inspected inputs are preserved under `inputs/`, with raw guards in `current-inputs.json`.
+
+The generic-translation supplier constructs F(p,a)=f(p)+a. Its parameter differential is the identity of R^n, so it is a submersion and its nontransverse parameters form a null set under the stated countable choice. Applying this with the embedded point {q} gives the present proof1.1. The point-transversality supplier proves that T_q{q}=0, making transversality exactly surjectivity of df_a at every p in f_a^(-1)(q). This is precisely regularity of the TARGET value q, as already stated in proof2.1 and in the unchanged Statement.
+
+An arbitrary q is not a zero of the translated map. Independently, take M=R, f(p)=p and q=1. For each a, df_a=1 and f_a^(-1)(1)={1-a}, but f_a(1-a)=1, not0. The false wording could describe zeros of f_a-q, but introducing that different map is unnecessary and would obscure the actual fixed-q claim. The smallest correction simply concludes that q is a regular value of f_a.
+
+Empty fibres remain regular by the actual Definition, with transversality vacuous. If n=0, the unique differential into the zero vector space is onto, so the unique target value is regular for every parameter; no new nonemptiness or positive-dimensional hypothesis is needed. The exceptional set is for the fixed q and may depend on q: no simultaneous assertion for every target value under one translation is introduced.
+
+The proposed complete source changes exactly two strings: the title becomes `Outside a null set of translations a fixed value is regular`, and proof3.1 becomes `Therefore outside a null set of translation parameters, the fixed point q is a regular value of f_a` (with the existing TeX and citation). Stable ID, Statement, dependencies, Facts, proof1.1–2.1, publication status, source attribution and all other metadata are preserved. The exact diff is `source.diff`. Root's existing pre-edit claim/authorization was read before writing this isolated proposal; its original group and history are not replaced.
+
+A complete current literal-reference search of `items/` and `library/` found no item consumer of this stable ID. The only other item/page reference is the owning A page's `items` inventory. The target has no aliases. Hence there is no logical reverse-closure propagation or semantic consumer repair required. Its stable ID and unchanged Statement remain the reference interface; the page inventory remains valid. No source or item consumer claims are narrowed.
+
+Root's mechanical followthrough should update the manifest title and the target contract's proof3.1 derivation mirror. Several contract boundary texts reproduce the old title and the zero row inaccurately cites proof3.1 as a zero-level argument; those should follow the corrected title and actual fixed-q regular-value interpretation rather than preserve the false zero wording. The null/empty-fibre case follows directly from the inspected Definitions, and q=0 is simply an allowed instance, not an assumption. Root owns these metadata/quote changes, current checks, native disposition and ordinary repair receipt. This packet does not edit contracts or manifests.
+
+The native decision's `observed_sha256` value `9611ad5e…` is retained as its original report binding; it is not represented as the current raw guard. The current raw source before this isolated proposal is `35f70985e31d7c21321a5b1e8a430d7600855e463bf46200bd8b0c22841daf38`.
+
+No canonical source, native report/state/counter, metadata, readiness or runtime history was edited. No validator, gate, native execution or ordinary repair receipt was run or issued. Root owns integration and all current verification.

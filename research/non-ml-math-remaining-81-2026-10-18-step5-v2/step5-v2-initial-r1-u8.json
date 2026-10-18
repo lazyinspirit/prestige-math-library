@@ -1,0 +1,119 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "initial",
+  "round": 1,
+  "unit": "8",
+  "input_sha256": "5a7686cf6af281fffc281470b9fd4d1b4497cd3e88649ffa4676dd5e748ac1b1",
+  "decisions": [
+    {
+      "id": "def-binary-prefix-code",
+      "model": "gpt-6-luna",
+      "context_sha256": "d63efce601df84dfc20c8075154c323264852309e31c57106c4c96268d9b8816",
+      "outcome": "false_positive",
+      "reason": "The inherited domain excludes m=0: def-binary-source-code-and-extension defines codes for the finite source [m], and def-finite-discrete-source-and-blocks explicitly requires m>=1. In a finite trie of a nonempty prefix-free code, each codeword has no proper extension among vertices, while every leaf is a prefix of a codeword and must equal it. The singleton case is one nonempty root-to-leaf chain. The page and contract preserve this nonempty-source convention; no edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-binary-kraft-criterion-for-finite-lengths",
+      "model": "gpt-6-luna",
+      "context_sha256": "6b2748bc41c699e1c0a80e48160764b8ec18717298ffcacf99a89e52d41f6009",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 2.1 incorrectly attributes positivity of the input lengths to F2, which defines already-formed binary codes. Positivity is an explicit hypothesis, so the existence argument is sound and this is a nonfatal citation defect. Repaired the attribution to the hypothesis and explicitly applied F2 after allocation to its positive-length words. The published Kraft proof was read completely: disjoint cylinders prove necessity; finite free nodes of distinct lengths and maximal available depth give a computable prefix-free allocation. Finite requests need no choice axiom; nonsingularity then gives exactly the requested code. The Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-binary-prefix-code",
+      "disposition": "unaffected",
+      "post_sha256": "f62bd273d88e158b817d192dce11c8f7afe4a1bb7e48f1260bb093267ebd2577",
+      "review_context_sha256": "c3e081a6b2fc0300348ec6a792c28d63599d76d4ff4848ddf63be4801959a64c",
+      "reason": "The inherited domain excludes m=0: def-binary-source-code-and-extension defines codes for the finite source [m], and def-finite-discrete-source-and-blocks explicitly requires m>=1. In a finite trie of a nonempty prefix-free code, each codeword has no proper extension among vertices, while every leaf is a prefix of a codeword and must equal it. The singleton case is one nonempty root-to-leaf chain. The page and contract preserve this nonempty-source convention; no edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-binary-kraft-criterion-for-finite-lengths",
+      "disposition": "repaired",
+      "post_sha256": "624472195d2a4cd46baf8b301d1765de9349f733f01aedaf11704ec219036948",
+      "review_context_sha256": "bcd3d5466031eb80f58482e2710eab4e54a8c06c0f10f45a39303afcd7ad9de1",
+      "reason": "Step 2.1 incorrectly attributes positivity of the input lengths to F2, which defines already-formed binary codes. Positivity is an explicit hypothesis, so the existence argument is sound and this is a nonfatal citation defect. Repaired the attribution to the hypothesis and explicitly applied F2 after allocation to its positive-length words. The published Kraft proof was read completely: disjoint cylinders prove necessity; finite free nodes of distinct lengths and maximal available depth give a computable prefix-free allocation. Finite requests need no choice axiom; nonsingularity then gives exactly the requested code. The Statement is unchanged. The owning contract now mirrors the corrected step exactly; this is a local repair review, not an independent review of my edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "thm-binary-kraft-criterion-for-finite-lengths",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "locus": "proof-step",
+      "location": "2.1",
+      "finding": "F2 defines nonempty output codewords but does not imply positivity of the supplied request lengths; positivity is given explicitly.",
+      "correction": "Attribute request positivity to the hypothesis, then apply F2 to the allocated positive-length words. The owning contract derivation is synchronized.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "def-binary-prefix-code",
+      "thm-binary-kraft-criterion-for-finite-lengths"
+    ],
+    "next_action": "Engine collection and any required current rejudgment; no worker-launched judge, certificate, state transition, or independent acceptance is claimed.",
+    "sources_consulted": [
+      "items/def-finite-discrete-source-and-blocks.md#Definition",
+      "items/def-binary-source-code-and-extension.md#Definition",
+      "items/def-binary-prefix-code.md#Definition",
+      "research/non-ml-math-remaining-81-2026-10-18-batch-8.proof-contracts.json",
+      "library/information-theory/prefix-codes-and-finite-lossless-coding.md",
+      "items/thm-kraft-inequality.md#Statement-and-Proof",
+      "items/def-prefix-free-machine-and-prefix-complexity.md#Definition"
+    ],
+    "unresolved_mathematics": [],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-binary-prefix-code.md items/thm-binary-kraft-criterion-for-finite-lengths.md --json",
+        "exit_code": 0,
+        "result": "2 files; definition not applicable; 1 checked proof passes; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-binary-prefix-code.md items/thm-binary-kraft-criterion-for-finite-lengths.md --json",
+        "exit_code": 0,
+        "result": "2 checked; 0 errors; 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-binary-kraft-criterion-for-finite-lengths.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/non-ml-math-remaining-81-2026-10-18-batch-8.proof-contracts.json --strict --items def-binary-prefix-code,thm-binary-kraft-criterion-for-finite-lengths --json",
+        "exit_code": 0,
+        "result": "ok=true; both assigned items checked; 0 errors; 0 warnings."
+      }
+    ],
+    "interface_changes": [],
+    "repair_complete": true,
+    "contract_repair": "Under tools/step5-shared-write-lock.mjs, reread the current batch-8 contract and replaced only the Kraft step-2.1 derivation claim to match the corrected proof. Strict scoped contract check passed before releasing the lock.",
+    "context_binding": "Completed supplier review was bound before the consumer edit. After synchronizing the consumer contract, rechecked that the proof-only edit and its mirror preserve both reviewed interfaces and every used supplier; review-contexts returned the same two context hashes.",
+    "downstream_reason": "The complete original Definition of def-binary-prefix-code and original Statement of thm-binary-kraft-criterion-for-finite-lengths are unchanged. Only proof step 2.1 and its contract derivation were edited, so no consumer propagation is triggered.",
+    "published_consumer_findings": [],
+    "external_source_reading": "No external source was consulted or claimed. These finite-trie and elementary Kraft-allocation arguments are familiar; the complete local published Kraft argument and its prefix-free convention were read and checked directly."
+  },
+  "supporting_evidence": {
+    "research/non-ml-math-remaining-81-2026-10-18-batch-8.proof-contracts.json": "85e1ce1b50bb48e01644af4d723c67c8913a26af36cce907284b074e2c994a5d"
+  }
+}

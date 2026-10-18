@@ -3,6 +3,7 @@ id: cor-cantor-function-is-continuous
 kind: corollary
 title: "The Cantor function is continuous on $[0,1]$"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
@@ -15,12 +16,12 @@ landmark: true
 short: "the Cantor function is continuous"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/cor-cantor-function-is-continuous.json
 sources:
   scraped: []
   references:

@@ -1,0 +1,122 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "initial",
+  "round": 1,
+  "unit": "14",
+  "input_sha256": "5a7686cf6af281fffc281470b9fd4d1b4497cd3e88649ffa4676dd5e748ac1b1",
+  "decisions": [
+    {
+      "id": "lem-it-gallager-input-maxima-attained",
+      "model": "gpt-6-luna",
+      "context_sha256": "918c894bd7dad76d0dea897655d8c883d944fa85f28495ed1ab0ada4123e36f8",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F4 cites algebra and composition theorems restricted to subsets of R, whereas steps 1.2 and 2.1 require continuity on the input simplex in R^|X|. That key prerequisite for EVT was not established by those citations. Repaired locally: |T(P)-T(Q)| <= 2C||P-Q||_2, |A_y(P)-A_y(Q)| <= |X| ||P-Q||_2, finite scalar power tolerances and scalar logarithm tolerances establish the required vector-domain continuity.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-it-one-shot-decision-threshold-achievability",
+      "model": "gpt-6-luna",
+      "context_sha256": "af90bdf2dd7a7ebd5773f145770f8956afa8963fe93d06990cdc55276b23fe03",
+      "outcome": "false_positive",
+      "reason": "The Statement explicitly defines the block likelihood ratio for arbitrary P_{X^n}; no single-letter sum is used anywhere in the proof. More explicitly, the cited stochasticity lemma makes W^n a finite stochastic kernel, so it is the one-use kernel of a finite DMC on alphabets X^n and Y^n. Applying the first part of the information-density Definition to that channel and its arbitrary input law P_{X^n} gives exactly this ratio and the -infinity off-support convention. The separate additive block clause is not invoked.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-it-gallager-input-maxima-attained",
+      "disposition": "repaired",
+      "post_sha256": "421be0d32d40ca5953163b7c1c7edf8ec0aee19251440d258c0d3b2868bea4ac",
+      "review_context_sha256": "e9aaad0f40ec95f88aae705ea3e88dea79ef4daa0ea2b6eb7f1c3b907c38aaa0",
+      "reason": "Checked the one-letter definitions, scalar supplier domain restrictions, positive-power endpoint argument, diagonal bound T(P)>=sum P(x)^2>=1/|X|, positivity of S(P), explicit Euclidean continuity estimates, and nonempty closed bounded simplex hypotheses of the ZF extreme-value supplier. F4 now states the scalar restriction accurately. Statement and dependencies are unchanged; no AC is used. This is a repair review, not an independent review of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-it-one-shot-decision-threshold-achievability",
+      "disposition": "unaffected",
+      "post_sha256": "276036d283be3d1421fa385ddf13370b6a29d4d608995da50848e44aa4c7f059",
+      "review_context_sha256": "79c98253e2569e3eedfdc06aeacac1550cda4e535c35d09dda54d8122df7d56f",
+      "reason": "Checked the complete proof and its actual code, error, stochastic-kernel and information-density interfaces. Treating W^n as one use of a finite channel licenses F2 without any independence among coordinates of P_{X^n}. Off joint support the imported density convention is -infinity, so strict-threshold passage excludes zero channel likelihood and unreachable outputs decode by the fallback. For each earlier codeword, independence from the true output gives P_{X^n} tensor Q; averaging j-1 yields (M-1)/2. On threshold passage, P(x)Q(y)=P(x)W^n(y|x)exp(-imath(x;y)), proving the finite-sum change of measure. The finite ensemble provides a deterministic realization; repeated encoder words are allowed, and M=1 has zero error. Consulted PPV Theorems 17-18 and complete proofs, printed pages 15-17, which require arbitrary input laws and average error only. No item or metadata edit is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-it-gallager-input-maxima-attained",
+      "severity": "fatal",
+      "defect_type": "dependency_citation",
+      "locus": "facts-block",
+      "reason": "F4 overextended scalar continuity suppliers to a Euclidean simplex. Steps 1.2 and 2.1 now prove continuity by explicit norm estimates and finite epsilon-delta arguments. The claim, compactness interface and choice-free boundary are preserved.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-it-one-shot-decision-threshold-achievability",
+      "reason": "The rejected additive-block-interface concern is not used by this proof: the Statement defines its own arbitrary-input block ratio, equivalently the single-use information density of the finite channel W^n on block alphabets. The first definition clause and stochasticity supplier suffice.",
+      "status": "rejected-finding"
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "lem-it-gallager-input-maxima-attained",
+      "sources_checked": [
+        "items/thm-algebra-of-continuous-functions.md: Statement",
+        "items/thm-composition-of-continuous-functions.md: Statement",
+        "items/thm-euclidean-heine-borel-pseudocompactness-and-extreme-values.md: Statement",
+        "items/def-it-one-letter-gallager-exponent-functions.md: Definition",
+        "items/thm-real-power-continuity-and-derivatives.md: Statement",
+        "items/thm-natural-logarithm-laws.md: Statement"
+      ],
+      "checks": [
+        "Final batched precheck: 2 checked, 0 failures (exit 0).",
+        "Final batched rendercheck: 2 checked, 0 errors, 0 warnings (exit 0).",
+        "Strict two-item proof-contract: 0 errors, 0 warnings (exit 0). Contract citations and derivations for the repaired lemma regenerated under the shared-write lock; other contract entries preserved.",
+        "Required final proof-layout: 1 changed item, 4 steps, 0 defects (exit 0)."
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Handoff for ordinary engine collection, certification and rejudgment of the changed carrier; one confirmed-fatal item remains counted for this round despite its repair."
+    },
+    {
+      "id": "thm-it-one-shot-decision-threshold-achievability",
+      "sources_checked": [
+        "items/def-discrete-memoryless-channel-information-density.md: complete Definition",
+        "items/def-discrete-memoryless-channel.md: complete Definition",
+        "items/lem-discrete-memoryless-channel-block-kernels-are-stochastic.md: complete proof",
+        "items/def-finite-stochastic-kernel.md: complete Definition",
+        "items/def-fixed-length-channel-code.md: complete Definition",
+        "items/def-fixed-length-channel-code-errors.md: complete Definition",
+        "https://people.lids.mit.edu/yp/homepage/data/finite_block.pdf : Section III.C, Theorems 17-18, printed pages 15-17, equations (67)-(73) and full proofs"
+      ],
+      "checks": [
+        "Original and current raw bytes identical; itemHashGuard equals the assignment before guard.",
+        "Strict proof-contract, precheck and rendercheck all pass for the unchanged item."
+      ],
+      "unresolved_obligations": [],
+      "next_action": "No edit or consumer propagation; the claim and the carrier remain unchanged."
+    },
+    {
+      "scope": "batch-14",
+      "reason": "The rejection-blind digest lists presentation concerns only for three unassigned examples/counterexamples; those are outside this adjudication lane and have not been edited. No published defect was discovered, so there is no proposed published-consumer-ledger entry. No gate diagnostic was assigned. Both original Statement sections were compared directly against exact pre-edit bytes and are unchanged; downstream is therefore empty. No new prerequisites were required.",
+      "published_ledger_updates": []
+    }
+  ]
+}

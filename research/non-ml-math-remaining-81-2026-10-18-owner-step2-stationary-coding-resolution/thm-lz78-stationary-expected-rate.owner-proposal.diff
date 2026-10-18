@@ -1,0 +1,20 @@
+--- items/thm-lz78-stationary-expected-rate.md
++++ PROPOSED/items/thm-lz78-stationary-expected-rate.md
+@@ -34,7 +34,7 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** A stationary finite-alphabet source $X$ on alphabet $\mathcal A$ of size $q\ge2$, its bit entropy rate $h$, and the explicit terminated LZ78 code of [[alg-lz78-incremental-prefix-code]] and [[thm-lz78-prefix-code-lossless]].
++**Given:** A stationary source $X$ on a finite nonempty alphabet, its bit entropy rate $h$, and the explicit terminated LZ78 code of [[alg-lz78-incremental-prefix-code]] and [[thm-lz78-prefix-code-lossless]]. For a singleton source alphabet, adjoin one fixed unused symbol of probability zero before applying the code, with the terminator still distinct; write $\mathcal A$ for this coding alphabet and $q=|\mathcal A|\ge2$.
+ 
+ [F1] [[thm-lz78-prefix-code-lossless]]: the terminated output is a nonempty prefix-free lossless code with no supplied record count; for $N$ output records its length is at most $N[\log_2(N+1)+2\log_2\log_2(N+2)+3+\lceil\log_2(q+1)\rceil]$.
+ 
+@@ -52,7 +52,7 @@
+ 
+ **Given:** The stationary source, parser and code length convention.
+ 
+-1.1 Let $N$ be the number of phrases in parsing $X_0^{n-1}\#$ over the augmented alphabet $\mathcal A\cup\{\#\}$, and let $c_{\ell,u}$ count phrases of length $\ell$ and preceding $k$-symbol context $u$. The phrases are distinct. For $r=\lfloor\frac12\log_{q+1}(n+1)\rfloor$, at most $\sum_{j=1}^r(q+1)^j=O(\sqrt n)$ phrases have length at most $r$, while longer phrases use at least $r+1$ symbols. Thus $N=O(n/\log n)$ uniformly over input words. [F2, given, algebra]
++1.1 Adjoining an unused symbol, if necessary, does not change any block probability, block entropy or entropy rate: every word containing the extra symbol has probability zero. Stationarity is retained under the coordinatewise inclusion. The resulting coding alphabet has $q\ge2$, so the stated terminated algorithm is defined, including for an originally singleton source with $h=0$. Let $N$ be the number of phrases in parsing $X_0^{n-1}\#$ over the augmented alphabet $\mathcal A\cup\{\#\}$, and let $c_{\ell,u}$ count phrases of length $\ell$ and preceding $k$-symbol context $u$. The phrases are distinct. For $r=\lfloor\frac12\log_{q+1}(n+1)\rfloor$, at most $\sum_{j=1}^r(q+1)^j=O(\sqrt n)$ phrases have length at most $r$, while longer phrases use at least $r+1$ symbols. Thus $N=O(n/\log n)$ uniformly over input words. [F2, given, algebra]
+ 
+ 2.1 Let $\widehat P(L=\ell,U=u)=c_{\ell,u}/N$ be the empirical law of a uniformly selected phrase. Since phrase lengths sum to $n+1$, $E L=(n+1)/N$, and $U$ has at most $q^k$ values. If $\mu=E L>0$, compare the finite-support law of $L$ with the geometric weights $r_j=(\mu+1)^{-1}(\mu/(\mu+1))^j$, $j\ge0$, restricted to that finite support. The restricted weights have sum at most one, so nonnegative relative entropy [F5] gives $$H_2(L)\le-E\log_2r_L=(\mu+1)\log_2(\mu+1)-\mu\log_2\mu\le\log_2(e(\mu+1)),$$ because $\ln(1+x)\le x$ for $x\ge0$ (the derivative of $x-\ln(1+x)$ is $x/(1+x)\ge0$). The case $\mu=0$ has $H_2(L)=0$. Comparing $U$ with the uniform law on its support and using [F5] gives $H_2(U)\le k\log_2q$; [F6] gives $H_2(L,U)\le H_2(L)+H_2(U)$. Since $N=O(n/\log n)$, $x\mapsto x\log((n+1)/x)$ is increasing on this range for all large $n$, so $$N H_2(L,U)=O\!\left(\frac{n\log\log n}{\log n}\right)+O\!\left(\frac{kn}{\log n}\right)=o(n)$$ for each fixed $k$. [F2, F5, F6, step 1.1, algebra]
+ 

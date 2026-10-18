@@ -1,0 +1,30 @@
+--- items/lem-water-filling-optimal-allocation.md
++++ items/lem-water-filling-optimal-allocation.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: non-ml-math-remaining-81-2026-10-18
+ dependency_level: 0
+-deps: [def-natural-logarithm, thm-logarithm-derivative-and-integral, thm-algebra-of-derivatives, thm-intermediate-value, cor-second-derivative-characterises-convexity]
++deps: [def-natural-logarithm, thm-logarithm-derivative-and-integral, thm-algebra-of-derivatives, thm-chain-rule, thm-intermediate-value, cor-second-derivative-characterises-convexity]
+ justified_by: []
+ aliases: []
+ proof_strategy: direct
+@@ -40,14 +40,14 @@
+ 
+ [F2] [[thm-intermediate-value]]: a continuous function whose endpoint values straddle a target takes that value.
+ 
+-[F3] [[cor-second-derivative-characterises-convexity]]: a twice-differentiable function with nonpositive second derivative is concave, and every differentiable concave function lies below its tangent line.
++[F3] [[cor-second-derivative-characterises-convexity]]: a twice-differentiable function on an open interval with nonnegative second derivative is convex. Applying this to $-f$ gives concavity when $f''\le0$. The tangent bound will be derived directly from concavity below.
+ 
+-[F4] [[thm-algebra-of-derivatives]]: sums, scalar multiples, and compositions of differentiable functions obey the usual derivative rules.
++[F4] [[thm-algebra-of-derivatives]] gives the sum, scalar, product and quotient derivative rules; [[thm-chain-rule]] supplies the derivative of a composition at points where both derivatives are defined.
+ 
+ ## Proof
+ 
+-1.1 For $P=0$, feasibility forces every $p_j=0$, so the maximum is $0$. Suppose $P>0$ and define $g(T)=\sum_j(T-\lambda_j)^+$. This function is continuous, equals $0$ at $T=\min_j\lambda_j$, and tends to $+\infty$ as $T\to+\infty$. By [F2] a solution of $g(T)=P$ exists; for $T>\min_j\lambda_j$ at least one active term grows strictly with $T$, so the solution is unique. [F2, given, cases]
++1.1 For $P=0$, feasibility forces every $p_j=0$, so the maximum is $0$. Suppose $P>0$, put $a=\min_j\lambda_j$, and define $g(T)=\sum_j(T-\lambda_j)^+$. For real $u,v$, considering whether each is nonnegative gives $|u^+-v^+|\le|u-v|$; hence $|g(T)-g(S)|\le L|T-S|$, proving continuity, including at the breakpoints. We have $g(a)=0$ and $g(a+P)\ge P$ because a branch with $\lambda_j=a$ contributes $P$. By [F2] on $[a,a+P]$, a solution exists; it lies above $a$ since $P>0$. If $a<S<T$, that same branch grows by $T-S>0$ and all other terms are nondecreasing, so $g(T)>g(S)$ and the solution is unique. [F2, given, cases, algebra]
+ 
+-2.1 Put $p_j^*=(T-\lambda_j)^+$. Then $\sum_jp_j^*=P$. For $f_j(p)=\frac12\ln(1+p/\lambda_j)$, [F1] and [F4] give $f_j'(p)=1/(2(\lambda_j+p))$ and $f_j''(p)=-1/(2(\lambda_j+p)^2)<0$, so [F3] makes $f_j$ concave and bounds it above by its tangent. On an active branch $f_j'(p_j^*)=1/(2T)$; on an inactive branch $p_j^*=0$ and $f_j'(0)=1/(2\lambda_j)\le1/(2T)$. Summing the tangent bounds gives, for every feasible $p$, $\sum_j[f_j(p_j)-f_j(p_j^*)]\le(2T)^{-1}(\sum_jp_j-P)\le0$. Thus $p^*$ is globally optimal. [F1, F3, F4, step 1.1, given, algebra]
++2.1 Put $p_j^*=(T-\lambda_j)^+$. Then $\sum_jp_j^*=P$. Extend $f_j(p)=\frac12\ln(1+p/\lambda_j)$ to the open interval $p>-\lambda_j$. Its affine inner function has positive value and derivative $1/\lambda_j$, so [F1] and the chain rule in [F4] give $f_j'(p)=1/(2(\lambda_j+p))$; the quotient rule gives $f_j''(p)=-1/(2(\lambda_j+p)^2)<0$. Thus [F3] applied to $-f_j$ proves concavity on this open interval. For any $a,b$ in it and $0<t<1$, concavity gives $f_j(a+t(b-a))\ge(1-t)f_j(a)+tf_j(b)$. Subtracting $f_j(a)$, dividing by $t$, and taking $t\downarrow0$ yields $f_j(b)-f_j(a)\le f_j'(a)(b-a)$. This proves the tangent bound also when $a=0$, which is an interior point of the extended domain. On an active branch $f_j'(p_j^*)=1/(2T)$; on an inactive branch $p_j^*=0$ and $f_j'(0)=1/(2\lambda_j)\le1/(2T)$. Summing the tangent bounds gives, for every feasible $p$, $\sum_j[f_j(p_j)-f_j(p_j^*)]\le(2T)^{-1}(\sum_jp_j-P)\le0$. Thus $p^*$ is globally optimal. [F1, F3, F4, step 1.1, given, algebra]
+ 
+-3.1 Substitution of $p_j^*$ yields $F(p^*)=\frac12\sum_j\ln^+(T/\lambda_j)$. The feasible sets are nested as $P$ grows, so $C_L$ is nondecreasing. If $P_0,P_1\ge0$ and $p^{(0)},p^{(1)}$ are maximizing allocations, then $\theta p^{(0)}+(1-\theta)p^{(1)}$ is feasible at $\theta P_0+(1-\theta)P_1$. Concavity of each $f_j$ gives $C_L(\theta P_0+(1-\theta)P_1)\ge\theta C_L(P_0)+(1-\theta)C_L(P_1)$, including $P_i=0$ by step 1.1. [step 1.1, step 2.1, given, algebra] ∎+3.1 Substitution of $p_j^*$ yields $F(p^*)=\frac12\sum_j\ln^+(T/\lambda_j)$. The feasible sets are nested as $P$ grows, so $C_L$ is nondecreasing. If $P_0,P_1\ge0$ and $p^{(0)},p^{(1)}$ are maximizing allocations, then $\theta p^{(0)}+(1-\theta)p^{(1)}$ is feasible at $\theta P_0+(1-\theta)P_1$. Concavity of each $f_j$ gives $C_L(\theta P_0+(1-\theta)P_1)\ge\theta C_L(P_0)+(1-\theta)C_L(P_1)$, including $P_i=0$ by step 1.1. [step 1.1, step 2.1, given, algebra] ∎

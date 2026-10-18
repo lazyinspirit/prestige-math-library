@@ -3,11 +3,12 @@ id: prop-countable-unions-and-subsets-of-manifold-null-sets-are-null
 kind: proposition
 title: "Countable unions and subsets of manifold null sets are null"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [prop-a-countable-chart-cover-detects-manifold-null-sets,
+deps: [def-null-subset-of-a-smooth-manifold,
        def-null-and-content-zero-in-rn,
        def-countable-choice,
        thm-n-cross-n-countable,
@@ -17,8 +18,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
-  precheck: pass
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/prop-countable-unions-and-subsets-of-manifold-null-sets-are-null.json
 sources:
   scraped: []
   references:
@@ -35,7 +35,7 @@ null, and every countable union of manifold null sets is null.
 
 **Given:** The Axiom of Countable Choice, null subsets $E,E_1,E_2,\ldots$ of a smooth manifold $M$, and a subset $A\subseteq E$.
 
-[L1] A countable chart cover detects manifold nullity ([[prop-a-countable-chart-cover-detects-manifold-null-sets]]).
+[L1] In positive dimension, nullity means Euclidean nullity of every chart image in a smooth atlas; in dimension zero the only null subset is empty ([[def-null-subset-of-a-smooth-manifold]]).
 
 [F1] In Euclidean space, subsets of null sets are null ([[def-null-and-content-zero-in-rn]]).
 
@@ -46,7 +46,7 @@ null, and every countable union of manifold null sets is null.
 ## Proof
 **Proof technique:** direct.
 
-1.1 Fix a countable smooth atlas detecting nullity as in [L1]. For each chart $(U_j,\varphi_j)$, the set $\varphi_j(A\cap U_j)$ is contained in the null set $\varphi_j(E\cap U_j)$, so [F1] makes it null. Thus $A$ is null. [F1, L1, given]
+1.1 If $\dim M=0$, [L1] gives $E=E_m=\varnothing$ for every $m$, hence $A=\varnothing$ and $\bigcup_{m\ge1}E_m=\varnothing$; both are null. Henceforth assume $\dim M\ge1$ and fix any smooth atlas on $M$. For each of its charts $(U_j,\varphi_j)$, the set $\varphi_j(A\cap U_j)$ is contained in the null set $\varphi_j(E\cap U_j)$, so [F1] makes it null. Thus $A$ is null by [L1]. [F1, L1, given, cases]
 
 1.2 Fix a chart index $j$ and $\varepsilon>0$. For each $m\ge1$, nullity of $\varphi_j(E_m\cap U_j)$ supplies cube covers with total volume at most $\varepsilon2^{-m}$. By [A1], choose these covers simultaneously. By [L2], their doubly indexed union is a single countable cube cover, and its total volume is at most $\sum_{m\ge1}\varepsilon2^{-m}=\varepsilon$. Hence $\bigcup_{m\ge1}\varphi_j(E_m\cap U_j)$ is null. [A1, L2, given, choose, algebra]
 

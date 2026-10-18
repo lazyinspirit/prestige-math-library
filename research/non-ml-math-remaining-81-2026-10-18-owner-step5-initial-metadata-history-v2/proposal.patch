@@ -1,0 +1,338 @@
+--- /dev/null
++++ b/tools/step5-initial-metadata-history-v2.test.mjs
+@@ -0,0 +1,97 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync} from 'node:fs';
++import {join} from 'node:path';
++import {tmpdir} from 'node:os';
++import {createHash} from 'node:crypto';
++import {freezeFrontier} from './step5-rounds.mjs';
++import {itemHashGuard} from './item-hash.mjs';
++import {statementHash} from './step5-statement.mjs';
++import {MODELS} from './models.mjs';
++import {recordInitialMetadataHistory,loadInitialMetadataHistory,initialMetadataSupportingHistory} from './step5-initial-metadata-history.mjs';
++import {collect,prepareImpact} from './step5-workflow.mjs';
++const run='metadata-fixture',dir=`research/${run}-step5-v2`,dispatch=`research/${run}-dispatch`,nativeId='ex-box-muller-finite-midpoint-tail',unassigned='lem-unassigned',context='def-context',discharged='def-discharged';
++const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
++function fixture(t,version=2){
++ const root=mkdtempSync(join(tmpdir(),'initial-level-history-'));t.after(()=>rmSync(root,{recursive:true,force:true}));for(const p of ['items',dir,dispatch,`.autopilot/${run}`])mkdirSync(join(root,p),{recursive:true});
++ const put=(p,v)=>writeFileSync(join(root,p),typeof v==='string'?v:JSON.stringify(v));
++ const source=(id,kind,level,deps,status='draft',extra='')=>`---\nid: ${id}\nkind: ${kind}\ntitle: ${id}\nstatus: ${status}\ndependency_level: ${level}\ndeps: ${JSON.stringify(deps)}\n${extra}---\n\n## ${kind==='definition'?'Definition':'Statement'}\n\nA fixed complete interface for ${id}.\n\n## Proof\n\n1.1 The original full proof of this fixture. [given] ∎\n`;
++ const nativeOriginal=source(nativeId,'example',version===2?9:2,[context]),nativeBefore=nativeOriginal.replace('original full proof','reviewed repaired proof'),nativeAfter=nativeBefore.replace(`dependency_level: ${version===2?9:2}`,'dependency_level: 1');
++ const unassignedBefore=source(unassigned,'lemma',version===2?9:2,[nativeId]),unassignedAfter=unassignedBefore.replace('dependency_level: 9','dependency_level: 2');
++ const defOriginal=source(discharged,'definition',0,[]),defAfter=source(discharged,'definition',0,[],'draft',`justified_by: [${nativeId}]\n`),ctx=source(context,'definition',0,[],'published');
++ const current={[nativeId]:nativeAfter,[unassigned]:unassignedAfter,[discharged]:defAfter,[context]:ctx};for(const [id,s]of Object.entries(current))put(`items/${id}.md`,s);
++ const beforeFiles={[nativeId]:`research/${nativeId}-before.md`,[unassigned]:`research/${unassigned}-before.md`};put(beforeFiles[nativeId],nativeBefore);put(beforeFiles[unassigned],unassignedBefore);
++ const frontier=freezeFrontier({run,batches:[{id:'1',items:[nativeId,discharged]},{id:'2',items:[context,unassigned]}]}),baseline={[nativeId]:itemHashGuard(nativeOriginal),[unassigned]:itemHashGuard(unassignedBefore),[discharged]:itemHashGuard(defOriginal),[context]:itemHashGuard(ctx)};
++ const verdicts=frontier.ids.map(id=>({id,model:MODELS.luna.id,keep:![nativeId,discharged].includes(id),item_sha256:baseline[id],context_sha256:'c'.repeat(64)})),rejected=verdicts.filter(v=>!v.keep),pack={version:2,adjudicationSchemaVersion:1,repair_scope:'frontier',run,phase:'initial',round:1,judge_model:MODELS.luna.id,frontier_ids:frontier.ids,units:['1','2'],assignments:{'1':rejected,'2':[]},rejected,before:baseline,before_statements:Object.fromEntries(Object.entries({...current,[nativeId]:nativeOriginal,[discharged]:defOriginal,[unassigned]:unassignedBefore}).map(([id,s])=>[id,statementHash(s)])),input_evidence:{[join(root,dir,'step4-verdicts.json')]:hash(verdicts)}};
++ for(const [name,v]of Object.entries({'frontier.json':frontier,'baseline.json':baseline,'step4-verdicts.json':verdicts,'initial-1.json':pack}))put(`${dir}/${name}`,v);
++ const m1=`research/${run}-batch-1.pages.json`,m2=`research/${run}-batch-2.pages.json`,row=(id,kind,level,deps,extra={})=>({id,kind,title:id,deps,dependency_level:level,...extra});
++ const old1=[{id:'page-one',items:[row(nativeId,'example',version===2?9:2,[context]),row(discharged,'definition',0,[],{justified_by:version===2?[]:[nativeId]})]}],new1=structuredClone(old1);new1[0].items[0].dependency_level=1;new1[0].items[1].justified_by=[nativeId];
++ const old2=[{id:'page-two',items:[row(context,'definition',0,[]),row(unassigned,'lemma',version===2?9:2,[nativeId])]}],new2=structuredClone(old2);new2[0].items[1].dependency_level=2;
++ put(m1,new1);put(m2,new2);const mb1='research/manifest-1-before.json',mb2='research/manifest-2-before.json';put(mb1,old1);put(mb2,old2);
++ const report={run,phase:'initial',round:1,unit:'1',input_sha256:hash(pack),decisions:rejected.map(v=>({...v,outcome:'confirmed_nonfatal',reason:'A concrete fixture source defect was actually corrected in the original native wave.',uncertain:false,source_urls:[],familiar:true})),reviews:[{id:nativeId,disposition:'repaired',post_sha256:itemHashGuard(nativeBefore),review_context_sha256:'b'.repeat(64),reason:'The authentic original native post contains the proof correction before its purely numeric label adjustment.',uncertain:false,source_urls:[],familiar:true},{id:discharged,disposition:'repaired',post_sha256:itemHashGuard(defAfter),review_context_sha256:'d'.repeat(64),reason:'The authentic original native source contains its nonempty logical-discharge metadata.',uncertain:false,source_urls:[],familiar:true}],created_items:[],downstream:[],ledger_updates:[],supporting_evidence:{[join(root,m1)]:hash(old1),[join(root,m2)]:hash(old2)}};
++ const empty={run,phase:'initial',round:1,unit:'2',input_sha256:hash(pack),completion:'mechanical-zero-work',written_by:'step5-workflow',mathematical_review:false,reviews:[],decisions:[],created_items:[],downstream:[],ledger_updates:[],gate_resolutions:[]};
++ const label='step5-v2-initial-r1-u1',stem=`${dispatch}/alpha-adjudicate-${label}.attempt-1`,dp=`${dispatch}/alpha-adjudicate-${label}.result.json`,rp=`${dir}/${label}.json`,result={run,role:'alpha-adjudicate',label,runner:'codex',model:MODELS.sol61.id,provider_effort:'high',covers:['1'],ok:true,attempt:1,evidence_tag:'.attempt-1',started_at:'2026-10-01T10:00:00Z',ended_at:'2026-10-01T11:00:00Z',exit_code:0,process_exit_code:0,timed_out:false,terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0},log:`${stem}.log`,prompt:`${stem}.prompt.md`};
++ const output=structuredClone(report),sync=()=>{report.input_sha256=hash(pack);output.input_sha256=hash(pack);empty.input_sha256=hash(pack);put(rp,report);put(`${dir}/step5-v2-initial-r1-u2.json`,empty);put(dp,result);put(`${stem}.result.json`,result);put(`${stem}.log`,`\ncodex\n${JSON.stringify(output)}\ntokens used\n100\n`);put(`${stem}.prompt.md`,`run: ${run}\nrole: alpha-adjudicate\nlabel: ${label}\ncovers: 1\noutput: ${rp}\ninput_sha256:"${hash(pack)}"`);};sync();
++ const zeroLabel='step5-v2-empty-initial-r1-u2';put(`${dispatch}/tool-${zeroLabel}.result.json`,{run,role:'tool',label:zeroLabel,covers:['2'],ok:true,written_by:'autopilot',ended_at:'2026-10-01T11:00:00Z'});
++ const observed=(role,label,covers)=>({stage:'5.1-adjudicate',role,label,covers,attempt:1,lastExitOk:true,startedAt:'2026-10-01T09:59:00Z',endedAt:'2026-10-01T11:01:00Z'}),state={run,stage:'5.1-adjudicate',paused:true,dispatches:{[`5.1-adjudicate:${label}`]:observed('alpha-adjudicate',label,['1']),[`5.1-adjudicate:${zeroLabel}`]:observed('tool',zeroLabel,['2'])}},request={version:1,run,id:'actual-fixture-hold',group:'5.1-adjudicate',stages:['5.1-adjudicate'],at:'2026-10-01T12:00:00Z'};put(`.autopilot/${run}/state.json`,state);put(`.autopilot/${run}/owner-gate-request.json`,request);
++ const payload={version,reason:'The actual fixture completed initial handoffs precede strictly mechanical numeric dependency labels and source-backed manifest mirror correction, with no scientific source-body or original native evidence change.',carriers:[{path:m1,before_file:mb1},...(version===2?[{path:m2,before_file:mb2}]:[])],...(version===2?{source_levels:[{id:nativeId,before:9,after:1,before_file:beforeFiles[nativeId],historical_basis:'native-post'},{id:unassigned,before:9,after:2,before_file:beforeFiles[unassigned],historical_basis:'baseline-keep'}]}:{source_level:{id:nativeId,before:2,after:1,before_file:beforeFiles[nativeId]}})};
++ return {root,put,payload,pack,baseline,verdicts,report,output,empty,result,state,request,stem,dp,rp,current,nativeBefore,nativeAfter,unassignedBefore,unassignedAfter,beforeFiles,new1,new2,old1,old2,m1,m2,mb1,mb2,sync,record:()=>recordInitialMetadataHistory(root,run,payload)};
++}
++test('v1 sole Box-Muller path retains its original strict behavior',t=>{const f=fixture(t,1),r=f.record();assert.deepEqual(r.current_review_targets,[nativeId]);assert.deepEqual(loadInitialMetadataHistory(f.root,run,{current:true}).sourceIds,[nativeId]);});
++test('v2 authenticates both genuine native posts and unchanged accepted baseline labels',t=>{
++ const f=fixture(t),beforeReport=readFileSync(join(f.root,f.rp),'utf8'),r=f.record(),loaded=loadInitialMetadataHistory(f.root,run,{current:true});assert.deepEqual(r.current_review_targets,[nativeId,unassigned]);assert.equal(loaded.historicalReviews.length,1);assert.equal(loaded.historicalReviews[0].id,nativeId);assert.equal(loaded.historicalGuards[unassigned],f.baseline[unassigned]);assert.equal(readFileSync(join(f.root,f.rp),'utf8'),beforeReport);
++ const old=initialMetadataSupportingHistory({root:f.root,run},join(f.root,f.m1),hash(f.old1));assert.equal(readFileSync(old.archive,'utf8'),JSON.stringify(f.old1));
++ f.put(`items/${nativeId}.md`,f.nativeAfter+'Later genuine owner work.\n');assert.ok(loadInitialMetadataHistory(f.root,run));assert.throws(()=>loadInitialMetadataHistory(f.root,run,{current:true}));
++});
++for(const defect of ['published','body-change','Statement-change','deps-change','title-change','extra-label','wrong-before','wrong-after','unknown-basis','duplicate','missing-original-label','baseline','keep-false','assigned-baseline','baseline-has-review','native-report-forged','native-output-forged','native-context-forged','unassigned-native-post','uncertain','wrong-model','failed-native','immutable-result','missing-native-log','wrong-prompt','wrong-final-identity','active','not-paused','wrong-stage','wrong-native-request','missing-handoff','omitted-source-graph','graph-cycle','manifest-title-forged','manifest-extra-field','justification-forged','source-justification-forged','after-collect','after-impact','caller-state','omitted-changed-label','wrong-supporting-preimage','missing-changed-carrier'])test(`v2 numeric history rejects ${defect}`,t=>{
++ const f=fixture(t),label=f.payload.source_levels[0];
++ if(defect==='published')f.put(`items/${nativeId}.md`,f.nativeAfter.replace('status: draft','status: published'));
++ if(defect==='body-change')f.put(`items/${nativeId}.md`,f.nativeAfter+'Unrelated body edit.\n');
++ if(defect==='Statement-change')f.put(`items/${nativeId}.md`,f.nativeAfter.replace('A fixed complete interface','A weaker interface'));
++ if(defect==='deps-change')f.put(`items/${nativeId}.md`,f.nativeAfter.replace('["def-context"]','[]'));
++ if(defect==='title-change')f.put(`items/${nativeId}.md`,f.nativeAfter.replace('title: '+nativeId,'title: altered'));
++ if(defect==='extra-label')f.put(f.beforeFiles[nativeId],f.nativeBefore+'\ndependency_level: 9\n');
++ if(defect==='wrong-before')label.before=8;
++ if(defect==='wrong-after')label.after=3;
++ if(defect==='unknown-basis')label.historical_basis='root-says-reviewed';
++ if(defect==='duplicate')f.payload.source_levels.push({...label});
++ if(defect==='missing-original-label')f.put(f.beforeFiles[nativeId],f.nativeBefore.replace('dependency_level: 9\n',''));
++ if(defect==='baseline'){f.baseline[unassigned]='0'.repeat(64);f.put(`${dir}/baseline.json`,f.baseline);}
++ if(defect==='keep-false'){f.verdicts.find(v=>v.id===unassigned).keep=false;f.put(`${dir}/step4-verdicts.json`,f.verdicts);}
++ if(defect==='assigned-baseline'){f.pack.assignments['2']=[{id:unassigned}];f.put(`${dir}/initial-1.json`,f.pack);f.sync();}
++ if(defect==='baseline-has-review'){f.report.reviews.push({id:unassigned});f.sync();}
++ if(defect==='native-report-forged'){f.report.reviews[0].post_sha256='0'.repeat(64);f.sync();}
++ if(defect==='native-output-forged'){f.output.reviews[0].post_sha256='0'.repeat(64);f.sync();}
++ if(defect==='native-context-forged'){f.output.reviews[0].review_context_sha256='0'.repeat(64);f.sync();}
++ if(defect==='unassigned-native-post'){label.historical_basis='baseline-keep';}
++ if(defect==='uncertain'){f.report.reviews[0].uncertain=true;f.sync();}
++ if(defect==='wrong-model'){f.result.model='wrong';f.sync();}
++ if(defect==='failed-native'){f.result.ok=false;f.sync();}
++ if(defect==='immutable-result')f.put(`${f.stem}.result.json`,{...f.result,ok:false});
++ if(defect==='missing-native-log')rmSync(join(f.root,`${f.stem}.log`));
++ if(defect==='wrong-prompt')f.put(`${f.stem}.prompt.md`,'wrong prompt');
++ if(defect==='wrong-final-identity'){f.output.unit='2';f.sync();}
++ if(defect==='active'){f.state.dispatches.live={startedAt:'now'};f.put(`.autopilot/${run}/state.json`,f.state);}
++ if(defect==='not-paused'){f.state.paused=false;f.put(`.autopilot/${run}/state.json`,f.state);}
++ if(defect==='wrong-stage'){f.state.stage='5.2-impact';f.put(`.autopilot/${run}/state.json`,f.state);}
++ if(defect==='wrong-native-request'){f.request.group='4-judge';f.put(`.autopilot/${run}/owner-gate-request.json`,f.request);}
++ if(defect==='missing-handoff')rmSync(join(f.root,`${dir}/step5-v2-initial-r1-u2.json`));
++ if(defect==='omitted-source-graph'){f.new2[0].items.pop();f.put(f.m2,f.new2);}
++ if(defect==='graph-cycle'){f.put(`items/${context}.md`,f.current[context].replace('deps: []','deps: ["'+unassigned+'"]'));f.new2[0].items[0].deps=[unassigned];f.put(f.m2,f.new2);}
++ if(defect==='manifest-title-forged'){f.new1[0].items[0].title='invented';f.put(f.m1,f.new1);}
++ if(defect==='manifest-extra-field'){f.new1[0].items[0].invented=true;f.put(f.m1,f.new1);}
++ if(defect==='justification-forged'){f.new1[0].items[1].justified_by=[context];f.put(f.m1,f.new1);}
++ if(defect==='source-justification-forged'){const text=f.current[discharged].replace(nativeId,'lem-made-up');f.put(`items/${discharged}.md`,text);f.new1[0].items[1].justified_by=['lem-made-up'];f.put(f.m1,f.new1);}
++ if(defect==='after-collect')f.put(`${dir}/initial-1-collected.json`,{});
++ if(defect==='after-impact')f.put(`${dir}/impact-initial-1.json`,{});
++ if(defect==='omitted-changed-label')f.payload.source_levels.pop();
++ if(defect==='wrong-supporting-preimage'){f.old1[0].items[0].title='forged original metadata';f.put(f.mb1,f.old1);}
++ if(defect==='missing-changed-carrier')f.payload.carriers.pop();
++ if(defect==='caller-state')f.payload.creation_state='research/fake-state.json';
++ assert.throws(f.record);assert.equal(existsSync(join(f.root,dir,'initial-1-owner-metadata-history.json')),false);
++});
++test('v2 keeps native rows historical, actual post current, and queues every changed draft for real 5.2 review',t=>{
++ const f=fixture(t),nativeBytes=readFileSync(join(f.root,f.rp),'utf8');f.record();const result=collect(f.root,run,'initial',1);
++ assert.deepEqual(result.metadata_history_current_review_targets,[nativeId,unassigned]);assert.equal(result.post[nativeId],itemHashGuard(f.nativeAfter));assert.equal(result.post[unassigned],itemHashGuard(f.unassignedAfter));assert.deepEqual(result.historical_metadata_reviews,[f.report.reviews[0]]);assert.equal(result.reviews.some(v=>v.id===nativeId),false);assert.equal(result.reviews.some(v=>v.id===unassigned),false);assert.deepEqual(result.decisions,f.report.decisions);assert.equal(readFileSync(join(f.root,f.rp),'utf8'),nativeBytes);
++ const pack=prepareImpact(f.root,run,'impact-initial',1);assert.ok(Object.values(pack.assignments).flat().includes(nativeId));assert.ok(Object.values(pack.assignments).flat().includes(unassigned));assert.deepEqual(pack.metadata_history_current_review_targets,[nativeId,unassigned]);
++});
+--- a/tools/step5-initial-metadata-history.md
++++ b/tools/step5-initial-metadata-history.md
+@@ -84,3 +84,30 @@
+ Installation changes the workflow's static imports. Restart the controller
+ and workflow host in fresh processes at the real paused/drained boundary
+ before resuming. No native history or frozen pack is rewritten to load code.
++
++## Opt-in version 2: computed draft dependency levels
++
++Version 1 remains the sole hardcoded Box–Muller route above. An explicit payload `version:2` instead supplies nonempty `source_levels` (and no `source_level`):
++
++```json
++{
++  "version": 2,
++  "reason": "ACTUAL OWNER EXPLANATION OF THE COMPUTED METADATA DEFECT",
++  "carriers": [{"path":"research/RUN-batch-N.pages.json","before_file":"research/EXACT-NATIVE-MANIFEST.json"}],
++  "source_levels": [{"id":"EXISTING_DRAFT_ID","before":9,"after":2,"before_file":"research/EXACT-FULL-PREEDIT-SOURCE.md","historical_basis":"native-post"}]
++}
++```
++
++The recorder captures all complete current in-run sources and every current run manifest itself, plus actual paused/drained 5.1 state/request, frozen initial pack/frontier/baseline/verdicts and every successful original handoff. Callers cannot supply creation or current-graph archives. No initial collection or impact freeze/dispatch may exist. Numeric values and counts above illustrate fields, never authorize edits.
++
++Every listed source must be a true draft with unchanged ID/kind and every byte unchanged except one canonical top-level `dependency_level: INTEGER` numeric substitution. Both values are distinct nonnegative integers and the new value must equal the ordinary computed dependency level. Published source labels are expressly excluded: they require ordinary recorded published repair policy and the published-maintenance bridge. No body, Statement, Definition, deps, title, provenance, verification or other source edit is authorized by this adapter.
++
++`historical_basis:native-post` requires the full before source guard to equal the unique actually assigned original native report post and immutable final-output post; disposition, context hash and explicit uncertainty must agree. `historical_basis:baseline-keep` requires no original assignment or review, exact initial/baseline guard and the unique unchanged accepted Luna verdict. It creates no original review or rejection. The complete current draft graph must match these original post/baseline guards except the explicitly listed numeric substitutions; omitted numeric changes and unrelated current draft source changes fail closed.
++
++The complete source/manifest graph retains the original frozen item inventory and all original units. Every current source and manifest label must agree with the computed acyclic in-run dependency graph. Corrected manifests retain exact page/item identities, kind and other fields. Only current-source-backed title/deps/level mirrors may change. An actual nonempty `justified_by` mirror may additionally be corrected for a draft whose complete source is authenticated by its exact assigned original report/final native post (or numeric preimage). This reflects already-authored native source metadata; it never authors a new logical edge. Existing absent/empty optional justification mirrors are semantically empty and should remain untouched. Null/type/nonempty mismatches are not normalized.
++
++Every original native supporting manifest hash must match its preserved full before archive, including absolute native evidence paths. Missing changed carriers or forged preimages fail. Historical lookups retain these exact archives after later native work without pinning the live graph forever. All nonempty units additionally bind original prompt/log bytes and the exact immutable final-message identity; no session journal payload is consumed.
++
++Collection returns `historicalGuards` only for these drafts, preserves genuine original review rows in `historical_metadata_reviews`, and supplies no new current review. Unassigned baseline items have no invented historical row. The collection post remains actual current source bytes; existing decisions and repair counters retain their original meaning. Every changed draft ID is queued in `metadata_history_current_review_targets` for ordinary fresh native 5.2 review, certification, Sol judgment and gates, even though no public mathematical interface changed.
++
++When published repairs also change mirrors in the same manifest, preserve layering: keep original native manifests for this v2 history, apply draft-only mirrors, archive that intermediate state as the published bridge's metadata preimage, then apply only the authenticated published mirrors. Both receipts capture the same final complete current graph. This v2 carrier may span original-native to final source-backed mirrors; the published carrier remains strictly published-only. Do not overwrite historical pins or rewrite old reports.
+--- a/tools/step5-initial-metadata-history.mjs
++++ b/tools/step5-initial-metadata-history.mjs
+@@ -20,7 +20,7 @@
+ }
+ function validate(root,run,row,{current=false,receiptBytes=null}={}){
+   const {sha256,...payload}=row,path=initialMetadataHistoryPath(root,run);
+-  need(sha256===sha(payload)&&row.version===1&&row.kind==='owner-initial-metadata-history'
++  need(sha256===sha(payload)&&[1,2].includes(row.version)&&row.kind==='owner-initial-metadata-history'
+     &&row.run===run&&row.phase==='initial'&&row.round===1&&row.authorized_by==='owner'
+     &&row.owner_identity==='/root'&&row.historical_only===true&&row.current_review_granted===false
+     &&row.native_execution_coverage_adopted===false&&date(row.recorded_at)
+@@ -46,7 +46,11 @@
+     &&typeof request.id==='string'&&request.id.length>0&&request.group==='5.1-adjudicate'
+     &&same(request.stages,['5.1-adjudicate'])&&date(request.at)
+     &&Date.parse(request.at)<=Date.parse(row.recorded_at),'not the actual paused/drained native creation hold');
+-  const reports=[];
++  if(row.version===2)need(Array.isArray(frontier.batches)&&pack.units.length===frontier.batches.length
++    &&frontier.batches.every(b=>pack.units.includes(String(b.id)))&&same(pack.frontier_ids,frontier.ids),
++    'v2 requires every original frozen unit');
++  const verdicts=row.version===2?bound(join(dir,'step4-verdicts.json')):null;
++  const reports=[],nativeOutputs=new Map();
+   for(const unit of pack.units){
+     const label=`step5-v2-initial-r1-u${unit}`,rp=join(dir,`${label}.json`),report=bound(rp);
+     need(report.run===run&&report.phase==='initial'&&report.round===1&&String(report.unit)===unit
+@@ -73,13 +77,23 @@
+         &&Date.parse(observed.startedAt)<=Date.parse(native.started_at)
+         &&Date.parse(native.started_at)<=Date.parse(native.ended_at),'not genuine completed native Sol initial work');
+       need(same(native,bound(dp.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`))),'native immutable attempt mismatch');
++      if(row.version===2){
++        const stem=dp.replace(/\.result\.json$/,`.attempt-${native.attempt}`),logPath=stem+'.log',promptPath=stem+'.prompt.md';
++        need(resolve(root,native.log??'')===logPath&&resolve(root,native.prompt??'')===promptPath,'v2 wrong native log/prompt identity');
++        const log=bytes(logPath),prompt=bytes(promptPath),end=log.lastIndexOf('\ntokens used\n'),start=log.lastIndexOf('\ncodex\n',end);
++        need(start>=0&&end>start&&prompt.includes(`run: ${run}\nrole: alpha-adjudicate\nlabel: ${label}\ncovers: ${unit}\noutput: ${relative(root,rp)}\n`)
++          &&prompt.includes(`input_sha256:"${sha(pack)}"`),'v2 native final output identity missing');
++        const output=JSON.parse(log.slice(start+7,end).trim());
++        need(output.run===run&&output.phase==='initial'&&output.round===1&&String(output.unit)===unit&&output.input_sha256===sha(pack),'v2 wrong immutable native final identity');
++        nativeOutputs.set(unit,output);
++      }
+     }
+   }
+   // Authenticate complete repair-time source/manifest graph from immutable
+   // archives. Later history reads do not require the live graph to stay frozen.
+   const expectedNames=readdirSync(join(root,'research')).filter(n=>new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(n)).sort();
+   need(Array.isArray(row.manifests)&&same(row.manifests.map(x=>x.path.split('/').pop()).sort(),expectedNames),'incomplete actual run manifest graph');
+-  const graphPages=[],sourceById=new Map(),manifestByPath=new Map();
++  const graphPages=[],sourceById=new Map(),manifestByPath=new Map(),manifestBytes=new Map();
+   need(Array.isArray(row.sources)&&new Set(row.sources.map(x=>x.id)).size===row.sources.length,'invalid source archive inventory');
+   for(const source of row.sources){
+     need(source.path===`items/${source.id}.md`,'wrong archived source identity');
+@@ -87,32 +101,60 @@
+     need(fm?.id===source.id,'invalid archived source frontmatter');sourceById.set(source.id,{fm,text});
+     if(current)need(readFileSync(join(root,source.path),'utf8')===text,'live source differs from repair-time graph '+source.id);
+   }
++  const exactNativePost=(id,guard)=>{const rows=reports.flatMap(report=>(report.reviews??[]).filter(v=>v.id===id).map(review=>({report,review})));
++    if(rows.length!==1)return false;const {report,review}=rows[0],out=nativeOutputs.get(String(report.unit)),summaries=(out?.reviews??[]).filter(v=>v.id===id);
++    return pack.assignments[String(report.unit)]?.some(v=>(typeof v==='string'?v:v.id)===id)
++      &&['repaired','unaffected'].includes(review.disposition)&&review.uncertain===false&&review.post_sha256===guard
++      &&summaries.length===1&&summaries[0].disposition===review.disposition&&summaries[0].post_sha256===guard
++      &&summaries[0].review_context_sha256===review.review_context_sha256&&summaries[0].uncertain===false;
++  };
++  const optionalJustification=(a,b)=>same(a,b)||((a===undefined||Array.isArray(a)&&!a.length)&&(b===undefined||Array.isArray(b)&&!b.length));
+   for(const manifest of row.manifests){
+     need(new RegExp(`^research/${run}-batch-\\d+\\.pages\\.json$`).test(manifest.path),'foreign manifest');
+     const text=bytes(manifest.archive),pages=JSON.parse(text);need(Array.isArray(pages),'invalid archived manifest');
+-    graphPages.push(...pages);manifestByPath.set(manifest.path,pages);
++    graphPages.push(...pages);manifestByPath.set(manifest.path,pages);manifestBytes.set(manifest.path,text);
+     if(current)need(readFileSync(join(root,manifest.path),'utf8')===text,'live manifest differs from corrected graph');
+     for(const page of pages)for(const item of page.items??[]){
+       const s=sourceById.get(item.id)?.fm;
+       need(s&&same(item.kind,s.kind)&&same(item.title,s.title)&&Array.isArray(item.deps)&&Array.isArray(s.deps)
+-        &&same([...item.deps].sort(),[...s.deps].sort())&&item.dependency_level===s.dependency_level,'not a source-to-manifest metadata mirror '+item.id);
++        &&same([...item.deps].sort(),[...s.deps].sort())&&item.dependency_level===s.dependency_level
++        &&(row.version!==2||optionalJustification(item.justified_by,s.justified_by)),'not a source-to-manifest metadata mirror '+item.id);
+     }
+   }
+   const graph=dependencyLevels(graphPages);
+   need(!graph.errors.length&&graph.items.size===sourceById.size
+     &&same([...graph.items.keys()].sort(),[...sourceById.keys()].sort()),'invalid complete repaired in-run dependency graph');
+-  const seen=new Set();need(Array.isArray(row.carriers)&&row.carriers.length>0,'missing manifest corrections');
++  if(row.version===2)need(same([...graph.items.keys()].sort(),[...frontier.ids].sort()),'v2 repaired graph differs from full original frontier');
++  const seen=new Set();need(Array.isArray(row.carriers)&&(row.version===2||row.carriers.length>0),'missing manifest corrections');
+   for(const carrier of row.carriers){
+     need(!seen.has(carrier.path)&&manifestByPath.has(carrier.path),'duplicate or foreign corrected manifest');seen.add(carrier.path);
+     const before=bound(carrier.before_file),after=manifestByPath.get(carrier.path),copy=structuredClone(before);let count=0;
+     need(same(before.map(p=>[p.id,p.items.map(x=>x.id)]),after.map(p=>[p.id,p.items.map(x=>x.id)])),'manifest page/item inventory changed');
+-    for(let p=0;p<copy.length;p++)for(let i=0;i<copy[p].items.length;i++)for(const field of ['title','deps','dependency_level']){
+-      if(!same(copy[p].items[i][field],after[p].items[i][field])){copy[p].items[i][field]=after[p].items[i][field];count++;}
++    for(let p=0;p<copy.length;p++)for(let i=0;i<copy[p].items.length;i++)for(const field of (row.version===2?['title','deps','dependency_level','justified_by']:['title','deps','dependency_level'])){
++      if(!same(copy[p].items[i][field],after[p].items[i][field])){
++        if(field==='justified_by'){
++          const id=copy[p].items[i].id,source=sourceById.get(id),label=row.source_levels?.find(x=>x.id===id);
++          need(source.fm.status==='draft'&&Array.isArray(source.fm.justified_by)&&source.fm.justified_by.length>0
++            &&same(after[p].items[i][field],source.fm.justified_by)
++            &&exactNativePost(id,itemHashGuard(label?bytes(label.before_file):source.text)),
++            'v2 justification mirror lacks exact original native source post');
++        }
++        copy[p].items[i][field]=after[p].items[i][field];count++;
++      }
+     }
+     need(count>0&&same(copy,after),'manifest repair changed more than source title/deps/level mirrors');
+     for(const report of reports)if(Object.hasOwn(report.supporting_evidence??{},carrier.path))
+       need(report.supporting_evidence[carrier.path]===sha(bytes(carrier.before_file)),'manifest preimage is not actual native supporting bytes');
+-  }
++    if(row.version===2)for(const report of reports)for(const [file,hash]of Object.entries(report.supporting_evidence??{}))
++      if(resolve(root,file)===resolve(root,carrier.path))need(hash===sha(bytes(carrier.before_file)),'v2 manifest preimage differs from exact absolute/relative native supporting bytes');
++  }
++  if(row.version===2)for(const report of reports)for(const [file,expected]of Object.entries(report.supporting_evidence??{})){
++    const canonical=relative(root,resolve(root,file));if(!manifestBytes.has(canonical)||sha(manifestBytes.get(canonical))===expected)continue;
++    const carrier=row.carriers.find(c=>c.path===canonical);
++    need(carrier&&sha(bytes(carrier.before_file))===expected,'v2 missing exact historical supporting manifest carrier '+canonical);
++  }
++  let historicalGuards,sourceIds,historicalReviews;
++  if(row.version===1){
+   const label=row.source_level;
+   need(label?.id==='ex-box-muller-finite-midpoint-tail'&&label.before===2&&label.after===1
+     &&sourceById.has(label.id)&&graph.levels.get(label.id)===1,'not the sole authorized computed label correction');
+@@ -124,11 +166,57 @@
+     &&originals[0].review.post_sha256===itemHashGuard(before)&&itemHashGuard(before)!==pack.before[label.id]
+     &&originals[0].report.decisions.some(x=>x.id===label.id&&x.outcome==='confirmed_nonfatal'&&x.uncertain===false)
+     &&baseline[label.id]===pack.before[label.id],'sole label lacks its genuine exact historical repair review');
++  historicalGuards={[label.id]:itemHashGuard(before)};sourceIds=[label.id];historicalReviews=originals.map(x=>x.review);
++  }else{
++    need(!Object.hasOwn(row,'source_level')&&Array.isArray(row.source_levels)&&row.source_levels.length>0,
++      'v2 requires explicit draft numeric source_levels');
++    historicalGuards={};sourceIds=[];const changed=new Set();
++    for(const label of row.source_levels){
++      need(typeof label.id==='string'&&!changed.has(label.id)&&sourceById.has(label.id)
++        &&Number.isSafeInteger(label.before)&&label.before>=0&&Number.isSafeInteger(label.after)&&label.after>=0
++        &&label.before!==label.after&&graph.levels.get(label.id)===label.after,'v2 duplicate/invalid/noncomputed numeric label');changed.add(label.id);
++      const before=bytes(label.before_file),after=sourceById.get(label.id).text,oldFm=yaml().parse(split(before).fm),fm=sourceById.get(label.id).fm;
++      const lines=[...before.matchAll(/^dependency_level: (0|[1-9]\d*)$/gm)];
++      need(oldFm?.id===label.id&&oldFm.status==='draft'&&fm.status==='draft'&&oldFm.kind===fm.kind
++        &&oldFm.dependency_level===label.before&&fm.dependency_level===label.after
++        &&lines.length===1&&Number(lines[0][1])===label.before
++        &&before.replace(lines[0][0],`dependency_level: ${label.after}`)===after,
++        'v2 source changed beyond one numeric dependency_level or is not a true draft');
++      const guard=itemHashGuard(before),originals=reports.flatMap(report=>(report.reviews??[]).filter(x=>x.id===label.id).map(review=>({report,review})));
++      if(label.historical_basis==='native-post'){
++        need(originals.length===1,'v2 numeric label lacks unique original native post');
++        const {report,review}=originals[0],output=nativeOutputs.get(String(report.unit));
++        const summaries=(output?.reviews??[]).filter(x=>x.id===label.id);
++        need(pack.assignments[String(report.unit)]?.some(x=>(typeof x==='string'?x:x.id)===label.id)
++          &&['repaired','unaffected'].includes(review.disposition)&&review.uncertain===false&&review.post_sha256===guard
++          &&summaries.length===1&&summaries[0].disposition===review.disposition&&summaries[0].post_sha256===guard
++          &&summaries[0].review_context_sha256===review.review_context_sha256&&summaries[0].uncertain===false,
++          'v2 historical source is not the exact assigned native report/final-output post guard');
++      }else{
++        const matches=verdicts.filter(v=>v.id===label.id);
++        need(label.historical_basis==='baseline-keep'&&originals.length===0
++          &&Object.values(pack.assignments).every(rows=>rows.every(x=>(typeof x==='string'?x:x.id)!==label.id))
++          &&guard===baseline[label.id]&&pack.before[label.id]===baseline[label.id]
++          &&matches.length===1&&matches[0].model==='gpt-6-luna'&&matches[0].keep===true,
++          'v2 unassigned label lacks its unchanged original baseline and accepted Luna verdict');
++      }
++      need(typeof baseline[label.id]==='string'&&pack.before[label.id]===baseline[label.id],'v2 source is outside original baseline');
++      historicalGuards[label.id]=guard;sourceIds.push(label.id);
++    }
++    for(const [id,source]of sourceById)if(source.fm.status==='draft'){
++      const rows=reports.flatMap(report=>(report.reviews??[]).filter(review=>review.id===id));
++      need(rows.length<=1,'v2 graph has ambiguous original draft review posts');
++      const expected=rows.length?rows[0].post_sha256:pack.before[id];
++      need(typeof expected==='string'&&(itemHashGuard(source.text)===expected||changed.has(id)),
++        'v2 omits a changed draft source or includes unrelated current source changes '+id);
++    }
++    historicalReviews=reports.flatMap(report=>(report.reviews??[]).filter(review=>changed.has(review.id)));
++  }
+   // The archived state is historical-only on later reads. The first collection
+   // also requires real live drained 5.1 or pre-dispatch 5.2 currency.
+   if(current){beforeImpact(root,run);const live=read(join(root,'.autopilot',run,'state.json'));
+     need(live.run===run&&stateDrained(live)&&['5.1-adjudicate','5.2-impact'].includes(live.stage),'wrong live initial collection boundary');}
+-  return {path,evidence,historicalGuards:{[label.id]:itemHashGuard(before)},sourceIds:[label.id],historicalReviews:originals.map(x=>x.review),row};
++  return {path,evidence,historicalGuards,sourceIds,historicalReviews,row};
+ }
+ export function loadInitialMetadataHistory(root,run,options={}){
+   const path=initialMetadataHistoryPath(root,run);return existsSync(path)?validate(root,run,read(path),options):null;
+@@ -147,6 +235,9 @@
+   const stateBytes=readFileSync(statePath,'utf8'),requestBytes=readFileSync(requestPath,'utf8');
+   const state=JSON.parse(stateBytes);need(state.run===run&&state.stage==='5.1-adjudicate'&&state.paused===true&&stateDrained(state),'recording requires actual paused drained 5.1');beforeImpact(root,run);
+   need(!existsSync(join(root,'research',`${run}-step5-v2`,'initial-1-collected.json')),'original initial collection already exists');
++  const version=payload.version===2?2:1;
++  if(version===2)need(!Object.hasOwn(payload,'source_level')&&Array.isArray(payload.source_levels)
++    &&['creation_state','owner_gate_request','manifests','sources'].every(k=>!Object.hasOwn(payload,k)),'v2 caller cannot supply creation/current graph archives');
+   const bindings={...payload.bindings},store=(name,bytes)=>{
+     const path=join(base(root,run),name);mkdirSync(resolve(path,'..'),{recursive:true});
+     if(existsSync(path))need(readFileSync(path,'utf8')===bytes,'immutable archive conflict '+path);else writeFileSync(path,bytes,{flag:'wx'});
+@@ -164,14 +255,14 @@
+   for(const name of ['initial-1.json','frontier.json','baseline.json','step4-verdicts.json'])bind(join(dir,name));
+   for(const unit of pack.units){const label=`step5-v2-initial-r1-u${unit}`,rp=join(dir,label+'.json');bind(rp);const report=read(rp);
+     const dp=join(root,'research',`${run}-dispatch`,`${report.completion==='mechanical-zero-work'?'tool-step5-v2-empty-initial-r1-u'+unit:'alpha-adjudicate-'+label}.result.json`);bind(dp);
+-    const native=read(dp);if(report.completion!=='mechanical-zero-work')bind(dp.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`));}
+-  for(const file of [...payload.carriers.map(x=>x.before_file),payload.source_level.before_file])bind(resolve(root,file));
+-  const row={...payload,version:1,kind:'owner-initial-metadata-history',run,phase:'initial',round:1,authorized_by:'owner',owner_identity:'/root',historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false,recorded_at:new Date().toISOString(),creation_state,owner_gate_request,owner_gate_request_id:read(requestPath).id,manifests,sources,bindings};
++    const native=read(dp);if(report.completion!=='mechanical-zero-work'){bind(dp.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`));if(version===2){bind(resolve(root,native.log));bind(resolve(root,native.prompt));}}}
++  for(const file of [...payload.carriers.map(x=>x.before_file),...(version===2?payload.source_levels:[payload.source_level]).map(x=>x.before_file)])bind(resolve(root,file));
++  const row={...payload,version,kind:'owner-initial-metadata-history',run,phase:'initial',round:1,authorized_by:'owner',owner_identity:'/root',historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false,recorded_at:new Date().toISOString(),creation_state,owner_gate_request,owner_gate_request_id:read(requestPath).id,manifests,sources,bindings};
+   const receipt={...row,sha256:sha(row)},target=initialMetadataHistoryPath(root,run);
+   const receiptBytes=JSON.stringify(receipt,null,2)+'\n';
+   validate(root,run,receipt,{current:true,receiptBytes});
+   need(readFileSync(statePath,'utf8')===stateBytes&&readFileSync(requestPath,'utf8')===requestBytes,
+     'native state or request changed during owner recording');
+   need(!existsSync(target),'metadata history receipt already exists');writeFileSync(target,receiptBytes,{flag:'wx'});
+-  return {path:target,historical_only:true,current_review_targets:[payload.source_level.id]};
+-}
++  return {path:target,historical_only:true,current_review_targets:(version===2?payload.source_levels:[payload.source_level]).map(x=>x.id)};
++}

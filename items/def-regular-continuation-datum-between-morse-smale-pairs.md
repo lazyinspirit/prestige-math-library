@@ -5,9 +5,9 @@ title: "A regular continuation datum between Morse--Smale pairs"
 status: published
 origin: pipeline
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: [def-morse-smale-pair, def-downward-gradient-like-vector-field, def-riemannian-gradient-of-a-smooth-function, def-time-dependent-vector-field-and-evolution-operator, def-smooth-family-of-maps-and-evaluation-map, thm-sard-smale-residual-regular-values-for-fredholm-maps, def-fredholm-maps-and-regular-values-on-countable-banach-manifolds, lem-universal-metric-trajectory-projection-is-fredholm, def-nowhere-dense-meagre-and-residual-subsets, def-parametrized-morse-trajectory-space, def-morse-trajectory-from-p-to-q, def-nondegenerate-critical-point-nullity-index-and-coindex, def-axiom-of-choice, lem-first-order-asymptotically-hyperbolic-operator-is-fredholm, thm-local-stable-unstable-manifolds-for-hyperbolic-gradient-critical-points, thm-time-dependent-vector-fields-have-local-smooth-evolution-operators, thm-transverse-fibre-product-theorem, thm-parametric-transversality, def-countable-choice]
+deps: [ def-morse-smale-pair, def-downward-gradient-like-vector-field, def-riemannian-gradient-of-a-smooth-function, def-time-dependent-vector-field-and-evolution-operator, def-smooth-family-of-maps-and-evaluation-map, thm-sard-smale-residual-regular-values-for-fredholm-maps, def-fredholm-maps-and-regular-values-on-countable-banach-manifolds, lem-universal-metric-trajectory-projection-is-fredholm, def-nowhere-dense-meagre-and-residual-subsets, def-parametrized-morse-trajectory-space, def-morse-trajectory-from-p-to-q, def-nondegenerate-critical-point-nullity-index-and-coindex, def-axiom-of-choice, lem-first-order-asymptotically-hyperbolic-operator-is-fredholm, thm-local-stable-unstable-manifolds-for-hyperbolic-gradient-critical-points, thm-time-dependent-vector-fields-have-local-smooth-evolution-operators, thm-transverse-fibre-product-theorem, thm-parametric-transversality, def-countable-choice ]
 justified_by: []
 dependency_level: 0
 sources:
@@ -26,6 +26,7 @@ sources:
       locator: "Lecture 21, Sec. 1.2, Approach 2: the vector field V, the moduli spaces m^V and the dimension formula, p. 2 of the lecture"
 verification:
   precheck: n/a
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/def-regular-continuation-datum-between-morse-smale-pairs.json
 ---
 
 ## Definition
@@ -86,8 +87,9 @@ spaces spanning $T_yM$
 ([[lem-first-order-asymptotically-hyperbolic-operator-is-fredholm]]).
 These spaces are exactly $d\Psi_{S,-S}(T_xW^u_-(p))$ and $T_yW^s_+(q)$.
 Thus regularity is transversality of this fibre product; it makes
-$\mathcal C(p,q)$ a smooth manifold of dimension
-$\operatorname{ind}(p)-\operatorname{ind}(q)$, empty for negative dimension
+$\mathcal C(p,q)$ a smooth manifold, possibly empty. When nonempty its dimension
+is $\operatorname{ind}(p)-\operatorname{ind}(q)$; a negative index difference
+forces $\mathcal C(p,q)=\varnothing$
 ([[thm-transverse-fibre-product-theorem]]). No translation quotient is taken,
 even for the constant datum, for which translations happen to be symmetries.
 

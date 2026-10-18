@@ -7,14 +7,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-the-dimension-of-an-object-relative-to-a-pivotal-structure]
+deps: [def-the-dimension-of-an-object-relative-to-a-pivotal-structure, def-tensor-and-multitensor-category]
 verification:
-  audited: 2026-09-04
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-page-cycle-repair/def-spherical-published-repair.json
 sources:
   scraped: []
   references:

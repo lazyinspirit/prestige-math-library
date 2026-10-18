@@ -1,0 +1,29 @@
+diff --git a/tools/step5-workflow.mjs b/tools/step5-workflow.mjs
+index 0f92d93df9..0f55c9af56 100644
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -12,6 +12,7 @@ import { itemHashGuard } from './item-hash.mjs';
+ import { currentHashesMany } from './step5-terminal-resolution.mjs';
+ import { MODELS } from './models.mjs';
+ import { supportingQuoteHistory } from './step5-quote-history.mjs';
++import { supportingSiblingContractHistory } from './step5-sibling-contract-history.mjs';
+ import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+ import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
+ import { createdMaintenanceBasis } from './step5-created-maintenance-cert.mjs';
+@@ -196,6 +197,7 @@ function repairedRun44LedgerHistory(history,path,expected) {
+ // This run's recovery binds exact historical bytes to unchanged native reports;
+ // it supplies no current-source review or gate coverage.
+ function supportingMetadataHistory(history,path,expected) {
++  const siblings = supportingSiblingContractHistory(history,path,expected); if (siblings) return siblings;
+   const quotes = supportingQuoteHistory(history,path,expected);
+   if (quotes) return quotes;
+   const metadata = initialMetadataSupportingHistory(history,path,expected);
+@@ -319,7 +321,7 @@ function frozenSupportingEvidence(root,run,supporting) {
+     if(existsSync(archive))requireValue(readFileSync(archive,'utf8')===bytes,'immutable supporting metadata conflict');
+     else writeFileSync(archive,bytes,{flag:'wx'});
+     evidence[archive]=hash;
+-    if(history)evidence[history.marker]=digest(readFileSync(history.marker,'utf8'));
++    if(history){evidence[history.marker]=digest(readFileSync(history.marker,'utf8'));Object.assign(evidence,history.evidence??{});}
+   }
+   return evidence;
+ }

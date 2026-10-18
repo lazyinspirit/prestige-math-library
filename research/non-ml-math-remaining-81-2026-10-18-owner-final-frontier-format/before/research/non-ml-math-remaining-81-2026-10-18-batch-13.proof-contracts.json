@@ -1,0 +1,4277 @@
+{
+  "version": 1,
+  "scope": [
+    "def-parallel-gaussian-channel-with-power-constraint",
+    "lem-cost-pruned-random-code",
+    "lem-density-channel-threshold-random-coding-bound",
+    "lem-finite-simplex-entropy-continuity-and-concavity",
+    "lem-gaussian-maximum-differential-entropy-under-variance",
+    "lem-jensen-for-integrable-cost-random-variable",
+    "lem-standard-normal-fourth-moment",
+    "lem-water-filling-optimal-allocation",
+    "def-countable-dmc-zero-cost-information-capacity",
+    "def-parallel-awgn-feedback-code",
+    "lem-gaussian-noise-orthogonalization",
+    "lem-parallel-awgn-single-use-information-bound",
+    "lem-parallel-awgn-information-density-convergence",
+    "def-finite-dmc-cost-model",
+    "lem-parallel-awgn-cost-constrained-achievability",
+    "def-cost-constrained-dmc-code-and-capacity",
+    "def-finite-dmc-feedback-code",
+    "lem-cost-constrained-dmc-information-capacity-properties",
+    "lem-finite-message-fano-for-density-observation",
+    "lem-cost-constrained-dmc-achievability",
+    "lem-cost-constrained-dmc-mutual-information-under-average-cost",
+    "thm-parallel-awgn-feedback-capacity-water-filling",
+    "thm-cost-constrained-dmc-capacity-formula",
+    "cor-inactive-dmc-cost-constraint-recovers-capacity",
+    "thm-feedback-does-not-increase-cost-constrained-dmc-capacity",
+    "ex-countable-input-channel-finite-capacity-supremum-not-attained",
+    "ex-correlated-gaussian-noise-orthogonal-reduction",
+    "ex-two-branch-awgn-water-filling",
+    "ex-binary-identity-channel-with-cost-and-feedback"
+  ],
+  "contracts": {
+    "def-parallel-gaussian-channel-with-power-constraint": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-message, one-coordinate, or singleton case is included in Definition or the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is covered in Statement or the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in Definition; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "Definition"
+          ],
+          "reason": "AC is inherited from the multivariate-normal construction; no additional choice is used by the channel definition."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-cost-pruned-random-code": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then $$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$, $$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$ For $n=0$ both sides are $0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $q_n+a_n=0$, nonnegativity implies $B_n=\\bar\\varepsilon_n=0$ almost surely, so a realization has both equal to zero. If $q_n+a_n>0$, put $s_n=\\sqrt{q_n+a_n}<1$. By [F1], $\\Pr[B_n>s_n]\\le q_n/s_n$ and $\\Pr[\\bar\\varepsilon_n>s_n]\\le a_n/s_n$. The union bound [F2] makes the probability of either failure at most $s_n<1$, so a realization exists with both quantities at most $s_n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "cases",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Retain exactly the codewords in that realization whose normalized cost is at most $\\Gamma$, and let $M'$ be their number. Since $B_n\\le s_n$, $M'\\ge M(1-s_n)>0$. Change the decoder only by mapping decisions for removed messages to one fixed retained message. An originally correct decision for a retained message is unchanged, so its error probability cannot increase; hence the retained average error is at most $M\\bar\\varepsilon_n/M'\\le s_n/(1-s_n)$. Each retained word satisfies the cost constraint by construction.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $q_n+a_n\\to0$ along blocklengths, then $s_n\\to0$ and $\\ln M'/n\\ge\\ln M/n+\\ln(1-s_n)/n$. Since $\\ln(1-s_n)\\to0$, the rate loss tends to zero; the error bound in step 2.1 also tends to zero. The conclusion is per blocklength, so no sequence of witnesses is selected in this lemma.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-message, one-coordinate, or singleton case is included in 1.1 or the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is covered in 1.1 or the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The equality cases are addressed in 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The equality cases are addressed in 3.1."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "The statement is per blocklength and makes no sequence-wide selections; no choice axiom is used."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-density-channel-threshold-random-coding-bound": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to [0,\\infty]$ be",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces. Then: 1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then $$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-union-bound",
+          "source_section": "Statement",
+          "quote": "For every finite family of events $A_0,\\ldots,A_{n-1}$, $$\\mathbb P\\!\\left(\\bigcup_{i<n}A_i\\right)\\le\\sum_{i<n}\\mathbb P(A_i).$$ For $n=0$ both sides are $0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Draw $M$ codewords independently from $P_X^{\\otimes n}$. For a received $y^n$, declare message $m$ if it is the unique codeword whose information density exceeds $\\ln(M-1)+\\tau$; if there is no unique such message, output a fixed default. Conditional on the transmitted word, an error is contained in the event that its information density fails the threshold or that some independent competing word passes it. The natural-log threshold uses [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The first event has probability exactly the miss probability in the Statement. For one competing word $\\bar X^n$ independent of $Y^n$, the latter has density $q^{\\otimes n}$ under the ensemble. The nonnegative likelihood ratio $L:=\\prod_t w(Y_t\\mid\\bar X_t)/q(Y_t)$ has expectation\n$$\\mathbb EL=\\int P_X^{\\otimes n}(d\\bar x^n)\\int q^{\\otimes n}(y^n)\\frac{w^{\\otimes n}(y^n\\mid\\bar x^n)}{q^{\\otimes n}(y^n)}\\,d\\nu^{\\otimes n}(y^n)=1$$\nby [F1, F2] and normalization of each channel row.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If a competitor passes, [F3] makes $L>(M-1)e^\\tau$, hence the event is contained in $\\{L\\ge(M-1)e^\\tau\\}$. Markov's integral inequality [F4] bounds this probability by $e^{-\\tau}/(M-1)$. The finite union bound [F5] over the $M-1$ competitors contributes at most $e^{-\\tau}$. Combining this with the miss event in step 1.1 proves the asserted bound on ensemble expected average error.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Averaging over the transmitted message and the random codebook gives expected average error at most the displayed bound from steps 1.1 and 2.1. A nonnegative random variable has some value no greater than its expectation; otherwise its expectation would be strictly larger. Selecting such a codebook proves the deterministic-code assertion.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-message, one-coordinate, or singleton case is included in 1.1 or the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is covered in 1.1 or the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The relevant endpoint or threshold is checked in 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; the conclusion is an existential statement for one fixed blocklength."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-finite-simplex-entropy-continuity-and-concavity": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-slower-than-every-positive-power",
+          "source_section": "Statement",
+          "quote": "For every $\\alpha>0$, $$\\lim_{x\\to+\\infty}\\frac{\\log x}{x^\\alpha}=0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and $$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-second-derivative-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "If $f:I\\to\\mathbb R$ is twice differentiable on an open interval, then $f$ is convex if and only if $f''(x)\\ge0$ for",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $h(t)=-t\\ln t$ for $0<t\\le1$ and $h(0)=0$. With $s=1/t$, $|t\\ln t|=\\ln(s)/s\\to0$ as $t\\downarrow0$ by [F1] and [F2]; hence $h$ is continuous on $[0,1]$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $(0,1)$, [F3] gives $h''(t)=-1/t<0$, so [F4] makes $h$ concave there. For $u,v\\in[0,1]$ and $0<\\epsilon<1$, replace each endpoint by $u_\\epsilon=(1-\\epsilon)u+\\epsilon/2$ and $v_\\epsilon=(1-\\epsilon)v+\\epsilon/2$. Concavity on $(0,1)$ applies to these interior points; taking $\\epsilon\\downarrow0$ and using step 1.1 gives the concavity inequality on the closed interval.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $p,q\\in\\Delta_m$ and $0\\le\\theta\\le1$, apply the concavity inequality for $h$ to each coordinate $\\theta p_i+(1-\\theta)q_i$. Summing the $m$ inequalities gives $H(\\theta p+(1-\\theta)q)\\ge\\theta H(p)+(1-\\theta)H(q)$. Continuity of $H$ follows from continuity of the finite sum of the coordinate functions $h$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each summand $-p_i\\ln p_i$ is nonnegative because $0\\le p_i\\le1$, so $H(p)\\ge0$. The average of the $m!$ coordinate permutations of $p$ is the uniform vector $u=(1/m,\\ldots,1/m)$, and each permutation has entropy $H(p)$. Concavity from step 3.1, iterated over this finite average, gives $H(u)\\ge H(p)$. Since $H(u)=\\ln m$, the claimed upper bound follows, including $m=1$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; the proof is coordinatewise on a finite simplex."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-gaussian-maximum-differential-entropy-under-variance": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function >",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space ([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention of [[def-absolutely-continuous-with-respect-to-a-positive-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kullback-leibler-is-nonnegative",
+          "source_section": "Statement",
+          "quote": "Assume AC and use the directional convention of [[def-kullback-leibler-divergence]]. For probability measures $P,Q$ on one measurable space, $D(P\\|Q)\\ge0$, and $D(P\\|Q)=0$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure;",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$,",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space. - For $p>0$, the **$p$th absolute moment** of $X$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $q$ be the positive density in [F3]. Since $q(x)>0$ for every $x$, the law with density $p$ is absolutely continuous with respect to the Gaussian law. Its KL divergence is well-defined by [F1]. The absolute entropy-integrability hypothesis and finite second moment make each term in the following expansion integrable.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expanding $\\ln(p/q)$ and integrating gives $D(P_V\\|N(\\mu,v))=-h(V)+\\frac12\\ln(2\\pi v)+\\frac{\\mathbb E[(V-\\mu)^2]}{2v}=-h(V)+\\frac12\\ln(2\\pi e v)$. By [F2] this is nonnegative, proving the bound; equality holds exactly when the two laws coincide, again by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The equality cases are addressed in 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The equality cases are addressed in 2.1."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "reason": "AC is inherited from the measure-theoretic KL and Gaussian-law definitions; no selection beyond those interfaces is made."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-jensen-for-integrable-cost-random-variable": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-dedekind-complete",
+          "source_section": "Statement",
+          "quote": "**Least-upper-bound property.** Every nonempty set $S$ of Dedekind cuts that is bounded above (there is a cut $B$ with $A",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $m=\\mathbb E U$. If $m=a$, then $U-a\\ge0$ and $\\mathbb E(U-a)=0$, so $U=a$ almost surely and $\\mathbb E f(U)=f(a)=f(m)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $m>a$. For $y>m$ define $r(y)=(f(y)-f(m))/(y-m)$. Concavity applied to $a<m<y$ gives $r(y)\\le(f(m)-f(a))/(m-a)$, and the right-slope set is nonempty (take $y=m+1$) and bounded above; [F1] supplies its finite supremum $s$. For each $x$ with $a\\le x<m$ and each $y>m$, concavity at $x<m<y$ gives $(f(m)-f(x))/(m-x)\\ge r(y)$; taking the supremum over $y$ yields $(f(m)-f(x))/(m-x)\\ge s$. Therefore every $u\\ge a$ satisfies $f(u)\\le f(m)+s(u-m)$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The affine upper bound in step 1.2 is integrable because $U$ is integrable. Taking expectations gives $\\mathbb E f(U)\\le f(m)+s(\\mathbb E U-m)=f(m)$. Together with step 1.1 this proves the claim.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "reason": "No choice axiom is used; the proof constructs a supporting affine function from secant slopes."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-standard-normal-fourth-moment": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function >",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure;",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-substitution-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $J$ be intervals, possibly open at finite or infinite singular ends, and let $\\phi:I\\to J$ be a",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at every point of",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$, $$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$, $$\\exp^{(m)}=\\exp.$$ In particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $I_k:=\\int_{\\mathbb R}x^{2k}e^{-x^2/2}\\,dx$ for $k=0,1,2$. These integrals are finite: outside a bounded interval, $|x|^{2k}e^{-x^2/4}$ is bounded by [F3], while $e^{-x^2/4}$ is integrable by [F1] after scaling. Thus integration by parts on $[-R,R]$ is valid, and its polynomial-exponential boundary terms vanish as $R\\to\\infty$ by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $(e^{-x^2/2})'=-xe^{-x^2/2}$ by [F4], integration by parts gives $\\int_{-R}^R x^2e^{-x^2/2}\\,dx=[-xe^{-x^2/2}]_{-R}^R+\\int_{-R}^R e^{-x^2/2}\\,dx$ and $\\int_{-R}^R x^4e^{-x^2/2}\\,dx=[-x^3e^{-x^2/2}]_{-R}^R+3\\int_{-R}^R x^2e^{-x^2/2}\\,dx$. Letting $R\\to\\infty$, [F3] makes the boundary terms vanish and [F1] gives $I_1=I_0=\\sqrt{2\\pi}$ and $I_2=3I_1=3\\sqrt{2\\pi}$; integration against the standard-normal density gives $\\mathbb E[G_0^2]=1$ and $\\mathbb E[G_0^4]=3$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\sigma>0$, the definition of $N(0,\\sigma^2)$ is the law of $\\sigma G_0$, so $\\mathbb E[G^2]=\\sigma^2\\mathbb E[G_0^2]=\\sigma^2$ and $\\mathbb E[G^4]=\\sigma^4\\mathbb E[G_0^4]=3\\sigma^4$. If $\\sigma=0$, $G=0$ almost surely and both formulas hold. For finitely many independent coordinates, [F5] gives $\\mathbb E[G_i^2G_j^2]=\\mathbb E[G_i^2]\\mathbb E[G_j^2]<\\infty$; expanding the square of any finite linear combination of the $G_j^2$ proves that it has finite second moment.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 2.1",
+            "given",
+            "cases",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 2.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "reason": "AC is inherited from the published standard-normal law definition; the moment calculation itself is choice-free."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-water-filling-optimal-allocation": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and $$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be continuous on the closed",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-second-derivative-characterises-convexity",
+          "source_section": "Statement",
+          "quote": "If $f:I\\to\\mathbb R$ is twice differentiable on an open interval, then $f$ is convex if and only if $f''(x)\\ge0$ for",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $P=0$, feasibility forces every $p_j=0$, so the maximum is $0$. Suppose $P>0$ and define $g(T)=\\sum_j(T-\\lambda_j)^+$. This function is continuous, equals $0$ at $T=\\min_j\\lambda_j$, and tends to $+\\infty$ as $T\\to+\\infty$. By [F2] a solution of $g(T)=P$ exists; for $T>\\min_j\\lambda_j$ at least one active term grows strictly with $T$, so the solution is unique.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $p_j^*=(T-\\lambda_j)^+$. Then $\\sum_jp_j^*=P$. For $f_j(p)=\\frac12\\ln(1+p/\\lambda_j)$, [F1] and [F4] give $f_j'(p)=1/(2(\\lambda_j+p))$ and $f_j''(p)=-1/(2(\\lambda_j+p)^2)<0$, so [F3] makes $f_j$ concave and bounds it above by its tangent. On an active branch $f_j'(p_j^*)=1/(2T)$; on an inactive branch $p_j^*=0$ and $f_j'(0)=1/(2\\lambda_j)\\le1/(2T)$. Summing the tangent bounds gives, for every feasible $p$, $\\sum_j[f_j(p_j)-f_j(p_j^*)]\\le(2T)^{-1}(\\sum_jp_j-P)\\le0$. Thus $p^*$ is globally optimal.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitution of $p_j^*$ yields $F(p^*)=\\frac12\\sum_j\\ln^+(T/\\lambda_j)$. The feasible sets are nested as $P$ grows, so $C_L$ is nondecreasing. If $P_0,P_1\\ge0$ and $p^{(0)},p^{(1)}$ are maximizing allocations, then $\\theta p^{(0)}+(1-\\theta)p^{(1)}$ is feasible at $\\theta P_0+(1-\\theta)P_1$. Concavity of each $f_j$ gives $C_L(\\theta P_0+(1-\\theta)P_1)\\ge\\theta C_L(P_0)+(1-\\theta)C_L(P_1)$, including $P_i=0$ by step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is covered in 1.1 or the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The relevant endpoint or threshold is checked in 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; the allocation is finite-dimensional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-countable-dmc-zero-cost-information-capacity": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in Definition or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in Definition; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "Definition"
+          ],
+          "reason": "No choice axiom is used; all input laws are supplied countable probability sequences."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-parallel-awgn-feedback-code": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in Definition or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-message, one-coordinate, or singleton case is included in Definition or the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in Definition; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "Definition"
+          ],
+          "reason": "AC is inherited from the Gaussian channel law; defining the encoder maps itself uses no additional choice."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-gaussian-noise-orthogonalization": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function >",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be self-adjoint. Then $V$ has an orthonormal",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let $T:V\\to V$ be non-negative. Then there exists",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $Z\\sim N_n(0,I_n)$ have independent standard-normal coordinates, and let $U\\in\\mathbb R^{n\\times n}$ satisfy",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], choose an orthogonal eigenbasis $U$ for $K$, so $K=U^T\\Lambda U$ with $\\Lambda=\\operatorname{diag}(\\lambda_1,\\ldots,\\lambda_d)$ and $\\lambda_j>0$. The positive square root is $K^{1/2}=U^T\\Lambda^{1/2}U$: this matrix is positive semidefinite, squares to $K$, and is therefore the unique square root in [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], write $Z$ in law as $K^{1/2}G$. Since $UU^T=I_d$, $UZ$ therefore has the law of $\\Lambda^{1/2}UG$. By [A1] and [F4], the coordinates of $UG$ are independent standard normals; multiplication by $\\sqrt{\\lambda_j}$ gives independent $N(0,\\lambda_j)$ coordinates.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Orthogonality gives $\\|UX\\|_2^2=X^TU^TUX=\\|X\\|_2^2$, and linearity gives $U(X+Z)=UX+UZ$. Thus the transformed channel has parallel independent Gaussian noise and exactly the same input power and code/error correspondence.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 2.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "2.1"
+          ],
+          "reason": "AC is used in the multivariate-normal realization and in the published orthogonal-normal invariance theorem, at step 2.1."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-parallel-awgn-single-use-information-bound": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function >",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$,",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-maximum-differential-entropy-under-variance",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $V$ have a Lebesgue density $p$ with $\\int p(x)|\\ln p(x)|\\,dx<\\infty$, finite mean $\\mu$, and positive finite variance",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kullback-leibler-is-nonnegative",
+          "source_section": "Statement",
+          "quote": "Assume AC and use the directional convention of [[def-kullback-leibler-divergence]]. For probability measures $P,Q$ on one measurable space, $D(P\\|Q)\\ge0$, and $D(P\\|Q)=0$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-water-filling-optimal-allocation",
+          "source_section": "Statement",
+          "quote": "Let $L\\ge1$, let $\\lambda_1,\\ldots,\\lambda_L>0$, and let $P\\ge0$. For allocations $p_j\\ge0$ with $\\sum_jp_j\\le P$, set $$F(p_1,\\ldots,p_L):=\\frac12\\sum_{j=1}^L\\ln\\left(1+\\frac{p_j}{\\lambda_j}\\right).$$ If $P=0$, the maximum is",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space ([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention of [[def-absolutely-continuous-with-respect-to-a-positive-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space. - For $p>0$, the **$p$th absolute moment** of $X$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to [0,\\infty]$ be",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-standard-normal-fourth-moment",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $G\\sim N(0,\\sigma^2)$ for $\\sigma\\ge0$. Then $\\mathbb E[G^2]=\\sigma^2$ and $\\mathbb E[G^4]=3\\sigma^4$; in particular the fourth moment is",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $Y=X+Z$. Its density is the finite mixture $p_Y(y)=\\sum_xP_X(x)\\prod_j\\phi_{\\lambda_j}(y_j-x_j)$, which is positive and bounded by [F1]. Fix any support point $x_0$ with $P_X(x_0)>0$. Then $p_Y(y)\\ge P_X(x_0)\\prod_j\\phi_{\\lambda_j}(y_j-x_{0j})$. The Gaussian upper bound and this lower bound show $|\\ln p_Y(y)|\\le C(1+\\|y\\|_2^2)$ for some finite $C$; $Y$ has finite second moment, so $h(Y)$ is absolutely finite by [F10]. The same bounds apply to each marginal $Y_j$, and each conditional density given a support point is a Gaussian translate, so all entropy integrals below are finite.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The joint output density has finite differential entropy by step 1.1. On the support of $X$, the joint-to-product density ratio in [F5] is $\\prod_j\\phi_{\\lambda_j}(y_j-x_j)/p_Y(y)$. Expanding its logarithm and integrating gives $I(X;Y)=h(Y)-h(Y\\mid X)=h(Y)-h(Z)$, because each conditional output density is a translate of the noise density. The KL divergence of $P_Y$ from the product of its marginals is finite by step 1.1 and nonnegative by [F3]; expanding it gives $h(Y)\\le\\sum_jh(Y_j)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Independence [F7] and the variance definition [F6] give $\\operatorname{Var}(Y_j)=\\operatorname{Var}(X_j)+\\lambda_j$ and $\\operatorname{Var}(X_j)\\le\\mathbb E X_j^2$. By [F2], $h(Y_j)\\le\\frac12\\ln(2\\pi e(\\operatorname{Var}(X_j)+\\lambda_j))$. Direct integration of $\\phi_{\\lambda_j}$ using [F1] and [F10] gives $h(Z_j)=\\frac12\\ln(2\\pi e\\lambda_j)$, hence $h(Z)=\\sum_jh(Z_j)$ by independence. Tonelli [F8] on the integrable positive and negative parts from step 1.1 justifies the product integrals. Therefore $I(X;Y)\\le\\frac12\\sum_j\\ln(1+\\operatorname{Var}(X_j)/\\lambda_j)\\le\\frac12\\sum_j\\ln(1+\\mathbb E X_j^2/\\lambda_j)$. The powers $p_j=\\mathbb E X_j^2$ sum to at most $P$, so [F4] proves the claim.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC is inherited from the finite-dimensional Gaussian law and its orthogonalization; the entropy and KL calculations use no further choice."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-parallel-awgn-information-density-convergence": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function >",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-parallel-gaussian-channel-with-power-constraint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix an integer $d\\ge1$ and a real symmetric positive-definite matrix $K\\in\\mathbb R^{d\\times d}$. The",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-noise-orthogonalization",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $K\\in\\mathbb R^{d\\times d}$ be symmetric positive definite and let $Z\\sim N_d(0,K)$ be the additive noise in [[def-parallel-gaussian-channel-with-power-constraint]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$,",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-standard-normal-fourth-moment",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $G\\sim N(0,\\sigma^2)$ for $\\sigma\\ge0$. Then $\\mathbb E[G^2]=\\sigma^2$ and $\\mathbb E[G^4]=3\\sigma^4$; in particular the fourth moment is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-substitution-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $J$ be intervals, possibly open at finite or infinite singular ends, and let $\\phi:I\\to J$ be a",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent random elements. Define $$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$ Then $X$ is a random",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space. - For $p>0$, the **$p$th absolute moment** of $X$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then $$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure;",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $p_j>0$, completing the square gives $x^2/p_j+(y-x)^2/\\lambda_j=((p_j+\\lambda_j)/(p_j\\lambda_j))(x-p_jy/(p_j+\\lambda_j))^2+y^2/(p_j+\\lambda_j)$, so [F4] yields $\\int_{\\mathbb R}\\phi_{p_j}(x)\\phi_{\\lambda_j}(y-x)\\,dx=(2\\pi(p_j+\\lambda_j))^{-1/2}e^{-y^2/(2(p_j+\\lambda_j))}=\\phi_{p_j+\\lambda_j}(y)$. If $p_j=0$, then $X_j=0$ and $Y_j=Z_j$ has density $\\phi_{\\lambda_j}$. Independence across coordinates and uses gives product output densities by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $p_j>0$, substituting $Y_j=X_j+Z_j$ in the log-density ratio gives $\\imath_j=\\frac12\\ln(1+p_j/\\lambda_j)-Z_j^2/(2\\lambda_j)+(X_j+Z_j)^2/(2(p_j+\\lambda_j))$. By [F3] and [F9], the second moments are $p_j$ and $\\lambda_j$ and the means are zero; [F5] factors the cross moment, so $\\mathbb E\\imath_j=\\frac12\\ln(1+p_j/\\lambda_j)$. Its second moment is finite because $(a+b+c)^2\\le3(a^2+b^2+c^2)$, $(x+z)^4\\le8(x^4+z^4)$, and the Gaussian fourth moments in [F3] are finite. If $p_j=0$, the information density is identically zero, which agrees with the formula; for finitely many branches, $(\\sum_j\\imath_j)^2\\le d\\sum_j\\imath_j^2$, so the summed density has mean $I=\\frac12\\sum_j\\ln(1+p_j/\\lambda_j)$ and finite variance.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The pairs $(X_t,Y_t)$ are IID across uses because [A2] gives fresh independent noises and [F5] gives product coordinate laws. Their information densities therefore have mean $I$ and finite variance $v$ by step 2.1. By [F7] the sum's squared deviation from $nI$ has expectation $nv$; for every $\\eta>0$, its normalized deviation event forces this square to be at least $n^2\\eta^2$, so [F8] bounds its probability by $v/(n\\eta^2)\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F5",
+            "F7",
+            "F8",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "reason": "AC is inherited from the Gaussian-law definition and orthogonalization supplier; Chebyshev's inequality and the moment calculation are choice-free."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-finite-dmc-cost-model": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in Definition; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "Definition"
+          ],
+          "reason": "No choice axiom is used; the alphabets and cost minimization are finite."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-parallel-awgn-cost-constrained-achievability": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function >",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-parallel-gaussian-channel-with-power-constraint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix an integer $d\\ge1$ and a real symmetric positive-definite matrix $K\\in\\mathbb R^{d\\times d}$. The",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-parallel-awgn-feedback-code",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]] and use the channel in [[def-parallel-gaussian-channel-with-power-constraint]] with dimension $d$ and budget $P$. A length-$n$ code with $M\\ge1$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-noise-orthogonalization",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $K\\in\\mathbb R^{d\\times d}$ be symmetric positive definite and let $Z\\sim N_d(0,K)$ be the additive noise in [[def-parallel-gaussian-channel-with-power-constraint]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-parallel-awgn-information-density-convergence",
+          "source_section": "Statement",
+          "quote": "Assume AC. In orthogonal coordinates let the independent channel branches be $Y_j=X_j+Z_j$, where $X_j\\sim N(0,p_j)$, $Z_j\\sim N(0,\\lambda_j)$, all coordinates are",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-density-channel-threshold-random-coding-bound",
+          "source_section": "Statement",
+          "quote": "Let $P_X$ be an input law, let $\\nu$ be a sigma-finite reference measure on the output space, and let $w(y\\mid",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-standard-normal-fourth-moment",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $G\\sim N(0,\\sigma^2)$ for $\\sigma\\ge0$. Then $\\mathbb E[G^2]=\\sigma^2$ and $\\mathbb E[G^4]=3\\sigma^4$; in particular the fourth moment is",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chebyshev-markov-inequality-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $t>0$. Then $$\\mu(\\{f\\ge t\\})\\le\\frac1t\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space. - For $p>0$, the **$p$th absolute moment** of $X$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a common probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-cost-pruned-random-code",
+          "source_section": "Statement",
+          "quote": "Fix a blocklength $n$, a message count $M\\ge2$, a codebook ensemble with exchangeable message codewords, and a decoder for each",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use [F1] to work in orthogonal coordinates, and draw each vector use independently with branch inputs $X_j\\sim N(0,p_j)$, independent across branches. The mean squared norm is $\\mu=\\sum_jp_j<P$. The information density has mean $I(p)$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $R=0$, one-message codes meet the assertion. Suppose $R>0$, choose $\\delta>0$ with $R+2\\delta<I(p)$, and put $M_n=\\lceil e^{nR}\\rceil$. The threshold $\\ln(M_n-1)+n\\delta$ is eventually below $n(R+2\\delta)$. The weak law in [F2] makes the miss probability tend to zero; [F3] then shows the ensemble expected average error $a_n$ tends to zero.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For one vector use put $Q=\\sum_jX_j^2$. By [F4], $\\mathbb E X_j^2=p_j$ and $\\mathbb E X_j^4=3p_j^2$; [F7] then gives $\\operatorname{Var}(X_j^2)=2p_j^2$, and independence factors the cross moments to yield $\\operatorname{Var}(Q)=2\\sum_jp_j^2<\\infty$. Across $n$ uses the codeword average cost $\\bar Q_n$ has mean $\\mu$ and variance $\\operatorname{Var}(Q)/n$. With $\\Delta=P-\\mu>0$, the event $\\bar Q_n>P$ is contained in $\\{|\\bar Q_n-\\mu|\\ge\\Delta\\}$, whose probability is at most $\\operatorname{Var}(Q)/(n\\Delta^2)$ by [F5] applied to the squared deviation. This probability is the expected fraction $q_n$ of over-budget codewords, so $q_n\\to0$.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The random code ensemble has $q_n+a_n\\to0$ by steps 2.1 and 2.2. Apply [F6] to prune every over-budget word; [A2] identifies the retained deterministic codes as feasible no-feedback codes, with average power at most $P$, error tending to zero, and rate loss tending to zero. Orthogonal invariance in [F1] carries these codes back to the original channel.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F6",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is covered in 1.1 or the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "reason": "AC is inherited from the Gaussian input and noise laws; the finite-moment, concentration, and pruning arguments use no further choice."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-cost-constrained-dmc-code-and-capacity": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in Definition or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-message, one-coordinate, or singleton case is included in Definition or the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in Definition; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "Definition"
+          ],
+          "reason": "No choice axiom is used; all code alphabets and probability vectors are finite."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-finite-dmc-feedback-code": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in Definition or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-message, one-coordinate, or singleton case is included in Definition or the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is covered in Statement or the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in Definition; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "Definition"
+          ],
+          "reason": "No choice axiom is used; the alphabets and encoding functions are finite-domain objects."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-cost-constrained-dmc-information-capacity-properties": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-dmc-cost-model",
+          "source_section": "Definition",
+          "quote": "Let $W(y\\mid x)$ be a finite DMC with nonempty finite input alphabet $\\mathcal X$ ([[def-discrete-memoryless-channel]]). A **letter cost** is a",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on $\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cost-constrained-dmc-code-and-capacity",
+          "source_section": "Definition",
+          "quote": "Fix a finite DMC and cost model from [[def-finite-dmc-cost-model]], with feasible budget $\\Gamma$. A length-$n$, $M$-message code from [[def-fixed-length-channel-code]] is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-memoryless-channel-information-capacity",
+          "source_section": "Definition",
+          "quote": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf, $$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$ and $$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$ In particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-simplex-entropy-continuity-and-concavity",
+          "source_section": "Statement",
+          "quote": "For a finite nonempty alphabet of size $m$, let $$H(p):=-\\sum_{i=1}^m p_i\\ln p_i,\\qquad 0\\ln0:=0,$$ on the probability simplex $\\Delta_m=\\{p\\in[0,1]^m:\\sum_i p_i=1\\}$. Then",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent. 1. $A$ is compact. 2. $A$ is closed and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The probability simplex on $\\mathcal X$ is closed and bounded in $\\mathbb R^{|\\mathcal X|}$. The feasible subset is closed because $P_X\\mapsto\\bar c(P_X)$ is linear and continuous; it is nonempty because $\\delta_{x_{\\min}}$ has cost $c_{\\min}\\le\\Gamma$. Hence it is compact by [F5]. The output law $P_XW$ is linear in $P_X$, so [F3]–[F4] show that $P_X\\mapsto I(P_X;W)$ is continuous. Nonnegativity of mutual information follows from [F6] applied to the joint law and product marginals. Also $I(P_X;W)=H(P_X)-H(X\\mid Y)\\le H(P_X)$ by [F3], since conditional entropy is a sum of nonnegative terms. Concavity in [F4] gives $H(P_X)\\le\\ln|\\mathcal X|$: the uniform vector is the average of the finitely many coordinate permutations of $P_X$, all of which have the same entropy. Thus the objective lies in",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\Gamma_0\\le\\Gamma_1$, the feasible set at $\\Gamma_0$ is contained in the one at $\\Gamma_1$, proving monotonicity. For $0\\le\\theta\\le1$, let $P_0,P_1$ attain $C_I(\\Gamma_0),C_I(\\Gamma_1)$. The mixture $P_\\theta=\\theta P_0+(1-\\theta)P_1$ has cost at most $\\theta\\Gamma_0+(1-\\theta)\\Gamma_1$. By [F3]–[F4], mutual information is concave in $P_X$: the output entropy is concave and the conditional entropy term is linear. Therefore $C_I(\\theta\\Gamma_0+(1-\\theta)\\Gamma_1)\\ge\\theta C_I(\\Gamma_0)+(1-\\theta)C_I(\\Gamma_1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $\\Gamma>c_{\\min}$ and $P_X^*$ attains $C_I(\\Gamma)$. If $\\bar c(P_X^*)=\\Gamma$, choose a minimum-cost symbol $x_{\\min}$ from the finite alphabet. Then $\\bar c(P_{X,\\epsilon})=(1-\\epsilon)\\Gamma+\\epsilon c_{\\min}<\\Gamma$ for every $\\epsilon>0$. Since $P_{X,\\epsilon}\\to P_X^*$ and the mutual-information objective is continuous by step 1.1, $I(P_{X,\\epsilon};W)\\to C_I(\\Gamma)$. If $P_X^*$ already has strict cost, no approximation is needed.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; maximizers are obtained by the finite-dimensional extreme-value theorem."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-finite-message-fano-for-density-observation": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-fano-inequality",
+          "source_section": "Statement",
+          "quote": "Let $X$ take values in an alphabet $\\mathcal X$ of size $m\\ge2$, let $Y$ be finite, and let $\\widehat X$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On the set $q(y)>0$, Bayes' formula gives the posterior probability vector $\\pi(y)$. Thus $H(M\\mid Y)=\\int q(y)H(\\pi(y))\\,d\\nu(y)$; the integrand is bounded by $\\ln N$, so the conditional entropy is finite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each decoder value $j$ with $\\alpha_j=\\Pr[g(Y)=j]>0$, let $A_j=g^{-1}(j)$ and $r^{(j)}=\\alpha_j^{-1}\\int_{A_j}q(y)\\pi(y)\\,d\\nu(y)$ be the posterior given that estimate. If $r_m^{(j)}=0$, then $\\pi_m(y)=0$ for $q(y)d\\nu$-almost every $y\\in A_j$. Otherwise expansion gives $\\alpha_j^{-1}\\int_{A_j}q(y)D(\\pi(y)\\|r^{(j)})\\,d\\nu(y)=H(r^{(j)})-\\alpha_j^{-1}\\int_{A_j}q(y)H(\\pi(y))\\,d\\nu(y)\\ge0$ by [F2]. Summing over $j$ proves $H(M\\mid g(Y))\\ge H(M\\mid Y)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F3] to the finite pair $(M,g(Y))$. Its sharp and relaxed Fano bounds give both upper inequalities in the Statement; the entropy convention in [F4] makes them nats. Together with step 2.1 this proves the full chain.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; all posterior distributions are finite probability vectors."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-cost-constrained-dmc-achievability": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-finite-dmc-cost-model",
+          "source_section": "Definition",
+          "quote": "Let $W(y\\mid x)$ be a finite DMC with nonempty finite input alphabet $\\mathcal X$ ([[def-discrete-memoryless-channel]]). A **letter cost** is a",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-cost-constrained-dmc-code-and-capacity",
+          "source_section": "Definition",
+          "quote": "Fix a finite DMC and cost model from [[def-finite-dmc-cost-model]], with feasible budget $\\Gamma$. A length-$n$, $M$-message code from [[def-fixed-length-channel-code]] is",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-fixed-length-channel-code",
+          "source_section": "Definition",
+          "quote": "For a finite DMC $W$, a **length-$n$ code with $M$ messages** is a pair of maps $e:[M]\\to\\mathcal X^n$ and $d:\\mathcal",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-fixed-length-channel-code-errors",
+          "source_section": "Definition",
+          "quote": "For a length-$n$ code $(e,d)$, let $$e_m:=W^n\\{y^n:d(y^n)\\ne m\\mid e(m)\\}.$$ Its **average error** is $\\varepsilon_{\\rm av}:=M^{-1}\\sum_{m=1}^M e_m$, corresponding to a uniform",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-cost-constrained-dmc-information-capacity-properties",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a finite DMC, $c:\\mathcal X\\to[0,\\infty)$ a finite letter cost, and $\\Gamma\\ge c_{\\min}$. The feasible set $\\{P_X:\\bar c(P_X)\\le\\Gamma\\}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discrete-memoryless-channel-iid-information-density-converges",
+          "source_section": "Statement",
+          "quote": "Fix a finite DMC $W$ and input law $P_X$. If $(X_i,Y_i)_{i\\ge1}$ are IID with law $P_X(x)W(y\\mid x)$, then $n^{-1}\\imath_{P_X}(X^n;Y^n)\\to I(P_X;W)$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-density-channel-threshold-random-coding-bound",
+          "source_section": "Statement",
+          "quote": "Let $P_X$ be an input law, let $\\nu$ be a sigma-finite reference measure on the output space, and let $w(y\\mid",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cost-pruned-random-code",
+          "source_section": "Statement",
+          "quote": "Fix a blocklength $n$, a message count $M\\ge2$, a codebook ensemble with exchangeable message codewords, and a decoder for each",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chebyshev-inequality",
+          "source_section": "Statement",
+          "quote": "For every finite real random variable $X$ and every $t>0$, $$\\mathbb P(|X-\\mathbb E[X]|\\ge t)\\le\\frac{\\operatorname{Var}(X)}{t^2}.$$ Equivalently, if $\\sigma_X>0$ and $c>0$, then",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-discrete-memoryless-channel-information-capacity",
+          "source_section": "Definition",
+          "quote": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-discrete-memoryless-channel-information-density",
+          "source_section": "Definition",
+          "quote": "Given an input law $P_X$, let $Q_{P_X}=P_XW$ be its output law. The **information density** is $$\\imath_{P_X}(x;y):=\\ln\\frac{W(y\\mid x)}{Q_{P_X}(y)}$$ when $P_X(x)W(y\\mid x)>0$,",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets. A **stochastic kernel** from $\\mathcal X$ to $\\mathcal Y$ is a matrix",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $R=0$, the one-message code that repeats a minimum-cost symbol has zero error and cost $c_{\\min}\\le\\Gamma$. Suppose $R>0$. If $\\Gamma>c_{\\min}$, [F1] gives an input law $P_X$ with $\\bar c(P_X)<\\Gamma$ and $I(P_X;W)>R$. If $\\Gamma=c_{\\min}$, choose an attaining law from [F1]. Feasibility gives $\\sum_xP_X(x)(c(x)-c_{\\min})\\le0$; every summand is nonnegative, so this law is supported on minimum-cost symbols and its mutual information exceeds $R$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose $\\delta>0$ with $R+2\\delta<I(P_X;W)$ and $M_n=\\lceil e^{nR}\\rceil$. For the IID input and product DMC, [F2] makes the miss probability at threshold $\\ln(M_n-1)+n\\delta$ tend to zero, since the threshold divided by $n$ tends to $R+\\delta<I(P_X;W)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], the IID random-code ensemble has expected average error $a_n\\to0$. If $\\Gamma>c_{\\min}$, the letter costs are bounded on the finite alphabet, so the variance of their $n$-letter average is $\\operatorname{Var}(c(X_1))/n$; [F5] implies the expected fraction $q_n$ of codewords whose average cost exceeds $\\Gamma$ tends to zero because $\\mathbb E c(X_1)<\\Gamma$. Apply [F4] to obtain deterministic subcodes with every retained word feasible, error tending to zero, and rate loss tending to zero. If $\\Gamma=c_{\\min}$, every drawn input letter has minimum cost, so every random codeword has cost exactly $\\Gamma$ and no pruning is needed; [F3] supplies deterministic codes with vanishing error.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "cases",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is covered in 1.1 or the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 3.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "3.1"
+          ],
+          "reason": "No choice axiom is used; all alphabets and codebooks are finite at each blocklength."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-cost-constrained-dmc-mutual-information-under-average-cost": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf, $$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$ and $$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$ In particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-dmc-cost-model",
+          "source_section": "Definition",
+          "quote": "Let $W(y\\mid x)$ be a finite DMC with nonempty finite input alphabet $\\mathcal X$ ([[def-discrete-memoryless-channel]]). A **letter cost** is a",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cost-constrained-dmc-code-and-capacity",
+          "source_section": "Definition",
+          "quote": "Fix a finite DMC and cost model from [[def-finite-dmc-cost-model]], with feasible budget $\\Gamma$. A length-$n$, $M$-message code from [[def-fixed-length-channel-code]] is",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-memoryless-channel-information-capacity",
+          "source_section": "Definition",
+          "quote": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-vector",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X$ be a finite nonempty set. A **probability vector** on $\\mathcal X$ is a family $P=(p_x)_{x\\in\\mathcal X}$ of",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cost-constrained-dmc-information-capacity-properties",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a finite DMC, $c:\\mathcal X\\to[0,\\infty)$ a finite letter cost, and $\\Gamma\\ge c_{\\min}$. The feasible set $\\{P_X:\\bar c(P_X)\\le\\Gamma\\}$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-jensen-for-integrable-cost-random-variable",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb R$, let $f:[a,\\infty)\\to\\mathbb R$ be finite and concave, and let $U$ be an integrable real random variable with",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $H(Y^n)=\\sum_tH(Y_t\\mid Y^{t-1})$. For each $t$, the difference $H(Y_t)-H(Y_t\\mid Y^{t-1})=I(Y_t;Y^{t-1})$ is nonnegative by [F7], so $H(Y^n)\\le\\sum_tH(Y_t)$. The product channel [F5] and the chain rule give $H(Y^n\\mid X^n)=\\sum_tH(Y_t\\mid X_t)$. Subtracting and using [F2] yields $I(X^n;Y^n)\\le\\sum_{t=1}^n I(X_t;Y_t)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $\\gamma_t=\\mathbb E c(X_t)\\ge c_{\\min}$. By [F3], $I(X_t;Y_t)\\le C_I(\\gamma_t)$. Apply [F4] and [F6] to the uniform random variable taking values $\\gamma_1,\\ldots,\\gamma_n$; this gives $\\sum_t C_I(\\gamma_t)\\le n C_I(n^{-1}\\sum_t\\gamma_t)\\le nC_I(\\Gamma)$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Combining steps 1.1 and 1.2 proves the claimed block bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; this is a finite-alphabet entropy argument."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-parallel-awgn-feedback-capacity-water-filling": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function >",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-parallel-gaussian-channel-with-power-constraint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix an integer $d\\ge1$ and a real symmetric positive-definite matrix $K\\in\\mathbb R^{d\\times d}$. The",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-parallel-awgn-feedback-code",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]] and use the channel in [[def-parallel-gaussian-channel-with-power-constraint]] with dimension $d$ and budget $P$. A length-$n$ code with $M\\ge1$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-noise-orthogonalization",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $K\\in\\mathbb R^{d\\times d}$ be symmetric positive definite and let $Z\\sim N_d(0,K)$ be the additive noise in [[def-parallel-gaussian-channel-with-power-constraint]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-parallel-awgn-single-use-information-bound",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $Z=(Z_1,\\ldots,Z_d)$ have independent coordinates $Z_j\\sim N(0,\\lambda_j)$ with $\\lambda_j>0$, and let $X$ be an independent finite-support random vector",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-water-filling-optimal-allocation",
+          "source_section": "Statement",
+          "quote": "Let $L\\ge1$, let $\\lambda_1,\\ldots,\\lambda_L>0$, and let $P\\ge0$. For allocations $p_j\\ge0$ with $\\sum_jp_j\\le P$, set $$F(p_1,\\ldots,p_L):=\\frac12\\sum_{j=1}^L\\ln\\left(1+\\frac{p_j}{\\lambda_j}\\right).$$ If $P=0$, the maximum is",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-jensen-for-integrable-cost-random-variable",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb R$, let $f:[a,\\infty)\\to\\mathbb R$ be finite and concave, and let $U$ be an integrable real random variable with",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-message-fano-for-density-observation",
+          "source_section": "Statement",
+          "quote": "Let $M$ be uniform on $[N]$ with $N\\ge2$, and let an observation $Y$ have conditional densities $p_m$ with respect to",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-parallel-awgn-cost-constrained-achievability",
+          "source_section": "Statement",
+          "quote": "Assume AC. For the channel in [[def-parallel-gaussian-channel-with-power-constraint]], let the noise eigenvalues be $\\lambda_1,\\ldots,\\lambda_d>0$. Let $P>0$ and choose $p_j\\ge0$ with $\\sum_jp_j<P$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nondegenerate-multivariate-normal-law-has-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and $$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use [F1] to express the channel in independent scalar branches. For a feedback code from [A2], conditional on each message $m$ the output vector has density\n$$p(y^n\\mid m)=\\prod_{t=1}^n\\phi_K\\bigl(y_t-f_t(m,y^{t-1})\\bigr),$$\nwhere $\\phi_K(z)=(2\\pi)^{-d/2}(\\det K)^{-1/2}\\exp(-z^TK^{-1}z/2)$ is positive by [F7]. Thus [F5] applies. Since $M$ is finite, define $I(M;Y^n)=H(M)-H(M\\mid Y^n)$ using the posterior density of [F5]. Bayes' formula factors $\\Pr(M=m\\mid Y^n)/\\Pr(M=m)$ into the product over $t$ of $p(Y_t\\mid M=m,Y^{t-1})/p(Y_t\\mid Y^{t-1})$; taking logarithms and expectations proves $I(M;Y^n)=\\sum_t I(M;Y_t\\mid Y^{t-1})$. At a fixed history, $X_t=f_t(M,h)$ has finite support; grouping the finite mixture terms for messages with the same input shows $I(M;Y_t\\mid h)=I(X_t;Y_t\\mid h)$ becaus",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $T$ be uniform on $[n]$, independent of the channel, and let $H=Y^{T-1}$ and $U=u_{T,H}$. Then $U\\ge0$ and $\\mathbb E U=n^{-1}\\sum_t\\mathbb E\\|X_t\\|^2\\le P$. For every allocation with total power at most $u$, [F8]--[F9] give $\\frac12\\sum_j\\ln(1+p_j/\\lambda_j)\\le\\frac12\\sum_jp_j/\\lambda_j\\le u/(2\\lambda_{\\min})$; hence $C_K(U)$ is integrable. Apply [F4] to step 1.1 and then monotonicity of $C_K$ to obtain $I(M;Y^n)\\le nC_K(\\mathbb E U)\\le nC_K(P)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F8",
+            "F9",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $N=1$ the rate is zero. If $N\\ge2$, [F5] and $H(M)=\\ln N$ give $I(M;Y^n)\\ge(1-e)\\ln N-\\ln2$. Combining with step 2.1 shows every reliable feedback rate is at most $C_K(P)$. The no-feedback capacity is bounded by the same argument because no-feedback codes are a subclass.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $P=0$, expected total input energy is zero, so each nonnegative $\\|X_t\\|^2$ is zero almost surely; outputs are then independent of the message and step 3.1 gives zero reliable rate. One-message codes attain rate zero. If $P>0$, [F3] supplies the allocation $p_j^*$ with total power $P$. For any $R<C_K(P)$ choose $\\epsilon>0$ so the strict allocation $(1-\\epsilon)p^*$ has Gaussian mutual information greater than $R$; continuity from [F9] gives such an $\\epsilon$. Apply [F6] to obtain no-feedback codes at every such rate, and therefore also feedback codes. Letting $R\\uparrow C_K(P)$ proves both lower bounds, including the case $C_K(P)=0$ by a one-message code.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "F9",
+            "step 3.1",
+            "given",
+            "cases",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is covered in 1.1 or the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The relevant endpoint or threshold is checked in 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC is inherited from the Gaussian channel law and orthogonal-normal invariance supplier; the converse and finite-block coding arguments add no choice principle."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-cost-constrained-dmc-capacity-formula": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-finite-dmc-cost-model",
+          "source_section": "Definition",
+          "quote": "Let $W(y\\mid x)$ be a finite DMC with nonempty finite input alphabet $\\mathcal X$ ([[def-discrete-memoryless-channel]]). A **letter cost** is a",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-cost-constrained-dmc-code-and-capacity",
+          "source_section": "Definition",
+          "quote": "Fix a finite DMC and cost model from [[def-finite-dmc-cost-model]], with feasible budget $\\Gamma$. A length-$n$, $M$-message code from [[def-fixed-length-channel-code]] is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-cost-constrained-dmc-information-capacity-properties",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a finite DMC, $c:\\mathcal X\\to[0,\\infty)$ a finite letter cost, and $\\Gamma\\ge c_{\\min}$. The feasible set $\\{P_X:\\bar c(P_X)\\le\\Gamma\\}$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cost-constrained-dmc-mutual-information-under-average-cost",
+          "source_section": "Statement",
+          "quote": "Let $X^n=(X_1,\\ldots,X_n)$ be any random input to a finite DMC $W$ and let the output follow the memoryless product channel.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cost-constrained-dmc-achievability",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a finite DMC with cost $c$, feasible budget $\\Gamma\\ge c_{\\min}$, and cost-constrained information capacity $C_I(\\Gamma)$. For every",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-fano-inequality",
+          "source_section": "Statement",
+          "quote": "Let $X$ take values in an alphabet $\\mathcal X$ of size $m\\ge2$, let $Y$ be finite, and let $\\widehat X$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf, $$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$ and $$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$ In particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-finite-markov-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $X,Y,Z$ have a joint pmf on finite alphabets and suppose that, for every $y$ with $p_Y(y)>0$, $$p_{XZ|y}(x,z)=p_{X|y}(x)p_{Z|y}(z).$$ This is",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $M=1$, the rate is zero and the converse is immediate. Suppose $M\\ge2$. Then the message and channel variables form the finite Markov chains $M\\to X^n\\to Y^n$ and $M\\to Y^n\\to\\widehat M$. By [F5] and [F6], $I(M;Y^n)\\ge I(M;\\widehat M)=\\ln M-H(M\\mid\\widehat M)\\ge(1-e)\\ln M-\\ln2$, using the relaxed Fano bound in [F4]. Feasibility and [A1] give $n^{-1}\\sum_t\\mathbb E c(X_t)\\le\\Gamma$, so [F2] applies. Also [F6] gives $I(M;Y^n)\\le I(X^n;Y^n)$, and [F2] bounds the latter by $nC_I(\\Gamma)$. Hence $(1-e)\\ln M\\le nC_I(\\Gamma)+\\ln2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Along any reliable sequence, $e_n\\to0$, so step 1.1 implies $\\limsup n^{-1}\\ln M_n\\le C_I(\\Gamma)$. This proves $C(\\Gamma)\\le C_I(\\Gamma)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $R=0$, a one-message minimum-cost code is feasible. If $0<R<C_I(\\Gamma)$, [F3] constructs a reliable feasible code sequence of rate at least $R$. Therefore every rate below $C_I(\\Gamma)$ is operationally achievable, so $C(\\Gamma)\\ge C_I(\\Gamma)$ by the supremum definition, also when $C_I(\\Gamma)=0$. Attainment of the displayed maximum is [F1].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; all channels, alphabets, and codebooks in each argument are finite."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "cor-inactive-dmc-cost-constraint-recovers-capacity": {
+      "risk": "medium",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-dmc-cost-model",
+          "source_section": "Definition",
+          "quote": "Let $W(y\\mid x)$ be a finite DMC with nonempty finite input alphabet $\\mathcal X$ ([[def-discrete-memoryless-channel]]). A **letter cost** is a",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cost-constrained-dmc-code-and-capacity",
+          "source_section": "Definition",
+          "quote": "Fix a finite DMC and cost model from [[def-finite-dmc-cost-model]], with feasible budget $\\Gamma$. A length-$n$, $M$-message code from [[def-fixed-length-channel-code]] is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cost-constrained-dmc-capacity-formula",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a finite DMC with finite nonnegative input cost $c$, and let $\\Gamma\\ge c_{\\min}$. Under the uniform-message average",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-discrete-memoryless-channel-capacity-formula",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$ with no input-cost constraint, $$C_{\\rm av}(W)=C_{\\max}(W)=C(W)=\\max_{P_X}I(P_X;W),$$ with rates and mutual information measured in nats per",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every letter has $c(x)\\le c_{\\max}\\le\\Gamma$ by [F1]. Therefore every ordinary code satisfies the block cost constraint, and every input distribution satisfies the one-letter cost constraint. Conversely a cost-feasible code or distribution is still an ordinary one, so the two code classes and feasible input sets coincide.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] and [F3] to these identical code and input classes. Their operational capacities agree; both use average error and natural-log nats by their definitions.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; the finite cost bound holds symbol by symbol."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-feedback-does-not-increase-cost-constrained-dmc-capacity": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-finite-dmc-feedback-code",
+          "source_section": "Definition",
+          "quote": "Let $W(y\\mid x)$ be the finite DMC [[def-discrete-memoryless-channel]] and $c:\\mathcal X\\to[0,\\infty)$ the finite input cost from [[def-finite-dmc-cost-model]], with feasible budget",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf, $$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$ and $$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$ In particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-markov-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $X,Y,Z$ have a joint pmf on finite alphabets and suppose that, for every $y$ with $p_Y(y)>0$, $$p_{XZ|y}(x,z)=p_{X|y}(x)p_{Z|y}(z).$$ This is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-dmc-cost-model",
+          "source_section": "Definition",
+          "quote": "Let $W(y\\mid x)$ be a finite DMC with nonempty finite input alphabet $\\mathcal X$ ([[def-discrete-memoryless-channel]]). A **letter cost** is a",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cost-constrained-dmc-information-capacity-properties",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a finite DMC, $c:\\mathcal X\\to[0,\\infty)$ a finite letter cost, and $\\Gamma\\ge c_{\\min}$. The feasible set $\\{P_X:\\bar c(P_X)\\le\\Gamma\\}$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-jensen-for-integrable-cost-random-variable",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb R$, let $f:[a,\\infty)\\to\\mathbb R$ be finite and concave, and let $U$ be an integrable real random variable with",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-fano-inequality",
+          "source_section": "Statement",
+          "quote": "Let $X$ take values in an alphabet $\\mathcal X$ of size $m\\ge2$, let $Y$ be finite, and let $\\widehat X$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cost-constrained-dmc-capacity-formula",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a finite DMC with finite nonnegative input cost $c$, and let $\\Gamma\\ge c_{\\min}$. Under the uniform-message average",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each time $t$ and each positive-probability history $h=y^{t-1}$, the causal encoder and memoryless channel give the finite Markov chain $M\\to X_t\\to Y_t$. By chain rule [F1] and data processing [F2], $I(M;Y^n)\\le\\sum_{t=1}^n\\mathbb E_{Y^{t-1}}C_I(\\mathbb E[c(X_t)\\mid Y^{t-1}])$, applying the definition of $C_I$ to each conditional input law, whose cost is at least $c_{\\min}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Give a uniform random index $T\\in[n]$ independent of the code and set $U=\\mathbb E[c(X_T)\\mid T,Y^{T-1}]$. Then $U\\ge c_{\\min}$, $\\mathbb E U=n^{-1}\\sum_t\\mathbb E c(X_t)\\le\\Gamma$, and $C_I(U)$ is integrable by [F3]. Applying [F4] and monotonicity in [F3] to step 1.1 yields $I(M;Y^n)\\le n\\mathbb E C_I(U)\\le nC_I(\\mathbb E U)\\le nC_I(\\Gamma)$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $M=1$, the rate is zero. If $M\\ge2$, the relaxed Fano bound [F5] and the deterministic decoder imply $(1-e)\\ln M\\le I(M;Y^n)+\\ln2\\le nC_I(\\Gamma)+\\ln2$. Thus reliable feedback rates are at most $C_I(\\Gamma)=C(\\Gamma)$ by [F6]. Every ordinary feasible code is a feedback code whose encoders ignore past outputs, so $C_{\\rm fb}(\\Gamma)\\ge C(\\Gamma)$; the reverse inequality follows from the converse.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1",
+            "given",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; the posterior histories and conditional laws are finite."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-countable-input-channel-finite-capacity-supremum-not-attained": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable-dmc-zero-cost-information-capacity",
+          "source_section": "Definition",
+          "quote": "A **countable-input finite-output DMC** has input alphabet $\\mathbb N=\\{1,2,\\ldots\\}$, a finite nonempty output alphabet $\\mathcal Y$, and row probabilities $W(y\\mid",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-simplex-entropy-continuity-and-concavity",
+          "source_section": "Statement",
+          "quote": "For a finite nonempty alphabet of size $m$, let $$H(p):=-\\sum_{i=1}^m p_i\\ln p_i,\\qquad 0\\ln0:=0,$$ on the probability simplex $\\Delta_m=\\{p\\in[0,1]^m:\\sum_i p_i=1\\}$. Then",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $q_x=W(1\\mid x)\\in(0,1)$ and $r=\\sum_xp_xq_x$. There is some $x_0$ with $p_{x_0}>0$, so $r\\ge p_{x_0}q_{x_0}>0$ and $1-r\\ge p_{x_0}(1-q_{x_0})>0$. The output entropy is $h_2(r)\\le h_2(1/2)=\\ln2$: concavity and symmetry in [F2] give $h_2(1/2)\\ge\\frac12h_2(r)+\\frac12h_2(1-r)=h_2(r)$. Every row has entropy $h_2(q_x)>0$, and at least one term has positive weight, so $\\sum_xp_xh_2(q_x)>0$. By [F1], $I(p;W)=h_2(r)-\\sum_xp_xh_2(q_x)<\\ln2$ for every input law.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $k$, choose the law assigning probability $1/2$ to $2k$ and $1/2$ to $2k-1$. Its output is uniform because the two row probabilities sum to one, while its conditional entropy is $h_2(\\epsilon_k)$ by symmetry. Hence its mutual information is $\\ln2-h_2(\\epsilon_k)$. Since $\\epsilon_k\\downarrow0$ and binary entropy is continuous with $h_2(0)=0$ by [F2]–[F3], these values tend to $\\ln2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Step 1.1 bounds every input law strictly below $\\ln2$, while step 1.2 gives a sequence of feasible values tending to $\\ln2$. Therefore the supremum is finite and equals $\\ln2$, but no input law attains it.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; the approximating sequence is explicitly indexed by positive integers."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "k=1",
+          "claim": "epsilon=1/3 and I=ln 2-h_2(1/3)<ln 2",
+          "evidence": "Steps 1.1–1.2."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-correlated-gaussian-noise-orthogonal-reduction": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function >",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-parallel-gaussian-channel-with-power-constraint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix an integer $d\\ge1$ and a real symmetric positive-definite matrix $K\\in\\mathbb R^{d\\times d}$. The",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-noise-orthogonalization",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $K\\in\\mathbb R^{d\\times d}$ be symmetric positive definite and let $Z\\sim N_d(0,K)$ be the additive noise in [[def-parallel-gaussian-channel-with-power-constraint]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $Z\\sim N_n(0,I_n)$ have independent standard-normal coordinates, and let $U\\in\\mathbb R^{n\\times n}$ satisfy",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-parallel-awgn-feedback-capacity-water-filling",
+          "source_section": "Statement",
+          "quote": "Assume AC and use the finite-dimensional channel of dimension $d$ and covariance $K$ from [[def-parallel-gaussian-channel-with-power-constraint]]. Let $\\lambda_1,\\ldots,\\lambda_d>0$ be the eigenvalues",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication gives $U^TU=I_2$ and $UKU^T=\\operatorname{diag}(1,4)$, so $K$ is positive definite with eigenvalues $1,4$. By [F1] and [F2], $UZ$ has independent coordinates with variances $1,4$. For every input, $\\|UX\\|_2^2=X^TU^TUX=\\|X\\|_2^2$ and $U(X+Z)=UX+UZ$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $P=2<4-1=3$, the water level is $T=1+P=3$: the first branch receives $p_1=T-1=2$ and the second receives $p_2=0$. Substitution in [F3] gives capacity $\\frac12\\ln(1+2/1)+\\frac12\\ln(1+0/4)=\\frac12\\ln3$. The orthogonal code correspondence from step 1.1 transfers this value to the original correlated channel.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero endpoint is asserted by this item."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "AC is used for the normal law and the published orthogonal-normal invariance theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "covariance",
+          "claim": "eigenvalues 1 and 4",
+          "evidence": "Step 1.1."
+        },
+        {
+          "case": "P=2",
+          "claim": "T=3, allocation (2,0), capacity (1/2)ln 3",
+          "evidence": "Step 1.2."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-two-branch-awgn-water-filling": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-parallel-gaussian-channel-with-power-constraint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix an integer $d\\ge1$ and a real symmetric positive-definite matrix $K\\in\\mathbb R^{d\\times d}$. The",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-water-filling-optimal-allocation",
+          "source_section": "Statement",
+          "quote": "Let $L\\ge1$, let $\\lambda_1,\\ldots,\\lambda_L>0$, and let $P\\ge0$. For allocations $p_j\\ge0$ with $\\sum_jp_j\\le P$, set $$F(p_1,\\ldots,p_L):=\\frac12\\sum_{j=1}^L\\ln\\left(1+\\frac{p_j}{\\lambda_j}\\right).$$ If $P=0$, the maximum is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-parallel-awgn-feedback-capacity-water-filling",
+          "source_section": "Statement",
+          "quote": "Assume AC and use the finite-dimensional channel of dimension $d$ and covariance $K$ from [[def-parallel-gaussian-channel-with-power-constraint]]. Let $\\lambda_1,\\ldots,\\lambda_d>0$ be the eigenvalues",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $0<P\\le3$, choosing $T=1+P\\le4$ makes $p_1=T-1=P$ and $p_2=(T-4)^+=0$, whose sum is $P$. If $P\\ge3$, choosing $T=(P+5)/2\\ge4$ gives $p_1=(P+3)/2$, $p_2=(P-3)/2$, and their sum is $P$. At $P=0$ both allocations are zero. In each regime [F1] therefore confirms the displayed water level and nonnegative powers.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "cases",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting the first allocation into the rate formula [F2] gives $\\frac12\\ln(1+P)$; substituting the second gives $\\frac12\\ln(T)+\\frac12\\ln(T/4)=\\ln(T/2)=\\ln((P+5)/4)$. At the common endpoint $P=3$, both are $\\ln2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The relevant endpoint or threshold is checked in 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used in the finite allocation calculation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "P=0",
+          "claim": "p=(0,0), C=0",
+          "evidence": "Statement and step 1.1."
+        },
+        {
+          "case": "P=3",
+          "claim": "T=4, p=(3,0), C=ln 2",
+          "evidence": "Steps 1.1–1.2."
+        },
+        {
+          "case": "P=5",
+          "claim": "T=5, p=(4,1), C=ln(5/2)",
+          "evidence": "Substitution into the P>=3 formulas in the Statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-binary-identity-channel-with-cost-and-feedback": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-dmc-cost-model",
+          "source_section": "Definition",
+          "quote": "Let $W(y\\mid x)$ be a finite DMC with nonempty finite input alphabet $\\mathcal X$ ([[def-discrete-memoryless-channel]]). A **letter cost** is a",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf, $$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$ and $$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$ In particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-simplex-entropy-continuity-and-concavity",
+          "source_section": "Statement",
+          "quote": "For a finite nonempty alphabet of size $m$, let $$H(p):=-\\sum_{i=1}^m p_i\\ln p_i,\\qquad 0\\ln0:=0,$$ on the probability simplex $\\Delta_m=\\{p\\in[0,1]^m:\\sum_i p_i=1\\}$. Then",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cost-constrained-dmc-code-and-capacity",
+          "source_section": "Definition",
+          "quote": "Fix a finite DMC and cost model from [[def-finite-dmc-cost-model]], with feasible budget $\\Gamma$. A length-$n$, $M$-message code from [[def-fixed-length-channel-code]] is",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cost-constrained-dmc-capacity-formula",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a finite DMC with finite nonnegative input cost $c$, and let $\\Gamma\\ge c_{\\min}$. Under the uniform-message average",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-feedback-does-not-increase-cost-constrained-dmc-capacity",
+          "source_section": "Statement",
+          "quote": "For every finite DMC and finite nonnegative letter cost with feasible budget $\\Gamma$, the feedback operational capacity $C_{\\rm fb}(\\Gamma)$ defined",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "An input law is feasible exactly when $0\\le p\\le\\min\\{\\Gamma,1\\}$, and [F2] makes its mutual information $h_2(p)$. If $0\\le p\\le q\\le1/2$ and $p<1/2$, put $\\theta=(1-p-q)/(1-2p)\\in[1/2,1]$. Then $q=\\theta p+(1-\\theta)(1-p)$; concavity and symmetry in [F3] imply $h_2(q)\\ge\\theta h_2(p)+(1-\\theta)h_2(1-p)=h_2(p)$. Thus $h_2$ is nondecreasing on $[0,1/2]$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $p\\in[0,1]$, concavity and symmetry give $h_2(1/2)\\ge\\frac12h_2(p)+\\frac12h_2(1-p)=h_2(p)$. Therefore the maximum over the feasible interval occurs at $p=\\min\\{\\Gamma,1/2\\}$ and equals the displayed formula. Substitution yields $C(0)=0$, $C(1/2)=\\ln2$, and $C(1)=\\ln2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The feedback theorem in [F4] makes the feedback capacity equal to the same ordinary constrained capacity. This identifies the values for all three requested budgets.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item requires nonempty alphabets, spaces, or supplied objects; an empty domain is outside its hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter or zero-cost boundary is stated or evaluated in 1.1 or the Statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no separate one-element or one-message assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses require nondegenerate parameters, or there is no separate degeneracy case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement makes no interval-endpoint or threshold claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC and nonempty supplied data are recorded in 1.1; no unmarked choice step is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "id": "def-axiom-of-choice",
+          "uses": [
+            "1.1"
+          ],
+          "reason": "No choice axiom is used; the example is a finite binary calculation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "Gamma=0",
+          "claim": "p=0 and C=0",
+          "evidence": "Step 1.2 and the Statement."
+        },
+        {
+          "case": "Gamma=1/2",
+          "claim": "p=1/2 and C=ln 2",
+          "evidence": "Step 1.2 and the Statement."
+        },
+        {
+          "case": "Gamma=1",
+          "claim": "p=1/2 remains feasible and C=ln 2",
+          "evidence": "Step 1.2 and the Statement."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

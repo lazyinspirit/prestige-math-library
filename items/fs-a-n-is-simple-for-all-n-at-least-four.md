@@ -6,8 +6,8 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: literature-derived
-deps: [lem-conjugating-a-cycle-relabels-its-entries, def-normal-subgroup, def-alternating-group, cor-sign-from-disjoint-cycle-structure, cor-alternating-group-is-normal-and-has-half-the-elements, def-simple-group, thm-alternating-group-is-simple-for-n-at-least-five]
+  proof: ai-altered
+deps: [ lem-conjugating-a-cycle-relabels-its-entries, def-normal-subgroup, def-alternating-group, cor-sign-from-disjoint-cycle-structure, cor-alternating-group-is-normal-and-has-half-the-elements, def-simple-group, thm-alternating-group-is-simple-for-n-at-least-five ]
 justified_by: []
 aliases: []
 landmark: false
@@ -15,6 +15,7 @@ proof_strategy: counterexample
 verification:
   precheck: pass
   audited: 2026-08-13
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/fs-a-n-is-simple-for-all-n-at-least-four.json
 sources:
   scraped: []
   references:
@@ -43,7 +44,7 @@ $A_n$ is simple for every $n\ge4$.
 
 **Proof technique:** counterexample.
 
-1.1 Each double transposition has two cycles and hence sign $(-1)^{4-2}=+1$ by [F1]. Thus $V=\{1,(12)(34),(13)(24),(14)(23)\}$ lies in $A_4$, and direct multiplication shows it is a subgroup of order $4$. [F1, algebra]
+1.1 Each double transposition has two cycles and hence sign $(-1)^{4-2}=+1$ by [F1]. Thus $V=\{1,(0\,1)(2\,3),(0\,2)(1\,3),(0\,3)(1\,2)\}$ lies in $A_4$, and direct multiplication shows it is a subgroup of order $4$. [F1, algebra]
 
 2.1 By [F2], conjugation relabels a double transposition to another member of $V$. Thus [F3] makes $V\trianglelefteq A_4$. [F2, F3, step 1.1]
 

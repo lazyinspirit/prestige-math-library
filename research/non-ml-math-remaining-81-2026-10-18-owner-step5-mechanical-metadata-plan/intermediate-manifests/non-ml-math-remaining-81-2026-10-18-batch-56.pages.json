@@ -1,0 +1,516 @@
+[
+  {
+    "order": 2926,
+    "id": "hall-stability-dt-bps-and-wall-crossing",
+    "kind": "A",
+    "category": "hall-algebras-and-tensor-categories",
+    "title": "Hall Integration, Stability, DT/BPS Invariants, and Wall Crossing",
+    "companion": "hall-stability-dt-bps-and-wall-crossing-examples",
+    "requires": [
+      "derived-hall-algebras",
+      "motivic-hall-algebras-and-integration",
+      "cohomological-hall-algebras-and-quiver-correspondences",
+      "hall-algebra-modules-and-geometric-actions"
+    ],
+    "items": [
+      {
+        "id": "def-finite-acyclic-quiver-stability-data",
+        "kind": "definition",
+        "title": "Finite-field stability data for an acyclic quiver",
+        "deps": [
+          "def-finite-field-and-its-order",
+          "def-abelian-category"
+        ],
+        "dependency_level": 0,
+        "source_path": "items/def-finite-acyclic-quiver-stability-data.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §§4.4–4.6",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Markus Reineke, The Harder–Narasimhan system in quantum groups and cohomology of quiver moduli, §§2–3",
+              "url": "https://arxiv.org/pdf/math/0204059"
+            }
+          ]
+        },
+        "statement": "Let $Q=(Q_0,Q_1,s,t)$ be a finite quiver: $Q_0$ and $Q_1$ are finite sets,\nand $s,t:Q_1\\to Q_0$ give the source and target of each arrow. Assume $Q$ has\nno directed cycles. For a field $K$, a finite-dimensional representation $M$\nassigns a finite-dimensional $K$-vector space $M_i$ to each $i\\in Q_0$ and a\nlinear map $M_a:M_{s(a)}\\to M_{t(a)}$ to each $a\\in Q_1$. A morphism is a\nfamily of linear maps at the vertices commuting with all arrow maps. Write\n$\\mathcal A_Q(K)$ for this category and\n$\\mathbf d(M)=(\\dim_K M_i)_{i\\in Q_0}\\in\\mathbb N^{Q_0}$ for its dimension\nvector. For the finite-field Hall branch, fix $k=\\mathbb F_q$ and write\n$\\mathcal A_Q=\\mathcal A_Q(k)$. The next lemma proves the abelian and Euler\nproperties over any field, and the small finitary properties over $k$.\n\nFor $\\mathbf d,\\mathbf e\\in\\mathbb Z^{Q_0}$ define the bilinear form\n$$\\chi_Q(\\mathbf d,\\mathbf e)=\\sum_{i\\in Q_0}d_i e_i-\\sum_{a:i\\to j}d_i e_j,$$\nand its skew-symmetrization\n$\\langle\\mathbf d,\\mathbf e\\rangle=\\chi_Q(\\mathbf d,\\mathbf e)-\\chi_Q(\\mathbf e,\\mathbf d)$.\nThe next lemma proves that $\\chi_Q(\\mathbf d(M),\\mathbf d(N))$ is the\nHom-minus-Yoneda-Ext$^1$ dimension for this arrow convention.\n\nFix $z_i\\in\\mathbb H:=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ for each\nvertex and extend $Z(\\mathbf d)=\\sum_i d_i z_i$ additively. If\n$\\mathbf d\\in\\mathbb N^{Q_0}$ is nonzero, then\n$\\operatorname{Im}Z(\\mathbf d)=\\sum_i d_i\\operatorname{Im}z_i>0$; thus its\nprincipal argument lies in $(0,\\pi)$. For a nonzero representation $M$, put\n$\\phi_Z(M)=\\arg Z(\\mathbf d(M))/\\pi\\in(0,1)$. Call\n$M$ **$Z$-semistable** if every nonzero subrepresentation $U\\subseteq M$\nsatisfies $\\phi_Z(U)\\le\\phi_Z(M)$, and **$Z$-stable** if the inequality is\nstrict for every proper nonzero subrepresentation.\n\nFor a dimension vector $\\mathbf d$, let\n$$\\operatorname{Rep}_{\\mathbf d}(Q)=\\prod_{a:i\\to j} \\operatorname{Hom}_k(k^{d_i},k^{d_j}),\\qquad G_{\\mathbf d}=\\prod_{i\\in Q_0}\\operatorname{GL}_{d_i,k}.$$\nThe group $G_{\\mathbf d}$ acts by change of bases. Define\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ geometrically: its points over an\nalgebraic closure $\\bar k$ are representations for which every nonzero\n$\\bar k$-subrepresentation satisfies the semistability inequality. The\nassociated quotient stack is\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)=[\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)/G_{\\mathbf d}]$.\nHere $[X/G]$ denotes the groupoid-valued quotient: over a scheme $S$ its\nobjects are $G$-torsors on $S$ with equivariant maps to $X$, and its arrows\nare equivariant isomorphisms over $S$. The openness lemma below proves that\n$\\operatorname{Rep}^{ss}_{\\mathbf d}$ is open.\n\nFor a finite groupoid $\\mathcal G$, define its groupoid cardinality by\n$$|\\mathcal G|=\\sum_{[x]\\in\\operatorname{Iso}(\\mathcal G)} \\frac{1}{|\\operatorname{Aut}_{\\mathcal G}(x)|}.$$\nThe rational-point groupoid of $\\mathfrak M^{ss}_{\\mathbf d}$ is finite, and\nthe finite-field descent lemma identifies it with the groupoid of finite-field\nsemistable representations and their isomorphisms. No Calabi–Yau structure,\npotential, orientation data, vanishing cycles, or physical state-counting\nidentification is part of this definition.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+        "kind": "lemma",
+        "title": "Finite acyclic quiver representations: heredity, Euler form, and finite-field finitarity",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "def-hall-finitary-abelian-category",
+          "def-equivalence-of-n-fold-extensions",
+          "thm-short-five-lemma-in-an-abelian-category"
+        ],
+        "dependency_level": 1,
+        "source_path": "items/lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Olivier Schiffmann, Lectures on Hall Algebras, §§1.1, 1.3 and 3.3",
+              "url": "https://arxiv.org/pdf/math/0611617"
+            },
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §§2.1 and 3.2–3.4",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            }
+          ]
+        },
+        "statement": "Let $Q$ be a finite acyclic quiver and $K$ any field. The category\n$\\mathcal A_Q(K)$ of finite-dimensional representations is abelian. For all\n$X,Y\\in\\mathcal A_Q(K)$, the spaces $\\operatorname{Hom}(X,Y)$ and Yoneda\n$\\operatorname{Ext}^1(X,Y)$ are finite-dimensional $K$-vector spaces, and\n$$\\dim_K\\operatorname{Hom}(X,Y)-\\dim_K\\operatorname{YExt}^1(X,Y) =\\chi_Q(\\mathbf d(X),\\mathbf d(Y)).$$\nThe explicit projective resolution below shows that the projective-resolution\ngroups $\\operatorname{Ext}^r_{\\mathcal A_Q(K)}(X,Y)$ vanish for $r\\ge2$; these\ngroups are the cohomology of applying $\\operatorname{Hom}_{\\mathcal A_Q(K)}(-,Y)$\nto a projective resolution. If\n$K=\\mathbb F_q$, the displayed vector spaces have finite underlying sets and\n$\\mathcal A_Q(K)$ has a small skeleton (a small full subcategory with one\nrepresentative of each isomorphism class), so it is a small finitary abelian\ncategory. Yoneda $\\operatorname{Ext}^1$ is classified directly below; it is\nnot identified with derived $\\operatorname{Ext}^1$ by an unstated theorem."
+      },
+      {
+        "id": "lem-upper-half-plane-sum-phase-between",
+        "kind": "lemma",
+        "title": "The phase of a sum lies between upper-half-plane phases",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data"
+        ],
+        "dependency_level": 1,
+        "source_path": "items/lem-upper-half-plane-sum-phase-between.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §4.4",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Markus Reineke, The Harder–Narasimhan system in quantum groups and cohomology of quiver moduli, Lemma 2.2",
+              "url": "https://arxiv.org/pdf/math/0204059"
+            }
+          ]
+        },
+        "statement": "Let $\\mathbb H=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ and define\n$\\phi(z)=\\arg(z)/\\pi\\in(0,1)$. For $z,w\\in\\mathbb H$, the phase of $z+w$\nlies between $\\phi(z)$ and $\\phi(w)$, strictly between them when they are\nunequal and equal to their common value when they coincide."
+      },
+      {
+        "id": "lem-quiver-semistable-loci-are-open",
+        "kind": "lemma",
+        "title": "Semistable loci of finite-quiver representations are open",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "def-grassmannian-subspaces",
+          "def-plucker-coordinates",
+          "lem-plucker-map-well-defined-injective",
+          "thm-plucker-image-closed",
+          "def-segre-map",
+          "thm-segre-image-rank-one-minors",
+          "def-projective-morphism-pre-proj",
+          "thm-projective-morphism-proper",
+          "thm-proper-morphism-closed-image",
+          "thm-closed-projective-embedding-by-homogeneous-generators",
+          "def-axiom-of-choice",
+          "thm-closed-subschemes-projective-space-homogeneous-ideals"
+        ],
+        "dependency_level": 1,
+        "source_path": "items/lem-quiver-semistable-loci-are-open.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Markus Reineke, The Harder–Narasimhan system in quantum groups and cohomology of quiver moduli, §3",
+              "url": "https://arxiv.org/pdf/math/0204059"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice. Let $Q$, $k$, $\\mathbf d$, and $Z$ be as in\n[[def-finite-acyclic-quiver-stability-data]]. The subset\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ of representations over $\\bar k$\nthat are semistable for every nonzero geometric subrepresentation is Zariski\nopen in $\\operatorname{Rep}_{\\mathbf d}(Q)_{\\bar k}$."
+      },
+      {
+        "id": "lem-quiver-hardernarasimhan-filtrations-exist-are-unique-and-descend",
+        "kind": "lemma",
+        "title": "Quiver Harder–Narasimhan filtrations exist, are unique, and descend",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+          "lem-upper-half-plane-sum-phase-between"
+        ],
+        "dependency_level": 2,
+        "source_path": "items/lem-quiver-hardernarasimhan-filtrations-exist-are-unique-and-descend.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §4.4",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Markus Reineke, The Harder–Narasimhan system in quantum groups and cohomology of quiver moduli, §2",
+              "url": "https://arxiv.org/pdf/math/0204059"
+            }
+          ]
+        },
+        "statement": "Let $Q$ be finite and acyclic, let $k=\\mathbb F_q$, and give every vertex an\narbitrary charge $z_i\\in\\mathbb H$. Over any field extension $K/k$, every\nfinite-dimensional representation has a unique filtration\n$$0=M_0\\subsetneq M_1\\subsetneq\\cdots\\subsetneq M_r=M$$\nwhose nonzero factors $M_j/M_{j-1}$ are $Z$-semistable and have strictly\ndecreasing phases. If $M$ is defined over $k$, the unique filtration of its\nscalar extension $M_{\\bar k}=M\\otimes_k\\bar k$ is Frobenius invariant and\ndescends to $k$. Consequently geometric\nsemistability of an $\\mathbb F_q$-representation is equivalent to\nsemistability tested only on its $\\mathbb F_q$-subrepresentations. Write\n$|\\mathbf d|=\\sum_i d_i$ for total dimension."
+      },
+      {
+        "id": "lem-finite-field-quiver-semistable-stack-points-are-hall-groupoids",
+        "kind": "lemma",
+        "title": "Finite-field points of the semistable quiver stack give the Hall groupoid",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "lem-quiver-semistable-loci-are-open",
+          "lem-quiver-hardernarasimhan-filtrations-exist-are-unique-and-descend",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 3,
+        "source_path": "items/lem-finite-field-quiver-semistable-stack-points-are-hall-groupoids.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §§2.1 and 4.4",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Tom Bridgeland, An Introduction to Motivic Hall Algebras, §§3.1–3.2",
+              "url": "https://arxiv.org/pdf/1002.4372v1"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Choice inherited from the semistable-openness prerequisite.\nLet $Q$ be finite and acyclic over $k=\\mathbb F_q$, and let\n$\\mathbf d\\in\\mathbb N^{Q_0}$. In this statement, include the zero\nrepresentation as $Z$-semistable, without assigning it a phase.\nThe rational-point groupoid of\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)$ is finite and is equivalent to the\ngroupoid whose objects are $Z$-semistable $\\mathbb F_q$-representations of\ndimension $\\mathbf d$ and whose arrows are their representation isomorphisms.\nIts groupoid cardinality is therefore\n$$\\sum_{[M]:\\,\\mathbf d(M)=\\mathbf d,\\ M\\;Z\\text{-semistable}} \\frac{1}{|\\operatorname{Aut}_{\\mathcal A_Q}(M)|}.$$"
+      },
+      {
+        "id": "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+        "kind": "definition",
+        "title": "Subobject-first Hall completion and quantum tori for finite quivers",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+          "def-untwisted-hall-algebra",
+          "lem-untwisted-hall-product-finiteness"
+        ],
+        "dependency_level": 3,
+        "source_path": "items/def-subobject-first-completed-finite-quiver-hall-algebra-and-tori.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §§2.1, 3.3–3.4",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Olivier Schiffmann, Lectures on Hall Algebras, §§1.1, 1.3 and 3.3",
+              "url": "https://arxiv.org/pdf/math/0611617"
+            }
+          ]
+        },
+        "statement": "Fix $Q$, $k=\\mathbb F_q$, and $Z$ as in\n[[def-finite-acyclic-quiver-stability-data]]. For a representation $M$, write\n$a_M=|\\operatorname{Aut}_{\\mathcal A_Q}(M)|$ and let $\\delta_M$ be the basis\nfunction of its isomorphism class. Let $H_Q:=H_{\\mathcal A_Q,\\mathbb Q}$ be\nthe direct sum over isomorphism classes of $\\mathcal A_Q$, with rational\ncoefficients and the quotient-first untwisted Hall product of\n[[def-untwisted-hall-algebra]]. In that convention $[A]*_{qf}[B]$ counts\nsequences $0\\to B\\to L\\to A\\to0$, and identify the basis symbol $[M]$ with\nthe characteristic function $\\delta_M$. Define the **subobject-first** product\nby $f\\star g:=g*_{qf}f$. Then\n$$(f\\star g)(L)=\\sum_{U\\subseteq L} f(U)g(L/U),$$\nwhere the sum is over subobject classes of $L$: monomorphisms into $L$ modulo\nisomorphisms of their domains commuting with the monomorphism. Distinct\nembedded subobjects are counted separately even when their domains are\nisomorphic. Put\n$\\kappa_M=a_M\\delta_M$.\n\nFor $\\mathbf d\\in\\mathbb N^{Q_0}$, let $H_{Q,\\mathbf d}$ be the span of\nclasses of dimension vector $\\mathbf d$. It is finite-dimensional: the\nrepresentation set on the standard spaces $k^{d_i}$ is finite. Define the\ndimension completion\n$$\\widehat H_Q=\\prod_{\\mathbf d\\in\\mathbb N^{Q_0}}H_{Q,\\mathbf d}.$$\nThe product is extended degreewise; each coefficient uses finitely many\ndecompositions $\\mathbf d=\\mathbf a+\\mathbf b$. There is no analytic\nconvergence assertion. The all-object and phase factors are\n$$A_{\\mathrm{all}}=\\sum_{[M]}\\delta_M,\\qquad S_Z(\\phi)=\\delta_0+\\sum_{\\substack{[M]\\\\M\\ne0,\\ \\phi_Z(M)=\\phi,\\ M\\ Z\\text{-semistable}}}\\delta_M.$$\nEach is an element of $\\widehat H_Q$ because each homogeneous component has\nfinite support.\n\nLet $t=\\sqrt q>0$ and $K_q=\\mathbb Q(\\sqrt q)$. Take the completed Euler\ntorus and skew torus over $K_q$, with bases $X^{\\mathbf d}$ and\n$x^{\\mathbf d}$, respectively, and products\n$$X^{\\mathbf d}X^{\\mathbf e}=q^{-\\chi_Q(\\mathbf e,\\mathbf d)}X^{\\mathbf d+\\mathbf e},\\qquad x^{\\mathbf d}*x^{\\mathbf e}=t^{-\\langle\\mathbf e,\\mathbf d\\rangle}x^{\\mathbf d+\\mathbf e}.$$\nTheir completions use the same dimension product. The next theorem proves\nassociativity and gives the continuous Euler and skew integration maps."
+      },
+      {
+        "id": "lem-finite-quiver-hall-extension-orbit-count",
+        "kind": "lemma",
+        "title": "Finite-quiver Hall multiplication counts extensions by automorphism orbits",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+          "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+          "def-untwisted-hall-algebra",
+          "lem-untwisted-hall-product-finiteness"
+        ],
+        "dependency_level": 4,
+        "source_path": "items/lem-finite-quiver-hall-extension-orbit-count.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, Lemma 2.2",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Olivier Schiffmann, Lectures on Hall Algebras, §§1.1 and 1.3",
+              "url": "https://arxiv.org/pdf/math/0611617"
+            }
+          ]
+        },
+        "statement": "Let $U,V$ be finite-dimensional representations over $\\mathbb F_q$. For\n$\\kappa_M=|\\operatorname{Aut}(M)|\\delta_M$ and the subobject-first product\nfrom [[def-subobject-first-completed-finite-quiver-hall-algebra-and-tori]],\n$$\\kappa_U\\star\\kappa_V =\\sum_{[M]}\\frac{|\\operatorname{YExt}^1(V,U)_M|} {|\\operatorname{Hom}(V,U)|}\\,\\kappa_M,$$\nwhere $\\operatorname{YExt}^1(V,U)_M$ is the set of endpoint-fixed Yoneda\nclasses of $0\\to U\\to E\\to V\\to0$ whose middle term is isomorphic to $M$."
+      },
+      {
+        "id": "thm-finite-quiver-euler-and-skew-integration-is-multiplicative",
+        "kind": "theorem",
+        "title": "Euler and skew integration are multiplicative for finite acyclic quivers",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+          "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+          "lem-finite-quiver-hall-extension-orbit-count",
+          "def-untwisted-hall-algebra",
+          "lem-untwisted-hall-product-finiteness",
+          "thm-untwisted-hall-algebra-is-associative-and-unital"
+        ],
+        "dependency_level": 5,
+        "source_path": "items/thm-finite-quiver-euler-and-skew-integration-is-multiplicative.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §§3.3–3.4",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Markus Reineke, The Harder–Narasimhan system in quantum groups and cohomology of quiver moduli, §6",
+              "url": "https://arxiv.org/pdf/math/0204059"
+            }
+          ]
+        },
+        "statement": "Let $Q$ be a finite acyclic quiver over $k=\\mathbb F_q$, let\n$t=\\sqrt q>0$, and use the subobject-first completion and tori from\n[[def-subobject-first-completed-finite-quiver-hall-algebra-and-tori]]. The\ndegree-completed Hall product is associative and unital. The continuous maps\n$$I(f)=\\sum_{[M]}\\frac{f(M)}{|\\operatorname{Aut}(M)|}X^{\\mathbf d(M)},\\qquad J(f)=\\sum_{[M]}t^{\\chi_Q(\\mathbf d(M),\\mathbf d(M))} \\frac{f(M)}{|\\operatorname{Aut}(M)|}x^{\\mathbf d(M)}$$\nare unital algebra homomorphisms to the completed tori with products\n$$X^{\\mathbf d}X^{\\mathbf e}=q^{-\\chi_Q(\\mathbf e,\\mathbf d)}X^{\\mathbf d+\\mathbf e}, \\qquad x^{\\mathbf d}*x^{\\mathbf e}=t^{-\\langle\\mathbf e,\\mathbf d\\rangle}x^{\\mathbf d+\\mathbf e}.$$\nThese are separate normalizations: the first is the Euler form target, while\nthe second uses the skew-symmetrized form and the diagonal factor\n$t^{\\chi_Q(\\mathbf d,\\mathbf d)}$."
+      },
+      {
+        "id": "thm-finite-quiver-hall-wall-crossing",
+        "kind": "theorem",
+        "title": "Completed Hall wall crossing for finite acyclic quivers",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "lem-quiver-hardernarasimhan-filtrations-exist-are-unique-and-descend",
+          "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+          "thm-finite-quiver-euler-and-skew-integration-is-multiplicative"
+        ],
+        "dependency_level": 6,
+        "source_path": "items/thm-finite-quiver-hall-wall-crossing.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §§4.4–4.6",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Markus Reineke, The Harder–Narasimhan system in quantum groups and cohomology of quiver moduli, §§2 and 4",
+              "url": "https://arxiv.org/pdf/math/0204059"
+            }
+          ]
+        },
+        "statement": "Let $Q$ be any finite acyclic quiver over $\\mathbb F_q$, including wild\nquivers, and let $Z_-$ and $Z_+$ be any two assignments of upper-half-plane\ncharges $z_i\\in\\mathbb H$. In the dimension completion of the subobject-first\nHall algebra,\n$$A_{\\mathrm{all}}=\\prod_{\\phi\\in\\Phi_Z\\ \\mathrm{decreasing}}S_Z(\\phi),\\qquad \\Phi_Z=\\{\\phi_Z(\\mathbf e):0\\ne\\mathbf e\\in\\mathbb N^{Q_0}\\}.$$\nThe product is degreewise finite and includes all semistable objects, whether\nstable or strictly semistable. Applying either Euler integration $I$ or skew\nintegration $J$ gives equal completed ordered products for $Z_-$ and $Z_+$.\nEach integrated ordered product has constant term $1$ and is a unit in its\ncompleted quantum torus; conjugation by the two equal products therefore gives\nthe same continuous automorphism.\nNo generic-stability, finite-type, 3-Calabi–Yau, orientation-data, or analytic\nconvergence assumption is used."
+      },
+      {
+        "id": "rem-finite-quiver-hall-counts-and-dt-bps-interpretation",
+        "kind": "remark",
+        "title": "Finite-quiver Hall counts and the limits of DT/BPS interpretation",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "lem-finite-field-quiver-semistable-stack-points-are-hall-groupoids",
+          "thm-finite-quiver-euler-and-skew-integration-is-multiplicative",
+          "thm-finite-quiver-hall-wall-crossing",
+          "def-toen-derived-hall-algebra",
+          "def-hall-algebra-module",
+          "def-motivic-hall-algebra-of-a-finite-quiver",
+          "def-quiver-motivic-quantum-torus",
+          "def-untwisted-quiver-cohomological-hall-algebra"
+        ],
+        "dependency_level": 7,
+        "source_path": "items/rem-finite-quiver-hall-counts-and-dt-bps-interpretation.md",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §§4.3–4.6",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Bertrand Toën, Derived Hall algebras, §§3–4",
+              "url": "https://arxiv.org/pdf/math/0501343v4"
+            },
+            {
+              "title": "Tom Bridgeland, An Introduction to Motivic Hall Algebras, §§3–5",
+              "url": "https://arxiv.org/pdf/1002.4372v1"
+            },
+            {
+              "title": "Maxim Kontsevich and Yan Soibelman, Cohomological Hall algebra, exponential Hodge structures and motivic Donaldson-Thomas invariants, §§1–2",
+              "url": "https://arxiv.org/pdf/1006.2706v2"
+            },
+            {
+              "title": "Maxim Kontsevich and Yan Soibelman, Stability structures, motivic Donaldson–Thomas invariants and cluster transformations, §§1–2 and 7",
+              "url": "https://arxiv.org/pdf/0811.2435"
+            }
+          ]
+        },
+        "statement": "The coefficients of $J(S_Z(\\phi))$ are finite-field, Euler-normalized\nsemistable groupoid masses: the weight of $[M]$ is\n$t^{\\chi_Q(\\mathbf d(M),\\mathbf d(M))}/|\\operatorname{Aut}(M)|$. The wall\ncrossing proved on this page is an arithmetic finite-field Hall identity and\nits stated Euler/skew integrations. It does not identify these coefficients\nwith Behrend-weighted numerical Donaldson–Thomas invariants of a\nCalabi–Yau-threefold, motivic vanishing-cycle invariants, cohomological BPS\nspaces, or dimensions of physical Hilbert spaces.\n\nThe four required preceding pages provide distinct reading contexts. The\nderived definition uses dg enhancements and higher homotopy weights; the\nmotivic definition uses stack-function coefficients; the cohomological\ndefinition uses rational intrinsic quotient-stack Borel–Moore homology and\nthe exact-sequence correspondence operations; a Hall-module definition is an\nalgebra action on a separate module. These coefficient theories remain distinct\nfrom the arithmetic groupoid masses. Their operation and integration theorems\nare not used in this finite-field proof.\n\nAny physical BPS identification is conditional on a specified supersymmetric\nquiver model, charge assignment, central charge, superpotential, relevant\nCalabi–Yau-threefold enhancement and orientation data, together with a proved\nstate-counting comparison. The finite-field argument establishes none of\nthose additional identifications."
+      }
+    ]
+  },
+  {
+    "order": 2927,
+    "id": "hall-stability-dt-bps-and-wall-crossing-examples",
+    "kind": "B",
+    "category": "hall-algebras-and-tensor-categories",
+    "title": "Hall Integration, Stability, DT/BPS Invariants, and Wall Crossing: Examples and Counterexamples",
+    "companion": "hall-stability-dt-bps-and-wall-crossing",
+    "requires": [
+      "hall-stability-dt-bps-and-wall-crossing"
+    ],
+    "items": [
+      {
+        "id": "ex-one-vertex-finite-quiver-hall-integration-is-quantum-dilogarithm",
+        "kind": "example",
+        "title": "One vertex with no arrows gives the quantum dilogarithm",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+          "lem-finite-field-quiver-semistable-stack-points-are-hall-groupoids",
+          "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+          "thm-finite-quiver-euler-and-skew-integration-is-multiplicative"
+        ],
+        "dependency_level": 6,
+        "source_path": "items/ex-one-vertex-finite-quiver-hall-integration-is-quantum-dilogarithm.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §2.2",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Olivier Schiffmann, Lectures on Hall Algebras, Example 3.14",
+              "url": "https://arxiv.org/pdf/math/0611617"
+            }
+          ]
+        },
+        "statement": "Let $Q$ consist of one vertex and no arrows:\n\n~~~tikz\n\\begin{tikzpicture}\n  \\node[circle,draw,inner sep=2pt,label=below:{1}] at (0,0) {};\n\\end{tikzpicture}\n~~~\n\nThe single vertex is labelled $1$ and there are no edges. Thus\n$\\mathcal A_Q$ is the category of finite-dimensional $\\mathbb F_q$-vector\nspaces. For any $z_1\\in\\mathbb H$, all nonzero objects are semistable of the\nsame phase. With $t=\\sqrt q>0$, the skew integration of their all-object\nseries is\n$$J(A_{\\mathrm{all}})=E_{t^2}(x):= \\sum_{n\\ge0}\\frac{t^n x^n}{\\prod_{r=1}^{n}(t^{2r}-1)},$$\nwhere the empty product for $n=0$ is $1$. This is a finite-field\nEuler-normalized groupoid series, not by itself a physical BPS number."
+      },
+      {
+        "id": "ex-a2-quiver-hall-wall-crossing-pentagon",
+        "kind": "example",
+        "title": "The A₂ quiver gives the quantum-dilogarithm pentagon",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+          "lem-upper-half-plane-sum-phase-between",
+          "lem-quiver-hardernarasimhan-filtrations-exist-are-unique-and-descend",
+          "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+          "thm-finite-quiver-euler-and-skew-integration-is-multiplicative",
+          "thm-finite-quiver-hall-wall-crossing"
+        ],
+        "dependency_level": 7,
+        "source_path": "items/ex-a2-quiver-hall-wall-crossing-pentagon.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §4.6",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Olivier Schiffmann, Lectures on Hall Algebras, Example 3.15",
+              "url": "https://arxiv.org/pdf/math/0611617"
+            }
+          ]
+        },
+        "statement": "Let $Q$ be the A₂ quiver with one arrow $1\\to2$:\n\n~~~tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[circle,draw,inner sep=2pt,label=below:{1}] (v1) at (0,0) {};\n  \\node[circle,draw,inner sep=2pt,label=below:{2}] (v2) at (2,0) {};\n  \\draw[->] (v1) -- (v2);\n\\end{tikzpicture}\n~~~\n\nThe nodes are the two vertices and the single directed edge is the unique\narrow. Let $S_1,S_2$ be the vertex simples and let\n$E=(\\mathbb F_q\\xrightarrow{\\mathrm{id}}\\mathbb F_q)$. For\n$z_1,z_2\\in\\mathbb H$ with phases $\\phi_i=\\arg(z_i)/\\pi$, the integrated\nwall identity is\n$$E_{t^2}(x_2)*E_{t^2}(x_1) =E_{t^2}(x_1)*E_{t^2}(x^{(1,1)})*E_{t^2}(x_2),\\qquad x^{(1,1)}=t\\,x_1*x_2,\\quad t=\\sqrt q.$$\nHere $E_{t^2}(x)=\\sum_{n\\ge0}t^n x^n/\\prod_{r=1}^n(t^{2r}-1)$.\nThe identity is the actual completed A₂ pentagon, with the factors coming\nfrom the two chambers; no commutative product is substituted."
+      },
+      {
+        "id": "cex-omitting-strictly-semistable-objects-breaks-hn-factorization",
+        "kind": "counterexample",
+        "title": "Omitting strictly semistable objects breaks Hall factorization at the A₂ wall",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori"
+        ],
+        "dependency_level": 4,
+        "source_path": "items/cex-omitting-strictly-semistable-objects-breaks-hn-factorization.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §§4.4–4.6",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Markus Reineke, The Harder–Narasimhan system in quantum groups and cohomology of quiver moduli, §§2 and 4",
+              "url": "https://arxiv.org/pdf/math/0204059"
+            }
+          ]
+        },
+        "statement": "The claim that the Hall HN factorization remains valid if each\n$S_Z(\\phi)$ is replaced by the sum of only the stable isomorphism classes of\nphase $\\phi$ is false. Use the A₂ quiver $1\\to2$ over $\\mathbb F_q$ and set\n$z_1=z_2\\in\\mathbb H$."
+      },
+      {
+        "id": "cex-commutative-target-erases-the-a2-wall-crossing",
+        "kind": "counterexample",
+        "title": "Commutativizing the target erases the A₂ wall-crossing identity",
+        "deps": [
+          "def-finite-acyclic-quiver-stability-data",
+          "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+          "thm-finite-quiver-euler-and-skew-integration-is-multiplicative",
+          "thm-finite-quiver-hall-wall-crossing"
+        ],
+        "dependency_level": 7,
+        "source_path": "items/cex-commutative-target-erases-the-a2-wall-crossing.md",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tom Bridgeland, Hall algebras and Donaldson–Thomas invariants, §4.6",
+              "url": "https://arxiv.org/pdf/1611.03696"
+            },
+            {
+              "title": "Olivier Schiffmann, Lectures on Hall Algebras, Example 3.15",
+              "url": "https://arxiv.org/pdf/math/0611617"
+            }
+          ]
+        },
+        "statement": "The A₂ quantum-dilogarithm wall identity is not preserved if the skew quantum\ntorus product is replaced by ordinary commutative multiplication while its\nfactor normalization is kept. In the commutative formal power-series ring in\n$x_1,x_2$ over $\\mathbb Q(t)$, the resulting claimed equality is\n$$E_{t^2}(x_2)E_{t^2}(x_1) =E_{t^2}(x_1)E_{t^2}(t x_1x_2)E_{t^2}(x_2),\\qquad E_{t^2}(x)=\\sum_{n\\ge0}\\frac{t^n x^n}{\\prod_{r=1}^{n}(t^{2r}-1)}.$$"
+      }
+    ]
+  }
+]

@@ -1,0 +1,776 @@
+[
+  {
+    "order": 2940,
+    "id": "temperley-lieb-towers-and-physics-models",
+    "kind": "A",
+    "category": "quantum-algebra-and-representation-theory",
+    "title": "Temperley–Lieb Towers, Spin Chains, and Scaling Interfaces",
+    "companion": "temperley-lieb-towers-and-physics-models-examples",
+    "requires": [
+      "temperley-lieb-jones-wenzl-traces-and-quotients",
+      "direct-integral-decomposition-and-type-i-groups"
+    ],
+    "items": [
+      {
+        "id": "def-temperley-lieb-type-a-path-spaces-and-matrix-unit-tower",
+        "kind": "definition",
+        "title": "Type-A path spaces and their matrix-unit tower",
+        "dependency_level": 0,
+        "deps": [],
+        "justified_by": [],
+        "statement": "Let $\\ell\\ge3$. The path graph $A_{\\ell-1}$ has vertex set $\\{0,1,\\ldots,\\ell-2\\}$ and an edge between $a$ and $b$ exactly when $|a-b|=1$. For $n\\ge0$ and a vertex $a$, let $\\mathsf P_{n,a}$ be the set of sequences\n$$\np=(a_0,a_1,\\ldots,a_n)\n$$\nwith $a_0=0$, $a_n=a$, each $a_j\\in\\{0,1,\\ldots,\\ell-2\\}$, and $|a_j-a_{j-1}|=1$ for $1\\le j\\le n$. The set is finite; it may be empty. Let $V_{n,a}:=\\mathbb C^{(\\mathsf P_{n,a})}$ be the free complex vector space with basis $\\{|p\\rangle:p\\in\\mathsf P_{n,a}\\}$, and put\n$$\nK_n:=\\bigoplus_{a=0}^{\\ell-2}\\operatorname{End}_{\\mathbb C}(V_{n,a}),\n$$\nomitting zero summands. For $p,q\\in\\mathsf P_{n,a}$, the matrix unit $E^{(n,a)}_{p,q}$ sends $|q\\rangle$ to $|p\\rangle$, sends every other path basis vector to zero, and is zero on every endpoint block other than $a$.\n\nFor $b\\sim a$, write $pb=(a_0,\\ldots,a_n,b)$ for the path obtained by appending $b$. Define the unital algebra map candidate $\\iota_n:K_n\\to K_{n+1}$ on matrix units by\n$$\n\\iota_n(E^{(n,a)}_{p,q})=\\sum_{b\\sim a}E^{(n+1,b)}_{pb,qb},\n$$\nand extend it linearly. The next local theorem proves that these assignments are injective unital $*$-homomorphisms and gives the corresponding branching rule. This is an abstract path-space tower definition; it does not assert that a particular quotient of a Temperley–Lieb algebra is isomorphic to $K_n$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "§4.2, PDF pp. 31–32: the A_n Bratteli diagram and Jones tower representation setting."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-temperley-lieb-type-a-path-space-tower-branching",
+        "kind": "theorem",
+        "title": "The A_(ell-1) path-space tower branches by adjacent vertices",
+        "dependency_level": 1,
+        "deps": [
+          "def-temperley-lieb-type-a-path-spaces-and-matrix-unit-tower"
+        ],
+        "justified_by": [],
+        "statement": "Let $\\ell\\ge3$ and use the path sets, endpoint modules, matrix units, and maps $\\iota_n$ of [[def-temperley-lieb-type-a-path-spaces-and-matrix-unit-tower]]. Then each $\\iota_n:K_n\\to K_{n+1}$ is a unital injective $*$-algebra homomorphism. For every endpoint $b$, the restriction of the natural $K_{n+1}$-module $V_{n+1,b}$ to $K_n$ is\n$$\nV_{n+1,b}\\!\\downarrow_{K_n}\\cong\\bigoplus_{\\substack{0\\le a\\le\\ell-2\\\\|a-b|=1}}V_{n,a},\n$$\nwith each summand occurring once; vertices outside $\\{0,\\ldots,\\ell-2\\}$ contribute no summand.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "§4.2, PDF pp. 31–32: the A_n Bratteli diagram and path-indexed Jones tower representations. The local proof below spells out the path-basis maps."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-xxz-open-chain-temperley-lieb-representation",
+        "kind": "definition",
+        "title": "Open XXZ spin-half generators and Hamiltonian convention",
+        "dependency_level": 1,
+        "deps": [
+          "def-temperley-lieb-generator-presentation"
+        ],
+        "justified_by": [],
+        "statement": "Fix $L\\ge2$, $\\gamma\\in\\mathbb R$, $q=e^{i\\gamma}$, and loop parameter $\\delta=q+q^{-1}=2\\cos\\gamma$. Let $\\mathcal H_L=(\\mathbb C^2)^{\\otimes L}$ with ordered one-site basis $|\\uparrow\\rangle,|\\downarrow\\rangle$ and two-site basis $|\\uparrow\\uparrow\\rangle,|\\uparrow\\downarrow\\rangle,|\\downarrow\\uparrow\\rangle,|\\downarrow\\downarrow\\rangle$. With the standard Pauli matrices $X,Y,Z$, define\n$$e_i=I^{\\otimes(i-1)}\\otimes U(q)\\otimes I^{\\otimes(L-i-1)},\\quad 1\\le i<L,$$\nwhere\n$$U(q)=\\begin{pmatrix}0&0&0&0\\\\0&q^{-1}&-1&0\\\\0&-1&q&0\\\\0&0&0&0\\end{pmatrix}=-\\frac12\\bigl(X\\otimes X+Y\\otimes Y+\\cos\\gamma\\,Z\\otimes Z-\\cos\\gamma\\,I_4+i\\sin\\gamma\\,(Z\\otimes I_2-I_2\\otimes Z)\\bigr).$$\nThe open-chain Temperley–Lieb Hamiltonian convention is $H_L=-\\sum_{i=1}^{L-1}e_i$. No wrap-around term couples site $L$ to site $1$. This defines local operators; the following result proves their Temperley–Lieb relations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Nichols, The Temperley-Lieb Algebra and its Generalizations in the Potts and XXZ Models",
+              "url": "https://arxiv.org/pdf/hep-th/0509069",
+              "locator": "§2.1.1, equation (2.3), PDF p. 4: q = e^(i gamma), the open spin-half local generator and its Pauli expansion; equation (2.2) for H_TL = -sum e_i."
+            },
+            {
+              "title": "Vaughan F. R. Jones, Planar Algebras, I",
+              "url": "https://arxiv.org/pdf/math/9909027",
+              "locator": "§2.1, printed pp. 27–29: the Temperley–Lieb generator convention and diagram algebra."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-potts-open-chain-clock-shift-representation",
+        "kind": "definition",
+        "title": "Open Potts clock-shift Temperley–Lieb generators",
+        "dependency_level": 1,
+        "deps": [
+          "def-temperley-lieb-generator-presentation"
+        ],
+        "justified_by": [],
+        "statement": "Let $Q\\in\\{2,3,4\\}$, $L\\ge1$, $\\omega_Q=e^{2\\pi i/Q}$, and $\\delta=\\sqrt Q$. On $\\mathbb C^Q$ with basis $|0\\rangle,\\ldots,|Q-1\\rangle$, define the clock and shift matrices by\n$$R_Q|a\\rangle=\\omega_Q^a|a\\rangle,\\qquad M_Q|a\\rangle=|a-1\\!\\pmod Q\\rangle.$$\nThus the source matrices are\n$$R_2=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},\\quad M_2=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix};\\qquad R_3=\\begin{pmatrix}1&0&0\\\\0&e^{2\\pi i/3}&0\\\\0&0&e^{4\\pi i/3}\\end{pmatrix},\\quad M_3=\\begin{pmatrix}0&1&0\\\\0&0&1\\\\1&0&0\\end{pmatrix}.$$\n$$R_4=\\begin{pmatrix}1&0&0&0\\\\0&i&0&0\\\\0&0&-1&0\\\\0&0&0&-i\\end{pmatrix},\\quad M_4=\\begin{pmatrix}0&1&0&0\\\\0&0&1&0\\\\0&0&0&1\\\\1&0&0&0\\end{pmatrix}.$$\nOn $\\mathcal H_{Q,L}=(\\mathbb C^Q)^{\\otimes L}$, put, for $1\\le j\\le L$ and $1\\le j<L$ respectively,\n$$e_{2j-1}=\\frac1{\\sqrt Q}\\sum_{r=0}^{Q-1}M_{Q,j}^{\\,r},\\qquad e_{2j}=\\frac1{\\sqrt Q}\\sum_{r=0}^{Q-1}R_{Q,j}^{\\,r}R_{Q,j+1}^{-r}.$$\nwhere the subscript denotes the tensor factor on which the matrix acts. The Potts loop normalization is $\\delta=q+q^{-1}$ with\n$$q=\\begin{cases}e^{i\\pi/4},&Q=2,\\\\ e^{i\\pi/6},&Q=3,\\\\1,&Q=4.\\end{cases}$$\nThe free/open-chain Hamiltonian convention is $H_{Q,L}=-\\sum_{i=1}^{2L-1}e_i$; there is no generator joining the last site back to the first. The following result proves that these operators satisfy the stated Temperley–Lieb relations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Nichols, The Temperley-Lieb Algebra and its Generalizations in the Potts and XXZ Models",
+              "url": "https://arxiv.org/pdf/hep-th/0509069",
+              "locator": "§2.1.2–2.1.4, equations (2.4), (2.6)–(2.10), PDF pp. 4–6: the Q = 2, 3, 4 matrices, loop parameters and open-chain Hamiltonian."
+            },
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "Chapter 2, §§2.1.1–2.1.4, PDF pp. 4–6: loop and idempotent normalizations in the finite diagram representation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-temperley-lieb-diagram-tower-and-right-closure",
+        "kind": "definition",
+        "title": "Finite diagram tower inclusion and normalized right closure",
+        "dependency_level": 2,
+        "deps": [
+          "def-temperley-lieb-diagram-category",
+          "thm-temperley-lieb-diagram-category-laws",
+          "def-temperley-lieb-normalized-markov-trace-by-closure"
+        ],
+        "justified_by": [],
+        "statement": "Use the diagram algebra $\\mathrm{TL}_n(\\mathbb C,\\delta)$ and its stacking convention from [[def-temperley-lieb-diagram-category]] and [[thm-temperley-lieb-diagram-category-laws]]. For $n\\ge1$, append a rightmost vertical strand to every $(n,n)$ diagram and extend linearly; denote this map by\n$$\n\\iota_n:\\mathrm{TL}_n(\\mathbb C,\\delta)\\longrightarrow \\mathrm{TL}_{n+1}(\\mathbb C,\\delta),\\qquad x\\longmapsto x\\otimes1.\n$$\nFor a basis diagram $D:(n+1)\\to(n+1)$, join its rightmost top and bottom boundary points by an arc outside the rectangle, remove every resulting closed component with the factor $\\delta$, and retain the induced $(n,n)$ matching. Extend this **right closure** linearly as $c_n$. When $\\delta\\in\\mathbb C^\\times$, define the normalized right-closure map\n$$\nE_n:=\\delta^{-1}c_n:\\mathrm{TL}_{n+1}(\\mathbb C,\\delta)\\longrightarrow\\mathrm{TL}_n(\\mathbb C,\\delta).\n$$\nThe normalized closure traces $\\tau_n$ are those of [[def-temperley-lieb-normalized-markov-trace-by-closure]]. No positivity of $\\tau_n$ is included in this definition. The next result proves the algebraic expectation identities for $E_n$ and states precisely when it is a positive conditional expectation.\n\nWhen $\\delta\\in\\mathbb R$, equip each diagram algebra with the conjugate-linear involution that reflects a diagram across a horizontal line and conjugates coefficients. Reflection reverses stacking and fixes the loop weight, so $(xy)^*=y^*x^*$ and $1^*=1$. The positivity assertion below assumes this involution and a compatible finite-dimensional $C^*$-algebra structure.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "§2.1.4, PDF pp. 7–8: the right inclusion, conditional-expectation tangle, closure trace, and trace rules."
+            },
+            {
+              "title": "Vaughan F. R. Jones, Planar Algebras, I",
+              "url": "https://arxiv.org/pdf/math/9909027",
+              "locator": "§2.1, printed pp. 27–29, and §4.1, printed pp. 81–82: diagram generators, right-closure maps, and the subfactor tower convention."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-xxz-open-chain-local-matrix-satisfies-temperley-lieb",
+        "kind": "lemma",
+        "title": "The open XXZ local 4-by-4 matrix satisfies the Temperley–Lieb relations",
+        "dependency_level": 2,
+        "deps": [
+          "def-xxz-open-chain-temperley-lieb-representation",
+          "def-temperley-lieb-generator-presentation"
+        ],
+        "justified_by": [],
+        "statement": "For every $q=e^{i\\gamma}\\ne0$, put $\\delta=q+q^{-1}$ and let $U(q)$ be the local matrix defined in [[def-xxz-open-chain-temperley-lieb-representation]]. Its embeddings $e_i$ on $(\\mathbb C^2)^{\\otimes L}$ satisfy $e_i^2=\\delta e_i$, $e_i e_{i+1}e_i=e_i=e_{i+1}e_i e_{i+1}$, and $e_i e_j=e_j e_i$ when $|i-j|>1$. Thus they define a representation of the presented open Temperley–Lieb algebra, including at values where $\\delta=0$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Nichols, The Temperley-Lieb Algebra and its Generalizations in the Potts and XXZ Models",
+              "url": "https://arxiv.org/pdf/hep-th/0509069",
+              "locator": "§2.1.1, equations (2.2)–(2.3), PDF p. 4: local XXZ matrix and its open-chain convention; the matrix checks are supplied here."
+            },
+            {
+              "title": "Vaughan F. R. Jones, Planar Algebras, I",
+              "url": "https://arxiv.org/pdf/math/9909027",
+              "locator": "§2.1, printed pp. 27–29: diagram/presentation normalization."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-xxz-open-chain-hamiltonian-and-boundary-field",
+        "kind": "theorem",
+        "title": "The XXZ generator Hamiltonian has the declared Pauli expansion and endpoint field",
+        "dependency_level": 2,
+        "deps": [
+          "def-xxz-open-chain-temperley-lieb-representation"
+        ],
+        "justified_by": [],
+        "statement": "For $L\\ge2$, $q=e^{i\\gamma}$ and the open Hamiltonian $H_L=-\\sum_{i=1}^{L-1}e_i$ from [[def-xxz-open-chain-temperley-lieb-representation]],\n$$H_L=\\frac12\\sum_{i=1}^{L-1}\\left(X_iX_{i+1}+Y_iY_{i+1}+\\cos\\gamma\\,Z_iZ_{i+1}-\\cos\\gamma\\,I\\right)+\\frac{i\\sin\\gamma}{2}(Z_1-Z_L).$$\nThe sum has $L-1$ bonds and contains no periodic bond from site $L$ to site $1$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Nichols, The Temperley-Lieb Algebra and its Generalizations in the Potts and XXZ Models",
+              "url": "https://arxiv.org/pdf/hep-th/0509069",
+              "locator": "§2.1.1, equation (2.3), PDF p. 4: Pauli form of the local operator; equation (2.2) defines the Hamiltonian as the negative sum of generators."
+            },
+            {
+              "title": "Vaughan F. R. Jones, Planar Algebras, I",
+              "url": "https://arxiv.org/pdf/math/9909027",
+              "locator": "§2.1, printed pp. 27–29: the local generator convention used for the loop normalization."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-potts-q2-q3-q4-matrices-satisfy-temperley-lieb",
+        "kind": "lemma",
+        "title": "The Q = 2, 3, 4 open Potts matrices satisfy Temperley–Lieb",
+        "dependency_level": 2,
+        "deps": [
+          "def-potts-open-chain-clock-shift-representation",
+          "def-temperley-lieb-generator-presentation"
+        ],
+        "justified_by": [],
+        "statement": "For each $Q\\in\\{2,3,4\\}$, the operators $e_i$ defined in [[def-potts-open-chain-clock-shift-representation]] satisfy $e_i^2=\\sqrt Q\\,e_i$, $e_i e_{i+1}e_i=e_i=e_{i+1}e_i e_{i+1}$, and commute at distance greater than one. Their loop parameter is $\\delta=\\sqrt Q=q+q^{-1}$ with the separate $q$ values given there.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Nichols, The Temperley-Lieb Algebra and its Generalizations in the Potts and XXZ Models",
+              "url": "https://arxiv.org/pdf/hep-th/0509069",
+              "locator": "§2.1.2–2.1.4, equations (2.4), (2.6)–(2.10), PDF pp. 4–6: the clock-shift matrices and loop parameters; local projector proof below."
+            },
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "Chapter 2, §§2.1.1–2.1.4, PDF pp. 4–6: diagram and loop normalization."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-temperley-lieb-diagram-tower-conditional-expectation-identities",
+        "kind": "lemma",
+        "title": "Right closure is a trace-preserving diagram-tower expectation",
+        "dependency_level": 4,
+        "deps": [
+          "def-temperley-lieb-diagram-tower-and-right-closure",
+          "def-temperley-lieb-diagram-category",
+          "thm-temperley-lieb-diagram-category-laws",
+          "def-temperley-lieb-normalized-markov-trace-by-closure",
+          "lem-temperley-lieb-closure-trace-is-cyclic-and-markov"
+        ],
+        "justified_by": [],
+        "statement": "Let $n\\ge1$, $\\delta\\in\\mathbb C^\\times$, and let $\\iota_n,E_n$ be as in [[def-temperley-lieb-diagram-tower-and-right-closure]]. Then $\\iota_n$ is an injective unital algebra homomorphism, $E_n\\iota_n=\\mathrm{id}$, and for $a,b\\in\\mathrm{TL}_n$ and $x\\in\\mathrm{TL}_{n+1}$,\n$$\nE_n(\\iota_n(a)x\\iota_n(b))=aE_n(x)b,\\qquad \\tau_n(E_n(x))=\\tau_{n+1}(x).\n$$\nIf $d_n$ is the elementary cup-cap generator on the last two strands, then\n$$\nE_n(\\iota_n(x)d_n)=\\delta^{-1}x,\\qquad \\tau_{n+1}(\\iota_n(x)d_n)=\\delta^{-1}\\tau_n(x).\n$$\nWhen $\\delta\\in\\mathbb R$, $\\iota_n$ also preserves the reflection involution. Moreover, if $\\delta\\in\\mathbb R^\\times$, the involution is compatible with finite-dimensional $C^*$-algebra structures on the tower and the Markov traces are faithful positive traces, then $E_n$ is positive and hence is a positive trace-preserving conditional expectation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "§2.1.4, Exercise 2.1.12, PDF pp. 7–8: inclusion, closure, trace and Markov identities. The local proof below counts the closed components."
+            },
+            {
+              "title": "Vaughan F. R. Jones, Planar Algebras, I",
+              "url": "https://arxiv.org/pdf/math/9909027",
+              "locator": "§4.1, printed pp. 81–82: finite-index expectation and Jones-generator identities; §2.1, pp. 27–29: the diagram tower."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-temperley-lieb-right-closure-preserves-trace-radical",
+        "kind": "lemma",
+        "title": "Normalized right closure preserves the diagram trace radical",
+        "dependency_level": 5,
+        "deps": [
+          "lem-temperley-lieb-diagram-tower-conditional-expectation-identities",
+          "def-temperley-lieb-diagram-category",
+          "def-temperley-lieb-normalized-markov-trace-by-closure",
+          "lem-temperley-lieb-closure-trace-is-cyclic-and-markov",
+          "def-temperley-lieb-diagram-tower-and-right-closure"
+        ],
+        "justified_by": [],
+        "statement": "Let $n\\ge1$ and $\\delta\\in\\mathbb C^\\times$. Define the trace-pairing radical\n$$\nJ_n:=\\{x\\in\\mathrm{TL}_n(\\mathbb C,\\delta):\\tau_n(yx)=0\\text{ for every }y\\in\\mathrm{TL}_n(\\mathbb C,\\delta)\\}.\n$$\nThen $J_n$ is a two-sided ideal, $\\iota_n(J_n)\\subseteq J_{n+1}$, and $E_n(J_{n+1})\\subseteq J_n$. Consequently the inclusion and normalized right closure descend to the quotient tower $\\mathrm{TL}_n/J_n$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "§2.1.4, Exercise 2.1.12(6), PDF p. 8: the trace-adjoint relation between right closure and inclusion. The two-sided ideal and radical-stability assertions are proved directly below."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-temperley-lieb-root-quotient-tower-interface",
+        "kind": "theorem",
+        "title": "The positive-root Jones quotient is the type-A path tower with positive right closure",
+        "dependency_level": 8,
+        "deps": [
+          "lem-temperley-lieb-diagram-tower-conditional-expectation-identities",
+          "lem-temperley-lieb-right-closure-preserves-trace-radical",
+          "def-temperley-lieb-type-a-path-spaces-and-matrix-unit-tower",
+          "thm-temperley-lieb-type-a-path-space-tower-branching",
+          "lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings",
+          "thm-temperley-lieb-root-negligible-quotient-is-semisimple",
+          "lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness",
+          "def-temperley-lieb-quantum-integers-and-quantum-characteristic",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "justified_by": [],
+        "statement": "Let $\\ell\\ge3$, $q=e^{\\pi i/\\ell}$, $\\delta=q+q^{-1}>0$, $k=\\ell-2$, and let $[a]=\\sin(a\\pi/\\ell)/\\sin(\\pi/\\ell)$. For the normalized closure trace $\\tau_n$, let $J_n$ be its trace-pairing radical and put $Q_n=\\mathrm{TL}_n(\\mathbb C,\\delta)/J_n$. Then $J_n$ is exactly the endomorphism component of the negligible tensor ideal generated by the boundary Jones–Wenzl projector $p_{\\ell-1}$. The $Q_n$ form the actual $A_{\\ell-1}$ path-space matrix tower of [[def-temperley-lieb-type-a-path-spaces-and-matrix-unit-tower]], with paths starting at $0$ and staying in $\\{0,\\ldots,k\\}$. Their simple modules are precisely the nonzero endpoint path spaces, and restriction branches with multiplicity one over adjacent predecessor vertices.\n\nReflection gives a finite-dimensional $C^*$-structure on $Q_n$ in which the normalized closure trace is faithful positive. The strand inclusions are injective unital $*$-maps and normalized right closure descends to the positive trace-preserving conditional expectation $\\bar E_n:Q_{n+1}\\to Q_n$ for $n\\ge1$. More explicitly, choose the normalized path matrix units $F_{p,q}$ whose prefix inclusions satisfy $F_{p,q}\\mapsto\\sum_c F_{pc,qc}$. If $pc,qc$ end at $c$, with predecessor endpoints $a,b$, then\n$$\\bar E_n(F_{pc,qc})=\\begin{cases}\\dfrac{[c+1]}{\\delta[a+1]}F_{p,q},&a=b,\\\\0,&a\\ne b.\\end{cases}$$\nHere the extensions and matrix units exist only for valid adjacent retained labels. The diagonal trace is $\\tau_n(F_{p,p})=\\delta^{-n}[a+1]$ when $p$ ends at $a$. These assertions hold at every finite rank, including the $\\ell=3$ boundary; no extra quotient/path identification is assumed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vaughan F. R. Jones, Planar Algebras, I",
+              "url": "https://arxiv.org/pdf/math/9909027",
+              "locator": "§4.1, printed pp.81–92: tower and Markov normalization context. The actual positive-root path identification uses the completed PA-31 matrix-unit and radical-equality suppliers below."
+            },
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "§4.2, PDF pp. 31–32: path-space branching context."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tracial-standard-form-and-normal-functional-vectors",
+        "source_path": "items/lem-tracial-standard-form-and-normal-functional-vectors.md",
+        "kind": "lemma",
+        "title": "Tracial standard form, normal functional vectors, and expectation",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-von-neumann-algebra-and-commutant",
+          "def-tracial-state-and-faithful-normal-trace-on-a-von-neumann-algebra",
+          "thm-double-commutant-theorem-for-concrete-von-neumann-algebras",
+          "lem-bounded-density-and-finite-vector-transitivity-for-c-star-representations",
+          "thm-banach-alaoglu",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-complex-hahn-banach-norm-preserving-extension",
+          "thm-relative-hahn-banach-geometric-separation",
+          "thm-borel-functional-calculus-for-bounded-normal-operators",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Claire Anantharaman and Sorin Popa, An Introduction to II1 Factors",
+              "url": "https://www.math.ucla.edu/~popa/Books/IIun.pdf",
+              "locator": "Theorem 7.1.1 (pp. 98–99), Propositions 7.3.6–7 and Theorem 7.3.8 (pp. 109–111), Theorem 9.1.2 (p. 140). Complete arguments read; normality is explicitly the repository bounded-ball WOT convention."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assume AC. Zorn supplies maximal orthogonal families and cyclic decompositions. AC supplies the hypotheses of the published functional analytic suppliers; all nonseparable index sets are allowed.",
+        "statement": "Assume AC. Here normality for positive functionals and positive maps means WOT continuity on every operator-norm bounded ball, agreeing with the published trace convention. For a finite tracial von Neumann algebra $(A,t)$, left and right multiplication\non $L^2(A,t)$ are faithful normal representations, with $L(A)'=R(A)$ and\n$R(A)'=L(A)$. A vector $\\xi \\in L^2(A)$ defines a bounded map $a\\mapsto \\xi a$ on $L^2(A)$\nif and only if $\\xi $ is represented by an element of $A$. Every positive normal\nfunctional is $a\\mapsto \\langle a\\xi ,\\xi \\rangle $ for some $\\xi \\in L^2(A)$. If $D\\subseteq A$ is a unital von\nNeumann subalgebra, there is a unique normal faithful trace-preserving\nconditional expectation $E_D:A\\to D$; it is the restriction of the orthogonal\nprojection onto $L^2(D)$ and is contractive and $D$-bimodular.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-factor-projection-comparison-and-normalized-trace",
+        "source_path": "items/lem-finite-factor-projection-comparison-and-normalized-trace.md",
+        "kind": "lemma",
+        "title": "Projection comparison and unique normalized traces in finite factors",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-von-neumann-algebra-and-commutant",
+          "def-tracial-state-and-faithful-normal-trace-on-a-von-neumann-algebra",
+          "lem-polar-decomposition-and-nonzero-partial-isometries-in-factors",
+          "thm-borel-functional-calculus-for-bounded-normal-operators"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Claire Anantharaman and Sorin Popa, An Introduction to II1 Factors",
+              "url": "https://www.math.ucla.edu/~popa/Books/IIun.pdf",
+              "locator": "Lemma 4.1.1 and Proposition 4.1.3 (pp. 59–60), Proposition 4.2.1 (p. 61). Complete arguments read; finite-trace comparison is proved locally from the published polar/nonzero-corner supplier."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assume AC. Zorn supplies maximal orthogonal families and cyclic decompositions. AC supplies the hypotheses of the published functional analytic suppliers; all nonseparable index sets are allowed.",
+        "statement": "Assume AC. In a factor $Q$, any two projections $p,q$ are comparable by subequivalence.\nIf $Q$ has a faithful normal semifinite trace $s$ and $s(p),s(q)<\\infty$, then\n$p\\precsim q$ if and only if $s(p)\\le s(q)$, and equality means equivalence.\nEvery nonzero corner of a diffuse factor is again a diffuse factor. A diffuse\nfinite factor has a unique normalized tracial state. Finite matrix\namplifications of a II1 factor and all their nonzero corners are II1 factors.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-tracial-hilbert-module-dimension-and-finite-corners",
+        "source_path": "items/lem-tracial-hilbert-module-dimension-and-finite-corners.md",
+        "kind": "lemma",
+        "title": "Ordinary Hilbert-module dimension and finite projection models",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-von-neumann-algebra-and-commutant",
+          "def-tracial-state-and-faithful-normal-trace-on-a-von-neumann-algebra",
+          "lem-tracial-standard-form-and-normal-functional-vectors",
+          "lem-finite-factor-projection-comparison-and-normalized-trace"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Claire Anantharaman and Sorin Popa, An Introduction to II1 Factors",
+              "url": "https://www.math.ucla.edu/~popa/Books/IIun.pdf",
+              "locator": "Lemma 8.2.1 and Propositions 8.2.2–3 (pp. 123–124; footnote 2 allows arbitrary I), Proposition 8.4.2 (pp. 128–129), Definition 8.5.4 and Proposition 8.6.1 (pp. 133–134). Finite-trace classification is proved locally for arbitrary I."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assume AC. Zorn supplies maximal orthogonal families and cyclic decompositions. AC supplies the hypotheses of the published functional analytic suppliers; all nonseparable index sets are allowed.",
+        "statement": "Assume AC. For a finite tracial algebra $(N,t)$, every Hilbert space $H$ with a normal\nunital right $N$ action, meaning a unital star anti-homomorphism into $B(H)$ that is WOT continuous on bounded balls, is right-unitarily isomorphic to\n$P(\\ell^2(I)\\otimes L^2(N))$, where $I$ is an arbitrary set and\n$P\\in B(\\ell^2(I)) \\bar\\otimes N$ is a projection. Its bounded right-linear operator\nalgebra is the corner $P(B(\\ell^2(I)) \\bar\\otimes N)P$. The formula\n$\\operatorname{Tr}_N(T)=\\sum _i t(T_{ii})$ for positive $T$ defines a faithful normal\nsemifinite trace on the ambient algebra and its corner. Transport to $H$\nis independent of the model; its value at the identity defines $\\dim_N H$.\nIf $N$ is a II1 factor and this dimension is finite, $H$ is isomorphic to\n$p L^2(N)^k$ for some finite $k$ and $p\\in M_k(N)$, with\n$\\dim_N H=(\\operatorname{Tr}_k\\otimes t)(p)$.",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-extremal-finite-index-ii1-subfactor-data",
+        "kind": "definition",
+        "title": "Finite-index extremal II1 subfactor data",
+        "dependency_level": 2,
+        "deps": [
+          "def-von-neumann-algebra-and-commutant",
+          "def-tracial-state-and-faithful-normal-trace-on-a-von-neumann-algebra",
+          "def-axiom-of-choice",
+          "lem-tracial-standard-form-and-normal-functional-vectors",
+          "lem-tracial-hilbert-module-dimension-and-finite-corners"
+        ],
+        "justified_by": [],
+        "axiom_use": "AC supplies Hilbert adjoints, maximal orthogonal module decompositions, projection comparison and compactness selections through the declared foundational suppliers. No bounded frame is assumed.",
+        "statement": "Assume AC. A **II1 factor** is a von Neumann algebra $A$ with center $\\mathbb C1$, no nonzero minimal projections, and a faithful normal normalized trace $\\tau_A$, with the operator and trace conventions of [[def-von-neumann-algebra-and-commutant]] and [[def-tracial-state-and-faithful-normal-trace-on-a-von-neumann-algebra]]. A **II1 subfactor inclusion** is a unital inclusion $N\\subseteq M$ of II1 factors, with $\\tau_N=\\tau_M|_N$. Its trace-preserving normal faithful conditional expectation $E_N:M\\to N$ is the unique expectation constructed in [[lem-tracial-standard-form-and-normal-functional-vectors]]; it is positive, unital, $N$-bimodular, and the restriction of the orthogonal projection $e_N:L^2(M)\\to L^2(N)$.\n\nA **normal right Hilbert-space $N$-module** is a Hilbert space with a unital star representation of $N^{\\mathrm{op}}$ that is WOT-continuous on the operator-norm unit ball. This is the topological normality convention of the trace definition above. Right multiplication is $R_a(x)=xa$, so $R_aR_b=R_{ba}$. The amplification theorem [[lem-tracial-hilbert-module-dimension-and-finite-corners]] constructs a right-module unitary $H\\cong P(\\ell^2(I)\\otimes L^2(N))$ and its model-independent canonical semifinite trace on $\\operatorname{End}_N(H)$, given in that model by $\\operatorname{Tr}_H(T)=\\sum_{i\\in I}\\tau_N(T_{ii})$ for positive $T$. Define $\\dim_N H=\\operatorname{Tr}_H(1)$; in particular $\\dim_N L^2(N)=1$. The **ordinary Jones index** of the inclusion is\n$$[M:N]=\\dim_N L^2(M,\\tau_M)=:\\lambda.$$\nThe inclusion has **finite index** when $\\lambda<\\infty$. No finite bounded frame or complete $N$-valued module model is part of this hypothesis.\n\nFor finite index, put $B=\\operatorname{End}_N L^2(M)$ and $\\tau_B=\\lambda^{-1}\\operatorname{Tr}_{L^2(M)}$. Let $J(x)=x^*$ on $L^2(M)$, so $R_a=JL_{a^*}J$. The inclusion is **extremal** when\n$$\\tau_B(R_a)=\\tau_M(a)\\qquad(a\\in N'\\cap M).$$\nHere $N'\\cap M=\\{a\\in M:an=na\\text{ for every }n\\in N\\}$, and $R_a$ belongs to $B$ for these $a$. Equivalently, the normalized trace on the commutant of the left $N$ action and $\\tau_M$ agree on $N'\\cap M$, transported by $J$. This specifies the right-action trace: the normalized trace of $B$ on the left action of $M$ agrees automatically with $\\tau_M$ and does not define extremality.\n\nFor later calculations write $\\mathcal X=M$ with $N$-valued inner product $\\langle x,y\\rangle_N=E_N(x^*y)$ and norm $\\|x\\|_{\\mathcal X}=\\|E_N(x^*x)\\|^{1/2}$. Its completeness, finite projection model $\\mathcal X\\cong pN^k$, and bounded coordinate frame are consequences proved below from ordinary finite index; they are not additional assumptions. No separability or irreducibility hypothesis is imposed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vaughan F. R. Jones, Planar Algebras, I",
+              "url": "https://arxiv.org/pdf/math/9909027",
+              "locator": "§4.1, printed pp. 81–92: finite-index II1 inclusions, basic-construction notation, finite module bases, and the extremality convention."
+            },
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "§3.2.1–3.2.2 and §4.2, PDF pp. 20–22 and 31–32: trace-preserving expectations, the orthogonal projection, and the finite-index tower setting."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-index-bounded-vector-pull-down",
+        "source_path": "items/lem-finite-index-bounded-vector-pull-down.md",
+        "kind": "lemma",
+        "title": "Finite Jones index gives bounded vector pull-down",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-von-neumann-algebra-and-commutant",
+          "def-tracial-state-and-faithful-normal-trace-on-a-von-neumann-algebra",
+          "lem-tracial-standard-form-and-normal-functional-vectors",
+          "lem-finite-factor-projection-comparison-and-normalized-trace",
+          "lem-tracial-hilbert-module-dimension-and-finite-corners",
+          "def-extremal-finite-index-ii1-subfactor-data",
+          "lem-bounded-density-and-finite-vector-transitivity-for-c-star-representations",
+          "thm-banach-alaoglu",
+          "thm-double-commutant-theorem-for-concrete-von-neumann-algebras"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Claire Anantharaman and Sorin Popa, An Introduction to II1 Factors",
+              "url": "https://www.math.ucla.edu/~popa/Books/IIun.pdf",
+              "locator": "Proposition 9.4.2 (pp. 147–148), Proposition 9.4.5 and Corollary 9.4.6 (p. 149), complete proofs read. Local proof includes bounded approximation in the pull-down step."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assume AC. Zorn supplies maximal orthogonal families and cyclic decompositions. AC supplies the hypotheses of the published functional analytic suppliers; all nonseparable index sets are allowed.",
+        "statement": "Assume AC. Let $N\\subseteq M$ be II1 factors and let $H=L^2(M,\\tau )$. Define ordinary Jones\nindex by $\\lambda =\\dim_N H<\\infty $ using [[lem-tracial-hilbert-module-dimension-and-finite-corners]]. Let $e$ be the orthogonal\nprojection onto $L^2(N)$. Then\n$B=(\\text{right }N)'=W^*(M,e)$ is a II1 factor with canonical unnormalized trace\n$\\operatorname{Tr}_B(1)=\\lambda $, $\\operatorname{Tr}_B(e)=1$,\n$\\operatorname{Tr}_B(xey)=\\tau (yx)$, and $\\operatorname{Tr}_B|_M=\\lambda \\tau $.\nIts normalized trace-preserving expectation $F:B\\to M$ satisfies\n$F(xey)=\\lambda ^{-1} xy$. Every $T\\in B$ has a unique bounded $x\\in M$ such that\n$Te=xe$; necessarily $x=\\lambda F(Te)$. In particular every right-$N$ bounded\nvector in $H$ is represented by an element of $M$.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-finite-right-n-module-frame-from-projection-model",
+        "kind": "lemma",
+        "title": "Ordinary finite Jones index supplies a bounded finite Parseval frame",
+        "dependency_level": 4,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-von-neumann-algebra-and-commutant",
+          "def-tracial-state-and-faithful-normal-trace-on-a-von-neumann-algebra",
+          "lem-finite-factor-projection-comparison-and-normalized-trace",
+          "lem-finite-index-bounded-vector-pull-down",
+          "def-extremal-finite-index-ii1-subfactor-data",
+          "lem-tracial-hilbert-module-dimension-and-finite-corners"
+        ],
+        "justified_by": [],
+        "axiom_use": "Assume AC. Zorn supplies maximal orthogonal families and cyclic decompositions. AC supplies the hypotheses of the published functional analytic suppliers; all nonseparable index sets are allowed.",
+        "statement": "Assume AC. Under the ordinary finite-index hypotheses of [[lem-finite-index-bounded-vector-pull-down]] there are a finite\ninteger $k$, elements $u_1,\\ldots ,u_k\\in M$ and a projection $p\\in M_k(N)$ such that\n\n- $\\sum  u_j e u_j^*=1$ on $L^2(M)$;\n- $x=\\sum  u_j E_N(u_j^*x)$ for all $x\\in M$;\n- $\\sum  \\tau (u_j^*u_j)=\\lambda $ and $\\sum  u_j u_j^*=\\lambda 1$;\n- $U:M\\to pN^k$, $U(x)=(E_N(u_j^*x))_j$, is an onto right-module unitary\n  for the $N$-valued inner product $E_N(x^*y)$;\n- $p_{ij}=E_N(u_i^*u_j)$ and $(\\operatorname{Tr}_k\\otimes \\tau _N)(p)=\\lambda $.\n\nIn particular $M$ is complete in the norm $\\|E_N(x^*x)\\|^{1/2}$ and the\nbounded coordinate representatives are exactly $u_j=U^{-1}(p \\varepsilon _j)$.\nFurthermore $\\|x\\|\\le \\sqrt{\\lambda}\\|E_N(x^*x)\\|^{1/2}$ for $x\\in M$.\n\nThe map $U$ also extends to a right-module Hilbert-space unitary $L^2(M)\\cong pL^2(N)^k$. Consequently $\\operatorname{End}_N(L^2(M))\\cong pM_k(N)p$, every such endomorphism preserves $M$, and for its matrix $a=(a_{ij})\\in pM_k(N)p$ one has $T(x)=\\sum_{i,j}u_i a_{ij}E_N(u_j^*x)$ for every $x\\in M$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Claire Anantharaman and Sorin Popa, An Introduction to II1 Factors",
+              "url": "https://www.math.ucla.edu/~popa/Books/IIun.pdf",
+              "locator": "Proposition 9.4.8 (p. 150), complete proof read, together with Proposition 8.6.1 (p. 134). Local proof derives the finite bounded coordinates and complete module model from ordinary finite Jones index."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-finite-index-ii1-basic-construction-jones-tower",
+        "kind": "theorem",
+        "title": "Ordinary finite-index II1 inclusions give the full Jones tower and Temperley–Lieb relations",
+        "dependency_level": 5,
+        "deps": [
+          "def-extremal-finite-index-ii1-subfactor-data",
+          "lem-finite-right-n-module-frame-from-projection-model",
+          "lem-finite-index-bounded-vector-pull-down",
+          "lem-tracial-standard-form-and-normal-functional-vectors",
+          "lem-finite-factor-projection-comparison-and-normalized-trace",
+          "def-temperley-lieb-generator-presentation",
+          "thm-temperley-lieb-presentation-isomorphism",
+          "thm-temperley-lieb-generator-normal-form",
+          "lem-temperley-lieb-closure-trace-is-cyclic-and-markov",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "axiom_use": "AC is inherited from the ordinary-index module and tracial foundations: maximal orthogonal families, finite projection comparison, Hilbert adjoints and compactness selections. The subsequent dual frames and Jones-relation calculations are explicit finite sums.",
+        "statement": "Let $N\\subseteq M$ be an ordinary finite-index II1 inclusion as in [[def-extremal-finite-index-ii1-subfactor-data]], with $\\lambda=[M:N]<\\infty$ and $\\delta=\\sqrt\\lambda>0$. Set $M_{-1}=N$, $M_0=M$, and recursively let $e_i$ be projection $L^2(M_{i-1})\\to L^2(M_{i-2})$ and $M_i=W^*(M_{i-1},e_i)$ for $i\\ge1$. Every $M_i$ is a II1 factor; every adjacent inclusion has index $\\lambda$ and a bounded finite right-module Parseval frame. Its normalized trace extends the earlier trace and satisfies\n$$\\tau_i(xe_i y)=\\lambda^{-1}\\tau_{i-1}(yx)\\qquad(x,y\\in M_{i-1}).$$\nIf $N\\subseteq M$ is extremal in the specified right-action sense, every adjacent inclusion is extremal. The projections satisfy\n$$e_i^2=e_i=e_i^*,\\qquad e_i e_{i+1}e_i=\\lambda^{-1}e_i,\\qquad e_{i+1}e_i e_{i+1}=\\lambda^{-1}e_{i+1},\\qquad [e_i,e_j]=0\\quad(|i-j|\\ge2).$$\nConsequently $U_i=\\delta e_i$ define compatible unital $*$-representations of the finite diagram Temperley–Lieb tower $\\mathrm{TL}_n(\\mathbb C,\\delta)\\to M_{n-1}$, whose pulled-back traces are the normalized closure traces. Neither surjectivity onto $M_{n-1}$ nor identification with its full relative commutant is asserted. These conclusions include the index-one inclusion $N=M$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vaughan F. R. Jones, Planar Algebras, I",
+              "url": "https://arxiv.org/pdf/math/9909027",
+              "locator": "§4.1, printed pp. 81–92: finite-index basic construction, module traces and Jones projections. The first-stage frame calculation is given directly below."
+            },
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "§§3.2.1–3.2.2, PDF pp. 20–22, and §4.2.1, PDF pp. 31–32: conditional expectation as orthogonal projection, finite module projection, and tower setting."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 2941,
+    "id": "temperley-lieb-towers-and-physics-models-examples",
+    "kind": "B",
+    "category": "quantum-algebra-and-representation-theory",
+    "title": "Temperley–Lieb Towers, Spin Chains, and Scaling Interfaces: Examples and Counterexamples",
+    "companion": "temperley-lieb-towers-and-physics-models",
+    "requires": [
+      "temperley-lieb-towers-and-physics-models"
+    ],
+    "items": [
+      {
+        "id": "cex-xxz-unit-circle-generator-not-self-adjoint",
+        "kind": "counterexample",
+        "title": "The XXZ local generator is not always self-adjoint in the standard spin basis",
+        "dependency_level": 2,
+        "deps": [
+          "def-xxz-open-chain-temperley-lieb-representation"
+        ],
+        "justified_by": [],
+        "statement": "For the convention of [[def-xxz-open-chain-temperley-lieb-representation]], the blanket claim that $U(q)$ is self-adjoint for every unit-circle $q$ is false. At $q=e^{i\\pi/4}$, $U(q)^*\\ne U(q)$ in the standard ordered spin basis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Nichols, The Temperley-Lieb Algebra and its Generalizations in the Potts and XXZ Models",
+              "url": "https://arxiv.org/pdf/hep-th/0509069",
+              "locator": "§2.1.1, equation (2.3), PDF p. 4: the unit-circle local matrix convention."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "rem-temperley-lieb-scaling-limit-and-boundary-status",
+        "kind": "remark",
+        "title": "Scaling limits and non-open boundary models remain source-qualified",
+        "dependency_level": 2,
+        "deps": [
+          "def-xxz-open-chain-temperley-lieb-representation",
+          "def-potts-open-chain-clock-shift-representation"
+        ],
+        "justified_by": [],
+        "statement": "The XXZ and Potts definitions in this batch are exact finite-dimensional open-chain operator families. The cited continuum-limit discussion calls its proposed lattice-to-Virasoro-mode formula conjectural and its derivation heuristic, while noting free-fermion results and numerical support in interacting cases. The source does not establish a theorem covering every spectrum, spectral gap, Bethe state, or boundary algebra; that limit is an inference from the stated scope of the cited discussion. Periodic, blob, and two-boundary Temperley–Lieb variants require their own generators and boundary relations and are outside these open-chain definitions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Nichols, The Temperley-Lieb Algebra and its Generalizations in the Potts and XXZ Models",
+              "url": "https://arxiv.org/pdf/hep-th/0509069",
+              "locator": "§§2.1.1–2.1.4, PDF pp. 4–6: finite open-chain definitions and separate Potts parameter conventions."
+            },
+            {
+              "title": "A. M. Gainutdinov, N. Read, and H. Saleur, Continuum Limit and the Conformal Bootstrap in Two-Dimensional Logarithmic Theories",
+              "url": "https://arxiv.org/pdf/1303.2082",
+              "locator": "discussion around equation (49), printed pp. 19–20, and conclusion p. 36: conjectural/heuristic Virasoro-mode correspondence and unresolved general relation."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-matrix-amplification-basic-construction",
+        "kind": "example",
+        "title": "A matrix amplification gives an explicit finite-index II1 inclusion",
+        "dependency_level": 6,
+        "deps": [
+          "def-extremal-finite-index-ii1-subfactor-data",
+          "lem-finite-right-n-module-frame-from-projection-model",
+          "thm-finite-index-ii1-basic-construction-jones-tower",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC as inherited from the II1 factor and finite-index suppliers. Let $(P,\\tau_P)$ be a II1 factor with faithful normal normalized trace and let $k\\ge2$. The inclusion $N=P\\otimes1\\subseteq M=P\\bar\\otimes M_k(\\mathbb C)$ with trace $\\tau_P\\otimes\\operatorname{tr}_k$ has expectation $E_N=\\mathrm{id}_P\\otimes\\operatorname{tr}_k$, is extremal, has frame $u_{ab}=\\sqrt{k}(1\\otimes e_{ab})$ for $1\\le a,b\\le k$, and has index $[M:N]=k^2$. Its first basic construction has trace $\\tau_1(xe_Ny)=k^{-2}\\tau(yx)$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vaughan F. R. Jones, Planar Algebras, I",
+              "url": "https://arxiv.org/pdf/math/9909027",
+              "locator": "§4.1, printed pp. 81–92: finite-index module frames, basic construction and trace normalization."
+            },
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "§§3.2.1–3.2.2, PDF pp. 20–22: right-module inner product, finite projection model and basic-construction trace."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The II1 factor and normalized trace are the supplied data; the finite matrix-unit frame is explicit and uses no choice."
+      },
+      {
+        "id": "ex-xxz-q-one-three-site-open-chain",
+        "kind": "example",
+        "title": "The q = 1 three-site open XXZ chain has loop value 2",
+        "dependency_level": 3,
+        "deps": [
+          "def-xxz-open-chain-temperley-lieb-representation",
+          "lem-xxz-open-chain-local-matrix-satisfies-temperley-lieb",
+          "thm-xxz-open-chain-hamiltonian-and-boundary-field"
+        ],
+        "justified_by": [],
+        "statement": "At $q=1$ and $L=3$, the loop value is $\\delta=2$. In the mixed-spin sector of each adjacent pair the local block is $\\begin{pmatrix}1&-1\\\\-1&1\\end{pmatrix}$; the embedded generators satisfy the TL relations, and in the ordered three-site basis grouped by number of down spins the open Hamiltonian is $\\operatorname{diag}(0,-K,-K,0)$ with $K=\\begin{pmatrix}1&-1&0\\\\-1&2&-1\\\\0&-1&1\\end{pmatrix}$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Nichols, The Temperley-Lieb Algebra and its Generalizations in the Potts and XXZ Models",
+              "url": "https://arxiv.org/pdf/hep-th/0509069",
+              "locator": "§2.1.1, equations (2.2)–(2.3), PDF p. 4: the XXZ local matrix, q=1 loop value and open Hamiltonian convention."
+            },
+            {
+              "title": "Vaughan F. R. Jones, Planar Algebras, I",
+              "url": "https://arxiv.org/pdf/math/9909027",
+              "locator": "§2.1, printed pp. 27–29: Temperley–Lieb diagram generators and loop convention."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-potts-q-two-three-four-open-chain",
+        "kind": "example",
+        "title": "The Q = 2, 3, 4 Potts chains use three distinct q normalizations",
+        "dependency_level": 3,
+        "deps": [
+          "def-potts-open-chain-clock-shift-representation",
+          "lem-potts-q2-q3-q4-matrices-satisfy-temperley-lieb"
+        ],
+        "justified_by": [],
+        "statement": "For $Q=2,3,4$, the loop values and corresponding parameters are respectively $(\\delta,q)=(\\sqrt2,e^{i\\pi/4})$, $(\\sqrt3,e^{i\\pi/6})$, and $(2,1)$. On each site the odd generator is $\\sqrt Q|+\\rangle\\langle+|$; on adjacent sites the even generator is $\\sqrt Q\\sum_{a=0}^{Q-1}|aa\\rangle\\langle aa|$. For $L$ Potts sites the open Hamiltonian contains exactly $L+(L-1)=2L-1$ generators.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. Nichols, The Temperley-Lieb Algebra and its Generalizations in the Potts and XXZ Models",
+              "url": "https://arxiv.org/pdf/hep-th/0509069",
+              "locator": "§2.1.2–2.1.4, PDF pp. 4–6: explicit Q=2,3,4 clocks, shifts, and parameters."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-temperley-lieb-rank-three-right-closure",
+        "kind": "example",
+        "title": "Right closure on the five rank-three diagrams",
+        "dependency_level": 5,
+        "deps": [
+          "def-temperley-lieb-diagram-tower-and-right-closure",
+          "def-temperley-lieb-diagram-category",
+          "lem-temperley-lieb-diagram-tower-conditional-expectation-identities",
+          "def-temperley-lieb-normalized-markov-trace-by-closure",
+          "thm-temperley-lieb-diagrams-have-catalan-cardinality"
+        ],
+        "justified_by": [],
+        "statement": "For $\\delta\\in\\mathbb C^\\times$, use the five standard basis diagrams $1_3,d_1,d_2,d_1d_2,d_2d_1$ of $\\mathrm{TL}_3(\\mathbb C,\\delta)$. Their right closures are\n$$E_2(1_3)=1_2,\\quad E_2(d_1)=d_1,\\quad E_2(d_2)=\\delta^{-1}1_2,\\quad E_2(d_1d_2)=E_2(d_2d_1)=\\delta^{-1}d_1.$$\nThe normalized trace satisfies $\\tau_3(D)=\\tau_2(E_2(D))$ for all five diagrams.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Penneys, Exercises in Quantum Algebra",
+              "url": "https://people.math.osu.edu/penneys.2/archive/QuantumAlgebra.pdf",
+              "locator": "§2.1.4, PDF pp. 7–8: right closure, trace preservation and the Markov value."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

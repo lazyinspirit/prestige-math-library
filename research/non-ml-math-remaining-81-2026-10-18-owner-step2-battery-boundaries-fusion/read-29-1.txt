@@ -1,0 +1,240 @@
+
+ITEM def-qc-tqc-physical-braid-interface
+
+
+## Definition
+
+Let $V$ be a nonzero finite-dimensional complex inner-product space and let
+$\rho:B_n\to U(V)$ be a fixed mathematical braid representation. A **physical
+implementation record** for a braid $b\in B_n$ consists of all of the following
+data and hypotheses:
+
+1. a finite-dimensional physical state space identified with $V$ on a specified
+   low-energy sector;
+2. a $C^2$ path $H(s)$ of Hermitian endomorphisms, $0\le s\le1$, and a
+   norm-continuous constant-rank orthogonal spectral projection $P(s)$ that
+   is a coherently followed band in the sense of
+   [[def-qa-36-finite-adiabatic-path-model]], including its local-contour
+   continuation, and is separated from its complement by a uniform positive
+   full gap;
+3. an explicit initial preparation isometry into $\operatorname{ran}P(0)$,
+   its declared preparation cost, and a stated slow-time schedule $T>0;$
+4. a separate identification of the band's transported action for the chosen
+   exchange path with $\rho(b)$, up to a stated scalar phase.
+
+The first three clauses form an instance of the finite adiabatic path model
+[[def-qa-36-finite-adiabatic-path-model]]. Under those hypotheses,
+[[thm-qa-36-jrs-finite-adiabatic-bound]] bounds the deviation from ideal
+adiabatic band following. That estimate does not establish that a material
+realizes the fusion category, that the exchange path has the prescribed
+holonomy, or that the initial state can be prepared at no cost. Locality,
+temperature, quasiparticle separation, stray excitations, and tunnelling
+require their own physical error model.
+
+ITEM lem-qc-tqc-special-unitary-connected
+
+
+## Statement
+
+For every integer $n\ge1$, the matrix group
+$$SU(n)=\{A\in M_n(\mathbb C):A^*A=I,\ \det A=1\}$$
+is path connected.
+
+## Facts & Assumptions
+
+**Given:** An integer $n\ge1$ and a matrix $A\in SU(n)$.
+
+[F1] A normal complex matrix has an orthonormal eigenbasis.
+[[thm-complex-spectral-theorem-for-normal-endomorphisms]]
+
+[F2] For real $\alpha$, $|e^{i\alpha}|=1$, and
+$e^{i\alpha}=e^{i\beta}$ exactly when $\alpha-\beta\in2\pi\mathbb Z$.
+[[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]
+[[thm-kernel-and-fibres-of-complex-exponential]]
+
+[F3] The complex exponential is entire, hence continuous.
+[[thm-complex-exponential-is-entire-with-derivative-itself]]
+
+## Proof
+
+1.1 The matrix $A$ is unitary and therefore normal. By [F1], choose a unitary matrix $Q$ and real phases $\alpha_1,\ldots,\alpha_n$ such that $A=Q\operatorname{diag}(e^{i\alpha_1},\ldots,e^{i\alpha_n})Q^*$. Since $\det A=1$, [F2] gives $\sum_j\alpha_j=2\pi k$ for some integer $k$. Replace $\alpha_1$ by $\alpha_1-2\pi k$; the eigenvalue is unchanged and the sum of phases is now zero. This uses only finitely many eigenvalues. [given, F1, F2, choose, algebra]
+
+2.1 Define $A(t)=Q\operatorname{diag}(e^{it\alpha_1},\ldots,e^{it\alpha_n})Q^*$ for $0\le t\le1$. Each $A(t)$ is unitary by [F2], and $\det A(t)=e^{it\sum_j\alpha_j}=1$, so $A(t)\in SU(n)$. The path is continuous by [F3], $A(0)=I$, and $A(1)=A$. Thus every element is joined to the identity, proving path connectedness. [given, F2, F3, step 1.1, algebra] ∎
+
+ITEM def-qc-tqc-fixed-charge-encoding
+
+
+## Definition
+
+Fix a unitary fusion category $\mathcal D$ and the representative set
+$\operatorname{Irr}(\mathcal D)$ of [[def-qc-tqc-fusion-tree-basis]].
+For an ordered list $x_1,\ldots,x_n\in\operatorname{Irr}(\mathcal D)$,
+$n\ge1$, a total charge $c\in\operatorname{Irr}(\mathcal D)$, and a
+parenthesized input tensor $T$, let $V=\operatorname{Hom}(T,c)\ne0$,
+equipped with that definition's orthonormal fusion-tree inner product.
+The identical-input case $x_1=\cdots=x_n=x$ retains the notation
+$V=V(x^n\to c)$. Let
+$\mathcal C=\mathbb C^k$ with its ordered orthonormal computational basis,
+where $k\ge1$. A **fixed-charge encoding** is an isometry
+$J:\mathcal C\to V$, so $J^*J=I_{\mathcal C}$. Its code subspace is
+$J\mathcal C$, and its code projector is
+$$P:=JJ^*:V\to V.$$
+An encoding records a chosen subspace of a fusion space; it does not identify
+that subspace with an object of the fusion category.
+
+## Facts & Assumptions
+
+**Given:** The finite-dimensional fusion space $V$, the computational space
+$\mathcal C$, and an isometry $J:\mathcal C\to V$.
+
+[F1] An isometry satisfies $J^*J=I_{\mathcal C}$.
+[[def-linear-isometry-and-orthogonal-or-unitary-operator]]
+
+[F2] The adjoint satisfies $(AB)^*=B^*A^*$ and $(J^*)^*=J$.
+[[def-adjoint-of-a-linear-map-between-inner-product-spaces]]
+
+
+
+## Proof
+
+1.1 By [F2], $P^*=(JJ^*)^*=(J^*)^*J^*=JJ^*=P$. Also $P^2=JJ^*JJ^*=J(J^*J)J^*=JI_{\mathcal C}J^*=P$ by [F1]. Hence $P$ is an orthogonal projection. [given, F1, F2, algebra]
+
+2.1 For every $u\in\mathcal C$, $P(Ju)=JJ^*Ju=Ju$ by [F1], so $J\mathcal C\subseteq\operatorname{ran}P$. Conversely $Pv=J(J^*v)$ lies in $J\mathcal C$ for every $v\in V$, so $\operatorname{ran}P\subseteq J\mathcal C$. Therefore $\operatorname{ran}P=J\mathcal C$. [given, F1, step 1.1, algebra] ∎
+
+ITEM def-qc-tqc-logical-error-and-leakage
+
+
+## Definition
+
+Let $J:\mathcal C\to V$ be a fixed-charge encoding, $P=JJ^*$ its code
+projector, $U\in U(\mathcal C)$ a logical target, and $W\in U(V)$ an ambient
+unitary. Its zero-on-the-complement target extension is
+$\widetilde U:=JUJ^*:V\to V$. Define the **logical block error** and
+**leakage amplitude** by
+$$\epsilon_{\mathrm{log}}(W,U):=\|PWP-\widetilde U\|_{\mathrm{op}}, \qquad \epsilon_{\mathrm{leak}}(W):=\|(I-P)WP\|_{\mathrm{op}}.$$
+Both are finite operator norms. The first measures the compressed block
+against the target; the second measures transfer from the code into its
+orthogonal complement. They diagnose different errors.
+
+## Facts & Assumptions
+
+**Given:** A finite-dimensional encoding $J:\mathcal C\to V$, its projector
+$P$, a logical unitary $U$, and an ambient unitary $W$.
+
+[F1] $P$ is the orthogonal projection onto $J\mathcal C$.
+[[def-qc-tqc-fixed-charge-encoding]]
+
+[F2] The operator norm is finite for every linear map between
+finite-dimensional inner-product spaces.
+[[def-operator-norm-on-a-finite-dimensional-inner-product-space]]
+
+## Proof
+
+1.1 The maps $PWP-\widetilde U$ and $(I-P)WP$ are endomorphisms of $V$. Because $V$ is finite dimensional, [F2] assigns a finite operator norm to each map; the two quantities are therefore well defined. [given, F1, F2]
+
+2.1 For a zero-leakage but logically incorrect boundary case, take $V=\mathcal C=\mathbb C^2$, $J=P=I$, $W=I$, and $U=\operatorname{diag}(1,-1)$. Then $\epsilon_{\mathrm{leak}}=0$ and $\epsilon_{\mathrm{log}}=\|I-U\|_{\mathrm{op}}=2$. This proves the two quantities are not interchangeable. [given, F1, F2, algebra] ∎
+
+ITEM def-qc-tqc-braid-action-from-fusion-data
+
+
+## Definition
+
+Fix a unitary braided fusion category $\mathcal C$ and the simple-object
+representative set $\operatorname{Irr}(\mathcal C)$ used in
+[[def-qc-tqc-fusion-tree-basis]]. Let $x,c\in\operatorname{Irr}(\mathcal C)$,
+let $n\ge2$, and suppose $V(x^n\to c)\ne0$. Use the left-associated fusion-tree basis. For the Artin
+generator $\sigma_i$ that exchanges the $i$th and $(i+1)$st strands, let
+$T_i$ be the specified sequence of $F$-moves that changes from the fixed tree
+basis to a basis where those two charges fuse first, and let $R_i$ apply the
+corresponding $R$-symbol on each pair-charge channel. Define
+$$\rho_c(\sigma_i):=T_i^{-1}R_iT_i.$$
+This defines the generator assignment. The next theorem proves that the
+assignment descends from words to a well-defined group homomorphism. Word
+products use matrix multiplication acting right-to-left on column vectors.
+The abstract group in this definition is the Artin group
+[[def-braid-group-by-the-artin-presentation]]; the positive crossing is the
+generator convention used for the displayed $R$-symbols. If a motion is
+described chronologically, its matrix product is written in reverse temporal
+order.
+
+
+## Positive crossing convention
+
+The diagram depicts the positive adjacent generator on two identical charges.
+Time runs from top to bottom; the continuous left-input strand passes over the
+broken right-input strand. The crossing represents $c_{x,x}$, while its
+pullback on a fusion space uses the inverse in the formula above. This fixes
+the $R$-matrix orientation; the proof of the Artin relations is categorical.
+
+[diagram omitted from reading extract]
+
+## Remarks
+
+The geometric configuration convention in
+[[thm-geometric-braids-are-the-fundamental-group-of-unordered-configurations]]
+uses first-loop-then-second multiplication, while raw slicing reverses
+stacking. This definition fixes the algebraic Artin action directly and makes
+no extra assertion that the library's geometric group is identified with the
+Artin presentation under a stronger axiom branch.
+
+ITEM lem-qc-tqc-zero-logical-error-forces-zero-leakage
+
+
+## Statement
+
+Let $J:\mathcal C\to V$ be an isometric encoding with $P=JJ^*$, let $U$ be
+unitary on $\mathcal C$, and let $W$ be unitary on $V$. If the logical block
+error $\|PWP-JUJ^*\|_{\mathrm{op}}$ is zero, then the leakage amplitude
+$\|(I-P)WP\|_{\mathrm{op}}$ is zero.
+
+## Facts & Assumptions
+
+**Given:** Finite-dimensional inner-product spaces $\mathcal C,V$, an
+isometry $J:\mathcal C\to V$, a unitary $U$ on $\mathcal C$, a unitary $W$ on
+$V$, and zero logical block error.
+
+[F1] The logical block error is $\|PWP-JUJ^*\|_{\mathrm{op}}$ and the leakage
+amplitude is $\|(I-P)WP\|_{\mathrm{op}}$; $P=JJ^*$ is the orthogonal
+projection onto $J\mathcal C$.
+[[def-qc-tqc-logical-error-and-leakage]]
+
+[F2] Isometries preserve inner-product norm, and orthogonal projection splits
+a vector into orthogonal code and complement components.
+[[def-linear-isometry-and-orthogonal-or-unitary-operator]]
+[[def-inner-product-norm]]
+
+## Proof
+
+1.1 Zero block error means $PWP=JUJ^*$ as operators on $V$. For every $x\in\mathcal C$, $J^*J=I_{\mathcal C}$ gives $PWJx=PWPJx=JUJ^*Jx=JUx$. By [F2], $\|WJx\|=\|x\|$ and $\|PWJx\|=\|JUx\|=\|Ux\|=\|x\|$. [given, F1, F2, algebra]
+
+2.1 The decomposition $WJx=PWJx+(I-P)WJx$ is orthogonal by [F1]. Its Pythagorean identity and step 1.1 give $\|(I-P)WJx\|^2=\|WJx\|^2-\|PWJx\|^2=0$ for every $x$. Hence $(I-P)WJ=0$, and since $P=JJ^*$, $(I-P)WP=0$; its operator norm is zero. [F1, F2, step 1.1, algebra] ∎
+
+ITEM thm-qc-tqc-block-approximation-error
+
+
+## Statement
+
+Let $V=P V\oplus(I-P)V$ be an orthogonal decomposition of a finite-dimensional
+Hilbert space, let $U$ and $W$ be unitary operators on the two summands, and
+let $T:=U\oplus W$. If an ambient unitary $G$ satisfies
+$\|G-T\|_{\mathrm{op}}\le\delta$, then the logical block error of $G$ relative
+to $U$ and its leakage amplitude both are at most $\delta$.
+
+## Facts & Assumptions
+
+**Given:** The orthogonal projection $P$, the block-unitary target $T$, the
+ambient unitary $G$, and $\delta\ge0$.
+
+[F1] Logical block error and leakage are
+$\|PGP-U P\|_{\mathrm{op}}$ and $\|(I-P)GP\|_{\mathrm{op}}$ after identifying
+$U$ with its zero-on-the-complement extension.
+[[def-qc-tqc-logical-error-and-leakage]]
+
+[F2] The operator norm is the maximum of $\|Tx\|$ over unit vectors $x$.
+[[def-operator-norm-on-a-finite-dimensional-inner-product-space]]
+
+## Proof
+
+1.1 Since $T$ preserves both summands, $PTP=UP$ on $PV$ and $(I-P)TP=0$. Thus $PGP-UP=P(G-T)P$. For any $y\in V$, the decomposition $y=Py+(I-P)y$ is orthogonal, so the Pythagorean identity gives $\|Py\|\le\|y\|$ and $\|(I-P)y\|\le\|y\|$. Applying the first inequality to $y=(G-T)Px$ and to $x$, for every unit vector $x$, yields $\|P(G-T)Px\|\le\|(G-T)Px\|\le\|G-T\|_{\mathrm{op}}$. Taking the maximum in [F2] proves the norm is at most $\delta$. This is the logical block error bound. [given, F1, F2, algebra]
+
+2.1 Similarly $(I-P)GP=(I-P)(G-T)P$ because $(I-P)TP=0$. Use the second contraction proved in step 1.1: for every unit $x$, $\|(I-P)(G-T)Px\|\le\|(G-T)Px\|\le\|G-T\|_{\mathrm{op}}\le\delta$. Taking the maximum gives the leakage bound. [given, F1, F2, step 1.1, algebra] ∎

@@ -3,6 +3,7 @@ id: thm-cauchy-functional-equation-regularity
 kind: theorem
 title: "Six regularity conditions each force an additive $f : \\mathbb{R} \\to \\mathbb{R}$ to be $x \\mapsto f(1)x$: continuity at a single point, monotonicity on a nondegenerate interval, boundedness above on one, boundedness below on one, constancy of sign on one, and a graph that is not dense in $\\mathbb{R}^{2}$"
 status: published
+dependency_level: 3
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,12 @@ landmark: true
 short: "regularity forces linearity"
 proof_strategy: cases
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/thm-cauchy-functional-equation-regularity.json
 sources:
   scraped: []
   references:

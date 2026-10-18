@@ -3,6 +3,7 @@ id: prop-frattini-subgroup-monotonicity-for-subgroups-of-finite-p-groups
 kind: proposition
 title: "If $H\\le P$ are finite $p$-groups, then $\\Phi(H)\\le\\Phi(P)$"
 status: published
+dependency_level: 6
 origin: session
 provenance:
   statement: literature-derived
@@ -14,10 +15,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/published-receipts/prop-frattini-subgroup-monotonicity-for-subgroups-of-finite-p-groups.json
 sources:
   scraped: []
   references:

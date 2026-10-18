@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "batch": "27",
+  "round": 0,
+  "reviewed_items": [
+    "def-finite-layered-trellis",
+    "def-finite-hidden-markov-model-for-sequence-decoding",
+    "lem-finite-trellis-prefix-score-recurrence",
+    "lem-finite-hmm-joint-law-normalizes",
+    "alg-viterbi-max-product-on-finite-trellis",
+    "thm-viterbi-finite-trellis-is-optimal",
+    "alg-hmm-viterbi-sequence-map",
+    "thm-hmm-viterbi-is-sequence-map",
+    "cex-hmm-zero-evidence-has-no-posterior-map",
+    "cex-hmm-marginal-modes-are-not-sequence-map",
+    "ex-finite-trellis-viterbi-tie-and-unreachable-state",
+    "ex-hmm-viterbi-exact-sequence-map"
+  ],
+  "reviewed_pages": [
+    "finite-trellis-viterbi-and-sequence-decoding",
+    "finite-trellis-viterbi-and-sequence-decoding-examples"
+  ],
+  "decision": "repair",
+  "reason": "The assigned proofs, examples, and supplier uses are sound. The approved IT24 design includes N=0, but the trellis definition and Viterbi procedure only cover T≥1. This is locally repairable. The prefix-coding page route contributes no mathematical premise to these claims.",
+  "findings": [
+    {
+      "id": "scope-trellis-zero-length",
+      "type": "scope",
+      "reason": "IT24 requires the zero-length trellis case. The current definition requires T≥1, and the algorithm initializes D1 and reads VT without an empty-horizon branch. Define the empty-path convention (naturally, score 1), add the algorithm branch, and update the recurrence/theorem domains and operation bound as needed."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-finite-trellis-prefix-score-recurrence",
+      "decision": "repair",
+      "reason": "Its unqualified finite-trellis statement defines D1, so after expanding the definition it must explicitly restrict to T≥1 or include an empty case."
+    },
+    {
+      "id": "alg-viterbi-max-product-on-finite-trellis",
+      "decision": "repair",
+      "reason": "Add a T=0 branch consistent with the chosen empty-path convention."
+    },
+    {
+      "id": "thm-viterbi-finite-trellis-is-optimal",
+      "decision": "repair",
+      "reason": "Cover the T=0 algorithm branch in the statement and proof; O(T+V+E) also needs a constant term for the empty input."
+    },
+    {
+      "id": "alg-hmm-viterbi-sequence-map",
+      "decision": "accept",
+      "reason": "Its HMM input has T≥1 and always constructs a positive-length trellis."
+    },
+    {
+      "id": "ex-finite-trellis-viterbi-tie-and-unreachable-state",
+      "decision": "accept",
+      "reason": "The example uses T=3 and is unaffected by the added zero-length case."
+    },
+    {
+      "id": "thm-hmm-viterbi-is-sequence-map",
+      "decision": "accept",
+      "reason": "Its HMM domain requires T≥1, so the existing positive-length trellis result suffices."
+    },
+    {
+      "id": "ex-hmm-viterbi-exact-sequence-map",
+      "decision": "accept",
+      "reason": "The example uses a length-three observation sequence and is unaffected."
+    },
+    {
+      "id": "finite-trellis-viterbi-and-sequence-decoding-examples",
+      "decision": "accept",
+      "reason": "Its examples use positive-length trellises and make no zero-length claim."
+    }
+  ]
+}

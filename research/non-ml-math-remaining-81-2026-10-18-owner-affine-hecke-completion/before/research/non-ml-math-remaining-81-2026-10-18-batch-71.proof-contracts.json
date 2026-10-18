@@ -1,0 +1,525 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-hh-affine-hecke-im-basis",
+    "lem-hh-affine-hecke-bernstein-quotients-are-well-defined",
+    "lem-hh-positive-affine-parameter-has-infinite-quantum-characteristic",
+    "ex-hh-affine-b2-unequal-parameters",
+    "ex-hh-affine-padic-versus-root-of-unity-parameters"
+  ],
+  "contracts": {
+    "lem-hh-affine-hecke-im-basis": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hh-affine-hecke-algebra-from-root-datum",
+          "source_section": "Definition",
+          "quote": "The extended **Iwahori–Matsumoto affine Hecke algebra** is the crossed product",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hh-generic-coxeter-hecke-standard-basis",
+          "source_section": "Statement",
+          "quote": "**Standard basis.** $\\{T_w:w\\in W\\}$ is an $R$-basis of $H$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hh-affine-hecke-algebra-from-root-datum",
+          "source_section": "Definition",
+          "quote": "Its underlying vector space is $\\mathcal H_{\\mathrm{aff}}(R,q)\\otimes_\\mathbb C\\mathbb C[\\Omega]$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "affine-coxeter-basis",
+          "step": "1.1",
+          "claim": "The generic Coxeter basis theorem applies to the supplied affine Coxeter system and remains a basis after the parameter specialization to the positive complex units.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "extended-crossed-product-basis",
+          "step": "2.1",
+          "claim": "The direct-sum crossed-product vector space has the tensor-product basis T_w U_omega, with unique finite expansions.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If W_aff is trivial, step 1.1 gives its singleton basis and step 2.1 gives the group basis indexed by Omega."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The parameter domain requires q_s>0, so zero is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes q_s=1 as a valid specialization of the generic basis theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 carries the basis through coefficient specialization, including q_s=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval or limit endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the given Coxeter basis and finite-support crossed-product expansion; no representatives are selected from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a basis, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a basis, not a biconditional."
+        }
+      ]
+    },
+    "lem-hh-affine-hecke-bernstein-quotients-are-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abstract-root-datum-and-its-weyl-group",
+          "source_section": "Definition",
+          "quote": "the reflections $s_\\alpha(x)=x-\\langle x,\\alpha^\\vee\\rangle\\alpha$ and $s_{\\alpha^\\vee}(y)=y-\\langle\\alpha,y\\rangle\\alpha^\\vee$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hh-affine-hecke-bernstein-presentation",
+          "source_section": "Definition",
+          "quote": "The group algebra $\\mathbb C[Y]$ is the complex vector space with basis $\\{\\theta_y:y\\in Y\\}$ and multiplication $\\theta_y\\theta_z=\\theta_{y+z}$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ordinary-root-divisibility",
+          "step": "1.1",
+          "claim": "For n=<alpha,y>, the numerator is theta_y(1-u^n); the finite geometric-sum formulas for positive, zero, and negative n show divisibility by 1-u.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "doubled-root-divisibility",
+          "step": "2.1",
+          "claim": "If alpha=2 beta in X, then n is even; applying the same finite Laurent-sum identity to u^2 proves divisibility by 1-u^2.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A simple root and lattice element are part of the given data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 give numerator zero when <alpha,y>=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives quotient 1 for n=1; step 2.1 shows the doubled-root branch cannot have n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The negative-exponent formula in step 1.1 also covers every negative even exponent in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval or limiting parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 fix the given alpha and y and use only finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts divisibility, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts divisibility, not a biconditional."
+        }
+      ]
+    },
+    "lem-hh-positive-affine-parameter-has-infinite-quantum-characteristic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "source_section": "Definition",
+          "quote": "least integer $e\\ge2$ such that $1+q+\\cdots+q^{e-1}=0$ in $F$, and $e:=\\infty$ when no such integer exists",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-real-parameter",
+          "step": "1.1",
+          "claim": "Every finite geometric sum in q>1 is positive, so no finite quantum characteristic exists.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "root-of-unity-parameter",
+          "step": "2.1",
+          "claim": "For xi not equal to one, the geometric-sum identity makes the least vanishing exponent its multiplicative order; its modulus also separates xi from q>1.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns scalar parameters."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "q is assumed to be a positive real number greater than one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "q=1 is excluded; in characteristic zero the canonical definition also gives infinity at q=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The finite-order branch explicitly assumes xi!=1; step 2.1 applies to every root of unity of order at least two."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 are scalar calculations and make no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives two parameter cases, not an if-and-only-if classification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives two parameter cases, not an if-and-only-if classification."
+        }
+      ]
+    },
+    "ex-hh-affine-b2-unequal-parameters": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-abstract-root-datum-and-its-weyl-group",
+          "source_section": "Definition",
+          "quote": "A **root datum** is a quadruple $(X,\\Phi,X^\\vee,\\Phi^\\vee)$ consisting of free $\\mathbb Z$-modules $X,X^\\vee$ of finite rank in perfect duality",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hh-affine-hecke-algebra-from-root-datum",
+          "source_section": "Definition",
+          "quote": "Define $\\mathcal H_{\\mathrm{aff}}(R,q)$ to be the quotient of the free associative $\\mathbb C$-algebra on $(T_s)_{s\\in S_{\\mathrm{aff}}}$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cg-affine-root-hyperplane-reflection-and-alcove",
+          "source_section": "Definition",
+          "quote": "The **affine reflection group** $W_a$ is the subgroup of the Euclidean isometry group $\\mathrm{Isom}(E)$ generated by the maps $r_{\\alpha,k}$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cg-affine-alcove-transitivity-presentation-and-length",
+          "source_section": "Statement",
+          "quote": "Thus $W_a$ is the Coxeter group with simple system $(s_a)_{a\\in J}$, and it acts simply transitively on alcoves",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hh-universal-coxeter-hecke-parameters-and-presentation",
+          "source_section": "Definition",
+          "quote": "Write $s\\sim t$ when there exist $s=s_0,s_1,\\dots,s_k=t$ in $S$ with $m(s_i,s_{i+1})$ odd for every $i<k$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-hh-affine-hecke-im-basis",
+          "source_section": "Statement",
+          "quote": "is a $\\mathbb C$-basis of $\\mathcal H_{\\mathrm{IM}}(R,q)$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "b2-root-datum",
+          "step": "1.1",
+          "claim": "The displayed dual lattice bases, root set, coroot set, and finite signed-permutation Weyl group satisfy the reduced root-datum conditions.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "affine-b2-coxeter-labels",
+          "step": "1.2",
+          "claim": "The three affine wall reflections have product orders 4, 4, and 2, yielding the stated affine B2 Coxeter system.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unequal-parameter-validity",
+          "step": "2.1",
+          "claim": "All Coxeter labels are even, so the odd-edge parameter classes are singletons and q0=q1=2, q2=3 meets the required parameter condition.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "b2-im-basis",
+          "step": "3.1",
+          "claim": "The length-zero group is trivial for Y=Q^vee, and the local extended Iwahori–Matsumoto basis lemma supplies the affine Hecke basis.",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty rank-two root datum B2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both Hecke parameters are positive units, 2 and 3."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No rank-one or one-node affine system is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example uses generic positive parameters and does not specialize to a root of unity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There are no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use the displayed lattice bases, affine reflections, parameters, and supplied basis; no arbitrary-family choices occur."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        }
+      ]
+    },
+    "ex-hh-affine-padic-versus-root-of-unity-parameters": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hh-positive-affine-parameter-has-infinite-quantum-characteristic",
+          "source_section": "Statement",
+          "quote": "$e(\\mathbb C,q)=\\infty$ and $e(\\mathbb C,\\xi)$ is the finite multiplicative order of $\\xi$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "source_section": "Definition",
+          "quote": "least integer $e\\ge2$ such that $1+q+\\cdots+q^{e-1}=0$ in $F$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "q3-infinite-characteristic",
+          "step": "1.1",
+          "claim": "The positive-real lemma applies to q_F=3 and yields infinite quantum characteristic.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "i-fourth-root-characteristic",
+          "step": "1.2",
+          "claim": "The sums 1+i and 1+i+i^2 are nonzero while the sum through i^3 is zero, so the least vanishing exponent is 4.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "parameter-regime-conclusion",
+          "step": "2.1",
+          "claim": "The computed quantum characteristics differ and the scalar moduli differ; no algebra-equivalence conclusion is asserted.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two nonzero scalar parameters."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both 3 and i are invertible parameters."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Neither scalar is 1; the characteristic-zero q=1 case is not claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the finite root-of-unity case exactly at i; step 1.1 handles the p-adic positive-real value 3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use the explicit scalar values and four geometric-sum terms."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        }
+      ]
+    }
+  }
+}

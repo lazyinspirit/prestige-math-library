@@ -3,6 +3,7 @@ id: cor-regular-values-have-null-complement-and-are-dense
 kind: corollary
 title: "Regular values have null complement and are dense"
 status: published
+dependency_level: 5
 origin: session
 provenance:
   statement: literature-derived
@@ -15,13 +16,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (cor-regular-values-have-null-complement-and-are-dense). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/cor-regular-values-have-null-complement-and-are-dense.json
 sources:
   scraped: []
   references:

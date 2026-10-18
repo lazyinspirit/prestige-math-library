@@ -71,8 +71,8 @@ space of weak equivalence classes, and that Fell convergence and closure are
 governed by weak containment of direct sums. The A page closes with the
 abelian case, where $C^*(G)$ recovers Pontryagin duality
 ([[cor-the-abelian-group-c-star-algebra-recovers-pontryagin-duality]]), and
-with the canonical full-to-reduced comparison. Every item is a draft authored
-under the Axiom of Choice where the GNS, direct-sum and dual constructions
+with the canonical full-to-reduced comparison. The constructions use
+the Axiom of Choice where the GNS, direct-sum and dual constructions
 require it; selective prerequisites such as the nondegeneracy convention
 ([[def-nondegenerate-star-representation-of-a-banach-star-algebra]]) are
 recorded explicitly rather than assumed.

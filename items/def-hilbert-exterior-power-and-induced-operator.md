@@ -11,6 +11,18 @@ deps:
   - def-bounded-linear-operator
   - cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases
   - def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis
+  - def-completion-of-a-normed-space
+  - def-space-of-bounded-linear-operators
+  - def-operator-norm
+  - thm-bounded-operator-space-is-banach
+  - thm-complex-plane-is-complete
+  - thm-cauchy-schwarz-in-an-inner-product-space
+  - thm-parallelogram-law
+  - thm-jordan-von-neumann-polarization
+  - thm-hartogs
+  - thm-transfinite-recursion
+  - thm-transfinite-induction
+  - def-axiom-schema-of-replacement
 justified_by: []
 landmark: false
 proof_strategy: direct
@@ -20,10 +32,11 @@ provenance:
 verification:
   precheck: pass
   judge:
-    model: "gpt-6-sol"
+    model: gpt-6-sol
     verdict: pass
     date: 2026-09-29
   audited: 2026-09-30
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/def-hilbert-exterior-power-and-induced-operator.json
 sources:
   scraped: []
   references:
@@ -49,7 +62,7 @@ relations. Give it the sesquilinear form determined on elementary tensors by
 $$\langle x_1\otimes\cdots\otimes x_n, y_1\otimes\cdots\otimes y_n\rangle =\prod_{i=1}^n\langle x_i,y_i\rangle,$$
 
 which is well defined because the product is linear in each first-slot vector
-and conjugate-linear in each second-slot vector. Complete
+and conjugate-linear in each second-slot vector. Apply the choice-free sequential Hilbert completion constructed in proof steps 1.1–7.1 below to
 $H^{\otimes_{\rm alg}n}$ in the induced norm to obtain the Hilbert tensor
 power $H^{\otimes n}$. Use the action convention
 $U_\pi(x_1\otimes\cdots\otimes x_n)=
@@ -85,20 +98,52 @@ induced operator is considered, a bounded linear operator $T:H\to H$.
 
 [A4] Every finite-dimensional real or complex inner-product space has a finite orthonormal basis, including the empty basis in dimension zero ([[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]).
 
-[A5] A supplied orthonormal basis is a complete orthonormal family, so its finite linear span is dense in $H$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]).
+[A5] A supplied orthonormal basis is a complete orthonormal family, so its finite linear span is dense in $H$ ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). For the increasing-index enumeration of basis wedges in step 11.1, a linear order on its index set is supplied as additional data; no order on an arbitrary set is asserted to exist.
+
+[L1] The bounded operator space $\mathcal B(X,\mathbb C)$ has the unit-ball operator norm and is Banach because $\mathbb C$ is complete ([[def-space-of-bounded-linear-operators]], [[def-operator-norm]], [[thm-bounded-operator-space-is-banach]], [[thm-complex-plane-is-complete]]). The proof uses uniquely determined pointwise limits, not a family of arbitrary choices.
+
+[L2] Cauchy–Schwarz gives $|\langle x,y\rangle|\le\|x\|\|y\|$; the original norm satisfies the parallelogram law. A complex norm satisfying that law determines a unique first-variable-linear inner product by polarization ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[thm-parallelogram-law]], [[thm-jordan-von-neumann-polarization]], [[def-real-and-complex-inner-product-space]]).
+
+[L3] Hartogs' theorem gives, for each set $A$, an ordinal $h(A)$ that does not inject into $A$. Transfinite recursion and induction hold in ZF without Choice ([[thm-hartogs]], [[thm-transfinite-recursion]], [[thm-transfinite-induction]]).
+
+[L4] Replacement collects a family of uniquely specified values into a function ([[def-axiom-schema-of-replacement]]). Power Set, Separation and Union are available as in the ZF hypotheses of [L3].
+
+[L5] A norm completion is a Banach space with a dense linear isometric embedding, and Hilbert completeness here means convergence of Cauchy sequences ([[def-completion-of-a-normed-space]], [[def-hilbert-space]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Fix $n\ge1$. In any finite tensor sum, all factor vectors lie in a finite-dimensional subspace $E\subseteq H$. Choose a finite orthonormal basis $(f_j)$ of $E$ by [A4]. Multilinearity expands the sum in the elementary tensors $f_{j_1}\otimes\cdots\otimes f_{j_n}$; the product form makes these tensors orthonormal. Their linear independence follows by applying the multilinear coordinate functionals $(x_1,\ldots,x_n)\mapsto\prod_{r=1}^n\langle x_r,f_{j_r}\rangle$, which descend to the quotient and extract their coefficients. Thus the form is positive definite on every finite tensor span. Its completion is the Hilbert tensor power $H^{\otimes n}$. [A1, A4, construct]
+In steps 1.1–7.1, let $X$ be an arbitrary complex inner-product space; for bounded extension let $Y$ be any complex Banach space and $T:X\to Y$ any linear map with bound $C\ge0$. Then return to the given $H$ and its operator in steps 8.1–11.1.
 
-2.1 Each $U_\pi$ is unitary and $U_\pi U_\tau=U_{\pi\tau}$. Replacing $\pi$ by $\pi^{-1}$ in the adjoint sum gives $A_n^*=A_n$; grouping the $n!$ pairs with product $\rho$ gives $A_n^2=A_n$. Thus $A_n$ is an orthogonal projection and is bounded with norm at most $1$ by the orthogonal decomposition into its range and kernel. Its range is closed. It is exactly the alternating subspace because the signed average is alternating and fixes every alternating tensor. [step 1.1, algebra]
+1.1 Let $D=\mathcal B(X,\mathbb C)$ and give its conjugate vector space $\overline D$ the same addition and norm, with scalar action $\lambda\cdot_{\overline D}\varphi=\overline\lambda\varphi$. It is Banach by [L1]. Define $j(x)(y)=\langle y,x\rangle$. This is a bounded linear functional of $y$ by [L2]. Since $j(\lambda x)=\overline\lambda j(x)=\lambda\cdot_{\overline D}j(x)$, the map $j:X\to\overline D$ is complex-linear. Cauchy–Schwarz gives $\|j(x)\|\le\|x\|$; if $x\ne0$, evaluation at $y=x/\|x\|$ gives $|j(x)(y)|=\|x\|$, so equality holds; it also holds at zero. Thus $j$ is an isometry. [L1, L2, given, construct, algebra]
 
-2.2 Let $C$ be any bound for $T$ from [A3]. After permuting tensor factors, a finite tensor sum can be written $\sum_{j=1}^m x_j\otimes y_j$ with $(y_j)$ an orthonormal basis of the finite-dimensional span of its remaining-factor tensors. Its squared norm is $\sum_j\|x_j\|^2$, while applying $T$ in that factor gives squared norm $\sum_j\|Tx_j\|^2\le C^2\sum_j\|x_j\|^2$. Since factor permutations are unitary, this proves the bound $C$ for applying $T$ in any one slot. Composing over the $n$ slots extends $T^{\otimes n}$ to the completion with bound $C^n$. [A3, A4, step 1.1]
+2.1 Put $S=\overline{jX}$ in $\overline D$. It is a vector subspace: approximating two points within an arbitrary positive tolerance gives approximants for their sum, and approximating one point does the same for each scalar multiple. These are finite choices for fixed points and tolerance. It is complete because a Cauchy sequence has a limit in $\overline D$ by [L1], and that limit lies in the closed set $S$. The norm of $S$ satisfies the parallelogram law without selecting approximants for a whole sequence of tolerances. Indeed, for $u,v\in S$ and each $0<\delta\le1$, take $x,y\in X$ with $\|u-jx\|,\|v-jy\|<\delta$. The reverse triangle inequality and $|a^2-b^2|=|a-b|(a+b)$ show that the absolute value of the parallelogram defect at $(u,v)$ is at most $12\delta(\|u\|+\|v\|+1)$, since the defect at $(jx,jy)$ is zero by [L2]. This bound for every $\delta$ forces the defect to vanish. Polarization [L2] therefore equips $S$ with its unique compatible inner product. Since $j$ is linear and isometric, polarization shows this pairing restricts to the original pairing on $X$. Thus $S$ is an ambient Hilbert space and $jX$ is dense in $S$. [L1, L2, step 1.1, construct, algebra]
 
-3.1 By step 2.1 the normalized wedges are vectors in the alternating range. For pure tensors, self-adjointness and idempotence give $\langle\sqrt{n!}A_nx,\sqrt{n!}A_ny\rangle=n!\langle x,A_ny\rangle$. Expanding the signed average yields $\sum_{\pi\in S_n}\operatorname{sgn}(\pi)\prod_i\langle x_i,y_{\pi(i)}\rangle$, which is the determinant in [A2]. This proves the stated Gram formula and its positivity from the Hilbert-space norm. [A1, A2, step 2.1]
+3.1 For $A\subseteq S$, define $L(A)$ to be the set of limits in $S$ of all Cauchy sequences with terms in $A$. The set of sequences is a subset of $A^{\mathbb N}$, and each has a unique limit because $S$ is complete, so [L4] makes $L(A)$ a well-defined subset of $S$. Constant sequences give $A\subseteq L(A)$. Let $\kappa=h(\mathcal P(S))$, and use [L3] to define, through stage $\kappa$, $$A_0=jX,\qquad A_{\alpha+1}=L(A_\alpha),\qquad A_\lambda=\bigcup_{\alpha<\lambda}A_\alpha\quad(\lambda\text{ a nonzero limit ordinal}).$$ The chain is increasing. If $A_{\alpha+1}\ne A_\alpha$ for every $\alpha<\kappa$, then for $\alpha<\beta<\kappa$ one has $A_\alpha\subsetneq A_{\alpha+1}\subseteq A_\beta$, so $\alpha\mapsto A_\alpha$ injects $\kappa$ into $\mathcal P(S)$, contradicting the choice of $\kappa$. Let $\theta<\kappa$ be the least stage with $A_{\theta+1}=A_\theta$. This uses Hartogs of the power set, not a selection of one new point at each stage. [L3, L4, step 2.1, construct, induction, contradiction]
 
-3.2 On elementary tensors $T^{\otimes n}$ commutes with every permutation, hence preserves $\operatorname{ran}A_n$ and restricts to a bounded $\Lambda^nT$ with bound $C^n$. Its action on wedges is the displayed formula. Applying that formula twice proves $\Lambda^n(ST)=\Lambda^nS\,\Lambda^nT$ on a dense span and therefore everywhere. For $n=0$ the space is $\mathbb C$ and the induced map is its identity; for $n=1$, $A_1=I$ and $\Lambda^1T=T$. If $T=0$ and $n\ge1$, its induced map is zero. [A3, step 2.1, step 2.2]
+4.1 Each $A_\alpha$ is a vector subspace. At a successor, for two points choose two witnessing sequences in $A_\alpha$; their sum and scalar multiples converge to the corresponding sum and scalar multiple in $S$, so these belong to $L(A_\alpha)$. Only two witnesses for a fixed pair are used, not a family indexed by all points. At a limit, any two points occur in two earlier stages, whose larger ordinal stage contains both; the union is therefore a vector subspace. Transfinite induction proves the assertion. Set $X^{\mathrm{seq}}=A_\theta$ with the restricted pairing. Every Cauchy sequence in it converges in $S$, and the fixed-point equality puts that limit back in $A_\theta$. Hence it is Hilbert. Since $jX$ is dense in $S$ and $jX\subseteq A_\theta$, it is dense in $A_\theta$ in the subspace norm. Thus $(X^{\mathrm{seq}},j)$ is a norm completion. Any sequentially closed subset of $S$ containing $jX$ contains every $A_\alpha$ by induction, so this hull is the least such subset. [L3, L5, step 2.1, step 3.1, induction, algebra]
 
-4.1 If $(e_j)$ is a supplied orthonormal basis of $H$, its finite span is dense by [A5]. Approximate the factors of each elementary tensor by finite linear combinations of the $e_j$. The telescoping tensor identity and $\|x_1\otimes\cdots\otimes x_n\|=\prod_r\|x_r\|$ show that elementary tensors in those finite spans are dense in $H^{\otimes n}$. Since $A_n$ is bounded, their images are dense in $\operatorname{ran}A_n$. Applying $A_n$ to a basis tensor gives zero if indices repeat and otherwise a signed multiple of the wedge with increasing indices. These wedges are orthonormal by step 3.1 and span a dense subspace, so they form an orthonormal basis of $\Lambda^nH$. If $H$ is finite-dimensional with $n>\dim H$, there are no increasing $n$-tuples and $\Lambda^nH=\{0\}$. [A5, step 2.1, step 3.1, construct] ∎
+4.2 Start with $T_0(jx)=Tx$ on $A_0$. Suppose $T_\alpha:A_\alpha\to Y$ is linear with bound $C$. For $u\in A_{\alpha+1}$, there is a Cauchy sequence $(u_n)$ in $A_\alpha$ converging to $u$ in $S$. The sequence $T_\alpha u_n$ is Cauchy by its bound and has a limit in $Y$. If $(v_n)$ is another witness for $u$, then $\|T_\alpha u_n-T_\alpha v_n\|\le C\|u_n-v_n\|\to0$, so the two limits agree. Therefore the relation “$y$ is the limit of the image of a witnessing sequence for $u$” has exactly one value $y$ for each $u$. Replacement [L4] defines a function $T_{\alpha+1}$ with these values, without choosing one witnessing sequence for every $u$. Constant sequences show $T_{\alpha+1}|_{A_\alpha}=T_\alpha$. Taking limits in $\|T_\alpha u_n\|\le C\|u_n\|$ gives the same bound on $A_{\alpha+1}$. [L4, given, step 3.1, construct, algebra]
+
+5.1 For $u,v\in A_{\alpha+1}$, choose two witnesses $(u_n),(v_n)$ in $A_\alpha$. The witnesses $(u_n+v_n)$ and $(\lambda u_n)$ and uniqueness of limits give $T_{\alpha+1}(u+v)=T_{\alpha+1}u+T_{\alpha+1}v$ and $T_{\alpha+1}(\lambda u)=\lambda T_{\alpha+1}u$. At a limit ordinal take the union of the compatible preceding functions. This union is a function, and its linearity and bound follow in one common earlier stage for every fixed pair of arguments. Transfinite recursion [L3] therefore produces the compatible bounded linear maps through stage $\theta$, giving $\widetilde T=T_\theta$. [L3, L4, step 4.1, step 4.2, construct, induction, algebra]
+
+6.1 If $U,V:X^{\mathrm{seq}}\to Y$ are bounded linear extensions of $T$ with respective bounds $C_U,C_V$, then for each $u$ and each $\delta>0$, density supplies one $x\in X$ with $\|u-jx\|<\delta$. Since $Ujx=Vjx$, one has $\|Uu-Vu\|\le(C_U+C_V)\delta$. Hence $Uu=Vu$ for every $u$. No simultaneous family of approximants is used. This proves uniqueness, including uniqueness among extensions with a different bound. [step 4.1, step 5.1, algebra]
+
+7.1 If $X$ is already Cauchy complete, $jX$ is sequentially closed in $S$: any Cauchy sequence in $jX$ has the unique inverse sequence in $X$ under $j$, and the latter converges in $X$; its image is the unique ambient limit. Thus $L(jX)=jX$, $\theta=0$, and $X^{\mathrm{seq}}=jX$. In particular completing a Hilbert space by this construction changes nothing. Together with steps 4.1–6.1 this proves the completion and bounded-extension assertions for arbitrary $X$ without a choice axiom. [L4, L5, step 1.1, step 3.1, step 4.1, step 5.1, step 6.1, algebra]
+
+8.1 Fix $n\ge1$. In any finite tensor sum, all factor vectors lie in a finite-dimensional subspace $E\subseteq H$. Choose a finite orthonormal basis $(f_j)$ of $E$ by [A4]. Multilinearity expands the sum in the elementary tensors $f_{j_1}\otimes\cdots\otimes f_{j_n}$; the product form makes these tensors orthonormal. Their linear independence follows by applying the multilinear coordinate functionals $(x_1,\ldots,x_n)\mapsto\prod_{r=1}^n\langle x_r,f_{j_r}\rangle$, which descend to the quotient and extract their coefficients. Thus the form is positive definite on every finite tensor span. It defines an inner-product space, and step 7.1 supplies its choice-free sequential Hilbert completion $H^{\otimes n}$. When $n=1$, this construction identifies the tensor power with the already complete space $H$ by the onto assertion in step 7.1. [A1, A4, step 7.1, construct]
+
+9.1 Each algebraic permutation preserves the product pairing, so step 7.1 extends it uniquely and isometrically to $U_\pi$ on the Hilbert tensor power. The inverse permutation extends to its inverse; hence each $U_\pi$ is unitary and $U_\pi U_\tau=U_{\pi\tau}$. Replacing $\pi$ by $\pi^{-1}$ in the adjoint sum gives $A_n^*=A_n$; grouping the $n!$ pairs with product $\rho$ gives $A_n^2=A_n$. Thus $A_n$ is an orthogonal projection and is bounded with norm at most $1$ by the orthogonal decomposition into its range and kernel. Its range is closed. It is exactly the alternating subspace because the signed average is alternating and fixes every alternating tensor. [step 7.1, step 8.1, algebra]
+
+9.2 Let $C$ be any bound for $T$ from [A3]. After permuting tensor factors, a finite tensor sum can be written $\sum_{j=1}^m x_j\otimes y_j$ with $(y_j)$ an orthonormal basis of the finite-dimensional span of its remaining-factor tensors. Its squared norm is $\sum_j\|x_j\|^2$, while applying $T$ in that factor gives squared norm $\sum_j\|Tx_j\|^2\le C^2\sum_j\|x_j\|^2$. Since factor permutations are unitary, this proves the bound $C$ for applying $T$ in any one slot. Composing over the $n$ slots bounds the algebraic $T^{\otimes n}$ by $C^n$; step 7.1 extends it uniquely to the Hilbert completion with the same bound. [A3, A4, step 7.1, step 8.1]
+
+10.1 By step 9.1 the normalized wedges are vectors in the alternating range. For pure tensors, self-adjointness and idempotence give $\langle\sqrt{n!}A_nx,\sqrt{n!}A_ny\rangle=n!\langle x,A_ny\rangle$. Expanding the signed average yields $\sum_{\pi\in S_n}\operatorname{sgn}(\pi)\prod_i\langle x_i,y_{\pi(i)}\rangle$, which is the determinant in [A2]. This proves the stated Gram formula and its positivity from the Hilbert-space norm. [A1, A2, step 9.1]
+
+10.2 On elementary tensors $T^{\otimes n}$ commutes with every permutation, hence preserves $\operatorname{ran}A_n$ and restricts to a bounded $\Lambda^nT$ with bound $C^n$. Its action on wedges is the displayed formula. Applying that formula twice proves $\Lambda^n(ST)=\Lambda^nS\,\Lambda^nT$ on a dense span and therefore everywhere. For $n=0$ the space is $\mathbb C$ and the induced map is its identity; for $n=1$, $A_1=I$ and $\Lambda^1T=T$. If $T=0$ and $n\ge1$, its induced map is zero. [A3, step 9.1, step 9.2]
+
+11.1 If $(e_j)_{j\in I}$ is a supplied orthonormal basis of $H$ and $I$ is supplied with a linear order, its finite span is dense by [A5]. Approximate the factors of each elementary tensor by finite linear combinations of the $e_j$. The telescoping tensor identity and $\|x_1\otimes\cdots\otimes x_n\|=\prod_r\|x_r\|$ show that elementary tensors in those finite spans are dense in $H^{\otimes n}$. Since $A_n$ is bounded, their images are dense in $\operatorname{ran}A_n$. Applying $A_n$ to a basis tensor gives zero if indices repeat and otherwise a signed multiple of the wedge with increasing indices. These wedges are orthonormal by step 10.1 and span a dense subspace, so they form an orthonormal basis of $\Lambda^nH$. If $H$ is finite-dimensional with $n>\dim H$, there are no increasing $n$-tuples and $\Lambda^nH=\{0\}$. [A5, step 9.1, step 10.1, construct] ∎
+
+## Remarks
+
+No choice principle or orthonormal basis of an arbitrary $H$ is assumed. The completion here is the specified transfinite sequential-hull construction, whose bounded-extension property is proved in steps 1.1–7.1 above; it is not an unsupported appeal to completeness of the one-stage Cauchy-sequence quotient. The increasing-index basis enumeration in step 11.1 is conditional on a supplied linearly ordered orthonormal basis. The tensor and exterior constructions themselves require no basis or order on $H$.

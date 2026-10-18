@@ -3,6 +3,7 @@ id: ex-continuous-inverse-gives-the-nth-root
 kind: example
 title: "The $n$-th root as a continuous inverse: for a natural $n \\ge 1$ the map $x \\mapsto x^{n}$ is continuous and strictly increasing on $[0,\\infty)$ with image $[0,\\infty)$, so its inverse $x \\mapsto x^{1/n}$ is continuous and strictly increasing"
 status: published
+dependency_level: 3
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,12 @@ landmark: false
 short: "$x \\mapsto x^{1/n}$ is continuous"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/ex-continuous-inverse-gives-the-nth-root.json
 sources:
   scraped: []
   references:

@@ -1,0 +1,170 @@
+FILE items/alg-qa-37-exhaustive-b6-block-pair-compiler.md
+Definition
+
+**Inputs:** certified Cauchy names for targets $T_5\in SU(5)$ and
+$T_8\in SU(8)$; a positive binary-rational tolerance $\varepsilon$; and the
+fixed normalized six-strand Fibonacci B6 generators in both total-charge
+blocks. Enumerate all finite Artin words over the six-strand generators and
+their inverses, and at stage $s=1,2,\ldots$ inspect every word of length at
+most $s$ and every integer precision $1\le p\le s$ not previously inspected,
+in fixed lexicographic order. For each word $b$ and precision $p$, compute rational complex
+matrix approximants $P_{5,b,p},P_{8,b,p}$ to its exact normalized block
+matrices and request rational target approximants $Q_{5,p},Q_{8,p}$. Each
+real and imaginary entry error in these approximants is certified at most
+$2^{-p}$. For $d\in\{5,8\}$ compute the rational number
+$$s_{d,b,p}=\sum_{i,j}\Bigl(|\Re(P_{d,b,p}-Q_{d,p})_{ij}| +|\Im(P_{d,b,p}-Q_{d,p})_{ij}|\Bigr).$$
+Return the first word for which both rational tests
+$$s_{d,b,p}+4d\,2^{-p}<\varepsilon\qquad(d=5,8)$$
+hold. Output the word, its exponent sum, both rational certificates, and the
+measured search/precision costs in the ledger of
+[[def-qa-37-resource-cost-model]]. The braid matrices have computable
+algebraic entries from the fixed Fibonacci $F/R$ data
+[[lem-qc-tqc-fibonacci-b6-path-projectors-and-artin]]. This is a dovetailed
+partial search definition: no cutoff or useful word-length/time bound is
+asserted here. A separate theorem in this pair proves termination under certified target
+access. The returned matrices are
+normalized by the common $R_1$ scalar; their physical phase is recorded by
+[[def-qa-37-phase-reference-cost]].
+
+For this compiler subroutine's ledger record, $N_{\rm any}=6$,
+$\epsilon_{\rm op}=\varepsilon$, $N_{\rm meas}=B_{\rm out}=0$, and
+$N_{\rm phase}=t_{\rm phase}=0$ because it performs no measurement or phase
+correction. Preparation, ancilla, Hamiltonian-time, transport, measurement-
+implementation and physical-leakage coordinates are “not applicable” because
+this mathematical search supplies no physical realization. $L_{\rm in}$,
+$|b|$, $b_{\max}$, and $t_{\rm cl}$ record the encoded target/compiler inputs,
+returned word, greatest precision request, and measured search/postprocessing
+bit time.
+
+
+
+FILE items/alg-qa-37-su2-solovay-kitaev-compiler.md
+Definition
+
+**Inputs:** a positive binary-rational tolerance $0<\varepsilon\le\eta_0$;
+the fixed inverse-closed Fibonacci alphabet $G_{\rm Fib}$; and a fixed
+certified base-net certificate $(\mathcal N_0,\eta_0,L_0)$ with
+$0<\eta_0<64^{-2}$. Select exactly one target interface:
+
+1. **Ideal exact-real interface:** supply an exact-real handle for
+   $S\in SU(2)$ with exact fixed-dimensional matrix operations and exact
+   comparisons. Invoke the ideal recursive procedure
+   [[alg-qc-solovay-kitaev-unitary-compiler]] on $S$ and $\varepsilon$.
+2. **Finite Turing interface:** supply a polynomial-time Cauchy name for
+   $S\in SU(2)$ and the minimal-polynomial and rational isolating-interval
+   descriptions of every real and imaginary gate coordinate required by the
+   finite-precision theorem. Run the deterministic Turing implementation
+   established by [[thm-qc-solovay-kitaev-bit-complexity]] on that name,
+   alphabet, certificate, and tolerance. This branch uses its certified
+   interval decisions and does not invoke exact-real comparisons.
+
+In either branch, return the resulting word in the labels
+$zB_1,zB_2,(zB_1)^{-1},(zB_2)^{-1}$, its expanded length, and its Artin
+exponent sum $k$. The base-net list is supplied certificate data; this
+algorithm does not compute it from density. A Cauchy name alone is not an
+exact-real handle, and the ideal branch makes no finite bit-time claim.
+
+**Output:** a braid word $b$ and ledger scalar $(R_1z^{-1})^k$ such that,
+when the algorithm's hypotheses hold, the normalized SU(2) matrix of $b$ is
+within the requested tolerance of $S$. Its physical matrix carries the
+recorded scalar from [[def-qa-37-phase-reference-cost]].
+
+
+FILE items/cex-qa-37-projective-is-not-controlled.md
+Statement
+
+On one target qubit, $I_2$ and $-I_2$ differ only by a global phase and
+induce the same standalone ray and outcome probabilities. Controlled access
+changes the comparison. With control first,
+$$C(I_2)=I_4,\qquad C(-I_2)=\begin{pmatrix}I_2&0\\0&-I_2\end{pmatrix} =Z\otimes I_2.$$
+On input $|+\rangle|0\rangle$, these give $|+\rangle|0\rangle$ and
+$|-\rangle|0\rangle$. Measuring the control in the $X$ basis is
+respectively deterministic for $+$ and $-$, so the total-variation distance
+is one. Thus projective equivalence of an isolated braid gate is not
+interchangeable with equality under coherent control.
+
+
+
+
+
+FILE items/cex-qc-tqc-controlled-global-phase.md
+Statement refuted
+
+A scalar phase that is irrelevant for an uncontrolled fixed-sector braid
+remains irrelevant when that braid is coherently controlled.
+
+
+
+FILE items/def-anyonic-frobenius-schur-sign.md
+Definition
+
+Let $\mathcal C$ be a unitary spherical fusion category over $\mathbb C$, with pivotal structure and spherical dimension as in [[def-pivotal-structure]], [[def-spherical-structure]], and [[def-the-dimension-of-an-object-relative-to-a-pivotal-structure]]. Let $a$ be a self-dual simple object with $N_{aa}^{\mathbf1}=1$. Choose a unit vector $v:\mathbf1\to a\otimes a$ spanning the one-dimensional vacuum split space and let $d_a>0$ be its positive spherical dimension.
+
+A **normalized vacuum-channel self-duality datum** is a supplied pair of maps $\operatorname{coev}:\mathbf1\to a\otimes a$ and $\operatorname{ev}:a\otimes a\to\mathbf1$ of the form
+
+$$\operatorname{coev}=\sqrt{d_a}\,v,\qquad \operatorname{ev}=\kappa_a\sqrt{d_a}\,v^\dagger,$$
+
+where $\kappa_a\in\{+1,-1\}$ and the two duality zig-zag identities hold after the self-duality identification, using the left-dual convention of [[def-left-dual-and-right-dual-object]]. We call $\kappa_a$ the **Frobenius–Schur sign in this normalized cup/cap convention**. It is not a braiding or $R$-symbol phase.
+
+This item records supplied normalized duality data; it does not assert that every self-dual simple object admits the displayed gauge or prove a trace, ribbon, or category-equivalence theorem. An example must supply the datum or compute the sign from coherent normalized F-data; fusion rules alone do not specify it.
+
+
+FILE items/def-anyonic-fusion-path-space.md
+Definition
+
+Let $\mathcal C$ be a fusion category over $\mathbb C$, so it is finite semisimple, rigid, monoidal, and has simple unit [[def-fusion-and-multifusion-category]]. Let $a,b,c$ be simple objects and let $n\ge0$. Set $T_0=b$ and recursively fix the left-associated parenthesization $T_{j+1}:=T_j\otimes a$. The **fixed-boundary anyonic path space** is
+
+$$H_{a,n;b,c}:=\operatorname{Hom}_{\mathcal C}(c,T_n).$$
+
+For simple labels $x,y$, define the split multiplicity space $W_{x,a}^y:=\operatorname{Hom}_{\mathcal C}(y,x\otimes a)$. A fusion path is a sequence of simple labels $x_0=b,x_1,\ldots,x_n=c$ together with, for every $1\le j\le n$, one basis index $\mu_j$ in a chosen basis $B_{x_{j-1},a}^{x_j}$ of $W_{x_{j-1},a}^{x_j}$. The basis index is retained even when distinct indices have the same adjacent labels. Fusion rules are the nonnegative integers $N_{x a}^{y}$ in $[x][a]=\sum_yN_{x a}^{y}[y]$ [[def-fusion-rules]].
+
+If $i_j\in B_{x_{j-1},a}^{x_j}$ is the selected inclusion $x_j\to x_{j-1}\otimes a$, define the path composite by $\gamma_0:=\operatorname{id}_b$ and $\gamma_j:=(\gamma_{j-1}\otimes\operatorname{id}_a)\circ i_j:x_j\to T_j$. For $x_n=c$, $\gamma_n$ is a vector in $H_{a,n;b,c}$. The next lemma proves these composites form a basis and computes the dimension. No Hilbert-space or physical Hamiltonian structure is part of this definition.
+
+
+
+FILE items/def-anyonic-local-channel-projector.md
+Definition
+
+Fix a fusion-path space with repeated simple site charge $a$, a position $i$ with two adjacent $a$-labels, and a simple output $s$ of $a\otimes a$. In the tree basis where this adjacent pair is fused first, let $\Pi_s$ be the projection onto the direct summand with pair output $s$, acting as the identity on every multiplicity index inside that channel and as zero on all other pair outputs. Let $F_i$ be the typed sequence of associator changes carrying the fixed path tree to this pair-first tree; each local matrix is the F-symbol of [[def-qc-tqc-f-symbol]], with rows and columns as in that Definition. Define the **local channel projector** in the fixed path basis by
+
+$$P_{i,s}:=F_i^{-1}\Pi_sF_i.$$
+
+This is an idempotent for any fusion category because $F_i$ is invertible. In a unitary fusion category with orthonormal tree bases, $F_i$ is unitary and $P_{i,s}$ is an orthogonal projection. The channel projection includes every multiplicity coordinate; the definition has no multiplicity-free restriction.
+
+The coordinate convention is illustrated below: vectors move from the fixed tree to the pair-first tree by $F_i$, the channel projection acts there, and $F_i^{-1}$ returns to the fixed tree. The curved arrow denotes the defined composite, not an additional morphism.
+
+```tikzcd
+\mathcal H_{\mathrm{fixed}} \arrow[r,"F_i"] \arrow[rrr,bend right=35,"P_{i,s}"'] & \mathcal H_{\mathrm{pair}} \arrow[r,"\Pi_s"] & \mathcal H_{\mathrm{pair}} \arrow[r,"F_i^{-1}"] & \mathcal H_{\mathrm{fixed}}
+```
+
+
+FILE items/def-qa-37-anyon-task-and-promise.md
+Definition
+
+Work in a fixed unitary braided fusion category and fix an ordered finite list
+of $n\ge1$ simple charge labels, a parenthesized fusion tree, and a total charge for
+which the fusion space is nonzero. Simple charges, multiplicity bases, and
+admissible fusion-tree vectors have the conventions of
+[[def-qc-tqc-fusion-tree-basis]]. An encoded input subspace is specified by a
+fixed-charge isometry as in [[def-qc-tqc-fixed-charge-encoding]]. Each task
+instance supplies either an initial unit vector in that subspace as an abstract
+quantum input, or a finite state-preparation procedure whose specified output
+is that vector and whose preparation operations and ancillas are recorded.
+The instance also gives a nonnegative rational error threshold and specifies
+the correctness relation and metric to which it applies.
+
+A **finite anyon decision task** is a promise pair $(Y,N)$ of disjoint sets of
+binary strings with domain $D=Y\cup N$, together with a finite encoding of
+admissible fusion-tree input labels; a solver must answer yes on $Y$ and no on
+$N$, with no obligation outside $D$. A **finite anyon search task** is a domain
+$D$ and a finite-string witness relation, with a valid witness required only
+for encoded inputs in $D$. The input record states the number and order of
+strands, the finite alphabet of positive and inverse Artin generators
+available to the solver, any prescribed finite braid word, and the finite set
+of adjacent fusion-measurement locations.
+Braid action is the mathematical unitary action specified by the fixed
+physical-interface record [[def-qc-tqc-physical-braid-interface]]; a
+measurement location is interpreted in the declared fusion-tree basis. The
+state-preparation field is an abstract task input and does not assert that a
+physical device prepares the state or realizes the braid. Input length and
+correctness-on-promises follow [[def-qa-task-and-promise-domain]].

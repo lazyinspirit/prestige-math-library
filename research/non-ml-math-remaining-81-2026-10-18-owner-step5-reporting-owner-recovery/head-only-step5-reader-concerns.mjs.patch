@@ -1,0 +1,21 @@
+diff --git a/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-reporting-owner-recovery/head-before/tools/step5-reader-concerns.mjs b/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-reporting-owner-recovery/head-only-candidate/tools/step5-reader-concerns.mjs
+index 7c24aff1ef..96dd823605 100644
+--- a/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-reporting-owner-recovery/head-before/tools/step5-reader-concerns.mjs
++++ b/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-reporting-owner-recovery/head-only-candidate/tools/step5-reader-concerns.mjs
+@@ -6,6 +6,7 @@ import {validateFrontier} from './step5-rounds.mjs';
+ import {itemHashGuard} from './item-hash.mjs';
+ import {MODELS} from './models.mjs';
+ import {validateProofCompanion} from './step5-proof-companion.mjs';
++import {reportingOwnerHome,reportingSessionOptions} from './step5-reporting-owner-recovery.mjs';
+ const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex');
+ const read=path=>JSON.parse(readFileSync(path,'utf8'));
+ const need=(yes,message)=>{if(!yes)throw Error(`Step 5 reader concern: ${message}`);};
+@@ -256,6 +257,8 @@ export function readerConcernSession(root,run,phase,round,unit) {
+   const packPath=join(root,'research',`${run}-step5-v2`,`${phase}-${round}.json`);
+   if(!existsSync(packPath))return {};
+   const pack=read(packPath),owners=pack.reader_review_owners??pack.reader_concern_owners??{};
++  const reporting=reportingSessionOptions(root,run,pack,unit);if(reporting)return reporting;
++  if(['impact-repeat','gate'].includes(pack.basePhase??phase)&&pack.units?.includes(unit))return {sessionHome:reportingOwnerHome(root,run,pack.basePhase??phase,round,unit)};
+   if(!(pack.assignments?.[unit]??[]).some(id=>owners[id]===unit))return {};
+   const sessionHome=resolve(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`);
+   if(phase==='impact-initial'&&round===1)return {sessionHome};

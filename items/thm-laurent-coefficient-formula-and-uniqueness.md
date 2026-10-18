@@ -14,6 +14,7 @@ proof_strategy: direct
 verification:
   audited: 2026-08-26
   precheck: pass
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/published-recording/receipts/thm-laurent-coefficient-formula-and-uniqueness.json
 sources:
   scraped: []
   references:
@@ -57,7 +58,7 @@ their coefficients agree term by term.
 
 1.1 On the circle $\gamma_\rho(t)=a+\rho\exp(it)$, the Laurent series for $f$ converges uniformly by [L1], so [L2] gives $$\int_{\gamma_\rho}\frac{f(\zeta)}{(\zeta-a)^{n+1}}\,d\zeta=\lim_{N\to\infty}\int_{\gamma_\rho}\sum_{k=-N}^Nc_k(\zeta-a)^{k-n-1}\,d\zeta.$$ [given, L1, L2]
 
-2.1 By [L3] each finite integral in step 1.1 is $\sum_{k=-N}^Nc_k\int_{\gamma_\rho}(\zeta-a)^{k-n-1}\,d\zeta$, and [L4] kills every summand except $k=n$, for which the integral is $2\pi i$; therefore every finite sum equals $2\pi i\,c_n$. [step 1.1, L3, L4, algebra]
+2.1 Fix the integer $n$ and take $N\ge|n|$. By [L3], the finite integral in step 1.1 is $\sum_{k=-N}^Nc_k\int_{\gamma_\rho}(\zeta-a)^{k-n-1}\,d\zeta$. Now $k=n$ lies in the truncated range, and [L4] kills every summand except that one, for which the integral is $2\pi i$. Therefore the finite integral equals $2\pi i\,c_n$ for every $N\ge|n|$. [step 1.1, L3, L4, algebra]
 
 3.1 Letting $N\to\infty$ in step 2.1 proves the contour formula for $c_n$. [step 1.1, step 2.1]
 

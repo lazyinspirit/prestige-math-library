@@ -1,0 +1,1908 @@
+{
+  "version": 1,
+  "scope": [
+    "def-it-information-units-and-logarithm-base",
+    "lem-it-finite-marginals-and-conditionals-are-pmfs",
+    "lem-it-finite-kl-agrees-with-measurable-kl",
+    "lem-it-finite-log-sum-inequality",
+    "def-it-finite-conditional-entropy",
+    "def-it-finite-mutual-information",
+    "def-it-finite-conditional-mutual-information",
+    "thm-it-finite-kl-nonnegative-equality",
+    "thm-it-information-unit-conversion",
+    "thm-it-finite-conditional-mutual-information-identities-and-equality",
+    "thm-it-finite-entropy-chain-rule",
+    "thm-it-finite-markov-data-processing",
+    "thm-it-fano-inequality",
+    "cor-it-fano-with-erasure-or-out-of-alphabet-estimates",
+    "ex-it-binary-entropy-and-extremizers",
+    "cex-it-kl-is-directional-and-can-be-infinite",
+    "ex-it-independent-and-deterministic-information"
+  ],
+  "contracts": {
+    "def-it-information-units-and-logarithm-base": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition states 0 log 0 = 0 and positive-over-zero is +infinity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-element branch is needed; singleton laws are covered by the same finite definitions and sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no additional degenerate regime beyond its general finite hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition fixes the zero convention and names b=2 and b=e."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "lem-it-finite-marginals-and-conditionals-are-pmfs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every marginal coordinate is nonnegative because it is a finite sum of nonnegative entries of $p_{UV}$. By [F2], $\\sum_up_U(u)=\\sum_u\\sum_vp_{UV}(u,v)=\\sum_{(u,v)}p_{UV}(u,v)=1$, and the same calculation with the order reversed gives $\\sum_vp_V(v)=1$. Thus both marginals are probability vectors by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $v$ with $p_V(v)>0$. Each ratio $p_{UV}(u,v)/p_V(v)$ is nonnegative, and $\\sum_up_{U|v}(u)=\\bigl(\\sum_up_{UV}(u,v)\\bigr)/p_V(v)=p_V(v)/p_V(v)=1$. Hence $p_{U|v}$ is a probability vector by [F1]. The same argument with $u$ fixed gives $p_{V|u}$. If $p_{UVW}$ is a joint pmf and $p_W(w)>0$, first apply this argument to the pair of finite alphabets $\\mathcal U\\times\\mathcal V$ and $\\mathcal W$; then apply step 1.1 to the resulting conditional pmf on $\\mathcal U\\times\\mathcal V$. This gives the last assertion.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 conditions only on a positive-mass coordinate and normalizes it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that the marginal coordinates sum to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no additional degenerate regime beyond its general finite hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no separate interval endpoint parameter beyond any support conventions stated in its definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "lem-it-finite-kl-agrees-with-measurable-kl": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega$ be a finite set.\n\n1. If $(\\Omega,w)$ is a finite probability space in the sense of\n   [[def-finite-probability-space-and-event]], then\n   $$\\mathbb P_w(A):=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega)$$\n   is a probability measure on $(\\Omega,\\mathcal P(\\Omega))$.\n2. Conversely, if $\\mathbb P$ is a probability measure on\n   $(\\Omega,\\mathcal P(\\Omega))$, then\n   $$w(\\omega):=\\mathbb P(\\{\\omega\\})\\qquad(\\omega\\in\\Omega)$$\n   makes $(\\Omega,w)$ a finite probability space and\n   $$\\mathbb P(A)=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega).$$\n\nThese two constructions are inverse to each other. In particular, zero-weight\noutcomes remain genuine outcomes in both descriptions.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure or a complex measure on the same measurable space $(X,\\mathcal A)$. We say that $\\nu$ is **absolutely continuous with respect to $\\mu$**, and write\n$$\\nu\\ll\\mu,$$\nif every measurable $\\mu$-null set is also $\\nu$-null:\n$$\\mu(E)=0\\qquad\\Longrightarrow\\qquad \\nu(E)=0\\qquad(E\\in\\mathcal A).$$\nBecause every measurable subset of a $\\mu$-null set is again $\\mu$-null, this is equivalent to requiring $\\nu(F)=0$ for every measurable $F\\subseteq E$ whenever $\\mu(E)=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-radon-nikodym-derivative",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure.\n\n1. If $\\nu$ is a signed measure satisfying the hypothesis of [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]] and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of measurable real-valued functions $f$ satisfying the measurable-set integral formula in that theorem.\n2. Assuming the Axiom of Choice ([[def-axiom-of-choice]]), if $\\nu$ is a finite complex measure and $\\nu\\ll\\mu$, the **Radon-Nikodym derivative** $d\\nu/d\\mu$ is the $\\mu$-almost-everywhere equivalence class of complex $L^1(\\mu)$ functions $h$ satisfying\n   $$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A),$$\n   as given by [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]].\n\nIn both cases the derivative is not a distinguished pointwise function: it is determined only up to $\\mu$-almost-everywhere equality in the sense of [[def-measure-null-set-and-almost-everywhere]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and let $X:\\Omega\\to\\mathbb R$.\nAfter identifying $(\\Omega,w)$ with the full-power-set probability space of\n[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],\nthe expectation defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with\nthe published finite formulas:\n$$\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)=\\sum_{x\\in X(\\Omega)}x\\,\\mathbb P(X=x).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "Let $P,Q$ be probability measures on the same measurable space\n([[def-probability-measure]]). Absolute continuity $P\\ll Q$ has the convention\nof [[def-absolutely-continuous-with-respect-to-a-positive-measure]]. If\n$P\\not\\ll Q$, define $D(P\\|Q)=+\\infty$. If $P\\ll Q$, assume AC\n([[def-axiom-of-choice]]) as in [[def-likelihood-ratio-as-rn-derivative]] and\nlet $r=dP/dQ$ be a finite-valued nonnegative measurable representative of its\nRadon–Nikodym class; such a representative exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\nOn $\\{r=0\\}$ set $\\ell=0$, and on $\\{r>0\\}$ set $\\ell=\\log r$. This\nfunction is measurable: for $a\\ge0$, $\\{\\ell>a\\}=\\{r>\\exp(a)\\}$, and for\n$a<0$, $\\{\\ell>a\\}=\\{r=0\\}\\cup\\{r>\\exp(a)\\}$, by the inverse and\nmonotonicity properties of the natural logarithm\n([[def-natural-logarithm]], [[thm-natural-logarithm-laws]]). These are\nmeasurable sets by [[def-extended-real-valued-measurable-function]]. Since\n$P(\\{r=0\\})=\\int_{\\{r=0\\}}r\\,dQ=0$ by\n[[thm-likelihood-ratio-change-of-measure]], the value chosen there does not\naffect $\\int\\ell\\,dP$. Define\n$$D(P\\|Q):=\\int \\ell\\,dP,$$\nwhere $\\log$ is the natural logarithm ([[def-natural-logarithm]]).\n\nThe definition is independent of the representative: two representatives\nagree $Q$-almost everywhere, hence $P$-almost everywhere. Put\n$$\\psi(0):=0,\\qquad \\psi(t):=t\\log t\\quad(t>0).$$\nThe function $\\psi$ is continuous at zero: for $s\\ge1$,\n$$0\\le \\frac{\\log s}{s}=\\frac1s\\int_1^s\\frac{du}{u}\\le\\frac1s\\int_1^s\\frac{du}{\\sqrt u}\\le\\frac2{\\sqrt s}.$$\nThus $t\\log t\\to0$ as $t\\downarrow0$; here $L=\\log$ by\n[[cor-integral-logarithm-agrees-with-natural-logarithm]] and\n[[def-integral-logarithm]]. On $(0,\\infty)$, $\\psi$ is a product of continuous\nfunctions by [[thm-natural-logarithm-laws]] and\n[[thm-algebra-of-continuous-functions]], so $\\psi$ is continuous on\n$[0,\\infty)$ and $\\psi(r)$ is measurable by\n[[def-extended-real-valued-measurable-function]]. Its signed integral is\ndefined by the positive and negative parts\n([[def-positive-and-negative-parts-of-a-function]],\n[[def-nonnegative-lebesgue-integral]]).\n\nFor $0<t\\le1$, the function $-t\\log t$ has derivative $-\\log t-1$ and\nmaximum $1/e$ at $t=1/e$: $e=\\exp(1)>1$ by\n[[def-real-exponential-function-and-e]] and\n[[thm-exponential-is-strictly-increasing]], $1/e=\\exp(-1)$ by\n[[cor-exponential-reciprocal-and-positivity]], and $\\log(1/e)=-1$ by\n[[thm-natural-logarithm-laws]] and the inverse definition. The mean value\ntheorem gives increase before and decrease after this point\n([[thm-algebra-of-derivatives]], [[thm-integral-logarithm-derivative-and-normalisation]],\n[[cor-integral-logarithm-agrees-with-natural-logarithm]], [[cor-mean-value-theorem]]).\nAt $t=0$ the negative part is zero. Since $Q$ is a probability measure,\n$$\\int \\psi(r)^-\\,dQ\\le\\frac1e.$$\nThe change-of-measure identity of [[thm-likelihood-ratio-change-of-measure]],\napplied to $\\ell^-$ gives $\\int\\ell^-\\,dP=\\int\\psi(r)^-\\,dQ\\le1/e$,\nso $\\int\\ell\\,dP$ is well-defined; applying it to both positive and negative\nparts gives\n$$D(P\\|Q)=\\int\\ell\\,dP=\\int\\psi(r)\\,dQ=\\int r\\log r\\,dQ,$$\nwith $0\\log0:=0$ and a finite negative part. Therefore the extended integral\nis well-defined without an $\\infty-\\infty$ ambiguity.\n\nThis convention is directional: the first argument must be absolutely\ncontinuous with respect to the second for the integral formula to apply.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F9], the finite vectors define probability spaces on $(S,\\mathcal P(S))$, with every singleton measurable; [F2] gives their event weights. If $p_i>0=q_i$, then $P(\\{i\\})>0=Q(\\{i\\})$, so [F3] gives $P\\not\\ll Q$. The general definition [F6] and finite convention [F1] both give $+\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $p_i=0$ whenever $q_i=0$. If $Q(A)=0$, the finite sum $\\sum_{i\\in A}q_i=0$ and nonnegativity force $q_i=0$ for every $i\\in A$; hence $p_i=0$ for those $i$ and $P(A)=0$. Thus $P\\ll Q$ by [F3]. Define $r_i=p_i/q_i$ when $q_i>0$ and $r_i=0$ when $q_i=0$. Since every subset of $S$ is measurable, this finite function is measurable. For every $A\\subseteq S$, [F5] gives $\\int_A r\\,dQ=\\sum_{i\\in A}r_iq_i=\\sum_{i\\in A}p_i=P(A)$, so [F4] identifies $r$ as a Radon–Nikodym derivative. It is explicitly constructed; no choice is used in this step.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under the AC interface assumption [A1], substitute the density from step 1.2 into [F8], using the logarithm convention [F7]. Applying [F5] to $\\ell(i)=\\ln r_i$ for $r_i>0$ and $\\ell(i)=0$ for $r_i=0$ gives $D(P\\|Q)=\\sum_{i:p_i>0}p_i\\ln r_i=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i)$; coordinates with $p_i=0$ contribute $0$ by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F7",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 handles support failure, while step 2.1 proves equality with the finite sum when $p$ is supported by $q$. These cases exhaust the finite vectors in the Statement.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 treat zero reference mass and the support-failure branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the finite weighted sum on a finite full-power-set space."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no additional degenerate regime beyond its general finite hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 matches the support failure to +infinity in the measurable definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 constructs the coordinatewise density explicitly; the only AC use is the stated general measurable-KL interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "lem-it-finite-log-sum-inequality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-information-units-and-logarithm-base",
+          "source_section": "Definition",
+          "quote": "Write $\\ln$ for the natural logarithm $\\log$ of [[def-natural-logarithm]]. Unless a base is displayed, every information quantity on this page uses $\\ln$ and is measured in **nats**. For a base $b>1$ and $t>0$, define\n$$\\log_b t:=\\frac{\\ln t}{\\ln b}.$$\nThe denominator is positive: $b>1$, $\\ln$ is strictly increasing, and $\\ln 1=0$ by [[thm-natural-logarithm-laws]]. A base-$b$ entropy or divergence is obtained by replacing each $\\ln$ in the finite formulas below by $\\log_b$; use $0\\log_b0:=0$ and assign $+\\infty$ to a positive numerator over a zero denominator. The case $b=2$ measures **bits**; $b=e$ gives nats.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-convex-concave-and-midpoint-convex-functions",
+          "source_section": "Definition",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval ([[def-interval]]) and let $f:I\\to\\mathbb R$. For $x,y\\in I$ and $\\lambda\\in[0,1]$, the point $\\lambda x+(1-\\lambda)y$ belongs to $I$. The function $f$ is **convex** when the convex-combination inequality holds for every weight in $[0,1]$:\n\n$$f(\\lambda x+(1-\\lambda)y)\\le \\lambda f(x)+(1-\\lambda)f(y).$$\n\nIt is **strictly convex** when this inequality is strict whenever $x\\ne y$ and $0<\\lambda<1$. It is **concave** (respectively **strictly concave**) when $-f$ is convex (respectively strictly convex). It is **midpoint convex** when the displayed inequality is required only at $\\lambda=1/2$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-finite-jensen-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:I\\to\\mathbb R$ be convex. If $N\\ge1$, $x_1,\\ldots,x_N\\in I$, and $\\lambda_1,\\ldots,\\lambda_N\\ge0$ satisfy $\\sum_{i=1}^N\\lambda_i=1$, then\n\n$$f\\left(\\sum_{i=1}^N\\lambda_i x_i\\right)\\le\\sum_{i=1}^N\\lambda_i f(x_i).$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $f(0)=0$ and $f(t)=t\\ln t$ for $t>0$. On $(0,\\infty)$, [F3] and [F4] give $f'(t)=\\ln t+1$, which is strictly increasing by [F2]; [F2] and [F5] also give continuity of $f$ on every positive compact interval. If $0<u<v<w$, [F6] on $[u,v]$ and $[v,w]$ gives secant slopes $f'(c_1)$ and $f'(c_2)$ with $c_1<v<c_2$; strict increase makes the first slope smaller, which rearranges to the strict convexity inequality at $v$. For an endpoint $0<y$ and $0<\\lambda<1$, $f(\\lambda y)=\\lambda f(y)+\\lambda y\\ln\\lambda<\\lambda f(y)+(1-\\lambda)f(0)$ since $\\ln\\lambda<0$ by [F2]. Thus $f$ is strictly convex on $[0,\\infty)$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $A=0$, nonnegativity forces all $a_i=0$, so both sides are $0$. If $A>0=B$, all $b_i=0$ and at least one $a_i>0$, so both sides are $+\\infty$. If $A,B>0$ but some $a_i>0=b_i$, the left side is $+\\infty$ while the right side is finite. It remains to handle $A,B>0$ with $a_i=0$ whenever $b_i=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "cases",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the remaining case set $J=\\{i:b_i>0\\}$, $\\lambda_i=b_i/B$, and $x_i=a_i/b_i$ for $i\\in J$. These weights are positive and sum to one, and $\\sum_{i\\in J}\\lambda_i x_i=A/B$. By [F8] and the convexity proved in step 1.1, $Bf(A/B)\\le\\sum_{i\\in J}b_i f(a_i/b_i)$. Expanding $f$ turns this into the desired inequality, including coordinates with $a_i=0<b_i$ because $f(0)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If all $x_i$ are equal, their weighted mean is $A/B$ and Jensen is an equality; together with $a_i=0$ when $b_i=0$, this is exactly $a_i=(A/B)b_i$ for every coordinate. Conversely, suppose they are not all equal, so $|J|\\ge2$ and $0<\\lambda_j<1$ for every $j$. For each $j\\in J$, let $\\mu_i=\\lambda_i/(1-\\lambda_j)$ for $i\\ne j$ and $y_j=\\sum_{i\\ne j}\\mu_i x_i$. Some $j$ has $x_j\\ne y_j$: otherwise $x_j=(A/B-\\lambda_jx_j)/(1-\\lambda_j)$ for every $j$, forcing each $x_j=A/B$. Fix such a $j$. Then $A/B=\\lambda_jx_j+(1-\\lambda_j)y_j$; strict convexity from step 1.1 gives $f(A/B)<\\lambda_jf(x_j)+(1-\\lambda_j)f(y_j)$. By [F8] on the normalized remaining weights, $f(y_j)\\le\\sum_{i\\ne j}\\mu_if(x_i)$, making the total Jensen inequality strict.",
+          "step": "2.2",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.2–2.2 prove the inequality in every extended-real support case and, when $A,B>0$, prove equality exactly at proportional vectors.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 handles A=0, B=0, and a positive numerator over zero denominator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 includes the one-coordinate case in the all-ratios-equal equality branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no additional degenerate regime beyond its general finite hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 prove the t=0 convexity boundary and all extended support cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 proves equality forces all ratios to agree and hence proportionality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 proves proportional vectors give equality in Jensen."
+        }
+      ]
+    },
+    "def-it-finite-conditional-entropy": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition omits zero-mass conditioning values explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition applies the finite entropy formula to singleton conditional laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no additional degenerate regime beyond its general finite hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no separate interval endpoint parameter beyond any support conventions stated in its definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "def-it-finite-mutual-information": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition sums only over positive joint mass, where both marginals are positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition applies to singleton alphabets using the same finite KL formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no additional degenerate regime beyond its general finite hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no separate interval endpoint parameter beyond any support conventions stated in its definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "def-it-finite-conditional-mutual-information": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition omits zero-mass conditioning values explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition applies the same conditional-product divergence to singleton alphabets."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no additional degenerate regime beyond its general finite hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no separate interval endpoint parameter beyond any support conventions stated in its definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "thm-it-finite-kl-nonnegative-equality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-finite-log-sum-inequality",
+          "source_section": "Statement",
+          "quote": "Let $(a_i)_{i=1}^n,(b_i)_{i=1}^n$ be finite nonnegative real vectors, with $A=\\sum_i a_i$ and $B=\\sum_i b_i$. Interpret $\\sum_{a_i>0}a_i\\ln(a_i/b_i)$ as $+\\infty$ if some $a_i>0=b_i$; otherwise zero coordinates contribute $0$. Interpret $A\\ln(A/B)$ as $0$ if $A=0$ and as $+\\infty$ if $A>0=B$. Then\n\n$$\\sum_{a_i>0}a_i\\ln\\frac{a_i}{b_i}\\ge A\\ln\\frac AB.$$\n\nWhen $A,B>0$, equality holds exactly when $a_i=(A/B)b_i$ for every $i$. If $A>0=B$, both sides are $+\\infty$ and no finite equality characterization is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $p_i>0=q_i$ for some $i$, [F1] gives $D(p\\|q)=+\\infty$, so nonnegativity holds and equality to zero is impossible. Otherwise $p_i=0$ whenever $q_i=0$; apply [F2] to $a_i=p_i$, $b_i=q_i$. Both sums equal $1$, and its left side is $D(p\\|q)$, so $D(p\\|q)\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the absolutely continuous case, [F2] says equality holds exactly when $p_i=(1/1)q_i=q_i$ for every coordinate. Conversely, if $p=q$, every positive-support term in [F1] is $p_i\\ln1=0$, so $D(p\\|q)=0$. Together with step 1.1 this proves the iff statement, including zero coordinates.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles positive p mass over zero q mass separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 apply when the common alphabet has one coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows p=q gives zero and the log-sum equality condition forces p=q."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover zero coordinates and support failure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves zero divergence implies p=q in the finite-support case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 computes D(p||p)=0; step 1.1 excludes support failure at equality."
+        }
+      ]
+    },
+    "thm-it-information-unit-conversion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-information-units-and-logarithm-base",
+          "source_section": "Definition",
+          "quote": "Write $\\ln$ for the natural logarithm $\\log$ of [[def-natural-logarithm]]. Unless a base is displayed, every information quantity on this page uses $\\ln$ and is measured in **nats**. For a base $b>1$ and $t>0$, define\n$$\\log_b t:=\\frac{\\ln t}{\\ln b}.$$\nThe denominator is positive: $b>1$, $\\ln$ is strictly increasing, and $\\ln 1=0$ by [[thm-natural-logarithm-laws]]. A base-$b$ entropy or divergence is obtained by replacing each $\\ln$ in the finite formulas below by $\\log_b$; use $0\\log_b0:=0$ and assign $+\\infty$ to a positive numerator over a zero denominator. The case $b=2$ measures **bits**; $b=e$ gives nats.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-it-finite-conditional-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XYZ}$ be a joint probability vector on finite alphabets and write $p_Z(z)$ for its marginal. It is the law of finite coordinate random elements on the canonical finite probability space from [[def-finite-probability-space-and-event]] and [[def-random-element-and-real-random-variable]]. For each $z$ with $p_Z(z)>0$, the conditional law $p_{XY|z}$ and its marginals $p_{X|z},p_{Y|z}$ are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define conditional mutual information in nats by\n\n$$I(X;Y|Z):=\\sum_{z:p_Z(z)>0}p_Z(z)D(p_{XY|z}\\|p_{X|z}\\otimes p_{Y|z}),$$\n\nusing the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], where $(p_{X|z}\\otimes p_{Y|z})(x,y):=p_{X|z}(x)p_{Y|z}(y)$. A positive conditional joint mass forces both conditional marginals to be positive, so each displayed KL term is finite. Zero-mass conditioning values contribute no term. The base-$b$ version replaces $\\ln$ by $\\log_b$ inside the conditional KL sums.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $\\ln b>0$, so division by $\\ln b$ preserves order and sends $+\\infty$ to $+\\infty$. For entropy, replacing each $\\ln p_i$ by $\\log_b p_i=\\ln p_i/\\ln b$ factors the same positive scalar out of the finite sum; zero terms remain zero by [F1]. The identical termwise calculation applies to every finite KL sum when $p$ is supported by $q$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $p_i>0=q_i$, both base conventions set the KL value to $+\\infty$, agreeing with the extended-real equation. Conditional entropy is a finite weighted sum of the entropy terms from step 1.1 by [F3]; mutual information is a finite KL sum by [F4]; conditional mutual information is a finite weighted sum of conditional KL sums by [F5]. Factoring $1/\\ln b$ from each of these finite sums proves all remaining conversions.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 retains 0 log 0 = 0 term by term."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-element branch is needed; singleton laws are covered by the same finite definitions and sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no additional degenerate regime beyond its general finite hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the KL conversion is stated in [0,+infinity] and sends +infinity to +infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "thm-it-finite-conditional-mutual-information-identities-and-equality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-conditional-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XYZ}$ be a joint probability vector on finite alphabets and write $p_Z(z)$ for its marginal. It is the law of finite coordinate random elements on the canonical finite probability space from [[def-finite-probability-space-and-event]] and [[def-random-element-and-real-random-variable]]. For each $z$ with $p_Z(z)>0$, the conditional law $p_{XY|z}$ and its marginals $p_{X|z},p_{Y|z}$ are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define conditional mutual information in nats by\n\n$$I(X;Y|Z):=\\sum_{z:p_Z(z)>0}p_Z(z)D(p_{XY|z}\\|p_{X|z}\\otimes p_{Y|z}),$$\n\nusing the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]], where $(p_{X|z}\\otimes p_{Y|z})(x,y):=p_{X|z}(x)p_{Y|z}(y)$. A positive conditional joint mass forces both conditional marginals to be positive, so each displayed KL term is finite. Zero-mass conditioning values contribute no term. The base-$b$ version replaces $\\ln$ by $\\log_b$ inside the conditional KL sums.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-it-finite-marginals-and-conditionals-are-pmfs",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal U,\\mathcal V$ be finite nonempty alphabets and let $p_{UV}(u,v)\\ge0$ satisfy $\\sum_{u,v}p_{UV}(u,v)=1$. Define $p_U(u)=\\sum_vp_{UV}(u,v)$ and $p_V(v)=\\sum_up_{UV}(u,v)$. Then both marginals are probability vectors. For each $v$ with $p_V(v)>0$, the conditional vector $p_{U|v}(u):=p_{UV}(u,v)/p_V(v)$ is a probability vector; likewise for conditioning on positive-mass $u$. Consequently, if $p_{UVW}$ is a finite joint pmf, then for every $w$ with $p_W(w)>0$, $p_{UV|w}$ and its two marginals are probability vectors.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $z$ with $p_Z(z)>0$. By [F5], $p_{XY|z}$ and its marginals are pmfs. If $p_{XY|z}(x,y)>0$, then both marginals are positive at $x,y$. Expanding [F1] and collecting terms using [F3] gives $D(p_{XY|z}\\|p_{X|z}\\otimes p_{Y|z})=H(p_{X|z})+H(p_{Y|z})-H(p_{XY|z})$; zero coordinates contribute $0$, so no logarithm of zero is taken.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiply the identity in step 1.1 by $p_Z(z)$ and sum over positive-mass $z$. By [F1] and [F2], this gives the stated entropy identity. Each conditional KL is nonnegative by [F4], and every weight in the sum is positive. Hence the total is zero exactly when each conditional KL is zero, which by [F4] is exactly $p_{XY|z}=p_{X|z}\\otimes p_{Y|z}$ for every positive-mass $z$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the conditional sum omits zero-mass z and weights each positive-mass conditional law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the equality characterization covers each positive-mass z, including singleton conditional laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: equality holds exactly at conditional independence for every positive-mass z."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no separate interval endpoint parameter beyond any support conventions stated in its definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves zero total CMI forces every positive-mass conditional KL to vanish."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves conditional independence makes every positive-mass conditional KL zero."
+        }
+      ]
+    },
+    "thm-it-finite-entropy-chain-rule": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$,\n\n$$I(X;Y|Z)=H(X|Z)+H(Y|Z)-H(X,Y|Z)\\ge0.$$\n\nEquality holds if and only if, for every $z$ with $p_Z(z)>0$, the conditional joint pmf factors as $p_{XY|z}=p_{X|z}p_{Y|z}$; this is conditional independence given $Z$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-finite-marginals-and-conditionals-are-pmfs",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal U,\\mathcal V$ be finite nonempty alphabets and let $p_{UV}(u,v)\\ge0$ satisfy $\\sum_{u,v}p_{UV}(u,v)=1$. Define $p_U(u)=\\sum_vp_{UV}(u,v)$ and $p_V(v)=\\sum_up_{UV}(u,v)$. Then both marginals are probability vectors. For each $v$ with $p_V(v)>0$, the conditional vector $p_{U|v}(u):=p_{UV}(u,v)/p_V(v)$ is a probability vector; likewise for conditioning on positive-mass $u$. Consequently, if $p_{UVW}$ is a finite joint pmf, then for every $w$ with $p_W(w)>0$, $p_{UV|w}$ and its two marginals are probability vectors.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $z$ with $p_Z(z)>0$ and write $q_{xy}=p_{XY|z}(x,y)$, $q_x=\\sum_yq_{xy}$; for $q_x>0$ define $q_{y|x}=q_{xy}/q_x$. By [F4], these are pmfs and $q_{xy}=q_xq_{y|x}$ on positive support. Expanding the logarithm gives $-\\sum_{q_{xy}>0}q_{xy}\\ln q_{xy}=-\\sum_{q_x>0,y}q_xq_{y|x}(\\ln q_x+\\ln q_{y|x})$. Since $\\sum_yq_{y|x}=1$, the first sum is $-\\sum_{q_x>0}q_x\\ln q_x$ and the second is $\\sum_{q_x>0}q_x(-\\sum_{q_{y|x}>0}q_{y|x}\\ln q_{y|x})$, exactly $H(q_X)+\\sum_xq_xH(q_{Y|x})$ by [F5]. Weighting this equality by $p_Z(z)$ and summing over positive-mass $z$ using [F1] proves $H(X,Y|Z)=H(X|Z)+H(Y|X,Z)$. Zero atoms contribute zero by convention.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Expanding [F2] gives $I(U;V)=\\sum_{p_{uv}>0}p_{uv}(\\ln p_{uv}-\\ln p_U(u)-\\ln p_V(v))$. Grouping the finite sums by $u,v$, using [F4] to know the marginals, and applying [F5] yields $I(U;V)=H(U)+H(V)-H(U,V)$. Also, [F1] and $p_{U|v}=p_{UV}/p_V$ on positive support give $H(U|V)=-\\sum_{p_{uv}>0}p_{uv}\\ln(p_{uv}/p_V(v))=H(U,V)-H(V)$. Thus $I(U;V)=H(U)-H(U|V)$, and exchanging $U,V$ gives the other form. All sums are finite.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply step 1.1 and [F3] to get $I(X;Y|Z)=H(Y|Z)-H(Y|X,Z)$. By step 1.2, $H(Y,Z)=H(Z)+H(Y|Z)$ and $H(X,Y,Z)=H(Z)+H(X,Y|Z)=H(X,Z)+H(Y|X,Z)$. Therefore $I(X;Y,Z)=H(X)+H(Y,Z)-H(X,Y,Z)=I(X;Z)+I(X;Y|Z)$. Every entropy is a finite sum, so no extended-real subtraction occurs.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 omits zero-mass conditioning atoms and factors only positive conditional masses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the identities apply to all finite alphabets, so singleton alphabets use the same finite sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The item states no additional degenerate regime beyond its general finite hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no separate interval endpoint parameter beyond any support conventions stated in its definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "thm-it-finite-markov-data-processing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$,\n\n$$I(X;Y|Z)=H(X|Z)+H(Y|Z)-H(X,Y|Z)\\ge0.$$\n\nEquality holds if and only if, for every $z$ with $p_Z(z)>0$, the conditional joint pmf factors as $p_{XY|z}=p_{X|z}p_{Y|z}$; this is conditional independence given $Z$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $y$ with $p_Y(y)>0$, the hypothesis makes $p_{XZ|y}=p_{X|y}\\otimes p_{Z|y}$. The corresponding conditional KL term in the definition of $I(X;Z|Y)$ is therefore $D(p_{XZ|y}\\|p_{X|y}\\otimes p_{Z|y})=0$, so the finite weighted sum gives $I(X;Z|Y)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Equating the two expansions in [F1] and using step 1.1 gives $I(X;Y)-I(X;Z)=I(X;Y|Z)$. This is nonnegative by [F2], proving data processing. The difference vanishes exactly when $I(X;Y|Z)=0$, and [F2] identifies that equality case with conditional independence of $X,Y$ given each positive-mass $z$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 conditions only on positive-mass y; the CMI definition omits zero-mass conditioning values."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-element branch is needed; singleton laws are covered by the same finite definitions and sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: equality holds exactly when I(X;Y|Z)=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no separate interval endpoint parameter beyond any support conventions stated in its definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies I(X;Y)-I(X;Z) with I(X;Y|Z)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 combines nonnegativity with the conditional-independence equality criterion."
+        }
+      ]
+    },
+    "thm-it-fano-inequality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-it-finite-markov-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $X,Y,Z$ have a joint pmf on finite alphabets and suppose that, for every $y$ with $p_Y(y)>0$,\n\n$$p_{XZ|y}(x,z)=p_{X|y}(x)p_{Z|y}(z).$$\n\nThis is the finite Markov condition $X\\to Y\\to Z$. Then\n\n$$I(X;Z)\\le I(X;Y),$$\n\nwith equality if and only if $I(X;Y|Z)=0$, equivalently $X$ and $Y$ are conditionally independent given every positive-mass value of $Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $m=1$, then $X$ is constant and $H(X|Y)=0$. Hence assume $m\\ge2$. The factorization in the hypotheses is the Markov condition $X\\to Y\\to\\widehat X$. By [F1], $I(X;\\widehat X)\\le I(X;Y)$; subtracting from the finite value $H(X)$ and using [F2] gives $H(X|Y)\\le H(X|\\widehat X)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "algebra",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $E=\\mathbf1\\{X\\ne\\widehat X\\}$. Since $E$ is determined by $(X,\\widehat X)$, [F2] gives $H(X|\\widehat X)=H(E|\\widehat X)+H(X|E,\\widehat X)$. The law of $E$ is Bernoulli with mass $P_e$ at $1$, so [F5] gives $H(E)=h_2(P_e)$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite MI identity in [F2] gives $H(E)-H(E|\\widehat X)=I(E;\\widehat X)$. By [F3], this MI, which is KL between the joint law and product marginals, is nonnegative. Thus $H(E|\\widehat X)\\le h_2(P_e)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On $E=0$, $X=\\widehat X$, so the conditional entropy of $X$ given $(E,\\widehat X)$ is zero. On $E=1$ and a fixed value of $\\widehat X$, at most $m-1$ values of $X$ remain. For any pmf $r$ on at most $k=m-1$ points, pad by zeros to a $k$-vector and compare with the uniform vector $u_k$: [F3] gives $0\\le D(r\\|u_k)=\\ln k-H(r)$, so $H(r)\\le\\ln(m-1)$. Averaging these conditional entropies yields $H(X|E,\\widehat X)\\le P_e\\ln(m-1)$.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Combining steps 1.2, 2.1, and 2.2 gives $H(X|\\widehat X)\\le h_2(P_e)+P_e\\ln(m-1)$; step 1.1 then gives the stated sharp bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $D((P_e,1-P_e)\\|(1/2,1/2))=\\ln2-h_2(P_e)\\ge0$ by [F3], $h_2(P_e)\\le\\ln2$. Also $m-1\\le m$ and [F4] makes $\\ln(m-1)\\le\\ln m$, so step 3.1 implies the weaker bound. If $P_e=0$ or $1$, zero-probability conditional branches above are omitted and $h_2(P_e)=0$ by convention.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 treats Pe=0 and uses the zero-probability convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles m=1 and proves H(X|Y)=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 handle the constant alphabet and endpoint error probabilities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 explicitly treats Pe=0 and Pe=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "cor-it-fano-with-erasure-or-out-of-alphabet-estimates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-it-fano-inequality",
+          "source_section": "Statement",
+          "quote": "Let $X$ take values in an alphabet $\\mathcal X$ of size $m\\ge2$, let $Y$ be finite, and let $\\widehat X$ be an estimator in the same alphabet generated from $Y$, so the joint pmf factors as $p_{XY\\widehat X}=p_{XY}p_{\\widehat X|Y}$. Put $P_e=\\mathbb P[\\widehat X\\ne X]$ and define\n\n$$h_2(t):=-t\\ln t-(1-t)\\ln(1-t),\\qquad 0\\ln0:=0.$$\n\nThen\n\n$$H(X|Y)\\le h_2(P_e)+P_e\\ln(m-1)\\le \\ln2+P_e\\ln m.$$\n\nFor $m=1$, $X$ is constant and $H(X|Y)=0$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-markov-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $X,Y,Z$ have a joint pmf on finite alphabets and suppose that, for every $y$ with $p_Y(y)>0$,\n\n$$p_{XZ|y}(x,z)=p_{X|y}(x)p_{Z|y}(z).$$\n\nThis is the finite Markov condition $X\\to Y\\to Z$. Then\n\n$$I(X;Z)\\le I(X;Y),$$\n\nwith equality if and only if $I(X;Y|Z)=0$, equivalently $X$ and $Y$ are conditionally independent given every positive-mass value of $Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $m=1$, then $X$ is constant, so $H(X|Y)=0$ and $I(X;Y)=0$ because $p_{XY}=p_X\\otimes p_Y$; also $h_2(P_e)\\ge0$ since $\\ln t\\le0$ for $0<t\\le1$ by [F7], with the zero term set to $0$. Thus both claims hold. Assume $m\\ge2$ below. From [F2] and [F3], $H(X|Y)\\le H(X|\\widehat X)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "cases",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Define $E=\\mathbf1\\{X\\ne\\widehat X\\}$. It is determined by $(X,\\widehat X)$, so [F3]'s entropy chain rule gives $H(X|\\widehat X)=H(E|\\widehat X)+H(X|E,\\widehat X)$. Also $H(E)=h_2(P_e)$ by [F1] and [F6]. The finite MI identity [F3] gives $H(E|\\widehat X)=H(E)-I(E;\\widehat X)$, and [F4]–[F5] make this MI nonnegative, so $H(E|\\widehat X)\\le h_2(P_e)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $E=0$, $X=\\widehat X$ and the conditional entropy is zero. On $E=1$, for each fixed estimator output the message $X$ has at most $m$ possible values. Any pmf $r$ on at most $m$ points has $H(r)\\le\\ln m$: pad it by zeros to $m$ coordinates and compare with the uniform pmf $u_m$; [F4] gives $0\\le D(r\\|u_m)=\\ln m-H(r)$ by [F6]. Averaging the two branches yields $H(X|E,\\widehat X)\\le P_e\\ln m$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Combining steps 1.1, 1.2, and 2.1 proves $H(X|Y)\\le h_2(P_e)+P_e\\ln m$. For uniform $X$, [F6] gives $H(X)=\\ln m$; subtracting the conditional-entropy bound from $H(X)$ and using [F3] gives $(1-P_e)\\ln m\\le I(X;Y)+h_2(P_e)$. The formulas remain valid for $P_e=0$ or $1$ because zero-probability branches are omitted and [F1] fixes the endpoints of $h_2$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 records validity at Pe=0 and Pe=1 with zero-probability branches omitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles m=1 separately."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 cover the constant-message and endpoint-error cases; step 2.1 includes out-of-alphabet outputs among errors."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly verifies Pe=0 and Pe=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "ex-it-binary-entropy-and-extremizers": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting $q=(p,1-p)$ into [F1] gives the displayed formula. If $p=0$ or $p=1$, the nonzero coordinate is $1$ and [F3] gives $\\ln1=0$, so $h(p)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $u=(1/2,1/2)$. The finite KL formula gives $D(q\\|u)=p\\ln(2p)+(1-p)\\ln(2(1-p))=\\ln2-h(p)$, also at $p=0,1$ because zero terms are omitted. By [F2], this value is nonnegative and vanishes exactly when $q=u$, i.e. $p=1/2$. Thus $h(p)\\le\\ln2$ with a unique maximizer.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $0<p<1$, then $\\ln p<0$ and $\\ln(1-p)<0$ by [F3], so both terms in $h(p)$ are positive. Along with step 1.1 this proves that the only zeros are the endpoints.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates p=0 and p=1 using the zero convention."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-element branch is needed; singleton laws are covered by the same finite definitions and sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 identifies the uniform law as the unique maximizing distribution."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 check p=0, p=1, and the open interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "cex-it-kl-is-directional-and-can-be-infinite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The support of $p$ is contained in that of $q$ because $q_0=\\varepsilon>0$. By [F1], $D(p\\|q)=1\\cdot\\ln(1/\\varepsilon)=-\\ln\\varepsilon$, a finite real number. Since $p\\ne q$, [F2] makes this value strictly positive, consistent with the formula.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The second coordinate has $q_1=1-\\varepsilon>0=p_1$. Thus [F1] gives $D(q\\|p)=+\\infty$. The two directions are unequal, which refutes the statement.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "cases"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the separate disjoint point masses $p=\\delta_0$ and $q=\\delta_1$, coordinate $0$ has $p_0>0=q_0$ and coordinate $1$ has $q_1>0=p_1$; applying [F1] in each direction gives $D(p\\|q)=D(q\\|p)=+\\infty$. This records the disjoint-support boundary.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 exhibit one-sided and two-sided support failure."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-element branch is needed; singleton laws are covered by the same finite definitions and sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks disjoint point masses in both directions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compute the finite and infinite directions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    },
+    "ex-it-independent-and-deterministic-information": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $X,Y$ are independent, then $p_{XY}(x,y)=p_X(x)p_Y(y)$ at every coordinate. Each positive-support ratio in [F1] is $1$, so every summand is zero and $I(X;Y)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $Y=f(X)$, then for each $x$ with $p_X(x)>0$, $p_{Y|X=x}$ has mass $1$ at $f(x)$ and $0$ elsewhere, so [F4] gives entropy $-1\\ln1=0$. Averaging these conditional entropies by [F3] gives $H(Y|X)=0$, and [F2] yields $I(X;Y)=H(Y)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated domain requires finite probability laws or finite vectors; an empty alphabet is outside the hypotheses or is already covered by the zero-mass calculation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves independence gives zero mutual information."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one-element branch is needed; singleton laws are covered by the same finite definitions and sums."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats a deterministic function as a point-mass conditional law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item has no separate interval endpoint parameter beyond any support conventions stated in its definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument uses only finite sums and finitely many individual choices, so no nonempty-family choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is not stated as a biconditional, so this implication direction is not applicable."
+        }
+      ]
+    }
+  }
+}

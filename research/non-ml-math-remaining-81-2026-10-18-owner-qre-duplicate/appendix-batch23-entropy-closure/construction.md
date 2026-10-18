@@ -1,0 +1,33 @@
+# Batch23 entropy/cq supplier closure and actual mechanical repair
+
+The native batch23 author genuinely completed immutable attempt1 at2026-10-17T16:56:45.213Z; task_complete, ok=true and task_aborted=false. The complete fresh62-file before archive includes its15 carriers, both pages, manifest/contracts/notes/cross-record/coverage,11 raw escalations, original native result/prompt, current direct quantum/classical/AEP suppliers and their existing readiness context. No live batch23 carrier was edited.
+
+## Historical supplier holds versus actual current interfaces
+
+All eight actual direct in-run suppliers are present: entropy and finite cq/Holevo definitions from21; the canonical Holevo bound from21; SSA from22; finite MI, entropy chain rule and Fano from4; finite IID information AEP from9. Their existing root-owned authoring-readiness records are ready, recorded before the native23 holds at16:55. The quantum owner acceptance and finite/AEP route receipts are preserved in context. These records are authoring context and focused repair acceptance, not independent native mathematical certification.
+
+The entropy Definition uses a nonzero finite-dimensional complex state space, natural-log nats and zero-eigenvalue contribution0ln0=0. The source code uses exactly this entropy, an M>=1-dimensional intermediate quantum register and squared entanglement fidelity on a finite purification, rate ln(M)/n. Its continuity supplier uses the finite eigenvalue sum, continuous−tln(t) at zero, and Hermitian eigenvalue continuity without a full-rank assumption. The Schmidt-rank bound uses the same squared overlap and an M-dimensional channel factorization. The spectral AEP applies to the finite positive eigenvalue law in natural units, with zero-mass symbols omitted and variance/n tails.
+
+The actual CQ Definition uses a finite nonempty input alphabet, nonzero finite-dimensional output, finite ensemble average state and natural-log Holevo information with zero weights omitted. Block codes use deterministic input words, finite POVMs and uniform-message average error. HSW's Holevo/Fano uses are finite ensemble/POVM and finite message instances. Its SSA use inserts a one-dimensional middle state to deduce entropy subadditivity; tensor product entropy additivity is a finite spectral calculation. These hypotheses agree with the actual canonical21/22 and finite4 supplier statements/proofs previously reviewed by the same owner. No entropy, CQ, Holevo, SSA, Fano or AEP supplier source was changed.
+
+The45 stale owner-escalation statuses in the batch23 cross-record are reconciled to verified interface context, preserving original status/evidence and binding the already-existing exact root readiness records. These are1 page,16 direct-item and28 transitive-item rows. All current statuses now use open/verified/removed. Eleven raw Step1 escalations remain untouched: root owns their rehash/reconciliation after reviewing this handoff. The old native notes/results are preserved; the current notes append this distinction rather than rewriting historical authoring evidence.
+
+## Confirmed focused mathematical corrections
+
+Three small actual defects were repaired explicitly and separately from formatting:
+
+1. HSW's statement said every R<C, while code rates ln(M)/n are inherently nonnegative and the proof treats0<=R. The statement now explicitly says0<=R<C. This preserves every operational rate claim and the full fixed finite cq capacity formula. A point-mass input has chi=0, now stated in its maximum-attainment step, making the nonnegative-capacity case split explicit. The native statement's negative-rate literal reading was impossible; no valid richer claim was discarded.
+2. The typical-projector proof formed mu_x=tr(sigma_x[−ln average]) for all labels and claimed all entries finite. A zero-weight sigma_x may lie outside the average support. The proof now restricts that auxiliary family to p_x>0, exactly the labels permitted in its input typical set, and proves support inclusion from average>=p_x sigma_x before invoking the bounded spectral log on positive support. Arbitrary zero ensemble weights and singular states remain allowed; the theorem Statement is unchanged.
+3. The same spectral surprisal sum omitted the control sequence before ln. It now correctly reads the sum of negative natural logarithms.
+
+The complete Schumacher direct channel construction, its below-entropy fidelity-to-zero converse, squared entanglement-fidelity convention, finite dimension/code hypotheses and nats/qubits conversion are retained. HSW retains its whole finite cq achievability/converse and single-letter maximization domain. This focused review does not replace independent review of the entire local packing/Hayashi–Nagaoka proof chain or the native textbooks.
+
+## Actual mechanical completion
+
+The baseline normative phase precheck reproduced9 nonpassing proof statuses. Every complete numbered proof step was joined into one paragraph with trailing tags. Four actual canonical checker proposals were then adopted (packing, typical projectors, Schumacher and HSW), including all reference remaps. `canonical-phase-remaps.json` verifies a one-to-one match of old/proposed step text after normalizing only whitespace and step-label references: no mathematical clause was lost in the phase reordering. Corresponding contract derivations, exact source quotations and boundary step anchors were refreshed. All original source frontmatter, including levels, dependencies, hypotheses metadata, provenance and verification fields, remains unchanged. The HSW manifest Statement mirror matches its corrected inherent rate domain.
+
+Final explicit local checks bind the actual unchanged current inputs: precheck15 files/12 proof items/0 failures; render17 files/0 errors; proof-layout15 items/42 steps/0 defects; strict contracts15/15 with no errors/warnings. Definitions are precheck-not-applicable. These are local mechanical checks, not a production gate or mathematical acceptance stamp. No checker waiver was used.
+
+The actual current sources mentioning the touched claim/proof interfaces are the typical-projector supplier, Schumacher, HSW, the binary cq example and the same A page. No current external actual source consumer was found. Batch24 is live and may add future consumers; recheck its eventual inventory through the ordinary workflow. No external writer was touched.
+
+No readiness, source level, verification stamp, shared plan, runtime/state/scheduler, native result/history, accepted prior repair or commit was changed. Root owns current metadata/readiness and genuine recertification.

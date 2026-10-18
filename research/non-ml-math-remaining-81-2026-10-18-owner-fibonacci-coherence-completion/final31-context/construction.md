@@ -1,0 +1,7 @@
+Final batch 31 Fibonacci consumer followthrough
+
+The immutable result reports successful, unaborted completion at 2026-10-17T17:12:52.322Z; runtime dispatch ended at 2026-10-17T17:12:52.357Z. All final-current files were archived before the local correction. The logical closure grew from 25 to 36 consumers, including 20 batch 31 items. I read the final sources of the original nine and all eleven newly added consumers, using the accepted exact Fibonacci F/R model, determinant normalization, common B6 phase, spectator type, and independent physical transport hypotheses. Individual reasons and raw hashes are in appendix.json. Earlier repair.json and owner-acceptance.json remain byte-identical.
+
+The only new actual defect is a false intermediate budget bound in ex-qa-37-fibonacci-budget. When eta0/2 is the smaller min argument, eta0/2<epsilon/(2M) implies M eta0/2<epsilon/2. It need not be below epsilon/4. Removing that stronger inequality preserves the example statement, the product bound and every interface. This B leaf has no actual deps/justified_by consumers. Only its proof line and its exact contract mirror changed. The scoped actual precheck, rendering, proof layout and strict contract check all passed after the final edit; checks.json records commands and output.
+
+This appendix records actual final context currency and one local proof-line correction. It adds no native mathematical approval, readiness evidence, verification stamps or historical audit coverage. Root owns subsequent hashes and recertification.

@@ -1,0 +1,224 @@
+
+ITEM alg-qa-37-su2-solovay-kitaev-compiler
+
+
+## Definition
+
+**Inputs:** a positive binary-rational tolerance $0<\varepsilon\le\eta_0$;
+the fixed inverse-closed Fibonacci alphabet $G_{\rm Fib}$; and a fixed
+certified base-net certificate $(\mathcal N_0,\eta_0,L_0)$ with
+$0<\eta_0<64^{-2}$. Select exactly one target interface:
+
+1. **Ideal exact-real interface:** supply an exact-real handle for
+   $S\in SU(2)$ with exact fixed-dimensional matrix operations and exact
+   comparisons. Invoke the ideal recursive procedure
+   [[alg-qc-solovay-kitaev-unitary-compiler]] on $S$ and $\varepsilon$.
+2. **Finite Turing interface:** supply a polynomial-time Cauchy name for
+   $S\in SU(2)$ and the minimal-polynomial and rational isolating-interval
+   descriptions of every real and imaginary gate coordinate required by the
+   finite-precision theorem. Run the deterministic Turing implementation
+   established by [[thm-qc-solovay-kitaev-bit-complexity]] on that name,
+   alphabet, certificate, and tolerance. This branch uses its certified
+   interval decisions and does not invoke exact-real comparisons.
+
+In either branch, return the resulting word in the labels
+$zB_1,zB_2,(zB_1)^{-1},(zB_2)^{-1}$, its expanded length, and its Artin
+exponent sum $k$. The base-net list is supplied certificate data; this
+algorithm does not compute it from density. A Cauchy name alone is not an
+exact-real handle, and the ideal branch makes no finite bit-time claim.
+
+**Output:** a braid word $b$ and ledger scalar $(R_1z^{-1})^k$ such that,
+when the algorithm's hypotheses hold, the normalized SU(2) matrix of $b$ is
+within the requested tolerance of $S$. Its physical matrix carries the
+recorded scalar from [[def-qa-37-phase-reference-cost]].
+
+ITEM thm-qa-37-su2-compiler-error-length
+
+
+## Statement
+
+Let $G_{\rm Fib}$ be the fixed Fibonacci SU(2) alphabet with a supplied finite
+base-net certificate of radius $0<\eta_0<64^{-2}$ and maximum word length
+$L_0$. For every exact target $S\in SU(2)$ and rational
+$0<\varepsilon\le\eta_0$, let
+$$\eta_{j+1}=64\eta_j^{3/2},\qquad J=\min\{j\ge0:\eta_j\le\varepsilon\}.$$
+The ideal SK recursion returns a normalized braid word $W$ with
+$\|S-W\|_{\rm op}\le\varepsilon$ and length at most $L_0 5^J$; hence its
+length is $O(\log^{\log_{3/2}5}(1/\varepsilon))=O(\log^{3.97}(1/\varepsilon))$.
+If each real and imaginary gate coordinate is supplied by its minimal
+polynomial and rational isolating interval with the endpoint/root conditions
+of the published finite-precision theorem, the base certificate is fixed,
+and $S$ has a polynomial-time Cauchy name with query cost at most $(b+1)^c$,
+the finite implementation additionally has the bit-time bound
+$O((N+s_\varepsilon)^{c+10})$ from the cited theorem, where
+$N=\lceil\log_2(2/\varepsilon)\rceil$ and $s_\varepsilon$ is the binary
+encoding length of the rational tolerance. The lifted physical braid carries
+$(R_1z^{-1})^k$ and that phase is not part of the normalized error.
+
+## Facts & Assumptions
+
+**Given:** The Fibonacci SU(2) gate package, its fixed certified base net, an
+exact target $S\in SU(2)$ and rational tolerance $0<\varepsilon\le\eta_0$.
+For the finite bit bound also assume the algebraic coordinate descriptions
+and polynomial-name conditions stated above.
+
+[F1] The Fibonacci lifted generators form a finite inverse-closed dense
+subset of $SU(2)$ and have algebraic entries.
+[[def-qa-37-fibonacci-braid-gate-set]]
+
+[F2] The SU(2) SK recursion returns error at most $\varepsilon$ at the least
+level $J$ and length at most $L_0 5^J$.
+[[thm-qc-solovay-kitaev-error-and-resource-bound]]
+
+[F3] For algebraic gate entries and a polynomial-time Cauchy target name, the
+finite implementation has the stated polynomial bit-time bound.
+[[thm-qc-solovay-kitaev-bit-complexity]]
+
+[F4] The exact-real target and finite Cauchy-name conventions are distinct;
+each precision query and rational encoding cost is explicit.
+[[def-qa-37-certified-matrix-input]]
+
+[F5] For a braid word, the physical and normalized operators differ by the
+exact scalar determined by exponent sum; the extra $z^{-k}$ is recorded for
+the lifted alphabet. [[lem-qa-37-fixed-sector-global-phase]]
+
+[A1] The density premise is inherited under exactly ACω from the lifted
+Fibonacci density lemma. [[def-countable-choice]]
+
+## Proof
+
+1.1 By [A1] and [F1], the alphabet satisfies the dense inverse-closed SU(2) hypothesis of the published SK estimate. Put $q_j=64^2\eta_j$. The recurrence gives $q_{j+1}=q_j^{3/2}$, so $q_j=(64^2\eta_0)^{(3/2)^j}\to0$ because $0<64^2\eta_0<1$. Hence a finite least $J$ with $\eta_J\le\varepsilon$ exists; the supplied SK theorem [F2] gives the error and $L_0 5^J$ length bounds. Taking logarithms in the formula for $q_J$ gives $J=O(\log\log(1/\varepsilon))$ and $5^J=O(\log^{\log_{3/2}5}(1/\varepsilon))$. [A1, F1, F2, given, algebra]
+
+2.1 Under the extra finite-input hypotheses, [F3] applies because the lifted Fibonacci entries are algebraic by [F1] and the target is supplied through [F4]'s polynomial Cauchy interface. It gives the stated bit-time bound, including precision input and output word. [F5] supplies the exact exponent-sum phase scalar, which does not change the normalized operator error. Only ACω is inherited for density; no full AC is used. [A1, F1, F3, F4, F5, step 1.1] ∎
+
+ITEM thm-qa-37-arbitrary-n-encoded-circuit
+
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$. Fix the inverse-closed Fibonacci SU(2) gate
+package and its supplied finite base-net certificate
+$(\mathcal N_0,\eta_0,L_0)$ from
+[[def-qa-37-fibonacci-braid-gate-set]]. Let $n\ge1$, let
+$c\in\{1,\tau\}$ satisfy $V(\tau^n\to c)\ne0$, and let
+$U\in U(2^n)$ and $\epsilon>0$. Use the arbitrary-$n$ triple code
+$\mathcal C_{n,c}$, isometry $J_{n,c}$, and projector $P_{n,c}$ of
+[[def-qa-37-n-triple-fusion-code]]. There exists a finite physical
+Fibonacci braid word $b$ and a unit scalar $\omega$ such that
+$$\|J_{n,c}^*\rho(b)J_{n,c} -\omega(U\otimes I_{V(\tau^n\to c)})\|_{\rm op}\le\epsilon, \qquad \|(I-P_{n,c})\rho(b)J_{n,c}\|_{\rm op}\le\epsilon.$$
+The bounds are uniform over spectator fusion states. The proof composes exact
+QSD, SK approximation of one-qubit SU(2) representatives, and joint B6
+targets extended safely over spectators. The scalar $\omega$ is the product
+of braid exponent-sum and one-qubit lift phases; under coherent control it
+must be retained or corrected. For certified Cauchy target names the B6
+dovetail terminates, but no useful joint-block word-length or search-time
+bound follows. This is a mathematical existence result and does not imply a
+physical realization.
+
+## Facts & Assumptions
+
+**Given:** The finite-dimensional logical unitary $U$, the fixed Fibonacci
+SU(2) base-net package, the arbitrary-$n$ fixed-charge triple code, a total
+charge $c$ with nonzero spectator space, and $\epsilon>0$.
+
+[F1] For $n\ge2$ every $n$-qubit unitary has a finite exact no-ancilla
+factorization into one-qubit gates and CNOTs; for $n=1$ it is a one-qubit
+gate. The theorem asserts no synthesis-time or precision bound.
+[[thm-qc-exact-arbitrary-unitary-qsd-upper-bound]]
+
+[F2] The Fibonacci SK compiler approximates any exact $S\in SU(2)$ within
+rational tolerance $\delta\le\eta_0$ using a finite word, under the supplied
+base-net hypotheses. [[thm-qa-37-su2-compiler-error-length]]
+
+[F3] For certified Cauchy inputs in $SU(5)\times SU(8)$, the exhaustive B6
+compiler terminates, but has no useful joint-block length or search-time
+bound. [[thm-qa-37-exhaustive-b6-compiler-terminates]]
+
+[F4] A two-qubit target has a code-preserving six-strand ideal extension
+whose normalized braid error is bounded on the full ambient fusion space,
+uniformly over all spectator paths. [[thm-qc-tqc-spectator-extension]]
+
+[F5] For a finite product of unitary factors, operator errors are at most the
+sum of factor errors. [[lem-qa-37-product-error]]
+
+[F6] $\mathcal C_{n,c}$ is the image of the isometry $J_{n,c}$ defined by
+grouped triple fusion paths and all spectator fusion paths.
+[[def-qa-37-n-triple-fusion-code]]
+
+[F7] If ideal unitaries preserve the code, a full-space product error bound
+also bounds logical block error and leakage amplitude by the same amount.
+[[lem-qc-tqc-leakage-logical-error-accumulation]]
+
+[F8] Physical Fibonacci braid words carry a common exponent-sum phase;
+standalone projective phases become relative under coherent control.
+[[lem-qa-37-fixed-sector-global-phase]]
+
+[F9] The Fibonacci fusion rule is $\tau\otimes\tau=1\oplus\tau$, with both
+channels of multiplicity one. [[ex-qc-tqc-fibonacci-data]]
+
+[F10] The fusion-tree dimension recurrence computes multiplicities by summing
+products of local vertex multiplicities. [[lem-qc-tqc-fusion-tree-dimension]]
+
+[F11] The fixed-charge braid action is unitary and preserves total charge.
+[[thm-qc-tqc-braid-action-unitary-and-artin]]
+
+[F12] On the grouped triple fusion tree, a braid supported inside one triple acts on that triple's multiplicity factor and as identity on every other triple and spectator factor.
+[[lem-qa-37-local-braid-acts-trivially-on-spectators]]
+
+[F13] Nonnegative real numbers have unique nonnegative square roots.
+[[thm-non-negative-square-root-exists-and-is-unique]]
+
+[F14] For every real $x$ there is an integer larger than $x$.
+[[thm-of-archimedean]]
+
+[A1] Assume exactly $\mathrm{AC}_\omega$ through the single-qubit and joint
+B6 density suppliers. [[def-countable-choice]]
+
+## Proof
+
+1.1 By [F6], the code consists of $n$ local two-path triple factors and the full spectator space. The fusion recurrence from [F9]–[F10] gives $m_2(1)=m_2(\tau)=1$, then $m_3(1)=m_2(\tau)=1$ and $m_3(\tau)=m_2(1)+m_2(\tau)=2$. Thus the local triple total-$\tau$ factor is two-dimensional and the total-$1$ factor is one-dimensional. If $U=I$, choose the empty target list and the empty braid proves the claim. For the rest of the proof suppose $U\ne I$. For $n\ge2$, [F1] gives a finite QSD list of one-qubit gates and CNOTs; for $n=1$, use $U$ as its one-qubit list. Replace each nonadjacent two-qubit target on wires $i<j$ by adjacent SWAPs carrying wire $j$ next to $i$, the target on that adjacent pair, and the reverse SWAPs. On each computational basis vector, conjugation by this wire permutation transfers the same two target coordinates and undoing the permutation restores the others; hence the replacement is exactly the original gate. The resulting finite list contains only one-qubit and adjacent two-qubit targets. [F1, F6, F9, F10, given, algebra]
+
+2.1 Let $M>0$ be the number of factors in the resulting list; positivity follows from $U\ne I$ in step 1.1. By [F14] choose an integer $N>\max\{2M/\epsilon,2/\eta_0\}$ and put $\delta=1/N$. Then $\delta<\epsilon/(2M)$ and $\delta<\eta_0/2$. For a one-qubit factor $G\in U(2)$ write $\det G=a+ib$; since $G$ is unitary, $a^2+b^2=1$. If $a=-1$, set $\alpha=i$; otherwise define $x=\sqrt{(1+a)/2},\qquad y=\operatorname{sgn}(b)\sqrt{(1-a)/2},\qquad \alpha=x+iy,$ with $\operatorname{sgn}(0)=1$. The roots exist by [F13], and direct squaring gives $\alpha^2=\det G$ and $|\alpha|=1$. Therefore $S=\alpha^{-1}G$ is unitary with determinant one. By [F2] and [A1], compile $S$ to a normalized braid word within $\delta$. If its Artin exponent sum is $k$, the physical action on the local total-$\tau$ code sector is within $\delta$ of $(R_1z^{-1})^k\alpha^{-1}G$. [A1, F2, F8, F13, F14, step 1.1, algebra]
+
+3.1 For an adjacent two-qubit factor $G$, [F4] and [A1] give one normalized six-strand braid and a code-preserving ideal extension with full ambient operator error at most $\delta$, uniformly over all spectator fusion paths. If its exponent sum is $k$, [F8] multiplies both the physical word and ideal extension by the same scalar $R_1^k$; their norm error remains $\delta$ and the code target is $R_1^kG$. For a one-qubit word from step 2.1, use [F11]–[F12] to decompose the register by the selected triple's total charge and spectator fusion paths. On the two-dimensional total-$\tau$ sector define the ideal block to be the target $G$ times the phase $(R_1z^{-1})^k\alpha^{-1}$; on the one-dimensional total-$1$ sector define it to equal the physical braid. These blocks form a unitary preserving the code. Its full ambient norm difference from the physical word is at most $\delta$: the error is at most $\delta$ on the total-$\tau$ block by step 2.1 and zero on total charge $1$, and tensoring with spectator identities and taking an orthogonal direct sum does not increase the maximum block norm. [A1, F4, F8, F11, F12, step 2.1, algebra]
+
+4.1 Each ideal extension preserves the code and its restriction to the code is the corresponding QSD factor multiplied by its recorded scalar. Their product therefore restricts to $\omega(U\otimes I_{V(\tau^n\to c)})$ for the product phase $\omega$. The physical/ideal factor errors are each at most $\delta$, so [F5] bounds the full product error by $M\delta<\epsilon/2$. Applying [F7] gives logical block error and leakage amplitude at most $M\delta<\epsilon$. For certified Cauchy target names [F3] guarantees that the B6 subsearch terminates; its density proof supplies no useful length or time cutoff. The only choice axiom is [A1], inherited from the density suppliers; all remaining arguments are finite-dimensional. [A1, F3, F5, F7, F8, step 1.1, step 3.1, algebra] ∎
+
+ITEM ex-qa-37-fusion-measurement-branches
+
+
+## Example
+
+In the two-dimensional Fibonacci fusion space for three $\tau$ anyons of
+total charge $\tau$, use the basis $|1\rangle,|\tau\rangle$ labelled by the
+charge after fusing the first two anyons. This is the fixed convention of
+[[ex-qc-tqc-fibonacci-data]]. For
+$$|\psi\rangle=\sqrt{3/5}\,|1\rangle+\sqrt{2/5}\,|\tau\rangle,$$
+measurement of that pair's total charge yields probabilities $3/5$ and
+$2/5$ and conditional states $|1\rangle$ and $|\tau\rangle$. If either
+coefficient is zero, its outcome has probability zero and there is no
+normalized conditional state for that outcome.
+
+The circuit below is schematic: the pair enters the declared fusion-channel
+projective measurement, the classical outcome is the charge label, and the
+post-measurement quantum branch is $P_a|\psi\rangle$. It records no physical
+measurement hardware or any unproved braid diagram rule.
+
+[diagram omitted from reading extract]
+
+## Facts & Assumptions
+
+**Given:** The two orthogonal Fibonacci channel basis vectors and the finite
+projective measurement of their pair charge.
+
+[F1] The two basis states are the total-charge channels of the first pair in
+the stated Fibonacci convention. [[ex-qc-tqc-fibonacci-data]]
+
+[F2] Channel outcome probability and conditional state are given by the
+fusion-branch theorem. [[thm-qa-37-fusion-branch-validity]]
+
+## Verification
+
+1.1 The coefficients have squared moduli $3/5$ and $2/5$, whose sum is one. The channel projectors are $P_1=|1\rangle\langle1|$ and $P_\tau=|\tau\rangle\langle\tau|$, so they send $|\psi\rangle$ to the corresponding coefficient times its basis vector. Thus the probabilities are $3/5$ and $2/5$, and after division by the coefficient magnitudes the conditional states are $|1\rangle$ and $|\tau\rangle$ by [F1]–[F2]. [F1, F2, given, algebra]
+
+2.1 If the coefficient of one channel is zero, its projected vector is zero and the corresponding probability is zero. The branch-validity theorem says that this case has no normalized conditional state; the other coefficient has modulus one and its branch is the original basis state. This checks both zero-coefficient boundary cases. [F2, step 1.1, algebra] ∎

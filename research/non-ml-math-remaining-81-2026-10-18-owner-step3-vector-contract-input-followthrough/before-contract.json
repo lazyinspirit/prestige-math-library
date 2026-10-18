@@ -1,0 +1,454 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-matrix-algebra-is-a-c-star-algebra",
+    "ex-vector-and-tracial-states-on-matrix-algebras"
+  ],
+  "contracts": {
+    "lem-matrix-algebra-is-a-c-star-algebra": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and assume\n$X$ admits an ordered basis of finite length. Then $X$ is a Banach space in the\nsense of [[def-banach-space]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-c-star-algebra",
+          "source_section": "Definition",
+          "quote": "A **possibly nonunital complex Banach algebra** is a complex vector space $A$\nequipped with an associative complex-bilinear multiplication\n$A \\times A \\to A$ ([[def-bounded-bilinear-map]] for the bilinearity convention)\nand a norm under which $A$ is a Banach space ([[def-banach-space]],\n[[def-complex-norm-and-complex-normed-space]]), such that the norm is\n**submultiplicative**:\n\n$$\\|ab\\| \\le \\|a\\|\\,\\|b\\| \\qquad (a,b \\in A).$$\n\nNo multiplicative identity is assumed, and no real-algebra or unital\nconvention is imported from elsewhere.\n\nA **complex C\\*-algebra** is a possibly nonunital complex Banach algebra $A$\nequipped with an **involution** $A \\to A$, $a \\mapsto a^*$, which is\nconjugate-linear ([[def-complex-conjugate-real-imaginary-part-and-modulus]]) and\nsatisfies\n\n$$(a^*)^* = a, \\qquad (ab)^* = b^*a^*, \\qquad \\|a^*a\\| = \\|a\\|^2 \\qquad (a,b \\in A).$$\n\nThe last identity is the **C\\*-identity**. Two immediate consequences are worth\nrecording, and both are proved from the displayed axioms alone:\n\n- **the involution is isometric**: $\\|a^*\\| = \\|a\\|$. Indeed $\\|a\\|^2 = \\|a^*a\\| \\le \\|a^*\\|\\,\\|a\\|$ gives $\\|a\\| \\le \\|a^*\\|$ when $a \\ne 0$, and applying this inequality to $a^*$ and using $(a^*)^* = a$ gives $\\|a^*\\| \\le \\|a\\|$; the case $a = 0$ is trivial;\n- **no norm-uniqueness assertion is part of this definition**: such a theorem\n  needs additional hypotheses and proof, and does not follow merely by naming\n  the displayed C\\*-identity.\n\nLet $A$ and $B$ be complex C\\*-algebras. A **bounded star-homomorphism**, or\nbounded $*$-homomorphism, is a bounded complex-linear map\n$\\varphi : A \\to B$ ([[def-bounded-linear-operator]]) satisfying\n\n$$\\varphi(ab) = \\varphi(a)\\varphi(b), \\qquad \\varphi(a^*) = \\varphi(a)^* \\qquad (a,b \\in A).$$\n\nA star-homomorphism is **not** required to be unital, and it is not required\nthat a unit be present or preserved; when $A$ and $B$ both happen to be unital,\n$\\varphi$ is called **unital** if $\\varphi(1_A) = 1_B$. The bounded nonunital\nstar-homomorphisms are the arrows of the locally compact duality theorem on this\npage ([[thm-locally-compact-gelfand-duality]]), with properness imposed there\nthrough [[def-approximate-unit-and-proper-c-star-morphism]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-numbers-form-a-field",
+          "source_section": "Statement",
+          "quote": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field containing the embedded copy of\n$\\mathbb R$. Every complex number has a unique form $a+bi$ with $a,b\\in\\mathbb R$,\nand\n$$ (a+bi)+(u+vi)=(a+u)+(b+v)i, $$\n$$ (a+bi)(u+vi)=(au-bv)+(av+bu)i. $$\nIf $a+bi\\ne0$, then\n$$ (a+bi)^{-1}=\\frac{a-bi}{a^2+b^2}. $$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "matrix-algebra-structure",
+          "claim": "The matrix units form a finite basis, the coordinate formula makes every matrix action linear and bounded, matrix multiplication is associative and bilinear with unit I_n, and conjugate transpose is a conjugate-linear involution reversing products. Since every linear map is represented by its columns, M_n(C)=B(C^n).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "operator-norm-and-c-star-identity",
+          "claim": "The operator norm is submultiplicative; the double unit-ball supremum and the adjoint identity give ||a*||=||a||; the upper and lower estimates for ||a*a|| then give the C*-identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra",
+            "F7"
+          ]
+        },
+        {
+          "id": "matrix-algebra-completeness",
+          "claim": "The operator norm is a norm, the matrix units form a finite basis, and finite-dimensional completeness supplies the Banach algebra axiom. Together with the preceding algebraic and norm identities this is a unital C*-algebra.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n >= 1; the zero-dimensional matrix algebra is outside its scope.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check the actual quantified index/object domain and any empty operation/zero-layer convention, rather than treating every displayed sum as an arbitrary possibly empty family. n>=1 excludes empty coordinate algebra; all sums in proof range over fixed nonempty{1,...,n}. Nonempty unit sphere via e1, norm0 case ax=0 handled2.1; displayed sum regex is not an empty family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero matrix is in M_n(C); its norm is 0 and its involution and C*-identity are covered by steps 1.1-2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=1 the matrix units consist of I_1; conjugate transpose is complex conjugation and step 2.1 gives |z-bar z|=|z|^2 in the operator norm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero and rank-deficient matrices remain elements of the same finite-dimensional operator algebra; step 2.1 proves the norm identities without invertibility assumptions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lower parameter endpoint n=1 is included; the proof uses finite sums for every n >= 1 in steps 1.1-3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 use the specified finite matrix-unit basis and finite coordinate sums only; no family of choices is made, as recorded in the Remarks."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts a C*-algebra structure, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts a C*-algebra structure, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-74",
+        "refuter": "research/non-ml-math-remaining-81-2026-10-18-refute-74.json",
+        "notes": "Independently read all three proof steps and all nine direct suppliers. Coordinate expansion establishes complex inner-product and algebra axioms, conjugate-transpose adjoint identity and linear bounded matrix action. Cauchy–Schwarz bounds each row; columns give every bounded linear operator. Double unit-ball supremum uses y=ax/||ax|| only for ax nonzero; conjugate symmetry and the adjoint identity exchange x,y and give equal adjoint norm. Submultiplicativity gives the upper C*-bound, the unit-vector quadratic form gives the lower bound. n>=1 makes the sphere nonempty; zero/rank-deficient matrices need no division or inverse. Operator-norm axioms and the explicit finite ordered matrix-unit basis meet the completeness supplier hypotheses. No AC, general Hilbert representation theorem or spectral theorem is used. Axler Section 7F 7.86, 7.88(c), 7.91 checked at printed pp.280-283 / zero-based PDF pp.293-296. Reader linearity addition is sound polish; locator extension includes the actual adjoint theorem. No reader/refuter findings and no unresolved prerequisite."
+      }
+    },
+    "ex-vector-and-tracial-states-on-matrix-algebras": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-matrix-algebra-is-a-c-star-algebra",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $H_n=\\mathbb C^n$ with inner product\n$$\\langle x,y\\rangle=\\sum_{j=1}^n x_j\\overline{y_j}$$\nand induced Euclidean norm, and let $M_n(\\mathbb C)$ act on $H_n$ by matrix\nmultiplication. Give it the conjugate-transpose involution $a^*=\\overline a^{\\mathsf T}$\nand the operator norm\n$$\\|a\\|=\\sup\\{\\|ax\\|_2:x\\in H_n,\\ \\|x\\|_2\\le1\\}.$$\nThen $M_n(\\mathbb C)=\\mathcal B(H_n)$ is a unital complex C*-algebra.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-state-on-a-c-star-algebra",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a complex C\\*-algebra ([[def-c-star-algebra]]) and recall that\npositivity in $A$ is the algebraic condition $a=b^*b$, without spectral\nhypotheses ([[def-self-adjoint-positive-unitary-and-normal-elements-of-a-c-star-algebra]]).\nA linear functional $\\omega:A\\to\\mathbb C$ is **positive** if\n$$\\omega(a^*a)\\ge0\\qquad\\text{for every }a\\in A,$$\nand a **state** if in addition $\\|\\omega\\|=1$, the norm being the operator\nnorm of the bounded linear functional on $A$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published [[def-inner-product-norm]]: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-space-of-bounded-linear-operators",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field. Write\n\n$$\\mathcal B(X,Y) := \\{T:X\\to Y : T \\text{ is a bounded linear operator}\\}.$$\n\nThis is a subspace of the vector space $\\mathcal L(X,Y)$ of\n[[def-vector-space-of-linear-maps]], with the same pointwise operations:\n\n$$(S+T)(x) := Sx+Tx,\\qquad (\\lambda T)(x) := \\lambda\\,Tx.$$\n\nIf $X=Y$, write\n\n$$\\mathcal B(X) := \\mathcal B(X,X).$$",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]).\n\n**The completion convention is the Cauchy-sequence one.**\n[[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-finite-dimensional-normed-spaces-are-banach",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and assume\n$X$ admits an ordered basis of finite length. Then $X$ is a Banach space in the\nsense of [[def-banach-space]].",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "vector-states",
+          "claim": "Each coordinate-vector functional is bounded and positive; the operator norm definition gives ||I_n||=1 for n>=1, so its value 1 at I_n proves norm one and hence the state property.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F8"
+          ]
+        },
+        {
+          "id": "trace-state",
+          "claim": "The normalized trace is positive and bounded by the operator norm; using ||I_n||=1 gives norm one and hence the state property.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F8"
+          ]
+        },
+        {
+          "id": "vector-state-quotient",
+          "claim": "For each coordinate state the null space is the matrices killing its basis vector, and the quotient map to C^n is a surjective isometry; hence its quotient is complete.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F6",
+            "F7",
+            "step 1.1",
+            "F9"
+          ]
+        },
+        {
+          "id": "trace-state-quotient",
+          "claim": "The trace null space is zero; the coordinate formula defines an inner product on its normalized Hilbert-Schmidt quotient, which is complete, and left multiplication is bounded, linear, multiplicative, and preserves adjoints, with I_n a unit cyclic vector of coefficient tau.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "L1",
+            "step 2.1",
+            "algebra",
+            "F9"
+          ]
+        },
+        {
+          "id": "vector-state-representation",
+          "claim": "The vector-state left actions descend to bounded unital *-representations and their unit cyclic coefficients equal the coordinate states.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "L1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "trace-reducibility-boundary",
+          "claim": "For n >= 2, the estimate |b_ij| <= sqrt(n) ||b||_tau makes every entry functional continuous in the normalized Hilbert-Schmidt norm; the nonzero proper closed first-column subspace is invariant under left multiplication, so the trace GNS representation is reducible.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "trace-extremality-boundary",
+          "claim": "At n=1 the trace is the vector state with an irreducible one-dimensional model; at n >= 2 the auxiliary average is a state using ||I_n||=1, so the trace is a nontrivial convex combination of distinct states and is not extreme.",
+          "step": "4.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "example-closure",
+          "claim": "The vector-state, trace-state, and dimension-boundary calculations establish every clause of the Statement.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 3.2",
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n >= 1, so the zero-dimensional algebra is outside this example.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check the actual quantified index/object domain and any empty operation/zero-layer convention, rather than treating every displayed sum as an arbitrary possibly empty family. n>=1 fixed nonempty matrix indices. Every j exists in1..n; auxiliary psi sum j=2..n used only n>=2, while n=1 handled separately4.2. Quotient nullspaces include0, both finite GNS models explicit; empty-sum regex false positive."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero matrix is included: steps 1.1 and 2.2 give zero state values while the unit still normalizes each state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, step 4.2 gives tau=omega_1 and uses the one-dimensional quotient from steps 2.2 and 3.2 to establish irreducibility."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The vector-state null space can be nonzero; step 2.2 computes it exactly as matrices annihilating e_j and identifies the quotient."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lower endpoint n=1 is checked in step 4.2; the first reducible trace case n=2 is covered by the E_11/E_12 witness in step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-5.1 use explicit finite vectors, matrix units, sums, and quotient maps; the item records that no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-74",
+        "refuter": "research/non-ml-math-remaining-81-2026-10-18-refute-74.json",
+        "notes": "Read all eight Verification steps, all nine cited suppliers and local adjoint uniqueness argument L1. Positivity and boundedness of every coordinate state and trace are direct coordinate sums; evaluating at I_n with ||I_n||=1 proves norm one. N_omega_j is the kernel of the column map, so the quotient pairing descends, is positive-definite and isometrically maps onto C^n. N_tau=0 and the normalized entry pairing is a complex inner product. Explicit finite bases meet the completeness theorem hypotheses, avoiding any completion/choice issue. Left multiplication descends in the vector quotient, is norm bounded by ||a|| in both models, preserves algebra products/unit and has adjoint given by a*. I_n gives a unit cyclic vector with the stated coefficient in both models. For n>=2 the first-column subspace contains E11 and omits E12; coordinate functionals have bound sqrt(n), proving closedness, and left multiplication preserves its zero columns. The distinct states omega_1 and psi have values 1 and 0 on E11 and weights 1/n,(n-1)/n strictly in (0,1); n=1 is separately one-dimensional and irreducible. Zero/singular matrices and all coordinate indices are covered. No general GNS, purity equivalence or AC is assumed. Reader normalization and sesquilinearity additions are justified elementary expansions. Axler 7.86/7.88/7.91 and Putnam Theorem1.12.4 complete proof (printed54-55) checked. Farah host returned browser internal error; no independent reading of that PDF claimed; Putnam and the complete local coordinate argument close the mathematics without it. No refuter or reader findings, no open prerequisite."
+      }
+    }
+  }
+}

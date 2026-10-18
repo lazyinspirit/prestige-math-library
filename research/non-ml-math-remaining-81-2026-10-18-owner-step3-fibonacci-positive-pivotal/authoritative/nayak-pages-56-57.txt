@@ -1,0 +1,294 @@
+
+=== PDF PAGE 56 ===
+like to show how to compute with them. First, we need to
+construct our qubits. An obvious choice might be to use two
+particles for a qubit and declare the two states |(•, •)1⟩and
+|(•, •)τ⟩to be the two orthogonal states of the qubit. While
+this is a reasonably natural looking qubit, it turns out not to
+be convenient for computations. The reason for this is that
+we will want to do single qubit operations (simple rotations)
+by braiding. However, it is not possible to change the over-
+all quantum number of a group of particles by braiding within
+that group. Thus, by simply braiding the two particles around
+each other, we can never change |(•, •)1⟩to |(•, •)τ⟩. To
+remedy this problem, it is convenient to use three quasipar-
+ticles to represent a qubit as suggested by Freedman et al.,
+2002a (many other schemes for encoding qubits are also pos-
+sible (Freedman et al., 2002a; Hormozi et al., 2007)). Thus,
+we represent the two states of the qubit as the |0⟩and |1⟩states
+shown in Fig. 14. The additional state |N⟩is a “noncompu-
+tational” state. In other words, we arrange so that at the be-
+ginning and end of our computations, there is no amplitude in
+this state. Any amplitude that ends up in this state is known as
+“leakage error”. We note, however, that the braiding matrices
+ρ(σ1) and ρ(σ2) are block diagonal and therefore never mix
+the noncomputational state |N⟩with the computational space
+|0⟩and |1⟩(This is just another way to say that the overall
+quantum number of the three particles must remain unchanged
+under any amount of braiding). Therefore, braiding the three
+particles gives us a way to do single qubit operations with no
+leakage.
+In section IV.C, we will describe a proof that the set of
+braids has a “dense image” in the set of unitary operations
+for the Fibonacci theory. This means that there exists a braid
+that corresponds to a unitary operation arbitrarily close to any
+desired operation. The closer one wants to approximate the
+desired unitary operation, the longer the braid typically needs
+to be, although only logarithmically so (i.e, the necessary
+braid length grows only as the log of the allowed error dis-
+tance to the target operation). The problem of actually ﬁnd-
+ing the braids that correspond to desired unitary operations,
+while apparently complicated, turns out to be straightforward
+(Bonesteel et al., 2005; Hormozi et al., 2007). One simple ap-
+proach is to implement a brute force search on a (classical)
+computer to examine all possible braids (on three strands) up
+to some certain length, looking for a braid that happen to
+generate a unitary operation very close to some desired re-
+sult. While this approach works very well for searching short
+braids (Bonesteel et al., 2005; Hormozi et al., 2007), the job
+of searching all braids grows exponentially in the length of
+the braid, making this scheme unfeasible if one requires high
+accuracy long braids. Fortunately, there is an iterative algo-
+rithm by Solovay and Kitaev (see Nielsen and Chuang, 2000)
+which allows one to put together many short braids to efﬁ-
+ciently construct a long braid arbitrarily close to any desired
+target unitary operation. While this algorithm does not gen-
+erally ﬁnd the shortest braid for performing some operation
+(within some allowed error), it does ﬁnd a braid which is only
+polylogarithmically long in the allowed error distance to the
+desired operation. Furthermore, the (classical) algorithm for
+ﬁnding such a braid is only algebraically hard in the length of
+56
+the braid.
+Having solved the single qubit problem, let us now imag-
+ine we have multiple qubits, each encoded with three par-
+ticles.
+To perform universal quantum computation, in ad-
+dition to being able to perform single qubit operations, we
+must also be able to perform two-qubit entangling gates
+(Bremner et al., 2002; Nielsen and Chuang, 2000). Such two-
+qubit gates will necessarily involve braiding together (phys-
+ically “entangling”!) the particles from two different qubits.
+The result of Freedman et al., 2002a generally guarantees that
+braids exist corresponding to any desired unitary operation on
+a two-qubit Hilbert space. However, ﬁnding such braids is
+now a much more formidable task. The full Hilbert space for
+six Fibonacci particles (constituting two qubits) is now 13 di-
+mensional, and searching for a desired result in such a high
+dimensional space is extremely hard even for a powerful clas-
+sical computer. Therefore, the problem needs to be tackled by
+divide-and-conquer approaches, building up two-qubit gates
+out of simple braids on three particles (Bonesteel et al., 2005;
+Hormozi et al., 2007). A simple example of such a construc-
+tion is sketched in Fig. 16. First, in Fig. 16.a, we consider
+braids on three strands that moves (“weaves” (Simon et al.,
+2006)) only a single particle (the blue particle in the ﬁgure)
+through two stationary particles (the green particles).
+We
+search for such a braid whose action on the Hilbert space is
+equivalent to exchanging the two green particles twice. Since
+this is now just a three particle problem, ﬁnding such a braid,
+to arbitrary accuracy, is computationally tractable. Next, for
+the two qubit problem, we label one qubit the control (blue in
+Fig. 16.b) and another qubit the target (green). We take a pair
+of particles from the control qubit (the control pair) and weave
+them as a group through two of the particles in the target, us-
+ing the same braid we just found for the three particle prob-
+lem. Now, if the quantum number of the control pair is 1 (i.e,
+control qubit is in state |0⟩) then any amount of braiding of this
+pair will necessarily give just an Abelian phase (since moving
+1 around is like moving nothing around). However, if the
+quantum number of the control pair is τ (i.e, the control qubit
+is in state |1⟩) then we can think of this pair as being equiv-
+alent to a single τ particle, and we will cause the same non-
+trivial rotation as in Fig.16.a above (Crucially, this is designed
+to not allow any leakage error!). Thus, we have constructed a
+“controlled rotation” gate, where the state of the target qubit is
+changed only if the control qubit is in state |1⟩, where the ro-
+tation that occurs is equivalent to exchanging two particles of
+the target qubit as shown in Fig. 16.b. The resulting two-qubit
+controlled gate, along with single qubit rotations, makes a uni-
+versal set for quantum computation (Bremner et al., 2002).
+More conventional two-qubit gates, such as the controlled
+NOT gates (CNOT), have also been designed using braids
+(Bonesteel et al., 2005; Hormozi et al., 2007).
+(d) Other theories: The Fibonacci theory is a particularly
+interesting theory to study, not only because of its simplicity,
+but also because of its close relationship (see the discussion
+at the beginning of section IV.B) with the Z3 parafermion the-
+ory — a theory thought to actually describe (Rezayi and Read,
+2006) the observed quantum Hall state at ν = 12/5 (Xia et al.,
+2004). It is not hard to show that a given braid will perform the
+
+=== PDF PAGE 57 ===
+|
+|
+$
+%
+
+
+V
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+V
+
+
+
+
+
+
+
+
+|
+FIG. 16 Construction of a two qubit gate from a certain three particle
+problem. ime ﬂows from left to right in this picture. In the top we
+construct a braid on three strands moving only the blue particle which
+has the same effect as interchanging the two green strands. Using this
+same braid (bottom), then constructs a controlled rotation gate. If the
+state of the upper (control) qubit is |0⟩, i.e., the control pair is in state
+1 then the braid has no effect on the Hilbert space (up to a phase).
+if, the upper (control) qubit is in the state |1⟩then the braid has the
+same effect as winding two of the particles in the lower qubit. Figure
+from Bonesteel et al., 2005
+same quantum computation in either theory (Hormozi et al.,
+2007) (up to an irrelevant overall Abelian phase). Therefore,
+the Fibonacci theory and the associated braiding may be phys-
+ically relevant for fractional quantum Hall topological quan-
+tum computation in high-mobility 2D semiconductor struc-
+tures.
+However, there are many other non-Abelian theories, which
+are not related to Fibonacci anyons. Nonetheless, for arbitrary
+non-Abelian theories, many of the themes we have discussed
+in this section continue to apply. In all cases, the Hilbert space
+can be understood via fusion rules and an F-matrix; rotations
+of two particles can be understood as a rotation ˆR operator
+that produces a phase dependent on the quantum number of
+the two particles; and one can always encode qubits in the
+quantum number of some group of particles. If we want to be
+able to do single qubit operations by braiding particles within
+a qubit (in a theory that allows universal quantum computa-
+tion) we always need to encode a qubit with at least three par-
+ticles (sometimes more). To perform two-qubit operations we
+always need to braid particles constituting one qubit with the
+particles constituting another qubit. It is always the case that
+for any unitary operation that can be achieved by braiding n
+particles around each other with an arbitrary braid can also be
+achieved by weaving a single particle around n−1 others that
+remain stationary (Simon et al., 2006) (Note that we implic-
+itly used this fact in constructing Fig. 15.a). So long as the
+state is among the ones known to have braid group represen-
+tations with dense images in the unitary group, as described in
+Section IV.C below, it will be able to support universal quan-
+tum computation. Finally, we note that it seems to always be
+true that the practical construction of complicated braids for
+multi-qubit operations needs to be subdivided into more man-
+ageable smaller problems for the problem to be tractable.
+57
+C. Universal Topological Quantum Computation
+As we have seen in subsection IV.A, even if the ν = 5/2
+state is non-Abelian, it is not non-Abelian enough to func-
+tion as a universal quantum computer simply by braiding
+anyons. However, in subsection IV.B, we described Fibonacci
+anyons which, we claimed, were capable of supporting uni-
+versal topological quantum computation. In this subsection,
+we sketch a proof of this claim within the context of the more
+general question: which topological states are universal for
+quantum computation or, in starker terms, for which topolog-
+ical states is the entire gate set required to efﬁciently simulate
+an arbitrary quantum circuit to arbitrary accuracy simply that
+depicted in Figure 17 (see also Kauffman and Lomonaco Jr.,
+2004, 2007).
+The discussion in this section is more mathematical than
+the rest of the paper and can skipped by less mathematically-
+inclined readers.
+FIG. 17 The entire gate set needed in a state supporting universal
+quantum computation.
+In other words, the general braid is composed of copies of a
+single operation (depicted in Figure 17) and its inverse. (Ac-
+tually, as we will see, “positive braids” will prove to be suf-
+ﬁcient, so there is no necessity to ever use the inverse oper-
+ation.) Fibonacci anyons, which we discussed in subsection
+IV.B, are an example which have this property. In this subsec-
+tion, we will see why.
+For the sake of concreteness, let us assume that we use a
+single species of quasiparticle, which we will call σ. When
+there are n σ’s at ﬁxed positions z1, . . . , zn, there is an
+exponentially-large (∼(dσ)n-dimensional) ground state sub-
+space of Hilbert space. Let us call this vector space Vn. Braid-
+ing the σ’s produces a representation ρn characteristic of the
+topological phase in question, ρn : Bn →U(Vn) from the
+braid group on n strands into the unitary transformations of
+Vn. We do not care about the overall phase of the wavefunc-
+tion, since only the projective reduction in PU(Vn) has physi-
+cal signiﬁcance. (PU(Vn) is the set of unitary transformations
+on Vn with two transformations identiﬁed if they differ only
+by a phase.) We would like to be able to enact an arbitrary uni-
+tary transformation, so ρ(Bn) should be dense in PU(Vn), i.e.
+dense up to phase. By ‘dense’ in PU(Vn), we mean that the
+intersection of all closed sets containing ρ(Bn) should simply
+be PU(Vn). Equivalently, it means that an arbitrary unitary
+transformation can be approximated, up to a phase, by a trans-
+formation in ρ(Bn) to within any desired accuracy. This is the
+condition which our topological phase must satisfy.
+For a modestly large number (≥7) of σs, it was shown
+(Freedman et al., 2002a,b) that the braid group representa-
+tions associated with SU(2) Chern-Simons theory at level

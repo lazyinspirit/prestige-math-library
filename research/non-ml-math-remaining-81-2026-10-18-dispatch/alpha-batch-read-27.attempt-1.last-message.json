@@ -1,0 +1,112 @@
+{
+  "group": "u",
+  "batches": ["27"],
+  "pages_read": [
+    "finite-trellis-viterbi-and-sequence-decoding",
+    "finite-trellis-viterbi-and-sequence-decoding-examples"
+  ],
+  "items_read": [
+    "def-finite-layered-trellis",
+    "def-finite-hidden-markov-model-for-sequence-decoding",
+    "lem-finite-trellis-prefix-score-recurrence",
+    "lem-finite-hmm-joint-law-normalizes",
+    "alg-viterbi-max-product-on-finite-trellis",
+    "thm-viterbi-finite-trellis-is-optimal",
+    "alg-hmm-viterbi-sequence-map",
+    "thm-hmm-viterbi-is-sequence-map",
+    "cex-hmm-zero-evidence-has-no-posterior-map",
+    "cex-hmm-marginal-modes-are-not-sequence-map",
+    "ex-finite-trellis-viterbi-tie-and-unreachable-state",
+    "ex-hmm-viterbi-exact-sequence-map"
+  ],
+  "conventions": [
+    {
+      "convention": "A length-zero trellis has one empty path of score 1. For positive length, vertex layers may be empty; allowed edges have strictly positive weights, and zero endpoint weights disable endpoints. Prefixes omit the terminal-weight condition.",
+      "fixed_by": "def-finite-layered-trellis",
+      "matters_for": [
+        "lem-finite-trellis-prefix-score-recurrence",
+        "alg-viterbi-max-product-on-finite-trellis",
+        "thm-viterbi-finite-trellis-is-optimal",
+        "alg-hmm-viterbi-sequence-map",
+        "ex-finite-trellis-viterbi-tie-and-unreachable-state"
+      ]
+    },
+    {
+      "convention": "HMM state and observation sets are finite and nonempty; initial probabilities and transition and emission rows normalize to 1, with zero entries permitted. HMM observation lengths are at least 1. Conditional path masses and sequence MAP are defined only for positive evidence.",
+      "fixed_by": "def-finite-hidden-markov-model-for-sequence-decoding",
+      "matters_for": [
+        "lem-finite-hmm-joint-law-normalizes",
+        "alg-hmm-viterbi-sequence-map",
+        "thm-hmm-viterbi-is-sequence-map",
+        "cex-hmm-zero-evidence-has-no-posterior-map",
+        "cex-hmm-marginal-modes-are-not-sequence-map",
+        "ex-hmm-viterbi-exact-sequence-map"
+      ]
+    },
+    {
+      "convention": "Supplied total vertex orders resolve predecessor and terminal ties by selecting the first maximizer. Backpointers are stored only for positive prefix scores.",
+      "fixed_by": "alg-viterbi-max-product-on-finite-trellis",
+      "matters_for": [
+        "thm-viterbi-finite-trellis-is-optimal",
+        "alg-hmm-viterbi-sequence-map",
+        "thm-hmm-viterbi-is-sequence-map",
+        "ex-finite-trellis-viterbi-tie-and-unreachable-state"
+      ]
+    },
+    {
+      "convention": "The complexity bound counts each real multiplication and comparison as one operation.",
+      "fixed_by": "thm-viterbi-finite-trellis-is-optimal",
+      "matters_for": ["thm-viterbi-finite-trellis-is-optimal"]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-finite-trellis-prefix-score-recurrence",
+      "statement": "For T ≥ 1, D₁(v) = α(v) and Dₜ(v) = max({Dₜ₋₁(u)wₜ(u,v) : (u,v) ∈ Eₜ} ∪ {0}). Then Dₜ(v) is the maximum score of a prefix path ending at v; if no such prefix exists, Dₜ(v) = 0. For T = 0, the unique empty prefix has score 1.",
+      "used_by": [
+        "alg-viterbi-max-product-on-finite-trellis",
+        "thm-viterbi-finite-trellis-is-optimal"
+      ]
+    },
+    {
+      "id": "thm-viterbi-finite-trellis-is-optimal",
+      "statement": "For every finite weighted trellis, the algorithm returns “no admissible path” exactly when the trellis has no path. Otherwise it returns an admissible path whose score is maximal among all admissible paths. With V the total number of vertices and E the total number of edges, real multiplication and comparison counted as unit operations, time is O(1+T+V+E) and auxiliary storage is O(1+V). For T = 0 it returns the unique empty path with score 1.",
+      "used_by": [
+        "thm-hmm-viterbi-is-sequence-map",
+        "ex-finite-trellis-viterbi-tie-and-unreachable-state"
+      ]
+    },
+    {
+      "id": "lem-finite-hmm-joint-law-normalizes",
+      "statement": "For every finite discrete HMM and each integer T ≥ 1, the joint masses p(z,y) in the Definition sum to 1 over all hidden paths z ∈ S^T and observation sequences y ∈ Y^T.",
+      "used_by": [
+        "def-finite-hidden-markov-model-for-sequence-decoding",
+        "thm-hmm-viterbi-is-sequence-map"
+      ]
+    },
+    {
+      "id": "alg-hmm-viterbi-sequence-map",
+      "statement": "For an HMM observation sequence of length T ≥ 1, construct layers S, initial weights π(s)B(s,y₁), terminal weights 1, and edges exactly where A(r,s) and B(s,yₜ) are positive, weighted by their product. Run finite-trellis Viterbi; return its path, or “zero evidence; no conditional sequence MAP” when no admissible path exists.",
+      "used_by": [
+        "thm-hmm-viterbi-is-sequence-map",
+        "ex-hmm-viterbi-exact-sequence-map"
+      ]
+    },
+    {
+      "id": "thm-hmm-viterbi-is-sequence-map",
+      "statement": "Given a finite discrete HMM and an observation sequence of positive length, the sequence-decoding algorithm returns no conditional MAP path exactly when the observation evidence is zero. When the evidence is positive, it returns a hidden-state sequence maximizing the posterior probability of the entire sequence, including when there are ties.",
+      "used_by": ["ex-hmm-viterbi-exact-sequence-map"]
+    }
+  ],
+  "published_dependencies": [],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "finite-trellis-viterbi-and-sequence-decoding",
+      "to": "prefix-codes-and-finite-lossless-coding",
+      "faithful": true,
+      "note": "Checked both page interfaces and the assigned items' actual premises. This is a reading prerequisite, with no prefix-coding proposition imported into the trellis or HMM arguments. The coding page's full-support source assumption is not transferred to HMM parameters, which explicitly permit zero probabilities."
+    }
+  ]
+}

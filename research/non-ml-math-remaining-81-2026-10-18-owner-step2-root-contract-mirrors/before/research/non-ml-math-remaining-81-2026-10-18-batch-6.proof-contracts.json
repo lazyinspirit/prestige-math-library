@@ -1,0 +1,1543 @@
+{
+  "version": 1,
+  "level": "batch-6",
+  "scope": [
+    "lem-it-number-of-n-types-polynomial-bound",
+    "lem-it-n-type-approximation",
+    "lem-it-finite-relative-entropy-continuity-on-simplex",
+    "lem-it-finite-product-law-is-iid",
+    "lem-it-type-probability-identity",
+    "lem-it-type-class-cardinality-bounds",
+    "lem-it-type-class-probability-bounds",
+    "thm-it-type-class-entropy-approximation",
+    "thm-it-finite-alphabet-sanov-theorem",
+    "ex-it-binary-type-class-count",
+    "ex-it-finite-sanov-bernoulli-tail",
+    "cex-it-type-count-is-not-exactly-exponential"
+  ],
+  "contracts": {
+    "lem-it-number-of-n-types-polynomial-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "For $a\\in\\mathcal A$, define its count and empirical type by $$N(a\\mid x^n):=\\#\\{i\\in\\{1,\\ldots,n\\}:x_i=a\\},\\qquad \\widehat P_{x^n}(a):=\\frac{N(a\\mid x^n)}n.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every word has a unique empirical type, so its type class contains it; equality of two type vectors makes the corresponding classes disjoint.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The first k-1 integer counts determine the last count, so there are at most (n+1)^(k-1) types, including the k=1 case.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty alphabet and positive block length, so an empty input alphabet or block is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly allows each of the first k-1 counts to be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats k=1: the empty tuple determines the unique type."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the partition even when a word's type class is a singleton."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes counts 0 and n among the allowed endpoint counts."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family of nonempty sets is selected; finite listings and coordinate choices are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "lem-it-n-type-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "Thus $q\\in\\mathcal P_n(\\mathcal A)$ exactly when every $nq(a)$ is a nonnegative integer and $\\sum_a nq(a)=n$: the converse is obtained by arranging the prescribed finite number of copies of each letter.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Floor the first counts, compute the integer remainder, and round up that many positive fractional coordinates; the resulting nonnegative counts sum to n.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The rounded vector is an n-type and each of its k coordinates differs by less than 1/n, giving the stated l1 bound, including zero coordinates.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty alphabet and positive block length, so an empty input alphabet or block is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly states that coordinates q(a_i)=0 remain covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles k=1: q(a_1)=1 and the remainder is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers point-mass probability vectors as well as interior vectors."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly checks zero coordinates and the floor/round-up endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses only finitely many listed positive fractional parts by a deterministic ordering."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "lem-it-finite-relative-entropy-continuity-on-simplex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For probability vectors $p,q$ on the same set $[k]$, the relative entropy is $$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$ with value $+\\infty$ if $p_i>0=q_i$ for some $i$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and $$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The integral formula bounds |t ln t| by 2/sqrt(1/t), which tends to zero as t decreases to zero; hence t ln t extends continuously at zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For full-support p, D(q||p) is the finite sum of continuous q(a) ln q(a) terms and linear q(a) ln p(a) terms, so it is finite and continuous on the closed simplex.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty alphabet and positive block length, so an empty input alphabet or block is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.2 handle q(a)=0 using the continuous extension 0 ln 0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to the one-coordinate simplex, where the finite sum is constant."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes boundary and point-mass vectors in the entire simplex."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the limit at the endpoint t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family of nonempty sets is selected; finite listings and coordinate choices are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "lem-it-type-probability-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "For $q\\in\\mathcal P_n(\\mathcal A)$, its **type class** is $$T_q:=\\{x^n\\in\\mathcal A^n:\\widehat P_{x^n}=q\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "Its Shannon entropy in natural units is $$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$ with $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is $$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$ with value $+\\infty$ if $p_i>0=q_i$ for some $i$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-alphabet-product-law",
+          "source_section": "Definition",
+          "quote": "Assign each word $x^n=(x_1,\\ldots,x_n)$ the weight $$w_{p,n}(x^n):=\\prod_{i=1}^n p(x_i),$$ and for $E\\subseteq\\Omega_n$ define $\\mu_{p,n}(E):=\\sum_{x^n\\in E}w_{p,n}(x^n)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-finite-product-law-is-iid",
+          "source_section": "Statement",
+          "quote": "The finite mass assignment $p^{\\otimes n}$ of [[def-it-finite-alphabet-product-law]] is a probability law on $\\mathcal A^n$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If q has positive mass where p is zero, every word in T_q has zero product mass and the probability-law event mass is zero; the right side also vanishes because D(q||p)=infinity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On supp(q) contained in supp(p), the product-mass formula gives equal word masses; expanding H(q)+D(q||p) gives each word mass exp(-n[H(q)+D(q||p)]), and summing the finite class under the verified probability law proves the identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty alphabet and positive block length, so an empty input alphabet or block is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.2 use the stated zero-coordinate and 0 ln 0 conventions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If the alphabet has one symbol, the supported class has mass one and H=D=0 in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles a type using a symbol of zero source mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.2 include types with zero coordinates and the support boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family of nonempty sets is selected; finite listings and coordinate choices are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "lem-it-type-class-cardinality-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "For $q\\in\\mathcal P_n(\\mathcal A)$, its **type class** is $$T_q:=\\{x^n\\in\\mathcal A^n:\\widehat P_{x^n}=q\\}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-number-of-n-types-polynomial-bound",
+          "source_section": "Statement",
+          "quote": "The type classes $T_q$, $q\\in\\mathcal P_n(\\mathcal A)$, form a disjoint partition of $\\mathcal A^n$, and $$|\\mathcal P_n(\\mathcal A)|\\le(n+1)^{k-1}.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "Its Shannon entropy in natural units is $$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$ with $0\\ln0:=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-finite-product-law-is-iid",
+          "source_section": "Statement",
+          "quote": "The finite mass assignment $p^{\\otimes n}$ of [[def-it-finite-alphabet-product-law]] is a probability law on $\\mathcal A^n$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The class consists of arrangements of the prescribed counts, and every such word has q-product mass exp(-nH(q)).",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The target count vector m is a mode: every other multinomial count vector has probability at most its probability, including vectors that place mass outside q support.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The exact class mass under q^n is at most one, giving the entropy upper bound.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The modal target class among at most (n+1)^(k-1) partitioning classes has mass at least their reciprocal count.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Combine the exact class mass with the modal lower probability to obtain the type-class cardinality lower bound.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty alphabet and positive block length, so an empty input alphabet or block is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly handles m_a=0 and r_a>0, whose multinomial probability is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When k=1, F2 gives one type class and step 2.2 gives modal probability one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2-2.2 include point-mass types with zero counts in the remaining coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 covers both r_a=0 and m_a=0 endpoints of the count range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family of nonempty sets is selected; finite listings and coordinate choices are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "lem-it-type-class-probability-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-it-type-probability-identity",
+          "source_section": "Statement",
+          "quote": "Under the product law $p^{\\otimes n}$, $$p^{\\otimes n}(T_q)=|T_q|\\exp\\!\\bigl(-n[H(q)+D(q\\|p)]\\bigr),$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-type-class-cardinality-bounds",
+          "source_section": "Statement",
+          "quote": "$$(n+1)^{-(k-1)}e^{nH(q)}\\le |T_q|\\le e^{nH(q)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "with value $+\\infty$ if $p_i>0=q_i$ for some $i",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "When D(q||p) is finite, combine the exact probability identity with both cardinality bounds and cancel the entropy factors.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "When D(q||p) is infinite, the class probability and both claimed bounds are zero by the support convention.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty alphabet and positive block length, so an empty input alphabet or block is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the support-failure branch D=+infinity and gives zero on both sides."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes k=1, where the only type and class have probability one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers types outside the support of p."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the support-failure endpoint and its zero probability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family of nonempty sets is selected; finite listings and coordinate choices are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "thm-it-type-class-entropy-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-it-type-class-cardinality-bounds",
+          "source_section": "Statement",
+          "quote": "$$(n+1)^{-(k-1)}e^{nH(q)}\\le |T_q|\\le e^{nH(q)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "Its Shannon entropy in natural units is $$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$ with $0\\ln0:=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and $$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each attainable type class is nonempty; taking logarithms of the cardinality bounds gives the stated two-sided log-size estimate.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After dividing by n, the uniform error is at most (k-1)ln(n+1)/n, which tends to zero by the logarithm integral bound.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty alphabet and positive block length, so an empty input alphabet or block is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 include zero coordinates in the uniform bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 include the one-symbol case in the uniform bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 include point-mass types in the uniform bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 include simplex endpoints in the uniform bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family of nonempty sets is selected; finite listings and coordinate choices are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "thm-it-finite-alphabet-sanov-theorem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "For $q\\in\\mathcal P_n(\\mathcal A)$, its **type class** is $$T_q:=\\{x^n\\in\\mathcal A^n:\\widehat P_{x^n}=q\\}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For probability vectors $p,q$ on the same set $[k]$, the relative entropy is $$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$ with value $+\\infty$ if $p_i>0=q_i$ for some $i$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-it-number-of-n-types-polynomial-bound",
+          "source_section": "Statement",
+          "quote": "$|\\mathcal P_n(\\mathcal A)|\\le(n+1)^{k-1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-type-class-probability-bounds",
+          "source_section": "Statement",
+          "quote": "$$(n+1)^{-(k-1)}e^{-nD(q\\|p)}\\le p^{\\otimes n}(T_q)\\le e^{-nD(q\\|p)},$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-it-n-type-approximation",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$, there is an $n$-type $q_n\\in\\mathcal P_n(\\mathcal A)$ such that $$\\|q_n-q\\|_1:=\\sum_{a\\in\\mathcal A}|q_n(a)-q(a)|\\le\\frac{k}{n}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-it-finite-relative-entropy-continuity-on-simplex",
+          "source_section": "Statement",
+          "quote": "Then $q\\mapsto D(q\\|p)$ is finite and continuous on the probability simplex $\\Delta(\\mathcal A)$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-it-finite-product-law-is-iid",
+          "source_section": "Statement",
+          "quote": "The finite mass assignment $p^{\\otimes n}$ of [[def-it-finite-alphabet-product-law]] is a probability law on $\\mathcal A^n$, and its coordinate maps $X_i(x^n)=x_i$ are independent random elements, each with law $p$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The event is the disjoint union of the type classes whose types lie in Gamma.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any relative-interior point q, an open l1 neighborhood lies in Gamma; the fixed rounding construction puts every sufficiently accurate n-type approximant in that neighborhood.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each event class is bounded by exp(-n times the closure rate); counting at most (n+1)^(k-1) classes gives the finite upper bound.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The event contains the approximating type class; its finite lower probability bound and continuity of D give normalized liminf at least -D(q||p).",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking logarithms of the finite upper bound and letting the polynomial factor vanish proves the limsup inequality, including zero-probability events.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Taking the supremum of the lower bound over all interior points gives the relative-interior infimum; an empty interior makes the right side -infinity.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Equal interior and closure infima make the liminf and limsup bounds coincide, so the limit exists with their common negative value.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "step 3.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For one-point support, Gamma is empty or the singleton simplex; the probability and rate are respectively zero/-infinity or one/zero.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 4.1",
+            "algebra",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1-1.3 and 2.3 explicitly cover Gamma empty and the empty-interior lower bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and steps 1.1-1.3 use ln 0=-infinity and the support simplex."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 checks the one-symbol support simplex directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2-2.3 allow an empty relative interior; no lower bound stronger than -infinity is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The support simplex includes boundary types with zero coordinates; F6 and step 2.2 cover them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2-2.2 use the explicit finite rounding construction in F5, not arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "ex-it-binary-type-class-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "For $q\\in\\mathcal P_n(\\mathcal A)$, its **type class** is $$T_q:=\\{x^n\\in\\mathcal A^n:\\widehat P_{x^n}=q\\}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "Its Shannon entropy in natural units is $$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$ with $0\\ln0:=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-it-type-class-cardinality-bounds",
+          "source_section": "Statement",
+          "quote": "$$(n+1)^{-(k-1)}e^{nH(q)}\\le |T_q|\\le e^{nH(q)}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For q(1)=1/5, the count vector is (8,2), the class has 45 words, and its entropy exponential is 5^10/4^8.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For q(1)=1/2, the count vector is (5,5), the class has 252 words, and both polynomially corrected inequalities hold by integer comparison.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Exact integer cross-multiplication verifies the lower and upper bound for the q(1)=1/5 class.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the two point-mass endpoint types the class is a singleton and entropy is zero, so both cardinality endpoints equal one.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes a nonempty binary alphabet and positive block length ten."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks types with a zero coordinate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 checks each point-mass type, whose class size is one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the degenerate endpoint types."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly checks q=(1,0) and q=(0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family of nonempty sets is selected; finite listings and coordinate choices are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "ex-it-finite-sanov-bernoulli-tail": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "For $a\\in\\mathcal A$, define its count and empirical type by $$N(a\\mid x^n):=\\#\\{i\\in\\{1,\\ldots,n\\}:x_i=a\\},\\qquad \\widehat P_{x^n}(a):=\\frac{N(a\\mid x^n)}n.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For probability vectors $p,q$ on the same set $[k]$, the relative entropy is $$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$ with value $+\\infty$ if $p_i>0=q_i$ for some $i$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-it-type-class-probability-bounds",
+          "source_section": "Statement",
+          "quote": "$$(n+1)^{-(k-1)}e^{-nD(q\\|p)}\\le p^{\\otimes n}(T_q)\\le e^{-nD(q\\|p)},$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-it-finite-relative-entropy-continuity-on-simplex",
+          "source_section": "Statement",
+          "quote": "Then $q\\mapsto D(q\\|p)$ is finite and continuous on the probability simplex $\\Delta(\\mathcal A)$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-finite-alphabet-sanov-theorem",
+          "source_section": "Statement",
+          "quote": "For any set $\\Gamma\\subseteq\\Delta(S)$, let $\\Gamma^\\circ$ and $\\overline\\Gamma$ denote its interior and closure in the relative topology induced by $\\|\\cdot\\|_1$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-hoeffding-independent-bounded-sums",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n\\ge1$ and let $X_1,\\ldots,X_n$ be independent integrable real random variables on one probability space. Suppose finite real numbers $a_i\\le b_i$ satisfy $a_i\\le X_i\\le b_i$ almost surely for every $i$. Put $V=\\sum_{i=1}^n(b_i-a_i)^2$ and $S=\\sum_{i=1}^n(X_i-\\mathbb E X_i)$. For every $t>0$, if $V>0$ then $$\\mathbb P(|S|\\ge t)\\le 2\\exp\\!\\left(-\\frac{2t^2}{V}\\right),$$ and if $V=0$ then $\\mathbb P(|S|\\ge t)=0$. The two one-sided tails are each bounded by $\\exp(-2t^2/V)$ when $V>0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and $$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in (a,b)$ with",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-it-number-of-n-types-polynomial-bound",
+          "source_section": "Statement",
+          "quote": "$|\\mathcal P_n(\\mathcal A)|\\le(n+1)^{k-1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-it-finite-product-law-is-iid",
+          "source_section": "Statement",
+          "quote": "The finite mass assignment $p^{\\otimes n}$ of [[def-it-finite-alphabet-product-law]] is a probability law on $\\mathcal A^n$, and its coordinate maps $X_i(x^n)=x_i$ are independent random elements, each with law $p$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If p=0 the tail and both bounds are zero; otherwise the attainable ceiling type lies in the event and its type-class probability gives the lower bound.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The derivative of binary divergence is positive above p; the mean value theorem gives monotonicity on [a,1), and continuity extends the divergence comparison to q=1.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "There are at most n+1 tail types, each bounded by exp(-n d(a||p)), so summing proves the finite upper inequality when a<1.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F9",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For 0<p<a<1 the finite Sanov theorem gives the rate after identifying both infima; for a=1 the all-ones probability is exactly p^n, and p=0 was handled separately.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a<1, summing the tail type bounds gives the finite upper bound; for a=1 and p>0 the exact p^n tail has the bound, and p=0 is handled separately.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the n=4 fair-coin tail the event has five of sixteen words; the finite product lemma supplies independence and [0,1] bounds, so Hoeffding with t=1 and total squared range 4 gives exp(-1/2).",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F6",
+            "given",
+            "algebra",
+            "step 1.1",
+            "step 3.1",
+            "F10"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 checks p=0, where the upper-tail event is empty up to probability zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the p=0 support boundary and the d=+infinity convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 checks the threshold endpoint a=1 by the exact all-ones event."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the deterministic Bernoulli law p=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 handle p=0 and a=1 explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 explicitly assumes AC for the imported Hoeffding theorem; steps 1.1-2.2 remain choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "cex-it-type-count-is-not-exactly-exponential": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-empirical-type-and-type-class",
+          "source_section": "Definition",
+          "quote": "For $q\\in\\mathcal P_n(\\mathcal A)$, its **type class** is $$T_q:=\\{x^n\\in\\mathcal A^n:\\widehat P_{x^n}=q\\}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "Its Shannon entropy in natural units is $$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$ with $0\\ln0:=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-it-type-class-cardinality-bounds",
+          "source_section": "Statement",
+          "quote": "$$(n+1)^{-(k-1)}e^{nH(q)}\\le |T_q|\\le e^{nH(q)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the balanced binary n=2 type, the only words are 01 and 10, so the class size is two.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The entropy is ln 2, so e^(2H)=4, which differs from the class size two and refutes the universal equality claim.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the point-mass boundary type the sole word has size one and entropy zero; this boundary equality does not invalidate the balanced-type counterexample.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The counterexample uses the fixed nonempty alphabet {0,1} and block length two."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks a type with a zero coordinate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the point-mass endpoint type."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the degenerate singleton class."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 computes the boundary type q=(1,0)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family of nonempty sets is selected; finite listings and coordinate choices are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no forward iff direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence, so no reverse iff direction is asserted."
+        }
+      ]
+    },
+    "lem-it-finite-product-law-is-iid": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-alphabet-product-law",
+          "source_section": "Definition",
+          "quote": "Assign each word $x^n=(x_1,\\ldots,x_n)$ the weight $$w_{p,n}(x^n):=\\prod_{i=1}^n p(x_i),$$ and for $E\\subseteq\\Omega_n$ define $\\mu_{p,n}(E):=\\sum_{x^n\\in E}w_{p,n}(x^n)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and $$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "A function $f : X \\to Y$ is **measurable** when $$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "A **random element** of $S$ is a measurable map $$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sigma-algebra-generated-by-a-function",
+          "source_section": "Definition",
+          "quote": "The **sigma-algebra generated by $f$** is $$\\sigma(f) := \\{\\, f^{-1}(B) : B \\in \\mathcal{B}(Y) \\,\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "A family $(\\mathcal F_i)_{i\\in I}$ of sub-sigma-algebras of $\\mathcal F$ is **independent** when it is independent as a family of event classes in the sense of [[def-independent-families-of-event-classes]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-independent-families-of-event-classes",
+          "source_section": "Definition",
+          "quote": "The family $(\\mathcal C_i)_{i\\in I}$ is **independent** when for every natural number $n\\ge1$, every choice of distinct indices $i_0,\\dots,i_{n-1}\\in I$, and every choice of events $A_k\\in\\mathcal C_{i_k}$, one has $$\\mathbb P\\left(\\bigcap_{k<n}A_k\\right)=\\prod_{k<n}\\mathbb P(A_k).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent in the sense of [[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Finite distributivity and the normalized input vector make the atom weights nonnegative and sum to one, so the mass assignment is a finite probability law.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The product formula factors every finite family of coordinate events; the definitions of generated sigma-algebras, sigma-algebra independence, and independent random elements then give iid coordinates with marginal p.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition and statement require a finite nonempty alphabet and n at least one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 allows zero atom weights, and step 2.1 factors events even when some p(a)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-letter alphabet, steps 1.1 and 2.1 give the unit mass and constant coordinate law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 permit a point-mass vector, with zero weight on all other words."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 allow p(a)=0 or p(a)=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All sums and event sets are finite; no arbitrary family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    }
+  }
+}

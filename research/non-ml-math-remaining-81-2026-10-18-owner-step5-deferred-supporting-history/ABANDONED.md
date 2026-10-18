@@ -1,0 +1,1 @@
+Exact-history candidate abandoned before integration/testing: four required exact old preimages are unavailable. This isolated draft grants no authority and must not be installed. Root authorized a separate total-native-review-withdrawal protocol instead.

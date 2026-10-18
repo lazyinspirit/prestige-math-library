@@ -3,6 +3,7 @@ id: ex-hamel-basis-additive-function
 kind: example
 title: "An additive $f : \\mathbb{R} \\to \\mathbb{R}$ that is not $x \\mapsto cx$: the coefficient of one fixed Hamel basis vector. It is unbounded above and below on every nondegenerate interval, its graph is dense in $\\mathbb{R}^{2}$, and every nonempty level set is dense in $\\mathbb{R}$"
 status: published
+dependency_level: 5
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,12 @@ landmark: false
 short: "a Hamel coefficient is additive and wild"
 proof_strategy: constructive
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/ex-hamel-basis-additive-function.json
 sources:
   scraped: []
   references:

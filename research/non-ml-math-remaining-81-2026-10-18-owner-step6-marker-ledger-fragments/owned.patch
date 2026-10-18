@@ -1,0 +1,222 @@
+--- a/tools/STEP6-REBUILD.md
++++ b/tools/STEP6-REBUILD.md
+@@ -273,3 +273,28 @@
+ against the same original HEAD/index ledger bases. Do not relabel it consumed,
+ rewrite historical receipts, or broaden ledger additions into replacements.
+ Physics and legacy closeout do not acquire this plan-replacement route.
++
++
++An explicitly authorized `published-local-repair-marker-additions` shared-ledger
++fragment uses version 2 only for a genuinely absent original marker projection.
++Its `base_owned_records` must be empty. Its ordered `target_owned_records` are
++complete, unique `local-published-repair:RUN-…` begin/end blocks; repeated
++paragraphs inside a block remain exact bytes and are never deduplicated. Every
++block has an ordered `record_receipts` reference (`marker`, `path`, `sha256`)
++bound in authority evidence. The regular run-owned receipt must be an authentic
++`recorded-local-published-repair` for an owned item, and its run, marker,
++recorded time, source content guard and exact inner ledger hash must agree.
++Historical receipt validation grants no current source, audit or review credit;
++ordinary current published-repair and readiness checks still apply.
++
++This opt-in parser owns only those local-repair blocks. Legacy overview rows,
++native audit markers, unmarked sections and arbitrary run mentions remain
++foreign, even when the broader working ledger supplies scientific context.
++Malformed current-run local-repair namespace tokens, missing or crossed ends,
++nesting, duplicate markers, unknown blocks, incomplete receipt inventories and
++partial integration fail closed. Both original Git projections must really
++contain no owned marker blocks. Composition appends the exact authorized blocks
++to each base separately and preserves every original base byte, its ordering and
++the unchanged working file. Preparation, cutover, scope validation and all
++commit residual checks use the same explicit parser mode. V1/default paragraph
++ownership and its unique-record retention rules are unchanged.
+--- a/tools/autopilot/src/step6-cutover.mts
++++ b/tools/autopilot/src/step6-cutover.mts
+@@ -247,7 +247,7 @@
+       const blob = git(scope.gitRoot, ['cat-file', 'blob', entry.oid]);
+       const spec = value.row.spec;
+       const owned = value.kind === 'ledger'
+-        ? fragmentRecords(decodeLedger(blob), o.run, value.ids).filter(row => row.owned).map(row => recordSignature(row.text))
++        ? fragmentRecords(decodeLedger(blob), o.run, value.ids, spec).filter(row => row.owned).map(row => recordSignature(row.text))
+         : planDocument(decodePlan(blob)).rows.filter(row => value.ids.has(row.id)).map(({ id, raw }) => ({ id, raw }));
+       const expected = value.kind === 'ledger' ? spec.base_owned_records.map(recordSignature)
+         : spec[kind === 'head' ? 'base_head_owned_rows' : 'base_index_owned_rows'];
+--- a/tools/run-commit-scope.mjs
++++ b/tools/run-commit-scope.mjs
+@@ -504,7 +504,7 @@
+       const bytes = readFileSync(join(root, row.authority));
+       if (sha256(bytes) !== row.sha256) throw Error('closeout: fragment authority changed');
+       const spec = JSON.parse(decodeLedger(bytes));
+-      validateFragment(spec, run, ownedIds, decodeLedger(readFileSync(join(root, row.path))));
++      validateFragment(spec, run, ownedIds, decodeLedger(readFileSync(join(root, row.path))), {root});
+       required.add(row.authority);
+       for (const evidence of spec.evidence) {
+         if (!evidence || Object.keys(evidence).some(key => !['path', 'sha256'].includes(key))
+--- a/tools/step6-commit.mjs
++++ b/tools/step6-commit.mjs
+@@ -106,7 +106,7 @@
+       const ids = new Set(fragment.ownedIds);
+       const head = composeFragment(headText, fragment.spec, run, ids);
+       const index = composeFragment(indexText, fragment.spec, run, ids);
+-      const residual = text => fragmentRecords(text, run, ids).filter(row => !row.owned).map(row => recordSignature(row.text));
++      const residual = text => fragmentRecords(text, run, ids, fragment.spec).filter(row => !row.owned).map(row => recordSignature(row.text));
+       equal(residual(head.text), residual(headText), 'fragment HEAD foreign residual');
+       equal(residual(index.text), residual(indexText), 'fragment index foreign residual');
+       fragmentStates.set(path, { fragment, head, index, headRow, indexRow,
+@@ -195,7 +195,7 @@
+         if (!actual || actual.oid !== expected.oid || actual.mode !== expected.mode)
+           throw Error(`step6 commit: ${label} fragment blob mismatch`);
+         const text = decodeLedger(git(gitRoot, ['cat-file', 'blob', actual.oid]));
+-        const residual = fragmentRecords(text, run, new Set(row.fragment.ownedIds))
++        const residual = fragmentRecords(text, run, new Set(row.fragment.ownedIds), row.fragment.spec)
+           .filter(record => !record.owned).map(record => recordSignature(record.text));
+         equal(digest(residual), kind === 'head' ? row.headForeign : row.indexForeign, label + ' fragment residual');
+       }
+@@ -256,7 +256,7 @@
+     }
+     for (const [path, row] of fragmentStates) {
+       const ids = new Set(row.fragment.ownedIds);
+-      const residual = text => fragmentRecords(text, run, ids).filter(record => !record.owned).map(record => recordSignature(record.text));
++      const residual = text => fragmentRecords(text, run, ids, row.fragment.spec).filter(record => !record.owned).map(record => recordSignature(record.text));
+       const committedText = decodeLedger(git(gitRoot, ['cat-file', 'blob', committed.get(path).oid]));
+       const indexedText = decodeLedger(git(gitRoot, ['cat-file', 'blob', indexed.get(path).oid]));
+       equal(digest(residual(committedText)), row.headForeign, 'committed fragment foreign residual');
+--- a/tools/step6-ledger-fragment.mjs
++++ b/tools/step6-ledger-fragment.mjs
+@@ -1,5 +1,7 @@
+ // Exact owner-authorized addition-only shared-ledger commit fragments.
+ import { createHash } from 'node:crypto';
++import {readFileSync,lstatSync,realpathSync} from 'node:fs';
++import {resolve,join} from 'node:path';
+ const sha = text => createHash('sha256').update(text).digest('hex');
+ // Only a terminal record line terminator is non-content. Original bytes are
+ // retained; this accounts for EOF becoming an interior blank-line separator.
+@@ -7,7 +9,8 @@
+ export const recordSignature = text => text.replace(/\r?\n$/, '');
+ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+ const refuse = why => { throw Error(`shared ledger fragment: ${why}`); };
+-export function fragmentRecords(text, run, ownedIds) {
++export function fragmentRecords(text, run, ownedIds, spec = null) {
++  if(spec?.version===2){if(spec.kind!=='published-local-repair-marker-additions')refuse('unknown marker projection kind');return localRepairMarkerRecords(text,run);}
+   const records = [];
+   const owns = value => value.includes(run) || ownedIds.has(/^\s*(?:\|\s*)?(?:`|\[\[)?([a-z][a-z0-9]*(?:-[a-z0-9]+)+)(?=[`|\]\s])/.exec(value)?.[1]);
+   const emit = (start, end) => {
+@@ -27,8 +30,59 @@
+   emit(cursor, text.length);
+   return records;
+ }
+-export function validateFragment(spec, run, actualOwnedIds, working) {
+-  if (spec.version !== 1 || spec.kind !== 'published-ledger-addition-fragment' || spec.run !== run
++// V2 owns only this run's ordinary recorded-repair marker blocks. Legacy
++// overview rows, native audit sections and arbitrary run mentions stay foreign.
++function localRepairMarkerRecords(text,run){
++  const records=[],seen=new Set(),prefix='local-published-repair:'+run;
++  const related=key=>key===prefix||key.startsWith(prefix+'-')||key.startsWith(prefix+':');
++  // Inventory the reserved namespace before the single-line token parser:
++  // malformed or unterminated comments cannot silently become foreign text.
++  const escapedRun=run.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
++  const namespace=new RegExp('^\\s*local-published-repair\\s*:\\s*'+escapedRun+'(?=$|[-:\\s])');
++  for(const opener of text.matchAll(/<!--/g)){
++    const end=text.indexOf('-->',opener.index+4),next=text.indexOf('<!--',opener.index+4);
++    const stop=end<0?text.length:end;
++    const body=text.slice(opener.index+4, next>=0&&next<stop?next:stop);
++    if(namespace.test(body)){
++      const token=end<0?'':text.slice(opener.index,end+3);
++      const exact=/^<!-- ([^\r\n]+):(begin|end) -->$/.exec(token);
++      if(!exact||!related(exact[1])||next>=0&&next<end)refuse('malformed current-run repair namespace');
++    }
++  }
++
++  const foreign=(start,end)=>{for(const row of fragmentRecords(text.slice(start,end),'',new Set()))records.push({...row,start:row.start+start,end:row.end+start,owned:false});};
++  let open=null,cursor=0;const foreignStack=[];
++  for(const m of text.matchAll(/<!--([^\r\n]*?)-->/g)){
++    const value=m[1].trim(),parts=/^(.+):(begin|end)$/.exec(value),key=parts?.[1],side=parts?.[2];
++    const ours=related(key??value);
++    if(open){
++      if(!ours||side!=='end'||key!==open.key)refuse('nested, crossed or malformed owned repair marker');
++      if(m[0]!==`<!-- ${key}:end -->`||(m.index>0&&text[m.index-1]!=='\n')||!['','\n','\r'].includes(text[m.index+m[0].length]??''))refuse('owned marker is not an exact standalone line');
++      records.push({start:open.start,end:m.index+m[0].length,text:text.slice(open.start,m.index+m[0].length),owned:true,marker:key.slice('local-published-repair:'.length)});cursor=m.index+m[0].length;open=null;continue;
++    }
++    if(!ours){if(side==='begin')foreignStack.push(key);else if(side==='end'&&foreignStack.at(-1)===key)foreignStack.pop();continue;}
++    if(!parts||side!=='begin'||foreignStack.length||m[0]!==`<!-- ${key}:begin -->`||(m.index>0&&text[m.index-1]!=='\n')||!['','\n','\r'].includes(text[m.index+m[0].length]??''))refuse('unbalanced, nested or malformed current-run repair marker');
++    if(seen.has(key))refuse('duplicate current-run repair marker');seen.add(key);foreign(cursor,m.index);open={key,start:m.index};
++  }
++  if(open)refuse('unterminated current-run repair marker');foreign(cursor,text.length);return records;
++}
++function validateMarkerReceipts(spec,run,ids,working,{root}={}){
++  const expected=['version','kind','run','path','authorized_by','authorization','base_owned_records','target_owned_records','evidence','record_receipts'];
++  if(!same(Object.keys(spec).sort(),expected.sort())||spec.base_owned_records.length!==0||!Array.isArray(spec.record_receipts)||!spec.record_receipts.length||typeof root!=='string')refuse('invalid absent-base marker authority');
++  const records=fragmentRecords(working,run,ids,spec).filter(r=>r.owned),markers=records.map(r=>r.marker);
++  if(!same(spec.record_receipts.map(r=>r?.marker),markers))refuse('receipt inventory differs from every current-run repair marker');
++  for(const [index,ref]of spec.record_receipts.entries()){
++    if(!ref||!same(Object.keys(ref).sort(),['marker','path','sha256'])||typeof ref.path!=='string'||!ref.path.startsWith(`research/${run}-`)||/[\\\x00-\x1f]/.test(ref.path)||ref.path.split('/').some(x=>!x||x==='.'||x==='..')||!/^[a-f0-9]{64}$/.test(ref.sha256??''))refuse('invalid exact marker receipt reference');
++    const path=resolve(root,ref.path),stat=lstatSync(path);if(!stat.isFile()||stat.isSymbolicLink()||!realpathSync(path).startsWith(realpathSync(join(root,'research'))+'/'))refuse('receipt must be regular run-owned research evidence');
++    const raw=readFileSync(path,'utf8');if(sha(raw)!==ref.sha256||spec.evidence.filter(e=>e.path===ref.path&&e.sha256===ref.sha256).length!==1)refuse('changed or unbound marker receipt');
++    const receipt=JSON.parse(raw),record=records[index],begin=`<!-- local-published-repair:${ref.marker}:begin -->`,end=`<!-- local-published-repair:${ref.marker}:end -->`;
++    const inner=record.text.slice(begin.length,-end.length);
++    if(receipt.version!==1||receipt.kind!=='recorded-local-published-repair'||receipt.run!==run||receipt.ledger_marker!==ref.marker||!ids.has(receipt.id)||!Number.isFinite(Date.parse(receipt.recorded_at))||!/^[a-f0-9]{64}$/.test(receipt.content_sha256??'')||receipt.ledger_sha256!==sha(inner)||!inner.includes(receipt.id)||!inner.includes(receipt.content_sha256))refuse('marker does not match its genuine recorded local repair receipt');
++  }
++}
++export function validateFragment(spec, run, actualOwnedIds, working, options = {}) {
++  if (!(spec.version === 1 && spec.kind === 'published-ledger-addition-fragment'
++    || spec.version === 2 && spec.kind === 'published-local-repair-marker-additions') || spec.run !== run
+     || spec.path !== 'research/published-consumer-supplier-ledger.md' || spec.authorized_by !== 'owner'
+     || typeof spec.authorization !== 'string' || spec.authorization.length < 20
+     || !Array.isArray(spec.base_owned_records) || !Array.isArray(spec.target_owned_records)
+@@ -36,7 +90,8 @@
+   // Caller verifies every evidence path/hash and descriptor raw hash, and binds
+   // this descriptor in native scope policy/readiness before actual preparation.
+   const ids = new Set(actualOwnedIds);
+-  const own = text => fragmentRecords(text, run, ids).filter(r => r.owned).map(r => recordSignature(r.text));
++  if(spec.version===2)validateMarkerReceipts(spec,run,ids,working,options);
++  const own = text => fragmentRecords(text, run, ids, spec).filter(r => r.owned).map(r => recordSignature(r.text));
+   for (const rows of [spec.base_owned_records, spec.target_owned_records]) {
+     if (rows.some(row => typeof row !== 'string' || !same(own(row), [recordSignature(row)])) || new Set(rows.map(recordSignature)).size !== rows.length)
+       refuse('non-owned or duplicate authorized record');
+@@ -49,7 +104,7 @@
+   return { ids, own };
+ }
+ export function composeFragment(base, spec, run, ids) {
+-  const rows = fragmentRecords(base, run, ids), owned = rows.filter(r => r.owned);
++  const rows = fragmentRecords(base, run, ids, spec), owned = rows.filter(r => r.owned);
+   const current = owned.map(r => recordSignature(r.text)), target = spec.target_owned_records.map(recordSignature);
+   const before = spec.base_owned_records.map(recordSignature);
+   if (same(current, target)) return { text: base, already_integrated: true, base_sha256: sha(base), insertions: [] };
+@@ -79,7 +134,7 @@
+   let reconstructed = text;
+   for (const span of [...applied].reverse()) reconstructed = reconstructed.slice(0, span.at) + reconstructed.slice(span.at + span.length);
+   if (reconstructed !== base) refuse('composition failed exact base-byte reconstruction');
+-  const after = fragmentRecords(text, run, ids);
++  const after = fragmentRecords(text, run, ids, spec);
+   if (!same(after.filter(r => r.owned).map(r => recordSignature(r.text)), target)
+     || !same(after.filter(r => !r.owned).map(r => recordSignature(r.text)), rows.filter(r => !r.owned).map(r => recordSignature(r.text))))
+     refuse('composition changed owned projection or foreign residual');
+--- /dev/null
++++ b/tools/step6-ledger-fragment.test.mjs
+@@ -0,0 +1,27 @@
++import test from 'node:test';import assert from 'node:assert/strict';
++import{mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync}from'node:fs';import{join,dirname}from'node:path';import{tmpdir}from'node:os';import{createHash}from'node:crypto';import{spawnSync}from'node:child_process';
++import{fragmentRecords,recordSignature,validateFragment,composeFragment}from'./step6-ledger-fragment.mjs';import{preflightStep6,commitStep6}from'./step6-commit.mjs';
++const hash=x=>createHash('sha256').update(x).digest('hex'),clone=x=>structuredClone(x);
++function fixture(t,count=255){const root=mkdtempSync(join(tmpdir(),'step6-local-markers-'));t.after(()=>rmSync(root,{recursive:true,force:true}));const run='demo',ids=new Set(Array.from({length:count},(_,i)=>`thm-item-${i}`)),put=(path,value)=>{mkdirSync(dirname(join(root,path)),{recursive:true});writeFileSync(join(root,path),typeof value==='string'?value:JSON.stringify(value,null,2)+'\n');};
++ const legacy=label=>'# Shared published evidence\n\n| Item | Finding |\n|---|---|\n'+[...ids].slice(0,50).map(id=>`| \`${id}\` | Historical ${label} evidence preserved exactly. |`).join('\n')+'\n\nForeign footer '+label+'.\n';
++ const blocks=[],refs=[];for(const id of ids){const marker=`${run}-${id}`,inner=`\n\n### ${id} genuine historical repair\n\nRun: ${run}. Group: repeated-actual-owner.\n\nRecorded source ${id}, content SHA256 ${'a'.repeat(64)}.\n\nOwner evidence repeats without deduplication.\n\n`,raw=`<!-- local-published-repair:${marker}:begin -->${inner}<!-- local-published-repair:${marker}:end -->`;blocks.push(raw);const path=`research/${run}-receipts/${id}.json`,receipt={version:1,kind:'recorded-local-published-repair',run,id,group:'owner',recorded_at:'2026-01-01T00:00:00Z',content_sha256:'a'.repeat(64),ledger_marker:marker,ledger_sha256:hash(inner)};put(path,receipt);refs.push({marker,path,sha256:hash(readFileSync(join(root,path),'utf8'))});}
++ const foreign=`<!-- ${run}-alpha-batch-1-3a:begin -->\n\nNative audit context remains unowned.\n\n<!-- ${run}-alpha-batch-1-3a:end -->\n\n## Unmarked current run notes\n\nRun: ${run}. No marker means no fragment ownership.\n\n`;
++ const head=legacy('HEAD'),index=legacy('INDEX'),working=legacy('WORKING changed overview')+'\n'+foreign+blocks.join('\n\n')+'\n';
++ const spec={version:2,kind:'published-local-repair-marker-additions',run,path:'research/published-consumer-supplier-ledger.md',authorized_by:'owner',authorization:'Commit exactly these genuine recorded local repair marker blocks and preserve all other bytes.',base_owned_records:[],target_owned_records:blocks,evidence:refs.map(({path,sha256})=>({path,sha256})),record_receipts:refs};
++ const validate=()=>validateFragment(spec,run,ids,working,{root});return{root,run,ids,put,spec,head,index,working,blocks,refs,validate};}
++test('V2 commits255 exact marker blocks with repeated paragraphs and leaves50legacy rows plus native/unmarked context foreign',t=>{const f=fixture(t);assert.equal(f.validate().own(f.working).length,255);assert.equal(fragmentRecords(f.head,f.run,f.ids,f.spec).filter(x=>x.owned).length,0);assert.ok(fragmentRecords(f.working,f.run,f.ids).filter(x=>x.owned).length>255,'default parser remains historical V1');
++ for(const base of [f.head,f.index]){const result=composeFragment(base,f.spec,f.run,f.ids);assert.equal(fragmentRecords(result.text,f.run,f.ids,f.spec).filter(x=>x.owned).length,255);assert.ok(result.text.startsWith(base),'every exact original byte remains');assert.equal((result.text.match(/Group: repeated-actual-owner/g)??[]).length,255);assert.ok(!result.text.includes('WORKING changed overview'));assert.deepEqual(composeFragment(result.text,f.spec,f.run,f.ids),{text:result.text,already_integrated:true,base_sha256:hash(result.text),insertions:[]});}});
++for(const mode of ['missing-receipt','receipt-hash','receipt-run','receipt-id','receipt-marker','body-hash','content-guard','missing-evidence','nonowned-id','base-nonempty','unknown-authority-key'])test(`V2 rejects ${mode}`,t=>{const f=fixture(t,3);
++ if(mode==='missing-receipt')f.spec.record_receipts.pop();if(mode==='receipt-hash')f.spec.record_receipts[0].sha256='b'.repeat(64);if(mode==='missing-evidence')f.spec.evidence.shift();if(mode==='nonowned-id')f.ids.delete('thm-item-0');if(mode==='base-nonempty')f.spec.base_owned_records.push(f.blocks[0]);if(mode==='unknown-authority-key')f.spec.trust_all_paragraphs=true;
++ if(['receipt-run','receipt-id','receipt-marker','body-hash','content-guard'].includes(mode)){const ref=f.spec.record_receipts[0],d=JSON.parse(readFileSync(join(f.root,ref.path),'utf8'));if(mode==='receipt-run')d.run='foreign';if(mode==='receipt-id')d.id='thm-not-owned';if(mode==='receipt-marker')d.ledger_marker='other';if(mode==='body-hash')d.ledger_sha256='b'.repeat(64);if(mode==='content-guard')d.content_sha256='c'.repeat(64);f.put(ref.path,d);ref.sha256=hash(readFileSync(join(f.root,ref.path),'utf8'));f.spec.evidence[0].sha256=ref.sha256;}
++ assert.throws(f.validate);});
++for(const mode of ['duplicate','unterminated','unmatched-end','nested-ours','nested-foreign','crossed','inline','malformed','missing-comment-end','newline-marker','namespace-whitespace'])test(`V2 refuses ${mode} current-run marker`,t=>{const f=fixture(t,3);let value=f.working;
++ if(mode==='duplicate')value+='\n'+f.blocks[0];if(mode==='unterminated')value=value.replace(`<!-- local-published-repair:demo-thm-item-0:end -->`,'');if(mode==='unmatched-end')value='<!-- local-published-repair:demo-unknown:end -->\n'+value;
++ if(mode==='nested-ours')value=value.replace('### thm-item-0',f.blocks[1]+'\n### thm-item-0');if(mode==='nested-foreign')value=value.replace('### thm-item-0','<!-- local-published-repair:foreign:begin -->\n### thm-item-0');if(mode==='crossed')value=value.replace('demo-thm-item-0:end','demo-thm-item-1:end');if(mode==='inline')value=value.replace('<!-- local-published-repair:demo-thm-item-0:begin -->','inline <!-- local-published-repair:demo-thm-item-0:begin -->');if(mode==='malformed')value=value.replace('demo-thm-item-0:begin','demo-thm-item-0:BEGIN');
++ if(mode==='missing-comment-end')value=value.replace('demo-thm-item-0:begin -->','demo-thm-item-0:begin');if(mode==='newline-marker')value=value.replace('demo-thm-item-0:begin -->','demo-thm-item-0:begin\n -->');if(mode==='namespace-whitespace')value=value.replace('demo-thm-item-0:begin','demo thm-item-0:begin');
++ assert.throws(()=>validateFragment(f.spec,f.run,f.ids,value,{root:f.root}));});
++test('unknown current-run local repair block and partial integration fail closed',t=>{const f=fixture(t,3);assert.throws(()=>validateFragment(f.spec,f.run,f.ids,f.working+'\n'+f.blocks[0].replaceAll('demo-thm-item-0','demo-unknown'),{root:f.root}));assert.throws(()=>composeFragment(f.head+'\n'+f.blocks[0],f.spec,f.run,f.ids),/neither exact before nor target/);});
++test('V1 unique-record additions and duplicate rejection retain their original API',()=>{const run='old-demo',ids=new Set(),a='Old '+run+' exact record.',b='New '+run+' exact record.',spec={version:1,kind:'published-ledger-addition-fragment',run,path:'research/published-consumer-supplier-ledger.md',authorized_by:'owner',authorization:'Commit only the exact original V1 fixture record additions.',base_owned_records:[a],target_owned_records:[a,b],evidence:[{path:'research/old-demo-evidence.json',sha256:'a'.repeat(64)}]};validateFragment(spec,run,ids,a+'\n\n'+b);assert.ok(composeFragment(a,spec,run,ids).text.includes(b));assert.throws(()=>validateFragment({...spec,target_owned_records:[a,b,b]},run,ids,a+'\n\n'+b+'\n\n'+b),/duplicate/);});
++
++test('native temporary-Git V2 transaction preserves every foreign HEAD/index byte and current working ledger',t=>{const f=fixture(t,3),git=args=>{const r=spawnSync('git',args,{cwd:f.root,encoding:'utf8'});assert.equal(r.status,0,r.stderr);return r.stdout.trimEnd();};git(['init','-b','main']);git(['config','user.name','Marker fixture']);git(['config','user.email','fixture@example.invalid']);mkdirSync(join(f.root,'empty-hooks'));git(['config','core.hooksPath',join(f.root,'empty-hooks')]);const ledger='research/published-consumer-supplier-ledger.md';f.put(ledger,f.head);f.put('foreign.md','HEAD foreign file\n');git(['add','--',ledger,'foreign.md']);git(['commit','-m','original shared foreign history']);f.put(ledger,f.index);f.put('foreign.md','INDEX foreign file\n');git(['add','--',ledger,'foreign.md']);const before=git(['ls-files','--stage','--','foreign.md']);f.put(ledger,f.working);f.put('foreign.md','WORKING foreign file\n');
++ const items=[...f.ids].map(id=>({id,kind:'theorem',deps:[]}));f.put(`research/demo-scope-ledger.json`,{run:'demo',pages:[{id:'page',kind:'A',category:'test-category',items:[...f.ids]}]});f.put('research/demo-batch-1.pages.json',[{id:'page',kind:'A',category:'test-category',items}]);f.put('library/test-category/page.md','---\npage: page\nitems: '+JSON.stringify([...f.ids])+'\nexamples: []\n---\n');for(const id of f.ids)f.put(`items/${id}.md`,`---\nid: ${id}\nkind: theorem\nstatus: draft\ndeps: []\n---\n## Statement\nFixture only.\n`);f.put('research/plan-spec.json',{pages:[]});f.put('research/defect-ledger.jsonl','');for(const suffix of ['proof-layout.json','publication-readiness.json','step6-evidence.json','step6-report-integrity.json','step6-report.response.json','step6-report.md','pathway-closure.json','judge-closure.json'])f.put(`research/demo-${suffix}`,'{}');const authority='research/demo-marker-authority.json';f.put(authority,f.spec);f.put('research/demo-closeout-scope.json',{version:1,run:'demo',authorized_by:'owner',authorization:'Commit exact marker fragments only, preserving separate shared foreign bytes.',additional_paths:[],shared_fragments:[{path:ledger,authority,sha256:hash(readFileSync(join(f.root,authority),'utf8'))}]});assert.equal(preflightStep6(f.root,'demo').fragments.length,1);const result=commitStep6(f.root,'demo',{assertValidated(){}});assert.equal(git(['rev-parse','HEAD']),result.commit);assert.equal(spawnSync('git',['show','HEAD:'+ledger],{cwd:f.root,encoding:'utf8'}).stdout,composeFragment(f.head,f.spec,f.run,f.ids).text);assert.equal(spawnSync('git',['show',':'+ledger],{cwd:f.root,encoding:'utf8'}).stdout,composeFragment(f.index,f.spec,f.run,f.ids).text);assert.equal(readFileSync(join(f.root,ledger),'utf8'),f.working);assert.equal(git(['ls-files','--stage','--','foreign.md']),before);assert.equal(readFileSync(join(f.root,'foreign.md'),'utf8'),'WORKING foreign file\n');});

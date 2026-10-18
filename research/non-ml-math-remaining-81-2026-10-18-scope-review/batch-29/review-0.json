@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "batch": "29",
+  "round": 0,
+  "reviewed_items": [
+    "def-qc-tqc-physical-braid-interface",
+    "lem-qc-tqc-special-unitary-connected",
+    "def-qc-tqc-fixed-charge-encoding",
+    "def-qc-tqc-logical-error-and-leakage",
+    "def-qc-tqc-braid-action-from-fusion-data",
+    "lem-qc-tqc-zero-logical-error-forces-zero-leakage",
+    "thm-qc-tqc-block-approximation-error",
+    "def-qc-tqc-ising-majorana-interface",
+    "def-qc-tqc-projective-gate-and-metric",
+    "def-qc-tqc-six-anyon-encoded-subspace",
+    "ex-qc-tqc-fibonacci-qubit-matrices",
+    "ex-qc-tqc-ising-three-anyon-clifford",
+    "lem-qc-tqc-determinant-character-phase",
+    "lem-qc-tqc-fibonacci-b6-path-projectors-and-artin",
+    "lem-qc-tqc-fibonacci-coefficient-ring-specialization",
+    "lem-qc-tqc-leakage-logical-error-accumulation",
+    "thm-qc-tqc-braid-action-unitary-and-artin",
+    "cex-qc-tqc-controlled-global-phase",
+    "def-qc-tqc-universality-notions",
+    "lem-qc-tqc-pu2-is-so3",
+    "thm-qc-tqc-b6-su5-density",
+    "thm-qc-tqc-b6-su8-density",
+    "thm-qc-tqc-ising-braids-clifford-only",
+    "lem-qc-tqc-b6-joint-su5-su8-density",
+    "thm-qc-tqc-fibonacci-single-qubit-density",
+    "lem-qc-tqc-su2-determinant-lifts-dense",
+    "thm-qc-tqc-approximate-encoded-two-qubit-gate",
+    "thm-qc-tqc-spectator-extension",
+    "thm-qc-tqc-arbitrary-n-register-universality",
+    "ex-qc-tqc-ising-vs-fibonacci",
+    "ex-qc-tqc-b6-rank-and-leakage"
+  ],
+  "reviewed_pages": [
+    "topological-braid-gates-encodings-and-universality",
+    "topological-braid-gates-encodings-and-universality-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch and prerequisite closure were reviewed. Request one local repair pass for the proof gaps below; no statement or definition change is requested.",
+  "findings": [
+    {
+      "id": "lem-qc-tqc-b6-joint-su5-su8-density",
+      "type": "local",
+      "reason": "Step 1.2 obtains E_kj and E_ik for k distinct from i,j, then asserts it has E_jk without deriving it. Add [E_ji,E_ik]=E_jk before generating the remaining matrix units; handle n=2 separately as the proof claims."
+    },
+    {
+      "id": "thm-qc-tqc-fibonacci-single-qubit-density",
+      "type": "prerequisite",
+      "reason": "Steps 3.1–5.1 use Cartan and Lie-algebra arguments in PU(2) and differentiate q, while F4 supplies a topological group isomorphism and covering. Explicitly transport SO(3)'s Lie-group structure to PU(2) through the proved homeomorphism, and note q is smooth via the SU(2) to SO(3) map, before using dq and Cartan."
+    },
+    {
+      "id": "thm-qc-tqc-spectator-extension",
+      "type": "local",
+      "reason": "Step 1.2 cannot move an arbitrary interior six-strand block to the first tensor factor by reassociation, which preserves strand order. Retain the ordered prefix and suffix around the selected contiguous block and show the local braid acts on its fusion factor with identity on those spectator multiplicities; then apply the direct-sum norm bound."
+    },
+    {
+      "id": "thm-qc-tqc-arbitrary-n-register-universality",
+      "type": "local",
+      "reason": "Step 1.3 uses projective density on a local total-τ triple to claim a full-ambient approximation at any logical position without giving the ordered triple/prefix/suffix decomposition. State that decomposition, use z_j U_j with spectator identity on total-τ summands and the actual braid on total-1 summands, and derive the direct-sum norm bound needed in Step 2.1."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-qc-tqc-approximate-encoded-two-qubit-gate",
+      "decision": "accept",
+      "reason": "Its simultaneous open-neighborhood argument uses the joint SU(5)×SU(8) closure and one common braid word correctly."
+    },
+    {
+      "id": "thm-qc-tqc-spectator-extension",
+      "decision": "repair",
+      "reason": "Its use of joint density is correct; its ordered local-factorization proof needs the repair listed above."
+    },
+    {
+      "id": "thm-qc-tqc-arbitrary-n-register-universality",
+      "decision": "repair",
+      "reason": "Its density and product-error uses are sound, but the one-qubit full-ambient extension needs the ordered local decomposition listed above."
+    },
+    {
+      "id": "ex-qc-tqc-b6-rank-and-leakage",
+      "decision": "accept",
+      "reason": "It uses the density statements for independent four-dimensional code subspaces without identifying their projectors, as claimed."
+    },
+    {
+      "id": "lem-qc-tqc-su2-determinant-lifts-dense",
+      "decision": "accept",
+      "reason": "Its dense-preimage argument uses the covering and projective density topologically; it does not depend on the missing Lie-group step."
+    },
+    {
+      "id": "ex-qc-tqc-ising-vs-fibonacci",
+      "decision": "accept",
+      "reason": "It compares the conditional Ising Clifford result and Fibonacci projective density under their stated interfaces."
+    }
+  ]
+}

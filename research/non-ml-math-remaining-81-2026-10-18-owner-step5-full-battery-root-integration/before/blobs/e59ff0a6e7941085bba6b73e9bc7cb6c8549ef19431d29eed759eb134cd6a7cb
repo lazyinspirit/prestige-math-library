@@ -1,0 +1,596 @@
+{
+  "version": 1,
+  "level": "non-ml-math-remaining-81-2026-10-18",
+  "scope": [
+    "def-unital-associative-algebra-representation",
+    "ex-standard-two-dimensional-sl2-module-and-enveloping-algebra",
+    "thm-associative-algebra-representations-are-unital-modules",
+    "ex-c2-trivial-and-sign-modules-under-diagonal-tensor-action",
+    "cex-componentwise-algebra-action-need-not-define-a-tensor-action"
+  ],
+  "contracts": {
+    "def-unital-associative-algebra-representation": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition permits V=0; End_k(0) has one element, and that unique map is both its identity and zero, so the unique representation is unital."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition requires rho(1_A)=id_V, so the zero map is not a representation on a nonzero V; the zero-space case is covered by the empty boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The identity element is explicitly fixed by rho(1_A)=id_V in the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No nondegeneracy or nonzero-space assumption is imposed; the zero vector space remains admissible as specified in the Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no interval, exponent, limiting parameter, or endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition selects no elements from a family of nonempty sets and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states structural conditions and no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states structural conditions and no biconditional claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Independently read the complete current Definition and all seven direct suppliers. The field and central unital algebra structure give the specified scalar action; pointwise linear maps form a vector space and composition gives End_k(V) its unital ring. Linearity, multiplication and unit are explicit. V=0 has a singleton endomorphism ring with identity equal to zero, so the unique map is admissible; on nonzero V the zero map fails the unit law. No dimension restriction, choice, tensor action or biconditional is asserted. Reader/refuter report no defect; no item edit needed."
+      }
+    },
+    "ex-standard-two-dimensional-sl2-module-and-enveloping-algebra": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lie-algebra-over-a-field",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field. A **Lie algebra over $k$** is a $k$-vector space\n$\\mathfrak g$ ([[def-vector-space]]) together with a map\n\n$$[-,-]:\\mathfrak g\\times\\mathfrak g\\longrightarrow\\mathfrak g$$\n\nthat is linear in each variable ([[def-linear-map]]) and satisfies, for all\n$x,y,z\\in\\mathfrak g$,\n\n$$[x,x]=0$$\n\nand\n\n$$[x,[y,z]]+[y,[z,x]]+[z,[x,y]]=0.$$\n\nThe first identity is **alternation** and the second is the **Jacobi identity**.\nNo finite-dimensional hypothesis is imposed. Alternation implies\n$[x,y]=-[y,x]$ in every characteristic: expand\n$0=[x+y,x+y]=[x,y]+[y,x]$. Thus skew-symmetry is a consequence here, not a\nreplacement for alternation in characteristic $2$.\n\nThe zero vector space, with its unique bracket, is a Lie algebra. A Lie algebra\nis **abelian** when $[x,y]=0$ for every $x,y$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-representation-of-a-lie-algebra",
+          "source_section": "Definition",
+          "quote": "For a vector space $V$ over $k$, write\n\n$$\\mathfrak{gl}(V)=\\operatorname{End}_k(V)$$\n\nwith commutator bracket $[A,B]=AB-BA$. Expansion of triple composites shows\nthat this is a Lie algebra in every characteristic.\n\nA **representation** of a Lie algebra $\\mathfrak g$ on $V$ is a Lie-algebra\nhomomorphism\n\n$$\\rho:\\mathfrak g\\longrightarrow\\mathfrak{gl}(V).$$\n\nWriting $xv$ for $\\rho(x)(v)$, this is equivalently a $k$-bilinear action\n$\\mathfrak g\\times V\\to V$ satisfying\n\n$$[x,y]v=x(yv)-y(xv)$$\n\nfor all $x,y\\in\\mathfrak g$ and $v\\in V$. No finite-dimensional hypothesis is\nimposed on either $\\mathfrak g$ or $V$. The zero vector space and the zero\naction are allowed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lie-algebra-representations-are-equivalent-to-unital-modules-over-the-enveloping-algebra",
+          "source_section": "Statement",
+          "quote": "Restriction along $\\iota_{\\mathfrak g}:\\mathfrak g\\to U(\\mathfrak g)$ and extension by the\nuniversal property give mutually inverse correspondences between\nrepresentations of $\\mathfrak g$ and unital left $U(\\mathfrak g)$-module\nstructures whose restriction along $k\\to U(\\mathfrak g)$ is the given scalar\naction on $V$. A linear map is an intertwiner on one side exactly when it is a\nmodule homomorphism on the other.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sl2-matrix-brackets-and-closure",
+          "claim": "The displayed basis matrices satisfy the sl2 commutator relations, so their span is closed under the commutator and inherits a Lie algebra structure.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sl2-standard-inclusion-is-a-representation",
+          "claim": "The inclusion into End_C(C^2) preserves the commutator bracket and is therefore a Lie-algebra representation.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "sl2-standard-representation-extends-to-enveloping-module",
+          "claim": "The established Lie-representation to enveloping-module correspondence supplies the unique scalar-compatible unital U(sl2)-module structure.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This fixed example uses the nonempty Lie algebra sl2(C) and V=C^2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-dimensional nonzero representation space and has no zero-valued parameter."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The enveloping-module extension is unital by the supplier statement and step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No bilinear form, rank parameter, or nondegeneracy condition occurs in this matrix example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The three matrices and their ordered basis are explicitly displayed; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves one explicit representation and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves one explicit representation and no biconditional."
+        }
+      ]
+    },
+    "thm-associative-algebra-representations-are-unital-modules": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-unital-associative-algebra-representation",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field, let $A$ be a unital associative $k$-algebra\n([[def-algebra-over-a-commutative-ring]]), and let $V$ be a $k$-vector space.\nWrite $\\operatorname{End}_k(V)=\\mathcal L_k(V,V)$ for the $k$-linear endomorphisms\nof $V$ ([[def-vector-space-of-linear-maps]]); its multiplication is composition\nand its identity is $\\operatorname{id}_V$\n([[def-endomorphism-ring-of-a-module]], [[prop-endomorphisms-form-a-ring]]).\nAn **(unital) representation of $A$ on $V$** is a $k$-linear map\n$$\\rho:A\\longrightarrow\\operatorname{End}_k(V)$$\nsuch that $\\rho(1_A)=\\operatorname{id}_V$ and\n$$\\rho(ab)=\\rho(a)\\circ\\rho(b)\\qquad(a,b\\in A).$$\nThe associated action is $a\\cdot v:=\\rho(a)(v)$. The zero vector space is\nallowed; in that case $\\operatorname{id}_V=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-left-and-right-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring. A **left $R$-module** is an abelian group $(M,+,0_M)$ with a\nscalar action $R\\times M\\to M$, $(r,m)\\mapsto rm$, satisfying\n\n$$r(m+n)=rm+rn,\\quad (r+s)m=rm+sm,\\quad (rs)m=r(sm),\\quad 1_Rm=m.$$\n\nA **right $R$-module** has an action $M\\times R\\to M$, $(m,r)\\mapsto mr$, with\nthe analogous right-handed axioms. Unless \u201cright\u201d is stated, **module** means a\nunital left module.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-vector-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]), with additive identity $0_F$, multiplicative\nidentity $1_F$, and the field axioms as stated there. A **vector space over $F$**,\nalso called an **$F$-vector space**, consists of\n\n- a set $V$, whose elements are called **vectors**;\n- a binary operation $+ : V \\times V \\to V$ on $V$ ([[def-binary-operation]]),\n  the **vector addition**;\n- an element $0_V \\in V$, the **zero vector**;\n- a map $\\cdot \\,:\\, F \\times V \\to V$, the **scalar multiplication**, written\n  $\\lambda v := \\cdot(\\lambda, v)$;\n\nsubject to the following axioms, in which $u, v \\in V$ and $\\lambda, \\mu \\in F$\nare arbitrary.\n\n- **(V1)** $(V, +, 0_V)$ is an abelian group ([[def-group]]): $+$ is associative\n  and commutative, $0_V$ is a two-sided identity for $+$\n  ([[def-identity-element]]), and every $v \\in V$ has an additive inverse\n  ([[def-invertible-element]]).\n- **(V2)** $\\lambda(u + v) = \\lambda u + \\lambda v$.\n- **(V3)** $(\\lambda + \\mu)v = \\lambda v + \\mu v$.\n- **(V4)** $(\\lambda\\mu)v = \\lambda(\\mu v)$.\n- **(V5)** $1_F v = v$.\n\nThe elements of $F$ are called **scalars**. When several vector spaces are in\nplay we write $0_V$ for the zero of $V$, and we write $-v$ for the additive\ninverse of $v$ and $u - v := u + (-v)$.\n\n**The notation $0_V$ and $-v$ is legitimate.** Axiom (V1) asserts only that some\ntwo-sided identity and some additive inverses exist. That there is at most one\ntwo-sided identity for $+$ is [[lem-identity-unique]], and that an invertible\nelement of a monoid has exactly one inverse is [[lem-inverse-unique]]; both are\nproved before [[def-group]] and are inherited here with the group structure. So\n$0_V$ and $-v$ denote well-defined elements, and nothing below re-derives them.\n\n**What (V1) buys, and why it is not restated.** Associativity, commutativity, the\nidentity law $v + 0_V = v = 0_V + v$, the inverse law $v + (-v) = 0_V$,\ncancellation ([[lem-group-cancellation]]) and the inverse identities\n([[lem-group-inverse-laws]]) are facts about abelian groups. They are quoted from\nthe group page wherever they are used and are never proved again for vectors.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-vector-space-of-linear-maps",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. Write\n\n$$\\mathcal L(V,W):=\\{T:V\\to W:T\\text{ is linear}\\}.$$\n\nFor $S,T\\in\\mathcal L(V,W)$ and $\\lambda\\in F$, define pointwise operations by\n\n$$(S+T)(v):=S(v)+T(v),\\qquad (\\lambda T)(v):=\\lambda T(v).$$\n\nThe zero function $v\\mapsto0_W$ is denoted by $0$. Closure and the vector-space\naxioms for these operations are proved in [[prop-linear-maps-form-a-vector-space]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-algebra-over-a-commutative-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring ([[def-commutative-ring]]). An **$R$-algebra** is a unital ring $A$ together with a unital ring homomorphism\n\n$$\\eta_A:R\\longrightarrow A$$\n\n([[def-ring-homomorphism]]) whose image is central: $\\eta_A(r)a=a\\eta_A(r)$ for every $r\\in R$ and $a\\in A$. The induced scalar action is $ra:=\\eta_A(r)a$, making $A$ an $R$-module and multiplication $A\\times A\\to A$ bilinear.\n\nAn **$R$-algebra homomorphism** $f:A\\to B$ is a unital ring homomorphism satisfying $f\\circ\\eta_A=\\eta_B$. Such a map is automatically $R$-linear. An $R$-algebra is **commutative** when its underlying ring is commutative.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "representation-induces-bilinear-action",
+          "claim": "Evaluation of the operator representation defines a k-bilinear action on A x V.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "representation-action-satisfies-module-laws",
+          "claim": "Multiplicativity and preservation of the identity give the associative and unital left-module laws.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "bilinear-module-action-induces-representation",
+          "claim": "The action operators are k-linear, depend k-linearly on a, and preserve products and the identity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "constructions-are-inverse",
+          "claim": "The two constructions recover the same value on every pair (a,v), so they are inverse bijections.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For V=0, End_k(V) is the one-element ring with id=0, and both the representation and module action are unique; the constructions of steps 1.1\u20133.1 still agree."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero action on nonzero V fails the unit law checked in step 2.1; the zero-space action is valid by steps 1.1\u20133.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When A=k, k-bilinearity and 1_A v=v force lambda v=(lambda 1_A)v=lambda(1_Av)=lambda v, as in steps 1.1\u20133.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If A is the zero k-algebra, unitality forces id_V=0 and hence V=0; the unique representation and action correspond by steps 1.1\u20133.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no interval, exponent, limiting parameter, or endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both maps are explicitly defined on each a and v; no choice principle or selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 construct a k-bilinear unital left A-module action from each representation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1 construct a representation from each action and prove the two constructions are inverse."
+        }
+      ]
+    },
+    "ex-c2-trivial-and-sign-modules-under-diagonal-tensor-action": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-hh-group-and-polynomial-hopf-algebras-exist",
+          "source_section": "Statement",
+          "quote": "Let $k$ be any field.\n\n1. For any group $G$, the vector space $kG$ of finite sums $\\sum_{g\\in G}a_g g$ is a Hopf algebra. Its multiplication is the bilinear extension of the group law, its unit is the group identity $e$, and\n   $$\\Delta(g)=g\\otimes g,\\qquad \\varepsilon(g)=1,\\qquad S(g)=g^{-1}\\quad(g\\in G).$$\n2. For any finite group $G$, the pointwise algebra $k^G$ of all functions $f:G\\to k$ is a Hopf algebra with\n   $$\\Delta(f)(x,y)=f(xy),\\qquad \\varepsilon(f)=f(e),\\qquad S(f)(x)=f(x^{-1}).$$\n   The finite-set tensor identification $k^G\\otimes k^G\\cong k^{G\\times G}$ is used to define $\\Delta$. No Hopf structure on the full function space $k^G$ for infinite $G$ is claimed.\n3. The polynomial algebra $k[x]$ is a Hopf algebra with\n   $$\\Delta(x)=x\\otimes1+1\\otimes x,\\qquad \\varepsilon(x)=0,\\qquad S(x)=-x.$$\n   These formulas work in every characteristic. The element $x$ is primitive in every characteristic, and in characteristic $p>0$ so is $x^p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hh-hopf-algebra-and-antipode",
+          "source_section": "Definition",
+          "quote": "A **Hopf algebra over $k$** is a bialgebra $H$ together with a $k$-linear map $S:H\\to H$, called its **antipode**, such that\n\n$$S*\\mathrm{id}_H=u\\varepsilon=\\mathrm{id}_H*S,$$\n\nwhere $*$ is the convolution product on $\\operatorname{Hom}_k(H,H)$, $u:k\\to H$ is the unit, and $\\varepsilon:H\\to k$ is the counit. Equivalently, $m(S\\otimes\\mathrm{id})\\Delta=u\\varepsilon=m(\\mathrm{id}\\otimes S)\\Delta$. Thus $S$ is the two-sided inverse of $\\mathrm{id}_H$ in the convolution algebra. This definition imposes no compositional bijectivity condition on $S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-unital-associative-algebra-representation",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field, let $A$ be a unital associative $k$-algebra\n([[def-algebra-over-a-commutative-ring]]), and let $V$ be a $k$-vector space.\nWrite $\\operatorname{End}_k(V)=\\mathcal L_k(V,V)$ for the $k$-linear endomorphisms\nof $V$ ([[def-vector-space-of-linear-maps]]); its multiplication is composition\nand its identity is $\\operatorname{id}_V$\n([[def-endomorphism-ring-of-a-module]], [[prop-endomorphisms-form-a-ring]]).\nAn **(unital) representation of $A$ on $V$** is a $k$-linear map\n$$\\rho:A\\longrightarrow\\operatorname{End}_k(V)$$\nsuch that $\\rho(1_A)=\\operatorname{id}_V$ and\n$$\\rho(ab)=\\rho(a)\\circ\\rho(b)\\qquad(a,b\\in A).$$\nThe associated action is $a\\cdot v:=\\rho(a)(v)$. The zero vector space is\nallowed; in that case $\\operatorname{id}_V=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-associative-algebra-representations-are-unital-modules",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field, $A$ a unital associative $k$-algebra, and $V$ a\n$k$-vector space. There is a bijection between unital representations\n$\\rho:A\\to\\operatorname{End}_k(V)$ of [[def-unital-associative-algebra-representation]]\nand $k$-bilinear left $A$-module actions $A\\times V\\to V$, $(a,v)\\mapsto a\\cdot v$,\nfor which $(ab)\\cdot v=a\\cdot(b\\cdot v)$ and $1_A\\cdot v=v$. The maps are\n$a\\cdot v=\\rho(a)(v)$ and $\\rho(a)(v)=a\\cdot v$. Here $k$-bilinear means\nlinear in each variable with respect to the given $k$-vector structures; the\nmodule axioms are those of [[def-left-and-right-modules]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-hh-module-category-and-tensor-action",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field and let $H$ be a $k$-vector space with associative unital multiplication $m$, unit $1_H$, coassociative comultiplication $\\Delta:H\\to H\\otimes_k H$, and counit $\\varepsilon:H\\to k$. Assume $\\Delta$ and $\\varepsilon$ are unital algebra maps; this is the bialgebra interface used on this page. A left $H$-module is a unital left module in the sense of [[def-left-and-right-modules]]: its action satisfies $1_Hv=v$ and $(hh')v=h(h'v)$. Let $H\\text{-}\\mathrm{Mod}$ be the category whose objects are all left $H$-modules and whose morphisms $f:V\\to W$ are $k$-linear maps satisfying $f(hv)=h f(v)$ for every $h\\in H$ and $v\\in V$.\n\nFor left $H$-modules $V,W$, give the algebraic tensor product $V\\otimes_k W$ the candidate action\n\n$$h\\cdot(v\\otimes w)=\\sum h_{(1)}v\\otimes h_{(2)}w,\\qquad \\Delta(h)=\\sum h_{(1)}\\otimes h_{(2)}.$$\n\nThe sums are finite algebraic tensor sums; the tensor product and scalar conventions are those of [[def-hh-scalar-and-tensor-conventions]]. The candidate unit object is $k_\\varepsilon=k$ with $h\\cdot c=\\varepsilon(h)c$. For morphisms $f:V\\to V'$ and $g:W\\to W'$, the candidate tensor morphism is the usual linear map $f\\otimes g$ determined by $(f\\otimes g)(v\\otimes w)=f(v)\\otimes g(w)$ through [[thm-universal-property-of-module-tensor-products]].\n\nThese formulas specify the proposed tensor operations; [[thm-hh-bialgebra-module-tensor-coherence]] proves that they are module actions and that the canonical associator and unit maps are morphisms in $H\\text{-}\\mathrm{Mod}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-symmetry-and-associativity-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $L,M,N$ be $R$-modules. There are natural $R$-module isomorphisms\n\n$$\\sigma_{M,N}:M\\otimes_RN\\longrightarrow N\\otimes_RM,\\qquad \\sigma_{M,N}(m\\otimes n)=n\\otimes m,$$\n\nand\n\n$$\\alpha_{L,M,N}:(L\\otimes_RM)\\otimes_RN\\longrightarrow L\\otimes_R(M\\otimes_RN),\\qquad \\alpha((l\\otimes m)\\otimes n)=l\\otimes(m\\otimes n).$$\n\nMoreover $\\sigma_{N,M}\\sigma_{M,N}$ is the identity.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "c2-trivial-and-sign-modules",
+          "claim": "The maps sending s to +1 and -1 respect s^2=1 and define unital representations and modules.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "c2-coproduct-tensor-action",
+          "claim": "The group-like coproduct makes s act by -1 on the tensor product, and the cited bialgebra theorem validates the module structure.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "c2-swap-intertwines-the-action",
+          "claim": "The ordinary tensor flip is an isomorphism and intertwines the generator s, hence the full group algebra action.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes C2 and two nonzero one-dimensional modules."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The modules are fixed as C and no zero-valued parameter occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The identity element acts as identity on both factors by step 1.1 and the unital tensor action in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The field is C, so +1 and -1 are distinct; the tensor action is the sign action as computed in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval, limiting value, or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The group, basis, and representations are explicitly specified and involve no selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a one-way worked computation and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a one-way worked computation and no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Read every current example step and all six cited supplier carriers, including the representation/module proof, the group-algebra construction (steps 1.1, 2.2, 3.2, 4.1), and the vector-space flip proof. Step 1.1 extends from basis 1,s and checks s^2=1 for both scalar operators. Step 2.1 directly constructs the unital representation with s acting as -id and proves agreement with the finite algebraic coproduct formula; it does not rely on an unproved general action assertion. Step 3.1 checks both generators on spanning pure tensors, including the reversed tensor action; flip squared is identity. Complex scalars ensure distinct signs; spaces and group are fixed nonzero finite examples, so no endpoint, empty-family, iff or choice case is omitted. Primary Kytola Example 3.28 and formula (3.5), pp.39,41-42, agree. Reader/refuter no-findings evidence is consistent with this independent review. No defect or item edit."
+      }
+    },
+    "cex-componentwise-algebra-action-need-not-define-a-tensor-action": {
+      "risk": "low",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-unital-associative-algebra-representation",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field, let $A$ be a unital associative $k$-algebra\n([[def-algebra-over-a-commutative-ring]]), and let $V$ be a $k$-vector space.\nWrite $\\operatorname{End}_k(V)=\\mathcal L_k(V,V)$ for the $k$-linear endomorphisms\nof $V$ ([[def-vector-space-of-linear-maps]]); its multiplication is composition\nand its identity is $\\operatorname{id}_V$\n([[def-endomorphism-ring-of-a-module]], [[prop-endomorphisms-form-a-ring]]).\nAn **(unital) representation of $A$ on $V$** is a $k$-linear map\n$$\\rho:A\\longrightarrow\\operatorname{End}_k(V)$$\nsuch that $\\rho(1_A)=\\operatorname{id}_V$ and\n$$\\rho(ab)=\\rho(a)\\circ\\rho(b)\\qquad(a,b\\in A).$$\nThe associated action is $a\\cdot v:=\\rho(a)(v)$. The zero vector space is\nallowed; in that case $\\operatorname{id}_V=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-associative-algebra-representations-are-unital-modules",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field, $A$ a unital associative $k$-algebra, and $V$ a\n$k$-vector space. There is a bijection between unital representations\n$\\rho:A\\to\\operatorname{End}_k(V)$ of [[def-unital-associative-algebra-representation]]\nand $k$-bilinear left $A$-module actions $A\\times V\\to V$, $(a,v)\\mapsto a\\cdot v$,\nfor which $(ab)\\cdot v=a\\cdot(b\\cdot v)$ and $1_A\\cdot v=v$. The maps are\n$a\\cdot v=\\rho(a)(v)$ and $\\rho(a)(v)=a\\cdot v$. Here $k$-bilinear means\nlinear in each variable with respect to the given $k$-vector structures; the\nmodule axioms are those of [[def-left-and-right-modules]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-unit-isomorphisms-for-module-tensor-products",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a unital ring. For every left $R$-module $N$ and every right $R$-module $M$, the maps\n\n$$\\lambda_N:R\\otimes_RN\\longrightarrow N,\\qquad r\\otimes n\\longmapsto rn,$$\n\nand\n\n$$\\rho_M:M\\otimes_RR\\longrightarrow M,\\qquad m\\otimes r\\longmapsto mr,$$\n\nare group isomorphisms. Their inverses are $n\\mapsto1_R\\otimes n$ and $m\\mapsto m\\otimes1_R$, respectively. The maps respect every displayed outer module structure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hh-module-category-and-tensor-action",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field and let $H$ be a $k$-vector space with associative unital multiplication $m$, unit $1_H$, coassociative comultiplication $\\Delta:H\\to H\\otimes_k H$, and counit $\\varepsilon:H\\to k$. Assume $\\Delta$ and $\\varepsilon$ are unital algebra maps; this is the bialgebra interface used on this page. A left $H$-module is a unital left module in the sense of [[def-left-and-right-modules]]: its action satisfies $1_Hv=v$ and $(hh')v=h(h'v)$. Let $H\\text{-}\\mathrm{Mod}$ be the category whose objects are all left $H$-modules and whose morphisms $f:V\\to W$ are $k$-linear maps satisfying $f(hv)=h f(v)$ for every $h\\in H$ and $v\\in V$.\n\nFor left $H$-modules $V,W$, give the algebraic tensor product $V\\otimes_k W$ the candidate action\n\n$$h\\cdot(v\\otimes w)=\\sum h_{(1)}v\\otimes h_{(2)}w,\\qquad \\Delta(h)=\\sum h_{(1)}\\otimes h_{(2)}.$$\n\nThe sums are finite algebraic tensor sums; the tensor product and scalar conventions are those of [[def-hh-scalar-and-tensor-conventions]]. The candidate unit object is $k_\\varepsilon=k$ with $h\\cdot c=\\varepsilon(h)c$. For morphisms $f:V\\to V'$ and $g:W\\to W'$, the candidate tensor morphism is the usual linear map $f\\otimes g$ determined by $(f\\otimes g)(v\\otimes w)=f(v)\\otimes g(w)$ through [[thm-universal-property-of-module-tensor-products]].\n\nThese formulas specify the proposed tensor operations; [[thm-hh-bialgebra-module-tensor-coherence]] proves that they are module actions and that the canonical associator and unit maps are morphisms in $H\\text{-}\\mathrm{Mod}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "scalar-algebra-modules-are-valid",
+          "claim": "The identity representation of C on C gives the two stated unital modules.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "tensor-unit-is-nonzero",
+          "claim": "The tensor-unit isomorphism sends 1 tensor 1 to 1, proving u is nonzero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "componentwise-formula-fails-additivity",
+          "claim": "The formula sends u to a squared scalar, contradicting additivity at 1+1; the coproduct formula is a distinct construction requiring extra data.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes two nonzero one-dimensional modules."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample does not use zero modules or a zero scalar."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proposed formula passes the unit value a=1 but fails additivity at a=1+1 in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The scalar field is C, so 4u and 2u differ because u is nonzero by step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample has no interval or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All objects and scalars are explicitly fixed; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted claim is one-way and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted claim is one-way and states no equivalence."
+        }
+      ]
+    }
+  }
+}

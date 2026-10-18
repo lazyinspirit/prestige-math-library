@@ -3,6 +3,7 @@ id: ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous
 kind: example
 title: "A bounded function on $\\mathbb{R}$ with no local maximum and no local minimum at any point, upper semicontinuous at no point and lower semicontinuous at no point: compose the Hamel coefficient with a strictly increasing injection of $\\mathbb{R}$ into $(0,1)$"
 status: published
+dependency_level: 6
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,12 @@ landmark: false
 short: "no local extremum, nowhere semicontinuous"
 proof_strategy: constructive
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous.json
 sources:
   scraped: []
   references:

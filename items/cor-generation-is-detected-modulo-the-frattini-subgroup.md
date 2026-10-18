@@ -3,6 +3,7 @@ id: cor-generation-is-detected-modulo-the-frattini-subgroup
 kind: corollary
 title: "Generation of a finite group is detected modulo its Frattini subgroup"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
@@ -14,10 +15,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/published-receipts/cor-generation-is-detected-modulo-the-frattini-subgroup.json
 sources:
   scraped: []
   references:

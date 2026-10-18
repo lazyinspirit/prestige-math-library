@@ -1,0 +1,1071 @@
+{
+  "version": 1,
+  "level": "non-ml-math-remaining-81-2026-10-18",
+  "batch": "34",
+  "scope": [
+    "def-clifford-algebra-of-a-quadratic-space",
+    "lem-clifford-exterior-wedge-contraction-relations",
+    "lem-clifford-polarized-relations",
+    "lem-clifford-quotient-factorization",
+    "thm-universal-property-of-clifford-algebra",
+    "thm-clifford-pbw-basis-and-associated-graded",
+    "ex-one-dimensional-clifford-algebra",
+    "ex-zero-quadratic-clifford-algebra-is-exterior",
+    "cex-clifford-algebra-need-not-be-semisimple"
+  ],
+  "contracts": {
+    "def-clifford-algebra-of-a-quadratic-space": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition explicitly witnesses that the family of relation-containing ideals is nonempty by T_k(V) itself; its intersection therefore defines the smallest ideal without an empty-family convention."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definitions have no proof phase; this construction asserts no theorem boundary or choice-dependent result."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Definitions have no proof phase; this construction asserts no theorem boundary or choice-dependent result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definitions have no proof phase; this construction asserts no theorem boundary or choice-dependent result."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definitions have no proof phase; this construction asserts no theorem boundary or choice-dependent result."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definitions have no proof phase; this construction asserts no theorem boundary or choice-dependent result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definitions have no proof phase; this construction asserts no theorem boundary or choice-dependent result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definitions have no proof phase; this construction asserts no theorem boundary or choice-dependent result."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Checked the full Definition against the actual tensor-algebra and two-sided-ideal definitions. The containing-ideal family contains T(V); intersections preserve additive and both ideal closures, including scalar closure via central k. The quotient product is independent of representatives since (t+i)(s+j)-ts belongs to J_Q. The plus-Q convention yields the square relation without asserting premature injectivity. For V=0 every relation is zero and J_Q=0, so Cl=k; zero or degenerate B causes no issue. No basis choice or AC is used. ABS Part I section 1, pp.4-5, agrees with this quotient convention; reader/refuter have no routed findings."
+      }
+    },
+    "lem-clifford-exterior-wedge-contraction-relations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tensor-algebra-of-a-vector-space",
+          "source_section": "Definition",
+          "quote": "For a vector space $V$ over $k$, set $V^{\\otimes0}=k$ and define the\n**tensor algebra**\n\n$$T(V)=\\bigoplus_{n\\geq0}V^{\\otimes n}.$$\n\nAfter fixing the canonical tensor-product associators, multiplication on\nhomogeneous pure tensors is concatenation:\n\n$$ (v_1\\otimes\\cdots\\otimes v_m)(w_1\\otimes\\cdots\\otimes w_n)=v_1\\otimes\\cdots\\otimes v_m\\otimes w_1\\otimes\\cdots\\otimes w_n.$$\n\nExtend this bilinearly. Each element has finite degree support, so products are\nfinite sums. Tensor associativity makes concatenation associative, and\n$1\\in k=V^{\\otimes0}$ is its unit. Thus $T(V)$ is a graded unital associative\n$k$-algebra. The degree-one inclusion is denoted $j:V\\to T(V)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-exterior-algebra-of-a-finite-free-module",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $F$ be a finite free $R$-module\nwith ordered basis $e_1,\\ldots,e_n$. Define\n$\\bigwedge F=T_R(F)/(v\\otimes v:v\\in F)$, graded by tensor degree; write\n$e_I=e_{i_1}\\wedge\\cdots\\wedge e_{i_p}$ for\n$I=\\{i_1<\\cdots<i_p\\}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $M_1,\\ldots,M_k$ be a finite list of $R$-modules. Any parenthesized tensor product\n\n$$T=M_1\\otimes_R\\cdots\\otimes_RM_k$$\n\nrepresents $R$-multilinear maps from $M_1\\times\\cdots\\times M_k$: for every $R$-module $P$, composition with $(m_1,\\ldots,m_k)\\mapsto m_1\\otimes\\cdots\\otimes m_k$ is a bijection from $\\operatorname{Hom}_R(T,P)$ to the set of multilinear maps into $P$. Different parenthesizations are connected by the unique isomorphism preserving pure tensors.\n\nFor $k=0$, take $T=R$ and identify zero-variable multilinear maps with chosen elements of $P$. For $k=1$, take $T=M_1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-left-right-and-two-sided-ideal",
+          "source_section": "Definition",
+          "quote": "Left, right and two-sided ideals.\n\nLet $R$ be a ring. An additive subgroup $I\\le(R,+)$ is a **left ideal** when\n$r i\\in I$ for every $r\\in R$ and $i\\in I$, and a **right ideal** when\n$i r\\in I$ for every such $r,i$.  A **two-sided ideal**, written\n$I\\mathrel{\\trianglelefteq}R$, is both a left and a right ideal.  In a\ncommutative ring these three notions agree.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $r\\ge1$, the displayed sum is multilinear in $(w_1,\\ldots,w_r)$, so [F3] defines a linear map on $V^{\\otimes r}$. Together with $\\iota_v(1)=0$, these maps define $\\delta_v:T_k(V)\\to T_k(V)$. On a concatenated pair of pure tensors of degrees $p,q$, the first $p$ deletion terms give $\\delta_v(x)y$, while each remaining deletion has the extra sign $(-1)^p$ and gives $(-1)^px\\delta_v(y)$. Thus $\\delta_v(xy)=\\delta_v(x)y+(-1)^p x\\delta_v(y)$; bilinearity extends this to homogeneous tensors.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Left multiplication gives $\\epsilon_v\\epsilon_w+\\epsilon_w\\epsilon_v=0$: in $\\Lambda V$, $(v+w)^2=v^2=w^2=0$, so expansion gives $vw+wv=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $S$ be the $k$-linear span of the terms $xj(u)^2y$ for $x,y\\in T_k(V)$ and $u\\in V$. This span contains all the squares, and multiplying its terms on the left or right only changes $x$ or $y$, so it is a two-sided ideal by [F4]. Every two-sided ideal containing all the squares contains $S$, hence $S=J_{\\wedge}$ by [F2]. For $u\\in V$, $\\delta_v(j(u)j(u))=B(v,u)j(u)-j(u)B(v,u)=0$. If $x$ is homogeneous of degree $p$, then for homogeneous $y$ the derivation rule gives $\\delta_v(xj(u)^2y)=\\delta_v(x)j(u)^2y+(-1)^px\\delta_v(j(u)^2)y+(-1)^{p+2}xj(u)^2\\delta_v(y)$. Each outer term lies in $J_{\\wedge}$ by [F4], and the middle term is zero. By linearity, $\\delta_v(J_{\\wedge})\\subseteq J_{\\wedge}$, so $\\delta_v$ descends to $\\iota_v$ on $\\Lambda V$. Since $J_{\\wedge}$ is a two-sided ideal, left multiplication by $j(v)$ also descends to $\\epsilon_v$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On a decomposable wedge, every term of $\\iota_v\\iota_w+\\iota_w\\iota_v$ deletes two distinct positions. For fixed $i<j$ and fixed choice of which contraction deletes each factor, deleting position $i$ before $j$ changes the second deletion's sign from $(-1)^{j-1}$ to $(-1)^{j-2}$; the two orders therefore have opposite signs and identical scalar coefficient. Pairing all such terms gives zero. If $r<2$, both compositions vanish.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The contraction formula separates the term deleting the first factor and the terms deleting the remaining factors, giving $\\iota_v(w\\wedge\\omega)=B(v,w)\\omega-w\\wedge\\iota_v(\\omega)$ on decomposable $\\omega$ and hence on all $\\omega$. Thus $\\iota_v\\epsilon_w+\\epsilon_w\\iota_v=B(v,w)I$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Adding the three anticommutator identities yields $c(v)c(w)+c(w)c(v)=(B(v,w)+B(w,v))I=2B(v,w)I$. Taking $w=v$ and cancelling $2$ in $k$ gives $c(v)^2=Q(v)I$. Linearity of $\\epsilon_v$ and of the contraction formula in $v$ makes $c:V\\to\\operatorname{End}_k(\\Lambda V)$ linear.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 4.1 include degree zero: contraction is zero on 1 and the Clifford square identity still holds."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When B=0, step 2.1 gives zero contraction and steps 1.2 and 4.1 reduce to exterior multiplication with square zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2-4.1 cover degree one: the mixed identity gives the scalar B(v,w) and the square relation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No nondegeneracy hypothesis is used in steps 1.1-4.1; the formula and cancellations apply to every symmetric B."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint parameter occurs in this algebraic operator identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-4.1 use explicit formulas and tensor universal properties; no choice axiom or basis selection occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Contraction descent is proved by stability of the square ideal in2.1, not by assuming an equivalent condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is the constructed linear operator identity4.1; it does not assert a converse characterization."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all six current steps and the four cited local suppliers, including the multilinear-map corollary proof and its three tensor-product prerequisite statements/proofs. Multilinear deletion on tensor powers defines the odd derivation; the span of x u^2 y is the square ideal, and delta(u^2)=0 proves descent. Distinct-position deletion orders cancel with opposite signs; the first-factor deletion proves the mixed identity. Symmetry and invertibility of 2 yield c(v)^2=B(v,v)I; dependence on v is linear. Checked degree zero/one, V=0, v=0, B=0 and arbitrary radical without diagonalization or AC. Exact pre/post raw hashes show a citation-only reader change. Independently read Meinrenken author notes cl12.pdf Chapter 2 section 1.2 equations (15)-(16), section 2.1 Proposition 2.2, printed pp.24-25: the same deletion formula and plus-Q action for possibly degenerate B under characteristic not 2 (Chapter 1 opening). Amended the bibliographic locator to this accessible checked primary text; the local Statement, proof, dependencies and citation mirrors are unchanged. Source transcription contains an obvious mistyped first operator identity; the local exterior identity is independently established in step 1.2. No reader/refuter finding remains."
+      }
+    },
+    "lem-clifford-polarized-relations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-clifford-algebra-of-a-quadratic-space",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field with $\\operatorname{char}(k)\\ne2$, let $V$ be a finite-dimensional $k$-vector space, and let $B:V\\times V\\to k$ be a symmetric bilinear form, not necessarily nondegenerate. Put $Q(v)=B(v,v)$. Write $T_k(V)$ for the tensor algebra and $j:V\\to T_k(V)$ for its degree-one inclusion ([[def-tensor-algebra-of-a-vector-space]]). For each $v\\in V$, set $r_v=j(v)j(v)-Q(v)1$ and let $J_Q$ be the intersection of all two-sided ideals of $T_k(V)$ containing every $r_v$ ([[def-left-right-and-two-sided-ideal]]). This family is nonempty because it contains $T_k(V)$, and its intersection is a two-sided ideal; thus $J_Q$ is the smallest such ideal.\n\nDefine the **universal Clifford algebra** with the plus-$Q$ convention by\n\n$$\\mathrm{Cl}^{+}(V,Q):=T_k(V)/J_Q.$$\n\nThe quotient operations are induced from $T_k(V)$; the two-sided ideal condition makes multiplication of cosets well defined. Let $q_Q:T_k(V)\\to\\mathrm{Cl}^{+}(V,Q)$ be the quotient map, put $i_Q=q_Q\\circ j$, and write $\\bar v=i_Q(v)$. The defining relation is $\\bar v^{\\,2}=Q(v)1$. In this pair, $\\mathrm{Cl}(V,Q)$ abbreviates $\\mathrm{Cl}^{+}(V,Q)$ after this sign convention has been fixed. No nondegeneracy assumption is imposed.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "Subtracting the defining square relations for v and w from the relation for v+w isolates the anticommutator.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "Symmetric bilinearity identifies the polarization difference with 2B(v,w).",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For V=0 there are no nonzero v,w and the relation in steps 1.1 and 2.1 is the identity 0=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Substituting v=0 or w=0 into steps 1.1-1.2 gives both sides zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-dimensional space, steps 1.1 and 2.1 give the relation from the single coefficient B(e,e)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof uses only symmetry and bilinearity in steps 1.1-1.2; B may be degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The variables v,w lie in an algebraic vector space and the expansion uses addition, not an ordered interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 are algebraic expansions and use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proof1.1 subtracts three known square relations to obtain a new identity, not an iff hypothesis."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof2.1 evaluates polarization and exports only the anticommutator equality, not its converse."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-clifford-quotient-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-clifford-algebra-of-a-quadratic-space",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field with $\\operatorname{char}(k)\\ne2$, let $V$ be a finite-dimensional $k$-vector space, and let $B:V\\times V\\to k$ be a symmetric bilinear form, not necessarily nondegenerate. Put $Q(v)=B(v,v)$. Write $T_k(V)$ for the tensor algebra and $j:V\\to T_k(V)$ for its degree-one inclusion ([[def-tensor-algebra-of-a-vector-space]]). For each $v\\in V$, set $r_v=j(v)j(v)-Q(v)1$ and let $J_Q$ be the intersection of all two-sided ideals of $T_k(V)$ containing every $r_v$ ([[def-left-right-and-two-sided-ideal]]). This family is nonempty because it contains $T_k(V)$, and its intersection is a two-sided ideal; thus $J_Q$ is the smallest such ideal.\n\nDefine the **universal Clifford algebra** with the plus-$Q$ convention by\n\n$$\\mathrm{Cl}^{+}(V,Q):=T_k(V)/J_Q.$$\n\nThe quotient operations are induced from $T_k(V)$; the two-sided ideal condition makes multiplication of cosets well defined. Let $q_Q:T_k(V)\\to\\mathrm{Cl}^{+}(V,Q)$ be the quotient map, put $i_Q=q_Q\\circ j$, and write $\\bar v=i_Q(v)$. The defining relation is $\\bar v^{\\,2}=Q(v)1$. In this pair, $\\mathrm{Cl}(V,Q)$ abbreviates $\\mathrm{Cl}^{+}(V,Q)$ after this sign convention has been fixed. No nondegeneracy assumption is imposed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-left-right-and-two-sided-ideal",
+          "source_section": "Definition",
+          "quote": "Left, right and two-sided ideals.\n\nLet $R$ be a ring. An additive subgroup $I\\le(R,+)$ is a **left ideal** when\n$r i\\in I$ for every $r\\in R$ and $i\\in I$, and a **right ideal** when\n$i r\\in I$ for every such $r,i$.  A **two-sided ideal**, written\n$I\\mathrel{\\trianglelefteq}R$, is both a left and a right ideal.  In a\ncommutative ring these three notions agree.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-algebra-over-a-commutative-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring ([[def-commutative-ring]]). An **$R$-algebra** is a unital ring $A$ together with a unital ring homomorphism\n\n$$\\eta_A:R\\longrightarrow A$$\n\n([[def-ring-homomorphism]]) whose image is central: $\\eta_A(r)a=a\\eta_A(r)$ for every $r\\in R$ and $a\\in A$. The induced scalar action is $ra:=\\eta_A(r)a$, making $A$ an $R$-module and multiplication $A\\times A\\to A$ bilinear.\n\nAn **$R$-algebra homomorphism** $f:A\\to B$ is a unital ring homomorphism satisfying $f\\circ\\eta_A=\\eta_B$. Such a map is automatically $R$-linear. An $R$-algebra is **commutative** when its underlying ring is commutative.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The kernel is a two-sided ideal containing the defining relations, hence contains their generated ideal.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "The map on cosets is independent of representative and therefore well defined.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "The induced map is a unital algebra homomorphism and is unique because the quotient map is surjective.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "When V=0 the only defining relation is zero and J_Q is the zero ideal, so the same coset construction of steps 1.1–3.1 applies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If Q=0, step 1.1 uses generators j(v)^2 and steps 2.1-3.1 give the same factorization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 apply to a one-generator relation without any additional relation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No nondegeneracy assumption occurs in the kernel or quotient argument of steps 1.1-1.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The construction sends a tensor coset to its given image; no real interval or limiting endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 defines the factor by one formula on every coset; no representative is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proof1.1 starts with the stipulated vanishing and deduces containment in the kernel; it does not state an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proofs2.1,3.1 construct the unique coset map and use surjectivity for uniqueness, rather than a reverse logical direction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all three steps and exact Clifford quotient, two-sided-ideal and central unital algebra definitions. The kernel is a two-sided ideal containing every stipulated relation, hence J_Q is contained in it. Equality of cosets gives equality of images, and induced operations give the unital k-algebra map; surjectivity of q_Q proves uniqueness without selecting representatives. Checked V=0 (relation set consists of the zero relation), Q=0, degenerate B, and zero target algebra under the stated unital convention. No nondegeneracy, arbitrary basis or AC is used. ABS Part I section 1 (1.2)-(1.3) matches the quotient factorization mechanism; no reader/refuter findings."
+      }
+    },
+    "thm-universal-property-of-clifford-algebra": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-universal-property-of-the-tensor-algebra",
+          "source_section": "Statement",
+          "quote": "If $A$ is a unital associative $k$-algebra, every linear map $f:V\\to A$\nextends uniquely to a unital $k$-algebra homomorphism\n$\\widehat f:T(V)\\to A$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-clifford-quotient-factorization",
+          "source_section": "Statement",
+          "quote": "Let $q_Q:T_k(V)\\to\\mathrm{Cl}(V,Q)$ be the quotient map from [[def-clifford-algebra-of-a-quadratic-space]]. If $A$ is a unital associative $k$-algebra and $\\psi:T_k(V)\\to A$ is a unital $k$-algebra homomorphism satisfying $\\psi(j(v)^2-Q(v)1)=0$ for every $v\\in V$, then there is a unique unital $k$-algebra homomorphism $\\bar\\psi:\\mathrm{Cl}(V,Q)\\to A$ with $\\psi=\\bar\\psi\\circ q_Q$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-clifford-algebra-of-a-quadratic-space",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field with $\\operatorname{char}(k)\\ne2$, let $V$ be a finite-dimensional $k$-vector space, and let $B:V\\times V\\to k$ be a symmetric bilinear form, not necessarily nondegenerate. Put $Q(v)=B(v,v)$. Write $T_k(V)$ for the tensor algebra and $j:V\\to T_k(V)$ for its degree-one inclusion ([[def-tensor-algebra-of-a-vector-space]]). For each $v\\in V$, set $r_v=j(v)j(v)-Q(v)1$ and let $J_Q$ be the intersection of all two-sided ideals of $T_k(V)$ containing every $r_v$ ([[def-left-right-and-two-sided-ideal]]). This family is nonempty because it contains $T_k(V)$, and its intersection is a two-sided ideal; thus $J_Q$ is the smallest such ideal.\n\nDefine the **universal Clifford algebra** with the plus-$Q$ convention by\n\n$$\\mathrm{Cl}^{+}(V,Q):=T_k(V)/J_Q.$$\n\nThe quotient operations are induced from $T_k(V)$; the two-sided ideal condition makes multiplication of cosets well defined. Let $q_Q:T_k(V)\\to\\mathrm{Cl}^{+}(V,Q)$ be the quotient map, put $i_Q=q_Q\\circ j$, and write $\\bar v=i_Q(v)$. The defining relation is $\\bar v^{\\,2}=Q(v)1$. In this pair, $\\mathrm{Cl}(V,Q)$ abbreviates $\\mathrm{Cl}^{+}(V,Q)$ after this sign convention has been fixed. No nondegeneracy assumption is imposed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-algebra-over-a-commutative-ring",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring ([[def-commutative-ring]]). An **$R$-algebra** is a unital ring $A$ together with a unital ring homomorphism\n\n$$\\eta_A:R\\longrightarrow A$$\n\n([[def-ring-homomorphism]]) whose image is central: $\\eta_A(r)a=a\\eta_A(r)$ for every $r\\in R$ and $a\\in A$. The induced scalar action is $ra:=\\eta_A(r)a$, making $A$ an $R$-module and multiplication $A\\times A\\to A$ bilinear.\n\nAn **$R$-algebra homomorphism** $f:A\\to B$ is a unital ring homomorphism satisfying $f\\circ\\eta_A=\\eta_B$. Such a map is automatically $R$-linear. An $R$-algebra is **commutative** when its underlying ring is commutative.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4], $A$ has the central unital $k$-algebra structure required by [F1], so $f$ extends uniquely to a unital $k$-algebra homomorphism $\\widetilde f:T_k(V)\\to A$ with $\\widetilde f\\circ j=f$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $v\\in V$, $\\widetilde f(j(v)^2-Q(v)1)=f(v)^2-Q(v)1_A=0$. Thus [F2] gives a unique unital homomorphism $\\bar f:\\mathrm{Cl}(V,Q)\\to A$ satisfying $\\bar f\\circ q_Q=\\widetilde f$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $i_Q=q_Q\\circ j$, step 2.1 gives $\\bar f\\circ i_Q=\\widetilde f\\circ j=f$. Let $g:\\mathrm{Cl}(V,Q)\\to A$ be any other unital $k$-algebra homomorphism with $g\\circ i_Q=f$. Then $g\\circ q_Q:T_k(V)\\to A$ and $\\widetilde f$ are unital algebra extensions of the same map $f$ along $j$, because $(g\\circ q_Q)\\circ j=g\\circ i_Q=f=\\widetilde f\\circ j$. Uniqueness in [F1] gives $g\\circ q_Q=\\widetilde f=\\bar f\\circ q_Q$. Since $q_Q$ is surjective by [F3], $g=\\bar f$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For V=0 the relation set is empty and T_k(V)=Cl(V,Q)=k; steps 1.1, 2.1, and 3.1 give the unique unital k-algebra map."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For Q=0, step 2.1 kills each relation f(v)^2 and the same quotient argument applies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 apply to a one-dimensional V with its one square relation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 use only the defining relation; the Statement imposes no nondegeneracy condition on Q."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The data are a linear map and quadratic identities; there is no analytic parameter or interval boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 construct uniquely determined maps; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proofs1.1,2.1 construct an extension from the stipulated square relation, not an iff classification of maps."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof3.1 establishes uniqueness by tensor uniqueness and quotient surjectivity, not a reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Checked all three steps and all four exact local suppliers. The published tensor-algebra theorem constructs the extension from multilinear maps on tensor powers and the direct-sum universal property; its target is precisely a unital associative k-algebra. The square hypothesis kills each j(v)^2-Q(v)1, so the previously reviewed quotient-factorization lemma applies. A competing Clifford map pulls back to the same tensor extension, and q_Q surjectivity gives equality. Checked V=0, Q=0, arbitrary radical and zero target; no injectivity of i_Q or nondegeneracy is assumed and no AC is needed. ABS Part I section 1 (1.2)-(1.3) and Gallier section 1.2 Definition 1.3/quotient construction support the source attribution; local proof supplies the full argument. Reader/refuter have no findings."
+      }
+    },
+    "thm-clifford-pbw-basis-and-associated-graded": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-clifford-algebra-of-a-quadratic-space",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field with $\\operatorname{char}(k)\\ne2$, let $V$ be a finite-dimensional $k$-vector space, and let $B:V\\times V\\to k$ be a symmetric bilinear form, not necessarily nondegenerate. Put $Q(v)=B(v,v)$. Write $T_k(V)$ for the tensor algebra and $j:V\\to T_k(V)$ for its degree-one inclusion ([[def-tensor-algebra-of-a-vector-space]]). For each $v\\in V$, set $r_v=j(v)j(v)-Q(v)1$ and let $J_Q$ be the intersection of all two-sided ideals of $T_k(V)$ containing every $r_v$ ([[def-left-right-and-two-sided-ideal]]). This family is nonempty because it contains $T_k(V)$, and its intersection is a two-sided ideal; thus $J_Q$ is the smallest such ideal.\n\nDefine the **universal Clifford algebra** with the plus-$Q$ convention by\n\n$$\\mathrm{Cl}^{+}(V,Q):=T_k(V)/J_Q.$$\n\nThe quotient operations are induced from $T_k(V)$; the two-sided ideal condition makes multiplication of cosets well defined. Let $q_Q:T_k(V)\\to\\mathrm{Cl}^{+}(V,Q)$ be the quotient map, put $i_Q=q_Q\\circ j$, and write $\\bar v=i_Q(v)$. The defining relation is $\\bar v^{\\,2}=Q(v)1$. In this pair, $\\mathrm{Cl}(V,Q)$ abbreviates $\\mathrm{Cl}^{+}(V,Q)$ after this sign convention has been fixed. No nondegeneracy assumption is imposed.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-clifford-polarized-relations",
+          "source_section": "Statement",
+          "quote": "Let $k,V,B,Q$ be as in [[def-clifford-algebra-of-a-quadratic-space]], and let $\\bar v=i_Q(v)$. Then\n\n$$\\bar v\\bar w+\\bar w\\bar v=2B(v,w)1$$\n\nfor all $v,w\\in V$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-universal-property-of-clifford-algebra",
+          "source_section": "Statement",
+          "quote": "Let $k,V,B,Q$ be as in [[def-clifford-algebra-of-a-quadratic-space]], and let $A$ be a unital associative $k$-algebra. For every $k$-linear map $f:V\\to A$ satisfying $f(v)^2=Q(v)1_A$ for all $v\\in V$, there is a unique unital $k$-algebra homomorphism $\\bar f:\\mathrm{Cl}(V,Q)\\to A$ such that $\\bar f\\circ i_Q=f$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-exterior-algebra-of-a-finite-free-module",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $F$ be a finite free $R$-module\nwith ordered basis $e_1,\\ldots,e_n$. Define\n$\\bigwedge F=T_R(F)/(v\\otimes v:v\\in F)$, graded by tensor degree; write\n$e_I=e_{i_1}\\wedge\\cdots\\wedge e_{i_p}$ for\n$I=\\{i_1<\\cdots<i_p\\}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-exterior-algebra-basis-monomials",
+          "source_section": "Statement",
+          "quote": "For every $p$, the wedges $e_I$ with $|I|=p$ form an $R$-basis of $\\bigwedge^pF$; in particular it is zero for $p>n$.",
+          "uses": [
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-clifford-exterior-wedge-contraction-relations",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field of characteristic not $2$, let $V$ be a finite-dimensional $k$-vector space, and let $B:V\\times V\\to k$ be symmetric bilinear, possibly degenerate. Set $Q(v)=B(v,v)$ and let $\\Lambda V$ be the exterior algebra of the finite free $k$-module $V$ ([[def-exterior-algebra-of-a-finite-free-module]]). Define $\\epsilon_v(\\omega)=v\\wedge\\omega$ and, on decomposable wedges,\n\n$$\\iota_v(w_1\\wedge\\cdots\\wedge w_r)=\\sum_{j=1}^r(-1)^{j-1}B(v,w_j)\\,w_1\\wedge\\cdots\\wedge\\widehat{w_j}\\wedge\\cdots\\wedge w_r,$$\n\nwith $\\iota_v(1)=0$. Then $\\iota_v$ is well defined and $k$-linear, and the operators $c(v)=\\epsilon_v+\\iota_v$ satisfy $c(v)^2=Q(v)I_{\\Lambda V}$ for every $v\\in V$, where $I_{\\Lambda V}$ is the identity map on $\\Lambda V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-universal-property-of-the-tensor-algebra",
+          "source_section": "Statement",
+          "quote": "If $A$ is a unital associative $k$-algebra, every linear map $f:V\\to A$\nextends uniquely to a unital $k$-algebra homomorphism\n$\\widehat f:T(V)\\to A$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The square and polarized relations permit adjacent swaps and square reductions.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "Well-founded reduction proves the ordered square-free words span.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The exterior-action representation sends each length-r ordered word on 1 to its distinct top-degree wedge.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "A maximal-length relation contradicts independence of the exterior basis, proving independence of ordered Clifford words.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "The ordered-word basis restricts to a basis of every filtration piece.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "d-3.2",
+          "claim": "Degree-one symbols define a graded algebra map from the exterior quotient to the associated graded algebra.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F7",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "d-3.3",
+          "claim": "The map sends one basis to the other degree by degree, hence is an isomorphism.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "The basis cardinality is 2^n and the filtration identification is proved, including dimension zero.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 2.2, 5.1, and 6.1 include n=0: the empty word is the basis 1 and the associated graded is k in degree zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For Q=0 the contraction in F6 is zero; steps 1.1, 4.1, and 5.1 still give the exterior action and associated graded identification."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 apply to n=1 and yield the two words 1 and e_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows degenerate B and steps 1.1-5.1 use no diagonalization or nondegeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The n=0 and filtration degrees are discrete and explicitly included in6.1; no real endpoint limit is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1-5.1 use the ordered basis fixed in the Given clause; no choice axiom or selection from a family occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proofs2.1,2.2 establish an ordered basis directly; the equivalent monomial descriptions are not a biconditional criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proofs4.1,5.1 construct the associated-graded isomorphism by matched degree bases, not a reverse hypothesis."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read all eight steps and seven exact dependencies, including the polarization proof and published exterior-basis determinant proof. The previously checked linear wedge-plus-contraction map factors through Cl into End(Lambda V). Its action on 1 has top component the correctly ordered wedge; every contraction reduces final degree by two relative to all-wedge terms. Word reductions decrease the lexicographic natural pair (length,inversions), including repeated adjacent indices after sorting; hence spanning terminates without a confluence assumption. Applying the representation to a finite relation and taking its greatest degree proves independence from the exterior basis. Reductions respect word-length bounds, giving a basis for each F_m. F_p F_q is contained in F_(p+q); the degree-one square vanishes in F_2/F_1, so the tensor map descends through the exterior ideal. Matching bases prove the map is an isomorphism in every degree, including degree zero, m>n and n=0. The supplied ordered basis uses no arbitrary AC, and no form invertibility or diagonalization is invoked. ABS Part I section 1 (1.4) states the filtered exterior/basis result; local proof supplies the full justification. No reader/refuter findings."
+      }
+    },
+    "ex-one-dimensional-clifford-algebra": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-clifford-pbw-basis-and-associated-graded",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field of characteristic not $2$, let $V$ be finite-dimensional of dimension $n$, and let $B$ be any symmetric bilinear form on $V$, possibly degenerate; put $Q(v)=B(v,v)$. Fix an ordered basis $e_1,\\ldots,e_n$. Then\n\n$$1,\\qquad \\bar e_{i_1}\\cdots\\bar e_{i_r}\\quad(1\\le i_1<\\cdots<i_r\\le n)$$\n\nis a $k$-basis of $\\mathrm{Cl}(V,Q)$, so $\\dim_k\\mathrm{Cl}(V,Q)=2^n$. Give $\\mathrm{Cl}(V,Q)$ the word-length filtration $F_{-1}=0$ and, for $m\\ge0$, let $F_m$ be the span of products of at most $m$ canonical generators. The natural graded algebra map\n\n$$\\Lambda V\\longrightarrow\\operatorname{gr}_F\\mathrm{Cl}(V,Q)=\\bigoplus_{m\\ge0}F_m/F_{m-1}$$\n\nthat sends $v\\in V$ to the degree-one class of $\\bar v$ is an isomorphism, where the graded product is induced by $F_pF_q\\subseteq F_{p+q}$. No nondegeneracy hypothesis is needed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-clifford-algebra-of-a-quadratic-space",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field with $\\operatorname{char}(k)\\ne2$, let $V$ be a finite-dimensional $k$-vector space, and let $B:V\\times V\\to k$ be a symmetric bilinear form, not necessarily nondegenerate. Put $Q(v)=B(v,v)$. Write $T_k(V)$ for the tensor algebra and $j:V\\to T_k(V)$ for its degree-one inclusion ([[def-tensor-algebra-of-a-vector-space]]). For each $v\\in V$, set $r_v=j(v)j(v)-Q(v)1$ and let $J_Q$ be the intersection of all two-sided ideals of $T_k(V)$ containing every $r_v$ ([[def-left-right-and-two-sided-ideal]]). This family is nonempty because it contains $T_k(V)$, and its intersection is a two-sided ideal; thus $J_Q$ is the smallest such ideal.\n\nDefine the **universal Clifford algebra** with the plus-$Q$ convention by\n\n$$\\mathrm{Cl}^{+}(V,Q):=T_k(V)/J_Q.$$\n\nThe quotient operations are induced from $T_k(V)$; the two-sided ideal condition makes multiplication of cosets well defined. Let $q_Q:T_k(V)\\to\\mathrm{Cl}^{+}(V,Q)$ be the quotient map, put $i_Q=q_Q\\circ j$, and write $\\bar v=i_Q(v)$. The defining relation is $\\bar v^{\\,2}=Q(v)1$. In this pair, $\\mathrm{Cl}(V,Q)$ abbreviates $\\mathrm{Cl}^{+}(V,Q)$ after this sign convention has been fixed. No nondegeneracy assumption is imposed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "In dimension one the PBW basis is {1,e} and the generator squares to a.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "Bilinearity determines products; at a=0 the basis vector is a nonzero nilpotent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example has a one-dimensional vector space, not the zero-dimensional boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At a=0, steps 1.1-2.1 give the nonzero basis element e with e^2=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The full one-dimensional example is handled in steps 1.1-2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The coefficient a=0 is degenerate and is explicitly covered by step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The coefficient a is algebraic data and no interval endpoint is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 use the generator e supplied in the Given clause and no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-zero-quadratic-clifford-algebra-is-exterior": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-clifford-algebra-of-a-quadratic-space",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field with $\\operatorname{char}(k)\\ne2$, let $V$ be a finite-dimensional $k$-vector space, and let $B:V\\times V\\to k$ be a symmetric bilinear form, not necessarily nondegenerate. Put $Q(v)=B(v,v)$. Write $T_k(V)$ for the tensor algebra and $j:V\\to T_k(V)$ for its degree-one inclusion ([[def-tensor-algebra-of-a-vector-space]]). For each $v\\in V$, set $r_v=j(v)j(v)-Q(v)1$ and let $J_Q$ be the intersection of all two-sided ideals of $T_k(V)$ containing every $r_v$ ([[def-left-right-and-two-sided-ideal]]). This family is nonempty because it contains $T_k(V)$, and its intersection is a two-sided ideal; thus $J_Q$ is the smallest such ideal.\n\nDefine the **universal Clifford algebra** with the plus-$Q$ convention by\n\n$$\\mathrm{Cl}^{+}(V,Q):=T_k(V)/J_Q.$$\n\nThe quotient operations are induced from $T_k(V)$; the two-sided ideal condition makes multiplication of cosets well defined. Let $q_Q:T_k(V)\\to\\mathrm{Cl}^{+}(V,Q)$ be the quotient map, put $i_Q=q_Q\\circ j$, and write $\\bar v=i_Q(v)$. The defining relation is $\\bar v^{\\,2}=Q(v)1$. In this pair, $\\mathrm{Cl}(V,Q)$ abbreviates $\\mathrm{Cl}^{+}(V,Q)$ after this sign convention has been fixed. No nondegeneracy assumption is imposed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-exterior-algebra-of-a-finite-free-module",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring and let $F$ be a finite free $R$-module\nwith ordered basis $e_1,\\ldots,e_n$. Define\n$\\bigwedge F=T_R(F)/(v\\otimes v:v\\in F)$, graded by tensor degree; write\n$e_I=e_{i_1}\\wedge\\cdots\\wedge e_{i_p}$ for\n$I=\\{i_1<\\cdots<i_p\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-clifford-pbw-basis-and-associated-graded",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field of characteristic not $2$, let $V$ be finite-dimensional of dimension $n$, and let $B$ be any symmetric bilinear form on $V$, possibly degenerate; put $Q(v)=B(v,v)$. Fix an ordered basis $e_1,\\ldots,e_n$. Then\n\n$$1,\\qquad \\bar e_{i_1}\\cdots\\bar e_{i_r}\\quad(1\\le i_1<\\cdots<i_r\\le n)$$\n\nis a $k$-basis of $\\mathrm{Cl}(V,Q)$, so $\\dim_k\\mathrm{Cl}(V,Q)=2^n$. Give $\\mathrm{Cl}(V,Q)$ the word-length filtration $F_{-1}=0$ and, for $m\\ge0$, let $F_m$ be the span of products of at most $m$ canonical generators. The natural graded algebra map\n\n$$\\Lambda V\\longrightarrow\\operatorname{gr}_F\\mathrm{Cl}(V,Q)=\\bigoplus_{m\\ge0}F_m/F_{m-1}$$\n\nthat sends $v\\in V$ to the degree-one class of $\\bar v$ is an isomorphism, where the graded product is induced by $F_pF_q\\subseteq F_{p+q}$. No nondegeneracy hypothesis is needed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-exterior-algebra-basis-monomials",
+          "source_section": "Statement",
+          "quote": "For every $p$, the wedges $e_I$ with $|I|=p$ form an $R$-basis of $\\bigwedge^pF$; in particular it is zero for $p>n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "When Q=0, the Clifford and exterior ideals coincide and the identity on the tensor algebra induces inverse quotient isomorphisms.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "The agreed increasing square-free monomials give the stated bases, including the empty basis case.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 states that for n=0 both ordered bases consist only of 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example is Q=0, treated by the equality of ideals in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, steps 1.1-2.1 identify the common basis {1,e_1}."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For every nonzero V the zero form is degenerate, and steps 1.1-2.1 require no nondegeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Q is fixed identically zero; verification1.1 identifies equal quotient presentations and2.1 covers n=0, with no real parameter approaching an endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 use the ordered basis fixed in the Given clause; no selection from a family occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example contains no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Read Example, Given, all four facts and both verification steps after completing the supplier risk reviews. At Q=0 the Clifford and exterior definitions have exactly the same square-generated two-sided ideal in the same tensor algebra. Both displayed maps on cosets are representative-independent inverse unital algebra maps, so canonicity does not require a basis choice. The PBW and exterior-basis suppliers give the asserted common square-free basis; n=0 yields k with basis 1. For V nonzero, every vector is radical for B=0, so the degeneracy caveat is exact; the zero-dimensional form is not asserted degenerate. Characteristic not 2 is provided by Given and the Clifford-definition dependency. No extra choice or nondegeneracy assumption and no reader/refuter findings."
+      }
+    },
+    "cex-clifford-algebra-need-not-be-semisimple": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-clifford-pbw-basis-and-associated-graded",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field of characteristic not $2$, let $V$ be finite-dimensional of dimension $n$, and let $B$ be any symmetric bilinear form on $V$, possibly degenerate; put $Q(v)=B(v,v)$. Fix an ordered basis $e_1,\\ldots,e_n$. Then\n\n$$1,\\qquad \\bar e_{i_1}\\cdots\\bar e_{i_r}\\quad(1\\le i_1<\\cdots<i_r\\le n)$$\n\nis a $k$-basis of $\\mathrm{Cl}(V,Q)$, so $\\dim_k\\mathrm{Cl}(V,Q)=2^n$. Give $\\mathrm{Cl}(V,Q)$ the word-length filtration $F_{-1}=0$ and, for $m\\ge0$, let $F_m$ be the span of products of at most $m$ canonical generators. The natural graded algebra map\n\n$$\\Lambda V\\longrightarrow\\operatorname{gr}_F\\mathrm{Cl}(V,Q)=\\bigoplus_{m\\ge0}F_m/F_{m-1}$$\n\nthat sends $v\\in V$ to the degree-one class of $\\bar v$ is an isomorphism, where the graded product is induced by $F_pF_q\\subseteq F_{p+q}$. No nondegeneracy hypothesis is needed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-clifford-algebra-of-a-quadratic-space",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field with $\\operatorname{char}(k)\\ne2$, let $V$ be a finite-dimensional $k$-vector space, and let $B:V\\times V\\to k$ be a symmetric bilinear form, not necessarily nondegenerate. Put $Q(v)=B(v,v)$. Write $T_k(V)$ for the tensor algebra and $j:V\\to T_k(V)$ for its degree-one inclusion ([[def-tensor-algebra-of-a-vector-space]]). For each $v\\in V$, set $r_v=j(v)j(v)-Q(v)1$ and let $J_Q$ be the intersection of all two-sided ideals of $T_k(V)$ containing every $r_v$ ([[def-left-right-and-two-sided-ideal]]). This family is nonempty because it contains $T_k(V)$, and its intersection is a two-sided ideal; thus $J_Q$ is the smallest such ideal.\n\nDefine the **universal Clifford algebra** with the plus-$Q$ convention by\n\n$$\\mathrm{Cl}^{+}(V,Q):=T_k(V)/J_Q.$$\n\nThe quotient operations are induced from $T_k(V)$; the two-sided ideal condition makes multiplication of cosets well defined. Let $q_Q:T_k(V)\\to\\mathrm{Cl}^{+}(V,Q)$ be the quotient map, put $i_Q=q_Q\\circ j$, and write $\\bar v=i_Q(v)$. The defining relation is $\\bar v^{\\,2}=Q(v)1$. In this pair, $\\mathrm{Cl}(V,Q)$ abbreviates $\\mathrm{Cl}^{+}(V,Q)$ after this sign convention has been fixed. No nondegeneracy assumption is imposed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-left-right-and-two-sided-ideal",
+          "source_section": "Definition",
+          "quote": "Left, right and two-sided ideals.\n\nLet $R$ be a ring. An additive subgroup $I\\le(R,+)$ is a **left ideal** when\n$r i\\in I$ for every $r\\in R$ and $i\\in I$, and a **right ideal** when\n$i r\\in I$ for every such $r,i$.  A **two-sided ideal**, written\n$I\\mathrel{\\trianglelefteq}R$, is both a left and a right ideal.  In a\ncommutative ring these three notions agree.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The zero one-dimensional Clifford algebra has basis 1,epsilon with epsilon nonzero and square zero; its regular module has a nonzero proper submodule.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "A semisimple two-dimensional module would have one simple two-dimensional summand or two one-dimensional summands; the first contradicts step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The nilpotent generator acts trivially on each one-dimensional summand but nontrivially on the regular module, excluding the second case.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a one-dimensional space rather than the empty space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The witness has Q(e)=0 and epsilon^2=0 by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample is one-dimensional and its regular module is analyzed in steps 1.1-3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The witness form is zero and degenerate; steps 1.1-3.1 exhibit the failure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The witness is the fixed algebra k[epsilon]/epsilon squared; proofs1.1–3.1 use nilpotence and dimensions, not a real interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1 use the explicit witness and its two-dimensional basis; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    }
+  }
+}

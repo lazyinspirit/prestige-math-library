@@ -1,0 +1,957 @@
+{
+  "version": 1,
+  "scope": [
+    "prop-coordinate-jacobi-and-schouten-criterion-for-poisson-bivectors",
+    "prop-first-order-star-commutator-is-a-poisson-bracket",
+    "prop-hochschild-cochains-form-a-differential-graded-lie-algebra",
+    "thm-higher-order-hochschild-obstruction-class",
+    "prop-formal-equivalence-changes-first-order-by-a-hochschild-coboundary",
+    "cex-nonpoisson-bivector-cannot-be-a-first-order-star-commutator",
+    "ex-moyal-star-product-for-a-constant-poisson-tensor"
+  ],
+  "contracts": {
+    "prop-coordinate-jacobi-and-schouten-criterion-for-poisson-bivectors": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-general-poisson-bivector-and-bracket",
+          "source_section": "Definition",
+          "quote": "For smooth functions $f,g$ on a coordinate domain, the associated local bracket is $$\\{f,g\\}_{\\pi,x}:=\\sum_{i,j=1}^n\\pi_x^{ij}\\, \\frac{\\partial f}{\\partial x^i}\\frac{\\partial g}{\\partial x^j}.$$ A bivector datum is",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-differentials-of-smooth-maps",
+          "source_section": "Statement",
+          "quote": "If $F:M\\to N$ and $G:N\\to P$ are smooth, then $d(G\\circ F)_p=dG_{F(p)}\\circ dF_p$ for every $p\\in",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-general-poisson-bivector-and-bracket",
+          "source_section": "Definition",
+          "quote": "For $\\pi=\\tfrac12\\pi^{ij}\\partial_i\\wedge\\partial_j$, the local components of its Schouten–Nijenhuis self-bracket are $[\\pi,\\pi]_{SN}^{ijk}:=2J_\\pi^{ijk}$. In this pair, $[\\pi,\\pi]_{SN}=0$ means that these coefficients",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1_1",
+          "step": "1.1",
+          "claim": "The bivector transition law makes the coordinate bracket independent of chart.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1_2",
+          "step": "1.2",
+          "claim": "The bracket is a biderivation in each argument.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_1",
+          "step": "2.1",
+          "claim": "The Jacobiator reduces to the coordinate coefficients J^{ijk}.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_2",
+          "step": "2.2",
+          "claim": "Jacobi is equivalent to vanishing of J^{ijk}, and hence to the stated Schouten self-bracket criterion.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns a specified algebra or manifold and has no empty-index construction; this boundary is outside the stated input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 make the bracket and J coefficients vanish when pi=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 gives the biderivation identity; a derivation annihilates the unit by applying it to 1·1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement imposes no nondegeneracy condition; the coordinate calculations in steps 1.1–2.2 use only skewness and the transition law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and proof use explicit coordinate, coefficient, or insertion formulas; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 proves vanishing of J implies Jacobi."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 tests Jacobi on coordinate functions to force each J coefficient to vanish."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No finite-smoke check applies; the proof establishes the formulas symbolically for arbitrary inputs."
+    },
+    "prop-first-order-star-commutator-is-a-poisson-bracket": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-formal-associative-deformation-of-a-commutative-algebra",
+          "source_section": "Definition",
+          "quote": "It is required to be associative and unital with unit $1$; equivalently, $B_r(1,f)=B_r(f,1)=0$ for $r\\geq1$. Reduction modulo $\\hbar$ is the original product $m$. This definition alone asserts no differential-order",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-general-poisson-bivector-and-bracket",
+          "source_section": "Definition",
+          "quote": "A **real Poisson algebra** is a commutative unital algebra over $\\mathbb R$ equipped with an $\\mathbb R$-bilinear bracket $\\{\\ ,\\ \\}$ that is skew-symmetric, satisfies the Jacobi identity, and is a derivation in each",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1_1",
+          "step": "1.1",
+          "claim": "The commutator of an associative product satisfies Jacobi.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1_2",
+          "step": "1.2",
+          "claim": "The leading commutator coefficient beta satisfies Jacobi.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_1",
+          "step": "2.1",
+          "claim": "The leading commutator coefficient beta satisfies the derivation rule.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_2",
+          "step": "2.2",
+          "claim": "Bilinearity, skewness, Jacobi, and the derivation rule make beta a Poisson bracket.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns a specified algebra or manifold and has no empty-index construction; this boundary is outside the stated input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If B_1 has zero skew part then beta is the zero bracket, and steps 1.2–2.2 verify its Poisson identities."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 prove a derivation bracket, which annihilates the unit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No rank or degeneracy parameter occurs in this algebraic claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and proof use explicit coordinate, coefficient, or insertion formulas; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No finite-smoke check applies; the proof establishes the formulas symbolically for arbitrary inputs."
+    },
+    "prop-hochschild-cochains-form-a-differential-graded-lie-algebra": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hh-cochain-complex-and-gerstenhaber-bracket",
+          "source_section": "Definition",
+          "quote": "Gerstenhaber bracket** by $$[\\phi,\\psi]_G:=\\phi\\circ\\psi- (-1)^{(p-1)(q-1)}\\psi\\circ\\phi.$$ The shifted degree of a $p$-cochain is $p-1$. These formulas fix all insertion signs used in the local deformation equations",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1_1",
+          "step": "1.1",
+          "claim": "The signed insertion operation obeys the graded pre-Lie associator identity.",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1_2",
+          "step": "1.2",
+          "claim": "The Gerstenhaber bracket is graded skew and satisfies graded Jacobi.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_1",
+          "step": "2.1",
+          "claim": "Associativity makes [m,m] zero and gives the shifted differential degree one.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_2",
+          "step": "2.2",
+          "claim": "Graded Jacobi gives square-zero differential and the signed differential derivation rule.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3_1",
+          "step": "3.1",
+          "claim": "The shifted differential equals the signed standard Hochschild differential.",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3_2",
+          "step": "3.2",
+          "claim": "Normalized multidifferential cochains are closed under the differential and insertion bracket.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns a specified algebra or manifold and has no empty-index construction; this boundary is outside the stated input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 show the insertion and differential formulas send the zero cochain to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.2 explicitly treats a tuple containing the unit and proves normalized closure."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No rank or degeneracy parameter occurs in this algebraic claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and proof use explicit coordinate, coefficient, or insertion formulas; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No finite-smoke check applies; the proof establishes the formulas symbolically for arbitrary inputs."
+    },
+    "thm-higher-order-hochschild-obstruction-class": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-formal-associative-deformation-of-a-commutative-algebra",
+          "source_section": "Definition",
+          "quote": "For each fixed $N$ the inner sum is finite, so this formula defines a coefficientwise-continuous, $\\mathbb R\\llbracket\\hbar\\rrbracket$-bilinear product. It is required to be associative and unital with unit $1$;",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hh-cochain-complex-and-gerstenhaber-bracket",
+          "source_section": "Definition",
+          "quote": "The normalized multidifferential cochains are the subcomplex used for differential star-product obstructions; closure under $\\delta$ and insertion is proved in the cited proposition. For $r\\geq2$,",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-hochschild-cochains-form-a-differential-graded-lie-algebra",
+          "source_section": "Statement",
+          "quote": "the bracket has degree zero and satisfies graded skew-symmetry and Jacobi; $\\partial$ has degree $+1$, squares to zero, and obeys $$\\partial[\\phi,\\psi]_G=[\\partial\\phi,\\psi]_G +(-1)^{|\\phi|}[\\phi,\\partial\\psi]_G.$$ For",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1_1",
+          "step": "1.1",
+          "claim": "The order-n associator coefficient is O_n and equals one half of the Gerstenhaber bracket sum.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1_2",
+          "step": "1.2",
+          "claim": "The Bianchi identity implies the leading obstruction coefficient is closed under the shifted differential.",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1_3",
+          "step": "1.3",
+          "claim": "O_n is a normalized multidifferential Hochschild 3-cocycle.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_1",
+          "step": "2.1",
+          "claim": "Adding hbar^n B_n changes the order-n associator by -delta B_n.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_2",
+          "step": "2.2",
+          "claim": "Extension through order n is equivalent to delta B_n=O_n, hence to vanishing of the obstruction class.",
+          "inputs": [
+            "F2",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns a specified algebra or manifold and has no empty-index construction; this boundary is outside the stated input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When all B_i vanish, O_n=0 and B_n=0 satisfies the extension equation in steps 2.1–2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 verifies that O_n vanishes whenever any argument is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No rank or degeneracy parameter occurs in this algebraic claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and proof use explicit coordinate, coefficient, or insertion formulas; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 derives extension implies delta B_n=O_n and hence a zero obstruction class."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 uses a vanishing class to choose a normalized multidifferential B_n with delta B_n=O_n."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No finite-smoke check applies; the proof establishes the formulas symbolically for arbitrary inputs."
+    },
+    "prop-formal-equivalence-changes-first-order-by-a-hochschild-coboundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-formal-star-product-on-a-poisson-manifold",
+          "source_section": "Definition",
+          "quote": "A formal associative deformation $\\star$ of $A$ from [[def-formal-associative-deformation-of-a-commutative-algebra]] is a **differential star product quantizing $\\pi$** if every coefficient $B_r$ is bidifferential and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-formal-equivalence-of-star-products",
+          "source_section": "Definition",
+          "quote": "They are **formally gauge equivalent** if there is an invertible $\\mathbb R\\llbracket\\hbar\\rrbracket$-linear map $T:A\\llbracket\\hbar\\rrbracket\\to A\\llbracket\\hbar\\rrbracket$ of the form",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hh-cochain-complex-and-gerstenhaber-bracket",
+          "source_section": "Definition",
+          "quote": "The Hochschild differential $\\delta:C^p\\to C^{p+1}$ is $$\\begin{aligned} (\\delta\\phi)(a_1,\\ldots,a_{p+1})={}&a_1\\phi(a_2,\\ldots,a_{p+1})\\\\ &+\\sum_{i=1}^{p}(-1)^i\\phi(a_1,\\ldots,a_{i-1},a_i",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-hochschild-cochains-form-a-differential-graded-lie-algebra",
+          "source_section": "Statement",
+          "quote": "In particular, the standard Hochschild cochains form a cochain complex. When $A=C^\\infty(M,\\mathbb R)$, the normalized multidifferential cochains are closed under both $\\delta$ and $[\\ ,\\ ]_G$. Here a differential",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1_1",
+          "step": "1.1",
+          "claim": "Associativity makes each first cochain a normalized Hochschild 2-cocycle.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1_2",
+          "step": "1.2",
+          "claim": "The first coefficient of the inverse gauge map is -D_1.",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_1",
+          "step": "2.1",
+          "claim": "The gauge formula changes B_1 by the stated Hochschild coboundary.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_2",
+          "step": "2.2",
+          "claim": "The coboundary is symmetric on a commutative algebra, so the skew parts and cohomology classes agree.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns a specified algebra or manifold and has no empty-index construction; this boundary is outside the stated input family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or zero-domain case occurs in the gauge-equivalence statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "F2 requires D_1(1)=0, and step 2.2 computes the resulting normalized coboundary and its symmetry."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No rank or degeneracy parameter occurs in this algebraic claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and proof use explicit coordinate, coefficient, or insertion formulas; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "No finite-smoke check applies; the proof establishes the formulas symbolically for arbitrary inputs."
+    },
+    "cex-nonpoisson-bivector-cannot-be-a-first-order-star-commutator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-general-poisson-bivector-and-bracket",
+          "source_section": "Definition",
+          "quote": "For smooth functions $f,g$ on a coordinate domain, the associated local bracket is $$\\{f,g\\}_{\\pi,x}:=\\sum_{i,j=1}^n\\pi_x^{ij}\\, \\frac{\\partial f}{\\partial x^i}\\frac{\\partial g}{\\partial x^j}.$$ A bivector datum is",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-coordinate-jacobi-and-schouten-criterion-for-poisson-bivectors",
+          "source_section": "Statement",
+          "quote": "exactly when, in every coordinate chart, $$J^{ijk}:=\\pi^{i\\ell}\\partial_\\ell\\pi^{jk} +\\pi^{j\\ell}\\partial_\\ell\\pi^{ki} +\\pi^{k\\ell}\\partial_\\ell\\pi^{ij}=0.$$ With the convention",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-first-order-star-commutator-is-a-poisson-bracket",
+          "source_section": "Statement",
+          "quote": "Then $\\beta$ is a real Poisson-algebra bracket on $A$. Thus the first-order skew part of an associative deformation necessarily satisfies the Lie and biderivation axioms; this is a necessary compatibility statement, not",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1_1",
+          "step": "1.1",
+          "claim": "The specified smooth bivector gives the displayed coordinate brackets.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "d1_2",
+          "step": "1.2",
+          "claim": "Its Jacobiator is nonzero at (1,0,0), so it is not Poisson.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_1",
+          "step": "2.1",
+          "claim": "The first-order obstruction rules out this bivector as an associative deformation commutator.",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns a specified algebra or manifold and has no empty-index construction; this boundary is outside the stated input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The bivector vanishes at the origin but step 1.2 supplies a separate nonzero Jacobiator witness at (1,0,0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coordinate formula in step 1.1 makes every constant function bracket to zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example is allowed to have varying rank; the failure is the nonzero Jacobiator in step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and proof use explicit coordinate, coefficient, or insertion formulas; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "jacobiator-witness-at-one-zero-zero",
+          "claim": "The coordinate Jacobiator is nonzero at (x,y,z)=(1,0,0).",
+          "result": "Step 1.2 evaluates x^2-y^2 to 1."
+        }
+      ],
+      "finite_check_disposition": "The finite checks record explicit parameter or coordinate boundary cases proved in the cited verification steps."
+    },
+    "ex-moyal-star-product-for-a-constant-poisson-tensor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-general-poisson-bivector-and-bracket",
+          "source_section": "Definition",
+          "quote": "For smooth functions $f,g$ on a coordinate domain, the associated local bracket is $$\\{f,g\\}_{\\pi,x}:=\\sum_{i,j=1}^n\\pi_x^{ij}\\, \\frac{\\partial f}{\\partial x^i}\\frac{\\partial g}{\\partial x^j}.$$ A bivector datum is",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-coordinate-jacobi-and-schouten-criterion-for-poisson-bivectors",
+          "source_section": "Statement",
+          "quote": "$J^{ijk}:=\\pi^{i\\ell}\\partial_\\ell\\pi^{jk} +\\pi^{j\\ell}\\partial_\\ell\\pi^{ki} +\\pi^{k\\ell}\\partial_\\ell\\pi^{ij}=0.$$ With the convention $\\pi=\\tfrac12\\pi^{ij}\\partial_i\\wedge\\partial_j$, the Schouten–Nijenhuis",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-formal-associative-deformation-of-a-commutative-algebra",
+          "source_section": "Definition",
+          "quote": "For each fixed $N$ the inner sum is finite, so this formula defines a coefficientwise-continuous, $\\mathbb R\\llbracket\\hbar\\rrbracket$-bilinear product. It is required to be associative and unital with unit $1$;",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-formal-star-product-on-a-poisson-manifold",
+          "source_section": "Definition",
+          "quote": "is a **differential star product quantizing $\\pi$** if every coefficient $B_r$ is bidifferential and $$B_1(f,g)-B_1(g,f)=\\{f,g\\}_{\\pi}\\qquad(f,g\\in A).$$ Here **bidifferential** means that in every coordinate chart each",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-hamiltonian-vector-field-and-hamiltonian-function",
+          "source_section": "Definition",
+          "quote": "For $H\\in C^\\infty(M)$, its **Hamiltonian vector field** is the vector field $X_H$ determined by the library sign convention $$\\iota_{X_H}\\omega=dH.$$ A vector field $X$ is **Hamiltonian** if $\\iota_X\\omega=dH$ for some",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-poisson-bracket-on-a-symplectic-manifold",
+          "source_section": "Definition",
+          "quote": "$\\{F,G\\}:=\\omega(X_F,X_G)=dF(X_G)=X_G(F)=-X_F(G).$$ All four formulas use $\\iota_{X_H}\\omega=dH$. In particular, the order in the observable formula is important: evolution by $H$ differentiates $F$ as",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-symplectic-form-and-symplectic-manifold",
+          "source_section": "Definition",
+          "quote": "A **symplectic form** on a smooth manifold $M$ is a smooth two-form $\\omega$ such that 1. $d\\omega=0$, and 2. $(T_pM,\\omega_p)$ is a [[def-symplectic-vector-space|symplectic vector space]] for every $p\\in M$. The pair",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1_1",
+          "step": "1.1",
+          "claim": "A constant skew tensor satisfies the coordinate Jacobi criterion, including degenerate ranks.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1_2",
+          "step": "1.2",
+          "claim": "The canonical form is symplectic and its bracket sign matches the library convention.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2_1",
+          "step": "2.1",
+          "claim": "The exponential coefficients are finite bidifferential maps and preserve the unit.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "d2_2",
+          "step": "2.2",
+          "claim": "Commuting tensor-factor operators prove coefficientwise associativity.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3_1",
+          "step": "3.1",
+          "claim": "The first skew coefficient is the prescribed constant Poisson bracket, with zero and degenerate cases included.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns a specified algebra or manifold and has no empty-index construction; this boundary is outside the stated input family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 states that Pi=0 makes every P_ab vanish and the product is ordinary multiplication."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 shows every positive-order term vanishes if an input is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 require no rank condition and explicitly include zero and other degenerate tensors."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and proof use explicit coordinate, coefficient, or insertion formulas; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "zero-poisson-tensor",
+          "claim": "The zero tensor gives the undeformed commutative product.",
+          "result": "Step 3.1 sets every P_ab to zero, so f star g=fg."
+        }
+      ],
+      "finite_check_disposition": "The finite checks record explicit parameter or coordinate boundary cases proved in the cited verification steps."
+    }
+  }
+}

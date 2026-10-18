@@ -1,0 +1,1746 @@
+[
+  {
+    "order": 232,
+    "id": "monotone-functions-and-discontinuities",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Monotone Functions, Discontinuities, and Continuity Sets",
+    "companion": "monotone-functions-and-discontinuities-examples",
+    "requires": [
+      "continuity-ivt-evt-and-uniform-continuity",
+      "cantor-set-baire-and-measure-zero",
+      "vector-spaces-and-subspaces",
+      "linear-independence-bases-and-dimension"
+    ],
+    "items": [
+      {
+        "id": "def-monotone-function",
+        "kind": "definition",
+        "title": "Nondecreasing, increasing (strictly increasing), nonincreasing, decreasing, monotone and strictly monotone real functions on a subset of $\\mathbb{R}$, with the dictionary to monotone sequences",
+        "deps": [
+          "def-complete-ordered-field",
+          "def-real-order",
+          "def-interval",
+          "def-monotone-sequence",
+          "def-sequence",
+          "def-ordered-field",
+          "def-injection-surjection-bijection"
+        ],
+        "statement": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) with its order\n([[def-real-order]]). Let $A \\subseteq \\mathbb{R}$ and let\n$f : A \\to \\mathbb{R}$. Then $f$ is:\n\n- **nondecreasing** when $f(x) \\le f(y)$ for all $x, y \\in A$ with $x \\le y$;\n- **increasing**, or *strictly increasing*, when $f(x) < f(y)$ for all\n  $x, y \\in A$ with $x < y$;\n- **nonincreasing** when $f(x) \\ge f(y)$ for all $x, y \\in A$ with $x \\le y$;\n- **decreasing**, or *strictly decreasing*, when $f(x) > f(y)$ for all\n  $x, y \\in A$ with $x < y$;\n- **monotone** when it is nondecreasing or nonincreasing;\n- **strictly monotone** when it is increasing or decreasing.\n\nThe naming follows the convention of [[def-monotone-sequence]], which is the\nconvention of this library throughout: *increasing* is the strict notion and\n*nondecreasing* the weak one.\n\n**An increasing function is nondecreasing, and a decreasing function is\nnonincreasing.** For $x \\le y$ either $x < y$, and then $f(x) < f(y)$, hence\n$f(x) \\le f(y)$; or $x = y$, and then $f(x) = f(y)$. The same argument with the\ninequalities reversed gives the second claim. So strictly monotone implies\nmonotone.\n\n**A strictly monotone function is injective**\n([[def-injection-surjection-bijection]]). Let $f$ be increasing and let\n$x, y \\in A$ with $x \\ne y$. By trichotomy either $x < y$, and then\n$f(x) < f(y)$, or $y < x$, and then $f(y) < f(x)$; in both cases\n$f(x) \\ne f(y)$. The decreasing case is the same argument. The converse fails,\nand the failure is not exotic: a continuous injection on an interval *is*\nstrictly monotone ([[thm-continuous-injection-on-an-interval-is-strictly-monotone]]),\nbut on a domain that is not an interval it need not be.\n\n**Negation exchanges the two directions.** For $g := -f$, that is\n$g(x) := -f(x)$, the four conditions above are exchanged in pairs: $f$ is\nnondecreasing exactly when $g$ is nonincreasing, and $f$ is increasing exactly\nwhen $g$ is decreasing, because $u \\le v$ holds exactly when $-v \\le -u$\n([[def-ordered-field]]). Several proofs below use this to reduce a nonincreasing\ncase to a nondecreasing one.\n\n**Monotone on a set, not at a point.** All six conditions are conditions on the\nwhole of $A$; unlike continuity ([[def-continuity-real]]) there is no pointwise\nversion, and none is used in this library. The domain $A$ is an arbitrary subset\nof $\\mathbb{R}$; where a result needs $A$ to be an interval\n([[def-interval]]) it says so, and the hypothesis is never decoration.\n\n### The dictionary to monotone sequences\n\nA sequence of reals is a function $x : \\mathbb{N} \\to \\mathbb{R}$\n([[def-sequence]]), and [[def-monotone-sequence]] calls it nondecreasing when\n$x_j \\le x_k$ for all $j \\le k$, increasing when $x_j < x_k$ for all $j < k$,\nand so on. Those are **the same four conditions as above**, read with the\nordered set $\\mathbb{N}$ in place of the ordered subset $A \\subseteq \\mathbb{R}$\nand with the comparison of indices in place of the comparison of arguments. So\nnothing new is introduced here for sequences, and the two vocabularies may be\nused interchangeably: the words *nondecreasing*, *increasing*, *nonincreasing*,\n*decreasing*, *monotone* and *strictly monotone* mean the corresponding\ncondition on the domain at hand.\n\nOne consequence is used repeatedly, and it has to be stated carefully because\ncomposition does **not** simply preserve the four words. Let $(x_k)$ be a\n**nondecreasing** sequence with $x_k \\in A$ for every $k$, so that $j \\le k$ gives\n$x_j \\le x_k$. Then:\n\n- if $f$ is nondecreasing, $(f(x_k))$ is nondecreasing, since $f(x_j) \\le f(x_k)$;\n- if $f$ is nonincreasing, $(f(x_k))$ is **nonincreasing**, since\n  $f(x_j) \\ge f(x_k)$.\n\nSo along a nondecreasing sequence the composite inherits the direction of $f$;\nand with $(x_k)$ increasing and $f$ increasing, $(f(x_k))$ is increasing, while\nwith $(x_k)$ increasing and $f$ decreasing, $(f(x_k))$ is decreasing.\n\n**Along a nonincreasing sequence the direction is reversed, not inherited.** If\n$(x_k)$ is nonincreasing and $f$ is nonincreasing, then $j \\le k$ gives\n$x_j \\ge x_k$ and hence $f(x_j) \\le f(x_k)$: the composite is **nondecreasing**.\nThe witness is $f(x) = -x$ on $A = \\mathbb{R}$ with $x_k = -k$, where both $f$ and\n$(x_k)$ are decreasing and $f(x_k) = k$ is increasing. Two order-reversing maps\ncompose to an order-preserving one, exactly as for the four words applied to\nfunctions.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Monotonic function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Monotonic_function"
+            },
+            {
+              "title": "Monotone Functions (Analysis WebNotes)",
+              "url": "https://mathcs.org/analysis/reals/cont/defs/monofun.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-classification-of-discontinuities",
+        "kind": "definition",
+        "title": "Discontinuity of $f$ at a point of its domain, and its classification: removable discontinuity, jump discontinuity and essential discontinuity, equivalently Rudin's discontinuities of the first and of the second kind",
+        "deps": [
+          "def-continuity-real",
+          "def-one-sided-limits",
+          "def-function-limit",
+          "def-limit-point-r",
+          "def-interval",
+          "thm-two-sided-limit-iff-both-one-sided"
+        ],
+        "statement": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$. Then\n$f$ is **discontinuous at $c$**, and $c$ is a **discontinuity of $f$**, when $f$\nis not continuous at $c$ ([[def-continuity-real]]). As in\n[[def-one-sided-limits]] write\n\n$$A^{-} := A \\cap (-\\infty, c), \\qquad A^{+} := A \\cap (c, \\infty)$$\n\n([[def-interval]]), and recall that $\\lim_{x \\to c^{-}} f(x)$ is defined only\nwhen $c$ is a limit point of $A^{-}$, and $\\lim_{x \\to c^{+}} f(x)$ only when\n$c$ is a limit point of $A^{+}$ ([[def-limit-point-r]]).\n\n**At an isolated point there is nothing to classify.** If $c$ is an isolated\npoint of $A$ ([[def-limit-point-r]]), so that $A \\cap N_{\\rho}(c) = \\{c\\}$ for\nsome real $\\rho > 0$, then $f$ is continuous at $c$: the $\\varepsilon$-$\\delta$\ncondition of [[def-continuity-real]] is satisfied by $\\delta := \\rho$, since the\nonly $x \\in A$ with $|x - c| < \\rho$ is $c$ itself and $|f(c) - f(c)| = 0$. So\nevery discontinuity is a limit point of $A$, and the classification below covers\nevery case that occurs.\n\n### Two-sided points\n\nSuppose $c$ is a limit point of **both** $A^{-}$ and $A^{+}$, so that both\none-sided limits are well posed. Say that $c$ is a discontinuity\n\n- **of the first kind** when both one-sided limits exist;\n- **of the second kind**, also called **essential**, when at least one of the two\n  one-sided limits fails to exist.\n\nA discontinuity of the first kind is further\n\n- **removable** when $\\lim_{x \\to c^{-}} f(x) = \\lim_{x \\to c^{+}} f(x)$; the\n  common value is then different from $f(c)$, for otherwise\n  [[thm-two-sided-limit-iff-both-one-sided]] would give\n  $\\lim_{x \\to c} f(x) = f(c)$ and $f$ would be continuous at $c$\n  ([[def-continuity-real]]);\n- a **jump** when $\\lim_{x \\to c^{-}} f(x) \\ne \\lim_{x \\to c^{+}} f(x)$; the\n  difference $\\lim_{x \\to c^{+}} f(x) - \\lim_{x \\to c^{-}} f(x)$ is then called\n  the **jump of $f$ at $c$**.\n\nThe three cases *removable*, *jump*, *essential* are mutually exclusive and\nexhaust the two-sided discontinuities of $f$: either both one-sided limits\nexist, and then they are equal or not, or one of them does not exist.\n\n**Removable is a name for what can be repaired.** If $c$ is a removable\ndiscontinuity with common one-sided value $L$, then the function agreeing with\n$f$ off $c$ and taking the value $L$ at $c$ is continuous at $c$, again by\n[[thm-two-sided-limit-iff-both-one-sided]] and [[def-continuity-real]]: changing\nthe single value $f(c)$ removes the discontinuity. No such repair is available at\na jump or at an essential discontinuity, since there the two-sided limit does not\nexist at all and no choice of value at $c$ can create it.\n\n### One-sided points\n\nIf $c$ is a limit point of exactly one of $A^{-}$ and $A^{+}$, only that side is\ndefined and only that side is used: $c$ is a discontinuity **of the first kind**\nwhen the one-sided limit on the side in question exists, and **of the second\nkind** otherwise. When it exists it is different from $f(c)$, since on such a\npoint the one-sided condition and the continuity condition are the same\ncondition; and there is no jump case, there being nothing to compare the value\nwith. The endpoints of an interval are the typical instance.\n\n**On the two vocabularies.** *First kind* and *second kind* are Rudin's terms and\nare recorded because the literature uses them; *removable*, *jump* and\n*essential* are the names used in the rest of this library. They name the same\nthree cases and no third classification is introduced.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Classification of discontinuities (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
+            },
+            {
+              "title": "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 4",
+              "url": "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-oscillation",
+        "kind": "definition",
+        "title": "The oscillation $\\omega_f(S) = \\sup\\{\\,|f(x) - f(y)| : x, y \\in S\\,\\}$ of $f$ on a set and the oscillation $\\omega_f(c) = \\inf_{\\delta > 0} \\omega_f(A \\cap N_\\delta(c))$ at a point, both taken in the extended reals",
+        "deps": [
+          "def-extended-reals",
+          "lem-extended-reals-complete",
+          "def-neighbourhood-r",
+          "def-bounded-set",
+          "def-infimum",
+          "lem-of-abs-value",
+          "lem-of-triangle-inequality",
+          "def-complete-ordered-field"
+        ],
+        "statement": "Let $A \\subseteq \\mathbb{R}$ and let $f : A \\to \\mathbb{R}$. All suprema and\ninfima below are taken in the extended real line\n$\\overline{\\mathbb{R}} = \\mathbb{R} \\cup \\{-\\infty, +\\infty\\}$\n([[def-extended-reals]]), where **every** subset has a least upper bound and a\ngreatest lower bound ([[lem-extended-reals-complete]]); no boundedness\nhypothesis on $f$ is therefore needed anywhere, and none is imposed.\n\n**Oscillation on a set.** For $S \\subseteq A$ put\n\n$$\\omega_f(S) \\;:=\\; \\sup\\{\\, |f(x) - f(y)| \\;:\\; x, y \\in S \\,\\} \\;\\in\\; \\overline{\\mathbb{R}} .$$\n\n**Oscillation at a point.** For $c \\in A$ put\n\n$$\\omega_f(c) \\;:=\\; \\inf\\{\\, \\omega_f(A \\cap N_\\delta(c)) \\;:\\; \\delta \\in \\mathbb{R},\\ \\delta > 0 \\,\\} \\;\\in\\; \\overline{\\mathbb{R}},$$\n\nwhere $N_\\delta(c) = (c - \\delta, c + \\delta)$ is the $\\delta$-neighbourhood of\n$c$ ([[def-neighbourhood-r]]).\n\nThe two uses of the symbol $\\omega_f$ are distinguished by their argument: a\nsubset of $A$ in the first, a point of $A$ in the second. Where confusion is\npossible the first is written $\\omega_f(S)$ with $S$ named as a set.\n\n### Both values are well posed; point oscillation and nonempty-set oscillation are nonnegative\n\n**The set in the first display is nonempty whenever $S$ is**, since $x = y \\in S$\ngives the value $|f(x) - f(x)| = 0$; so $\\omega_f(S) \\ge 0$ for nonempty $S$,\nand $\\omega_f(S) = \\sup \\varnothing = -\\infty$ for $S = \\varnothing$\n([[lem-extended-reals-complete]]). Only nonempty $S$ occurs below.\n\n**The set in the second display is nonempty**, since some real $\\delta > 0$\nexists, and each of its members is $\\ge 0$: for $c \\in A$ the set\n$A \\cap N_\\delta(c)$ contains $c$ itself, because $|c - c| = 0 < \\delta$, so it\nis nonempty and $\\omega_f(A \\cap N_\\delta(c)) \\ge 0$\n([[lem-of-abs-value]]). Hence $0$ is a lower bound of that set and\n\n$$0 \\;\\le\\; \\omega_f(c) \\;\\le\\; \\omega_f(A \\cap N_\\delta(c)) \\qquad \\text{for every real } \\delta > 0,$$\n\nthe second inequality because $\\omega_f(c)$ is a lower bound of the set of which\n$\\omega_f(A \\cap N_\\delta(c))$ is a member. In particular $\\omega_f(c)$ is never\n$-\\infty$.\n\n### Monotonicity, and the case of a bounded $f$\n\n**$\\omega_f$ is monotone under inclusion.** If $S \\subseteq T \\subseteq A$ then\nevery value $|f(x) - f(y)|$ with $x, y \\in S$ is also a value with $x, y \\in T$,\nso the first set of values is contained in the second and\n$\\omega_f(S) \\le \\omega_f(T)$: a supremum of a subset is at most the supremum of\nthe set. Consequently $\\delta \\mapsto \\omega_f(A \\cap N_\\delta(c))$ is\nnondecreasing in $\\delta$, since $\\delta \\le \\delta'$ gives\n$N_\\delta(c) \\subseteq N_{\\delta'}(c)$ ([[def-neighbourhood-r]]).\n\n**When $f$ is bounded, nonempty-set and point oscillations are real.** Suppose\nthere is a real $M$ with $|f(x)| \\le M$ for every $x \\in A$\n([[def-bounded-set]]). Then for $x, y \\in A$,\n\n$$|f(x) - f(y)| \\;\\le\\; |f(x)| + |f(y)| \\;\\le\\; 2M$$\n\n([[lem-of-triangle-inequality]], [[lem-of-abs-value]]), so $\\omega_f(S) \\le 2M$\nfor every $S \\subseteq A$. If\n$S$ is nonempty, $\\omega_f(S)$ is a real number in $[0,2M]$, and every point\noscillation is also a real number in $[0,2M]$: the supremum of a nonempty\nsubset of $\\mathbb{R}$ that is bounded above in $\\mathbb{R}$ is the real\nsupremum ([[lem-extended-reals-complete]], [[def-complete-ordered-field]],\n[[def-infimum]]). The convention $\\omega_f(\\varnothing)=-\\infty$ remains the\nsingle empty-set exception. Apart from that exception, an infinite extended\nvalue can occur only when $f$ is unbounded.\n\n**The notation.** The letter is $\\omega$ throughout this library, never\n\"$\\operatorname{osc}$\", and the function is always in the subscript.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Oscillation (mathematics) (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Oscillation_(mathematics)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-dirichlet-and-thomae-functions",
+        "kind": "definition",
+        "title": "The Dirichlet function $1_{\\mathbb{Q}}$, and Thomae's function $t$ with $t(x) = 1/q$ at a rational $x = p/q$ in lowest terms with $q \\ge 1$ and $t(x) = 0$ at every irrational $x$",
+        "deps": [
+          "lem-coprime-divides-product",
+          "lem-rat-embeds-dense",
+          "lem-int-embeds-rat",
+          "lem-nat-embeds-int",
+          "def-coprime",
+          "cor-gcd-quotients-coprime",
+          "lem-gcd-basic-values",
+          "def-common-divisor-and-gcd",
+          "thm-well-ordering-principle",
+          "def-complete-ordered-field",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-q-and-irrationals-dense-r"
+        ],
+        "statement": "Throughout, $\\mathbb{N} \\subseteq \\mathbb{Z} \\subseteq \\mathbb{Q} \\subseteq\n\\mathbb{R}$ denotes the chain of canonical embeddings\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]]), and\neach set is identified with its image in $\\mathbb{R}$, as elsewhere in this\nlibrary; for a natural $q$ the real $q = q \\cdot 1_{\\mathbb{R}}$ is the\ncanonical natural ([[def-canonical-natural]]), and $q > 0$ for $q \\ge 1$\n([[lem-of-naturals-positive]]). A real is **rational** when it lies in\n$\\mathbb{Q}$ and **irrational** otherwise; both sets are dense in $\\mathbb{R}$\n([[lem-q-and-irrationals-dense-r]]).\n\n### The Dirichlet function\n\n$$\\mathbf{1}_{\\mathbb{Q}} : \\mathbb{R} \\to \\mathbb{R}, \\qquad \\mathbf{1}_{\\mathbb{Q}}(x) := \\begin{cases} 1 & \\text{if } x \\in \\mathbb{Q},\\\\ 0 & \\text{if } x \\notin \\mathbb{Q}.\\end{cases}$$\n\nThis is the indicator of the rationals. It is a function because every real\neither lies in $\\mathbb{Q}$ or does not, and the two clauses are exclusive.\n\n### The least denominator of a rational\n\nLet $x \\in \\mathbb{Q}$ and put\n\n$$Q(x) \\;:=\\; \\{\\, q \\in \\mathbb{N} \\;:\\; q \\ge 1 \\ \\text{ and } \\ q\\,x \\in \\mathbb{Z} \\,\\}.$$\n\n**$Q(x)$ is nonempty.** Every rational is $a/b$ with $a \\in \\mathbb{Z}$ and $b$ a\npositive integer ([[lem-int-embeds-rat]]), and a positive integer is $q$\nfor a unique natural $q \\ge 1$ ([[lem-nat-embeds-int]]); then\n$q\\,x = a \\in \\mathbb{Z}$, so $q \\in Q(x)$.\n\nBy the well-ordering principle ([[thm-well-ordering-principle]]) the nonempty\nsubset $Q(x) \\subseteq \\mathbb{N}$ has a least element. Write\n\n$$q(x) \\;:=\\; \\min Q(x) \\;\\ge\\; 1,$$\n\nthe **least denominator** of $x$, and $p(x) := q(x)\\,x \\in \\mathbb{Z}$,\nso that\n\n$$x \\;=\\; \\frac{p(x)}{q(x)} .$$\n\nNothing is selected here: $q(x)$ is the least element of a set determined by\n$x$, so it is a function of $x$ alone.\n\n**The least denominator is the denominator in lowest terms.** The integers\n$p(x)$ and $q(x)$ are coprime ([[def-coprime]]). Indeed put\n$d := \\gcd(p(x), q(x))$, which satisfies $d \\ge 1$ because $q(x) \\ge 1$ makes the\npair different from $(0,0)$ ([[lem-gcd-basic-values]],\n[[def-common-divisor-and-gcd]]). Then $d$ divides $q(x)$, so $q(x)/d$ is a\nnatural number $\\ge 1$, and $(q(x)/d) = q(x)/d$ because $\\iota$\ncarries products of naturals to products ([[lem-of-naturals-positive]]); hence\n\n$$(q(x)/d)\\,x \\;=\\; \\frac{q(x)\\,x}{d} \\;=\\; \\frac{p(x)}{d} \\;\\in\\; \\mathbb{Z},$$\n\nso $q(x)/d \\in Q(x)$ and therefore $q(x)/d \\ge q(x)$, which forces $d = 1$.\n**Conversely, a lowest-terms denominator is the least one, so the description is\nunambiguous.** Suppose $x = p/q$ with $q \\ge 1$ a natural, $p \\in \\mathbb{Z}$\nand $\\gcd(p,q) = 1$. Then $q \\in Q(x)$, so $q_{0} := q(x) \\le q$; and from\n$p/q = p(x)/q_{0}$ we get $q_{0}p = q\\,p(x)$ in $\\mathbb{Z}$, so\n$q \\mid q_{0}p$, and $\\gcd(p,q) = 1$ gives $q \\mid q_{0}$\n([[lem-coprime-divides-product]], claim 1), hence $q \\le q_{0}$. So $q = q(x)$:\nwriting $x = p/q$ \"in lowest terms with $q \\ge 1$\" and taking $q = q(x)$ describe\nthe same integer, and [[cor-gcd-quotients-coprime]] is what produces such a\nrepresentation from an arbitrary one.\n\n### Thomae's function\n\n$$t : \\mathbb{R} \\to \\mathbb{R}, \\qquad t(x) := \\begin{cases} 1/q(x) & \\text{if } x \\in \\mathbb{Q},\\\\ 0 & \\text{if } x \\notin \\mathbb{Q}.\\end{cases}$$\n\nIt is also called the **popcorn function** or the **ruler function**. The value\nis well defined because $q(x)$ is, and $q(x) \\ge 1 > 0$ is invertible.\n\n**Boundary values, stated rather than left to the reader.**\n\n- $t(0) = 1$. Indeed $1\\cdot 0 = 0 \\in \\mathbb{Z}$, so $1 \\in Q(0)$ and\n  $q(0) = 1$; the representation is $0 = 0/1$.\n- $t(m) = 1$ for every integer $m$, by the same computation with $1 \\in Q(m)$.\n- $0 < t(x) \\le 1$ for every rational $x$, since $q(x) \\ge 1$; and\n  $t(x) = 0$ exactly at the irrationals.\n\n**On the range.** The values of $t$ are $0$ and the reciprocals\n$1/q$ of the canonical naturals $q \\ge 1$; every such value is attained,\n$1/q$ being the value at the rational $1/q$ itself, whose least\ndenominator is $q$ because $k/q \\in \\mathbb{Z}$ with\n$1 \\le k < q$ would give a positive integer smaller than $1$.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Thomae's function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Thomae%27s_function"
+            },
+            {
+              "title": "Dirichlet function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Dirichlet_function"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-intermediate-value-property",
+        "kind": "definition",
+        "title": "The intermediate value property (Darboux property) of a function on an interval: the image of every subinterval is order-convex",
+        "deps": [
+          "lem-monotone-with-interval-image-is-continuous",
+          "def-interval",
+          "def-complete-ordered-field",
+          "thm-connected-subsets-of-r-are-intervals",
+          "cor-continuous-image-of-an-interval-is-an-interval",
+          "def-continuity-real"
+        ],
+        "statement": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$. Then $f$ has the **intermediate value property**, also\ncalled the **Darboux property**, when\n\n$$f[J] \\ \\text{is order-convex for every order-convex } J \\subseteq I .$$\n\nAs everywhere in this library, \"interval\" is read as \"order-convex\"\n([[thm-connected-subsets-of-r-are-intervals]] is what licenses the word;\n[[def-interval]] records that the classification of the order-convex subsets of\n$\\mathbb{R}$ into the nine written forms is not proved here).\n\n### The equivalent pointwise form\n\n$f$ has the intermediate value property **if and only if**\n\n> for all $a, b \\in I$ with $a < b$ and every real $y$ with $f(a) \\le y \\le f(b)$\n> or $f(b) \\le y \\le f(a)$, there is $c \\in [a,b]$ with $f(c) = y$.\n\n*From the displayed condition to the pointwise one.* Given $a < b$ in $I$, the\nset $[a,b]$ is order-convex and contained in $I$ by order-convexity of $I$, so\n$f[\\,[a,b]\\,]$ is order-convex; it contains $f(a)$ and $f(b)$, hence every $y$\nbetween them, and such a $y$ is $f(c)$ for some $c \\in [a,b]$.\n\n*From the pointwise condition to the displayed one.* Let $J \\subseteq I$ be\norder-convex, let $u, v \\in f[J]$ and let $u \\le y \\le v$. Write $u = f(a)$ and\n$v = f(b)$ with $a, b \\in J$. If $a = b$ then $u = v = y$ and $y \\in f[J]$. If\n$a < b$, the pointwise condition gives $c \\in [a,b]$ with $f(c) = y$, and\n$c \\in J$ because $J$ is order-convex and $a, b \\in J$; so $y \\in f[J]$. If\n$b < a$ the same argument applies with the roles of $a$ and $b$ exchanged, the\npointwise condition being stated symmetrically in the two orders. Hence $f[J]$\nis order-convex.\n\nBoth forms are used below, and they are used interchangeably.\n\n### Every continuous function on an interval has the property\n\nIf $f$ is continuous on $I$ ([[def-continuity-real]]) then $f[J]$ is\norder-convex for every order-convex $J \\subseteq I$\n([[cor-continuous-image-of-an-interval-is-an-interval]], claim 1). So continuity\nimplies the intermediate value property.\n\n**The converse is false**, and that is the whole reason the property is given a\nname of its own: a function may take every intermediate value on every\nsubinterval and be continuous nowhere. The failure is recorded as\n[[fs-intermediate-value-property-implies-continuity]].\n\n**A monotone function with the intermediate value property is continuous.** This\nis not a further theorem but a reading of\n[[lem-monotone-with-interval-image-is-continuous]]: for a function satisfying\n$f(x) \\le f(y)$ whenever $x \\le y$ on an order-convex $I$, order-convexity of\nthe single image $f[I]$ already forces continuity. So the pathologies live\nentirely among the non-monotone functions.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Darboux's theorem (analysis) (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Darboux%27s_theorem_(analysis)"
+            },
+            {
+              "title": "Intermediate value theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Intermediate_value_theorem"
+            },
+            {
+              "title": "Darboux property (Encyclopedia of Mathematics)",
+              "url": "https://encyclopediaofmath.org/wiki/Darboux_property"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-semicontinuity",
+        "kind": "definition",
+        "title": "Upper and lower semicontinuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$",
+        "deps": [
+          "def-continuity-real",
+          "def-neighbourhood-r",
+          "def-complete-ordered-field",
+          "lem-of-abs-value"
+        ],
+        "statement": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$, with\nneighbourhoods as in [[def-neighbourhood-r]].\n\n- $f$ is **upper semicontinuous at $c$** when for every real $\\varepsilon > 0$\n  there is a real $\\delta > 0$ with\n  $$f(x) \\;<\\; f(c) + \\varepsilon \\qquad \\text{for every } x \\in A \\cap N_\\delta(c).$$\n- $f$ is **lower semicontinuous at $c$** when for every real $\\varepsilon > 0$\n  there is a real $\\delta > 0$ with\n  $$f(x) \\;>\\; f(c) - \\varepsilon \\qquad \\text{for every } x \\in A \\cap N_\\delta(c).$$\n- $f$ is **upper semicontinuous on $A$**, respectively **lower semicontinuous on\n  $A$**, when it is so at every point of $A$.\n\nIn words: an upper semicontinuous function cannot jump **up** in the limit, and\na lower semicontinuous one cannot jump **down**. Both conditions are pointwise,\nboth quantify over the same unpunctured neighbourhoods as\n[[def-continuity-real]], and at $x = c$ each holds automatically, since\n$f(c) < f(c) + \\varepsilon$ and $f(c) > f(c) - \\varepsilon$.\n\n### Continuity is exactly the conjunction\n\n$f$ is continuous at $c$ **if and only if** it is both upper and lower\nsemicontinuous at $c$.\n\n*If $f$ is continuous at $c$*, a $\\delta$ witnessing $|f(x) - f(c)| < \\varepsilon$\non $A \\cap N_\\delta(c)$ witnesses both displayed conditions, since\n$|f(x) - f(c)| < \\varepsilon$ gives $-\\varepsilon < f(x) - f(c) < \\varepsilon$\n([[lem-of-abs-value]]).\n\n*Conversely*, given $\\varepsilon > 0$ take $\\delta_1$ for the upper condition\nand $\\delta_2$ for the lower one and put $\\delta := \\min\\{\\delta_1, \\delta_2\\} > 0$.\nFor $x \\in A \\cap N_\\delta(c)$ both $f(x) < f(c) + \\varepsilon$ and\n$f(x) > f(c) - \\varepsilon$ hold, that is $|f(x) - f(c)| < \\varepsilon$\n([[lem-of-abs-value]]). So $f$ is continuous at $c$.\n\nConsequently $f$ is continuous on $A$ exactly when it is both upper and lower\nsemicontinuous on $A$.\n\n### Negation exchanges the two\n\n$f$ is upper semicontinuous at $c$ **if and only if** $-f$ is lower\nsemicontinuous at $c$, since $f(x) < f(c) + \\varepsilon$ says the same thing as\n$-f(x) > -f(c) - \\varepsilon$ ([[def-complete-ordered-field]]). Every statement\nabout one notion below is therefore proved for one of them and transferred to\nthe other by this substitution, never proved twice.\n\n**Neither notion implies the other, and neither implies continuity.** The\nindicator of a closed set is upper semicontinuous and the indicator of an open\nset is lower semicontinuous, and neither is continuous unless the set is clopen;\nthe companion page uses an upper semicontinuous function on $[0,1]$ that attains\nno minimum.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Semi-continuity (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Semi-continuity"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-baire-category-in-a-closed-interval",
+        "kind": "lemma",
+        "title": "Baire category inside a closed bounded interval: if $[a,b]$ with $a < b$ is covered by a sequence of closed sets, then one of them contains a nondegenerate closed subinterval of $[a,b]$; no choice principle is used",
+        "deps": [
+          "def-open-and-closed-in-r",
+          "def-interior-closure-boundary-r",
+          "thm-closure-characterisations-r",
+          "thm-open-set-algebra-r",
+          "thm-baire-category-r",
+          "def-limit-point-r",
+          "def-interval",
+          "def-neighbourhood-r"
+        ],
+        "statement": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $(F_n)_{n \\in \\mathbb{N}}$ be a\nsequence of closed subsets of $\\mathbb{R}$ ([[def-open-and-closed-in-r]]) with\n\n$$[a,b] \\;\\subseteq\\; \\bigcup_{n \\in \\mathbb{N}} F_n$$\n\n([[def-interval]]). Then there are $n \\in \\mathbb{N}$ and reals $u < v$ with\n\n$$[u,v] \\;\\subseteq\\; F_n \\cap [a,b].$$\n\n**No choice principle is used.** The only category input is\n[[thm-baire-category-r]], whose own proof selects nothing: it fixes one\nenumeration of the rationals and takes least indices. Nothing further is chosen\nbelow, the argument being a direct application of that theorem to the\ncomplements of the $F_n$.",
+        "dependency_level": 0,
+        "proof_strategy": "contradiction",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Baire category theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Baire_category_theorem"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-baire-class-one",
+        "kind": "definition",
+        "title": "Pointwise convergence of a sequence of real functions, and the Baire class one functions as the pointwise limits of sequences of continuous functions",
+        "deps": [
+          "def-continuity-real",
+          "def-sequence",
+          "def-real-limit",
+          "lem-limit-unique",
+          "def-interval"
+        ],
+        "statement": "Let $A \\subseteq \\mathbb{R}$. A **sequence of functions on $A$** is a function\nassigning to each $n \\in \\mathbb{N}$ a function $f_n : A \\to \\mathbb{R}$; it is\nwritten $(f_n)_{n \\in \\mathbb{N}}$. As everywhere in this library $\\mathbb{N}$\ncontains $0$, so the first term is $f_0$ ([[def-sequence]]).\n\n**Pointwise convergence.** $(f_n)$ **converges pointwise on $A$** to\n$f : A \\to \\mathbb{R}$ when, for every $x \\in A$, the sequence of reals\n$(f_n(x))_{n \\in \\mathbb{N}}$ converges to $f(x)$ ([[def-real-limit]]); written\nout, for every $x \\in A$ and every real $\\varepsilon > 0$ there is\n$N \\in \\mathbb{N}$ with $|f_n(x) - f(x)| < \\varepsilon$ for every $n \\ge N$.\n\n**The limit function is unique.** A sequence of reals has at most one limit\n([[lem-limit-unique]]), so if $(f_n)$ converges pointwise to $f$ and to $g$ then\n$f(x) = g(x)$ for every $x \\in A$, hence $f = g$. We may therefore speak of\n*the* pointwise limit and write $f = \\lim_n f_n$ pointwise.\n\n**The index $N$ is allowed to depend on $x$, and that is the whole content of the\nword *pointwise*.** No uniformity over $A$ is asserted anywhere below.\n\n### Baire class one\n\n$f : A \\to \\mathbb{R}$ is of **Baire class one on $A$** when there is a sequence\n$(f_n)$ of functions $A \\to \\mathbb{R}$, each continuous on $A$\n([[def-continuity-real]]), converging pointwise on $A$ to $f$.\n\n**Every continuous function is of Baire class one**, by the constant sequence\n$f_n := f$, which converges pointwise to $f$ because a constant sequence of\nreals converges to its value.\n\n**The class is strictly larger than the continuous functions**, and it is\nstrictly smaller than the class of all functions. The first is visible already\non $A = [0,1]$ ([[def-interval]]): the indicator of a single point is of Baire\nclass one and is not continuous. The second is\n[[thm-baire-one-continuity-points]], which shows that a Baire class one function\non a closed bounded interval has a dense set of continuity points, and the\ncompanion page uses it to exhibit a function that is not of Baire class one.\n\n**On the higher classes.** The pointwise limits of sequences of Baire class one\nfunctions form what is classically called Baire class two, and the construction\niterates. No definition of the higher classes is given here and none is used;\nwhere the phrase is needed below it is stated as \"a pointwise limit of a\nsequence of Baire class one functions\", which is a condition already expressible\nwith the words above.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Baire function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Baire_function"
+            },
+            {
+              "title": "Pointwise convergence (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Pointwise_convergence"
+            },
+            {
+              "title": "Baire classes (Encyclopedia of Mathematics)",
+              "url": "https://encyclopediaofmath.org/wiki/Baire_classes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-additive-function",
+        "kind": "definition",
+        "title": "Cauchy's functional equation $f(x+y) = f(x) + f(y)$, and the additive functions $\\mathbb{R} \\to \\mathbb{R}$",
+        "deps": [
+          "def-complete-ordered-field",
+          "def-ordered-field",
+          "def-field"
+        ],
+        "statement": "Let $\\mathbb{R}$ be the complete ordered field ([[def-complete-ordered-field]],\n[[def-ordered-field]], [[def-field]]). A function $f : \\mathbb{R} \\to \\mathbb{R}$\nis **additive** when it satisfies **Cauchy's functional equation**\n\n$$f(x + y) \\;=\\; f(x) + f(y) \\qquad \\text{for all } x, y \\in \\mathbb{R}.$$\n\nEquivalently, $f$ is a homomorphism of the additive group of $\\mathbb{R}$ into\nitself.\n\n**The linear maps are additive.** For a fixed real $c$ the function\n$x \\mapsto cx$ satisfies $c(x+y) = cx + cy$ by distributivity, so it is\nadditive. Cauchy's question is whether these are the only additive functions,\nand the answer is a genuine dichotomy: with any one of a short list of\nregularity conditions the answer is yes\n([[thm-cauchy-functional-equation-regularity]]), and without any of them it is\nno ([[fs-additive-implies-linear]]).\n\n**No continuity, no monotonicity and no measurability is part of the\ndefinition.** The equation is purely algebraic, and every regularity hypothesis\nbelow is stated explicitly where it is used.\n\n**A first consequence, recorded here because it is used immediately.** An\nadditive $f$ satisfies $f(0) = 0$: putting $x = y = 0$ gives\n$f(0) = f(0) + f(0)$, and subtracting $f(0)$ gives $f(0) = 0$. The remaining\nelementary consequences, including $f(-x) = -f(x)$ and $\\mathbb{Q}$-homogeneity,\nare collected in [[lem-additive-is-q-linear]].",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cauchy's functional equation (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hamel-basis-exists",
+        "kind": "lemma",
+        "title": "Assuming the Axiom of Choice, $\\mathbb{R}$ has a Hamel basis over $\\mathbb{Q}$: there is $B \\subseteq \\mathbb{R}$ such that every real is a finite $\\mathbb{Q}$-linear combination of elements of $B$ in exactly one way, and each basis vector carries a well-defined $\\mathbb{Q}$-linear coefficient map",
+        "deps": [
+          "def-vector-space",
+          "lem-restriction-of-scalars",
+          "def-subfield",
+          "def-linear-combination-and-span",
+          "lem-span-is-the-set-of-linear-combinations",
+          "lem-dependent-iff-a-vector-lies-in-the-span-of-the-others",
+          "lem-span-monotone-and-idempotent",
+          "lem-span-of-a-single-vector",
+          "lem-sum-is-span-of-union",
+          "def-sum-of-linear-subspaces",
+          "def-internal-direct-sum",
+          "lem-direct-sum-criterion",
+          "def-linear-subspace",
+          "def-linear-independence",
+          "def-linear-basis",
+          "cor-every-vector-space-has-a-basis",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "def-axiom-of-choice",
+          "thm-zorn",
+          "lem-rat-embeds-dense",
+          "thm-rationals-countable",
+          "thm-r-uncountable",
+          "lem-countable-iff-surjection-from-n",
+          "def-countable",
+          "def-field",
+          "def-complete-ordered-field",
+          "def-injection-surjection-bijection",
+          "def-natural-numbers"
+        ],
+        "statement": "**Assume the Axiom of Choice** ([[def-axiom-of-choice]]). The hypothesis is\ngenuinely used: it enters through [[cor-every-vector-space-has-a-basis]], whose\nown Statement begins \"Assume the Axiom of Choice\", and which rests on\n[[thm-zorn]].\n\nWrite $\\mathbb{Q}$ for the canonical copy $\\{\\hat q : q \\in \\mathbb{Q}\\}$ of the\nrationals inside $\\mathbb{R}$ ([[lem-rat-embeds-dense]]). Then $\\mathbb{Q}$ is a\nsubfield of $\\mathbb{R}$ ([[def-subfield]]) and $\\mathbb{R}$ is a vector space\nover $\\mathbb{Q}$ by restriction of scalars ([[lem-restriction-of-scalars]],\n[[def-vector-space]]); all spans, linear independence and bases below are taken\nin that structure. Then:\n\n1. **Existence.** $\\mathbb{R}$ has a basis $B$ over $\\mathbb{Q}$\n   ([[def-linear-basis]]), called a **Hamel basis**.\n2. **Representation.** Every real $x$ is\n   $x = \\sum_{i<n}\\lambda_i b_i$ for some $n \\in \\mathbb{N}$, some **injective**\n   list $b : n \\to B$ ([[def-injection-surjection-bijection]]) and some\n   $\\lambda : n \\to \\mathbb{Q}$ ([[def-linear-combination-and-span]]).\n3. **Uniqueness along a list.** For a fixed $n$ and a fixed injective\n   $b : n \\to B$, if $\\lambda, \\mu : n \\to \\mathbb{Q}$ satisfy\n   $\\sum_{i<n}\\lambda_i b_i = \\sum_{i<n}\\mu_i b_i$, then $\\lambda_i = \\mu_i$ for\n   every $i < n$.\n4. **The coefficient map of a basis vector.** Fix $b_{\\star} \\in B$ and put\n   $W_{b_{\\star}} := \\operatorname{span}(B \\setminus \\{b_{\\star}\\})$. Every real\n   $x$ is $x = \\lambda\\, b_{\\star} + w$ with $\\lambda \\in \\mathbb{Q}$ and\n   $w \\in W_{b_{\\star}}$ in **exactly one** way. Writing\n   $\\Lambda_{b_{\\star}}(x) := \\lambda$ for that unique scalar, the map\n   $\\Lambda_{b_{\\star}} : \\mathbb{R} \\to \\mathbb{Q}$ satisfies\n   $$\\Lambda_{b_{\\star}}(x+y) = \\Lambda_{b_{\\star}}(x) + \\Lambda_{b_{\\star}}(y), \\qquad \\Lambda_{b_{\\star}}(qx) = q\\,\\Lambda_{b_{\\star}}(x) \\ \\ (q \\in \\mathbb{Q}), \\qquad \\Lambda_{b_{\\star}}(b_{\\star}) = 1,$$\n   its range is the whole of $\\mathbb{Q}$, and\n   $\\{\\, x \\in \\mathbb{R} : \\Lambda_{b_{\\star}}(x) = 0 \\,\\} = W_{b_{\\star}}$.\n5. **The complement is not trivial.** $W_{b_{\\star}} \\ne \\{0\\}$ for every\n   $b_{\\star} \\in B$.\n\nClaim 2 together with claim 4 is the precise content of the phrase \"in exactly\none way\" in the title: a real is a finite $\\mathbb{Q}$-combination of basis\nvectors, and the coefficient attached to each single basis vector is determined\nby the real alone.",
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Hamel basis, in Basis (linear algebra) (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
+            },
+            {
+              "title": "Axiom of choice (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Axiom_of_choice"
+            },
+            {
+              "title": "Hamel Basis (MathWorld)",
+              "url": "https://mathworld.wolfram.com/HamelBasis.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-monotone-one-sided-limits-exist",
+        "kind": "theorem",
+        "title": "One-sided limits of a monotone function always exist: for $f$ nondecreasing on an interval $I$ and $c \\in I$, $\\lim_{x \\to c^{-}} f(x) = \\sup\\{f(x) : x \\in I,\\ x < c\\}$ whenever $I$ has points below $c$, $\\lim_{x \\to c^{+}} f(x) = \\inf\\{f(x) : x \\in I,\\ x > c\\}$ whenever it has points above $c$, and these satisfy $\\lim_{x \\to c^{-}} f(x) \\le f(c) \\le \\lim_{x \\to c^{+}} f(x)$",
+        "deps": [
+          "def-monotone-function",
+          "def-one-sided-limits",
+          "def-function-limit",
+          "lem-function-limit-unique",
+          "def-limit-point-r",
+          "def-interval",
+          "lem-sup-epsilon",
+          "lem-inf-epsilon",
+          "def-bounded-set",
+          "def-infimum",
+          "thm-infimum-property",
+          "def-complete-ordered-field",
+          "def-neighbourhood-r"
+        ],
+        "statement": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]), let\n$f : I \\to \\mathbb{R}$ be nondecreasing ([[def-monotone-function]]) and let\n$c \\in I$. Write\n\n$$I^{-} := I \\cap (-\\infty, c), \\qquad I^{+} := I \\cap (c, \\infty)$$\n\n([[def-one-sided-limits]]).\n\n1. **Left.** If $I^{-} \\ne \\varnothing$ then $c$ is a limit point of $I^{-}$\n   ([[def-limit-point-r]]), the set $\\{\\, f(x) : x \\in I^{-} \\,\\}$ is nonempty\n   and bounded above by $f(c)$, and\n   $$\\lim_{x \\to c^{-}} f(x) \\;=\\; \\sup\\{\\, f(x) : x \\in I,\\ x < c \\,\\} \\;\\le\\; f(c) .$$\n2. **Right.** If $I^{+} \\ne \\varnothing$ then $c$ is a limit point of $I^{+}$,\n   the set $\\{\\, f(x) : x \\in I^{+} \\,\\}$ is nonempty and bounded below by\n   $f(c)$, and\n   $$\\lim_{x \\to c^{+}} f(x) \\;=\\; \\inf\\{\\, f(x) : x \\in I,\\ x > c \\,\\} \\;\\ge\\; f(c) .$$\n3. **Together.** If both $I^{-}$ and $I^{+}$ are nonempty then\n   $$\\lim_{x \\to c^{-}} f(x) \\;\\le\\; f(c) \\;\\le\\; \\lim_{x \\to c^{+}} f(x) .$$\n\nIn particular a nondecreasing function on an interval has, at every point of\nthat interval, every one-sided limit that is well posed at all: no hypothesis of\ncontinuity, of boundedness, or of any other kind is needed.\n\n**The nonincreasing case is not a separate theorem.** If $g : I \\to \\mathbb{R}$\nis nonincreasing then $-g$ is nondecreasing ([[def-monotone-function]]), and a\nreal $L$ is the left limit of $-g$ at $c$ exactly when $-L$ is the left limit of\n$g$ at $c$, since $|(-g)(x) - L| = |g(x) - (-L)|$; so claims 1 to 3 hold for $g$\nwith the suprema and infima exchanged and the inequalities reversed.\n\n**Order-convexity of $I$ is what makes the limits well posed.** Without it the\nsymbol $\\lim_{x \\to c^{-}} f(x)$ need not be defined even though $I^{-}$ is\nnonempty: for $I = \\{0\\} \\cup [1,2]$ and $c = 1$ the set $I^{-} = \\{0\\}$ is\nnonempty but $1$ is not a limit point of it, and [[def-one-sided-limits]] leaves\nthe symbol undefined there for exactly that reason.",
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Monotonic function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Monotonic_function"
+            },
+            {
+              "title": "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 4",
+              "url": "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
+            },
+            {
+              "title": "Monotone Functions (Analysis WebNotes)",
+              "url": "https://mathcs.org/analysis/reals/cont/defs/monofun.html"
+            },
+            {
+              "title": "Discontinuities of monotone functions (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Discontinuities_of_monotone_functions"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-continuous-injection-on-an-interval-is-strictly-monotone",
+        "kind": "theorem",
+        "title": "A continuous injective function on an interval is strictly monotone",
+        "deps": [
+          "def-continuity-real",
+          "def-monotone-function",
+          "thm-intermediate-value",
+          "def-interval",
+          "def-injection-surjection-bijection",
+          "lem-rat-embeds-dense"
+        ],
+        "statement": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ninjective ([[def-injection-surjection-bijection]]). Then $f$ is strictly\nmonotone ([[def-monotone-function]]): either $f(x) < f(y)$ whenever $x < y$ in\n$I$, or $f(x) > f(y)$ whenever $x < y$ in $I$.\n\n**Both hypotheses are needed and neither can be weakened to the other.**\nContinuity alone does not give injectivity, and injectivity alone does not give\nmonotonicity: the companion page exhibits a continuous injection on\n$[0,1] \\cup [2,3]$, a set that is not order-convex, that is not monotone. So it\nis order-convexity of the domain, and not merely continuity, that forces the\nconclusion.",
+        "dependency_level": 1,
+        "proof_strategy": "contradiction",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Monotonic function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Monotonic_function"
+            },
+            {
+              "title": "Intermediate value theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Intermediate_value_theorem"
+            },
+            {
+              "title": "Continuous Injection of Interval is Strictly Monotone (ProofWiki)",
+              "url": "https://proofwiki.org/wiki/Continuous_Injection_of_Interval_is_Strictly_Monotone"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-cantor-function-is-continuous",
+        "kind": "corollary",
+        "title": "The Cantor function is continuous on $[0,1]$",
+        "deps": [
+          "def-cantor-function",
+          "thm-cantor-function-properties",
+          "lem-monotone-with-interval-image-is-continuous",
+          "def-monotone-function",
+          "def-continuity-real",
+          "def-interval",
+          "def-cantor-set"
+        ],
+        "statement": "The Cantor function $c : [0,1] \\to \\mathbb{R}$ ([[def-cantor-function]]) is\ncontinuous on $[0,1]$ ([[def-continuity-real]]). It is moreover nondecreasing\n([[def-monotone-function]]), with $c(0) = 0$ and $c(1) = 1$.\n\n**No intermediate value theorem is used.** The Cantor function is surjective\nonto $[0,1]$ by construction ([[thm-cantor-function-properties]], claim 3), so\nits image is order-convex without any appeal to continuity, and continuity is\nthen read off the monotone-with-interval-image criterion\n([[lem-monotone-with-interval-image-is-continuous]]). The implication runs in\nthe direction opposite to the usual one: here surjectivity is known first and\ncontinuity is deduced.",
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cantor function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cantor_function"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-continuity-iff-oscillation-zero",
+        "kind": "theorem",
+        "title": "$f : A \\to \\mathbb{R}$ is continuous at $c \\in A$ if and only if $\\omega_f(c) = 0$",
+        "deps": [
+          "def-oscillation",
+          "def-continuity-real",
+          "def-extended-reals",
+          "lem-extended-reals-complete",
+          "def-neighbourhood-r",
+          "lem-of-abs-value"
+        ],
+        "statement": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$. Then\n\n$$f \\text{ is continuous at } c \\quad \\Longleftrightarrow \\quad \\omega_f(c) = 0$$\n\n([[def-continuity-real]], [[def-oscillation]]).\n\nSince $\\omega_f(c) \\ge 0$ always ([[def-oscillation]]), the equivalent form of\nthe right-hand side is: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ with $\\omega_f(A \\cap N_\\delta(c)) < \\varepsilon$.\n\n**This is the tool that converts a pointwise condition into a set condition.**\nContinuity at $c$ is a statement about $f$ near $c$ with a quantifier over\n$\\varepsilon$; $\\omega_f(c) = 0$ is the vanishing of a single extended real\nattached to the point. The change of form is what makes the discontinuity set\naccessible: the sets $\\{\\,x : \\omega_f(x) \\ge \\varepsilon\\,\\}$ are closed\n([[lem-oscillation-superlevel-sets-are-closed]]) and their union over\n$\\varepsilon = 1, 1/2, 1/3, \\dots$ is the discontinuity set\n([[thm-discontinuity-set-is-f-sigma]]).",
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Oscillation (mathematics) (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Oscillation_(mathematics)"
+            },
+            {
+              "title": "Real Function is Continuous at Point iff Oscillation is Zero (ProofWiki)",
+              "url": "https://proofwiki.org/wiki/Real_Function_is_Continuous_at_Point_iff_Oscillation_is_Zero"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-oscillation-superlevel-sets-are-closed",
+        "kind": "lemma",
+        "title": "For every real $\\varepsilon > 0$ the set $\\{\\,x \\in A : \\omega_f(x) \\ge \\varepsilon\\,\\}$ is the intersection with $A$ of a closed subset of $\\mathbb{R}$; in particular it is closed in $\\mathbb{R}$ when $A = \\mathbb{R}$",
+        "deps": [
+          "def-oscillation",
+          "def-open-and-closed-in-r",
+          "def-neighbourhood-r",
+          "def-extended-reals",
+          "lem-extended-reals-complete"
+        ],
+        "statement": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let\n$\\varepsilon \\in \\mathbb{R}$ with $\\varepsilon > 0$. Put\n\n$$E_\\varepsilon \\;:=\\; \\{\\, x \\in A : \\omega_f(x) \\ge \\varepsilon \\,\\}$$\n\n([[def-oscillation]]). Then there is a **closed** $G \\subseteq \\mathbb{R}$\n([[def-open-and-closed-in-r]]) with\n\n$$E_\\varepsilon \\;=\\; A \\cap G .$$\n\nIn particular, if $A = \\mathbb{R}$ then $E_\\varepsilon$ is itself a closed\nsubset of $\\mathbb{R}$.\n\n**The set $G$ is produced explicitly and does not depend on any choice**: it is\nthe complement of\n\n$$U \\;:=\\; \\{\\, y \\in \\mathbb{R} : \\omega_f(A \\cap N_\\rho(y)) < \\varepsilon \\ \\text{ for some real } \\rho > 0 \\,\\},$$\n\nwhich the proof shows to be open. Note that $y$ ranges over all of $\\mathbb{R}$\nhere and not only over $A$; the expression $\\omega_f(A \\cap N_\\rho(y))$ is the\noscillation of $f$ on a subset of $A$ and makes sense for every real $y$, taking\nthe value $\\sup \\varnothing = -\\infty$ when $A \\cap N_\\rho(y) = \\varnothing$\n([[def-oscillation]], [[lem-extended-reals-complete]]).",
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Oscillation (mathematics) (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Oscillation_(mathematics)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-intermediate-value-property-implies-continuity",
+        "kind": "false-statement",
+        "title": "FALSE: a function with the intermediate value property on an interval is continuous",
+        "deps": [
+          "def-intermediate-value-property",
+          "def-continuity-real",
+          "thm-intermediate-value",
+          "cor-continuous-image-of-an-interval-is-an-interval",
+          "def-interval",
+          "lem-integer-part",
+          "def-max-min",
+          "lem-finite-set-has-max",
+          "thm-algebra-of-continuous-functions",
+          "thm-composition-of-continuous-functions",
+          "cor-archimedean-reciprocal",
+          "thm-of-archimedean",
+          "lem-of-abs-value",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ],
+        "statement": "",
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Darboux's theorem (analysis) (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Darboux%27s_theorem_(analysis)"
+            },
+            {
+              "title": "Darboux property (Encyclopedia of Mathematics)",
+              "url": "https://encyclopediaofmath.org/wiki/Darboux_property"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-semicontinuity-level-set-characterisation",
+        "kind": "theorem",
+        "title": "$f$ is upper semicontinuous on $A$ if and only if $\\{x \\in A : f(x) < \\alpha\\}$ is relatively open in $A$ for every real $\\alpha$, lower semicontinuous if and only if $\\{x \\in A : f(x) > \\alpha\\}$ is, and continuous if and only if it is both",
+        "deps": [
+          "def-semicontinuity",
+          "def-continuity-real",
+          "def-open-and-closed-in-r",
+          "def-neighbourhood-r"
+        ],
+        "statement": "Let $A \\subseteq \\mathbb{R}$ and let $f : A \\to \\mathbb{R}$. Call $S \\subseteq A$\n**relatively open in $A$** when $S = U \\cap A$ for some open\n$U \\subseteq \\mathbb{R}$ ([[def-open-and-closed-in-r]]). Then:\n\n1. $f$ is upper semicontinuous on $A$ ([[def-semicontinuity]]) **if and only if**\n   $\\{\\, x \\in A : f(x) < \\alpha \\,\\}$ is relatively open in $A$ for every real\n   $\\alpha$;\n2. $f$ is lower semicontinuous on $A$ **if and only if**\n   $\\{\\, x \\in A : f(x) > \\alpha \\,\\}$ is relatively open in $A$ for every real\n   $\\alpha$;\n3. $f$ is continuous on $A$ ([[def-continuity-real]]) **if and only if** both\n   families of sets are relatively open.\n\n**The open set is produced canonically, not chosen.** For each $\\alpha$ the\nproof exhibits one specific open $U_\\alpha \\subseteq \\mathbb{R}$ with\n$U_\\alpha \\cap A = \\{f < \\alpha\\}$, namely the set of reals $y$ admitting a\nradius $\\rho$ with $A \\cap N_\\rho(y) \\subseteq \\{f < \\alpha\\}$. No choice of a\nradius per point is made, which matters because the level set may be\nuncountable.",
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Semi-continuity (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Semi-continuity"
+            },
+            {
+              "title": "Characterization of Lower Semicontinuity (ProofWiki)",
+              "url": "https://proofwiki.org/wiki/Characterization_of_Lower_Semicontinuity"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-additive-is-q-linear",
+        "kind": "lemma",
+        "title": "An additive $f : \\mathbb{R} \\to \\mathbb{R}$ satisfies $f(0) = 0$, $f(-x) = -f(x)$ and $f(qx) = q\\,f(x)$ for every rational $q$ and every real $x$; in particular $f(q) = q\\,f(1)$ at every rational $q$",
+        "deps": [
+          "def-additive-function",
+          "thm-induction-principle",
+          "lem-rat-embeds-dense",
+          "lem-int-embeds-rat",
+          "lem-nat-embeds-int",
+          "def-canonical-natural",
+          "lem-integer-multiples-agree-with-canonical-natural",
+          "def-complete-ordered-field",
+          "def-integers",
+          "lem-of-naturals-positive"
+        ],
+        "statement": "Let $f : \\mathbb{R} \\to \\mathbb{R}$ be additive ([[def-additive-function]]), and\nidentify $\\mathbb{N} \\subseteq \\mathbb{Z} \\subseteq \\mathbb{Q} \\subseteq\n\\mathbb{R}$ along the canonical embeddings ([[lem-nat-embeds-int]],\n[[lem-int-embeds-rat]], [[lem-rat-embeds-dense]]), writing $n$ for the\ncanonical natural of $n$ in $\\mathbb{R}$ ([[def-canonical-natural]]). Then, for\nevery real $x$:\n\n1. $f(0) = 0$;\n2. $f(-x) = -f(x)$;\n3. $f(n\\,x) = n\\,f(x)$ for every $n \\in \\mathbb{N}$;\n4. $f(m x) = m\\,f(x)$ for every integer $m$;\n5. $f(q x) = q\\,f(x)$ for every rational $q$.\n\nIn particular, taking $x = 1$ in claim 5, $f(q) = q\\,f(1)$ at every rational $q$:\n**an additive function is determined on $\\mathbb{Q}$ by its value at $1$.**",
+        "dependency_level": 1,
+        "proof_strategy": "induction",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cauchy's functional equation (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-monotone-discontinuities-are-jumps",
+        "kind": "theorem",
+        "title": "A monotone function on an interval has no discontinuity of the second kind: at every point both relevant one-sided limits exist, and an interior point $c$ is a discontinuity exactly when $\\lim_{x \\to c^{-}} f(x) < \\lim_{x \\to c^{+}} f(x)$",
+        "deps": [
+          "def-monotone-function",
+          "thm-monotone-one-sided-limits-exist",
+          "def-classification-of-discontinuities",
+          "thm-two-sided-limit-iff-both-one-sided",
+          "def-continuity-real",
+          "def-one-sided-limits",
+          "def-interval",
+          "def-limit-point-r"
+        ],
+        "statement": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be nondecreasing ([[def-monotone-function]]). Write\n$I^{-} = I \\cap (-\\infty,c)$ and $I^{+} = I \\cap (c,\\infty)$ for $c \\in I$.\n\n1. At every $c \\in I$, each of the two one-sided limits that is well posed\n   exists ([[def-one-sided-limits]]). Consequently $f$ has **no discontinuity of\n   the second kind** ([[def-classification-of-discontinuities]]): every\n   discontinuity of $f$ is of the first kind.\n2. Call $c \\in I$ an **interior point of $I$** when both $I^{-}$ and $I^{+}$ are\n   nonempty. At such a point\n   $$\\lim_{x \\to c^{-}} f(x) \\;\\le\\; f(c) \\;\\le\\; \\lim_{x \\to c^{+}} f(x),$$\n   and $f$ is continuous at $c$ ([[def-continuity-real]]) **if and only if**\n   $\\lim_{x \\to c^{-}} f(x) = \\lim_{x \\to c^{+}} f(x)$.\n3. Hence an interior point $c$ is a discontinuity of $f$ exactly when\n   $$\\lim_{x \\to c^{-}} f(x) \\;<\\; \\lim_{x \\to c^{+}} f(x),$$\n   and every such discontinuity is a **jump**, of jump\n   $\\lim_{x \\to c^{+}} f(x) - \\lim_{x \\to c^{-}} f(x) > 0$.\n\nThe same three claims hold for a nonincreasing $f$, with the two one-sided\nlimits exchanged and all inequalities reversed, by applying the above to $-f$,\nwhich is nondecreasing ([[def-monotone-function]]) and has exactly the same\npoints of continuity, since $|(-f)(x) - (-f)(c)| = |f(x) - f(c)|$.\n\n**A point of $I$ that is not interior is an endpoint, and there are at most\ntwo.** $I^{-} = \\varnothing$ says that $c$ is a least element of $I$ and\n$I^{+} = \\varnothing$ that it is a greatest one, and a set has at most one of\neach. Those two points are excluded from claims 2 and 3 only because a\ncomparison of two one-sided limits is not available there; claim 1 covers them.",
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Classification of discontinuities (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
+            },
+            {
+              "title": "Discontinuities of monotone functions (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Discontinuities_of_monotone_functions"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-continuous-inverse",
+        "kind": "theorem",
+        "title": "Continuous inverse theorem: a continuous injective $f$ on an interval $I$ is a bijection onto the order-convex set $f[I]$, and the inverse $g : f[I] \\to I$ is continuous and strictly monotone in the same sense as $f$",
+        "deps": [
+          "thm-continuous-injection-on-an-interval-is-strictly-monotone",
+          "def-monotone-function",
+          "cor-continuous-image-of-an-interval-is-an-interval",
+          "lem-monotone-with-interval-image-is-continuous",
+          "def-continuity-real",
+          "def-interval",
+          "def-injection-surjection-bijection",
+          "thm-algebra-of-continuous-functions",
+          "thm-composition-of-continuous-functions"
+        ],
+        "statement": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ninjective ([[def-injection-surjection-bijection]]). Then:\n\n1. $f$ is strictly monotone ([[def-monotone-function]]);\n2. $f[I]$ is order-convex;\n3. the map $f : I \\to f[I]$ is a bijection, so there is exactly one\n   $g : f[I] \\to I$ with $g(f(x)) = x$ for every $x \\in I$ and $f(g(u)) = u$ for\n   every $u \\in f[I]$;\n4. $g$ is strictly monotone in the same sense as $f$: increasing if $f$ is\n   increasing, decreasing if $f$ is decreasing;\n5. $g$ is continuous on $f[I]$.\n\n**\"Interval\" means \"order-convex\" here**, as throughout this library\n([[thm-connected-subsets-of-r-are-intervals]] is what licenses the word and\n[[def-interval]] records that the classification of order-convex sets into the\nnine written forms is not proved here). No compactness and no boundedness is\nassumed: $I$ may be open, half-open, unbounded, or a single point.",
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Inverse function theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Inverse_function_theorem"
+            },
+            {
+              "title": "Monotonic function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Monotonic_function"
+            },
+            {
+              "title": "Real Analysis Notes 10 (California State University, Dominguez Hills)",
+              "url": "https://math.csudh.edu/~pong/a3/Notes_10.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-cantor-function-increases-only-on-a-null-set",
+        "kind": "remark",
+        "title": "The Cantor function is continuous and nondecreasing, climbs from $0$ to $1$, and is constant on every interval removed in the construction of the Cantor set, so all of its increase happens on a set of measure zero",
+        "deps": [
+          "cor-cantor-function-is-continuous",
+          "thm-cantor-function-properties",
+          "thm-cantor-set-properties",
+          "def-cantor-set",
+          "def-cantor-function",
+          "def-measure-zero-and-content-zero",
+          "def-monotone-function",
+          "def-interval"
+        ],
+        "statement": "Collect what is now known about the Cantor function $c : [0,1] \\to \\mathbb{R}$\n([[def-cantor-function]]) and the Cantor set $C$ ([[def-cantor-set]]).\n\n- $c$ is continuous on $[0,1]$ ([[cor-cantor-function-is-continuous]]).\n- $c$ is nondecreasing ([[def-monotone-function]]), and $c(0) = 0$, $c(1) = 1$:\n  it climbs the whole way from $0$ to $1$ ([[thm-cantor-function-properties]],\n  claims 2 and 3).\n- $c$ is **constant on every interval removed in the construction of $C$**: if\n  $u < v$ lie in $C$ and $(u,v) \\cap C = \\varnothing$, then $c$ is constant on\n  $[u,v]$; and every point of $[0,1] \\setminus C$ lies in the open interval\n  $(u,v)$ of such a pair ([[thm-cantor-function-properties]], claim 4).\n- $C$ has content zero, and therefore measure zero\n  ([[thm-cantor-set-properties]], claim 2, [[def-measure-zero-and-content-zero]]).\n\n**All of the increase happens on $C$, in the following exact sense.** Let\n$x < y$ in $[0,1]$ with $c(x) < c(y)$. Then $(x,y) \\cap C \\ne \\varnothing$.\nIndeed, suppose $(x,y) \\cap C = \\varnothing$ and pick any $t$ with $x < t < y$.\nThen $t \\notin C$, so $t$ lies in the open interval $(u,v)$ of a pair $u < v$ of\npoints of $C$ with $(u,v) \\cap C = \\varnothing$, and $c$ is constant on $[u,v]$.\nNow $u < t < y$, and $u \\in C$, so $u \\notin (x,y)$ and therefore $u \\le x$;\nsymmetrically $x < t < v$ and $v \\in C$ give $v \\ge y$. Hence\n$[x,y] \\subseteq [u,v]$ and $c(x) = c(y)$, contrary to assumption. So a\nnondegenerate interval on which $c$ actually rises must meet $C$, a set of\nmeasure zero, while on the complement of $C$ the function is locally constant.\n\n**What is not claimed here.** Nothing above says that $c$ is differentiable\nanywhere, that its derivative vanishes anywhere, or that $c$ is singular: no\nnotion of derivative is available at this point in the reading order, and no\nnotion of Lebesgue measure is developed in the library as it stands. Measure\nzero here is exactly [[def-measure-zero-and-content-zero]], a condition on\ncovers by intervals, and every statement above is a statement about $c$, about\n$C$, and about that covering condition, and about nothing else.\n\n**Why this is worth recording at all.** A continuous nondecreasing function that\nclimbs from $0$ to $1$ might be expected to do its climbing on a set that is\nlarge in some sense; $c$ does all of it on a set that is null and, being\nnowhere dense ([[thm-cantor-set-properties]], claim 5), small in category as\nwell. The companion page pushes the same observation one step further: $c$ maps\nthe null set $C$ **onto** the whole of $[0,1]$.",
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cantor function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cantor_function"
+            },
+            {
+              "title": "Cantor set (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cantor_set"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-discontinuity-set-is-f-sigma",
+        "kind": "theorem",
+        "title": "For $f : A \\to \\mathbb{R}$ the set of points of $A$ at which $f$ is discontinuous is the intersection with $A$ of an $F_\\sigma$ subset of $\\mathbb{R}$, and the set of points at which $f$ is continuous is the intersection with $A$ of a $G_\\delta$ subset; for $A = \\mathbb{R}$ the two sets are $F_\\sigma$ and $G_\\delta$ outright",
+        "deps": [
+          "def-oscillation",
+          "thm-continuity-iff-oscillation-zero",
+          "lem-oscillation-superlevel-sets-are-closed",
+          "def-f-sigma-g-delta",
+          "def-open-and-closed-in-r",
+          "cor-archimedean-reciprocal",
+          "def-continuity-real",
+          "def-extended-reals",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-classification-of-discontinuities"
+        ],
+        "statement": "Let $A \\subseteq \\mathbb{R}$ and let $f : A \\to \\mathbb{R}$. Write\n\n$$D \\;:=\\; \\{\\, x \\in A : f \\text{ is discontinuous at } x \\,\\}, \\qquad C \\;:=\\; A \\setminus D$$\n\n([[def-continuity-real]], [[def-classification-of-discontinuities]]). Then:\n\n1. **Pointwise exhaustion.** $D = \\{\\, x \\in A : \\omega_f(x) > 0 \\,\\}$\n   ([[def-oscillation]]), and $D$ is the union of the increasing sequence of\n   superlevel sets\n   $$D \\;=\\; \\bigcup_{n \\in \\mathbb{N}} \\{\\, x \\in A : \\omega_f(x) \\ge 1/(n+1) \\,\\}$$\n   ([[def-canonical-natural]]), whose thresholds are $1, 1/2, 1/3, \\dots$.\n2. **Descriptive form.** There is an $F_\\sigma$ set $F \\subseteq \\mathbb{R}$ and\n   a $G_\\delta$ set $V \\subseteq \\mathbb{R}$ ([[def-f-sigma-g-delta]]) with\n   $$D \\;=\\; A \\cap F, \\qquad C \\;=\\; A \\cap V, \\qquad V = \\mathbb{R} \\setminus F ,$$\n   and $F$ may be taken to be $\\bigcup_{n \\in \\mathbb{N}} G_n$ with each $G_n$ a\n   closed subset of $\\mathbb{R}$ cutting down on $A$ to the $n$-th set of\n   claim 1 ([[lem-oscillation-superlevel-sets-are-closed]]).\n\nIn particular, when $A = \\mathbb{R}$ the discontinuity set $D$ is an $F_\\sigma$\nsubset of $\\mathbb{R}$ and the continuity set $C$ is a $G_\\delta$ subset, and\nclaim 1 reads $D = \\bigcup_{n} \\{\\, x \\in \\mathbb{R} : \\omega_f(x) \\ge 1/(n+1) \\,\\}$.\n\n**Claim 1 is stated separately because it is what later arguments cite\ndownstream.** The exhaustion of $D$ by the superlevel sets\n$\\{\\omega_f \\ge 1/(n+1)\\}$ is exactly the form needed when a later proof\nestablishes a property one threshold at a time, so the identity itself is\nrecorded here and not only the descriptive conclusion of claim 2.\n\n**The statement is relative on purpose.** For a general domain $A$ the sets $D$\nand $C$ are subsets of $A$, and neither is $F_\\sigma$ or $G_\\delta$ in\n$\\mathbb{R}$ in general; what the proof produces are two subsets of\n$\\mathbb{R}$ that cut down to them. The absolute form is stated only for\n$A = \\mathbb{R}$, which is the case used later by the realization and\nexact-continuity-set examples.",
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Classification of discontinuities (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
+            },
+            {
+              "title": "Gdelta set (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/G%CE%B4_set"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-dirichlet-and-thomae-continuity-sets",
+        "kind": "theorem",
+        "title": "The Dirichlet function is continuous at no point of $\\mathbb{R}$, and Thomae's function is continuous at every irrational and at no rational, so its set of continuity points is exactly the set of irrationals and its oscillation at $c$ equals $t(c)$",
+        "deps": [
+          "def-dirichlet-and-thomae-functions",
+          "def-continuity-real",
+          "lem-q-and-irrationals-dense-r",
+          "def-oscillation",
+          "thm-continuity-iff-oscillation-zero",
+          "cor-archimedean-reciprocal",
+          "lem-integer-part",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-finite-set-has-max",
+          "def-max-min",
+          "def-neighbourhood-r",
+          "thm-closure-characterisations-r",
+          "lem-rat-embeds-dense",
+          "def-extended-reals",
+          "lem-extended-reals-complete"
+        ],
+        "statement": "Let $\\mathbf{1}_{\\mathbb{Q}}$ and $t$ be the Dirichlet and Thomae functions\n([[def-dirichlet-and-thomae-functions]]), and write $q(x)$ for the least\ndenominator of a rational $x$, so that $t(x) = 1/q(x)$ there and\n$t(x) = 0$ at every irrational $x$. Then:\n\n1. $\\mathbf{1}_{\\mathbb{Q}}$ is continuous at **no** point of $\\mathbb{R}$\n   ([[def-continuity-real]]);\n2. $\\omega_{t}(c) = t(c)$ for **every** real $c$ ([[def-oscillation]]);\n3. $t$ is continuous at every irrational and discontinuous at every rational, so\n   its set of continuity points is exactly $\\mathbb{R} \\setminus \\mathbb{Q}$.\n\n**Claim 1 duplicates a companion examples-page argument on purpose.** The\nexamples-page proof that the Dirichlet function is nowhere continuous lives on\na leaf page of the library, so later A-page items cannot cite it directly. The\nclaim is needed here, and on later pages, as a citable theorem-level\nstatement, so it is proved again rather than quoted. The two statements are the\nsame, and no originality is claimed for the repeated proof. The same\nduplication pattern is used elsewhere in this page family for examples whose\nargument also has to be available in A-page form.",
+        "dependency_level": 2,
+        "proof_strategy": "cases",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Thomae's function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Thomae%27s_function"
+            },
+            {
+              "title": "Dirichlet function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Dirichlet_function"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-semicontinuous-evt",
+        "kind": "theorem",
+        "title": "Semicontinuous extreme value theorem: an upper semicontinuous function on a nonempty compact $K \\subseteq \\mathbb{R}$ is bounded above and attains a maximum, and a lower semicontinuous one is bounded below and attains a minimum",
+        "deps": [
+          "def-semicontinuity",
+          "thm-semicontinuity-level-set-characterisation",
+          "def-open-cover-r",
+          "def-max-min",
+          "def-bounded-set",
+          "lem-sup-epsilon",
+          "def-complete-ordered-field",
+          "cor-archimedean-reciprocal",
+          "def-open-and-closed-in-r",
+          "lem-finite-set-has-max",
+          "thm-of-archimedean",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ],
+        "statement": "Let $K \\subseteq \\mathbb{R}$ be nonempty and compact ([[def-open-cover-r]]).\n\n1. If $f : K \\to \\mathbb{R}$ is upper semicontinuous on $K$\n   ([[def-semicontinuity]]) then $f[K]$ is bounded above\n   ([[def-bounded-set]]) and $f$ attains a maximum: there is $x_0 \\in K$ with\n   $f(x) \\le f(x_0)$ for every $x \\in K$ ([[def-max-min]]).\n2. If $f : K \\to \\mathbb{R}$ is lower semicontinuous on $K$ then $f[K]$ is\n   bounded below and $f$ attains a minimum.\n\n**The theorem is genuinely one-sided.** An upper semicontinuous function on a\ncompact set need not attain its infimum; the companion page gives such a\nfunction on $[0,1]$. Only the maximum is\nasserted in claim 1, and only the minimum in claim 2.\n\nTaking $f$ continuous, which is upper and lower semicontinuous at once\n([[def-semicontinuity]]), recovers the classical extreme value theorem on a\ncompact subset of $\\mathbb{R}$.",
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Semi-continuity (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Semi-continuity"
+            },
+            {
+              "title": "Extreme value theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Extreme_value_theorem"
+            },
+            {
+              "title": "Upper Semicontinuous Function on Compact Space Attains Maximum (ProofWiki)",
+              "url": "https://proofwiki.org/wiki/Real-Valued_Upper_Semicontinuous_Function_on_Compact_Space_attains_Maximum_with_Compact_Set_of_Maximizers"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-additive-bounded-above-on-an-interval-is-linear",
+        "kind": "lemma",
+        "title": "If an additive $f : \\mathbb{R} \\to \\mathbb{R}$ is bounded above on some nondegenerate interval, then $f(x) = f(1)\\,x$ for every real $x$",
+        "deps": [
+          "def-additive-function",
+          "lem-additive-is-q-linear",
+          "def-interval",
+          "def-bounded-set",
+          "lem-rat-embeds-dense",
+          "cor-archimedean-reciprocal",
+          "thm-of-archimedean",
+          "def-complete-ordered-field",
+          "lem-of-abs-value",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ],
+        "statement": "Let $f : \\mathbb{R} \\to \\mathbb{R}$ be additive ([[def-additive-function]]) and\nsuppose there are reals $p < r$ and a real $M$ with $f(z) \\le M$ for every\n$z \\in [p,r]$; that is, $f$ is bounded above on a nondegenerate interval\n([[def-interval]], [[def-bounded-set]]). Then\n\n$$f(x) \\;=\\; f(1)\\,x \\qquad \\text{for every real } x .$$\n\n**A nondegenerate interval is all that is needed, and its position is\nirrelevant.** Any order-convex set with two distinct points contains a closed\n$[p,r]$ with $p < r$, and the hypothesis is used only through that closed\ninterval; the argument then translates the interval along $\\mathbb{Q}$ to cover\nthe whole line.",
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cauchy's functional equation (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
+            },
+            {
+              "title": "Additive operators approximately preserving Birkhoff-James orthogonality (Aequationes mathematicae)",
+              "url": "https://link.springer.com/article/10.1007/s00010-025-01210-4"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-froda",
+        "kind": "theorem",
+        "title": "Froda's theorem: the set of discontinuities of a monotone function on an interval is at most countable, the injection into $\\mathbb{N}$ being built from one fixed enumeration of the rationals by least index, so no choice principle is used",
+        "deps": [
+          "def-monotone-function",
+          "thm-monotone-discontinuities-are-jumps",
+          "thm-monotone-one-sided-limits-exist",
+          "def-classification-of-discontinuities",
+          "def-countable",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "lem-subset-of-countable",
+          "thm-well-ordering-principle",
+          "def-interval",
+          "def-injection-surjection-bijection",
+          "def-equinumerous",
+          "def-continuity-real"
+        ],
+        "statement": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be monotone ([[def-monotone-function]]). Then the set\n\n$$D \\;:=\\; \\{\\, c \\in I : f \\text{ is discontinuous at } c \\,\\}$$\n\n([[def-classification-of-discontinuities]]) is **at most countable**\n([[def-countable]]).\n\nMore precisely, the proof exhibits an injection $J : D \\to \\mathbb{N}$\n([[def-injection-surjection-bijection]]) built from one fixed enumeration of the\nrationals: at a discontinuity $c$ interior to $I$ the value $J(c)$ is read off\nthe **least index** of a rational lying in the gap\n$\\bigl(\\lim_{x \\to c^{-}} f(x),\\ \\lim_{x \\to c^{+}} f(x)\\bigr)$, which is a\nnonempty open interval by [[thm-monotone-discontinuities-are-jumps]]. The map\n$J$ is therefore determined by $f$ and by the fixed enumeration, and **no choice\nprinciple is used**: least indices are canonical by\n[[thm-well-ordering-principle]], and nothing anywhere in the proof is selected\nwithout being determined.",
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Froda's theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Froda%27s_theorem"
+            },
+            {
+              "title": "Classification of discontinuities (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
+            },
+            {
+              "title": "Discontinuities of monotone functions (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Discontinuities_of_monotone_functions"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-continuity-set-realisation",
+        "kind": "theorem",
+        "title": "Every $G_\\delta$ subset of $\\mathbb{R}$ is the set of continuity points of some $f : \\mathbb{R} \\to \\mathbb{R}$, so the $G_\\delta$ sets are exactly the continuity sets",
+        "deps": [
+          "def-f-sigma-g-delta",
+          "thm-discontinuity-set-is-f-sigma",
+          "def-open-and-closed-in-r",
+          "thm-open-set-algebra-r",
+          "thm-well-ordering-principle",
+          "lem-q-and-irrationals-dense-r",
+          "cor-archimedean-reciprocal",
+          "def-continuity-real",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-neighbourhood-r",
+          "lem-rat-embeds-dense",
+          "thm-closure-characterisations-r"
+        ],
+        "statement": "Let $G \\subseteq \\mathbb{R}$ be a $G_\\delta$ set ([[def-f-sigma-g-delta]]). Then\nthere is a function $f : \\mathbb{R} \\to \\mathbb{R}$ whose set of continuity\npoints ([[def-continuity-real]]) is exactly $G$.\n\nTogether with [[thm-discontinuity-set-is-f-sigma]], which says that the\ncontinuity set of every $f : \\mathbb{R} \\to \\mathbb{R}$ is a $G_\\delta$ set, this\nidentifies the two classes:\n\n$$\\{\\, \\text{continuity sets of functions } \\mathbb{R} \\to \\mathbb{R} \\,\\} \\;=\\; \\{\\, G_\\delta \\text{ subsets of } \\mathbb{R} \\,\\} .$$\n\n**The construction.** Write $G = \\bigcap_{n \\in \\mathbb{N}} V_n$ with each $V_n$\nopen and put $W_n := V_0 \\cap \\dots \\cap V_n$, so that the $W_n$ are open and\ndecreasing with $\\bigcap_n W_n = G$. For $x \\notin G$ let $n(x)$ be the least $n$\nwith $x \\notin W_n$, and set\n\n$$f(x) := 0 \\ \\text{ for } x \\in G, \\qquad f(x) := \\frac{1}{(n(x)+1)} \\ \\text{ for } x \\notin G,\\ x \\in \\mathbb{Q}, \\qquad f(x) := -\\frac{1}{(n(x)+1)} \\ \\text{ for } x \\notin G,\\ x \\notin \\mathbb{Q}.$$\n\nThe sign carries the whole of the discontinuity: near a point outside $G$ there\nare points of the opposite rationality, where $f$ has the opposite sign or is\n$0$, and the values cannot come close.",
+        "dependency_level": 3,
+        "proof_strategy": "constructive",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Gdelta set (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/G%CE%B4_set"
+            },
+            {
+              "title": "Classification of discontinuities (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-no-function-is-continuous-exactly-on-q",
+        "kind": "corollary",
+        "title": "No function $\\mathbb{R} \\to \\mathbb{R}$ is continuous at every rational and discontinuous at every irrational, because $\\mathbb{Q}$ is not $G_\\delta$",
+        "deps": [
+          "thm-discontinuity-set-is-f-sigma",
+          "def-f-sigma-g-delta",
+          "cor-q-is-meager-and-not-g-delta",
+          "def-continuity-real",
+          "lem-rat-embeds-dense"
+        ],
+        "statement": "There is **no** function $f : \\mathbb{R} \\to \\mathbb{R}$ that is continuous at\nevery rational and discontinuous at every irrational\n([[def-continuity-real]], [[lem-rat-embeds-dense]]).\n\nEquivalently: $\\mathbb{Q}$ is not the continuity set of any function\n$\\mathbb{R} \\to \\mathbb{R}$.\n\n**The contrast with Thomae's function is the point.** There *is* a function\ncontinuous exactly at the irrationals, namely $t$\n([[thm-dirichlet-and-thomae-continuity-sets]]), and one might expect the two\narrangements to be symmetric. They are not, because the classes $F_\\sigma$ and\n$G_\\delta$ are exchanged by complementation while $\\mathbb{Q}$ and the\nirrationals are, and only one of the two sets is $G_\\delta$\n([[cor-q-is-meager-and-not-g-delta]]).",
+        "dependency_level": 3,
+        "proof_strategy": "contradiction",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Gdelta set (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/G%CE%B4_set"
+            },
+            {
+              "title": "Baire category theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Baire_category_theorem"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-baire-one-continuity-points",
+        "kind": "theorem",
+        "title": "Baire's theorem: a Baire class one function on a closed bounded interval $[a,b]$ is continuous at the points of a dense subset of $[a,b]$ that is the trace of a $G_\\delta$ set, so its set of discontinuities is meager",
+        "deps": [
+          "def-baire-class-one",
+          "def-oscillation",
+          "lem-oscillation-superlevel-sets-are-closed",
+          "thm-discontinuity-set-is-f-sigma",
+          "lem-baire-category-in-a-closed-interval",
+          "def-nowhere-dense-meager",
+          "def-f-sigma-g-delta",
+          "def-open-and-closed-in-r",
+          "def-interior-closure-boundary-r",
+          "thm-closure-characterisations-r",
+          "thm-open-set-algebra-r",
+          "thm-continuity-preimage-characterisation",
+          "thm-algebra-of-continuous-functions",
+          "def-continuity-real",
+          "def-interval",
+          "cor-archimedean-reciprocal",
+          "def-real-limit",
+          "def-sequence",
+          "lem-of-abs-value",
+          "def-max-min",
+          "def-neighbourhood-r",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "def-limit-point-r"
+        ],
+        "statement": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be of\nBaire class one ([[def-baire-class-one]]). Write\n\n$$D \\;:=\\; \\{\\, x \\in [a,b] : f \\text{ is discontinuous at } x \\,\\}, \\qquad C := [a,b] \\setminus D$$\n\n([[def-continuity-real]]). Then:\n\n1. for every real $\\varepsilon > 0$ the set\n   $D_\\varepsilon := \\{\\, x \\in [a,b] : \\omega_f(x) \\ge \\varepsilon \\,\\}$\n   ([[def-oscillation]]) is a closed subset of $\\mathbb{R}$ containing **no**\n   nondegenerate closed interval, hence nowhere dense\n   ([[def-nowhere-dense-meager]]);\n2. $D$ is meager, being the union of the sequence\n   $(D_{1/(n+1)})_{n \\in \\mathbb{N}}$ of nowhere dense sets;\n3. $C$ is dense in $[a,b]$: for every $x \\in [a,b]$ and every real $\\rho > 0$\n   the set $[a,b] \\cap N_\\rho(x)$ contains a point of $C$;\n4. $C = [a,b] \\cap V$ for a $G_\\delta$ subset $V \\subseteq \\mathbb{R}$\n   ([[def-f-sigma-g-delta]]).\n\n**On the phrase \"dense $G_\\delta$\".** Claims 3 and 4 together are what the\nclassical statement calls a *dense $G_\\delta$ subset of $[a,b]$*: the continuity\nset is dense in $[a,b]$ and it is the trace on $[a,b]$ of a $G_\\delta$ subset of\n$\\mathbb{R}$. It is not claimed that $C$ is $G_\\delta$ as a subset of\n$\\mathbb{R}$, nor that it is dense in $\\mathbb{R}$; neither is true in general,\nsince $C \\subseteq [a,b]$.",
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Baire function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Baire_function"
+            },
+            {
+              "title": "Baire category theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Baire_category_theorem"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cauchy-functional-equation-regularity",
+        "kind": "theorem",
+        "title": "Six regularity conditions each force an additive $f : \\mathbb{R} \\to \\mathbb{R}$ to be $x \\mapsto f(1)x$: continuity at a single point, monotonicity on a nondegenerate interval, boundedness above on one, boundedness below on one, constancy of sign on one, and a graph that is not dense in $\\mathbb{R}^{2}$",
+        "deps": [
+          "def-additive-function",
+          "lem-additive-is-q-linear",
+          "lem-additive-bounded-above-on-an-interval-is-linear",
+          "def-monotone-function",
+          "def-continuity-real",
+          "def-interval",
+          "def-bounded-set",
+          "lem-metrics-on-rn",
+          "def-metric-space",
+          "def-metric-ball",
+          "def-metric-interior-closure-boundary",
+          "thm-metric-closure-characterisation",
+          "lem-rat-embeds-dense",
+          "cor-archimedean-reciprocal",
+          "lem-of-abs-value",
+          "def-complete-ordered-field",
+          "def-neighbourhood-r"
+        ],
+        "statement": "Let $f : \\mathbb{R} \\to \\mathbb{R}$ be additive ([[def-additive-function]]) and\nput $c := f(1)$. Write $\\mathbb{R}^{2}$ for the set of functions\n$2 \\to \\mathbb{R}$ with the metric\n$d_\\infty\\bigl((a,b),(a',b')\\bigr) = \\max\\{|a-a'|,\\ |b-b'|\\}$\n([[lem-metrics-on-rn]], [[def-metric-space]]), and let\n\n$$\\Gamma \\;:=\\; \\{\\, (x, f(x)) \\;:\\; x \\in \\mathbb{R} \\,\\} \\;\\subseteq\\; \\mathbb{R}^{2}$$\n\nbe the graph of $f$. If **any one** of the following six conditions holds, then\n$f(x) = c\\,x$ for every real $x$.\n\n1. $f$ is continuous at some single point of $\\mathbb{R}$\n   ([[def-continuity-real]]).\n2. $f$ is monotone on some nondegenerate interval\n   ([[def-monotone-function]], [[def-interval]]).\n3. $f$ is bounded above on some nondegenerate interval ([[def-bounded-set]]).\n4. $f$ is bounded below on some nondegenerate interval.\n5. $f$ has constant sign on some nondegenerate interval $I$: either $f(z) \\ge 0$\n   for every $z \\in I$, or $f(z) \\le 0$ for every $z \\in I$.\n6. $\\Gamma$ is **not** dense in $\\mathbb{R}^{2}$\n   ([[def-metric-interior-closure-boundary]]).\n\n**Conditions 3, 4 and 5 are not independent, and the proof does not pretend they\nare.** Condition 5 is the special case of 3 or of 4 with the bound $0$, and\ncondition 4 is condition 3 applied to $-f$; they are listed separately only\nbecause each is the form in which the hypothesis usually arises. Condition 1 and\ncondition 2 are each reduced to condition 3 in one line. Condition 6 is the only\none that is not, and it is proved in the contrapositive: if $f$ is not of the\nform $x \\mapsto cx$, then $\\Gamma$ is dense.\n\n**Two classical clauses are absent.** *Boundedness on a set of positive measure*\nand *Lebesgue measurability* also force linearity, and neither is stated here:\nboth require a measure, and this library develops none as it stands. Each is an\nindependent sufficient condition, so restoring them would change nothing else on\nthis page.",
+        "dependency_level": 3,
+        "proof_strategy": "cases",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cauchy's functional equation (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
+            },
+            {
+              "title": "Hamel basis (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
+            },
+            {
+              "title": "Additive operators approximately preserving Birkhoff-James orthogonality (Aequationes mathematicae)",
+              "url": "https://link.springer.com/article/10.1007/s00010-025-01210-4"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-monotone-with-prescribed-discontinuity-set",
+        "kind": "theorem",
+        "title": "Converse to Froda: for every at most countable $E \\subseteq \\mathbb{R}$ there is a bounded nondecreasing $f : \\mathbb{R} \\to \\mathbb{R}$ whose set of discontinuities is exactly $E$, every one of them a jump",
+        "deps": [
+          "def-monotone-function",
+          "def-classification-of-discontinuities",
+          "thm-monotone-one-sided-limits-exist",
+          "thm-monotone-discontinuities-are-jumps",
+          "thm-froda",
+          "def-countable",
+          "lem-countable-iff-surjection-from-n",
+          "def-series",
+          "thm-geometric-series",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "lem-series-tail-invariance",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "def-continuity-real",
+          "def-bounded-set",
+          "def-integer-power",
+          "def-real-limit",
+          "lem-finite-set-has-max",
+          "lem-rat-embeds-dense",
+          "def-interval",
+          "def-max-min"
+        ],
+        "statement": "Let $E \\subseteq \\mathbb{R}$ be at most countable ([[def-countable]]). Then\nthere is a function $f : \\mathbb{R} \\to \\mathbb{R}$ such that\n\n1. $f$ is nondecreasing ([[def-monotone-function]]) and $0 \\le f(x) \\le 1$ for\n   every real $x$, so $f$ is bounded ([[def-bounded-set]]);\n2. $f$ is continuous at every $x \\notin E$ and discontinuous at every $x \\in E$\n   ([[def-continuity-real]]), so the discontinuity set of $f$ is exactly $E$;\n3. every discontinuity of $f$ is a **jump**\n   ([[def-classification-of-discontinuities]]), with\n   $\\lim_{x \\to c^{-}} f(x) = f(c) < \\lim_{x \\to c^{+}} f(x)$ at every $c \\in E$.\n\nTogether with [[thm-froda]] this settles the question completely: the sets that\noccur as discontinuity sets of monotone functions on $\\mathbb{R}$ are **exactly**\nthe at most countable ones.\n\n**The construction.** For $E = \\varnothing$ take $f := 0$. Otherwise fix a\nsurjection $s : \\mathbb{N} \\to E$ ([[lem-countable-iff-surjection-from-n]]) and\nset\n\n$$f(x) \\;:=\\; \\sum_{k=0}^{\\infty} a_{k}(x), \\qquad a_{k}(x) := \\begin{cases} 1/2^{\\,k+1} & \\text{if } s(k) < x,\\\\ 0 & \\text{otherwise,}\\end{cases}$$\n\n([[def-series]], [[def-integer-power]]): the mass $1/2^{\\,k+1}$ is placed at the\npoint $s(k)$ and is collected by $f$ strictly to the right of it. Repetitions in\nthe enumeration are harmless; they only make the jump at a point larger.",
+        "dependency_level": 4,
+        "proof_strategy": "constructive",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Classification of discontinuities (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
+            },
+            {
+              "title": "Froda's theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Froda%27s_theorem"
+            },
+            {
+              "title": "Discontinuities of monotone functions (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Discontinuities_of_monotone_functions"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-additive-implies-linear",
+        "kind": "false-statement",
+        "title": "FALSE: every additive $f : \\mathbb{R} \\to \\mathbb{R}$ is of the form $x \\mapsto cx$ for a single real $c$",
+        "deps": [
+          "def-additive-function",
+          "lem-additive-is-q-linear",
+          "lem-hamel-basis-exists",
+          "thm-cauchy-functional-equation-regularity",
+          "def-vector-space",
+          "def-linear-combination-and-span",
+          "lem-restriction-of-scalars",
+          "def-axiom-of-choice",
+          "thm-zorn",
+          "def-complete-ordered-field",
+          "lem-rat-embeds-dense",
+          "lem-q-and-irrationals-dense-r"
+        ],
+        "statement": "",
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cauchy's functional equation (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
+            },
+            {
+              "title": "Axiom of choice (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Axiom_of_choice"
+            },
+            {
+              "title": "Hamel Basis (MathWorld)",
+              "url": "https://mathworld.wolfram.com/HamelBasis.html"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 233,
+    "id": "monotone-functions-and-discontinuities-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Monotone Functions, Discontinuities, and Continuity Sets: Examples and Counterexamples",
+    "requires": [
+      "monotone-functions-and-discontinuities",
+      "absolute-convergence-and-rearrangement"
+    ],
+    "items": [
+      {
+        "id": "ex-locally-unbounded-finite-everywhere",
+        "kind": "example",
+        "title": "The function equal to $q$ at a rational $p/q$ in lowest terms and to $0$ at every irrational is finite at every point and unbounded on every nondegenerate interval",
+        "deps": [
+          "def-dirichlet-and-thomae-functions",
+          "lem-q-and-irrationals-dense-r",
+          "lem-rat-embeds-dense",
+          "def-bounded-set",
+          "def-interval",
+          "cor-archimedean-reciprocal",
+          "thm-of-archimedean",
+          "def-oscillation",
+          "def-continuity-real",
+          "lem-integer-part",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-of-abs-value",
+          "def-complete-ordered-field"
+        ],
+        "statement": "Let $q(x)$ be the least denominator of a rational $x$\n([[def-dirichlet-and-thomae-functions]]) and define\n$h : \\mathbb{R} \\to \\mathbb{R}$ by\n\n$$h(x) := q(x) \\ \\text{ for } x \\in \\mathbb{Q}, \\qquad h(x) := 0 \\ \\text{ for } x \\notin \\mathbb{Q},$$\n\nwhere $q$ is the canonical natural ([[def-canonical-natural]]) and\n$\\mathbb{Q}$ is the canonical copy of the rationals inside $\\mathbb{R}$\n([[lem-rat-embeds-dense]]). Equivalently $h(x) = 1/t(x)$ at a rational $x$,\nwhere $t$ is Thomae's function. Then:\n\n1. $h(x)$ is a real number for every real $x$: $h$ is finite at every point;\n2. $h$ is **unbounded on every nondegenerate interval**\n   ([[def-bounded-set]], [[def-interval]]): for all reals $a < b$ and every real\n   $M$ there is $x \\in (a,b)$ with $h(x) > M$.\n\nSo a function may be finite at every single point and yet fail to be bounded on\nevery interval, however short. In particular $h$ is bounded on no neighbourhood\nof any point.",
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Thomae's function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Thomae%27s_function"
+            },
+            {
+              "title": "Elements of Real Analysis (Rutgers University-Camden)",
+              "url": "https://math.camden.rutgers.edu/files/Real_Analysis.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cantor-function-maps-a-null-set-onto-the-unit-interval",
+        "kind": "example",
+        "title": "The Cantor set has measure zero, yet the Cantor function maps it onto all of $[0,1]$: a null set can have image an interval of length $1$",
+        "deps": [
+          "def-cantor-function",
+          "thm-cantor-function-properties",
+          "thm-cantor-set-properties",
+          "cor-cantor-function-is-continuous",
+          "def-measure-zero-and-content-zero",
+          "lem-nondegenerate-interval-is-not-null",
+          "def-cantor-set",
+          "def-interval",
+          "def-injection-surjection-bijection"
+        ],
+        "statement": "Let $C$ be the Cantor set ([[def-cantor-set]]) and let $c : [0,1] \\to \\mathbb{R}$\nbe the Cantor function ([[def-cantor-function]]). Then:\n\n1. $C$ has measure zero ([[def-measure-zero-and-content-zero]]);\n2. $c[C] = [0,1]$: the Cantor function maps the Cantor set **onto** the whole of\n   $[0,1]$ ([[def-injection-surjection-bijection]]);\n3. $[0,1]$ does not have measure zero\n   ([[lem-nondegenerate-interval-is-not-null]]).\n\nSo a continuous function can carry a set of measure zero onto a set that is not\nof measure zero, and indeed onto an interval of length $1$: **being null is not\npreserved by continuous images.**",
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cantor function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cantor_function"
+            },
+            {
+              "title": "Cantor set (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cantor_set"
+            },
+            {
+              "title": "The Cantor Function and the Cantor Set (University of Melbourne)",
+              "url": "https://researchers.ms.unimelb.edu.au/~xgge%40unimelb/Files/Teaching/Advanced%20Probability%20%28Semester%201%202020%29/The%20Cantor%20Function%20and%20the%20Cantor%20Set.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-thomae-values-and-oscillation-computed",
+        "kind": "example",
+        "title": "Thomae's function computed: $t(1/2) = 1/2$, $t(2/3) = 1/3$, $t(m) = 1$ at every integer $m$, $t(x) = 0$ at every irrational, and $\\omega_t(c) = t(c)$ at every real $c$",
+        "deps": [
+          "def-dirichlet-and-thomae-functions",
+          "thm-dirichlet-and-thomae-continuity-sets",
+          "def-oscillation",
+          "thm-continuity-iff-oscillation-zero",
+          "lem-q-and-irrationals-dense-r",
+          "lem-rat-embeds-dense",
+          "lem-integer-part",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ],
+        "statement": "Let $t$ be Thomae's function ([[def-dirichlet-and-thomae-functions]]), so that\n$t(x) = 1/q(x)$ at a rational $x$ with least denominator $q(x)$ and\n$t(x) = 0$ at an irrational $x$. Then:\n\n1. $t(0) = 1$ and $t(m) = 1$ for every integer $m$;\n2. $t(1/2) = 1/2$, and more generally $t(1/q) = 1/q$ for every\n   natural $q \\ge 1$;\n3. $t(2/3) = 1/3$;\n4. $t(x) = 0$ at every irrational $x$;\n5. $\\omega_{t}(c) = t(c)$ at every real $c$ ([[def-oscillation]]), so\n   $\\omega_{t}$ is $1$ at every integer, $1/2$ at every half-integer that is not\n   an integer, and $0$ at every irrational.\n\nClaim 5 is claim 2 of [[thm-dirichlet-and-thomae-continuity-sets]] evaluated at\nthe points computed here; nothing new is proved about the oscillation, and the\npoint of the example is to see the numbers.",
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Thomae's function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Thomae%27s_function"
+            },
+            {
+              "title": "Dirichlet Function (MathWorld)",
+              "url": "https://mathworld.wolfram.com/DirichletFunction.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-continuous-inverse-gives-the-nth-root",
+        "kind": "example",
+        "title": "The $n$-th root as a continuous inverse: for a natural $n \\ge 1$ the map $x \\mapsto x^{n}$ is continuous and strictly increasing on $[0,\\infty)$ with image $[0,\\infty)$, so its inverse $x \\mapsto x^{1/n}$ is continuous and strictly increasing",
+        "deps": [
+          "thm-continuous-inverse",
+          "thm-continuous-injection-on-an-interval-is-strictly-monotone",
+          "def-monotone-function",
+          "thm-nth-roots-exist",
+          "lem-power-monotone",
+          "def-integer-power",
+          "def-rational-power",
+          "thm-algebra-of-continuous-functions",
+          "def-interval",
+          "def-continuity-real",
+          "def-injection-surjection-bijection"
+        ],
+        "statement": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$ and put $I := [0,\\infty)$\n([[def-interval]]) and $p : I \\to \\mathbb{R}$, $p(x) := x^{n}$\n([[def-integer-power]]). Then:\n\n1. $p$ is continuous on $I$ ([[def-continuity-real]]);\n2. $p$ is increasing on $I$ ([[def-monotone-function]]), hence injective\n   ([[def-injection-surjection-bijection]]);\n3. $p[I] = I$;\n4. consequently the inverse map $g : I \\to I$ of $p$ is continuous on $I$ and\n   increasing, and $g(a) = a^{1/n}$ is the unique nonnegative $n$-th root of $a$\n   ([[thm-nth-roots-exist]]).\n\nSo the $n$-th root function is continuous, and it is obtained from\n[[thm-continuous-inverse]] rather than from a direct\n$\\varepsilon$-$\\delta$ estimate.",
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Nth root (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Nth_root"
+            },
+            {
+              "title": "MATH 320 Lecture Notes, October 21 (Stony Brook University)",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math320.F21/lecOct21.pdf"
+            },
+            {
+              "title": "Real Analysis Notes 10 (California State University, Dominguez Hills)",
+              "url": "https://math.csudh.edu/~pong/a3/Notes_10.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-upper-semicontinuous-need-not-attain-its-infimum",
+        "kind": "counterexample",
+        "title": "An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided",
+        "deps": [
+          "def-semicontinuity",
+          "thm-semicontinuous-evt",
+          "thm-semicontinuity-level-set-characterisation",
+          "def-max-min",
+          "def-infimum",
+          "thm-infimum-property",
+          "def-bounded-set",
+          "def-interval",
+          "def-continuity-real",
+          "cor-archimedean-reciprocal",
+          "def-neighbourhood-r",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "statement": "**Refuted claim:** an upper semicontinuous function on a nonempty compact\nsubset of $\\mathbb{R}$ that is bounded below attains a minimum\n([[def-semicontinuity]], [[def-max-min]]).\n\nWhat [[thm-semicontinuous-evt]] proves is the one-sided statement: an **upper**\nsemicontinuous function on a nonempty compact set attains a **maximum**, and a\n**lower** semicontinuous one attains a **minimum**. The refuted claim mixes the\ntwo, and it is false.",
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Semi-continuity (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Semi-continuity"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-continuous-injection-on-a-non-interval-need-not-be-monotone",
+        "kind": "counterexample",
+        "title": "A continuous injection on $[0,1] \\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem",
+        "deps": [
+          "thm-continuous-injection-on-an-interval-is-strictly-monotone",
+          "thm-continuous-inverse",
+          "def-monotone-function",
+          "def-continuity-real",
+          "thm-algebra-of-continuous-functions",
+          "def-interval",
+          "def-injection-surjection-bijection",
+          "def-neighbourhood-r"
+        ],
+        "statement": "**Refuted claim:** every continuous injective function $f : A \\to \\mathbb{R}$\non a subset $A \\subseteq \\mathbb{R}$ is strictly monotone\n([[def-continuity-real]], [[def-injection-surjection-bijection]],\n[[def-monotone-function]]).\n\n[[thm-continuous-injection-on-an-interval-is-strictly-monotone]] proves this\nunder the hypothesis that $A$ is order-convex ([[def-interval]]). The refuted\nclaim drops that hypothesis, and it is false.",
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Monotonic function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Monotonic_function"
+            },
+            {
+              "title": "Chapter 4: Continuous Functions (Trinity College Dublin)",
+              "url": "https://www.maths.tcd.ie/~richardt/121/121-ch4.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-indicator-of-q-is-baire-class-two-not-one",
+        "kind": "example",
+        "title": "The Dirichlet function is the pointwise limit of a sequence of Baire class one functions and is itself not Baire class one, so the Baire hierarchy on $[0,1]$ is already strict at the first level",
+        "deps": [
+          "def-dirichlet-and-thomae-functions",
+          "def-baire-class-one",
+          "thm-baire-one-continuity-points",
+          "thm-dirichlet-and-thomae-continuity-sets",
+          "thm-rationals-countable",
+          "lem-q-and-irrationals-dense-r",
+          "def-continuity-real",
+          "thm-algebra-of-continuous-functions",
+          "def-real-limit",
+          "def-sequence",
+          "def-countable",
+          "def-interval",
+          "def-max-min",
+          "lem-finite-set-has-max",
+          "lem-countable-iff-surjection-from-n",
+          "lem-rat-embeds-dense",
+          "cor-archimedean-reciprocal",
+          "thm-of-archimedean",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-of-abs-value",
+          "def-neighbourhood-r",
+          "thm-closure-characterisations-r"
+        ],
+        "statement": "Let $D : [0,1] \\to \\mathbb{R}$ be the restriction to $[0,1]$\n([[def-interval]]) of the Dirichlet function\n([[def-dirichlet-and-thomae-functions]]), so $D(x) = 1$ at a rational $x$ and\n$D(x) = 0$ at an irrational $x$. Then:\n\n1. $D$ is the pointwise limit on $[0,1]$ of a sequence $(g_m)_{m \\in \\mathbb{N}}$\n   of functions each of which **is** of Baire class one on $[0,1]$\n   ([[def-baire-class-one]]), namely the indicators of the finite sets\n   $\\{s(0), \\dots, s(m)\\}$ for a fixed surjection\n   $s : \\mathbb{N} \\to \\mathbb{Q} \\cap [0,1]$;\n2. $D$ is **not** of Baire class one on $[0,1]$.\n\nSo the class of pointwise limits of sequences of Baire class one functions is\nstrictly larger than the class of Baire class one functions. That larger class\nis classically called Baire class two; no definition of it is given in this\nlibrary and none is used, the statement above being phrased entirely in terms of\npointwise limits ([[def-baire-class-one]]).",
+        "dependency_level": 4,
+        "proof_strategy": "contradiction",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Baire function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Baire_function"
+            },
+            {
+              "title": "Dirichlet function (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Dirichlet_function"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-monotone-function-discontinuous-exactly-at-the-rationals",
+        "kind": "example",
+        "title": "A bounded nondecreasing $f : \\mathbb{R} \\to \\mathbb{R}$ whose set of discontinuities is exactly $\\mathbb{Q}$, obtained from the prescribed-jump construction applied to one fixed enumeration of the rationals",
+        "deps": [
+          "thm-monotone-with-prescribed-discontinuity-set",
+          "def-monotone-function",
+          "def-classification-of-discontinuities",
+          "thm-froda",
+          "thm-rationals-countable",
+          "lem-rat-embeds-dense",
+          "def-countable",
+          "def-series",
+          "thm-geometric-series",
+          "def-equinumerous",
+          "lem-countable-iff-surjection-from-n"
+        ],
+        "statement": "Write $\\mathbb{Q}$ for the canonical copy of the rationals inside $\\mathbb{R}$\n([[lem-rat-embeds-dense]]). There is a function $f : \\mathbb{R} \\to \\mathbb{R}$\nwith all of the following properties:\n\n1. $f$ is nondecreasing ([[def-monotone-function]]) and $0 \\le f(x) \\le 1$ for\n   every real $x$;\n2. $f$ is discontinuous at every rational and continuous at every irrational, so\n   its discontinuity set is exactly $\\mathbb{Q}$;\n3. every discontinuity of $f$ is a jump\n   ([[def-classification-of-discontinuities]]).\n\nExplicitly, fixing a bijection $e : \\mathbb{N} \\to \\mathbb{Q}$\n([[thm-rationals-countable]]), one may take\n\n$$f(x) \\;=\\; \\sum_{k=0}^{\\infty} a_{k}(x), \\qquad a_{k}(x) = \\begin{cases} 1/2^{\\,k+1} & \\text{if } e(k) < x,\\\\ 0 & \\text{otherwise,}\\end{cases}$$\n\nwhich is the construction of [[thm-monotone-with-prescribed-discontinuity-set]]\napplied to $E := \\mathbb{Q}$ ([[def-series]], [[thm-geometric-series]]).\n\n**This is the extreme case allowed by Froda's theorem.** [[thm-froda]] says that\na monotone function on an interval has at most countably many discontinuities;\n$\\mathbb{Q}$ is countable and dense, so the bound is attained by a set that\nmeets every interval. A monotone function can therefore be discontinuous on a\ndense set, and it is nevertheless continuous on a set whose complement is\ncountable.",
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered",
+          "evidence": "exact-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Classification of discontinuities (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Classification_of_discontinuities"
+            },
+            {
+              "title": "Froda's theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Froda%27s_theorem"
+            },
+            {
+              "title": "Math 402/502 Real Analysis Homework (University of New Mexico)",
+              "url": "https://math.unm.edu/~crisp/courses/math402/spring19/hwk.html"
+            },
+            {
+              "title": "Discontinuities of monotone functions (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Discontinuities_of_monotone_functions"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-froda-is-sharp",
+        "kind": "example",
+        "title": "Froda's countable bound is attained: a bounded nondecreasing function on $\\mathbb{R}$ discontinuous exactly at the points $1 - 1/(k+1)$ for $k \\in \\mathbb{N}$, an infinite discontinuity set inside a bounded interval",
+        "deps": [
+          "def-equinumerous",
+          "def-injection-surjection-bijection",
+          "thm-monotone-with-prescribed-discontinuity-set",
+          "thm-froda",
+          "def-monotone-function",
+          "def-classification-of-discontinuities",
+          "def-countable",
+          "lem-countable-iff-surjection-from-n",
+          "cor-archimedean-reciprocal",
+          "thm-of-archimedean",
+          "def-interval",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ],
+        "statement": "Put\n\n$$E \\;:=\\; \\Bigl\\{\\, 1 - \\frac{1}{(k+1)} \\;:\\; k \\in \\mathbb{N} \\,\\Bigr\\} \\;=\\; \\Bigl\\{\\, 0,\\ \\tfrac12,\\ \\tfrac23,\\ \\tfrac34,\\ \\dots \\Bigr\\} \\;\\subseteq\\; [0,1)$$\n\n([[def-canonical-natural]], [[def-interval]]). Then:\n\n1. $E$ is countably infinite ([[def-countable]]);\n2. there is a nondecreasing $f : \\mathbb{R} \\to \\mathbb{R}$ with\n   $0 \\le f \\le 1$ whose set of discontinuities is exactly $E$, every one of them\n   a jump ([[thm-monotone-with-prescribed-discontinuity-set]],\n   [[def-monotone-function]], [[def-classification-of-discontinuities]]);\n3. $E$ is contained in the bounded interval $[0,1)$, so a monotone function may\n   have infinitely many discontinuities inside a bounded interval.\n\n**Indexing.** $\\mathbb{N}$ contains $0$, so the points are\n$1 - 1/(k+1)$ for $k \\in \\mathbb{N}$ and never $1 - 1/k$, which is\nundefined at $k = 0$; the first point of $E$ is $1 - 1/1 = 0$.\n\n**The point $1$ is not in $E$ and $f$ is continuous there.** $E$ has $1$ as a\nlimit point but does not contain it, and claim 2 asserts continuity at every\npoint outside $E$, so in particular at $1$: a monotone function may be\ncontinuous at a limit point of its own discontinuity set.",
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Froda's theorem (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Froda%27s_theorem"
+            },
+            {
+              "title": "Discontinuities of monotone functions (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Discontinuities_of_monotone_functions"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hamel-basis-additive-function",
+        "kind": "example",
+        "title": "An additive $f : \\mathbb{R} \\to \\mathbb{R}$ that is not $x \\mapsto cx$: the coefficient of one fixed Hamel basis vector. It is unbounded above and below on every nondegenerate interval, its graph is dense in $\\mathbb{R}^{2}$, and every nonempty level set is dense in $\\mathbb{R}$",
+        "deps": [
+          "lem-hamel-basis-exists",
+          "fs-additive-implies-linear",
+          "def-additive-function",
+          "lem-additive-is-q-linear",
+          "thm-cauchy-functional-equation-regularity",
+          "def-vector-space",
+          "lem-restriction-of-scalars",
+          "def-linear-combination-and-span",
+          "def-linear-subspace",
+          "lem-metrics-on-rn",
+          "def-metric-interior-closure-boundary",
+          "thm-metric-closure-characterisation",
+          "def-metric-ball",
+          "def-axiom-of-choice",
+          "thm-zorn",
+          "def-bounded-set",
+          "def-interval",
+          "lem-rat-embeds-dense",
+          "lem-q-and-irrationals-dense-r",
+          "def-complete-ordered-field",
+          "def-continuity-real",
+          "def-monotone-function"
+        ],
+        "statement": "**Assume the Axiom of Choice** ([[def-axiom-of-choice]]), which enters through\n[[lem-hamel-basis-exists]] and hence through [[thm-zorn]]. Fix a Hamel basis\n$B$ of $\\mathbb{R}$ over the canonical copy $\\mathbb{Q} \\subseteq \\mathbb{R}$ of\nthe rationals ([[lem-rat-embeds-dense]], [[lem-restriction-of-scalars]],\n[[def-vector-space]]), fix $b_{\\star} \\in B$, and let\n\n$$f \\;:=\\; \\Lambda_{b_{\\star}} : \\mathbb{R} \\to \\mathbb{R}$$\n\nbe the coefficient map of $b_{\\star}$ ([[lem-hamel-basis-exists]], claim 4).\nWrite $W := W_{b_{\\star}} = \\operatorname{span}(B \\setminus \\{b_{\\star}\\})$\n([[def-linear-combination-and-span]]). Then:\n\n1. $f$ is additive ([[def-additive-function]]) and is **not** of the form\n   $x \\mapsto cx$ for any real $c$ ([[fs-additive-implies-linear]]);\n2. $f$ is bounded neither above nor below on any nondegenerate interval\n   ([[def-bounded-set]], [[def-interval]]), is monotone on no nondegenerate\n   interval ([[def-monotone-function]]), is of constant sign on none, and is\n   continuous at no point of $\\mathbb{R}$ ([[def-continuity-real]]);\n3. the graph $\\{(x,f(x)) : x \\in \\mathbb{R}\\}$ is dense in $\\mathbb{R}^{2}$ for\n   the metric $d_\\infty$ ([[lem-metrics-on-rn]],\n   [[def-metric-interior-closure-boundary]]);\n4. the values of $f$ are exactly the rationals, and for every rational $r$ the\n   level set $f^{-1}(\\{r\\}) = \\{\\, x \\in \\mathbb{R} : f(x) = r \\,\\}$ is **dense\n   in $\\mathbb{R}$**; for an irrational $v$ the level set $f^{-1}(\\{v\\})$ is\n   empty.\n\nClaim 2 is the contrapositive of [[thm-cauchy-functional-equation-regularity]]\napplied to claim 1, clause by clause, and claim 3 is the contrapositive of its\nsixth clause.",
+        "dependency_level": 5,
+        "proof_strategy": "constructive",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Cauchy's functional equation (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
+            },
+            {
+              "title": "Hamel basis, in Basis (linear algebra) (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Basis_(linear_algebra)"
+            },
+            {
+              "title": "On Functions Whose Graph Is a Hamel Basis",
+              "url": "https://www.scranton.edu/faculty/plotka/pdfs/5.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous",
+        "kind": "example",
+        "title": "A bounded function on $\\mathbb{R}$ with no local maximum and no local minimum at any point, upper semicontinuous at no point and lower semicontinuous at no point: compose the Hamel coefficient with a strictly increasing injection of $\\mathbb{R}$ into $(0,1)$",
+        "deps": [
+          "ex-hamel-basis-additive-function",
+          "lem-hamel-basis-exists",
+          "def-additive-function",
+          "lem-additive-is-q-linear",
+          "def-semicontinuity",
+          "thm-semicontinuity-level-set-characterisation",
+          "def-max-min",
+          "lem-rat-embeds-dense",
+          "def-bounded-set",
+          "def-interval",
+          "lem-q-and-irrationals-dense-r",
+          "def-continuity-real",
+          "def-complete-ordered-field",
+          "def-neighbourhood-r",
+          "lem-of-abs-value",
+          "def-axiom-of-choice",
+          "thm-zorn"
+        ],
+        "statement": "**Assume the Axiom of Choice** ([[def-axiom-of-choice]], [[thm-zorn]]), which\nenters through [[lem-hamel-basis-exists]]. Let\n$f = \\Lambda_{b_{\\star}} : \\mathbb{R} \\to \\mathbb{R}$ be the Hamel coefficient\nmap of [[ex-hamel-basis-additive-function]], whose values are exactly the\nrationals and each of whose nonempty level sets is dense in $\\mathbb{R}$. Define\n\n$$\\varphi : \\mathbb{R} \\to \\mathbb{R}, \\qquad \\varphi(u) \\;:=\\; \\frac{1}{2} + \\frac{u}{2\\,(1 + |u|)}, \\qquad g := \\varphi \\circ f .$$\n\nSay that $x$ is a **local maximum point** of $g$ when there is a real\n$\\delta > 0$ with $g(y) \\le g(x)$ for every $y \\in N_\\delta(x)$\n([[def-neighbourhood-r]]), and a **local minimum point** when there is a real\n$\\delta > 0$ with $g(y) \\ge g(x)$ for every $y \\in N_\\delta(x)$. Then:\n\n1. $0 < g(x) < 1$ for every real $x$, so $g$ is bounded\n   ([[def-bounded-set]]);\n2. $g$ has **no** local maximum point and **no** local minimum point;\n3. $g$ is upper semicontinuous at no point of $\\mathbb{R}$ and lower\n   semicontinuous at no point ([[def-semicontinuity]]); in particular it is\n   continuous at no point ([[def-continuity-real]]).\n\n**Why $\\varphi$ and not a bijection onto $\\mathbb{Q} \\cap (0,1)$.** All that is\nneeded of $\\varphi$ is that it be strictly increasing, take values in $(0,1)$,\nand send rationals to rationals; the explicit formula above does all three and\ncosts no countability argument.",
+        "dependency_level": 6,
+        "proof_strategy": "constructive",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated",
+          "evidence": "semantic-source"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Semi-continuity (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Semi-continuity"
+            },
+            {
+              "title": "Cauchy's functional equation (Wikipedia)",
+              "url": "https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

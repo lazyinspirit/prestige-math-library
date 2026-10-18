@@ -3,6 +3,7 @@ id: prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets
 kind: proposition
 title: "An equidimensional $C^1$ map sends null sets to null sets"
 status: published
+dependency_level: 3
 origin: session
 provenance:
   statement: literature-derived
@@ -18,13 +19,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-10-receipts.jsonl (prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets.json
 sources:
   scraped: []
   references:
@@ -56,6 +51,6 @@ dimension. If $E\subseteq M$ is null, then $F(E)\subseteq N$ is null.
 
 1.1 If $m=0$, then nullity means emptiness by [L1], so $E=\varnothing$ and the claim follows. Assume $m\ge1$. By [L0] under the stated Countable Choice, take countable chart atlases $(U_j,\varphi_j)$ of $M$ and $(V_k,\psi_k)$ of $N$. For each pair $(j,k)$, the set $D_{jk}:=\varphi_j(U_j\cap F^{-1}(V_k))$ is open in $\mathbb R^m$ and the coordinate map $f_{jk}:=\psi_k\circ F\circ\varphi_j^{-1}$ is $C^1$ on $D_{jk}$. [L0, L1, given, cases]
 
-2.1 For every $(j,k)$, enumerate the nondegenerate closed cubes with rational endpoints whose closures lie in $D_{jk}$. Their interiors cover $D_{jk}$, and the family is countable. On each such cube $Q$, [L2] bounds $\|Df_{jk}\|$ and makes $f_{jk}|_Q$ Lipschitz, since $Q$ is convex. Define $\pi_Q:\mathbb R^m\to Q$ by clamping each coordinate to its interval; each scalar clamp is $1$-Lipschitz, so $\pi_Q$ is $1$-Lipschitz in Euclidean norm and fixes $Q$. Hence $f_{jk}\circ\pi_Q$ is Lipschitz on all of $\mathbb R^m$. The set $A_{jkQ}:=\varphi_j(E\cap U_j)\cap Q$ is null by [L1], so [L3] makes $f_{jk}(A_{jkQ})=(f_{jk}\circ\pi_Q)(A_{jkQ})$ null. [L1, L2, L3, step 1.1, construct]
+2.1 For every $(j,k)$, enumerate the nondegenerate closed cubes with rational endpoints whose closures lie in $D_{jk}$. Their interiors cover $D_{jk}$, and the family is countable. For each such closed cube $Q$, choose an open convex cube $Q'$ with $Q\subset Q'$ and $\overline{Q'}\subset D_{jk}$. The derivative of $f_{jk}$ is bounded on $\overline{Q'}$ by [L2]. Apply the mean-value inequality on the open convex set $Q'$, and extend its estimate to $\overline{Q'}$ by continuity; in particular $f_{jk}|_Q$ is Lipschitz. Define $\pi_Q:\mathbb R^m\to Q$ by clamping each coordinate to its interval; each scalar clamp is $1$-Lipschitz, so $\pi_Q$ is $1$-Lipschitz in Euclidean norm and fixes $Q$. Hence $f_{jk}\circ\pi_Q$ is Lipschitz on all of $\mathbb R^m$. The set $A_{jkQ}:=\varphi_j(E\cap U_j)\cap Q$ is null by [L1], so [L3] makes $f_{jk}(A_{jkQ})=(f_{jk}\circ\pi_Q)(A_{jkQ})$ null. [L1, L2, L3, step 1.1, construct]
 
 3.1 Fix $k$. Every point of $\psi_k(F(E)\cap V_k)$ comes from some $p\in E\cap U_j\cap F^{-1}(V_k)$, and $\varphi_j(p)$ lies in the interior of one of the cubes from step 2.1. Thus $\psi_k(F(E)\cap V_k)$ is contained in the countable union of the null sets $f_{jk}(A_{jkQ})$ over $j,Q$. Countable subadditivity makes it null. Since this holds for each $k$, [L1] detects $F(E)$ as null in $N$. [L1, step 1.1, step 2.1, algebra] ∎

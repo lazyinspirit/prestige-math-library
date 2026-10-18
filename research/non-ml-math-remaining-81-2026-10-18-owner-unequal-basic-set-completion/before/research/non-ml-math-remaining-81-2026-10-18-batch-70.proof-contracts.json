@@ -1,0 +1,1476 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-arbitrary-rank-finite-parabolics-and-bruhat-subword",
+    "lem-simple-generator-weights-extend-to-a-weight-function",
+    "lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity",
+    "thm-unequal-parameter-kazhdan-lusztig-basis",
+    "thm-unequal-parameter-cell-quotients-are-modules",
+    "thm-a1xa1-unequal-parameter-cells-give-a-canonical-basic-set",
+    "ex-b2-unequal-parameter-kl-basis-and-cell-edges",
+    "cex-modular-specialization-collapses-unequal-parameter-cell-labels"
+  ],
+  "contracts": {
+    "thm-arbitrary-rank-finite-parabolics-and-bruhat-subword": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-arbitrary-rank-coxeter-system-and-bruhat-order",
+          "source_section": "Definition",
+          "quote": "Let $S$ be any set, possibly infinite, and let $m:S\\times S\\to\\{1,2,3,\\ldots\\}\\cup\\{\\infty\\}$ be a Coxeter matrix: $m(s,s)=1$, and for distinct $s,t$, $m(s,t)=m(t,s)\\in\\{2,3,\\ldots\\}\\cup\\{\\infty\\}$. Let $F(S)$ be the free group on $S$, let $N$ be the normal closure of\n$$\n\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s\\ne t,\\ m(s,t)<\\infty\\},\n$$\nand define $W=F(S)/N$. The image of $s\\in S$ in $W$ is also denoted $s$. This is the Coxeter group presented by $(S,m)$.\n\nFor $w\\in W$, define its length by\n$$\n\\ell(w)=\\min\\{k\\in\\mathbb N: w=s_1\\cdots s_k\\text{ for some }s_1,\\ldots,s_k\\in S\\}.\n$$\nThe set is nonempty because every element of the quotient has a finite word in $S\\cup S^{-1}$ and the relators give $s^{-1}=s$; its minimum exists by the well-ordering principle. A word of length $\\ell(w)$ for $w$ is a reduced expression; the empty word is the reduced expression of $1$.\n\nDefine the reflection set $T=\\{x s x^{-1}:x\\in W,\\ s\\in S\\}$. Write $u\\to v$ if $v=ut$ for a reflection $t\\in T$ and $\\ell(v)>\\ell(u)$. Define the reflection-chain Bruhat order by $u\\le v$ if there is a finite chain $u=u_0\\to u_1\\to\\cdots\\to u_k=v$; the empty chain is allowed. Length strictly increases on each nonempty chain, so this relation is a partial order. The exact reduced-subword description and finite-interval consequence needed below are established in [[thm-arbitrary-rank-finite-parabolics-and-bruhat-subword]].\n\nWhen $S$ is finite, the presentation and length agree with [[def-hh-coxeter-matrix-word-group-and-length]], and the reflection-chain order agrees with [[def-cg-bruhat-order-by-reflection-chains]]. No exchange, standard-parabolic, reduced-subword, or interval-finiteness property is included in this definition; those properties are justified separately.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hh-parabolic-minimal-representatives-and-length-additivity",
+          "source_section": "Statement",
+          "quote": "Let $(S,m)$ be a finite Coxeter matrix with presented group $W$, length $\\ell$ and geometric representation $\\sigma:W\\to\\mathrm{GL}_K(E)$ as in [[def-hh-coxeter-matrix-word-group-and-length]], [[def-hh-geometric-coxeter-representation-and-roots]] and [[lem-hh-dihedral-root-recurrence-and-root-sign]], and let $J\\subseteq S$.\n\n1. **Support and reduction.** For every $w\\in W$ the set $S(w)$ of letters occurring in a reduced expression of $w$ is independent of the reduced expression, and every word in $S$ representing $w$ can be transformed into a reduced expression by repeatedly deleting two letters (Tits reduction, using only letters already present). Consequently\n$$W_J=\\langle J\\rangle=\\{w\\in W:S(w)\\subseteq J\\}.$$\n2. **Intrinsic parabolic presentation.** Let $W_J^\\ast$ be the group presented by the restricted Coxeter matrix $(J,m|_J)$ in the sense of [[def-hh-coxeter-matrix-word-group-and-length]]. The canonical homomorphism $W_J^\\ast\\to W_J$, $s\\mapsto s$, is an isomorphism. Hence $(W_J,J)$ is a Coxeter system, its intrinsic length function $\\ell_J$ agrees with the ambient length $\\ell$ on $W_J$, and $W_J\\cap S=J$.\n3. **Minimal coset representatives.** Every right coset $W_J a:=\\{ua:u\\in W_J\\}$ ($a\\in W$, [[def-coset]]) has a unique element $d$ of minimal length; it is characterized by $\\ell(sd)>\\ell(d)$ for all $s\\in J$, and it satisfies\n$$\\ell(ud)=\\ell(u)+\\ell(d)\\qquad\\text{for all }u\\in W_J .$$\nEquivalently, every $w\\in W$ has a unique factorization $w=u\\,d$ with $u\\in W_J$ and $d$ the minimal representative of the right coset $W_J d$, and then $\\ell(w)=\\ell(u)+\\ell(d)$. By inversion ($w\\mapsto w^{-1}$ preserves lengths and interchanges the two coset families $\\{W_Ja\\}$ and $\\{aW_J\\}$), every left coset $aW_J:=\\{au:u\\in W_J\\}$ has a unique minimal element $d$, characterized by $\\ell(ds)>\\ell(d)$ for all $s\\in J$ and satisfying $\\ell(du)=\\ell(d)+\\ell(u)$ for all $u\\in W_J$.\n4. **Type A.** Let $n\\ge2$, $S=\\{s_1,\\dots,s_{n-1}\\}$ and $m(s_i,s_j):=3$ if $|i-j|=1$, $m(s_i,s_j):=2$ if $|i-j|>1$ (a Coxeter matrix of type $A_{n-1}$). Then $s_i\\mapsto(i\\ i+1)$ extends to an isomorphism $W\\to S_n$ (the letters $1,\\dots,n$ carry the library's symmetric group by the order-preserving identification with $\\{0,\\dots,n-1\\}$, under which $(i\\ i+1)$ is the adjacent transposition $(i-1\\ i)$), and for every $w\\in W$,\n$$\\ell(w)=\\operatorname{inv}\\bigl(\\varphi(w)\\bigr),$$\nthe inversion number of the corresponding permutation ([[def-inversions-inversion-number-and-sign]]). In particular a word in the $s_i$ is reduced if and only if its length equals the inversion number of its value.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hh-coxeter-exchange-deletion-and-faithfulness",
+          "source_section": "Statement",
+          "quote": "Let $(S,m)$ be a finite Coxeter matrix, $W$ the presented group, $\\ell$ its length function, and let $T$, $\\eta$, $\\Phi$ and the right action of $W$ on $\\{\\pm1\\}\\times T$ be as in [[lem-hh-dihedral-root-recurrence-and-root-sign]].\n\n1. **Sign character and parity.** There is a unique homomorphism $\\operatorname{sgn}:W\\to\\{\\pm1\\}$ with $\\operatorname{sgn}(s)=-1$ for all $s\\in S$, and $\\operatorname{sgn}(w)=(-1)^{\\ell(w)}$ for all $w\\in W$. Consequently, for all $w\\in W$ and $s\\in S$,\n$$\\ell(sw)=\\ell(w)\\pm1,\\qquad \\ell(ws)=\\ell(w)\\pm1,$$\nwith $\\ell(sw)\\equiv\\ell(w)+1\\pmod2$ and $\\ell(ws)\\equiv\\ell(w)+1\\pmod2$.\n2. **Exchange.** Let $w=s_1\\cdots s_k$ be a reduced expression and let $s\\in S$ satisfy $\\ell(sw)=k-1$. Then\n$$sw=s_1\\cdots\\widehat{s_i}\\cdots s_k$$\nfor some $i\\in\\{1,\\dots,k\\}$; equivalently, $w$ has a reduced expression beginning with $s$, and $s$ is a prefix reflection of any reduced expression of $w$. Right-handed form: if $\\ell(ws)=k-1$ then $ws=s_1\\cdots\\widehat{s_i}\\cdots s_k$ for some $i$.\n3. **Deletion.** If the word $(s_1,\\dots,s_k)$ in $S$ is not reduced, then there are $i<j$ with\n$$s_1\\cdots\\widehat{s_i}\\cdots\\widehat{s_j}\\cdots s_k=s_1\\cdots s_k .$$\nHence repeated deletion of two letters transforms every word into a reduced expression for the same element, and a word is reduced if and only if it cannot be shortened by deleting two letters.\n4. **Faithfulness of the signed action.** The right action of $W$ on $\\{\\pm1\\}\\times T$ is faithful, so $W$ embeds in $\\operatorname{Sym}(\\{\\pm1\\}\\times T)$; in particular distinct simple generators are distinct in $W$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cg-bruhat-order-by-reflection-chains",
+          "source_section": "Definition",
+          "quote": "Let $(S,m)$ be a Coxeter matrix ([[def-hh-coxeter-matrix-word-group-and-length]]), let $W$ be the presented group with length function $\\ell$ and identity $1$ ([[def-hh-coxeter-matrix-word-group-and-length]]), and let\n$$T=\\{wsw^{-1}:w\\in W,\\ s\\in S\\}$$\nbe its set of reflections ([[def-cg-canonical-reflection-homomorphism]] (2)).\n\n**(1) The Bruhat graph and the Bruhat order.** For $u,v\\in W$ write $u\\to v$ if $v=ut$ for some $t\\in T$ with $\\ell(v)>\\ell(u)$. The directed graph on $W$ with these edges is the **Bruhat graph** of $(W,S)$. Define $u\\le v$ if there exist $u_0,\\dots,u_k\\in W$ with $u=u_0\\to u_1\\to\\cdots\\to u_k=v$; the empty chain ($k=0$) is allowed, so $u\\le u$ for every $u$. This relation is the **Bruhat order** on $W$. Both $\\to$ and $\\le$ are predicates on $W\\times W$ defined from the length function of [[def-hh-coxeter-matrix-word-group-and-length]], and chains in the definition of $\\le$ are finite sequences of elements of $W$, so both relations are well defined; every object below is a subset or a predicate on the fixed group $W$, and no choice principle is used anywhere in this definition.\n\n**(2) Partial order and the identity.** $\\le$ is a partial order on $W$: it is reflexive and transitive by construction (an empty chain, and concatenation of chains), and it is antisymmetric because $\\ell$ strictly increases along every edge, so a chain from $u$ to $v$ containing at least one edge satisfies $\\ell(u)<\\ell(v)$ ([[def-natural-numbers]]). Consequently $u\\le v$ together with $\\ell(u)=\\ell(v)$ forces $u=v$, and every $u<v$ (that is, $u\\le v$ and $u\\ne v$) satisfies $\\ell(u)<\\ell(v)$. Moreover $1\\le w$ for every $w\\in W$: for a reduced expression $w=s_1\\cdots s_k$ and $w_j:=s_1\\cdots s_j$ one has $\\ell(w_j)=j$ (a shorter expression for the prefix $s_1\\cdots s_j$, substituted into $s_1\\cdots s_k$, would be a word of length $<k$ for $w$), so $w_{j-1}\\to w_j$ because $w_{j-1}^{-1}w_j=s_j=1\\cdot s_j\\cdot 1^{-1}\\in T$ and $\\ell(w_j)=j>\\ell(w_{j-1})=j-1$ ([[def-group]]).\n\n**(3) Inversion and left multiplication.** For all $u,v\\in W$ one has $u\\le v$ if and only if $u^{-1}\\le v^{-1}$. More precisely, a chain $u=u_0\\to\\cdots\\to u_k=v$ with $u_{j+1}=u_jt_j$, $t_j\\in T$, inverts to the chain $u^{-1}=u_0^{-1}\\to\\cdots\\to u_k^{-1}=v^{-1}$, because\n$$u_{j+1}^{-1}=t_ju_j^{-1}=u_j^{-1}\\,(u_jt_ju_j^{-1})$$\nwith $u_jt_ju_j^{-1}\\in T$ and $\\ell(u_{j+1}^{-1})=\\ell(u_{j+1})>\\ell(u_j)=\\ell(u_j^{-1})$; here $\\ell(x)=\\ell(x^{-1})$ holds because reversing a reduced expression of $x$ gives a reduced expression of $x^{-1}$ ([[thm-hh-parabolic-minimal-representatives-and-length-additivity]] (3)). Consequently the order is also generated by left multiplication by reflections: if $x\\in W$, $t\\in T$ and $\\ell(tx)>\\ell(x)$, then $x\\to tx$, since $x^{-1}(tx)=x^{-1}tx\\in T$ and $T$ is closed under conjugation ([[def-group]]).\n\n**(4) Reflection parity.** If $x\\in W$ and $t\\in T$ then $\\ell(xt)\\equiv\\ell(x)+1\\pmod 2$, so $\\ell(xt)\\ne\\ell(x)$; in particular $x\\to xt$ if and only if $\\ell(xt)>\\ell(x)$, and for each pair $(x,t)$ exactly one of the relations $x\\to xt$, $xt\\to x$ holds. Indeed [[thm-hh-coxeter-exchange-deletion-and-faithfulness]] (1) supplies the sign character $\\operatorname{sgn}:W\\to\\{\\pm1\\}$ with $\\operatorname{sgn}(s)=-1$ for all $s\\in S$ and $\\operatorname{sgn}(x)=(-1)^{\\ell(x)}$ for all $x\\in W$; as $\\operatorname{sgn}$ is a homomorphism into the abelian group $\\{\\pm1\\}$ ([[def-group]]) one has $\\operatorname{sgn}(wsw^{-1})=\\operatorname{sgn}(s)=-1$ for every $w\\in W$ and $s\\in S$, so $\\operatorname{sgn}(t)=-1$ for every $t\\in T$, and then $\\operatorname{sgn}(xt)=-\\operatorname{sgn}(x)$ gives the asserted congruence.\n\nThe **interval** $[u,v]:=\\{x\\in W:u\\le x\\le v\\}$ and the statement that $\\ell$ is a rank function are introduced only after the saturated-chain results of [[lem-cg-bruhat-chain-refinement-and-gradedness]]. The subword description of $\\le$ used throughout this page is the theorem [[thm-cg-bruhat-subword-characterization]], the recorded justifier of this definition; no subword assertion is made here.",
+          "uses": [
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cg-bruhat-subword-characterization",
+          "source_section": "Statement",
+          "quote": "Let $w\\in W$ have reduced expression $w=s_1\\cdots s_q$ ([[def-hh-coxeter-matrix-word-group-and-length]]) and let $\\le$ be the Bruhat order ([[def-cg-bruhat-order-by-reflection-chains]]).\n\n**(1) Subword criterion.** For every $u\\in W$,\n$$u\\le w\\iff\\text{there exist }1\\le i_1<\\cdots<i_k\\le q\\text{ with }u=s_{i_1}\\cdots s_{i_k},$$\nand the indices may be chosen with $k=\\ell(u)$, so that $s_{i_1}\\cdots s_{i_k}$ is then a reduced expression of $u$.\n\n**(2) Expression independence.** For all $u,w\\in W$ the following are equivalent: (a) $u\\le w$; (b) every reduced expression of $w$ has a subword that is a reduced expression of $u$; (c) some reduced expression of $w$ has a subword that is a reduced expression of $u$.\n\n**(3) The identity.** In particular $1\\le w$ for every $w\\in W$: the empty subword of any reduced expression realizes the identity.",
+          "uses": [
+            "3.2",
+            "3.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "parabolic-embedding",
+          "step": "1.1",
+          "claim": "A finite normal-closure witness for a word on J has finite support K, where the published finite parabolic embedding forces the J-word to be trivial.",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "intrinsic-ambient-length",
+          "step": "2.1",
+          "claim": "Finite support K and equality in its embedded presentation reduce the length comparison to the finite standard-parabolic length theorem.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "simple-length-change",
+          "step": "3.1",
+          "claim": "The simple-generator length law transfers from a finite support subgroup to W.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "bruhat-to-subword",
+          "step": "3.2",
+          "claim": "A finite global reflection chain is contained in one finite-generator subgroup, so the finite subword theorem applies to the fixed reduced word.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "subword-to-bruhat",
+          "step": "3.3",
+          "claim": "The finite-generator subword theorem gives a chain whose image is a global reflection chain.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "interval-finiteness",
+          "step": "4.1",
+          "claim": "Elements below w are among at most 2^ell(w) subword values, and strict chains increase length.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 3.2",
+            "step 3.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For J empty the presented subgroup is trivial; the empty reduced word and length-zero chain are included in steps 1.1 and 3.2–3.3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The identity has length zero; the length and subword arguments include the empty word by the Coxeter definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 transfers the ±1 simple-generator length law, including length-one elements."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Finite support K may be empty or contain infinite Coxeter labels; only relators actually present are used in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no interval endpoint or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Each chosen support is the union of finitely many explicit word supports and the finite chain support; no choice from an arbitrary family is used. (see proof steps 1.1, 3.2, 3.3)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.2 proves Bruhat comparison implies a reduced subword in the fixed expression."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.3 maps the finite subword chain back to the global reflection-chain order."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-simple-generator-weights-extend-to-a-weight-function": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-arbitrary-rank-coxeter-system-and-bruhat-order",
+          "source_section": "Definition",
+          "quote": "Let $S$ be any set, possibly infinite, and let $m:S\\times S\\to\\{1,2,3,\\ldots\\}\\cup\\{\\infty\\}$ be a Coxeter matrix: $m(s,s)=1$, and for distinct $s,t$, $m(s,t)=m(t,s)\\in\\{2,3,\\ldots\\}\\cup\\{\\infty\\}$. Let $F(S)$ be the free group on $S$, let $N$ be the normal closure of\n$$\n\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s\\ne t,\\ m(s,t)<\\infty\\},\n$$\nand define $W=F(S)/N$. The image of $s\\in S$ in $W$ is also denoted $s$. This is the Coxeter group presented by $(S,m)$.\n\nFor $w\\in W$, define its length by\n$$\n\\ell(w)=\\min\\{k\\in\\mathbb N: w=s_1\\cdots s_k\\text{ for some }s_1,\\ldots,s_k\\in S\\}.\n$$\nThe set is nonempty because every element of the quotient has a finite word in $S\\cup S^{-1}$ and the relators give $s^{-1}=s$; its minimum exists by the well-ordering principle. A word of length $\\ell(w)$ for $w$ is a reduced expression; the empty word is the reduced expression of $1$.\n\nDefine the reflection set $T=\\{x s x^{-1}:x\\in W,\\ s\\in S\\}$. Write $u\\to v$ if $v=ut$ for a reflection $t\\in T$ and $\\ell(v)>\\ell(u)$. Define the reflection-chain Bruhat order by $u\\le v$ if there is a finite chain $u=u_0\\to u_1\\to\\cdots\\to u_k=v$; the empty chain is allowed. Length strictly increases on each nonempty chain, so this relation is a partial order. The exact reduced-subword description and finite-interval consequence needed below are established in [[thm-arbitrary-rank-finite-parabolics-and-bruhat-subword]].\n\nWhen $S$ is finite, the presentation and length agree with [[def-hh-coxeter-matrix-word-group-and-length]], and the reflection-chain order agrees with [[def-cg-bruhat-order-by-reflection-chains]]. No exchange, standard-parabolic, reduced-subword, or interval-finiteness property is included in this definition; those properties are justified separately.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-arbitrary-rank-finite-parabolics-and-bruhat-subword",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter matrix $m$, and let $W,\\ell,T,\\le$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. For a finite $J\\subseteq S$, let $W_J^*$ be the group presented by the restricted matrix $m|_J$, and let $\\phi_J:W_J^*\\to W$ send each generator to the same-named element.\n\n1. The map $\\phi_J$ is injective with image $\\langle J\\rangle$, and intrinsic length in $W_J^*$ equals ambient length in $W$ on this subgroup.\n2. For $y,w\\in W$, $y\\le w$ if and only if a reduced expression of $y$ occurs as a subword of any fixed reduced expression of $w$. In particular, the interval $\\{y:y\\le w\\}$ is finite and has at most $2^{\\ell(w)}$ elements.\n3. For every $s\\in S$ and $w\\in W$, $\\ell(sw)=\\ell(w)\\pm1$ and $\\ell(ws)=\\ell(w)\\pm1$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hh-matsumoto-reduced-word-theorem",
+          "source_section": "Statement",
+          "quote": "Let $(S,m)$ be a finite Coxeter matrix; let $W$ and $\\ell$ be the presented group and its length and let $\\sigma:W\\to\\mathrm{GL}_K(E)$ be the geometric representation, as in [[def-hh-coxeter-matrix-word-group-and-length]], [[def-hh-geometric-coxeter-representation-and-roots]] and [[lem-hh-dihedral-root-recurrence-and-root-sign]], with reflection set $T$ and sign-change sets $\\Phi(w)$ as in that lemma. Parts (1) and (2) hold for every finite $S$, including the empty and singleton cases; a distinct pair is required only for part (3).\n\n1. **Braid moves.** Call two words in $S$ *braid-equivalent* when one is obtained from the other by finitely many replacements of an alternating subword $s\\,t\\,s\\,t\\cdots$ of length $m(s,t)<\\infty$ by the alternating word $t\\,s\\,t\\,s\\cdots$ of the same length. Then any two reduced expressions of the same element $w\\in W$ are braid-equivalent.\n2. **M-reducedness.** A word is reduced if and only if no sequence of braid moves followed by cancellation of a consecutive equal pair can shorten it (M-reduced in the sense of [Davis, Definition 3.4.1]).\n3. **Singleton detection in dihedral subgroups.** Fix distinct $s,t\\in S$ and put $m:=m(s,t)$. The subgroup $\\langle s,t\\rangle\\le W$ is dihedral of order $2m$ when $m<\\infty$ and infinite dihedral when $m=\\infty$; every element of $\\langle s,t\\rangle$ acts on the quotient $E/\\operatorname{span}(\\alpha_s,\\alpha_t)$ as the identity, while for every $u\\in S\\setminus\\{s,t\\}$ one has $\\sigma_u(\\alpha_u)-\\alpha_u=-2\\alpha_u\\notin\\operatorname{span}(\\alpha_s,\\alpha_t)$ (no induced quotient map for $\\sigma_u$ is assumed). Consequently\n$$S\\cap\\langle s,t\\rangle=\\{s,t\\},$$\nand every element of $\\langle s,t\\rangle$ has a reduced expression with all letters in $\\{s,t\\}$ (so the alternating words of length $q\\le m$, and any $q$ when $m=\\infty$, are reduced in $W$).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-unequal-parameter-weight-function-and-coefficient-order",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. A **totally ordered abelian group** $(\\Gamma,+,0,<)$ is an abelian group with a total order invariant under translation. Its group algebra $A=\\mathbb Z[\\Gamma]$ consists of finite sums $\\sum_{\\gamma\\in\\Gamma}a_\\gamma v^\\gamma$, where $a_\\gamma\\in\\mathbb Z$, with $v^\\gamma v^\\delta=v^{\\gamma+\\delta}$. Define the ring involution $\\overline{v^\\gamma}=v^{-\\gamma}$, and set\n$$\nA_{<0}=\\bigoplus_{\\gamma<0}\\mathbb Z v^\\gamma,\\qquad A_{\\le0}=\\bigoplus_{\\gamma\\le0}\\mathbb Z v^\\gamma.\n$$\n\nA **weight function** is a map $L:W\\to\\Gamma$ such that $L(xy)=L(x)+L(y)$ whenever $\\ell(xy)=\\ell(x)+\\ell(y)$. Its simple-generator parameters are $L(s)$ for $s\\in S$. The exact criterion for prescribing those values on the simple generators is proved in [[lem-simple-generator-weights-extend-to-a-weight-function]]. No sign restriction on $L(s)$ is part of this definition.\n\nThe coefficient ordering used on the weighted Kazhdan–Lusztig basis is the given order on $\\Gamma$, through $A_{<0}$. The group algebra elements $v^{L(s)}$ are units for every $s\\in S$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-hh-dihedral-root-recurrence-and-root-sign",
+          "source_section": "Statement",
+          "quote": "Let $(S,m)$ be a finite Coxeter matrix, and let $K$, $E$, $(\\alpha_s)_{s\\in S}$, the constants $c_{st}$ and the linear maps $\\sigma_s$ be as in [[def-hh-geometric-coxeter-representation-and-roots]]; let $W$ and $\\ell$ be as in [[def-hh-coxeter-matrix-word-group-and-length]]. The involution, representation, signed-action and word assertions below hold for every finite $S$, including $S=\\varnothing$ and $\\#S=1$. Only the rank-two assertions require distinct generators.\n\n1. **Involutions.** $\\sigma_s^2=\\mathrm{id}_E$ for every $s\\in S$; each $\\sigma_s$ is invertible, and $\\ell(s)=1$.\n2. **The rank-two block.** For any distinct $s,t\\in S$, put $m:=m(s,t)$, $c:=c_{st}$, $P:=\\operatorname{span}(\\alpha_s,\\alpha_t)\\subseteq E$, $A:=\\sigma_s\\sigma_t$ and $B:=A|_P$. Then $A(P)\\subseteq P$, and in the basis $(\\alpha_s,\\alpha_t)$,\n$$B(\\alpha_s)=(c^2-1)\\alpha_s+c\\,\\alpha_t,\\qquad B(\\alpha_t)=-c\\,\\alpha_s-\\alpha_t;\\qquad \\operatorname{tr}(B)=c^2-2,\\qquad \\det(B)=1 .$$\nMoreover $A(v)-v\\in P$ for every $v\\in E$. Consequently $E=P\\oplus Q$ with $Q:=\\operatorname{span}\\{\\alpha_u:u\\in S,\\ u\\notin\\{s,t\\}\\}$, and for every $v=p+q$ with $p\\in P$, $q\\in Q$ and every $k\\ge1$,\n$$A^k(p+q)=B^k p+\\bigl(\\mathrm{id}_P+B+\\cdots+B^{k-1}\\bigr)\\bigl(A(q)-q\\bigr)+q .$$\n3. **Exact order of the rank-two product.** For any distinct $s,t$ and the notation of (2), when $m<\\infty$ put $\\zeta:=\\zeta_{st}$, of order $2m$, so $c=\\zeta+\\zeta^{-1}$; when $m=\\infty$ use $c=2$, with no $\\zeta$ stipulated. Then:\n   (a) if $2<m<\\infty$, the characteristic polynomial of $B$ is $X^2-(c^2-2)X+1=(X-\\zeta^2)(X-\\zeta^{-2})$ with distinct roots; $B$ is diagonalisable, $B^m=\\mathrm{id}_P$, $\\mathrm{id}_P+B+\\cdots+B^{m-1}=0$, and $B^k\\ne\\mathrm{id}_P$ for $0<k<m$;\n   (b) if $m=2$, then $c=0$ and $B=-\\mathrm{id}_P$;\n   (c) if $m=\\infty$, then $c=2$, $B\\ne\\mathrm{id}_P$, $(B-\\mathrm{id}_P)^2=0$, and $B^k\\ne\\mathrm{id}_P$ for every $k\\ge1$.\n   Hence $\\sigma_s\\sigma_t=A$ has order exactly $m$ when $m<\\infty$, and infinite order when $m=\\infty$; in particular $A^m=\\mathrm{id}_E$ and $A^k\\ne\\mathrm{id}_E$ for $0<k<m$ in the finite case.\n4. **The representation and the exact dihedral orders.** The assignment $s\\mapsto\\sigma_s$ respects every defining relator of $W$ and induces a unique homomorphism $\\sigma:W\\to\\mathrm{GL}_K(E)$ with $\\sigma(s)=\\sigma_s$. Consequently, for any distinct $s,t\\in S$, one has $s\\ne t$ in $W$ and $st$ has order exactly $m(s,t)$ in $W$ (infinite when $m(s,t)=\\infty$).\n5. **The signed reflection action.** Let $T:=\\{wsw^{-1}:w\\in W,\\ s\\in S\\}\\subseteq W$. For $s\\in S$ define $U_s:\\{\\pm1\\}\\times T\\to\\{\\pm1\\}\\times T$ by\n$$U_s(\\varepsilon,r):=\\bigl(\\varepsilon\\cdot(-1)^{\\delta(s,r)},\\ srs\\bigr),$$\nwhere $\\delta(s,r)=1$ if $r=s$ and $\\delta(s,r)=0$ otherwise. Then $U_s^2=\\mathrm{id}$ for every $s$, and the assignment $(\\varepsilon,r)\\cdot s:=U_s(\\varepsilon,r)$ extends to a well-defined **right action** of $W$ on $\\{\\pm1\\}\\times T$ (so $(\\varepsilon,r)\\cdot1=(\\varepsilon,r)$ and $(\\varepsilon,r)\\cdot(wv)=((\\varepsilon,r)\\cdot w)\\cdot v$). Indeed the only relations to check are $s^2=1$ and, for distinct $s,t$ with $m=m(s,t)<\\infty$, $(st)^m=1$: $U_s^2=\\mathrm{id}$ because for $r=s$ the two signs cancel while for $r\\ne s$ one has $srs\\ne s$ and $U_s(\\varepsilon,srs)=(\\varepsilon,r)$; and the alternating word $s\\,t\\,s\\,t\\cdots$ of length $2m$ acts trivially because its $2m$ prefix reflections $r_i:=w_{i-1}s_iw_{i-1}^{-1}$ (with $w_j:=s_1\\cdots s_j$) satisfy $r_{i+m}=r_i$ for $1\\le i\\le m$ and $r_1,\\dots,r_m$ are pairwise distinct, so each reflection of the dihedral subgroup $\\langle s,t\\rangle$ occurs exactly twice and every accumulated sign is even while the conjugating coordinate returns to $r$ because $(st)^m=1$.\n6. **Prefix reflections, deletion and expression independence.** Let $(s_1,\\dots,s_k)$ be a word in $S$ with value $w=s_1\\cdots s_k$ and prefix reflections $r_i=s_1\\cdots s_{i-1}s_is_{i-1}\\cdots s_1$, and let $n(r):=\\#\\{i:r_i=r\\}$.\n   (a) If $r_i=r_j$ for some $i<j$, then $s_1\\cdots\\widehat{s_i}\\cdots\\widehat{s_j}\\cdots s_k=w$: the two letters $s_i,s_j$ can be deleted.\n   (b) $(-1)^{n(r)}=:\\eta(r,w)$ depends only on $w$ and $r$, and the right action satisfies $(\\varepsilon,r)\\cdot w=(\\varepsilon\\,\\eta(r,w),\\,w^{-1}rw)$.\n   (c) If the word is reduced ($k=\\ell(w)$), then $n(r)\\in\\{0,1\\}$ for every $r$, the map $i\\mapsto r_i$ is injective, and the set $\\Phi(w):=\\{r_1,\\dots,r_k\\}=\\{r\\in T:\\eta(r,w)=-1\\}$ is independent of the reduced expression chosen, with $\\#\\Phi(w)=\\ell(w)$.\n7. **Ambient reducedness of dihedral words.** Let $s\\ne t$, $m:=m(s,t)$, and for $q\\ge1$ let $w_q$ be the value of the alternating word of length $q$ beginning with $s$. If $m<\\infty$ and $q\\le m$, or if $m=\\infty$ and $q\\ge1$, then $\\ell(w_q)=q$, every word in $S$ representing $w_q$ has length at least $q$, and $w_1,\\dots,w_q$ are pairwise distinct. Thus dihedral alternating words are reduced in the ambient group $W$, not merely inside $\\langle s,t\\rangle$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "reduced-word-sum-is-well-defined",
+          "step": "1.1",
+          "claim": "Finite support places both reduced expressions in one finite parabolic; Matsumoto moves preserve the label sum because odd braid edges have equal labels.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "additivity-and-uniqueness",
+          "step": "2.1",
+          "claim": "Length-additive concatenation is reduced, giving additivity; every extension must equal the sum on each reduced expression.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "odd-edge-necessity",
+          "step": "3.1",
+          "claim": "The two length-m alternating expressions at an odd edge represent the same element and force the two generator labels to agree.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identity is represented by the empty reduced word; the construction assigns it the empty sum 0. (see proof step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The ordered group may contain zero labels; the additivity and odd-edge argument do not require positivity. (see proof steps 1.1, 3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The m=3 odd-edge case is covered by step 3.1 with k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Finite support and the even/odd braid count apply to all finite labels; infinite edges contribute no braid moves. (see proof steps 1.1, 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A single reduced word is selected for each given w, and finite support contains the two compared expressions. (see proof step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 construct the unique weight function from any labels satisfying the odd-edge equalities."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves every weight function has equal values across each finite odd-labelled edge."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-arbitrary-rank-coxeter-system-and-bruhat-order",
+          "source_section": "Definition",
+          "quote": "Let $S$ be any set, possibly infinite, and let $m:S\\times S\\to\\{1,2,3,\\ldots\\}\\cup\\{\\infty\\}$ be a Coxeter matrix: $m(s,s)=1$, and for distinct $s,t$, $m(s,t)=m(t,s)\\in\\{2,3,\\ldots\\}\\cup\\{\\infty\\}$. Let $F(S)$ be the free group on $S$, let $N$ be the normal closure of\n$$\n\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s\\ne t,\\ m(s,t)<\\infty\\},\n$$\nand define $W=F(S)/N$. The image of $s\\in S$ in $W$ is also denoted $s$. This is the Coxeter group presented by $(S,m)$.\n\nFor $w\\in W$, define its length by\n$$\n\\ell(w)=\\min\\{k\\in\\mathbb N: w=s_1\\cdots s_k\\text{ for some }s_1,\\ldots,s_k\\in S\\}.\n$$\nThe set is nonempty because every element of the quotient has a finite word in $S\\cup S^{-1}$ and the relators give $s^{-1}=s$; its minimum exists by the well-ordering principle. A word of length $\\ell(w)$ for $w$ is a reduced expression; the empty word is the reduced expression of $1$.\n\nDefine the reflection set $T=\\{x s x^{-1}:x\\in W,\\ s\\in S\\}$. Write $u\\to v$ if $v=ut$ for a reflection $t\\in T$ and $\\ell(v)>\\ell(u)$. Define the reflection-chain Bruhat order by $u\\le v$ if there is a finite chain $u=u_0\\to u_1\\to\\cdots\\to u_k=v$; the empty chain is allowed. Length strictly increases on each nonempty chain, so this relation is a partial order. The exact reduced-subword description and finite-interval consequence needed below are established in [[thm-arbitrary-rank-finite-parabolics-and-bruhat-subword]].\n\nWhen $S$ is finite, the presentation and length agree with [[def-hh-coxeter-matrix-word-group-and-length]], and the reflection-chain order agrees with [[def-cg-bruhat-order-by-reflection-chains]]. No exchange, standard-parabolic, reduced-subword, or interval-finiteness property is included in this definition; those properties are justified separately.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-unequal-parameter-weight-function-and-coefficient-order",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. A **totally ordered abelian group** $(\\Gamma,+,0,<)$ is an abelian group with a total order invariant under translation. Its group algebra $A=\\mathbb Z[\\Gamma]$ consists of finite sums $\\sum_{\\gamma\\in\\Gamma}a_\\gamma v^\\gamma$, where $a_\\gamma\\in\\mathbb Z$, with $v^\\gamma v^\\delta=v^{\\gamma+\\delta}$. Define the ring involution $\\overline{v^\\gamma}=v^{-\\gamma}$, and set\n$$\nA_{<0}=\\bigoplus_{\\gamma<0}\\mathbb Z v^\\gamma,\\qquad A_{\\le0}=\\bigoplus_{\\gamma\\le0}\\mathbb Z v^\\gamma.\n$$\n\nA **weight function** is a map $L:W\\to\\Gamma$ such that $L(xy)=L(x)+L(y)$ whenever $\\ell(xy)=\\ell(x)+\\ell(y)$. Its simple-generator parameters are $L(s)$ for $s\\in S$. The exact criterion for prescribing those values on the simple generators is proved in [[lem-simple-generator-weights-extend-to-a-weight-function]]. No sign restriction on $L(s)$ is part of this definition.\n\nThe coefficient ordering used on the weighted Kazhdan–Lusztig basis is the given order on $\\Gamma$, through $A_{<0}$. The group algebra elements $v^{L(s)}$ are units for every $s\\in S$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-simple-generator-weights-extend-to-a-weight-function",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter matrix $m$, let $(W,S)$ be the presented system of [[def-arbitrary-rank-coxeter-system-and-bruhat-order]], and let $\\Gamma$ be the ordered abelian group of [[def-unequal-parameter-weight-function-and-coefficient-order]]. Every weight function $L:W\\to\\Gamma$ has $L(s)=L(t)$ whenever $s\\ne t$, $m(s,t)<\\infty$, and $m(s,t)$ is odd. Conversely, every label map $\\lambda:S\\to\\Gamma$ satisfying these odd-edge equalities extends uniquely to a weight function with $L(s)=\\lambda(s)$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-arbitrary-rank-finite-parabolics-and-bruhat-subword",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter matrix $m$, and let $W,\\ell,T,\\le$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. For a finite $J\\subseteq S$, let $W_J^*$ be the group presented by the restricted matrix $m|_J$, and let $\\phi_J:W_J^*\\to W$ send each generator to the same-named element.\n\n1. The map $\\phi_J$ is injective with image $\\langle J\\rangle$, and intrinsic length in $W_J^*$ equals ambient length in $W$ on this subgroup.\n2. For $y,w\\in W$, $y\\le w$ if and only if a reduced expression of $y$ occurs as a subword of any fixed reduced expression of $w$. In particular, the interval $\\{y:y\\le w\\}$ is finite and has at most $2^{\\ell(w)}$ elements.\n3. For every $s\\in S$ and $w\\in W$, $\\ell(sw)=\\ell(w)\\pm1$ and $\\ell(ws)=\\ell(w)\\pm1$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-hh-generic-coxeter-hecke-standard-basis",
+          "source_section": "Statement",
+          "quote": "Let $(S,m)$, $W$, $\\ell$ be as in [[def-hh-coxeter-matrix-word-group-and-length]]; let $R$, $v_s$, $H$, $T_s$ be as in [[def-hh-universal-coxeter-hecke-parameters-and-presentation]]; let $T_w$ for $w\\in W$ and the spanning statement be as in [[lem-hh-reduced-word-independence-and-length-multiplication]]; and let $E$, $P_s$, $Q_s$ and $P_w$ be as in [[lem-hh-commuting-left-right-hecke-length-operators]].\n\n1. **The length-operator representation.** There is a unique unital $R$-algebra homomorphism $\\rho:H\\to\\operatorname{End}_R(E)$ with $\\rho(T_s)=P_s$ for all $s\\in S$; it satisfies $\\rho(T_w)=P_w$ and $\\rho(T_w)(e_1)=e_w$ for all $w\\in W$.\n2. **Standard basis.** $\\{T_w:w\\in W\\}$ is an $R$-basis of $H$: it spans by [[lem-hh-reduced-word-independence-and-length-multiplication]] and is $R$-linearly independent. Hence $H$ is free as an $R$-module and every element of $H$ has a unique expansion $\\sum_wa_wT_w$ with $a_w\\in R$ and all but finitely many $a_w$ zero.\n3. **Faithfulness.** $\\rho$ is injective.\n4. **Base change.** For every commutative ring $R'$ and every ring homomorphism $\\varphi:R\\to R'$, the scalar extension $R'\\otimes_RH$ is, as an $R'$-algebra, canonically isomorphic to the quotient of the free associative $R'$-algebra on $(T_s)_{s\\in S}$ by the two-sided ideal generated by the images under $\\varphi$ of the relations (Q) and (B) of [[def-hh-universal-coxeter-hecke-parameters-and-presentation]], and it is free as an $R'$-module with basis $(1\\otimes T_w)_{w\\in W}$. No flatness or freeness of $R'$ over $R$ is assumed, and no torsion-freeness or semisimplicity of $H$ or of its specialisations is claimed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-unequal-parameter-coxeter-hecke-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$, $\\Gamma$, $A=\\mathbb Z[\\Gamma]$, and $L:W\\to\\Gamma$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]] and [[def-unequal-parameter-weight-function-and-coefficient-order]]. For $s\\in S$, write $q_s=v^{L(s)}\\in A^\\times$. Let $F=A\\langle T_s:s\\in S\\rangle$ be the free associative $A$-algebra and let $I$ be the two-sided ideal generated by\n$$\n(T_s-q_s)(T_s+q_s^{-1})\\quad(s\\in S)\n$$\nand, for each distinct $s,t\\in S$ with finite $m(s,t)$, the equality of the two alternating products of $T_s,T_t$ having $m(s,t)$ factors. Define the **unequal-parameter Coxeter Hecke algebra** by $H_A(W,L)=F/I$, and use $T_s$ for the image of a generator. For $m(s,t)=\\infty$ there is no braid relation between $T_s$ and $T_t$.\n\nThe quadratic relation is equivalently\n$$\nT_s^2=(q_s-q_s^{-1})T_s+1,\n$$\nso each $T_s$ is invertible with $T_s^{-1}=T_s-(q_s-q_s^{-1})$. The basis, bar, and Bruhat support properties are not part of this definition; they are proved in [[lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cg-bruhat-subword-characterization",
+          "source_section": "Statement",
+          "quote": "Let $w\\in W$ have reduced expression $w=s_1\\cdots s_q$ ([[def-hh-coxeter-matrix-word-group-and-length]]) and let $\\le$ be the Bruhat order ([[def-cg-bruhat-order-by-reflection-chains]]).\n\n**(1) Subword criterion.** For every $u\\in W$,\n$$u\\le w\\iff\\text{there exist }1\\le i_1<\\cdots<i_k\\le q\\text{ with }u=s_{i_1}\\cdots s_{i_k},$$\nand the indices may be chosen with $k=\\ell(u)$, so that $s_{i_1}\\cdots s_{i_k}$ is then a reduced expression of $u$.\n\n**(2) Expression independence.** For all $u,w\\in W$ the following are equivalent: (a) $u\\le w$; (b) every reduced expression of $w$ has a subword that is a reduced expression of $u$; (c) some reduced expression of $w$ has a subword that is a reduced expression of $u$.\n\n**(3) The identity.** In particular $1\\le w$ for every $w\\in W$: the empty subword of any reduced expression realizes the identity.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-support-spanning",
+          "step": "1.1",
+          "claim": "Each finite generator support has the published generic standard basis, and parameter specialization maps its odd components consistently into A; finite support gives global spanning.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "finite-support-independence",
+          "step": "1.2",
+          "claim": "Any alleged finite relation uses finitely many generators and relations, where base-changed standard-basis independence forces all coefficients to vanish.",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bar-involution",
+          "step": "2.1",
+          "claim": "The semilinear inversion map preserves the quadratic and braid relators, descends, and squares to the identity.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "simple-multiplication-rule",
+          "step": "3.1",
+          "claim": "The quadratic relation and exact ±1 length change give the two standard-basis multiplication cases.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bar-bruhat-support",
+          "step": "4.1",
+          "claim": "Expanding inverses yields subword values; the fixed-word subword theorem places all labels below w, and proper subwords cannot have length ell(w).",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "assembly",
+          "step": "5.1",
+          "claim": "The previous steps establish the standard basis, bar involution, and strict Bruhat support clauses.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For w=1, the empty product is T_1=1; the bar and support claims are immediate from steps 2.1 and 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The quadratic relation allows q_s=q_s^{-1}=1 when L(s)=0; step 2.1 remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The simple-generator case is covered explicitly by step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The finite-support proof permits non-flat base changes and arbitrary ordered-group labels, including zero and negative values. (see proof steps 2.1, 4.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints or limits are asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Each word and relation uses finite support, so the proof selects no object from an arbitrary family. (see proof steps 1.1, 1.2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement has no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement has no if-and-only-if claim."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-unequal-parameter-kazhdan-lusztig-basis": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter group $W$, let $L:W\\to\\Gamma$ be a weight function as in [[def-unequal-parameter-weight-function-and-coefficient-order]], and let $H_A(W,L)$ be as in [[def-unequal-parameter-coxeter-hecke-algebra]]. Then:\n\n1. For each $w$, the product $T_w$ along a reduced expression is independent of the chosen expression, and $\\{T_w:w\\in W\\}$ is an $A$-basis of $H_A(W,L)$.\n2. The assignments $\\overline{v^\\gamma}=v^{-\\gamma}$ and $\\overline{T_s}=T_s^{-1}$ extend to an involutive semilinear algebra automorphism of $H_A(W,L)$.\n3. For every reduced expression of $w$, the expansion of $\\overline{T_w}-T_w$ in the standard basis is supported on $T_y$ with $y<w$ in Bruhat order.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-arbitrary-rank-finite-parabolics-and-bruhat-subword",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter matrix $m$, and let $W,\\ell,T,\\le$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. For a finite $J\\subseteq S$, let $W_J^*$ be the group presented by the restricted matrix $m|_J$, and let $\\phi_J:W_J^*\\to W$ send each generator to the same-named element.\n\n1. The map $\\phi_J$ is injective with image $\\langle J\\rangle$, and intrinsic length in $W_J^*$ equals ambient length in $W$ on this subgroup.\n2. For $y,w\\in W$, $y\\le w$ if and only if a reduced expression of $y$ occurs as a subword of any fixed reduced expression of $w$. In particular, the interval $\\{y:y\\le w\\}$ is finite and has at most $2^{\\ell(w)}$ elements.\n3. For every $s\\in S$ and $w\\in W$, $\\ell(sw)=\\ell(w)\\pm1$ and $\\ell(ws)=\\ell(w)\\pm1$.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-unequal-parameter-weight-function-and-coefficient-order",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. A **totally ordered abelian group** $(\\Gamma,+,0,<)$ is an abelian group with a total order invariant under translation. Its group algebra $A=\\mathbb Z[\\Gamma]$ consists of finite sums $\\sum_{\\gamma\\in\\Gamma}a_\\gamma v^\\gamma$, where $a_\\gamma\\in\\mathbb Z$, with $v^\\gamma v^\\delta=v^{\\gamma+\\delta}$. Define the ring involution $\\overline{v^\\gamma}=v^{-\\gamma}$, and set\n$$\nA_{<0}=\\bigoplus_{\\gamma<0}\\mathbb Z v^\\gamma,\\qquad A_{\\le0}=\\bigoplus_{\\gamma\\le0}\\mathbb Z v^\\gamma.\n$$\n\nA **weight function** is a map $L:W\\to\\Gamma$ such that $L(xy)=L(x)+L(y)$ whenever $\\ell(xy)=\\ell(x)+\\ell(y)$. Its simple-generator parameters are $L(s)$ for $s\\in S$. The exact criterion for prescribing those values on the simple generators is proved in [[lem-simple-generator-weights-extend-to-a-weight-function]]. No sign restriction on $L(s)$ is part of this definition.\n\nThe coefficient ordering used on the weighted Kazhdan–Lusztig basis is the given order on $\\Gamma$, through $A_{<0}$. The group algebra elements $v^{L(s)}$ are units for every $s\\in S$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lower-interval-induction",
+          "step": "1.1",
+          "claim": "Finite lower Bruhat intervals permit induction and give a finite unitriangular basis change on the lower span.",
+          "inputs": [
+            "F2",
+            "F3",
+            "induction"
+          ]
+        },
+        {
+          "id": "anti-invariant-coefficients",
+          "step": "2.1",
+          "claim": "Bar anti-invariance of the standard defect forces each KL-basis coefficient to be anti-invariant.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "negative-part-lift",
+          "step": "3.1",
+          "claim": "Splitting each anti-invariant Laurent polynomial into negative and positive parts constructs the unique normalized lift.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniqueness",
+          "step": "4.1",
+          "claim": "A maximal-length nonzero coefficient in a difference of two lifts would be both negative and bar-invariant, which is impossible.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "basis",
+          "step": "4.2",
+          "claim": "Unitriangular leading terms give independence and induction on length gives spanning.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "simple-normalization",
+          "step": "5.1",
+          "claim": "Solving the bar-invariance equation in the negative subgroup yields the positive, zero, and negative parameter cases.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For w=1 the lower interval is empty and the construction gives C_1=T_1. (see proof step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When L(s)=0, the simple normalization gives C_s=T_s; the anti-invariant coefficient split also covers zero exponent. (see proof steps 2.1, 5.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Induction begins at the identity and the simple-generator normalization is verified in step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof uses only total order on Gamma and finite Laurent support; it includes torsion-free ordered groups and negative or zero L-values. (see proof steps 1.1, 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or limiting argument occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Induction is on natural-number length and each lower interval is finite. (see proof steps 1.1, 3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence and uniqueness, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence and uniqueness, not a biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-unequal-parameter-cell-quotients-are-modules": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-unequal-parameter-cells-and-cell-quotients",
+          "source_section": "Definition",
+          "quote": "Let $C_w$ be the basis of [[thm-unequal-parameter-kazhdan-lusztig-basis]]. For $x,y\\in W$, write $x\\leftarrow_L y$ if the coefficient of $C_x$ in $C_sC_y$ is nonzero for some $s\\in S$. Write $x\\le_L y$ if there is a finite chain $x=w_0,\\ldots,w_n=y$ with $w_i\\leftarrow_L w_{i+1}$ at every step. Define $x\\leftarrow_R y$ from the coefficient of $C_x$ in $C_yC_s$, and define $\\le_R$ by finite chains of such steps. Define $x\\le_{LR}y$ by finite chains in which each step is either a left or a right step. The length-zero chain makes each relation reflexive, and concatenation makes each transitive. Mutual comparability defines equivalence relations; their classes are the left, right, and two-sided **cells**.\n\nFor a left cell $\\mathcal C$, define\n$$I^L_{\\le\\mathcal C}=\\operatorname{span}_A\\{C_x:x\\le_L y\\text{ for some }y\\in\\mathcal C\\},\\qquad I^L_{<\\mathcal C}=\\operatorname{span}_A\\{C_x:x\\le_L y\\text{ for some }y\\in\\mathcal C,\\ x\\notin\\mathcal C\\}.$$\nDefine $I^R_{\\le\\mathcal C}, I^R_{<\\mathcal C}$ for a right cell and $I^{LR}_{\\le\\mathcal C}, I^{LR}_{<\\mathcal C}$ for a two-sided cell in the same way, using the corresponding preorder. The associated left cell quotient, right cell quotient, and two-sided cell quotient are respectively $I^L_{\\le\\mathcal C}/I^L_{<\\mathcal C}$, $I^R_{\\le\\mathcal C}/I^R_{<\\mathcal C}$, and $I^{LR}_{\\le\\mathcal C}/I^{LR}_{<\\mathcal C}$. [[thm-unequal-parameter-cell-quotients-are-modules]] proves that these quotients inherit the stated module or bimodule actions and have bases indexed by their cells.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-unequal-parameter-kazhdan-lusztig-basis",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter group $W$, let $L:W\\to\\Gamma$ be any weight function into a totally ordered abelian group, let $A=\\mathbb Z[\\Gamma]$, and let $H_A(W,L)$ and its bar involution be as above. For each $w\\in W$, there is a unique element $C_w\\in H_A(W,L)$ such that\n$$\n\\overline{C_w}=C_w,\\qquad C_w=T_w+\\sum_{y<w}p_{y,w}T_y,\\qquad p_{y,w}\\in A_{<0}.\n$$\nThe family $\\{C_w:w\\in W\\}$ is an $A$-basis. For a simple generator $s$ the normalization is\n$$C_s=\\begin{cases}T_s+v^{-L(s)},&L(s)>0,\\\\T_s,&L(s)=0,\\\\T_s-v^{L(s)},&L(s)<0.\\end{cases}$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "left-ideal-closure",
+          "step": "1.1",
+          "claim": "Left transitions preserve the lower numerator; a denominator term cannot transition into the cell without forcing a preorder cycle.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "right-ideal-closure",
+          "step": "1.2",
+          "claim": "The right-transition definition gives right numerator closure; transitivity rules out a cell index arising from a strict-lower denominator term.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-sided-ideal-closure",
+          "step": "2.1",
+          "claim": "A two-sided step is left or right, so both closure results give two-sided ideal closure.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quotient-actions-and-bases",
+          "step": "3.1",
+          "claim": "Ideal closure induces the required module actions, and numerator indices split into the cell and denominator indices.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Length-zero preorder chains make each cell element part of its own numerator. (see proof steps 1.1, 3.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A transition is included only for a nonzero coefficient; zero coefficients create no edge and preserve the closure argument. (see proof steps 1.1, 3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof is generator-by-generator and includes every simple generator, including rank one. (see proof step 1.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No finiteness of cells, boundedness, positivity, or semisimplicity is assumed; all algebra products have finite expansions. (see proof step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limit endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For each finite product expansion and cell index, the argument uses only the defining finite chain relation. (see proof steps 1.1, 3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem does not assert an if-and-only-if."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem does not assert an if-and-only-if."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-a1xa1-unequal-parameter-cells-give-a-canonical-basic-set": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-arbitrary-rank-coxeter-system-and-bruhat-order",
+          "source_section": "Definition",
+          "quote": "Let $S$ be any set, possibly infinite, and let $m:S\\times S\\to\\{1,2,3,\\ldots\\}\\cup\\{\\infty\\}$ be a Coxeter matrix: $m(s,s)=1$, and for distinct $s,t$, $m(s,t)=m(t,s)\\in\\{2,3,\\ldots\\}\\cup\\{\\infty\\}$. Let $F(S)$ be the free group on $S$, let $N$ be the normal closure of\n$$\n\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s\\ne t,\\ m(s,t)<\\infty\\},\n$$\nand define $W=F(S)/N$. The image of $s\\in S$ in $W$ is also denoted $s$. This is the Coxeter group presented by $(S,m)$.\n\nFor $w\\in W$, define its length by\n$$\n\\ell(w)=\\min\\{k\\in\\mathbb N: w=s_1\\cdots s_k\\text{ for some }s_1,\\ldots,s_k\\in S\\}.\n$$\nThe set is nonempty because every element of the quotient has a finite word in $S\\cup S^{-1}$ and the relators give $s^{-1}=s$; its minimum exists by the well-ordering principle. A word of length $\\ell(w)$ for $w$ is a reduced expression; the empty word is the reduced expression of $1$.\n\nDefine the reflection set $T=\\{x s x^{-1}:x\\in W,\\ s\\in S\\}$. Write $u\\to v$ if $v=ut$ for a reflection $t\\in T$ and $\\ell(v)>\\ell(u)$. Define the reflection-chain Bruhat order by $u\\le v$ if there is a finite chain $u=u_0\\to u_1\\to\\cdots\\to u_k=v$; the empty chain is allowed. Length strictly increases on each nonempty chain, so this relation is a partial order. The exact reduced-subword description and finite-interval consequence needed below are established in [[thm-arbitrary-rank-finite-parabolics-and-bruhat-subword]].\n\nWhen $S$ is finite, the presentation and length agree with [[def-hh-coxeter-matrix-word-group-and-length]], and the reflection-chain order agrees with [[def-cg-bruhat-order-by-reflection-chains]]. No exchange, standard-parabolic, reduced-subword, or interval-finiteness property is included in this definition; those properties are justified separately.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-unequal-parameter-weight-function-and-coefficient-order",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. A **totally ordered abelian group** $(\\Gamma,+,0,<)$ is an abelian group with a total order invariant under translation. Its group algebra $A=\\mathbb Z[\\Gamma]$ consists of finite sums $\\sum_{\\gamma\\in\\Gamma}a_\\gamma v^\\gamma$, where $a_\\gamma\\in\\mathbb Z$, with $v^\\gamma v^\\delta=v^{\\gamma+\\delta}$. Define the ring involution $\\overline{v^\\gamma}=v^{-\\gamma}$, and set\n$$\nA_{<0}=\\bigoplus_{\\gamma<0}\\mathbb Z v^\\gamma,\\qquad A_{\\le0}=\\bigoplus_{\\gamma\\le0}\\mathbb Z v^\\gamma.\n$$\n\nA **weight function** is a map $L:W\\to\\Gamma$ such that $L(xy)=L(x)+L(y)$ whenever $\\ell(xy)=\\ell(x)+\\ell(y)$. Its simple-generator parameters are $L(s)$ for $s\\in S$. The exact criterion for prescribing those values on the simple generators is proved in [[lem-simple-generator-weights-extend-to-a-weight-function]]. No sign restriction on $L(s)$ is part of this definition.\n\nThe coefficient ordering used on the weighted Kazhdan–Lusztig basis is the given order on $\\Gamma$, through $A_{<0}$. The group algebra elements $v^{L(s)}$ are units for every $s\\in S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-simple-generator-weights-extend-to-a-weight-function",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter matrix $m$, let $(W,S)$ be the presented system of [[def-arbitrary-rank-coxeter-system-and-bruhat-order]], and let $\\Gamma$ be the ordered abelian group of [[def-unequal-parameter-weight-function-and-coefficient-order]]. Every weight function $L:W\\to\\Gamma$ has $L(s)=L(t)$ whenever $s\\ne t$, $m(s,t)<\\infty$, and $m(s,t)$ is odd. Conversely, every label map $\\lambda:S\\to\\Gamma$ satisfying these odd-edge equalities extends uniquely to a weight function with $L(s)=\\lambda(s)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-arbitrary-rank-finite-parabolics-and-bruhat-subword",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter matrix $m$, and let $W,\\ell,T,\\le$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. For a finite $J\\subseteq S$, let $W_J^*$ be the group presented by the restricted matrix $m|_J$, and let $\\phi_J:W_J^*\\to W$ send each generator to the same-named element.\n\n1. The map $\\phi_J$ is injective with image $\\langle J\\rangle$, and intrinsic length in $W_J^*$ equals ambient length in $W$ on this subgroup.\n2. For $y,w\\in W$, $y\\le w$ if and only if a reduced expression of $y$ occurs as a subword of any fixed reduced expression of $w$. In particular, the interval $\\{y:y\\le w\\}$ is finite and has at most $2^{\\ell(w)}$ elements.\n3. For every $s\\in S$ and $w\\in W$, $\\ell(sw)=\\ell(w)\\pm1$ and $\\ell(ws)=\\ell(w)\\pm1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-unequal-parameter-coxeter-hecke-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$, $\\Gamma$, $A=\\mathbb Z[\\Gamma]$, and $L:W\\to\\Gamma$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]] and [[def-unequal-parameter-weight-function-and-coefficient-order]]. For $s\\in S$, write $q_s=v^{L(s)}\\in A^\\times$. Let $F=A\\langle T_s:s\\in S\\rangle$ be the free associative $A$-algebra and let $I$ be the two-sided ideal generated by\n$$\n(T_s-q_s)(T_s+q_s^{-1})\\quad(s\\in S)\n$$\nand, for each distinct $s,t\\in S$ with finite $m(s,t)$, the equality of the two alternating products of $T_s,T_t$ having $m(s,t)$ factors. Define the **unequal-parameter Coxeter Hecke algebra** by $H_A(W,L)=F/I$, and use $T_s$ for the image of a generator. For $m(s,t)=\\infty$ there is no braid relation between $T_s$ and $T_t$.\n\nThe quadratic relation is equivalently\n$$\nT_s^2=(q_s-q_s^{-1})T_s+1,\n$$\nso each $T_s$ is invertible with $T_s^{-1}=T_s-(q_s-q_s^{-1})$. The basis, bar, and Bruhat support properties are not part of this definition; they are proved in [[lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity]].",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-unequal-parameter-kazhdan-lusztig-basis",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter group $W$, let $L:W\\to\\Gamma$ be any weight function into a totally ordered abelian group, let $A=\\mathbb Z[\\Gamma]$, and let $H_A(W,L)$ and its bar involution be as above. For each $w\\in W$, there is a unique element $C_w\\in H_A(W,L)$ such that\n$$\n\\overline{C_w}=C_w,\\qquad C_w=T_w+\\sum_{y<w}p_{y,w}T_y,\\qquad p_{y,w}\\in A_{<0}.\n$$\nThe family $\\{C_w:w\\in W\\}$ is an $A$-basis. For a simple generator $s$ the normalization is\n$$C_s=\\begin{cases}T_s+v^{-L(s)},&L(s)>0,\\\\T_s,&L(s)=0,\\\\T_s-v^{L(s)},&L(s)<0.\\end{cases}$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter group $W$, let $L:W\\to\\Gamma$ be a weight function as in [[def-unequal-parameter-weight-function-and-coefficient-order]], and let $H_A(W,L)$ be as in [[def-unequal-parameter-coxeter-hecke-algebra]]. Then:\n\n1. For each $w$, the product $T_w$ along a reduced expression is independent of the chosen expression, and $\\{T_w:w\\in W\\}$ is an $A$-basis of $H_A(W,L)$.\n2. The assignments $\\overline{v^\\gamma}=v^{-\\gamma}$ and $\\overline{T_s}=T_s^{-1}$ extend to an involutive semilinear algebra automorphism of $H_A(W,L)$.\n3. For every reduced expression of $w$, the expansion of $\\overline{T_w}-T_w$ in the standard basis is supported on $T_y$ with $y<w$ in Bruhat order.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-unequal-parameter-cells-and-cell-quotients",
+          "source_section": "Definition",
+          "quote": "Let $C_w$ be the basis of [[thm-unequal-parameter-kazhdan-lusztig-basis]]. For $x,y\\in W$, write $x\\leftarrow_L y$ if the coefficient of $C_x$ in $C_sC_y$ is nonzero for some $s\\in S$. Write $x\\le_L y$ if there is a finite chain $x=w_0,\\ldots,w_n=y$ with $w_i\\leftarrow_L w_{i+1}$ at every step. Define $x\\leftarrow_R y$ from the coefficient of $C_x$ in $C_yC_s$, and define $\\le_R$ by finite chains of such steps. Define $x\\le_{LR}y$ by finite chains in which each step is either a left or a right step. The length-zero chain makes each relation reflexive, and concatenation makes each transitive. Mutual comparability defines equivalence relations; their classes are the left, right, and two-sided **cells**.\n\nFor a left cell $\\mathcal C$, define\n$$I^L_{\\le\\mathcal C}=\\operatorname{span}_A\\{C_x:x\\le_L y\\text{ for some }y\\in\\mathcal C\\},\\qquad I^L_{<\\mathcal C}=\\operatorname{span}_A\\{C_x:x\\le_L y\\text{ for some }y\\in\\mathcal C,\\ x\\notin\\mathcal C\\}.$$\nDefine $I^R_{\\le\\mathcal C}, I^R_{<\\mathcal C}$ for a right cell and $I^{LR}_{\\le\\mathcal C}, I^{LR}_{<\\mathcal C}$ for a two-sided cell in the same way, using the corresponding preorder. The associated left cell quotient, right cell quotient, and two-sided cell quotient are respectively $I^L_{\\le\\mathcal C}/I^L_{<\\mathcal C}$, $I^R_{\\le\\mathcal C}/I^R_{<\\mathcal C}$, and $I^{LR}_{\\le\\mathcal C}/I^{LR}_{<\\mathcal C}$. [[thm-unequal-parameter-cell-quotients-are-modules]] proves that these quotients inherit the stated module or bimodule actions and have bases indexed by their cells.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-unequal-parameter-cell-quotients-are-modules",
+          "source_section": "Statement",
+          "quote": "For every Coxeter system and weight function of [[def-unequal-parameter-coxeter-hecke-algebra]], the spans $I^L_{\\le\\mathcal C}$ and $I^L_{<\\mathcal C}$ attached to a left cell are left ideals; the right-cell spans are right ideals; and the two-sided-cell spans are two-sided ideals. Therefore the quotients defined in [[def-unequal-parameter-cells-and-cell-quotients]] are left modules, right modules, or bimodules, respectively. Each quotient has an $A$-basis consisting exactly of the images of the KL basis elements indexed by its cell. No further cell property, semisimplicity, or irreducible-module classification is asserted.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-hh-canonical-hecke-trace-and-symmetrizing-form",
+          "source_section": "Definition",
+          "quote": "Let $(S,m)$, $W$, $R$, $H$, and $\\{T_w:w\\in W\\}$ be as in [[def-hh-coxeter-matrix-word-group-and-length]], [[def-hh-universal-coxeter-hecke-parameters-and-presentation]], and [[thm-hh-generic-coxeter-hecke-standard-basis]], and assume $W$ is finite. For the unique standard-basis expansion $h=\\sum_{w\\in W}r_wT_w$, define the **canonical Hecke trace**\n$$\n\\tau:H\\to R,\\qquad \\tau(h):=r_1.\n$$\n\nThe associated $R$-bilinear form is $B_\\tau(a,b):=\\tau(ab)$. A trace is **symmetric** when $\\tau(ab)=\\tau(ba)$ for every $a,b\\in H$. The form is **perfect** when the $R$-linear map\n$$\nH\\longrightarrow\\operatorname{Hom}_R(H,R),\\qquad a\\longmapsto[b\\longmapsto\\tau(ab)]\n$$\nis an isomorphism. A **symmetrizing trace** is a trace for which this form is symmetric and perfect. This is an integral definition over $R$; it assumes no field, semisimplicity, or nondegeneracy after passing to a fraction field. The theorem [[thm-hh-canonical-hecke-trace-is-symmetric-and-perfect]] proves these properties for $\\tau$ and every commutative base change of $R$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-hh-canonical-hecke-trace-is-symmetric-and-perfect",
+          "source_section": "Statement",
+          "quote": "Let $(S,m)$, $W$, $R$, $H$, the standard basis $\\{T_w:w\\in W\\}$, and the trace $\\tau$ be as in [[def-hh-universal-coxeter-hecke-parameters-and-presentation]], [[thm-hh-generic-coxeter-hecke-standard-basis]], and [[def-hh-canonical-hecke-trace-and-symmetrizing-form]]. Assume $W$ is finite. On the finite free $R$-module $E=\\bigoplus_{w\\in W}Re_w$, define the coordinate pairing by $\\langle e_x,e_y\\rangle=\\delta_{x,y}$ and extend $R$-bilinearly. For an endomorphism $A$ with $A(e_x)=\\sum_y a_{y,x}e_y$, define its coordinate transpose by $A^t(e_y)=\\sum_xa_{y,x}e_x$, so $\\langle Au,v\\rangle=\\langle u,A^tv\\rangle$. Let $P_s$ be the left length operator of [[lem-hh-commuting-left-right-hecke-length-operators]].\n\nFor all $x,y\\in W$,\n$$\n\\tau(T_xT_y)=\\delta_{x^{-1},y}.\n$$\nConsequently $\\tau(ab)=\\tau(ba)$ for all $a,b\\in H$, and the map $H\\to\\operatorname{Hom}_R(H,R)$, $a\\mapsto[b\\mapsto\\tau(ab)]$, is an isomorphism. The basis dual to $\\{T_w:w\\in W\\}$ for this pairing is $\\{T_{w^{-1}}:w\\in W\\}$; it is the standard basis indexed by inverses, not the algebra-inverse family $\\{T_w^{-1}\\}$.\n\nFor every unital homomorphism of commutative rings $\\phi:R\\to R'$, the induced canonical trace on $R'\\otimes_RH$ has the same basis-pair formula and is again symmetric and perfect. No semisimplicity, field, or nondegeneracy hypothesis is required.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-schur-elements-from-a-symmetrizing-trace",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field and $H$ a finite-dimensional split semisimple $K$-algebra, meaning $H\\cong\\prod_{i=1}^n M_{d_i}(K)$ for positive integers $d_i$. Let $\\tau:H\\to K$ be a symmetrizing trace: $\\tau(ab)=\\tau(ba)$, and the bilinear form $(a,b)\\mapsto\\tau(ab)$ is nondegenerate. For each simple $H$-module $E$, let $\\chi_E(h)=\\operatorname{Tr}_K(h|_E)$ be its character. If the trace has an expansion\n$$\n\\tau=\\sum_{E\\in\\operatorname{Irr}(H)}c_E^{-1}\\chi_E\n$$\nwith all $c_E\\in K^\\times$, the scalars $c_E$ are the **Schur elements** of the pair $(H,\\tau)$. The definition makes no existence claim for an arbitrary functional; in the explicit split rank-one algebras below, the expansion and its coefficients are computed directly.\n\nFor the canonical finite Coxeter Hecke trace and its symmetric perfect pairing, see [[def-hh-canonical-hecke-trace-and-symmetrizing-form]] and [[thm-hh-canonical-hecke-trace-is-symmetric-and-perfect]].",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-canonical-basic-set-for-hecke-specialization",
+          "source_section": "Definition",
+          "quote": "Let $O$ be a nonfield discrete valuation ring, equivalently a local principal ideal domain with nonzero maximal ideal ([[thm-equivalent-characterisations-of-a-dvr]]). Write $K$ for its fraction field, $\\mathfrak m$ for its maximal ideal, and $k=O/\\mathfrak m$ for its residue field. Let $H_O$ be a finite free $O$-algebra, so it has finite rank as an $O$-module. Assume the generic algebra $H_K=K\\otimes_O H_O$ is split semisimple, meaning a finite product of full matrix algebras over $K$; assume $H_k=k\\otimes_O H_O$ is split, meaning each simple module remains simple after extending the field. A simple module is a nonzero module with no proper nonzero submodule. Write $\\operatorname{Irr}(H_K)$ and $\\operatorname{Irr}(H_k)$ for their isomorphism classes of simple modules. For each $E\\in\\operatorname{Irr}(H_K)$, choose an $H_O$-stable $O$-lattice $\\Lambda_E\\subset E$, meaning a finite free $O$-submodule spanning $E$ over $K$. Assume each simple $M\\in\\operatorname{Irr}(H_k)$ occurs in at least one reduction $\\Lambda_E/\\mathfrak m\\Lambda_E$, so every column below is nonzero. For such $M$, let\n$$\nd_{E,M}=[\\Lambda_E/\\mathfrak m\\Lambda_E:M]\n$$\nbe the multiplicity of $M$ among the composition factors of this finite-dimensional $H_k$-module. A composition series is a finite strict submodule chain with simple successive quotients; one exists by induction on module dimension, and Jordan–Hölder makes its multiplicities independent of the chosen series ([[def-composition-series-and-composition-factors-of-an-object]], [[thm-jordan-holder-theorem-in-an-abelian-category]]). The matrix $D=(d_{E,M})$ is the decomposition matrix for these chosen lattices. No general choice-independence theorem for $D$ is asserted here; in the explicit specialization below, the lattices and their reductions are given directly.\n\nFix an integer-valued statistic $\\alpha_E$ on $\\operatorname{Irr}(H_K)$. In Geck's finite-Weyl Hecke convention this is the Schur-element exponent denoted $\\alpha_E$; its particular values do not enter the identity-matrix case. Put\n$$\n\\check\\alpha_M=\\min\\{\\alpha_E:d_{E,M}>0\\}.\n$$\nA subset $B\\subseteq\\operatorname{Irr}(H_K)$ is a **canonical basic set** (relative to $D$ and $\\alpha$) if there is a bijection $M\\mapsto E(M)$ from $\\operatorname{Irr}(H_k)$ to $B$ satisfying\n$$\nd_{E(M),M}=1,\\qquad \\alpha_{E(M)}=\\check\\alpha_M,\n$$\nand, for every $E,M$,\n$$\nd_{E,M}>0\\quad\\Longrightarrow\\quad \\check\\alpha_M<\\alpha_E\\ \\text{or}\\ E=E(M).\n$$\nThis is a definition only; it makes no claim that such a subset exists in every specialization.",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "group-and-weight",
+          "step": "1.1",
+          "claim": "The presentation reduces to four distinct elements with lengths 0,1,1,2, and the odd-edge criterion permits weights 1 and 2.",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kl-basis-computation",
+          "step": "2.1",
+          "claim": "Quadratic relations give the rank-one squares and the bar-invariant triangular product C_st.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "integral-splitting-idempotents",
+          "step": "2.2",
+          "claim": "The rank-one idempotents have unit denominators and tensor to an integral split order O^4.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cell-transition-table",
+          "step": "3.1",
+          "claim": "The complete left/right multiplication table has four one-way non-loop edges, so each cell is a singleton.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cell-character-table",
+          "step": "4.1",
+          "claim": "Passing to each cell quotient gives the four explicit eigenvalue pairs; their generic values are distinct.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "identity-decomposition-matrix",
+          "step": "5.1",
+          "claim": "The four stable rank-one lattices reduce to four distinct simple characters, so D is identity.",
+          "inputs": [
+            "F5",
+            "step 4.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "geck-hypothesis-check",
+          "step": "6.1",
+          "claim": "The generic rank-one trace expansions give Schur elements 1+Q and 1+Q^-1; all four tensor products specialize to 4.",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.2",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "canonical-basic-set",
+          "step": "7.1",
+          "claim": "For identity D, every column has one matching row and both defining conditions hold for any integer alpha statistic.",
+          "inputs": [
+            "F6",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identity cell and its one-dimensional quotient are handled in steps 1.1 and 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes the positive weights L(s)=1 and L(t)=2; zero-weight cases are outside its statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The rank-one simple generators and their four sign characters are computed explicitly. (see proof steps 2.2, 4.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The denominator q^L+q^-L reduces to 2, a unit for every odd p; p=2 is explicitly excluded and handled separately by the counterexample."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limit endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The group, four characters, and four lattices are explicitly indexed; no arbitrary family is selected. (see proof steps 1.1, 2.2, 5.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is a basic-set criterion check, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is a basic-set criterion check, not a biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "A1xA1 rank-one splitting at p=3",
+          "method": "exact finite calculation",
+          "input": {
+            "p": 3,
+            "q": 4,
+            "L_s": 1,
+            "L_t": 2
+          },
+          "calculation": "Modulo 3, q and q^2 equal 1; each denominator q^{L(r)}+q^{-L(r)} equals 2, and each tensor-product Schur element reduces to 4=1.",
+          "expected": {
+            "denominators_nonzero": true,
+            "schur_elements_nonzero": true,
+            "decomposition_matrix": "identity"
+          },
+          "evidence_steps": [
+            "2.2",
+            "6.1",
+            "5.1"
+          ]
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-b2-unequal-parameter-kl-basis-and-cell-edges": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-arbitrary-rank-coxeter-system-and-bruhat-order",
+          "source_section": "Definition",
+          "quote": "Let $S$ be any set, possibly infinite, and let $m:S\\times S\\to\\{1,2,3,\\ldots\\}\\cup\\{\\infty\\}$ be a Coxeter matrix: $m(s,s)=1$, and for distinct $s,t$, $m(s,t)=m(t,s)\\in\\{2,3,\\ldots\\}\\cup\\{\\infty\\}$. Let $F(S)$ be the free group on $S$, let $N$ be the normal closure of\n$$\n\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s\\ne t,\\ m(s,t)<\\infty\\},\n$$\nand define $W=F(S)/N$. The image of $s\\in S$ in $W$ is also denoted $s$. This is the Coxeter group presented by $(S,m)$.\n\nFor $w\\in W$, define its length by\n$$\n\\ell(w)=\\min\\{k\\in\\mathbb N: w=s_1\\cdots s_k\\text{ for some }s_1,\\ldots,s_k\\in S\\}.\n$$\nThe set is nonempty because every element of the quotient has a finite word in $S\\cup S^{-1}$ and the relators give $s^{-1}=s$; its minimum exists by the well-ordering principle. A word of length $\\ell(w)$ for $w$ is a reduced expression; the empty word is the reduced expression of $1$.\n\nDefine the reflection set $T=\\{x s x^{-1}:x\\in W,\\ s\\in S\\}$. Write $u\\to v$ if $v=ut$ for a reflection $t\\in T$ and $\\ell(v)>\\ell(u)$. Define the reflection-chain Bruhat order by $u\\le v$ if there is a finite chain $u=u_0\\to u_1\\to\\cdots\\to u_k=v$; the empty chain is allowed. Length strictly increases on each nonempty chain, so this relation is a partial order. The exact reduced-subword description and finite-interval consequence needed below are established in [[thm-arbitrary-rank-finite-parabolics-and-bruhat-subword]].\n\nWhen $S$ is finite, the presentation and length agree with [[def-hh-coxeter-matrix-word-group-and-length]], and the reflection-chain order agrees with [[def-cg-bruhat-order-by-reflection-chains]]. No exchange, standard-parabolic, reduced-subword, or interval-finiteness property is included in this definition; those properties are justified separately.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-simple-generator-weights-extend-to-a-weight-function",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter matrix $m$, let $(W,S)$ be the presented system of [[def-arbitrary-rank-coxeter-system-and-bruhat-order]], and let $\\Gamma$ be the ordered abelian group of [[def-unequal-parameter-weight-function-and-coefficient-order]]. Every weight function $L:W\\to\\Gamma$ has $L(s)=L(t)$ whenever $s\\ne t$, $m(s,t)<\\infty$, and $m(s,t)$ is odd. Conversely, every label map $\\lambda:S\\to\\Gamma$ satisfying these odd-edge equalities extends uniquely to a weight function with $L(s)=\\lambda(s)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-arbitrary-rank-finite-parabolics-and-bruhat-subword",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter matrix $m$, and let $W,\\ell,T,\\le$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. For a finite $J\\subseteq S$, let $W_J^*$ be the group presented by the restricted matrix $m|_J$, and let $\\phi_J:W_J^*\\to W$ send each generator to the same-named element.\n\n1. The map $\\phi_J$ is injective with image $\\langle J\\rangle$, and intrinsic length in $W_J^*$ equals ambient length in $W$ on this subgroup.\n2. For $y,w\\in W$, $y\\le w$ if and only if a reduced expression of $y$ occurs as a subword of any fixed reduced expression of $w$. In particular, the interval $\\{y:y\\le w\\}$ is finite and has at most $2^{\\ell(w)}$ elements.\n3. For every $s\\in S$ and $w\\in W$, $\\ell(sw)=\\ell(w)\\pm1$ and $\\ell(ws)=\\ell(w)\\pm1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-unequal-parameter-coxeter-hecke-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$, $\\Gamma$, $A=\\mathbb Z[\\Gamma]$, and $L:W\\to\\Gamma$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]] and [[def-unequal-parameter-weight-function-and-coefficient-order]]. For $s\\in S$, write $q_s=v^{L(s)}\\in A^\\times$. Let $F=A\\langle T_s:s\\in S\\rangle$ be the free associative $A$-algebra and let $I$ be the two-sided ideal generated by\n$$\n(T_s-q_s)(T_s+q_s^{-1})\\quad(s\\in S)\n$$\nand, for each distinct $s,t\\in S$ with finite $m(s,t)$, the equality of the two alternating products of $T_s,T_t$ having $m(s,t)$ factors. Define the **unequal-parameter Coxeter Hecke algebra** by $H_A(W,L)=F/I$, and use $T_s$ for the image of a generator. For $m(s,t)=\\infty$ there is no braid relation between $T_s$ and $T_t$.\n\nThe quadratic relation is equivalently\n$$\nT_s^2=(q_s-q_s^{-1})T_s+1,\n$$\nso each $T_s$ is invertible with $T_s^{-1}=T_s-(q_s-q_s^{-1})$. The basis, bar, and Bruhat support properties are not part of this definition; they are proved in [[lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter group $W$, let $L:W\\to\\Gamma$ be a weight function as in [[def-unequal-parameter-weight-function-and-coefficient-order]], and let $H_A(W,L)$ be as in [[def-unequal-parameter-coxeter-hecke-algebra]]. Then:\n\n1. For each $w$, the product $T_w$ along a reduced expression is independent of the chosen expression, and $\\{T_w:w\\in W\\}$ is an $A$-basis of $H_A(W,L)$.\n2. The assignments $\\overline{v^\\gamma}=v^{-\\gamma}$ and $\\overline{T_s}=T_s^{-1}$ extend to an involutive semilinear algebra automorphism of $H_A(W,L)$.\n3. For every reduced expression of $w$, the expansion of $\\overline{T_w}-T_w$ in the standard basis is supported on $T_y$ with $y<w$ in Bruhat order.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-unequal-parameter-kazhdan-lusztig-basis",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter group $W$, let $L:W\\to\\Gamma$ be any weight function into a totally ordered abelian group, let $A=\\mathbb Z[\\Gamma]$, and let $H_A(W,L)$ and its bar involution be as above. For each $w\\in W$, there is a unique element $C_w\\in H_A(W,L)$ such that\n$$\n\\overline{C_w}=C_w,\\qquad C_w=T_w+\\sum_{y<w}p_{y,w}T_y,\\qquad p_{y,w}\\in A_{<0}.\n$$\nThe family $\\{C_w:w\\in W\\}$ is an $A$-basis. For a simple generator $s$ the normalization is\n$$C_s=\\begin{cases}T_s+v^{-L(s)},&L(s)>0,\\\\T_s,&L(s)=0,\\\\T_s-v^{L(s)},&L(s)<0.\\end{cases}$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-unequal-parameter-cells-and-cell-quotients",
+          "source_section": "Definition",
+          "quote": "Let $C_w$ be the basis of [[thm-unequal-parameter-kazhdan-lusztig-basis]]. For $x,y\\in W$, write $x\\leftarrow_L y$ if the coefficient of $C_x$ in $C_sC_y$ is nonzero for some $s\\in S$. Write $x\\le_L y$ if there is a finite chain $x=w_0,\\ldots,w_n=y$ with $w_i\\leftarrow_L w_{i+1}$ at every step. Define $x\\leftarrow_R y$ from the coefficient of $C_x$ in $C_yC_s$, and define $\\le_R$ by finite chains of such steps. Define $x\\le_{LR}y$ by finite chains in which each step is either a left or a right step. The length-zero chain makes each relation reflexive, and concatenation makes each transitive. Mutual comparability defines equivalence relations; their classes are the left, right, and two-sided **cells**.\n\nFor a left cell $\\mathcal C$, define\n$$I^L_{\\le\\mathcal C}=\\operatorname{span}_A\\{C_x:x\\le_L y\\text{ for some }y\\in\\mathcal C\\},\\qquad I^L_{<\\mathcal C}=\\operatorname{span}_A\\{C_x:x\\le_L y\\text{ for some }y\\in\\mathcal C,\\ x\\notin\\mathcal C\\}.$$\nDefine $I^R_{\\le\\mathcal C}, I^R_{<\\mathcal C}$ for a right cell and $I^{LR}_{\\le\\mathcal C}, I^{LR}_{<\\mathcal C}$ for a two-sided cell in the same way, using the corresponding preorder. The associated left cell quotient, right cell quotient, and two-sided cell quotient are respectively $I^L_{\\le\\mathcal C}/I^L_{<\\mathcal C}$, $I^R_{\\le\\mathcal C}/I^R_{<\\mathcal C}$, and $I^{LR}_{\\le\\mathcal C}/I^{LR}_{<\\mathcal C}$. [[thm-unequal-parameter-cell-quotients-are-modules]] proves that these quotients inherit the stated module or bimodule actions and have bases indexed by their cells.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "dihedral-weight-and-length-data",
+          "step": "1.1",
+          "claim": "The m=4 edge permits unequal weights and the required alternating words are reduced with the stated Bruhat subwords.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "rank-two-kl-elements",
+          "step": "2.1",
+          "claim": "The displayed products have Bruhat-triangular negative coefficients and are bar invariant, hence equal the unique KL elements.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quadratic-products-and-arrows",
+          "step": "3.1",
+          "claim": "The quadratic relations give the two KL squares and the four stated transition arrows.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty subword in the Bruhat intervals supplies the identity term in both displayed KL expansions. (see proof steps 1.1, 2.1)."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes strictly positive weights 1 and 2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The simple KL generators C_s and C_t are explicitly normalized and squared. (see proof steps 2.1, 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No division or generic semisimplicity is used; the expansions are polynomial Laurent identities. (see proof steps 2.1, 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or limiting parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "I2(4) has finite support and the two displayed reduced words are explicit. (see proof steps 1.1, 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "I2(4) weighted KL products",
+          "method": "exact symbolic calculation",
+          "input": {
+            "m": 4,
+            "L_s": 1,
+            "L_t": 2
+          },
+          "calculation": "Expand (T_s+v^-1)(T_t+v^-2) and use T_s^2=(v-v^-1)T_s+1, T_t^2=(v^2-v^-2)T_t+1.",
+          "expected": {
+            "C_st": "T_st+v^-2 T_s+v^-1 T_t+v^-3",
+            "C_s_squared": "(v+v^-1)C_s",
+            "C_t_squared": "(v^2+v^-2)C_t"
+          },
+          "evidence_steps": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-modular-specialization-collapses-unequal-parameter-cell-labels": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-arbitrary-rank-coxeter-system-and-bruhat-order",
+          "source_section": "Definition",
+          "quote": "Let $S$ be any set, possibly infinite, and let $m:S\\times S\\to\\{1,2,3,\\ldots\\}\\cup\\{\\infty\\}$ be a Coxeter matrix: $m(s,s)=1$, and for distinct $s,t$, $m(s,t)=m(t,s)\\in\\{2,3,\\ldots\\}\\cup\\{\\infty\\}$. Let $F(S)$ be the free group on $S$, let $N$ be the normal closure of\n$$\n\\{s^2:s\\in S\\}\\cup\\{(st)^{m(s,t)}:s\\ne t,\\ m(s,t)<\\infty\\},\n$$\nand define $W=F(S)/N$. The image of $s\\in S$ in $W$ is also denoted $s$. This is the Coxeter group presented by $(S,m)$.\n\nFor $w\\in W$, define its length by\n$$\n\\ell(w)=\\min\\{k\\in\\mathbb N: w=s_1\\cdots s_k\\text{ for some }s_1,\\ldots,s_k\\in S\\}.\n$$\nThe set is nonempty because every element of the quotient has a finite word in $S\\cup S^{-1}$ and the relators give $s^{-1}=s$; its minimum exists by the well-ordering principle. A word of length $\\ell(w)$ for $w$ is a reduced expression; the empty word is the reduced expression of $1$.\n\nDefine the reflection set $T=\\{x s x^{-1}:x\\in W,\\ s\\in S\\}$. Write $u\\to v$ if $v=ut$ for a reflection $t\\in T$ and $\\ell(v)>\\ell(u)$. Define the reflection-chain Bruhat order by $u\\le v$ if there is a finite chain $u=u_0\\to u_1\\to\\cdots\\to u_k=v$; the empty chain is allowed. Length strictly increases on each nonempty chain, so this relation is a partial order. The exact reduced-subword description and finite-interval consequence needed below are established in [[thm-arbitrary-rank-finite-parabolics-and-bruhat-subword]].\n\nWhen $S$ is finite, the presentation and length agree with [[def-hh-coxeter-matrix-word-group-and-length]], and the reflection-chain order agrees with [[def-cg-bruhat-order-by-reflection-chains]]. No exchange, standard-parabolic, reduced-subword, or interval-finiteness property is included in this definition; those properties are justified separately.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-unequal-parameter-weight-function-and-coefficient-order",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. A **totally ordered abelian group** $(\\Gamma,+,0,<)$ is an abelian group with a total order invariant under translation. Its group algebra $A=\\mathbb Z[\\Gamma]$ consists of finite sums $\\sum_{\\gamma\\in\\Gamma}a_\\gamma v^\\gamma$, where $a_\\gamma\\in\\mathbb Z$, with $v^\\gamma v^\\delta=v^{\\gamma+\\delta}$. Define the ring involution $\\overline{v^\\gamma}=v^{-\\gamma}$, and set\n$$\nA_{<0}=\\bigoplus_{\\gamma<0}\\mathbb Z v^\\gamma,\\qquad A_{\\le0}=\\bigoplus_{\\gamma\\le0}\\mathbb Z v^\\gamma.\n$$\n\nA **weight function** is a map $L:W\\to\\Gamma$ such that $L(xy)=L(x)+L(y)$ whenever $\\ell(xy)=\\ell(x)+\\ell(y)$. Its simple-generator parameters are $L(s)$ for $s\\in S$. The exact criterion for prescribing those values on the simple generators is proved in [[lem-simple-generator-weights-extend-to-a-weight-function]]. No sign restriction on $L(s)$ is part of this definition.\n\nThe coefficient ordering used on the weighted Kazhdan–Lusztig basis is the given order on $\\Gamma$, through $A_{<0}$. The group algebra elements $v^{L(s)}$ are units for every $s\\in S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-simple-generator-weights-extend-to-a-weight-function",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter matrix $m$, let $(W,S)$ be the presented system of [[def-arbitrary-rank-coxeter-system-and-bruhat-order]], and let $\\Gamma$ be the ordered abelian group of [[def-unequal-parameter-weight-function-and-coefficient-order]]. Every weight function $L:W\\to\\Gamma$ has $L(s)=L(t)$ whenever $s\\ne t$, $m(s,t)<\\infty$, and $m(s,t)$ is odd. Conversely, every label map $\\lambda:S\\to\\Gamma$ satisfying these odd-edge equalities extends uniquely to a weight function with $L(s)=\\lambda(s)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-unequal-parameter-coxeter-hecke-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(W,S)$, $\\Gamma$, $A=\\mathbb Z[\\Gamma]$, and $L:W\\to\\Gamma$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]] and [[def-unequal-parameter-weight-function-and-coefficient-order]]. For $s\\in S$, write $q_s=v^{L(s)}\\in A^\\times$. Let $F=A\\langle T_s:s\\in S\\rangle$ be the free associative $A$-algebra and let $I$ be the two-sided ideal generated by\n$$\n(T_s-q_s)(T_s+q_s^{-1})\\quad(s\\in S)\n$$\nand, for each distinct $s,t\\in S$ with finite $m(s,t)$, the equality of the two alternating products of $T_s,T_t$ having $m(s,t)$ factors. Define the **unequal-parameter Coxeter Hecke algebra** by $H_A(W,L)=F/I$, and use $T_s$ for the image of a generator. For $m(s,t)=\\infty$ there is no braid relation between $T_s$ and $T_t$.\n\nThe quadratic relation is equivalently\n$$\nT_s^2=(q_s-q_s^{-1})T_s+1,\n$$\nso each $T_s$ is invertible with $T_s^{-1}=T_s-(q_s-q_s^{-1})$. The basis, bar, and Bruhat support properties are not part of this definition; they are proved in [[lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity]].",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter group $W$, let $L:W\\to\\Gamma$ be a weight function as in [[def-unequal-parameter-weight-function-and-coefficient-order]], and let $H_A(W,L)$ be as in [[def-unequal-parameter-coxeter-hecke-algebra]]. Then:\n\n1. For each $w$, the product $T_w$ along a reduced expression is independent of the chosen expression, and $\\{T_w:w\\in W\\}$ is an $A$-basis of $H_A(W,L)$.\n2. The assignments $\\overline{v^\\gamma}=v^{-\\gamma}$ and $\\overline{T_s}=T_s^{-1}$ extend to an involutive semilinear algebra automorphism of $H_A(W,L)$.\n3. For every reduced expression of $w$, the expansion of $\\overline{T_w}-T_w$ in the standard basis is supported on $T_y$ with $y<w$ in Bruhat order.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-arbitrary-rank-finite-parabolics-and-bruhat-subword",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter matrix $m$, and let $W,\\ell,T,\\le$ be as in [[def-arbitrary-rank-coxeter-system-and-bruhat-order]]. For a finite $J\\subseteq S$, let $W_J^*$ be the group presented by the restricted matrix $m|_J$, and let $\\phi_J:W_J^*\\to W$ send each generator to the same-named element.\n\n1. The map $\\phi_J$ is injective with image $\\langle J\\rangle$, and intrinsic length in $W_J^*$ equals ambient length in $W$ on this subgroup.\n2. For $y,w\\in W$, $y\\le w$ if and only if a reduced expression of $y$ occurs as a subword of any fixed reduced expression of $w$. In particular, the interval $\\{y:y\\le w\\}$ is finite and has at most $2^{\\ell(w)}$ elements.\n3. For every $s\\in S$ and $w\\in W$, $\\ell(sw)=\\ell(w)\\pm1$ and $\\ell(ws)=\\ell(w)\\pm1$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-unequal-parameter-kazhdan-lusztig-basis",
+          "source_section": "Statement",
+          "quote": "Let $S$ be any set with Coxeter group $W$, let $L:W\\to\\Gamma$ be any weight function into a totally ordered abelian group, let $A=\\mathbb Z[\\Gamma]$, and let $H_A(W,L)$ and its bar involution be as above. For each $w\\in W$, there is a unique element $C_w\\in H_A(W,L)$ such that\n$$\n\\overline{C_w}=C_w,\\qquad C_w=T_w+\\sum_{y<w}p_{y,w}T_y,\\qquad p_{y,w}\\in A_{<0}.\n$$\nThe family $\\{C_w:w\\in W\\}$ is an $A$-basis. For a simple generator $s$ the normalization is\n$$C_s=\\begin{cases}T_s+v^{-L(s)},&L(s)>0,\\\\T_s,&L(s)=0,\\\\T_s-v^{L(s)},&L(s)<0.\\end{cases}$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-unequal-parameter-cells-and-cell-quotients",
+          "source_section": "Definition",
+          "quote": "Let $C_w$ be the basis of [[thm-unequal-parameter-kazhdan-lusztig-basis]]. For $x,y\\in W$, write $x\\leftarrow_L y$ if the coefficient of $C_x$ in $C_sC_y$ is nonzero for some $s\\in S$. Write $x\\le_L y$ if there is a finite chain $x=w_0,\\ldots,w_n=y$ with $w_i\\leftarrow_L w_{i+1}$ at every step. Define $x\\leftarrow_R y$ from the coefficient of $C_x$ in $C_yC_s$, and define $\\le_R$ by finite chains of such steps. Define $x\\le_{LR}y$ by finite chains in which each step is either a left or a right step. The length-zero chain makes each relation reflexive, and concatenation makes each transitive. Mutual comparability defines equivalence relations; their classes are the left, right, and two-sided **cells**.\n\nFor a left cell $\\mathcal C$, define\n$$I^L_{\\le\\mathcal C}=\\operatorname{span}_A\\{C_x:x\\le_L y\\text{ for some }y\\in\\mathcal C\\},\\qquad I^L_{<\\mathcal C}=\\operatorname{span}_A\\{C_x:x\\le_L y\\text{ for some }y\\in\\mathcal C,\\ x\\notin\\mathcal C\\}.$$\nDefine $I^R_{\\le\\mathcal C}, I^R_{<\\mathcal C}$ for a right cell and $I^{LR}_{\\le\\mathcal C}, I^{LR}_{<\\mathcal C}$ for a two-sided cell in the same way, using the corresponding preorder. The associated left cell quotient, right cell quotient, and two-sided cell quotient are respectively $I^L_{\\le\\mathcal C}/I^L_{<\\mathcal C}$, $I^R_{\\le\\mathcal C}/I^R_{<\\mathcal C}$, and $I^{LR}_{\\le\\mathcal C}/I^{LR}_{<\\mathcal C}$. [[thm-unequal-parameter-cell-quotients-are-modules]] proves that these quotients inherit the stated module or bimodule actions and have bases indexed by their cells.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-unequal-parameter-cell-quotients-are-modules",
+          "source_section": "Statement",
+          "quote": "For every Coxeter system and weight function of [[def-unequal-parameter-coxeter-hecke-algebra]], the spans $I^L_{\\le\\mathcal C}$ and $I^L_{<\\mathcal C}$ attached to a left cell are left ideals; the right-cell spans are right ideals; and the two-sided-cell spans are two-sided ideals. Therefore the quotients defined in [[def-unequal-parameter-cells-and-cell-quotients]] are left modules, right modules, or bimodules, respectively. Each quotient has an $A$-basis consisting exactly of the images of the KL basis elements indexed by its cell. No further cell property, semisimplicity, or irreducible-module classification is asserted.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-canonical-basic-set-for-hecke-specialization",
+          "source_section": "Definition",
+          "quote": "Let $O$ be a nonfield discrete valuation ring, equivalently a local principal ideal domain with nonzero maximal ideal ([[thm-equivalent-characterisations-of-a-dvr]]). Write $K$ for its fraction field, $\\mathfrak m$ for its maximal ideal, and $k=O/\\mathfrak m$ for its residue field. Let $H_O$ be a finite free $O$-algebra, so it has finite rank as an $O$-module. Assume the generic algebra $H_K=K\\otimes_O H_O$ is split semisimple, meaning a finite product of full matrix algebras over $K$; assume $H_k=k\\otimes_O H_O$ is split, meaning each simple module remains simple after extending the field. A simple module is a nonzero module with no proper nonzero submodule. Write $\\operatorname{Irr}(H_K)$ and $\\operatorname{Irr}(H_k)$ for their isomorphism classes of simple modules. For each $E\\in\\operatorname{Irr}(H_K)$, choose an $H_O$-stable $O$-lattice $\\Lambda_E\\subset E$, meaning a finite free $O$-submodule spanning $E$ over $K$. Assume each simple $M\\in\\operatorname{Irr}(H_k)$ occurs in at least one reduction $\\Lambda_E/\\mathfrak m\\Lambda_E$, so every column below is nonzero. For such $M$, let\n$$\nd_{E,M}=[\\Lambda_E/\\mathfrak m\\Lambda_E:M]\n$$\nbe the multiplicity of $M$ among the composition factors of this finite-dimensional $H_k$-module. A composition series is a finite strict submodule chain with simple successive quotients; one exists by induction on module dimension, and Jordan–Hölder makes its multiplicities independent of the chosen series ([[def-composition-series-and-composition-factors-of-an-object]], [[thm-jordan-holder-theorem-in-an-abelian-category]]). The matrix $D=(d_{E,M})$ is the decomposition matrix for these chosen lattices. No general choice-independence theorem for $D$ is asserted here; in the explicit specialization below, the lattices and their reductions are given directly.\n\nFix an integer-valued statistic $\\alpha_E$ on $\\operatorname{Irr}(H_K)$. In Geck's finite-Weyl Hecke convention this is the Schur-element exponent denoted $\\alpha_E$; its particular values do not enter the identity-matrix case. Put\n$$\n\\check\\alpha_M=\\min\\{\\alpha_E:d_{E,M}>0\\}.\n$$\nA subset $B\\subseteq\\operatorname{Irr}(H_K)$ is a **canonical basic set** (relative to $D$ and $\\alpha$) if there is a bijection $M\\mapsto E(M)$ from $\\operatorname{Irr}(H_k)$ to $B$ satisfying\n$$\nd_{E(M),M}=1,\\qquad \\alpha_{E(M)}=\\check\\alpha_M,\n$$\nand, for every $E,M$,\n$$\nd_{E,M}>0\\quad\\Longrightarrow\\quad \\check\\alpha_M<\\alpha_E\\ \\text{or}\\ E=E(M).\n$$\nThis is a definition only; it makes no claim that such a subset exists in every specialization.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "group-and-weight",
+          "step": "1.1",
+          "claim": "The presentation gives the four-element A1xA1 group and the even edge permits weights 1 and 2.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "local-special-fiber",
+          "step": "2.1",
+          "claim": "The special fiber is F2[x,y]/(x^2,y^2), whose nilpotent ideal has quotient F2 and kills every simple module.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cell-character-calculation",
+          "step": "2.2",
+          "claim": "The KL multiplication table gives four singleton cells and the four explicit one-dimensional character pairs.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "distinct-generic-characters",
+          "step": "3.1",
+          "claim": "The two eigenvalues for each generator are distinct in Q2, giving four distinct generic characters with O-stable lattices.",
+          "inputs": [
+            "F3",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "label-collapse",
+          "step": "4.1",
+          "claim": "Every stable lattice reduces to the unique special simple, yielding a four-by-one all-ones decomposition matrix.",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 3.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identity cell and its one-dimensional character are included among the four rows. (see proof steps 1.1, 2.2, 4.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The special-fiber generators x and y satisfy x^2=y^2=0, and the nilpotent ideal is checked explicitly. (see proof step 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The special fiber has a unique one-dimensional simple module, identified as the quotient by (x,y). (see proof step 2.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The p=2 specialization is precisely the degenerate case: all roots merge and the local algebra has one simple module. (see proof steps 2.1, 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or limit is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All four cell labels and lattices are explicit; no arbitrary selection is used. (see proof steps 2.2, 3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal implication and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal implication and asserts no biconditional."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [
+        {
+          "name": "Characteristic-two A1xA1 special fiber",
+          "method": "exact finite algebra calculation",
+          "input": {
+            "p": 2,
+            "q": 3,
+            "L_s": 1,
+            "L_t": 2
+          },
+          "calculation": "Modulo 2, q=q^2=1 and x=T_s-1, y=T_t-1 satisfy x^2=y^2=0; the four standard basis elements correspond to 1,x,y,xy.",
+          "expected": {
+            "special_algebra": "F2[x,y]/(x^2,y^2)",
+            "simple_module_count": 1,
+            "decomposition_rows": 4,
+            "decomposition_columns": 1,
+            "all_decomposition_entries": 1
+          },
+          "evidence_steps": [
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

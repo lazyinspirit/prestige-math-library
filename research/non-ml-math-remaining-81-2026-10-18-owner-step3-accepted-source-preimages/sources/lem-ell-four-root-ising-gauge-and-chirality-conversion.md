@@ -1,0 +1,85 @@
+---
+id: lem-ell-four-root-ising-gauge-and-chirality-conversion
+kind: lemma
+title: "The exact ell-four Ising gauge and parity chirality conversion"
+status: draft
+dependency_level: 9
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+deps:
+  - lem-ising-unitary-normal-data-and-ribbon-coherence
+  - thm-temperley-lieb-rank-one-pivotal-ribbon-conversion
+  - lem-temperley-lieb-rank-one-ribbon-structure-from-the-finite-r-series
+  - lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness
+  - lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings
+  - thm-temperley-lieb-root-negligible-quotient-is-semisimple
+  - def-qc-tqc-f-symbol
+  - def-qc-tqc-r-symbol
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Jacob Siehler, Braided Near-Group Categories"
+      url: "https://arxiv.org/pdf/math/0011037"
+    - title: "David Penneys, Unitary Fusion Categories"
+      url: "https://people.math.osu.edu/penneys.2/UQSL/ArchivedNotes/TPM/FusionCats.pdf"
+    - title: "Chetan Nayak et al., Non-Abelian Anyons and Topological Quantum Computation"
+      url: "https://arxiv.org/pdf/0707.1889"
+    - title: "Shu-Heng Shao, What’s Done Cannot Be Undone"
+      url: "https://arxiv.org/pdf/2308.00747"
+---
+
+## Statement
+
+Set $q=e^{\pi i/4}$, $s=e^{\pi i/8}$ and $d=\sqrt2$. The specified rank-one tilting negligible quotient is ribbon-equivalent to the normal-data category of [[lem-ising-unitary-normal-data-and-ribbon-coherence]] at $\kappa=-1$, $\beta_-=-s^{-3}$, with labels $p_0=\mathbf1$, $p_1=D$, $p_2=\eta$. The full explicit normalized trivalent gauge is given in the proof using its negative-loop cup $w$, cap $b$, and $p_2=1+wb/d$. It gives $F_D^{DDD}=-2^{-1/2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}$, FS sign $-1$, positive dimension $\sqrt2$, and $\theta_D=s^3$.
+
+Multiplying the associator by $\omega(x,y,z)=(-1)^{|x||y||z|}$ and the braiding by $(-i)^{|x||y|}$, with $D$ odd and group objects even, gives the distinct $\kappa=+1$, $\beta_+=s$ category. Flip the $D$ evaluation and keep its coevaluation. Its complete pullback R data are $R_{DD}^0=s^{-1}$, $R_{DD}^\eta=i s^{-1}$, $R_{\eta D}^D=R_{D\eta}^D=-i$, $R_{\eta\eta}^0=-1$, and unit entries one. Its twist is $\theta_D=s^{-1}$ in the actual pullback orientation. This is an associator/braiding conversion, not a vertex gauge equivalence or an unmodified positive-loop pivotal TL equivalence. Reversing its braiding and twist is a further explicitly different chirality operation.
+
+## Facts & Assumptions
+
+**Given:** The specified ell-four root category with its actual negative FS and positive pivotal convention, and the complete normal-data supplier. All computations use the explicit retained quotient, not the unreduced tensor-module kernel.
+
+[F1] [[lem-ising-unitary-normal-data-and-ribbon-coherence]] constructs the complete two-sign normal F/R category, its full coherence, positive pivot, FS and twists, with no sector example as a premise.
+
+[F2] [[thm-temperley-lieb-rank-one-pivotal-ribbon-conversion]] gives the exact negative-loop, parity-pivotal ribbon comparison and complete centralizer identification with the full root tilting quotient.
+
+[F3] [[lem-temperley-lieb-rank-one-ribbon-structure-from-the-finite-r-series]] gives the actual full-weight cup/cap, negative FS, positive-$K$ pivot, finite R and channel twists, including even roots.
+
+[F4] The JW recursion, partial trace and annihilation are [[lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness]]; complete retained path units and the exact boundary quotient are [[lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings]] and [[thm-temperley-lieb-root-negligible-quotient-is-semisimple]].
+
+[F5] The typed F and inverse-pullback R conventions are [[def-qc-tqc-f-symbol]] and [[def-qc-tqc-r-symbol]].
+
+## Proof
+
+**Proof technique:** fix every trivalent phase in the root quotient, compute its contraction table, and apply the explicit parity cocycle and braiding correction.
+
+1.1 Put $d=\sqrt2$, $q=e^{\pi i/4}$ and $s=e^{\pi i/8}$. In the specified root quotient the labels $p_0,p_1,p_2$ are $\mathbf1,D,\eta$. The fundamental FS sign is $-1$, positive pivotal dimension is $d$, twists are $\theta_D=s^3$, $\theta_\eta=-1$, and object crossing eigenvalues are $c_{DD}^0=-s^{-3}=e^{5\pi i/8}$ and $c_{DD}^\eta=s$. [F2, F3, given, algebra]
+
+2.1 The local definition of R is pullback $f\mapsto f\circ c_{a,b}^{-1}$. Consequently the displayed positive-Hadamard Ising sector phases correspond to object eigenvalues $e^{\pi i/8},e^{-3\pi i/8}$ and FS sign $+1$. Neither FS nor an equal-input braiding eigenvalue changes under a vertex gauge. These are therefore distinct categories, and the inverse-pullback orientation will force target twist $e^{-\pi i/8}$, not an implicitly imported physical twist $e^{\pi i/8}$. [F1, F5, step 1.1, algebra]
+
+3.1 Work in the root's negative-loop realization, with cup $w$, cap $b$, both snakes and $bw=-d$. Set $P=p_2=I+wb/d$, represent $D$ by one strand and $\eta$ by the two-strand summand $P$, and put $W_2=(I\otimes w\otimes I)w$, $B_2=b(I\otimes b\otimes I)$. Choose all unit vertices as identities and the nonunit inclusions/retractions as $\begin{aligned}i_{DD}^0&=w/\sqrt d,&p_{DD}^0&=-b/\sqrt d,\\i_{DD}^\eta&=P,&p_{DD}^\eta&=P,\\i_{\eta D}^D&=-\sqrt d(P\otimes I)(I\otimes w),&p_{\eta D}^D&=\sqrt d(I\otimes b)(P\otimes I),\\i_{D\eta}^D&=-\sqrt d(I\otimes P)(w\otimes I),&p_{D\eta}^D&=\sqrt d(b\otimes I)(I\otimes P),\\i_{\eta\eta}^0&=-(P\otimes P)W_2,&p_{\eta\eta}^0&=-B_2(P\otimes P).\end{aligned}$ The last minus sign is part of the gauge: omitting it would change four scalar F blocks. The positive unitary dagger has $w^\dagger=-b$; it is not the ordinary Hilbert adjoint of matrices in the quantum weight basis. [F4, step 2.1, algebra]
+
+4.1 The snakes, $P^2=P$, $Pw=bP=0$ and $d^2=2$ prove these are isometric splittings. For example, for $A=(P\otimes I)(I\otimes w)$ one has $A^\dagger=-(I\otimes b)(P\otimes I)$ and $A^\dagger A=1/d$, so $-\sqrt d A$ is isometric; reflection proves the other mixed case. The nested two-strand cup/cap contraction with $P$ inserted is one, proving the $\eta\eta$ normalization. The channel projections sum to identity in the negligible quotient: $DD$ is vacuum plus $P$, $\eta D$ and $D\eta$ are simple $D$ after killing $p_3$, and $\eta\eta$ is the unit. In the constructed three-simple category the second-pair vacuum coefficient on the first-pair $\eta$ part of its $DDD$ fusion space is $1/2$, so the corresponding $U_2=dP_{\mathrm{vac}}$ sandwich is $1/d$ and $p_3=(P\otimes I)-d(P\otimes I)U_2(P\otimes I)=0$. This concerns the quotient, not the nonzero unreduced weight-module projector. [F4, step 3.1, algebra]
+
+5.1 Every F entry is the same explicit contraction $(p_{af}^z)(1_a\otimes p_{bc}^f)(i_{ab}^e\otimes1_c)i_{ec}^z=F_z^{abc}[f,e]1_z$, where $1_\eta=P$, $1_D=I$, $1_0=1$ and every elementary multiplicity coordinate equals one. With the gauge of step 3.1 the full nonunit table is $\begin{array}{c|c|c}(a,b,c)&z&F_z^{abc}\\(\eta,\eta,\eta)&\eta&1\\(\eta,\eta,D)&D&1\\(\eta,D,\eta)&D&-1\\(D,\eta,\eta)&D&1\\(\eta,D,D)&0,\eta&1,1\\(D,\eta,D)&0,\eta&1,-1\\(D,D,\eta)&0,\eta&1,1\\(D,D,D)&D&d^{-1}\begin{pmatrix}-1&-1\\-1&1\end{pmatrix}\end{array}$. Unit blocks are identities and impossible channels are empty. Thus every coefficient, rather than only a selected sector, has a specified matrix product and basis. [F1, F4, step 4.1, algebra]
+
+6.1 Expand $P=1+wb/d$ in those contractions. Each inner cup-cap contributes $-d$ or is removed by a snake; turnbacks into $P$ vanish. In the two-dimensional block the left/right vacuum overlap is $-1/d$, the fixed negative mixed inclusions make both off-diagonal overlaps $-1/d$, and normalization/orthogonality gives the final overlap $+1/d$. In scalar blocks expanding a $P$ next to a mixed vertex either removes its turnback term or leaves its complementary $1/d$ term. With the chosen minus on $i_{\eta\eta}^0$, the table entries for $(\eta,\eta,D)$ and $(D,\eta,\eta)$, each of total $D$, are $+1$; the total-$\mathbf1$ channels of $(\eta,D,D)$ and $(D,D,\eta)$ are also $+1$. The remaining nontrivial scalar signs are exactly $F_D^{\eta D\eta}=F_\eta^{D\eta D}=-1$. This proves step 5.1's full table and matches the normal category at $\kappa=-1$. An independent exact-matrix evaluation uses $q=(1+i)/\sqrt2$, $w=(0,1,-q^{-1},0)^{\mathsf t}$ and $b=(0,-q,1,0)$ in the same contractions, extracting the scalar on the highest retained vector; it corroborates all 33 admissible F blocks, rather than supplying a missing argument. [F1, F4, step 5.1, algebra]
+
+7.1 The category identification also follows directly from the tensor functor generated by cup $\sqrt d\,i_{DD}^0$ and cap $-\sqrt d\,p_{DD}^0$ in the negative-sign normal category. They satisfy both snakes and loop $-d$, so define a functor from negative-loop TL; $p_2$ maps to $\eta$ and $p_3$ maps to zero by step 4.1. The complete retained path matrix units give full faithfulness on every tensor power and rectangular Hom block: both sides have the same $A_3$ paths, scalar corners $0,D,\eta$, and nonzero normalized splits, and these generate all objects. The positive pivotal structures agree in dimension and the actual negative FS convention. The explicit maps of step 3.1 fix its vertex gauge, so this is a category equivalence rather than merely a fusion-ring identification. The matching braiding in the next step makes it a ribbon equivalence. [F1, F2, F4, step 6.1, algebra]
+
+8.1 At $\kappa=-1$, take $\beta_-=-s^{-3}$. Then $\beta_-^2=-(1+i)/d$ and $v(1)=-i\beta_-=s$. The negative-loop source crossing $sI+s^{-1}e$ agrees with both actual root $DD$ eigenvalues. Since $D$ generates and the hexagons build every block crossing, the full root braiding is the normal table: $c_{\eta\eta}^0=-1$ and $c_{\eta D}^D=c_{D\eta}^D=i$, together with those two $DD$ entries and unit entries one. Contractions of the explicit block crossings with step 3.1's vertices give the same ten channels. The full normal-data supplier proves the positive pivot and curl $\theta_D=-1/\beta_-=s^3$, so step 7.1's equivalence preserves the specified ribbon structure. [F1, F3, step 7.1, algebra]
+
+9.1 Declare $D$ odd and the group objects even. Change the associator by $\omega(x,y,z)=(-1)^{xyz}$ on parities and the braiding by $\zeta^{xy}$ with $\zeta=-i$. The cocycle equation is the equality modulo two of $bcd+a(b+c)d+abc$ and $(a+b)cd+ab(c+d)$. It changes only the $DDD$ associator, hence flips $\tau$. The abelian hexagon correction uses $\zeta^2=-1$: an all-odd triple contributes the two crossing factors $\zeta^2$ and the compensating associator sign $-1$; all other parity placements contribute one. Equivalently the complete normal F/R table proves these changed hexagons entrywise. This is a parity associator change, not a vertex gauge. [F1, step 8.1, algebra]
+
+10.1 Keep the $D$ coevaluation and flip its evaluation. The changed odd-triple associator flips its snake sign too, so both snakes remain identities and $\kappa$ changes from $-1$ to $+1$ while the positive pivotal dimension remains $d$. The mixed braidings stay $i$ and $\beta_+=(-i)\beta_-=s$. The positive curl changes by the same factor: $\theta_D^+=(-i)\theta_D^-=s^{-1}$. The normal supplier's explicit dual and double-dual tensorators verify this positive pivotal convention globally; it has not been chosen merely from the square of a braiding phase. [F1, step 9.1, algebra]
+
+11.1 The resulting full pullback table is $R_{DD}^0=s^{-1}=e^{-\pi i/8}$, $R_{DD}^\eta=is^{-1}=e^{3\pi i/8}$, $R_{\eta D}^D=R_{D\eta}^D=-i$, $R_{\eta\eta}^0=-1$, and unit entries one. Its $DDD$ block is the positive Hadamard and its FS sign is $+1$, so it matches the stated inverse-pullback sector convention in the full coherent category. The root and changed categories retain their different associators, FS and braid phases. If object braiding phases $e^{-\pi i/8},e^{3\pi i/8}$ and twist $e^{\pi i/8}$ are instead desired, one must additionally reverse this braiding and invert its twist. That is a further explicit chirality operation, not the orientation of the local inverse-pullback definition. This proves all root-gauge and conversion assertions. [F5, step 10.1, algebra] ∎
+
+## Remarks
+
+The full source reading and exact finite checks are recorded in the isolated Ising receipt. Siehler gives the full hexagon reduction but cites Tambara–Yamagami for the monoidal classification; the complete pentagon is proved locally here. Penneys leaves Ising F extraction as an exercise. The physical R vocabulary in Nayak is not substituted for the library's inverse-pullback convention. Finite scripts corroborate the proofs and do not assert a readiness or audit stamp.

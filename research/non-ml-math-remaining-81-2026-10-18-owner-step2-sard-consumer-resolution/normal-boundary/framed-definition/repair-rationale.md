@@ -1,0 +1,13 @@
+# Framed regular-preimage definition: isolated successor
+
+The published definition assigns codimension (k) to every regular fibre, including when (k>n=\dim X). The embedded-submanifold definition permits only nonnegative dimensions. Surjectivity of (df_x:T_xX\to T_yS^k) rules out every fibre point when (k>n); this gives emptiness, rather than an embedded submanifold of dimension (n-k).
+
+The successor guards only the expected-codimension assertion. It retains all (k\ge0), every smooth map from a closed smooth manifold to the sphere, the actual differential-induced normal isomorphism, and the specified positive-basis framing. For an empty fibre the normal quotient, target pullback, and trivial bundle have empty total spaces. Their unique bundle maps are smooth inverse isomorphisms with the specified rank-(k) model, as established in clauses (ii) and proof step 2.1 of the separately proposed normal-structure supplier. The empty base can have its zero-dimensional smooth structure; this does not assign it negative dimension or expected codimension.
+
+The existing framing definition explicitly includes empty framings. The Thom-space supplier explicitly uses the based quotient convention (S^{-1}=\varnothing), (D^0/\varnothing=(D^0)_+=S^0). The successor records this convention without introducing negative-dimensional manifolds. The rank-zero clopen fibre, its unique framing, and the counterexample to regular-value independence for (k=0) remain intact. Independence of auxiliary charts and the stated (k\ge1) cobordism-independence interface remain unchanged.
+
+The required downstream interface is: infer dimension (n-k) and embedded codimension (k) only after establishing (k\le n). If (k>n), consume emptiness and the unique rank-(k) empty framing. The parent owns every consumer edit and direct or indirect audit; none is performed here.
+
+The full current definition and direct supplier carriers were read. The normal-structure successor is bound to its exact bytes, alongside the sealed three-item packet's full auxiliary empty-bundle reading evidence. No new full reading of the cited external books is asserted. The original published bytes match the root's preclaim and are preserved under `before/`; the only source writes are inside this new isolated directory. Proposal metadata changes only mark it draft and remove the inherited verification field.
+
+Checks cover this one proposal: precheck reports not-applicable (zero proof-bearing items), the math renderer reports no errors or warnings, and the layout check reports zero proof steps and zero defects. These are format checks, not an independent mathematical approval.

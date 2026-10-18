@@ -1,0 +1,94 @@
+diff --git a/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-created-physical-event/before/tools/step5-workflow.mjs b/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-created-physical-event/proposed/tools/step5-workflow.mjs
+index a8ad0eda3b..f7303f0fd2 100644
+--- a/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-created-physical-event/before/tools/step5-workflow.mjs
++++ b/home/lazyinspirit/Projects/prestige-math-library/research/non-ml-math-remaining-81-2026-10-18-owner-step5-created-physical-event/proposed/tools/step5-workflow.mjs
+@@ -1,8 +1,8 @@
+ #!/usr/bin/env node
+ // Round-based Step 5. Mathematical workers write evidence; only the controller
+ // collects it, judges a stable snapshot, and certifies a completed repair wave.
+-import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, appendFileSync } from 'node:fs';
+-import { resolve, join, basename } from 'node:path';
++import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, appendFileSync, lstatSync, realpathSync } from 'node:fs';
++import { resolve, join, basename, dirname } from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import { createHash } from 'node:crypto';
+ import { spawnSync } from 'node:child_process';
+@@ -1528,13 +1528,47 @@ export function impactWork(root,run,phase,round) {
+ export const maintenanceLabel=(phase,round,id,lane)=>`consumer-maintenance-${phase}-r${round}-${id}-lane-${lane}`;
+ export const maintenancePack=(root,run,id)=>read(join(root,'research',`${run}-consumer-maintenance`,`${id}.json`));
+ 
++// Attribute only the exact archived native creation interface, never a later
++// Statement change. The owner preparation was already frozen by withdrawal;
++// its exact source archives supply history, not current review coverage.
++function historicalCreatedEvent(root,run,pack,receipt,unit,review,event,withdrawal,evidence) {
++  if(!withdrawal)return false;
++  const inputPath=resolve(root,withdrawal.row.preparation_inputs_file);
++  requireValue(receipt.evidence[inputPath]===withdrawal.evidence[inputPath],'created event lacks bound owner preparation');
++  const inputs=read(inputPath),guards=new Map(inputs.guards.map(row=>[row.path,row.raw_sha256]));
++  const pin=(path,expected)=>{
++    const p=resolve(root,path);
++    requireValue(p.startsWith(resolve(root,'research')+'/')&&lstatSync(p).isFile()&&!lstatSync(p).isSymbolicLink()
++      &&realpathSync(p).startsWith(realpathSync(join(root,'research'))+'/'),'invalid created event archive');
++    const bytes=readFileSync(p,'utf8'),sha=digest(bytes);
++    requireValue(sha===expected&&(!evidence[p]||evidence[p]===sha),'created event archive hash or evidence collision');evidence[p]=sha;return bytes;
++  };
++  const authorization=JSON.parse(pin(inputs.authorization,guards.get(inputs.authorization)));
++  const rows=(authorization.native_creations??[]).filter(row=>row.id===event.id),item=inputs.items.find(row=>row.id===event.id);
++  requireValue(rows.length===1&&item&&item.status==='draft'&&Number.isSafeInteger(item.level)&&item.level>=0,'created event lacks exact numeric source preparation');
++  const row=rows[0],paths={pack:packPath(root,run,pack.phase,pack.round),report:workerReport(root,run,pack.phase,pack.round,unit),dispatch_result:join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel(pack.phase,pack.round,unit)}.result.json`)};
++  for(const [key,path]of Object.entries(paths))requireValue(resolve(root,row[key]?.path??'')===path&&row[key]?.sha256===receipt.evidence[path],'created event provenance differs from collected native authorship');
++  const prior=row.numeric_metadata_before;
++  requireValue(prior&&basename(prior.path)==='before.md'&&prior.sha256===guards.get(prior.path),'created event lacks bound original full source');
++  const before=pin(prior.path,prior.sha256),after=pin(join(dirname(prior.path),'proposed.md'),item.raw_sha256);
++  const field=/^dependency_level: ([0-9]+)[ \t]*$/gm,matches=[...before.matchAll(field)];
++  requireValue(matches.length===1&&Number(matches[0][1])!==item.level
++    &&before.replace(field,`dependency_level: ${item.level}`)===after
++    &&itemHashGuard(before)===review.post_sha256&&itemHashGuard(after)===receipt.post[event.id]
++    &&item.guard_sha256===receipt.post[event.id]&&event.before_statement_sha256===statementHash('')
++    &&statementHash(before)===event.after_statement_sha256&&statementHash(after)===event.after_statement_sha256,
++    'created event is not exact unchanged-interface numeric-only history');
++  return true;
++}
++
+ // Keep the authentic reviewer identity separate from an item's several review
+ // obligations. A native review belongs to its report lane and persistent session,
+ // never to the last writer or an arbitrarily selected supplier owner.
+ function readerReviewOwnership(root,run,packs,receipts,items,current) {
+   const obligations=new Map(),originalOwners={},events=[],records=[],contexts=reviewContexts(items),evidence={};
+   const withdrawal=packs.some(p=>p.phase==='impact-initial'&&p.round===1)?loadOwnerReviewWithdrawal(root,run):null;
+-  const frontier=new Set(packs.flatMap(pack=>pack.frontier_ids??[]));
++  const createdIds=collectedCreationIds(root,run,receipts);
++  const frontier=new Set([...packs.flatMap(pack=>pack.frontier_ids??[]),...createdIds]);
+   const add=(id,unit)=>{
+     if(!frontier.has(id))return false;
+     requireValue(['1','2','3'].includes(unit),`invalid reader reviewer lane: ${id}/${unit}`);
+@@ -1576,15 +1610,19 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
+     const nativeReports=new Map(pack.units.map(unit=>[unit,read(workerReport(root,run,pack.phase,pack.round,unit))]));
+     for(const event of receipt.statement_events??[]){
+       if(event.before_statement_sha256===event.after_statement_sha256)continue;
+-      const createdBy=unit=>!Object.hasOwn(pack.before,event.id)
++      const createdBy=unit=>createdIds.has(event.id)&&!Object.hasOwn(pack.before,event.id)
+         &&nativeReports.get(unit).created_items.some(row=>row.id===event.id)
+         &&receipt.created_items.some(row=>row.id===event.id);
+       const units=pack.units.filter(unit=>pack.assignments[unit]?.includes(event.id)||createdBy(unit));
+       const review=units.length===1?nativeReports.get(units[0]).reviews.find(row=>row.id===event.id):null;
++      const historicalCreation=review?.disposition==='authored'&&createdBy(units[0])&&review.post_sha256!==receipt.post[event.id]
++        &&receipt.reviews.some(row=>digest(row)===digest(review))
++        &&historicalCreatedEvent(root,run,pack,receipt,units[0],review,event,withdrawal,evidence);
+       requireValue((review?.disposition==='repaired'||review?.disposition==='authored'&&createdBy(units[0]))
+-        &&(review.post_sha256===receipt.post[event.id]||withdrawnOwnerReport(withdrawal,pack,units[0],receipt)
++        &&(review.post_sha256===receipt.post[event.id]||historicalCreation||withdrawnOwnerReport(withdrawal,pack,units[0],receipt)
+           &&withdrawal.row.original_reviews.some(row=>row.id===event.id&&row.post_sha256===review.post_sha256)),
+         `reader repair event lacks its actual native repairing or creating lane: ${event.id}`);
++      if(historicalCreation)add(event.id,units[0]);
+       events.push({id:event.id,unit:units[0]});
+     }
+     for(const unit of pack.units){
+@@ -1870,6 +1908,7 @@ export function advanceImpact(root,run,phase,round) {
+         pack.input_evidence[file]=hash;
+       }
+     }
++    for(const [p,h]of Object.entries(ownership.evidence??{})){pack.input_evidence??={};requireValue(!pack.input_evidence[p]||pack.input_evidence[p]===h,'owner review evidence collision');pack.input_evidence[p]=h;}
+     if(withdrawal){
+       pack.review_withdrawal={path:withdrawal.path,unit:'1',targets:[...withdrawal.row.targets]};
+       pack.input_evidence??={};for(const [p,h]of Object.entries(withdrawal.evidence)){requireValue(!pack.input_evidence[p]||pack.input_evidence[p]===h,'withdrawal evidence collision');pack.input_evidence[p]=h;}

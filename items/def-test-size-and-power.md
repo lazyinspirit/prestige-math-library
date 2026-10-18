@@ -14,16 +14,20 @@ deps:
   - def-expectation-of-a-nonnegative-or-integrable-random-variable
   - def-probability-measure
   - def-complete-ordered-field
+  - def-real-numbers
+  - thm-reals-ordered-field
+  - cor-cauchy-reals-lub-complete
 justified_by: []
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 verification:
   precheck: n/a
   judge:
-    model: "gpt-6-luna"
+    model: gpt-6-luna
     verdict: pass
     date: 2026-10-14
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/def-test-size-and-power.json
 sources:
   references:
     - title: "George Deligiannidis, SB2.1 Foundations of Statistical Inference, Chapter 13, §§13.1.1–13.1.2, PDF pp. 76–77"
@@ -52,8 +56,10 @@ $0\le\varphi\le1$ and each $P_\theta$ is a probability measure
 ([[def-probability-measure]],
 [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).
 The supremum exists because $\Theta_0$ is nonempty, the values lie in
-$[0,1]$, and $\mathbb R$ has the least-upper-bound property
-([[def-complete-ordered-field]]).
+$[0,1]$. Here [[def-real-numbers]] identifies $\mathbb R$ with the
+Cauchy-sequence reals, [[thm-reals-ordered-field]] gives their ordered-field
+structure, and [[cor-cauchy-reals-lub-complete]] establishes their
+least-upper-bound property ([[def-complete-ordered-field]]).
 
 For the binary action $a\in\{0,1\}$, where $1$ means reject, the
 **zero-one error loss** is $1$ when $a=1$ and $\theta\in\Theta_0$, or when

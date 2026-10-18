@@ -20,6 +20,7 @@ verification:
     date: 2026-07-28
   precheck: pass
   audited: 2026-07-29
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-recording/receipts/cex-a-composition-of-integrable-functions-that-is-not-integrable.json
 sources:
   scraped: []
   references:
@@ -33,6 +34,8 @@ pipeline_run: null
 ---
 
 ## Statement refuted
+
+Throughout, $\mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R}$ denotes the canonical copies. Natural numbers, integers and rationals are written directly when used in real arithmetic.
 
 **False claim:** if $f : [a,b] \to [m,M]$ is Riemann integrable and
 $\varphi : [m,M] \to \mathbb{R}$ is Riemann integrable, then $\varphi\circ f$ is
@@ -59,9 +62,9 @@ and that is not enough.
 
 ## Facts & Assumptions
 
-**Given:** Thomae's function $t$ on $[0,1]$, with $t(x) = 1/\iota(q(x))$ at a rational $x$ of least denominator $q(x) \ge 1$ and $t(x) = 0$ at an irrational $x$, and the function $\varphi$ above.
+**Given:** Thomae's function $t$ on $[0,1]$, with $t(x) = 1/q(x)$ at a rational $x$ of least denominator $q(x) \ge 1$ and $t(x) = 0$ at an irrational $x$, and the function $\varphi$ above.
 
-[L1] $0 \le t(x) \le 1$ for every $x$, and $t(x) > 0$ exactly at the rational $x$, since $\iota(q(x)) \ge 1 > 0$ ([[def-dirichlet-and-thomae-functions]], [[def-canonical-natural]], [[lem-of-naturals-positive]], [[def-ordered-field]]).
+[L1] $0 \le t(x) \le 1$ for every $x$, and $t(x) > 0$ exactly at the rational $x$, since $q(x) \ge 1 > 0$ ([[def-dirichlet-and-thomae-functions]], [[def-canonical-natural]], [[lem-of-naturals-positive]], [[def-ordered-field]]).
 
 [L2] $t$ is continuous at every irrational and discontinuous at every rational, and $\mathbf{1}_{\mathbb{Q}}$ is continuous at no real ([[thm-dirichlet-and-thomae-continuity-sets]], claims 1 and 3, [[def-continuity-real]]).
 

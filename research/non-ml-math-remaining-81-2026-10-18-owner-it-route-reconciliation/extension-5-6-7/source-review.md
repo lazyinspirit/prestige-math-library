@@ -1,0 +1,40 @@
+# Extension: current batch-5 supplier and batch-6/7 formal holds
+
+This separately dated delegated extension preserves the preceding reconciliation evidence. Scope is current supplier availability, exact page routes and the actual finite interfaces relevant to the 14 batch-6 and 19 batch-7 formal holds. It supplies no native coverage, independent whole-batch proof acceptance, readiness, publication, or full 675-item closure audit.
+
+The complete original notes and immutable attempt-1 result summaries of batches 5, 6 and 7 were read. All three results are successful, completed and unaborted. The exact batch-5 immutable result ended at 2026-10-17T15:56:01.885Z; the root's collection completion time is separate. The native batch-6 and batch-7 missing-page observations are preserved as historical observations, not rewritten as if the suppliers had existed then. All 33 actual original decision records were inspected: each is escalated specifically for the unavailable batch-4/5 or batch-5 required page. Complete before copies, full native summaries, all current manifest/page/cross evidence, item carriers and the original decision records are in `archive/`, raw-hash-bound by `repair.json`.
+
+## Current exact repairs
+
+All six batch-5/6/7 physical A/B page carriers omitted their manifest `requires` arrays. The exact arrays were restored, with no requirement removed or invented:
+
+| Page | Preserved manifest route |
+|---|---|
+| measure-theoretic-information-and-conditioning | finite-alphabet-entropy-and-divergence; conditional-distributions-and-regular-conditional-probability |
+| measure-theoretic-information-and-conditioning-examples | measure-theoretic-information-and-conditioning |
+| method-of-types-and-finite-large-deviations | finite-alphabet-entropy-and-divergence; measure-theoretic-information-and-conditioning; concentration-inequalities-and-tail-bounds |
+| method-of-types-and-finite-large-deviations-examples | method-of-types-and-finite-large-deviations |
+| f-divergences-renyi-and-hypothesis-testing | measure-theoretic-information-and-conditioning; finite-sample-tests-neyman-pearson-and-valid-p-values |
+| f-divergences-renyi-and-hypothesis-testing-examples | f-divergences-renyi-and-hypothesis-testing |
+
+Only the two stale “unavailable” assertions in the batch-6 A-page summary were replaced: the pages now exist as in-run drafts, and the same finite product-law scope and absence of general conditional-information claims are stated. Mathematical item definitions/statements/proofs, page inventories, diagram and limits are unchanged.
+
+Only the two missing-page rows of current batch-6 cross-batch evidence and the one missing-page row of batch-7 cross-batch evidence were changed to verified, with explicitly limited current owner route dispositions. The existing batch-5 evidence already states current body compatibility without acceptance and was left unchanged. The native notes and original Step-1 records remain byte-identical. `per_item_formal_holds` in `repair.json` separately lists all 33 original IDs, their exact original record/reason and the resolved current formal hold; it writes no ready verdict and grants no proof acceptance.
+
+## Source reading and consumer qualifications
+
+The actual batch-5 A/B page summaries and MI, standard-Borel CMI, and supplied-kernel conditional-KL definitions were read fully. They are directional extended divergences, use natural-log nats, and do not define information by subtracting possibly infinite entropies. CMI retains the conditioning marginal in the product reference; conditional KL allows singular fibers and integrates their nonnegative extended divergences. Their metadata and Given clauses declare the inherited AC/RN/regular-conditional-law branch. These are broader interfaces than either finite consumer needs.
+
+The full actual batch-4 finite-to-measurable KL bridge proof and batch-5 variational/finite-partition and standard-Borel kernel-chain-rule proofs were read as focused supplier context. The bridge constructs the finite density p_i/q_i explicitly, tests absolute continuity by singletons and preserves positive-numerator/zero-reference infinity. The variational proof handles a singular null set separately and uses clipped log-density approximations for infinite divergence. The kernel-chain proof keeps supplied kernels, handles non-absolute-continuity branches and integrates log-density pieces with finite negative parts. These readings establish what is and is not being imported here; they do not assert an independent full audit of batch 5. No batch-6/7 proof invokes one of those general results, so no general AC or standard-Borel hypothesis was transferred into the finite claims.
+
+For batch 6, every original Definition/Statement/Example/Statement-refuted clause was read directly. The complete positive-reference KL-continuity, type-probability identity and Sanov proofs were also read. The finite formula is exactly D(q||p), in nats, with zero q terms omitted and infinity if q puts mass outside supp(p). The continuity lemma requires strictly positive reference p on its displayed alphabet and proves the t ln t boundary by a coordinatewise limit. Sanov applies it on S=supp(p), where that hypothesis holds; its event interior/closure are relative to Delta(S). Its explicit rounding sequence is eventually in the relative interior event, its upper bound counts finitely many types, and the one-letter support and empty-event branches remain explicit. The Bernoulli example includes p=0 and a=1, and AC is stated only for the separate published Hoeffding comparison. The local product-law definition and its iid verification supply the finite probability model. No general conditional-information claim or infinite-product existence theorem is introduced.
+
+For batch 7, every original Definition/Statement/Example clause was read directly, and the finite KL definition and full iid type-II exponent proof were read. The probability vectors retain zero coordinates, KL is from the first to second argument, and the singular branch yields +infinity. The finite f-perspective keeps recession and zero-coordinate conventions; Renyi orders are positive, with the below-one sign and support rules retained. Testing takes P as null and Q as alternative, constrains rejection under P and minimizes acceptance under Q. The exponent proof treats singular support separately by a finite-product event and handles the absolutely continuous branch on supp(P), with a fixed epsilon strictly between zero and one. This is compatible with the general supplier's direction and natural units while using finite local suppliers. The broader dominated-measure Neyman–Pearson/AC branch is not a premise of these local claims.
+
+An explicit source-and-dependency inspection found no batch-5 item ID in any of the 33 batch-6/7 logical dependency lists or actual item links. Together with the actual finite claims read above, this confirms the batch-5 edge is a preserved reading prerequisite rather than an undisclosed general theorem premise. No missing source gap was found within this focused route/interface review. The formal disposition covers all 14 plus 19 items; it does not assert a new independent mathematical audit of every argument.
+
+## Actual validation and owner handoff
+
+The actual six-page rendercheck returned exit 0, six checked files, no errors or warnings; command and output are in `local-checks.json`. An explicit current YAML inspection confirms all six exact routes and all 54 batch-5/6/7 carrier identities/membership. Source item bytes were not edited, so no new proof-layout/precheck pass was needed for this page frontmatter/prose repair. No native gates, source-fetch stamps, source levels, readiness writers, shared plan or runtime edits, publication or commits were performed.
+
+All 33 original formal missing-supplier holds now have a current resolved disposition in the separate evidence. Root must bind actual latest metadata and readiness independently. Original historical loader/duplicate/empty-inventory diagnostics remain preserved; their current resolution was not tested or claimed by this task.

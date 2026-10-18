@@ -1,4 +1,6 @@
 ---
+verification:
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/lem-double-point-locus-has-expected-dimension-two-m-minus-n.json
 id: lem-double-point-locus-has-expected-dimension-two-m-minus-n
 kind: lemma
 title: The double point locus has the expected dimension $2m-n$
@@ -57,7 +59,7 @@ No finiteness of $\Delta_2(f)$ is asserted.
 
 [F1] $\Delta_2(f)=\{(x,y)\in M\times M\setminus\Delta_M:f(x)=f(y)\}$ and $\Sigma(f)=f(\operatorname{pr}_1\Delta_2(f))$; self-transversality means that $f\times f$ is transverse to $\Delta_X$ on $M\times M\setminus\Delta_M$, i.e. $df_x(T_xM)+df_y(T_yM)=T_rX$ at every double point $r=f(x)=f(y)$ ([[def-self-transverse-immersion-and-double-point-locus]]).
 
-[L1] If $F:P\to N$ is smooth and transverse to an embedded submanifold $Z\subseteq N$ of codimension $c$, then $F^{-1}(Z)$ is an embedded submanifold of $P$ of codimension $c$, and $T_pF^{-1}(Z)=\{v\in T_pP:dF_p(v)\in T_{F(p)}Z\}$ ([[thm-transverse-preimage-theorem]]).
+[L1] If $F:P\to N$ is smooth and transverse to an embedded submanifold $Z\subseteq N$ of codimension $c$, then for $c\le\dim P$ the set $F^{-1}(Z)$ is an embedded submanifold of $P$ of codimension $c$ (possibly empty), and for $c>\dim P$ it is empty; at every preimage point its tangent space is $T_pF^{-1}(Z)=\{v\in T_pP:dF_p(v)\in T_{F(p)}Z\}$ ([[thm-transverse-preimage-theorem]]).
 
 [L2] Transversality of a smooth map $F$ to an embedded submanifold $Z$ is the condition $dF_p(T_pP)+T_{F(p)}Z=T_{F(p)}N$ for all $p\in F^{-1}(Z)$ ([[def-a-smooth-map-transverse-to-an-embedded-submanifold]]); for the inclusion $\iota:Z\hookrightarrow N$ this is exactly the transversality of the maps $F$ and $\iota$ in the sense of [[def-transverse-smooth-maps]].
 
@@ -81,7 +83,7 @@ No finiteness of $\Delta_2(f)$ is asserted.
 
 **Proof technique:** direct.
 
-1.1 The map $f\times f$ is smooth on the open submanifold $M\times M\setminus\Delta_M$ and transverse to $\Delta_X$ there by [F1]; by [L3] the diagonal $\Delta_X$ is an embedded submanifold of $X\times X$ of codimension $2n-n=n$. Applying [L1] to the restriction of $f\times f$ to $M\times M\setminus\Delta_M$ yields that $\Delta_2(f)$ is an embedded submanifold of $M\times M\setminus\Delta_M$ of codimension $n$, that is, of pure dimension $2m-n$ when $2m-n\ge0$, and in particular $\Delta_2(f)$ carries the subspace topology by [L5]. [L1, L3, L5, F1, A1]
+1.1 The map $f\times f$ is smooth on the open submanifold $M\times M\setminus\Delta_M$ and transverse to $\Delta_X$ there by [F1]; by [L3] the diagonal $\Delta_X$ is an embedded submanifold of $X\times X$ of codimension $2n-n=n$. First suppose $n>2m$. The high-codimension branch of [L1] gives $\Delta_2(f)=\varnothing$ and hence $\Sigma(f)=\varnothing$; the empty subset is closed and embedded by the vacuous slice-chart condition of [L5], without assigning it a negative dimension. If $n\le2m$, the codimension branch of [L1] applies to this $2m$-dimensional source and yields an embedded codimension-$n$ submanifold $\Delta_2(f)$, of pure dimension $2m-n\ge0$ (possibly empty). In both cases $\Delta_2(f)$ carries the subspace topology by [L5]. [L1, L3, L5, F1, A1]
 
 1.2 The tangent space description at a point $(x,y)\in\Delta_2(f)$ with $r=f(x)=f(y)$: by [L1], a tangent vector lies in $T_{(x,y)}\Delta_2(f)$ exactly when its image under $d(f\times f)_{(x,y)}$ lies in $T_{(r,r)}\Delta_X$. By [L6] applied to the components $\pi_1\circ(f\times f)=f\circ\pi_1$ and $\pi_2\circ(f\times f)=f\circ\pi_2$, this image is $(df_x(v),df_y(w))$ for a tangent vector $(v,w)\in T_xM\oplus T_yM$, while $T_{(r,r)}\Delta_X=\{(u,u):u\in T_rX\}$; hence $$T_{(x,y)}\Delta_2(f)=\{(v,w)\in T_xM\oplus T_yM:df_x(v)=df_y(w)\}.$$ [L1, L6, F1]
 

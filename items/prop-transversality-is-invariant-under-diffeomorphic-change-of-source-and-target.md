@@ -3,6 +3,7 @@ id: prop-transversality-is-invariant-under-diffeomorphic-change-of-source-and-ta
 kind: proposition
 title: "Transversality is invariant under diffeomorphic change of source and target"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
@@ -16,8 +17,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/prop-transversality-is-invariant-under-diffeomorphic-change-of-source-and-target.json
 sources:
   scraped: []
   references:

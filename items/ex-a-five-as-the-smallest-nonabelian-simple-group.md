@@ -10,11 +10,12 @@ provenance:
   proof: ai-altered
 verification:
   verified:
-    model: "gpt-6-sol"
-    verdict: "locally-reviewed"
+    model: gpt-6-sol
+    verdict: locally-reviewed
     date: 2026-09-26
-    scope: "Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim."
-    delegated_by: "owner"
+    scope: Current item-local mathematical content and used-supplier-interface review, as documented in the bound evidence; no whole-closure claim; no new judge claim.
+    delegated_by: owner
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/ex-a-five-as-the-smallest-nonabelian-simple-group.json
 sources:
   scraped: []
   references:
@@ -43,7 +44,7 @@ $A_5$ is the smallest nonabelian finite simple group.
 
 **Proof technique:** direct.
 
-1.1 By [L1], $A_5$ is simple. Multiplication by a transposition pairs the even and odd permutations, so $|A_5|=5!/2=60$. The even permutations $(1\,2\,3)$ and $(3\,4\,5)$ do not commute, so $A_5$ is nonabelian. [L1, L4, algebra]
+1.1 By [L1], $A_5$ is simple. Multiplication by a transposition pairs the even and odd permutations, so $|A_5|=5!/2=60$. The even permutations $\alpha=(0\,1\,2)$ and $\beta=(2\,3\,4)$ do not commute: $(\alpha\beta)(2)=3$ whereas $(\beta\alpha)(2)=0$. Thus $A_5$ is nonabelian. [L1, L4, algebra]
 
 1.2 Suppose $G$ is nonabelian simple and $|G|<60$. Its order cannot be $1$ or a prime power: in the latter case its nontrivial normal center from [L3] would be all of $G$, making $G$ abelian. For every prime divisor $p$ of its order, [L2] therefore gives $n_p>1$. [L3, L2, given, algebra]
 

@@ -3,6 +3,7 @@ id: thm-semicontinuity-level-set-characterisation
 kind: theorem
 title: "$f$ is upper semicontinuous on $A$ if and only if $\\{x \\in A : f(x) < \\alpha\\}$ is relatively open in $A$ for every real $\\alpha$, lower semicontinuous if and only if $\\{x \\in A : f(x) > \\alpha\\}$ is, and continuous if and only if it is both"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,12 @@ landmark: true
 short: "semicontinuity by level sets"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/thm-semicontinuity-level-set-characterisation.json
 sources:
   scraped: []
   references:

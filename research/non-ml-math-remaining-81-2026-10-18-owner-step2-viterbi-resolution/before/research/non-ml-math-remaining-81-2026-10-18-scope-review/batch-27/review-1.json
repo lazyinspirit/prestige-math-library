@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "batch": "27",
+  "round": 1,
+  "reviewed_items": [
+    "def-finite-layered-trellis",
+    "def-finite-hidden-markov-model-for-sequence-decoding",
+    "lem-finite-trellis-prefix-score-recurrence",
+    "lem-finite-hmm-joint-law-normalizes",
+    "alg-viterbi-max-product-on-finite-trellis",
+    "thm-viterbi-finite-trellis-is-optimal",
+    "alg-hmm-viterbi-sequence-map",
+    "thm-hmm-viterbi-is-sequence-map",
+    "cex-hmm-zero-evidence-has-no-posterior-map",
+    "cex-hmm-marginal-modes-are-not-sequence-map",
+    "ex-finite-trellis-viterbi-tie-and-unreachable-state",
+    "ex-hmm-viterbi-exact-sequence-map"
+  ],
+  "reviewed_pages": [
+    "finite-trellis-viterbi-and-sequence-decoding",
+    "finite-trellis-viterbi-and-sequence-decoding-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The prior N=0 scope finding is resolved: the definition, recurrence, algorithm and complexity claim now cover the empty path of score 1. Final review found a remaining T=1 proof gap in Viterbi optimality and an affected consumer relying on that case.",
+  "findings": [
+    {
+      "id": "local-viterbi-single-layer-traceback",
+      "type": "local",
+      "reason": "In thm-viterbi-finite-trellis-is-optimal, proof step 2.1 invokes p_T(v_T) for every T≥1. At T=1 the algorithm defines no p_1, since pointers are stored only for layers t≥2. Handle T=1 directly using D_1(v)=α(v) and Q(v)=α(v)β(v); this second review must escalate the unresolved defect."
+    },
+    {
+      "id": "prereq-hmm-map-single-observation",
+      "type": "prerequisite",
+      "reason": "thm-hmm-viterbi-is-sequence-map proof step 2.1 uses thm-viterbi-finite-trellis-is-optimal for all T≥1, including T=1, whose supplier case is not established. The smallest missing prerequisite is the single-layer Viterbi correctness case."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-finite-trellis-prefix-score-recurrence",
+      "decision": "accept",
+      "reason": "Its revised statement and proof treat T=0 separately and give the recurrence for T≥1."
+    },
+    {
+      "id": "alg-viterbi-max-product-on-finite-trellis",
+      "decision": "accept",
+      "reason": "The T=0 branch returns the unique empty path with score 1; the positive-length procedure remains well-defined."
+    },
+    {
+      "id": "thm-viterbi-finite-trellis-is-optimal",
+      "decision": "escalate",
+      "reason": "Proof step 2.1 uses the undefined p_1 when T=1; the theorem claim still needs that case proved."
+    },
+    {
+      "id": "alg-hmm-viterbi-sequence-map",
+      "decision": "accept",
+      "reason": "Its input requires T≥1, so the added zero-length trellis branch is not used."
+    },
+    {
+      "id": "ex-finite-trellis-viterbi-tie-and-unreachable-state",
+      "decision": "accept",
+      "reason": "The example uses T=3; the traceback argument in the trellis theorem covers this case."
+    },
+    {
+      "id": "thm-hmm-viterbi-is-sequence-map",
+      "decision": "escalate",
+      "reason": "Proof step 2.1 applies the trellis theorem at T=1, so its all-positive-length claim inherits the unresolved single-layer supplier case."
+    },
+    {
+      "id": "ex-hmm-viterbi-exact-sequence-map",
+      "decision": "accept",
+      "reason": "The worked example uses T=3 and its exact calculation does not rely on the missing T=1 case."
+    },
+    {
+      "id": "finite-trellis-viterbi-and-sequence-decoding-examples",
+      "decision": "accept",
+      "reason": "The examples page uses positive-length examples and makes no zero-length claim."
+    }
+  ]
+}

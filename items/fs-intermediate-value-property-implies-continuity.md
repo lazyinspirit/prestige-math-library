@@ -3,6 +3,7 @@ id: fs-intermediate-value-property-implies-continuity
 kind: false-statement
 title: "FALSE: a function with the intermediate value property on an interval is continuous"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
@@ -15,12 +16,12 @@ landmark: false
 short: "IVP does not imply continuity"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-recording/receipts/fs-intermediate-value-property-implies-continuity.json
 sources:
   scraped: []
   references:
@@ -32,6 +33,8 @@ pipeline_run: null
 ---
 
 ## Statement
+
+Throughout, $\mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R}$ denotes the canonical copies. Natural numbers, integers and rationals are written directly when used in real arithmetic.
 
 **FALSE.** If $I \subseteq \mathbb{R}$ is an interval and $f : I \to \mathbb{R}$
 has the intermediate value property ([[def-intermediate-value-property]]), then
@@ -54,7 +57,7 @@ asserts that the implication reverses, and it does not.
 
 [L4] Intermediate value theorem: a continuous function on $[a,b]$ takes every value between its values at the endpoints ([[thm-intermediate-value]]).
 
-[L5] For every real $\eta > 0$ there is a natural $k \ge 1$ with $1/\iota(k) < \eta$, and the canonical naturals are cofinal in $\mathbb{R}$ ([[cor-archimedean-reciprocal]], [[thm-of-archimedean]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
+[L5] For every real $\eta > 0$ there is a natural $k \ge 1$ with $1/k < \eta$, and the canonical naturals are cofinal in $\mathbb{R}$ ([[cor-archimedean-reciprocal]], [[thm-of-archimedean]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
 
 [L6] $|u| \ge 0$, $|u| = 0$ only for $u = 0$, and $|u - w| \le |u - v| + |v - w|$ ([[lem-of-abs-value]]).
 
@@ -70,11 +73,11 @@ asserts that the implication reverses, and it does not.
 
 2.2 $\psi(u) = \min\{\, |u - m| : m \in \mathbb{Z} \,\}$ in the sense that $|u - m| \ge \psi(u)$ for every integer $m$, with equality for $m = \lfloor u \rfloor$ or $m = \lfloor u \rfloor + 1$. Indeed, with $n := \lfloor u \rfloor$: for $m \le n$ one has $|u - m| = u - m \ge u - n$, and for $m \ge n+1$ one has $|u - m| = m - u \ge n + 1 - u$. [step 1.1, L1]
 
-2.3 For every real $\eta > 0$ and every $y \in [0,1/2]$ there is $x$ with $0 < x < \eta$ and $g(x) = y$: take a natural $k \ge 1$ with $1/\iota(k) < \eta$ and put $x := 1/(\iota(k) + y)$. Then $0 < x \le 1/\iota(k) < \eta$ and $1/x = \iota(k) + y$ with $0 \le y \le 1/2 < 1$, so $\lfloor 1/x \rfloor = \iota(k)$ and $\psi(1/x) = \min\{y, 1-y\} = y$. [step 1.1, L1, L5]
+2.3 For every real $\eta > 0$ and every $y \in [0,1/2]$ there is $x$ with $0 < x < \eta$ and $g(x) = y$: take a natural $k \ge 1$ with $1/k < \eta$ and put $x := 1/(k + y)$. Then $0 < x \le 1/k < \eta$ and $1/x = k + y$ with $0 \le y \le 1/2 < 1$, so $\lfloor 1/x \rfloor = k$ and $\psi(1/x) = \min\{y, 1-y\} = y$. [step 1.1, L1, L5]
 
 3.1 $\psi$ is continuous on $\mathbb{R}$, because $|\psi(u) - \psi(v)| \le |u - v|$ for all reals $u, v$: choose an integer $m$ with $|u - m| = \psi(u)$, which exists by step 2.2; then $\psi(v) \le |v - m| \le |v - u| + |u - m| = |u - v| + \psi(u)$, and exchanging $u$ and $v$ gives the other inequality. So $\delta := \varepsilon$ witnesses continuity at every point. [step 2.2, L6]
 
-3.2 For every real $\eta > 0$ and every $y \in [0,1/2]$ there is $x$ with $-\eta < x < 0$ and $g(x) = y$: with $k$ as in step 2.3 put $x := -1/(\iota(k) + y)$, so $-\eta < x < 0$ and $1/x = -\iota(k) - y$. If $y = 0$ then $1/x = -\iota(k)$ is an integer and $\psi(1/x) = 0 = y$; if $0 < y \le 1/2$ then $\lfloor 1/x \rfloor = -\iota(k) - 1$ and $1/x - \lfloor 1/x \rfloor = 1 - y$, so $\psi(1/x) = \min\{1-y, y\} = y$. [step 1.1, step 2.3, L1, L5]
+3.2 For every real $\eta > 0$ and every $y \in [0,1/2]$ there is $x$ with $-\eta < x < 0$ and $g(x) = y$: with $k$ as in step 2.3 put $x := -1/(k + y)$, so $-\eta < x < 0$ and $1/x = -k - y$. If $y = 0$ then $1/x = -k$ is an integer and $\psi(1/x) = 0 = y$; if $0 < y \le 1/2$ then $\lfloor 1/x \rfloor = -k - 1$ and $1/x - \lfloor 1/x \rfloor = 1 - y$, so $\psi(1/x) = \min\{1-y, y\} = y$. [step 1.1, step 2.3, L1, L5]
 
 3.3 $g$ is **discontinuous at $0$**: $g(0) = 0$, and by step 2.3 every real $\delta > 0$ admits $x$ with $0 < x < \delta$ and $g(x) = 1/2$, so $|g(x) - g(0)| = 1/2$. Hence no $\delta$ witnesses the continuity condition at $0$ for $\varepsilon := 1/2$. [step 1.1, step 2.3, L6]
 

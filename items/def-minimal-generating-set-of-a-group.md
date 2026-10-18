@@ -3,6 +3,7 @@ id: def-minimal-generating-set-of-a-group
 kind: definition
 title: "Minimal generating sets of a group"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: literature-derived
@@ -13,10 +14,10 @@ landmark: false
 verification:
   precheck: n/a
   judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/published-receipts/def-minimal-generating-set-of-a-group.json
 sources:
   scraped: []
   references:

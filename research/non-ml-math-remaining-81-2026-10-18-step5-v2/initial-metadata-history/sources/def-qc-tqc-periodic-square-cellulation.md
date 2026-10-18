@@ -1,0 +1,51 @@
+---
+id: def-qc-tqc-periodic-square-cellulation
+kind: definition
+title: Periodic square cellulation of the torus
+status: draft
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+dependency_level: 0
+deps: []
+justified_by: []
+proof_strategy: direct
+axiom_use: "None; the construction uses fixed finite coordinate sets."
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "Alexei Kitaev, Fault-tolerant quantum computation by anyons"
+      url: https://arxiv.org/pdf/quant-ph/9707021
+    - title: "Eric Dennis, Alexei Kitaev, Andrew Landahl, and John Preskill, Topological quantum memory"
+      url: https://arxiv.org/pdf/quant-ph/0110143
+---
+
+## Definition
+
+Fix an integer $L\ge3$ and write $\mathbb Z_L=\mathbb Z/L\mathbb Z$. The
+periodic square cellulation has vertices $q_{i,j}$, horizontal edges $h_{i,j}$
+from $q_{i,j}$ to $q_{i+1,j}$, vertical edges $v_{i,j}$ from $q_{i,j}$ to
+$q_{i,j+1}$, and faces $f_{i,j}$, for $i,j\in\mathbb Z_L$. Every index is
+read modulo $L$. The boundary of $f_{i,j}$ consists of
+$h_{i,j},v_{i+1,j},h_{i,j+1},v_{i,j}$. Equivalently, this is the quotient of
+the unit square tiling of $\mathbb R^2$ by translations in $L\mathbb Z^2$.
+
+The cellulation has $L^2$ vertices, $2L^2$ edges, and $L^2$ faces. The
+condition $L\ge3$ ensures that the four edges in each star and face are
+distinct, and that every edge has two distinct endpoints and two distinct
+incident faces. The vertex-edge graph joins vertices joined by an edge. The
+face-adjacency graph joins faces sharing an edge; both graphs are connected.
+
+## Facts & Assumptions
+
+**Given:** An integer $L\ge3$ and coordinate indices in $\mathbb Z_L$.
+
+## Verification
+
+1.1 The horizontal and vertical edges are indexed by two disjoint copies of $\mathbb Z_L^2$, so there are $2L^2$ edges; the vertex and face sets each have $L^2$ indices. At $q_{i,j}$ the four incident edges are $h_{i-1,j},h_{i,j},v_{i,j-1},v_{i,j}$. Their endpoints are distinct because $L\ge3$. [given, algebra]
+
+2.1 The faces adjacent to $h_{i,j}$ are $f_{i,j-1}$ and $f_{i,j}$, and the faces adjacent to $v_{i,j}$ are $f_{i-1,j}$ and $f_{i,j}$. These pairs are distinct for $L\ge3$; each displayed face boundary has four distinct edges. Thus the stated incidences define a square cellulation without repeated incidences. [given, step 1.1, algebra]
+
+3.1 Repeated horizontal and vertical steps modulo $L$ connect any pair of vertices. The same coordinate moves connect any pair of face indices through shared edges. Therefore both graphs defined above are connected. [given, algebra] ∎
+

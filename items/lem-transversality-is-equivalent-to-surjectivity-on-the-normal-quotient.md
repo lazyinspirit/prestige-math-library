@@ -3,6 +3,7 @@ id: lem-transversality-is-equivalent-to-surjectivity-on-the-normal-quotient
 kind: lemma
 title: "Transversality is equivalent to surjectivity on the normal quotient"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
@@ -14,8 +15,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/lem-transversality-is-equivalent-to-surjectivity-on-the-normal-quotient.json
 sources:
   scraped: []
   references:

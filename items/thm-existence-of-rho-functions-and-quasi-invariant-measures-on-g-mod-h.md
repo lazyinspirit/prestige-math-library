@@ -24,9 +24,10 @@ verification:
   audited: 2026-10-02
   precheck: pass
   judge:
-    model: "gpt-6.1-sol"
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-02
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/published-recording/receipts/thm-existence-of-rho-functions-and-quasi-invariant-measures-on-g-mod-h.json
 ---
 
 ## Statement
@@ -63,6 +64,8 @@ Assume AC. Every closed $H\leq G$ admits a rho-function $\rho$ and a full-suppor
 
 2.2 For $h_0\in H$, substitute $k=h_0h$; left invariance of $dh$ and the homomorphism laws give $\rho(xh_0)=\Delta_H(h_0)\Delta_G(h_0)^{-1}\rho(x)$. Hence $\rho$ is a rho-function. [F3, step 1.1, algebra]
 
-3.1 Apply [F5] to obtain $\mu_\rho$ and the Weil formula. The ratio $D_g(xH)=\rho(g^{-1}x)/\rho(x)$ is independent of the representative by [F3] and is positive continuous. For $\phi=T_Hf$, Weil and left invariance give $$\int_{G/H}\phi(gq)d\mu_\rho(q)=\int_G f(gx)\rho(x)dx=\int_G f(y)\rho(g^{-1}y)dy=\int_{G/H}\phi(q)D_g(q)d\mu_\rho(q).$$ By [F6] this holds for every $\phi\in C_c(G/H)$, and [F7] identifies $g_*\mu_\rho=D_g\mu_\rho$. Positivity of $D_g$ gives equivalence of measures; the ratio descends continuously jointly in $(g,q)$ through the open quotient map. Thus $\mu_\rho$ is strongly quasi-invariant. Full support is part of [F5]. ∎ [A1, F1, F2, F3, F4, F5, F6, F7, step 1.1, step 2.1, step 2.2] ## Sources
+3.1 Apply [F5] to obtain $\mu_\rho$ and the Weil formula. The ratio $D_g(xH)=\rho(g^{-1}x)/\rho(x)$ is independent of the representative by [F3] and is positive continuous. For $\phi=T_Hf$, Weil and left invariance give $$\int_{G/H}\phi(gq)d\mu_\rho(q)=\int_G f(gx)\rho(x)dx=\int_G f(y)\rho(g^{-1}y)dy=\int_{G/H}\phi(q)D_g(q)d\mu_\rho(q).$$ By [F6] this holds for every $\phi\in C_c(G/H)$, and [F7] identifies $g_*\mu_\rho=D_g\mu_\rho$. Positivity of $D_g$ gives equivalence of measures; the ratio descends continuously jointly in $(g,q)$ through the open quotient map. Thus $\mu_\rho$ is strongly quasi-invariant. Full support is part of [F5]. [A1, F1, F2, F3, F4, F5, F6, F7, step 1.1, step 2.1, step 2.2] ∎
+
+## Sources
 
 Bekka–de la Harpe–Valette, *Kazhdan’s Property (T)*, Appendix B §B.1, PDF pp. 349–356; Bruhat, *Lectures on Lie Groups and Representations of Locally Compact Groups*, Chapter 7 §§3.3–3.4, PDF pp. 72–77. Full relevant text was inspected.

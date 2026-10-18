@@ -3,6 +3,7 @@ id: lem-baire-category-in-a-closed-interval
 kind: lemma
 title: "Baire category inside a closed bounded interval: if $[a,b]$ with $a < b$ is covered by a sequence of closed sets, then one of them contains a nondegenerate closed subinterval of $[a,b]$; no choice principle is used"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,7 @@ landmark: false
 short: "Baire category inside $[a,b]$"
 proof_strategy: contradiction
 verification:
-  audited: 2026-07-28
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/lem-baire-category-in-a-closed-interval.json
 sources:
   scraped: []
   references:
@@ -76,6 +72,6 @@ complements of the $F_n$.
 
 ## Remarks
 
-- **Why the statement is about $[a,b]$ and not about $\mathbb{R}$.** [[thm-baire-category-r]] says that $\mathbb{R}$ is not a countable union of nowhere dense sets. What is needed for Baire's theorem on functions of the first class ([[thm-baire-one-continuity-points]]) is the same statement *localised* to a closed bounded interval, and the localisation is not formal: a closed set may be nowhere dense in $\mathbb{R}$ and yet fill an interval, so the conclusion has to be stated as "contains a nondegenerate closed subinterval" rather than "has nonempty interior in $\mathbb{R}$". The two are in fact the same condition here, which is what step 2.1 uses.
+- **Why the statement is about $[a,b]$ and not about $\mathbb{R}$.** [[thm-baire-category-r]] says that $\mathbb{R}$ is not a countable union of nowhere dense sets. What is needed for Baire's theorem on functions of the first class ([[thm-baire-one-continuity-points]]) is the same statement *localised* to a closed bounded interval, and the localisation is supplied by applying the theorem to the closed traces $G_n=F_n\cap[a,b]$. A closed set contains a nondegenerate closed interval if and only if it has nonempty interior in $\mathbb{R}$; in particular, a nowhere dense set cannot fill such an interval. Step 2.1 uses exactly this equivalence for the traces $G_n$, so the conclusion locates the subinterval inside $[a,b]$.
 
 - **The hypothesis $a < b$ is not decoration.** For $a = b$ the set $[a,b]$ is a single point, it is covered by the constant sequence $F_n = \{a\}$, and no $F_n$ contains a nondegenerate closed interval; the conclusion fails, and the proof breaks at step 3.1, where $(a,b)$ is empty.

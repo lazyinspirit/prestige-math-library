@@ -1,0 +1,46 @@
+---
+page: toric-code-anyons-logical-operators-and-protection-examples
+title: Toric Code Anyons, Logical Operators, and Protection — Examples
+status: draft
+requires:
+  - toric-code-anyons-logical-operators-and-protection
+items: []
+examples:
+  - ex-qc-tqc-l3-toric-checks
+  - cex-qc-tqc-planar-is-not-toric
+---
+
+## The periodic square fundamental domain
+
+The picture shows a $3\times3$ fundamental square for the periodic cellulation.
+Opposite boundary vertices and edge segments with matching transverse index
+are identified. Indices are read modulo $3$; the exact vertex, edge and face
+incidences are given by [[def-qc-tqc-periodic-square-cellulation]]. The
+endpoint notation in that definition specifies each edge, while chains and check supports
+use coefficients in $\mathbb F_2$ and hence do not depend on orientation.
+
+```tikz
+\begin{tikzpicture}[scale=0.78, every node/.style={font=\small}]
+  \draw[gray!65] (0,0) grid (3,3);
+  \foreach \i in {0,1,2,3} {
+    \foreach \j in {0,1,2,3} {
+      \fill (\i,\j) circle (1.5pt);
+    }
+  }
+  \node[below left] at (0,0) {$q_{0,0}$};
+  \node[above right] at (3,3) {$q_{0,0}$};
+  \node[below] at (1.5,0) {$h_{i,0}$};
+  \node[left] at (0,1.5) {$v_{0,j}$};
+  \draw[->,thick,blue] (-0.20,3.38) -- (3.20,3.38)
+    node[midway,above] {identify left/right, same $j$};
+  \draw[->,thick,red] (3.43,-0.18) -- (3.43,3.18)
+    node[midway,right,align=left] {identify bottom/top,\ same $i$};
+  \node[below] at (1.5,-0.50) {$i=0,1,2$};
+  \node[rotate=90] at (-0.55,1.5) {$j=0,1,2$};
+\end{tikzpicture}
+```
+
+The two arrows show the quotient identifications only; they are not extra
+edges. The four corner vertices represent one torus vertex after the paired
+identifications. The example below lists all eighteen edge qubits and checks
+the length-three logical loop directly, so no proof depends on the drawing.

@@ -1,0 +1,245 @@
+[
+  {
+    "order": 2544,
+    "id": "finite-quantization-lloyd-and-compact-companders",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Finite Quantization, Lloyd Iteration, and Compact Companders",
+    "companion": "finite-quantization-lloyd-and-compact-companders-examples",
+    "requires": [
+      "rate-distortion-and-lossy-source-coding"
+    ],
+    "items": [
+      {
+        "id": "lem-it-weighted-centroid-squared-error-identity",
+        "kind": "lemma",
+        "title": "The weighted centroid minimizes finite-cluster squared error",
+        "statement": "For positive finite weights and a nonempty cluster, squared error equals the centroid cost plus total cluster weight times squared distance from the centroid; an empty cluster has zero cost for every center.",
+        "strategy": "Expand the squared norm and use the vanishing weighted centered sum; check uniqueness and the empty-cluster convention.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-it-point-density-cumulative-map",
+        "kind": "definition",
+        "title": "Cumulative coordinate of a point density on a compact interval",
+        "statement": "For a positive normalized C1 point density g on [a,b], define G_g(x)=integral_a^x g(t)dt using the Riemann integral of a continuous function.",
+        "strategy": "State the nondegenerate interval, positivity, C1 regularity, normalization and integral convention.",
+        "deps": [
+          "cor-primitives-of-a-continuous-function"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-it-finite-squared-error-quantizer",
+        "kind": "definition",
+        "title": "Finite measurable squared-error quantizer and nearest-center rule",
+        "statement": "Define finite Borel index maps with a finite reproduction tuple, expected squared-error distortion under a finite-second-moment Borel law, and the least-index nearest-center specialization with its cell inequalities.",
+        "strategy": "Specify the Borel domain, finite discrete index set, Euclidean squared norm, source moment and tie rule.",
+        "deps": [
+          "def-it-single-letter-distortion-and-block-distortion"
+        ],
+        "justified_by": [
+          "lem-it-nearest-center-quantizer-is-borel-and-finite-distortion"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-it-point-density-cumulative-map-is-c2-diffeomorphism",
+        "kind": "lemma",
+        "title": "A positive C1 point density has a C2 cumulative inverse",
+        "statement": "A positive normalized C1 g on a nondegenerate compact interval has a strictly increasing C2 cumulative map G_g:[a,b]->[0,1] and a C2 inverse with phi'=1/(g composed with phi) and phi''=-g' composed with phi divided by (g composed with phi)^3.",
+        "strategy": "Use the primitive theorem, mean value theorem, IVT, uniqueness of inverse values and explicit difference quotients; derive the second derivative and endpoint extensions.",
+        "deps": [
+          "def-it-point-density-cumulative-map",
+          "cor-mean-value-theorem",
+          "cor-primitives-of-a-continuous-function",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-extreme-value-metric",
+          "thm-intermediate-value"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-it-nearest-center-quantizer-is-borel-and-finite-distortion",
+        "kind": "lemma",
+        "title": "The finite nearest-center quantizer is Borel with finite distortion",
+        "statement": "For a Borel probability law on R^d with finite second moment and a finite center tuple, the least-index nearest-center cells are Borel and the expected squared error is finite, including coincident centers and empty cells.",
+        "strategy": "Express cells by strict/nonstrict inequalities of continuous squared-distance polynomials and dominate squared error by twice the source and center squared norms.",
+        "deps": [
+          "def-it-finite-squared-error-quantizer"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-it-compact-one-dimensional-compander",
+        "kind": "definition",
+        "title": "Positive C1 compact one-dimensional compander",
+        "statement": "For positive normalized C1 densities f,g on [a,b], use inverse cumulative boundaries phi(j/N) and reproduction points phi((j-1/2)/N), with half-open cells and the final right endpoint included; define the exact squared-error distortion.",
+        "strategy": "State fixed compact support, normalized positive densities, the cumulative inverse, every boundary and reproduction point, and the absence of overload.",
+        "deps": [
+          "def-it-finite-squared-error-quantizer",
+          "def-it-point-density-cumulative-map",
+          "lem-it-point-density-cumulative-map-is-c2-diffeomorphism"
+        ],
+        "justified_by": [
+          "lem-it-compact-compander-quantizer-is-borel-and-finite-distortion"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-it-finite-data-lloyd-quantizer",
+        "kind": "algorithm",
+        "title": "Exact finite-data Lloyd quantizer",
+        "statement": "On positive weighted finite data, repeatedly assign by least-index nearest center, replace nonempty centers by weighted centroids, leave empty centers unchanged, and stop when the exact center tuple is unchanged.",
+        "strategy": "Specify input, exact comparison/arithmetic model, deterministic ties, empty-cluster branch, stop test and output.",
+        "deps": [
+          "def-it-finite-squared-error-quantizer",
+          "lem-it-nearest-center-quantizer-is-borel-and-finite-distortion",
+          "lem-it-weighted-centroid-squared-error-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "alg-it-exhaustive-global-empirical-quantizer",
+        "kind": "algorithm",
+        "title": "Exhaustive global empirical squared-error quantizer",
+        "statement": "Enumerate the k^N assignments, use weighted centroids on nonempty clusters and x_1 on empty clusters, retain the first least-cost assignment, and return nearest-center reassignment.",
+        "strategy": "Specify the exact finite search order, empty-cluster convention, cost and output.",
+        "deps": [
+          "def-it-finite-squared-error-quantizer",
+          "lem-it-nearest-center-quantizer-is-borel-and-finite-distortion",
+          "lem-it-weighted-centroid-squared-error-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-it-compact-compander-quantizer-is-borel-and-finite-distortion",
+        "kind": "lemma",
+        "title": "The compact compander is a measurable finite quantizer",
+        "statement": "The compander's consecutive interval cells are Borel and partition [a,b], its finite index map is measurable, and its squared-error distortion is finite for each N.",
+        "strategy": "Use strict monotonicity of the cumulative inverse, half-open interval cells, compact support and the bound |x-r_j|<=b-a.",
+        "deps": [
+          "def-it-compact-one-dimensional-compander",
+          "def-it-finite-squared-error-quantizer",
+          "lem-it-point-density-cumulative-map-is-c2-diffeomorphism"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-it-finite-data-lloyd-termination-and-fixed-point",
+        "kind": "theorem",
+        "title": "Exact finite-data Lloyd descent and finite termination",
+        "statement": "A center-changing pass strictly decreases empirical distortion; at most 2^(Nk) passes occur, ending at a nearest-assignment/centroid fixed point, with an exponential exact-operation bound and no global-optimum assertion.",
+        "strategy": "Use assignment minimization, the weighted centroid excess identity, the finite set of possible center values, and deterministic fixed-point stopping.",
+        "deps": [
+          "alg-it-finite-data-lloyd-quantizer",
+          "def-it-finite-squared-error-quantizer",
+          "lem-it-weighted-centroid-squared-error-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-it-exhaustive-global-empirical-quantizer-is-optimal",
+        "kind": "theorem",
+        "title": "Exhaustive empirical search attains a global quantizer",
+        "statement": "The k^N assignment enumeration terminates and returns a nearest-center tuple whose empirical squared-error distortion is no greater than every k-center tuple; its operation count is exponential.",
+        "strategy": "Compare every tuple's nearest assignment, its centroid-adjusted cost, the exhaustive minimum, and the returned tuple's nearest reassignment.",
+        "deps": [
+          "alg-it-exhaustive-global-empirical-quantizer",
+          "def-it-finite-squared-error-quantizer",
+          "lem-it-weighted-centroid-squared-error-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-it-compact-compander-high-rate-distortion",
+        "kind": "theorem",
+        "title": "Exact high-rate limit for a positive compact one-dimensional compander",
+        "statement": "For positive normalized C1 source and point densities on a fixed compact interval, N^2 D_N(f,g) converges to (1/12) integral_a^b f/g^2.",
+        "strategy": "Transform each cell to cumulative coordinates; derive a uniform second-order midpoint expansion and sum its cubic leading terms; pass to midpoint Riemann sums and transform back.",
+        "deps": [
+          "def-it-compact-one-dimensional-compander",
+          "lem-it-compact-compander-quantizer-is-borel-and-finite-distortion",
+          "lem-it-point-density-cumulative-map-is-c2-diffeomorphism",
+          "cor-mean-value-theorem",
+          "cor-primitives-of-a-continuous-function",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-extreme-value-metric",
+          "thm-heine-cantor-metric"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-it-optimal-compact-compander-density",
+        "kind": "theorem",
+        "title": "Optimal point density within the compact compander class",
+        "statement": "Among positive normalized C1 point densities, g*=f^(1/3)/integral f^(1/3) uniquely minimizes the compact compander coefficient at (1/12)(integral f^(1/3))^3.",
+        "strategy": "Normalize f/g^3 against the density g and integrate the exact factorization z+2-3z^(1/3)=(z^(1/3)-1)^2(z^(1/3)+2); check equality and admissibility.",
+        "deps": [
+          "def-it-compact-one-dimensional-compander",
+          "thm-it-compact-compander-high-rate-distortion",
+          "def-real-power",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-primitives-of-a-continuous-function",
+          "thm-extreme-value-metric"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 2545,
+    "id": "finite-quantization-lloyd-and-compact-companders-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Finite Quantization, Lloyd Iteration, and Compact Companders — Examples",
+    "companion": "finite-quantization-lloyd-and-compact-companders",
+    "requires": [
+      "finite-quantization-lloyd-and-compact-companders"
+    ],
+    "items": [
+      {
+        "id": "cex-it-lloyd-fixed-point-need-not-be-global",
+        "kind": "counterexample",
+        "title": "Lloyd can stop at a strictly suboptimal finite-data fixed point",
+        "statement": "Equal weights on {0,1,4,5,9} and initial centers (5/2,9) stop at distortion 17/5, while centers (1/2,6) have distortion 29/10.",
+        "strategy": "Calculate every strict nearest comparison, verify the first centers are the assigned centroids, and compute the smaller alternative cost exactly.",
+        "deps": [
+          "alg-it-finite-data-lloyd-quantizer",
+          "def-it-finite-squared-error-quantizer",
+          "lem-it-weighted-centroid-squared-error-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-it-uniform-compact-compander",
+        "kind": "example",
+        "title": "Uniform density gives exact midpoint compander distortion",
+        "statement": "For f=g=1 on [0,1], midpoint quantization has exact distortion 1/(12N^2), so N^2 D_N=1/12 and agrees with the compander limit.",
+        "strategy": "Integrate squared distance on each of the N equal symmetric cells and sum exactly.",
+        "deps": [
+          "def-it-compact-one-dimensional-compander",
+          "thm-it-compact-compander-high-rate-distortion"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

@@ -40110,3 +40110,3313 @@ Published supplier thm-c2-ode-flow-on-common-tube; proof-only owner correction f
 Published supplier cor-real-spectral-theorem-for-self-adjoint-endomorphisms; proof-only owner correction for native Step4 batch 67 alert. Describe the b=0 two-dimensional block as aI_2=diag(a,a), preserving its two coordinates; Statement and orthonormal eigenbasis interface unchanged. Current content guard: d1b90759f7fcec1128df217d37366ebc0dbe5d4a7c9fe83690b2d8266818e45c. Actual source owner /root/gate_phasefield_provenance; unchanged statement and consumer-interface review: research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step4-published-spectral67-repair-applied.json. Ordinary pre-edit claim step4-published-67-owner; exact before source research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step4-published-alerts-before/cor-real-spectral-theorem-for-self-adjoint-endomorphisms.md. Successful current local precheck/render and final proof-layout recorded in research/numerical-analysis-remaining-71-2026-10-17-owner-planning-integration/step4-published-alert-repair-records. This is local correction history, not initial publication, a new whole-item audit, or native execution coverage.
 <!-- local-published-repair:numerical-analysis-remaining-71-2026-10-17:cor-real-spectral-theorem-for-self-adjoint-endomorphisms:step4-alert-67:end -->
 
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-thm-basic-properties-of-the-categorical-trace:begin -->
+
+### thm-basic-properties-of-the-categorical-trace — owner drift prerequisite correction
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-drift-prerequisite-suppliers.
+
+Current content SHA-256: ea0a6d24b098d380c0ffb058dca50c3ab4e2d68668a04ccae749799d0600ae76.
+
+Reviewed typed nested left/right trace formulas, duality and cyclicity. General scalar actions need not coincide; Mat_2(Vec) disproves old multiplicativity. Corrected statement retains general identities and proves multiplicativity precisely with central scalar actions, in particular braided or scalar-unit linear categories. Same owner checked all affected direct and indirect consumers. Independently reviewed subsequent canonical phase formatting: Statements, Facts and mathematical argument paragraphs preserved; only step ordering/labels/references and whitespace changed. Previous adoption and genuine repair evidence remain immutable and authenticated.
+
+Owner acceptance: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-acceptances/thm-basic-properties-of-the-categorical-trace-formatted.json. Adoption evidence: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-receipts/thm-basic-properties-of-the-categorical-trace-formatted-adoption.json. Consumer checks and genuine source review remain in research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/trace-tl/repair.json and research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/tangle-topology/repair.json. Local precheck/render checks below postdate actual ownership adoption; no new whole-item audit or native execution coverage is claimed.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-thm-basic-properties-of-the-categorical-trace:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-thm-in-a-spherical-category-the-left-and-right-traces-agree:begin -->
+
+### thm-in-a-spherical-category-the-left-and-right-traces-agree — owner drift prerequisite correction
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-drift-prerequisite-suppliers.
+
+Current content SHA-256: 12482c47eb7271dad96d093c60741dacdf9e13a316110e2b6d659ee4e00e1dbc.
+
+Reviewed the arbitrary-field failure in real Rep(C3), exact algebraically closed field hypothesis, nilpotent image induction and primary decomposition. Simple dimension agreement alone over R is insufficient; all affected existing consumers were checked/repaired by the same owner.
+
+Owner acceptance: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-acceptances/thm-in-a-spherical-category-the-left-and-right-traces-agree.json. Adoption evidence: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-receipts/thm-in-a-spherical-category-the-left-and-right-traces-agree-adoption.json. Consumer checks and genuine source review remain in research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/trace-tl/repair.json and research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/tangle-topology/repair.json. Local precheck/render checks below postdate actual ownership adoption; no new whole-item audit or native execution coverage is claimed.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-thm-in-a-spherical-category-the-left-and-right-traces-agree:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-thm-a-braided-rigid-category-has-a-drinfeld-morphism:begin -->
+
+### thm-a-braided-rigid-category-has-a-drinfeld-morphism — owner drift prerequisite correction
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-drift-prerequisite-suppliers.
+
+Current content SHA-256: 28ef9f5a16328bb8f6c5385f1e30522032f324cc816e25f4bd5702e2d89c4620.
+
+Reviewed explicit braided dual comparison, typed inverse and naturality, and hexagon tensor defect; statement preserved. Independently reviewed subsequent canonical phase formatting: Statements, Facts and mathematical argument paragraphs preserved; only step ordering/labels/references and whitespace changed. Previous adoption and genuine repair evidence remain immutable and authenticated.
+
+Owner acceptance: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-acceptances/thm-a-braided-rigid-category-has-a-drinfeld-morphism-formatted.json. Adoption evidence: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-receipts/thm-a-braided-rigid-category-has-a-drinfeld-morphism-formatted-adoption.json. Consumer checks and genuine source review remain in research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/trace-tl/repair.json and research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/tangle-topology/repair.json. Local precheck/render checks below postdate actual ownership adoption; no new whole-item audit or native execution coverage is claimed.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-thm-a-braided-rigid-category-has-a-drinfeld-morphism:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-fs-the-left-and-right-traces-always-agree:begin -->
+
+### fs-the-left-and-right-traces-always-agree — owner drift prerequisite correction
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-drift-prerequisite-suppliers.
+
+Current content SHA-256: f5599d47bcec49243e766be29c7d64feba9a6995da37dcfcc32b20b8580abe2e.
+
+Reviewed explicit graded complex-line witness and qualified spherical supplier hypotheses. False statement unchanged; contextual reference corrected.
+
+Owner acceptance: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-acceptances/fs-the-left-and-right-traces-always-agree.json. Adoption evidence: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-receipts/fs-the-left-and-right-traces-always-agree-adoption.json. Consumer checks and genuine source review remain in research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/trace-tl/repair.json and research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/tangle-topology/repair.json. Local precheck/render checks below postdate actual ownership adoption; no new whole-item audit or native execution coverage is claimed.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-fs-the-left-and-right-traces-always-agree:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-lem-framed-oriented-tangles-have-the-ribbon-generator-and-relation-presentation:begin -->
+
+### lem-framed-oriented-tangles-have-the-ribbon-generator-and-relation-presentation — owner drift prerequisite correction
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-drift-prerequisite-suppliers.
+
+Current content SHA-256: f5e4c4f29352589ff0d51727c19320f910c1fb648ffb3f550432f7db4a3767dd.
+
+Reviewed reduced typed relation presentation, framing/slicing and finite multijet perturbation, complete R1/R2/R3 orientation and cup-passages, inverse bending and curl framing compensation. Statement preserved; no source-only presentation theorem substituted. Independently reviewed subsequent canonical phase formatting: Statements, Facts and mathematical argument paragraphs preserved; only step ordering/labels/references and whitespace changed. Previous adoption and genuine repair evidence remain immutable and authenticated.
+
+Owner acceptance: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-acceptances/lem-framed-oriented-tangles-have-the-ribbon-generator-and-relation-presentation-formatted.json. Adoption evidence: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-receipts/lem-framed-oriented-tangles-have-the-ribbon-generator-and-relation-presentation-formatted-adoption.json. Consumer checks and genuine source review remain in research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/trace-tl/repair.json and research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/tangle-topology/repair.json. Local precheck/render checks below postdate actual ownership adoption; no new whole-item audit or native execution coverage is claimed.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-lem-framed-oriented-tangles-have-the-ribbon-generator-and-relation-presentation:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor:begin -->
+
+### thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor — owner drift prerequisite correction
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-drift-prerequisite-suppliers.
+
+Current content SHA-256: 0b4765fd006038e779fb93e254b24bd5e75e737dfa7b298a61377024ed81646f.
+
+Reviewed direct algebraic relation verification, both bent inverse orders, theta-square naturality, negative cup/cap via j=u theta, and coherent transport to the original category. Statement preserved. Independently reviewed subsequent canonical phase formatting: Statements, Facts and mathematical argument paragraphs preserved; only step ordering/labels/references and whitespace changed. Previous adoption and genuine repair evidence remain immutable and authenticated.
+
+Owner acceptance: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-acceptances/thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor-formatted.json. Adoption evidence: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-receipts/thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor-formatted-adoption.json. Consumer checks and genuine source review remain in research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/trace-tl/repair.json and research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/tangle-topology/repair.json. Local precheck/render checks below postdate actual ownership adoption; no new whole-item audit or native execution coverage is claimed.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-lem-ribbon-trace-equals-the-framed-closure-evaluation:begin -->
+
+### lem-ribbon-trace-equals-the-framed-closure-evaluation — owner drift prerequisite correction
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-drift-prerequisite-suppliers.
+
+Current content SHA-256: 225ec6deb5b9021e2a22c0f74c87e96d4b56c88a413e2f7cb6a801a253e2d167.
+
+Reviewed nested cup/right-cap evaluation word, j monoidality derived from double-braiding/balancing rather than the closure conclusion, typed tensor dual recursion and signed stabilization. Final central scalar action argument follows unit braiding naturality. Genuine trace correction and topology integration endpoints are preserved in order; statement unchanged. Independently reviewed subsequent canonical phase formatting: Statements, Facts and mathematical argument paragraphs preserved; only step ordering/labels/references and whitespace changed. Previous adoption and genuine repair evidence remain immutable and authenticated.
+
+Owner acceptance: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-acceptances/lem-ribbon-trace-equals-the-framed-closure-evaluation-formatted.json. Adoption evidence: research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/published-receipts/lem-ribbon-trace-equals-the-framed-closure-evaluation-formatted-adoption.json. Consumer checks and genuine source review remain in research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/trace-tl/repair.json and research/non-ml-math-remaining-81-2026-10-18-owner-drift-repair/tangle-topology/repair.json. Local precheck/render checks below postdate actual ownership adoption; no new whole-item audit or native execution coverage is claimed.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-lem-ribbon-trace-equals-the-framed-closure-evaluation:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-def-spherical-structure:begin -->
+
+### def-spherical-structure — truthful tensor supplier and spherical placement
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-page-cycle-spherical-placement.
+
+Current content SHA-256: f1f041f20140592585672823ac93fe996bf80fa21ce728804541e7de0b529060.
+
+Declared the exact tensor-category supplier used by the unchanged spherical Definition. Same original statement reviewer checked its spherical theorem/remark and false-statement consumers; relocated the closed five-item spherical block after tensor definitions on the existing tensor page. All Definition/Statement/proof bodies and logical dependencies are preserved.
+
+Genuine delegated evidence: research/non-ml-math-remaining-81-2026-10-18-owner-page-cycle-repair/trace-owner/repair.json. Owner placement acceptance: research/non-ml-math-remaining-81-2026-10-18-owner-page-cycle-repair/owner-integration.json. Actual local checks postdate the native pre-edit claim; no new audit, judge or native execution coverage.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-def-spherical-structure:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cex-fitting-centralizer-without-solvability:begin -->
+
+### cex-fitting-centralizer-without-solvability — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 33baecc0c3a0d7a880696581b71575e97a424b7ccff22f900f37100bf95b2a3b.
+
+Added the native run's derived dependency_level 0 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cex-fitting-centralizer-without-solvability:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-def-elementary-abelian-p-group:begin -->
+
+### def-elementary-abelian-p-group — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 2711212bfae4905a52c9c1ad6964ba9a27a872ca5982a255cd3020d8483274e9.
+
+Added the native run's derived dependency_level 0 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-def-elementary-abelian-p-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-def-minimal-generating-set-of-a-group:begin -->
+
+### def-minimal-generating-set-of-a-group — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 606e73c3ce1db52b6f4a28a2b62a702ceb637072ae32a4a2566be1fab89fe7f6.
+
+Added the native run's derived dependency_level 0 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-def-minimal-generating-set-of-a-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-def-pth-power-subgroup-of-a-group:begin -->
+
+### def-pth-power-subgroup-of-a-group — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 2cf5af77e9059f33de24bd7fbfa2f48b2e22025e312e45a5f2cd5ef243c6c173.
+
+Added the native run's derived dependency_level 0 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-def-pth-power-subgroup-of-a-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-lem-frattini-subgroup-is-characteristic:begin -->
+
+### lem-frattini-subgroup-is-characteristic — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 42272eef46ad1efd6a1ced4509d1a366c0f74d83ca302910de8fe929b46ee695.
+
+Added the native run's derived dependency_level 0 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-lem-frattini-subgroup-is-characteristic:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-generation-is-detected-modulo-the-frattini-subgroup:begin -->
+
+### cor-generation-is-detected-modulo-the-frattini-subgroup — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: f229fb270fae289fd2d57532ce6cbe28adf4211c8b23d9121b8ef299d5b67414.
+
+Added the native run's derived dependency_level 1 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-generation-is-detected-modulo-the-frattini-subgroup:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-fs-centralizer-of-the-fitting-subgroup-is-always-contained-in-the-fitting-subgroup:begin -->
+
+### fs-centralizer-of-the-fitting-subgroup-is-always-contained-in-the-fitting-subgroup — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: b9738e8a0beff6aae339447fa415290bf7870871a16db2ed69749dd8a7086a25.
+
+Added the native run's derived dependency_level 1 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-fs-centralizer-of-the-fitting-subgroup-is-always-contained-in-the-fitting-subgroup:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-fs-every-minimal-generating-set-of-an-arbitrary-finite-group-has-the-same-size:begin -->
+
+### fs-every-minimal-generating-set-of-an-arbitrary-finite-group-has-the-same-size — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 583b5057d8896a10aaf065aac6736937454449d43c13b86b02d1c5f9492a1f71.
+
+Added the native run's derived dependency_level 1 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-fs-every-minimal-generating-set-of-an-arbitrary-finite-group-has-the-same-size:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces:begin -->
+
+### lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 5962512a985f648fbac01830391f7503055e198f8a5124d95c1d0d965a7ad8b9.
+
+Added the native run's derived dependency_level 1 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-def-fp-basis-of-an-elementary-abelian-p-group:begin -->
+
+### def-fp-basis-of-an-elementary-abelian-p-group — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: a685dffa5202886d222e266f06bf6621a413aa82197c2f943ebcbb9f01c713b1.
+
+Added the native run's derived dependency_level 2 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-def-fp-basis-of-an-elementary-abelian-p-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension:begin -->
+
+### lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 86fe837b02235ab0a8da88e793706a1a969a755577d5bf8307f2c46fa06cbdf6.
+
+Added the native run's derived dependency_level 3 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-thm-frattini-quotient-is-the-largest-elementary-abelian-quotient:begin -->
+
+### thm-frattini-quotient-is-the-largest-elementary-abelian-quotient — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 5fb7d4b23a81199a9d15729fe5c5082674c6bb1dacf446f4df49f3b03f7d322c.
+
+Added the native run's derived dependency_level 4 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-thm-frattini-quotient-is-the-largest-elementary-abelian-quotient:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-frattini-free-finite-p-groups-are-elementary-abelian:begin -->
+
+### cor-frattini-free-finite-p-groups-are-elementary-abelian — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 6ab04af14819294a26011a8f9b02ceff584fd21655e2a6a9e01015e5540de3f3.
+
+Added the native run's derived dependency_level 5 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-frattini-free-finite-p-groups-are-elementary-abelian:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-maximal-subgroups-of-a-finite-p-group-are-frattini-hyperplanes:begin -->
+
+### cor-maximal-subgroups-of-a-finite-p-group-are-frattini-hyperplanes — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 0c8b2fd37a03d1f2cd0021a2f8878bb50c53c07482cdba24dba6391be752d73f.
+
+Added the native run's derived dependency_level 5 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-maximal-subgroups-of-a-finite-p-group-are-frattini-hyperplanes:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-def-generator-rank-of-a-finite-p-group:begin -->
+
+### def-generator-rank-of-a-finite-p-group — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 41a07c1d7e7d6e0b29d707e59902b77df68fa43a08e9c474d8f0dfb5f3e65aa7.
+
+Added the native run's derived dependency_level 5 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-def-generator-rank-of-a-finite-p-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-thm-automorphisms-act-linearly-on-the-frattini-quotient:begin -->
+
+### thm-automorphisms-act-linearly-on-the-frattini-quotient — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 2870b5d32df147fc875c5246ebd2c54e6c00b88564a990bd2f63d1af6771d370.
+
+Added the native run's derived dependency_level 5 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-thm-automorphisms-act-linearly-on-the-frattini-quotient:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-thm-frattini-subgroup-formula-for-a-finite-p-group:begin -->
+
+### thm-frattini-subgroup-formula-for-a-finite-p-group — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 044ad9457b2c0631b282d43bc6ae58375fec5723d98fc7fe4f5f359fcbec0040.
+
+Added the native run's derived dependency_level 5 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-thm-frattini-subgroup-formula-for-a-finite-p-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-frattini-subgroup-of-a-finite-two-group-is-the-square-subgroup:begin -->
+
+### cor-frattini-subgroup-of-a-finite-two-group-is-the-square-subgroup — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 10381553e63b5723a15f5705696bee5f24fa6f7690589903edc0ba69c4340357.
+
+Added the native run's derived dependency_level 6 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-frattini-subgroup-of-a-finite-two-group-is-the-square-subgroup:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-frattini-subgroup-of-a-cyclic-p-group:begin -->
+
+### ex-frattini-subgroup-of-a-cyclic-p-group — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: d4af2b15a0e9c7d437ce820a849e758bc266a916a415ccac18340197410d9843.
+
+Added the native run's derived dependency_level 6 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-frattini-subgroup-of-a-cyclic-p-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-frattini-subgroup-of-an-elementary-abelian-p-group:begin -->
+
+### ex-frattini-subgroup-of-an-elementary-abelian-p-group — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 2d22cfe2b393774872d4261c29f907d25f81985c0468396ab310535ee5c105a0.
+
+Added the native run's derived dependency_level 6 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-frattini-subgroup-of-an-elementary-abelian-p-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-generator-rank-of-upper-unitriangular-groups:begin -->
+
+### ex-generator-rank-of-upper-unitriangular-groups — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: cf74daf7e85fd1aca2a4875aacafc92cb72d9526abe9e096eeb43e219630871b.
+
+Added the native run's derived dependency_level 6 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-generator-rank-of-upper-unitriangular-groups:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-prop-frattini-subgroup-monotonicity-for-subgroups-of-finite-p-groups:begin -->
+
+### prop-frattini-subgroup-monotonicity-for-subgroups-of-finite-p-groups — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: c9b5295d7b9a730772fcecf27218fd93291f1a089f22227a03189874126eb758.
+
+Added the native run's derived dependency_level 6 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-prop-frattini-subgroup-monotonicity-for-subgroups-of-finite-p-groups:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-prop-frattini-subgroup-of-a-direct-product-of-finite-p-groups:begin -->
+
+### prop-frattini-subgroup-of-a-direct-product-of-finite-p-groups — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: de77b5ee77b2b657b97802859d14b6d69911f50062c4bf18a311500f72f10b8f.
+
+Added the native run's derived dependency_level 6 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-prop-frattini-subgroup-of-a-direct-product-of-finite-p-groups:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-prop-frattini-subgroup-of-a-quotient-finite-p-group:begin -->
+
+### prop-frattini-subgroup-of-a-quotient-finite-p-group — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: dc5e226d45194262e7d45064a71f04add1a370e12147de47ad11fd31c0198d39.
+
+Added the native run's derived dependency_level 6 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-prop-frattini-subgroup-of-a-quotient-finite-p-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-thm-burnside-basis-theorem:begin -->
+
+### thm-burnside-basis-theorem — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 583b20486100998e14d420c74f0742db2dfbd544df1812a2c812a12fdff05e0a.
+
+Added the native run's derived dependency_level 6 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-thm-burnside-basis-theorem:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cex-frattini-image-under-a-nonsurjective-homomorphism:begin -->
+
+### cex-frattini-image-under-a-nonsurjective-homomorphism — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 0eead7b791ee256cde7c01dbc9bdadc3e5ceaec81a3a779b5b5aadba28f4144e.
+
+Added the native run's derived dependency_level 7 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cex-frattini-image-under-a-nonsurjective-homomorphism:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-every-nonfrattini-element-belongs-to-a-minimal-generating-set:begin -->
+
+### cor-every-nonfrattini-element-belongs-to-a-minimal-generating-set — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 6b7b8006241a4d3dc689551c327559eeeabf559c5f4e2fdd48187a676c0682b4.
+
+Added the native run's derived dependency_level 7 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-every-nonfrattini-element-belongs-to-a-minimal-generating-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-minimal-generating-sets-of-a-finite-p-group-have-equal-size:begin -->
+
+### cor-minimal-generating-sets-of-a-finite-p-group-have-equal-size — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 1adffd4c48d8bbde4f7fb3c281a8fdb1957c2a407a07e5fd2631808a2a515f0e.
+
+Added the native run's derived dependency_level 7 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-minimal-generating-sets-of-a-finite-p-group-have-equal-size:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-nontrivial-finite-p-group-is-cyclic-iff-generator-rank-one:begin -->
+
+### cor-nontrivial-finite-p-group-is-cyclic-iff-generator-rank-one — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: a55f3636da9f84d3232c28309b6d619a47c8abb2e40a68d4820f5d39b9f4c60d.
+
+Added the native run's derived dependency_level 7 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-nontrivial-finite-p-group-is-cyclic-iff-generator-rank-one:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-frattini-subgroups-of-dihedral-and-quaternion-groups:begin -->
+
+### ex-frattini-subgroups-of-dihedral-and-quaternion-groups — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 1ae9cc75d73d01f7b2b3e990cbdf7411546eb92cce5f50c83bb2e574415ab3f3.
+
+Added the native run's derived dependency_level 7 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-frattini-subgroups-of-dihedral-and-quaternion-groups:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-fs-the-frattini-subgroup-is-the-union-of-the-maximal-subgroups:begin -->
+
+### fs-the-frattini-subgroup-is-the-union-of-the-maximal-subgroups — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 638fd2d3e7a03447774581b7be54670a7c0cc2e26afdfe4f8c73dd4357ecfdb7.
+
+Added the native run's derived dependency_level 7 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-fs-the-frattini-subgroup-is-the-union-of-the-maximal-subgroups:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-thm-hall-burnside-automorphism-theorem:begin -->
+
+### thm-hall-burnside-automorphism-theorem — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 0465a3964be0e507f97c59e508925beceb93ebd4cad0579baac3a80fa9ae758a.
+
+Added the native run's derived dependency_level 7 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-thm-hall-burnside-automorphism-theorem:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-kernel-of-the-action-on-the-frattini-quotient-is-a-p-group:begin -->
+
+### cor-kernel-of-the-action-on-the-frattini-quotient-is-a-p-group — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: d1ec4b06d1049869cac75c1afc0dd945e6c9ef427508906e6920700d4f3e8fc7.
+
+Added the native run's derived dependency_level 8 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-cor-kernel-of-the-action-on-the-frattini-quotient-is-a-p-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-hall-burnside-detects-a-nontrivial-coprime-automorphism:begin -->
+
+### ex-hall-burnside-detects-a-nontrivial-coprime-automorphism — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 376aae2ed52d8744b84918663ab78212b06f598707d6c7a915030f5f70d59da0.
+
+Added the native run's derived dependency_level 8 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-hall-burnside-detects-a-nontrivial-coprime-automorphism:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-maximal-subgroups-as-frattini-hyperplanes:begin -->
+
+### ex-maximal-subgroups-as-frattini-hyperplanes — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 901902fdac84069a4bc6270f648fb43c207051d4ab07f4de4fd39140019de7c7.
+
+Added the native run's derived dependency_level 8 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-ex-maximal-subgroups-as-frattini-hyperplanes:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-fs-the-frattini-subgroup-is-functorial-for-all-homomorphisms:begin -->
+
+### fs-the-frattini-subgroup-is-functorial-for-all-homomorphisms — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: e606106835110f16b8de235466d6692aac70129923de087b8a999e8ed5f481e6.
+
+Added the native run's derived dependency_level 8 for unchanged reused published content after its paired group-theory placement was reconciled. Every mathematical body, Statement/Definition, dependency, status, provenance and source reference remains byte-identical to the archived original; no new proof audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-1.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-frattini-fs-the-frattini-subgroup-is-functorial-for-all-homomorphisms:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-monotone-function:begin -->
+
+### def-monotone-function — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 9891af00a42975df2d814b940e91ea8569c65453f1677cb8d7cc97c762e8403a.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-monotone-function:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-classification-of-discontinuities:begin -->
+
+### def-classification-of-discontinuities — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 9832df10b4be6a7df68b515c0266829123301e6abe826a0c96160e8dfebe8bc6.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-classification-of-discontinuities:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-oscillation:begin -->
+
+### def-oscillation — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 14c2e3af6cb6d993cea130dda2942f7347a1fa9aff8eb0f5bf647a729b079147.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-oscillation:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-dirichlet-and-thomae-functions:begin -->
+
+### def-dirichlet-and-thomae-functions — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 14135fc14a70a483495ed4dda9ea11ec7ddaf79e7cbe67739d250750e9ad79cd.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-dirichlet-and-thomae-functions:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-intermediate-value-property:begin -->
+
+### def-intermediate-value-property — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 006269e9857b2a639404be1588ab522d7e705eff2b6fdd9f6f5986571da497cd.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-intermediate-value-property:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-semicontinuity:begin -->
+
+### def-semicontinuity — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: e1d1abe36df6637a251bd80ac77a2cc264eef1eb6f21f5f5fcad542709be7263.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-semicontinuity:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-lem-baire-category-in-a-closed-interval:begin -->
+
+### lem-baire-category-in-a-closed-interval — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 34415cdd8e29fd9dedd3a3f32642f4f2ba4eb3188b53dc4e60d4e36573cbd94c.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-lem-baire-category-in-a-closed-interval:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-baire-class-one:begin -->
+
+### def-baire-class-one — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 06eedd1972d88bd22b4c25bfec4e14b9d879d7c59c1e51832d1f42978a4cb487.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-baire-class-one:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-additive-function:begin -->
+
+### def-additive-function — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 8fb283629ffbd601e938a6a1976c8f4b799fc7645a59cc3c0507ea5b52ff2e5a.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-def-additive-function:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-lem-hamel-basis-exists:begin -->
+
+### lem-hamel-basis-exists — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 9c450b23cfc54e87cb65f9dc0f4f020c8cc24ed66f3548afcb87e6777ce099ed.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-lem-hamel-basis-exists:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-monotone-one-sided-limits-exist:begin -->
+
+### thm-monotone-one-sided-limits-exist — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 3ebc82ba884d6bfb9be58ebd093f4bb76351ec4b76de93fa874c7d86ad52eb64.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-monotone-one-sided-limits-exist:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-continuous-injection-on-an-interval-is-strictly-monotone:begin -->
+
+### thm-continuous-injection-on-an-interval-is-strictly-monotone — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: d4af1f187f60d4c0111b5d7f3c03ecf844e5b7d8902d0254999d1a0a503adc8d.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-continuous-injection-on-an-interval-is-strictly-monotone:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-cor-cantor-function-is-continuous:begin -->
+
+### cor-cantor-function-is-continuous — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: c6b7af39946e1b3587083372cbe5929e639ff62bec5c9426ba15dc5d0e15e7b2.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-cor-cantor-function-is-continuous:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-continuity-iff-oscillation-zero:begin -->
+
+### thm-continuity-iff-oscillation-zero — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 3bcf9227a72cd0f20ee64a6ef7aed0ce8ee84925736004737f80f7dfad68e835.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-continuity-iff-oscillation-zero:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-lem-oscillation-superlevel-sets-are-closed:begin -->
+
+### lem-oscillation-superlevel-sets-are-closed — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 3cddc4f014356741b416465cdcc937ff9c11d9af807b161541deda9f67c80dc5.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-lem-oscillation-superlevel-sets-are-closed:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-fs-intermediate-value-property-implies-continuity:begin -->
+
+### fs-intermediate-value-property-implies-continuity — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 9f00a3acd47fa1923560432a57815ca1b6fad8ac43f497ecadeb050c217b6675.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-fs-intermediate-value-property-implies-continuity:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-semicontinuity-level-set-characterisation:begin -->
+
+### thm-semicontinuity-level-set-characterisation — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 98982e68dd8b1e52ddf347300cca01b80214e2dcfd9ded0d0446a66d1ea7abc7.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-semicontinuity-level-set-characterisation:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-lem-additive-is-q-linear:begin -->
+
+### lem-additive-is-q-linear — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: e648dd3fcdebf92eb5b4ac0ef6cf1c3eea1dc9bcda76e6c9fac138dfdf8670e9.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-lem-additive-is-q-linear:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-monotone-discontinuities-are-jumps:begin -->
+
+### thm-monotone-discontinuities-are-jumps — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 872f59172a307b38eaabf051639db55d3ab770313088076646f35c8fb5604088.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-monotone-discontinuities-are-jumps:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-continuous-inverse:begin -->
+
+### thm-continuous-inverse — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 789e6065180e097369f885360ae46c1974c9559382f913c883d9fecc4426d43d.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-continuous-inverse:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-rem-cantor-function-increases-only-on-a-null-set:begin -->
+
+### rem-cantor-function-increases-only-on-a-null-set — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 0b7fc442e384ff30c2da33ac31f0d6668bec886bec7887d1d52b474566a4039e.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-rem-cantor-function-increases-only-on-a-null-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-discontinuity-set-is-f-sigma:begin -->
+
+### thm-discontinuity-set-is-f-sigma — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 322825bc003d035b4f93215d5ba12a2becb6bbbab8f11346264fa7c17b873ff0.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-discontinuity-set-is-f-sigma:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-dirichlet-and-thomae-continuity-sets:begin -->
+
+### thm-dirichlet-and-thomae-continuity-sets — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: f40ed681b275a4d5eb35ce1b258709dd6b2bc83092a64e8c45de75339c9499e1.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-dirichlet-and-thomae-continuity-sets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-semicontinuous-evt:begin -->
+
+### thm-semicontinuous-evt — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 2f7639ad53bc48f6e7e65476dd10ba298043752d98f4c7a511696758962c606e.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-semicontinuous-evt:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-lem-additive-bounded-above-on-an-interval-is-linear:begin -->
+
+### lem-additive-bounded-above-on-an-interval-is-linear — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: e5621c090b84d42f13d02b4c4fde9b76e441fba6cb13ca99752077be24196ab2.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-lem-additive-bounded-above-on-an-interval-is-linear:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-froda:begin -->
+
+### thm-froda — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 8b01be5fa6269df0390b2336ccd42366d24bf0b6c297b3c8cb44e4136b9c5e51.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-froda:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-continuity-set-realisation:begin -->
+
+### thm-continuity-set-realisation — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: ff8e6e1aa35fc4ff977c4b88253508486a4c57e80e296e44ddeac7c2dd6ed7f5.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-continuity-set-realisation:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-cor-no-function-is-continuous-exactly-on-q:begin -->
+
+### cor-no-function-is-continuous-exactly-on-q — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: a0394f8f1cd28231c42819ec85be21e5943f8d12ae3c069fbbd36fd309a70bd2.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-cor-no-function-is-continuous-exactly-on-q:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-baire-one-continuity-points:begin -->
+
+### thm-baire-one-continuity-points — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: ec98e9fccc20e3aa6a774645714b4ed17aac0d3d8b1f60952f2d329685a675f7.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-baire-one-continuity-points:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-cauchy-functional-equation-regularity:begin -->
+
+### thm-cauchy-functional-equation-regularity — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: ad0d4ec0003e87a539e4e7bd4aac8be5cfbfe48af0bb93e2a25449da146264e1.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-cauchy-functional-equation-regularity:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-monotone-with-prescribed-discontinuity-set:begin -->
+
+### thm-monotone-with-prescribed-discontinuity-set — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 5958142ce3caa72119a9e55b4267664d0d5100de22b6c79f8b466a7eef4eab0b.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-monotone-with-prescribed-discontinuity-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-fs-additive-implies-linear:begin -->
+
+### fs-additive-implies-linear — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 1217e25e925bdbcaaabd33778c22dcbaf0c0d77375c18b5d25b63943e1053fe1.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-fs-additive-implies-linear:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-locally-unbounded-finite-everywhere:begin -->
+
+### ex-locally-unbounded-finite-everywhere — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: fa3b57c7f62f7b6133bd904604d8e54dc4a87d594274b39c8afea7ff679669a4.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-locally-unbounded-finite-everywhere:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-cantor-function-maps-a-null-set-onto-the-unit-interval:begin -->
+
+### ex-cantor-function-maps-a-null-set-onto-the-unit-interval — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 5cb22be2c1c6b9092fb2e6136f1203122d42ab5a8262d434d45f0ed36083b040.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-cantor-function-maps-a-null-set-onto-the-unit-interval:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-thomae-values-and-oscillation-computed:begin -->
+
+### ex-thomae-values-and-oscillation-computed — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: a89798a38771801dd74ade3d3635587906526de6ad90382a9dd300c4a72dc445.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-thomae-values-and-oscillation-computed:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-continuous-inverse-gives-the-nth-root:begin -->
+
+### ex-continuous-inverse-gives-the-nth-root — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: e5f07a2e8c5f3ea144a911f883d7d9c4d1d9332f4aeef55e59b6778fab679f6a.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-continuous-inverse-gives-the-nth-root:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-cex-upper-semicontinuous-need-not-attain-its-infimum:begin -->
+
+### cex-upper-semicontinuous-need-not-attain-its-infimum — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 5717f9a300e8aa48bc3e60ad124184f72ff2ca32e579d1e487f906f82ee445a1.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-cex-upper-semicontinuous-need-not-attain-its-infimum:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-cex-continuous-injection-on-a-non-interval-need-not-be-monotone:begin -->
+
+### cex-continuous-injection-on-a-non-interval-need-not-be-monotone — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 48df6ea7ccea82512e296b4aa4bcd77720dfc9af12b6b0a893a1babb5abe56e9.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-cex-continuous-injection-on-a-non-interval-need-not-be-monotone:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-indicator-of-q-is-baire-class-two-not-one:begin -->
+
+### ex-indicator-of-q-is-baire-class-two-not-one — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 242b99197df859bad71ccacf514bf45a57b24ea5b629abc0155ea3e5029db65f.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-indicator-of-q-is-baire-class-two-not-one:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-monotone-function-discontinuous-exactly-at-the-rationals:begin -->
+
+### ex-monotone-function-discontinuous-exactly-at-the-rationals — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 1127ee6c01d275d7f3e67a206194f375bb2339f89151fb541564beaf6eb77a7e.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-monotone-function-discontinuous-exactly-at-the-rationals:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-froda-is-sharp:begin -->
+
+### ex-froda-is-sharp — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 7f3eb0715659eeb8632d75a0dd73d57082d437e2e7e0b3fab0e4ca6114b3db14.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-froda-is-sharp:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-hamel-basis-additive-function:begin -->
+
+### ex-hamel-basis-additive-function — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 58ca8aa26efafced890be7c9237d8839fc194c4c7224569c0943bf43f35c7950.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-hamel-basis-additive-function:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous:begin -->
+
+### ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 2e2ceef1df27db85b3cda595fbf35329e988d0d7d271d682fa5341815aa6b85b.
+
+Recorded the native run derived dependency level for reused published mathematics; retained every mathematical claim/dependency and applied only the two explicitly reviewed counterexample section repairs where applicable. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-geometric-series:begin -->
+
+### thm-geometric-series — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 9c70c7d30be7f01d2b15383bac3e5ce500d0d92d9874ee36a3bc54f1976038cf.
+
+Declared the exact existing supplier used by the unchanged published claim, with a focused fact/citation repair where required. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-thm-geometric-series:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-cor-every-vector-space-has-a-basis:begin -->
+
+### cor-every-vector-space-has-a-basis — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 7eabe9c8ce3a71d05200e0d18b5d678f5f9bab6cdf56a268dc0189098ef7b0d2.
+
+Declared the exact existing supplier used by the unchanged published claim, with a focused fact/citation repair where required. The actual four focused supplier/section repairs and all affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-2.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-monotone-cor-every-vector-space-has-a-basis:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-null-subset-of-a-smooth-manifold:begin -->
+
+### def-null-subset-of-a-smooth-manifold — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 5605e7ba2e94a3e865b8cfdaf6c7737febbeb8d3760cdefc2bfb25bd24e3f9c8.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-null-subset-of-a-smooth-manifold:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets:begin -->
+
+### lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 29531b050ac9633f50c4b361557a95c31b2441b4e7a83dab641b12eadc598a3a.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-c1-local-diffeomorphisms-preserve-null-sets-locally:begin -->
+
+### lem-c1-local-diffeomorphisms-preserve-null-sets-locally — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: e63c9fef320618be4d3ba5ce8ae04eedd1802641b3a7747bb49ce220e4227c59.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-c1-local-diffeomorphisms-preserve-null-sets-locally:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-the-null-set-definition-is-independent-of-the-smooth-atlas:begin -->
+
+### prop-the-null-set-definition-is-independent-of-the-smooth-atlas — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 7ffdb90dcc3b9de80805bfd9e7c030c1a91234e91a9aee588c5cf24f6a82e3b5.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-the-null-set-definition-is-independent-of-the-smooth-atlas:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-a-countable-chart-cover-detects-manifold-null-sets:begin -->
+
+### prop-a-countable-chart-cover-detects-manifold-null-sets — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: d765ced5f70524417fedd5a3eb81690bfd91466f9bc81494e8820bee2ceedf86.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-a-countable-chart-cover-detects-manifold-null-sets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-countable-unions-and-subsets-of-manifold-null-sets-are-null:begin -->
+
+### prop-countable-unions-and-subsets-of-manifold-null-sets-are-null — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: fdb05726e56604fde132dc36278a74741b85d1f8efee6df7052d6db33a55f43b.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-countable-unions-and-subsets-of-manifold-null-sets-are-null:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold:begin -->
+
+### prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 29e221191c40bf5f9181ea8f3f4f7361ed2aefc6ed16ef60aea7100d512b5e67.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets:begin -->
+
+### prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 6ca639951bc7a79664f391f35857c502f3f5d7354b7a4c3f1f6d615a8aeab6a1.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-the-image-of-a-lower-dimensional-c1-manifold-is-null:begin -->
+
+### prop-the-image-of-a-lower-dimensional-c1-manifold-is-null — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: c2c49c99c24d5895403b59070f3601b7294cd38c01e25fb5c27050f13d798b23.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-the-image-of-a-lower-dimensional-c1-manifold-is-null:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-positive-codimension-immersed-submanifolds-are-null:begin -->
+
+### cor-positive-codimension-immersed-submanifolds-are-null — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 9e5342347116687ddbd49230e306a2e05b86c83e6c76699315ed2f457b6ea976.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-positive-codimension-immersed-submanifolds-are-null:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-critical-locus-and-critical-value-set:begin -->
+
+### def-critical-locus-and-critical-value-set — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 8b9d04980762d4d0a0fdd9926c02b44c79be23f51d9c108f405e6c760abf59f5.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-critical-locus-and-critical-value-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-sard-slicing-for-compact-null-sections:begin -->
+
+### lem-sard-slicing-for-compact-null-sections — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 3ab6ee4166af4b05576b8c4374b640f14ac75c7bc7e9353c5a3d66627d9bc00f.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-sard-slicing-for-compact-null-sections:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-whitney-extension-for-finite-order-euclidean-jets:begin -->
+
+### thm-whitney-extension-for-finite-order-euclidean-jets — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: d9cffc0c829c02d44d524dcd8d739adf2505b2af5b4974fd506ffb4a0ff527fa.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-whitney-extension-for-finite-order-euclidean-jets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-kneser-glaeser-rough-composition-on-flat-sets:begin -->
+
+### lem-kneser-glaeser-rough-composition-on-flat-sets — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 4db8ed7e5925faf9239e0b16e8d7a12b2b4a9aadf683328665e36644ddb6b719.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-kneser-glaeser-rough-composition-on-flat-sets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-sard-on-the-nonflat-critical-strata:begin -->
+
+### lem-sard-on-the-nonflat-critical-strata — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: cc05acbbc7afb97aad8faf7e8ed9abaf32f53297805227f442ddf57fbef8c1f1.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-sard-on-the-nonflat-critical-strata:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-sard-on-the-infinitely-flat-critical-stratum:begin -->
+
+### lem-sard-on-the-infinitely-flat-critical-stratum — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: a1192f9a87d8663d49df85e14dd60051b3ebb9ffd2caa2c2cc4a072724686473.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-sard-on-the-infinitely-flat-critical-stratum:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-morse-sard-for-euclidean-maps:begin -->
+
+### thm-morse-sard-for-euclidean-maps — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: da48ccf7aa11b07d5b65a2d8acb307097a9be6add59956d6a1fd4fbc491cdb59.
+
+Completed the focused finite-regularity supplier or local C1 refutation/counterexample repair, preserving the original mathematical claim; recorded the native derived dependency level. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-morse-sard-for-euclidean-maps:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-morse-sard-for-smooth-manifolds:begin -->
+
+### thm-morse-sard-for-smooth-manifolds — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: b512d098f32b07ed1dc55e638a239a619dbbde44a431c3c2a91b1c593b2fca57.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-morse-sard-for-smooth-manifolds:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-regular-values-have-null-complement-and-are-dense:begin -->
+
+### cor-regular-values-have-null-complement-and-are-dense — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 0249abffd1b660245ca689555574dda05f5f4a82257b8584193bfe68b99d97cc.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-regular-values-have-null-complement-and-are-dense:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact:begin -->
+
+### prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: ee39624d71a3bcbba3cae4074ca0a211115d87b6e364b3b99de1173adb08f139.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-regular-values-form-a-dense-g-delta-set:begin -->
+
+### cor-regular-values-form-a-dense-g-delta-set — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 051ce69c8b7048caea8e204812490e3d050634f6ce5bc9536d0a2e4a21e7ed87.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-regular-values-form-a-dense-g-delta-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-a-smooth-map-from-lower-to-higher-dimension-cannot-be-surjective:begin -->
+
+### cor-a-smooth-map-from-lower-to-higher-dimension-cannot-be-surjective — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 3dd5668f6ec7db789664ecda377045174175615a7e198c87103f1410135d55d1.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-a-smooth-map-from-lower-to-higher-dimension-cannot-be-surjective:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-transverse-linear-subspaces:begin -->
+
+### def-transverse-linear-subspaces — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: eb1c04ed0ebe8a3fb8f981d9bd81e0703f875169c1f158095850f78dd0fab83b.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-transverse-linear-subspaces:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-a-smooth-map-transverse-to-an-embedded-submanifold:begin -->
+
+### def-a-smooth-map-transverse-to-an-embedded-submanifold — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 2e313e084b3aa056b925fad73b0d65b34c2236122e084530407fdf2d68a963df.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-a-smooth-map-transverse-to-an-embedded-submanifold:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-transverse-smooth-maps:begin -->
+
+### def-transverse-smooth-maps — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: ac98629946544906c3ae83157aa24b193e879f23b89753b4220d4375da883d5b.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-transverse-smooth-maps:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-transverse-embedded-submanifolds:begin -->
+
+### def-transverse-embedded-submanifolds — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: cf3bc45a3c321d7317c9c9d6fd1fe2e1b8d13ea3f34548086ca91fdcfdb85167.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-transverse-embedded-submanifolds:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-transversality-is-equivalent-to-surjectivity-on-the-normal-quotient:begin -->
+
+### lem-transversality-is-equivalent-to-surjectivity-on-the-normal-quotient — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 5b86db81727fcaea4fb85c8d5cce259e14eaca528baeec9c5623f1c1151b66f1.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-lem-transversality-is-equivalent-to-surjectivity-on-the-normal-quotient:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-transverse-preimage-theorem:begin -->
+
+### thm-transverse-preimage-theorem — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 7c0ea34cc74b10c6785900f4493cb18fb1ca7be764677c5414e2ee4f457a29e4.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-transverse-preimage-theorem:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-transverse-intersection-theorem:begin -->
+
+### cor-transverse-intersection-theorem — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: e760420a72a17d41f1e5575f56e1b10accdc750d31aee0347767a95f1311c935.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-transverse-intersection-theorem:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-transverse-fibre-product-theorem:begin -->
+
+### thm-transverse-fibre-product-theorem — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 52de258bbef747cce340a517e029e2122a9459cf1a8e4490f656aba72316531c.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-transverse-fibre-product-theorem:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-a-submersion-is-transverse-to-every-embedded-submanifold:begin -->
+
+### cor-a-submersion-is-transverse-to-every-embedded-submanifold — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 1dc5da34f27761020aab98575a78d1ae43bd31c66490c2973d5ed2ed3143036a.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-a-submersion-is-transverse-to-every-embedded-submanifold:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-transversality-to-a-point-is-the-regular-value-condition:begin -->
+
+### prop-transversality-to-a-point-is-the-regular-value-condition — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 78b6a98ab120ab27eebddbd803925ac8b78fc65bfc836e90c237124d3c57adca.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-transversality-to-a-point-is-the-regular-value-condition:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-transversality-is-invariant-under-diffeomorphic-change-of-source-and-target:begin -->
+
+### prop-transversality-is-invariant-under-diffeomorphic-change-of-source-and-target — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: daa5e8b3da616e5085799b7103d1aa6f92a64d9dbe518acc3d2490cb37efaae3.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-transversality-is-invariant-under-diffeomorphic-change-of-source-and-target:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-local-graph-characterization-by-transversality-to-vertical-fibres:begin -->
+
+### prop-local-graph-characterization-by-transversality-to-vertical-fibres — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: ba463ebcb60c7e927b2a34c7f260745577e24d36a049e35a23fdef911752e412.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-local-graph-characterization-by-transversality-to-vertical-fibres:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-global-graph-characterization-by-one-point-transverse-fibres:begin -->
+
+### prop-global-graph-characterization-by-one-point-transverse-fibres — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: ebff6e281534c193a095740e84d58247d9943f5f171c3c6e84538ee60441e7c0.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-global-graph-characterization-by-one-point-transverse-fibres:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-smooth-family-of-maps-and-evaluation-map:begin -->
+
+### def-smooth-family-of-maps-and-evaluation-map — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: c31afb08f99e9b103a1361d537837c178fa26636a5b42a6889ccbe3940ee06ab.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-def-smooth-family-of-maps-and-evaluation-map:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-parametric-transversality:begin -->
+
+### thm-parametric-transversality — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 60bd9ab7f7a7986c2bcf25b5222edb144861d7ffef9cbcafe973ad8ec7f87d0f.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-thm-parametric-transversality:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-generic-translations-of-a-map-to-euclidean-space-are-transverse:begin -->
+
+### cor-generic-translations-of-a-map-to-euclidean-space-are-transverse — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 37934ebba8248b1cd17317c968e4b9b3928b3aaeb86d9bef3e9b5baf11238f0c.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-generic-translations-of-a-map-to-euclidean-space-are-transverse:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation:begin -->
+
+### cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 9bcb8f009e599c82f4b80d07e7640a431759acab60f1a780c65798eb8b752167.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-transversality-is-stable-on-a-compact-source:begin -->
+
+### prop-transversality-is-stable-on-a-compact-source — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: d99d4fa859bba5c70b7e3b996b6934ad5b22a5d30b329ed2c63ebda9d35d1190.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-prop-transversality-is-stable-on-a-compact-source:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-every-critical-point-is-an-isolated-point:begin -->
+
+### fs-every-critical-point-is-an-isolated-point — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 1cea0a70146e9d4beacef97930884e1497b9804380af998fa8cdb2c291e009b4.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-every-critical-point-is-an-isolated-point:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-the-set-of-critical-values-is-always-closed:begin -->
+
+### fs-the-set-of-critical-values-is-always-closed — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 9b0567b71d09d942799d3df3e90da9764ea5a988c30e7c74f74bbb4587baf6aa.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-the-set-of-critical-values-is-always-closed:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-sard-theorem-holds-for-every-c1-map-between-arbitrary-dimensions:begin -->
+
+### fs-sard-theorem-holds-for-every-c1-map-between-arbitrary-dimensions — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: f54a37143bc99fb0356a437fe33a34cbaeffe3231f3fcd9c913cdf8e7a32098a.
+
+Completed the focused finite-regularity supplier or local C1 refutation/counterexample repair, preserving the original mathematical claim; recorded the native derived dependency level. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-sard-theorem-holds-for-every-c1-map-between-arbitrary-dimensions:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-two-submanifolds-with-nonempty-intersection-are-transverse:begin -->
+
+### fs-two-submanifolds-with-nonempty-intersection-are-transverse — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: a0a41862f7b87cd6b5b2bc35a543aec9f4e83281c42e3b84088a03268c238238.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-two-submanifolds-with-nonempty-intersection-are-transverse:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold:begin -->
+
+### fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 059a028049a85bb87681f14b652f136ef3a32f247afb7d68b9bbde677f658470.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-transversality-is-globally-open-for-arbitrary-noncompact-sources-in-the-uniform-c1-topology:begin -->
+
+### fs-transversality-is-globally-open-for-arbitrary-noncompact-sources-in-the-uniform-c1-topology — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: aee5c12ccea83edd089490126307b39dea277e6a5c655f816cf2c7462b92f98e.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-fs-transversality-is-globally-open-for-arbitrary-noncompact-sources-in-the-uniform-c1-topology:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-critical-points-and-values-of-a-height-function-on-a-sphere:begin -->
+
+### ex-critical-points-and-values-of-a-height-function-on-a-sphere — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 1e75b51cc64e7982ec8d70b589b65a00c9fbbfaafd202e2457932f03beb26db2.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-critical-points-and-values-of-a-height-function-on-a-sphere:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-a-constant-map-with-a-large-critical-locus-and-one-critical-value:begin -->
+
+### ex-a-constant-map-with-a-large-critical-locus-and-one-critical-value — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: f74f116de1240e91190f67d1651bbe835a0f09dac5d6472103b2e84efd046860.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-a-constant-map-with-a-large-critical-locus-and-one-critical-value:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-a-smooth-map-with-a-nonclosed-critical-value-set:begin -->
+
+### ex-a-smooth-map-with-a-nonclosed-critical-value-set — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 53a5abfb675ffc9fa74c8bbcdb4230bac446cec71f07a37ab3eef64930b1d454.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-a-smooth-map-with-a-nonclosed-critical-value-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-transverse-and-tangent-intersections-of-plane-curves:begin -->
+
+### ex-transverse-and-tangent-intersections-of-plane-curves — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 1c872f3990b94b50e0822c439ed232c9c176f4d45fbdacf98fa64bbaebb933e9.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-transverse-and-tangent-intersections-of-plane-curves:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-the-intersection-of-coordinate-spheres-as-a-transverse-level-set:begin -->
+
+### ex-the-intersection-of-coordinate-spheres-as-a-transverse-level-set — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 47bca512a1bf1a4cb3ec57b2cda423d62ea1fe6cbcd2b00af8ec241699f61ae5.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-the-intersection-of-coordinate-spheres-as-a-transverse-level-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-a-fibre-product-of-submersions:begin -->
+
+### ex-a-fibre-product-of-submersions — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: f6420791fb17edca5f6f6f9953dbabbf057050183747511265d1317480cfdfb0.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-a-fibre-product-of-submersions:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely:begin -->
+
+### ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 04d504a69227c714217419daa02deb7b3e4bb2b27f5e1b1b66437c43e73a74c1.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-a-map-vacuously-transverse-to-a-submanifold-it-avoids:begin -->
+
+### ex-a-map-vacuously-transverse-to-a-submanifold-it-avoids — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 2ca22d8fd47ddad25c4974d860e17fcb543c9f407006805813125824fdeff617.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-ex-a-map-vacuously-transverse-to-a-submanifold-it-avoids:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cex-a-c1-map-whose-critical-values-have-positive-measure:begin -->
+
+### cex-a-c1-map-whose-critical-values-have-positive-measure — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: d8f4f24afd069047f416ffd37a5d67acaaf446dd70399b7eafd8e4d361146710.
+
+Completed the focused finite-regularity supplier or local C1 refutation/counterexample repair, preserving the original mathematical claim; recorded the native derived dependency level. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cex-a-c1-map-whose-critical-values-have-positive-measure:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cex-a-tangent-intersection-whose-set-theoretic-intersection-is-not-of-the-expected-dimension:begin -->
+
+### cex-a-tangent-intersection-whose-set-theoretic-intersection-is-not-of-the-expected-dimension — reused published metadata
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: e5df9b03cccdd8c675a548aa693cae0f4cb6e22a04da78c775e33b6ea89bef0b.
+
+Recorded the native derived dependency level on reused published mathematics with every mathematical body, claim, dependency and publication status preserved. The actual three focused supplier/stub proof repairs and affected consumer checks are documented in research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/source-review.md; every original mathematical Statement is retained. No new whole-item audit, judge or native execution coverage is claimed.
+
+Owner evidence: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/owner-integration.json. Actual local checks: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/root-local-checks.json. Original native source/contract reading: research/non-ml-math-remaining-81-2026-10-18-dispatch/beta-batch-3.attempt-1.result.json.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-sard-cex-a-tangent-intersection-whose-set-theoretic-intersection-is-not-of-the-expected-dimension:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-cex-a-composition-of-integrable-functions-that-is-not-integrable:begin -->
+
+### cex-a-composition-of-integrable-functions-that-is-not-integrable — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 5a6b46ee74a446ff194876b4d6634ba0278d2b7f65a135b83b1f0ad95eaa211f.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-cex-a-composition-of-integrable-functions-that-is-not-integrable:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-cex-nonnegative-integrable-with-zero-integral-need-not-vanish:begin -->
+
+### cex-nonnegative-integrable-with-zero-integral-need-not-vanish — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 283fcb75a75480a252c1d8eb1edd00c4255cad313946c3298efc68a3ff528113.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-cex-nonnegative-integrable-with-zero-integral-need-not-vanish:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-cex-riemann-sums-along-one-sequence-of-tagged-partitions-do-not-suffice:begin -->
+
+### cex-riemann-sums-along-one-sequence-of-tagged-partitions-do-not-suffice — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 5a3cae163805330ec191ae8f7cf8d16572ce288a7c8cec4fcd4c0828db0fcc20.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-cex-riemann-sums-along-one-sequence-of-tagged-partitions-do-not-suffice:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-def-dirichlet-and-thomae-functions:begin -->
+
+### def-dirichlet-and-thomae-functions — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 0277f59bd403d15720d80e988652a4c4d4faa263acbef7475567df59d5b17db1.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-def-dirichlet-and-thomae-functions:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-froda-is-sharp:begin -->
+
+### ex-froda-is-sharp — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 50b69568c915c0d8761acba3ec7cf4a7ea4416b753d587080951f5cb7feaf87b.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-froda-is-sharp:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-indicator-of-q-is-baire-class-two-not-one:begin -->
+
+### ex-indicator-of-q-is-baire-class-two-not-one — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 8db977e1057a4bcee5c13320b37c2800b0157be55f7ff7e296e1211865d6def4.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-indicator-of-q-is-baire-class-two-not-one:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-locally-unbounded-finite-everywhere:begin -->
+
+### ex-locally-unbounded-finite-everywhere — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 28e80907abfbe045e87a3ca13c7049bef0af5aba8a50af22fdc9752e2827e71b.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-locally-unbounded-finite-everywhere:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-thomae-is-riemann-integrable-with-integral-zero:begin -->
+
+### ex-thomae-is-riemann-integrable-with-integral-zero — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: d9d9706cbbc11eacb241bd18515c1d8b4989aaae19817460ebdd9762320512d1.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-thomae-is-riemann-integrable-with-integral-zero:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-thomae-values-and-oscillation-computed:begin -->
+
+### ex-thomae-values-and-oscillation-computed — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: cc26be7a9c132ddfdff71abd5aea68d53a9ff4db466a003240901a181beaf942.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-thomae-values-and-oscillation-computed:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-fs-intermediate-value-property-implies-continuity:begin -->
+
+### fs-intermediate-value-property-implies-continuity — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 3a58b76e3c33f376e8028fccfa622388f3709e534411265676361e121e8edd93.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-fs-intermediate-value-property-implies-continuity:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-fs-nonnegative-integrable-with-zero-integral-vanishes:begin -->
+
+### fs-nonnegative-integrable-with-zero-integral-vanishes — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 3f05555d1f5e0c8861582606acb597600d9ed1e6abbb20cfcf023dd6d31f6df4.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-fs-nonnegative-integrable-with-zero-integral-vanishes:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-lem-additive-bounded-above-on-an-interval-is-linear:begin -->
+
+### lem-additive-bounded-above-on-an-interval-is-linear — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: f7bbc67139ddb0e18269b1e48382e28681e4ec5efb9b5e7bfbd43d1a80a13316.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-lem-additive-bounded-above-on-an-interval-is-linear:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-lem-additive-is-q-linear:begin -->
+
+### lem-additive-is-q-linear — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 16b5e4f4e9bf46a44116fb9cafe4c90347e539976a62628317bd53cebcbf59b3.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-lem-additive-is-q-linear:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-baire-one-continuity-points:begin -->
+
+### thm-baire-one-continuity-points — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 370f9a9e9c0dc1489771f7f507fcc71799991c09bf4e58a0b2559809f3a526b9.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-baire-one-continuity-points:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-continuity-set-realisation:begin -->
+
+### thm-continuity-set-realisation — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: aec75a5ed542cd1815e233fc9aa1896a1fced2a6345afcc8fe4a8bcd22a65cef.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-continuity-set-realisation:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-dirichlet-and-thomae-continuity-sets:begin -->
+
+### thm-dirichlet-and-thomae-continuity-sets — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 4dba71e9626f074bb37d8d212b0cb9cdfc4d5e8559f13a30ce27f061a14757f9.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-dirichlet-and-thomae-continuity-sets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-discontinuity-set-is-f-sigma:begin -->
+
+### thm-discontinuity-set-is-f-sigma — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 6a1f18331ec94490e90f024480ebee057a2994441cb73a34e4167202a40e3db2.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-discontinuity-set-is-f-sigma:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-semicontinuous-evt:begin -->
+
+### thm-semicontinuous-evt — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 3775a827d8ba6306b7f54b892ebf84fb7b5d82bb53f4560584b22c34f6cf5f2b.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-semicontinuous-evt:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-riemann-integrable-with-a-prescribed-null-f-sigma-discontinuity-set:begin -->
+
+### ex-riemann-integrable-with-a-prescribed-null-f-sigma-discontinuity-set — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: a360ab98e74ba49a8faf8ca67bb090af20ab2fd9e880efcd819d2af7667ce236.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-ex-riemann-integrable-with-a-prescribed-null-f-sigma-discontinuity-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-lebesgue-criterion:begin -->
+
+### thm-lebesgue-criterion — canonical natural-number notation repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-monotone-supplier-and-reuse-metadata.
+
+Current content SHA-256: 55b6acef17e053226ee69ee7424baf9f4282c3ffb61f54d5d58825a905fe1024.
+
+Applied the owner canonical-copy natural-number notation policy using the already proved arithmetic/order embeddings. All mathematical claims, domains, zero/endpoint cases, constructions, hypotheses, proof steps/inputs and publication status are retained. The same delegate read the full20affectedcarriers and8embedding suppliers, checked90declaredclosureitems plus21textualcontexts, and repaired7necessaryoutsideconsumers. Root accepted the bounded equivalence/consumer evidence, verifiedexactpreimages/proposals and ran current local checks. This records a notation repair, not a new whole-item audit, judge, source reading or native execution coverage.
+
+Scientific preservation and actual consumer dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/monotone-notation/repair.json and construction.md. Canonical integration: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-integration/source-integration.json. Actual current local checks: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-checks/checks.json. Previous receipts and markers remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-first-scaffold-notation-thm-lebesgue-criterion:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-cor-derived-subgroups-of-symmetric-and-alternating-groups:begin -->
+
+### cor-derived-subgroups-of-symmetric-and-alternating-groups — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-frattini-supplier.
+
+Current content SHA-256: a2f591113bdfd3ed27741922a844aa81d7b55ab4de8231920693e8559892891c.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-frattini-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-cor-derived-subgroups-of-symmetric-and-alternating-groups.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-cor-derived-subgroups-of-symmetric-and-alternating-groups:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-cor-regular-values-form-a-dense-g-delta-set:begin -->
+
+### cor-regular-values-form-a-dense-g-delta-set — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 9669b24939b57be4942759d5dd84481091ad7b0135c55b25579d4004481adf91.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-cor-regular-values-form-a-dense-g-delta-set.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-cor-regular-values-form-a-dense-g-delta-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-cor-transverse-intersection-theorem:begin -->
+
+### cor-transverse-intersection-theorem — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: d89ad5723c2c9e7aac6d5ba3f6edf1b20f4b11e04860df9a69883f90344edf04.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-cor-transverse-intersection-theorem.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-cor-transverse-intersection-theorem:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-def-framed-cobordism-of-embedded-submanifolds:begin -->
+
+### def-framed-cobordism-of-embedded-submanifolds — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 51fc5c131585bfcc1c309748f8d33a2ad2173a17cd2f66c0ff861a0c2a03c8d6.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-def-framed-cobordism-of-embedded-submanifolds.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-def-framed-cobordism-of-embedded-submanifolds:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-def-framed-regular-preimage-of-a-map-to-a-sphere:begin -->
+
+### def-framed-regular-preimage-of-a-map-to-a-sphere — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: e4fd0105d082b82b7d3eef69ad82d0fdceb38b70684f015cce294a3bef92459b.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-def-framed-regular-preimage-of-a-map-to-a-sphere.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-def-framed-regular-preimage-of-a-map-to-a-sphere:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-def-hilbert-exterior-power-and-induced-operator:begin -->
+
+### def-hilbert-exterior-power-and-induced-operator — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-car-exterior-completion.
+
+Current content SHA-256: b2d7db7c4fcc739444571e3947a6e65705fb672d90d69bdf5d78b88241f0497e.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-car-exterior-completion-resolution/inline-completion-superseding/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-def-hilbert-exterior-power-and-induced-operator.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-def-hilbert-exterior-power-and-induced-operator:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-def-regular-continuation-datum-between-morse-smale-pairs:begin -->
+
+### def-regular-continuation-datum-between-morse-smale-pairs — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 4d01450363a05f44cadc8450aca5452a47f363ec6485131fbef1f59a5d34409c.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-def-regular-continuation-datum-between-morse-smale-pairs.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-def-regular-continuation-datum-between-morse-smale-pairs:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-def-test-size-and-power:begin -->
+
+### def-test-size-and-power — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-testing-completeness.
+
+Current content SHA-256: e067abbb47d0ec0d4655a35d4bd93320308747284ae836c19041f6ea5e5c636f.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-testing-completeness-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-def-test-size-and-power.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-def-test-size-and-power:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-a-five-as-the-smallest-nonabelian-simple-group:begin -->
+
+### ex-a-five-as-the-smallest-nonabelian-simple-group — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-frattini-supplier.
+
+Current content SHA-256: 829e1f8cb8101e1f8068aba6437036395dd4ec32369484a47fc46227c6502a8f.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-frattini-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-ex-a-five-as-the-smallest-nonabelian-simple-group.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-a-five-as-the-smallest-nonabelian-simple-group:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-a-morse-smale-height-function-on-a-tilted-torus:begin -->
+
+### ex-a-morse-smale-height-function-on-a-tilted-torus — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: e1651d897f0a7e4d276e6bd385406805f1c838195a303fd50832af3490664454.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-ex-a-morse-smale-height-function-on-a-tilted-torus.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-a-morse-smale-height-function-on-a-tilted-torus:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-a-smooth-map-with-a-nonclosed-critical-value-set:begin -->
+
+### ex-a-smooth-map-with-a-nonclosed-critical-value-set — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: b23c1642b419af5137e5df1db29a565b5b6b8c2731d3cb52d0335f7155c8a037.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-ex-a-smooth-map-with-a-nonclosed-critical-value-set.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-a-smooth-map-with-a-nonclosed-critical-value-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-composition-and-derived-series-of-s-four:begin -->
+
+### ex-composition-and-derived-series-of-s-four — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-frattini-supplier.
+
+Current content SHA-256: f721ae6962ba505839d59829ea4fb7f7b58869d43b460897d1b2f2d9a652d126.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-frattini-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-ex-composition-and-derived-series-of-s-four.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-composition-and-derived-series-of-s-four:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-composition-and-derived-series-of-s-three:begin -->
+
+### ex-composition-and-derived-series-of-s-three — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-frattini-supplier.
+
+Current content SHA-256: 4a77c45e5aa4270d7fd68761b706931afa25a8b5380bd9377639cc4361db2439.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-frattini-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-ex-composition-and-derived-series-of-s-three.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-composition-and-derived-series-of-s-three:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-frattini-subgroups-of-dihedral-and-quaternion-groups:begin -->
+
+### ex-frattini-subgroups-of-dihedral-and-quaternion-groups — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 47edf8ce154bbd2ae158610a934db86886097bd9b5338d6e0d1823ffb30eaaeb.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-frattini-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-ex-frattini-subgroups-of-dihedral-and-quaternion-groups.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-frattini-subgroups-of-dihedral-and-quaternion-groups:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely:begin -->
+
+### ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: b1d4539b9ca165b8945d90df2ce91508fb2e2bf06ebbad23b514268cb42e768b.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely.json; superseding mechanical numbering and checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-numbering/owner-repair.json and current-checks.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-fs-a-n-is-simple-for-all-n-at-least-four:begin -->
+
+### fs-a-n-is-simple-for-all-n-at-least-four — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-frattini-supplier.
+
+Current content SHA-256: 0c185bc279c18ce9df5d9d760e60beafe82452d8c55530e7eefee3bff1359ee2.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-frattini-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-fs-a-n-is-simple-for-all-n-at-least-four.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-fs-a-n-is-simple-for-all-n-at-least-four:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-fs-every-solvable-group-is-abelian:begin -->
+
+### fs-every-solvable-group-is-abelian — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-frattini-supplier.
+
+Current content SHA-256: ec2913d70df9ad264f261122938173859257dacb35cfd657b3067bea89eeb6ee.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-frattini-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-fs-every-solvable-group-is-abelian.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-fs-every-solvable-group-is-abelian:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold:begin -->
+
+### fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 53fd81aeac20b2426cfa174a45b5b91ebff508292fa09900fefffa823d323f3d.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-fs-the-preimage-of-every-embedded-submanifold-is-a-submanifold:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-fs-the-set-of-critical-values-is-always-closed:begin -->
+
+### fs-the-set-of-critical-values-is-always-closed — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 6a24ee24b83ee9ea2fe65c38f1d46b3580273b99ae04117e648444313517f62f.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-fs-the-set-of-critical-values-is-always-closed.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-fs-the-set-of-critical-values-is-always-closed:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets:begin -->
+
+### lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: b5565ac5493597b6dbfb80593086832a91c421bada4498f55fc1bcb97310f6ca.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-collared-whitney-disk-can-be-made-disjoint-from-an-entire-compact-immersed-image:begin -->
+
+### lem-a-collared-whitney-disk-can-be-made-disjoint-from-an-entire-compact-immersed-image — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 336ad3cd56c04fc7cd3fb1744286d212dcf78dbd5f563b38451f7075817d3ea2.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-a-collared-whitney-disk-can-be-made-disjoint-from-an-entire-compact-immersed-image.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-collared-whitney-disk-can-be-made-disjoint-from-an-entire-compact-immersed-image:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks:begin -->
+
+### lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 5970a85a70d301dc04b5f9744eacfe5a273050149b7c0afba3458545adb30bb6.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-double-point-of-a-self-transverse-immersion-has-two-disjoint-embedded-sheet-disks:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-small-regular-homotopy-removes-triple-points-and-preserves-transverse-branch-pairs:begin -->
+
+### lem-a-small-regular-homotopy-removes-triple-points-and-preserves-transverse-branch-pairs — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 6445f000f656ac6c70502fddb076d5793a469bf8d494a410df66bd1cca41e266.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-a-small-regular-homotopy-removes-triple-points-and-preserves-transverse-branch-pairs.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-small-regular-homotopy-removes-triple-points-and-preserves-transverse-branch-pairs:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-smooth-isotopy-of-links-can-be-put-in-general-position:begin -->
+
+### lem-a-smooth-isotopy-of-links-can-be-put-in-general-position — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: d5660ed6e895dd77adca35090b0b1e174ccf7b4d4943415b79e31f845fec5de8.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-a-smooth-isotopy-of-links-can-be-put-in-general-position.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-smooth-isotopy-of-links-can-be-put-in-general-position:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-taut-foliation-of-a-compact-connected-manifold-is-met-by-a-single-closed-transversal:begin -->
+
+### lem-a-taut-foliation-of-a-compact-connected-manifold-is-met-by-a-single-closed-transversal — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: a212b6455d6c571b61fa1cc3ac79533fb843352417b83232021952a457cf655b.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-a-taut-foliation-of-a-compact-connected-manifold-is-met-by-a-single-closed-transversal.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-a-taut-foliation-of-a-compact-connected-manifold-is-met-by-a-single-closed-transversal:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-algebraic-open-inclusion-surjects-on-fundamental-groups:begin -->
+
+### lem-algebraic-open-inclusion-surjects-on-fundamental-groups — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 5b2abd31a6e737e66339da607fa794383374c186b93f9cb8771eadddd84913b7.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-algebraic-open-inclusion-surjects-on-fundamental-groups.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-algebraic-open-inclusion-surjects-on-fundamental-groups:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-c1-local-diffeomorphisms-preserve-null-sets-locally:begin -->
+
+### lem-c1-local-diffeomorphisms-preserve-null-sets-locally — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: e669384613992be98c336c7c71c6b7603d543fc4cf9f6ca3067ad077aa0cbc6e.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-c1-local-diffeomorphisms-preserve-null-sets-locally.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-c1-local-diffeomorphisms-preserve-null-sets-locally:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-compact-smooth-manifolds-have-finite-cw-models-under-countable-choice:begin -->
+
+### lem-compact-smooth-manifolds-have-finite-cw-models-under-countable-choice — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: b334562927e38ed0f6136d28162e48ab1f305ccdf02738b0d9045501618586af.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-compact-smooth-manifolds-have-finite-cw-models-under-countable-choice.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-compact-smooth-manifolds-have-finite-cw-models-under-countable-choice:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-double-point-locus-has-expected-dimension-two-m-minus-n:begin -->
+
+### lem-double-point-locus-has-expected-dimension-two-m-minus-n — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 709859771b84e577fff62e5de104482cf1980fa0492af23d4dd808d6450061e9.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-double-point-locus-has-expected-dimension-two-m-minus-n.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-double-point-locus-has-expected-dimension-two-m-minus-n:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-every-oriented-link-admits-a-regular-projection:begin -->
+
+### lem-every-oriented-link-admits-a-regular-projection — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: c4d518b2fe15885c33da5079a8308143da55beea3e3d20c8652f4488d970ca9d.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-every-oriented-link-admits-a-regular-projection.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-every-oriented-link-admits-a-regular-projection:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension:begin -->
+
+### lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: ba8efca646c170df9c94379410efb5ad9eeb3bc73ee74d200cbb988523091b8a.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-frattini-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-finite-elementary-abelian-p-groups-have-bases-and-basis-extension:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-general-position-makes-a-whitney-disk-embedded-and-interior-disjoint-in-the-stable-range:begin -->
+
+### lem-general-position-makes-a-whitney-disk-embedded-and-interior-disjoint-in-the-stable-range — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: d72621867a39c6d92098318c5810b7358a4f3fdd14b7c2ddc90e585855ac5092.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-general-position-makes-a-whitney-disk-embedded-and-interior-disjoint-in-the-stable-range.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-general-position-makes-a-whitney-disk-embedded-and-interior-disjoint-in-the-stable-range:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-geometric-intersection-descends-through-oriented-cobordism-of-cycles:begin -->
+
+### lem-geometric-intersection-descends-through-oriented-cobordism-of-cycles — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 9dff472365d29508f661ac6b14ac717e7e8da2e2842181578a4471450a99f2c0.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-geometric-intersection-descends-through-oriented-cobordism-of-cycles.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-geometric-intersection-descends-through-oriented-cobordism-of-cycles:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-homotopic-maps-with-a-common-regular-value-have-framed-cobordant-preimages:begin -->
+
+### lem-homotopic-maps-with-a-common-regular-value-have-framed-cobordant-preimages — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: a815aeda38bc29fed140a67f8240f3f85410d688bec6b36f96d2a1f7a3a3c4ce.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-homotopic-maps-with-a-common-regular-value-have-framed-cobordant-preimages.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-homotopic-maps-with-a-common-regular-value-have-framed-cobordant-preimages:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-metastable-embedding-for-maps-from-a-compact-manifold:begin -->
+
+### lem-metastable-embedding-for-maps-from-a-compact-manifold — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: b2cc186fd93612a0487d7ff1ee45e636617af3a9d15504b3f745c67d314a40ad.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-metastable-embedding-for-maps-from-a-compact-manifold.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-metastable-embedding-for-maps-from-a-compact-manifold:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-normal-bundle-of-the-zero-locus-of-a-transverse-section:begin -->
+
+### lem-normal-bundle-of-the-zero-locus-of-a-transverse-section — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 0eddc198e0dafb148fa3813eb99147cc6eba90f67c5c0735eb4f36e7ac08391c.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-normal-bundle-of-the-zero-locus-of-a-transverse-section.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-normal-bundle-of-the-zero-locus-of-a-transverse-section:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-one-relative-map-cell-kills-its-class-with-the-correct-fundamental-group-action:begin -->
+
+### lem-one-relative-map-cell-kills-its-class-with-the-correct-fundamental-group-action — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 2af8c659a8c00e34d94f677b46e22327894d4f21ae2b575d8679ef38ac057788.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-one-relative-map-cell-kills-its-class-with-the-correct-fundamental-group-action.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-one-relative-map-cell-kills-its-class-with-the-correct-fundamental-group-action:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-oriented-intersection-detects-nonvanishing-rational-homology:begin -->
+
+### lem-oriented-intersection-detects-nonvanishing-rational-homology — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 4c69f287a12440d7509a52f2a1520c6d0244c72007d243bbab4def8e2c27ea36.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-oriented-intersection-detects-nonvanishing-rational-homology.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-oriented-intersection-detects-nonvanishing-rational-homology:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-sard-on-the-nonflat-critical-strata:begin -->
+
+### lem-sard-on-the-nonflat-critical-strata — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 2397b13ebaadaf53b8187984c3cb5121caad5d8f89fc1a493f59bcd4bed7b742.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-sard-on-the-nonflat-critical-strata.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-sard-on-the-nonflat-critical-strata:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-unstable-orientations-induce-trajectory-moduli-orientations:begin -->
+
+### lem-unstable-orientations-induce-trajectory-moduli-orientations — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 16a0041b7e18feef3f6b3370c48c755e46a4b39aa6f819c204e77cb357dcc847.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-lem-unstable-orientations-induce-trajectory-moduli-orientations.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-lem-unstable-orientations-induce-trajectory-moduli-orientations:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets:begin -->
+
+### prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 69916723054641f9fb2658079a4a91b11609b2e6caafca9738cc61b8c0a825b4.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-frattini-subgroup-of-a-direct-product-of-finite-p-groups:begin -->
+
+### prop-frattini-subgroup-of-a-direct-product-of-finite-p-groups — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: 5ba8928c699afd88a214ec1de22c25a21679f0ce082207d32e18cd18f1544584.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-frattini-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-prop-frattini-subgroup-of-a-direct-product-of-finite-p-groups.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-frattini-subgroup-of-a-direct-product-of-finite-p-groups:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-global-graph-characterization-by-one-point-transverse-fibres:begin -->
+
+### prop-global-graph-characterization-by-one-point-transverse-fibres — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: fd451182cf419e2e722eb9b727ab672cc0c9392a7ce2c93eb66aa22c43a27a98.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-prop-global-graph-characterization-by-one-point-transverse-fibres.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-global-graph-characterization-by-one-point-transverse-fibres:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-local-graph-characterization-by-transversality-to-vertical-fibres:begin -->
+
+### prop-local-graph-characterization-by-transversality-to-vertical-fibres — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: ee5e5c17e8643ec81ed9ebf2113e5f5d971a55ba7a1d807f2004452f2e23da58.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-prop-local-graph-characterization-by-transversality-to-vertical-fibres.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-local-graph-characterization-by-transversality-to-vertical-fibres:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-parametrized-morse-trajectory-space-is-a-manifold:begin -->
+
+### prop-parametrized-morse-trajectory-space-is-a-manifold — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 4d4e0ff1e907f11e145493e863f11d986d4043c52f6bdfda678c71c05e70f213.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-prop-parametrized-morse-trajectory-space-is-a-manifold.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-parametrized-morse-trajectory-space-is-a-manifold:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-transverse-preimage-carries-a-pulled-back-normal-structure:begin -->
+
+### prop-transverse-preimage-carries-a-pulled-back-normal-structure — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 2465e7f700216a52f70fb5ee6668664a9609e740f14a5f219b191d8843cba304.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-prop-transverse-preimage-carries-a-pulled-back-normal-structure.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-transverse-preimage-carries-a-pulled-back-normal-structure:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual:begin -->
+
+### prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 6ae2cc84048ed0b003bc0fdcbbebbde73c6eb0836fba3e6285b459dd11349b22.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-alternating-group-is-simple-for-n-at-least-five:begin -->
+
+### thm-alternating-group-is-simple-for-n-at-least-five — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-frattini-supplier.
+
+Current content SHA-256: 463ff0b63bcb15f52e3ada285c5e929ebe73fdf720bf3ccc9a705c2f65be7047.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-frattini-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-thm-alternating-group-is-simple-for-n-at-least-five.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-alternating-group-is-simple-for-n-at-least-five:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-cantor-function-properties:begin -->
+
+### thm-cantor-function-properties — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-cantor-supplier.
+
+Current content SHA-256: 7f9924bc399649165e4801c8266c6d97e28401dce1f526045678f5ccbd8d0ca2.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-cantor-resolution/proposal-receipt.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-thm-cantor-function-properties.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-cantor-function-properties:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-closed-projective-embedding-by-homogeneous-generators:begin -->
+
+### thm-closed-projective-embedding-by-homogeneous-generators — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-projective-embedding.
+
+Current content SHA-256: a0176373549af4ab604bcf47960da1cebad128335b178870bb235f21a4c52be5.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-projective-embedding-resolution/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-thm-closed-projective-embedding-by-homogeneous-generators.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-closed-projective-embedding-by-homogeneous-generators:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-transverse-fibre-product-theorem:begin -->
+
+### thm-transverse-fibre-product-theorem — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: e54a0e08358b9eaa9d557100b5818bf06c0608ccfb6278831adc1dac976c3a2e.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/current-proposal-inventory.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-thm-transverse-fibre-product-theorem.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-transverse-fibre-product-theorem:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-transverse-preimage-for-manifolds-with-boundary:begin -->
+
+### thm-transverse-preimage-for-manifolds-with-boundary — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: b27d26f43eec587be727c1ec2da1e8c000025bad64b7da97e75ae3e8eca33182.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-thm-transverse-preimage-for-manifolds-with-boundary.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-transverse-preimage-for-manifolds-with-boundary:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-transverse-preimage-theorem:begin -->
+
+### thm-transverse-preimage-theorem — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 1c17c223911f1e0c755257675cbce2ff171643dec7702dd5c7c2259e6d5eff3f.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-thm-transverse-preimage-theorem.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-transverse-preimage-theorem:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-unparametrized-trajectory-space-is-a-smooth-manifold:begin -->
+
+### thm-unparametrized-trajectory-space-is-a-smooth-manifold — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: c924bc68af65cd8733160e31f022360904d31d259199252d9394e84bcfd1084d.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/successor-quotient-topology/repair.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-thm-unparametrized-trajectory-space-is-a-smooth-manifold.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-unparametrized-trajectory-space-is-a-smooth-manifold:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-whitney-trick-in-the-two-dimensional-borderline-case:begin -->
+
+### thm-whitney-trick-in-the-two-dimensional-borderline-case — Step 2 focused published repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step2-sard-consumers.
+
+Current content SHA-256: 33c06c644de5ae8b4d0649362953ec6b479816661676f39f8dab4f730bbdd626.
+
+Focused supplier/consumer correction and current metadata reconciliation after the native first Step 2 owner pass. The same escalation owner reviewed the relevant original supplier interface, affected consumers and bounded repairs; root reviewed and installed the accepted proposals in supplier order. Native reports, previous receipts, original ownership, publication status and scientific review histories remain intact. Current local checks are recorded below. This is a local published repair, not a new whole-item audit, external-source reading, native worker credit or initial publication.
+
+Accepted focused evidence: research/non-ml-math-remaining-81-2026-10-18-owner-step2-sard-consumer-resolution/final/source-proposals.json. Root scientific dispositions: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-review/. Exact source integration and original preimages: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-source-integration/source-integration.json. Current metadata: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-metadata/owner-metadata.json. Actual current checks: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-checks/item-thm-whitney-trick-in-the-two-dimensional-borderline-case.json. All previous ledger evidence and receipt files remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step2-repair-thm-whitney-trick-in-the-two-dimensional-borderline-case:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step3-owner-repair-cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation:begin -->
+
+### cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation — Step 3 focused owner repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-sard-proof-and-reuse-metadata.
+
+Current content SHA-256: 3630da7ac5578d353a7a7134ab043c973f02024b297b9b3e4dc167c428645216.
+
+Focused published title/final-proof correction: for one fixed q, almost every translation makes q a regular value; an arbitrary target q is not a zero of f_a. Stable ID, Statement, dependencies and publication status remain unchanged. The original supplier owner independently reviewed the current target, exact suppliers and definitions; root reviewed the minimal correction and its lack of item consumers.
+
+Pre-edit owner authorization and current preimage: research/non-ml-math-remaining-81-2026-10-18-owner-step3-batch3-regular-value-title-root-preedit/owner-authorization.json. Accepted focused proposal: research/non-ml-math-remaining-81-2026-10-18-owner-step3-batch3-regular-value-title/proposal.json. Guarded source/metadata integration: research/non-ml-math-remaining-81-2026-10-18-owner-step3-first-published-source-integration/owner-integration.json. Actual current local precheck, renderer and proof-layout checks: research/non-ml-math-remaining-81-2026-10-18-owner-step3-first-published-source-integration/local-checks/actual-checks.json. Native original reader, refuter and Alpha observations remain historical evidence; this repair is an owner action and supplies no fresh native worker coverage, whole-item audit, external reading or initial publication. Original claim, original published preimage, earlier receipt and every earlier ledger block remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step3-owner-repair-cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step3-owner-repair-cex-frattini-image-under-a-nonsurjective-homomorphism:begin -->
+
+### cex-frattini-image-under-a-nonsurjective-homomorphism — Step 3 focused owner repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-frattini-reuse-metadata.
+
+Current content SHA-256: febbbf9c10354e0d6fcb51a013d661710a0cc06353ec8d6e6526f1241f5e5372.
+
+Focused published typing correction: the refuted universal Frattini-image claim explicitly concerns homomorphisms between finite groups, matching the existing finite Frattini Definition. The same C4-to-S5 witness and full proof remain unchanged. Its original reviewer checked all direct/indirect and nonlogical references; the sole root item consumer already states the finite domain and remains unchanged. No richer well-typed claim is removed.
+
+Pre-edit owner authorization and current preimage: research/non-ml-math-remaining-81-2026-10-18-owner-step3-batch1-frattini-domain-root-preedit/owner-authorization.json. Accepted focused proposal: research/non-ml-math-remaining-81-2026-10-18-owner-step3-batch1-frattini-domain/repair.json. Guarded source/metadata integration: research/non-ml-math-remaining-81-2026-10-18-owner-step3-first-published-source-integration/owner-integration.json. Actual current local precheck, renderer and proof-layout checks: research/non-ml-math-remaining-81-2026-10-18-owner-step3-first-published-source-integration/local-checks/actual-checks.json. Native original reader, refuter and Alpha observations remain historical evidence; this repair is an owner action and supplies no fresh native worker coverage, whole-item audit, external reading or initial publication. Original claim, original published preimage, earlier receipt and every earlier ledger block remain unchanged.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step3-owner-repair-cex-frattini-image-under-a-nonsurjective-homomorphism:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-cor-q-is-meager-and-not-g-delta:begin -->
+
+### cor-q-is-meager-and-not-g-delta — Step 4 focused published-supplier repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step4-published-alerts.
+
+Current content SHA-256: 2270e40c7985544a02575bd90407578393c2b3d887171a67e777c4c39474bb66.
+
+Replace the false independence assertion in one Remark by residuality implies uncountability; preserve the converse counterexample and give the actual singleton/meager-complement/Baire contradiction. Statement and complete numbered proof unchanged.
+
+Actual proposal author: /root/math81_boundary_classical_low. Root independently read and accepted the complete proposed source and the supplier uses recorded in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Exact pre-edit source and ordinary claim were captured before edits in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-preedit/. Guarded integration: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Actual current local precheck, renderer and proof-layout receipts: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/local-checks-round2/actual-checks.json. The original native Step-4 alert, digest, immutable dispatch and item judgments remain unchanged. This is a focused owner repair, with no new native execution coverage, whole-item audit, external-source reading or initial publication. The Statement remains unchanged; actual owner consumer dispositions are retained with the proposal.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-cor-q-is-meager-and-not-g-delta:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-thm-smooth-inverse-function-theorem-on-manifolds:begin -->
+
+### thm-smooth-inverse-function-theorem-on-manifolds — Step 4 focused published-supplier repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step4-published-alerts.
+
+Current content SHA-256: f564526ccc72a14c2b481af74eb3bdb0c3c576d5aaac182ebcafddbe1216d549.
+
+The published Statement admits zero-dimensional manifolds. Their tangent spaces are zero-dimensional; an invertible differential forces equal source/target dimensions. At dimension0, charts have singleton images and give open singleton domains, and the inverse singleton map is smooth by the actual local smoothness convention. Only the positive-dimensional branch invokes Euclidean IFT and its regularity bootstrap. Compatible charts are explicitly selected so the coordinate map has its displayed domain.
+
+Actual proposal author: /root/math81_boundary_classical_mid. Root independently read and accepted the complete proposed source and the supplier uses recorded in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Exact pre-edit source and ordinary claim were captured before edits in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-preedit/. Guarded integration: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Actual current local precheck, renderer and proof-layout receipts: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/local-checks-round2/actual-checks.json. The original native Step-4 alert, digest, immutable dispatch and item judgments remain unchanged. This is a focused owner repair, with no new native execution coverage, whole-item audit, external-source reading or initial publication. The Statement remains unchanged; actual owner consumer dispositions are retained with the proposal.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-thm-smooth-inverse-function-theorem-on-manifolds:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-thm-laurent-coefficient-formula-and-uniqueness:begin -->
+
+### thm-laurent-coefficient-formula-and-uniqueness — Step 4 focused published-supplier repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step4-published-alerts.
+
+Current content SHA-256: aa0455d0eedbf2157101b9d87b9cf1325cc301750a80b1a1131ea6419686ff4c.
+
+For each fixed integer n, the symmetric truncation includes k=n exactly when N>=|n|. Circle monomial integration therefore gives the target coefficient eventually, which is sufficient for the already stated N-to-infinity limit. No coefficient, annulus, convergence or uniqueness scope changes.
+
+Actual proposal author: /root/math81_boundary_classical_mid. Root independently read and accepted the complete proposed source and the supplier uses recorded in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Exact pre-edit source and ordinary claim were captured before edits in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-preedit/. Guarded integration: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Actual current local precheck, renderer and proof-layout receipts: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/local-checks-round2/actual-checks.json. The original native Step-4 alert, digest, immutable dispatch and item judgments remain unchanged. This is a focused owner repair, with no new native execution coverage, whole-item audit, external-source reading or initial publication. The Statement remains unchanged; actual owner consumer dispositions are retained with the proposal.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-thm-laurent-coefficient-formula-and-uniqueness:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-lem-nrqm-composites-hilbert-tensor-construction:begin -->
+
+### lem-nrqm-composites-hilbert-tensor-construction — Step 4 focused published-supplier repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step4-published-alerts.
+
+Current content SHA-256: 58f2abb37b53ac0055ebdf32f72cd03be5f2321e03fa1d632cb8bc6cd9fe9634.
+
+The actual tensor supplier constructs a quotient of a free Z-module. Bilinear evaluation extends Z-linearly on its formal generators, kills all additive and balanced relations, and descends to a complex-linear functional using the already constructed scalar action. Conjugate symmetry proves second-representative independence and conjugate linearity. Only root proof1.2 changes; original physics carrier/import history remain untouched. The normative precheck also required canonical consecutive phase labels; the exact label/reference-only followthrough is archived separately.
+
+Actual proposal author: /root/math81_frattini_placement. Root independently read and accepted the complete proposed source and the supplier uses recorded in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Exact pre-edit source and ordinary claim were captured before edits in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-preedit/. Guarded integration: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Actual current local precheck, renderer and proof-layout receipts: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/local-checks-round2/actual-checks.json. Original physics source and import remain immutable; the prior-publication context reference authenticates the original imported before bytes, and research/non-ml-math-remaining-81-2026-10-18-owner-step4-hilbert-phase-format/owner-record.json records the label-only followthrough. The original native Step-4 alert, digest, immutable dispatch and item judgments remain unchanged. This is a focused owner repair, with no new native execution coverage, whole-item audit, external-source reading or initial publication. The Statement remains unchanged; actual owner consumer dispositions are retained with the proposal.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-lem-nrqm-composites-hilbert-tensor-construction:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-lem-conjugation-reverses-dominance:begin -->
+
+### lem-conjugation-reverses-dominance — Step 4 focused published-supplier repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step4-published-alerts.
+
+Current content SHA-256: 9e608fb411cb4b7986d1800ab13fa6a1d48aec07be33f90964bfccdd4416608a.
+
+Move only the existing final QED after its identical justification tags; full dominance equivalence proof and all scientific metadata unchanged.
+
+Actual proposal author: /root/math81_boundary_homological. Root independently read and accepted the complete proposed source and the supplier uses recorded in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Exact pre-edit source and ordinary claim were captured before edits in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-preedit/. Guarded integration: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Actual current local precheck, renderer and proof-layout receipts: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/local-checks-round2/actual-checks.json. The original native Step-4 alert, digest, immutable dispatch and item judgments remain unchanged. This is a focused owner repair, with no new native execution coverage, whole-item audit, external-source reading or initial publication. The Statement remains unchanged; actual owner consumer dispositions are retained with the proposal.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-lem-conjugation-reverses-dominance:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-thm-existence-of-rho-functions-and-quasi-invariant-measures-on-g-mod-h:begin -->
+
+### thm-existence-of-rho-functions-and-quasi-invariant-measures-on-g-mod-h — Step 4 focused published-supplier repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step4-published-alerts.
+
+Current content SHA-256: 0f888e4b84b28e6621658d1ad17d8551b258eaba4b10f17d504a36786cb45956.
+
+Move existing final QED after identical tags and put the existing Sources heading on its own line. Full Statement, proof mathematics and dependencies unchanged.
+
+Actual proposal author: /root/math81_sugawara_completion. Root independently read and accepted the complete proposed source and the supplier uses recorded in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Exact pre-edit source and ordinary claim were captured before edits in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-preedit/. Guarded integration: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/owner-integration.json. Actual current local precheck, renderer and proof-layout receipts: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/local-checks-round2/actual-checks.json. The original native Step-4 alert, digest, immutable dispatch and item judgments remain unchanged. This is a focused owner repair, with no new native execution coverage, whole-item audit, external-source reading or initial publication. The Statement remains unchanged; actual owner consumer dispositions are retained with the proposal.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-thm-existence-of-rho-functions-and-quasi-invariant-measures-on-g-mod-h:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-lem-circle-and-path-loop-models-for-eilenberg-maclane-induction:begin -->
+
+### lem-circle-and-path-loop-models-for-eilenberg-maclane-induction — Step 4 focused published-supplier repair
+
+Run: non-ml-math-remaining-81-2026-10-18. Group: owner-step4-published-alerts.
+
+Current content SHA-256: a20f50721dc237eb865066b6e2e44dc4d009571b95ed826550e9f229e8e5b0f5.
+
+Replace the unproved external CW-type premise by a newly authored full local based-loop CW-type lemma. Apply it directly to the marked connected CW base, preserving all groups, n>=2, arbitrary marked basepoints, both loop topologies, the entire original Statement and its marked homotopy equivalence. Same owner checked all four direct consumers and the integral downstream consumer; the separately rejected integral CW-pair gap is held for its ordinary native Step5 adjudication/repair. The new prerequisite remains draft and unhomed, outside selected81pairs/162pages/1619items; no new pair or publication.
+
+Actual helper author: /root/math81_hopf_spectral_placement/cw_fibre_constructor; exact local supplier followthrough and independent parent proof/consumer review: /root/math81_hopf_spectral_placement. Root independently read and accepted the complete helper proof and supplier proposal with critical actual local suppliers, subject to separately recorded final canonical helper formatting. Integration and root scientific reasoning: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-cw/root-integration/owner-integration.json. Actual exact supplier local checks: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-cw/root-integration/local-checks-round2/actual-checks.json. Current logical closure: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-cw/root-current-yaml-closure.json. Actual source-reading/consumer limitations and authentic original native rejection handoff remain in research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-cw/root-integration-pointers.json and native-step5-consumer-handoff.json. The original pre-edit source, audit history, original native digest/alert/reader output and Luna verdict are retained unchanged. No whole-item audit, initial publication, new native authorship/execution/judgment or historical baseline presence is claimed. The helper has genuine current outside authorship and will be included explicitly in final supporting ownership.
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step4-owner-repair-lem-circle-and-path-loop-models-for-eilenberg-maclane-induction:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces:begin -->
+lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces | 241512b3ca6c16c66de4753890c09581486828dd40fb88743c08bfda3fcbbf26 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-lem-elementary-abelian-p-groups-are-canonical-fp-vector-spaces:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-def-classification-of-discontinuities:begin -->
+def-classification-of-discontinuities | 7785bf1b849d6aa9fdf346086f9e4495bc9f3353169dd1fb8ab0e9771730765c | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-def-classification-of-discontinuities:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-monotone-discontinuities-are-jumps:begin -->
+thm-monotone-discontinuities-are-jumps | e03c7205d0199b18f806345ba4504a2ce3f87012cc49bede0cbbf5490189283b | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-monotone-discontinuities-are-jumps:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-froda:begin -->
+thm-froda | 8fb80b955eab055121b377f83b4b08394b2438543cb2fc99da4e0e565311a5ab | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-froda:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-continuity-iff-oscillation-zero:begin -->
+thm-continuity-iff-oscillation-zero | 9aa0ad703f78e35e610cd66d1272762b21207cb7baaf81f2cf4588920cdaee05 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-continuity-iff-oscillation-zero:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-lem-baire-category-in-a-closed-interval:begin -->
+lem-baire-category-in-a-closed-interval | 28bced92d7681dec2e57b486d141a933451273b78ed9d6677f0c51c628aa3e50 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-lem-baire-category-in-a-closed-interval:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-ex-froda-is-sharp:begin -->
+ex-froda-is-sharp | 0696298cd8d880759b9b8730a07c6aa7b1364938e17f02628a99289dcd58b228 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-ex-froda-is-sharp:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-ex-quantile-coupling-on-the-real-line:begin -->
+ex-quantile-coupling-on-the-real-line | 4f55199f1474ca7f7c056848276530bff30552bec735c5a3b0c42087cf9db6f3 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-ex-quantile-coupling-on-the-real-line:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-baire-one-continuity-points:begin -->
+thm-baire-one-continuity-points | e0648c9f116d450e87340a00f5149bd454319f7e8d55de6e38fd7dd76ed2129a | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-baire-one-continuity-points:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-ex-indicator-of-q-is-baire-class-two-not-one:begin -->
+ex-indicator-of-q-is-baire-class-two-not-one | 5115a4c58d9deef1bf99e5d874d6353741203665561dd477f0b71fd8e3d55c02 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-ex-indicator-of-q-is-baire-class-two-not-one:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cex-a-c1-map-whose-critical-values-have-positive-measure:begin -->
+cex-a-c1-map-whose-critical-values-have-positive-measure | 9a24ae969f8574b801559699b204f0e60f20e4fc4d74d449af0db44d0da66b13 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cex-a-c1-map-whose-critical-values-have-positive-measure:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-lem-additive-is-q-linear:begin -->
+lem-additive-is-q-linear | cb2b01ce2c44f23d186438e52bfb19ac444f52e44ad8b07fb75618ab9d7a4405 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-lem-additive-is-q-linear:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-prop-countable-unions-and-subsets-of-manifold-null-sets-are-null:begin -->
+prop-countable-unions-and-subsets-of-manifold-null-sets-are-null | 0d0df2263b4fb8d169b0b50a1d618784543dfac5e36aff80517b3a9a98910cfa | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-prop-countable-unions-and-subsets-of-manifold-null-sets-are-null:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-prop-the-null-set-definition-is-independent-of-the-smooth-atlas:begin -->
+prop-the-null-set-definition-is-independent-of-the-smooth-atlas | e2c6a05728e5ae86d892c64226bb4a20b7402b2518569710ce778d64593ffa82 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-prop-the-null-set-definition-is-independent-of-the-smooth-atlas:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-prop-a-countable-chart-cover-detects-manifold-null-sets:begin -->
+prop-a-countable-chart-cover-detects-manifold-null-sets | ab4376bfa4dbc8e082e7e542dbd0cd018d94c0d74a8ccfde12e1e5fbd98c9f9e | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-prop-a-countable-chart-cover-detects-manifold-null-sets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets:begin -->
+prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets | eddc84943aa699d8e58929d9d2d38b3f57460c994eb4395d5e64a96ca54fc746 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-prop-the-image-of-a-lower-dimensional-c1-manifold-is-null:begin -->
+prop-the-image-of-a-lower-dimensional-c1-manifold-is-null | ed7852921aecfa8513f759bb3e2f005160d33bebd5f10ecc4ee241670bdf6c69 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-prop-the-image-of-a-lower-dimensional-c1-manifold-is-null:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-positive-codimension-immersed-submanifolds-are-null:begin -->
+cor-positive-codimension-immersed-submanifolds-are-null | 432e6e6f50caf947bea739ca9fcb53c1ce35f9b51d7ae9dcf875c7d2d499d26c | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-positive-codimension-immersed-submanifolds-are-null:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-morse-sard-for-smooth-manifolds:begin -->
+thm-morse-sard-for-smooth-manifolds | 81259d3a7ab76b97141ca7afb202a187f472b8306bc006cc9a014b278b6b5793 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-morse-sard-for-smooth-manifolds:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-regular-values-have-null-complement-and-are-dense:begin -->
+cor-regular-values-have-null-complement-and-are-dense | d76dca1d39b17812c2a2a941f442eca41cd92237e0cc21ca5369ad1247a6df5b | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-regular-values-have-null-complement-and-are-dense:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-regular-values-form-a-dense-g-delta-set:begin -->
+cor-regular-values-form-a-dense-g-delta-set | 2fcda41e03e8102f9e055f46a9085bacce8f1195073cfd817dc8aa7c6e3d5760 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-regular-values-form-a-dense-g-delta-set:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-a-smooth-map-from-lower-to-higher-dimension-cannot-be-surjective:begin -->
+cor-a-smooth-map-from-lower-to-higher-dimension-cannot-be-surjective | c9918984d62bed45f783971bfe90e1dbed842a35b8d2967935b85eb9281082c5 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-a-smooth-map-from-lower-to-higher-dimension-cannot-be-surjective:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-parametric-transversality:begin -->
+thm-parametric-transversality | c0610891de3374d94e5f6ba1c22ba110a5dab78c55eaac26c202fd8995ff3855 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-thm-parametric-transversality:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-generic-translations-of-a-map-to-euclidean-space-are-transverse:begin -->
+cor-generic-translations-of-a-map-to-euclidean-space-are-transverse | aad7f6e662a4b68a952570dd47da89b7c542033f24adcd3253cb40401ff791ba | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-generic-translations-of-a-map-to-euclidean-space-are-transverse:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation:begin -->
+cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation | abecb739ce3da4bfea375d440c71086149ebb8b3ecd4b29b948a6688338cd46f | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation:end -->
+
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely:begin -->
+ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely | 0da0d6667bcd317687e12a9bf5429a3c2626064e77381a2214d3240ed41c0853 | Focused ordinary Step5 owner repair; research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/root-post-install-acceptance.json. Original claims, prior repair receipts and original native findings retained.
+<!-- local-published-repair:non-ml-math-remaining-81-2026-10-18-step5-focused-non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2-ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely:end -->
+

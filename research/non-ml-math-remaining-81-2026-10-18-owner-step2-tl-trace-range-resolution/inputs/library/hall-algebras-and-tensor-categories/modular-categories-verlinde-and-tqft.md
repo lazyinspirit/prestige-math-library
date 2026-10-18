@@ -1,0 +1,102 @@
+---
+page: modular-categories-verlinde-and-tqft
+title: "Modular Categories, Verlinde Formula, and TQFT"
+status: draft
+items:
+  - def-modular-ribbon-category-and-hopf-link-data
+  - def-pointed-metric-group-ribbon-category
+  - lem-finite-sine-transform-orthogonality
+  - lem-fusion-ring-character-orthogonality
+  - lem-lagrangian-relation-sends-lagrangian-to-lagrangian
+  - lem-maslov-index-four-lagrangian-cocycle
+  - lem-3-manifold-boundary-kernel-is-lagrangian
+  - lem-maslov-correction-composes-for-lagrangian-relations
+  - def-weighted-lagrangian-ribbon-bordism
+  - lem-simple-ribbon-fusion-dimensions-are-nonzero
+  - thm-pointed-metric-group-is-modular-iff-radical-trivial
+  - def-rt-state-spaces
+  - lem-balancing-and-hopf-link-character-identity
+  - thm-every-closed-oriented-smooth-three-manifold-bounds-a-compact-oriented-smooth-four-manifold
+  - lem-closed-oriented-smooth-one-and-two-manifolds-bound
+  - lem-integral-eilenberg-maclane-offset-five-homology-vanishes
+  - thm-signature-classifies-oriented-smooth-four-bordism
+  - lem-projective-plane-stabilization-gives-relative-five-bordisms
+  - lem-relative-one-parameter-morse-path-with-finite-events
+  - lem-parametrized-relative-elementary-handle-comparison
+  - lem-relative-descending-path-with-finite-same-index-passages
+  - lem-circumcision-meridian-pair-preserves-relative-three-manifold
+  - lem-isolated-same-index-trajectory-passage-is-a-framed-handle-slide
+  - lem-framed-circles-in-four-dimensional-two-handle-traces-move-to-the-base
+  - lem-interior-one-handle-trade-and-framed-circle-surgery-pair
+  - lem-fixed-vertical-height-relative-morse-handle-normalization
+  - lem-relative-three-manifolds-admit-parametrized-link-surgery-presentations
+  - lem-boundary-marked-five-bordisms-give-common-middle-two-handle-traces
+  - lem-continuous-one-handle-surgery-replacement-gives-relative-kirby-moves
+  - lem-one-handle-surgery-replacement-is-independent-of-the-base-arc
+  - lem-one-handle-slides-become-relative-kirby-slides-after-trading
+  - lem-parametric-index-grouping-preserves-a-relative-descending-path
+  - lem-index-grouped-relative-descending-paths-give-based-framed-handle-movies
+  - lem-finite-relative-mixed-handle-movies-give-marked-kirby-moves
+  - lem-relative-three-bordism-surgery-presentation
+  - lem-modular-hopf-matrix-squared
+  - lem-su2-hopf-link-sine-data-from-truncated-fusion
+  - lem-multicolored-ribbon-coupon-evaluation
+  - lem-kirby-color-full-band-slide-and-coupon-identity
+  - lem-modular-gauss-sums-and-kirby-color
+  - thm-algebraic-verlinde-formula
+  - thm-su2-root-unity-ribbon-category-is-modular
+  - lem-colored-fr-surgery-and-coupon-cancellation
+  - lem-rt-capped-operator-normalization-and-composition
+  - lem-wall-signature-and-rt-cap-reference-correction
+  - lem-decorated-graphs-lift-through-relative-surgery-calculus
+  - lem-rt-handlebody-pairing-and-surgery-gluing
+  - thm-weighted-rt-tqft-and-factorization
+  - lem-modular-hom-state-spaces-have-exact-sewing-inverses
+  - cor-rt-torus-and-state-dimension-formula
+examples: []
+requires:
+  - noninvertible-symmetries-and-anyonic-chains
+  - periods-jacobians-and-abel-jacobi-theory
+  - strongly-continuous-semigroups-and-hille-yosida
+  - vanishing-cycles-novikov-and-taut-foliations
+  - isotopy-extension-and-embedding-theory-beyond-whitney
+
+---
+
+This page constructs the general weighted Reshetikhin–Turaev functor and its full modular-functor factorization from explicit local algebra and marked relative surgery. The proofs retain arbitrary complex modular ribbon fusion categories, arbitrary real object Lagrangians, complete coupon morphisms, disconnected bordisms and empty boundaries. No positivity, unitarity or anomaly-cancellation restriction is imposed.
+
+## Ribbon data and modularity
+
+The conventions of [[def-modular-ribbon-category-and-hopf-link-data]] fix the spherical pivotal trace, $d_i$, $s_{ij}$, $D^2=\sum_i d_i^2$, $S=s/D$ and $\kappa=p_+/D$. The dimension, character and balancing lemmas prove [[lem-modular-hopf-matrix-squared]] and the general [[thm-algebraic-verlinde-formula]] without complex conjugation. Modularity means invertibility of the Hopf matrix; ribbon semisimplicity alone does not imply it.
+
+The complete abelian cocycle data of [[def-pointed-metric-group-ribbon-category]] give the precise radical criterion [[thm-pointed-metric-group-is-modular-iff-radical-trivial]]. The distinct root-of-unity family [[thm-su2-root-unity-ribbon-category-is-modular]] uses the full toral-character Lusztig tilting, path quotient and signed pivotal/ribbon suppliers from the preceding Temperley–Lieb pages, followed by [[lem-su2-hopf-link-sine-data-from-truncated-fusion]] and finite sine orthogonality. Its actual category exists for every integer $\ell\ge3$, including even levels; a numerical sine matrix is not used as an existence proof.
+
+## Boundaries and weights
+
+[[lem-3-manifold-boundary-kernel-is-lagrangian]] and [[lem-lagrangian-relation-sends-lagrangian-to-lagrangian]] supply the individual bordism homology relations. [[lem-maslov-index-four-lagrangian-cocycle]] and [[lem-maslov-correction-composes-for-lagrangian-relations]] prove the finite-dimensional sign and full associative relation correction used by [[def-weighted-lagrangian-ribbon-bordism]]. The composition weight is $n_2+n_1+\mu_W(R_1\lambda_0,\lambda_1,R_2^t\lambda_2)$, calculated in the actual middle object, not from a whole-composite inclusion kernel.
+
+## Complete marked surgery topology
+
+[[thm-every-closed-oriented-smooth-three-manifold-bounds-a-compact-oriented-smooth-four-manifold]] gives actual single-copy integral oriented three-dimensional fillings. The low-dimensional fillings, integral Eilenberg–Mac Lane calculation and Thom-fiber proof establish [[thm-signature-classifies-oriented-smooth-four-bordism]]; [[lem-projective-plane-stabilization-gives-relative-five-bordisms]] retains connected fixed-collar five-bordisms after explicit projective-plane corrections.
+
+The framing-preserving circle and disk-factor trade suppliers construct parametrized link-surgery presentations and [[lem-boundary-marked-five-bordisms-give-common-middle-two-handle-traces]]. Finite function events, [[lem-relative-descending-path-with-finite-same-index-passages]], actual index grouping and [[lem-index-grouped-relative-descending-paths-give-based-framed-handle-movies]] supply the finite based comparison with all outgoing maps. Continuous one-handle replacements, arbitrary replacement arcs and full framed disk slides give [[lem-finite-relative-mixed-handle-movies-give-marked-kirby-moves]]. Finally [[lem-decorated-graphs-lift-through-relative-surgery-calculus]] lifts the specified output markings and actual coupon graph.
+
+Their conclusion [[lem-relative-three-bordism-surgery-presentation]] is the complete fixed-base marked decorated calculus: split signed unit unknots, framed band slides, arbitrary framed knots with small zero meridians, exterior ribbon isotopy and open strands over the actual surgery longitudes. It retains arbitrary fundamental groups, fixed component partitions, closed $S^3$ bases and empty ends. Each supporting lemma retains its bounded interface; the global conclusion is proved only after those interfaces have been assembled.
+
+## Local evaluation and exact caps
+
+[[lem-multicolored-ribbon-coupon-evaluation]] proves the full coupon movie. The independent finite-coend proof [[lem-kirby-color-full-band-slide-and-coupon-identity]] supplies the entire surgery-component and open colored-strand identities. [[lem-modular-gauss-sums-and-kirby-color]] and [[lem-colored-fr-surgery-and-coupon-cancellation]] then give both blow-up signs, signed FR moves, arbitrary-knot circumcision and full paired-handle cancellation with all multiplicity channels.
+
+The geometric cap form in [[lem-rt-capped-operator-normalization-and-composition]] is $Q_t|_i=D^{g-1}/d(i)$ in composition-dual coordinates, with inverse $N_t|_i=D^{1-g}d(i)$. This is distinct from the categorical trace $\operatorname{tr}(1_{i\otimes i^*})=d_i^2$. The actual cylinder, both balls and disconnected-family projectors fix all normalization powers. [[lem-wall-signature-and-rt-cap-reference-correction]] proves the actual four-dimensional cut and $\Delta\sigma=+\mu_W$, together with the cap-reference correction $a$ for arbitrary real Lagrangians.
+
+## The full functor and sewing
+
+[[lem-rt-handlebody-pairing-and-surgery-gluing]] combines the complete marked move theorem and local identities to prove presentation-independent maps. The exact outgoing block of [[thm-weighted-rt-tqft-and-factorization]] is
+
+$$\kappa^{n+a(R_M;\lambda,\alpha)-\sigma(B)}D^{-m-b_0(M)+\chi(\Sigma_{\rm out})/2}d(j)F_0(\Omega;i,j).$$
+
+Thus a unit increase of weight acts by $\kappa$, consistently with the prescribed positive Walker correction. The theorem proves strict composition, cylinders, empty and disjoint-union laws, symmetry and duality. Its actual normalized tube maps are the explicitly inverse Hom maps of [[lem-modular-hom-state-spaces-have-exact-sewing-inverses]], proving separating/nonseparating factorization, all multiplicities, naturality, commuting cuts and iterated gluing.
+
+[[cor-rt-torus-and-state-dimension-formula]] gives the general dimension formula and fixes the torus mapping-class convention: the positive Hopf class and positive core twist act by $S=s/D$ and $T=\operatorname{diag}(\theta_i)$ with $(ST)^3=\kappa I$, while the inverse Hopf class satisfies $(S^{-1}T)^3=\kappa C$. Both use $S^2=C$; nonselfdual labels distinguish the two cube relations.
+
+Companion worked leaves are [[modular-categories-verlinde-and-tqft-examples]]. The prerequisite [[noninvertible-symmetries-and-anyonic-chains]] is a reading route; no general modularity or RT theorem is inferred from that route.

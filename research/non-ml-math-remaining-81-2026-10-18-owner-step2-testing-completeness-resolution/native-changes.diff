@@ -1,0 +1,171 @@
+--- validated-step2-baseline/items/lem-convex-generator-boundary-limits-exist.md
++++ items/lem-convex-generator-boundary-limits-exist.md
+@@ -9,6 +9,9 @@
+ deps:
+   - def-convex-and-strictly-convex-functions-on-euclidean-sets
+   - def-complete-ordered-field
++  - def-real-numbers
++  - thm-reals-ordered-field
++  - cor-cauchy-reals-lub-complete
+ justified_by: []
+ proof_strategy: direct
+ provenance:
+@@ -40,9 +43,11 @@
+ convexity means $f((1-s)x+sy)\le(1-s)f(x)+sf(y)$ for positive $x,y$
+ and $s\in[0,1]$.
+ 
+-[F2] [[def-complete-ordered-field]]: every nonempty set of real numbers
+-bounded above has a real supremum, and every nonempty set bounded below has
+-a real infimum.
++[F2] [[def-real-numbers]], [[thm-reals-ordered-field]],
++[[cor-cauchy-reals-lub-complete]], and [[def-complete-ordered-field]]:
++$\mathbb R$ is the Cauchy-sequence real field with the least-upper-bound
++property, so every nonempty set of real numbers bounded above has a real
++supremum and every nonempty set bounded below has a real infimum.
+ 
+ ## Proof
+ 
+--- validated-step2-baseline/items/lem-finite-renyi-generators-are-convex.md
++++ items/lem-finite-renyi-generators-are-convex.md
+@@ -75,4 +75,4 @@
+ 
+ 2.1 For $\alpha>1$, [F2] gives $h_\alpha''(t)=\alpha(\alpha-1)t^{\alpha-2}>0$, so [F3] proves convexity; also $h_\alpha(1)=0$. By step 1.2, $h_\alpha(0+)=0^\alpha-1=-1$. By step 1.1 with $\gamma=\alpha-1$, $t^{\alpha-1}\to+\infty$, and $1/t\le1$ for $t\ge1$, so $h_\alpha(t)/t=t^{\alpha-1}-1/t\to+\infty$. [F1, F2, F3, step 1.1, step 1.2, algebra]
+ 
+-3.1 For $0<\alpha<1$, [F2] gives $g_\alpha''(t)=\alpha(1-\alpha)t^{\alpha-2}>0$, so [F3] proves convexity; also $g_\alpha(1)=0$. By step 1.2, $g_\alpha(0+)=1$. By step 1.1 with $\gamma=1-\alpha$, $t^{-(1-\alpha)}\to0$, and for $t\ge1$, $0\le |g_\alpha(t)/t|=t^{-(1-\alpha)}-1/t\le t^{-(1-\alpha)}$. Therefore $g_\alpha(t)/t\to0$. [F1, F2, F3, step 1.1, step 1.2, algebra] ∎
++3.1 For $0<\alpha<1$, [F2] gives $g_\alpha''(t)=\alpha(1-\alpha)t^{\alpha-2}>0$, so [F3] proves convexity; also $g_\alpha(1)=0$. By step 1.2, $g_\alpha(0+)=1$. Put $u=1/t$. As $t\to+\infty$, $u\downarrow0$, and step 1.2 with $\gamma=1-\alpha$ gives $u^{1-\alpha}\to0$, that is, $t^{-(1-\alpha)}\to0$. For $t\ge1$, $0\le |g_\alpha(t)/t|=t^{-(1-\alpha)}-1/t\le t^{-(1-\alpha)}$. Therefore $g_\alpha(t)/t\to0$. [F1, F2, F3, step 1.2, construct, algebra] ∎
+--- validated-step2-baseline/items/def-finite-hypothesis-testing-beta.md
++++ items/def-finite-hypothesis-testing-beta.md
+@@ -12,6 +12,10 @@
+   - def-randomized-test
+   - def-test-size-and-power
+   - def-expectation-on-a-finite-probability-space
++  - def-complete-ordered-field
++  - def-real-numbers
++  - thm-reals-ordered-field
++  - cor-cauchy-reals-lub-complete
+ justified_by: []
+ provenance:
+   statement: literature-derived
+@@ -45,9 +49,15 @@
+ $$\beta_\epsilon(P,Q):=\inf_{\substack{\phi:\mathcal X\to[0,1]\\\sum_xp_x\phi(x)\le\epsilon}}\sum_xq_x(1-\phi(x)).$$
+ Here the first argument is the null law and the second is the alternative
+ law; $\epsilon$ bounds rejection under the first law, while the objective is
+-acceptance of the null under the second. The feasible set is nonempty
+-because $\phi=0$ is allowed, and every objective value lies in $[0,1]$, so
+-the infimum is a real number in that interval. In the
++acceptance of the null under the second. The feasible set is nonempty because
++$\phi=0$ is allowed, and every objective value lies in $[0,1]$. Thus the set
++of objective values is nonempty and bounded below in $\mathbb R$, so it has a
++real infimum: [[def-real-numbers]] identifies $\mathbb R$ with the
++Cauchy-sequence reals, [[thm-reals-ordered-field]] gives their ordered-field
++structure, and [[cor-cauchy-reals-lub-complete]] gives their
++least-upper-bound property. [[def-complete-ordered-field]] gives the
++equivalent infimum property. Since the set also lies in $[0,1]$, that
++infimum lies in $[0,1]$. In the
+ Neyman–Pearson-region convention that constrains null acceptance below by
+ $\gamma$, this is the lower boundary value at $\gamma=1-\epsilon$.
+ 
+--- validated-step2-baseline/items/ex-binary-f-and-renyi-divergences.md
++++ items/ex-binary-f-and-renyi-divergences.md
+@@ -13,6 +13,10 @@
+   - def-finite-renyi-divergence
+   - def-natural-logarithm
+   - thm-natural-logarithm-laws
++  - def-abs-value
++  - lem-of-abs-value
++  - lem-of-triangle-inequality
++  - def-convex-and-strictly-convex-functions-on-euclidean-sets
+ justified_by: []
+ proof_strategy: direct
+ provenance:
+@@ -50,8 +54,17 @@
+ $D_\alpha(P\|Q)=\log S_\alpha(P,Q)/(\alpha-1)$ with the support conventions
+ stated in its Definition.
+ 
+-[F4] [[def-finite-f-divergence]]: for $f(t)=\frac12|t-1|$, the
+-f-divergence uses the coordinate terms $q_xf(p_x/q_x)$.
++[F4] [[def-finite-f-divergence]]: the generator must be finite and convex on
++$(0,\infty)$ and satisfy $f(1)=0$; its coordinate terms here are
++$q_xf(p_x/q_x)$.
++
++[F5] [[def-abs-value]] and [[lem-of-abs-value]]: absolute value is real-valued,
++$|c|=c$ for $c\ge0$, and $|cz|=|c||z|$.
++
++[F6] [[lem-of-triangle-inequality]]: $|u+v|\le|u|+|v|$.
++
++[F7] [[def-convex-and-strictly-convex-functions-on-euclidean-sets]]: a
++function is convex when it lies below each two-point chord.
+ 
+ ## Verification
+ 
+@@ -63,4 +76,12 @@
+ 
+ 1.3 For order $2$, [F3] gives $S_2=(9/16)/(1/4)+(1/16)/(3/4)=9/4+1/12=7/3$, so $D_2=\log(7/3)$. [F3, algebra]
+ 
+-2.1 The generator in [F4] gives $D_f(P\|Q)=\frac12\sum_x|p_x-q_x| =\frac12(1/2+1/2)=1/2$. [F1, F4, algebra] ∎
++2.1 Put $f(t)=\frac12|t-1|$ for $t>0$. It is finite-valued and $f(1)=0$.
++For $x,y>0$ and $s\in[0,1]$, $(1-s)x+sy>0$, so [F5] and [F6] give
++$$f((1-s)x+sy)=\frac12|(1-s)(x-1)+s(y-1)|\le(1-s)f(x)+sf(y).$$
++Thus [F7] proves that $f$ is convex, so it is an admissible generator in
++[F4]. [F4, F5, F6, F7, algebra]
++
++2.2 The generator in [F4] now gives
++$D_f(P\|Q)=\frac12\sum_x|p_x-q_x| =\frac12(1/2+1/2)=1/2$.
++[F1, F4, step 2.1, algebra] ∎
+--- validated-step2-baseline/items/ex-disjoint-support-f-and-renyi-divergences.md
++++ items/ex-disjoint-support-f-and-renyi-divergences.md
+@@ -11,6 +11,10 @@
+   - def-finite-f-divergence
+   - def-finite-kullback-leibler-divergence
+   - def-finite-renyi-divergence
++  - def-abs-value
++  - lem-of-abs-value
++  - lem-of-triangle-inequality
++  - def-convex-and-strictly-convex-functions-on-euclidean-sets
+ justified_by: []
+ proof_strategy: direct
+ provenance:
+@@ -41,7 +45,8 @@
+ [F1] [[def-finite-probability-vector]]: coordinates may be zero, and
+ $\operatorname{supp}P=\{x:p_x>0\}$.
+ 
+-[F2] [[def-finite-f-divergence]]: a coordinate with $q_x>0=p_x$
++[F2] [[def-finite-f-divergence]]: the generator must be finite and convex on
++$(0,\infty)$ and satisfy $f(1)=0$; a coordinate with $q_x>0=p_x$
+ contributes $q_xf(0)$, while one with $p_x>0=q_x$ contributes
+ $p_xf_\infty$.
+ 
+@@ -52,12 +57,30 @@
+ coordinate contributes zero to the affinity; above order one it makes the
+ affinity infinite.
+ 
++[F5] [[def-abs-value]] and [[lem-of-abs-value]]: absolute value is real-valued,
++$|c|=c$ for $c\ge0$, and $|cz|=|c||z|$.
++
++[F6] [[lem-of-triangle-inequality]]: $|u+v|\le|u|+|v|$.
++
++[F7] [[def-convex-and-strictly-convex-functions-on-euclidean-sets]]: a
++function is convex when it lies below each two-point chord.
++
+ ## Verification
+ 
+ **Given:** $P=(1,0)$ and $Q=(0,1)$ on $\{a,b\}$.
+ 
+-1.1 For the total-variation generator, $f(0)=1/2$ and $f_\infty=1/2$. The coordinate $a$ contributes $p_af_\infty=1/2$ by [F2], and coordinate $b$ contributes $q_bf(0)=1/2$. Thus $D_f(P\|Q)=1$. [F1, F2, algebra]
++1.1 Put $f(t)=\frac12|t-1|$ for $t>0$. It is finite-valued and $f(1)=0$.
++For $x,y>0$ and $s\in[0,1]$, $(1-s)x+sy>0$, so [F5] and [F6] give
++$$f((1-s)x+sy)=\frac12|(1-s)(x-1)+s(y-1)|\le(1-s)f(x)+sf(y).$$
++Thus [F7] proves that $f$ is convex, so it is an admissible generator in
++[F2]. [F2, F5, F6, F7, algebra]
+ 
+-1.2 Since $p_a=1>0=q_a$, [F3] gives $D(P\|Q)=+\infty$. This records the singular direction; $D(Q\|P)$ is also infinite by the same support calculation with $a,b$ exchanged. [F3, algebra]
++1.2 For $0<t<1$, $f(t)=\frac12(1-t)$, so $f(0)=\lim_{t\downarrow0}f(t)=1/2$.
++For $t>1$, $f(t)/t=\frac12(1-1/t)$, so
++$f_\infty=\lim_{t\to\infty}f(t)/t=1/2$. The coordinate $a$ contributes
++$p_af_\infty=1/2$ by [F2], and coordinate $b$ contributes
++$q_bf(0)=1/2$. Thus $D_f(P\|Q)=1$. [F1, F2, step 1.1, algebra]
+ 
+-2.1 If $0<\alpha<1$, the only coordinate with $q_x>0$ is $b$, where $p_b=0$, so $S_\alpha(P,Q)=0$ and $D_\alpha(P\|Q)=+\infty$ by [F4] and the definition. If $\alpha>1$, coordinate $a$ gives infinite affinity by [F4]. At $\alpha=1$, KL is infinite by step 1.2. [F3, F4, step 1.2, algebra] ∎
++1.3 Since $p_a=1>0=q_a$, [F3] gives $D(P\|Q)=+\infty$. This records the singular direction; $D(Q\|P)$ is also infinite by the same support calculation with $a,b$ exchanged. [F3, algebra]
++
++2.1 If $0<\alpha<1$, the only coordinate with $q_x>0$ is $b$, where $p_b=0$, so $S_\alpha(P,Q)=0$ and $D_\alpha(P\|Q)=+\infty$ by [F4] and the definition. If $\alpha>1$, coordinate $a$ gives infinite affinity by [F4]. At $\alpha=1$, KL is infinite by step 1.3. [F3, F4, step 1.3, algebra] ∎

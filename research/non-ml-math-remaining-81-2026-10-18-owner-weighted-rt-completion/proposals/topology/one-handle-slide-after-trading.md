@@ -1,0 +1,41 @@
+# A one-handle slide after the two one-handles have been traded
+
+2026-10-18. Local construction proposal, subject to root review. The operation is a slide between two four-dimensional one-handles, together with their full two-handle attaching strips. This file does not assert global genericity or a completeness theorem.
+
+## 1. Compatible choices before and after the slide
+
+Let H be N×I with two one-handles h_a,h_b and possibly other disjoint one-handles. All feet and the specified slide band are compactly contained off the protected boundary collar. Use the actual k=1 handle-slide definition: after attaching h_b, move one foot of h_a along a thin strip across the interval core of h_b to a parallel of its other endpoint. Its normal D³ travels in the strip coordinates. Denote the resulting handle h_a′. The support is a regular neighborhood of the two handles and the slide strip; no homotopy of the three-dimensional base to a ball is assumed.
+
+Choose disjoint replacement arcs B_a,B_b in the base, with fixed product germs at the feet. Let γ_a,γ_b be the corresponding interior core-plus-arc circles in H, pushed to disjoint normal positions. In the slid presentation choose B_a′,B_b′ compatibly with the core-disk push: after identifying the two one-handle stages by the actual slide diffeomorphism, γ_b′ is γ_b and γ_a′ is the framed band sum of γ_a with the signed parallel of γ_b along the slide strip. To obtain these arcs, trace the moved foot back through the slide strip and then along a parallel of B_b, joining the remaining end to B_a inside the foot ball. All segments outside the original handle cores lie in N. Round the two joins in disjoint small balls and put the parallels at different normal positions. The result is an embedded arc after a small relative perturbation in dimension three. The product normal framing is transported by the same strip. This construction proves existence of compatible choices; arbitrary other replacement arc choices are compared by `replacement-arc-comparison.md`.
+
+## 2. The traded attaching charts
+
+For each h_i insert the interior circle-surgery pair C_i,U_i and cancel h_i with C_i, exactly as in the continuous-surgery construction. Its link consists of U_a,U_b and all old attaching curves routed through the B_a,B_b tubes. Both U_i are zero-framed meridians of the corresponding routing tube. The product normal positions make the two meridian disks disjoint; in particular lk(U_a,U_b)=0, and both framings are the displayed disk framings. Strips traversing either handle are retained with their actual order and their orientation of traversal.
+
+The supported slide of the thickened two-edge spine has the following elementary effect on its transverse disks:
+
+\[
+D_a\longmapsto D_a,\qquad D_b\longmapsto D_b\mathbin{\natural}(-D_a),
+\]
+
+with the sign reversed for the other orientation of the slide. Here the second operation joins a parallel of the two disks by the thin rectangle running along the slide strip. This formula is a geometric disk formula. Cut the original two tubes at D_a and D_b; their neighborhood is a ball with four named disk faces a_+,a_−,b_+,b_−. The foot slide joins the a_+ collar to the b_- collar and then continues from b_+. A disk separating the new b cross-section is the old b disk together with the oppositely oriented a disk and the joining rectangle. Its boundary misses the unchanged a cross-section. Reattaching the four disk faces gives exactly the displayed banded disk; the remaining product collar is unchanged. Thus the disk formula follows from cutting and regluing the explicit tube products, not merely from the inverse-transpose action on homology.
+
+Taking boundaries gives the four-dimensional two-handle slide
+
+\[
+U_b\longmapsto U_b\#_{\beta}(-U_a),\qquad U_a\longmapsto U_a,
+\]
+
+where β is this specific rectangle. Its framing is the band framing zero, since it is the boundary framing of the displayed banded disk; equivalently 0+0−2lk(U_a,U_b)=0. A small product displacement separates it from every routed attaching strip. The old strips are transported at the same time through the cut-open four-face ball. A strip that does not traverse h_a is unchanged there. A strip traversing h_a enters at a_−, follows the new a tube and then the signed b tube, exactly the edge substitution a↦ab of the specified one-handle slide. The compatible choice of B_a′ in §1 performs the identical substitution in its routed image. Thus the two sets of old routed strips agree after this supported product comparison. Multiple traversals are parallel copies of the same calculation and can be made disjoint by decreasing their widths. At any residual crossing with an auxiliary replacement arc, the already proved transverse-arc rectangle gives an additional O2 on the relevant meridian; it does not create a new move type.
+
+This proves the local link conversion: a one-handle slide, with compatible replacement arcs, becomes the indicated O2 on the dual zero-framed meridians, together with the explicit framed isotopies and any auxiliary-arc crossing O2 moves. It does not require the replacement arcs or the slide support to be contractible in N. Arbitrary replacement arc choices add the finite O3/O2 comparison from the companion file.
+
+## 3. Why this is the retained boundary comparison
+
+There is an equivalent way to check the map, not just the final diagram. On H attach five-dimensional two-handles along γ_a,γ_b. In the slid presentation attach them along γ_a′,γ_b′. The compatible choice in §1 makes these two five-dimensional attachments related by the actual n=5,k=2 handle slide along the specified strip. Its diffeomorphism is identity on the entire external three-boundary times the interval because the circles and the strip are interior to H. Split each resulting D²×S² into hemispherical four-dimensional two-handles, interchanging the disk factors in the second hemisphere. On the long core pieces this is the original a-over-b core-disk push. On their transverse disk pieces it is exactly the banded-disk formula of §2, hence the opposite dual-meridian slide. The product normal charts on the band and four disk faces are those used in both descriptions. Cancelling h_a/C_a and h_b/C_b on the two sides therefore yields the same outgoing restriction as the specified O2/product-isotopy link comparison. The incoming base collar and the prescribed external outgoing identification are retained.
+
+The five-dimensional lemma is used only inside its verified range 1≤k≤n−2, here k=2,n=5. No claim that diffeomorphic four-dimensional two-handlebodies are two-equivalent is involved. The underlying four-dimensional levels are modified by the circle surgeries; the five-dimensional slide compares these particular modifications and their maps.
+
+## 4. Scope still owed globally
+
+This is the isolated one-handle-slide row of a proposed unrestricted-handle-movie conversion. To assemble a theorem, one still needs naturality of the dual three-handle trades under the same movie, the two endpoint birth/death rows at indices2/3 and3/4, and comparison of index regroupings and spanning-tree choices with all actual outgoing maps. The finite descending-field movie is constructed in another lane. These are mandatory remaining proof obligations; this local row does not erase them.

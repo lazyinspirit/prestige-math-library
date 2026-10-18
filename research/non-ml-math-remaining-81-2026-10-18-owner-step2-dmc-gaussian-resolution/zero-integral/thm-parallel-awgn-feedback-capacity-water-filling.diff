@@ -1,0 +1,25 @@
+--- items/thm-parallel-awgn-feedback-capacity-water-filling.md
++++ research/non-ml-math-remaining-81-2026-10-18-owner-step2-dmc-gaussian-resolution/zero-integral/proposed/items/thm-parallel-awgn-feedback-capacity-water-filling.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: non-ml-math-remaining-81-2026-10-18
+ dependency_level: 8
+-deps: [def-axiom-of-choice, def-parallel-awgn-feedback-code, def-parallel-gaussian-channel-with-power-constraint, lem-finite-message-fano-for-density-observation, lem-gaussian-noise-orthogonalization, lem-jensen-for-integrable-cost-random-variable, lem-parallel-awgn-cost-constrained-achievability, lem-parallel-awgn-single-use-information-bound, lem-water-filling-optimal-allocation, def-natural-logarithm, thm-logarithm-derivative-and-integral, thm-nondegenerate-multivariate-normal-law-has-density]
++deps: [def-axiom-of-choice, def-parallel-awgn-feedback-code, def-parallel-gaussian-channel-with-power-constraint, lem-finite-message-fano-for-density-observation, lem-gaussian-noise-orthogonalization, lem-jensen-for-integrable-cost-random-variable, lem-parallel-awgn-cost-constrained-achievability, lem-parallel-awgn-single-use-information-bound, lem-water-filling-optimal-allocation, def-natural-logarithm, thm-logarithm-derivative-and-integral, thm-nondegenerate-multivariate-normal-law-has-density, thm-nonnegative-integral-zero-iff-zero-almost-everywhere]
+ justified_by: []
+ aliases: []
+ proof_strategy: direct
+@@ -54,6 +54,8 @@
+ 
+ [F9] [[thm-logarithm-derivative-and-integral]]: $\ln'(x)=1/x$ for $x>0$, so integrating its derivative gives $\ln(1+x)\le x$ for $x\ge0$ and continuity of the finite rate expression.
+ 
++[F10] [[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]]: a nonnegative measurable function of integral zero vanishes almost everywhere; on the probability space this says zero expected nonnegative energy is zero almost surely.
++
+ ## Proof
+ 
+ 1.1 Use [F1] to express the channel in independent scalar branches. For a feedback code from [A2], conditional on each message $m$ the output vector has density
+@@ -64,4 +66,4 @@
+ 
+ 3.1 If $N=1$ the rate is zero. If $N\ge2$, [F5] and $H(M)=\ln N$ give $I(M;Y^n)\ge(1-e)\ln N-\ln2$. Combining with step 2.1 shows every reliable feedback rate is at most $C_K(P)$. The no-feedback capacity is bounded by the same argument because no-feedback codes are a subclass. [F5, step 2.1, given, algebra, cases]
+ 
+-4.1 If $P=0$, expected total input energy is zero, so each nonnegative $\|X_t\|^2$ is zero almost surely; outputs are then independent of the message and step 3.1 gives zero reliable rate. One-message codes attain rate zero. If $P>0$, [F3] supplies the allocation $p_j^*$ with total power $P$. For any $R<C_K(P)$ choose $\epsilon>0$ so the strict allocation $(1-\epsilon)p^*$ has Gaussian mutual information greater than $R$; continuity from [F9] gives such an $\epsilon$. Apply [F6] to obtain no-feedback codes at every such rate, and therefore also feedback codes. Letting $R\uparrow C_K(P)$ proves both lower bounds, including the case $C_K(P)=0$ by a one-message code. [F3, F6, F9, step 3.1, given, cases, algebra] ∎+4.1 If $P=0$, put $V=\sum_{t=1}^n\|X_t\|^2$. This is nonnegative and the expected-power constraint gives $\mathbb EV\le nP=0$, hence $\mathbb EV=0$. By [F10], $V=0$ almost surely, and every summand is therefore zero almost surely. Thus $X_t=0$ for every $t$ outside one null set and $Y^n=Z^n$ almost surely. The fresh noise vector is independent of the message by [A1], so the outputs carry no message information and the Fano bound in step 3.1 gives zero reliable rate. One-message codes attain rate zero. If $P>0$, [F3] supplies the allocation $p_j^*$ with total power $P$. For any $R<C_K(P)$ choose $\epsilon>0$ so the strict allocation $(1-\epsilon)p^*$ has Gaussian mutual information greater than $R$; continuity from [F9] gives such an $\epsilon$. Apply [F6] to obtain no-feedback codes at every such rate, and therefore also feedback codes. Letting $R\uparrow C_K(P)$ proves both lower bounds, including the case $C_K(P)=0$ by a one-message code. [A1, A2, F3, F6, F9, F10, step 3.1, given, cases, algebra] ∎

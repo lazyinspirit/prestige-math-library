@@ -20,6 +20,7 @@ verification:
     model: z-ai/glm-5.2
     verdict: pass
     date: 2026-07-28
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-recording/receipts/ex-thomae-is-riemann-integrable-with-integral-zero.json
 sources:
   scraped: []
   references:
@@ -36,9 +37,11 @@ pipeline_run: null
 
 ## Example
 
+Throughout, $\mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R}$ denotes the canonical copies. Natural numbers, integers and rationals are written directly when used in real arithmetic.
+
 Let $t : [0,1] \to \mathbb{R}$ be Thomae's function restricted to $[0,1]$: at a
 rational $x$ with least denominator $q(x) \ge 1$ it takes the value
-$1/\iota(q(x))$, and at an irrational $x$ the value $0$
+$1/q(x)$, and at an irrational $x$ the value $0$
 ([[def-dirichlet-and-thomae-functions]], [[def-canonical-natural]]). Then $t$ is
 Riemann integrable on $[0,1]$ and
 
@@ -60,7 +63,7 @@ positive numbers.
 
 **Given:** Thomae's function $t : [0,1] \to \mathbb{R}$ as above.
 
-[L1] $t(x) = 1/\iota(q(x))$ with $\iota(q(x)) \ge 1 > 0$ at a rational $x$, and $t(x) = 0$ at an irrational $x$; hence $0 \le t(x) \le 1$ everywhere and $t(x) > 0$ at every rational $x$ ([[def-dirichlet-and-thomae-functions]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
+[L1] $t(x) = 1/q(x)$ with $q(x) \ge 1 > 0$ at a rational $x$, and $t(x) = 0$ at an irrational $x$; hence $0 \le t(x) \le 1$ everywhere and $t(x) > 0$ at every rational $x$ ([[def-dirichlet-and-thomae-functions]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
 
 [L2] Thomae's function on $\mathbb{R}$ is continuous at every irrational and discontinuous at every rational ([[thm-dirichlet-and-thomae-continuity-sets]]); a restriction is continuous at every point of the smaller domain at which the original is continuous, the same $\delta$ serving a condition quantified over fewer points ([[def-continuity-real]]).
 

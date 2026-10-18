@@ -3,6 +3,7 @@ id: cor-frattini-free-finite-p-groups-are-elementary-abelian
 kind: corollary
 title: "A finite $p$-group has trivial Frattini subgroup exactly when it is elementary abelian"
 status: published
+dependency_level: 5
 origin: session
 provenance:
   statement: literature-derived
@@ -14,10 +15,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/published-receipts/cor-frattini-free-finite-p-groups-are-elementary-abelian.json
 sources:
   scraped: []
   references:

@@ -1,0 +1,186 @@
+--- /dev/null
++++ b/tools/step5-initial-scope-finding-shapes.md
+@@ -0,0 +1,12 @@
++# Additional exact native Definition findings
++
++This opt-in successor retains the original registry versions and all original paused/drained initial-wave, frozen frontier, baseline, successful handoff, original Luna keep, unassigned draft Definition, full root source, literal edits and no-native-reading-coverage guards. It changes no source or original native report/output.
++
++`origin_kind:native-open-finding` now admits two explicit `finding_shape` values in addition to the unchanged original sparse shape:
++
++* `classified-definition`: the observed exact classified rich object, with fatal logic/open status, current item path, literal original source excerpt, concrete affected use/invalidated claim/minimality/reason, actual HTTPS source references and exact identical individual final output. Root correspondence and independent classification remain required and must agree with original severity.
++* `plural-report-reference`: the observed individual detailed open object without a severity, with exact canonical ledger path, open status, concrete affected_use/reason and empty source URLs. The final output is the exact four-field plural `record-open-findings` object (ledger/action/route/reason), with no fabricated ID. Its `repair_notes.report` must name the exact immutable detailed report. Separate root literal correspondence links the individual detailed finding to that actual plural summary and full current source. Root supplies classification separately; it never edits original native fields.
++
++Both use existing exact `finding`, `output_finding`, indices and root `open_finding_correspondence`; the latter report excerpt comes from actual affected-use/reason (or rich prose), and output excerpt from the actual plural reason or rich prose. Unknown shapes, extra keys, arbitrary prose, wrong action/path, invented output IDs or missing exact report reference fail. No ID is hardcoded. Work admission grants no mathematical acceptance, native finding, native source reading or current review; normal 5.2 remains owed.
++
++Actual observed provenance: unit5 report ledger_updates12–14 uses plural-report-reference for the three unassigned information Definitions; final output ledger_updates1 is a plural report reference, not per-ID evidence. Unit56 report/output ledger_updates4 supplies the rich quiver Definition object. No session journal payload was read.
+--- /dev/null
++++ b/tools/step5-initial-scope-finding-shapes.test.mjs
+@@ -0,0 +1,92 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync} from 'node:fs';
++import {join} from 'node:path';
++import {tmpdir} from 'node:os';
++import {createHash} from 'node:crypto';
++import {freezeFrontier} from './step5-rounds.mjs';
++import {itemHashGuard} from './item-hash.mjs';
++import {MODELS} from './models.mjs';
++import {recordInitialScopeFindings,loadInitialScopeFindings,checkFrozenInitialScopeFindingInput} from './step5-initial-scope-findings.mjs';
++const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
++const run='test-initial-alert',id='def-test-dmc',dir=`research/${run}-step5-v2`,dispatch=`research/${run}-dispatch`;
++// Synthetic execution/reading strings test provenance mechanics only. They do
++// not claim real native execution, source reading, mathematical review or gates.
++function fixture(t,version=2){
++ const root=mkdtempSync(join(tmpdir(),'initial-outside-alert-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
++ for(const path of ['items',dir,dispatch,`.autopilot/${run}`])mkdirSync(join(root,path),{recursive:true});
++ const put=(path,value)=>writeFileSync(join(root,path),typeof value==='string'?value:JSON.stringify(value));
++ const text=`---\nid: ${id}\nkind: definition\ntitle: Fixture\nstatus: draft\n---\n\n## Definition\n\nThe fixture source has the exact current coordinate product requiring a local label convention.\n`;
++ put(`items/${id}.md`,text);const guard=itemHashGuard(text);
++ const frontier=freezeFrontier({run,batches:[{id:'1',items:[id]},{id:'2',items:['lem-assigned']} ]});
++ const initial={run,phase:'initial',round:1,adjudicationSchemaVersion:1,frontier_ids:frontier.ids,units:['1','2'],assignments:{'1':[],'2':[{id:'lem-assigned'}]},before:{[id]:guard,'lem-assigned':'a'.repeat(64)}};
++ put(`${dir}/frontier.json`,frontier);put(`${dir}/baseline.json`,initial.before);put(`${dir}/step4-verdicts.json`,[{id,model:MODELS.luna.id,keep:true}]);put(`${dir}/initial-1.json`,initial);
++ put(`research/${run}-batch-1.pages.json`,[{items:[{id}]}]);put(`research/${run}-batch-2.pages.json`,[{items:[{id:'lem-assigned'}]}]);
++ const state={run,stage:'5.1-adjudicate',paused:true,dispatches:{done:{startedAt:'2026-09-30T10:00:00Z',endedAt:'2026-09-30T11:00:00Z'}}};put(`.autopilot/${run}/state.json`,state);
++ const empty={run,phase:'initial',round:1,unit:'1',input_sha256:hash(initial),completion:'mechanical-zero-work',mathematical_review:false,reviews:[],decisions:[],created_items:[],downstream:[],ledger_updates:[]};
++ put(`${dir}/step5-v2-initial-r1-u1.json`,empty);put(`${dispatch}/tool-step5-v2-empty-initial-r1-u1.result.json`,{run,ok:true,covers:['1'],role:'tool',written_by:'autopilot',label:'step5-v2-empty-initial-r1-u1'});
++ const alert={id,path:`items/${id}.md`,route:'frontier owner',affected_use:'Definition has the displayed coordinate product without an explicit shifted-coordinate labeling convention.',reason:'The owner should examine this unchanged separate supplier; this worker did not edit or adjudicate it.'};
++ const outputAlert={id,route:'frontier owner',affected_use:'Its inspected definition likewise uses a coordinate product without declaring its local block-coordinate labels.',reason:'This separate carrier needs its frontier owner to examine the coordinate convention without claiming an assigned repair.'};
++ const finding={id,ledger:'canonical-defect-ledger',action:'record-open-finding',severity:'nonfatal',uncertain:false,route:'frontier-owner',reason:alert.reason};
++ const report={run,phase:'initial',round:1,unit:'2',input_sha256:hash(initial),ledger_updates:version===1?[finding]:[],repair_notes:{outside_lane_alerts:[alert]}};
++ const output={...report,repair_notes:{outside_lane_alerts:[outputAlert]}};
++ const label='step5-v2-initial-r1-u2',stem=`${dispatch}/alpha-adjudicate-${label}.attempt-1`,reportPath=`${dir}/${label}.json`,stable=`${dispatch}/alpha-adjudicate-${label}.result.json`;
++ const result={run,ok:true,covers:['2'],role:'alpha-adjudicate',label,runner:'codex',model:MODELS.sol61.id,provider_effort:'high',attempt:1,evidence_tag:'.attempt-1',started_at:'2026-09-30T10:00:00Z',ended_at:'2026-09-30T11:00:00Z',process_exit_code:0,exit_code:0,timed_out:false,terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0},log:`${stem}.log`,prompt:`${stem}.prompt.md`};
++ const nativeRecord=`exec\ncat items/${id}.md\n succeeded in 1ms:\n${text}\n`;
++ const putNative=()=>{
++  empty.input_sha256=hash(initial);put(`${dir}/step5-v2-initial-r1-u1.json`,empty);
++  report.input_sha256=hash(initial);output.input_sha256=hash(initial);put(reportPath,report);put(stable,result);put(`${stem}.result.json`,result);
++  put(`${stem}.prompt.md`,`run: ${run}\nrole: alpha-adjudicate\nlabel: ${label}\ncovers: 2\noutput: ${reportPath}\ninput_sha256:"${hash(initial)}"`);
++  put(`${stem}.log`,`${nativeRecord}\ncodex\n${JSON.stringify(output)}\ntokens used\n123\n`);
++ };putNative();
++ const evidenceFile=`research/${run}-root-review.md`,beforeFile=`research/${run}-before.md`;
++ put(evidenceFile,'Synthetic root fixture confirmation of complete current source, exact native report/output correspondence and concrete label repair; no real audit.');put(beforeFile,text);
++ const owner_review={reviewed_by:'root',confirmed_defect:true,reviewed_at:'2026-10-01T10:00:00Z',reason:'Root fixture has read the complete current source and confirms the exact coordinate convention issue in the native alert.',evidence_file:evidenceFile,proposed_edits:[{source_excerpt:'requiring a local label convention',proposed_replacement:'with explicit shifted coordinate labels'}],full_current_source_read:true,source_raw_sha256:hash(text),outside_alert_correspondence:{confirmed_same_alert:true,report_excerpt:'displayed coordinate product',output_excerpt:'without declaring its local block-coordinate labels',reason:'The two actual native objects describe the same unchanged source coordinate-index convention, and root confirms their literal correspondence.'}};
++ const entry={id,batch:'1',unit:'2',route:'frontier-owner',current_guard_sha256:guard,owner_review,...(version===1?{open_finding_index:0,finding,output_finding_index:0,output_finding:finding,source_read:{native_log_record:nativeRecord,source_excerpt:'The fixture source has the exact current coordinate product'}}:{origin_kind:'native-outside-lane-alert',outside_alert_index:0,alert,output_alert_index:0,output_alert:outputAlert,source_read:{mode:'owner-current-source-confirmation',native_full_read_adopted:false,before_file:beforeFile,before_raw_sha256:hash(text),source_excerpt:'The fixture source has the exact current coordinate product'}})};
++ const request={version,kind:'owner-confirmed-native-initial-scope-findings',run,authorized_by:'owner',owner_identity:'/root',native_coverage_adopted:false,recorded_at:'2026-10-01T11:00:00Z',original_count:2,bindings:{},entries:[entry]};
++ const files=[`${dir}/frontier.json`,`${dir}/baseline.json`,`${dir}/step4-verdicts.json`,`${dir}/initial-1.json`,`${dir}/step5-v2-initial-r1-u1.json`,`${dispatch}/tool-step5-v2-empty-initial-r1-u1.result.json`,reportPath,stable,`${stem}.result.json`,`${stem}.prompt.md`,`${stem}.log`,`research/${run}-batch-1.pages.json`,`research/${run}-batch-2.pages.json`,evidenceFile,beforeFile];
++ const requestPath=`research/${run}-request.json`;
++ const save=()=>{request.bindings=Object.fromEntries(files.map(p=>[p,hash(readFileSync(join(root,p),'utf8'))]));put(requestPath,request);};save();
++ const record=()=>recordInitialScopeFindings(root,run,requestPath);
++ const collect=()=>{const row=JSON.parse(readFileSync(join(root,`research/${run}-step5-initial-scope-findings.json`),'utf8'));const evidence=Object.fromEntries(Object.entries(row.bindings).map(([p,h])=>[join(root,p),h]));put(`${dir}/initial-1-collected.json`,{run,phase:'initial',round:1,errors:[],evidence});return row;};
++ return {root,put,text,initial,state,report,output,result,request,entry,files,requestPath,reportPath,stable,stem,alert,outputAlert,putNative,save,record,collect};
++}
++function typedFixture(t,shape){
++ const f=fixture(t),e=f.entry;for(const k of ['alert','output_alert','outside_alert_index','output_alert_index'])delete e[k];
++ const common={ledger:'canonical-defect-ledger',action:'record-open-finding',id,route:'frontier-owner',uncertain:false,familiar:true};
++ const finding=shape==='classified-definition'?{...common,severity:'fatal',defect_type:'logic',status:'open',affected_path:`items/${id}.md`,source_excerpt:'The fixture source has the exact current coordinate product requiring a local label convention.',affected_use:'The unchanged defining interface is missing the actual coordinate convention required by its declared product.',invalidated_claim:'The claimed equivalence does not specify which local coordinates appear in the displayed finite product.',minimality:'State the explicit coordinate labeling convention and inspect all actual consumers of the changed Definition.',reason:'The exact unassigned defining source needs its original owner to examine the missing product convention before normal review.',source_urls:['https://example.org/full-source.pdf']}:{...common,path:'research/defect-ledger.jsonl',status:'open',affected_use:'The unchanged defining interface is missing the actual coordinate convention required by its declared product.',reason:'The assigned report records exact unassigned frontier uses needing explicit conventions. No unassigned items were edited.',source_urls:[]};
++ const summary=shape==='classified-definition'?{...finding}:{ledger:'canonical-defect-ledger',action:'record-open-findings',route:'frontier-owner',reason:'The assigned report records exact unassigned frontier uses needing explicit conventions. No unassigned items were edited.'};
++ f.report.ledger_updates=[finding];f.output.ledger_updates=[summary];f.output.repair_notes.report=f.reportPath;
++ e.origin_kind='native-open-finding';e.finding_shape=shape;e.open_finding_index=0;e.output_finding_index=0;e.finding=finding;e.output_finding=summary;
++ delete e.owner_review.outside_alert_correspondence;
++ e.owner_review.open_finding_correspondence={confirmed_same_finding:true,report_excerpt:'unchanged defining interface is missing',output_excerpt:shape==='classified-definition'?'unchanged defining interface is missing':'exact unassigned frontier uses needing explicit conventions',reason:'Root read both exact original objects and the actual full source and confirms this individual detailed report finding belongs to the literal final report reference.'};
++ e.owner_review.classification={severity:'fatal',defect_type:'logic',reason:'Root confirms that the current unchanged fixture Definition lacks the coordinate convention required by the declared product.'};f.putNative();f.save();return {...f,finding,summary};
++}
++for(const shape of ['classified-definition','plural-report-reference']){
++ test(`${shape} preserves exact objects and grants work only`,t=>{const f=typedFixture(t,shape),original=readFileSync(join(f.root,f.reportPath),'utf8');f.record();f.collect();assert.equal(loadInitialScopeFindings(f.root,run).entries[0].finding_shape,shape);assert.equal(readFileSync(join(f.root,f.reportPath),'utf8'),original);if(shape==='plural-report-reference')assert.equal(Object.hasOwn(f.summary,'id'),false);});
++ for(const defect of ['unknown-shape','extra-report-field','extra-output-id','wrong-action','wrong-route','uncertain','source-path','missing-classification','missing-correspondence','bad-literal','assigned','reject','changed-source','no-before','active','not-paused','after-impact','failed-native','wrong-raw-object'])test(`${shape} rejects ${defect}`,t=>{
++  const f=typedFixture(t,shape),e=f.entry;
++  if(defect==='unknown-shape')e.finding_shape='arbitrary-prose';
++  if(defect==='extra-report-field')f.finding.invented='no';
++  if(defect==='extra-output-id')f.summary.invented_id=id;
++  if(defect==='wrong-action')f.finding.action='record-fixed-finding';
++  if(defect==='wrong-route')f.summary.route='outside-maintenance';
++  if(defect==='uncertain')f.finding.uncertain=true;
++  if(defect==='source-path'){if(shape==='classified-definition')f.finding.affected_path='items/def-other.md';else f.finding.path='research/other.jsonl';}
++  if(defect==='missing-classification')delete e.owner_review.classification;
++  if(defect==='missing-correspondence')delete e.owner_review.open_finding_correspondence;
++  if(defect==='bad-literal')e.owner_review.open_finding_correspondence.output_excerpt='Invented correspondence not in the native original output';
++  if(defect==='assigned'){f.initial.assignments['1']=[{id}];f.put(`${dir}/initial-1.json`,f.initial);}
++  if(defect==='reject')f.put(`${dir}/step4-verdicts.json`,[{id,model:MODELS.luna.id,keep:false}]);
++  if(defect==='changed-source')f.put(`items/${id}.md`,f.text+'changed');
++  if(defect==='no-before')delete e.source_read.before_file;
++  if(defect==='active'){f.state.dispatches.live={startedAt:'2026-10-01'};f.put(`.autopilot/${run}/state.json`,f.state);}
++  if(defect==='not-paused'){f.state.paused=false;f.put(`.autopilot/${run}/state.json`,f.state);}
++  if(defect==='after-impact')f.put(`${dir}/impact-initial-1.json`,{});
++  if(defect==='failed-native')f.result.ok=false;
++  if(defect==='wrong-raw-object')e.finding={...f.finding,reason:'Invented substitute object that differs from the actual original report.'};
++  f.putNative();f.save();assert.throws(f.record);
++ });
++}
++test('classified source excerpt must be literal and root classification must agree',t=>{for(const key of ['excerpt','severity']){const f=typedFixture(t,'classified-definition');if(key==='excerpt'){f.finding.source_excerpt='This invented source excerpt is not in the actual original carrier or current full Definition.';f.summary.source_excerpt=f.finding.source_excerpt;}else f.entry.owner_review.classification.severity='nonfatal';f.putNative();f.save();assert.throws(f.record);}});
++test('plural output must reference the exact original detailed report and cannot invent individual IDs',t=>{for(const key of ['report','id','action']){const f=typedFixture(t,'plural-report-reference');if(key==='report')f.output.repair_notes.report='research/another-report.json';if(key==='id')f.summary.id=id;if(key==='action')f.summary.action='record-open-finding';f.putNative();f.save();assert.throws(f.record);}});
+--- a/tools/step5-initial-scope-findings.mjs
++++ b/tools/step5-initial-scope-findings.mjs
+@@ -133,29 +133,52 @@
+       const keys=(value,wanted)=>value&&typeof value==='object'&&!Array.isArray(value)
+         &&same(Object.keys(value).sort(),wanted.sort());
+       const fields=['ledger','action','id','route','locus','finding','minimality','uncertain','source_urls','familiar'];
++      const richFields=['ledger','action','id','severity','defect_type','status','route','affected_path','source_excerpt','affected_use','invalidated_claim','minimality','reason','uncertain','source_urls','familiar'];
++      const rich=entry.finding_shape==='classified-definition',plural=entry.finding_shape==='plural-report-reference';
++      need(entry.finding_shape===undefined||rich||plural,'unknown typed open-finding shape');
++      const ordinary=keys(finding,fields)&&(keys(summary,fields)||keys(summary,fields.filter(key=>key!=='locus')))
++        &&finding.locus===`items/${id}.md#Definition`
++        &&(!Object.hasOwn(summary,'locus')||summary.locus===finding.locus)
++        &&same(finding.source_urls,[])&&same(summary.source_urls,[])
++        &&[finding.finding,finding.minimality,summary.finding,summary.minimality]
++          .every(text=>typeof text==='string'&&text.trim().length>=40);
++      const classified=keys(finding,richFields)&&keys(summary,richFields)
++        &&finding.severity==='fatal'&&finding.defect_type==='logic'&&finding.status==='open'
++        &&finding.affected_path===`items/${id}.md`&&same(finding,summary)
++        &&Array.isArray(finding.source_urls)&&finding.source_urls.length>0
++        &&finding.source_urls.every(url=>typeof url==='string'&&/^https:\/\/[^\s]+$/.test(url))
++        &&['source_excerpt','affected_use','invalidated_claim','minimality','reason']
++          .every(key=>typeof finding[key]==='string'&&finding[key].trim().length>=40);
++      const pluralFields=['ledger','path','action','id','status','route','affected_use','reason','uncertain','source_urls','familiar'];
++      const pluralReference=keys(finding,pluralFields)
++        &&finding.path==='research/defect-ledger.jsonl'&&finding.status==='open'
++        &&same(finding.source_urls,[])
++        &&['affected_use','reason'].every(key=>typeof finding[key]==='string'&&finding[key].trim().length>=40)
++        &&keys(summary,['ledger','action','route','reason'])
++        &&summary.ledger==='canonical-defect-ledger'&&summary.action==='record-open-findings'
++        &&summary.route==='frontier-owner'&&typeof summary.reason==='string'&&summary.reason.trim().length>=80
++        &&origin.output.repair_notes?.report===relative(root,origin.reportPath);
+       need(origin&&Number.isSafeInteger(index)&&index>=0&&Number.isSafeInteger(entry.output_finding_index)&&entry.output_finding_index>=0
+-        &&same(finding,entry.finding)&&same(summary,entry.output_finding)&&keys(finding,fields)
+-        &&(keys(summary,fields)||keys(summary,fields.filter(key=>key!=='locus')))
++        &&same(finding,entry.finding)&&same(summary,entry.output_finding)&&(rich?classified:plural?pluralReference:ordinary)
+         &&finding.ledger==='canonical-defect-ledger'&&finding.action==='record-open-finding'&&finding.id===id
+-        &&finding.route==='frontier-owner'&&finding.locus===`items/${id}.md#Definition`
+-        &&summary.ledger===finding.ledger&&summary.action===finding.action&&summary.id===id&&summary.route===finding.route
+-        &&(!Object.hasOwn(summary,'locus')||summary.locus===finding.locus)
+-        &&finding.uncertain===false&&summary.uncertain===false&&finding.familiar===true&&summary.familiar===true
+-        &&same(finding.source_urls,[])&&same(summary.source_urls,[])&&entry.route==='frontier-owner'
+-        &&[finding.finding,finding.minimality,summary.finding,summary.minimality]
+-          .every(text=>typeof text==='string'&&text.trim().length>=40)
++        &&finding.route==='frontier-owner'
++        &&(plural||(summary.ledger===finding.ledger&&summary.action===finding.action&&summary.id===id&&summary.route===finding.route))
++        &&finding.uncertain===false&&finding.familiar===true&&(plural||(summary.uncertain===false&&summary.familiar===true))
++        &&entry.route==='frontier-owner'
+         &&!Object.hasOwn(entry,'alert')&&!Object.hasOwn(entry,'output_alert')
+         &&!Object.hasOwn(entry,'outside_alert_index')&&!Object.hasOwn(entry,'output_alert_index'),
+-        'not the exact unclassified original frontier-owner open finding');
++        'not the exact typed original frontier-owner open finding');
+       const witness=review?.open_finding_correspondence,classification=review?.classification;
++      const prose=rich?['affected_use','invalidated_claim','minimality','reason']:plural?['affected_use','reason']:['finding','minimality'];
+       need(witness?.confirmed_same_finding===true&&typeof witness.reason==='string'&&witness.reason.trim().length>=80
+         &&typeof witness.report_excerpt==='string'&&witness.report_excerpt.length>=20
+-        &&[finding.finding,finding.minimality].some(text=>text.includes(witness.report_excerpt))
++        &&prose.some(key=>finding[key].includes(witness.report_excerpt))
+         &&typeof witness.output_excerpt==='string'&&witness.output_excerpt.length>=20
+-        &&[summary.finding,summary.minimality].some(text=>text.includes(witness.output_excerpt))
++        &&(plural?summary.reason.includes(witness.output_excerpt):prose.some(key=>summary[key].includes(witness.output_excerpt)))
+         &&['fatal','nonfatal'].includes(classification?.severity)&&classification.defect_type==='logic'
++        &&(!rich||classification.severity===finding.severity)
+         &&typeof classification.reason==='string'&&classification.reason.trim().length>=40,
+-        'missing separate root correspondence and classification of unclassified finding');
++        'missing separate root correspondence and classification of typed finding');
+     }else{
+     need(origin&&Number.isSafeInteger(index)&&index>=0&&same(finding,entry.finding)
+       &&finding.ledger==='canonical-defect-ledger'&&finding.action==='record-open-finding'&&finding.id===id
+@@ -181,6 +204,7 @@
+     const text=readFileSync(source,'utf8');
+     need(/^status:\s*draft\s*$/m.test(text)&&text.match(/^id:\s*(\S+)\s*$/m)?.[1]===id
+       &&typeof baseline[id]==='string'&&initial.before[id]===baseline[id]&&itemHashGuard(text)===entry.current_guard_sha256, 'not a current draft original frontier carrier');
++    if(unclassified&&entry.finding_shape==='classified-definition')need(text.includes(finding.source_excerpt),'classified finding excerpt is absent from current original source');
+     if(ownerSource){
+       const observation=entry.source_read;
+       need(/^kind:\s*definition\s*$/m.test(text)&&itemHashGuard(text)===baseline[id]&&observation?.mode==='owner-current-source-confirmation'

@@ -1,0 +1,265 @@
+[
+  {
+    "order": 2542,
+    "id": "quantum-key-distribution-and-composable-secrecy",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Quantum Key Distribution and Composable Secrecy",
+    "companion": "quantum-key-distribution-and-composable-secrecy-examples",
+    "requires": [
+      "secrecy-and-information-privacy",
+      "quantum-relative-entropy-data-processing-and-strong-subadditivity"
+    ],
+    "items": [
+      {
+        "id": "def-qkd-finite-authenticated-protocol",
+        "kind": "definition",
+        "title": "Finite authenticated key-distribution protocol",
+        "deps": [
+          "def-qc-density-operator",
+          "def-qc-quantum-channel",
+          "def-qc-instrument-and-conditional-state",
+          "thm-qc-instrument-outcome-law-normalizes",
+          "thm-qc-instrument-conditional-state-is-density",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "statement": "A finite two-party key-distribution protocol has a finite nonempty key alphabet, a finite public transcript alphabet, finite-dimensional quantum registers, finitely many rounds of local quantum channels and measurements, and final classical outputs in the key alphabet or a common abort symbol. Its authenticated public messages are delivered unchanged to the other honest party and disclosed to the adversary. For each adversarial strategy its final normalized output is a classical-classical-classical-quantum state on Alice's key, Bob's key, transcript, and the adversary's retained quantum system.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {"title": "Christopher Portmann and Renato Renner, Cryptographic Security of Quantum Key Distribution (2014)", "url": "https://arxiv.org/pdf/1409.3525"},
+            {"title": "Joseph M. Renes, Quantum Information Theory, ETH Zürich lecture notes (HS2014; revised 4 February 2015)", "url": "https://edu.itp.phys.ethz.ch/hs15/QIT/renes_lecture_notes14.pdf"},
+            {"title": "M. Ben-Or, M. Horodecki, D. W. Leung, D. Mayers, and J. Oppenheim, The Universal Composable Security of Quantum Key Distribution (2005)", "url": "https://arxiv.org/pdf/quant-ph/0409078"},
+            {"title": "John Watrous, The Theory of Quantum Information (2018)", "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"}
+          ]
+        },
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "lem-qkd-classical-key-copy-map-is-channel",
+        "kind": "lemma",
+        "title": "The finite classical key-copy map is a quantum channel",
+        "deps": [
+          "def-qc-quantum-channel",
+          "def-qc-completely-positive-map",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-qc-kraus-map-completely-positive",
+          "def-trace-of-an-endomorphism",
+          "thm-trace-of-ab-equals-trace-of-ba"
+        ],
+        "justified_by": [],
+        "statement": "For a finite nonempty key alphabet K and finite-dimensional transcript and adversary registers, define C(X)=sum_k L_k X L_k^dagger from ATE to ABTE, where L_k=|k,k><k|_A tensor I_TE. Then C is completely positive and trace-preserving. On a state classical in A, C copies its basis label into B and leaves the transcript and adversary system unchanged.",
+        "strategy": "direct",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {"title": "Christopher Portmann and Renato Renner, Cryptographic Security of Quantum Key Distribution (2014), §4.3", "url": "https://arxiv.org/pdf/1409.3525"},
+            {"title": "Joseph M. Renes, Quantum Information Theory, ETH Zürich lecture notes (HS2014; revised 4 February 2015), §8.3", "url": "https://edu.itp.phys.ethz.ch/hs15/QIT/renes_lecture_notes14.pdf"},
+            {"title": "John Watrous, The Theory of Quantum Information (2018), §§1.1.3 and 2.2.2", "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"}
+          ]
+        },
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "lem-qkd-trace-norm-adds-over-classical-blocks",
+        "kind": "lemma",
+        "title": "Trace norm of a finite classical block operator",
+        "deps": [
+          "def-qc-trace-norm",
+          "thm-qc-trace-norm-spectral-formula",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": [],
+        "statement": "If X_i are self-adjoint endomorphisms of a finite-dimensional complex inner-product space E indexed by a finite set I, and (|i>) is the computational basis of C^I, then ||sum_i |i><i| tensor X_i||_1=sum_i ||X_i||_1.",
+        "strategy": "direct",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {"title": "John Watrous, The Theory of Quantum Information (2018), Chapter 1, §1.1.3", "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"},
+            {"title": "Joseph M. Renes, Quantum Information Theory, ETH Zürich lecture notes (HS2014; revised 4 February 2015), §2.1", "url": "https://edu.itp.phys.ethz.ch/hs15/QIT/renes_lecture_notes14.pdf"}
+          ]
+        },
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-qkd-abort-aware-composable-security",
+        "kind": "definition",
+        "title": "Abort-aware real and ideal QKD outputs and security errors",
+        "deps": [
+          "def-qkd-finite-authenticated-protocol",
+          "def-qc-density-operator",
+          "def-qc-trace-distance",
+          "def-qc-trace-norm",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "justified_by": ["lem-qkd-abort-aware-ideal-output-is-state"],
+        "statement": "For a fixed adversarial strategy, let p_acc be the acceptance probability and rho^top_ABTE the normalized real output conditioned on acceptance when p_acc>0. Define the ideal full output to retain the real abort branch and accepted transcript-adversary marginal, while replacing the accepted keys by a uniform shared key independent of transcript and adversary. Define epsilon_cor=Pr[accept and K_A != K_B], epsilon_sec=p_acc D(rho^top_ATE, tau_A tensor rho^top_TE), with epsilon_sec=0 if p_acc=0, and delta_real-ideal as the trace distance of the normalized full real and ideal states.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {"title": "Christopher Portmann and Renato Renner, Cryptographic Security of Quantum Key Distribution (2014), §§3.3–4.3", "url": "https://arxiv.org/pdf/1409.3525"},
+            {"title": "Joseph M. Renes, Quantum Information Theory, ETH Zürich lecture notes (HS2014; revised 4 February 2015), §8.3", "url": "https://edu.itp.phys.ethz.ch/hs15/QIT/renes_lecture_notes14.pdf"},
+            {"title": "M. Ben-Or, M. Horodecki, D. W. Leung, D. Mayers, and J. Oppenheim, The Universal Composable Security of Quantum Key Distribution (2005), §4", "url": "https://arxiv.org/pdf/quant-ph/0409078"},
+            {"title": "John Watrous, The Theory of Quantum Information (2018), Chapter 1, §1.1.3", "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"}
+          ]
+        },
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "lem-qkd-copy-replacement-distance-is-correctness-error",
+        "kind": "lemma",
+        "title": "Replacing Bob's key by a copy of Alice's costs the correctness error",
+        "deps": [
+          "lem-qkd-classical-key-copy-map-is-channel",
+          "lem-qkd-trace-norm-adds-over-classical-blocks",
+          "def-qc-density-operator",
+          "def-trace-of-an-endomorphism",
+          "def-qc-quantum-channel",
+          "def-qc-completely-positive-map",
+          "def-qc-trace-distance",
+          "def-qc-trace-norm",
+          "def-qc-register-and-computational-basis",
+          "thm-qc-trace-norm-unitary-invariance-and-positive-formula",
+          "thm-qc-trace-norm-duality-and-norm-properties"
+        ],
+        "justified_by": [],
+        "statement": "For a normalized finite classical-classical-classical-quantum state rho_ABTE with blocks R_E^{a,b,t}, define rho_ATE=sum_{a,t}|a,t><a,t| tensor sum_b R_E^{a,b,t} and gamma=C(rho_ATE), where C copies Alice's classical key into B. Then D(rho_ABTE,gamma)=Pr[K_A != K_B].",
+        "strategy": "direct",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {"title": "Christopher Portmann and Renato Renner, Cryptographic Security of Quantum Key Distribution (2014), §4.3, Theorem 4.1 proof", "url": "https://arxiv.org/pdf/1409.3525"},
+            {"title": "Joseph M. Renes, Quantum Information Theory, ETH Zürich lecture notes (HS2014; revised 4 February 2015), §8.3", "url": "https://edu.itp.phys.ethz.ch/hs15/QIT/renes_lecture_notes14.pdf"},
+            {"title": "John Watrous, The Theory of Quantum Information (2018), Chapter 1, §1.1.3", "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"}
+          ]
+        },
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "lem-qkd-abort-aware-ideal-output-is-state",
+        "kind": "lemma",
+        "title": "The abort-aware ideal output and conditional marginals are states",
+        "deps": [
+          "def-qkd-finite-authenticated-protocol",
+          "def-qkd-abort-aware-composable-security",
+          "def-qc-density-operator",
+          "def-trace-of-an-endomorphism",
+          "def-qc-register-and-computational-basis",
+          "def-qc-tensor-register-and-permutation",
+          "thm-non-negative-operator-characterisations"
+        ],
+        "justified_by": [],
+        "statement": "For every finite protocol output in the preceding definition, the conditional accepted real state and each transcript-adversary marginal used there are density operators when p_acc>0; the displayed abort-aware ideal full output is also a density operator. If p_acc=0, the ideal output equals the real abort-only state.",
+        "strategy": "direct",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {"title": "Christopher Portmann and Renato Renner, Cryptographic Security of Quantum Key Distribution (2014), §4.2", "url": "https://arxiv.org/pdf/1409.3525"},
+            {"title": "Joseph M. Renes, Quantum Information Theory, ETH Zürich lecture notes (HS2014; revised 4 February 2015), §8.3", "url": "https://edu.itp.phys.ethz.ch/hs15/QIT/renes_lecture_notes14.pdf"}
+          ]
+        },
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-qkd-composable-secrecy-sum-bound",
+        "kind": "theorem",
+        "title": "QKD composable secrecy is bounded by correctness plus secrecy",
+        "deps": [
+          "def-qkd-finite-authenticated-protocol",
+          "def-qkd-abort-aware-composable-security",
+          "lem-qkd-classical-key-copy-map-is-channel",
+          "lem-qkd-trace-norm-adds-over-classical-blocks",
+          "lem-qkd-copy-replacement-distance-is-correctness-error",
+          "lem-qkd-abort-aware-ideal-output-is-state",
+          "def-qc-trace-distance",
+          "thm-qc-trace-norm-duality-and-norm-properties"
+        ],
+        "justified_by": [],
+        "statement": "For every finite authenticated key-distribution protocol and each adversarial strategy, the trace distance between the abort-aware real and ideal outputs is at most epsilon_cor+epsilon_sec. Consequently, uniform correctness and secrecy bounds over all strategies add to a uniform real-ideal bound.",
+        "strategy": "direct",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {"title": "Christopher Portmann and Renato Renner, Cryptographic Security of Quantum Key Distribution (2014), Theorem 4.1", "url": "https://arxiv.org/pdf/1409.3525"},
+            {"title": "Joseph M. Renes, Quantum Information Theory, ETH Zürich lecture notes (HS2014; revised 4 February 2015), §8.3, Proposition 8.3.1", "url": "https://edu.itp.phys.ethz.ch/hs15/QIT/renes_lecture_notes14.pdf"},
+            {"title": "John Watrous, The Theory of Quantum Information (2018), Chapter 1, §1.1.3", "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.pdf"}
+          ]
+        },
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      }
+    ]
+  },
+  {
+    "order": 2543,
+    "id": "quantum-key-distribution-and-composable-secrecy-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Quantum Key Distribution and Composable Secrecy — Examples",
+    "companion": "quantum-key-distribution-and-composable-secrecy",
+    "requires": [
+      "quantum-key-distribution-and-composable-secrecy"
+    ],
+    "items": [
+      {
+        "id": "ex-qkd-abort-weighted-secrecy-distance",
+        "kind": "example",
+        "title": "Abort probability weights an otherwise imperfect one-bit key",
+        "deps": [
+          "def-qkd-finite-authenticated-protocol",
+          "def-qkd-abort-aware-composable-security",
+          "thm-qkd-composable-secrecy-sum-bound",
+          "def-qc-trace-distance",
+          "thm-qc-trace-norm-spectral-formula",
+          "thm-qc-trace-norm-unitary-invariance-and-positive-formula",
+          "def-qc-density-operator",
+          "def-qc-register-and-computational-basis"
+        ],
+        "justified_by": [],
+        "statement": "Let a finite protocol abort with probability 1/4 and, when it accepts, output the shared key 0 with probability one, with trivial transcript and a one-dimensional adversary system. Its correctness error is 0, its secrecy error is 3/8, and its abort-aware real-ideal trace distance is exactly 3/8.",
+        "strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {"title": "Christopher Portmann and Renato Renner, Cryptographic Security of Quantum Key Distribution (2014), §4.3", "url": "https://arxiv.org/pdf/1409.3525"},
+            {"title": "Joseph M. Renes, Quantum Information Theory, ETH Zürich lecture notes (HS2014; revised 4 February 2015), §8.3", "url": "https://edu.itp.phys.ethz.ch/hs15/QIT/renes_lecture_notes14.pdf"}
+          ]
+        },
+        "provenance": {"statement": "ai-generated", "proof": "ai-generated"},
+        "generation": {"role": "example"}
+      },
+      {
+        "id": "ex-qkd-secrecy-and-correctness-are-independent",
+        "kind": "example",
+        "title": "Secrecy and correctness are separate requirements",
+        "deps": [
+          "def-qkd-finite-authenticated-protocol",
+          "def-qkd-abort-aware-composable-security",
+          "thm-qkd-composable-secrecy-sum-bound",
+          "def-qc-trace-distance",
+          "thm-qc-trace-norm-spectral-formula",
+          "def-qc-density-operator",
+          "def-qc-register-and-computational-basis"
+        ],
+        "justified_by": [],
+        "statement": "For K={0,1} and no abort, the state with Alice's key uniform and independent of a trivial adversary but Bob's key always its complement has epsilon_sec=0, epsilon_cor=1, and real-ideal distance 1. Conversely, if both parties always output 0 and the adversary is trivial, then epsilon_cor=0 while epsilon_sec and real-ideal distance equal 1/2.",
+        "strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {"title": "Christopher Portmann and Renato Renner, Cryptographic Security of Quantum Key Distribution (2014), §4.3", "url": "https://arxiv.org/pdf/1409.3525"},
+            {"title": "Joseph M. Renes, Quantum Information Theory, ETH Zürich lecture notes (HS2014; revised 4 February 2015), §8.3", "url": "https://edu.itp.phys.ethz.ch/hs15/QIT/renes_lecture_notes14.pdf"}
+          ]
+        },
+        "provenance": {"statement": "ai-generated", "proof": "ai-generated"},
+        "generation": {"role": "example"}
+      }
+    ]
+  }
+]

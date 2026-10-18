@@ -6,8 +6,8 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: literature-derived
-deps: [def-simple-group, lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle, lem-normal-subgroup-containing-a-three-cycle-is-a-n, def-alternating-group, cor-sign-from-disjoint-cycle-structure]
+  proof: ai-altered
+deps: [ def-simple-group, lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle, lem-normal-subgroup-containing-a-three-cycle-is-a-n, def-alternating-group, cor-sign-from-disjoint-cycle-structure ]
 justified_by: []
 aliases: []
 landmark: true
@@ -15,6 +15,7 @@ proof_strategy: direct
 verification:
   precheck: pass
   audited: 2026-08-13
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/thm-alternating-group-is-simple-for-n-at-least-five.json
 sources:
   scraped: []
   references:
@@ -43,7 +44,7 @@ The alternating group $A_n$ is simple for every $n\ge5$.
 
 **Proof technique:** direct.
 
-1.1 The cycles $(1\,2\,3)$ and $(3\,4\,5)$ have sign $(-1)^2=+1$ by [F4], so they belong to $A_n$; they do not commute, so $A_n$ is nontrivial. [F4, algebra]
+1.1 Put $\alpha=(0\,1\,2)$ and $\beta=(2\,3\,4)$, whose entries lie in $\{0,\ldots,n-1\}$ since $n\ge5$. Both cycles have sign $(-1)^2=+1$ by [F4], so they belong to $A_n$. They do not commute: $(\alpha\beta)(2)=3$ whereas $(\beta\alpha)(2)=0$. Hence $A_n$ is nontrivial. [F4, algebra]
 
 1.2 Let $N\trianglelefteq A_n$. If $N$ is nontrivial, [F2] gives a $3$-cycle in $N$, and [F3] then gives $N=A_n$. [F2, F3]
 

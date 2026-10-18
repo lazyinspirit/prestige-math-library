@@ -1,0 +1,808 @@
+[
+  {
+    "order": 2516,
+    "id": "discrete-memoryless-channel-capacity",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Discrete Memoryless Channel Capacity",
+    "companion": "discrete-memoryless-channel-capacity-examples",
+    "requires": [
+      "f-divergences-renyi-and-hypothesis-testing"
+    ],
+    "items": [
+      {
+        "id": "def-channel-sequence",
+        "kind": "definition",
+        "title": "Channel sequences",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "dependency_level": 0,
+        "proof_obligations": [
+          "Use measurable input and output spaces and a probability kernel at each blocklength.",
+          "State that no consistency between different blocklengths is assumed."
+        ],
+        "statement": "For each integer $n\\ge1$, let $(\\mathcal X_n,\\mathcal A_n)$ and $(\\mathcal Y_n,\\mathcal B_n)$ be measurable spaces and let $W_n$ be a probability kernel from the first space to the second ([[def-measure-kernel-and-probability-kernel]]). The sequence $(W_n)_{n\\ge1}$ is a **channel sequence**, and $n$ is its blocklength. A length-$n$ transmission sends an input in $\\mathcal X_n$ and produces an output with conditional law $W_n$. No consistency between different blocklengths is assumed.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; this definition quantifies over supplied kernels and selects no versions."
+      },
+      {
+        "id": "def-discrete-memoryless-channel",
+        "kind": "definition",
+        "title": "Finite discrete memoryless channels",
+        "deps": [
+          "def-channel-sequence",
+          "def-finite-stochastic-kernel"
+        ],
+        "dependency_level": 1,
+        "justified_by": [
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic"
+        ],
+        "proof_obligations": [
+          "Specify the fixed finite alphabets and single-use transition kernel.",
+          "Define every blocklength kernel by the product formula and state the memoryless convention."
+        ],
+        "statement": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §8.7.1, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; all alphabets and products in this definition are finite."
+      },
+      {
+        "id": "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+        "kind": "lemma",
+        "title": "The DMC product laws are stochastic kernels",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-finite-stochastic-kernel"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Check nonnegativity of each product probability.",
+          "Factor the finite sum over the product output alphabet into the product of row sums."
+        ],
+        "statement": "For a finite DMC $W$ and every $n\\ge1$, the block formula $W^n(y^n\\mid x^n)=\\prod_{i=1}^n W(y_i\\mid x_i)$ is a stochastic kernel from $\\mathcal X^n$ to $\\mathcal Y^n$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §8.7.1, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; only finite products and finite sums occur."
+      },
+      {
+        "id": "def-discrete-memoryless-channel-information-capacity",
+        "kind": "definition",
+        "title": "Single-letter information capacity of a finite DMC",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-finite-probability-vector",
+          "def-it-finite-mutual-information"
+        ],
+        "dependency_level": 2,
+        "justified_by": [
+          "lem-discrete-memoryless-channel-capacity-is-attained"
+        ],
+        "proof_obligations": [
+          "Define the induced joint and output laws for every input probability vector.",
+          "Define capacity in nats per channel use and establish attainment on the finite input simplex."
+        ],
+        "statement": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this joint law, using [[def-it-finite-mutual-information]]. The **single-letter information capacity** is\n$$C(W):=\\sup_{P_X} I(P_X;W),$$\nmeasured in nats per channel use. The finite-dimensional maximum is attained, as proved in [[lem-discrete-memoryless-channel-capacity-is-attained]].",
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §§19.1–19.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §§8.7.1–8.7.2, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; the input simplex and all probability laws are finite-dimensional."
+      },
+      {
+        "id": "def-fixed-length-channel-code",
+        "kind": "definition",
+        "title": "Fixed-length codes for a finite DMC",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic"
+        ],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "Specify positive blocklength, finite message set, deterministic encoder, and deterministic decoder.",
+          "State that the channel output is governed by the product DMC kernel."
+        ],
+        "statement": "For a finite DMC $W$, a **length-$n$ code with $M$ messages** is a pair of maps $e:[M]\\to\\mathcal X^n$ and $d:\\mathcal Y^n\\to[M]$, where $n,M\\ge1$ and $[M]:=\\{1,\\ldots,M\\}$. A message $m$ is encoded as $e(m)$, passed through the block kernel $W^n$ of [[def-discrete-memoryless-channel]], and decoded as $d(Y^n)$. The encoder and decoder are deterministic; there is no feedback, and no input-cost constraint is imposed.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §§8.7.2–8.7.3, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; the message set and all code alphabets are finite."
+      },
+      {
+        "id": "def-discrete-memoryless-channel-information-density",
+        "kind": "definition",
+        "title": "Finite DMC information density",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-finite-stochastic-kernel",
+          "def-finite-probability-vector",
+          "def-it-finite-mutual-information",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 3,
+        "proof_obligations": [
+          "Define the log likelihood ratio only on the support of the induced joint law.",
+          "Define its block version and zero-support convention."
+        ],
+        "statement": "Given an input law $P_X$, let $Q_{P_X}=P_XW$ be its output law. The **information density** is\n$$\\imath_{P_X}(x;y):=\\ln\\frac{W(y\\mid x)}{Q_{P_X}(y)}$$\nwhen $P_X(x)W(y\\mid x)>0$, and is $-\\infty$ otherwise. For block sequences define $\\imath_{P_X}(x^n;y^n):=\\sum_{i=1}^n\\imath_{P_X}(x_i;y_i)$, with any sum containing $-\\infty$ equal to $-\\infty$. On the support of the induced joint law, both numerator and denominator are positive, and the value is finite.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §§19.1–19.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §8.7.4, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; the definition is on finite probability vectors."
+      },
+      {
+        "id": "lem-discrete-memoryless-channel-capacity-is-attained",
+        "kind": "lemma",
+        "title": "Finite DMC information capacity is attained",
+        "deps": [
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-discrete-memoryless-channel",
+          "def-finite-probability-vector",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-natural-logarithm",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-logarithm-slower-than-every-positive-power",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Express mutual information as output entropy minus average row entropy.",
+          "Prove continuity at zero coordinates and on the finite probability simplex.",
+          "Apply compactness and the extreme-value theorem to obtain a maximizing input law."
+        ],
+        "statement": "For every finite DMC $W$, the supremum $C(W)$ is a maximum: there is an input probability vector $P_X^*$ such that $I(P_X^*;W)=C(W)$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §§19.1–19.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §8.7.2, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; compactness is applied to a finite-dimensional simplex."
+      },
+      {
+        "id": "lem-discrete-memoryless-channel-n-letter-information-bound",
+        "kind": "lemma",
+        "title": "The n-letter mutual information of a DMC is at most nC",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-finite-stochastic-kernel",
+          "def-finite-probability-vector",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Use the finite entropy chain rule and monotonicity under conditioning.",
+          "Use the product channel law to identify each conditional output entropy.",
+          "Bound each single-letter mutual information by C(W)."
+        ],
+        "statement": "For every input probability vector on $\\mathcal X^n$ and output $Y^n$ generated by a finite DMC $W^n$, one has $I(X^n;Y^n)\\le nC(W)$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §§8.7.2, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the random variables and all sums have finite ranges."
+      },
+      {
+        "id": "def-fixed-length-channel-code-errors",
+        "kind": "definition",
+        "title": "Average and maximal error of a fixed-length code",
+        "deps": [
+          "def-fixed-length-channel-code",
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic"
+        ],
+        "dependency_level": 4,
+        "proof_obligations": [
+          "Define conditional error for each message.",
+          "Define average error for a uniform message and maximal error without a message prior."
+        ],
+        "statement": "For a length-$n$ code $(e,d)$, let\n$$e_m:=W^n\\{y^n:d(y^n)\\ne m\\mid e(m)\\}.$$\nIts **average error** is $\\varepsilon_{\\rm av}:=M^{-1}\\sum_{m=1}^M e_m$, corresponding to a uniform message, and its **maximal error** is $\\varepsilon_{\\max}:=\\max_{1\\le m\\le M}e_m$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §§8.7.2–8.7.3, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; errors are finite sums over messages and outputs."
+      },
+      {
+        "id": "lem-discrete-memoryless-channel-iid-information-density-converges",
+        "kind": "lemma",
+        "title": "IID DMC information density converges to mutual information",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-density",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-finite-stochastic-kernel",
+          "def-finite-probability-vector",
+          "def-it-finite-mutual-information",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Compute the one-letter mean from the finite mutual-information formula.",
+          "Use finite support for finite variance and prove the probability bound from the squared deviation."
+        ],
+        "statement": "Fix a finite DMC $W$ and input law $P_X$. If $(X_i,Y_i)_{i\\ge1}$ are IID with law $P_X(x)W(y\\mid x)$, then $n^{-1}\\imath_{P_X}(X^n;Y^n)\\to I(P_X;W)$ in probability.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §8.7.4, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the random variables have finite support."
+      },
+      {
+        "id": "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+        "kind": "lemma",
+        "title": "Capacity-achieving output laws bound every row divergence",
+        "deps": [
+          "def-discrete-memoryless-channel-information-capacity",
+          "lem-discrete-memoryless-channel-capacity-is-attained",
+          "def-discrete-memoryless-channel",
+          "def-finite-stochastic-kernel",
+          "def-finite-probability-vector",
+          "def-finite-kullback-leibler-divergence",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-natural-logarithm",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Prove every output symbol reachable from an input has positive mass under a capacity-achieving output law.",
+          "Differentiate mutual information along the simplex segment toward each point mass.",
+          "Identify the one-sided derivative as D(W(·|x)||Q*)−C(W) and use maximality."
+        ],
+        "statement": "Let $P_X^*$ attain $C(W)$ and let $Q^*:=P_X^*W$. If $W(y\\mid x)>0$, then $Q^*(y)>0$, and for every $x\\in\\mathcal X$,\n$$D(W(\\cdot\\mid x)\\|Q^*)\\le C(W).$$",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.1 and Chapter 22 §22.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 8, channel capacity and maximizing capacity",
+              "url": "https://web.mit.edu/6.441/spring05/lectures/6441Lecture8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the proof uses a one-dimensional path in a finite simplex."
+      },
+      {
+        "id": "def-discrete-memoryless-channel-operational-capacity",
+        "kind": "definition",
+        "title": "Average-error and maximal-error DMC capacities",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors"
+        ],
+        "dependency_level": 5,
+        "proof_obligations": [
+          "Define rates in nats per use from message counts and blocklength.",
+          "Define reliable average-error and maximal-error rates by vanishing corresponding error."
+        ],
+        "statement": "A rate $R\\ge0$ is **average-error achievable** for $W$ if there are length-$n$ codes for all sufficiently large $n$ with\n$$\\liminf_{n\\to\\infty}\\frac{\\ln M_n}{n}\\ge R,\\qquad \\varepsilon_{\\rm av}(n)\\longrightarrow0.$$\nIt is **maximal-error achievable** if the same condition holds with $\\varepsilon_{\\max}(n)\\to0$. Define $C_{\\rm av}(W)$ and $C_{\\max}(W)$ as the suprema of the respective achievable-rate sets. Rates use nats per channel use.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §§8.7.2–8.7.3, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used; capacity is defined by sequences of finite codes."
+      },
+      {
+        "id": "lem-discrete-memoryless-channel-average-to-maximal-expurgation",
+        "kind": "lemma",
+        "title": "Expurgation converts small average error to small maximal error",
+        "deps": [
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Show at least half the messages have individual error no more than twice the average.",
+          "Restrict to those messages and define a decoder whose error for a retained message cannot increase.",
+          "Bound the rate loss by ln 2 divided by blocklength."
+        ],
+        "statement": "Every length-$n$ code with average error $\\varepsilon_{\\rm av}$ has a subcode with at least $M/2$ messages and maximal error at most $2\\varepsilon_{\\rm av}$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §8.7.4, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the retained message set is finite."
+      },
+      {
+        "id": "thm-discrete-memoryless-channel-random-coding-achievability",
+        "kind": "theorem",
+        "title": "Random coding achieves every rate below finite DMC capacity",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "def-discrete-memoryless-channel-information-capacity",
+          "lem-discrete-memoryless-channel-capacity-is-attained",
+          "def-discrete-memoryless-channel-information-density",
+          "lem-discrete-memoryless-channel-iid-information-density-converges",
+          "def-finite-stochastic-kernel",
+          "def-finite-probability-vector"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Construct an IID random codebook and unique-threshold decoder.",
+          "Bound miss probability by the IID information-density law of large numbers.",
+          "Bound each independent false alarm using E exp(i)=1, Markov's inequality, and a union bound.",
+          "Select a deterministic codebook whose average error is no greater than the ensemble mean."
+        ],
+        "statement": "For every finite DMC $W$ and every $0\\le R<C(W)$, there are fixed-length codes with $\\liminf_{n\\to\\infty}n^{-1}\\ln M_n\\ge R$ and average error tending to zero.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §8.7.4, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; every random-code ensemble has finite support."
+      },
+      {
+        "id": "lem-discrete-memoryless-channel-information-density-concentration",
+        "kind": "lemma",
+        "title": "Uniform concentration around the capacity output divergence bound",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+          "def-finite-kullback-leibler-divergence",
+          "def-natural-logarithm",
+          "def-finite-stochastic-kernel",
+          "def-finite-probability-vector"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Bound the row-wise information-density variance uniformly over the finite input alphabet.",
+          "Use independence of channel outputs for a fixed input word and the squared-deviation tail inequality."
+        ],
+        "statement": "Let $P_X^*$ attain $C(W)$ and $Q^*=P_X^*W$. There is a finite constant $V\\ge0$ such that, for every $n\\ge1$, every $x^n\\in\\mathcal X^n$, and every $\\delta>0$, under output law $W^n(\\cdot\\mid x^n)$,\n$$\\Pr\\left[\\ln\\frac{W^n(Y^n\\mid x^n)}{(Q^*)^n(Y^n)}>n(C(W)+\\delta)\\right]\\le\\frac{V}{n\\delta^2}.$$\nThe likelihood ratio is evaluated only on the support of $W^n(\\cdot\\mid x^n)$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 8, maximizing DMC capacity",
+              "url": "https://web.mit.edu/6.441/spring05/lectures/6441Lecture8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all alphabets and variance sums are finite."
+      },
+      {
+        "id": "thm-discrete-memoryless-channel-average-error-converse",
+        "kind": "theorem",
+        "title": "Reliable average-error DMC rates do not exceed capacity",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "def-discrete-memoryless-channel-information-capacity",
+          "lem-discrete-memoryless-channel-n-letter-information-bound",
+          "thm-it-fano-inequality",
+          "def-it-finite-mutual-information",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Apply finite Fano to the uniform message and decoder output.",
+          "Show I(message; output)=I(channel input; output) for a deterministic encoder.",
+          "Apply the n-letter mutual-information bound and pass to the vanishing-error limit."
+        ],
+        "statement": "For any sequence of fixed-length codes over a finite DMC with average errors $\\varepsilon_{\\rm av}(n)\\to0$, one has $\\limsup_{n\\to\\infty}n^{-1}\\ln M_n\\le C(W)$.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 17 §17.3 and Chapter 19 §19.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §8.7.3, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the message and channel alphabets are finite."
+      },
+      {
+        "id": "thm-discrete-memoryless-channel-alphabet-scoped-strong-converse",
+        "kind": "theorem",
+        "title": "Strong converse for finite-alphabet DMCs",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "def-discrete-memoryless-channel-information-capacity",
+          "lem-discrete-memoryless-channel-capacity-is-attained",
+          "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+          "lem-discrete-memoryless-channel-information-density-concentration"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "For each decoding region, split the channel law at a log-likelihood threshold against the capacity-achieving output product law.",
+          "Use disjoint decoding regions to bound the reference-measure term by exp(threshold)/M.",
+          "Choose a threshold strictly above nC and below ln M, then use uniform concentration to show success tends to zero."
+        ],
+        "statement": "Let $W$ be a finite DMC with finite nonempty input and output alphabets and no input-cost constraint. For any sequence of length-$n$ codes with $\\liminf_{n\\to\\infty}n^{-1}\\ln M_n>C(W)$, the average success probability tends to zero; hence both average and maximal error tend to one.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 22 §22.1",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 8, maximizing capacity",
+              "url": "https://web.mit.edu/6.441/spring05/lectures/6441Lecture8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; the proof uses finite decoding regions and finite probability sums."
+      },
+      {
+        "id": "thm-discrete-memoryless-channel-capacity-formula",
+        "kind": "theorem",
+        "title": "Operational capacity formula for a finite DMC",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "def-discrete-memoryless-channel-operational-capacity",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-it-finite-mutual-information",
+          "thm-it-finite-kl-nonnegative-equality",
+          "lem-discrete-memoryless-channel-capacity-is-attained",
+          "lem-discrete-memoryless-channel-average-to-maximal-expurgation",
+          "thm-discrete-memoryless-channel-average-error-converse",
+          "thm-discrete-memoryless-channel-random-coding-achievability"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Combine the average-error converse and random-coding achievability to identify average-error capacity.",
+          "Use expurgation to identify maximal-error capacity, including the vanishing rate loss.",
+          "Use capacity attainment to replace the supremum by a maximum."
+        ],
+        "statement": "For every finite DMC $W$ with no input-cost constraint,\n$$C_{\\rm av}(W)=C_{\\max}(W)=C(W)=\\max_{P_X}I(P_X;W),$$\nwith rates and mutual information measured in nats per channel use.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §§19.1–19.2",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            },
+            {
+              "title": "Robert Gallager, Principles of Digital Communication I, Chapter 8 §§8.7.2–8.7.4, MIT OpenCourseWare",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communications-i-fall-2006/f6c75b427b022503f5c605db7de4d46f_book_8.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "axiom_use": "No choice axiom is used; all claims concern finite-alphabet codes and distributions."
+      }
+    ]
+  },
+  {
+    "order": 2517,
+    "id": "discrete-memoryless-channel-capacity-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Discrete Memoryless Channel Capacity — Examples",
+    "companion": "discrete-memoryless-channel-capacity",
+    "requires": [
+      "discrete-memoryless-channel-capacity"
+    ],
+    "items": [
+      {
+        "id": "ex-binary-symmetric-channel-capacity",
+        "kind": "example",
+        "title": "Capacity of the binary symmetric channel",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-capacity",
+          "thm-discrete-memoryless-channel-capacity-formula",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-natural-logarithm",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality",
+          "def-finite-probability-vector",
+          "def-finite-stochastic-kernel"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Compute the output law and conditional output entropy for an arbitrary Bernoulli input.",
+          "Upper-bound output entropy by ln 2 and show the uniform input attains it.",
+          "Check crossover endpoints 0, 1/2, and 1 under the 0 ln 0 convention."
+        ],
+        "statement": "The binary symmetric channel has input and output alphabets $\\{0,1\\}$; independently at each use, the output is the input bit flipped with probability $p\\in[0,1]$. Write\n$$h(p):=-p\\ln p-(1-p)\\ln(1-p),\\qquad 0\\ln0:=0.$$\nThe channel capacity is $\\ln2-h(p)$ nats per use, attained by a uniform input.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 8, Channel Capacity and Binary Symmetric Channels",
+              "url": "https://web.mit.edu/6.441/spring05/lectures/6441Lecture8.pdf"
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.3",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; all alphabets and sums are finite."
+      },
+      {
+        "id": "ex-binary-erasure-channel-capacity",
+        "kind": "example",
+        "title": "Capacity of the binary erasure channel",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-capacity",
+          "thm-discrete-memoryless-channel-capacity-formula",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-natural-logarithm",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality",
+          "def-finite-probability-vector",
+          "def-finite-stochastic-kernel"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "proof_obligations": [
+          "Compute H(X|Y) by separating received-symbol and erasure outputs.",
+          "Maximize the resulting mutual information over binary input laws.",
+          "Check erasure endpoints 0 and 1."
+        ],
+        "statement": "The binary erasure channel outputs the input bit with probability $1-\\epsilon$ and the erasure symbol $e$ with probability $\\epsilon$, independently at each use. For $\\epsilon\\in[0,1]$, its capacity is $(1-\\epsilon)\\ln2$ nats per use, attained by a uniform input.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "MIT 6.441 Information Theory, Lecture 8, Binary Erasure Channel",
+              "url": "https://web.mit.edu/6.441/spring05/lectures/6441Lecture8.pdf"
+            },
+            {
+              "title": "Yury Polyanskiy and Yihong Wu, Information Theory: From Coding to Learning, Chapter 19 §19.3",
+              "url": "https://people.lids.mit.edu/yp/homepage/data/itbook-export.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; all alphabets and sums are finite."
+      }
+    ]
+  }
+]

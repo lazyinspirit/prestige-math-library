@@ -3,21 +3,25 @@ id: ex-a-smooth-map-with-a-nonclosed-critical-value-set
 kind: example
 title: "A smooth map with a nonclosed critical-value set"
 status: published
+dependency_level: 2
 origin: session
 provenance:
   statement: ai-generated
   proof: ai-generated
 generation:
   role: example
-deps: [def-critical-locus-and-critical-value-set,
-       fs-the-set-of-critical-values-is-always-closed]
+deps: [ def-critical-locus-and-critical-value-set, fs-the-set-of-critical-values-is-always-closed ]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/ex-a-smooth-map-with-a-nonclosed-critical-value-set.json
 sources:
   scraped: []
   references:

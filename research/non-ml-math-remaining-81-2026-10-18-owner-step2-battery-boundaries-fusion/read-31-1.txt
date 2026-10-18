@@ -1,0 +1,220 @@
+
+ITEM def-qa-37-certified-matrix-input
+
+
+## Definition
+
+Fix $d\in\{2,5,8\}$ and put
+$$SU(d)=\{T\in M_d(\mathbb C):T^*T=I_d,\ \det T=1\}.$$
+A **certified $SU(d)$ matrix input** is an exact target $T\in SU(d)$ together
+with a deterministic Cauchy-name procedure which, on unary input $1^b$ for
+$b\ge1$, returns a rational complex matrix $Q_b$ such that each real and
+imaginary coordinate of each entry differs from the corresponding coordinate
+of $T$ by at most $2^{-b}$. The interface also specifies a worst-case bit-time
+bound $t(b)$ for the query. A **polynomial-time name** has
+$t(b)\le(b+1)^c$ for some fixed integer $c\ge1$. The target is the matrix
+specified by the entire Cauchy name; if two targets satisfy the same bounds,
+every coordinate difference is at most $2^{1-b}$ for all $b$, hence is zero.
+No individual $Q_b$ is required to be unitary or special unitary. A requested tolerance is a positive binary
+rational and its numerator/denominator encoding length is recorded
+separately. For $d=2$ this specializes the unary-name convention of
+[[def-qc-effective-unitary-matrix-input]]. For $d=5,8$ it is the same
+entrywise interface in the fixed block dimensions; no dimension is input to
+an algorithm as an unbounded parameter.
+
+ITEM lem-qa-37-product-error
+
+
+## Statement
+
+Let $U_1,\ldots,U_m$ and $V_1,\ldots,V_m$ be unitary operators on the same
+finite-dimensional Hilbert space, and suppose
+$\|U_j-V_j\|_{\rm op}\le\epsilon_j$ with $\epsilon_j\ge0$. With empty
+products equal to the identity and empty sums equal to zero,
+$$\|U_m\cdots U_1-V_m\cdots V_1\|_{\rm op} \le\sum_{j=1}^m\epsilon_j.$$
+
+## Facts & Assumptions
+
+**Given:** Two finite lists of unitaries on one finite-dimensional Hilbert
+space and their individual error bounds.
+
+[F1] The operator norm is induced by the Hilbert-space norm, and a unitary
+preserves that vector norm.
+[[def-operator-norm-on-a-finite-dimensional-inner-product-space]]
+[[def-linear-isometry-and-orthogonal-or-unitary-operator]]
+
+[F2] The operator norm is submultiplicative. For a unitary $Q$, its norm and
+the norm of $Q^*$ are both $1$ by [F1], so submultiplicativity gives
+$\|QX\|_{\rm op}=\|X\|_{\rm op}=\|XQ\|_{\rm op}$ by applying the same
+upper bound to $Q$ and the reverse bound to $Q^*$.
+[[cor-operator-norm-submultiplicative-and-t-star-t-identity]]
+
+## Proof
+
+1.1 If $m=0$, both products are $I$, so their difference is zero and the empty sum is zero. This is the claimed bound in the empty case. [given, algebra]
+
+2.1 For $m\ge1$, insert and subtract mixed products to obtain $U_m\cdots U_1-V_m\cdots V_1 =\sum_{j=1}^m U_m\cdots U_{j+1}(U_j-V_j)V_{j-1}\cdots V_1.$ Expansion cancels adjacent terms and leaves exactly the left side. Each outer product is unitary and has norm one by [F1]; [F2] and the unitary invariance derived there show that each summand has norm at most $\epsilon_j$. The operator-norm triangle inequality then gives the stated sum. [F1, F2, given, algebra] ∎
+
+ITEM thm-qa-37-output-distribution-error
+
+
+## Statement
+
+Let $U,V$ be unitary operators on a finite-dimensional Hilbert space, let
+$\rho$ be any density operator, and let $\mathsf M$ be any finite POVM. If
+$\|U-V\|_{\rm op}\le\epsilon$, then the outcome distributions obtained by
+measuring $U\rho U^*$ and $V\rho V^*$ have total-variation distance at most
+$\epsilon$.
+
+## Facts & Assumptions
+
+**Given:** Finite-dimensional unitaries $U,V$, a density operator $\rho$, a
+finite POVM, and $\|U-V\|_{\rm op}\le\epsilon$.
+
+[F1] For unit vectors $u,v$, pure-state trace distance is at most
+$\|u-v\|$. [[lem-qa-21-pure-state-trace-distance-from-vector-error]]
+
+[F2] Trace distance is one half the trace norm of the density-operator
+difference. [[def-qc-trace-distance]]
+
+[F3] The trace norm obeys the triangle inequality and positive homogeneity.
+[[thm-qc-trace-norm-duality-and-norm-properties]]
+
+[F4] A finite POVM's total-variation change is bounded by trace distance.
+[[thm-qc-measurement-variation-at-most-trace-distance]]
+
+[F5] Every finite-dimensional density operator has an orthonormal spectral
+decomposition; its eigenvalues are nonnegative and sum to one.
+[[thm-complex-spectral-theorem-for-normal-endomorphisms]]
+[[def-qc-density-operator]]
+
+[F6] The operator norm is induced by the Hilbert-space norm, and a unitary
+preserves that vector norm.
+[[def-operator-norm-on-a-finite-dimensional-inner-product-space]]
+[[def-linear-isometry-and-orthogonal-or-unitary-operator]]
+
+## Proof
+
+1.1 First let $\rho=|\psi\rangle\langle\psi|$ be pure with $\|\psi\|=1$. Then $U\psi,V\psi$ are unit vectors by [F6] and $\|U\psi-V\psi\|=\|(U-V)\psi\|\le\epsilon$ by the operator-norm definition in [F6]. By [F2] and the pure-state estimate in [F1], the output trace distance is at most $\epsilon$. [F1, F2, F6, given, algebra]
+
+2.1 For a general density operator, [F5] gives $\rho=\sum_jp_j|\psi_j\rangle\langle\psi_j|$ with $p_j\ge0$ and $\sum_jp_j=1$. Unitary conjugation preserves this mixture. The trace-norm triangle inequality and homogeneity [F3], applied to the sum of output projector differences, bound the output trace distance by $\sum_jp_j\epsilon=\epsilon$ using step 1.1. [F2, F3, F5, step 1.1, algebra]
+
+3.1 Apply the POVM variation bound [F4] to the two output density operators from step 2.1. Their total variation distance is at most their trace distance, hence at most $\epsilon$. [F4, step 2.1] ∎
+
+ITEM def-qa-37-anyon-task-and-promise
+
+
+## Definition
+
+Work in a fixed unitary braided fusion category $\mathcal C$ with the
+representative set $\operatorname{Irr}(\mathcal C)$ of
+[[def-qc-tqc-fusion-tree-basis]]. Fix ordered inputs
+$a_1,\ldots,a_n\in\operatorname{Irr}(\mathcal C)$, $n\ge1$, a
+parenthesized fusion tree, and a total charge
+$c\in\operatorname{Irr}(\mathcal C)$ for which the fusion space is nonzero. Simple charges, multiplicity bases, and
+admissible fusion-tree vectors have the conventions of
+[[def-qc-tqc-fusion-tree-basis]]. An encoded input subspace is specified by a
+fixed-charge isometry as in [[def-qc-tqc-fixed-charge-encoding]]. Each task
+instance supplies either an initial unit vector in that subspace as an abstract
+quantum input, or a finite state-preparation procedure whose specified output
+is that vector and whose preparation operations and ancillas are recorded.
+The instance also gives a nonnegative rational error threshold and specifies
+the correctness relation and metric to which it applies.
+
+A **finite anyon decision task** is a promise pair $(Y,N)$ of disjoint sets of
+binary strings with domain $D=Y\cup N$, together with a finite encoding of
+admissible fusion-tree input labels; a solver must answer yes on $Y$ and no on
+$N$, with no obligation outside $D$. A **finite anyon search task** is a domain
+$D$ and a finite-string witness relation, with a valid witness required only
+for encoded inputs in $D$. The input record states the number and order of
+strands, the finite alphabet of positive and inverse Artin generators
+available to the solver, any prescribed finite braid word, and the finite set
+of adjacent fusion-measurement locations.
+For distinct input charges, an adjacent exchange has the typed unitary
+F/R action from the current ordered-list fusion space to the space for the
+list with those charges exchanged; track that list after every generator.
+These colored maps and their Artin relations are supplied by
+[[thm-qc-tqc-gauge-covariance]]. If a single-space $B_n$ representation is
+required for the physical-interface record
+[[def-qc-tqc-physical-braid-interface]], use the finite orthogonal direct
+sum of fusion spaces over all distinct orderings of the fixed input
+multiset, with the same total $c$. Each generator maps each summand to its
+exchanged-list summand by the typed unitary; its inverse reverses that
+map. The colored Artin relations on each summand give the relations on
+the direct sum, hence a unitary $B_n$ action. Record the occupied summand
+and interpret measurements in its declared fusion-tree basis. Identical
+charges give the usual single fixed-space action. The physical-interface
+record specifies the mathematical action and separately states its
+physical realization hypotheses. The
+state-preparation field is an abstract task input and does not assert that a
+physical device prepares the state or realizes the braid. Input length and
+correctness-on-promises follow [[def-qa-task-and-promise-domain]].
+
+ITEM def-qa-37-fusion-input-encoding
+
+
+## Definition
+
+In the unitary braided fusion category $\mathcal C$ fixed by
+[[def-qa-37-anyon-task-and-promise]], use its fixed representative set
+$\operatorname{Irr}(\mathcal C)$. Fix $n\ge1$, ordered inputs
+$a_1,\ldots,a_n\in\operatorname{Irr}(\mathcal C)$, a total charge
+$c\in\operatorname{Irr}(\mathcal C)$ with nonzero fusion space, and
+one parenthesized binary tree. Every charge label below belongs to this
+same representative set. An **encoded fusion input** consists of the
+finite tree shape, a simple-charge label on each internal edge, and a
+multiplicity-basis index at each trivalent vertex. A label is **admissible**
+exactly when every chosen vertex index belongs to the specified basis of its
+multiplicity space $V_{xy}^z$; the allowed local vertex data and resulting
+orthonormal fusion-tree vectors are those of
+[[def-qc-tqc-fusion-tree-basis]]. The input encoding uses fixed self-delimiting
+binary codes for charge labels and nonnegative multiplicity indices, with
+out-of-range labels rejected as invalid encodings. It also records the total
+charge and the selected computational subspace isometry required by
+[[def-qa-37-anyon-task-and-promise]], as in
+[[def-qc-tqc-fixed-charge-encoding]]. The tree labels and isometry are finite
+classical data; they do not themselves specify or prepare the initial encoded
+quantum state, which is the separate state/preparation field in the task
+record.
+
+ITEM def-qa-37-resource-cost-model
+
+
+## Definition
+
+For a finite anyon solver instance and one run, record separately the tuple
+$$\bigl(L_{\rm in},\ N_{\rm any},\ |b|,\ N_{\rm prep},\ N_{\rm anc},\ N_{\rm meas},\ B_{\rm out},\ b_{\max},\ t_{\rm cl},\ T_H,\ \epsilon_{\rm op},\epsilon_{\rm tr},\epsilon_{\rm meas},\ell_{\rm leak},\ p_{\rm leak},\ N_{\rm phase},\ t_{\rm phase}\bigr).$$
+Here $L_{\rm in}$ is the complete finite classical input-description bit
+length, including the declared task, state/preparation descriptions when
+classically encoded, and tolerance descriptions; a directly supplied quantum
+input is not assumed to have a finite classical coordinate description;
+$N_{\rm any}$ is the number of ordered simple-charge strand labels in the
+fusion-space instance; and $|b|$ is the number of braid-generator occurrences
+(inverse generators count as one). $N_{\rm prep}$ counts elementary
+operations in the declared preparation procedure, while $N_{\rm anc}$ counts
+the ancillary anyons or other physical ancilla systems used by preparation or
+computation. If the initial state is supplied directly as an abstract quantum
+input with no preparation interface, $N_{\rm prep}$ is “not applicable”, not
+silently set to zero; $N_{\rm anc}$ still records any declared solver ancillas
+(zero if none, or “not applicable” if no physical ancilla model is supplied).
+$N_{\rm meas}$ is the number of fusion measurements,
+and $B_{\rm out}$ is the total bit length of their classical outcome record
+under its declared finite encoding (zero when no measurement occurs). The
+largest unary precision query to a certified matrix name is $b_{\max}$; $t_{\rm cl}$
+is the classical bit time used by search and postprocessing. $T_H$ is the total
+Hamiltonian evolution time over the run in the declared physical time unit;
+it is “not applicable” for an abstract braid-only model without Hamiltonian
+evolution. The error coordinates $\epsilon_{\rm op},\epsilon_{\rm tr},
+\epsilon_{\rm meas},\ell_{\rm leak},p_{\rm leak}$ are respectively a stated
+operator-norm approximation bound, an independent in-band transport bound,
+an implementation-to-ideal-measurement total-variation bound, and leakage
+amplitude and probability bounds. $N_{\rm phase},t_{\rm phase}$ count phase
+corrections and their classical control cost. Circuit description and
+elementary wire costs follow [[def-qc-circuit-cost-model]], while classical
+input bit cost follows [[def-qa-classical-bit-cost]] and finite nonoracle
+gates follow [[def-qa-nonoracle-gate-cost]]. An inapplicable coordinate is
+marked “not applicable”; it is not assigned value zero. Unless an interface
+explicitly states a bound, no braid length, preparation operation, ancilla,
+matrix precision, measurement, Hamiltonian time, search step, or phase
+correction is free. The tuple is a bookkeeping convention; it does not assert
+any of its error or runtime bounds.

@@ -24,6 +24,7 @@ items:
   - lem-first-connective-complex-k-theory-postnikov-invariant-is-integral-sq-three
   - lem-ku-representability-and-skeletal-postnikov-d-three-comparison
   - thm-first-possible-complex-k-ahss-differential-is-integral-sq-three
+  - lem-reduction-of-the-integral-bockstein-is-the-first-steenrod-square
 examples: []
 ---
 
@@ -53,3 +54,6 @@ extension data, and the page ends with the complex $K$-theory application: the
 $K$-AHSS has $d_2=0$ and $d_3=\beta_{\mathbb Z}Sq^2\rho_2$, obtained from the
 Bott-compatible representing spectrum, its connective cover and the first
 Postnikov invariant of the $ku$ representing spaces.
+
+The integral Bockstein reduces to the first Steenrod square; the companion
+examples use this identity in their concrete calculation.

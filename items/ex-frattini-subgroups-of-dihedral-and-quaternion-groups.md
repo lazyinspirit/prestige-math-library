@@ -3,6 +3,7 @@ id: ex-frattini-subgroups-of-dihedral-and-quaternion-groups
 kind: example
 title: "The Frattini subgroups of the dihedral and quaternion groups of order eight"
 status: published
+dependency_level: 7
 origin: session
 provenance:
   statement: ai-altered
@@ -14,10 +15,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/ex-frattini-subgroups-of-dihedral-and-quaternion-groups.json
 sources:
   scraped: []
   references:
@@ -50,6 +51,6 @@ For the dihedral group of order eight and $Q_8$, the Frattini subgroup has order
 
 **Proof technique:** direct.
 
-1.1 In $D$, $(r^i)^2=r^{2i}$ and $(r^is)^2=1$, so $D^2=\langle r^2\rangle$. In $Q_8$, the squares are $1$ and $-1$, with every noncentral element squaring to $-1$, so $Q_8^2=\{1,-1\}$. The commutators of [F1] give the same two subgroups: $[r,s]=r(sr^{-1}s^{-1})=r\cdot r=r^2$ and every commutator of $D$ is a power of $r^2$, so $D'=\langle r^2\rangle$; and $[i,j]=iji^{-1}j^{-1}=k(-i)(-j)=kij=k^2=-1$, so $Q_8'=\{1,-1\}$. [given, L2, F1, algebra]
+1.1 In $D$, $(r^i)^2=r^{2i}$ and $(r^is)^2=1$, so $D^2=\langle r^2\rangle$. In $Q_8$, the squares are $1$ and $-1$, with every noncentral element squaring to $-1$, so $Q_8^2=\{1,-1\}$. The commutator upper bounds follow from the same normal forms and table. For $x=r^as^b$ and $y=r^cs^d$, with $b,d\in\{0,1\}$, the relation $sr^c=r^{-c}s$ gives $xy=r^{a+(-1)^bc}s^{b+d}$ and $yx=r^{c+(-1)^da}s^{b+d}$. Thus $[x,y]=xy(yx)^{-1}=r^{a(1-(-1)^d)+c((-1)^b-1)}\in\langle r^2\rangle$. Also $[r,s]=r(sr^{-1}s^{-1})=r\cdot r=r^2$, so [F1] gives $D'=\langle r^2\rangle$. In $Q_8$, central signs and the table give $uv=vu$ or $uv=-vu$ for every $u,v\in\{1,i,j,k\}$, hence for all signed elements. Therefore every commutator is $1$ or $-1$. Conversely $[i,j]=iji^{-1}j^{-1}=k(-i)(-j)=kij=k^2=-1$, so [F1] gives $Q_8'=\{1,-1\}$. [given, L2, F1, algebra]
 
 2.1 Apply [L1] to step 1.1. Each quotient has order four and exponent two, with the classes of $r,s$ and of $i,j$ respectively as two-vector bases. Thus both quotients are $(\mathbb Z/2)^2$, and [F2] gives generator rank two. [step 1.1, L1, L2, F2, algebra] ∎

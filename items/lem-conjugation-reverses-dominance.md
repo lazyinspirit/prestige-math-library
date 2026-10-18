@@ -22,6 +22,7 @@ sources:
 verification:
   audited: 2026-09-27
   precheck: pass
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/published-recording/receipts/lem-conjugation-reverses-dominance.json
 ---
 
 ## Statement
@@ -49,4 +50,4 @@ $$\lambda\unrhd\mu\qquad\Longleftrightarrow\qquad\mu'\unrhd\lambda'.$$
 
 3.1 Conversely assume $\mu'\unrhd\lambda'$. The partitions $\lambda'$ and $\mu'$ of $n$ are a pair of partitions of the same integer, so the implication of step 2.1 applies to them and yields $(\lambda')'\unrhd(\mu')'$; by the involution $(\lambda')'=\lambda$ and $(\mu')'=\mu$ of [L3] this is $\lambda\unrhd\mu$. [step 2.1, L3]
 
-4.1 Step 2.1 proves the forward implication and step 3.1 the reverse one, so for all partitions $\lambda,\mu\vdash n$ one has $\lambda\unrhd\mu$ if and only if $\mu'\unrhd\lambda'$. ∎ [step 2.1, step 3.1]
+4.1 Step 2.1 proves the forward implication and step 3.1 the reverse one, so for all partitions $\lambda,\mu\vdash n$ one has $\lambda\unrhd\mu$ if and only if $\mu'\unrhd\lambda'$. [step 2.1, step 3.1] ∎

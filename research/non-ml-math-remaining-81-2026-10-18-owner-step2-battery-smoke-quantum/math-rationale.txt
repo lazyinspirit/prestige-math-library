@@ -1,0 +1,141 @@
+Quantum finite-smoke repair proposal — non-ml-math-remaining-81-2026-10-18
+
+Scope and installation
+All 27 assigned actual source files were read, including their full statements,
+Facts, proofs/verifications, and authored finite-smoke rows. Canonical source,
+contracts, and tools were not changed. The proposed ES module has no imports,
+filesystem access, package dependencies or production-run side effects. Export:
+frontier81QuantumChecks. Root can place it in tools/ and import/spread that export
+in tools/finite-smoke.mjs, checking duplicate names against other proposals.
+
+row-patches.json contains one guarded field replacement per assigned item.
+Compare current contracts[id].finite_smoke deeply to before, then replace only
+that field with after. All authored input/calculation/result/id fields survive.
+The exact source excerpt is in asserts; the fixed selector is in fixture. Source
+hashes record the inspected content. A source change requires renewed inspection,
+not overwriting concurrent source work. make-row-patches.py constructs proposals
+only, and never writes canonical files.
+
+Every fixture rejects absent or wrong fixture names, unknown model-parameter
+keys, null and nonobjects. Models are fixed rather than inferred from descriptive
+input prose. Floating arithmetic tolerance is absolute 1e-11 on these small
+bounded real matrices; binary incidence, ranks, subset enumeration and rational
+base-2 exponents use exact integer arithmetic within JavaScript's safe range.
+A finite pass is not a proof of an operator theorem, capacity theorem, asymptotic
+limit, categorical coherence, or general category existence.
+
+Item-by-item computational rationale (suffix of frontier81-quantum-*):
+
+1. gentle: rho=1, Lambda=1 or 0. Compute the unnormalized operation directly;
+   disturbance is absolute scalar difference, 0 or 1; bound is 0 or 2.
+2. sqrt-order: A=0, B=1. Recompute square roots and their squares, positivity
+   and ordered difference. This is precisely the authored singular endpoint.
+3. hayashi-nagaoka: (S,T)=(0,0),(1,0),(0,1). Support inverse is zero at zero;
+   independently evaluate both sides to obtain (1,2),(0,0),(1,6).
+4. entropy-zero: spectral entropy sum at (1) and (1,0) uses explicit zero-log
+   extension. Both sums vanish, without calling a continuity theorem.
+5. packing-one: M=1, d=D=1, u=0,1/4,1. Generate the message-pair index sum;
+   there is no competing index. Direct square-root POVM for a sole scalar
+   output has error 0, and the computed remaining bound is 2(u+2 sqrt u).
+6. schmidt-pure: spectrum (1,0,0), M=1. Realize a physical encoder by E_j=<j|
+   and decoder D=|0>. Composite K_j=|0><j| gives fidelity sum 1. Independently
+   sum the top M eigenvalues, obtaining 1. This realizes the padded pure case.
+7. typical-pure: rho=[1], delta=1/4, n=1..8. Enumerate its only positive
+   eigenword; surprisal 0 lies in the typical window, and mass=rank=1.
+8. schumacher-pure: rho=diag(1,0), delta=1/4, n=1..8. Enumerate all 2^n
+   eigenvalues, omit zero probabilities from surprisal, select rank-one
+   support. The authored construction uses one extra flag: M=2 and rate
+   ln(2)/n. The retained branch has fidelity contribution mass^2=1. The
+   check does not falsely assert that the construction uses M=1, or infer
+   an asymptotic convergence theorem from eight block lengths.
+9. hsw-single: sole alphabet symbol at four spectra (1),(1,0),(1/2,1/2),
+   (1/4,3/4). Directly form the ensemble average and entropy difference,
+   which vanishes. One-message decoding by effect I has outcome mass 1.
+10. qubit-rates: spectra (p,1-p), p=0,1/2,1. Recompute the spectral entropy
+    and divide by ln 2 for qubit units: (0,ln2,0)/(0,1,0).
+11. fixed-povm: form X basis vectors and Z basis inputs; square inner products
+    and multiply by input probability 1/2. All four joint entries are 1/4.
+    Marginals and mutual-information sum are independently recomputed; I=0
+    strictly below the average-state spectral Holevo value ln2.
+12. binary-pure: c=0,1. Construct the output vector (c,sqrt(1-c^2)), form its
+    pure projector and average with |0><0|, then compute eigenvalues through
+    the 2x2 characteristic discriminant, yielding Holevo ln2 or 0.
+13. toric-inventory: generate 18 edges from modulo-3 endpoints, derive star
+    supports by searching actual endpoints, and face supports from the
+    oriented square formula. Verify 9 vertices/stars, 9 faces, 18 edges,
+    four distinct edges per support, and distinct edge endpoints.
+14. toric-ranks: Gaussian elimination over F2 gives each 9x18 rank 8. Enumerate
+    all 512 row subsets of each family: only empty/full sums vanish.
+15. toric-commutation: all 81 star-face intersection sizes are 0 or 2; for
+    each of 18 coordinates count exactly two star and two face occurrences.
+16. toric-dimension: recompute ranks and commutation, use separate X and Z
+    coordinates, and compute 2^(18-(8+8))=4. No huge Hilbert matrix is built.
+17. toric-loops: generate all four declared coordinate supports, verify exact
+    intersection counts I2, commutation with relevant checks, and exclusion
+    from explicitly generated opposite-type stabilizer support spans.
+18. toric-gap: enumerate every even-parity 9-bit star and face sign pattern:
+    256^2-1=65,535 nonzero pairs, at couplings (1,1),(1,2),(3,1),(1/2,3/4).
+    Minimum of directly computed 2 Je ne+2 Jm nm is 4 min(Je,Jm). For every
+    single edge, calculate its star/face syndrome to verify the two-defect
+    attainability witnesses. No claim of checking every real coupling.
+19. toric-worked: repeat actual inventory/rank/total-relation/logical tests,
+    then XOR successive h00,h10,h20 edges and compute star syndromes from
+    dot products. Endpoints are {q00,q10}, {q00,q20}, then empty.
+20. planar-toric: independently construct the planar d=3 relative chain
+    maps from the published supplier definition, deleting rough vertical
+    edges and rough vertices. Enumerate all 262,144 supports for each
+    18-qubit CSS model. Among commuting supports outside stabilizer spans,
+    minimum pure Z/X weights are (3,4) planar and (3,3) toric. Computed
+    check ranks yield code dimensions 2 and 4, respectively. This checks
+    actual relative/periodic code geometry, not only theorem substitution.
+21. fusion-measurement: apply two basis projections to the authored state
+    (sqrt(3/5),sqrt(2/5)) and endpoints (1,0),(0,1). Compute branch norms,
+    probabilities, normalized nonzero states, and zero projected vectors.
+    The zero outcome receives no normalized state.
+22. controlled-phase: multiply diagonal controlled-I and controlled-(-I)
+    matrices by |+0>, apply X-basis measurement on control, and recompute
+    laws (1,0),(0,1), whose total variation distance is 1.
+23. b6-identity: start empty word products as identity in dimensions 5,8,
+    compute determinant-corrected identity target, restrictions via explicit
+    first-four-coordinate embeddings, and complementary projection times
+    output. Block/logical error and leakage vanish; exponent zero has phase 1.
+    Identity is basis independent, so standard embedding coordinates are a
+    faithful finite model for this identity-only boundary case.
+24. sk-budget: compute log2 exponents exactly by a rational recurrence:
+    (a/b) -> (12b+3a)/(2b). Levels are -13,-27/2,-57/4; first <=-14 is J=2,
+    and 5^J=25. Check the authored min allocation at M=1,2,10 independently.
+25. multiplicity-two: conditional on the authored split-space basis, enumerate
+    the two complete labels with fixed surrounding labels and distinct local
+    mu indices. Their coordinate basis Gram matrix is identity and rank 2.
+    This does not assert existence of a fusion category with a chosen rule.
+26. ising-periodic: apply D fusion adjacency to all nine length-two cyclic
+    label pairs from {D,1,eta}. Four satisfy both transitions, two per sector.
+    Compute cyclic-shift permutation, which exchanges sectors and squares
+    to identity. No categorical F/R coherence inference is made.
+27. fib-projector: form numerical phi,u,v and the actual F matrix; compute
+    F^T F, F^T P1 F, square, determinant, trace, and P1 P2 P1. This checks
+    unitarity, displayed P2, idempotence, rank 1, and factor phi^-2 on the
+    authored two-site 2x2 block. The source's richer three-site 3x3 block
+    is preserved; this authored finite selector asks for the two-channel block.
+
+Isolated validation
+Run from repository root:
+  node research/non-ml-math-remaining-81-2026-10-18-owner-step2-battery-smoke-quantum/isolated-tests.mjs
+Result: 27/27 positive fixtures; 108/108 bad fixture/key/shape rejections;
+27 exact assertion/current-row guard checks; and 27/27 injected arithmetic,
+incidence, projector, branch, or indexing defects detected. The mutation tests
+alter independent computations while retaining expected invariants. Report:
+isolated-results.json. No full registry self-test, native gate, or production
+validator was run.
+
+Source proof issue reported to root (not repaired here)
+lem-it-hayashi-nagaoka-finite-operator-inequality step 2.1's last two sentences
+combine an inequality containing +I-P with I-P <= 2(I-S). Taken literally,
+that substitution yields a coefficient 4 for I-S, not the claimed 2. The
+statement is sound and the earlier proof supplies the missing block argument.
+Minimal repair: after establishing S=T=0 on ker X, note self-adjointness makes
+both S and T preserve PH and ker X. On PH, the support inverse calculation
+already gives the claimed inequality. On ker X, its LHS is I and RHS is 2I.
+The direct sum gives the statement. This is a proof-only correction and changes
+no supplier Statement or Definition and no consumer interface. Root was notified
+promptly and owns source editing, layout, rehashing, and any consumer recertification.

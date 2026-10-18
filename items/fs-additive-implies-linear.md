@@ -3,6 +3,7 @@ id: fs-additive-implies-linear
 kind: false-statement
 title: "FALSE: every additive $f : \\mathbb{R} \\to \\mathbb{R}$ is of the form $x \\mapsto cx$ for a single real $c$"
 status: published
+dependency_level: 4
 origin: session
 provenance:
   statement: literature-derived
@@ -16,12 +17,11 @@ short: "additive does not imply linear"
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-09
-    scope: published-audit
-    delegated_by: owner
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/fs-additive-implies-linear.json
 sources:
   scraped: []
   references:

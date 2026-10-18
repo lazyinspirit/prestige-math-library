@@ -1,0 +1,223 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "13",
+  "input_sha256": "c7f3b34dc8a7ef86a37e42498266d95bcbf10fabe5fd5ddee2d4b09e84534d65",
+  "decisions": [
+    {
+      "id": "lem-parallel-awgn-cost-constrained-achievability",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "bba54bcccef9c7e9d47e8f21cb0ecc82f47b0816a0036de0b6b35f6540423006",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 and step 1.1 overstate the cited Statement: convergence in probability alone supplies no moment claims. The supplier proof step 2.1 does establish those Gaussian moments, but they are unnecessary here. Replaced both assertions by exactly its stated normalized-information-density convergence; threshold decoding still gives vanishing ensemble error, independently of the cost-moment calculation in step 2.2.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/24fb44b6a101e847c32ffe38bbeeea6e_MIT6_441S16_chapter_17.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "def-finite-dmc-feedback-code",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "7dac7c666bca0577edb9920fbbd6cd0a3f9726118eb155a6cbea6653d67abc46",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "M is the fixed message count, so the original event compares the decoder to a constant rather than to the transmitted message. A noiseless binary identity code with M=2 has original error 1/2 although its actual decoding error is zero; a constant decoder outputting M has original error zero. This logically invalidates the defined reliability criterion. Introduced U uniform on [M], specified X_t=f_t(U,Y^{t-1}) and conditional path law, and corrected the error to Pr[g(Y^n) ne U], preserving the count, costs, causal maps and capacity convention.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/a5ff16d929efde1d8313e12e372aa94b_MIT6_441S16_chapter_21.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-parallel-awgn-cost-constrained-achievability",
+      "disposition": "repaired",
+      "post_sha256": "aeb35ff4d11854545d344a8e643843b77809c7abb4b914ed1d790a19fb52bc10",
+      "review_context_sha256": "7069b3375bdc04b0b9236e61e073304e24e5ba08f2f0ab49b099f381416a60d2",
+      "reason": "Reviewed all four steps and actual cited interfaces: choose R+2delta<I(p), apply convergence in probability and the density threshold bound, compute Var(sum X_j^2)=2 sum p_j^2 from fourth moments and independent factorization, and use strict power slack and pruning. Zero-rate zero-input codes and zero-variance branches are valid; orthogonal maps preserve feasibility and decoding. Only the surplus information-density moment attribution was removed; Statement, dependencies, AC and rate range are unchanged. The unassigned Gaussian feedback-definition notation defect is separately escalated in repair_notes.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/24fb44b6a101e847c32ffe38bbeeea6e_MIT6_441S16_chapter_17.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "def-finite-dmc-feedback-code",
+      "disposition": "repaired",
+      "post_sha256": "924474bb942df351375fd369638cf588b4d7d9e4912689a1899e5427f49d3a86",
+      "review_context_sha256": "0eab35016a1c0d8cda80043d25226ef5809a41d276ae75df356dc267d49bba0d",
+      "reason": "Checked the complete Definition and five actual prerequisite interfaces. Successive sums of the finite causal row probabilities normalize the conditional path law for each U=m. Averaging over uniform U gives the ordinary code error and expected cost when histories are ignored. M=1, empty initial history, feasible minimum-cost budgets, nats and all-sufficiently-large-blocklength/liminf conventions are preserved. The repaired error compares the decoded and transmitted random messages. The direct theorem consumer needs only proof-notation clarification, routed separately; its capacity claim remains valid under the corrected definition.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/a5ff16d929efde1d8313e12e372aa94b_MIT6_441S16_chapter_21.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-feedback-does-not-increase-cost-constrained-dmc-capacity"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-parallel-awgn-cost-constrained-achievability",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "reason": "F2 and step 1.1 overstate the cited Statement: convergence in probability alone supplies no moment claims. The supplier proof step 2.1 does establish those Gaussian moments, but they are unnecessary here. Replaced both assertions by exactly its stated normalized-information-density convergence; threshold decoding still gives vanishing ensemble error, independently of the cost-moment calculation in step 2.2.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/24fb44b6a101e847c32ffe38bbeeea6e_MIT6_441S16_chapter_17.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-finite-dmc-feedback-code",
+      "severity": "fatal",
+      "status": "fixed",
+      "reason": "M is the fixed message count, so the original event compares the decoder to a constant rather than to the transmitted message. A noiseless binary identity code with M=2 has original error 1/2 although its actual decoding error is zero; a constant decoder outputting M has original error zero. This logically invalidates the defined reliability criterion. Introduced U uniform on [M], specified X_t=f_t(U,Y^{t-1}) and conditional path law, and corrected the error to Pr[g(Y^n) ne U], preserving the count, costs, causal maps and capacity convention.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/a5ff16d929efde1d8313e12e372aa94b_MIT6_441S16_chapter_21.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "def-parallel-awgn-feedback-code",
+      "route": "frontier-owner",
+      "status": "open",
+      "reason": "Literal M is the fixed count. A decoder constantly outputting M then has zero stated error regardless of transmitted message; the intended average-error operational capacity is not defined by this formula. Introduce a uniform message U on [M], set X_t=f_t(U,Y^{t-1}), and define error Pr[g(Y^n) ne U], preserving M for message counts and rate. Route original Definition change and direct consumers to the owner; this file is outside the assigned writing scope.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/a5ff16d929efde1d8313e12e372aa94b_MIT6_441S16_chapter_21.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "thm-feedback-does-not-increase-cost-constrained-dmc-capacity",
+      "route": "frontier-owner",
+      "status": "open",
+      "reason": "Statement identifies C_fb via this definition. A1 uses M as encoder message; F1, F2 and steps 1.1-2.1 use M as a random variable in mutual information, while F5 and step 3.1 also use M for the fixed message count in logarithms. Change only random-message occurrences in A1/F1/F2/F5 and proof steps to U, with decoder estimate U-hat and e=Pr[g(Y^n) ne U]; retain M in counts, logs and cases. The conditional finite Markov chains, Jensen bound, Fano converse and ordinary-code inclusion then prove the unchanged Statement. No further hop is triggered by this proof-only repair.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/a5ff16d929efde1d8313e12e372aa94b_MIT6_441S16_chapter_21.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "no-update-required",
+      "id": "def-finite-dmc-feedback-code",
+      "reason": "No direct published or outside-frontier item consumes this changed Definition. The direct draft theorem is routed to the frontier owner, and the page interface remains sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "sources_consulted": [
+      {
+        "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/24fb44b6a101e847c32ffe38bbeeea6e_MIT6_441S16_chapter_17.pdf",
+        "locator": "Chapter 17, Theorem 17.3 and its complete proof, printed p.177 (PDF p.4)",
+        "establishes": "Strict expected-cost slack and normalized information-density convergence suffice for asymptotic cost-feasible coding; local pruning provides the local proof mechanism."
+      },
+      {
+        "url": "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/a5ff16d929efde1d8313e12e372aa94b_MIT6_441S16_chapter_21.pdf",
+        "locator": "Chapter 21, Definition 21.1 and its probability-space note, printed pp.218-219 (PDF pp.1-2)",
+        "establishes": "Feedback uses a uniform random message distinct from the fixed count and compares the decoded random message with that transmitted message."
+      }
+    ],
+    "outside_lane_alerts": [
+      {
+        "id": "def-parallel-awgn-feedback-code",
+        "path": "items/def-parallel-awgn-feedback-code.md",
+        "route": "frontier-owner",
+        "source_excerpt": "At time $t$ the input is $X_t=f_t(M,Y^{t-1})$",
+        "affected_use": "The Definition uses M as both fixed message count and encoder argument/random decoded message; its average error is Pr[g(Y^n) ne M] without a separately defined uniform random message. The assigned Gaussian achievability lemma uses this supplier for the no-feedback code and capacity conventions.",
+        "invalidated_claim": "Literal M is the fixed count. A decoder constantly outputting M then has zero stated error regardless of transmitted message; the intended average-error operational capacity is not defined by this formula.",
+        "minimality": "Introduce a uniform message U on [M], set X_t=f_t(U,Y^{t-1}), and define error Pr[g(Y^n) ne U], preserving M for message counts and rate. Route original Definition change and direct consumers to the owner; this file is outside the assigned writing scope.",
+        "uncertain": false,
+        "status": "open; owner action required",
+        "reason": "Confirmed by the same fixed-count/random-message distinction; no source edit is licensed outside the assigned two-item scope.",
+        "source_urls": [
+          "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/a5ff16d929efde1d8313e12e372aa94b_MIT6_441S16_chapter_21.pdf"
+        ],
+        "familiar": true
+      }
+    ],
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "closure": "Both assigned tuple repairs are complete. Run closure still requires owner disposition of the unassigned Gaussian feedback-definition defect and the direct DMC theorem proof-notation repair. Neither is claimed repaired or independently reviewed here.",
+    "statement_definition_comparison": [
+      {
+        "id": "lem-parallel-awgn-cost-constrained-achievability",
+        "changed": false,
+        "reason": "Only F2 and proof step 1.1 changed, together with its exact contract derivation mirror. The original Statement is byte-for-byte unchanged; no consumer propagation is triggered."
+      },
+      {
+        "id": "def-finite-dmc-feedback-code",
+        "changed": true,
+        "reason": "Definition now explicitly introduces U uniform on [M], sets the causal inputs, conditions the row-product law on U=m and uses U in the decoding-error event. All prior count, cost and capacity clauses remain."
+      }
+    ],
+    "consumer_examination": [
+      {
+        "supplier": "def-finite-dmc-feedback-code",
+        "id": "thm-feedback-does-not-increase-cost-constrained-dmc-capacity",
+        "path": "items/thm-feedback-does-not-increase-cost-constrained-dmc-capacity.md",
+        "scope": "draft frontier; outside assigned writing scope",
+        "disposition": "frontier_owner_proof_notation_repair",
+        "source_excerpt": "[A1] [[def-finite-dmc-feedback-code]]: at each time $t$, $X_t=f_t(M,Y^{t-1})$",
+        "affected_use": "Statement identifies C_fb via this definition. A1 uses M as encoder message; F1, F2 and steps 1.1-2.1 use M as a random variable in mutual information, while F5 and step 3.1 also use M for the fixed message count in logarithms.",
+        "invalidated_claim": "The fixed count cannot be the random argument in the causal Markov chain or mutual information. The proof is the usual sound converse after distinguishing the uniform message U from the count M.",
+        "minimality": "Change only random-message occurrences in A1/F1/F2/F5 and proof steps to U, with decoder estimate U-hat and e=Pr[g(Y^n) ne U]; retain M in counts, logs and cases. The conditional finite Markov chains, Jensen bound, Fano converse and ordinary-code inclusion then prove the unchanged Statement. No further hop is triggered by this proof-only repair.",
+        "uncertain": false
+      },
+      {
+        "supplier": "def-finite-dmc-feedback-code",
+        "path": "library/information-theory/cost-constrained-gaussian-and-feedback-channels.md",
+        "disposition": "unaffected",
+        "affected_use": "Page prose describes the finite message, causal encoder history and current channel row, and lists the definition. Its diagram M denotes the message without a competing count variable.",
+        "reason": "The repaired definition implements exactly those causal/message/cost conventions; neither prose nor diagram asserts the defective error formula."
+      }
+    ],
+    "published_consumer_maintenance": "The changed DMC Definition has exactly one direct item dependency/reference consumer, a draft frontier theorem. No direct published or outside-frontier consumer was found; no published carrier was edited and no published audit is claimed. The companion binary example consumes the theorem indirectly; no extra hop is taken through its unchanged Statement.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-parallel-awgn-cost-constrained-achievability.md items/def-finite-dmc-feedback-code.md --json",
+        "exit_code": 0,
+        "result": "2 files, 1 proof checked and passed, 0 failures; definition not applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-parallel-awgn-cost-constrained-achievability.md items/def-finite-dmc-feedback-code.md --json",
+        "exit_code": 0,
+        "result": "2 items checked, zero errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/non-ml-math-remaining-81-2026-10-18-batch-13.proof-contracts.json --items lem-parallel-awgn-cost-constrained-achievability,def-finite-dmc-feedback-code --strict --json",
+        "exit_code": 0,
+        "result": "Both selected contracts checked; zero errors or warnings. Exact Gaussian derivation mirror updated under shared-write lock."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-parallel-awgn-cost-constrained-achievability.md items/def-finite-dmc-feedback-code.md",
+        "exit_code": 0,
+        "result": "2 items, 4 steps, 0 defects. Run after the final item edit."
+      }
+    ],
+    "no_gate_diagnostics": "Frozen repeat-1 input assigns no gate diagnostics to this unit; gate_resolutions is empty."
+  },
+  "supporting_evidence": {
+    "research/non-ml-math-remaining-81-2026-10-18-batch-13.proof-contracts.json": "68685719f007cf3df6bb939cacb2b48953f7515530a128639eb08034c71ec0d9"
+  }
+}

@@ -3,6 +3,7 @@ id: thm-semicontinuous-evt
 kind: theorem
 title: "Semicontinuous extreme value theorem: an upper semicontinuous function on a nonempty compact $K \\subseteq \\mathbb{R}$ is bounded above and attains a maximum, and a lower semicontinuous one is bounded below and attains a minimum"
 status: published
+dependency_level: 2
 origin: session
 provenance:
   statement: literature-derived
@@ -17,18 +18,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-09
-    scope: published-audit-targeted
-    context_sha256: a0e60fb506eedee299cb38a7440e1f216e2f5ee101dd84ab6fd3aca6dd048e40
-    item_sha256: 2906e58bb366c631f921b470cf5ae8567eb6a875d5b28f15fc3aa63b58def863
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-09
-    scope: published-audit
-    delegated_by: owner
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-first-scaffold-gate-repair/root-published-recording/receipts/thm-semicontinuous-evt.json
 sources:
   scraped: []
   references:
@@ -42,6 +35,8 @@ pipeline_run: null
 ---
 
 ## Statement
+
+Throughout, $\mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R}$ denotes the canonical copies. Natural numbers, integers and rationals are written directly when used in real arithmetic.
 
 Let $K \subseteq \mathbb{R}$ be nonempty and compact ([[def-open-cover-r]]).
 
@@ -71,7 +66,7 @@ compact subset of $\mathbb{R}$.
 
 [L3] $K$ compact means: every family of open subsets of $\mathbb{R}$ whose union contains $K$ has a finite subfamily whose union contains $K$ ([[def-open-cover-r]]).
 
-[L4] For every real $x$ there is a natural $n \ge 1$ with $x < \iota(n)$, and for every real $\eta > 0$ a natural $n \ge 1$ with $1/\iota(n) < \eta$; $\iota$ is positive and strictly increasing on the naturals $\ge 1$ ([[thm-of-archimedean]], [[cor-archimedean-reciprocal]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
+[L4] For every real $x$ there is a natural $n \ge 1$ with $x < n$, and for every real $\eta > 0$ a natural $n \ge 1$ with $1/n < \eta$; the natural numbers $\ge 1$ are positive in $\mathbb{R}$ and their order is preserved there ([[thm-of-archimedean]], [[cor-archimedean-reciprocal]], [[def-canonical-natural]], [[lem-of-naturals-positive]]).
 
 [L5] A nonempty set of reals bounded above has a least upper bound, and for every real $\varepsilon > 0$ some member of the set exceeds $\sup - \varepsilon$ ([[def-complete-ordered-field]], [[lem-sup-epsilon]], [[def-bounded-set]]).
 
@@ -85,17 +80,17 @@ compact subset of $\mathbb{R}$.
 
 1.1 For each real $\alpha$ let $U_\alpha$ be the open set of [L1], so that $U_\alpha \cap K = \{x \in K : f(x) < \alpha\}$ and $\alpha \le \beta$ implies $U_\alpha \subseteq U_\beta$. [L1, L2, construct]
 
-2.1 The family $\{\, U_{\iota(n)} : n \in \mathbb{N},\ n \ge 1 \,\}$ covers $K$: every $x \in K$ has $f(x) < \iota(n)$ for some natural $n \ge 1$, and then $x \in U_{\iota(n)}$. [step 1.1, L4]
+2.1 The family $\{\, U_{n} : n \in \mathbb{N},\ n \ge 1 \,\}$ covers $K$: every $x \in K$ has $f(x) < n$ for some natural $n \ge 1$, and then $x \in U_{n}$. [step 1.1, L4]
 
-3.1 By compactness finitely many members cover $K$, say $U_{\iota(n_0)}, \dots, U_{\iota(n_j)}$ with each $n_i \ge 1$; let $N$ be the greatest of $\iota(n_0), \dots, \iota(n_j)$, which exists as the maximum of a nonempty finite set of reals. Then each $U_{\iota(n_i)} \subseteq U_{N}$, so $K \subseteq U_{N}$ and hence $K = U_{N} \cap K = \{x \in K : f(x) < N\}$. So $f[K]$ is bounded above by $N$. [step 1.1, step 2.1, L2, L3, L6]
+3.1 By compactness finitely many members cover $K$, say $U_{n_0}, \dots, U_{n_j}$ with each $n_i \ge 1$; let $N$ be the greatest of $n_0, \dots, n_j$, which exists as the maximum of a nonempty finite set of reals. Then each $U_{n_i} \subseteq U_{N}$, so $K \subseteq U_{N}$ and hence $K = U_{N} \cap K = \{x \in K : f(x) < N\}$. So $f[K]$ is bounded above by $N$. [step 1.1, step 2.1, L2, L3, L6]
 
 4.1 $f[K]$ is nonempty, since $K$ is, and bounded above, so $M := \sup f[K]$ exists. [step 3.1, L5]
 
-5.1 For each natural $n \ge 1$ put $\alpha_n := M - 1/\iota(n)$. The family $\{\, U_{\alpha_n} : n \ge 1 \,\}$ has **no** finite subfamily covering $K$. Indeed, let $U_{\alpha_{n_0}}, \dots, U_{\alpha_{n_j}}$ be finitely many of them; if the list is empty its union is empty and does not contain the nonempty $K$. Otherwise let $n^{*}$ be a natural among $n_0, \dots, n_j$ with $\alpha_{n^{*}}$ greatest, so that every member of the list is contained in $U_{\alpha_{n^{*}}}$. Since $\alpha_{n^{*}} < M = \sup f[K]$, there is $x \in K$ with $f(x) > \alpha_{n^{*}}$, and such an $x$ lies in $K$ but not in $U_{\alpha_{n^{*}}} \cap K = \{f < \alpha_{n^{*}}\}$, hence in no member of the list. [step 1.1, step 4.1, L2, L4, L5, L6]
+5.1 For each natural $n \ge 1$ put $\alpha_n := M - 1/n$. The family $\{\, U_{\alpha_n} : n \ge 1 \,\}$ has **no** finite subfamily covering $K$. Indeed, let $U_{\alpha_{n_0}}, \dots, U_{\alpha_{n_j}}$ be finitely many of them; if the list is empty its union is empty and does not contain the nonempty $K$. Otherwise let $n^{*}$ be a natural among $n_0, \dots, n_j$ with $\alpha_{n^{*}}$ greatest, so that every member of the list is contained in $U_{\alpha_{n^{*}}}$. Since $\alpha_{n^{*}} < M = \sup f[K]$, there is $x \in K$ with $f(x) > \alpha_{n^{*}}$, and such an $x$ lies in $K$ but not in $U_{\alpha_{n^{*}}} \cap K = \{f < \alpha_{n^{*}}\}$, hence in no member of the list. [step 1.1, step 4.1, L2, L4, L5, L6]
 
-6.1 By compactness, a family of open sets with no finite subfamily covering $K$ cannot itself cover $K$. So there is $x_{0} \in K$ with $x_{0} \notin U_{\alpha_n}$ for every natural $n \ge 1$, that is $f(x_{0}) \ge \alpha_n = M - 1/\iota(n)$ for every such $n$. [step 1.1, step 5.1, L3]
+6.1 By compactness, a family of open sets with no finite subfamily covering $K$ cannot itself cover $K$. So there is $x_{0} \in K$ with $x_{0} \notin U_{\alpha_n}$ for every natural $n \ge 1$, that is $f(x_{0}) \ge \alpha_n = M - 1/n$ for every such $n$. [step 1.1, step 5.1, L3]
 
-7.1 Hence $f(x_{0}) = M$. If $f(x_{0}) < M$ then $M - f(x_{0}) > 0$ and there is a natural $n \ge 1$ with $1/\iota(n) < M - f(x_{0})$, that is $f(x_{0}) < M - 1/\iota(n)$, contradicting step 6.1; and $f(x_{0}) \le M$ because $M$ is an upper bound of $f[K]$. [step 4.1, step 6.1, L4, L5]
+7.1 Hence $f(x_{0}) = M$. If $f(x_{0}) < M$ then $M - f(x_{0}) > 0$ and there is a natural $n \ge 1$ with $1/n < M - f(x_{0})$, that is $f(x_{0}) < M - 1/n$, contradicting step 6.1; and $f(x_{0}) \le M$ because $M$ is an upper bound of $f[K]$. [step 4.1, step 6.1, L4, L5]
 
 8.1 So $f$ is bounded above on $K$ and attains the value $M = \sup f[K]$ at $x_{0} \in K$, which is a maximum of $f[K]$: this is claim 1. [step 3.1, step 4.1, step 7.1, L5]
 

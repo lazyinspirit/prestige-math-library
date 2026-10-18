@@ -1,0 +1,59 @@
+--- validated baseline/items/def-qa-37-resource-cost-model.md
++++ current/items/def-qa-37-resource-cost-model.md
+@@ -29,21 +29,38 @@
+ ## Definition
+ 
+ For a finite anyon solver instance and one run, record separately the tuple
+-$$\bigl(L_{\rm in},\ |b|,\ N_{\rm meas},\ b_{\max},\ t_{\rm cl},\ \epsilon_{\rm op},\epsilon_{\rm tr},\ell_{\rm leak},\ p_{\rm leak},\ N_{\rm phase},\ t_{\rm phase}\bigr).$$
+-Here $L_{\rm in}$ is the complete input-description bit length; $|b|$ is the
+-number of braid-generator occurrences (inverse generators count as one);
+-$N_{\rm meas}$ is the number of fusion measurements; $b_{\max}$ is the
+-largest unary precision query to a certified matrix name; $t_{\rm cl}$ is
+-the classical bit time used by search and postprocessing; $\epsilon_{\rm op}$
+-is a stated operator-norm approximation bound; $\epsilon_{\rm tr}$ is a
+-separately assumed in-band transport bound; $\ell_{\rm leak}$ and
+-$p_{\rm leak}$ are leakage amplitude and probability bounds; and
+-$N_{\rm phase},t_{\rm phase}$ count phase corrections and their classical
+-control cost. Circuit description and elementary wire costs follow
+-[[def-qc-circuit-cost-model]], while classical input bit cost follows
+-[[def-qa-classical-bit-cost]] and finite nonoracle gates follow
+-[[def-qa-nonoracle-gate-cost]]. An inapplicable coordinate is marked “not
+-applicable”; it is not assigned value zero. Unless an interface explicitly
+-states a bound, no braid length, matrix precision, measurement, search step,
+-or phase correction is free. The tuple is a bookkeeping convention; it does
+-not assert any of its error or runtime bounds.
++$$\bigl(L_{\rm in},\ N_{\rm any},\ |b|,\ N_{\rm prep},\ N_{\rm anc},\ N_{\rm meas},\ B_{\rm out},\ b_{\max},\ t_{\rm cl},\ T_H,\ \epsilon_{\rm op},\epsilon_{\rm tr},\epsilon_{\rm meas},\ell_{\rm leak},\ p_{\rm leak},\ N_{\rm phase},\ t_{\rm phase}\bigr).$$
++Here $L_{\rm in}$ is the complete finite classical input-description bit
++length, including the declared task, state/preparation descriptions when
++classically encoded, and tolerance descriptions; a directly supplied quantum
++input is not assumed to have a finite classical coordinate description;
++$N_{\rm any}$ is the number of ordered simple-charge strand labels in the
++fusion-space instance; and $|b|$ is the number of braid-generator occurrences
++(inverse generators count as one). $N_{\rm prep}$ counts elementary
++operations in the declared preparation procedure, while $N_{\rm anc}$ counts
++the ancillary anyons or other physical ancilla systems used by preparation or
++computation. If the initial state is supplied directly as an abstract quantum
++input with no preparation interface, $N_{\rm prep}$ is “not applicable”, not
++silently set to zero; $N_{\rm anc}$ still records any declared solver ancillas
++(zero if none, or “not applicable” if no physical ancilla model is supplied).
++$N_{\rm meas}$ is the number of fusion measurements,
++and $B_{\rm out}$ is the total bit length of their classical outcome record
++under its declared finite encoding (zero when no measurement occurs). The
++largest unary precision query to a certified matrix name is $b_{\max}$; $t_{\rm cl}$
++is the classical bit time used by search and postprocessing. $T_H$ is the total
++Hamiltonian evolution time over the run in the declared physical time unit;
++it is “not applicable” for an abstract braid-only model without Hamiltonian
++evolution. The error coordinates $\epsilon_{\rm op},\epsilon_{\rm tr},
++\epsilon_{\rm meas},\ell_{\rm leak},p_{\rm leak}$ are respectively a stated
++operator-norm approximation bound, an independent in-band transport bound,
++an implementation-to-ideal-measurement total-variation bound, and leakage
++amplitude and probability bounds. $N_{\rm phase},t_{\rm phase}$ count phase
++corrections and their classical control cost. Circuit description and
++elementary wire costs follow [[def-qc-circuit-cost-model]], while classical
++input bit cost follows [[def-qa-classical-bit-cost]] and finite nonoracle
++gates follow [[def-qa-nonoracle-gate-cost]]. An inapplicable coordinate is
++marked “not applicable”; it is not assigned value zero. Unless an interface
++explicitly states a bound, no braid length, preparation operation, ancilla,
++matrix precision, measurement, Hamiltonian time, search step, or phase
++correction is free. The tuple is a bookkeeping convention; it does not assert
++any of its error or runtime bounds.

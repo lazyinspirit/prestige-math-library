@@ -45,8 +45,9 @@ of the page rests on: a monotone function on an interval has every well-posed
 one-sided limit. For a nondecreasing function the left limit is a supremum and
 the right limit an infimum; for a nonincreasing function the roles reverse.
 [[def-classification-of-discontinuities]]
-then sorts discontinuities into removable, jump and essential, equivalently
-Rudin's first and second kind, and
+then distinguishes removable, jump and essential discontinuities at two-sided
+points: the first kind groups removable and jump, while the second kind is
+essential. Its one-sided convention uses only the available limit. The theorem
 [[thm-monotone-discontinuities-are-jumps]] shows that a monotone function has
 none of the second kind: at an interior point it is discontinuous exactly when
 the two one-sided limits differ, and then it jumps.

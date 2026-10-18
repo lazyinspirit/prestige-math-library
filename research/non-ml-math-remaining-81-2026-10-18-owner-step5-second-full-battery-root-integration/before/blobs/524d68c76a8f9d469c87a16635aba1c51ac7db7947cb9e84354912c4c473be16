@@ -1,0 +1,2066 @@
+{
+  "version": 1,
+  "scope": [
+    "def-finite-acyclic-quiver-stability-data",
+    "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+    "lem-upper-half-plane-sum-phase-between",
+    "lem-quiver-semistable-loci-are-open",
+    "lem-quiver-hardernarasimhan-filtrations-exist-are-unique-and-descend",
+    "lem-finite-field-quiver-semistable-stack-points-are-hall-groupoids",
+    "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+    "lem-finite-quiver-hall-extension-orbit-count",
+    "thm-finite-quiver-euler-and-skew-integration-is-multiplicative",
+    "thm-finite-quiver-hall-wall-crossing",
+    "rem-finite-quiver-hall-counts-and-dt-bps-interpretation",
+    "ex-one-vertex-finite-quiver-hall-integration-is-quantum-dilogarithm",
+    "ex-a2-quiver-hall-wall-crossing-pentagon",
+    "cex-omitting-strictly-semistable-objects-breaks-hn-factorization",
+    "cex-commutative-target-erases-the-a2-wall-crossing"
+  ],
+  "contracts": {
+    "def-finite-acyclic-quiver-stability-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition uses finite vertex and arrow sets; with no vertices the empty products and sums give the one zero representation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition restricts phase to nonzero objects and separately defines the zero-dimensional quotient-stack groupoid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits a single vertex and no arrows; the one-vertex example checks this specialization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition allows zero vertex dimensions and includes the zero-dimensional representation vector."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition distinguishes proper nonzero subobjects in stability and semistability inequalities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The groupoid cardinality is a sum over isomorphism classes with finite automorphism weights; no representative choice enters the definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition makes no biconditional claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The quiver, upper-half-plane charges and geometric semistability conditions are defined explicitly; definitions of stable/semistable are not a theorem equating two previously defined properties. This row concerns a forward biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "e85909eed851438525c047bb5265b05f37500ebdb593e33bc71c67b3c6990573",
+            "row_sha256": "8569884a481e02cc97fb2c69f0efc1fde524147ba7e3a0682feae02b24d0997b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition makes no biconditional claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The quiver, upper-half-plane charges and geometric semistability conditions are defined explicitly; definitions of stable/semistable are not a theorem equating two previously defined properties. This row concerns a reverse biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "e85909eed851438525c047bb5265b05f37500ebdb593e33bc71c67b3c6990573",
+            "row_sha256": "62d4dfd28ab04b6f6ca0d87bef04d9e762f156e5e47b38915cf732732d47838c"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": []
+    },
+    "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-acyclic-quiver-stability-data",
+          "source_section": "Definition",
+          "quote": "Let $Q=(Q_0,Q_1,s,t)$ be a finite quiver: $Q_0$ and $Q_1$ are finite sets,\nand $s,t:Q_1\\to Q_0$ give the source and target of each arrow. Assume $Q$ has\nno directed cycles. For a field $K$, a finite-dimensional representation $M$\nassigns a finite-dimensional $K$-vector space $M_i$ to each $i\\in Q_0$ and a\nlinear map $M_a:M_{s(a)}\\to M_{t(a)}$ to each $a\\in Q_1$. A morphism is a\nfamily of linear maps at the vertices commuting with all arrow maps. Write\n$\\mathcal A_Q(K)$ for this category and\n$\\mathbf d(M)=(\\dim_K M_i)_{i\\in Q_0}\\in\\mathbb N^{Q_0}$ for its dimension\nvector. For the finite-field Hall branch, fix $k=\\mathbb F_q$ and write\n$\\mathcal A_Q=\\mathcal A_Q(k)$. The next lemma proves the abelian and Euler\nproperties over any field; over $k$ it constructs a small finitary abelian\nskeleton of $\\mathcal A_Q$, so $\\mathcal A_Q$ is essentially small.\n\nFor $\\mathbf d,\\mathbf e\\in\\mathbb Z^{Q_0}$ define the bilinear form\n$$\\chi_Q(\\mathbf d,\\mathbf e)=\\sum_{i\\in Q_0}d_i e_i-\\sum_{a:i\\to j}d_i e_j,$$\nand its skew-symmetrization\n$\\langle\\mathbf d,\\mathbf e\\rangle=\\chi_Q(\\mathbf d,\\mathbf e)-\\chi_Q(\\mathbf e,\\mathbf d)$.\nThe next lemma proves that $\\chi_Q(\\mathbf d(M),\\mathbf d(N))$ is the\nHom-minus-Yoneda-Ext$^1$ dimension for this arrow convention.\n\nFix $z_i\\in\\mathbb H:=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ for each\nvertex and extend $Z(\\mathbf d)=\\sum_i d_i z_i$ additively. If\n$\\mathbf d\\in\\mathbb N^{Q_0}$ is nonzero, then\n$\\operatorname{Im}Z(\\mathbf d)=\\sum_i d_i\\operatorname{Im}z_i>0$; thus its\nprincipal argument lies in $(0,\\pi)$. For a nonzero representation $M$, put\n$\\phi_Z(M)=\\arg Z(\\mathbf d(M))/\\pi\\in(0,1)$. Call\n$M$ **$Z$-semistable** if every nonzero subrepresentation $U\\subseteq M$\nsatisfies $\\phi_Z(U)\\le\\phi_Z(M)$, and **$Z$-stable** if the inequality is\nstrict for every proper nonzero subrepresentation.\n\nFor the semistable groupoids and stacks below, include the zero representation\nas semistable without assigning it a phase. Stable objects and HN factors\nremain nonzero.\n\nFor a dimension vector $\\mathbf d$, let\n$$\\operatorname{Rep}_{\\mathbf d}(Q)=\\prod_{a:i\\to j} \\operatorname{Hom}_k(k^{d_i},k^{d_j}),\\qquad G_{\\mathbf d}=\\prod_{i\\in Q_0}\\operatorname{GL}_{d_i,k}.$$\nThe group $G_{\\mathbf d}$ acts by change of bases. Define\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ geometrically: its points over an\nalgebraic closure $\\bar k$ are representations for which every nonzero\n$\\bar k$-subrepresentation satisfies the semistability inequality. The\nassociated quotient stack is\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)=[\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)/G_{\\mathbf d}]$.\nFor $\\mathbf d=0$, set $\\operatorname{Rep}^{ss}_{\\mathbf0}=\\operatorname{Rep}_{\\mathbf0}=\\operatorname{Spec}k$.\nThe group $G_{\\mathbf0}$ is trivial, so its rational-point groupoid has one\nzero object, trivial automorphism group, and cardinality $1$.\nHere $[X/G]$ denotes the groupoid-valued quotient: over a scheme $S$ its\nobjects are $G$-torsors on $S$ with equivariant maps to $X$, and its arrows\nare equivariant isomorphisms over $S$. The openness lemma below proves that\n$\\operatorname{Rep}^{ss}_{\\mathbf d}$ is open.\n\nFor a finite groupoid $\\mathcal G$, define its groupoid cardinality by\n$$|\\mathcal G|=\\sum_{[x]\\in\\operatorname{Iso}(\\mathcal G)} \\frac{1}{|\\operatorname{Aut}_{\\mathcal G}(x)|}.$$\nThe rational-point groupoid of $\\mathfrak M^{ss}_{\\mathbf d}$ is finite, and\nthe finite-field descent lemma identifies it with the groupoid of finite-field\nsemistable representations and their isomorphisms. No Calabi–Yau structure,\npotential, orientation data, vanishing cycles, or physical state-counting\nidentification is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hall-finitary-abelian-category",
+          "source_section": "Definition",
+          "quote": "A **small finitary abelian category** for Hall multiplication is a small\nabelian category $\\mathcal A$ (its object and morphism collections are sets,\nby [[def-small-locally-small-and-large-category]]), with abelian structure as\nin [[def-abelian-category]], in which the\nfollowing sets are finite for every pair of objects $M,N$:\n\n1. $\\operatorname{Hom}_{\\mathcal A}(M,N)$;\n2. $\\operatorname{YExt}^{1}_{\\mathcal A}(M,N)$, the set of Yoneda classes of\n   short exact sequences $0\\to N\\to E\\to M\\to0$. Equivalence is the\n   one-fold instance of the generated endpoint-fixed chain-map relation in\n   [[def-equivalence-of-n-fold-extensions]]: chain maps are the identity on\n   $N$ and $M$, and the relation is closed under reflexivity, symmetry and\n   transitivity. A short exact sequence and its endpoint order use\n   [[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]],\n   [[def-extension-of-an-object-by-an-object-in-an-abelian-category]] and\n   [[def-n-fold-yoneda-extension]].\n\nOne may instead supply a small skeleton $\\mathcal A_0$ of an essentially\nsmall abelian category and perform the construction on $\\mathcal A_0$. Here\n“essentially small” means that such a small equivalent category is part of the\ngiven data; the construction does not select representatives by an unstated\nchoice principle. The isomorphism classes $\\operatorname{Iso}(\\mathcal A_0)$\nthen form a set.\n\nNo $\\mathbb F_q$-linear structure, enough projectives or injectives, finite\nnumber of subobjects of every object, or identification with derived\n$\\operatorname{Ext}^{1}$ is included in this definition. Subobjects are the\nmonomorphism classes of [[def-subobject-and-quotient-object]], and quotients\nare the cokernels specified in [[def-the-quotient-of-an-object-by-a-subobject]].",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-short-five-lemma-in-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "Consider a morphism of short exact sequences in an abelian category\n\n```tikzcd\n0 \\arrow[r] & A \\arrow[r, \"i\"] \\arrow[d, \"f\"'] & B \\arrow[r, \"p\"] \\arrow[d, \"g\"'] & C \\arrow[r] \\arrow[d, \"h\"'] & 0 \\\\\n0 \\arrow[r] & A' \\arrow[r, \"i'\"'] & B' \\arrow[r, \"p'\"'] & C' \\arrow[r] & 0.\n```\n\nThen:\n\n1. if $f$ and $h$ are monic, then $g$ is monic;\n2. if $f$ and $h$ are epic, then $g$ is epic;\n3. if $f$ and $h$ are isomorphisms, then $g$ is an isomorphism.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a morphism $f:X\\to Y$, its vertexwise kernels form a subrepresentation: if $x\\in\\ker f_i$, then $f_jX_a(x)=Y_af_i(x)=0$ for every arrow $a:i\\to j$. The vertexwise cokernels form a quotient representation because $Y_a(\\operatorname{im}f_i)\\subseteq\\operatorname{im}f_j$. The kernel and cokernel universal properties hold vertex by vertex. The canonical coimage-to-image map is an isomorphism at every vertex, hence an isomorphism of representations. With vertexwise finite direct sums and a zero object, these facts make $\\mathcal A_Q(K)$ abelian.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $i\\in Q_0$, let $P_i(v)$ have basis the directed paths from $i$ to $v$, with arrow maps given by path concatenation. Acyclicity and finiteness of $Q$ make each path set finite. A morphism $P_i\\to N$ is uniquely determined by the image of the length-zero path at $i$, so $\\operatorname{Hom}(P_i,N)\\cong N_i$; evaluation at $i$ preserves epimorphisms, and therefore $P_i$ is projective.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $$C^0(X,Y)=\\bigoplus_i\\operatorname{Hom}_K(X_i,Y_i),\\qquad C^1(X,Y)=\\bigoplus_{a:i\\to j}\\operatorname{Hom}_K(X_i,Y_j),$$ and define $\\partial:C^0\\to C^1$ by $(\\partial h)_a=Y_ah_i-h_jX_a$. Its kernel is exactly $\\operatorname{Hom}_{\\mathcal A_Q(K)}(X,Y)$ by the commuting-square definition of a representation morphism.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a representation $X$, define $\\epsilon:\\bigoplus_iP_i\\otimes_KX_i\\to X$ by $p\\otimes x\\mapsto X_p(x)$, where $X_p$ is the composite arrow map along the path $p$. Define $$d:\\bigoplus_{a:i\\to j}P_j\\otimes_KX_i\\longrightarrow\\bigoplus_iP_i\\otimes_KX_i$$ at a path $p:j\\to v$ by $$d(p\\otimes x)=(p\\otimes X_a(x))_j-((p\\circ a)\\otimes x)_i.$$ Both terms are finite direct sums of the projectives from step 1.2. Then $\\epsilon d=0$ because $X_{p\\circ a}=X_pX_a$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Now assume $K=\\mathbb F_q$. For each dimension vector $\\mathbf d$, there are finitely many arrow matrix tuples on the fixed spaces $K^{d_i}$, and the finite group $G_{\\mathbf d}(K)$ has finitely many orbits on this set. Fix an enumeration of the finite set $K$; the lexicographically least tuple in each orbit gives a representative without making a choice from an arbitrary family. The union over the set $\\mathbb N^{Q_0}$ is a set, so the full subcategory on these representatives is small. It is a skeleton: every finite-dimensional representation becomes one of the matrix tuples after choosing bases at its finitely many vertices. The full skeleton is abelian because each vertexwise kernel and cokernel from step 1.1 is isomorphic to its selected representative, and transporting its kernel or cokernel map across that isomorphism preserves the universal property.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At vertex $v$, $\\epsilon$ is onto because $x\\in X_v$ is the image of $\\operatorname{id}_v\\otimes x$. Modulo $\\operatorname{im}d$, the relation in step 2.1 replaces $(p\\circ a)\\otimes x$ by $p\\otimes X_a(x)$. Every positive-length path has a unique first arrow, so repeated replacement sends each path tensor to $\\operatorname{id}_v\\otimes X_p(x)$. Consequently the quotient of the middle term by $\\operatorname{im}d$ is isomorphic to $X_v$ through $\\epsilon$, and $\\ker\\epsilon=\\operatorname{im}d$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The map $d$ is injective. In a nonzero element of its domain, choose the largest length $\\ell$ of a suffix path $p$ with nonzero coefficient. The second term of $d(p\\otimes x)$ has length $\\ell+1$. Each such path has a unique first arrow and suffix, so its coefficient cannot cancel with the second term of a different source basis summand. A first term of $d$ has length at most $\\ell$, since no source suffix has length $\\ell+1$. Thus the length-$(\\ell+1)$ part of $d$ is nonzero, proving injectivity. The displayed sequence is a projective resolution of length one; applying $\\operatorname{Hom}(-,Y)$ therefore gives $\\operatorname{Ext}^r_{\\mathcal A_Q(K)}(X,Y)=0$ for $r\\ge2$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "A short exact sequence $0\\to Y\\to E\\to X\\to0$ splits as a sequence of vector spaces at each of the finitely many vertices. In the resulting coordinates every arrow of $E$ has block matrix $$E_a=\\begin{pmatrix}Y_a&\\xi_a\\\\0&X_a\\end{pmatrix},\\qquad \\xi_a\\in\\operatorname{Hom}_K(X_i,Y_j).$$ Every tuple $\\xi\\in C^1(X,Y)$ defines such an extension. Changing the vertexwise splittings by $h\\in C^0(X,Y)$ changes $\\xi$ by $\\partial h$. Conversely, an isomorphism of extensions that is the identity on endpoints has block matrix $\\begin{pmatrix}1&h_i\\\\0&1\\end{pmatrix}$ at each vertex and hence changes $\\xi$ by exactly $\\partial h$. By [F3], the generated endpoint-fixed Yoneda relation consists of these isomorphisms. The Baer sum of the extensions represented by $\\xi$ and $\\eta$ is represented by $\\xi+\\eta$: the pullback of their direct sum along $X\\to X\\oplus X$ followed by pushout along $Y\\oplus Y\\to Y$ adds the off-diagonal arrow blocks. Pushout along $\\lambda\\operatorname{id}_Y$ sends $\\xi$ to $\\lambda\\xi$. Therefore the Yoneda vector-space structure is the quotient structure $$\\operatorname{YExt}^1(X,Y)\\cong C^1(X,Y)/\\operatorname{im}\\partial,$$ a finite-dimensional $K$-vector space; it is not being identified here with the projective-resolution group of step 4.1.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.3",
+            "construct",
+            "algebra",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Both cochain spaces in step 1.3 are finite-dimensional. Rank-nullity for $\\partial$ gives $$\\dim\\ker\\partial-\\dim\\operatorname{coker}\\partial =\\dim C^0-\\dim C^1 =\\sum_i d_i(X)d_i(Y)-\\sum_{a:i\\to j}d_i(X)d_j(Y) =\\chi_Q(\\mathbf d(X),\\mathbf d(Y)).$$ The kernel and cokernel identifications already proved give the Hom–Yoneda-Ext$^1$ formula and finite-dimensionality over any $K$. When $K=\\mathbb F_q$, the underlying sets are finite. The full skeleton constructed in step 2.2 has the same Hom sets on its objects; transporting extension middle terms to their representatives identifies its Yoneda classes with those in $\\mathcal A_Q(K)$. Thus this small abelian skeleton satisfies the finitary hypotheses of [F2], while $\\mathcal A_Q(K)$ is essentially small.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.2",
+            "step 1.3",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-quiver case has only the zero representation; the empty direct sums in steps 1.2–1.3 and rank-nullity in step 6.1 give the zero Euler identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero representation is included in the vertexwise abelian argument in step 1.1 and the zero projective resolution in steps 2.1–4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a single arrow 1→2, the projective resolution and arrow cochain in steps 2.1–6.1 specialize directly; the finite check records the simple-pair Euler value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The no-arrow case has C¹=0 in step 1.3, so the Euler formula reduces to the Hom dimension in step 6.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The block-matrix classification in step 5.1 keeps both endpoints fixed and the short-five-lemma input [F3] preserves the middle term."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite-field skeleton uses lexicographically least representatives in step 2.2; extension splittings use only finitely many vertexwise finite-dimensional vector spaces in step 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication and dimension identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication and dimension identity, not a biconditional."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "name": "A₂ simple-pair Euler value",
+          "result": "For X=S1 and Y=S2 on 1→2, C0=0 and C1=K, so Hom=0, dim YExt¹=1, and χ(e1,e2)=−1.",
+          "evidence": "The block classification and rank-nullity in steps 1.3, 5.1, and 6.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read every step and F1–F3 actual interfaces. Vertexwise kernels/cokernels give abelianness. Finite acyclic path projectives give the explicit length-one resolution: unique first-arrow reduction proves exactness and maximal path length proves injectivity. Endpoint-fixed block changes classify Yoneda extensions as coker(partial), with Baer addition and scalar pushout as claimed; rank-nullity gives the stated Euler orientation. No unstated identification with derived Ext is used. Lexicographic finite-field matrix representatives give the small skeleton without arbitrary choice. Zero objects, no arrows and empty quiver give zero cochains and the one zero class. Source context Bridgeland §2.1 and Reineke §2 checked. Reader/refuter have no finding; no defect."
+      }
+    },
+    "lem-upper-half-plane-sum-phase-between": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-acyclic-quiver-stability-data",
+          "source_section": "Definition",
+          "quote": "Let $Q=(Q_0,Q_1,s,t)$ be a finite quiver: $Q_0$ and $Q_1$ are finite sets,\nand $s,t:Q_1\\to Q_0$ give the source and target of each arrow. Assume $Q$ has\nno directed cycles. For a field $K$, a finite-dimensional representation $M$\nassigns a finite-dimensional $K$-vector space $M_i$ to each $i\\in Q_0$ and a\nlinear map $M_a:M_{s(a)}\\to M_{t(a)}$ to each $a\\in Q_1$. A morphism is a\nfamily of linear maps at the vertices commuting with all arrow maps. Write\n$\\mathcal A_Q(K)$ for this category and\n$\\mathbf d(M)=(\\dim_K M_i)_{i\\in Q_0}\\in\\mathbb N^{Q_0}$ for its dimension\nvector. For the finite-field Hall branch, fix $k=\\mathbb F_q$ and write\n$\\mathcal A_Q=\\mathcal A_Q(k)$. The next lemma proves the abelian and Euler\nproperties over any field; over $k$ it constructs a small finitary abelian\nskeleton of $\\mathcal A_Q$, so $\\mathcal A_Q$ is essentially small.\n\nFor $\\mathbf d,\\mathbf e\\in\\mathbb Z^{Q_0}$ define the bilinear form\n$$\\chi_Q(\\mathbf d,\\mathbf e)=\\sum_{i\\in Q_0}d_i e_i-\\sum_{a:i\\to j}d_i e_j,$$\nand its skew-symmetrization\n$\\langle\\mathbf d,\\mathbf e\\rangle=\\chi_Q(\\mathbf d,\\mathbf e)-\\chi_Q(\\mathbf e,\\mathbf d)$.\nThe next lemma proves that $\\chi_Q(\\mathbf d(M),\\mathbf d(N))$ is the\nHom-minus-Yoneda-Ext$^1$ dimension for this arrow convention.\n\nFix $z_i\\in\\mathbb H:=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ for each\nvertex and extend $Z(\\mathbf d)=\\sum_i d_i z_i$ additively. If\n$\\mathbf d\\in\\mathbb N^{Q_0}$ is nonzero, then\n$\\operatorname{Im}Z(\\mathbf d)=\\sum_i d_i\\operatorname{Im}z_i>0$; thus its\nprincipal argument lies in $(0,\\pi)$. For a nonzero representation $M$, put\n$\\phi_Z(M)=\\arg Z(\\mathbf d(M))/\\pi\\in(0,1)$. Call\n$M$ **$Z$-semistable** if every nonzero subrepresentation $U\\subseteq M$\nsatisfies $\\phi_Z(U)\\le\\phi_Z(M)$, and **$Z$-stable** if the inequality is\nstrict for every proper nonzero subrepresentation.\n\nFor the semistable groupoids and stacks below, include the zero representation\nas semistable without assigning it a phase. Stable objects and HN factors\nremain nonzero.\n\nFor a dimension vector $\\mathbf d$, let\n$$\\operatorname{Rep}_{\\mathbf d}(Q)=\\prod_{a:i\\to j} \\operatorname{Hom}_k(k^{d_i},k^{d_j}),\\qquad G_{\\mathbf d}=\\prod_{i\\in Q_0}\\operatorname{GL}_{d_i,k}.$$\nThe group $G_{\\mathbf d}$ acts by change of bases. Define\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ geometrically: its points over an\nalgebraic closure $\\bar k$ are representations for which every nonzero\n$\\bar k$-subrepresentation satisfies the semistability inequality. The\nassociated quotient stack is\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)=[\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)/G_{\\mathbf d}]$.\nFor $\\mathbf d=0$, set $\\operatorname{Rep}^{ss}_{\\mathbf0}=\\operatorname{Rep}_{\\mathbf0}=\\operatorname{Spec}k$.\nThe group $G_{\\mathbf0}$ is trivial, so its rational-point groupoid has one\nzero object, trivial automorphism group, and cardinality $1$.\nHere $[X/G]$ denotes the groupoid-valued quotient: over a scheme $S$ its\nobjects are $G$-torsors on $S$ with equivariant maps to $X$, and its arrows\nare equivariant isomorphisms over $S$. The openness lemma below proves that\n$\\operatorname{Rep}^{ss}_{\\mathbf d}$ is open.\n\nFor a finite groupoid $\\mathcal G$, define its groupoid cardinality by\n$$|\\mathcal G|=\\sum_{[x]\\in\\operatorname{Iso}(\\mathcal G)} \\frac{1}{|\\operatorname{Aut}_{\\mathcal G}(x)|}.$$\nThe rational-point groupoid of $\\mathfrak M^{ss}_{\\mathbf d}$ is finite, and\nthe finite-field descent lemma identifies it with the groupoid of finite-field\nsemistable representations and their isomorphisms. No Calabi–Yau structure,\npotential, orientation data, vanishing cycles, or physical state-counting\nidentification is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $\\arg z>\\arg w$. Then $\\operatorname{Im}(\\overline w z)=|w||z|\\sin(\\arg z-\\arg w)>0$. Consequently $\\operatorname{Im}(\\overline w(z+w))>0$, which, by [F1], gives $\\arg(z+w)>\\arg w$. Also $\\operatorname{Im}(\\overline{(z+w)}z)=\\operatorname{Im}(\\overline w z)>0$, so [F1] gives $\\arg z>\\arg(z+w)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\arg w>\\arg z$, interchange $z,w$ in step 1.1. If the arguments are equal, $z,w$ are positive real multiples of the same ray, so their sum has that same argument. These cases prove the stated between-phase rule.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns two specified elements z,w of the open upper half-plane, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero is excluded from the open upper half-plane by the hypothesis z,w∈H."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No vector-space dimension or one-dimensional endpoint occurs in this scalar phase statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The equal-argument case is handled directly in step 2.1: positive multiples on one ray sum to that ray."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats equality as the common phase and step 1.1 proves strict inequalities when the phases differ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only two fixed complex numbers and no selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The two unequal-angle orientations and common-ray case prove the phase of z+w lies between those of z,w; this is not an iff claim about arbitrary complex sums. This row concerns a forward biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "836dcff8263a78d8f3d0a40fe3cf6407e4320bdd952a336f405dc3ab1944407b",
+            "row_sha256": "824deec486997f8f89454af5f7fe6c3e4fd1d50970d455f03959ce5a4d02e78f"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The two unequal-angle orientations and common-ray case prove the phase of z+w lies between those of z,w; this is not an iff claim about arbitrary complex sums. This row concerns a reverse biconditional branch; the actual claim supplies the stated construction or calculation rather than such a branch.",
+            "item_sha256": "836dcff8263a78d8f3d0a40fe3cf6407e4320bdd952a336f405dc3ab1944407b",
+            "row_sha256": "d963cc6a63112f0d7e8b2478bbb7bb3e075f977c9dc0d487ca96cd9fe5fa201d"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "name": "unequal-ray scalar check",
+          "result": "For z=i and w=1+i, the phases are 1/2 and 1/4; arg(z+w)/π=arctan(2)/π lies strictly between them.",
+          "evidence": "The determinant-sign argument in step 1.1 and equality-case split in step 2.1."
+        }
+      ]
+    },
+    "lem-quiver-semistable-loci-are-open": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-acyclic-quiver-stability-data",
+          "source_section": "Definition",
+          "quote": "Let $Q=(Q_0,Q_1,s,t)$ be a finite quiver: $Q_0$ and $Q_1$ are finite sets,\nand $s,t:Q_1\\to Q_0$ give the source and target of each arrow. Assume $Q$ has\nno directed cycles. For a field $K$, a finite-dimensional representation $M$\nassigns a finite-dimensional $K$-vector space $M_i$ to each $i\\in Q_0$ and a\nlinear map $M_a:M_{s(a)}\\to M_{t(a)}$ to each $a\\in Q_1$. A morphism is a\nfamily of linear maps at the vertices commuting with all arrow maps. Write\n$\\mathcal A_Q(K)$ for this category and\n$\\mathbf d(M)=(\\dim_K M_i)_{i\\in Q_0}\\in\\mathbb N^{Q_0}$ for its dimension\nvector. For the finite-field Hall branch, fix $k=\\mathbb F_q$ and write\n$\\mathcal A_Q=\\mathcal A_Q(k)$. The next lemma proves the abelian and Euler\nproperties over any field; over $k$ it constructs a small finitary abelian\nskeleton of $\\mathcal A_Q$, so $\\mathcal A_Q$ is essentially small.\n\nFor $\\mathbf d,\\mathbf e\\in\\mathbb Z^{Q_0}$ define the bilinear form\n$$\\chi_Q(\\mathbf d,\\mathbf e)=\\sum_{i\\in Q_0}d_i e_i-\\sum_{a:i\\to j}d_i e_j,$$\nand its skew-symmetrization\n$\\langle\\mathbf d,\\mathbf e\\rangle=\\chi_Q(\\mathbf d,\\mathbf e)-\\chi_Q(\\mathbf e,\\mathbf d)$.\nThe next lemma proves that $\\chi_Q(\\mathbf d(M),\\mathbf d(N))$ is the\nHom-minus-Yoneda-Ext$^1$ dimension for this arrow convention.\n\nFix $z_i\\in\\mathbb H:=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ for each\nvertex and extend $Z(\\mathbf d)=\\sum_i d_i z_i$ additively. If\n$\\mathbf d\\in\\mathbb N^{Q_0}$ is nonzero, then\n$\\operatorname{Im}Z(\\mathbf d)=\\sum_i d_i\\operatorname{Im}z_i>0$; thus its\nprincipal argument lies in $(0,\\pi)$. For a nonzero representation $M$, put\n$\\phi_Z(M)=\\arg Z(\\mathbf d(M))/\\pi\\in(0,1)$. Call\n$M$ **$Z$-semistable** if every nonzero subrepresentation $U\\subseteq M$\nsatisfies $\\phi_Z(U)\\le\\phi_Z(M)$, and **$Z$-stable** if the inequality is\nstrict for every proper nonzero subrepresentation.\n\nFor the semistable groupoids and stacks below, include the zero representation\nas semistable without assigning it a phase. Stable objects and HN factors\nremain nonzero.\n\nFor a dimension vector $\\mathbf d$, let\n$$\\operatorname{Rep}_{\\mathbf d}(Q)=\\prod_{a:i\\to j} \\operatorname{Hom}_k(k^{d_i},k^{d_j}),\\qquad G_{\\mathbf d}=\\prod_{i\\in Q_0}\\operatorname{GL}_{d_i,k}.$$\nThe group $G_{\\mathbf d}$ acts by change of bases. Define\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ geometrically: its points over an\nalgebraic closure $\\bar k$ are representations for which every nonzero\n$\\bar k$-subrepresentation satisfies the semistability inequality. The\nassociated quotient stack is\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)=[\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)/G_{\\mathbf d}]$.\nFor $\\mathbf d=0$, set $\\operatorname{Rep}^{ss}_{\\mathbf0}=\\operatorname{Rep}_{\\mathbf0}=\\operatorname{Spec}k$.\nThe group $G_{\\mathbf0}$ is trivial, so its rational-point groupoid has one\nzero object, trivial automorphism group, and cardinality $1$.\nHere $[X/G]$ denotes the groupoid-valued quotient: over a scheme $S$ its\nobjects are $G$-torsors on $S$ with equivariant maps to $X$, and its arrows\nare equivariant isomorphisms over $S$. The openness lemma below proves that\n$\\operatorname{Rep}^{ss}_{\\mathbf d}$ is open.\n\nFor a finite groupoid $\\mathcal G$, define its groupoid cardinality by\n$$|\\mathcal G|=\\sum_{[x]\\in\\operatorname{Iso}(\\mathcal G)} \\frac{1}{|\\operatorname{Aut}_{\\mathcal G}(x)|}.$$\nThe rational-point groupoid of $\\mathfrak M^{ss}_{\\mathbf d}$ is finite, and\nthe finite-field descent lemma identifies it with the groupoid of finite-field\nsemistable representations and their isomorphisms. No Calabi–Yau structure,\npotential, orientation data, vanishing cycles, or physical state-counting\nidentification is part of this definition.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-plucker-image-closed",
+          "source_section": "Statement",
+          "quote": "The Plucker image of $\\operatorname{Gr}(r,V)$ is a closed projective algebraic set in $\\mathbf P(\\Lambda^rV)$, cut out by the quadratic Plucker relations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-segre-image-rank-one-minors",
+          "source_section": "Statement",
+          "quote": "The image of the Segre point map is precisely the nonzero projective matrices $(z_{ij})$ satisfying\n$$z_{ij}z_{k\\ell}-z_{i\\ell}z_{kj}=0\\quad\\text{for all }i,k,j,\\ell.$$\nIt is a closed projective algebraic set. On every standard open\n$z_{i_0j_0}\\ne0$, the two factors are recovered by regular coordinate ratios.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-projective-morphism-pre-proj",
+          "source_section": "Definition",
+          "quote": "For an arbitrary base scheme $S$, a morphism $f:X\\to S$ is **projective on\nthis page** if for some integer $n\\ge0$ it factors over $S$ as\n$$X\\xrightarrow{i}\\mathbb P^n_S\\longrightarrow S,$$\nwhere $i$ is a closed immersion and the second arrow is the projection. The\nrelative projective space and its projection are those of\n[[def-relative-projective-space-standard-charts]], and closed immersion has\nthe meaning in [[def-closed-immersion-schemes]]. This is the finite-dimensional\nH-projective convention of Stacks Definition 29.44.1(2). That source's clause\n(1) separately uses a projective bundle $\\mathbb P(\\mathcal E)$; this page\ndoes not conflate the two conventions. The value $n=0$ is allowed, with\n$\\mathbb P^0_S\\cong S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-projective-morphism-proper",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Every projective morphism in the finite-dimensional\nH-projective convention of this page is proper: if $f:X\\to S$ factors over $S$\nas\n$$X\\xrightarrow{i}\\mathbb P^n_S\\longrightarrow S$$\nwith $n\\ge0$, $i$ a closed immersion and the second arrow the projection, then\n$f$ is proper. The empty source, the empty base and the case $n=0$ are\nincluded, and no Noetherian, field, reducedness or nonemptiness hypothesis is\nimposed.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-proper-morphism-closed-image",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to S$ be a proper morphism of schemes. Then $f$ is a closed map of\ntopological spaces: for every closed subset $Z\\subseteq|X|$ its image $f(Z)$ is\nclosed in $|S|$. In particular $f(X)$ is closed. Moreover, for every $S$-scheme\n$T$ the base-changed projection\n$$f_T:X\\times_S T\\longrightarrow T$$\nis closed, so the image of $X\\times_S T$, and of any closed subset of it, is\nclosed in $|T|$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-closed-subschemes-projective-space-homogeneous-ideals",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as inherited from the affine quotient and gluing\nsuppliers ([[def-axiom-of-choice]]). Let $A$ be a commutative ring, $n\\ge0$,\n$B=A[x_0,\\dots,x_n]$ graded by total degree, and\n$\\mathfrak b=(x_0,\\dots,x_n)=B_+$. For a homogeneous ideal $I\\subseteq B$ let\n$I^{\\mathrm{sat}}=\\bigcup_{r\\ge0}(I:\\mathfrak b^r)$ be its saturation\n([[lem-projective-space-saturation-local-criterion]]).\n\nThen:\n\n1. Every homogeneous ideal $I\\subseteq B$ determines a closed subscheme\n   $$V_+(I)\\hookrightarrow\\mathbb P^n_A,$$\n   whose intersection with the chart $D_+(x_i)$ is\n   $\\operatorname{Spec}\\bigl(B_{(x_i)}/I_{(x_i)}\\bigr)$, where\n   $I_{(x_i)}=(I[x_i^{-1}])_0$; equivalently $V_+(I)=\\operatorname{Proj}(B/I)$\n   under the canonical closed immersion $\\operatorname{Proj}(B/I)\\to\n   \\operatorname{Proj}B=\\mathbb P^n_A$.\n2. For homogeneous ideals $I,J\\subseteq B$ one has $V_+(I)=V_+(J)$ as closed\n   subschemes of $\\mathbb P^n_A$ if and only if\n   $I^{\\mathrm{sat}}=J^{\\mathrm{sat}}$.\n3. Every closed subscheme $Z\\hookrightarrow\\mathbb P^n_A$ is of the form\n   $V_+(I)$ for a unique $\\mathfrak b$-saturated homogeneous ideal\n   $I=I^{\\mathrm{sat}}$; it is recovered from the chart ideals of $Z$ by the\n   saturation criterion.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-closed-projective-embedding-by-homogeneous-generators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $J$ is homogeneous radical and\n$V_+(J)\\ne\\varnothing$, then $I_+(V_+(J))=J$; its inclusion in\n$\\mathbf P_k^n$ is a closed projective embedding and its homogeneous\ncoordinate ring is $k[x_0,\\ldots,x_n]/J$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Work over $\\bar k$. By [F2] and [F7], the Plucker equations define a closed projective subscheme whose $\\bar k$-points are the $r$-planes. On a chart $p_I\\ne0$, normalize $p_I=1$ and use the signed one-outside coordinates as the entries of a matrix $A$. The Plucker relation with tuples $J\\setminus\\{j\\}$ and $I\\cup\\{j\\}$ expresses each $p_J$, for $j\\in J\\setminus I$, using coordinates with fewer indices outside $I$ and one-outside coordinates. Induction identifies every $p_J$ in the quotient chart ring with the corresponding maximal minor of $(I_r\\mid A)$; conversely those minors satisfy every Plucker relation. Hence the chart ring is $\\bar k[A]$. The row spans of $(I_r\\mid A)$ give a rank-$r$ subbundle of the trivial bundle, and its quotient is locally free; the pivot changes on overlaps are invertible and glue these bundles and charts. Thus the equations construct the Grassmannian scheme with its closed Plucker embedding. The endpoint cases $r=0,n$ are points. For the Segre equations in [F3], on $z_{i_0j_0}\\ne0$ normalize $z_{i_0j_0}=1$ and put $u_i=z_{ij_0}$ and $v_j=z_{i_0j}$, with $u_{i_0}=v_{j_0}=1$. The minor relations give $z_{ij}=u_iv_j$ in the quotient ring, and substitution and coordinate extraction are inverse maps with $\\bar k[u_i\\ (i\\ne i_0),v_j\\ (j\\ne j_0)]$. These charts construct the closed Segre embedding. Iterating it embeds the finite product $P_{\\mathbf e}=\\prod_i\\operatorname{Gr}(e_i,k^{d_i})_{\\bar k}$ as a closed subscheme of one projective space; if $Q_0$ is empty, $P_{\\mathbf e}$ is a point. The chart ring surjections remain surjective after adjoining the arrow-matrix coordinates, so $\\operatorname{Rep}_{\\mathbf d}(Q)_{\\bar k}\\times P_{\\mathbf e}$ is closed in a relative projective space over $\\operatorname{Rep}_{\\mathbf d}(Q)_{\\bar k}$. The chart calculations show these projective subschemes are reduced with the point loci in [F2] and [F3]; [A2] records their classical projective coordinate interpretation over $\\bar k$.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F2",
+            "F3",
+            "F7",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 For each subvector $\\mathbf e$ with $0<\\mathbf e\\le\\mathbf d$ and $\\phi_Z(\\mathbf e)>\\phi_Z(\\mathbf d)$, impose in $\\operatorname{Rep}_{\\mathbf d}(Q)_{\\bar k}\\times P_{\\mathbf e}$, for each arrow $a:i\\to j$, that the composition $$\\mathcal S_i\\longrightarrow k^{d_i}\\xrightarrow{A_a}k^{d_j}\\longrightarrow\\mathcal Q_j$$ vanish. Here $\\mathcal S_i$ and $\\mathcal Q_j$ are the tautological subbundle and quotient bundle constructed in step 1.1; their fibers at $U_i,U_j$ are $U_i$ and $k^{d_j}/U_j$. On the charts from step 1.1 these are polynomial equations, so their common zero locus $I_{\\mathbf e}$ is closed. Its geometric points are exactly pairs consisting of an arrow-matrix tuple and a subrepresentation of dimension $\\mathbf e$. The closed inclusion $I_{\\mathbf e}\\hookrightarrow\\operatorname{Rep}_{\\mathbf d}(Q)_{\\bar k}\\times P_{\\mathbf e}$ composes with the relative Plucker–Segre closed immersion of step 1.1, so the projection to $\\operatorname{Rep}_{\\mathbf d}(Q)_{\\bar k}$ is projective by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 By [A1] and [F5], the projection in step 2.1 is proper; [F6] then makes its image closed in $\\operatorname{Rep}_{\\mathbf d}(Q)_{\\bar k}$. Its $\\bar k$-points are exactly the representations with a destabilizing subrepresentation of dimension $\\mathbf e$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "4.1 There are finitely many subvectors $\\mathbf e$ with $0<\\mathbf e\\le\\mathbf d$. The unstable locus is the finite union of the closed images from step 3.1 over the subvectors satisfying the strict phase inequality. Its complement is therefore open and, by [F1], is precisely $\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$. If $\\mathbf d=0$ the union is empty and the whole one-point representation space is open.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "5.1 The two declared axiom branches are [A2], used in step 1.1 through [F7] for the scheme-theoretic projective constructions, and [A1], used in step 3.1 through [F5] for properness. The semistability and HN counting arguments do not otherwise use AC.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F5",
+            "F7",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero dimension vector case is the whole one-point representation space, explicitly handled in step 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The destabilizing-subvector union omits zero; step 4.1 states its complement remains open when d=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one vertex and d=1 the Grassmannian incidence construction in steps 1.1, 2.1 is still projective and the strict violating-subvector set is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If there is no violating subvector, step 4.1 takes the complement of the empty closed union."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses 0<e≤d and the strict phase inequality; e=d has equal phase and is not destabilizing."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit: step 1.1 uses it through F7 for the scheme structures, and step 3.1 uses it through F5 for properness. The finite unstable-subvector union uses no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts openness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts openness, not an equivalence."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-vertex dimension one",
+          "result": "With one vertex, no arrows and d=1, the only nonzero subvector is e=d, whose phase is equal rather than strictly greater; the unstable union is empty.",
+          "evidence": "The strict inequality in step 2.1 and complement argument in step 4.1 show the unstable union is empty."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read all five current steps and thirteen exact cited prerequisites. Plucker recursion works in the localized quotient ring, not merely on points; normalized matrix charts, including r=0,n, construct subbundles and locally free quotients. Segre minor charts construct the finite-product closed embedding. Arrow-coordinate base extension preserves the surjections. Vanishing of S_i -> Q_j gives compatible closed incidence equations. Relative projectivity implies properness and closed image under the declared AC. Nonempty finite-type fibers over algebraically closed points have geometric points. Finitely many subvectors give the open complement; d=0 and the empty quiver are included. Classical field is bar(k); AC branches through homogeneous ideals and properness are explicit. Reineke §3 Theorem 3.2 checked with its algebraically closed hypothesis; local proof also allows arbitrary charges. Reader repair sound; no reader/refuter findings."
+      }
+    },
+    "lem-quiver-hardernarasimhan-filtrations-exist-are-unique-and-descend": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-acyclic-quiver-stability-data",
+          "source_section": "Definition",
+          "quote": "Let $Q=(Q_0,Q_1,s,t)$ be a finite quiver: $Q_0$ and $Q_1$ are finite sets,\nand $s,t:Q_1\\to Q_0$ give the source and target of each arrow. Assume $Q$ has\nno directed cycles. For a field $K$, a finite-dimensional representation $M$\nassigns a finite-dimensional $K$-vector space $M_i$ to each $i\\in Q_0$ and a\nlinear map $M_a:M_{s(a)}\\to M_{t(a)}$ to each $a\\in Q_1$. A morphism is a\nfamily of linear maps at the vertices commuting with all arrow maps. Write\n$\\mathcal A_Q(K)$ for this category and\n$\\mathbf d(M)=(\\dim_K M_i)_{i\\in Q_0}\\in\\mathbb N^{Q_0}$ for its dimension\nvector. For the finite-field Hall branch, fix $k=\\mathbb F_q$ and write\n$\\mathcal A_Q=\\mathcal A_Q(k)$. The next lemma proves the abelian and Euler\nproperties over any field; over $k$ it constructs a small finitary abelian\nskeleton of $\\mathcal A_Q$, so $\\mathcal A_Q$ is essentially small.\n\nFor $\\mathbf d,\\mathbf e\\in\\mathbb Z^{Q_0}$ define the bilinear form\n$$\\chi_Q(\\mathbf d,\\mathbf e)=\\sum_{i\\in Q_0}d_i e_i-\\sum_{a:i\\to j}d_i e_j,$$\nand its skew-symmetrization\n$\\langle\\mathbf d,\\mathbf e\\rangle=\\chi_Q(\\mathbf d,\\mathbf e)-\\chi_Q(\\mathbf e,\\mathbf d)$.\nThe next lemma proves that $\\chi_Q(\\mathbf d(M),\\mathbf d(N))$ is the\nHom-minus-Yoneda-Ext$^1$ dimension for this arrow convention.\n\nFix $z_i\\in\\mathbb H:=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ for each\nvertex and extend $Z(\\mathbf d)=\\sum_i d_i z_i$ additively. If\n$\\mathbf d\\in\\mathbb N^{Q_0}$ is nonzero, then\n$\\operatorname{Im}Z(\\mathbf d)=\\sum_i d_i\\operatorname{Im}z_i>0$; thus its\nprincipal argument lies in $(0,\\pi)$. For a nonzero representation $M$, put\n$\\phi_Z(M)=\\arg Z(\\mathbf d(M))/\\pi\\in(0,1)$. Call\n$M$ **$Z$-semistable** if every nonzero subrepresentation $U\\subseteq M$\nsatisfies $\\phi_Z(U)\\le\\phi_Z(M)$, and **$Z$-stable** if the inequality is\nstrict for every proper nonzero subrepresentation.\n\nFor the semistable groupoids and stacks below, include the zero representation\nas semistable without assigning it a phase. Stable objects and HN factors\nremain nonzero.\n\nFor a dimension vector $\\mathbf d$, let\n$$\\operatorname{Rep}_{\\mathbf d}(Q)=\\prod_{a:i\\to j} \\operatorname{Hom}_k(k^{d_i},k^{d_j}),\\qquad G_{\\mathbf d}=\\prod_{i\\in Q_0}\\operatorname{GL}_{d_i,k}.$$\nThe group $G_{\\mathbf d}$ acts by change of bases. Define\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ geometrically: its points over an\nalgebraic closure $\\bar k$ are representations for which every nonzero\n$\\bar k$-subrepresentation satisfies the semistability inequality. The\nassociated quotient stack is\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)=[\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)/G_{\\mathbf d}]$.\nFor $\\mathbf d=0$, set $\\operatorname{Rep}^{ss}_{\\mathbf0}=\\operatorname{Rep}_{\\mathbf0}=\\operatorname{Spec}k$.\nThe group $G_{\\mathbf0}$ is trivial, so its rational-point groupoid has one\nzero object, trivial automorphism group, and cardinality $1$.\nHere $[X/G]$ denotes the groupoid-valued quotient: over a scheme $S$ its\nobjects are $G$-torsors on $S$ with equivariant maps to $X$, and its arrows\nare equivariant isomorphisms over $S$. The openness lemma below proves that\n$\\operatorname{Rep}^{ss}_{\\mathbf d}$ is open.\n\nFor a finite groupoid $\\mathcal G$, define its groupoid cardinality by\n$$|\\mathcal G|=\\sum_{[x]\\in\\operatorname{Iso}(\\mathcal G)} \\frac{1}{|\\operatorname{Aut}_{\\mathcal G}(x)|}.$$\nThe rational-point groupoid of $\\mathfrak M^{ss}_{\\mathbf d}$ is finite, and\nthe finite-field descent lemma identifies it with the groupoid of finite-field\nsemistable representations and their isomorphisms. No Calabi–Yau structure,\npotential, orientation data, vanishing cycles, or physical state-counting\nidentification is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite acyclic quiver and $K$ any field. The category\n$\\mathcal A_Q(K)$ of finite-dimensional representations is abelian. For all\n$X,Y\\in\\mathcal A_Q(K)$, the spaces $\\operatorname{Hom}(X,Y)$ and Yoneda\n$\\operatorname{Ext}^1(X,Y)$ are finite-dimensional $K$-vector spaces, and\n$$\\dim_K\\operatorname{Hom}(X,Y)-\\dim_K\\operatorname{YExt}^1(X,Y) =\\chi_Q(\\mathbf d(X),\\mathbf d(Y)).$$\nThe explicit projective resolution below shows that the projective-resolution\ngroups $\\operatorname{Ext}^r_{\\mathcal A_Q(K)}(X,Y)$ vanish for $r\\ge2$; these\ngroups are the cohomology of applying $\\operatorname{Hom}_{\\mathcal A_Q(K)}(-,Y)$\nto a projective resolution. If\n$K=\\mathbb F_q$, the displayed vector spaces have finite underlying sets and\n$\\mathcal A_Q(K)$ has a small skeleton (a small full subcategory with one\nrepresentative of each isomorphism class). Thus $\\mathcal A_Q(K)$ is essentially\nsmall, and this skeleton is a small finitary abelian category. Yoneda\n$\\operatorname{Ext}^1$ is classified directly below; it is\nnot identified with derived $\\operatorname{Ext}^1$ by an unstated theorem.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-upper-half-plane-sum-phase-between",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb H=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ and define\n$\\phi(z)=\\arg(z)/\\pi\\in(0,1)$. For $z,w\\in\\mathbb H$, the phase of $z+w$\nlies between $\\phi(z)$ and $\\phi(w)$, strictly between them when they are\nunequal and equal to their common value when they coincide.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $M\\ne0$ have dimension vector $\\mathbf d$. The nonzero dimension vectors of its subrepresentations form a nonempty subset of the finite set $\\{\\mathbf e:0\\le e_i\\le d_i\\}$. Choose the largest attained phase and, among subobjects attaining it, the largest attained total dimension. Such a phase and dimension are maxima of finite sets of attained values, so they are attained without an infinite choice. Let $S\\subseteq M$ attain both maxima. Every nonzero subobject of $S$ is a subobject of $M$, so its phase is at most $\\phi_Z(S)$; hence $S$ is semistable.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $A,B$ are semistable and $\\phi_Z(A)>\\phi_Z(B)$, then $\\operatorname{Hom}(A,B)=0$. Indeed, a nonzero map has a nonzero image $I$. From $0\\to\\ker f\\to A\\to I\\to0$, semistability of $A$ and [F3] force $\\phi_Z(I)\\ge\\phi_Z(A)$: if the kernel is zero the phases are equal; if the kernel is nonzero and $\\phi_Z(I)<\\phi_Z(A)$, the phase of the sum lies strictly below $\\phi_Z(A)$, contradicting $Z(A)=Z(\\ker f)+Z(I)$. But $I\\subseteq B$ and semistability of $B$ give $\\phi_Z(I)\\le\\phi_Z(B)$, a contradiction.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $T\\subseteq M/S$ is nonzero, let $P\\subseteq M$ be its inverse image. Then $0\\to S\\to P\\to T\\to0$ is exact. If $\\phi_Z(T)>\\phi_Z(S)$, [F3] gives $\\phi_Z(P)>\\phi_Z(S)$, contrary to maximality of the phase of $S$. If $\\phi_Z(T)=\\phi_Z(S)$, additivity and [F3] give $\\phi_Z(P)=\\phi_Z(S)$, while $|\\mathbf d(P)|>|\\mathbf d(S)|$, contrary to the second maximum. Thus every nonzero subobject of $M/S$ has phase strictly less than $\\phi_Z(S)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Consider two filtrations with first subobjects $S,S'$ of phases $p,p'$. If $p>p'$, every factor in the quotient filtration of $M/S'$ has phase below $p'$. Step 1.2 therefore makes every map from $S$ to each such factor zero. Induction along the finite quotient filtration shows $\\operatorname{Hom}(S,M/S')=0$: a map whose projection to the last factor is zero factors through the preceding subobject. Thus the inclusion of $S$ in $M$ factors through $S'$, giving a nonzero map $S\\to S'$, contrary to $\\operatorname{Hom}(S,S')=0$ from step 1.2. Interchanging $S,S'$ similarly rules out $p'>p$; hence $p=p'$. Applying step 1.2 to all factors of both quotients now gives $S\\subseteq S'$ and $S'\\subseteq S$, hence $S=S'$. Induction on the quotient proves equality of the full filtrations.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Induct on $|\\mathbf d(M)|$. The zero representation has the empty filtration. For $M\\ne0$, the quotient $M/S$ has smaller total dimension, so by induction it has a filtration with semistable factors in strictly decreasing phase order. Step 2.1 places every one of those phases below $\\phi_Z(S)$. Pulling that filtration back along $M\\to M/S$ and placing $S$ first gives the required filtration of $M$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $M$ be defined over $k$, set $M_{\\bar k}=M\\otimes_k\\bar k$, and let $\\sigma(x)=x^q$ be Frobenius. Applying $\\sigma$ to a filtration preserves the arrow maps of $M_{\\bar k}$, every dimension vector, and every phase. It therefore gives another HN filtration; uniqueness proved above fixes each term. At each vertex, a Frobenius-invariant subspace has a unique reduced row-echelon basis matrix. Applying $\\sigma$ gives another such matrix for the same subspace, so uniqueness makes the matrix fixed entrywise. Its entries lie in $\\mathbb F_q$, and the arrow maps of $M$ preserve these descended subspaces. Thus the filtration descends to $k$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If an $\\mathbb F_q$-object is geometrically unstable, it has a geometric subrepresentation of phase greater than its total phase. Step 1.1 chooses a subobject of maximal phase, so the first HN term has phase greater than the total phase. Step 4.1 descends that term and its phase inequality to $\\mathbb F_q$, contradicting $\\mathbb F_q$-semistability. Conversely, an $\\mathbb F_q$-subrepresentation extends to $\\bar k$ with the same dimension vector and phase. This proves the stated equivalence and the result.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero representation has the empty filtration by step 3.1; if Q has no vertices this is the only representation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives the empty HN filtration for M=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-dimensional nonzero representation the maximal subobject in step 1.1 is the whole simple object, yielding a one-factor filtration."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Equal-phase subobjects trigger the maximal-total-dimension clause in step 2.1, so quotient factors have strictly lower phase."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The equality case in step 2.1 and the strict phase ordering in step 3.1 cover the phase boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 maximizes over a finite set of attained dimension vectors and phases; it uses no infinite choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 5.1 shows geometric semistability implies the finite-field subrepresentation test by descending a destabilizing HN term."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 extends any finite-field subrepresentation to the algebraic closure with unchanged dimension and phase."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read all seven steps and all three supplier statements/proofs. Finite attained dimension vectors ensure both maxima exist. The phase-between lemma forces strictly smaller phase for every nonzero subobject of M/S; applying induction to its first maximal-phase term then bounds all later factors. Hom vanishing to lower-phase semistable factors proves uniqueness via finite quotient filtrations. Total dimension strictly drops, including empty zero filtration. Frobenius invariance preserves dimensions/charges and uniqueness fixes every term. Unique RREF at each vertex has entries fixed by x -> x^q, hence lies in F_q and descends with arrow compatibility. Both directions of geometric/rational semistability follow, with zero excluded from phase evaluation. No infinite choice. Compared Reineke §2 Proposition 2.5 and phase convention in Bridgeland §4.4; no reader/refuter finding or defect."
+      }
+    },
+    "lem-finite-field-quiver-semistable-stack-points-are-hall-groupoids": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-acyclic-quiver-stability-data",
+          "source_section": "Definition",
+          "quote": "Let $Q=(Q_0,Q_1,s,t)$ be a finite quiver: $Q_0$ and $Q_1$ are finite sets,\nand $s,t:Q_1\\to Q_0$ give the source and target of each arrow. Assume $Q$ has\nno directed cycles. For a field $K$, a finite-dimensional representation $M$\nassigns a finite-dimensional $K$-vector space $M_i$ to each $i\\in Q_0$ and a\nlinear map $M_a:M_{s(a)}\\to M_{t(a)}$ to each $a\\in Q_1$. A morphism is a\nfamily of linear maps at the vertices commuting with all arrow maps. Write\n$\\mathcal A_Q(K)$ for this category and\n$\\mathbf d(M)=(\\dim_K M_i)_{i\\in Q_0}\\in\\mathbb N^{Q_0}$ for its dimension\nvector. For the finite-field Hall branch, fix $k=\\mathbb F_q$ and write\n$\\mathcal A_Q=\\mathcal A_Q(k)$. The next lemma proves the abelian and Euler\nproperties over any field; over $k$ it constructs a small finitary abelian\nskeleton of $\\mathcal A_Q$, so $\\mathcal A_Q$ is essentially small.\n\nFor $\\mathbf d,\\mathbf e\\in\\mathbb Z^{Q_0}$ define the bilinear form\n$$\\chi_Q(\\mathbf d,\\mathbf e)=\\sum_{i\\in Q_0}d_i e_i-\\sum_{a:i\\to j}d_i e_j,$$\nand its skew-symmetrization\n$\\langle\\mathbf d,\\mathbf e\\rangle=\\chi_Q(\\mathbf d,\\mathbf e)-\\chi_Q(\\mathbf e,\\mathbf d)$.\nThe next lemma proves that $\\chi_Q(\\mathbf d(M),\\mathbf d(N))$ is the\nHom-minus-Yoneda-Ext$^1$ dimension for this arrow convention.\n\nFix $z_i\\in\\mathbb H:=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ for each\nvertex and extend $Z(\\mathbf d)=\\sum_i d_i z_i$ additively. If\n$\\mathbf d\\in\\mathbb N^{Q_0}$ is nonzero, then\n$\\operatorname{Im}Z(\\mathbf d)=\\sum_i d_i\\operatorname{Im}z_i>0$; thus its\nprincipal argument lies in $(0,\\pi)$. For a nonzero representation $M$, put\n$\\phi_Z(M)=\\arg Z(\\mathbf d(M))/\\pi\\in(0,1)$. Call\n$M$ **$Z$-semistable** if every nonzero subrepresentation $U\\subseteq M$\nsatisfies $\\phi_Z(U)\\le\\phi_Z(M)$, and **$Z$-stable** if the inequality is\nstrict for every proper nonzero subrepresentation.\n\nFor the semistable groupoids and stacks below, include the zero representation\nas semistable without assigning it a phase. Stable objects and HN factors\nremain nonzero.\n\nFor a dimension vector $\\mathbf d$, let\n$$\\operatorname{Rep}_{\\mathbf d}(Q)=\\prod_{a:i\\to j} \\operatorname{Hom}_k(k^{d_i},k^{d_j}),\\qquad G_{\\mathbf d}=\\prod_{i\\in Q_0}\\operatorname{GL}_{d_i,k}.$$\nThe group $G_{\\mathbf d}$ acts by change of bases. Define\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ geometrically: its points over an\nalgebraic closure $\\bar k$ are representations for which every nonzero\n$\\bar k$-subrepresentation satisfies the semistability inequality. The\nassociated quotient stack is\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)=[\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)/G_{\\mathbf d}]$.\nFor $\\mathbf d=0$, set $\\operatorname{Rep}^{ss}_{\\mathbf0}=\\operatorname{Rep}_{\\mathbf0}=\\operatorname{Spec}k$.\nThe group $G_{\\mathbf0}$ is trivial, so its rational-point groupoid has one\nzero object, trivial automorphism group, and cardinality $1$.\nHere $[X/G]$ denotes the groupoid-valued quotient: over a scheme $S$ its\nobjects are $G$-torsors on $S$ with equivariant maps to $X$, and its arrows\nare equivariant isomorphisms over $S$. The openness lemma below proves that\n$\\operatorname{Rep}^{ss}_{\\mathbf d}$ is open.\n\nFor a finite groupoid $\\mathcal G$, define its groupoid cardinality by\n$$|\\mathcal G|=\\sum_{[x]\\in\\operatorname{Iso}(\\mathcal G)} \\frac{1}{|\\operatorname{Aut}_{\\mathcal G}(x)|}.$$\nThe rational-point groupoid of $\\mathfrak M^{ss}_{\\mathbf d}$ is finite, and\nthe finite-field descent lemma identifies it with the groupoid of finite-field\nsemistable representations and their isomorphisms. No Calabi–Yau structure,\npotential, orientation data, vanishing cycles, or physical state-counting\nidentification is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-quiver-semistable-loci-are-open",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $Q$, $k$, $\\mathbf d$, and $Z$ be as in\n[[def-finite-acyclic-quiver-stability-data]]. The subset\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ of representations over $\\bar k$\nthat are semistable for every nonzero geometric subrepresentation is Zariski\nopen in $\\operatorname{Rep}_{\\mathbf d}(Q)_{\\bar k}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-quiver-hardernarasimhan-filtrations-exist-are-unique-and-descend",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be finite and acyclic, let $k=\\mathbb F_q$, and give every vertex an\narbitrary charge $z_i\\in\\mathbb H$. Over any field extension $K/k$, every\nfinite-dimensional representation has a unique filtration\n$$0=M_0\\subsetneq M_1\\subsetneq\\cdots\\subsetneq M_r=M$$\nwhose nonzero factors $M_j/M_{j-1}$ are $Z$-semistable and have strictly\ndecreasing phases. If $M$ is defined over $k$, the unique filtration of its\nscalar extension $M_{\\bar k}=M\\otimes_k\\bar k$ is Frobenius invariant and\ndescends to $k$. Consequently geometric\nsemistability of an $\\mathbb F_q$-representation is equivalent to\nsemistability tested only on its $\\mathbb F_q$-subrepresentations. Write\n$|\\mathbf d|=\\sum_i d_i$ for total dimension.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-quiver-semistable-loci-are-open",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $Q$, $k$, $\\mathbf d$, and $Z$ be as in\n[[def-finite-acyclic-quiver-stability-data]]. The subset\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ of representations over $\\bar k$\nthat are semistable for every nonzero geometric subrepresentation is Zariski\nopen in $\\operatorname{Rep}_{\\mathbf d}(Q)_{\\bar k}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the inherited assumption [A1], the semistable locus is the open subscheme from [F1]. An object of its quotient groupoid over $\\mathbb F_q$ is a tuple of $\\operatorname{GL}_{d_i}$-torsors together with an equivariant semistable representation. A $\\operatorname{GL}_{n}$-torsor is the frame torsor of its associated $n$-dimensional vector space. Every finite-dimensional vector space over $\\mathbb F_q$ has a basis, so that associated space is isomorphic to $\\mathbb F_q^n$ and its frame torsor is trivial. Applying this at the finitely many vertices trivializes the product $G_{\\mathbf d}$-torsor. Thus every quotient-stack object is isomorphic to a representation on the standard spaces $k^{d_i}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under a chosen trivialization, an equivariant map to $\\operatorname{Rep}^{ss}_{\\mathbf d}$ is an arrow-matrix tuple. Two trivialized objects are isomorphic exactly when their tuples differ by change of bases in $G_{\\mathbf d}(\\mathbb F_q)$. If $\\mathbf d\\ne0$,",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "There are finitely many arrow-matrix tuples on the fixed finite vector spaces, and each automorphism group is a subgroup of the finite group $G_{\\mathbf d}(\\mathbb F_q)$. Hence the groupoid is finite. Under the equivalence of step 2.1, the stabilizer of a tuple is exactly $\\operatorname{Aut}_{\\mathcal A_Q}(M)$. Substituting these stabilizers into the groupoid-cardinality definition in [[def-finite-acyclic-quiver-stability-data]] gives the displayed sum.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If Q has no vertices then d=0 and the unique trivial torsor gives the one-object groupoid in steps 1.1–3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly includes the zero representation as semistable without assigning a phase. Step 2.1 treats d=0 separately: the representation space is a point, GL_0 is trivial, and the quotient groupoid has one zero object with trivial automorphism group and mass 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-dimensional vertex space step 1.1 trivializes its GL_1 torsor by choosing a basis over F_q."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero coordinates use the trivial GL_0 factor in step 1.1; finiteness in step 3.1 is unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement is a groupoid equivalence and does not assert an endpoint theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses finite-dimensional vector-space bases; the inherited AC branch [A1] is only the open-substack premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies rational geometric-semistable tuples with finite-field semistable representations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The converse in step 2.1 uses the HN descent supplier [F2] to pass from finite-field semistability to the geometric test."
+        }
+      ],
+      "axiom_uses": [
+        {
+          "axiom": "def-axiom-of-choice",
+          "steps": [
+            "1.1"
+          ]
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero dimension stack point",
+          "result": "For d=0 the representation space and G_d are points/trivial, so the groupoid has one object with trivial automorphism and cardinality 1.",
+          "evidence": "The torsor trivialization in step 1.1 and stabilizer mass in step 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read all three steps and exact stability, openness and HN prerequisites. Each product-GL torsor corresponds to finitely many associated vector spaces; finite bases trivialize its frame torsors, yielding the action groupoid of rational matrix tuples. Isomorphisms are precisely changes of bases and stabilizers are representation automorphisms. HN Frobenius descent supplies equivalence of rational and geometric semistability, rather than assuming it. Finite matrix sets and finite GL groups make the groupoid essentially finite and give the automorphism-weighted cardinality. d=0 has the unique zero object and trivial group, hence mass 1; empty quiver likewise. AC is inherited for openness only. No reader/refuter finding or defect. Source attribution correction: arXiv:1002.4372v1 title page identifies Tom Bridgeland, not Dominic Joyce; corrected the source title and manifest mirror without changing mathematics. Closed defect nm81-b56-motivic-source-author.",
+        "defect_ids": [
+          "nm81-b56-motivic-source-author"
+        ],
+        "repair_confidence": 1
+      }
+    },
+    "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition boundary check: For an empty quiver the representation category has only the zero object and the empty dimension product is the degree-zero completion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition includes δ_0 as the zero-degree term and as the unit for convolution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits one-vertex dimension vectors and fixes the same completion and torus formulas."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition explicitly counts distinct embedded subobject classes even if their domains are isomorphic."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition boundary check: The subobject-first formula includes the zero subobject and the whole-object subobject, corresponding to the two exact-sequence endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Hall carrier and its dimension completion are explicitly over Q; finite-dimensional components have bases from finite matrix orbit sets, with no representative selection in the definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The subobject-first multiplication is assigned as the opposite quotient-first Hall product; finite dimension-vector decompositions define its completion. There is no property P whose implication to a second condition is asserted by this Definition.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The subobject-first multiplication is assigned as the opposite quotient-first Hall product; finite dimension-vector decompositions define its completion. There is no property P whose implication to a second condition is asserted by this Definition.",
+            "item_sha256": "670c9cd92f557dfa195c6f345642cc782be87302762d68957d5e0c6fd6d4faa9",
+            "row_sha256": "fdb5976b07a11af0b1bbaa049b8a030fbcb0b02f56e86caca486c5f9a0ceef08"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The formulas for Euler and skew torus products specify their coefficients and grading. They do not claim that every completed algebra or torus arises from these Hall data, so there is no reverse characterization to prove.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_frattini_placement",
+            "reason": "The formulas for Euler and skew torus products specify their coefficients and grading. They do not claim that every completed algebra or torus arises from these Hall data, so there is no reverse characterization to prove.",
+            "item_sha256": "670c9cd92f557dfa195c6f345642cc782be87302762d68957d5e0c6fd6d4faa9",
+            "row_sha256": "20da231480d465a9ed73d6f7d93b62a7eeb876af0004753e7ddd8fa010b3f6f2"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read the full Definition and four actual suppliers. Rational direct-sum coefficients H_(A_Q,Q) and characteristic basis identification make all subsequent automorphism denominators well-typed. Opposite of quotient-first multiplication counts embedded subobjects in the first factor. Each fixed dimension has finitely many matrix orbits; finite decompositions of a degree justify dimension-product completion and all-object/phase sums. Both targets are over Q(sqrt(q)), with positive real t; their exponents are bilinear and zero degree gives the unit. Empty quiver has only degree zero. No analytic convergence or BPS assertion. Bridgeland §2.1 and §3.3–3.4 conventions checked. Reader coefficient repair is sound and all direct uses will be checked; no reader/refuter finding."
+      }
+    },
+    "lem-finite-quiver-hall-extension-orbit-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-untwisted-hall-algebra",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a small finitary abelian category in the sense of\n[[def-hall-finitary-abelian-category]], and let $R$ be a commutative ring\nwith unit. Define the free $R$-module\n$$ H_{\\mathcal A,R}:=\\bigoplus_{[M]\\in\\operatorname{Iso}(\\mathcal A)}R[M], $$\nwhere $[M]$ is a basis symbol for the isomorphism class of $M$. For objects $N,L$, let\n$$\\operatorname{Mon}_{\\mathcal A}(N,L):=\\{f\\in\\operatorname{Hom}_{\\mathcal A}(N,L): f\\text{ is monic}\\}.$$\nThis is a finite set by the Hom condition in\n[[def-hall-finitary-abelian-category]]. For $f,g$ in this set, write\n$f\\sim_N g$ when $g=f\\circ u$ for an isomorphism $u:N\\to N$; this is an\nequivalence relation by [[def-isomorphism-groupoid-and-connected-category]].\nThe quotient set $\\operatorname{Mon}_{\\mathcal A}(N,L)/\\sim_N$ represents\nexactly the subobjects of $L$ isomorphic to $N$: each class gives the usual\nsubobject class from [[def-subobject-and-quotient-object]], and the mutual-\nfactorisation theorem says two such monomorphisms give the same subobject\nexactly when they differ by such an isomorphism\n([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).\nEvery subobject class with domain isomorphic to $N$ is represented by composing\nits monomorphism with an isomorphism from $N$, one class at a time. The\ncokernel quotient is independent of that representative by\n[[thm-the-quotient-is-independent-of-the-representing-monomorphism]] and\n[[def-the-quotient-of-an-object-by-a-subobject]]. Define $g^L_{M,N}$ to be the\nnumber of classes $[f]_{\\sim_N}$ for which $\\operatorname{coker}(f)\\cong M$.\nThe finiteness lemma below also proves that the resulting product has finite\nsupport. Extend the operation\n$$ [M]*[N]:=\\sum_{[L]\\in\\operatorname{Iso}(\\mathcal A)}g^L_{M,N}[L] $$\n$R$-bilinearly, mapping each natural number coefficient to its multiple of\n$1_R$. The order is fixed: the counted short exact sequence is\n$$ 0\\longrightarrow N\\longrightarrow L\\longrightarrow M\\longrightarrow0. $$\n\nThis is the **untwisted Hall product**. It does not use an Euler form, a square\nroot of a field size, or division by automorphism cardinalities. The finite\ncoefficient and finite-support claims needed for the operation to define a\nbilinear product are established in\n[[lem-untwisted-hall-product-finiteness]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+          "source_section": "Definition",
+          "quote": "Fix $Q$, $k=\\mathbb F_q$, and $Z$ as in\n[[def-finite-acyclic-quiver-stability-data]]. For a representation $M$, write\n$a_M=|\\operatorname{Aut}_{\\mathcal A_Q}(M)|$ and let $\\delta_M$ be the basis\nfunction of its isomorphism class. Let $\\mathcal S_Q$ be the small finitary\nabelian skeleton constructed in\n[[lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form]].\nDefine $H_Q:=H_{\\mathcal S_Q,\\mathbb Q}$, identifying its basis with the\nisomorphism classes of $\\mathcal A_Q$. Fullness and transport of subobjects\nand cokernels along isomorphisms preserve the Hall coefficients. Thus $H_Q$ is\nthe direct sum over those classes, with rational\ncoefficients and the quotient-first untwisted Hall product of\n[[def-untwisted-hall-algebra]]. In that convention $[A]*_{qf}[B]$ counts\nsequences $0\\to B\\to L\\to A\\to0$, and identify the basis symbol $[M]$ with\nthe characteristic function $\\delta_M$. Define the **subobject-first** product\nby $f\\star g:=g*_{qf}f$. Then\n$$(f\\star g)(L)=\\sum_{U\\subseteq L} f(U)g(L/U),$$\nwhere the sum is over subobject classes of $L$: monomorphisms into $L$ modulo\nisomorphisms of their domains commuting with the monomorphism. Distinct\nembedded subobjects are counted separately even when their domains are\nisomorphic. Put\n$\\kappa_M=a_M\\delta_M$.\n\nFor $\\mathbf d\\in\\mathbb N^{Q_0}$, let $H_{Q,\\mathbf d}$ be the span of\nclasses of dimension vector $\\mathbf d$. It is finite-dimensional: the\nrepresentation set on the standard spaces $k^{d_i}$ is finite. Define the\ndimension completion\n$$\\widehat H_Q=\\prod_{\\mathbf d\\in\\mathbb N^{Q_0}}H_{Q,\\mathbf d}.$$\nThe product is extended degreewise; each coefficient uses finitely many\ndecompositions $\\mathbf d=\\mathbf a+\\mathbf b$. There is no analytic\nconvergence assertion. The all-object and phase factors are\n$$A_{\\mathrm{all}}=\\sum_{[M]}\\delta_M,\\qquad S_Z(\\phi)=\\delta_0+\\sum_{\\substack{[M]\\\\M\\ne0,\\ \\phi_Z(M)=\\phi,\\ M\\ Z\\text{-semistable}}}\\delta_M.$$\nEach is an element of $\\widehat H_Q$ because each homogeneous component has\nfinite support.\n\nLet $t=\\sqrt q>0$ and $K_q=\\mathbb Q(\\sqrt q)$. Take the completed Euler\ntorus and skew torus over $K_q$, with bases $X^{\\mathbf d}$ and\n$x^{\\mathbf d}$, respectively, and products\n$$X^{\\mathbf d}X^{\\mathbf e}=q^{-\\chi_Q(\\mathbf e,\\mathbf d)}X^{\\mathbf d+\\mathbf e},\\qquad x^{\\mathbf d}*x^{\\mathbf e}=t^{-\\langle\\mathbf e,\\mathbf d\\rangle}x^{\\mathbf d+\\mathbf e}.$$\nTheir completions use the same dimension product. The next theorem proves\nassociativity and gives the continuous Euler and skew integration maps.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite acyclic quiver and $K$ any field. The category\n$\\mathcal A_Q(K)$ of finite-dimensional representations is abelian. For all\n$X,Y\\in\\mathcal A_Q(K)$, the spaces $\\operatorname{Hom}(X,Y)$ and Yoneda\n$\\operatorname{Ext}^1(X,Y)$ are finite-dimensional $K$-vector spaces, and\n$$\\dim_K\\operatorname{Hom}(X,Y)-\\dim_K\\operatorname{YExt}^1(X,Y) =\\chi_Q(\\mathbf d(X),\\mathbf d(Y)).$$\nThe explicit projective resolution below shows that the projective-resolution\ngroups $\\operatorname{Ext}^r_{\\mathcal A_Q(K)}(X,Y)$ vanish for $r\\ge2$; these\ngroups are the cohomology of applying $\\operatorname{Hom}_{\\mathcal A_Q(K)}(-,Y)$\nto a projective resolution. If\n$K=\\mathbb F_q$, the displayed vector spaces have finite underlying sets and\n$\\mathcal A_Q(K)$ has a small skeleton (a small full subcategory with one\nrepresentative of each isomorphism class). Thus $\\mathcal A_Q(K)$ is essentially\nsmall, and this skeleton is a small finitary abelian category. Yoneda\n$\\operatorname{Ext}^1$ is classified directly below; it is\nnot identified with derived $\\operatorname{Ext}^1$ by an unstated theorem.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-untwisted-hall-product-finiteness",
+          "source_section": "Statement",
+          "quote": "For a finitary abelian category, each untwisted Hall coefficient\n$g^L_{M,N}$ is finite and depends only on the isomorphism classes of\n$M,N,L$. For fixed $M,N$, only finitely many isomorphism classes $[L]$\nhave $g^L_{M,N}\\ne0$. Hence the basis formula in\n[[def-untwisted-hall-algebra]] is a finite sum in its direct-sum module.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix the middle object to be $M$. The coefficient of $\\delta_M$ in $\\delta_U\\star\\delta_V$ counts subobjects $S\\subseteq M$ with $S\\cong U$ and $M/S\\cong V$, by [F1] and [F2]. For each such $S$, the monomorphisms $U\\to M$ with image $S$ form a set of size $|\\operatorname{Aut}(U)|$; the epimorphisms $M\\to V$ with kernel $S$ form a set of size $|\\operatorname{Aut}(V)|$. These choices are independent. Hence the number of endpoint-fixed short exact sequences with middle object literally $M$ is $$g^M_{V,U}|\\operatorname{Aut}(U)||\\operatorname{Aut}(V)|,$$ where $g^M_{V,U}$ is the Hall coefficient of [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The finite group $\\operatorname{Aut}(M)$ acts on those sequences by $(i,p)\\mapsto(g i,p g^{-1})$. Its orbits are exactly the endpoint-fixed Yoneda classes with middle term isomorphic to $M$: an isomorphism from any middle object $E\\cong M$ transports its sequence to one on $M$, and changing that isomorphism changes the result by this action. The stabilizer of a sequence $(i,p)$ consists of $g$ with $gi=i$ and $pg=p$. Put $h=g-1$. Since $hi=0$ and $p$ is an epimorphism, $h$ factors uniquely as $h=ifp$ for a unique $f:V\\to U$. Conversely, $1+ifp$ is invertible because $(ifp)^2=0$, with inverse $1-ifp$. Thus every stabilizer has exactly $|\\operatorname{Hom}(V,U)|$ elements.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a fixed sequence, the map from $\\operatorname{Aut}(M)$ to its orbit has fibers exactly the cosets of its stabilizer, so that orbit has size $|\\operatorname{Aut}(M)|/|\\operatorname{Hom}(V,U)|$. Summing over the $|\\operatorname{YExt}^1(V,U)_M|$ orbits gives $$g^M_{V,U}|\\operatorname{Aut}(U)||\\operatorname{Aut}(V)| =|\\operatorname{Aut}(M)|\\, \\frac{|\\operatorname{YExt}^1(V,U)_M|}{|\\operatorname{Hom}(V,U)|}.$$ Multiplying the coefficient of $\\delta_M$ in $\\kappa_U\\star\\kappa_V$ by the definition of $\\kappa_M$ yields precisely the claimed coefficient. Summing over the finitely many possible middle terms is valid by [F3] and [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement boundary check: If Q is empty, U=V=0 is the only case and the unique extension class has middle term zero; the formula gives coefficient 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary check: If either endpoint is zero, the zero-object unit cases have one extension class and a one-element Hom set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary check: The one-vertex split extension with U=V=F_q is checked explicitly by the q+1 line count in the finite-check record."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the stabilizer also for split extensions, using (ifp)^2=0 and inverse 1−ifp."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 preserve the endpoint-fixed sequence equivalence and its middle-object isomorphism class."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary check: The Aut(M)-orbit/stabilizer count is on finite sets; transport of an isomorphic middle term does not make a global choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a coefficient formula, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a coefficient formula, not a biconditional."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "name": "split vector-space extension over F2",
+          "result": "For U=V=F2 and M=F2², there is one extension class, |Hom(V,U)|=2, and three embedded lines; both normalized coefficients equal 3.",
+          "evidence": "The subobject count in step 1.1 and Aut(M)-orbit/stabilizer calculation in steps 1.2–2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read all three steps and five actual prerequisites. Fixed middle-object sequences number g_(V,U)^M a_U a_V; endpoint-fixed Aut(M) orbits are Yoneda classes using the already proved short-five identification. Stabilizers are exactly 1+i f p with f:V->U, inverse 1-i f p since p i=0. Orbit-stabilizer gives coefficient |YExt1(V,U)_M|/|Hom(V,U)| on kappa_M in subobject-first order. Finite support is proved by the generic supplier. U=0 or V=0 yields the unit, since Hom(0,U) is a singleton and all automorphisms have nonzero finite order. No unproved derived-Ext identification or arbitrary choice. Bridgeland Lemma 2.2 checked; no reader/refuter finding or defect."
+      }
+    },
+    "thm-finite-quiver-euler-and-skew-integration-is-multiplicative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+          "source_section": "Definition",
+          "quote": "Fix $Q$, $k=\\mathbb F_q$, and $Z$ as in\n[[def-finite-acyclic-quiver-stability-data]]. For a representation $M$, write\n$a_M=|\\operatorname{Aut}_{\\mathcal A_Q}(M)|$ and let $\\delta_M$ be the basis\nfunction of its isomorphism class. Let $\\mathcal S_Q$ be the small finitary\nabelian skeleton constructed in\n[[lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form]].\nDefine $H_Q:=H_{\\mathcal S_Q,\\mathbb Q}$, identifying its basis with the\nisomorphism classes of $\\mathcal A_Q$. Fullness and transport of subobjects\nand cokernels along isomorphisms preserve the Hall coefficients. Thus $H_Q$ is\nthe direct sum over those classes, with rational\ncoefficients and the quotient-first untwisted Hall product of\n[[def-untwisted-hall-algebra]]. In that convention $[A]*_{qf}[B]$ counts\nsequences $0\\to B\\to L\\to A\\to0$, and identify the basis symbol $[M]$ with\nthe characteristic function $\\delta_M$. Define the **subobject-first** product\nby $f\\star g:=g*_{qf}f$. Then\n$$(f\\star g)(L)=\\sum_{U\\subseteq L} f(U)g(L/U),$$\nwhere the sum is over subobject classes of $L$: monomorphisms into $L$ modulo\nisomorphisms of their domains commuting with the monomorphism. Distinct\nembedded subobjects are counted separately even when their domains are\nisomorphic. Put\n$\\kappa_M=a_M\\delta_M$.\n\nFor $\\mathbf d\\in\\mathbb N^{Q_0}$, let $H_{Q,\\mathbf d}$ be the span of\nclasses of dimension vector $\\mathbf d$. It is finite-dimensional: the\nrepresentation set on the standard spaces $k^{d_i}$ is finite. Define the\ndimension completion\n$$\\widehat H_Q=\\prod_{\\mathbf d\\in\\mathbb N^{Q_0}}H_{Q,\\mathbf d}.$$\nThe product is extended degreewise; each coefficient uses finitely many\ndecompositions $\\mathbf d=\\mathbf a+\\mathbf b$. There is no analytic\nconvergence assertion. The all-object and phase factors are\n$$A_{\\mathrm{all}}=\\sum_{[M]}\\delta_M,\\qquad S_Z(\\phi)=\\delta_0+\\sum_{\\substack{[M]\\\\M\\ne0,\\ \\phi_Z(M)=\\phi,\\ M\\ Z\\text{-semistable}}}\\delta_M.$$\nEach is an element of $\\widehat H_Q$ because each homogeneous component has\nfinite support.\n\nLet $t=\\sqrt q>0$ and $K_q=\\mathbb Q(\\sqrt q)$. Take the completed Euler\ntorus and skew torus over $K_q$, with bases $X^{\\mathbf d}$ and\n$x^{\\mathbf d}$, respectively, and products\n$$X^{\\mathbf d}X^{\\mathbf e}=q^{-\\chi_Q(\\mathbf e,\\mathbf d)}X^{\\mathbf d+\\mathbf e},\\qquad x^{\\mathbf d}*x^{\\mathbf e}=t^{-\\langle\\mathbf e,\\mathbf d\\rangle}x^{\\mathbf d+\\mathbf e}.$$\nTheir completions use the same dimension product. The next theorem proves\nassociativity and gives the continuous Euler and skew integration maps.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-quiver-hall-extension-orbit-count",
+          "source_section": "Statement",
+          "quote": "Let $U,V$ be finite-dimensional representations over $\\mathbb F_q$. For\n$\\kappa_M=|\\operatorname{Aut}(M)|\\delta_M$ and the subobject-first product\nfrom [[def-subobject-first-completed-finite-quiver-hall-algebra-and-tori]],\n$$\\kappa_U\\star\\kappa_V =\\sum_{[M]}\\frac{|\\operatorname{YExt}^1(V,U)_M|} {|\\operatorname{Hom}(V,U)|}\\,\\kappa_M,$$\nwhere $\\operatorname{YExt}^1(V,U)_M$ is the set of endpoint-fixed Yoneda\nclasses of $0\\to U\\to E\\to V\\to0$ whose middle term is isomorphic to $M$.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite acyclic quiver and $K$ any field. The category\n$\\mathcal A_Q(K)$ of finite-dimensional representations is abelian. For all\n$X,Y\\in\\mathcal A_Q(K)$, the spaces $\\operatorname{Hom}(X,Y)$ and Yoneda\n$\\operatorname{Ext}^1(X,Y)$ are finite-dimensional $K$-vector spaces, and\n$$\\dim_K\\operatorname{Hom}(X,Y)-\\dim_K\\operatorname{YExt}^1(X,Y) =\\chi_Q(\\mathbf d(X),\\mathbf d(Y)).$$\nThe explicit projective resolution below shows that the projective-resolution\ngroups $\\operatorname{Ext}^r_{\\mathcal A_Q(K)}(X,Y)$ vanish for $r\\ge2$; these\ngroups are the cohomology of applying $\\operatorname{Hom}_{\\mathcal A_Q(K)}(-,Y)$\nto a projective resolution. If\n$K=\\mathbb F_q$, the displayed vector spaces have finite underlying sets and\n$\\mathcal A_Q(K)$ has a small skeleton (a small full subcategory with one\nrepresentative of each isomorphism class). Thus $\\mathcal A_Q(K)$ is essentially\nsmall, and this skeleton is a small finitary abelian category. Yoneda\n$\\operatorname{Ext}^1$ is classified directly below; it is\nnot identified with derived $\\operatorname{Ext}^1$ by an unstated theorem.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-untwisted-hall-algebra-is-associative-and-unital",
+          "source_section": "Statement",
+          "quote": "For every small finitary abelian category $\\mathcal A$ and commutative\ncoefficient ring $R$, the operation of\n[[def-untwisted-hall-algebra]] is a well-defined associative $R$-bilinear\nmultiplication on $H_{\\mathcal A,R}$, with unit $[0]$, the basis symbol of\nthe zero object.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-untwisted-hall-product-finiteness",
+          "source_section": "Statement",
+          "quote": "For a finitary abelian category, each untwisted Hall coefficient\n$g^L_{M,N}$ is finite and depends only on the isomorphism classes of\n$M,N,L$. For fixed $M,N$, only finitely many isomorphism classes $[L]$\nhave $g^L_{M,N}\\ne0$. Hence the basis formula in\n[[def-untwisted-hall-algebra]] is a finite sum in its direct-sum module.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F4] to the small finitary abelian full skeleton supplied by [F3]. Its inclusion preserves isomorphism classes and subobject classes: transporting a monomorphism's domain to its skeleton representative gives a bijection on monomorphisms modulo domain isomorphism, and transports the quotient to the same quotient class. Thus its Hall coefficients are exactly those in [F1]. Write $*_q$ for this quotient-first product. By [F1], $f\\star g=g*_q f$, so $$(f\\star g)\\star h=h*_q(g*_q f)=(h*_q g)*_qf =f\\star(g\\star h)$$ by [F4]. The zero-object class is the unit for $*_q$, hence also for $\\star$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The degree of an extension is the sum of the endpoint dimension vectors. For a fixed output degree $\\mathbf n$, a product coefficient uses only the finitely many pairs $\\mathbf d+\\mathbf e=\\mathbf n$; each $H_{Q,\\mathbf d}$ is finite-dimensional by the representation-matrix definition. Thus [F5] extends the product degree by degree to $\\widehat H_Q$, and truncating above total dimension $D$ changes no coefficient of dimension at most $D$. This is continuity for the total-dimension filtration.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "On a normalized basis vector, $I(\\kappa_M)=X^{\\mathbf d(M)}$ because $\\kappa_M=|\\operatorname{Aut}(M)|\\delta_M$. For $\\mathbf d=\\mathbf d(U)$ and $\\mathbf e=\\mathbf d(V)$, [F2] gives $$I(\\kappa_U\\star\\kappa_V)= \\frac{|\\operatorname{YExt}^1(V,U)|}{|\\operatorname{Hom}(V,U)|} X^{\\mathbf d+\\mathbf e}.$$ By [F3], both sets are finite vector spaces and the ratio of their cardinalities is $$q^{\\dim\\operatorname{YExt}^1(V,U)-\\dim\\operatorname{Hom}(V,U)} =q^{-\\chi_Q(\\mathbf e,\\mathbf d)}.$$ This is exactly $I(\\kappa_U)I(\\kappa_V)$ in the Euler target.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "On the same basis, $J(\\kappa_M)=t^{\\chi_Q(\\mathbf d,\\mathbf d)}x^{\\mathbf d}$. Applying [F2] and [F3] to $\\kappa_U\\star\\kappa_V$ gives its $J$-image coefficient $$t^{-2\\chi_Q(\\mathbf e,\\mathbf d)+\\chi_Q(\\mathbf d+\\mathbf e,\\mathbf d+\\mathbf e)}.$$ By bilinearity, $$\\chi_Q(\\mathbf d+\\mathbf e,\\mathbf d+\\mathbf e) =\\chi_Q(\\mathbf d,\\mathbf d)+\\chi_Q(\\mathbf e,\\mathbf e) +\\chi_Q(\\mathbf d,\\mathbf e)+\\chi_Q(\\mathbf e,\\mathbf d).$$ Since $\\langle\\mathbf e,\\mathbf d\\rangle= \\chi_Q(\\mathbf e,\\mathbf d)-\\chi_Q(\\mathbf d,\\mathbf e)$ and $q=t^2$, the coefficient becomes $$t^{\\chi_Q(\\mathbf d,\\mathbf d)+\\chi_Q(\\mathbf e,\\mathbf e) -\\langle\\mathbf e,\\mathbf d\\rangle},$$ which is exactly the coefficient of $J(\\kappa_U)*J(\\kappa_V)$ in the skew target.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Bilinearity of $\\chi_Q$ makes the Euler twist associative: both parenthesizations of $X^{\\mathbf d}X^{\\mathbf e}X^{\\mathbf f}$ have exponent $-\\chi_Q(\\mathbf e,\\mathbf d)-\\chi_Q(\\mathbf f,\\mathbf d) -\\chi_Q(\\mathbf f,\\mathbf e)$. Bilinearity of $\\langle-,-\\rangle$ gives the same cocycle identity for the skew product. Both products have the degree-zero basis vector as unit. Step 1.2 gives finite-dimensional homogeneous components, so the formulas for $I$ and $J$ define degree-preserving linear maps and are continuous on the completion. Step 1.1 establishes the source unit and associativity, and steps 1.3–1.4 establish multiplicativity on normalized basis vectors. The cocycle calculation above establishes the target unit and associativity, so linearity and continuity extend $I$ and $J$ to unital algebra homomorphisms on the completions.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The degree-zero basis vector is the unit in step 2.1 and both integrations send it to the degree-zero monomial."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The normalized zero-object class and its degree-zero monomial satisfy the unit formula in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary check: The no-arrow one-vertex specialization is checked by the finite q=2 coefficient calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When the Euler form is symmetric the skew exponent in step 1.4 is zero, so the skew target becomes commutative on that lattice."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The degree-zero basis element is the unit for both target products in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every homogeneous component has finite matrix support and finite degree decompositions in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts algebra homomorphisms and does not state a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts algebra homomorphisms and does not state a biconditional."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "name": "one-vertex q=2 normalized square",
+          "result": "For U=V=F2, the extension ratio is 1/2; the Euler target coefficient is q⁻¹=1/2, and the skew target coefficient is t²=2.",
+          "evidence": "The coefficient derivations in steps 1.3–1.4."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read all five steps and all seven actual suppliers including generic associativity proof. Opposite multiplication preserves associativity/unit. Finite homogeneous supports and finite degree decompositions extend it continuously. On kappa_U,kappa_V the orbit formula yields q^(-chi(e,d)), with e the quotient degree; diagonal twist t^chi(d,d) converts this to t^(-<e,d>) exactly. Bilinearity proves both target cocycle identities and zero-degree units. Rational Hall coefficients and Q(sqrt(q)) targets make maps Q-linear unital homomorphisms; no K_q-linearity of the rational source is needed. Zero endpoints, empty quiver, q=2 and square-q specialization retain nonzero denominators and t>0. Bridgeland §3.4 Lemma 3.3 and Remark 3.4 checked. Reader/refuter findings empty; no defect."
+      }
+    },
+    "thm-finite-quiver-hall-wall-crossing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+          "source_section": "Definition",
+          "quote": "Fix $Q$, $k=\\mathbb F_q$, and $Z$ as in\n[[def-finite-acyclic-quiver-stability-data]]. For a representation $M$, write\n$a_M=|\\operatorname{Aut}_{\\mathcal A_Q}(M)|$ and let $\\delta_M$ be the basis\nfunction of its isomorphism class. Let $\\mathcal S_Q$ be the small finitary\nabelian skeleton constructed in\n[[lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form]].\nDefine $H_Q:=H_{\\mathcal S_Q,\\mathbb Q}$, identifying its basis with the\nisomorphism classes of $\\mathcal A_Q$. Fullness and transport of subobjects\nand cokernels along isomorphisms preserve the Hall coefficients. Thus $H_Q$ is\nthe direct sum over those classes, with rational\ncoefficients and the quotient-first untwisted Hall product of\n[[def-untwisted-hall-algebra]]. In that convention $[A]*_{qf}[B]$ counts\nsequences $0\\to B\\to L\\to A\\to0$, and identify the basis symbol $[M]$ with\nthe characteristic function $\\delta_M$. Define the **subobject-first** product\nby $f\\star g:=g*_{qf}f$. Then\n$$(f\\star g)(L)=\\sum_{U\\subseteq L} f(U)g(L/U),$$\nwhere the sum is over subobject classes of $L$: monomorphisms into $L$ modulo\nisomorphisms of their domains commuting with the monomorphism. Distinct\nembedded subobjects are counted separately even when their domains are\nisomorphic. Put\n$\\kappa_M=a_M\\delta_M$.\n\nFor $\\mathbf d\\in\\mathbb N^{Q_0}$, let $H_{Q,\\mathbf d}$ be the span of\nclasses of dimension vector $\\mathbf d$. It is finite-dimensional: the\nrepresentation set on the standard spaces $k^{d_i}$ is finite. Define the\ndimension completion\n$$\\widehat H_Q=\\prod_{\\mathbf d\\in\\mathbb N^{Q_0}}H_{Q,\\mathbf d}.$$\nThe product is extended degreewise; each coefficient uses finitely many\ndecompositions $\\mathbf d=\\mathbf a+\\mathbf b$. There is no analytic\nconvergence assertion. The all-object and phase factors are\n$$A_{\\mathrm{all}}=\\sum_{[M]}\\delta_M,\\qquad S_Z(\\phi)=\\delta_0+\\sum_{\\substack{[M]\\\\M\\ne0,\\ \\phi_Z(M)=\\phi,\\ M\\ Z\\text{-semistable}}}\\delta_M.$$\nEach is an element of $\\widehat H_Q$ because each homogeneous component has\nfinite support.\n\nLet $t=\\sqrt q>0$ and $K_q=\\mathbb Q(\\sqrt q)$. Take the completed Euler\ntorus and skew torus over $K_q$, with bases $X^{\\mathbf d}$ and\n$x^{\\mathbf d}$, respectively, and products\n$$X^{\\mathbf d}X^{\\mathbf e}=q^{-\\chi_Q(\\mathbf e,\\mathbf d)}X^{\\mathbf d+\\mathbf e},\\qquad x^{\\mathbf d}*x^{\\mathbf e}=t^{-\\langle\\mathbf e,\\mathbf d\\rangle}x^{\\mathbf d+\\mathbf e}.$$\nTheir completions use the same dimension product. The next theorem proves\nassociativity and gives the continuous Euler and skew integration maps.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-quiver-hardernarasimhan-filtrations-exist-are-unique-and-descend",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be finite and acyclic, let $k=\\mathbb F_q$, and give every vertex an\narbitrary charge $z_i\\in\\mathbb H$. Over any field extension $K/k$, every\nfinite-dimensional representation has a unique filtration\n$$0=M_0\\subsetneq M_1\\subsetneq\\cdots\\subsetneq M_r=M$$\nwhose nonzero factors $M_j/M_{j-1}$ are $Z$-semistable and have strictly\ndecreasing phases. If $M$ is defined over $k$, the unique filtration of its\nscalar extension $M_{\\bar k}=M\\otimes_k\\bar k$ is Frobenius invariant and\ndescends to $k$. Consequently geometric\nsemistability of an $\\mathbb F_q$-representation is equivalent to\nsemistability tested only on its $\\mathbb F_q$-subrepresentations. Write\n$|\\mathbf d|=\\sum_i d_i$ for total dimension.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-quiver-euler-and-skew-integration-is-multiplicative",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite acyclic quiver over $k=\\mathbb F_q$, let\n$t=\\sqrt q>0$, and use the subobject-first completion and tori from\n[[def-subobject-first-completed-finite-quiver-hall-algebra-and-tori]]. The\ndegree-completed Hall product is associative and unital. The continuous maps\n$$I(f)=\\sum_{[M]}\\frac{f(M)}{|\\operatorname{Aut}(M)|}X^{\\mathbf d(M)},\\qquad J(f)=\\sum_{[M]}t^{\\chi_Q(\\mathbf d(M),\\mathbf d(M))} \\frac{f(M)}{|\\operatorname{Aut}(M)|}x^{\\mathbf d(M)}$$\nare unital algebra homomorphisms to the completed tori with products\n$$X^{\\mathbf d}X^{\\mathbf e}=q^{-\\chi_Q(\\mathbf e,\\mathbf d)}X^{\\mathbf d+\\mathbf e}, \\qquad x^{\\mathbf d}*x^{\\mathbf e}=t^{-\\langle\\mathbf e,\\mathbf d\\rangle}x^{\\mathbf d+\\mathbf e}.$$\nThese are separate normalizations: the first is the Euler form target, while\nthe second uses the skew-symmetrized form and the diagonal factor\n$t^{\\chi_Q(\\mathbf d,\\mathbf d)}$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix distinct phases $\\phi_1>\\cdots>\\phi_r$. Iterating the defining formula $(f\\star g)(M)=\\sum_{U\\subseteq M}f(U)g(M/U)$ from [F1], with left-associated products, shows that the coefficient of $\\delta_M$ in $S_Z(\\phi_1)\\star\\cdots\\star S_Z(\\phi_r)$ is the number of weak flags $$0=M_0\\subseteq M_1\\subseteq\\cdots\\subseteq M_r=M$$ for which every nonzero factor $M_j/M_{j-1}$ is semistable of phase $\\phi_j$. The induction step chooses $M_{r-1}\\subseteq M$ in the last binary product and then uses the previous flag inside $M_{r-1}$; zero quotients exactly represent skipped phases.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a fixed dimension vector $\\mathbf d$, any contributing nonzero factor has dimension vector $\\mathbf e$ with $0<\\mathbf e\\le\\mathbf d$. There are finitely many such vectors and therefore finitely many possible phases. A contributing flag has at most $|\\mathbf d|$ nonzero factors. Thus the ordered product over all phases is a finite computation in each degree and defines an element of $\\widehat H_Q$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], for every $M$ exactly one flag counted by the preceding flag-count argument has strictly decreasing semistable factors: its unique HN filtration. Therefore the coefficient of each $\\delta_M$ in the ordered product is $1$, which is the coefficient of $\\delta_M$ in $A_{\\mathrm{all}}$. The zero object contributes the common degree-zero unit. This proves the Hall identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply $I$ and $J$ from [F3] to the degreewise truncations of the identity in step 2.1. Their continuity shows that the limits preserve the identity, giving both equalities of completed Euler and skew ordered products for $Z_-$ and $Z_+$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Write each integrated phase factor as $1+g_\\phi$, where every term of $g_\\phi$ has positive total dimension. Then $(1+g_\\phi)^{-1}=1-g_\\phi+g_\\phi^2-\\cdots$, since for any fixed degree only finitely many powers contribute. By step 1.2 only finitely many phases affect a fixed degree, so the ordered product $P_Z$ and the reverse-ordered product of these inverses both converge degreewise. Their finite truncations are mutual inverses, and continuity of multiplication gives $P_ZP_Z^{-1}=P_Z^{-1}P_Z=1$. Thus $a\\mapsto P_ZaP_Z^{-1}$ is a continuous automorphism with inverse $a\\mapsto P_Z^{-1}aP_Z$. Step 3.1 gives the same $P_Z$ for $Z_-$ and $Z_+$, so these conjugations agree. All limits are formal in the degree completion.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero object contributes the degree-zero unit in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The all-object series and every phase factor contain δ_0; step 2.1 verifies their common zero-degree coefficient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-vertex case has one semistable phase factor and is calculated in the companion example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary check: Equal-phase and strictly semistable objects remain inside the full phase factor; the A₂ equal-charge case checks this boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The product is ordered over distinct phases and finite subvectors in step 1.2, including the smallest and largest contributing phases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary check: The coefficient proof counts flags and invokes the unique HN filtration; it does not choose a generic stability chamber."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an equality, not a biconditional."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "name": "A₂ bidegree (1,1)",
+          "result": "Writing c1=t/(t²−1), the left coefficient is c1²t and the right coefficient is c1²t⁻¹+c1; their difference is c1²(t−t⁻¹)−c1=0.",
+          "evidence": "The integrated product identity in step 3.1 and the explicit A₂ companion verification step 6.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read all five steps and four actual prerequisites. Iterated subobject-first convolution counts weak flags in descending distinct phases; zero factors skip phases uniquely. In each output degree, finitely many subdimension vectors give finitely many phases and at most total-dimension nonzero factors. HN uniqueness makes every object coefficient exactly 1, including zero. Continuous I/J preserve these finite truncations for either arbitrary stability assignment. Positive degree geometric inverses and reverse-ordered finite truncations give a two-sided inverse and continuous conjugation. Works for wild quivers; no representation-finite or generic-charge assumption enters. Empty quiver yields empty product equal to degree-zero 1. Bridgeland §4.5 Lemma 4.2 and formula (9) checked. No reader/refuter finding or defect."
+      }
+    },
+    "rem-finite-quiver-hall-counts-and-dt-bps-interpretation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This interpretation remark does not make a boundary-sensitive mathematical assertion; its scope is limited to distinguishing the proved arithmetic count from conditional DT/BPS identifications."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This interpretation remark does not make a boundary-sensitive mathematical assertion; its scope is limited to distinguishing the proved arithmetic count from conditional DT/BPS identifications."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This interpretation remark does not make a boundary-sensitive mathematical assertion; its scope is limited to distinguishing the proved arithmetic count from conditional DT/BPS identifications."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This interpretation remark does not make a boundary-sensitive mathematical assertion; its scope is limited to distinguishing the proved arithmetic count from conditional DT/BPS identifications."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This interpretation remark does not make a boundary-sensitive mathematical assertion; its scope is limited to distinguishing the proved arithmetic count from conditional DT/BPS identifications."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This interpretation remark does not make a boundary-sensitive mathematical assertion; its scope is limited to distinguishing the proved arithmetic count from conditional DT/BPS identifications."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This interpretation remark does not make a boundary-sensitive mathematical assertion; its scope is limited to distinguishing the proved arithmetic count from conditional DT/BPS identifications."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This interpretation remark does not make a boundary-sensitive mathematical assertion; its scope is limited to distinguishing the proved arithmetic count from conditional DT/BPS identifications."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read every paragraph and all nine exact supplier definitions/statements. The displayed weight is exactly J on delta_M; arithmetic HN and integration prove the asserted finite-field identity. Derived source/cofiber homotopy weights, separate unital Hall-module actions, motivic stack-function coefficients and rational intrinsic quotient-stack Borel–Moore operations are distinct current interfaces; none supplies an arithmetic inference. CoHA is described using its actual grading and exact-sequence operations without importing an operation theorem here. Conditional physical comparisons do not assert BPS, vanishing-cycle, Behrend or CY3 identifications. Bridgeland §§3.5,4.3–4.6 distinguishes these enhancements; current local definitions read independently. Zero-degree mass remains 1. No reader/refuter finding or defect."
+      }
+    },
+    "ex-one-vertex-finite-quiver-hall-integration-is-quantum-dilogarithm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-acyclic-quiver-stability-data",
+          "source_section": "Definition",
+          "quote": "Let $Q=(Q_0,Q_1,s,t)$ be a finite quiver: $Q_0$ and $Q_1$ are finite sets,\nand $s,t:Q_1\\to Q_0$ give the source and target of each arrow. Assume $Q$ has\nno directed cycles. For a field $K$, a finite-dimensional representation $M$\nassigns a finite-dimensional $K$-vector space $M_i$ to each $i\\in Q_0$ and a\nlinear map $M_a:M_{s(a)}\\to M_{t(a)}$ to each $a\\in Q_1$. A morphism is a\nfamily of linear maps at the vertices commuting with all arrow maps. Write\n$\\mathcal A_Q(K)$ for this category and\n$\\mathbf d(M)=(\\dim_K M_i)_{i\\in Q_0}\\in\\mathbb N^{Q_0}$ for its dimension\nvector. For the finite-field Hall branch, fix $k=\\mathbb F_q$ and write\n$\\mathcal A_Q=\\mathcal A_Q(k)$. The next lemma proves the abelian and Euler\nproperties over any field; over $k$ it constructs a small finitary abelian\nskeleton of $\\mathcal A_Q$, so $\\mathcal A_Q$ is essentially small.\n\nFor $\\mathbf d,\\mathbf e\\in\\mathbb Z^{Q_0}$ define the bilinear form\n$$\\chi_Q(\\mathbf d,\\mathbf e)=\\sum_{i\\in Q_0}d_i e_i-\\sum_{a:i\\to j}d_i e_j,$$\nand its skew-symmetrization\n$\\langle\\mathbf d,\\mathbf e\\rangle=\\chi_Q(\\mathbf d,\\mathbf e)-\\chi_Q(\\mathbf e,\\mathbf d)$.\nThe next lemma proves that $\\chi_Q(\\mathbf d(M),\\mathbf d(N))$ is the\nHom-minus-Yoneda-Ext$^1$ dimension for this arrow convention.\n\nFix $z_i\\in\\mathbb H:=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ for each\nvertex and extend $Z(\\mathbf d)=\\sum_i d_i z_i$ additively. If\n$\\mathbf d\\in\\mathbb N^{Q_0}$ is nonzero, then\n$\\operatorname{Im}Z(\\mathbf d)=\\sum_i d_i\\operatorname{Im}z_i>0$; thus its\nprincipal argument lies in $(0,\\pi)$. For a nonzero representation $M$, put\n$\\phi_Z(M)=\\arg Z(\\mathbf d(M))/\\pi\\in(0,1)$. Call\n$M$ **$Z$-semistable** if every nonzero subrepresentation $U\\subseteq M$\nsatisfies $\\phi_Z(U)\\le\\phi_Z(M)$, and **$Z$-stable** if the inequality is\nstrict for every proper nonzero subrepresentation.\n\nFor the semistable groupoids and stacks below, include the zero representation\nas semistable without assigning it a phase. Stable objects and HN factors\nremain nonzero.\n\nFor a dimension vector $\\mathbf d$, let\n$$\\operatorname{Rep}_{\\mathbf d}(Q)=\\prod_{a:i\\to j} \\operatorname{Hom}_k(k^{d_i},k^{d_j}),\\qquad G_{\\mathbf d}=\\prod_{i\\in Q_0}\\operatorname{GL}_{d_i,k}.$$\nThe group $G_{\\mathbf d}$ acts by change of bases. Define\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ geometrically: its points over an\nalgebraic closure $\\bar k$ are representations for which every nonzero\n$\\bar k$-subrepresentation satisfies the semistability inequality. The\nassociated quotient stack is\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)=[\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)/G_{\\mathbf d}]$.\nFor $\\mathbf d=0$, set $\\operatorname{Rep}^{ss}_{\\mathbf0}=\\operatorname{Rep}_{\\mathbf0}=\\operatorname{Spec}k$.\nThe group $G_{\\mathbf0}$ is trivial, so its rational-point groupoid has one\nzero object, trivial automorphism group, and cardinality $1$.\nHere $[X/G]$ denotes the groupoid-valued quotient: over a scheme $S$ its\nobjects are $G$-torsors on $S$ with equivariant maps to $X$, and its arrows\nare equivariant isomorphisms over $S$. The openness lemma below proves that\n$\\operatorname{Rep}^{ss}_{\\mathbf d}$ is open.\n\nFor a finite groupoid $\\mathcal G$, define its groupoid cardinality by\n$$|\\mathcal G|=\\sum_{[x]\\in\\operatorname{Iso}(\\mathcal G)} \\frac{1}{|\\operatorname{Aut}_{\\mathcal G}(x)|}.$$\nThe rational-point groupoid of $\\mathfrak M^{ss}_{\\mathbf d}$ is finite, and\nthe finite-field descent lemma identifies it with the groupoid of finite-field\nsemistable representations and their isomorphisms. No Calabi–Yau structure,\npotential, orientation data, vanishing cycles, or physical state-counting\nidentification is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-quiver-euler-and-skew-integration-is-multiplicative",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite acyclic quiver over $k=\\mathbb F_q$, let\n$t=\\sqrt q>0$, and use the subobject-first completion and tori from\n[[def-subobject-first-completed-finite-quiver-hall-algebra-and-tori]]. The\ndegree-completed Hall product is associative and unital. The continuous maps\n$$I(f)=\\sum_{[M]}\\frac{f(M)}{|\\operatorname{Aut}(M)|}X^{\\mathbf d(M)},\\qquad J(f)=\\sum_{[M]}t^{\\chi_Q(\\mathbf d(M),\\mathbf d(M))} \\frac{f(M)}{|\\operatorname{Aut}(M)|}x^{\\mathbf d(M)}$$\nare unital algebra homomorphisms to the completed tori with products\n$$X^{\\mathbf d}X^{\\mathbf e}=q^{-\\chi_Q(\\mathbf e,\\mathbf d)}X^{\\mathbf d+\\mathbf e}, \\qquad x^{\\mathbf d}*x^{\\mathbf e}=t^{-\\langle\\mathbf e,\\mathbf d\\rangle}x^{\\mathbf d+\\mathbf e}.$$\nThese are separate normalizations: the first is the Euler form target, while\nthe second uses the skew-symmetrized form and the diagonal factor\n$t^{\\chi_Q(\\mathbf d,\\mathbf d)}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-field-quiver-semistable-stack-points-are-hall-groupoids",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice inherited from the semistable-openness prerequisite.\nLet $Q$ be finite and acyclic over $k=\\mathbb F_q$, and let\n$\\mathbf d\\in\\mathbb N^{Q_0}$. In this statement, include the zero\nrepresentation as $Z$-semistable, without assigning it a phase.\nThe rational-point groupoid of\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)$ is finite and is equivalent to the\ngroupoid whose objects are $Z$-semistable $\\mathbb F_q$-representations of\ndimension $\\mathbf d$ and whose arrows are their representation isomorphisms.\nIts groupoid cardinality is therefore\n$$\\sum_{[M]:\\,\\mathbf d(M)=\\mathbf d,\\ M\\;Z\\text{-semistable}} \\frac{1}{|\\operatorname{Aut}_{\\mathcal A_Q}(M)|}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A representation is determined up to isomorphism by its dimension $n$; its automorphism group is $\\operatorname{GL}_n(\\mathbb F_q)$. For $n>0$, $Z(n)=nz_1$ and every nonzero subspace has the same phase, so every object is semistable. The zero object supplies the degree-zero term.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "An ordered basis of $\\mathbb F_q^n$ can be chosen in $$|\\operatorname{GL}_n(\\mathbb F_q)|= \\prod_{j=0}^{n-1}(q^n-q^j)$$ ways: after $j$ independent vectors have been chosen, their span contains $q^j$ vectors to exclude. Factoring $q^j$ from the $j$th term and reversing the remaining index gives $$|\\operatorname{GL}_n(\\mathbb F_q)|= q^{n(n-1)/2}\\prod_{r=1}^{n}(q^r-1).$$ For $n=0$ both sides equal $1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The Euler form is $\\chi_Q(n,n)=n^2$. By [F2], the degree-$n$ term of $J(A_{\\mathrm{all}})$ is $$\\frac{t^{n^2}}{|\\operatorname{GL}_n(\\mathbb F_q)|}x^n =\\frac{t^n}{\\prod_{r=1}^{n}(t^{2r}-1)}x^n,$$ using [F1], step 1.2 and $q=t^2$. The formula also holds at $n=0$ by the empty-product convention.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Summing the degreewise coefficients in step 2.1 gives the stated formal power series. By [F3] its unweighted coefficient is the finite groupoid cardinality of the semistable stack, and the factor $t^{n^2}$ is precisely the Euler normalization in [F2]. No physical state-counting identification is asserted.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example boundary check: The quiver has an empty arrow set; the product of arrow-map spaces is a point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty product convention gives coefficient 1 at n=0 in steps 1.2–2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=1 coefficient is checked directly from GL_1(F_q) in step 1.2 and finite check."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "There are no arrows and the Euler form is n², explicitly used in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The n=0 degree endpoint is treated by the empty-product convention in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 counts ordered bases by successive choices from finite vector spaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example proves a series identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example proves a series identity, not a biconditional."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "name": "q=2 coefficients n=0,1,2",
+          "result": "The series coefficients are 1, √2, and 2/3; these equal 1, t/(t²−1), and t²/((t²−1)(t⁴−1)) at t=√2, and agree with t^{n²}/|GL_n(F2)|.",
+          "evidence": "The ordered-basis count and coefficient formula in steps 1.2 and 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read four verification steps and all five prerequisites. With no arrows, a unique object per n has automorphism GL_n(F_q); all nonzero subspaces have the same phase. Ordered-basis count is product(q^n-q^j)=q^(n(n-1)/2) product(q^r-1). Multiplying its reciprocal by t^(n^2), q=t^2, gives exactly t^n/product(t^(2r)-1); n=0 has both empty products and automorphism order 1. Denominators nonzero for every finite q>=2; skew form vanishes, so x^n has ordinary multiplication. Groupoid mass interpretation is inverse automorphism cardinality, with Euler normalization distinguished from physical BPS counts. Bridgeland §2.2 checked. No reader/refuter finding or defect."
+      }
+    },
+    "ex-a2-quiver-hall-wall-crossing-pentagon": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-acyclic-quiver-stability-data",
+          "source_section": "Definition",
+          "quote": "Let $Q=(Q_0,Q_1,s,t)$ be a finite quiver: $Q_0$ and $Q_1$ are finite sets,\nand $s,t:Q_1\\to Q_0$ give the source and target of each arrow. Assume $Q$ has\nno directed cycles. For a field $K$, a finite-dimensional representation $M$\nassigns a finite-dimensional $K$-vector space $M_i$ to each $i\\in Q_0$ and a\nlinear map $M_a:M_{s(a)}\\to M_{t(a)}$ to each $a\\in Q_1$. A morphism is a\nfamily of linear maps at the vertices commuting with all arrow maps. Write\n$\\mathcal A_Q(K)$ for this category and\n$\\mathbf d(M)=(\\dim_K M_i)_{i\\in Q_0}\\in\\mathbb N^{Q_0}$ for its dimension\nvector. For the finite-field Hall branch, fix $k=\\mathbb F_q$ and write\n$\\mathcal A_Q=\\mathcal A_Q(k)$. The next lemma proves the abelian and Euler\nproperties over any field; over $k$ it constructs a small finitary abelian\nskeleton of $\\mathcal A_Q$, so $\\mathcal A_Q$ is essentially small.\n\nFor $\\mathbf d,\\mathbf e\\in\\mathbb Z^{Q_0}$ define the bilinear form\n$$\\chi_Q(\\mathbf d,\\mathbf e)=\\sum_{i\\in Q_0}d_i e_i-\\sum_{a:i\\to j}d_i e_j,$$\nand its skew-symmetrization\n$\\langle\\mathbf d,\\mathbf e\\rangle=\\chi_Q(\\mathbf d,\\mathbf e)-\\chi_Q(\\mathbf e,\\mathbf d)$.\nThe next lemma proves that $\\chi_Q(\\mathbf d(M),\\mathbf d(N))$ is the\nHom-minus-Yoneda-Ext$^1$ dimension for this arrow convention.\n\nFix $z_i\\in\\mathbb H:=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ for each\nvertex and extend $Z(\\mathbf d)=\\sum_i d_i z_i$ additively. If\n$\\mathbf d\\in\\mathbb N^{Q_0}$ is nonzero, then\n$\\operatorname{Im}Z(\\mathbf d)=\\sum_i d_i\\operatorname{Im}z_i>0$; thus its\nprincipal argument lies in $(0,\\pi)$. For a nonzero representation $M$, put\n$\\phi_Z(M)=\\arg Z(\\mathbf d(M))/\\pi\\in(0,1)$. Call\n$M$ **$Z$-semistable** if every nonzero subrepresentation $U\\subseteq M$\nsatisfies $\\phi_Z(U)\\le\\phi_Z(M)$, and **$Z$-stable** if the inequality is\nstrict for every proper nonzero subrepresentation.\n\nFor the semistable groupoids and stacks below, include the zero representation\nas semistable without assigning it a phase. Stable objects and HN factors\nremain nonzero.\n\nFor a dimension vector $\\mathbf d$, let\n$$\\operatorname{Rep}_{\\mathbf d}(Q)=\\prod_{a:i\\to j} \\operatorname{Hom}_k(k^{d_i},k^{d_j}),\\qquad G_{\\mathbf d}=\\prod_{i\\in Q_0}\\operatorname{GL}_{d_i,k}.$$\nThe group $G_{\\mathbf d}$ acts by change of bases. Define\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ geometrically: its points over an\nalgebraic closure $\\bar k$ are representations for which every nonzero\n$\\bar k$-subrepresentation satisfies the semistability inequality. The\nassociated quotient stack is\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)=[\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)/G_{\\mathbf d}]$.\nFor $\\mathbf d=0$, set $\\operatorname{Rep}^{ss}_{\\mathbf0}=\\operatorname{Rep}_{\\mathbf0}=\\operatorname{Spec}k$.\nThe group $G_{\\mathbf0}$ is trivial, so its rational-point groupoid has one\nzero object, trivial automorphism group, and cardinality $1$.\nHere $[X/G]$ denotes the groupoid-valued quotient: over a scheme $S$ its\nobjects are $G$-torsors on $S$ with equivariant maps to $X$, and its arrows\nare equivariant isomorphisms over $S$. The openness lemma below proves that\n$\\operatorname{Rep}^{ss}_{\\mathbf d}$ is open.\n\nFor a finite groupoid $\\mathcal G$, define its groupoid cardinality by\n$$|\\mathcal G|=\\sum_{[x]\\in\\operatorname{Iso}(\\mathcal G)} \\frac{1}{|\\operatorname{Aut}_{\\mathcal G}(x)|}.$$\nThe rational-point groupoid of $\\mathfrak M^{ss}_{\\mathbf d}$ is finite, and\nthe finite-field descent lemma identifies it with the groupoid of finite-field\nsemistable representations and their isomorphisms. No Calabi–Yau structure,\npotential, orientation data, vanishing cycles, or physical state-counting\nidentification is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-quiver-hall-wall-crossing",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be any finite acyclic quiver over $\\mathbb F_q$, including wild\nquivers, and let $Z_-$ and $Z_+$ be any two assignments of upper-half-plane\ncharges $z_i\\in\\mathbb H$. In the dimension completion of the subobject-first\nHall algebra,\n$$A_{\\mathrm{all}}=\\prod_{\\phi\\in\\Phi_Z\\ \\mathrm{decreasing}}S_Z(\\phi),\\qquad \\Phi_Z=\\{\\phi_Z(\\mathbf e):0\\ne\\mathbf e\\in\\mathbb N^{Q_0}\\}.$$\nThe product is degreewise finite and includes all semistable objects, whether\nstable or strictly semistable. Applying either Euler integration $I$ or skew\nintegration $J$ gives equal completed ordered products for $Z_-$ and $Z_+$.\nEach integrated ordered product has constant term $1$ and is a unit in its\ncompleted quantum torus; conjugation by the two equal products therefore gives\nthe same continuous automorphism.\nNo generic-stability, finite-type, 3-Calabi–Yau, orientation-data, or analytic\nconvergence assumption is used.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-quiver-euler-and-skew-integration-is-multiplicative",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite acyclic quiver over $k=\\mathbb F_q$, let\n$t=\\sqrt q>0$, and use the subobject-first completion and tori from\n[[def-subobject-first-completed-finite-quiver-hall-algebra-and-tori]]. The\ndegree-completed Hall product is associative and unital. The continuous maps\n$$I(f)=\\sum_{[M]}\\frac{f(M)}{|\\operatorname{Aut}(M)|}X^{\\mathbf d(M)},\\qquad J(f)=\\sum_{[M]}t^{\\chi_Q(\\mathbf d(M),\\mathbf d(M))} \\frac{f(M)}{|\\operatorname{Aut}(M)|}x^{\\mathbf d(M)}$$\nare unital algebra homomorphisms to the completed tori with products\n$$X^{\\mathbf d}X^{\\mathbf e}=q^{-\\chi_Q(\\mathbf e,\\mathbf d)}X^{\\mathbf d+\\mathbf e}, \\qquad x^{\\mathbf d}*x^{\\mathbf e}=t^{-\\langle\\mathbf e,\\mathbf d\\rangle}x^{\\mathbf d+\\mathbf e}.$$\nThese are separate normalizations: the first is the Euler form target, while\nthe second uses the skew-symmetrized form and the diagonal factor\n$t^{\\chi_Q(\\mathbf d,\\mathbf d)}$.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-upper-half-plane-sum-phase-between",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb H=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ and define\n$\\phi(z)=\\arg(z)/\\pi\\in(0,1)$. For $z,w\\in\\mathbb H$, the phase of $z+w$\nlies between $\\phi(z)$ and $\\phi(w)$, strictly between them when they are\nunequal and equal to their common value when they coincide.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite acyclic quiver and $K$ any field. The category\n$\\mathcal A_Q(K)$ of finite-dimensional representations is abelian. For all\n$X,Y\\in\\mathcal A_Q(K)$, the spaces $\\operatorname{Hom}(X,Y)$ and Yoneda\n$\\operatorname{Ext}^1(X,Y)$ are finite-dimensional $K$-vector spaces, and\n$$\\dim_K\\operatorname{Hom}(X,Y)-\\dim_K\\operatorname{YExt}^1(X,Y) =\\chi_Q(\\mathbf d(X),\\mathbf d(Y)).$$\nThe explicit projective resolution below shows that the projective-resolution\ngroups $\\operatorname{Ext}^r_{\\mathcal A_Q(K)}(X,Y)$ vanish for $r\\ge2$; these\ngroups are the cohomology of applying $\\operatorname{Hom}_{\\mathcal A_Q(K)}(-,Y)$\nto a projective resolution. If\n$K=\\mathbb F_q$, the displayed vector spaces have finite underlying sets and\n$\\mathcal A_Q(K)$ has a small skeleton (a small full subcategory with one\nrepresentative of each isomorphism class). Thus $\\mathcal A_Q(K)$ is essentially\nsmall, and this skeleton is a small finitary abelian category. Yoneda\n$\\operatorname{Ext}^1$ is classified directly below; it is\nnot identified with derived $\\operatorname{Ext}^1$ by an unstated theorem.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A representation is one linear map $f:V_1\\to V_2$. Choose a complement to $\\ker f$ and a complement to $\\operatorname{im}f$. The restriction of $f$ from the first complement to $\\operatorname{im}f$ is an isomorphism. In bases adapted to these spaces, the representation is $$S_1^{\\oplus a}\\oplus E^{\\oplus r}\\oplus S_2^{\\oplus b},\\qquad r=\\operatorname{rank}f,\\quad a=\\dim\\ker f,\\quad b=\\dim(V_2/\\operatorname{im}f).$$ Thus these three isomorphism types account for every representation.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The Euler form gives $\\chi_Q(\\mathbf e_1,\\mathbf e_2)=-1$ and $\\chi_Q(\\mathbf e_2,\\mathbf e_1)=0$, so $\\langle\\mathbf e_1,\\mathbf e_2\\rangle=-1$ and $\\langle\\mathbf e_2,\\mathbf e_1\\rangle=1$. By [F3], $$x_2*x_1=t\\,x^{(1,1)},\\qquad x_1*x_2=t^{-1}x^{(1,1)},\\qquad x^{(1,1)}=t\\,x_1*x_2.$$ In particular $x_2*x_1=t^2x_1*x_2$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A subrepresentation of $E$ is a pair of subspaces $U_1,U_2\\subseteq\\mathbb F_q$ with $U_1\\subseteq U_2$. Its only proper nonzero possibility is $S_2$. The phase of $z_1+z_2$ lies between $\\phi_1$ and $\\phi_2$ by [F4]. The sequence $0\\to S_2\\to E\\to S_1\\to0$ is nonsplit because $E$ has no subrepresentation isomorphic to $S_1$; every nonzero arrow scalar is changed to the identity by vertex base changes, so this is the unique nontrivial extension of these simples. Hence $E$ is stable when $\\phi_1>\\phi_2$, unstable when $\\phi_1<\\phi_2$, and strictly semistable when $\\phi_1=\\phi_2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $\\phi_1>\\phi_2$. In the decomposition of step 1.1, if two different summand types occur, the direct sum of all summands of greatest phase is a proper subobject. Repeated application of [F4] shows the total phase is strictly below that greatest phase, because at least one summand has smaller phase; hence the representation is unstable. Pure sums $S_1^{\\oplus n}$ and $S_2^{\\oplus n}$ are semistable because all their nonzero subobjects have the same phase. A subrepresentation of $E^{\\oplus n}$ is a pair $U_1\\subseteq U_2$; writing $r=\\dim U_1$ and $s=\\dim U_2$ gives $r\\le s$. The determinant calculation $$\\operatorname{Im}\\big(\\overline{(z_1+z_2)}(rz_1+sz_2)\\big) =(s-r)\\operatorname{Im}(\\bar z_1z_2)\\le0$$ shows its phase is at most that of $E^{\\oplus n}$. Thus the semistable objects are exactly pure sums of $S_1$, $E$, or $S_2$, in descending phase order.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Suppose $\\phi_1<\\phi_2$. Every summand in the decomposition of step 1.1 has phase at most $\\phi_2$, and an $E$ summand or an $S_1$ summand has smaller phase. Repeated application of [F4] therefore makes the phase of any object containing a lower-phase summand strictly less than $\\phi_2$. An object with an $E$ summand has the nonzero subobject $S_2$, and an object with both $S_1$ and $S_2$ summands has an $S_2$ summand; each is a destabilizing subobject. Hence only pure sums of $S_2$ and pure sums of $S_1$ are semistable, in that descending order. If $\\phi_1=\\phi_2$, all nonzero dimension vectors have the same phase, so every representation is semistable and the HN product has one phase factor containing both $S_1\\oplus S_2$ and $E$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each $A\\in\\{S_1,S_2,E\\}$ has $\\operatorname{End}(A)=\\mathbb F_q$. For $E$, an endomorphism is a pair of scalars at the vertices that must agree because its arrow is the identity. Also $\\chi_Q(\\mathbf d(A),\\mathbf d(A))=1$ for each of these three objects. [F5] gives $\\operatorname{YExt}^1(A^{\\oplus m},A^{\\oplus n})=0$: the Hom space has dimension $mn$ and $\\chi_Q(m\\mathbf d(A),n\\mathbf d(A))=mn$. The semistable subcategory at each stable phase in step 3.1 is consequently equivalent to $\\mathrm{Vect}_{\\mathbb F_q}$, with the displayed object as its one-dimensional simple.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $A$ one of these three stable objects, put $\\gamma=\\mathbf d(A)$. Then $\\chi_Q(n\\gamma,n\\gamma)=n^2$ and $|\\operatorname{Aut}(A^{\\oplus n})|=|\\operatorname{GL}_n(\\mathbb F_q)|$. Counting ordered bases directly gives $$|\\operatorname{GL}_n(\\mathbb F_q)|= \\prod_{j=0}^{n-1}(q^n-q^j) =q^{n(n-1)/2}\\prod_{r=1}^{n}(q^r-1).$$ Therefore $$\\frac{t^{n^2}}{|\\operatorname{GL}_n(\\mathbb F_q)|} =\\frac{t^n}{\\prod_{r=1}^{n}(t^{2r}-1)}$$ using $q=t^2$. Thus the $J$-image of the semistable series at that phase is $E_{t^2}(x^\\gamma)$. The empty product gives the same result for $n=0$.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "If $\\phi_1>\\phi_2$, the descending semistable phases are $S_1,E,S_2$; if $\\phi_1<\\phi_2$, they are $S_2,S_1$. Apply [F2] to these two chamber assignments and substitute the phase images from steps 5.1 and 1.2. This gives the stated pentagon over $\\mathbb Q(\\sqrt q)$.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "step 3.2",
+            "step 5.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Each fixed-bidegree coefficient of the pentagon is a rational function of $t$. Specializing to $q=2^m$ for every $m\\ge1$ gives infinitely many distinct $t=2^{m/2}>1$, where every denominator $t^{2r}-1$ is nonzero and step 6.1 proves equality. The numerator of the difference therefore has infinitely many roots and is the zero polynomial. This proves the identity coefficientwise in $\\mathbb Q(t)$.",
+          "step": "7.1",
+          "inputs": [
+            "step 6.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The n=0 term in each quantum-dilogarithm factor is the empty product 1 in step 5.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero representation is included as the degree-zero HN factor in step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The simple representations S1 and S2 are the one-dimensional phase factors classified in steps 3.1–3.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The equal-phase case is treated in step 3.2 and keeps all representations in one semistable factor."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cases φ1>φ2, φ1<φ2, and φ1=φ2 are separated in steps 2.1 and 3.1–3.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The complement choices in step 1.1 are finite-dimensional linear-algebra complements over F_q."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example proves a pentagon identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example proves a pentagon identity, not a biconditional."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "name": "A₂ bidegree (1,1)",
+          "result": "With c1=t/(t²−1), the left coefficient is c1²t and the right coefficient is c1²t⁻¹+c1; c1²(t−t⁻¹)=c1.",
+          "evidence": "The skew multiplication in step 1.2, chamber products in step 6.1, and coefficient specialization in step 7.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read all nine verification steps and all seven suppliers. Rank normal form gives S1^a+E^r+S2^b. Skew exponents give x2*x1=t*x^(1,1), x1*x2=t^-1*x^(1,1). The only proper nonzero subobject of E is S2; vertex base changes identify the nonzero-arrow middle representations (the uniqueness phrase is explicitly in that isomorphism sense, not endpoint-fixed Yoneda classes). Phase-between and the displayed determinant inequality classify all semistables in both strict chambers; equal phases make every object semistable. End(A)=F_q and chi(gamma,gamma)=1 give Hom dimension mn and zero self-Yoneda extensions. Pure sums have GL_n automorphisms and the ordered-basis count gives each dilogarithm, including n=0. HN identity gives the stated pentagon with its middle factor; finitely many terms in each bidegree are rational in t, and infinitely many q=2^m nonpole specializations prove the formal Q(t) identity. Bridgeland §4.6 PDF pp.25–26 checked. No reader/refuter finding or defect."
+      }
+    },
+    "cex-omitting-strictly-semistable-objects-breaks-hn-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-acyclic-quiver-stability-data",
+          "source_section": "Definition",
+          "quote": "Let $Q=(Q_0,Q_1,s,t)$ be a finite quiver: $Q_0$ and $Q_1$ are finite sets,\nand $s,t:Q_1\\to Q_0$ give the source and target of each arrow. Assume $Q$ has\nno directed cycles. For a field $K$, a finite-dimensional representation $M$\nassigns a finite-dimensional $K$-vector space $M_i$ to each $i\\in Q_0$ and a\nlinear map $M_a:M_{s(a)}\\to M_{t(a)}$ to each $a\\in Q_1$. A morphism is a\nfamily of linear maps at the vertices commuting with all arrow maps. Write\n$\\mathcal A_Q(K)$ for this category and\n$\\mathbf d(M)=(\\dim_K M_i)_{i\\in Q_0}\\in\\mathbb N^{Q_0}$ for its dimension\nvector. For the finite-field Hall branch, fix $k=\\mathbb F_q$ and write\n$\\mathcal A_Q=\\mathcal A_Q(k)$. The next lemma proves the abelian and Euler\nproperties over any field; over $k$ it constructs a small finitary abelian\nskeleton of $\\mathcal A_Q$, so $\\mathcal A_Q$ is essentially small.\n\nFor $\\mathbf d,\\mathbf e\\in\\mathbb Z^{Q_0}$ define the bilinear form\n$$\\chi_Q(\\mathbf d,\\mathbf e)=\\sum_{i\\in Q_0}d_i e_i-\\sum_{a:i\\to j}d_i e_j,$$\nand its skew-symmetrization\n$\\langle\\mathbf d,\\mathbf e\\rangle=\\chi_Q(\\mathbf d,\\mathbf e)-\\chi_Q(\\mathbf e,\\mathbf d)$.\nThe next lemma proves that $\\chi_Q(\\mathbf d(M),\\mathbf d(N))$ is the\nHom-minus-Yoneda-Ext$^1$ dimension for this arrow convention.\n\nFix $z_i\\in\\mathbb H:=\\{z\\in\\mathbb C:\\operatorname{Im}z>0\\}$ for each\nvertex and extend $Z(\\mathbf d)=\\sum_i d_i z_i$ additively. If\n$\\mathbf d\\in\\mathbb N^{Q_0}$ is nonzero, then\n$\\operatorname{Im}Z(\\mathbf d)=\\sum_i d_i\\operatorname{Im}z_i>0$; thus its\nprincipal argument lies in $(0,\\pi)$. For a nonzero representation $M$, put\n$\\phi_Z(M)=\\arg Z(\\mathbf d(M))/\\pi\\in(0,1)$. Call\n$M$ **$Z$-semistable** if every nonzero subrepresentation $U\\subseteq M$\nsatisfies $\\phi_Z(U)\\le\\phi_Z(M)$, and **$Z$-stable** if the inequality is\nstrict for every proper nonzero subrepresentation.\n\nFor the semistable groupoids and stacks below, include the zero representation\nas semistable without assigning it a phase. Stable objects and HN factors\nremain nonzero.\n\nFor a dimension vector $\\mathbf d$, let\n$$\\operatorname{Rep}_{\\mathbf d}(Q)=\\prod_{a:i\\to j} \\operatorname{Hom}_k(k^{d_i},k^{d_j}),\\qquad G_{\\mathbf d}=\\prod_{i\\in Q_0}\\operatorname{GL}_{d_i,k}.$$\nThe group $G_{\\mathbf d}$ acts by change of bases. Define\n$\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)$ geometrically: its points over an\nalgebraic closure $\\bar k$ are representations for which every nonzero\n$\\bar k$-subrepresentation satisfies the semistability inequality. The\nassociated quotient stack is\n$\\mathfrak M^{ss}_{\\mathbf d}(Q,Z)=[\\operatorname{Rep}^{ss}_{\\mathbf d}(Q,Z)/G_{\\mathbf d}]$.\nFor $\\mathbf d=0$, set $\\operatorname{Rep}^{ss}_{\\mathbf0}=\\operatorname{Rep}_{\\mathbf0}=\\operatorname{Spec}k$.\nThe group $G_{\\mathbf0}$ is trivial, so its rational-point groupoid has one\nzero object, trivial automorphism group, and cardinality $1$.\nHere $[X/G]$ denotes the groupoid-valued quotient: over a scheme $S$ its\nobjects are $G$-torsors on $S$ with equivariant maps to $X$, and its arrows\nare equivariant isomorphisms over $S$. The openness lemma below proves that\n$\\operatorname{Rep}^{ss}_{\\mathbf d}$ is open.\n\nFor a finite groupoid $\\mathcal G$, define its groupoid cardinality by\n$$|\\mathcal G|=\\sum_{[x]\\in\\operatorname{Iso}(\\mathcal G)} \\frac{1}{|\\operatorname{Aut}_{\\mathcal G}(x)|}.$$\nThe rational-point groupoid of $\\mathfrak M^{ss}_{\\mathbf d}$ is finite, and\nthe finite-field descent lemma identifies it with the groupoid of finite-field\nsemistable representations and their isomorphisms. No Calabi–Yau structure,\npotential, orientation data, vanishing cycles, or physical state-counting\nidentification is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-subobject-first-completed-finite-quiver-hall-algebra-and-tori",
+          "source_section": "Definition",
+          "quote": "Fix $Q$, $k=\\mathbb F_q$, and $Z$ as in\n[[def-finite-acyclic-quiver-stability-data]]. For a representation $M$, write\n$a_M=|\\operatorname{Aut}_{\\mathcal A_Q}(M)|$ and let $\\delta_M$ be the basis\nfunction of its isomorphism class. Let $\\mathcal S_Q$ be the small finitary\nabelian skeleton constructed in\n[[lem-finite-acyclic-quiver-representations-are-finitary-hereditary-with-euler-form]].\nDefine $H_Q:=H_{\\mathcal S_Q,\\mathbb Q}$, identifying its basis with the\nisomorphism classes of $\\mathcal A_Q$. Fullness and transport of subobjects\nand cokernels along isomorphisms preserve the Hall coefficients. Thus $H_Q$ is\nthe direct sum over those classes, with rational\ncoefficients and the quotient-first untwisted Hall product of\n[[def-untwisted-hall-algebra]]. In that convention $[A]*_{qf}[B]$ counts\nsequences $0\\to B\\to L\\to A\\to0$, and identify the basis symbol $[M]$ with\nthe characteristic function $\\delta_M$. Define the **subobject-first** product\nby $f\\star g:=g*_{qf}f$. Then\n$$(f\\star g)(L)=\\sum_{U\\subseteq L} f(U)g(L/U),$$\nwhere the sum is over subobject classes of $L$: monomorphisms into $L$ modulo\nisomorphisms of their domains commuting with the monomorphism. Distinct\nembedded subobjects are counted separately even when their domains are\nisomorphic. Put\n$\\kappa_M=a_M\\delta_M$.\n\nFor $\\mathbf d\\in\\mathbb N^{Q_0}$, let $H_{Q,\\mathbf d}$ be the span of\nclasses of dimension vector $\\mathbf d$. It is finite-dimensional: the\nrepresentation set on the standard spaces $k^{d_i}$ is finite. Define the\ndimension completion\n$$\\widehat H_Q=\\prod_{\\mathbf d\\in\\mathbb N^{Q_0}}H_{Q,\\mathbf d}.$$\nThe product is extended degreewise; each coefficient uses finitely many\ndecompositions $\\mathbf d=\\mathbf a+\\mathbf b$. There is no analytic\nconvergence assertion. The all-object and phase factors are\n$$A_{\\mathrm{all}}=\\sum_{[M]}\\delta_M,\\qquad S_Z(\\phi)=\\delta_0+\\sum_{\\substack{[M]\\\\M\\ne0,\\ \\phi_Z(M)=\\phi,\\ M\\ Z\\text{-semistable}}}\\delta_M.$$\nEach is an element of $\\widehat H_Q$ because each homogeneous component has\nfinite support.\n\nLet $t=\\sqrt q>0$ and $K_q=\\mathbb Q(\\sqrt q)$. Take the completed Euler\ntorus and skew torus over $K_q$, with bases $X^{\\mathbf d}$ and\n$x^{\\mathbf d}$, respectively, and products\n$$X^{\\mathbf d}X^{\\mathbf e}=q^{-\\chi_Q(\\mathbf e,\\mathbf d)}X^{\\mathbf d+\\mathbf e},\\qquad x^{\\mathbf d}*x^{\\mathbf e}=t^{-\\langle\\mathbf e,\\mathbf d\\rangle}x^{\\mathbf d+\\mathbf e}.$$\nTheir completions use the same dimension product. The next theorem proves\nassociativity and gives the continuous Euler and skew integration maps.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $E=(\\mathbb F_q\\xrightarrow{\\mathrm{id}}\\mathbb F_q)$, $S_1=(\\mathbb F_q\\to0)$, and $S_2=(0\\to\\mathbb F_q)$. A subrepresentation of $E$ is a pair $U_1\\subseteq U_2\\subseteq\\mathbb F_q$, so its only proper nonzero possibility is $S_2$. Since $z_1=z_2$, $E$ and $S_2$ have the same phase. Thus $E$ is semistable but not stable. The sequence $0\\to S_2\\to E\\to S_1\\to0$ is nonsplit because $E$ has no subrepresentation isomorphic to $S_1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every representation of dimension vector $(1,1)$ is a scalar arrow map. There are exactly two isomorphism classes: the zero map gives $S_1\\oplus S_2$, and every nonzero scalar is isomorphic by vertex base changes to $E$. Both classes are semistable at phase $\\phi$; neither is stable, because $S_1\\oplus S_2$ has a proper subobject of the same phase and step 1.1 handles $E$. Hence the coefficient of $\\delta_E$ in $A_{\\mathrm{all}}$ is $1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "All nonzero dimension vectors at this wall have phase $\\phi$, since $Z(d_1,d_2)=(d_1+d_2)z_1$. Therefore the ordered product over distinct phases has only the single factor at $\\phi$. If that factor is replaced by $S_Z^{\\mathrm{st}}(\\phi)$, its coefficient at $\\delta_E$ is $0$: step 2.1 lists every isomorphism class of dimension $(1,1)$ and neither is stable. This contradicts the coefficient $1$ from step 2.1. The omitted term is the strictly semistable nontrivial extension $E$, so the stable-only replacement cannot satisfy the HN factorization.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The counterexample identifies a nonzero dimension-(1,1) coefficient; the degree-zero term is unaffected."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Counterexample boundary check: The defect is exhibited at degree (1,1), while the zero-object unit remains present."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses the two one-dimensional vertex simples S1 and S2 in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The equal-charge wall makes E strictly semistable, which is the degeneracy causing failure in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The sequence 0→S2→E→S1→0 fixes the subobject and quotient endpoints in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The scalar classification in step 2.1 uses only a finite field and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Counterexample refutes an equality; it is not biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Counterexample refutes an equality; it is not biconditional."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "name": "F2 dimension-(1,1) wall",
+          "result": "At equal charges there are exactly two isomorphism classes in bidegree (1,1), but neither is stable; A_all has coefficient 1 at E and the stable-only factor has coefficient 0.",
+          "evidence": "The classification and coefficient comparison in steps 2.1 and 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read all three steps and both defining suppliers. For E=(k --id--> k), proper nonzero subobject is only S2, with equal phase at z1=z2, so E is strictly semistable and its short exact sequence is nonsplit. Rank 0 and rank 1 give exactly two dimension-(1,1) classes; neither is stable at the wall. Every nonzero degree has the common phase, so the product has one factor, and a stable-only replacement has coefficient 0 at E whereas the all-object coefficient is 1. Retaining a zero-object unit would not alter this contradiction. Valid over every finite field including q=2. No reader/refuter finding or defect."
+      }
+    },
+    "cex-commutative-target-erases-the-a2-wall-crossing": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "thm-finite-quiver-euler-and-skew-integration-is-multiplicative",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be a finite acyclic quiver over $k=\\mathbb F_q$, let\n$t=\\sqrt q>0$, and use the subobject-first completion and tori from\n[[def-subobject-first-completed-finite-quiver-hall-algebra-and-tori]]. The\ndegree-completed Hall product is associative and unital. The continuous maps\n$$I(f)=\\sum_{[M]}\\frac{f(M)}{|\\operatorname{Aut}(M)|}X^{\\mathbf d(M)},\\qquad J(f)=\\sum_{[M]}t^{\\chi_Q(\\mathbf d(M),\\mathbf d(M))} \\frac{f(M)}{|\\operatorname{Aut}(M)|}x^{\\mathbf d(M)}$$\nare unital algebra homomorphisms to the completed tori with products\n$$X^{\\mathbf d}X^{\\mathbf e}=q^{-\\chi_Q(\\mathbf e,\\mathbf d)}X^{\\mathbf d+\\mathbf e}, \\qquad x^{\\mathbf d}*x^{\\mathbf e}=t^{-\\langle\\mathbf e,\\mathbf d\\rangle}x^{\\mathbf d+\\mathbf e}.$$\nThese are separate normalizations: the first is the Euler form target, while\nthe second uses the skew-symmetrized form and the diagonal factor\n$t^{\\chi_Q(\\mathbf d,\\mathbf d)}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-quiver-hall-wall-crossing",
+          "source_section": "Statement",
+          "quote": "Let $Q$ be any finite acyclic quiver over $\\mathbb F_q$, including wild\nquivers, and let $Z_-$ and $Z_+$ be any two assignments of upper-half-plane\ncharges $z_i\\in\\mathbb H$. In the dimension completion of the subobject-first\nHall algebra,\n$$A_{\\mathrm{all}}=\\prod_{\\phi\\in\\Phi_Z\\ \\mathrm{decreasing}}S_Z(\\phi),\\qquad \\Phi_Z=\\{\\phi_Z(\\mathbf e):0\\ne\\mathbf e\\in\\mathbb N^{Q_0}\\}.$$\nThe product is degreewise finite and includes all semistable objects, whether\nstable or strictly semistable. Applying either Euler integration $I$ or skew\nintegration $J$ gives equal completed ordered products for $Z_-$ and $Z_+$.\nEach integrated ordered product has constant term $1$ and is a unit in its\ncompleted quantum torus; conjugation by the two equal products therefore gives\nthe same continuous automorphism.\nNo generic-stability, finite-type, 3-Calabi–Yau, orientation-data, or analytic\nconvergence assumption is used.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the left side, the coefficient of bidegree $(1,1)$ can only come from the linear term of each of the two factors. It is therefore $c_1^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the right side, that bidegree receives the contribution $c_1^2$ from the linear terms of the first and third factors, and the contribution $tc_1$ from the linear term of the middle factor. All remaining terms have a coordinate degree exceeding $(1,1)$ in at least one variable. Thus its coefficient is $c_1^2+tc_1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The difference is $tc_1=t^2/(t^2-1)$, a nonzero rational function (and nonzero at every finite-field specialization $t=\\sqrt q>1$). The two formal series are unequal, so ordinary commutative multiplication cannot retain the A₂ wall identity. This is exactly why the target skew twist is part of the theorem's normalization.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Counterexample boundary check: The constant term is 1 on both sides; the discrepancy is first detected in positive bidegree (1,1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The constant terms do not cause the failure; step 1.1 isolates the first mixed degree."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coefficient c1 is the degree-one term, computed directly in Fact F1 and used in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Ordinary commutativity removes the skew monomial distinction; the nonzero bidegree-(1,1) difference is computed in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The bidegree calculation in steps 1.1–1.2 accounts for every nonnegative exponent choice that reaches (1,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The formal coefficient comparison uses no choice of objects."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Counterexample refutes a claimed equality rather than asserting a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Counterexample refutes a claimed equality rather than asserting a biconditional."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "name": "commutative bidegree (1,1)",
+          "result": "The two coefficients differ by tc1=t²/(t²−1), which is nonzero for t=√q>1.",
+          "evidence": "The complete mixed-degree coefficient count in steps 1.1–2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Read all three steps and all four prerequisites. In ordinary commutative Q(t)[[x1,x2]], bidegree (1,1) is c1^2 on the left and c1^2+t c1 on the right, with c1=t/(t^2-1). No other term contributes because all exponents are nonnegative. Difference t^2/(t^2-1) is nonzero both formally and at every t=sqrt(q)>1. This refutes replacing the product while retaining the stated factor normalization; it makes no claim at the singular t=1 specialization. Checked against Bridgeland §4.6 with actual skew relation x2*x1=t^2 x1*x2. No reader/refuter finding or defect."
+      }
+    }
+  }
+}

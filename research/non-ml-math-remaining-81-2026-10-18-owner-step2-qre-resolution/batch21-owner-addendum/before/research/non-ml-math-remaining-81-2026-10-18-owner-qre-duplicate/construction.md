@@ -1,0 +1,67 @@
+# Duplicate quantum relative entropy helper: proposed ownership repair
+
+This is a proposal and live observation, not an applied canonical repair, mathematical acceptance, or native coverage. The exact read time, hashes, existing/missing paths, and complete observed file preimages are in `observation.json` and `archive/`. Both batches 21 and 22 were live in the observed native state. The shared lemma carrier, both proof-contract files, and both actual page carriers were absent. A collision of manifests is confirmed; a source overwrite is not confirmed.
+
+## Actual interfaces
+
+Batch 21 lists `lem-it-quantum-relative-entropy-support-regularization`, titled “Support-sensitive regularization limit for quantum relative entropy,” but does not yet specify its statement in the observed manifest. Its direct consumer is `thm-it-quantum-relative-entropy-partial-trace-data-processing`. Its listed prerequisites include QRE, positivity, square root, scalar log calculus and trace cyclicity. Neither this title nor the dependency list proves an exact common-identity-shift interface or a restriction to density operators.
+
+Batch 22 explicitly lists the same ID, titled “Common-support regularization of finite quantum relative entropy,” with the claim that for arbitrary finite-dimensional positive semidefinite A,B, D(A+εI || B+εI) → D(A || B), including +∞ when support inclusion fails. Its direct consumer is `thm-it-quantum-relative-entropy-joint-convexity-finite`. Its manifest strategy diagonalizes B, isolates the kernel, and invokes continuity of t log t and ε|log ε|→0.
+
+The actual batch-21-owned definition `def-it-finite-dimensional-quantum-relative-entropy` already defines D for general PSD operators, with natural logarithms and no added trace correction. It sets D(0||B)=0. Thus there is **no established normalization/domain distinction** between the proposed helpers. Identical claims would favor genuine earlier-owner reuse, but the missing batch21 statement/proof and unresolved authoring provenance prevent certifying that branch now. Source references and source-coverage assertions were inspected as existing author evidence, not independently re-certified reading by this proposal.
+
+## Soundness check of the preserved later claim
+
+The common-shift general-PSD claim is sound with the actual definition. Write B=Σ_j b_j |e_j><e_j|, a_j=<Ae_j,e_j>≥0. Then
+
+D(A+εI || B+εI) = tr((A+εI)log(A+εI)) − Σ_j(a_j+ε)log(b_j+ε).
+
+The first term tends to tr(A log A), including zero eigenvalues by t log t→0. Terms with b_j>0 converge to a_j log b_j. The kernel terms are −(Σ_{b_j=0}a_j + ε dim ker B)log ε. If supp A⊆supp B, all these a_j vanish and the term tends to zero. Conversely, zero kernel trace implies A annihilates ker B: for v in ker B, <Av,v>=||A^(1/2)v||²=0, hence Av=0. Thus failed support inclusion gives strictly positive kernel trace and divergence to +∞. This argument handles A=0, B=0, unequal/nonunit traces, and noncommuting A,B. No commutativity assumption or bounded-log assertion near zero is valid or necessary.
+
+The same calculation proves D(A+αεI || B+βεI)→D(A||B) for fixed α,β>0. This observation may be needed when checking actual partial-trace consumers, since tr_E(εI_HE)=ε dim(E) I_H. The common-shift lemma can instead be applied with a reparameterized common ε when both marginal shifts acquire the same dimension factor. Check the actual proof before adding an unnecessary stronger statement. Normalized density approximants require an explicit scaling/normalization calculation; their applicability cannot be inferred from an unnormalized lemma's title.
+
+The later manifest's spectral-theorem/trace dependencies alone do not document the scalar endpoint limits. Check its actual resulting proof and contract for explicit justification or declared log-calculus suppliers. This is an outstanding proof obligation, not a confirmed gap in an absent proof.
+
+## Minimal provisional operation
+
+After genuine native batches 21 and 22 have both drained, root must first archive their actual results and complete source, manifest, contract, notes, coverage and readiness preimages. Do not pause/interrupt either writer or change its assignment beneath it. Then inspect authentic author provenance and actual proof interfaces.
+
+The conservative reviewed candidate in `proposed/research/...batch-22.pages.json` changes only the later ownership ID and its one local dependency occurrence to `lem-it-quantum-relative-entropy-common-support-regularization`. It preserves all statement, strategy, dependencies and provenance fields. The earlier batch21 owner and all its consumers retain the old ID. The new name is an ownership separation pending complete interface evidence; it is not an assertion that the two mathematics claims are already proved distinct.
+
+Use this candidate only if the actual completed interfaces justify separate helpers or root needs to retain separately authored obligations pending review. Do not simply rename the sole shared source and deprive the earlier owner of its body. Select the authentic batch22 authored body for the new ID and the authentic earlier body for the old ID, preserving full arguments. A cloned body with an altered ID does not inherit native provenance or acceptance automatically.
+
+If actual earlier native authoring instead proves the full later claim and has authentic surviving provenance, a single earlier owner is mathematically preferable: remove the later ownership row, leave later consumers referencing the earlier old ID, and update current local contracts/page inventories accordingly. Do not invent an earlier proof or claim equivalence from the titles. Both branches require root's genuine readiness/context recomputation and ordinary gates.
+
+## Complete observed consumer scope
+
+`consumer-closure.json` contains the exact current 81-manifest dependency scan. There are two direct logical consumers and eleven logical consumers in the full observed transitive closure, all in batches21/22. Review their actual carriers/contracts after drain in the listed dependency order. For the rename branch, only the later direct consumer's dependency/link/contract supplier occurrence changes initially; indirect consumers require compatibility checks, not blind global replacement. Metadata-only ownership edits do not authorize mathematical narrowing.
+
+The nonlogical page `requires` closure adds the companions of batches21/22 and both pages of batches23,24,25. These are quantum source compression/cq capacity, quantum channel capacities/entanglement assistance, and quantum key distribution/composable secrecy. All six downstream23–25 pages currently have empty item inventories, so no existing logical consumer is fabricated for them and future authoring must be rescanned. The A-page requires edges remain unchanged in the rename branch.
+
+`scoped-operations.json` lists exact known and conditional paths. Current batch21/22 contract, notes, coverage, cross-batch-ledger, item/page-scope and actual page paths are explicitly recorded present/absent. All81 manifests are archived to make the closure reproducible. Current frontier gate inventories, batch scheduling levels, task directions, source coverage and the actual shared QRE definition are archived too. No historical native report/result/task receipt may be rewritten to manufacture continuity. Root owns current scheduling input/readiness rehash and native recertification.
+
+## Remaining checks
+
+This proposal does not discharge the collision at runtime. Root must bind the actual post-drain outputs, confirm ownership attribution, choose the supported branch, apply the source/manifest/contract/page edits in supplier-before-consumer order, rerun textual-reference and full-run closure discovery, and run ordinary scoped formatting and native gates. An observed missing carrier is not a deletion finding; live hashes can change after this snapshot. No controls, gates, stamps, commits, tool code or shared canonical files were changed here.
+
+## Follow-up during live authoring
+
+At 2026-10-17T15:22:40.762605+00:00 the shared lemma carrier appeared, with title and general-PSD/common-shift statement matching batch22. Its complete bytes are preserved separately in `followup-archive/`, with hash in `repair.json`. This is an appearance, not confirmed overwrite; author attribution still needs genuine native completion. The spectral proof matches the sound argument above. Its F1 explicitly retains an uninspected planned-definition disclaimer, now stale because the actual definition exists: verify and replace that context honestly after drain. The actual body says nonzero space whereas the manifest says arbitrary finite dimension; the zero-dimensional case is trivial and must not be silently lost. Scalar endpoint-limit justifications and actual contract closure remain review obligations.
+
+## Expanded three-collision decision — supersedes the tentative rename
+
+The later investigation covers regularization, isometric invariance, and Holevo measurement bound together. The original tentative rename candidate is superseded and must not be applied. Current actual carriers now supply the earlier21 interfaces in full. Each matches the corresponding later22 manifest's mathematics: general-PSD common-identity-shift QRE limit including infinity; general-PSD simultaneous isometry invariance including infinity; and finite-ensemble/finite-POVM Holevo bound, zero-probability branches omitted. No substantive mathematical difference justifies duplicate renamed theorems.
+
+Propose a single canonical earlier21 owner for all three, deleting only their duplicate later22 ownership rows. Keep later22 consumer dependencies to the same IDs as genuine cross-batch suppliers; keep appropriate contextual page links. Remove duplicate placements from the later22 actual page inventory, and remove later22 contracts claiming local ownership of these suppliers. Later22 consumer contracts must bind the authentic earlier supplier bodies. Full mathematical statements are retained; no new mathematical ID is required.
+
+The current actual21 dependency route is its own inverse-compression/Jensen/modular helpers → `thm-it-quantum-relative-entropy-joint-convexity` → `thm-it-quantum-relative-entropy-partial-trace-data-processing` → `thm-it-quantum-relative-entropy-channel-data-processing` → Holevo. It does not use22's `...joint-convexity-finite` or `...data-processing-finite`. In particular, moving ownership to21 does not itself create a21→22→21 cycle. Exact current actual ancestor discovery and the union of actual-source and manifest consumer graphs are recorded in `three-collision/consumer-closure.json`; missing contracts and future downstream inventories remain explicit obligations.
+
+A confirmed current Holevo proof typo needs focused correction after writers drain: step3.1 writes the trace difference in the wrong order. The correct identity is Σ_x p_x D(ρ_x||ρ̄) = Σ_x p_x tr(ρ_x lnρ_x) − tr(ρ̄ lnρ̄) = χ. The current displayed reversed difference equals −χ. This is a proof-line correction with unchanged theorem statement. Do not rewrite the complete proof or weaken its bound. Zero-weight branches, kernel support inclusion and finite POVM probability normalization are already treated in the actual argument.
+
+The currently observed isometric-invariance proof transports supports and computes traces under the isometry correctly, including the infinite branch. The current earlier-style regularization proof now supplies the explicit ε|ln ε| limit argument from ln x≤x−1 and retains general PSD/zero-dimensional scope. These are fresh actual proof observations, not native acceptance. The shared regularization source has changed from the previously archived later-style body to an earlier-style body, confirming different contents at one shared path. Authorship attribution still requires genuine terminal native evidence; source style and timestamps alone do not establish who performed each write.
+
+Everything remains proposal-only while both workers are live. Native writer outputs and reports stay untouched. The three ownership removals, any unfixed Holevo sign typo, all actual page/contract mirrors and root readiness recomputation should be integrated atomically after genuine writer drain and fresh source comparison. The earlier `proposed/` rename is retained only as historical proposal evidence; the operative candidate is `three-collision/proposed/`.
+
+## Direct-chain joint-convexity comparison
+
+`joint-convexity-comparison/comparison.json` records the focused actual21 versus22 theorem comparison and full source snapshots. These are the same joint-convexity theorem under different IDs, except21 explicitly assumes positive weights while22 permits zero weights omitted; discarding zero terms gives exactly22’s interface.21 additionally allows the trivial zero-dimensional space. Both use the same compression/isometry regularization route and neither depends on the other. Preserve the earlier21 route: routing21 to22 would create page-cycle risk because22 already requires21. Any optional extra consolidation should retain the earlier21 supplier, preserve zero-weight and zero-dimensional scope, and remap only actual later22 consumers after drain. It is not included in the three-collision candidate. The21 statement’s phrase “extended nonnegative order” is misleading for unnormalized generalPSD D, which may be negative; its following “extended real line” is the correct convention.

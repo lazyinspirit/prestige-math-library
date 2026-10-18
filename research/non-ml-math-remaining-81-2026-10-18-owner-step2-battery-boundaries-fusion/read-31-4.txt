@@ -1,0 +1,209 @@
+
+ITEM lem-qa-37-fibonacci-su2-lifts-are-dense
+
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$ and the fixed Fibonacci convention
+$B_1=\operatorname{diag}(1,r)$, $B_2=FB_1F$ with
+$r=e^{-3\pi i/5}$. Put $z=e^{3\pi i/10}$ and let
+$\Lambda=\langle zB_1,zB_2\rangle\le SU(2)$. Then $\Lambda$ is dense in
+$SU(2)$ in operator norm.
+
+## Facts & Assumptions
+
+**Given:** The fixed $F/R$ data and three-anyon braid matrices, the projective
+image $\Gamma$ of the Fibonacci braid generators, and $\mathrm{AC}_\omega$.
+
+[F1] The supplier verifies the stated matrices $B_1,B_2$, unitarity, braid
+relation, and $\det B_j=r$. [[ex-qc-tqc-fibonacci-qubit-matrices]]
+
+[F2] The fixed data use $r=R_\tau/R_1=e^{-3\pi i/5}$ in the specified
+chirality and gauge. [[ex-qc-tqc-fibonacci-data]]
+
+[F3] The projective Fibonacci B3 image is dense in $PU(2)$ under ACω.
+[[thm-qc-tqc-fibonacci-single-qubit-density]]
+
+[F4] The full inverse image of a dense subgroup under $SU(2)\to PU(2)$ is dense under ACω.
+[[lem-qc-tqc-su2-determinant-lifts-dense]]
+
+[F5] $SU(2)$ is connected. [[lem-qc-tqc-special-unitary-connected]]
+
+[A1] Assume exactly countable choice $\mathrm{AC}_\omega$.
+[[def-countable-choice]]
+
+## Proof
+
+1.1 The matrices $B_j$ are unitary by [F1], and $z$ has modulus one. Their determinants satisfy $\det(zB_j)=z^2\det(B_j)=e^{3\pi i/5}e^{-3\pi i/5}=1$ by [F1]–[F2], so each lifted generator lies in $SU(2)$. Let $q:SU(2)\to PU(2)$ be the quotient map with kernel $\{I,-I\}$. Multiplication by the scalar $z$ does not change a projective class, so $q(\Lambda)=\Gamma$. By [A1] and [F3], $\Gamma$ is dense, so [F4] gives density of $q^{-1}(\Gamma)$. Every fiber of $q$ has exactly two elements, which yields $q^{-1}(\Gamma)=\Lambda\cup(-\Lambda)$. [A1, F1, F2, F3, F4, given, algebra]
+
+2.1 Let $K=\overline\Lambda$ in $SU(2)$. It is a subgroup: for $x,y\in K$ and any neighborhood $O$ of $xy^{-1}$, continuity of $(u,v)\mapsto uv^{-1}$ gives neighborhoods $U,V$ of $x,y$ with $UV^{-1}\subseteq O$; since $x,y$ lie in the closure, choose $u\in U\cap\Lambda$ and $v\in V\cap\Lambda$, so $uv^{-1}\in O\cap\Lambda$. Hence $xy^{-1}\in K$. By step 1.1, $q^{-1}(\Gamma)=\Lambda\cup(-\Lambda)$ is dense; taking closures of this finite union gives $K\cup(-K)=SU(2)$. If $-I\in K$, then $-K=K$ and the cover forces $K=SU(2)$. If $-I\notin K$, then $K\cap(-K)=\varnothing$: an intersection would give $x=-y$ for $x,y\in K$, hence $-I=y^{-1}x\in K$. Both sets are closed, so each is also open as the complement of the other; this separates the connected group $SU(2)$ into two nonempty clopen sets, contradicting [F5]. Therefore $-I\in K$ and $K=SU(2)$. Only [A1] is used as a choice axiom. [A1, F5, step 1.1, algebra] ∎
+
+ITEM lem-qa-37-total-error-budget
+
+
+## Statement
+
+Let $A_0$ and $A_1$ be the initial and endpoint isometries in a finite
+adiabatic braid input, let $V$ be the ideal logical unitary, and let $W_c$ be
+a compiled logical unitary. Suppose
+$$\|W_c-V\|_{\rm op}\le\epsilon_c,\qquad \|P(1)U_T(1)A_0-A_1V\|_{\rm op}\le\epsilon_{\rm tr},$$
+and let the JRS leakage amplitude be bounded by $A_m(1)$. Fix a finite POVM $\mathsf M$ on the physical output space. If the
+implemented measurement distribution differs from the distribution of this
+same $\mathsf M$ on $U_T(1)A_0\rho A_0^*U_T(1)^*$ by at most $\epsilon_m$
+in total variation, then for every input density operator $\rho$ the total
+measured-output variation from the ideal compiled output
+$A_1W_c\rho W_c^*A_1^*$ is at most
+$$\epsilon_c+\epsilon_{\rm tr}+A_m(1)+\epsilon_m.$$
+The transport mismatch is an explicit independent premise; the JRS estimate
+bounds leakage only.
+
+## Facts & Assumptions
+
+**Given:** The finite adiabatic input, its JRS leakage bound, compiled and
+ideal logical unitaries, an independent in-band transport bound, a finite
+measurement, and its implementation-variation bound $\epsilon_m$.
+
+[F1] JRS bounds the leakage amplitude of the followed band by $A_m(1)$.
+[[thm-qa-37-jrs-leakage-bound]]
+
+[F2] Pure-state trace distance is bounded by the difference of unit vectors.
+[[lem-qa-21-pure-state-trace-distance-from-vector-error]]
+
+[F3] Finite POVM output variation is bounded by trace distance.
+[[thm-qc-measurement-variation-at-most-trace-distance]]
+
+[F4] The trace norm is homogeneous and satisfies the triangle inequality.
+[[thm-qc-trace-norm-duality-and-norm-properties]]
+
+[F5] A finite-dimensional density operator is a convex combination of pure
+state projectors, with nonnegative weights summing to one.
+[[thm-complex-spectral-theorem-for-normal-endomorphisms]]
+[[def-qc-density-operator]]
+
+## Proof
+
+1.1 Put $S=U_T(1)A_0$ and $T_c=A_1W_c$, both isometries. With $Q=I-P(1)$, decompose $S-T_c=QS+\bigl(P(1)S-A_1V\bigr)+A_1(V-W_c).$ Since $A_1V$ lies in $\operatorname{ran}P(1)$, this identity is exact. The three terms have operator norms at most $A_m(1)$ by [F1], $\epsilon_{\rm tr}$ by the transport premise, and $\epsilon_c$ because $A_1$ is an isometry. The triangle inequality gives $\|S-T_c\|_{\rm op}\le A_m(1)+\epsilon_{\rm tr}+\epsilon_c$. [F1, given, algebra]
+
+2.1 For a pure logical input $|\psi\rangle$, the output vectors $S\psi$ and $T_c\psi$ are unit vectors and differ by at most the step 1.1 operator bound. [F2] therefore bounds their output trace distance by that same number. For mixed $\rho$, decompose it as $\sum_jp_j|\psi_j\rangle\langle\psi_j|$ by [F5]; trace-norm triangle and homogeneity [F4] give the same bound after mixing. Applying [F3] bounds exact-measurement total variation by $A_m(1)+\epsilon_{\rm tr}+\epsilon_c$. [F2, F3, F4, F5, step 1.1, algebra]
+
+3.1 The implemented measurement differs from the exact output measurement by at most $\epsilon_m$ by hypothesis. The total-variation triangle inequality adds this amount to step 2.1 and gives the claimed budget. The phase of each compiled braid is included in $W_c$ or corrected according to the phase-reference record; no phase is omitted. [step 2.1, given, algebra] ∎
+
+ITEM thm-qa-37-approx-encoded-two-qubit-gate
+
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$ and use the six-anyon triple-triple encoding
+[[def-qc-tqc-six-anyon-encoded-subspace]]. For any $U\in U(4)$ put
+$$T_1=U\oplus(\det U)^{-1}\in SU(5),\qquad T_\tau=U\oplus\operatorname{diag}((\det U)^{-1},1,1,1)\in SU(8).$$
+For every $\delta>0$, one normalized six-strand braid word $b$ has both block
+errors $\|B_1(b)-T_1\|_{\rm op}<\delta$ and
+$\|B_\tau(b)-T_\tau\|_{\rm op}<\delta$. In either total-charge block, the
+normalized braid's logical block error and leakage amplitude relative to the
+encoded action of $U$ are at most $\delta$. The physical categorical braid is
+$\zeta B(b)$ with $\zeta=R_1^{e(b)}$; its logical block error is at most
+$\delta$ relative to the phase-matched target $\zeta U$, and its leakage
+amplitude is unchanged. This common scalar is recorded under
+[[def-qa-37-phase-reference-cost]] and must be handled under coherent control.
+When the two determinant-corrected targets are supplied as certified Cauchy
+inputs, the dovetailed B6 compiler finds such a word. No useful joint-block
+word-length or search-time bound is asserted.
+
+## Facts & Assumptions
+
+**Given:** The six-anyon code embeddings, a unitary $U$ on $\mathbb C^4$,
+$\delta>0$, and $\mathrm{AC}_\omega$.
+
+[F1] The code has dimension four in both fixed-charge blocks, with ambient
+dimensions five and eight and the stated leakage complements.
+[[def-qc-tqc-six-anyon-encoded-subspace]]
+
+[F2] The normalized joint B6 closure contains $SU(5)\times SU(8)$ under
+ACω. [[lem-qc-tqc-b6-joint-su5-su8-density]]
+
+[F3] If an ambient unitary is within $\delta$ of a code-preserving block
+target, logical block error and leakage are each at most $\delta$.
+[[thm-qc-tqc-block-approximation-error]]
+
+[F4] The physical braid word differs from normalized blocks by the common
+scalar $R_1^{e(b)}$ on every charge block. [[lem-qc-tqc-determinant-character-phase]]
+
+[F5] For certified Cauchy target inputs the shared-word search terminates.
+[[thm-qa-37-exhaustive-b6-compiler-terminates]]
+
+[A1] Assume exactly $\mathrm{AC}_\omega$. [[def-countable-choice]]
+
+## Proof
+
+1.1 Since $U$ is unitary, $|\det U|=1$. Each displayed extension is unitary on the orthogonal direct sum. Its determinant is $\det U\cdot(\det U)^{-1}=1$, so $T_1\in SU(5)$ and $T_\tau\in SU(8)$. Both preserve the encoded four-dimensional subspace and act there as $U$, by [F1]. [given, F1, algebra]
+
+2.1 The product of open operator-norm $\delta$-balls around $(T_1,T_\tau)$ is a neighborhood in $SU(5)\times SU(8)$. By [A1] and [F2], it contains the image of one common normalized braid word. This proves both block inequalities at once; the word is not chosen separately for the two sectors. For certified Cauchy targets, [F5] gives a terminating search with rational strict certificates (choose any rational tolerance below $\delta$). [A1, F2, F5, step 1.1, choose]
+
+3.1 Apply [F3] in each charge block to the normalized braid matrix and its code-preserving extension $T_a$. The normalized compression to the code differs from $U$ by at most $\delta$, and the off-diagonal block from code to leakage has norm at most $\delta$. Write $\zeta=R_1^{e(b)}$ for the common unit scalar from [F4]. The physical compression differs from the phase-matched target $\zeta U$ by $\|\zeta P B_a(b)P-\zeta\widetilde U\|=\|P B_a(b)P-\widetilde U\|\le\delta$; its leakage amplitude is $\|(I-P)\zeta B_a(b)P\|=\|(I-P)B_a(b)P\|\le\delta$. The exponent-sum phase must still be retained under coherent control. [F1, F3, F4, step 2.1, algebra] ∎
+
+ITEM def-qa-37-fibonacci-braid-gate-set
+
+
+## Definition
+
+Use the fixed chirality and fusion-tree basis of the three-$\tau$, total-$\tau$
+Fibonacci space from [[ex-qc-tqc-fibonacci-qubit-matrices]]. There
+$B_1=\operatorname{diag}(1,r)$, $B_2=FB_1F$, and
+$r=e^{-3\pi i/5}$. Put $z=e^{3\pi i/10}$ and
+$$G_{\rm Fib}=\{zB_1,zB_2,(zB_1)^{-1},(zB_2)^{-1}\}\subset SU(2).$$
+The determinants are one because $\det B_j=r$ and $z^2r=1$; the matrices
+are unitary by the cited matrix verification. The resulting package is
+inverse-closed, and its generated subgroup is dense under the inherited
+$\mathrm{AC}_\omega$ assumption by
+[[lem-qa-37-fibonacci-su2-lifts-are-dense]]. Its exact entries are algebraic
+numbers. For the finite bit implementation, the real and imaginary
+coordinates are supplied by minimal polynomials over $\mathbb Q$ and rational
+isolating intervals with opposite endpoint signs and exactly one real root,
+as required by the finite-precision SK theorem. For the SK recursion one
+additionally supplies a fixed finite base-net certificate $(\mathcal N_0,\eta_0,L_0)$ with
+$0<\eta_0<64^{-2}$, as defined in
+[[def-qc-inverse-closed-dense-su2-gate-set]]. The certificate is input data:
+the compactness result [[lem-qc-compact-su2-base-net]] proves existence but
+computes neither the list nor $L_0$.
+
+The diagram uses the positive Artin crossing convention: time runs downward,
+and the continuous left-input strand passes over the broken right-input
+strand. Its word matrix is the representation convention in
+[[def-qc-tqc-braid-action-from-fusion-data]]; no proof depends on the drawing.
+
+[diagram omitted from reading extract]
+
+ITEM def-qa-37-physical-locality-boundary
+
+
+## Definition
+
+A **physical realization record** for a mathematical braid-compilation
+instance contains, in addition to its finite fusion input and braid word, all
+of: a specified physical state space and low-energy-sector identification; a
+$C^2$ Hermitian path and constant-rank uniformly gapped projection; an
+initial preparation isometry and its cost; a slow-time schedule; an endpoint
+frame; a separately justified identification of band transport with the
+logical-frame Fibonacci $F/R$ target of
+[[def-qa-37-finite-adiabatic-braid-input]], including its phase; and a
+locality model for exchanges. A local-Hamiltonian model specifies a finite
+lattice $\Lambda$ with its metric, an interaction range $R$, and a uniform
+per-site interaction bound $J$ for a decomposition
+$H(s)=\sum_{X\subseteq\Lambda}h_X(s)$: every $h_X(s)$ is Hermitian and
+supported on $X$, $\operatorname{diam}(X)\le R$, and
+$$\sup_{s\in[0,1],\,x\in\Lambda}\sum_{X\ni x}\|h_X(s)\|\le J.$$
+The record separately states the local-indistinguishability and stability
+criteria, including their region scales, norms, tolerances, and the evidence
+used to establish them. It also supplies explicit preparation, excitation,
+measurement, and control-error terms.
+The first spectral-path clauses are the finite interface in
+[[def-qc-tqc-physical-braid-interface]] and
+[[def-qa-37-finite-adiabatic-braid-input]]. The error ledger is
+[[lem-qa-37-total-error-budget]]. A successful SK compilation, projective
+density theorem, or JRS leakage estimate supplies none of the material,
+locality, preparation, or band-holonomy evidence by itself; those are
+independent record fields, not consequences of the mathematical compiler.
+Only terms appearing as hypotheses in the stated error ledger contribute to
+its measured-output bound; a separately recorded preparation, excitation, or
+control error requires an additional bound before it can be included in a
+total physical error claim.

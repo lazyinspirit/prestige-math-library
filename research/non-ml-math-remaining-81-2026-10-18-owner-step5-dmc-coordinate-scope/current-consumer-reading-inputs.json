@@ -1,0 +1,808 @@
+[
+  {
+    "id": "cex-it-asymptotic-source-channel-threshold-does-not-give-zero-error-at-finite-blocklength",
+    "source": "items/cex-it-asymptotic-source-channel-threshold-does-not-give-zero-error-at-finite-blocklength.md",
+    "raw_sha256": "b84cd9852b1d0ae7b7b63fbdf894d8ba868601ed48da2d2a120c313777823ec4",
+    "claim": "For every finite IID source and finite DMC, if $H(P_S)<\\rho C(W)$, then every finite blocklength ratio $n/k=\\rho$ admits a deterministic joint code with zero block error.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For every finite IID source and finite DMC, if $H(P_S)<\\rho C(W)$, then every finite blocklength ratio $n/k=\\rho$ admits a deterministic joint code with zero block error.",
+      "**Given:** A uniform binary IID source, a BSC with crossover probability $1/4$, channel blocklength $n_k=6k$, and a deterministic joint code as in [[def-it-point-to-point-joint-source-channel-code]].",
+      "[F1] [[def-discrete-memoryless-channel]]: for the BSC with crossover probability $1/4$, each coordinate transition probability is either $1/4$ or $3/4$, so every output word has positive probability under every input word.",
+      "[F2] [[def-discrete-memoryless-channel-information-capacity]] and [[thm-discrete-memoryless-channel-capacity-formula]]: $C(W)=\\max_{P_X}I(X;Y)$ in nats per use.",
+      "[F5] [[thm-it-point-to-point-lossless-source-channel-separation]]: a strict entropy-capacity gap ensures reliable transmission by a sequence of codes, asymptotically.",
+      "1.2 Fix any $k\\ge1$, any deterministic encoder $f_k:\\{0,1\\}^k\\to\\{0,1\\}^{6k}$, and decoder $g_k:\\{0,1\\}^{6k}\\to\\{0,1\\}^k$. Choose any output word $y_0$ and then a source word $s^k\\ne g_k(y_0)$, which exists because $|\\{0,1\\}^k|\\ge2$. By [A1] and [F1], $\\Pr[S^k=s^k,Y^{6k}=y_0]=2^{-k}W^{6k}(y_0\\mid f_k(s^k))>0$. On this event the decoder is wrong, so the block-error probability is positive for every finite code. [A1, F1, given, choose, algebra]",
+      "3.1 The strict asymptotic threshold in step 2.1 therefore cannot imply a zero-error code at each finite blocklength ratio. This refutes the statement while leaving the asymptotic separation conclusion intact. [F5, step 2.1, step 1.2, algebra] \u220e\n"
+    ]
+  },
+  {
+    "id": "cex-it-expected-random-code-error-does-not-give-maximal-error",
+    "source": "items/cex-it-expected-random-code-error-does-not-give-maximal-error.md",
+    "raw_sha256": "a334014cfdff05e08121650eadaba081fbf484c1521a44c80b3410ac1bde8ec7",
+    "claim": "For every integer $M\\ge2$, there is a singleton random-code ensemble on a finite noiseless DMC whose expected average error is $1/M$ while the code's maximal error is $1$. Thus a small expected average error alone does not make every message's error small.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-fixed-length-channel-code]]: a fixed-length code consists of an encoder from messages to input words and a deterministic decoder from outputs to messages.",
+      "[F2] [[def-fixed-length-channel-code-errors]]: average error is the uniform-message mean, and maximal error is the largest individual error.",
+      "## Proof\n1.1 Use blocklength one, encode message $m$ as $x=m$ for $1\\le m\\le M-1$ and encode message $M$ as $x=1$. Decode output $y$ as message $y$. These maps are defined on the stated finite alphabets and form a code by [F1]. [F1, given, construct]"
+    ]
+  },
+  {
+    "id": "cor-inactive-dmc-cost-constraint-recovers-capacity",
+    "source": "items/cor-inactive-dmc-cost-constraint-recovers-capacity.md",
+    "raw_sha256": "bfe79fd32ef1713670c758c49e081ff2a1505f5b4b73d481f6b611404260deb3",
+    "claim": "For a finite DMC with letter cost $c$ and budget $\\Gamma\\ge c_{\\max}$, the cost-constrained operational capacity equals the ordinary DMC capacity, with the same average-error convention and in nats.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-finite-dmc-cost-model]] and [[def-cost-constrained-dmc-code-and-capacity]]: each codeword's per-use average cost is an average of the letter costs and the information-capacity constraint is $\\mathbb E c(X)\\le\\Gamma$.",
+      "[F2] [[thm-cost-constrained-dmc-capacity-formula]]: the cost-constrained operational capacity equals $\\max_{P_X:\\mathbb E c(X)\\le\\Gamma}I(P_X;W)$.",
+      "[F3] [[thm-discrete-memoryless-channel-capacity-formula]]: ordinary average-error DMC capacity equals $\\max_{P_X}I(P_X;W)$.",
+      "1.1 Every letter has $c(x)\\le c_{\\max}\\le\\Gamma$ by [F1]. Therefore every ordinary code satisfies the block cost constraint, and every input distribution satisfies the one-letter cost constraint. Conversely a cost-feasible code or distribution is still an ordinary one, so the two code classes and feasible input sets coincide. [F1, given, algebra]"
+    ]
+  },
+  {
+    "id": "def-cost-constrained-dmc-code-and-capacity",
+    "source": "items/def-cost-constrained-dmc-code-and-capacity.md",
+    "raw_sha256": "de6bfafc03d550dff79b7b00bda3bd1902617afa274d60ba3b9a0736955424cb",
+    "claim": "Fix a finite DMC and cost model from [[def-finite-dmc-cost-model]], with feasible budget $\\Gamma$. A length-$n$, $M$-message code from [[def-fixed-length-channel-code]] is **average-cost feasible** if\n$$\\frac1{nM}\\sum_{m=1}^M\\sum_{t=1}^n c(x_t(m))\\le\\Gamma.$$\nA rate $R\\ge0$ is **average-error achievable under budget $\\Gamma$** if there is a sequence of such codes, for all sufficiently large $n$, whose average errors from [[def-fixed-length-channel-code-errors]] tend to zero and satisfy $\\liminf_{n\\to\\infty}n^{-1}\\ln M_n\\ge R$. The **operational cost-constrained capacity** $C(\\Gamma)$ is the supremum of these rates.\n\nFor an input probability vector $P_X$, define its expected cost $\\bar c(P_X)$ as in [[def-finite-dmc-cost-model]]. The **cost-constrained information capacity** is\n$$C_I(\\Gamma):=\\sup_{P_X:\\,\\bar c(P_X)\\le\\Gamma} I(P_X;W),$$\nwhere $I(P_X;W)$ and the unconstrained DMC information capacity use natural-log nats as in [[def-discrete-memoryless-channel-information-capacity]] and [[def-natural-logarithm]]. All rates use natural-log nats ([[def-natural-logarithm]]). This definition uses a supremum; attainment is proved separately.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Fix a finite DMC and cost model from [[def-finite-dmc-cost-model]], with feasible budget $\\Gamma$. A length-$n$, $M$-message code from [[def-fixed-length-channel-code]] is **average-cost feasible** if\n$$\\frac1{nM}\\sum_{m=1}^M\\sum_{t=1}^n c(x_t(m))\\le\\Gamma.$$\nA rate $R\\ge0$ is **average-error achievable under budget $\\Gamma$** if there is a sequence of such codes, for all sufficiently large $n$, whose average errors from [[def-fixed-length-channel-code-errors]] tend to zero and satisfy $\\liminf_{n\\to\\infty}n^{-1}\\ln M_n\\ge R$. The **operational cost-constrained capacity** $C(\\Gamma)$ is the supremum of these rates.",
+      "For an input probability vector $P_X$, define its expected cost $\\bar c(P_X)$ as in [[def-finite-dmc-cost-model]]. The **cost-constrained information capacity** is\n$$C_I(\\Gamma):=\\sup_{P_X:\\,\\bar c(P_X)\\le\\Gamma} I(P_X;W),$$\nwhere $I(P_X;W)$ and the unconstrained DMC information capacity use natural-log nats as in [[def-discrete-memoryless-channel-information-capacity]] and [[def-natural-logarithm]]. All rates use natural-log nats ([[def-natural-logarithm]]). This definition uses a supremum; attainment is proved separately.\n"
+    ]
+  },
+  {
+    "id": "def-discrete-memoryless-channel-information-capacity",
+    "source": "items/def-discrete-memoryless-channel-information-capacity.md",
+    "raw_sha256": "7207f74ed6a64fe4e4abc33540db952cb1f3d9612fb4cdc94783c3a823ac5c79",
+    "claim": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this joint law, using [[def-it-finite-mutual-information]]. The **single-letter information capacity** is\n$$C(W):=\\sup_{P_X} I(P_X;W),$$\nmeasured in nats per channel use. The finite-dimensional maximum is attained, as proved in [[lem-discrete-memoryless-channel-capacity-is-attained]].\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this joint law, using [[def-it-finite-mutual-information]]. The **single-letter information capacity** is\n$$C(W):=\\sup_{P_X} I(P_X;W),$$\nmeasured in nats per channel use. The finite-dimensional maximum is attained, as proved in [[lem-discrete-memoryless-channel-capacity-is-attained]].\n"
+    ]
+  },
+  {
+    "id": "def-discrete-memoryless-channel-information-density",
+    "source": "items/def-discrete-memoryless-channel-information-density.md",
+    "raw_sha256": "b376d64371fc6633613dec6ef54ce739e3dbdff5672e24bca04e6f41594811ff",
+    "claim": "Given an input law $P_X$, let $Q_{P_X}=P_XW$ be its output law. The **information density** is\n$$\\imath_{P_X}(x;y):=\\ln\\frac{W(y\\mid x)}{Q_{P_X}(y)}$$\nwhen $P_X(x)W(y\\mid x)>0$, and is $-\\infty$ otherwise. For block sequences define $\\imath_{P_X}(x^n;y^n):=\\sum_{i=1}^n\\imath_{P_X}(x_i;y_i)$, with any sum containing $-\\infty$ equal to $-\\infty$. On the support of the induced joint law, both numerator and denominator are positive, and the value is finite.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Given an input law $P_X$, let $Q_{P_X}=P_XW$ be its output law. The **information density** is\n$$\\imath_{P_X}(x;y):=\\ln\\frac{W(y\\mid x)}{Q_{P_X}(y)}$$\nwhen $P_X(x)W(y\\mid x)>0$, and is $-\\infty$ otherwise. For block sequences define $\\imath_{P_X}(x^n;y^n):=\\sum_{i=1}^n\\imath_{P_X}(x_i;y_i)$, with any sum containing $-\\infty$ equal to $-\\infty$. On the support of the induced joint law, both numerator and denominator are positive, and the value is finite.\n"
+    ]
+  },
+  {
+    "id": "def-discrete-memoryless-channel-operational-capacity",
+    "source": "items/def-discrete-memoryless-channel-operational-capacity.md",
+    "raw_sha256": "67afcc5a23188fe83fb592eacd6a519e399420a50aacfb5c93bc8946a987d9c5",
+    "claim": "A rate $R\\ge0$ is **average-error achievable** for $W$ if there are length-$n$ codes for all sufficiently large $n$ with\n$$\\liminf_{n\\to\\infty}\\frac{\\ln M_n}{n}\\ge R,\\qquad \\varepsilon_{\\rm av}(n)\\longrightarrow0.$$\nIt is **maximal-error achievable** if the same condition holds with $\\varepsilon_{\\max}(n)\\to0$. Define $C_{\\rm av}(W)$ and $C_{\\max}(W)$ as the suprema of the respective achievable-rate sets. Rates use nats per channel use.\n",
+    "affected_use_and_coordinate_paragraphs": []
+  },
+  {
+    "id": "def-discrete-memoryless-channel",
+    "source": "items/def-discrete-memoryless-channel.md",
+    "raw_sha256": "6f241565fe2f4171d76294ffc7908eaf233166fe8b5c06cd6c2b7eaf8c9c526a",
+    "claim": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.\n"
+    ]
+  },
+  {
+    "id": "def-finite-dmc-cost-model",
+    "source": "items/def-finite-dmc-cost-model.md",
+    "raw_sha256": "ad16806cc24031fa55efc667891aef86c5ad9788b440d527241a5b83a26c3eaa",
+    "claim": "Let $W(y\\mid x)$ be a finite DMC with nonempty finite input alphabet $\\mathcal X$ ([[def-discrete-memoryless-channel]]). A **letter cost** is a supplied function $c:\\mathcal X\\to[0,\\infty)$ with finite real values. Define\n$$c_{\\min}:=\\min_{x\\in\\mathcal X}c(x),\\qquad c_{\\max}:=\\max_{x\\in\\mathcal X}c(x),\\qquad \\bar c(P_X):=\\sum_{x\\in\\mathcal X}P_X(x)c(x)$$\nfor each input probability vector $P_X$ ([[def-finite-probability-vector]]). A real number $\\Gamma$ is a **feasible cost budget** when $\\Gamma\\ge c_{\\min}$. Costs and budgets are per channel use; all logarithms and rates in this pair use natural units [[def-natural-logarithm]].\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $W(y\\mid x)$ be a finite DMC with nonempty finite input alphabet $\\mathcal X$ ([[def-discrete-memoryless-channel]]). A **letter cost** is a supplied function $c:\\mathcal X\\to[0,\\infty)$ with finite real values. Define\n$$c_{\\min}:=\\min_{x\\in\\mathcal X}c(x),\\qquad c_{\\max}:=\\max_{x\\in\\mathcal X}c(x),\\qquad \\bar c(P_X):=\\sum_{x\\in\\mathcal X}P_X(x)c(x)$$\nfor each input probability vector $P_X$ ([[def-finite-probability-vector]]). A real number $\\Gamma$ is a **feasible cost budget** when $\\Gamma\\ge c_{\\min}$. Costs and budgets are per channel use; all logarithms and rates in this pair use natural units [[def-natural-logarithm]].\n"
+    ]
+  },
+  {
+    "id": "def-finite-dmc-feedback-code",
+    "source": "items/def-finite-dmc-feedback-code.md",
+    "raw_sha256": "0573f24aa20e8a4ac5ac242a73817c7c1a29f66aa60dcd55944c969874deb2cb",
+    "claim": "Let $W(y\\mid x)$ be the finite DMC [[def-discrete-memoryless-channel]] and $c:\\mathcal X\\to[0,\\infty)$ the finite input cost from [[def-finite-dmc-cost-model]], with feasible budget $\\Gamma$ from [[def-cost-constrained-dmc-code-and-capacity]]. For an integer $n\\ge1$, a deterministic length-$n$ feedback code with $M\\ge1$ equiprobable messages consists of causal maps\n$$f_t:[M]\\times\\mathcal Y^{t-1}\\to\\mathcal X\\quad(1\\le t\\le n)$$\nand a decoder $g:\\mathcal Y^n\\to[M]$. Given message $m$, its channel law is the product of the row probabilities $W(y_t\\mid f_t(m,y^{t-1}))$. Its expected average cost is\n$$\\frac1n\\sum_{t=1}^n\\mathbb E[c(X_t)],$$\nwhere the expectation is over the uniform message and channel outputs. It is feasible when this quantity is at most $\\Gamma$; its average error is $\\Pr[g(Y^n)\\ne M]$ and its rate is $n^{-1}\\ln M$ nats per use. The feedback operational capacity $C_{\\rm fb}(\\Gamma)$ is the supremum of rates for which feasible codes for all sufficiently large blocklengths have average error tending to zero and limiting inferior rate at least the stated rate. The no-feedback subclass consists of encoders $f_t$ that do not depend on $y^{t-1}$; it includes every ordinary fixed-length code from [[def-fixed-length-channel-code]]. Its rate uses the natural logarithm [[def-natural-logarithm]].\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $W(y\\mid x)$ be the finite DMC [[def-discrete-memoryless-channel]] and $c:\\mathcal X\\to[0,\\infty)$ the finite input cost from [[def-finite-dmc-cost-model]], with feasible budget $\\Gamma$ from [[def-cost-constrained-dmc-code-and-capacity]]. For an integer $n\\ge1$, a deterministic length-$n$ feedback code with $M\\ge1$ equiprobable messages consists of causal maps\n$$f_t:[M]\\times\\mathcal Y^{t-1}\\to\\mathcal X\\quad(1\\le t\\le n)$$\nand a decoder $g:\\mathcal Y^n\\to[M]$. Given message $m$, its channel law is the product of the row probabilities $W(y_t\\mid f_t(m,y^{t-1}))$. Its expected average cost is\n$$\\frac1n\\sum_{t=1}^n\\mathbb E[c(X_t)],$$\nwhere the expectation is over the uniform message and channel outputs. It is feasible when this quantity is at most $\\Gamma$; its average error is $\\Pr[g(Y^n)\\ne M]$ and its rate is $n^{-1}\\ln M$ nats per use. The feedback operational capacity $C_{\\rm fb}(\\Gamma)$ is the supremum of rates for which feasible codes for all sufficiently large blocklengths have average error tending to zero and limiting inferior rate at least the stated rate. The no-feedback subclass consists of encoders $f_t$ that do not depend on $y^{t-1}$; it includes every ordinary fixed-length code from [[def-fixed-length-channel-code]]. Its rate uses the natural logarithm [[def-natural-logarithm]].\n"
+    ]
+  },
+  {
+    "id": "def-fixed-length-channel-code-errors",
+    "source": "items/def-fixed-length-channel-code-errors.md",
+    "raw_sha256": "a875fff828648fc264a42719d136bd8109265eaa9d2514b942e7256e90076ade",
+    "claim": "For a length-$n$ code $(e,d)$, let\n$$e_m:=W^n\\{y^n:d(y^n)\\ne m\\mid e(m)\\}.$$\nIts **average error** is $\\varepsilon_{\\rm av}:=M^{-1}\\sum_{m=1}^M e_m$, corresponding to a uniform message, and its **maximal error** is $\\varepsilon_{\\max}:=\\max_{1\\le m\\le M}e_m$.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For a length-$n$ code $(e,d)$, let\n$$e_m:=W^n\\{y^n:d(y^n)\\ne m\\mid e(m)\\}.$$\nIts **average error** is $\\varepsilon_{\\rm av}:=M^{-1}\\sum_{m=1}^M e_m$, corresponding to a uniform message, and its **maximal error** is $\\varepsilon_{\\max}:=\\max_{1\\le m\\le M}e_m$.\n"
+    ]
+  },
+  {
+    "id": "def-fixed-length-channel-code",
+    "source": "items/def-fixed-length-channel-code.md",
+    "raw_sha256": "81cf79160294f3f88dd83fd5ebf4c8e00838af18f47251781f0b15606bda72d9",
+    "claim": "For a finite DMC $W$, a **length-$n$ code with $M$ messages** is a pair of maps $e:[M]\\to\\mathcal X^n$ and $d:\\mathcal Y^n\\to[M]$, where $n,M\\ge1$ and $[M]:=\\{1,\\ldots,M\\}$. A message $m$ is encoded as $e(m)$, passed through the block kernel $W^n$ of [[def-discrete-memoryless-channel]], and decoded as $d(Y^n)$. The encoder and decoder are deterministic; there is no feedback, and no input-cost constraint is imposed.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For a finite DMC $W$, a **length-$n$ code with $M$ messages** is a pair of maps $e:[M]\\to\\mathcal X^n$ and $d:\\mathcal Y^n\\to[M]$, where $n,M\\ge1$ and $[M]:=\\{1,\\ldots,M\\}$. A message $m$ is encoded as $e(m)$, passed through the block kernel $W^n$ of [[def-discrete-memoryless-channel]], and decoded as $d(Y^n)$. The encoder and decoder are deterministic; there is no feedback, and no input-cost constraint is imposed.\n"
+    ]
+  },
+  {
+    "id": "def-it-channel-dispersion",
+    "source": "items/def-it-channel-dispersion.md",
+    "raw_sha256": "79ae39c3fd40748f83799c30128fdda73e0e661a683702d2250e5757af1e19fd",
+    "claim": "Let $P$ be an input probability vector for the finite DMC $W$, and let $P_Y(y)=\\sum_xP(x)W(y\\mid x)$. On cells with $P(x)W(y\\mid x)>0$, define $\\imath_P(x;y)=\\ln[W(y\\mid x)/P_Y(y)]$; the denominator is then positive. Put\n$$V(P,W):=\\sum_{x:P(x)>0}P(x)\\operatorname{Var}_{W(\\cdot\\mid x)}[\\imath_P(x;Y)].$$\nLet $C(W)=\\max_P I(P,W)$ and $\\Pi(W)=\\{P:I(P,W)=C(W)\\}$, the nonempty set of capacity-achieving input distributions. Define\n$$V_{\\min}(W):=\\min_{P\\in\\Pi(W)}V(P,W),\\qquad V_{\\max}(W):=\\max_{P\\in\\Pi(W)}V(P,W).$$\nThe local attainment lemma [[lem-it-dmc-dispersion-attains-minimum]] proves these extrema exist. Dispersion is measured in nats squared. In the normal-approximation theorem on this page only the fixed range $0<\\epsilon<1/2$ and premise $V_{\\min}(W)>0$ are used.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $P$ be an input probability vector for the finite DMC $W$, and let $P_Y(y)=\\sum_xP(x)W(y\\mid x)$. On cells with $P(x)W(y\\mid x)>0$, define $\\imath_P(x;y)=\\ln[W(y\\mid x)/P_Y(y)]$; the denominator is then positive. Put\n$$V(P,W):=\\sum_{x:P(x)>0}P(x)\\operatorname{Var}_{W(\\cdot\\mid x)}[\\imath_P(x;Y)].$$\nLet $C(W)=\\max_P I(P,W)$ and $\\Pi(W)=\\{P:I(P,W)=C(W)\\}$, the nonempty set of capacity-achieving input distributions. Define\n$$V_{\\min}(W):=\\min_{P\\in\\Pi(W)}V(P,W),\\qquad V_{\\max}(W):=\\max_{P\\in\\Pi(W)}V(P,W).$$\nThe local attainment lemma [[lem-it-dmc-dispersion-attains-minimum]] proves these extrema exist. Dispersion is measured in nats squared. In the normal-approximation theorem on this page only the fixed range $0<\\epsilon<1/2$ and premise $V_{\\min}(W)>0$ are used.\n"
+    ]
+  },
+  {
+    "id": "def-it-degraded-wiretap-channel",
+    "source": "items/def-it-degraded-wiretap-channel.md",
+    "raw_sha256": "079776b20ec50a8fbe8ff40d9a35c5406c75998a06765ff4258385b88699d4fa",
+    "claim": "A finite wiretap channel [[def-it-wiretap-channel]] is **degraded from Bob to Eve** if there is a finite stochastic kernel $V(z\\mid y)$ from Bob's output alphabet to Eve's output alphabet such that\n\n$$W(y,z\\mid x)=W_Y(y\\mid x)V(z\\mid y)\\quad\\text{for every }x,y,z.$$\n\nEquivalently, for every input law $P_X$, the induced joint law is $P_X(x)W_Y(y\\mid x)V(z\\mid y)$. The requirement specifies the joint coupling of Bob's and Eve's outputs, not only their separate marginal channels.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "A finite wiretap channel [[def-it-wiretap-channel]] is **degraded from Bob to Eve** if there is a finite stochastic kernel $V(z\\mid y)$ from Bob's output alphabet to Eve's output alphabet such that"
+    ]
+  },
+  {
+    "id": "def-it-finite-dmc-feedback-code",
+    "source": "items/def-it-finite-dmc-feedback-code.md",
+    "raw_sha256": "e71204143f5ff1058e9b7d5d8b4081535f47bb07d161b016310929fb7a9d0631",
+    "claim": "For a finite DMC $W:\\mathcal X\\to\\mathcal Y$ as in [[def-discrete-memoryless-channel]], a length-$n$ feedback code has a uniform message $M\\in[M]$, deterministic causal encoders $f_i:[M]\\times\\mathcal Y^{i-1}\\to\\mathcal X$ and a decoder $g:\\mathcal Y^n\\to[M]$. The encoder at time $i$ sees only $Y^{i-1}$, sets $X_i=f_i(M,Y^{i-1})$, and the causal joint law is\n$$\\Pr(M=m,Y^n=y^n)=\\frac1M\\prod_{i=1}^n W(y_i\\mid f_i(m,y^{i-1})).$$\nEquivalently, at each positive-probability message-and-past-output history, $Y_i$ has conditional law $W(\\cdot\\mid f_i(m,y^{i-1}))$. Its average error is $\\Pr[g(Y^n)\\ne M]$, rate is $n^{-1}\\ln M$ nats/use, and the feedback capacity is the closure of rates achievable with error tending to zero. There is no input-cost constraint.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For a finite DMC $W:\\mathcal X\\to\\mathcal Y$ as in [[def-discrete-memoryless-channel]], a length-$n$ feedback code has a uniform message $M\\in[M]$, deterministic causal encoders $f_i:[M]\\times\\mathcal Y^{i-1}\\to\\mathcal X$ and a decoder $g:\\mathcal Y^n\\to[M]$. The encoder at time $i$ sees only $Y^{i-1}$, sets $X_i=f_i(M,Y^{i-1})$, and the causal joint law is\n$$\\Pr(M=m,Y^n=y^n)=\\frac1M\\prod_{i=1}^n W(y_i\\mid f_i(m,y^{i-1})).$$\nEquivalently, at each positive-probability message-and-past-output history, $Y_i$ has conditional law $W(\\cdot\\mid f_i(m,y^{i-1}))$. Its average error is $\\Pr[g(Y^n)\\ne M]$, rate is $n^{-1}\\ln M$ nats/use, and the feedback capacity is the closure of rates achievable with error tending to zero. There is no input-cost constraint.",
+      "[F1] [[def-discrete-memoryless-channel]]: the single-use transition kernel is the stochastic row $W(\\cdot\\mid x)$ on the finite output alphabet for each input $x$.",
+      "1.1 Recursively in $i$, the message and past-output history determine $X_i=f_i(M,Y^{i-1})$, after which [F1] specifies a probability vector for $Y_i$. Multiplying these causal row probabilities and the uniform message mass $1/M$ gives the displayed joint law. Summing first over $y_n$, then $y_{n-1}$ down to $y_1$, each last row sums to one; summing over the $M$ messages then gives total mass one. Thus the law is normalized, and its positive-probability history conditionals are the stated rows. [given, F1, algebra]"
+    ]
+  },
+  {
+    "id": "def-it-gallager-and-expurgated-exponent-functions",
+    "source": "items/def-it-gallager-and-expurgated-exponent-functions.md",
+    "raw_sha256": "6cb175700afa5a4ec002aac2670e738c8cdade51cde3529ae765931bea50e024",
+    "claim": "Let $W$ be a finite unconstrained DMC from finite nonempty $\\mathcal X$ to $\\mathcal Y$, with rates and logarithms in nats. The one-letter function $E_0(\\rho,P)$ for $\\rho\\ge0$ and $E_{0x}(\\rho,P)$ for $\\rho\\ge1$ are defined in [[def-it-one-letter-gallager-exponent-functions]]. Their maxima over the input simplex are attained and finite by [[lem-it-gallager-input-maxima-attained]]. For every $\\rho\\ge0$, define $E_0(\\rho):=\\max_P E_0(\\rho,P)$; on the random-coding range set\n$$E_r(R):=\\sup_{0\\le\\rho\\le1}\\{E_0(\\rho)-\\rho R\\}.$$\nThe expurgated function and sphere-packing expression are\n$$E_{\\rm ex}(R):=\\sup_{\\rho\\ge1}\\left\\{\\max_P E_{0x}(\\rho,P)-\\rho R\\right\\},\\qquad E_{\\rm sp}(R):=\\sup_{\\rho\\ge0}\\{E_0(\\rho)-\\rho R\\}.$$\nThese functions define lower or upper bounds used on this page; they do not assert that an error-exponent limit exists or that the sphere-packing bound applies without its later strict-feasibility hypothesis.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $W$ be a finite unconstrained DMC from finite nonempty $\\mathcal X$ to $\\mathcal Y$, with rates and logarithms in nats. The one-letter function $E_0(\\rho,P)$ for $\\rho\\ge0$ and $E_{0x}(\\rho,P)$ for $\\rho\\ge1$ are defined in [[def-it-one-letter-gallager-exponent-functions]]. Their maxima over the input simplex are attained and finite by [[lem-it-gallager-input-maxima-attained]]. For every $\\rho\\ge0$, define $E_0(\\rho):=\\max_P E_0(\\rho,P)$; on the random-coding range set\n$$E_r(R):=\\sup_{0\\le\\rho\\le1}\\{E_0(\\rho)-\\rho R\\}.$$\nThe expurgated function and sphere-packing expression are\n$$E_{\\rm ex}(R):=\\sup_{\\rho\\ge1}\\left\\{\\max_P E_{0x}(\\rho,P)-\\rho R\\right\\},\\qquad E_{\\rm sp}(R):=\\sup_{\\rho\\ge0}\\{E_0(\\rho)-\\rho R\\}.$$\nThese functions define lower or upper bounds used on this page; they do not assert that an error-exponent limit exists or that the sphere-packing bound applies without its later strict-feasibility hypothesis.\n"
+    ]
+  },
+  {
+    "id": "def-it-one-letter-gallager-exponent-functions",
+    "source": "items/def-it-one-letter-gallager-exponent-functions.md",
+    "raw_sha256": "a6b0abdb4dabc34d1bae8d0e36c82a9b441314d793d1a09f8930bcb901c72cc4",
+    "claim": "Let $W$ be a finite DMC from finite nonempty $\\mathcal X$ to $\\mathcal Y$, with rates and logarithms in nats. For an input law $P$ and $\\rho\\ge0$, define\n$$E_0(\\rho,P):=-\\ln\\sum_{y\\in\\mathcal Y}\\left(\\sum_{x\\in\\mathcal X}P(x)W(y\\mid x)^{1/(1+\\rho)}\\right)^{1+\\rho}.$$\nSeparately, for $\\rho\\ge1$, define $B(x,x'):=\\sum_y\\sqrt{W(y\\mid x)W(y\\mid x')}$ and\n$$E_{0x}(\\rho,P):=-\\rho\\ln\\sum_{x,x'}P(x)P(x')B(x,x')^{1/\\rho}.$$\nFor every $a>0$, $0^a=0$; thus zero channel transitions and zero Bhattacharyya coefficients contribute zero to these sums. These are one-letter functions at a fixed $P$; the global maxima and rate-dependent exponent functions are separate definitions.\n",
+    "affected_use_and_coordinate_paragraphs": []
+  },
+  {
+    "id": "def-it-point-to-point-joint-source-channel-code",
+    "source": "items/def-it-point-to-point-joint-source-channel-code.md",
+    "raw_sha256": "0f7788612cc727e1390f065e46bef4b528821c9b3906bfa71fd696dbc11d89ab",
+    "claim": "Let $\\mathcal S,\\mathcal X,\\mathcal Y,\\widehat{\\mathcal S}$ be nonempty finite alphabets, let $P_S$ be a probability vector on $\\mathcal S$, and let $W$ be a finite discrete memoryless channel from $\\mathcal X$ to $\\mathcal Y$ as in [[def-discrete-memoryless-channel]]. For positive integers $k,n$, a deterministic **$(k,n)$ joint source-channel code** is a pair of maps\n$$f_k:\\mathcal S^k\\to\\mathcal X^n,\\qquad g_k:\\mathcal Y^n\\to\\widehat{\\mathcal S}^{\\,k}.$$\nThe source block has law $P_S^{\\otimes k}$, the channel output conditional on input $x^n$ has law $W^n(\\cdot\\mid x^n)$, and the reproduction is $\\widehat S^k=g_k(Y^n)$. The code has no feedback.\n\nA **code sequence at channel-use ratio $\\rho$** consists of such codes with source lengths $k\\to\\infty$, channel lengths $n_k$, and $n_k/k\\to\\rho\\in(0,\\infty)$. In the lossless case $\\widehat{\\mathcal S}=\\mathcal S$, its block error is $\\Pr[\\widehat S^k\\ne S^k]$. In the lossy case, for finite nonnegative single-letter distortion $d$, its normalized block distortion is $d_k$ from [[def-it-single-letter-distortion-and-block-distortion]]; expected distortion and the positive-slack excess-distortion probabilities $\\Pr[d_k>D+\\varepsilon]$ for every $\\varepsilon>0$ are distinct criteria.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $\\mathcal S,\\mathcal X,\\mathcal Y,\\widehat{\\mathcal S}$ be nonempty finite alphabets, let $P_S$ be a probability vector on $\\mathcal S$, and let $W$ be a finite discrete memoryless channel from $\\mathcal X$ to $\\mathcal Y$ as in [[def-discrete-memoryless-channel]]. For positive integers $k,n$, a deterministic **$(k,n)$ joint source-channel code** is a pair of maps\n$$f_k:\\mathcal S^k\\to\\mathcal X^n,\\qquad g_k:\\mathcal Y^n\\to\\widehat{\\mathcal S}^{\\,k}.$$\nThe source block has law $P_S^{\\otimes k}$, the channel output conditional on input $x^n$ has law $W^n(\\cdot\\mid x^n)$, and the reproduction is $\\widehat S^k=g_k(Y^n)$. The code has no feedback.",
+      "A **code sequence at channel-use ratio $\\rho$** consists of such codes with source lengths $k\\to\\infty$, channel lengths $n_k$, and $n_k/k\\to\\rho\\in(0,\\infty)$. In the lossless case $\\widehat{\\mathcal S}=\\mathcal S$, its block error is $\\Pr[\\widehat S^k\\ne S^k]$. In the lossy case, for finite nonnegative single-letter distortion $d$, its normalized block distortion is $d_k$ from [[def-it-single-letter-distortion-and-block-distortion]]; expected distortion and the positive-slack excess-distortion probabilities $\\Pr[d_k>D+\\varepsilon]$ for every $\\varepsilon>0$ are distinct criteria.\n"
+    ]
+  },
+  {
+    "id": "def-it-reliability-function",
+    "source": "items/def-it-reliability-function.md",
+    "raw_sha256": "c5150164c5bf08d8a28acbef4b6865fd5bd27a8b64b1e3cf4e2105e893004ed7",
+    "claim": "For a finite DMC $W$, $R>0$, and $n\\ge1$, set $M_n=\\lceil e^{nR}\\rceil$. Let $P_k^*(n,M_n)$ be the minimum error probability among length-$n$ deterministic codes of that size under criterion $k\\in\\{\\mathrm{av},\\mathrm{max}\\}$, where the two errors are those of [[def-fixed-length-channel-code-errors]]. This minimum exists because the encoder and decoder range over finite sets. Define\n$$E_k^-(R):=\\liminf_{n\\to\\infty}-\\frac1n\\ln P_k^*(n,M_n),\\qquad E_k^+(R):=\\limsup_{n\\to\\infty}-\\frac1n\\ln P_k^*(n,M_n),$$\nwith $-\\ln0=+\\infty$. An error-exponent limit $E_k(R)$ is used only when the liminf and limsup agree in the extended reals. These are exponents of error probability; the exponent of success probability is a different quantity. No general exact formula for the finite-DMC reliability function is part of this definition.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For a finite DMC $W$, $R>0$, and $n\\ge1$, set $M_n=\\lceil e^{nR}\\rceil$. Let $P_k^*(n,M_n)$ be the minimum error probability among length-$n$ deterministic codes of that size under criterion $k\\in\\{\\mathrm{av},\\mathrm{max}\\}$, where the two errors are those of [[def-fixed-length-channel-code-errors]]. This minimum exists because the encoder and decoder range over finite sets. Define\n$$E_k^-(R):=\\liminf_{n\\to\\infty}-\\frac1n\\ln P_k^*(n,M_n),\\qquad E_k^+(R):=\\limsup_{n\\to\\infty}-\\frac1n\\ln P_k^*(n,M_n),$$\nwith $-\\ln0=+\\infty$. An error-exponent limit $E_k(R)$ is used only when the liminf and limsup agree in the extended reals. These are exponents of error probability; the exponent of success probability is a different quantity. No general exact formula for the finite-DMC reliability function is part of this definition.\n"
+    ]
+  },
+  {
+    "id": "def-it-weak-and-strong-secrecy",
+    "source": "items/def-it-weak-and-strong-secrecy.md",
+    "raw_sha256": "46367391611861a2d58ddaed4dfca0a7f18409902a82ddf1436c2d435cfb5465",
+    "claim": "Consider a sequence of finite wiretap codes from [[def-it-wiretap-channel]], with uniform message $M_n$ and Eve's observation $Z^n$. Call it reliable when its average error tends to zero; maximal reliability is the stronger condition that its maximal error tends to zero. Among reliable sequences, **weak secrecy** means\n\n$$\\frac1n I(M_n;Z^n)\\longrightarrow 0,$$\n\nand **strong secrecy** means\n\n$$I(M_n;Z^n)\\longrightarrow 0,$$\n\nwhere leakage is the unnormalized finite mutual information of [[def-it-information-leakage-and-equivocation]] and all quantities are in nats. Exact independence at every blocklength, total-variation secrecy, and per-message secrecy are separate conditions and are not identified with either limit here.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Consider a sequence of finite wiretap codes from [[def-it-wiretap-channel]], with uniform message $M_n$ and Eve's observation $Z^n$. Call it reliable when its average error tends to zero; maximal reliability is the stronger condition that its maximal error tends to zero. Among reliable sequences, **weak secrecy** means",
+      "where leakage is the unnormalized finite mutual information of [[def-it-information-leakage-and-equivocation]] and all quantities are in nats. Exact independence at every blocklength, total-variation secrecy, and per-message secrecy are separate conditions and are not identified with either limit here.\n"
+    ]
+  },
+  {
+    "id": "def-it-wiretap-channel",
+    "source": "items/def-it-wiretap-channel.md",
+    "raw_sha256": "29419fbb4a810341098a9f10865569f89ffbdbbb83c2db9a190bb26c8bbd25ac",
+    "claim": "Let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be finite nonempty alphabets and let $W(y,z\\mid x)$ be a stochastic kernel from $\\mathcal X$ to $\\mathcal Y\\times\\mathcal Z$ ([[def-finite-stochastic-kernel]]). Its Bob and Eve marginals are $W_Y(y\\mid x):=\\sum_z W(y,z\\mid x)$ and $W_Z(z\\mid x):=\\sum_y W(y,z\\mid x)$; each is a finite DMC in the sense of [[def-discrete-memoryless-channel]].\n\nFor each integer $n\\ge1$, use one-based coordinate labels for blocks: for $a^n\\in\\mathcal A^n$, a function on $\\{0,\\ldots,n-1\\}$, write $a_i:=a^n(i-1)$ for $1\\le i\\le n$. With these labels, the joint channel law is\n\n$$W^n(y^n,z^n\\mid x^n):=\\prod_{i=1}^n W(y_i,z_i\\mid x_i).$$\n\nThe product formula is a stochastic kernel by [[lem-it-finite-wiretap-product-kernel-is-stochastic]]. Finite distributivity gives $\\sum_{z^n}W^n(y^n,z^n\\mid x^n)=\\prod_i\\sum_{z_i}W(y_i,z_i\\mid x_i)=\\prod_iW_Y(y_i\\mid x_i)=W_Y^n(y^n\\mid x^n)$, and the analogous finite sum over $y^n$ gives marginal $W_Z^n$. The pair $(Y^n,Z^n)$ may be correlated conditional on $X^n$; neither marginal changes if that coupling changes while the two marginal channels stay fixed.\n\nAn $(n,\\mathcal M_n)$ wiretap code has a finite message set $\\mathcal M_n$, a uniform message $M_n$, a stochastic encoder $P_{X^n\\mid M_n}$ using private randomness independent of channel noise, and a decoder $\\hat M_n:\\mathcal Y^n\\to\\mathcal M_n\\cup\\{e\\}$, where $e\\notin\\mathcal M_n$ denotes erasure and is counted as error. The encoder uses no feedback and the parties have no preshared secret key or forward public aid. The public code description is known to Eve, who observes $Z^n$. Average error is $P_{e,av}^{(n)}:=\\Pr[\\hat M_n(Y^n)\\ne M_n]$; maximal error is $P_{e,max}^{(n)}:=\\max_{m\\in\\mathcal M_n}\\Pr[\\hat M_n(Y^n)\\ne m\\mid M_n=m]$. The rate is $n^{-1}\\ln|\\mathcal M_n|$ nats per channel use. A secrecy metric is specified separately.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be finite nonempty alphabets and let $W(y,z\\mid x)$ be a stochastic kernel from $\\mathcal X$ to $\\mathcal Y\\times\\mathcal Z$ ([[def-finite-stochastic-kernel]]). Its Bob and Eve marginals are $W_Y(y\\mid x):=\\sum_z W(y,z\\mid x)$ and $W_Z(z\\mid x):=\\sum_y W(y,z\\mid x)$; each is a finite DMC in the sense of [[def-discrete-memoryless-channel]].",
+      "For each integer $n\\ge1$, use one-based coordinate labels for blocks: for $a^n\\in\\mathcal A^n$, a function on $\\{0,\\ldots,n-1\\}$, write $a_i:=a^n(i-1)$ for $1\\le i\\le n$. With these labels, the joint channel law is",
+      "$$W^n(y^n,z^n\\mid x^n):=\\prod_{i=1}^n W(y_i,z_i\\mid x_i).$$",
+      "The product formula is a stochastic kernel by [[lem-it-finite-wiretap-product-kernel-is-stochastic]]. Finite distributivity gives $\\sum_{z^n}W^n(y^n,z^n\\mid x^n)=\\prod_i\\sum_{z_i}W(y_i,z_i\\mid x_i)=\\prod_iW_Y(y_i\\mid x_i)=W_Y^n(y^n\\mid x^n)$, and the analogous finite sum over $y^n$ gives marginal $W_Z^n$. The pair $(Y^n,Z^n)$ may be correlated conditional on $X^n$; neither marginal changes if that coupling changes while the two marginal channels stay fixed."
+    ]
+  },
+  {
+    "id": "def-it-wiretap-secrecy-capacities",
+    "source": "items/def-it-wiretap-secrecy-capacities.md",
+    "raw_sha256": "41bb0329e65f9c0a699b25840ad791c20740e9dd076c42d74e92aec5e00419a0",
+    "claim": "Fix an error criterion $e\\in\\{\\mathrm{av},\\mathrm{max}\\}$ and a secrecy criterion $s\\in\\{\\mathrm{weak},\\mathrm{strong}\\}$. For each code let $P_{\\rm err}^{(n)}=P_{e,\\rm av}^{(n)}$ when $e=\\mathrm{av}$ and $P_{\\rm err}^{(n)}=P_{e,\\rm max}^{(n)}$ when $e=\\mathrm{max}$. A rate $R\\ge0$ in nats per channel use is $(e,s)$-achievable for a finite wiretap channel [[def-it-wiretap-channel]] if there is a sequence of wiretap codes, one at each blocklength $n\\ge1$, such that\n\n$$\\liminf_{n\\to\\infty}\\frac1n\\ln|\\mathcal M_n|\\ge R,\\qquad P_{\\rm err}^{(n)}\\longrightarrow0,$$\n\nand the sequence satisfies secrecy criterion $s$ from [[def-it-weak-and-strong-secrecy]], with leakage measured by [[def-it-information-leakage-and-equivocation]]. Define $C_{e,s}$ as the supremum of all such rates. Thus this definition gives four operational capacities, distinguished by average or maximal error and weak or strong secrecy.\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Fix an error criterion $e\\in\\{\\mathrm{av},\\mathrm{max}\\}$ and a secrecy criterion $s\\in\\{\\mathrm{weak},\\mathrm{strong}\\}$. For each code let $P_{\\rm err}^{(n)}=P_{e,\\rm av}^{(n)}$ when $e=\\mathrm{av}$ and $P_{\\rm err}^{(n)}=P_{e,\\rm max}^{(n)}$ when $e=\\mathrm{max}$. A rate $R\\ge0$ in nats per channel use is $(e,s)$-achievable for a finite wiretap channel [[def-it-wiretap-channel]] if there is a sequence of wiretap codes, one at each blocklength $n\\ge1$, such that",
+      "and the sequence satisfies secrecy criterion $s$ from [[def-it-weak-and-strong-secrecy]], with leakage measured by [[def-it-information-leakage-and-equivocation]]. Define $C_{e,s}$ as the supremum of all such rates. Thus this definition gives four operational capacities, distinguished by average or maximal error and weak or strong secrecy.\n"
+    ]
+  },
+  {
+    "id": "ex-binary-erasure-channel-capacity",
+    "source": "items/ex-binary-erasure-channel-capacity.md",
+    "raw_sha256": "50b4b185eac4a59a0045f75a91efcd4daec06fa10c6bbcfa90a31a6ff65a2b7f",
+    "claim": "The binary erasure channel outputs the input bit with probability $1-\\epsilon$ and the erasure symbol $e$ with probability $\\epsilon$, independently at each use. For $\\epsilon\\in[0,1]$, its capacity is $(1-\\epsilon)\\ln2$ nats per use, attained by a uniform input.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-discrete-memoryless-channel]]: conditional on $X=x$, the output is $x$ with probability $1-\\epsilon$ and $e$ with probability $\\epsilon$.",
+      "[F2] [[thm-discrete-memoryless-channel-capacity-formula]]: capacity is the maximum of finite mutual information over input laws.",
+      "[F4] [[def-it-finite-conditional-entropy]] and [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]: conditional entropy averages the entropy of each positive-mass conditional law; zero coordinates contribute $0\\ln0=0$."
+    ]
+  },
+  {
+    "id": "ex-binary-identity-channel-with-cost-and-feedback",
+    "source": "items/ex-binary-identity-channel-with-cost-and-feedback.md",
+    "raw_sha256": "e476d5bb03137be3ada0c3cd630cde91f5dbf8f135846039de9dff19df210152",
+    "claim": "Let $\\mathcal X=\\mathcal Y=\\{0,1\\}$, let $W(y\\mid x)=\\mathbf1_{\\{y=x\\}}$, and let $c(0)=0,c(1)=1$. For every budget $\\Gamma\\ge0$, both ordinary and feedback capacities are\n$$C(\\Gamma)=C_{\\rm fb}(\\Gamma)=h_2(\\min\\{\\Gamma,1/2\\}),$$\nwhere $h_2(p)=-p\\ln p-(1-p)\\ln(1-p)$ and $0\\ln0=0$. In particular the values at $\\Gamma=0,1/2,1$ are $0,\\ln2,\\ln2$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-finite-dmc-cost-model]]: an input law with $p=P_X(1)$ has expected cost $p$.",
+      "[F4] [[def-cost-constrained-dmc-code-and-capacity]], [[thm-cost-constrained-dmc-capacity-formula]], and [[thm-feedback-does-not-increase-cost-constrained-dmc-capacity]]: ordinary and feedback capacities use the stated average-cost conventions and equal the maximum feasible mutual information: ordinary and feedback capacities equal the maximum feasible mutual information."
+    ]
+  },
+  {
+    "id": "ex-binary-symmetric-channel-capacity",
+    "source": "items/ex-binary-symmetric-channel-capacity.md",
+    "raw_sha256": "1f2252f906945b3e2595abb30978d578f77596c0700b25457ffea8b1946180da",
+    "claim": "The binary symmetric channel has input and output alphabets $\\{0,1\\}$; independently at each use, the output is the input bit flipped with probability $p\\in[0,1]$. Write\n$$h(p):=-p\\ln p-(1-p)\\ln(1-p),\\qquad 0\\ln0:=0.$$\nThe channel capacity is $\\ln2-h(p)$ nats per use, attained by a uniform input.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-discrete-memoryless-channel]]: the row $W(\\cdot\\mid x)$ assigns probability $1-p$ to $x$ and $p$ to $1-x$.",
+      "[F2] [[thm-discrete-memoryless-channel-capacity-formula]]: capacity is the maximum of finite mutual information over input laws."
+    ]
+  },
+  {
+    "id": "ex-it-degraded-wiretap-capacity",
+    "source": "items/ex-it-degraded-wiretap-capacity.md",
+    "raw_sha256": "7973dd049c00f9546179ec4907be4f071cfee33d8ea89322d8033ebd4bf89cde",
+    "claim": "Bob observes a binary erasure channel (BEC) with input alphabet $\\{0,1\\}$, output alphabet $\\{0,1,e\\}$, and erasure probability $1/4$. Eve observes Bob's output after independently erasing each surviving bit with probability $1/3$, while an erasure remains an erasure. This is a finite degraded wiretap channel. Its strong- and weak-secrecy capacities under average or maximal error are all $\\ln2/4$ nats per use. Define $h(p):=-p\\ln p-(1-p)\\ln(1-p)$ with $0\\ln0:=0$. For Bernoulli-$p$ input the single-letter difference is $h(p)/4$, which is zero at $p=0,1$ and maximal at $p=1/2$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-it-degraded-wiretap-channel]]: a degraded wiretap channel has factorization $W(y,z\\mid x)=W_Y(y\\mid x)V(z\\mid y)$.",
+      "[F2] [[thm-it-degraded-wiretap-secrecy-capacity]]: all four operational secrecy capacities equal $\\max_{P_X}[I(X;Y)-I(X;Z)]$."
+    ]
+  },
+  {
+    "id": "ex-it-dmc-one-shot-error-bound",
+    "source": "items/ex-it-dmc-one-shot-error-bound.md",
+    "raw_sha256": "735cc0fefef61c455c552c2e87c4b155c9d12b01b3eb0ff2d49af3cc10723662",
+    "claim": "For a one-use BSC with crossover $p=0.1$, uniform input, and $M=2$, the dependence-testing upper bound on achievable average error is exactly $0.35$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[thm-it-one-shot-decision-threshold-achievability]]: a deterministic code exists whose average error is at most $\\mathbb E\\exp(-[\\imath(X;Y)-\\ln((M-1)/2)]_+)$.",
+      "[F2] [[def-discrete-memoryless-channel]]: a BSC row is a probability vector, and its output law under an input vector is the matrix product $PW$."
+    ]
+  },
+  {
+    "id": "ex-it-meta-converse-binary-channel",
+    "source": "items/ex-it-meta-converse-binary-channel.md",
+    "raw_sha256": "61afb0cda9ff4223bc863b09cbd1df952d7325f1772ab34ca403584916722176",
+    "claim": "For the one-use BSC$(p)$ with $0<p<1/2$, the identity encoder/decoder with two equiprobable messages has average error $p$. With its true joint law $P_{MY}$ and the uniform-message/uniform-output auxiliary law $\\widetilde Q_{MY}$, the oriented testing value is exactly $\\beta_p(P_{MY},\\widetilde Q_{MY})=1/2=1/M$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-finite-hypothesis-testing-beta]]: $\\beta_\\epsilon(P,Q)$ minimizes $\\mathbb E_Q(1-\\phi)$ over tests $\\phi\\in[0,1]$ with $\\mathbb E_P\\phi\\le\\epsilon$.",
+      "[F2] [[thm-it-one-shot-meta-converse]]: every $M$-message code with average error $\\epsilon$ satisfies $\\beta_\\epsilon(P_{MY},\\widetilde Q_{MY})\\le1/M$ for any auxiliary output law.",
+      "[F3] [[def-discrete-memoryless-channel]]: the BSC has transition probability $1-p$ on $y=x$ and $p$ on $y\\ne x$.",
+      "2.1 Write $\\psi=1-\\phi$ for the acceptance probability. The constraint in [F1] is $\\mathbb E_P\\psi\\ge1-p$, and the objective is $\\mathbb E_{\\widetilde Q}\\psi$. Let $s$ be the sum of $\\psi$ on the two correct pairs and $t$ its sum on the two crossover pairs. Then $0\\le s,t\\le2$, the constraint is $(1-p)s/2+pt/2\\ge1-p$, and the objective is $(s+t)/4$. [F1, step 1.1, algebra]",
+      "3.1 If $s\\ge2$, the objective is at least $1/2$. If $s<2$, the constraint forces $t\\ge(1-p)(2-s)/p$, so $s+t\\ge s+\\frac{1-p}{p}(2-s)\\ge2,$ where the last inequality follows from $(1-p)/p>1$ and $s<2$. Thus every randomized feasible test has objective at least $1/2$. Taking $\\psi=1$ on the two correct pairs and $0$ on the crossover pairs attains constraint equality and objective $1/2$. Hence $\\beta_p=1/2=1/M$, as also bounded by [F2]. [F1, F2, step 2.1, cases, algebra] \u220e\n"
+    ]
+  },
+  {
+    "id": "ex-it-point-to-point-source-channel-rate-budget",
+    "source": "items/ex-it-point-to-point-source-channel-rate-budget.md",
+    "raw_sha256": "ea21ae0a49637f88681066604af0d65ea068ddccfb19e6215abf36b922ea5996",
+    "claim": "Take an IID Bernoulli source with $P_S(1)=1/4$ and a binary symmetric channel with crossover probability $1/4$. Use five channel symbols per source symbol. Both the source entropy and the channel capacity are in nats; this example computes the strict asymptotic lossless separation margin exactly.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-discrete-memoryless-channel]]: the BSC is a finite DMC; [[def-discrete-memoryless-channel-information-capacity]] defines $C(W)=\\sup_{P_X}I(X;Y)$ in nats per use.",
+      "[F5] [[thm-discrete-memoryless-channel-capacity-formula]]: the operational DMC capacity equals the single-letter information capacity $C(W)$.",
+      "[F6] [[thm-it-point-to-point-lossless-source-channel-separation]]: if source entropy in nats is strictly below $\\rho C(W)$, reliable transmission is achievable asymptotically."
+    ]
+  },
+  {
+    "id": "ex-it-weak-secrecy-does-not-imply-strong-secrecy",
+    "source": "items/ex-it-weak-secrecy-does-not-imply-strong-secrecy.md",
+    "raw_sha256": "2c29fa46757a044232a0d981bce7271677cd5e147f17e88f9c7e064818227d56",
+    "claim": "Consider the noiseless finite wiretap channel with $\\mathcal X=\\mathcal Y=\\mathcal Z=\\{0,1\\}$ and $W(y,z\\mid x)=1$ exactly when $y=z=x$. At blocklength $n$, let $k_n=\\lfloor\\sqrt n\\rfloor$, let $M_n$ be uniform on $\\{0,1\\}^{k_n}$, and transmit $X^n=(M_n,0^{n-k_n})$. Bob and Eve both observe the transmitted word exactly. This reliable code sequence satisfies weak secrecy but not strong secrecy: its leakage is $I(M_n;Z^n)=k_n\\ln2\\to\\infty$, whereas $n^{-1}I(M_n;Z^n)\\to0$. In general, strong secrecy implies weak secrecy.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Consider the noiseless finite wiretap channel with $\\mathcal X=\\mathcal Y=\\mathcal Z=\\{0,1\\}$ and $W(y,z\\mid x)=1$ exactly when $y=z=x$. At blocklength $n$, let $k_n=\\lfloor\\sqrt n\\rfloor$, let $M_n$ be uniform on $\\{0,1\\}^{k_n}$, and transmit $X^n=(M_n,0^{n-k_n})$. Bob and Eve both observe the transmitted word exactly. This reliable code sequence satisfies weak secrecy but not strong secrecy: its leakage is $I(M_n;Z^n)=k_n\\ln2\\to\\infty$, whereas $n^{-1}I(M_n;Z^n)\\to0$. In general, strong secrecy implies weak secrecy.",
+      "[F1] [[def-it-wiretap-channel]]: a wiretap code has a uniform message, Bob observes $Y^n$, Eve observes $Z^n$, and error includes erasure.",
+      "[F3] [[def-it-weak-and-strong-secrecy]]: weak secrecy requires normalized leakage to vanish, while strong secrecy requires unnormalized leakage to vanish."
+    ]
+  },
+  {
+    "id": "lem-cost-constrained-dmc-achievability",
+    "source": "items/lem-cost-constrained-dmc-achievability.md",
+    "raw_sha256": "d78b1ddd15ff9c2fff662895623cba1ceca7da058a658b9a939bffd07288e5d1",
+    "claim": "Let $W$ be a finite DMC with cost $c$, feasible budget $\\Gamma\\ge c_{\\min}$, and cost-constrained information capacity $C_I(\\Gamma)$. For every $0\\le R<C_I(\\Gamma)$, there are deterministic ordinary codes with rate tending to at least $R$, average error tending to zero, and average block cost at most $\\Gamma$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $W$ be a finite DMC with cost $c$, feasible budget $\\Gamma\\ge c_{\\min}$, and cost-constrained information capacity $C_I(\\Gamma)$. For every $0\\le R<C_I(\\Gamma)$, there are deterministic ordinary codes with rate tending to at least $R$, average error tending to zero, and average block cost at most $\\Gamma$.",
+      "[A1] [[def-discrete-memoryless-channel]], [[def-finite-dmc-cost-model]], [[def-cost-constrained-dmc-code-and-capacity]], [[def-fixed-length-channel-code]], and [[def-fixed-length-channel-code-errors]]: the product DMC, finite letter cost, deterministic code, uniform-message average error, and constrained information-capacity convention.",
+      "[F1] [[lem-cost-constrained-dmc-information-capacity-properties]]: the constrained maximum is attained, and for $\\Gamma>c_{\\min}$ its value can be approached by input laws of strictly smaller cost.",
+      "[F2] [[lem-discrete-memoryless-channel-iid-information-density-converges]]: for a fixed finite DMC input law, the normalized IID information density converges in probability to $I(P_X;W)$.",
+      "[F6] [[def-discrete-memoryless-channel-information-capacity]], [[def-discrete-memoryless-channel-information-density]], and [[def-finite-stochastic-kernel]]: the induced law determines mutual information and information density; each finite channel row sums to one."
+    ]
+  },
+  {
+    "id": "lem-cost-constrained-dmc-information-capacity-properties",
+    "source": "items/lem-cost-constrained-dmc-information-capacity-properties.md",
+    "raw_sha256": "86519448410d8e7d873130789e65ac239c6c711eec4ba73be94f9a0427e6b5d6",
+    "claim": "Let $W$ be a finite DMC, $c:\\mathcal X\\to[0,\\infty)$ a finite letter cost, and $\\Gamma\\ge c_{\\min}$. The feasible set $\\{P_X:\\bar c(P_X)\\le\\Gamma\\}$ is nonempty and compact, and $C_I(\\Gamma)$ from [[def-cost-constrained-dmc-code-and-capacity]] is attained with $0\\le C_I(\\Gamma)\\le\\ln|\\mathcal X|$. The function $\\Gamma\\mapsto C_I(\\Gamma)$ is nondecreasing and concave on $[c_{\\min},\\infty)$. If $\\Gamma>c_{\\min}$, then for every maximizing law $P_X^*$ the laws\n$$P_{X,\\epsilon}:=(1-\\epsilon)P_X^*+\\epsilon\\delta_{x_{\\min}},\\qquad 0<\\epsilon<1,$$\nhave cost strictly below $\\Gamma$ whenever $P_X^*$ has cost $\\Gamma$, and $I(P_{X,\\epsilon};W)\\to C_I(\\Gamma)$ as $\\epsilon\\downarrow0$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $W$ be a finite DMC, $c:\\mathcal X\\to[0,\\infty)$ a finite letter cost, and $\\Gamma\\ge c_{\\min}$. The feasible set $\\{P_X:\\bar c(P_X)\\le\\Gamma\\}$ is nonempty and compact, and $C_I(\\Gamma)$ from [[def-cost-constrained-dmc-code-and-capacity]] is attained with $0\\le C_I(\\Gamma)\\le\\ln|\\mathcal X|$. The function $\\Gamma\\mapsto C_I(\\Gamma)$ is nondecreasing and concave on $[c_{\\min},\\infty)$. If $\\Gamma>c_{\\min}$, then for every maximizing law $P_X^*$ the laws\n$$P_{X,\\epsilon}:=(1-\\epsilon)P_X^*+\\epsilon\\delta_{x_{\\min}},\\qquad 0<\\epsilon<1,$$\nhave cost strictly below $\\Gamma$ whenever $P_X^*$ has cost $\\Gamma$, and $I(P_{X,\\epsilon};W)\\to C_I(\\Gamma)$ as $\\epsilon\\downarrow0$.",
+      "[F1] [[def-finite-dmc-cost-model]] and [[def-finite-probability-vector]]: $\\mathcal X$ is finite and nonempty, $c_{\\min}$ is attained, and $\\bar c(P_X)=\\sum_xP_X(x)c(x)$ is linear in $P_X$.",
+      "[F2] [[def-cost-constrained-dmc-code-and-capacity]]: $C_I(\\Gamma)=\\sup_{\\bar c(P_X)\\le\\Gamma} I(P_X;W)$.",
+      "[F3] [[def-discrete-memoryless-channel-information-capacity]], [[def-it-finite-mutual-information]], [[def-it-finite-conditional-entropy]], and [[thm-it-finite-entropy-chain-rule]]: for the induced finite joint law, $I(P_X;W)=H(P_XW)-\\sum_xP_X(x)H(W(\\cdot\\mid x))$.",
+      "1.1 The probability simplex on $\\mathcal X$ is closed and bounded in $\\mathbb R^{|\\mathcal X|}$. The feasible subset is closed because $P_X\\mapsto\\bar c(P_X)$ is linear and continuous; it is nonempty because $\\delta_{x_{\\min}}$ has cost $c_{\\min}\\le\\Gamma$. Hence it is compact by [F5]. The output law $P_XW$ is linear in $P_X$, so [F3]\u2013[F4] show that $P_X\\mapsto I(P_X;W)$ is continuous. Nonnegativity of mutual information follows from [F6] applied to the joint law and product marginals. Also $I(P_X;W)=H(P_X)-H(X\\mid Y)\\le H(P_X)$ by [F3], since conditional entropy is a sum of nonnegative terms. Concavity in [F4] gives $H(P_X)\\le\\ln|\\mathcal X|$: the uniform vector is the average of the finitely many coordinate permutations of $P_X$, all of which have the same entropy. Thus the objective lies in $[0,\\ln|\\mathcal X|]$, and [F5] proves its supremum is finite and attained. [F1, F3, F4, F5, F6, given, algebra]"
+    ]
+  },
+  {
+    "id": "lem-cost-constrained-dmc-mutual-information-under-average-cost",
+    "source": "items/lem-cost-constrained-dmc-mutual-information-under-average-cost.md",
+    "raw_sha256": "626c2fc34f79b2393579da4a44f7a482f247f000235c6133278662073887f438",
+    "claim": "Let $X^n=(X_1,\\ldots,X_n)$ be any random input to a finite DMC $W$ and let the output follow the memoryless product channel. If $\\frac1n\\sum_{t=1}^n\\mathbb E c(X_t)\\le\\Gamma$ for a feasible budget $\\Gamma$, then\n$$I(X^n;Y^n)\\le n C_I(\\Gamma),$$\nwhere $C_I$ is defined in [[def-cost-constrained-dmc-code-and-capacity]].\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $X^n=(X_1,\\ldots,X_n)$ be any random input to a finite DMC $W$ and let the output follow the memoryless product channel. If $\\frac1n\\sum_{t=1}^n\\mathbb E c(X_t)\\le\\Gamma$ for a feasible budget $\\Gamma$, then\n$$I(X^n;Y^n)\\le n C_I(\\Gamma),$$\nwhere $C_I$ is defined in [[def-cost-constrained-dmc-code-and-capacity]].",
+      "**Given:** A finite DMC with finite letter cost, a feasible budget, and a possibly dependent block input satisfying the stated expected average cost constraint.",
+      "[F3] [[def-finite-dmc-cost-model]], [[def-cost-constrained-dmc-code-and-capacity]], [[def-discrete-memoryless-channel-information-capacity]], and [[def-finite-probability-vector]]: $C_I(\\gamma)=\\sup_{P_X:\\,\\mathbb E c(X)\\le\\gamma}I(P_X;W)$ for every feasible $\\gamma$.",
+      "[F4] [[lem-cost-constrained-dmc-information-capacity-properties]]: $C_I$ is nondecreasing and concave on $[c_{\\min},\\infty)$.",
+      "[F5] [[def-discrete-memoryless-channel]]: conditioned on $X^n$, the output coordinates have product law $\\prod_t W(y_t\\mid X_t)$.",
+      "2.1 Combining steps 1.1 and 1.2 proves the claimed block bound. [step 1.1, step 1.2, algebra] \u220e\n"
+    ]
+  },
+  {
+    "id": "lem-discrete-memoryless-channel-average-to-maximal-expurgation",
+    "source": "items/lem-discrete-memoryless-channel-average-to-maximal-expurgation.md",
+    "raw_sha256": "aa65dab2bc95014e4206f5d9185dd8f2054d7aa2c1ee081c1848d541b514cec6",
+    "claim": "Every length-$n$ code with average error $\\varepsilon_{\\rm av}$ has a subcode with at least $M/2$ messages and maximal error at most $2\\varepsilon_{\\rm av}$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-fixed-length-channel-code-errors]]: $\\varepsilon_{\\rm av}=M^{-1}\\sum_m e_m$ and $\\varepsilon_{\\max}=\\max_m e_m$.",
+      "[F2] [[def-fixed-length-channel-code]]: restricting the encoder to a nonempty subset of messages and mapping decoder outputs to the retained message labels gives another fixed-length code."
+    ]
+  },
+  {
+    "id": "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+    "source": "items/lem-discrete-memoryless-channel-block-kernels-are-stochastic.md",
+    "raw_sha256": "dffa7b462667232e5724933d81ac8d723b84576d1ae808e41c36b49feb174c5f",
+    "claim": "For a finite DMC $W$ and every $n\\ge1$, the block formula $W^n(y^n\\mid x^n)=\\prod_{i=1}^n W(y_i\\mid x_i)$ is a stochastic kernel from $\\mathcal X^n$ to $\\mathcal Y^n$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For a finite DMC $W$ and every $n\\ge1$, the block formula $W^n(y^n\\mid x^n)=\\prod_{i=1}^n W(y_i\\mid x_i)$ is a stochastic kernel from $\\mathcal X^n$ to $\\mathcal Y^n$.",
+      "[F1] [[def-discrete-memoryless-channel]]: the block values are $W^n(y^n\\mid x^n)=\\prod_{i=1}^nW(y_i\\mid x_i)$.",
+      "1.1 Fix $x^n\\in\\mathcal X^n$. By [F1] and [F2], each product $W^n(y^n\\mid x^n)$ is nonnegative. [F1, F2, given]",
+      "2.1 Summing over the finite product alphabet and factoring the finite sum gives $\\sum_{y^n\\in\\mathcal Y^n}W^n(y^n\\mid x^n)=\\prod_{i=1}^n(\\sum_{y_i\\in\\mathcal Y}W(y_i\\mid x_i))=\\prod_{i=1}^n1=1$. Together with step 1.1, these are exactly the stochastic-kernel conditions. [F1, F2, step 1.1, algebra] \u220e\n"
+    ]
+  },
+  {
+    "id": "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+    "source": "items/lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound.md",
+    "raw_sha256": "d4fa2e02ab5a6a6dc867e50c1ea74ba03f4de171921f56a91fc63337b6b223ad",
+    "claim": "Let $P_X^*$ attain $C(W)$ and let $Q^*:=P_X^*W$. If $W(y\\mid x)>0$, then $Q^*(y)>0$, and for every $x\\in\\mathcal X$,\n$$D(W(\\cdot\\mid x)\\|Q^*)\\le C(W).$$\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[lem-discrete-memoryless-channel-capacity-is-attained]]: $I(P_X^*;W)=C(W)$ and $P_X^*$ maximizes $I(P_X;W)$ over the input simplex.",
+      "[F3] [[def-discrete-memoryless-channel]] and [[def-finite-stochastic-kernel]] and [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]: every channel row is a probability vector, and $H(q)=-\\sum_{y:q_y>0}q_y\\ln q_y$ with $0\\ln0=0$.",
+      "1.1 Fix $x\\in\\mathcal X$. Suppose some output reachable from $x$ has zero $Q^*$ mass, and put $a:=\\sum_{y:Q^*(y)=0}W(y\\mid x)>0$. For $0<t<1$, let $P_t:=(1-t)P_X^*+t\\delta_x$ and $Q_t:=P_tW=(1-t)Q^*+tW(\\cdot\\mid x)$. By [F2] and [F3], the conditional-entropy part of $I(P_t;W)-I(P_X^*;W)$ is linear in $t$. On coordinates with $Q^*(y)>0$, differentiability in [F5] bounds the total entropy change in absolute value by $K_1t$ for some finite $K_1$ and all small $t$. For zero coordinates with $W(y\\mid x)>0$, the entropy contribution is exactly $-tW(y\\mid x)\\ln t-tW(y\\mid x)\\ln W(y\\mid x)$. All terms other than $-ta\\ln t$ have absolute value at most $K_2t$ for a finite $K_2$. Since $-\\ln t\\to+\\infty$ by [F6], the information change is positive for sufficiently small $t$, contradicting maximality in [F1]. Every row therefore has support contained in $\\operatorname{supp}Q^*$. [F1, F2, F3, F5, F6, given, algebra]"
+    ]
+  },
+  {
+    "id": "lem-discrete-memoryless-channel-capacity-is-attained",
+    "source": "items/lem-discrete-memoryless-channel-capacity-is-attained.md",
+    "raw_sha256": "505f55d5d956471c510b6fcf8afcc87d9a1c3831d494ec2b7af2c84a89895306",
+    "claim": "For every finite DMC $W$, the supremum $C(W)$ is a maximum: there is an input probability vector $P_X^*$ such that $I(P_X^*;W)=C(W)$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-discrete-memoryless-channel-information-capacity]]: $C(W)=\\sup_{P_X} I(P_X;W)$ over probability vectors on $\\mathcal X$.",
+      "2.1 The scalar summand $-t\\ln t$, extended by $0$ at $t=0$, is continuous on $[0,1]$ by [F4]. Each coordinate of $Q_{P_X}$ is linear in $P_X$, so the finite sum $H(Q_{P_X})$ is continuous on the input simplex. Therefore $P_X\\mapsto I(P_X;W)$ is continuous. [F3, F4, step 1.1, algebra]"
+    ]
+  },
+  {
+    "id": "lem-discrete-memoryless-channel-iid-information-density-converges",
+    "source": "items/lem-discrete-memoryless-channel-iid-information-density-converges.md",
+    "raw_sha256": "00616e538d9e13665436e95fedf4f8ce7cc519357c5890e755eefe08b281b0da",
+    "claim": "Fix a finite DMC $W$ and input law $P_X$. If $(X_i,Y_i)_{i\\ge1}$ are IID with law $P_X(x)W(y\\mid x)$, then $n^{-1}\\imath_{P_X}(X^n;Y^n)\\to I(P_X;W)$ in probability.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Fix a finite DMC $W$ and input law $P_X$. If $(X_i,Y_i)_{i\\ge1}$ are IID with law $P_X(x)W(y\\mid x)$, then $n^{-1}\\imath_{P_X}(X^n;Y^n)\\to I(P_X;W)$ in probability.",
+      "[F1] [[def-discrete-memoryless-channel-information-density]]: on positive joint support, $\\imath_{P_X}(x;y)=\\ln(W(y\\mid x)/Q_{P_X}(y))$.",
+      "2.1 Let $S_n:=\\sum_{i=1}^n\\imath_{P_X}(X_i;Y_i)$. Independence gives $\\mathbb E S_n=nI(P_X;W)$ and $\\mathbb E[(S_n-\\mathbb E S_n)^2]=nv$. For every $\\eta>0$, the squared deviation is at least $n^2\\eta^2$ on $\\{|S_n/n-I(P_X;W)|\\ge\\eta\\}$, so that event has probability at most $v/(n\\eta^2)\\to0$. This is convergence in probability. [F1, step 1.1, given, algebra] \u220e\n"
+    ]
+  },
+  {
+    "id": "lem-discrete-memoryless-channel-information-density-concentration",
+    "source": "items/lem-discrete-memoryless-channel-information-density-concentration.md",
+    "raw_sha256": "550d74d70bee852955092df7d609014b6a31cfaa9141547ad11f2938873eefda",
+    "claim": "Let $P_X^*$ attain $C(W)$ and $Q^*=P_X^*W$. There is a finite constant $V\\ge0$ such that, for every $n\\ge1$, every $x^n\\in\\mathcal X^n$, and every $\\delta>0$, under output law $W^n(\\cdot\\mid x^n)$,\n$$\\Pr\\left[\\ln\\frac{W^n(Y^n\\mid x^n)}{(Q^*)^n(Y^n)}>n(C(W)+\\delta)\\right]\\le\\frac{V}{n\\delta^2}.$$\nThe likelihood ratio is evaluated only on the support of $W^n(\\cdot\\mid x^n)$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $P_X^*$ attain $C(W)$ and $Q^*=P_X^*W$. There is a finite constant $V\\ge0$ such that, for every $n\\ge1$, every $x^n\\in\\mathcal X^n$, and every $\\delta>0$, under output law $W^n(\\cdot\\mid x^n)$,\n$$\\Pr\\left[\\ln\\frac{W^n(Y^n\\mid x^n)}{(Q^*)^n(Y^n)}>n(C(W)+\\delta)\\right]\\le\\frac{V}{n\\delta^2}.$$\nThe likelihood ratio is evaluated only on the support of $W^n(\\cdot\\mid x^n)$.",
+      "[F1] [[lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound]]: every row $W(\\cdot\\mid x)$ is supported on $Q^*$ and has mean log likelihood ratio $D(W(\\cdot\\mid x)\\|Q^*)\\le C(W)$.",
+      "[F3] [[def-discrete-memoryless-channel]] and [[lem-discrete-memoryless-channel-block-kernels-are-stochastic]]: conditional on a fixed input word, the output law is the product of the corresponding row laws.",
+      "2.1 Fix $x^n$. By [F3], the coordinate log likelihoods are independent. Their sum $S_n$ therefore has mean at most $nC(W)$ and variance at most $nV$. On the event $S_n>n(C(W)+\\delta)$ one has $|S_n-\\mathbb ES_n|>n\\delta$, so the squared deviation is at least $n^2\\delta^2$. Taking expectations bounds the event probability by $\\mathbb E[(S_n-\\mathbb ES_n)^2]/(n^2\\delta^2)\\le V/(n\\delta^2)$. [F1, F2, F3, step 1.1, algebra] \u220e\n"
+    ]
+  },
+  {
+    "id": "lem-discrete-memoryless-channel-n-letter-information-bound",
+    "source": "items/lem-discrete-memoryless-channel-n-letter-information-bound.md",
+    "raw_sha256": "ea21bbb3d276876096518bb000dad27b05c409f2e1ec103851f9d84185abf4c5",
+    "claim": "For every input probability vector on $\\mathcal X^n$ and output $Y^n$ generated by a finite DMC $W^n$, one has $I(X^n;Y^n)\\le nC(W)$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F3] [[def-discrete-memoryless-channel]] and [[lem-discrete-memoryless-channel-block-kernels-are-stochastic]]: $P(Y^n=y^n\\mid X^n=x^n)=\\prod_{i=1}^nW(y_i\\mid x_i)$.",
+      "[F4] [[def-discrete-memoryless-channel-information-capacity]]: $I(X_i;Y_i)\\le C(W)$ for every marginal input law of $X_i$.",
+      "1.1 By [F1], $H(Y^n)=\\sum_{i=1}^nH(Y_i\\mid Y^{i-1})$. For each $i$, [F2] gives $H(Y_i\\mid Y^{i-1})\\le H(Y_i)$, so $H(Y^n)\\le\\sum_iH(Y_i)$. [F1, F2, given, algebra]",
+      "1.2 The conditional chain rule in [F1] gives $H(Y^n\\mid X^n)=\\sum_iH(Y_i\\mid X^n,Y^{i-1})$. For every positive-probability value $(x^n,y^{i-1})$, factorization [F3] and summing the unused future coordinates show that the conditional law of $Y_i$ is $W(\\cdot\\mid x_i)$. Thus $H(Y_i\\mid X^n,Y^{i-1})=H(Y_i\\mid X_i)$, including after averaging over conditioning values. [F1, F3, given, algebra]",
+      "2.1 By [F1], $I(X^n;Y^n)=H(Y^n)-H(Y^n\\mid X^n)$. Steps 1.1 and 1.2 therefore give $I(X^n;Y^n)\\le\\sum_{i=1}^n(H(Y_i)-H(Y_i\\mid X_i))=\\sum_{i=1}^nI(X_i;Y_i)\\le nC(W)$ by [F4]. [F1, F4, step 1.1, step 1.2, algebra] \u220e\n"
+    ]
+  },
+  {
+    "id": "lem-it-channel-resolvability-soft-covering",
+    "source": "items/lem-it-channel-resolvability-soft-covering.md",
+    "raw_sha256": "a92a3cdf1d3e9464287216db2bb40a007f6a74038a77e16e34e0cae670a78a86",
+    "claim": "Let $W(z\\mid u)$ be a finite DMC, let $P_U$ be an input probability vector, and let $P_Z(z)=\\sum_uP_U(u)W(z\\mid u)$. On the joint support define $J(u,z):=\\ln(W(z\\mid u)/P_Z(z))$ and let $I=I(U;Z)$. Set $B=\\max(0,\\max_{P_U(u)W(z\\mid u)>0}J(u,z))$. For $R_0>I$ and any $\\gamma$ with $0<\\gamma<R_0-I$, draw $L_n=\\lceil e^{nR_0}\\rceil$ independent words $U^n(\\ell)\\sim P_U^n$ and define the induced mixture\n\n$$P_Z^n(z^n):=\\prod_{i=1}^nP_Z(z_i),\\qquad Q_{Z^n\\mid C}:=\\frac1{L_n}\\sum_{\\ell=1}^{L_n}W^n(\\cdot\\mid U^n(\\ell)).$$\n\nThere is a $\\rho\\in(0,1)$, depending only on $(P_U,W,\\gamma)$, for which\n\n$$\\mathbb E_C D(Q_{Z^n\\mid C}\\|P_Z^n)\\le e^{-n(R_0-I-\\gamma)}+(\\ln2+nB)\\rho^n,$$\n\nand\n\n$$\\mathbb E_C\\,\\operatorname{TV}(Q_{Z^n\\mid C},P_Z^n)\\le\\rho^n+\\frac12e^{-n(R_0-I-\\gamma)/2},$$\n\nwhere $\\operatorname{TV}(P,Q):=\\frac12\\sum_z|P(z)-Q(z)|$. Thus both expected deviations tend to zero. Here $D$ is the directional finite KL divergence of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]].\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "$$P_Z^n(z^n):=\\prod_{i=1}^nP_Z(z_i),\\qquad Q_{Z^n\\mid C}:=\\frac1{L_n}\\sum_{\\ell=1}^{L_n}W^n(\\cdot\\mid U^n(\\ell)).$$",
+      "[F1] [[def-discrete-memoryless-channel]]: $W^n(z^n\\mid u^n)=\\prod_iW(z_i\\mid u_i)$.",
+      "[F2] [[lem-discrete-memoryless-channel-block-kernels-are-stochastic]]: each block product law is a stochastic kernel.",
+      "[F5] [[lem-it-finite-dmc-information-density-concentration]]: for IID $(U_i,Z_i)\\sim P_UW$, $S_n=\\sum_iJ(U_i,Z_i)$ has upper tail $\\Pr[S_n>n(I+\\gamma)]\\le\\rho^n$ for some $0<\\rho<1$.",
+      "[F7] [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]: finite KL is $D(P\\|Q)=\\sum_{p_i>0}p_i\\ln(p_i/q_i)$, with value $+\\infty$ if $p_i>0=q_i$ for some coordinate."
+    ]
+  },
+  {
+    "id": "lem-it-classical-wiretap-auxiliary-cardinality",
+    "source": "items/lem-it-classical-wiretap-auxiliary-cardinality.md",
+    "raw_sha256": "9312bfe71c2898f7849f5fd97495a67205cc78c3a52ec12fceda58bf11f55957",
+    "claim": "For every finite joint law $P_{UX}$ on a finite wiretap channel with input alphabet $\\mathcal X$, where $U-X-(Y,Z)$ means $P_{UXYZ}(u,x,y,z)=P_{UX}(u,x)W(y,z\\mid x)$, there is another finite auxiliary $\\widetilde U$ with $|\\widetilde{\\mathcal U}|\\le|\\mathcal X|$ whose value of $I(\\widetilde U;Y)-I(\\widetilde U;Z)$ is at least $I(U;Y)-I(U;Z)$. Consequently\n\n$$\\sup_{P_{U,X}:\\,U-X-(Y,Z)}[I(U;Y)-I(U;Z)]$$\n\nis a maximum and may be restricted to $|\\mathcal U|\\le|\\mathcal X|$. For each input law $q$, the single-letter objective $q\\mapsto I_q(X;Y)-I_q(X;Z)$ is continuous on the finite probability simplex.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-it-wiretap-channel]]: the input alphabet and both output alphabets are finite; conditional on $X$, the marginals $Y$ and $Z$ use the finite DMCs $W_Y$ and $W_Z$.",
+      "3.1 Suppose the current posterior mixture has $k>m$ positive weights. The $k$ vectors $(q_u(x_1),\\ldots,q_u(x_{m-1}),1)$ lie in $\\mathbb R^m$, so there are coefficients $c_u$, not all zero, with $\\sum_uc_u=0$ and $\\sum_uc_uq_u(x_j)=0$ for $j<m$. Since each $q_u$ sums to one, the same relation holds for the last coordinate $x_m$. The coefficients include both signs. Therefore the weights $\\lambda_u+t c_u$ remain nonnegative on a bounded interval $[t_-,t_+]$ with $t_-<0<t_+$; at either endpoint at least one weight is zero, while the total weight and posterior average stay fixed. The average $G(t)=\\sum_u(\\lambda_u+t c_u)F(q_u)$ is affine in $t$, so at least one endpoint has $G(t)\\le G(0)$: otherwise zero, a convex combination of $t_-$ and $t_+$, would have a larger value than both endpoints. Choose that endpoint and delete its zero weights. This keeps $\\bar q$ fixed and does not decrease the wiretap objective in step 2.1. [F1, step 2.1, choose, construct, algebra]",
+      "5.1 The parameter space $\\Delta_m\\times\\Delta(\\mathcal X)^m$ of $m$ weights and $m$ posterior laws is a nonempty closed bounded subset of $\\mathbb R^{m+m^2}$, since it is described by finitely many coordinate inequalities $0\\le t\\le1$ and coordinate-sum equalities. It is compact by [F6]. By step 1.1 the objective $F(\\bar q)-\\sum_{j=1}^m\\lambda_jF(q_j)$ is continuous there, including zero weights, so it attains a maximum by [F7]. Step 4.1 shows this maximum equals the supremum over all finite auxiliaries. [F6, F7, step 1.1, step 4.1, algebra] \u220e\n"
+    ]
+  },
+  {
+    "id": "lem-it-dmc-caid-conditional-variance-identity",
+    "source": "items/lem-it-dmc-caid-conditional-variance-identity.md",
+    "raw_sha256": "af7fad16e7c8dd2a30325bfd1d047de8f3e1f9f02f5d5bd587c0ecfdff2179a3",
+    "claim": "For every CAID $P\\in\\Pi(W)$, let $Q^*=PW$ and let $(X,Y)\\sim P(x)W(y\\mid x)$. For every $x$ with $P(x)>0$,\n$$\\mathbb E[\\ln(W(Y\\mid x)/Q^*(Y))\\mid X=x]=C(W),$$\nand\n$$\\operatorname{Var}[\\ln(W(Y\\mid X)/Q^*(Y))]=V(P,W).$$\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[lem-discrete-memoryless-channel-capacity-is-attained]]: $P$ is a maximizer of $I(P,W)$ and $I(P,W)=C(W)$.",
+      "[F2] [[lem-it-dmc-capacity-output-law-is-unique]]: every CAID induces the same output law $Q^*$.",
+      "[F3] [[lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound]]: each row is supported on $Q^*$ and has divergence $d_x:=D(W(\\cdot\\mid x)\\|Q^*)\\le C(W)$.",
+      "[F5] [[def-it-channel-dispersion]]: $V(P,W)=\\sum_xP(x)\\operatorname{Var}_{W_x}\\ln[W(Y\\mid x)/(PW)(Y)]$."
+    ]
+  },
+  {
+    "id": "lem-it-dmc-capacity-output-law-is-unique",
+    "source": "items/lem-it-dmc-capacity-output-law-is-unique.md",
+    "raw_sha256": "4150de4b5a17cb1fbcefb31bf30d049b52a25821064a154565cac67cafbe4f3d",
+    "claim": "For a finite DMC $W$, every input law attaining $C(W)=\\max_P I(P,W)$ induces the same output law $Q^*$. This output law is unique even when the capacity-achieving input law is not.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[lem-discrete-memoryless-channel-capacity-is-attained]]: at least one input law attains $C(W)$.",
+      "[F2] [[def-discrete-memoryless-channel-information-capacity]]: $C(W)$ is the maximum of $I(P,W)$ over input probability vectors.",
+      "[F4] [[def-discrete-memoryless-channel]]: every row $W(\\cdot\\mid x)$ is a probability vector and $PW$ is the induced output law.",
+      "[F5] [[thm-logarithm-derivative-and-integral]] and [[thm-algebra-of-derivatives]]: logarithmic differentiation and the product rule apply on positive coordinates."
+    ]
+  },
+  {
+    "id": "lem-it-dmc-dispersion-attains-minimum",
+    "source": "items/lem-it-dmc-dispersion-attains-minimum.md",
+    "raw_sha256": "e6b692eaf0a33164d31e8b672d84525985a2b8bd59db8b3cb82e76b92258955c",
+    "claim": "For every finite DMC, the set $\\Pi(W)$ of capacity-achieving input laws is nonempty and compact, and the function $P\\mapsto V(P,W)$ is continuous on $\\Pi(W)$. Therefore $V_{\\min}(W)$ and $V_{\\max}(W)$ in [[def-it-channel-dispersion]] are attained.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For every finite DMC, the set $\\Pi(W)$ of capacity-achieving input laws is nonempty and compact, and the function $P\\mapsto V(P,W)$ is continuous on $\\Pi(W)$. Therefore $V_{\\min}(W)$ and $V_{\\max}(W)$ in [[def-it-channel-dispersion]] are attained.",
+      "[F1] [[lem-discrete-memoryless-channel-capacity-is-attained]]: a capacity-achieving input law exists.",
+      "[F2] [[lem-it-dmc-capacity-output-law-is-unique]]: all capacity-achieving inputs induce the same output law $Q^*$.",
+      "[F3] [[lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound]]: every row is supported on $Q^*$, and $D(W(\\cdot\\mid x)\\|Q^*)\\le C(W)$.",
+      "[F4] [[def-it-channel-dispersion]]: $V(P,W)$ is the $P$-average of row conditional variances of $\\ln[W(Y\\mid x)/(PW)(Y)]$.",
+      "[F8] [[def-discrete-memoryless-channel-information-capacity]]: $C(W)=\\max_P I(P,W)$ and $\\Pi(W)$ is its maximizing level set."
+    ]
+  },
+  {
+    "id": "lem-it-dmc-mutual-information-concave-in-input",
+    "source": "items/lem-it-dmc-mutual-information-concave-in-input.md",
+    "raw_sha256": "7a336b9fe8fc96323c40563a42a49315204dc41052aa7b8a1364685e6a608eb2",
+    "claim": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets and let $V(y\\mid x)$ be a row-stochastic channel. For an input probability vector $P$, write $I_P(V)$ for the mutual information under the joint law $P(x)V(y\\mid x)$. Then $P\\mapsto I_P(V)$ is concave: for input laws $P_0,P_1$ and $\\lambda\\in[0,1]$,\n$$I_{\\lambda P_0+(1-\\lambda)P_1}(V)\\ge\\lambda I_{P_0}(V)+(1-\\lambda)I_{P_1}(V).$$\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F2] [[def-discrete-memoryless-channel]]: each row $V(\\cdot\\mid x)$ is a probability vector and the output law is $PV$.",
+      "1.1 Expanding the finite KL sum in [F1] under $P(x)V(y\\mid x)$ and grouping the finite terms gives\n$$I_P(V)=H(PV)-\\sum_xP(x)H(V(\\cdot\\mid x)).$$\nIndeed, the logarithm of the joint-to-product ratio is $\\ln V(y\\mid x)-\\ln(PV)(y)$ on positive joint support; summing the first term gives the negative conditional entropy and summing the second gives the output entropy. Zero-mass coordinates contribute zero by [F1]. [F1, F2, algebra]",
+      "2.1 For $u,w\\in[0,1]$ with one endpoint zero, replace that endpoint by a positive sequence tending to zero in the inequality of step 1.2 and use continuity from [F5]. Therefore $g$ is concave on $[0,1]$. Summing the scalar concavity inequalities over coordinates proves that finite entropy $H(q)=\\sum_y g(q_y)$ is concave on each probability simplex. [F1, F5, step 1.2, algebra]"
+    ]
+  },
+  {
+    "id": "lem-it-finite-dmc-information-density-concentration",
+    "source": "items/lem-it-finite-dmc-information-density-concentration.md",
+    "raw_sha256": "900b1853dfe175a41a031870bb253d11b31d3828f473768e21982744559cfd68",
+    "claim": "Let $W(y\\mid u)$ be a finite DMC and let $P_U$ be any fixed input probability vector. Let $P_Y(y)=\\sum_uP_U(u)W(y\\mid u)$. On the joint support $P_U(u)W(y\\mid u)>0$, define\n\n$$J(u,y):=\\ln\\frac{W(y\\mid u)}{P_Y(y)},\\qquad I:=I(U;Y),\\qquad \\sigma^2:=\\sum_{u,y:P_U(u)W(y\\mid u)>0}P_U(u)W(y\\mid u)(J(u,y)-I)^2.$$\n\nFor IID pairs $(U_i,Y_i)\\sim P_UW$, write $S_n=\\sum_{i=1}^nJ(U_i,Y_i)$ and $B:=\\max(0,\\max_{P_U(u)W(y\\mid u)>0}J(u,y))$. Then $J$ is bounded and $\\mathbb E[J]=I$. For every $\\delta>0$,\n\n$$\\Pr\\left[\\left|\\frac{S_n}{n}-I\\right|\\ge\\delta\\right]\\le\\frac{\\sigma^2}{n\\delta^2}.$$\n\nFor every $\\gamma>0$ there is a $\\rho\\in(0,1)$, depending only on $(P_U,W,\\gamma)$, such that\n\n$$\\Pr[S_n>n(I+\\gamma)]\\le\\rho^n.$$\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For IID pairs $(U_i,Y_i)\\sim P_UW$, write $S_n=\\sum_{i=1}^nJ(U_i,Y_i)$ and $B:=\\max(0,\\max_{P_U(u)W(y\\mid u)>0}J(u,y))$. Then $J$ is bounded and $\\mathbb E[J]=I$. For every $\\delta>0$,",
+      "**Given:** For each blocklength $n$, the joint law is $P_{U^n,Y^n}(u^n,y^n)=\\prod_{i=1}^nP_U(u_i)W(y_i\\mid u_i)$ for a finite DMC $W$ and input probability vector $P_U$.",
+      "[F1] [[def-discrete-memoryless-channel]]: for the input word $u^n$, the output law is $W^n(y^n\\mid u^n)=\\prod_{i=1}^nW(y_i\\mid u_i)$.",
+      "4.1 The event $S_n>n(I+\\gamma)$ implies $e^{t\\sum_i(J(U_i,Y_i)-I-\\gamma)}>1$. Its indicator is therefore at most that nonnegative exponential. Independence of the IID pairs gives $\\Pr[S_n>n(I+\\gamma)]\\le\\mathbb E\\left[e^{t\\sum_i(J(U_i,Y_i)-I-\\gamma)}\\right]=\\phi(t)^n=\\rho^n.$ This proves the exponential tail. [step 3.1, algebra] \u220e\n"
+    ]
+  },
+  {
+    "id": "lem-it-gallager-input-maxima-attained",
+    "source": "items/lem-it-gallager-input-maxima-attained.md",
+    "raw_sha256": "c07e0054c9ef7ebc5329c74d93ed61fa23ef339ff3f25bbe73f0cdac6c0b7894",
+    "claim": "For a finite DMC $W$, the functions $P\\mapsto E_0(\\rho,P)$ for each $\\rho\\ge0$ and $P\\mapsto E_{0x}(\\rho,P)$ for each $\\rho\\ge1$, defined in [[def-it-one-letter-gallager-exponent-functions]], are finite and continuous on the input probability simplex. Consequently, each attains a finite maximum there. At $\\rho=0$, $E_0(0,P)=0$ for every $P$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For a finite DMC $W$, the functions $P\\mapsto E_0(\\rho,P)$ for each $\\rho\\ge0$ and $P\\mapsto E_{0x}(\\rho,P)$ for each $\\rho\\ge1$, defined in [[def-it-one-letter-gallager-exponent-functions]], are finite and continuous on the input probability simplex. Consequently, each attains a finite maximum there. At $\\rho=0$, $E_0(0,P)=0$ for every $P$.",
+      "[F1] [[def-it-one-letter-gallager-exponent-functions]]: for $\\rho\\ge0$, $E_0$ is the negative logarithm of the finite sum of powers $1/(1+\\rho)$ and $1+\\rho$; for $\\rho\\ge1$, $E_{0x}$ is $-\\rho$ times the logarithm of the finite sum of $P(x)P(x')B(x,x')^{1/\\rho}$, with $0^a=0$ for $a>0$.",
+      "[F2] [[def-discrete-memoryless-channel]]: each row $W(\\cdot\\mid x)$ is a probability vector.",
+      "1.2 For every $x$, $B(x,x)=\\sum_yW(y\\mid x)=1$ by [F2]. Thus the inner sum in $E_{0x}$ satisfies\n$$\\sum_{x,x'}P(x)P(x')B(x,x')^{1/\\rho}\\ge\\sum_xP(x)^2\\ge\\frac1{|\\mathcal X|}>0.$$\nThe last inequality follows from $|\\mathcal X|\\sum_xP(x)^2-(\\sum_xP(x))^2=\\sum_{x<x'}(P(x)-P(x'))^2\\ge0$. Write $d=|\\mathcal X|$, $c_{xx'}=B(x,x')^{1/\\rho}$, $C=\\sum_{x,x'}c_{xx'}>0$, and $T(P)=\\sum_{x,x'}c_{xx'}P(x)P(x')$. For input laws $P,Q$, their coordinates lie in $[0,1]$, so\n$$|T(P)-T(Q)|\\le\\sum_{x,x'}c_{xx'}\\bigl(|P(x)-Q(x)|+|P(x')-Q(x')|\\bigr)\\le2C\\|P-Q\\|_2.$$\nThus $T$ is continuous on the simplex. At each $P$, scalar continuity of $\\ln$ at $T(P)\\ge1/d$ supplies a tolerance $\\eta>0$ such that $|t-T(P)|<\\eta$ and $t>0$ imply $\\rho|\\ln t-\\ln T(P)|<\\epsilon$. Taking $\\|P-Q\\|_2<\\eta/(2C)$ proves continuity of $E_{0x}(\\rho,P)=-\\rho\\ln T(P)$ directly, without applying [F4] on a vector domain. [F1, F2, F3, F4, given, algebra, choose]",
+      "3.1 The finite probability vectors form the nonempty simplex $\\Delta=\\{P:P(x)\\ge0,\\sum_xP(x)=1\\}$ by [F5]. It is nonempty because a point mass belongs to it; each coordinate lies in $[0,1]$, so it is bounded; and the coordinate inequalities are closed half-spaces while the sum equation is a closed affine hyperplane, so $\\Delta$ is closed. Heine\u2013Borel makes $\\Delta$ compact, and steps 1.2 and 2.1 show that each objective is continuous and real-valued on it. The extreme-value assertion in [F5] therefore gives an attained finite maximum for every stated $\\rho$. [F5, step 1.2, step 2.1] \u220e\n"
+    ]
+  },
+  {
+    "id": "lem-it-optimized-constant-composition-gallager-identity",
+    "source": "items/lem-it-optimized-constant-composition-gallager-identity.md",
+    "raw_sha256": "99a2132f3a60c8b2f225821d242e662ade12a2a524ebf9e7e9a56f627ab88767",
+    "claim": "Let $W$ be a finite DMC. For each $\\rho>0$ and input law $P$, define\n$$E_{0,\\rm cc}(\\rho,P):=\\inf_{V:\\,V(\\cdot\\mid x)\\ll W(\\cdot\\mid x)}\\left\\{\\sum_xP(x)D(V(\\cdot\\mid x)\\|W(\\cdot\\mid x))+\\rho I_P(V)\\right\\},$$\nwhere $V$ ranges over row-stochastic channels on the same alphabets, $I_P(V)$ is the mutual information of $P(x)V(y\\mid x)$, and terms with $P(x)=0$ are omitted. At $\\rho=0$, set $E_{0,\\rm cc}(0,P)=0$. Then\n$$\\max_P E_{0,\\rm cc}(\\rho,P)=\\max_P E_0(\\rho,P),$$\nwith $E_0$ from [[def-it-gallager-and-expurgated-exponent-functions]]. This equality holds for every $\\rho>0$ and is after optimizing over $P$; it is not asserted for each fixed $P$. At $\\rho=0$, both sides are zero under the stated conventions.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $W$ be a finite DMC. For each $\\rho>0$ and input law $P$, define\n$$E_{0,\\rm cc}(\\rho,P):=\\inf_{V:\\,V(\\cdot\\mid x)\\ll W(\\cdot\\mid x)}\\left\\{\\sum_xP(x)D(V(\\cdot\\mid x)\\|W(\\cdot\\mid x))+\\rho I_P(V)\\right\\},$$\nwhere $V$ ranges over row-stochastic channels on the same alphabets, $I_P(V)$ is the mutual information of $P(x)V(y\\mid x)$, and terms with $P(x)=0$ are omitted. At $\\rho=0$, set $E_{0,\\rm cc}(0,P)=0$. Then\n$$\\max_P E_{0,\\rm cc}(\\rho,P)=\\max_P E_0(\\rho,P),$$\nwith $E_0$ from [[def-it-gallager-and-expurgated-exponent-functions]]. This equality holds for every $\\rho>0$ and is after optimizing over $P$; it is not asserted for each fixed $P$. At $\\rho=0$, both sides are zero under the stated conventions.",
+      "[F1] [[def-it-one-letter-gallager-exponent-functions]]: $E_0(\\rho,P)=-\\ln\\sum_y(\\sum_xP(x)W(y\\mid x)^{1/(1+\\rho)})^{1+\\rho}$.",
+      "1.2 Define $S_y(P)=\\sum_xP(x)W(y\\mid x)^\\alpha$ and $\\Psi(P)=\\sum_yS_y(P)^{1/\\alpha}$. Then [F1] gives $E_0(\\rho,P)=-\\ln\\Psi(P)$. Since $1/\\alpha=1+\\rho>1$, [F7] shows that each summand $S_y(P)^{1/\\alpha}$ is continuous and convex as a function of $P$; hence $\\Psi$ is continuous and convex on the input simplex. The simplex is nonempty because it contains a point mass, closed as the intersection of finitely many coordinate half-spaces with the affine equation $\\sum_xP(x)=1$, and bounded because every coordinate lies in $[0,1]$. By [F4] it is compact, so $\\Psi$ attains a minimum at some $P^*$. For every input law at least one coordinate of $P$ is positive, and that row of $W$ has a positive entry; hence at least one $S_y(P)>0$ and $\\Psi(P)>0$. Also, for every $r>0$, $t^r\\to0$ as $t\\downarrow0$: given $\\varepsilon>0$, take $\\delta=\\varepsilon^{1/r}$; if $0<t<\\delta$, strict monotonicity of $\\ln$ and $\\exp$ gives $t^r<\\varepsilon$. Write $S_y=S_y(P^*)$, $\\Psi_* =\\Psi(P^*)>0$, $T=\\{y:S_y>0\\}$, and $q^*(y)=S_y^{1/\\alpha}/\\Psi_*$ on $T$, with $q^*(y)=0$ outside $T$. [F1, F4, F7, F9, given, algebra]",
+      "3.2 On $[0,\\infty)$, the power $t^{1-\\alpha}$ is continuous by the endpoint estimate in step 1.2 and concave: on $(0,\\infty)$ the second derivative of $-t^{1-\\alpha}$ is $(1-\\alpha)\\alpha t^{-1-\\alpha}>0$, so [F5], [F6], and [F8] make $-t^{1-\\alpha}$ convex there; continuity extends the concavity inequality to zero. Thus each $Z_x(Q)$ is concave. The function $-\\ln z$ is decreasing and convex on $(0,\\infty)$, since $\\ln$ is increasing by [F9] and $(-\\ln z)''=z^{-2}>0$ by [F5], [F6], [F8], and [F10]. Consequently $f_x(Q)=-\\alpha^{-1}\\ln Z_x(Q)$ is convex wherever $Z_x(Q)>0$: concavity of $Z_x$, monotonicity of $-\\ln$, and convexity of $-\\ln$ give the convex-combination inequality directly. Hence $F(Q)=\\sum_{x:P^*(x)>0}P^*(x)f_x(Q)$ is convex on its finite domain. For $y\\in T$, differentiating at the positive point $q^*$ and using $Z_x(q^*)=\\Psi_*^\\alpha$ for active $x$ from step 2.2 gives $$\\frac{\\partial F}{\\partial Q(y)}(q^*)=-\\frac{1-\\alpha}{\\alpha}\\frac{\\Psi_*^\\alpha}{S_y}\\frac{\\sum_{x:P^*(x)>0}P^*(x)W(y\\mid x)^\\alpha}{\\Psi_*^\\alpha}=-\\rho.$$ For any strictly positive probability vector $Q$ on $T$, let $g(t)=F((1-t)q^*+tQ)$. It is convex, and $g'_+(0)=\\sum_{y\\in T}(-\\rho)(Q(y)-q^*(y))=0$. Convexity gives $(g(t)-g(0))/t\\le g(1)-g(0)$ for $0<t<1$; letting $t\\downarrow0$ yields $F(Q)\\ge F(q^*)$. If $Q$ has zero coordinates on $T$ but $F(Q)<\\infty$, then every active $Z_x(Q)>0$; apply the result to $Q_t=(1-t)Q+tq^*$ and let $t\\downarrow0$, using continuity of the finite sums and logarithms on positive $Z_x(Q)$. If $F(Q)=+\\infty$, the inequality is immediate. Thus $F(Q)\\ge F(q^*)$ for every probability vector supported on $T$. [F5, F6, F8, F9, F10, step 1.2, step 2.2]"
+    ]
+  },
+  {
+    "id": "thm-cost-constrained-dmc-capacity-formula",
+    "source": "items/thm-cost-constrained-dmc-capacity-formula.md",
+    "raw_sha256": "45c729825a9bbdc98131d89312c021191981369d5bd380c83f64c105ac49af39",
+    "claim": "Let $W$ be a finite DMC with finite nonnegative input cost $c$, and let $\\Gamma\\ge c_{\\min}$. Under the uniform-message average block-cost and average-error conventions of [[def-cost-constrained-dmc-code-and-capacity]], the operational capacity is\n$$C(\\Gamma)=C_I(\\Gamma)=\\max_{P_X:\\,\\mathbb E c(X)\\le\\Gamma} I(P_X;W),$$\nwith all rates measured in nats per use.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $W$ be a finite DMC with finite nonnegative input cost $c$, and let $\\Gamma\\ge c_{\\min}$. Under the uniform-message average block-cost and average-error conventions of [[def-cost-constrained-dmc-code-and-capacity]], the operational capacity is\n$$C(\\Gamma)=C_I(\\Gamma)=\\max_{P_X:\\,\\mathbb E c(X)\\le\\Gamma} I(P_X;W),$$\nwith all rates measured in nats per use.",
+      "[A1] [[def-discrete-memoryless-channel]], [[def-finite-dmc-cost-model]], and [[def-cost-constrained-dmc-code-and-capacity]]: $C(\\Gamma)$ uses deterministic length-$n$ codes, uniform-message average error and average block cost; $C_I$ is the supremum over input laws with expected letter cost at most $\\Gamma$.",
+      "[F1] [[lem-cost-constrained-dmc-information-capacity-properties]]: the feasible input set is compact, the maximum is attained, and $C_I$ is nondecreasing and concave; for $\\Gamma>c_{\\min}$ its maximum can be approached with strict-cost laws.",
+      "[F2] [[lem-cost-constrained-dmc-mutual-information-under-average-cost]]: every block input satisfying the average cost constraint obeys $I(X^n;Y^n)\\le nC_I(\\Gamma)$.",
+      "[F3] [[lem-cost-constrained-dmc-achievability]]: every rate below $C_I(\\Gamma)$ is achievable by average-cost feasible ordinary codes, including the minimum-cost endpoint."
+    ]
+  },
+  {
+    "id": "thm-discrete-memoryless-channel-alphabet-scoped-strong-converse",
+    "source": "items/thm-discrete-memoryless-channel-alphabet-scoped-strong-converse.md",
+    "raw_sha256": "5d04fd0e18fc46e7a2b749256b6d954af0a210a528c2264aee8ba97ef39c6346",
+    "claim": "Let $W$ be a finite DMC with finite nonempty input and output alphabets and no input-cost constraint. For any sequence of length-$n$ codes with $\\liminf_{n\\to\\infty}n^{-1}\\ln M_n>C(W)$, the average success probability tends to zero; hence both average and maximal error tend to one.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[lem-discrete-memoryless-channel-capacity-is-attained]] and [[lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound]]: a maximizing input law $P_X^*$ exists, and for $Q^*:=P_X^*W$ every row is supported on $Q^*$ with $D(W(\\cdot\\mid x)\\|Q^*)\\le C(W)$.",
+      "[F2] [[lem-discrete-memoryless-channel-information-density-concentration]]: for every fixed $\\eta>0$, uniformly over input words $x^n$, the probability under $W^n(\\cdot\\mid x^n)$ that $\\ln(W^n(Y^n\\mid x^n)/(Q^*)^n(Y^n))>n(C(W)+\\eta)$ is at most $V/(n\\eta^2)$.",
+      "[F3] [[def-fixed-length-channel-code]] and [[def-fixed-length-channel-code-errors]]: the decoder regions $D_m:=\\{y^n:d(y^n)=m\\}$ are pairwise disjoint, and average success is $M_n^{-1}\\sum_m W^n(D_m\\mid e(m))$.",
+      "1.1 By [F1] choose a maximizing input law $P_X^*$ and set $Q^*:=P_X^*W$. Fix a blocklength $n$, a codeword $x_m^n=e(m)$, and a threshold $\\tau$. Split $D_m$ within the support of $W^n(\\cdot\\mid x_m^n)$ into outputs where $\\ln(W^n(y^n\\mid x_m^n)/(Q^*)^n(y^n))>\\tau$ and the supported complement. The first part has channel probability at most the threshold-tail probability in [F2]. On the supported complement, $W^n(y^n\\mid x_m^n)\\le e^\\tau(Q^*)^n(y^n)$ by the likelihood ratio; outside the support, $W^n(y^n\\mid x_m^n)=0$, so the same inequality holds there. Hence the remaining channel probability is at most $e^\\tau(Q^*)^n(D_m)$. [F1, F2, F3, given, algebra]"
+    ]
+  },
+  {
+    "id": "thm-discrete-memoryless-channel-average-error-converse",
+    "source": "items/thm-discrete-memoryless-channel-average-error-converse.md",
+    "raw_sha256": "1845637b81143daaa5a90f516a41b5d31105e290f05edbc470f6823b5281f575",
+    "claim": "For any sequence of fixed-length codes over a finite DMC with average errors $\\varepsilon_{\\rm av}(n)\\to0$, one has $\\limsup_{n\\to\\infty}n^{-1}\\ln M_n\\le C(W)$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F3] [[def-fixed-length-channel-code]] and [[def-discrete-memoryless-channel]]: $X^n$ is a deterministic function of $J$, and conditional on $J=m$ the output law is $W^n(\\cdot\\mid e(m))$.",
+      "[F4] [[lem-discrete-memoryless-channel-n-letter-information-bound]]: $I(X^n;Y^n)\\le nC(W)$ for every input law."
+    ]
+  },
+  {
+    "id": "thm-discrete-memoryless-channel-capacity-formula",
+    "source": "items/thm-discrete-memoryless-channel-capacity-formula.md",
+    "raw_sha256": "fc5cceeeb929b3e8e6342694a58e0a2a1bb61f56c43672b4368da436ebfd3aa0",
+    "claim": "For every finite DMC $W$ with no input-cost constraint,\n$$C_{\\rm av}(W)=C_{\\max}(W)=C(W)=\\max_{P_X}I(P_X;W),$$\nwith rates and mutual information measured in nats per channel use.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-discrete-memoryless-channel-operational-capacity]]: $C_{\\rm av}$ and $C_{\\max}$ are the suprema of rates achievable with vanishing average and maximal error, respectively.",
+      "[F2] [[def-discrete-memoryless-channel-information-capacity]] and [[lem-discrete-memoryless-channel-capacity-is-attained]]: $C(W)=\\max_{P_X}I(P_X;W)$.",
+      "[F3] [[thm-discrete-memoryless-channel-average-error-converse]]: any vanishing-average-error code sequence has limsup rate at most $C(W)$.",
+      "[F4] [[thm-discrete-memoryless-channel-random-coding-achievability]]: every $0\\le R<C(W)$ is achievable with vanishing average error.",
+      "[F5] [[lem-discrete-memoryless-channel-average-to-maximal-expurgation]]: each code can be replaced by a subcode with rate loss at most $\\ln2/n$ and maximal error at most twice its average error.",
+      "[F7] [[def-discrete-memoryless-channel]] and [[def-fixed-length-channel-code]] and [[def-fixed-length-channel-code-errors]]: the nonempty input alphabet supplies one input word, and decoding every output to the sole message gives a one-message code with rate zero and zero error.",
+      "2.1 If $C(W)>0$, fix any $0\\le R<C(W)$. By [F4] there is an average-error reliable sequence at rate at least $R$. Apply [F5] to each code: the maximal errors tend to zero and the log message count loses at most $\\ln2$ at blocklength $n$, so the resulting rate is still at least $R$ in the limit. Thus $C_{\\max}(W)\\ge R$ for every such $R$, and hence $C_{\\max}(W)\\ge C(W)$. If $C(W)=0$, [F7] gives $C_{\\max}(W)\\ge0=C(W)$. The cases are exhaustive by [F6], and step 1.1 gives equality. [F1, F4, F5, F6, F7, step 1.1, algebra] \u220e\n"
+    ]
+  },
+  {
+    "id": "thm-discrete-memoryless-channel-random-coding-achievability",
+    "source": "items/thm-discrete-memoryless-channel-random-coding-achievability.md",
+    "raw_sha256": "419f1be8cdfdfbf97130a5068a20f0b9c8650081483ec09946672afd1ab902f4",
+    "claim": "For every finite DMC $W$ and every $0\\le R<C(W)$, there are fixed-length codes with $\\liminf_{n\\to\\infty}n^{-1}\\ln M_n\\ge R$ and average error tending to zero.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[lem-discrete-memoryless-channel-capacity-is-attained]]: some input law $P_X^*$ satisfies $I(P_X^*;W)=C(W)$.",
+      "[F2] [[def-discrete-memoryless-channel-information-density]]: the information density is $\\ln(W(y\\mid x)/Q_{P_X^*}(y))$ on the induced joint support, with its block value the coordinate sum.",
+      "[F3] [[lem-discrete-memoryless-channel-iid-information-density-converges]]: under IID input $P_X^*$ and DMC output, the normalized information density converges in probability to $C(W)$.",
+      "[F4] [[def-finite-stochastic-kernel]] and [[lem-discrete-memoryless-channel-block-kernels-are-stochastic]]: each block transition law is a probability vector.",
+      "[F5] [[def-fixed-length-channel-code]] and [[def-fixed-length-channel-code-errors]]: a selected codebook and deterministic decoder define a code and its average error.",
+      "2.1 Draw $M_n$ codewords independently from $P_X^{*\\,n}$. Decode to the unique codeword with information density greater than $\\ln M_n+n\\delta$, using a fixed default output if there is not exactly one. Conditional on the transmitted message, an error is contained in the union of the true-codeword miss event from step 1.1 and the event that some independent competing word passes the threshold. For one competitor $X'^n\\sim P_X^{*\\,n}$ independent of $Y^n\\sim Q_{P_X^*}^{\\,n}$, [F2] gives $\\mathbb E e^{\\imath_{P_X^*}(X'^n;Y^n)}=\\sum_{x^n}P_X^{*\\,n}(x^n)\\sum_{y^n:Q_{P_X^*}^{\\,n}(y^n)>0}W^n(y^n\\mid x^n)=1$ by [F4], since every output reachable from a positive-probability input has positive $Q_{P_X^*}$ mass. On a false pass, the nonnegative variable $Z=e^{\\imath_{P_X^*}(X'^n;Y^n)}$ exceeds $e^{\\ln M_n+n\\delta}$, so $1=\\mathbb E Z\\ge e^{\\ln M_n+n\\delta}\\Pr[Z>e^{\\ln M_n+n\\delta}]$, and the false-pass probability is at most $e^{-\\ln M_n-n\\delta}$. A union bound over at most $M_n-1$ competitors makes this term at most $e^{-n\\delta}$. [F2, F4, step 1.1, algebra]"
+    ]
+  },
+  {
+    "id": "thm-feedback-does-not-increase-cost-constrained-dmc-capacity",
+    "source": "items/thm-feedback-does-not-increase-cost-constrained-dmc-capacity.md",
+    "raw_sha256": "5889b52e1ad8ea3a9fe19d67eabdecdfd1be6c95cefcb0554d7933784a61d097",
+    "claim": "For every finite DMC and finite nonnegative letter cost with feasible budget $\\Gamma$, the feedback operational capacity $C_{\\rm fb}(\\Gamma)$ defined in [[def-finite-dmc-feedback-code]] equals the ordinary average-error capacity $C(\\Gamma)$ in [[def-cost-constrained-dmc-code-and-capacity]]. Thus $C_{\\rm fb}(\\Gamma)=C_I(\\Gamma)$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For every finite DMC and finite nonnegative letter cost with feasible budget $\\Gamma$, the feedback operational capacity $C_{\\rm fb}(\\Gamma)$ defined in [[def-finite-dmc-feedback-code]] equals the ordinary average-error capacity $C(\\Gamma)$ in [[def-cost-constrained-dmc-code-and-capacity]]. Thus $C_{\\rm fb}(\\Gamma)=C_I(\\Gamma)$.",
+      "[A1] [[def-finite-dmc-feedback-code]]: at each time $t$, $X_t=f_t(M,Y^{t-1})$ and the conditional output row is $W(\\cdot\\mid X_t)$; the cost is expected average letter cost.",
+      "[F3] [[def-finite-dmc-cost-model]] and [[lem-cost-constrained-dmc-information-capacity-properties]]: $C_I(u)$ is nondecreasing and concave for $u\\ge c_{\\min}$ and satisfies $0\\le C_I(u)\\le\\ln|\\mathcal X|$.",
+      "[F6] [[thm-cost-constrained-dmc-capacity-formula]]: the ordinary capacity equals $C_I(\\Gamma)$.",
+      "3.1 If $M=1$, the rate is zero. If $M\\ge2$, the relaxed Fano bound [F5] and the deterministic decoder imply $(1-e)\\ln M\\le I(M;Y^n)+\\ln2\\le nC_I(\\Gamma)+\\ln2$. Thus reliable feedback rates are at most $C_I(\\Gamma)=C(\\Gamma)$ by [F6]. Every ordinary feasible code is a feedback code whose encoders ignore past outputs, so $C_{\\rm fb}(\\Gamma)\\ge C(\\Gamma)$; the reverse inequality follows from the converse. [F5, F6, step 2.1, given, algebra, cases] \u220e"
+    ]
+  },
+  {
+    "id": "thm-it-degraded-wiretap-secrecy-capacity",
+    "source": "items/thm-it-degraded-wiretap-secrecy-capacity.md",
+    "raw_sha256": "c4d1ea85c533b27ff5c2eb30e397884d6b537d6b2122438c5e15a1f448ca6562",
+    "claim": "If $W(y,z\\mid x)$ is a finite degraded wiretap channel in the sense of [[def-it-degraded-wiretap-channel]], then all four operational capacities in [[def-it-wiretap-secrecy-capacities]] are equal to\n\n$$\\max_{P_X}\\bigl[I(X;Y)-I(X;Z)\\bigr],$$\n\nwhere $P_X$ ranges over probability vectors on the finite input alphabet and the output law is induced by $W$. The maximum is attained.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "If $W(y,z\\mid x)$ is a finite degraded wiretap channel in the sense of [[def-it-degraded-wiretap-channel]], then all four operational capacities in [[def-it-wiretap-secrecy-capacities]] are equal to",
+      "[F1] [[def-it-degraded-wiretap-channel]]: for every input law $P_X$, $P_{XYZ}(x,y,z)=P_X(x)W_Y(y\\mid x)V(z\\mid y)$; this factorization is the finite Markov condition written $X-Y-Z$.",
+      "[F5] [[lem-it-classical-wiretap-auxiliary-cardinality]]: the auxiliary objective's maximum is attained, and $q\\mapsto I_q(X;Y)-I_q(X;Z)$ is continuous on the finite input simplex.",
+      "[F6] [[thm-it-finite-classical-wiretap-auxiliary-capacity]]: each of the four operational weak/strong secrecy capacities equals the maximum over finite $U-X-(Y,Z)$.",
+      "[F7] [[def-it-wiretap-secrecy-capacities]]: the four operational capacities use the rate, reliability, and secrecy limits stated in its Definition."
+    ]
+  },
+  {
+    "id": "thm-it-dmc-uniform-quadratic-capacity-decay",
+    "source": "items/thm-it-dmc-uniform-quadratic-capacity-decay.md",
+    "raw_sha256": "ae4ae94263dab66c2577a80b8fd2ea8ac21c632acd605534bf43a5ed049c23c4",
+    "claim": "Let $W$ be a finite DMC, $C=C(W)$, and $\\Pi=\\{P:I(P,W)=C\\}$. There is $\\alpha>0$, depending on $W$, such that every input law $P$ satisfies\n$$C-I(P,W)\\ge\\alpha\\,\\operatorname{dist}_2(P,\\Pi)^2.$$\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[lem-it-dmc-capacity-output-law-is-unique]]: every $P^*\\in\\Pi$ induces one common output law $Q^*$.",
+      "[F2] [[lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound]]: every row $W_x$ is supported on $Q^*$ and $d_x:=D(W_x\\|Q^*)\\le C$.",
+      "2.2 If $E^c\\ne\\varnothing$, let $\\eta=\\min_{x\\notin E}(C-d_x)>0$. The first term in step 1.1 is at least $\\eta\\|P|_{E^c}\\|_2^2$, since $P(x)\\in[0,1]$ and $\\sum_{E^c}P(x)\\ge\\|P|_{E^c}\\|_2\\ge\\|P|_{E^c}\\|_2^2$. By [F5], the second term is at least $\\tfrac12\\|PW-Q^*\\|_2^2$. Hence the gap is at least $a$ times the squared norm of the concatenated residual $(P|_{E^c},PW-Q^*)$, with $a=\\min(\\eta,1/2)$. If $E^c=\\varnothing$, omit that block and take $a=1/2$. [F2, F5, step 1.1, given, algebra]"
+    ]
+  },
+  {
+    "id": "thm-it-error-exponent-zero-above-capacity",
+    "source": "items/thm-it-error-exponent-zero-above-capacity.md",
+    "raw_sha256": "9fcf1bbed6dce50b2395ee9cc9d00b8dcde5fbbffa38bf79e5506ba151b31537",
+    "claim": "For every finite unconstrained DMC and every $R>C(W)$,\n$$E^-_{\\rm av}(R)=E^+_{\\rm av}(R)=E^-_{\\rm max}(R)=E^+_{\\rm max}(R)=0.$$\nThese are error-probability exponents; no success-probability exponent is asserted.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[thm-discrete-memoryless-channel-alphabet-scoped-strong-converse]] and [[def-fixed-length-channel-code-errors]]: for any code sequence with liminf rate above $C(W)$, average success tends to zero, so both average and maximal errors tend to one; the two criteria are the uniform-message average and largest message error.",
+      "[F2] [[def-it-reliability-function]]: $E_k^\\pm(R)$ are the liminf and limsup of $-n^{-1}\\ln P_k^*(n,M_n)$, with $-\\ln0=+\\infty$.",
+      "[F3] [[def-fixed-length-channel-code-errors]]: maximal error is at least average error for every code."
+    ]
+  },
+  {
+    "id": "thm-it-expurgated-error-exponent-lower-bound",
+    "source": "items/thm-it-expurgated-error-exponent-lower-bound.md",
+    "raw_sha256": "9f3077ccbf0aa8f7f454c85f7e9891d8eff8dac6d315c8b9b06766bb63d92c5e",
+    "claim": "For every finite unconstrained DMC and rate $R>0$, the liminf average- and maximal-error exponents satisfy\n$$E^-_{\\rm av}(R)\\ge E_{\\rm ex}(R),\\qquad E^-_{\\rm max}(R)\\ge E_{\\rm ex}(R),$$\nwhere $E_{\\rm ex}$ is defined in [[def-it-gallager-and-expurgated-exponent-functions]]. This is a lower bound; it is not asserted to equal the general reliability function.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For every finite unconstrained DMC and rate $R>0$, the liminf average- and maximal-error exponents satisfy\n$$E^-_{\\rm av}(R)\\ge E_{\\rm ex}(R),\\qquad E^-_{\\rm max}(R)\\ge E_{\\rm ex}(R),$$\nwhere $E_{\\rm ex}$ is defined in [[def-it-gallager-and-expurgated-exponent-functions]]. This is a lower bound; it is not asserted to equal the general reliability function.",
+      "[F1] [[def-discrete-memoryless-channel]]: for a block input and output, $W^n(y^n\\mid x^n)=\\prod_iW(y_i\\mid x_i)$.",
+      "[F2] [[def-fixed-length-channel-code]] and [[def-fixed-length-channel-code-errors]]: ML decoding defines a deterministic length-$n$ code, and maximal error is the largest per-message error.",
+      "[F3] [[def-it-gallager-and-expurgated-exponent-functions]]: $B(x,x')=\\sum_y\\sqrt{W(y\\mid x)W(y\\mid x')}$ and $E_{0x}(\\rho,P)=-\\rho\\ln\\sum_{x,x'}P(x)P(x')B(x,x')^{1/\\rho}$ for $\\rho\\ge1$.",
+      "1.1 For any two codewords $x^n,x'^n$, if ML decoding selects the competitor when $x^n$ was sent, then $W^n(y^n\\mid x'^n)\\ge W^n(y^n\\mid x^n)$. On that event $W^n(y^n\\mid x^n)\\le\\sqrt{W^n(y^n\\mid x^n)W^n(y^n\\mid x'^n)}$; this also holds when the codewords coincide, in which case the pairwise sum is $1$. Summing over outputs and using a union bound over competitors gives message error at most $f_m:=\\sum_{j\\ne m}B^n(x_m^n,x_j^n)$, where $B^n(x^n,x'^n)=\\prod_iB(x_i,x'_i)$. [F1, F2, algebra]",
+      "2.1 Fix $r\\in(0,1]$. If $r=1$, $(a+b)^r=a^r+b^r$. If $0<r<1$, then $u\\mapsto u^{r-1}$ has derivative $(r-1)u^{r-2}<0$ on $(0,\\infty)$ by [F4], so it is nonincreasing by [F5]. For $t>0$, put $g(t)=1+t^r-(1+t)^r$; [F4] gives $g'(t)=r(t^{r-1}-(1+t)^{r-1})\\ge0$. Also $t^r\\to0$ as $t\\downarrow0$: its derivative is positive, and for any $\\eta>0$, $0<t<\\eta^{1/r}$ gives $t^r<\\eta$ by [F4]\u2013[F5]. Thus $g$ extends continuously to $g(0)=0$. By [F5] on $[0,\\infty)$, $g(t)\\ge0$ for all $t\\ge0$. If $a>0$, scale with $t=b/a$ and use [F4] to obtain $(a+b)^r\\le a^r+b^r$; if $a=0$, equality holds, including $a=b=0$. Induction gives $(\\sum_j a_j)^r\\le\\sum_j a_j^r$ for every finite nonnegative family (the empty family gives $0=0$). Now draw $M'$ codewords independently from $P^n$ and take $r=1/\\rho$ for $\\rho\\ge1$. The proved finite-sum inequality and step 1.1 yield $\\mathbb E f_m^{1/\\rho}\\le\\sum_{j\\ne m}\\mathbb E B^n(X_m^n,X_j^n)^{1/\\rho}=(M'-1)\\left(\\sum_{x,x'}P(x)P(x')B(x,x')^{1/\\rho}\\right)^n.$ The equality follows from independent coordinates, the product form of $B^n$, and the power laws in [F4]. [F1, F3, F4, F5, step 1.1, algebra, induction]"
+    ]
+  },
+  {
+    "id": "thm-it-finite-classical-wiretap-auxiliary-capacity",
+    "source": "items/thm-it-finite-classical-wiretap-auxiliary-capacity.md",
+    "raw_sha256": "9a09dfe474bd84f03c61e788638bedecde9451ef87c1fa7a0c8536d843ef5b3a",
+    "claim": "Let $W(y,z\\mid x)$ be a finite wiretap DMC as in [[def-it-wiretap-channel]], with no input-cost constraint, feedback, or preshared secret key. Let\n\n$$C(W):=\\max_{\\substack{\\mathcal U\\text{ finite},\\ P_{U,X}:\\ U-X-(Y,Z)}}\\bigl[I(U;Y)-I(U;Z)\\bigr],$$\n\nwhere $U-X-(Y,Z)$ means the joint law factors as $P_U(u)P_{X\\mid U}(x\\mid u)W(y,z\\mid x)$. The maximum is attained with $|\\mathcal U|\\le|\\mathcal X|$. The four capacities defined in [[def-it-wiretap-secrecy-capacities]] are equal:\n\n$$C_{\\mathrm{av,weak}}=C_{\\mathrm{av,strong}}=C_{\\mathrm{max,weak}}=C_{\\mathrm{max,strong}}=C(W).$$\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $W(y,z\\mid x)$ be a finite wiretap DMC as in [[def-it-wiretap-channel]], with no input-cost constraint, feedback, or preshared secret key. Let",
+      "where $U-X-(Y,Z)$ means the joint law factors as $P_U(u)P_{X\\mid U}(x\\mid u)W(y,z\\mid x)$. The maximum is attained with $|\\mathcal U|\\le|\\mathcal X|$. The four capacities defined in [[def-it-wiretap-secrecy-capacities]] are equal:",
+      "**Given:** A finite wiretap channel, the code model of [[def-it-wiretap-channel]], and the four operational capacities of [[def-it-wiretap-secrecy-capacities]].",
+      "[F1] [[def-it-wiretap-channel]]: $W(y,z\\mid x)$ is row-stochastic on finite alphabets; its block law is $W^n(y^n,z^n\\mid x^n)=\\prod_iW(y_i,z_i\\mid x_i)$; encoders have no feedback or preshared key, messages are uniform, and Eve knows the code description.",
+      "[F2] [[def-it-wiretap-secrecy-capacities]]: $R$ is achievable when $\\liminf_n n^{-1}\\ln|\\mathcal M_n|\\ge R$, the selected error criterion tends to zero, and the selected weak or strong secrecy limit holds.",
+      "[F4] [[def-it-weak-and-strong-secrecy]]: weak secrecy is $n^{-1}I(M;Z^n)\\to0$; strong secrecy is $I(M;Z^n)\\to0$.",
+      "[F8] [[lem-it-finite-dmc-information-density-concentration]]: for a fixed finite DMC input law, its IID information-density sum has two-sided Chebyshev concentration about $nI$ and an exponential upper tail above $n(I+\\gamma)$ for every $\\gamma>0$.",
+      "[F9] [[lem-it-channel-resolvability-soft-covering]]: for an induced finite DMC $U\\to Z$, a uniform codebook of $\\lceil e^{nR_0}\\rceil$ IID codewords has expected output divergence from $P_Z^n$ tending to zero whenever $R_0>I(U;Z)$.",
+      "[F10] [[lem-it-classical-wiretap-auxiliary-cardinality]]: every finite $U-X-(Y,Z)$ is dominated in $I(U;Y)-I(U;Z)$ by an auxiliary of size at most $|\\mathcal X|$, and the maximum is attained.",
+      "[F11] [[lem-it-finite-wiretap-product-kernel-is-stochastic]]: the finite wiretap block product is stochastic; the product formula preserves the coordinatewise memoryless factorization.",
+      "1.3 If $C=0$, the one-message code has zero error and zero leakage at every blocklength, so all four capacities are at least zero. In all cases, strong secrecy implies weak secrecy because [F5] and [F12] give $0\\le I(M;Z^n)/n\\le I(M;Z^n)$ for $n\\ge1$; maximal error tending to zero implies average error tending to zero. [F2, F4, F5, F12, given, algebra]",
+      "1.5 For $i=0,\\ldots,n$, set $A_i:=I(M;Y^i,Z_{i+1}^n)$, with empty strings omitted, and set $V_i:=(Y^{i-1},Z_{i+1}^n)$. The mutual-information chain rule [F6] gives $I(M;Y^n)-I(M;Z^n)=A_n-A_0=\\sum_{i=1}^n\\left[I(M;Y_i\\mid V_i)-I(M;Z_i\\mid V_i)\\right].$ Indeed, $A_i-A_{i-1}=I(M;Y_i\\mid V_i)-I(M;Z_i\\mid V_i)$ for each $i$, and the sum telescopes. [F1, F6, F11, given, algebra]",
+      "2.1 For a selected codebook, encode message $m$ by choosing $l$ uniformly and, conditional on $U^n(m,l)=u^n$, draw $X^n$ according to $$P_{X^n\\mid U^n}(x^n\\mid u^n)=\\prod_{i=1}^nP_{X\\mid U}(x_i\\mid u_i),$$ using independent private draws at the coordinates. Thus the induced channels from $U$ to Bob and Eve are the finite DMCs $Q_Y(y\\mid u):=\\sum_xP_{X\\mid U}(x\\mid u)W_Y(y\\mid x)$ and $Q_Z(z\\mid u):=\\sum_xP_{X\\mid U}(x\\mid u)W_Z(z\\mid x)$, with block laws $Q_Y^n$ and $Q_Z^n$. For an output with $P_Y^n(y^n)=0$, declare erasure; it has probability zero because every sampled letter has positive $P_U$-mass and $P_Y(y)=\\sum_uP_U(u)Q_Y(y\\mid u)$. For an output with $P_Y^n(y^n)>0$, assign score $-\\infty$ if $Q_Y^n(y^n\\mid u^n)=0$ and otherwise use its log likelihood ratio. Decode the pair $(m,l)$ as the unique codeword satisfying $\\ln\\frac{Q_Y^n(Y^n\\mid U^n(m,l))}{P_Y^n(Y^n)}>n\\bigl(I(U;Y)-\\gamma_Y\\bigr)$; output its message coordinate $m$, and declare erasure if no unique pair passes. Under the transmitted pair, the missed-threshold probability is at most $\\sigma_Y^2/(n\\gamma_Y^2)$ by [F8]. For any incorrect pair, its independently drawn word is independent of the received $Y^n\\sim P_Y^n$ under the random-code ensemble, and $\\mathbb E_{U^n}[Q_Y^n(y^n\\mid U^n)/P_Y^n(y^n)]=1$ on the support of $P_Y^n$. On the threshold event the likelihood ratio exceeds $e^{n(I(U;Y)-\\gamma_Y)}$, so its indicator is bounded above by the ratio times $e^{-n(I(U;Y)-\\gamma_Y)}$; taking expectations bounds the false-alarm probability by that exponential. If the true pair uniquely passes, the message is decoded correctly; hence message error is bounded by the missed-threshold event or the union of false-alarm events. The union bound over at most $M_nL_n-1$ incorrect pairs tends to zero: since $R',R_0\\ge0$, $M_nL_n\\le4e^{n(R'+R_0)}$, and $R'+R_0<I(U;Y)-\\gamma_Y$. Thus the ensemble average message error tends to zero. [F1, F5, F8, step 1.2, given, algebra]",
+      "2.2 The code and channel law factor as $P_M(m)P_{X^n\\mid M}(x^n\\mid m)\\prod_{j=1}^nW(y_j,z_j\\mid x_j).$ In this finite sum, the time-$i$ factor $W(y_i,z_i\\mid x_i)$ separates from all other coordinate factors. Therefore, after summing over the other inputs and outputs, $P(Y_i=y,Z_i=z\\mid M=m,X_i=x,V_i=v)=W(y,z\\mid x)$ whenever the conditioning event has positive probability. This proves $M-X_i-(Y_i,Z_i)$ conditional on each positive-mass $V_i=v$. Thus $P_{M,X_i\\mid V_i=v}W$ is a finite auxiliary law allowed in the maximum defining $C$. By [F10], $I(M;Y_i\\mid V_i=v)-I(M;Z_i\\mid V_i=v)\\le C.$ Average over positive-mass $v$ and sum over $i$ in step 1.5 to obtain $I(M;Y^n)-I(M;Z^n)\\le nC$. [F1, F10, F11, step 1.5, given, algebra]",
+      "3.1 Use the same conditional product encoder law $P_{X^n\\mid U^n}(x^n\\mid u^n)=\\prod_{i=1}^nP_{X\\mid U}(x_i\\mid u_i)$ with independent private coordinate draws as in step 2.1. Summing over $X^n$ through the product wiretap kernel gives the induced Eve DMC block law $Q_Z^n(z^n\\mid u^n)=\\prod_{i=1}^nQ_Z(z_i\\mid u_i)$, where $Q_Z(z\\mid u)=\\sum_xP_{X\\mid U}(x\\mid u)W_Z(z\\mid x)$. Eve's conditional output law for message $m$ is the mixture of the $L_n$ induced $Q_Z^n(\\cdot\\mid U^n(m,l))$ outputs. Let $d(\\mathcal C)$ be the average over $m$ of its KL divergence from $P_Z^n$. For each fixed $m$, its randomization subcode has exactly the IID codebook law in [F9], so $\\mathbb E_{\\mathcal C}d(\\mathcal C)\\to0$. Let $a(\\mathcal C)$ be the codebook's average Bob error. Step 2.1 and finite averaging give $\\mathbb E_{\\mathcal C}a(\\mathcal C)\\to0$. Fix an ordering of the finite auxiliary alphabet and order its finite word/codebook sets lexicographically. At each $n$, take the first codebook whose $a(\\mathcal C_n)+d(\\mathcal C_n)$ is no larger than its finite ensemble mean. Such a codebook exists by finite averaging, so this specifies a sequence with $a(\\mathcal C_n)+d(\\mathcal C_n)\\to0$ without countable choices. [F1, F3, F9, step 2.1, given, choose]",
+      "4.1 Write $\\eta_n=a(\\mathcal C_n)+d(\\mathcal C_n)$ and, for each message $m$, write $e_m$ for its Bob error and $d_m=D(P_{Z^n\\mid m,\\mathcal C_n}\\|P_Z^n)$. Delete every message with $e_m>t_n$ or $d_m>t_n$, where $t_n=\\sqrt{\\eta_n}+1/n$. For each message, $\\mathbf1\\{e_m>t_n\\text{ or }d_m>t_n\\}\\le(e_m+d_m)/t_n$; averaging over the uniform message bounds the deleted fraction by $\\eta_n/t_n\\le\\sqrt{\\eta_n}$. Thus for all sufficiently large $n$ the retained fraction tends to one and is positive, and each retained message has both $e_m,d_m\\le t_n\\to0$. Restrict the encoder to retained messages and map any old decoder output outside the retained set to erasure; this cannot increase the error for a retained message. For the finitely many earlier blocklengths use a one-message code. [F1, step 3.1, given, construct, algebra]"
+    ]
+  },
+  {
+    "id": "thm-it-finite-dmc-feedback-does-not-increase-capacity",
+    "source": "items/thm-it-finite-dmc-feedback-does-not-increase-capacity.md",
+    "raw_sha256": "84832460762ddd00a0c4f1d0b7bd9751668e768079cb76528bbe696f604be21f",
+    "claim": "For a finite DMC $W$ without input-cost constraints, the vanishing-average-error capacity with perfect causal output feedback equals its ordinary information capacity\n$$C(W)=\\max_{P_X}I(P_X;W)$$\nfrom [[def-discrete-memoryless-channel-information-capacity]]. The feedback code convention is [[def-it-finite-dmc-feedback-code]].\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For a finite DMC $W$ without input-cost constraints, the vanishing-average-error capacity with perfect causal output feedback equals its ordinary information capacity\n$$C(W)=\\max_{P_X}I(P_X;W)$$\nfrom [[def-discrete-memoryless-channel-information-capacity]]. The feedback code convention is [[def-it-finite-dmc-feedback-code]].",
+      "[F1] [[def-it-finite-dmc-feedback-code]]: $X_i=f_i(M,Y^{i-1})$ deterministically, and at each positive-probability history $(M=m,Y^{i-1}=y^{i-1})$, the conditional law of $Y_i$ is $W(\\cdot\\mid f_i(m,y^{i-1}))$.",
+      "[F2] [[def-discrete-memoryless-channel-information-capacity]]: $C(W)$ is the supremum of $I(P_X;W)$ over all input probability vectors.",
+      "[F3] [[thm-discrete-memoryless-channel-random-coding-achievability]]: every rate below $C(W)$ is achievable by ordinary finite DMC codes.",
+      "[F5] [[thm-it-finite-entropy-chain-rule]]: finite output entropy obeys the chain rule, and $I(M;Y^n)=\\sum_i I(M;Y_i\\mid Y^{i-1})$.",
+      "1.1 Every no-feedback code is a feedback code whose maps ignore $Y^{i-1}$. By [F3], each rate below $C(W)$ is therefore feedback-achievable, giving $C_{\\rm fb}(W)\\ge C(W)$. [F1, F3]",
+      "2.1 Expand the mutual information using [F5] and the conditional-information definition [F8]. Given $(M,Y^{i-1})$, $X_i$ is fixed and the DMC law makes $Y_i$ have law $W(\\cdot\\mid X_i)$, so $H(Y_i\\mid M,Y^{i-1})=H(Y_i\\mid X_i)$. Also $H(Y_i\\mid Y^{i-1})\\le H(Y_i)$ by [F6]. Hence $$I(M;Y_i\\mid Y^{i-1})\\le H(Y_i)-H(Y_i\\mid X_i)=I(P_{X_i};W)\\le C(W)$$ by [F2]; the identity with entropy differences is the finite mutual-information identity [F7]. [F1, F2, F5, F6, F7, F8, step 1.2, algebra]"
+    ]
+  },
+  {
+    "id": "thm-it-normal-approximation-nondegenerate-dmc",
+    "source": "items/thm-it-normal-approximation-nondegenerate-dmc.md",
+    "raw_sha256": "a8f2c125696a052093bdca78ab36746c4841c340b0d0af2e0499c92d00e077b4",
+    "claim": "Assume the Axiom of Choice. Let $W$ be a fixed finite DMC with no feedback or input-cost constraint, let $0<\\epsilon<1/2$ be fixed, and suppose $V_{\\min}(W)>0$. For $k\\in\\{\\mathrm{av},\\mathrm{max}\\}$, let $M_k^*(n,\\epsilon)$ be the largest number of messages in a deterministic length-$n$ code with uniform messages and error criterion $k$ at most $\\epsilon$. Then\n$$\\ln M_k^*(n,\\epsilon)=nC(W)+\\sqrt{nV_{\\min}(W)}\\,\\Phi^{-1}(\\epsilon)+O(\\ln n),\\qquad k\\in\\{\\mathrm{av},\\mathrm{max}\\},$$\nwhere all logarithms are natural, $\\Phi$ is the standard-normal CDF, and the constants may depend on $W,\\epsilon$. This theorem makes no claim for cost constraints, $\\epsilon\\ge1/2$, zero dispersion, or a third-order coefficient.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "[F1] [[def-discrete-memoryless-channel]] and [[lem-discrete-memoryless-channel-block-kernels-are-stochastic]]: $W^n(y^n\\mid x^n)=\\prod_iW(y_i\\mid x_i)$ is the DMC block law.",
+      "[F2] [[lem-discrete-memoryless-channel-capacity-is-attained]] and [[def-discrete-memoryless-channel-information-capacity]]: $C(W)=\\max_PI(P,W)$ is finite and attained; the CAID set $\\Pi(W)$ is nonempty.",
+      "[F3] [[lem-it-dmc-capacity-output-law-is-unique]] and [[lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound]]: all CAIDs induce a common output law $Q^*$, every channel row is supported on $Q^*$, and $D(W_x\\|Q^*)\\le C(W)$.",
+      "[F4] [[lem-it-dmc-dispersion-attains-minimum]] and [[def-it-channel-dispersion]]: $V_{\\min}(W)$ is attained on $\\Pi(W)$ and $V(P,W)$ is the conditional information variance.",
+      "[F5] [[lem-it-dmc-caid-conditional-variance-identity]]: for every CAID, the conditional information-density mean is $C(W)$ on each positive-mass input and the unconditional information-density variance equals its conditional dispersion.",
+      "[F6] [[thm-it-dmc-uniform-quadratic-capacity-decay]]: $C(W)-I(P,W)\\ge\\alpha\\operatorname{dist}_2(P,\\Pi(W))^2$ for some $\\alpha>0$ and every input law $P$.",
+      "[F7] [[thm-it-berry-essen-independent-array]]: for independent finite-support summands with total variance $\\sigma^2>0$, the CDF error from $\\Phi$ is at most $1088\\sum_i\\mathbb E|X_i|^3/\\sigma^3$.",
+      "[F8] [[thm-it-one-shot-decision-threshold-achievability]]: a deterministic code exists with average error at most $\\mathbb E e^{-[\\imath(X^n;Y^n)-\\ln((M-1)/2)]_+}$ for $M\\ge2$.",
+      "[F9] [[def-fixed-length-channel-code]] and [[def-fixed-length-channel-code-errors]]: the encoder and decoder are deterministic; decoder regions are disjoint; average and maximal error are the uniform-message average and largest message error.",
+      "1.4 Fix a code whose every codeword has type $P$ and let $Q_n=(PW)^n$. For message $m$ with codeword $x_m^n$, put $L_m(y^n)=\\ln[W^n(y^n\\mid x_m^n)/Q_n(y^n)]$ on its charged support. Every codeword of type $P$ gives the same distribution of $L_m$ under its channel law, with mean $nI(P,W)$ and variance $nV(P,W)$; the summands are independent and row counts are $nP(x)$. For any $\\gamma>0$, split each decoder region at $t=\\ln M-\\gamma$. On $L_m\\le t$, $W^n(y^n\\mid x_m^n)\\le Me^{-\\gamma}Q_n(y^n)$. Averaging over messages and using disjoint decoder regions gives $1-e_{\\rm av}\\le\\Pr\\{L>\\ln M-\\gamma\\}+e^{-\\gamma},\\qquad F_L(\\ln M-\\gamma)\\le e_{\\rm av}+e^{-\\gamma}.$ [F1, F9, given, algebra]"
+    ]
+  },
+  {
+    "id": "thm-it-one-shot-decision-threshold-achievability",
+    "source": "items/thm-it-one-shot-decision-threshold-achievability.md",
+    "raw_sha256": "6a80063dcbde7aa2061e3fafdd2d7d5d28b4b96f5df1322c56fe9fad718b1f24",
+    "claim": "Let $W^n$ be the block channel of a finite DMC, let $P_{X^n}$ be any input law, and let $M\\ge2$. Define the charged information density $\\imath(x^n;y^n)=\\ln[W^n(y^n\\mid x^n)/(P_{X^n}W^n)(y^n)]$ on the support of $P_{X^n}W^n$. There is a deterministic length-$n$ code with $M$ messages and average error at most\n$$\\mathbb E\\exp\\left(-\\left[\\imath(X^n;Y^n)-\\ln\\frac{M-1}{2}\\right]_+\\right),$$\nwhere $(X^n,Y^n)\\sim P_{X^n}W^n$. For $M=1$, a zero-error code exists. The conclusion is an average-error bound and does not by itself bound every message's error.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $W^n$ be the block channel of a finite DMC, let $P_{X^n}$ be any input law, and let $M\\ge2$. Define the charged information density $\\imath(x^n;y^n)=\\ln[W^n(y^n\\mid x^n)/(P_{X^n}W^n)(y^n)]$ on the support of $P_{X^n}W^n$. There is a deterministic length-$n$ code with $M$ messages and average error at most\n$$\\mathbb E\\exp\\left(-\\left[\\imath(X^n;Y^n)-\\ln\\frac{M-1}{2}\\right]_+\\right),$$\nwhere $(X^n,Y^n)\\sim P_{X^n}W^n$. For $M=1$, a zero-error code exists. The conclusion is an average-error bound and does not by itself bound every message's error.",
+      "**Given:** A finite DMC, its product block kernel $W^n$, an input law $P_{X^n}$, and an integer $M\\ge2$.",
+      "[F1] [[def-discrete-memoryless-channel]] and [[lem-discrete-memoryless-channel-block-kernels-are-stochastic]]: the block law is $W^n(y^n\\mid x^n)=\\prod_iW(y_i\\mid x_i)$ and is a stochastic kernel.",
+      "[F2] [[def-discrete-memoryless-channel-information-density]]: information density is the natural-log likelihood ratio between the channel output law given the input and the output marginal, evaluated on charged support.",
+      "[F3] [[def-fixed-length-channel-code]] and [[def-fixed-length-channel-code-errors]]: a code has a deterministic encoder and decoder, and its average error is the uniform-message average of its message errors.",
+      "1.1 Draw codewords $X^n(1),\\ldots,X^n(M)$ independently from $P_{X^n}$. Put $Q=P_{X^n}W^n$ and $\\tau=\\ln((M-1)/2)$. The decoder selects the lowest index $j$ for which $\\imath(X^n(j);y^n)>\\tau$; if no index passes, it outputs message $1$. This defines a deterministic code decoder for each realized codebook. [F1, F2, F3, given, construct]"
+    ]
+  },
+  {
+    "id": "thm-it-one-shot-meta-converse",
+    "source": "items/thm-it-one-shot-meta-converse.md",
+    "raw_sha256": "8f0958356d7b710ec6493a8afe14ec2164bc9f0a87696d57ecb172be07120f3b",
+    "claim": "Let a finite-DMC code have $M\\ge1$ messages and average error $\\epsilon$. For any output probability vector $Q_{Y^n}$, let $P_{MY^n}(m,y^n)=M^{-1}W^n(y^n\\mid x_m^n)$ be the true joint law and let $\\widetilde Q_{MY^n}(m,y^n)=M^{-1}Q_{Y^n}(y^n)$. With the type-II testing function $\\beta_\\epsilon$ of [[def-finite-hypothesis-testing-beta]], which constrains rejection under its first argument, one has\n$$\\beta_\\epsilon(P_{MY^n},\\widetilde Q_{MY^n})\\le\\frac1M.$$\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let a finite-DMC code have $M\\ge1$ messages and average error $\\epsilon$. For any output probability vector $Q_{Y^n}$, let $P_{MY^n}(m,y^n)=M^{-1}W^n(y^n\\mid x_m^n)$ be the true joint law and let $\\widetilde Q_{MY^n}(m,y^n)=M^{-1}Q_{Y^n}(y^n)$. With the type-II testing function $\\beta_\\epsilon$ of [[def-finite-hypothesis-testing-beta]], which constrains rejection under its first argument, one has\n$$\\beta_\\epsilon(P_{MY^n},\\widetilde Q_{MY^n})\\le\\frac1M.$$",
+      "[F1] [[def-finite-hypothesis-testing-beta]]: $\\beta_\\epsilon(P,Q)$ is the infimum of $\\mathbb E_Q(1-\\phi)$ over tests $0\\le\\phi\\le1$ with $\\mathbb E_P\\phi\\le\\epsilon$; the first law is the null and the second is the alternative.",
+      "[F2] [[def-fixed-length-channel-code]] and [[def-fixed-length-channel-code-errors]]: the decoder is a deterministic map $d:Y^n\\to[M]$, and the average error is the uniform-message error probability.",
+      "[F3] [[def-discrete-memoryless-channel]] and [[lem-discrete-memoryless-channel-block-kernels-are-stochastic]]: $W^n(\\cdot\\mid x_m^n)$ is a probability vector for every codeword.",
+      "1.1 Define $\\phi(m,y^n)=\\mathbf1\\{d(y^n)\\ne m\\}$. Under the true law $P_{MY^n}$, $\\mathbb E_P\\phi=\\epsilon$, so $\\phi$ is feasible in [F1]. Under $\\widetilde Q$, its type-II error is $\\mathbb E_{\\widetilde Q}(1-\\phi)=\\frac1M\\sum_{m=1}^M\\sum_{y^n}Q_{Y^n}(y^n)\\mathbf1\\{d(y^n)=m\\}=\\frac1M,$ since for each output exactly one message is decoded. No likelihood ratio is used, so zeros in $Q_{Y^n}$ cause no support problem. [F1, F2, F3, given, algebra]"
+    ]
+  },
+  {
+    "id": "thm-it-point-to-point-lossless-source-channel-separation",
+    "source": "items/thm-it-point-to-point-lossless-source-channel-separation.md",
+    "raw_sha256": "552b7ef2768f53b0e27ad0565062f9a9d3b83346120c0fdfc99c3233c203ec5c",
+    "claim": "Let $S_1,S_2,\\ldots$ be IID with probability vector $P_S$ on a finite nonempty alphabet $\\mathcal S$, and let $W$ be a finite DMC with capacity $C(W)$ in nats per channel use. Write $H(P_S):=-\\sum_{s:P_S(s)>0}P_S(s)\\ln P_S(s)$ for source entropy in nats. Fix positive integers $n_k$ with $n_k/k\\to\\rho\\in(0,\\infty)$. A deterministic $(k,n_k)$ joint code is as in [[def-it-point-to-point-joint-source-channel-code]]. If $H(P_S)=0$, a zero-error code sequence exists for every such $W$. If $H(P_S)<\\rho C(W)$, there are codes with block error tending to zero. Conversely, every code sequence with block error tending to zero satisfies $H(P_S)\\le\\rho C(W)$. Thus strict violation $H(P_S)>\\rho C(W)$ rules out reliable transmission; the positive-entropy equality boundary is not asserted.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $S_1,S_2,\\ldots$ be IID with probability vector $P_S$ on a finite nonempty alphabet $\\mathcal S$, and let $W$ be a finite DMC with capacity $C(W)$ in nats per channel use. Write $H(P_S):=-\\sum_{s:P_S(s)>0}P_S(s)\\ln P_S(s)$ for source entropy in nats. Fix positive integers $n_k$ with $n_k/k\\to\\rho\\in(0,\\infty)$. A deterministic $(k,n_k)$ joint code is as in [[def-it-point-to-point-joint-source-channel-code]]. If $H(P_S)=0$, a zero-error code sequence exists for every such $W$. If $H(P_S)<\\rho C(W)$, there are codes with block error tending to zero. Conversely, every code sequence with block error tending to zero satisfies $H(P_S)\\le\\rho C(W)$. Thus strict violation $H(P_S)>\\rho C(W)$ rules out reliable transmission; the positive-entropy equality boundary is not asserted.",
+      "**Given:** A finite IID source, a finite DMC, positive blocklengths with $n_k/k\\to\\rho>0$, and deterministic joint codes.",
+      "[A1] The source blocks have law $P_S^{\\otimes k}$, and $H(P_S)=-\\sum_{s:P_S(s)>0}P_S(s)\\ln P_S(s)$ is measured in nats.",
+      "[F1] [[def-it-point-to-point-joint-source-channel-code]]: an encoder maps $\\mathcal S^k\\to\\mathcal X^{n_k}$ and a decoder maps $\\mathcal Y^{n_k}\\to\\mathcal S^k$ in the lossless case.",
+      "[F2] [[def-discrete-memoryless-channel-information-capacity]]: $C(W)$ is the supremum of single-letter mutual information in nats per channel use.",
+      "[F3] [[def-discrete-memoryless-channel-operational-capacity]] and [[thm-discrete-memoryless-channel-capacity-formula]]: the maximal-error capacity is the supremum of maximal-error achievable rates and equals $C(W)$.",
+      "[F4] [[lem-it-finite-iid-source-lossless-code-achievability]]: every source-code rate strictly above $H(P_S)$ admits deterministic fixed-length source codes with block error tending to zero.",
+      "[F5] [[lem-discrete-memoryless-channel-n-letter-information-bound]]: for every input law on $\\mathcal X^n$, $I(X^n;Y^n)\\le nC(W)$.",
+      "[F8] [[thm-it-finite-entropy-chain-rule]]: finite entropy and mutual information obey the chain rule, and IID coordinates have $H(S^k)=kH(P_S)$.",
+      "1.1 If $H(P_S)=0$, each nonzero term $-P_S(s)\\ln P_S(s)$ is nonnegative, so exactly one source letter has probability one. Choose that letter $s_0$ and any channel input letter $x_0$, encode every source block as $x_0^{n_k}$, and decode every output to $s_0^k$. This is a deterministic joint code with zero error. [A1, F1, given, choose, construct, algebra]",
+      "1.2 Now assume $0<H(P_S)<\\rho C(W)$. Choose $\\eta>0$ with $H(P_S)+2\\eta<\\rho C(W)$. By [F4], choose source codes with message counts $M_k$, source block error tending to zero, and $\\limsup_k k^{-1}\\ln M_k\\le H(P_S)+\\eta$. Then $\\limsup_k n_k^{-1}\\ln M_k\\le(H(P_S)+\\eta)/\\rho<C(W)$. [A1, F4, given, choose, algebra]",
+      "3.1 Compose the source encoder and decoder from step 1.2 with the restricted channel code from step 2.1. The source-code index can have any distribution, but its channel decoding error is at most the maximal error. The joint block-error event is contained in the union of the source-code error event and the channel message-error event, so its probability is at most the sum of those two probabilities and tends to zero. [F1, step 1.2, step 2.1, given, construct, algebra]"
+    ]
+  },
+  {
+    "id": "thm-it-point-to-point-lossy-source-channel-separation",
+    "source": "items/thm-it-point-to-point-lossy-source-channel-separation.md",
+    "raw_sha256": "a9b516a34e5713b125d946ace5d3e7f35167419085156e0d12c0c2999944143d",
+    "claim": "Let $S_1,S_2,\\ldots$ be IID with probability vector $P_S$ on a finite nonempty alphabet $\\mathcal S$. Let $\\widehat{\\mathcal S}$ be finite nonempty, let $d:\\mathcal S\\times\\widehat{\\mathcal S}\\to[0,d_{\\max}]$ be finite-valued distortion, and let $D_{\\min}:=\\sum_sP_S(s)\\min_{\\hat s}d(s,\\hat s)$. For $D\\ge D_{\\min}$, let $R(D)$ be the finite-alphabet information rate-distortion function in bits from [[def-it-information-rate-distortion-function]] and put $r(D):=(\\ln2)R(D)$ nats per source symbol. Let $W$ be a finite DMC with capacity $C(W)$ nats per channel use, and fix positive integers $n_k$ with $n_k/k\\to\\rho\\in(0,\\infty)$. For either criterion separately\u2014expected distortion $\\limsup_k\\mathbb E d_k\\le D$, or positive-slack excess distortion $\\Pr[d_k>D+\\varepsilon]\\to0$ for every $\\varepsilon>0$\u2014the following hold for deterministic joint codes as in [[def-it-point-to-point-joint-source-channel-code]]:\n\n- If $r(D)<\\rho C(W)$, codes achieving the criterion exist.\n- If $R(D)=0$, a one-message constant-reproduction code achieves both criteria for every channel.\n- Any code sequence achieving either criterion must satisfy $r(D)\\le\\rho C(W)$. Thus $r(D)>\\rho C(W)$ is impossible; the positive-rate equality boundary is not asserted.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Let $S_1,S_2,\\ldots$ be IID with probability vector $P_S$ on a finite nonempty alphabet $\\mathcal S$. Let $\\widehat{\\mathcal S}$ be finite nonempty, let $d:\\mathcal S\\times\\widehat{\\mathcal S}\\to[0,d_{\\max}]$ be finite-valued distortion, and let $D_{\\min}:=\\sum_sP_S(s)\\min_{\\hat s}d(s,\\hat s)$. For $D\\ge D_{\\min}$, let $R(D)$ be the finite-alphabet information rate-distortion function in bits from [[def-it-information-rate-distortion-function]] and put $r(D):=(\\ln2)R(D)$ nats per source symbol. Let $W$ be a finite DMC with capacity $C(W)$ nats per channel use, and fix positive integers $n_k$ with $n_k/k\\to\\rho\\in(0,\\infty)$. For either criterion separately\u2014expected distortion $\\limsup_k\\mathbb E d_k\\le D$, or positive-slack excess distortion $\\Pr[d_k>D+\\varepsilon]\\to0$ for every $\\varepsilon>0$\u2014the following hold for deterministic joint codes as in [[def-it-point-to-point-joint-source-channel-code]]:",
+      "[A1] The source blocks have law $P_S^{\\otimes k}$; distortion is the normalized additive block distortion $d_k$ of [[def-it-single-letter-distortion-and-block-distortion]], with $0\\le d_k\\le d_{\\max}$.",
+      "[F3] [[def-discrete-memoryless-channel-operational-capacity]], [[def-fixed-length-channel-code]], [[def-fixed-length-channel-code-errors]], and [[thm-discrete-memoryless-channel-capacity-formula]]: maximal-error capacity is the supremum of maximal-error achievable rates and equals $C(W)$; per-message errors define maximal error.",
+      "[F6] [[lem-discrete-memoryless-channel-n-letter-information-bound]]: $I(X^n;Y^n)\\le nC(W)$ for every DMC input law."
+    ]
+  },
+  {
+    "id": "thm-it-random-coding-error-exponent",
+    "source": "items/thm-it-random-coding-error-exponent.md",
+    "raw_sha256": "9615b69608737cf1ae3c8895d3011da4e0cf5649b36a744fe9cde538fbe7036d",
+    "claim": "For every finite DMC without an input-cost constraint or feedback and every $R>0$,\n$$E^-_{\\rm av}(R)\\ge E_r(R),\\qquad E^-_{\\rm max}(R)\\ge E_r(R),$$\nwhere $E_r$ is the random-coding function in [[def-it-gallager-and-expurgated-exponent-functions]]. If $0<R<C(W)$, then $E_r(R)>0$. This is an achievability lower bound, not an exact general reliability formula.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "For every finite DMC without an input-cost constraint or feedback and every $R>0$,\n$$E^-_{\\rm av}(R)\\ge E_r(R),\\qquad E^-_{\\rm max}(R)\\ge E_r(R),$$\nwhere $E_r$ is the random-coding function in [[def-it-gallager-and-expurgated-exponent-functions]]. If $0<R<C(W)$, then $E_r(R)>0$. This is an achievability lower bound, not an exact general reliability formula.",
+      "[F1] [[def-discrete-memoryless-channel]] and [[def-fixed-length-channel-code]] and [[def-fixed-length-channel-code-errors]]: a length-$n$ code uses the product channel, a deterministic encoder/decoder, and uniform-message average and maximal errors.",
+      "[F2] [[def-it-gallager-and-expurgated-exponent-functions]]: $E_0(\\rho,P)=-\\ln\\sum_y(\\sum_xP(x)W(y\\mid x)^{1/(1+\\rho)})^{1+\\rho}$ for $\\rho\\ge0$, and $E_r(R)=\\sup_{0\\le\\rho\\le1}(\\max_PE_0(\\rho,P)-\\rho R)$.",
+      "[F4] [[lem-discrete-memoryless-channel-average-to-maximal-expurgation]]: a code of average error $a$ has a subcode with at least half its messages and maximal error at most $2a$.",
+      "[F5] [[def-it-finite-mutual-information]] and [[def-discrete-memoryless-channel-information-capacity]]: $I(P,W)$ is the finite joint/product KL sum in nats, and $C(W)=\\max_PI(P,W)$.",
+      "[F6] [[lem-discrete-memoryless-channel-capacity-is-attained]]: some input law $P^*$ satisfies $I(P^*,W)=C(W)$.",
+      "1.1 Fix $0<\\rho\\le1$, an input law $P$, and an $M$-word codebook drawn independently from $P^n$. Use maximum-likelihood decoding with the lowest-index tie rule. If message $m$ is sent and $y^n$ is received with $W^n(y^n\\mid x_m^n)>0$, an error implies some competitor has likelihood at least the true likelihood. Hence its error indicator is at most $\\left(\\sum_{j\\ne m}\\left[\\frac{W^n(y^n\\mid x_j^n)}{W^n(y^n\\mid x_m^n)}\\right]^{1/(1+\\rho)}\\right)^\\rho,$ which is at least one on every error event; outputs of zero true likelihood carry no channel mass. [F1, given, algebra]",
+      "2.1 Conditional on $x_m^n,y^n$, the power Jensen inequality from step 1.3 bounds the expected $\\rho$-power by the $\\rho$-power of its mean. Independence of each competitor gives that mean as $(M-1)\\frac{A_n(y^n)}{W^n(y^n\\mid x_m^n)^{1/(1+\\rho)}},\\qquad A_n(y^n):=\\sum_{x^n}P^n(x^n)W^n(y^n\\mid x^n)^{1/(1+\\rho)}.$ Multiplication by the true likelihood changes its power to $1-\\rho/(1+\\rho)=1/(1+\\rho)$. Averaging over the transmitted word and summing over outputs therefore bounds ensemble average error by $(M-1)^\\rho\\sum_{y^n}A_n(y^n)^{1+\\rho}.$ [F1, F3, step 1.1, step 1.3, algebra]",
+      "3.1 The product law in [F1] makes $A_n(y^n)=\\prod_{i=1}^n\\sum_xP(x)W(y_i\\mid x)^{1/(1+\\rho)}$. Thus the sum in step 2.1 factors into the $n$th power of the single-letter sum defining $E_0(\\rho,P)$ in [F2]. Some deterministic codebook has average error at most its ensemble mean, so for each $n$ a code exists with $\\epsilon_{\\rm av}\\le\\exp\\{-n[E_0(\\rho,P)-\\rho n^{-1}\\ln(M-1)]\\}.$ [F1, F2, step 2.1, algebra]"
+    ]
+  },
+  {
+    "id": "thm-it-sphere-packing-strict-feasibility-converse",
+    "source": "items/thm-it-sphere-packing-strict-feasibility-converse.md",
+    "raw_sha256": "e0e79e4471e58c54421984c97346ca5bffc64b67f88e9e0b95dceeb714f29429",
+    "claim": "Assume the Axiom of Choice and Countable Choice. Let $W$ be a finite unconstrained DMC. For $P$ on $\\mathcal X$, let $V$ range over row-stochastic channels satisfying $\\operatorname{supp}V(\\cdot\\mid x)\\subseteq\\operatorname{supp}W(\\cdot\\mid x)$, and define\n$$D_P(V)=\\sum_xP(x)D(V(\\cdot\\mid x)\\|W(\\cdot\\mid x)),\\quad I_P(V)=I(X;Y)\\text{ under }P(x)V(y\\mid x),$$\n$$J(P)=\\min_V I_P(V),\\qquad R_\\infty(W)=\\max_PJ(P).$$\nFor every $R>R_\\infty(W)$, the limsup average- and maximal-error exponents satisfy\n$$E^+_{\\rm av}(R)\\le E_{\\rm sp}(R),\\qquad E^+_{\\rm max}(R)\\le E_{\\rm sp}(R),$$\nwhere $E_{\\rm sp}$ is defined in [[def-it-gallager-and-expurgated-exponent-functions]]. The theorem makes no endpoint assertion at $R=R_\\infty(W)$.\n\n",
+    "affected_use_and_coordinate_paragraphs": [
+      "Assume the Axiom of Choice and Countable Choice. Let $W$ be a finite unconstrained DMC. For $P$ on $\\mathcal X$, let $V$ range over row-stochastic channels satisfying $\\operatorname{supp}V(\\cdot\\mid x)\\subseteq\\operatorname{supp}W(\\cdot\\mid x)$, and define\n$$D_P(V)=\\sum_xP(x)D(V(\\cdot\\mid x)\\|W(\\cdot\\mid x)),\\quad I_P(V)=I(X;Y)\\text{ under }P(x)V(y\\mid x),$$\n$$J(P)=\\min_V I_P(V),\\qquad R_\\infty(W)=\\max_PJ(P).$$\nFor every $R>R_\\infty(W)$, the limsup average- and maximal-error exponents satisfy\n$$E^+_{\\rm av}(R)\\le E_{\\rm sp}(R),\\qquad E^+_{\\rm max}(R)\\le E_{\\rm sp}(R),$$\nwhere $E_{\\rm sp}$ is defined in [[def-it-gallager-and-expurgated-exponent-functions]]. The theorem makes no endpoint assertion at $R=R_\\infty(W)$.",
+      "[F1] [[def-discrete-memoryless-channel]] and [[lem-discrete-memoryless-channel-block-kernels-are-stochastic]]: the DMC block law is the product of its row kernels.",
+      "[F2] [[def-fixed-length-channel-code]] and [[def-fixed-length-channel-code-errors]]: messages are uniform, codewords are deterministic, and average error is the average of message errors.",
+      "[F9] [[lem-it-optimized-constant-composition-gallager-identity]]: for every $\\rho>0$, $\\max_PE_{0,\\rm cc}(\\rho,P)=\\max_PE_0(\\rho,P)$.",
+      "[F11] [[def-it-reliability-function]] and [[def-it-gallager-and-expurgated-exponent-functions]]: $E^+_{\\rm av},E^+_{\\rm max}$ are limsup error exponents and $E_{\\rm sp}(R)=\\sup_{\\rho\\ge0}(\\max_PE_0(\\rho,P)-\\rho R)$.",
+      "[F13] [[lem-it-dmc-mutual-information-concave-in-input]]: for every finite channel $V$, $P\\mapsto I_P(V)$ is concave, including on the boundary of the input simplex.",
+      "1.2 Consider any deterministic $M\\ge2$ message code whose every codeword has type $P$, and evaluate its average error $e_V$ through the product channel $V^n$. Let $U$ be its uniform message and $X^n$ its codeword. Since $X^n$ is a function of $U$ and the channel depends on $U$ only through $X^n$, $I(U;Y^n)=H(Y^n)-H(Y^n\\mid U)$. The finite entropy chain rule and nonnegative conditional mutual information in [F4] give $H(Y^n)\\le\\sum_iH(Y_i)$. The product-channel law in [F1] gives $H(Y^n\\mid U)=\\sum_iH(Y_i\\mid X_i)$, so $I(U;Y^n)\\le\\sum_iI(X_i;Y_i)=\\sum_i I_{P_i}(V)$, where $P_i$ is the law of $X_i$ under the uniform message. Every codeword has type $P$, hence $n^{-1}\\sum_iP_i=P$. Concavity [F13] and finite Jensen [F10] imply $I(U;Y^n)\\le nI_P(V)$. Fano's inequality [F3] now yields\n$$e_V\\ge1-\\frac{nI_P(V)+\\ln2}{\\ln M}.$$\nThe entropy formula [F5] and limit [F12] also show that $P\\mapsto I_P(V)$ is continuous, as needed when types vary. [F1, F3, F4, F5, F10, F12, F13, given, algebra]",
+      "2.2 For each row $x$, under $V(\\cdot\\mid x)$ the log ratio $\\ln[V(Y\\mid x)/W(Y\\mid x)]$ has mean $D(V_x\\|W_x)$ and variance bounded uniformly over allowed $V$: the finite set of positive $W(y\\mid x)$ has a positive minimum, and $t(\\ln(t/W(y\\mid x)))^2$ extends continuously at $t=0$. Thus for some finite $K_W$, a codeword of type $P_n$ has log ratio $L=\\ln[V^n(Y^n\\mid x^n)/W^n(Y^n\\mid x^n)]$ with mean $nD_{P_n}(V)$ and variance at most $nK_W$. On $L>n(D_{P_n}(V)+\\eta)$, the squared centered deviation exceeds $n^2\\eta^2$, so the event indicator is at most $(L-\\mathbb E L)^2/(n^2\\eta^2)$. Taking expectations gives $V^n\\{L>n(D_{P_n}(V)+\\eta)\\}\\le K_W/(n\\eta^2)$. On its complement $W^n\\ge e^{-n(D_{P_n}(V)+\\eta)}V^n$; integrating over decoder error events gives $e_W\\ge e^{-n(D_{P_n}(V)+\\eta)}\\left(e_V-\\frac{K_W}{n\\eta^2}\\right).$ [F1, F2, step 1.2]",
+      "3.1 At each $n$, choose a code attaining the finite-block minimum average error. For any such code of size $M_n$, partition its messages into input types; there are at most $(n+1)^{|\\mathcal X|}$ types. Restrict to a largest type class of size $M'_n\\ge M_n/(n+1)^{|\\mathcal X|}$. Reindex the retained messages and map every old decoder output outside the retained class to one fixed retained message. For each retained message this decoder cannot increase its error, so if $e_n$ is the original average error and $e'_n$ the restricted one, then $e_n\\ge(M'_n/M_n)e'_n$. Since $M_n=\\lceil e^{nR}\\rceil$ and $R>0$ by step 1.1, $M'_n$ grows exponentially and $n^{-1}\\ln M'_n\\to R$ by [F12]. Along any subsequence realizing the limsup exponent, compactness gives a further subsequence of selected types $P_n\\to P$. For each allowed $V$ with $I_P(V)<R$, continuity from step 1.2 makes its Fano lower bound bounded away from zero; step 2.2 then gives $\\limsup -n^{-1}\\ln e_n\\le D_P(V)+\\eta$, since the type-class factor costs only $|\\mathcal X|\\ln(n+1)/n$. Letting $\\eta\\downarrow0$ and taking the infimum over strict-feasible $V$ proves $E^+_{\\rm av}(R)\\le\\sup_P\\inf_{V:I_P(V)<R}D_P(V)=\\sup_PS_P(R),$ where the equality is step 2.1. Since every code's maximal error is at least its average error, $P^*_{\\rm max}(n,M_n)\\ge P^*_{\\rm av}(n,M_n)$ and the same upper bound holds for $E^+_{\\rm max}$. [F1, F2, F3, F11, F12, step 1.1, step 1.2, step 2.1, step 2.2]",
+      "3.2 Fix $P$. Form the upper image $G=\\{(a,b):a\\ge I_P(V),\\ b\\ge D_P(V)\\text{ for some allowed }V\\}$ and the open convex set $O=(-\\infty,R)\\times(-\\infty,S_P(R))$. They are nonempty convex sets. If a point lay in both, its witnessing $V$ would satisfy $I_P(V)<R$ and $D_P(V)<S_P(R)$, contradicting the definition of the closed minimum; hence they are disjoint. Convexity of $G$ follows from step 2.1. Apply [F8] under [A1] to obtain a nonzero normal separating $G$ from $O$. Because $G$ is upper in each coordinate, the separating normal in the orientation $a\\cdot g\\le a\\cdot o$ must have nonpositive coordinates (otherwise increasing that coordinate of $g$ violates separation). Reversing its sign gives weights $u,v\\ge0$, not both zero, with $uI_P(V)+vD_P(V)\\ge uR+vS_P(R)\\quad\\text{for every allowed }V.$ Strict feasibility from step 1.1 forces $v>0$: if $v=0$, then $u>0$ and the inequality contradicts $I_P(V_0)<R$. Normalize $v=1$ and put $\\rho=u/v\\ge0$. [A1, F8, step 1.1, step 2.1, algebra]"
+    ]
+  }
+]

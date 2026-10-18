@@ -4,11 +4,7 @@ kind: example
 title: Quantile coupling on the real line
 deps: ["thm-probability-law-and-distribution-function-correspondence", "thm-portmanteau-theorem", "thm-froda", "thm-lebesgue-measure-of-a-box-of-every-kind", "prop-countable-subsets-of-rn-are-lebesgue-null", "def-countable-choice", "def-axiom-of-choice"]
 verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/ex-quantile-coupling-on-the-real-line.json
 sources:
   references:
     - title: Durrett, Theorem 3.2.8, pp. 118–119
@@ -42,13 +38,27 @@ $$\lambda_n(R) \;=\; \prod_{i<n}(b_i-a_i).$$
 
 In particular this covers the four one-dimensional face conventions in each coordinate — the open box, the closed box $[a,b]$, the half-open box $B(a,b) = \prod_{i<n}(a_i,b_i]$ of def-half-open-box, and every mixture of them, in any combination of coordinates — and it gives measure $0$ to all of them whenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite parameters the value is already $\lambda_n(B) = \operatorname{vol}(B)$ (thm-lebesgue-measure-is-a-complete-measure).
 
-[F3] [[thm-froda]]: Let $I \subseteq \mathbb{R}$ be order-convex (def-interval) and let $f : I \to \mathbb{R}$ be monotone (def-monotone-function). Then the set
+[F3] [[thm-froda]]: Let $I \subseteq \mathbb{R}$ be order-convex (def-interval) and let
+$f : I \to \mathbb{R}$ be monotone (def-monotone-function). Then the set
 
 $$D \;:=\; \{\, c \in I : f \text{ is discontinuous at } c \,\}$$
 
-(def-classification-of-discontinuities) is **at most countable** (def-countable).
+(def-classification-of-discontinuities) is **at most countable**
+(def-countable).
 
-More precisely, the proof exhibits an injection $J : D \to \mathbb{N}$ (def-injection-surjection-bijection) built from one fixed enumeration of the rationals: at a discontinuity $c$ interior to $I$ the value $J(c)$ is read off the **least index** of a rational lying in the gap $\bigl(\lim_{x \to c^{-}} f(x),\ \lim_{x \to c^{+}} f(x)\bigr)$, which is a nonempty open interval by thm-monotone-discontinuities-are-jumps. The map $J$ is therefore determined by $f$ and by the fixed enumeration, and **no choice principle is used**: least indices are canonical by thm-well-ordering-principle, and nothing anywhere in the proof is selected without being determined.
+More precisely, the proof exhibits an injection $J : D \to \mathbb{N}$
+(def-injection-surjection-bijection) built from one fixed enumeration of the
+rationals. Write $L^{-}(c):=\lim_{x \to c^{-}}f(x)$ and
+$L^{+}(c):=\lim_{x \to c^{+}}f(x)$. At a discontinuity $c$ interior to $I$,
+the value $J(c)$ is read off the **least index** of a rational in the ordered gap
+$\bigl(\min\{L^{-}(c),L^{+}(c)\},\ \max\{L^{-}(c),L^{+}(c)\}\bigr)$.
+This is nonempty for either direction of monotonicity by
+thm-monotone-discontinuities-are-jumps; the at most two included endpoints
+of $I$ receive separate even codes as in the proof. The map
+$J$ is therefore determined by $f$ and by the fixed enumeration, and **no choice
+principle is used**: least indices are canonical by
+thm-well-ordering-principle, and nothing anywhere in the proof is selected
+without being determined.
 
 [F4] [[thm-portmanteau-theorem]]: For Borel probabilities $\mu_n,\mu$ on a metric space S, the following are equivalent: (i) $\mu_n\Rightarrow\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\limsup_n\mu_n(F)\le\mu(F)$ for every closed F; (iv) $\liminf_n\mu_n(G)\ge\mu(G)$ for every open G; (v) $\mu_n(A)\to\mu(A)$ for every Borel A with $\mu(\partial A)=0$.
 

@@ -1,0 +1,11 @@
+# Batch 63 q=1 endpoint, first outside cycle
+
+The full latest review1/repair1 reports, complete actual Example, XXZ Definition, local-matrix proof, Hamiltonian theorem, current quotient-tower proof and both assigned pages were read. The Example's proof3.1 has a genuine local contradiction: it adds i/2(Z1−Z3) at q=1, whereas the actual supplier has coefficient i sin(gamma)/2. For real gamma with exp(i gamma)=1, sin(gamma)=0 and cos(gamma)=1. Thus the endpoint contribution vanishes.
+
+The proposal removes only that spurious summand and explicitly states why it vanishes. It retains the complete Statement byte-for-byte, including delta2, the mixed-spin block, the exact real K matrix and H3=diag(0,−K,−K,0). Those blocks follow by adding the actual e1/e2 matrices in proof1.1 and negating; the surviving Pauli expression agrees. The open bond range is still (1,2),(2,3), with no bond (3,1). No general-q endpoint field, non-self-adjointness conclusion at other parameters, boundary convention or scaling claim changes.
+
+The canonical dependency/alias/wiki-link scan finds no direct, indirect or textual-only item consumers of this Example, and no aliases. Both assigned pages were read and archived; their descriptive q1 block context remains valid and needs no change. The target's frontmatter, sources, deps and Statement remain byte-identical. There are no published edit targets.
+
+The actual immutable raw baseline comparison over twenty-four assigned items and both pages finds one native changed carrier: the quotient-tower theorem. Its genuine reflection-invariance, adjoint cap/cup and positive isometric path normalization repair was read in full and is preserved verbatim. The endpoint Example itself still matches its authenticated baseline before this isolated proposal. Baseline and current raw preimages, native diffs, report inputs and exact hashes are retained. This focused correction neither reopens nor replaces the quotient-tower proof.
+
+No new external source reading, proof audit, validation stamp, native state/report change, metadata edit or gate result is claimed. Deterministic byte checks confirm current target, consumer inventory and assigned native input currency. Root owns a fresh guard after drain, installation of the isolated Example proposal, quote mirrors and ordinary recorded repair checks.

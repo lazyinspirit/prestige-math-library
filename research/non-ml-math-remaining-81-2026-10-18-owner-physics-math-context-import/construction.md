@@ -1,0 +1,34 @@
+# Exact selected physics mathematics context import
+
+The implementation is ready for root review. **No actual source import, canonical source edit, shared-tool installation, engine control, readiness record, gate or commit was performed. Physics was read-only.**
+
+The proposed mechanism is in the new disjoint files:
+
+- `tools/physics-math-context-import.mjs`
+- `tools/physics-math-context-import.test.mjs`
+- `tools/physics-math-context-import.md`
+
+The bulk `tools/physics-support/physics-imports.mjs` is mathematics-to-physics, imports every eligible published supplier and pages, updates ignore state, and permits authenticated refresh of its own pins. It is not suitable for this reverse, selected context operation. Existing same-ID relocation tools move page ownership rather than import a new source namespace. The new small CLI supplies the missing selected receipt/verification route.
+
+`inspection.json` proves the exact missing-root closure is five canonical IDs: the Fock CCR/CAR lemma, its Fock/test-space definition, and the three tensor construction/map/permutation lemmas. All current raw bytes match authentic Git ancestor carriers already marked published. All five are ordinary mathematical classes with explicit mathematical domain and only mathematical-premise dependency roles. The 30 immediate existing root canonical suppliers stop traversal and are bound by exact raw hashes. All selected source wikilinks resolve to those root sources or the five selected IDs. No root destination exists. No other physics supplier, page, category, path, planned item or empirical premise is included.
+
+The exact context fingerprint is `51a2a7cb02e2a3b4db9bb090c1e82620a3281a76022b967c0400967c730cd2a8`.
+
+There is an important metadata limit: the three tensor lemmas have no verification mapping. The Fock lemma and definition have verification records explicitly attributed to the completed physics run's owner-accepted delegated review/publication, with its stated limitations. Git publication alone does not establish an audit. Preserve all five raw files, those original markers and their absence, their source-run level fields, provenance, bodies and IDs. The import receipt identifies `source_reference_root: physics` so original evidence paths retain their original namespace.
+
+Root depcheck's publication-audit loop checks selected subjects, while the imported five remain external prerequisite context. It is unchanged by the proposed integration. Any imported ID selected as an audit/authoring subject is rejected explicitly; there is no published-audit waiver, new math verification stamp, fabricated native coverage, or new publication. Genuine source/dependency reading is separately attributed to `/root/math81_monotone_repairs`, whose focused artifact is `research/non-ml-math-remaining-81-2026-10-18-owner-car-fock-completion/import-context-proof-review/review.json`. The scientific owner read all five full bodies, 30 immediate root supplier interfaces and named completion context, preserving the minor tensor bilinearity wording limitation without source alteration. Root must actually review and accept that artifact; the code's schema cannot invent a reading.
+
+The tool rejects missing/failed/stale scientific review, changed supporting evidence, invalid/unsigned/stale root acceptance, an unexpected closure, any destination or alias collision, symlinks, an ineligible physical or unproved supplier, source bytes differing from authentic published Git history, and any frontier capture of an imported ID. It preflights the complete closure before copying. Exclusive creates and rollback preserve existing files; copied root context is read-only. No refresh command or silent overwrite exists. Verification rechecks the exact bytes, original source publication, root boundary, current review/acceptance and ownership list.
+
+`integration.patch` is **unapplied**. It has exact guarded hunks for `depcheck.mjs` and `frontier-snapshot.mjs`; `integration-guards.json`, `archive/` and `proposed/` provide current preimages and complete reviewable candidates. Apply hunks against the current shared files after checking the guard/diff and preserving foreign numerical changes. Do not replace whole shared files. Depcheck verifies only reached import registries. Frontier hashing binds the reached receipt; input-path sealing additionally covers the actual physics source pins, scientific review, root acceptance and supporting evidence. The cache belongs to one ordinary snapshot. Existing consumer, metadata, audit, graph and native gate conditions remain.
+
+After root reviews the concrete proposal, replace the placeholders in `owner-acceptance.template.json` with root's actual disposition, time and scientific reason and save it as `root-acceptance.json`. The template is not acceptance evidence. Then run:
+
+```sh
+node tools/physics-math-context-import.mjs import --run non-ml-math-remaining-81-2026-10-18 --selection research/non-ml-math-remaining-81-2026-10-18-owner-physics-math-context-import/selection.json --review research/non-ml-math-remaining-81-2026-10-18-owner-car-fock-completion/import-context-proof-review/review.json --acceptance research/non-ml-math-remaining-81-2026-10-18-owner-physics-math-context-import/root-acceptance.json --receipt research/non-ml-math-remaining-81-2026-10-18-physics-math-context-import.json
+node tools/physics-math-context-import.mjs verify --receipt research/non-ml-math-remaining-81-2026-10-18-physics-math-context-import.json
+```
+
+The importer generates the actual `owned_paths` for its five copied root carriers. `closeout-additional-paths.proposed.json` supplies the ordinary packaging-policy rows, pointing to the generated import receipt; it separately proposes ownership of the three new tooling/docs files using `repair.json`. Root must use the actual imported receipt and current tool hashes. These are exact additional-path packaging rights; the five remain absent from all frontier subject lists. Run-owned research artifacts are retained by ordinary closeout evidence ownership; physics originals are excluded from root commit ownership.
+
+Six meaningful tests pass; exact TAP is `tooling-tests.tap`. They use temporary Git fixtures and test closure stopping, preserved source bytes and audit absence, immutability, physical rejection, source-history failure, canonical/alias collision, symlinks, publication-only/failed/stale review rejection, root acceptance identity, evidence drift, upstream/local drift, frontier capture and false ownership lists. The new module and both proposed shared files pass `node --check`; the unapplied integration passes `git apply --check`. The real selected inspection was read-only and successful. These are tooling checks, not mathematical acceptance or gates. Root owns installation, actual selected import, rehashing/readiness and the ordinary native batteries.

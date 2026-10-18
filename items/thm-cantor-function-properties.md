@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-cantor-function, thm-cantor-set-ternary-description, thm-cantor-set-properties, def-cantor-set, def-series, thm-geometric-series, thm-nonnegative-series-bounded-partial-sums, lem-series-linearity, def-interval, def-bounded-set, lem-sup-unique, lem-sup-epsilon, def-infimum, lem-inf-epsilon, thm-infimum-property, def-integer-power, lem-power-laws, thm-recursion, thm-induction-principle, thm-well-ordering-principle, lem-geometric-sequence-null, def-real-limit, lem-limit-unique, def-sequence, def-open-and-closed-in-r, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-neighbourhood-r, lem-finite-set-has-max, def-max-min, def-injection-surjection-bijection, lem-of-abs-value, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
+deps: [lem-finite-sum-laws, def-cantor-function, thm-cantor-set-ternary-description, thm-cantor-set-properties, def-cantor-set, def-series, thm-geometric-series, thm-nonnegative-series-bounded-partial-sums, lem-series-linearity, def-interval, def-bounded-set, lem-sup-unique, lem-sup-epsilon, def-infimum, lem-inf-epsilon, thm-infimum-property, def-integer-power, lem-power-laws, thm-recursion, thm-induction-principle, thm-well-ordering-principle, lem-geometric-sequence-null, def-real-limit, lem-limit-unique, def-sequence, def-open-and-closed-in-r, thm-closure-characterisations-r, def-interior-closure-boundary-r, def-neighbourhood-r, lem-finite-set-has-max, def-max-min, def-injection-surjection-bijection, lem-of-abs-value, def-complete-ordered-field, def-ordered-field, cor-of-one-positive, lem-of-add-order, lem-of-sign-rules]
 justified_by: []
 forward_refs: [ex-cantor-function-values]
 aliases: []
@@ -21,6 +21,7 @@ verification:
     verdict: pass
     date: 2026-07-27
   audited: 2026-07-27
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/thm-cantor-function-properties.json
 sources:
   scraped: []
   references:
@@ -63,7 +64,7 @@ order.
 
 [L1] $\Phi(a) = \sum_{k \ge 0} a_k 3^{-k-1}$ is a bijection from $D$ onto $C$, with two-sided inverse $\Phi^{-1}$; $\gamma(x) = \sum_{k \ge 0}(a_k 2^{-1})2^{-k-1}$ for $a = \Phi^{-1}(x)$, with values in $[0,1]$; $c(x) = \sup\{\gamma(t) : t \in C,\ t \le x\}$, the supremum of a nonempty set bounded above by $1$ and containing $\gamma(0)$ ([[thm-cantor-set-ternary-description]], [[def-cantor-function]], [[def-injection-surjection-bijection]], [[def-complete-ordered-field]], [[def-bounded-set]], [[lem-sup-unique]]).
 
-[L2] $\sum_{k=0}^{\infty} r^{k} = 1/(1-r)$ for $|r|<1$, so $\sum_{k \ge m} 2^{-k-1} = 2^{-m}$ and $\sum_{k \ge m} 2 \cdot 3^{-k-1} = 3^{-m}$; convergent series add and scale termwise; a series of nonnegative terms has nonnegative sum and all partial sums at most the sum ([[thm-geometric-series]], [[lem-series-linearity]], [[thm-nonnegative-series-bounded-partial-sums]], [[def-series]], [[def-integer-power]], [[lem-power-laws]]).
+[L2] $\sum_{k=0}^{\infty} r^{k} = 1/(1-r)$ for $|r|<1$, so $\sum_{k \ge m} 2^{-k-1} = 2^{-m}$ and $\sum_{k \ge m} 2 \cdot 3^{-k-1} = 3^{-m}$; convergent series add and scale termwise; finite sums preserve termwise inequalities and split at each finite index; a nonnegative series whose partial sums are bounded above converges to their supremum, so if all its partial sums lie in $[0,M]$, its sum lies in $[0,M]$ ([[lem-finite-sum-laws]], [[thm-geometric-series]], [[lem-series-linearity]], [[thm-nonnegative-series-bounded-partial-sums]], [[def-series]], [[def-integer-power]], [[lem-power-laws]]).
 
 [L3] $C$ is closed and $0, 1 \in C$; $\overline{A}$ is the set of points every neighbourhood of which meets $A$, and a closed set equals its closure ([[thm-cantor-set-properties]], [[def-cantor-set]], [[def-open-and-closed-in-r]], [[thm-closure-characterisations-r]], [[def-interior-closure-boundary-r]], [[def-neighbourhood-r]]).
 
@@ -83,7 +84,7 @@ order.
 
 **Proof technique:** direct.
 
-1.1 **Comparison of two digit sequences.** Let $a \ne b$ in $D$ and let $k$ be the least index with $a_k \ne b_k$, which exists by [L5]; suppose $a_k = 0$ and $b_k = 2$. Then $\Phi(b) - \Phi(a) = \sum_{j \ge 0}(b_j - a_j)3^{-j-1}$ by [L2], the terms with $j < k$ vanish, and the tail $R := \sum_{j \ge k+1}(b_j - a_j)3^{-j-1}$ satisfies $|R| \le \sum_{j \ge k+1} 2 \cdot 3^{-j-1} = 3^{-k-1}$ by [L2], since $|b_j - a_j| \le 2$; hence $\Phi(b) - \Phi(a) \ge 2 \cdot 3^{-k-1} - 3^{-k-1} = 3^{-k-1} > 0$. The same computation with the halved digits gives $\gamma(\Phi(b)) - \gamma(\Phi(a)) = 2^{-k-1} + R'$ with $|R'| \le \sum_{j \ge k+1} 2^{-j-1} = 2^{-k-1}$, so $\gamma(\Phi(b)) \ge \gamma(\Phi(a))$. Consequently, for $s, t \in C$ with $s \le t$ one has $\gamma(s) \le \gamma(t)$: this is trivial if $s = t$, and otherwise the least index $k$ at which the digit sequences differ must have the digit of $t$ equal to $2$, by the first computation applied both ways. [given, L1, L2, L5, L9]
+1.1 **Comparison of two digit sequences.** Let $a \ne b$ in $D$ and let $k$ be the least index with $a_k \ne b_k$, which exists by [L5]; suppose $a_k = 0$ and $b_k = 2$. For each $d\in\{a,b\}$ consider its nonnegative ternary tail $A_d:=\sum_{j\ge k+1}d_j3^{-j-1}$. Each finite partial sum lies between $0$ and the corresponding partial sum of $\sum_{j\ge k+1}2\cdot3^{-j-1}$ by finite-sum comparison in [L2], since $0\le d_j\le2$. The latter partial sums are at most the geometric sum $M:=3^{-k-1}$. Thus the nonnegative-series supremum criterion in [L2] gives convergence and $0\le A_a,A_b\le M$. Splitting off the common finite prefix and the $k$th term, then using series linearity in [L2], gives $\Phi(b)-\Phi(a)=2\cdot3^{-k-1}+A_b-A_a\ge2M-M=M>0$. This bounds the two nonnegative tails separately before taking their difference; it does not invoke an absolute-comparison theorem for a signed series. For the binary images, put $B_d:=\sum_{j\ge k+1}(d_j2^{-1})2^{-j-1}$. Each coefficient $d_j2^{-1}$ is $0$ or $1$, so the same finite-partial-sum and supremum argument, now using $\sum_{j\ge k+1}2^{-j-1}=H:=2^{-k-1}$, gives convergence and $0\le B_a,B_b\le H$. Prefix splitting and linearity therefore give $\gamma(\Phi(b))-\gamma(\Phi(a))=2^{-k-1}+B_b-B_a\ge H-H=0$. Consequently, for $s,t\in C$ with $s\le t$ one has $\gamma(s)\le\gamma(t)$: this is trivial if $s=t$, and otherwise the least differing index must have the digit of $t$ equal to $2$, since the opposite ordering of those two digits would give $s>t$ by the ternary comparison just proved. [given, L1, L2, L5, L9]
 
 1.2 **Values at the endpoints.** The constant sequence $\bar 0$ has $\Phi(\bar 0) = 0$ and $\gamma(0) = 0$; the constant sequence $\bar 2$ has $\Phi(\bar 2) = \sum_{k \ge 0} 2 \cdot 3^{-k-1} = 1$ and $\gamma(1) = \sum_{k \ge 0} 2^{-k-1} = 1$, by [L2]. Both $0$ and $1$ lie in $C$ by [L3]. [L1, L2, L3]
 

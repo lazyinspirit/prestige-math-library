@@ -1,0 +1,129 @@
+from pathlib import Path
+import json,yaml,re,datetime,hashlib
+run='non-ml-math-remaining-81-2026-10-18';r=Path('research')/(run+'-owner-root-unity-tilting-completion');prefix=Path('research')/(run+'-batch-68')
+original=json.loads((r/'before/research'/f'{run}-batch-68.item-scope.json').read_text())
+ids=list(original)
+for sub in ['frobenius','category','tilting','negligible']:
+ for x in json.loads((r/sub/'proposal-inventory.json').read_text())['items']:
+  if x['id'] not in ids:ids.append(x['id'])
+ids += ['lem-simply-laced-quantum-braid-symmetries-preserve-the-integral-form','thm-simply-laced-integral-convex-root-pbw-bases','lem-small-root-unity-image-has-braid-stable-pbw-decompositions','thm-root-of-unity-strong-affine-linkage-for-weyl-and-tilting-modules','lem-affine-closest-pairs-and-downward-facet-translation']
+assert len(ids)==len(set(ids))==33
+metas={};texts={}
+for i in ids:
+ s=(Path('items')/(i+'.md')).read_text();m=yaml.safe_load(s.split('---',2)[1]);assert m['status']=='draft';metas[i]=m;texts[i]=s
+# Actual logical dependency order inside this batch. External prerequisites remain context, not reassigned claims.
+ordered=[];todo=set(ids)
+while todo:
+ ready=sorted(i for i in todo if not(set(metas[i].get('deps',[]))&todo))
+ assert ready,'cycle in new local construction'
+ ordered+=ready;todo-=set(ready)
+old=json.loads(Path(str(prefix)+'.pages.json').read_text());oldrows={x['id']:x for p in old for x in p['items']}
+def section(s):
+ for h in ['Definition','Statement','Statement refuted','Example','Counterexample']:
+  mat=re.search(r'^## '+re.escape(h)+r'\n(.*?)(?=\n## |\Z)',s,re.S|re.M)
+  if mat:return mat.group(1).strip()
+ raise Exception('missing claim')
+for page in old:
+ selected=[i for i in ordered if (metas[i]['kind'] in ['example','counterexample']) == (page['kind']=='B')]
+ rows=[]
+ for i in selected:
+  m=metas[i];row=oldrows.get(i,{}).copy();row.update({'id':i,'kind':m['kind'],'title':m['title'],'deps':m.get('deps',[]),'statement':section(texts[i]),'strategy':row.get('strategy',m.get('proof_strategy') or 'Explicit definition; constructions are supplied by the stated local suppliers.'),'axiom_use':row.get('axiom_use','Inherited Axiom of Choice exactly as declared in the carrier.' if 'def-axiom-of-choice' in m.get('deps',[]) else 'No additional Choice; finite constructions as stated in the carrier.'),'provenance':m['provenance'],'sources':m.get('sources',{}).get('references',[]),'justified_by':m.get('justified_by',[])})
+  if 'dependency_level' in m:row['dependency_level']=m['dependency_level']
+  rows.append(row)
+ page['items']=rows
+Path(str(prefix)+'.pages.json').write_text(json.dumps(old,indent=2,ensure_ascii=False)+'\n')
+Path(str(prefix)+'.item-scope.json').write_text(json.dumps(ordered,indent=2)+'\n')
+# No shared plan/ledger/run scope or levels are mutated.
+(r/'construction/integrated-item-inventory.json').write_text(json.dumps({'created_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'ids':ordered,'proof_bearing':[i for i in ordered if metas[i]['kind']!='definition'],'definitions':[i for i in ordered if metas[i]['kind']=='definition'],'external_dependencies':sorted(set(d for i in ordered for d in metas[i].get('deps',[]) if d not in ids)),'levels_owner':'root; no level recomputation or readiness performed'},indent=2)+'\n')
+# Exact current interface prose; original contents archived before any edit.
+p=Path('library/quantum-groups-and-crystal-bases/quantum-groups-at-roots-of-unity-and-tilting-quotients.md');s=p.read_text();s=re.sub(r'^items:.*$', 'items: ['+', '.join(x['id'] for x in old[0]['items'])+']',s,flags=re.M)
+header=s.split('---',2)[0]+'---'+s.split('---',2)[1]+'---\n\n'
+p.write_text(header+'''This page constructs the good-order quantum Frobenius map and the selected
+higher-rank tilting quotient. The comparison of quantum-group forms keeps the
+ordinary and divided-power specializations distinct. Every carrier remains draft.
+
+Companion: [[quantum-groups-at-roots-of-unity-and-tilting-quotients-examples]].
+
+## Reading prerequisites
+
+[[hopf-hecke-and-quantum-symmetry-interfaces]] provides reading context. Its
+rational spectral R-matrix is not the universal root-category braiding used here.
+
+## Forms and quantum Frobenius
+
+[[def-root-of-unity-quantum-group-forms]] fixes the coefficient rings, toral
+lattice and root-order conditions. A quotient imposing only simple-root powers
+is explicitly a candidate in higher rank; the ordinary-generator small image
+and its toral quotient are defined separately. The original rank-one Hopf
+quotient and specialization counterexample remain complete calculations.
+
+[[thm-quantum-frobenius-map-and-kernel-in-good-root-order-regime]] proves the
+surjective Hopf map for every semisimple isogeny lattice, finite Cartan type,
+primitive odd root order relatively prime to all symmetrizers, including the
+required exclusion of multiples of three in G2. Its exact algebra kernel is
+generated by the ordinary simple root generators and all toral differences
+K_h minus one. This kernel is not identified with Hopf coinvariants by terminology.
+Quantum Lucas, higher divided Serre identities and the actual toral quotient
+supply the construction before the theorem is applied.
+
+## The actual root module category and tiltings
+
+For the quotient branch, select a complex simple simply-laced root system,
+its full weight lattice and coroot lattice, odd $\\ell>h$, and
+$\\operatorname{ord}(\\zeta^2)=\\ell$. Both orders $\\ell$ and $2\\ell$ of
+$\\zeta$ are allowed. Full toral quantum-binomial weight characters are part
+of type 1; ordinary torus eigenvalues alone do not distinguish root weights.
+[[lem-lusztig-divided-power-form-is-a-hopf-integral-form]] and
+[[thm-root-of-unity-lusztig-module-category-is-braided-rigid]] construct the
+actual tensor action, locally finite integral braiding, duals and spherical
+pivot $K_{-2\\rho^\\vee}$ in the library coproduct convention.
+
+[[def-root-of-unity-weyl-and-dual-weyl-module-families]] and the specialization
+lemma construct the Weyl families. Actual adapted integral bases give saturated
+Weyl filtrations with free quotients; arbitrary lattices are not substituted.
+Finite highest-weight truncations represent exact weight functors and supply
+projective reciprocity. Universal extensions then construct and classify every
+indecomposable tilting. Tensor and summand closure are proved locally.
+
+## Small PBW and strong linkage
+
+The braid symmetries are constructed by presentation checks and rank-one
+operators. Exact A2 normal-order identities and integral common spans yield
+[[thm-simply-laced-integral-convex-root-pbw-bases]]. Actual root specialization
+then gives the finite ordinary image with residue PBW bases and free parabolic
+induction, for both parameter orders. The finite-Hopf Frobenius theorem supplies
+its one-dimensional half socles. Rank-one Borel kernels prove baby strong
+linkage; a locally finite completed-character comparison transfers it to Weyl
+modules, and reciprocity transfers it to tilting sections. This is the stronger
+statement used in the wall argument, not merely orbit membership and dominance.
+
+## The finite tilting quotient and fusion rules
+
+[[thm-negligible-morphisms-form-a-tensor-ideal-on-root-of-unity-tiltings]] proves
+tensor-ideal closure by an explicit pivotal partial trace and obtains the
+semisimple quotient from finite endomorphism radicals.
+[[thm-root-of-unity-outside-alcove-tiltings-are-negligible]] proves that every
+outside-alcove indecomposable becomes zero. Its wall construction uses a lower
+facet, corrected integral displacements including E8, and the actual strong
+linkage and closest-pair equality argument. Closed-bottom Weyl modules are
+simple tiltings, including the zero-dimension boundary.
+
+[[thm-verlinde-tilting-quotient-in-simply-laced-large-odd-order-regime]] identifies
+the surviving simple labels by
+$A_\\ell=\\{\\nu\\in P^+:(\\nu+\\rho,\\theta)<\\ell\\}$ and proves finite
+semisimplicity, rigidity, braiding and the spherical trace. It derives both the
+affine alternating tensor-coefficient formula and the affine weight Racah
+formula from actual tilting summands and quantum-dimension signs. No inversion
+of a monodromy matrix is used. Modularity remains a separate nondegeneracy claim.
+
+## Sources and construction evidence
+
+The original five-source harvest and immutable native result are preserved.
+Andersen–Paradowski's correct DOI is 10.1007/BF02099312; six authentic retrieval
+attempts did not yield its full text. The complete local proof chain above uses
+actually consulted full sources and actual canonical prerequisite proofs. The
+source disposition and any new fetch stamps remain the run owner's decision.
+See [source review](../../research/non-ml-math-remaining-81-2026-10-18-owner-root-unity-tilting-completion/construction/source-review.md)
+and [batch coverage](../../research/non-ml-math-remaining-81-2026-10-18-batch-68.coverage.json).
+''')
+print(json.dumps({'items':len(ordered),'definitions':sum(metas[i]['kind']=='definition' for i in ordered),'A':len(old[0]['items']),'B':len(old[1]['items'])}))

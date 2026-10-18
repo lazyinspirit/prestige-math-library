@@ -1,0 +1,104 @@
+436: function publishedDependencies(batchIds, allRunIds) {
+437:   const Y = yaml();
+438:   const owners = new Map();
+439:   const claimed = claimedPublishedIds();
+440:   const itemMetadata = new Map();
+441:   const producers = manifestProducers();
+442:   const metadataFor = (id) => {
+443:     if (itemMetadata.has(id)) return itemMetadata.get(id);
+444:     const path = R('items', `${id}.md`);
+445:     let item = null;
+446:     if (existsSync(path)) {
+447:       try { item = Y.parse(split(readFileSync(path, 'utf8')).fm) ?? {}; }
+448:       catch { /* An unreadable item is excluded from dependency traversal. */ }
+449:     }
+450:     itemMetadata.set(id, item);
+451:     return item;
+452:   };
+453:   for (const consumer of batchIds) {
+454:     const queue = [consumer];
+455:     const seen = new Set();
+456:     while (queue.length) {
+457:       const id = queue.shift();
+458:       if (seen.has(id)) continue;
+459:       seen.add(id);
+460:       const item = metadataFor(id);
+461:       if (!item) continue;
+462:       const dependencies = [...(Array.isArray(item.deps) ? item.deps : []),
+463:         ...(Array.isArray(item.justified_by) ? item.justified_by : [])]
+464:         .filter((target) => typeof target === 'string');
+465:       for (const target of dependencies) {
+466:         const targetItem = metadataFor(target);
+467:         if (!targetItem) continue;
+468:         // Current-manifest prerequisites are traversal context, never
+469:         // published subjects; their real edges may reach published suppliers.
+470:         if (allRunIds.has(target)) {
+471:           const runOwners = producers.get(target) ?? [];
+472:           if (runOwners.length !== 1 || (targetItem.status !== 'published'
+473:             && !currentRunDraft(targetItem, runOwners))) continue;
+474:           queue.push(target);
+475:           continue;
+476:         }
+477:         if (targetItem.status !== 'published' && !claimed.has(target)) continue;
+478:         if (!owners.has(target)) owners.set(target, new Set());
+479:         owners.get(target).add(consumer);
+480:         queue.push(target);
+481:       }
+482:     }
+483:   }
+484:   return owners;
+489: function inRunDependencies(batch, consumers, manifests = manifestItems()) {
+490:   const Y = yaml(), metadata = new Map(), producers = manifestProducers(manifests), result = new Map();
+491:   const claimed = claimedPublishedIds();
+492:   const itemFor = id => {
+493:     if (!metadata.has(id)) {
+494:       const path = R('items', `${id}.md`);
+495:       let item = null;
+496:       if (/^[a-z][a-z0-9-]*$/.test(id) && existsSync(path)) {
+497:         try { item = Y.parse(split(readFileSync(path, 'utf8')).fm) ?? {}; }
+498:         catch { /* Unreadable prerequisites cannot establish reachability. */ }
+499:       }
+500:       metadata.set(id, item);
+501:     }
+502:     return metadata.get(id);
+503:   };
+504:   for (const consumer of consumers) {
+505:     const queue = [[consumer]], seen = new Set();
+506:     while (queue.length) {
+507:       const path = queue.shift(), id = path.at(-1);
+508:       if (seen.has(id)) continue;
+509:       seen.add(id);
+510:       const item = itemFor(id);
+511:       if (!item) continue;
+512:       const deps = [...(Array.isArray(item.deps) ? item.deps : []),
+513:         ...(Array.isArray(item.justified_by) ? item.justified_by : [])];
+514:       for (const dep of deps) {
+515:         if (typeof dep !== 'string' || path.includes(dep)) continue;
+516:         const source = itemFor(dep), owners = producers.get(dep) ?? [];
+517:         if (!source || (!owners.length && source.status !== 'published' && !claimed.has(dep))) continue;
+518:         if (owners.length && !currentRunDraft(source, owners)) continue;
+519:         const next = [...path, dep];
+520:         if (owners.length === 1 && owners[0] !== batch) {
+521:           if (!result.has(dep)) result.set(dep, { producer_batch: owners[0], consumers: new Map() });
+522:           result.get(dep).consumers.set(consumer, next);
+523:         }
+524:         queue.push(next);
+525:       }
+526:     }
+527:   }
+528:   return result;
+529: }
+530: 
+551: function refuterContext(batch, scope, opened, reportError, manifests = manifestItems()) {
+552:   const required = new Set(scope.refuter_scope ?? []);
+553:   const extra = opened.filter(id => !required.has(id));
+554:   if (!extra.length) return [];
+555:   const roots = [...required], runIds = new Set(Object.values(manifests).flat());
+556:   const published = publishedDependencies(roots, runIds);
+557:   const inRun = inRunDependencies(batch, roots, manifests);
+558:   for (const id of extra) if (!published.has(id) && !inRun.has(id)) {
+559:     reportError(`extra opened context ${id} is not a reachable declared supplier of the required scope`);
+560:   }
+561:   return [...extra].sort();
+562: }
+563: 

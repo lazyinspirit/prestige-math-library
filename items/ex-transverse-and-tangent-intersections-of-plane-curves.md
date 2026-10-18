@@ -3,6 +3,7 @@ id: ex-transverse-and-tangent-intersections-of-plane-curves
 kind: example
 title: "Transverse and tangent intersections of plane curves"
 status: published
+dependency_level: 5
 origin: session
 provenance:
   statement: ai-generated
@@ -17,8 +18,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/ex-transverse-and-tangent-intersections-of-plane-curves.json
 sources:
   scraped: []
   references:

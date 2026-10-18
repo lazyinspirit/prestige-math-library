@@ -1,0 +1,167 @@
+--- /dev/null
++++ b/tools/step5-deferred-created-review.md
+@@ -0,0 +1,7 @@
++# Deferred reviews of native-created prerequisites
++
++A deferred owner collection preserves original review rows against the historical posts actually reported for its assigned items **and declared created items**. This is historical continuity only. The collection `post` remains the actual current source hashes. Original native reports, authored rows and author identities are never rewritten. Normal creation validation still requires unique new IDs, declared registration and contract, an authored review, actual direct dependency and a load-bearing repaired consumer in the author's scope.
++
++Owner continuation and completed-closure verification derive a local set of created subjects only from already collected native declarations. Each declaration must remain bound to its original native author result/report/pack and exact authored declaration, be draft, and retain valid current registration. These IDs are local continuation subjects; the original frozen frontier is unchanged. Unrelated manifest additions receive no authority. They are classified with that local scope before ordinary outside-maintenance routing.
++
++For example, an actually created lemma may retain a sound proof but have `dependency_level: 5` when its in-run computed level is zero. After the exact metadata correction, deferred collection retains the native authored row at hash 5 and records current hash 0. The old row fails ordinary current-review matching. Continuation queues the helper in a genuine next owner pass, whose regular review at hash 0 is required before completed verification/certification. Authorship remains bound to the original native author; the later review supplies currency, not replacement authorship. All ordinary current context, native worker identity, certification, judgment and gate requirements remain in force.
+--- /dev/null
++++ b/tools/step5-deferred-created-review.test.mjs
+@@ -0,0 +1,44 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync} from 'node:fs';
++import {join} from 'node:path';
++import {tmpdir} from 'node:os';
++import {prepareAdjudication,prepareImpact,collect,advanceImpact,certify,verifyCompletedImpact,workerReport,workerLabel,workflowDir,digest,reviewContextHashes} from './step5-workflow.mjs';
++import {writeAuditorCreatedBaseline} from './auditor-created-items.mjs';
++import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
++import {dependencyLevels,runPages} from './item-dependency-levels.mjs';
++import {MODELS} from './models.mjs';
++const run='deferred-created',supplier='thm-root',consumer='thm-consumer',helper='lem-green-helper',reason='The complete assigned proof and its exact prerequisites were checked and the focused missing prerequisite was authored before repairing the consumer.',evidence={reason,uncertain:false,source_urls:[],familiar:true};
++function fixture(t){
++ const root=mkdtempSync(join(tmpdir(),'deferred-created-'));t.after(()=>rmSync(root,{recursive:true,force:true}));for(const d of ['items','research'])mkdirSync(join(root,d));
++ const put=(p,v)=>writeFileSync(join(root,p),typeof v==='string'?v:JSON.stringify(v)),get=p=>JSON.parse(readFileSync(join(root,p),'utf8'));
++ const source=(id,deps=[],kind='theorem',level=0,published=false)=>`---\nid: ${id}\nkind: ${kind}\ntitle: ${id}\nstatus: ${published?'published':'draft'}\ndependency_level: ${level}\ndeps: ${JSON.stringify(deps)}\n---\n\n## Statement\n\nThe retained full claim for ${id}.\n\n## Proof\n\n1.1 The original argument. [given] ∎\n`;
++ put(`items/${supplier}.md`,source(supplier));put(`items/${consumer}.md`,source(consumer,[supplier],'theorem',1));put('items/thm-external.md',source('thm-external',[],'theorem',0,true));
++ const manifest=`research/${run}-batch-1.pages.json`;put(manifest,[{id:'page',items:[{id:supplier,kind:'theorem',title:supplier,deps:[],dependency_level:0},{id:consumer,kind:'theorem',title:consumer,deps:[supplier],dependency_level:1}]}]);
++ put(`research/${run}-judge.jsonl`,[supplier,consumer].map(id=>JSON.stringify({id,model:MODELS.sol61.id,keep:id!==supplier,item_sha256:itemHashJudge(readFileSync(join(root,`items/${id}.md`),'utf8')),context_sha256:'c'.repeat(64)})).join('\n')+'\n');
++ const report=(pack,created=[])=>{mkdirSync(join(root,'research',`${run}-dispatch`),{recursive:true});for(const unit of pack.units){const ids=pack.assignments[unit].map(v=>typeof v==='string'?v:v.id);const reviews=ids.map(id=>({id,disposition:itemHashGuard(readFileSync(join(root,`items/${id}.md`),'utf8'))===pack.before[id]?'unaffected':'repaired',...reviewContextHashes(root,[id])[id],...evidence}));put(`research/${run}-step5-v2/${workerLabel(pack.phase,1,unit)}.json`,{run,phase:pack.phase,round:1,unit,input_sha256:digest(pack),decisions:pack.rejected?pack.assignments[unit].map(v=>({...v,outcome:'confirmed_nonfatal',...evidence})):[],reviews:[...reviews,...(ids.includes(consumer)?created:[])],created_items:[],downstream:pack.rejected?[consumer]:[],ledger_updates:[]});const role=pack.rejected?'alpha-adjudicate':'alpha-repair';put(`research/${run}-dispatch/${role}-${workerLabel(pack.phase,1,unit)}.result.json`,{run,role,label:workerLabel(pack.phase,1,unit),covers:[unit],ok:true,model:MODELS.sol61.id,provider_effort:'high'});}};
++ const initial=prepareAdjudication(root,run,'initial',1);put(`items/${supplier}.md`,source(supplier).replace('original argument','corrected original argument'));report(initial);const pack=prepareImpact(root,run,'impact-initial',1);pack.assignments['1']=[consumer];put(`research/${run}-step5-v2/impact-initial-1.json`,pack);writeAuditorCreatedBaseline(root,run,5);
++ const oldHelper=source(helper,['thm-external'],'lemma',5);put(`items/${helper}.md`,oldHelper);const pages=get(manifest);pages[0].items.push({id:helper,kind:'lemma',title:helper,deps:['thm-external'],dependency_level:5});put(manifest,pages);put(`research/${run}-batch-1.proof-contracts.json`,{contracts:{[helper]:{kind:'lemma'}}});
++ put(`items/${consumer}.md`,source(consumer,[supplier,helper],'theorem',1).replace('original argument','completed argument using the helper'));
++ const oldRow={id:helper,disposition:'authored',...reviewContextHashes(root,[helper])[helper],...evidence};report(pack,[oldRow]);const unit=pack.units.find(u=>pack.assignments[u].includes(consumer));assert.ok(unit,JSON.stringify(pack));const path=`research/${run}-step5-v2/${workerLabel(pack.phase,1,unit)}.json`,native=get(path);native.created_items=[{id:helper,kind:'lemma',home_page:'page',batch:'1',consumers:[consumer],...evidence}];put(path,native);
++ const correct=()=>{put(`items/${helper}.md`,oldHelper.replace('dependency_level: 5','dependency_level: 0'));const m=get(manifest);m[0].items.find(i=>i.id===helper).dependency_level=0;put(manifest,m);};
++ const contexts=(root,ids)=>new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(root,`items/${id}.md`),'utf8')),context_sha256:'c'.repeat(64)}]));
++ return {root,put,get,pack,report,native,path,oldHelper,oldRow,manifest,correct,contexts};
++}
++test('deferred created-item collection keeps old authored row and actual current numeric-zero post',t=>{
++ const f=fixture(t),bytes=readFileSync(join(f.root,f.path),'utf8');f.correct();const graph=dependencyLevels(runPages(f.root,run));assert.equal(graph.levels.get(helper),0);assert.deepEqual(graph.errors,[]);
++ const result=collect(f.root,run,'impact-initial',1,{deferImpactClosure:true});assert.deepEqual(result.reviews.find(r=>r.id===helper),f.oldRow);assert.notEqual(result.reviews.find(r=>r.id===helper).post_sha256,result.post[helper]);assert.equal(result.post[helper],itemHashGuard(readFileSync(join(f.root,`items/${helper}.md`),'utf8')));assert.equal(readFileSync(join(f.root,f.path),'utf8'),bytes);assert.equal(result.created_items[0].id,helper);
++});
++test('normal closure queues the registered helper for a fresh review and certification cannot use stale authorship',t=>{
++ const f=fixture(t);f.correct();const next=advanceImpact(f.root,run,'impact-initial',1);assert.equal(next.complete,false);assert.ok(Object.values(next.pack.assignments).flat().includes(helper));assert.throws(()=>certify(f.root,run,'impact-initial',1,{contextHasher:f.contexts}),/continuation|ENOENT|review/);f.report(next.pack);assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);const closed=verifyCompletedImpact(f.root,run,'impact-initial',1);assert.equal(closed.reviews.find(r=>r.id===helper).post_sha256,closed.post[helper]);const cert=certify(f.root,run,'impact-initial',1,{contextHasher:f.contexts});assert.ok(cert.items.some(r=>r.id===helper));assert.equal(cert.creations.find(r=>r.id===helper).author_result,closed.created_items.find(r=>r.id===helper).author_result);
++});
++for(const mode of ['undeclared','unregistered','unanchored'])test(`deferred history rejects ${mode} creation`,t=>{
++ const f=fixture(t);f.correct();if(mode==='undeclared')f.native.created_items=[];if(mode==='unregistered')f.put(`research/${run}-batch-1.proof-contracts.json`,{contracts:{}});if(mode==='unanchored'){f.native.created_items[0].consumers=[supplier];}f.put(f.path,f.native);assert.throws(()=>collect(f.root,run,'impact-initial',1,{deferImpactClosure:true}),mode==='undeclared'?/invalid review/:mode==='unregistered'?/proof contract/:/outside creator scope|not a declared direct dependency|not load-bearing/);assert.equal(existsSync(join(workflowDir(f.root,run),'impact-initial-1-collected.json')),false);
++});
++
++test('closed verification rejects stale authored rows even with an actual current post snapshot',t=>{
++ const f=fixture(t);f.correct();const next=advanceImpact(f.root,run,'impact-initial',1);f.report(next.pack);assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);const path=`research/${run}-step5-v2/impact-initial-1-closed.json`,closed=f.get(path);closed.reviews=closed.reviews.map(row=>row.id===helper?f.oldRow:row);closed.changed=closed.changed.filter(id=>id!==helper);f.put(path,closed);assert.throws(()=>verifyCompletedImpact(f.root,run,'impact-initial',1),/lacks current review/);assert.throws(()=>certify(f.root,run,'impact-initial',1,{contextHasher:f.contexts}),/lacks current review/);
++});
++test('an unrelated new manifest ID never acquires local continuation scope',t=>{
++ const f=fixture(t);f.correct();f.put('items/lem-unrelated-new.md',f.oldHelper.replaceAll(helper,'lem-unrelated-new').replace('dependency_level: 5','dependency_level: 0'));const m=f.get(f.manifest);m[0].items.push({id:'lem-unrelated-new',kind:'lemma',title:'Unrelated',deps:['thm-external'],dependency_level:0});f.put(f.manifest,m);const next=advanceImpact(f.root,run,'impact-initial',1);assert.ok(Object.values(next.pack.assignments).flat().includes(helper));assert.equal(next.pack.frontier_ids.includes('lem-unrelated-new'),false);assert.equal(Object.values(next.pack.assignments).flat().includes('lem-unrelated-new'),false);assert.equal(JSON.parse(readFileSync(join(workflowDir(f.root,run),'frontier.json'),'utf8')).ids.includes(helper),false);
++});
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -351,8 +351,8 @@
+   requireValue(frontier.run===run,'wrong run frontier');
+   return new Set(frontier.ids.filter(id => !isPublishedItem(root, id)));
+ }
+-function impactTargets(root,run,phase,items,seeds,discovered=[]) {
+-  const frontier=gateFrontier(root,run),roots=[...new Set(seeds)];
++function impactTargets(root,run,phase,items,seeds,discovered=[],createdIds=[]) {
++  const frontier=new Set([...gateFrontier(root,run),...createdIds]),roots=[...new Set(seeds)];
+   const impacts=discoverDownstream({items,repairedIds:roots});
+   const direct=new Set(impacts.map(row=>row.id));
+   const targets=[...new Set([...direct,...discovered.filter(id=>frontier.has(id))])]
+@@ -364,6 +364,31 @@
+     maintenance.push({id,published:Boolean(items.find(row=>row.id===id)?.published),suppliers:roots,paths:roots.map(root=>[root,id]),reported:true});
+   return {frontier,seeds:roots,impacts,targets,maintenance};
+ }
++// Local continuation subjects come only from bound, collected native creations;
++// neither the frozen frontier nor arbitrary new manifest IDs grant authority.
++function collectedCreationIds(root,run,receipts) {
++  const ids=new Set();
++  for(const receipt of receipts.filter(Boolean))for(const row of receipt.created_items??[]){
++    requireValue(typeof row.author_result==='string'&&basename(row.author_result)===row.author_result,'created closure lacks native author identity');
++    const author=join(root,'research',`${run}-dispatch`,row.author_result);
++    requireValue(receipt.evidence?.[author]===digest(readFileSync(author,'utf8')),'created closure lacks bound native author result');
++    const native=read(author),unit=native.covers?.[0],reportPath=workerReport(root,run,receipt.phase,receipt.round,unit);
++    requireValue(native.run===run&&native.ok===true&&['alpha-adjudicate','alpha-repair'].includes(native.role)
++      &&JSON.stringify(native.covers)===JSON.stringify([unit])&&native.label===workerLabel(receipt.phase,receipt.round,unit)
++      &&receipt.evidence?.[reportPath]===digest(readFileSync(reportPath,'utf8')),'created closure lacks bound native report');
++    const report=read(reportPath),{author_result,...declaration}=row;
++    const declarations=(report.created_items??[]).filter(value=>value.id===row.id);
++    const reviews=(report.reviews??[]).filter(value=>value.id===row.id&&value.disposition==='authored');
++    const original=readPack(root,run,receipt.phase,receipt.round);
++    requireValue(report.run===run&&report.phase===receipt.phase&&report.round===receipt.round&&String(report.unit)===unit
++      &&report.input_sha256===digest(original)&&!original.before[row.id]
++      &&declarations.length===1&&digest(declarations[0])===digest(declaration)&&reviews.length===1
++      &&!isPublishedItem(root,row.id),'created closure is not an original declared draft native authorship');
++    creationRegistration(root,run,row);ids.add(row.id);
++  }
++  return ids;
++}
++
+ function libraryIdentity(root,run) {
+   const items=readLibraryItems(root,{run}),ids=new Set(items.map(row=>row.id)),aliases=new Map();
+   for(const row of items)for(const alias of row.aliases??[]){
+@@ -1327,7 +1352,7 @@
+     requireValue(!pack.rejected,'only owner waves can defer impact closure');
+     // Archive the carriers workers actually reviewed. Later edits are queued
+     // for another owner pass instead of invalidating already completed work.
+-    const assigned=new Set(Object.values(pack.assignments).flat());
++    const assigned=new Set([...Object.values(pack.assignments).flat(),...reports.flatMap(report=>(report.created_items??[]).map(row=>row.id))]);
+     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
+   }
+   const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance});
+@@ -1753,18 +1778,20 @@
+   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root,run),items=readLibraryItems(root,{run});
+   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
+   const maintenanceChanges=maintenance.completed_changes.filter(row=>maintenanceIds.has(row.pack));
+-  const frontier=gateFrontier(root,run);
++  const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
++  const sourceReceipt=source?read(join(workflowDir(root,run),`${source}-${round}-collected.json`)):null;
++  if(sourceReceipt)verifyEvidence(sourceReceipt.evidence,{root,run});
++  const createdIds=collectedCreationIds(root,run,[sourceReceipt,...completed]);
++  const frontier=new Set([...gateFrontier(root,run),...createdIds]);
+   const changed=diff(base.before,current).filter(id=>frontier.has(id)),rawSeeds=[...new Set([...(base.seeds??[]),...completed.flatMap(receipt=>receipt.restated??receipt.changed),...maintenanceChanges.filter(row=>row.before_statement_sha256!==row.after_statement_sha256).map(row=>row.id)])];
+   const maintenanceRestatements=new Set(maintenanceChanges.filter(row=>row.before_statement_sha256!==row.after_statement_sha256).map(row=>row.id));
+   const returned=maintenance.frontier_events.filter(row=>maintenanceRestatements.has(row.id)).map(row=>row.consumer_id);
+-  const scope=impactTargets(root,run,phase,items,rawSeeds,[...completed.flatMap(receipt=>receipt.downstream??[]),...returned]);
++  const scope=impactTargets(root,run,phase,items,rawSeeds,[...completed.flatMap(receipt=>receipt.downstream??[]),...returned],createdIds);
+   const {seeds,impacts}=scope;
+-  const required=new Set([...Object.values(base.assignments).flat(),...scope.targets,...changed]);
++  const required=new Set([...Object.values(base.assignments).flat(),...scope.targets,...changed,...createdIds]);
+   const reviews=new Map(completed.flatMap(receipt=>receipt.reviews).map(row=>[row.id,row]));
+   // An adjudicator's source review remains valid unless an owner changes it.
+   // It is used only for closure accounting, never counted as an owner repair.
+-  const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
+-  const sourceReceipt=source?read(join(workflowDir(root,run),`${source}-${round}-collected.json`)):null;
+   // Actual proof/interface consumers reported by workers need not yet have a
+   // graph edge. Keep them in closure until a current owner review covers them.
+   for(const receipt of [sourceReceipt,...completed])for(const id of receipt?.downstream??[])if(scope.frontier.has(id))required.add(id);
+@@ -1872,20 +1899,23 @@
+       `completed owner collection does not bind pass: ${pass}`);
+     const receipt=read(path);verifyEvidence(receipt.evidence,{root,run});return receipt;
+   });
+-  const items=readLibraryItems(root,{run}),frontier=gateFrontier(root,run),current=hashes(root,run);
+-  const stable=prerequisiteScope(items,[...frontier,...(result.created_items??[]).map(row=>row.id)]);
+-  for(const id of diff(result.post,current).filter(id=>stable.has(id)))
+-    throw Error(`writer changed relevant content after completed owner collection: ${id}`);
++  const items=readLibraryItems(root,{run}),current=hashes(root,run);
+   const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
+   const sourceReceipt=source?read(join(dir,`${source}-${round}-collected.json`)):null;
+   if(sourceReceipt)verifyEvidence(sourceReceipt.evidence,{root,run});
++  const createdIds=collectedCreationIds(root,run,[sourceReceipt,...passes]);
++  requireValue(digest(result.created_items??[])===digest(passes.flatMap(receipt=>receipt.created_items??[])),'completed creation inventory differs from collected native declarations');
++  const frontier=new Set([...gateFrontier(root,run),...createdIds]);
++  const stable=prerequisiteScope(items,[...frontier]);
++  for(const id of diff(result.post,current).filter(id=>stable.has(id)))
++    throw Error(`writer changed relevant content after completed owner collection: ${id}`);
+   const reviews=new Map([...(sourceReceipt?.reviews??[]),...result.reviews].map(row=>[row.id,row]));
+   const snapshots=new Map([sourceReceipt,...passes].filter(Boolean)
+     .flatMap(receipt=>receipt.reviews.map(row=>[row.id,receipt.post])));
+   const base=readPack(root,run,progress.repairBasePhase??phase,round);
+-  const scope=impactTargets(root,run,phase,items,result.restated??base.seeds??[],result.downstream??[]);
++  const scope=impactTargets(root,run,phase,items,result.restated??base.seeds??[],result.downstream??[],createdIds);
+   const required=new Set([...progress.passes.flatMap(pass=>Object.values(readPack(root,run,pass,round).assignments).flat()),
+-    ...scope.targets,...result.changed,...(sourceReceipt?.reviews??[]).map(row=>row.id)]);
++    ...scope.targets,...result.changed,...(sourceReceipt?.reviews??[]).map(row=>row.id),...createdIds]);
+   const authorizedOperational=new Set(passes.flatMap(receipt=>receipt.operational_resolution?.subjects??[]));
+   requireValue((result.operational_carries??[]).every(id=>authorizedOperational.has(id)),'unbound operational carry');
+   const operationalIds=(result.operational_carries??[]).filter(id=>!scope.targets.includes(id)&&!result.changed.includes(id));

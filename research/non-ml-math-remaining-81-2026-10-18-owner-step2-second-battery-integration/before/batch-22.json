@@ -1,0 +1,1440 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-it-finite-weyl-twirl-partial-trace",
+    "thm-it-finite-strong-subadditivity",
+    "thm-it-finite-quantum-conditional-mutual-information-nonnegative",
+    "ex-it-dephasing-quantum-relative-entropy-dpi",
+    "ex-it-strong-subadditivity-for-pure-tripartite-state",
+    "cex-it-fidelity-data-processing-does-not-prove-qre-dpi"
+  ],
+  "contracts": {
+    "lem-it-finite-weyl-twirl-partial-trace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-complex-de-moivre-formula",
+          "source_section": "Statement",
+          "quote": "Let $j:\\mathbb Z\\to\\mathbb Q$ be the integer embedding of [[lem-int-embeds-rat]], let $\\iota_{\\mathbb R}:\\mathbb Q\\to\\mathbb R$ be the ordered-field embedding of [[lem-of-q-embeds]], and put $\\kappa_{\\mathbb R}:=\\iota_{\\mathbb R}\\circ j$. For every integer $m$ and real $\\theta$,\n$$ (\\cos\\theta+i\\sin\\theta)^m=\\cos(\\kappa_{\\mathbb R}(m)\\theta)+i\\sin(\\kappa_{\\mathbb R}(m)\\theta). $$ The conventions and prerequisite facts used below are recorded in [[thm-eulers-formula]], [[thm-complex-exponential-addition-and-real-extension]], [[thm-complex-numbers-form-a-field]], [[def-complex-integer-powers]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-eulers-formula",
+          "source_section": "Statement",
+          "quote": "For every real $\\theta$, $\\exp(i\\theta)=\\cos\\theta+i\\sin\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If $d\\ge2$, Euler's identity [F5] and the integer-power formula [F3] give $\\omega^m=\\exp(2\\pi i m/d)$ for every integer $m$. By [F4], this equals $1$ exactly when $d$ divides $m$, so $\\omega$ has exact order $d$ and $|\\omega|=1$. The shift $X$ permutes the orthonormal basis and the phase $Z$ multiplies its vectors by unit scalars, so both are unitary. For $d=1$ both are the identity. For $d\\ge2$, $d^{-1}\\sum_{q=0}^{d-1}\\omega^{qm}$ is $1$ when $d\\mid m$; otherwise multiplication by $1-\\omega^m\\ne0$ makes the geometric sum telescope to $1-\\omega^{md}=0$, so it is $0$.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Write $E_{ab}=|e_a\\rangle\\langle e_b|$ and expand $R=\\sum_{a,b=0}^{d-1}R_{ab}\\otimes E_{ab}$ in the product basis. Direct action on basis vectors gives $Z^qE_{ab}(Z^q)^\\dagger=\\omega^{q(a-b)}E_{ab}$ and $X^pE_{ab}(X^p)^\\dagger=E_{a+p,b+p}$, with indices modulo $d$. Averaging first over $q$ using step 1.1 removes every $a\\ne b$ term and keeps $R_{aa}\\otimes E_{aa}$.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For each remaining diagonal unit, $d^{-1}\\sum_{p=0}^{d-1}E_{a+p,a+p}=I_K/d$. Therefore the full average is $\\sum_aR_{aa}\\otimes I_K/d$. By [F1], $\\sum_aR_{aa}=\\operatorname{Tr}_K R$, giving the identity. When $d=1$, [F1] says $\\operatorname{Tr}_K R$ is the unique coefficient $R_{00}$, so the same equality holds.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "reason": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The untraced space may be zero: then every matrix block and both sides are zero; the traced dimension remains strictly positive.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The untraced space may be zero: then every matrix block and both sides are zero; the traced dimension remains strictly positive.",
+            "item_sha256": "fdf27687b52893bade5c8a54150b934cd9184a3b7529ac75c5450673fe04e490",
+            "row_sha256": "1a6dec013e14d2a9c386f28ab675d234cf9a08807fc60558fb71091baf203c93"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is a linear matrix-unit identity and therefore also holds for R=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 explicitly check d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The twirl identity holds for arbitrary operators, with no rank or spectral multiplicity assumption on the input.",
+          "reason": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The twirl identity holds for arbitrary operators, with no rank or spectral multiplicity assumption on the input.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The twirl identity holds for arbitrary operators, with no rank or spectral multiplicity assumption on the input.",
+            "item_sha256": "fdf27687b52893bade5c8a54150b934cd9184a3b7529ac75c5450673fe04e490",
+            "row_sha256": "4b633fea59de919901f93d5fe830fd8707de1a608eb734df309756e6b4471729"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the p,q endpoints 0 and d−1; Step 3.1 verifies d=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The fixed basis specifies every shift, phase and matrix unit; the root orthogonality proof is finite arithmetic.",
+          "reason": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The fixed basis specifies every shift, phase and matrix unit; the root orthogonality proof is finite arithmetic.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The fixed basis specifies every shift, phase and matrix unit; the root orthogonality proof is finite arithmetic.",
+            "item_sha256": "fdf27687b52893bade5c8a54150b934cd9184a3b7529ac75c5450673fe04e490",
+            "row_sha256": "31de4d564020752525901aa4350d9c9a0ca30201d11ccc8f09f7e821b53b26b1"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The averaging formula is an operator identity, not a characterization of inputs fixed by the twirl.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The averaging formula is an operator identity, not a characterization of inputs fixed by the twirl.",
+            "item_sha256": "fdf27687b52893bade5c8a54150b934cd9184a3b7529ac75c5450673fe04e490",
+            "row_sha256": "97bbc0449556dbfdd996bde2f6aeaebca6ea50c9a2f60123fb8e4c17f49abee6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The averaging formula is an operator identity, not a characterization of inputs fixed by the twirl.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The phase geometric sum kills off-diagonal matrix units and the shift average replaces each diagonal matrix unit by uniform identity. The averaging formula is an operator identity, not a characterization of inputs fixed by the twirl.",
+            "item_sha256": "fdf27687b52893bade5c8a54150b934cd9184a3b7529ac75c5450673fe04e490",
+            "row_sha256": "b8ffc7a31fe4b51f3f36f304a834679c173aab18a784876dbac02bf0b86247de"
+          }
+        }
+      ]
+    },
+    "thm-it-finite-strong-subadditivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-dimensional-quantum-relative-entropy",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space and let $A,B:H\\to H$ be non-negative operators. For such an operator $A$, set $\\operatorname{supp}(A):=(\\ker A)^\\perp$, where $\\ker A$ is the kernel of a linear map ([[def-kernel-and-image-of-a-linear-map]]); this extends the density-operator support convention in [[def-qc-density-operator]]. If $\\operatorname{supp}(A)\\subseteq\\operatorname{supp}(B)$, define\n\n$$D(A\\|B):=\\operatorname{tr}(A\\ln A)-\\operatorname{tr}(A\\ln B).$$\n\nHere $\\ln A$ is defined spectrally on the positive eigenspaces of $A$ with $0\\ln0:=0$, and $\\ln B$ in the cross term is restricted to $\\operatorname{supp}(B)$; the support condition ensures that $A$ vanishes on $\\ker B$, so the omitted kernel contributes zero. If $\\operatorname{supp}(A)\\nsubseteq\\operatorname{supp}(B)$, set $D(A\\|B):=+\\infty$. In particular, $D(0\\|B)=0$. For density operators this is the finite-dimensional **quantum relative entropy**. The logarithms are natural, so the value is in nats; the base-two value is $D_2(A\\|B):=D(A\\|B)/\\ln2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-it-quantum-entropy-support-and-finiteness",
+          "source_section": "Statement",
+          "quote": "For a state $\\rho_{AB}$ on a finite-dimensional bipartite space, with marginals $\\rho_A=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B=\\operatorname{Tr}_A\\rho_{AB}$,\n\n$$\\operatorname{supp}(\\rho_{AB})\\subseteq\\operatorname{supp}(\\rho_A)\\otimes\\operatorname{supp}(\\rho_B)=\\operatorname{supp}(\\rho_A\\otimes\\rho_B).$$\n\nConsequently $D(\\rho_{AB}\\|\\rho_A\\otimes\\rho_B)$ is finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-quantum-entropy-identities",
+          "source_section": "Statement",
+          "quote": "For a finite-dimensional bipartite state $\\rho_{AB}$,\n\n$$I(A:B)_\\rho=S(\\rho_A)+S(\\rho_B)-S(\\rho_{AB})=D(\\rho_{AB}\\|\\rho_A\\otimes\\rho_B).$$\n\nFor a finite classical-quantum state $\\rho_{XB}=\\sum_xp_x\\Pi_x\\otimes\\rho_x$, its mutual information equals its Holevo information:\n\n$$I(X:B)_\\rho=S\\!\\left(\\sum_xp_x\\rho_x\\right)-\\sum_{x:p_x>0}p_xS(\\rho_x)=\\chi(\\{p_x,\\rho_x\\}).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-quantum-relative-entropy-partial-trace-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $H_A,H_B$ be nonzero finite-dimensional complex inner-product spaces, let $d=\\dim H_B\\ge1$, and let $A,B$ be non-negative operators on $H_A\\otimes H_B$. Then\n\n$$D(\\operatorname{Tr}_B A\\|\\operatorname{Tr}_B B)\\le D(A\\|B).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-it-partial-traces-of-a-state-are-states",
+          "source_section": "Statement",
+          "quote": "For nonzero finite-dimensional complex inner-product spaces $H_A,H_B$ and a density operator $\\rho_{AB}$ on $H_A\\otimes H_B$, both marginals $\\rho_A:=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B:=\\operatorname{Tr}_A\\rho_{AB}$ are density operators.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "View $\\rho_{ABC}$ first across the grouped bipartition $A|BC$: [F9] makes $\\rho_A=\\operatorname{Tr}_{BC}\\rho_{ABC}$ and $\\rho_{BC}=\\operatorname{Tr}_A\\rho_{ABC}$ states. Applying [F9] across $AB|C$ also makes $\\rho_{AB}=\\operatorname{Tr}_C\\rho_{ABC}$ a state. Applying it once more to $\\rho_{AB}$ across $A|B$ makes $\\rho_B=\\operatorname{Tr}_A\\rho_{AB}$ a state. This is also $\\operatorname{Tr}_C\\rho_{BC}$: in the ordered product basis [F6]–[F7], both have coefficient $\\sum_{a,c}(\\rho_{ABC})_{(a,b,c),(a,b^\\prime,c)}$, since the finite sums may be reordered. The operator $\\rho_A\\otimes\\rho_{BC}$ is also a state: spectral decompositions of the two positive factors give nonnegative product eigenvalues, and their sum is $\\operatorname{tr}(\\rho_A)\\operatorname{tr}(\\rho_{BC})=1$. Applying [F2] to the bipartite states $\\rho_{A|BC}$ and $\\rho_{AB}$ gives support inclusion for both relative entropies $D(\\rho_{ABC}\\|\\rho_A\\otimes\\rho_{BC})$ and $D(\\rho_{AB}\\|\\rho_A\\otimes\\rho_B)$; [F1] then makes both finite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "algebra",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $X=\\rho_{ABC}$ and $Y=\\rho_A\\otimes\\rho_{BC}$. By [F6] and the ordered product basis [F7], $\\operatorname{Tr}_C X=\\rho_{AB}$ and $\\operatorname{Tr}_C Y=\\rho_A\\otimes\\operatorname{Tr}_C\\rho_{BC}=\\rho_A\\otimes\\rho_B$: the latter equality follows entrywise by summing the C-diagonal block of $\\rho_{BC}$ while the A-factor matrix coefficient remains fixed. Apply [F4] to this pair to obtain $$D(\\rho_{AB}\\|\\rho_A\\otimes\\rho_B)\\le D(\\rho_{ABC}\\|\\rho_A\\otimes\\rho_{BC}).$$",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both sides in step 2.1 are finite by step 1.1, so [F3] identifies them as $S(\\rho_A)+S(\\rho_B)-S(\\rho_{AB})$ and $S(\\rho_A)+S(\\rho_{BC})-S(\\rho_{ABC})$, respectively. Cancel the common finite term $S(\\rho_A)$ and rearrange the inequality to obtain $S(\\rho_{AB})+S(\\rho_{BC})\\ge S(\\rho_B)+S(\\rho_{ABC})$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Nonzero tensor factors and normalization exclude a state on an empty tripartite space.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Nonzero tensor factors and normalization exclude a state on an empty tripartite space.",
+            "item_sha256": "074e162982a4809cfe888395114d3eea631494683b9e026feac57f30020ef7e3",
+            "row_sha256": "f61d0ef4bea28b52fdcad2e1c6014cea42b41b2215e56772894bfabc449543e0"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 invokes the support lemma for PSD marginals, so zero eigenvalues are retained."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 remain valid when a register is one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Singular states are admitted: the grouped support lemma makes both relative-entropy expansions finite before entropy cancellation.",
+          "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Singular states are admitted: the grouped support lemma makes both relative-entropy expansions finite before entropy cancellation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Singular states are admitted: the grouped support lemma makes both relative-entropy expansions finite before entropy cancellation.",
+            "item_sha256": "074e162982a4809cfe888395114d3eea631494683b9e026feac57f30020ef7e3",
+            "row_sha256": "10ce736195cecc7ae42cbf9bdeec5b314a29f32a17c10f6a26ff4223a050dc7c"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. No scalar interval parameter enters strong subadditivity; zero eigenvalues are treated by finite state entropy.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. No scalar interval parameter enters strong subadditivity; zero eigenvalues are treated by finite state entropy.",
+            "item_sha256": "074e162982a4809cfe888395114d3eea631494683b9e026feac57f30020ef7e3",
+            "row_sha256": "d5463daa2f6dd016ef57e480976f8544674e6047e30e9a86e72e84ed9ae6017c"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Grouping, the fixed partial trace and finite spectral logarithms need no family of selected witnesses.",
+          "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Grouping, the fixed partial trace and finite spectral logarithms need no family of selected witnesses.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Grouping, the fixed partial trace and finite spectral logarithms need no family of selected witnesses.",
+            "item_sha256": "074e162982a4809cfe888395114d3eea631494683b9e026feac57f30020ef7e3",
+            "row_sha256": "215d8d022dd6428f547b17f8f78626d98fea69370046521d609f296de071c612"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Only the strong-subadditivity inequality is asserted; no quantum Markov equality criterion is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Only the strong-subadditivity inequality is asserted; no quantum Markov equality criterion is claimed.",
+            "item_sha256": "074e162982a4809cfe888395114d3eea631494683b9e026feac57f30020ef7e3",
+            "row_sha256": "d10af151b7560ebd7e844a33167a789e3650bbc8e7391fd71ad25f22ac4e750b"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Only the strong-subadditivity inequality is asserted; no quantum Markov equality criterion is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Grouping the state and product marginal permits finite-support relative-entropy data processing, whose entropy expansion is strong subadditivity. Only the strong-subadditivity inequality is asserted; no quantum Markov equality criterion is claimed.",
+            "item_sha256": "074e162982a4809cfe888395114d3eea631494683b9e026feac57f30020ef7e3",
+            "row_sha256": "646cc9459217edc9d85f527e2cf837690b7bd4984a7460db34dc3734809ebc40"
+          }
+        }
+      ]
+    },
+    "thm-it-finite-quantum-conditional-mutual-information-nonnegative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-quantum-information-measures",
+          "source_section": "Definition",
+          "quote": "For a finite bipartite state $\\rho_{AB}$ on the ordered product $H_A\\otimes H_B$, write $\\rho_A=\\operatorname{Tr}_B\\rho_{AB}$ and $\\rho_B=\\operatorname{Tr}_A\\rho_{AB}$, using the partial traces in [[def-qc-partial-trace]] and [[def-qc-first-factor-partial-trace]]. They are states by [[lem-it-partial-traces-of-a-state-are-states]]. Define\n\n$$S(A)_\\rho:=S(\\rho_A),\\qquad S(A\\mid B)_\\rho:=S(\\rho_{AB})-S(\\rho_B),\\qquad I(A:B)_\\rho:=S(\\rho_A)+S(\\rho_B)-S(\\rho_{AB}).$$\n\nFor a finite tripartite state $\\rho_{ABC}$ on the ordered product $H_A\\otimes H_B\\otimes H_C$, set $\\rho_{AB}:=\\operatorname{Tr}_{H_C}\\rho_{ABC}$ after identifying the factors as $(H_A\\otimes H_B)\\otimes H_C$, and $\\rho_{BC}:=\\operatorname{Tr}_{H_A}\\rho_{ABC}$ after identifying them as $H_A\\otimes(H_B\\otimes H_C)$. Let $P:H_A\\otimes H_B\\otimes H_C\\to H_A\\otimes H_C\\otimes H_B$ be the wire permutation taking factor order $A,B,C$ to $A,C,B$ ([[def-qc-tensor-register-and-permutation]], [[thm-qc-wire-permutation-is-unitary]]) whose unique adjoint $P^*$ exists by [[thm-adjoint-exists-and-is-unique-in-finite-dimension]], and set $\\rho_{AC}:=\\operatorname{Tr}_{H_B}(P\\rho_{ABC}P^*)$, tracing out the last factor. Because $P$ is unitary, $P\\rho_{ABC}P^*$ is a state: unitary conjugation preserves non-negativity by the adjoint identity ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]], [[def-non-negative-and-positive-operator]]) and preserves trace by cyclicity ([[thm-trace-of-ab-equals-trace-of-ba]]). Finally set $\\rho_C:=\\operatorname{Tr}_{H_B}\\rho_{BC}$. All these marginals are density operators by applying [[lem-it-partial-traces-of-a-state-are-states]] after grouping factors. Define\n\n$$I(A:B\\mid C)_\\rho:=S(\\rho_{AC})+S(\\rho_{BC})-S(\\rho_C)-S(\\rho_{ABC}).$$\n\nThese are finite-dimensional definitions only; no non-negativity of conditional entropy or conditional mutual information is part of the notation.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-strong-subadditivity",
+          "source_section": "Statement",
+          "quote": "Let $H_A,H_B,H_C$ be nonzero finite-dimensional complex inner-product spaces and let $\\rho_{ABC}$ be a density operator on their ordered tensor product. Write $\\rho_{AB},\\rho_{BC},\\rho_B$ for its marginals using the partial traces in [[def-qc-partial-trace]]. Then\n$$S(\\rho_{AB})+S(\\rho_{BC})\\ge S(\\rho_B)+S(\\rho_{ABC}),$$\nwhere $S(\\rho)=-\\operatorname{tr}(\\rho\\ln\\rho)$ with $0\\ln0:=0$ as in [[def-it-von-neumann-entropy]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-wire-permutation-is-unitary",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered family of finite-dimensional\ncomplex inner-product spaces, with the product bases of\n[[def-qc-tensor-register-and-permutation]]. For a permutation $\\sigma$ of the\nfactor positions, the map $P_\\sigma$ that reorders the factors is a bijective\nlinear isometry from $H_0\\otimes\\cdots\\otimes H_{n-1}$ to\n$H_{\\sigma(0)}\\otimes\\cdots\\otimes H_{\\sigma(n-1)}$. When source and target\nare identified as the same register, $P_\\sigma$ is a unitary operator in the\nsense of [[def-linear-isometry-and-orthogonal-or-unitary-operator]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-it-von-neumann-entropy",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root convention that its inner product is linear in the first argument, and let $\\rho$ be a density operator on $H$ ([[def-qc-density-operator]]). If $\\lambda_1,\\ldots,\\lambda_d$ are its eigenvalues counted with multiplicity, define its **von Neumann entropy** by\n\n$$S(\\rho):=-\\operatorname{tr}(\\rho\\ln\\rho):=-\\sum_{j:\\lambda_j>0}\\lambda_j\\ln\\lambda_j.$$\n\nThe trace is the finite-dimensional endomorphism trace ([[def-trace-of-an-endomorphism]]), and the spectral definition makes the expression independent of the eigenbasis. The term for a zero eigenvalue is defined to be $0\\ln0:=0$. The default unit is nats, using the natural logarithm ([[def-natural-logarithm]]); the entropy in bits is $S_2(\\rho):=S(\\rho)/\\ln2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$\nbe linear. Then $T$ is normal if and only if $V$ has an orthonormal basis\nconsisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $Q_{BC}:H_B\\otimes H_C\\to H_C\\otimes H_B$ be the two-factor swap and let $P=I_A\\otimes Q_{BC}:H_A\\otimes H_B\\otimes H_C\\to H_A\\otimes H_C\\otimes H_B$. Put $\\tau_{ACB}=P\\rho_{ABC}P^\\dagger$. By [F3], $P$ is unitary; therefore an orthonormal eigenbasis of $\\rho_{ABC}$ is carried to an orthonormal eigenbasis of $\\tau_{ACB}$ with the same eigenvalues, and [F5] gives $S(\\tau_{ACB})=S(\\rho_{ABC})$. The $AC$ marginal of $\\tau$ is exactly $\\rho_{AC}$ by the definition in [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In the product basis, tracing out A from $\\tau$ gives $\\tau_{CB}=Q_{BC}\\rho_{BC}Q_{BC}^\\dagger$: its $(c,b),(c',b')$ coefficient is the sum over $a$ of the $\\rho$ coefficients with indices $(a,b,c),(a,b',c')$, which is precisely the swapped coefficient. Thus [F3] and the eigenvalue argument in step 1.1 give $S(\\tau_{CB})=S(\\rho_{BC})$. Tracing out both A and B gives the same C marginal $\\tau_C=\\rho_C$, since the finite sums over their basis indices are merely reordered.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Apply [F2] to the tripartite state $\\tau$ with middle register C. It yields $S(\\tau_{AC})+S(\\tau_{CB})-S(\\tau_C)-S(\\tau_{ACB})\\ge0$. Substituting the equalities in steps 1.1 and 2.1 gives exactly the expression in [F1], so $I(A:B\\mid C)_\\rho\\ge0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. The normalized tripartite state and its unitary swap require the stated nonzero factors, excluding an empty state space.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. The normalized tripartite state and its unitary swap require the stated nonzero factors, excluding an empty state space.",
+            "item_sha256": "791a403ca00bd4f77cb328635c2b6d0ec166d1481e1d3b593b7ba0d8374e9dad",
+            "row_sha256": "4340a9dfaf1645103cee4952e85402719eecf80f65fae1c8d280ef60cd044188"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 preserve zero eigenvalues under the wire permutation and use the entropy sum over positive eigenvalues."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 remain valid when any register is one-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. The swap preserves the full spectrum including zero eigenvalues, so singular states remain covered by strong subadditivity.",
+          "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. The swap preserves the full spectrum including zero eigenvalues, so singular states remain covered by strong subadditivity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. The swap preserves the full spectrum including zero eigenvalues, so singular states remain covered by strong subadditivity.",
+            "item_sha256": "791a403ca00bd4f77cb328635c2b6d0ec166d1481e1d3b593b7ba0d8374e9dad",
+            "row_sha256": "9da50a4ff4e4548f0cae1a49c2a468b664a2c064b1e856dc898e50e7c33804fa"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. Conditional mutual information has no free interval endpoint parameter in this assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. Conditional mutual information has no free interval endpoint parameter in this assertion.",
+            "item_sha256": "791a403ca00bd4f77cb328635c2b6d0ec166d1481e1d3b593b7ba0d8374e9dad",
+            "row_sha256": "ce16448fbdc19985375ece25719f9f91b3c5d0f5c0f3200c0c1dbc5f77e83fed"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. The register swap is explicitly defined on simple tensors and selects no purification or basis family.",
+          "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. The register swap is explicitly defined on simple tensors and selects no purification or basis family.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. The register swap is explicitly defined on simple tensors and selects no purification or basis family.",
+            "item_sha256": "791a403ca00bd4f77cb328635c2b6d0ec166d1481e1d3b593b7ba0d8374e9dad",
+            "row_sha256": "1e28712db9e2b09bdbdf89e5b65e2d324b7deae5de0fc7091d7e1a2bf66f703a"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. Nonnegativity is asserted without a converse characterizing its zero set.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. Nonnegativity is asserted without a converse characterizing its zero set.",
+            "item_sha256": "791a403ca00bd4f77cb328635c2b6d0ec166d1481e1d3b593b7ba0d8374e9dad",
+            "row_sha256": "d614ab82b4bbc5e5cdc16b5136a1e9816fc2bc61bb34afee1ea64f537ebadfda"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. Nonnegativity is asserted without a converse characterizing its zero set.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "A fixed swap permutes the last two registers, and strong subadditivity for the swapped state is conditional mutual-information nonnegativity. Nonnegativity is asserted without a converse characterizing its zero set.",
+            "item_sha256": "791a403ca00bd4f77cb328635c2b6d0ec166d1481e1d3b593b7ba0d8374e9dad",
+            "row_sha256": "22fd7795102885853215e1aeae3d908085e609f6840d0a4983486c9db2b0d47d"
+          }
+        }
+      ]
+    },
+    "ex-it-dephasing-quantum-relative-entropy-dpi": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-dimensional-quantum-relative-entropy",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space and let $A,B:H\\to H$ be non-negative operators. For such an operator $A$, set $\\operatorname{supp}(A):=(\\ker A)^\\perp$, where $\\ker A$ is the kernel of a linear map ([[def-kernel-and-image-of-a-linear-map]]); this extends the density-operator support convention in [[def-qc-density-operator]]. If $\\operatorname{supp}(A)\\subseteq\\operatorname{supp}(B)$, define\n\n$$D(A\\|B):=\\operatorname{tr}(A\\ln A)-\\operatorname{tr}(A\\ln B).$$\n\nHere $\\ln A$ is defined spectrally on the positive eigenspaces of $A$ with $0\\ln0:=0$, and $\\ln B$ in the cross term is restricted to $\\operatorname{supp}(B)$; the support condition ensures that $A$ vanishes on $\\ker B$, so the omitted kernel contributes zero. If $\\operatorname{supp}(A)\\nsubseteq\\operatorname{supp}(B)$, set $D(A\\|B):=+\\infty$. In particular, $D(0\\|B)=0$. For density operators this is the finite-dimensional **quantum relative entropy**. The logarithms are natural, so the value is in nats; the base-two value is $D_2(A\\|B):=D(A\\|B)/\\ln2$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-completely-positive-map",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional complex inner-product spaces and write $\\mathcal L(H)$ and $\\mathcal L(K)$ for their vector spaces of complex-linear endomorphisms with pointwise operations ([[def-dimension]], [[def-real-and-complex-inner-product-space]], [[def-vector-space-of-linear-maps]], [[prop-linear-maps-form-a-vector-space]]). Let $\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be complex-linear. For each integer $r\\ge1$, put $R=\\mathbb C^r$ with its standard ordered register basis ([[def-qc-register-and-computational-basis]]). Write an operator $X\\in\\mathcal L(H\\otimes R)$ in its unique $r\\times r$ block form $X=[X_{ij}]$ with $X_{ij}\\in\\mathcal L(H)$, and define $\\Phi^{(r)}(X)$ to have blocks $[\\Phi(X_{ij})]$ on $K\\otimes R$. Lemma [[lem-qc-finite-ancilla-amplification-is-block-map]] proves that this block rule defines a linear map on the full operator space for every finite $r$. For $r=1$, the extension is $\\Phi$ under the canonical unitary identifications $x\\mapsto x\\otimes e_0$ and $y\\mapsto y\\otimes e_0$ proved in that lemma.\n\nThe map $\\Phi$ is **completely positive** if, for every finite $r\\ge1$, $\\Phi^{(r)}$ sends every nonnegative operator on $H\\otimes R$ to a nonnegative operator on $K\\otimes R$ ([[def-non-negative-and-positive-operator]]). The quantifier includes $r=1$; complete positivity therefore implies positivity. No Kraus, Choi, or Stinespring characterization is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-quantum-channel",
+          "source_section": "Definition",
+          "quote": "Let $H$ and $K$ be finite-dimensional (have finite bases by [[def-dimension]])\ncomplex inner-product spaces. A\n**quantum channel** from $H$ to $K$ is a complex-linear map\n$\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ ([[def-linear-map]]) that is completely\npositive ([[def-qc-completely-positive-map]]) and trace-preserving, meaning\n\n$$\\operatorname{tr}(\\Phi(X))=\\operatorname{tr}(X)\\qquad\\text{for every }X\\in\\mathcal L(H),$$\n\nwhere trace is the basis-independent trace of a finite-dimensional\nendomorphism ([[def-trace-of-an-endomorphism]]). Trace preservation is\nrequired on the full operator space, not only on density operators. This\ndefinition is mathematical and assumes no physical realization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-trace-of-ab-equals-trace-of-ba",
+          "source_section": "Statement",
+          "quote": "For $A\\in M_{m\\times n}(F)$ and $B\\in M_{n\\times m}(F)$,\n\n$$\\operatorname{tr}(AB)=\\operatorname{tr}(BA).$$\n\nThe two products may have different sizes, and the equality includes $m=0$ or\n$n=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-it-quantum-relative-entropy-channel-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be nonzero finite-dimensional complex inner-product spaces, let $\\Phi:\\mathcal L(H)\\to\\mathcal L(K)$ be a quantum channel ([[def-qc-quantum-channel]]), and let $A,B$ be non-negative operators on $H$. Then\n\n$$D(\\Phi(A)\\|\\Phi(B))\\le D(A\\|B).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $P_j=|j\\rangle\\langle j|$ for $j=0,1$. Then $P_j=P_j^\\dagger=P_j^2$ and $P_0+P_1=I$ by [F3]. The map $\\Delta(X)=\\sum_jP_jXP_j$ is complex-linear. For any finite ancilla dimension $r$ and positive $Q$ on $H\\otimes\\mathbb C^r$, its amplification is $\\sum_j(P_j\\otimes I_r)Q(P_j\\otimes I_r)^\\dagger$, a sum of positive operators since each summand has quadratic form $\\langle Q(P_j\\otimes I_r)^\\dagger z,(P_j\\otimes I_r)^\\dagger z\\rangle\\ge0$. Thus [F4] gives complete positivity. Also [F6] gives $\\operatorname{tr}(\\Delta(X))=\\sum_j\\operatorname{tr}(P_jXP_j)=\\operatorname{tr}(X(P_0+P_1))=\\operatorname{tr}(X)$. Hence $\\Delta$ is a channel by [F5].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The state $\\rho$ has eigenvalues $1,0$, while $\\sigma$ has eigenvalues $3/4,1/4$; both are density operators by direct trace and positivity. Since $\\rho$ is the rank-one projection onto $|+\\rangle$, $\\operatorname{tr}(\\rho\\ln\\rho)=0$ under $0\\ln0=0$, and $\\langle+|\\ln\\sigma|+\\rangle=\\frac12\\ln(3/4)+\\frac12\\ln(1/4)$. Therefore [F1] gives $D(\\rho\\|\\sigma)=\\frac12\\ln(16/3)$. Dephasing gives $\\Delta(\\rho)=I/2$ and $\\Delta(\\sigma)=\\sigma$; the diagonal trace formula gives $D(I/2\\|\\sigma)=\\frac12\\ln((1/2)/(3/4))+\\frac12\\ln((1/2)/(1/4))=\\frac12\\ln(4/3)$. Since $16/3>4/3$, strict monotonicity of the logarithm in [F7] proves the strict decrease; this explicit calculation is consistent with [F9] applied to the channel in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The supports of $|+\\rangle\\langle+|$ and $|-\\rangle\\langle-|$ are distinct one-dimensional subspaces, so the first is not contained in the second and [F1] gives input divergence $+\\infty$. Their diagonal entries are both $(1/2,1/2)$, so $\\Delta(|+\\rangle\\langle+|)=\\Delta(|-\\rangle\\langle-|)=I/2$; consequently the output relative entropy is $D(I/2\\|I/2)=0$ by [F1].",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. Every input and output matrix in the example is on a fixed nonzero qubit.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. Every input and output matrix in the example is on a fixed nonzero qubit.",
+            "item_sha256": "db809c0a261223f6ca0ff01b4c80575abcedf33c5565727b363b5abd7e422797",
+            "row_sha256": "1badc40e305785ac7d1003dbdd6451fbfbd019dd5c31dfd0c7ec88a74c9335a1"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly checks the support-failure boundary with infinite input divergence and zero output divergence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. A dimension-one dephasing channel is not the witness claimed; the computation fixes two coordinates.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. A dimension-one dephasing channel is not the witness claimed; the computation fixes two coordinates.",
+            "item_sha256": "db809c0a261223f6ca0ff01b4c80575abcedf33c5565727b363b5abd7e422797",
+            "row_sha256": "f7d7c1a1252c862dabf4132ac996c3b12644d8affc2acdd3f4e5ea449ad80720"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the rank-one input and maximally mixed dephased state; step 3.1 treats distinct pure-state supports and their identical maximally mixed outputs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. The example fixes the diagonal probabilities three quarters and one quarter rather than asserting an interval theorem.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. The example fixes the diagonal probabilities three quarters and one quarter rather than asserting an interval theorem.",
+            "item_sha256": "db809c0a261223f6ca0ff01b4c80575abcedf33c5565727b363b5abd7e422797",
+            "row_sha256": "2d5d2bbcbe22ec88c59aa15413f118b53c3fae510637e2c992df6216b983d7f0"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. Two explicit Kraus projectors and fixed pure vectors determine the entire calculation.",
+          "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. Two explicit Kraus projectors and fixed pure vectors determine the entire calculation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. Two explicit Kraus projectors and fixed pure vectors determine the entire calculation.",
+            "item_sha256": "db809c0a261223f6ca0ff01b4c80575abcedf33c5565727b363b5abd7e422797",
+            "row_sha256": "c296146abbe2005fe40564193547db9ead832bbd5c2e403602df0afc5ba10a6b"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. The two strict-loss examples do not assert a criterion for equality in data processing.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. The two strict-loss examples do not assert a criterion for equality in data processing.",
+            "item_sha256": "db809c0a261223f6ca0ff01b4c80575abcedf33c5565727b363b5abd7e422797",
+            "row_sha256": "263b89e393c834a9eb3433895239537e7dcfacb28dc619398adf9d588f30c1d3"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. The two strict-loss examples do not assert a criterion for equality in data processing.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "Explicit qubit dephasing strictly lowers one finite divergence and sends an orthogonal pure pair with infinite divergence to identical mixed outputs. The two strict-loss examples do not assert a criterion for equality in data processing.",
+            "item_sha256": "db809c0a261223f6ca0ff01b4c80575abcedf33c5565727b363b5abd7e422797",
+            "row_sha256": "b296a20641815f8ee876c87ee6b63b2b255caeb9b3d8c1312cb3da614f4a3c18"
+          }
+        }
+      ]
+    },
+    "ex-it-strong-subadditivity-for-pure-tripartite-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-von-neumann-entropy",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root convention that its inner product is linear in the first argument, and let $\\rho$ be a density operator on $H$ ([[def-qc-density-operator]]). If $\\lambda_1,\\ldots,\\lambda_d$ are its eigenvalues counted with multiplicity, define its **von Neumann entropy** by\n\n$$S(\\rho):=-\\operatorname{tr}(\\rho\\ln\\rho):=-\\sum_{j:\\lambda_j>0}\\lambda_j\\ln\\lambda_j.$$\n\nThe trace is the finite-dimensional endomorphism trace ([[def-trace-of-an-endomorphism]]), and the spectral definition makes the expression independent of the eigenbasis. The term for a zero eigenvalue is defined to be $0\\ln0:=0$. The default unit is nats, using the natural logarithm ([[def-natural-logarithm]]); the entropy in bits is $S_2(\\rho):=S(\\rho)/\\ln2$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a complex vector space $H$, write $\\operatorname{End}(H)$ for the set of\nlinear maps $H\\to H$ ([[def-linear-map]]).\n\nLet $H_A,H_B$ be finite-dimensional complex inner-product spaces with fixed\nordered orthonormal bases $(e_i)_{i<a}$ and $(f_j)_{j<b}$, respectively. The\nordered product basis of $H_A\\otimes H_B$ has the $A$ index first. For\n$R\\in\\operatorname{End}(H_A\\otimes H_B)$ define\n$\\operatorname{Tr}_B(R)\\in\\operatorname{End}(H_A)$ by\n\n$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$\n\nRows are output coordinates and columns are input coordinates, as in\n[[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, the sum is\nempty and equals $0$. The notation $\\operatorname{Tr}_B$ means that the second\nfactor is contracted; the first factor and its order are retained.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-first-factor-partial-trace",
+          "source_section": "Definition",
+          "quote": "Let $H_G,H_Q$ be finite-dimensional complex inner-product spaces, and fix\nthe factor order $H_G\\otimes H_Q$. For ordered orthonormal bases\n$(g_s)$ and $(q_\\alpha)$, define\n$$\\operatorname{Tr}_G:\\mathcal B(H_G\\otimes H_Q)\\to\\mathcal B(H_Q),\\qquad (\\operatorname{Tr}_G X)_{\\alpha\\beta}=\\sum_sX_{(s,\\alpha),(s,\\beta)},$$\nwhere $X_{(s,\\alpha),(t,\\beta)}=\\langle X(g_t\\otimes q_\\beta),\ng_s\\otimes q_\\alpha\\rangle$ under the linear-first convention. Equivalently,\nthis is the partial trace over the second factor after swapping the two wires.\nThe partial-trace characterization and wire-permutation unitarity in\n[[thm-qc-partial-trace-characterization-and-basis-independence]] and\n[[thm-qc-wire-permutation-is-unitary]] show that the map is independent of\nthe chosen orthonormal bases. In particular, the same definition applies when\n$H_Q=H_L\\otimes H_R$, with that residual factor order left unchanged. For an\noperator on $(H_G\\otimes H_L)\\otimes H_R$, use the canonical associator of\nthe ordered tensor-register construction to view it on\n$H_G\\otimes(H_L\\otimes H_R)$ before taking this partial trace.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of\nfinite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each\nequipped with a specified ordered orthonormal basis. Its space is\n$H_0\\otimes\\cdots\\otimes H_{n-1}$, with factors retained in the displayed\norder. The product basis is ordered lexicographically by its tuple of factor\nindices. The empty tensor product is $\\mathbb C$ with basis $\\{1\\}$. A\nzero-dimensional factor is allowed in this mathematical construction and makes\nthe tensor space zero; it is not a register under\n[[def-qc-register-and-computational-basis]].\n\nThe inner product is linear in the first argument and conjugate-linear in the\nsecond, and on elementary tensors it is\n\n$$\\left\\langle\\bigotimes_{k<n}x_k,\\bigotimes_{k<n}y_k\\right\\rangle_{\\otimes}:=\\prod_{k<n}\\langle x_k,y_k\\rangle_{{\\rm root},k}.$$ \n\nFor the empty tensor, the right side is the empty product $1$, giving the\nstandard inner product on $\\mathbb C$.\n\nFor a permutation $\\sigma$ of the $n$ factor positions, the **wire permutation**\n$P_\\sigma$ maps the product basis vector indexed by\n$(i_0,\\ldots,i_{n-1})$ to the product basis vector whose output factor order is\n$(\\sigma(0),\\ldots,\\sigma(n-1))$. It is extended linearly; for $n=0$ it is the\nidentity on $\\mathbb C$. The extension is a linear map in the sense of\n[[def-linear-map]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-register-and-computational-basis",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge 1$, the $d$-level register is the complex inner-product\nspace $Q_d=\\mathbb C^d$ with the standard pairing\n$\\langle z,w\\rangle_{\\rm root}=\\sum_{j<d}z_j\\overline{w_j}$, linear in the\nfirst argument as in [[def-real-and-complex-inner-product-space]] and\n[[prop-standard-coordinate-inner-products]]. Its **computational basis** is the\nordered standard basis $(e_0,\\ldots,e_{d-1})$ of [[lem-standard-basis-of-f-n]].\nThe register's alphabet is the ordered set $\\{0,\\ldots,d-1\\}$.\n\nFor $n\\ge0$, the $n$-qubit register is the ordered tensor product over\n$\\mathbb C$ of $n$ copies of $Q_2$. Here $\\otimes_{\\mathbb C}$ is the algebraic\nmodule tensor product ([[def-tensor-product-of-modules-by-generators-and-relations]]),\nwith its complex-module structure and finite iterated/empty-product conventions\nfrom [[thm-commutative-ring-module-structure-on-a-tensor-product]] and\n[[cor-finite-iterated-tensor-products-represent-multilinear-maps]]. The tuple of\nbit positions is ordered lexicographically, with the first wire as the most\nsignificant position; the product-basis theorem below establishes the\ncorresponding elementary tensors as a basis. For $n=0$, the empty tensor\nproduct is $\\mathbb C$ with basis $\\{1\\}$. This one-dimensional trivial\nregister is distinct from the zero vector space $\\mathbb C^0$. By definition a\nregister has positive dimension; a zero-dimensional space may still occur as a\nfactor in the more general tensor-space construction below.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-qc-schmidt-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $H,K$ be finite-dimensional complex-inner-product spaces with the tensor-product convention of [[def-qc-tensor-register-and-permutation]]. For every $\\Psi\\in H\\otimes K$ there are an integer $r\\ge0$, positive numbers $s_1,\\ldots,s_r$, and orthonormal families $u_1,\\ldots,u_r\\in H$ and $v_1,\\ldots,v_r\\in K$ such that\n\n$$\\Psi=\\sum_{j=1}^r s_j u_j\\otimes v_j,\\qquad \\|\\Psi\\|^2=\\sum_{j=1}^r s_j^2.$$\n\nFor $\\Psi=0$ take $r=0$ and the empty sum. For any chosen ordered pair of orthonormal bases, the construction below obtains the $s_j$ as the positive singular values of the coefficient matrix of $\\Psi$ in their ordered product basis.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-finite-strong-subadditivity",
+          "source_section": "Statement",
+          "quote": "Let $H_A,H_B,H_C$ be nonzero finite-dimensional complex inner-product spaces and let $\\rho_{ABC}$ be a density operator on their ordered tensor product. Write $\\rho_{AB},\\rho_{BC},\\rho_B$ for its marginals using the partial traces in [[def-qc-partial-trace]]. Then\n$$S(\\rho_{AB})+S(\\rho_{BC})\\ge S(\\rho_B)+S(\\rho_{ABC}),$$\nwhere $S(\\rho)=-\\operatorname{tr}(\\rho\\ln\\rho)$ with $0\\ln0:=0$ as in [[def-it-von-neumann-entropy]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-non-negative-operator-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be linear. The following are equivalent:\n\n1. $T$ is non-negative.\n2. $T$ is self-adjoint and every eigenvalue of $T$ is a nonnegative real number.\n3. Some orthonormal basis makes the matrix of $T$ diagonal with nonnegative real diagonal entries.\n4. There exists a linear map $S:V\\to V$ such that $T=S^*S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-qc-wire-permutation-is-unitary",
+          "source_section": "Statement",
+          "quote": "Let $H_0,\\ldots,H_{n-1}$ be a finite ordered family of finite-dimensional\ncomplex inner-product spaces, with the product bases of\n[[def-qc-tensor-register-and-permutation]]. For a permutation $\\sigma$ of the\nfactor positions, the map $P_\\sigma$ that reorders the factors is a bijective\nlinear isometry from $H_0\\otimes\\cdots\\otimes H_{n-1}$ to\n$H_{\\sigma(0)}\\otimes\\cdots\\otimes H_{\\sigma(n-1)}$. When source and target\nare identified as the same register, $P_\\sigma$ is a unitary operator in the\nsense of [[def-linear-isometry-and-orthogonal-or-unitary-operator]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The two computational basis vectors $|000\\rangle,|111\\rangle$ are orthonormal by [F4], so $|\\mathrm{GHZ}\\rangle$ has norm one and [F2] makes $\\rho_{ABC}$ a state. Its rank-one spectrum is $(1,0,\\ldots,0)$ by [F8], hence $S(\\rho_{ABC})=-1\\ln1=0$ by [F1] and [F7].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Expanding $\\rho_{ABC}$ gives the four terms $\\frac12|000\\rangle\\langle000|$, $\\frac12|000\\rangle\\langle111|$, $\\frac12|111\\rangle\\langle000|$, and $\\frac12|111\\rangle\\langle111|$. For any traced register, the first- or last-factor formula [F3], after the wire permutation [F9] when needed, kills both off-diagonal terms because $\\operatorname{tr}(|0\\rangle\\langle1|)=\\operatorname{tr}(|1\\rangle\\langle0|)=0$; the resulting two-register marginal is $\\frac12|00\\rangle\\langle00|+\\frac12|11\\rangle\\langle11|$. Tracing out two registers similarly gives $I/2$ for each one-register marginal. Thus each such reduced state has eigenvalues $1/2,1/2$ on its support, consistent with the equal Schmidt coefficients $1/\\sqrt2,1/\\sqrt2$ across each one-versus-two split by [F5].",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each reduced state in step 1.2, [F1] gives entropy $-2(\\frac12\\ln\\frac12)=\\ln2$. Hence the left side of the claimed SSA instance is $2\\ln2$, and the right side is $\\ln2+0$. Since $2>1$ and $\\ln2>0$ by strict monotonicity in [F7], the inequality is strict and equals the stated comparison.",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The three fixed qubit registers and normalized GHZ vector are nonempty.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The three fixed qubit registers and normalized GHZ vector are nonempty.",
+            "item_sha256": "3fdb057ac86f42d3fc95e3ccab7322e6fe4f890bb6cddf5ecc0b5412838b7f35",
+            "row_sha256": "6370aa1134fc1a14ec4e8125df28d692ade2dc28242ec14bcc92d8c807b979cf"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 retain zero eigenvalues in the pure-state and reduced-state spectra."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. A single-dimensional register is outside this fixed three-qubit example.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. A single-dimensional register is outside this fixed three-qubit example.",
+            "item_sha256": "3fdb057ac86f42d3fc95e3ccab7322e6fe4f890bb6cddf5ecc0b5412838b7f35",
+            "row_sha256": "af28da5a1fcf00b21e92d4df8110964ebab2b76966502c2a52a43f6d02c9e16d"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly handles the repeated eigenvalue 1/2 in each reduced spectrum."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The GHZ coefficients are fixed, with no variable scalar interval.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The GHZ coefficients are fixed, with no variable scalar interval.",
+            "item_sha256": "3fdb057ac86f42d3fc95e3ccab7322e6fe4f890bb6cddf5ecc0b5412838b7f35",
+            "row_sha256": "62c6f7f099dd3272737712cb261314182f6f3cb86ec43d572141bb453be6ec6d"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The marginal matrices follow by tracing explicit computational-basis cross terms, not by selecting unspecified states.",
+          "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The marginal matrices follow by tracing explicit computational-basis cross terms, not by selecting unspecified states.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The marginal matrices follow by tracing explicit computational-basis cross terms, not by selecting unspecified states.",
+            "item_sha256": "3fdb057ac86f42d3fc95e3ccab7322e6fe4f890bb6cddf5ecc0b5412838b7f35",
+            "row_sha256": "9b438e20f598fe5dac5d9a7fbb25a8d6fb4e6dc459a4eea615b7dece695d69bf"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The strict GHZ entropy calculation is a witness, not an iff description of equality in strong subadditivity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The strict GHZ entropy calculation is a witness, not an iff description of equality in strong subadditivity.",
+            "item_sha256": "3fdb057ac86f42d3fc95e3ccab7322e6fe4f890bb6cddf5ecc0b5412838b7f35",
+            "row_sha256": "8abb3f911893e9572d83b716973af0c5a71c1412134ac38df54c1ad80c63895d"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The strict GHZ entropy calculation is a witness, not an iff description of equality in strong subadditivity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The GHZ state is pure and its proper nontrivial marginals each have two equal positive eigenvalues, giving a strict entropy inequality. The strict GHZ entropy calculation is a witness, not an iff description of equality in strong subadditivity.",
+            "item_sha256": "3fdb057ac86f42d3fc95e3ccab7322e6fe4f890bb6cddf5ecc0b5412838b7f35",
+            "row_sha256": "cbe333d4ce5c5df1b639ea9d9b5426e6c6b05f16e84ad7f1a0da063e314a4310"
+          }
+        }
+      ]
+    },
+    "cex-it-fidelity-data-processing-does-not-prove-qre-dpi": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-dimensional-quantum-relative-entropy",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a finite-dimensional complex inner-product space and let $A,B:H\\to H$ be non-negative operators. For such an operator $A$, set $\\operatorname{supp}(A):=(\\ker A)^\\perp$, where $\\ker A$ is the kernel of a linear map ([[def-kernel-and-image-of-a-linear-map]]); this extends the density-operator support convention in [[def-qc-density-operator]]. If $\\operatorname{supp}(A)\\subseteq\\operatorname{supp}(B)$, define\n\n$$D(A\\|B):=\\operatorname{tr}(A\\ln A)-\\operatorname{tr}(A\\ln B).$$\n\nHere $\\ln A$ is defined spectrally on the positive eigenspaces of $A$ with $0\\ln0:=0$, and $\\ln B$ in the cross term is restricted to $\\operatorname{supp}(B)$; the support condition ensures that $A$ vanishes on $\\ker B$, so the omitted kernel contributes zero. If $\\operatorname{supp}(A)\\nsubseteq\\operatorname{supp}(B)$, set $D(A\\|B):=+\\infty$. In particular, $D(0\\|B)=0$. For density operators this is the finite-dimensional **quantum relative entropy**. The logarithms are natural, so the value is in nats; the base-two value is $D_2(A\\|B):=D(A\\|B)/\\ln2$.",
+          "uses": [
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qc-fidelity",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\rho,\\sigma$ be density operators on $H$ (nonnegative operators of trace one; [[def-qc-density-operator]]). Their **root fidelity** is\n$$F(\\rho,\\sigma):=\\|\\sqrt\\rho\\,\\sqrt\\sigma\\|_1,$$\nwhere $\\sqrt\\rho$ and $\\sqrt\\sigma$ are the unique non-negative square roots and $\\|\\cdot\\|_1$ is the finite-dimensional trace norm ([[def-qc-trace-norm]]). This library uses root fidelity; the squared quantity $F(\\rho,\\sigma)^2$ is called squared fidelity.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-trace-distance",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space and let $\\rho,\\sigma$ be density operators on $H$ (nonnegative operators of trace one; [[def-qc-density-operator]]). Their **trace distance** is\n$$D(\\rho,\\sigma):=\\tfrac12\\|\\rho-\\sigma\\|_1,$$\nwhere $\\|\\cdot\\|_1$ is the trace norm ([[def-qc-trace-norm]]). The factor $1/2$ is part of this state-distance convention. The diamond norm below is an unhalved norm on maps.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qc-trace-norm",
+          "source_section": "Definition",
+          "quote": "Let $A:H\\to K$ be a linear map ([[def-linear-map]]) between finite-dimensional\ncomplex inner-product spaces. Its singular values are the eigenvalues of\n$|A|:=\\sqrt{A^*A}:H\\to H$, counted with multiplicity, as defined in\n[[def-singular-values-of-an-endomorphism]]. Define the **trace norm**, or\nSchatten-$1$ norm, by\n\n$$\\|A\\|_1:=\\sum_{j<\\dim H}s_j(A).$$\n\nThe sum includes zero singular values and is $0$ when $H$ is the zero space.\nFor this definition, $A$ may be rectangular; the singular values are those of\n$|A|$ on the domain $H$. The spectral trace formula is proved in\n[[thm-qc-trace-norm-spectral-formula]].",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qc-density-operator",
+          "source_section": "Definition",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, with the root library's convention that the inner product is linear in its first argument. A **density operator** on $H$ is a non-negative endomorphism $\\rho:H\\to H$ with $\\operatorname{tr}(\\rho)=1$; non-negative and trace have the meanings of [[def-non-negative-and-positive-operator]] and [[def-trace-of-an-endomorphism]]. The zero-dimensional space is excluded: its only endomorphism has trace $0$.\n\nHere $\\ker\\rho=\\{x\\in H:\\rho x=0\\}$, using the kernel of a linear map from [[def-kernel-and-image-of-a-linear-map]]. The **support** of $\\rho$ is the orthogonal complement of its kernel in the root convention:\n\n$$\\operatorname{supp}(\\rho):=\\{x\\in H: \\langle x,y\\rangle=0\\text{ for every }y\\in\\ker\\rho\\}.$$\n\nFor a subspace $S\\subseteq H$, $\\rho$ is **faithful on $S$** when $\\operatorname{supp}(\\rho)=S$ and the restriction $\\rho|_S:S\\to S$ is positive definite in the sense of [[def-non-negative-and-positive-operator]]. This restriction is an endomorphism: if $x\\in S$ and $y\\in\\ker\\rho$, self-adjointness gives $\\langle\\rho x,y\\rangle=\\langle x,\\rho y\\rangle=0$, so $\\rho x\\in(\\ker\\rho)^\\perp=S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).\n\nConsequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.\n\n**No converse is asserted, and none holds.** Continuity at $c$ does not give\ndifferentiability at $c$, and the standard witness is worked out on the\ncompanion page.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-pi-via-first-positive-cosine-zero",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma$ be the unique smallest positive zero of cosine supplied by [[thm-cosine-has-a-smallest-positive-zero]]. Define\n$$\\pi:=2\\gamma.$$\n\nThus $\\pi>0$ and $\\pi/2=\\gamma$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $\\theta\\in[a,\\pi/4]$, $\\rho_{\\sin^2\\theta}=\\operatorname{diag}(\\cos^2\\theta,\\sin^2\\theta)$ is nonnegative and has trace one by [F11], so is a state by [F5]. Since $a>0$ by [F15], [F8] and [F12] make sine positive and strictly increasing on $[a,\\pi/4]$; squaring preserves strict order there, so the angle parametrization is injective and $T_a$ is well-defined. Its output angle lies in $[0,\\pi/4-a]$, so its output is also a density operator.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F8",
+            "F11",
+            "F12",
+            "F15",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If a quantum channel agreed with $T_a$ on $\\mathcal S_a$, complex-linearity would make its output's $|1\\rangle$ diagonal entry affine in $p$, since $\\rho_p=(1-p)|0\\rangle\\langle0|+p|1\\rangle\\langle1|$. Thus there would be constants $A,B$ with $\\sin^2(\\theta-a)=A+B\\sin^2\\theta$ for every $\\theta\\in[a,\\pi/4]$. Differentiating twice on the open interval and using [F10]–[F13] gives $\\cos(2\\theta-2a)=B\\cos(2\\theta)$. By [F14], cosine is continuous, so taking $\\theta\\uparrow\\pi/4$ yields $\\sin(2a)=0$, because $\\cos(\\pi/2-2a)=\\sin(2a)$ and $\\cos(\\pi/2)=0$. But $0<2a=\\pi/6<\\pi/2$ by [F15], so [F8]–[F9] give $\\sin(2a)>0$, a contradiction. Hence no quantum channel agrees with $T_a$ on the family.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\theta,\\phi\\in[a,\\pi/4]$, the square roots in [F6] are diagonal with entries $(\\cos\\theta,\\sin\\theta)$ and $(\\cos\\phi,\\sin\\phi)$. Their product is positive diagonal, so by [F2] and [F4], $$F(\\rho_{\\sin^2\\theta},\\rho_{\\sin^2\\phi})=\\cos\\theta\\cos\\phi+\\sin\\theta\\sin\\phi=\\cos(\\theta-\\phi).$$ The cosine addition formula [F10] justifies the last equality. Applying $T_a$ subtracts $a$ from both angles, leaving their difference unchanged; root fidelity is therefore preserved for every pair.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F6",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For diagonal qubit states, [F3] and [F4] give $d_{\\rm tr}(\\rho_p,\\rho_q)=|p-q|$. Take $\\theta\\ge\\phi$ in $[a,\\pi/4]$. The addition formulas and Pythagorean identity [F10]–[F11] give $\\sin^2u-\\sin^2v=\\sin(u+v)\\sin(u-v)$. Therefore $$\\sin^2\\theta-\\sin^2\\phi=\\sin(\\theta+\\phi)\\sin(\\theta-\\phi),$$ $$\\sin^2(\\theta-a)-\\sin^2(\\phi-a)=\\sin(\\theta+\\phi-2a)\\sin(\\theta-\\phi).$$ Here $0\\le\\theta+\\phi-2a\\le\\theta+\\phi\\le\\pi/2$, so [F8]–[F12] make the first sine factor in the second line no larger than the corresponding nonnegative factor in the first line; the other factor is the same and nonnegative. Thus the output coordinate difference is at most the input difference, proving trace-distance contraction for every pair.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Take $\\theta=\\pi/4$ and $\\phi=a$. By strict increase of sine from $\\sin0=0$ to $\\sin(\\pi/2)=1$ in [F8], [F9], and [F12], every angle strictly between zero and $\\pi/2$ gives $0<\\sin^2\\theta<1$; thus both input diagonal states have full support and their relative entropy is finite by [F1] and [F7], since the positive spectral entries have finite natural logarithms. The outputs are $\\rho_{\\sin^2(\\pi/4-a)}$ and $\\rho_0=|0\\rangle\\langle0|$. Since $0<\\pi/4-a<\\pi/2$ by [F15], the first output has full support, while the second has one-dimensional support; support inclusion fails and [F1] gives output divergence $+\\infty$.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "F8",
+            "F9",
+            "F12",
+            "F15",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Independently, the root fidelity of $|0\\rangle\\langle0|$ and $|+\\rangle\\langle+|$ is $1/\\sqrt2$: the product of their positive square roots is $(1/\\sqrt2)|0\\rangle\\langle+|$, whose only nonzero singular value is $1/\\sqrt2$. Their difference is $\\frac12\\begin{pmatrix}1&-1\\\\-1&-1\\end{pmatrix}$, whose square is $I/2$, so both singular values are $1/\\sqrt2$ and [F3]–[F4] give trace distance $1/\\sqrt2$. The first support is not contained in the second, so [F1] gives infinite relative entropy.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "An angle translation preserves root fidelity and contracts trace distance while increasing one relative entropy from finite to infinite, and a separate pure pair separates the metrics. The closed angle interval contains distinct endpoints and the example uses a fixed qubit, so no empty family is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "An angle translation preserves root fidelity and contracts trace distance while increasing one relative entropy from finite to infinite, and a separate pure pair separates the metrics. The closed angle interval contains distinct endpoints and the example uses a fixed qubit, so no empty family is claimed.",
+            "item_sha256": "97c77651331b3c5dc1f9108a97e93bfaa6a19f50df7e2b227f2733bab771b5b6",
+            "row_sha256": "66a197d462b7e2d379085990a3d5ea502430cfed66da272e5e0b95fdac8d1229"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "The closed angle interval contains distinct endpoints and the example uses a fixed qubit, so no empty family is claimed. An angle translation preserves root fidelity and contracts trace distance while increasing one relative entropy from finite to infinite, and a separate pure pair separates the metrics."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.3 and 3.1 explicitly use support failure when an output or comparison state has a zero eigenvalue."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "An angle translation preserves root fidelity and contracts trace distance while increasing one relative entropy from finite to infinite, and a separate pure pair separates the metrics. A one-dimensional state space cannot realize the two independent qubit directions used in this counterexample.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "An angle translation preserves root fidelity and contracts trace distance while increasing one relative entropy from finite to infinite, and a separate pure pair separates the metrics. A one-dimensional state space cannot realize the two independent qubit directions used in this counterexample.",
+            "item_sha256": "97c77651331b3c5dc1f9108a97e93bfaa6a19f50df7e2b227f2733bab771b5b6",
+            "row_sha256": "8885abaebf9c126a6aebb7d3b826a2f7417820743ecdd9be9ee9896e651078bf"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.3 treats full-support inputs whose output comparison state has rank one; step 3.1 separately treats two rank-one supports and infinite relative entropy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 2.3 check both closed angle endpoints θ=a and θ=π/4, including the support-loss output."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "An angle translation preserves root fidelity and contracts trace distance while increasing one relative entropy from finite to infinite, and a separate pure pair separates the metrics. All translated density matrices and the pure comparison pair are explicit finite formulas; no map selection principle is used.",
+          "reason": "An angle translation preserves root fidelity and contracts trace distance while increasing one relative entropy from finite to infinite, and a separate pure pair separates the metrics. All translated density matrices and the pure comparison pair are explicit finite formulas; no map selection principle is used.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "An angle translation preserves root fidelity and contracts trace distance while increasing one relative entropy from finite to infinite, and a separate pure pair separates the metrics. All translated density matrices and the pure comparison pair are explicit finite formulas; no map selection principle is used.",
+            "item_sha256": "97c77651331b3c5dc1f9108a97e93bfaa6a19f50df7e2b227f2733bab771b5b6",
+            "row_sha256": "945f792f47817d2981f9bfd8f92533862250733f249233f3a636b49cb6200521"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement provides a counterexample and a separate support check, not a biconditional. Step 2.3 is the support-failure witness, not an iff direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An angle translation preserves root fidelity and contracts trace distance while increasing one relative entropy from finite to infinite, and a separate pure pair separates the metrics. Fidelity and trace-distance comparisons are not asserted equivalent to relative-entropy data processing; the example refutes that implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_qre_duplicate",
+            "reason": "An angle translation preserves root fidelity and contracts trace distance while increasing one relative entropy from finite to infinite, and a separate pure pair separates the metrics. Fidelity and trace-distance comparisons are not asserted equivalent to relative-entropy data processing; the example refutes that implication.",
+            "item_sha256": "97c77651331b3c5dc1f9108a97e93bfaa6a19f50df7e2b227f2733bab771b5b6",
+            "row_sha256": "0bc531a9b2cf78a19a6512509753d113408619fe45a2c14c6c70fe86ea27e96a"
+          }
+        }
+      ]
+    }
+  },
+  "unresolved_supplier_checks": [
+    {
+      "supplier": "lem-it-quantum-relative-entropy-support-regularization",
+      "affected_items": [
+        "thm-it-quantum-relative-entropy-partial-trace-dpi",
+        "thm-it-quantum-relative-entropy-data-processing-finite"
+      ],
+      "finding": "Ownership reconciled after genuine native writer completion: unique canonical batch21 supplier; actual current body inspected for the batch22 uses. Pending readiness/verification metadata remains a root workflow obligation; this records no independent acceptance."
+    },
+    {
+      "supplier": "lem-it-quantum-relative-entropy-isometric-invariance",
+      "affected_items": [
+        "thm-it-quantum-relative-entropy-partial-trace-dpi",
+        "thm-it-quantum-relative-entropy-data-processing-finite"
+      ],
+      "finding": "Ownership reconciled after genuine native writer completion: unique canonical batch21 supplier; actual current body inspected for the batch22 uses. Pending readiness/verification metadata remains a root workflow obligation; this records no independent acceptance."
+    },
+    {
+      "supplier": "thm-it-quantum-entropy-identities",
+      "affected_items": [
+        "thm-it-finite-strong-subadditivity"
+      ],
+      "finding": "Current batch-21 body was inspected and its mutual-information/CQ identities are the intended interfaces, but verification.precheck is pending; dependent items remain escalated."
+    },
+    {
+      "supplier": "lem-natural-logarithm-bounded-by-argument",
+      "affected_items": [
+        "thm-it-quantum-relative-entropy-partial-trace-dpi",
+        "thm-it-quantum-relative-entropy-data-processing-finite",
+        "thm-it-finite-strong-subadditivity",
+        "thm-it-finite-quantum-conditional-mutual-information-nonnegative"
+      ],
+      "finding": "The published supplier proves 0 <= ln x <= x-1 for x >= 1 in its full two-step proof, which was inspected and is mathematically sound. Its verification.precheck remains pending, so it is retained as an unaccepted cross-batch supplier; exact dependencies and proof use are preserved."
+    }
+  ]
+}

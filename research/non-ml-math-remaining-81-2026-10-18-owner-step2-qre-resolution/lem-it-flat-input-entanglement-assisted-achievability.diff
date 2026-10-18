@@ -1,0 +1,22 @@
+--- items/lem-it-flat-input-entanglement-assisted-achievability.md
++++ PROPOSED/items/lem-it-flat-input-entanglement-assisted-achievability.md
+@@ -12,6 +12,7 @@
+ - lem-it-quantum-coherent-information-complement-identity
+ - thm-qc-schmidt-decomposition
+ - def-qc-tensor-register-and-permutation
++- lem-it-finite-weyl-twirl-partial-trace
+ justified_by: []
+ proof_strategy: direct
+ axiom_use: No choice axiom is used; all probabilistic selections are finite, and the stated real/finite-dimensional completeness suppliers suffice.
+@@ -48,8 +49,10 @@
+ 
+ [F5] [[def-qc-tensor-register-and-permutation]]: Ordered tensor registers, their inner product, and wire permutations.
+ 
++[F6] [[lem-it-finite-weyl-twirl-partial-trace]]: for every finite nonzero twirled factor of dimension $D$, averaging its $D^2$ Weyl conjugations sends any bipartite operator to its retained partial trace tensored with $I_D/D$; its proof verifies the exact root-of-unity orthogonality, unitarity and $D=1$ case.
++
+ ## Proof
+ 
+-1.1 Fix a $D$-dimensional subspace of the input, with embedding $J$ and flat state $\tau=JJ^*/D$. Share $|\Phi_D\rangle$ between the sender's subspace and a receiver reference $R$. On the sender half apply the $D^2$ Weyl unitaries, each uniformly likely, before the input embedding. The Weyl matrices in the fixed ordered basis are $U_{ab}|j\rangle=e^{2\pi i bj/D}|j+a\pmod D\rangle$. Direct summation over $b$ kills off-diagonal matrix units; summation over $a$ gives the maximally mixed diagonal. Consequently their average action on the sender half of $\Phi_D$ gives $I_D/D\otimes I_R/D$. [F1, F2, F3, F4, F5, given, algebra, construct]
++1.1 Fix a $D$-dimensional subspace of the input, with embedding $J$ and flat state $\tau=JJ^*/D$. Share $|\Phi_D\rangle$ between the sender's subspace and a receiver reference $R$. On the sender half apply the $D^2$ Weyl unitaries, each uniformly likely, before the input embedding. The Weyl matrices in the fixed ordered basis are $U_{ab}|j\rangle=e^{2\pi i bj/D}|j+a\pmod D\rangle$. Apply [F6] in factor order $R$ then sender, using the unitary swap from [F5]; the sender marginal discarded by the partial trace leaves $I_R/D$. Swapping back gives $I_D/D\otimes I_R/D$ for the average state in the original sender/reference order. Thus the finite phase summation used here is precisely the proved root-of-unity twirl, including $D=1$. [F1, F2, F3, F4, F5, F6, given, algebra, construct]
+ 
+ 2.1 Let $\sigma_{ab}$ be the joint output on $B R$ of this finite cq alphabet through $\mathcal N$. Because $(U_{ab}\otimes I)|\Phi_D\rangle=(I\otimes U_{ab}^T)|\Phi_D\rangle$ in coefficient coordinates, all $\sigma_{ab}$ are related by a unitary on $R$ and have identical entropy $S(\mathcal N^c(\tau))$ by purity of the full Stinespring output. Their average is $\mathcal N(\tau)\otimes I_R/D$. Thus the ensemble Holevo information is exactly $$\chi=\ln D+S(\mathcal N(\tau))-S(\mathcal N^c(\tau))=f_{\mathcal N}(\tau).$$ The HSW theorem applies to this fixed finite cq channel $ab\mapsto\sigma_{ab}$, with output $B R$. Each cq codeword is physically implemented by its sequence of Weyl operations on independent shared maximally entangled pairs. Its collective POVM is a permitted receiver measurement and its rate/error are exactly those of HSW. Therefore every nonnegative rate strictly below $f_{\mathcal N}(\tau)$ is entanglement-assisted achievable. Dimension $D=1$ is included: the one-letter ensemble then has Holevo information zero. [F1, F2, F3, F4, F5, step 1.1, given, algebra, construct] ∎

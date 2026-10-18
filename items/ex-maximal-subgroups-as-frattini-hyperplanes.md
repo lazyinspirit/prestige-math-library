@@ -3,6 +3,7 @@ id: ex-maximal-subgroups-as-frattini-hyperplanes
 kind: example
 title: "The maximal subgroups of the dihedral group of order eight as Frattini hyperplanes"
 status: published
+dependency_level: 8
 origin: session
 provenance:
   statement: ai-altered
@@ -13,7 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-24
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/published-receipts/ex-maximal-subgroups-as-frattini-hyperplanes.json
 sources:
   scraped: []
   references:

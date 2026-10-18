@@ -1,0 +1,2465 @@
+{
+  "version": 1,
+  "scope": [
+    "def-channel-sequence",
+    "def-discrete-memoryless-channel",
+    "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+    "def-discrete-memoryless-channel-information-capacity",
+    "def-fixed-length-channel-code",
+    "def-discrete-memoryless-channel-information-density",
+    "lem-discrete-memoryless-channel-capacity-is-attained",
+    "lem-discrete-memoryless-channel-n-letter-information-bound",
+    "def-fixed-length-channel-code-errors",
+    "lem-discrete-memoryless-channel-iid-information-density-converges",
+    "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+    "def-discrete-memoryless-channel-operational-capacity",
+    "lem-discrete-memoryless-channel-average-to-maximal-expurgation",
+    "thm-discrete-memoryless-channel-random-coding-achievability",
+    "lem-discrete-memoryless-channel-information-density-concentration",
+    "thm-discrete-memoryless-channel-average-error-converse",
+    "thm-discrete-memoryless-channel-alphabet-scoped-strong-converse",
+    "thm-discrete-memoryless-channel-capacity-formula",
+    "ex-binary-symmetric-channel-capacity",
+    "ex-binary-erasure-channel-capacity"
+  ],
+  "contracts": {
+    "def-channel-sequence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "An empty input measurable space admits a vacuous probability kernel; an empty output is possible only with empty input. The definition does not require finite nonempty alphabets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Kernel values may be zero; every actual input row has total mass one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. n=1 is the first channel in the sequence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Constant-output kernels and singleton input/output spaces are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval parameter or endpoint assertion; its discrete positive-integer domain has already been checked at one.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Only integer blocklengths n>=1 occur, with no continuous rate interval.",
+            "item_sha256": "cf1c3f350ac38e1eef9549bc44b6f01c850f64275815fdca72a51f11bd317b15",
+            "row_sha256": "1488adc7af85ee9dadf3c46b90ede63c7bf7969dd7d0bebfc19ccc248d12a35b"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Each W_n is supplied; no consistent process extension or selected kernels are required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "This is a definition of an arbitrary channel sequence, not an iff.",
+            "item_sha256": "cf1c3f350ac38e1eef9549bc44b6f01c850f64275815fdca72a51f11bd317b15",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "This is a definition of an arbitrary channel sequence, not an iff.",
+            "item_sha256": "cf1c3f350ac38e1eef9549bc44b6f01c850f64275815fdca72a51f11bd317b15",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ]
+    },
+    "def-discrete-memoryless-channel": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input or output alphabet is explicitly required to be nonempty, so the empty-alphabet case lies outside this item’s hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Both finite alphabets are explicitly nonempty.",
+            "item_sha256": "b2d39cee23e7c728ff1aa3411fb8b24251710078d680d762a6470a00ca6c450a",
+            "row_sha256": "607aeec0167cf6e0e8348f89ae756b4c8a4aaa99f6e36922c9d6b8d556711d8f"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Both finite alphabets are explicitly nonempty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Zero channel transitions are allowed and multiply to zero in W^n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. n=1 recovers W; singleton alphabets are allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition. The stated DMC class includes deterministic channels and channels with identical rows."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition. The finite probability simplex includes its boundary and displayed scalar parameters use their closed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. The finite product kernel is explicitly specified by the supplied W."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The definition fixes the product channel model rather than a biconditional claim.",
+            "item_sha256": "b2d39cee23e7c728ff1aa3411fb8b24251710078d680d762a6470a00ca6c450a",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The definition fixes the product channel model rather than a biconditional claim.",
+            "item_sha256": "b2d39cee23e7c728ff1aa3411fb8b24251710078d680d762a6470a00ca6c450a",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ]
+    },
+    "lem-discrete-memoryless-channel-block-kernels-are-stochastic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets. A **stochastic kernel**\nfrom $\\mathcal X$ to $\\mathcal Y$ is a matrix\n$K=(K(y\\mid x))_{x\\in\\mathcal X,y\\in\\mathcal Y}$ such that\n$K(y\\mid x)\\ge0$ and $\\sum_{y\\in\\mathcal Y}K(y\\mid x)=1$ for every\n$x\\in\\mathcal X$. The convention is input first in the condition and output\nfirst in the value $K(y\\mid x)$.\n\nFor a probability vector $P=(p_x)_{x\\in\\mathcal X}$, the output vector\n$PK$ on $\\mathcal Y$ is\n$$(PK)_y:=\\sum_{x\\in\\mathcal X}p_xK(y\\mid x).$$\nIt is a probability vector because its coordinates are nonnegative and\n$\\sum_y(PK)_y=\\sum_xp_x\\sum_yK(y\\mid x)=\\sum_xp_x=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Fix $x^n\\in\\mathcal X^n$. By [F1] and [F2], each product $W^n(y^n\\mid x^n)$ is nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Summing over the finite product alphabet and factoring the finite sum gives $\\sum_{y^n\\in\\mathcal Y^n}W^n(y^n\\mid x^n)=\\prod_{i=1}^n(\\sum_{y_i\\in\\mathcal Y}W(y_i\\mid x_i))=\\prod_{i=1}^n1=1$. Together with step 1.1, these are exactly the stochastic-kernel conditions.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input or output alphabet is explicitly required to be nonempty, so the empty-alphabet case lies outside this item’s hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Nonempty alphabets and positive n are hypotheses; each row sum is over nonempty Y^n.",
+            "item_sha256": "e34aecaa63538a5c7e4f8ab2156979e41f3073b5e51d82f94618818a17043d2d",
+            "row_sha256": "607aeec0167cf6e0e8348f89ae756b4c8a4aaa99f6e36922c9d6b8d556711d8f"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Nonempty alphabets and positive n are hypotheses; each row sum is over nonempty Y^n."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero transition factors produce zero block probability, with nonnegativity in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. n=1 is exactly the original normalized stochastic row."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Deterministic rows still have one block output of probability one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Transition values 0 and 1 preserve the finite product normalization in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The proof is finite sum factorization, requiring no selected representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "It proves the specified product is stochastic, without a converse claim.",
+            "item_sha256": "e34aecaa63538a5c7e4f8ab2156979e41f3073b5e51d82f94618818a17043d2d",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "It proves the specified product is stochastic, without a converse claim.",
+            "item_sha256": "e34aecaa63538a5c7e4f8ab2156979e41f3073b5e51d82f94618818a17043d2d",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ]
+    },
+    "def-discrete-memoryless-channel-information-capacity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Input probability vectors exist because the DMC input alphabet is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Zero-mass input/output cells use the finite KL convention; zero capacity is permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. A singleton input alphabet has I=0 and therefore C=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Identical channel rows give I=0 for every input law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Boundary laws such as point masses are included in the full input simplex."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. The supremum is over a specified nonempty simplex; attainment is a separate supplier, not assumed selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "This defines capacity as a supremum and names its separate attainment theorem; it is not an iff.",
+            "item_sha256": "c489d47e084d43eed2d90254fe6dd4ad627752d932f05e3128d4fa6900a6b13d",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "This defines capacity as a supremum and names its separate attainment theorem; it is not an iff.",
+            "item_sha256": "c489d47e084d43eed2d90254fe6dd4ad627752d932f05e3128d4fa6900a6b13d",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ]
+    },
+    "def-fixed-length-channel-code": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "n,M>=1 and the DMC alphabets are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. A rate-zero one-message code exists; no positive error is forced."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. M=1 gives a constant decoder and zero error."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition. The stated DMC class includes deterministic channels and channels with identical rows."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition. The finite probability simplex includes its boundary and displayed scalar parameters use their closed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Encoder and decoder are supplied deterministic maps on finite sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The statement defines a code pair, with no converse theorem.",
+            "item_sha256": "2cb259c8d5c0721b63b71e8118d064a1788b55893c761d1104aaa543a7272067",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The statement defines a code pair, with no converse theorem.",
+            "item_sha256": "2cb259c8d5c0721b63b71e8118d064a1788b55893c761d1104aaa543a7272067",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ]
+    },
+    "def-discrete-memoryless-channel-information-density": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A given input probability law has nonempty charged joint support.",
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Definition: the detected sum is over the n coordinates of a positive-blocklength DMC codeword, so it is not an empty indexed aggregate. A probability input has some x with P_X(x)>0; its normalized row has some y with W(y|x)>0, so the charged joint support is nonempty as well. Uncharged cells receive -infinity individually; they do not remove terms from the coordinate sum. No zero-fold block sum is asserted."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Uncharged pairs receive -infinity; charged pairs have W>0 and Q>0, so no zero denominator is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. A singleton positive-support input has information density zero on its outputs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. If all rows coincide, the density is zero wherever charged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Zero transition and zero input mass are explicitly off-support cases; n is a positive blocklength."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. The formula fixes all off-support values and needs no selected version."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "This is a definition of a log ratio and its block sum, not a biconditional.",
+            "item_sha256": "130c91eda23b1f8dadf8212a1040f3b672fa9b62ffa72c49615d5e180528c710",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "This is a definition of a log ratio and its block sum, not a biconditional.",
+            "item_sha256": "130c91eda23b1f8dadf8212a1040f3b672fa9b62ffa72c49615d5e180528c710",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ]
+    },
+    "lem-discrete-memoryless-channel-capacity-is-attained": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel-information-capacity",
+          "source_section": "Definition",
+          "quote": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this joint law, using [[def-it-finite-mutual-information]]. The **single-letter information capacity** is\n$$C(W):=\\sup_{P_X} I(P_X;W),$$\nmeasured in nats per channel use. The finite-dimensional maximum is attained, as proved in [[lem-discrete-memoryless-channel-capacity-is-attained]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-slower-than-every-positive-power",
+          "source_section": "Statement",
+          "quote": "For every $\\alpha>0$,\n$$\\lim_{x\\to+\\infty}\\frac{\\log x}{x^\\alpha}=0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and let $A\\subseteq\\mathbb{R}^n$ be nonempty. The following are equivalent.\n\n1. $A$ is compact.\n2. $A$ is closed and bounded.\n3. $A$ is pseudocompact.\n4. Every continuous $f:A\\to\\mathbb{R}$ attains a maximum and a minimum on $A$.\n\nThis theorem is a ZF statement. The nonemptiness hypothesis is necessary for condition 4, because the empty image has neither a maximum nor a minimum.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For an input law $P_X$, let $Q_{P_X}=P_XW$. By [F2] and [F3], $I(P_X;W)=H(Q_{P_X})-\\sum_xP_X(x)H(W(\\cdot\\mid x))$. The second term is linear in $P_X$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "The scalar summand $-t\\ln t$, extended by $0$ at $t=0$, is continuous on $[0,1]$ by [F4]. Each coordinate of $Q_{P_X}$ is linear in $P_X$, so the finite sum $H(Q_{P_X})$ is continuous on the input simplex. Therefore $P_X\\mapsto I(P_X;W)$ is continuous.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The input simplex is nonempty because $\\mathcal X$ is nonempty; it is closed and bounded in $\\mathbb R^{|\\mathcal X|}$. By [F5], the continuous mutual-information function attains a maximum at some $P_X^*$. Its maximum equals the supremum in [F1], proving $I(P_X^*;W)=C(W)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "F5",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input or output alphabet is explicitly required to be nonempty, so the empty-alphabet case lies outside this item’s hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Step 3.1 proves input simplex nonempty from nonempty X.",
+            "item_sha256": "1c0366a500d37c22b879e24473c3d9cdadbf174c3efa2e66fb0d2e905b682a4b",
+            "row_sha256": "607aeec0167cf6e0e8348f89ae756b4c8a4aaa99f6e36922c9d6b8d556711d8f"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 extends -t ln t continuously at 0, covering boundary input/output masses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. For one input symbol the unique input law attains I=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. If I is identically zero, every input law attains the same maximum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Closed-simplex boundary maximizers are included by continuity, not excluded by positive-support assumptions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. A single finite-dimensional extreme-value theorem supplies a maximizing input; no arbitrary-index family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Existence of a maximizer is the conclusion, not an iff.",
+            "item_sha256": "1c0366a500d37c22b879e24473c3d9cdadbf174c3efa2e66fb0d2e905b682a4b",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Existence of a maximizer is the conclusion, not an iff.",
+            "item_sha256": "1c0366a500d37c22b879e24473c3d9cdadbf174c3efa2e66fb0d2e905b682a4b",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read Proof 1.1–3.1 and each F1–F5 supplier. Entropy identity is finite on the whole simplex; t log t tends to zero at zero by the cited positive-power limit. The nonempty finite input simplex is closed/bounded in dimension >=1, so the exact ZF extreme-value theorem supplies a maximizer. Includes boundary input laws, zero transitions and singleton alphabets; no AC or unsupported external premise."
+      }
+    },
+    "lem-discrete-memoryless-channel-n-letter-information-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$,\n\n$$I(X;Y|Z)=H(X|Z)+H(Y|Z)-H(X,Y|Z)\\ge0.$$\n\nEquality holds if and only if, for every $z$ with $p_Z(z)>0$, the conditional joint pmf factors as $p_{XY|z}=p_{X|z}p_{Y|z}$; this is conditional independence given $Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "source_section": "Statement",
+          "quote": "For a finite DMC $W$ and every $n\\ge1$, the block formula $W^n(y^n\\mid x^n)=\\prod_{i=1}^n W(y_i\\mid x_i)$ is a stochastic kernel from $\\mathcal X^n$ to $\\mathcal Y^n$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-discrete-memoryless-channel-information-capacity",
+          "source_section": "Definition",
+          "quote": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this joint law, using [[def-it-finite-mutual-information]]. The **single-letter information capacity** is\n$$C(W):=\\sup_{P_X} I(P_X;W),$$\nmeasured in nats per channel use. The finite-dimensional maximum is attained, as proved in [[lem-discrete-memoryless-channel-capacity-is-attained]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By [F1], $H(Y^n)=\\sum_{i=1}^nH(Y_i\\mid Y^{i-1})$. For each $i$, [F2] gives $H(Y_i\\mid Y^{i-1})\\le H(Y_i)$, so $H(Y^n)\\le\\sum_iH(Y_i)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "The conditional chain rule in [F1] gives $H(Y^n\\mid X^n)=\\sum_iH(Y_i\\mid X^n,Y^{i-1})$. For every positive-probability value $(x^n,y^{i-1})$, factorization [F3] and summing the unused future coordinates show that the conditional law of $Y_i$ is $W(\\cdot\\mid x_i)$. Thus $H(Y_i\\mid X^n,Y^{i-1})=H(Y_i\\mid X_i)$, including after averaging over conditioning values.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By [F1], $I(X^n;Y^n)=H(Y^n)-H(Y^n\\mid X^n)$. Steps 1.1 and 1.2 therefore give $I(X^n;Y^n)\\le\\sum_{i=1}^n(H(Y_i)-H(Y_i\\mid X_i))=\\sum_{i=1}^nI(X_i;Y_i)\\le nC(W)$ by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "n>=1 and finite nonempty alphabets are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-probability conditioning values are omitted in step 1.2; when C=0 the bound gives zero information."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. n=1 yields I(X;Y)<=C directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Dependent or deterministic inputs are allowed; product structure is required only conditionally on X^n."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Boundary input probability vectors and zero transitions use finite conditional entropies."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Finite entropy chain expansions and marginal laws are determined by the input law."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The n-letter information upper bound is a one-sided inequality.",
+            "item_sha256": "e89e49808d4983d816b8647840b09dd8ad2b854a83964044b9993734f19958ec",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The n-letter information upper bound is a one-sided inequality.",
+            "item_sha256": "e89e49808d4983d816b8647840b09dd8ad2b854a83964044b9993734f19958ec",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read Proof 1.1–2.1, exact finite entropy-chain and conditional-MI suppliers, and product-kernel normalization. Chain/subadditivity applies to arbitrary dependent input coordinates. Conditional independence of outputs given the complete input follows by finite product summation at positive conditioning atoms; zero atoms are omitted. Thus H(Y^n|X^n)=sum H(Y_i|X_i), yielding sum I(X_i;Y_i)<=nC. n=1, deterministic and singleton cases hold; no IID input or AC assumed."
+      }
+    },
+    "def-fixed-length-channel-code-errors": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: although the message-index set [M] is nonempty because M>=1, an individual error event {y^n:d(y^n)!=m} may be empty. Its W^n probability is then e_m=0. In particular, a one-message code has a constant decoder, every error event is empty, and the displayed average and maximum are both zero. Thus empty error events are admitted and defined, whereas an empty message average is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Zero error is allowed when every decoded output equals the sent message."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. M=1 gives all per-message errors zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Identical encoded words are allowed and may create large maximal error."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Each e_m and both aggregate errors lie in [0,1], including the extreme values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Per-message errors and their finite average/maximum are specified quantities."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The statement defines two error criteria, not an equivalence.",
+            "item_sha256": "09ab447b7818e8d86e444cb22b322f778d0de653beb05ddd6075012852e2da83",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The statement defines two error criteria, not an equivalence.",
+            "item_sha256": "09ab447b7818e8d86e444cb22b322f778d0de653beb05ddd6075012852e2da83",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ]
+    },
+    "lem-discrete-memoryless-channel-iid-information-density-converges": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel-information-density",
+          "source_section": "Definition",
+          "quote": "Given an input law $P_X$, let $Q_{P_X}=P_XW$ be its output law. The **information density** is\n$$\\imath_{P_X}(x;y):=\\ln\\frac{W(y\\mid x)}{Q_{P_X}(y)}$$\nwhen $P_X(x)W(y\\mid x)>0$, and is $-\\infty$ otherwise. For block sequences define $\\imath_{P_X}(x^n;y^n):=\\sum_{i=1}^n\\imath_{P_X}(x_i;y_i)$, with any sum containing $-\\infty$ equal to $-\\infty$. On the support of the induced joint law, both numerator and denominator are positive, and the value is finite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets. A **stochastic kernel**\nfrom $\\mathcal X$ to $\\mathcal Y$ is a matrix\n$K=(K(y\\mid x))_{x\\in\\mathcal X,y\\in\\mathcal Y}$ such that\n$K(y\\mid x)\\ge0$ and $\\sum_{y\\in\\mathcal Y}K(y\\mid x)=1$ for every\n$x\\in\\mathcal X$. The convention is input first in the condition and output\nfirst in the value $K(y\\mid x)$.\n\nFor a probability vector $P=(p_x)_{x\\in\\mathcal X}$, the output vector\n$PK$ on $\\mathcal Y$ is\n$$(PK)_y:=\\sum_{x\\in\\mathcal X}p_xK(y\\mid x).$$\nIt is a probability vector because its coordinates are nonnegative and\n$\\sum_y(PK)_y=\\sum_xp_x\\sum_yK(y\\mid x)=\\sum_xp_x=1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "On every pair with $P_X(x)W(y\\mid x)>0$, the output marginal $Q_{P_X}(y)$ is positive. Thus [F1] gives a finite value, and summing its expectation gives $\\mathbb E[\\imath_{P_X}(X_1;Y_1)]=\\sum_{x,y:P_X(x)W(y\\mid x)>0}P_X(x)W(y\\mid x)\\ln\\frac{W(y\\mid x)}{Q_{P_X}(y)}=I(P_X;W)$ by [F2]. The variable has finite support, hence some finite variance $v$. The row-law normalization is supplied by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Let $S_n:=\\sum_{i=1}^n\\imath_{P_X}(X_i;Y_i)$. Independence gives $\\mathbb E S_n=nI(P_X;W)$ and $\\mathbb E[(S_n-\\mathbb E S_n)^2]=nv$. For every $\\eta>0$, the squared deviation is at least $n^2\\eta^2$ on $\\{|S_n/n-I(P_X;W)|\\ge\\eta\\}$, so that event has probability at most $v/(n\\eta^2)\\to0$. This is convergence in probability.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A finite input probability vector has nonempty support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Off-support zero transitions never occur under the joint law; variance v=0 gives exact constant density averages."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. For n=1 the normalized sum is one information variable; convergence concerns n->infinity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Deterministic or constant information density has v=0 and Chebyshev bound zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The proof divides only by n eta^2 with n>=1 and eta>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Given IID pairs determine all finite-support moments; no new random elements are selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Weak convergence in probability follows from IID hypotheses; no converse is asserted.",
+            "item_sha256": "2761381dc5ae64522854db04ebd15561a538933c6aecaac8e8fc2d101b3776c0",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Weak convergence in probability follows from IID hypotheses; no converse is asserted.",
+            "item_sha256": "2761381dc5ae64522854db04ebd15561a538933c6aecaac8e8fc2d101b3776c0",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read Proof 1.1–2.1 and F1–F3 definitions. Positive joint support forces positive output marginal, so information density has finitely many finite values almost surely despite its off-support -infinity convention. Its expectation equals finite MI; independent summands have variance nv. The displayed squared-deviation bound proves convergence for every eta>0, including v=0. No process extension is asserted or selected; the IID sequence is given."
+      }
+    },
+    "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-discrete-memoryless-channel-capacity-is-attained",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$, the supremum $C(W)$ is a maximum: there is an input probability vector $P_X^*$ such that $I(P_X^*;W)=C(W)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets. A **stochastic kernel**\nfrom $\\mathcal X$ to $\\mathcal Y$ is a matrix\n$K=(K(y\\mid x))_{x\\in\\mathcal X,y\\in\\mathcal Y}$ such that\n$K(y\\mid x)\\ge0$ and $\\sum_{y\\in\\mathcal Y}K(y\\mid x)=1$ for every\n$x\\in\\mathcal X$. The convention is input first in the condition and output\nfirst in the value $K(y\\mid x)$.\n\nFor a probability vector $P=(p_x)_{x\\in\\mathcal X}$, the output vector\n$PK$ on $\\mathcal Y$ is\n$$(PK)_y:=\\sum_{x\\in\\mathcal X}p_xK(y\\mid x).$$\nIt is a probability vector because its coordinates are nonnegative and\n$\\sum_y(PK)_y=\\sum_xp_x\\sum_yK(y\\mid x)=\\sum_xp_x=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback–Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\n[[def-finite-f-divergence]] by\n[[lem-finite-kl-generator-is-admissible]]. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Fix $x\\in\\mathcal X$. Suppose some output reachable from $x$ has zero $Q^*$ mass, and put $a:=\\sum_{y:Q^*(y)=0}W(y\\mid x)>0$. For $0<t<1$, let $P_t:=(1-t)P_X^*+t\\delta_x$ and $Q_t:=P_tW=(1-t)Q^*+tW(\\cdot\\mid x)$. By [F2] and [F3], the conditional-entropy part of $I(P_t;W)-I(P_X^*;W)$ is linear in $t$. On coordinates with $Q^*(y)>0$, differentiability in [F5] bounds the total entropy change in absolute value by $K_1t$ for some finite $K_1$ and all small $t$. For zero coordinates with $W(y\\mid x)>0$, the entropy contribution is exactly $-tW(y\\mid x)\\ln t-tW(y\\mid x)\\ln W(y\\mid x)$. All terms other than $-ta\\ln t$ have absolute value at most $K_2t$ for a finite $K_2$. Since $-\\ln t\\to+\\infty$ by [F6], the information change is positive for sufficiently small $t$, contradicting maximality in [F1]. Every row therefore has support contained in $\\operatorname{supp}Q^*$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Now fix any $x$ and use the same segment $P_t=(1-t)P_X^*+t\\delta_x$. By step 1.1, $Q^*$ is positive on the support of $W(\\cdot\\mid x)$, so the right derivative at $t=0$ is finite. Differentiating the entropy expression in [F2] with [F3] and [F5] gives $\\left.\\frac{d}{dt}I(P_t;W)\\right|_{0+}=-\\sum_{y:Q^*(y)>0}(W(y\\mid x)-Q^*(y))\\ln Q^*(y)-H(W(\\cdot\\mid x))+\\sum_uP_X^*(u)H(W(\\cdot\\mid u))=D(W(\\cdot\\mid x)\\|Q^*)-C(W)$, where the $+1$ derivative terms cancel because both rows sum to one, and the last equality is [F2] and [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Since $P_X^*$ maximizes information and $P_t$ is feasible for $t\\ge0$, the right derivative in step 2.1 is nonpositive. Hence $D(W(\\cdot\\mid x)\\|Q^*)\\le C(W)$. The input $x$ was arbitrary, proving the bound for all rows.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite input alphabet is nonempty and a maximizing input law is supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 rules out Q*=0 on any reachable row output; unreachable outputs carry no divergence term."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. With one input symbol Q*=W_x and row divergence and capacity are zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. At C=0, every row equals Q* by zero KL; the bound still holds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The derivative at t=0 is a one-sided feasible-simplex derivative, after reachable support positivity is proved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The argument fixes arbitrary x and uses its explicit mixture with P*; no simultaneous witness selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "It establishes support inclusion and a divergence bound, not a biconditional.",
+            "item_sha256": "a2b716e3c2c22c71ea35bb4f05be7f30d74e37cbf817b7f323b08687b551405a",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "It establishes support inclusion and a divergence bound, not a biconditional.",
+            "item_sha256": "a2b716e3c2c22c71ea35bb4f05be7f30d74e37cbf817b7f323b08687b551405a",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all three proof steps, exact F1–F6 suppliers and KL/f-divergence/convex-boundary completeness path. If a previously unused output is reachable, its -ta log t gain dominates all O(t) losses, contradicting maximality. Removing those coordinates makes the finite right derivative valid; normalization cancels the +1 terms and yields D(row||Q*)-C<=0, in the stated KL direction for every row including unused inputs. Zero/unreachable outputs are omitted and singleton cases hold. Independently rejected reader:12:1: s-s′=(s-a_k)+(a_k-b_k)+(b_k-s′)<=|s-a_k|+(a_k-b_k)+|b_k-s′|<2epsilon since a_k<=b_k; no published defect or missing prerequisite."
+      }
+    },
+    "def-discrete-memoryless-channel-operational-capacity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "One-message codes make the achievable-rate sets nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. Rate R=0 is achievable by any fixed word and constant decoder."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. M_n=1 gives rate zero and zero average/maximal errors."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Definition. A zero-capacity channel still has the zero achievable rate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition admits R=0 and uses all sufficiently large positive blocklengths."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition quantifies over code sequences; it does not itself choose one for every rate."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "These are definitions of achievability and its supremum, with no iff theorem.",
+            "item_sha256": "9ec570694d818e833301789a72389de436714c90802641335433cf95787193aa",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "These are definitions of achievability and its supremum, with no iff theorem.",
+            "item_sha256": "9ec570694d818e833301789a72389de436714c90802641335433cf95787193aa",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ]
+    },
+    "lem-discrete-memoryless-channel-average-to-maximal-expurgation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fixed-length-channel-code-errors",
+          "source_section": "Definition",
+          "quote": "For a length-$n$ code $(e,d)$, let\n$$e_m:=W^n\\{y^n:d(y^n)\\ne m\\mid e(m)\\}.$$\nIts **average error** is $\\varepsilon_{\\rm av}:=M^{-1}\\sum_{m=1}^M e_m$, corresponding to a uniform message, and its **maximal error** is $\\varepsilon_{\\max}:=\\max_{1\\le m\\le M}e_m$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fixed-length-channel-code",
+          "source_section": "Definition",
+          "quote": "For a finite DMC $W$, a **length-$n$ code with $M$ messages** is a pair of maps $e:[M]\\to\\mathcal X^n$ and $d:\\mathcal Y^n\\to[M]$, where $n,M\\ge1$ and $[M]:=\\{1,\\ldots,M\\}$. A message $m$ is encoded as $e(m)$, passed through the block kernel $W^n$ of [[def-discrete-memoryless-channel]], and decoded as $d(Y^n)$. The encoder and decoder are deterministic; there is no feedback, and no input-cost constraint is imposed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Let $S:=\\{m:e_m\\le2\\varepsilon_{\\rm av}\\}$. If fewer than $M/2$ messages belonged to $S$, then more than $M/2$ messages would each have error greater than $2\\varepsilon_{\\rm av}$, forcing $\\sum_m e_m>M\\varepsilon_{\\rm av}$, a contradiction. Hence $|S|\\ge M/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Restrict the encoder to $S$ and relabel its messages. Define the new decoder to keep any old decoded message in $S$ and to output a fixed retained message otherwise. For each transmitted $m\\in S$, every output previously decoded correctly as $m$ is still decoded correctly, so its new error is at most $e_m\\le2\\varepsilon_{\\rm av}$. Thus the subcode has maximal error at most $2\\varepsilon_{\\rm av}$; its rate loss is at most $n^{-1}\\ln2$ because $|S|\\ge M/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Step 1.1 gives |S|>=M/2>0, so the retained message default exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. If epsilon_av=0, all e_m=0 and S is all messages."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. M=1 keeps the sole message and has zero error."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. An all-zero error vector is covered without dividing by epsilon_av."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Even if 2 epsilon_av>1 the error bound remains a valid loose bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. A fixed retained message is chosen from one finite nonempty set after its nonemptiness is proved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "This is an existence subcode bound rather than a biconditional.",
+            "item_sha256": "88541332f2a9b4401a38b79b2d5a296f6bb8e21882174ac7ff1b02357fb108d9",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "This is an existence subcode bound rather than a biconditional.",
+            "item_sha256": "88541332f2a9b4401a38b79b2d5a296f6bb8e21882174ac7ff1b02357fb108d9",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ]
+    },
+    "thm-discrete-memoryless-channel-random-coding-achievability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-discrete-memoryless-channel-capacity-is-attained",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$, the supremum $C(W)$ is a maximum: there is an input probability vector $P_X^*$ such that $I(P_X^*;W)=C(W)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discrete-memoryless-channel-information-density",
+          "source_section": "Definition",
+          "quote": "Given an input law $P_X$, let $Q_{P_X}=P_XW$ be its output law. The **information density** is\n$$\\imath_{P_X}(x;y):=\\ln\\frac{W(y\\mid x)}{Q_{P_X}(y)}$$\nwhen $P_X(x)W(y\\mid x)>0$, and is $-\\infty$ otherwise. For block sequences define $\\imath_{P_X}(x^n;y^n):=\\sum_{i=1}^n\\imath_{P_X}(x_i;y_i)$, with any sum containing $-\\infty$ equal to $-\\infty$. On the support of the induced joint law, both numerator and denominator are positive, and the value is finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-discrete-memoryless-channel-iid-information-density-converges",
+          "source_section": "Statement",
+          "quote": "Fix a finite DMC $W$ and input law $P_X$. If $(X_i,Y_i)_{i\\ge1}$ are IID with law $P_X(x)W(y\\mid x)$, then $n^{-1}\\imath_{P_X}(X^n;Y^n)\\to I(P_X;W)$ in probability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets. A **stochastic kernel**\nfrom $\\mathcal X$ to $\\mathcal Y$ is a matrix\n$K=(K(y\\mid x))_{x\\in\\mathcal X,y\\in\\mathcal Y}$ such that\n$K(y\\mid x)\\ge0$ and $\\sum_{y\\in\\mathcal Y}K(y\\mid x)=1$ for every\n$x\\in\\mathcal X$. The convention is input first in the condition and output\nfirst in the value $K(y\\mid x)$.\n\nFor a probability vector $P=(p_x)_{x\\in\\mathcal X}$, the output vector\n$PK$ on $\\mathcal Y$ is\n$$(PK)_y:=\\sum_{x\\in\\mathcal X}p_xK(y\\mid x).$$\nIt is a probability vector because its coordinates are nonnegative and\n$\\sum_y(PK)_y=\\sum_xp_x\\sum_yK(y\\mid x)=\\sum_xp_x=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "source_section": "Statement",
+          "quote": "For a finite DMC $W$ and every $n\\ge1$, the block formula $W^n(y^n\\mid x^n)=\\prod_{i=1}^n W(y_i\\mid x_i)$ is a stochastic kernel from $\\mathcal X^n$ to $\\mathcal Y^n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fixed-length-channel-code",
+          "source_section": "Definition",
+          "quote": "For a finite DMC $W$, a **length-$n$ code with $M$ messages** is a pair of maps $e:[M]\\to\\mathcal X^n$ and $d:\\mathcal Y^n\\to[M]$, where $n,M\\ge1$ and $[M]:=\\{1,\\ldots,M\\}$. A message $m$ is encoded as $e(m)$, passed through the block kernel $W^n$ of [[def-discrete-memoryless-channel]], and decoded as $d(Y^n)$. The encoder and decoder are deterministic; there is no feedback, and no input-cost constraint is imposed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fixed-length-channel-code-errors",
+          "source_section": "Definition",
+          "quote": "For a length-$n$ code $(e,d)$, let\n$$e_m:=W^n\\{y^n:d(y^n)\\ne m\\mid e(m)\\}.$$\nIts **average error** is $\\varepsilon_{\\rm av}:=M^{-1}\\sum_{m=1}^M e_m$, corresponding to a uniform message, and its **maximal error** is $\\varepsilon_{\\max}:=\\max_{1\\le m\\le M}e_m$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "If $R=0$, one message gives zero error. Otherwise choose $\\delta:=(C(W)-R)/3>0$ and $M_n:=\\lfloor e^{nR}\\rfloor$. Then $\\ln M_n/n\\to R$, so for all sufficiently large $n$, $(\\ln M_n+n\\delta)/n<C(W)-\\delta$. By [F3], the probability that the transmitted IID pair fails the threshold $\\imath_{P_X^*}(X^n;Y^n)>\\ln M_n+n\\delta$ tends to zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Draw $M_n$ codewords independently from $P_X^{*\\,n}$. Decode to the unique codeword with information density greater than $\\ln M_n+n\\delta$, using a fixed default output if there is not exactly one. Conditional on the transmitted message, an error is contained in the union of the true-codeword miss event from step 1.1 and the event that some independent competing word passes the threshold. For one competitor $X'^n\\sim P_X^{*\\,n}$ independent of $Y^n\\sim Q_{P_X^*}^{\\,n}$, [F2] gives $\\mathbb E e^{\\imath_{P_X^*}(X'^n;Y^n)}=\\sum_{x^n}P_X^{*\\,n}(x^n)\\sum_{y^n:Q_{P_X^*}^{\\,n}(y^n)>0}W^n(y^n\\mid x^n)=1$ by [F4], since every output reachable from a positive-probability input has positive $Q_{P_X^*}$ mass. On a false pass, the nonnegative variable $Z=e^{\\imath_{P_X^*}(X'^n;Y^n)}$ exceeds $e^{\\ln M_n+n\\delta}$, so $1=\\mathbb E Z\\ge e^{\\ln M_n+n\\delta}\\Pr[Z>e^{\\ln M_n+n\\delta}]$, and the false-pass probability is at most $e^{-\\ln M_n-n\\delta}$. A union bound over at most $M_n-1$ competitors makes this term at most $e^{-n\\delta}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "The ensemble-averaged average error is at most the miss probability plus $e^{-n\\delta}$, so it tends to zero by step 1.1 and step 2.1. The ensemble has finite support; therefore at each $n$ some deterministic codebook has average error no greater than the ensemble mean. Its rate tends to $R$, proving the claim.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite DMC has nonempty alphabets, giving a one-message default code."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats R=0 with one message and zero error."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. M=1 is used exactly in the R=0 branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. C=0 leaves no rate 0<=R<C, so the hypothesis is empty in that channel branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. R=C is excluded and delta=(C-R)/3 is positive only under strict inequality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. A maximizing law is supplied and each finite code ensemble has a deterministic realization no worse than its mean."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The conclusion is achievability below capacity, with no equality-rate iff claim.",
+            "item_sha256": "a6a2e2543621e1960d608ae95d1231e81575e64a9bf9934b237f5cdafc20ffd7",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The conclusion is achievability below capacity, with no equality-rate iff claim.",
+            "item_sha256": "a6a2e2543621e1960d608ae95d1231e81575e64a9bf9934b237f5cdafc20ffd7",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read every step and F1–F5 suppliers. R=0 uses one message. For R>0, delta=(C-R)/3 separates the threshold from nC, and the IID variance limit gives the miss bound. Each independent competitor has E exp(i)=1 with zeros omitted; finite union bound gives exp(-n delta). Finite ensemble averaging yields a deterministic code. Repeated codewords are allowed by the code definition; default decoding cannot enlarge the union bound. To select a sequence without AC, fix finite alphabet orders and choose the first codebook whose error is at most the finite ensemble mean at each n. No defect or substantial missing prerequisite."
+      }
+    },
+    "lem-discrete-memoryless-channel-information-density-concentration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+          "source_section": "Statement",
+          "quote": "Let $P_X^*$ attain $C(W)$ and let $Q^*:=P_X^*W$. If $W(y\\mid x)>0$, then $Q^*(y)>0$, and for every $x\\in\\mathcal X$,\n$$D(W(\\cdot\\mid x)\\|Q^*)\\le C(W).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-kullback-leibler-divergence",
+          "source_section": "Definition",
+          "quote": "For probability vectors $P=(p_x)$ and $Q=(q_x)$ on the same finite\nnonempty alphabet, their **Kullback–Leibler divergence** (or **relative\nentropy**) in the stated direction from $P$ to $Q$ is\n$$D(P\\|Q):=\\sum_{x:p_x>0}p_x\\log\\frac{p_x}{q_x}.$$\nThe logarithm is natural. If $p_x>0$ and $q_x=0$ for at least one $x$, set\n$D(P\\|Q)=+\\infty$. If $p_x=0$, its contribution is zero, including when\n$q_x=0$; equivalently, $0\\log(0/q_x)=0$. When $P\\ll Q$, all ratios in the\nsum are positive and finite.\n\nThe generator $f(t)=t\\log t$ is admissible for\n[[def-finite-f-divergence]] by\n[[lem-finite-kl-generator-is-admissible]]. Its boundary values\n$f(0)=0$ and $f_\\infty=+\\infty$ make that f-divergence exactly the displayed\nKL formula, including the singular-support case.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "source_section": "Statement",
+          "quote": "For a finite DMC $W$ and every $n\\ge1$, the block formula $W^n(y^n\\mid x^n)=\\prod_{i=1}^n W(y_i\\mid x_i)$ is a stochastic kernel from $\\mathcal X^n$ to $\\mathcal Y^n$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "For each $x\\in\\mathcal X$, the random variable $Z_x:=\\ln(W(Y\\mid x)/Q^*(Y))$ under row law $W(\\cdot\\mid x)$ is finite on its support by [F1]. Its mean is $D(W(\\cdot\\mid x)\\|Q^*)\\le C(W)$, and it has finite variance because it takes only finitely many values. Thus $V:=\\max_{x\\in\\mathcal X}\\operatorname{Var}(Z_x)$ is finite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Fix $x^n$. By [F3], the coordinate log likelihoods are independent. Their sum $S_n$ therefore has mean at most $nC(W)$ and variance at most $nV$. On the event $S_n>n(C(W)+\\delta)$ one has $|S_n-\\mathbb ES_n|>n\\delta$, so the squared deviation is at least $n^2\\delta^2$. Taking expectations bounds the event probability by $\\mathbb E[(S_n-\\mathbb ES_n)^2]/(n^2\\delta^2)\\le V/(n\\delta^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "X is finite nonempty, so the maximum of row variances in step 1.1 exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "V=0 gives zero upper-tail probability in step 2.1; no division by V occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. n=1 is an included independent row sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Deterministic row likelihoods have zero variance and satisfy the same inequality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Delta>0 is essential to the denominator n delta^2; delta=0 is not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. A finite maximum of explicit row variances supplies V."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The assertion is a uniform upper-tail bound, not a converse characterization.",
+            "item_sha256": "48af684ae19b2240b394b0c07f07836ac705988aa3c4a7c558f06a404f5e3ce0",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The assertion is a uniform upper-tail bound, not a converse characterization.",
+            "item_sha256": "48af684ae19b2240b394b0c07f07836ac705988aa3c4a7c558f06a404f5e3ce0",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read both steps and all F1–F3 suppliers. The already-reviewed optimizing-output lemma supplies every row support and mean<=C, including unused inputs. Finite nonempty X gives finite V=max row variance, independent of n, word and delta. Product channel gives independent (not necessarily identically distributed) row likelihoods, mean<=nC and variance<=nV. Squared deviation bounds the strict upper tail by V/(n delta^2); V=0 and singleton/deterministic cases are included. Ratios are restricted to positive channel support."
+      }
+    },
+    "thm-discrete-memoryless-channel-average-error-converse": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-it-fano-inequality",
+          "source_section": "Statement",
+          "quote": "Let $X$ take values in an alphabet $\\mathcal X$ of size $m\\ge2$, let $Y$ be finite, and let $\\widehat X$ be an estimator in the same alphabet generated from $Y$, so the joint pmf factors as $p_{XY\\widehat X}=p_{XY}p_{\\widehat X|Y}$. Put $P_e=\\mathbb P[\\widehat X\\ne X]$ and define\n\n$$h_2(t):=-t\\ln t-(1-t)\\ln(1-t),\\qquad 0\\ln0:=0.$$\n\nThen\n\n$$H(X|Y)\\le h_2(P_e)+P_e\\ln(m-1)\\le \\ln2+P_e\\ln m.$$\n\nFor $m=1$, $X$ is constant and $H(X|Y)=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fixed-length-channel-code",
+          "source_section": "Definition",
+          "quote": "For a finite DMC $W$, a **length-$n$ code with $M$ messages** is a pair of maps $e:[M]\\to\\mathcal X^n$ and $d:\\mathcal Y^n\\to[M]$, where $n,M\\ge1$ and $[M]:=\\{1,\\ldots,M\\}$. A message $m$ is encoded as $e(m)$, passed through the block kernel $W^n$ of [[def-discrete-memoryless-channel]], and decoded as $d(Y^n)$. The encoder and decoder are deterministic; there is no feedback, and no input-cost constraint is imposed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-discrete-memoryless-channel-n-letter-information-bound",
+          "source_section": "Statement",
+          "quote": "For every input probability vector on $\\mathcal X^n$ and output $Y^n$ generated by a finite DMC $W^n$, one has $I(X^n;Y^n)\\le nC(W)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "Since the encoder is deterministic and the channel law given $J=m$ depends on $m$ only through $X^n=e(m)$, $H(Y^n\\mid J)=H(Y^n\\mid X^n)$. By [F2], $I(J;Y^n)=I(X^n;Y^n)$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By [F1] and [F2], $\\ln M=I(J;Y^n)+H(J\\mid Y^n)\\le I(X^n;Y^n)+\\ln2+\\varepsilon_{\\rm av}\\ln M\\le nC(W)+\\ln2+\\varepsilon_{\\rm av}\\ln M$ using [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "For a reliable code sequence, rearrange step 2.1 to get $(1-\\varepsilon_{\\rm av}(n))n^{-1}\\ln M_n\\le C(W)+n^{-1}\\ln2$. The left coefficient tends to one and the right side tends to $C(W)$, so $\\limsup n^{-1}\\ln M_n\\le C(W)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "n,M>=1 and source/channel probability vectors are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. C=0 forces every reliable sequence to have limsup rate zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. M=1 gives ln M=0, so Fano and the rate bound remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Repeated codewords and zero mutual information are included in the n-letter bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Dividing by 1-epsilon_av is only asymptotic, where epsilon_av->0 ensures positivity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. All code maps are supplied; no choice of witness codes occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Reliability implies a rate upper bound; the theorem states no reverse implication.",
+            "item_sha256": "ba8da10703c56b3dbc34664e44b7a173b452699d610cb6f13b4b0c578c8dfd11",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Reliability implies a rate upper bound; the theorem states no reverse implication.",
+            "item_sha256": "ba8da10703c56b3dbc34664e44b7a173b452699d610cb6f13b4b0c578c8dfd11",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read all three steps and exact F1–F4 sources, including the full Fano proof and its m=1 case. Deterministic encoding need not be injective: conditioning on a message or its codeword gives the identical row law, so I(J;Y^n)=I(X^n;Y^n). Fano applies to uniform J and deterministic decoder. Combine nC bound and eventually positive 1-epsilon to conclude limsup rate<=C. Includes zero capacity and M=1. No choice or unproved asymptotic premise."
+      }
+    },
+    "thm-discrete-memoryless-channel-alphabet-scoped-strong-converse": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-discrete-memoryless-channel-capacity-is-attained",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$, the supremum $C(W)$ is a maximum: there is an input probability vector $P_X^*$ such that $I(P_X^*;W)=C(W)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound",
+          "source_section": "Statement",
+          "quote": "Let $P_X^*$ attain $C(W)$ and let $Q^*:=P_X^*W$. If $W(y\\mid x)>0$, then $Q^*(y)>0$, and for every $x\\in\\mathcal X$,\n$$D(W(\\cdot\\mid x)\\|Q^*)\\le C(W).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discrete-memoryless-channel-information-density-concentration",
+          "source_section": "Statement",
+          "quote": "Let $P_X^*$ attain $C(W)$ and $Q^*=P_X^*W$. There is a finite constant $V\\ge0$ such that, for every $n\\ge1$, every $x^n\\in\\mathcal X^n$, and every $\\delta>0$, under output law $W^n(\\cdot\\mid x^n)$,\n$$\\Pr\\left[\\ln\\frac{W^n(Y^n\\mid x^n)}{(Q^*)^n(Y^n)}>n(C(W)+\\delta)\\right]\\le\\frac{V}{n\\delta^2}.$$\nThe likelihood ratio is evaluated only on the support of $W^n(\\cdot\\mid x^n)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fixed-length-channel-code",
+          "source_section": "Definition",
+          "quote": "For a finite DMC $W$, a **length-$n$ code with $M$ messages** is a pair of maps $e:[M]\\to\\mathcal X^n$ and $d:\\mathcal Y^n\\to[M]$, where $n,M\\ge1$ and $[M]:=\\{1,\\ldots,M\\}$. A message $m$ is encoded as $e(m)$, passed through the block kernel $W^n$ of [[def-discrete-memoryless-channel]], and decoded as $d(Y^n)$. The encoder and decoder are deterministic; there is no feedback, and no input-cost constraint is imposed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fixed-length-channel-code-errors",
+          "source_section": "Definition",
+          "quote": "For a length-$n$ code $(e,d)$, let\n$$e_m:=W^n\\{y^n:d(y^n)\\ne m\\mid e(m)\\}.$$\nIts **average error** is $\\varepsilon_{\\rm av}:=M^{-1}\\sum_{m=1}^M e_m$, corresponding to a uniform message, and its **maximal error** is $\\varepsilon_{\\max}:=\\max_{1\\le m\\le M}e_m$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "By [F1] choose a maximizing input law $P_X^*$ and set $Q^*:=P_X^*W$. Fix a blocklength $n$, a codeword $x_m^n=e(m)$, and a threshold $\\tau$. Split $D_m$ within the support of $W^n(\\cdot\\mid x_m^n)$ into outputs where $\\ln(W^n(y^n\\mid x_m^n)/(Q^*)^n(y^n))>\\tau$ and the supported complement. The first part has channel probability at most the threshold-tail probability in [F2]. On the supported complement, $W^n(y^n\\mid x_m^n)\\le e^\\tau(Q^*)^n(y^n)$ by the likelihood ratio; outside the support, $W^n(y^n\\mid x_m^n)=0$, so the same inequality holds there. Hence the remaining channel probability is at most $e^\\tau(Q^*)^n(D_m)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "Average the bound in step 1.1 over messages. The tail term is at most $V/(n\\eta^2)$ uniformly by [F2]. Pairwise disjointness from [F3] gives $\\sum_m(Q^*)^n(D_m)\\le1$, so average success is at most $V/(n\\eta^2)+e^\\tau/M_n$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "claim": "Choose $\\eta>0$ such that eventually $n^{-1}\\ln M_n\\ge C(W)+2\\eta$, which is possible by the strict liminf hypothesis. Set $\\tau=n(C(W)+\\eta)$. Then $e^\\tau/M_n\\le e^{-n\\eta}$, and step 2.1 bounds success by $V/(n\\eta^2)+e^{-n\\eta}\\to0$. Thus average error tends to one. Since maximal error is at least average error, it too tends to one.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input or output alphabet is explicitly required to be nonempty, so the empty-alphabet case lies outside this item’s hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Positive M_n gives valid nonempty decoder partitions; individual decoder cells may be empty.",
+            "item_sha256": "8fdda237a1c11cff1bccfbc83f2b930dcb15aef4f01f2f9cc5121ddf2f3f48dd",
+            "row_sha256": "607aeec0167cf6e0e8348f89ae756b4c8a4aaa99f6e36922c9d6b8d556711d8f"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. C=0 is allowed and every strictly positive limiting rate satisfies the strong-converse premise."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. One-message sequences cannot satisfy the strict above-capacity premise because C>=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Identical-row channels obey the same likelihood/decoder-region bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The strict liminf gap permits eta>0; no equality-rate conclusion is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. A single capacity-achieving law supplies Q*, and all decoder cells are given."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "This proves errors tend to one from an above-capacity rate premise, not an iff.",
+            "item_sha256": "8fdda237a1c11cff1bccfbc83f2b930dcb15aef4f01f2f9cc5121ddf2f3f48dd",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "This proves errors tend to one from an above-capacity rate premise, not an iff.",
+            "item_sha256": "8fdda237a1c11cff1bccfbc83f2b930dcb15aef4f01f2f9cc5121ddf2f3f48dd",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read Proof 1.1–3.1 and every cited supplier. Optimizing Q* dominates each channel row. Split each decoding region on its supported likelihood ratio and bound its low part by exp(tau) Q*^n(D_m). At tau=n(C+eta), uniform row-word concentration bounds the high part by V/(n eta^2). Disjoint regions have total Q* mass<=1, and strict liminf rate>C permits eventual rate>=C+2eta. Success<=V/(n eta^2)+exp(-n eta) tends to zero; maximal error>=average error gives both conclusions. Handles zero rows on unreachable outputs, zero capacity and repeated codewords. Scope is explicitly finite alphabets, no cost constraint."
+      }
+    },
+    "thm-discrete-memoryless-channel-capacity-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel-operational-capacity",
+          "source_section": "Definition",
+          "quote": "A rate $R\\ge0$ is **average-error achievable** for $W$ if there are length-$n$ codes for all sufficiently large $n$ with\n$$\\liminf_{n\\to\\infty}\\frac{\\ln M_n}{n}\\ge R,\\qquad \\varepsilon_{\\rm av}(n)\\longrightarrow0.$$\nIt is **maximal-error achievable** if the same condition holds with $\\varepsilon_{\\max}(n)\\to0$. Define $C_{\\rm av}(W)$ and $C_{\\max}(W)$ as the suprema of the respective achievable-rate sets. Rates use nats per channel use.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-discrete-memoryless-channel-information-capacity",
+          "source_section": "Definition",
+          "quote": "For an input probability vector $P_X$ on $\\mathcal X$ ([[def-finite-probability-vector]]), let $P_{XY}(x,y):=P_X(x)W(y\\mid x)$ and $Q_{P_X}(y):=\\sum_xP_X(x)W(y\\mid x)$. Write $I(P_X;W):=I(X;Y)$ for this joint law, using [[def-it-finite-mutual-information]]. The **single-letter information capacity** is\n$$C(W):=\\sup_{P_X} I(P_X;W),$$\nmeasured in nats per channel use. The finite-dimensional maximum is attained, as proved in [[lem-discrete-memoryless-channel-capacity-is-attained]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discrete-memoryless-channel-capacity-is-attained",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$, the supremum $C(W)$ is a maximum: there is an input probability vector $P_X^*$ such that $I(P_X^*;W)=C(W)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-discrete-memoryless-channel-average-error-converse",
+          "source_section": "Statement",
+          "quote": "For any sequence of fixed-length codes over a finite DMC with average errors $\\varepsilon_{\\rm av}(n)\\to0$, one has $\\limsup_{n\\to\\infty}n^{-1}\\ln M_n\\le C(W)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-discrete-memoryless-channel-random-coding-achievability",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$ and every $0\\le R<C(W)$, there are fixed-length codes with $\\liminf_{n\\to\\infty}n^{-1}\\ln M_n\\ge R$ and average error tending to zero.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-discrete-memoryless-channel-average-to-maximal-expurgation",
+          "source_section": "Statement",
+          "quote": "Every length-$n$ code with average error $\\varepsilon_{\\rm av}$ has a subcode with at least $M/2$ messages and maximal error at most $2\\varepsilon_{\\rm av}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-fixed-length-channel-code",
+          "source_section": "Definition",
+          "quote": "For a finite DMC $W$, a **length-$n$ code with $M$ messages** is a pair of maps $e:[M]\\to\\mathcal X^n$ and $d:\\mathcal Y^n\\to[M]$, where $n,M\\ge1$ and $[M]:=\\{1,\\ldots,M\\}$. A message $m$ is encoded as $e(m)$, passed through the block kernel $W^n$ of [[def-discrete-memoryless-channel]], and decoded as $d(Y^n)$. The encoder and decoder are deterministic; there is no feedback, and no input-cost constraint is imposed.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-fixed-length-channel-code-errors",
+          "source_section": "Definition",
+          "quote": "For a length-$n$ code $(e,d)$, let\n$$e_m:=W^n\\{y^n:d(y^n)\\ne m\\mid e(m)\\}.$$\nIts **average error** is $\\varepsilon_{\\rm av}:=M^{-1}\\sum_{m=1}^M e_m$, corresponding to a uniform message, and its **maximal error** is $\\varepsilon_{\\max}:=\\max_{1\\le m\\le M}e_m$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "A maximal-error reliable sequence is also average-error reliable because $\\varepsilon_{\\rm av}\\le\\varepsilon_{\\max}$. Thus [F3] gives $C_{\\max}(W)\\le C_{\\rm av}(W)\\le C(W)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "claim": "By [F4], every $0\\le R<C(W)$ is average-error achievable, so $C_{\\rm av}(W)\\ge C(W)$ after taking the supremum when $C(W)>0$. If $C(W)=0$, [F7] gives $C_{\\rm av}(W)\\ge0$. The case split is exhaustive by [F6]; in either case $C_{\\rm av}(W)=C(W)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "If $C(W)>0$, fix any $0\\le R<C(W)$. By [F4] there is an average-error reliable sequence at rate at least $R$. Apply [F5] to each code: the maximal errors tend to zero and the log message count loses at most $\\ln2$ at blocklength $n$, so the resulting rate is still at least $R$ in the limit. Thus $C_{\\max}(W)\\ge R$ for every such $R$, and hence $C_{\\max}(W)\\ge C(W)$. If $C(W)=0$, [F7] gives $C_{\\max}(W)\\ge0=C(W)$. The cases are exhaustive by [F6], and step 1.1 gives equality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated input or output alphabet is explicitly required to be nonempty, so the empty-alphabet case lies outside this item’s hypotheses.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Step 1.2 uses a one-message code when the strict subcapacity rate set is empty at C=0.",
+            "item_sha256": "31140a4af3ceff79443570cd9dab829bfaa72fec1a5e6bfaf449e324d74694d5",
+            "row_sha256": "607aeec0167cf6e0e8348f89ae756b4c8a4aaa99f6e36922c9d6b8d556711d8f"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 explicitly prove both capacities zero when C=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. One-message zero-error codes supply rate-zero lower bounds."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Constant-output channels are included in the C=0 case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. Capacity equality is equality of suprema; actual achievability exactly at C is not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The proof uses fixed subcapacity rate witnesses and finite expurgation, not simultaneous maximizing code selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Equality of operational and information capacities is not a biconditional about a fixed rate.",
+            "item_sha256": "31140a4af3ceff79443570cd9dab829bfaa72fec1a5e6bfaf449e324d74694d5",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "Equality of operational and information capacities is not a biconditional about a fixed rate.",
+            "item_sha256": "31140a4af3ceff79443570cd9dab829bfaa72fec1a5e6bfaf449e324d74694d5",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read Proof 1.1–2.1, all F1–F7 sources, operational-rate definition, full expurgation lemma and KL nonnegativity proof. Reliable maximal implies reliable average and Fano/nC gives both upper bounds. For C>0 random coding approaches C from below and expurgation preserves liminf rates with at most ln2/n loss. For C=0, a one-message code witnesses rate zero under both errors; finite MI nonnegativity exhausts cases. The finite maximum supplier identifies C=max I. Retained sets are nonempty even at M=1 or zero error, and deterministic relabeling preserves correct decodes. No AC or claim of achieving the endpoint rate is required."
+      }
+    },
+    "ex-binary-symmetric-channel-capacity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-discrete-memoryless-channel-capacity-formula",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$ with no input-cost constraint,\n$$C_{\\rm av}(W)=C_{\\max}(W)=C(W)=\\max_{P_X}I(P_X;W),$$\nwith rates and mutual information measured in nats per channel use.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "The output law is Bernoulli with parameter $q=p+r(1-2p)$. Each row has entropy $h(p)$, so [F3] and [F4] give $I(X;Y)=h(q)-h(p)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By [F5], $0\\le D(\\operatorname{Bern}(q)\\|\\operatorname{Bern}(1/2))=\\ln2-h(q)$, so $I(X;Y)\\le\\ln2-h(p)$. Taking $r=1/2$ gives $q=1/2$ and equality. Therefore [F2] gives capacity $\\ln2-h(p)$. If $p=0$ or $p=1$, $h(p)=0$ and the channel is a deterministic bijection; if $p=1/2$, every row is the same and the capacity is zero.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The alphabets are the nonempty binary set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Example; Verification. At p=0 the channel is the noiseless identity and C=ln2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Example; Verification. At p=1 the channel is a deterministic bit flip and C=ln2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At p=1/2 all rows agree and C=0, explicitly in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Example; Verification. p=0,1 use 0 ln0=0, while p=1/2 gives zero capacity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Example; Verification. Uniform input explicitly attains the bound for every p."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The example computes a capacity formula and an optimizer, not an iff.",
+            "item_sha256": "912c691e525b9aca5e2d6968d357c592a19d42c07f6444665acd39322ed6a299",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The example computes a capacity formula and an optimizer, not an iff.",
+            "item_sha256": "912c691e525b9aca5e2d6968d357c592a19d42c07f6444665acd39322ed6a299",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read both verification steps and exact F1–F5 suppliers. For every p,r in [0,1], q=p+r(1-2p) is the output parameter and each row has entropy h(p). Thus I=h(q)-h(p)<=ln2-h(p), using KL versus the binary uniform; r=1/2 gives q=1/2 for every p and attains equality. At p=0,1 the channel is a bijection with capacity ln2; at p=1/2 identical rows give zero. Input endpoints and zero masses use the explicit 0 log 0 convention. The maximizing information is the operational capacity by the reviewed theorem."
+      }
+    },
+    "ex-binary-erasure-channel-capacity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-discrete-memoryless-channel-capacity-formula",
+          "source_section": "Statement",
+          "quote": "For every finite DMC $W$ with no input-cost constraint,\n$$C_{\\rm av}(W)=C_{\\max}(W)=C(W)=\\max_{P_X}I(P_X;W),$$\nwith rates and mutual information measured in nats per channel use.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "claim": "On the events $Y=0$ and $Y=1$, $X$ is known exactly. The erasure indicator is independent of $X$ because [F1] gives the same conditional erasure probability $\\epsilon$ for both input symbols. Hence on $Y=e$ the conditional law of $X$ remains $\\operatorname{Bern}(r)$. By [F4], $H(X\\mid Y)=\\epsilon h(r)$, and [F3] gives $I(X;Y)=(1-\\epsilon)h(r)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "cases"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "claim": "By [F5], $h(r)\\le\\ln2$, with equality at $r=1/2$. Therefore the maximum mutual information is $(1-\\epsilon)\\ln2$ by [F2]. At $\\epsilon=0$ the channel is noiseless and has capacity $\\ln2$; at $\\epsilon=1$ its output is constant and the capacity is $0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Source/input alphabet is binary and output alphabet includes the erasure marker."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Local source sections: Example; Verification. Epsilon=0 gives noiseless capacity ln2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Local source sections: Example; Verification. Epsilon=1 gives constant output and capacity zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At full erasure every output is e, explicitly covered in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Example; Verification. At epsilon=0 the absent erasure cell is omitted; at epsilon=1 the known-bit cells have zero mass."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Local source sections: Example; Verification. Uniform input is an explicit optimizer; no arbitrary law choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The result is the BEC capacity formula, not a biconditional.",
+            "item_sha256": "968d664cbfc974244ca45bb974aeff156bc77ea522bdddefaaef60b5944ab11e",
+            "row_sha256": "c8825be29c9c78f73ffade596e8ba56d369586daf2288361cba00eb993858490"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement/Definition is not an if-and-only-if assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_mid",
+            "reason": "The result is the BEC capacity formula, not a biconditional.",
+            "item_sha256": "968d664cbfc974244ca45bb974aeff156bc77ea522bdddefaaef60b5944ab11e",
+            "row_sha256": "ade5a6e40a48d20d71d4a1c8b3a60df9416c61e2d6a3bd8a540e41210dcb5159"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-12",
+        "notes": "Read both verification steps and every F1–F5 supplier. Identical erasure probability for each input makes the erasure independent of X, so H(X|Y)=epsilon h(r) with zero-mass branches omitted. At epsilon=0 there is no conditional law to evaluate on the absent erasure branch, and at epsilon=1 the bit branches vanish. I=(1-epsilon)h(r), KL comparison with the binary uniform gives h(r)<=ln2, and r=1/2 attains the bound including both channel endpoints. Input endpoints r=0,1 give zero information; no undefined logarithm occurs under 0 log 0 convention."
+      }
+    }
+  }
+}

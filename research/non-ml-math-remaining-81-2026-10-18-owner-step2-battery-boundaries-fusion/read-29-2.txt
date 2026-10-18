@@ -1,0 +1,229 @@
+
+ITEM def-qc-tqc-ising-majorana-interface
+
+
+## Definition
+
+Let $m\ge2$ and let $\mathcal H=(\mathbb C^2)^{\otimes m}$. A **Majorana
+system of length $2m$** is a family of operators
+$\gamma_1,\ldots,\gamma_{2m}\in\operatorname{End}(\mathcal H)$ satisfying
+$$\gamma_j^*=\gamma_j,\qquad \gamma_j^2=I,\qquad \gamma_j\gamma_k=-\gamma_k\gamma_j\quad(j\ne k).$$
+Its parity operator is $\Pi=i^m\gamma_1\cdots\gamma_{2m}$. For each adjacent
+pair, put
+$$Q_1(j)=\frac{I-i\gamma_j\gamma_{j+1}}2,\qquad Q_\psi(j)=\frac{I+i\gamma_j\gamma_{j+1}}2,\qquad U_j=\exp\!\left(-\frac\pi4\gamma_j\gamma_{j+1}\right).$$
+
+A **Majorana–Ising exchange interface** on a fixed parity sector consists of
+such a system, a choice $\eta\in\{1,-1\}$ and the sector
+$\mathcal H_\eta=\ker(\Pi-\eta I)$, together with the following explicit
+model-identification hypotheses for every $1\le j<2m$: the Ising pair-charge
+projections are identified with $Q_1(j),Q_\psi(j)$, and the exchange is
+$R_1Q_1(j)+R_\psi Q_\psi(j)$ with the same relative phase
+$R_\psi/R_1=i$. The last identity is required for all adjacent pairs as part
+of the interface; the three-anyon supplier below establishes it only in its
+stated sector and does not prove this all-$m$ identification.
+
+## Facts & Assumptions
+
+**Given:** A Majorana system, a fixed parity sector, and the interface
+hypotheses in the Definition.
+
+[F1] In the three-$\sigma$, total-$\sigma$ Ising sector, the supplier gives
+$R_1=e^{-i\pi/8}$ and $R_\psi=e^{3i\pi/8}$, hence
+$R_\psi/R_1=i$. [[ex-qc-tqc-ising-data]]
+
+## Proof
+
+1.1 Let $A_j=i\gamma_j\gamma_{j+1}$. The Majorana relations give $A_j^*=A_j$ and $A_j^2=I$. Therefore $Q_1(j)=(I-A_j)/2$ and $Q_\psi(j)=(I+A_j)/2$ are self-adjoint idempotents, $Q_1(j)Q_\psi(j)=0$, and $Q_1(j)+Q_\psi(j)=I$. They are the orthogonal complementary pair-channel projections stipulated by the interface. [given, algebra]
+
+2.1 Since $(\gamma_j\gamma_{j+1})^2=-I$, expansion of the exponential gives $U_j=2^{-1/2}(I-\gamma_j\gamma_{j+1})$. Its restrictions to $\operatorname{ran}Q_1(j)$ and $\operatorname{ran}Q_\psi(j)$ are respectively $e^{-i\pi/4}I$ and $e^{i\pi/4}I$. Using the phase ratio in [F1] as imposed for every generator by the interface, the channel exchange equals $$R_1Q_1(j)+R_\psi Q_\psi(j)=R_1e^{i\pi/4}U_j.$$ Thus it differs from $U_j$ by one common scalar. [given, F1, algebra] ∎
+
+ITEM def-qc-tqc-projective-gate-and-metric
+
+
+## Definition
+
+Let $V\ne0$ be a finite-dimensional complex inner-product space and let
+$U(V)$ be its unitary group. Two unitaries are **projectively equivalent**
+when $A=zB$ for some $z\in\mathbb C$ with $|z|=1$; write $[A]\in PU(V)$ for
+the equivalence class. Define
+$$d_P([A],[B]):=\min_{|z|=1}\|A-zB\|_{\mathrm{op}}.$$
+This is the distance after quotienting by one common scalar phase. The phase
+is minimized over the unit circle; it is not chosen independently in
+different charge blocks.
+
+## Facts & Assumptions
+
+**Given:** The finite-dimensional unitary group $U(V)$ and the operator norm.
+
+[F1] The operator norm is the maximum of $\|Tx\|$ over unit vectors.
+[[def-operator-norm-on-a-finite-dimensional-inner-product-space]]
+
+[F2] The inner-product norm satisfies the triangle inequality and
+$\|\lambda x\|=|\lambda|\|x\|$.
+[[cor-triangle-inequality-for-inner-product-norm]]
+[[lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous]]
+
+[F3] The multiplicative unit circle is compact and metrizable.
+[[lem-unit-circle-is-a-compact-metrizable-topological-group]]
+
+[F4] A continuous real-valued function on a nonempty compact metric space
+attains its minimum. [[thm-extreme-value-metric]]
+
+## Proof
+
+1.1 The operator norm satisfies the triangle inequality: for every unit vector $x$, $\|(S+T)x\|\le\|Sx\|+\|Tx\|\le\|S\|_{\mathrm{op}}+\|T\|_{\mathrm{op}}$, so taking the maximum gives $\|S+T\|_{\mathrm{op}}\le\|S\|_{\mathrm{op}}+ \|T\|_{\mathrm{op}}$. Scalar homogeneity follows from [F2] and the same maximum definition. Thus $|\|S\|_{\mathrm{op}}-\|T\|_{\mathrm{op}}|\le\|S-T\|_{\mathrm{op}}$ by applying the triangle inequality twice. [F1, F2, algebra]
+
+1.2 The formula is independent of representatives. If $A'=uA$ and $B'=vB$ with $|u|=|v|=1$, then $\inf_{|z|=1}\|A'-zB'\|=\inf_{|z|=1}\|A-(u^{-1}zv)B\|$; as $z$ runs over the unit circle, so does $u^{-1}zv$. [given, F1, algebra]
+
+2.1 The map $z\mapsto\|A-zB\|_{\mathrm{op}}$ is continuous: step 1.1 bounds $|\|A-zB\|-\|A-wB\||\le\|(z-w)B\|=|z-w|\|B\|$. By [F3] and [F4] it attains its minimum on the unit circle, so the infimum in the definition is a minimum. Nonnegativity and symmetry follow from the norm axioms and the substitution $z\mapsto\bar z$. [F1, F2, F3, F4, step 1.1, algebra]
+
+3.1 For classes $[A],[B],[C]$, choose minimizing phases $z,w$ for the pairs $(A,B)$ and $(B,C)$ by [F3]–[F4]. The triangle inequality gives $\|A-zwC\|\le\|A-zB\|+\|zB-zwC\|=d_P([A],[B])+d_P([B],[C])$, so taking the minimum over phases for $(A,C)$ proves the triangle inequality. If $d_P([A],[B])=0$, a minimizing phase satisfies $A=zB$, so $[A]=[B]$. Conversely equal classes have distance zero. Therefore $d_P$ is a metric on $PU(V)$. [F1, F2, F3, F4, step 1.1, step 1.2, step 2.1, algebra] ∎
+
+ITEM def-qc-tqc-six-anyon-encoded-subspace
+
+
+## Definition
+
+Assume the Fibonacci fusion rules
+$1\otimes x=x\otimes1=x$ and $\tau\otimes\tau=1\oplus\tau$, with each
+listed summand of multiplicity one. For six ordered $\tau$ charges, let
+$W_a$ be the fixed-input, fixed-total fusion space of total charge
+$a\in\{1,\tau\}$ in the tree that first fuses leaves $1,2,3$ and $4,5,6$
+separately, then fuses those triple outputs. Let
+$V_a$ be the same fixed-charge space in the left-associated tree.
+
+To identify these spaces, write
+$A=((\tau_1\otimes\tau_2)\otimes\tau_3)$. Use the object associator
+composite
+$$g=(\alpha^{-1}_{A\otimes\tau_4,\tau_5,\tau_6}) \circ\alpha^{-1}_{A,\tau_4,\tau_5\otimes\tau_6} \circ(\operatorname{id}_A\otimes\alpha_{\tau_4,\tau_5,\tau_6})$$
+from the triple-grouped input tree to the left-associated tree. On a fusion
+morphism $f$ into $a$, define $G_a(f)=f\circ g^{-1}:V_a$; this is a unitary
+change of fusion-tree coordinates.
+
+For one triple of total charge $\tau$, its two orthonormal path vectors are
+indexed by the charge $x\in\{1,\tau\}$ after the first two anyons: both
+$x\otimes\tau\to\tau$ channels have multiplicity one. Write these vectors as
+$|x\rangle$. For $x,y\in\{1,\tau\}$ and $a\in\{1,\tau\}$, let $|x,y;a\rangle$
+be the grouped-tree vector with first triple path $x$, first triple total
+$\tau$, second triple path $y$, second triple total $\tau$, and final vertex
+channel $\tau\otimes\tau\to a$. The last channel has multiplicity one. Define
+$$\mathcal C_a:=G_a\bigl(\operatorname{span}\{|x,y;a\rangle: x,y\in\{1,\tau\}\}\bigr)\subseteq V_a.$$
+In the ordered basis
+$(G_a|1,1;a\rangle,G_a|1,\tau;a\rangle,
+G_a|\tau,1;a\rangle,G_a|\tau,\tau;a\rangle)$, the inclusion
+$J_a:\mathbb C^4\to V_a$ is an isometry; its code projector is $P_a=J_aJ_a^*$.
+The same ordered local triple paths are used for $a=1$ and $a=\tau$; only
+the final pair-charge coordinate differs. The orthogonal complements are
+called leakage spaces.
+
+## Facts & Assumptions
+
+**Given:** The stated Fibonacci fusion rules, the multiplicity-aware
+fusion-tree basis, the unitary associator, and the fixed-charge encoding
+convention.
+
+[A1] Assume the Fibonacci fusion rules stated in the Definition. The actual
+Fibonacci data carrier states $1\otimes x=x\otimes1=x$ and
+$\tau\otimes\tau=1\oplus\tau$ with multiplicity one in each channel.
+[[ex-qc-tqc-fibonacci-data]]
+
+[F1] The fusion-tree definition constructs each path vector by composing
+its vertex multiplicity-basis maps. [[def-qc-tqc-fusion-tree-basis]]
+
+[F2] The fusion-tree lemma proves that these path vectors form a complete
+orthonormal basis and counts them by the products of the vertex
+multiplicities. [[lem-qc-tqc-fusion-tree-dimension]]
+
+[F3] An isometric inclusion $J$ has code projector $JJ^*$ onto its image.
+[[def-qc-tqc-fixed-charge-encoding]]
+
+[F4] Each associator is unitary, so the stated finite associator composite
+induces a unitary map between the two fusion-tree Hom spaces.
+[[def-qc-tqc-unitary-fusion-category]]
+[[thm-qc-tqc-f-symbol-unitary]]
+
+## Proof
+
+1.1 The fusion rule gives $\dim V(\tau^2\to1)=\dim V(\tau^2\to\tau)=1$ and therefore $\dim V(\tau^3\to1)=1$, $\dim V(\tau^3\to\tau)=2$. Applying the fusion-tree count [F2] to the grouped tree, total charge $1$ receives one basis vector from the $(1,1)$ triple-output pair and four from $(\tau,\tau)$, so $\dim W_1=1+2\cdot2=5$. Total charge $\tau$ receives two vectors from $(1,\tau)$, two from $(\tau,1)$, and four from $(\tau,\tau)$, so $\dim W_\tau=2+2+4=8$. The map $G_a$ in [F4] is unitary, hence $\dim V_1=5$ and $\dim V_\tau=8$. [A1, F2, F4, algebra]
+
+1.2 Each selected triple-total-$\tau$ factor has its two paths $|1\rangle$ and $|\tau\rangle$, and the final $\tau\otimes\tau\to a$ vertex has multiplicity one. Thus the four grouped-tree vectors $|x,y;a\rangle$ are admissible tree vectors by [F1] and form an orthonormal family by [F2]. Applying the unitary $G_a$ preserves orthonormality, so they define an isometric inclusion $J_a$; [F3] gives the projector $P_a=J_aJ_a^*$ and $\dim\mathcal C_a=4$. [F1, F2, F3, F4, given, algebra]
+
+2.1 The orthogonal decompositions $V_a=\mathcal C_a\oplus\mathcal C_a^\perp$ then give $\dim\mathcal C_1^\perp=5-4=1$ and $\dim\mathcal C_\tau^\perp=8-4=4$ by step 1.1. These code copies share the same ordered local triple paths, while their final output charge differs. This supplies the dimensions and path identification used in the two B6 blocks. [step 1.1, step 1.2, algebra] ∎
+
+ITEM ex-qc-tqc-fibonacci-qubit-matrices
+
+
+## Example
+
+For three $\tau$ anyons of total charge $\tau$, the fusion space is
+two-dimensional. Fix the chiral convention
+$$F=\begin{pmatrix}\phi^{-1}&\phi^{-1/2}\\ \phi^{-1/2}&-\phi^{-1}\end{pmatrix},\qquad r=R_\tau/R_1=e^{-3\pi i/5}.$$
+After removing the common scalar $R_1$, the adjacent generators are
+$$B_1=\operatorname{diag}(1,r),\qquad B_2=FB_1F.$$
+
+The verification checks these matrices directly as a unitary $B_3$
+representation. It uses the listed sector data as input and does not infer
+global category coherence from this calculation.
+
+## Facts & Assumptions
+
+**Given:** $\tau\otimes\tau=1\oplus\tau$ and the displayed fixed-convention
+Fibonacci $F$ and $R$ data.
+
+[F1] The Fibonacci supplier states the fusion rule, the displayed $F$ block,
+and the pullback phases $R_1=e^{-4\pi i/5}$ and
+$R_\tau=e^{3\pi i/5}$, so $R_\tau/R_1=e^{-3\pi i/5}$.
+[[ex-qc-tqc-fibonacci-data]]
+
+## Verification
+
+1.1 Put $u=\phi^{-1}$ and $v=\phi^{-1/2}$. Since $\phi^2=\phi+1$, $u^2+u=1$ and $v^2=u$. Matrix multiplication then gives $F^2=\begin{pmatrix}u^2+v^2&uv-uv\\uv-uv&u^2+v^2\end{pmatrix}=I$. Both diagonal entries of $B_1$ have modulus one, so $B_1$ is unitary; $F$ is unitary because it is real and $F^*F=F^2=I$. The data in [F1] give $r=R_\tau/R_1=e^{-3\pi i/5}$. Also $r^5=-1$ and $r\ne-1$, so division of $r^5+1=0$ by $r+1$ gives $r^4-r^3+r^2-r+1=0$. With $y=r+r^{-1}$, division by $r^2$ gives $y^2-y-1=0$; since $y=2\cos(3\pi/5)<0$, it follows that $y=-u$ and $r^2+ur+1=0$. Hence $B_2=FB_1F$ is unitary. [given, F1, algebra]
+
+1.2 Write $B_2=\begin{pmatrix}p&q\\q&t\end{pmatrix}$, where $p=u^2+ur$, $q=uv(1-r)$, and $t=u+u^2r$. Then $$B_1B_2B_1= \begin{pmatrix}p&qr\\qr&r^2t\end{pmatrix},\qquad B_2B_1B_2= \begin{pmatrix}p^2+q^2r&q(p+rt)\\q(p+rt)&q^2+t^2r\end{pmatrix}.$$ The relations $r^2=-ur-1$ and $u^3=2u-1$ give $p+rt=r$; expanding the remaining diagonal entries and using $u^2+u=1$, $v^2=u$, and $r^2+ur+1=0$ gives $p^2+q^2r=p$ and $q^2+t^2r=-p$. Thus both matrices reduce to $$\begin{pmatrix}u^2+ur&uvr(1-r)\\uvr(1-r)&-(u^2+ur)\end{pmatrix}.$$ The Artin relation follows entry by entry. [given, F1, algebra]
+
+2.1 The off-diagonal entry of $B_1B_2-B_2B_1$ is $q(1-r)=uv(1-r)^2\ne0$, because $u,v\ne0$ and $r\ne1$. Thus the generators do not commute. They are not two copies of a single diagonal phase gate in the same fusion basis. [given, step 1.2, algebra] ∎
+
+ITEM ex-qc-tqc-ising-three-anyon-clifford
+
+
+## Example
+
+In the three-$\sigma$, total-$\sigma$ Ising sector, use
+$F=H=2^{-1/2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}$,
+$R_1=e^{-i\pi/8}$, and $R_\psi=e^{3i\pi/8}$. After removing the common phase
+$R_1$, the two projective braid generators are
+$$B_1=\begin{pmatrix}1&0\\0&i\end{pmatrix},\qquad B_2=H B_1 H.$$
+
+## Facts & Assumptions
+
+**Given:** The displayed fixed Ising fusion sector, its ordered channel basis,
+and the Pauli matrices $X,Y,Z$.
+
+[F1] The Pauli matrices are
+$X=\begin{pmatrix}0&1\\1&0\end{pmatrix}$,
+$Y=\begin{pmatrix}0&-i\\i&0\end{pmatrix}$,
+$Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$.
+[[def-qc-pauli-matrices]]
+
+[F2] A unitary is Clifford when it normalizes the phase-aware Pauli group.
+[[def-qc-clifford-normalizer]]
+
+[F3] In the three-$\sigma$, total-$\sigma$ sector, the Ising supplier gives
+$F=H$, $R_1=e^{-i\pi/8}$, and $R_\psi=e^{3i\pi/8}$; hence
+$R_\psi/R_1=i$. It explicitly limits this to sector data.
+[[ex-qc-tqc-ising-data]]
+
+## Verification
+
+1.1 By [F3], $R_\psi/R_1=i$. Removing $R_1$ gives $B_1=\operatorname{diag}(1,i)$, and recoupling by $H=H^{-1}$ gives $B_2=HB_1H$. Both are unitary because $H$ and $B_1$ are unitary. Put $a=(1+i)/2$ and $b=(1-i)/2$, so $B_2=\begin{pmatrix}a&b\\b&a\end{pmatrix}$. Direct multiplication, using $a^2+ib^2=a$, $ab(1+i)=ib$, and $b^2+ia^2=-a$, gives $$B_1B_2B_1=\begin{pmatrix}a&ib\\ib&-a\end{pmatrix} =B_2B_1B_2.$$ Thus these matrices define a unitary representation of the two-generator Artin presentation of $B_3$, independently of any all-label Ising coherence claim. [F3, algebra]
+
+2.1 Direct multiplication gives $B_1XB_1^*=Y$, $B_1YB_1^*=-X$, and $B_1ZB_1^*=Z$; also $B_2XB_2^*=X$, $B_2YB_2^*=Z$, and $B_2ZB_2^*=-Y$. Thus each generator conjugates every Pauli matrix to a signed Pauli matrix. [F1, step 1.1, algebra]
+
+3.1 Products and inverses of Pauli normalizers again normalize the Pauli group: for normalizers $A,B$, $(AB)\mathcal P(AB)^* =A(B\mathcal P B^*)A^*=\mathcal P$, and the inverse property follows by conjugating the equality $A\mathcal P A^*=\mathcal P$ by $A^*$. The scalar phase removed in step 1.1 has trivial conjugation action, so the physical braids are projectively Clifford in this sector. [F2, step 1.1, step 2.1, algebra] ∎
+
+## Remarks
+
+This is a projective statement for an isolated fixed-charge sector. The scalar
+phase cannot be discarded when the braid is coherently controlled. The
+supplier gives sector data only; this item makes no all-label Ising category
+claim.

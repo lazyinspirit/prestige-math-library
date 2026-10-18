@@ -3,6 +3,7 @@ id: fs-the-frattini-subgroup-is-functorial-for-all-homomorphisms
 kind: false-statement
 title: "FALSE: every homomorphism carries the Frattini subgroup into the target Frattini subgroup"
 status: published
+dependency_level: 8
 origin: session
 provenance:
   statement: ai-altered
@@ -14,10 +15,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-frattini-placement/published-receipts/fs-the-frattini-subgroup-is-functorial-for-all-homomorphisms.json
 sources:
   scraped: []
   references:

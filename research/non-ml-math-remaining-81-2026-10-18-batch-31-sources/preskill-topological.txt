@@ -1,0 +1,3906 @@
+--- PDF page 1 ---
+Lecture Notes for Physics 219:
+Quantum Computation
+John Preskill
+California Institute of Technology
+14 June 2004
+
+--- PDF page 2 ---
+Contents
+9
+Topological quantum computation
+4
+9.1
+Anyons, anyone?
+4
+9.2
+Flux-charge composites
+7
+9.3
+Spin and statistics
+9
+9.4
+Combining anyons
+11
+9.5
+Unitary representations of the braid group
+13
+9.6
+Topological degeneracy
+16
+9.7
+Toric code revisited
+20
+9.8
+The nonabelian Aharonov-Bohm eﬀect
+21
+9.9
+Braiding of nonabelian ﬂuxons
+24
+9.10
+Superselection sectors of a nonabelian superconductor
+29
+9.11
+Quantum computing with nonabelian ﬂuxons
+32
+9.12
+Anyon models generalized
+40
+9.12.1Labels
+40
+9.12.2Fusion spaces
+41
+9.12.3Braiding: the R-matrix
+44
+9.12.4Associativity of fusion: the F-matrix
+45
+9.12.5Many anyons: the standard basis
+46
+9.12.6Braiding in the standard basis: the B-matrix
+47
+9.13
+Simulating anyons with a quantum circuit
+49
+9.14
+Fibonacci anyons
+52
+9.15
+Quantum dimension
+53
+9.16
+Pentagon and hexagon equations
+58
+9.17
+Simulating a quantum circuit with Fibonacci anyons
+61
+9.18
+Epilogue
+63
+9.18.1Chern-Simons theory
+63
+9.18.2S-matrix
+64
+9.18.3Edge excitations
+65
+9.19
+Bibliographical notes
+65
+2
+
+--- PDF page 3 ---
+Contents
+3
+References
+67
+
+--- PDF page 4 ---
+9
+Topological quantum computation
+9.1 Anyons, anyone?
+A central theme of quantum theory is the concept of indistinguishable
+particles (also called identical particles). For example, all electrons in the
+world are exactly alike.
+Therefore, for a system with many electrons,
+an operation that exchanges two of the electrons (swaps their positions)
+is a symmetry — it leaves the physics unchanged.
+This symmetry is
+represented by a unitary transformation acting on the many-electron wave
+function.
+For the indistinguishable particles in three-dimensional space that we
+normally talk about in physics, particle exchanges are represented in one
+of two distinct ways. If the particles are bosons (like, for example, 4He
+atoms in a superﬂuid), then an exchange of two particles is represented by
+the identity operator: the wave function is invariant, and we say the par-
+ticles obey Bose statistics. If the particles are fermions (like, for example,
+electrons in a metal), than an exchange is represented by multiplication
+by (−1): the wave function changes sign, and we say that the particles
+obey Fermi statistics.
+The concept of identical-particle statistics becomes ambiguous in one
+spatial dimension. The reason is that for two particles to swap positions
+in one dimension, the particles need to pass through one another. If the
+wave function changes sign when two identical particles are exchanged,
+we could say that the particles are noninteracting fermions, but we could
+just as well say that the particles are interacting bosons, such that the
+sign change is induced by the interaction as the particles pass one an-
+other. More generally, the exchange could modify the wavefunction by
+a multiplicative phase eiθ that could take values other than +1 or −1,
+but we could account for this phase change by describing the particles as
+either bosons or fermions.
+4
+
+--- PDF page 5 ---
+9.1 Anyons, anyone?
+5
+Thus, identical-particle statistics is a rather tame concept in three (or
+more) spatial dimensions and also in one dimension. But in between these
+two dull cases, in two dimensions, a remarkably rich variety of types of
+particle statistics are possible, so rich that we have far to go before we
+can give a useful classiﬁcation of all of the possibilities.
+Indistinguishable particles in two dimensions that are neither bosons
+nor fermions are called anyons. Anyons are a fascinating theoretical con-
+struct, but do they have anything to do with the physics of real systems
+that can be studied in the laboratory? The remarkable answer is: “Yes!”
+Even in our three-dimensional world, a two-dimensional gas of electrons
+can be realized by trapping the electrons in a thin layer between two slabs
+of semiconductor, so that at low energies, electron motion in the direction
+orthogonal to the layer is frozen out. In a suﬃciently strong magnetic ﬁeld
+and at suﬃciently low temperature, and if the electrons in the material
+are suﬃciently mobile, the two-dimensional electron gas attains a pro-
+foundly entangled ground state that is separated from all excited states
+by a nonzero energy gap. Furthermore, the low-energy particle excitations
+in the systems do not have the quantum numbers of electrons; rather they
+are anyons, and carry electric charges that are fractions of the electron
+charge. The anyons have spectacular eﬀects on the transport properties
+of the sample, manifested as the fractional quantum Hall eﬀect.
+Anyons will be our next topic. But why? True, I have already said
+enough to justify that anyons are a deep and fascinating subject. But this
+is not a course about the unusual behavior of exotic phases attainable in
+condensed matter systems. It is a course about quantum computation.
+In fact, there is a connection, ﬁrst appreciated by Alexei Kitaev in
+1997: anyons provide an unusual, exciting, and perhaps promising means
+of realizing fault-tolerant quantum computation.
+So that sounds like something we should be interested in. After all,
+I have already given 12 lectures on the theory of quantum error correc-
+tion and fault-tolerant quantum computing. It is a beautiful theory; I
+have enjoyed telling you about it and I hope you enjoyed hearing about
+it. But it is also daunting. We’ve seen that an ideal quantum circuit
+can be simulated faithfully by a circuit with noisy gates, provided the
+noisy gates are not too noisy, and we’ve seen that the overhead in cir-
+cuit size and depth required for the simulation to succeed is reasonable.
+These observations greatly boost our conﬁdence that large scale quantum
+computers will really be built and operated someday. Still, for fault tol-
+erance to be eﬀective, quantum gates need to have quite high ﬁdelity (by
+the current standards of experimental physics), and the overhead cost of
+achieving fault tolerance is substantial. Even though reliable quantum
+computation with noisy gates is possible in principle, there always will
+
+--- PDF page 6 ---
+6
+9 Topological quantum computation
+be a strong incentive to improve the ﬁdelity of our computation by im-
+proving the hardware rather than by compensating for the deﬁciencies of
+the hardware through clever circuit design. By using anyons, we might
+achieve fault tolerance by designing hardware with an intrinsic resistance
+to decoherence and other errors, signiﬁcantly reducing the size and depth
+blowups of our circuit simulations. Clearly, then, we have ample motiva-
+tion for learning about anyons. Besides, it will be fun!
+In some circles, this subject has a reputation (not fully deserved in my
+view) for being abstruse and inaccessible. I intend to start with the basics,
+and not to clutter the discussion with details that are mainly irrelevant to
+our central goals. That way, I hope to keep the presentation clear without
+really dumbing it down.
+What are these goals? I will not be explaining how the theory of anyons
+connects with observed phenomena in fractional quantum Hall systems.
+In particular, abelian anyons arise in most of these applications. From
+a quantum information viewpoint, abelian anyons are relevant to robust
+storage of quantum information (and we have already gotten a whiﬀof
+that connection in our study of toric quantum codes). We will discuss
+abelian anyons here, but our main interest will be in nonabelian anyons,
+which as we will see can be endowed with surprising computational power.
+Kitaev (quant-ph/9707021) pointed out that a system of nonabelian
+anyons with suitable properties can eﬃciently simulate a quantum circuit;
+this idea was elaborated by Ogburn and me (quant-ph/9712048), and gen-
+eralized by Mochon (quant-ph/0206128, quant-ph/0306063). In Kitaev’s
+original scheme, measurements were required to simulate some quantum
+gates. Freedman, Larsen and Wang (quant-ph/000110) observed that if
+we use the right kind of anyons, all measurements can be postponed until
+the readout of the ﬁnal result of the computation. Freedman, Kitaev,
+and Wang (quant-ph/0001071) also showed that a system of anyons can
+be simulated eﬃciently by a quantum circuit; thus the anyon quantum
+computer and the quantum circuit model have equivalent computational
+power. The aim of these lectures is to explain these important results.
+We will focus on the applications of anyons to quantum computing, not
+on the equally important issue of how systems of anyons with desirable
+properties can be realized in practice.∗It will be left to you to ﬁgure that
+out!
+∗Two interesting approaches to realizing nonabelian anyons — using superconduct-
+ing junction arrays and using cold atoms trapped in optical lattices — have been
+discussed in the recent literature.
+
+--- PDF page 7 ---
+9.2 Flux-charge composites
+7
+9.2 Flux-charge composites
+For those of us who are put oﬀby abstract mathematical constructions, it
+will be helpful to begin our exploration of the theory of anyons by thinking
+about a concrete model. So let’s start by recalling a more familiar concept,
+the Aharonov-Bohm eﬀect.
+Imagine electromagnetism in a two-dimensional world, where a “ﬂux
+tube” is a localized “pointlike” object (in three dimensions, you may en-
+vision a plane intersecting a magnetic solenoid directed perpendicular to
+the plane). The ﬂux might be enclosed behind an impenetrable wall, so
+that an object outside can never visit the region where the magnetic ﬁeld
+is nonzero. But even so, the magnetic ﬁeld has a measurable inﬂuence on
+charged particles outside the ﬂux tube. If an electric charge q is adiabat-
+ically transported (counterclockwise) around a ﬂux Φ, the wave function
+of the charge acquires a topological phase eiqΦ (where we use units with
+¯h = c = 1). Here the word “topological” means that the Aharonov-Bohm
+phase is robust when we deform the trajectory of the charged particle —
+all that matters is the “winding number” of the charge about the ﬂux.
+The concept of topological invariance arises naturally in the study of
+fault tolerance. Topological properties are those that remain invariant
+when we smoothly deform a system, and a fault-tolerant quantum gate is
+one whose action on protected information remains invariant (or nearly
+so) when we deform the implementation of the gate by adding noise. The
+topological invariance of the Aharonov-Bohm phenomenon is the essential
+property that we hope to exploit in the design of quantum gates that are
+intrinsically robust.
+We usually regard the Aharonov-Bohm eﬀect as a phenomenon that
+occurs in quantum electrodynamics, where the photon is exactly mass-
+less. But it is useful to recognize that Aharonov-Bohm phenomena can
+also occur in massive theories. For example, we might consider a “super-
+conducting” system composed of charge e particles, such that composite
+objects with charge ne form a condensate (where n is an integer). In
+this superconductor, there is a quantum of ﬂux Φ0 = 2π/ne, the minimal
+nonzero ﬂux such that a charge-(ne) particle in the condensate, when
+transported around the ﬂux, acquires a trivial Aharonov-Bohm phase.
+An isolated region that contains a ﬂux quantum is an island of normal
+material surrounded by the superconducting condensate, prevented from
+spreading because the magnetic ﬂux cannot penetrate into the supercon-
+ductor. That is, it is a stable particle, what we could call a “ﬂuxon.”
+When one of the charge-e particles is transported around a ﬂuxon, its
+wave function acquires the nontrivial topological phase eieΦ0 = e2πi/n.
+But in the superconductor, the photon acquires a mass via the Higgs
+mechanism, and there are no massless particles. That topological phases
+
+--- PDF page 8 ---
+8
+9 Topological quantum computation
+are compatible with massive theories is important, because massless par-
+ticles are easily excited, a potentially copious source of decoherence.
+Now, let’s imagine that, in our two-dimensional world, ﬂux and electric
+charge are permanently bound together (for some reason). A ﬂuxon can
+be envisioned as ﬂux Φ conﬁned inside an impenetrable circular wall,
+and an electric charge q is stuck to the outside of the wall.
+What is
+the angular momentum of this ﬂux-charge composite? Suppose that we
+carefully rotate the object counterclockwise by angle 2π, returning it to
+its original orientation. In doing so, we have transported the charge q
+about the ﬂux Φ, generating a topological phase eiqΦ. This rotation by
+2π is represented in Hilbert space by the unitary transformation
+U(2π) = e−i2πJ = eiqΦ ,
+(9.1)
+where J is the angular momentum. We conclude, then, that the possible
+eigenvalues of angular momentum are
+J = m −qΦ
+2π
+(m = integer) .
+(9.2)
+We can characterize this spectrum by an angular variable θ ∈[0, 2π),
+deﬁned by θ = qΦ (mod 2π), and say that the eigenvalues are shifted
+away from integer values by −θ/2π. We will refer to the phase eiθ that
+represents a counterclockwise rotation by 2π as the topological spin of the
+composite object.
+But shouldn’t a rotation by 2π act trivially on a physical system (isn’t
+it the same as doing nothing)? No, we know better than that, from our
+experience with spinors in three dimensions. For a system with fermion
+number F, we have
+e−2πiJ = (−1)F ;
+(9.3)
+if the fermion number is odd, the eigenvalues of J are shifted by 1/2
+from the integers. This shift is physically acceptable because there is a
+(−1)F superselection rule: no observable local operator can change the
+value of (−1)F (there is no physical process that can create or destroy
+an isolated fermion). Acting on a coherent superposition of states with
+diﬀerent values of (−1)F, the eﬀect of e−2πiJ is
+e−i2πJ (a| even F ⟩+ b| odd F ⟩) = a| even F ⟩−b| odd F ⟩.
+(9.4)
+The relative sign in the superposition ﬂips, but this has no detectable
+physical eﬀects, since all observables are block diagonal in the (−1)F
+basis.
+Similarly, in two dimensions, the shift in the angular momentum spec-
+trum e−2πiJ = eiθ has no unacceptable physical consequences if there is
+
+--- PDF page 9 ---
+9.3 Spin and statistics
+9
+a θ superselection rule, ensuring that the relative phase in a superposi-
+tion of states with diﬀerent values of θ is physically inaccessible (not just
+in practice but even in principle). As for fermions, there is no allowed
+physical process that can create of destroy an isolated anyon.
+In three dimensions, only θ = 0, π are allowed, because (as you probably
+know) of a topological property of the three-dimensional rotation group
+SO(3): a closed path in SO(3) beginning at the identity and ending at a
+rotation by 4π can be smoothly contracted to a trivial path. It follows
+that a rotation by 4π really is represented by the identity, and therefore
+that the eigenvalues of a rotation by 2π are +1 and −1. But the two-
+dimensional rotation group SO(2) does not have this topological property,
+so that any value of θ is possible in principle.
+Note that the angular momentum J changes sign under time reversal
+(T ) and also under parity (P ). Unless θ = 0 or π, the spectrum of J
+is asymmetric about zero, and therefore a theory of anyons typically will
+not be T or P invariant. In our ﬂux-charge composite model the origin
+of this symmetry breaking is not mysterious — it arises from the nonzero
+magnetic ﬁeld. But in a system with no intrinsic breaking of T and P , if
+anyons occur then either these symmetries must be broken spontaneously,
+or else the particle spectrum must be “doubled” so that for each anyon
+with exchange phase eiθ there also exists an otherwise identical particle
+with exchange phase e−iθ.
+9.3 Spin and statistics
+For identical particles in three dimensions, there is a well known connec-
+tion between spin and statistics: indistinguishable particles with integer
+spin are bosons, and those with half-odd-integer spin are fermions. In
+two dimensions, the spin can be any real number. What does this new
+possibility of “fractional spin” imply about statistics? The answer is that
+statistics, too, can be “fractionalized”!
+What happens if we perform an exchange of two of our ﬂux-charge
+composite objects, in a counterclockwise sense? Each charge q is adiabat-
+ically transported half way around the ﬂux Φ of the other object. We can
+anticipate, then, that each charge will acquire an Aharonov-Bohm phase
+that is half of the phase generated by a complete revolution of the charge
+about the ﬂux. Adding together the phases arising from the transport of
+both charges, we ﬁnd that the exchange of the two ﬂux-charge composites
+changes their wave function by the phase
+exp
+
+i
+1
+2qΦ + 1
+2qΦ
+
+= eiqΦ = eiθ = e−2πiJ .
+(9.5)
+The phase generated when the two objects are exchanged matches the
+
+--- PDF page 10 ---
+10
+9 Topological quantum computation
+phase generated when one of the two objects is rotated by 2π. Thus the
+connection between spin and statistics continues to hold, in a form that
+is a natural generalization of the connection that applies to bosons and
+fermions.
+The origin of this connection is fairly clear in our ﬂux-charge composite
+model, but in fact it holds much more generally. Why? Reading textbooks
+on relativistic quantum ﬁeld theory, one can easily get the impression that
+the spin-statistics connection is founded on Lorentz invariance, and has
+something to do with the properties of the complexiﬁed Lorentz group.
+Actually, this impression is quite misleading. All that is essential for a
+spin-statistics connection to hold is the existence of antiparticles. Special
+relativity is not an essential ingredient.
+Consider an anyon, characterized by the phase θ, and suppose that this
+particle has a corresponding antiparticle. This means that the particle
+and its antiparticle, when combined, have trivial quantum numbers (in
+particular, zero angular momentum) and therefore that there are physical
+processes in which particle-antiparticle pairs can be created and annihi-
+lated. Draw a world line in spacetime that represents a process in which
+two particle-antiparticle pairs are created (one pair on the left and the
+other pair on the right), the particle from the pair on the right is ex-
+changed in a counterclockwise sense with the particle from the pair on
+the left, and then both pairs reannihilate. (The world line has an orien-
+tation; if directed forward in time it represents a particle, and if directed
+backward in time it represents an antiparticle.) Turning our diagram 90◦,
+we obtain a depiction of a process in which a single particle-antiparticle
+pair is created, the particle and antiparticle are exchanged in a clock-
+wise sense, and then the pair reannihilates. Turning it 90◦yet again, we
+have a process in which two pairs are created and the antiparticle from
+the pair on the right is exchanged, in a counterclockwise sense, with the
+antiparticle from the pair on the left, before reannihilation.
+aa
+R
+ 
+1
+aa
+R
+ 
+ 
+aa
+R
+ 
+ 
+What do we conclude from these manipulations? Denote by Rab the
+unitary operator that represents a counterclockwise exchange of particles
+of types a and b (so that the inverse operator R−1
+ab represents a clockwise
+exchange), and denote by ¯a the antiparticle of a. We have found that
+Raa = R−1
+a¯a = R¯a¯a .
+(9.6)
+
+--- PDF page 11 ---
+9.4 Combining anyons
+11
+If a is an anyon with exchange phase eiθ, then its antiparticle ¯a also has
+the same exchange phase.
+Furthermore, when a and ¯a are exchanged
+counterclockwise, the phase acquired is e−iθ.
+These conclusions are unsurprising when we interpret them from the
+perspective of our ﬂux-charge composite model of anyons. The antipar-
+ticle of the object with ﬂux Φ and charge q has ﬂux −Φ and charge −q.
+Hence, when we exchange two antiparticles, the minus signs cancel and
+the eﬀect is the same as though the particles were exchanged. But if we
+exchange a particle and an antiparticle, then the relative sign of charge
+and ﬂux results in the exchange phase e−iqΦ = e−iθ.
+But what is the connection between these observations about statistics
+and the spin? Continuing to contemplate the same spacetime diagram, let
+us consider its implications regarding the orientation of the particles. For
+keeping track of the orientation, it is convenient to envision the particle
+world line not as a thread but as a ribbon in spacetime. I claim that our
+process can be smoothly deformed to one in which a particle-antiparticle
+pair is created, the particle is rotated counterclockwise by 2π, and then
+the pair reannihilates. A convenient way to verify this assertion is to take
+oﬀyour belt (or borrow a friend’s). The buckle at one end speciﬁes an
+orientation; point your thumb toward the buckle, and following the right-
+hand rule, twist the belt by 2π before rebuckling it. You should be able
+to check that you can lay out the belt to match the spacetime diagram for
+any of the exchange processes described earlier, and also for the process
+in which the particle rotates by 2π.
+Thus, in a topological sense, rotating a particle counterclockwise by 2π
+is really the same thing as exchanging two particles in a counterclockwise
+sense (or exchanging particle and antiparticle in a clockwise sense), which
+provides a satisfying explanation for a general spin-statistics connection.†
+I emphasize again that this argument invokes processes in which particle-
+antiparticle pairs are created and annihilated, and therefore the existence
+of antiparticles is an essential prerequisite for it to apply.
+9.4 Combining anyons
+We know that a composite object composed of two fermions is a bo-
+son. What happens when we build a composite object by combining two
+anyons?
+† Actually, this discussion has been oversimpliﬁed. Though it is adequate for abelian
+anyons, we will see that it must be amended for nonabelian anyons, because Rab has
+more than one eigenvalue in the nonabelian case. Similarly, the discussion in the next
+section of “combining anyons” will need to be elaborated because, in the nonabelian
+case, more than one kind of composite anyon can be obtained when two anyons are
+fused together.
+
+--- PDF page 12 ---
+12
+9 Topological quantum computation
+Suppose that a is an anyon with exchange phase eiθ, and that we build
+a “molecule” from n of these a anyons. What phase is acquired under a
+counterclockwise exchange of the two molecules?
+The answer is clear in our ﬂux-charge composite model. Each of the n
+charges in one molecule acquires a phase eiθ/2 when transported half way
+around each of the n ﬂuxes in the other molecule. Altogether then, 2n2
+factors of the phase eiθ/2 are generated, resulting in the total phase
+eiθn = ein2θ .
+(9.7)
+Said another way, the phase eiθ occurs altogether n2 times because in
+eﬀect n anyons in one molecule are being exchanged with n anyons in
+the other molecule. Contrary to what we might have naively expected, if
+we split a fermion (say) into two identical constituents, the constituents
+have, not an exchange phase of √−1 = i, but rather (eiπ)1/4 = eiπ/4.
+This behavior is compatible with the spin-statistics connection: the
+angular momentum J of the n-anyon molecule satisﬁes
+e−2πiJn = e−2πin2J = ein2θ .
+(9.8)
+For example, consider a molecule of two anyons, and imagine rotating
+the molecule counterclockwise by 2π. Not only does each anyon in the
+molecule rotate by 2π; in addition one of the anyons revolves around the
+other. One revolution is equivalent to two successive exchanges, so that
+the phase generated by the revolution is ei2θ. The total eﬀect of the two
+rotations and the revolution is the phase
+exp [i (θ + θ + 2θ)] = ei4θ .
+(9.9)
+Another way to understand why the angular momenta of the anyons in
+the molecule do not combine additively is to note that the total angular
+momentum of the molecule consists of two parts — the spin angular
+momentum S of each of the two anyons (which is additive) and the orbital
+angular momentum L of the anyon pair. Because the counterclockwise
+transport of one anyon around the other generates the nontrivial phase
+ei2θ, the dependence of the two-anyon wavefunction ψ on the relative
+azimuthal angle ϕ is not single-valued; instead,
+ψ(ϕ + 2π) = e−i2θψ(ϕ) .
+(9.10)
+This means that the spectrum of the orbital angular momentum L is
+shifted away from integer values:
+e−i2πL = e2iθ ,
+(9.11)
+
+--- PDF page 13 ---
+9.5 Unitary representations of the braid group
+13
+and this orbital angular momentum combines additively with the spin S
+to produce the total angular momentum
+−2πJ = −2πL−2πS = 2θ+2θ+ 2π(integer) = 4θ+ 2π(integer) . (9.12)
+What if, on the other hand, we build a molecule ¯aa from an anyon a
+and its antiparticle ¯a? Then, as we’ve seen, the spin S has the same value
+as for the aa molecule. But the exchange phase has the opposite value, so
+that the noninteger part of the orbital angular momentum is −2πL = −2θ
+instead of −2πL = 2θ, and the total angular momentum J = L + S is
+an integer. This property is necessary, of course, if the ¯aa pair is to be
+able to annihilate without leaving behind an object that carries nontrivial
+angular momentum.
+9.5 Unitary representations of the braid group
+We have already noted that the angular momentum spectrum has diﬀer-
+ent properties in two spatial dimensions than in three dimensions because
+SO(2) has diﬀerent topological properties than SO(3) (SO(3) has a com-
+pact simply connected covering group SU(2), but SO(2) does not). This
+observation provides one way to see why anyons are possible in two di-
+mensions but not in three. It is also instructive to observe that particle
+exchanges have diﬀerent topological properties in two spatial dimensions
+than in three dimensions.
+As we have found in our discussion of the relation between the statistics
+of particles and of antiparticles, it is useful to envision exchanges of parti-
+cles as processes taking place in spacetime. In particular, it is convenient
+to imagine that we are computing the quantum transition amplitude for
+a time-dependent process involving n particles by evaluating a sum over
+particle histories (though for our purposes it will not actually be necessary
+to calculate any path integrals).
+Consider a system of n indistinguishable pointlike particles conﬁned to
+a two-dimensional spatial surface (which for now we may assume is the
+plane), and suppose that no two particles are permitted to occupy coinci-
+dent positions. We may think of a conﬁguration of the particles at a ﬁxed
+time as a plane with n “punctures” at speciﬁed locations — that is, we
+associate with each particle a hole in the surface with inﬁnitesimal radius.
+The condition that the particles are forbidden to coincide is enforced by
+demanding that there are exactly n punctures in the plane at any time.
+Furthermore, just as the particles are indistinguishable, each puncture
+is the same as any other. Thus if we were to perform a permutation of
+the n punctures, this would have no physical eﬀect; all the punctures are
+the same anyway, so it makes no diﬀerence which one is which. All that
+matters is the n distinct particle positions in the plane.
+
+--- PDF page 14 ---
+14
+9 Topological quantum computation
+To evaluate the quantum amplitude for a conﬁguration of n particles
+at speciﬁed initial positions at time t = 0 to evolve to a conﬁguration
+of n particles at speciﬁed ﬁnal positions at time t = T, we are to sum
+over all classical histories for the n particles that interpolate between the
+ﬁxed initial conﬁguration and the ﬁxed ﬁnal conﬁguration, weighted by
+the phase eiS, where S is the classical action of the history. If we envision
+each particle world line as a thread, each history for the n particles be-
+comes a braid, where each particle on the initial (t = 0) time slice can be
+connected by a thread to any one of the particles on the ﬁnal (t = T) time
+slice. Furthermore, since the particle world lines are forbidden to cross,
+the braids fall into distinct topological classes that cannot be smoothly
+deformed one to another, and the path integral can be decomposed as
+a sum of contributions, with each contribution arising from a diﬀerent
+topological class of histories.
+Nontrivial exchange operations acting on the particles on the ﬁnal time
+slice change the topological class of the braid.
+Thus we see that the
+elements of the symmetry group generated by exchanges are in one-to-one
+correspondence with the topological classes. This (inﬁnite) group is called
+Bn, the braid group on n strands; the group composition law corresponds
+to concatenation of braids (that is, following one braid with another). In
+the quantum theory, the quantum state of the n indistinguishable particles
+belongs to a Hilbert space that transforms as a unitary representation of
+the braid group Bn.
+The group can be presented as a set of generators that obey particular
+deﬁning relations. To understand the deﬁning relations, we may imag-
+ine that the n particles occupy n ordered positions (labeled 1, 2, 3, . . ., n)
+arranged on a line. Let σ1 denote a counterclockwise exchange of the
+particles that initially occupy positions 1 and 2, let σ2 denote a counter-
+clockwise exchange of the particles that initially occupy positions 2 and
+3, and so on. Any braid can be constructed as a succession of exchanges
+of neighboring particles; hence σ1, σ2, . . ., σn−1 are the group generators.
+The deﬁning relations satisﬁed by these generators are of two types.
+The ﬁrst type is
+σjσk = σkσj ,
+|j −k| ≥2 ,
+(9.13)
+which just says that exchanges of disjoint pairs of particles commute. The
+second, slightly more subtle, type of relation is
+σjσj+1σj = σj+1σjσj+1 ,
+j = 1, 2, . . ., n −2 ,
+(9.14)
+which is sometimes called the Yang-Baxter relation. You can verify the
+Yang-Baxter relation by drawing the two braids σ1σ2σ1 and σ2σ1σ2 on
+a piece of paper, and observing that both describe a process in which
+the particles initially in positions 1 and 3 are exchanged counterclockwise
+
+--- PDF page 15 ---
+9.5 Unitary representations of the braid group
+15
+about the particle labeled 2, which stays ﬁxed — i.e., these are topologi-
+cally equivalent braids.
+2
+V
+1
+V
+2
+V
+1
+V
+2
+V
+1
+V
+ 
+Since the braid group is inﬁnite, it has an inﬁnite number of unitary
+irreducible representations, and in fact there are an inﬁnite number of one-
+dimensional representations. Indistinguishable particles that transform as
+a one-dimensional representation of the braid group are said to be abelian
+anyons. In the one-dimensional representations, each generator σj of Bn is
+represented by a phase σj = eiθj. Furthermore, the Yang-Baxter relation
+becomes eiθjeiθj+1eiθj = eiθj+1eiθjeiθj+1, which implies eiθj = eiθj+1 ≡eiθ
+— all exchanges are represented by the same phase.
+Of course, that
+makes sense; if the particles are really indistinguishable, the exchange
+phase ought not to depend on which pair is exchanged. For θ = 0 we
+obtain bosons, and for θ = π, fermions
+The braid group also has many nonabelian representations that are
+of dimension greater than one; indistinguishable particles that transform
+as such representations are said to be nonabelian anyons (or, sometimes,
+nonabelions). To understand the physical properties of nonabelian anyons
+we will need to understand the mathematical structure of some of these
+representations. In these lectures, I hope to convey some intuition about
+nonabelian anyons by discussing some examples in detail.
+For now, though, we can already anticipate the main goal we hope to
+fulﬁll. For nonabelian anyons, the irreducible representation of Bn real-
+ized by n anyons acts on a “topological vector space” Vn whose dimension
+Dn increases exponentially with n. And for anyons with suitable prop-
+erties, the image of the representation may be dense in SU(Dn). Then
+braiding of anyons can simulate a quantum computation — any (special)
+unitary transformation acting on the exponentially large vector space Vn
+can be realized with arbitrarily good ﬁdelity by executing a suitably cho-
+sen braid.
+Thus we are keenly interested in the nonabelian representations of the
+braid group. But we should also emphasize (and will discuss at greater
+
+--- PDF page 16 ---
+16
+9 Topological quantum computation
+length later on) that there is more to a model of anyons than a mere rep-
+resentation of the braid group. In our ﬂux tube model of abelian anyons,
+we were able to describe not only the eﬀects of an exchange of anyons, but
+also the types of particles that can be obtained when two or more anyons
+are combined together. Likewise, in a general anyon model, the anyons
+are of various types, and the model incorporates “fusion rules” that spec-
+ify what types can be obtained when two anyons of particular types are
+combined. Nontrivial consistency conditions arise because fusion is asso-
+ciate (fusing a with b and then fusing the result with c is equivalent to
+fusing b with c and then fusing the result with a), and because the fusion
+rules must be consistent with the braiding rules. Though these consis-
+tency conditions are highly restrictive, many solutions exist, and hence
+many diﬀerent models of nonabelian anyons are realizable in principle.
+9.6 Topological degeneracy
+But before moving on to nonabelian anyons, there is another important
+idea concerning abelian anyons that we should discuss. In any model of
+anyons (indeed, in any local quantum system with a mass gap), there is a
+ground state or vacuum state, the state in which no particles are present.
+On the plane the ground state is unique, but for a two-dimensional surface
+with nontrivial topology, the ground state is degenerate, with the degree of
+degeneracy depending on the topology. We have already encountered this
+phenomenon of “topological degeneracy” in the model of abelian anyons
+that arose in our study of a particular quantum error-correcting code,
+Kitaev’s toric code. Now we will observe that topological degeneracy is a
+general feature of any model of (abelian) anyons.
+We can arrive at the concept of topological degeneracy by examining
+the representations of a simple operator algebra. Consider the case of the
+torus, represented as a square with opposite sides identiﬁed, and consider
+the two fundamental 1-cycles of the torus: C1, which winds around the
+square in the x1 direction, and C2 which winds around in the x2 direction.
+A unitary operator T1 can be constructed that describes a process in
+which an anyon-antianyon pair is created, the anyon propagates around
+C1, and then the pair reannihilates. Similarly a unitary operator T2 can
+be constructed that describes a process in which the pair is created, and
+the anyon propagates around the cycle C2 before the pair reannihilates.
+Each of the operators T1 and T2 preserves the ground state of the system
+(the state with no particles); indeed, each commutes with the Hamiltonian
+H of the system and so either can be simultaneously diagonalized with
+H (T1 and T2 are both symmetries).
+However, T1 and T2 do not commute with one another. If our torus
+has inﬁnite spatial volume, and there is a mass gap (so that the only
+
+--- PDF page 17 ---
+9.6 Topological degeneracy
+17
+interactions among distantly separated anyons are due to the Aharonov-
+Bohm eﬀect), then the commutator of T1 and T2 is
+T −1
+2 T −1
+1 T2T1 = e−i2θI ,
+(9.15)
+where eiθ is the anyon’s exchange phase.
+The nontrivial commutator
+arises because the process in which (1) an anyon winds around C1, (2)
+an anyon winds around C2 (3) an anyon winds around C1 in the reverse
+direction, and (4) an anyon winds around C2 in the reverse direction, is
+topologically equivalent to a process in which one anyon winds clockwise
+around another. To verify this claim, view the action of T −1
+2 T −1
+1 T2T1
+as a process in spacetime. First note that the process described by the
+operator T −1
+1 T1, in which an anyon world line ﬁrst sweeps though C1 and
+then immediately traverses C1 in the reverse order, can be deformed to
+a process in which the anyon world line traverses a topologically trivial
+loop that can be smoothly shrunk to a point (in keeping with the prop-
+erty that T −1
+1 T1 is really the identity operator). In similar fashion, the
+process described by the operator T −1
+2 T −1
+1 T2T1 can be deformed to one
+where the anyon world lines traverse two closed loops, but such that the
+world lines link once with one another; furthermore, one loop pierces the
+surface bounded by the other loop in a direction opposite to the orien-
+tation inherited by the surface via the right-hand rule from its bounding
+loop. This process can be smoothly deformed to one in which two pairs
+are created, one anyon winds clockwise around the other, and then both
+pairs annihilate. The clockwise winding is equivalent to two successive
+clockwise exchanges, represented in our one-dimensional representation
+of the braid group by the phase e−i2θ. We conclude that T1 and T2 are
+noncommuting, except in the cases θ = 0 (bosons) and θ = π (fermions).
+2
+1
+
+--- PDF page 18 ---
+18
+9 Topological quantum computation
+Since T1 and T2 both commute with the Hamiltonian H, both preserve
+the eigenspaces of H, but since T1 and T2 do not commute with one
+another, they cannot be simultaneously diagonalized. Since T1 is unitary,
+its eigenvalues are phases; let us use the angular variable α ∈[0, 2π) to
+label an eigenstate of T1 with eigenvalue eiα:
+T1|α⟩= eiα|α⟩.
+(9.16)
+Then applying T2 to the T1 eigenstate advances the value of α by 2θ:
+T1 (T2|α⟩) = ei2θT2T1|α⟩= ei2θeiα (T2|α⟩) .
+(9.17)
+Suppose that θ is a rational multiple of 2π, which we may express as
+θ = πp/q ,
+(9.18)
+where q and p (p < 2q) are positive integers with no common factor. Then
+we conclude that T1 must have at least q distinct eigenvalues; T1 acting
+on α generates an orbit with q distinct values:
+α +
+2πp
+q
+
+k (mod 2π) ,
+k = 0, 1, 2, . . ., q −1 .
+(9.19)
+Since T1 commutes with H, on the torus the ground state of our anyonic
+system (indeed, any energy eigenstate) must have a degeneracy that is an
+integer multiple of q. Indeed, generically (barring further symmetries or
+accidental degeneracies), the degeneracy is expected to be exactly q.
+For a two-dimensional surface with genus g (a sphere with g “handles”),
+the degree of this topological degeneracy becomes qg, because there are
+operators analogous to T1 and T2 associated with each of the g handles,
+and all of the T1-like operators can be simultaneously diagonalized. Fur-
+thermore, we can apply a similar argument to a ﬁnite planar medium if
+single anyons can be created and destroyed at the edges of the system. For
+example, consider an annulus in which anyons can appear or disappear
+at the inner and outer edges. Then we could deﬁne the unitary opera-
+tor T1 as describing a process in which an anyon winds counterclockwise
+around the annulus, and a unitary operator T2 as describing a process in
+which an anyon appears at the outer edge, propagates to the inner edge,
+and disappears. These operators T1 and T2 have the same commutator
+as the corresponding operators deﬁned on the torus, and so we conclude
+as before that the ground state on the annulus is q-fold degenerate for
+θ = πp/q. For a disc with h holes, there is an operator analogous to
+T1 that winds an anyon counterclockwise around each of the holes, and
+an operator analogous to T2 that propagates an anyon from the outer
+boundary of the disk to the edge of the hole; thus the degeneracy is qh.
+
+--- PDF page 19 ---
+9.6 Topological degeneracy
+19
+What we have described here is a robust topological quantum memory.
+The phase ei2θ = ei2πp/q ≡ω acquired when one anyon winds counter-
+clockwise around another is a primitive qth root of unity, and in the case
+of a planar system with holes, the operator T1 can be regarded as the en-
+coded Pauli operator ¯Z acting on a q-dimension system associated with
+a particular hole. Physically, the eigenvalue ωs of ¯Z just counts the num-
+ber s of anyons that are “stuck” inside the hole. The operator T2 can
+be regarded as the complementary Pauli operator ¯X that increments the
+value of s by carrying one anyon from the boundary of the system and
+depositing it in the hole. Since the quantum information is encoded in a
+nonlocal property of the system, it is well protected from environmental
+decoherence. By the same token depositing a quantum state in the mem-
+ory, and reading it out, might be challenging for this system, though in
+principle ¯Z could be measured by, say, performing an interference experi-
+ment in which an anyon projectile scatters oﬀof a hole. We will see later
+that by using nonabelian anyons we will be able to simplify the readout;
+in addition, with nonabelian anyons we can use topological properties to
+process quantum information as well as to store it.
+Just how robust is this quantum memory? We need to worry about er-
+rors due to thermal ﬂuctuations and due to quantum ﬂuctuations. Ther-
+mal ﬂuctuations might excite the creation of anyons, and thermal anyons
+might diﬀuse around one of the holes in the sample, or from one bound-
+ary to another, causing an encoded error.
+Thermal errors are heavily
+suppressed by the Boltzman factor e−∆/T , if the temperature T is suﬃ-
+ciently small compared to the energy gap ∆(the minimal energy cost of
+creating a single anyon at the edge of the sample, or a pair of anyons in
+the bulk). The harmful quantum ﬂuctuations are tunneling processes in
+which a virtual anyon-antianyon pair appears and the anyon propagates
+around a hole before reannihilating, or a virtual anyon appears at the
+edge of a hole and propagates to another boundary before disappearing.
+These errors due to quantum tunneling are heavily suppressed if the holes
+are suﬃciently large and suﬃciently well separated from one another and
+from the outer boundary.‡
+Note that our conclusion that the topological degeneracy is ﬁnite hinged
+on the assumption that the angle θ is a rational multiple of π. We may
+say that a theory of anyons is rational if the topological degeneracy is
+ﬁnite for any surface of ﬁnite genus (and, for nonabelian anyons, if the
+‡ If you are familiar with Euclidean path integral methods, you’ll ﬁnd it easy to verify
+that in the leading semiclassical approximation the amplitude A for such a tunneling
+process in which the anyon propagates a distance L has the form A = Ce−L/L0,
+where C is a constant and L0 = ¯h (2m∗∆)−1/2; here ¯h is Planck’s constant and m∗
+is the eﬀective mass of the anyon, deﬁned so that the kinetic energy of an anyon
+traveling at speed v is 1
+2m∗v2.
+
+--- PDF page 20 ---
+20
+9 Topological quantum computation
+topological vector space Vn is ﬁnite-dimensional for any ﬁnite number of
+anyons n). We may anticipate that the anyons that arise in any physically
+reasonable system will be rational in this sense, and therefore should be
+expected to have exchange phases that are roots of unity.
+9.7 Toric code revisited
+If these observations about topological degeneracy seem hauntingly famil-
+iar, it may be because we used quite similar arguments in our discussion
+of the toric code.
+The toric code can be regarded as the (degenerate) ground state of a
+system of qubits that occupy the links of a square lattice on the torus,
+with Hamiltonian
+H = −1
+4∆
+ X
+P
+ZP +
+X
+S
+XS
+!
+,
+(9.20)
+where the plaquette operator ZP = ⊗ℓ∈P Zℓis the tensor product of Z’s
+acting on the four qubits associated with the links contained in plaquette
+P, and the site operator XS ⊗ℓ∋S Xℓis the tensor product of X’s acting
+on the four qubits associated with the links that meet at the site S. These
+plaquette and site operators are just the (commuting) stabilizer generators
+for the toric code. The ground state is the simultaneous eigenstate with
+eigenvalue 1 of all the stabilizer generators.
+This model has two types of localized particle excitations — plaquette
+excitations where ZP = −1, which we might think of as magnetic ﬂuxons,
+and site excitations where XS = −1, which we might think of as electric
+charges. A Z error acting on a link creates a pair of charges on the two
+site joined by the link, and an X error acting on a link creates a pair of
+ﬂuxons on the two plaquettes that share the link. The energy gap ∆is
+the cost of creating a pair of either type.
+The charges are bosons relative to one another (they have a trivial
+exchange phase eiθ = 1), and the ﬂuxons are also bosons relative to one
+another. Since the ﬂuxons are distinguishable from the charges, it does
+not make sense to exchange a charge with a ﬂux. But what makes this
+an anyon model is that a phase (−1) is acquired when a charge is carried
+around a ﬂux. The degeneracy of the ground state (the dimension of the
+code space) can be understood as a consequence of this property of the
+particles.
+For this model on the torus, because there are two types of particles,
+there are two types of T1 operators: T1,S, which propagates a charge (site
+defect) around the 1-cycle C1, and T1,P, which propagates a ﬂuxon (pla-
+quette defect) around C1. Similarly there are two types of T2 operators,
+
+--- PDF page 21 ---
+9.8 The nonabelian Aharonov-Bohm eﬀect
+21
+T2,S and T2,P. The nontrivial commutators are
+T −1
+2,PT −1
+1,ST2,PT1,S = −1 = T −1
+2,ST −1
+1,PT2,ST1,P ,
+(9.21)
+both arising from processes in which world lines of charges and ﬂuxon link
+once with one another. Thus T1,S and T2,S can be diagonalized simulta-
+neously, and can be regarded as the encoded Pauli operators ¯Z1 and ¯Z2
+acting on two protected qubits. The operator T2,P, which commutes with
+¯Z1 and anticommutes with ¯Z2, can be regarded as the encoded ¯X1, and
+similarly T1,P is the encoded ¯X2.
+On the torus, the degeneracy of the four ground states is exact for
+the ideal Hamiltonian we constructed (the particles have inﬁnite eﬀective
+masses). Weak local perturbations will break the degeneracy, but only
+by an amount that gets exponentially small as the linear size L of the
+torus increases. To be concrete, suppose the perturbation is a uniform
+“magnetic ﬁeld” pointing in the ˆz direction, coupling to the magnetic
+moments of the qubits:
+H′ = −h
+X
+ℓ
+Zℓ.
+(9.22)
+Because of the nonzero energy gap, for the purpose of computing in per-
+turbation theory the leading contribution to the splitting of the degen-
+eracy, it suﬃces to consider the eﬀect of the perturbation in the four-
+dimensional subspace spanned by the ground states of the unperturbed
+system. In the toric code, the operators with nontrivial matrix elements
+in this subspace are those such that Zℓ’s act on links that form a closed
+loop that wraps around the torus (or Xℓ’s act on links whose dual links
+form a closed loop that wraps around the torus). For an L × L lattice on
+the torus, the minimal length of such a closed loop is L; therefore nonva-
+nishing matrix elements do not arise in perturbation theory until the Lth
+order, and are suppressed by hL. Thus, for small h and large L, memory
+errors due to quantum ﬂuctuations occur only with exponentially small
+amplitude.
+9.8 The nonabelian Aharonov-Bohm eﬀect
+There is a beautiful abstract theory of nonabelian anyons, and in due
+course we will delve into that theory a bit. But I would prefer to launch
+our study of the subject by describing a more concrete model.
+With that goal in mind, let us recall some properties of chromodynam-
+ics, the theory of the quarks and gluons contained within atomic nuclei
+and other strongly interacting particles. In the real world, quarks are per-
+manently bound together and can never be isolated, but for our discussion
+let us imagine a ﬁctitious world in which the forces between quarks are
+
+--- PDF page 22 ---
+22
+9 Topological quantum computation
+weak, so that the characteristic distance scale of quark conﬁnement is
+very large.
+Quarks carry a degree of freedom known metaphorically as color. That
+is, there are three kinds of quarks, which in keeping with the metaphor
+we call red (R), yellow (Y ), and blue (B). Quarks of all three colors are
+physical identical, except that when we bring two quarks together, we can
+tell whether their colors are the same (the Coulombic interaction between
+like colors is repulsive), or diﬀerent (distinct colors attract). There is
+nothing to prevent me from establishing a quark bureau of standards in
+my laboratory, where colored quarks are sorted into three bins; all the
+quarks in the same bin have the same color, and quarks in diﬀerent bins
+have diﬀerent colors. We may attach (arbitrary) labels to the three bins
+— R, Y , and B.
+If while taking a hike outside by lab, I discover a previously unseen
+quark, I may at ﬁrst be unsure of its color. But I can ﬁnd out. I capture
+the quark and carry it back to my lab, being very careful not to disturb
+its color along the way (in chromodynamics, there is a notion of parallel
+transport of color). Once back at the quark bureau of standards, I can
+compare this new quark to the previously calibrated quarks in the bins,
+and so determine whether the new quark should be labeled R, Y , or B.
+It sounds simple but there is a catch: in chromodynamics, the paral-
+lel transport of color is path dependent due to an Aharonov-Bohm phe-
+nomenon that aﬀects color. Suppose that at the quark bureau of stan-
+dards a quark is prepared whose color is described by the quantum state
+|ψq⟩= qR|R⟩+ qY |Y ⟩+ qB|B⟩;
+(9.23)
+it is a coherent superposition with amplitudes qR, qY , qB for the red, yel-
+low, and blue states. The quark is carried along a path that winds around
+a color magnetic ﬂux tube and is returned to the quark bureau of stan-
+dards where its color can be recalibrated. Upon its return the color state
+has been rotated:
+
+
+q′
+R
+q′
+Y
+q′
+B
+
+= U
+
+
+qR
+qY
+qB
+
+,
+(9.24)
+where U is a (special) unitary 3 × 3 matrix. Similarly, when a newly
+discovered quark is carried back to the bureau of standards, the outcome
+of a measurement of its color will depend on whether it passed to the left
+or the right of the ﬂux tube during its voyage.
+This path dependence of the parallel transport of color is closely analo-
+gous to the path dependence of the parallel transport of a tangent vector
+on a curved Riemannian manifold. In chromodynamics, a magnetic ﬁeld
+is the “curvature” whose strength determines the amount of path depen-
+dence.
+
+--- PDF page 23 ---
+9.8 The nonabelian Aharonov-Bohm eﬀect
+23
+In general, the SU(3) matrix U that describes the eﬀect of parallel
+transport of color about a closed path depends on the basepoint x0 where
+the path begins and ends, as well as on the closed loop C traversed by the
+path — when it is important to specify the loop and basepoint we will use
+the notation U(C, x0). The eigenvalues of the matrix U have an invariant
+“geometrical” meaning characterizing the parallel transport, but U itself
+depends on the conventions we have established at the basepoint. You
+might prefer to choose a diﬀerent orthonormal basis for the color space
+at the basepoint x0 than the basis I chose, so that your standard colors
+R, Y , and B diﬀer from mine by the action of an SU(3) matrix V (x0).
+Then, while I characterize the eﬀect or parallel transport around the loop
+C with the matrix U, you characterize it with another matrix
+V (x0)U(C, x0)V (x0)−1 ,
+(9.25)
+that diﬀers from mine by conjugation by V (x0). Physicists sometimes
+speak of this freedom to redeﬁne conventions as a choice of gauge, and say
+that U itself is gauge dependent while its eigenvalues are gauge invariant.
+Chromodynamics, on the distance scales we consider here (much smaller
+than the characteristic distance scale of quark conﬁnement), is a the-
+ory like electrodynamics with long-range Coulombic interactions among
+quarks, mediated by “gluon” ﬁelds. We will prefer to consider a theory
+that retains some of the features of chromodynamics (in particular the
+path dependence of color transport), but without the easily excited light
+gluons. In the case of electrodynamics, we eliminated the light photon
+by considering a “superconductor” in which charged particles form a con-
+densate, magnetic ﬁelds are expelled, and the magnetic ﬂux of an isolated
+object is quantized. Let us appeal to the same idea here. We consider a
+nonabelian superconductor in two spatial dimensions. This world contains
+particles that carry “magnetic ﬂux” (similar to the color magnetic ﬂux in
+chromodynamics) and particles that carry charge (similar to the colored
+quarks of chromodynamics). The ﬂux takes values in a nonabelian ﬁnite
+group G, and the charges are unitary irreducible representations of the
+group G. In this setting, we can formulate some interesting models of
+nonabelian anyons.
+Let R denote a particular irreducible representation of G, whose di-
+mension is denoted |R|.
+We may establish a “charge bureau of stan-
+dards,” and deﬁne there an arbitrarily chosen orthonormal basis for the
+|R|-dimensional vector space acted upon by R:
+|R, i⟩,
+i = 1, 2, . . .|R| .
+(9.26)
+When a charge R is transported around a closed path that encloses a ﬂux
+a ∈G, there is a nontrivial Aharonov-Bohm eﬀect — the basis for R is
+
+--- PDF page 24 ---
+24
+9 Topological quantum computation
+rotated by a unitary matrix DR(a) that represents a:
+|R, j⟩7→
+|R|
+X
+i=1
+|R, i⟩DR
+ij(a) .
+(9.27)
+The matrix elements DR
+ij(a) are measurable in principle, for example by
+conducting interference experiments in which a beam of calibrated charges
+can pass on either side of the ﬂux. (The phase of the complex number
+DR
+ij(a) determines the magnitude of the shift of the interference fringes,
+and the modulus of DR
+ij(a) determines the visibility of the fringes.) Thus
+once we have chosen a standard basis for the charges, we can use the
+charges to attach labels (elements of G) to all ﬂuxes.
+The ﬂux labels
+are unambiguous as long as the representation R is faithful, and barring
+any group automorphisms (which create ambiguities that we are free to
+resolve however we please).
+However, the group elements that we attach to the ﬂuxes depend on our
+conventions. Suppose I am presented with k ﬂuxons (particles that carry
+ﬂux), and that I use my standard charges to measure the ﬂux of each
+particle. I assign group elements a1, a2, . . ., ak ∈G to the k ﬂuxons. You
+are then asked to measure the ﬂux, to verify my assignments. But your
+standard charges diﬀer from mine, because they have been surreptitiously
+transported around another ﬂux (one that I would label with g ∈G).
+Therefore you will assign the group elements ga1g−1, ga2g−1, . . ., gakg−1
+to the k ﬂuxons; our assignments diﬀer by an overall conjugation by g.
+The moral of this story is that the assignment of group elements to
+ﬂuxons is inherently ambiguous and has no invariant meaning. But be-
+cause the valid assignments of group elements to ﬂuxons diﬀer only by
+conjugation by some element g ∈G, the conjugacy class of the ﬂux in
+G does have an invariant meaning on which all observers will agree. In-
+deed, even if we ﬁx our conventions at the charge bureau of standards, the
+group element that we assign to a particular ﬂuxon may change if that
+ﬂuxon takes part in a physical process in which it braids with other ﬂux-
+ons. For that reason, the ﬂuxons belonging to the same conjugacy class
+should all be regarded as indistinguishable particles, even though they
+come in many varieties (one for each representative of the class) that can
+be distinguished when we make measurements at a particular time and
+place: The ﬂuxons are nonabelian anyons.
+9.9 Braiding of nonabelian ﬂuxons
+We will see that, for a nonabelian superconductor with suitable properties,
+it is possible to operate a fault-tolerant universal quantum computer by
+
+--- PDF page 25 ---
+9.9 Braiding of nonabelian ﬂuxons
+25
+manipulating the ﬂuxons. The key thing to understand is what happens
+when two ﬂuxons are exchanged with one another.
+For this purpose, imagine that we carefully calibrate two ﬂuxons, and
+label them with elements of the group G.
+The labels are assigned by
+establishing a standard basis for the charged particles at a basepoint x0.
+Then a standard path, designated α, is chosen that begins at x0, winds
+counterclockwise around the ﬂuxon on the left, and returns to x0. Finally,
+charged particles are carried around the closed path α, and it is observed
+that under this parallel transport, the particles are acted upon by D(a),
+where D is the representation of G according to which the charged parti-
+cles transform, and a ∈G is the particular group element that we assign
+to the ﬂuxon. Similarly, another standard path, designated β, is chosen
+that begins at x0, winds counterclockwise around the ﬂuxon on the right,
+and returns to x0; the eﬀect of parallel transport around β is found to be
+D(b), and so the ﬂuxon on the right is labeled with b ∈G.
+Now imagine that a counterclockwise exchange of the two ﬂuxons is
+performed, after which the calibration procedure is repeated. How will
+the ﬂuxons be labeled now?
+To ﬁnd the answer, consider the path αβα−1; here we use α−1 to denote
+the path α traversed in reverse order, and we have adopted the convention
+that αβα−1 denotes the path in which α−1 is traversed ﬁrst, followed by
+β and then α. Now observe that if, as the two ﬂuxons are exchanged
+counterclockwise, we deform the paths so that they are never crossed by
+the ﬂuxons, then the path αβα−1 is deformed to the path α, while the
+path α is deformed to β:
+αβα−1 7→α ,
+α 7→β .
+(9.28)
+0x
+D
+E
+0x
+D
+1
+DED 
+It follows that the eﬀect of transporting a charge around the path α, after
+the exchange, is equivalent to the eﬀect of transport around the path
+αβα−1, before the exchange; similarly, the eﬀect of transport around β,
+after the exchange, is the same as the eﬀect of transport around α before.
+We conclude that the braid operator R representing a counterclockwise
+
+--- PDF page 26 ---
+26
+9 Topological quantum computation
+exchange acts on the ﬂuxes according to
+R : |a, b⟩→|aba−1, a⟩.
+(9.29)
+Of course, if the ﬂuxes a and b are commuting elements of G, all the
+braiding does is swap the positions of the two labels. But if a and b do not
+commute, the eﬀect of the exchange is more subtle and interesting. The
+asymmetric form of the action of R is a consequence of our conventions
+and of the (counterclockwise) sense of the exchange; the inverse operator
+R−1 representing a clockwise exchange acts as
+R−1 : |a, b⟩→|b, b−1ab⟩.
+(9.30)
+Note that the total ﬂux of the pair of ﬂuxons can be detected by a charged
+particle that traverses the path αβ that encloses both members of the
+pair. Since in principle the charge detecting this total ﬂux could be far,
+far away, the exchange ought not to alter the total ﬂux; indeed, we ﬁnd
+that the product ﬂux ab is preserved by R and by R−1.
+The eﬀect of two successive counterclockwise exchanges is the “mon-
+odromy” operator R2, representing the counterclockwise winding of one
+ﬂuxon about the other, whose action is
+R2 : |a, b⟩7→|(ab)a(ab)−1, (ab)b(ab)−1⟩;
+(9.31)
+both ﬂuxes are conjugated by the total ﬂux ab. That is, winding a coun-
+terclockwise about b conjugates b by a (and similarly, winding b clockwise
+about a conjugates a by b−1). The nontrivial monodromy means that if
+many ﬂuxons are distributed in the plane, and one of these ﬂuxons is to
+be brought to my laboratory for analysis, the group element I assign to
+the ﬂuxon may depend on the path the ﬂux follows as it travels to my lab.
+If for one choice of path the ﬂux is labeled by a ∈G, then for other paths
+any other element bab−1 might in principle be assigned. Thus, the conju-
+gacy class in G represented by the ﬂuxon is invariant, but the particular
+representative of that class is ambiguous.
+For example, suppose the group is G = S3, the permutation group
+on three objects. One of the conjugacy classes contains all of the two-
+cycle permutations (transpositions of two objects), the three elements
+{(12), (23), (31)}. When two such two-cycles ﬂuxes are combined, there
+are three possibilities for the total ﬂux — the trivial ﬂux e, or one of the
+three-cycle ﬂuxes (123) or (132). If the total ﬂux is trivial, the braiding
+of the two ﬂuxes is also trivial (a and b = a−1 commute). But if the total
+ﬂux is nontrivial, then the braid operator R has orbits of length three:
+R : |(12), (23)⟩7→|(31), (12)⟩7→|(23), (31)⟩7→|(12), (23)⟩,
+R : |(23), (12)⟩7→|(31), (23)⟩7→|(12), (31)⟩7→|(23), (12)⟩,
+(9.32)
+
+--- PDF page 27 ---
+9.9 Braiding of nonabelian ﬂuxons
+27
+Thus, if the two ﬂuxons are exchanged three times, they swap positions
+(the number of exchanges is odd), yet the labeling of the state is unmod-
+iﬁed.
+This observation means that there can be quantum interference
+between the “direct” and “exchange” scattering of two ﬂuxons that carry
+distinct labels in the same conjugacy class, reinforcing the notion that
+ﬂuxes carrying conjugate labels ought to be regarded as indistinguishable
+particles.
+Since the braid operator acting on pairs of two-cycle ﬂuxes satisﬁes
+R3 = I, its eigenvalues are third roots of unity. For example, by taking
+linear combinations of the three states with total ﬂux (123), we obtain
+the R eigenstates
+R = 1 :
+|(12), (23)⟩+ |(31), (12)⟩+ |(23), (31)⟩,
+R = ω :
+|(12), (23)⟩+ ¯ω|(31), (12)⟩+ ω|(23), (31)⟩,
+R = ¯ω :
+|(12), (23)⟩+ ω|(31), (12)⟩+ ¯ω|(23), (31)⟩,
+(9.33)
+where ω = e2πi/3.
+Although a pair of ﬂuxes |a, a−1⟩with trivial total ﬂux has trivial braid-
+ing properties, it is interesting for another reason — it carries charge. The
+way to detect the charge of an object is to carry a ﬂux b around the ob-
+ject (counterclockwise); this modiﬁes the object by the action of DR(b) for
+some representation R of G. If the charge is zero then the representation
+is trivial — D(b) = I for all b ∈G. But if we carry ﬂux b counterclockwise
+around the state |a, a−1⟩, the state transforms as
+|a, a−1⟩7→|bab−1, ba−1b−1⟩,
+(9.34)
+a nontrivial action (for at least some b) if a belongs to a conjugacy class
+with more than one element. In fact, for each conjugacy class α, there is
+a unique state |0; α⟩with zero charge, the uniform superposition of the
+class representatives:
+|0; α⟩=
+1
+p
+|α|
+X
+a∈α
+|a, a−1⟩,
+(9.35)
+where |α| denotes the order of α. A pair of ﬂuxons in the class α that can
+be created in a local process must not carry any conserved charges and
+therefore must be in the state |0; α⟩. Other linear combinations orthogonal
+to |0; α⟩carry nonzero charge. This charge carried by a pair of ﬂuxons can
+be detected by other ﬂuxons, yet oddly the charge cannot be localized on
+the core of either particle in the pair. Rather it is a collective property of
+the pair. If two ﬂuxons with a nonzero total charge are brought together,
+complete annihilation of the pair will be forbidden by charge conservation,
+even though the total ﬂux is zero.
+
+--- PDF page 28 ---
+28
+9 Topological quantum computation
+In the case of a pair of ﬂuxons from the two-cycle class of G = S3, for
+example, there is a two-dimensional subspace with trivial total ﬂux and
+nontrivial charge, for which we may choose the basis
+|0⟩= |(12), (12)⟩+ ¯ω|(23), (23)⟩+ ω|(31), (31)⟩,
+|1⟩= |(12), (12)⟩+ ω|(23), (23)⟩+ ¯ω|(31), (31)⟩.
+(9.36)
+If a ﬂux b is carried around the pair, both ﬂuxes are conjugated by b;
+therefore the action (by conjugation) of S3 on these states is
+D(12) =
+0
+1
+1
+0
+
+,
+D(23) =
+0
+¯ω
+ω
+0
+
+,
+D(31) =
+0
+ω
+¯ω
+0
+
+,
+D(123) =
+ω
+0
+0
+¯ω
+
+,
+D(132) =
+¯ω
+0
+0
+ω
+
+.
+(9.37)
+This action is just the two-dimensional irreducible representation R = [2]
+of S3, and so we conclude that the charge of the pair of ﬂuxons is [2].
+Furthermore, under braiding this charge carried by a pair of ﬂuxons can
+be transferred to other particles. For example, consider a pair of particles,
+each of which carries charge but no ﬂux (I will refer to such particles as
+chargeons), such that the total charge of the pair is trivial.
+If one of
+the chargeons transforms as the unitary irreducible representation R of
+G, there is a unique conjugate representation ¯R that can be combined
+with R to give the trivial representation; if {|R, i⟩} is a basis for R, then
+a basis {| ¯R, i⟩} can be chosen for ¯R, such that the chargeon pair with
+trivial charge can be expressed as
+|0; R⟩=
+1
+p
+|R|
+X
+i
+|R, i⟩⊗| ¯R, i⟩.
+(9.38)
+Imagine that we create a pair of ﬂuxons in the state |0; α⟩and also
+create a pair of chargeons in the state |0; R⟩. Then we wind the chargeon
+with charge R counterclockwise around the ﬂuxon with ﬂux in class α,
+and bring the two chargeons together again to see if they will annihilate.
+What happens?
+For a ﬁxed value a ∈α of the ﬂux, the eﬀect of the winding on the
+state of the two chargeons is
+|0; R⟩7→
+1
+p
+|R|
+X
+i,j
+|R, j⟩⊗| ¯R, i⟩DR
+ji(a) ;
+(9.39)
+if the charge of the pair were now measured, the probability that zero
+total charge would be found is the square of the overlap of this state with
+|0; R⟩, which is
+Prob(0) =
+
+χR(a)
+|R|
+
+2
+,
+(9.40)
+
+--- PDF page 29 ---
+9.10 Superselection sectors of a nonabelian superconductor
+29
+where
+χR(a) =
+X
+i
+DR
+ii(a) = tr DR(a)
+(9.41)
+is the character of the representation R, evaluated at a.
+In fact, the
+character (a trace) is unchanged by conjugation — it takes the same value
+for all a ∈α. Therefore, eq. (9.40) is also the probability that the pair of
+chargeons has zero total charge when one chargeon (initially a member
+of a pair in the state |0; R⟩) winds around one ﬂuxon (initially a member
+of a pair in the state |0; α⟩). Of course, since the total charge of all four
+particles is zero and charge is conserved, after the winding the two pairs
+have opposite charges — if the pair of chargeons has total charge R′, then
+the pair of ﬂuxons must have total charge ¯R′, combined with R′ to give
+trivial total charge. A pair of particles with zero total charge and ﬂux can
+annihilate, leaving no stable particle behind, while a pair with nonzero
+charge will be unable to annihilate completely. We conclude, then, that
+if the world lines of a ﬂuxon pair and a chargeon pair link once, the
+probability that both pairs will be able to annihilate is given by eq. (9.40).
+This probability is less than one, provided that the representation of R
+is not one dimensional and the class α is not represented trivially. Thus
+the linking of the world lines induces an exchange of charge between the
+two pairs.
+For example, in the case where α is the two-cycle class of G = S3 and
+R = [2] (the two-dimensional irreducible representation of S3), we see
+from eq. (9.37) that χ[2](α) = 0.
+Therefore, charge is transfered with
+certainty; after the winding, both the ﬂuxon pair and the chargeon pair
+transform as R′ = [2].
+9.10 Superselection sectors of a nonabelian superconductor
+In our discussion so far of the nonabelian superconductor, we have been
+considering two kinds of particles: ﬂuxons, which carry ﬂux but no charge,
+and chargeons, which carry charge but no ﬂux. These are not the most
+general possible particles. It will be instructive to consider what happens
+when we build a composite particle by combining a ﬂuxon with a chargeon.
+In particular, what is the charge of the composite?
+This question is
+surprisingly subtle; to answer cogently, we should think carefully about
+how the charge can be measured.
+In principle, charge can be measured in an Aharonov-Bohm interference
+experiment. We could hide the object whose charge is to be found behind
+a screen in between two slits, shoot a beam of carefully calibrated ﬂuxons
+at the screen, and detect the ﬂuxons on the other side. From the shift and
+visibility of the interference pattern revealed by the detected positions of
+the ﬂuxons, we can determine DR(b) for each b ∈G, and so deduce R.
+
+--- PDF page 30 ---
+30
+9 Topological quantum computation
+However, there is a catch if the object being analyzed carries a nontrivial
+ﬂux a ∈G as well as charge. Since carrying a ﬂux b around the ﬂux a
+changes a to bab−1, the two possible paths followed by the b ﬂux do not
+interfere, if a and b do not commute. After the b ﬂux is detected, we could
+check whether the a ﬂux has been modiﬁed, and determine whether the b
+ﬂux passed through the slit on the left or the slit on the right. Since the
+ﬂux (a or bab−1) is correlated with the “which way” information (left or
+right slit), the interference is destroyed.
+Therefore, the experiment reveals information about the charge only if
+a and b commute. Hence the charge attached to a ﬂux a is not described
+as an irreducible representation of G; instead it is an irreducible repre-
+sentation of a subgroup of G, the normalizer N(a) of a in G, which is
+deﬁned as
+N(a) = {b ∈G|ab = ba} .
+(9.42)
+The normalizers N(a) and N(bab−1) are isomorphic, so we may associate
+the normalizer with a conjugacy class α of G rather than with a par-
+ticular element, and denote it as N(α). Therefore, each type of particle
+that can occur in our nonabelian superconductor really has two labels:
+a conjugacy class α describing the ﬂux, and an irreducible representa-
+tion R(α) of N(α) describing the charge. We say that α and R(α) label
+the superselection sectors of the theory, as these are the properties of a
+localized object that must be conserved in all local physical processes.
+For particles that carry the labels (α, R(α)), it is possible to establish a
+“bureau of standards” where altogether |α| · |R(α)| ≡d(α,R(α)) diﬀerent
+particle species can be distinguished at a particular time and place —
+this number is called the dimension of the sector. But if these particles
+are braided with other particles the species may change, while the labels
+(α, R(α)) remain invariant.
+In any theory of anyons, a dimension can be assigned to each particle
+type, although as we will see, in general the dimension need not be an
+integer, and may have no direct interpretation in terms the counting of
+distinct species of the same type. The total dimension D can be deﬁned
+by summing over all types; in the case of a nonabelian superconductor we
+have
+D2 =
+X
+α
+X
+R(α)
+d2
+(α,R(α)) =
+X
+α
+|α|2 X
+R(α)
+|R(α)|2 .
+(9.43)
+Since the sum over the dimension squared for all irreducible representa-
+tions of a ﬁnite group is the order of the group, and the order of the
+normalizer N(α) is |G|/|α|, we obtain
+D2 =
+X
+α
+|α| · |G| = |G|2 ;
+(9.44)
+
+--- PDF page 31 ---
+9.10 Superselection sectors of a nonabelian superconductor
+31
+the total dimension is D = |G|.
+For the case G = S3 there are 8 particle types, listed here:
+Type
+Flux
+Charge
+Dim
+A
+e
+[+]
+1
+B
+e
+[-]
+1
+C
+e
+[2]
+2
+D
+(12)
+[+]
+3
+E
+(12)
+[-]
+3
+F
+(123)
+[1]
+2
+G
+(123)
+[ω]
+2
+H
+(123)
+[¯ω]
+2
+If the ﬂux is trivial (e), then the charge can be any one of the three
+irreducible representations of S3 — the trivial one-dimensional represen-
+tation [+], the nontrivial one-dimensional representation [-], or the two-
+dimensional representation [2]. If the ﬂux is a two-cycle, then the normal-
+izer group is Z2, and the charge can be either the trivial representation
+[+] or the nontrivial representation [-]. And if the ﬂux is a three-cycle,
+then the normalizer group is Z3, and the charge can be either the trivial
+representation [1], the nontrivial representation [ω], or its conjugate rep-
+resentation [¯ω]. You can verify that the total dimension is D = |S3| = 6,
+as expected.
+Note that since a commutes with all elements of N(a) by deﬁnition, the
+matrix DR(a)(a) that represents a in the irreducible representation R(a)
+commutes with all matrices in the representation; therefore by Schur’s
+lemma it is a multiple of the identity:
+DR(a)(a) = exp (iθR(a)) I .
+(9.45)
+To appreciate the signiﬁcance of the phase exp (iθR(a)), consider a ﬂux-
+charge composite in which a chargeon in representation R(a) is bound to
+the ﬂux a, and imagine rotating the composite object counterclockwise
+by 2π. This rotation carries the charge around the ﬂux, generating the
+phase
+e−2πiJ = eiθR(a) ;
+(9.46)
+therefore each superselection sector has a deﬁnite value of the topological
+spin, determined by θR(a).
+When two diﬀerent particle types are fused together, the composite
+object can be of various types, and the fusion rules of the theory specify
+which types are possible. The ﬂux of the composite can belong to any of
+the conjugacy classes that can be obtained as a product of representatives
+of the classes that label the two constituents. Finding the charge of the
+composite is especially tricky, as we must decompose a tensor product of
+
+--- PDF page 32 ---
+32
+9 Topological quantum computation
+representations of two diﬀerent normalizer groups as a sum of representa-
+tions of the normalizer of the product ﬂux. In the case G = S3, the rule
+governing the fusion of two particles of type D, for example, is
+D × D = A + C + F + G + H
+(9.47)
+We have already noted that the fusion of two two-cycle ﬂuxes can yield
+either a trivial total ﬂux or a three-cycle ﬂux, and that the charge of the
+composite with trivial total ﬂux can be either [+] or [2]. If the total ﬂux
+is a three-cycle, then the charge eigenstates are just the braid operator
+eigenstates that we constructed in eq. (9.33).
+For a system of two anyons, why should the eigenstates of the total
+charge also be eigenstates of the braid operator? We can understand this
+connection more generally by thinking about the angular momentum of
+the two-anyon composite object. The monodromy operator R2 captures
+the eﬀect of winding one particle counterclockwise around another. This
+winding is almost the same thing as rotating the composite system coun-
+terclockwise by 2π, except that the rotation of the composite system also
+rotates both of the constituents. We can compensate for the rotation of
+the constituents by following the counterclockwise rotation of the compos-
+ite by a clockwise rotation of the constituents. Therefore, the monodromy
+operator can be expressed as
+(Rc
+ab)2 = e−2πiJce2πiJae2πiJb = ei(θc−θa−θb) .
+(9.48)
+Here Rc
+ab denotes the braid operator for a counterclockwise exchange of
+particles of types a and b that are combined together into a composite
+of type c, and we are using a more succinct notation than before, in
+which a, b, c are complete labels for the superselection sectors (specifying,
+in the nonabelian superconductor model, both the ﬂux and the charge).
+Since each superselection sector has a deﬁnite topological spin, and the
+monodromy operator is diagonal in the topological spin basis, we see that
+eigenstates of the braid operator coincide with charge eigenstates. Note
+that eq. (9.48) generalizes our earlier observations about abelian anyons
+— that a composite of two identical anyons has topological spin ei4θ, and
+that the exchange phase of an anyon-antianyon pair (with trivial total
+spin) is e−iθ.
+9.11 Quantum computing with nonabelian ﬂuxons
+A model of anyons is characterized by the answers to two basic questions:
+(1) What happens when two anyons are combined together (what are
+the fusion rules)? (2) What happens when two anyons are exchanged
+(what are the braiding rules)? We have discussed how these questions
+
+--- PDF page 33 ---
+9.11 Quantum computing with nonabelian ﬂuxons
+33
+are answered in the special case of a nonabelian superconductor model
+associated with a nonabelian ﬁnite group G, and now we wish to see
+how these fusion and braiding rules can be invoked in a simulation of a
+quantum circuit.
+In formulating the simulation, we will assume these physical capabili-
+ties:
+Pair creation and identiﬁcation. We can create pairs of particles, and
+for each pair we can identify the particle type (the conjugacy class
+α of the ﬂux of each particle in the pair, and the particles’s charge
+— an irreducible representation R(α) of the ﬂux’s normalizer group
+N(α)). This assumption is reasonable because there is no symmetry
+relating particles of diﬀerent types; they have distinguishable phys-
+ical properties — for example, diﬀerent energy gaps and eﬀective
+masses. In practice, the only particle types that will be needed are
+ﬂuxons that carry no charge and chargeons that carry no ﬂux.
+Pair annihilation.
+We can bring two particles together, and observe
+whether the pair annihilates completely. Thus we obtain the answer
+to the question: Does this pair of particles have trivial ﬂux and
+charge, or not? This assumption is reasonable, because if the pair
+carries a nontrivial value of some conserved quantity, a localized
+excitation must be left behind when the pair fuses, and this leftover
+particle is detectable in principle.
+Braiding. We can guide the particles along speciﬁed trajectories, and so
+perform exchanges of the particles. Quantum gates will be simulated
+by choosing particles world lines that realize particular braids.
+These primitive capabilities allow us to realize some further derived
+capabilities that will be used repeatedly. First, we can use the chargeons
+to calibrate the ﬂuxons and assemble a ﬂux bureau of standards. Suppose
+that we are presented with two pairs of ﬂuxons in the states |a, a−1⟩and
+|b, b−1⟩, and we wish to determine whether the ﬂuxes a and b match or
+not. We create a chargeon-antichargeon pair, where the charge of the
+chargeon is the irreducible representation R of G.
+Then we carry the
+chargeon around a closed path that encloses the ﬁrst member of the ﬁrst
+ﬂuxon pair and the second member of the second ﬂuxon pair, we reunite
+the chargeon and antichargeon, and observed whether the chargeon pair
+annihilates or not. Since the total ﬂux enclosed by the chargeon’s path is
+ab−1, the chargeon pair annihilates with probability
+Prob(0) =
+
+χR(ab−1)
+|R|
+
+2
+,
+(9.49)
+
+--- PDF page 34 ---
+34
+9 Topological quantum computation
+which is less than one if the ﬂux ab−1 is not the identity (assuming that the
+representation R is not one-dimensional and represents ab−1 nontrivially).
+Thus, if annihilation of the chargeon pair does not occur, we know for sure
+that a and b are distinct ﬂuxes, and each time annihilation does occur,
+it becomes increasingly likely that a and b are equal. By repeating this
+procedure a modest number of times, we can draw a conclusion about
+whether a and b are the same, with high statistical conﬁdence.
+This procedure allows us to sort the ﬂuxon pairs into bins, where each
+pair in a bin has the same ﬂux. If a bin contains n pairs, its state is, in
+general, a mixture of states of the form
+X
+a∈G
+ψa|a, a−1⟩⊗n .
+(9.50)
+By discarding just one pair in the bin, each such state becomes a mixture
+X
+a∈G
+ρa
+ |a, a−1⟩⟨a, a−1|
+⊗(n−1) ;
+(9.51)
+we may regard each bin as containing (n −1) pairs, all with the same
+deﬁnite ﬂux, but where that ﬂux is as yet unknown.
+Which bin is which? We want to label the bins with elements of G. To
+arrive at a consistent labeling, we withdraw ﬂuxon pairs from three dif-
+ferent bins. Suppose the three pairs are |a, a−1⟩, |b, b−1⟩, and |c, c−1⟩, and
+that we want to check whether c = ab. We create a chargeon-antichargeon
+pair, carry the chargeon around a closed path that encloses the ﬁrst mem-
+ber of the ﬁrst ﬂuxon pair, the ﬁrst member of the second ﬂuxon pair,
+and second member of the third ﬂuxon pair, and observe whether the
+reunited chargeon pair annihilates or not. Since the total ﬂux enclosed
+by the chargeon’s path is abc−1, by repeating this procedure we can de-
+termine with high statistical conﬁdence whether ab and c are the same.
+Such observations allow us to label the bins in some manner that is consis-
+tent with the group composition rule. This labeling is unique apart from
+group automorphisms (and ambiguities arising from any automorphisms
+may be resolved arbitrarily).
+Once the ﬂux bureau of standards is established, we can use it to mea-
+sure the unknown ﬂux of an unlabeled pair. If the state of the pair to
+be measured is |d, d−1⟩, we can withdraw the labeled pair |a, a−1⟩from
+a bin, and use chargeon pairs to measure the ﬂux ad−1. By repeating
+this procedure with other labeled ﬂuxes, we can eventually determine the
+value of the ﬂux d, realizing a projective measurement of the ﬂux.
+For a simulation of a quantum circuit using ﬂuxons, we will need to
+perform logic gates that act upon the value of the ﬂux. The basic gate we
+will use is realized by winding counterclockwise a ﬂuxon pair with state
+
+--- PDF page 35 ---
+9.11 Quantum computing with nonabelian ﬂuxons
+35
+|a, a−1⟩around the ﬁrst member of another ﬂuxon pair with state |b, b−1⟩.
+Since the |a, a−1⟩pair has trivial total ﬂux, the |b, b−1⟩pair is unaﬀected
+by this procedure. But since in eﬀect the ﬂux b travels counterclockwise
+about both members of the pair whose initial state was |a, a−1⟩, this pair
+is transformed as
+|a, a−1⟩7→|bab−1, ba−1b−1⟩.
+(9.52)
+We will refer to this operation as the conjugation gate acting on the ﬂuxon
+pair.
+To summarize what has been said so far, our primitive and derived
+capabilities allow us to: (1) Perform a projective ﬂux measurement, (2)
+perform a destructive measurement that determines whether or not the
+ﬂux and charge of a pair is trivial, and (3) execute a conjugation gate.
+Now we must discuss how to simulate a quantum circuit using these ca-
+pabilities.
+The next step is to decide how to encode qubits using ﬂuxons. Ap-
+propriate encodings can be chosen in many ways; we will stick to one
+particular choice that illustrates the key ideas — namely we will encode a
+qubit by using a pair of ﬂuxons, where the total ﬂux of the pair is trivial.
+We select two noncommuting elements a, b ∈G, where b2 = e, and choose
+a computational basis for the qubit
+|¯0⟩= |a, a−1⟩,
+|¯1⟩= |bab−1, ba−1b−1⟩.
+(9.53)
+The crucial point is that a single isolated ﬂuxon with ﬂux a looks iden-
+tical to a ﬂuxon with the conjugate ﬂux bab−1.
+Therefore, if the two
+ﬂuxons in a pair are kept far apart from one another, local interactions
+with the environment will not cause a superposition of the states |¯0⟩and
+|¯1⟩to decohere. The quantum information is protected from damage be-
+cause it is stored nonlocally, by exploiting a topological degeneracy of the
+states where the ﬂuxon and antiﬂuxon are pinned to ﬁxed and distantly
+separated positions.
+However, in contrast with the topological degeneracy that arises in
+systems with abelian anyons, this protected qubit can be measured rela-
+tively easily, without resorting to delicate interferometric procedures that
+extract Aharonov-Bohm phases. We have already described how to mea-
+sure ﬂux using previously calibrated ﬂuxons; therefore we can perform
+a projective measurement of the encoded Pauli operator ¯Z (a projection
+onto the basis {|¯0⟩, |¯1⟩}). We can also measure the complementary Pauli
+operator ¯
+X, albeit destructively and imperfectly. The ¯X eigenstates are
+|±⟩=
+1
+√
+2 (|¯0⟩± |¯1⟩) ≡
+1
+√
+2
+ |a, a−1⟩± |bab−1, ba−1b−1⟩
+
+;
+(9.54)
+
+--- PDF page 36 ---
+36
+9 Topological quantum computation
+therefore the state |−⟩is orthogonal to the zero-charge state
+|0; α⟩=
+1
+p
+|α|
+ X
+c∈α
+|c, c−1⟩
+!
+,
+(9.55)
+where α is the conjugacy class that contains a. On the other hand, the
+state |+⟩has a nonzero overlap with |0; α⟩
+⟨+|0; α⟩=
+p
+2/|α| ;
+(9.56)
+Therefore, if the two members of the ﬂuxon pair are brought together,
+complete annihilation is impossible if the state of the pair is |−⟩, and
+occurs with probability Prob(0) = 2/|α| if the state is |+⟩.
+Note that it is also possible to prepare a ﬂuxon pair in the state |+⟩.
+One way to do that is to create a pair in the state |0; α⟩. If α contains
+only the two elements a and bab−1 we are done. Otherwise, we compare
+the newly created pair with calibrated pairs in each of the states |c, c−1⟩,
+where c ∈α and c is distinct from both a and bab−1. If the pair fails to
+match any of these |c, c−1⟩pairs, its state must be |+⟩.
+To go further, we need to characterize the computational power of the
+conjugation gate.
+Let us use a more compact notation, in which the
+state |x, x−1⟩of a ﬂuxon pair is simply denoted |x⟩, and consider the
+transformations of the state |x, y, z⟩that can be built from conjugation
+gates. By winding the third pair through the ﬁrst, either counterclockwise
+or clockwise, we can execute the gates
+|x, y, z⟩7→|x, y, xzx−1⟩,
+|x, y, z⟩7→|x, y, x−1zx⟩,
+(9.57)
+and by winding the third pair through the second, either counterclockwise
+or clockwise, we can execute
+|x, y, z⟩7→|x, y, yzy−1⟩,
+|x, y, z⟩7→|x, y, y−1zy⟩;
+(9.58)
+furthermore, by borrowing a pair with ﬂux |c⟩from the bureau of stan-
+dards, we can execute
+|x, y, z⟩7→|x, y, czc−1⟩
+(9.59)
+for any constant c ∈G. Composing these elementary operations, we can
+execute any gate of the form
+|x, y, z⟩7→|x, y, fzf−1⟩,
+(9.60)
+where the function f(x, y) can be expressed in product form — that is,
+as a ﬁnite product of group elements, where the elements appearing in
+
+--- PDF page 37 ---
+9.11 Quantum computing with nonabelian ﬂuxons
+37
+the product may be the inputs x and y, their inverses x−1 and y−1, or
+constant elements of G, each of which may appear in the product any
+number of times.
+What are the functions f(x, y) that can be expressed in this form?
+The answer depends on the structure of the group G, but the following
+characterization will suﬃce for our purposes. Recall that a subgroup H
+of a ﬁnite group G is normal if for any h ∈H and any g ∈G, ghg−1 ∈H,
+and recall that a ﬁnite group G is said to be simple if G has no normal
+subgroups other than G itself and the trivial group {e}. It turns out that
+if G is a simple nonabelian ﬁnite group, then any function f(x, y) can be
+expressed in product form. In the computer science literature, a closely
+related result is often called Barrington’s theorem.
+In particular, then, if the group G is a nonabelian simple group, there
+is a function f realizable in product form such that
+f(a, a) = f(a, bab−1) = f(bab−1, a) = e ,
+f(bab−1, bab−1) = b . (9.61)
+Thus for x, y, z ∈{a, bab−1}, the action eq. (9.60) causes the ﬂux of the
+third pair to “ﬂip” if and only if x = y = bab−1; we have constructed
+from our elementary operations a Toﬀoli gate in the computational ba-
+sis. Therefore, conjugation gates suﬃce for universal reversible classical
+computation acting on the standard basis states.
+The nonabelian simple group of minimal order is A5, the group of even
+permutations of ﬁve objects, with |A5| = 60. Therefore, one concrete
+realization of universal classical computation using conjugation gates is
+obtained by choosing a to be the three-cycle element a = (345) ∈A5, and
+b to be the product of two-cycles b = (12)(34) ∈A5, so that bab−1 = (435).
+With this judicious choice of the group G, we achieve a topological real-
+ization of universal classical computation, but how can be go still further,
+to realize universal quantum computation? We have the ability to prepare
+computational basis states, to measure in the computational basis, and
+to execute Toﬀoli gates, but these tools are entirely classical. The only
+nonclassical tricks at our disposal are the ability to prepare ¯X = 1 eigen-
+states, and the ability to perform an imperfect destructive measurement
+of ¯X. Fortunately, these additional capabilities are suﬃcient.
+In our previous discussions of quantum fault tolerance, we have noted
+that if we can do the classical gates Toﬀoli and CNOT, it suﬃces for
+universal quantum computation to be able to apply each of the Pauli op-
+erators X, Y , and Z, and to be able to perform projective measurements
+of each of X, Y , and Z. We already know how to apply the classical
+gate X and to measure Z (that is, project onto the computational basis).
+Projective measurement of X and Y , and execution of Z, are still missing
+from our repertoire. (Of course, if we can apply X and Z, we can also
+apply their product ZX = iY .)
+
+--- PDF page 38 ---
+38
+9 Topological quantum computation
+Next, let’s see how to elevate our imperfect destructive measurement
+of X to a reliable projective measurement of X. Recall the action by
+conjugation of a CNOT on Pauli operators:
+CNOT : XI 7→XX ,
+(9.62)
+where the ﬁrst qubit is the control and the second qubit is the target of
+the CNOT. Therefore, CNOT gates, together with the ability to prepare
+X = 1 eigenstates and to perform destructive measurements of X, suﬃce
+to realize projective measurements of X. We can prepare an ancilla qubit
+in the X = 1 eigenstate, perform a CNOT with the ancilla as control
+and the data to be measured as target, and then measure the ancilla
+destructively. The measurement prepares the data in an eigenstate of X,
+whose eigenvalue matches the outcome of the measurement of the ancilla.
+In our case, the destructive measurement is not fully reliable, but we
+can repeat the measurement multiple times. Each time we prepare and
+measure a fresh ancilla, and after a few repetitions, we have acceptable
+statistical conﬁdence in the inferred outcome of the measurement.
+Now that we can measure X projectively, we can prepare X = −1
+eigenstates as well as X = 1 eigenstates (for example, we follow a Z mea-
+surement with an X measurement until we eventually obtain the outcome
+X = −1). Then, by performing a CNOT gate whose target is an X = −1
+eigenstate, we can realize the Pauli operator Z acting on the control qubit.
+It only remains to show that a measurement of Y can be realized.
+Measurement of Y seems problematic at ﬁrst, since our physical capa-
+bilities have not provided any means to distinguish between Y = 1 and
+Y = −1 eigenstates (that is, between a state ψ and its complex conjugate
+ψ∗). However, this ambiguity actually poses no serious diﬃculty, because
+it makes no diﬀerence how the ambiguity is resolved. Were we to replace
+measurement of Y by measurement of −Y in our simulation of a unitary
+transformation U, the eﬀect would be that U∗is simulated instead; this
+replacement would not alter the probability distributions of outcomes for
+measurements in the standard computational basis.
+To be explicit, we can formulate a protocol for measuring Y by noting
+ﬁrst that applying a Toﬀoli gate whose target qubit is an X = −1 eigen-
+state realizes the controlled-phase gate Λ(Z) acting on the two control
+qubits. By composing this gate with the CNOT gate Λ(X), we obtain
+the gate Λ(iY ) acting as
+Λ(iY ) :
+|X = +1⟩⊗|Y = +1⟩7→|Y = +1⟩⊗|Y = +1⟩,
+|X = +1⟩⊗|Y = −1⟩7→|Y = −1⟩⊗|Y = −1⟩,
+|X = −1⟩⊗|Y = +1⟩7→|Y = −1⟩⊗|Y = +1⟩,
+|X = −1⟩⊗|Y = −1⟩7→|Y = +1⟩⊗|Y = −1⟩, (9.63)
+
+--- PDF page 39 ---
+9.11 Quantum computing with nonabelian ﬂuxons
+39
+where the ﬁrst qubit is the control and the second is the target. Now
+suppose that my trusted friend gives me just one qubit that he assures
+me has been prepared in the state |Y = 1⟩.
+I know how to prepare
+|X = 1⟩states myself and I can execute Λ(iY ) gates; therefore since a
+Λ(iY ) gate with |Y = 1⟩as its target transforms |X = 1⟩to |Y = 1⟩, I
+can make many copies of the |Y = 1⟩state I obtained from my friend.
+When I wish to measure Y , I apply the inverse of Λ(iY ), whose target is
+the qubit to be measured, and whose control is one of my Y = 1 states;
+then I perform an X measurement of the ancilla to read out the result of
+the Y measurement of the other qubit.
+What if my friend lies to me, and gives me a copy of the state |Y = −1⟩
+instead? Then I’ll make many copies of the |Y = −1⟩state, and I will
+be measuring −Y when I think I am measuring Y . My simulation will
+work just the same as before; I’ll actually be simulating the complex
+conjugate of the ideal circuit, but that won’t change the ﬁnal outcome of
+the quantum computation. If my friend ﬂipped a coin to decide whether
+to give me the |Y = 1⟩state or the |Y = −1⟩, this too would have no
+eﬀect on the ﬁdelity of my simulation. Therefore, it turns out I don’t
+need by friend’s help at all — instead of using the |Y = 1⟩state I would
+have received from him, I may use the random state ρ = I/2 (an equally
+weighted mixture of |Y = 1⟩and |Y = −1⟩, which I know how to prepare
+myself).
+This completes the demonstration that we can simulate a quantum cir-
+cuit eﬃciently and fault tolerantly using the ﬂuxons and chargeons of
+a nonabelian superconductor, at least in the case where G is a simple
+nonabelian ﬁnite group.§ Viewed as a whole, including all state prepara-
+tion and calibration of ﬂuxes, the simulation can be described this way:
+Many pairs of anyons (ﬂuxons and chargeons) are prepared, the anyon
+world lines follow a particular braid, and pairs of anyons are fused to see
+whether they will annihilate. The simulation is nondeterministic in the
+sense that the actual braid executed by the anyons depends on the out-
+comes of measurements performed (via fusion) during the course of the
+simulation. It is robust if the temperature is low compared to the energy
+gap, and if particles are kept suﬃciently far apart from one another (ex-
+cept when pairs are being created and fused), to suppress the exchange
+of virtual anyons. Small deformations in the world lines of the particles
+have no eﬀect on the outcome of the computation, as long as the braiding
+of the particles is in the correct topological class.
+§ Mochon has shown that universal quantum computation is possible for a larger class
+of groups.
+
+--- PDF page 40 ---
+40
+9 Topological quantum computation
+9.12 Anyon models generalized
+Our discussion of the nonabelian superconductor model provides an exis-
+tence proof for fault-tolerant quantum computation using anyons. But the
+model certainly has drawbacks. The scheme we described lacks beauty,
+elegance, or simplicity.
+I have discussed this model in such detail because it is rather concrete
+and so helps us to build intuition about the properties of nonabelian
+anyons. But now that we understand better the key concepts of braiding
+and fusing in anyon models, we are ready to start thinking about anyons
+in a more general and abstract way. Our new perspective will lead us
+to new models, including some that are far simpler than those we have
+considered so far. We will be able to jettison much of the excess baggage
+that burdened the nonabelian superconductor model, such as the distinc-
+tion between ﬂuxons and chargeons, the calibration of ﬂuxes, and the
+measurements required to simulate nonclassical gates. The simpler mod-
+els we will now encounter are more naturally conducive to fault-tolerant
+computing, and more plausibly realizable in reasonable physical systems.
+A model of anyons is a theory of particles on a two-dimensional surface
+(which we will assume to be the plane), where the particles carry locally
+conserved charges. We also assume that the theory has a mass gap, so
+that there are no long-range interactions between particles mediated by
+massless particles. The model has three deﬁning properties:
+1. A list of particle types. The types are labels that specify the possible
+values of the conserved charge that a particle can carry.
+2. Rules for fusing and splitting, which specify the possible values of the
+charge that can be obtained when two particles of known charge
+are combined together, and the possible ways in which the charge
+carried by a single particle can be split into two parts.
+3. Rules for braiding, which specify what happens when two particles are
+exchanged (or when one particle is rotated by 2π).
+Let’s now discuss each of these properties in more detail.
+9.12.1 Labels
+I will use Latin letters {a, b, c, . . .} for the labels that distinguish diﬀerent
+types of particles. (For the case of the nonabelian superconductor, the
+label was (α, R(α)), specifying a conjugacy class and an irreducible rep-
+resentation of the normalizer of the class, but now our notation will be
+more compact). We will assume that the set of possible labels is ﬁnite.
+The symbol a represents the value of the conserved charge carried by the
+
+--- PDF page 41 ---
+9.12 Anyon models generalized
+41
+particle. Sometimes we say that this label speciﬁes a superselection sector
+of the theory. This term just means that the label a is a property of a
+localized object that cannot be changed by any local physical process.
+That is, if one particle is at all times well isolated from other particles,
+its label will never change. In particular, local interactions between the
+particle and its environment may jostle the particle, but will not alter the
+label. This local conservation of charge is the essential reason that anyons
+are amenable to fault-tolerant quantum information processing.
+There is one special label — the identity label 1. A particle with the
+label 1 is really the same thing as no particle at all. Furthermore, for
+each particle label a there is a conjugate label ¯a, and there is a charge
+conjugation operation C (where C2 = I) acting on the labels that maps
+a label to its conjugate:
+C : a 7→¯a 7→a .
+(9.64)
+It is possible for a label to be self-conjugate, so that ¯a = a. For example,
+¯1 = 1.
+We will want to consider states of n particles, where the particles have
+a speciﬁed order. Therefore, it is convenient to imagine that the particles
+are arranged on a particular line (such as the real axis) from left to right
+in consecutive order. The n particles are labeled (a1, a2, a3 . . ., an), where
+a1 is attached to the particle furthest to the left, an to the particle furthest
+to the right.
+9.12.2 Fusion spaces
+When two particles are combined together, the composite object also has
+a charge. The fusion rules of the model specify the possible values of the
+total charge c when the constituents have charges a and b. These can be
+written
+a × b =
+X
+c
+N c
+ab c ,
+(9.65)
+where each N c
+ab is a nonnegative integer and the sum is over the complete
+set of labels.
+Note that a, b and c are labels, not vector spaces; the
+product on the left-hand side is not a tensor product and the sum on
+the right-hand side is not a direct sum. Rather, the fusion rules can be
+regarded as an abstract relation on the label set that maps the ordered
+triple (a, b; c) to N c
+ab. This relation is symmetric in a and b (a×b = b×a)
+— the possible charges of the composite do not depend on whether a is on
+the left or the right. Read backwards, the fusion rules specify the possible
+ways for the charge c to split into two parts with charges a and b.
+If N c
+ab = 0, then charge c cannot be obtained when we combine a and
+b. If N c
+ab = 1, then c can be obtained — in a unique way. If N c
+ab > 1,
+
+--- PDF page 42 ---
+42
+9 Topological quantum computation
+then c can be obtained in N c
+ab distinguishable ways.
+The notion that
+fusing two charges can yield a third charge in more than one possible way
+should be familiar from group representation theory. For example, the
+rule governing the fusion of two octet representations of SU(3) is
+8 × 8 = 1 + 8 + 8 + 10 + 10 + 27 ,
+(9.66)
+so that N 8
+88 = 2. We emphasize again, however, that while the fusion
+rules for group representations can be interpreted as a decomposition of a
+tensor product of vector spaces as a direct sum of vector spaces, in general
+the fusion rules in an anyon model have no such interpretation.
+The N c
+ab distinguishable ways that c can arise by fusing a and b can
+be regarded as the orthonormal basis states of a Hilbert space V c
+ab. We
+call V c
+ab a fusion space and the states it contains fusion states. The basis
+elements for V c
+ab may be denoted
+{|ab; c, µ⟩,
+µ = 1, 2, . . ., N c
+ab} .
+(9.67)
+It is quite convenient to introduce a graphical notation for the fusion basis
+states:
+a
+c
+P
+b
+|
+; ,
+ab c P
+ 
+²
+a
+c
+P
+b
+; ,
+|
+ab c P
+ ¢
+The state |ab; c, µ⟩is represented as a circle containing the symbol µ;
+connected to the circle are lines labeled a and b with incoming arrows,
+representing the charges being fused, and a line labeled c with an outgoing
+arrow, representing the result of the fusion. There is a dual vector space
+V ab
+c
+describing the states that arise when charge c splits into charges a
+and b, and a dual basis with the sense of the arrow reversed (c coming in,
+a and b going out). The spaces V c
+ab with diﬀerent values of c are mutually
+orthogonal, so that the fusion basis elements satisfy
+⟨ab; c′µ′|ab; c, µ⟩= δc′
+c δµ′
+µ ,
+(9.68)
+and the completeness of the fusion basis can be expressed as
+X
+c,µ
+|ab; c, µ⟩⟨ab; c, µ| = Iab ,
+(9.69)
+where Iab denotes the projector onto the space ⊕cV c
+ab, the full Hilbert
+space for the anyon pair ab.
+
+--- PDF page 43 ---
+9.12 Anyon models generalized
+43
+c
+P
+a
+c´
+P´
+b
+c
+c
+P
+P
+G G
+c
+c
+ 
+a
+c
+P
+b
+a
+P
+b
+a
+b
+ 
+,c P¦
+There are some natural isomorphisms among fusion spaces. First of all,
+V c
+ab ∼= V c
+ba; these vector spaces are associated with diﬀerent labelings of
+the two particles (if a ̸= b) and so should be regarded as distinct, but they
+are isomorphic spaces because fusion is symmetric. We may also “raise
+and lower indices” of a fusion space by replacing a label by its conjugate,
+e.g.,
+V c
+ab ∼= V
+¯b
+a¯c ∼= V 1
+ab¯c ∼= V
+¯bc
+a , ∼= V ¯a¯b
+¯c
+∼= · · · ;
+(9.70)
+in the diagrammatic notation, we have the freedom to reverse the sense
+of a line while conjugating the line’s label. The space V 1
+ab¯c, represented
+as a diagram with three incoming lines, is the space spanned by the dis-
+tinguishable ways to obtain the trivial total charge 1 when fusing three
+particles with labels a, b, ¯c.
+The charge 1 deserves its name because it fuses trivially with other
+particles:
+a × 1 = a .
+(9.71)
+Because of the isomorphism V a
+a1 ∼= V 1
+a¯a, we conclude that ¯a is the unique
+label that can fuse with a to yield 1, and that this fusion can occur in
+only one way. Similarly, V a
+a1 ∼= V a¯a
+1
+means that pairs of particles created
+out of the vacuum have conjugate charges.
+An anyon model is nonabelian if
+dim
+ M
+c
+V c
+ab
+!
+=
+X
+c
+N c
+ab ≥2
+(9.72)
+for at least some pair of labels ab; otherwise the model is abelian. In an
+abelian model, any two particles fuse in a unique way, but in a nonabelian
+model, there are some pairs of particles that can fuse in more than one
+way, and there is a Hilbert space of two or more dimensions spanned by
+these distinguishable states. We will refer to this space as the “topological
+
+--- PDF page 44 ---
+44
+9 Topological quantum computation
+Hilbert space” of the pair of anyons, to emphasize that this quantum
+information is encoded nonlocally — it is a collective property of the
+pair, not localized on either particle. Indeed, when the two particles with
+labels a and b are far apart, diﬀerent states in the topological Hilbert
+space look identical locally. Therefore, this quantum information is well
+hidden, and invulnerable to decoherence due to local interactions with
+the environment.
+It is for this reason that we propose to use nonabelian anyons in the
+operation of a quantum computer. Of course, nonlocally encoded infor-
+mation is not only hidden from the environment; we are unable to read
+it ourselves as well. However, with nonabelian anyons, we can have our
+cake and eat it too! At the conclusion of a quantum computation, when
+we are ready to perform the readout, we can bring the anyons together
+in pairs and observe the result of this fusion. In fact, it will suﬃce to
+distinguish the case where the charge of the composite is c = 1 from the
+case c ̸= 1 — that is, to distinguish a residual particle (unable to decay
+because of its nontrivial conserved charge) from no particle at all.
+Note that for each pair of anyons this topological Hilbert space is ﬁnite-
+dimensional. An anyon model with this property is said to be rational.
+As in our discussion of the topologically degenerate ground state for an
+abelian model, anyons in rational nonabelian models always have topo-
+logical spins that are roots of unity.
+9.12.3 Braiding: the R-matrix
+When two particles with labels a and b undergo a counterclockwise ex-
+change, their total charge c is unchanged. Therefore, since the two parti-
+cles swap positions on the line, the swap induces a natural isomorphism
+mapping the Hilbert space V c
+ba to V c
+ab; this map is the braid operator
+R : V c
+ba →V c
+ab .
+(9.73)
+If we choose canonical bases {|ba; c, µ⟩} and {|ab; c, µ′⟩} for these two
+spaces, R can be expressed as the unitary matrix
+R : |ba; c, µ⟩7→
+X
+µ′
+|ab; c, µ′⟩(Rc
+ab)µ′
+µ ;
+(9.74)
+note that R may have a nontrivial action on the fusion states. When
+we represent the action of R diagrammatically, it is convenient to ﬁx the
+positions of the labels a and b on the incoming lines, and twist the lines
+counterclockwise as they move toward the fusion vertex (µ)— the graph
+with twisted lines represents the state in V c
+ab obtained by applying R to
+|ba; c, µ⟩, which can be expanded in terms of the canonical basis for V c
+ab:
+
+--- PDF page 45 ---
+9.12 Anyon models generalized
+45
+P
+a
+b
+c
+a
+b
+c
+Pc
+
+
+c
+ba
+R
+P
+P
+P
+c
+c
+ ¦
+The monodromy operator
+R2 : V c
+ab →V c
+ab
+(9.75)
+is an isomorphism from V c
+ab to itself, representing the eﬀect of winding a
+counterclockwise around b. As we already remarked in our discussion of
+the nonabelian superconductor, the monodromy operator is equivalent to
+rotating c by 2π while rotating a and b by −2π; therefore, the eigenvalues
+of the monodromy operator are determined by the topological spins of the
+particles:
+(Rc
+ab)2 = e−2πiJce2πiJae2πiJb ≡ei(θc−θa−θb) .
+(9.76)
+Furthermore, as we argued for the case of abelian anyons, the topological
+spin is determined by the braid operator acting on a particle-antiparticle
+pair with trivial total charge:
+e−iθa = R1
+a¯a
+(9.77)
+(because creating a pair, exchanging, and annihilating is equivalent to
+rotating the particle by −2π).
+9.12.4 Associativity of fusion: the F-matrix
+Fusion is associative:
+(a × b) × c = a × (b × c) .
+(9.78)
+Mathematically, this is an axiom satisﬁed by the fusion rules of an anyon
+model. Physically, it is imposed because the total charge of a system of
+three particles is an intrinsic property of the three particles, and ought
+not to depend on whether we ﬁrst fuse a and b and then fuse the result
+with c, or ﬁrst fuse b and c and then fuse the result with a.
+Therefore, when three particles with charges a, b, c are fused to yield a
+total charge of d, there are two natural ways to decompose the topological
+Hilbert space in terms of the fusion spaces of pairs of particles:
+V d
+abc ∼=
+M
+e
+V e
+ab ⊗V d
+eb ∼=
+M
+e′
+V d
+ae′ ⊗V e′
+bc .
+(9.79)
+
+--- PDF page 46 ---
+46
+9 Topological quantum computation
+Correspondingly, there are two natural orthonormal bases for V d
+abc, which
+we may denote
+|(ab)c →d; eµν⟩≡|ab; e, µ⟩⊗|ec; d, ν⟩,
+|a(bc) →d; e′µ′ν′⟩≡|ae′; d, ν′⟩⊗|bc; e′, µ′⟩,
+(9.80)
+and which are related by a unitary transformation F:
+|(ab)c →d; eµν⟩=
+X
+e′µ′ν′
+|a(bc) →d; e′µ′ν′⟩
+
+F d
+abc
+e′µ′ν′
+eµν
+.
+(9.81)
+a
+b
+P
+Q
+c
+d
+Q c
+Pc
+a
+b
+c
+
+
+e
+d
+abc
+e
+e
+F
+P Q
+PQ
+P Q
+c c c
+c c c
+ ¦
+e
+e´
+d
+The unitary matrices F d
+abc are sometimes called fusion matrices; how-
+ever, rather than risk causing confusion between F and the fusion rules
+N c
+ab, I will just call it the F-matrix.
+9.12.5 Many anyons: the standard basis
+In an anyonic quantum computer, we process the topological quantum
+state of n anyons by braiding the anyons. For describing this computation,
+it is convenient to adopt a standard basis for such a Hilbert space.
+Suppose that n anyons with total charge c, arranged sequentially along
+a line, carry labels a1, a2, a3, . . ., an. Imagine fusing anyons 1 and 2, then
+fusing the result with anyon 3, then fusing the result with anyon 4, and
+so on.
+Associated with fusion in this order is a decomposition of the
+topological Hilbert space of the n anyons
+V c
+a1a2a3···an ∼=
+M
+b1,b2,...,bn−2
+V b1
+a1a2 ⊗V b2
+b1a3 ⊗V b3
+b2a4 ⊗· · · ⊗V c
+bn−2an .
+(9.82)
+Note that this space does not have a natural decomposition as a tensor
+product of subsystems associated with the localized particles; rather, we
+have expressed it as a direct sum of many tensor products. For nonabelian
+anyons, its dimension
+dim
+ V c
+a1a2a3···an
+
+≡N c
+a1a2a3···an
+=
+X
+b1,b2,b3,...bn−2
+N b1
+a1a2N b2
+b1a3N b3
+b2a4 . . .N c
+bn−2an
+(9.83)
+
+--- PDF page 47 ---
+9.12 Anyon models generalized
+47
+is exponential in n; thus the topological Hilbert space is a suitable arena
+for powerful quantum information processing.
+This decomposition of V c
+a1a2a3···an suggests a standard basis whose ele-
+ments are labeled by the intermediate charges b1, b2, . . .bn−2 and by the
+basis elements {|µj⟩} for the fusion spaces V bj
+bj−1,aj+1:
+{|a1a2; b1, µ1⟩|b1a3; b2, µ2⟩· · ·|bn−3an−1; bn−2, µn−2⟩|bn−2an; c, µn−1⟩} ,
+(9.84)
+or in diagrammatic notation:
+1
+n
+P 
+a1
+a2
+b1
+a3
+b2
+a4
+bn-2
+an-1
+c
+an
+1
+P
+2
+P
+2
+n
+P 
+3
+P
+b3
+bn-3
+Of course, this basis is chosen arbitrarily. If we preferred, we could imag-
+ine fusing the particles in a diﬀerent order, and would obtain a diﬀerent
+basis that can be expressed in terms of our standard one with help from
+the F-matrix.
+9.12.6 Braiding in the standard basis: the B-matrix
+We would like to consider what happens to states of the topological vector
+space V c
+a1a2a3···an of n anyons when the particles are exchanged with one
+another. Actually, since exchanges can swap the positions of particles with
+distinct labels, they may map one topological vector space to another by
+permuting the labels. Nevertheless, we can consider the direct sums of the
+vector spaces associated with all the possible permutations of the labels,
+which will provide a representation of the braid group Bn.
+We would like to describe how this representation acts on the standard
+bases for these spaces. It suﬃces to say how exchanges of neighboring
+particles are represented; that is, to specify the action of the generators
+of the braid group. However, so far, we have discussed only the action of
+the braid group on a pair of particles with deﬁnite total charge (the R-
+matrix), which is not in itself enough to tell us its action on the standard
+bases.
+The way out of this quandary is to observe that, by applying the F-
+matrix, we can move from the standard basis to the basis in which the
+R-matrix is block diagonal, apply R, and then apply F −1 to return to the
+standard basis:
+
+--- PDF page 48 ---
+48
+9 Topological quantum computation
+Fo
+Ro
+1
+F 
+o
+The composition of these three operations, which expresses the eﬀect of
+braiding in the standard basis, is denoted B and sometimes called the
+“braid matrix;” but to avoid confusion between B and R, I will just call
+it the B-matrix.
+Consider exchanging the anyons in positions j and j +1 along the line.
+In our decomposition of V c
+a1a2a3···an, this exchange acts on the space
+V bj
+bj−2,aj,aj+1 =
+M
+bj−1
+V bj−1
+bj−2,aj ⊗V bj
+bj−1,aj+1 .
+(9.85)
+To reduce the number of subscripts, we will call this space V d
+acb, which is
+transformed by the exchange as
+B : V d
+acb →V d
+abc .
+(9.86)
+Let us express the action of B in terms of the standard bases for the two
+spaces V d
+acb and V d
+abc.
+b
+c
+a
+d
+e
+a
+d
+b
+c
+e´
+
+
+e
+d
+abc
+e
+e
+B
+P Q
+PQ
+P Q
+c c c
+c c c
+ ¦
+To avoid cluttering the equations, I suppress the labels for the fusion
+space basis elements (it is obvious where they should go). Hence we write
+B|(ac)b →d; e⟩
+=
+X
+f
+B|a(cb) →d; f⟩
+
+F d
+acb
+f
+e
+=
+X
+f
+|a(bc) →d; f⟩Rf
+bc
+
+F d
+acb
+f
+e
+=
+X
+f,g
+|(ab)c →d; g⟩
+h F −1d
+abc
+ig
+f Rf
+bc
+
+F d
+acb
+f
+e ,
+(9.87)
+
+--- PDF page 49 ---
+9.13 Simulating anyons with a quantum circuit
+49
+or
+B : |(ac)b →d; e⟩7→
+X
+g
+|(ab)c →d; g⟩
+
+Bd
+abc
+g
+e ,
+(9.88)
+where
+
+Bd
+abc
+g
+e =
+X
+f
+h F −1d
+abc
+ig
+f Rf
+bc
+
+F d
+acb
+f
+e .
+(9.89)
+We have expressed the action of the B-matrix in the standard basis in
+terms of the F-matrix and R-matrix, as desired.
+Thus, the representation of the braid group realized by n anyons is com-
+pletely characterized by the F-matrix and the R-matrix. Furthermore, we
+have seen that the R matrix also determines the topological spins of the
+anyons, so that we have actually constructed a representation of a larger
+group whose generators include both the exchanges of neighboring parti-
+cles and 2π rotations of the particles. A good name for this group would
+be the ribbon group, as its elements are in one-to-one correspondence with
+the topological classes of braided ribbons (which can be twisted) rather
+than braided strings; however, mathematicians have already named it
+“the mapping class group for the sphere with n punctures.”
+And with that observation we have completed our description of an
+anyon model in this general setting. The model is speciﬁed by: (1) a
+label set, (2) the fusion rules, (3) the R-matrix, and (4) the F matrix.
+The mathematical object we have constructed is called a unitary topo-
+logical modular functor, and it is closely related to two other objects that
+have been much studied: topological quantum ﬁeld theories in 2+1 space-
+time dimensions, and conformal ﬁeld theories in 1+1 spacetime dimen-
+sions. However, we will just call it an anyon model.
+9.13 Simulating anyons with a quantum circuit
+A topological quantum computation is executed in three steps:
+1. Initialization: Particle-antiparticle pairs c1¯c1, c2¯c2, c3¯c3, . . ., cm¯cm are
+created. Each pair is of a speciﬁed type and has trivial total charge.
+2. Processing. The n = 2m particles are guided along trajectories, their
+world lines following a speciﬁed braid.
+3. Readout. Pairs of neighboring particles are fused together, and it is
+recorded whether each pair annihilates fully or not. This record is
+the output of the computation.
+
+--- PDF page 50 ---
+50
+9 Topological quantum computation
+(In the case of the nonabelian superconductor model of computation, we
+allowed the braiding to be conditioned on the outcome of fusing carried
+out during the processing stage. But now we are considering a model in
+which all measurements are delayed until the ﬁnal readout.)
+How powerful is this model of computation? I claim that this topologi-
+cal quantum computer can be simulated eﬃciently by a quantum circuit.
+Since the topological Hilbert space of n anyons does not have a simple
+and natural decomposition as a tensor product of small subsystems, this
+claim may not be immediately obvious. To show it we must explain:
+1. How to encode the topological Hilbert space using ordinary qubits.
+2. How to represent braiding eﬃciently using quantum gates.
+3. How to simulate the fusion of an anyon pair.
+Encoding.
+Since each pair produced during initialization has trivial
+total charge, the initial state of the n anyons also has trivial total charge.
+Therefore, the topological Hilbert space is
+V 1
+a1a2a3···an ∼=
+M
+b1,b2,...,bn−3
+V b1
+a1a2 ⊗V b2
+b1a3 ⊗· · · ⊗V ¯an
+bn−3an−1 ,
+(9.90)
+for some choice of the labels a1, a2, a3, . . .an; there are n−3 intermediate
+charges and n −2 fusion spaces appearing in each summand. Exchanges
+of the particles swap the labels, but after each exchange the vector space
+still has the form eq. (9.90) with labels given by some permutation of the
+original labels.
+Although each n-anyon topological Hilbert spaces is not itself a tensor
+products of subsystems, all of these spaces are contained in
+(Hd)⊗(n−2) ,
+(9.91)
+where
+Hd =
+M
+a,b,c
+V 1
+abc .
+(9.92)
+Here, a, b, c are summed over the complete label set of the model (which
+we have assumed is ﬁnite), so that Hd contains all the possible fusion
+states of three particles, and the dimension d of Hd is
+d =
+X
+a,b,c
+N 1
+abc .
+(9.93)
+Thus the state of n anyons can be encoded in the Hilbert space of n −2
+qudits for some constant d (which depends on the anyon model but is
+
+--- PDF page 51 ---
+9.13 Simulating anyons with a quantum circuit
+51
+independent of n). The basis states of this qudit can be chosen to be
+{|a, b, c; µ⟩}, where µ labels an element of the basis for the fusion space
+V 1
+abc.
+Braiding. In the topological quantum computer, a braid is executed by
+performing a sequence of exchanges, each acting on a pair of neighboring
+particles. The eﬀect of each exchange in the standard basis is described by
+the B-matrix. How is B represented acting on our encoding of the topo-
+logical vector space (using qudits)? Suppressing fusion states, our basis
+for two-qudit states can be denoted |a, b, c⟩|d, e, ¯f⟩. But in the topolog-
+ical quantum computer, the labels d and ¯c always match, and therefore
+to perform our simulation of braiding we need only consider two-qudit
+states whose labels match in this sense:
+
+
+g
+f
+aeb
+d
+g
+B
+ ¦
+a
+f
+d
+d
+b
+e
+a
+f
+g
+g
+b
+e
+Then the action of the B-matrix on these basis states is
+B : |a, b, ¯d⟩|d, e, ¯f⟩7→
+X
+g
+|a, e, ¯g⟩|g, b, ¯f⟩
+
+Bf
+aeb
+g
+d .
+(9.94)
+As desired, we have represented the B as a d2 × d2 matrix acting on a
+pair of neighboring qudits.
+Fusion. Fusion of a pair of anyons can be simulated by a two-qudit
+measurement, which can be reduced to a single-qudit measurement with
+a little help from the F-matrix:
+
+
+g
+f
+abe
+d
+g
+F
+ ¦
+a
+f
+d
+d
+e
+b
+a
+e
+g
+f
+b
+g
+Consider a basis state |a, b, ¯d⟩|d, e, ¯f⟩for a pair of neighboring qudits;
+what is the amplitude for the anyon pair (be) to have trivial total charge?
+Using an F-move, the state can be expanded as
+F :
+|a, b, ¯d⟩|d, e, ¯f⟩7→
+X
+g
+|a, g, ¯f⟩|b, ¯g, e⟩
+
+F f
+abe
+g
+d
+=
+|a, 1, ¯f⟩|b, 1, e⟩
+
+F f
+abe
+1
+d +
+X
+g̸=1
+|a, g, ¯f⟩|b, ¯g, e⟩
+
+F f
+abe
+g
+d ;(9.95)
+
+--- PDF page 52 ---
+52
+9 Topological quantum computation
+we have separated the sum over g into the component for which (be) fuses
+to 1, plus the remainder. After the F-move which (is just a particular
+two-qudit unitary gate), we can sample the probability that (be) fuses to
+1 by performing a projective measurement of the second qudit in the basis
+{|b, ¯g, e⟩}, and recording whether g = 1.
+This completes our demonstration that a quantum circuit can simulate
+eﬃciently a topological quantum computer.
+9.14 Fibonacci anyons
+Now we have established that topological quantum computation is no
+more powerful than the quantum circuit model — any problem that can
+be solved eﬃciently by braiding nonabelian anyons can also be solved
+eﬃciently with a quantum circuit. But is it as powerful? Can we simulate
+a universal quantum computer by braiding anyons? The answer depends
+on the speciﬁc properties of the anyons: some nonabelian anyon models
+are universal, others are not. To ﬁnd the answer for a particular anyon
+model, we need to understand the properties of the representations of the
+braid group that are determined by the F-matrix and R-matrix.
+Rather than give a general discussion, we will study one especially
+simple nonabelian anyon model, and demonstrate its computational uni-
+versality. This model is the very simplest nonabelian model — conformal
+ﬁeld theorists call it the “Yang-Lee model,” but I will call it the “Fibonacci
+model” for reasons that will soon be clear.
+In the Fibonacci model there are only two labels — the trivial label,
+which I will now denote 0, and a single nontrivial label that I will call 1,
+where ¯1 = 1. And there is only one nontrivial fusion rule:
+1 × 1 = 0 + 1 ;
+(9.96)
+when two anyons are brought together they either annihilate, or fuse to
+become a single anyon. The model is nonabelian because two anyons can
+fuse in two distinguishable ways.
+Consider the standard basis for the Hilbert space V b
+1n of n anyons, where
+each basis element describes a distinguishable way in which the n anyons
+could fuse to give total charge b ∈{0, 1}. If the two anyons furthest to
+the left were fused ﬁrst, the resulting charge could be 0 or 1; this charge
+could then fuse with the third anyon, yielding a total charge of 0 or 1,
+and so on. Finally, the last anyon fuses with the total charge of the ﬁrst
+n −1 anyons to give the total charge b. Altogether n −2 intermediate
+charges b1, b2, b3, . . .bn−2 appear in this description of the fusion process;
+thus the corresponding basis element can be designated with a binary
+string of length n −2. If the total charge is 0, the result of fusing the
+
+--- PDF page 53 ---
+9.15 Quantum dimension
+53
+ﬁrst n −1 anyons has to be 1, so the basis states are labeled by strings of
+length n −3.
+However, not all binary strings are allowed — a 0 must always be
+followed by a 1. There cannot be two zeros in a row because when the
+charge 0 fuses with 1, a total charge of 1 is the only possible outcome.
+Otherwise, there is no restriction on the sequence. Therefore, the basis
+states are in one-to-one with the binary strings that do not contain two
+successive 0’s.
+Thus the dimensions N 0
+n ≡N 0
+1n of the topological Hilbert spaces V 0
+1n
+obey a simple recursion relation. If the fusion of the ﬁrst two particles
+yields trivial total charge, then the remaining n −2 particles can fuse
+in N 0
+n−2 distinguishable ways, and if the fusion of the ﬁrst two particles
+yields an anyon with nontrivial charge, then that anyon can fuse with the
+other n −2 anyons in N 0
+n−1 ways; therefore,
+N 0
+n = N 0
+n−1 + N 0
+n−2 .
+(9.97)
+Since N 0
+1 = 0 and N 0
+2 = 1, the solution to this recursion relation is
+n
+=
+1
+2
+3
+4
+5
+6
+7
+8
+9 . . .
+N 0
+n =
+0
+1
+1
+2
+3
+5
+8
+13
+21 . . .
+(9.98)
+— the dimensions are Fibonacci numbers (which is why I am calling this
+model the “Fibonacci model”).
+The Fibonacci numbers grow with n at a rate N 0
+n ≈Cφn, where φ is
+the golden mean φ = 1
+2
+ 1 +
+√
+5 ≈1.618. Because φ governs the rate at
+which the Hilbert space enlarges as anyons are added, we say that d = φ
+is the quantum dimension of the Fibonacci anyon. That this “dimension”
+is an irrational number illustrates vividly that the topological Hilbert
+space has no natural decomposition as a tensor product of subsystems
+— instead, the topologically encoded quantum information is a collective
+property of the n anyons.
+9.15 Quantum dimension
+We will return shortly to the properties of the Fibonacci model, but ﬁrst
+let’s explore more deeply the concept of quantum dimension. For a general
+anyon model, how should the dimension da of label a be deﬁned? For this
+purpose, it is convenient to imagine a physical process in which two a¯a
+pairs are created (each with trivial total charge); then the particle a from
+the pair on the right fuses with the antiparticle ¯a from the pair on the
+left. Do these particles annihilate?
+With suitable phase conventions, the amplitude for the annihilation
+to occur is a real number in the unit interval [0,1]. Let us deﬁne this
+
+--- PDF page 54 ---
+54
+9 Topological quantum computation
+number to be 1/da, where da is the quantum dimension of a (and 1/d2
+a
+is the probability that annihilation occurs).
+Note that it is clear from
+this deﬁnition that da = d¯a. For the case in which the a is the label
+of an irreducible representation Ra of a group G, the dimension is just
+da = |Ra|, the dimension of the representation. This is easily understood
+pictorially:
+a
+a
+a
+a
+a
+a
+a
+a
+1
+a
+d
+ 
+1
+ 
+If two pairs are created and then each pair annihilates immediately, the
+world lines of the pairs form two closed loops, and |R| counts the number
+of distinct “colors” that propagate around each loop. But if the particle
+from each pair annihilates the antiparticle from the other pair, there is
+only one closed loop and therefore one sum over colors; if we normalize
+the process on the left to unity, the amplitude for the process on the right
+is suppressed by a factor of 1/|R|. To say the same thing in an equation,
+the normalized state of an R ¯R pair is
+|R ¯R⟩=
+1
+p
+|R|
+X
+i
+|i⟩|¯i⟩,
+(9.99)
+where {|i⟩} denotes an orthonormal basis for R and {|¯i⟩} is a basis for ¯R.
+Suppose that two pairs |R ¯R⟩and |R′ ¯R′⟩are created; if the pairs are fused
+after swapping partners, the amplitude for annihilation is
+⟨R ¯R, R′ ¯R′|R ¯R′, R′ ¯R⟩=
+1
+|R|2
+X
+i,i′,j,j′
+⟨j¯j, j′¯j′|i¯i′, i′¯i⟩
+=
+1
+|R|2
+X
+i,i′,j,j′
+δjiδji′δj′i′δj′i =
+1
+|R|2
+X
+i
+δii = 1
+|R| .
+(9.100)
+In general, though, the quantum dimension has no direct interpretation
+in terms of counting “colors,” and there is no reason why it has to be an
+integer.
+How are such quantum dimensions related to the dimensions of topo-
+logical Hilbert spaces? To see the connection, if is very useful to alter
+our normalization conventions. Notice we can introduce many “zigzags”
+in the world line of a particle of type a by creating many a¯a pairs, and
+
+--- PDF page 55 ---
+9.15 Quantum dimension
+55
+fusing the particle from each pair with the antiparticle from the neighbor-
+ing pair. However, each zigzag reduces the amplitude by another factor
+of 1/da. We can compensate for these factors of 1/da if we weight each
+pair creation or annihilation event by a factor of √da. With this new
+convention, we can bend the world line of a particle forward or backward
+in time without paying any penalty:
+a
+a
+a
+d
+a
+d
+a
+d
+a
+d
+a
+d
+a
+d
+ 
+a
+a
+Now the weight assigned to a world line is a topological invariant (it is
+unchanged when we distort the line), and a world line of type a forming
+a closed loop is weighted by da.
+With our new conventions, we can justify this sequence of manipula-
+tions:
+a b
+a
+b
+a
+b
+P
+P
+c
+c
+ 
+a b
+P
+P
+c
+,c P
+ ¦
+,c P
+ ¦
+c
+ab
+c
+N
+ ¦
+c
+ab
+c
+c
+N d
+ ¦
+a
+b
+d d  
+Each diagram represents an inner product of two (unconventionally nor-
+malized) states. We have inserted a complete sum over the labels (c) and
+the corresponding fusion states (µ) that can arise when a and b fuse. Ex-
+ploiting the topological invariance of the diagram, we have then turned it
+“inside out,” then contracted the fusion states (acquiring the factor N c
+ab
+which counts the possible values of µ).
+The equation that we have derived,
+dadb =
+X
+c
+N c
+abdc ≡
+X
+c
+(Na)c
+b dc ,
+(9.101)
+
+--- PDF page 56 ---
+56
+9 Topological quantum computation
+says that the vector ⃗d, whose components are the quantum dimensions,
+is an eigenvector with eigenvalue da of the matrix Na that describes how
+the label a fuses with other labels:
+Na⃗d = da⃗d .
+(9.102)
+Furthermore, since Na has nonnegative entries and all components of ⃗d are
+positive, da is the largest eigenvalue of Na and is nondegenerate. (This
+simple observation is sometimes called the Perron-Frobenius theorem.)
+For n anyons, each with label a, the topological Hilbert space V b
+aaa···a for
+the sector with total charge b has dimension
+N b
+aaa···a =
+X
+{bi}
+N b1
+aaN b2
+ab1N b3
+ab2 . . .N b
+abn−2 = ⟨b| (Na)n−1 |a⟩.
+(9.103)
+The matrix Na can be diagonalized, and expressed as
+Na = |v⟩da⟨v| + · · · ,
+(9.104)
+where
+|v⟩=
+⃗d
+D ,
+D =
+sX
+c
+dc2 ,
+(9.105)
+and subleading eigenvalues have been omitted; therefore
+N b
+aaa···a = dn
+adb/D2 + · · · ,
+(9.106)
+where the ellipsis represents terms that are exponentially suppressed for
+large n. We see that the quantum dimension da controls the rate of growth
+of the n-particle Hilbert space for anyons of type a.
+Because the label 0 with trivial charge fuses trivially, we have d0 = 1. In
+the case of the Fibonacci model, it follows from the fusion rule 1×1 = 0+1
+that d2
+1 = 1 + d1, which is solved by d1 = φ as we found earlier; therefore
+D2 = d2
+0 + d2
+1 = 1 + φ2 = 2 + φ. Our formula becomes
+N 0
+111···1 =
+
+1
+2 + φ
+
+φn ,
+(9.107)
+which is an excellent approximation to the Fibonacci numbers even for
+modest values of n.
+Suppose that an a¯a pair and a b¯b pair are both created. If the a and b
+particles are fused, with what probability p(ab →c) will their total charge
+be c? This question can be answered using the same kind of graphical
+manipulations:
+
+--- PDF page 57 ---
+9.15 Quantum dimension
+57
+a
+P
+P
+c
+c
+c
+ab
+N
+ 
+c
+ab
+c
+N d
+ 
+a b
+P
+P
+c
+(
+)
+a
+b
+d d p ab
+c
+P
+o
+ ¦
+b
+P
+ ¦
+Dividing by dadb to restore the proper renormalization of the inner prod-
+uct, we conclude that
+p(ab →c) = N c
+abdc
+dadb
+,
+(9.108)
+which generalizes the formula p(a¯a →1) = 1/d2
+a that we used to deﬁne
+the quantum dimension, and satisﬁes the normalization condition
+X
+c
+p(ab →c) = 1.
+(9.109)
+To arrive at another interpretation of the quantum dimension, imagine
+that a dense gas of anyons is created, which is then permitted to anneal
+for awhile — anyons collide and fuse, gradually reducing the population of
+particles. Eventually, but long before the thermal equilibrium is attained,
+the collision rate becomes so slow that the fusion process eﬀectively turns
+oﬀ. By this stage, whatever the initial distribution of particles types, a
+steady state distribution is attained that is preserved by collisions. If in
+the steady state particles of type a appear with probability pa, then
+X
+ab
+papb p(ab →c) = pc .
+(9.110)
+Using
+X
+a
+N c
+ab da =
+X
+a
+N a
+b¯c d¯a = dbd¯c = dbdc ,
+(9.111)
+we can easily verify that this condition is satisﬁed by
+pa = d2
+a
+D2 .
+(9.112)
+We conclude that if anyons are created in a random process, those carrying
+labels with larger quantum dimension are more likely to be produced, in
+keeping with the property that anyons with larger dimension have more
+quantum states.
+
+--- PDF page 58 ---
+58
+9 Topological quantum computation
+9.16 Pentagon and hexagon equations
+To assess the computational power of an anyon model like the Fibonacci
+model, we need to know the braiding properties of the anyons, which are
+determined by the R and F matrices. We will see that the braiding rules
+are highly constrained by algebraic consistency conditions. For the Fi-
+bonacci model, these consistency conditions suﬃce to determine a unique
+braiding rule that is compatible with the fusion rules.
+Consistency conditions arise because we can make a sequence of “F-
+moves” and “R-moves” to obtain an isomorphism relating two topological
+Hilbert spaces. The isomorphism can be regarded as a unitary matrix
+that relates the canonical orthonormal bases for two diﬀerent spaces; this
+unitary transformation does not depend on the particular sequence of
+moves from which the isomorphism is constructed, only on the initial and
+ﬁnal bases.
+For example, there are ﬁve diﬀerent ways to fuse four particles (without
+any particle exchanges), which are related by F-moves:
+1
+2
+3
+4
+5
+a
+b
+d
+1
+2
+3
+4
+5
+c
+1
+2
+3
+4
+5
+1
+2
+3
+4
+5
+1
+2
+3
+4
+5
+a
+c
+b
+e
+e
+d
+F
+F
+F
+F
+F
+The basis shown furthest to the left in this pentagon diagram is the “left
+standard basis” {|left; a, b⟩}, in which particles 1 and 2 are fused ﬁrst,
+the resulting charge a is fused with particle 3 to yield charge b, and then
+ﬁnally b is fused with particle 4 to yield the total charge 5. The basis
+shown furthest to the right is the “right standard basis” {|right; c, d⟩}, in
+which the particles are fused from right to left instead of left to right.
+Across the top of the pentagon, these two bases are related by two F-
+
+--- PDF page 59 ---
+9.16 Pentagon and hexagon equations
+59
+moves, and we obtain
+|left; a, b⟩=
+X
+c,d
+|right; c, d⟩
+ F 5
+12c
+d
+a
+ F 5
+a34
+c
+b .
+(9.113)
+Across the bottom of the pentagon, the bases are related by three F-
+moves, and we ﬁnd
+|left; a, b⟩=
+X
+c,d,e
+|right; c, d⟩
+
+F d
+234
+c
+e
+ F 5
+1e4
+d
+b
+
+F b
+123
+e
+a .
+(9.114)
+Equating our two expressions for |left; a, b⟩, we obtain the pentagon equa-
+tion:
+ F 5
+12c
+d
+a
+ F 5
+a34
+c
+b =
+X
+e
+
+F d
+234
+c
+e
+ F 5
+1e4
+d
+b
+
+F b
+123
+e
+a .
+(9.115)
+Another nontrivial consistency condition is found by considering the
+various ways that three particles can fuse:
+1
+2
+3
+4
+b
+1
+2
+3
+4
+a
+2
+3
+1
+4
+b
+2
+3
+1
+4
+c
+2
+1
+3
+4
+c
+2
+1
+3
+4
+a
+F
+R
+F
+F
+R
+R
+The basis {|left; a⟩} furthest to the left in this hexagon diagram is obtained
+if the particles are arranged in the order 123, and particles 1 and 2 are
+fused ﬁrst, while the basis {|right, c⟩} furthest to the right is obtained if
+the particles are arranged in order 231, and particles 1 and 3 are fused
+ﬁrst. Across the top of the hexagon, the two bases are related by the
+sequence of moves FRF:
+|left, a⟩=
+X
+b,c
+|right; c⟩
+ F 4
+231
+c
+b R4
+1b
+ F 4
+123
+b
+a .
+(9.116)
+Across the bottom of the hexagon, the bases are related by the sequence
+of moves RFR, and we ﬁnd
+|left, a⟩=
+X
+c
+|right; c⟩Rc
+13
+ F 4
+213
+c
+a Ra
+12 .
+(9.117)
+
+--- PDF page 60 ---
+60
+9 Topological quantum computation
+Equating our two expressions for |left; a⟩, we obtain the hexagon equation:
+Rc
+13
+ F 4
+213
+c
+a Ra
+12 =
+X
+b
+ F 4
+231
+c
+b R4
+1b
+ F 4
+123
+b
+a .
+(9.118)
+A beautiful theorem, which I will not prove here, says that there are
+no further conditions that must be imposed to ensure the consistency of
+braiding and fusing. That is, for any choice of an initial and ﬁnal basis
+for n anyons, all sequences of R-moves and F-moves that take the initial
+basis to the ﬁnal basis yield the same isomorphism, provided that the
+pentagon equation and hexagon equation are satisﬁed. This theorem is
+an instance of the MacLane coherence theorem, a fundamental result in
+category theory. The pentagon and hexagon equations together are called
+the Moore-Seiberg polynomial equations — their relevance to physics was
+ﬁrst appreciated in studies of (1+1)-dimensional conformal ﬁeld theory
+during the 1980’s.
+A solution to the polynomial equations deﬁnes a viable anyon model.
+Therefore, there is a systematic procedure for constructing anyon models:
+1. Choose a set of labels and assume a fusion rule.
+2. Solve the polynomial equations for R and F.
+If no solutions exist, then the hypothetical fusion rule is incompatible with
+the principles of local quantum physics and must be rejected. If there is
+more than one solution (not related to one another by any reshuﬄing of
+the labels, redeﬁnition of bases, etc.), then each distinct solution deﬁnes
+a distinct model with the assumed fusion rule.
+To illustrate the procedure, consider the polynomial equations for the
+Fibonacci fusion rule. There are only two F-matrices that arise, which
+we will denote as
+F0111 ≡F0 ,
+F1111 ≡F1 .
+(9.119)
+F0 is really the 1 × 1 matrix
+(F0)b
+a = δ1
+aδb
+1 ,
+(9.120)
+while F1 is a 2 × 2 matrix. The pentagon equation becomes
+(Fc)d
+a (Fa)c
+b =
+X
+e
+(Fd)c
+e (Fe)d
+b (Fb)e
+a .
+(9.121)
+The general solution for F ≡F1 is
+F =
+
+τ
+eiφ√τ
+e−iφ√τ
+−τ
+
+,
+(9.122)
+
+--- PDF page 61 ---
+9.17 Simulating a quantum circuit with Fibonacci anyons
+61
+where eiφ is an arbitrary phase (which we can set to 1 with a suitable
+phase convention), and τ =
+ √
+5 −1
+
+/2 = φ −1 ≈.618, which satisﬁes
+τ 2 + τ = 1 .
+(9.123)
+The 2 × 2 R-matrix that describes a counterclockwise exchange of two
+Fibonacci anyons has two eigenvalues — R0 for the case where the total
+charge of the pair of anyons is trivial, and R1 for the case where the total
+charge is nontrivial. The hexagon equation becomes
+Rc (F)c
+a Ra = (F)c
+0 (F)0
+a + (F)c
+1 R1 (F)1
+a .
+(9.124)
+Using the expression for F found by solving the pentagon equation, we
+can solve the hexagon equation for R, ﬁnding
+R =
+
+e4πi/5
+0
+0
+−e2πi/5
+
+,
+F =
+
+τ
+√τ
+√τ
+−τ
+
+.
+(9.125)
+The only other solution is the complex conjugate of this one; this second
+solution really describes the same model, but with clockwise and coun-
+terclockwise braiding interchanged. Therefore, an anyon model with the
+Fibonacci fusion rule really does exist, and it is essentially unique.
+9.17 Simulating a quantum circuit with Fibonacci anyons
+Now we know enough to address whether a universal quantum computer
+can be simulated using Fibonacci anyons. We need to explain how qubits
+can be encoded with anyons, and how a universal set of quantum gates
+can be realized.
+First we note that the Hilbert space V 0
+4 ≡V 0
+1111 has dimension N 0
+4 = 2;
+therefore a qubit can be encoded by four anyons with trivial total charge.
+The anyons are lined up in order 1234, numbered from left to right; in the
+standard basis state |0⟩, anyons number 1 and number 2 fuse to yield total
+charge 0, while in the standard basis state |1⟩, anyons 1 and 2 fuse to yield
+total charge 1. Acting on this standard basis, the braid group generator
+σ1 (counterclockwise exchange of particles 1 and 2) is represented by
+σ1 7→R =
+
+e4πi/5
+0
+0
+−e2πi/5
+
+,
+(9.126)
+while the generator σ2 is represented by
+σ2 7→B = F −1RF ,
+F =
+
+τ
+√τ
+√τ
+−τ
+
+.
+(9.127)
+
+--- PDF page 62 ---
+62
+9 Topological quantum computation
+These matrices generate a representation of the braid group B3 on three
+strands whose image is dense in SU(2). Indeed, R and B generate Z10
+subgroups of U(2), about two distinct axes, and there is no ﬁnite sub-
+group of U(2) that contains both of these subgroups — therefore, the
+representation closes on the group containing all elements of U(2) with
+determinant equal to a 10th root of unity. Similarly, for n anyons with
+trivial total charge, the image of the representation of the braid group is
+dense in SU(N 0
+n).
+To simulate a quantum circuit acting on n qubits, altogether 4n anyons
+are used. We have just seen that by braiding within each cluster of four
+anyons, arbitrary single-qubit gates can be realized. To complete a uni-
+versal set, we will need two-qubit gates as well.
+But two neighboring
+qubits are encoded by eight anyons, and exchanges of these anyons gen-
+erate a representation of B8 whose image is dense in SU(N 0
+8)= SU(13),
+which of course includes the SU(4) that acts on the two encoded qubits.
+Therefore, each gate in a universal set can be simulated with arbitrary
+accuracy by some ﬁnite braid.
+Since we can braid clockwise as well as counterclockwise, the inverse
+of each exchange gate is also in our repertoire. Therefore, we can ap-
+ply the Solovay-Kitaev theorem to conclude that the universal gates of
+the circuit model can be simulated to accuracy ε with braids of length
+poly (log(1/ε)).
+It follows that an ideal quantum circuit with L gates
+acting on all together n qubits can be simulated to ﬁxed accuracy using
+4n anyons and a braid of length O(L · poly(log(L)). As desired, we have
+shown that a universal quantum computer can be simulated eﬃciently
+with Fibonacci anyons. Note that, in contrast to the simulation using
+the nonabelian superconductor model, no intermediate measurements are
+needed to realize the universal gates.
+In the analysis above, we have assumed that there are no errors in
+the simulation other than those limiting the accuracy of the Solovay-
+Kitaev approximation to the ideal gates. It is therefore implicit that the
+temperature is small enough compared to the energy gap of the model
+that thermally excited anyons are too rare to cause trouble, that the
+anyons are kept far enough apart from one another that uncontrolled
+exchange of charge can be neglected, and in general that errors in the
+topological quantum computation are unimportant. If the error rate is
+small but not completely negligible, then the standard theory of quantum
+fault tolerance can be invoked to boost the accuracy of the simulation as
+needed, at an additional overhead cost polylogarithmic in L. The fault-
+tolerant procedure should include a method for controlling the “leakage”
+of the encoded qubits — that is, to prevent the drift of the clusters of
+four qubits from the two-dimensional computational space V 0
+4 to its three-
+dimensional orthogonal complement V 1
+4 .
+
+--- PDF page 63 ---
+9.18 Epilogue
+63
+9.18 Epilogue
+That is as far as I got in class. I will mention brieﬂy here a few other
+topics that I might have covered if I had not run out of time.
+9.18.1 Chern-Simons theory
+We have discussed how anyon models can be constructed through a brute-
+force solution to the polynomial equations.
+This method is foolproof,
+but in practice models are often constructed using other, more eﬃcient
+methods. Indeed, most of the known anyon models have been found as
+instances of Chern-Simons theory.
+The fusion rules of a Chern-Simons theory are a truncated version of the
+fusion rules for irreducible representations of a Lie group. For example,
+associated with the group SU(2) there is a tower of Chern-Simons theories
+indexed by a positive integer k. For SU(2), the irreducible representations
+carry labels j = 0, 1
+2, 1, 3
+2, 2, 5
+2, . . ., and the fusion rules have the form
+j1 × j2 =
+j1+j2
+X
+j=|j2−j1|
+j .
+(9.128)
+In the Chern-Simons theory denoted SU(2)k, the half-integer labels are
+limited to j ≤k/2, and the label j is contained in j1×j2 only if j1+j2+j ≤
+k.
+For example, the SU(2)1 model is abelian, and the nontrivial fusion
+rules of the SU(2)2 model are
+1
+2 × 1
+2
+= 0 + 1 ,
+1
+2 × 1
+= 1
+2 ,
+1 × 1
+= 0 .
+(9.129)
+Therefore, the label 1
+2 has quantum dimension d1/2 =
+√
+2, and the topo-
+logical Hilbert space of 2m such anyons with total charge 0 has dimension
+N 0
+( 1
+2)
+2m = 2m−1 .
+(9.130)
+The polynomial equations for these fusion rules have multiple solutions
+(only one of which describes the braiding properties of the SU(2)2 model),
+but none of the resulting models have computationally universal braiding
+rules. The space V 0
+1
+2
+1
+2
+1
+2
+1
+2 is two-dimensional, and the 2 × 2 matrices F ≡
+F 1
+2
+1
+2
+1
+2
+1
+2 and R ≡R 1
+2
+1
+2 are, up to overall phases and complex conjugation,
+F = H =
+1
+√
+2
+
+1
+1
+1
+−1
+
+,
+R = P =
+
+1
+0
+0
+i
+
+.
+(9.131)
+
+--- PDF page 64 ---
+64
+9 Topological quantum computation
+There are Cliﬀord-group quantum gates, inadequate for universality.
+However, the SU(2)k models for k ≥3 are computationally universal.
+The nontrivial fusion rules of SU(2)3 are
+1
+2 × 1
+2
+= 0 + 1 ,
+1
+2 × 1
+= 1
+2 + 3
+2 ,
+1
+2 × 3
+2
+= 1 ,
+1 × 1
+= 0 + 1 ,
+1 × 3
+2
+= 1
+2 ,
+3
+2 × 3
+2
+= 0 .
+(9.132)
+The Fibonacci (Yang-Lee) model that we have studied is obtained by
+truncating SU(2)3, further, eliminating the noninteger labels
+1
+2 and
+3
+2
+(i.e., this is the Chern-Simons theory SO(3)3); then the only remaining
+nontrivial fusion rule is 1 × 1 = 0 + 1.
+Wang (unpublished) has recently constructed all anyons models with
+no more than four labels, and has found that all of the models are closely
+related to the models that are found in Chern-Simons theory.
+9.18.2 S-matrix
+The modular S-matrix of an anyon model can be deﬁned in terms of two
+anyon world lines that form a Hopf link:
+1
+b
+a
+S  D
+b
+a
+Here D is the total quantum dimension of the model, and we have used
+the normalization where unlinked loops would have the value dadb; then
+the matrix Sb
+a is symmetric and unitary. In abelian anyon models, the
+Hopf link arose in our discussion of topological degeneracy, where we
+characterized how the vacuum state of an anyon model on the torus is
+aﬀected when an anyon is transported around one of the cycles of the
+torus. The S-matrix has a similar interpretation in the nonabelian case.
+By elementary reasoning, S can be related to the fusion rules:
+(Na)c
+b =
+X
+d
+Sd
+b
+Sd
+a
+Sd
+1
+  S−1c
+d ;
+(9.133)
+
+--- PDF page 65 ---
+9.19 Bibliographical notes
+65
+that is, the S-matrix simulaneously diagonalizes all the matrices {Na}
+(the Verlinde relation). Note that it follows from the deﬁnition that Sa
+1 =
+da/D.
+9.18.3 Edge excitations
+In our formulation of anyon models, we have discussed the fusing and
+braiding of particles in the two-dimensional bulk. But there is another
+aspect of the physics of two-dimensional media that we have not yet dis-
+cussed, the properties of the one-dimensional edge of the sample. Typi-
+cally, if a two-dimensional system supports anyons in the bulk, there are
+also chiral massless excitations that propagate along the one-dimensional
+edge. At nonzero temperature T, there is an energy ﬂux along the edge
+given by the expression
+J = π
+12c−T 2 ;
+(9.134)
+here the constant c−, called the chiral central charge of the edge, is a
+universal property that is unaﬀected by small changes in the underlying
+Hamiltonian of the system.
+While this chiral central charge is an intrinsic property of the two-
+dimensional medium, the properties of the anyons in the bulk do not
+determine it completely; rather we have
+1
+D
+X
+a
+d2
+ae2πiJa = e(2πi/8)c−,
+(9.135)
+where the sum is over the complete label set of the anyon model, and
+e2πiJa = R1
+a¯a is the topological spin of the label a. This expression re-
+lates the quantity c−, characteristic of the edge theory, to the quantum
+dimensions and topological spins of the bulk theory, but determines c−
+only modulo 8. Therefore, at least in principle, there can be multiple edge
+theories corresponding to a single theory of anyons in the bulk.
+9.19 Bibliographical notes
+Some of the pioneering papers on the theory of anyons are reprinted in
+[1].
+What I have called the “nonabelian superconductor” model is often
+referred to in the literature as the “quantum double,” and is studied
+using the representation theory of Hopf algebras. For a review see [2].
+That nonabelian anyons can be used for fault-tolerant quantum com-
+puting was ﬁrst suggested in [3]. This paper also discusses the toric code,
+and related lattice models that have nonabelian phases. A particular real-
+ization of universal quantum computation in a nonabelian superconductor
+
+--- PDF page 66 ---
+66
+9 Topological quantum computation
+was discussed in [4, 5]. My discussion of the universal gate set is based
+on [6], where more general models are also discussed.
+Other schemes,
+that make more extensive use of electric charges and that are universal
+for smaller groups (like S3) are described in [7].
+Diagrammatic methods, like those I used in the discussion of the quan-
+tum dimension, are extensively applied to derive properties of anyons in
+[8]. The role of the polynomial equations (pentagon and hexagon equa-
+tions) in (1+1)-dimensional conformal ﬁeld theory is discussed in [9].
+Simulation of anyons using a quantum circuit is discussed in [10]. Simu-
+lation of a universal quantum computer using the anyons of the SU(2)k=3
+Chern-Simons theory is discussed in [11]. That the Yang-Lee model is
+also universal was pointed out in [12].
+I did not discuss physical implementations in my lectures, but I list a
+few relevant references here anyway: Ideas about realizing abelian and
+nonabelian anyons using superconducting Josephson-junction arrays are
+discussed in [13]. A spin model with nearest-neighbor interactions that
+has nonabelian anyons (though not ones that are computationally univer-
+sal) is proposed and solved in [14], and a proposal for realizing this model
+using cold atoms trapped in an optical lattice is described in [15]. Some
+ideas about realizing the (computationally universal) SU(2)k=3 model in
+a system of interacting electrons are discussed in [16].
+Much of my understanding of the theory of computing with nonabelian
+anyons was derived from many helpful discussions with Alexei Kitaev.
+
+--- PDF page 67 ---
+References
+[1] F. Wilczek, Fractional statistics and anyon superconductivity (World Scien-
+tiﬁc, Singapore, 1990).
+[2] M. de Wild Propitius and F. A. Bais, “Discrete gauge theories,” arXiv:
+hep-th/9511201 (1995).
+[3] A. Yu. Kitaev, “Fault-tolerant quantum computation by anyons,” Annals
+Phys. 303, 2-30 (2003), arXiv: quant-ph/9707021.
+[4] R. W. Ogburn and H. Preskill, “Topological quantum computation,” Lect.
+Notes in Comp. Sci. 1509, 341-356 (1999).
+[5] J.
+Preskill,
+“Fault-tolerant
+quantum
+computation,”
+arXiv:
+quant-
+ph/9712048 (1997).
+[6] C. Mochon, “Anyons from non-solvable ﬁnite groups are suﬃcient for uni-
+versal quantum computation” Phys. Rev. A 67, 022315 (2003), quant-
+ph/0206128.
+[7] C. Mochon, “Anyon computers with smaller groups,” Phys. Rev. A 69,
+032306 (2004), arXiv: quant-ph/0306063.
+[8] J. Fr¨ohlich and F. Gabbiani, “Braid statistics in local quantum theory,”
+Rev. Math. Phys. 2:3, 251–353 (1990).
+[9] G. Moore and N. Seiberg, “Classical and quantum conformal ﬁeld theory,”
+Comm. Math. Phys. 123, 171–254 (1989).
+[10] M. H. Freedman, A. Kitaev, and Z. Wang, “Simulation of topological ﬁeld
+theories by quantum computers,” Comm. Math. Phys. 227, 587-603 (2002),
+arXiv: quant-ph/0001071.
+[11] M. H. Freedman, M. Larsen, and Z. Wang, “A modular functor which is
+universal for quantum computation,” arXiv: quant-ph/0001108 (2000).
+[12] G. Kuperberg, unpublished.
+[13] B. Doucot, L. B. Ioﬀe, and J. Vidal, “Discrete non-Abelian gauge theo-
+ries in two-dimensional lattices and their realizations in Josephson-junction
+arrays,” Phys. Rev. B 69, 214501 (2004), arXiv: cond-mat/0302104.
+67
+
+--- PDF page 68 ---
+68
+References
+[14] A. Kitaev, “Anyons in a spin model on the honeycomb lattice,” unpublished.
+[15] L.-M. Duan, E. Demler, and M. D. Lukin, “Controlling spin exchange inter-
+actions of ultracold atoms in optical lattices,” Phys. Rev. Lett. 91, 090402
+(2003), arXiv: cond-mat/0210564.
+[16] M. Freedman, C. Nayak, K. Shtengel, K. Walker, and Zhenghan Wang, “A
+class of P, T-invariant topological phases of interacting electrons,” cond-
+mat/0307511 (2003).

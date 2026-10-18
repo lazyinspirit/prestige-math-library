@@ -3,6 +3,7 @@ id: thm-continuous-inverse
 kind: theorem
 title: "Continuous inverse theorem: a continuous injective $f$ on an interval $I$ is a bijection onto the order-convex set $f[I]$, and the inverse $g : f[I] \\to I$ is continuous and strictly monotone in the same sense as $f$"
 status: published
+dependency_level: 2
 origin: session
 provenance:
   statement: literature-derived
@@ -15,12 +16,12 @@ landmark: true
 short: "continuous inverse theorem"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/thm-continuous-inverse.json
 sources:
   scraped: []
   references:

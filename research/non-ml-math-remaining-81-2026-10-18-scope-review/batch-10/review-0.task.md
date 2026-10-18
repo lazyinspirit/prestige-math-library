@@ -1,0 +1,13 @@
+# Batch 10: review 0
+
+Run: non-ml-math-remaining-81-2026-10-18
+Batch: 10
+Round: 0
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: stationary-ergodic-sources-and-universal-coding, stationary-ergodic-sources-and-universal-coding-examples
+Items: def-finite-alphabet-stationary-source, def-finite-block-information-and-entropy, def-finite-support-binary-prefix-code, lem-triangular-information-averages, lem-finite-kl-nonnegative-choice-free, alg-lz78-incremental-prefix-code, def-ams-source-and-stationary-mean, def-finite-block-source-code, def-finite-state-compressibility, def-general-process-information-rate, def-lz77-previous-match-phrase-length, def-past-information-density-finite-alphabet, lem-prefix-code-entropy-bounds, lem-finite-block-entropy-chain-rule, lem-aep-implies-fixed-rate-lossless-coding, lem-lz78-distinct-parse-ziv-inequality, thm-ams-stationary-mean-asymptotic-dominance, thm-lz78-prefix-code-lossless, thm-stationary-entropy-rate-limit, lem-ams-stationary-mean-dominates-tail-events, thm-lz78-individual-sequence-finite-state-optimality, lem-finite-alphabet-past-information-convergence, thm-stationary-expected-prefix-code-rate, thm-componentwise-shannon-mcmillan-breiman, thm-lz78-stationary-expected-rate, lem-infinite-past-conditional-block-information-rate, cor-ergodic-shannon-mcmillan-breiman, cor-smb-limit-is-conditional-entropy-under-ac, cor-fixed-rate-lossless-coding-stationary-ergodic, thm-ams-ergodic-information-aep, thm-lz77-phrase-length-entropy-rate, cor-fixed-rate-lossless-coding-ams-ergodic, ex-nonstationary-block-entropy-rate-oscillation, ex-lz78-parse-with-explicit-terminator, ex-iid-and-markov-source-entropy-rates
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

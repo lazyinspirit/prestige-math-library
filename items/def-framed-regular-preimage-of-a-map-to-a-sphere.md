@@ -19,10 +19,11 @@ deps:
   - def-countable-choice
 proof_strategy: not-applicable
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 verification:
   precheck: n/a
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/def-framed-regular-preimage-of-a-map-to-a-sphere.json
 sources:
   references:
     - title: "John Milnor, Topology from the Differentiable Viewpoint"
@@ -38,14 +39,14 @@ sources:
 
 ## Definition
 
-Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]). Fix the standard
+Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]), and let $k\ge0$. Fix the standard
 orientation of $S^k$ and identify $S^k=D^k/S^{k-1}$ with the one-point
 compactification $\mathbb R^k\cup\{\infty\}$ of the zero section of the
 trivial rank-$k$ bundle over a point, so a chosen centre $y_0$ corresponds to
 $0$
 ([[prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product]],
 [[def-disk-bundle-sphere-bundle-and-thom-space]]). Let $X$ be a closed smooth
-manifold, let $f:X\to S^k$ be smooth and let $y\in S^k$ be a regular value,
+$n$-manifold, let $f:X\to S^k$ be smooth and let $y\in S^k$ be a regular value,
 with $b=(b_1,\dots,b_k)$ a positively oriented basis of $T_yS^k$
 ([[def-smooth-manifold]],
 [[prop-transversality-to-a-point-is-the-regular-value-condition]]); read $b$
@@ -53,25 +54,30 @@ as the trivialization $\beta:T_yS^k\to\mathbb R^k$ sending $b_i$ to the
 $i$-th standard basis vector
 ([[def-orientation-of-a-finite-dimensional-real-vector-space]]).
 
-Then $N=f^{-1}(y)$ is a closed embedded submanifold of $X$ of codimension $k$,
-and the differential of $f$ factors through the normal quotient to a smooth
-bundle isomorphism
+For $k\le n$, the set $N=f^{-1}(y)$ is a closed embedded submanifold of $X$
+of codimension $k$, possibly empty. For $k>n$, regularity forces
+$N=\varnothing$: a linear map $T_xX\to T_yS^k$ cannot be surjective when
+$k>n$. In this case no dimension $n-k$ or codimension-$k$ embedded-submanifold
+structure is asserted. For every $k\ge0$, the differential of $f$ factors
+through the normal quotient to a smooth bundle isomorphism
 $$\nu(N\subseteq X)\longrightarrow(f|_N)^*TS^k;$$
 composing it with $\beta$ gives a framing
 $$f_*b:\nu(N\subseteq X)\longrightarrow N\times\mathbb R^k.$$
 The pair $(N,f_*b)$ is the **framed regular preimage** of $(f,y,b)$.
 
-Both assertions are the case $E=\mathbb R^k$ of
+These assertions use the case $E=\mathbb R^k$ of
 [[prop-transverse-preimage-carries-a-pulled-back-normal-structure]], applied locally in a target chart centred at $y$, whose differential at $y$ is $\beta$, to
 the trivial rank-$k$ bundle over the one-point base: its Thom space is
 $S^k=\mathbb R^k\cup\{\infty\}$, its zero section is $\{0\}$, transversality
 of $f$ to $\{0\}$ is exactly regularity of $y$
 ([[def-transverse-smooth-maps]],
 [[prop-transversality-to-a-point-is-the-regular-value-condition]]), and
-clauses (i)-(ii) of that proposition give the closed embedded submanifold and
-the specified isomorphism of the normal quotient with the pulled-back target
-fibre; inserting the positive basis $\beta$ turns the target factor into
-$\mathbb R^k$ and is precisely the framing. The construction is independent of
+clause (i) of that proposition gives the embedded-submanifold conclusion
+when $k\le n$ and emptiness when $k>n$, while clause (ii) gives the specified
+normal isomorphism in every rank. Closedness follows also directly from
+continuity of $f$ and closedness of $\{y\}$ in $S^k$. Inserting the positive
+basis $\beta$ turns the target factor into $\mathbb R^k$ and is precisely
+the framing. The construction is independent of
 any auxiliary choice: only the derivative of $f$ along $N$, the value $y$ and
 the basis $b$ enter, so no chart of $S^k$ at $y$ is chosen and the framing is
 the composite displayed above. Regular values are not assumed to exist a
@@ -81,8 +87,16 @@ regular value and positive basis in the two following lemmas.
 
 Rank $k=0$ and $N=\varnothing$ are included: for $k=0$ the sphere is $S^0$,
 the basis is empty, $\beta$ is the unique map $T_yS^0\to\mathbb R^0$, and
-$N=f^{-1}(y)$ is a clopen submanifold of $X$ of dimension $\dim X$, carrying the unique rank-zero framing;
-for $N=\varnothing$ the normal bundle and the framing are empty. Regular-value
+$N=f^{-1}(y)$ is a clopen submanifold of $X$ of dimension $\dim X$, carrying the unique rank-zero framing.
+Here $S^{-1}=\varnothing$ is the empty-boundary notation in the based
+quotient convention $D^0/\varnothing=(D^0)_+=S^0$, rather than a
+negative-dimensional manifold. For $N=\varnothing$, the normal quotient
+is the empty coproduct of tangent quotients, the pullback target bundle and
+$N\times\mathbb R^k$ are empty, and the two displayed isomorphisms are the
+unique empty bundle maps. With the specified rank-$k$ empty-bundle model,
+this is the unique empty rank-$k$ framing of
+[[def-framing-of-a-normal-bundle]], also when $k>n$; one may use the empty
+zero-dimensional smooth structure on $N$ in that case. Regular-value
 independence does not extend to $k=0$: a constant map from a point to $S^0$
 has the point and the empty set as its two regular fibres. They are not
 framed cobordant within the point, since a compact neat codimension-zero

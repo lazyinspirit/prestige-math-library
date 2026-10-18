@@ -3,24 +3,21 @@ id: cor-regular-values-form-a-dense-g-delta-set
 kind: corollary
 title: "Regular values form a dense $G_\\delta$ set"
 status: published
+dependency_level: 6
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-countable-choice, cor-regular-values-have-null-complement-and-are-dense,
-       prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact]
+       prop-the-critical-value-set-of-a-smooth-map-is-sigma-compact,
+       prop-countable-unions-and-subsets-of-manifold-null-sets-are-null,
+       prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (cor-regular-values-form-a-dense-g-delta-set). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/cor-regular-values-form-a-dense-g-delta-set.json
 sources:
   scraped: []
   references:
@@ -42,11 +39,15 @@ $G_\delta$ subset of $N$.
 
 [L2] Regular values are dense, and the critical value set is null ([[cor-regular-values-have-null-complement-and-are-dense]]).
 
+[L3] Every subset of a manifold-null set is null under Countable Choice ([[prop-countable-unions-and-subsets-of-manifold-null-sets-are-null]]).
+
+[L4] A null subset of a positive-dimensional manifold has dense complement ([[prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold]]).
+
 ## Proof
 **Proof technique:** direct.
 
 1.1 By [L1], write the critical value set as $\bigcup_{j\ge 1}K_j$ with each $K_j$ compact. [L1, given]
 
-2.1 If $\dim N>0$, then [L2] makes each $K_j$ a compact null set, hence it has empty interior. Therefore $N\setminus K_j$ is open and dense. The regular-value set is $$ N\setminus\bigcup_{j\ge 1}K_j=\bigcap_{j\ge 1}(N\setminus K_j), $$ so it is a dense $G_\delta$. If $\dim N=0$, then [L2] already says every value is regular, so the regular-value set is all of $N$, again a dense $G_\delta$. [L2, step 1.1, cases, algebra]
+2.1 If $\dim N>0$, then the Sard conclusion in [L2] makes $\operatorname{CV}(F)$ null, and [L3] makes each compact set $K_j\subseteq\operatorname{CV}(F)$ null as well. By [L4], each $N\setminus K_j$ is dense; it is open because $K_j$ is compact and hence closed. The regular-value set is $$ N\setminus\bigcup_{j\ge 1}K_j=\bigcap_{j\ge 1}(N\setminus K_j), $$ so it is a dense $G_\delta$. If $\dim N=0$, then [L2] already says every value is regular, so the regular-value set is all of $N$, again a dense $G_\delta$. [L2, L3, L4, step 1.1, cases, algebra]
 
 3.1 Therefore regular values form a dense $G_\delta$ set. [step 2.1] ∎

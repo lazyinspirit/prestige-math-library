@@ -3,11 +3,12 @@ id: thm-morse-sard-for-euclidean-maps
 kind: theorem
 title: "Morse-Sard for Euclidean maps"
 status: published
+dependency_level: 3
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-critical-locus-and-critical-value-set,
+deps: [def-c1-critical-locus-and-critical-value-set-in-euclidean-spaces,
        def-null-and-content-zero-in-rn,
        lem-sard-slicing-for-compact-null-sections,
        lem-sard-on-the-nonflat-critical-strata,
@@ -26,14 +27,11 @@ sources:
       url: "https://encyclopediaofmath.org/wiki/Sard_theorem"
 verification:
   precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-10-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/thm-morse-sard-for-euclidean-maps.json
 ---
 
 ## Statement
@@ -49,13 +47,13 @@ Then the critical value set of $f$ is a null subset of $\mathbb R^n$.
 
 **Given:** An integer $n\ge 1$ and a $C^r$ map $f:U\to\mathbb R^n$ with $r>\max\{m-n,0\}$.
 
-[F1] The critical value set is the image of the critical locus ([[def-critical-locus-and-critical-value-set]]).
+[F1] For every $C^1$ Euclidean map, the critical locus consists of points where the total derivative is not onto, and the critical-value set is its image, including for zero-dimensional source ([[def-c1-critical-locus-and-critical-value-set-in-euclidean-spaces]]). We write these sets as $\operatorname{Crit}(f)$ and $\operatorname{CV}(f)$.
 
 [F2] Nullity is expressed by countable cube covers of arbitrarily small total volume ([[def-null-and-content-zero-in-rn]]).
 
 [L1] Compact null sections reassemble into a null set, and the nonflat and flat critical strata have null images under the hypotheses of the preceding lemmas ([[lem-sard-slicing-for-compact-null-sections]], [[lem-sard-on-the-nonflat-critical-strata]], [[lem-sard-on-the-infinitely-flat-critical-stratum]]).
 
-[L2] If a Euclidean map has invertible derivative at a point, it becomes a coordinate there after shrinking ([[thm-euclidean-inverse-function-theorem]]).
+[L2] A $C^1$ Euclidean map with invertible derivative has a local $C^1$ inverse $g$, with $Dg=(Df\circ g)^{-1}$ ([[thm-euclidean-inverse-function-theorem]]). For a $C^r$ map this inverse is $C^r$: inductively, if $g$ is $C^k$ and $k<r$, then $Df\circ g$ is $C^k$, and matrix inversion is $C^k$ on invertible matrices by the adjugate-over-determinant formula; the displayed identity makes $Dg$ $C^k$, hence $g$ $C^{k+1}$.
 
 ## Proof
 **Proof technique:** direct.
@@ -66,4 +64,4 @@ Then the critical value set of $f$ is a null subset of $\mathbb R^n$.
 
 2.2 It remains to show that $f(C_0\setminus C_1)$ is null. If $n=1$, then a linear map $\mathbb R^m\to\mathbb R$ is surjective exactly when it is nonzero, so $C_0=C_1$ and there is nothing to prove. Assume $n>1$, and fix $x\in C_0\setminus C_1$. Some first partial derivative of some component of $f$ is nonzero at $x$; after reordering coordinates and components, assume $$ \frac{\partial f^1}{\partial x^1}(x)\neq 0. $$ By [L2], after shrinking choose a neighbourhood $W_x$ of $x$ and a $C^r$ diffeomorphism $$ \Phi_x(y):=\bigl(f^1(y),y^2,\ldots,y^m\bigr) $$ from $W_x$ onto an open set $I_x\times\Omega_x\subseteq\mathbb R\times \mathbb R^{m-1}$. Write $$ f\circ\Phi_x^{-1}(t,u)=\bigl(t,\widetilde f_x(t,u)\bigr). $$ Each slice map $u\mapsto \widetilde f_x(t,u)$ is $C^r$, and because $$ r>\max\{m-n,0\}=\max\{(m-1)-(n-1),0\}, $$ the induction hypothesis applies to those maps. If $q=\Phi_x^{-1}(t,u)\in C_0\cap W_x$, then in these coordinates the differential of $f$ has block form $$ Df_q=\begin{bmatrix}1&0\\ *&D(\widetilde f_x)_t(u)\end{bmatrix}, $$ so $q$ is critical for $f$ exactly when $u$ is a critical point of the slice $u\mapsto\widetilde f_x(t,u)$. For every rational open cube $B$ whose closure lies in $W_x$, the compact set $f(C_0\cap\overline B)$ has sections contained in the slice critical value sets, hence null in $\mathbb R^{n-1}$ by induction. The slicing lemma in [L1] makes this compact image null in $\mathbb R^n$. Consider **all** rational cubes $B$ for which such an $x$ and chart exist; they form a countable family covering $C_0\setminus C_1$. Each has the compact-null conclusion just proved, independently of which witnessing chart exists. The canonical-cover observation in step 1.1 makes their image union $f(C_0\setminus C_1)$ null without selecting charts or covers countably. [L1, L2, step 1.1, algebra]
 
-3.1 Step 2.1 shows that $f(C_j\setminus C_{j+1})$ is null for every [F1, step 2.1, step 2.2, step 1.1] $1\le j<r$ and that $f(C_r)$ is null, while step 2.2 handles $f(C_0\setminus C_1)$. Hence $$ f(C_0)=f(\operatorname{Crit}(f)\cap Q_\nu) $$ is null. Applying step 1.1 shows that the whole critical value set of $f$ is null. [F1, step 2.1, step 2.2, step 1.1] ∎ 
+3.1 Step 2.1 shows that $f(C_j\setminus C_{j+1})$ is null for every $1\le j<r$ and that $f(C_r)$ is null, while step 2.2 handles $f(C_0\setminus C_1)$. Hence $$ f(C_0)=f(\operatorname{Crit}(f)\cap Q_\nu) $$ is null. Applying step 1.1 shows that the whole critical value set of $f$ is null. [F1, step 2.1, step 2.2, step 1.1] ∎ 

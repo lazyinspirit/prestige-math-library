@@ -3,6 +3,7 @@ id: cex-continuous-injection-on-a-non-interval-need-not-be-monotone
 kind: counterexample
 title: "A continuous injection on $[0,1] \\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem"
 status: published
+dependency_level: 3
 origin: session
 provenance:
   statement: literature-derived
@@ -15,12 +16,12 @@ landmark: false
 short: "continuous injection, not monotone"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/cex-continuous-injection-on-a-non-interval-need-not-be-monotone.json
 sources:
   scraped: []
   references:
@@ -42,19 +43,9 @@ on a subset $A \subseteq \mathbb{R}$ is strictly monotone
 under the hypothesis that $A$ is order-convex ([[def-interval]]). The refuted
 claim drops that hypothesis, and it is false.
 
-## Counterexample
-
-Let $A := [0,1] \cup [2,3]$ and define $f : A \to \mathbb{R}$ by
-
-$$f(x) := x \quad \text{for } x \in [0,1], \qquad f(x) := 5 - x \quad \text{for } x \in [2,3].$$
-
-Then $f$ is continuous on $A$ and injective, and it is not monotone: $f(0) = 0 <
-1 = f(1)$ while $f(2) = 3 > 2 = f(3)$. The set $A$ is not order-convex, since
-$0, 3 \in A$ and $3/2 \notin A$.
-
 ## Facts & Assumptions
 
-**Given:** The set $A = [0,1] \cup [2,3]$ and the function $f$ above.
+**Given:** The set $A = [0,1] \cup [2,3]$ and the function $f$ defined below.
 
 [L1] $f$ is continuous at $c \in A$ when for every real $\varepsilon > 0$ there is a real $\delta > 0$ with $|f(x) - f(c)| < \varepsilon$ for every $x \in A \cap N_\delta(c)$ ([[def-continuity-real]], [[def-neighbourhood-r]]).
 
@@ -66,7 +57,15 @@ $0, 3 \in A$ and $3/2 \notin A$.
 
 [L5] A continuous injective function on an order-convex subset of $\mathbb{R}$ is strictly monotone, and its inverse on the image is continuous ([[thm-continuous-injection-on-an-interval-is-strictly-monotone]], [[thm-continuous-inverse]]).
 
-## Verification
+## Counterexample
+
+Let $A := [0,1] \cup [2,3]$ and define $f : A \to \mathbb{R}$ by
+
+$$f(x) := x \quad \text{for } x \in [0,1], \qquad f(x) := 5 - x \quad \text{for } x \in [2,3].$$
+
+Then $f$ is continuous on $A$ and injective, and it is not monotone: $f(0) = 0 <
+1 = f(1)$ while $f(2) = 3 > 2 = f(3)$. The set $A$ is not order-convex, since
+$0, 3 \in A$ and $3/2 \notin A$.
 
 **Proof technique:** direct.
 

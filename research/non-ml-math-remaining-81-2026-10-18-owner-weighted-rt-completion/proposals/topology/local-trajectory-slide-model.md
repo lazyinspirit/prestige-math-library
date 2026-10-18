@@ -1,0 +1,47 @@
+# A transverse same-index trajectory passage gives the framed band sum
+
+2026-10-18. Local isolated construction. This proves the translation for an already isolated transverse trajectory event. It does not claim that an arbitrary global path of descending fields has been reduced to such events, or that arbitrary surgery presentations arise from the same trace.
+
+## Exact hypotheses
+
+Let $q$ be an index-$k$ critical point of a smooth function on an $n$-manifold, $1\le k\le n-1$, with a fixed chart and descending field
+
+$$f=c-|u|^2+|v|^2,\qquad X=(2u,-2v),\qquad (u,v)\in\mathbb R^k\times\mathbb R^{n-k}.$$
+
+Let $p$ be a higher critical point of the same index. Suppose a one-parameter family of its descending attaching-sphere sections passes transversely through the stable section of $q$ exactly once, at one point, with the remainder of the attaching data disjoint from the chosen local passage region. “Transversely” means that the derivative in the $k-1$ sphere-patch directions together with the parameter derivative maps isomorphically onto the $k$ unstable $u$ directions at the event. The normal ribbons/framing and all remaining data are part of the family and are fixed outside the passage region. The lower regular level, the band swept from $p$ to this region, and its framed parallel of $q$ are retained.
+
+Then the two attaching embeddings obtained by transporting the section below $q$, immediately before and after the passage, differ by the framed band sum of the attaching sphere of $p$ with a signed parallel of the attaching sphere of $q$. For $k=1$ this means replacing one foot of the first handle by a parallel of the other foot of the second along the band. The full attaching thickening, rather than just the core sphere, has the transported band framing.
+
+## Proof by the actual passage map
+
+Choose incoming and outgoing sections in the chart given respectively by $|v|=\epsilon$ with $|u|$ small and by $|u|=\epsilon$ with $|v|$ small. They are transverse to $X$. A trajectory entering with $(u_0,v_0)$, $u_0\ne0$, $|v_0|=\epsilon$, is
+
+$$u(t)=e^{2t}u_0,\qquad v(t)=e^{-2t}v_0.$$
+
+It exits when $e^{2t}=\epsilon/|u_0|$, so its exact exit point is
+
+$$P(u_0,v_0)=\left(\epsilon\frac{u_0}{|u_0|},\frac{|u_0|}{\epsilon}v_0\right).$$
+
+The singularity of this map is precisely the stable set $u_0=0$. By the transverse-event hypothesis, the map $U:(x,s)\mapsto u_0$, from the sphere patch coordinates $x\in\mathbb R^{k-1}$ and the family parameter $s$, has invertible derivative at zero. This does not itself permit replacing the parameter by a coordinate depending on $x$. Instead straighten the family by the following fiber-preserving local deformation. First choose a linear orthogonal change of the $u$ coordinates sending the image of $D_xU$ to the first $k-1$ coordinate directions. Reparametrize $x$ linearly, shift $x$ by a constant vector times $s$, and rescale or reverse $s$ by a nonzero constant, to put the derivative $DU(0,0)$ into the identity form. Now $U(x,s)=(x,s)+O((|x|+|s|)^2)$. In a sufficiently small fixed ball the straight interpolation to $(x,s)$ has derivative uniformly close to the identity, fixes zero, and has no other zero; one can insert a cutoff in a slightly larger ball without losing those properties. It is therefore a deformation through exactly one transverse event, with the original parameter slices still designated by $s$. At either nonzero endpoint parameter it induces an isotopy of the outgoing patch, since $u_0\ne0$ there. Its remaining entry coordinate is a smooth map into the stable sphere. After shrinking the passage region it lies in a single coordinate disk of that sphere, so it can be deformed to its value at the event through such disks. The deformation also avoids $u_0=0$ on either side, and its normal thickening is transported throughout. We may consequently take $u_0=(x,s)$ and $v_0=\epsilon e$ for one fixed stable unit vector $e$ when identifying the change in the outgoing core.
+
+The two outgoing patches are thus explicitly
+
+$$x\longmapsto\left(\epsilon\frac{(x,s)}{\sqrt{|x|^2+s^2}},\sqrt{|x|^2+s^2}\,e\right),\qquad s<0\ \text{or}\ s>0.$$
+
+As $s\to0$ they agree along the equatorial boundary away from $x=0$; the negative and positive families approach the two hemispheres of the $u$-sphere $|u|=\epsilon$, with opposite seam orientations. Gluing those two limiting disks along that equator gives the entire $S^{k-1}$ in the direction $u/|u|$. The second component is a small push in the stable $e$ direction, hence this is a **parallel** of the unstable sphere of $q$ rather than its intersecting core sphere. Truncate the two patches at a small common sphere in the $x$ variables. Their outer boundary annuli are related by an ordinary isotopy, since $u_0\ne0$ there. The retained path from the original $p$ patch to this small passage sphere is exactly the joining band. Therefore replacing the negative patch by the positive patch removes one disk from the $p$ sphere and attaches the complementary punctured parallel sphere of $q$ along the band. This is the band-sum construction, with its sign determined by the orientation of the transverse parameter. Reversing that orientation reverses the signed parallel. For $k=1$, $x$ has no coordinates and the displayed formula changes the outgoing point from one end of the $u$ interval to the other, giving the asserted foot replacement.
+
+The computation also controls the **full framing**. On every truncated patch the exit map $P$ is a smooth diffeomorphism between transverse flow sections, so its differential transports the given normal coordinates. On the parallel sphere its retained stable direction $e$, followed by the remaining stable normal coordinates, is the local normal disk frame of the $q$ handle. Across the hemispherical seam the tangent radial direction and the first normal direction undergo the same planar seam rotation as in the band-sum definition. If the parameter reverses the induced end-disk orientation, reflect that first normal coordinate on the copied sphere; the retained $q$ handle is unchanged. All other normal coordinates are the continuously transported stable coordinates. Hence the full ordered frames glue to precisely the signed band framing, not an independently chosen integer twist. Compactness of the truncated sphere patch and band permits one uniform sufficiently small normal radius, so the framed thickening is an embedding throughout and misses the retained $q$ attaching region. This proves the attaching-embedding statement.
+
+Transport the outgoing section further to the chosen lower regular level by the actual flow, with no intervening critical point. This is a diffeomorphism on a neighborhood of the compact patched sphere, so it preserves the band-sum identification and framing. The rest of the attaching data are unchanged outside the swept passage neighborhood by hypothesis. This finishes the local translation. ∎
+
+## Relative diffeomorphism and the dimension distinction
+
+For $1\le k\le n-2$, the actual read supplier `lem-handle-slides-preserve-the-relative-diffeomorphism-type` identifies the band sum with pushing a patch through the parallel core disk after the second handle is attached. Its proof constructs an isotopy of the full attaching region in that surgered boundary, and applies compact-source isotopy extension; it carries all later attaching maps and fixes the incoming collar. Thus the local passage above translates to precisely that supplier's supported relative slide, with its outgoing boundary map carried along.
+
+In particular $n=4,k=2$ is in the supplier's contract. Its attaching spheres are framed circles in a 3-dimensional level manifold, so this is the framed-link Kirby slide. The framing is the one carried by the displayed flow, band, and normal thickening. If a diagram uses integer framings relative to chosen longitude conventions, the band-sum framing has the usual extra mutual-linking contribution; it is not obtained by adding integers while dropping the geometry of the band.
+
+The current definition and preservation lemma both restrict $k\le n-2$. They therefore **do not include** $n=3,k=2$, where the attaching circles lie in a surface and have one normal coordinate. The local computation above still gives the local surface-circle band sum whenever its embedded band and disjoint thickenings are supplied, but global existence of such a band must not be imported from the higher-codimension supplier. The elementary-band comparison in the companion finite-jet proposal uses independent attachment interchanges and geometric cancellations, so it does not presume that missing global surface-slide contract.
+
+## Remaining completeness duty
+
+To turn this local lemma into a global descending-field comparison, one must construct a one-parameter family whose stable/unstable section evaluation is transverse, control all broken trajectories and limiting intersections, and show that the only changes of based attaching data are these finitely many isolated crossings and isotopies. A generic function-path theorem does not prove those assertions: it controls spatial derivatives of the functions, while this lemma controls a nonlocal flow incidence. Likewise the local $n=4,k=2$ Kirby slide does not prove that two surgery traces can be compared without other-index handles or that the traces become comparable after blow-ups and circumcision moves. The detailed Roberts and Kerler proofs still use higher-dimensional bordism and Cerf reductions for those steps.

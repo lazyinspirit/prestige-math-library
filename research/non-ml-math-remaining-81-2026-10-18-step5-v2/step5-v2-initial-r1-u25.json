@@ -1,0 +1,189 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "initial",
+  "round": 1,
+  "unit": "25",
+  "input_sha256": "5a7686cf6af281fffc281470b9fd4d1b4497cd3e88649ffa4676dd5e748ac1b1",
+  "decisions": [
+    {
+      "id": "def-qkd-finite-authenticated-protocol",
+      "model": "gpt-6-luna",
+      "context_sha256": "f723d3cea3542ec09ccc7afb37bf97f8582c9dbaf51e713c54504dc7f409c083",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original registers were identified with the key alphabet K, so the displayed abort ket was not a vector in A or B. Specifying full registers Q_(|K|+1) labelled by K union {bot}, with bot distinct and last, makes the abort and accepted blocks well typed. Accepted-state calculations use the key subspaces Q_|K| and zero extension; no claim is weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-qkd-abort-weighted-secrecy-distance",
+      "model": "gpt-6-luna",
+      "context_sha256": "43ab39f075de5eb012b626fe1911b8e9d2cc4751d17543efe2559f78ecd0846b",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The title incorrectly names abort probability as the weight. The Example and verification correctly use p_acc=3/4 and conditional distance 1/2, giving secrecy and real-ideal distance 3/8 with zero mismatch. Renamed the title to acceptance probability and made the uniform accepted-key state explicit, with zero on the abort coordinate.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-qkd-finite-authenticated-protocol",
+      "disposition": "repaired",
+      "post_sha256": "dd32ec0e092d05c9fcae17401a350dcb3c74afa3314201962a97eacab66eef0d",
+      "review_context_sha256": "a836f26aa9214953941f3167e4e5521348e7104f2a5cca98c41e6f979d1a58c0",
+      "reason": "Reviewed finite register, density, channel and instrument interfaces and normalization/conditioning supplier statements. Ordered key-plus-abort bases now type every output ket; nonnegative block traces sum to one and unilateral abort remains excluded. Accepted subspace identifications preserve finite copy-map uses and require no choice. This is a repair review, not independent acceptance of my repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-qkd-abort-weighted-secrecy-distance",
+      "disposition": "repaired",
+      "post_sha256": "6274cde5a6fc12a886c618e2ed86c04072a38059c288ec05fc3ba68ec2cb41f5",
+      "review_context_sha256": "db715ca81ec7ebf661032170012848d376f02d24e0f75777e81f1eb668b48768",
+      "reason": "Recomputed all output masses: real abort/accepted masses are 1/4 and 3/4, ideal accepted masses are 3/8 each, and the difference has nonzero eigenvalues plus/minus 3/8. The conditional Alice difference has eigenvalues plus/minus 1/2, with zero on abort under full embedding, so secrecy is (3/4)(1/2)=3/8 and correctness is zero. The sum bound is saturated. The Example section and numerical claim are unchanged; only title and explicit accepted-state notation were repaired.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-qkd-abort-aware-composable-security",
+    "lem-qkd-abort-aware-ideal-output-is-state",
+    "thm-qkd-composable-secrecy-sum-bound",
+    "ex-qkd-abort-weighted-secrecy-distance",
+    "ex-qkd-secrecy-and-correctness-are-independent"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-qkd-finite-authenticated-protocol",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "Definition, register identification and displayed abort output",
+      "finding": "The original registers were identified with the key alphabet K, so the displayed abort ket was not a vector in A or B. Specifying full registers Q_(|K|+1) labelled by K union {bot}, with bot distinct and last, makes the abort and accepted blocks well typed. Accepted-state calculations use the key subspaces Q_|K| and zero extension; no claim is weakened.",
+      "repair": "Declared ordered K-plus-abort computational bases for full A,B and accepted K-subspace identifications with zero extension.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-qkd-abort-weighted-secrecy-distance",
+      "severity": "nonfatal",
+      "locus": "Frontmatter title",
+      "finding": "The title incorrectly names abort probability as the weight. The Example and verification correctly use p_acc=3/4 and conditional distance 1/2, giving secrecy and real-ideal distance 3/8 with zero mismatch. Renamed the title to acceptance probability and made the uniform accepted-key state explicit, with zero on the abort coordinate.",
+      "repair": "Changed Abort probability to Acceptance probability and expanded tau_A in verification step 2.1 to the two accepted-key projectors.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "def-qkd-finite-authenticated-protocol",
+      "ex-qkd-abort-weighted-secrecy-distance"
+    ],
+    "claim_and_conventions": "Full A,B carry ordered K then bot; accepted calculations restrict to the K subspaces and embed by zero extension. Common abort and all block probabilities are unchanged.",
+    "source_evidence": "Local mathematical definitions inspected; no external source reading claimed. Published finite register and tensor-register definitions, density/channel/instrument definitions and instrument normalization/conditional-state statements suffice.",
+    "validation": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-qkd-finite-authenticated-protocol.md items/ex-qkd-abort-weighted-secrecy-distance.md --json",
+        "exit_code": 0,
+        "result": "2 files, 1 proof checked, 0 failed; definition not applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-qkd-finite-authenticated-protocol.md items/ex-qkd-abort-weighted-secrecy-distance.md --json",
+        "exit_code": 0,
+        "result": "2 files checked, 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/non-ml-math-remaining-81-2026-10-18-batch-25.proof-contracts.json --strict --items lem-qkd-abort-aware-ideal-output-is-state,ex-qkd-abort-weighted-secrecy-distance",
+        "exit_code": 0,
+        "result": "2/2 items checked, 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-qkd-finite-authenticated-protocol.md items/ex-qkd-abort-weighted-secrecy-distance.md",
+        "exit_code": 0,
+        "result": "2 items, 3 steps, 0 defects; batched once after all item edits."
+      }
+    ],
+    "unresolved_obligations": [],
+    "consumer_examination": [
+      {
+        "id": "def-qkd-abort-aware-composable-security",
+        "path": "items/def-qkd-abort-aware-composable-security.md",
+        "affected_use": "Definition: abort/accepted TE block sums, full ideal output with |bot,bot,t>, uniform tau_A and tau_AB over K, and p_acc-weighted conditional trace distance.",
+        "disposition": "unaffected",
+        "reason": "All full output projectors now lie in the declared K-plus-abort registers. Uniform states sum over K and have zero abort weight; conditional operators may be restricted to K under the explicit convention. Formulas, normalization and error definitions remain sound."
+      },
+      {
+        "id": "lem-qkd-abort-aware-ideal-output-is-state",
+        "path": "items/lem-qkd-abort-aware-ideal-output-is-state.md",
+        "affected_use": "F1 and proof steps 1.1–3.1 use orthogonal nonnegative abort/accepted blocks and sum their traces; step 2.1 already says all other diagonal entries are zero.",
+        "disposition": "mathematically_unaffected",
+        "reason": "Adding the abort coordinate supplies precisely the orthogonal slots assumed by the proof. Zero extension preserves positivity and trace; every state and the zero-acceptance argument remain valid. Only the necessary supplier-quotation mirror requires synchronization."
+      },
+      {
+        "id": "thm-qkd-composable-secrecy-sum-bound",
+        "path": "items/thm-qkd-composable-secrecy-sum-bound.md",
+        "affected_use": "Proof 1.1 cancels the common abort block; 1.2–1.3 apply the K-indexed copy channel to normalized accepted states, then 2.1 weights their distances by p_acc.",
+        "disposition": "unaffected",
+        "reason": "Accepted states are explicitly identified with Q_|K| key subspaces, where the cited K-indexed copy map is trace preserving. The full embeddings add zero blocks, preserving trace norms by the block lemma. Abort cancellation, correctness cost and secrecy term are unchanged."
+      },
+      {
+        "id": "ex-qkd-abort-weighted-secrecy-distance",
+        "path": "items/ex-qkd-abort-weighted-secrecy-distance.md",
+        "affected_use": "Verification 1.1–1.2 place mass 1/4 on |bot,bot,t> and accepted masses on |0,0,t>, |1,1,t>; 2.1 compares the accepted Alice state with tau_A.",
+        "disposition": "assigned_repair",
+        "reason": "The full three-dimensional key registers now contain all displayed kets. Explicit tau_A notation avoids confusing the accepted two-dimensional identity with the full identity; the nonzero eigenvalues and all claimed errors are unchanged."
+      },
+      {
+        "id": "ex-qkd-secrecy-and-correctness-are-independent",
+        "path": "items/ex-qkd-secrecy-and-correctness-are-independent.md",
+        "affected_use": "No-abort Verification 1.1 writes Alice marginal I/2 and 2.1 uses |0><0|-I/2; both computations involve only accepted labels 0 and 1.",
+        "disposition": "unaffected",
+        "reason": "By the new accepted-state convention, I denotes the identity on Q_2 for these accepted-only calculations; zero embedding into the full key register adds one zero eigenvalue. The mismatch probabilities 1 and 0 and secrecy distances 0 and 1/2 remain correct."
+      }
+    ],
+    "page_examination": [
+      {
+        "path": "library/information-theory/quantum-key-distribution-and-composable-secrecy.md",
+        "affected_use": "Page inventory places the protocol definition first; summary promises finite classical output blocks with common abort and acceptance-weighted secrecy.",
+        "disposition": "unaffected",
+        "reason": "The explicit abort basis realizes the already advertised common-abort output and changes no page claim."
+      },
+      {
+        "path": "library/information-theory/quantum-key-distribution-and-composable-secrecy-examples.md",
+        "affected_use": "Summary states abort probability 1/4 and real-ideal distance/secrecy error 3/8 for deterministic accepted key 0.",
+        "disposition": "unaffected",
+        "reason": "These numbers match the recomputed output law and the corrected acceptance-weight title."
+      }
+    ],
+    "propagation": "Only def-qkd-finite-authenticated-protocol Definition changed. Its five direct item consumers were found by exact ID search in items/ and library/ (no aliases are declared), all belong to the frozen frontier and are listed in downstream. No consumer Statement or Definition changed; propagation stops at this hop. Example section is byte-identical to the assigned version.",
+    "published_consumer_findings": [],
+    "repair_complete": true,
+    "metadata_repairs": [
+      {
+        "path": "research/non-ml-math-remaining-81-2026-10-18-batch-25.pages.json",
+        "change": "Only the assigned example title mirror now says Acceptance probability."
+      },
+      {
+        "path": "research/non-ml-math-remaining-81-2026-10-18-batch-25.proof-contracts.json",
+        "change": "Synchronized the exact protocol-Definition quotation in the assigned example and ideal-output lemma; synchronized only the assigned example step-2.1 derivation text. No prior risk-review or independent-review record was rewritten."
+      }
+    ],
+    "shared_write": "Acquired step5-shared-write-lock as step5-v2-initial-r1-u25; reread current metadata, edited necessary mirrors, ran strict focused contract validation, then released the lock.",
+    "review_hash_binding": "Each item was bound by review-contexts immediately after its mathematical review and before later item edits. After checking the metadata-only mirrors and unchanged consumer effects, review-contexts was run for both items; both guard and review-context hashes remained identical to the immediately recorded hashes.",
+    "next_action": "Controller collection and ordinary consumer-owner processing/certification/rejudgment; one confirmed-fatal subject in this round requires another adjudication round. No independent review, judgment, stamp or closure is claimed."
+  }
+}

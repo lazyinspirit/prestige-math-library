@@ -1,0 +1,1202 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-temperley-lieb-critical-gram-unit-interval",
+    "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors",
+    "lem-temperley-lieb-signed-forest-candidates-and-their-composition",
+    "lem-temperley-lieb-spencer-support-binomial-and-reflection-calculus",
+    "lem-temperley-lieb-support-character-carry-and-simple-extras",
+    "thm-temperley-lieb-spencer-decomposition-numbers-over-arbitrary-fields"
+  ],
+  "contracts": {
+    "lem-temperley-lieb-critical-gram-unit-interval": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-temperley-lieb-link-state-gram-determinant",
+          "source_section": "Statement",
+          "quote": "Let $q\\in\\mathbb C^\\times$, $\\delta=q+q^{-1}$, $n\\ge0$, and $0\\le p\\le\\lfloor n/2\\rfloor$. Put $t=n-2p$, and let $G_{n,p}$ be the Gram matrix of the link-state form on $W_{n,t}(\\mathbb C,\\delta)$ in its link-state basis. Set\n\n$$d_{n,r}=\\binom nr-\\binom n{r-1},\\qquad \\binom n{-1}=0.$$\n\nThen\n\n$$\\det G_{n,p}=\\prod_{j=1}^{p}\\left(\\frac{[n-2p+1+j]_q}{[j]_q}\\right)^{d_{n,p-j}}.$$\n\nThe empty product for $p=0$ is $1$. The right side is interpreted as its polynomial continuation in $\\delta$ at parameter values where an individual displayed quotient has a removable zero-over-zero form.",
+          "uses": []
+        },
+        {
+          "fact": "F2",
+          "source": "cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, $\\delta\\in F$, and $n\\ge0$. Put $D_{n,t}=W_{n,t}(F,\\delta)/\\operatorname{rad}(\\phi_{n,t})$ for each allowed $t$. Then the nonzero $D_{n,t}$ are absolutely simple and form a complete set of pairwise nonisomorphic simple right $\\mathrm{TL}_n(F,\\delta)$-modules. Moreover, $D_{n,t}\\ne0$ exactly when $\\phi_{n,t}$ is not identically zero; in that case $\\operatorname{rad}(\\phi_{n,t})$ is the unique maximal proper submodule and $D_{n,t}$ is the simple head of $W_{n,t}$. If $\\phi_{n,t}$ is identically zero, then $D_{n,t}=0$, but no conclusion about the actual head of $W_{n,t}$ follows.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-temperley-lieb-quantum-integers-and-quantum-characteristic",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit and $\\delta\\in R$. Define the quantum integers by\n\n$$[0]_\\delta=0,\\qquad [1]_\\delta=1,\\qquad [r+1]_\\delta=\\delta[r]_\\delta-[r-1]_\\delta\\quad(r\\ge1).$$\n\nThe **quantum characteristic** of $(R,\\delta)$ is the least positive integer $\\ell$ with $[\\ell]_\\delta=0$, if one exists, and $\\ell=\\infty$ otherwise. No element of $R$ is inverted in this definition.\n\nFor $q\\in\\mathbb C^\\times$ and $\\delta=q+q^{-1}$, write $[r]_q=[r]_\\delta$. If $q\\ne\\pm1$, this agrees with $(q^r-q^{-r})/(q-q^{-1})$; at $q=\\pm1$ the recurrence gives $[r]_q=rq^{r-1}$. For complex-parameter classification, write $\\kappa=\\operatorname{ord}(q^2)$, with $\\kappa=\\infty$ when $q^2$ has infinite order. If $q\\ne\\pm1$, the quantum characteristic equals $\\kappa$ when $\\kappa<\\infty$ and is $\\infty$ otherwise. At $q=\\pm1$, $\\kappa=1$ but the complex quantum characteristic is $\\infty$, because $[r]_q=rq^{r-1}\\ne0$ for every positive $r$.\n\nFor a field $K$ of positive characteristic $p$, set $p(0)=1$ and, when $\\ell<\\infty$, set $p(i)=\\ell p^{i-1}$ for $i\\ge1$. In characteristic zero and finite $\\ell$, the finite digit scale is $p(1)=\\ell$; the separate characteristic-zero criterion below uses $a\\ell-1$ for arbitrary positive integers $a$. If $\\ell=\\infty$, every finite index is already in the range $n<\\ell$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-irreducible-quotient-adjoins-a-root",
+          "source_section": "Statement",
+          "quote": "Let $p\\in F[x]$ be monic and irreducible, and put\n$K=F[x]/(p)$ and $a=x+(p)$. Then $K$ is a field extension of $F$, $p(a)=0$,\nand every element of $K$ has a unique representative $r$ with\n$\\deg r<\\deg p$ (with $r=0$ allowed). In particular, if $\\deg p=n$, every\nelement is uniquely\n$$c_0+c_1a+\\cdots+c_{n-1}a^{n-1},\\qquad c_j\\in F.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-temperley-lieb-critical-gram-unit-interval-1.1",
+          "claim": "Each Gram entry is a monomial in the loop parameter with integer coefficient, so its determinant is a polynomial $D(T)\\in\\mathbb Z[T]$. Clear the quantum-integer denominators in",
+          "step": "1.1",
+          "inputs": [
+            "F1]",
+            "obtaining an equality between integer polynomials for every complex loop parameter. Every complex number has the form $q+q^{-1}$ for a nonzero $q$",
+            "and a polynomial with infinitely many distinct complex zeros is zero. Thus this is an integer polynomial identity",
+            "which reduces to an identity over every field. No division after specialization is involved in this conclusion. [F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-critical-gram-unit-interval-2.1",
+          "claim": "Adjoin $q_0\\ne0$ with $q_0+q_0^{-1}=\\delta$ using",
+          "step": "2.1",
+          "inputs": [
+            "F3]",
+            "and work in formal Laurent series over that extension. Set $q(t)=q_0(1+t)$ and $\\delta(t)=q(t)+q(t)^{-1}$. This is a nonconstant series: even if its linear coefficient vanishes",
+            "its first nonconstant coefficient in degree two is nonzero. Hence substituting $\\delta(t)$ in a nonzero polynomial gives a nonzero series",
+            "since otherwise the nonconstant series $\\delta(t)$ would satisfy a polynomial over a field and therefore be constant in the algebraic closure of that field. Equivalently",
+            "factor the polynomial over an algebraic closure and note that each factor $\\delta(t)-a$ is nonzero. Every quantum integer $[j]_{\\delta(t)}$ is nonzero by its Laurent expression $q(t)^{1-j}(1-q(t)^{2j})/(1-q(t)^2)$",
+            "interpreted as a rational identity. We may consequently use the product in [F1] in the Laurent-series field. Its constant coefficient is $D(\\delta)$. [F1",
+            "F3",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-critical-gram-unit-interval-3.1",
+          "claim": "Suppose the characteristic is $p>0$ and put $c=1$ for odd $p$ and $c=2$ for $p=2$. For every positive integer $j$, the order of $1-(1+t)^{2j}$ is $c p^{\\nu_p(j)}$: factor $2j=p^h u$ with $p\\nmid u$, use $(1+t)^{p^h}=1+t^{p^h}$, and the coefficient of $t^{p^h}$ is the nonzero residue of $u$. If $q_0^2\\ne1$, finite $\\ell$ is the order of $q_0^2$, and it is prime to $p$ because a field has no nonidentity element of order $p$. Thus $[j]_{\\delta(t)}$ has order zero for $\\ell\\nmid j$ and order $c p^{\\nu_p(j/\\ell)}$ for $\\ell\\mid j$. If $q_0^2=1$, the recurrence gives $[j]_\\delta=j q_0^{j-1}$ and $\\ell=p$; the denominator $1-q(t)^2$ has order $c$, so the order of $[j]_{\\delta(t)}$ is $c(p^{\\nu_p(j)}-1)$. These statements hold also in characteristic two.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-critical-gram-unit-interval-4.1",
+          "claim": "For a critical label $m+1=B\\ell$, the numerator and denominator of a factor in",
+          "step": "4.1",
+          "inputs": [
+            "F1] both have order zero when $\\ell\\nmid j$. If $j=j'\\ell$",
+            "step 3.1 shows that their orders agree whenever $\\nu_p(B+j')=\\nu_p(j')$",
+            "in both of its cases",
+            "including $\\ell=p$. Write $B=p^v b'$ as in the Statement and suppose $0<j'<p^v(p-b)$. If $p^v\\nmid j'$",
+            "then $\\nu_p(j')<v$ and adding $B$ preserves that valuation. Otherwise $j'=p^v h$ with $1\\le h<p-b<p$",
+            "so both $h$ and $b'+h$ are nonzero modulo $p$ and both valuations equal $v$. Thus the equality holds for every $j'\\le\\lfloor(A-B)/2\\rfloor$ under the stated bound. Every factor in the determinant product is consequently a Laurent-series unit with nonzero constant term. Their product has nonzero constant term",
+            "proving $D(\\delta)\\ne0$. This nonvanishing descends to the original field",
+            "so [F2] proves simplicity. [F1",
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-critical-gram-unit-interval-5.1",
+          "claim": "In characteristic zero with finite $\\ell$, one has $q_0^2\\ne1$. Each quantum integer whose index is a multiple of $\\ell$ has a simple zero along $q(t)$, because differentiating $1-q(t)^{2j}$ gives nonzero coefficient $-2j$ at $t=0$. All other indices give units. Therefore each numerator and denominator in the critical determinant product has the same order, either zero or one, and its quotient has nonzero constant term. The same argument as in step 4.1 proves simplicity. If $\\ell=\\infty$, every specialized numerator and denominator in",
+          "step": "5.1",
+          "inputs": [
+            "F1] is nonzero",
+            "so the determinant is nonzero directly. Finally",
+            "when $m=n-2$",
+            "the product consists solely of $[n]_\\delta$ to exponent one. Thus $[n]_\\delta\\ne0$ implies the last simplicity assertion. [F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the empty determinant product."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 separates q0-squared1, including characteristic2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 includes the all-defect Gram matrix(1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 through 4.1 use formal-series units rather than division by specialized zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 uses the strict divided-label interval including its first integer."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 adjoins at most one quadratic root."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Only sufficient simplicity is claimed; step 4.1 proves that implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the integral determinant identity by clearing denominators."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "General proof is symbolic. Separately retained independent Gram-rank dimension sanity evidence is not a registered workflow gate and proves no general module-structure assertion."
+    },
+    "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-link-state-standard-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit, let $\\delta\\in R$, and let $n\\ge0$. Let $t$ be an integer with $0\\le t\\le n$ and $n-t$ even. The diagram module $M_R(n,t)$ has $n$ bottom boundary points and $t$ top boundary points, with stacking and loop removal as in [[def-temperley-lieb-diagram-category]]. A component of a basis diagram is **propagating** if it meets both the bottom and top boundaries. Write $\\operatorname{prop}(D)$ for the number of propagating components of a diagram $D:n\\to t$.\n\nLet $M_R^{<t}(n,t)$ be the $R$-span of the basis diagrams $D:n\\to t$ with $\\operatorname{prop}(D)<t$. Define the **Temperley\u2013Lieb link-state standard module**\n\n$$W_{n,t}(R,\\delta):=M_R(n,t)/M_R^{<t}(n,t).$$\n\nWrite $T_{n,t}$ for the set of diagrams in $\\mathcal D(n,t)$ with exactly $t$ propagating components. The cosets of these diagrams form an $R$-basis of $W_{n,t}$. Identifying each diagram with its bottom arcs and defects gives a partial matching of the $n$ ordered bottom sites, with the additional condition that the $t$ unpaired sites are joined to the ordered top sites by noncrossing propagating strands. In particular, no defect lies inside an arc. The unpaired sites are called **defects**. Thus $t$ is the defect or through-line number; in sources using $p$ for the number of arcs, $p=(n-t)/2$.\n\nThe intended right action of $\\mathrm{TL}_n(R,\\delta)$ is $x\\cdot a=[x\\circ a]$, where $x\\in M_R(n,t)$, $a\\in M_R(n,n)$, and $x\\circ a$ stacks $x$ above $a$. The submodule $M_R^{<t}(n,t)$ is stable under this action, so it descends to $W_{n,t}$; the complete well-definedness argument is [[lem-temperley-lieb-link-state-module-action-is-well-defined]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-temperley-lieb-link-state-module-action-is-well-defined",
+          "source_section": "Statement",
+          "quote": "For $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ as in [[def-temperley-lieb-link-state-standard-modules]], the rule $x\\cdot a=[x\\circ a]$ defines a unital right $\\mathrm{TL}_n(R,\\delta)$-module structure on $W_{n,t}(R,\\delta)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit ([[def-algebra-over-a-commutative-ring]]) and let $\\delta\\in R$. The object labels are the nonnegative integers $n=0,1,2,\\ldots$. For labels $m,n$, place bottom points $b_1,\\ldots,b_m$ and top points $t_1,\\ldots,t_n$ along the rectangle from left to right on their respective edges. Their cyclic order is $t_1,\\ldots,t_n,b_m,\\ldots,b_1$. When $m=n=0$, the empty matching is included.\n\nAn $(m,n)$ **diagram** is a perfect matching of these $m+n$ boundary labels which is noncrossing: there are no four labels $a,b,c,d$ in cyclic order whose matched pairs are $\\{a,c\\}$ and $\\{b,d\\}$. A picture consists of disjoint arcs realizing the matching; equality is equality of the matching, so planar deformation that fixes the boundary does not change a diagram. If $m+n$ is odd, there are no such diagrams. Write $\\mathcal D(m,n)$ for this set and define the $R$-module\n\n$$M_R(m,n):=R^{(\\mathcal D(m,n))},$$\n\nthe free $R$-module on the set of diagrams ([[def-free-module-on-a-set-and-standard-basis]]). In particular, its diagram basis is empty when $m+n$ is odd.\n\nFor basis diagrams $D:m\\to n$ and $E:n\\to p$, stack $E$ above $D$ and identify the $n$ matching boundary points. The resulting finite graph has degree two at each identified point, where degree means the number of incident arcs. Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles. Denote this output by $E\\circ D$ and extend the rule $R$-bilinearly to a map $M_R(n,p)\\times M_R(m,n)\\to M_R(m,p)$. A following result proves closure of these operations on the diagram modules and the category axioms.\n\nThe matching $1_n:n\\to n$ pairs each bottom point to the top point directly above it. Horizontal juxtaposition, with the left diagram placed first, defines $m\\otimes m'=m+m'$ on object labels and $D\\otimes D'$ on basis diagrams; extend it $R$-bilinearly to the modules. A following result proves that these operations give a strict monoidal category.\n\nFor $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position. Define $\\mathrm{TL}_n(R,\\delta)$ to be the $R$-module $M_R(n,n)$ with bilinear multiplication $xy:=x\\circ y$ and distinguished element $1_n$. A following result proves that it is a unital associative $R$-algebra and identifies it with the endomorphism algebra at object $n$.\n\nThe left factor is stacked above the right factor. The loop value is $\\delta$; no invertibility or nonzero condition on $\\delta$ is part of these data.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-temperley-lieb-diagram-category-laws",
+          "source_section": "Statement",
+          "quote": "For every commutative ring $R$, loop value $\\delta\\in R$, and objects $m,n,p,q\\ge0$, the raw diagram data of [[def-temperley-lieb-diagram-category]] form a strict monoidal category $\\mathcal{TL}_R(\\delta)$ with hom-modules $M_R(m,n)$ and the stated $R$-bilinear stacking composition. Composition is associative, the identity diagrams are two-sided identities, and horizontal juxtaposition is a strict monoidal bifunctor with unit object $0$. Consequently $\\operatorname{End}_{\\mathcal{TL}_R(\\delta)}(n)=\\mathrm{TL}_n(R,\\delta)$ is a unital associative $R$-algebra whose underlying $R$-module is free on its noncrossing pairing diagrams.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-link-state-gram-form-is-invariant",
+          "source_section": "Statement",
+          "quote": "Let $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ be as in [[def-temperley-lieb-link-state-standard-modules]]. For link states $x,y$, let $x^*$ denote reflection across a horizontal line. The diagram $y\\circ x^*:t\\to t$ is either $\\delta^c1_t$ for some $c\\ge0$ or has fewer than $t$ propagating components. Define $\\phi_{n,t}(x,y)=\\delta^c$ in the first case and $0$ in the second, and extend $R$-bilinearly. Then $\\phi_{n,t}$ is symmetric and satisfies\n\n$$\\phi_{n,t}(x\\cdot a,y)=\\phi_{n,t}(x,y\\cdot a^*)$$\n\nfor all $x,y\\in W_{n,t}(R,\\delta)$ and $a\\in\\mathrm{TL}_n(R,\\delta)$. Here $a^*$ is reflection across a horizontal line. The matrix of $\\phi_{n,t}$ in the link-state basis is the Gram matrix obtained by reflecting and capping two link states, with one factor $\\delta$ for each closed loop.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, $\\delta\\in F$, and $n\\ge0$. Put $D_{n,t}=W_{n,t}(F,\\delta)/\\operatorname{rad}(\\phi_{n,t})$ for each allowed $t$. Then the nonzero $D_{n,t}$ are absolutely simple and form a complete set of pairwise nonisomorphic simple right $\\mathrm{TL}_n(F,\\delta)$-modules. Moreover, $D_{n,t}\\ne0$ exactly when $\\phi_{n,t}$ is not identically zero; in that case $\\operatorname{rad}(\\phi_{n,t})$ is the unique maximal proper submodule and $D_{n,t}$ is the simple head of $W_{n,t}$. If $\\phi_{n,t}$ is identically zero, then $D_{n,t}=0$, but no conclusion about the actual head of $W_{n,t}$ follows.",
+          "uses": []
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors-1.1",
+          "claim": "We construct $y,z:n\\to r$ with $y\\circ z^*=1_r$. Write $n=r+2k$. If $k=0$, take identities. If $r>0$, take $y$ with bottom cups $(1,2),(3,4),\\ldots,(2k-1,2k)$ and all remaining sites propagating; take $z$ with cups $(2,3),(4,5),\\ldots,(2k,2k+1)$ and all remaining sites propagating. In $y\\circ z^*$, the first through strand follows the single alternating chain through sites $1,2,\\ldots,2k+1$, while each remaining through strand is straight. There is no closed component, and the exterior matching is $1_r$. If $r=0$ and $\\delta\\ne0$, choose the same adjacent perfect matching $y=z_0$ on $n=2k$ sites and put $z=\\delta^{-k}z_0$. Then $y\\circ z^*=\\delta^{-k}\\delta^k1_0=1_0$. This also handles $n=r=0$ with the empty diagram and no scalar inversion.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors-2.1",
+          "claim": "Set $e=z^*\\circ y\\in A_n$. Step 1.1 gives $e^2=e$. The map $A_r\\to eA_ne$ sending $a$ to $z^*\\circ a\\circ y$ is multiplicative because $y\\circ z^*=1_r$, and its inverse is $b\\mapsto y\\circ b\\circ z^*$. Indeed the first composite is identity, and the second is $b\\mapsto ebe=b$ on the corner. Thus it is an algebra isomorphism with identity $1_r$ mapping to $e$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors-3.1",
+          "claim": "The functor $M\\mapsto Me$ preserves exact sequences. If $0\\to M'\\to M\\to M''\\to0$ is exact, its injection remains injective on the subspaces obtained by multiplication by $e$. If $x''e\\in M''e$, lift $x''$ to $x\\in M$ and then $xe$ lifts $x''e$, proving surjectivity. If $xe$ maps to zero, it belongs to $M'$ and satisfies $(xe)e=xe$, hence belongs to $M'e$, proving exactness in the middle. These are corner-module maps under step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors-3.2",
+          "claim": "For every label $t$, the map $W_{n,t}e\\to W_{r,t}$ sending $xe$ to $x\\circ z^*$ is well-defined, since diagrams of propagation less than $t$ remain such after composition. Its inverse sends $u:r\\to t$ to $u\\circ y$, which lies in $W_{n,t}e$. Their composites are identity by $y\\circ z^*=1_r$ and $xe=x\\circ z^*\\circ y$. They respect right $A_r$ action under the corner identification in step 2.1. If $t>r$, every diagram $r\\to t$ has propagation less than $t$, so both spaces vanish.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors-4.1",
+          "claim": "We verify compatibility with radicals without requiring $e=e^*$. Swapping $y,z$ in step 3.2 identifies $W_{n,t}e^*$ with $W_{r,t}$ by $v\\mapsto v\\circ z$. The form pairing of $u\\circ y$ and $v\\circ z$ is the coefficient of $1_t$ in $u\\circ y\\circ z^*\\circ v^*=u\\circ v^*$, hence is $\\phi_{r,t}(u,v)$. Moreover, for $x\\in W_{n,t}e$ and any $w\\in W_{n,t}$, invariance gives $\\phi_{n,t}(x,w)=\\phi_{n,t}(xe,w)=\\phi_{n,t}(x,we^*)$. Therefore $x$ is in the full radical precisely when its pairing against $W_{n,t}e^*$ vanishes. Under the two identifications this is exactly the condition that $u$ belongs to $\\operatorname{rad}\\phi_{r,t}$. Thus $(\\operatorname{rad}\\phi_{n,t})e$ corresponds to $\\operatorname{rad}\\phi_{r,t}$, and exactness in step 3.1 proves $D_{n,t}e\\cong D_{r,t}$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors-5.1",
+          "claim": "A finite-dimensional $A_n$-module has a composition series by induction on its vector-space dimension. Apply the exact functor of step 3.1 to such a series for $W_{n,m}$. By",
+          "step": "5.1",
+          "inputs": [
+            "F3] and step 4.1",
+            "each simple factor $D_{n",
+            "t}$ contributes either zero or the simple factor $D_{r",
+            "t}$. Distinct surviving labels remain distinct by [F3]. In particular",
+            "only the factor with $t=r$ contributes $D_{r",
+            "r}$",
+            "and it contributes once. Step 4.1 identifies the resulting filtered module with $W_{r",
+            "m}$",
+            "giving the claimed multiplicity equality. [F3",
+            "step 3.1",
+            "step 3.2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors-6.1",
+          "claim": "The sole basis vector of $W_{r,r}$ is $1_r$; every generator lowers propagation and thus acts by zero, and its form value on that vector is $1$. Hence $D_{r,r}=W_{r,r}$ is the stated one-dimensional module. Finally, for $n>0$ even and $\\delta=0$, gluing any two perfect matchings creates at least one closed component, so $\\phi_{n,0}$ is identically zero and $D_{n,0}=0$. This explains the precise excluded branch and completes the assertion over every field, including characteristic two.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the empty identity retraction at n=r=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 6.1 identify zero cell quotients and exclude n>r=0,delta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1 proves W_r,r is one dimensional with form1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 pairs e with e*, not a false selfadjoint assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.2 explicitly kills labels t>r."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs retractions using specified finite cup patterns without choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 5.1 counts surviving composition factors."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 and exactness give the multiplicity equality in both directions."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "General proof is symbolic. Separately retained independent Gram-rank dimension sanity evidence is not a registered workflow gate and proves no general module-structure assertion."
+    },
+    "lem-temperley-lieb-signed-forest-candidates-and-their-composition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-link-state-standard-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit, let $\\delta\\in R$, and let $n\\ge0$. Let $t$ be an integer with $0\\le t\\le n$ and $n-t$ even. The diagram module $M_R(n,t)$ has $n$ bottom boundary points and $t$ top boundary points, with stacking and loop removal as in [[def-temperley-lieb-diagram-category]]. A component of a basis diagram is **propagating** if it meets both the bottom and top boundaries. Write $\\operatorname{prop}(D)$ for the number of propagating components of a diagram $D:n\\to t$.\n\nLet $M_R^{<t}(n,t)$ be the $R$-span of the basis diagrams $D:n\\to t$ with $\\operatorname{prop}(D)<t$. Define the **Temperley\u2013Lieb link-state standard module**\n\n$$W_{n,t}(R,\\delta):=M_R(n,t)/M_R^{<t}(n,t).$$\n\nWrite $T_{n,t}$ for the set of diagrams in $\\mathcal D(n,t)$ with exactly $t$ propagating components. The cosets of these diagrams form an $R$-basis of $W_{n,t}$. Identifying each diagram with its bottom arcs and defects gives a partial matching of the $n$ ordered bottom sites, with the additional condition that the $t$ unpaired sites are joined to the ordered top sites by noncrossing propagating strands. In particular, no defect lies inside an arc. The unpaired sites are called **defects**. Thus $t$ is the defect or through-line number; in sources using $p$ for the number of arcs, $p=(n-t)/2$.\n\nThe intended right action of $\\mathrm{TL}_n(R,\\delta)$ is $x\\cdot a=[x\\circ a]$, where $x\\in M_R(n,t)$, $a\\in M_R(n,n)$, and $x\\circ a$ stacks $x$ above $a$. The submodule $M_R^{<t}(n,t)$ is stable under this action, so it descends to $W_{n,t}$; the complete well-definedness argument is [[lem-temperley-lieb-link-state-module-action-is-well-defined]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "6.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-temperley-lieb-link-state-module-action-is-well-defined",
+          "source_section": "Statement",
+          "quote": "For $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ as in [[def-temperley-lieb-link-state-standard-modules]], the rule $x\\cdot a=[x\\circ a]$ defines a unital right $\\mathrm{TL}_n(R,\\delta)$-module structure on $W_{n,t}(R,\\delta)$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "6.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-quantum-binomial-digit-criterion",
+          "source_section": "Statement",
+          "quote": "For $0\\le k\\le n$, let $G_{n,k}(Q)$ be the polynomial $\\sum_w Q^{\\operatorname{inv}(w)}$, summed over binary words with $k$ ones and $n-k$ zeros, where $\\operatorname{inv}(w)$ counts pairs with a one to the left of a zero. There is a unique polynomial $B_{n,k}(T)\\in\\mathbb Z[T]$ such that\n\n$$B_{n,k}(q+q^{-1})=q^{-k(n-k)}G_{n,k}(q^2).$$\n\nIt agrees as a rational-function identity with $[n]!/([k]![n-k]!)$; its value at a specialized loop parameter is the polynomial value, without division by vanishing factorials.\n\nFor a field $K$, $\\delta\\in K$, recurrence quantum characteristic $\\ell$, and $p=\\operatorname{char}K$, every $B_{n,k}(\\delta)$ for $0\\le k\\le n$ is nonzero exactly as follows: if $\\ell=\\infty$, at every finite $n$; if $\\ell<\\infty$ and $p>0$, when $n<\\ell$ or $n=a\\ell p^{i-1}-1$ with $i\\ge1$ and $1\\le a<p$; if $\\ell<\\infty$ and $p=0$, when $n<\\ell$ or $n=a\\ell-1$ for a positive integer $a$.",
+          "uses": [
+            "6.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-spencer-support-binomial-and-reflection-calculus",
+          "source_section": "Statement",
+          "quote": "Use the digits and place values in [[def-temperley-lieb-spencer-digit-support]], and write $N+1=\\sum_{j=0}^r n_js_j$ with $n_r>0$. When $\\ell<\\infty$, each signed expression $\\sum_j\\varepsilon_jn_js_j-1$ with $\\varepsilon_r=1$ lies in $[0,N]$, has parity $N$, and determines its signs at every nonzero digit uniquely. Thus the support has $2^h$ elements, where $h$ is the number of nonzero digits below $r$.\n\nFor $0\\le v\\le u$, the specialized quantum binomial $B_{u,v}(\\delta)$ is nonzero exactly when each mixed-radix digit of $v$ is at most the corresponding digit of $u$. In characteristic zero this uses the two digits with places $1,\\ell$; if $\\ell=\\infty$, every such binomial is nonzero.\n\nFor any $0<k\\le r$, changing all signs at indices less than $k$ reflects the corresponding support element about the wall $H-1$, where $H=\\sum_{j\\ge k}\\varepsilon_jn_js_j$ is a positive multiple of $s_k$. In particular, writing $L=\\sum_{j<k}\\varepsilon_jn_js_j$ gives the pair $H+L-1,H-L-1$ and $|L|<s_k$.\n\nLet $a,b,c$ belong to this support, and suppose their sets of negative nonzero digits satisfy $A\\subseteq B\\subseteq C$. Then $a\\ge b\\ge c$ and the specialized quantum binomial\n$$B_{(a-c)/2,(a-b)/2}(\\delta)$$\nis nonzero. Here $B$ denotes the polynomial quantum binomial of [[lem-temperley-lieb-quantum-binomial-digit-criterion]]. If $\\ell=\\infty$, the same last assertion holds for the only triple $a=b=c=N$.",
+          "uses": [
+            "6.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-temperley-lieb-spencer-digit-support",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field, let $\\delta\\in K$, and let $\\ell$ be the recurrence quantum characteristic of $(K,\\delta)$ from [[def-temperley-lieb-quantum-integers-and-quantum-characteristic]]. Put $P=\\operatorname{char}K$ when $\\operatorname{char}K>0$, and put $P=\\infty$ when $\\operatorname{char}K=0$. In this definition $\\ell$ is Spencer's recurrence parameter; it is not the complex order $\\kappa=\\operatorname{ord}(q^2)$.\n\nSuppose first that $\\ell<\\infty$. Set $s_0=1$ and $s_i=\\ell P^{i-1}$ for each $i\\ge1$ with $P<\\infty$. If $P=\\infty$, set $s_1=\\ell$ and omit all $s_i$ for $i\\ge2$. Every $M\\in\\mathbb N$ has a unique expansion\n$$M=\\sum_{i=0}^{r}m_i s_i,$$\nwhere $0\\le m_0<\\ell$ and $0\\le m_i<P$ for $i\\ge1$ when $P<\\infty$. When $P=\\infty$, write $M=m_0+m_1\\ell$ with $0\\le m_0<\\ell$ and $m_1\\ge0$; if $m_1=0$, take $r=0$. The highest digit $m_r$ is nonzero unless $M=0$, for which take $r=0$ and $m_0=0$.\n\nFor a label $N\\ge0$, let $n_i$ be the digits of $N+1$, so $N+1=\\sum_{i=0}^{r}n_i s_i$. Define the **Spencer support set**\n$$\\operatorname{Supp}_{\\ell,P}(N)= \\left\\{\\sum_{i=0}^{r}\\varepsilon_i n_i s_i-1: \\varepsilon_i\\in\\{-1,1\\},\\ \\varepsilon_r=1,\\ \\sum_{i=0}^{r}\\varepsilon_i n_i s_i-1\\ge0\\right\\}.$$\nIf $\\ell=\\infty$, define $\\operatorname{Supp}_{\\ell,P}(N)=\\{N\\}$.\n\nThis item defines the digit expansion and a finite set only. Spencer's theorem identifying these sets with decomposition multiplicities, and the separate Jones\u2013Wenzl existence criterion, are not asserted here; both require the full field hypotheses and their own proofs.",
+          "uses": [
+            "7.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors",
+          "source_section": "Statement",
+          "quote": "Let $K$ be any field, $\\delta\\in K$, and let $0\\le r\\le n$ with $n-r$ even. Assume $r>0$ or $\\delta\\ne0$ or $n=r=0$. Put $A_n=\\mathrm{TL}_n(K,\\delta)$, use the right modules $W_{n,t}$ of [[def-temperley-lieb-link-state-standard-modules]], and put $D_{n,t}=W_{n,t}/\\operatorname{rad}\\phi_{n,t}$. There are $y,z:n\\to r$ with $y\\circ z^*=1_r$, and for $r>0$ both may be chosen as basis monic diagrams. There is an idempotent $e\\in A_n$ with $eA_ne\\cong A_r$ such that $M\\mapsto Me$ is exact, sends $W_{n,t}$ to $W_{r,t}$, and sends $D_{n,t}$ to $D_{r,t}$, with value zero when $t>r$.\n\nConsequently, for every allowed $m$,\n$$[W_{n,m}:D_{n,r}]=[W_{r,m}:D_{r,r}],$$\nwhere $W_{r,m}=0$ if $m>r$. The module $D_{r,r}=W_{r,r}$ is one dimensional and every diagram generator acts by zero. Thus the decomposition problem reduces exactly to multiplicities of this trivial module. The excluded case $n>r=0,\\delta=0$ has $D_{n,0}=0$ and is not a simple label.",
+          "uses": [
+            "8.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-temperley-lieb-signed-forest-candidates-and-their-composition-1.1",
+          "claim": "The hook quotient is a polynomial by induction on its forest. Removing the root of a tree cancels its factor $[|F|]_T$, leaving the quotient for its subforest. For a disjoint union of forests of sizes $u,v$, the quotient is $B_{u+v,u}(T)$ times their two quotients, a polynomial by",
+          "step": "1.1",
+          "inputs": [
+            "F2]. The empty forest has weight $1$. For a chain",
+            "numerator and denominator cancel completely",
+            "so its weight is $1$. All further calculations may therefore be proved in $\\mathbb Q(T)$ and then interpreted as identities in $\\mathbb Z[T]$",
+            "before making any field specialization. [F2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-signed-forest-candidates-and-their-composition-2.1",
+          "claim": "We first use loop value $-T$. Consider matchings with a fixed finite number $d$ of cups on a half-infinite ordered row, with all sufficiently far-left sites propagating. A diagram is encoded by the $d$ right cup endpoints, numbered from the right starting at $1$: scanning from right to left, a listed site opens a cup and the next unpaired unlisted site closes the most recent cup; unlisted sites with no open cup propagate. Thus every $d$-element subset of the positive integers encodes exactly one matching. Hook weights are unchanged by adding more leftmost propagating strands, because bending one more such strand adds a root above the entire old forest and cancels its new numerator factor. We may consequently form the formal series $V_d$ of these matchings with their hook weights. Every fixed output coefficient after a local generator or cup attachment involves finitely many terms: only its finitely many cups and the nearest exposed propagating strand can be reconnected. All operations below are defined coefficient by coefficient.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-signed-forest-candidates-and-their-composition-3.1",
+          "claim": "We prove that every local generator kills $V_d$. Fix an output matching $D$ with its simple cup at sites $i,i+1$, and remove that cup to obtain a gap $J$ in $D^-$. A line is exposed to $J$ if an arc from $J$ to an interior point of that line can avoid all other lines. Replacing that line by two lines ending at $i$ and $i+1$ is its nip at $J$. Exactly $D$ itself and these nipped diagrams are the preimages contributing to the coefficient of $D$: a generator changes only the two lines meeting its sites, while the converse reconnection recovers each nip. A line exposed on both sides is nipped only once. Therefore the coefficient is $C_D=-[2]_T h(D)+\\sum_{e\\text{ exposed to }J}h(\\operatorname{nip}_J(e)).$ This enumeration includes loops through the first term and all reconnection terms with coefficient $1$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-signed-forest-candidates-and-their-composition-4.1",
+          "claim": "Here is a textual reduction verifying this coefficient identity. First contract each intervening fixed internal subforest to a weighted interval block: its total edge count is retained in the containing arc's subtree size and its own hook factors are common to all compared terms. Consecutive exposed arcs then have adjacent block endpoints; relabel these endpoints in their order without changing subtree sizes. Suppose those two arcs have endpoints $(a,b),(b+1,c)$, with all their internal subforests retained, and the distinguished simple cup is immediately beyond them at $(c+1,c+2)$. Replace those two arcs by $(a,c),(b,b+1)$. If their subtree sizes are $E_1,E_2$, their merged subtree has size $E_1+E_2$. Every term in $C_D$ other than the two nips of these arcs corresponds to the replaced diagram with hook ratio $[E_1+E_2]_T/([E_1]_T[E_2]_T)$. Comparing the two exceptional nips with the single exceptional nip after replacement leaves a common rational factor times $[E_2]_T[E_1+E_2+1]_T+[E_1]_T-[E_2+1]_T[E_1+E_2]_T=0.$ To verify the ratios, every unchanged arc contributes the same denominator factor; the changed arcs contribute respectively the subtree sizes $E_1,E_2,E_1+E_2,E_2+1,E_1+E_2+1$. The displayed identity follows by induction on $E_1$ from the recurrence for $[j]_T$, with $E_1=0,1$ as immediate base cases. Thus this replacement preserves the vanishing of $C_D$. The reflected replacement does the same on the other side. Each replacement reduces by one the number of exposed arcs on the chosen side; repeated replacements leave at most one exposed arc on each side.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-signed-forest-candidates-and-their-composition-5.1",
+          "claim": "In the half-infinite setting there is always a leftmost propagating strand beyond all the cups under consideration. Bend that strand and the other output strands to put the distinguished cup and the remaining exposed arcs inside one outer arc. This only adds successive roots as in step 2.1. After the reductions of step 4.1, let the sizes of the optional left and right exposed subtrees be $B,C>0$. Canceling the hook factors of unchanged internal subforests, the four contributions in step 3.1 have the common-factor-normalized sum $-\\frac{[2]_T}{[B]_T[C]_T[B+C+2]_T}+\\frac1{[B+1]_T[C+1]_T[B]_T[C]_T}+\\frac1{[B+1]_T[C]_T[B+C+2]_T}+\\frac1{[B]_T[C+1]_T[B+C+2]_T}=0.$ The numerator is $-[2]_T[B+1]_T[C+1]_T+[B+C+2]_T+[B]_T[C+1]_T+[C]_T[B+1]_T$, zero by the same recurrence. If the left subtree is absent, the three terms reduce instead to $-[2]_T/([C]_T[C+2]_T)+1/([C+1]_T[C]_T)+1/([C+1]_T[C+2]_T)$, zero because $[C+2]_T+[C]_T=[2]_T[C+1]_T$. The case of no right subtree is its reflection. If neither is present, the sum is $-[2]_T/[2]_T+1=0$. Thus $C_D=0$ in every case, proving the assertion of step 3.1 as a polynomial identity.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-signed-forest-candidates-and-their-composition-6.1",
+          "claim": "A formal vector killed by every generator is uniquely determined by its coefficient on the fully nested rightmost $d$ cups. Indeed order the endpoint subsets componentwise, with minimum $\\{1,\\ldots,d\\}$. For any other subset $J$, let $i>1$ be its least element with $i-1\\notin J$, and replace $i$ by $i-1$ to obtain $K<J$. In the coefficient at $K$ after applying the generator at $i-1,i$, the coefficient at $J$ occurs with coefficient $1$. Every other contributing subset $L$ satisfies $L<J$: nipping a line different from the one producing $J$ moves an endpoint closer to the right boundary, and the loop term is $K<J$. Setting this coefficient to zero therefore determines the coefficient at $J$ from smaller subsets. Componentwise lower sets are finite, so induction applies. This proof is valid over $\\mathbb Z[T]$ and after any specialization.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-signed-forest-candidates-and-their-composition-6.2",
+          "claim": "We check when the finite candidate $v_{a,b}$ is killed by every generator. Put $d=(a-b)/2$ and $M=(a+b)/2+1$. The cancellation of steps 3.1\u20135.1 applies unchanged whenever an enclosing arc or a propagating strand is exposed to the left of the distinguished cup. Only the remaining case has a missing nip: the distinguished cup is not enclosed by another cup, and there is no propagating strand to its left. Number the original input sites $1,\\ldots,a$ and let the distinguished cup be $(i,i+1)$. Then every site $1,\\ldots,i-1$ is paired within that interval, so $i$ is odd. Add a new leftmost input site $0$ and a new first output site, joined by a propagating strand. Remove $(i,i+1)$ and nip that new strand at its gap, producing the cup $(0,i)$ and a strand from $i+1$ to the new output site. This is the unique additional contributing diagram. Its bent matching has $(a+1+b+1)/2=M$ edges. The new cup $(0,i)$ and the $(i-1)/2$ original cups inside it form a separate tree with $t=(i+1)/2$ edges. Since the original diagram had these $t-1$ cups and the distinguished cup, $1\\le t\\le d$. Every other edge lies to its right, including the bent strand beginning at $i+1$, so no edge of this tree is comparable with an edge of the remaining forest. Any common roots introduced by auxiliary bending of additional strands cancel as in step 2.1 before this split is counted. By step 1.1 its hook weight consequently factors as $B_{M,t}(T)$ times the polynomial hook weights of those two parts. The uncanceled coefficient is the negative of this missing hook weight. For $a=3,b=1,i=1$, the missing matching has a one-edge component and a two-edge chain, giving $B_{3,1}(T)=[3]_T$, whose negative agrees with the direct coefficient $1-T^2$.",
+          "step": "6.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-signed-forest-candidates-and-their-composition-7.1",
+          "claim": "Attaching $V_{s-r}$ to a half-infinite diagram with $r$ cups defines a map to the diagrams with $s$ cups. It commutes with all generators: ordinary surviving diagram compositions commute by associativity, loop terms have the same scalar on both sides, and when a generator joins two propagating strands the failure coefficient is exactly the vanishing coefficient of steps 3.1\u20135.1 after suppressing unchanged cups. Composing two attachment maps attaches a formal vector with the sum of their cup counts. This vector is killed by every generator, so step 6.1 makes it a scalar multiple of the corresponding $V$. The scalar is obtained on the fully nested output diagram. Its only monic factorization first inserts its inner $u$ cups and then its remaining $v$ cups. Indeed every cup in the first factor must be a cup of the nested output, and choosing any cup forces every cup inside it to be chosen too, since a defect cannot lie inside a cup. With exactly $u$ cups, this selects precisely the $u$ innermost cups; the remaining through strands have their uniquely forced order. After bending, the first factor has two chains of lengths $u,v$ below successive common roots and hence weight $B_{u+v,u}(T)$; the second factor has a chain forest and weight $1$. This gives scalar $B_{u+v,u}(T)$. Restricting the attachment maps to a finite row and discarding diagrams using a site beyond its left boundary preserves this composition identity, because further cup insertion never removes such a site. With $u=(a-b)/2,v=(b-c)/2$, this proves the asserted finite candidate-composition identity over loop value $-T$.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 5.1",
+            "step 6.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-signed-forest-candidates-and-their-composition-7.2",
+          "claim": "Now specialize $T=-\\delta$, so the loop value $-T$ is the required $\\delta$. The recurrence gives $[j]_{-\\delta}=(-1)^{j-1}[j]_\\delta$ by induction. Thus the quantum characteristic and all mixed-radix zero tests are unchanged. The hypotheses give $0<d<s_k$ and $s_k\\mid M$. For every $1\\le t\\le d$, at least one digit of $t$ below place $k$ is positive, while every digit of $M$ at those places is zero. By",
+          "step": "7.2",
+          "inputs": [
+            "F2]",
+            "$B_{M",
+            "t}(-\\delta)=0$. Step 6.2 therefore kills every finite failure coefficient. All generators annihilate the candidate. Its chain coefficient is $1$ by step 1.1",
+            "so it is nonzero. [F2",
+            "F3",
+            "step 1.1",
+            "step 6.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-signed-forest-candidates-and-their-composition-8.1",
+          "claim": "Finally, if a linear combination $v\\in W_{a,b}$ is killed by all generators, every adjacent cap at the $a$ inputs kills it modulo propagation less than $b$. This follows by factoring the generator as cup followed by cap: insertion of that cup is injective on the relevant monic diagram basis, so zero after insertion implies zero before insertion. Every diagram $n\\to a$ of propagation less than $a$ has a cup on its $a$-boundary, and an innermost such cup is adjacent; factoring it off shows that its postcomposition with $v$ is zero modulo propagation less than $b$. Postcomposition consequently descends from the quotient $W_{n,a}$ to $W_{n,b}$ and commutes with the diagram action. Nonzeroness for every $n\\ge a$ follows by choosing a monic diagram $z:n\\to a$ with a left retraction, by",
+          "step": "8.1",
+          "inputs": [
+            "F4]: because $a>b\\ge0$",
+            "one has $a>0$",
+            "and the shifted adjacent-cup construction gives this retraction over every field without division. Composing a putative zero $zv$ with the retraction would give $v=0$",
+            "a contradiction. Step 7.2 supplies precisely this annihilated nonzero $v$ under the stated wall hypotheses. Together with step 7.1 and the substitution in step 7.2",
+            "this proves all conclusions. [F1",
+            "F4",
+            "step 7.1",
+            "step 7.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 sets empty-forest weight1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 7.2 separates the vanished boundary coefficients from nonzero chain coefficient1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives chain weight1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 7.2 treats q-degenerate branches by polynomial specialization at minusdelta."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.2 counts 1<=t<=d; strict wall inequalities used in step 7.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 8.1 uses explicitly constructed retractions, not arbitrary choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 8.1 proves genuine module maps and nonzeroness under each wall hypothesis."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "No equivalence is claimed; step 7.1 proves the exact composition identity."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "General proof is symbolic. Separately retained independent Gram-rank dimension sanity evidence is not a registered workflow gate and proves no general module-structure assertion."
+    },
+    "lem-temperley-lieb-spencer-support-binomial-and-reflection-calculus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-spencer-digit-support",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field, let $\\delta\\in K$, and let $\\ell$ be the recurrence quantum characteristic of $(K,\\delta)$ from [[def-temperley-lieb-quantum-integers-and-quantum-characteristic]]. Put $P=\\operatorname{char}K$ when $\\operatorname{char}K>0$, and put $P=\\infty$ when $\\operatorname{char}K=0$. In this definition $\\ell$ is Spencer's recurrence parameter; it is not the complex order $\\kappa=\\operatorname{ord}(q^2)$.\n\nSuppose first that $\\ell<\\infty$. Set $s_0=1$ and $s_i=\\ell P^{i-1}$ for each $i\\ge1$ with $P<\\infty$. If $P=\\infty$, set $s_1=\\ell$ and omit all $s_i$ for $i\\ge2$. Every $M\\in\\mathbb N$ has a unique expansion\n$$M=\\sum_{i=0}^{r}m_i s_i,$$\nwhere $0\\le m_0<\\ell$ and $0\\le m_i<P$ for $i\\ge1$ when $P<\\infty$. When $P=\\infty$, write $M=m_0+m_1\\ell$ with $0\\le m_0<\\ell$ and $m_1\\ge0$; if $m_1=0$, take $r=0$. The highest digit $m_r$ is nonzero unless $M=0$, for which take $r=0$ and $m_0=0$.\n\nFor a label $N\\ge0$, let $n_i$ be the digits of $N+1$, so $N+1=\\sum_{i=0}^{r}n_i s_i$. Define the **Spencer support set**\n$$\\operatorname{Supp}_{\\ell,P}(N)= \\left\\{\\sum_{i=0}^{r}\\varepsilon_i n_i s_i-1: \\varepsilon_i\\in\\{-1,1\\},\\ \\varepsilon_r=1,\\ \\sum_{i=0}^{r}\\varepsilon_i n_i s_i-1\\ge0\\right\\}.$$\nIf $\\ell=\\infty$, define $\\operatorname{Supp}_{\\ell,P}(N)=\\{N\\}$.\n\nThis item defines the digit expansion and a finite set only. Spencer's theorem identifying these sets with decomposition multiplicities, and the separate Jones\u2013Wenzl existence criterion, are not asserted here; both require the full field hypotheses and their own proofs.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-quantum-binomial-digit-criterion",
+          "source_section": "Statement",
+          "quote": "For $0\\le k\\le n$, let $G_{n,k}(Q)$ be the polynomial $\\sum_w Q^{\\operatorname{inv}(w)}$, summed over binary words with $k$ ones and $n-k$ zeros, where $\\operatorname{inv}(w)$ counts pairs with a one to the left of a zero. There is a unique polynomial $B_{n,k}(T)\\in\\mathbb Z[T]$ such that\n\n$$B_{n,k}(q+q^{-1})=q^{-k(n-k)}G_{n,k}(q^2).$$\n\nIt agrees as a rational-function identity with $[n]!/([k]![n-k]!)$; its value at a specialized loop parameter is the polynomial value, without division by vanishing factorials.\n\nFor a field $K$, $\\delta\\in K$, recurrence quantum characteristic $\\ell$, and $p=\\operatorname{char}K$, every $B_{n,k}(\\delta)$ for $0\\le k\\le n$ is nonzero exactly as follows: if $\\ell=\\infty$, at every finite $n$; if $\\ell<\\infty$ and $p>0$, when $n<\\ell$ or $n=a\\ell p^{i-1}-1$ with $i\\ge1$ and $1\\le a<p$; if $\\ell<\\infty$ and $p=0$, when $n<\\ell$ or $n=a\\ell-1$ for a positive integer $a$.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-binomial-theorem-over-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring. For all $x,y\\in R$ and $n\\in\\mathbb N$,\n\n$$ (x+y)^n=\\sum_{k=0}^n\\binom nkx^ky^{n-k}.$$\n\nThe natural-number coefficients act by repeated addition. The formula includes $n=0$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-prime-divides-intermediate-binomial-coefficients",
+          "source_section": "Statement",
+          "quote": "If $p$ is prime and $0<k<p$, then\n\n$$p\\mid\\binom pk.$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-irreducible-quotient-adjoins-a-root",
+          "source_section": "Statement",
+          "quote": "Let $p\\in F[x]$ be monic and irreducible, and put\n$K=F[x]/(p)$ and $a=x+(p)$. Then $K$ is a field extension of $F$, $p(a)=0$,\nand every element of $K$ has a unique representative $r$ with\n$\\deg r<\\deg p$ (with $r=0$ allowed). In particular, if $\\deg p=n$, every\nelement is uniquely\n$$c_0+c_1a+\\cdots+c_{n-1}a^{n-1},\\qquad c_j\\in F.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-temperley-lieb-spencer-support-binomial-and-reflection-calculus-1.1",
+          "claim": "The digit bounds give $\\sum_{j<k}n_js_j\\le s_k-1$ for every available $k\\ge1$: for $k=1$ this is $n_0\\le\\ell-1$, and adjoining a digit at place $s_k$ increases the maximum from $s_k-1$ to $(p-1)s_k+s_k-1=s_{k+1}-1$. In characteristic zero there is only the first such bound to check. Therefore the signed sum with positive highest digit is at least $n_rs_r-(s_r-1)-1\\ge0$ and at most $N$. Flipping signs changes $N$ by an even integer. For $r=0$, the only support element is $N$, so the same assertions hold.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-spencer-support-binomial-and-reflection-calculus-1.2",
+          "claim": "We prove the quantum-binomial zero test needed below, retaining scalar units. Using",
+          "step": "1.2",
+          "inputs": [
+            "F4] when necessary",
+            "adjoin a root $q\\ne0$ of $X^2-\\delta X+1$ if necessary and put $Q=q^2$. If $Q\\ne1$",
+            "the recurrence gives $[t]_\\delta=q^{1-t}(1-Q^t)/(1-Q)$",
+            "so finite $\\ell$ is the exact order of $Q$. If $Q=1$",
+            "the recurrence gives $[t]_\\delta=tq^{t-1}$",
+            "so finite $\\ell$ equals the field characteristic. The extension does not change which elements of the original field vanish. Expanding by subsets gives $\\prod_{i=0}^{u-1}(1+Q^iX)=\\sum_vQ^{v(v-1)/2}G_{u",
+            "v}(Q)X^v$. In the first case",
+            "the length-$\\ell$ factor is $1-(-X)^\\ell$ by the distinct roots of $Y^\\ell-1$; in the second it has this same value by [F3]. [F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-spencer-support-binomial-and-reflection-calculus-2.1",
+          "claim": "If two sign choices differ at a nonzero digit, let $j$ be their largest differing index. Their signed sums differ by a term of absolute value $2n_js_j\\ge2s_j$, whereas all smaller terms have combined absolute value at most $2(s_j-1)$ by step 1.1. Thus their sums differ. Each of the $h$ nonzero lower digits consequently gives an independent choice, proving the count.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-spencer-support-binomial-and-reflection-calculus-2.2",
+          "claim": "If $\\ell=\\infty$, every quantum factorial is nonzero and",
+          "step": "2.2",
+          "inputs": [
+            "F2] proves the asserted nonvanishing directly. Suppose $\\ell<\\infty$ and write $u=U\\ell+u_0$ and $v=V\\ell+v_0$ with remainders in $[0",
+            "\\ell-1]$. Step 1.2 factors its product into $(1-(-X)^\\ell)^U\\prod_{i=0}^{u_0-1}(1+Q^iX)$. Comparing the coefficient of $X^v$",
+            "and using [F2]",
+            "shows $B_{u",
+            "v}(\\delta)\\ne0$ precisely when $v_0\\le u_0$ and $\\binom UV\\ne0$ in the field: the omitted factors are powers of $Q$ and $-1$",
+            "and $G_{u_0",
+            "v_0}$ is nonzero because every quantum factorial index is less than $\\ell$. In positive characteristic",
+            "expand $(1+X)^U=\\prod_i(1+X^{p^i})^{u_i}$ using [F3]. The coefficient at $V$ is nonzero exactly when its base-$p$ digits are at most the corresponding digits of $U$",
+            "since then it is a product of nonzero binomials with factorial indices less than $p$. In characteristic zero $\\binom UV$ is nonzero whenever $0\\le V\\le U$. Consequently the quantum binomial is nonzero exactly when every mixed-radix digit of $v$ is at most that of $u$. [F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-spencer-support-binomial-and-reflection-calculus-3.1",
+          "claim": "For a fixed split index $k$, the higher contribution $H$ is divisible by $s_k$ and satisfies $H\\ge n_rs_r-\\sum_{k\\le j<r}n_js_j\\ge s_k>0$ by the same place-value bound. Step 1.1 gives $|L|<s_k$. Negating exactly the lower signs replaces $H+L-1$ by $H-L-1=2(H-1)-(H+L-1)$, retains the highest positive sign, and hence stays in the support. This proves the reflection assertion, including the case $L=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-spencer-support-binomial-and-reflection-calculus-4.1",
+          "claim": "For the nested sets in the Statement, subtracting the signed sums gives $(a-c)/2=\\sum_{j\\in C\\setminus A}n_js_j$ and $(a-b)/2=\\sum_{j\\in B\\setminus A}n_js_j$. These are their actual mixed-radix expansions, because each digit is either $0$ or the original allowed digit and no position is added twice. Since $B\\setminus A\\subseteq C\\setminus A$, the second expansion is digitwise bounded by the first. Step 2.2 proves the nonzero scalar, including repeated labels and zero digits. If $\\ell=\\infty$ then the singleton support gives $B_{0,0}=1$ directly from",
+          "step": "4.1",
+          "inputs": [
+            "F2]. [F1",
+            "F2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats a support with no lower digits."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 ignores zero-digit sign redundancies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 gives B_0,0=1 through the word polynomial."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1 retain root-of-unity and q-squared1 cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 allows equal labels in the comparable triple."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 construct the finite digit signs uniquely."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves necessity of the digitwise zero test."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves sufficiency; step 4.1 applies it to nested differences."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "General proof is symbolic. Separately retained independent Gram-rank dimension sanity evidence is not a registered workflow gate and proves no general module-structure assertion."
+    },
+    "lem-temperley-lieb-support-character-carry-and-simple-extras": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-spencer-digit-support",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field, let $\\delta\\in K$, and let $\\ell$ be the recurrence quantum characteristic of $(K,\\delta)$ from [[def-temperley-lieb-quantum-integers-and-quantum-characteristic]]. Put $P=\\operatorname{char}K$ when $\\operatorname{char}K>0$, and put $P=\\infty$ when $\\operatorname{char}K=0$. In this definition $\\ell$ is Spencer's recurrence parameter; it is not the complex order $\\kappa=\\operatorname{ord}(q^2)$.\n\nSuppose first that $\\ell<\\infty$. Set $s_0=1$ and $s_i=\\ell P^{i-1}$ for each $i\\ge1$ with $P<\\infty$. If $P=\\infty$, set $s_1=\\ell$ and omit all $s_i$ for $i\\ge2$. Every $M\\in\\mathbb N$ has a unique expansion\n$$M=\\sum_{i=0}^{r}m_i s_i,$$\nwhere $0\\le m_0<\\ell$ and $0\\le m_i<P$ for $i\\ge1$ when $P<\\infty$. When $P=\\infty$, write $M=m_0+m_1\\ell$ with $0\\le m_0<\\ell$ and $m_1\\ge0$; if $m_1=0$, take $r=0$. The highest digit $m_r$ is nonzero unless $M=0$, for which take $r=0$ and $m_0=0$.\n\nFor a label $N\\ge0$, let $n_i$ be the digits of $N+1$, so $N+1=\\sum_{i=0}^{r}n_i s_i$. Define the **Spencer support set**\n$$\\operatorname{Supp}_{\\ell,P}(N)= \\left\\{\\sum_{i=0}^{r}\\varepsilon_i n_i s_i-1: \\varepsilon_i\\in\\{-1,1\\},\\ \\varepsilon_r=1,\\ \\sum_{i=0}^{r}\\varepsilon_i n_i s_i-1\\ge0\\right\\}.$$\nIf $\\ell=\\infty$, define $\\operatorname{Supp}_{\\ell,P}(N)=\\{N\\}$.\n\nThis item defines the digit expansion and a finite set only. Spencer's theorem identifying these sets with decomposition multiplicities, and the separate Jones\u2013Wenzl existence criterion, are not asserted here; both require the full field hypotheses and their own proofs.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-critical-gram-unit-interval",
+          "source_section": "Statement",
+          "quote": "The polynomial Gram-determinant identity of [[lem-temperley-lieb-link-state-gram-determinant]] holds over every field, with polynomial continuation at zeros of displayed denominators. Let $\\ell<\\infty$, let $n+1=A\\ell$ and $m+1=B\\ell$ with $0<B\\le A$ and $n-m$ even. In characteristic zero, $W_{n,m}$ is simple. In characteristic $p>0$, write $B=p^v b'$ with $p\\nmid b'$ and let $b\\in\\{1,\\ldots,p-1\\}$ be the residue of $b'$ modulo $p$. If\n$$\\left\\lfloor\\frac{A-B}{2}\\right\\rfloor<p^v(p-b),$$\nthen $W_{n,m}$ is simple. If $\\ell=\\infty$, every $W_{n,m}$ is simple. Also $W_{n,n-2}$ is simple whenever $[n]_\\delta\\ne0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-temperley-lieb-support-character-carry-and-simple-extras-1.1",
+          "claim": "Put $z_a(x)=x^a+x^{-a}$ for $a>0$, and use $z_0=2$ in identities involving it. Summing over the lower digit signs gives $F_M(x)=\\chi_{n_rs_r-1}(x)\\prod_{j<r,\\ n_j>0}z_{n_js_j}(x).$ Indeed the positive highest exponential times the sign product minus its negative counterpart, divided by $x-x^{-1}$, is exactly the sum of the indicated $\\chi_m$. The lower signed sums cannot make the exponent negative, since their absolute sum is at most $s_r-1$, while the highest contribution is at least $s_r$. No zero digit contributes a factor $2$, since the support is a set.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-support-character-carry-and-simple-extras-2.1",
+          "claim": "In positive characteristic $p$, define $C_A(y)$ by the same formula as step 1.1 using ordinary base-$p$ digits of the positive integer $A$, and put $C_0=0$. If $A=hp+d$ with $h\\ge1$ and $0\\le d<p$, this formula gives $C_A(y)=\\chi_{p-1}(y)C_h(y^p)$ times $z_d(y)$ when $d>0$, and times $1$ when $d=0$. When $1\\le A<p$, it gives $C_A=\\chi_{A-1}$. For $A\\ge2$, write $z_1 C_{A-1}=C_A+\\sum_{0<B<A}\\gamma_{A,B}C_B.$ The coefficients are defined recursively as follows. If $A-1<p$, the only extra is $B=A-2$ with coefficient $1$ when $B>0$. Otherwise write $A-1=hp+d$. If $d=0$, there are no extras. If $1\\le d\\le p-2$, the only extra is $B=A-2$, with coefficient $2$ for $d=1$ and $1$ otherwise. If $d=p-1$, take the extra $B=A-2$ with coefficient $2$ for $p=2$ and $1$ otherwise, and add the extras $B=pB'$ with coefficients $\\gamma_{h+1,B'}$. This recursion decreases $A$ and proves the displayed identity: use $z_1\\chi_j=\\chi_{j+1}+\\chi_{j-1}$ at the base, and $z_1z_d=z_{d+1}+z_{d-1}$ at the other stages, remembering $z_0=2$. All coefficients are nonnegative, and every extra has $B\\equiv A\\pmod2$. In characteristic zero define $C_A=\\chi_{A-1}$ and use just the base recurrence with extra $B=A-2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-support-character-carry-and-simple-extras-3.1",
+          "claim": "In positive characteristic every extra of step 2.1 satisfies $\\frac{A-B}{2}<p^{\\nu_p(B)}(p-b),\\qquad b\\equiv B/p^{\\nu_p(B)}\\pmod p,\\quad1\\le b<p.$ For an unscaled extra $B=A-2$, the left side is $1$. In the base case $1\\le B\\le p-2$, the right side is at least $2$. In the noncarry case, either $d=1$ and $p\\mid B$, making the right side at least $p\\ge2$, or $B\\bmod p=d-1\\le p-3$, making it at least $3$. In the carry case $p>2$ gives $B\\bmod p=p-2$ and right side $2$; when $p=2$, $B$ is positive and even, so the right side is again at least $2$. A scaled extra $A=p(h+1),B=pB'$ multiplies both sides of the inductive inequality for $(h+1,B')$ by $p$. This proves the assertion by induction.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-support-character-carry-and-simple-extras-4.1",
+          "claim": "Suppose $\\ell<\\infty$. Put $S_\\ell(x)=\\chi_{\\ell-1}(x)$. For $M=h\\ell+d$ with $h\\ge1$ and $0\\le d<\\ell$, step 1.1 factors $F_M=S_\\ell(x)C_h(x^\\ell)$ times $z_d(x)$ if $d>0$ and times $1$ otherwise. If $n<\\ell$, then $z_1F_n=F_{n+1}+F_{n-1}$, omitting $F_0$, including $n=\\ell-1$. If $n\\ge\\ell$, write $n=h\\ell+d$. For $d=0$ one gets just $F_{n+1}$. For $1\\le d\\le\\ell-2$ one gets $F_{n+1}$ and the extra $F_{n-1}$ with coefficient $2$ if $d=1$ and $1$ otherwise. For $d=\\ell-1$, put $A=h+1$: step 2.1 gives $F_{n+1}$, the extras $F_{B\\ell}$ with coefficients $\\gamma_{A,B}$, and $F_{n-1}$ with coefficient $2$ if $\\ell=2$ and $1$ otherwise. These are the asserted $\\beta$; if two indices coincide their coefficients add. Immediate extras have $r=n-2$ and $\\ell\\nmid n$, so",
+          "step": "4.1",
+          "inputs": [
+            "F2] makes $W_{n",
+            "r}$ simple. The scaled extras have $n+1=A\\ell",
+            "r+1=B\\ell$ and satisfy the interval of [F2] by step 3.1",
+            "so are also simple; in characteristic zero use the critical clause of [F2]. If $\\ell=\\infty$",
+            "the recurrence $z_1\\chi_{n-1}=\\chi_n+\\chi_{n-2}$ gives the claim and [F2] gives simplicity of every extra. [F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-support-character-carry-and-simple-extras-5.1",
+          "claim": "The Laurent polynomials $\\chi_m$ are linearly independent over $\\mathbb Z$: the largest exponent of $\\chi_m$ is $m$ with coefficient $1$, so a finite nonzero combination has nonzero coefficient at its largest index. Comparing their coefficients in step 4.1, using $z_1\\chi_0=\\chi_1$ and the out-of-range convention, proves the last identity of the Statement. Finally $\\delta=0$ gives $[2]_\\delta=0$ and $[1]_\\delta=1$, hence $\\ell=2$. When $n>0$ is even one has $n\\ge\\ell$ and $d=0$ in step 4.1, so its only term is $F_{n+1}$ and $\\beta_{n,0}=0$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 omits zero-digit factors and uses F_0=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 proves beta_n,0=0 for positive even rank at delta0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 treats n=1 and omits F_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 keep coefficient2 when p2 or ell2 requires it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 proves strict unit inequality for every positive extra."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 supplies a finite decreasing recursion for all coefficients."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves that every extra standard is simple."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 compares independent Laurent characters to obtain exact coefficients."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "General proof is symbolic. Separately retained independent Gram-rank dimension sanity evidence is not a registered workflow gate and proves no general module-structure assertion."
+    },
+    "thm-temperley-lieb-spencer-decomposition-numbers-over-arbitrary-fields": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-temperley-lieb-link-state-diagram-basis-is-cellular",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring with unit, $\\delta\\in R$, and $n\\ge0$. Let $\\Lambda_n$ be the set of $t$ with $0\\le t\\le n$ and $n-t$ even, ordered by $\\lambda_r\\unrhd\\lambda_t$ exactly when $r\\le t$. Thus labels with fewer propagating strands are strictly greater. For $x,y\\in T_{n,t}$, define\n\n$$C^t_{x,y}:=x^*\\circ y\\in\\mathrm{TL}_n(R,\u03b4),$$\n\nwhere $x,y:n\\to t$ are link-state diagrams and $*$ is reflection across a horizontal line. Then the diagrams $C^t_{x,y}$, for all $t\\in\\Lambda_n$ and $x,y\\in T_{n,t}$, form an $R$-basis of $\\mathrm{TL}_n(R,\\delta)$, and $(C,\\Lambda_n)$ is a cellular basis in the convention of [[def-cellular-algebra-basis-and-cell-module]]. Its cell module at $\\lambda_t$ is $W_{n,t}(R,\\delta)$, and its cell form is the Gram form $\\phi_{n,t}$ of [[lem-temperley-lieb-link-state-gram-form-is-invariant]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, $\\delta\\in F$, and $n\\ge0$. Put $D_{n,t}=W_{n,t}(F,\\delta)/\\operatorname{rad}(\\phi_{n,t})$ for each allowed $t$. Then the nonzero $D_{n,t}$ are absolutely simple and form a complete set of pairwise nonisomorphic simple right $\\mathrm{TL}_n(F,\\delta)$-modules. Moreover, $D_{n,t}\\ne0$ exactly when $\\phi_{n,t}$ is not identically zero; in that case $\\operatorname{rad}(\\phi_{n,t})$ is the unique maximal proper submodule and $D_{n,t}$ is the simple head of $W_{n,t}$. If $\\phi_{n,t}$ is identically zero, then $D_{n,t}=0$, but no conclusion about the actual head of $W_{n,t}$ follows.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-link-state-restriction-filtration",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring with unit, $\\delta\\in R$, $n\\ge1$, and let $t$ be allowed for $W_{n,t}(R,\\delta)$. Include $\\mathrm{TL}_{n-1}(R,\\delta)$ into $\\mathrm{TL}_n(R,\\delta)$ by adding a rightmost vertical strand, and restrict the right action along this inclusion. Set $W_{m,s}=0$ when $s<0$, $s>m$, or $m-s$ is odd. Then there is a short exact sequence of right $\\mathrm{TL}_{n-1}(R,\\delta)$-modules\n\n$$0\\longrightarrow W_{n-1,t-1}\\longrightarrow \\operatorname{Res}^{TL_n}_{TL_{n-1}}W_{n,t}\\longrightarrow W_{n-1,t+1}\\longrightarrow0.$$\n\nThe sequence gives a two-step filtration; it is not asserted to split.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-exact-truncation-reduces-decomposition-to-trivial-factors",
+          "source_section": "Statement",
+          "quote": "Let $K$ be any field, $\\delta\\in K$, and let $0\\le r\\le n$ with $n-r$ even. Assume $r>0$ or $\\delta\\ne0$ or $n=r=0$. Put $A_n=\\mathrm{TL}_n(K,\\delta)$, use the right modules $W_{n,t}$ of [[def-temperley-lieb-link-state-standard-modules]], and put $D_{n,t}=W_{n,t}/\\operatorname{rad}\\phi_{n,t}$. There are $y,z:n\\to r$ with $y\\circ z^*=1_r$, and for $r>0$ both may be chosen as basis monic diagrams. There is an idempotent $e\\in A_n$ with $eA_ne\\cong A_r$ such that $M\\mapsto Me$ is exact, sends $W_{n,t}$ to $W_{r,t}$, and sends $D_{n,t}$ to $D_{r,t}$, with value zero when $t>r$.\n\nConsequently, for every allowed $m$,\n$$[W_{n,m}:D_{n,r}]=[W_{r,m}:D_{r,r}],$$\nwhere $W_{r,m}=0$ if $m>r$. The module $D_{r,r}=W_{r,r}$ is one dimensional and every diagram generator acts by zero. Thus the decomposition problem reduces exactly to multiplicities of this trivial module. The excluded case $n>r=0,\\delta=0$ has $D_{n,0}=0$ and is not a simple label.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-temperley-lieb-spencer-support-binomial-and-reflection-calculus",
+          "source_section": "Statement",
+          "quote": "Use the digits and place values in [[def-temperley-lieb-spencer-digit-support]], and write $N+1=\\sum_{j=0}^r n_js_j$ with $n_r>0$. When $\\ell<\\infty$, each signed expression $\\sum_j\\varepsilon_jn_js_j-1$ with $\\varepsilon_r=1$ lies in $[0,N]$, has parity $N$, and determines its signs at every nonzero digit uniquely. Thus the support has $2^h$ elements, where $h$ is the number of nonzero digits below $r$.\n\nFor $0\\le v\\le u$, the specialized quantum binomial $B_{u,v}(\\delta)$ is nonzero exactly when each mixed-radix digit of $v$ is at most the corresponding digit of $u$. In characteristic zero this uses the two digits with places $1,\\ell$; if $\\ell=\\infty$, every such binomial is nonzero.\n\nFor any $0<k\\le r$, changing all signs at indices less than $k$ reflects the corresponding support element about the wall $H-1$, where $H=\\sum_{j\\ge k}\\varepsilon_jn_js_j$ is a positive multiple of $s_k$. In particular, writing $L=\\sum_{j<k}\\varepsilon_jn_js_j$ gives the pair $H+L-1,H-L-1$ and $|L|<s_k$.\n\nLet $a,b,c$ belong to this support, and suppose their sets of negative nonzero digits satisfy $A\\subseteq B\\subseteq C$. Then $a\\ge b\\ge c$ and the specialized quantum binomial\n$$B_{(a-c)/2,(a-b)/2}(\\delta)$$\nis nonzero. Here $B$ denotes the polynomial quantum binomial of [[lem-temperley-lieb-quantum-binomial-digit-criterion]]. If $\\ell=\\infty$, the same last assertion holds for the only triple $a=b=c=N$.",
+          "uses": []
+        },
+        {
+          "fact": "F4",
+          "source": "lem-temperley-lieb-signed-forest-candidates-and-their-composition",
+          "source_section": "Statement",
+          "quote": "Write $[j]_T$ for the polynomial recurrence $[0]_T=0,[1]_T=1,[j+1]_T=T[j]_T-[j-1]_T$. For a monic diagram $x:a\\to b$, bend its $b$ output points around the right edge in reverse order to form a matching on $a+b$ points. Its nesting forest $F(x)$ consists of its $(a+b)/2$ arcs, ordered by containment. For an arc $e$, let $c(e)$ be the number of arcs inside it, counting itself. Define the polynomial hook weight\n$$h_F(T)=\\frac{[|F|]_T!}{\\prod_{e\\in F}[c(e)]_T}.$$\nFor $a\\ge b$ of the same parity, define the nonzero vector\n$$v_{a,b}=\\sum_{x:a\\to b\\text{ monic}}h_{F(x)}(-\\delta)x\\in W_{a,b}.$$\nIts coefficient on the diagram whose bent forest is a chain is $1$.\n\nFor $a\\ge b\\ge c$ of the same parity, composition modulo propagation less than $c$ satisfies\n$$v_{a,b}\\circ v_{b,c}=B_{(a-c)/2,(a-b)/2}(-\\delta)v_{a,c}.$$\nComposition here means attaching the indicated linear combinations of monic diagrams, in source-to-target order.\n\nLet $s_k$ be an available finite place value of [[def-temperley-lieb-spencer-digit-support]]. If $b<a<b+2s_k$ and $a+b+2$ is divisible by $2s_k$, then postcomposition by $v_{a,b}$ induces a nonzero module homomorphism $W_{n,a}\\to W_{n,b}$ for every $n\\ge a$ of the same parity.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-temperley-lieb-support-character-carry-and-simple-extras",
+          "source_section": "Statement",
+          "quote": "Let $\\chi_j(x)=(x^{j+1}-x^{-j-1})/(x-x^{-1})$ for $j\\ge0$, and set $\\chi_{-1}=0$. These are integer Laurent polynomials. Put $F_0=0$ and, for $M>0$,\n$$F_M(x)=\\sum_{m\\in\\operatorname{Supp}(M-1)}\\chi_m(x).$$\nFor every $n\\ge1$, there are nonnegative integers $\\beta_{n,r}$, for the labels $0\\le r\\le n$ of parity $n$, with $\\beta_{n,n}=1$, such that\n$$ (x+x^{-1})F_n(x)=\\sum_{r}\\beta_{n,r}F_{r+1}(x).$$\nWhenever $r<n$ and $\\beta_{n,r}>0$, the actual module $W_{n,r}(K,\\delta)$ is simple. If $\\delta=0$, $n>0$ is even, and the field is arbitrary, then $\\beta_{n,0}=0$. Equivalently, writing $d(r,m)=1$ for $m\\in\\operatorname{Supp}(r)$ and $0$ otherwise,\n$$d(n-1,m-1)+d(n-1,m+1)=\\sum_{r\\ge m}d(r,m)\\beta_{n,r},$$\nwith out-of-range labels interpreted as zero.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-temperley-lieb-spencer-decomposition-numbers-over-arbitrary-fields-1.1",
+          "claim": "We first record the triangular facts used below. Let $I_t$ be the ideal spanned by diagrams of propagation at most $t$, with $I_{-1}=I_{-2}=0$. The action on $W_{n,m}$ kills $I_{m-2}$, because propagation cannot increase. On a nonzero $D_{n,r}$, the ideal $I_r$ acts nontrivially: the cellular rule $xC^r_{u,v}=\\phi_{n,r}(x,u)v$ gives a nonzero operator since the form is nonzero. Thus a composition factor of $W_{n,m}$ cannot have label $r<m$. If $D_{n,m}\\ne0$, the same rank-one rule shows that $I_m$ kills the form radical, while $W_{n,m}$ modulo this radical is $D_{n,m}$. Therefore this label has multiplicity exactly one; every other factor has larger label. If $m=0,\\delta=0,n>0$, the form is identically zero, so this label contributes no simple quotient. These are all cases because a link state has nonzero form whenever $m>0$ or $\\delta\\ne0$: at nonzero loop use its self-pairing, and at positive $m$ use the two shifted adjacent-cup states whose gluing has no loop.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-spencer-decomposition-numbers-over-arbitrary-fields-2.1",
+          "claim": "Write $d(N,m)=1$ when $m\\in\\operatorname{Supp}(N)$ and $0$ otherwise. We prove the lower bound for the trivial-factor multiplicity $t(N,m)=[W_{N,m}:D_{N,N}]$. Call $v_{N,m}$ embodied if there are a submodule $U\\subseteq W_{N,m}$ containing it and a module map $q:U\\to D_{N,N}$ with $q(v_{N,m})\\ne0$. This implies $t(N,m)\\ge1$. If the support is a singleton, its only label is $N$ and the assertion is immediate. Otherwise write $N+1=\\sum_{i=0}^r n_is_i$ with $r\\ge1$ and let $\\mu=n_rs_r-\\sum_{i<r}n_is_i-1$. The pair $N,\\mu$ is a reflection about the $s_r$-wall below $N$, with $0<N-\\mu<2s_r$ and $N+\\mu+2=2n_rs_r$. Thus",
+          "step": "2.1",
+          "inputs": [
+            "F4] gives a nonzero homomorphism $W_{N",
+            "N}\\to W_{N",
+            "\\mu}$ carrying its basis vector to $v_{N",
+            "\\mu}$. Its image is an actual trivial submodule",
+            "so this vector is embodied. [F3",
+            "F4",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-spencer-decomposition-numbers-over-arbitrary-fields-3.1",
+          "claim": "We propagate this property across the cube. Consider any subcube with higher signs fixed and all lower nonzero digits up to index $j$ variable. Let $h$ be its maximal label, with all variable signs positive, and $l$ its minimal label, with all variable signs negative; suppose $v_{N,l}$ is embodied. We show all its labels are embodied by induction on the number of variable digits. If there are none, this is the assumption. Otherwise split at its largest variable index $j$. The minus-half has minimum $l$. The plus-half has minimum $a$, obtained by retaining the positive sign at $j$ and making every smaller variable sign negative. Full-prefix reflections give genuine homomorphisms $f:W_{N,h}\\to W_{N,a}$ and $H:W_{N,h}\\to W_{N,l}$ by",
+          "step": "3.1",
+          "inputs": [
+            "F4]",
+            "using the identity map for $f$ if $a=h$. All three labels are comparable cube elements",
+            "so [F3]\u2013[F4] give $gf=\\lambda H$ with $\\lambda\\ne0$",
+            "where $g:W_{N",
+            "a}\\to W_{N",
+            "l}$ is the linear candidate map. This makes $g$ a module map on $I=\\operatorname{im}f$: for any algebra element and any preimage in $W_{N",
+            "h}$",
+            "the equality with the genuine map $H$ verifies intertwining",
+            "and $f$ is surjective onto $I$. Moreover $f(v_{N",
+            "h})$ is a nonzero multiple of $v_{N",
+            "a}$ and $g(v_{N",
+            "a})$ is a nonzero multiple of $v_{N",
+            "l}$",
+            "again because their candidate-composition scalars are nonzero. If $U_l",
+            "q_l$ embody $v_{N",
+            "l}$",
+            "the submodule $I\\cap g^{-1}(U_l)$ and the functional $q_lg$ therefore embody $v_{N",
+            "a}$. Apply induction to both smaller halves. The whole support cube starts with its embodied minimum from step 2.1",
+            "proving $t(N",
+            "m)\\ge d(N",
+            "m)$ for every field and every support label. [F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-spencer-decomposition-numbers-over-arbitrary-fields-4.1",
+          "claim": "We now prove equality by induction on $n$, the case $n=0$ being the one-dimensional algebra. Suppose the full decomposition formula holds at smaller ranks. For each label $m$ put $t_m=t(n,m)$ and let $u_m$ be the multiplicity of the rank-$(n-1)$ trivial module in the restriction of $W_{n,m}$. By",
+          "step": "4.1",
+          "inputs": [
+            "F2] and induction",
+            "$u_m=d(n-1",
+            "m-1)+d(n-1",
+            "m+1).$ For each nonzero simple $D_{n",
+            "r}$ let $b_r$ be the multiplicity of that trivial module in its restriction; these are nonnegative integers",
+            "and $b_n=1$. For $r<n$",
+            "[F2] and induction already give $[W_{n",
+            "m}:D_{n",
+            "r}]=d(r",
+            "m)$. It remains only to determine the $t_m$. [F1",
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-spencer-decomposition-numbers-over-arbitrary-fields-5.1",
+          "claim": "Treat labels $m<n$ in decreasing order, assuming $t_r=d(n,r)$ and $b_r=\\beta_{n,r}$ at all larger labels. If $D_{n,m}\\ne0$, step 1.1 and restriction of a composition series give $u_m=t_m+b_m+\\sum_{m<r<n}d(r,m)b_r.$ The carry identity",
+          "step": "5.1",
+          "inputs": [
+            "F5] gives $u_m=d(n",
+            "m)+\\beta_{n",
+            "m}+\\sum_{m<r<n}d(r",
+            "m)\\beta_{n",
+            "r}.$ Subtracting and using the descending assumption yields $t_m+b_m=d(n",
+            "m)+\\beta_{n",
+            "m}$. If $\\beta_{n",
+            "m}=0$",
+            "the lower bound of step 3.1 and $b_m\\ge0$ force $t_m=d(n",
+            "m)$ and $b_m=0$. If $\\beta_{n",
+            "m}>0$",
+            "[F5] makes $W_{n",
+            "m}$ simple. Since $m<n$",
+            "its simple label is different from $n$",
+            "so $t_m=0$; step 3.1 then forces $d(n",
+            "m)=0$",
+            "and the same equality gives $b_m=\\beta_{n",
+            "m}$. This completes the descending step whenever the diagonal simple exists. [F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-spencer-decomposition-numbers-over-arbitrary-fields-6.1",
+          "claim": "The only missing diagonal is $m=0,\\delta=0,n>0$ even. Here $D_{n,0}=0$ by step 1.1, so restriction of a composition series gives $u_0=t_0+\\sum_{0<r<n}d(r,0)b_r$ with no $b_0$ term. By",
+          "step": "6.1",
+          "inputs": [
+            "F5]",
+            "$\\beta_{n",
+            "0}=0$",
+            "and all larger $b_r$ already equal their carry values. The carry identity consequently gives $t_0=d(n",
+            "0)$ directly. Thus the exceptional zero-form standard is classified too",
+            "and no nonexistent simple has been inserted. The case $n=1$ is covered by the initial top label and needs no descending step. [F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-spencer-decomposition-numbers-over-arbitrary-fields-7.1",
+          "claim": "We have proved $[W_{n,m}:D_{n,n}]=d(n,m)$ at rank $n$, completing the induction by steps 4.1\u20136.1. Finally, for any nonzero $D_{n,r}$, exact truncation",
+          "step": "7.1",
+          "inputs": [
+            "F2] identifies its desired multiplicity with $[W_{r",
+            "m}:D_{r",
+            "r}]=d(r",
+            "m)$",
+            "which is precisely the formula in the Statement. All arguments were over the given field or polynomial identities valid after its extension",
+            "and the zero-loop",
+            "zero-defect exception was explicitly handled. Hence the formula has every asserted field",
+            "characteristic and quantum-characteristic branch. [F2",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 6.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 starts with n0 and the one-dimensional empty diagram algebra."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 6.1 treats delta0,m0 and the nonexistent diagonal simple explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 and step 6.1 include n1 and singleton support."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1,5.1 and6.1 treat subquotient survival, characteristic2 and zero cell quotient separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes lower simple labels and gives diagonal multiplicity1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses finite subcube induction and nonzero scalar pullback; no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 4.1 through7.1 prove no composition factors outside support and no repeated factors."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1 and3.1 prove every support label yields a genuine trivial composition factor."
+        }
+      ],
+      "finite_checks": [],
+      "finite_check_disposition": "General proof is symbolic. Separately retained independent Gram-rank dimension sanity evidence is not a registered workflow gate and proves no general module-structure assertion."
+    }
+  }
+}

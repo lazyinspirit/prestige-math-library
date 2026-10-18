@@ -3,6 +3,7 @@ id: fs-every-critical-point-is-an-isolated-point
 kind: false-statement
 title: "Critical points need not be isolated"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
@@ -13,8 +14,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/fs-every-critical-point-is-an-isolated-point.json
 sources:
   scraped: []
   references:

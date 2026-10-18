@@ -1,0 +1,690 @@
+[
+  {
+    "order": 2508,
+    "id": "prefix-codes-and-finite-lossless-coding",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Prefix Codes and Finite Lossless Coding",
+    "companion": "prefix-codes-and-finite-lossless-coding-examples",
+    "requires": [
+      "finite-alphabet-entropy-and-divergence",
+      "kolmogorov-complexity-and-algorithmic-randomness"
+    ],
+    "items": [
+      {
+        "id": "def-finite-discrete-source-and-blocks",
+        "kind": "definition",
+        "title": "Finite discrete sources and product blocks",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "A **finite discrete source** is an integer $m\\ge1$ and a probability vector $p=(p_1,\\ldots,p_m)$ on the alphabet $\\mathcal X=[m]=\\{1,\\ldots,m\\}$ such that $p_i>0$ for every $i$. Here a probability vector has nonnegative entries summing to one, as in [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]; the strict positivity convention means that $\\mathcal X$ is the source support. In particular, the one-symbol source has $m=1$ and $p_1=1$.\n\nFor $n\\ge1$, a **block of length $n$** is a word $x^n=(x_1,\\ldots,x_n)\\in\\mathcal X^n$. Its product probability is\n$$p^n(x^n):=\\prod_{t=1}^n p_{x_t}.$$\nFinite distributivity gives $\\sum_{x^n\\in\\mathcal X^n}p^n(x^n)=(\\sum_{i=1}^m p_i)^n=1$, so $p^n$ is again a probability vector and has full support. When coding blocks, use lexicographic order on $\\mathcal X^n$; listing its $m^n$ words in that order identifies the block alphabet with $[m^n]$ for the code conventions below. Blocks are the only memoryless-source objects used on this page.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§§4.1–4.3, finite source alphabet and probability mass function"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 0–1, discrete memoryless source model"
+            }
+          ]
+        },
+        "strategy": "Define a finite full-support probability vector and its normalized finite product block law."
+      },
+      {
+        "id": "lem-finite-gibbs-inequality",
+        "kind": "lemma",
+        "title": "Nonnegativity of finite relative entropy with a positive reference",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "Let $p=(p_i)_{i=1}^m$ and $q=(q_i)_{i=1}^m$ be probability vectors with $q_i>0$ for every $i$. Then $D(p\\|q)\\ge0$, with equality if and only if $p=q$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.4, relative entropy and the entropy lower bound for uniquely decodable codes"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 1–2, finite entropy and expected code length"
+            }
+          ]
+        },
+        "strategy": "Prove ln t <= t-1 by its derivative, then sum over the support of p; strict positivity of q handles the zero coordinates of p."
+      },
+      {
+        "id": "def-base-two-entropy-of-a-finite-source",
+        "kind": "definition",
+        "title": "Base-two entropy of a finite source",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-it-information-units-and-logarithm-base"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "For a finite source $p$ of [[def-finite-discrete-source-and-blocks]], define its **base-two Shannon entropy**, measured in bits, by\n$$H_2(p):=\\frac{H(p)}{\\ln 2}=-\\sum_{i=1}^m p_i\\log_2 p_i.$$\nHere $H(p)=-\\sum_i p_i\\ln p_i$ is the finite Shannon entropy in natural units from [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. By [[def-it-information-units-and-logarithm-base]], information quantities use natural logarithms by default and $\\log_2 t=\\ln(t)/\\ln 2$. Substituting this identity termwise and using $\\sum_i p_i=1$ gives the displayed equality. Every $p_i$ is positive by the source convention, so no zero-term convention is needed here.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.3, Shannon codes and expected length in bits"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 1–2 and 9–10, entropy and the binary code-length convention"
+            }
+          ]
+        },
+        "strategy": "Convert the published natural-unit entropy to bits explicitly by division by ln 2."
+      },
+      {
+        "id": "def-binary-source-code-and-extension",
+        "kind": "definition",
+        "title": "Finite binary source codes, extension, and expected length",
+        "deps": [
+          "def-finite-discrete-source-and-blocks"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "A **binary word** is a finite sequence of symbols from $\\{0,1\\}$. The set $\\{0,1\\}^*$ includes the empty word $\\varepsilon$, and $\\{0,1\\}^+$ is the set of nonempty binary words. A **binary source code** for the finite source $\\mathcal X=[m]$ is a function $C:\\mathcal X\\to\\{0,1\\}^+$. Its codeword length is $\\ell_i:=|C(i)|\\ge1$.\n\nThe **extension** $C^*:\\mathcal X^*\\to\\{0,1\\}^*$ maps the empty source word to $\\varepsilon$ and maps $i_1\\cdots i_n$ to $C(i_1)\\cdots C(i_n)$. The code is **uniquely decodable** if $C^*$ is injective, including comparisons between source words of different lengths. Its expected length for source law $p$ is\n$$L_p(C):=\\sum_{i=1}^m p_i\\ell_i.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.1, definitions of uniquely decodable and prefix codes"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 1–2, finite source symbols and integer binary codeword lengths"
+            }
+          ]
+        },
+        "strategy": "Define nonempty binary words, code extension, unique decodability, and expected length."
+      },
+      {
+        "id": "def-binary-prefix-code",
+        "kind": "definition",
+        "title": "Binary prefix codes and their code trees",
+        "deps": [
+          "def-binary-source-code-and-extension"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "A binary code $C$ is a **prefix code** if it is nonsingular and no codeword $C(i)$ is a proper prefix of a different codeword $C(j)$. A word $u$ is a proper prefix of $v$ when $v=uw$ for some nonempty binary word $w$. Nonsingular means $C(i)\\ne C(j)$ whenever $i\\ne j$.\n\nThe **code tree** is the finite rooted trie whose vertices are all prefixes of codewords, whose root is $\\varepsilon$, and whose edges append one bit, labeled $0$ or $1$. Since the code is prefix-free, its codewords are exactly the leaves; unused branches are absent. A binary word path from the root records its successive edge labels.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.1, prefix condition and binary code trees"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 2–4, prefix-free code trees and leaves"
+            }
+          ]
+        },
+        "strategy": "Define nonsingularity, the prefix condition, and the finite binary trie."
+      },
+      {
+        "id": "thm-mcmillan-inequality-for-finite-binary-codes",
+        "kind": "theorem",
+        "title": "McMillan inequality for finite binary uniquely decodable codes",
+        "deps": [
+          "def-binary-source-code-and-extension"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "Let $C$ be a finite binary uniquely decodable code with lengths $\\ell_i$. Then\n$$\\sum_{i=1}^m2^{-\\ell_i}\\le1.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.4, proof of the uniquely decodable direction of Kraft–McMillan"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slide 23, uniquely decodable Kraft inequality"
+            }
+          ]
+        },
+        "strategy": "Raise the Kraft sum to the k-th power, group source k-tuples by total code length, and count distinct binary words at each length."
+      },
+      {
+        "id": "def-ideal-real-arithmetic-interval-code",
+        "kind": "definition",
+        "title": "Ideal-real arithmetic interval coding for a fixed block",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-binary-source-code-and-extension"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "Fix a finite full-support source $p=(p_1,\\ldots,p_m)$, its symbol order $1<\\cdots<m$, and a public block length $n\\ge1$. The **ideal-real arithmetic interval** of the empty prefix is $[0,1)$. If a prefix has interval $[a,b)$ and the next symbol is $i$, assign the extended prefix the half-open subinterval\n$$\\left[a+(b-a)\\sum_{j<i}p_j,\\ a+(b-a)\\sum_{j\\le i}p_j\\right).$$\nThis subdivision is performed exactly over the real numbers.\n\nFor a completed block $x^n$, let $I(x^n)=[a,b)$ be its resulting interval, put $w=b-a$, and define\n$$r=\\left\\lfloor-\\log_2w\\right\\rfloor,\\qquad s=r+2,\\qquad k=\\left\\lfloor2^s\\frac{a+b}{2}\\right\\rfloor.$$\nThe dyadic cell represented by an $s$-bit index $k$ is $J_{s,k}:=[k2^{-s},(k+1)2^{-s})$. The ideal-real codeword is the $s$-bit binary representation of $k$, with leading zeros. Each encoding frame contains exactly one length-$n$ source block; the decoder knows $p$ and $n$. A stream uses an externally known number of such frames. No finite-register or finite-precision implementation is specified by this definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.2, finite block source probabilities; §4.3, Shannon code construction"
+            },
+            {
+              "title": "Scott D. Roweis, CSC310 Lecture 8x: Arithmetic Coding Without Blocks, version 1.1",
+              "url": "https://cs.nyu.edu/home/people/in_memoriam/roweis/csc310-2005/notes/lec8x.pdf",
+              "locator": "slides 4–8, interval refinement, pending bits, and ideal-real coding"
+            }
+          ]
+        },
+        "strategy": "Define ordered interval refinement and dyadic midpoint output for a known-length block."
+      },
+      {
+        "id": "lem-prefix-codes-are-uniquely-decodable",
+        "kind": "lemma",
+        "title": "Every finite binary prefix code is uniquely decodable",
+        "deps": [
+          "def-binary-source-code-and-extension",
+          "def-binary-prefix-code"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "Every binary prefix code for a finite source is uniquely decodable.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.1, prefix condition, uniquely decodable codes, and on-the-fly parsing"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 2–4, prefix-code trees and leaves"
+            }
+          ]
+        },
+        "strategy": "Decode the first codeword greedily: at most one codeword can be an initial segment, and removing it strictly shortens the unread finite word."
+      },
+      {
+        "id": "thm-binary-kraft-criterion-for-finite-lengths",
+        "kind": "theorem",
+        "title": "Binary Kraft criterion for finite positive codeword lengths",
+        "deps": [
+          "def-binary-source-code-and-extension",
+          "def-binary-prefix-code",
+          "thm-kraft-inequality"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "For a finite list of positive integers $\\ell_1,\\ldots,\\ell_m$, there is a binary prefix code on $[m]$ having codeword lengths $\\ell_i$ if and only if\n$$\\sum_{i=1}^m2^{-\\ell_i}\\le1.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.4, Kraft–McMillan inequality and the prefix-code converse"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 1–2 and 23, Kraft criterion for prefix-code lengths"
+            }
+          ]
+        },
+        "strategy": "Specialize the published binary Kraft inequality to a finite prefix code, and apply its effective allocation direction to a finite positive request list."
+      },
+      {
+        "id": "alg-binary-huffman-coding",
+        "kind": "algorithm",
+        "title": "Deterministic binary Huffman coding",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-binary-source-code-and-extension",
+          "def-binary-prefix-code"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "**Input:** A finite full-support source $(m,p)$ as in [[def-finite-discrete-source-and-blocks]], with the symbols ordered $1,\\ldots,m$.\n\n**Output:** A binary prefix code $C_H$ on these symbols.\n\nIf $m=1$, return the one-bit codeword $C_H(1)=0$.\n\nIf $m\\ge2$, make one active leaf for each source symbol $i$, with weight $p_i$ and serial number $i$. Repeatedly do the following while more than one node is active:\n\n1. Order active nodes lexicographically by (weight, serial number), using the ordinary order on real weights and then integer serials.\n2. Remove the first two nodes. Make a new parent whose left child is the first removed node and whose right child is the second, whose weight is their sum, and whose serial is the next unused integer.\n3. Insert this parent among the active nodes.\n\nWhen one root remains, label every left edge $0$ and every right edge $1$. The codeword for symbol $i$ is the edge-label sequence on the path from the root to its original leaf. The order by serial number fixes all ties and fixes the bit orientation. The same merge rule applies to any finite active list of positive weights carrying distinct serial numbers; the source input initializes the serials as $1,\\ldots,m$, and each new parent receives a fresh serial.\n\nFor each $m\\ge2$, the algorithm executes exactly $m-1$ merges because each merge decreases the number of active nodes by one. The returned tree is finite. The next theorem proves the code is prefix-free and optimal; no complexity bound is asserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.5, Huffman merge procedure; §4.6, optimality"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 3–8, Huffman merge and contraction route"
+            }
+          ]
+        },
+        "strategy": "Specify least-weight merges, serial tie-breaking, left-right orientation, and the finite stop condition."
+      },
+      {
+        "id": "thm-ideal-real-arithmetic-interval-code-is-prefix-and-lossless",
+        "kind": "theorem",
+        "title": "Ideal-real interval coding is prefix-free and lossless",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-binary-source-code-and-extension",
+          "def-binary-prefix-code",
+          "def-ideal-real-arithmetic-interval-code"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "For fixed $p$ and $n$, the code in [[def-ideal-real-arithmetic-interval-code]] is injective and prefix-free on the lexicographically ordered block alphabet $\\mathcal X^n$. Its codeword length for $x^n$ is at most $-\\log_2p^n(x^n)+2$. Thus an $n$-block is recovered uniquely, and concatenated frames of this fixed block length are uniquely parsed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.2, product probabilities; §4.3, finite block Shannon coding"
+            },
+            {
+              "title": "Scott D. Roweis, CSC310 Lecture 8x: Arithmetic Coding Without Blocks, version 1.1",
+              "url": "https://cs.nyu.edu/home/people/in_memoriam/roweis/csc310-2005/notes/lec8x.pdf",
+              "locator": "slides 4–8, ideal-real interval refinement and termination"
+            }
+          ]
+        },
+        "strategy": "Show source intervals partition the unit interval, then place a dyadic cell around each midpoint; disjoint cells give a prefix-free code and the width gives a two-bit pointwise bound."
+      },
+      {
+        "id": "alg-finite-register-rational-arithmetic-coder",
+        "kind": "algorithm",
+        "title": "Exact finite-register arithmetic coding for rational block sources",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-binary-source-code-and-extension",
+          "def-binary-prefix-code",
+          "def-ideal-real-arithmetic-interval-code"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "**Configuration and frame model.** The shared model consists of positive integers $q_1,\\ldots,q_m$, their total $Q=\\sum_iq_i$, the rational source $p_i=q_i/Q$, and a maximum frame length $N\\ge1$. Fix a frame length $n$ with $1\\le n\\le N$. At configuration time compute $B$ as the least integer $b\\ge0$ with $Q^N\\le2^b$; this is a finite bit-length calculation, and $B$ is fixed for every frame using this configuration. Every frame is exactly one $n$-symbol block; the decoder knows $q_1,\\ldots,q_m,Q,N,n$. A complete stream contains a specified finite number $R$ of such frames, supplied by an outer frame count. The arithmetic coder adds no end marker.\n\n**Register size.** With $B$ fixed by the configuration above, Endpoint, width, frequency, and cumulative-frequency registers have $B+1$ bits; the output index has at most $B+2$ bits. One $2B+4$-bit temporary register stores intermediate products, numerators, denominators, and sums. The symbol-position counter uses $\\lceil\\log_2(N+1)\\rceil$ bits and the range/output-length counter uses $\\lceil\\log_2(B+3)\\rceil$ bits. All arithmetic is exact integer addition, multiplication, comparison, and floor division; no floating-point rounding or register growth during a frame is allowed.\n\n**Encoder.** Put $c_i=\\sum_{j<i}q_j$ and $D=Q^n$. For an input block $x^n=(x_1,\\ldots,x_n)$, initialize $L=0$ and $W=1$. For $t=1,\\ldots,n$, set $r=n-t$ and update\n$$L\\leftarrow L+Wc_{x_t}Q^r,\\qquad W\\leftarrow Wq_{x_t}.$$\nAfter the $n$ updates, search the finite list $j=0,\\ldots,B$ and retain the largest $u$ satisfying $2^uW\\le D$. Set $s=u+2$ and\n$$k=\\left\\lfloor\\frac{2^s(2L+W)}{2D}\\right\\rfloor.$$\nEmit the $s$-bit binary representation of $k$, padded on the left with zeros; its dyadic cell is $J_{s,k}$ from [[def-ideal-real-arithmetic-interval-code]].\n\n**Decoder.** For fixed $n$, generate the finite codebook by applying the encoder to every block in $[m]^n$ and build its binary trie. For one frame, read payload bits along this trie until a leaf is reached and return its block; reject an invalid path or a path not reaching a leaf within $B+2$ bits. For a stream, repeat this operation exactly $R$ times and then stop. The next theorem proves that the generated codebook is prefix-free and that every encoded frame reaches exactly one leaf.\n\nThe configured register widths are finite for each fixed rational model and cap $N$. They grow when a new configuration with a larger $N$ or $Q$ is installed; no constant-word-width streaming guarantee is claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Scott D. Roweis, CSC310 Lecture 8x: Arithmetic Coding Without Blocks, version 1.1",
+              "url": "https://cs.nyu.edu/home/people/in_memoriam/roweis/csc310-2005/notes/lec8x.pdf",
+              "locator": "slides 10–15, positive integer frequencies, fixed-point interval arithmetic, and decoder"
+            }
+          ]
+        },
+        "strategy": "Specify exact frequency updates, fixed frame model, bounded registers, and trie decoding."
+      },
+      {
+        "id": "thm-shannon-bounds-for-finite-binary-codes",
+        "kind": "theorem",
+        "title": "Shannon bounds for finite binary codes",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-base-two-entropy-of-a-finite-source",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "def-binary-source-code-and-extension",
+          "thm-binary-kraft-criterion-for-finite-lengths",
+          "thm-mcmillan-inequality-for-finite-binary-codes",
+          "lem-finite-gibbs-inequality"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "statement": "Let $p$ be a finite full-support source and let $H_2(p)$ be its entropy in bits. Every finite binary uniquely decodable code $C$ satisfies $L_p(C)\\ge H_2(p)$. If $m\\ge2$, the binary prefix code with lengths\n$\\ell_i=\\left\\lceil-\\log_2p_i\\right\\rceil$\n(called a Shannon code) has expected length strictly less than $H_2(p)+1$. If $m=1$, the one-bit codeword $0$ has length $1=H_2(p)+1$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§§4.3–4.4, Shannon code construction, Kraft–McMillan, and entropy lower bound"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 1–2, entropy bound for prefix codes"
+            }
+          ]
+        },
+        "strategy": "Use McMillan and finite Gibbs nonnegativity for the lower bound; realize the rounded self-information lengths by the binary Kraft criterion for the upper bound."
+      },
+      {
+        "id": "thm-huffman-coding-is-prefix-optimal",
+        "kind": "theorem",
+        "title": "The deterministic Huffman code is prefix-optimal",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-binary-source-code-and-extension",
+          "def-binary-prefix-code",
+          "thm-binary-kraft-criterion-for-finite-lengths",
+          "alg-binary-huffman-coding"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "statement": "For every finite full-support source, the algorithm [[alg-binary-huffman-coding]] terminates, returns a binary prefix code, and minimizes $L_p(C)$ among all binary prefix codes on the same alphabet. For a one-symbol source it returns the one-bit codeword $0$, which is optimal among codes with nonempty codewords.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.5–4.6, sibling rearrangement, contraction, and Huffman induction"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 3–8, full trees and the reduced-source cost identity"
+            }
+          ]
+        },
+        "strategy": "Establish an optimal finite prefix tree, move the two least weights to a deepest sibling pair by exchanges, contract that pair, and induct on the alphabet size."
+      },
+      {
+        "id": "cor-ideal-real-arithmetic-code-average-length",
+        "kind": "corollary",
+        "title": "Ideal-real arithmetic coding is within two bits per block",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-base-two-entropy-of-a-finite-source",
+          "thm-ideal-real-arithmetic-interval-code-is-prefix-and-lossless"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "statement": "For an ideal-real arithmetic code of a length-$n$ block from source $p$,\n$$\\mathbb E[\\ell(X^n)]\\le nH_2(p)+2.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Scott D. Roweis, CSC310 Lecture 8x: Arithmetic Coding Without Blocks, version 1.1",
+              "url": "https://cs.nyu.edu/home/people/in_memoriam/roweis/csc310-2005/notes/lec8x.pdf",
+              "locator": "slides 4–8, ideal-real intervals and termination"
+            },
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.3, block source entropy and code-length overhead"
+            }
+          ]
+        },
+        "strategy": "Take the expectation of the pointwise interval-width bound and use the product block law."
+      },
+      {
+        "id": "thm-finite-register-rational-arithmetic-coder-is-prefix-and-lossless",
+        "kind": "theorem",
+        "title": "The rational finite-register arithmetic code is prefix-free and lossless",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-binary-source-code-and-extension",
+          "def-binary-prefix-code",
+          "def-ideal-real-arithmetic-interval-code",
+          "alg-finite-register-rational-arithmetic-coder"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "statement": "For every configured rational model and fixed frame length in [[alg-finite-register-rational-arithmetic-coder]], the codebook on the lexicographically ordered block alphabet $[m]^n$ assigns each block $x^n$ a distinct binary word of length at most $B+2$, the codebook on $[m]^n$ is prefix-free, and the decoder returns exactly $x^n$. The encoder uses exactly $n$ symbol updates, the bounded integer search terminates, and the decoder reads at most $B+2$ payload bits per frame without overflow.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Scott D. Roweis, CSC310 Lecture 8x: Arithmetic Coding Without Blocks, version 1.1",
+              "url": "https://cs.nyu.edu/home/people/in_memoriam/roweis/csc310-2005/notes/lec8x.pdf",
+              "locator": "slides 10–15, finite-register integer arithmetic and decoding conditions"
+            }
+          ]
+        },
+        "strategy": "Track the exact integer interval under each frequency split, place a dyadic cell around its midpoint, and bound every loop and register."
+      },
+      {
+        "id": "cor-huffman-code-lengths-are-within-one-bit-of-entropy",
+        "kind": "corollary",
+        "title": "Huffman expected length is within one bit of entropy",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-base-two-entropy-of-a-finite-source",
+          "alg-binary-huffman-coding",
+          "lem-prefix-codes-are-uniquely-decodable",
+          "thm-huffman-coding-is-prefix-optimal",
+          "thm-shannon-bounds-for-finite-binary-codes"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "statement": "Let $C_H$ be the code returned by [[alg-binary-huffman-coding]] for a finite full-support source $p$. If $m\\ge2$, then\n$$H_2(p)\\le L_p(C_H)<H_2(p)+1.$$\nIf $m=1$, then $H_2(p)=0$ and $L_p(C_H)=1$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§§4.3–4.6, Shannon bound and Huffman optimality"
+            },
+            {
+              "title": "MIT OpenCourseWare 6.450, Memory-less sources, prefix free codes, and entropy",
+              "url": "https://ocw.mit.edu/courses/6-450-principles-of-digital-communication-i-fall-2009/f57623d4056984d18685fdb37cea01d6_MIT6_450F09_slide03.pdf",
+              "locator": "PDF slides 1–9, Shannon bound and Huffman construction"
+            }
+          ]
+        },
+        "strategy": "The entropy lower bound applies to the Huffman prefix code, and optimality compares it with the Shannon code."
+      },
+      {
+        "id": "cor-finite-register-arithmetic-coder-average-length",
+        "kind": "corollary",
+        "title": "The finite-register rational coder is within two bits per block",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-base-two-entropy-of-a-finite-source",
+          "thm-finite-register-rational-arithmetic-coder-is-prefix-and-lossless"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "statement": "For the rational source and length-$n$ frames of [[alg-finite-register-rational-arithmetic-coder]],\n$$\\mathbb E[\\ell(X^n)]\\le nH_2(p)+2.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Scott D. Roweis, CSC310 Lecture 8x: Arithmetic Coding Without Blocks, version 1.1",
+              "url": "https://cs.nyu.edu/home/people/in_memoriam/roweis/csc310-2005/notes/lec8x.pdf",
+              "locator": "slides 10–15, finite rational source frequencies and integer interval coding"
+            },
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.3, finite-block entropy and expected length"
+            }
+          ]
+        },
+        "strategy": "Average the pointwise exact interval bound under the rational product source."
+      }
+    ]
+  },
+  {
+    "order": 2509,
+    "id": "prefix-codes-and-finite-lossless-coding-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Prefix Codes and Finite Lossless Coding — Examples",
+    "companion": "prefix-codes-and-finite-lossless-coding",
+    "requires": [
+      "prefix-codes-and-finite-lossless-coding"
+    ],
+    "items": [
+      {
+        "id": "ex-uniquely-decodable-code-not-prefix",
+        "kind": "example",
+        "title": "A uniquely decodable binary code that is not prefix-free",
+        "deps": [
+          "def-binary-source-code-and-extension",
+          "def-binary-prefix-code",
+          "thm-mcmillan-inequality-for-finite-binary-codes"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "The word $0$ is itself assigned to symbol 1 and is also the first bit of the word $01$ assigned to symbol 2. Thus the code fails the prefix condition. The next verification shows that the two codewords still admit a unique parse.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.1, prefix and uniquely decodable code definitions"
+            }
+          ]
+        },
+        "strategy": "Show the shorter word is a proper prefix, then give the forced first-word rule that uniquely parses every concatenation.",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-finite-register-arithmetic-coder-block-ab",
+        "kind": "example",
+        "title": "Exact rational interval coding of the block AB",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "alg-finite-register-rational-arithmetic-coder",
+          "thm-finite-register-rational-arithmetic-coder-is-prefix-and-lossless"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "statement": "With $p=(1/2,1/3,1/6)$ and a length-two frame, the interval for $AB$ should be $[1/4,5/12)$. The emitted codeword is $0101$, whose dyadic cell is strictly inside that interval.\n\nThe diagram uses horizontal position for the real coordinate on $[0,1)$. The upper bar is the source interval for $AB$; the lower bar is the dyadic cell represented by $0101$. It illustrates the exact rational comparisons below but is not used as proof.\n\n```tikz\n\\begin{tikzpicture}[x=0.25cm,y=0.7cm]\n  \\draw[->] (0,0) -- (24,0) node[right] {$1$};\n  \\draw (0,0.08) -- (0,-0.08) node[below=2pt] {$0$};\n  \\draw (6,0.08) -- (6,-0.08) node[below=2pt] {$1/4$};\n  \\draw (9,0.08) -- (9,-0.08) node[below=2pt] {$3/8$};\n  \\draw (10,0.08) -- (10,-0.08) node[below=2pt] {$5/12$};\n  \\draw (12,0.08) -- (12,-0.08) node[below=2pt] {$1/2$};\n  \\draw (24,0.08) -- (24,-0.08) node[below=2pt] {$1$};\n  \\draw[line width=2pt] (6,1) -- (10,1) node[midway,above=2pt] {$I(AB)=[1/4,5/12)$};\n  \\draw[line width=2pt] (7.5,0.45) -- (9,0.45) node[midway,below=2pt] {$J(0101)=[5/16,3/8)$};\n\\end{tikzpicture}\n```",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Scott D. Roweis, CSC310 Lecture 8x: Arithmetic Coding Without Blocks, version 1.1",
+              "url": "https://cs.nyu.edu/home/people/in_memoriam/roweis/csc310-2005/notes/lec8x.pdf",
+              "locator": "slides 10–15, positive integer frequencies and exact integer interval updates"
+            }
+          ]
+        },
+        "strategy": "Run the integer interval updates for a two-symbol block and verify the emitted dyadic cell by exact rational inequalities.",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-huffman-dyadic-source-and-code-tree",
+        "kind": "example",
+        "title": "Huffman tree for a dyadic three-symbol source",
+        "deps": [
+          "def-finite-discrete-source-and-blocks",
+          "def-base-two-entropy-of-a-finite-source",
+          "def-binary-source-code-and-extension",
+          "def-binary-prefix-code",
+          "alg-binary-huffman-coding",
+          "thm-huffman-coding-is-prefix-optimal",
+          "cor-huffman-code-lengths-are-within-one-bit-of-entropy"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "statement": "The weights of symbols 2 and 3 are tied for least, so the first merge combines them. The final tie is between symbol 1 and the merged node; the serial rule puts symbol 1 on the left. The code tree uses edge labels 0 on the left and 1 on the right; each leaf label is a source symbol, and reading its root path gives its codeword.\n\n```tikz\n\\begin{tikzpicture}[\n  level distance=12mm,\n  level 1/.style={sibling distance=34mm},\n  level 2/.style={sibling distance=18mm},\n  every node/.style={draw,circle,inner sep=1.5pt}\n]\n\\node {$\\circ$}\n  child {node {$1$} edge from parent node[left] {$0$}}\n  child {node {$\\circ$}\n    child {node {$2$} edge from parent node[left] {$0$}}\n    child {node {$3$} edge from parent node[right] {$1$}}\n    edge from parent node[right] {$1$}\n  };\n\\end{tikzpicture}\n```\n\nThe diagram records the tree structure and edge convention; the verification below computes the codewords and lengths directly.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford EE376A, Information Theory Course Notes, Chapter 4: Lossless Compression",
+              "url": "https://web.stanford.edu/class/ee376a/files/lecture_notes.pdf",
+              "locator": "§4.5, worked Huffman tree and codeword lengths"
+            }
+          ]
+        },
+        "strategy": "Execute the declared deterministic merges, read the leaf paths, and compute the exact expected length and entropy.",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

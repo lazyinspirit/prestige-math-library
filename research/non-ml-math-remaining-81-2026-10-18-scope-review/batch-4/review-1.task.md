@@ -1,0 +1,14 @@
+# Batch 4: review 1
+
+Run: non-ml-math-remaining-81-2026-10-18
+Batch: 4
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: finite-alphabet-entropy-and-divergence, finite-alphabet-entropy-and-divergence-examples
+Items: def-it-information-units-and-logarithm-base, lem-it-finite-marginals-and-conditionals-are-pmfs, lem-it-finite-kl-agrees-with-measurable-kl, lem-it-finite-log-sum-inequality, def-it-finite-conditional-entropy, def-it-finite-mutual-information, def-it-finite-conditional-mutual-information, thm-it-finite-kl-nonnegative-equality, thm-it-information-unit-conversion, thm-it-finite-conditional-mutual-information-identities-and-equality, thm-it-finite-entropy-chain-rule, thm-it-finite-markov-data-processing, thm-it-fano-inequality, cor-it-fano-with-erasure-or-out-of-alphabet-estimates, ex-it-binary-entropy-and-extremizers, cex-it-kl-is-directional-and-can-be-infinite, ex-it-independent-and-deterministic-information
+Consolidated findings: [{"id":"def-it-information-units-and-logarithm-base","type":"prerequisite","reason":"The Definition says base e gives nats, but does not list the supplier defining e:=exp(1). Add def-real-exponential-function-and-e to deps so ln(e)=1 is supported explicitly; this dependency-only repair does not change the consumer interface."}]
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

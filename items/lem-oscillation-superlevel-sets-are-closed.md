@@ -3,6 +3,7 @@ id: lem-oscillation-superlevel-sets-are-closed
 kind: lemma
 title: "For every real $\\varepsilon > 0$ the set $\\{\\,x \\in A : \\omega_f(x) \\ge \\varepsilon\\,\\}$ is the intersection with $A$ of a closed subset of $\\mathbb{R}$; in particular it is closed in $\\mathbb{R}$ when $A = \\mathbb{R}$"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,12 @@ landmark: false
 short: "$\\{\\omega_f \\ge \\varepsilon\\}$ is relatively closed"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/lem-oscillation-superlevel-sets-are-closed.json
 sources:
   scraped: []
   references:

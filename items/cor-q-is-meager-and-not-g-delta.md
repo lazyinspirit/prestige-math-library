@@ -17,7 +17,7 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   judge:
-    model: "deepseek-v4-pro + gpt-5.6-terra"
+    model: deepseek-v4-pro + gpt-5.6-terra
     verdict: pass
     date: 2026-08-09
     scope: published-audit-targeted
@@ -29,6 +29,7 @@ verification:
     date: 2026-08-09
     scope: published-audit
     delegated_by: owner
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step4-published-alerts-six-root-integration/published-recording/receipts/cor-q-is-meager-and-not-g-delta.json
 sources:
   scraped: []
   references:
@@ -104,7 +105,7 @@ argument would prove the same thing about both sets and about neither.
 
 - **Where the two halves of the argument part company.** Claim 1 is a listing argument: step 1.2 lists $\mathbb{Q}_{\mathbb{R}}$, and step 1.1 shows that each real singleton is nowhere dense; claim 3 uses the completeness of $\mathbb{R}$ through [[thm-nested-interval-property]], inside [[thm-baire-category-r]]. Indeed $\mathbb{Q}$ is a $G_\delta$ subset of itself, being the whole space, so no argument that ignores the ambient completeness can possibly give claim 3.
 
-- **The irrationals are also uncountable** ([[cor-irrationals-uncountable]]), by a different and much cheaper argument that needs only the countability of $\mathbb{Q}$ and the uncountability of $\mathbb{R}$. Uncountability and being residual are independent properties: $\mathbb{Q}$ is meager and countable, the Cantor set is meager and uncountable ([[thm-cantor-set-properties]]), and $X$ is residual and uncountable.
+- **The irrationals are also uncountable** ([[cor-irrationals-uncountable]]), by a different and much cheaper argument that needs only the countability of $\mathbb{Q}$ and the uncountability of $\mathbb{R}$. Residuality implies uncountability for subsets of $\mathbb{R}$, but uncountability does not imply residuality: $\mathbb{Q}$ is meager and countable, the Cantor set is meager and uncountable ([[thm-cantor-set-properties]]), and $X$ is residual and uncountable. Indeed, every countable subset of $\mathbb{R}$ is meager by the singleton argument in step 1.1 (with the empty set represented by an all-empty sequence). A meager set cannot also be residual: its union with its meager complement would make $\mathbb{R}$ meager, contradicting [[thm-baire-category-r]].
 
 - **The named witness for claim 3** is [[cex-irrationals-are-not-f-sigma]], and the false statement it refutes is [[fs-q-is-g-delta]]; the refutation is carried out here.
 

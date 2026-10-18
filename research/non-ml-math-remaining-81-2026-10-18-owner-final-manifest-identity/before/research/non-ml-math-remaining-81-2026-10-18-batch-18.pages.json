@@ -1,0 +1,370 @@
+[
+  {
+    "order": 2528,
+    "id": "multiuser-channel-networks",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Multiuser Channel Networks",
+    "companion": "multiuser-channel-networks-examples",
+    "requires": [
+      "lossy-source-coding-with-side-information"
+    ],
+    "items": [
+      {
+        "id": "def-it-real-differential-entropy",
+        "kind": "definition",
+        "title": "Differential entropy for real densities",
+        "statement": "Defines differential entropy for Lebesgue densities with finite entropy integrals and conditional differential entropy when the stated conditional densities and integrals exist.",
+        "deps": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-it-two-user-real-awgn-mac-code",
+        "kind": "definition",
+        "title": "Two-user real AWGN multiple-access channel and no-feedback code",
+        "statement": "Defines the real unit-gain AWGN MAC, independent private messages, separate deterministic no-feedback encoders, average joint error, expected block-power constraints, and rates in nats per use.",
+        "deps": [
+          "thm-gaussian-integral",
+          "thm-substitution",
+          "thm-of-square-roots",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-it-two-user-real-awgn-mac-feedback-code",
+        "kind": "definition",
+        "title": "Two-user real AWGN MAC with perfect causal output feedback",
+        "statement": "Defines causal message-and-past-output encoders, common noiseless output feedback, average joint error, expected block-power constraints, and rates in nats per use.",
+        "deps": [
+          "def-it-two-user-real-awgn-mac-code"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-it-finite-gaussian-mixture-entropy-bounds",
+        "kind": "lemma",
+        "title": "Entropy bounds for finite-power Gaussian convolutions",
+        "statement": "Proves finiteness, scalar Gaussian maximum-entropy bounds, and differential-entropy subadditivity for real finite-dimensional signals with finite second moments after independent Gaussian noise is added.",
+        "strategy": "Use the positive Gaussian convolution density, a direct density relative-entropy inequality, and finite second-moment bounds.",
+        "deps": [
+          "def-it-real-differential-entropy",
+          "def-it-two-user-real-awgn-mac-code",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-it-physically-degraded-dm-broadcast-channel",
+        "kind": "definition",
+        "title": "Physically degraded two-receiver discrete memoryless broadcast channel",
+        "statement": "Defines finite alphabets and the factorization W(y1,y2|x)=W1(y1|x)W2(y2|y1), with receiver 1 the stronger output.",
+        "deps": [
+          "def-finite-stochastic-kernel"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-it-two-user-discrete-memoryless-mac",
+        "kind": "definition",
+        "title": "Two-user discrete memoryless multiple-access channel",
+        "statement": "Defines finite nonempty input and output alphabets, a two-input stochastic kernel, and its product block law.",
+        "deps": [
+          "def-finite-stochastic-kernel"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-it-awgn-feedback-estimation-covariance-update",
+        "kind": "lemma",
+        "title": "Gaussian feedback estimation-error covariance update",
+        "statement": "Computes the two-input conditional covariance after one real AWGN MAC observation and the normalized opposite-sign feedback update, including its correlation recursion.",
+        "strategy": "Complete the square in the joint Gaussian density, compute the conditional covariance, then normalize the two error coordinates.",
+        "deps": [
+          "def-it-two-user-real-awgn-mac-feedback-code"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-it-finite-dmc-feedback-code",
+        "kind": "definition",
+        "title": "Fixed-length finite DMC code with perfect causal output feedback",
+        "statement": "Defines a finite-message code whose encoder at time i is a deterministic function of its message and Y^(i-1), with a decoder, average error, and nats per use.",
+        "deps": [
+          "def-discrete-memoryless-channel"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-it-physically-degraded-dm-broadcast-code",
+        "kind": "definition",
+        "title": "Private-message code for a physically degraded DM broadcast channel",
+        "statement": "Defines independent private messages, a single deterministic encoder, one decoder at each receiver, average joint error, and rates.",
+        "deps": [
+          "def-it-physically-degraded-dm-broadcast-channel"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-it-two-user-discrete-memoryless-mac-code",
+        "kind": "definition",
+        "title": "No-feedback independent-private-message DM-MAC code",
+        "statement": "Defines separate deterministic message-only encoders, independent uniform private messages, one joint decoder, average joint error, rates, and the achievable capacity-region convention.",
+        "deps": [
+          "def-it-two-user-discrete-memoryless-mac"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-it-two-user-discrete-memoryless-mac-feedback-code",
+        "kind": "definition",
+        "title": "Two-user DM-MAC code with perfect causal output feedback",
+        "statement": "Defines independent private messages and separate encoders X_ji=f_ji(M_j,Y^(i-1)) sharing the noiseless past output, with average joint error and rates.",
+        "deps": [
+          "def-it-two-user-discrete-memoryless-mac"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-it-fano-for-finite-message-density-observations",
+        "kind": "lemma",
+        "title": "Fano bound for finite messages and density observations",
+        "statement": "Proves H(M|Y,S) <= ln 2 + epsilon ln |M| for a finite uniform message, finite side information, conditional observation densities, and any measurable estimator with error epsilon.",
+        "strategy": "Use the error indicator, posterior entropy, the finite-alphabet maximum-entropy bound, and concavity of binary entropy.",
+        "deps": [
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-it-finite-kl-nonnegative-equality"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-it-ozarow-feedback-sum-corner-achievable",
+        "kind": "lemma",
+        "title": "Ozarow linear feedback scheme achieves the two-user Gaussian sum point",
+        "statement": "For positive powers and noise variance, proves existence and uniqueness of the correlation parameter where the Gaussian MAC sum bound equals the sum of the individual feedback bounds, and constructs reliable codes at that corner under expected block power.",
+        "strategy": "Use two message-point training transmissions and a shared-noise sample to initialize a correlated Gaussian pair; recursively send normalized estimation errors and decode the message grids from the residual variances.",
+        "deps": [
+          "def-it-two-user-real-awgn-mac-code",
+          "def-it-two-user-real-awgn-mac-feedback-code",
+          "lem-it-awgn-feedback-estimation-covariance-update"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-it-two-correlated-iid-sources-over-dm-mac-code",
+        "kind": "definition",
+        "title": "Lossless transmission of two correlated IID sources over a DM-MAC",
+        "statement": "Defines a finite jointly distributed IID source pair, separate deterministic encoders observing their own source blocks, a common decoder, and vanishing joint source-block error.",
+        "deps": [
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-iid-multisource",
+          "def-it-two-user-discrete-memoryless-mac"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-it-awgn-feedback-rate-splitting-achievable",
+        "kind": "lemma",
+        "title": "Rate splitting transfers Ozarow's sum point to lower-correlation corners",
+        "statement": "For each 0<rho<rho* and positive powers, constructs a deterministic code achieving the R1-dominant Ozarow corner by combining a no-feedback Gaussian code for user 1 with a feedback sum-point code for residual powers; user exchange gives the other corner.",
+        "strategy": "Treat the independent private Gaussian codeword as additional Gaussian noise while decoding the feedback layer, subtract the reconstructed causal feedback inputs, decode the private layer, and solve the power-splitting equation by continuity.",
+        "deps": [
+          "def-it-two-user-real-awgn-mac-code",
+          "def-it-two-user-real-awgn-mac-feedback-code",
+          "lem-it-awgn-feedback-estimation-covariance-update",
+          "lem-it-ozarow-feedback-sum-corner-achievable"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-it-cover-leung-feedback-mac-inner-bound",
+        "kind": "theorem",
+        "title": "Cover-Leung inner bound for the two-user DM-MAC with feedback",
+        "statement": "Proves the achievable region R1 <= I(X1;Y|X2,U), R2 <= I(X2;Y|X1,U), R1+R2 <= I(X1,X2;Y) for finite p(u)p(x1|u)p(x2|u); it is an inner bound, not a general capacity formula.",
+        "strategy": "Use block-Markov superposition, sender-1 decoding of sender-2's previous-block message through feedback, backward joint decoding, conditional packing, and a finite-block time-sharing argument.",
+        "deps": [
+          "def-it-two-user-discrete-memoryless-mac",
+          "def-it-two-user-discrete-memoryless-mac-feedback-code",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-mutual-information"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-it-two-user-real-awgn-mac-capacity-region",
+        "kind": "theorem",
+        "title": "No-feedback real AWGN MAC capacity region",
+        "statement": "Proves the expected-average-power two-user real AWGN MAC capacity region: the two individual bounds 1/2 ln(1+P_j/N) and the sum bound 1/2 ln(1+(P_1+P_2)/N), in nats per use.",
+        "strategy": "Use independent Gaussian random codebooks and three information-density thresholds for achievability; use subset Fano bounds, Gaussian-convolution entropy inequalities, and Jensen's inequality for the converse.",
+        "deps": [
+          "def-it-two-user-real-awgn-mac-code",
+          "def-it-real-differential-entropy",
+          "lem-it-finite-gaussian-mixture-entropy-bounds",
+          "lem-it-fano-for-finite-message-density-observations"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-it-cover-elgamal-salehi-conditional-packing",
+        "kind": "lemma",
+        "title": "Conditional type packing bounds for source-indexed DM-MAC codebooks",
+        "statement": "Bounds expected wrong single-source and wrong source-pair jointly typical candidates in independently generated source-indexed conditional codebooks by their conditional-entropy and mutual-information exponents.",
+        "strategy": "Count conditional joint type classes, bound each candidate codeword probability under its conditional kernel, and simplify the exponents using the source-encoder product law and the DM-MAC factorization.",
+        "deps": [
+          "def-it-finite-strongly-typical-set",
+          "lem-it-finite-type-class-cardinality-bounds",
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-mutual-information",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "def-it-two-user-discrete-memoryless-mac"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-it-ozarow-awgn-mac-feedback-capacity-region",
+        "kind": "theorem",
+        "title": "Ozarow capacity region of the two-user real AWGN MAC with feedback",
+        "statement": "Proves that for 0 <= rho <= 1 the expected-average-power perfect-feedback capacity region is the union of rate pairs R_j <= 1/2 ln(1+P_j(1-rho^2)/N) and R1+R2 <= 1/2 ln(1+(P1+P2+2rho sqrt(P1P2))/N), in nats per use.",
+        "strategy": "Bound arbitrary causal codes by message Fano inequalities and Gaussian-convolution entropy; achieve the rho* rectangle with the linear feedback recursion, lower-correlation dominant corners by rate splitting, and the full region by time sharing.",
+        "deps": [
+          "def-it-two-user-real-awgn-mac-feedback-code",
+          "lem-it-finite-gaussian-mixture-entropy-bounds",
+          "lem-it-fano-for-finite-message-density-observations",
+          "lem-it-ozarow-feedback-sum-corner-achievable",
+          "lem-it-awgn-feedback-rate-splitting-achievable",
+          "thm-it-two-user-real-awgn-mac-capacity-region"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-it-cover-el-gamal-salehi-correlated-source-mac-sufficient-condition",
+        "kind": "theorem",
+        "title": "Cover-El Gamal-Salehi sufficient condition for correlated sources over a DM-MAC",
+        "statement": "Proves reliable lossless transmission when a finite p(q)p(s1,s2)p(x1|s1,q)p(x2|s2,q) satisfies the three strict conditional-entropy and mutual-information inequalities; the condition is sufficient and is not a general capacity characterization.",
+        "strategy": "Generate independent source-indexed conditional codebooks, decode the unique jointly typical source/input/output tuple, count conditional typical source fibers, and bound wrong single-user and pair candidates by their exact information-density exponents.",
+        "deps": [
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-conditional-mutual-information",
+          "def-it-finite-mutual-information",
+          "def-it-two-correlated-iid-sources-over-dm-mac-code",
+          "def-it-two-user-discrete-memoryless-mac",
+          "lem-it-cover-elgamal-salehi-conditional-packing",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-it-finite-dmc-feedback-does-not-increase-capacity",
+        "kind": "theorem",
+        "title": "Perfect output feedback does not increase finite DMC capacity",
+        "statement": "For a finite DMC without input-cost constraints, the vanishing-average-error capacity with perfect causal output feedback equals the ordinary DMC capacity max_P I(P;W).",
+        "strategy": "Use ordinary DMC codes for the lower bound; for the converse, expand mutual information causally, condition on the past output, bound each induced input law by single-letter capacity, and apply finite Fano.",
+        "deps": [
+          "def-it-finite-dmc-feedback-code",
+          "def-discrete-memoryless-channel-information-capacity",
+          "thm-discrete-memoryless-channel-random-coding-achievability",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-mutual-information",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-fano-inequality"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-it-physically-degraded-dm-broadcast-capacity-region",
+        "kind": "theorem",
+        "title": "Physically degraded two-user DM broadcast capacity region",
+        "statement": "Proves the private-message capacity region closure R1 <= I(X;Y1|U), R2 <= I(U;Y2) over finite p(u,x) with U-X-Y1-Y2, under average joint error and no feedback.",
+        "strategy": "Use superposition codebooks and joint threshold decoding for achievability; for the converse use Fano, U_i=(M2,Y1^(i-1)), physical degradation, memorylessness, and time sharing.",
+        "deps": [
+          "def-it-physically-degraded-dm-broadcast-channel",
+          "def-it-physically-degraded-dm-broadcast-code",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-fano-inequality"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-it-two-user-discrete-memoryless-mac-capacity-region",
+        "kind": "theorem",
+        "title": "Independent-private-message DM-MAC capacity region",
+        "statement": "Proves that the average-error no-feedback two-user DM-MAC capacity region is the closure of the union over finite p(q)p(x1|q)p(x2|q) of R1 <= I(X1;Y|X2,Q), R2 <= I(X2;Y|X1,Q), and R1+R2 <= I(X1,X2;Y|Q).",
+        "strategy": "Use simultaneous threshold decoding with independent conditional codebooks for achievability; use three Fano bounds, memoryless single-letterization, and a uniform time coordinate for the converse.",
+        "deps": [
+          "def-it-two-user-discrete-memoryless-mac",
+          "def-it-two-user-discrete-memoryless-mac-code",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-fano-inequality"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 2529,
+    "id": "multiuser-channel-networks-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Multiuser Channel Networks — Examples",
+    "companion": "multiuser-channel-networks",
+    "requires": [
+      "multiuser-channel-networks"
+    ],
+    "items": [
+      {
+        "id": "ex-it-ozarow-awgn-mac-feedback-rate-region-at-rho",
+        "kind": "example",
+        "title": "A finite-power Ozarow feedback-region slice",
+        "statement": "Substitutes P1=P2=N=1 and rho=1/2 into the exact feedback region and compares its sum-rate bound with the no-feedback Gaussian MAC sum bound.",
+        "strategy": "Evaluate the three logarithmic inequalities exactly and check that the selected point satisfies both individual and sum constraints.",
+        "deps": [
+          "thm-it-ozarow-awgn-mac-feedback-capacity-region",
+          "def-it-two-user-real-awgn-mac-feedback-code"
+        ],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-it-binary-xor-dm-mac-product-input-region",
+        "kind": "example",
+        "title": "The binary XOR MAC shows the conditional product-input law",
+        "statement": "Computes the binary XOR MAC information bounds and proves that their capacity region is the triangle R1+R2<=ln 2. Distinguishes a correlated single-letter law at fixed Q from a public time-sharing mixture allowed by the independent-private-message theorem.",
+        "strategy": "Evaluate the three mutual informations under independent Bernoulli inputs, use the binary output entropy bound, and compare with the diagonal correlated law.",
+        "deps": [
+          "def-it-finite-conditional-mutual-information",
+          "def-it-finite-mutual-information",
+          "def-it-two-user-discrete-memoryless-mac-code",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-two-user-discrete-memoryless-mac-capacity-region"
+        ],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-it-correlated-source-binary-adder-dm-mac",
+        "kind": "example",
+        "title": "A correlated binary source is sent uncoded over an adder MAC",
+        "statement": "Computes the source and channel laws in the Cover-El Gamal-Salehi example, verifies uncoded zero-error transmission, and shows why the independent-message product-input MAC region is a different operational model.",
+        "strategy": "Enumerate the three positive-probability source pairs and their adder outputs, then compute the maximum product-input sum information.",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "def-it-two-correlated-iid-sources-over-dm-mac-code",
+          "def-it-two-user-discrete-memoryless-mac",
+          "thm-it-fano-inequality",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-two-user-discrete-memoryless-mac-capacity-region"
+        ],
+        "dependency_level": 8
+      }
+    ]
+  }
+]

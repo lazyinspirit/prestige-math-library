@@ -7,19 +7,15 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [thm-every-independent-set-extends-to-a-basis, def-linear-basis, def-linear-independence, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-linear-subspace, def-vector-space, def-field]
+deps: [thm-every-independent-set-extends-to-a-basis, def-linear-basis, def-linear-independence, def-linear-combination-and-span, lem-span-monotone-and-idempotent, def-linear-subspace, def-vector-space, def-field, def-axiom-of-choice]
 justified_by: []
 aliases: [cor-basis-exists]
 landmark: true
 short: "every vector space has a basis"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/cor-every-vector-space-has-a-basis.json
 sources:
   scraped: []
   references:

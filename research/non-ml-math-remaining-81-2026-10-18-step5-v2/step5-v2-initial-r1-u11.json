@@ -1,0 +1,254 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "initial",
+  "round": 1,
+  "unit": "11",
+  "input_sha256": "5a7686cf6af281fffc281470b9fd4d1b4497cd3e88649ffa4676dd5e748ac1b1",
+  "decisions": [
+    {
+      "id": "lem-it-rate-distortion-convexity-and-monotonicity",
+      "model": "gpt-6-luna",
+      "context_sha256": "13de7a3e003ca07526598f1caefb8ae12c802fb4727b4890323a6c9749591619",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 2.3 omits a choice-free justification for selecting minimizers at all budgets. This is nonfatal: the nonempty compact argmin sets in finite-dimensional Euclidean space admit unique lexicographic minima after fixing a finite coordinate order, so no additional choice axiom is mathematically required. Nevertheless the written selection rule was unspecified. Replaced it by nested nonempty closed sets K_k={distortion<=D+1/(k+1), bit information<=L}; compactness via a finite subcover gives one point in their intersection and R(D)<=L, proving right-continuity without selecting a sequence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-it-gaussian-squared-error-rate-distortion",
+      "model": "gpt-6-luna",
+      "context_sha256": "eafe2438c1e951f1f5de934eab1dd0015a9b6e585524ee62b40d6d13924ed76c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The D=0 argument uses h=1/n without declaring a positive index. Under the library zero-based sequence convention this leaves its zeroth event undefined; this is a nonfatal indexing omission, since restricting to positive n or shifting by one gives the identical decreasing family and limit. Repaired to h=1/(n+1), n>=0; the diagonal is joint-full and product-null, proving infinite KL. The positive-distortion Gaussian construction has determinant -ab and expected log-density ratio one half ln(sigma^2/D), and the constant branches cover D>=sigma^2 and zero variance. Statement and AC assumptions are unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/5721b7df786b416dadad7c7bb3364d00_MIT6_441S16_chapter_25.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-it-finite-alphabet-blahut-arimoto",
+      "model": "gpt-6-luna",
+      "context_sha256": "473e57cff4e900a9cd1e575fe1c7582932646a86c28e9da0835c790ac15b5015",
+      "outcome": "false_positive",
+      "reason": "The rejection overlooks thm-it-blahut-arimoto-certified-gap-termination on the same page. Its steps 3.1 and 4.1 telescope KL to prove L_t-L*<=D(q*||q0)/(t+1); steps 5.1 and 6.1 show all cluster points minimize continuous F(q)=-sum p_i ln Z_i(q), and the simplex optimality conditions give s_j<=1 with equality on the support, hence gamma_t->1 even at boundary minimizers. Step 1.2 proves the fixed-t expression enclosures shrink for the specified r^2,-r,r and N=r schedule; thus u_t<=ln gamma_t+1/(t+1)->0. Positive rational tolerance is eventually met. Algorithm properties belong in that separate theorem under SCHEMA.md, so no convergence proof is missing from this definition and no item edit is warranted. The repaired RDF supplier retains its Statement and choice-free result.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-it-binary-hamming-rate-distortion-curve",
+      "model": "gpt-6-luna",
+      "context_sha256": "5382c22d8c16ab6d585ef9561eae2b105cd23b845895a1508aea4b2625811703",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The numerical claims are correct, but F1 attributes a backward construction to a supplier Statement exporting only the rate formula, and its unqualified D<1/2 range is false: for p=1/4 and D=3/8 the proposed mass is -1/2. This is nonfatal because all actual uses are D=0 or 1/8 within the valid branch. Removed the overbroad attributed fact and proved the needed construction locally: independent Y~Ber(q), E~Ber(D), X=Y xor E with q=(1/4-D)/(1-2D) gives source mass 1/4 and distortion D. The displayed finite joint-KL sum is h2(1/4)-h2(D), proving attainment and q=1/6 at D=1/8. The zero-rate constant branch and entropy continuity prove the remaining unchanged assertions.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/5721b7df786b416dadad7c7bb3364d00_MIT6_441S16_chapter_25.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-it-rate-distortion-convexity-and-monotonicity",
+      "disposition": "repaired",
+      "post_sha256": "d0d33d7bec709f19091016b68b8f8dada16b130bd070126b8bcde1a93f2ccd9c",
+      "review_context_sha256": "3157b77f38d4ed805608cce58d03a88fbaefa4fced45cd2cf13a74952a27782d",
+      "reason": "The log-sum mixture proves convexity, nested feasible sets give monotonicity, and a constant channel gives the zero branch, including Dc=Dmin. The repaired step 2.3 uses finite entropy continuity and compact nested closed sets to prove endpoint right-continuity without countable selection. Statement and no-choice assumptions are unchanged. This is my repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-it-gaussian-squared-error-rate-distortion",
+      "disposition": "repaired",
+      "post_sha256": "2aef2ae1897dfb99c213e4c6675392a17382b7e70472994635c0e73c09e2ef9c",
+      "review_context_sha256": "9ce7bbd0b35df2bd8bb76c14493608dfa9c0d120b7e901cc93c9df12c6039203",
+      "reason": "Reindexed the decreasing strips by h=1/(n+1), n>=0. Their product probabilities tend to zero while the diagonal has joint probability one, proving infinite mutual information at D=0. Checked the arbitrary-reconstruction lower bound, Gaussian joint-density calculation, bit conversion, constant branch and zero-variance case; AC is preserved. Statement unchanged; this is my repair review.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/5721b7df786b416dadad7c7bb3364d00_MIT6_441S16_chapter_25.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-it-finite-alphabet-blahut-arimoto",
+      "disposition": "unaffected",
+      "post_sha256": "d5cef2caf0012bf1c844e31ecb95135386a647cbe21747c8173d5928500b31fb",
+      "review_context_sha256": "786582552dca871c5c04caf7a412b26a8cfa537c761e86068b387d97d7795cf0",
+      "reason": "The separate termination theorem proves both fixed-t interval refinement and gamma_t->1, hence u_t->0 under precisely this procedure and rational-input conditions. The recurrence preserves positive divisors and full support, retry and return branches are specified, and no complexity bound is asserted. Its unchanged RDF supplier interface remains valid after the proof-only repair. No algorithm edit is warranted.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-it-binary-hamming-rate-distortion-curve",
+      "disposition": "repaired",
+      "post_sha256": "1b0732c6fa717ce97dba6449d80196829c26ab6229622db4d0aefbc721f2bbaa",
+      "review_context_sha256": "d9157e771364e4c793a45561bb44e0f8d1f6a9f49c5d030a06f10f10f37179e2",
+      "reason": "Removed the overbroad fact attribution. The local independent Bernoulli construction has source mass D+q(1-2D)=1/4, error probability D and bit information h2(1/4)-h2(D); q=1/6 at D=1/8. Direct substitution, constant-zero reproduction and entropy continuity verify all other claims. Statement unchanged; this is my repair review.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/5721b7df786b416dadad7c7bb3364d00_MIT6_441S16_chapter_25.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-it-rate-distortion-convexity-and-monotonicity",
+      "severity": "nonfatal",
+      "locus": "Proof step 2.3",
+      "reason": "Step 2.3 left the choice-free selection rule unstated; replaced the minimizing sequence by a compact nested-set argument without changing the Statement.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "thm-it-gaussian-squared-error-rate-distortion",
+      "severity": "nonfatal",
+      "locus": "Proof step 1.3",
+      "reason": "Step 1.3 used an unstated positive starting index; h=1/(n+1), n>=0 now defines every event of the decreasing sequence.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-it-finite-alphabet-blahut-arimoto",
+      "severity": "nonfatal",
+      "locus": "Definition outer stopping loop",
+      "reason": "The separate local certified-gap termination theorem already proves gamma_t tends to one and the interval procedure returns; the algorithm requires no edit.",
+      "status": "false-positive"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-it-binary-hamming-rate-distortion-curve",
+      "severity": "nonfatal",
+      "locus": "Facts F1 and Proof step 1.1",
+      "reason": "F1 overstated its supplier interface and the range of the backward mass formula; the needed finite construction and information calculation are now proved locally.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-existing-step4-finding",
+      "id": "ex-it-gaussian-distortion-waterline",
+      "status": "open",
+      "reason": "Verified the existing Step-4 finding against current artifacts; route to its actual owner without editing or adjudicating an unassigned item.",
+      "route": "Original frontier owner for ex-it-gaussian-distortion-waterline; it is draft, not published maintenance.",
+      "origin": "research/non-ml-math-remaining-81-2026-10-18-batch-11-step5-context.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "path": "items/ex-it-gaussian-distortion-waterline.md",
+      "affected_use": "Step 2.1 claims that F2 gives mutual information equal to the water-filling rate for the displayed reconstruction, but the Statement requires U,V independent only of each other, not independent of X2.",
+      "invalidated_claim": "Take independent standard normals Z1,Z2, X1=2Z1, X2=Z2, a=sqrt(5/2), b=sqrt(3/2), U=(a Z1+b Z2)/2, V=(b Z1-a Z2)/2. The transform is orthogonal, U,V are independent standard normals and X1=aU+bV, yet Y1=aU=a^2 X1/4+ab X2/2 is a nondegenerate deterministic function of the source vector. The joint source/reconstruction law is graph-supported while the corresponding product law gives that graph zero mass, so its mutual information is infinite.",
+      "minimality": "The owning frontier reviewer should require X2 independent of (U,V), with X1 formed from U,V as displayed. This repairs the actual attainment assertion; it changes the Statement and requires ordinary direct-consumer examination. Route through the original Step-4 concern owner, not this assignment.",
+      "source_observation": "Existing Step-4 batch-11 concern, verified against current Statement and Proof step 2.1; no edit or adjudication of this unassigned item."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "route-existing-step4-finding",
+      "id": "point-to-point-source-channel-separation",
+      "status": "open",
+      "reason": "Verified the existing Step-4 finding against current artifacts; route to its actual owner without editing or adjudicating an unassigned item.",
+      "route": "Owning page/batch metadata lane; no edit made.",
+      "origin": "research/non-ml-math-remaining-81-2026-10-18-batch-11-step5-context.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "path": "library/information-theory/point-to-point-source-channel-separation.md",
+      "affected_use": "The page lists no requires field although thm-it-point-to-point-lossy-source-channel-separation imports finite information RDF, minimum attainment, operational coding and right-continuity from rate-distortion-and-lossy-source-coding.",
+      "invalidated_claim": "The page prerequisite metadata omits an actual prerequisite page; the examined mathematical citations preserve the supplier claims.",
+      "minimality": "The owning page lane should add rate-distortion-and-lossy-source-coding to requires; no mathematical statement repair is implied.",
+      "source_observation": "Existing Step-4 alert, verified read-only against current page frontmatter and consumer Facts F1,F2,F5."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "lem-it-rate-distortion-convexity-and-monotonicity",
+      "claim": "Finite RDF shape properties in bits, choice-free; Statement unchanged.",
+      "sources": [
+        "items/lem-it-finite-rate-distortion-minimum-attained.md: Statement and Proof",
+        "items/thm-heine-borel-rn.md: Statement and compactness proof",
+        "items/def-it-information-rate-distortion-function.md: Definition",
+        "items/lem-it-finite-log-sum-inequality.md: Statement and Proof"
+      ],
+      "dependencies": [
+        "lem-it-finite-rate-distortion-minimum-attained",
+        "thm-heine-borel-rn",
+        "def-it-information-rate-distortion-function",
+        "lem-it-finite-log-sum-inequality",
+        "def-it-finite-mutual-information",
+        "thm-it-finite-kl-nonnegative-equality"
+      ],
+      "unresolved": [],
+      "finding_classification": "Nonfatal omitted selection justification: compact argmin sets permit canonical finite-coordinate lexicographic minima in ZF. The actual repair avoids selecting any sequence."
+    },
+    {
+      "id": "thm-it-gaussian-squared-error-rate-distortion",
+      "claim": "AC; real Gaussian source; information RDF in bits; no reconstruction density assumed.",
+      "sources": [
+        "items/lem-it-gaussian-reference-kernel-information-lower-bound.md: full proof",
+        "items/thm-continuity-from-above-for-measures.md: Statement",
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/5721b7df786b416dadad7c7bb3364d00_MIT6_441S16_chapter_25.pdf : sections 25.1.1-25.1.2, PDF pages 1-3"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "alg-it-finite-alphabet-blahut-arimoto",
+      "claim": "Exact-real BA recurrence for positive finite source and full-support q0; certified execution restricted to rational data and positive rational tolerance, all objectives in nats.",
+      "sources": [
+        "items/thm-it-blahut-arimoto-certified-gap-termination.md: complete proof, steps 1.1-6.1",
+        "items/alg-certified-elementary-range-evaluation.md: Definition, real exp/log and DAG rules",
+        "items/lem-directed-dyadic-rounding-enclosure-and-error.md: Statement and Proof",
+        "items/lem-range-reduced-exp-log-and-arctan-series-enclosures.md: Statement",
+        "items/thm-real-elementary-range-enclosures.md: Statement",
+        "items/def-dyadic-floating-point-format-and-directed-rounding.md: Definition"
+      ],
+      "unresolved": []
+    },
+    {
+      "id": "ex-it-binary-hamming-rate-distortion-curve",
+      "claim": "Bernoulli-1/4 source, binary Hamming distortion, rates in bits at 0,1/8,1/4; original Statement unchanged.",
+      "sources": [
+        "items/thm-it-binary-hamming-rate-distortion.md: Statement and complete Proof, particularly 1.2 and 3.1",
+        "https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/5721b7df786b416dadad7c7bb3364d00_MIT6_441S16_chapter_25.pdf : section 25.1.1, PDF pages 1-2"
+      ],
+      "unresolved": []
+    },
+    {
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-it-rate-distortion-convexity-and-monotonicity.md items/thm-it-gaussian-squared-error-rate-distortion.md items/ex-it-binary-hamming-rate-distortion-curve.md --json",
+          "result": "exit 0; 3 checked, 0 failed; all pass"
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/lem-it-rate-distortion-convexity-and-monotonicity.md items/thm-it-gaussian-squared-error-rate-distortion.md items/ex-it-binary-hamming-rate-distortion-curve.md",
+          "result": "exit 0; 3 items, 14 steps, 0 defects; after final item edits"
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/lem-it-rate-distortion-convexity-and-monotonicity.md items/thm-it-gaussian-squared-error-rate-distortion.md items/ex-it-binary-hamming-rate-distortion-curve.md items/alg-it-finite-alphabet-blahut-arimoto.md --json",
+          "result": "exit 0; 4 checked, 0 errors, 0 warnings"
+        },
+        {
+          "command": "node tools/proof-contract.mjs research/non-ml-math-remaining-81-2026-10-18-batch-11.proof-contracts.json --strict --items lem-it-rate-distortion-convexity-and-monotonicity,thm-it-gaussian-squared-error-rate-distortion,ex-it-binary-hamming-rate-distortion-curve",
+          "result": "exit 0; 3/3 checked, 0 errors, 0 warnings"
+        }
+      ],
+      "integration": "Owning contracts synchronized under acquire/reread/edit/check/release critical sections; no shared ledger, report, baseline, workflow, stamp or round state was edited.",
+      "interfaces": "All four exact Statement/Definition section hashes match frozen initial-1.json; no new prerequisite or interface was created, so downstream is empty.",
+      "guard_validation": "All four stored post_sha256 values match current itemHashGuard. Context hashes were captured immediately after the respective reviews and preserved; later contract-only synchronization does not change those source/interface contexts.",
+      "published_ledger": "No published item was edited and no new published mathematical defect was found. No published-ledger mutation is proposed.",
+      "unresolved": [],
+      "corrected_check_attempts": "Initial precheck requested binary step phase renumbering; adopted and reran successfully. Initial contract check included the proof-free algorithm outside contract scope; corrected selection to the three proof-bearing subjects and reran successfully."
+    }
+  ]
+}

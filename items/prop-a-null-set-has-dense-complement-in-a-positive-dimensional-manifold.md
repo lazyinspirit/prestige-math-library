@@ -3,6 +3,7 @@ id: prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold
 kind: proposition
 title: "A null set has dense complement in a positive-dimensional manifold"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
@@ -19,12 +20,12 @@ sources:
     - title: "John M. Lee, Introduction to Smooth Manifolds, 2nd ed."
       url: "https://dokumen.pub/introduction-to-smooth-manifolds-2nd-ed-9781441999818-9781441999825-1441999817-1441999825.html"
 verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold). No independent judge or whole-closure certification.
-    delegated_by: owner
+  precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold.json
 ---
 
 ## Statement

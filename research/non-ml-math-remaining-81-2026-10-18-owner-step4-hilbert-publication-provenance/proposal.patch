@@ -1,0 +1,604 @@
+--- a/SCHEMA.md
++++ b/SCHEMA.md
+@@ -104,6 +104,12 @@
+   carrier, committed before the pre-edit ownership claim; it records historical
+   publication provenance and grants no new audit coverage. Its hash and owner
+   must match the actual run's pre-edit published ownership claim.
++  An exact physics-to-root mathematical context import may instead supply
++  `prior_publication_context: {path, sha256, source_path}` together with its
++  `prior_publication_commit`; see [the strict import lineage protocol](tools/physics-math-context-import.md#recorded-root-repairs-of-imported-publication).
++  It authenticates the original published physics carrier and immutable import
++  before the explicit pre-edit claim, without changing either or supplying an
++  audit. The current root successor still owes every ordinary local repair guard.
+   `ledger_marker` and `ledger_sha256` bind the exact text between unique
+   `<!-- local-published-repair:MARKER:begin -->` and corresponding `:end`
+   markers in the canonical published ledger; that text identifies the item and
+--- a/tools/algorithm-items.test.mjs
++++ b/tools/algorithm-items.test.mjs
+@@ -15,7 +15,7 @@
+ function fixture(t) {
+  const root = mkdtempSync(join(tmpdir(), 'algorithm-items-')); t.after(() => rmSync(root,{recursive:true,force:true}));
+  for(const dir of ['tools','items','library/test','research'])mkdirSync(join(root,dir),{recursive:true});
+- for(const file of ['depcheck.mjs','facts-block.mjs','frontmatter-list.mjs','item-scope.mjs','published-repair-adoption.mjs','published-repair-policy.mjs','item-hash.mjs'])copyFileSync(join(toolDir,file),join(root,'tools',file));
++ for(const file of ['depcheck.mjs','facts-block.mjs','frontmatter-list.mjs','item-scope.mjs','published-repair-adoption.mjs','published-repair-policy.mjs','physics-math-context-history.mjs','physics-math-context-import.mjs','pathway-lib.mjs','paths.mjs','item-hash.mjs'])copyFileSync(join(toolDir,file),join(root,'tools',file));
+ 
+  writeFileSync(join(root,'research/b-leaf-legacy-allowlist.json'),JSON.stringify({version:1,edges:[]}));
+  const rows=[{id:'alg-small',kind:'algorithm',deps:[],dependency_level:0},
+--- a/tools/autopilot/test/published-repair-policy.test.mts
++++ b/tools/autopilot/test/published-repair-policy.test.mts
+@@ -59,7 +59,7 @@
+     return git('rev-parse', 'HEAD');
+   };
+   const depcheck = (...args: string[]) => {
+-    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'item-hash.mjs', 'published-repair-policy.mjs', 'published-repair-adoption.mjs'])
++    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'item-hash.mjs', 'published-repair-policy.mjs', 'published-repair-adoption.mjs', 'physics-math-context-import.mjs', 'physics-math-context-history.mjs', 'pathway-lib.mjs', 'paths.mjs'])
+       copyFileSync(join(REPO, 'tools', file), join(root, 'tools', file));
+     return spawnSync(process.execPath, [join(root, 'tools/depcheck.mjs'), '--json', ...args], { encoding: 'utf8' });
+   };
+--- a/tools/depcheck-block-list.test.mjs
++++ b/tools/depcheck-block-list.test.mjs
+@@ -14,7 +14,7 @@
+     mkdirSync(join(root, 'items'));
+     mkdirSync(join(root, 'research')); 
+     mkdirSync(join(root, 'library', 'test'), { recursive: true });
+-    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs', 'item-hash.mjs', 'physics-math-context-import.mjs', 'pathway-lib.mjs', 'paths.mjs'])
++    for (const file of ['depcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs', 'item-hash.mjs', 'physics-math-context-import.mjs', 'physics-math-context-history.mjs', 'pathway-lib.mjs', 'paths.mjs'])
+       copyFileSync(join(HERE, file), join(root, 'tools', file));
+     for (const id of ['lem-indented', 'lem-indentless', 'ex-next-line-flow']) {
+       writeFileSync(join(root, 'items', `${id}.md`),
+--- a/tools/focused-failed-item-recheck.test.mjs
++++ b/tools/focused-failed-item-recheck.test.mjs
+@@ -34,7 +34,7 @@
+     mkdirSync(join(root, 'tools'));
+     mkdirSync(join(root, 'research'));
+     mkdirSync(join(root, 'library', 'test'), { recursive: true });
+-    for (const file of ['depcheck.mjs', 'fwdcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs', 'item-hash.mjs'])
++    for (const file of ['depcheck.mjs', 'fwdcheck.mjs', 'facts-block.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs','physics-math-context-history.mjs','physics-math-context-import.mjs','pathway-lib.mjs','paths.mjs', 'item-hash.mjs'])
+       copyFileSync(join(HERE, file), join(root, 'tools', file));
+     writeFileSync(join(root, 'research', 'b-leaf-legacy-allowlist.json'), JSON.stringify({ version: 1, edges: [] }));
+     writeFileSync(join(root, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
+--- a/tools/frontier-gate-scope.test.mjs
++++ b/tools/frontier-gate-scope.test.mjs
+@@ -13,7 +13,7 @@
+   const repo = mkdtempSync(join(tmpdir(), 'frontier-gates-test-'));
+   t.after(() => rmSync(repo, { recursive: true, force: true }));
+   for (const dir of ['tools', 'items', 'research', 'library/test']) mkdirSync(join(repo, dir), { recursive: true });
+-  for (const file of ['extcheck.mjs', 'content-policy-lib.mjs', 'depsource.mjs', 'pathcheck.mjs', 'pathway-lib.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'run-manifest-pages.mjs', 'depcheck.mjs', 'facts-block.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs', 'item-hash.mjs'])
++  for (const file of ['extcheck.mjs', 'content-policy-lib.mjs', 'depsource.mjs', 'pathcheck.mjs', 'pathway-lib.mjs', 'paths.mjs', 'frontmatter-list.mjs', 'item-scope.mjs', 'run-manifest-pages.mjs', 'depcheck.mjs', 'facts-block.mjs', 'published-repair-adoption.mjs','published-repair-policy.mjs','physics-math-context-history.mjs','physics-math-context-import.mjs', 'item-hash.mjs'])
+     copyFileSync(join(tools, file), join(repo, 'tools', file));
+   const write = (path, text) => writeFileSync(join(repo, path), text);
+   const item = (id, deps = '[]', extra = '') => `---\nid: ${id}\nkind: theorem\nstatus: draft\ndeps: ${deps}\n${extra}---\n`;
+--- a/tools/open-problems.test.mjs
++++ b/tools/open-problems.test.mjs
+@@ -20,7 +20,7 @@
+   const root = mkdtempSync(join(tmpdir(), 'open-problems-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
+   for (const dir of ['tools', 'items', 'library/test', 'research']) mkdirSync(join(root,dir),{recursive:true});
+   const sourceTools = physics ? join(tools,'physics-support') : tools;
+-  for (const name of ['depcheck.mjs','extcheck.mjs','content-policy.mjs','content-policy-lib.mjs','paths.mjs','facts-block.mjs','frontmatter-list.mjs','item-scope.mjs','published-repair-policy.mjs','item-hash.mjs']) copyFileSync(join(sourceTools,name),join(root,'tools',name));
++  for (const name of ['depcheck.mjs','extcheck.mjs','content-policy.mjs','content-policy-lib.mjs','paths.mjs','facts-block.mjs','frontmatter-list.mjs','item-scope.mjs','published-repair-policy.mjs','item-hash.mjs', ...(!physics ? ['physics-math-context-history.mjs','physics-math-context-import.mjs','pathway-lib.mjs'] : [])]) copyFileSync(join(sourceTools,name),join(root,'tools',name));
+   writeFileSync(join(root,'research/b-leaf-legacy-allowlist.json'),JSON.stringify({version:1,edges:[]}));
+   const pages = [{id:'questions',kind:'A',category:'test',library:'mathematics',order:1,companion:'questions-examples',requires:[],items:[problem]},{id:'questions-examples',kind:'B',category:'test',library:'mathematics',order:2,companion:'questions',requires:['questions'],items:[]}];
+   writeFileSync(join(root,'research/plan-spec.json'),JSON.stringify({pages}));
+@@ -29,7 +29,7 @@
+   writeFileSync(join(root,'library/test/questions.md'),'---\npage: questions\nstatus: draft\nitems: [op-question]\nexamples: []\n---\n');
+   if (!physics) copyFileSync(join(tools, 'published-repair-adoption.mjs'), join(root, 'tools/published-repair-adoption.mjs'));
+   if (physics) {
+-    for (const name of ['published-repair-adoption.mjs','published-repair-policy.mjs','item-hash.mjs']) copyFileSync(join(tools,name),join(root,name));
++    for (const name of ['published-repair-adoption.mjs','published-repair-policy.mjs','physics-math-context-history.mjs','physics-math-context-import.mjs','pathway-lib.mjs','paths.mjs','item-hash.mjs']) copyFileSync(join(tools,name),join(root,name));
+     copyFileSync(join(sourceTools,'run-manifest-pages.mjs'),join(root,'tools/run-manifest-pages.mjs'));
+   }
+   const env = {...process.env,PRESTIGE_APP_DIR:APP_DIR,PHYSICS_REPO:root};
+--- /dev/null
++++ b/tools/physics-math-context-history.mjs
+@@ -0,0 +1,178 @@
++#!/usr/bin/env node
++// Selected immutable mathematical context from physics; never a publication or
++// a transfer of native execution, audit, authoring or frontier ownership.
++import { readFileSync, readdirSync, lstatSync } from 'node:fs';
++import { resolve, join } from 'node:path';
++import { execFileSync } from 'node:child_process';
++import { createHash } from 'node:crypto';
++import { yaml, split } from './pathway-lib.mjs';
++const ID = /^(def|alg|thm|lem|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
++const KINDS = {def:'definition',alg:'algorithm',thm:'theorem',lem:'lemma',prop:'proposition',cor:'corollary',ex:'example',cex:'counterexample',fs:'false-statement',rem:'remark'};
++export const rawHash = bytes => createHash('sha256').update(bytes).digest('hex');
++const stable = value => Array.isArray(value) ? value.map(stable) : value && typeof value === 'object'
++  ? Object.fromEntries(Object.keys(value).sort().map(k => [k, stable(value[k])])) : value;
++const fingerprint = value => rawHash(JSON.stringify(stable(value)));
++const fail = message => { throw Error(`physics mathematics context: ${message}`); };
++const present = path => { try { lstatSync(path); return true; } catch (e) { if (e.code === 'ENOENT') return false; throw e; } };
++function regular(root, path) {
++  if (typeof path !== 'string' || path.startsWith('/') || path.split('/').some(p => !p || p === '.' || p === '..')) fail('unsafe path');
++  let current = root;
++  for (const part of path.split('/')) { current = join(current, part); if (lstatSync(current).isSymbolicLink()) fail(`symlink: ${path}`); }
++  if (!lstatSync(current).isFile()) fail(`not a regular file: ${path}`);
++  return current;
++}
++const bytes = (root, path) => readFileSync(regular(root, path));
++const json = (root, path) => JSON.parse(bytes(root, path));
++const git = (root, args) => execFileSync('git', ['-C', root, '--no-replace-objects', ...args], { maxBuffer: 32 * 1024 * 1024 });
++const sortedIds = values => {
++  if (!Array.isArray(values) || !values.length || values.some(id => !ID.test(id)) || new Set(values).size !== values.length) fail('nonempty unique canonical IDs required');
++  return [...values].sort();
++};
++function lists(fm, key) {
++  const value = fm[key] ?? [];
++  if (!Array.isArray(value) || value.some(id => typeof id !== 'string' || !(key==='aliases' ? Boolean(id.trim()) : ID.test(id))) || new Set(value).size !== value.length) fail(`invalid ${key} for ${fm.id}`);
++  return value;
++}
++function item(root, path, id, physics) {
++  const raw = bytes(root, path), {fm, body} = split(raw.toString('utf8')); const data = yaml().parse(fm);
++  if (!data || data.id !== id || !ID.test(id) || data.kind !== KINDS[id.split('-')[0]]
++    || data.status !== 'published' || data.domain === 'physics' || data.library === 'physics'
++    || (physics && data.domain !== 'mathematics') || data.proved_here === false
++    || data.external_dependency || lists(data, 'external_refs').length || data.physical_scope != null
++    || data.empirical_result || (data.empirical_premises ?? []).length
++    || Object.values(data.dependency_roles ?? {}).some(role => role !== 'mathematical-premise')) fail(`not an eligible published mathematical carrier: ${path}`);
++  const deps = [...new Set([...lists(data, 'deps'), ...lists(data, 'justified_by')])].sort();
++  if (physics && lists(data,'deps').some(dep=>data.dependency_roles?.[dep]!=='mathematical-premise')) fail(`missing mathematical dependency role: ${path}`);
++  if (physics && lists(data, 'forward_refs').length) fail(`forward references require separate context, not supported: ${path}`);
++  if (!body.trim() || !data.title?.trim()) fail(`incomplete carrier: ${path}`);
++  return {raw, data, deps, path, sha256:rawHash(raw)};
++}
++function identities(root, ignored) {
++  const map = new Map();
++  // Project only identity fields: unrelated in-flight descriptive YAML must not
++  // force broad validation. Duplicate or malformed identity fields fail closed.
++  for (const name of readdirSync(join(root,'items')).filter(f => f.endsWith('.md'))) {
++    const id = name.slice(0,-3); if (ignored.has(id)) continue;
++    const {fm} = split(bytes(root, `items/${name}`).toString('utf8')); const lines = fm.split(/\r?\n/); const selected=[]; const seen=new Set();
++    for (let i=0;i<lines.length;i++) {
++      const match=lines[i].match(/^("(?:[^"\\]|\\.)*"|'(?:[^']|'')*'|[a-zA-Z_][a-zA-Z0-9_-]*)\s*:/); if (!match) continue;
++      const key=Object.keys(yaml().parse(`${match[1]}: null`))[0]; if (!['id','aliases'].includes(key)) continue;
++      if (seen.has(key)) fail(`duplicate identity field: items/${name}`); seen.add(key); selected.push(lines[i]);
++      while(i+1<lines.length && !/^[^\s#-][^\n]*:/.test(lines[i+1])) selected.push(lines[++i]);
++    }
++    const data=yaml().parse(selected.join('\n')) ?? {};
++    if (data.id !== id) fail(`noncanonical root identity: items/${name}`);
++    for(const token of [id,...lists(data,'aliases')]) { const owners=map.get(token)??new Set();owners.add(id);map.set(token,owners); }
++  }
++  return map;
++}
++export function inspectSelection(root, run, selection, {installed=false}={}) {
++  root=resolve(root); if (!/^[a-zA-Z0-9_-]+$/.test(run??'')) fail('invalid run');
++  if (selection.version!==1) fail('invalid selection'); const entries=sortedIds(selection.entry_ids), expected=sortedIds(selection.expected_ids);
++  const expectedSet=new Set(expected), imported=new Map(), boundaries=new Map(), visiting=new Set();
++  function visit(id) {
++    if (imported.has(id) || boundaries.has(id)) return;
++    if (visiting.has(id)) fail(`dependency cycle: ${id}`);
++    const target=`items/${id}.md`;
++    if (!expectedSet.has(id) && present(join(root,target))) { const row=item(root,target,id,false); boundaries.set(id,{id,path:target,sha256:row.sha256}); return; }
++    visiting.add(id);
++    const source=`physics/items/${id}.md`, sourceItem=item(root,source,id,true);
++    const commit=git(root,['log','-1','--format=%H','--',source]).toString().trim();
++    if (!/^[a-f0-9]{40,64}$/.test(commit)) fail(`source is not Git-authenticated: ${id}`);
++    git(root,['merge-base','--is-ancestor',commit,'HEAD']);
++    if (!git(root,['show',`${commit}:${source}`]).equals(sourceItem.raw)) fail(`source differs from authenticated publication: ${id}`);
++    for(const dep of sourceItem.deps) visit(dep);
++    imported.set(id,{id,path:target,source_path:source,sha256:sourceItem.sha256,publication_commit:commit,kind:sourceItem.data.kind,aliases:lists(sourceItem.data,'aliases'),deps:sourceItem.deps,source_verification:sourceItem.data.verification??null});
++    visiting.delete(id);
++  }
++  for(const id of entries) visit(id);
++  if (JSON.stringify([...imported.keys()].sort())!==JSON.stringify(expected)) fail('actual missing-root closure differs from expected_ids');
++  const identity=identities(root,installed?expectedSet:new Set()); const tokens=new Set();
++  for(const row of imported.values()) {
++    if(!installed && present(join(root,row.path))) fail(`destination collision: ${row.path}`);
++    for(const token of [row.id,...row.aliases]) { if(tokens.has(token) || identity.has(token)) fail(`identity or alias collision: ${token}`);tokens.add(token); }
++  }
++  // These are prerequisite context, never any current or historical frontier.
++  for(const name of readdirSync(join(root,'research')).filter(n=>new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(n))) {
++    for(const page of json(root,`research/${name}`)) for(const row of page.items??[]) if(expectedSet.has(typeof row==='string'?row:row.id)) fail(`imported ID appears in frontier manifest: ${name}`);
++  }
++  const files=[...imported.values()].sort((a,b)=>a.id.localeCompare(b.id)); const boundary_files=[...boundaries.values()].sort((a,b)=>a.id.localeCompare(b.id));
++  const context_sha256=fingerprint({files:files.map(({id,sha256,deps})=>({id,sha256,deps})),boundary_files});
++  return {version:1,kind:'selected-physics-mathematics-context-inspection',run,entry_ids:entries,expected_ids:expected,context_sha256,files,boundary_files};
++}
++function researchPath(run,path) {
++  if (typeof path!=='string' || !(path.startsWith(`research/${run}-`) || path.startsWith(`research/${run}/`)) || path.split('/').some(p=>p==='..'||p==='.')) fail('evidence must be run-owned research');
++  return path;
++}
++function reviewEvidence(root, run, inspection, reviewPath, acceptancePath) {
++  researchPath(run,reviewPath);researchPath(run,acceptancePath);
++  const review=json(root,reviewPath), acceptance=json(root,acceptancePath);
++  if(review.version!==1 || review.kind!=='focused-physics-mathematics-context-review' || review.run!==run
++    || !/^\/root\/[^\s]+$/.test(review.reviewer??'') || review.context_sha256!==inspection.context_sha256
++    || review.scope!=='full-supplier-proof-and-dependency-review' || !Number.isFinite(Date.parse(review.reviewed_at))
++    || review.native_execution_coverage!==false || !Array.isArray(review.items) || !Array.isArray(review.evidence_files) || !review.evidence_files.length) fail('missing, invalid or stale focused review');
++  const evidencePaths=new Set();
++  for(const row of review.evidence_files) { researchPath(run,row.path);if(evidencePaths.has(row.path) || rawHash(bytes(root,row.path))!==row.sha256)fail('missing, duplicate or stale review evidence');evidencePaths.add(row.path); }
++  const subjects=review.items.map(row=>row.id);
++  if(new Set(subjects).size!==subjects.length || JSON.stringify(subjects.sort())!==JSON.stringify(inspection.expected_ids)) fail('focused review must cover exact imported closure');
++  for(const file of inspection.files) {
++    const row=review.items.find(row=>row.id===file.id);
++    if(row.raw_sha256!==file.sha256 || row.verdict!=='pass' || row.dependency_review!=='pass'
++      || (file.kind==='definition' ? row.definition_review : row.proof_review)!=='pass'
++      || typeof row.evidence!=='string' || row.evidence.trim().length<40) fail(`unaccepted or stale supplier review: ${file.id}`);
++  }
++  const review_sha256=rawHash(bytes(root,reviewPath));
++  if(acceptance.version!==1 || acceptance.kind!=='owner-accepted-physics-mathematics-context-review'
++    || acceptance.run!==run || acceptance.authorized_by!=='owner' || acceptance.reviewer!=='/root'
++    || acceptance.verdict!=='accepted' || acceptance.review_file!==reviewPath || acceptance.review_sha256!==review_sha256
++    || acceptance.context_sha256!==inspection.context_sha256 || acceptance.native_execution_coverage!==false
++    || !Number.isFinite(Date.parse(acceptance.accepted_at)) || Date.parse(acceptance.accepted_at)<Date.parse(review.reviewed_at)
++    || typeof acceptance.reason!=='string' || acceptance.reason.trim().length<40) fail('missing, invalid or stale owner acceptance');
++  return {review:{path:reviewPath,sha256:review_sha256},acceptance:{path:acceptancePath,sha256:rawHash(bytes(root,acceptancePath))}};
++}
++export function verifyContextReceiptHistory(root,receiptPath,{selectedIds=[]}={}) {
++  root=resolve(root);const receipt=json(root,receiptPath); const expected=`research/${receipt.run}-physics-math-context-import.json`;
++  if(receiptPath!==expected || receipt.version!==1 || receipt.kind!=='immutable-selected-physics-mathematics-context-import'
++    || receipt.source_reference_root!=='physics' || !Number.isFinite(Date.parse(receipt.recorded_at))
++    || receipt.external_context_only!==true || receipt.native_execution_coverage!==false) fail('invalid import receipt');
++  if(selectedIds.some(id=>receipt.expected_ids.includes(id))) fail('external context cannot be a selected audit/authoring subject');
++  const inspection=inspectSelection(root,receipt.run,{version:1,entry_ids:receipt.entry_ids,expected_ids:receipt.expected_ids},{installed:true});
++  for(const field of ['context_sha256','files','boundary_files']) if(fingerprint(receipt[field])!==fingerprint(inspection[field])) fail(`stale receipt ${field}`);
++  const evidence=reviewEvidence(root,receipt.run,inspection,receipt.review?.path,receipt.acceptance?.path);
++  if(fingerprint(evidence)!==fingerprint({review:receipt.review,acceptance:receipt.acceptance})) fail('review/acceptance evidence changed');
++  if(fingerprint(receipt.owned_paths)!==fingerprint(inspection.files.map(({path,sha256})=>({path,sha256}))))fail('invalid import ownership paths');
++  return {receipt,paths:[receiptPath,receipt.review.path,receipt.acceptance.path,...json(root,receipt.review.path).evidence_files.map(row=>row.path),...receipt.files.map(row=>row.source_path)]};
++}
++
++/** Historical publication provenance only. Validate the entire immutable import
++ * and its actual physics sources/evidence without asking current root successors
++ * to equal the historical preimage. This does not authenticate a repair itself. */
++export function hasPhysicsContextPriorPublication(root,id,before,commit,claimedAt,run,reference) {
++  try {
++    if (!ID.test(id) || !/^[a-zA-Z0-9_-]+$/.test(run??'')
++      || !/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(commit??'')
++      || !Number.isFinite(Date.parse(claimedAt)) || !reference || typeof reference!=='object'
++      || Array.isArray(reference) || Object.keys(reference).sort().join(',')!=='path,sha256,source_path'
++      || reference.path!==`research/${run}-physics-math-context-import.json`
++      || reference.source_path!==`physics/items/${id}.md`
++      || !/^[a-f0-9]{64}$/.test(reference.sha256??'')
++      || rawHash(bytes(root,reference.path))!==reference.sha256) return false;
++    const {receipt}=verifyContextReceiptHistory(root,reference.path);
++    const rows=receipt.files.filter(row=>row.id===id), row=rows[0];
++    if (rows.length!==1 || row.path!==`items/${id}.md` || row.source_path!==reference.source_path
++      || row.publication_commit!==commit || row.sha256!==rawHash(Buffer.from(before,'utf8'))
++      || Date.parse(receipt.recorded_at)>Date.parse(claimedAt)
++      || !bytes(root,row.source_path).equals(Buffer.from(before,'utf8'))) return false;
++    // History verification already authenticates the complete published physics
++    // carrier and ancestor; additionally enforce exact commit identity/time.
++    const [object,timestamp,...extra]=git(root,['show','--no-patch','--format=%H%n%ct',commit]).toString().trim().split('\n');
++    return object===commit && !extra.length && /^\d+$/.test(timestamp)
++      && Number(timestamp)*1000<=Date.parse(receipt.recorded_at)
++      && Number(timestamp)*1000<=Date.parse(claimedAt)
++      && git(root,['show',`${commit}:${row.source_path}`]).equals(Buffer.from(before,'utf8'));
++  } catch { return false; }
++}
++
++
++// Shared helpers for the unchanged importer and current-context wrapper.
++export {bytes,json,present,fail,reviewEvidence,item};
+--- a/tools/physics-math-context-import.md
++++ b/tools/physics-math-context-import.md
+@@ -94,3 +94,29 @@
+ ```sh
+ node --test tools/physics-math-context-import.test.mjs
+ ```
++
++## Recorded root repairs of imported publication
++
++The immutable import pin and physics source remain unchanged. A necessary root
++correction may use the ordinary explicit pre-edit ownership claim and
++`recorded-local-published-repair` receipt. When the original has no root audit
++or root Git carrier, add `prior_publication_commit` from its import file row
++and `prior_publication_context: {path, sha256, source_path}`: the exact run's
++immutable import receipt path/raw SHA-256 and `physics/items/ID.md`.
++
++The policy authenticates the complete existing import history, source, focused
++review and owner acceptance; exact root/source path and ID; complete original
++bytes; original ancestor commit identity and time; and import time no later
++than the ownership claim. This is historical publication provenance, not an
++audit, publication, adoption recovery or native execution credit. All ordinary
++before/current hashes, ownership, ledger and successful local checks remain
++required. Supplying an invalid explicit context reference fails even if another
++publication basis exists. Adoption and unchanged-claim protocols are unchanged.
++
++The context validator accepts a changed root copy only through that current
++policy-valid ordinary repair, whose before archive is the exact original import
++pin. It retains the immutable import receipt and adds repair receipt, before
++archive, claim and ledger paths to reached-context evidence. It never refreshes
++`files`, `owned_paths`, `context_sha256`, original review or physics bytes.
++Changed or missing historical inputs, unsupported current edits, missing local
++checks or capture as a frontier subject still fail closed.
+--- a/tools/physics-math-context-import.mjs
++++ b/tools/physics-math-context-import.mjs
+@@ -1,136 +1,16 @@
+ #!/usr/bin/env node
+-// Selected immutable mathematical context from physics; never a publication or
+-// a transfer of native execution, audit, authoring or frontier ownership.
+-import { readFileSync, readdirSync, lstatSync, mkdirSync, writeFileSync, chmodSync, unlinkSync } from 'node:fs';
++// Current imported context and its explicit recorded root successors. Historical
++// authentication lives in a shared leaf that never calls the repair policy.
++import { readFileSync, readdirSync, mkdirSync, writeFileSync, chmodSync, unlinkSync } from 'node:fs';
+ import { resolve, join, dirname } from 'node:path';
+-import { execFileSync } from 'node:child_process';
+-import { createHash } from 'node:crypto';
+ import { pathToFileURL } from 'node:url';
+-import { yaml, split } from './pathway-lib.mjs';
+-const ID = /^(def|alg|thm|lem|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+-const KINDS = {def:'definition',alg:'algorithm',thm:'theorem',lem:'lemma',prop:'proposition',cor:'corollary',ex:'example',cex:'counterexample',fs:'false-statement',rem:'remark'};
+-export const rawHash = bytes => createHash('sha256').update(bytes).digest('hex');
++import { recordedPublishedRepair } from './published-repair-policy.mjs';
++import { inspectSelection, rawHash, verifyContextReceiptHistory,
++  bytes, json, present, fail, reviewEvidence, item } from './physics-math-context-history.mjs';
++export { inspectSelection, rawHash } from './physics-math-context-history.mjs';
+ const stable = value => Array.isArray(value) ? value.map(stable) : value && typeof value === 'object'
+   ? Object.fromEntries(Object.keys(value).sort().map(k => [k, stable(value[k])])) : value;
+ const fingerprint = value => rawHash(JSON.stringify(stable(value)));
+-const fail = message => { throw Error(`physics mathematics context: ${message}`); };
+-const present = path => { try { lstatSync(path); return true; } catch (e) { if (e.code === 'ENOENT') return false; throw e; } };
+-function regular(root, path) {
+-  if (typeof path !== 'string' || path.startsWith('/') || path.split('/').some(p => !p || p === '.' || p === '..')) fail('unsafe path');
+-  let current = root;
+-  for (const part of path.split('/')) { current = join(current, part); if (lstatSync(current).isSymbolicLink()) fail(`symlink: ${path}`); }
+-  if (!lstatSync(current).isFile()) fail(`not a regular file: ${path}`);
+-  return current;
+-}
+-const bytes = (root, path) => readFileSync(regular(root, path));
+-const json = (root, path) => JSON.parse(bytes(root, path));
+-const git = (root, args) => execFileSync('git', ['-C', root, '--no-replace-objects', ...args], { maxBuffer: 32 * 1024 * 1024 });
+-const sortedIds = values => {
+-  if (!Array.isArray(values) || !values.length || values.some(id => !ID.test(id)) || new Set(values).size !== values.length) fail('nonempty unique canonical IDs required');
+-  return [...values].sort();
+-};
+-function lists(fm, key) {
+-  const value = fm[key] ?? [];
+-  if (!Array.isArray(value) || value.some(id => typeof id !== 'string' || !(key==='aliases' ? Boolean(id.trim()) : ID.test(id))) || new Set(value).size !== value.length) fail(`invalid ${key} for ${fm.id}`);
+-  return value;
+-}
+-function item(root, path, id, physics) {
+-  const raw = bytes(root, path), {fm, body} = split(raw.toString('utf8')); const data = yaml().parse(fm);
+-  if (!data || data.id !== id || !ID.test(id) || data.kind !== KINDS[id.split('-')[0]]
+-    || data.status !== 'published' || data.domain === 'physics' || data.library === 'physics'
+-    || (physics && data.domain !== 'mathematics') || data.proved_here === false
+-    || data.external_dependency || lists(data, 'external_refs').length || data.physical_scope != null
+-    || data.empirical_result || (data.empirical_premises ?? []).length
+-    || Object.values(data.dependency_roles ?? {}).some(role => role !== 'mathematical-premise')) fail(`not an eligible published mathematical carrier: ${path}`);
+-  const deps = [...new Set([...lists(data, 'deps'), ...lists(data, 'justified_by')])].sort();
+-  if (physics && lists(data,'deps').some(dep=>data.dependency_roles?.[dep]!=='mathematical-premise')) fail(`missing mathematical dependency role: ${path}`);
+-  if (physics && lists(data, 'forward_refs').length) fail(`forward references require separate context, not supported: ${path}`);
+-  if (!body.trim() || !data.title?.trim()) fail(`incomplete carrier: ${path}`);
+-  return {raw, data, deps, path, sha256:rawHash(raw)};
+-}
+-function identities(root, ignored) {
+-  const map = new Map();
+-  // Project only identity fields: unrelated in-flight descriptive YAML must not
+-  // force broad validation. Duplicate or malformed identity fields fail closed.
+-  for (const name of readdirSync(join(root,'items')).filter(f => f.endsWith('.md'))) {
+-    const id = name.slice(0,-3); if (ignored.has(id)) continue;
+-    const {fm} = split(bytes(root, `items/${name}`).toString('utf8')); const lines = fm.split(/\r?\n/); const selected=[]; const seen=new Set();
+-    for (let i=0;i<lines.length;i++) {
+-      const match=lines[i].match(/^("(?:[^"\\]|\\.)*"|'(?:[^']|'')*'|[a-zA-Z_][a-zA-Z0-9_-]*)\s*:/); if (!match) continue;
+-      const key=Object.keys(yaml().parse(`${match[1]}: null`))[0]; if (!['id','aliases'].includes(key)) continue;
+-      if (seen.has(key)) fail(`duplicate identity field: items/${name}`); seen.add(key); selected.push(lines[i]);
+-      while(i+1<lines.length && !/^[^\s#-][^\n]*:/.test(lines[i+1])) selected.push(lines[++i]);
+-    }
+-    const data=yaml().parse(selected.join('\n')) ?? {};
+-    if (data.id !== id) fail(`noncanonical root identity: items/${name}`);
+-    for(const token of [id,...lists(data,'aliases')]) { const owners=map.get(token)??new Set();owners.add(id);map.set(token,owners); }
+-  }
+-  return map;
+-}
+-export function inspectSelection(root, run, selection, {installed=false}={}) {
+-  root=resolve(root); if (!/^[a-zA-Z0-9_-]+$/.test(run??'')) fail('invalid run');
+-  if (selection.version!==1) fail('invalid selection'); const entries=sortedIds(selection.entry_ids), expected=sortedIds(selection.expected_ids);
+-  const expectedSet=new Set(expected), imported=new Map(), boundaries=new Map(), visiting=new Set();
+-  function visit(id) {
+-    if (imported.has(id) || boundaries.has(id)) return;
+-    if (visiting.has(id)) fail(`dependency cycle: ${id}`);
+-    const target=`items/${id}.md`;
+-    if (!expectedSet.has(id) && present(join(root,target))) { const row=item(root,target,id,false); boundaries.set(id,{id,path:target,sha256:row.sha256}); return; }
+-    visiting.add(id);
+-    const source=`physics/items/${id}.md`, sourceItem=item(root,source,id,true);
+-    const commit=git(root,['log','-1','--format=%H','--',source]).toString().trim();
+-    if (!/^[a-f0-9]{40,64}$/.test(commit)) fail(`source is not Git-authenticated: ${id}`);
+-    git(root,['merge-base','--is-ancestor',commit,'HEAD']);
+-    if (!git(root,['show',`${commit}:${source}`]).equals(sourceItem.raw)) fail(`source differs from authenticated publication: ${id}`);
+-    for(const dep of sourceItem.deps) visit(dep);
+-    imported.set(id,{id,path:target,source_path:source,sha256:sourceItem.sha256,publication_commit:commit,kind:sourceItem.data.kind,aliases:lists(sourceItem.data,'aliases'),deps:sourceItem.deps,source_verification:sourceItem.data.verification??null});
+-    visiting.delete(id);
+-  }
+-  for(const id of entries) visit(id);
+-  if (JSON.stringify([...imported.keys()].sort())!==JSON.stringify(expected)) fail('actual missing-root closure differs from expected_ids');
+-  const identity=identities(root,installed?expectedSet:new Set()); const tokens=new Set();
+-  for(const row of imported.values()) {
+-    if(!installed && present(join(root,row.path))) fail(`destination collision: ${row.path}`);
+-    for(const token of [row.id,...row.aliases]) { if(tokens.has(token) || identity.has(token)) fail(`identity or alias collision: ${token}`);tokens.add(token); }
+-  }
+-  // These are prerequisite context, never any current or historical frontier.
+-  for(const name of readdirSync(join(root,'research')).filter(n=>new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(n))) {
+-    for(const page of json(root,`research/${name}`)) for(const row of page.items??[]) if(expectedSet.has(typeof row==='string'?row:row.id)) fail(`imported ID appears in frontier manifest: ${name}`);
+-  }
+-  const files=[...imported.values()].sort((a,b)=>a.id.localeCompare(b.id)); const boundary_files=[...boundaries.values()].sort((a,b)=>a.id.localeCompare(b.id));
+-  const context_sha256=fingerprint({files:files.map(({id,sha256,deps})=>({id,sha256,deps})),boundary_files});
+-  return {version:1,kind:'selected-physics-mathematics-context-inspection',run,entry_ids:entries,expected_ids:expected,context_sha256,files,boundary_files};
+-}
+-function researchPath(run,path) {
+-  if (typeof path!=='string' || !(path.startsWith(`research/${run}-`) || path.startsWith(`research/${run}/`)) || path.split('/').some(p=>p==='..'||p==='.')) fail('evidence must be run-owned research');
+-  return path;
+-}
+-function reviewEvidence(root, run, inspection, reviewPath, acceptancePath) {
+-  researchPath(run,reviewPath);researchPath(run,acceptancePath);
+-  const review=json(root,reviewPath), acceptance=json(root,acceptancePath);
+-  if(review.version!==1 || review.kind!=='focused-physics-mathematics-context-review' || review.run!==run
+-    || !/^\/root\/[^\s]+$/.test(review.reviewer??'') || review.context_sha256!==inspection.context_sha256
+-    || review.scope!=='full-supplier-proof-and-dependency-review' || !Number.isFinite(Date.parse(review.reviewed_at))
+-    || review.native_execution_coverage!==false || !Array.isArray(review.items) || !Array.isArray(review.evidence_files) || !review.evidence_files.length) fail('missing, invalid or stale focused review');
+-  const evidencePaths=new Set();
+-  for(const row of review.evidence_files) { researchPath(run,row.path);if(evidencePaths.has(row.path) || rawHash(bytes(root,row.path))!==row.sha256)fail('missing, duplicate or stale review evidence');evidencePaths.add(row.path); }
+-  const subjects=review.items.map(row=>row.id);
+-  if(new Set(subjects).size!==subjects.length || JSON.stringify(subjects.sort())!==JSON.stringify(inspection.expected_ids)) fail('focused review must cover exact imported closure');
+-  for(const file of inspection.files) {
+-    const row=review.items.find(row=>row.id===file.id);
+-    if(row.raw_sha256!==file.sha256 || row.verdict!=='pass' || row.dependency_review!=='pass'
+-      || (file.kind==='definition' ? row.definition_review : row.proof_review)!=='pass'
+-      || typeof row.evidence!=='string' || row.evidence.trim().length<40) fail(`unaccepted or stale supplier review: ${file.id}`);
+-  }
+-  const review_sha256=rawHash(bytes(root,reviewPath));
+-  if(acceptance.version!==1 || acceptance.kind!=='owner-accepted-physics-mathematics-context-review'
+-    || acceptance.run!==run || acceptance.authorized_by!=='owner' || acceptance.reviewer!=='/root'
+-    || acceptance.verdict!=='accepted' || acceptance.review_file!==reviewPath || acceptance.review_sha256!==review_sha256
+-    || acceptance.context_sha256!==inspection.context_sha256 || acceptance.native_execution_coverage!==false
+-    || !Number.isFinite(Date.parse(acceptance.accepted_at)) || Date.parse(acceptance.accepted_at)<Date.parse(review.reviewed_at)
+-    || typeof acceptance.reason!=='string' || acceptance.reason.trim().length<40) fail('missing, invalid or stale owner acceptance');
+-  return {review:{path:reviewPath,sha256:review_sha256},acceptance:{path:acceptancePath,sha256:rawHash(bytes(root,acceptancePath))}};
+-}
+ export function importSelectedContext(root,run,selection,{review,acceptance,receipt}) {
+   root=resolve(root); const wanted=`research/${run}-physics-math-context-import.json`;
+   if(receipt!==wanted) fail(`receipt must be ${wanted}`); if(present(join(root,receipt))) fail('receipt already exists');
+@@ -146,19 +26,27 @@
+     return result;
+   } catch(error) { for(const path of created.reverse())unlinkSync(path);throw error; }
+ }
+-export function verifyContextReceipt(root,receiptPath,{selectedIds=[]}={}) {
+-  root=resolve(root);const receipt=json(root,receiptPath); const expected=`research/${receipt.run}-physics-math-context-import.json`;
+-  if(receiptPath!==expected || receipt.version!==1 || receipt.kind!=='immutable-selected-physics-mathematics-context-import'
+-    || receipt.source_reference_root!=='physics' || !Number.isFinite(Date.parse(receipt.recorded_at))
+-    || receipt.external_context_only!==true || receipt.native_execution_coverage!==false) fail('invalid import receipt');
+-  if(selectedIds.some(id=>receipt.expected_ids.includes(id))) fail('external context cannot be a selected audit/authoring subject');
+-  const inspection=inspectSelection(root,receipt.run,{version:1,entry_ids:receipt.entry_ids,expected_ids:receipt.expected_ids},{installed:true});
+-  for(const field of ['context_sha256','files','boundary_files']) if(fingerprint(receipt[field])!==fingerprint(inspection[field])) fail(`stale receipt ${field}`);
+-  const evidence=reviewEvidence(root,receipt.run,inspection,receipt.review?.path,receipt.acceptance?.path);
+-  if(fingerprint(evidence)!==fingerprint({review:receipt.review,acceptance:receipt.acceptance})) fail('review/acceptance evidence changed');
+-  if(fingerprint(receipt.owned_paths)!==fingerprint(inspection.files.map(({path,sha256})=>({path,sha256}))))fail('invalid import ownership paths');
+-  for(const file of receipt.files)if(rawHash(bytes(root,file.path))!==file.sha256)fail(`immutable import changed: ${file.id}`);
+-  return {receipt,paths:[receiptPath,receipt.review.path,receipt.acceptance.path,...json(root,receipt.review.path).evidence_files.map(row=>row.path),...receipt.files.map(row=>row.source_path)]};
++export function verifyContextReceipt(root,receiptPath,options={}) {
++  const verified=verifyContextReceiptHistory(root,receiptPath,options), {receipt}=verified;
++  for(const file of receipt.files) {
++    const current=bytes(root,file.path);
++    if(rawHash(current)===file.sha256)continue;
++    const currentItem=item(root,file.path,file.id,false);
++    const repairPath=currentItem.data?.verification?.repair;
++    // The immutable import pin remains original. A changed root copy must be
++    // an ordinary recorded repair rooted in exactly this pin, never a reimport.
++    if(typeof repairPath!=='string')fail(`immutable import changed: ${file.id}`);
++    const repair=json(root,repairPath), ref=repair.prior_publication_context;
++    if(repair.run!==receipt.run || repair.before_raw_sha256!==file.sha256
++      || ref?.path!==receiptPath || ref.sha256!==rawHash(bytes(root,receiptPath))
++      || ref.source_path!==file.source_path || repair.prior_publication_commit!==file.publication_commit
++      || !recordedPublishedRepair(root,file.id,current.toString('utf8'),repairPath).ok)
++      fail(`immutable import changed without an authenticated root repair: ${file.id}`);
++    verified.paths.push(repairPath,repair.before_file,
++      `research/${repair.run}-step3-published-claims.jsonl`,'research/published-consumer-supplier-ledger.md');
++  }
++  verified.paths=[...new Set(verified.paths)];
++  return verified;
+ }
+ export function reachedPhysicsMathContext(root,reachedIds,{selectedIds=[],cache=null}={}) {
+   const reached=new Set(reachedIds), bindings=[], paths=new Set();
+--- a/tools/physics-math-context-import.test.mjs
++++ b/tools/physics-math-context-import.test.mjs
+@@ -61,3 +61,86 @@
+  const r=JSON.parse(readFileSync(join(f.root,receipt)));f.put(receipt,JSON.stringify({...r,owned_paths:[]}));assert.throws(()=>verifyContextReceipt(f.root,receipt),/ownership paths/);f.put(receipt,JSON.stringify(r));
+  f.put('physics/items/lem-local.md',source('lem-local',['def-local'])+'upstream changed');assert.throws(()=>verifyContextReceipt(f.root,receipt),/authenticated publication/);
+ });
++
++
++// Synthetic local receipts below test provenance mechanics, not mathematics or
++// real precheck/render execution. All production checks remain owner duties.
++import {recordedPublishedRepair} from './published-repair-policy.mjs';
++import {itemHashGuard} from './item-hash.mjs';
++function repairedImportFixture(t) {
++ const f=fixture(t),e=evidence(f);importSelectedContext(f.root,run,selection,e);
++ const before=readFileSync(join(f.root,'items/lem-local.md'),'utf8');
++ const importRaw=readFileSync(join(f.root,receipt));const imported=JSON.parse(importRaw);
++ const row=imported.files.find(row=>row.id==='lem-local');
++ const repairPath=`research/${run}-repair.json`, now=new Date().toISOString();
++ const current=before.replace('---\n\n## Statement',`verification:\n  repair: ${repairPath}\n---\n\n## Statement`).replace('A mathematical test carrier.','A corrected mathematical test carrier.');
++ chmodSync(join(f.root,'items/lem-local.md'),0o644);f.put('items/lem-local.md',current);
++ const pre=itemHashGuard(before),content=itemHashGuard(current);
++ const claim={version:1,run,id:'lem-local',group:'owner-fixture',pre_sha256:pre,claimed_at:now};
++ const ledger=`\nlem-local local fixture repair ${content}\n`;
++ const repair={version:1,kind:'recorded-local-published-repair',run,id:'lem-local',group:claim.group,
++  correction:'Synthetic recorded correction of imported root carrier.',content_sha256:content,
++  before_file:`research/${run}-before.md`,before_raw_sha256:rawHash(before),pre_sha256:pre,
++  recorded_at:now,prior_publication_commit:row.publication_commit,
++  prior_publication_context:{path:receipt,sha256:rawHash(importRaw),source_path:row.source_path},
++  ledger_marker:'fixture-import',ledger_sha256:rawHash(ledger),local_checks:Object.fromEntries(['precheck','rendercheck'].map(tool=>[tool,{
++   checked_at:now,content_sha256:content,exit_code:0,command:['node',`tools/${tool}${tool==='precheck'?'.mts':'.mjs'}`,'items/lem-local.md'],
++   output:tool==='precheck'?'PASS items/lem-local.md\n1 checked, 0 failing':'OK — 1 file(s)'}]))};
++ f.put(repair.before_file,before);f.put(`research/${run}-step3-published-claims.jsonl`,JSON.stringify(claim)+'\n');
++ f.put('research/published-consumer-supplier-ledger.md',`<!-- local-published-repair:fixture-import:begin -->${ledger}<!-- local-published-repair:fixture-import:end -->`);
++ const putRepair=()=>f.put(repairPath,JSON.stringify(repair));putRepair();
++ return {...f,before,current,claim,repair,repairPath,imported,importRaw,row,putRepair,
++  check:()=>recordedPublishedRepair(f.root,'lem-local',readFileSync(join(f.root,'items/lem-local.md'),'utf8'),repairPath),
++  putClaim:()=>f.put(`research/${run}-step3-published-claims.jsonl`,JSON.stringify(claim)+'\n')};
++}
++test('ordinary root repair authenticates original physics publication and preserves immutable import',t=>{
++ const f=repairedImportFixture(t);assert.equal(f.check().ok,true);
++ const verified=verifyContextReceipt(f.root,receipt);assert.ok(verified.paths.includes(f.repairPath));assert.ok(verified.paths.includes(f.repair.before_file));
++ assert.deepEqual(readFileSync(join(f.root,receipt)),f.importRaw);
++ assert.equal(readFileSync(join(f.root,f.row.source_path),'utf8'),f.before);
++ assert.throws(()=>f.git('show',`${f.row.publication_commit}:items/lem-local.md`),'no original root Git carrier');
++ assert.doesNotMatch(f.current,/audited:|verified:/);assert.equal(reachedPhysicsMathContext(f.root,['lem-local']).bindings.length,1);
++ assert.throws(()=>verifyContextReceipt(f.root,receipt,{selectedIds:['lem-local']}),/cannot be a selected/);
++});
++for(const defect of ['missing-reference','reference-hash','reference-path','source-path','source-id','missing-commit','wrong-commit',
++ 'wrong-run','wrong-owner','pre-import-claim','changed-before','changed-physics','changed-import-pin','changed-owned-paths',
++ 'changed-review','changed-acceptance','missing-local-check','stale-check','failed-render','changed-ledger','changed-current','adoption-kind']) {
++ test(`imported root repair rejects ${defect}`,t=>{
++  const f=repairedImportFixture(t),r=f.repair;assert.equal(f.check().ok,true);
++  if(defect==='missing-reference')delete r.prior_publication_context;
++  if(defect==='reference-hash')r.prior_publication_context.sha256='0'.repeat(64);
++  if(defect==='reference-path')r.prior_publication_context.path=`research/${run}-other-import.json`;
++  if(defect==='source-path')r.prior_publication_context.source_path='items/lem-local.md';
++  if(defect==='source-id')r.prior_publication_context.source_path='physics/items/def-local.md';
++  if(defect==='missing-commit')delete r.prior_publication_commit;
++  if(defect==='wrong-commit')r.prior_publication_commit='0'.repeat(40);
++  if(defect==='wrong-run')r.run='other';
++  if(defect==='wrong-owner')r.group='other';
++  if(defect==='pre-import-claim'){f.claim.claimed_at='2000-01-01T00:00:00Z';f.putClaim();}
++  if(defect==='changed-before'){
++   const before=f.before+'fabricated original\n';f.put(r.before_file,before);r.before_raw_sha256=rawHash(before);
++   r.pre_sha256=itemHashGuard(before);f.claim.pre_sha256=r.pre_sha256;f.putClaim();
++  }
++  if(defect==='changed-physics')f.put(f.row.source_path,f.before+'changed physics\n');
++  if(defect==='changed-import-pin'||defect==='changed-owned-paths'){
++   const imported=structuredClone(f.imported);
++   if(defect==='changed-import-pin')imported.files.find(row=>row.id==='lem-local').sha256='0'.repeat(64);
++   else imported.owned_paths=[];
++   const raw=JSON.stringify(imported);f.put(receipt,raw);r.prior_publication_context.sha256=rawHash(raw);
++  }
++  if(defect==='changed-review')f.put(f.imported.review.path,'{}');
++  if(defect==='changed-acceptance')f.put(f.imported.acceptance.path,'{}');
++  if(defect==='missing-local-check')delete r.local_checks.precheck;
++  if(defect==='stale-check')r.local_checks.precheck.content_sha256='0'.repeat(64);
++  if(defect==='failed-render')r.local_checks.rendercheck.exit_code=1;
++  if(defect==='changed-ledger')f.put('research/published-consumer-supplier-ledger.md','changed ledger');
++  if(defect==='changed-current')f.put('items/lem-local.md',f.current+'unsupported current change\n');
++  if(defect==='adoption-kind'){f.claim.claim_kind='owner-adopted-delegated-repair';f.putClaim();}
++  f.putRepair();assert.equal(f.check().ok,false);assert.throws(()=>verifyContextReceipt(f.root,receipt));
++ });
++}
++test('imported publication must remain an ancestor, not merely an available Git object',t=>{
++ const f=repairedImportFixture(t);f.git('checkout','--orphan','unrelated');
++ f.git('rm','-rf','--cached','.');f.put('unrelated.txt','Unrelated branch\n');f.git('add','unrelated.txt');f.git('commit','-qm','Unrelated root');
++ assert.equal(f.check().ok,false);assert.throws(()=>verifyContextReceipt(f.root,receipt));
++});
+--- a/tools/published-repair-policy.mjs
++++ b/tools/published-repair-policy.mjs
+@@ -7,6 +7,7 @@
+ import { spawnSync } from 'node:child_process';
+ import { itemHashGuard } from './item-hash.mjs';
+ import { ADOPTION_KIND, authenticateAdoption, hasCommittedPriorPublication } from './published-repair-adoption.mjs';
++import { hasPhysicsContextPriorPublication } from './physics-math-context-history.mjs';
+ 
+ const sha = (text) => createHash('sha256').update(text).digest('hex');
+ const frontmatter = (text) => /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(text)?.[1] ?? '';
+@@ -80,7 +81,13 @@
+     } else if (claim.adoption_receipt !== undefined || claim.adoption_sha256 !== undefined) {
+       return fail('adoption evidence requires its explicit ownership claim kind');
+     }
+-    if (claim.claim_kind !== ADOPTION_KIND && !hasPriorPublicationAudit(before)
++    if (receipt.prior_publication_context !== undefined) {
++      // Explicit imported lineage is checked even if an audit or root Git
++      // carrier would otherwise suffice. It never extends adoption recovery.
++      if (claim.claim_kind === ADOPTION_KIND || !hasPhysicsContextPriorPublication(root, id, before,
++        receipt.prior_publication_commit, claim.claimed_at, receipt.run, receipt.prior_publication_context))
++        return fail('invalid prior physics mathematics context publication');
++    } else if (claim.claim_kind !== ADOPTION_KIND && !hasPriorPublicationAudit(before)
+       && !hasCommittedPriorPublication(root, id, before, receipt.prior_publication_commit, claim.claimed_at))
+       return fail('pre-edit carrier lacks an audit or authenticated prior publication');
+     if (!/^[a-zA-Z0-9:_-]+$/.test(receipt.ledger_marker ?? '')) return fail('invalid ledger marker');

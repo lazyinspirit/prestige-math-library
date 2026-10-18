@@ -3,11 +3,13 @@ id: lem-sard-on-the-nonflat-critical-strata
 kind: lemma
 title: "Sard on the nonflat critical strata"
 status: published
+dependency_level: 2
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-euclidean-inverse-function-theorem, lem-kneser-glaeser-rough-composition-on-flat-sets]
+deps: [thm-euclidean-inverse-function-theorem, thm-higher-regularity-of-local-inverses,
+       lem-kneser-glaeser-rough-composition-on-flat-sets]
 justified_by: []
 aliases: []
 landmark: false
@@ -19,14 +21,11 @@ sources:
       url: "https://arxiv.org/pdf/1511.05822"
 verification:
   precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-24'
-    scope: Bounded mathematical repair review recorded in /home/lazyinspirit/Projects/prestige-math-library/research/ap-131-sol-repair/agent-10-receipts.jsonl.
-      Local checks and any separate second-reader evidence are recorded in the run
-      report; this is not an independent judge verdict or whole-library certification.
-    delegated_by: user
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/lem-sard-on-the-nonflat-critical-strata.json
 ---
 
 ## Statement
@@ -48,10 +47,12 @@ $\mathbb R^{m-1}$ to $\mathbb R^n$, then $f(K)$ is null.
 
 [L2] A $C^r$ map that is $j$-flat on a set has a $C^r$ rough-composition extension along a $C^{r-j}$ parametrization of that set ([[lem-kneser-glaeser-rough-composition-on-flat-sets]]).
 
+[L3] Every local inverse supplied for a $C^k$ Euclidean map with invertible derivative is $C^k$ ([[thm-higher-regularity-of-local-inverses]]).
+
 ## Proof
 **Proof technique:** direct.
 
-1.1 Fix $x\in K$. [L1, given, choose] Because $x\notin C_{j+1}$, some partial derivative of order $j+1$ of some component of $f$ is nonzero at $x$. After reordering coordinates and components, choose a multi-index $\alpha$ with $|\alpha|=j$ and a component $f^\mu$ such that, for $$ g:=D^\alpha f^\mu, $$ one has $\partial g/\partial x^1(x)\neq 0$. Since $g$ is $C^{r-j}$, [L1] applied to $$ \Phi_x(y):=\bigl(g(y),y^2,\ldots,y^m\bigr) $$ gives a neighbourhood $W_x$ of $x$ and a $C^{r-j}$ diffeomorphism from $W_x$ onto an open set $I_x\times\Omega_x\subseteq\mathbb R\times\mathbb R^{m-1}$. [L1, given, choose]
+1.1 Fix $x\in K$. [L1, given, choose] Because $x\notin C_{j+1}$, some partial derivative of order $j+1$ of some component of $f$ is nonzero at $x$. After reordering coordinates and components, choose a multi-index $\alpha$ with $|\alpha|=j$ and a component $f^\mu$ such that, for $$ g:=D^\alpha f^\mu, $$ one has $\partial g/\partial x^1(x)\neq 0$. Since $g$ is $C^{r-j}$, [L1] gives local inverse-function coordinates for $$ \Phi_x(y):=\bigl(g(y),y^2,\ldots,y^m\bigr), $$ whose derivative at $x$ is invertible. The higher-regularity conclusion [L3], with $k=r-j\ge1$, upgrades that inverse to $C^{r-j}$. Thus after shrinking, $\Phi_x$ is a $C^{r-j}$ diffeomorphism from a neighbourhood $W_x$ of $x$ onto an open set $I_x\times\Omega_x\subseteq\mathbb R\times\mathbb R^{m-1}$. [L1, L3, given, choose]
 
 2.1 Every point of $K\cap W_x$ lies in $C_j$, so $g$ vanishes there by definition of $C_j$. Hence $$ \Phi_x(K\cap W_x)\subseteq \{0\}\times\Omega_x. $$ If $m=1$, then $\Omega_x\subseteq\mathbb R^0$ has at most one point. Thus $K\cap W_x$ has at most one point, and its image is null in $\mathbb R^n$. Assume $m\ge2$. Define the $C^{r-j}$ graph parametrization $$ b_x:\Omega_x\to U,\qquad b_x(u):=\Phi_x^{-1}(0,u), $$ and the relatively closed set $A_x^*:=b_x^{-1}(C_j\cap W_x)$ in $\Omega_x$. The map $f$ is $j$-flat on $C_j$, and $b_x(A_x^*)\subseteq C_j$. By [L2] there is a $C^r$ map $H_x:\Omega_x\to\mathbb R^n$ agreeing with $f\circ b_x$ on $A_x^*$ and satisfying $DH_x=0$ there. Thus every $u\in b_x^{-1}(K\cap W_x)$ is a critical point of the **$C^r$** map $H_x$, and $$ f(K\cap W_x)=H_x\bigl(b_x^{-1}(K\cap W_x)\bigr)\subseteq H_x(\operatorname{Crit}H_x). $$ The induction hypothesis, at the unchanged differentiability order $r$, gives nullity of this image. [L2, step 1.1, algebra]
 

@@ -1,0 +1,2305 @@
+{
+  "version": 1,
+  "level": "batch-20",
+  "note": "Draft contracts mirror the canonical numbered arguments. Exact supplier excerpts are quoted from the named item sections; unresolved page-level prerequisites and readiness are recorded separately.",
+  "scope": [
+    "thm-it-universal-hashing-leftover-bound",
+    "lem-it-finite-wiretap-product-kernel-is-stochastic",
+    "lem-it-finite-dmc-information-density-concentration",
+    "thm-it-perfect-privacy-kernel-criterion",
+    "lem-it-channel-resolvability-soft-covering",
+    "lem-it-classical-wiretap-auxiliary-cardinality",
+    "thm-it-finite-classical-wiretap-auxiliary-capacity",
+    "thm-it-degraded-wiretap-secrecy-capacity",
+    "ex-it-information-bottleneck-finite-model",
+    "ex-it-weak-secrecy-does-not-imply-strong-secrecy",
+    "ex-it-degraded-wiretap-capacity"
+  ],
+  "contracts": {
+    "thm-it-universal-hashing-leftover-bound": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $z$ with $P_Z(z)>0$ and write $q_z(x):=P(X=x\\mid Z=z)$ and $r_{h,z}(k):=\\sum_{x:h(x)=k}q_z(x)$. Expanding the square and applying [A1] to the off-diagonal terms gives $\\mathbb E_H\\sum_{k=1}^M r_{H,z}(k)^2\\le\\sum_xq_z(x)^2+\\frac1M\\sum_{x\\ne x'}q_z(x)q_z(x')=\\frac1M+\\left(1-\\frac1M\\right)\\sum_xq_z(x)^2.$ Since $\\sum_k r_{h,z}(k)=1$, subtracting $1/M$ from this inequality yields $\\mathbb E_H\\sum_k(r_{H,z}(k)-1/M)^2\\le\\sum_xq_z(x)^2$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The total-variation definition and [A2] give $\\operatorname{TV}(P_{KHZ},U_M\\otimes P_{HZ})=\\frac12\\sum_{h,z}P_H(h)P_Z(z)\\sum_k|r_{h,z}(k)-1/M|.$ For any real vector $(a_k)_{k=1}^M$, $M\\sum_ka_k^2-(\\sum_k|a_k|)^2=\\sum_{i<j}(|a_i|-|a_j|)^2\\ge0$. Applying this identity to $a_k=r_{h,z}(k)-1/M$ bounds the inner sum by $\\sqrt{M\\sum_k(r_{h,z}(k)-1/M)^2}$. For a nonnegative finite random variable $V$, $\\mathbb E[V]-(\\mathbb E\\sqrt V)^2=\\mathbb E[(\\sqrt V-\\mathbb E\\sqrt V)^2]\\ge0$. Applying this to the squared-bin sum over $(H,Z)$, followed by step 1.1, gives $\\operatorname{TV}(P_{KHZ},U_M\\otimes P_{HZ})\\le\\frac12\\sqrt{M\\sum_zP_Z(z)\\sum_xq_z(x)^2}.$",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every probability vector $q_z$, $\\sum_xq_z(x)^2\\le\\max_xq_z(x)\\sum_xq_z(x)=\\max_xq_z(x)$. Hence $\\sum_zP_Z(z)\\sum_xq_z(x)^2\\le\\sum_zP_Z(z)\\max_xq_z(x)=\\sum_z\\max_xP_{XZ}(x,z)=g(X\\mid Z).$ Combining with step 2.1 proves the bound, including zero-mass $z$ by omission.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $M g(X\\mid Z)\\le4\\varepsilon^2$, the bound proved in step 3.1 is at most $\\varepsilon$ by taking nonnegative square roots.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim. Independent item review: Two-universal collision expansion bounds the mean squared bin deviation; finite Cauchy–Schwarz and sum q²<=max q give the public-seed TV bound (1.1–4.1).",
+            "item_sha256": "c4e4113fcca893b4733a91338c307bc6e5eae8ebf0b8f3f971d6d48ac45fdf53",
+            "row_sha256": "e863846b7da87da97cee9fc239953af45377ea7ba3d847fd82747524a5881b6a"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim. Independent item review: Two-universal collision expansion bounds the mean squared bin deviation; finite Cauchy–Schwarz and sum q²<=max q give the public-seed TV bound (1.1–4.1)."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-mass z values are omitted in steps 1.1 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-bin case M=1 is covered by the finite bin sums in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A deterministic X is covered on its one-point support in steps 1.1–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The output-size equality M g(X|Z)=4 epsilon^2 is included in step 4.1; the Statement assumes epsilon>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument makes no selection from an infinite family and uses no choice axiom.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The argument makes no selection from an infinite family and uses no choice axiom. Independent item review: Two-universal collision expansion bounds the mean squared bin deviation; finite Cauchy–Schwarz and sum q²<=max q give the public-seed TV bound (1.1–4.1).",
+            "item_sha256": "c4e4113fcca893b4733a91338c307bc6e5eae8ebf0b8f3f971d6d48ac45fdf53",
+            "row_sha256": "8d689a368a383a6d44d90633870222a7923aa7b4e9f6096f3af8c5161ae43e37"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The claim is not stated as a biconditional. Independent item review: Two-universal collision expansion bounds the mean squared bin deviation; finite Cauchy–Schwarz and sum q²<=max q give the public-seed TV bound (1.1–4.1).",
+            "item_sha256": "c4e4113fcca893b4733a91338c307bc6e5eae8ebf0b8f3f971d6d48ac45fdf53",
+            "row_sha256": "452049805ed355b30b80557022b5ad9df9af06642039717828c526747f4a4a22"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The claim is not stated as a biconditional. Independent item review: Two-universal collision expansion bounds the mean squared bin deviation; finite Cauchy–Schwarz and sum q²<=max q give the public-seed TV bound (1.1–4.1).",
+            "item_sha256": "c4e4113fcca893b4733a91338c307bc6e5eae8ebf0b8f3f971d6d48ac45fdf53",
+            "row_sha256": "dc738a6e7f42bf2afa8edadc0e985f8303b0e2598965d5c33b96d2aa8fb13f9f"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "single-output bin boundary",
+          "method": "direct finite calculation",
+          "inputs": [
+            "M=1",
+            "X deterministic"
+          ],
+          "result": "The hashed output is the unique bin, so total variation is 0 and the stated upper bound is 1/2.",
+          "checked_in": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ]
+    },
+    "lem-it-finite-wiretap-product-kernel-is-stochastic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-stochastic-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y$ be finite nonempty sets. A **stochastic kernel**\nfrom $\\mathcal X$ to $\\mathcal Y$ is a matrix\n$K=(K(y\\mid x))_{x\\in\\mathcal X,y\\in\\mathcal Y}$ such that\n$K(y\\mid x)\\ge0$ and $\\sum_{y\\in\\mathcal Y}K(y\\mid x)=1$ for every\n$x\\in\\mathcal X$. The convention is input first in the condition and output\nfirst in the value $K(y\\mid x)$.\n\nFor a probability vector $P=(p_x)_{x\\in\\mathcal X}$, the output vector\n$PK$ on $\\mathcal Y$ is\n$$(PK)_y:=\\sum_{x\\in\\mathcal X}p_xK(y\\mid x).$$\nIt is a probability vector because its coordinates are nonnegative and\n$\\sum_y(PK)_y=\\sum_xp_x\\sum_yK(y\\mid x)=\\sum_xp_x=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $x^n\\in\\mathcal X^n$. Every factor $W(y_i,z_i\\mid x_i)$ is nonnegative by [F1], so every product $W^n(y^n,z^n\\mid x^n)$ is nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Finite distributivity factors the output sum as $\\sum_{y^n,z^n}W^n(y^n,z^n\\mid x^n)=\\prod_{i=1}^n\\left(\\sum_{y_i,z_i}W(y_i,z_i\\mid x_i)\\right)=\\prod_{i=1}^n1=1.$ The row sums are one by [F1]; together with step 1.1 these are exactly the stochastic-kernel conditions.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The product runs over positive blocklength n>=1; the underlying stochastic law has nonempty support. Zero-probability letters are omitted, not treated as an empty probability alphabet.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The product runs over positive blocklength n>=1; the underlying stochastic law has nonempty support. Zero-probability letters are omitted, not treated as an empty probability alphabet. Independent item review: Every block entry is nonnegative and finite distributivity makes its output sum the product of n stochastic row sums, equal to one (1.1,2.1).",
+            "item_sha256": "b447ce64476de3bfa8086e14f97392d6d301a552bdd596ff5182615e566a94f3",
+            "row_sha256": "af7a42fc7dfc394e67a8fbe24501d3796b927036a7b0f5e78ff0b44b3878abd4"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The product runs over positive blocklength n>=1; the underlying stochastic law has nonempty support. Zero-probability letters are omitted, not treated as an empty probability alphabet. Independent item review: Every block entry is nonnegative and finite distributivity makes its output sum the product of n stochastic row sums, equal to one (1.1,2.1)."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero kernel entries remain nonnegative and are included in the row-sum calculation in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=1 the product formula is exactly the original kernel, as steps 1.1 and 2.1 show."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A deterministic row is a nonnegative row of sum one, covered by step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is not an interval or endpoint assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The claim is not an interval or endpoint assertion. Independent item review: Every block entry is nonnegative and finite distributivity makes its output sum the product of n stochastic row sums, equal to one (1.1,2.1).",
+            "item_sha256": "b447ce64476de3bfa8086e14f97392d6d301a552bdd596ff5182615e566a94f3",
+            "row_sha256": "06a3c9ed956504f677643dd4ab8ee8d4c6f93e1eb86628225eb7075367a1c756"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument makes no selection from an infinite family and uses no choice axiom.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The argument makes no selection from an infinite family and uses no choice axiom. Independent item review: Every block entry is nonnegative and finite distributivity makes its output sum the product of n stochastic row sums, equal to one (1.1,2.1).",
+            "item_sha256": "b447ce64476de3bfa8086e14f97392d6d301a552bdd596ff5182615e566a94f3",
+            "row_sha256": "8d689a368a383a6d44d90633870222a7923aa7b4e9f6096f3af8c5161ae43e37"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The claim is not stated as a biconditional. Independent item review: Every block entry is nonnegative and finite distributivity makes its output sum the product of n stochastic row sums, equal to one (1.1,2.1).",
+            "item_sha256": "b447ce64476de3bfa8086e14f97392d6d301a552bdd596ff5182615e566a94f3",
+            "row_sha256": "452049805ed355b30b80557022b5ad9df9af06642039717828c526747f4a4a22"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The claim is not stated as a biconditional. Independent item review: Every block entry is nonnegative and finite distributivity makes its output sum the product of n stochastic row sums, equal to one (1.1,2.1).",
+            "item_sha256": "b447ce64476de3bfa8086e14f97392d6d301a552bdd596ff5182615e566a94f3",
+            "row_sha256": "dc738a6e7f42bf2afa8edadc0e985f8303b0e2598965d5c33b96d2aa8fb13f9f"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "blocklength n=1",
+          "method": "substitution into the product formula",
+          "inputs": [
+            "n=1",
+            "finite stochastic W"
+          ],
+          "result": "W^1(y,z|x)=W(y,z|x), whose row is stochastic by hypothesis.",
+          "checked_in": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ]
+    },
+    "lem-it-finite-dmc-information-density-concentration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-information-units-and-logarithm-base",
+          "source_section": "Definition",
+          "quote": "Write $\\ln$ for the natural logarithm $\\log$ of [[def-natural-logarithm]]. Unless a base is displayed, every information quantity on this page uses $\\ln$ and is measured in **nats**. For a base $b>1$ and $t>0$, define\n$$\\log_b t:=\\frac{\\ln t}{\\ln b}.$$\nThe denominator is positive: $b>1$, $\\ln$ is strictly increasing, and $\\ln 1=0$ by [[thm-natural-logarithm-laws]]. A base-$b$ entropy or divergence is obtained by replacing each $\\ln$ in the finite formulas below by $\\log_b$; use $0\\log_b0:=0$ and assign $+\\infty$ to a positive numerator over a zero denominator. The case $b=2$ measures **bits**; $b=e$ gives nats.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $P_U(u)W(y\\mid u)>0$, then $P_Y(y)\\ge P_U(u)W(y\\mid u)>0$. Hence every displayed logarithm is finite; because the joint support is finite, $J$ is bounded and $B<\\infty$. The unmarked logarithm uses nats by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The expectation $\\mathbb E[J(U,Y)]$ is the finite sum in [F2], so it equals $I$. Independence and the common product law in [F1] give $\\mathbb E[S_n]=nI$ and $\\mathbb E[(S_n-nI)^2]=n\\sigma^2$: the cross terms vanish because each centered summand has mean zero, and each diagonal term has second moment $\\sigma^2$. For the nonnegative variable $(S_n-nI)^2$, the pointwise inequality $\\mathbf 1\\{(S_n-nI)^2\\ge n^2\\delta^2\\}\\le (S_n-nI)^2/(n^2\\delta^2)$ gives the Chebyshev bound after taking expectations.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $\\gamma>0$ and define $\\phi(t):=\\mathbb E[e^{t(J-I-\\gamma)}]$. Finite support makes $\\phi$ differentiable at zero, with $\\phi(0)=1$ and $\\phi'(0)=\\mathbb E[J-I-\\gamma]=-\\gamma<0$. By the definition of derivative, some sufficiently small $t>0$ has $0<\\rho:=\\phi(t)<1$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The event $S_n>n(I+\\gamma)$ implies $e^{t\\sum_i(J(U_i,Y_i)-I-\\gamma)}>1$. Its indicator is therefore at most that nonnegative exponential. Independence of the IID pairs gives $\\Pr[S_n>n(I+\\gamma)]\\le\\mathbb E\\left[e^{t\\sum_i(J(U_i,Y_i)-I-\\gamma)}\\right]=\\phi(t)^n=\\rho^n.$ This proves the exponential tail.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The product runs over positive blocklength n>=1; the underlying stochastic law has nonempty support. Zero-probability letters are omitted, not treated as an empty probability alphabet.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The product runs over positive blocklength n>=1; the underlying stochastic law has nonempty support. Zero-probability letters are omitted, not treated as an empty probability alphabet. Independent item review: Positive joint atoms have PY>0, making finite-support information density bounded; variance sums give Chebyshev and a positive exponential tilt with negative derivative gives an exponential upper tail (1.1–4.1).",
+            "item_sha256": "a50ba29542fa52d9e32ef0c7292bf5ebc2600bc43d0a59878afb9f6866199a36",
+            "row_sha256": "af7a42fc7dfc394e67a8fbe24501d3796b927036a7b0f5e78ff0b44b3878abd4"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The product runs over positive blocklength n>=1; the underlying stochastic law has nonempty support. Zero-probability letters are omitted, not treated as an empty probability alphabet. Independent item review: Positive joint atoms have PY>0, making finite-support information density bounded; variance sums give Chebyshev and a positive exponential tilt with negative derivative gives an exponential upper tail (1.1–4.1)."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When sigma^2=0, the Chebyshev bound in step 2.1 has zero right side; the exponential argument in steps 3.1–4.1 still applies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The stated bounds include n=1 directly in steps 2.1 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For a deterministic one-point joint support, J=I and sigma^2=0, as defined and used in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires positive thresholds; the exponential-tail assertion is proved for every gamma>0 in steps 3.1–4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument makes no selection from an infinite family and uses no choice axiom.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The argument makes no selection from an infinite family and uses no choice axiom. Independent item review: Positive joint atoms have PY>0, making finite-support information density bounded; variance sums give Chebyshev and a positive exponential tilt with negative derivative gives an exponential upper tail (1.1–4.1).",
+            "item_sha256": "a50ba29542fa52d9e32ef0c7292bf5ebc2600bc43d0a59878afb9f6866199a36",
+            "row_sha256": "8d689a368a383a6d44d90633870222a7923aa7b4e9f6096f3af8c5161ae43e37"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The claim is not stated as a biconditional. Independent item review: Positive joint atoms have PY>0, making finite-support information density bounded; variance sums give Chebyshev and a positive exponential tilt with negative derivative gives an exponential upper tail (1.1–4.1).",
+            "item_sha256": "a50ba29542fa52d9e32ef0c7292bf5ebc2600bc43d0a59878afb9f6866199a36",
+            "row_sha256": "452049805ed355b30b80557022b5ad9df9af06642039717828c526747f4a4a22"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The claim is not stated as a biconditional. Independent item review: Positive joint atoms have PY>0, making finite-support information density bounded; variance sums give Chebyshev and a positive exponential tilt with negative derivative gives an exponential upper tail (1.1–4.1).",
+            "item_sha256": "a50ba29542fa52d9e32ef0c7292bf5ebc2600bc43d0a59878afb9f6866199a36",
+            "row_sha256": "dc738a6e7f42bf2afa8edadc0e985f8303b0e2598965d5c33b96d2aa8fb13f9f"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "one-point deterministic channel",
+          "method": "direct support calculation",
+          "inputs": [
+            "P_U concentrated at one symbol",
+            "W deterministic"
+          ],
+          "result": "J=I=0 and sigma^2=0; both displayed tail bounds hold.",
+          "checked_in": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Read steps 1.1-4.1 and current finite-DMC/product-kernel, MI, nats, logarithm and exponential-derivative suppliers. On positive joint support the output marginal is positive, so J is finite and bounded without full support. Centered independence gives variance n sigma^2, including sigma=0. For every gamma>0 the finite exponential moment has derivative -gamma at zero and thus a value strictly between zero and one at some t>0; the indicator bound and product expectation prove the upper tail for all n>=1. No choice or uniform-in-law exponent is claimed. Cuff Lecture 12 pp. 1-2 contain converse context rather than the stated information-density threshold locator: corrected this separate citation defect; local mathematics unchanged."
+      }
+    },
+    "thm-it-perfect-privacy-kernel-criterion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-source-privacy-utility-region",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite sensitive variable and $X$ a finite useful variable with joint law $P_{SX}$. For each finite nonempty release alphabet $\\mathcal Z$, choose a stochastic kernel $K(z\\mid x)$ from $\\mathcal X$ to $\\mathcal Z$ ([[def-finite-stochastic-kernel]]) and form\n\n$$P_{SXZ}(s,x,z):=P_{SX}(s,x)K(z\\mid x).$$\n\nThus the induced variables satisfy the explicitly defined factorization $P_{SXZ}=P_{SX}K_{Z\\mid X}$, written $S-X-Z$. The **privacy–utility region** for this source is the closure in $\\mathbb R^2$ of\n\n$$\\bigcup_{\\mathcal Z,K}\\left\\{\\bigl(I(S;Z),I(X;Z)\\bigr)\\right\\},$$\n\nwhere mutual information uses nats and the finite definition [[def-it-finite-mutual-information]]. The first coordinate is the chosen leakage metric and the second is the chosen retained-information utility. This model does not itself impose a distortion, rate, or perfect-privacy constraint; those define different optimization problems.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $I(S;Z)=0$, [F2] and [F3] give $P_{SZ}=P_S\\otimes P_Z$. For every $s$ with $P_S(s)>0$, divide the equality $P_{SZ}(s,z)=P_S(s)P_Z(z)$ by $P_S(s)$ and use [F1]. The conditional mixture in the Statement is therefore $P_Z(z)$, independent of $s$ for every $z$, in particular for every positive-mass $z$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, assume the stated mixture is a constant $c_z$ in $s$ on $\\operatorname{supp}P_S$ for each $z$ with $P_Z(z)>0$. Averaging it over $P_S$ shows $c_z=P_Z(z)$. If $P_Z(z)=0$, [F1] gives $0=P_Z(z)=\\sum_{s:P_S(s)>0}P_S(s)P_{Z\\mid S=s}(z)$, a finite sum of nonnegative terms with positive weights; hence each $P_{Z\\mid S=s}(z)=0=P_Z(z)$. Thus for every $s$ in the support and every $z$, $P_{Z\\mid S=s}(z)=P_Z(z)$, so [F1] yields $P_{SZ}=P_S\\otimes P_Z$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F2] and [F3] to this equality gives $I(S;Z)=0$. This proves both directions, including zero-probability release symbols.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim. Independent item review: Independence follows from zero KL; conversely constant positive-output conditional mixtures average to PZ, and zero-output mass forces all supported conditional masses zero (1.1–2.1).",
+            "item_sha256": "b7ab696f0523fc08bf819c2536cb0689beedae23f74e08453b29e12cea79c735",
+            "row_sha256": "e863846b7da87da97cee9fc239953af45377ea7ba3d847fd82747524a5881b6a"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-mass release columns are shown to vanish for every positive-mass sensitive value in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If S has one positive-mass value, conditional independence is automatic and both directions apply in steps 1.1–1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Deterministic conditional laws are allowed without a full-support assumption in steps 1.1–1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is not an interval or endpoint assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The claim is not an interval or endpoint assertion. Independent item review: Independence follows from zero KL; conversely constant positive-output conditional mixtures average to PZ, and zero-output mass forces all supported conditional masses zero (1.1–2.1).",
+            "item_sha256": "b7ab696f0523fc08bf819c2536cb0689beedae23f74e08453b29e12cea79c735",
+            "row_sha256": "06a3c9ed956504f677643dd4ab8ee8d4c6f93e1eb86628225eb7075367a1c756"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument makes no selection from an infinite family and uses no choice axiom.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The argument makes no selection from an infinite family and uses no choice axiom. Independent item review: Independence follows from zero KL; conversely constant positive-output conditional mixtures average to PZ, and zero-output mass forces all supported conditional masses zero (1.1–2.1).",
+            "item_sha256": "b7ab696f0523fc08bf819c2536cb0689beedae23f74e08453b29e12cea79c735",
+            "row_sha256": "8d689a368a383a6d44d90633870222a7923aa7b4e9f6096f3af8c5161ae43e37"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The implication from I(S;Z)=0 to equality of conditional release laws is proved in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse implication, including zero output columns, is proved in steps 1.2 and 2.1."
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "constant release kernel",
+          "method": "direct factorization",
+          "inputs": [
+            "K(z0|x)=1 for every x"
+          ],
+          "result": "P_{Z|S=s} is the same point mass for each positive-mass s, and I(S;Z)=0.",
+          "checked_in": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Read all steps and current F1-F3 suppliers. KL equality proves the forward implication; averaging the constant conditional rows proves the reverse on positive release support, while a zero P_Z value forces all positive-weight conditional masses to zero. Zero P_S values are omitted, as stated. Singleton alphabets satisfy both directions. Source author order independently verified at arXiv:1402.1774v5 p. 1 and finite privacy mapping in §§II-III. No choice or extra positivity hypothesis is used."
+      }
+    },
+    "lem-it-channel-resolvability-soft-covering": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-discrete-memoryless-channel",
+          "source_section": "Definition",
+          "quote": "A **finite discrete memoryless channel (DMC)** is the channel sequence [[def-channel-sequence]] with fixed finite nonempty input and output alphabets $\\mathcal X,\\mathcal Y$ (with every subset measurable) and one stochastic kernel $W(y\\mid x)$ from $\\mathcal X$ to $\\mathcal Y$ ([[def-finite-stochastic-kernel]]). At every blocklength its input and output alphabets are $\\mathcal X^n,\\mathcal Y^n$, and its block kernel is\n$$W^n(y^n\\mid x^n):=\\prod_{i=1}^n W(y_i\\mid x_i).$$\nThus the same single-use transition law is applied independently at each coordinate, conditional on the input word. This page imposes no feedback or input-cost constraint.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discrete-memoryless-channel-block-kernels-are-stochastic",
+          "source_section": "Statement",
+          "quote": "For a finite DMC $W$ and every $n\\ge1$, the block formula $W^n(y^n\\mid x^n)=\\prod_{i=1}^n W(y_i\\mid x_i)$ is a stochastic kernel from $\\mathcal X^n$ to $\\mathcal Y^n$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-it-finite-dmc-information-density-concentration",
+          "source_section": "Statement",
+          "quote": "Let $W(y\\mid u)$ be a finite DMC and let $P_U$ be any fixed input probability vector. Let $P_Y(y)=\\sum_uP_U(u)W(y\\mid u)$. On the joint support $P_U(u)W(y\\mid u)>0$, define\n\n$$J(u,y):=\\ln\\frac{W(y\\mid u)}{P_Y(y)},\\qquad I:=I(U;Y),\\qquad \\sigma^2:=\\sum_{u,y:P_U(u)W(y\\mid u)>0}P_U(u)W(y\\mid u)(J(u,y)-I)^2.$$\n\nFor IID pairs $(U_i,Y_i)\\sim P_UW$, write $S_n=\\sum_{i=1}^nJ(U_i,Y_i)$ and $B:=\\max(0,\\max_{P_U(u)W(y\\mid u)>0}J(u,y))$. Then $J$ is bounded and $\\mathbb E[J]=I$. For every $\\delta>0$,\n\n$$\\Pr\\left[\\left|\\frac{S_n}{n}-I\\right|\\ge\\delta\\right]\\le\\frac{\\sigma^2}{n\\delta^2}.$$\n\nFor every $\\gamma>0$ there is a $\\rho\\in(0,1)$, depending only on $(P_U,W,\\gamma)$, such that\n\n$$\\Pr[S_n>n(I+\\gamma)]\\le\\rho^n.$$",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-it-information-units-and-logarithm-base",
+          "source_section": "Definition",
+          "quote": "Write $\\ln$ for the natural logarithm $\\log$ of [[def-natural-logarithm]]. Unless a base is displayed, every information quantity on this page uses $\\ln$ and is measured in **nats**. For a base $b>1$ and $t>0$, define\n$$\\log_b t:=\\frac{\\ln t}{\\ln b}.$$\nThe denominator is positive: $b>1$, $\\ln$ is strictly increasing, and $\\ln 1=0$ by [[thm-natural-logarithm-laws]]. A base-$b$ entropy or divergence is obtained by replacing each $\\ln$ in the finite formulas below by $\\log_b$; use $0\\log_b0:=0$ and assign $+\\infty$ to a positive numerator over a zero denominator. The case $b=2$ measures **bits**; $b=e$ gives nats.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-natural-logarithm-bounded-by-argument",
+          "source_section": "Statement",
+          "quote": "For every real $x\\ge1$, the natural logarithm of\n[[def-natural-logarithm]] satisfies\n$$0\\le\\log x\\le x-1\\le x.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $Q_C$ for the mixture in the Statement. Any $z^n$ with $Q_C(z^n)>0$ has $P_Z^n(z^n)>0$, since each sampled codeword has letters in $\\operatorname{supp}P_U$ and any output reachable from such a letter has positive $P_Z$ mass. Hence all divergences below are well-defined and finite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the total-variation bound, let $L_\\ell(z^n):=W^n(z^n\\mid U^n(\\ell))/P_Z^n(z^n)$ on the support, let $L_C=L_n^{-1}\\sum_\\ell L_\\ell$, set $T=e^{n(I+\\gamma)}$, and truncate to $\\widetilde L_\\ell=L_\\ell\\mathbf1\\{L_\\ell\\le T\\}$ and $\\widetilde L_C=L_n^{-1}\\sum_\\ell\\widetilde L_\\ell$. If $\\alpha_n:=\\Pr[S_n>n(I+\\gamma)]$, then the expected removed mass $\\sum_{z^n}P_Z^n(z^n)\\mathbb E_C[L_C-\\widetilde L_C]$ is exactly $\\alpha_n$, and the missing mass $\\sum_{z^n}P_Z^n(z^n)(1-\\mathbb E_C\\widetilde L_C)$ is also $\\alpha_n$, because $\\sum_{z^n}P_Z^n(z^n)\\mathbb E_C L_C=1$. Since $L_C\\ge\\widetilde L_C$ and $\\mathbb E_C\\widetilde L_C\\le1$, the triangle inequality gives $2\\operatorname{TV}(Q_C,P_Z^n)\\le\\sum_{z^n}P_Z^n(z^n)\\bigl((L_C-\\widetilde L_C)+|\\widetilde L_C-\\mathbb E_C\\widetilde L_C|+(1-\\mathbb E_C\\widetilde L_C)\\bigr).$ After expectation, the first and third terms together contribute $\\alpha_n$ to total variation (the factor $1/2$ in its definition is included).",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $C$, expand $D(Q_C\\|P_Z^n)$ as an expectation over a uniform index $J$ and then $Z^n\\sim W^n(\\cdot\\mid U^n(J))$. Averaging over codebooks and using symmetry lets us take $J=1$. The divergence and all rates use natural-log nats by [F6]. Conditional on $U^n(1),Z^n$, the remaining codewords are independent and $\\mathbb E_{U^n(2),\\ldots,U^n(L_n)}\\left[\\frac{Q_C(Z^n)}{P_Z^n(Z^n)}\\right]=\\frac{e^{S_n}+L_n-1}{L_n}.$ For any finite positive random variable $A$ with law $p$ and mean $a$, the vector $q_i=p_iA_i/a$ is a probability vector; [F4] gives $0\\le D(p\\|q)=\\ln a-\\mathbb E[\\ln A]$. Thus $\\mathbb E\\ln A\\le\\ln\\mathbb E A$. Applying this finite Jensen inequality to the displayed likelihood ratio gives $\\mathbb E_C D(Q_C\\|P_Z^n)\\le\\mathbb E\\ln\\left(1+e^{S_n}/L_n\\right).$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $S_n\\le n(I+\\gamma)$, $L_n\\ge e^{nR_0}$ and [F8] bound the logarithm by $e^{-n(R_0-I-\\gamma)}$. On the complement, $S_n\\le nB$ by the definition of $B$, so $\\ln(1+e^{S_n}/L_n)\\le\\ln2+nB$. The complement has probability at most $\\rho^n$ by [F5]. Splitting the expectation in step 2.1 across these two events proves the KL bound.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For fixed $z^n$, let $A=\\widetilde L_C(z^n)-\\mathbb E_C\\widetilde L_C(z^n)$. The finite inequality $\\mathbb E|A|\\le\\sqrt{\\mathbb E A^2}$ follows by expanding $0\\le\\mathbb E(|A|-\\mathbb E|A|)^2$. Independence of the $L_n$ codewords makes the cross terms vanish, so $\\mathbb E A^2=\\frac1{L_n}\\left(\\mathbb E_U[\\widetilde L_1(z^n)^2]-(\\mathbb E_U\\widetilde L_1(z^n))^2\\right)\\le\\frac{\\mathbb E_U[\\widetilde L_1(z^n)^2]}{L_n}.$ Since $0\\le\\widetilde L_1\\le T$ and $\\mathbb E_U L_1(z^n)=\\sum_{u^n}P_U^n(u^n)\\frac{W^n(z^n\\mid u^n)}{P_Z^n(z^n)}=1,$ the numerator is at most $T$. Finite Cauchy–Schwarz with weights $P_Z^n(z^n)$ then gives $\\sum_{z^n}P_Z^n(z^n)\\mathbb E_C|A|\\le\\sum_{z^n}P_Z^n(z^n)\\sqrt{\\mathbb E_C A^2}\\le\\left(\\sum_{z^n}P_Z^n(z^n)\\right)^{1/2}\\left(\\sum_{z^n}P_Z^n(z^n)\\mathbb E_C A^2\\right)^{1/2}\\le\\sqrt{T/L_n},$ where the middle inequality is finite Cauchy–Schwarz and $\\sum_{z^n}P_Z^n(z^n)=1$. Together with step 1.2, this fluctuation contributes at most $\\frac12\\sqrt{T/L_n}$ to expected total variation. Using [F5], $\\alpha_n\\le\\rho^n$, and $L_n\\ge e^{nR_0}$ gives the stated bound.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The product runs over positive blocklength n>=1; the underlying stochastic law has nonempty support. Zero-probability letters are omitted, not treated as an empty probability alphabet.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The product runs over positive blocklength n>=1; the underlying stochastic law has nonempty support. Zero-probability letters are omitted, not treated as an empty probability alphabet. Independent item review: The mixture support lies in PZ^n; KL Jensen plus information-density truncation bounds expected divergence, and truncated-likelihood variance bounds expected TV (1.1–4.1).",
+            "item_sha256": "760e4e1e4018e83b4c3468fec9476643a2e4a5d438d383b8dc61eb25eaa8e027",
+            "row_sha256": "af7a42fc7dfc394e67a8fbe24501d3796b927036a7b0f5e78ff0b44b3878abd4"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The product runs over positive blocklength n>=1; the underlying stochastic law has nonempty support. Zero-probability letters are omitted, not treated as an empty probability alphabet. Independent item review: The mixture support lies in PZ^n; KL Jensen plus information-density truncation bounds expected divergence, and truncated-likelihood variance bounds expected TV (1.1–4.1)."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-probability input/output symbols are omitted on joint support in steps 1.1–1.2; removed and missing mass are handled in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-symbol DMC the induced mixture is exactly P_Z^n, included in the support and mixture calculations in steps 1.1 and 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant information density is covered by the finite-tail and truncation calculations in steps 3.1 and 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The theorem requires strict R0>I and 0<gamma<R0-I; the equal-rate boundary is excluded in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument makes no selection from an infinite family and uses no choice axiom.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The argument makes no selection from an infinite family and uses no choice axiom. Independent item review: The mixture support lies in PZ^n; KL Jensen plus information-density truncation bounds expected divergence, and truncated-likelihood variance bounds expected TV (1.1–4.1).",
+            "item_sha256": "760e4e1e4018e83b4c3468fec9476643a2e4a5d438d383b8dc61eb25eaa8e027",
+            "row_sha256": "8d689a368a383a6d44d90633870222a7923aa7b4e9f6096f3af8c5161ae43e37"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The claim is not stated as a biconditional. Independent item review: The mixture support lies in PZ^n; KL Jensen plus information-density truncation bounds expected divergence, and truncated-likelihood variance bounds expected TV (1.1–4.1).",
+            "item_sha256": "760e4e1e4018e83b4c3468fec9476643a2e4a5d438d383b8dc61eb25eaa8e027",
+            "row_sha256": "452049805ed355b30b80557022b5ad9df9af06642039717828c526747f4a4a22"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The claim is not stated as a biconditional. Independent item review: The mixture support lies in PZ^n; KL Jensen plus information-density truncation bounds expected divergence, and truncated-likelihood variance bounds expected TV (1.1–4.1).",
+            "item_sha256": "760e4e1e4018e83b4c3468fec9476643a2e4a5d438d383b8dc61eb25eaa8e027",
+            "row_sha256": "dc738a6e7f42bf2afa8edadc0e985f8303b0e2598965d5c33b96d2aa8fb13f9f"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "one-symbol DMC",
+          "method": "direct mixture calculation",
+          "inputs": [
+            "|U|=|Z|=1",
+            "W(z0|u0)=1"
+          ],
+          "result": "Every random codebook induces Q_{Z^n|C}=P_Z^n, so both deviations are exactly zero.",
+          "checked_in": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Read all six numbered steps and F1-F8 current suppliers. Sampled words have positive input mass; unreachable reference outputs also have zero mixture mass. Conditional finite log Jensen follows from KL nonnegativity. Splitting at n(I+gamma), with L_n>=exp(nR0), gives the claimed directional-KL bound. TV truncation removes expected mass alpha_n and misses the same mass; after division by two their combined contribution is alpha_n, not twice alpha_n. Independence gives truncated variance <=T/L_n pointwise and weighted finite Cauchy-Schwarz gives half its square root. The supplier log bound for x>=1 applies at x=1+t>=1, yielding ln(1+t)<=t. Finite positive support makes B finite; strict rate margin and exponential rho ensure both limits even at I=B=0. Cuff Lecture 13 pp. 1-3 supply soft-covering/truncation context (OCR partly garbled); the explicit local estimates were checked directly, also against Bloch-Laneman §§II and V-C, finite-memoryless moment hypotheses. Published log lemma currently has its required introductory blank line and a sound x=1/x>1 MVT proof. No new mathematical defect or choice use."
+      }
+    },
+    "lem-it-classical-wiretap-auxiliary-cardinality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-wiretap-channel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be finite nonempty alphabets and let $W(y,z\\mid x)$ be a stochastic kernel from $\\mathcal X$ to $\\mathcal Y\\times\\mathcal Z$ ([[def-finite-stochastic-kernel]]). Its Bob and Eve marginals are $W_Y(y\\mid x):=\\sum_z W(y,z\\mid x)$ and $W_Z(z\\mid x):=\\sum_y W(y,z\\mid x)$; each is a finite DMC in the sense of [[def-discrete-memoryless-channel]]. At blocklength $n$, the joint channel law is\n\n$$W^n(y^n,z^n\\mid x^n):=\\prod_{i=1}^n W(y_i,z_i\\mid x_i).$$\n\nThe product formula is a stochastic kernel by [[lem-it-finite-wiretap-product-kernel-is-stochastic]]. Finite distributivity gives $\\sum_{z^n}W^n(y^n,z^n\\mid x^n)=\\prod_i\\sum_{z_i}W(y_i,z_i\\mid x_i)=\\prod_iW_Y(y_i\\mid x_i)=W_Y^n(y^n\\mid x^n)$, and the analogous finite sum over $y^n$ gives marginal $W_Z^n$. The pair $(Y^n,Z^n)$ may be correlated conditional on $X^n$; neither marginal changes if that coupling changes while the two marginal channels stay fixed.\n\nAn $(n,\\mathcal M_n)$ wiretap code has a finite message set $\\mathcal M_n$, a uniform message $M_n$, a stochastic encoder $P_{X^n\\mid M_n}$ using private randomness independent of channel noise, and a decoder $\\hat M_n:\\mathcal Y^n\\to\\mathcal M_n\\cup\\{e\\}$, where $e\\notin\\mathcal M_n$ denotes erasure and is counted as error. The encoder uses no feedback and the parties have no preshared secret key or forward public aid. The public code description is known to Eve, who observes $Z^n$. Average error is $P_{e,av}^{(n)}:=\\Pr[\\hat M_n(Y^n)\\ne M_n]$; maximal error is $P_{e,max}^{(n)}:=\\max_{m\\in\\mathcal M_n}\\Pr[\\hat M_n(Y^n)\\ne m\\mid M_n=m]$. The rate is $n^{-1}\\ln|\\mathcal M_n|$ nats per channel use. A secrecy metric is specified separately.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-natural-logarithm-bounded-by-argument",
+          "source_section": "Statement",
+          "quote": "For every real $x\\ge1$, the natural logarithm of\n[[def-natural-logarithm]] satisfies\n$$0\\le\\log x\\le x-1\\le x.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $m:=|\\mathcal X|=1$, then $X$ is constant and both mutual informations in the objective are zero, so $|\\widetilde{\\mathcal U}|=1$ suffices. Assume $m\\ge2$. For a probability vector $q$ on $\\mathcal X$, let $F(q):=I_q(X;Y)-I_q(X;Z).$ By [F2]–[F4] and the finite entropy identity in [F3], $F(q)=H(qW_Y)-H(qW_Z)-\\sum_xq(x)\\bigl(H(W_Y(\\cdot\\mid x))-H(W_Z(\\cdot\\mid x))\\bigr).$ The maps $q\\mapsto qW_Y$ and $q\\mapsto qW_Z$ are finite linear maps. On $0<t\\le1$, set $s=t^{-1/2}\\ge1$; [F5] gives $0\\le-t\\ln t=2t\\ln s\\le2\\sqrt t$. Hence $-t\\ln t$ extends continuously to $t=0$ with value $0$, so finite entropy and $F$ are continuous on the simplex $\\Delta(\\mathcal X)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "cases",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $\\lambda_u=P_U(u)>0$, $q_u=P_{X\\mid U=u}$, and $\\bar q=P_X=\\sum_u\\lambda_uq_u$, omitting zero-mass $u$. The chain rule [F3] gives $I(U;Y)-I(U;Z)=F(\\bar q)-\\sum_u\\lambda_uF(q_u).$ Indeed, expanding the right side by the entropy formula in step 1.1 leaves $H(Y)-\\sum_u\\lambda_uH(Y\\mid U=u)-H(Z)+\\sum_u\\lambda_uH(Z\\mid U=u)$; the linear conditional-on-$X$ terms cancel because $\\bar q=\\sum_u\\lambda_uq_u$, and the remaining expression is the left side.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose the current posterior mixture has $k>m$ positive weights. The $k$ vectors $(q_u(x_1),\\ldots,q_u(x_{m-1}),1)$ lie in $\\mathbb R^m$, so there are coefficients $c_u$, not all zero, with $\\sum_uc_u=0$ and $\\sum_uc_uq_u(x_j)=0$ for $j<m$. Since each $q_u$ sums to one, the same relation holds for the last coordinate $x_m$. The coefficients include both signs. Therefore the weights $\\lambda_u+t c_u$ remain nonnegative on a bounded interval $[t_-,t_+]$ with $t_-<0<t_+$; at either endpoint at least one weight is zero, while the total weight and posterior average stay fixed. The average $G(t)=\\sum_u(\\lambda_u+t c_u)F(q_u)$ is affine in $t$, so at least one endpoint has $G(t)\\le G(0)$: otherwise zero, a convex combination of $t_-$ and $t_+$, would have a larger value than both endpoints. Choose that endpoint and delete its zero weights. This keeps $\\bar q$ fixed and does not decrease the wiretap objective in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Repeating step 3.1 finitely many times reduces any finite auxiliary to at most $m$ positive weights, preserving $P_X$ and not decreasing $I(U;Y)-I(U;Z)$. Thus every finite auxiliary is dominated by one with $|\\mathcal U|\\le m$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The parameter space $\\Delta_m\\times\\Delta(\\mathcal X)^m$ of $m$ weights and $m$ posterior laws is a nonempty closed bounded subset of $\\mathbb R^{m+m^2}$, since it is described by finitely many coordinate inequalities $0\\le t\\le1$ and coordinate-sum equalities. It is compact by [F6]. By step 1.1 the objective $F(\\bar q)-\\sum_{j=1}^m\\lambda_jF(q_j)$ is continuous there, including zero weights, so it attains a maximum by [F7]. Step 4.1 shows this maximum equals the supremum over all finite auxiliaries.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim. Independent item review: Posterior-mixture null directions preserve PX while not lowering the wiretap objective, reducing to |U|<=|X|; entropy continuity and compactness attain the maximum (1.1–5.1).",
+            "item_sha256": "bb1c01aaafadaab3852caedfe5706fe3510dddfccb47b83211f970cde7c3af35",
+            "row_sha256": "e863846b7da87da97cee9fc239953af45377ea7ba3d847fd82747524a5881b6a"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-probability auxiliary values are omitted in step 2.1, and zero weights are allowed in the compact parameter space of step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case |X|=1 is proved separately in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When X is constant both mutual informations vanish, handled in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The maximization includes boundary input laws with zero coordinates and deterministic simplex vertices; entropy extends continuously by 0 ln0=0, so compactness/auxiliary reduction includes the boundary.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The maximization includes boundary input laws with zero coordinates and deterministic simplex vertices; entropy extends continuously by 0 ln0=0, so compactness/auxiliary reduction includes the boundary. Independent item review: Posterior-mixture null directions preserve PX while not lowering the wiretap objective, reducing to |U|<=|X|; entropy continuity and compactness attain the maximum (1.1–5.1).",
+            "item_sha256": "bb1c01aaafadaab3852caedfe5706fe3510dddfccb47b83211f970cde7c3af35",
+            "row_sha256": "620fa0addae44a5365e10326d494a5768332daa0fd638b2bbfc6f1ba1eae3704"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The support reduction uses finite linear dependence and chooses one of two finite endpoints in step 3.1; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The claim is not stated as a biconditional. Independent item review: Posterior-mixture null directions preserve PX while not lowering the wiretap objective, reducing to |U|<=|X|; entropy continuity and compactness attain the maximum (1.1–5.1).",
+            "item_sha256": "bb1c01aaafadaab3852caedfe5706fe3510dddfccb47b83211f970cde7c3af35",
+            "row_sha256": "452049805ed355b30b80557022b5ad9df9af06642039717828c526747f4a4a22"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The claim is not stated as a biconditional. Independent item review: Posterior-mixture null directions preserve PX while not lowering the wiretap objective, reducing to |U|<=|X|; entropy continuity and compactness attain the maximum (1.1–5.1).",
+            "item_sha256": "bb1c01aaafadaab3852caedfe5706fe3510dddfccb47b83211f970cde7c3af35",
+            "row_sha256": "dc738a6e7f42bf2afa8edadc0e985f8303b0e2598965d5c33b96d2aa8fb13f9f"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "singleton input alphabet",
+          "method": "direct mutual-information calculation",
+          "inputs": [
+            "|X|=1"
+          ],
+          "result": "X is constant and I(U;Y)-I(U;Z)=0 for every U; one auxiliary value suffices.",
+          "checked_in": [
+            "1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Read every step and current wiretap, MI, entropy-chain, finite entropy, logarithm-bound, Heine-Borel and extreme-value suppliers. The m=1 case has zero information. For m>=2, -t ln t<=2 sqrt(t) follows by the stated substitution, so F is continuous at zero coordinates. The chain identity F(qbar)-sum lambda F(q_u) is exact. With k>m, the m affine-coordinate constraints give a nonzero signed null vector; both endpoint weights are feasible and at least one endpoint does not increase the affine average. Deleting zero weights terminates after finitely many deletions and preserves P_X. The parameter space Delta_m times Delta(X)^m is nonempty closed bounded in positive dimension m+m^2; its continuous objective attains a maximum including zero weights. Local support reduction proves improvement rather than an unjustified exact-value preservation. Source: El Gamal-Kim printed p. 23-9 gives |U|<=|X|; Lecture 12 pp. 2-4 gives auxiliary converse context, not a substitute for this local proof. No AC or hidden support assumption."
+      }
+    },
+    "thm-it-finite-classical-wiretap-auxiliary-capacity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-wiretap-channel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be finite nonempty alphabets and let $W(y,z\\mid x)$ be a stochastic kernel from $\\mathcal X$ to $\\mathcal Y\\times\\mathcal Z$ ([[def-finite-stochastic-kernel]]). Its Bob and Eve marginals are $W_Y(y\\mid x):=\\sum_z W(y,z\\mid x)$ and $W_Z(z\\mid x):=\\sum_y W(y,z\\mid x)$; each is a finite DMC in the sense of [[def-discrete-memoryless-channel]]. At blocklength $n$, the joint channel law is\n\n$$W^n(y^n,z^n\\mid x^n):=\\prod_{i=1}^n W(y_i,z_i\\mid x_i).$$\n\nThe product formula is a stochastic kernel by [[lem-it-finite-wiretap-product-kernel-is-stochastic]]. Finite distributivity gives $\\sum_{z^n}W^n(y^n,z^n\\mid x^n)=\\prod_i\\sum_{z_i}W(y_i,z_i\\mid x_i)=\\prod_iW_Y(y_i\\mid x_i)=W_Y^n(y^n\\mid x^n)$, and the analogous finite sum over $y^n$ gives marginal $W_Z^n$. The pair $(Y^n,Z^n)$ may be correlated conditional on $X^n$; neither marginal changes if that coupling changes while the two marginal channels stay fixed.\n\nAn $(n,\\mathcal M_n)$ wiretap code has a finite message set $\\mathcal M_n$, a uniform message $M_n$, a stochastic encoder $P_{X^n\\mid M_n}$ using private randomness independent of channel noise, and a decoder $\\hat M_n:\\mathcal Y^n\\to\\mathcal M_n\\cup\\{e\\}$, where $e\\notin\\mathcal M_n$ denotes erasure and is counted as error. The encoder uses no feedback and the parties have no preshared secret key or forward public aid. The public code description is known to Eve, who observes $Z^n$. Average error is $P_{e,av}^{(n)}:=\\Pr[\\hat M_n(Y^n)\\ne M_n]$; maximal error is $P_{e,max}^{(n)}:=\\max_{m\\in\\mathcal M_n}\\Pr[\\hat M_n(Y^n)\\ne m\\mid M_n=m]$. The rate is $n^{-1}\\ln|\\mathcal M_n|$ nats per channel use. A secrecy metric is specified separately.",
+          "uses": [
+            "1.1",
+            "1.5",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-wiretap-secrecy-capacities",
+          "source_section": "Definition",
+          "quote": "Fix an error criterion $e\\in\\{\\mathrm{av},\\mathrm{max}\\}$ and a secrecy criterion $s\\in\\{\\mathrm{weak},\\mathrm{strong}\\}$. For each code let $P_{\\rm err}^{(n)}=P_{e,\\rm av}^{(n)}$ when $e=\\mathrm{av}$ and $P_{\\rm err}^{(n)}=P_{e,\\rm max}^{(n)}$ when $e=\\mathrm{max}$. A rate $R\\ge0$ in nats per channel use is $(e,s)$-achievable for a finite wiretap channel [[def-it-wiretap-channel]] if there is a sequence of wiretap codes, one at each blocklength $n\\ge1$, such that\n\n$$\\liminf_{n\\to\\infty}\\frac1n\\ln|\\mathcal M_n|\\ge R,\\qquad P_{\\rm err}^{(n)}\\longrightarrow0,$$\n\nand the sequence satisfies secrecy criterion $s$ from [[def-it-weak-and-strong-secrecy]], with leakage measured by [[def-it-information-leakage-and-equivocation]]. Define $C_{e,s}$ as the supremum of all such rates. Thus this definition gives four operational capacities, distinguished by average or maximal error and weak or strong secrecy.",
+          "uses": [
+            "1.3",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-information-leakage-and-equivocation",
+          "source_section": "Definition",
+          "quote": "For finite random variables $M,Z$, information leakage is the finite mutual information $I(M;Z)$ in nats, as defined in [[def-it-finite-mutual-information]], and equivocation is the finite conditional entropy $H(M\\mid Z)$, as defined in [[def-it-finite-conditional-entropy]]. For an $n$-use code with Eve's observation $Z^n$, its normalized leakage is $n^{-1}I(M;Z^n)$. When $M$ is uniform on a finite message set $\\mathcal M$, its entropy is $H(M)=\\ln|\\mathcal M|$. Zero-probability symbols are handled by the finite entropy and KL conventions cited above.",
+          "uses": [
+            "1.4",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-weak-and-strong-secrecy",
+          "source_section": "Definition",
+          "quote": "Consider a sequence of finite wiretap codes from [[def-it-wiretap-channel]], with uniform message $M_n$ and Eve's observation $Z^n$. Call it reliable when its average error tends to zero; maximal reliability is the stronger condition that its maximal error tends to zero. Among reliable sequences, **weak secrecy** means\n\n$$\\frac1n I(M_n;Z^n)\\longrightarrow 0,$$\n\nand **strong secrecy** means\n\n$$I(M_n;Z^n)\\longrightarrow 0,$$\n\nwhere leakage is the unnormalized finite mutual information of [[def-it-information-leakage-and-equivocation]] and all quantities are in nats. Exact independence at every blocklength, total-variation secrecy, and per-message secrecy are separate conditions and are not identified with either limit here.",
+          "uses": [
+            "1.3",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-it-fano-with-erasure-or-out-of-alphabet-estimates",
+          "source_section": "Statement",
+          "quote": "Let $X$ have a finite alphabet $\\mathcal X$ of size $m\\ge1$, let $Y$ be finite, and let $\\widehat X$ be any finite estimate output generated from $Y$, with an output alphabet that may contain symbols outside $\\mathcal X$. Assume $X\\to Y\\to\\widehat X$, and set $P_e=\\mathbb P[\\widehat X\\ne X]$. Use $h_2$ as defined in [[thm-it-fano-inequality]]. Then\n\n$$H(X|Y)\\le h_2(P_e)+P_e\\ln m.$$\n\nIf $X$ is uniform on $\\mathcal X$, then\n\n$$ (1-P_e)\\ln m\\le I(X;Y)+h_2(P_e).$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-it-finite-dmc-information-density-concentration",
+          "source_section": "Statement",
+          "quote": "Let $W(y\\mid u)$ be a finite DMC and let $P_U$ be any fixed input probability vector. Let $P_Y(y)=\\sum_uP_U(u)W(y\\mid u)$. On the joint support $P_U(u)W(y\\mid u)>0$, define\n\n$$J(u,y):=\\ln\\frac{W(y\\mid u)}{P_Y(y)},\\qquad I:=I(U;Y),\\qquad \\sigma^2:=\\sum_{u,y:P_U(u)W(y\\mid u)>0}P_U(u)W(y\\mid u)(J(u,y)-I)^2.$$\n\nFor IID pairs $(U_i,Y_i)\\sim P_UW$, write $S_n=\\sum_{i=1}^nJ(U_i,Y_i)$ and $B:=\\max(0,\\max_{P_U(u)W(y\\mid u)>0}J(u,y))$. Then $J$ is bounded and $\\mathbb E[J]=I$. For every $\\delta>0$,\n\n$$\\Pr\\left[\\left|\\frac{S_n}{n}-I\\right|\\ge\\delta\\right]\\le\\frac{\\sigma^2}{n\\delta^2}.$$\n\nFor every $\\gamma>0$ there is a $\\rho\\in(0,1)$, depending only on $(P_U,W,\\gamma)$, such that\n\n$$\\Pr[S_n>n(I+\\gamma)]\\le\\rho^n.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-it-channel-resolvability-soft-covering",
+          "source_section": "Statement",
+          "quote": "Let $W(z\\mid u)$ be a finite DMC, let $P_U$ be an input probability vector, and let $P_Z(z)=\\sum_uP_U(u)W(z\\mid u)$. On the joint support define $J(u,z):=\\ln(W(z\\mid u)/P_Z(z))$ and let $I=I(U;Z)$. Set $B=\\max(0,\\max_{P_U(u)W(z\\mid u)>0}J(u,z))$. For $R_0>I$ and any $\\gamma$ with $0<\\gamma<R_0-I$, draw $L_n=\\lceil e^{nR_0}\\rceil$ independent words $U^n(\\ell)\\sim P_U^n$ and define the induced mixture\n\n$$P_Z^n(z^n):=\\prod_{i=1}^nP_Z(z_i),\\qquad Q_{Z^n\\mid C}:=\\frac1{L_n}\\sum_{\\ell=1}^{L_n}W^n(\\cdot\\mid U^n(\\ell)).$$\n\nThere is a $\\rho\\in(0,1)$, depending only on $(P_U,W,\\gamma)$, for which\n\n$$\\mathbb E_C D(Q_{Z^n\\mid C}\\|P_Z^n)\\le e^{-n(R_0-I-\\gamma)}+(\\ln2+nB)\\rho^n,$$\n\nand\n\n$$\\mathbb E_C\\,\\operatorname{TV}(Q_{Z^n\\mid C},P_Z^n)\\le\\rho^n+\\frac12e^{-n(R_0-I-\\gamma)/2},$$\n\nwhere $\\operatorname{TV}(P,Q):=\\frac12\\sum_z|P(z)-Q(z)|$. Thus both expected deviations tend to zero. Here $D$ is the directional finite KL divergence of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-it-classical-wiretap-auxiliary-cardinality",
+          "source_section": "Statement",
+          "quote": "For every finite joint law $P_{UX}$ on a finite wiretap channel with input alphabet $\\mathcal X$, where $U-X-(Y,Z)$ means $P_{UXYZ}(u,x,y,z)=P_{UX}(u,x)W(y,z\\mid x)$, there is another finite auxiliary $\\widetilde U$ with $|\\widetilde{\\mathcal U}|\\le|\\mathcal X|$ whose value of $I(\\widetilde U;Y)-I(\\widetilde U;Z)$ is at least $I(U;Y)-I(U;Z)$. Consequently\n\n$$\\sup_{P_{U,X}:\\,U-X-(Y,Z)}[I(U;Y)-I(U;Z)]$$\n\nis a maximum and may be restricted to $|\\mathcal U|\\le|\\mathcal X|$. For each input law $q$, the single-letter objective $q\\mapsto I_q(X;Y)-I_q(X;Z)$ is continuous on the finite probability simplex.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-it-finite-wiretap-product-kernel-is-stochastic",
+          "source_section": "Statement",
+          "quote": "For finite nonempty alphabets $\\mathcal X,\\mathcal Y,\\mathcal Z$, a stochastic kernel $W(y,z\\mid x)$ from $\\mathcal X$ to $\\mathcal Y\\times\\mathcal Z$, and every $n\\ge1$, the block formula\n\n$$W^n(y^n,z^n\\mid x^n):=\\prod_{i=1}^nW(y_i,z_i\\mid x_i)$$\n\nis a stochastic kernel from $\\mathcal X^n$ to $(\\mathcal Y\\times\\mathcal Z)^n$.",
+          "uses": [
+            "1.5",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $C=C(W)$. A constant $U$ gives value zero, so $C\\ge0$. By [F10] the maximum is attained with finite $|U|\\le|X|$, and [F5] makes each mutual information finite, so $C<\\infty$. For any fixed finite $P_{U,X}$, restrict $U$ to its positive-mass values and define the induced Bob and Eve channels $Q_Y(y\\mid u):=\\sum_xP_{X\\mid U}(x\\mid u)W_Y(y\\mid x),\\qquad Q_Z(z\\mid u):=\\sum_xP_{X\\mid U}(x\\mid u)W_Z(z\\mid x).$ Each row sums to one because $P_{X\\mid U=u}$ and the marginals $W_Y,W_Z$ are stochastic. These induced channels are finite DMCs, and their input-output mutual informations are $I(U;Y)$ and $I(U;Z)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $C>0$ and fix any $0\\le R<C$. By [F10], choose a maximizing law $P_{U,X}$. Choose $R'$ with $R<R'<C$, then choose $R_0>I(U;Z)$ so that $R'+R_0<I(U;Y)$. Choose $\\gamma_Y>0$ with $R'+R_0<I(U;Y)-\\gamma_Y$. For each $n$, set $M_n=\\lceil e^{nR'}\\rceil$, $L_n=\\lceil e^{nR_0}\\rceil$, and independently draw $M_nL_n$ words $U^n(m,l)$ from $P_U^n$.",
+          "step": "1.2",
+          "inputs": [
+            "F10",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $C=0$, the one-message code has zero error and zero leakage at every blocklength, so all four capacities are at least zero. In all cases, strong secrecy implies weak secrecy because [F5] and [F12] give $0\\le I(M;Z^n)/n\\le I(M;Z^n)$ for $n\\ge1$; maximal error tending to zero implies average error tending to zero.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F12",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For the converse, consider any sequence of wiretap codes with average error $p_n\\to0$ and weak leakage $\\ell_n:=I(M;Z^n)$ satisfying $\\ell_n/n\\to0$. Fano's bound [F7] gives $ (1-p_n)\\ln|\\mathcal M_n|\\le I(M;Y^n)+h_2(p_n)=I(M;Y^n)-I(M;Z^n)+\\ell_n+h_2(p_n).$ The binary entropy is bounded by $\\ln2$, since [F12] applied to $(p_n,1-p_n)$ and $(1/2,1/2)$ gives $0\\le\\ln2-h_2(p_n)$.",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F7",
+            "F12",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "For $i=0,\\ldots,n$, set $A_i:=I(M;Y^i,Z_{i+1}^n)$, with empty strings omitted, and set $V_i:=(Y^{i-1},Z_{i+1}^n)$. The mutual-information chain rule [F6] gives $I(M;Y^n)-I(M;Z^n)=A_n-A_0=\\sum_{i=1}^n\\left[I(M;Y_i\\mid V_i)-I(M;Z_i\\mid V_i)\\right].$ Indeed, $A_i-A_{i-1}=I(M;Y_i\\mid V_i)-I(M;Z_i\\mid V_i)$ for each $i$, and the sum telescopes.",
+          "step": "1.5",
+          "inputs": [
+            "F1",
+            "F6",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a selected codebook, encode message $m$ by choosing $l$ uniformly and, conditional on $U^n(m,l)=u^n$, draw $X^n$ according to $$P_{X^n\\mid U^n}(x^n\\mid u^n)=\\prod_{i=1}^nP_{X\\mid U}(x_i\\mid u_i),$$ using independent private draws at the coordinates. Thus the induced channels from $U$ to Bob and Eve are the finite DMCs $Q_Y(y\\mid u):=\\sum_xP_{X\\mid U}(x\\mid u)W_Y(y\\mid x)$ and $Q_Z(z\\mid u):=\\sum_xP_{X\\mid U}(x\\mid u)W_Z(z\\mid x)$, with block laws $Q_Y^n$ and $Q_Z^n$. For an output with $P_Y^n(y^n)=0$, declare erasure; it has probability zero because every sampled letter has positive $P_U$-mass and $P_Y(y)=\\sum_uP_U(u)Q_Y(y\\mid u)$. For an output with $P_Y^n(y^n)>0$, assign score $-\\infty$ if $Q_Y^n(y^n\\mid u^n)=0$ and otherwise use its log likelihood ratio. Decode the pair $(m,l)$ as the unique codeword satisfying $\\ln\\frac{Q_Y^n(Y^n\\mid U^n(m,l))}{P_Y^n(Y^n)}>n\\bigl(I(U;Y)-\\gamma_Y\\bigr)$; output its message coordinate $m$, and declare erasure if no unique pair passes. Under the transmitted pair, the missed-threshold probability is at most $\\sigma_Y^2/(n\\gamma_Y^2)$ by [F8]. For any incorrect pair, its independently drawn word is independent of the received $Y^n\\sim P_Y^n$ under the random-code ensemble, and $\\mathbb E_{U^n}[Q_Y^n(y^n\\mid U^n)/P_Y^n(y^n)]=1$ on the support of $P_Y^n$. On the threshold event the likelihood ratio exceeds $e^{n(I(U;Y)-\\gamma_Y)}$, so its indicator is bounded above by the ratio times $e^{-n(I(U;Y)-\\gamma_Y)}$; taking expectations bounds the false-alarm probability by that exponential. If the true pair uniquely passes, the message is decoded correctly; hence message error is bounded by the missed-threshold event or the union of false-alarm events. The union bound over at most $M_nL_n-1$ incorrect pairs tends to zero: since $R',R_0\\ge0$, $M_nL_n\\le4e^{n(R'+R_0)}$, and $R'+R_0<I(U;Y)-\\gamma_Y$. Thus the ensemble average message error tends to zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F8",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The code and channel law factor as $P_M(m)P_{X^n\\mid M}(x^n\\mid m)\\prod_{j=1}^nW(y_j,z_j\\mid x_j).$ In this finite sum, the time-$i$ factor $W(y_i,z_i\\mid x_i)$ separates from all other coordinate factors. Therefore, after summing over the other inputs and outputs, $P(Y_i=y,Z_i=z\\mid M=m,X_i=x,V_i=v)=W(y,z\\mid x)$ whenever the conditioning event has positive probability. This proves $M-X_i-(Y_i,Z_i)$ conditional on each positive-mass $V_i=v$. Thus $P_{M,X_i\\mid V_i=v}W$ is a finite auxiliary law allowed in the maximum defining $C$. By [F10], $I(M;Y_i\\mid V_i=v)-I(M;Z_i\\mid V_i=v)\\le C.$ Average over positive-mass $v$ and sum over $i$ in step 1.5 to obtain $I(M;Y^n)-I(M;Z^n)\\le nC$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F10",
+            "F11",
+            "step 1.5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Use the same conditional product encoder law $P_{X^n\\mid U^n}(x^n\\mid u^n)=\\prod_{i=1}^nP_{X\\mid U}(x_i\\mid u_i)$ with independent private coordinate draws as in step 2.1. Summing over $X^n$ through the product wiretap kernel gives the induced Eve DMC block law $Q_Z^n(z^n\\mid u^n)=\\prod_{i=1}^nQ_Z(z_i\\mid u_i)$, where $Q_Z(z\\mid u)=\\sum_xP_{X\\mid U}(x\\mid u)W_Z(z\\mid x)$. Eve's conditional output law for message $m$ is the mixture of the $L_n$ induced $Q_Z^n(\\cdot\\mid U^n(m,l))$ outputs. Let $d(\\mathcal C)$ be the average over $m$ of its KL divergence from $P_Z^n$. For each fixed $m$, its randomization subcode has exactly the IID codebook law in [F9], so $\\mathbb E_{\\mathcal C}d(\\mathcal C)\\to0$. Let $a(\\mathcal C)$ be the codebook's average Bob error. Step 2.1 and finite averaging give $\\mathbb E_{\\mathcal C}a(\\mathcal C)\\to0$. Fix an ordering of the finite auxiliary alphabet and order its finite word/codebook sets lexicographically. At each $n$, take the first codebook whose $a(\\mathcal C_n)+d(\\mathcal C_n)$ is no larger than its finite ensemble mean. Such a codebook exists by finite averaging, so this specifies a sequence with $a(\\mathcal C_n)+d(\\mathcal C_n)\\to0$ without countable choices.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F9",
+            "step 2.1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Write $\\eta_n=a(\\mathcal C_n)+d(\\mathcal C_n)$ and, for each message $m$, write $e_m$ for its Bob error and $d_m=D(P_{Z^n\\mid m,\\mathcal C_n}\\|P_Z^n)$. Delete every message with $e_m>t_n$ or $d_m>t_n$, where $t_n=\\sqrt{\\eta_n}+1/n$. For each message, $\\mathbf1\\{e_m>t_n\\text{ or }d_m>t_n\\}\\le(e_m+d_m)/t_n$; averaging over the uniform message bounds the deleted fraction by $\\eta_n/t_n\\le\\sqrt{\\eta_n}$. Thus for all sufficiently large $n$ the retained fraction tends to one and is positive, and each retained message has both $e_m,d_m\\le t_n\\to0$. Restrict the encoder to retained messages and map any old decoder output outside the retained set to erasure; this cannot increase the error for a retained message. For the finitely many earlier blocklengths use a one-message code.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For the uniform message on the retained set $S_n$, put $\\bar P_{Z^n}=|S_n|^{-1}\\sum_{m\\in S_n}P_{Z^n\\mid m,\\mathcal C_n}$. Expanding the finite KL sums and grouping terms gives the exact identity $\\frac1{|S_n|}\\sum_{m\\in S_n}D(P_{Z^n\\mid m,\\mathcal C_n}\\|P_Z^n)=\\frac1{|S_n|}\\sum_{m,z^n:P_{Z^n\\mid m,\\mathcal C_n}(z^n)>0}P_{Z^n\\mid m,\\mathcal C_n}(z^n)\\ln\\frac{P_{Z^n\\mid m,\\mathcal C_n}(z^n)}{P_Z^n(z^n)}=\\frac1{|S_n|}\\sum_{m,z^n:P_{Z^n\\mid m,\\mathcal C_n}(z^n)>0}P_{Z^n\\mid m,\\mathcal C_n}(z^n)\\ln\\frac{P_{Z^n\\mid m,\\mathcal C_n}(z^n)}{\\bar P_{Z^n}(z^n)}+\\sum_{z^n:\\bar P_{Z^n}(z^n)>0}\\bar P_{Z^n}(z^n)\\ln\\frac{\\bar P_{Z^n}(z^n)}{P_Z^n(z^n)}=I(M;Z^n)+D(\\bar P_{Z^n}\\|P_Z^n).$ The reference law has positive mass wherever any induced Eve output has positive mass, so all terms are finite. By [F12], $I(M;Z^n)\\le |S_n|^{-1}\\sum_{m\\in S_n}d_m\\le t_n\\to0$. Also $|S_n|\\ge(1-\\sqrt{\\eta_n})M_n$ and $M_n\\ge e^{nR'}$, while $n^{-1}\\ln(1-\\sqrt{\\eta_n})\\to0$; hence $\\liminf_n n^{-1}\\ln|S_n|\\ge R'$. This constructs a maximal-error, strong-secrecy sequence at rate at least $R'$, and therefore every $R<C$ is achievable for all four criteria.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F12",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Substitute step 2.2 into step 1.4, divide by $n(1-p_n)$, and use $p_n\\to0$, $\\ell_n/n\\to0$, and $0\\le h_2(p_n)\\le\\ln2$ to get $\\limsup_n n^{-1}\\ln|\\mathcal M_n|\\le C$. This converse applies to weak secrecy and average error; it also bounds strong-secrecy or maximal-error sequences because each implies the corresponding weaker condition. Together with the achievability and zero-capacity branches, all four operational capacities equal $C(W)$.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim. Independent item review: Auxiliary random coding plus resolvability and message expurgation give maximal-error strong secrecy; a telescoping output-information difference and Fano bound every weak/average code by the same maximum (1.1–6.1).",
+            "item_sha256": "284c0ab3a9e41e83755efd37d19a0206ff819b0801c21da39ad1e66f6d9f1757",
+            "row_sha256": "e863846b7da87da97cee9fc239953af45377ea7ba3d847fd82747524a5881b6a"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The C=0 branch is handled by the one-message code in step 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-message case establishes rate zero in step 1.3; the singleton input branch is included in the cardinality supplier [F10]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the auxiliary maximum is zero, the one-message lower bound and converse remain valid in steps 1.3, 1.4, 1.5 and 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Achievability is proved for every R<C in step 1.2 and the capacity is a supremum; no code at R=C is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All codebooks have finite support and a deterministic public codebook is selected from a finite ensemble in step 3.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Necessity in the asserted exact capacity characterization is proved by the converse calculation. Auxiliary random coding plus resolvability and message expurgation give maximal-error strong secrecy; a telescoping output-information difference and Fano bound every weak/average code by the same maximum (1.1–6.1).",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: Necessity in the asserted exact capacity characterization is proved by the converse calculation. Auxiliary random coding plus resolvability and message expurgation give maximal-error strong secrecy; a telescoping output-information difference and Fano bound every weak/average code by the same maximum (1.1–6.1). Independent item review: Auxiliary random coding plus resolvability and message expurgation give maximal-error strong secrecy; a telescoping output-information difference and Fano bound every weak/average code by the same maximum (1.1–6.1).",
+            "item_sha256": "284c0ab3a9e41e83755efd37d19a0206ff819b0801c21da39ad1e66f6d9f1757",
+            "row_sha256": "8e4cfb581620edfe00fc40b53d0588bf99ef423ec21b84ce1864965e02c6c600"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Sufficiency in the asserted exact capacity characterization follows from its actual code construction/supplier and closure, including singleton-message cases. Auxiliary random coding plus resolvability and message expurgation give maximal-error strong secrecy; a telescoping output-information difference and Fano bound every weak/average code by the same maximum (1.1–6.1).",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: Sufficiency in the asserted exact capacity characterization follows from its actual code construction/supplier and closure, including singleton-message cases. Auxiliary random coding plus resolvability and message expurgation give maximal-error strong secrecy; a telescoping output-information difference and Fano bound every weak/average code by the same maximum (1.1–6.1). Independent item review: Auxiliary random coding plus resolvability and message expurgation give maximal-error strong secrecy; a telescoping output-information difference and Fano bound every weak/average code by the same maximum (1.1–6.1).",
+            "item_sha256": "284c0ab3a9e41e83755efd37d19a0206ff819b0801c21da39ad1e66f6d9f1757",
+            "row_sha256": "4ef41e39360ea7b287ce07d422da5ab8019bea4786bb502c1e0cc8839ef26ceb"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "identical noiseless outputs",
+          "method": "single-letter formula and one-message code",
+          "inputs": [
+            "Y=Z=X noiselessly"
+          ],
+          "result": "Every auxiliary has I(U;Y)-I(U;Z)=0, and the one-message code has zero error and leakage.",
+          "checked_in": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Level 8. All eleven steps and F1-F12 read. Fixed finite maximizing P_UX is supplied by the reviewed cardinality lemma. Strict R<Rprime<C and R0>I(U;Z) leave a positive Bob decoding margin; ceilings cost at most factor 4. Incorrect codewords are independent of the received word under ensemble averaging; the likelihood indicator bound and missed-threshold variance bound give vanishing error. The same conditional product prefix encoder induces Eve Q_Z^n, so the reviewed resolvability bound applies per message. Lexicographic first admissible finite codebooks avoid countable choice. Nonnegative error+divergence allows simultaneous expurgation with deleted fraction <=sqrt(eta_n), retained rate at least Rprime, and maximal error <=t_n. The exact per-message KL decomposition bounds strong leakage by t_n even after changing to a uniform retained message set. Converse telescope A_i-A_(i-1) is the conditional MI difference; no feedback/private-noise independence lets W_i factor out conditional on M,X_i,V_i (V_i excludes both time-i outputs). Each posterior is an admissible finite auxiliary law, hence difference <=nC; erasure-aware Fano gives the rate bound without assuming rates initially bounded. C=0 has the one-message branch; singleton/zero transitions are covered. El Gamal-Kim pp. 23-8-23-10 gives weak secrecy and auxiliary formula, not the stronger four-capacity claim. Bloch-Laneman §V-C Theorem 3/Corollary 2 supplies strong-memoryless context under moment hypotheses automatically met by finite support; maximal-error strengthening is local expurgation. Corrected source attribution to distinguish these, and removed unsupported threshold-decoding attribution to Lecture 13. No mathematical rewrite or choice use."
+      }
+    },
+    "thm-it-degraded-wiretap-secrecy-capacity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-degraded-wiretap-channel",
+          "source_section": "Definition",
+          "quote": "A finite wiretap channel [[def-it-wiretap-channel]] is **degraded from Bob to Eve** if there is a finite stochastic kernel $V(z\\mid y)$ from Bob's output alphabet to Eve's output alphabet such that\n\n$$W(y,z\\mid x)=W_Y(y\\mid x)V(z\\mid y)\\quad\\text{for every }x,y,z.$$\n\nEquivalently, for every input law $P_X$, the induced joint law is $P_X(x)W_Y(y\\mid x)V(z\\mid y)$. The requirement specifies the joint coupling of Bob's and Eve's outputs, not only their separate marginal channels.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-markov-data-processing",
+          "source_section": "Statement",
+          "quote": "Let $X,Y,Z$ have a joint pmf on finite alphabets and suppose that, for every $y$ with $p_Y(y)>0$,\n\n$$p_{XZ|y}(x,z)=p_{X|y}(x)p_{Z|y}(z).$$\n\nThis is the finite Markov condition $X\\to Y\\to Z$. Then\n\n$$I(X;Z)\\le I(X;Y),$$\n\nwith equality if and only if $I(X;Y|Z)=0$, equivalently $X$ and $Y$ are conditionally independent given every positive-mass value of $Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-it-classical-wiretap-auxiliary-cardinality",
+          "source_section": "Statement",
+          "quote": "For every finite joint law $P_{UX}$ on a finite wiretap channel with input alphabet $\\mathcal X$, where $U-X-(Y,Z)$ means $P_{UXYZ}(u,x,y,z)=P_{UX}(u,x)W(y,z\\mid x)$, there is another finite auxiliary $\\widetilde U$ with $|\\widetilde{\\mathcal U}|\\le|\\mathcal X|$ whose value of $I(\\widetilde U;Y)-I(\\widetilde U;Z)$ is at least $I(U;Y)-I(U;Z)$. Consequently\n\n$$\\sup_{P_{U,X}:\\,U-X-(Y,Z)}[I(U;Y)-I(U;Z)]$$\n\nis a maximum and may be restricted to $|\\mathcal U|\\le|\\mathcal X|$. For each input law $q$, the single-letter objective $q\\mapsto I_q(X;Y)-I_q(X;Z)$ is continuous on the finite probability simplex.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-finite-classical-wiretap-auxiliary-capacity",
+          "source_section": "Statement",
+          "quote": "Let $W(y,z\\mid x)$ be a finite wiretap DMC as in [[def-it-wiretap-channel]], with no input-cost constraint, feedback, or preshared secret key. Let\n\n$$C(W):=\\max_{\\substack{\\mathcal U\\text{ finite},\\ P_{U,X}:\\ U-X-(Y,Z)}}\\bigl[I(U;Y)-I(U;Z)\\bigr],$$\n\nwhere $U-X-(Y,Z)$ means the joint law factors as $P_U(u)P_{X\\mid U}(x\\mid u)W(y,z\\mid x)$. The maximum is attained with $|\\mathcal U|\\le|\\mathcal X|$. The four capacities defined in [[def-it-wiretap-secrecy-capacities]] are equal:\n\n$$C_{\\mathrm{av,weak}}=C_{\\mathrm{av,strong}}=C_{\\mathrm{max,weak}}=C_{\\mathrm{max,strong}}=C(W).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-it-wiretap-secrecy-capacities",
+          "source_section": "Definition",
+          "quote": "Fix an error criterion $e\\in\\{\\mathrm{av},\\mathrm{max}\\}$ and a secrecy criterion $s\\in\\{\\mathrm{weak},\\mathrm{strong}\\}$. For each code let $P_{\\rm err}^{(n)}=P_{e,\\rm av}^{(n)}$ when $e=\\mathrm{av}$ and $P_{\\rm err}^{(n)}=P_{e,\\rm max}^{(n)}$ when $e=\\mathrm{max}$. A rate $R\\ge0$ in nats per channel use is $(e,s)$-achievable for a finite wiretap channel [[def-it-wiretap-channel]] if there is a sequence of wiretap codes, one at each blocklength $n\\ge1$, such that\n\n$$\\liminf_{n\\to\\infty}\\frac1n\\ln|\\mathcal M_n|\\ge R,\\qquad P_{\\rm err}^{(n)}\\longrightarrow0,$$\n\nand the sequence satisfies secrecy criterion $s$ from [[def-it-weak-and-strong-secrecy]], with leakage measured by [[def-it-information-leakage-and-equivocation]]. Define $C_{e,s}$ as the supremum of all such rates. Thus this definition gives four operational capacities, distinguished by average or maximal error and weak or strong secrecy.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix any finite $P_{U,X}$ and form the joint law $P_{U,X,Y,Z}(u,x,y,z)=P_{U,X}(u,x)W(y,z\\mid x)$, which is the notation $U-X-(Y,Z)$. For each $u$ with $P_U(u)>0$, the degraded factorization [F1] makes $X-Y-Z$ under the posterior law $P_{X\\mid U=u}$, so [F4] gives $I(X;Z\\mid U=u)\\le I(X;Y\\mid U=u)$. Averaging over $u$ yields $I(X;Z\\mid U)\\le I(X;Y\\mid U)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, for any input law $P_X$, take $U=X$. Then $U-X-(Y,Z)$ holds and $I(U;Y)-I(U;Z)=I(X;Y)-I(X;Z)$. Thus the supremum over auxiliaries is at least the supremum of the displayed single-letter objective.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The Markov condition $U-X-Y$ gives $I(U;Y\\mid X)=0$, so the chain rule [F3] yields $I(X;Y)=I(U;Y)+I(X;Y\\mid U)$. Likewise $U-X-Z$ gives $I(X;Z)=I(U;Z)+I(X;Z\\mid U)$. Subtracting these identities and using step 1.1 shows $I(U;Y)-I(U;Z)=I(X;Y)-I(X;Z)-\\bigl(I(X;Y\\mid U)-I(X;Z\\mid U)\\bigr)\\le I(X;Y)-I(X;Z).$",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5], choose an auxiliary law attaining the maximum in the general formula. Step 2.1 shows that replacing this law by $U=X$ at the same marginal $P_X$ cannot decrease its value, so this input law attains the maximum of the single-letter expression. Every input law is itself an allowed auxiliary with $U=X$ by step 1.2. Thus the auxiliary maximum equals the displayed maximum, and [F6] identifies it with all four capacities in the sense of [F7].",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim. Independent item review: Posterior degraded data processing makes the auxiliary objective at most the same-input X objective; U=X attains it and the general auxiliary maximum supplies the optimizer (1.1–3.1).",
+            "item_sha256": "ae18070c5d53aaaab2fb1990024f5cfee7a32df61709a40e27141e876992ca94",
+            "row_sha256": "e863846b7da87da97cee9fc239953af45377ea7ba3d847fd82747524a5881b6a"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If the data-processing difference is zero for a posterior law, step 1.1 uses only the nonnegative inequality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The choice U=X at each input law is explicit in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Deterministic output channels are included in the finite Markov data-processing argument of steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The maximization includes boundary input laws with zero coordinates and deterministic simplex vertices; entropy extends continuously by 0 ln0=0, so compactness/auxiliary reduction includes the boundary.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The maximization includes boundary input laws with zero coordinates and deterministic simplex vertices; entropy extends continuously by 0 ln0=0, so compactness/auxiliary reduction includes the boundary. Independent item review: Posterior degraded data processing makes the auxiliary objective at most the same-input X objective; U=X attains it and the general auxiliary maximum supplies the optimizer (1.1–3.1).",
+            "item_sha256": "ae18070c5d53aaaab2fb1990024f5cfee7a32df61709a40e27141e876992ca94",
+            "row_sha256": "620fa0addae44a5365e10326d494a5768332daa0fd638b2bbfc6f1ba1eae3704"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A maximizing finite auxiliary is supplied by [F5], and the U=X replacement is explicit in steps 1.2 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Necessity in the asserted exact capacity characterization is proved by the converse calculation. Posterior degraded data processing makes the auxiliary objective at most the same-input X objective; U=X attains it and the general auxiliary maximum supplies the optimizer (1.1–3.1).",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: Necessity in the asserted exact capacity characterization is proved by the converse calculation. Posterior degraded data processing makes the auxiliary objective at most the same-input X objective; U=X attains it and the general auxiliary maximum supplies the optimizer (1.1–3.1). Independent item review: Posterior degraded data processing makes the auxiliary objective at most the same-input X objective; U=X attains it and the general auxiliary maximum supplies the optimizer (1.1–3.1).",
+            "item_sha256": "ae18070c5d53aaaab2fb1990024f5cfee7a32df61709a40e27141e876992ca94",
+            "row_sha256": "e194340ad4168d8cdc60718b1e35c438da9d76239875e756b91b83c4b15915ed"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Sufficiency in the asserted exact capacity characterization follows from its actual code construction/supplier and closure, including singleton-message cases. Posterior degraded data processing makes the auxiliary objective at most the same-input X objective; U=X attains it and the general auxiliary maximum supplies the optimizer (1.1–3.1).",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: Sufficiency in the asserted exact capacity characterization follows from its actual code construction/supplier and closure, including singleton-message cases. Posterior degraded data processing makes the auxiliary objective at most the same-input X objective; U=X attains it and the general auxiliary maximum supplies the optimizer (1.1–3.1). Independent item review: Posterior degraded data processing makes the auxiliary objective at most the same-input X objective; U=X attains it and the general auxiliary maximum supplies the optimizer (1.1–3.1).",
+            "item_sha256": "ae18070c5d53aaaab2fb1990024f5cfee7a32df61709a40e27141e876992ca94",
+            "row_sha256": "13d4bca0a33df06f9fbe3a248971e10fc69d9fbebeb453a6eac256be00f6200c"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "auxiliary U=X",
+          "method": "direct substitution",
+          "inputs": [
+            "any finite P_X"
+          ],
+          "result": "The auxiliary objective equals I(X;Y)-I(X;Z) exactly.",
+          "checked_in": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Level 9. Every step and the current degradation, finite MI/chain-rule/DPI, cardinality and general-capacity suppliers checked. Under each positive-mass U posterior, W_Y V still gives X-Y-Z, so conditional DPI makes the subtracted conditional-information difference nonnegative. U-X-Y and U-X-Z give the exact two chain identities. U=X supplies the reverse inequality, and replacing an attained auxiliary optimizer at its own P_X proves attainment without a separate limiting argument. Zero U weights, deterministic X and singleton alphabets are allowed. General four-capacity equality is supplied by the fully reviewed theorem; Lecture 11 p. 4 states the weak-secrecy formula only. Refuter:20:2 confirmed_fatal; corrected the locator and separated local auxiliary/strong-secrecy conclusions. No Statement or proof change."
+      }
+    },
+    "ex-it-information-bottleneck-finite-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-finite-source-privacy-utility-region",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite sensitive variable and $X$ a finite useful variable with joint law $P_{SX}$. For each finite nonempty release alphabet $\\mathcal Z$, choose a stochastic kernel $K(z\\mid x)$ from $\\mathcal X$ to $\\mathcal Z$ ([[def-finite-stochastic-kernel]]) and form\n\n$$P_{SXZ}(s,x,z):=P_{SX}(s,x)K(z\\mid x).$$\n\nThus the induced variables satisfy the explicitly defined factorization $P_{SXZ}=P_{SX}K_{Z\\mid X}$, written $S-X-Z$. The **privacy–utility region** for this source is the closure in $\\mathbb R^2$ of\n\n$$\\bigcup_{\\mathcal Z,K}\\left\\{\\bigl(I(S;Z),I(X;Z)\\bigr)\\right\\},$$\n\nwhere mutual information uses nats and the finite definition [[def-it-finite-mutual-information]]. The first coordinate is the chosen leakage metric and the second is the chosen retained-information utility. This model does not itself impose a distortion, rate, or perfect-privacy constraint; those define different optimization problems.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-conditional-entropy",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$. It is the weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Write $p_Y(y)=\\sum_xp_{XY}(x,y)$. For each $y$ with $p_Y(y)>0$, set $p_{X|y}(x)=p_{XY}(x,y)/p_Y(y)$; this is a probability vector by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. Define the conditional entropy in nats by\n\n$$H(X|Y):=\\sum_{y:p_Y(y)>0}p_Y(y)H(p_{X|y}),$$\n\nwhere $H(p)=-\\sum_xp(x)\\ln p(x)$ is the finite entropy of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]]. Terms for zero-mass $y$ are omitted. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-perfect-privacy-kernel-criterion",
+          "source_section": "Statement",
+          "quote": "Let $(S,X)$ have a finite joint law and let $K(z\\mid x)$ be a finite release kernel, giving $P_{SXZ}=P_{SX}K_{Z\\mid X}$ as in [[def-it-finite-source-privacy-utility-region]]. Then $I(S;Z)=0$ if and only if, for each $z$ with $P_Z(z)>0$, the conditional mixture\n\n$$\\sum_xP_{X\\mid S=s}(x)K(z\\mid x)$$\n\nis independent of $s$ over $\\operatorname{supp}P_S$. No full-support assumption is imposed; zero-mass values of $s$ are not constrained.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The fair bit $S$ has entropy $\\ln2$. Since $S$ is fair and independent of the symmetric noise, $Y$ is fair as well. Given either value of $Y$, the posterior error probability for estimating $S$ is $1/10$, so $H(S\\mid Y)=h(1/10)$. The factorization in [F1] is $P_{SYZ}=P_{SY}K_{Z\\mid Y}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using [F2] and [F4], expand the objective as $I(Y;Z)-\\tfrac12I(S;Z)=\\tfrac12\\ln2-H(Y\\mid Z)+\\tfrac12H(S\\mid Z).$ The conditional-entropy chain rules in [F4] give $H(S,Y\\mid Z)=H(S\\mid Z)+H(Y\\mid S,Z)=H(Y\\mid Z)+H(S\\mid Y,Z)$. By [F3] and [F6], $H(Y\\mid S,Z)\\ge0$ and $H(Y\\mid Z)\\ge0$, so $H(S\\mid Z)\\le H(S,Y\\mid Z)$. The factorization in [F1] gives $P_{S\\mid Y,Z}=P_{S\\mid Y}$ on positive-mass pairs, hence $H(S\\mid Y,Z)=H(S\\mid Y)=h(1/10)$ by step 1.1. Therefore $H(S\\mid Z)\\le H(Y\\mid Z)+h(1/10)$, and $I(Y;Z)-\\tfrac12I(S;Z)\\le\\tfrac12\\ln2+\\tfrac12h(1/10)-\\tfrac12H(Y\\mid Z)\\le\\tfrac12\\ln2+\\tfrac12h(1/10)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For the identity release $Z=Y$, $H(Y\\mid Z)=0$ and step 1.1 gives $I(S;Y)=H(S)-H(S\\mid Y)=\\ln2-h(1/10)$. Substitution gives equality in the bound. A bijective relabeling preserves these conditional entropies and mutual informations, so also attains equality.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $I(S;Z)=0$. By [F5], for each $z$ with $P_Z(z)>0$, the two rows of $P_{Z\\mid S}$ agree. If $P_Z(z)=0$, then $0=\\tfrac12P(z\\mid S=0)+\\tfrac12P(z\\mid S=1)$, and nonnegativity forces both entries to be zero, so the rows agree for every release value. With row order $s=0,1$ and $y=0,1$, the binary symmetric channel matrix from $S$ to $Y$ is $T=\\begin{pmatrix}9/10&1/10\\\\1/10&9/10\\end{pmatrix},$ so for the column $k_z=(K(z\\mid0),K(z\\mid1))^{\\mathsf T}$ the output column is $Tk_z=c_z(1,1)^{\\mathsf T}$ for some $c_z$. Since $\\det T=4/5\\ne0$ and $T(1,1)^{\\mathsf T}=(1,1)^{\\mathsf T}$, invertibility gives $k_z=c_z(1,1)^{\\mathsf T}$. This holds for every $z$, so the two rows of $K$ coincide and $Y,Z$ are independent. Therefore $I(Y;Z)=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim. Independent item review: The entropy-chain objective bound is attained by identity release; the invertible binary-symmetric matrix forces a perfectly private release to have identical kernel rows (1.1–3.1).",
+            "item_sha256": "221dcc5cf2902bf4a4842757fbdc025e963fc38393ec1e15dc23d0480b1e9461",
+            "row_sha256": "e863846b7da87da97cee9fc239953af45377ea7ba3d847fd82747524a5881b6a"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-probability release values are treated in step 3.1 before the matrix equation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A constant release has identical kernel rows and zero utility; the row-equality conclusion in step 3.1 includes this case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The bound is for every finite stochastic release kernel, including deterministic or constant releases, in steps 2.1–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local source sections: Statement; Proof. The sensitive-channel noise is fixed at 1/10, but the release-kernel simplex includes deterministic identity release (attaining equality) and constant release (zero utility/leakage); the proof applies to both endpoints.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The sensitive-channel noise is fixed at 1/10, but the release-kernel simplex includes deterministic identity release (attaining equality) and constant release (zero utility/leakage); the proof applies to both endpoints. Independent item review: The entropy-chain objective bound is attained by identity release; the invertible binary-symmetric matrix forces a perfectly private release to have identical kernel rows (1.1–3.1).",
+            "item_sha256": "221dcc5cf2902bf4a4842757fbdc025e963fc38393ec1e15dc23d0480b1e9461",
+            "row_sha256": "2a5e07890ec4b2476f928b15e03512a7f7e77bd59502254928a136c10b3ae709"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument makes no selection from an infinite family and uses no choice axiom.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The argument makes no selection from an infinite family and uses no choice axiom. Independent item review: The entropy-chain objective bound is attained by identity release; the invertible binary-symmetric matrix forces a perfectly private release to have identical kernel rows (1.1–3.1).",
+            "item_sha256": "221dcc5cf2902bf4a4842757fbdc025e963fc38393ec1e15dc23d0480b1e9461",
+            "row_sha256": "8d689a368a383a6d44d90633870222a7923aa7b4e9f6096f3af8c5161ae43e37"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The claim is not stated as a biconditional. Independent item review: The entropy-chain objective bound is attained by identity release; the invertible binary-symmetric matrix forces a perfectly private release to have identical kernel rows (1.1–3.1).",
+            "item_sha256": "221dcc5cf2902bf4a4842757fbdc025e963fc38393ec1e15dc23d0480b1e9461",
+            "row_sha256": "452049805ed355b30b80557022b5ad9df9af06642039717828c526747f4a4a22"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not stated as a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The claim is not stated as a biconditional. Independent item review: The entropy-chain objective bound is attained by identity release; the invertible binary-symmetric matrix forces a perfectly private release to have identical kernel rows (1.1–3.1).",
+            "item_sha256": "221dcc5cf2902bf4a4842757fbdc025e963fc38393ec1e15dc23d0480b1e9461",
+            "row_sha256": "dc738a6e7f42bf2afa8edadc0e985f8303b0e2598965d5c33b96d2aa8fb13f9f"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "identity release",
+          "method": "direct entropy calculation",
+          "inputs": [
+            "S fair",
+            "N~Bernoulli(1/10)",
+            "Z=Y"
+          ],
+          "result": "I(Y;Z)-I(S;Z)/2=ln(2)/2+h(1/10)/2, attaining the upper bound.",
+          "checked_in": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Level 5. Read all four steps and current finite conditional entropy, chain-rule, KL/MI and privacy suppliers. Bayes gives fair Y and H(S|Y)=h(0.1). Conditional chain-rule expansion bounds the objective by half ln2 plus half h(0.1), and identity/bijective release attains it. Perfect privacy makes both conditional output rows equal, including zero-mass z; the BSC determinant is (0.9)^2-(0.1)^2=0.8 and its fixed constant vector forces equal kernel rows, hence zero utility. Source §§II-III describes the general privacy funnel, not the asserted binary example; narrowed that locator to the actual framework and marked the binary illustration local. Lecture 15 pp. 1-2 discusses secrecy metrics and wiretap coding rather than finite privacy utility, so its locator now names only that background. The reader author-order correction is retained. No mathematical change, full-support assumption, or choice principle."
+      }
+    },
+    "ex-it-weak-secrecy-does-not-imply-strong-secrecy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-wiretap-channel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal X,\\mathcal Y,\\mathcal Z$ be finite nonempty alphabets and let $W(y,z\\mid x)$ be a stochastic kernel from $\\mathcal X$ to $\\mathcal Y\\times\\mathcal Z$ ([[def-finite-stochastic-kernel]]). Its Bob and Eve marginals are $W_Y(y\\mid x):=\\sum_z W(y,z\\mid x)$ and $W_Z(z\\mid x):=\\sum_y W(y,z\\mid x)$; each is a finite DMC in the sense of [[def-discrete-memoryless-channel]]. At blocklength $n$, the joint channel law is\n\n$$W^n(y^n,z^n\\mid x^n):=\\prod_{i=1}^n W(y_i,z_i\\mid x_i).$$\n\nThe product formula is a stochastic kernel by [[lem-it-finite-wiretap-product-kernel-is-stochastic]]. Finite distributivity gives $\\sum_{z^n}W^n(y^n,z^n\\mid x^n)=\\prod_i\\sum_{z_i}W(y_i,z_i\\mid x_i)=\\prod_iW_Y(y_i\\mid x_i)=W_Y^n(y^n\\mid x^n)$, and the analogous finite sum over $y^n$ gives marginal $W_Z^n$. The pair $(Y^n,Z^n)$ may be correlated conditional on $X^n$; neither marginal changes if that coupling changes while the two marginal channels stay fixed.\n\nAn $(n,\\mathcal M_n)$ wiretap code has a finite message set $\\mathcal M_n$, a uniform message $M_n$, a stochastic encoder $P_{X^n\\mid M_n}$ using private randomness independent of channel noise, and a decoder $\\hat M_n:\\mathcal Y^n\\to\\mathcal M_n\\cup\\{e\\}$, where $e\\notin\\mathcal M_n$ denotes erasure and is counted as error. The encoder uses no feedback and the parties have no preshared secret key or forward public aid. The public code description is known to Eve, who observes $Z^n$. Average error is $P_{e,av}^{(n)}:=\\Pr[\\hat M_n(Y^n)\\ne M_n]$; maximal error is $P_{e,max}^{(n)}:=\\max_{m\\in\\mathcal M_n}\\Pr[\\hat M_n(Y^n)\\ne m\\mid M_n=m]$. The rate is $n^{-1}\\ln|\\mathcal M_n|$ nats per channel use. A secrecy metric is specified separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-it-information-leakage-and-equivocation",
+          "source_section": "Definition",
+          "quote": "For finite random variables $M,Z$, information leakage is the finite mutual information $I(M;Z)$ in nats, as defined in [[def-it-finite-mutual-information]], and equivocation is the finite conditional entropy $H(M\\mid Z)$, as defined in [[def-it-finite-conditional-entropy]]. For an $n$-use code with Eve's observation $Z^n$, its normalized leakage is $n^{-1}I(M;Z^n)$. When $M$ is uniform on a finite message set $\\mathcal M$, its entropy is $H(M)=\\ln|\\mathcal M|$. Zero-probability symbols are handled by the finite entropy and KL conventions cited above.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-weak-and-strong-secrecy",
+          "source_section": "Definition",
+          "quote": "Consider a sequence of finite wiretap codes from [[def-it-wiretap-channel]], with uniform message $M_n$ and Eve's observation $Z^n$. Call it reliable when its average error tends to zero; maximal reliability is the stronger condition that its maximal error tends to zero. Among reliable sequences, **weak secrecy** means\n\n$$\\frac1n I(M_n;Z^n)\\longrightarrow 0,$$\n\nand **strong secrecy** means\n\n$$I(M_n;Z^n)\\longrightarrow 0,$$\n\nwhere leakage is the unnormalized finite mutual information of [[def-it-information-leakage-and-equivocation]] and all quantities are in nats. Exact independence at every blocklength, total-variation secrecy, and per-message secrecy are separate conditions and are not identified with either limit here.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $n$, the input string has length $k_n+(n-k_n)=n$. The noiseless channel gives $Y^n=Z^n=X^n$ with probability one, so Bob recovers the first $k_n$ bits exactly and the error probability is zero. Eve's observation also determines $M_n$ exactly, hence $H(M_n\\mid Z^n)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By uniformity and [F7], $H(M_n)=\\ln(2^{k_n})=k_n\\ln2$. Thus [F5] gives $I(M_n;Z^n)=H(M_n)-H(M_n\\mid Z^n)=k_n\\ln2$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $\\sqrt n-1<k_n\\le\\sqrt n$, one has $k_n\\to\\infty$ and $k_n/n\\to0$. Step 2.1 therefore gives unnormalized leakage tending to infinity and normalized leakage tending to zero by [F2]. With zero error this is weak secrecy and failure of strong secrecy by [F3].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any wiretap code sequence, [F4] identifies mutual information with finite KL divergence, and [F6] makes it nonnegative. Hence $0\\le I(M_n;Z^n)/n\\le I(M_n;Z^n)$ for $n\\ge1$. If the right side tends to zero, so does the left side, proving that strong secrecy implies weak secrecy.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim. Independent item review: Both observers recover all floor(sqrt n) message bits, giving leakage floor(sqrt n)ln2; its normalized value tends to zero while unnormalized leakage diverges (1.1–4.1).",
+            "item_sha256": "e0ec3068dc8f5526ce41c0f1de6f324c0f8226f781168cb7c5c937d2f0081e29",
+            "row_sha256": "e863846b7da87da97cee9fc239953af45377ea7ba3d847fd82747524a5881b6a"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero leakage is included in the implication 0<=I(M;Z^n)/n in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction is defined for n=1 with k_1=1; the asymptotic estimate in step 3.1 is unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example uses a deterministic noiseless channel and verifies both receivers exactly in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is not an interval or endpoint assertion.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "endpoints: The claim is not an interval or endpoint assertion. Independent item review: Both observers recover all floor(sqrt n) message bits, giving leakage floor(sqrt n)ln2; its normalized value tends to zero while unnormalized leakage diverges (1.1–4.1).",
+            "item_sha256": "e0ec3068dc8f5526ce41c0f1de6f324c0f8226f781168cb7c5c937d2f0081e29",
+            "row_sha256": "06a3c9ed956504f677643dd4ab8ee8d4c6f93e1eb86628225eb7075367a1c756"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument makes no selection from an infinite family and uses no choice axiom.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The argument makes no selection from an infinite family and uses no choice axiom. Independent item review: Both observers recover all floor(sqrt n) message bits, giving leakage floor(sqrt n)ln2; its normalized value tends to zero while unnormalized leakage diverges (1.1–4.1).",
+            "item_sha256": "e0ec3068dc8f5526ce41c0f1de6f324c0f8226f781168cb7c5c937d2f0081e29",
+            "row_sha256": "8d689a368a383a6d44d90633870222a7923aa7b4e9f6096f3af8c5161ae43e37"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The channel description W=1 exactly when y=z=x is a definition of a deterministic stochastic row. The mathematical conclusion is a weak-but-not-strong example and a one-way implication strong implies weak, not a biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The channel description W=1 exactly when y=z=x is a definition of a deterministic stochastic row. The mathematical conclusion is a weak-but-not-strong example and a one-way implication strong implies weak, not a biconditional. Independent item review: Both observers recover all floor(sqrt n) message bits, giving leakage floor(sqrt n)ln2; its normalized value tends to zero while unnormalized leakage diverges (1.1–4.1).",
+            "item_sha256": "e0ec3068dc8f5526ce41c0f1de6f324c0f8226f781168cb7c5c937d2f0081e29",
+            "row_sha256": "8145be8f8e1c3c7f1d9abe84636d83c9c41b14327c2506e790f5154f348f24b4"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: The channel description W=1 exactly when y=z=x is a definition of a deterministic stochastic row. The mathematical conclusion is a weak-but-not-strong example and a one-way implication strong implies weak, not a biconditional. Independent item review: Both observers recover all floor(sqrt n) message bits, giving leakage floor(sqrt n)ln2; its normalized value tends to zero while unnormalized leakage diverges (1.1–4.1)."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The words exactly when specify which channel entries equal one. They do not assert weak secrecy iff strong secrecy; the computed divergent leakage explicitly refutes the reverse implication.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The words exactly when specify which channel entries equal one. They do not assert weak secrecy iff strong secrecy; the computed divergent leakage explicitly refutes the reverse implication. Independent item review: Both observers recover all floor(sqrt n) message bits, giving leakage floor(sqrt n)ln2; its normalized value tends to zero while unnormalized leakage diverges (1.1–4.1).",
+            "item_sha256": "e0ec3068dc8f5526ce41c0f1de6f324c0f8226f781168cb7c5c937d2f0081e29",
+            "row_sha256": "4220c007dd0d08c39dcfa442bae422721021953d2f03c8e398bc36d5bee96d17"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: The words exactly when specify which channel entries equal one. They do not assert weak secrecy iff strong secrecy; the computed divergent leakage explicitly refutes the reverse implication. Independent item review: Both observers recover all floor(sqrt n) message bits, giving leakage floor(sqrt n)ln2; its normalized value tends to zero while unnormalized leakage diverges (1.1–4.1)."
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "blocklength n=4",
+          "method": "exact code calculation",
+          "inputs": [
+            "k_4=floor(sqrt(4))=2"
+          ],
+          "result": "Bob error is zero and Eve leakage is 2 ln 2; normalized leakage is (ln 2)/2.",
+          "checked_in": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Level 5. All four steps and finite wiretap, leakage, secrecy, entropy-chain and KL suppliers checked. For every n>=1, floor(sqrt(n)) is between 1 and n, so the word is admissible and both recipients decode exactly. Uniform entropy is k_n ln2, conditional entropy zero; its normalized version vanishes and its unnormalized version diverges. The example makes no positive-rate claim. Nonnegativity gives strong implies weak for every sequence. Lecture 15 p. 1 states strong secrecy but does not contain the asserted normalized-leakage counterexample; its locator now accurately names context and identifies the example as local. Bloch-Laneman §III defines the distinct normalized and unnormalized metrics. No change to the witness, Statement, or choice assumptions."
+      }
+    },
+    "ex-it-degraded-wiretap-capacity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-it-degraded-wiretap-channel",
+          "source_section": "Definition",
+          "quote": "A finite wiretap channel [[def-it-wiretap-channel]] is **degraded from Bob to Eve** if there is a finite stochastic kernel $V(z\\mid y)$ from Bob's output alphabet to Eve's output alphabet such that\n\n$$W(y,z\\mid x)=W_Y(y\\mid x)V(z\\mid y)\\quad\\text{for every }x,y,z.$$\n\nEquivalently, for every input law $P_X$, the induced joint law is $P_X(x)W_Y(y\\mid x)V(z\\mid y)$. The requirement specifies the joint coupling of Bob's and Eve's outputs, not only their separate marginal channels.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-it-degraded-wiretap-secrecy-capacity",
+          "source_section": "Statement",
+          "quote": "If $W(y,z\\mid x)$ is a finite degraded wiretap channel in the sense of [[def-it-degraded-wiretap-channel]], then all four operational capacities in [[def-it-wiretap-secrecy-capacities]] are equal to\n\n$$\\max_{P_X}\\bigl[I(X;Y)-I(X;Z)\\bigr],$$\n\nwhere $P_X$ ranges over probability vectors on the finite input alphabet and the output law is induced by $W$. The maximum is attained.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-it-finite-mutual-information",
+          "source_section": "Definition",
+          "quote": "Let $p_{XY}$ be a joint probability vector on finite alphabets $\\mathcal X\\times\\mathcal Y$, with marginals $p_X(x):=\\sum_y p_{XY}(x,y)$ and $p_Y(y):=\\sum_xp_{XY}(x,y)$. The marginals are probability vectors by [[lem-it-finite-marginals-and-conditionals-are-pmfs]]. The joint vector is the outcome-weight function of the canonical finite probability space from [[def-finite-probability-space-and-event]]; its coordinate maps are finite random elements in the sense of [[def-random-element-and-real-random-variable]]. Define mutual information in nats by\n\n$$I(X;Y):=D(p_{XY}\\|p_X\\otimes p_Y)=\\sum_{(x,y):p_{XY}(x,y)>0}p_{XY}(x,y)\\ln\\frac{p_{XY}(x,y)}{p_X(x)p_Y(y)},$$\n\nwhere $D$ is the finite KL convention of [[def-qa-35-finite-probability-entropy-and-stochastic-matrices]] and $(p_X\\otimes p_Y)(x,y):=p_X(x)p_Y(y)$. Every ratio in the displayed sum is positive and finite: if $p_{XY}(x,y)>0$, then each marginal sum is at least that positive entry. The sum is over finite support, so $I(X;Y)$ is finite. The base-$b$ version replaces $\\ln$ by $\\log_b$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-it-finite-entropy-chain-rule",
+          "source_section": "Statement",
+          "quote": "For finite $X,Y,Z$ with a joint pmf,\n\n$$H(X,Y|Z)=H(X|Z)+H(Y|X,Z),$$\n\nand\n\n$$I(X;Y,Z)=I(X;Z)+I(X;Y|Z).$$\n\nIn particular, $I(X;Y)=H(X)-H(X|Y)=H(Y)-H(Y|X)$. All terms are finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-it-finite-kl-nonnegative-equality",
+          "source_section": "Statement",
+          "quote": "For finite probability vectors $p,q$ on the same alphabet, $D(p\\|q)\\ge0$, and $D(p\\|q)=0$ if and only if $p=q$. If $p_i>0=q_i$ for some coordinate, then $D(p\\|q)=+\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "source_section": "Definition",
+          "quote": "For a finite nonempty set identified with $[k]=\\{1,\\ldots,k\\}$, a **probability vector** is $p=(p_i)_{i=1}^k$ with $p_i\\ge0$ and $\\sum_i p_i=1$; it is the outcome-weight vector of a finite probability space ([[def-finite-probability-space-and-event]]). Its Shannon entropy in natural units is\n$$H(p):=-\\sum_{i=1}^k p_i\\ln p_i,$$\nwith $0\\ln0:=0$. For probability vectors $p,q$ on the same set $[k]$, the relative entropy is\n$$D(p\\|q):=\\sum_{i:p_i>0}p_i\\ln(p_i/q_i),$$\nwith value $+\\infty$ if $p_i>0=q_i$ for some $i$. A matrix $A\\in[0,1]^{N\\times m}$ is **row-stochastic** when each row sums to one. For a probability row vector $p$ on $[m]$ and a row vector $X\\in[0,1]^m$, the dot product $pX^{\\mathsf T}=\\sum_{i=1}^m p_iX_i$ is the acceptance probability under distribution $p$.\n\nThese definitions use finite sets only; entropy is between $0$ and $\\ln k$, as proved where needed below.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $V(e\\mid e)=1$, $V(y\\mid y)=2/3$, and $V(e\\mid y)=1/3$ for $y\\in\\{0,1\\}$, with all other entries zero. Each row sums to one. Given input $x$, the joint probabilities are $W_Y(e\\mid x)V(e\\mid e)=1/4$ for $(Y,Z)=(e,e)$, $W_Y(x\\mid x)V(x\\mid x)=(3/4)(2/3)=1/2$ for $(x,x)$, and $W_Y(x\\mid x)V(e\\mid x)=(3/4)(1/3)=1/4$ for $(x,e)$; all other pairs have probability zero. Thus $W(y,z\\mid x)=W_Y(y\\mid x)V(z\\mid y)$ and [F1] applies.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a Bernoulli-$p$ input, a BEC with erasure probability $\\epsilon$ has $H(X\\mid Y)=\\epsilon h(p)$: on a received bit the conditional entropy is zero, and on erasure it is $H(X)=h(p)$. Since $I(X;Y)=H(X)-H(X\\mid Y)$ by [F4], Bob's mutual information is $(3/4)h(p)$ and Eve's is $(1/2)h(p)$. Their difference is $h(p)/4$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every $p\\in[0,1]$, compare the Bernoulli-$p$ law with the uniform binary law. By [F5], $0\\le D\\bigl((p,1-p)\\|(1/2,1/2)\\bigr)=\\ln2-h(p),$ with equality exactly when $p=1/2$. At $p=0$ and $p=1$, the zero-term convention in [F6] gives $h(p)=0$. Thus $h(p)/4$ has maximum $\\ln2/4$ at the fair input and vanishes at both deterministic endpoints. The capacity claim follows from [F2] and step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "empty: The hypotheses use finite nonempty alphabets and probability laws; there is no empty-indexed family branch in this claim. Independent item review: Explicit erasure kernels make Eve BEC(1/2), so the information difference is h(p)/4; binary KL shows the maximum ln2/4 at p=1/2 and zero at p=0,1 (1.1–3.1).",
+            "item_sha256": "a9527a54b40a14513c364c93ea9095771a16722fb16ee8b6110029b10daebbe7",
+            "row_sha256": "e863846b7da87da97cee9fc239953af45377ea7ba3d847fd82747524a5881b6a"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The deterministic input endpoints p=0,1 give h(p)=0 by the zero-term convention in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim has no one-valued cardinality parameter that changes its conclusion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At p=0 and p=1 both mutual informations vanish as computed in steps 2.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Bernoulli input endpoints p=0,1 and maximizing point p=1/2 are checked in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument makes no selection from an infinite family and uses no choice axiom.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "nonempty-choice: The argument makes no selection from an infinite family and uses no choice axiom. Independent item review: Explicit erasure kernels make Eve BEC(1/2), so the information difference is h(p)/4; binary KL shows the maximum ln2/4 at p=1/2 and zero at p=0,1 (1.1–3.1).",
+            "item_sha256": "a9527a54b40a14513c364c93ea9095771a16722fb16ee8b6110029b10daebbe7",
+            "row_sha256": "8d689a368a383a6d44d90633870222a7923aa7b4e9f6096f3af8c5161ae43e37"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Necessity in the asserted exact capacity characterization is proved by the converse calculation. Explicit erasure kernels make Eve BEC(1/2), so the information difference is h(p)/4; binary KL shows the maximum ln2/4 at p=1/2 and zero at p=0,1 (1.1–3.1).",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-forward: Necessity in the asserted exact capacity characterization is proved by the converse calculation. Explicit erasure kernels make Eve BEC(1/2), so the information difference is h(p)/4; binary KL shows the maximum ln2/4 at p=1/2 and zero at p=0,1 (1.1–3.1). Independent item review: Explicit erasure kernels make Eve BEC(1/2), so the information difference is h(p)/4; binary KL shows the maximum ln2/4 at p=1/2 and zero at p=0,1 (1.1–3.1).",
+            "item_sha256": "a9527a54b40a14513c364c93ea9095771a16722fb16ee8b6110029b10daebbe7",
+            "row_sha256": "a95e75d5c2a452d82bc2ddf531d57e03222c869cc0b1b84875c368c5fe86df95"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Sufficiency in the asserted exact capacity characterization follows from its actual code construction/supplier and closure, including singleton-message cases. Explicit erasure kernels make Eve BEC(1/2), so the information difference is h(p)/4; binary KL shows the maximum ln2/4 at p=1/2 and zero at p=0,1 (1.1–3.1).",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_high",
+            "reason": "iff-reverse: Sufficiency in the asserted exact capacity characterization follows from its actual code construction/supplier and closure, including singleton-message cases. Explicit erasure kernels make Eve BEC(1/2), so the information difference is h(p)/4; binary KL shows the maximum ln2/4 at p=1/2 and zero at p=0,1 (1.1–3.1). Independent item review: Explicit erasure kernels make Eve BEC(1/2), so the information difference is h(p)/4; binary KL shows the maximum ln2/4 at p=1/2 and zero at p=0,1 (1.1–3.1).",
+            "item_sha256": "a9527a54b40a14513c364c93ea9095771a16722fb16ee8b6110029b10daebbe7",
+            "row_sha256": "6db4df736d577ce2195aad170912cd412a73696618b5b71946c77d57f1001773"
+          }
+        }
+      ],
+      "axiom_uses": [],
+      "finite_checks": [
+        {
+          "check": "erasure cascade probabilities",
+          "method": "finite transition-matrix calculation",
+          "inputs": [
+            "Bob erasure 1/4",
+            "Eve second erasure 1/3"
+          ],
+          "result": "Eve receives the input with probability (3/4)(2/3)=1/2; capacity is ln(2)/4 at p=1/2 and zero at p=0,1.",
+          "checked_in": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-20",
+        "notes": "Level 10. All three steps and current degraded formula, MI/entropy and KL suppliers checked. V has nonnegative unit rows; the three joint probabilities 1/4,1/2,1/4 sum to one. Eve survival is (3/4)(2/3)=1/2. Under Bernoulli-p, independent erasure leaves the prior posterior on erasure, so Bob/Eve informations are 3h(p)/4 and h(p)/2. Uniform-reference KL proves h(p)<=ln2 with equality only at p=1/2; p=0,1 have h=0. Thus all four capacities are ln2/4 nats under the reviewed finite degraded theorem. Refuter:20:3 confirmed_fatal: Lecture 11 pp. 1-3 do not contain wiretap capacity, and neither its p. 4 nor El Gamal-Kim pp. 23-9-23-10 supplies this binary-erasure specialization. Corrected both source locators to distinguish the formula from the local calculation. No witness, Statement, proof or assumption change."
+      }
+    }
+  }
+}

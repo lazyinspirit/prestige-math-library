@@ -1,0 +1,618 @@
+[
+  {
+    "order": 2518,
+    "id": "cost-constrained-gaussian-and-feedback-channels",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Cost-Constrained, Gaussian, and Feedback Channels",
+    "companion": "cost-constrained-gaussian-and-feedback-channels-examples",
+    "requires": [
+      "discrete-memoryless-channel-capacity",
+      "gaussian-orthogonal-decomposition-and-quadratic-forms",
+      "mixed-effects-and-longitudinal-models"
+    ],
+    "items": [
+      {
+        "id": "def-parallel-gaussian-channel-with-power-constraint",
+        "kind": "definition",
+        "title": "Finite-dimensional additive Gaussian channel with average power",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_obligations": [
+          "Define finite dimension, positive-definite noise covariance, independent noise across uses, and real nats convention.",
+          "Define average block power for ordinary and feedback codes; state AC inherited from the Gaussian-law interface."
+        ]
+      },
+      {
+        "id": "lem-cost-pruned-random-code",
+        "kind": "lemma",
+        "title": "A low-error random code can be pruned to satisfy a strict average cost constraint",
+        "deps": [
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-finite-union-bound",
+          "thm-natural-logarithm-laws",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_obligations": [
+          "State the random-code ensemble, per-word cost random variable, strict mean-cost gap, and expected-error hypothesis.",
+          "Use Markov bounds on the fraction of over-budget words and ensemble-average error; prove deletion preserves vanishing error and rate."
+        ]
+      },
+      {
+        "id": "lem-density-channel-threshold-random-coding-bound",
+        "kind": "lemma",
+        "title": "Threshold decoding bound for memoryless channels with densities",
+        "deps": [
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-finite-union-bound",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_obligations": [
+          "Specify counting or Lebesgue reference measures, transition/output densities, support, and information density.",
+          "Prove the false-alarm likelihood-ratio expectation is one, then derive the union-bound error estimate."
+        ]
+      },
+      {
+        "id": "lem-finite-simplex-entropy-continuity-and-concavity",
+        "kind": "lemma",
+        "title": "Finite-simplex entropy is continuous and concave",
+        "deps": [
+          "def-natural-logarithm",
+          "thm-logarithm-slower-than-every-positive-power",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "cor-second-derivative-characterises-convexity"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_obligations": [
+          "Prove continuity of -t ln t at zero and on [0,1].",
+          "Prove concavity on the closed interval, including zero coordinates, and derive 0 <= H(p) <= ln(m) including m=1."
+        ]
+      },
+      {
+        "id": "lem-gaussian-maximum-differential-entropy-under-variance",
+        "kind": "lemma",
+        "title": "A Gaussian maximizes scalar differential entropy at fixed variance",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kullback-leibler-divergence",
+          "thm-kullback-leibler-is-nonnegative",
+          "def-natural-logarithm",
+          "def-standard-normal-and-normal-laws",
+          "def-moments-variance-and-covariance",
+          "thm-nondegenerate-multivariate-normal-law-has-density"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_obligations": [
+          "Define differential entropy for a density with finite entropy and derive the Gaussian reference density.",
+          "Expand the KL divergence and compute the quadratic expectation to obtain the entropy bound and equality case."
+        ]
+      },
+      {
+        "id": "lem-jensen-for-integrable-cost-random-variable",
+        "kind": "lemma",
+        "title": "Jensen's inequality for an integrable cost random variable",
+        "deps": [
+          "thm-dedekind-complete",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_obligations": [
+          "Prove Jensen for finite concave functions on a half-line using a supporting affine function at the mean; handle the boundary mean and integrability explicitly."
+        ]
+      },
+      {
+        "id": "lem-standard-normal-fourth-moment",
+        "kind": "lemma",
+        "title": "A normal variable has finite fourth moment",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "thm-gaussian-integral",
+          "thm-integration-by-parts",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-exponential-beats-every-polynomial",
+          "thm-substitution-for-improper-integrals",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_obligations": [
+          "Compute the second and fourth moments by integration by parts with vanishing Gaussian boundary terms.",
+          "Scale the result to N(0,sigma^2) and state the finite-product consequence used later."
+        ]
+      },
+      {
+        "id": "lem-water-filling-optimal-allocation",
+        "kind": "lemma",
+        "title": "Water-filling maximizes the finite parallel Gaussian allocation objective",
+        "deps": [
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-intermediate-value",
+          "cor-second-derivative-characterises-convexity"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_obligations": [
+          "Prove existence and uniqueness of the water level for positive total power, including inactive branches.",
+          "Prove global optimality using concavity and the active/inactive derivative inequalities; check zero power."
+        ]
+      },
+      {
+        "id": "def-countable-dmc-zero-cost-information-capacity",
+        "kind": "definition",
+        "title": "Zero-cost information capacity of a countable-input finite-output DMC",
+        "deps": [
+          "def-natural-logarithm",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-finite-simplex-entropy-continuity-and-concavity"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_obligations": [
+          "Define countable input laws, a finite-output row-stochastic DMC, zero letter cost, finite output entropy, conditional entropy, mutual information, and the zero-cost information-capacity supremum."
+        ]
+      },
+      {
+        "id": "def-parallel-awgn-feedback-code",
+        "kind": "definition",
+        "title": "Causal feedback codes for a finite-dimensional Gaussian channel",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-parallel-gaussian-channel-with-power-constraint",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_obligations": [
+          "Define measurable causal encoders, a decoder, uniform-message average error, and expected average power.",
+          "Define the no-feedback subcase by encoders independent of past outputs."
+        ]
+      },
+      {
+        "id": "lem-gaussian-noise-orthogonalization",
+        "kind": "lemma",
+        "title": "Orthogonal coordinates diagonalize a finite-dimensional Gaussian noise law",
+        "deps": [
+          "def-parallel-gaussian-channel-with-power-constraint",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-orthogonal-transform-preserves-standard-normal-product-law"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_obligations": [
+          "Use the positive-definite spectral decomposition and the exact orthogonal-normal supplier to prove the transformed noise coordinates are independent with variances equal to the eigenvalues.",
+          "Prove orthogonal transformations preserve the squared-power cost and code/error correspondence; identify the AC use."
+        ]
+      },
+      {
+        "id": "lem-parallel-awgn-single-use-information-bound",
+        "kind": "lemma",
+        "title": "Finite-input vector Gaussian mutual information is bounded by water-filling",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "lem-gaussian-maximum-differential-entropy-under-variance",
+          "lem-water-filling-optimal-allocation",
+          "def-kullback-leibler-divergence",
+          "def-moments-variance-and-covariance",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-kullback-leibler-is-nonnegative",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-natural-logarithm",
+          "lem-standard-normal-fourth-moment"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_obligations": [
+          "For a finite-support input, prove all output differential entropies and KL expressions are finite.",
+          "Use orthogonal coordinates, entropy subadditivity, and the scalar Gaussian entropy bound to reduce mutual information to a power allocation problem.",
+          "Invoke the water-filling optimization lemma and show independent Gaussian inputs attain the bound."
+        ]
+      },
+      {
+        "id": "lem-parallel-awgn-information-density-convergence",
+        "kind": "lemma",
+        "title": "Parallel Gaussian information density obeys a finite-variance law of large numbers",
+        "deps": [
+          "def-parallel-gaussian-channel-with-power-constraint",
+          "lem-gaussian-noise-orthogonalization",
+          "lem-standard-normal-fourth-moment",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice",
+          "thm-gaussian-integral",
+          "thm-substitution-for-improper-integrals",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "def-natural-logarithm",
+          "def-moments-variance-and-covariance",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_obligations": [
+          "Derive the output Gaussian density by completing the square, including zero-power coordinates.",
+          "Compute the information-density mean and prove its second moment is finite using the local Gaussian fourth-moment lemma.",
+          "Apply Chebyshev across independent channel uses."
+        ]
+      },
+      {
+        "id": "def-finite-dmc-cost-model",
+        "kind": "definition",
+        "title": "Finite DMC with a nonnegative input cost and feasible budget",
+        "deps": [
+          "def-discrete-memoryless-channel",
+          "def-finite-probability-vector",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_obligations": [
+          "Define a finite nonnegative cost function, its minimum and maximum, and budgets Gamma at least the minimum cost.",
+          "Define the constrained one-letter information supremum and its nats convention."
+        ]
+      },
+      {
+        "id": "lem-parallel-awgn-cost-constrained-achievability",
+        "kind": "lemma",
+        "title": "Strictly feasible Gaussian inputs yield cost-feasible Gaussian codes",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-parallel-gaussian-channel-with-power-constraint",
+          "def-parallel-awgn-feedback-code",
+          "lem-cost-pruned-random-code",
+          "lem-density-channel-threshold-random-coding-bound",
+          "lem-gaussian-noise-orthogonalization",
+          "lem-parallel-awgn-information-density-convergence",
+          "lem-standard-normal-fourth-moment",
+          "def-moments-variance-and-covariance",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_obligations": [
+          "Use independent Gaussian inputs with total power strictly below the budget and the threshold-decoder bound.",
+          "Show the per-codeword quadratic cost concentrates using the finite fourth moment, then prune and preserve rate."
+        ]
+      },
+      {
+        "id": "def-cost-constrained-dmc-code-and-capacity",
+        "kind": "definition",
+        "title": "Average-cost fixed-length codes and operational DMC capacity",
+        "deps": [
+          "def-finite-dmc-cost-model",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_obligations": [
+          "Define the uniform-message average block cost, average-error reliable rates, and the operational supremum.",
+          "Define C_I(Gamma) as the supremum of I(P_X;W) over the feasible finite simplex; do not presume attainment."
+        ]
+      },
+      {
+        "id": "def-finite-dmc-feedback-code",
+        "kind": "definition",
+        "title": "Causal feedback codes for a finite cost-constrained DMC",
+        "deps": [
+          "def-cost-constrained-dmc-code-and-capacity",
+          "def-discrete-memoryless-channel",
+          "def-finite-dmc-cost-model",
+          "def-fixed-length-channel-code",
+          "def-natural-logarithm"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "proof_obligations": [
+          "Define each causal encoder f_t(M,Y^{t-1}), the finite decoder, and expected average letter cost.",
+          "State that the channel law at time t depends only on the current input and is row-stochastic."
+        ]
+      },
+      {
+        "id": "lem-cost-constrained-dmc-information-capacity-properties",
+        "kind": "lemma",
+        "title": "Constrained DMC information capacity is attained, nondecreasing, and concave",
+        "deps": [
+          "def-finite-dmc-cost-model",
+          "def-cost-constrained-dmc-code-and-capacity",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-finite-probability-vector",
+          "def-it-finite-mutual-information",
+          "def-it-finite-conditional-entropy",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "lem-finite-simplex-entropy-continuity-and-concavity"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "proof_obligations": [
+          "Show the feasible simplex is nonempty and compact and the mutual-information objective is continuous, so the maximum is attained.",
+          "Prove monotonicity and concavity of C_I(Gamma).",
+          "For Gamma above minimum cost, approximate every boundary-feasible optimizer by strictly feasible input laws with convergent mutual information."
+        ]
+      },
+      {
+        "id": "lem-finite-message-fano-for-density-observation",
+        "kind": "lemma",
+        "title": "Fano's inequality for a finite message observed through a density",
+        "deps": [
+          "def-natural-logarithm",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "thm-it-fano-inequality",
+          "thm-it-finite-kl-nonnegative-equality",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "cor-finite-nonnegative-integral-implies-finite-almost-everywhere",
+          "cor-integral-over-a-null-set-vanishes"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "proof_obligations": [
+          "Define the posterior probability vector from the conditional and marginal output densities and define H(M|Y).",
+          "Prove conditioning on a finite decoder output cannot lower H(M|Y) using finite KL nonnegativity, then apply Fano to that decoder output."
+        ]
+      },
+      {
+        "id": "lem-cost-constrained-dmc-achievability",
+        "kind": "lemma",
+        "title": "Strictly feasible DMC input laws achieve every lower mutual-information rate",
+        "deps": [
+          "def-cost-constrained-dmc-code-and-capacity",
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-discrete-memoryless-channel-information-density",
+          "def-finite-dmc-cost-model",
+          "def-finite-stochastic-kernel",
+          "def-fixed-length-channel-code",
+          "def-fixed-length-channel-code-errors",
+          "lem-cost-pruned-random-code",
+          "lem-density-channel-threshold-random-coding-bound",
+          "lem-discrete-memoryless-channel-iid-information-density-converges",
+          "lem-cost-constrained-dmc-information-capacity-properties",
+          "thm-chebyshev-inequality"
+        ],
+        "dependency_level": 8,
+        "justified_by": [],
+        "proof_obligations": [
+          "State the strict cost hypothesis and handle the zero-rate case.",
+          "Use the IID information-density limit and threshold decoder to make ensemble average error vanish.",
+          "Prove IID costs concentrate below budget and prune to a deterministic code with all retained words feasible and asymptotically unchanged rate."
+        ]
+      },
+      {
+        "id": "lem-cost-constrained-dmc-mutual-information-under-average-cost",
+        "kind": "lemma",
+        "title": "An average-cost DMC block input has mutual information at most n C_I(Gamma)",
+        "deps": [
+          "def-cost-constrained-dmc-code-and-capacity",
+          "def-discrete-memoryless-channel",
+          "def-discrete-memoryless-channel-information-capacity",
+          "def-finite-dmc-cost-model",
+          "def-finite-probability-vector",
+          "def-it-finite-conditional-entropy",
+          "def-it-finite-mutual-information",
+          "lem-cost-constrained-dmc-information-capacity-properties",
+          "lem-jensen-for-integrable-cost-random-variable",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality"
+        ],
+        "dependency_level": 8,
+        "justified_by": [],
+        "proof_obligations": [
+          "Use the memoryless conditional law and finite entropy chain rules to bound block mutual information by the sum of one-letter terms.",
+          "Apply concavity and monotonicity of C_I to the coordinate costs."
+        ]
+      },
+      {
+        "id": "thm-parallel-awgn-feedback-capacity-water-filling",
+        "kind": "theorem",
+        "title": "Capacity of finite parallel Gaussian channels with and without feedback",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-parallel-awgn-feedback-code",
+          "def-parallel-gaussian-channel-with-power-constraint",
+          "lem-finite-message-fano-for-density-observation",
+          "lem-gaussian-noise-orthogonalization",
+          "lem-jensen-for-integrable-cost-random-variable",
+          "lem-parallel-awgn-cost-constrained-achievability",
+          "lem-parallel-awgn-single-use-information-bound",
+          "lem-water-filling-optimal-allocation",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "dependency_level": 8,
+        "justified_by": [],
+        "proof_obligations": [
+          "State both ordinary and causal-feedback operational capacities under expected average power.",
+          "Prove the converse by Fano, chain rule, the conditional single-use bound, and Jensen over histories and time.",
+          "Prove achievability with the no-feedback Gaussian random code and identify the active/inactive water-filling branches and P=0 case."
+        ]
+      },
+      {
+        "id": "thm-cost-constrained-dmc-capacity-formula",
+        "kind": "theorem",
+        "title": "Average-cost capacity formula for a finite DMC",
+        "deps": [
+          "def-cost-constrained-dmc-code-and-capacity",
+          "def-discrete-memoryless-channel",
+          "def-finite-dmc-cost-model",
+          "lem-cost-constrained-dmc-achievability",
+          "lem-cost-constrained-dmc-information-capacity-properties",
+          "lem-cost-constrained-dmc-mutual-information-under-average-cost",
+          "thm-it-fano-inequality",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-markov-data-processing"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "proof_obligations": [
+          "Prove the converse with finite Fano, data processing and the block mutual-information bound.",
+          "Prove achievability above minimum cost by strict-feasibility approximation; treat Gamma=min-cost separately using the restricted minimum-cost alphabet.",
+          "Check one-message and zero-capacity endpoints."
+        ]
+      },
+      {
+        "id": "cor-inactive-dmc-cost-constraint-recovers-capacity",
+        "kind": "corollary",
+        "title": "An inactive DMC cost constraint recovers ordinary capacity",
+        "deps": [
+          "def-cost-constrained-dmc-code-and-capacity",
+          "def-finite-dmc-cost-model",
+          "thm-cost-constrained-dmc-capacity-formula",
+          "thm-discrete-memoryless-channel-capacity-formula"
+        ],
+        "dependency_level": 10,
+        "justified_by": [],
+        "proof_obligations": [
+          "For Gamma at least the maximum letter cost, show every input law and every codeword satisfies the constraint.",
+          "Apply both capacity formulas with the same average-error convention and nats units."
+        ]
+      },
+      {
+        "id": "thm-feedback-does-not-increase-cost-constrained-dmc-capacity",
+        "kind": "theorem",
+        "title": "Causal feedback does not increase finite DMC capacity under average cost",
+        "deps": [
+          "def-cost-constrained-dmc-code-and-capacity",
+          "def-finite-dmc-cost-model",
+          "def-finite-dmc-feedback-code",
+          "lem-cost-constrained-dmc-information-capacity-properties",
+          "lem-jensen-for-integrable-cost-random-variable",
+          "thm-cost-constrained-dmc-capacity-formula",
+          "thm-it-fano-inequality",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-markov-data-processing"
+        ],
+        "dependency_level": 10,
+        "justified_by": [],
+        "proof_obligations": [
+          "Use the finite feedback Markov structure to single-letterize the message-output mutual information.",
+          "Apply the constrained one-letter information supremum conditional on each past output and Jensen across histories and times.",
+          "Show ordinary cost-feasible codes are feedback codes that ignore feedback."
+        ]
+      }
+    ]
+  },
+  {
+    "order": 2519,
+    "id": "cost-constrained-gaussian-and-feedback-channels-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Cost-Constrained, Gaussian, and Feedback Channels — Examples",
+    "companion": "cost-constrained-gaussian-and-feedback-channels",
+    "requires": [
+      "cost-constrained-gaussian-and-feedback-channels"
+    ],
+    "items": [
+      {
+        "id": "ex-countable-input-channel-finite-capacity-supremum-not-attained",
+        "kind": "example",
+        "title": "A finite information-capacity supremum need not be attained",
+        "deps": [
+          "def-countable-dmc-zero-cost-information-capacity",
+          "def-natural-logarithm",
+          "lem-finite-simplex-entropy-continuity-and-concavity"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_obligations": [
+          "Specify the binary rows with strictly positive crossover terms; show every input law has mutual information below ln 2; give an explicit feasible sequence tending to ln 2."
+        ]
+      },
+      {
+        "id": "ex-correlated-gaussian-noise-orthogonal-reduction",
+        "kind": "example",
+        "title": "Orthogonal reduction of a correlated two-dimensional Gaussian channel",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-parallel-gaussian-channel-with-power-constraint",
+          "def-standard-normal-and-normal-laws",
+          "lem-gaussian-noise-orthogonalization",
+          "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "thm-parallel-awgn-feedback-capacity-water-filling"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "proof_obligations": [
+          "Specify an orthogonal matrix and positive noise eigenvalues and compute the covariance.",
+          "Use the published orthogonal-normal theorem under AC to prove transformed noise independence.",
+          "Show the input transformation preserves the power constraint and code correspondence; evaluate the P=2 capacity example."
+        ]
+      },
+      {
+        "id": "ex-two-branch-awgn-water-filling",
+        "kind": "example",
+        "title": "Water-filling for noise variances one and four",
+        "deps": [
+          "def-parallel-gaussian-channel-with-power-constraint",
+          "lem-water-filling-optimal-allocation",
+          "thm-parallel-awgn-feedback-capacity-water-filling"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "proof_obligations": [
+          "Solve the water-level equation for noise variances 1 and 4 in both power regimes.",
+          "Verify the allocations are nonnegative, sum to P, and the rate formulas agree at the threshold P=3."
+        ]
+      },
+      {
+        "id": "ex-binary-identity-channel-with-cost-and-feedback",
+        "kind": "example",
+        "title": "Cost-constrained capacity of a binary identity channel with feedback",
+        "deps": [
+          "def-cost-constrained-dmc-code-and-capacity",
+          "def-finite-dmc-cost-model",
+          "def-natural-logarithm",
+          "def-qa-35-finite-probability-entropy-and-stochastic-matrices",
+          "lem-finite-simplex-entropy-continuity-and-concavity",
+          "thm-cost-constrained-dmc-capacity-formula",
+          "thm-feedback-does-not-increase-cost-constrained-dmc-capacity",
+          "thm-it-finite-entropy-chain-rule"
+        ],
+        "dependency_level": 11,
+        "justified_by": [],
+        "proof_obligations": [
+          "Compute the feasible binary input laws and maximize binary entropy on the constrained interval.",
+          "Check Gamma=0, Gamma=1/2 and Gamma=1, and identify the feedback capacity."
+        ]
+      }
+    ]
+  }
+]

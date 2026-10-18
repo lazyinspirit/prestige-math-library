@@ -3,6 +3,7 @@ id: cex-frattini-image-under-a-nonsurjective-homomorphism
 kind: counterexample
 title: "A nonsurjective homomorphism need not carry the Frattini subgroup into the target Frattini subgroup"
 status: published
+dependency_level: 7
 origin: session
 provenance:
   statement: ai-altered
@@ -14,10 +15,10 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: "deepseek-v4-pro + claude-opus-5[1m]"
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-08-23
-  audited: 2026-08-24
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step3-first-published-source-integration/published-recording/receipts/cex-frattini-image-under-a-nonsurjective-homomorphism.json
 sources:
   scraped: []
   references:
@@ -30,7 +31,7 @@ pipeline_run: null
 
 ## Statement refuted
 
-For every group homomorphism $f:G\to H$, one has $f(\Phi(G))\le\Phi(H)$. This fails for the embedding $f:C_4\hookrightarrow S_5$ below: $f(\Phi(C_4))\nleq\Phi(S_5)$.
+For every group homomorphism $f:G\to H$ between finite groups, one has $f(\Phi(G))\le\Phi(H)$. This fails for the embedding $f:C_4\hookrightarrow S_5$ below: $f(\Phi(C_4))\nleq\Phi(S_5)$.
 
 ## Facts & Assumptions
 

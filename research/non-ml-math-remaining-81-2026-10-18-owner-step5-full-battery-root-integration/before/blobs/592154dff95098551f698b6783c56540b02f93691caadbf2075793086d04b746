@@ -1,0 +1,1669 @@
+{
+  "version": 1,
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "batch": "72",
+  "scope": [
+    "def-daha-a1-root-datum-and-parameter-conventions",
+    "lem-daha-a1-bernstein-quotients-are-laurent",
+    "lem-daha-a1-q-affine-automorphisms-linearly-independent",
+    "def-daha-a1-double-affine-hecke-algebra",
+    "lem-daha-a1-affine-normal-words-span",
+    "lem-daha-a1-polynomial-operators-satisfy-presentation",
+    "def-daha-a1-polynomial-representation",
+    "thm-daha-a1-polynomial-representation-faithful",
+    "def-daha-a1-symmetric-macdonald-operator",
+    "rem-daha-skein-and-physical-knot-interfaces-require-specific-maps",
+    "lem-daha-a1-macdonald-operator-preserves-orbit-sums",
+    "lem-daha-a1-y-sum-restricts-to-macdonald-operator",
+    "thm-daha-a1-macdonald-eigenfunctions",
+    "ex-daha-a1-first-symmetric-macdonald-eigenfunctions",
+    "cex-daha-a1-eigenvalue-separation-fails-at-q-one"
+  ],
+  "contracts": {
+    "def-daha-a1-root-datum-and-parameter-conventions": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition fixes the nonempty rank-one root system A1 and its lattice."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition takes q and t in the rational function field and treats them as units."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition fixes the parameter and affine-generator normalization explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition is formal over Q(q,t) and makes no root-of-unity specialization claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This algebraic Definition has no endpoint or limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Definition over formal Q(q,t), root and parameter choices fixed; no specialization or iff claim.",
+            "item_sha256": "62802688bcfbf8e8e2dda56d65a42edd30db3b79a229cea40780142ec5e362b0",
+            "row_sha256": "31370f327412a840690aaa717329d4c81bd6da08235697608d7f95b15cec128f"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Definition over formal Q(q,t), root and parameter choices fixed; no specialization or iff claim.",
+            "item_sha256": "62802688bcfbf8e8e2dda56d65a42edd30db3b79a229cea40780142ec5e362b0",
+            "row_sha256": "49ba4c83cf590689797d6d7c04bbef61a9945c57f49b6ef109c106216d45c1e4"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No proof phase or registered finite-smoke case applies.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-72",
+        "notes": "Checked the complete Definition over Q(q,t): rho pairs to 1 with alpha-vee, alpha=2rho; s0,s1,pi are involutions, pi s0 pi=s1, and pi sends u0=q^2 z^2 to u1=z^-2. Alternating dihedral words have distinct even q-shift/reflection exponents; appending pi gives the odd exponents, proving the stated unique extended-group form. The positive/negative finite B sums telescope after multiplication by 1-u_i, including m=0 and m=1. Parameters are units and algebraically independent; no specialization, analytic endpoints, quotient choice or AC is used. Independently read Kirillov Definition 4.1 (actual PDF p.22) and Etingof-Ma sections 7.11-7.13 (PDF pp.57-59); the sources use alternate elliptic generators, and the local explicit conventions are consistent. Reader/refuter both report no finding. No defect."
+      }
+    },
+    "lem-daha-a1-bernstein-quotients-are-laurent": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-daha-a1-root-datum-and-parameter-conventions",
+          "source_section": "Definition",
+          "quote": "Work over the rational function field $K=\\mathbb Q(q,t)$, where $q$ and $t$ are algebraically independent indeterminates. The rank-one reduced root system is $\\Phi=\\{\\pm\\alpha\\}$ with $\\alpha=2\\rho$, weight lattice $P=\\mathbb Z\\rho$, coroot lattice $Q^\\vee=\\mathbb Z\\alpha^\\vee$, and pairing $\\langle\\rho,\\alpha^\\vee\\rangle=1$. Put $z=X^\\rho$, so the lattice algebra is $K[z,z^{-1}]$; the finite Weyl reflection is $s_1(z)=z^{-1}$.\n\nLet $\\delta$ be the affine degree with $z^\\delta=q^{-2}$, and set $\\alpha_0=-2\\rho+\\delta$. The affine reflections and the length-zero symmetry act on Laurent functions by\n\n$$\ns_0 f(z)=f(q^{-2}z^{-1}),\\qquad s_1 f(z)=f(z^{-1}),\\qquad \\pi f(z)=f(q^{-1}z^{-1}).\n$$\n\nThus $s_0^2=s_1^2=\\pi^2=1$, $\\pi s_0\\pi=s_1$, and the affine denominators are $u_0=z^{-\\alpha_0}=q^2z^2$ and $u_1=z^{-\\alpha_1}=z^{-2}$. The affine Coxeter group generated by $s_0,s_1$ is infinite dihedral, with no finite braid relation between these reflections. The extended affine group is $W_{\\mathrm{aff}}\\rtimes\\Omega$, where $\\Omega=\\{1,\\pi\\}$ acts by swapping $s_0,s_1$; every element has a unique form $w\\pi^\\epsilon$ with $w$ an alternating reduced word in $s_0,s_1$ and $\\epsilon\\in\\{0,1\\}$.\n\nFor $m\\in\\mathbb Z$, define the Laurent polynomials $B_{1,m},B_{0,m}$ by\n\n$$\nB_{1,0}=B_{0,0}=0,\\quad B_{1,m}=\\sum_{j=0}^{m-1}z^{m-2j}\\ (m>0),\\quad B_{1,-m}=-B_{1,m}\\ (m>0),\n$$\n\n$$\nB_{0,m}=-\\sum_{j=0}^{m-1}q^{-2j-2}z^{m-2-2j}\\ (m>0),\\qquad B_{0,-m}=\\sum_{j=0}^{m-1}q^{2j}z^{-m+2j}\\ (m>0).\n$$\n\nThey are the finite Laurent-polynomial versions of the Bernstein quotients with $s_1(z^m)=z^{-m}$ and $s_0(z^m)=q^{-2m}z^{-m}$. The symmetric Hecke normalization uses the same nonzero parameter $t$ at both affine simple roots: $(T_i-t)(T_i+t^{-1})=0$. The DAHA parameter $q$ is the lattice-translation parameter; it is distinct from the finite Hecke parameter $t$ and from the multiplicative type-A normalization $Q$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "quotient-positive-and-negative-A1",
+          "claim": "The finite B1 sums equal the first Bernstein quotient for all integer exponents.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "affine-quotient-geometric-sums",
+          "claim": "The finite B0 sums equal the second Bernstein quotient for positive, zero, and negative exponents.",
+          "step": "2.1",
+          "inputs": [
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero exponent m=0 is evaluated in step 1.1 and has zero numerator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both B1,0 and B0,0 equal zero in step 1.1 and step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The m=1 geometric sums are included in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement works in the formal Laurent ring and does not specialize q to a root of unity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting process occurs in this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check actual numerical range or geometric source/target endpoints; no artificial analytic limiting parameter is added. Finite telescoping sums for m positive/negative/zero1\u20132, no endpoint interval or choice. Denominator canceled as Laurent polynomial, not localized value at forbidden z.",
+            "item_sha256": "114f5031d73c9917fd2a4cd68269ff25de30a06ca2a132a0a93f51426404fd52",
+            "row_sha256": "db0b8460301917b75091cd764c9f79f3bcb4171916dfd5d3a1fa30787195a76f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an indexed family and invokes no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Distinguish finite explicitly supplied choices from inherited AC/countable choice; a nonzero module or listed finite basis is not a new infinite-family choice. Finite telescoping sums for m positive/negative/zero1\u20132, no endpoint interval or choice. Denominator canceled as Laurent polynomial, not localized value at forbidden z.",
+            "item_sha256": "114f5031d73c9917fd2a4cd68269ff25de30a06ca2a132a0a93f51426404fd52",
+            "row_sha256": "8662fb7a0019b6f019bc71ad3952632a43af22643dfb3107ba49ec08d8cbbdd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Finite telescoping sums for m positive/negative/zero1\u20132, no endpoint interval or choice. Denominator canceled as Laurent polynomial, not localized value at forbidden z.",
+            "item_sha256": "114f5031d73c9917fd2a4cd68269ff25de30a06ca2a132a0a93f51426404fd52",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Finite telescoping sums for m positive/negative/zero1\u20132, no endpoint interval or choice. Denominator canceled as Laurent polynomial, not localized value at forbidden z.",
+            "item_sha256": "114f5031d73c9917fd2a4cd68269ff25de30a06ca2a132a0a93f51426404fd52",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No registered finite-smoke case applies; the complete symbolic verification is in the item steps."
+    },
+    "lem-daha-a1-q-affine-automorphisms-linearly-independent": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-daha-a1-root-datum-and-parameter-conventions",
+          "source_section": "Definition",
+          "quote": "Work over the rational function field $K=\\mathbb Q(q,t)$, where $q$ and $t$ are algebraically independent indeterminates. The rank-one reduced root system is $\\Phi=\\{\\pm\\alpha\\}$ with $\\alpha=2\\rho$, weight lattice $P=\\mathbb Z\\rho$, coroot lattice $Q^\\vee=\\mathbb Z\\alpha^\\vee$, and pairing $\\langle\\rho,\\alpha^\\vee\\rangle=1$. Put $z=X^\\rho$, so the lattice algebra is $K[z,z^{-1}]$; the finite Weyl reflection is $s_1(z)=z^{-1}$.\n\nLet $\\delta$ be the affine degree with $z^\\delta=q^{-2}$, and set $\\alpha_0=-2\\rho+\\delta$. The affine reflections and the length-zero symmetry act on Laurent functions by\n\n$$\ns_0 f(z)=f(q^{-2}z^{-1}),\\qquad s_1 f(z)=f(z^{-1}),\\qquad \\pi f(z)=f(q^{-1}z^{-1}).\n$$\n\nThus $s_0^2=s_1^2=\\pi^2=1$, $\\pi s_0\\pi=s_1$, and the affine denominators are $u_0=z^{-\\alpha_0}=q^2z^2$ and $u_1=z^{-\\alpha_1}=z^{-2}$. The affine Coxeter group generated by $s_0,s_1$ is infinite dihedral, with no finite braid relation between these reflections. The extended affine group is $W_{\\mathrm{aff}}\\rtimes\\Omega$, where $\\Omega=\\{1,\\pi\\}$ acts by swapping $s_0,s_1$; every element has a unique form $w\\pi^\\epsilon$ with $w$ an alternating reduced word in $s_0,s_1$ and $\\epsilon\\in\\{0,1\\}$.\n\nFor $m\\in\\mathbb Z$, define the Laurent polynomials $B_{1,m},B_{0,m}$ by\n\n$$\nB_{1,0}=B_{0,0}=0,\\quad B_{1,m}=\\sum_{j=0}^{m-1}z^{m-2j}\\ (m>0),\\quad B_{1,-m}=-B_{1,m}\\ (m>0),\n$$\n\n$$\nB_{0,m}=-\\sum_{j=0}^{m-1}q^{-2j-2}z^{m-2-2j}\\ (m>0),\\qquad B_{0,-m}=\\sum_{j=0}^{m-1}q^{2j}z^{-m+2j}\\ (m>0).\n$$\n\nThey are the finite Laurent-polynomial versions of the Bernstein quotients with $s_1(z^m)=z^{-m}$ and $s_0(z^m)=q^{-2m}z^{-m}$. The symmetric Hecke normalization uses the same nonzero parameter $t$ at both affine simple roots: $(T_i-t)(T_i+t^{-1})=0$. The DAHA parameter $q$ is the lattice-translation parameter; it is distinct from the finite Hecke parameter $t$ and from the multiplicative type-A normalization $Q$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "distinct-affine-images",
+          "claim": "Distinct q-affine substitutions give distinct rational functions of z.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "vandermonde-independence",
+          "claim": "A Vandermonde system obtained by evaluation on 1,z,... proves operator independence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For N=0 the assumed operator relation is the empty sum and the conclusion is vacuous; step 2.1 covers it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The conclusion that all coefficients vanish includes zero coefficients in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For N=1 the Vandermonde matrix in step 2.1 is the 1 by 1 matrix (1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The indeterminate q separates integer powers in step 1.1; root-of-unity specializations are expressly excluded by the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting process occurs in this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check actual numerical range or geometric source/target endpoints; no artificial analytic limiting parameter is added. Finite distinct substitutions have nonzero differences; finite Vandermonde on1,z,...,z^(N\u22121), including N=1 and vacuous N=0 if allowed. Formal q prevents collapse; no interval or choice/iff assertion.",
+            "item_sha256": "9a88628704016611c3ccefd63553c65a7b73ea50469d91d3e78b866889abc6af",
+            "row_sha256": "db0b8460301917b75091cd764c9f79f3bcb4171916dfd5d3a1fa30787195a76f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an indexed family and invokes no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Distinguish finite explicitly supplied choices from inherited AC/countable choice; a nonzero module or listed finite basis is not a new infinite-family choice. Finite distinct substitutions have nonzero differences; finite Vandermonde on1,z,...,z^(N\u22121), including N=1 and vacuous N=0 if allowed. Formal q prevents collapse; no interval or choice/iff assertion.",
+            "item_sha256": "9a88628704016611c3ccefd63553c65a7b73ea50469d91d3e78b866889abc6af",
+            "row_sha256": "8662fb7a0019b6f019bc71ad3952632a43af22643dfb3107ba49ec08d8cbbdd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Finite distinct substitutions have nonzero differences; finite Vandermonde on1,z,...,z^(N\u22121), including N=1 and vacuous N=0 if allowed. Formal q prevents collapse; no interval or choice/iff assertion.",
+            "item_sha256": "9a88628704016611c3ccefd63553c65a7b73ea50469d91d3e78b866889abc6af",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Finite distinct substitutions have nonzero differences; finite Vandermonde on1,z,...,z^(N\u22121), including N=1 and vacuous N=0 if allowed. Formal q prevents collapse; no interval or choice/iff assertion.",
+            "item_sha256": "9a88628704016611c3ccefd63553c65a7b73ea50469d91d3e78b866889abc6af",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No registered finite-smoke case applies; the complete symbolic verification is in the item steps."
+    },
+    "def-daha-a1-double-affine-hecke-algebra": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition fixes the nonempty rank-one root system A1 and its lattice."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition takes q and t in the rational function field and treats them as units."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition fixes the parameter and affine-generator normalization explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition is formal over Q(q,t) and makes no root-of-unity specialization claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This algebraic Definition has no endpoint or limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. DAHA generators/relations Definition only with generic independent q,t and specified unit/inverses; no existence or faithful action assumed.",
+            "item_sha256": "5e8119179e4fd8f8f35b8cf543860829fdf2ff108a48d491753aea26f088d58f",
+            "row_sha256": "31370f327412a840690aaa717329d4c81bd6da08235697608d7f95b15cec128f"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. DAHA generators/relations Definition only with generic independent q,t and specified unit/inverses; no existence or faithful action assumed.",
+            "item_sha256": "5e8119179e4fd8f8f35b8cf543860829fdf2ff108a48d491753aea26f088d58f",
+            "row_sha256": "49ba4c83cf590689797d6d7c04bbef61a9945c57f49b6ef109c106216d45c1e4"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No proof phase or registered finite-smoke case applies."
+    },
+    "lem-daha-a1-affine-normal-words-span": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-daha-a1-double-affine-hecke-algebra",
+          "source_section": "Definition",
+          "quote": "Use the rank-one root datum, affine actions, field $K$, and Laurent polynomials $B_{i,m}$ from [[def-daha-a1-root-datum-and-parameter-conventions]] and [[lem-daha-a1-bernstein-quotients-are-laurent]]. Let $F$ be the free associative unital $K$-algebra on $Z,Z^{-1},T_0,T_1,\\pi$. Define the equal-parameter double-affine Hecke algebra\n\n$$\n\\mathcal H_{q,t}(A_1)=F/I\n$$\n\nwhere $I$ is the two-sided ideal generated by the following relations:\n\n1. $ZZ^{-1}=Z^{-1}Z=1$.\n2. $\\pi^2=1$ and $\\pi T_0\\pi=T_1$ (hence also $\\pi T_1\\pi=T_0$).\n3. $(T_i-t)(T_i+t^{-1})=0$ for $i=0,1$.\n4. For every $m\\in\\mathbb Z$ and $i\\in\\{0,1\\}$,\n$$\nT_i Z^m-s_i(Z^m)T_i=(t-t^{-1})B_{i,m}(Z),\n$$\nwhere $s_1(Z^m)=Z^{-m}$ and $s_0(Z^m)=q^{-2m}Z^{-m}$.\n5. $\\pi Z\\pi=q^{-1}Z^{-1}$.\n\nThis is the rank-one root-datum DAHA presentation: $T_0,T_1$ are the affine Hecke generators, $Z$ is the weight-lattice generator, and $\\pi$ is the length-zero symmetry. There is no finite braid relation between $T_0$ and $T_1$ because the affine $A_1$ Coxeter label is infinite. The scalar normalization is $(T_i-t)(T_i+t^{-1})=0$; $q$ controls translations and is independent of $t$. The quotient is a definition, not a claim about a PBW basis or a faithful polynomial representation.\n\nThe fundamental translation is $y=\\pi s_1$, acting by the $q$-shift $z\\mapsto qz$; its DAHA lift is $Y=\\pi T_1$. The quadratic relation makes $T_1$ invertible, with $T_1^{-1}=T_1-(t-t^{-1})$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "affine-word-reduction",
+          "claim": "Move pi to the right and reduce repeated Hecke letters to alternating strings.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "lattice-moves",
+          "claim": "Move every lattice monomial to the left using the finite Bernstein relations and a terminating lexicographic measure.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty affine word is included by r=0 in the Statement and step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero element is the empty linear combination; the Statement includes it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-letter affine word is already alternating and needs no reduction in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement concerns formal quotient rewriting and asserts no semisimplicity specialization."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting process occurs in this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check actual numerical range or geometric source/target endpoints; no artificial analytic limiting parameter is added. Finite lexicographic word reduction, empty alternating word r=0 and unit allowed, finite Laurent corrections. No infinite representative selection or iff statement.",
+            "item_sha256": "29434fd35a4161d68547eb46ca5c69f6c64da664bb7720cc5061b5a058cc07d6",
+            "row_sha256": "db0b8460301917b75091cd764c9f79f3bcb4171916dfd5d3a1fa30787195a76f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an indexed family and invokes no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Distinguish finite explicitly supplied choices from inherited AC/countable choice; a nonzero module or listed finite basis is not a new infinite-family choice. Finite lexicographic word reduction, empty alternating word r=0 and unit allowed, finite Laurent corrections. No infinite representative selection or iff statement.",
+            "item_sha256": "29434fd35a4161d68547eb46ca5c69f6c64da664bb7720cc5061b5a058cc07d6",
+            "row_sha256": "8662fb7a0019b6f019bc71ad3952632a43af22643dfb3107ba49ec08d8cbbdd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Finite lexicographic word reduction, empty alternating word r=0 and unit allowed, finite Laurent corrections. No infinite representative selection or iff statement.",
+            "item_sha256": "29434fd35a4161d68547eb46ca5c69f6c64da664bb7720cc5061b5a058cc07d6",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Finite lexicographic word reduction, empty alternating word r=0 and unit allowed, finite Laurent corrections. No infinite representative selection or iff statement.",
+            "item_sha256": "29434fd35a4161d68547eb46ca5c69f6c64da664bb7720cc5061b5a058cc07d6",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No registered finite-smoke case applies; the complete symbolic verification is in the item steps."
+    },
+    "lem-daha-a1-polynomial-operators-satisfy-presentation": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-daha-a1-root-datum-and-parameter-conventions",
+          "source_section": "Definition",
+          "quote": "Work over the rational function field $K=\\mathbb Q(q,t)$, where $q$ and $t$ are algebraically independent indeterminates. The rank-one reduced root system is $\\Phi=\\{\\pm\\alpha\\}$ with $\\alpha=2\\rho$, weight lattice $P=\\mathbb Z\\rho$, coroot lattice $Q^\\vee=\\mathbb Z\\alpha^\\vee$, and pairing $\\langle\\rho,\\alpha^\\vee\\rangle=1$. Put $z=X^\\rho$, so the lattice algebra is $K[z,z^{-1}]$; the finite Weyl reflection is $s_1(z)=z^{-1}$.\n\nLet $\\delta$ be the affine degree with $z^\\delta=q^{-2}$, and set $\\alpha_0=-2\\rho+\\delta$. The affine reflections and the length-zero symmetry act on Laurent functions by\n\n$$\ns_0 f(z)=f(q^{-2}z^{-1}),\\qquad s_1 f(z)=f(z^{-1}),\\qquad \\pi f(z)=f(q^{-1}z^{-1}).\n$$\n\nThus $s_0^2=s_1^2=\\pi^2=1$, $\\pi s_0\\pi=s_1$, and the affine denominators are $u_0=z^{-\\alpha_0}=q^2z^2$ and $u_1=z^{-\\alpha_1}=z^{-2}$. The affine Coxeter group generated by $s_0,s_1$ is infinite dihedral, with no finite braid relation between these reflections. The extended affine group is $W_{\\mathrm{aff}}\\rtimes\\Omega$, where $\\Omega=\\{1,\\pi\\}$ acts by swapping $s_0,s_1$; every element has a unique form $w\\pi^\\epsilon$ with $w$ an alternating reduced word in $s_0,s_1$ and $\\epsilon\\in\\{0,1\\}$.\n\nFor $m\\in\\mathbb Z$, define the Laurent polynomials $B_{1,m},B_{0,m}$ by\n\n$$\nB_{1,0}=B_{0,0}=0,\\quad B_{1,m}=\\sum_{j=0}^{m-1}z^{m-2j}\\ (m>0),\\quad B_{1,-m}=-B_{1,m}\\ (m>0),\n$$\n\n$$\nB_{0,m}=-\\sum_{j=0}^{m-1}q^{-2j-2}z^{m-2-2j}\\ (m>0),\\qquad B_{0,-m}=\\sum_{j=0}^{m-1}q^{2j}z^{-m+2j}\\ (m>0).\n$$\n\nThey are the finite Laurent-polynomial versions of the Bernstein quotients with $s_1(z^m)=z^{-m}$ and $s_0(z^m)=q^{-2m}z^{-m}$. The symmetric Hecke normalization uses the same nonzero parameter $t$ at both affine simple roots: $(T_i-t)(T_i+t^{-1})=0$. The DAHA parameter $q$ is the lattice-translation parameter; it is distinct from the finite Hecke parameter $t$ and from the multiplicative type-A normalization $Q$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-daha-a1-double-affine-hecke-algebra",
+          "source_section": "Definition",
+          "quote": "Use the rank-one root datum, affine actions, field $K$, and Laurent polynomials $B_{i,m}$ from [[def-daha-a1-root-datum-and-parameter-conventions]] and [[lem-daha-a1-bernstein-quotients-are-laurent]]. Let $F$ be the free associative unital $K$-algebra on $Z,Z^{-1},T_0,T_1,\\pi$. Define the equal-parameter double-affine Hecke algebra\n\n$$\n\\mathcal H_{q,t}(A_1)=F/I\n$$\n\nwhere $I$ is the two-sided ideal generated by the following relations:\n\n1. $ZZ^{-1}=Z^{-1}Z=1$.\n2. $\\pi^2=1$ and $\\pi T_0\\pi=T_1$ (hence also $\\pi T_1\\pi=T_0$).\n3. $(T_i-t)(T_i+t^{-1})=0$ for $i=0,1$.\n4. For every $m\\in\\mathbb Z$ and $i\\in\\{0,1\\}$,\n$$\nT_i Z^m-s_i(Z^m)T_i=(t-t^{-1})B_{i,m}(Z),\n$$\nwhere $s_1(Z^m)=Z^{-m}$ and $s_0(Z^m)=q^{-2m}Z^{-m}$.\n5. $\\pi Z\\pi=q^{-1}Z^{-1}$.\n\nThis is the rank-one root-datum DAHA presentation: $T_0,T_1$ are the affine Hecke generators, $Z$ is the weight-lattice generator, and $\\pi$ is the length-zero symmetry. There is no finite braid relation between $T_0$ and $T_1$ because the affine $A_1$ Coxeter label is infinite. The scalar normalization is $(T_i-t)(T_i+t^{-1})=0$; $q$ controls translations and is independent of $t$. The quotient is a definition, not a claim about a PBW basis or a faithful polynomial representation.\n\nThe fundamental translation is $y=\\pi s_1$, acting by the $q$-shift $z\\mapsto qz$; its DAHA lift is $Y=\\pi T_1$. The quadratic relation makes $T_1$ invertible, with $T_1^{-1}=T_1-(t-t^{-1})$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-daha-a1-bernstein-quotients-are-laurent",
+          "source_section": "Statement",
+          "quote": "With the root data and $B_{i,m}$ from [[def-daha-a1-root-datum-and-parameter-conventions]], for every integer $m$,\n\n$$\nB_{1,m}=\\frac{z^m-z^{-m}}{1-z^{-2}},\\qquad B_{0,m}=\\frac{z^m-q^{-2m}z^{-m}}{1-q^2z^2}\n$$\n\nas elements of $K[z,z^{-1}]$. In particular, the rank-one Bernstein cross-relations use actual Laurent polynomials and require no localization of the coefficient algebra.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-hh-free-associative-ring-and-relations-descent",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and $S$ a set. There is a unital associative $R$-algebra $R\\langle S\\rangle$, the **free associative $R$-algebra on $S$**, whose underlying $R$-module is free on the set of finite words in $S$ (including the empty word), with product given on words by concatenation and extended $R$-bilinearly.\n\n1. **Universal property.** For every $R$-algebra $A$ ([[def-algebra-over-a-commutative-ring]]) and every map $S\\to A$ there is a unique unital $R$-algebra homomorphism $R\\langle S\\rangle\\to A$ extending it. When $R=k$ is a field and $S$ indexes a basis of a vector space $V$, $R\\langle S\\rangle$ reproduces the published tensor algebra $T(V)$ ([[def-tensor-algebra-of-a-vector-space]], [[thm-universal-property-of-the-tensor-algebra]]).\n2. **Two-sided ideal description.** For $E\\subseteq R\\langle S\\rangle$ the two-sided ideal $(E)$ ([[def-generated-and-principal-ideals]]) is the set of finite sums $\\sum_sa_se_sb_s$ with $a_s,b_s\\in R\\langle S\\rangle$ and $e_s\\in E$.\n3. **Quotient universal property.** If $\\varphi:R\\langle S\\rangle\\to A$ is an $R$-algebra homomorphism killing $E$, then $\\varphi$ factors uniquely through the quotient $R\\langle S\\rangle/(E)$ ([[thm-quotient-ring-universal-property]]); the quotient is the presented $R$-algebra with generators $S$ and relations $E$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-daha-a1-polynomial-representation",
+          "source_section": "Definition",
+          "quote": "The **polynomial representation** is the action of $\\mathcal H_{q,t}(A_1)$ on $\\mathcal P=K[z,z^{-1}]$ specified by sending $Z$ to multiplication by $z$, $Z^{-1}$ to multiplication by $z^{-1}$, $\\pi$ to $f(z)\\mapsto f(q^{-1}z^{-1})$, and $T_i$ to\n\n$$\n(\\mathsf T_i f)(z)=t f(s_i z)+(t-t^{-1})\\frac{f(s_i z)-f(z)}{z^{-\\alpha_i}-1},\\qquad i=0,1,\n$$\n\nwith $s_1z=z^{-1}$, $s_0z=q^{-2}z^{-1}$, $z^{-\\alpha_1}=z^{-2}$, and $z^{-\\alpha_0}=q^2z^2$. The quotient is interpreted by the finite Laurent sums in [[lem-daha-a1-bernstein-quotients-are-laurent]]. Well-definedness as an algebra action is proved in [[lem-daha-a1-polynomial-operators-satisfy-presentation]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "affine-actions-and-symmetry",
+          "claim": "Check the involutions, q-lattice action, and conjugation of the two Hecke operators.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "quadratic-identities",
+          "claim": "Expand the Hecke operators in the crossed-product algebra and verify T_i^2=cT_i+1.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "bernstein-relations",
+          "claim": "Compute the commutator with multiplication and identify the finite quotient B_i,m.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "representation-descent",
+          "claim": "Use the quotient universal property to descend the generator assignment.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero Laurent polynomial is preserved by the linear operators in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The m=0 Bernstein relation has B_i,0=0 and is included in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The m=1 Bernstein generator is included in the all-integer calculation in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement is over the formal field Q(q,t) and asserts no singular specialization."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting process occurs in this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check actual numerical range or geometric source/target endpoints; no artificial analytic limiting parameter is added. Actual operator relations verified1.1\u20131.3 and quotient descent2.1; nonzero t, generic q, apparent rational poles canceled by Laurent supplier. Finite algebraic operations, no interval/choice or iff claim.",
+            "item_sha256": "26f7808c13b9236cd572509f1af8bb3d51a3828db6655bd8453a0b43ef593e85",
+            "row_sha256": "db0b8460301917b75091cd764c9f79f3bcb4171916dfd5d3a1fa30787195a76f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an indexed family and invokes no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Distinguish finite explicitly supplied choices from inherited AC/countable choice; a nonzero module or listed finite basis is not a new infinite-family choice. Actual operator relations verified1.1\u20131.3 and quotient descent2.1; nonzero t, generic q, apparent rational poles canceled by Laurent supplier. Finite algebraic operations, no interval/choice or iff claim.",
+            "item_sha256": "26f7808c13b9236cd572509f1af8bb3d51a3828db6655bd8453a0b43ef593e85",
+            "row_sha256": "8662fb7a0019b6f019bc71ad3952632a43af22643dfb3107ba49ec08d8cbbdd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Actual operator relations verified1.1\u20131.3 and quotient descent2.1; nonzero t, generic q, apparent rational poles canceled by Laurent supplier. Finite algebraic operations, no interval/choice or iff claim.",
+            "item_sha256": "26f7808c13b9236cd572509f1af8bb3d51a3828db6655bd8453a0b43ef593e85",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Actual operator relations verified1.1\u20131.3 and quotient descent2.1; nonzero t, generic q, apparent rational poles canceled by Laurent supplier. Finite algebraic operations, no interval/choice or iff claim.",
+            "item_sha256": "26f7808c13b9236cd572509f1af8bb3d51a3828db6655bd8453a0b43ef593e85",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No registered finite-smoke case applies; the complete symbolic verification is in the item steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-72",
+        "notes": "Read every proof step and all five cited suppliers, including the full published relation-descent proof. Step 1.1 gives inverse multipliers, Pi^2=1, Pi M_z Pi=q^-1 M_z^-1, and Pi sends sigma0,u0 to sigma1,u1. For step 1.2, sigma(u)=u^-1 yields sigma(a)=(t^-1 u-t)/(u-1), sigma(b)=c u/(u-1); direct multiplication gives a sigma(b)+ba=ca and a sigma(a)+b^2=1+cb, hence T^2=cT+1. Step 1.3 cancels substitution terms and leaves b(f-sigma f)=c(f-sigma f)/(1-u), exactly all integer Bernstein relations, including m=0 and negative m. The finite quotient lemma guarantees Laurent preservation although computations take place in K(z). Step 2.1 applies precisely the quotient universal property, without assuming injectivity. Source Theorem 4.3 explicitly leaves the A1 relation check to direct calculation; the local proof supplies it. No braid relation, specialization, or AC claim. Reader/refuter have no finding. No defect."
+      }
+    },
+    "def-daha-a1-polynomial-representation": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition specifies the representation space K[z,z^-1], including its zero vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition gives linear generator actions that send zero to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition specifies the unit and inverse lattice generators in the polynomial representation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition's formal parameters are nonzero indeterminates; specializations are not part of this Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or limiting parameter is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No family of elements is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Definition of already proved representation; fixed formal field, finite Laurent divided differences. No separate iff theorem.",
+            "item_sha256": "ba9488cea8f49cb0d4f3791ce62eedb6b37cd1fe4ed8fb0eda075dc0c4cbec3d",
+            "row_sha256": "31370f327412a840690aaa717329d4c81bd6da08235697608d7f95b15cec128f"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Definition of already proved representation; fixed formal field, finite Laurent divided differences. No separate iff theorem.",
+            "item_sha256": "ba9488cea8f49cb0d4f3791ce62eedb6b37cd1fe4ed8fb0eda075dc0c4cbec3d",
+            "row_sha256": "49ba4c83cf590689797d6d7c04bbef61a9945c57f49b6ef109c106216d45c1e4"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No proof phase or registered finite-smoke case applies.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-72",
+        "notes": "Checked the complete candidate Definition and all three direct suppliers (root conventions, DAHA presentation, Bernstein quotient lemma), and read its justified_by relation-check proof. Each quotient equals B_i,m on monomials, hence preserves Laurent polynomials by linearity for positive, negative and zero powers. The unique algebra action is justified by all relator checks and the published free-algebra quotient universal property (full current supplier proof read); no PBW or faithfulness assumption enters. Z and pi actions are K-linear, invertible as specified. The justified_by backlink does not assume the action in its relation check. Kirillov Theorem 4.3 (actual PDF p.23) has exactly this difference-reflection normalization; Etingof-Ma sections 7.11-7.13 provide presentation context. No specialization or AC. Reader/refuter have no finding. No defect."
+      }
+    },
+    "thm-daha-a1-polynomial-representation-faithful": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-daha-a1-polynomial-representation",
+          "source_section": "Definition",
+          "quote": "The **polynomial representation** is the action of $\\mathcal H_{q,t}(A_1)$ on $\\mathcal P=K[z,z^{-1}]$ specified by sending $Z$ to multiplication by $z$, $Z^{-1}$ to multiplication by $z^{-1}$, $\\pi$ to $f(z)\\mapsto f(q^{-1}z^{-1})$, and $T_i$ to\n\n$$\n(\\mathsf T_i f)(z)=t f(s_i z)+(t-t^{-1})\\frac{f(s_i z)-f(z)}{z^{-\\alpha_i}-1},\\qquad i=0,1,\n$$\n\nwith $s_1z=z^{-1}$, $s_0z=q^{-2}z^{-1}$, $z^{-\\alpha_1}=z^{-2}$, and $z^{-\\alpha_0}=q^2z^2$. The quotient is interpreted by the finite Laurent sums in [[lem-daha-a1-bernstein-quotients-are-laurent]]. Well-definedness as an algebra action is proved in [[lem-daha-a1-polynomial-operators-satisfy-presentation]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-daha-a1-affine-normal-words-span",
+          "source_section": "Statement",
+          "quote": "In the algebra of [[def-daha-a1-double-affine-hecke-algebra]], every element is a finite $K$-linear combination of words\n\n$$\nZ^m T_{i_1}\\cdots T_{i_r}\\pi^\\epsilon,\n$$\n\nwhere $m\\in\\mathbb Z$, $\\epsilon\\in\\{0,1\\}$, $r\\ge0$, and adjacent indices in the string $i_1,\\ldots,i_r\\in\\{0,1\\}$ are distinct. This is a spanning statement only; no linear independence is asserted here.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-daha-a1-q-affine-automorphisms-linearly-independent",
+          "source_section": "Statement",
+          "quote": "Let $G$ be the group of substitutions of $K[z,z^{-1}]$ generated by $s_0,s_1,\\pi$ from [[def-daha-a1-root-datum-and-parameter-conventions]]. If $g_1,\\ldots,g_N\\in G$ are distinct and $f_1,\\ldots,f_N\\in K(z)$ satisfy\n\n$$\n\\sum_{j=1}^{N} f_j(z)\\,g_j(h)(z)=0\\qquad\\text{for every }h\\in K[z,z^{-1}],\n$$\n\nthen every $f_j$ is zero. This holds over $K=\\mathbb Q(q,t)$ because $q$ is indeterminate; it is not asserted when distinct translations collapse at a root of unity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-daha-a1-root-datum-and-parameter-conventions",
+          "source_section": "Definition",
+          "quote": "Work over the rational function field $K=\\mathbb Q(q,t)$, where $q$ and $t$ are algebraically independent indeterminates. The rank-one reduced root system is $\\Phi=\\{\\pm\\alpha\\}$ with $\\alpha=2\\rho$, weight lattice $P=\\mathbb Z\\rho$, coroot lattice $Q^\\vee=\\mathbb Z\\alpha^\\vee$, and pairing $\\langle\\rho,\\alpha^\\vee\\rangle=1$. Put $z=X^\\rho$, so the lattice algebra is $K[z,z^{-1}]$; the finite Weyl reflection is $s_1(z)=z^{-1}$.\n\nLet $\\delta$ be the affine degree with $z^\\delta=q^{-2}$, and set $\\alpha_0=-2\\rho+\\delta$. The affine reflections and the length-zero symmetry act on Laurent functions by\n\n$$\ns_0 f(z)=f(q^{-2}z^{-1}),\\qquad s_1 f(z)=f(z^{-1}),\\qquad \\pi f(z)=f(q^{-1}z^{-1}).\n$$\n\nThus $s_0^2=s_1^2=\\pi^2=1$, $\\pi s_0\\pi=s_1$, and the affine denominators are $u_0=z^{-\\alpha_0}=q^2z^2$ and $u_1=z^{-\\alpha_1}=z^{-2}$. The affine Coxeter group generated by $s_0,s_1$ is infinite dihedral, with no finite braid relation between these reflections. The extended affine group is $W_{\\mathrm{aff}}\\rtimes\\Omega$, where $\\Omega=\\{1,\\pi\\}$ acts by swapping $s_0,s_1$; every element has a unique form $w\\pi^\\epsilon$ with $w$ an alternating reduced word in $s_0,s_1$ and $\\epsilon\\in\\{0,1\\}$.\n\nFor $m\\in\\mathbb Z$, define the Laurent polynomials $B_{1,m},B_{0,m}$ by\n\n$$\nB_{1,0}=B_{0,0}=0,\\quad B_{1,m}=\\sum_{j=0}^{m-1}z^{m-2j}\\ (m>0),\\quad B_{1,-m}=-B_{1,m}\\ (m>0),\n$$\n\n$$\nB_{0,m}=-\\sum_{j=0}^{m-1}q^{-2j-2}z^{m-2-2j}\\ (m>0),\\qquad B_{0,-m}=\\sum_{j=0}^{m-1}q^{2j}z^{-m+2j}\\ (m>0).\n$$\n\nThey are the finite Laurent-polynomial versions of the Bernstein quotients with $s_1(z^m)=z^{-m}$ and $s_0(z^m)=q^{-2m}z^{-m}$. The symmetric Hecke normalization uses the same nonzero parameter $t$ at both affine simple roots: $(T_i-t)(T_i+t^{-1})=0$. The DAHA parameter $q$ is the lattice-translation parameter; it is distinct from the finite Hecke parameter $t$ and from the multiplicative type-A normalization $Q$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonzero-leading-coefficient",
+          "claim": "Each affine Hecke generator has a nonzero reflection coefficient and each reduced normal word has a unique top substitution.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "independence-of-normal-words",
+          "claim": "A finite kernel relation is separated by its maximal affine length and the q-affine operator independence lemma.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "faithfulness",
+          "claim": "The spanning normal words have independent images, so the representation kernel is zero.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero relation is included in the finite-support argument in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypotheses require t nonzero; t=0 is excluded in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Length-zero and length-one normal words are covered by the leading-term calculation in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Root-of-unity q is expressly outside the Statement; distinct q-affine maps are used in steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting process occurs in this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check actual numerical range or geometric source/target endpoints; no artificial analytic limiting parameter is added. Finite relation and largest affine length, r=0 handled by distinct terminal pi and Laurent powers. Formal q,t and nonzero leading coefficients explicit; no specialization or choice and no iff claim.",
+            "item_sha256": "699f677b63b4334cca2015473bbbd80489780e7dfe6eac021a86f6038a38efa8",
+            "row_sha256": "db0b8460301917b75091cd764c9f79f3bcb4171916dfd5d3a1fa30787195a76f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an indexed family and invokes no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Distinguish finite explicitly supplied choices from inherited AC/countable choice; a nonzero module or listed finite basis is not a new infinite-family choice. Finite relation and largest affine length, r=0 handled by distinct terminal pi and Laurent powers. Formal q,t and nonzero leading coefficients explicit; no specialization or choice and no iff claim.",
+            "item_sha256": "699f677b63b4334cca2015473bbbd80489780e7dfe6eac021a86f6038a38efa8",
+            "row_sha256": "8662fb7a0019b6f019bc71ad3952632a43af22643dfb3107ba49ec08d8cbbdd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Finite relation and largest affine length, r=0 handled by distinct terminal pi and Laurent powers. Formal q,t and nonzero leading coefficients explicit; no specialization or choice and no iff claim.",
+            "item_sha256": "699f677b63b4334cca2015473bbbd80489780e7dfe6eac021a86f6038a38efa8",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Finite relation and largest affine length, r=0 handled by distinct terminal pi and Laurent powers. Formal q,t and nonzero leading coefficients explicit; no specialization or choice and no iff claim.",
+            "item_sha256": "699f677b63b4334cca2015473bbbd80489780e7dfe6eac021a86f6038a38efa8",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No registered finite-smoke case applies; the complete symbolic verification is in the item steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-72",
+        "notes": "Checked all three proof steps and all five suppliers. The spanning supplier moves lattice letters left with lexicographically decreasing Hecke count / inversion count, then moves pi right and uses the quadratic relation; it asserts only spanning. For faithfulness each a_i=(t u_i-t^-1)/(u_i-1) is nonzero in K(z), and all its substitution transforms remain nonzero. An alternating length-r word has exactly one all-reflection term; every proper subexpression has Coxeter length at most r-1, also after the length-zero pi factor. Distinct alternating words with epsilon=0,1 give distinct extended-group substitutions. The substitution-independence supplier tests 1,z,...,z^(N-1) and has invertible Vandermonde determinant over K(z); the empty support case is vacuous. Grouping lattice coefficients for a maximal-length substitution leaves gamma_g times a Laurent polynomial, so its vanishing forces every coefficient zero, including the r=0 base case. Finite descent proves injectivity without assuming PBW independence. Independently read Kirillov Theorems 5.6-5.7 and Corollary 5.8, actual PDF pp.27-28 and their preceding leading-term setup pp.25-26; the local A1 proof supplies the independence needed rather than importing the source affine assertion. Formal q,t only; no specialization or AC. Reader/refuter have no finding. No defect."
+      }
+    },
+    "def-daha-a1-symmetric-macdonald-operator": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition acts on the zero polynomial as zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition is a linear operator and sends zero to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition includes the constant polynomial in its domain V."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition is over Q(q,t); specializations are handled only in separate items."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or limiting parameter is part of the operator Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Definition on invariant Laurent polynomials, rational expression interpreted via later cancellation proof; no separate iff or specialization assertion.",
+            "item_sha256": "e7d896b5decc40789cded69da5259373a9b0cfa5db66944a3c0a85f2902a5a8b",
+            "row_sha256": "31370f327412a840690aaa717329d4c81bd6da08235697608d7f95b15cec128f"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Definition on invariant Laurent polynomials, rational expression interpreted via later cancellation proof; no separate iff or specialization assertion.",
+            "item_sha256": "e7d896b5decc40789cded69da5259373a9b0cfa5db66944a3c0a85f2902a5a8b",
+            "row_sha256": "49ba4c83cf590689797d6d7c04bbef61a9945c57f49b6ef109c106216d45c1e4"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No proof phase or registered finite-smoke case applies."
+    },
+    "rem-daha-skein-and-physical-knot-interfaces-require-specific-maps": {
+      "risk": "medium",
+      "kind": "remark",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement explicitly limits the interface claims proved on this page."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "No zero-parameter representation or physical model is asserted in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement makes no one-generator skein or knot-invariant assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires exact parameters and completions before any interface claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or limit is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Remark contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Remark contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No proof phase or registered finite-smoke case applies."
+    },
+    "lem-daha-a1-macdonald-operator-preserves-orbit-sums": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-daha-a1-symmetric-macdonald-operator",
+          "source_section": "Definition",
+          "quote": "Let $V=\\{f\\in K[z,z^{-1}]:f(z)=f(z^{-1})\\}$ be the Weyl-invariant Laurent polynomials. Define the type-A1 symmetric Macdonald difference operator on $V$ by\n\n$$\n(\\mathcal D f)(z)=\\frac{tz^2-t^{-1}}{z^2-1}f(qz)+\\frac{t^{-1}z^2-t}{z^2-1}f(q^{-1}z).\n$$\n\nThe formula is interpreted as the sum of the two rational terms; [[lem-daha-a1-macdonald-operator-preserves-orbit-sums]] proves that for every $f\\in V$ the sum is a Weyl-invariant Laurent polynomial.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "pole-cancellation",
+          "claim": "The apparent poles at z=\u00b11 cancel for symmetric Laurent polynomials.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "weyl-invariance",
+          "claim": "Substitution z to z^-1 exchanges the two coefficients and shifts.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "triangular-diagonal",
+          "claim": "The degree bound and leading coefficient give the triangular orbit-sum formula.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero Laurent polynomial is preserved by the linear formula in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The n=0 orbit sum m0=1 is computed directly in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=1 orbit sum is included in the leading-coefficient calculation in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement is over the formal field Q(q,t) and makes no root-of-unity specialization claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting process occurs in this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check actual numerical range or geometric source/target endpoints; no artificial analytic limiting parameter is added. n=0 separately A+B scalar3.1, positive n pole cancellation at both z=\u00b11 and finite orbit-sum decomposition. Finite coefficient operations, no interval/choice or iff classification.",
+            "item_sha256": "cd558a08526095953c8bb572cfa68c8a1543bfde2d9161af146cf5769b47b88e",
+            "row_sha256": "db0b8460301917b75091cd764c9f79f3bcb4171916dfd5d3a1fa30787195a76f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an indexed family and invokes no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Distinguish finite explicitly supplied choices from inherited AC/countable choice; a nonzero module or listed finite basis is not a new infinite-family choice. n=0 separately A+B scalar3.1, positive n pole cancellation at both z=\u00b11 and finite orbit-sum decomposition. Finite coefficient operations, no interval/choice or iff classification.",
+            "item_sha256": "cd558a08526095953c8bb572cfa68c8a1543bfde2d9161af146cf5769b47b88e",
+            "row_sha256": "8662fb7a0019b6f019bc71ad3952632a43af22643dfb3107ba49ec08d8cbbdd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. n=0 separately A+B scalar3.1, positive n pole cancellation at both z=\u00b11 and finite orbit-sum decomposition. Finite coefficient operations, no interval/choice or iff classification.",
+            "item_sha256": "cd558a08526095953c8bb572cfa68c8a1543bfde2d9161af146cf5769b47b88e",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. n=0 separately A+B scalar3.1, positive n pole cancellation at both z=\u00b11 and finite orbit-sum decomposition. Finite coefficient operations, no interval/choice or iff classification.",
+            "item_sha256": "cd558a08526095953c8bb572cfa68c8a1543bfde2d9161af146cf5769b47b88e",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No registered finite-smoke case applies; the complete symbolic verification is in the item steps."
+    },
+    "lem-daha-a1-y-sum-restricts-to-macdonald-operator": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-daha-a1-polynomial-representation",
+          "source_section": "Definition",
+          "quote": "The **polynomial representation** is the action of $\\mathcal H_{q,t}(A_1)$ on $\\mathcal P=K[z,z^{-1}]$ specified by sending $Z$ to multiplication by $z$, $Z^{-1}$ to multiplication by $z^{-1}$, $\\pi$ to $f(z)\\mapsto f(q^{-1}z^{-1})$, and $T_i$ to\n\n$$\n(\\mathsf T_i f)(z)=t f(s_i z)+(t-t^{-1})\\frac{f(s_i z)-f(z)}{z^{-\\alpha_i}-1},\\qquad i=0,1,\n$$\n\nwith $s_1z=z^{-1}$, $s_0z=q^{-2}z^{-1}$, $z^{-\\alpha_1}=z^{-2}$, and $z^{-\\alpha_0}=q^2z^2$. The quotient is interpreted by the finite Laurent sums in [[lem-daha-a1-bernstein-quotients-are-laurent]]. Well-definedness as an algebra action is proved in [[lem-daha-a1-polynomial-operators-satisfy-presentation]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-daha-a1-symmetric-macdonald-operator",
+          "source_section": "Definition",
+          "quote": "Let $V=\\{f\\in K[z,z^{-1}]:f(z)=f(z^{-1})\\}$ be the Weyl-invariant Laurent polynomials. Define the type-A1 symmetric Macdonald difference operator on $V$ by\n\n$$\n(\\mathcal D f)(z)=\\frac{tz^2-t^{-1}}{z^2-1}f(qz)+\\frac{t^{-1}z^2-t}{z^2-1}f(q^{-1}z).\n$$\n\nThe formula is interpreted as the sum of the two rational terms; [[lem-daha-a1-macdonald-operator-preserves-orbit-sums]] proves that for every $f\\in V$ the sum is a Weyl-invariant Laurent polynomial.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-daha-a1-macdonald-operator-preserves-orbit-sums",
+          "source_section": "Statement",
+          "quote": "Let $m_0=1$ and $m_n=z^n+z^{-n}$ for $n\\ge1$ be the A1 Weyl orbit sums. The degree of a nonzero Laurent polynomial $\\sum_k a_kz^k$ is $\\max\\{|k|:a_k\\ne0\\}$. For every $n\\ge0$, the operator $\\mathcal D$ of [[def-daha-a1-symmetric-macdonald-operator]] sends $m_n$ to\n\n$$\n\\mathcal Dm_n=\\lambda_nm_n+\\sum_{0\\le j<n}d_{n,j}m_j,\\qquad \\lambda_n=tq^n+t^{-1}q^{-n},\n$$\n\nwith coefficients $d_{n,j}\\in K$. In particular, $\\mathcal D$ preserves the symmetric Laurent-polynomial space.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-daha-a1-double-affine-hecke-algebra",
+          "source_section": "Definition",
+          "quote": "Use the rank-one root datum, affine actions, field $K$, and Laurent polynomials $B_{i,m}$ from [[def-daha-a1-root-datum-and-parameter-conventions]] and [[lem-daha-a1-bernstein-quotients-are-laurent]]. Let $F$ be the free associative unital $K$-algebra on $Z,Z^{-1},T_0,T_1,\\pi$. Define the equal-parameter double-affine Hecke algebra\n\n$$\n\\mathcal H_{q,t}(A_1)=F/I\n$$\n\nwhere $I$ is the two-sided ideal generated by the following relations:\n\n1. $ZZ^{-1}=Z^{-1}Z=1$.\n2. $\\pi^2=1$ and $\\pi T_0\\pi=T_1$ (hence also $\\pi T_1\\pi=T_0$).\n3. $(T_i-t)(T_i+t^{-1})=0$ for $i=0,1$.\n4. For every $m\\in\\mathbb Z$ and $i\\in\\{0,1\\}$,\n$$\nT_i Z^m-s_i(Z^m)T_i=(t-t^{-1})B_{i,m}(Z),\n$$\nwhere $s_1(Z^m)=Z^{-m}$ and $s_0(Z^m)=q^{-2m}Z^{-m}$.\n5. $\\pi Z\\pi=q^{-1}Z^{-1}$.\n\nThis is the rank-one root-datum DAHA presentation: $T_0,T_1$ are the affine Hecke generators, $Z$ is the weight-lattice generator, and $\\pi$ is the length-zero symmetry. There is no finite braid relation between $T_0$ and $T_1$ because the affine $A_1$ Coxeter label is infinite. The scalar normalization is $(T_i-t)(T_i+t^{-1})=0$; $q$ controls translations and is independent of $t$. The quotient is a definition, not a claim about a PBW basis or a faithful polynomial representation.\n\nThe fundamental translation is $y=\\pi s_1$, acting by the $q$-shift $z\\mapsto qz$; its DAHA lift is $Y=\\pi T_1$. The quadratic relation makes $T_1$ invertible, with $T_1^{-1}=T_1-(t-t^{-1})$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-daha-a1-root-datum-and-parameter-conventions",
+          "source_section": "Definition",
+          "quote": "Work over the rational function field $K=\\mathbb Q(q,t)$, where $q$ and $t$ are algebraically independent indeterminates. The rank-one reduced root system is $\\Phi=\\{\\pm\\alpha\\}$ with $\\alpha=2\\rho$, weight lattice $P=\\mathbb Z\\rho$, coroot lattice $Q^\\vee=\\mathbb Z\\alpha^\\vee$, and pairing $\\langle\\rho,\\alpha^\\vee\\rangle=1$. Put $z=X^\\rho$, so the lattice algebra is $K[z,z^{-1}]$; the finite Weyl reflection is $s_1(z)=z^{-1}$.\n\nLet $\\delta$ be the affine degree with $z^\\delta=q^{-2}$, and set $\\alpha_0=-2\\rho+\\delta$. The affine reflections and the length-zero symmetry act on Laurent functions by\n\n$$\ns_0 f(z)=f(q^{-2}z^{-1}),\\qquad s_1 f(z)=f(z^{-1}),\\qquad \\pi f(z)=f(q^{-1}z^{-1}).\n$$\n\nThus $s_0^2=s_1^2=\\pi^2=1$, $\\pi s_0\\pi=s_1$, and the affine denominators are $u_0=z^{-\\alpha_0}=q^2z^2$ and $u_1=z^{-\\alpha_1}=z^{-2}$. The affine Coxeter group generated by $s_0,s_1$ is infinite dihedral, with no finite braid relation between these reflections. The extended affine group is $W_{\\mathrm{aff}}\\rtimes\\Omega$, where $\\Omega=\\{1,\\pi\\}$ acts by swapping $s_0,s_1$; every element has a unique form $w\\pi^\\epsilon$ with $w$ an alternating reduced word in $s_0,s_1$ and $\\epsilon\\in\\{0,1\\}$.\n\nFor $m\\in\\mathbb Z$, define the Laurent polynomials $B_{1,m},B_{0,m}$ by\n\n$$\nB_{1,0}=B_{0,0}=0,\\quad B_{1,m}=\\sum_{j=0}^{m-1}z^{m-2j}\\ (m>0),\\quad B_{1,-m}=-B_{1,m}\\ (m>0),\n$$\n\n$$\nB_{0,m}=-\\sum_{j=0}^{m-1}q^{-2j-2}z^{m-2-2j}\\ (m>0),\\qquad B_{0,-m}=\\sum_{j=0}^{m-1}q^{2j}z^{-m+2j}\\ (m>0).\n$$\n\nThey are the finite Laurent-polynomial versions of the Bernstein quotients with $s_1(z^m)=z^{-m}$ and $s_0(z^m)=q^{-2m}z^{-m}$. The symmetric Hecke normalization uses the same nonzero parameter $t$ at both affine simple roots: $(T_i-t)(T_i+t^{-1})=0$. The DAHA parameter $q$ is the lattice-translation parameter; it is distinct from the finite Hecke parameter $t$ and from the multiplicative type-A normalization $Q$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "translation-on-symmetric-polynomials",
+          "claim": "Y=pi T1 acts on invariant Laurent polynomials as t times the q-shift.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "inverse-translation-and-sum",
+          "claim": "Use T1 inverse and compute Y^-1; the sum has the displayed Macdonald coefficients.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "symmetric-translation-family",
+          "claim": "The invariant Laurent algebra in Y is generated by Y+Y^-1 and restricts to polynomials in D.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero invariant function is preserved by the linear operators in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero translation exponent is the constant in the invariant Laurent algebra treated in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first symmetric translation is S1=Y+Y^-1 in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and proof are formal over Q(q,t), without a singular specialization claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting process occurs in this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check actual numerical range or geometric source/target endpoints; no artificial analytic limiting parameter is added. Finite invariant Y-Laurent coefficient comparison and Chebyshev recurrence starting S0=2,S1, restriction to D; zero/constant polynomials included. No interval/choice or logical iff theorem.",
+            "item_sha256": "8f73f55dfe18d4d2d02ad7989b1ac97eb1a1d0908b52480ce82a246fc01e03cc",
+            "row_sha256": "db0b8460301917b75091cd764c9f79f3bcb4171916dfd5d3a1fa30787195a76f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an indexed family and invokes no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Distinguish finite explicitly supplied choices from inherited AC/countable choice; a nonzero module or listed finite basis is not a new infinite-family choice. Finite invariant Y-Laurent coefficient comparison and Chebyshev recurrence starting S0=2,S1, restriction to D; zero/constant polynomials included. No interval/choice or logical iff theorem.",
+            "item_sha256": "8f73f55dfe18d4d2d02ad7989b1ac97eb1a1d0908b52480ce82a246fc01e03cc",
+            "row_sha256": "8662fb7a0019b6f019bc71ad3952632a43af22643dfb3107ba49ec08d8cbbdd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Finite invariant Y-Laurent coefficient comparison and Chebyshev recurrence starting S0=2,S1, restriction to D; zero/constant polynomials included. No interval/choice or logical iff theorem.",
+            "item_sha256": "8f73f55dfe18d4d2d02ad7989b1ac97eb1a1d0908b52480ce82a246fc01e03cc",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Finite invariant Y-Laurent coefficient comparison and Chebyshev recurrence starting S0=2,S1, restriction to D; zero/constant polynomials included. No interval/choice or logical iff theorem.",
+            "item_sha256": "8f73f55dfe18d4d2d02ad7989b1ac97eb1a1d0908b52480ce82a246fc01e03cc",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No registered finite-smoke case applies; the complete symbolic verification is in the item steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-72",
+        "notes": "Read all three steps and all five direct suppliers, including the complete orbit-sum preservation proof. For symmetric f, T1 f=t f and Pi f=f(qz), so Yf=t f(qz). Independently expanding (T1-c)Pi gives coefficient B=(t^-1 z^2-t)/(z^2-1) on f(q^-1 z) and c/(z^2-1) on f(qz); adding Y gives A=(t z^2-t^-1)/(z^2-1). The orbit-sum supplier removes poles at both z=1 and z=-1 (characteristic zero), proves inversion symmetry, and gives degree/leading coefficient, with n=0 checked directly. The finite reflection acts on the abstract translation exponent, not by ordinary conjugation by T1. Inversion-invariant Laurent polynomials have paired coefficients and the recurrence S_(n+1)=(Y+Y^-1)S_n-S_(n-1), S0=2,S1=Y+Y^-1, gives polynomial restrictions; only the sum must preserve V, not Y separately. Constants and the zero polynomial are included. Kirillov actual PDF p.24 independently gives the identical A1 calculation with X=z^2; Macdonald sections 4-6 (PDF pp.8-14) supply context under its specialized integer-k hypotheses, which are not imported. Source locator for the A1 calculation is off by one page and is reported separately. Reader/refuter have no finding. No mathematical prerequisite gap or AC."
+      }
+    },
+    "thm-daha-a1-macdonald-eigenfunctions": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-daha-a1-symmetric-macdonald-operator",
+          "source_section": "Definition",
+          "quote": "Let $V=\\{f\\in K[z,z^{-1}]:f(z)=f(z^{-1})\\}$ be the Weyl-invariant Laurent polynomials. Define the type-A1 symmetric Macdonald difference operator on $V$ by\n\n$$\n(\\mathcal D f)(z)=\\frac{tz^2-t^{-1}}{z^2-1}f(qz)+\\frac{t^{-1}z^2-t}{z^2-1}f(q^{-1}z).\n$$\n\nThe formula is interpreted as the sum of the two rational terms; [[lem-daha-a1-macdonald-operator-preserves-orbit-sums]] proves that for every $f\\in V$ the sum is a Weyl-invariant Laurent polynomial.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-daha-a1-macdonald-operator-preserves-orbit-sums",
+          "source_section": "Statement",
+          "quote": "Let $m_0=1$ and $m_n=z^n+z^{-n}$ for $n\\ge1$ be the A1 Weyl orbit sums. The degree of a nonzero Laurent polynomial $\\sum_k a_kz^k$ is $\\max\\{|k|:a_k\\ne0\\}$. For every $n\\ge0$, the operator $\\mathcal D$ of [[def-daha-a1-symmetric-macdonald-operator]] sends $m_n$ to\n\n$$\n\\mathcal Dm_n=\\lambda_nm_n+\\sum_{0\\le j<n}d_{n,j}m_j,\\qquad \\lambda_n=tq^n+t^{-1}q^{-n},\n$$\n\nwith coefficients $d_{n,j}\\in K$. In particular, $\\mathcal D$ preserves the symmetric Laurent-polynomial space.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-daha-a1-y-sum-restricts-to-macdonald-operator",
+          "source_section": "Statement",
+          "quote": "Let $Y=\\pi T_1$ be the fundamental coweight translation in the polynomial representation of [[def-daha-a1-polynomial-representation]]. On the symmetric Laurent polynomials $V$, the restriction of $Y+Y^{-1}$ is the operator $\\mathcal D$ of [[def-daha-a1-symmetric-macdonald-operator]]. Here Weyl-invariant means fixed by the involution $Y\\mapsto Y^{-1}$ induced by the rank-one finite reflection. Every such Laurent polynomial in $Y$ restricts to a polynomial in $\\mathcal D$. Thus the symmetric rank-one DAHA translations give a commuting family of difference operators on $V$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "eigenvalue-separation",
+          "claim": "The stated parameter exclusions make the diagonal eigenvalues pairwise distinct.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "recursive-eigenvector-construction",
+          "claim": "Triangularity constructs each normalized eigenvector from lower-degree eigenvectors.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "uniqueness-basis-and-common-eigenfamily",
+          "claim": "Distinct eigenvalues give uniqueness, the triangular basis gives spanning, and symmetric translations are polynomials in D.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The base eigenfunction P0=1 is constructed at the start of step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The n=0 case P0=1 is explicitly included in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The recursion includes n=1 after the base case in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Root-of-unity q and t^2=q^-N eigenvalue collisions are excluded in the Statement and step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting process occurs in this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check actual numerical range or geometric source/target endpoints; no artificial analytic limiting parameter is added. n=0 P0=1, each finite eigenvalue gap nonzero by non-root q and t\u00b2 exclusion1.1. Deterministic finite triangular recursion/uniqueness2\u20133; infinite basis assembled by indexed formula, not AC. No endpoint interval or iff assertion.",
+            "item_sha256": "a0b8653424600af65868d82628c8e5f0ab2527a82e1f046c809a25ca3870757e",
+            "row_sha256": "db0b8460301917b75091cd764c9f79f3bcb4171916dfd5d3a1fa30787195a76f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an indexed family and invokes no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Distinguish finite explicitly supplied choices from inherited AC/countable choice; a nonzero module or listed finite basis is not a new infinite-family choice. n=0 P0=1, each finite eigenvalue gap nonzero by non-root q and t\u00b2 exclusion1.1. Deterministic finite triangular recursion/uniqueness2\u20133; infinite basis assembled by indexed formula, not AC. No endpoint interval or iff assertion.",
+            "item_sha256": "a0b8653424600af65868d82628c8e5f0ab2527a82e1f046c809a25ca3870757e",
+            "row_sha256": "8662fb7a0019b6f019bc71ad3952632a43af22643dfb3107ba49ec08d8cbbdd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. n=0 P0=1, each finite eigenvalue gap nonzero by non-root q and t\u00b2 exclusion1.1. Deterministic finite triangular recursion/uniqueness2\u20133; infinite basis assembled by indexed formula, not AC. No endpoint interval or iff assertion.",
+            "item_sha256": "a0b8653424600af65868d82628c8e5f0ab2527a82e1f046c809a25ca3870757e",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. n=0 P0=1, each finite eigenvalue gap nonzero by non-root q and t\u00b2 exclusion1.1. Deterministic finite triangular recursion/uniqueness2\u20133; infinite basis assembled by indexed formula, not AC. No endpoint interval or iff assertion.",
+            "item_sha256": "a0b8653424600af65868d82628c8e5f0ab2527a82e1f046c809a25ca3870757e",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "No registered finite-smoke case applies; the complete symbolic verification is in the item steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-72",
+        "notes": "Read all three steps and all three direct suppliers. For n!=m>=0 the exact factorization is (q^n-q^m)(t-t^-1 q^(-(n+m))); non-root-of-unity q and t^2!=q^-N for N>=1 make both factors nonzero, including m=0. Over the declared characteristic-zero K=Q(q,t) these exclusions hold formally. The n=0 constant eigenvector uses A+B=t+t^-1. In each finite degree, inversion symmetry gives the orbit-sum basis; the displayed correction coefficient r_n,j/(lambda_n-lambda_j) has the correct sign and kills the residual. Triangular leading terms establish the induction basis, uniqueness and finite expansions for every Laurent polynomial, without infinite-series inversion or an infinite-dimensional convergence assertion. Every symmetric translation restriction is a polynomial r(D), hence gives eigenvalue r(lambda_n). No orthogonality/norm formula is asserted, no AC is used. Independently read Kirillov Theorem 6.2 and its setup/proof (actual PDF pp.30-31) and Theorem 6.6 with proof (p.33); its integer-k restriction is not used in the local finite algebraic construction. Macdonald Theorem 1.5 (PDF pp.3-4) and section 6 (pp.13-14) provide normalization/eigenfunction context, with specialized hypotheses retained. Etingof-Ma section 7.13 supplies DAHA context only: the advertised Macdonald discussion on pp.18-19 is absent there (these pages concern rational Cherednik modules), an editorial source-locator alert for the owner. Reader/refuter have no finding. No mathematical defect or unmet prerequisite."
+      }
+    },
+    "ex-daha-a1-first-symmetric-macdonald-eigenfunctions": {
+      "risk": "medium",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-daha-a1-symmetric-macdonald-operator",
+          "source_section": "Definition",
+          "quote": "Let $V=\\{f\\in K[z,z^{-1}]:f(z)=f(z^{-1})\\}$ be the Weyl-invariant Laurent polynomials. Define the type-A1 symmetric Macdonald difference operator on $V$ by\n\n$$\n(\\mathcal D f)(z)=\\frac{tz^2-t^{-1}}{z^2-1}f(qz)+\\frac{t^{-1}z^2-t}{z^2-1}f(q^{-1}z).\n$$\n\nThe formula is interpreted as the sum of the two rational terms; [[lem-daha-a1-macdonald-operator-preserves-orbit-sums]] proves that for every $f\\in V$ the sum is a Weyl-invariant Laurent polynomial.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-daha-a1-macdonald-eigenfunctions",
+          "source_section": "Statement",
+          "quote": "Assume $q\\in K^\\times$ is not a root of unity, $t\\in K^\\times$, and $t^2\\ne q^{-N}$ for every positive integer $N$. Let $m_0=1$ and $m_n=z^n+z^{-n}$ for $n\\ge1$. The Laurent degree of a nonzero $\\sum_k a_kz^k$ is $\\max\\{|k|:a_k\\ne0\\}$; the coefficient of $m_n$ is the monic normalization. For each $n\\ge0$ there is a unique symmetric Laurent polynomial\n\n$$\nP_n=m_n+\\sum_{0\\le j<n}c_{n,j}m_j\n$$\n\nsuch that\n\n$$\n\\mathcal D P_n=\\lambda_nP_n,\\qquad \\lambda_n=tq^n+t^{-1}q^{-n}.\n$$\n\nThe polynomials $P_n$ form a $K$-basis of the symmetric Laurent polynomials and are simultaneous eigenfunctions of every symmetric rank-one DAHA translation operator. This is the monic type-A1 symmetric Macdonald eigenfunction normalization; no inner-product norm formula or general-root-system extension is asserted here.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "degree-zero-eigenfunction",
+          "claim": "The constant polynomial has eigenvalue t+t^-1 and is P0.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "degree-one-eigenfunction",
+          "claim": "Direct expansion gives the eigenvalue tq+t^-1q^-1 for z+z^-1, hence P1.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The degree-zero orbit sum P0=1 is checked in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero parameter case is excluded by the Given hypotheses in the Example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The degree-one orbit sum and its eigenvalue are computed in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example assumes the theorem's nonsingularity condition; the q=1 boundary is recorded separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting process occurs in this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check actual numerical range or geometric source/target endpoints; no artificial analytic limiting parameter is added. Fixed n=0 and n=1 direct computations Verification1\u20132, no selection, interval or iff assertion.",
+            "item_sha256": "c238e4d77e85e4f762b8d2225c7aab2974a0006f6fa7d9fae9abad9dbbd4f034",
+            "row_sha256": "db0b8460301917b75091cd764c9f79f3bcb4171916dfd5d3a1fa30787195a76f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an indexed family and invokes no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Distinguish finite explicitly supplied choices from inherited AC/countable choice; a nonzero module or listed finite basis is not a new infinite-family choice. Fixed n=0 and n=1 direct computations Verification1\u20132, no selection, interval or iff assertion.",
+            "item_sha256": "c238e4d77e85e4f762b8d2225c7aab2974a0006f6fa7d9fae9abad9dbbd4f034",
+            "row_sha256": "8662fb7a0019b6f019bc71ad3952632a43af22643dfb3107ba49ec08d8cbbdd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Fixed n=0 and n=1 direct computations Verification1\u20132, no selection, interval or iff assertion.",
+            "item_sha256": "c238e4d77e85e4f762b8d2225c7aab2974a0006f6fa7d9fae9abad9dbbd4f034",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Fixed n=0 and n=1 direct computations Verification1\u20132, no selection, interval or iff assertion.",
+            "item_sha256": "c238e4d77e85e4f762b8d2225c7aab2974a0006f6fa7d9fae9abad9dbbd4f034",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "The two computations are finite symbolic Laurent-polynomial checks written out in Verification; no registered finite-smoke model applies."
+    },
+    "cex-daha-a1-eigenvalue-separation-fails-at-q-one": {
+      "risk": "medium",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-daha-a1-symmetric-macdonald-operator",
+          "source_section": "Definition",
+          "quote": "Let $V=\\{f\\in K[z,z^{-1}]:f(z)=f(z^{-1})\\}$ be the Weyl-invariant Laurent polynomials. Define the type-A1 symmetric Macdonald difference operator on $V$ by\n\n$$\n(\\mathcal D f)(z)=\\frac{tz^2-t^{-1}}{z^2-1}f(qz)+\\frac{t^{-1}z^2-t}{z^2-1}f(q^{-1}z).\n$$\n\nThe formula is interpreted as the sum of the two rational terms; [[lem-daha-a1-macdonald-operator-preserves-orbit-sums]] proves that for every $f\\in V$ the sum is a Weyl-invariant Laurent polynomial.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "specialize-q-one",
+          "claim": "At q=1 both shifts are identity and the coefficients sum to t+t^-1.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "equal-first-two-eigenvalues",
+          "claim": "The distinct orbit sums m0,m1 have the same eigenvalue, refuting universal pairwise separation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "No empty-family assertion is used; the counterexample uses the explicit nonempty pair m0,m1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The counterexample chooses t nonzero as required in the Statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first two indices n=0,1 are computed explicitly in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample is the excluded root-of-unity boundary q=1, verified in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, endpoint, or limiting process occurs in this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Check actual numerical range or geometric source/target endpoints; no artificial analytic limiting parameter is added. Counterexample at q=1,t nonzero gives scalar D and distinct m0,m1 same eigenvalue. It refutes unrestricted separation, not a biconditional or interval endpoint theorem; finite calculation without choice.",
+            "item_sha256": "1ae02810e90a190101b8a136fc832770a7e01eb47ff373cc3f13020eed54f530",
+            "row_sha256": "db0b8460301917b75091cd764c9f79f3bcb4171916dfd5d3a1fa30787195a76f"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument selects no element from an indexed family and invokes no choice principle.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Distinguish finite explicitly supplied choices from inherited AC/countable choice; a nonzero module or listed finite basis is not a new infinite-family choice. Counterexample at q=1,t nonzero gives scalar D and distinct m0,m1 same eigenvalue. It refutes unrestricted separation, not a biconditional or interval endpoint theorem; finite calculation without choice.",
+            "item_sha256": "1ae02810e90a190101b8a136fc832770a7e01eb47ff373cc3f13020eed54f530",
+            "row_sha256": "8662fb7a0019b6f019bc71ad3952632a43af22643dfb3107ba49ec08d8cbbdd0"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its forward implication, not an iff token inside a supplier link. Counterexample at q=1,t nonzero gives scalar D and distinct m0,m1 same eigenvalue. It refutes unrestricted separation, not a biconditional or interval endpoint theorem; finite calculation without choice.",
+            "item_sha256": "1ae02810e90a190101b8a136fc832770a7e01eb47ff373cc3f13020eed54f530",
+            "row_sha256": "b5418604072e4d20720cfe4a39cf0838dc85680201091986c51f484580ce84f6"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/math81_hopf_spectral_placement",
+            "reason": "Read the actual assertion for a biconditional and its converse, not an iff token inside a supplier link. Counterexample at q=1,t nonzero gives scalar D and distinct m0,m1 same eigenvalue. It refutes unrestricted separation, not a biconditional or interval endpoint theorem; finite calculation without choice.",
+            "item_sha256": "1ae02810e90a190101b8a136fc832770a7e01eb47ff373cc3f13020eed54f530",
+            "row_sha256": "cb3270b358350459a2265f8060a8b95b1014291534dda82ce7b6e01df30ae0cd"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "finite_checks": [],
+      "finite_check_rationale": "The counterexample is the exact finite specialization q=1 with t nonzero; both scalar values are computed symbolically in steps 1.1 and 2.1."
+    }
+  }
+}

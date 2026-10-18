@@ -3,6 +3,7 @@ id: def-null-subset-of-a-smooth-manifold
 kind: definition
 title: "Null subsets of a smooth manifold"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (def-null-subset-of-a-smooth-manifold). No independent judge or whole-closure certification.
-    delegated_by: owner
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-sard-completion/published-receipts/def-null-subset-of-a-smooth-manifold.json
 sources:
   scraped: []
   references:

@@ -3,24 +3,20 @@ id: thm-continuity-iff-oscillation-zero
 kind: theorem
 title: "$f : A \\to \\mathbb{R}$ is continuous at $c \\in A$ if and only if $\\omega_f(c) = 0$"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
   evidence: exact-source
-deps: [def-oscillation, def-continuity-real, def-extended-reals, lem-extended-reals-complete, def-neighbourhood-r, lem-of-abs-value]
+deps: [def-oscillation, def-continuity-real, def-extended-reals, lem-extended-reals-complete, def-neighbourhood-r, lem-of-abs-value, lem-of-triangle-inequality]
 justified_by: []
 aliases: []
 landmark: true
 short: "continuity iff zero oscillation"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
-  precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/thm-continuity-iff-oscillation-zero.json
 sources:
   scraped: []
   references:
@@ -47,7 +43,7 @@ $\delta > 0$ with $\omega_f(A \cap N_\delta(c)) < \varepsilon$.
 Continuity at $c$ is a statement about $f$ near $c$ with a quantifier over
 $\varepsilon$; $\omega_f(c) = 0$ is the vanishing of a single extended real
 attached to the point. The change of form is what makes the discontinuity set
-accessible: the sets $\{\,x : \omega_f(x) \ge \varepsilon\,\}$ are closed
+accessible: the sets $\{\,x\in A : \omega_f(x) \ge \varepsilon\,\}$ are relatively closed in $A$
 ([[lem-oscillation-superlevel-sets-are-closed]]) and their union over
 $\varepsilon = 1, 1/2, 1/3, \dots$ is the discontinuity set
 ([[thm-discontinuity-set-is-f-sigma]]).
@@ -62,7 +58,7 @@ $\varepsilon = 1, 1/2, 1/3, \dots$ is the discontinuity set
 
 [L3] In $\overline{\mathbb{R}}$ every subset has a least upper bound and a greatest lower bound; a supremum is at most an extended real $u$ exactly when $u$ bounds every member of the set, and an infimum is at least an extended real $\ell$ exactly when $\ell$ bounds every member from below ([[lem-extended-reals-complete]]).
 
-[L4] $|u - w| \le |u - v| + |v - w|$ and $|u| \ge 0$ for reals $u, v, w$ ([[lem-of-abs-value]]).
+[L4] $|u-w|\le |u-v|+|v-w|$ for reals $u,v,w$, by applying [[lem-of-triangle-inequality]] to $(u-v)+(v-w)=u-w$; and $|u|\ge0$ by [[lem-of-abs-value]].
 
 ## Proof
 

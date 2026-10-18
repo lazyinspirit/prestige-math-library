@@ -1,0 +1,57 @@
+--- a/tools/depcheck.mjs
++++ b/tools/depcheck.mjs
+@@ -44,6 +44,7 @@
+ import { frontmatterList } from './frontmatter-list.mjs';
+ import { includesItem, parseItemScope, unknownItems } from './item-scope.mjs';
+ import { recordedPublishedRepair } from './published-repair-policy.mjs';
++import { reachedPhysicsMathContext } from './physics-math-context-import.mjs';
+ 
+ const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
+ const itemScope = parseItemScope(process.argv.slice(2));
+@@ -292,6 +293,15 @@
+     }
+   }
+ }
++// Verify only reached immutable physics-authored mathematical context. Imports
++// cannot become this frontier's audit/authoring subjects. Publication audit
++// requirements below remain unchanged.
++try {
++  reachedPhysicsMathContext(REPO, [...graphContext.keys()], {
++    selectedIds: itemScope.selected === null ? [...items.keys()] : [...itemScope.selected],
++  });
++} catch (error) { err('physics-math-context-import', error.message); }
++
+ // An unresolved question cannot establish a claim, including through aliases
+ // or an indirect prerequisite's well-definedness discharge.
+ for (const id of graphContext.keys()) {
+--- a/tools/frontier-snapshot.mjs
++++ b/tools/frontier-snapshot.mjs
+@@ -3,6 +3,7 @@
+ import { existsSync, readFileSync, readdirSync } from 'node:fs';
+ import { join } from 'node:path';
+ import { yaml } from './pathway-lib.mjs';
++import { reachedPhysicsMathContext } from './physics-math-context-import.mjs';
+ const safe = value => { if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid identity'); return value; };
+ const json = path => JSON.parse(readFileSync(path, 'utf8'));
+ const read = path => existsSync(path) ? json(path) : null;
+@@ -178,6 +179,10 @@
+       contract ? { id: contract.page.id, order: contract.page.order, requires: contract.page.requires } : null],
+     deps: [...new Set(declarations.flatMap(i => [...(i.deps ?? []), ...(i.justified_by ?? []), ...(i.forward_refs ?? [])]))],
+   };
++  const imported = reachedPhysicsMathContext(s.root, [id], {
++    selectedIds: [...s.items.keys()], cache: s.physicsMathContextCache ??= new Map(),
++  });
++  if (imported.bindings.length) value.bytes.push({ physics_math_context: imported.bindings });
+   s.cache.set(id, value);
+   return value;
+ }
+@@ -227,5 +232,9 @@
+     if (live) paths.add(join(s.root, 'research', `${s.run}-batch-${live.page.batch}.pages.json`));
+     else if (s.planned.has(key)) paths.add(join(s.root, 'research', 'plan-spec.json'));
+   }
++  const imported = reachedPhysicsMathContext(s.root, [...itemInputs(s, id, extra).keys()], {
++    selectedIds: [...s.items.keys()], cache: s.physicsMathContextCache ??= new Map(),
++  });
++  for (const path of imported.paths) paths.add(path);
+   return [...paths];
+ }

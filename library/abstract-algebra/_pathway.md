@@ -53,7 +53,6 @@ parts:
       - semidirect-products-and-automorphism-groups
       - sylow-theorems-and-nilpotent-groups
       - the-galois-correspondence
-      - frattini-subgroups-and-the-burnside-basis-theorem
       - finite-fields-and-cyclotomic-extensions
       - the-fundamental-theorem-of-algebra
       - solvability-by-radicals-and-kummer-theory
@@ -62,6 +61,9 @@ parts:
       - finite-averaging-and-character-theory-prerequisites
       - characters-and-the-orthogonality-relations
       - induced-representations-and-frobenius-reciprocity
+  - part: algebra-and-physics-extensions
+    title: Algebra and representation interfaces
+    pages: ["algebraic-representation-and-tensor-symmetry-map", "heisenberg-and-algebraic-weyl-algebras", "jordan-spin-factor-and-alternative-algebras"]
 ---
 
 ## groups-and-quotients
@@ -131,3 +133,7 @@ idempotent traces, class-function indicators, the normalized Hermitian form, equ
 finite unit sums, and the Galois behavior of cyclotomic averages. Characters can then encode
 orthogonality and central-character arithmetic, while induction adds Frobenius reciprocity,
 Mackey decomposition, and Burnside's $p^aq^b$ solvability theorem.
+
+## algebra-and-physics-extensions
+
+These draft extensions connect the existing foundations to algebraic structures and representation problems motivated by theoretical physics. Each companion supplies the planned examples and boundary cases; exact hypotheses, local proof obligations, and reuse holds remain in its page contract.

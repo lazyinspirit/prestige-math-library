@@ -1,0 +1,53 @@
+---
+id: ex-su2-ell-three-modular-data
+kind: example
+title: "The conditional sl2 modular data at ell=3"
+status: draft
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+dependency_level: 11
+deps: [thm-su2-root-unity-ribbon-category-is-modular, lem-su2-hopf-link-sine-data-from-truncated-fusion, cor-rt-torus-and-state-dimension-formula, def-axiom-of-choice, def-countable-choice, thm-weighted-rt-tqft-and-factorization]
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: n/a
+sources:
+  references:
+    - title: "Bakalov and Kirillov, Lectures on Tensor Categories and Modular Functor, §3.3"
+      url: "https://www.math.stonybrook.edu/~kirillov/tensor/tensor.ps.gz"
+    - title: "Stephen F. Sawin, Quantum Groups at Roots of Unity and Modularity, §3.3"
+      url: "https://arxiv.org/pdf/math/0308281"
+---
+
+## Statement
+
+Conditional on the standard $\ell=3$ root-of-unity ribbon quotient, the labels are $0,1$, both dimensions are $1$, and
+
+$$S=\frac1{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}, \qquad(\theta_0,\theta_1)=(1,i),\qquad 1\otimes1=0.$$
+
+The torus state dimension is $2$.
+
+## Facts & Assumptions
+
+**Given:** $\ell=3$, $q=e^{\pi i/3}$, and the positive-trace convention.
+
+[F1] The conditional sine theorem gives $d_a=\sin((a+1)\pi/3)/\sin(\pi/3)$, $\theta_a=q^{a(a+2)/2}$, and $S_{ab}=\sqrt{2/3}\sin((a+1)(b+1)\pi/3)$ ([[lem-su2-hopf-link-sine-data-from-truncated-fusion]]).
+
+[F2] The truncated fusion rule and torus dimension formula are supplied conditionally by [[lem-su2-hopf-link-sine-data-from-truncated-fusion]] and [[cor-rt-torus-and-state-dimension-formula]].
+
+[A1] The actual tilting quotient and TQFT remain unresolved suppliers ([[thm-su2-root-unity-ribbon-category-is-modular]], [[thm-weighted-rt-tqft-and-factorization]]).
+
+## Proof
+
+**Given:** The conditional data in the Statement.
+
+1.1 The dimension formula gives $d_0=d_1=1$. The twist exponents are $0$ and $3/2$, so $\theta_0=1$ and $\theta_1=e^{\pi i/2}=i$. Substitution in the sine formula gives $S_{00}=S_{01}=S_{10}=1/\sqrt2$ and $S_{11}=-1/\sqrt2$. The truncated fusion range for $1\otimes1$ contains only $0$. [F1, F2, given, algebra]
+
+1.2 There are exactly two labels; hence the conditional torus dimension formula gives $\dim V(T^2)=2$. Also $S^2=I$ by direct multiplication of the displayed matrix, verifying nondegeneracy in this finite case. [F2, A1, step 1.1, algebra] ∎
+
+## Readiness note
+
+The finite calculation is conditional and complete; the actual category and TQFT interfaces remain escalated by [A1].

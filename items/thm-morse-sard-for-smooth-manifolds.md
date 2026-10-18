@@ -3,6 +3,7 @@ id: thm-morse-sard-for-smooth-manifolds
 kind: theorem
 title: "Morse-Sard for smooth manifolds"
 status: published
+dependency_level: 4
 origin: session
 provenance:
   statement: literature-derived
@@ -20,13 +21,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
-  precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-07-receipts.jsonl (thm-morse-sard-for-smooth-manifolds). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/thm-morse-sard-for-smooth-manifolds.json
 sources:
   scraped: []
   references:

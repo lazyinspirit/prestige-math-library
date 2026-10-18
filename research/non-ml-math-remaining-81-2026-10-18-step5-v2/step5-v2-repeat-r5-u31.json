@@ -1,0 +1,119 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "phase": "repeat",
+  "round": 5,
+  "unit": "31",
+  "input_sha256": "892611570ba65b543c470ccdb692001782c9c57216631014e9c4cd45c5c3ba75",
+  "decisions": [
+    {
+      "id": "thm-qa-37-exhaustive-b6-compiler-terminates",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "2a8d320d15903369d5b67f8e7de3b4daa3d696ee4edc2ffb7f336752cbc39b4a",
+      "outcome": "false_positive",
+      "reason": "The certified-input definition explicitly uses a numerator/denominator encoding, specializing def-qc-effective-unitary-matrix-input, which calls for a positive rational in binary. Thus binary-rational denotes binary-encoded rational input here; 1/3 has numerator 1 and denominator 11 in binary. Both compiler tests are exact rational comparisons. No dyadic restriction or conversion is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-qa-37-su2-solovay-kitaev-compiler",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "9938a0140d4660dc9767382bfb51178dda45deb47c1c8cd5e97b1a4a40e4426c",
+      "outcome": "false_positive",
+      "reason": "The certificate already requires rational eta0. def-qa-37-fibonacci-braid-gate-set explicitly imports the base-net certificate definition from def-qc-inverse-closed-dense-su2-gate-set, which fixes a rational 0<eta0<1/4096 and coverage eta0/4. This algorithm assumes that certified package, so its finite branch satisfies the cited bit-complexity theorem without conversion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-37-su2-compiler-error-length",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "fe5270fe28a46a67e485b3462e97759ce20175c273a48762fbf07737e9472e12",
+      "outcome": "false_positive",
+      "reason": "The supplied Fibonacci certificate is the certificate explicitly defined in def-qc-inverse-closed-dense-su2-gate-set, with rational 0<eta0<1/4096 and coverage eta0/4. That condition is imported through def-qa-37-fibonacci-braid-gate-set. Step 2.1 therefore satisfies the rational-radius hypothesis in addition to its stated algebraic-coordinate and polynomial-name conditions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-qa-37-exhaustive-b6-compiler-terminates",
+      "disposition": "unaffected",
+      "post_sha256": "5de03a043b1543710443507922894f7a2752d3ca1b7b7d49cad1eb330b473295",
+      "review_context_sha256": "a6217877ee11fee0549a9c334f9fe5034b26312e5d69322e8dc7aa1afc6b2371",
+      "reason": "The rejection mistakes binary encoding for a dyadic restriction. def-qa-37-certified-matrix-input explicitly records the numerator/denominator encoding length, and its supplier def-qc-effective-unitary-matrix-input defines a positive rational tolerance in binary. Thus epsilon=1/3 is encoded by binary integers 1 and 11 and is admissible without conversion. The compiler uses exact rational comparisons, not a finite binary expansion of epsilon. Independently checked steps 1.1--3.1: coordinate errors total less than 3d*2^-p in Frobenius norm; the real-coordinate l1 bound is sqrt(2)*d^(3/2)<=32 for d<=8; joint density supplies one word with l1 error <epsilon/4; convergence and finite dovetailing eventually make both strict rational tests pass. AComega is retained solely through joint density; no search-time bound is inferred.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-qa-37-su2-solovay-kitaev-compiler",
+      "disposition": "unaffected",
+      "post_sha256": "f3f92fa40d6d49b86e130465530fb6d20d3d736002af20a97b46b2aba8cf2738",
+      "review_context_sha256": "87c80f2344c84654feeeca97bc26144317d9f18d982534a4c115fa33c16866a1",
+      "reason": "Rationality is already part of the admitted certificate type. def-qc-inverse-closed-dense-su2-gate-set defines a finite base-net certificate by fixing a rational 0<eta0<1/4096, coverage eta0/4, and maximum word length L0. def-qa-37-fibonacci-braid-gate-set explicitly imports that definition, and this algorithm both depends on it and takes that fixed certified certificate as input. Its finite branch therefore satisfies the rational-radius hypothesis of thm-qc-solovay-kitaev-bit-complexity; no conversion or extra restriction is missing. Checked the two distinct target interfaces, algebraic coordinate isolation conditions, recursive supplier calls, finite interval branch, expanded labels, and scalar (R1*z^-1)^k. No algorithm edit is justified.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-qa-37-su2-compiler-error-length",
+      "disposition": "unaffected",
+      "post_sha256": "6daf7ca1e09862703a8565b13de1542b23449e40565721b37b3cda515f599855",
+      "review_context_sha256": "dbdd862c6fa5f355f9610c450762521cd6d750b8dd39841e274b546760294e1d",
+      "reason": "The supplied Fibonacci base-net certificate already has rational eta0: def-qa-37-fibonacci-braid-gate-set explicitly uses the certificate defined in def-qc-inverse-closed-dense-su2-gate-set, whose defining clause fixes a rational 0<eta0<1/4096 and eta0/4 coverage. This theorem assumes that package, not an arbitrary real-radius net. Thus step 2.1 meets the rational-radius hypothesis, as well as algebraic isolation, fixed-certificate and polynomial Cauchy-name hypotheses of the bit-complexity supplier. Independently checked q_j=4096*eta_j, q_(j+1)=q_j^(3/2), q0 in (0,1), the finite least J including epsilon=eta0 and J=0, the inherited L0*5^J length bound and logarithmic exponent, and the separate physical scalar. The owning contract quotes the same interfaces; no repair is necessary.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-qa-37-exhaustive-b6-compiler-terminates",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "2a8d320d15903369d5b67f8e7de3b4daa3d696ee4edc2ffb7f336752cbc39b4a",
+      "outcome": "false_positive",
+      "reason": "The certified-input definition explicitly uses a numerator/denominator encoding, specializing def-qc-effective-unitary-matrix-input, which calls for a positive rational in binary. Thus binary-rational denotes binary-encoded rational input here; 1/3 has numerator 1 and denominator 11 in binary. Both compiler tests are exact rational comparisons. No dyadic restriction or conversion is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-qa-37-su2-solovay-kitaev-compiler",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "9938a0140d4660dc9767382bfb51178dda45deb47c1c8cd5e97b1a4a40e4426c",
+      "outcome": "false_positive",
+      "reason": "The certificate already requires rational eta0. def-qa-37-fibonacci-braid-gate-set explicitly imports the base-net certificate definition from def-qc-inverse-closed-dense-su2-gate-set, which fixes a rational 0<eta0<1/4096 and coverage eta0/4. This algorithm assumes that certified package, so its finite branch satisfies the cited bit-complexity theorem without conversion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "thm-qa-37-su2-compiler-error-length",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "fe5270fe28a46a67e485b3462e97759ce20175c273a48762fbf07737e9472e12",
+      "outcome": "false_positive",
+      "reason": "The supplied Fibonacci certificate is the certificate explicitly defined in def-qc-inverse-closed-dense-su2-gate-set, with rational 0<eta0<1/4096 and coverage eta0/4. That condition is imported through def-qa-37-fibonacci-braid-gate-set. Step 2.1 therefore satisfies the rational-radius hypothesis in addition to its stated algebraic-coordinate and polynomial-name conditions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed all three assigned reviews in increasing dependency order. Each review-contexts command ran immediately after its mathematical review; all post_sha256 values equal the frozen before guards. No item, contract, page, Statement or Definition was edited. No new prerequisite, downstream event, independent review of a repair, or unresolved mathematical uncertainty is claimed.",
+    "Local evidence: items/def-qa-37-certified-matrix-input.md Definition (numerator/denominator encoding); items/def-qc-effective-unitary-matrix-input.md Definition (positive rational in binary); items/def-qc-inverse-closed-dense-su2-gate-set.md Definition (rational base-net radius and eta0/4 coverage); items/def-qa-37-fibonacci-braid-gate-set.md Definition (explicit import of that certificate). Checked both published SK supplier arguments, the assigned proofs/procedure, owning batch-31 contracts and library/quantum-algorithms/topological-quantum-algorithms-and-braid-compilation.md interface. These are local mathematical/interface checks; no external source-reading claim is made.",
+    "Focused checks, all exit 0: node tools/tsx-run.mjs tools/precheck.mts [the three assigned item paths] --json: 3 files, 2 proofs checked, 0 failures, algorithm not applicable. node tools/rendercheck.mjs [same paths] --json: 3 checked, 0 errors, 0 warnings. node tools/proof-layout.mjs [same paths]: 3 items, 6 steps, 0 defects. node tools/proof-contract.mjs research/non-ml-math-remaining-81-2026-10-18-batch-31.proof-contracts.json --items thm-qa-37-exhaustive-b6-compiler-terminates,alg-qa-37-su2-solovay-kitaev-compiler,thm-qa-37-su2-compiler-error-length --strict --json: all three checked, no errors or warnings.",
+    "Read-only identity check passed: SHA-256 of JSON.stringify of frozen repeat-5.json equals input_sha256; all three exact rejected tuples are covered; current itemHashGuard values equal assignment before hashes and recorded review guards. All three subjects belong to the frozen frontier; no gate diagnostics are assigned to unit 31.",
+    "No assigned item contains TikZ/tikzcd, and these procedural and norm arguments require no additional diagram. No published-ledger update is proposed because no published repair or newly established outside-consumer defect arose. Existing Step-4 outside alerts remain owner evidence, not new adjudications by this unit."
+  ]
+}

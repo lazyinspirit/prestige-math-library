@@ -1,0 +1,387 @@
+[
+  {
+    "order": 2514,
+    "id": "rate-distortion-and-lossy-source-coding",
+    "kind": "A",
+    "category": "information-theory",
+    "title": "Rate Distortion and Lossy Source Coding",
+    "companion": "rate-distortion-and-lossy-source-coding-examples",
+    "requires": [
+      "gaussian-orthogonal-decomposition-and-quadratic-forms",
+      "stationary-ergodic-sources-and-universal-coding"
+    ],
+    "items": [
+      {
+        "id": "def-it-general-mutual-information",
+        "kind": "definition",
+        "title": "Mutual information for standard-Borel random elements",
+        "statement": "Assume AC. Let $X,Y$ be random elements with standard-Borel value spaces $(\\mathsf X,\\mathcal X)$ and $(\\mathsf Y,\\mathcal Y)$, and let $P_{XY}$, $P_X$, and $P_Y$ be their joint and marginal probability laws. The product law $P_X\\otimes P_Y$ exists by [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]. Define the mutual information in nats by\n\n$$I_{\\mathrm{nat}}(X;Y):=D(P_{XY}\\|P_X\\otimes P_Y)\\in[0,+\\infty],$$\n\nwhere $D$ is the directional Kullback–Leibler divergence of [[def-kullback-leibler-divergence]]. This definition remains meaningful when one or both laws have no Lebesgue density and does not subtract differential entropies that may be infinite.",
+        "strategy": "Use the measure-level relative-entropy definition and product probability law; state the Axiom of Choice inherited from the Radon–Nikodym definition.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kullback-leibler-divergence",
+          "def-standard-borel-space",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-it-single-letter-distortion-and-block-distortion",
+        "kind": "definition",
+        "title": "Single-letter and block distortion",
+        "statement": "Let $(\\mathcal X,\\mathcal A)$ and $(\\widehat{\\mathcal X},\\widehat{\\mathcal A})$ be measurable spaces, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,+\\infty]$ be a measurable single-letter distortion. For a positive integer $n$, define the normalized additive block distortion by\n\n$$d_n(x^n,\\widehat x^n):=\\frac1n\\sum_{i=0}^{n-1}d(x_i,\\widehat x_i).$$\n\nWhen the alphabets are finite and $d$ is finite-valued, define $d_{\\max}:=\\max_{x,\\widehat x}d(x,\\widehat x)$. Expected distortion is $\\mathbb E d_n(X^n,\\widehat X^n)$; the excess-distortion probability at threshold $D$ is $\\mathbb P(d_n(X^n,\\widehat X^n)>D)$. These are distinct criteria: one is an expectation and the other is a tail probability.",
+        "strategy": "Specify measurable source and reproduction spaces, the distortion domain, normalization, boundedness convention, and the two performance quantities without identifying them.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-it-finite-vector-gaussian-water-level-allocation",
+        "kind": "lemma",
+        "title": "Finite Gaussian water-level allocation",
+        "statement": "Let $m\\ge1$, let $\\lambda_1,\\ldots,\\lambda_m\\ge0$, and for $0\\le\\delta_i\\le\\lambda_i$ put\n\n$$\\phi_i(\\delta_i):=\\begin{cases}\\frac12\\log_2(\\lambda_i/\\delta_i),&\\lambda_i>0,\\ 0<\\delta_i\\le\\lambda_i,\\\\+\\infty,&\\lambda_i>0,\\ \\delta_i=0,\\\\0,&\\lambda_i=0,\\ \\delta_i=0.\\end{cases}$$\n\nFor a total distortion budget $D\\ge0$, minimize $\\sum_i\\phi_i(\\delta_i)$ subject to $\\sum_i\\delta_i\\le D$ and $0\\le\\delta_i\\le\\lambda_i$. If $0<D<\\sum_i\\lambda_i$, there is a unique $\\theta\\in(0,\\max_i\\lambda_i)$ satisfying\n\n$$\\sum_i\\min(\\lambda_i,\\theta)=D,$$\n\nand the minimum is\n\n$$\\frac12\\sum_i\\log_2^+(\\lambda_i/\\theta),\\qquad \\delta_i^*=\\min(\\lambda_i,\\theta),$$\n\nwhere $\\log_2^+(u):=\\max(0,\\log_2 u)$. If $D=0$, the minimum is $+\\infty$ when some $\\lambda_i>0$ and is $0$ when all $\\lambda_i=0$. If $D\\ge\\sum_i\\lambda_i$, the minimum is $0$.",
+        "strategy": "Prove the water-level exists by continuity and use a common supporting-line inequality for the convex scalar rate-versus-distortion functions; check degenerate and endpoint budgets separately.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-it-general-rate-distortion-function",
+        "kind": "definition",
+        "title": "General single-letter information rate-distortion function",
+        "statement": "Assume AC. Let $\\mathcal X,\\widehat{\\mathcal X}$ be standard-Borel spaces, let $P_X$ be a probability law on $\\mathcal X$, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,+\\infty]$ be measurable. A feasible joint law, or coupling, is a probability measure $\\pi$ on $\\mathcal X\\times\\widehat{\\mathcal X}$ whose $\\mathcal X$-marginal is $P_X$. Define\n\n$$R_{\\mathrm{std}}(D):=\\inf_{\\substack{\\pi_{\\mathcal X}=P_X\\\\ \\int d\\,d\\pi\\le D}}\\frac{D(\\pi\\|P_X\\otimes\\pi_{\\widehat{\\mathcal X}})}{\\ln2}=\\inf_{\\substack{\\pi_{\\mathcal X}=P_X\\\\ \\int d\\,d\\pi\\le D}}\\frac{I_{\\mathrm{nat}}(X;\\widehat X)}{\\ln2}.$$\n\nThe infimum of an empty feasible set is $+\\infty$. Values are in bits. This definition makes no general existence or attainment claim and supplies no operational coding theorem for arbitrary standard-Borel alphabets.",
+        "strategy": "Define feasible joint laws directly, specify the empty-feasible-set convention, and distinguish this information quantity from operational coding rates.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-it-general-mutual-information",
+          "def-it-single-letter-distortion-and-block-distortion",
+          "def-standard-borel-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "def-it-operational-rate-distortion-function",
+        "kind": "definition",
+        "title": "Fixed-length operational rate-distortion functions",
+        "statement": "Let $X_0,X_1,\\ldots$ be a source over a finite alphabet $\\mathcal X$, let $\\widehat{\\mathcal X}$ be finite, and let $d$ be finite-valued. An $n$-block fixed-length code with $M_n$ messages is a deterministic encoder $f_n:\\mathcal X^n\\to[M_n]$ and decoder $g_n:[M_n]\\to\\widehat{\\mathcal X}^{\\,n}$; its reconstruction is $\\widehat X^n=g_n(f_n(X^n))$, its block distortion is [[def-it-single-letter-distortion-and-block-distortion]], and its rate is $n^{-1}\\log_2M_n$ bits per source symbol.\n\nDefine the expected-distortion operational rate $R_{\\mathrm{op}}^{\\mathrm{avg}}(D)$ as the infimum of $\\limsup_n n^{-1}\\log_2M_n$ over code sequences satisfying $\\limsup_n\\mathbb E d_n(X^n,\\widehat X^n)\\le D$. Define the positive-slack excess-distortion operational rate $R_{\\mathrm{op}}^{\\mathrm{slack}}(D)$ by the same rate infimum over code sequences satisfying\n\n$$\\text{for every }\\varepsilon>0,\\qquad \\mathbb P\\!\\left(d_n(X^n,\\widehat X^n)>D+\\varepsilon\\right)\\longrightarrow0.$$\n\nThe expected and positive-slack excess criteria are separate definitions. An exact-threshold condition $\\mathbb P(d_n>D)\\to0$ is not part of either definition.",
+        "strategy": "State encoder, decoder, code rate, expected criterion, excess criterion with every positive slack, and infimum convention separately.",
+        "deps": [
+          "def-it-single-letter-distortion-and-block-distortion"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-it-finite-rate-distortion-minimum-attained",
+        "kind": "lemma",
+        "title": "Attainment of finite-alphabet rate-distortion minima",
+        "statement": "Let $\\mathcal X,\\widehat{\\mathcal X}$ be nonempty finite sets, let $p$ be a probability mass function on $\\mathcal X$, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,\\infty)$ be finite-valued. Put\n$$\nD_{\\min}:=\\sum_{x\\in\\mathcal X}p(x)\\min_{\\hat x\\in\\widehat{\\mathcal X}}d(x,\\hat x).\n$$\nFor every $D\\ge0$, the feasible stochastic channels $W(\\hat x\\mid x)$ satisfying $\\sum_{x,\\hat x}p(x)W(\\hat x\\mid x)d(x,\\hat x)\\le D$ form a nonempty set exactly when $D\\ge D_{\\min}$. Whenever nonempty, mutual information in bits attains its minimum over this set.",
+        "strategy": "Identify the minimum feasible distortion by pointwise minimization, use Heine–Borel for the closed channel slice, and prove continuity of the finite mutual-information objective at zero probabilities.",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "thm-heine-borel-rn",
+          "thm-it-information-unit-conversion",
+          "thm-extreme-value-metric"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-it-information-rate-distortion-function",
+        "kind": "definition",
+        "title": "Finite-alphabet information rate-distortion function",
+        "statement": "Let $\\mathcal X,\\widehat{\\mathcal X}$ be nonempty finite alphabets, let $p$ be a pmf on $\\mathcal X$, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,\\infty)$ be finite-valued. A test channel is a stochastic matrix $W(\\hat x\\mid x)$, and its expected single-letter distortion is $\\sum_{x,\\hat x}p(x)W(\\hat x\\mid x)d(x,\\hat x)$, with block distortion as in [[def-it-single-letter-distortion-and-block-distortion]]. Put $D_{\\min}=\\sum_xp(x)\\min_{\\hat x}d(x,\\hat x)$. Define, in bits,\n$$\nR_{p,d}(D):=\\begin{cases}\\displaystyle\\min_{W:\\,\\mathbb E d(X,\\hat X)\\le D} I(X;\\hat X),&D\\ge D_{\\min},\\\\[4pt]+\\infty,&D<D_{\\min}. \\end{cases}\n$$\nThe minimum exists by [[lem-it-finite-rate-distortion-minimum-attained]]. Values are not operational code rates; the finite memoryless coding theorem is a separate claim.",
+        "strategy": "Use the finite mutual-information and bit-conversion suppliers, define the feasible channel simplex and endpoint thresholds, and cite the local compactness lemma for minimum attainment.",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "def-it-single-letter-distortion-and-block-distortion",
+          "lem-it-finite-rate-distortion-minimum-attained",
+          "thm-it-information-unit-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "def-it-stationary-finite-block-information-rdf",
+        "kind": "definition",
+        "title": "Stationary finite-block information rate-distortion function",
+        "statement": "Let $(X_t)_{t\\in\\mathbb Z}$ be a stationary source on a finite nonempty alphabet $\\mathcal X$, let $\\widehat{\\mathcal X}$ be finite nonempty, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be a bounded finite-valued distortion. For $n\\ge1$ and $D\\ge0$, define\n$$\nR_n(D):=\\frac1n\\min_{W_n:\\,\\mathbb E d_n(X_0^{n-1},\\widehat X_0^{n-1})\\le D} I(X_0^{n-1};\\widehat X_0^{n-1})\\quad\\text{bits/symbol},\n$$\nwith value $+\\infty$ when the constraint is infeasible. The minimum is attained whenever feasible by [[lem-it-finite-rate-distortion-minimum-attained]] applied to the block alphabets. Put\n$$\nD_{\\min}:=\\mathbb E\\min_{\\hat x\\in\\widehat{\\mathcal X}}d(X_0,\\hat x),\\qquad D_{\\rm c}:=\\min_{\\hat x\\in\\widehat{\\mathcal X}}\\mathbb E d(X_0,\\hat x),\\qquad R_{\\rm block}(D):=\\inf_{n\\ge1}R_n(D).\n$$\nThe stationary-ergodic process information rate-distortion quantity is\n$$\nR_{\\rm erg}(D):=\\inf \\limsup_{n\\to\\infty}\\frac1n I(X_0^{n-1};\\widehat X_0^{n-1}),\n$$\nwhere the infimum ranges over jointly stationary ergodic pairs of finite-alphabet processes with the given source marginal and $\\mathbb E d(X_0,\\widehat X_0)\\le D$; an empty infimum is $+\\infty$. The block-limit lemma proves $R_n(D)\\to R_{\\rm block}(D)$, convexity, and right continuity at $D_{\\min}$.",
+        "strategy": "State the two-sided source convention, finite block channels, units in bits, infeasibility below D-min, and the upper mutual-information-rate convention for the process infimum; the following lemma proves the block limit.",
+        "deps": [
+          "def-finite-alphabet-stationary-source",
+          "def-it-finite-mutual-information",
+          "def-it-single-letter-distortion-and-block-distortion",
+          "lem-it-finite-rate-distortion-minimum-attained",
+          "thm-it-information-unit-conversion"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-it-gaussian-reference-kernel-information-lower-bound",
+        "kind": "lemma",
+        "title": "Gaussian reference-kernel lower bound",
+        "statement": "Assume AC. Let $X\\sim N(0,\\sigma^2)$ with $\\sigma^2>0$, let $Y$ be any real-valued reconstruction jointly distributed with $X$, and suppose $0<D<\\sigma^2$ and $\\delta:=\\mathbb E(X-Y)^2\\le D$. Then\n\n$$I_{\\mathrm{nat}}(X;Y)\\ge\\frac12\\ln\\frac{\\sigma^2}{D}.$$\n\nNo density for $Y$, conditional differential entropy, or subtraction of potentially infinite entropies is assumed.",
+        "strategy": "Compare the actual joint law to the reference joint law with conditional distribution normal centered at Y and variance D; establish the KL change-of-reference identity, check integrability, and use nonnegative conditional KL.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-it-general-mutual-information",
+          "def-kullback-leibler-divergence",
+          "def-standard-borel-space",
+          "def-standard-normal-and-normal-laws",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-general-kl-chain-rule-for-standard-borel-kernels",
+          "thm-kullback-leibler-is-nonnegative"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-it-rate-distortion-convexity-and-monotonicity",
+        "kind": "lemma",
+        "title": "Convexity, monotonicity, and endpoint continuity of finite rate-distortion",
+        "statement": "Let the source and reproduction alphabets be finite nonempty sets and let the distortion be finite-valued and nonnegative. The finite-alphabet information rate-distortion function $R(D)$ of [[def-it-information-rate-distortion-function]] is finite and nonincreasing on $[D_{\\min},\\infty)$, convex there, zero for $D\\ge D_{\\rm c}:=\\min_{\\hat x}\\mathbb E d(X,\\hat x)$, and right-continuous at every feasible distortion, including $D_{\\min}$.",
+        "strategy": "Use nested feasible channel sets, log-sum convexity, a constant reconstruction, and a finite positive distortion-gap correction whose information cost tends to zero at the lower endpoint.",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "def-it-information-rate-distortion-function",
+          "lem-it-finite-log-sum-inequality",
+          "lem-it-finite-rate-distortion-minimum-attained",
+          "thm-heine-borel-rn",
+          "thm-it-finite-kl-nonnegative-equality"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-it-binary-hamming-rate-distortion",
+        "kind": "theorem",
+        "title": "Binary Hamming rate-distortion function",
+        "statement": "Let $X\\sim\\operatorname{Bernoulli}(p)$, $0\\le p\\le1$, and let the reproduction alphabet be $\\{0,1\\}$ with Hamming distortion $d(x,\\hat x)=\\mathbf1_{\\{x\\ne\\hat x\\}}$. Write $p_0:=\\min(p,1-p)$ and\n$$\nh_2(u):=-u\\log_2u-(1-u)\\log_2(1-u),\\qquad 0\\log_20:=0.\n$$\nThen the finite-alphabet information rate-distortion function is\n$$\nR(D)=\\begin{cases}h_2(p)-h_2(D),&0\\le D\\le p_0,\\\\0,&D\\ge p_0.\\end{cases}\n$$",
+        "strategy": "Use the error indicator and conditional-entropy inequality for the converse, construct the backward binary symmetric test channel for achievability, and separate degenerate and endpoint cases.",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "def-it-information-rate-distortion-function",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-kl-nonnegative-equality"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "alg-it-finite-alphabet-blahut-arimoto",
+        "kind": "algorithm",
+        "title": "Finite-alphabet Blahut–Arimoto rate-distortion algorithm",
+        "statement": "Let $p_1,\\ldots,p_m>0$ be source probabilities summing to one, let $d_{ij}\\ge0$ be finite distortions on a nonempty finite reproduction alphabet $[n]$, and let $\\beta\\ge0$ be finite. Given a full-support initial reproduction pmf $q_0$, for $t=0,1,\\ldots$ set\n$$\nZ_i(q_t)=\\sum_{j=1}^n q_t(j)e^{-\\beta d_{ij}},\\qquad W_t(j\\mid i)=\\frac{q_t(j)e^{-\\beta d_{ij}}}{Z_i(q_t)},\\qquad q_{t+1}(j)=\\sum_{i=1}^m p_iW_t(j\\mid i).\n$$\nAll denominators are positive, every row of $W_t$ sums to one, and $q_{t+1}$ has full support. Define the nats objective $L_\\beta(W)=I_{\\rm nat}(X;\\widehat X)+\\beta\\mathbb E d(X,\\widehat X)$, the current channel value $L_t=L_\\beta(W_t)$, and the a-posteriori factor\n$$\n\\gamma_t:=\\max_{1\\le j\\le n}\\sum_{i=1}^m p_i\\frac{e^{-\\beta d_{ij}}}{Z_i(q_t)}\\ge1.\n$$\nThe certified stopping rule for tolerance $\\tau>0$ is to stop when a rigorous upper interval bound on $\\ln\\gamma_t$ is at most $\\tau$; the certificate theorem proves $L_t-L_\\beta^*\\le\\ln\\gamma_t$. When $p_i,d_{ij},\\beta$ are rational inputs, outward-rounded interval evaluation of the finite formulas and exponentials supplies such bounds. The displayed iteration is the exact-real mathematical recurrence; no bit-complexity bound is asserted.",
+        "strategy": "Specify input and output, exact update equations, support conventions, certificate evaluation, interval arithmetic acceptance rule, and per-iteration operation count.",
+        "deps": [
+          "def-it-information-rate-distortion-function",
+          "lem-it-rate-distortion-convexity-and-monotonicity"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-it-stationary-block-rdf-limit-and-endpoint-continuity",
+        "kind": "lemma",
+        "title": "Stationary block rate-distortion limit and endpoint continuity",
+        "statement": "For a stationary finite-alphabet source and bounded additive distortion as in [[def-it-stationary-finite-block-information-rdf]], the sequence $R_n(D)$ has a limit for every feasible $D$, and\n$$\n\\lim_{n\\to\\infty}R_n(D)=\\inf_{n\\ge1}R_n(D)=R_{\\rm block}(D).\n$$\nThe function $R_{\\rm block}$ is nonincreasing and convex on $[D_{\\min},\\infty)$, is zero for $D\\ge D_{\\rm c}$, and is right-continuous at $D_{\\min}$. It is infinite below $D_{\\min}$.",
+        "strategy": "Concatenate conditionally independent block channels without assuming independent source blocks, apply the finite subadditive argument, and repair excess-distortion coordinates with a correction flag and symbols.",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "def-it-stationary-finite-block-information-rdf",
+          "thm-it-information-unit-conversion",
+          "lem-finite-block-entropy-chain-rule",
+          "lem-it-finite-log-sum-inequality",
+          "lem-it-finite-rate-distortion-minimum-attained",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-markov-data-processing"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-it-finite-alphabet-rate-distortion-coding-theorem",
+        "kind": "theorem",
+        "title": "Finite-alphabet memoryless rate-distortion coding theorem",
+        "statement": "Let $(X_i)_{i\\ge0}$ be iid with a pmf on a finite nonempty alphabet $\\mathcal X$, let $\\widehat{\\mathcal X}$ be finite nonempty, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be finite nonnegative distortion. For every $D\\ge0$, the expected-distortion and positive-slack excess-distortion operational rates of [[def-it-operational-rate-distortion-function]] both equal the finite information rate-distortion function of [[def-it-information-rate-distortion-function]], with value $+\\infty$ when $D<D_{\\min}$.",
+        "strategy": "Prove the converse by finite mutual-information data processing, single-letterization, convexity, and endpoint continuity; prove achievability by a random codebook, an information-density and distortion typical set, default reproduction, and diagonal limits.",
+        "deps": [
+          "def-it-finite-mutual-information",
+          "def-it-information-rate-distortion-function",
+          "def-it-operational-rate-distortion-function",
+          "lem-it-finite-rate-distortion-minimum-attained",
+          "lem-it-rate-distortion-convexity-and-monotonicity",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-conditional-mutual-information-identities-and-equality",
+          "thm-it-finite-markov-data-processing",
+          "cor-iid-finite-variance-weak-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-it-gaussian-squared-error-rate-distortion",
+        "kind": "theorem",
+        "title": "Gaussian squared-error rate-distortion function",
+        "statement": "Assume AC. Let $X\\sim N(0,\\sigma^2)$, where $\\sigma^2\\ge0$, and let squared error $d(x,y)=(x-y)^2$ be used in the standard-Borel information rate-distortion function [[def-it-general-rate-distortion-function]]. For $D\\ge0$, if $\\sigma^2>0$, then\n$$\nR(D)=\\begin{cases}+\\infty,&D=0,\\\\[2pt]\\frac12\\log_2^+(\\sigma^2/D),&D>0,\\end{cases}\n$$\nwhere $\\log_2^+(u)=\\max(0,\\log_2u)$. If $\\sigma^2=0$, then $R(D)=0$ for every $D\\ge0$.",
+        "strategy": "Use the reference-kernel lower bound for arbitrary reconstructions, achieve it by an independent Gaussian decomposition and orthogonal normal invariance, and treat zero distortion and degenerate variance without differential-entropy subtraction.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-it-general-rate-distortion-function",
+          "def-standard-normal-and-normal-laws",
+          "lem-it-gaussian-reference-kernel-information-lower-bound",
+          "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "thm-kullback-leibler-is-nonnegative",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-continuity-from-above-for-measures"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-it-gaussian-vector-squared-error-rate-distortion",
+        "kind": "theorem",
+        "title": "Finite-dimensional Gaussian vector squared-error rate-distortion function",
+        "statement": "Assume AC. Let $m\\ge1$, let $X=(X_1,\\ldots,X_m)$ have independent coordinates $X_i\\sim N(0,\\lambda_i)$ with $\\lambda_i\\ge0$, and let $Y\\in\\mathbb R^m$ be any jointly distributed reconstruction. Use squared Euclidean distortion $\\mathbb E\\|X-Y\\|_2^2$. For $D\\ge0$, the standard-Borel information rate-distortion function of [[def-it-general-rate-distortion-function]] in bits is\n$$\nR(D)=\\begin{cases}+\\infty,&D=0<\\sum_i\\lambda_i,\\\\[2pt] \\frac12\\sum_{i=1}^m\\log_2^+(\\lambda_i/\\theta),&0<D<\\sum_i\\lambda_i,\\\\[2pt] 0,&D\\ge\\sum_i\\lambda_i, \\end{cases}\n$$\nwhere in the middle case $\\theta$ is the unique positive solution of $\\sum_i\\min(\\lambda_i,\\theta)=D$. If all $\\lambda_i=0$, then $R(D)=0$ for every $D\\ge0$.",
+        "strategy": "Lower bound arbitrary vector reconstructions by chain-rule decomposition into coordinate mutual informations and the Gaussian reference-kernel inequality; attain the bound by independent scalar Gaussian test channels and the finite water-level allocation.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-it-general-rate-distortion-function",
+          "def-it-general-mutual-information",
+          "def-measure-theoretic-mutual-information",
+          "def-standard-normal-and-normal-laws",
+          "def-standard-borel-conditional-mutual-information",
+          "lem-it-finite-vector-gaussian-water-level-allocation",
+          "lem-it-gaussian-reference-kernel-information-lower-bound",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-mutual-information-chain-rule",
+          "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "thm-kullback-leibler-is-nonnegative",
+          "thm-continuity-from-above-for-measures",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-it-random-cut-ergodic-block-channel-approximation",
+        "kind": "lemma",
+        "title": "Random-cut stationary ergodic block-channel approximation",
+        "statement": "Assume AC. Let $(X_t)_{t\\in\\mathbb Z}$ be a stationary ergodic source on a finite alphabet $\\mathcal X$, let $\\widehat{\\mathcal X}$ be finite nonempty, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be bounded. For any feasible $D\\ge D_{\\min}$ and any $r>R_{\\rm block}(D)$, there is a jointly stationary ergodic pair $(X_t,\\widehat X_t)_{t\\in\\mathbb Z}$ with the given source marginal, $\\mathbb E d(X_0,\\widehat X_0)\\le D$, and\n$$\n\\limsup_{n\\to\\infty}\\frac1n I(X_0^{n-1};\\widehat X_0^{n-1})<r.\n$$",
+        "strategy": "Use a two-sided iid marker and uniform-seed process, tile complete k-blocks between random cuts, repair leftover suffixes by pointwise minimizers, prove product ergodicity, and bound boundary information without assuming independent source blocks.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-finite-alphabet-stationary-source",
+          "def-measure-theoretic-mutual-information",
+          "def-it-stationary-finite-block-information-rdf",
+          "def-standard-borel-conditional-mutual-information",
+          "lem-it-stationary-block-rdf-limit-and-endpoint-continuity",
+          "thm-birkhoff-ergodic-theorem",
+          "thm-it-finite-markov-data-processing",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "thm-mutual-information-chain-rule"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-it-blahut-arimoto-certified-gap-termination",
+        "kind": "theorem",
+        "title": "Blahut–Arimoto certified gap and termination",
+        "statement": "For the iteration of [[alg-it-finite-alphabet-blahut-arimoto]], let $L_\\beta^*$ be the minimum of $I_{\\rm nat}(X;\\widehat X)+\\beta\\mathbb E d$ over all finite test channels. For every minimizer's output law $q^*$, every integer $t\\ge0$, and full-support initialization $q_0$,\n$$\n0\\le L_t-L_\\beta^*\\le\\frac{D(q^*\\|q_0)}{t+1}.\n$$\nFor uniform $q_0$, this is at most $\\ln n/(t+1)$. At every iteration the a-posteriori bound $L_t-L_\\beta^*\\le\\ln\\gamma_t$ holds; moreover $\\gamma_t\\to1$, so every positive tolerance in the algorithm's stopping rule is eventually certified, including when all minimizers lie on the boundary of the reproduction simplex.",
+        "strategy": "Expand the auxiliary divergence in two ways, prove the KL telescope using Jensen and simplex optimality conditions, establish the certificate, then use compactness and continuity to show the certificate tends to zero.",
+        "deps": [
+          "alg-it-finite-alphabet-blahut-arimoto",
+          "def-it-finite-mutual-information",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "thm-it-finite-kl-nonnegative-equality"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-it-stationary-ergodic-rate-distortion-bounded-distortion",
+        "kind": "theorem",
+        "title": "Stationary-ergodic bounded-distortion rate-distortion theorem",
+        "statement": "Assume AC. Let $(X_t)_{t\\in\\mathbb Z}$ be a stationary ergodic finite-alphabet source, let $\\widehat{\\mathcal X}$ be finite nonempty, and let $d:\\mathcal X\\times\\widehat{\\mathcal X}\\to[0,d_{\\max}]$ be bounded. With the positive-slack operational definitions of [[def-it-operational-rate-distortion-function]] and the stationary quantities of [[def-it-stationary-finite-block-information-rdf]], for every $D\\ge D_{\\min}$,\n$$\nR_{\\rm op}^{\\rm avg}(D)=R_{\\rm op}^{\\rm slack}(D)=R_{\\rm block}(D)=R_{\\rm erg}(D).\n$$\nAll four quantities are $+\\infty$ for $D<D_{\\min}$. At $D=D_{\\min}$, no assertion is made for the stricter exact-threshold requirement $\\mathbb P(d_n>D)\\to0$.",
+        "strategy": "Use the block limit and endpoint continuity for the converse; for achievability use random-cut approximation, finite-alphabet SMB for the source, reproduction, and pair processes, random codebooks, bounded failure distortion, and a diagonal sequence.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-finite-alphabet-stationary-source",
+          "def-it-operational-rate-distortion-function",
+          "def-it-finite-mutual-information",
+          "def-it-stationary-finite-block-information-rdf",
+          "lem-it-random-cut-ergodic-block-channel-approximation",
+          "lem-it-stationary-block-rdf-limit-and-endpoint-continuity",
+          "cor-ergodic-shannon-mcmillan-breiman",
+          "thm-stationary-entropy-rate-limit",
+          "thm-birkhoff-ergodic-theorem",
+          "thm-it-finite-entropy-chain-rule",
+          "thm-it-finite-markov-data-processing"
+        ],
+        "justified_by": [],
+        "dependency_level": 8
+      }
+    ]
+  },
+  {
+    "order": 2515,
+    "id": "rate-distortion-and-lossy-source-coding-examples",
+    "kind": "B",
+    "category": "information-theory",
+    "title": "Rate Distortion and Lossy Source Coding — Examples",
+    "companion": "rate-distortion-and-lossy-source-coding",
+    "requires": [
+      "rate-distortion-and-lossy-source-coding"
+    ],
+    "items": [
+      {
+        "id": "ex-it-binary-hamming-rate-distortion-curve",
+        "kind": "example",
+        "title": "Binary Hamming rate-distortion curve at p equals one quarter",
+        "statement": "For a Bernoulli-$1/4$ source with Hamming distortion, the rates at $D=0,1/8,1/4$ are respectively $h_2(1/4)$, $h_2(1/4)-h_2(1/8)$, and $0$. At $D=1/8$, the backward test-channel reproduction mass is $P(\\widehat X=1)=1/6$; at $D=1/4$, a constant zero reproduction attains rate zero. The rate tends continuously to zero as $D\\uparrow1/4$.",
+        "strategy": "Substitute each distortion into the binary theorem, calculate the backward-channel reproduction mass, and verify endpoint values and continuity.",
+        "deps": [
+          "thm-it-binary-hamming-rate-distortion"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-it-continuous-optimal-reconstruction-need-not-have-a-density",
+        "kind": "counterexample",
+        "title": "A continuous rate-distortion optimizer need not have a density",
+        "statement": "Let $X\\sim N(0,\\sigma^2)$ with $\\sigma^2>0$, use squared-error distortion, and choose $D\\ge\\sigma^2$. The constant reconstruction $Y=0$ attains the Gaussian information rate-distortion value zero, but its law $\\delta_0$ has no density with respect to Lebesgue measure.",
+        "strategy": "Verify feasibility and zero mutual information for the constant reproduction, invoke the Gaussian RDF value, and show a point mass cannot be absolutely continuous with respect to Lebesgue measure.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-it-general-mutual-information",
+          "def-it-general-rate-distortion-function",
+          "def-measure-with-density",
+          "thm-it-gaussian-squared-error-rate-distortion"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-it-gaussian-distortion-waterline",
+        "kind": "example",
+        "title": "Finite Gaussian-vector distortion waterline",
+        "statement": "Let $X_1\\sim N(0,4)$ and $X_2\\sim N(0,1)$ be independent, and use total squared-error budget $D=5/2$. The water level is $\\theta=3/2$, the optimal coordinate distortions are $(3/2,1)$, and the information rate is $\\frac12\\log_2(8/3)$ bits per vector. An attaining reconstruction is $Y_1=\\sqrt{5/2}U$, $Y_2=0$, where $X_1=\\sqrt{5/2}U+\\sqrt{3/2}V$ for independent standard normals $U,V$.",
+        "strategy": "Apply the finite-dimensional Gaussian vector rate-distortion theorem, solve the two-coordinate water-level equation, and verify the independent Gaussian construction and endpoint coordinates.",
+        "deps": [
+          "lem-it-finite-vector-gaussian-water-level-allocation",
+          "thm-it-gaussian-vector-squared-error-rate-distortion"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      }
+    ]
+  }
+]

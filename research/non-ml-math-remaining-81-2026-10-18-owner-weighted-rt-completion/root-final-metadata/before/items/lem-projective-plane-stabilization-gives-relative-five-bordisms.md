@@ -1,0 +1,54 @@
+---
+id: lem-projective-plane-stabilization-gives-relative-five-bordisms
+kind: lemma
+title: "Projective-plane stabilization gives a five-bordism with the prescribed three-boundary"
+status: draft
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+deps: [def-axiom-of-choice, thm-signature-classifies-oriented-smooth-four-bordism, thm-collar-neighborhood-theorem, lem-collar-gluing-and-corner-smoothing-give-transitivity, thm-mayer-vietoris-sequence-in-singular-homology, def-middle-dimensional-intersection-form, lem-signature-and-l-genus-agree-on-complex-projective-spaces, lem-signature-is-additive-under-disjoint-union-and-orientation-reversal]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Justin Roberts, Kirby calculus in manifolds with boundary"
+      url: "https://arxiv.org/abs/math/9812086"
+      locator: "Relative five-bordism setup; the integral bordism input and fixed-collar seam construction are proved by the actual local suppliers here. No Kirby completeness assertion is imported."
+---
+
+## Statement
+
+Assume AC. Let $Y$ be a closed oriented smooth three-manifold and let $W_0,W_1$ be compact oriented smooth four-manifolds, with $W_0$ nonempty, with fixed collars and orientation-preserving parametrizations $\phi_i:\partial W_i\to Y$. Form the actual closed seam $M=(-W_0)\cup_YW_1$ using $\phi_1^{-1}\phi_0$, and put $s=\sigma(M)$. Let $W_0'$ be its interior connected sum with $s$ complex-oriented projective planes for $s\ge0$, or $-s$ oppositely oriented projective planes for $s<0$, using balls away from its boundary collar. Then there is a compact oriented smooth five-manifold with corners $V$ whose identified faces are
+$$\partial V=(-W_0')\cup(Y\times[0,1])\cup W_1,$$
+with exactly the original parametrizations on both corner copies of $Y$ and fixed product collars. The five-manifold $V$ may be chosen connected whenever its nonempty boundary is prescribed; in particular it is connected for the connected nonempty trace case. No condition on any fundamental group is imposed. For two nonempty four-dimensional zero/two-handle traces these connected sums are the split $+1$ or $-1$ framed-unknot insertions in the trace diagram. The theorem asserts existence of this relative five-bordism; it asserts no ordering or cancellation of its handles.
+
+## Facts & Assumptions
+
+**Given:** AC and the oriented smooth manifolds, collars, parametrizations and nonempty $W_0$ in the Statement.
+
+[A1] [[def-axiom-of-choice]] is inherited from the integral bordism and collar suppliers.
+
+[F1] [[thm-signature-classifies-oriented-smooth-four-bordism]] proves that a closed oriented smooth four-manifold of zero signature has an actual compact oriented smooth five-dimensional filling, integrally and with arbitrary fundamental group.
+
+[F2] [[thm-collar-neighborhood-theorem]] supplies a collar of that filling's boundary. [[lem-collar-gluing-and-corner-smoothing-give-transitivity]] proves smooth gluing in signed collars and its orientation convention, with collar comparisons supported at the seam.
+
+[F3] [[thm-mayer-vietoris-sequence-in-singular-homology]] and [[def-middle-dimensional-intersection-form]] compute the middle form of a connected sum by disjoint punctured-summand cycles. [[lem-signature-and-l-genus-agree-on-complex-projective-spaces]] gives signature one for the complex-oriented projective plane; [[lem-signature-is-additive-under-disjoint-union-and-orientation-reversal]] gives the opposite sign after orientation reversal.
+
+## Proof
+
+1.1 The signed collar gluing in [F2] makes $M=(-W_0)\cup_YW_1$ a closed oriented smooth four-manifold. It uses the actual map $\phi_1^{-1}\phi_0$ on points, so no extension or mapping-class change of either boundary parametrization has been assumed. Opposite induced orientations on the two sides are exactly the compatibility condition. Fix its smooth seam collar $Y\times(-2\epsilon,2\epsilon)$. [F2, given, construct]
+
+2.1 Choose all projective-plane connected-sum balls and tubes in the interior of the nonempty $W_0$, disjoint from its boundary collar. If it has several components, any one component suffices for all insertions. The resulting $W_0'$ has exactly its previous parametrized boundary and collar. Its closed seam $M'=(-W_0')\cup_YW_1$ is the interior connected sum of $M$ with the oppositely oriented inserted projective planes. Deleting balls and applying Mayer–Vietoris, using $H_1(S^3)=H_2(S^3)=0$, identifies its second homology as the direct sum of the punctured-summand second homologies. Cycles supported in distinct summands have zero intersections. Hence the middle form is their orthogonal direct sum and $\sigma(M')=s-s=0$. [F3, step 1.1, construct]
+
+3.1 By [F1] choose an oriented smooth compact five-manifold $U$ and an orientation-preserving boundary identification $\partial U\cong M'$. Discard every component of $U$ with empty boundary. If $M'$ is connected, exactly one component remains. More generally join the finitely many remaining components by interior connected sums: remove an interior five-ball in each of two components and identify the two oriented four-sphere boundaries through $S^4\times[0,1]$ by the standard boundary-orientation-reversing gluing. Product annulus charts make this smooth and leave every original boundary collar fixed. A finite tree of these joins makes $U$ connected whenever its boundary is nonempty. Pull the seam marking and its collar back through the original boundary identification; [F2] gives an inward boundary collar of $U$. Thus near the seam there are product coordinates $Y\times(-2\epsilon,2\epsilon)_u\times[0,2\epsilon)_v$, where $v$ is inward and $u$ distinguishes the two four-dimensional pieces. This is an actual marked filling, not a claim that a boundary diffeomorphism extends across some previously chosen filling. [F1, F2, step 2.1, construct]
+
+3.2 To identify the trace insertion explicitly, decompose $\mathbb {CP}^2$ by homogeneous coordinates $[v_0:v_1:w]$. The region $|w|^2\le c(|v_0|^2+|v_1|^2)$ is the oriented disk bundle of $\operatorname{Hom}(\gamma,\mathbb C)=\gamma^*$ over the projective line $[v_0:v_1]$, of Euler number $+1$. Its complementary region is a four-ball in the chart $w\ne0$, with coordinates $(v_0/w,v_1/w)$. The disk bundle has one zero-handle and a two-handle attached to an unknot with framing $+1$: trivialize over the two hemispheres of the base sphere; the equatorial clutching of the oriented fiber has winding one, which is exactly the attaching framing. Reverse orientation for the $-1$ version. Its boundary is the standard Hopf $S^3$, so boundary connecting this punctured projective plane to a zero/two-handle trace in a disjoint small ball is the interior connected sum. In a framed-link presentation this is adjoining a split $+1$ or $-1$ unknot, with no change to the external boundary parametrization. [F3, step 2.1, construct]
+
+3.3 The disjoint-union bordism class used by [F1] agrees with the connected-sum construction: attach a five-dimensional one-handle to $(A\sqcup B)\times[0,1]$ along one outgoing interior four-ball in each component. Its outgoing face is $A\#B$, as the two product boundary disks are replaced by the boundary cylinder of that handle. All pre-existing external boundary collars remain products. This also shows directly that no hidden cancellation or simple-connectivity theorem is being used to identify the two conventions. [F2, step 2.1, construct]
+
+4.1 Open this seam to a vertical face by removing a small notch along $Y\times\{u=v=0\}$. In the $(u,v)$ half-plane choose the remaining boundary to be a left horizontal ray, a compact smooth arc, and a right horizontal ray, unchanged outside a small rectangle. Give the arc endpoints distinct inward tangent directions from the horizontal rays, so these two points are quadrant corners. Smooth the arc only away from those endpoints and use explicit quadrant charts at the endpoints; taking its product with $Y$ defines a smooth manifold with corners. The arc becomes the vertical face $Y\times[0,1]$. The left and right boundary pieces are the original $-W_0'$ and $W_1$ with short boundary collars removed. The inward side of the chosen arc is the side retained in the region, so the orientation inherited from $U$ extends over these charts. [F2, step 3.1, construct]
+
+5.1 Identify each shortened horizontal face with its original face by a smooth increasing collar map $[0,2\epsilon)\to[\epsilon,2\epsilon)$, equal to the identity near $2\epsilon$, and the identity off that collar. Such a map is obtained by choosing a positive smooth derivative, equal to one near the far end and with the required integral on the remaining interval. Parametrize the new arc monotonically by $[0,1]$ and take the identity on $Y$; choose its endpoint parametrizations to agree with the transported horizontal collars. Thus the two corner copies of $Y$ have precisely the original maps $\phi_0,\phi_1$, point by point. The new corner charts give compatible product collars of all three faces. The induced horizontal orientations are $-W_0'$ and $W_1$; the vertical face has the boundary orientation induced from the same $U$. All notch and collar operations are confined to the chosen product neighborhood. The notch removes only a boundary collar region, and each retained point of its local half-plane model can be joined to the unchanged interior. Consequently it preserves connectedness of the chosen $U$. This constructs the stated connected $V$. [F2, step 3.1, step 4.1, construct]
+
+6.1 For disconnected $Y$ perform the notch construction on its finitely many disjoint collar components. If product corner strata are prescribed as part of the input, take every notch and reparametrization as the identity in those extra product coordinates; their collars remain the prescribed ones. For $Y$ empty no notch is required. None of the operations restricts or changes a fundamental-group hypothesis, and no such hypothesis was supplied. The case of two empty traces is the empty product; a lone empty $W_0$ with closed nonempty $W_1$ is outside the connected-sum clause and can instead be handled by adjoining disjoint closed projective planes. In the stated nonempty trace case all insertions and faces are exactly those constructed above. [A1, F1, step 5.1, step 3.2, step 3.3] ∎

@@ -23,9 +23,6 @@ items: [def-left-dual-and-right-dual-object,
         rem-what-is-needed-before-a-trace-can-be-written,
         def-pivotal-structure,
         def-the-dimension-of-an-object-relative-to-a-pivotal-structure,
-        def-spherical-structure,
-        rem-pivotal-and-spherical-structures-vary-by-monoidal-automorphisms-of-the-identity,
-        thm-in-a-spherical-category-the-left-and-right-traces-agree,
         thm-basic-properties-of-the-categorical-trace,
         def-twist-and-ribbon-structure,
         thm-a-twist-on-a-braided-rigid-category-is-the-same-thing-as-a-pivotal-structure-of-drinfeld-type,
@@ -35,9 +32,7 @@ examples: [cex-not-every-monoidal-category-is-rigid,
            fs-a-trace-can-be-defined-for-an-endomorphism-in-any-monoidal-category,
            fs-a-braiding-suffices-to-define-a-trace,
            fs-left-and-right-duals-of-an-object-are-isomorphic,
-           fs-every-monoidal-category-is-rigid,
-           fs-the-left-and-right-traces-always-agree,
-           fs-the-dimension-of-an-object-is-independent-of-the-pivotal-structure]
+           fs-every-monoidal-category-is-rigid]
 ---
 
 This page keeps three distinctions sharp. Left and right duals are different
@@ -48,6 +43,7 @@ track.
 
 The route is duality first, then rigidity and concrete vector-space witnesses,
 then functorial duality and the Drinfeld morphism, and only then the
-trace-pivotal-spherical-ribbon ladder. The false statements at the end are
+trace-pivotal-ribbon ladder. The tensor-category setting for spherical structures
+and the equality of their traces continues on [[tensor-and-fusion-categories]]. The false statements at the end are
 there to stop the common collapses: braiding is not yet trace, pivotal data can
 vary, and left and right duals need not coincide.

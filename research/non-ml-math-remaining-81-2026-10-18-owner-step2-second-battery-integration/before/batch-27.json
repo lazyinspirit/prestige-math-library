@@ -1,0 +1,1158 @@
+{
+  "version": 1,
+  "level": "non-ml-math-remaining-81-2026-10-18-batch-27",
+  "scope": [
+    "def-finite-layered-trellis",
+    "def-finite-hidden-markov-model-for-sequence-decoding",
+    "lem-finite-trellis-prefix-score-recurrence",
+    "lem-finite-hmm-joint-law-normalizes",
+    "alg-viterbi-max-product-on-finite-trellis",
+    "thm-viterbi-finite-trellis-is-optimal",
+    "alg-hmm-viterbi-sequence-map",
+    "thm-hmm-viterbi-is-sequence-map",
+    "cex-hmm-zero-evidence-has-no-posterior-map",
+    "cex-hmm-marginal-modes-are-not-sequence-map",
+    "ex-finite-trellis-viterbi-tie-and-unreachable-state",
+    "ex-hmm-viterbi-exact-sequence-map"
+  ],
+  "contracts": {
+    "def-finite-layered-trellis": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition expressly permits T=0 and assigns the unique empty tuple score 1. At T>=1 an empty layer makes the Cartesian set of admissible paths empty; these cases cannot be marked outside the domain.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The Definition expressly permits T=0 and assigns the unique empty tuple score 1. At T>=1 an empty layer makes the Cartesian set of admissible paths empty; these cases cannot be marked outside the domain.",
+            "item_sha256": "722028f8a312fe0907ab3394932ee094017d144c015e4030594a1c5115ff1e59",
+            "row_sha256": "75739072322ded30385628274be387289ce7acf45288613135aa3ada7ed4200b"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition requires every included edge weight positive; zero alpha or beta disables its endpoint. At T=0 the empty product is 1, while no admissible path at T>=1 is reported as absent rather than given a zero score.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The Definition requires every included edge weight positive; zero alpha or beta disables its endpoint. At T=0 the empty product is 1, while no admissible path at T>=1 is reported as absent rather than given a zero score.",
+            "item_sha256": "722028f8a312fe0907ab3394932ee094017d144c015e4030594a1c5115ff1e59",
+            "row_sha256": "f7ee91ad2e9eba054cc76a525f45823231e41e851666e62feebd1fb0b875f296"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At T=1 the edge-weight product has no factors and equals 1. Each admissible path is a vertex v with alpha(v)>0 and beta(v)>0, with score alpha(v)beta(v).",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "At T=1 the edge-weight product has no factors and equals 1. Each admissible path is a vertex v with alpha(v)>0 and beta(v)>0, with score alpha(v)beta(v).",
+            "item_sha256": "722028f8a312fe0907ab3394932ee094017d144c015e4030594a1c5115ff1e59",
+            "row_sha256": "dde9ce3a42f7258910d9df3a14cd8c5c995a7fd9821367d460665a0b6ede816c"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At T>=1 empty layers admit no paths; singleton layers give at most one vertex tuple, admissible precisely when the endpoints and all required edges are enabled. T=0 has the separately defined unique empty path.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "At T>=1 empty layers admit no paths; singleton layers give at most one vertex tuple, admissible precisely when the endpoints and all required edges are enabled. T=0 has the separately defined unique empty path.",
+            "item_sha256": "722028f8a312fe0907ab3394932ee094017d144c015e4030594a1c5115ff1e59",
+            "row_sha256": "2bc4ddd1c3f4027f2d5917e32febc26974f1e34e6ba3f9a376e2163480163cc4"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Path admissibility explicitly requires alpha(v_1)>0 and beta(v_T)>0, and the score multiplies those endpoint weights. Prefix paths drop the terminal condition, so reachability does not require beta>0.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "Path admissibility explicitly requires alpha(v_1)>0 and beta(v_T)>0, and the score multiplies those endpoint weights. Prefix paths drop the terminal condition, so reachability does not require beta>0.",
+            "item_sha256": "722028f8a312fe0907ab3394932ee094017d144c015e4030594a1c5115ff1e59",
+            "row_sha256": "c967a0905ea98399fff802ccf40b77c237fbace071cf2e4ad5c76b0671ebc150"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The trellis Definition supplies finite sets and scores but no total order or tie-breaking instruction. Finiteness ensures a maximum is attained if paths exist; it does not choose among a family of tied paths. The supplied orders belong to the separate Viterbi algorithm.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The trellis Definition supplies finite sets and scores but no total order or tie-breaking instruction. Finiteness ensures a maximum is attained if paths exist; it does not choose among a family of tied paths. The supplied orders belong to the separate Viterbi algorithm.",
+            "item_sha256": "722028f8a312fe0907ab3394932ee094017d144c015e4030594a1c5115ff1e59",
+            "row_sha256": "32f1ae21f88f4400b2d3e605ba0e4250d1ea4c64de3010e3a67e6bae4d5586a7"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this definition or procedure.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "Paths and reachability are defined predicates; there is no biconditional theorem. The Definition explicitly gives the unique empty path of score 1 at T=0, empty edge product 1 at T=1, positive edge weights, and disabled endpoints of zero weight.",
+            "item_sha256": "722028f8a312fe0907ab3394932ee094017d144c015e4030594a1c5115ff1e59",
+            "row_sha256": "007999ff0cbee8b20590e2b8cddd0eb97deebe9e4a728ab2a1f36139cb99c2b5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is asserted in this definition or procedure.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "Paths and reachability are defined predicates; there is no biconditional theorem. The Definition explicitly gives the unique empty path of score 1 at T=0, empty edge product 1 at T=1, positive edge weights, and disabled endpoints of zero weight.",
+            "item_sha256": "722028f8a312fe0907ab3394932ee094017d144c015e4030594a1c5115ff1e59",
+            "row_sha256": "555702cb4a920fd6aed9f16814ec166b59801a39b185bc5f44c2fd60c52f2fb3"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-finite-hidden-markov-model-for-sequence-decoding": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The HMM Definition requires nonempty S and Y and T≥1.",
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "S,Y are finite nonempty and observation length T>=1. The HMM Definition normalizes pi and the A,B rows, uses an empty transition product at T=1, and leaves posterior path mass undefined at zero evidence."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly permits zero initial, transition, and emission probabilities."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The joint-mass formula uses an empty transition product when T=1. Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singleton finite state and observation sets satisfy the stated row-sum conditions. Definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition states the initial law and each emission law; terminal transition is not part of the model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition uses finite sums and no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in the Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted in the Definition."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-trellis-prefix-score-recurrence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-layered-trellis",
+          "source_section": "Definition",
+          "quote": "A **finite weighted trellis** has an integer length $T\\ge0$. If $T=0$, it is\nthe empty structure, with no vertex layers, edges, or endpoint weights. If\n$T\\ge1$, it consists of finite vertex sets $V_1,\\ldots,V_T$, edge sets\n$E_t\\subseteq V_{t-1}\\times V_t$ for $2\\le t\\le T$, positive edge weights\n$w_t:E_t\\to(0,\\infty)$, and initial and terminal weights\n$\\alpha:V_1\\to[0,\\infty)$ and $\\beta:V_T\\to[0,\\infty)$. The sets $V_t$ may\nbe empty. A zero initial or terminal weight disables that endpoint; every edge\nin $E_t$ is allowed and has positive weight.\n\nA **path** for $T\\ge1$ is a tuple $(v_1,\\ldots,v_T)$ with $v_t\\in V_t$,\n$\\alpha(v_1)>0$, $\\beta(v_T)>0$, and $(v_{t-1},v_t)\\in E_t$ for every\n$2\\le t\\le T$. Its **score** is\n$$\\alpha(v_1)\\left(\\prod_{t=2}^{T}w_t(v_{t-1},v_t)\\right)\\beta(v_T),$$\nwhere the empty product for $T=1$ is $1$. For $T=0$, the unique path is the\nempty tuple, with score $1$ (the empty product).\n\nA **prefix path through layer $t$**, for $1\\le t\\le T$, satisfies the same\nconditions through $v_t$, without a terminal-weight condition. For $T=0$,\nthe empty tuple is the unique prefix path through no layers, with score $1$.\nA vertex $v\\in V_t$ is **reachable** if some prefix path ends at $v$;\notherwise it is **unreachable**. There are finitely many paths. If at least\none path exists, its maximum score is attained; if none exists, the trellis\nhas no admissible path.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $T=0$, the unique prefix path through no layers is empty and has score $1$. For $T\\ge1$, at layer $1$ the only prefix ending at $v$ is the one-vertex prefix. It exists exactly when $\\alpha(v)>0$, and then has score $\\alpha(v)=D_1(v)$; when $\\alpha(v)=0$ there is no prefix and $D_1(v)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $t\\ge2$ and $v\\in V_t$. Every prefix ending at $v$ has a predecessor $u$ with $(u,v)\\in E_t$ and is obtained by appending that edge to a prefix ending at $u$. Its score is the predecessor-prefix score multiplied by the positive weight $w_t(u,v)$. By [A1], the best such extension through each $u$ has score $D_{t-1}(u)w_t(u,v)$; if no predecessor prefix exists this value is zero. Taking the maximum over the finite predecessor set, with zero when it is empty, gives exactly the stated recurrence.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The $T=0$ case and the base case in step 1.1, together with the induction step in step 1.2, prove the claim for every trellis length and every layer.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the zero candidate when the predecessor set is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 set the value to zero exactly when there is no positive prefix path."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the one-layer base case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 covers empty layers and vertices with no reachable predecessor."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the initial weight; the prefix definition deliberately omits the terminal weight."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 takes a maximum over a finite predecessor set and makes no choice of a family of witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The recurrence statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The recurrence statement is not an if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-hmm-joint-law-normalizes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-hidden-markov-model-for-sequence-decoding",
+          "source_section": "Definition",
+          "quote": "A **finite discrete hidden Markov model (HMM)** is a tuple\n$(S,Y,\\pi,A,B)$, where $S$ is a finite nonempty hidden-state set, $Y$ is a\nfinite nonempty observation alphabet, $\\pi:S\\to[0,1]$ is an initial\nprobability distribution, $A:S\\times S\\to[0,1]$ is a transition matrix, and\n$B:S\\times Y\\to[0,1]$ is an emission matrix. The parameters satisfy\n$$\\sum_{s\\in S}\\pi(s)=1,\\qquad \\sum_{s'\\in S}A(s,s')=1\\quad(s\\in S),\\qquad \\sum_{y\\in Y}B(s,y)=1\\quad(s\\in S).$$\n\nFor each length $T\\ge1$, hidden path $z=(z_1,\\ldots,z_T)\\in S^T$, and\nobservation sequence $y=(y_1,\\ldots,y_T)\\in Y^T$, define the joint mass\n$$p(z,y)=\\pi(z_1)B(z_1,y_1)\\prod_{t=2}^{T}A(z_{t-1},z_t)B(z_t,y_t).$$\nThe **evidence** of $y$ is $p(y)=\\sum_{z\\in S^T}p(z,y)$. When $p(y)>0$,\nthe conditional path mass is $p(z\\mid y)=p(z,y)/p(y)$, and a\n**sequence MAP (maximum-a-posteriori) path** is any $z$ maximizing this conditional mass. If $p(y)=0$,\nthe conditional path mass is undefined, so there is no posterior sequence MAP\npath for that observation sequence. A zero transition or emission factor gives\nthat hidden path zero joint mass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sum-emissions",
+          "claim": "For a fixed hidden path, summing the joint mass over all finite observation sequences removes each emission factor by its row sum.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sum-transitions",
+          "claim": "Summing the remaining state path from the last state backward removes transition rows and leaves the normalized initial law.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The HMM Definition requires nonempty state and observation sets and T≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 allows zero emission factors; the row sums still give total emission mass one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 cover T=1, when the transition product is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A singleton state or observation alphabet is allowed and its normalized row contributes one. Step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the transition rows and final initial-distribution sum; step 1.1 sums all emissions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof rearranges finite sums only and is choice-free. Step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The normalization statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The normalization statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-viterbi-max-product-on-finite-trellis": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The initial operational branch returns the empty path and score 1 at T=0. For T>=1 with an empty terminal layer, the universal condition every Q(v)=0 is vacuous, so the procedure returns no admissible path.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The initial operational branch returns the empty path and score 1 at T=0. For T>=1 with an empty terminal layer, the universal condition every Q(v)=0 is vacuous, so the procedure returns no admissible path.",
+            "item_sha256": "663365036242b193f9746ea3c23f1203c5738ef553fda3ef5d442ba1cd137a07",
+            "row_sha256": "d92634822b25565ccfbccbe08d59aa476e73278719ab1e59fe911b69f5880efa"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Each recurrence maximizes predecessor products together with {0}, so an absent or disabled incoming path gives D_t(v)=0 and no pointer. Zero terminal score at every vertex returns no admissible path before traceback.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "Each recurrence maximizes predecessor products together with {0}, so an absent or disabled incoming path gives D_t(v)=0 and no pointer. Zero terminal score at every vertex returns no admissible path before traceback.",
+            "item_sha256": "663365036242b193f9746ea3c23f1203c5738ef553fda3ef5d442ba1cd137a07",
+            "row_sha256": "749091e9d83fd163c2b72add3576087b87b57ae3e88410bd9271b28cbfaee731"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For T=1 the transition loop and traceback pointer list are empty. Initialization D_1=alpha followed by Q=alpha beta selects the first maximizing enabled terminal vertex, or reports no path when all scores vanish.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "For T=1 the transition loop and traceback pointer list are empty. Initialization D_1=alpha followed by Q=alpha beta selects the first maximizing enabled terminal vertex, or reports no path when all scores vanish.",
+            "item_sha256": "663365036242b193f9746ea3c23f1203c5738ef553fda3ef5d442ba1cd137a07",
+            "row_sha256": "c0ffa969f105c30fe87c728250bc4be419881448846c5fc375f206a4b46e765a"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Empty layers propagate zero scores through the recurrence (the maximum includes 0), and an empty terminal layer triggers the universal zero check. Singleton layers have a forced predecessor whenever the score is positive; T=0 is handled before initialization.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "Empty layers propagate zero scores through the recurrence (the maximum includes 0), and an empty terminal layer triggers the universal zero check. Singleton layers have a forced predecessor whenever the score is positive; T=0 is handled before initialization.",
+            "item_sha256": "663365036242b193f9746ea3c23f1203c5738ef553fda3ef5d442ba1cd137a07",
+            "row_sha256": "8b932734ed0ffd529abcc005c37e5f82afab5f7c1af6fa8472a72da8437bd566"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Initialization uses alpha and the final comparison multiplies D_T(v) by beta(v). A zero beta disables a reachable terminal vertex; successful traceback starts only at a vertex with positive final Q.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "Initialization uses alpha and the final comparison multiplies D_T(v) by beta(v). A zero beta disables a reachable terminal vertex; successful traceback starts only at a vertex with positive final Q.",
+            "item_sha256": "663365036242b193f9746ea3c23f1203c5738ef553fda3ef5d442ba1cd137a07",
+            "row_sha256": "e37b6eb107db45c6edd8b019c6dbee004731abf2e85db1df8bd0af64a10fa171"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For D_t(v)>0 at least one finite predecessor attains the maximum, and the supplied vertex order selects the first. The final positive maximum is selected by the terminal order, so no arbitrary-family choice is required.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "For D_t(v)>0 at least one finite predecessor attains the maximum, and the supplied vertex order selects the first. The final positive maximum is selected by the terminal order, so no arbitrary-family choice is required.",
+            "item_sha256": "663365036242b193f9746ea3c23f1203c5738ef553fda3ef5d442ba1cd137a07",
+            "row_sha256": "99771973ca93ba8fa874b717e8d618b0d68f958a4246bf40b9cd6afc76e312e5"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this definition or procedure.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "This is an operational recurrence and output procedure, not a biconditional assertion. The Definition returns empty path score 1 at T=0; otherwise D uses a maximum with {0}, omits pointers at D=0, checks terminal Q, and traces back through first maximizing predecessors.",
+            "item_sha256": "663365036242b193f9746ea3c23f1203c5738ef553fda3ef5d442ba1cd137a07",
+            "row_sha256": "007999ff0cbee8b20590e2b8cddd0eb97deebe9e4a728ab2a1f36139cb99c2b5"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is asserted in this definition or procedure.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "This is an operational recurrence and output procedure, not a biconditional assertion. The Definition returns empty path score 1 at T=0; otherwise D uses a maximum with {0}, omits pointers at D=0, checks terminal Q, and traces back through first maximizing predecessors.",
+            "item_sha256": "663365036242b193f9746ea3c23f1203c5738ef553fda3ef5d442ba1cd137a07",
+            "row_sha256": "555702cb4a920fd6aed9f16814ec166b59801a39b185bc5f44c2fd60c52f2fb3"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-viterbi-finite-trellis-is-optimal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-layered-trellis",
+          "source_section": "Definition",
+          "quote": "A **finite weighted trellis** has an integer length $T\\ge0$. If $T=0$, it is\nthe empty structure, with no vertex layers, edges, or endpoint weights. If\n$T\\ge1$, it consists of finite vertex sets $V_1,\\ldots,V_T$, edge sets\n$E_t\\subseteq V_{t-1}\\times V_t$ for $2\\le t\\le T$, positive edge weights\n$w_t:E_t\\to(0,\\infty)$, and initial and terminal weights\n$\\alpha:V_1\\to[0,\\infty)$ and $\\beta:V_T\\to[0,\\infty)$. The sets $V_t$ may\nbe empty. A zero initial or terminal weight disables that endpoint; every edge\nin $E_t$ is allowed and has positive weight.\n\nA **path** for $T\\ge1$ is a tuple $(v_1,\\ldots,v_T)$ with $v_t\\in V_t$,\n$\\alpha(v_1)>0$, $\\beta(v_T)>0$, and $(v_{t-1},v_t)\\in E_t$ for every\n$2\\le t\\le T$. Its **score** is\n$$\\alpha(v_1)\\left(\\prod_{t=2}^{T}w_t(v_{t-1},v_t)\\right)\\beta(v_T),$$\nwhere the empty product for $T=1$ is $1$. For $T=0$, the unique path is the\nempty tuple, with score $1$ (the empty product).\n\nA **prefix path through layer $t$**, for $1\\le t\\le T$, satisfies the same\nconditions through $v_t$, without a terminal-weight condition. For $T=0$,\nthe empty tuple is the unique prefix path through no layers, with score $1$.\nA vertex $v\\in V_t$ is **reachable** if some prefix path ends at $v$;\notherwise it is **unreachable**. There are finitely many paths. If at least\none path exists, its maximum score is attained; if none exists, the trellis\nhas no admissible path.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-trellis-prefix-score-recurrence",
+          "source_section": "Statement",
+          "quote": "For a finite weighted trellis with $T=0$, the unique prefix path through no\nlayers is empty and has score $1$. For $T\\ge1$, define $D_1(v)=\\alpha(v)$ and,\nfor $2\\le t\\le T$,\n$$D_t(v)=\\max\\bigl(\\{D_{t-1}(u)w_t(u,v):(u,v)\\in E_t\\}\\cup\\{0\\}\\bigr).$$\nThen $D_t(v)$ is the maximum score of a prefix path ending at $v$; if no such\nprefix exists, $D_t(v)=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-viterbi-max-product-on-finite-trellis",
+          "source_section": "Definition",
+          "quote": "**Input:** A finite weighted trellis and a total order on each vertex set.\n\n**Output:** “No admissible path,” or an admissible path and its score.\n\nIf $T=0$, return the empty path with score $1$. Otherwise perform the following\nsteps:\n\n1. Set $D_1(v)=\\alpha(v)$ for all $v\\in V_1$. For each layer $t=2,\\ldots,T$ and\n   each $v\\in V_t$, compute\n   $$D_t(v)=\\max\\bigl(\\{D_{t-1}(u)w_t(u,v):(u,v)\\in E_t\\}\\cup\\{0\\}\\bigr).$$\n   If $D_t(v)>0$, store as $p_t(v)$ the first predecessor $u$ in the supplied\n   vertex order attaining this maximum; if $D_t(v)=0$, leave $p_t(v)$\n   undefined.\n2. Compute $Q(v)=D_T(v)\\beta(v)$ for all $v\\in V_T$. If every $Q(v)=0$,\n   return “no admissible path.”\n3. Otherwise choose the first $v_T$ in the supplied order maximizing $Q(v)$,\n   and follow the stored pointers $p_T(v_T),p_{T-1}(v_{T-1}),\\ldots,p_2(v_2)$\n   backwards. Return the resulting path and its score $Q(v_T)$.\n\nThe stored predecessor at each layer is a **backpointer**. Following these\npointers backward from a maximizing terminal vertex is called **traceback**.\nThe given orders make the returned path deterministic when several paths have\nthe same maximum score. The empty path at $T=0$ is the unique path and is\ntherefore the unique maximum-score output in that case.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $T=0$, [F1] gives the unique empty path and its score $1$, which the branch in [F3] returns. If $T\\ge1$, [F2] shows that every positive $D_t(v)$ is attained by a prefix path and a zero value means there is no such prefix. Therefore, for each terminal vertex $v$, $D_T(v)\\beta(v)>0$ exactly when some full path ends at $v$; when positive it is the largest score of such a path.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $T\\ge1$. The finite set of terminal values has a positive maximum exactly when at least one full path exists. If it is positive, let $v_T$ be the maximizing terminal vertex; then $D_T(v_T)>0$ and $\\beta(v_T)>0$. If $T=1$, then $D_1(v)=\\alpha(v)$ and $Q(v)=\\alpha(v)\\beta(v)$, so the selected one-vertex tuple $(v_1)$ is already an admissible path of maximum score; no backpointer is needed. If $T\\ge2$, then by [F3], $p_T(v_T)$ is defined and selects an allowed edge from some $v_{T-1}$ with $D_{T-1}(v_{T-1})w_T(v_{T-1},v_T)=D_T(v_T)>0$, so $D_{T-1}(v_{T-1})>0$ because the edge weight is positive. In the $T\\ge2$ case, repeating this argument for the layers $t=T,T-1,\\ldots,2$ shows every pointer is defined, each selected pair is an allowed edge, and the chain ends at $v_1$ with $D_1(v_1)=\\alpha(v_1)>0$. The chain is therefore a path, and its score is $D_T(v_T)\\beta(v_T)$, the maximum terminal value from step 1.1. If all terminal values are zero, step 1.1 shows there is no path, so the algorithm correctly returns “no admissible path.” The $T=0$ case is settled by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "induction",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The $T=0$ branch takes constant time. For $T\\ge1$, each vertex is initialized or scanned a bounded number of times, each edge contributes one candidate product and comparison, and traceback visits at most $T$ layers. Thus the time is $O(1+T+V+E)$. The algorithm stores at most one backpointer per vertex and scores for the current and preceding layers, so auxiliary storage is $O(1+V)$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Final Proof step 1.1: T=0 has the unique empty path with score1, returned by the explicit algorithm branch. For T>=1, Proof step 2.1 returns no path exactly when all terminal values are0, including an empty terminal layer."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Final Proof step 1.1 treats T=0 separately and, for T>=1, identifies D_t(v)=0 with no prefix. Proof step 2.1 handles all terminal values0 as no full path; allowed edges remain strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Final Proof step 2.1 treats T=1 directly: D_1(v)=alpha(v), Q(v)=alpha(v)beta(v), and the maximizing one-vertex tuple already has optimal score. No p_1 backpointer is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Final Proof steps 1.1,2.1 cover empty layers or disabled initial/terminal weights via zero prefix/terminal scores; the T=0 empty path remains valid rather than being reported as missing."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Final Proof step 1.1 multiplies the maximal prefix D_T(v) by beta(v). Proof step 2.1 verifies initial alpha(v_1)>0 and terminal beta(v_T)>0; at T=1 the exact score is alpha(v)beta(v)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Actual axiom_use states no choice axiom: proof2.1 uses finite maxima and the supplied total vertex orders for ties. Proof3.1 uses those stored choices for finite traceback, not a family choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Final Proof step 2.1: if no full path exists, Proof step 1.1 makes all terminal candidates0 and the algorithm reports no path. T=0 instead has its unique path by Proof step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Final Proof step 2.1: a positive terminal maximum yields an actual optimal path, directly at T=1 and by pointers only at t>=2. Hence a no-path output implies no full path exists; Proof step 1.1 separately covers T=0."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-hmm-viterbi-sequence-map": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The HMM procedure requires T>=1 and finite nonempty S,Y, so there is no empty observation frame. It can construct an edge-empty trellis from zero transition/emission factors; the delegated algorithm then reports no admissible path as specified.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The HMM procedure requires T>=1 and finite nonempty S,Y, so there is no empty observation frame. It can construct an edge-empty trellis from zero transition/emission factors; the delegated algorithm then reports no admissible path as specified.",
+            "item_sha256": "2fc35c93f6bfad4415cb658ce40c475f5ccba76ba20f714952b5aac094670bad",
+            "row_sha256": "1f030edd374e031e2c0292e0c0c9f84e45f2a5cd6dbee54aa978275f310abbb7"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition initializes alpha_y(s)=pi(s)B(s,y_1), omits every zero transition/emission edge, and uses beta=1. No positive path produces the explicit zero-evidence/no-conditional-MAP output; zero evidence is not normalized into a posterior.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The Definition initializes alpha_y(s)=pi(s)B(s,y_1), omits every zero transition/emission edge, and uses beta=1. No positive path produces the explicit zero-evidence/no-conditional-MAP output; zero evidence is not normalized into a posterior.",
+            "item_sha256": "2fc35c93f6bfad4415cb658ce40c475f5ccba76ba20f714952b5aac094670bad",
+            "row_sha256": "03d49e336775545bbd93d453841516331e94bc622db6fa156c046e9cb2a4da29"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For T=1 the edge-construction loop is empty. The delegated trellis algorithm maximizes alpha_y(s)=pi(s)B(s,y_1) with beta_y(s)=1; it returns a maximizing state or reports zero evidence when all these masses are 0.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "For T=1 the edge-construction loop is empty. The delegated trellis algorithm maximizes alpha_y(s)=pi(s)B(s,y_1) with beta_y(s)=1; it returns a maximizing state or reports zero evidence when all these masses are 0.",
+            "item_sha256": "2fc35c93f6bfad4415cb658ce40c475f5ccba76ba20f714952b5aac094670bad",
+            "row_sha256": "b9af94a38211dde6ccbf256b587c0de3234615266af7a7385accb4de6b8880e0"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "S may be singleton but is never empty under the HMM input domain. Then the only hidden tuple is returned if every initial/emission/transition factor on it is positive; otherwise the trellis has no positive path and returns no conditional MAP.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "S may be singleton but is never empty under the HMM input domain. Then the only hidden tuple is returned if every initial/emission/transition factor on it is positive; otherwise the trellis has no positive path and returns no conditional MAP.",
+            "item_sha256": "2fc35c93f6bfad4415cb658ce40c475f5ccba76ba20f714952b5aac094670bad",
+            "row_sha256": "c6715c64a9797d36cb7e7d286afd006b1e0d125ef157b1a35a04e554585f6004"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The HMM trellis uses alpha_y(s)=pi(s)B(s,y_1) at the first observation and beta_y(s)=1 at the terminal layer. Thus no extra terminal factor changes the HMM joint path mass, including the T=1 frame.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The HMM trellis uses alpha_y(s)=pi(s)B(s,y_1) at the first observation and beta_y(s)=1 at the terminal layer. Thus no extra terminal factor changes the HMM joint path mass, including the T=1 frame.",
+            "item_sha256": "2fc35c93f6bfad4415cb658ce40c475f5ccba76ba20f714952b5aac094670bad",
+            "row_sha256": "51b59ef9f5c1ff964a0c5d8191a1f5ddc8a57f8733dcfe6110e70af31afb361b"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The supplied total order on S is reused on each layer, and the delegated max-product procedure takes the first maximizing predecessor and terminal state. The selected path is deterministic even when joint masses tie.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The supplied total order on S is reused on each layer, and the delegated max-product procedure takes the first maximizing predecessor and terminal state. The selected path is deterministic even when joint masses tie.",
+            "item_sha256": "2fc35c93f6bfad4415cb658ce40c475f5ccba76ba20f714952b5aac094670bad",
+            "row_sha256": "b8217d3a246fae0c70c4e742c41415d1c088e8153f45011dcd07f9491a3364cf"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted in this definition or procedure.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The word exactly when specifies edge inclusion in step 2, a defining instruction rather than a mathematical equivalence theorem. The Definition uses alpha=pi B(y_1), beta=1, includes only positive transition/emission edges, and delegates max-product; no path yields zero-evidence/no-posterior-MAP output.",
+            "item_sha256": "2fc35c93f6bfad4415cb658ce40c475f5ccba76ba20f714952b5aac094670bad",
+            "row_sha256": "007999ff0cbee8b20590e2b8cddd0eb97deebe9e4a728ab2a1f36139cb99c2b5"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The word exactly when specifies edge inclusion in step 2, a defining instruction rather than a mathematical equivalence theorem. The Definition uses alpha=pi B(y_1), beta=1, includes only positive transition/emission edges, and delegates max-product; no path yields zero-evidence/no-posterior-MAP output."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is asserted in this definition or procedure.",
+          "template_review": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The word exactly when specifies edge inclusion in step 2, a defining instruction rather than a mathematical equivalence theorem. The Definition uses alpha=pi B(y_1), beta=1, includes only positive transition/emission edges, and delegates max-product; no path yields zero-evidence/no-posterior-MAP output.",
+            "item_sha256": "2fc35c93f6bfad4415cb658ce40c475f5ccba76ba20f714952b5aac094670bad",
+            "row_sha256": "555702cb4a920fd6aed9f16814ec166b59801a39b185bc5f44c2fd60c52f2fb3"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "math81_boundary_classical_low",
+            "reason": "The word exactly when specifies edge inclusion in step 2, a defining instruction rather than a mathematical equivalence theorem. The Definition uses alpha=pi B(y_1), beta=1, includes only positive transition/emission edges, and delegates max-product; no path yields zero-evidence/no-posterior-MAP output."
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-hmm-viterbi-is-sequence-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-hidden-markov-model-for-sequence-decoding",
+          "source_section": "Definition",
+          "quote": "A **finite discrete hidden Markov model (HMM)** is a tuple\n$(S,Y,\\pi,A,B)$, where $S$ is a finite nonempty hidden-state set, $Y$ is a\nfinite nonempty observation alphabet, $\\pi:S\\to[0,1]$ is an initial\nprobability distribution, $A:S\\times S\\to[0,1]$ is a transition matrix, and\n$B:S\\times Y\\to[0,1]$ is an emission matrix. The parameters satisfy\n$$\\sum_{s\\in S}\\pi(s)=1,\\qquad \\sum_{s'\\in S}A(s,s')=1\\quad(s\\in S),\\qquad \\sum_{y\\in Y}B(s,y)=1\\quad(s\\in S).$$\n\nFor each length $T\\ge1$, hidden path $z=(z_1,\\ldots,z_T)\\in S^T$, and\nobservation sequence $y=(y_1,\\ldots,y_T)\\in Y^T$, define the joint mass\n$$p(z,y)=\\pi(z_1)B(z_1,y_1)\\prod_{t=2}^{T}A(z_{t-1},z_t)B(z_t,y_t).$$\nThe **evidence** of $y$ is $p(y)=\\sum_{z\\in S^T}p(z,y)$. When $p(y)>0$,\nthe conditional path mass is $p(z\\mid y)=p(z,y)/p(y)$, and a\n**sequence MAP (maximum-a-posteriori) path** is any $z$ maximizing this conditional mass. If $p(y)=0$,\nthe conditional path mass is undefined, so there is no posterior sequence MAP\npath for that observation sequence. A zero transition or emission factor gives\nthat hidden path zero joint mass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-hmm-viterbi-sequence-map",
+          "source_section": "Definition",
+          "quote": "**Input:** A finite discrete HMM $(S,Y,\\pi,A,B)$, an observation sequence\n$y=(y_1,\\ldots,y_T)\\in Y^T$ with $T\\ge1$, and a total order on $S$.\n\n1. Form a trellis with $V_t=S$ at every layer. Set\n   $\\alpha_y(s)=\\pi(s)B(s,y_1)$ and terminal weights $\\beta_y(s)=1$.\n2. For every $t=2,\\ldots,T$, include the edge $(r,s)$ exactly when\n   $A(r,s)>0$ and $B(s,y_t)>0$, and give it weight\n   $w_t(r,s)=A(r,s)B(s,y_t)$.\n3. Run [[alg-viterbi-max-product-on-finite-trellis]] on this trellis using the\n   supplied state order. If it returns no admissible path, return\n   “zero evidence; no conditional sequence MAP.” Otherwise return its path as\n   the decoded hidden-state sequence.\n\nZero transition or emission factors are omitted from the trellis, so every\ntrellis path has positive joint mass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-viterbi-finite-trellis-is-optimal",
+          "source_section": "Statement",
+          "quote": "For every finite weighted trellis, the algorithm returns “no admissible path”\nexactly when the trellis has no path. Otherwise it returns an admissible path\nwhose score is maximal among all admissible paths. If\n$V=\\sum_{t=1}^{T}|V_t|$ and $E=\\sum_{t=2}^{T}|E_t|$ (with empty sums taken\nas $0$), then when each real\nmultiplication and comparison is counted as one operation the running time is\n$O(1+T+V+E)$ and the auxiliary storage is $O(1+V)$. In the $T=0$ case the\nalgorithm returns the unique empty path with score $1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-hmm-joint-law-normalizes",
+          "source_section": "Statement",
+          "quote": "For every finite discrete HMM and each integer $T\\ge1$, the joint masses\n$p(z,y)$ in the Definition sum to $1$ over all hidden paths $z\\in S^T$ and\nobservation sequences $y\\in Y^T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "path-score-correspondence",
+          "claim": "Positive joint-mass hidden paths correspond exactly to trellis paths, with identical product scores.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "posterior-map-and-zero-evidence",
+          "claim": "No trellis path is equivalent to zero evidence; otherwise maximum joint mass and maximum conditional path mass have the same maximizers.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the case where no positive-mass hidden path exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows zero evidence is exactly the no-trellis-path branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definitions cover T=1 with no transition factors, and the same path correspondence in step 1.1 applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 omits zero initial, transition, or emission factors and preserves every positive path."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 matches the initial and emission factors; terminal weights are one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The state and path sets are finite; the supplied order selects one maximizer without arbitrary choice. Step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves zero evidence gives the algorithm's no-MAP branch."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves a positive trellis path gives positive evidence and a conditional MAP path."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-hmm-zero-evidence-has-no-posterior-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-hidden-markov-model-for-sequence-decoding",
+          "source_section": "Definition",
+          "quote": "A **finite discrete hidden Markov model (HMM)** is a tuple\n$(S,Y,\\pi,A,B)$, where $S$ is a finite nonempty hidden-state set, $Y$ is a\nfinite nonempty observation alphabet, $\\pi:S\\to[0,1]$ is an initial\nprobability distribution, $A:S\\times S\\to[0,1]$ is a transition matrix, and\n$B:S\\times Y\\to[0,1]$ is an emission matrix. The parameters satisfy\n$$\\sum_{s\\in S}\\pi(s)=1,\\qquad \\sum_{s'\\in S}A(s,s')=1\\quad(s\\in S),\\qquad \\sum_{y\\in Y}B(s,y)=1\\quad(s\\in S).$$\n\nFor each length $T\\ge1$, hidden path $z=(z_1,\\ldots,z_T)\\in S^T$, and\nobservation sequence $y=(y_1,\\ldots,y_T)\\in Y^T$, define the joint mass\n$$p(z,y)=\\pi(z_1)B(z_1,y_1)\\prod_{t=2}^{T}A(z_{t-1},z_t)B(z_t,y_t).$$\nThe **evidence** of $y$ is $p(y)=\\sum_{z\\in S^T}p(z,y)$. When $p(y)>0$,\nthe conditional path mass is $p(z\\mid y)=p(z,y)/p(y)$, and a\n**sequence MAP (maximum-a-posteriori) path** is any $z$ maximizing this conditional mass. If $p(y)=0$,\nthe conditional path mass is undefined, so there is no posterior sequence MAP\npath for that observation sequence. A zero transition or emission factor gives\nthat hidden path zero joint mass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-joint-masses",
+          "claim": "The normalized HMM gives zero mass to both hidden paths for the impossible observation, so evidence is zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conditional-undefined",
+          "claim": "Zero evidence makes the posterior conditional undefined, refuting universal existence of a MAP path.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 shows that both hidden paths have zero mass for the observation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes p(y)=0, and step 2.1 records that the conditional is undefined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The witness uses T=1 and has no transition factor. Step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both emission rows assign probability one to 0 and zero to 1. Step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The initial distribution is uniform and the emission endpoint is explicitly computed. Step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 distinguishes the tie among zero joint masses from a defined posterior maximizer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal existence claim; it asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal existence claim; it asserts no converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-hmm-marginal-modes-are-not-sequence-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-hidden-markov-model-for-sequence-decoding",
+          "source_section": "Definition",
+          "quote": "A **finite discrete hidden Markov model (HMM)** is a tuple\n$(S,Y,\\pi,A,B)$, where $S$ is a finite nonempty hidden-state set, $Y$ is a\nfinite nonempty observation alphabet, $\\pi:S\\to[0,1]$ is an initial\nprobability distribution, $A:S\\times S\\to[0,1]$ is a transition matrix, and\n$B:S\\times Y\\to[0,1]$ is an emission matrix. The parameters satisfy\n$$\\sum_{s\\in S}\\pi(s)=1,\\qquad \\sum_{s'\\in S}A(s,s')=1\\quad(s\\in S),\\qquad \\sum_{y\\in Y}B(s,y)=1\\quad(s\\in S).$$\n\nFor each length $T\\ge1$, hidden path $z=(z_1,\\ldots,z_T)\\in S^T$, and\nobservation sequence $y=(y_1,\\ldots,y_T)\\in Y^T$, define the joint mass\n$$p(z,y)=\\pi(z_1)B(z_1,y_1)\\prod_{t=2}^{T}A(z_{t-1},z_t)B(z_t,y_t).$$\nThe **evidence** of $y$ is $p(y)=\\sum_{z\\in S^T}p(z,y)$. When $p(y)>0$,\nthe conditional path mass is $p(z\\mid y)=p(z,y)/p(y)$, and a\n**sequence MAP (maximum-a-posteriori) path** is any $z$ maximizing this conditional mass. If $p(y)=0$,\nthe conditional path mass is undefined, so there is no posterior sequence MAP\npath for that observation sequence. A zero transition or emission factor gives\nthat hidden path zero joint mass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "joint-path-masses",
+          "claim": "The transition and initial factors give the four stated path masses and unit evidence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "marginal-versus-joint-mode",
+          "claim": "The unique marginal modes form vu, whose joint mass is strictly below uu; hence coordinatewise decoding need not be sequence MAP.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness uses two hidden states and two observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes positive evidence equal to one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The observation sequence has length two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero transition A→B is included and the B transition row still sums to one. Step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the initial probabilities; step 2.1 computes both time marginals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 has unique coordinatewise marginal modes, so no tie-breaking choice is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal assertion and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal assertion and states no converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-finite-trellis-viterbi-tie-and-unreachable-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-layered-trellis",
+          "source_section": "Definition",
+          "quote": "A **finite weighted trellis** has an integer length $T\\ge0$. If $T=0$, it is\nthe empty structure, with no vertex layers, edges, or endpoint weights. If\n$T\\ge1$, it consists of finite vertex sets $V_1,\\ldots,V_T$, edge sets\n$E_t\\subseteq V_{t-1}\\times V_t$ for $2\\le t\\le T$, positive edge weights\n$w_t:E_t\\to(0,\\infty)$, and initial and terminal weights\n$\\alpha:V_1\\to[0,\\infty)$ and $\\beta:V_T\\to[0,\\infty)$. The sets $V_t$ may\nbe empty. A zero initial or terminal weight disables that endpoint; every edge\nin $E_t$ is allowed and has positive weight.\n\nA **path** for $T\\ge1$ is a tuple $(v_1,\\ldots,v_T)$ with $v_t\\in V_t$,\n$\\alpha(v_1)>0$, $\\beta(v_T)>0$, and $(v_{t-1},v_t)\\in E_t$ for every\n$2\\le t\\le T$. Its **score** is\n$$\\alpha(v_1)\\left(\\prod_{t=2}^{T}w_t(v_{t-1},v_t)\\right)\\beta(v_T),$$\nwhere the empty product for $T=1$ is $1$. For $T=0$, the unique path is the\nempty tuple, with score $1$ (the empty product).\n\nA **prefix path through layer $t$**, for $1\\le t\\le T$, satisfies the same\nconditions through $v_t$, without a terminal-weight condition. For $T=0$,\nthe empty tuple is the unique prefix path through no layers, with score $1$.\nA vertex $v\\in V_t$ is **reachable** if some prefix path ends at $v$;\notherwise it is **unreachable**. There are finitely many paths. If at least\none path exists, its maximum score is attained; if none exists, the trellis\nhas no admissible path.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-viterbi-max-product-on-finite-trellis",
+          "source_section": "Definition",
+          "quote": "**Input:** A finite weighted trellis and a total order on each vertex set.\n\n**Output:** “No admissible path,” or an admissible path and its score.\n\nIf $T=0$, return the empty path with score $1$. Otherwise perform the following\nsteps:\n\n1. Set $D_1(v)=\\alpha(v)$ for all $v\\in V_1$. For each layer $t=2,\\ldots,T$ and\n   each $v\\in V_t$, compute\n   $$D_t(v)=\\max\\bigl(\\{D_{t-1}(u)w_t(u,v):(u,v)\\in E_t\\}\\cup\\{0\\}\\bigr).$$\n   If $D_t(v)>0$, store as $p_t(v)$ the first predecessor $u$ in the supplied\n   vertex order attaining this maximum; if $D_t(v)=0$, leave $p_t(v)$\n   undefined.\n2. Compute $Q(v)=D_T(v)\\beta(v)$ for all $v\\in V_T$. If every $Q(v)=0$,\n   return “no admissible path.”\n3. Otherwise choose the first $v_T$ in the supplied order maximizing $Q(v)$,\n   and follow the stored pointers $p_T(v_T),p_{T-1}(v_{T-1}),\\ldots,p_2(v_2)$\n   backwards. Return the resulting path and its score $Q(v_T)$.\n\nThe stored predecessor at each layer is a **backpointer**. Following these\npointers backward from a maximizing terminal vertex is called **traceback**.\nThe given orders make the returned path deterministic when several paths have\nthe same maximum score. The empty path at $T=0$ is the unique path and is\ntherefore the unique maximum-score output in that case.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-viterbi-finite-trellis-is-optimal",
+          "source_section": "Statement",
+          "quote": "For every finite weighted trellis, the algorithm returns “no admissible path”\nexactly when the trellis has no path. Otherwise it returns an admissible path\nwhose score is maximal among all admissible paths. If\n$V=\\sum_{t=1}^{T}|V_t|$ and $E=\\sum_{t=2}^{T}|E_t|$ (with empty sums taken\nas $0$), then when each real\nmultiplication and comparison is counted as one operation the running time is\n$O(1+T+V+E)$ and the auxiliary storage is $O(1+V)$. In the $T=0$ case the\nalgorithm returns the unique empty path with score $1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "enumerate-paths",
+          "claim": "The explicit edge list leaves exactly two admissible paths, each of score six; c is unreachable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "viterbi-table-and-traceback",
+          "claim": "The recurrence gives the stated layer scores, and the supplied order selects the a predecessor on the tie.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two full admissible paths."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes zero for the unreachable state c."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has three layers; the T=1 convention is already stated in the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies c as unreachable because it has no incoming edge."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the specified initial and terminal weights, both equal to one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 resolves the tied predecessor using the supplied order a<b<c."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one instance and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one instance and asserts no converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-hmm-viterbi-exact-sequence-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-hidden-markov-model-for-sequence-decoding",
+          "source_section": "Definition",
+          "quote": "A **finite discrete hidden Markov model (HMM)** is a tuple\n$(S,Y,\\pi,A,B)$, where $S$ is a finite nonempty hidden-state set, $Y$ is a\nfinite nonempty observation alphabet, $\\pi:S\\to[0,1]$ is an initial\nprobability distribution, $A:S\\times S\\to[0,1]$ is a transition matrix, and\n$B:S\\times Y\\to[0,1]$ is an emission matrix. The parameters satisfy\n$$\\sum_{s\\in S}\\pi(s)=1,\\qquad \\sum_{s'\\in S}A(s,s')=1\\quad(s\\in S),\\qquad \\sum_{y\\in Y}B(s,y)=1\\quad(s\\in S).$$\n\nFor each length $T\\ge1$, hidden path $z=(z_1,\\ldots,z_T)\\in S^T$, and\nobservation sequence $y=(y_1,\\ldots,y_T)\\in Y^T$, define the joint mass\n$$p(z,y)=\\pi(z_1)B(z_1,y_1)\\prod_{t=2}^{T}A(z_{t-1},z_t)B(z_t,y_t).$$\nThe **evidence** of $y$ is $p(y)=\\sum_{z\\in S^T}p(z,y)$. When $p(y)>0$,\nthe conditional path mass is $p(z\\mid y)=p(z,y)/p(y)$, and a\n**sequence MAP (maximum-a-posteriori) path** is any $z$ maximizing this conditional mass. If $p(y)=0$,\nthe conditional path mass is undefined, so there is no posterior sequence MAP\npath for that observation sequence. A zero transition or emission factor gives\nthat hidden path zero joint mass.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-hmm-viterbi-sequence-map",
+          "source_section": "Definition",
+          "quote": "**Input:** A finite discrete HMM $(S,Y,\\pi,A,B)$, an observation sequence\n$y=(y_1,\\ldots,y_T)\\in Y^T$ with $T\\ge1$, and a total order on $S$.\n\n1. Form a trellis with $V_t=S$ at every layer. Set\n   $\\alpha_y(s)=\\pi(s)B(s,y_1)$ and terminal weights $\\beta_y(s)=1$.\n2. For every $t=2,\\ldots,T$, include the edge $(r,s)$ exactly when\n   $A(r,s)>0$ and $B(s,y_t)>0$, and give it weight\n   $w_t(r,s)=A(r,s)B(s,y_t)$.\n3. Run [[alg-viterbi-max-product-on-finite-trellis]] on this trellis using the\n   supplied state order. If it returns no admissible path, return\n   “zero evidence; no conditional sequence MAP.” Otherwise return its path as\n   the decoded hidden-state sequence.\n\nZero transition or emission factors are omitted from the trellis, so every\ntrellis path has positive joint mass.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hmm-viterbi-is-sequence-map",
+          "source_section": "Statement",
+          "quote": "Given a finite discrete HMM and an observation sequence of positive length, the\nsequence-decoding algorithm returns no conditional MAP path exactly when the\nobservation evidence is zero. When the evidence is positive, it returns a\nhidden-state sequence maximizing the posterior probability of the entire\nsequence, including when there are ties.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "enumerate-rational-path-masses",
+          "claim": "Multiplying the six factors for each of the eight paths yields the table and positive evidence.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "recurrence-and-traceback",
+          "claim": "The exact Viterbi values and pointers recover uvv, agreeing with the unique maximum path mass.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The observed sequence has length three and positive evidence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes positive evidence 33/256; zero evidence is treated separately by the companion counterexample."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The observed sequence has length three."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both states and all listed transition and emission factors are positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The initial distribution and terminal weight one are included in each path score. Step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 has a unique largest path mass; no arbitrary tie choice is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a single computation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a single computation, not a converse."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

@@ -17,9 +17,10 @@ proof_strategy: constructive
 verification:
   precheck: pass
   judge:
-    model: "gpt-6.1-sol"
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-06
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/lem-compact-smooth-manifolds-have-finite-cw-models-under-countable-choice.json
 sources:
   scraped: []
   references:
@@ -51,7 +52,7 @@ model.
 
 [L2] For a compact $K$ inside an open $W_0$ there is a smooth bump equal to $1$ near $K$ with support in $W_0$ ([[lem-manifold-bump-for-a-compact-set-inside-an-open-set]]).
 
-[L3] Sard's theorem for $C^r$ Euclidean maps: with $r>\max\{m-n,0\}$ the critical values form a null set ([[thm-morse-sard-for-euclidean-maps]]); the preimage of a regular value of a transverse map is an embedded submanifold of the expected codimension ([[thm-transverse-preimage-theorem]]).
+[L3] Sard's theorem for $C^r$ Euclidean maps: with $r>\max\{m-n,0\}$ the critical values form a null set ([[thm-morse-sard-for-euclidean-maps]]); a smooth map from a $p$-manifold transverse to an embedded submanifold of codimension $c$ has an embedded codimension-$c$ preimage when $c\le p$ (possibly empty), and an empty preimage when $c>p$ ([[thm-transverse-preimage-theorem]]).
 
 [L4] A Morse function on a compact manifold has only finitely many critical points ([[cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points]]).
 

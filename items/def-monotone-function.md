@@ -3,6 +3,7 @@ id: def-monotone-function
 kind: definition
 title: "Nondecreasing, increasing (strictly increasing), nonincreasing, decreasing, monotone and strictly monotone real functions on a subset of $\\mathbb{R}$, with the dictionary to monotone sequences"
 status: published
+dependency_level: 0
 origin: session
 provenance:
   statement: ai-altered
@@ -14,12 +15,12 @@ aliases: [def-monotone-real-function, def-strictly-monotone]
 landmark: true
 short: "monotone real function"
 verification:
-  audited: 2026-07-28
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/def-monotone-function.json
 sources:
   scraped: []
   references:

@@ -1,0 +1,420 @@
+{
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "contract_file": "research/non-ml-math-remaining-81-2026-10-18-batch-2.proof-contracts.json",
+  "contract_raw_sha256": "6658644eecf9a077213f3a35edb650d47c6092961b3d9f0848afd2392e9b2df5",
+  "contract_changed": false,
+  "scope": [
+    "cex-upper-semicontinuous-need-not-attain-its-infimum",
+    "cex-continuous-injection-on-a-non-interval-need-not-be-monotone"
+  ],
+  "contracts": {
+    "cex-upper-semicontinuous-need-not-attain-its-infimum": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-semicontinuity",
+          "source_section": "Definition",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$, with\nneighbourhoods as in [[def-neighbourhood-r]].\n\n- $f$ is **upper semicontinuous at $c$** when for every real $\\varepsilon > 0$\n  there is a real $\\delta > 0$ with\n  $$f(x) \\;<\\; f(c) + \\varepsilon \\qquad \\text{for every } x \\in A \\cap N_\\delta(c).$$\n- $f$ is **lower semicontinuous at $c$** when for every real $\\varepsilon > 0$\n  there is a real $\\delta > 0$ with\n  $$f(x) \\;>\\; f(c) - \\varepsilon \\qquad \\text{for every } x \\in A \\cap N_\\delta(c).$$\n- $f$ is **upper semicontinuous on $A$**, respectively **lower semicontinuous on\n  $A$**, when it is so at every point of $A$.\n\nIn words: an upper semicontinuous function cannot jump **up** in the limit, and\na lower semicontinuous one cannot jump **down**. Both conditions are pointwise,\nboth quantify over the same unpunctured neighbourhoods as\n[[def-continuity-real]], and at $x = c$ each holds automatically, since\n$f(c) < f(c) + \\varepsilon$ and $f(c) > f(c) - \\varepsilon$.\n\n### Continuity is exactly the conjunction\n\n$f$ is continuous at $c$ **if and only if** it is both upper and lower\nsemicontinuous at $c$.\n\n*If $f$ is continuous at $c$*, a $\\delta$ witnessing $|f(x) - f(c)| < \\varepsilon$\non $A \\cap N_\\delta(c)$ witnesses both displayed conditions, since\n$|f(x) - f(c)| < \\varepsilon$ gives $-\\varepsilon < f(x) - f(c) < \\varepsilon$\n([[lem-of-abs-value]]).\n\n*Conversely*, given $\\varepsilon > 0$ take $\\delta_1$ for the upper condition\nand $\\delta_2$ for the lower one and put $\\delta := \\min\\{\\delta_1, \\delta_2\\} > 0$.\nFor $x \\in A \\cap N_\\delta(c)$ both $f(x) < f(c) + \\varepsilon$ and\n$f(x) > f(c) - \\varepsilon$ hold, that is $|f(x) - f(c)| < \\varepsilon$\n([[lem-of-abs-value]]). So $f$ is continuous at $c$.\n\nConsequently $f$ is continuous on $A$ exactly when it is both upper and lower\nsemicontinuous on $A$.\n\n### Negation exchanges the two\n\n$f$ is upper semicontinuous at $c$ **if and only if** $-f$ is lower\nsemicontinuous at $c$, since $f(x) < f(c) + \\varepsilon$ says the same thing as\n$-f(x) > -f(c) - \\varepsilon$ ([[def-complete-ordered-field]]). Every statement\nabout one notion below is therefore proved for one of them and transferred to\nthe other by this substitution, never proved twice.\n\n**Neither notion implies the other, and neither implies continuity.** The\nindicator of a closed set is upper semicontinuous and the indicator of an open\nset is lower semicontinuous, and neither is continuous unless the set is clopen;\nthe companion page uses an upper semicontinuous function on $[0,1]$ that attains\nno minimum.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-neighbourhood-r",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) with its order\n([[def-real-order]]) and its absolute value ([[def-abs-value]]).\n\nLet $x \\in \\mathbb{R}$ and let $\\varepsilon \\in \\mathbb{R}$ with\n$\\varepsilon > 0$. The **$\\varepsilon$-neighbourhood of $x$** is\n\n$$N_\\varepsilon(x) \\;:=\\; \\{\\, y \\in \\mathbb{R} : |y - x| < \\varepsilon \\,\\},$$\n\nand the **punctured $\\varepsilon$-neighbourhood of $x$** is\n\n$$N^{*}_\\varepsilon(x) \\;:=\\; N_\\varepsilon(x) \\setminus \\{x\\} \\;=\\; \\{\\, y \\in \\mathbb{R} : 0 < |y - x| < \\varepsilon \\,\\}.$$\n\nThe two descriptions of $N^{*}_\\varepsilon(x)$ agree because $|y - x| = 0$ holds\nexactly when $y = x$ ([[lem-of-abs-value]]).\n\n**A neighbourhood is an open interval.** For every $x$ and every\n$\\varepsilon > 0$,\n\n$$N_\\varepsilon(x) \\;=\\; (x - \\varepsilon,\\ x + \\varepsilon),$$\n\nthe interval of [[def-interval]]. Indeed [[lem-of-abs-value]] gives, for\n$\\varepsilon > 0$, the equivalence $|y - x| < \\varepsilon \\iff -\\varepsilon <\ny - x < \\varepsilon$, and adding $x$ throughout turns the right-hand side into\n$x - \\varepsilon < y < x + \\varepsilon$ ([[def-ordered-field]]).\n\n**The centre lies in its own neighbourhoods.** $x \\in N_\\varepsilon(x)$, since\n$|x - x| = |0| = 0 < \\varepsilon$ ([[lem-of-abs-value]]).\n\n**Punctured neighbourhoods are never empty.** The element\n$y := x + \\varepsilon/2$ satisfies $|y - x| = \\varepsilon/2$, which is\n$> 0$ and $< \\varepsilon$, so $y \\in N^{*}_\\varepsilon(x)$\n([[lem-of-abs-value]], [[def-ordered-field]]).\n\n**Monotonicity in the radius.** If $0 < \\delta \\le \\varepsilon$ then\n$N_\\delta(x) \\subseteq N_\\varepsilon(x)$, because $|y - x| < \\delta \\le\n\\varepsilon$ ([[def-ordered-field]]).\n\n**Nesting at an interior point.** If $y \\in N_\\varepsilon(x)$ and\n$0 < \\delta \\le \\varepsilon - |y - x|$, then\n\n$$N_\\delta(y) \\;\\subseteq\\; N_\\varepsilon(x).$$\n\nIndeed for $z \\in N_\\delta(y)$ the triangle inequality\n([[lem-of-triangle-inequality]]) gives\n$|z - x| = |(z - y) + (y - x)| \\le |z - y| + |y - x| < \\delta + |y - x| \\le\n\\varepsilon$. Note that $\\varepsilon - |y - x| > 0$ precisely because\n$y \\in N_\\varepsilon(x)$, so such a $\\delta$ always exists.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-continuity-real",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field with its order and\nabsolute value ([[def-complete-ordered-field]], [[lem-of-abs-value]]), and\nneighbourhoods are those of [[def-neighbourhood-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$. Then\n$f$ is **continuous at $c$** when\n\n$$(\\forall \\varepsilon > 0)\\ (\\exists \\delta > 0)\\ (\\forall x \\in A)\\ \\bigl[\\ |x - c| < \\delta \\ \\Longrightarrow\\ |f(x) - f(c)| < \\varepsilon\\ \\bigr],$$\n\nwith $\\varepsilon$ and $\\delta$ ranging over the **positive reals**. In the\nlanguage of neighbourhoods: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ with\n\n$$f\\bigl(A \\cap N_{\\delta}(c)\\bigr) \\;\\subseteq\\; N_{\\varepsilon}\\bigl(f(c)\\bigr).$$\n\n$f$ is **continuous on $A$** when it is continuous at every point of $A$.\n\n**The point $c$ is required to lie in $A$, and the condition is unpunctured.**\nBoth differ from [[def-function-limit]], and deliberately. There the quantifier\nruns over $0 < |x - c| < \\delta$, which removes $x = c$; here $x = c$ is allowed,\nand at $x = c$ the implication reads $|f(c) - f(c)| = 0 < \\varepsilon$, which is\nautomatic. So allowing $x = c$ costs nothing, and it is what lets the definition\nbe stated at every point of $A$, including the points where no limit exists.\n\n**Three clauses, and all three are part of the definition.**\n\n1. **At a limit point.** Suppose $c \\in A$ is a limit point of $A$\n   ([[def-limit-point-r]]). Then $f$ is continuous at $c$ if and only if the\n   limit of $f$ at $c$ exists and\n   $$\\lim_{x \\to c} f(x) \\;=\\; f(c)$$\n   ([[def-function-limit]]). Indeed, for a given $\\varepsilon > 0$ a $\\delta$\n   witnessing continuity witnesses the limit condition, because the limit\n   condition quantifies over a subset of the points continuity quantifies over;\n   and conversely a $\\delta$ witnessing $\\lim_{x \\to c} f(x) = f(c)$ witnesses\n   continuity, because the one point it omits, $x = c$, satisfies\n   $|f(c) - f(c)| < \\varepsilon$ anyway.\n\n2. **At an isolated point.** Suppose $c \\in A$ is an isolated point of $A$\n   ([[def-limit-point-r]]), so that $N_{\\eta}(c) \\cap A = \\{c\\}$ for some real\n   $\\eta > 0$. Then **every** $f : A \\to \\mathbb{R}$ is continuous at $c$: take\n   $\\delta := \\eta$, so that the only $x \\in A$ with $|x - c| < \\delta$ is $c$\n   itself, and $|f(c) - f(c)| = 0 < \\varepsilon$.\n\n3. **On a set.** Continuity on $A$ is continuity at each point of $A$, and\n   nothing more. It is not a condition relating $f$ to points outside $A$.\n\nEvery point of $A$ is either a limit point of $A$ or an isolated point of $A$,\nand never both ([[def-limit-point-r]]), so clauses 1 and 2 between them describe\ncontinuity at every point of $A$.\n\n**This is not the raw $\\varepsilon$-$\\delta$ formula of\n[[fs-limit-unique-at-every-point-of-the-domain]].** That item records what goes\nwrong when the *punctured* formula of [[def-function-limit]] is written down at\nan arbitrary point of the domain: at an isolated point it is satisfied\nvacuously by every real $L$ at once, so it defines nothing, and this library\ntherefore leaves $\\lim_{x \\to c} f(x)$ **undefined** at an isolated point.\nContinuity at an isolated point is a different matter: the formula above is not\nvacuous \u2014 it is a genuine condition on $f(c)$, satisfied because $f(c)$ is the\nonly value being compared with itself \u2014 and it names a single, well-defined\nproperty. The limit is undefined there; the continuity is defined, and is\nautomatic. Clause 1 is the only place where the two notions meet, and it is\nstated only where the limit exists as a notion.\n\n**Where the distinction disappears.** If $A$ is an open subset of $\\mathbb{R}$\n([[def-open-and-closed-in-r]]), then every $c \\in A$ has some\n$N_{\\eta}(c) \\subseteq A$, and a punctured neighbourhood is never empty\n([[def-neighbourhood-r]]), so every point of $A$ is a limit point of $A$ and\nclause 1 covers the whole of $A$. The same holds when $A$ is a nondegenerate\ninterval ([[def-interval]]). Isolated points are what force clause 2 to exist at\nall, and they occur as soon as $A$ is allowed to be an arbitrary subset of\n$\\mathbb{R}$, as in $A = \\{0\\} \\cup [1,2]$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-infimum-property",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a\ngreatest lower bound in $\\mathbb{R}$ ([[def-infimum]]), and it is given by\n\n$$\\inf S = -\\sup(-S), \\qquad \\text{where } -S = \\{-s : s \\in S\\}.$$\n\nIn particular the complete ordered field $\\mathbb{R}$ has the\ngreatest-lower-bound property, which is therefore not an extra axiom: it is a\nconsequence of the least-upper-bound property.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-infimum",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $\\ell \\in \\mathbb{R}$. Then $\\ell$ is a\n**greatest lower bound**, or **infimum**, of $S$ if both of the following hold:\n\n- $\\ell$ is a lower bound of $S$ ([[def-bounded-set]]), that is, $\\ell \\le s$ for\n  every $s \\in S$;\n- $\\ell' \\le \\ell$ for every lower bound $\\ell'$ of $S$.\n\nWritten out in one line:\n\n$$\\ell \\text{ is an infimum of } S \\iff \\big[(\\forall s \\in S)\\, \\ell \\le s\\big] \\text{ and } \\big[(\\forall \\ell' \\in \\mathbb{R})\\, \\big((\\forall s \\in S)\\, \\ell' \\le s\\big) \\Rightarrow \\ell' \\le \\ell\\big].$$\n\nAn infimum, when it exists, is unique ([[lem-sup-unique]]), so we may write\n$\\inf S$ for it.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-bounded-set",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ denotes the complete ordered field\n([[def-complete-ordered-field]]) and $S \\subseteq \\mathbb{R}$ is a subset of it.\n\nThe notions **upper bound** and **bounded above** are already fixed by\n[[def-complete-ordered-field]] and are only recalled here, never redefined:\n$u \\in \\mathbb{R}$ is an *upper bound* of $S$ if $s \\le u$ for all $s \\in S$, and\n$S$ is *bounded above* if it has at least one upper bound. The dual notions are:\n\n- $\\ell \\in \\mathbb{R}$ is a **lower bound** of $S$ if $\\ell \\le s$ for all $s \\in S$.\n- $S$ is **bounded below** if it has at least one lower bound.\n- $S$ is **bounded** if it is both bounded above and bounded below, that is, if\n  there are $\\ell, u \\in \\mathbb{R}$ with $\\ell \\le s \\le u$ for every $s \\in S$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-max-min",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $m \\in \\mathbb{R}$.\n\n- $m$ is a **maximum** (or *greatest element*) of $S$ if $m \\in S$ and $s \\le m$\n  for every $s \\in S$.\n- $m$ is a **minimum** (or *least element*) of $S$ if $m \\in S$ and $m \\le s$\n  for every $s \\in S$.\n\nA set has at most one maximum: if $m_1$ and $m_2$ are both maxima then\n$m_1 \\in S$ gives $m_1 \\le m_2$ and $m_2 \\in S$ gives $m_2 \\le m_1$, so\n$m_1 = m_2$ by antisymmetry of the order, which is immediate from the trichotomy\naxiom of an ordered field ([[def-ordered-field]], [[def-complete-ordered-field]]).\nThe same argument applies to minima, so we may write $\\max S$ and $\\min S$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-semicontinuous-evt",
+          "source_section": "Statement",
+          "quote": "Let $K \\subseteq \\mathbb{R}$ be nonempty and compact ([[def-open-cover-r]]).\n\n1. If $f : K \\to \\mathbb{R}$ is upper semicontinuous on $K$\n   ([[def-semicontinuity]]) then $f[K]$ is bounded above\n   ([[def-bounded-set]]) and $f$ attains a maximum: there is $x_0 \\in K$ with\n   $f(x) \\le f(x_0)$ for every $x \\in K$ ([[def-max-min]]).\n2. If $f : K \\to \\mathbb{R}$ is lower semicontinuous on $K$ then $f[K]$ is\n   bounded below and $f$ attains a minimum.\n\n**The theorem is genuinely one-sided.** An upper semicontinuous function on a\ncompact set need not attain its infimum; the companion page gives such a\nfunction on $[0,1]$. Only the maximum is\nasserted in claim 1, and only the minimum in claim 2.\n\nTaking $f$ continuous, which is upper and lower semicontinuous at once\n([[def-semicontinuity]]), recovers the classical extreme value theorem on a\ncompact subset of $\\mathbb{R}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-semicontinuity-level-set-characterisation",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$ and let $f : A \\to \\mathbb{R}$. Call $S \\subseteq A$\n**relatively open in $A$** when $S = U \\cap A$ for some open\n$U \\subseteq \\mathbb{R}$ ([[def-open-and-closed-in-r]]). Then:\n\n1. $f$ is upper semicontinuous on $A$ ([[def-semicontinuity]]) **if and only if**\n   $\\{\\, x \\in A : f(x) < \\alpha \\,\\}$ is relatively open in $A$ for every real\n   $\\alpha$;\n2. $f$ is lower semicontinuous on $A$ **if and only if**\n   $\\{\\, x \\in A : f(x) > \\alpha \\,\\}$ is relatively open in $A$ for every real\n   $\\alpha$;\n3. $f$ is continuous on $A$ ([[def-continuity-real]]) **if and only if** both\n   families of sets are relatively open.\n\n**The open set is produced canonically, not chosen.** For each $\\alpha$ the\nproof exhibits one specific open $U_\\alpha \\subseteq \\mathbb{R}$ with\n$U_\\alpha \\cap A = \\{f < \\alpha\\}$, namely the set of reals $y$ admitting a\nradius $\\rho$ with $A \\cap N_\\rho(y) \\subseteq \\{f < \\alpha\\}$. No choice of a\nradius per point is made, which matters because the level set may be\nuncountable.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "$f$ is upper semicontinuous at $0$: $f(0) = 1$ and $f(x) \\le 1$ for every $x \\in [0,1]$, so $f(x) < f(0) + \\varepsilon = 1 + \\varepsilon$ for every $x \\in [0,1]$ and every real $\\varepsilon > 0$; any $\\delta$ works.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "$f$ is upper semicontinuous at every $c \\in (0,1]$: taking $\\delta := \\min\\{c, \\varepsilon\\} > 0$, every $x \\in [0,1]$ with $|x - c| < \\delta$ satisfies $x > c - \\delta \\ge 0$, hence $x \\ne 0$ and $f(x) = x < c + \\varepsilon = f(c) + \\varepsilon$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "$f$ is bounded below by $0$ and $f(x) > 0$ for every $x \\in [0,1]$: for $x = 0$ the value is $1 > 0$, and for $0 < x \\le 1$ the value is $x > 0$.",
+          "step": "1.3",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "$\\inf f[\\,[0,1]\\,] = 0$: the set $f[\\,[0,1]\\,]$ is nonempty and bounded below by $0$ by step 1.3, so its infimum $\\ell$ exists and $\\ell \\ge 0$; and for every real $\\eta > 0$ there is a natural $n \\ge 1$ with $1/n < \\eta$, and then $f(1/n) = 1/n < \\eta$, so no positive real is a lower bound and $\\ell = 0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "$f$ has no minimum: a minimum would be a value $f(x_{0})$ that is a lower bound of $f[\\,[0,1]\\,]$, hence at most the infimum $0$; but every value of $f$ is strictly positive.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "step 2.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "So $f$ is upper semicontinuous on the nonempty compact set $[0,1]$, is bounded below, and attains no minimum, which refutes the claim. It does attain a maximum, $f(0) = 1 \\ge f(x)$ for every $x \\in [0,1]$, in agreement with the semicontinuous extreme value theorem.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 3.1",
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For cex-upper-semicontinuous-need-not-attain-its-infimum (An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided), the assertion does not quantify over an empty input set or family; the carrier's domain and hypotheses fix the objects being considered."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: The infimum is exactly zero and is shown not to be attained."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For cex-upper-semicontinuous-need-not-attain-its-infimum (An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided), no singleton cardinality or one-element input is a distinct branch of the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For cex-upper-semicontinuous-need-not-attain-its-infimum (An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided), there is no interval or compact-domain parameter whose degenerate case could alter the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: The exceptional endpoint 0 is checked separately; all c in (0,1], including 1, use the local identity branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For cex-upper-semicontinuous-need-not-attain-its-infimum (An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided), the proof makes no choice from a family; any witness is a single existential witness or is explicitly constructed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For cex-upper-semicontinuous-need-not-attain-its-infimum (An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided), the assertion is one-directional and states no forward implication of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For cex-upper-semicontinuous-need-not-attain-its-infimum (An upper semicontinuous function on $[0,1]$ that is bounded below and attains no minimum, so the semicontinuous extreme value theorem is genuinely one-sided), the assertion is one-directional and states no reverse implication of an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "input": "x = 0, 1/2, 1",
+          "expected": "f(x) = 1, 1/2, 1",
+          "disposition": "verified from the piecewise definition; positive values approach zero along x=1/n"
+        }
+      ]
+    },
+    "cex-continuous-injection-on-a-non-interval-need-not-be-monotone": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-continuity-real",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field with its order and\nabsolute value ([[def-complete-ordered-field]], [[lem-of-abs-value]]), and\nneighbourhoods are those of [[def-neighbourhood-r]].\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$. Then\n$f$ is **continuous at $c$** when\n\n$$(\\forall \\varepsilon > 0)\\ (\\exists \\delta > 0)\\ (\\forall x \\in A)\\ \\bigl[\\ |x - c| < \\delta \\ \\Longrightarrow\\ |f(x) - f(c)| < \\varepsilon\\ \\bigr],$$\n\nwith $\\varepsilon$ and $\\delta$ ranging over the **positive reals**. In the\nlanguage of neighbourhoods: for every real $\\varepsilon > 0$ there is a real\n$\\delta > 0$ with\n\n$$f\\bigl(A \\cap N_{\\delta}(c)\\bigr) \\;\\subseteq\\; N_{\\varepsilon}\\bigl(f(c)\\bigr).$$\n\n$f$ is **continuous on $A$** when it is continuous at every point of $A$.\n\n**The point $c$ is required to lie in $A$, and the condition is unpunctured.**\nBoth differ from [[def-function-limit]], and deliberately. There the quantifier\nruns over $0 < |x - c| < \\delta$, which removes $x = c$; here $x = c$ is allowed,\nand at $x = c$ the implication reads $|f(c) - f(c)| = 0 < \\varepsilon$, which is\nautomatic. So allowing $x = c$ costs nothing, and it is what lets the definition\nbe stated at every point of $A$, including the points where no limit exists.\n\n**Three clauses, and all three are part of the definition.**\n\n1. **At a limit point.** Suppose $c \\in A$ is a limit point of $A$\n   ([[def-limit-point-r]]). Then $f$ is continuous at $c$ if and only if the\n   limit of $f$ at $c$ exists and\n   $$\\lim_{x \\to c} f(x) \\;=\\; f(c)$$\n   ([[def-function-limit]]). Indeed, for a given $\\varepsilon > 0$ a $\\delta$\n   witnessing continuity witnesses the limit condition, because the limit\n   condition quantifies over a subset of the points continuity quantifies over;\n   and conversely a $\\delta$ witnessing $\\lim_{x \\to c} f(x) = f(c)$ witnesses\n   continuity, because the one point it omits, $x = c$, satisfies\n   $|f(c) - f(c)| < \\varepsilon$ anyway.\n\n2. **At an isolated point.** Suppose $c \\in A$ is an isolated point of $A$\n   ([[def-limit-point-r]]), so that $N_{\\eta}(c) \\cap A = \\{c\\}$ for some real\n   $\\eta > 0$. Then **every** $f : A \\to \\mathbb{R}$ is continuous at $c$: take\n   $\\delta := \\eta$, so that the only $x \\in A$ with $|x - c| < \\delta$ is $c$\n   itself, and $|f(c) - f(c)| = 0 < \\varepsilon$.\n\n3. **On a set.** Continuity on $A$ is continuity at each point of $A$, and\n   nothing more. It is not a condition relating $f$ to points outside $A$.\n\nEvery point of $A$ is either a limit point of $A$ or an isolated point of $A$,\nand never both ([[def-limit-point-r]]), so clauses 1 and 2 between them describe\ncontinuity at every point of $A$.\n\n**This is not the raw $\\varepsilon$-$\\delta$ formula of\n[[fs-limit-unique-at-every-point-of-the-domain]].** That item records what goes\nwrong when the *punctured* formula of [[def-function-limit]] is written down at\nan arbitrary point of the domain: at an isolated point it is satisfied\nvacuously by every real $L$ at once, so it defines nothing, and this library\ntherefore leaves $\\lim_{x \\to c} f(x)$ **undefined** at an isolated point.\nContinuity at an isolated point is a different matter: the formula above is not\nvacuous \u2014 it is a genuine condition on $f(c)$, satisfied because $f(c)$ is the\nonly value being compared with itself \u2014 and it names a single, well-defined\nproperty. The limit is undefined there; the continuity is defined, and is\nautomatic. Clause 1 is the only place where the two notions meet, and it is\nstated only where the limit exists as a notion.\n\n**Where the distinction disappears.** If $A$ is an open subset of $\\mathbb{R}$\n([[def-open-and-closed-in-r]]), then every $c \\in A$ has some\n$N_{\\eta}(c) \\subseteq A$, and a punctured neighbourhood is never empty\n([[def-neighbourhood-r]]), so every point of $A$ is a limit point of $A$ and\nclause 1 covers the whole of $A$. The same holds when $A$ is a nondegenerate\ninterval ([[def-interval]]). Isolated points are what force clause 2 to exist at\nall, and they occur as soon as $A$ is allowed to be an arbitrary subset of\n$\\mathbb{R}$, as in $A = \\{0\\} \\cup [1,2]$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-neighbourhood-r",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) with its order\n([[def-real-order]]) and its absolute value ([[def-abs-value]]).\n\nLet $x \\in \\mathbb{R}$ and let $\\varepsilon \\in \\mathbb{R}$ with\n$\\varepsilon > 0$. The **$\\varepsilon$-neighbourhood of $x$** is\n\n$$N_\\varepsilon(x) \\;:=\\; \\{\\, y \\in \\mathbb{R} : |y - x| < \\varepsilon \\,\\},$$\n\nand the **punctured $\\varepsilon$-neighbourhood of $x$** is\n\n$$N^{*}_\\varepsilon(x) \\;:=\\; N_\\varepsilon(x) \\setminus \\{x\\} \\;=\\; \\{\\, y \\in \\mathbb{R} : 0 < |y - x| < \\varepsilon \\,\\}.$$\n\nThe two descriptions of $N^{*}_\\varepsilon(x)$ agree because $|y - x| = 0$ holds\nexactly when $y = x$ ([[lem-of-abs-value]]).\n\n**A neighbourhood is an open interval.** For every $x$ and every\n$\\varepsilon > 0$,\n\n$$N_\\varepsilon(x) \\;=\\; (x - \\varepsilon,\\ x + \\varepsilon),$$\n\nthe interval of [[def-interval]]. Indeed [[lem-of-abs-value]] gives, for\n$\\varepsilon > 0$, the equivalence $|y - x| < \\varepsilon \\iff -\\varepsilon <\ny - x < \\varepsilon$, and adding $x$ throughout turns the right-hand side into\n$x - \\varepsilon < y < x + \\varepsilon$ ([[def-ordered-field]]).\n\n**The centre lies in its own neighbourhoods.** $x \\in N_\\varepsilon(x)$, since\n$|x - x| = |0| = 0 < \\varepsilon$ ([[lem-of-abs-value]]).\n\n**Punctured neighbourhoods are never empty.** The element\n$y := x + \\varepsilon/2$ satisfies $|y - x| = \\varepsilon/2$, which is\n$> 0$ and $< \\varepsilon$, so $y \\in N^{*}_\\varepsilon(x)$\n([[lem-of-abs-value]], [[def-ordered-field]]).\n\n**Monotonicity in the radius.** If $0 < \\delta \\le \\varepsilon$ then\n$N_\\delta(x) \\subseteq N_\\varepsilon(x)$, because $|y - x| < \\delta \\le\n\\varepsilon$ ([[def-ordered-field]]).\n\n**Nesting at an interior point.** If $y \\in N_\\varepsilon(x)$ and\n$0 < \\delta \\le \\varepsilon - |y - x|$, then\n\n$$N_\\delta(y) \\;\\subseteq\\; N_\\varepsilon(x).$$\n\nIndeed for $z \\in N_\\delta(y)$ the triangle inequality\n([[lem-of-triangle-inequality]]) gives\n$|z - x| = |(z - y) + (y - x)| \\le |z - y| + |y - x| < \\delta + |y - x| \\le\n\\varepsilon$. Note that $\\varepsilon - |y - x| > 0$ precisely because\n$y \\in N_\\varepsilon(x)$, so such a $\\delta$ always exists.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-monotone-function",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) with its order\n([[def-real-order]]). Let $A \\subseteq \\mathbb{R}$ and let\n$f : A \\to \\mathbb{R}$. Then $f$ is:\n\n- **nondecreasing** when $f(x) \\le f(y)$ for all $x, y \\in A$ with $x \\le y$;\n- **increasing**, or *strictly increasing*, when $f(x) < f(y)$ for all\n  $x, y \\in A$ with $x < y$;\n- **nonincreasing** when $f(x) \\ge f(y)$ for all $x, y \\in A$ with $x \\le y$;\n- **decreasing**, or *strictly decreasing*, when $f(x) > f(y)$ for all\n  $x, y \\in A$ with $x < y$;\n- **monotone** when it is nondecreasing or nonincreasing;\n- **strictly monotone** when it is increasing or decreasing.\n\nThe naming follows the convention of [[def-monotone-sequence]], which is the\nconvention of this library throughout: *increasing* is the strict notion and\n*nondecreasing* the weak one.\n\n**An increasing function is nondecreasing, and a decreasing function is\nnonincreasing.** For $x \\le y$ either $x < y$, and then $f(x) < f(y)$, hence\n$f(x) \\le f(y)$; or $x = y$, and then $f(x) = f(y)$. The same argument with the\ninequalities reversed gives the second claim. So strictly monotone implies\nmonotone.\n\n**A strictly monotone function is injective**\n([[def-injection-surjection-bijection]]). Let $f$ be increasing and let\n$x, y \\in A$ with $x \\ne y$. By trichotomy either $x < y$, and then\n$f(x) < f(y)$, or $y < x$, and then $f(y) < f(x)$; in both cases\n$f(x) \\ne f(y)$. The decreasing case is the same argument. The converse fails,\nand the failure is not exotic: a continuous injection on an interval *is*\nstrictly monotone ([[thm-continuous-injection-on-an-interval-is-strictly-monotone]]),\nbut on a domain that is not an interval it need not be.\n\n**Negation exchanges the two directions.** For $g := -f$, that is\n$g(x) := -f(x)$, the four conditions above are exchanged in pairs: $f$ is\nnondecreasing exactly when $g$ is nonincreasing, and $f$ is increasing exactly\nwhen $g$ is decreasing, because $u \\le v$ holds exactly when $-v \\le -u$\n([[def-ordered-field]]). Several proofs below use this to reduce a nonincreasing\ncase to a nondecreasing one.\n\n**Monotone on a set, not at a point.** All six conditions are conditions on the\nwhole of $A$; unlike continuity ([[def-continuity-real]]) there is no pointwise\nversion, and none is used in this library. The domain $A$ is an arbitrary subset\nof $\\mathbb{R}$; where a result needs $A$ to be an interval\n([[def-interval]]) it says so, and the hypothesis is never decoration.\n\n### The dictionary to monotone sequences\n\nA sequence of reals is a function $x : \\mathbb{N} \\to \\mathbb{R}$\n([[def-sequence]]), and [[def-monotone-sequence]] calls it nondecreasing when\n$x_j \\le x_k$ for all $j \\le k$, increasing when $x_j < x_k$ for all $j < k$,\nand so on. Those are **the same four conditions as above**, read with the\nordered set $\\mathbb{N}$ in place of the ordered subset $A \\subseteq \\mathbb{R}$\nand with the comparison of indices in place of the comparison of arguments. So\nnothing new is introduced here for sequences, and the two vocabularies may be\nused interchangeably: the words *nondecreasing*, *increasing*, *nonincreasing*,\n*decreasing*, *monotone* and *strictly monotone* mean the corresponding\ncondition on the domain at hand.\n\nOne consequence is used repeatedly, and it has to be stated carefully because\ncomposition does **not** simply preserve the four words. Let $(x_k)$ be a\n**nondecreasing** sequence with $x_k \\in A$ for every $k$, so that $j \\le k$ gives\n$x_j \\le x_k$. Then:\n\n- if $f$ is nondecreasing, $(f(x_k))$ is nondecreasing, since $f(x_j) \\le f(x_k)$;\n- if $f$ is nonincreasing, $(f(x_k))$ is **nonincreasing**, since\n  $f(x_j) \\ge f(x_k)$.\n\nSo along a nondecreasing sequence the composite inherits the direction of $f$;\nand with $(x_k)$ increasing and $f$ increasing, $(f(x_k))$ is increasing, while\nwith $(x_k)$ increasing and $f$ decreasing, $(f(x_k))$ is decreasing.\n\n**Along a nonincreasing sequence the direction is reversed, not inherited.** If\n$(x_k)$ is nonincreasing and $f$ is nonincreasing, then $j \\le k$ gives\n$x_j \\ge x_k$ and hence $f(x_j) \\le f(x_k)$: the composite is **nondecreasing**.\nThe witness is $f(x) = -x$ on $A = \\mathbb{R}$ with $x_k = -k$, where both $f$ and\n$(x_k)$ are decreasing and $f(x_k) = k$ is increasing. Two order-reversing maps\ncompose to an order-preserving one, exactly as for the four words applied to\nfunctions.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) with its order\n([[def-real-order]]).\n\nA subset $I \\subseteq \\mathbb{R}$ is **order-convex** when\n\n$$x, y \\in I \\text{ and } x \\le z \\le y \\;\\Longrightarrow\\; z \\in I .$$\n\nThe **intervals** of $\\mathbb{R}$ are the sets of the following nine forms, where\n$a, b \\in \\mathbb{R}$:\n\n| | bounded forms | | one-sided and full forms |\n|---|---|---|---|\n| $(a,b)$ | $\\{x : a < x < b\\}$ | $(a,\\infty)$ | $\\{x : a < x\\}$ |\n| $[a,b]$ | $\\{x : a \\le x \\le b\\}$ | $[a,\\infty)$ | $\\{x : a \\le x\\}$ |\n| $[a,b)$ | $\\{x : a \\le x < b\\}$ | $(-\\infty,b)$ | $\\{x : x < b\\}$ |\n| $(a,b]$ | $\\{x : a < x \\le b\\}$ | $(-\\infty,b]$ | $\\{x : x \\le b\\}$ |\n| | | $(-\\infty,\\infty)$ | $\\mathbb{R}$ |\n\nAn interval is **open** when both of its written endpoints are excluded, that is\nfor the forms $(a,b)$, $(a,\\infty)$, $(-\\infty,b)$ and $(-\\infty,\\infty)$; it is\n**closed** when both written endpoints are included, that is for $[a,b]$,\n$[a,\\infty)$, $(-\\infty,b]$ and $(-\\infty,\\infty)$. The forms $[a,b)$ and\n$(a,b]$ are **half-open**.\n\n**The symbols $\\pm\\infty$ are notation and not elements of $\\mathbb{R}$.** They\nmark which side carries no endpoint condition at all; the five forms in the right\ncolumn are defined by the displayed conditions on $x$ alone, and no arithmetic is\never performed with $\\infty$. This is the same refusal to extend $\\mathbb{R}$\nsilently that [[rem-sup-conventions]] records for suprema.\n\n**Every one of the nine forms is order-convex.** Each is defined by a conjunction\nof at most two conditions, each of the shape $a < x$, $a \\le x$, $x < b$ or\n$x \\le b$, and each such condition is inherited by an intermediate point: if\n$a < x$ and $x \\le z$ then $a < z$, and if $z \\le y$ and $y < b$ then $z < b$,\nby transitivity of the order ([[def-ordered-field]]). Applying this to whichever\none or two conditions define the form in question gives $z \\in I$ whenever\n$x, y \\in I$ and $x \\le z \\le y$.\n\n**Bounded intervals.** An interval is **bounded** ([[def-bounded-set]]) exactly\nwhen it is of one of the four forms in the left column: for those, $a$ is a lower\nbound and $b$ an upper bound. The other five forms are unbounded, on the side or\nsides written with $\\infty$; the verification is in the remarks below.\n\n**Nondegeneracy.** An interval is **degenerate** when it has at most one element,\nand **nondegenerate** when it has at least two. For the four bounded forms with\nendpoints $a$ and $b$:\n\n- $[a,b]$ is nonempty exactly when $a \\le b$, and it is nondegenerate exactly\n  when $a < b$. It is the singleton $\\{a\\}$ when $a = b$.\n- $(a,b)$, $[a,b)$ and $(a,b]$ are nonempty exactly when $a < b$, and then each\n  is nondegenerate.\n\nThe only assertion here that is not immediate from the defining conditions is\nthat $a < b$ makes $(a,b)$ nonempty with at least two points. It holds because\n$a < (a+b)/2 < b$, which follows from $a < b$ by adding $a$, respectively $b$, to\nboth sides and halving ([[def-ordered-field]]); repeating the halving inside\n$(a, (a+b)/2)$ produces a second point.\n\n**Closed bounded intervals.** These are the sets $[a,b]$ with $a \\le b$, which is\nexactly the condition making them nonempty. They are the intervals the nested\ninterval property is stated for, and the phrase *closed bounded interval* always\ncarries the hypothesis $a \\le b$ in this library.\n\n**Length.** The **length** of a bounded interval presented by its endpoints\n$a \\le b$ is\n\n$$\\ell = b - a \\;\\ge\\; 0 .$$\n\nLength is attached to the presentation by endpoints and is not recovered from the\nset: $(a,b)$, $[a,b)$ and $(a,b]$ are all empty when $a = b$, and so is\n$(c,c)$ for any other $c$, while each of these presentations has length $0$, so\nnothing inconsistent arises; but the endpoints are named explicitly at every\npoint where a length is used in this library, and never inferred from the set.\nUnbounded intervals are assigned no length.",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-continuous-injection-on-an-interval-is-strictly-monotone",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ninjective ([[def-injection-surjection-bijection]]). Then $f$ is strictly\nmonotone ([[def-monotone-function]]): either $f(x) < f(y)$ whenever $x < y$ in\n$I$, or $f(x) > f(y)$ whenever $x < y$ in $I$.\n\n**Both hypotheses are needed and neither can be weakened to the other.**\nContinuity alone does not give injectivity, and injectivity alone does not give\nmonotonicity: the companion page exhibits a continuous injection on\n$[0,1] \\cup [2,3]$, a set that is not order-convex, that is not monotone. So it\nis order-convexity of the domain, and not merely continuity, that forces the\nconclusion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-continuous-inverse",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ninjective ([[def-injection-surjection-bijection]]). Then:\n\n1. $f$ is strictly monotone ([[def-monotone-function]]);\n2. $f[I]$ is order-convex;\n3. the map $f : I \\to f[I]$ is a bijection, so there is exactly one\n   $g : f[I] \\to I$ with $g(f(x)) = x$ for every $x \\in I$ and $f(g(u)) = u$ for\n   every $u \\in f[I]$;\n4. $g$ is strictly monotone in the same sense as $f$: increasing if $f$ is\n   increasing, decreasing if $f$ is decreasing;\n5. $g$ is continuous on $f[I]$.\n\n**\"Interval\" means \"order-convex\" here**, as throughout this library\n([[thm-connected-subsets-of-r-are-intervals]] is what licenses the word and\n[[def-interval]] records that the classification of order-convex sets into the\nnine written forms is not proved here). No compactness and no boundedness is\nassumed: $I$ may be open, half-open, unbounded, or a single point.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "$f[\\,[0,1]\\,] = [0,1]$ and $f[\\,[2,3]\\,] = [2,3]$: on $[0,1]$ the map is the identity, and on $[2,3]$ the map $x \\mapsto 5-x$ sends $2$ to $3$ and $3$ to $2$ and is order-reversing, so its image is $[2,3]$.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "$f$ is continuous on $A$. Let $c \\in [0,1]$ and let $\\varepsilon > 0$ be real; take $\\delta := \\min\\{1, \\varepsilon\\}$. Every $x \\in A$ with $|x - c| < \\delta$ satisfies $x < c + 1 \\le 2$, so $x \\in [0,1]$ and $|f(x) - f(c)| = |x - c| < \\varepsilon$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "Let $c \\in [2,3]$ and let $\\varepsilon > 0$ be real; take $\\delta := \\min\\{1, \\varepsilon\\}$. Every $x \\in A$ with $|x - c| < \\delta$ satisfies $x > c - 1 \\ge 1$, so $x \\in [2,3]$ and $|f(x) - f(c)| = |(5-x)-(5-c)| = |x - c| < \\varepsilon$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-1-4",
+          "claim": "$f$ is not monotone: $0 < 1$ with $f(0) = 0 < 1 = f(1)$ rules out nonincreasing, and $2 < 3$ with $f(2) = 3 > 2 = f(3)$ rules out nondecreasing.",
+          "step": "1.4",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-1-5",
+          "claim": "$A$ is not order-convex: $0 \\in A$, $3 \\in A$ and $0 \\le 3/2 \\le 3$, but $3/2 \\notin [0,1] \\cup [2,3]$.",
+          "step": "1.5",
+          "inputs": [
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "$f$ is injective: it is injective on $[0,1]$, being the identity there; it is injective on $[2,3]$, since $5 - x = 5 - y$ gives $x = y$; and the two images $[0,1]$ and $[2,3]$ are disjoint, so no point of one piece has the same value as a point of the other.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "So $f$ is a continuous injection on $A$ that is not monotone, refuting the claim; and the hypothesis that fails is exactly order-convexity of the domain, which is what the theorem assumes.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "step 1.5",
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For cex-continuous-injection-on-a-non-interval-need-not-be-monotone (A continuous injection on $[0,1] \\\\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem), the assertion does not quantify over an empty input set or family; the carrier's domain and hypotheses fix the objects being considered."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: The example explicitly checks f(0)=0 in the monotonicity refutation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "For cex-continuous-injection-on-a-non-interval-need-not-be-monotone (A continuous injection on $[0,1] \\\\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem), no singleton cardinality or one-element input is a distinct branch of the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "For cex-continuous-injection-on-a-non-interval-need-not-be-monotone (A continuous injection on $[0,1] \\\\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem), there is no interval or compact-domain parameter whose degenerate case could alter the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: Both endpoints of each component interval are used in the explicit continuity and direction checks."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For cex-continuous-injection-on-a-non-interval-need-not-be-monotone (A continuous injection on $[0,1] \\\\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem), the proof makes no choice from a family; any witness is a single existential witness or is explicitly constructed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For cex-continuous-injection-on-a-non-interval-need-not-be-monotone (A continuous injection on $[0,1] \\\\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem), the assertion is one-directional and states no forward implication of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For cex-continuous-injection-on-a-non-interval-need-not-be-monotone (A continuous injection on $[0,1] \\\\cup [2,3]$ that is not monotone, so the interval hypothesis cannot be dropped from the strict-monotonicity theorem), the assertion is one-directional and states no reverse implication of an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "input": "x = 0, 1, 2, 3",
+          "expected": "f(x) = 0, 1, 3, 2",
+          "disposition": "verified directly from the two formulas; opposite component directions rule out either monotonicity direction"
+        }
+      ]
+    }
+  },
+  "section_disposition": "All numbered claim/input entries remain exact after relocation from Verification to Counterexample; strict selected check passes."
+}

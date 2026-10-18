@@ -3,6 +3,7 @@ id: thm-parametric-transversality
 kind: theorem
 title: "Parametric transversality"
 status: published
+dependency_level: 5
 origin: session
 provenance:
   statement: literature-derived
@@ -22,12 +23,7 @@ sources:
     - title: "Marco Gualtieri, Topology I: Smooth Manifolds, cumulative notes"
       url: "https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes.pdf"
 verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-02-maintenance-receipts.jsonl (thm-parametric-transversality). No independent judge or whole-closure certification.
-    delegated_by: owner
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step5-published-install-r2/receipts/thm-parametric-transversality.json
 ---
 
 ## Statement

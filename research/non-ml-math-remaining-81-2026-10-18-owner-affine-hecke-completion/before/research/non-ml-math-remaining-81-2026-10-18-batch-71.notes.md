@@ -1,0 +1,57 @@
+# Batch 71 authoring notes — Affine Hecke Algebras Beyond Type A
+
+Run `non-ml-math-remaining-81-2026-10-18`; role beta; assigned pair PA-40 in `hopf-hecke-algebras`. Scheduling input: `825ada459eb8a44f2bca9b180e0d40e43ed62d08f26d224468ce63c38b792042`. The run-level batch dependency is level 2 and requires batch 64. No engine state, shared plan, verdict, or published carrier was edited.
+
+## Plan and design reconciliation
+
+- `research/plan-spec.json` and the batch-71 scaffold manifest agree on page IDs, titles, category, order (2956/2957), and page-level `requires` (`hopf-hecke-and-quantum-symmetry-interfaces` for A; A for B). Both current item arrays were empty placeholders. The task/design supplies three A-page claim families and an examples duty, so the item inventory below was established in this batch manifest before any item carrier was written. No page identity or plan metadata changed.
+- The historical PA-40 proposal retains: (i) the general root-data Bernstein presentation and PBW theorem, (ii) tempered/Langlands classification for positive real parameters with exact hypotheses, and (iii) the boundary between p-adic Iwahori parameters and finite type-A quantum-characteristic specializations. Those claims were not narrowed or removed. The two large theorem families are explicitly retained as source reports and owner escalations; they are not theorem suppliers.
+- The current published supplier `def-quantum-characteristic-of-an-invertible-hecke-parameter` defines the no-finite-value case as `e=∞`. The historical Hecke dossier uses `e=0` for that case. This batch follows the exact current supplier definition, records the discrepancy here, and uses `∞` in its scalar calculations. No replacement definition or shared-plan edit was made.
+- The source treatments use dual root-data conventions: Solleveld writes the lattice group algebra as `C[X]` and the exceptional condition as `alpha^vee in 2Y`; this page uses `C[Y]` with `alpha in 2X`, following the explicit Ciubotaru convention. The comparison is by dual root datum; no generator or lattice is silently identified.
+- The parameter normalization is explicit: the Iwahori–Matsumoto generator satisfies `(T_s-q_s)(T_s+1)=0`; with `N_s=q_s^(-1/2)T_s` and `v_s=sqrt(q_s)`, it becomes `(N_s-v_s)(N_s+v_s^(-1))=0`. No generic type-A specialization theorem is inferred.
+- The final definitions make the finite simple set `S_0={s_alpha: alpha in Delta}` an explicit subset of `S_aff`, require the Coxeter labels on it to match `ord_W0(st)`, and therefore make the restricted affine parameters `q_s` available in the Bernstein presentation. In the doubled-root case, `v_prime_alpha` is stated as additional formal input; this definition does not silently identify it with a parameter absent from the declared affine parameter function.
+
+## Inventory and item dependency levels
+
+The levels below count only direct logical suppliers authored in this batch. External published suppliers are listed in item `deps` but do not raise an item level. `justified_by` marks the cross-relation well-definedness proof and is not a reverse dependency.
+
+| Item | Direct in-batch dependencies | Level | Authoring state |
+|---|---|---:|---|
+| `def-hh-affine-hecke-algebra-from-root-datum` | — | 0 | Complete definition. |
+| `lem-hh-affine-hecke-im-basis` | `def-hh-affine-hecke-algebra-from-root-datum` | 1 | Complete proof from the published generic Coxeter basis and the crossed-product definition. |
+| `def-hh-affine-hecke-bernstein-presentation` | `def-hh-affine-hecke-algebra-from-root-datum` | 1 | Formal presentation defined; well-definedness discharged by its `justified_by` lemma. It does not assert PBW or equivalence. |
+| `lem-hh-positive-affine-parameter-has-infinite-quantum-characteristic` | — | 0 | Complete scalar proof; uses the published quantum-characteristic definition. |
+| `lem-hh-affine-hecke-bernstein-quotients-are-well-defined` | `def-hh-affine-hecke-bernstein-presentation` | 2 | Complete positive/zero/negative exponent proof, including the doubled-root case. |
+| `rem-hh-affine-tempered-langlands-classification-awaits-local-proof` | `def-hh-affine-hecke-algebra-from-root-datum`, `def-hh-affine-hecke-bernstein-presentation`, `lem-hh-affine-hecke-im-basis` | 2 | Source-reported theorem and precise local proof escalation; not a supplier. |
+| `ex-hh-affine-padic-versus-root-of-unity-parameters` | `lem-hh-positive-affine-parameter-has-infinite-quantum-characteristic` | 1 | Complete finite scalar verification; makes no algebra-equivalence claim. |
+| `rem-hh-affine-hecke-general-bernstein-pbw-awaits-local-proof` | `def-hh-affine-hecke-algebra-from-root-datum`, `def-hh-affine-hecke-bernstein-presentation`, `lem-hh-affine-hecke-bernstein-quotients-are-well-defined`, `lem-hh-affine-hecke-im-basis` | 3 | Full source-reported result retained with exact missing proof obligations; not a supplier. |
+| `ex-hh-affine-b2-unequal-parameters` | `def-hh-affine-hecke-algebra-from-root-datum`, `lem-hh-affine-hecke-im-basis` | 2 | Complete coordinate, Coxeter, parameter, and basis verification. |
+
+The graph is acyclic. All proofs are choice-free. The A page has 7 items and its B page has 2 examples, below the 100-item page limit.
+
+## Supplier and source findings
+
+- The required batch-64 A page was read in full, along with the actual draft bodies of `def-hh-rational-spectral-r-matrix` and `lem-hh-rational-spectral-r-matrix-satisfies-yang-baxter`. They are a finite `C^2` spectral-matrix definition and a direct Yang–Baxter proof; neither supplies an affine root datum, Bernstein relation, Iwahori–Matsumoto basis, or parameter-classification claim. PA-40 has no logical `deps` on them. The exact page-reading disposition is in the cross-batch input. Batch 64's own notes leave its placement/readiness with the owner; no acceptance is claimed here.
+- The complete relevant portions of Solleveld's full-text survey were read: root-data and affine-Hecke definitions, the parameter restrictions and Bernstein formulas (§§1.2–1.4, PDF pp. 8–12), and tempered/Langlands definitions and theorem statement (§3.2, PDF pp. 27–30). The survey refers the Bernstein associativity/basis proof to Lusztig and the Langlands proof to another work.
+- Ciubotaru's 16-page full-text lecture note was read at the relevant sections: affine Hecke definition and parameter context (§1, p. 1), Bernstein–Lusztig relations including the doubled-root formula (§3, p. 4), and the Iwahori-fixed p-adic interface (§§4–5, pp. 5–8). Its Bernstein theorem cites Lusztig rather than supplying the full general proof.
+- The checked batch-64 draft bodies use a separate rational spectral-R convention and are not cited as proof sources. The exact source records and fetch stamps are in the batch coverage file.
+
+`node tools/source-fetch-check.mjs --coverage research/non-ml-math-remaining-81-2026-10-18-batch-71.coverage.json --stamp` passed 3/3 source entries. Solleveld's PDF returned 80 pages (1,031,243 bytes; SHA-256 prefix `43b99a715351daec`); Ciubotaru's lecture note returned 16 pages (388,928 bytes; prefix `86b7b84ff9bfc400`). The repeated Solleveld URL on the B-page example has the same stamp. All three fetched on the first attempt; no recovery retry, source drop, or source-resolution escalation was needed.
+
+## Owner escalations
+
+1. **General Bernstein PBW and presentation equivalence.** The source theorem is stated but its proof route is referred to Lusztig §3. The local quotient-divisibility lemma does not prove that the Bernstein elements multiply as the lattice group, that the cross-relations match the Iwahori–Matsumoto generators, or that either ordered family is a basis. Proposed A-page suppliers: `lem-hh-affine-hecke-bernstein-elements-are-multiplicative`, `lem-hh-affine-hecke-bernstein-cross-relations-match-im`, and `thm-hh-affine-hecke-general-root-data-bernstein-pbw`. Place after the current definitions, cross-quotient lemma, and Iwahori–Matsumoto basis, before any general center, parabolic-induction, or representation consumer. Affected source report: `rem-hh-affine-hecke-general-bernstein-pbw-awaits-local-proof`.
+2. **Positive-parameter tempered/Langlands classification.** The source states the theorem for positive real affine parameters and Langlands data built from parabolic Hecke algebras, essentially tempered modules, and strict positive position, but refers its proof to Solleveld's classification paper. The exact unique-quotient, exhaustivity, and uniqueness arguments are not locally present. Proposed A-page suppliers: `def-hh-affine-hecke-parabolic-subalgebras-and-central-characters`, `def-hh-affine-hecke-weight-temperedness-and-positive-position`, `thm-hh-affine-hecke-standard-module-unique-irreducible-quotient`, and `thm-hh-affine-hecke-tempered-langlands-classification`. Place after the Bernstein PBW and before the p-adic group interface. A group-level conclusion also needs an exact group-specific Iwahori-type equivalence. Affected source report: `rem-hh-affine-tempered-langlands-classification-awaits-local-proof`. These are established proof obligations, not open problems.
+
+## Scoped validation and readiness
+
+- Source retrieval: node tools/source-fetch-check.mjs --coverage research/non-ml-math-remaining-81-2026-10-18-batch-71.coverage.json --stamp passed 3/3 records with no new stamps, retries, or drops.
+- Phase format: node tools/tsx-run.mjs tools/precheck.mts --json on the five proof-bearing items passed 5/5; all five carriers record verification.precheck: pass.
+- Proof layout: node tools/proof-layout.mjs on all nine assigned items reported 13 steps and 0 defects.
+- Render: node tools/rendercheck.mjs on the nine items and both pages checked 11 files with no errors or warnings.
+- Proof contracts: strict validation checked all five proof-bearing items with no errors or warnings.
+- Scoped dependencies: frontmatter and scaffold-manifest dependency lists matched for all nine carriers. node tools/depcheck.mjs --items-file /tmp/batch-71-items.json --json checked all nine assigned items and their prerequisite closure (1,437 items and 430 pages), with 0 errors and 0 warnings. The separate in-batch dependency-level computation found all nine planned levels, no errors, and no cycles: 0 for the affine definition and positive-parameter lemma; 1 for the Iwahori–Matsumoto basis, Bernstein definition, and scalar comparison; 2 for quotient divisibility, the tempered/Langlands report, and the B2 example; 3 for the Bernstein PBW report.
+- Step 1 records: seven items have current hash-checked ready records: def-hh-affine-hecke-algebra-from-root-datum, lem-hh-affine-hecke-im-basis, def-hh-affine-hecke-bernstein-presentation, lem-hh-affine-hecke-bernstein-quotients-are-well-defined, lem-hh-positive-affine-parameter-has-infinite-quantum-characteristic, ex-hh-affine-b2-unequal-parameters, and ex-hh-affine-padic-versus-root-of-unity-parameters. The PBW and tempered/Langlands report items remain escalated for the exact proof gaps above; their escalation records were not overwritten.
+- Run-wide batch dependency-level validation could not parse the unrelated published item items/prop-first-order-star-commutator-is-a-poisson-bracket.md:21: its unquoted YAML locator contains a colon in “§1.2, first approximation: Poisson structures”. This batch made no out-of-scope edit. The batch-71 scoped graph itself is acyclic and consistent.
+
+No run-level gate or verdict was attempted while the two significant proof escalations remain open.

@@ -3,23 +3,23 @@ id: fs-the-set-of-critical-values-is-always-closed
 kind: false-statement
 title: "The critical-value set need not be closed"
 status: published
+dependency_level: 1
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: []
+deps: [ def-critical-locus-and-critical-value-set ]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-01-receipts.jsonl (fs-the-set-of-critical-values-is-always-closed). No independent judge or whole-closure certification.
-    delegated_by: owner
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/fs-the-set-of-critical-values-is-always-closed.json
 sources:
   scraped: []
   references:
@@ -35,11 +35,13 @@ sources:
 
 **Given:** A smooth bump $\beta:\mathbb R\to\mathbb R$ supported in $[-1,1]$ with $\beta(0)=1$, $\beta'(0)=0$, and $0<\beta(t)<1$ for $0<|t|<1$, together with the smooth map $$ f(x):=\sum_{k=1}^\infty \left(1-\frac1k\right)\beta\bigl(2^k(x-k)\bigr). $$
 
+[F1] For a smooth map, the critical-value set is the image of the points where the derivative is not surjective; values with empty fibre are regular ([[def-critical-locus-and-critical-value-set]]).
+
 ## Refutation
 **Proof technique:** direct.
 
-1.1 The supports of the summands are pairwise disjoint, so the series defines a smooth function. At each center $x=k$, the derivative is zero and $$ f(k)=1-\frac1k. $$ Thus every value $1-\frac1k$ is a critical value. [given, algebra]
+1.1 The supports of the summands are pairwise disjoint, so the series defines a smooth function. At each center $x=k$, the derivative of the $k$th summand is $\left(1-\frac1k\right)2^k\beta'(0)=0$, and every other summand vanishes nearby. Thus $f'(k)=0$, which is not surjective from $\mathbb R$ to $\mathbb R$, while $$ f(k)=1-\frac1k. $$ By [F1], every value $1-\frac1k$ is a critical value. [F1, given, algebra]
 
-2.1 The sequence $1-\frac1k$ converges to $1$. But $f(x)\neq 1$ for every $x$, because every summand has height strictly below $1$ and outside the supports the function is $0$. Hence $1$ is a regular value with empty fibre, not a critical value. [step 1.1, algebra]
+2.1 The sequence $1-\frac1k$ converges to $1$. But $f(x)\neq 1$ for every $x$, because every summand has height strictly below $1$ and outside the supports the function is $0$. Hence $1$ has empty fibre and is regular by [F1], not a critical value. [F1, step 1.1, algebra]
 
 3.1 Therefore the critical value set contains $\{1-\frac1k:k\ge 1\}$ but not its limit $1$, so it is not closed. [step 2.1] ∎

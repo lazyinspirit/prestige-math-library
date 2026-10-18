@@ -1,0 +1,113 @@
+
+ITEM cex-qa-37-projective-is-not-controlled
+
+
+## Statement
+
+On one target qubit, $I_2$ and $-I_2$ differ only by a global phase and
+induce the same standalone ray and outcome probabilities. Controlled access
+changes the comparison. With control first,
+$$C(I_2)=I_4,\qquad C(-I_2)=\begin{pmatrix}I_2&0\\0&-I_2\end{pmatrix} =Z\otimes I_2.$$
+On input $|+\rangle|0\rangle$, these give $|+\rangle|0\rangle$ and
+$|-\rangle|0\rangle$. Measuring the control in the $X$ basis is
+respectively deterministic for $+$ and $-$, so the total-variation distance
+is one. Thus projective equivalence of an isolated braid gate is not
+interchangeable with equality under coherent control.
+
+
+
+## Diagram
+
+The diagram uses a filled control dot on the upper wire and the scalar phase
+$-I$ on the lower target branch. The final $X$ measurement reads the relative
+phase on the control. It is a circuit convention only; the matrix calculation
+below proves the claim.
+
+[diagram omitted from reading extract]
+
+## Facts & Assumptions
+
+**Given:** A single control qubit, a target qubit, and the two phase-related
+target gates $I_2$ and $-I_2$.
+
+[F1] Standalone global phase does not change ray probabilities, while a
+controlled global phase becomes relative. [[lem-qa-37-fixed-sector-global-phase]]
+
+[F2] The controlled-phase supplier states the control-target relative-phase
+effect. [[thm-qc-controlled-global-phase-is-relative-phase]]
+
+## Proof
+
+1.1 Both $I_2$ and $-I_2$ send every target vector to the same ray, since the outputs differ by scalar $-1$; hence their standalone outcome probabilities coincide by [F1]. In the ordered control basis $|0\rangle,|1\rangle$, the controlled block matrix is $\operatorname{diag}(I_2,-I_2)=Z\otimes I_2$. [F1, given, algebra]
+
+2.1 Applying this matrix to $|+\rangle|0\rangle=(|0\rangle+|1\rangle)|0\rangle/\sqrt2$ gives $|-\rangle|0\rangle$, whereas controlled $I_2$ leaves the input unchanged. The $X$-basis outcome laws are point masses on opposite outcomes, so their total-variation distance is $1$. This is the relative-phase effect in [F2]. [F2, step 1.1, algebra] ∎
+
+ITEM ex-qa-37-approximate-b6-target
+
+
+## Example
+
+Take the logical two-qubit target $U=I_4$. Its determinant is one, so the
+special-unitary extensions are $T_1=I_5$ and $T_\tau=I_8$. The empty
+six-strand braid has normalized block matrices $I_5,I_8$ and exponent sum
+zero. It therefore certifies exact zero block error, zero logical error and
+zero leakage; its physical common phase is $R_1^0=1$. This is the identity
+boundary case of the shared-word B6 interface.
+
+## Facts & Assumptions
+
+**Given:** The empty Artin word, the Fibonacci normalized block convention,
+and the six-anyon code embeddings.
+
+[F1] The encoded two-qubit theorem uses determinant-corrected targets
+$T_1,T_\tau$ and bounds the code error and leakage by the block error.
+[[thm-qa-37-approx-encoded-two-qubit-gate]]
+
+[F2] The determinant-character phase for exponent sum $k$ is $R_1^k$.
+[[lem-qc-tqc-determinant-character-phase]]
+
+## Verification
+
+1.1 Since $\det I_4=1$, both determinant-corrected extensions in [F1] are identity matrices; their determinants are one and their code restrictions are $I_4$. [F1, given, algebra]
+
+2.1 The empty word acts as the identity in each block and has exponent sum zero, so both operator differences vanish. The block approximation result then gives zero logical error and zero leakage, while [F2] gives physical phase $R_1^0=1$. [F1, F2, step 1.1, algebra] ∎
+
+ITEM ex-qa-37-fibonacci-budget
+
+
+## Example
+
+Take the fixed SK recurrence with $\eta_0=2^{-13}$ and requested tolerance
+$\varepsilon=2^{-14}$. This is a symbolic certificate example: the finite
+base-net list and its maximum length $L_0$ are supplied compiler data, not
+computed here. The exact recurrence gives $J=2$ and output length at most
+$25L_0$. For a finite QSD factor list of size $M>0$, allocate each factor
+$\delta=\min\{\varepsilon/(2M),\eta_0/2\}$; then the sum of the factor
+errors is at most $\varepsilon/2$. The two-qubit B6 search, measurement
+outcomes, preparation and ancilla use, Hamiltonian evolution, and phase
+correction are separate ledger coordinates. The supplied base-net certificate
+is fixed input data counted in $L_{\rm in}$; this example does not compute it.
+No B6 search-length bound follows from the SK calculation.
+
+## Facts & Assumptions
+
+**Given:** The SK recurrence and length estimate, the compiler cost ledger,
+and a finite exact QSD factor list.
+
+[F1] The error recurrence and word-length estimate are
+$\eta_{j+1}=64\eta_j^{3/2}$ and $L_j\le L_0 5^j$.
+[[thm-qa-37-su2-compiler-error-length]]
+
+[F2] The per-operation costs are separate coordinates; an absent bound is not
+zero. [[def-qa-37-resource-cost-model]]
+
+[F3] The exact QSD supplies a finite factorization into one-qubit gates and
+CNOTs. [[thm-qc-exact-arbitrary-unitary-qsd-upper-bound]]
+
+[F4] Operator error in a finite product of unitary factors is bounded by the sum of factor errors. [[lem-qa-37-product-error]]
+
+## Verification
+
+1.1 Compute $\eta_1=64(2^{-13})^{3/2}=2^6 2^{-39/2}=2^{-27/2}>2^{-14}$, while $\eta_2=64(2^{-27/2})^{3/2}=2^6 2^{-81/4}=2^{-57/4}<2^{-14}$. Therefore $J=2$ is the least level meeting the tolerance, and [F1] gives $L_2\le L_0 5^2=25L_0$. [F1, given, algebra]
+
+2.1 Each of the $M$ factors has error at most $\delta$. If $\delta=\varepsilon/(2M)$, then $M\delta=\varepsilon/2$; if $\delta=\eta_0/2$ is smaller, its defining inequality gives $M\eta_0/2<\varepsilon/2$. The finite product error is therefore at most $\varepsilon/2$ by [F4], while [F2] keeps SK length, B6 search work, measurement and phase correction as separate ledger coordinates. The $L_0$ value is part of a supplied certificate; no net list or B6 length is inferred here. [F2, F3, F4, step 1.1, algebra] ∎

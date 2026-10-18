@@ -3,6 +3,7 @@ id: prop-global-graph-characterization-by-one-point-transverse-fibres
 kind: proposition
 title: "A globally one-to-one transverse-fibre submanifold is a graph"
 status: published
+dependency_level: 4
 origin: session
 provenance:
   statement: literature-derived
@@ -15,8 +16,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-step2-root-published-recording/receipts/prop-global-graph-characterization-by-one-point-transverse-fibres.json
 sources:
   scraped: []
   references:
@@ -47,7 +52,7 @@ Then there is a unique smooth map $f:M\to N$ with $S=\Gamma_f$.
 ## Proof
 **Proof technique:** direct.
 
-1.1 Let $(x,y)\in S$. The fibre hypothesis gives $S\cap(\{x\}\times N)=\{(x,y)\}$. Because that intersection is a single point, it is $0$-dimensional. The vertical fibre has codimension $\dim M$ in $M\times N$, so [L1] forces $\operatorname{codim}_{M\times N}S=\dim N$, hence $\dim S=\dim M$. [L1, given, algebra]
+1.1 If $M=\varnothing$, then $S\subseteq M\times N=\varnothing$, so $S=\varnothing$ and the unique map $f:\varnothing\to N$ has graph $S$. Now suppose $M\ne\varnothing$. For any $x\in M$, choose its unique fibre point $(x,y)\in S$. The intersection $S\cap(\{x\}\times N)=\{(x,y)\}$ is $0$-dimensional. The vertical fibre has codimension $\dim M$ in $M\times N$, so [L1] forces $\operatorname{codim}_{M\times N}S=\dim N$, hence $\dim S=\dim M$. [L1, given, cases, choose, algebra]
 
 2.1 Let $\pi_M:S\to M$ be the restriction of the first projection. By the fibre hypothesis, $\pi_M$ is bijective. Since step 1.1 gives $\dim S=\dim M$ and $S$ is transverse to every vertical fibre it meets, [L2] shows that every point of $S$ has a neighbourhood on which $\pi_M$ is a diffeomorphism onto an open set of $M$. [L2, step 1.1, given]
 

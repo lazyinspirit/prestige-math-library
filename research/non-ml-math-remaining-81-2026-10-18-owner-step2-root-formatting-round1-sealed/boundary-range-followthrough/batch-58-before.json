@@ -1,0 +1,1435 @@
+{
+  "version": 1,
+  "run": "non-ml-math-remaining-81-2026-10-18",
+  "batch": "58",
+  "level": 2,
+  "scope": [
+    "def-temperley-lieb-link-state-standard-modules",
+    "lem-temperley-lieb-link-state-module-action-is-well-defined",
+    "thm-temperley-lieb-link-state-dimension-formula",
+    "lem-temperley-lieb-link-state-gram-form-is-invariant",
+    "lem-temperley-lieb-link-state-restriction-filtration",
+    "prop-temperley-lieb-link-state-form-vanishes-exactly-at-zero-loop-without-defects",
+    "thm-temperley-lieb-link-state-diagram-basis-is-cellular",
+    "cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules",
+    "cex-temperley-lieb-zero-cell-form-does-not-detect-module-head",
+    "ex-temperley-lieb-link-state-module-at-rank-three"
+  ],
+  "contracts": {
+    "def-temperley-lieb-link-state-standard-modules": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes the empty-rank boundary, and the definition records its convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero loop value; the definition uses no division by the loop value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes the one-strand case; the definition covers its boundary convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement adds no semisimplicity hypothesis; the definition preserves the stated ring scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement covers endpoint labels; the definition includes the boundary cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constructions are explicit and finite in the definition; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_review": {
+        "status": "reviewed",
+        "assumptions": [
+          "All Temperley–Lieb constructions are over the stated commutative ring with unit and arbitrary loop value; the simple-head classification alone assumes a field. No invertibility of δ, semisimplicity, or choice axiom is used."
+        ]
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-58 authoring audit",
+        "notes": "This scoped authoring record is not independent mathematical approval."
+      }
+    },
+    "lem-temperley-lieb-link-state-module-action-is-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit ([[def-algebra-over-a-commutative-ring]]) and let $\\delta\\in R$. The object labels are the nonnegative integers $n=0,1,2,\\ldots$. For labels $m,n$, place bottom points $b_1,\\ldots,b_m$ and top points $t_1,\\ldots,t_n$ along the rectangle from left to right on their respective edges. Their cyclic order is $t_1,\\ldots,t_n,b_m,\\ldots,b_1$. When $m=n=0$, the empty matching is included.\n\nAn $(m,n)$ **diagram** is a perfect matching of these $m+n$ boundary labels which is noncrossing: there are no four labels $a,b,c,d$ in cyclic order whose matched pairs are $\\{a,c\\}$ and $\\{b,d\\}$. A picture consists of disjoint arcs realizing the matching; equality is equality of the matching, so planar deformation that fixes the boundary does not change a diagram. If $m+n$ is odd, there are no such diagrams. Write $\\mathcal D(m,n)$ for this set and define the $R$-module\n\n$$M_R(m,n):=R^{(\\mathcal D(m,n))},$$\n\nthe free $R$-module on the set of diagrams ([[def-free-module-on-a-set-and-standard-basis]]). In particular, its diagram basis is empty when $m+n$ is odd.\n\nFor basis diagrams $D:m\\to n$ and $E:n\\to p$, stack $E$ above $D$ and identify the $n$ matching boundary points. The resulting finite graph has degree two at each identified point, where degree means the number of incident arcs. Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles. Denote this output by $E\\circ D$ and extend the rule $R$-bilinearly to a map $M_R(n,p)\\times M_R(m,n)\\to M_R(m,p)$. A following result proves closure of these operations on the diagram modules and the category axioms.\n\nThe matching $1_n:n\\to n$ pairs each bottom point to the top point directly above it. Horizontal juxtaposition, with the left diagram placed first, defines $m\\otimes m'=m+m'$ on object labels and $D\\otimes D'$ on basis diagrams; extend it $R$-bilinearly to the modules. A following result proves that these operations give a strict monoidal category.\n\nFor $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position. Define $\\mathrm{TL}_n(R,\\delta)$ to be the $R$-module $M_R(n,n)$ with bilinear multiplication $xy:=x\\circ y$ and distinguished element $1_n$. A following result proves that it is a unital associative $R$-algebra and identifies it with the endomorphism algebra at object $n$.\n\nThe left factor is stacked above the right factor. The loop value is $\\delta$; no invertibility or nonzero condition on $\\delta$ is part of these data.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-temperley-lieb-diagram-category-laws",
+          "source_section": "Statement",
+          "quote": "For every commutative ring $R$, loop value $\\delta\\in R$, and objects $m,n,p,q\\ge0$, the raw diagram data of [[def-temperley-lieb-diagram-category]] form a strict monoidal category $\\mathcal{TL}_R(\\delta)$ with hom-modules $M_R(m,n)$ and the stated $R$-bilinear stacking composition. Composition is associative, the identity diagrams are two-sided identities, and horizontal juxtaposition is a strict monoidal bifunctor with unit object $0$. Consequently $\\operatorname{End}_{\\mathcal{TL}_R(\\delta)}(n)=\\mathrm{TL}_n(R,\\delta)$ is a unital associative $R$-algebra whose underlying $R$-module is free on its noncrossing pairing diagrams.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-temperley-lieb-link-state-standard-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit, let $\\delta\\in R$, and let $n\\ge0$. Let $t$ be an integer with $0\\le t\\le n$ and $n-t$ even. The diagram module $M_R(n,t)$ has $n$ bottom boundary points and $t$ top boundary points, with stacking and loop removal as in [[def-temperley-lieb-diagram-category]]. A component of a basis diagram is **propagating** if it meets both the bottom and top boundaries. Write $\\operatorname{prop}(D)$ for the number of propagating components of a diagram $D:n\\to t$.\n\nLet $M_R^{<t}(n,t)$ be the $R$-span of the basis diagrams $D:n\\to t$ with $\\operatorname{prop}(D)<t$. Define the **Temperley–Lieb link-state standard module**\n\n$$W_{n,t}(R,\\delta):=M_R(n,t)/M_R^{<t}(n,t).$$\n\nWrite $T_{n,t}$ for the set of diagrams in $\\mathcal D(n,t)$ with exactly $t$ propagating components. The cosets of these diagrams form an $R$-basis of $W_{n,t}$. Identifying each diagram with its bottom arcs and defects gives a partial matching of the $n$ ordered bottom sites, with the additional condition that the $t$ unpaired sites are joined to the ordered top sites by noncrossing propagating strands. In particular, no defect lies inside an arc. The unpaired sites are called **defects**. Thus $t$ is the defect or through-line number; in sources using $p$ for the number of arcs, $p=(n-t)/2$.\n\nThe intended right action of $\\mathrm{TL}_n(R,\\delta)$ is $x\\cdot a=[x\\circ a]$, where $x\\in M_R(n,t)$, $a\\in M_R(n,n)$, and $x\\circ a$ stacks $x$ above $a$. The submodule $M_R^{<t}(n,t)$ is stable under this action, so it descends to $W_{n,t}$; the complete well-definedness argument is [[lem-temperley-lieb-link-state-module-action-is-well-defined]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-temperley-lieb-link-state-module-action-is-well-defined-1-1",
+          "claim": "For basis diagrams $x:n\\to t$ and $a,b:n\\to n$, both $(x\\cdot a)\\cdot b$ and $x\\cdot(ab)$ are represented by the same three-layer glued graph, with the same exterior paths and the same number of closed components. By [F1] their coefficients are the same power of $\\delta$, and [F2] gives $(x\\cdot a)\\cdot b=x\\cdot(ab)$. The identity diagram leaves $x$ unchanged. Bilinearity extends these equalities to $M_R(n,t)$, making it a right $\\mathrm{TL}_n(R,\\delta)$-module before quotienting.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-link-state-module-action-is-well-defined-2-1",
+          "claim": "If $\\operatorname{prop}(x)<t$, every propagating component of $x\\circ a$ must pass through a distinct propagating component of $x$ at the glued $n$-boundary; stacking cannot create a new path from the top $t$-boundary of $x$ to the exterior bottom boundary of $a$ when no such path existed in $x$. Thus every basis term of $x\\cdot a$ has fewer than $t$ propagating components. By [F3], $M_R^{<t}(n,t)$ is a right submodule.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-link-state-module-action-is-well-defined-3-1",
+          "claim": "The action therefore descends to the quotient $W_{n,t}(R,\\delta)$, and the module identities from step 1.1 descend with it. Since the diagram basis of $M_R(n,t)$ is partitioned into diagrams with exactly $t$ propagating components and those with fewer, the surviving cosets form the stated link-state basis.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes the empty-rank boundary, and step 1.1 records its convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero loop value; step 3.1 uses no division by the loop value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes the one-strand case; step 1.1 covers its boundary convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement adds no semisimplicity hypothesis; step 3.1 preserves the stated ring scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement covers endpoint labels; step 3.1 includes the boundary cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constructions are explicit and finite in step 1.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_review": {
+        "status": "reviewed",
+        "assumptions": [
+          "All Temperley–Lieb constructions are over the stated commutative ring with unit and arbitrary loop value; the simple-head classification alone assumes a field. No invertibility of δ, semisimplicity, or choice axiom is used."
+        ]
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-58 authoring audit",
+        "notes": "This scoped authoring record is not independent mathematical approval."
+      }
+    },
+    "thm-temperley-lieb-link-state-dimension-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-link-state-standard-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit, let $\\delta\\in R$, and let $n\\ge0$. Let $t$ be an integer with $0\\le t\\le n$ and $n-t$ even. The diagram module $M_R(n,t)$ has $n$ bottom boundary points and $t$ top boundary points, with stacking and loop removal as in [[def-temperley-lieb-diagram-category]]. A component of a basis diagram is **propagating** if it meets both the bottom and top boundaries. Write $\\operatorname{prop}(D)$ for the number of propagating components of a diagram $D:n\\to t$.\n\nLet $M_R^{<t}(n,t)$ be the $R$-span of the basis diagrams $D:n\\to t$ with $\\operatorname{prop}(D)<t$. Define the **Temperley–Lieb link-state standard module**\n\n$$W_{n,t}(R,\\delta):=M_R(n,t)/M_R^{<t}(n,t).$$\n\nWrite $T_{n,t}$ for the set of diagrams in $\\mathcal D(n,t)$ with exactly $t$ propagating components. The cosets of these diagrams form an $R$-basis of $W_{n,t}$. Identifying each diagram with its bottom arcs and defects gives a partial matching of the $n$ ordered bottom sites, with the additional condition that the $t$ unpaired sites are joined to the ordered top sites by noncrossing propagating strands. In particular, no defect lies inside an arc. The unpaired sites are called **defects**. Thus $t$ is the defect or through-line number; in sources using $p$ for the number of arcs, $p=(n-t)/2$.\n\nThe intended right action of $\\mathrm{TL}_n(R,\\delta)$ is $x\\cdot a=[x\\circ a]$, where $x\\in M_R(n,t)$, $a\\in M_R(n,n)$, and $x\\circ a$ stacks $x$ above $a$. The submodule $M_R^{<t}(n,t)$ is stable under this action, so it descends to $W_{n,t}$; the complete well-definedness argument is [[lem-temperley-lieb-link-state-module-action-is-well-defined]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "For a finite set $A$ and $k \\in \\mathbb{N}$ put\n\n$$[A]^{k} := \\{\\, S \\subseteq A \\ :\\ \\lvert S\\rvert = k \\,\\},$$\n\nthe set of $k$-element subsets of $A$. Every $S \\subseteq A$ is finite\n([[thm-subset-of-a-finite-set]]), so the condition $\\lvert S\\rvert = k$ makes\nsense for every subset.\n\n**$[A]^{k}$ is finite.** It is a subset of $\\mathcal{P}(A)$, which is finite by\n[[cor-cardinality-of-the-power-set]], so [[thm-subset-of-a-finite-set]] applies.\n\n**$\\lvert [A]^{k}\\rvert$ depends only on $\\lvert A\\rvert$.** Let $h : A \\to A'$ be\na bijection of finite sets. The direct image map $S \\mapsto h[S]$ carries\n$[A]^{k}$ into $[A']^{k}$, because $h$ restricted to $S$ is a bijection of $S$\nonto $h[S]$ and so $\\lvert h[S]\\rvert = \\lvert S\\rvert = k$ by the transport\nclause of [[def-finite-cardinality]]; the map $T \\mapsto h^{-1}[T]$ is its\ntwo-sided inverse, since $h^{-1}[h[S]] = S$ and $h[h^{-1}[T]] = T$ for a\nbijection $h$. So $[A]^{k} \\approx [A']^{k}$ and the two have the same\ncardinality.\n\n**Definition.** For $n, k \\in \\mathbb{N}$ set\n\n$$\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N},$$\n\nthe **binomial coefficient**. By the previous paragraph and $\\lvert n\\rvert = n$,\n\n$$\\big\\lvert [A]^{k}\\big\\rvert = \\binom{\\lvert A\\rvert}{k} \\qquad \\text{for every finite } A .$$\n\n**$\\binom{n}{k}$ is a count, so it is a natural number by construction.** It is\n*not* defined as $n!/(k!\\,(n-k)!)$: that expression involves a division, hence\nlives in $\\mathbb{R}$, and the assertion that its value is a natural number is a\ntheorem, proved in [[thm-binomial-closed-formula]]. Defining the coefficient as a\ncount makes integrality free and leaves the closed formula something to prove.\n\n**Boundary values, read off the definition and not stipulated.**\n\n- $\\binom{n}{0} = 1$ **for every $n$, including $n = 0$**: the subsets of $n$ of\n  cardinality $0$ are exactly the subsets equal to $\\varnothing$\n  ([[def-finite-cardinality]], clause (b)), so $[n]^{0} = \\{\\varnothing\\}$, a\n  one-element set. No empty-product convention is involved.\n- $\\binom{n}{n} = 1$: if $S \\subseteq n$ has $\\lvert S\\rvert = n = \\lvert n\\rvert$\n  then $S = n$ by clause 3 of [[thm-subset-of-a-finite-set]], so\n  $[n]^{n} = \\{n\\}$.\n- $\\binom{n}{k} = 0$ for $k > n$: a subset $S \\subseteq n$ has\n  $\\lvert S\\rvert \\le n$ by clause 2 of [[thm-subset-of-a-finite-set]], so\n  $\\lvert S\\rvert = k > n$ is impossible and $[n]^{k} = \\varnothing$\n  ([[lem-nat-trichotomy]]).\n- $\\binom{n}{1} = n$: a subset of cardinality $1$ is $\\{x\\}$ for exactly one\n  $x \\in n$, since $\\lvert S\\rvert = 1$ means $S \\approx \\{0\\}$; so\n  $S \\mapsto$ its unique element is a bijection $[n]^{1} \\to n$.\n- $\\binom{0}{0} = 1$ and $\\binom{0}{k} = 0$ for $k \\ge 1$, both instances of the\n  above.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-temperley-lieb-link-state-dimension-formula-1-1",
+          "claim": "Encode each arc by an opening symbol at its left endpoint and a closing symbol at its right endpoint; encode each defect by an opening symbol. This gives a word of length $n$ with $a+t$ openings and $a$ closings. Every prefix has at least as many openings as closings, because each closing site in that prefix is paired with a distinct earlier opening site in the same prefix.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-link-state-dimension-formula-2-1",
+          "claim": "Conversely, scan any word with $a+t$ openings, $a$ closings and nonnegative prefix heights from left to right. Pair each closing symbol with the most recent unmatched opening. The prefix condition guarantees such an opening exists at every closing, and the final number of unmatched openings is $t$. The resulting arcs are nested or disjoint, so they form a noncrossing matching; the unmatched openings are its defects. This reverses step 1.1, giving a bijection between $T_{n,t}$ and those words.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-link-state-dimension-formula-3-1",
+          "claim": "There are $\\binom{n}{a}$ words with $a$ closing positions, by [F2]. For $a\\ge1$, reflect openings and closings through the first prefix whose height is $-1$. This is a bijection from words that violate the prefix condition to all words with $a-1$ closings: the reflected word ends at height $t+2\\ge2$ and therefore has a first prefix of height $1$, whose reflection is the inverse. When $a=0$ there are no violating words, agreeing with the stated convention. Subtracting the bad count $\\binom{n}{a-1}$ from the total gives the displayed formula.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes the empty-rank boundary, and step 1.1 records its convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero loop value; step 3.1 uses no division by the loop value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes the one-strand case; step 1.1 covers its boundary convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement adds no semisimplicity hypothesis; step 3.1 preserves the stated ring scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement covers endpoint labels; step 3.1 includes the boundary cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constructions are explicit and finite in step 1.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_review": {
+        "status": "reviewed",
+        "assumptions": [
+          "All Temperley–Lieb constructions are over the stated commutative ring with unit and arbitrary loop value; the simple-head classification alone assumes a field. No invertibility of δ, semisimplicity, or choice axiom is used."
+        ]
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-58 authoring audit",
+        "notes": "This scoped authoring record is not independent mathematical approval."
+      }
+    },
+    "lem-temperley-lieb-link-state-gram-form-is-invariant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-link-state-standard-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit, let $\\delta\\in R$, and let $n\\ge0$. Let $t$ be an integer with $0\\le t\\le n$ and $n-t$ even. The diagram module $M_R(n,t)$ has $n$ bottom boundary points and $t$ top boundary points, with stacking and loop removal as in [[def-temperley-lieb-diagram-category]]. A component of a basis diagram is **propagating** if it meets both the bottom and top boundaries. Write $\\operatorname{prop}(D)$ for the number of propagating components of a diagram $D:n\\to t$.\n\nLet $M_R^{<t}(n,t)$ be the $R$-span of the basis diagrams $D:n\\to t$ with $\\operatorname{prop}(D)<t$. Define the **Temperley–Lieb link-state standard module**\n\n$$W_{n,t}(R,\\delta):=M_R(n,t)/M_R^{<t}(n,t).$$\n\nWrite $T_{n,t}$ for the set of diagrams in $\\mathcal D(n,t)$ with exactly $t$ propagating components. The cosets of these diagrams form an $R$-basis of $W_{n,t}$. Identifying each diagram with its bottom arcs and defects gives a partial matching of the $n$ ordered bottom sites, with the additional condition that the $t$ unpaired sites are joined to the ordered top sites by noncrossing propagating strands. In particular, no defect lies inside an arc. The unpaired sites are called **defects**. Thus $t$ is the defect or through-line number; in sources using $p$ for the number of arcs, $p=(n-t)/2$.\n\nThe intended right action of $\\mathrm{TL}_n(R,\\delta)$ is $x\\cdot a=[x\\circ a]$, where $x\\in M_R(n,t)$, $a\\in M_R(n,n)$, and $x\\circ a$ stacks $x$ above $a$. The submodule $M_R^{<t}(n,t)$ is stable under this action, so it descends to $W_{n,t}$; the complete well-definedness argument is [[lem-temperley-lieb-link-state-module-action-is-well-defined]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-temperley-lieb-link-state-module-action-is-well-defined",
+          "source_section": "Statement",
+          "quote": "For $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ as in [[def-temperley-lieb-link-state-standard-modules]], the rule $x\\cdot a=[x\\circ a]$ defines a unital right $\\mathrm{TL}_n(R,\\delta)$-module structure on $W_{n,t}(R,\\delta)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit ([[def-algebra-over-a-commutative-ring]]) and let $\\delta\\in R$. The object labels are the nonnegative integers $n=0,1,2,\\ldots$. For labels $m,n$, place bottom points $b_1,\\ldots,b_m$ and top points $t_1,\\ldots,t_n$ along the rectangle from left to right on their respective edges. Their cyclic order is $t_1,\\ldots,t_n,b_m,\\ldots,b_1$. When $m=n=0$, the empty matching is included.\n\nAn $(m,n)$ **diagram** is a perfect matching of these $m+n$ boundary labels which is noncrossing: there are no four labels $a,b,c,d$ in cyclic order whose matched pairs are $\\{a,c\\}$ and $\\{b,d\\}$. A picture consists of disjoint arcs realizing the matching; equality is equality of the matching, so planar deformation that fixes the boundary does not change a diagram. If $m+n$ is odd, there are no such diagrams. Write $\\mathcal D(m,n)$ for this set and define the $R$-module\n\n$$M_R(m,n):=R^{(\\mathcal D(m,n))},$$\n\nthe free $R$-module on the set of diagrams ([[def-free-module-on-a-set-and-standard-basis]]). In particular, its diagram basis is empty when $m+n$ is odd.\n\nFor basis diagrams $D:m\\to n$ and $E:n\\to p$, stack $E$ above $D$ and identify the $n$ matching boundary points. The resulting finite graph has degree two at each identified point, where degree means the number of incident arcs. Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles. Denote this output by $E\\circ D$ and extend the rule $R$-bilinearly to a map $M_R(n,p)\\times M_R(m,n)\\to M_R(m,p)$. A following result proves closure of these operations on the diagram modules and the category axioms.\n\nThe matching $1_n:n\\to n$ pairs each bottom point to the top point directly above it. Horizontal juxtaposition, with the left diagram placed first, defines $m\\otimes m'=m+m'$ on object labels and $D\\otimes D'$ on basis diagrams; extend it $R$-bilinearly to the modules. A following result proves that these operations give a strict monoidal category.\n\nFor $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position. Define $\\mathrm{TL}_n(R,\\delta)$ to be the $R$-module $M_R(n,n)$ with bilinear multiplication $xy:=x\\circ y$ and distinguished element $1_n$. A following result proves that it is a unital associative $R$-algebra and identifies it with the endomorphism algebra at object $n$.\n\nThe left factor is stacked above the right factor. The loop value is $\\delta$; no invertibility or nonzero condition on $\\delta$ is part of these data.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-temperley-lieb-diagram-category-laws",
+          "source_section": "Statement",
+          "quote": "For every commutative ring $R$, loop value $\\delta\\in R$, and objects $m,n,p,q\\ge0$, the raw diagram data of [[def-temperley-lieb-diagram-category]] form a strict monoidal category $\\mathcal{TL}_R(\\delta)$ with hom-modules $M_R(m,n)$ and the stated $R$-bilinear stacking composition. Composition is associative, the identity diagrams are two-sided identities, and horizontal juxtaposition is a strict monoidal bifunctor with unit object $0$. Consequently $\\operatorname{End}_{\\mathcal{TL}_R(\\delta)}(n)=\\mathrm{TL}_n(R,\\delta)$ is a unital associative $R$-algebra whose underlying $R$-module is free on its noncrossing pairing diagrams.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-temperley-lieb-link-state-gram-form-is-invariant-1-1",
+          "claim": "For basis link states $x$ and $y$, the composite $y\\circ x^*$ is a diagram from $t$ to $t$. If all $t$ boundary points propagate, planarity forces them to connect in their order, so after removing $c$ closed loops the result is $\\delta^c1_t$ for a unique $c$. Otherwise it has fewer than $t$ propagating components. Thus the stated value is determined by the matching and loop count, and it extends uniquely to an $R$-bilinear form on the free link-state basis [F1, F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-link-state-gram-form-is-invariant-2-1",
+          "claim": "Reflection reverses the order of stacking, fixes each scalar $\\delta$, and sends $y\\circ x^*$ to $x\\circ y^*$. Hence $y\\circ x^*=\\delta^c1_t$ exactly when $x\\circ y^*=\\delta^c1_t$ with the same $c$; the lower-propagating case is also preserved. Therefore $\\phi_{n,t}(x,y)=\\phi_{n,t}(y,x)$ on basis states and, by bilinearity, on all module elements.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "lem-temperley-lieb-link-state-gram-form-is-invariant-3-1",
+          "claim": "For basis states $x,y$ and a basis diagram $a\\in\\mathrm{TL}_n$, reflection gives $(x\\circ a)^*=a^*\\circ x^*$. Both form values are therefore the coefficient of $1_t$ in the same associative composite $y\\circ(x\\circ a)^*=y\\circ a^*\\circ x^*=(y\\circ a^*)\\circ x^*$. They have the same exterior matching and number of removed loops, so their coefficients of $1_t$ agree. If an intermediate term has fewer than $t$ propagating components, it remains lower-propagating after further stacking and contributes zero on both sides. This proves the invariance identity for basis states and basis diagrams; bilinearity proves it for all $x,y,a$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes the empty-rank boundary, and step 1.1 records its convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero loop value; step 3.1 uses no division by the loop value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes the one-strand case; step 1.1 covers its boundary convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement adds no semisimplicity hypothesis; step 3.1 preserves the stated ring scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement covers endpoint labels; step 3.1 includes the boundary cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constructions are explicit and finite in step 1.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_review": {
+        "status": "reviewed",
+        "assumptions": [
+          "All Temperley–Lieb constructions are over the stated commutative ring with unit and arbitrary loop value; the simple-head classification alone assumes a field. No invertibility of δ, semisimplicity, or choice axiom is used."
+        ]
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-58 authoring audit",
+        "notes": "This scoped authoring record is not independent mathematical approval."
+      }
+    },
+    "lem-temperley-lieb-link-state-restriction-filtration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-link-state-standard-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit, let $\\delta\\in R$, and let $n\\ge0$. Let $t$ be an integer with $0\\le t\\le n$ and $n-t$ even. The diagram module $M_R(n,t)$ has $n$ bottom boundary points and $t$ top boundary points, with stacking and loop removal as in [[def-temperley-lieb-diagram-category]]. A component of a basis diagram is **propagating** if it meets both the bottom and top boundaries. Write $\\operatorname{prop}(D)$ for the number of propagating components of a diagram $D:n\\to t$.\n\nLet $M_R^{<t}(n,t)$ be the $R$-span of the basis diagrams $D:n\\to t$ with $\\operatorname{prop}(D)<t$. Define the **Temperley–Lieb link-state standard module**\n\n$$W_{n,t}(R,\\delta):=M_R(n,t)/M_R^{<t}(n,t).$$\n\nWrite $T_{n,t}$ for the set of diagrams in $\\mathcal D(n,t)$ with exactly $t$ propagating components. The cosets of these diagrams form an $R$-basis of $W_{n,t}$. Identifying each diagram with its bottom arcs and defects gives a partial matching of the $n$ ordered bottom sites, with the additional condition that the $t$ unpaired sites are joined to the ordered top sites by noncrossing propagating strands. In particular, no defect lies inside an arc. The unpaired sites are called **defects**. Thus $t$ is the defect or through-line number; in sources using $p$ for the number of arcs, $p=(n-t)/2$.\n\nThe intended right action of $\\mathrm{TL}_n(R,\\delta)$ is $x\\cdot a=[x\\circ a]$, where $x\\in M_R(n,t)$, $a\\in M_R(n,n)$, and $x\\circ a$ stacks $x$ above $a$. The submodule $M_R^{<t}(n,t)$ is stable under this action, so it descends to $W_{n,t}$; the complete well-definedness argument is [[lem-temperley-lieb-link-state-module-action-is-well-defined]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "5.1",
+            "6.1",
+            "6.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-temperley-lieb-link-state-module-action-is-well-defined",
+          "source_section": "Statement",
+          "quote": "For $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ as in [[def-temperley-lieb-link-state-standard-modules]], the rule $x\\cdot a=[x\\circ a]$ defines a unital right $\\mathrm{TL}_n(R,\\delta)$-module structure on $W_{n,t}(R,\\delta)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "5.1",
+            "6.1",
+            "6.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit ([[def-algebra-over-a-commutative-ring]]) and let $\\delta\\in R$. The object labels are the nonnegative integers $n=0,1,2,\\ldots$. For labels $m,n$, place bottom points $b_1,\\ldots,b_m$ and top points $t_1,\\ldots,t_n$ along the rectangle from left to right on their respective edges. Their cyclic order is $t_1,\\ldots,t_n,b_m,\\ldots,b_1$. When $m=n=0$, the empty matching is included.\n\nAn $(m,n)$ **diagram** is a perfect matching of these $m+n$ boundary labels which is noncrossing: there are no four labels $a,b,c,d$ in cyclic order whose matched pairs are $\\{a,c\\}$ and $\\{b,d\\}$. A picture consists of disjoint arcs realizing the matching; equality is equality of the matching, so planar deformation that fixes the boundary does not change a diagram. If $m+n$ is odd, there are no such diagrams. Write $\\mathcal D(m,n)$ for this set and define the $R$-module\n\n$$M_R(m,n):=R^{(\\mathcal D(m,n))},$$\n\nthe free $R$-module on the set of diagrams ([[def-free-module-on-a-set-and-standard-basis]]). In particular, its diagram basis is empty when $m+n$ is odd.\n\nFor basis diagrams $D:m\\to n$ and $E:n\\to p$, stack $E$ above $D$ and identify the $n$ matching boundary points. The resulting finite graph has degree two at each identified point, where degree means the number of incident arcs. Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles. Denote this output by $E\\circ D$ and extend the rule $R$-bilinearly to a map $M_R(n,p)\\times M_R(m,n)\\to M_R(m,p)$. A following result proves closure of these operations on the diagram modules and the category axioms.\n\nThe matching $1_n:n\\to n$ pairs each bottom point to the top point directly above it. Horizontal juxtaposition, with the left diagram placed first, defines $m\\otimes m'=m+m'$ on object labels and $D\\otimes D'$ on basis diagrams; extend it $R$-bilinearly to the modules. A following result proves that these operations give a strict monoidal category.\n\nFor $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position. Define $\\mathrm{TL}_n(R,\\delta)$ to be the $R$-module $M_R(n,n)$ with bilinear multiplication $xy:=x\\circ y$ and distinguished element $1_n$. A following result proves that it is a unital associative $R$-algebra and identifies it with the endomorphism algebra at object $n$.\n\nThe left factor is stacked above the right factor. The loop value is $\\delta$; no invertibility or nonzero condition on $\\delta$ is part of these data.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "6.1",
+            "6.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-temperley-lieb-diagram-category-laws",
+          "source_section": "Statement",
+          "quote": "For every commutative ring $R$, loop value $\\delta\\in R$, and objects $m,n,p,q\\ge0$, the raw diagram data of [[def-temperley-lieb-diagram-category]] form a strict monoidal category $\\mathcal{TL}_R(\\delta)$ with hom-modules $M_R(m,n)$ and the stated $R$-bilinear stacking composition. Composition is associative, the identity diagrams are two-sided identities, and horizontal juxtaposition is a strict monoidal bifunctor with unit object $0$. Consequently $\\operatorname{End}_{\\mathcal{TL}_R(\\delta)}(n)=\\mathrm{TL}_n(R,\\delta)$ is a unital associative $R$-algebra whose underlying $R$-module is free on its noncrossing pairing diagrams.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "6.1",
+            "6.2",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-temperley-lieb-diagram-generators-span",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$, each basis diagram in $\\mathcal D(n,n)$ is a finite product of the elementary diagrams $d_1,\\ldots,d_{n-1}$ from [[def-temperley-lieb-diagram-category]]. The product can be chosen so that no intermediate stack creates a closed cycle. Therefore the set of diagrams lies in the unital subalgebra of $\\mathrm{TL}_n(R,\\delta)$ generated by these diagrams.",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-temperley-lieb-generators-satisfy-local-relations",
+          "source_section": "Statement",
+          "quote": "Fix $n\\ge0$, a commutative ring $R$, and $\\delta\\in R$. For $1\\le i<n$, let $d_i\\in\\mathrm{TL}_n(R,\\delta)$ be the elementary cup-cap diagram of [[def-temperley-lieb-diagram-category]]. Then\n\n$$d_i^2=\\delta d_i\\ (1\\le i<n),\\qquad d_i d_{i+1}d_i=d_i,\\quad d_{i+1}d_i d_{i+1}=d_{i+1}\\ (1\\le i\\le n-2),\\qquad d_i d_j=d_jd_i\\ (1\\le i,j<n,\\ |i-j|>1).$$\n\nConsequently the assignment $u_i\\mapsto d_i$ extends to a unital $R$-algebra homomorphism\n\n$$\\pi_n:P_n(R,\\delta)\\longrightarrow\\mathrm{TL}_n(R,\\delta).$$",
+          "uses": [
+            "5.1",
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $U$ be the span in $W_{n,t}$ of link states in which the rightmost bottom site $n$ is a defect. Removing that defect and its top endpoint gives a link state in $W_{n-1,t-1}$; conversely, adding a new rightmost bottom site joined to a new rightmost top defect gives the inverse map. These basis maps define an $R$-module isomorphism $W_{n-1,t-1}\\to U$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under the inclusion in [F2], the rightmost strand of every diagram from $\\mathrm{TL}_{n-1}$ is vertical and does not meet the other $n-1$ sites. Stacking such a diagram below a link state in $U$ leaves the external site $n$ connected to its same defect. Thus $U$ is a $\\mathrm{TL}_{n-1}$-submodule, and the isomorphism in step 1.1 intertwines the restricted action.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The quotient by $U$ has basis the link states in which $n$ is paired to a site $m<n$. Cut the arc $(m,n)$ and turn $m$ into a defect. Noncrossing forces every defect to lie outside this arc, so this new defect is the rightmost one; the result is a link state with $n-1$ sites and $t+1$ defects. The inverse attaches a new site $n$ to the rightmost defect. These operations are inverse bijections of bases, so they give an $R$-module isomorphism of the quotient's underlying module with $W_{n-1,t+1}$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Check the quotient map on a basis state whose rightmost site $n$ is paired to $m<n$. A generator $d_i$ with $i\\notin\\{m-1,m\\}$ does not meet the endpoint $m$; stacking and cutting therefore give the same exterior matching and the same loop count. If $i=m-1$, the site $m-1$ is either a defect or is paired to a site $k<m-1$ (it cannot be paired to a site inside $(m,n)$, since that would cross the arc $(m,n)$). In the paired case, stacking joins the distinct arcs $(k,m-1)$ and $(m,n)$ and replaces them by the bottom arc $(m-1,m)$ and the arc $(k,n)$; cutting either result at the arc ending at $n$ gives the same link state, with no loop removed. In the defect case, stacking makes $n$ a defect, so the result lies in $U$ and is zero in the quotient. Cutting first makes $m-1$ and $m$ two defects; stacking $d_{m-1}$ joins their two top endpoints, leaving fewer than $t+1$ propagating strands, so its class in $W_{n-1,t+1}$ is also zero. If $i=m$, then $m+1$ lies inside the arc $(m,n)$ and must be paired to some $k$ with $m+1<k<n$. Stacking joins the distinct arcs $(m,n)$ and $(m+1,k)$, replacing them by $(m,m+1)$ and $(k,n)$; cutting at the arc ending at $n$ before or after this operation gives the same state, again with no loop removed. These cases exhaust generators touching $m$; hence the quotient map intertwines every $d_i$. By [F3] it intertwines the whole $\\mathrm{TL}_{n-1}$-action. The basis descriptions in step 1.1 and step 2.2 give exactness at every term.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the additional corollary, assume $R=\\mathbb C$, $q\\in\\mathbb C^\\times$, $\\delta=q+q^{-1}$, and $q^{2(t+1)}\\ne1$. Under these hypotheses the short exact sequence above splits as a sequence of right $\\mathrm{TL}_{n-1}(\\mathbb C,\\delta)$-modules. If $t=0$, then $W_{n-1,t-1}=0$; if $t=n$, then $W_{n-1,t+1}=0$. In either case exactness from step 3.1 makes the nonzero map in the sequence an isomorphism, so the sequence splits. Now suppose $0<t<n$, set $m=n-1$, and consider a nonzero summand $W_{m,s}$ with $s=t-1$ or $s=t+1$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Choose $v\\in\\mathbb C$ with $v^2=q$ and, in $\\mathrm{TL}_{m+1}(\\mathbb C,\\delta)$, put $g_i=v1-v^{-1}d_i$ for $1\\le i\\le m$. By [F4], multiplication gives $(v1-v^{-1}d_i)(v^{-1}1-vd_i)=1+(\\delta-q-q^{-1})d_i=1$, and the reversed product is the same; hence $g_i^{-1}=v^{-1}1-vd_i$. For $1\\le i<m$, expanding the adjacent products with both triple relations gives $g_ig_{i+1}g_i-g_{i+1}g_ig_{i+1}=-v^{-1}(q-\\delta+q^{-1})(d_i-d_{i+1})=0$. For valid distant indices, [F4] likewise gives $g_ig_j=g_jg_i$. Define $M_m=g_m\\cdots g_2g_1^2g_2\\cdots g_m$. Let $T_m:\\mathrm{TL}_{m+1}\\to\\mathrm{TL}_m$ close the last top and bottom points by an exterior arc and remove each resulting loop with factor $\\delta$, and put $F_m=T_m(M_m)$. The product has $2m$ crossing factors, so $F_m$ is independent of the choice of square root $v$.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "construct",
+            "algebra",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For $M_0=1$ and $M_j=g_jM_{j-1}g_j$, the braid and distant-commutation relations imply $g_iM_m=M_mg_i$ for $i<m$. Indeed, put $P=g_m\\cdots g_{i+2}$ and $B_i=g_{i+1}M_i g_{i+1}=g_{i+1}g_iM_{i-1}g_i g_{i+1}$, so $M_m=PB_iP^{\\mathrm{rev}}$, where $P^{\\mathrm{rev}}=g_{i+2}\\cdots g_m$. The element $g_i$ commutes with $P$ and $P^{\\mathrm{rev}}$, while $g_{i+1}$ commutes with $M_{i-1}$. Using $g_ig_{i+1}g_i=g_{i+1}g_ig_{i+1}$ on the left and right gives $g_iB_i=g_{i+1}g_iM_{i-1}g_{i+1}g_ig_{i+1}=B_ig_i$. Closing the last strand is a $\\mathrm{TL}_m$-bimodule map, since stacking on the first $m$ strands is disjoint from that closure. Thus $g_iF_m=F_mg_i$ for every $i<m$. Since $d_i=q1-vg_i$ and the $d_i$ generate $\\mathrm{TL}_m$ by [F3], $F_m$ is central.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-2",
+          "claim": "For link states $x,y$ with $s$ defects, define $\\psi(x,y)$ as the coefficient of $1_s$ in $y\\circ x^*$, and set it to zero when this composite has fewer than $s$ propagating components. For link states $z,w$, associativity and the quotient action give $z\\cdot(x^*\\circ w)=\\psi(x,z)w$: when $z\\circ x^*$ has fewer than $s$ propagating components, the resulting term is zero in $W_{m,s}$. This pairing is nonzero if $s>0$: for no arcs, pair the all-defect state with itself; with $p=(m-s)/2>0$, pair the states with arcs $(1,2),(3,4),\\ldots,(2p-1,2p)$ and defects to their right, and with arcs $(2,3),(4,5),\\ldots,(2p,2p+1)$ and a defect at site $1$, respectively. Their overlay has no loop and gives value $1$. If $s=0$, the case needed below has $t=1$ and $q^4\\ne1$, hence $\\delta\\ne0$; pairing any perfect matching with itself gives $\\delta^{m/2}\\ne0$. Choose $x,y$ with $\\psi(x,y)=1$. For every $w$, the element $x^*\\circ w$ then satisfies $y\\cdot(x^*\\circ w)=w$. If $\\Theta$ is a module endomorphism, $\\Theta(w)=\\Theta(y)\\cdot(x^*\\circ w)=\\psi(x,\\Theta(y))w$. Thus every module endomorphism of these summands is scalar.",
+          "step": "6.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 5.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "The central operator given by right multiplication by $F_m$ is therefore scalar on each such $W_{m,s}$. To compute its scalar, use the state $z_{m,s}$ with $p=(m-s)/2$ adjacent arcs followed by $s$ defects. Expand the defining crossings in $F_m$ and retain the coefficient of $z_{m,s}$ in the link-state quotient. The local identities $d_i g_{i+1}g_i=-d_id_{i+1}$ and $g_i g_{i+1}d_i=-d_{i+1}d_i$, obtained from [F4] by $d_ig_{i+1}g_i=qd_i-d_id_{i+1}-\\delta d_i+q^{-1}d_id_{i+1}d_i=-d_id_{i+1}$ and $g_ig_{i+1}d_i=qd_i-d_i^2-d_{i+1}d_i+q^{-1}d_id_{i+1}d_i=-d_{i+1}d_i$, for $1\\le i<m$, remove the $p$ adjacent arcs. Along one orientation of the closed strand, each of the $s$ defect crossings has one surviving through-resolution; at the terminal crossing the two surviving choices contribute $q^s\\delta$ and $-q^{s-1}$. Every other choice creates more than $p$ arcs and is zero in the quotient. The coefficient from this orientation is $q^s\\delta-q^{s-1}=q^{s+1}$. Reflection gives the other orientation with $q$ replaced by $q^{-1}$, contributing $q^{-s}\\delta-q^{-s+1}=q^{-s-1}$. Hence $F_m$ acts on $W_{m,s}$ as $q^{s+1}+q^{-s-1}$.",
+          "step": "7.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "step 5.1",
+            "step 6.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "For the submodule $W_{n-1,t-1}$, step 7.1 gives eigenvalue $\\lambda_-=q^t+q^{-t}$; for the quotient $W_{n-1,t+1}$ it gives $\\lambda_+=q^{t+2}+q^{-t-2}$. Both pairings used in step 6.2 are nonzero: the $t+1$ label has positive defects, and the $t-1$ label has positive defects unless $t=1$, in which case $\\delta\\ne0$ follows from $q^4\\ne1$. Their difference is $\\lambda_+-\\lambda_-=(q-q^{-1})(q^{t+1}-q^{-t-1})$, which is nonzero by [A1].",
+          "step": "8.1",
+          "inputs": [
+            "A1",
+            "step 6.2",
+            "step 7.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "Let $S$ be right multiplication by $F_{n-1}$ on the restricted middle module. It is a module endomorphism because $F_{n-1}$ is central. The polynomial operator $P=(S-\\lambda_+I)/(\\lambda_--\\lambda_+)$ is the identity on the submodule and induces zero on the quotient. Therefore its image lies in the submodule and its restriction there is the identity, so $P$ is a retraction. The middle module is the direct sum of the submodule and $\\ker P$, and projection to the quotient restricts to an isomorphism on $\\ker P$. This proves the asserted splitting.",
+          "step": "9.1",
+          "inputs": [
+            "step 3.1",
+            "step 6.1",
+            "step 8.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The input rank satisfies n>=1. For n1 the allowed t1 sequence uses W_(0,0) and a zero out-of-range quotient; it is the rightmost-defect basis isomorphism of steps 1.1–2.1. No input n0 restriction is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero loop value; step 3.1 uses no division by the loop value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes the one-strand case; step 1.1 covers its boundary convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 prove the all-ring exact sequence without dividing by delta. The additional complex splitting in steps 4.1–9.1 requires q!=0 and q^(2(t+1))!=1; it is not a uniform all-ring splitting assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Out-of-range labels are zero by the Statement. Step 4.1 separately splits t0 or tn because one term vanishes; the two-nonzero-factor eigenvalue argument follows only for 0<t<n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constructions are explicit and finite in step 1.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_review": {
+        "status": "reviewed",
+        "assumptions": [
+          "All Temperley–Lieb constructions are over the stated commutative ring with unit and arbitrary loop value; the simple-head classification alone assumes a field. No invertibility of δ, semisimplicity, or choice axiom is used."
+        ]
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-58 authoring audit",
+        "notes": "This scoped authoring record is not independent mathematical approval."
+      }
+    },
+    "prop-temperley-lieb-link-state-form-vanishes-exactly-at-zero-loop-without-defects": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-link-state-standard-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit, let $\\delta\\in R$, and let $n\\ge0$. Let $t$ be an integer with $0\\le t\\le n$ and $n-t$ even. The diagram module $M_R(n,t)$ has $n$ bottom boundary points and $t$ top boundary points, with stacking and loop removal as in [[def-temperley-lieb-diagram-category]]. A component of a basis diagram is **propagating** if it meets both the bottom and top boundaries. Write $\\operatorname{prop}(D)$ for the number of propagating components of a diagram $D:n\\to t$.\n\nLet $M_R^{<t}(n,t)$ be the $R$-span of the basis diagrams $D:n\\to t$ with $\\operatorname{prop}(D)<t$. Define the **Temperley–Lieb link-state standard module**\n\n$$W_{n,t}(R,\\delta):=M_R(n,t)/M_R^{<t}(n,t).$$\n\nWrite $T_{n,t}$ for the set of diagrams in $\\mathcal D(n,t)$ with exactly $t$ propagating components. The cosets of these diagrams form an $R$-basis of $W_{n,t}$. Identifying each diagram with its bottom arcs and defects gives a partial matching of the $n$ ordered bottom sites, with the additional condition that the $t$ unpaired sites are joined to the ordered top sites by noncrossing propagating strands. In particular, no defect lies inside an arc. The unpaired sites are called **defects**. Thus $t$ is the defect or through-line number; in sources using $p$ for the number of arcs, $p=(n-t)/2$.\n\nThe intended right action of $\\mathrm{TL}_n(R,\\delta)$ is $x\\cdot a=[x\\circ a]$, where $x\\in M_R(n,t)$, $a\\in M_R(n,n)$, and $x\\circ a$ stacks $x$ above $a$. The submodule $M_R^{<t}(n,t)$ is stable under this action, so it descends to $W_{n,t}$; the complete well-definedness argument is [[lem-temperley-lieb-link-state-module-action-is-well-defined]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-temperley-lieb-link-state-gram-form-is-invariant",
+          "source_section": "Statement",
+          "quote": "Let $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ be as in [[def-temperley-lieb-link-state-standard-modules]]. For link states $x,y$, let $x^*$ denote reflection across a horizontal line. The diagram $y\\circ x^*:t\\to t$ is either $\\delta^c1_t$ for some $c\\ge0$ or has fewer than $t$ propagating components. Define $\\phi_{n,t}(x,y)=\\delta^c$ in the first case and $0$ in the second, and extend $R$-bilinearly. Then $\\phi_{n,t}$ is symmetric and satisfies\n\n$$\\phi_{n,t}(x\\cdot a,y)=\\phi_{n,t}(x,y\\cdot a^*)$$\n\nfor all $x,y\\in W_{n,t}(R,\\delta)$ and $a\\in\\mathrm{TL}_n(R,\\delta)$. Here $a^*$ is reflection across a horizontal line. The matrix of $\\phi_{n,t}$ in the link-state basis is the Gram matrix obtained by reflecting and capping two link states, with one factor $\\delta$ for each closed loop.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "prop-temperley-lieb-link-state-form-vanishes-exactly-at-zero-loop-without-defects-1-1",
+          "claim": "Suppose $t>0$ and put $a=(n-t)/2$. If $a=0$, take $x=y$ to be the all-defect state; gluing gives $t$ through paths and no loops, so $\\phi_{n,t}(x,y)=1_R\\ne0$. If $a>0$, let $x$ have adjacent arcs $(1,2),(3,4),\\ldots,(2a-1,2a)$ and defects at $2a+1,\\ldots,n$. Let $y$ have arcs $(2,3),(4,5),\\ldots,(2a,2a+1)$, defects at $1$ and $2a+2,\\ldots,n$. Both are link states. Their glued graph has one path alternating across sites $1,\\ldots,2a+1$ and $t-1$ straight paths at the shared defects; it has no closed component. Hence $\\phi_{n,t}(x,y)=1_R\\ne0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "prop-temperley-lieb-link-state-form-vanishes-exactly-at-zero-loop-without-defects-2-1",
+          "claim": "Suppose $t=0$ and $n>0$, so $n=2a$ with $a\\ge1$. Every pair of link states glues to a finite graph in which every boundary site has degree two; each connected component is a cycle, and at least one cycle occurs. Thus every form value is divisible by $\\delta$, so the form is identically zero when $\\delta=0$. Conversely, let $x$ have adjacent arcs $(1,2),(3,4),\\ldots,(n-1,n)$, and let $y$ have the outer arc $(1,n)$ together with the adjacent interior arcs $(2,3),(4,5),\\ldots,(n-2,n-1)$. Their overlay is one cycle, so $\\phi_{n,0}(x,y)=\\delta$. If $\\delta\\ne0$, this value is nonzero and the form is not identically zero.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "prop-temperley-lieb-link-state-form-vanishes-exactly-at-zero-loop-without-defects-3-1",
+          "claim": "If $n=t=0$, there is one empty link state. Its reflection glues to the empty diagram with no loops, so $\\phi_{0,0}(x,x)=1_R\\ne0$. Together with the cases already treated, this exhausts all allowed $t$ and proves the equivalence.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes the empty-rank boundary, and step 1.1 records its convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero loop value; step 3.1 uses no division by the loop value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes the one-strand case; step 1.1 covers its boundary convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement adds no semisimplicity hypothesis; step 3.1 preserves the stated ring scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement covers endpoint labels; step 3.1 includes the boundary cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constructions are explicit and finite in step 1.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The equivalence directions are established in the statement and steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The equivalence directions are established in the statement and steps 1.1, 2.1, 3.1."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "zero-loop-small-boundaries",
+          "asserts": "For n=t=0 the unique Gram entry is 1; for n=2,t=0 the unique entry is δ; for n=3,t=1 the explicit shifted states pair to 1.",
+          "claim": "These hand computations agree with the three cases separated in the general proof.",
+          "checked_in": "Statement and steps 1.1-3.1",
+          "method": "explicit hand calculation"
+        }
+      ],
+      "axiom_review": {
+        "status": "reviewed",
+        "assumptions": [
+          "All Temperley–Lieb constructions are over the stated commutative ring with unit and arbitrary loop value; the simple-head classification alone assumes a field. No invertibility of δ, semisimplicity, or choice axiom is used."
+        ]
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-58 authoring audit",
+        "notes": "This scoped authoring record is not independent mathematical approval."
+      }
+    },
+    "thm-temperley-lieb-link-state-diagram-basis-is-cellular": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit ([[def-algebra-over-a-commutative-ring]]) and let $\\delta\\in R$. The object labels are the nonnegative integers $n=0,1,2,\\ldots$. For labels $m,n$, place bottom points $b_1,\\ldots,b_m$ and top points $t_1,\\ldots,t_n$ along the rectangle from left to right on their respective edges. Their cyclic order is $t_1,\\ldots,t_n,b_m,\\ldots,b_1$. When $m=n=0$, the empty matching is included.\n\nAn $(m,n)$ **diagram** is a perfect matching of these $m+n$ boundary labels which is noncrossing: there are no four labels $a,b,c,d$ in cyclic order whose matched pairs are $\\{a,c\\}$ and $\\{b,d\\}$. A picture consists of disjoint arcs realizing the matching; equality is equality of the matching, so planar deformation that fixes the boundary does not change a diagram. If $m+n$ is odd, there are no such diagrams. Write $\\mathcal D(m,n)$ for this set and define the $R$-module\n\n$$M_R(m,n):=R^{(\\mathcal D(m,n))},$$\n\nthe free $R$-module on the set of diagrams ([[def-free-module-on-a-set-and-standard-basis]]). In particular, its diagram basis is empty when $m+n$ is odd.\n\nFor basis diagrams $D:m\\to n$ and $E:n\\to p$, stack $E$ above $D$ and identify the $n$ matching boundary points. The resulting finite graph has degree two at each identified point, where degree means the number of incident arcs. Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles. Denote this output by $E\\circ D$ and extend the rule $R$-bilinearly to a map $M_R(n,p)\\times M_R(m,n)\\to M_R(m,p)$. A following result proves closure of these operations on the diagram modules and the category axioms.\n\nThe matching $1_n:n\\to n$ pairs each bottom point to the top point directly above it. Horizontal juxtaposition, with the left diagram placed first, defines $m\\otimes m'=m+m'$ on object labels and $D\\otimes D'$ on basis diagrams; extend it $R$-bilinearly to the modules. A following result proves that these operations give a strict monoidal category.\n\nFor $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position. Define $\\mathrm{TL}_n(R,\\delta)$ to be the $R$-module $M_R(n,n)$ with bilinear multiplication $xy:=x\\circ y$ and distinguished element $1_n$. A following result proves that it is a unital associative $R$-algebra and identifies it with the endomorphism algebra at object $n$.\n\nThe left factor is stacked above the right factor. The loop value is $\\delta$; no invertibility or nonzero condition on $\\delta$ is part of these data.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-temperley-lieb-diagram-category-laws",
+          "source_section": "Statement",
+          "quote": "For every commutative ring $R$, loop value $\\delta\\in R$, and objects $m,n,p,q\\ge0$, the raw diagram data of [[def-temperley-lieb-diagram-category]] form a strict monoidal category $\\mathcal{TL}_R(\\delta)$ with hom-modules $M_R(m,n)$ and the stated $R$-bilinear stacking composition. Composition is associative, the identity diagrams are two-sided identities, and horizontal juxtaposition is a strict monoidal bifunctor with unit object $0$. Consequently $\\operatorname{End}_{\\mathcal{TL}_R(\\delta)}(n)=\\mathrm{TL}_n(R,\\delta)$ is a unital associative $R$-algebra whose underlying $R$-module is free on its noncrossing pairing diagrams.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cellular-algebra-basis-and-cell-module",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with $1$ and $A$ a unital $R$-algebra\n([[def-algebra-over-a-commutative-ring]]) that is free as an $R$-module on a\nfinite set $C=\\{c^{\\lambda}_{st}:\\lambda\\in\\Lambda,\\ s,t\\in T(\\lambda)\\}$,\nwhere $(\\Lambda,\\unrhd)$ is a finite poset ([[def-partial-order]]; its strict\norder is written $\\rhd$) and each $T(\\lambda)$ is a finite set. For\n$\\lambda\\in\\Lambda$ let $A^{\\rhd\\lambda}$ be the $R$-submodule of $A$ spanned\nby all $c^{\\mu}_{uv}$ with $\\mu\\rhd\\lambda$.\n\nThen $(C,\\Lambda)$ is a **cellular basis** of $A$, and $A$ is a **cellular\nalgebra**, if:\n\n(i) the $R$-linear map $i:A\\to A$ with $i(c^{\\lambda}_{st})=c^{\\lambda}_{ts}$\nfor all $\\lambda,s,t$ is an algebra anti-automorphism of $A$, i.e. $i(ab)=i(b)i(a)$\nand $i(1)=1$ (equivalently $i$ is an isomorphism of $A$ with the opposite\nalgebra; the displayed formula forces $i^2=\\mathrm{id}$); and\n\n(ii) for every $\\lambda\\in\\Lambda$, every $t\\in T(\\lambda)$ and every $a\\in A$\nthere exist coefficients $r_v\\in R$ ($v\\in T(\\lambda)$), independent of $s$, such that for every $s\\in T(\\lambda)$\n$$c^{\\lambda}_{st}\\,a\\equiv\\sum_{v\\in T(\\lambda)}r_v\\,c^{\\lambda}_{sv}\\pmod{A^{\\rhd\\lambda}}.$$\n\n**Cell modules.** For $\\lambda\\in\\Lambda$ let $C^{\\lambda}$ be the free\n$R$-module with basis $\\{c^{\\lambda}_t:=c^{\\lambda}_{tt}:t\\in T(\\lambda)\\}$;\ncondition (ii) makes $C^{\\lambda}$ a right $A$-module by\n$c^{\\lambda}_t a:=\\sum_v r_vc^{\\lambda}_v$ when\n$c^{\\lambda}_{tt}a\\equiv\\sum_v r_vc^{\\lambda}_{tv}\\pmod{A^{\\rhd\\lambda}}$, and\nit makes $C^{\\lambda}$ a left $A$-module via $i$, the left action being\n$a\\cdot c^{\\lambda}_t:=c^{\\lambda}_t\\,i(a)$. Both actions are well defined on\nthe freely spanning basis elements by (ii): the coefficients $r_v$ are unique\nbecause $C$ is an $R$-basis of $A$ and the quotient by $A^{\\rhd\\lambda}$ kills\nexactly the basis elements indexed by strictly larger labels, while applying\nthe anti-automorphism (i) to (ii) gives the same triangularity for left\nmultiplication. The module $C^{\\lambda}$ is the **(right) cell module** of\n$\\lambda$, and\n$$A^{\\unrhd\\lambda}/A^{\\rhd\\lambda}\\cong C^{\\lambda}\\otimes_R C^{\\lambda}$$\nvia $c^{\\lambda}_{st}+A^{\\rhd\\lambda}\\mapsto c^{\\lambda}_s\\otimes c^{\\lambda}_t$,\nwhere $A^{\\unrhd\\lambda}$ is spanned by all $c^{\\mu}_{uv}$ with\n$\\mu\\unrhd\\lambda$. A cellular algebra may have several cellular bases.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-temperley-lieb-link-state-standard-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit, let $\\delta\\in R$, and let $n\\ge0$. Let $t$ be an integer with $0\\le t\\le n$ and $n-t$ even. The diagram module $M_R(n,t)$ has $n$ bottom boundary points and $t$ top boundary points, with stacking and loop removal as in [[def-temperley-lieb-diagram-category]]. A component of a basis diagram is **propagating** if it meets both the bottom and top boundaries. Write $\\operatorname{prop}(D)$ for the number of propagating components of a diagram $D:n\\to t$.\n\nLet $M_R^{<t}(n,t)$ be the $R$-span of the basis diagrams $D:n\\to t$ with $\\operatorname{prop}(D)<t$. Define the **Temperley–Lieb link-state standard module**\n\n$$W_{n,t}(R,\\delta):=M_R(n,t)/M_R^{<t}(n,t).$$\n\nWrite $T_{n,t}$ for the set of diagrams in $\\mathcal D(n,t)$ with exactly $t$ propagating components. The cosets of these diagrams form an $R$-basis of $W_{n,t}$. Identifying each diagram with its bottom arcs and defects gives a partial matching of the $n$ ordered bottom sites, with the additional condition that the $t$ unpaired sites are joined to the ordered top sites by noncrossing propagating strands. In particular, no defect lies inside an arc. The unpaired sites are called **defects**. Thus $t$ is the defect or through-line number; in sources using $p$ for the number of arcs, $p=(n-t)/2$.\n\nThe intended right action of $\\mathrm{TL}_n(R,\\delta)$ is $x\\cdot a=[x\\circ a]$, where $x\\in M_R(n,t)$, $a\\in M_R(n,n)$, and $x\\circ a$ stacks $x$ above $a$. The submodule $M_R^{<t}(n,t)$ is stable under this action, so it descends to $W_{n,t}$; the complete well-definedness argument is [[lem-temperley-lieb-link-state-module-action-is-well-defined]].",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-temperley-lieb-link-state-module-action-is-well-defined",
+          "source_section": "Statement",
+          "quote": "For $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ as in [[def-temperley-lieb-link-state-standard-modules]], the rule $x\\cdot a=[x\\circ a]$ defines a unital right $\\mathrm{TL}_n(R,\\delta)$-module structure on $W_{n,t}(R,\\delta)$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-temperley-lieb-link-state-gram-form-is-invariant",
+          "source_section": "Statement",
+          "quote": "Let $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ be as in [[def-temperley-lieb-link-state-standard-modules]]. For link states $x,y$, let $x^*$ denote reflection across a horizontal line. The diagram $y\\circ x^*:t\\to t$ is either $\\delta^c1_t$ for some $c\\ge0$ or has fewer than $t$ propagating components. Define $\\phi_{n,t}(x,y)=\\delta^c$ in the first case and $0$ in the second, and extend $R$-bilinearly. Then $\\phi_{n,t}$ is symmetric and satisfies\n\n$$\\phi_{n,t}(x\\cdot a,y)=\\phi_{n,t}(x,y\\cdot a^*)$$\n\nfor all $x,y\\in W_{n,t}(R,\\delta)$ and $a\\in\\mathrm{TL}_n(R,\\delta)$. Here $a^*$ is reflection across a horizontal line. The matrix of $\\phi_{n,t}$ in the link-state basis is the Gram matrix obtained by reflecting and capping two link states, with one factor $\\delta$ for each closed loop.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-temperley-lieb-link-state-diagram-basis-is-cellular-1-1",
+          "claim": "Every diagram $D:n\\to n$ has a definite number $t$ of propagating strands, with $0\\le t\\le n$ and $n-t$ even. Cut each propagating strand at a horizontal midpoint. The upper half, reflected, is a link state $x:n\\to t$; the lower half is a link state $y:n\\to t$. Conversely, $x^*\\circ y$ joins the $t$ corresponding defect endpoints in order and yields a diagram with exactly $t$ propagating strands. The cuts are determined by $D$, so these constructions are inverse. Thus the diagrams $C^t_{x,y}$ are in bijection with the basis diagrams of $\\mathrm{TL}_n$ and hence form an $R$-basis.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-link-state-diagram-basis-is-cellular-2-1",
+          "claim": "Define $*$ on every basis diagram by horizontal reflection and extend $R$-linearly. Reflecting a stack reverses its two factors and preserves each closed component, so $(ab)^*=b^*a^*$; reflecting twice restores the original pairing and $1_n^*=1_n$. Also $(C^t_{x,y})^*=C^t_{y,x}$. Thus $*$ is the involutive anti-automorphism required by [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-link-state-diagram-basis-is-cellular-2-2",
+          "claim": "For $t\\in\\Lambda_n$, let $J_t$ be the span of diagrams with fewer than $t$ propagating strands. The stated order makes these exactly the basis elements indexed by labels strictly greater than $\\lambda_t$, so $J_t=A^{\\rhd\\lambda_t}$. Every propagating path in a stacked product must pass through a distinct propagating path in each factor, so a product has no more propagating strands than either factor; therefore $J_t$ is a two-sided ideal. For $a\\in\\mathrm{TL}_n$, write the quotient of $y\\circ a$ in $M_R(n,t)/M_R^{<t}(n,t)$ as $\\sum_v r_v v$ in its link-state basis. Then $C^t_{x,y}a=x^*\\circ(y\\circ a)\\equiv\\sum_v r_v C^t_{x,v}$ modulo $J_t$. The coefficients $r_v$ are those of $y\\cdot a$ and are independent of $x$, so this is exactly the fixed-first-index cellular multiplication rule in [F3].",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-temperley-lieb-link-state-diagram-basis-is-cellular-3-1",
+          "claim": "For link states $y,u$, the middle composite $y\\circ u^*$ is a diagram $t\\to t$. If it has all $t$ propagating strands, planarity makes it $\\delta^c1_t$, and the full product is $C^t_{x,y}C^t_{u,v}=x^*\\circ(y\\circ u^*)\\circ v=\\phi_{n,t}(u,y)C^t_{x,v}=\\phi_{n,t}(y,u)C^t_{x,v}$, using symmetry of the form. If $y\\circ u^*$ has fewer than $t$ propagating strands, the full product also has fewer than $t$ and lies in $J_t$, so the same congruence holds with coefficient zero. Hence $\\phi_{n,t}$ is the cellular cell form. Finally, the generic right cell-module action read from $C^t_{x,x}a$ has the same coefficients $r_v$ as $y\\cdot a$ in step 2.2, so its basis and action identify with $W_{n,t}$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes the empty-rank boundary, and step 1.1 records its convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero loop value; step 3.1 uses no division by the loop value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes the one-strand case; step 1.1 covers its boundary convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement adds no semisimplicity hypothesis; step 3.1 preserves the stated ring scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement covers endpoint labels; step 3.1 includes the boundary cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constructions are explicit and finite in step 1.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_review": {
+        "status": "reviewed",
+        "assumptions": [
+          "All Temperley–Lieb constructions are over the stated commutative ring with unit and arbitrary loop value; the simple-head classification alone assumes a field. No invertibility of δ, semisimplicity, or choice axiom is used."
+        ]
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-58 authoring audit",
+        "notes": "This scoped authoring record is not independent mathematical approval."
+      }
+    },
+    "cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-temperley-lieb-link-state-diagram-basis-is-cellular",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring with unit, $\\delta\\in R$, and $n\\ge0$. Let $\\Lambda_n$ be the set of $t$ with $0\\le t\\le n$ and $n-t$ even, ordered by $\\lambda_r\\unrhd\\lambda_t$ exactly when $r\\le t$. Thus labels with fewer propagating strands are strictly greater. For $x,y\\in T_{n,t}$, define\n\n$$C^t_{x,y}:=x^*\\circ y\\in\\mathrm{TL}_n(R,δ),$$\n\nwhere $x,y:n\\to t$ are link-state diagrams and $*$ is reflection across a horizontal line. Then the diagrams $C^t_{x,y}$, for all $t\\in\\Lambda_n$ and $x,y\\in T_{n,t}$, form an $R$-basis of $\\mathrm{TL}_n(R,\\delta)$, and $(C,\\Lambda_n)$ is a cellular basis in the convention of [[def-cellular-algebra-basis-and-cell-module]]. Its cell module at $\\lambda_t$ is $W_{n,t}(R,\\delta)$, and its cell form is the Gram form $\\phi_{n,t}$ of [[lem-temperley-lieb-link-state-gram-form-is-invariant]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field and $A$ a finite-dimensional unital cellular $F$-algebra with\ncellular basis $(C,\\Lambda)$ over the finite poset $\\Lambda$\n([[def-cellular-algebra-basis-and-cell-module]]). For $\\lambda\\in\\Lambda$\nput $D^{\\lambda}:=C^{\\lambda}/\\mathrm{rad}\\,C^{\\lambda}$, where\n$\\mathrm{rad}\\,C^{\\lambda}$ is the radical of the cell form\n([[lem-cell-form-is-associative-and-its-radical-is-a-submodule]]). Then:\n\n1. if $D^{\\lambda}\\ne0$ then $D^{\\lambda}$ is an absolutely irreducible\n   (absolutely simple) $A$-module: it is simple over $F$ and remains simple\n   after every extension of scalars to a larger field;\n2. $\\{D^{\\lambda}:\\lambda\\in\\Lambda,\\ D^{\\lambda}\\ne0\\}$ is a complete set of\n   pairwise non-isomorphic simple $A$-modules ([[def-simple-module]],\n   [[thm-jordan-holder-theorem-for-modules]]);\n3. $D^{\\lambda}\\ne0$ if and only if the cell form\n   $\\langle\\ ,\\ \\rangle_\\lambda$ is not identically zero, if and only if\n   $\\mathrm{rad}\\,C^{\\lambda}\\ne C^{\\lambda}$; and, when these equivalent\n   conditions hold, $\\mathrm{rad}\\,C^{\\lambda}$ is the unique maximal proper\n   submodule and the Jacobson radical of $C^{\\lambda}$, so $D^{\\lambda}$ is its\n   simple head. If the form is identically zero, the cell-form quotient\n   $D^{\\lambda}$ is zero; no assertion about the Jacobson radical or the actual\n   head of $C^{\\lambda}$ is made.\n\nNo semisimplicity of $A$ is assumed; the theorem is the Graham-Lehrer\nclassification and applies in particular to $A=H_{F,q}(S_n)$ for every field\n$F$ and every $q\\in F^{\\times}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules-1-1",
+          "claim": "By [F1], $\\mathrm{TL}_n(F,\\delta)$ is a finite-dimensional unital cellular algebra with cell modules $W_{n,t}$ and cell forms $\\phi_{n,t}$. It is finite-dimensional because its diagram basis is a subset of the finite set of matchings of $2n$ boundary points.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules-2-1",
+          "claim": "Apply [F2] to this cellular datum. It gives absolute simplicity and pairwise distinction of every nonzero $D_{n,t}$, and says these quotients exhaust the simple right modules. It also gives $D_{n,t}\\ne0$ exactly when $\\phi_{n,t}$ is not identically zero and identifies $\\operatorname{rad}(\\phi_{n,t})$ as the unique maximal proper submodule in that case.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules-3-1",
+          "claim": "If $\\phi_{n,t}$ is identically zero, its radical is all of $W_{n,t}$, so $D_{n,t}=0$ by definition. The statement in [F2] makes no assertion about the actual head of $W_{n,t}$ in this case.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes the empty-rank boundary, and step 1.1 records its convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero loop value; step 3.1 uses no division by the loop value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes the one-strand case; step 1.1 covers its boundary convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement adds no semisimplicity hypothesis; step 3.1 preserves the stated ring scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement covers endpoint labels; step 3.1 includes the boundary cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constructions are explicit and finite in step 1.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The equivalence directions are established in the statement and steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The equivalence directions are established in the statement and steps 1.1, 2.1, 3.1."
+        }
+      ],
+      "finite_smoke": [],
+      "axiom_review": {
+        "status": "reviewed",
+        "assumptions": [
+          "All Temperley–Lieb constructions are over the stated commutative ring with unit and arbitrary loop value; the simple-head classification alone assumes a field. No invertibility of δ, semisimplicity, or choice axiom is used."
+        ]
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-58 authoring audit",
+        "notes": "This scoped authoring record is not independent mathematical approval."
+      }
+    },
+    "cex-temperley-lieb-zero-cell-form-does-not-detect-module-head": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-link-state-standard-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit, let $\\delta\\in R$, and let $n\\ge0$. Let $t$ be an integer with $0\\le t\\le n$ and $n-t$ even. The diagram module $M_R(n,t)$ has $n$ bottom boundary points and $t$ top boundary points, with stacking and loop removal as in [[def-temperley-lieb-diagram-category]]. A component of a basis diagram is **propagating** if it meets both the bottom and top boundaries. Write $\\operatorname{prop}(D)$ for the number of propagating components of a diagram $D:n\\to t$.\n\nLet $M_R^{<t}(n,t)$ be the $R$-span of the basis diagrams $D:n\\to t$ with $\\operatorname{prop}(D)<t$. Define the **Temperley–Lieb link-state standard module**\n\n$$W_{n,t}(R,\\delta):=M_R(n,t)/M_R^{<t}(n,t).$$\n\nWrite $T_{n,t}$ for the set of diagrams in $\\mathcal D(n,t)$ with exactly $t$ propagating components. The cosets of these diagrams form an $R$-basis of $W_{n,t}$. Identifying each diagram with its bottom arcs and defects gives a partial matching of the $n$ ordered bottom sites, with the additional condition that the $t$ unpaired sites are joined to the ordered top sites by noncrossing propagating strands. In particular, no defect lies inside an arc. The unpaired sites are called **defects**. Thus $t$ is the defect or through-line number; in sources using $p$ for the number of arcs, $p=(n-t)/2$.\n\nThe intended right action of $\\mathrm{TL}_n(R,\\delta)$ is $x\\cdot a=[x\\circ a]$, where $x\\in M_R(n,t)$, $a\\in M_R(n,n)$, and $x\\circ a$ stacks $x$ above $a$. The submodule $M_R^{<t}(n,t)$ is stable under this action, so it descends to $W_{n,t}$; the complete well-definedness argument is [[lem-temperley-lieb-link-state-module-action-is-well-defined]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-temperley-lieb-link-state-module-action-is-well-defined",
+          "source_section": "Statement",
+          "quote": "For $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ as in [[def-temperley-lieb-link-state-standard-modules]], the rule $x\\cdot a=[x\\circ a]$ defines a unital right $\\mathrm{TL}_n(R,\\delta)$-module structure on $W_{n,t}(R,\\delta)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit ([[def-algebra-over-a-commutative-ring]]) and let $\\delta\\in R$. The object labels are the nonnegative integers $n=0,1,2,\\ldots$. For labels $m,n$, place bottom points $b_1,\\ldots,b_m$ and top points $t_1,\\ldots,t_n$ along the rectangle from left to right on their respective edges. Their cyclic order is $t_1,\\ldots,t_n,b_m,\\ldots,b_1$. When $m=n=0$, the empty matching is included.\n\nAn $(m,n)$ **diagram** is a perfect matching of these $m+n$ boundary labels which is noncrossing: there are no four labels $a,b,c,d$ in cyclic order whose matched pairs are $\\{a,c\\}$ and $\\{b,d\\}$. A picture consists of disjoint arcs realizing the matching; equality is equality of the matching, so planar deformation that fixes the boundary does not change a diagram. If $m+n$ is odd, there are no such diagrams. Write $\\mathcal D(m,n)$ for this set and define the $R$-module\n\n$$M_R(m,n):=R^{(\\mathcal D(m,n))},$$\n\nthe free $R$-module on the set of diagrams ([[def-free-module-on-a-set-and-standard-basis]]). In particular, its diagram basis is empty when $m+n$ is odd.\n\nFor basis diagrams $D:m\\to n$ and $E:n\\to p$, stack $E$ above $D$ and identify the $n$ matching boundary points. The resulting finite graph has degree two at each identified point, where degree means the number of incident arcs. Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles. Denote this output by $E\\circ D$ and extend the rule $R$-bilinearly to a map $M_R(n,p)\\times M_R(m,n)\\to M_R(m,p)$. A following result proves closure of these operations on the diagram modules and the category axioms.\n\nThe matching $1_n:n\\to n$ pairs each bottom point to the top point directly above it. Horizontal juxtaposition, with the left diagram placed first, defines $m\\otimes m'=m+m'$ on object labels and $D\\otimes D'$ on basis diagrams; extend it $R$-bilinearly to the modules. A following result proves that these operations give a strict monoidal category.\n\nFor $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position. Define $\\mathrm{TL}_n(R,\\delta)$ to be the $R$-module $M_R(n,n)$ with bilinear multiplication $xy:=x\\circ y$ and distinguished element $1_n$. A following result proves that it is a unital associative $R$-algebra and identifies it with the endomorphism algebra at object $n$.\n\nThe left factor is stacked above the right factor. The loop value is $\\delta$; no invertibility or nonzero condition on $\\delta$ is part of these data.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-temperley-lieb-diagram-category-laws",
+          "source_section": "Statement",
+          "quote": "For every commutative ring $R$, loop value $\\delta\\in R$, and objects $m,n,p,q\\ge0$, the raw diagram data of [[def-temperley-lieb-diagram-category]] form a strict monoidal category $\\mathcal{TL}_R(\\delta)$ with hom-modules $M_R(m,n)$ and the stated $R$-bilinear stacking composition. Composition is associative, the identity diagrams are two-sided identities, and horizontal juxtaposition is a strict monoidal bifunctor with unit object $0$. Consequently $\\operatorname{End}_{\\mathcal{TL}_R(\\delta)}(n)=\\mathrm{TL}_n(R,\\delta)$ is a unital associative $R$-algebra whose underlying $R$-module is free on its noncrossing pairing diagrams.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-temperley-lieb-link-state-gram-form-is-invariant",
+          "source_section": "Statement",
+          "quote": "Let $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ be as in [[def-temperley-lieb-link-state-standard-modules]]. For link states $x,y$, let $x^*$ denote reflection across a horizontal line. The diagram $y\\circ x^*:t\\to t$ is either $\\delta^c1_t$ for some $c\\ge0$ or has fewer than $t$ propagating components. Define $\\phi_{n,t}(x,y)=\\delta^c$ in the first case and $0$ in the second, and extend $R$-bilinearly. Then $\\phi_{n,t}$ is symmetric and satisfies\n\n$$\\phi_{n,t}(x\\cdot a,y)=\\phi_{n,t}(x,y\\cdot a^*)$$\n\nfor all $x,y\\in W_{n,t}(R,\\delta)$ and $a\\in\\mathrm{TL}_n(R,\\delta)$. Here $a^*$ is reflection across a horizontal line. The matrix of $\\phi_{n,t}$ in the link-state basis is the Gram matrix obtained by reflecting and capping two link states, with one factor $\\delta$ for each closed loop.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cex-temperley-lieb-zero-cell-form-does-not-detect-module-head-1-1",
+          "claim": "There is exactly one rank-two link state with zero defects, namely the arc joining sites $1$ and $2$. Call it $x$. Thus $W_{2,0}(k,0)=kx$. The four cyclic boundary points have three pairings; the pairing with alternating endpoints is crossing, while the other two are the identity matching and $d_1$ with its top cap and bottom cup. Hence those two diagrams are the full basis of $\\mathrm{TL}_2(k,0)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "cex-temperley-lieb-zero-cell-form-does-not-detect-module-head-2-1",
+          "claim": "The identity acts as the identity on $x$. Stacking $x$ above $d_1$ closes the top cap of $d_1$ with the arc of $x$, producing one loop and leaving the same link state, so $x\\cdot d_1=\\delta x=0$. Since $1$ and $d_1$ span $\\mathrm{TL}_2(k,0)$, every algebra element acts on the one-dimensional space $kx$ by a scalar. The module is nonzero and simple.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "cex-temperley-lieb-zero-cell-form-does-not-detect-module-head-3-1",
+          "claim": "Reflecting $x$ and gluing it to itself creates one loop, so $\\phi_{2,0}(x,x)=\\delta=0$. Since $x$ is the sole basis vector, bilinearity makes the cell form identically zero and its cell-form quotient $W_{2,0}/\\operatorname{rad}(\\phi_{2,0})$ is zero. But $W_{2,0}=kx$ is itself a nonzero simple module by step 2.1. This refutes the statement.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes the empty-rank boundary, and step 1.1 records its convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero loop value; step 3.1 uses no division by the loop value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes the one-strand case; step 1.1 covers its boundary convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement adds no semisimplicity hypothesis; step 3.1 preserves the stated ring scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement covers endpoint labels; step 3.1 includes the boundary cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constructions are explicit and finite in step 1.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "TL2-zero-loop-head-counterexample",
+          "asserts": "TL_2(k,0) has basis {1,d_1}; x·1=x, x·d_1=0, and [φ_{2,0}]=[0].",
+          "claim": "The one-dimensional module kx is simple although its cell-form quotient is zero.",
+          "checked_in": "Steps 1.1-3.1",
+          "method": "explicit hand calculation"
+        }
+      ],
+      "axiom_review": {
+        "status": "reviewed",
+        "assumptions": [
+          "All Temperley–Lieb constructions are over the stated commutative ring with unit and arbitrary loop value; the simple-head classification alone assumes a field. No invertibility of δ, semisimplicity, or choice axiom is used."
+        ]
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-58 authoring audit",
+        "notes": "This scoped authoring record is not independent mathematical approval."
+      }
+    },
+    "ex-temperley-lieb-link-state-module-at-rank-three": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-temperley-lieb-link-state-standard-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit, let $\\delta\\in R$, and let $n\\ge0$. Let $t$ be an integer with $0\\le t\\le n$ and $n-t$ even. The diagram module $M_R(n,t)$ has $n$ bottom boundary points and $t$ top boundary points, with stacking and loop removal as in [[def-temperley-lieb-diagram-category]]. A component of a basis diagram is **propagating** if it meets both the bottom and top boundaries. Write $\\operatorname{prop}(D)$ for the number of propagating components of a diagram $D:n\\to t$.\n\nLet $M_R^{<t}(n,t)$ be the $R$-span of the basis diagrams $D:n\\to t$ with $\\operatorname{prop}(D)<t$. Define the **Temperley–Lieb link-state standard module**\n\n$$W_{n,t}(R,\\delta):=M_R(n,t)/M_R^{<t}(n,t).$$\n\nWrite $T_{n,t}$ for the set of diagrams in $\\mathcal D(n,t)$ with exactly $t$ propagating components. The cosets of these diagrams form an $R$-basis of $W_{n,t}$. Identifying each diagram with its bottom arcs and defects gives a partial matching of the $n$ ordered bottom sites, with the additional condition that the $t$ unpaired sites are joined to the ordered top sites by noncrossing propagating strands. In particular, no defect lies inside an arc. The unpaired sites are called **defects**. Thus $t$ is the defect or through-line number; in sources using $p$ for the number of arcs, $p=(n-t)/2$.\n\nThe intended right action of $\\mathrm{TL}_n(R,\\delta)$ is $x\\cdot a=[x\\circ a]$, where $x\\in M_R(n,t)$, $a\\in M_R(n,n)$, and $x\\circ a$ stacks $x$ above $a$. The submodule $M_R^{<t}(n,t)$ is stable under this action, so it descends to $W_{n,t}$; the complete well-definedness argument is [[lem-temperley-lieb-link-state-module-action-is-well-defined]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-temperley-lieb-link-state-module-action-is-well-defined",
+          "source_section": "Statement",
+          "quote": "For $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ as in [[def-temperley-lieb-link-state-standard-modules]], the rule $x\\cdot a=[x\\circ a]$ defines a unital right $\\mathrm{TL}_n(R,\\delta)$-module structure on $W_{n,t}(R,\\delta)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring with unit ([[def-algebra-over-a-commutative-ring]]) and let $\\delta\\in R$. The object labels are the nonnegative integers $n=0,1,2,\\ldots$. For labels $m,n$, place bottom points $b_1,\\ldots,b_m$ and top points $t_1,\\ldots,t_n$ along the rectangle from left to right on their respective edges. Their cyclic order is $t_1,\\ldots,t_n,b_m,\\ldots,b_1$. When $m=n=0$, the empty matching is included.\n\nAn $(m,n)$ **diagram** is a perfect matching of these $m+n$ boundary labels which is noncrossing: there are no four labels $a,b,c,d$ in cyclic order whose matched pairs are $\\{a,c\\}$ and $\\{b,d\\}$. A picture consists of disjoint arcs realizing the matching; equality is equality of the matching, so planar deformation that fixes the boundary does not change a diagram. If $m+n$ is odd, there are no such diagrams. Write $\\mathcal D(m,n)$ for this set and define the $R$-module\n\n$$M_R(m,n):=R^{(\\mathcal D(m,n))},$$\n\nthe free $R$-module on the set of diagrams ([[def-free-module-on-a-set-and-standard-basis]]). In particular, its diagram basis is empty when $m+n$ is odd.\n\nFor basis diagrams $D:m\\to n$ and $E:n\\to p$, stack $E$ above $D$ and identify the $n$ matching boundary points. The resulting finite graph has degree two at each identified point, where degree means the number of incident arcs. Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles. Denote this output by $E\\circ D$ and extend the rule $R$-bilinearly to a map $M_R(n,p)\\times M_R(m,n)\\to M_R(m,p)$. A following result proves closure of these operations on the diagram modules and the category axioms.\n\nThe matching $1_n:n\\to n$ pairs each bottom point to the top point directly above it. Horizontal juxtaposition, with the left diagram placed first, defines $m\\otimes m'=m+m'$ on object labels and $D\\otimes D'$ on basis diagrams; extend it $R$-bilinearly to the modules. A following result proves that these operations give a strict monoidal category.\n\nFor $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position. Define $\\mathrm{TL}_n(R,\\delta)$ to be the $R$-module $M_R(n,n)$ with bilinear multiplication $xy:=x\\circ y$ and distinguished element $1_n$. A following result proves that it is a unital associative $R$-algebra and identifies it with the endomorphism algebra at object $n$.\n\nThe left factor is stacked above the right factor. The loop value is $\\delta$; no invertibility or nonzero condition on $\\delta$ is part of these data.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-temperley-lieb-link-state-gram-form-is-invariant",
+          "source_section": "Statement",
+          "quote": "Let $R$, $\\delta$, $n$, $t$ and $W_{n,t}(R,\\delta)$ be as in [[def-temperley-lieb-link-state-standard-modules]]. For link states $x,y$, let $x^*$ denote reflection across a horizontal line. The diagram $y\\circ x^*:t\\to t$ is either $\\delta^c1_t$ for some $c\\ge0$ or has fewer than $t$ propagating components. Define $\\phi_{n,t}(x,y)=\\delta^c$ in the first case and $0$ in the second, and extend $R$-bilinearly. Then $\\phi_{n,t}$ is symmetric and satisfies\n\n$$\\phi_{n,t}(x\\cdot a,y)=\\phi_{n,t}(x,y\\cdot a^*)$$\n\nfor all $x,y\\in W_{n,t}(R,\\delta)$ and $a\\in\\mathrm{TL}_n(R,\\delta)$. Here $a^*$ is reflection across a horizontal line. The matrix of $\\phi_{n,t}$ in the link-state basis is the Gram matrix obtained by reflecting and capping two link states, with one factor $\\delta$ for each closed loop.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-temperley-lieb-link-state-diagram-basis-is-cellular",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring with unit, $\\delta\\in R$, and $n\\ge0$. Let $\\Lambda_n$ be the set of $t$ with $0\\le t\\le n$ and $n-t$ even, ordered by $\\lambda_r\\unrhd\\lambda_t$ exactly when $r\\le t$. Thus labels with fewer propagating strands are strictly greater. For $x,y\\in T_{n,t}$, define\n\n$$C^t_{x,y}:=x^*\\circ y\\in\\mathrm{TL}_n(R,δ),$$\n\nwhere $x,y:n\\to t$ are link-state diagrams and $*$ is reflection across a horizontal line. Then the diagrams $C^t_{x,y}$, for all $t\\in\\Lambda_n$ and $x,y\\in T_{n,t}$, form an $R$-basis of $\\mathrm{TL}_n(R,\\delta)$, and $(C,\\Lambda_n)$ is a cellular basis in the convention of [[def-cellular-algebra-basis-and-cell-module]]. Its cell module at $\\lambda_t$ is $W_{n,t}(R,\\delta)$, and its cell form is the Gram form $\\phi_{n,t}$ of [[lem-temperley-lieb-link-state-gram-form-is-invariant]].",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-temperley-lieb-nonzero-cell-forms-classify-simple-modules",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, $\\delta\\in F$, and $n\\ge0$. Put $D_{n,t}=W_{n,t}(F,\\delta)/\\operatorname{rad}(\\phi_{n,t})$ for each allowed $t$. Then the nonzero $D_{n,t}$ are absolutely simple and form a complete set of pairwise nonisomorphic simple right $\\mathrm{TL}_n(F,\\delta)$-modules. Moreover, $D_{n,t}\\ne0$ exactly when $\\phi_{n,t}$ is not identically zero; in that case $\\operatorname{rad}(\\phi_{n,t})$ is the unique maximal proper submodule and $D_{n,t}$ is the simple head of $W_{n,t}$. If $\\phi_{n,t}$ is identically zero, then $D_{n,t}=0$, but no conclusion about the actual head of $W_{n,t}$ follows.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-temperley-lieb-link-state-module-at-rank-three-1-1",
+          "claim": "For $n=3$ and $t=1$ there is one arc. The only noncrossing placements are $a$, with arc $(1,2)$ and defect $3$, and $b$, with defect $1$ and arc $(2,3)$. The dimension formula of [[thm-temperley-lieb-link-state-dimension-formula]] gives $\\binom{3}{1}-\\binom{3}{0}=2$, so these two distinct states are the full basis.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "ex-temperley-lieb-link-state-module-at-rank-three-2-1",
+          "claim": "For $a\\cdot d_1$, the cap of $d_1$ joins the two endpoints of $a$'s arc, making one closed loop; the bottom cup of $d_1$ leaves the same arc, so $a\\cdot d_1=\\delta a$. For $a\\cdot d_2$, tracing from the defect at site $3$ through the top cap of $d_2$, then through the arc of $a$ and the vertical strand at site $1$, leaves a defect at site $1$ and a cup at sites $2,3$, so $a\\cdot d_2=b$. For $b\\cdot d_1$, tracing from the defect at site $1$ through $d_1$'s cap, then through $b$'s arc and the vertical strand at site $3$, leaves the arc at sites $1,2$ and a defect at site $3$, so $b\\cdot d_1=a$. For $b\\cdot d_2$, the cap closes $b$'s arc into one loop and the bottom cup leaves $b$, so $b\\cdot d_2=\\delta b$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "ex-temperley-lieb-link-state-module-at-rank-three-2-2",
+          "claim": "Gluing $a$ with its reflection creates one loop, as does gluing $b$ with its reflection, so $\\phi(a,a)=\\delta=\\phi(b,b)$. Gluing $a$ to the reflection of $b$ creates one through path and no loop, so $\\phi(a,b)=1$; by symmetry $\\phi(b,a)=1$. These four values give the displayed Gram matrix.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "ex-temperley-lieb-link-state-module-at-rank-three-3-1",
+          "claim": "At $\\delta=0$, if $xa+yb$ lies in the radical then pairing with $a$ gives $y=0$ and pairing with $b$ gives $x=0$. Thus the radical is zero and the cell-form quotient is $W_{3,1}$ itself. The form is nonzero, so [F4] makes this module simple.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement includes the empty-rank boundary, and step 1.1 records its convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement allows zero loop value; step 3.1 uses no division by the loop value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes the one-strand case; step 1.1 covers its boundary convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement adds no semisimplicity hypothesis; step 3.1 preserves the stated ring scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement covers endpoint labels; step 3.1 includes the boundary cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constructions are explicit and finite in step 1.1; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "rank-three-one-defect-module",
+          "asserts": "The two dangles have generator actions in step 2.1 and Gram matrix [[δ,1],[1,δ]]; at δ=0 its determinant is −1.",
+          "claim": "At zero loop value the form is nondegenerate and the module is simple.",
+          "checked_in": "Steps 1.1-3.1",
+          "method": "explicit hand calculation"
+        }
+      ],
+      "axiom_review": {
+        "status": "reviewed",
+        "assumptions": [
+          "All Temperley–Lieb constructions are over the stated commutative ring with unit and arbitrary loop value; the simple-head classification alone assumes a field. No invertibility of δ, semisimplicity, or choice axiom is used."
+        ]
+      },
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-58 authoring audit",
+        "notes": "This scoped authoring record is not independent mathematical approval."
+      }
+    }
+  }
+}

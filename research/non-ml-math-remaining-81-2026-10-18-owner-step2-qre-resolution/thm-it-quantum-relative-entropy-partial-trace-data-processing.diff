@@ -1,0 +1,37 @@
+--- items/thm-it-quantum-relative-entropy-partial-trace-data-processing.md
++++ PROPOSED/items/thm-it-quantum-relative-entropy-partial-trace-data-processing.md
+@@ -6,7 +6,7 @@
+ origin: pipeline
+ pipeline_run: non-ml-math-remaining-81-2026-10-18
+ dependency_level: 4
+-deps: [def-it-finite-dimensional-quantum-relative-entropy, thm-it-quantum-relative-entropy-joint-convexity, lem-it-quantum-relative-entropy-isometric-invariance, def-qc-partial-trace, def-qc-tensor-register-and-permutation, def-real-and-complex-inner-product-space, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, thm-non-negative-operator-characterisations, thm-qc-partial-trace-positive-and-trace-preserving]
++deps: [def-it-finite-dimensional-quantum-relative-entropy, thm-it-quantum-relative-entropy-joint-convexity, lem-it-quantum-relative-entropy-isometric-invariance, def-qc-partial-trace, def-qc-tensor-register-and-permutation, def-real-and-complex-inner-product-space, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, thm-non-negative-operator-characterisations, thm-qc-partial-trace-positive-and-trace-preserving, cor-complex-de-moivre-formula, thm-kernel-and-fibres-of-complex-exponential, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -35,7 +35,7 @@
+ 
+ [F3] [[def-qc-partial-trace]]: in product bases, $(\operatorname{Tr}_B R)_{ii'}=\sum_jR_{(i,j),(i',j)}$.
+ 
+-[F4] [[thm-qc-partial-trace-positive-and-trace-preserving]]: the partial trace preserves non-negativity and total trace.
++[F4] [[thm-qc-partial-trace-positive-and-trace-preserving, cor-complex-de-moivre-formula, thm-kernel-and-fibres-of-complex-exponential, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]: the partial trace preserves non-negativity and total trace.
+ 
+ [F5] [[def-qc-tensor-register-and-permutation]]: ordered product bases and their inner products retain the stated factor order.
+ 
+@@ -47,9 +47,15 @@
+ 
+ [F9] [[def-real-and-complex-inner-product-space]]: the inner product is linear in its first argument, so $z\mapsto\langle z,e_s\rangle e_r$ is linear.
+ 
++[F10] [[cor-complex-de-moivre-formula]]: for every integer $m$ and real $t$, $(\cos t+i\sin t)^m=\cos(mt)+i\sin(mt)$.
++
++[F11] [[thm-kernel-and-fibres-of-complex-exponential]]: $\exp z=1$ exactly when $z\in2\pi i\mathbb Z$.
++
++[F12] [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]: for real $t$, $\exp(it)=\cos t+i\sin t$ and $|\exp(it)|=1$.
++
+ ## Proof
+ 
+-1.1 Choose an orthonormal basis $(e_j)_{j<d}$ of $H_B$ using [F8], and set $\omega=e^{2\pi i/d}$. Define $Xe_j=e_{j+1\bmod d}$ and $Ze_j=\omega^je_j$; these maps are unitary because they respectively permute the basis and multiply its vectors by unit-modulus scalars. For $M_{rs}z:=\langle z,e_s\rangle e_r$, write $R=\sum_{r,s}R_{rs}\otimes M_{rs}$. Averaging $X^aZ^b$ first over phases kills $r\ne s$, and averaging shifts sends each $M_{rr}$ to $I_B/d$. Thus the finite twirl is $\mathcal T(R):=d^{-2}\sum_{a,b}(I_A\otimes X^aZ^b)R(I_A\otimes X^aZ^b)^*=\operatorname{Tr}_B(R)\otimes I_B/d$ by [F3]; this formula also holds for $d=1$. [given, F3, F5, F8, F9, construct, choose, algebra]
++1.1 Choose an orthonormal basis $(e_j)_{j<d}$ of $H_B$ using [F8], and set $\omega=\exp(2\pi i/d)$. By [F10] and [F12], $|\omega|=1$ and $\omega^m=\exp(2\pi i m/d)$ for every integer $m$; by [F11], $\omega^m=1$ exactly when $d$ divides $m$. Thus $\omega$ has order $d$. Define $Xe_j=e_{j+1\bmod d}$ and $Ze_j=\omega^je_j$; these maps are unitary because they respectively permute the basis and multiply its vectors by unit-modulus scalars. If $d\nmid m$, then $q=\omega^m\ne1$, $q^d=1$, and $(1-q)\sum_{b=0}^{d-1}q^b=1-q^d=0$, so $d^{-1}\sum_{b=0}^{d-1}\omega^{bm}=0$; if $d\mid m$, that average is $1$. For $M_{rs}z:=\langle z,e_s\rangle e_r$, write $R=\sum_{r,s}R_{rs}\otimes M_{rs}$. Direct application to basis vectors gives $Z^bM_{rs}(Z^b)^*=\omega^{b(r-s)}M_{rs}$ and $X^aM_{rs}(X^a)^*=M_{r+a,s+a}$, with indices modulo $d$. For $0\le r,s<d$, $d\mid(r-s)$ exactly when $r=s$, so the proved phase average removes precisely the off-diagonal units. Also $d^{-1}\sum_{a=0}^{d-1}M_{r+a,r+a}=I_B/d$. Therefore $\mathcal T(R):=d^{-2}\sum_{a,b}(I_A\otimes X^aZ^b)R(I_A\otimes X^aZ^b)^*=\sum_rR_{rr}\otimes I_B/d=\operatorname{Tr}_B(R)\otimes I_B/d$ by [F3]. When $d=1$, $X=Z=I_B$ and there is only the diagonal unit, so the same formula holds directly. [given, F3, F5, F8, F9, F10, F11, F12, construct, choose, algebra]
+ 
+ 1.2 For non-negative $C,D$ on $H_A$, their tensor products with $I_B/d$ have supports $\operatorname{supp}(C)\otimes H_B$ and $\operatorname{supp}(D)\otimes H_B$ by the tensor-product eigenbases [F7]. Thus support inclusion holds for $(C,D)$ exactly when it holds for $(C\otimes I_B/d,D\otimes I_B/d)$. In the finite branch, the tensor eigenvalues add $-\ln d$ to both logarithms, which cancels, while $\operatorname{tr}(I_B/d)=1$; hence $D(C\otimes I_B/d\|D\otimes I_B/d)=D(C\|D)$. If inclusion fails both sides are $+\infty$ by [F6]. [given, F6, F7, algebra]
+ 

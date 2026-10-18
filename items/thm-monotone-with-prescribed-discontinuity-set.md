@@ -3,6 +3,7 @@ id: thm-monotone-with-prescribed-discontinuity-set
 kind: theorem
 title: "Converse to Froda: for every at most countable $E \\subseteq \\mathbb{R}$ there is a bounded nondecreasing $f : \\mathbb{R} \\to \\mathbb{R}$ whose set of discontinuities is exactly $E$, every one of them a jump"
 status: published
+dependency_level: 4
 origin: session
 provenance:
   statement: ai-altered
@@ -15,12 +16,12 @@ landmark: true
 short: "every countable set is a discontinuity set"
 proof_strategy: constructive
 verification:
-  audited: 2026-07-28
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-6-luna"
     verdict: pass
-    date: 2026-07-28
+    date: 2026-10-18
+  repair: research/non-ml-math-remaining-81-2026-10-18-owner-monotone-repair/published-receipts/thm-monotone-with-prescribed-discontinuity-set.json
 sources:
   scraped: []
   references:

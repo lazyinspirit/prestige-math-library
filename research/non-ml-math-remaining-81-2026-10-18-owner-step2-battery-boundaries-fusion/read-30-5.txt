@@ -1,0 +1,184 @@
+
+ITEM thm-qc-tqc-toric-logical-algebra
+
+
+## Statement
+
+The representatives $\bar Z_1,\bar Z_2,\bar X_1,\bar X_2$ of
+[[def-qc-tqc-toric-logical-loops]] obey
+$\bar Z_i\bar X_j=(-1)^{\delta_{ij}}\bar X_j\bar Z_i$ and commute within
+each Z pair and each X pair. Their four classes form a basis of the logical
+Pauli quotient of the two-qubit toric code.
+
+## Facts & Assumptions
+
+**Given:** The four specified normalizer representatives and the two-qubit toric stabilizer code.
+
+[F1] [[def-qc-tqc-toric-logical-loops]]: $\bar Z_1$ uses the horizontal primal row $h_{i,0}$, $\bar Z_2$ the vertical primal column $v_{0,j}$, $\bar X_1$ uses $h_{0,j}$, and $\bar X_2$ uses $v_{i,0}$.
+
+[F2] [[thm-qc-pauli-commutator-is-symplectic-pairing]]: the commutator sign of two Pauli strings is $(-1)^\omega$, where $\omega$ is their binary symplectic pairing; for pure X/Z supports it is the overlap parity.
+
+[F3] [[def-qc-stabilizer-syndrome-and-logical-operators]]: logical Paulis are classes in $N(S)/(Z_nS)$, with scalar phases and stabilizers identified.
+
+[F4] [[thm-qc-tqc-toric-code-dimension]]: the code encodes two qubits.
+
+[F5] [[thm-qc-stabilizer-logical-pauli-quotient-dimension]]: an $n$-qubit stabilizer code encoding $k$ qubits has a binary logical Pauli quotient of dimension $2k$.
+
+[F6] [[thm-qc-tqc-toric-mutual-sign]]: primal Z and dual X strings with exactly one shared physical edge anticommute.
+
+## Proof
+
+1.1 By [F1], $\bar Z_1$ and $\bar X_1$ share only $h_{0,0}$, while $\bar Z_2$ and $\bar X_2$ share only $v_{0,0}$. [F6] gives anticommutation for these equal-index pairs. The cross pairs $(\bar Z_1,\bar X_2)$ and $(\bar Z_2,\bar X_1)$ have disjoint physical-edge supports, so [F2] gives commutation for unequal indices. Two Z strings commute with one another and two X strings commute with one another because their factors have the same Pauli type. [given, F1, F2, F6, algebra]
+
+2.1 Suppose a product $\bar Z_1^a\bar Z_2^b\bar X_1^c\bar X_2^d$, with $a,b,c,d\in\mathbb F_2$, represented the identity class in [F3]. It would then commute with every normalizer representative. Commuting with $\bar X_1,\bar X_2,\bar Z_1,\bar Z_2$ in turn and using step 1.1 forces $a=b=c=d=0$. Hence the four classes are independent. [F3, step 1.1, algebra]
+
+3.1 By [F4] the code has $k=2$, and [F5] gives logical quotient dimension $2k=4$. The four independent classes from step 2.1 therefore form a basis of that quotient. [F4, F5, step 2.1, algebra] ∎
+
+
+ITEM thm-qc-tqc-toric-constant-barrier
+
+
+## Statement
+
+If $J_e\le J_m$, the horizontal logical string $\bar Z_1$ has
+$\mathcal B_L(\bar Z_1)\le4J_e$. If $J_m<J_e$, the dual horizontal logical
+string $\bar X_2$ has $\mathcal B_L(\bar X_2)\le4J_m$. In either case a
+noncontractible logical loop of the cheaper species has barrier at most
+$4\min(J_e,J_m)$, independently of $L$.
+
+## Facts & Assumptions
+
+**Given:** $L\ge3$, fixed $J_e,J_m>0$, the finite toric Hamiltonian, and the specified logical loops.
+
+[F1] [[def-qc-tqc-toric-energy-barrier]]: the barrier is the minimum peak energy excess over all paths of single-edge Pauli errors ending at the specified logical operator.
+
+[F2] [[thm-qc-tqc-toric-gap]]: the ground energy is $E_g=-L^2(J_e+J_m)$.
+
+[F3] [[lem-qc-tqc-toric-string-syndrome]]: an edge-simple open primal Z trail or dual X trail has the respective defects at exactly its two endpoints; a closed such trail has no defects.
+
+[F4] [[def-qc-tqc-toric-logical-loops]]: $\bar Z_1$ is the horizontal primal loop with edges $h_{i,0}$, and $\bar X_2$ is the dual horizontal loop with crossed edges $v_{i,0}$.
+
+[F5] [[def-qc-tqc-toric-hamiltonian]]: $H_L$ is the finite sum of star terms $-J_eA_{i,j}$ and plaquette terms $-J_mB_{i,j}$.
+
+## Proof
+
+1.1 Suppose $J_e\le J_m$. Apply $Z_{h_{0,0}},Z_{h_{1,0}},\ldots,Z_{h_{L-1,0}}$ in that order. After $k$ factors with $1\le k<L$, the partial string is a primal trail from $q_{0,0}$ to $q_{k,0}$; these endpoints are distinct, so [F3] gives exactly two e defects and no m defects. By [F5], changing one star eigenvalue from $+1$ to $-1$ changes its energy contribution from $-J_e$ to $+J_e$, an increase of $2J_e$; the excess is therefore $4J_e$. After the last factor the path is closed and has zero syndrome by [F3]. This is an elementary path in [F1] whose peak excess is at most $4J_e$. [given, F1, F2, F3, F4, F5, construct, algebra]
+
+1.2 Suppose $J_m<J_e$. Apply $X_{v_{0,0}},X_{v_{1,0}},\ldots,X_{v_{L-1,0}}$ in that order. The crossed dual edges form a closed horizontal dual loop. After $k$ factors with $1\le k<L$, the dual trail has distinct endpoint faces $f_{L-1,0}$ and $f_{k-1,0}$; [F3] gives exactly two m defects and no e defects. By [F5], each m defect raises the energy by $2J_m$, so the excess is $4J_m$. The final closed trail has zero syndrome by [F3] and ends at $\bar X_2$. This is an elementary path in [F1] with peak excess at most $4J_m$. [given, F1, F2, F3, F4, F5, construct, algebra]
+
+2.1 If $J_e\le J_m$, step 1.1 gives $4J_e=4\min(J_e,J_m)$. If $J_m<J_e$, step 1.2 gives $4J_m=4\min(J_e,J_m)$. The bound is independent of $L$. [step 1.1, step 1.2, algebra] ∎
+
+
+ITEM thm-qc-tqc-toric-recovery
+
+
+## Statement
+
+Let $t\in\mathbb Z_{\ge0}$ satisfy $2t<L$. Every finite Pauli error channel
+whose Kraus operators lie in the span of Pauli operators of weight at most
+$t$ has an exact recovery on the periodic $L\times L$ toric code. In
+particular, every unknown Pauli error of weight at most $t$ is exactly
+correctable.
+
+## Facts & Assumptions
+
+**Given:** The periodic toric code on $n=2L^2$ qubits and an integer $t\ge0$ with $2t<L$.
+
+[F1] [[thm-qc-tqc-toric-distance]]: the code has stabilizer distance $d(S)=L$.
+
+[F2] [[thm-qc-stabilizer-distance-detection-and-correction]]: a finite stabilizer error channel with Kraus operators in the span of Paulis of weight at most $t$ has an exact recovery whenever $2t<d(S)$.
+
+[F3] [[thm-qc-tqc-toric-code-dimension]]: the toric code is a nonzero finite-dimensional stabilizer code.
+
+## Proof
+
+1.1 By [F3], the common toric code space is nonzero and finite-dimensional; it is the stabilizer code defined by the commuting toric checks. [given, F3]
+
+2.1 By [F1], its distance is $d(S)=L$. The hypothesis $2t<L$ is therefore exactly the strict condition $2t<d(S)$ in [F2]. Applying [F2] gives one finite exact recovery for every error channel in the stated Pauli span, and hence for each Pauli error of weight at most $t$. No circuit-level noisy procedure or hardware threshold is asserted. [given, F1, F2, step 1.1, algebra] ∎
+
+
+ITEM cex-qc-tqc-gap-not-physical-protection
+
+
+## Statement
+
+For each finite $L\ge3$, the toric Hamiltonian has an exact positive gap,
+contractible-disk local indistinguishability, and a constant upper bound on a
+logical-string energy barrier. These unperturbed facts alone do not imply
+stability under arbitrary perturbations: the explicit global-projector
+perturbation $V_L=-\Delta_L(I-\Pi_L)$ closes the gap above the original
+code space and enlarges the ground space, where $\Pi_L$ is the ground
+projector and $\Delta_L=4\min(J_e,J_m)$. This does not refute
+stability theorems for sufficiently small local perturbations, and it makes
+no claim about thermal dynamics or a material realization.
+
+## Facts & Assumptions
+
+**Given:** The finite periodic toric Hamiltonian with $L\ge3$, couplings $J_e,J_m>0$, and its code projector $\Pi_L$.
+
+[F1] [[thm-qc-tqc-toric-gap]]: the code is the ground space, the ground energy is $E_g=-L^2(J_e+J_m)$, and the exact gap is $\Delta_L=4\min(J_e,J_m)>0$.
+
+[F2] [[thm-qc-tqc-toric-local-indistinguishability]]: every operator supported in the stated contractible disk has scalar compression to the code.
+
+[F3] [[thm-qc-tqc-toric-constant-barrier]]: one noncontractible logical string has an unperturbed Pauli-path energy barrier at most $4\min(J_e,J_m)$.
+
+[F4] [[thm-qc-tqc-toric-code-dimension]]: $\Pi_L$ has rank four, while the full Hilbert space has dimension $2^{2L^2}>4$.
+
+[F5] [[def-qc-tqc-toric-hamiltonian]]: $H_L$ is a finite self-adjoint operator on the $2^{2L^2}$-dimensional register.
+
+## Counterexample
+
+1.1 Since [F1] identifies the code as the ground eigenspace of the self-adjoint finite operator [F5], its orthogonal projector $\Pi_L$ commutes with $H_L$: for $\psi$ in the code and $\eta\perp\mathcal C$, $\langle\psi,H_L\eta\rangle=\langle H_L\psi,\eta\rangle =E_g\langle\psi,\eta\rangle=0$. The complement is nonzero by [F4], so the restriction of $H_L$ to it has a least eigenvalue. By [F1] that eigenvalue is $E_g+\Delta_L$. The other finite-volume properties [F2] and [F3] concern this same unperturbed Hamiltonian and code. [F1, F2, F3, F4, F5, given, algebra]
+
+2.1 Define $V_L=-\Delta_L(I-\Pi_L)$. The operator $I-\Pi_L$ is a nonzero orthogonal projection by [F4], so $V_L$ is self-adjoint and $\|V_L\|=\Delta_L$. It vanishes on the code and subtracts $\Delta_L$ from every eigenvalue on the orthogonal complement. The construction uses the global code projector and is not asserted to belong to a local perturbation class. [F1, F4, F5, step 1.1, construct, algebra]
+
+3.1 The code eigenvalue remains $E_g$ after adding $V_L$. Every excited eigenvalue $E\ge E_g+\Delta_L$ becomes $E-\Delta_L\ge E_g$, and a nonzero eigenspace with $E=E_g+\Delta_L$ now also has eigenvalue $E_g$. Thus the original code is no longer the full ground space: the energy gap above that four-dimensional code space is zero and the perturbed ground space is strictly larger. The finite unperturbed gap, local indistinguishability, and barrier statements therefore do not by themselves prove stability against arbitrary perturbations. No thermal evolution or material model was specified, so no memory-lifetime or physical-phase conclusion follows from these finite operator facts. [F1, F2, F3, step 2.1, algebra] ∎
+
+ITEM ex-qc-tqc-l3-toric-checks
+
+
+## Example
+
+Take $L=3$, with all indices in $\mathbb Z/3\mathbb Z$. The edge qubits are
+the eighteen distinct labels
+$$\{h_{i,j}:i,j\in\{0,1,2\}\}\sqcup\{v_{i,j}:i,j\in\{0,1,2\}\}.$$
+There are eighteen checks $A_{i,j},B_{i,j}$, given by the star and plaquette
+formulas in [[def-qc-tqc-toric-checks]]. The displayed horizontal primal loop
+is
+$\bar Z_1=Z_{h_{0,0}}Z_{h_{1,0}}Z_{h_{2,0}}$.
+
+## Facts & Assumptions
+
+**Given:** The periodic $3\times3$ cellulation and the toric check, code-space, string-syndrome, and Hamiltonian conventions.
+
+[F1] [[def-qc-tqc-periodic-square-cellulation]]: each edge label is distinct modulo $3$, and the incidence formulas use indices in $\mathbb Z/3\mathbb Z$.
+
+[F2] [[def-qc-tqc-toric-checks]]: $A_{i,j}$ is X on the four edges at $q_{i,j}$ and $B_{i,j}$ is Z on the four boundary edges of $f_{i,j}$.
+
+[F3] [[lem-qc-tqc-toric-check-commutation]]: all checks commute, and the products of all stars and of all plaquettes are each $I$.
+
+[F4] [[lem-qc-tqc-toric-incidence-ranks]]: each check type has rank $3^2-1=8$ and only its total relation.
+
+[F5] [[thm-qc-tqc-toric-code-dimension]]: the code has $18$ physical qubits, check rank $16$, and dimension $2^{18-16}=4$.
+
+[F6] [[def-qc-tqc-toric-logical-loops]]: $\bar Z_1$ is a nontrivial logical Pauli supported on $h_{i,0}$ for $i\in\mathbb Z_3$.
+
+[F7] [[lem-qc-tqc-toric-string-syndrome]]: an edge-simple open primal Z trail or dual X trail has the respective defects at exactly its two endpoints; a closed one has no defects.
+
+[F8] [[thm-qc-tqc-toric-gap]]: for couplings $J_e,J_m>0$, the exact gap is $4\min(J_e,J_m)$ and the ground energy is $-9(J_e+J_m)$.
+
+[F9] [[def-qc-tqc-toric-hamiltonian]]: for $L=3$ the Hamiltonian is $-J_e\sum_{i,j}A_{i,j}-J_m\sum_{i,j}B_{i,j}$.
+
+[F10] [[lem-qc-tqc-toric-joint-check-eigenspaces]]: every nonzero syndrome sector has an even number of e defects and an even number of m defects.
+
+[F11] [[def-qc-tqc-toric-excitations]]: e and m defects are respectively negative star and plaquette eigenvalues.
+
+## Verification
+
+1.1 There are $3\cdot3=9$ horizontal and nine vertical edge labels; they are disjoint by [F1], so there are $18$ qubits. Likewise there are nine stars and nine plaquettes, hence $18$ checks in the displayed list. [given, F1, F2, algebra]
+
+1.2 Every edge occurs in two stars, so the product of all nine stars is $I$; every edge also occurs in two plaquettes, so their total product is $I$, as [F3] records. By [F4], deleting $A_{0,0}$ and $B_{0,0}$ leaves $8+8=16$ independent checks, with no other relation. Thus [F5] gives a four-dimensional code space. [F3, F4, F5, algebra]
+
+1.3 The three edges $h_{0,0},h_{1,0},h_{2,0}$ form a closed horizontal primal loop. Applying $Z_{h_{0,0}}$ first gives e defects at $q_{0,0}$ and $q_{1,0}$. Applying $Z_{h_{1,0}}$ next leaves only the two endpoints $q_{0,0}$ and $q_{2,0}$. Applying $Z_{h_{2,0}}$ closes the trail, leaving no defects. These are precisely the endpoint and closed-trail cases of [F7]; [F6] says the final loop is logically nontrivial. [F1, F6, F7, construct, algebra]
+
+2.1 For a joint sector with $n_e$ negative stars and $n_m$ negative plaquettes, [F9] gives energy $-9(J_e+J_m)+2J_en_e+2J_mn_m$, using [F11] to count the negative signs. By [F10], any nonzero excited sector has $n_e\ge2$ or $n_m\ge2$, so it lies at least $4\min(J_e,J_m)$ above the code. A one-edge Z string attains $4J_e$ and a one-edge X string attains $4J_m$; hence the smaller value is attained, in agreement with [F8]. [F3, F7, F8, F9, F10, F11, algebra] ∎

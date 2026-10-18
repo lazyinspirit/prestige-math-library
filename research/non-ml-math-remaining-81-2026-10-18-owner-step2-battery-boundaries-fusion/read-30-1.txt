@@ -1,0 +1,148 @@
+
+ITEM def-qc-tqc-periodic-square-cellulation
+
+
+## Definition
+
+Fix an integer $L\ge3$ and write $\mathbb Z_L=\mathbb Z/L\mathbb Z$. The
+periodic square cellulation has vertices $q_{i,j}$, horizontal edges $h_{i,j}$
+from $q_{i,j}$ to $q_{i+1,j}$, vertical edges $v_{i,j}$ from $q_{i,j}$ to
+$q_{i,j+1}$, and faces $f_{i,j}$, for $i,j\in\mathbb Z_L$. Every index is
+read modulo $L$. The boundary of $f_{i,j}$ consists of
+$h_{i,j},v_{i+1,j},h_{i,j+1},v_{i,j}$. Equivalently, this is the quotient of
+the unit square tiling of $\mathbb R^2$ by translations in $L\mathbb Z^2$.
+
+The cellulation has $L^2$ vertices, $2L^2$ edges, and $L^2$ faces. The
+condition $L\ge3$ ensures that the four edges in each star and face are
+distinct, and that every edge has two distinct endpoints and two distinct
+incident faces. The vertex-edge graph joins vertices joined by an edge. The
+face-adjacency graph joins faces sharing an edge; both graphs are connected.
+
+## Facts & Assumptions
+
+**Given:** An integer $L\ge3$ and coordinate indices in $\mathbb Z_L$.
+
+## Verification
+
+1.1 The horizontal and vertical edges are indexed by two disjoint copies of $\mathbb Z_L^2$, so there are $2L^2$ edges; the vertex and face sets each have $L^2$ indices. At $q_{i,j}$ the four incident edges are $h_{i-1,j},h_{i,j},v_{i,j-1},v_{i,j}$. Their endpoints are distinct because $L\ge3$. [given, algebra]
+
+2.1 The faces adjacent to $h_{i,j}$ are $f_{i,j-1}$ and $f_{i,j}$, and the faces adjacent to $v_{i,j}$ are $f_{i-1,j}$ and $f_{i,j}$. These pairs are distinct for $L\ge3$; each displayed face boundary has four distinct edges. Thus the stated incidences define a square cellulation without repeated incidences. [given, step 1.1, algebra]
+
+3.1 Repeated horizontal and vertical steps modulo $L$ connect any pair of vertices. The same coordinate moves connect any pair of face indices through shared edges. Therefore both graphs defined above are connected. [given, algebra] ∎
+
+
+ITEM lem-qc-tqc-finite-square-cycle-is-boundary
+
+
+## Statement
+
+In the infinite square lattice, every finitely supported edge chain over
+$\mathbb F_2$ whose incidence at each vertex is even is the boundary of a
+finitely supported collection of square faces. The same conclusion holds for
+the translated dual square lattice.
+
+## Facts & Assumptions
+
+**Given:** Finitely supported coefficients $H_{i,j},V_{i,j}\in\mathbb F_2$ on the horizontal and vertical edges of the integer square lattice, satisfying the cycle equations
+
+$$H_{i,j}+H_{i-1,j}+V_{i,j}+V_{i,j-1}=0$$
+
+for every $(i,j)\in\mathbb Z^2$. All sums below are finite because the coefficients have finite support.
+
+## Proof
+
+1.1 For each row $j$, sum the cycle equations over $i\in\mathbb Z$. The horizontal terms cancel in pairs, giving $S_j=S_{j-1}$, where $S_j:=\sum_i V_{i,j}$. Finite support gives $S_j=0$ for all sufficiently large $|j|$, so $S_j=0$ for every $j$. Define a face coefficient $F_{i,j}:=\sum_{k>i}V_{k,j}$ in $\mathbb F_2$. For fixed $j$, this coefficient is zero for $i$ sufficiently large by finite support and for $i$ sufficiently negative because then it equals $S_j=0$. It is also zero for all but finitely many rows. Hence $F$ is a finitely supported face chain. [given, construct, algebra]
+
+2.1 The vertical edge $v_{i,j}$ belongs to the boundaries of $f_{i-1,j}$ and $f_{i,j}$, so its coefficient in $\partial F$ is $F_{i-1,j}+F_{i,j}=V_{i,j}$. Thus $\partial F$ and the given chain agree on every vertical edge. [given, step 1.1, algebra]
+
+3.1 The horizontal edge $h_{i,j}$ belongs to the boundaries of $f_{i,j-1}$ and $f_{i,j}$. Its coefficient in $\partial F$ is $F_{i,j-1}+F_{i,j}=\sum_{k>i}(V_{k,j-1}+V_{k,j})$. The cycle equation at $(k,j)$ replaces each summand by $H_{k,j}+H_{k-1,j}$; summing over $k>i$ telescopes to $H_{i,j}$ because the sequence is finitely supported. Thus $\partial F$ and the given chain agree on every horizontal edge, proving $\partial F=(H,V)$. Translating the dual square lattice by $(1/2,1/2)$ identifies it with the same integer grid, so the identical construction proves the dual assertion. [given, step 1.1, step 2.1, algebra] ∎
+
+
+ITEM def-qc-tqc-toric-checks
+
+
+## Definition
+
+For the periodic cellulation in [[def-qc-tqc-periodic-square-cellulation]],
+put one qubit on each edge, ordered lexicographically by $(i,j)$ and then with
+horizontal before vertical edges. The physical Hilbert space is
+$\mathcal H_L=(\mathbb C^2)^{\otimes E}$, where $E$ is the edge set. For an
+edge $e$, write $X_e$ and $Z_e$ for the corresponding one-qubit Pauli acting
+on that tensor factor and as the identity on every other factor. Define the
+star and plaquette checks by
+
+$$A_{i,j}=X_{h_{i-1,j}}X_{h_{i,j}}X_{v_{i,j-1}}X_{v_{i,j}},\qquad B_{i,j}=Z_{h_{i,j}}Z_{v_{i+1,j}}Z_{h_{i,j+1}}Z_{v_{i,j}}.$$
+
+All indices are in $\mathbb Z_L$.
+
+## Facts & Assumptions
+
+**Given:** An integer $L\ge3$, its periodic square cellulation, and the ordered edge register.
+
+[F1] [[def-qc-tqc-periodic-square-cellulation]]: the edges incident to $q_{i,j}$ are $h_{i-1,j},h_{i,j},v_{i,j-1},v_{i,j}$; the boundary of $f_{i,j}$ is $h_{i,j},v_{i+1,j},h_{i,j+1},v_{i,j}$, with four distinct edges in each list.
+
+[F2] [[def-qc-pauli-matrices]]: $X$ and $Z$ are the specified Hermitian one-qubit matrices, and $X^2=Z^2=I$ by direct multiplication.
+
+[F3] [[def-qc-register-and-computational-basis]]: the physical space is the ordered tensor product of one copy of $\mathbb C^2$ for each edge.
+
+[F4] [[def-qc-tensor-map]]: tensor products of maps act on elementary tensors factor by factor and extend linearly.
+
+[F5] [[lem-qc-tensor-product-basis-and-dimension]]: ordered elementary computational-basis tensors span the finite register.
+
+## Verification
+
+1.1 By [F1], each displayed check acts on four distinct edge factors. By [F2] and [F3], its factors are defined endomorphisms of the ordered physical register, so both $A_{i,j}$ and $B_{i,j}$ are well-defined tensor-product operators. [given, F1, F2, F3]
+
+2.1 Each factor in either product is Hermitian and squares to the identity by [F2]. The factors act on distinct tensor coordinates, so [F4] makes their two compositions agree on every elementary tensor; those tensors span the register by [F5]. Therefore each full product is Hermitian and squares to the identity. These are the star and plaquette checks used below. [F2, F3, F4, F5, step 1.1, algebra] ∎
+
+
+ITEM lem-qc-tqc-contractible-disk-lifts-to-plane
+
+
+## Statement
+
+Write the torus as $T_L=\mathbb R^2/(L\mathbb Z^2)$ with its periodic
+square cellulation. Let $D\subset T_L$ be a nonempty compact embedded
+topological disk with connected complement. Then the quotient map
+$\pi:\mathbb R^2\to T_L$ has a lift $\widetilde D\subset\mathbb R^2$ on
+which it is one-to-one and maps $\widetilde D$ homeomorphically onto $D$.
+Consequently every finite primal or dual edge chain supported in $D$ lifts
+to a finite chain in the infinite square tiling, and cycles lift to cycles.
+
+## Facts & Assumptions
+
+**Given:** The quotient torus $T_L=\mathbb R^2/(L\mathbb Z^2)$, the square cellulation, and a compact embedded disk $D$ homeomorphic to the closed unit disk.
+
+## Proof
+
+1.1 For any $\tilde p\in\mathbb R^2$, choose an open square $U$ about $\tilde p$ of side length less than $L$. Its translates by distinct vectors in $L\mathbb Z^2$ are disjoint, and the quotient map restricts to a homeomorphism from each translate onto the same open neighborhood of $\pi(\tilde p)$. These neighborhoods cover the torus. For a path, pull back this cover to the compact interval, take a finite subcover and a Lebesgue number, and partition the interval into pieces of smaller length. Each piece maps into one such neighborhood; once its initial lift is fixed, the inverse on the unique sheet through that lift defines the lift on the piece. These pieces agree at endpoints, and uniqueness follows from uniqueness of the local inverse. For a homotopy square, use a finite grid of rectangles whose images each lie in one evenly covered neighborhood. Starting from a lifted corner, the local inverses extend across adjacent rectangles; on a common edge two extensions agree because they are lifts agreeing at one endpoint. Thus paths and homotopies lift after their initial data are fixed. [given, choose, construct, algebra]
+
+2.1 Fix $p\in D$ and a lift $\tilde p$. For each $q\in D$, lift a path from $p$ to $q$ starting at $\tilde p$. Any two such paths are homotopic relative to their endpoints inside $D$, since the disk is contractible. By the homotopy lifting construction in step 1.1, the lifted endpoint varies continuously through the discrete fiber over $q$, so it is constant during the homotopy. Thus the endpoint is independent of the chosen path. These endpoints define a section $\widetilde D\to\mathbb R^2$ of $\pi$ over $D$; local inverse charts from step 1.1 make the section continuous and one-to-one. [given, step 1.1, construct, algebra]
+
+3.1 The image $\widetilde D$ is compact because $D$ is compact and the section is continuous, hence it is bounded. The square and dual square tilings are locally finite, so only finitely many of their edges meet $\widetilde D$. The lift preserves local edge incidences by step 1.1. Therefore every finite primal or dual cycle supported in $D$ lifts to a finite edge chain with even incidence at each lifted vertex. [given, step 2.1, step 1.1, algebra] ∎
+
+
+ITEM lem-qc-tqc-toric-incidence-ranks
+
+
+## Statement
+
+For $L\ge3$, the $L^2$ star-support vectors in $\mathbb F_2^E$ have span
+dimension $L^2-1$, and their only relation is their total sum. The $L^2$
+face-boundary vectors have the same span dimension and their only relation
+is their total sum. The dual-face incidence statement has the same rank.
+
+## Facts & Assumptions
+
+**Given:** The periodic square cellulation with vertices $q_{i,j}$, edges $h_{i,j},v_{i,j}$, and faces $f_{i,j}$.
+
+[F1] [[def-qc-tqc-periodic-square-cellulation]]: the vertex-edge graph and the face-adjacency graph are connected; every edge has two distinct endpoints and separates two distinct adjacent faces.
+
+[F2] [[thm-rank-nullity]]: for a linear map with finite-dimensional domain, the dimension of its image equals the dimension of its domain minus the dimension of its kernel.
+
+## Proof
+
+1.1 Define $S:\mathbb F_2^V\to\mathbb F_2^E$ by sending a coordinate vector at a vertex to its star-support vector and extending linearly. The coefficient of an edge joining vertices $q,q'$ in $S(a)$ is $a_q+a_{q'}$. Thus $\ker S$ consists exactly of assignments constant along every edge. By [F1] the vertex graph is connected, so $\ker S$ is the one-dimensional space of constant assignments. Since $\dim\mathbb F_2^V=L^2$, [F2] gives $\dim\operatorname{im}S=L^2-1$. The all-vertex sum is zero because each edge has two endpoints, so this is the only star relation. [given, F1, F2, algebra]
+
+2.1 Define $T:\mathbb F_2^F\to\mathbb F_2^E$ by sending a face coordinate vector to that face's boundary and extending linearly. An edge separating faces $f,f'$ has coefficient $b_f+b_{f'}$ in $T(b)$. Thus $\ker T$ consists exactly of assignments constant along adjacent faces. By [F1] the face-adjacency graph is connected, so $\ker T$ is the one-dimensional space of constant assignments. Since $\dim\mathbb F_2^F=L^2$, [F2] gives $\dim\operatorname{im}T=L^2-1$. The all-face sum is zero because each edge borders two faces, so this is the only face-boundary relation. The dual face-adjacency graph has the same square-grid incidence, proving its incidence rank is also $L^2-1$. [given, F1, F2, algebra] ∎
+

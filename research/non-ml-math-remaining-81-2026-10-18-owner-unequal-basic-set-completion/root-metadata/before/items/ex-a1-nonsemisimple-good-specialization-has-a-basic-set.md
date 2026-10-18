@@ -1,0 +1,47 @@
+---
+id: ex-a1-nonsemisimple-good-specialization-has-a-basic-set
+kind: example
+title: "A nonsemisimple L-good rank-one specialization has a singleton basic set"
+status: draft
+origin: pipeline
+pipeline_run: non-ml-math-remaining-81-2026-10-18
+deps:
+  - def-finite-weyl-lusztig-basic-set-data
+  - lem-schur-leading-coefficients-and-good-asymptotic-specializations
+  - thm-finite-weyl-canonical-basic-sets-from-lusztig-properties
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+verification: {}
+sources:
+  references:
+    - title: "Meinolf Geck, Modular Representations of Hecke Algebras, sections 4–6"
+      url: "https://arxiv.org/pdf/math/0511548"
+    - title: "George Lusztig, Hecke Algebras with Unequal Parameters, revised text, sections 18–21"
+      url: "https://arxiv.org/pdf/math/0208154"
+---
+
+## Example
+
+Take $W=A_1=\{1,s\}$, $L(s)=1$, $A=\mathbb Z[v,v^{-1}]$, and specialize to $k=\mathbb C$ by $v\mapsto i$. The specialized algebra is $\mathbb C[\varepsilon]/(\varepsilon^2)$, hence is not semisimple and has one simple module $M$ with $T_s=i$. The two generic labels have characters $T_s=v$ and $T_s=-v^{-1}$, Schur elements $1+v^2$ and $1+v^{-2}$, leading integers both one, and Schur exponents zero and one. Both full Schur elements vanish at $i$, but the characteristic is L-good. The decomposition matrix has one column with two entries equal to one, and the canonical basic set is the singleton consisting of the first generic label. The exact Lusztig properties required by the general theorem are verified directly below.
+
+## Facts & Assumptions
+
+**Given:** The rank-one quadratic relation $(T_s-v)(T_s+v^{-1})=0$ and specialization $v=i$.
+
+[F1] [[def-finite-weyl-lusztig-basic-set-data]] fixes the KL/dagger, $a$, $\gamma$, P2–P8/P15′, normalization and Schur-exponent conventions.
+
+[F2] [[lem-schur-leading-coefficients-and-good-asymptotic-specializations]] identifies the integer $f_E$ and exponent $\alpha_E$ of the generic Schur element and explains the L-good condition.
+
+[F3] [[thm-finite-weyl-canonical-basic-sets-from-lusztig-properties]] gives basic-set uniqueness and strict minimal-exponent selection once the exact hypotheses hold.
+
+## Verification
+
+1.1 The generic algebra has two distinct roots $v,-v^{-1}$ over $\mathbb Q(v)$, so it is split with its two displayed one-dimensional characters. The KL basis is $C_1=1$, $C_s=T_s+v^{-1}$, and $C_s^2=(v+v^{-1})C_s$ by expansion of the quadratic relation. Therefore $a(1)=0$, $a(s)=1$, and $\tau(C_1)=1$, $\tau(C_s)=v^{-1}$ give $\mathcal D=\{1,s\}$ and $n_1=n_s=1$. The only nonzero $\gamma$ are $\gamma_{1,1,1}=\gamma_{s,s,s}=1$. [F1, given, construct, algebra]
+
+2.1 P2, P3, P5, P6, P7 and P8 follow immediately from these two diagonal $\gamma$ entries and $s^2=1$. P4 holds for the only products $C_1C_w=C_w=C_wC_1$ and $C_s^2=(v+v^{-1})C_s$. For P15′, the condition $a(w)=a(y)$ forces $w=y$, since the two values are distinct. Its left side is then $\delta_{w,x'}h_{x,w,w}$ and its right side is $\delta_{y,x'}h_{x,w,y}$, identical because $w=y$. Thus every required P property is checked, not imported from a general cell theorem. [F1, step 1.1, algebra]
+
+2.2 For the two characters write $\tau=c_+^{-1}\chi_++c_-^{-1}\chi_-$. Evaluating on $1$ and $T_s$ gives $c_+^{-1}+c_-^{-1}=1$ and $vc_+^{-1}-v^{-1}c_-^{-1}=0$. Hence $c_+=1+v^2$ and $c_-=1+v^{-2}$. Their lowest terms give $(f_+,\alpha_+)=(1,0)$ and $(f_-,\alpha_-)=(1,1)$ as in [F2]. Both specialize to zero at $v=i$, whereas the leading integers stay nonzero. [F1, F2, step 1.1, algebra]
+
+3.1 At $v=i$ both roots equal $i$, so $H_k=\mathbb C[T_s]/((T_s-i)^2)$. Put $\varepsilon=T_s-i$. The element $\varepsilon$ is nonzero and square-zero, since $1,T_s$ form the rank-two basis. On a simple module, the nilpotent ideal $(\varepsilon)$ must act by zero: otherwise its image would be the whole simple and iteration would contradict its nilpotence. Thus the quotient $H_k/(\varepsilon)=\mathbb C$ gives the unique simple $M$. Both global free rank-one character models reduce to it, so the decomposition column is $(1,1)^t$. Its unique least Schur exponent is zero, with multiplicity one, selecting exactly the first label. These are also precisely the axioms and uniqueness conclusion in [F3]. This verifies concretely that full-Schur vanishing is compatible with the general nonsemisimple basic-set theorem. [F2, F3, step 2.1, step 2.2, algebra] ∎
