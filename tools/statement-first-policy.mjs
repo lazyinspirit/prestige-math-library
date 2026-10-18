@@ -7,7 +7,8 @@ export function readStatementPolicy(root, run, domain) {
   const file = policyPath(root, run);
   if (!existsSync(file)) return null;
   const policy = JSON.parse(readFileSync(file, 'utf8'));
-  if (policy.version !== 1 || policy.run !== run || policy.domain !== domain || policy.standard !== 'statement-first-v1')
+  if (policy.version !== 1 || policy.run !== run || policy.domain !== domain || policy.standard !== 'statement-first-v1'
+      || policy.page_layout !== undefined && policy.page_layout !== 'compact-v1')
     throw Error(`Invalid statement-first policy: ${file}`);
   return policy;
 }
@@ -17,7 +18,7 @@ export function isFreshStatementRun(root, run, stateDir) {
     && !readdirSync(join(root, 'research')).some(name => name.startsWith(`${run}-`));
 }
 export function writeStatementPolicy(root, run, domain) {
-  writeFileSync(policyPath(root, run), JSON.stringify({version: 1, run, domain, standard: 'statement-first-v1'}, null, 2) + '\n', {flag: 'wx'});
+  writeFileSync(policyPath(root, run), JSON.stringify({version: 1, run, domain, standard: 'statement-first-v1', page_layout: 'compact-v1'}, null, 2) + '\n', {flag: 'wx'});
 }
 export const statementDirections = `
 ## Uninterrupted statements: every item class

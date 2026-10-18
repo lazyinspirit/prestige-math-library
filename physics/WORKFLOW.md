@@ -11,9 +11,11 @@ contracts. Missing, empty or ambiguous manifests leave the probe unavailable;
 they never trigger a whole-library precheck. The ordinary liveness failure for
 missing probe inputs still applies.
 
-Freshly planned run namespaces now select the statement-first revision: every item
+Freshly planned run namespaces now select the compact statement-first revision: every item
 class has an uninterrupted statement/description with links afterward, one per
-line and paragraph. The native six steps, models and repair limits remain.
+line and paragraph. A/B summaries are not generated: authors write frontmatter-only pages. Code
+requires empty bodies and sets compact-layout metadata after initial authoring. Prerequisites render as a
+disclosure collapsed by default. The native six steps, models and repair limits remain.
 Existing runs retain their selected stages and original policy, including after
 restart. See [activation and mechanical checks](../tools/STATEMENT-FIRST.md).
 

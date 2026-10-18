@@ -108,8 +108,10 @@ function loadConfig(): Config {
   // Only newly planned namespaces opt in. Existing controllers and run-local
   // stage selections remain on their original table and revision.
   const editorialRun = opt('run') ?? base.run;
-  if (readStatementPolicy(repo, editorialRun, 'physics')) {
-    const selected = join(HERE, '..', 'stages', 'mathlib.statement-first.mts');
+  const editorialPolicy = readStatementPolicy(repo, editorialRun, 'physics');
+  if (editorialPolicy) {
+    const selected = join(HERE, '..', 'stages', editorialPolicy.page_layout === 'compact-v1'
+      ? 'mathlib.compact.mts' : 'mathlib.statement-first.mts');
     if (existsSync(localConfigPath) && resolve(base.stages) !== resolve(selected))
       throw new Error('Statement-first run cannot replace an explicit run-local stage table');
     base.stages = selected;

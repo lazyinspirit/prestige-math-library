@@ -269,6 +269,11 @@ identities are unchanged; historical run receipts retain their recorded paths.
   `status`, `items: [id, ...]`, and `examples: [id, ...]`; the body is the page
   summary. The two lists control placement, not item kind. Entries must resolve
   and cannot repeat. A published page may list only published items.
+  New math/physics workflows author frontmatter-only A/B pages with no summary
+  body. Code requires the empty body and sets
+  `page_layout: compact-v1`: no summary is displayed and prerequisites are
+  collapsible and collapsed by default. Category/pathway prose remains. Legacy
+  unmarked runs retain their policy. See [activation](tools/STATEMENT-FIRST.md).
   Published-category audits remove the summary body and set
   `audit_layout: statement-first-v1`: prerequisites render as a closed native
   disclosure, no summary is displayed, and the logical flowchart contains every
