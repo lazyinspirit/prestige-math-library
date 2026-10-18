@@ -48,3 +48,43 @@ writes the immutable root receipt only at actual paused/drained own5.9 with
 an identical archived state. Root owns recording, supporting-file retention,
 ordinary validation and native reloading/recertification. No historical
 report, original closure or canonical ledger is rewritten by either API.
+
+Version2 additionally supports the actual paused/drained5.6 owner normalization
+raised by a completed `impact-repeat-pass-2-r1-u1` native `operator_work[0]`
+finding. V1's own5.9 admission and finite aliases remain unchanged. V2 keeps the
+same original closure/native-close/original-current projection/preimage checks,
+but requires the genuine operator report, its immutable frozen collection,
+exact successful Sol6.1/high dispatch and immutable attempt, pack and prompt.
+The collection's original report/pack/result raw hashes must match; a newly
+edited detailed report cannot borrow its old completed dispatch. The actual
+paused state and owner request bind this completed native handoff.
+
+V2 admits only the observed exact metadata aliases: statement/inference classes
+to accuracy, missing-justification to unsupported-inference, alpha-batch-52 to
+group-alpha for batch52, specified Proof/Verification loci to proof-step,
+the sphere's primary false-claim locus to statement, and citation/source-reference
+loci to frontmatter. Missing historical at stays explicitly unknown. Precise
+original loci and labels remain verbatim in the bound originals/deltas. Severity,
+status, disposition, subjects, evidence, references and every other semantic
+field cannot change. V2 does not inherit V1's exceptional disposition/evidence
+conversions. The changed IDs and total field count must equal the genuine
+operator finding's exact subject/diagnostic inventory; unrelated normalizations
+cannot be admitted through this finding.
+
+Full canonical before/after JSONL snapshots must have the same line inventory.
+Every foreign and unrelated row stays byte-for-byte identical. Their selected
+original/current arrays must match the unchanged frozen closure and actual
+current own projection. A genuine current root installation receipt binds both
+canonical raw hashes, exact changed IDs and normalized_at at or after the actual
+owner request and native completion, no later than history recording. This real
+current normalization time is separate from any unknown original timestamp.
+Recording additionally checks the live full canonical after bytes and live
+request/state under the root's shared write lock; later legitimate foreign
+appends do not invalidate the sealed own historical projection.
+
+Root installs the accepted rows and writes actual application evidence first,
+then validates/records V2. No fresh Step3 verify or gate/preparation is required
+before the history exists: that would be circular. The original closure and
+native reports stay immutable. Root then performs ordinary current preparation,
+recertification and all required gates. V2 supplies no mathematical acceptance,
+new source reading, native coverage, defect resolution or threshold credit.
