@@ -16,11 +16,11 @@ const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x
 const run='test-initial-published',id='thm-published',consumer='lem-consumer',dir=`research/${run}-step5-v2`,dispatch=`research/${run}-dispatch`;
 // Synthetic fixtures authenticate metadata mechanics only. No actual native
 // execution, mathematical review, precheck/render run or acceptance is claimed.
-function fixture(t,{interfaceChange=true,metadata=true,extraPublished=false}={}){
+function fixture(t,{interfaceChange=true,metadata=true,extraPublished=false,sourceJustified=undefined}={}){
  const root=mkdtempSync(join(tmpdir(),'initial-published-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
  for(const d of ['items','library/test',dir,dispatch,`.autopilot/${run}`])mkdirSync(join(root,d),{recursive:true});
  const put=(p,x)=>writeFileSync(join(root,p),typeof x==='string'?x:JSON.stringify(x));
- const original=`---\nid: ${id}\nkind: theorem\ntitle: Published fixture\nstatus: published\ndependency_level: 0\ndeps: []\nverification:\n  audited: 2026-08-01\n---\n\n## Statement\n\nOriginal sound interface.\n\n## Proof\n\nOriginal proof.\n`;
+ const original=`---\nid: ${id}\nkind: theorem\ntitle: Published fixture\nstatus: published\ndependency_level: 0\ndeps: []\n${sourceJustified===undefined?'':`justified_by: ${JSON.stringify(sourceJustified)}\n`}verification:\n  audited: 2026-08-01\n---\n\n## Statement\n\nOriginal sound interface.\n\n## Proof\n\nOriginal proof.\n`;
  const originalFile=`research/${run}-original.md`,priorPath=`research/${run}-prior.json`,currentPath=`research/${run}-current.json`;
  const before=original.replace('  audited: 2026-08-01',`  repair: ${priorPath}`).replace('Original proof.','First recorded proof correction.');
  let after=before.replace(priorPath,currentPath).replace('First recorded proof correction.','Second recorded proof correction.');
@@ -191,4 +191,28 @@ for(const defect of ['fabricated-prior','wrong-publication','wrong-supplier','wr
 test('authenticated exclusion cannot be enlarged by mutating the returned set or guards',t=>{
  const f=fixture(t);f.record();const loaded=loadInitialPublishedMaintenance(f.root,run,{current:true});loaded.ids.add(consumer);loaded.guards[consumer]=f.now[consumer];
  assert.throws(()=>validateReports(f.pack,[f.empty,f.report],f.now,{root:f.root,publishedMaintenance:loaded}),/guarded loading/);
+});
+
+function emptyMirror(f,{beforeValue=[],afterValue=[],removeAfter=false}={}){
+ const before=JSON.parse(readFileSync(join(f.root,f.mb),'utf8'));before[0].items[0].justified_by=beforeValue;
+ if(removeAfter)delete f.newManifest[0].items[0].justified_by;else f.newManifest[0].items[0].justified_by=afterValue;
+ f.put(f.mb,before);f.put(f.ma,f.newManifest);f.put(f.m1,f.newManifest);f.request.manifests[0].sha256=hash(JSON.stringify(f.newManifest));f.save();
+}
+for(const sourceJustified of [undefined,[]])test(`optional empty source ${sourceJustified===undefined?'absent':'array'} accepts unchanged empty manifest array`,t=>{
+ const f=fixture(t,{sourceJustified});emptyMirror(f);f.record();assert.equal(loadInitialPublishedMaintenance(f.root,run,{current:true}).entries.length,1);
+});
+test('explicit empty optional manifest removal retains exact historical archives',t=>{
+ const f=fixture(t);emptyMirror(f,{removeAfter:true});const original=readFileSync(join(f.root,f.mb),'utf8');f.record();assert.equal(readFileSync(join(f.root,f.mb),'utf8'),original);assert.equal(loadInitialPublishedMaintenance(f.root,run,{current:true}).entries.length,1);
+});
+test('absent optional manifest accepts explicit source empty array',t=>{
+ const f=fixture(t,{sourceJustified:[]});f.record();assert.equal(loadInitialPublishedMaintenance(f.root,run,{current:true}).entries.length,1);
+});
+for(const [label,value]of [['null',null],['nonempty',['def-context']],['string',''],['object',{}]])test(`optional normalization rejects manifest ${label}`,t=>{
+ const f=fixture(t);emptyMirror(f,{beforeValue:value,afterValue:value});assert.throws(f.record,/source mirror/);
+});
+for(const [label,value]of [['null',null],['nonempty',['def-context']],['string','']])test(`optional normalization rejects source ${label} against empty manifest`,t=>{
+ const f=fixture(t,{sourceJustified:value});emptyMirror(f);assert.throws(f.record,/source mirror/);
+});
+test('optional normalization never authorizes a nonpublished manifest carrier',t=>{
+ const f=fixture(t),m=f.request.manifests[1],old=JSON.parse(readFileSync(join(f.root,m.archive),'utf8')),before=`research/${run}-nonpublished-before.json`;old[0].items[0].justified_by=[];f.put(before,old);f.files.push(before);f.request.metadata_carriers.push({path:m.path,before_file:before,current_file:m.archive});f.save();assert.throws(f.record,/not an exact old\/current published-source mirror/);
 });

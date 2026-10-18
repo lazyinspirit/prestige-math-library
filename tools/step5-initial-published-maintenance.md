@@ -172,3 +172,9 @@ consumers into actual 5.2 review. Existing context closure requeues every stale
 review before certification. Proof-only changes preserve valid v3 interface
 contexts; changed supplier interfaces do not. No old review hash is recomputed.
 The original published items remain outside native certification/Sol judgment.
+
+## Optional empty justification mirrors
+
+For the optional SCHEMA field `justified_by` only, an absent value and an empty array denote the same empty edge set. Current published manifest mirrors may retain their existing `justified_by: []` when the actual source omits it, or omit it when the actual source explicitly has an empty array. No source field needs to be added just for presence equality.
+
+An explicitly recorded manifest empty/absent normalization remains limited to authenticated published IDs and source-backed empty endpoints; its exact old/current raw archives are preserved. Nulls, strings, objects and nonempty arrays receive no empty normalization. Every other mirrored field, native historical byte/hash, source, receipt, original claim and ordinary publication guard remains exact.

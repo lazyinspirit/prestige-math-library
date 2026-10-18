@@ -11,6 +11,9 @@ import {hasCommittedPriorPublication} from './published-repair-adoption.mjs';
 import {yaml,split} from './pathway-lib.mjs';
 const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+// SCHEMA makes justified_by optional: absent and [] are the same empty edge set.
+const emptyJustification=x=>x===undefined||(Array.isArray(x)&&x.length===0);
+const sameMirror=(field,a,b)=>field==='justified_by'&&emptyJustification(a)&&emptyJustification(b)||same(a,b);
 const date=x=>typeof x==='string'&&Number.isFinite(Date.parse(x));
 const need=(v,m)=>{if(!v)throw Error('Step 5 initial published maintenance: '+m);};
 const drained=s=>Object.values(s.dispatches??{}).every(v=>!v.startedAt||Boolean(v.endedAt));
@@ -223,7 +226,7 @@ function validate(root,run,row,{current=false,virtual=new Map()}={}){
  for(const pages of currentManifests.values())for(const page of pages)for(const item of page.items??[])if(ids.has(item.id)){
   const source=afterSources.get(item.id);
   for(const field of ['kind','title','deps','justified_by','dependency_level'])
-   if(Object.hasOwn(item,field)||Object.hasOwn(source,field))need(same(item[field],source[field]),'current published manifest row is not a complete source mirror');
+   if(Object.hasOwn(item,field)||Object.hasOwn(source,field))need(sameMirror(field,item[field],source[field]),'current published manifest row is not a complete source mirror');
  }
  // Mirror only source-backed metadata changes for these exact published IDs.
  need(Array.isArray(row.metadata_carriers),'missing explicit metadata-carrier array');
@@ -236,7 +239,7 @@ function validate(root,run,row,{current=false,virtual=new Map()}={}){
   for(let p=0;p<copy.length;p++)for(let i=0;i<copy[p].items.length;i++){
    const old=copy[p].items[i],next=after[p].items[i];
    for(const field of ['title','deps','justified_by','dependency_level'])if(!same(old[field],next[field])){
-    need(ids.has(old.id)&&same(old[field],beforeSources.get(old.id)[field])&&same(next[field],afterSources.get(old.id)[field]),'metadata change is not an exact old/current published-source mirror');
+    need(ids.has(old.id)&&sameMirror(field,old[field],beforeSources.get(old.id)[field])&&sameMirror(field,next[field],afterSources.get(old.id)[field]),'metadata change is not an exact old/current published-source mirror');
     old[field]=next[field];count++;
    }
   }
