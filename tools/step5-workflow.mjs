@@ -23,6 +23,7 @@ import { syncMaintenance, maintenanceStatus, prepareMaintenance, collectMaintena
 import { orderedItems, runPages } from './item-dependency-levels.mjs';
 import { loadReaderConcerns, checkFrozenReaderConcernInput, readerConcernSession } from './step5-reader-concerns.mjs';
 import { loadInitialScopeFindings, checkFrozenInitialScopeFindingInput, recordInitialScopeFindings } from './step5-initial-scope-findings.mjs';
+import { loadInitialPublishedMaintenance, recordInitialPublishedMaintenance, isInitialPublishedMaintenance, initialPublishedSupportingHistory } from './step5-initial-published-maintenance.mjs';
 export { readerConcernSession };
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
@@ -199,6 +200,8 @@ function supportingMetadataHistory(history,path,expected) {
   if (quotes) return quotes;
   const metadata = initialMetadataSupportingHistory(history,path,expected);
   if (metadata) return metadata;
+  const published = initialPublishedSupportingHistory(history,path,expected);
+  if (published) return published;
   if(!history||history.run!=='frontier-44-special-representation-examples-28-six-step')return null;
   const {root,run}=history,base=join(root,'research',`${run}-owner-escalation-repairs`,
     'resume-20261011','step5-evidence-handoff');
@@ -1064,8 +1067,10 @@ function loadSupplierRepairs(root,pack,reports,current,items) {
   return {pack_sha256:digest(pack),resolved,evidence,path,[supplierRepairSeal]:true};
 }
 
-export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null}={}) {
+export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null,publishedMaintenance=null}={}) {
   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
+  requireValue(!publishedMaintenance||isInitialPublishedMaintenance(publishedMaintenance,pack,now),
+    'published maintenance must pass exact native guarded loading');
   requireValue(!ownerSupplement||(root&&ownerSupplement[ownerSupplementSeal]===true
     &&ownerSupplement.pack_sha256===digest(pack)),'owner supplement must pass native guarded loading');
   requireValue(!operationalSupplement||(root&&operationalSupplement[operationalSupplementSeal]===true
@@ -1124,7 +1129,7 @@ export function validateReports(pack,reports,now,{root=null,ownerSupplement=null
   if(reports.length!==pack.units.length)errors.push('unexpected or duplicate reports');
   reviews.push(...ownerReviews.values());
   const scoped=subjectScope(pack,[...creatorById.keys()]);
-  const changed=diff(pack.before,now).filter(id=>!scoped||scoped.has(id));
+  const changed=diff(pack.before,now).filter(id=>(!scoped||scoped.has(id))&&!publishedMaintenance?.ids.has(id));
   for(const id of changed) {
     const created=creatorById.get(id),review=reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
     if(!now[id]||!review||(!created&&!pack.before[id]))errors.push(`unlicensed or unreviewed change ${id}`);
@@ -1304,6 +1309,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
   const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});
   const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):null;
+  const publishedMaintenance=phase==='initial'&&round===1?loadInitialPublishedMaintenance(root,run,{current:true}):null;
   // Validate original reviews against exact historical source bytes only.
   // The collection's post snapshot below always describes actual current bytes.
   if(metadataHistory)Object.assign(reported,metadataHistory.historicalGuards);
@@ -1322,10 +1328,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const assigned=new Set(Object.values(pack.assignments).flat());
     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
   }
-  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs});
+  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance});
   if(result.errors.length)throw Error(result.errors.join('\n'));
   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
-  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{});
+  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{},publishedMaintenance?.evidence??{});
   verifyEvidence(evidence);
   const creationAuthors=new Map();
   for(const unit of pack.units) {
@@ -1376,6 +1382,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   // joining them records routing, never an additional mathematical review.
   const downstream=[...new Set([...reports.flatMap(row=>row.downstream),...result.created_items.flatMap(row=>row.consumers)])];
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root,run),downstream,ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
+  if(publishedMaintenance)receipt.published_maintenance={path:publishedMaintenance.path,ids:[...publishedMaintenance.ids],historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false};
   if(metadataHistory){
     const historical=new Set(metadataHistory.sourceIds);
     receipt.metadata_history={path:metadataHistory.path,historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false};
@@ -2170,6 +2177,12 @@ function main() {
       const admission=loadReaderConcerns(root,run,{requireCollection:false});
       requireValue(admission,'reader concern admission missing');
       console.log(JSON.stringify({run,ids:admission.entries.map(row=>row.id),mathematical_review:false,native_coverage_adopted:false}));return;
+    }
+    case 'record-initial-published-maintenance':result=recordInitialPublishedMaintenance(root,run,opt('--authorization'));break;
+    case 'check-initial-published-maintenance':{
+      const history=loadInitialPublishedMaintenance(root,run,{current:true});
+      requireValue(history,'initial published-maintenance receipt missing');
+      result={run,ids:[...history.ids],historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false};break;
     }
     case 'record-initial-scope-findings':result=recordInitialScopeFindings(root,run,opt('--authorization'));break;
     case 'check-initial-scope-findings':{
