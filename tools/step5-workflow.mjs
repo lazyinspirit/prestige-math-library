@@ -349,8 +349,8 @@ function gateFrontier(root,run) {
   requireValue(frontier.run===run,'wrong run frontier');
   return new Set(frontier.ids.filter(id => !isPublishedItem(root, id)));
 }
-function impactTargets(root,run,phase,items,seeds,discovered=[]) {
-  const frontier=gateFrontier(root,run),roots=[...new Set(seeds)];
+function impactTargets(root,run,phase,items,seeds,discovered=[],createdIds=[]) {
+  const frontier=new Set([...gateFrontier(root,run),...createdIds]),roots=[...new Set(seeds)];
   const impacts=discoverDownstream({items,repairedIds:roots});
   const direct=new Set(impacts.map(row=>row.id));
   const targets=[...new Set([...direct,...discovered.filter(id=>frontier.has(id))])]
@@ -362,6 +362,31 @@ function impactTargets(root,run,phase,items,seeds,discovered=[]) {
     maintenance.push({id,published:Boolean(items.find(row=>row.id===id)?.published),suppliers:roots,paths:roots.map(root=>[root,id]),reported:true});
   return {frontier,seeds:roots,impacts,targets,maintenance};
 }
+// Local continuation subjects come only from bound, collected native creations;
+// neither the frozen frontier nor arbitrary new manifest IDs grant authority.
+function collectedCreationIds(root,run,receipts) {
+  const ids=new Set();
+  for(const receipt of receipts.filter(Boolean))for(const row of receipt.created_items??[]){
+    requireValue(typeof row.author_result==='string'&&basename(row.author_result)===row.author_result,'created closure lacks native author identity');
+    const author=join(root,'research',`${run}-dispatch`,row.author_result);
+    requireValue(receipt.evidence?.[author]===digest(readFileSync(author,'utf8')),'created closure lacks bound native author result');
+    const native=read(author),unit=native.covers?.[0],reportPath=workerReport(root,run,receipt.phase,receipt.round,unit);
+    requireValue(native.run===run&&native.ok===true&&['alpha-adjudicate','alpha-repair'].includes(native.role)
+      &&JSON.stringify(native.covers)===JSON.stringify([unit])&&native.label===workerLabel(receipt.phase,receipt.round,unit)
+      &&receipt.evidence?.[reportPath]===digest(readFileSync(reportPath,'utf8')),'created closure lacks bound native report');
+    const report=read(reportPath),{author_result,...declaration}=row;
+    const declarations=(report.created_items??[]).filter(value=>value.id===row.id);
+    const reviews=(report.reviews??[]).filter(value=>value.id===row.id&&value.disposition==='authored');
+    const original=readPack(root,run,receipt.phase,receipt.round);
+    requireValue(report.run===run&&report.phase===receipt.phase&&report.round===receipt.round&&String(report.unit)===unit
+      &&report.input_sha256===digest(original)&&!original.before[row.id]
+      &&declarations.length===1&&digest(declarations[0])===digest(declaration)&&reviews.length===1
+      &&!isPublishedItem(root,row.id),'created closure is not an original declared draft native authorship');
+    creationRegistration(root,run,row);ids.add(row.id);
+  }
+  return ids;
+}
+
 function libraryIdentity(root,run) {
   const items=readLibraryItems(root,{run}),ids=new Set(items.map(row=>row.id)),aliases=new Map();
   for(const row of items)for(const alias of row.aliases??[]){
@@ -1325,7 +1350,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     requireValue(!pack.rejected,'only owner waves can defer impact closure');
     // Archive the carriers workers actually reviewed. Later edits are queued
     // for another owner pass instead of invalidating already completed work.
-    const assigned=new Set(Object.values(pack.assignments).flat());
+    const assigned=new Set([...Object.values(pack.assignments).flat(),...reports.flatMap(report=>(report.created_items??[]).map(row=>row.id))]);
     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
   }
   const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance});
@@ -1751,18 +1776,20 @@ export function advanceImpact(root,run,phase,round) {
   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root,run),items=readLibraryItems(root,{run});
   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
   const maintenanceChanges=maintenance.completed_changes.filter(row=>maintenanceIds.has(row.pack));
-  const frontier=gateFrontier(root,run);
+  const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
+  const sourceReceipt=source?read(join(workflowDir(root,run),`${source}-${round}-collected.json`)):null;
+  if(sourceReceipt)verifyEvidence(sourceReceipt.evidence,{root,run});
+  const createdIds=collectedCreationIds(root,run,[sourceReceipt,...completed]);
+  const frontier=new Set([...gateFrontier(root,run),...createdIds]);
   const changed=diff(base.before,current).filter(id=>frontier.has(id)),rawSeeds=[...new Set([...(base.seeds??[]),...completed.flatMap(receipt=>receipt.restated??receipt.changed),...maintenanceChanges.filter(row=>row.before_statement_sha256!==row.after_statement_sha256).map(row=>row.id)])];
   const maintenanceRestatements=new Set(maintenanceChanges.filter(row=>row.before_statement_sha256!==row.after_statement_sha256).map(row=>row.id));
   const returned=maintenance.frontier_events.filter(row=>maintenanceRestatements.has(row.id)).map(row=>row.consumer_id);
-  const scope=impactTargets(root,run,phase,items,rawSeeds,[...completed.flatMap(receipt=>receipt.downstream??[]),...returned]);
+  const scope=impactTargets(root,run,phase,items,rawSeeds,[...completed.flatMap(receipt=>receipt.downstream??[]),...returned],createdIds);
   const {seeds,impacts}=scope;
-  const required=new Set([...Object.values(base.assignments).flat(),...scope.targets,...changed]);
+  const required=new Set([...Object.values(base.assignments).flat(),...scope.targets,...changed,...createdIds]);
   const reviews=new Map(completed.flatMap(receipt=>receipt.reviews).map(row=>[row.id,row]));
   // An adjudicator's source review remains valid unless an owner changes it.
   // It is used only for closure accounting, never counted as an owner repair.
-  const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
-  const sourceReceipt=source?read(join(workflowDir(root,run),`${source}-${round}-collected.json`)):null;
   // Actual proof/interface consumers reported by workers need not yet have a
   // graph edge. Keep them in closure until a current owner review covers them.
   for(const receipt of [sourceReceipt,...completed])for(const id of receipt?.downstream??[])if(scope.frontier.has(id))required.add(id);
@@ -1870,20 +1897,23 @@ export function verifyCompletedImpact(root,run,phase,round) {
       `completed owner collection does not bind pass: ${pass}`);
     const receipt=read(path);verifyEvidence(receipt.evidence,{root,run});return receipt;
   });
-  const items=readLibraryItems(root,{run}),frontier=gateFrontier(root,run),current=hashes(root,run);
-  const stable=prerequisiteScope(items,[...frontier,...(result.created_items??[]).map(row=>row.id)]);
-  for(const id of diff(result.post,current).filter(id=>stable.has(id)))
-    throw Error(`writer changed relevant content after completed owner collection: ${id}`);
+  const items=readLibraryItems(root,{run}),current=hashes(root,run);
   const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
   const sourceReceipt=source?read(join(dir,`${source}-${round}-collected.json`)):null;
   if(sourceReceipt)verifyEvidence(sourceReceipt.evidence,{root,run});
+  const createdIds=collectedCreationIds(root,run,[sourceReceipt,...passes]);
+  requireValue(digest(result.created_items??[])===digest(passes.flatMap(receipt=>receipt.created_items??[])),'completed creation inventory differs from collected native declarations');
+  const frontier=new Set([...gateFrontier(root,run),...createdIds]);
+  const stable=prerequisiteScope(items,[...frontier]);
+  for(const id of diff(result.post,current).filter(id=>stable.has(id)))
+    throw Error(`writer changed relevant content after completed owner collection: ${id}`);
   const reviews=new Map([...(sourceReceipt?.reviews??[]),...result.reviews].map(row=>[row.id,row]));
   const snapshots=new Map([sourceReceipt,...passes].filter(Boolean)
     .flatMap(receipt=>receipt.reviews.map(row=>[row.id,receipt.post])));
   const base=readPack(root,run,progress.repairBasePhase??phase,round);
-  const scope=impactTargets(root,run,phase,items,result.restated??base.seeds??[],result.downstream??[]);
+  const scope=impactTargets(root,run,phase,items,result.restated??base.seeds??[],result.downstream??[],createdIds);
   const required=new Set([...progress.passes.flatMap(pass=>Object.values(readPack(root,run,pass,round).assignments).flat()),
-    ...scope.targets,...result.changed,...(sourceReceipt?.reviews??[]).map(row=>row.id)]);
+    ...scope.targets,...result.changed,...(sourceReceipt?.reviews??[]).map(row=>row.id),...createdIds]);
   const authorizedOperational=new Set(passes.flatMap(receipt=>receipt.operational_resolution?.subjects??[]));
   requireValue((result.operational_carries??[]).every(id=>authorizedOperational.has(id)),'unbound operational carry');
   const operationalIds=(result.operational_carries??[]).filter(id=>!scope.targets.includes(id)&&!result.changed.includes(id));
