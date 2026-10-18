@@ -37,6 +37,10 @@ run-local configuration to preserve live parallel authoring; other runs retain
 their selected tables. Native artifact/readiness and gate checks still run after
 all initial authors have coverage and every writer drains.
 
+Runs selecting `owner-supervised-compact.mts` also enable this construction-only
+deferral for `1-scaffold`, retaining the compact revision, original worker prompts
+and owner holds. Other selected stage tables keep their existing behavior.
+
 The same opt-in grants a fresh capability only to initial priority graph checks
 and plan generation, including startup/hot-reload validation of that initial
 authoring DAG. Their scheduling projection may retain duplicate item IDs

@@ -18,6 +18,7 @@ test('compact supervision holds before native gates without changing prompts or 
   const [stage, last] = ownerSupervisedCompactStages([source, final]);
   assert.equal(workflowRevision, 'six-step-v1-compact');
   assert.equal(stage.plan, source.plan);
+  assert.equal(stage.deferConstructionArtifactsUntilDrain, undefined);
   assert.equal(last, final);
   assert.deepEqual(stage.gates({ ...ctx, doctor: true }), [{ id: 'native' }]);
   assert.throws(() => stage.gates(ctx), /Missing owner/);

@@ -16,6 +16,9 @@ export function ownerSupervisedCompactStages(stages: any[]) {
     // Step 6 owns its metadata/render preparation and final transaction.
     if (source.id.startsWith('6-')) return source;
     const stage = { ...source };
+    // Live authors invalidate readiness inputs; check the complete current
+    // artifacts only after native coverage is complete and writers drain.
+    if (stage.id === '1-scaffold') stage.deferConstructionArtifactsUntilDrain = true;
     stage.onProgress = async (args: any) => {
       holdBeforeBattery(args);
       if (args.executor.state.paused) return;

@@ -19,6 +19,7 @@ import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
 import { Executor, completedPrefixProblem } from '../src/executor.mts';
 import { makeExecAdapter } from '../src/adapters/exec.mts';
+import { ownerSupervisedCompactStages } from '../stages/owner-supervised-compact.mts';
 
 function fixture() {
   const repo = mkdtempSync(join(tmpdir(), 'ap-eff-'));
@@ -95,6 +96,34 @@ test('status defers future artifact scans until their stage is reached', () => {
   const reached = ex.snapshot();
   assert.equal(reached.stage?.id, 'future');
   assert.ok(futureScans > 0, 'the future stage checks its artifacts when reached');
+});
+
+test('compact construction defers readiness until successful coverage and writer drain', () => {
+  const fx = fixture();
+  let scans = 0;
+  const [stage] = ownerSupervisedCompactStages([{
+    id: '1-scaffold', label: 'author', units: () => ['1', '2'],
+    pattern: /^worker-batch-/, unitPrerequisitePolicy: 'priority', plan: () => [],
+    artifacts: (_ctx: any, unit: string) => { scans++; return [`ready-${unit}`]; },
+    gates: () => [{ id: 'native', argv: ['true'] }],
+  }]);
+  const { ex } = makeExecutor(fx, [stage]);
+  cover(fx, 'worker', 'batch-1', ['1']);
+  assert.equal(ex.stageStatus(stage).unitsDone, false);
+  assert.equal(ex.unitsComplete(stage).size, 0);
+  assert.equal(scans, 0, 'partial native coverage must not scan current artifacts');
+  cover(fx, 'worker', 'batch-2', ['2']);
+  ex.inflight.set('live', { meta: { stage: stage.id } } as any);
+  assert.equal(ex.stageStatus(stage).unitsDone, false);
+  assert.equal(ex.unitsComplete(stage).size, 0);
+  assert.equal(scans, 0, 'even complete coverage must wait for the live writer');
+  ex.inflight.clear();
+  assert.equal(ex.stageStatus(stage).unitsDone, false, 'missing current artifacts still block');
+  assert.ok(scans > 0);
+  for (const unit of ['1', '2']) writeFileSync(join(fx.repo, `ready-${unit}`), 'current');
+  assert.equal(ex.stageStatus(stage).unitsDone, true);
+  assert.equal(ex.unitsComplete(stage).size, 2);
+  assert.equal(ex.stageStatus(stage).done, false, 'ordinary native gates remain owed');
 });
 
 test('run wakes on child completion and drains a completed boundary without polling', async () => {
