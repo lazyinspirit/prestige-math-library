@@ -273,3 +273,28 @@ original evidence/policy before truthfully authorizing the current successor
 against the same original HEAD/index ledger bases. Do not relabel it consumed,
 rewrite historical receipts, or broaden ledger additions into replacements.
 Physics and legacy closeout do not acquire this plan-replacement route.
+
+
+An explicitly authorized `published-local-repair-marker-additions` shared-ledger
+fragment uses version 2 only for a genuinely absent original marker projection.
+Its `base_owned_records` must be empty. Its ordered `target_owned_records` are
+complete, unique `local-published-repair:RUN-…` begin/end blocks; repeated
+paragraphs inside a block remain exact bytes and are never deduplicated. Every
+block has an ordered `record_receipts` reference (`marker`, `path`, `sha256`)
+bound in authority evidence. The regular run-owned receipt must be an authentic
+`recorded-local-published-repair` for an owned item, and its run, marker,
+recorded time, source content guard and exact inner ledger hash must agree.
+Historical receipt validation grants no current source, audit or review credit;
+ordinary current published-repair and readiness checks still apply.
+
+This opt-in parser owns only those local-repair blocks. Legacy overview rows,
+native audit markers, unmarked sections and arbitrary run mentions remain
+foreign, even when the broader working ledger supplies scientific context.
+Malformed current-run local-repair namespace tokens, missing or crossed ends,
+nesting, duplicate markers, unknown blocks, incomplete receipt inventories and
+partial integration fail closed. Both original Git projections must really
+contain no owned marker blocks. Composition appends the exact authorized blocks
+to each base separately and preserves every original base byte, its ordering and
+the unchanged working file. Preparation, cutover, scope validation and all
+commit residual checks use the same explicit parser mode. V1/default paragraph
+ownership and its unique-record retention rules are unchanged.

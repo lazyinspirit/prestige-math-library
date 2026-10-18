@@ -106,7 +106,7 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
       const ids = new Set(fragment.ownedIds);
       const head = composeFragment(headText, fragment.spec, run, ids);
       const index = composeFragment(indexText, fragment.spec, run, ids);
-      const residual = text => fragmentRecords(text, run, ids).filter(row => !row.owned).map(row => recordSignature(row.text));
+      const residual = text => fragmentRecords(text, run, ids, fragment.spec).filter(row => !row.owned).map(row => recordSignature(row.text));
       equal(residual(head.text), residual(headText), 'fragment HEAD foreign residual');
       equal(residual(index.text), residual(indexText), 'fragment index foreign residual');
       fragmentStates.set(path, { fragment, head, index, headRow, indexRow,
@@ -195,7 +195,7 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
         if (!actual || actual.oid !== expected.oid || actual.mode !== expected.mode)
           throw Error(`step6 commit: ${label} fragment blob mismatch`);
         const text = decodeLedger(git(gitRoot, ['cat-file', 'blob', actual.oid]));
-        const residual = fragmentRecords(text, run, new Set(row.fragment.ownedIds))
+        const residual = fragmentRecords(text, run, new Set(row.fragment.ownedIds), row.fragment.spec)
           .filter(record => !record.owned).map(record => recordSignature(record.text));
         equal(digest(residual), kind === 'head' ? row.headForeign : row.indexForeign, label + ' fragment residual');
       }
@@ -256,7 +256,7 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
     }
     for (const [path, row] of fragmentStates) {
       const ids = new Set(row.fragment.ownedIds);
-      const residual = text => fragmentRecords(text, run, ids).filter(record => !record.owned).map(record => recordSignature(record.text));
+      const residual = text => fragmentRecords(text, run, ids, row.fragment.spec).filter(record => !record.owned).map(record => recordSignature(record.text));
       const committedText = decodeLedger(git(gitRoot, ['cat-file', 'blob', committed.get(path).oid]));
       const indexedText = decodeLedger(git(gitRoot, ['cat-file', 'blob', indexed.get(path).oid]));
       equal(digest(residual(committedText)), row.headForeign, 'committed fragment foreign residual');

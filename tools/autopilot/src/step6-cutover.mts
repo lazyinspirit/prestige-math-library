@@ -247,7 +247,7 @@ function failedRefreshBasis(o: Options, state: any, events: Buffer) {
       const blob = git(scope.gitRoot, ['cat-file', 'blob', entry.oid]);
       const spec = value.row.spec;
       const owned = value.kind === 'ledger'
-        ? fragmentRecords(decodeLedger(blob), o.run, value.ids).filter(row => row.owned).map(row => recordSignature(row.text))
+        ? fragmentRecords(decodeLedger(blob), o.run, value.ids, spec).filter(row => row.owned).map(row => recordSignature(row.text))
         : planDocument(decodePlan(blob)).rows.filter(row => value.ids.has(row.id)).map(({ id, raw }) => ({ id, raw }));
       const expected = value.kind === 'ledger' ? spec.base_owned_records.map(recordSignature)
         : spec[kind === 'head' ? 'base_head_owned_rows' : 'base_index_owned_rows'];

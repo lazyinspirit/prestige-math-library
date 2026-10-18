@@ -504,7 +504,7 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
       const bytes = readFileSync(join(root, row.authority));
       if (sha256(bytes) !== row.sha256) throw Error('closeout: fragment authority changed');
       const spec = JSON.parse(decodeLedger(bytes));
-      validateFragment(spec, run, ownedIds, decodeLedger(readFileSync(join(root, row.path))));
+      validateFragment(spec, run, ownedIds, decodeLedger(readFileSync(join(root, row.path))), {root});
       required.add(row.authority);
       for (const evidence of spec.evidence) {
         if (!evidence || Object.keys(evidence).some(key => !['path', 'sha256'].includes(key))
