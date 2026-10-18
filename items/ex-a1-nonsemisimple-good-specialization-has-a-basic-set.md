@@ -2,7 +2,7 @@
 id: ex-a1-nonsemisimple-good-specialization-has-a-basic-set
 kind: example
 title: "A nonsemisimple L-good rank-one specialization has a singleton basic set"
-status: draft
+status: published
 dependency_level: 11
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

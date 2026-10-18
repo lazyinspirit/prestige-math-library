@@ -2,7 +2,7 @@
 id: ex-it-qubit-source-compression
 kind: example
 title: Schumacher compression of a diagonal qubit source
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: lem-upper-half-plane-sum-phase-between
 kind: lemma
 title: "The phase of a sum lies between upper-half-plane phases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

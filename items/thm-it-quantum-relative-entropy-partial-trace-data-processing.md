@@ -2,7 +2,7 @@
 id: thm-it-quantum-relative-entropy-partial-trace-data-processing
 kind: theorem
 title: Partial-trace data processing for finite quantum relative entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

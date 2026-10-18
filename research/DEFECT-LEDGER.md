@@ -1,15 +1,43 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 60b3edeb73ba by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 785ce8a929d8 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 17667 |
-| now mechanically prevented | 373 |
+| defects caught before publication | 20353 |
+| now mechanically prevented | 381 |
 | escaped to publication | 7 |
-| still open | 103 |
+| still open | 118 |
+
+## bayesian-computational-statistics-62 — 219 row(s)
+
+| subclass | 3a-adjudicate | 4-judge | 5-adjudicate | 5.2-impact | owner |
+|---|---|---|---|---|---|
+| missing-hypothesis | 19 |  | 20 | 1 |  |
+| citation-inaccurate | 33 |  | 1 |  | 1 |
+| unsupported-inference | 24 | 2 |  |  |  |
+| citation-missing | 16 |  | 5 |  |  |
+| citation-inflated | 4 |  | 14 | 2 |  |
+| false-or-overstrong-statement | 9 |  | 4 | 1 |  |
+| invalid-inference | 4 |  | 3 | 2 |  |
+| ill-typed-claim | 3 |  | 4 |  |  |
+| unlicensed-inference | 7 |  |  |  |  |
+| ill-formed | 6 |  |  |  |  |
+| ill-typed-construction | 2 |  | 4 |  |  |
+| undefined-notation | 5 |  |  |  |  |
+| missing-choice-scope | 3 |  | 1 |  |  |
+| false-or-overstrong-title | 3 |  | 1 |  |  |
+| missing-case | 3 |  |  |  |  |
+| false-claim | 3 |  |  |  |  |
+| citation-misattributed | 2 |  |  |  |  |
+| citation-truncated | 2 |  |  |  |  |
+| arithmetic-error | 1 |  |  |  |  |
+| contract-mismatch | 1 |  |  |  |  |
+| invalid-witness | 1 |  |  |  |  |
+| typing | 1 |  |  |  |  |
+| incorrect-step-reference | 1 |  |  |  |  |
 
 ## frontier-11 — 4 row(s)
 
@@ -928,6 +956,26 @@
 | unsupported-field-claim | 1 |  |  |  |
 | invalid-inference-and-target-type | 1 |  |  |  |
 
+## hopf-hecke-unfinished-15-2026-10-15 — 53 row(s)
+
+| subclass | 3a-adjudicate | 5.2-impact |
+|---|---|---|
+| citation-inaccurate | 19 | 1 |
+| citation-misattributed | 6 |  |
+| citation-inflated | 4 |  |
+| unsupported-inference | 4 |  |
+| ill-formed | 4 |  |
+| false-claim | 3 |  |
+| ill-typed-construction | 2 |  |
+| false-or-overstrong-title | 2 |  |
+| ill-typed-claim | 1 | 1 |
+| undefined-notation | 1 |  |
+| reader-repair | 1 |  |
+| missing-hypothesis | 1 |  |
+| frontmatter-schema | 1 |  |
+| invalid-inference | 1 |  |
+| citation-missing | 1 |  |
+
 ## mathematical-statistics-foundations-37 — 177 row(s)
 
 | subclass | 3a-adjudicate | 5-adjudicate | 5.2-impact |
@@ -958,6 +1006,108 @@
 | false-computation | 1 |  |  |
 | contract-mismatch | 1 |  |  |
 | missing-case | 1 |  |  |
+
+## non-ml-math-remaining-81-2026-10-18 — 586 row(s)
+
+| subclass | 3a-adjudicate | 4-judge | 5-adjudicate | 5.2-impact | owner |
+|---|---|---|---|---|---|
+| citation-inaccurate | 83 | 5 | 1 | 5 | 8 |
+| other |  | 5 |  |  | 94 |
+| invalid-inference | 14 |  |  |  | 50 |
+| citation-missing | 43 |  |  |  | 2 |
+| unsupported-inference | 20 | 12 | 3 | 4 | 1 |
+| missing-hypothesis | 28 |  |  | 5 | 1 |
+| citation-inflated | 5 |  |  |  | 27 |
+| unlicensed-inference | 28 |  |  |  |  |
+| ill-formed | 23 |  |  |  | 2 |
+| false-boundary-disposition | 1 |  |  |  | 17 |
+| ill-typed-construction | 14 |  |  |  | 3 |
+| undefined-notation | 15 | 1 |  |  | 1 |
+| false-or-overstrong-statement | 13 | 1 |  |  | 1 |
+| ill-typed-claim | 11 | 1 |  |  | 1 |
+| missing-choice-scope | 1 |  | 1 | 3 | 1 |
+| missing-case | 4 |  |  |  | 1 |
+| false-claim | 5 |  |  |  |  |
+| citation-misattributed | 4 |  |  |  | 1 |
+| false-or-overstrong-title | 4 |  |  |  |  |
+| arithmetic-error | 3 |  |  |  |  |
+| false-computation | 3 |  |  |  |  |
+| overstrong-title-or-statement | 2 |  |  |  |  |
+| contract-mismatch |  |  |  |  | 2 |
+| reader-repair | 1 |  |  |  |  |
+| citation-truncated |  |  |  |  | 1 |
+
+## numerical-analysis-remaining-71-2026-10-17 — 562 row(s)
+
+| subclass | 3a-adjudicate | 4-judge | 5-adjudicate | 5.2-impact |
+|---|---|---|---|---|
+| citation-inaccurate | 76 |  |  | 14 |
+| missing-hypothesis | 36 |  | 24 | 1 |
+| unlicensed-inference | 42 |  |  |  |
+| citation-missing | 37 |  | 2 |  |
+| false-or-overstrong-statement | 10 |  | 7 | 21 |
+| other | 8 |  |  | 27 |
+| contract-mismatch | 29 |  |  | 2 |
+| undefined-notation | 24 | 1 | 4 | 1 |
+| invalid-inference | 13 | 1 | 4 | 8 |
+| ill-formed | 24 |  |  |  |
+| ill-typed-construction | 11 |  | 13 |  |
+| unsupported-inference | 10 |  | 2 | 11 |
+| citation-misattributed | 15 |  |  | 1 |
+| ill-typed-claim | 11 | 1 | 2 |  |
+| arithmetic-error | 8 |  | 2 |  |
+| missing-case | 6 |  | 3 |  |
+| reader-repair | 8 |  |  |  |
+| missing-choice-scope | 2 |  | 5 |  |
+| false-claim | 6 |  |  |  |
+| false-or-overstrong-title | 6 |  |  |  |
+| missing-map | 3 |  |  | 2 |
+| citation-inflated | 2 |  | 2 |  |
+| frontmatter-schema | 3 |  |  |  |
+| false-computation | 3 |  |  |  |
+| false-boundary-disposition | 2 |  |  |  |
+| overstrong-title-or-statement | 2 |  |  |  |
+| invalid-witness | 1 |  |  |  |
+| citation-truncated | 1 |  |  |  |
+| missing-prerequisite | 1 |  |  |  |
+| scope-loss | 1 |  |  |  |
+
+## numerical-optimization-dynamics-2026-10-16 — 895 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate | 7.2-impact |
+|---|---|---|---|
+| reader-repair | 15 | 138 | 35 |
+| missing-hypothesis | 109 | 9 |  |
+| citation-inaccurate | 77 | 1 | 1 |
+| unsupported-inference | 64 |  |  |
+| ill-formed | 57 |  |  |
+| citation-misattributed | 50 |  |  |
+| unlicensed-inference | 46 |  |  |
+| false-or-overstrong-statement | 44 |  |  |
+| undefined-notation | 38 |  |  |
+| ill-typed-construction | 31 | 2 |  |
+| citation-missing | 30 |  |  |
+| ill-typed-claim | 24 |  |  |
+| invalid-inference | 22 |  |  |
+| citation-inflated | 19 | 2 |  |
+| false-or-overstrong-title | 18 |  |  |
+| missing-case | 14 |  |  |
+| missing-choice-scope | 10 |  |  |
+| contract-mismatch | 5 |  |  |
+| overstrong-title-or-statement | 4 |  |  |
+| arithmetic-error | 4 |  |  |
+| citation-truncated | 4 |  |  |
+| frontmatter-schema | 4 |  |  |
+| other | 4 |  |  |
+| false-claim | 3 |  |  |
+| false-boundary-disposition | 3 |  |  |
+| citation-corrupted | 2 |  |  |
+| invalid-witness | 1 |  |  |
+| missing-map | 1 |  |  |
+| scope-loss | 1 |  |  |
+| scope-drop | 1 |  |  |
+| citation-mismatch | 1 |  |  |
+| boundary-case | 1 |  |  |
 
 ## phase-2-catchup-24 — 14 row(s)
 
@@ -1197,6 +1347,53 @@
 |---|---|---|---|
 | other | 1 | 1 | 1 |
 
+## quantum-computing-algorithms-60-2026-10-15 — 360 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate | 5-rejudge | owner |
+|---|---|---|---|---|
+| citation-inaccurate | 69 |  |  | 1 |
+| invalid-inference | 5 | 26 | 11 |  |
+| missing-hypothesis | 40 |  |  | 1 |
+| unsupported-inference | 13 | 18 | 7 | 1 |
+| false-or-overstrong-statement | 19 |  | 2 |  |
+| ill-formed | 20 |  |  |  |
+| undefined-notation | 14 |  |  |  |
+| unlicensed-inference | 12 |  |  | 2 |
+| ill-typed-construction | 10 | 4 |  |  |
+| reader-repair | 11 |  |  |  |
+| false-claim | 8 |  |  | 2 |
+| ill-typed-claim | 8 |  |  |  |
+| missing-case | 4 |  |  | 2 |
+| citation-inflated | 6 |  |  |  |
+| invalid-witness | 3 |  |  | 2 |
+| false-computation | 5 |  |  |  |
+| citation-missing | 4 |  |  |  |
+| contract-mismatch |  |  |  | 4 |
+| arithmetic-error | 3 |  |  |  |
+| citation-misattributed | 2 |  |  | 1 |
+| false-or-overstrong-title | 3 |  |  |  |
+| incomplete-procedure | 2 |  |  |  |
+| false-boundary-disposition | 1 |  |  | 1 |
+| overstrong-title-or-statement | 2 |  |  |  |
+| citation-truncated | 1 |  | 1 |  |
+| unjustified-identification | 1 |  |  |  |
+| false-intermediate-claim | 1 |  |  |  |
+| external-proof-gap | 1 |  |  |  |
+| missing-cost-convention | 1 |  |  |  |
+| unlicensed-cost-inference | 1 |  |  |  |
+| false-status-caption | 1 |  |  |  |
+| invalid-refutation | 1 |  |  |  |
+| gate-wrong-signature |  |  |  | 1 |
+| artifact-overwritten |  |  |  | 1 |
+
+## quantum-prerequisites-4-2026-10-15 — 11 row(s)
+
+| subclass | 3a-adjudicate |
+|---|---|
+| unsupported-inference | 7 |
+| undefined-notation | 3 |
+| ill-typed-construction | 1 |
+
 ## ra-enrich-01 — 2 row(s)
 
 | subclass | unknown | 8-rejudge |
@@ -1345,3 +1542,18 @@
 - `f44-six-b47-upper-global-label-premise` frontier-44-special-representation-examples-28-six-step · invalid-inference · thm-self-dual-simple-cyclotomic-klr-modules-give-the-upper-global-basis
 - `f44-six-b47-page-foundation-overclaim` frontier-44-special-representation-examples-28-six-step · overstrong-title-or-statement · cyclotomic-klr-algebras-and-highest-weight-categorification
 - `msf37-step5-impact-initial-r1-u3-thm-huber-sparse-covariance-upper-and-lower-risk-ac-route` mathematical-statistics-foundations-37 · missing-choice-scope · thm-huber-sparse-covariance-upper-and-lower-risk
+- `quantum-computing-algorithms-60-2026-10-15-b29-3a-05` quantum-computing-algorithms-60-2026-10-15 · citation-inaccurate · thm-qa-finite-abelian-hidden-subgroup-sample-law
+- `nod-b49-3a-cost-title` numerical-optimization-dynamics-2026-10-16 · false-or-overstrong-title · thm-bartels-stewart-dense-operation-count
+- `nod-b49-3a-cost-invariant-scans` numerical-optimization-dynamics-2026-10-16 · unsupported-inference · thm-bartels-stewart-dense-operation-count
+- `nod-b101-3a-aubin-nitsche-endpoint` numerical-optimization-dynamics-2026-10-16 · false-or-overstrong-statement · thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity
+- `numerical-analysis-remaining-71-2026-10-17-batch-62-unrouted-periodic-grid-source-model` numerical-analysis-remaining-71-2026-10-17 · citation-inaccurate · def-periodic-reaction-diffusion-grid
+- `na71-b57-3a-lipschitz-scope` numerical-analysis-remaining-71-2026-10-17 · missing-prerequisite · lem-bem-exterior-energy-trace-bound
+- `na71-b67-3a-published-lebesgue-cover` numerical-analysis-remaining-71-2026-10-17 · false-claim · thm-lebesgue-criterion-in-rn
+- `nmm81-b3-3a-cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation` non-ml-math-remaining-81-2026-10-18 · overstrong-title-or-statement · cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation
+- `non-ml-math-remaining-81-2026-10-18-batch-1-D002` non-ml-math-remaining-81-2026-10-18 · ill-formed · cex-frattini-image-under-a-nonsurjective-homomorphism
+- `non-ml-math-remaining-81-2026-10-18-b17-3a-block-coordinate-interface` non-ml-math-remaining-81-2026-10-18 · ill-formed · def-it-single-letter-distortion-and-block-distortion
+- `na71-b65-3a-published-reference-simplex-index` numerical-analysis-remaining-71-2026-10-17 · undefined-notation · def-matching-affine-simplicial-meshes
+- `math81-3a-b29-outside-ising-locator` non-ml-math-remaining-81-2026-10-18 · citation-inaccurate · ex-qc-tqc-ising-data
+- `nm81-b48-dual-coxeter-compact-existence-open` non-ml-math-remaining-81-2026-10-18 · missing-hypothesis · def-dual-coxeter-number-for-normalized-form
+- `nmm81-b61-pivotal-left-partial-trace` non-ml-math-remaining-81-2026-10-18 · unsupported-inference · lem-negligible-morphisms-form-a-tensor-ideal-by-partial-trace
+- `math81-b77-3a-fibonacci-positive-pivot-prerequisite` non-ml-math-remaining-81-2026-10-18 · unsupported-inference · ex-fibonacci-golden-chain-projectors-and-noninvertibility

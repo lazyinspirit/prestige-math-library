@@ -2,7 +2,7 @@
 id: lem-discrete-memoryless-channel-average-to-maximal-expurgation
 kind: lemma
 title: "Expurgation converts small average error to small maximal error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

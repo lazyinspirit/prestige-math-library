@@ -20,8 +20,6 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references: []
 ---

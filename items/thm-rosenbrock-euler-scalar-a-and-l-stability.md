@@ -19,8 +19,6 @@ forward_refs: []
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "WIAS Berlin, Numerical Methods for Stiff Ordinary Differential Equations, §2.3 Linear Stability Theory"

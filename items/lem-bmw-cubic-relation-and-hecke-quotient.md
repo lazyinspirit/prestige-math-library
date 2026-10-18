@@ -2,7 +2,7 @@
 id: lem-bmw-cubic-relation-and-hecke-quotient
 kind: lemma
 title: The BMW braid generators satisfy a cubic, with a Hecke quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: prop-real-spin-factor-maps-onto-clifford-jordan-subalgebra
 kind: proposition
 title: The spin factor and the plus-quadratic Clifford convention
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: jordan-spin-factor-and-alternative-algebras

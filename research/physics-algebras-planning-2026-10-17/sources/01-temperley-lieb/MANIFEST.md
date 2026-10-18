@@ -1,0 +1,50 @@
+# Temperley–Lieb source manifest
+
+Prepared 2026-10-17 for dossier 01. Each listed PDF has a local extracted-text companion with the same basename and `.txt` extension. Text was extracted locally with PyMuPDF 1.27.2.3; PDF page numbers below refer to the local PDF unless explicitly called printed pages. Extraction is for navigation/search. It does not imply that unlisted pages were read. Source statements below distinguish a full article read from selective section reading and from downloaded-but-unread material.
+
+## Substantive source texts read
+
+1. **David Ridout and Yvan Saint-Aubin, “Standard Modules, Induction and the Structure of the Temperley-Lieb Algebra,”** *Advances in Theoretical and Mathematical Physics* 18(5) (2014), 957–1041; arXiv:1204.4505v4 [math-ph] (8 Jul 2014). Local files: `ridout_saint_aubin_standard_modules_2012.pdf` and `.txt`. Source: <https://arxiv.org/abs/1204.4505>. Read the substantive article pp. 1–50 (PDF pp. 1–50): §§2–8 and Appendices A–B; the final PDF page (printed p. 51) is references and was not read. This is the main comprehensive proof source. It works over C, treats β=0 separately, and records its own limits and corrections to earlier determinant arguments. The first-page arXiv version date (2014) differs from an internal date printed in the manuscript (May 23, 2018); version metadata is taken from arXiv.
+
+2. **Frederick M. Goodman and Hans Wenzl, “The Temperley-Lieb Algebra at Roots of Unity,”** *Pacific Journal of Mathematics* 161(2) (1993), 307–334. Local files: `goodman_wenzl_roots_of_unity_1993.pdf` and `.txt`. Source/DOI: <https://projecteuclid.org/journals/pacific-journal-of-mathematics/volume-161/issue-2/The-Temperley-Lieb-algebra-at-roots-of-unity/10.2140/pjm.1993.161.307.full>. Read the full article, printed pp. 307–334 (PDF pp. 2–29; PDF front/back matter outside the article was not treated as substantive text). It assumes characteristic zero and its stated root-order restriction ℓ>3; it uses normalized projection generators.
+
+3. **Vaughan F. R. Jones, “The Jones Polynomial,”** author-hosted lecture/survey notes (18 Aug 2005). Local files: `jones_the_jones_polynomial.pdf` and `.txt`. Source: <https://math.berkeley.edu/~vfr/jones.pdf>. Read printed pp. 1–17, particularly §3 pp. 7–11, §4 pp. 11–13, §§5–6 pp. 13–17; later pages were not read. The displayed skein relation on p. 2 has a normalization inconsistency with the later convention and is not used as a proof supplier.
+
+4. **Vaughan F. R. Jones, “Planar Algebras, I,”** arXiv:math.QA/9909027v1 (4 Sep 1999). Local files: `jones_planar_algebras.pdf` and `.txt`. Source: <https://arxiv.org/abs/math/9909027>. Read §1, printed pp. 13–27; §2.1, pp. 27–29; §3.1, pp. 68–74; and §§4.1–4.2, pp. 81–115, including the proof of Theorem 4.2.1. Other portions and references were not fully read. The subfactor result uses its stated finite-index extremal II₁ hypotheses.
+
+5. **K. Iohara, G. I. Lehrer, and R. B. Zhang, “The Jones Quotients of the Temperley-Lieb Algebras,”** arXiv:1702.08128v1 (27 Feb 2017). Local files: `jones_quotients_tl_2017.pdf` and `.txt`. Source: <https://arxiv.org/abs/1702.08128>. Read the complete article, pp. 1–22. Their loop/generator convention is not the same as δ=q+q⁻¹ without rescaling. The paper supplies the trace-degeneracy versus semisimplicity distinction and Jones-quotient results over C.
+
+6. **Joshua Chen, “The Temperley-Lieb Categories and Skein Modules,”** arXiv:1502.06845v1 (14 Dec 2014). Local files: `tl_categories_skein_modules_2015.pdf` and `.txt`. Source: <https://arxiv.org/abs/1502.06845>. Read §§2.1–2.4, 3.1–3.3, 5.1–5.4, and §6 (PDF pp. 15–66); references and remaining pages were not read. This is a category/skein source over the generic parameter and at the stated root convention; its direct Turaev–Viro construction has a narrower surface scope than the general theory.
+
+7. **A. Nichols, “The Temperley-Lieb Algebra and its Generalizations in the Potts and XXZ Models,”** arXiv:hep-th/0509069v2 (10 Jan 2006). Local files: `xxz_potts_tl_2006.pdf` and `.txt`. Source: <https://arxiv.org/abs/hep-th/0509069>. Read PDF pp. 1–15 and 31–43 (definitions and selected sections 2, 2.2, 3.1, 5, plus portions on periodic models). The omitted middle ranges were not read. This review contains parameter-specific physics results, numerical/sketched claims, and open problems; it is not a general proof source for all boundary or periodic models.
+
+8. **A. M. Gainutdinov, J. L. Jacobsen, N. Read, H. Saleur, and R. Vasseur, “Logarithmic Conformal Field Theory: A Lattice Approach,”** arXiv:1303.2082v2 (21 Nov 2013). Local files: `log_cft_lattice_2013.pdf` and `.txt`. Source: <https://arxiv.org/abs/1303.2082>. Read PDF pp. 1–36, including relevant portions of §§1, 4–9; references pp. 37–44 were not read. The scaling-limit discussion explicitly distinguishes heuristic/conjectural correspondences from rigorous results.
+
+9. **R. A. Spencer, “The Modular Temperley-Lieb Algebra,”** arXiv:2011.01328v4 [math.RT] (10 May 2022), published *Rocky Mountain Journal of Mathematics* 53(1) (2023), beginning at p. 177. Local files: `modular_tl_2023.pdf` and `.txt`. Source: <https://arxiv.org/abs/2011.01328>. Read the full article, PDF pp. 1–33, including §10.3. Its arbitrary-field and mixed-characteristic results use a quantum-characteristic framework and should not be summarized by the complex-root criterion alone.
+
+10. **M. Blakeney, L. Corcoran, M. de Leeuw, B. Pozsgay, and E. Vernier, “Temperley-Lieb Integrable Models and Fusion Categories,”** arXiv:2510.19902v3 [cond-mat.str-el] (21 Jan 2026), *Journal of High Energy Physics* 04 (2026), 165. Local files: `tl_integrable_models_fusion_categories_2026.pdf` and `.txt`. Source: <https://arxiv.org/abs/2510.19902>. Read the complete article body, PDF pp. 1–25; reference pages pp. 26–29 were not read. The F-symbol construction is proved with stated gauge conditions; δ>2 gap evidence and some finite-size sector claims are argued numerically/through Bethe ansatz and are not universal theorem statements.
+
+11. **A. Giaquinto and M. Mastnak, “The Center of the Temperley–Lieb Algebra,”** arXiv:2607.12247v1 [math.QA] (14 Jul 2026). Local files: `tl_center_2026.pdf` and `.txt`. Source: <https://arxiv.org/abs/2607.12247>. Read the full article, PDF pp. 1–23. The theorem assumes characteristic zero and δ≠0; the paper flags a question about a Gram-matrix leading-term specialization.
+
+12. **Louis H. Kauffman and Samuel J. Lomonaco Jr., “The Fibonacci Model and the Temperley-Lieb Algebra,”** arXiv:0804.4304v1 (27 Apr 2008). Local files: `fibonacci_tl_2008.pdf` and `.txt`. Source: <https://arxiv.org/abs/0804.4304>. Read the complete article, PDF pp. 1–13. It is a model-specific Fibonacci-path-space and braid-representation treatment, not a general fusion-category theorem.
+
+## Downloaded and extracted, but not substantively read
+
+13. **Steven M. Flores and Eveliina Peltola, “Standard Modules, Radicals, and the Valenced Temperley-Lieb Algebra,”** arXiv:1801.10003v2 (11 Dec 2018). Local files: `valenced_tl_radicals_2018.pdf` and `.txt`. Source: <https://arxiv.org/abs/1801.10003>. Only PDF pp. 1–2 (abstract, introduction, section map, and ordinary-TL background) were inspected. The 93-page article’s valenced-algebra proofs were not read and are not used as theorem evidence in the dossier.
+
+14. **Alexis Langlois-Rémillard and Alexi Morin-Duchesne, “Uncoiled Affine Temperley–Lieb Algebras and Their Wenzl–Jones Projectors,”** arXiv:2302.12782 (downloaded version). Local files: `jw_affine_uncoiled_2023.pdf` and `.txt`. Source: <https://arxiv.org/abs/2302.12782>. Downloaded/extracted, not substantively read; no result from it is relied on here.
+
+15. **Jonathan Belletête and Yvan Saint-Aubin, “Fusion and Monodromy in the Temperley–Lieb Category,”** arXiv:1802.09203v3 (3 Oct 2018). Local files: `fusion_monodromy_tl_category_2018.pdf` and `.txt`. Source: <https://arxiv.org/abs/1802.09203>. Downloaded/extracted, not substantively read; no result from it is relied on here.
+
+16. **Yacine Ikhlef and Alexi Morin-Duchesne, “Fusion in the Periodic Temperley–Lieb Algebra: General Definition of a Bifunctor,”** arXiv:2509.11756 (downloaded version). Local files: `periodic_tl_fusion_2026.pdf` and `.txt`. Source: <https://arxiv.org/abs/2509.11756>. Downloaded/extracted, not substantively read; no result from it is relied on here.
+
+## Retrieval and scope notes
+
+- All local source PDFs listed above have an extracted `.txt` companion. Null/control characters occur in some formula-heavy extractions; `rg -a` or a null-stripping copy may be needed for search. The PDFs remain the authoritative local read objects.
+- A direct fetch of Westbury’s Springer-hosted source returned an HTML/cookie redirect, not a PDF; it was not read. Ridout–Saint-Aubin was used for the detailed standard-module and Gram-form account. Do not cite the failed fetch as a read source.
+- A direct Project Euclid HTML route was blocked during retrieval; the Goodman–Wenzl article was read from the local PDF copy, with its DOI/publisher record given above. No claim depends on blocked HTML.
+- “Full article read” means the article body/identified pages listed above were read; front matter, references, or unrelated sections are explicitly excluded where stated. Selective reads are named by page/section range and are not represented as complete source review.
+
+## Auditor interpretation correction, 2026-10-17
+
+Spencer §§2.3, the discussion following Theorem8.4, and§10.3 were independently checked for the characteristic-zero limit. The earlier dossier incorrectly deleted the n=aℓ−1 branch when p=∞. In fact p(1)=ℓ and every finite positive a<p, so over a characteristic-zero field the existence criterion includes n<ℓ or n=aℓ−1; ℓ=∞ covers all finite n. The representation/projector criterion here is over fields (see the standing field assumption at§3), not arbitrary integral coefficient rings. This correction changes no researcher read-range claim; it is independently attributed audit interpretation.

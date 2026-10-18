@@ -2,7 +2,7 @@
 id: lem-hh-positive-affine-parameter-has-infinite-quantum-characteristic
 kind: lemma
 title: "A real affine-Hecke parameter greater than one has infinite quantum characteristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

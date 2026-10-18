@@ -2,7 +2,7 @@
 id: lem-parametric-index-grouping-preserves-a-relative-descending-path
 kind: lemma
 title: "Parametric index grouping preserves a relative descending path"
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

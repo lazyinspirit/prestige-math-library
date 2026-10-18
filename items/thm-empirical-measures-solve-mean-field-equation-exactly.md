@@ -14,8 +14,6 @@ axiom_use: No choice principle is used; only a finite sum and the chain rule occ
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

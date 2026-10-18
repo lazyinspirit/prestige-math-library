@@ -2,7 +2,7 @@
 id: prop-anyonic-vacuum-channel-projectors-satisfy-temperley-lieb
 kind: proposition
 title: "Vacuum-channel anyonic projectors satisfy Temperley–Lieb relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

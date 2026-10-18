@@ -26,7 +26,7 @@ sources:
     - title: "T. Tao, An Introduction to Measure Theory (GSM 126), Exercises 1.2.7 and 1.2.19"
       url: "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"
     - title: "John K. Hunter, Measure Theory (UC Davis lecture notes), Theorems 2.24, 2.25 and 2.27"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
     - title: "E. A. Carlen, Notes on Lebesgue Measure on $\\mathbb{R}^n$ and $S^{n-1}$ (Rutgers Math 501), Theorem 1.6"
       url: "https://sites.math.rutgers.edu/~carlen/501F13/LebesgueMeas.pdf"
 pipeline_run: null

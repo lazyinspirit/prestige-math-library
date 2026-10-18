@@ -1,7 +1,7 @@
 ---
 page: algebraic-representation-and-tensor-symmetry-map
 title: Algebra, Modules, and Tensor Symmetry Interfaces
-status: draft
+status: published
 requires:
   - lie-algebra-representations-enveloping-algebras-and-pbw
   - monoidal-categories-and-monoidal-functors

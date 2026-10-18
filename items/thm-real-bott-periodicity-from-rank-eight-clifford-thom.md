@@ -2,7 +2,7 @@
 id: thm-real-bott-periodicity-from-rank-eight-clifford-thom
 kind: theorem
 title: Real Bott periodicity from the rank-eight Clifford–Thom map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations

@@ -14,8 +14,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Jennifer Scott and Miroslav Tůma, Algorithms for Sparse Linear Systems, Chapter 4, §§4.1–4.2"

@@ -2,7 +2,7 @@
 id: lem-gaussian-superposition-nonunique-han-kobayashi-region
 kind: lemma
 title: Gaussian superposition Han–Kobayashi region with nonunique decoding and rate moving
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

@@ -1,7 +1,7 @@
 ---
 page: finite-blocklength-and-reliability-examples
 title: "Finite-Blocklength Bounds and Reliability — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-it-expected-random-code-error-does-not-give-maximal-error

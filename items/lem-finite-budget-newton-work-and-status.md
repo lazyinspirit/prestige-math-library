@@ -13,8 +13,6 @@ proof_strategy: induction
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation"

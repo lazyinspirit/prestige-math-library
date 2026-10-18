@@ -33,8 +33,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 2, §§2.3–2.4, PDF pp.33–37: factorial moment measures and reduced second moment measures."
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-hmm-viterbi-is-sequence-map
 kind: theorem
 title: Finite-HMM Viterbi decoding is exact sequence MAP
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

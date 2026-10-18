@@ -2,7 +2,7 @@
 id: def-discrete-memoryless-channel-information-density
 kind: definition
 title: "Finite DMC information density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

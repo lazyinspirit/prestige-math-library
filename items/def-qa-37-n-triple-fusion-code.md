@@ -2,7 +2,7 @@
 id: def-qa-37-n-triple-fusion-code
 kind: definition
 title: "Arbitrary-n triple-anyon fixed-charge code"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

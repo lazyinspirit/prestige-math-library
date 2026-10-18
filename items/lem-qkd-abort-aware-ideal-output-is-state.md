@@ -2,7 +2,7 @@
 id: lem-qkd-abort-aware-ideal-output-is-state
 kind: lemma
 title: The abort-aware ideal output and conditional marginals are states
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

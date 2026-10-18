@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-semisimplicity-and-generic-structure
 title: "Temperley–Lieb Semisimplicity and Generic Structure"
-status: draft
+status: published
 items:
   - def-temperley-lieb-quantum-integers-and-quantum-characteristic
   - lem-temperley-lieb-link-state-gram-determinant

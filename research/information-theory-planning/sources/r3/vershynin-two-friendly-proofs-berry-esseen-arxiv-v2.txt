@@ -1,0 +1,1924 @@
+TWO FRIENDLY PROOFS OF THE BERRY–ESSEEN THEOREM
+
+ROMAN VERSHYNIN
+
+Abstract. A gem of classical probability, the Berry–Esseen theorem provides a non-asymp-
+totic form of the central limit theorem.
+This note gives a friendly and intuitive exposi-
+tion of two different proofs of the Berry–Esseen theorem for nonidentically distributed ran-
+dom variables: the classical Fourier-analytic proof and a proof by Stein’s method following
+E. Bolthausen. Both proofs are self-contained; the reader may read either proof without
+reading the other. The exposition is suitable for a basic graduate course in probability.
+
+The central limit theorem describes the eventual Gaussian behavior of sums of independent
+random variables.
+The Berry–Esseen theorem makes this approximation quantitative for
+every finite sum.
+
+Theorem 0.1 (Berry–Esseen theorem [1, 4]). Let X1, . . . , Xn be independent mean-zero ran-
+dom variables whose sum Sn := X1 + · · · + Xn satisfies Var(Sn) = 1. Let G be a standard
+normal random variable. Then
+
+sup
+a∈R
+
+���P{Sn ≤a} −P{G ≤a}
+���≤C
+
+n
+�
+
+k=1
+E|Xk|3,
+
+provided the right-hand side is finite, where C is an absolute constant.
+
+To see how this implies the classical central limit theorem, let Y1, Y2, . . . be independent
+mean-zero random variables with unit variances and uniformly bounded third moments.
+Applying Theorem 0.1 to Xk = Yk/√n gives
+
+sup
+a∈R
+
+����P
+�Y1 + · · · + Yn
+√n
+≤a
+�
+−P{G ≤a}
+����= O
+�1
+√n
+
+�
+.
+(0.1)
+
+Thus the normalized sums converge in distribution to G. More precisely, (0.1) gives uniform
+convergence of the distribution functions, the optimal rate O(n−1/2), and a bound valid for
+every finite n.
+
+We prove the theorem twice. Part I gives the classical Fourier-analytic argument, including
+an intuitive proof of Esseen’s smoothing inequality. Part II gives a proof by Stein’s method,
+following an extremely concise argument of Bolthausen [2].
+The two parts are logically
+independent: neither proof invokes a definition, lemma, or estimate from the other. A reader
+interested in just one method may therefore go directly to the corresponding part.
+There are several existing textbook proofs of the Berry–Esseen theorem. The classical
+Fourier-analytic proof is covered, for example, in Feller [6, Ch. XVI, Sec. 5, Thm. 2]; for an
+introduction to Stein’s method, see Ross [7] and Chen, Goldstein, and Shao [3].
+
+Partially supported by the NSF Grant DMS 2451011 and the U.S. Air Force Grant FA9550-25-1-0294.
+
+1
+
+arXiv:2602.06234v2  [math.PR]  30 Jul 2026
+
+
+2
+ROMAN VERSHYNIN
+
+Part I. The Fourier-analytic proof
+
+This part is self-contained. It begins with the proof strategy, recalls the needed Fourier
+analysis, and develops its own smoothing and characteristic-function estimates.
+
+1. The proof strategy
+
+Here is a bird’s-eye, non-rigorous sketch of the proof of Theorem 0.1.
+
+1.1. Smoothing. We begin by writing
+
+P{Sn ≤a} = E 1{Sn≤a}.
+(1.1)
+
+The difficulty is that the function x �→1{x≤a} is too rough: it has a discontinuous drop from
+1 to 0 at the point a. To mitigate this issue, we smooth the indicator function: approximate
+it with a function f(x) that decreases from 1 to 0 gradually. With such approximation, (1.1)
+becomes
+P{Sn ≤a} ≈E f(Sn).
+A rigorous version of this smoothing step will be given in Lemma 3.1.
+
+1.2. Fourier transform. Next, we replace f(x) by an even simpler function – a complex
+exponential e2πitx. This can be done using the Fourier transform inversion formula (recalled
+in (2.2) below):
+
+E f(Sn) = E
+�
+
+R
+e2πitSn �f(t) dt =
+�
+
+R
+E
+�
+e2πitSn��f(t) dt.
+
+Applying the same method to a standard normal random variable G, subtracting the two
+expressions, and using Jensen’s inequality, we obtain
+
+|P{Sn ≤a} −P{G ≤a}| ≲
+�
+
+R
+
+��E e2πitSn −E e2πitG��| �f(t)| dt.
+(1.2)
+
+This reduces the problem to comparing the characteristic functions E eitSn and E eitG. For
+the standard normal random variable G, a simple computation yields
+
+E eitG = exp(−t2/2),
+t ∈R.
+(1.3)
+
+1.3. Taylor approximation. For Sn, independence of the random variables Xk gives
+
+E eitSn = E
+�
+eitX1�
+· · · E
+�
+eitXn�
+,
+
+which reduces the problem to computing the characteristic function E eitXk for each random
+variable Xk separately. By assumption,
+
+E Xk = 0
+and
+E X2
+k =: σ2
+k < ∞.
+
+Using the Taylor approximation ez ≈1 + z + z2/2 and taking expectations, we get
+
+E eitXk ≈E
+�
+1 + itXk −t2X2
+k/2
+�
+
+= 1 −σ2
+kt2/2 ≈exp
+�
+−σ2
+kt2/2
+�
+.
+
+Multiplying over k gives
+
+E eitSn ≈exp
+�
+−σ2
+1t2/2
+�
+· · · exp
+�
+−σ2
+nt2/2
+�
+= exp
+�
+−t2/2
+�
+,
+(1.4)
+
+since σ2
+1 + · · · + σ2
+n = 1 by assumption. Comparing to (1.3), we see that
+
+E eitSn ≈E eitG.
+
+
+TWO FRIENDLY PROOFS OF THE BERRY–ESSEEN THEOREM
+3
+
+Substituting this approximation into (1.2) completes the heuristic “proof”.
+
+1.4. A challenge and a fix. The main issue with this heuristic argument lies in the quality
+of the Taylor approximation. We cannot expect
+
+E eitXk ≈exp(−σ2
+kt2/2)
+(1.5)
+
+uniformly over all t ∈R. For example, if Xk has the Rademacher distribution, its character-
+istic function equals cos(t), which does not even decay to zero as |t| →∞.
+There is an elegant fix for this issue: choose the smoothing function f whose Fourier
+transform �f is supported on a compact interval centered at the origin. The integrand in (1.2)
+would vanish outside that interval, and so it suffices to establish the approximation (1.5) only
+for t close to the origin. This idea leads to Esseen’s smoothing inequality (Theorem 3.3).
+In Lemma 4.1, we will prove (1.5) in a neighborhood of the origin. Multiplying over k, we
+will deduce a rigorous form of (1.4) in Lemma 4.3. Plugging it into the smoothing inequality
+will complete the proof of Theorem 0.1.
+Now let’s do this step by step.
+
+2. Background on Fourier transform
+
+First, let’s recall some basic facts about Fourier transform that we will use in the proof.
+The Fourier transform of an integrable function f : R →C is the bounded and continuous
+function �f : R →C defined as
+
+�f(t) =
+�
+
+R
+e−2πitxf(x) dx.
+(2.1)
+
+If f is a Schwartz function (that is, f and all its derivatives decay faster than any polynomial
+at infinity), then �f is also a Schwartz function.
+Any Schwartz function f can be reconstructed from its Fourier transform using the Fourier
+inversion formula:
+
+f(x) =
+�
+
+R
+e2πitx �f(t) dt.
+(2.2)
+
+Comparing with (2.1), we see that applying the Fourier transform twice yields f(−x). In
+particular, the Fourier transform is an involution on even functions.
+The Fourier transform preserves the L2 norm: for a Schwartz function f, the Plancherel
+identity says that
+�
+
+R
+|f(x)|2 dx =
+�
+
+R
+| �f(t)|2 dt.
+(2.3)
+
+The convolution of two integrable functions f and g is the integrable function f ∗g defined
+as
+
+(f ∗g)(x) =
+�
+
+R
+f(y)g(x −y) dy.
+
+The convolution theorem states that
+
+�
+f ∗g = �f · �g
+pointwise.
+(2.4)
+
+
+4
+ROMAN VERSHYNIN
+
+3. Smoothing
+
+We can write the cumulative distribution function of a random variable X as
+
+P{X ≤a} = E 1(−∞,0](X −a),
+
+where 1(−∞,0](x) is the indicator of (−∞, 0]. We now smooth this indicator, replacing it by
+a function that transitions gradually from 1 to 0, with most of the transition occurring in an
+ε-neighborhood of the origin.
+
+Lemma 3.1 (Smoothing the discrepancy). Let φ be a probability density function, which is
+also a Schwartz function. Consider a smoothed version of the indicator function of (−∞, 0]:
+
+f = 1(−∞,0] ∗φ.
+
+Let X and Y be random variables.
+Assume that the probability density function of Y is
+bounded by M. Then we have for any ε > 0:
+
+sup
+a∈R
+
+���P{X ≤a} −P{Y ≤a}
+���≤2 sup
+a∈R
+
+����E f
+�X −a
+
+ε
+
+�
+−E f
+�Y −a
+
+ε
+
+�����+ CφMε.
+(3.1)
+
+Here Cφ depends only on the choice of the smoothing function φ.
+
+Proof. Step 1. Regularity of the discrepancy function. By rescaling, it is enough to consider
+ε = 1. Our task is to bound the discrepancy function
+
+∆(a) := FX(a) −FY (a),
+
+where FX(a) := P{X ≤a} and FY (a) := P{Y ≤a} are the cumulative distribution functions.
+The function FX increases, while FY cannot increase too fast because its derivative is
+bounded by M. Putting this together, we see that ∆cannot decrease too fast:
+
+∆(¯a + t) ≥∆(¯a) −Mt
+for any ¯a ∈R, t ≥0.
+(3.2)
+
+In particular, once ∆achieves its maximum, ∆will have to remain close to its maximum for
+a while. To make this precise, assume without loss of generality that
+¯∆:= sup
+a∈R
+|∆(a)| = sup
+a∈R
+∆(a).
+(3.3)
+
+(Otherwise replace X, Y by −X, −Y .) Choose a point ¯a where ∆(¯a) ≥0.9 ¯∆. Then (3.2)
+gives
+∆(¯a + t) ≥0.9 ¯∆−Mt ≥¯∆/2
+as long as 0 ≤t ≤¯∆/3M. In other words, we found an interval of length ¯∆/3M on which ∆
+is bounded below by ¯∆/2.
+Step 2.
+The smoothed discrepancy function.
+Our task is to compare the discrepancy
+function ∆(a) to its smoothed version
+
+∆f(a) := E f(X −a) −E f(Y −a).
+
+To express ∆f in terms of ∆, note that
+
+E f(X −a) = E
+�
+
+R
+1(−∞,0](X −a −y)φ(y) dy =
+�
+
+R
+FX(a + y)φ(y) dy
+
+by the Fubini theorem. Express E f(Y −a) similarly, subtract, and obtain
+
+∆f(a) =
+�∞
+
+−∞
+∆(a + y)φ(y) dy.
+(3.4)
+
+
+TWO FRIENDLY PROOFS OF THE BERRY–ESSEEN THEOREM
+5
+
+Step 3. Integrating. In Step 1, we found an interval [a0 −T, a0 + T] with T = ¯∆/6M and
+on which ∆is bounded below by ¯∆/2. Let’s decompose (3.4):
+
+∆f(a0) =
+�
+
+|y|≤T
+∆(a0 + y)φ(y) dy
+
+�
+��
+�
+I1
+
++
+�
+
+|y|>T
+∆(a0 + y)φ(y) dy
+
+�
+��
+�
+I2
+
+.
+
+To bound I2, recall that (3.3) implies that ∆is bounded below by −¯∆everywhere. Moreover,
+φ is a Schwartz function, so
+�
+
+|y|>T φ(y) dy ≤Cφ/T. Thus
+
+I2 ≥−¯∆· Cφ
+
+T .
+
+To bound I1, recall that ∆is bounded below by ¯∆/2 in the range of integration. Moreover,
+φ is a probability density function, so its total integral equals 1. Thus
+
+I1 ≥
+¯∆
+2 ·
+�
+1 −Cφ
+
+T
+
+�
+.
+
+Adding the two bounds, we conclude that
+
+∆f(a0) ≥
+¯∆
+2 −3Cφ ¯∆
+
+2T
+≥
+¯∆
+2 −9CφM.
+
+Rearranging the terms yields ¯∆≤2∆f(a0) + 18CφM, which completes the proof.
+□
+
+In Lemma 3.1, we replaced the indicator function 1(−∞,0] by a smooth function f. Now,
+we further replace f with a very particular choice: the complex exponential.
+
+Lemma 3.2 (Smoothed discrepancy via characteristic functions). There exists a probability
+density function φ, which is also a Schwartz function, with the following property. Consider
+a smoothed version of the indicator function of (−∞, 0]:
+
+f = 1(−∞,0] ∗φ.
+
+Let X and Y be random variables. Then we have for any ε > 0:
+
+sup
+a∈R
+
+����E f
+�X −a
+
+ε
+
+�
+−E f
+�Y −a
+
+ε
+
+�����≤
+�1/ε
+
+−1/ε
+
+����
+E eitX −E eitY
+
+t
+
+����dt.
+
+Proof. Step 1. Choosing a smoothing function. By translation and dilation, we can assume
+that a = 0 and ε = 1, so it suffices to prove the following version of the conclusion:
+
+|E f(X) −E f(Y )| ≤
+�1
+
+−1
+
+����
+E eitX −E eitY
+
+t
+
+����dt.
+
+Choose any probability density function φ, which is also a Schwartz function, and whose
+Fourier transform is supported in the interval
+�
+−1/(2π), 1/(2π)
+�
+.
+(Why does such φ exist? Take any even Schwartz function ψ supported in [−1/4π, 1/4π]
+and satisfying
+�
+
+R ψ(x)2 dx = 1, and set
+
+φ(t) := �ψ(t)2.
+
+Since ψ is even and Schwartz, �ψ is real-valued and Schwartz, so φ is nonnegative and Schwartz.
+Moreover, Plancherel identity (2.3) gives
+�
+
+R �ψ(t)2 dt =
+�
+
+R ψ(x)2 dx = 1, showing that φ is
+a probability density function.
+Finally, we have �φ = ψ ∗ψ: to see this, first apply the
+convolution theorem (2.4) and then the Fourier inversion formula (2.2), noting that ψ is
+even. Thus, �φ is supported on
+�
+−1/(2π), 1/(2π)
+�
+.)
+
+
+6
+ROMAN VERSHYNIN
+
+Step 2. Bounding the Fourier transform. Since the function f approaches 1 at −∞, it is
+not integrable. To fix this, let us consider the integrable function
+
+fM = 1(−M,0] ∗φ.
+
+Since the indicators 1(−M,0] increase to 1(−∞,0] pointwise as M →∞, the monotone conver-
+gence theorem implies that the functions fM increase to f pointwise. Another application of
+the monotone convergence theorem yields
+
+E fM(X) →E f(X),
+E fM(Y ) →E f(Y )
+as M →∞.
+(3.5)
+
+We claim that
+
+�
+fM is supported on
+�
+−1
+
+2π, 1
+
+2π
+�
+and
+���
+fM(t)
+��≤
+1
+π|t|,
+t ∈R.
+(3.6)
+
+Indeed, the convolution theorem (2.4) shows that �
+fM = �
+1(−M,0] · �φ. Now,
+
+�
+1(−M,0](t) =
+�0
+
+−M
+e−2πitx dx = e2πitM −1
+
+2πit
+,
+so
+����
+1(−M,0](t)
+���≤
+1
+π|t|.
+
+Moreover, by construction, |�φ(t)| vanishes outside
+�
+−1/(2π), 1/(2π)
+�
+.
+It is bounded by
+�
+
+R|φ(x)| dx = 1 since φ is a probability density function. Combining these bounds proves the
+claim.
+
+Step 3. Integrating. Using the inverse Fourier transform formula, we can write
+
+E fM(X) = E
+�
+
+R
+e2πitX �
+fM(t) dt =
+�
+
+R
+E
+�
+e2πitX��
+fM(t) dt
+
+by Fubini theorem (note that fM is Schwartz by construction, so �
+fM is Schwartz, too). Write
+the same for E fM(Y ), subtract and use Jensen’s inequality to get
+
+|E fM(X) −E fM(Y )| ≤
+�
+
+R
+
+��E e2πitX −E e2πitY �����
+fM(t)
+��dt
+
+≤
+�1/(2π)
+
+−1/(2π)
+
+��E e2πitX −E e2πitY ��·
+1
+π|t| dt
+(using (3.6)).
+
+Make the change of variable s = 2πt, take limit as M →∞using (3.5), and the proof is
+complete.
+□
+
+Combining Lemmas 3.1 and 3.2, we immediately obtain
+
+Theorem 3.3 (Esseen’s smoothing inequality [5]). Let X and Y be random variables. As-
+sume that the probability density function of Y is bounded by M. Then we have for any
+ε > 0:
+
+sup
+a∈R
+
+���P{X ≤a} −P{Y ≤a}
+���≤2
+�1/ε
+
+−1/ε
+
+����
+E eitX −E eitY
+
+t
+
+����dt + CMε.
+
+Here C is an absolute constant.
+
+
+TWO FRIENDLY PROOFS OF THE BERRY–ESSEEN THEOREM
+7
+
+4. Characteristic functions
+
+Esseen’s smoothing inequality (Theorem 3.3) reduces the problem of approximating a
+cumulative distribution function P{X ≤a} to approximating the characteristic function
+E eitX. So, what can we say about the characteristic function?
+
+Lemma 4.1 (The characteristic function of a random variable). Let X be a random variable
+with
+E X = 0,
+E X2 = σ2,
+E|X|3 = ρ3 < ∞.
+(4.1)
+Then
+
+E eitX = exp
+�
+−σ2t2
+
+2
++ O(ρ3t3)
+�
+whenever
+|t| ≤1
+
+ρ
+(4.2)
+
+and
+��E eitX��≤exp
+�
+−σ2t2
+
+2
++ O(ρ3t3)
+�
+for any
+t ∈R.
+(4.3)
+
+In the statement and proof of this lemma, we use the O(·) notation to hide factors that
+are bounded by absolute constants. Precisely, O(a) stands for θa where θ is some quantity
+that satisfies |θ| ≤C, where C is an absolute constant. The quantity θ and the constant C
+may change from line to line.
+
+Proof. Step 1. Approximating the exponential function. To prove (4.2), write a Taylor ap-
+proximation of the exponential function:
+
+eix = 1 + ix −x2
+
+2 + θ0x3
+for some θ0 = θ0(x) satisfying |θ0| ≤1
+
+6.
+
+(This holds since the third derivative of eix is bounded by 1 in modulus.) Substitute x = tX
+and take expectation to get
+
+E eitX = 1 + it E X −t2 E X2
+
+2
++ t3 E[θ0X3]
+
+for some random variable θ0 satisfying |θ0| ≤1
+
+6 pointwise. Using the assumptions (4.1), we
+get
+
+E eitX = 1 −σ2t2
+
+2
++ θρ3t3
+for some θ = θ(x) satisfying |θ| ≤1
+
+6.
+(4.4)
+
+For convenience, let us rewrite this as
+
+E eitX = 1 −a
+
+2 + θb,
+where
+a = σ2t2 and b = ρ3t3,
+(4.5)
+
+and note that
+a2 ≤|b| ≤1.
+(4.6)
+(The second inequality follows from the assumption |t| ≤1
+
+ρ. To check the first inequality,
+note that σ ≤ρ by Jensen’s inequality, so a2 = σ4t4 ≤ρ4t4 = |b|4/3 ≤|b|.)
+Step 2. Linearizing the logarithmic function. Now write a Taylor approximation of the
+logarithmic function:
+
+ln(1 + x) = x + O(x2)
+whenever
+|x| ≤2
+
+3.
+
+We can use this for x := −a
+
+2 + θb, since (4.6) and (4.4) guarantee that |x| ≤1
+
+2 + 1
+
+6 = 2
+
+3. We
+get
+ln
+�
+1 −a
+
+2 + θb
+�
+= −a
+
+2 + θb + O
+��
+−a
+
+2 + θb
+�2�
+.
+
+
+8
+ROMAN VERSHYNIN
+
+Expanding the square and letting the O(·) notation absorb the factors bounded by absolute
+constants, we conclude that
+
+ln
+�
+1 −a
+
+2 + θb
+�
+= −a
+
+2 + O(b) + O(a2) + O(ab) + O(b2) = −a
+
+2 + O(b),
+
+where the last step follows from (4.6). Recalling (4.5), we see that we proved that
+
+ln
+�
+E eitX�
+= −σ2t2
+
+2
++ O(ρ3t3),
+
+as claimed.
+Step 3. Deducing the bound (4.3). In the range |t| ≤1
+
+ρ, the bound (4.3) follows from (4.2).
+And if |t| > 1
+
+ρ, the bound is nearly trivial. Indeed, since |eix| = 1 holds pointwise, we have
+
+|E eitX| ≤1.
+
+On the other hand, σ ≤ρ and ρ|t| > 1 yield σ2t2/2 ≤ρ2t2/2 ≤ρ3|t|3, so
+
+exp
+�
+−σ2t2
+
+2
++ ρ3|t|3�
+≥exp(0) = 1,
+
+and (4.3) follows.
+□
+
+Remark 4.2 (No approximation everywhere). One might ask whether the bound (4.2) could
+hold for all t ∈R, in which case we won’t need the separate bound (4.3). This is false in
+general. For instance, a characteristic function E eitX may have compact support; then the
+left-hand side of (4.2) vanishes for large |t|, while the right-hand side remains positive.
+
+Our next goal is to approximate the characteristic function of a sum of independent random
+variables. To do this, we will multiply the bounds from Lemma 4.1 to obtain:
+
+Lemma 4.3 (The characteristic function of a sum). There exist absolute constants C, c > 0
+so that the following holds. Let X1, . . . , Xn be independent random variables that satisfy
+
+E Xk = 0,
+E X2
+k = σ2
+k,
+E|Xk|3 = ρ3
+k < ∞.
+
+Assume that
+n
+�
+
+k=1
+σ2
+k = 1
+and let
+ρ3 :=
+
+n
+�
+
+k=1
+ρ3
+k.
+
+Then the sum Sn := X1 + · · · + Xn satisfies
+���E eitSn −e−t2/2���≤Cρ3|t|3e−t2/4
+whenever
+|t| ≤c
+
+ρ3 .
+
+Proof. Step 1. Assume that |t| ≤1
+
+ρ. Then |t| ≤
+1
+ρk for each k, which allows us to apply (4.2)
+and get
+
+E eitXk = exp
+�
+−σ2
+kt2
+
+2
++ θkρ3
+kt3�
+for some θk = θk(t) satisfying |θk| ≤C.
+
+By independence, this yields
+
+E eitSn =
+
+n
+�
+
+k=1
+E eitXk = exp
+�
+−t2
+
+2 + θρ3t3�
+for some θ = θ(t) satisfying |θ| ≤C.
+
+Therefore
+���E eitSn −e−t2/2���= e−t2/2���eθρ3t3 −1
+���≤C1ρ3|t|3e−t2/2,
+
+
+TWO FRIENDLY PROOFS OF THE BERRY–ESSEEN THEOREM
+9
+
+and we are done. (The last bound follows once we apply the Taylor approximation of the
+exponential function |ex −1| ≤|x|e|x| for x := θρ3t3 and note that |x| ≤C by assumption on
+t.)
+
+Step 2. Assume that 1
+
+ρ < |t| ≤
+c
+ρ3 . Arguing similarly to Step 1, but applying (4.3) instead,
+we obtain
+
+��E eitSn��≤exp
+�
+−t2
+
+2 + θρ3t3�
+for some θ = θ(t) satisfying |θ| ≤C.
+
+Choosing the absolute constant c > 0 in the assumption on t small enough, we can make sure
+that θρ3t3 ≤t2/4. This gives
+��E eitSn��≤e−t2/4.
+
+Hence, by triangle inequality, we conclude that
+���E eitSn −e−t2/2���≤e−t2/4 + e−t2/2 ≤2ρ3|t|3e−t2/4,
+
+since ρ3|t|3 ≥1 by assumption. The lemma is proved.
+□
+
+5. Proof of Theorem 0.1
+
+Now we are ready to prove the Berry–Esseen theorem, Theorem 0.1. Set
+
+ρ3 :=
+
+n
+�
+
+k=1
+E|Xk|3.
+
+Apply Esseen’s smoothing inequality (Theorem 3.3) with X = Sn, Y = G, and 1/ε = c/ρ3.
+Since the density of G is bounded by an absolute constant and its characteristic function
+equals e−t2/2, we obtain
+
+sup
+a∈R
+
+���P{Sn ≤a} −P{G ≤a}
+���≤2
+�c/ρ3
+
+−c/ρ3
+
+�����
+E eitSn −e−t2/2
+
+t
+
+�����dt + C1ρ3.
+
+Now substitute the bound on the characteristic function of Sn given by Lemma 4.3. We get
+
+sup
+a∈R
+
+���P{Sn ≤a} −P{G ≤a}
+���≤C2ρ3
+�∞
+
+−∞
+t2e−t2/4 dt + C1ρ3 ≤C3ρ3.
+
+The Berry–Esseen theorem is proved.
+□
+
+Part II. The proof by Stein's method
+
+This part is also self-contained. It restarts from the proof strategy and develops its own
+smoothing lemma, Stein equation, and inductive argument. Nothing from Part I is used.
+
+6. The proof strategy
+
+We begin with a bird’s-eye, non-rigorous sketch of the proof of Theorem 0.1.
+
+
+10
+ROMAN VERSHYNIN
+
+6.1. Smoothing. We begin by writing the cumulative distribution function of Sn as
+
+P{Sn ≤a} = E 1{Sn≤a}.
+(6.1)
+
+The indicator function x �→1{x≤a} is difficult to handle analytically because it jumps from 1
+to 0 at a. To soften this jump, fix ε > 0 and define the following ε-smoothing function at a:
+
+ha(x) :=
+
+
+
+
+
+
+
+
+
+
+1,
+x ≤a,
+
+1 −x −a
+
+ε
+,
+a < x < a + ε,
+
+0,
+x ≥a + ε.
+a
+a + ε
+
+1
+
+(6.2)
+
+This function decreases linearly from 1 to 0 over the interval [a, a + ε]. With this smoothing
+function, (6.1) becomes
+
+P{Sn ≤a} ≈E ha(Sn).
+
+Lemma 7.1 makes this approximation rigorous and records the error introduced by smoothing.
+
+6.2. Gaussian integration by parts. Let φ(x) = (2π)−1/2e−x2/2 denote the standard
+normal density. Since φ′(x) = −xφ(x), integration by parts gives
+
+E f′(G) =
+�
+
+R
+f′(x)φ(x) dx =
+�
+
+R
+xf(x)φ(x) dx = E Gf(G)
+
+for every continuously differentiable function f such that f and f′ are bounded. Thus, if Sn
+were Gaussian, the difference
+
+E f′(Sn) −E Snf(Sn)
+(6.3)
+
+would vanish. Stein’s method turns this observation around: if (6.3) is small for suitable
+functions f, then Sn is approximately Gaussian.
+
+6.3. Stein’s ODE. Consider the following ordinary differential equation, which we call
+Stein’s ODE:
+
+f′(x) −xf(x) = h(x) −E h(G),
+where G ∼N(0, 1),
+(6.4)
+
+where h = ha is the ε-smoothing function (6.2). Suppose for the moment that this ODE has
+a well-behaved solution f; we will verify this in Sections 8 and 9. Substitute x = Sn and take
+expectations:
+
+E f′(Sn) −E Snf(Sn) = E h(Sn) −E h(G).
+(6.5)
+
+Together with smoothing, this identity suggests that
+���P{Sn ≤a} −P{G ≤a}
+���≈
+���E h(Sn) −E h(G)
+���=
+���E Snf(Sn) −E f′(Sn)
+���.
+
+Our new task is therefore to show that
+
+E Snf(Sn) ≈E f′(Sn).
+(6.6)
+
+We have reduced the problem to estimating a quantity intrinsic to the sum Sn.
+
+
+TWO FRIENDLY PROOFS OF THE BERRY–ESSEEN THEOREM
+11
+
+6.4. Expansion. Let us unpack the key quantity
+
+E Snf(Sn) =
+
+n
+�
+
+k=1
+E Xkf(Sn)
+(6.7)
+
+and estimate its terms separately, beginning with E Xnf(Sn). The factors Xn and f(Sn) are
+not independent because Sn contains Xn. Let us isolate this summand:
+
+Sn = Sn−1 + Xn
+
+The fundamental theorem of calculus gives
+
+f(Sn) = f(Sn−1) + Xn
+
+�1
+
+0
+f′(Sn−1 + tXn) dt.
+
+6.5. Approximation. Multiply both sides by Xn and take expectations:
+
+E Xnf(Sn) =
+E Xnf(Sn−1)
+�
+��
+�
+=0 by independence
+
++ E X2
+n
+
+�1
+
+0
+f′(Sn−1 + tXn)
+�
+��
+�
+≈f′(Sn−1) if f′′ is controlled
+
+dt
+(6.8)
+
+≈E X2
+nf′(Sn−1)
+(6.9)
+
+= σ2
+n E f′(Sn−1)
+(by independence, denoting σ2
+k = E X2
+k)
+
+≈σ2
+n E f′(Sn)
+(if f′′ is controlled).
+(6.10)
+
+The same argument applies to every term, giving
+
+E Xkf(Sn) ≈σ2
+k E f′(Sn),
+k = 1, . . . , n.
+
+Summing these estimates and using (6.7), we obtain
+
+E Snf(Sn) ≈
+
+n
+�
+
+k=1
+σ2
+k E f′(Sn) = E f′(Sn)
+
+because the variances σ2
+k = Var(Xk) sum to 1. This is precisely (6.6), and it completes the
+heuristic “proof”.
+
+6.6. How to make this rigorous? Apart from smoothing, which we handle in Section 7,
+the heuristic argument relies on one unverified approximation:
+
+f′(Sn−1 + y) ≈f′(Sn−1).
+(6.11)
+
+We used this approximation in (6.8) for y = tXn and in (6.10) for y = Xn. To verify this
+approximation, it is enough that y is small (which is intuitively true: Xn is just one term of
+a large sum Sn, so we expect it to be relatively small on average) and that f′′ is controlled.
+Here, f′′ is the second derivative of a solution to Stein’s ODE (6.4). We solve the ODE
+explicitly in Section 8 and study its solution in Section 9.
+This leads to Lemma 10.2, a
+rigorous version of (6.11).
+We now carry out these steps.
+
+
+12
+ROMAN VERSHYNIN
+
+7. Smoothing
+
+We can write the cumulative distribution function of a random variable X as
+
+P{X ≤a} = E 1(−∞,a](X).
+
+We approximate the indicator function 1(−∞,a] by the ε-smoothing function ha defined in
+(6.2).
+For the moment, think of ε as a fixed small quantity.
+We will eventually choose
+ε = C �n
+k=1 E|Xk|3, which gives the error in the Berry–Esseen theorem. We first record the
+error introduced by smoothing.
+
+Lemma 7.1 (Smoothing). Let ha be the ε-smoothing function at a, and let X and Y be
+random variables. Assume that the probability density function of Y is bounded by M. Then
+
+sup
+a∈R
+
+���P{X ≤a} −P{Y ≤a}
+���≤sup
+a∈R
+
+���E ha(X) −E ha(Y )
+���+ Mε.
+
+Proof. Note the pointwise inequality
+
+1(−∞,a] ≤ha ≤1(−∞,a+ε].
+(7.1)
+
+Then
+
+P{X ≤a} −P{Y ≤a} ≤P{X ≤a} −P{Y ≤a + ε} + Mε
+
+= E 1(−∞,a](X) −E 1(−∞,a+ε](Y ) + Mε
+
+≤E ha(X) −E ha(Y ) + Mε.
+
+For the reverse bound, apply (7.1) with a −ε in place of a. The same argument gives
+
+P{Y ≤a} −P{X ≤a} ≤E ha−ε(Y ) −E ha−ε(X) + Mε.
+
+Combining the two bounds completes the proof.
+□
+
+8. Solving Stein’s ODE
+
+Fix a bounded continuous function h : R →R and consider Stein’s ODE (6.4), restated
+here:
+f′(x) −xf(x) = h(x) −E h(G),
+where G ∼N(0, 1).
+(8.1)
+
+We solve this ODE by the method of integrating factors. Multiplying both sides by e−x2/2
+
+gives
+�
+e−x2/2f(x)
+�′
+= e−x2/2�
+h(x) −E h(G)
+�
+.
+
+The fundamental theorem of calculus now gives
+
+e−x2/2f(x) =
+�x
+
+−∞
+e−y2/2�
+h(y) −E h(G)
+�
+dy + C.
+
+Setting C = 0, we obtain the canonical solution
+
+f(x) = ex2/2
+�x
+
+−∞
+e−y2/2�
+h(y) −E h(G)
+�
+dy.
+(8.2)
+
+Any other solution differs from this one by Cex2/2, so the canonical solution is the unique
+bounded solution. Moreover, the total integral is zero:
+
+1
+√
+
+2π
+
+�∞
+
+−∞
+e−y2/2�
+h(y) −E h(G)
+�
+dy = E h(G) −E h(G) = 0,
+
+
+TWO FRIENDLY PROOFS OF THE BERRY–ESSEEN THEOREM
+13
+
+and therefore we may rewrite (8.2) as
+
+f(x) = −ex2/2
+�∞
+
+x
+e−y2/2�
+h(y) −E h(G)
+�
+dy.
+(8.3)
+
+9. Properties of the solution of Stein’s ODE
+
+The two formulas (8.2) and (8.3) give three simple bounds on the canonical solution of
+Stein’s ODE.
+
+Lemma 9.1 (Bounds on the solution of Stein’s ODE). Let h : R →[0, 1] be continuous.
+Then the canonical solution (8.2) of Stein’s ODE (8.1) satisfies, for every x ∈R,
+
+|f(x)| ≤2;
+|xf(x)| ≤1;
+|f′(x)| ≤2.
+(9.1)
+
+Proof. First, assume that x > 0. Since 0 ≤h ≤1 everywhere, (8.3) gives
+
+|f(x)| ≤ex2/2
+�∞
+
+x
+e−y2/2 dy =
+�∞
+
+0
+e−xt−t2/2 dt
+
+by the change of variables y = x + t. Dropping the term −xt gives
+
+|f(x)| ≤
+�∞
+
+0
+e−t2/2 dt =
+�π
+
+2 ≤2,
+
+proving the first bound in (9.1) for x > 0. Dropping the term −t2/2 instead gives
+
+|f(x)| ≤
+�∞
+
+0
+e−xt dt = 1
+
+x,
+
+proving the second bound in (9.1) for x > 0. For x ≤0, the same argument applies using
+(8.2) in place of (8.3).
+Finally, Stein’s ODE (8.1) and the triangle inequality give
+
+|f′(x)| ≤|xf(x)| + |h(x) −E h(G)|.
+
+The first term on the right is bounded by 1, as proved above. The second is also bounded by
+1 because the range of h is [0, 1]. Hence |f′(x)| ≤2.
+□
+
+We return to (6.11), where we need to show that f′ varies slowly. For this, we examine f′′.
+We now specialize to the functions needed in the proof. Let h = ha be the ε-smoothing
+function at a defined in (6.2). This function is differentiable except at a and a + ε. Differen-
+tiating Stein’s ODE (8.1) gives
+
+f′′(x) = f(x) + xf′(x) + h′(x)
+
+whenever x ̸= a, a + ε. By (9.1), |f(x)| ≤2 and |f′(x)| ≤2, while h′(x) = −1
+
+ε1[a,a+ε](x)
+wherever the derivative exists. Thus
+
+|f′′(x)| ≤2 + 2|x| + 1
+
+ε1[a,a+ε](x).
+(9.2)
+
+A bound on f′′ controls the increments of f′. Indeed, the fundamental theorem of calculus
+gives1
+
+f′(x + y) −f′(x) =
+�x+y
+
+x
+f′′(t) dt = y
+�1
+
+0
+f′′(x + sy) ds.
+
+1More precisely, the smoothing function h = ha is Lipschitz and f is continuously differentiable. Hence,
+by (8.1), f ′ = xf + h −E h(G) is locally absolutely continuous. It follows that f ′′ = f + xf ′ + h′ almost
+everywhere, and the fundamental theorem of calculus applies to f ′.
+
+
+14
+ROMAN VERSHYNIN
+
+Thus,
+
+|f′(x + y) −f′(x)| ≤|y|
+�1
+
+0
+|f′′(x + sy)| ds.
+
+Substituting x + sy for x in (9.2) and using |x + sy| ≤|x| + |y|, we obtain
+
+|f′(x + y) −f′(x)| ≤|y|
+�
+2 + 2|x| + 2|y| + 1
+
+ε
+
+�1
+
+0
+1[a,a+ε](x + sy) ds
+�
+.
+(9.3)
+
+This simplifies to the following deterministic bound.
+
+Lemma 9.2 (A deterministic increment bound). Let h = ha be the ε-smoothing function at
+a, defined in (6.2). Then the canonical solution (8.3) of Stein’s ODE (8.1) satisfies for all
+x, y ∈R:
+
+|f′(x + y) −f′(x)| ≤4|y|
+�
+1 + |x| + 1
+
+ε
+
+�1
+
+0
+1[a,a+ε](x + sy) ds
+�
+.
+(9.4)
+
+Proof. If |y| ≤1, the conclusion follows from (9.3) after replacing 2|y| by 2.
+If |y| > 1,
+the left-hand side of (9.4) is bounded by 4 by (9.1), while its right-hand side is at least
+4|y| > 4.
+□
+
+10. Preparing the induction
+
+We will soon average the deterministic increment bound over the partial sum Sn−1. But
+before that, let us introduce the error term in Berry-Esseen theorem we want to bound:
+
+Definition 10.1 (The error in the Berry–Esseen theorem). Let δn(ρ) denote the infimum of
+all δ > 0 such that
+sup
+a∈R
+
+���P{Sn ≤a} −P{G ≤a}
+���≤δ
+
+whenever Sn = X1 + · · · + Xn is a sum of independent random variables satisfying
+
+E Xk = 0,
+
+n
+�
+
+k=1
+E X2
+k = 1,
+
+n
+�
+
+k=1
+E|Xk|3 ≤ρ3.
+(10.1)
+
+Our goal is to prove that2
+
+δn(ρ) ≤Cρ3
+(10.2)
+for every n and ρ, where C is an absolute constant.
+We may restrict ourselves to the case where no single summand accounts for more than
+half of the total variance:
+
+E X2
+k ≤1
+
+2
+for every k = 1, . . . , n.
+(10.3)
+
+Indeed, if E X2
+k > 1
+
+2 for some k, then
+
+n
+�
+
+j=1
+E|Xj|3 ≥E|Xk|3 ≥
+�
+E X2
+k
+�3/2 > 2−3/2 > 1
+
+3.
+
+Since δn(ρ) ≤1 holds trivially, the desired bound (10.2) is then immediate as long as we
+choose C ≥3. Thus, it remains to consider the case (10.3).
+We are now ready for a rigorous version of the key approximation (6.11).
+
+2Here and throughout the rest of the proof, the notation a ≲b means a ≤Cb for an absolute constant C.
+
+
+TWO FRIENDLY PROOFS OF THE BERRY–ESSEEN THEOREM
+15
+
+Lemma 10.2 (An averaged increment bound). Let h = ha be the ε-smoothing function at a
+defined in (6.2), and let f be the canonical solution (8.2) of Stein’s ODE. Suppose that
+
+Sn = X1 + . . . + Xn,
+n ≥2,
+
+is a sum of independent random variables satisfying (10.1) and (10.3). Then, for every fixed
+y ∈R,
+
+E
+���f′(Sn−1 + y) −f′(Sn−1)
+���≤C|y|
+�
+1 + δn−1(2ρ)
+
+ε
+
+�
+.
+
+Proof. Apply Lemma 9.2 with x = Sn−1 and take expectations:
+
+E
+���f′(Sn−1 + y) −f′(Sn−1)
+���≲|y|
+�
+1 + E|Sn−1| + 1
+
+ε
+
+�1
+
+0
+P
+�
+Sn−1 + sy ∈[a, a + ε]
+�
+ds
+�
+(10.4)
+
+By Cauchy–Schwarz,
+
+E|Sn−1| ≤
+�
+
+Var(Sn−1) ≤
+�
+
+Var(Sn) = 1.
+(10.5)
+
+It remains to bound P
+�
+Sn−1 + sy ∈[a, a + ε]
+�
+. Set
+
+σ2 := Var(Sn−1) =
+
+n−1
+�
+
+k=1
+E X2
+k ≥1
+
+2
+
+where the last inequality follows from (10.1) and (10.3). Thus, Sn−1/σ is a sum of n −1
+independent mean-zero random variables Xk/σ. Their second moments sum to 1, and the
+sum of their third moments is at most (ρ/σ)3. Comparing the distribution functions at the
+two endpoints of the interval introduces two error terms. Therefore,
+
+P
+�
+Sn−1 + sy ∈[a, a + ε]
+�
+= P
+�
+Sn−1/σ ∈[b, b + ε/σ]
+�
+(where b = (a −sy)/σ)
+
+≤P
+�
+G ∈[b, b + ε/σ]
+�
++ 2δn−1(ρ/σ)
+(by Definition 10.1)
+
+≲ε + δn−1(2ρ)
+
+because σ ≥1/2 and the density of G is bounded by an absolute constant. Substituting this
+estimate and (10.5) into (10.4) gives
+
+E
+���f′(Sn−1 + y) −f′(Sn−1)
+���≲|y|
+�
+1 + 1
+
+ε
+�
+ε + δn−1(2ρ)
+��
+,
+
+which proves the lemma.
+□
+
+The appearance of δn−1 is the key. We have used the quantity we want to estimate, but
+with one fewer summand, so induction on n becomes possible.
+
+11. Proof of Theorem 0.1
+
+We now combine smoothing, the averaged increment bound, and induction on the number
+of summands. For each a ∈R, let ha be the ε-smoothing function at a defined in (6.2), and
+let fa be the corresponding canonical solution (8.3) of Stein’s ODE. Then
+
+sup
+a∈R
+
+���P{Sn ≤a} −P{G ≤a}
+���≤sup
+a∈R
+
+���E ha(Sn) −E ha(G)
+���+ Cε
+
+= sup
+a∈R
+
+���E Snfa(Sn) −E f′
+a(Sn)
+���+ Cε.
+(11.1)
+
+The first step is Lemma 7.1; the second is Stein’s ODE, as in (6.5).
+
+
+16
+ROMAN VERSHYNIN
+
+Fix a ∈R and suppress the subscript in fa. We again unpack the key quantity
+
+E Snf(Sn) =
+
+n
+�
+
+k=1
+E Xkf(Sn).
+(11.2)
+
+Set
+σ2
+k := E X2
+k.
+Expanding f(Sn) around Sn−1 as in the heuristic argument (6.8)–(6.10), we obtain
+���E Xnf(Sn) −σ2
+n E f′(Sn)
+���≤A + B,
+(11.3)
+
+where
+
+A = E X2
+n
+
+�1
+
+0
+
+���f′(Sn−1 + tXn) −f′(Sn−1)
+���dt;
+B = σ2
+n E
+���f′(Sn) −f′(Sn−1)
+���.
+
+(A is the approximation error in (6.9), and B is the approximation error in (6.10).)
+To bound A, condition on Xn and write En[·] := E[· | Xn]. The law of total expectation
+gives
+
+A = E
+�
+X2
+n
+
+�1
+
+0
+En
+���f′(Sn−1 + tXn) −f′(Sn−1)
+���
+�
+��
+�
+≲|Xn|(1+δn−1(2ρ)/ε) by Lemma 10.2
+
+dt
+�
+≲E|Xn|3
+����
+=:ρ3n
+
+�
+1 + δn−1(2ρ)
+
+ε
+
+�
+.
+
+Similarly,
+
+B = σ2
+n E
+�
+En
+���f′(Sn−1 + Xn) −f′(Sn−1)
+���
+�
+��
+�
+≲|Xn|(1+δn−1(2ρ)/ε) by Lemma 10.2
+
+�
+≲σ2
+n E|Xn|
+�
+��
+�
+≤ρ3n
+
+�
+1 + δn−1(2ρ)
+
+ε
+
+�
+.
+
+Here we used σn ≤ρn and E|Xn| ≤ρn. Combining the bounds for A and B controls (11.3).
+The same computation applies to every k: relabel the summands so that Xk is last. Thus,
+���E Xkf(Sn) −σ2
+k E f′(Sn)
+���≲ρ3
+k
+
+�
+1 + δn−1(2ρ)
+
+ε
+
+�
+.
+
+Summing these estimates in (11.2) and using �n
+k=1 σ2
+k = 1, we obtain
+���E Snf(Sn) −E f′(Sn)
+���≲ρ3
+�
+1 + δn−1(2ρ)
+
+ε
+
+�
+for any ρ such that
+
+n
+�
+
+k=1
+ρ3
+k ≤ρ3.
+
+This bound is uniform in a ∈R. Substituting it into (11.1) and restoring the subscript a, we
+obtain
+
+sup
+a∈R
+
+���P{Sn ≤a} −P{G ≤a}
+���≲ρ3
+�
+1 + δn−1(2ρ)
+
+ε
+
+�
++ ε.
+
+By Definition 10.1,
+
+δn(ρ) ≤Cρ3
+�
+1 + δn−1(2ρ)
+
+ε
+
+�
++ Cε.
+
+Choosing ε := 10Cρ3, we get
+
+δn(ρ) ≤C′ρ3 + δn−1(2ρ)
+
+10
+,
+
+where C′ ≥1 is an absolute constant. This recurrence closes the induction. Assume that
+
+δn−1(ρ) ≤5C′ρ3
+for any ρ.
+
+
+TWO FRIENDLY PROOFS OF THE BERRY–ESSEEN THEOREM
+17
+
+Then
+
+δn(ρ) ≤C′ρ3 + 5C′ · 8ρ3
+
+10
+= 5C′ρ3
+for any ρ,
+
+which verifies the induction step. The base case is immediate: δ1(ρ) ≤1, while the assump-
+tions give
+ρ3 ≥E|X1|3 ≥(E X2
+1)3/2 = 1.
+The Berry–Esseen theorem is proved.
+□
+
+Acknowledgements
+
+I am grateful to Pedro Abdalla and Guangyi Zou, who kindly read an early version of the
+Fourier-analytic proof and helped eliminate several typos and inaccuracies.
+
+Statement on AI use. The mathematical arguments and core exposition in this paper are
+entirely the author’s own. After the two notes were completed, ChatGPT Pro was used as
+an “artificial referee” to review the mathematics, polish the writing, and assist in combining
+the notes.
+
+References
+
+[1] A. C. Berry, The accuracy of the Gaussian approximation to the sum of independent variates, Transactions
+of the AMS 49 (1941), 122–136.
+[2] E. Bolthausen, An estimate of the remainder in a combinatorial central limit theorem, Zeitschrift f¨ur
+Wahrscheinlichkeitstheorie und verwandte Gebiete 66 (1984), 379–386.
+[3] L. H. Y. Chen, L. Goldstein, and Q.-M. Shao, Normal approximation by Stein’s method, Probability and
+its Applications, Springer, 2011.
+[4] C.-G. Esseen, On the Liapunoff limit of error in the theory of probability, Arkiv f¨or Matematik, Astronomi
+och Fysik A28 (1942), 1–19.
+[5] C.-G. Esseen, Fourier analysis of distribution functions. A mathematical study of the Laplace–Gaussian
+law, Acta Math. 77 (1945), 1–125.
+[6] W. Feller, An introduction to probability theory and its applications, 2nd ed., Vol. II, John Wiley & Sons,
+1971.
+[7] N. Ross, Fundamentals of Stein’s method, Probability Surveys 8 (2011), 210–293.
+
+Department of Mathematics, University of California, Irvine, U.S.A.
+Email address: rvershyn@uci.edu
+
+

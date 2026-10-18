@@ -2,7 +2,7 @@
 id: thm-conditional-kl-is-measurable
 kind: theorem
 title: "Conditional KL is measurable for supplied kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

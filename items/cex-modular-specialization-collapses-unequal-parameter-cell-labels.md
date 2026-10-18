@@ -2,7 +2,7 @@
 id: cex-modular-specialization-collapses-unequal-parameter-cell-labels
 kind: counterexample
 title: A characteristic-two specialization collapses four weighted cell labels
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

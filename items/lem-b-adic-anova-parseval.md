@@ -21,8 +21,6 @@ axiom_use: "Assume Countable Choice only through the stated L2 Hilbert and Parse
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Art B. Owen, Monte Carlo Variance of Scrambled Net Quadrature, §§6–7"

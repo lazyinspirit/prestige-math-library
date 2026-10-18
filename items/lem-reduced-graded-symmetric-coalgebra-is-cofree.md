@@ -2,7 +2,7 @@
 id: lem-reduced-graded-symmetric-coalgebra-is-cofree
 kind: lemma
 title: "The reduced graded symmetric coalgebra is cofree conilpotent cocommutative"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

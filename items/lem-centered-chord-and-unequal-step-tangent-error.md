@@ -14,8 +14,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Weinan E, Weiqing Ren, and Eric Vanden-Eijnden, String method for the study of rare events"

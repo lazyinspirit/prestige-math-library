@@ -2,7 +2,7 @@
 id: lem-modular-hopf-matrix-squared
 kind: lemma
 title: "The modular Hopf-link matrix squares to D² times duality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

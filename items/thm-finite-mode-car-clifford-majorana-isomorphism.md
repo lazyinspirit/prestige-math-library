@@ -2,7 +2,7 @@
 id: thm-finite-mode-car-clifford-majorana-isomorphism
 kind: theorem
 title: Finite-Mode CAR and the Complex Clifford Algebra via Majorana Generators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

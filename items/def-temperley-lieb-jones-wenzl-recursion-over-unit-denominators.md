@@ -2,7 +2,7 @@
 id: def-temperley-lieb-jones-wenzl-recursion-over-unit-denominators
 kind: definition
 title: "Jones–Wenzl recursion over unit quantum integers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

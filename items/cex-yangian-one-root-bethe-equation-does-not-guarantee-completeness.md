@@ -2,7 +2,7 @@
 id: cex-yangian-one-root-bethe-equation-does-not-guarantee-completeness
 kind: counterexample
 title: "A one-root Bethe equation need not produce a complete set of vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -16,8 +16,6 @@ axiom_use: No choice principle is used; the result combines the proved finite-di
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Ernst Hairer, course notes, Chapter III: Équations Différentielles Ordinaires, §§III.2–III.3"

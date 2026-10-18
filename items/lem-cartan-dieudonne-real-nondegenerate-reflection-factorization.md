@@ -2,7 +2,7 @@
 id: lem-cartan-dieudonne-real-nondegenerate-reflection-factorization
 kind: lemma
 title: Cartan–Dieudonné factorization over a real quadratic space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations

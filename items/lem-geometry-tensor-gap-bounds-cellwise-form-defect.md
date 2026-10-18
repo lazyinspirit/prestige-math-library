@@ -11,8 +11,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: Jean-Luc Guermond, MATH 661 Fall 2025, Part VI, Chapter 27, Error analysis with variational crimes

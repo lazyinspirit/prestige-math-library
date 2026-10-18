@@ -1,0 +1,2407 @@
+3132
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+Noisy Network Coding
+
+Sung Hoon Lim, Student Member, IEEE, Young-Han Kim, Member, IEEE, Abbas El Gamal, Fellow, IEEE, and
+Sae-Young Chung, Senior Member, IEEE
+
+Abstract—A noisy network coding scheme for communicating
+messages between multiple sources and destinations over a general
+noisy network is presented. For multi-message multicast networks,
+the scheme naturally generalizes network coding over noiseless
+networks by Ahlswede, Cai, Li, and Yeung, and compress-forward
+coding for the relay channel by Cover and El Gamal to discrete
+memoryless and Gaussian networks. The scheme also extends the
+results on coding for wireless relay networks and deterministic
+networks by Avestimehr, Diggavi, and Tse, and coding for wireless
+erasure networks by Dana, Gowaikar, Palanki, Hassibi, and Ef-
+fros. The scheme involves lossy compression by the relay as in the
+compress-forward coding scheme for the relay channel. However,
+unlike previous compress-forward schemes in which independent
+messages are sent over multiple blocks, the same message is sent
+multiple times using independent codebooks as in the network
+coding scheme for cyclic networks. Furthermore, the relays do
+not use Wyner-Ziv binning as in previous compress-forward
+schemes, and each decoder performs simultaneous decoding of
+the received signals from all the blocks without uniquely decoding
+the compression indices. A consequence of this new scheme is
+that achievability is proved simply and more generally without
+resorting to time expansion to extend results for acyclic networks
+to networks with cycles. The noisy network coding scheme is
+then extended to general multi-message networks by combining
+it with decoding techniques for the interference channel. For the
+Gaussian multicast network, noisy network coding improves the
+previously established gap to the cutset bound. We also demon-
+strate through two popular Gaussian network examples that noisy
+network coding can outperform conventional compress-forward,
+amplify-forward, and hash-forward coding schemes.
+
+Index Terms—Compress-forward, discrete memoryless net-
+work, Gaussian network, interference relay channel, network
+coding, noisy network coding, relaying, two-way relay channel.
+
+I. INTRODUCTION
+C
+ONSIDER the
+-node discrete memoryless network de-
+picted in Fig. 1. Each node wishes to send a message to
+a set of destination nodes while acting as a relay for messages
+from other nodes. What is the capacity region of this network,
+
+Manuscript received March 23, 2010; revised October 15, 2010; accepted Jan-
+uary 10, 2011. Date of current version April 20, 2011. This work was supported
+in part by the DARPA ITMANET program, in part by the MKE/KEIT IT R&D
+program KI001835, and in part by the NSF CAREER Grant CCF-0747111. The
+material in this paper was presented in part at the IEEE Information Theory
+Workshop, Cairo, Egypt, January 2010, and in part at the IEEE International
+Symposium on Information Theory, Austin, TX, June 2010.
+S. H. Lim and S.-Y. Chung are with the Department of Electrical Engineering,
+Korea Advanced Institute of Science and Technology (KAIST), Daejeon 305-
+701, Korea (e-mail: sunghlim@kaist.ac.kr; sychung@ee.kaist.ac.kr).
+Y.-H. Kim is with the Department of Electrical and Computer Engineering,
+University of California, San Diego, La Jolla, CA 92093 USA (e-mail:
+yhk@ucsd.edu).
+A. El Gamal is with the Department of Electrical Engineering, Stanford Uni-
+versity, Stanford, CA 94305 USA (e-mail: abbas@ee.stanford.edu).
+Communicated by S. Ulukus, Associate Editor for the special issue on "In-
+terference Networks".
+Color versions of one or more of the figures in this paper are available online
+at http://ieeexplore.ieee.org.
+Digital Object Identifier 10.1109/TIT.2011.2119930
+
+Fig. 1. N-node discrete memoryless network.
+
+that is, the set of rates at which the nodes can reliably commu-
+nicate their messages? What is the coding scheme that achieves
+the capacity region? These questions are at the heart of network
+information theory, yet complete answers remain elusive.
+Some progress has been made toward answering these ques-
+tions in the past forty years. In [1] and [2], a general cutset
+outer bound on the capacity region of this network was estab-
+lished. This bound generalizes the max-flow min-cut theorem
+for noiseless single-message unicast networks [3], [4], and has
+been shown to be tight for several other classes of networks.
+In their seminal paper on network coding [5], Ahlswede, Cai,
+Li, and Yeung showed that the capacity of noiseless multicast
+networks coincides with the cutset bound, thus generalizing the
+max-flow min-cut theorem to multiple destinations. Each relay
+in the network coding scheme sends a function of its incoming
+signals over each outgoing link instead of simply forwarding
+incoming signals. Their proof of the network coding theorem
+is in two steps. For acyclic networks, the relay mappings are
+randomly generated and it is shown that the message is correctly
+decoded with high probability provided the rate is below the
+cutset bound. This proof is then extended to cyclic networks
+by constructing an acyclic time-expanded network and relating
+achievable rates and codes for the time-expanded network to
+those for the original cyclic network.
+The network coding theorem has been extended in several
+directions. Dana, Gowaikar, Palanki, Hassibi, and Effros [6]
+studied the multi-message multicast erasure network as a
+simple model for a wireless data network with packet loss.
+They showed that for the case when the network erasure pattern
+is known at the destination nodes, the capacity region coincides
+with the cutset bound and is achieved via network coding.
+Ratnakar and Kramer [7] extended network coding to charac-
+terize the multicast capacity for single-message deterministic
+networks with broadcast but no interference at the receivers.
+Avestimehr, Diggavi, and Tse further extended this result to
+deterministic networks with broadcast and interference to
+obtain a lower bound on the multicast capacity that coincides
+with the cutset bound when each channel output is a linear
+
+0018-9448/$26.00 © 2011 IEEE
+
+
+LIM et al.: NOISY NETWORK CODING
+3133
+
+function of the input signals over a finite field. Their proof
+again involves two steps. As in the original proof of the network
+coding theorem, random coding is used to establish the lower
+bound for layered deterministic networks. A time-expansion
+technique is then used to extend the result to arbitrary nonlay-
+ered deterministic networks. Their coding scheme is further
+extended to layered and nonlayered Gaussian networks via a
+quantize-map–forward (QMF) scheme in which scalar quan-
+tization transforms a Gaussian network into a deterministic
+network. A bound on the achievable rate of the QMF scheme
+is then obtained from a multi-letter expression. This bound is
+shown to be within a constant gap of the cutset bound.
+In an earlier and seemingly unrelated line of investigation,
+van der Meulen [8] introduced the relay channel with a single
+source
+, single destination
+, and a single relay with trans-
+mitter-receiver pair
+. Although the capacity for this
+channel is still not known in general, several nontrivial upper
+and lower bounds have been developed. In [9], Cover and El
+Gamal proposed the compress-forward coding scheme in which
+the relay compresses its noisy observation of the source signal
+and forwards the compressed description to the destination.
+Despite its simplicity, compress-forward was shown to be
+optimal for classes of deterministic [10] and modulo-sum [11]
+relay channels. The Cover-El Gamal compress-forward lower
+bound on capacity has the form
+
+(1)
+
+where the maximum is over all pmfs
+such that
+. This lower bound
+was established using a block Markov coding scheme—in each
+block the sender transmits a new message and the relay com-
+presses its received signal and sends the bin index of the com-
+pression index to the receiver using Wyner-Ziv coding [12]. De-
+coding is performed sequentially. At the end of each block, the
+receiver first decodes the compression index and then uses it to
+decode the message sent in the previous block. Kramer, Gastpar,
+and Gupta [13] used an extension of this scheme to establish a
+compress-forward lower bound on the capacity of general relay
+networks. Around the same time, El Gamal, Mohseni, and Za-
+hedi [14] put forth the equivalent characterization of the com-
+press-forward lower bound
+
+(2)
+
+where the maximum is over all pmfs
+.
+As we will see, this characterization is a special case of a more
+general extension of compress-forward to networks.
+The above two lines of investigation have motivated us to de-
+velop the noisy network coding scheme that unifies and extends
+the above results. On the one hand, our scheme naturally gener-
+alizes compress-forward to noisy networks. The resulting inner
+bound on the capacity region extends the equivalent character-
+ization in (2), rather than the original characterization in (1).
+On the other hand, our scheme includes network coding and its
+variants as special cases. Hence, while the coding schemes for
+deterministic networks and erasure networks can be viewed as
+
+bottom-up generalizations of network coding to more compli-
+cated networks, our coding scheme represents a top-down ap-
+proach for general noisy networks.
+The noisy network coding scheme employs lossy compres-
+sion by the relay as in the previous compress-forward coding
+schemes in [9] and [13]. However, unlike these schemes, where
+different messages are sent over multiple blocks and decoded
+one message at a time, each source node in noisy network
+coding transmits the same message over multiple blocks using
+independently generated codebooks. The relay operation is
+also simpler than previous compress-forward schemes—the
+compression index of the received signal in each block is sent
+without Wyner-Ziv binning. After receiving the signals from
+all the blocks, each destination node performs simultaneous
+decoding of the messages without uniquely decoding the com-
+pression indices. As we will demonstrate throughout the paper,
+these differences result in better performance than the previous
+compress-forward schemes [13], [15]–[18] for networks with
+more than one relay node or more than one message.
+Note that each of the three key ideas involved in our scheme
+has been previously used in other network information theory
+problems.
+1) Sending the same message over multiple blocks has been
+used implicitly in the time-expansion technique for cyclic
+noiseless networks [5] and nonlayered deterministic net-
+works [19]. Unlike these time-expansion proofs, however,
+our achievability proof does not require a two-step ap-
+proach that depends on the network topology.
+2) Relaying the compression indices without binning has
+again used implicitly in network coding and its extensions.
+3) Simultaneous nonunique decoding has been used in var-
+ious settings, e.g., interference channels [20] and broadcast
+channels [21].
+The key contribution of the paper lies in the manner in which
+these three ideas are combined and in the careful analysis of the
+corresponding probability of error, which yields a single-letter
+characterization of the achievable rate. In fact, using only two
+of these three ideas fails to achieve the same performance as
+noisy network coding. The simplicity of our scheme makes it
+straightforward to combine with decoding techniques for in-
+terference channels. Indeed, the noisy network coding scheme
+can be viewed as transforming a multi-hop relay network into a
+single-hop interference network where the channel outputs are
+compressed versions of the received signals. We develop two
+coding schemes for general multiple source networks based on
+this observation. At one extreme, noisy network coding is com-
+bined with decoding all messages, while at the other, interfer-
+ence is treated as noise.
+We apply these noisy network coding schemes to Gaussian
+networks. For the multi-message multicast case, noisy network
+coding yields a single-letter inner bound that is within a tighter
+gap to the cutset bound than that of the QMF scheme by Aves-
+timehr, Diggavi, and Tse [19] and its extension by Perron [22].
+The reason for the tighter gap is that the QMF scheme uses
+scalar quantization and the bound on the achievable rate is ob-
+tained from a multi-letter expression. In comparison, noisy net-
+work coding uses a lossy source coding scheme (vector quan-
+tization), which, together with more general information theo-
+
+
+3134
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+retic analysis, enables us to obtain the exact single-letter expres-
+sion of the achievable rate instead of a bound. We also show that
+noisy network coding can outperform other specialized schemes
+for two-way relay channels [15], [16] and interference relay
+channels [17], [18].
+The rest of the paper is organized as follows. In the next sec-
+tion, we formally define the problem of communicating mul-
+tiple messages over a general network and discuss the main re-
+sults. We also show that previous results on network coding are
+special cases of our main theorems and compare noisy network
+coding to other schemes. In Section III, we present the noisy
+network coding scheme for multi-message multicast networks.
+In Section IV, the scheme is extended to general multi-mes-
+sage networks. Results on Gaussian networks are discussed in
+Section V.
+Throughout the paper, we follow the notation in [23]. In
+particular, a sequence of random variables with node index
+
+and time index
+is denoted as
+. A tuple of random variables is de-
+noted as
+.
+
+II. PROBLEM SETUP AND MAIN RESULTS
+
+The
+-node
+discrete
+memoryless
+network
+(DMN)
+depicted in Fig. 1 consists
+of
+sender-receiver alphabet pairs
+,
+, and
+a collection of conditional pmfs
+.
+Each node
+wishes to send a message
+to a set of destination nodes,
+. Formally, a
+code for the DMN consists of
+message
+sets
+, a set of encoders with encoder
+that assigns an input symbol
+to each pair
+for
+, and a set of decoders with decoder
+that assigns message estimates
+to
+each
+, where
+is the set
+of nodes that send messages to destination . For simplicity we
+assume
+for all destination nodes.
+We assume that the messages
+,
+, are indepen-
+dent of each other and each message is uniformly distributed
+over its message set. The average probability of error is defined
+as
+
+A rate tuple
+is said to be achievable if there exists
+a sequence of
+codes with
+as
+. The capacity region of the DMN is the closure of the
+set of achievable rate tuples.
+We are ready to state our main results.
+
+A. Multi-Message Multicast Networks
+
+In Section III, we establish the following noisy network
+coding theorem for multicasting multiple messages over a
+DMN. The coding scheme and techniques used to prove this
+theorem, which we highlighted earlier, constitute the key con-
+tributions of our paper.
+
+Theorem 1: Let
+. A rate tuple
+is achievable for the DMN
+if
+
+(3)
+
+for all subsets
+such that
+for some pmf
+, where
+.
+This inner bound has a similar structure to the cutset bound
+
+(4)
+
+for all
+such that
+. The first term
+of (3), however, has
+replaced by the “compressed” version
+. Another difference between the bounds is the negative term
+appearing in (3), which quantifies the rate requirement to convey
+the compressed version. In addition, the maximum in (3) is only
+over independent
+.
+Theorem 1 can be specialized to several important network
+models as follows:
+Noiseless Networks: Consider a noiseless network modeled
+by a weighted directed cyclic graph
+, where
+is the set of nodes,
+is the set of
+edges (links), and
+is the set of
+link capacities. Each node
+transmits
+and receives
+. Thus, each
+link
+carries a symbol
+noiselessly from
+node
+to node
+with link capacity
+. Now for
+each cut
+separating some source and destination pair
+
+with equality if
+has a uniform product pmf.
+Hence, by evaluating the inner bound in Theorem 1 with the
+uniform pmf on
+and
+for all
+, it can be easily
+shown that the inner bound coincides with the cutset bound, and
+thus the capacity region is the set of rate tuples
+such that
+
+(5)
+
+for all
+with
+. This recovers previous
+results in [5].
+Relay Channels: Consider the relay channel
+.
+By taking
+,
+,
+, and
+, it can be readily checked that the inner bound in Theorem
+1 reduces to the alternative characterization of the compress-
+forward lower bound in (2).
+
+
+LIM et al.: NOISY NETWORK CODING
+3135
+
+Wireless Erasure Networks: Consider a wireless data net-
+work with packet loss modeled by a hypergraph
+with random input erasures. Each node
+broadcasts a
+symbol
+to a subset of nodes
+over a hyperedge (wireless
+broadcast link)
+and receives
+from
+nodes
+for
+, where
+
+with probability
+with probability
+.
+
+Note that the capacity of each hyperedge
+(with no era-
+sure) is
+. We assume that the erasures are inde-
+pendent of each other. Assume further that the erasure pattern of
+the entire network is known at each destination node. By eval-
+uating the inner bound in Theorem 1 with the uniform product
+pmf on
+and
+for all
+, it can be easily shown that
+the inner bound coincides with the cutset bound and the capacity
+region is the set of rate tuples
+such that
+
+(6)
+
+for all
+such that
+. This recovers the
+previous result in [6].
+Deterministic Networks: Suppose
+,
+. By setting
+,
+, Theorem
+1 implies that a rate tuple
+is achievable for the
+deterministic network if
+
+(7)
+
+for all
+such that
+for some pmf
+. This recovers previous results in [19] for
+the single-message case and in [22] for the multi-message case.
+Note that the inner bound in (7) is tight when the cutset bound is
+attained by the product pmf, for example, as in the deterministic
+network without interference [7] or the finite-field linear deter-
+ministic network
+[19].
+Note that in all the above special cases, the channel output at
+node
+can be expressed as a deterministic function of the input
+symbols
+and the destination output symbol
+,
+i.e.,
+
+(8)
+
+for every
+and
+. Under this semideterministic
+structure, the inner bound in Theorem 1 can be simplified by
+substituting
+for
+in (3) to obtain the
+following generalization.
+
+Corollary 1: Let
+. A rate tuple
+is achievable for the semideterministic DMN (8)
+if there exists some pmf
+such that
+
+(9)
+
+for all
+such that
+.
+We also show in Appendix E that our noisy network coding
+scheme can strictly outperform the extension of the original
+
+compress-forward scheme for the relay channel to networks in
+[13, Theorem 3].
+
+B. General Multi-Message Networks
+
+We extend the noisy network coding theorem to general
+multi-message networks. As a first step, we note that Theorem
+1 continues to hold for general networks with multicast com-
+pletion of destination nodes, that is, when every message is
+decoded by all destination nodes
+. Thus, we can
+obtain an inner bound on the capacity region for the DMN in
+the same form as (3) with
+.
+This multicast-completion inner bound can be improved by
+noting that noisy network coding transforms a multi-hop relay
+network
+into a single-hop interference network
+, where the effective channel output at decoder
+is
+and the compressed channel outputs
+are described to the destination nodes with some
+rate penalty. This observation leads to a modified decoding rule
+that does not require each destination to decode unintended
+messages correctly, resulting in the following improved inner
+bound.
+
+Theorem 2: A rate tuple
+is achievable for the
+DMN if
+
+(10)
+
+for all subsets
+such that
+for
+some pmf
+, where
+.
+The proof of this theorem is given in Section IV-A.
+As an alternative, each destination node can simply treat in-
+terference as noise rather than decoding it. Using this approach,
+we establish the following inner bound on the capacity region.
+
+Theorem 3: A rate tuple
+is achievable for the
+DMN if
+
+(11)
+
+for all subsets
+and
+such that
+and
+for some pmf
+, where
+.
+Unlike the coding schemes in Theorems 1 and 2 where each
+node maps both its own message and the compression index to
+a single codeword, here each node applies superposition coding
+[24] for forwarding the compression index along with its own
+message. (Note that when a node does not have its own message
+and it acts only as a relay, there is no difference in the relay
+operation from the previous schemes.) The details are given in
+Section IV-B.
+
+C. Gaussian Networks
+
+In Section V, we present an extension of the above results to
+Gaussian networks and compare the performance of noisy net-
+
+
+3136
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+work coding to other specialized coding schemes for two pop-
+ular Gaussian networks.
+Consider the Gaussian network
+
+(12)
+
+where
+is the channel gain matrix and
+is a vector
+of independent Gaussian random variables with zero mean and
+unit variance. We further assume average power constraint
+on
+each sender
+.
+In Section V-A, we establish the following result on the mul-
+ticast capacity region of this general Gaussian network.
+
+Theorem 4: Let
+. For any rate tuple
+in the cutset bound for the Gaussian network
+(12), the rate tuple
+is in
+the inner bound in Theorem 1, regardless of the values of the
+channel gain matrix
+and power constraint
+.
+We also demonstrate through the following two examples
+that noisy network coding can outperform previous coding
+schemes, some of which are developed specifically for these
+channel models.
+Two-Way Relay Channel (Section V-B):
+Consider the
+Gaussian two-way relay channel
+
+(13)
+
+in which source nodes 1 and 2 wish to exchange messages re-
+liably with the help of relay node 3 (multicast with
+and
+). Various coding schemes for this channel have
+been investigated in [15], [16]. In Fig. 2, we compare noisy
+network coding with decode-forward, compress-forward, and
+amplify-forward studied in [15]. As shown in the figure, noisy
+network coding uniformly outperforms compress-forward. Fur-
+thermore, we can see that noisy network coding achieves uni-
+formly within 1.5 bits from the cutset bound. In Appendix F,
+we show that the gap from the cutset bound for noisy network
+coding is within 1 bit for the individual rates and within 1.5 bits
+for the sum rate, while decode-forward, compress-forward, and
+amplify-forward have arbitrarily large gaps.
+Interference Relay Channel (Section V-C): Consider the
+Gaussian interference relay channel with orthogonal receiver
+components in Fig. 3.
+The channel outputs are
+
+where
+is the channel gain from node
+to node
+. Source
+node 1 wishes to send a message to destination node 4, while
+source node 2 wishes to send a message to destination node
+5. Relay node 3 helps the communication of this interference
+channel by sending some information about
+over a common
+noiseless link of rate
+to both destination nodes. In Fig. 4, we
+compare noisy network coding (Theorems 2 and 3) to compress-
+forward (CF) and hash-forward (HF) in [18]. The curve repre-
+senting noisy network coding depicts the maximum of achiev-
+able sum rates in Theorems 2 and 3. At high signal-to-noise
+
+Fig. 2. Comparison of coding schemes for g
+= g
+= 0:1, g
+= g
+=
+0:5, and g
+= g
+= 2.
+
+Fig. 3. Gaussian interference relay channel.
+
+ratio (SNR), Theorem 2 provides further improvement, since de-
+coding other messages is a better strategy when interference is
+strong. Note that, although not shown in the figure, Theorem 3
+alone outperforms the other two schemes for all channel gains
+and power constraints. In Appendix G we give a detailed com-
+parison of noisy network coding (Theorem 3) and the other two
+schemes.
+
+III. NOISY NETWORK CODING FOR MULTICAST
+
+To illustrate the main idea of the noisy network coding
+scheme and highlight the differences from the standard com-
+press-forward coding scheme [9], [13], we first prove Theorem
+1 for the 3-node relay channel and then extend the proof to
+general multicast networks.
+Let
+denote
+,
+; thus
+. To send a
+message
+, the source node transmits
+for each block
+. In block , the relay finds a “com-
+pressed” version
+of the relay output
+conditioned on
+,
+and transmits a codeword
+in the next block. After
+block transmissions, the decoder finds the correct message
+
+
+LIM et al.: NOISY NETWORK CODING
+3137
+
+TABLE I
+NOISY NETWORK CODING FOR THE RELAY CHANNEL
+
+Fig. 4. Comparison of coding schemes for g
+= g
+= 1, g
+= g
+=
+g
+= 0:5, g
+= 0:1, R
+= 1.
+
+using
+by joint typicality de-
+coding for each of
+blocks simultaneously. The details are as
+follows.
+Codebook Generation: Fix
+. We ran-
+domly and independently generate a codebook for each block.
+For each
+, randomly and independently generate
+sequences
+each according to
+. Similarly, randomly and indepen-
+dently generate
+sequences
+each
+according
+to
+.
+For
+each
+randomly and con-
+ditionally
+independently
+generate
+sequences
+each according to
+
+.
+
+This defines the codebook
+
+Encoding and decoding are explained with the help of Table I.
+Encoding: Let
+be the message to be sent. The relay, upon
+receiving
+at the end of block
+, finds an index
+such that
+
+where
+by convention. If there is more than one such
+index, choose one of them at random. If there is no such index,
+choose an arbitrary index at random from
+. The code-
+word pair
+is transmitted in block
+.
+Decoding: Let
+. At the end of block , the decoder finds
+the unique message
+such that
+
+for all
+for some
+. If there is none or more
+than one such message, it declares an error.
+Analysis of the Probability of Error: To bound the probability
+of error, assume without loss of generality that
+and
+. Then the decoder makes an error
+only if one or more of the following events occur:
+
+Thus, the probability of error is bounded as
+
+By the covering lemma [23, Lecture Note 3] and the union of
+events bound (over
+blocks),
+tends to zero as
+if
+. By the conditional typicality lemma
+[23, Lecture Note 2] and the union of events bound, the second
+term
+tends to zero as
+. For the third term,
+define the events
+
+and consider
+
+
+3138
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+where
+follows since the codebook is generated inde-
+pendently for each block
+and the channel
+is memoryless. Note that if
+and
+, then
+is independent of
+and hence by the joint typi-
+cality lemma [23, Lecture Note 2]
+
+(14)
+
+where
+. Similarly, if
+and
+, then
+
+is independent of
+. Hence, by Lemma 2 in Appendix A,
+which is an easy application of the joint typicality lemma
+
+(15)
+
+where
+. If the binary
+sequence
+has
+1s, then by (14) and (15)
+
+Therefore
+
+which tends to zero as
+if
+
+Finally, by eliminating
+, substituting
+and
+, and taking
+, we have shown that the proba-
+bility of error tends to zero as
+if
+
+This completes the proof of achievability.
+We now describe the noisy network coding scheme for multi-
+message multicast over a general DMN
+. In this set-
+ting, each node is a source as well as a relay and hence it sends
+both a message and compression index. Furthermore, destina-
+tion nodes decode a set of messages and hence the error events
+involve cutsets
+of the nodes based on the messages (correctly
+decoded ones vs. the rest) in addition to cutsets
+based on both
+the messages and the compression indices. These two types of
+cutsets are simplified at the last stage of the proof.
+For simplicity of notation, we consider the case
+.
+Achievability for an arbitrary time-sharing random variable
+can be proved using the coded time-sharing technique [23, Lec-
+ture Note 4].
+Codebook
+Generation:
+Fix
+.
+For each block
+and node
+, ran-
+domly and independently generate
+sequences
+,
+,
+each
+according
+to
+.
+For
+each
+node
+and each
+
+randomly and
+conditionally
+independently
+generate
+sequences
+each according to
+
+. This de-
+fines the codebook
+
+for
+.
+Encoding: Let
+be the messages to be sent.
+Each node
+, upon receiving
+at the end of block
+, finds an index
+such that
+
+where
+,
+, by convention. If there is more
+than one such index, choose one of them at random. If there is
+no such index, choose an arbitrary index at random from
+
+. Then each node
+transmits the codeword
+in block
+.
+Decoding: Let
+. At the end of block , decoder
+finds the unique index tuple
+, where
+for
+and
+, such that there exist
+some
+,
+,
+and
+,
+, satisfying
+
+for all
+.
+Analysis of the Probability of Error: Let
+denote the mes-
+sage sent at node
+and
+,
+,
+,
+denote the index chosen by node
+for block
+. To bound the
+probability of error for decoder
+, assume without loss of
+generality that
+and
+
+
+LIM et al.: NOISY NETWORK CODING
+3139
+
+, where
+. Then the decoder
+makes an error only if one of the following events occur:
+
+Thus, the probability of error is bounded as
+
+By the covering lemma and the union of events bound,
+tends to zero as
+if
+,
+. By the Markov lemma [23, Lecture Note 13] and the union
+of events bound, the second term
+tends to zero as
+. For the third term, define the events
+
+Then
+
+where
+follows since the codebook is generated indepen-
+dently for each block
+and the channel is memoryless.
+For each
+,
+, and
+, define
+. Note that
+depends
+only on
+and hence we write it as
+. We
+further define
+. Note that
+and
+(recall
+our convention
+).
+Define
+to be the set of
+,
+, where
+and
+are the corre-
+sponding elements in
+and
+, respectively. Similarly define
+
+and
+. Then, by Lemma 2
+and the fact that
+
+is independent of
+,
+we have
+
+where
+
+Furthermore, by the definitions of
+and
+, if
+with
+, then
+
+where the minimum is over
+such that
+and
+. Hence
+
+(16)
+
+
+3140
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+where the minimum in (16) is over all
+such that
+and
+. Thus, (16) tends to zero as
+if
+
+for all
+such that
+and
+. By
+eliminating
+and letting
+, the
+probability of error tends to zero as
+if
+
+for all
+such that
+and
+.
+Furthermore, note that
+
+Therefore, the probability of error tends to zero as
+if
+
+(17)
+
+for all
+such that
+and
+.
+Since for every
+such that
+and
+the
+inequalities with
+are inactive due to the inequality with
+in (17), the set of inequalities can be further simplified
+to
+
+(18)
+
+for all
+such that
+. Thus, the probability of
+decoding error tends to zero for each destination node
+as
+, provided that the rate tuple satisfies (18).
+By the union of events bound, the probability of error for
+all destinations tends to zero as
+if the rate tuple
+satisfies
+
+for all
+such that
+for some
+. Finally, by coded time sharing, the
+
+probability of error tends to zero as
+if the rate tuple
+satisfies
+
+for all subsets
+such that
+for some
+. This completes the proof of
+Theorem 1.
+
+IV. EXTENSIONS TO GENERAL MULTI-MESSAGE NETWORKS
+
+A. Proof of Theorem 2 via Multicast Completion With
+Simultaneous Nonunique Decoding
+
+We modify the decoding rule in the previous section to estab-
+lish Theorem 2 as follows.
+Decoding: At the end of block , decoder
+finds
+the unique index tuple
+such that there exist
+some
+and
+satisfying
+
+for all
+, where
+for
+,
+,
+for
+, and
+,
+.
+The analysis of the probability of error is similar to that for
+Theorem 1 in Section III. For completeness, the details are given
+in Appendix B.
+
+B. Proof of Theorem 3 via Treating Interference as Noise
+
+Codebook Generation: Again we consider the case
+.
+Fix
+. We randomly and indepen-
+dently generate a codebook for each block. For each
+and
+, randomly and independently generate
+sequences
+,
+, each ac-
+cording to
+. For each
+and each
+,
+randomly
+and conditionally independently generate
+sequences
+,
+, each according to
+
+.
+For
+each
+and each
+randomly and conditionally independently generate
+se-
+quences
+each according to
+
+. This defines
+the codebook
+
+for
+.
+
+
+LIM et al.: NOISY NETWORK CODING
+3141
+
+Encoding: Let
+be the messages to be sent.
+Each node
+, upon receiving
+at the end of block
+, finds an index
+such that
+
+where
+,
+, by convention. If there is more
+than one such index, choose one of them at random. If there is
+no such index, choose an arbitrary index at random from
+
+. Then each node
+transmits the codeword
+in block
+.
+Similarly as before, decoding is done by simultaneous
+nonunique decoding. However, since we are treating inter-
+ference as noise, codewords corresponding to the unintended
+messages
+are discarded, which leads to the
+following.
+Decoding: At the end of block , decoder
+finds
+the unique index tuple
+such that there exists
+some
+satisfying
+
+for all
+, where
+and
+and
+,
+,
+and
+,
+.
+The analysis of the probability of error is delegated to
+Appendix C.
+
+V. GAUSSIAN NETWORKS
+
+We consider the additive white Gaussian noise network
+in which the channel output vector for an input vector
+is
+, where
+is the channel
+gain matrix and
+is a vector of independent additive white
+Gaussian noise with zero mean and unit variance. We assume
+average power constraint
+on each sender, i.e.,
+
+for all
+and
+. For each cutset
+, define a channel gain submatrix
+such that
+
+In the following subsection, we prove Theorem 4. In
+Sections V-B and V-C, we provide the capacity inner bounds
+for the Gaussian two-way relay channel and the Gaussian
+interference relay channel used in Figs. 2 and 4.
+
+A. Gaussian Multicast Capacity Gap (Proof of Theorem 4)
+
+The cutset bound for the Gaussian multi-message multicast
+network can be further upper bounded by the use of the fol-
+lowing lemma, the proof of which is delegated to Appendix D.
+
+Lemma 1: Let
+and
+be
+positive semidefinite matrices
+such that
+,
+, and
+. Suppose
+and
+
+if
+otherwise.
+
+Then,
+.
+Now let
+and consider the cutset bound
+
+(19)
+
+where
+is the covariance matrix of
+and
+follows
+by Lemma 1 with
+,
+, and
+.
+On the other hand, the inner bound in Theorem 1 yields the
+inner bound characterized by the set of inequalities
+
+(20)
+
+for all
+with
+, where
+. To
+show this, first note that by the standard procedure [23, Lecture
+Note 3], Theorem 1 for the discrete memoryless network can be
+easily adapted for the Gaussian network with power constraint,
+which yields the inner bound in (3) on the capacity region with
+(product) input distributions satisfying
+,
+. Let
+and
+,
+, be i.i.d. Gaussian with
+zero mean and variance
+. Let
+
+where
+,
+, are i.i.d. Gaussian with zero mean and
+variance
+. Then for each
+such that
+and
+
+
+3142
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+where
+the
+first
+inequality
+is
+due
+to
+the
+Markovity
+. Furthermore
+
+Substituting these two bounds in Theorem 1 yields (20).
+We now show that if a rate tuple
+is in the cutset
+bound, then
+is in the inner bound in
+Theorem 1, where
+
+, and
+. Let
+
+where
+and
+.
+Then, by (19), for
+and any rate tuple
+in
+the cutset bound, the rate tuple
+must satisfy
+
+for all
+such that
+. However, since
+
+we have
+
+for all
+such that
+. Thus, by (20), the
+rate tuple
+is achievable for every
+.
+Finally, we minimize
+over
+. Consider
+
+where, for
+
+if
+otherwise
+
+and for
+
+if
+otherwise.
+
+Numerical evaluation of this bound yields
+, which
+completes the proof of Theorem 4.
+
+B. Gaussian Two-Way Relay Channels
+
+Recall the Gaussian two-way relay channel model (13) in
+Section II. Rankov and Wittneben [15] showed that the decode-
+forward (DF) coding scheme results in the inner bound on the
+capacity region that consists of all rate pairs
+such that
+
+for some
+and
+, while the amplify-
+forward (AF) coding scheme results in the inner bound on the
+capacity region that consists of all rate pairs
+such that
+
+for some
+, where
+,
+,
+,
+and
+. They also showed that
+an extension of the original compress-forward (CF) coding
+scheme for the relay channel to the two-way relay channel
+results in the following inner bound on the capacity region that
+consists of all rate pairs
+such that
+
+(21)
+
+for some
+
+(22)
+
+
+LIM et al.: NOISY NETWORK CODING
+3143
+
+Specializing Theorem 2 to the two-way relay channel yields
+the inner bound that consists of all rate pairs
+such that
+
+for some
+. By setting
+and
+with
+, this inner bound
+simplifies to the set of rate pairs
+such that
+
+(23)
+
+for some
+. The sum rates of the above inner bounds are
+plotted in Fig. 2 in Section II.
+
+C. Gaussian Interference Relay Channels
+
+Recall the Gaussian interference relay channel model with
+orthogonal receiver components in Fig. 4. Djeumou, Belmaga,
+and Lasaulce [17], and Razaghi and Yu [18] showed that an
+extension of the original compress-forward (CF) coding scheme
+for the relay channel to the interference relay channel results in
+the inner bound on the capacity region that consists of all rate
+pairs
+such that
+
+(24)
+
+for some
+
+where
+and
+.
+Razaghi and Yu [18] generalized the hash-forward coding
+scheme [10], [25] for the relay channel to the interference relay
+channel, in which the relay sends the bin index (hash) of its noisy
+observation and destination nodes use list decoding. This gen-
+eralized hash-forward scheme yields the inner bound on the ca-
+
+pacity region that consists of the set of rate pairs
+such
+that
+
+(25)
+
+for some
+satisfying
+
+where
+and
+are the same as above.
+Specializing Theorem 2 by setting
+with
+yields the inner bound that consists of all rate pairs
+
+such that
+
+where
+,
+, and
+, for some
+. By the same choice of
+, the inner
+bound in Theorem 3 can be specialized to the set of rate pairs
+
+such that
+
+(26)
+
+for some
+. The sum rates of these inner bounds are
+plotted in Fig. 4. In Appendix G, we show that the inner bound
+in (26) is tighter than both compress-forward and hash-forward
+inner bounds in (24) and (25).
+
+VI. CONCLUDING REMARKS
+
+We presented a new noisy network coding scheme and used
+it to establish inner bounds on the capacity region of general
+
+
+3144
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+multi-message noisy networks. This scheme unifies and extends
+previous results on network coding and its extensions, and on
+compress-forward for the relay channel. We demonstrated that
+the noisy network coding scheme can outperform previous net-
+work compress-forward schemes. The reasons are: first, a source
+node sends the same message over multiple blocks, second,
+the relays do not use Wyner-Ziv coding (no binning indices to
+decode), and third, simultaneous nonunique decoding over all
+blocks is used without requiring the compression indices to be
+decoded uniquely.
+How good is noisy network coding as a general-purpose
+scheme? As we have seen, noisy network coding is optimal in
+some special cases. It also performs generally well under high
+SNR conditions in the network. In addition, it is a robust and
+scalable scheme in the sense that the relay operations do not
+depend on the specific codebooks used by the sources and des-
+tinations or even the topology of the network. Noisy network
+coding, however, is not always the best strategy. For example,
+for a cascade of Gaussian channels with low SNR, the optimal
+strategy is for the relay to decode the message and then forward
+it to the final destination. This simple multi-hop scheme can
+be improved by using the information from multiple paths
+and coherent cooperation as in the decode-forward scheme
+for the relay channel [9] and its extensions to networks [13],
+[26]. Further improvement can be obtained by only partially
+decoding of messages at the relays [9], and by combining
+noisy network coding with partial decode-forward to obtain the
+type of hybrid schemes in [9] and [13]. Another direction for
+improvement is to incorporate more sophisticated compression
+strategies at relays. For instance, as shown in [27], each relay
+node can compress its observation into multiple indices to
+leverage asymmetry in link quality and side information. On
+the receiver side, noisy network coding for multiple messages
+can be potentially improved by using more sophisticated inter-
+ference coding schemes, such as interference alignment [28]
+and Han–Kobayashi superposition coding [29].
+
+APPENDIX A
+AN APPLICATION OF THE JOINT TYPICALITY LEMMA
+
+Lemma 2: Let
+. Let
+be
+distributed according to an arbitrary pmf
+and
+
+independent of
+. Then there exists
+that tends to zero as
+such that
+
+Proof: By the joint typicality lemma [23, Lecture Note 2]
+
+APPENDIX B
+ERROR PROBABILITY ANALYSIS FOR THEOREM 2
+
+The analysis follows the same steps of the multicast case ex-
+cept that
+with
+in error event
+.
+Thus
+
+(27)
+
+where the minimum in (27) is over
+such that
+. Hence, (27) tends to zero as
+if
+
+for all
+such that
+,
+, and
+. By eliminating
+, letting
+, and removing inactive inequalities, the probability of
+error tends to zero as
+if
+
+for all
+such that
+and
+. The rest
+of the proof is identical to the multicast case.
+
+APPENDIX C
+ERROR PROBABILITY ANALYSIS FOR THEOREM 3
+
+Let
+denote the message sent at node
+and
+,
+,
+, denote the index chosen by node
+for
+block . To bound the probability of error for decoder
+,
+assume without loss of generality that
+and
+
+
+LIM et al.: NOISY NETWORK CODING
+3145
+
+, where
+. Then the
+decoder makes an error only if one or more of the following
+events occur:
+
+Here,
+with
+, and
+with
+for
+. Then
+the probability of error is upper bounded as
+
+By the covering lemma and the union of events bound,
+
+as
+, if
+,
+, and by
+the Markov lemma and the union of events bound, the second
+term
+tends to zero as
+. For the third term,
+define the events
+
+for
+and all
+. Following similar steps to the multicast
+case
+
+For each
+and
+, define
+and
+. By definition,
+, where
+. Then, by
+Lemma 2
+
+where
+
+Furthermore, by the definitions of
+and
+, if
+with
+, then
+
+Denote
+. Then
+
+where the minimum is over
+such that
+.
+Hence,
+tends to zero as
+if
+
+for all
+and
+such that
+. By
+eliminating
+and letting
+, the
+probability of error tends to zero as
+if
+
+
+3146
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+for all
+and
+such that
+.
+Furthermore, note that
+
+Therefore, the probability of error tends to zero as
+if
+
+(28)
+
+for all
+and
+such that
+. Since
+for every
+,
+the inequalities corresponding to
+are inactive due to the inequality with
+in (28), the set of inequalities can be further simplified to
+
+(29)
+
+for all
+such that
+and
+, where
+. Thus, the probability of decoding
+error tends to zero for each destination node
+as
+,
+provided that the rate tuple satisfies (29). The rest of the proof
+is identical to the multicast case.
+
+APPENDIX D
+PROOF OF LEMMA 1
+
+For
+and
+, let
+
+if
+otherwise
+
+where
+is chosen such that
+. Then, by
+diagonalizing
+and water filling under the constraint
+
+(30)
+
+where
+are the eigenvalues of
+,
+,
+,
+,
+, and
+
+We further upper bound (30) as follows:
+
+if
+otherwise
+
+where
+follows since
+for
+,
+follows since
+,
+follows since
+for
+,
+follows
+since
+,
+follows by relaxing
+by
+, and
+follows since
+is maximized when
+. Finally, to justify step
+we use the following.
+
+Lemma 3: Suppose
+for
+. If
+, then
+
+Proof: Let
+. Note
+that it suffices to prove the lemma for
+, which we
+assume here. For every
+,
+is convex on the simplex
+defined by
+and
+,
+, since
+is positive semidefinite on the simplex. Therefore,
+restricted to the intersection of
+and the polytope
+
+is maximized at one of the corner points of the intersection. By
+symmetry, we only need to consider
+.
+Then, the corresponding corner points of the intersection have
+the form
+for some
+,
+where
+for
+and
+. Hence
+
+(31)
+
+
+LIM et al.: NOISY NETWORK CODING
+3147
+
+where the range of
+is given by
+
+if
+if
+.
+
+Let
+denote the right-hand side (RHS) of (31). If
+or
+, then it is easy to verify that
+is strictly
+decreasing in
+and is thus maximized at
+, which
+corresponds to
+. For the case
+, let
+be
+parametrized by
+such that
+. Then
+
+Hence
+
+where
+follows since
+for
+and
+,
+follows since the RHS of
+is monotonically
+increasing in
+for given
+and , and is thus minimized at
+,
+and
+follows since
+for
+and
+. This implies that
+is maximized when
+, which again corresponds to
+. Therefore, for all
+, it suffices to assume
+. Finally
+
+where
+and
+holds for all
+. This completes
+the proof of Lemma 3, which, in turn, completes the proof of
+Lemma 1.
+
+APPENDIX E
+COMPARISON TO A PREVIOUS EXTENSION OF
+COMPRESS-FORWARD TO MULTICAST NETWORKS
+
+For a single-message multicast network with source node 1
+and destination nodes
+, a hybrid scheme proposed
+by Kramer, Gastpar, and Gupta [13, Theorem 3] achieves the
+capacity lower bound
+
+(32)
+
+where the maximum is over
+
+such that
+
+(33)
+
+for all
+, all partitions
+of
+, and all
+such that
+. The complements
+and
+are the complements of the respective
+and
+in
+.
+This hybrid coding scheme uses an extension of the original
+compress-forward scheme for the relay channel as well as de-
+coding of the compression indices at the relays.
+In the following subsections, we compare noisy network
+coding with the hybrid scheme. First we show that noisy net-
+work coding always outperforms the compress-forward part of
+the scheme (without compression index decoding at the relays),
+which corresponds to
+in (32). Then we consider a
+layered network and show that noisy network coding achieves a
+positive rate while the hybrid scheme in (32) achieves zero rate.
+1) Comparison to the Compress-Forward Part: The com-
+press-forward part of (32) without decoding yields the capacity
+lower bound
+
+(34)
+
+where the maximum is over all pmfs
+such
+that
+
+for all
+and
+. This bound is identical
+to (32) and (33) with
+,
+. By similar steps to
+those in [14, Appendix C] and some algebra, lower bound (34)
+can be upper bounded as
+
+(35)
+
+
+3148
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+where the maximums are over
+.
+Here equality (35) follows from
+
+(36)
+
+(37)
+
+(38)
+
+(39)
+
+(40)
+
+(41)
+
+(42)
+
+for all
+,
+and
+,
+where
+the
+last
+equality
+follows
+from
+the
+Markovity
+
+.
+On the other hand, the inner bound in Theorem 1 can be
+specialized to the single-message case by setting
+and
+to yield
+
+where the maximum is over all pmfs
+and
+. Thus, Theorem 1 achieves a higher rate
+than (34) with gap
+
+for each
+and
+.
+
+2) Comparison to the General Hybrid Scheme: Consider
+an
+-node DMN with single source node 1 and single destina-
+tion node
+. Assume that
+. Suppose the network
+is layered, that is, the channel pmf has the form
+
+where
+partitions
+such that
+and
+. In the following, we assume that
+and show
+that the rate achievable by the Kramer-Gastpar–Gupta hybrid
+scheme in (32) is zero for this case.
+First, note that the constraint in (33) corresponding to
+
+, and
+is given by
+
+(43)
+
+Now the RHS of (43) is zero since
+
+which follows by the Markov relationship
+
+for
+, and
+
+which follows by
+. Thus, (43)
+implies that a feasible pmf for the hybrid scheme must satisfy
+
+(44)
+
+By (32), an achievable rate of the hybrid scheme satisfies
+
+
+LIM et al.: NOISY NETWORK CODING
+3149
+
+where
+follows by (44) and the fact that
+
+and
+follows since
+.
+Thus the hybrid scheme achieves zero rate for every layered
+network with 4 or more layers.
+In comparison, it is easy to find a layered-network example
+for which noisy network coding achieves a positive rate (and the
+capacity itself). For instance, consider a 4-node layered network
+
+, where
+are binary,
+, and
+. The capacity of this
+network is 1 bit/transmission, and by (5) it is achieved by noisy
+network coding.
+
+APPENDIX F
+COMPARISON TO PREVIOUS SCHEMES FOR THE TWO-WAY
+RELAY CHANNEL
+
+1) Comparison to Compress-Forward: We show that the
+compress-forward inner bound is included in the noisy network
+coding inner bound for the Gaussian two-way relay channel. Fix
+the channel gains and power constraint. Denote
+
+Then, by using the above notation, we can write the noisy net-
+work coding inner bound (23) by
+
+for some
+. On the other hand, the compress-forward inner
+bound (21) can be written by
+
+for some
+, where
+
+Note that
+,
+, is nonincreasing and
+,
+, is nondecreasing since
+
+Furthermore
+and
+,
+where
+and
+. Hence,
+and
+for
+. Since
+, the noisy network coding
+inner bound (23) is equal to the compress-forward inner bound
+(21) for
+, i.e., the range of
+that satisfies
+the compress-forward constraint, and the noisy network coding
+inner bound is tighter than the compress-forward inner bound
+for
+, in which case compress-forward
+achieves zero rate.
+2) Comparison of Gap From Capacity: We first show that
+noisy network coding achieves within 1 bit for individual rates
+and 1.5 bit for the sum rate from the cutset bound. We begin
+by presenting some properties of the cutset bound and the noisy
+network coding inner bound.
+Consider a looser version of the cutset bound [30] for the
+two-way relay channel
+
+Note that if
+then
+
+(45)
+
+and if
+then
+satisfies
+
+(46)
+
+where
+. Similarly, if
+then
+
+(47)
+
+and if
+then
+satisfies
+
+(48)
+
+where
+. On the other
+hand, by the choice of
+, noisy network coding inner
+bound is given by the set of rate pairs
+that satisfies
+
+(49)
+(50)
+
+Hence, by (45)–(50), the individual rates of the noisy network
+coding inner bound are within 1 bit of those in the cutset bound.
+Next we bound the gap for the sum rate. Consider the cutset
+bound on the sum rate
+
+
+3150
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+and the sum rate of the noisy network coding inner bound
+
+We consider the following cases:
+1)
+and
+: By (45) and (47),
+
+. On the other hand, by
+(49) and (50),
+.
+Hence, the gap is upper bounded by 1 bit.
+2)
+and
+: First suppose
+. By
+taking
+for the noisy network coding inner bound
+
+Note that
+is the cutset upper bound and
+is
+the compress-forward rate for the 3 node one-way relay
+channel when node 1 is the source and node 2 is the desti-
+nation. Since compress-forward achieves uniformly within
+1/2 bit for the 3-node one-way relay channel [31], the first
+term is bounded as
+
+To upper bound the second term, first note that
+
+since
+by the standing assumption. Hence
+
+(51)
+
+Combining (48) and (51), we have
+
+and the sum rate gap is within 1.5 bits.
+Next, suppose
+. By symmetry, the gap is again
+within 1.5 bits by taking
+in the noisy network
+coding inner bound.
+3)
+and
+: Take
+for the noisy
+network coding inner bound. Then, by (45), (48), (49), and
+(50), it can be shown that the sum rate gap is within 1.5
+bits.
+4)
+and
+: By switching the roles of users
+1 and 2 in the third case above, the gap is again within 1.5
+bits for this case.
+Since we have covered all possible cases, the sum rate gap is
+within 1.5 bits, regardless of the channel gains and power con-
+straint.
+We now show that decode-forward, amplify-forward, and
+compress-forward have arbitrarily large gap from the cutset
+bound.
+
+1) Decode-forward: Suppose
+,
+. Then, the sum rate of the cutset bound is
+. On the other hand, the decode-forward sum rate is
+bounded as
+
+Hence, the sum rate gap for decode-forward becomes arbi-
+trarily large as
+.
+2) Amplify-forward and compress-forward: Suppose
+
+,
+,
+and
+.
+Then, the sum rate of the cutset bound is
+. On the
+other hand, the amplify-forward inner bound is simplified
+to the set of rate pairs
+such that
+
+Similarly, the compress-forward inner bound is simplified
+to the set of rate pairs
+such that
+
+Compared to the cutset bound, these bounds have arbi-
+trarily large gap as
+.
+
+APPENDIX G
+COMPARISON TO PREVIOUS SCHEMES FOR THE INTERFERENCE
+RELAY CHANNEL
+
+We show that the inner bound in Theorem 3 is tighter than
+both hash-forward and compress-forward inner bounds in [17],
+[18]. Fix the channel gains and power constraint
+. Define
+
+where
+and
+. Then,
+the hash-forward inner bound is given by
+
+
+LIM et al.: NOISY NETWORK CODING
+3151
+
+for some
+, where
+
+and
+
+Using the above notation, compress-forward inner bound can be
+written as
+
+for some
+. Similarly, the inner bound in The-
+orem 3 can be written as
+
+for some
+. Note that
+,
+, is nonincreasing
+in
+and
+,
+, is nondecreasing in
+, since
+
+(52)
+
+(53)
+
+From (52), the sum rate of the compress-forward scheme is max-
+imized by
+, and from (53), the sum rate of
+the hash-forward scheme is maximized by
+.
+Furthermore, it can be easily shown that
+and
+. Hence,
+in
+,
+, and
+in
+,
+.
+Therefore, the noisy network coding inner bound is equal to the
+compress-forward inner bound for
+, i.e., the
+range of
+that satisfies the compress-forward constraint, and is
+equal to the hash-forward inner bound for
+,
+i.e., the range of
+that satisfies the hash-forward constraint.
+Finally, when
+, the noisy
+network coding inner bound is tighter than both bounds.
+
+ACKNOWLEDGMENT
+
+The authors would like to thank H.-I. Su for his comments
+on earlier drafts of the paper. They would also like to thank the
+anonymous reviewers for many valuable comments that helped
+improve the presentation of this paper.
+
+REFERENCES
+
+[1] A. El Gamal, “On information flow in relay networks,” in Proc. IEEE
+Nat. Telecom Conf., Nov. 1981, vol. 2, pp. D4.1.1–D4.1.4.
+[2] T. M. Cover and J. A. Thomas, Elements of Information Theory, 2nd
+ed.
+New York: Wiley, 2006.
+[3] L. R. Ford Jr. and D. R. Fulkerson, “Maximal flow through a network,”
+Canad. J. Math., vol. 8, pp. 399–404, 1956.
+[4] P. Elias, A. Feinstein, and C. E. Shannon, “A note on the maximum
+flow through a network,” IRE Trans. Inf. Theory, vol. 2, no. 4, pp.
+117–119, Dec. 1956.
+
+[5] R. Ahlswede, N. Cai, S.-Y. R. Li, and R. W. Yeung, “Network infor-
+mation flow,” IEEE Trans. Inf. Theory, vol. 46, no. 4, pp. 1204–1216,
+2000.
+[6] A. F. Dana, R. Gowaikar, R. Palanki, B. Hassibi, and M. Effros, “Ca-
+pacity of wireless erasure networks,” IEEE Trans. Inf. Theory, vol. 52,
+no. 3, pp. 789–804, 2006.
+[7] N. Ratnakar and G. Kramer, “The multicast capacity of deterministic
+relay networks with no interference,” IEEE Trans. Inf. Theory, vol. 52,
+no. 6, pp. 2425–2432, 2006.
+[8] E. C. van der Meulen, “Three-terminal communication channels,” Adv.
+Appl. Prob., vol. 3, pp. 120–154, 1971.
+[9] T. M. Cover and A. El Gamal, “Capacity theorems for the relay
+channel,” IEEE Trans. Inf. Theory, vol. 25, no. 5, pp. 572–584, Sep.
+1979.
+[10] Y.-H. Kim, “Capacity of a class of deterministic relay channels,” IEEE
+Trans. Inf. Theory, vol. 54, no. 3, pp. 1328–1329, Mar. 2008.
+[11] M. Aleksic, P. Razaghi, and W. Yu, “Capacity of a class of modulo-sum
+relay channels,” IEEE Trans. Inf. Theory, vol. 55, no. 3, pp. 921–930,
+Mar. 2009.
+[12] A. D. Wyner and J. Ziv, “The rate-distortion function for source coding
+with side information at the decoder,” IEEE Trans. Inf. Theory, vol. 22,
+no. 1, pp. 1–10, 1976.
+[13] G. Kramer, M. Gastpar, and P. Gupta, “Cooperative strategies and ca-
+pacity theorems for relay networks,” IEEE Trans. Inf. Theory, vol. 51,
+no. 9, pp. 3037–3063, Sep. 2005.
+[14] A. El Gamal, M. Mohseni, and S. Zahedi, “Bounds on capacity and
+minimum energy-per-bit for AWGN relay channels,” IEEE Trans. Inf.
+Theory, vol. 52, no. 4, pp. 1545–1561, 2006.
+[15] B. Rankov and A. Wittneben, “Achievable rate region for the two-way
+relay channel,” in Proc. IEEE Int. Symp. Inf. Theory, Seattle, WA, Jul.
+2006.
+[16] S. Katti, I. Maric, A. Goldsmith, D. Katabi, and M. Médard, “Joint re-
+laying and network coding in wireless networks,” in Proc. IEEE Inter-
+national Symposium on Information Theory, Nice, France, Jun. 2007,
+pp. 1101–1105.
+[17] B. Djeumou, E. V. Belmega, and S. Lasaulce, Interference Relay Chan-
+nels—Part I: Transmission Rates 2009 [Online]. Available: http://arxiv.
+org/abs/0904.2585/
+[18] P. Razaghi and W. Yu, “Universal relaying for the interference
+channel,” in Proc. UCSD Inf. Theory Appl. Workshop, La Jolla, CA,
+2010.
+[19] S. Avestimehr, S. Diggavi, and D. Tse, “Wireless network information
+flow: A deterministic approach,” IEEE Trans. Inf. Theory, 2011, to be
+published.
+[20] H.-F. Chong, M. Motani, H. K. Garg, and H. El Gamal, “On the
+Han–Kobayashi region for the interference channel,” IEEE Trans. Inf.
+Theory, vol. 54, no. 7, pp. 3188–3195, Jul. 2008.
+[21] C. Nair and A. El Gamal, “The capacity region of a class of three-
+receiver broadcast channels with degraded message sets,” IEEE Trans.
+Inf. Theory, vol. 55, no. 10, pp. 4479–4493, Oct. 2009.
+[22] E. Perron, “Information-Theoretic Secrecy for Wireless Networks,”
+Ph.D., École Polytechnique Fédérale de Lausanne, Lausanne, Switzer-
+land, 2009.
+[23] A. El Gamal and Y.-H. Kim, Lecture Notes on Network Information
+Theory 2010 [Online]. Available: http://arxiv.org/abs/1001.3404/
+[24] T. M. Cover, “Broadcast channels,” IEEE Trans. Inf. Theory, vol. 18,
+no. 1, pp. 2–14, Jan. 1972.
+[25] T. M. Cover and Y.-H. Kim, “Capacity of a class of deterministic relay
+channels,” in Proc. IEEE Int. Symp. Inf. Theory, Nice, France, Jun.
+2007, pp. 591–595.
+[26] L.-L. Xie and P. R. Kumar, “An achievable rate for the multiple-level
+relay channel,” IEEE Trans. Inf. Theory, vol. 51, no. 4, pp. 1348–1358,
+2005.
+[27] S. H. Lim, Y.-H. Kim, A. El Gamal, and S.-Y. Chung, “Layered noisy
+network coding,” in Proc. IEEE Wireless Network Coding Workshop,
+Boston, MA, Aug. 2010.
+[28] V. Cadambe and S. A. Jafar, “Interference alignment and degrees of
+freedom of the K-user interference channel,” IEEE Trans. Inf. Theory,
+vol. 54, no. 8, pp. 3425–3441, Aug. 2008.
+[29] T. S. Han and K. Kobayashi, “A new achievable rate region for the in-
+terference channel,” IEEE Trans. Inf. Theory, vol. 27, no. 1, pp. 49–60,
+1981.
+[30] S. Avestimehr, A. Sezgin, and D. Tse, “Approximate capacity of the
+two-way relay channel: A deterministic approach,” in Proc. 46th An-
+nual Allerton Conf. Commun., Control, Comput., Monticello, IL, Sep.
+2008.
+
+
+3152
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 57, NO. 5, MAY 2011
+
+[31] W. Chang, S.-Y. Chung, and Y. H. Lee, Gaussian Relay Channel Ca-
+pacity to Within a Fixed Number of Bits 2010 [Online]. Available:
+http://arxiv.org/abs/1011.5065/
+
+Sung Hoon Lim (S’08) received the B.S. degree with honors in electrical and
+computer engineering from Korea University in 2005, and the M.S. degree in
+electrical engineering from the Korea Advanced Institute of Science and Tech-
+nology (KAIST) in 2007.
+He is currently pursuing the Ph.D. degree in the Department of Electrical En-
+gineering from KAIST. His research interests are in information theory, com-
+munication systems, and data compression.
+
+Young-Han Kim (S’99–M’06) received the B.S. degree with honors in elec-
+trical engineering from Seoul National University, Seoul, Korea, in 1996. He
+received the M.S. degrees in electrical engineering and statistics and the Ph.D.
+degree in electrical engineering, both from Stanford University, Stanford, CA,
+in 2001, 2006, and 2006, respectively.
+In July 2006, he joined the University of California, San Diego, where he is
+an Assistant Professor of Electrical and Computer Engineering. His research
+interests are in statistical signal processing and information theory, with appli-
+cations in communication, control, computation, networking, data compression,
+and learning.
+Dr. Kim is a recipient of the 2008 NSF Faculty Early Career Development
+(CAREER) Award and the 2009 U.S.-Israel Binational Science Foundation
+Bergmann Memorial Award.
+
+Abbas El Gamal (S’71–M’73–SM’83–F’00) received the B.Sc. (honors) de-
+gree in electrical engineering from Cairo University in 1972 and the M.S. de-
+gree in statistics and the Ph.D. degree in electrical engineering from Stanford
+University, Stanford, CA, in 1977 and 1978, respectively.
+From 1978 to 1980, he was an Assistant Professor of Electrical Engineering
+at the University of Southern California (USC), Los Angeles. He has been on
+the Stanford University faculty since 1981, where he is currently the Hitachi
+America Professor in the School of Engineering. His research interest and con-
+tributions are in the areas of network information theory, digital imaging, and
+integrated circuit design. He has authored or coauthored more than 200 papers
+and 30 patents in these areas.
+Dr. El Gamal is on the Board of Governors of the IEEE Information Theory
+Society.
+
+Sae-Young Chung (S’89–M’00–SM’07) received the B.S. and M.S. degrees in
+electrical engineering from Seoul National University, Seoul, Korea, in 1990
+and 1992, respectively. He received the Ph.D. degree in electrical engineering
+and computer science at the Massachusetts Institute of Technology (MIT), Cam-
+bridge, in 2000.
+From June to August 1998 and from June to August 1999, he was with Lucent
+Technologies. From September 2000 to December 2004, he was with Airvana,
+Inc., where he conducted research on the third-generation wireless communi-
+cations. Since January 2005, he has been with the Korea Advanced Institute of
+Science and Technology (KAIST), where he is now an Associate Professor in
+the Department of Electrical Engineering. His research interests include net-
+work information theory, coding theory, and their applications to wireless com-
+munications.
+Dr. Chung is currently serving as an Editor of the IEEE TRANSACTIONS ON
+COMMUNICATIONS. He served as a Guest Editor of JCN, EURASIP Journal, and
+Telecommunications Review. He is serving as a TPC Co-Chair of the 2014 IEEE
+International Symposium on Information Theory (ISIT) to be held in Hawaii.
+He also served as a TPC Co-Chair of WiOpt 2009.
+
+

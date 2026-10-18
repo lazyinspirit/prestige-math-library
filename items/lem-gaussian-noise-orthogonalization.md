@@ -2,7 +2,7 @@
 id: lem-gaussian-noise-orthogonalization
 kind: lemma
 title: Orthogonal coordinates diagonalize a finite-dimensional Gaussian noise law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

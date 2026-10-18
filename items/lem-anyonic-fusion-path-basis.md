@@ -2,7 +2,7 @@
 id: lem-anyonic-fusion-path-basis
 kind: lemma
 title: "Fusion paths give a basis of the fixed-boundary path space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

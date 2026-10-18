@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-rank-one-tilting-quotient-fusion-category
 kind: theorem
 title: "The rank-one tilting quotient is the truncated fusion category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

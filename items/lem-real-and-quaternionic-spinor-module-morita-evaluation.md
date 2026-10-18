@@ -2,7 +2,7 @@
 id: lem-real-and-quaternionic-spinor-module-morita-evaluation
 kind: lemma
 title: Ungraded real and quaternionic spinor Morita evaluation
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-given-spin-and-spinc-structures-and-associated-spinor-bundles

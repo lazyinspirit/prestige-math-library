@@ -2,7 +2,7 @@
 id: lem-simple-generator-weights-extend-to-a-weight-function
 kind: lemma
 title: Simple-generator weights extend uniquely to a weight function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

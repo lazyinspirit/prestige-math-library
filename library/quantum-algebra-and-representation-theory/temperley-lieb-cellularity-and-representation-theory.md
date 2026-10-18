@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-cellularity-and-representation-theory
 title: "Temperley–Lieb Link-State Modules and Cellularity"
-status: draft
+status: published
 requires:
   - temperley-lieb-diagram-algebra-and-catalan-basis
   - type-a-hecke-specht-modules-and-cellular-bases

@@ -2,7 +2,7 @@
 id: thm-huffman-coding-is-prefix-optimal
 kind: theorem
 title: "The deterministic Huffman code is prefix-optimal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

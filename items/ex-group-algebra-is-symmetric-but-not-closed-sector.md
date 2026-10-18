@@ -2,7 +2,7 @@
 id: ex-group-algebra-is-symmetric-but-not-closed-sector
 kind: example
 title: "A nonabelian group algebra is symmetric Frobenius but not a closed sector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

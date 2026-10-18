@@ -2,7 +2,7 @@
 id: def-qa-37-anyon-task-and-promise
 kind: definition
 title: "Finite anyon task and promise interface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

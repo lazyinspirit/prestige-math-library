@@ -2,7 +2,7 @@
 id: lem-it-finite-gaussian-mixture-entropy-bounds
 kind: lemma
 title: Entropy bounds for finite-power Gaussian convolutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

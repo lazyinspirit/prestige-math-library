@@ -37,8 +37,6 @@ sources:
     - title: "Günter Last and Mathew Penrose, Lectures on the Poisson Process, author-hosted 2017 version"
       url: "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
       locator: "Chapter 3, Theorem 3.6 and Proposition 3.8; Chapter 4, Theorem 4.1, PDF pp. 33–34 and 39–43."
-verification:
-  precheck: pending
 ---
 
 ## Example

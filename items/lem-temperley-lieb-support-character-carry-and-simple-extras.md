@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-support-character-carry-and-simple-extras
 kind: lemma
 title: "Support-character carry recursion has only simple extra standards"
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

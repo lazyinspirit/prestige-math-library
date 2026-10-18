@@ -24,8 +24,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Desmond J. Higham, Xuerong Mao, and Andrew M. Stuart, Strong Convergence of Euler-Type Methods for Nonlinear Stochastic Differential Equations, §2"

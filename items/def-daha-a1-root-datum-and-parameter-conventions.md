@@ -2,7 +2,7 @@
 id: def-daha-a1-root-datum-and-parameter-conventions
 kind: definition
 title: "The rank-one root datum and parameter conventions for DAHA"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

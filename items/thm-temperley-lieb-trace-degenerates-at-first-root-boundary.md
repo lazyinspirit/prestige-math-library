@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-trace-degenerates-at-first-root-boundary
 kind: theorem
 title: "At the first root boundary the Jones trace degenerates before semisimplicity fails"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

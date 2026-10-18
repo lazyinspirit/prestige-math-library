@@ -2,7 +2,7 @@
 id: thm-root-of-unity-strong-affine-linkage-for-weyl-and-tilting-modules
 kind: theorem
 title: Strong affine linkage for root Weyl modules and tilting sections
-status: draft
+status: published
 dependency_level: 10
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

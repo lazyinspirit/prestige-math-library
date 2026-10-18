@@ -2,7 +2,7 @@
 id: lem-hh-langlands-dominant-projection
 kind: lemma
 title: Dominant projection and strict parabolic weight decrease
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

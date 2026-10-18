@@ -2,7 +2,7 @@
 id: cex-sl2-specialization-map-not-injective-at-fifth-root
 kind: counterexample
 title: "At order five, the rank-one form specialization map is not injective"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

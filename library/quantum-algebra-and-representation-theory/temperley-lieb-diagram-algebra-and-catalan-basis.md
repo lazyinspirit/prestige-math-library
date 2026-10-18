@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-diagram-algebra-and-catalan-basis
 title: "Temperley–Lieb Diagram Algebra and Catalan Basis"
-status: draft
+status: published
 items:
   - def-temperley-lieb-diagram-category
   - def-temperley-lieb-generator-presentation

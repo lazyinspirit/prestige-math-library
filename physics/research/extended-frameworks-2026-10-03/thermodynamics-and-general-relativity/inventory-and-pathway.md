@@ -16,11 +16,11 @@ All proposed pages are draft research. The order below is computed from actual d
 | 10 | TGR-C02 | physics | 4/1 | TGR-I01, TGR-MC01, TGR-MC03, TGR-MC02 |
 | 11 | TGR-C03 | physics | 3/1 | TGR-C01, TGR-C02, TGR-I01, TGR-MC03 |
 | 12 | TGR-C04 | physics | 4/1 | TGR-I01, TGR-MC04 |
-| 13 | TGR-ET01 | mathematics | 6/1 | external or self-contained |
+| 13 | TGR-ET01 | mathematics | 9/1 | external or self-contained |
 | 14 | TGR-ET02 | mathematics | 3/1 | TGR-ET01 |
 | 15 | TGR-ET03 | mathematics | 4/1 | TGR-ET02, TGR-ET01 |
 | 16 | TGR-ET04 | mathematics | 2/1 | TGR-MC01, TGR-MC02, TGR-ET01 |
-| 17 | TGR-PET01 | physics | 4/2 | TGR-I01, TGR-ET01, TGR-ET02, TGR-ET03 |
+| 17 | TGR-PET01 | physics | 5/2 | TGR-I01, TGR-ET01, TGR-ET02, TGR-ET03 |
 | 18 | TGR-PET02 | physics | 3/1 | TGR-I01, TGR-ET03, TGR-PET01 |
 | 19 | TGR-PET03 | physics | 2/1 | TGR-I01, TGR-C02, TGR-ET04 |
 | 20 | TGR-MG01 | mathematics | 12/7 | external or self-contained |
@@ -35,6 +35,8 @@ All proposed pages are draft research. The order below is computed from actual d
 | 29 | TGR-PHS02 | physics | 3/1 | TGR-I01, TGR-MHS02, TGR-MHS03, TGR-ET01, TGR-PET01 |
 | 30 | TGR-PHS03 | physics | 2/1 | TGR-I01, TGR-PHS01, TGR-PHS02, TGR-MHS01, TGR-MI02 |
 | 31 | TGR-PHS04 | physics | 2/1 | TGR-I01, TGR-MHS04, TGR-PHS03 |
+| 32 | TGR-MHS05 | mathematics | 3/1 | external or self-contained |
+| 33 | TGR-PHS05 | physics | 1/1 | TGR-I01, TGR-MHS05, TGR-PHS03, TGR-PHS01 |
 
 ## TGR-MI01
 
@@ -134,7 +136,7 @@ Exact statement hypotheses, argument locators, prerequisite roles and publicatio
 
 ## TGR-ET01
 
-A develops Stationary thermal geometric data; Killing temperature normalization and rigidity; Exact thermal Killing kinematic equivalence; Natural tensors under Killing isometries; Mass-shell polynomial rigidity; Massive Jüttner stationarity and normalization.
+A develops Stationary thermal geometric data; Killing temperature normalization and rigidity; Exact thermal Killing kinematic equivalence; Natural tensors under Killing isometries; Mass-shell polynomial rigidity; Canonical future massive mass-shell measure; Mass-shell measure is independent of the tetrad; Exact massive Jüttner partition function and perfect-fluid moments; Massive Jüttner stationarity and normalization.
 
 B applies or tests those interfaces with FLRW obstruction and conformal radiation. Its items are not suppliers of other pages.
 
@@ -166,7 +168,7 @@ Exact statement hypotheses, argument locators, prerequisite roles and publicatio
 
 ## TGR-PET01
 
-A develops Selected stationary thermal equilibrium; Conditional Tolman–Ehrenfest relation; Specified equilibrium particle exchange; Conditional Tolman–Klein relation.
+A develops Selected stationary thermal equilibrium; Conditional Tolman–Ehrenfest relation; Specified equilibrium particle exchange; Conditional Tolman–Klein relation; Defined classical Jüttner kinetic preparation.
 
 B applies or tests those interfaces with Schwarzschild supported thermal bath; Rindler and rigid rotating bath domains. Its items are not suppliers of other pages.
 
@@ -281,5 +283,21 @@ Exact statement hypotheses, argument locators, prerequisite roles and publicatio
 A develops Ideal photon reservoir and active-area mass balance; Conditional ideal Planck emission and entropy accounting.
 
 B applies or tests those interfaces with Ideal active-area half-mass cutoff interval. Its items are not suppliers of other pages.
+
+Exact statement hypotheses, argument locators, prerequisite roles and publication/proof status are recorded per item in proposed-inventory.json.
+
+## TGR-MHS05
+
+A develops Finite-regulator outside density and entropy; Finite mode cutoffs can have unbounded outside entropy; A convergent subtraction leaves a free finite scheme shift.
+
+B applies or tests those interfaces with An additive generalized-entropy definition need not be monotone. Its items are not suppliers of other pages.
+
+Exact statement hypotheses, argument locators, prerequisite roles and publication/proof status are recorded per item in proposed-inventory.json.
+
+## TGR-PHS05
+
+A develops Specified finite-regulator generalized-entropy model.
+
+B applies or tests those interfaces with A generalized-entropy definition does not imply its second law. Its items are not suppliers of other pages.
 
 Exact statement hypotheses, argument locators, prerequisite roles and publication/proof status are recorded per item in proposed-inventory.json.

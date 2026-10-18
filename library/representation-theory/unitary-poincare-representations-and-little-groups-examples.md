@@ -1,7 +1,7 @@
 ---
 page: unitary-poincare-representations-and-little-groups-examples
 title: "Unitary Poincaré Representations and Little Groups: Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-d4-massive-spin-and-so3-descent

@@ -1,7 +1,7 @@
 ---
 page: frobenius-algebras-and-two-dimensional-sewing-examples
 title: "Frobenius Algebras and Oriented Two-Dimensional Sewing: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - frobenius-algebras-and-two-dimensional-sewing
   - modular-representations-and-projective-covers

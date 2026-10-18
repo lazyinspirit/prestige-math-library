@@ -19,8 +19,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

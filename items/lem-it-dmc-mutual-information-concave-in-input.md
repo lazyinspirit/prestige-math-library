@@ -2,7 +2,7 @@
 id: lem-it-dmc-mutual-information-concave-in-input
 kind: lemma
 title: Finite-channel mutual information is concave in the input law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

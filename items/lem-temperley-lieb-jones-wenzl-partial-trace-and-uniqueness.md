@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-jones-wenzl-partial-trace-and-uniqueness
 kind: lemma
 title: "Jones–Wenzl projectors: annihilation, uniqueness, partial trace, and closure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

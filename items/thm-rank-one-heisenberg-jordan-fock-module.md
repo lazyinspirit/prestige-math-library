@@ -2,7 +2,7 @@
 id: thm-rank-one-heisenberg-jordan-fock-module
 kind: theorem
 title: "The Heisenberg Jordan Fock family is grading-restricted; it is logarithmic exactly when λ is nonzero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

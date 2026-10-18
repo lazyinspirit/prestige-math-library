@@ -2,7 +2,7 @@
 id: lem-matrix-algebra-is-a-c-star-algebra
 kind: lemma
 title: Finite matrix algebras with the operator norm are C star algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

@@ -2,7 +2,7 @@
 id: lem-multilinear-minor-pfaffian-ideal-components
 kind: lemma
 title: Multilinear components of symmetric-minor and Pfaffian ideals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

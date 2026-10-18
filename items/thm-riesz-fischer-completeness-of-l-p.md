@@ -17,7 +17,7 @@ sources:
   scraped: []
   references:
     - title: "John K. Hunter, Measure Theory, Theorem 7.10 and Corollary 7.11"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, Proposition 7.23 and Theorem 7.24"
       url: "https://measure.axler.net/MIRA.pdf"
     - title: "Stein and Shakarchi, Real Analysis, Theorem 2.2"

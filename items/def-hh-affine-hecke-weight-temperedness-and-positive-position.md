@@ -2,7 +2,7 @@
 id: def-hh-affine-hecke-weight-temperedness-and-positive-position
 kind: definition
 title: Weight temperedness and positive Langlands data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

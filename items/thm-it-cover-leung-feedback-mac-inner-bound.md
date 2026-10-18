@@ -2,7 +2,7 @@
 id: thm-it-cover-leung-feedback-mac-inner-bound
 kind: theorem
 title: Cover-Leung inner bound for the two-user DM-MAC with feedback
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-one-mode-car-majorana-and-pauli-matrices
 kind: example
 title: One-Mode CAR and Its Two Majorana Matrices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison-examples

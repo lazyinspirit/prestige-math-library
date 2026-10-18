@@ -2,7 +2,7 @@
 id: def-admissible-vertex-algebra-module
 kind: definition
 title: Admissible module for a vertex operator algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

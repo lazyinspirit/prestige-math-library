@@ -20,8 +20,6 @@ axiom_use: "None; the sums are finite and the argument uses the supplied singula
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

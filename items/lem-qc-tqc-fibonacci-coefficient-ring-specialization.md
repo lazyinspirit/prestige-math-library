@@ -2,7 +2,7 @@
 id: lem-qc-tqc-fibonacci-coefficient-ring-specialization
 kind: lemma
 title: Fibonacci coefficient ring and its exact mod-31 specialization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

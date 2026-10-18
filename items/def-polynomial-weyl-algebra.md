@@ -2,7 +2,7 @@
 id: def-polynomial-weyl-algebra
 kind: definition
 title: "Polynomial Weyl algebra and its central parameter"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

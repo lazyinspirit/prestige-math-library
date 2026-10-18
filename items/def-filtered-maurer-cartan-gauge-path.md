@@ -2,7 +2,7 @@
 id: def-filtered-maurer-cartan-gauge-path
 kind: definition
 title: "Completed polynomial gauge paths for filtered Maurer–Cartan elements"
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

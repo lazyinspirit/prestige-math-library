@@ -17,8 +17,6 @@ sources:
   references:
     - title: Tosio Kato, Perturbation Theory for Linear Operators, 2nd ed., Chapter II §1.4–§1.6
       url: https://www.maths.ed.ac.uk/~v1ranick/papers/kato1.pdf
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

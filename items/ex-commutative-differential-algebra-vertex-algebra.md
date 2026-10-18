@@ -2,7 +2,7 @@
 id: ex-commutative-differential-algebra-vertex-algebra
 kind: example
 title: A commutative differential algebra gives a vertex algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

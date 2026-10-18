@@ -24,8 +24,6 @@ axiom_use: The Jordan parts use the Axiom of Choice; the coupling inequality aft
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: J. Liu and X. Xin, Convergence of Vortex Methods for Weak Solutions to the 2-D Euler Equations with Vortex Sheet Data

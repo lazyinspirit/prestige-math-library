@@ -2,7 +2,7 @@
 id: thm-abs-orientation-identifies-cokernels-with-ko
 kind: theorem
 title: The actual ABS symbol identifies graded Clifford cokernels with KO
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-abs-cokernel-and-clifford-symbol

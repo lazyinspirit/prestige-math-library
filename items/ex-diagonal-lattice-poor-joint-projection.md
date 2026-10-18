@@ -18,8 +18,6 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Art B. Owen, Monte Carlo Book: The Quasi-Monte Carlo Parts, Chapter 15 §15.7"

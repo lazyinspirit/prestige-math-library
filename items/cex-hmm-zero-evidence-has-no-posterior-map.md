@@ -2,7 +2,7 @@
 id: cex-hmm-zero-evidence-has-no-posterior-map
 kind: counterexample
 title: Zero-evidence observations have no conditional MAP path
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

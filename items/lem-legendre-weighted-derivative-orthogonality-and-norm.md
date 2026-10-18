@@ -15,7 +15,6 @@ provenance:
   proof: ai-altered
 axiom_use: "No choice axiom is used; the proof uses polynomial integration by parts and finite coefficient identities."
 verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

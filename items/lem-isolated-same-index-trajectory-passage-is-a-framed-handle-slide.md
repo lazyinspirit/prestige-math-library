@@ -2,7 +2,7 @@
 id: lem-isolated-same-index-trajectory-passage-is-a-framed-handle-slide
 kind: lemma
 title: "An isolated transverse same-index trajectory passage gives the framed band sum"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

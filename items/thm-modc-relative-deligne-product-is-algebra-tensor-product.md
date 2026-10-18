@@ -2,7 +2,7 @@
 id: thm-modc-relative-deligne-product-is-algebra-tensor-product
 kind: theorem
 title: The relative Deligne product is represented by the braided tensor algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

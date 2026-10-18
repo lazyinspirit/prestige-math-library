@@ -2,7 +2,7 @@
 id: thm-qc-tqc-arbitrary-n-register-universality
 kind: theorem
 title: Arbitrary-size triple-encoded braid universality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

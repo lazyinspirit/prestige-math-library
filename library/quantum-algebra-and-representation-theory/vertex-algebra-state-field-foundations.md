@@ -1,7 +1,7 @@
 ---
 page: vertex-algebra-state-field-foundations
 title: "Vertex Algebra Axioms and State–Field Constructions"
-status: draft
+status: published
 requires:
   - affine-current-algebras-virasoro-and-sugawara
 items:

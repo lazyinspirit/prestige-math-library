@@ -35,7 +35,7 @@ sources:
     - title: "Philippe Rigollet and Jan-Christian Hütter, High-Dimensional Statistics: Lecture Notes, Chapter 1, §1.4, Lemma 1.18"
       url: "https://arxiv.org/pdf/2310.19244v1"
     - title: "John K. Hunter, Measure Theory, Jordan content and volume properties"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: thm-two-dimensional-highest-weight-module-for-gl-1-1-is-well-defined
 kind: theorem
 title: The two-dimensional gl(1|1) action is well-defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

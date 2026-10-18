@@ -2,7 +2,7 @@
 id: def-it-weak-and-strong-secrecy
 kind: definition
 title: "Weak and strong secrecy for wiretap code sequences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

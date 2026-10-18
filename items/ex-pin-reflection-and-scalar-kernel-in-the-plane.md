@@ -2,7 +2,7 @@
 id: ex-pin-reflection-and-scalar-kernel-in-the-plane
 kind: example
 title: A Pin generator reflects one coordinate and has scalar kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations-examples

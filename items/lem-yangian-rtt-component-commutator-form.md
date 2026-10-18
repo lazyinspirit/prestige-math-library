@@ -2,7 +2,7 @@
 id: lem-yangian-rtt-component-commutator-form
 kind: lemma
 title: "The RTT relation has an explicit component commutator form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

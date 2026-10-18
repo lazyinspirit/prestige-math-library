@@ -1,7 +1,7 @@
 ---
 page: rate-distortion-and-lossy-source-coding-examples
 title: "Rate Distortion and Lossy Source Coding — Examples"
-status: draft
+status: published
 requires:
   - rate-distortion-and-lossy-source-coding
 items: []

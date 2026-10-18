@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-jones-wenzl-quantum-binomial-criterion-over-fields
 kind: lemma
 title: "Jones–Wenzl existence over a field is detected by one quantum-binomial row"
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

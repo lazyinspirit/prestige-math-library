@@ -17,8 +17,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Gregory F. Lawler, Stochastic Calculus: An Introduction with Applications, Proposition 2.7.2, pp. 60–61"

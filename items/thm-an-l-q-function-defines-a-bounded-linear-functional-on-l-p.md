@@ -24,7 +24,7 @@ sources:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Proposition 15.10"
       url: "https://www.math.wustl.edu/~victor/classes/ma5051/rags100514.pdf"
     - title: "John K. Hunter, Measure Theory, Proposition 7.13"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement

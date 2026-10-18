@@ -2,7 +2,7 @@
 id: lem-it-finite-pinsker-euclidean-bound
 kind: lemma
 title: Finite Pinsker inequality in Euclidean norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

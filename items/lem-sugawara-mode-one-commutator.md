@@ -2,7 +2,7 @@
 id: lem-sugawara-mode-one-commutator
 kind: lemma
 title: The Sugawara mode-one commutator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

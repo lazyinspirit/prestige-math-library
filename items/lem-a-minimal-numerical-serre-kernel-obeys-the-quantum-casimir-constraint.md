@@ -2,7 +2,7 @@
 id: lem-a-minimal-numerical-serre-kernel-obeys-the-quantum-casimir-constraint
 kind: lemma
 title: A minimal numerical Serre kernel obeys the quantum Casimir constraint
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

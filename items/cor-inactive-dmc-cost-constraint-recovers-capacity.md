@@ -2,7 +2,7 @@
 id: cor-inactive-dmc-cost-constraint-recovers-capacity
 kind: corollary
 title: An inactive DMC cost constraint recovers ordinary capacity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

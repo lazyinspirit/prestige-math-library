@@ -2,7 +2,7 @@
 id: lem-finite-relative-mixed-handle-movies-give-marked-kirby-moves
 kind: lemma
 title: "Finite relative mixed-handle movies give marked Kirby moves"
-status: draft
+status: published
 dependency_level: 11
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

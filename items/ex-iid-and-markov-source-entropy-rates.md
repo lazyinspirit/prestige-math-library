@@ -2,7 +2,7 @@
 id: ex-iid-and-markov-source-entropy-rates
 kind: example
 title: "IID and two-state Markov entropy rates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

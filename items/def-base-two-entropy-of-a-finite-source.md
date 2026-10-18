@@ -2,7 +2,7 @@
 id: def-base-two-entropy-of-a-finite-source
 kind: definition
 title: "Base-two entropy of a finite source"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

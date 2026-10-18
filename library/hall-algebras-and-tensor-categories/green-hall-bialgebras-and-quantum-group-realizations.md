@@ -1,7 +1,7 @@
 ---
 page: green-hall-bialgebras-and-quantum-group-realizations
 title: Euler-Twisted Hall Products, Green Coproducts, and Quantum Groups
-status: draft
+status: published
 requires:
   - finitary-ringel-hall-algebras
   - bialgebras-convolution-and-antipode-identities

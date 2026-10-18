@@ -2,7 +2,7 @@
 id: def-finite-dmc-feedback-code
 kind: definition
 title: Causal feedback codes for a finite cost-constrained DMC
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: lem-affine-closest-pairs-and-downward-facet-translation
 kind: lemma
 title: Affine closest pairs and downward translation from a lower facet
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

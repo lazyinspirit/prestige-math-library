@@ -2,7 +2,7 @@
 id: def-heisenberg-group-of-a-symplectic-vector-space
 kind: definition
 title: The Heisenberg group of a finite-dimensional symplectic vector space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

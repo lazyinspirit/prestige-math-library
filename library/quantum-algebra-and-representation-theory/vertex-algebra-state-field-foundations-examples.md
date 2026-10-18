@@ -1,7 +1,7 @@
 ---
 page: vertex-algebra-state-field-foundations-examples
 title: "Vertex Algebra Axioms and State–Field Constructions: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - vertex-algebra-state-field-foundations
 items: []

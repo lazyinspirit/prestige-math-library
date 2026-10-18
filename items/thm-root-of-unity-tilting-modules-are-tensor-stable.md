@@ -2,7 +2,7 @@
 id: thm-root-of-unity-tilting-modules-are-tensor-stable
 kind: theorem
 title: Tensor stability and dual stability of root-of-unity tilting modules
-status: draft
+status: published
 dependency_level: 6
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -16,8 +16,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "S. M. Rump, Verification methods: Rigorous results using floating-point arithmetic, Acta Numerica 19 (2010)"

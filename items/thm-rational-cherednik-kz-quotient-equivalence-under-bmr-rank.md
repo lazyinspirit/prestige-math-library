@@ -2,7 +2,7 @@
 id: thm-rational-cherednik-kz-quotient-equivalence-under-bmr-rank
 kind: theorem
 title: "KZ identifies the torsion quotient with Hecke modules under the Hecke-rank hypothesis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 14

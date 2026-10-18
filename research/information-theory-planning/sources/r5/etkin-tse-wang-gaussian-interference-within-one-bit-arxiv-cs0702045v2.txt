@@ -1,0 +1,5921 @@
+arXiv:cs/0702045v2  [cs.IT]  9 Feb 2007
+
+Gaussian Interference Channel Capacity to Within One Bit∗
+
+Raul H. Etkin †, David N. C. Tse ‡, Hua Wang §
+
+raul.etkin@hp.com, dtse@eecs.berkeley.edu, huawang@uiuc.edu
+
+November 26, 2024
+
+Abstract
+
+The capacity of the two-user Gaussian interference channel has been open for thirty years. The under-
+standing on this problem has been limited. The best known achievable region is due to Han-Kobayashi
+but its characterization is very complicated. It is also not known how tight the existing outer bounds are.
+In this work, we show that the existing outer bounds can in fact be arbitrarily loose in some parameter
+ranges, and by deriving new outer bounds, we show that a simplified Han-Kobayashi type scheme can
+achieve to within a single bit the capacity for all values of the channel parameters. We also show that
+the scheme is asymptotically optimal at certain high SNR regimes. Using our results, we provide a nat-
+ural generalization of the point-to-point classical notion of degrees of freedom to interference-limited
+scenarios.
+
+1
+Introduction
+
+Interference is a central phenomenon in wireless communication when multiple uncoordinated links share
+a common communication medium. Most state-of-the-art wireless systems deal with interference in one of
+two ways:
+
+• orthogonalize the communication links in time or frequency, so that they do not interfere with each
+other at all;
+
+∗The ordering of the authors in this paper is alphabetical.
+
+†R. Etkin is with Hewlett-Packard Laboratories, Palo Alto, CA 94304, USA. This work was done when R. Etkin was a graduate
+student at U.C. Berkeley. R. Etkin was supported by the National Science Foundation under an ITR grant: “the 3R’s of Spectrum
+Management: Reuse, Reduce and Recycle”.
+
+‡D. Tse is with Wireless Foundations, University of California, Berkeley, Berkeley, CA 94720, USA. D. Tse is supported by the
+National Science Foundation under an ITR grant: “the 3R’s of Spectrum Management: Reuse, Reduce and Recycle”.
+
+§H. Wang is with the Dept. of Electrical and Computer Engineering, University of Illinois, Urbana-Champaign, Urbana, IL
+61801, USA. This work was done when H. Wang was visiting U.C. Berkeley. H. Wang is supported by a Vodafone US Foundation
+Graduate Fellowship and NSF CCR CAREER 0237549.
+
+1
+
+
+• allow the communication links to share the same degrees of freedom, but treat each other’s interfer-
+ence as adding to the noise floor.
+
+It is clear that both approaches can be sub-optimal. The first approach entails an a priori loss of degrees
+of freedom in both links, no matter how weak the potential interference is. The second approach treats
+interference as pure noise while it actually carries information and has structure that can potentially be
+exploited in mitigating its effect.
+
+These considerations lead to the natural question of what is the best performance one can achieve without
+making any a priori assumptions on how the common resource is shared. A basic information theory model
+to study this question is the two-user Gaussian interference channel, where two point-to-point links with
+additive white Gaussian noise interfere with each other (Figure 1).
+The capacity region of this channel is
+
+Rx
+Tx
+
+Rx
+Tx
+
++
+
++
+
+x
+
+z
+
+y
+
+x
+
+z
+
+y
+
+1
+
+1
+
+1
+
+1
+1
+
+2
+
+2
+
+2
+
+2
+2
+
+h
+
+h
+
+h
+
+h
+
+11
+
+12
+
+21
+
+22
+
+Figure 1: Two-user Gaussian interference channel.
+
+the set of all simultaneously achievable rate pairs (R1, R2) in the two interfering links, and characterizes
+the fundamental tradeoff between the performance achievable in the two links in face of interference. Un-
+fortunately, the problem of characterizing this region has been open for over thirty years. The only case in
+which the capacity is known is in the strong interference case, where each receiver has a better reception of
+the other user’s signal than the intended receiver [1, 2]. The best known strategy for the other cases is due
+to Han and Kobayashi [1]. This strategy is a natural one and involves splitting the transmitted information
+of both users into two parts: private information to be decoded only at own receiver and common informa-
+tion that can be decoded at both receivers. By decoding the common information, part of the interference
+can be cancelled off, while the remaining private information from the other user is treated as noise. The
+Han-Kobayashi strategy allows arbitrary splits of each user’s transmit power into the private and common
+information portions as well as time sharing between multiple such splits. Unfortunately, the optimization
+among such myriads of possibilities is not well-understood, so while it is clear that it will be no worse
+than the above-mentioned strategies as it includes them as special cases, it is not very clear how much im-
+provement can be obtained and in which parameter regime would one get significant improvement. More
+importantly, it is also not clear how close to capacity can such a scheme get and whether there will be other
+strategies that can do significantly better.
+
+In this paper, we make progress on this state of affairs by showing that a very simple Han-Kobayashi
+type scheme can in fact achieve rates within 1 bits/s/Hz of the capacity of the channel for all values of the
+
+2
+
+
+channel parameters. That is, this scheme can achieve the rate pair (R1 −1, R2 −1) for any (R1, R2) in
+the interference channel capacity region. This result is particularly relevant in the high signal-to-noise-ratio
+(SNR) regime, where the achievable rates are high and grow unbounded as the noise level goes to zero. In
+fact, in some high SNR regimes, we can strengthen our results to show that our scheme is asymptotically
+optimal. The high SNR regime is the interference-limited scenario: when the noise is small, interference
+from one link will have a significant impact on the performance of the other. The low SNR regime is less
+interesting since here the performance of each link is primarily noise-limited and interference is not having
+a significant effect.
+
+The key feature of the scheme is that the power of the private information of each user should be set such
+that it is received at the level of the Gaussian noise at the other receiver. In this way, the interference caused
+by the private information has a small effect on the other link as compared to the impairments already caused
+by the noise. At the same time, quite a lot of private information can be conveyed in the own link if the
+direct gain is appreciably larger than the cross gain.
+
+To prove our result, we need good outer bounds on the capacity region of the interference channel. The
+best known outer bound is based on giving extra side information to one of the receivers so that it can decode
+all of the information from the other user (the one-sided interference channel and related bounds). It turns
+out that while this bound is sufficiently tight in some parameter regimes, it can get arbitrarily loose in others.
+We derive new outer bounds to cover for the other parameter ranges.
+
+At high SNR, it is well known that the capacity of a point-to-point additive white Gaussian noise (AWGN)
+link, in bits/s/Hz, is approximately:
+Cawgn ≈log SNR
+(1)
+
+Using our results, we can derive analogous approximations of the Gaussian interference channel capacity,
+accurate to within one bit/s/Hz. Just to give a flavor of the results, let us consider the symmetric case where
+the signal-to-noise ratios at the two receivers are the same (denoted by SNR) and the interference-to-noise
+ratios at the receivers are also the same (denoted by INR). The symmetric capacity, i.e. the best rate that
+both users can simultaneously achieve, is approximately:
+
+Csym ≈
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+log(SNR
+
+INR )
+log INR < 1
+
+2 log SNR
+(regime 1)
+log INR
+1
+2 log SNR < log INR < 2
+
+3 log SNR
+(regime 2)
+log SNR
+√
+
+INR
+2
+3 log SNR < log INR < log SNR
+(regime 3)
+
+log
+√
+
+INR
+log SNR < log INR < 2 log SNR
+(regime 4)
+log SNR
+log INR > 2 log SNR
+(regime 5)
+
+(2)
+
+Note that there are five regimes in which the qualitative behaviors of the capacity are different.
+
+The fifth regime is the very strong interference regime [2]. Here the interference is so strong that each
+receiver can decode the other transmitter’s information, treating its own signal as noise, before decoding
+its own information. Thus, interference has no impact on the performance of the other link. The fourth
+regime is the strong interference regime, where the optimal strategy is for both receivers to decode entirely
+each other’s signal, i.e. all the transmitted information is common information. Here, the capacity increases
+
+3
+
+
+monotonically with INR because increasing INR increases the common information rate.
+
+The capacity in the fourth and fifth regimes follow from previous results. The first three regimes fall
+into the weak interference regime, and the capacity in these regimes is a consequence of the new results
+that we obtain. In these regimes, the interference is not strong enough to be decoded in its entirety. In
+fact, the capacity approximation (2) in regime 1 implies that if the interference is very weak, then treating
+interference as noise is optimal. The capacity expression for regimes 2 and 3 however imply that if the
+interference is not very weak, decoding it partially can significantly improve performance. Interestingly, the
+capacity is not monotonically decreasing with INR in the weak interference regime.
+
+In point-to-point links, the notion of degrees of freedom is a fundamental measure of channel resources. It
+tells us how many signal dimensions are available for communication. In the (scalar) AWGN channel, there
+is one degree of freedom per second per Hz. When multiple links share the communication medium, one
+can think of the mutual interference as reducing the available degrees of freedom for useful communication.
+Our results quantify this reduction. Define
+
+α := log INR
+
+log SNR
+
+as the ratio of the interference-to-noise ratio and the signal-to-noise ratio in dB scale, and
+
+dsym := Csym
+
+Cawgn
+
+as the generalized degrees of freedom per user. Then (2) yields the following characterization:
+
+dsym =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1 −α
+0 ≤α ≤1
+
+2
+α
+1
+2 ≤α ≤2
+
+3
+1 −α
+
+2
+2
+3 ≤α ≤1
+α
+
+2
+1 ≤α ≤2
+1
+α ≥2.
+
+(3)
+
+This is plotted in Figure 2, together with the performance of our baseline strategies of orthogonalizing
+and treating interference as noise. Note that orthogonalizing between the links, in which each link achieves
+half the degrees of freedom, is strictly sub-optimal except when α = 1
+
+2 and α = 1. Treating interference as
+noise, on the other hand, is strictly sub-optimal except for α ≤1
+
+2. Note also the fundamental importance of
+comparing the signal-to-noise and the interference-to-noise ratios in dB scale.
+
+The rest of the paper is structured as follows. In Section 2, we describe the model. Section 3 focuses
+on the symmetric rate point in the symmetric interference channel, where the results can be described in
+the simplest form. Results on the entire capacity region for the general two-user channel are explained in
+Section 4. Section 5 investigates how the generalized degrees of freedom in the general case depend on the
+various channel parameters. Section 6 provides intuition about the simple Han-Kobayashi scheme used in
+this paper. Section 7 explores some analogies between our results and those of El Gamal and Costa on a
+deterministic interference channel [3].
+
+Regarding notation, we will use lowercase or uppercase letters for scalars, lowercase boldface letters for
+vectors, and calligraphic letters for sets. For example we write h or P for scalars, x for a vector, and R for
+
+4
+
+
+capacity
+
+orthogonal�(TDM�or�FDM)
+
+interference�treated�as�noise
+
+Csym
+dsym
+log�SNR
+=
+
+���log�SNR
+log�INR
+
+0.5
+
+0.66
+
+0.66
+
+Figure 2: Generalized degrees of freedom for two suboptimal schemes vs. capacity. These suboptimal schemes are
+treating interference as noise and orthogonalizing the users over time or frequency.
+
+a set. We use H(·) to denote binary entropy of a discrete random variable or vector, h(·) to denote binary
+differential entropy of a continuous random variable or vector, and I(·; ·) to denote mutual information. In
+addition, unless otherwise stated, all logarithms are to the base 2.
+
+2
+Model
+
+In this section we describe the model to be used in the rest of this part. We consider a two-user Gaussian
+interference channel. In this model there are two transmitter-receiver pairs, where each transmitter wants to
+communicate with its corresponding receiver (cf. Figure 1).
+
+This channel is represented by the equations:
+
+y1
+=
+h11x1 + h21x2 + z1
+
+y2
+=
+h12x1 + h22x2 + z2
+(4)
+
+where for i = 1, 2, xi ∈C is subject to a power constraint Pi, i.e. E[|xi|2] ≤Pi, and the noise processes
+zi ∼CN(0, N0) are i.i.d. over time. For convenience we will denote the power gains of the channels by
+|hij|2 = |hij|2, i, j = 1, 2.
+
+It is easy to see that the capacity region of the interference channel depends only on four parameters: the
+signal to noise and interference to noise ratios. For i = 1, 2, let SNRi = |hii|2Pi/N0 be the signal to noise
+ratio of user i, and INR1 = |h21|2P2/N0 (INR2 = |h12|2P1/N0) be the interference to noise ratio of user
+1 (2). As will become apparent from our analysis, this parameterization in terms of SNR and INR is more
+natural for the interference channel, because it puts in evidence the main factors that determine the channel
+capacity.
+
+5
+
+
+For a given block length n, user i communicates a message mi ∈{1, . . . , 2nRi} by choosing a codeword
+from a codebook Ci,n, with |Ci,n| = 2nRi. The codewords {ci(mi)} of this codebook must satisfy the
+average power constraint:
+1
+n
+
+n
+�
+
+t=1
+|ci(mi)[t]|2 ≤Pi
+
+Receiver i observes the channel outputs {yi[t] : t = 1, . . . , n} and uses a decoding function fi,n : Cn →N
+to get the estimate ˆmi of the transmitted message mi. The receiver is in error whenever ˆmi ̸= mi. The
+average probability of error for user i is given by
+
+ǫi,n = E[P( ˆmi ̸= mi)]
+
+where the expectation is taken with respect to the random choice of the transmitted messages m1 and m2.
+
+A rate pair (R1, R2) is achievable if there exists a family of codebook pairs {(C1,n, C2,n)}n with codewords
+satisfying the power constraints P1 and P2 respectively, and decoding functions {(f1,n(·), f2,n(·)}n, such
+that the average decoding error probabilities ǫ1,n, ǫ2,n go to zero as the block length n goes to infinity.
+
+The capacity region R of the interference channel is the closure of the set of achievable rate pairs.
+
+3
+Symmetric Gaussian Interference Channel
+
+3.1
+Symmetric channel and symmetric rate point
+
+In order to introduce the main ideas and results in the simplest possible setting, we start our analysis of the
+interference channel capacity region by considering a symmetric interference channel and the symmetric
+rate point.
+
+In the symmetric interference channel we have |h11|2 = |h22|2 = |hd|2, |h12|2 = |h21|2 = |hc|2 and
+P1 = P2 = P, or equivalently, SNR1 = SNR2 and INR1 = INR2. In addition, the symmetric capacity is the
+solution to the following optimization problem:
+
+Csym =
+
+�
+Maximize:
+min{R1, R2}
+Subject to:
+(R1, R2) ∈R
+
+where R is the capacity region of the interference channel.
+
+Due to the convexity and symmetry of the capacity region of the symmetric channel, the symmetric ca-
+pacity is attained at the point of the capacity region that maximizes the sum rate R1 +R2. Since the capacity
+region is known in the strong interference case when INR/SNR ≥1, we will focus on the case where
+0 < INR/SNR < 1. In addition, we will concentrate on the situation where INR ≥1, i.e. the interfering
+signal power is at least as large as the noise power. The case INR < 1 is not so interesting because the
+communication is essentially limited by noise. We will address this case briefly later.
+
+6
+
+
+3.2
+A simple communication scheme
+
+We will use a simple communication scheme that is a special case of the general type of schemes introduced
+by Han and Kobayashi in [1]. For a given block length n user i chooses a private message from codebook
+Cu
+i,n and a common message from codebook Cw
+i,n. These codebooks satisfy the power constraints Pu and
+Pw with Pu + Pw = P. The sizes of these codebooks are such that |Cu
+i,n| · |Cw
+i,n| = 2nRi. After selecting
+the corresponding codewords user i transmits the signal xi = cu
+i + cw
+i by adding the private and common
+codewords. The private codewords are meant to be decoded by receiver i, while the common codewords
+must be decoded by both receivers.
+
+The general Han and Kobayashi scheme allows to generate the codebooks using arbitrary input distribu-
+tions, and allows to do time sharing between multiple strategies. We will consider a simple scheme where
+the codebooks are generated by using i.i.d. random Gaussian random variables with the appropriate vari-
+ances. Let INRp = |hc|2Pu/N0, that is, INRp is the interference to noise ratio created onto the non-intending
+receiver by the private message. We choose INRp = 1, i.e. the interference created by the private message
+has the same power as the Gaussian noise1. In addition, we use a fixed strategy, i.e. we don’t do time
+sharing.
+
+Why do we choose INRp = 1 ? From the point of view of a single user, that is, if we don’t take interference
+into account, one should make the private message power as large as possible (i.e. set INRp = INR).
+However, due to interference, it may be convenient to reduce the private message power, so that part of the
+interfering signal (the common message) can be decoded and subtracted at the other receiver. We see that
+there is a tradeoff between achieving a large rate at one’s link and minimizing the interference caused at the
+other user’s link. In Figure 3 we plot the single user rate as a function of the interference power created by
+the private message of the other user. We can see that if we choose INRp = 1 the effect of the interference
+caused by the private message is small. At the same time, INRp = 1 allows to obtain a relatively large
+private message rate in the direct link. We will give a deeper explanation later on in Section 6.
+
+-10
+10
+
+10
+
+20
+30
+
+4
+
+6
+
+8
+
+INR��[dB]
+0�dB
+
+SNR=30�dB
+
+log
+1+
+SNR
+1+INR
+(
+)
+p
+
+p
+
+Figure 3: Rate vs. interference power level. The choice INRp = 1 (0 dB) does not create too much interference and
+it achieves a large private message rate.
+
+1Note that this is possible with the available power under the assumption INR ≥1. If INR < 1 one can choose INRp = INR,
+but will not consider this case in this section.
+
+7
+
+
+We will show that this simple scheme allows us to achieve a symmetric rate close to the symmetric rate
+capacity of the channel. In order to determine the symmetric rate that we can achieve with this scheme, it
+is useful to think of each user as being split into two virtual users: private user Ui and common user Wi.
+Let MAC1 be the multiple access channel formed by virtual users U1, W1, and W2, and receiver 1, with
+the signal from virtual user U2 being treated as noise. In a similar way, let MAC2 be the multiple access
+channel formed by virtual users U2, W1, and W2, and receiver 2, with the signal from virtual user U1 being
+treated as noise. Since the common messages must be decoded by both receivers, while the private messages
+must be decoded only by the intending receiver, we see that the rates achievable by a the Han and Kobayashi
+scheme correspond to the intersection of the capacity regions of MAC1 and MAC2.
+
+Among all the possible rate assignments for the private and common messages of this scheme, we choose
+the private rates of both users, as well as the common rate of both users to be equal, i.e. Ru,1 = Ru,2 and
+Rw,1 = Rw,2. We also fix a decoding order at each receiver, so that the common messages are decoded
+first, while the private message is decoded last. This choice of rates and decoding order allows for an easy
+analysis of the scheme and, as will be shown later, also achieves a symmetric rate close to capacity.
+
+Since the private message is decoded last, while the private message of the other user is treated as noise,
+the private rate of each user is given by:
+
+Ru = log
+�
+1 +
+SNR · INRp
+INR(1 + INRp)
+
+�
+= log
+�
+1 + SNR
+
+2INR
+
+�
+.
+
+Since each receiver decodes the common messages first, both private messages are treated as noise when
+decoding the common messages. With this decoding order, the sum rate of the common messages must
+satisfy two constraints:
+
+Rw,1 + Rw,2 ≤log
+�
+1 + (INR −1)(SNR + INR)
+
+SNR + 2INR
+
+�
+(5)
+
+and
+Rw,1 + Rw,2 ≤2 log
+�
+1 + INR(INR −1)
+
+SNR + 2INR
+
+�
+(6)
+
+where (5) arises from the sum rate constraint of the MAC formed by virtual users W1 and W2 at receiver 1
+(or receiver 2) when the messages from virtual users U1 and U2 are treated as noise, and (6) arises from the
+individual rate constraint of decoding the message of virtual user W1 at receiver 2 and virtual user W2 at
+receiver 1, treating the messages from virtual users U1 and U2 as noise (see Figure 4).
+
+Therefore, with the simple Han and Kobayashi scheme we obtain a symmetric rate:
+
+RHK
+=
+log
+�
+1 + SNR
+
+2INR
+
+�
++ min
+�1
+
+2 log
+�
+1 + (INR −1)(SNR + INR)
+
+SNR + 2INR
+
+�
+, log
+�
+1 + INR(INR −1)
+
+SNR + 2INR
+
+��
+
+=
+min
+�1
+
+2 log (1 + SNR + INR) + 1
+
+2 log
+�
+2 + SNR
+
+INR
+
+�
+−1, log
+�
+1 + INR + SNR
+
+INR
+
+�
+−1
+�
+.
+(7)
+
+By comparing (5) and (6) we can determine the parameter ranges in which each of the terms of the
+min{·, ·} in (7) is active. Define:
+
+B1
+=
+�
+(SNR, INR) : INR ≥1 and SNR(SNR + INR) < INR2(INR + 1)
+�
+
+B2
+=
+�
+(SNR, INR) : INR ≥1 and SNR(SNR + INR) ≥INR2(INR + 1)
+�
+.
+(8)
+
+8
+
+
+R
+
+R
+
+w,1
+
+w,2
+
+MAC(W��,W��)�@�Rx
+
+MAC(W��,W��)�@�Rx
+
+1
+
+1
+
+1
+
+2
+
+2
+
+2
+
+R
+
+R
+
+R
+
+w,1
+
+w,2
+
+MAC(W��,W��)�@�Rx
+
+MAC(W��,W��)�@�Rx
+
+1
+
+1
+
+1
+
+2
+
+2
+
+2
+
+R
+
+Figure 4: Intersection of the multiple access channel regions corresponding to virtual users W1 and W2 at receivers
+1 and 2, when the signals from virtual users U1 and U2 are treated as noise. The left figure corresponds to the case
+in which the sum rate constraint (5) is active, while the right figure corresponds to the case in which the sum rate
+constraint(6) is active. In both cases, the symmetric rate point is indicated. Note that due to the symmetry in the
+channel and power allocations, the regions MAC(W1, W2) at receivers 1 and 2 are mirror images of each other with
+respect to the line Rw,1 = Rw,2.
+
+Then, the first (second) term of the min{·, ·} is active in B1 (B2). We denote by RHK1 (RHK2) the
+symmetric rate expression that results in B1 (B2).
+
+We can gain further insight into the achievable rate (7) and the different parameter regimes B1, B2, by
+considering how the ratio RHK/Cawgn varies for different interference levels. Dividing (7) by log(1+SNR),
+we obtain for large SNR, INR:
+
+RHK
+Cawgn
+=
+min
+�1
+
+2 log (1 + SNR + INR) + 1
+
+2 log
+�
+2 + SNR
+
+INR
+�
+−1, log
+�
+1 + INR + SNR
+
+INR
+�
+−1
+�
+
+log(1 + SNR)
+
+≈
+min
+�1
+
+2 log (SNR) + 1
+
+2 [log (SNR) −log (INR)] , max {log (INR) , log (SNR) −log (INR)}
+�
+
+log(SNR)
+
+≈
+min
+�
+1 −1
+
+2
+log INR
+log SNR, max
+�log INR
+
+log SNR, 1 −log INR
+
+log SNR
+
+��
+.
+(9)
+
+We define the interference level α as the ratio of INR and SNR in dB, that is:
+
+α := log INR
+
+log SNR
+
+and rewrite (9) as a function of α:
+
+RHK(α)
+
+Cawgn
+≈min
+�
+1 −α
+
+2 , max {α, 1 −α}
+�
+(10)
+
+By inspecting (10) we can readily identify three different regimes. The first term of the min{·, ·} is active
+in (10) when 2/3 < α < 1. This corresponds to the parameter range B1, in which the MAC constraint (5)
+is active. For 0 < α < 2/3 the second term of the min{·, ·} is active in (10), which corresponds to the
+parameter range B2. In this range the MAC constraint (6) is active. In addition, we can further identify two
+subregimes, depending on whether 1/2 < α < 2/3 (the first term of the max{·, ·} is active) or 0 < α < 1/2
+(the second term of the max{·, ·} is active). Figure 5 shows how RHK/Cawgn varies with α in the different
+parameter regimes.
+
+9
+
+
+0
+0.5
+0.66
+
+0.66
+
+1
+0
+
+1
+
+0.5
+
+RHK
+Cawgn
+
+log�SNR
+log�INR
+��
+
+B
+B
+1
+2
+
+1
+�
+2
+-
+�
+
+1-�
+
+Figure 5: Achievable rate as a fraction of single user capacity vs. interference level.
+
+3.3
+Known upper bounds
+
+In order to evaluate the performance of our communication scheme, we can compare the symmetric rate
+achieved with an upper bound. We can obtain this upper bound by considering any outer bound to the
+interference channel capacity region evaluated at R1 = R2. The best known outer bound to the interference
+channel capacity region is that given in [6] Theorem 2. We analyze this bound in Appendix A, and provide
+in this section an alternative bound that has similar performance and is easier to obtain and analyze.
+
+We will consider a general interference channel so that the upper bounds that we derive are not restricted
+to the symmetric interference channel. Consider a modified interference channel, where a genie provides
+the side information x2 to receiver 1 (see Figure 6).
+
+Rx
+Tx
+
+Rx
+Tx
+
++
+
++
+
+x
+
+z
+
+y
+
+x
+
+x
+
+z
+
+y
+
+1
+
+1
+
+1
+
+2
+
+1
+1
+
+2
+
+2
+
+2
+
+2
+2
+
+h
+
+h
+
+h
+
+h
+
+11
+
+12
+
+21
+
+22
+
+Figure 6:
+Genie-aided two-user interference
+channel. A genie provides signal x2 to receiver
+1.
+
+Rx
+Tx
+
+Rx
+Tx
+
++
+
++
+
+x
+
+z
+
+y
+
+x
+
+z
+
+y
+
+1
+
+1
+
+1
+
+1
+1
+
+2
+
+2
+
+2
+
+2
+2
+
+h
+
+h
+
+h
+
+11
+
+12
+
+22
+
+Figure 7: One-sided interference channel.
+
+10
+
+
+Since xn
+1 is independent of xn
+2 we can write for any block of length n:
+
+I(xn
+1; yn
+1 , xn
+2) = I(xn
+1; xn
+2) + I(xn
+1; yn
+1 |xn
+2) = I(xn
+1; h11xn
+1 + zn
+1)
+
+and it follows that receiver 1 can get an interference-free signal by subtracting the interference h21x2 using
+the side information provided by the genie. Therefore we obtain that the genie-aided channel is equivalent
+to the one-sided interference channel depicted in Figure 7.
+
+The sum rate capacity of a one-sided interference channel for the case of INR2 < SNR1 is known from
+previous results [8] and will be explicitly derived in Section 4.1. It is given by:
+
+Rsum(one-sided IC) = log (1 + SNR1) + log
+�
+1 +
+SNR2
+1 + INR2
+
+�
+(11)
+
+and since the aid of the genie can only increase the capacity region of the interference channel, we obtain
+the upper bound for the symmetric rate:
+
+RUB = 1
+
+2 log (1 + SNR) + 1
+
+2 log
+�
+1 +
+SNR
+1 + INR
+
+�
+.
+(12)
+
+In order to compare this bound with the rate obtained with our simple Han-Kobayashi scheme we approx-
+imately compute the ratio RUB2/Cawgn for large SNR, INR:
+
+RUB
+Cawgn
+≈1 −1
+
+2
+log INR
+log SNR = 1 −α
+
+2 .
+(13)
+
+We see that (13) coincides with (10) when 2/3 < α < 1, but (13) and (10) differ when 0 < α < 2/3 (see
+Figure 8).
+
+0
+0.5
+0.66
+
+0.66
+
+1
+0
+
+1
+
+0.5
+
+R
+Cawgn
+
+log�SNR
+log�INR
+��
+
+B
+B
+1
+2
+
+1
+�
+2
+-
+
+1
+�
+2
+-
+
+�
+
+1-�
+
+upper�bound
+
+Han-Kobayashi�scheme
+
+Figure 8: Upper bound and achievable Han-Kobayashi rate (relative to single user capacity) as a function of the
+interference level α.
+
+Figure 8 suggests that the bound (12) is reasonably tight in the parameter range B1. It turns out that the
+upper bound (12) and the lower bound (7) differ by at most 1 bit/s/Hz in the parameter range B1. This can
+
+11
+
+
+be checked by writing for the parameter range B1:
+
+RUB −RHK1
+=
+1
+2 log (1 + SNR) + 1
+
+2 log
+�
+1 +
+SNR
+1 + INR
+
+�
+−1
+
+2 log (1 + SNR + INR)
+
+−1
+
+2 log
+�
+2 + SNR
+
+INR
+
+�
++ 1
+
+=
+1
+2 log
+�1 + SNR
+
+1 + INR
+
+�
+−1
+
+2 log
+�2INR + SNR
+
+INR
+
+�
++ 1
+
+<
+1
+2 log
+�
+1 + SNR
+2INR + SNR
+
+�
++ 1
+
+≤
+1
+(14)
+
+where we used the assumption INR ≥1 in the last inequality.
+
+We also observe in Figure 8 that the gap between the upper bound and the achievable rate can be arbitrarily
+large in the parameter range B22. This large gap could be due to a very suboptimal scheme, a loose upper
+bound, or both. It turns out that the large gap is due to the looseness of the upper bound.
+
+Even though the bound (11) is not as good as the bounds presented in [6], all these bounds have the same
+worst case 1-bit/s/Hz gap with respect to our simple communication strategy in the parameter range B1.
+Also, in the parameter range B2 all these bounds are arbitrarily loose.
+
+Why are all these bounds loose in B2 ? The problem is that they rely, in one way or another, in giving side
+information to receiver 1 so that he can eventually cancel the interfering signal from user 2. We can gain
+some intuition about why these bounds are loose in B2 by considering our simple communication scheme
+in the genie-aided channel of Figure 6. The side information provided by the genie allows receiver 1 to
+subtract the interference generated by transmitter 2. The rates of the virtual private users U1 and U2 are in
+this case:
+
+Ru1
+=
+log
+�
+1 + SNR · INRp
+
+INR
+
+�
+= log
+�
+1 + SNR
+
+INR
+
+�
+
+Ru2
+=
+log
+�
+1 +
+SNR · INRp
+INR(1 + INRp)
+
+�
+= log
+�
+1 + SNR
+
+2INR
+
+�
+
+and we see that virtual user U1 gains at most 1 bit/s/Hz due to the help of the genie. The sum rate of the MAC
+formed by virtual users W1 and W2 at receiver 2 does not change due to the aid of the genie. Therefore, the
+sum rate constraint (5) still holds. However, due to the aid of the genie receiver 1 can decode the message
+of virtual user W2 and the sum rate constraint (6) does not appear in this case.
+
+In B1 the sum rate constraint (5) is active in the original channel, and the aid of the genie does not allow to
+increase the sum rate by a large amount. In this regime, the bound obtained from the genie-aided channel is
+good. In contrast, in B2 the sum rate constraint (6) is active in the original channel, and the genie effectively
+releases this constraint by providing enough information to receiver 1 to decode the message of virtual user
+W2. Since in B2 the constraint (5) is larger than (6) (and the gap between the two constraints can be made
+arbitrarily large), the bound obtained from the genie-aided channel is loose.
+
+2Note that in Figure 8 the rates are plotted relative to Cawgn and any non-zero gap in the figure translates into an unbounded gap
+in the rates as SNR →∞.
+
+12
+
+
+3.4
+A new upper bound
+
+In order to derive a tighter sum rate bound for the parameter range B2 we will make use of the help of
+genies, but will avoid giving too much information to either receiver. The information that we will provide
+will not allow either receiver to completely decode the message of the interfering transmitter. The new sum
+rate upper bound is given in the following theorem, which we state for a general (not necessarily symmetric)
+Gaussian interference channel.
+
+Theorem 1. For a Gaussian interference channel as defined in Section 2, equation (4), the sum rate is upper
+bounded by
+
+R1 + R2 ≤log
+�
+1 + INR1 +
+SNR1
+1 + INR2
+
+�
++ log
+�
+1 + INR2 +
+SNR2
+1 + INR1
+
+�
+.
+(15)
+
+Proof. Define
+
+s1
+=
+h12x1 + z2
+
+s2
+=
+h21x2 + z1
+
+and consider the genie-aided channel where a genie provides s1 to receiver 1 and s2 to receiver 2 (see Figure
+9).
+Clearly, the capacity region of this genie-aided channel is an outer bound to the capacity region of
+
+Tx
+
+Tx
+
++
+
++
+
++
+
++
+
+x
+
+x
+
+1
+
+z 1
+
+y 1
+
+s 2
+
+s 1
+1
+Rx1
+
+2
+
+z 2
+
+y 2
+
+2
+Rx2
+
+h11
+
+h12
+
+h21
+
+h22
+
+Figure 9: Genie-aided two-user Gaussian interference channel. A genie provides signals s1 to receiver 1 and s2 to
+receiver 2.
+
+the original interference channel. Therefore, we can obtain an upper bound for the sum rate of the original
+channel by computing an upper bound on the sum rate of the genie aided channel. For a block of length n
+
+13
+
+
+we can bound the sum rate of the genie-aided channel in the following way:
+
+n(R1 + R2)
+≤
+I(xn
+1; yn
+1 , sn
+1) + I(xn
+2; yn
+2 , sn
+2) + nǫn
+
+=
+I(xn
+1; sn
+1) + I(xn
+1; yn
+1 |sn
+1) + I(xn
+2; sn
+2) + I(xn
+2; yn
+2 |sn
+2) + nǫn
+
+=
+h(sn
+1) −h(sn
+1|xn
+1) + h(yn
+1 |sn
+1) −h(yn
+1 |xn
+1, sn
+1)
+
++h(sn
+2) −h(sn
+2|xn
+2) + h(yn
+2 |sn
+2) −h(yn
+2 |xn
+2, sn
+2) + nǫn
+
+=
+h(sn
+1) −h(zn
+2) + h(yn
+1 |sn
+1) −h(sn
+2)
+
++h(sn
+2) −h(zn
+1) + h(yn
+2 |sn
+2) −h(sn
+1) + nǫn
+
+=
+h(yn
+1 |sn
+1) + h(yn
+2 |sn
+2) −h(zn
+1) −h(zn
+2) + nǫn
+
+≤
+
+n
+�
+
+i=1
+[h(y1i|s1i) + h(y2i|s2i) −h(z1i) −h(z2i)] + nǫn
+(16)
+
+where the last inequality follows by the fact that removing conditioning cannot reduce differential entropy,
+and ǫn →0 as n →∞.
+
+Let E[x2
+1i] = P1i and E[x2
+2i] = P2i, we have
+
+1
+n
+
+n
+�
+
+i=1
+h(y1i|s1i)
+(a)
+≤
+1
+n log
+�
+πe
+�
+N0 + |h21|2P2i +
+|h11|2P1iN0
+N0 + |h12|2P1i
+
+��
+
+(b)
+≤
+log
+
+
+
+πe
+
+
+
+
+
+N0 + |h21|2
+�
+1
+n
+
+n
+�
+
+i=1
+P2i
+
+�
+
++
+|h11|2
+�
+1
+n
+
+n�
+
+i=1
+P1i
+
+�
+N0
+
+N0 + |h12|2
+�
+1
+n
+
+n�
+
+i=1
+P1i
+
+�
+
+
+
+
+
+
+
+
+
+
+
+(c)
+≤
+log
+�
+πe
+�
+N0 + |h21|2P2 +
+|h11|2P1N0
+N0 + |h12|2P1
+
+��
+(17)
+
+where in step (a) we use the fact that the circularly symmetric complex Gaussian distribution maximizes
+conditional differential entropy for a given covariance constraint, in step (b) we use Jensen’s inequality
+applied to a function that, as can be easily checked, is concave, and in step (c) we used the fact that the
+function is increasing on P1 and P2. Similarly, we have
+
+1
+n
+
+n
+�
+
+i=1
+h(y2i|s2i) ≤log
+�
+πe
+�
+N0 + |h12|2P1 +
+|h22|2P2N0
+N0 + |h21|2P2
+
+��
+.
+(18)
+
+Thus we have
+
+R1 + R2
+≤
+1
+n
+
+n
+�
+
+i=1
+[h(y1i|s1i) + h(y2i|s2i) −h(z1i) −h(z2i)] + ǫn
+
+≤
+log
+�
+πe
+�
+N0 + |h21|2P2 +
+|h11|2P1N0
+N0 + |h12|2P1
+
+��
+−log (πeN0)
+
++ log
+�
+πe
+�
+N0 + |h12|2P1 +
+|h22|2P2N0
+N0 + |h21|2P2
+
+��
+−log (πeN0) + ǫn
+
+=
+log
+�
+1 + |h21|2P2
+
+N0
++
+|h11|2P1
+N0 + |h12|2P1
+
+�
++ log
+�
+1 + |h12|2P1
+
+N0
++
+|h22|2P2
+N0 + |h21|2P2
+
+�
++ ǫn.
+
+Letting n →∞, ǫn →0 and we get the desired upper bound.
+
+14
+
+
+It is interesting to note that the upper bound of Theorem 1 can be achieved with a communication scheme
+where each receiver treats interference as noise. In the genie-aided channel used to derive the upper bound,
+the side information provided by the genie compensates for the harm that interference produces on the other
+link by giving a boost in the own rate in the direct link. Thus, making the signal more random by not sending
+any common information results in an overall improvement in the sum rate.
+
+We now specialize the bound of Theorem 1 to the symmetric interference channel to obtain the following
+upper bound on the symmetric rate:
+
+RUBnew = log
+�
+1 + INR +
+SNR
+1 + INR
+
+�
+.
+(19)
+
+To see how this bound performs in the different regimes we compute the ratio of RUBnew and Cawgn for
+large SNR, INR:
+RUBnew
+
+Cawgn
+≈max
+�log INR
+
+log SNR, 1 −log INR
+
+log SNR
+
+�
+= max{α, 1 −α}
+(20)
+
+which we plot in Figure 10.
+
+0
+0.5
+0.66
+
+0.66
+
+1
+0
+
+1
+
+0.5
+
+R
+Cawgn
+
+log�SNR
+log�INR
+��
+
+B
+B
+1
+2
+
+1
+�
+2
+-
+�
+
+1-�
+
+Han-Kobayashi�scheme
+
+�
+new�upper�bound
+
+Figure 10: Upper bound of Theorem 1 and achievable Han-Kobayashi rate (relative to single user capacity) as a
+function of the interference level α.
+
+Observing Figure 10, the new upper bound seems to match the Han-Kobayashi achievable rate in the
+regime B2, where the upper bound (12) is loose. In fact, this new bound has a finite gap with respect to the
+achievable symmetric rate with our simple scheme in the parameter range B2. To verify this we compute:
+
+RUBnew −RHK2
+=
+log
+�
+1 + INR +
+SNR
+1 + INR
+
+�
+−log
+�
+1 + INR + SNR
+
+INR
+
+�
++ 1
+
+<
+log
+�
+1 + INR + SNR
+
+INR
+
+�
+−log
+�
+1 + INR + SNR
+
+INR
+
+�
++ 1
+
+=
+1
+(21)
+
+and we find that the gap in the symmetric rate with respect to the new upper bound is at most 1 bit/s/Hz in
+B2.
+
+15
+
+
+Using (14) and (21) we see that when INR ≥1 our simple scheme is at most 1 bit/s/Hz away from the
+symmetric rate channel capacity. Proving that the simple scheme is at most 1 bit/s/Hz away from capacity
+when INR < 1 is straightforward. We can set INRp = INR and use as a symmetric rate upper bound the
+single user capacity. The difference between the achievable rate and the upper bound is:
+
+log (1 + SNR) −log
+�
+1 +
+SNR
+1 + INR
+
+�
+≤log (1 + SNR) −log
+�
+1 + SNR
+
+2
+
+�
+≤1.
+(22)
+
+3.5
+Small gap between lower and upper bounds
+
+In Sections 3.3 and 3.4 we showed that the Han-Kobayashi scheme that sets the private message power so
+that the interference created is at noise level achieves a symmetric rate within one bit/s/Hz of the upper
+bounds. Therefore, we obtained a characterization of the symmetric capacity to within one bit/s/Hz. The
+finite and small gap between the lower and upper bounds on the symmetric capacity was obtained by direct
+calculation of the difference between the bounds. In this subsection we present a more intuitive explanation
+for the tightness of the bounds.
+
+We can decompose the total gap between the lower and upper bounds in two components ∆1 and ∆2,
+arising from the following two steps:
+
+1. Fix Han-Kobayashi strategy (i.e. set INRp = 1, decode first the common messages (w1, w2) and then
+the private message u1 or u23) and see how the symmetric rate changes when varying the channel
+from the given interference channel to the genie aided interference channel used in the bounds. The
+gap ∆1 quantifies the rate change due to the side information for the fixed strategy.
+
+2. Fix the channel to the genie aided interference channel, and change the Han-Kobayashi strategy by
+varying INRp from 1 to INR. The gap ∆2 quantifies the rate change in the genie-aided channel when
+INRp is varied.
+
+Referring to Figure 11, ∆1 corresponds to the difference in the rates between points A and B. ∆2 corre-
+sponds to the difference in the rates between points B and C.
+
+Since INRp = INR achieves the capacity of the genie aided channel (one can show that the sum rate upper
+bounds can be achieved by generating the codewords xn
+1 and xn
+2 with i.i.d. circularly symmetric complex
+Gaussian components of variance P, and treating interference as noise at the decoder) the sum ∆1 + ∆2
+quantifies the rate change from the initial Han-Kobayashi strategy in the original channel (lower bound), to
+the capacity achieving strategy in the genie aided channel (upper bound). It follows that a small gap between
+the lower and upper bounds can only occur if both ∆1 and ∆2 are small.
+
+To achieve a small value of ∆1, the help of the genie should not change the relevant rate constraints for
+the initial Han-Kobayashi strategy. Figure 4 and the discussion at the end of Section 3.3 describe the active
+constraints for the different weak interference regimes.
+
+3With some abuse of notation, we use ui, wi, i = 1, 2 to denote the private and common messages, and also to denote the
+symbols of the codewords actually sent over the channel.
+
+16
+
+
+INR p
+
+Rsym
+
+INR
+
+genie�aided�channel
+
+original�channel
+
+�1
+
+�2
+
+RHK
+
+RUB
+
+A
+
+B
+C
+
+1
+
+Figure 11: Gap between the achievable rate with the Han-Kobayashi scheme that sets INRp = 1 and the symmetric
+capacity upper bound decomposed into two components: ∆1 and ∆2. ∆1 results from fixing INRp and changing the
+channel; ∆2 results from increasing INRp to INR in the genie aided channel.
+
+In addition to achieving a small value for ∆1, the help of the genie should result in a small value of ∆2.
+∆2 arises when we vary the communication strategy from the initial Han-Kobayashi strategy to the capacity
+achieving strategy in the genie-aided channel. The sum rate of the genie-aided channels that we used can
+be explicitly computed by treating interference as noise. Unfortunately, it is hard to compute bounds for the
+interference channel when the interference is not treated as noise. In the original channel, setting INRp = 1
+achieves good performance, but in general, setting INRp = INR (treating interference as noise) may result
+in very small rates. The role of the genie in the genie-aided channel is to compensate for the loss in the sum
+rate when INRp is increased from 1 to INR. Increasing INRp beyond 1 in the original channel may produce a
+loss in the rate of common message due to increased interference. However, the genie provides just enough
+side information to compensate for this loss while making INRp = INR optimal.
+
+3.6
+Generalized degrees of freedom
+
+In the above analysis, we see the utility of the approximations like (10), (13), (19) both in identifying the
+different regimes of interest as well as in developing the relevant upper bounds for the different regimes. We
+can formalize the approximations of this nature through the following type of definition. Define, for a fixed
+α ≥0,
+
+dsym(α) :=
+lim
+SNR,INR→∞; log INR
+
+log SNR =α
+
+Csym(INR, SNR)
+
+Cawgn(SNR)
+.
+(23)
+
+If there were no interference between the two links (i.e. α = 0), then the capacity per link is just the
+AWGN capacity log(1 + SNR). Hence dsym(0) = 1. This can be interpreted as each link having the
+full degree of freedom to itself. Since interference cannot help in communicating each user’s message, it
+follows that Csym ≤Cawgn and therefore dsym(α) ≤1 for α > 0. We can think of interference as effectively
+reducing the degrees of freedom of the channel, and thus it is natural to think of dsym(α) as a generalized
+
+17
+
+
+degree of freedom. The approximations we made can be thought of as computing analogous limits for the
+achievable rates and upper bounds. Since the lower and upper bounds on the symmetric capacity we derived
+earlier differ by at most one bit, they allow us to precisely characterize dsym(α). For 0 ≤α ≤1, this is
+plotted in Figure 10. α ≥1 corresponds to the strong and very strong interference regimes, and since the
+capacity is known in these regimes, we can compute dsym(α) in a straightforward way.
+
+In the very strong interference case, each user can decode the interfering message before decoding his own
+message [2]. After decoding the interference and subtracting it from the received signal, the user effectively
+gets an AWGN channel for communicating his own message. It follows that the symmetric capacity in the
+very strong interference case is:
+
+Csym = log(1 + SNR) ≈log(SNR).
+(24)
+
+The channel is in the very strong interference situation whenever INR ≥SNR2 + SNR. Taking logs and
+assuming SNR, INR ≫1 the very strong interference condition becomes log INR ≥2 log SNR. In this
+regime we obtain dsym = 1, and therefore, interference does not reduce the available degrees of freedom of
+the channel.
+
+In the strong interference regime, each receiver is able to decode both messages. The capacity region
+of the interference channel is given by the intersection of the capacity regions of the two multiple access
+channels (MAC) formed by the two transmitters and each of the receivers. In the symmetric case, the sum
+capacity of both MACs is the same and the corresponding symmetric capacity is given by:
+
+Csym = 1
+
+2 log (1 + SNR + INR) .
+(25)
+
+The symmetric channel is in the strong interference situation whenever it is not in very strong interference
+and INR ≥SNR, which after taking logs becomes log SNR ≤log INR < 2 log SNR. This condition and
+(25) together with the assumption SNR, INR ≫1 imply that Csym ≈1
+
+2 log INR. It follows that under strong
+interference the generalized degrees of freedom are:
+
+dsym = log
+√
+
+INR
+log SNR = α
+
+2 .
+(26)
+
+We now have the complete picture:
+
+Csym ≈
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+log(SNR
+
+INR )
+log INR < 1
+
+2 log SNR
+log INR
+1
+2 log SNR < log INR < 2
+
+3 log SNR
+log SNR
+√
+
+INR
+2
+3 log SNR < log INR < log SNR
+
+log
+√
+
+INR
+log SNR < log INR < 2 log SNR
+log SNR
+log INR > 2 log SNR
+
+(27)
+
+and
+
+dsym =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1 −α
+0 ≤α < 1
+
+2
+α
+1
+2 ≤α < 2
+
+3
+1 −α
+
+2
+2
+3 < α ≤1
+α
+
+2
+1 ≤α < 2
+1
+α ≥2.
+
+(28)
+
+18
+
+
+The generalized degrees of freedom are plotted in Figure 12, together with the performance of the baseline
+strategies of orthogonalizing the users (in frequency or time) and treating interference as noise. Note that
+orthogonalizing between the links, in which each link achieves half the degrees of freedom, is strictly sub-
+optimal except when α =
+1
+2 and α = 1. Treating interference as noise, on the other hand, is strictly
+sub-optimal except for α ≤1
+
+2.
+
+Note that there are five regimes in which the qualitative behaviors of the capacity are different. The first
+three regimes fall into the weak interference regime, and the characterization of the symmetric capacity in
+these regimes is a consequence of the new results that we obtained. In these regimes, the interference is not
+strong enough to be decoded in its entirety. In fact, in regime 1 where the interference is very weak, treating
+interference as noise is optimal. In regimes 2 and 3 where the interference is not very weak, decoding it
+partially can significantly improve performance.
+
+Interestingly, the capacity is not monotonically decreasing with INR in the weak interference regime.
+Increasing INR has two opposing effects: more common information can be decoded and cancelled but less
+private information can be sent under the constraint INRp = 1. Depending on which of these two effects
+dominates, the capacity increases or decreases with INR.
+
+In regime 1 where treating interference as noise is optimal, the common messages carry negligible infor-
+mation. In this regime, the loss in the private rate due to the increase in INR makes the capacity decrease
+with INR. However, once interference becomes strong enough to reach regime 2, the users can start using
+common information to partially cancel interference. As the interference level increases, more and more of
+this common information can be decoded and partially cancelled, and this effects dominates the behavior of
+capacity with INR. Therefore, capacity increases with INR in regime 2. However, as INR increases further
+to reach regime 3, the gains obtained by partially cancelling interference through the common messages are
+not enough to offset the loss of rate in the private information. In this regime capacity decreases with INR
+until the strong interference regime is reached. Since in the strong interference regime all the information
+is common information, increasing INR increases capacity. Finally, in the very strong interference regime
+all the interference can be cancelled before decoding the useful information, and interference does not have
+any effect on capacity.
+
+3.7
+Tight characterization of symmetric capacity
+
+Our simple Han and Kobayashi type scheme, together with the symmetric capacity upper bounds (12) and
+(19) allowed us to characterize the symmetric capacity to within one bit/s/Hz. We will now show that in
+some parameter ranges, the gap between the upper bound (19) and the rates achievable with some improved
+communication schemes vanishes for SNR, INR →∞.
+
+The communication scheme that sets the private message power so that the interference generated onto
+the other receiver is at noise level (i.e. INRp = 1) is “universal” in the sense that the same scheme can be
+used to achieve a symmetric rate within one bit/s/Hz of capacity in the weak interference regime, regardless
+of the values of the parameters.
+
+However, we can further improve the achievable symmetric rate by modifying the communication scheme
+
+19
+
+
+capacity
+
+orthogonal�(TDM�or�FDM)
+
+interference�treated�as�noise
+
+Csym
+dsym
+log�SNR
+=
+
+���log�SNR
+log�INR
+
+0.5
+
+0.66
+
+0.66
+
+Figure 12: Generalized degrees of freedom for two suboptimal schemes vs. capacity. These suboptimal schemes are
+treating interference as noise and orthogonalizing the users over time or frequency.
+
+for different parameter ranges. In regime 1, when log INR < 1
+
+2 log SNR we can simply assign INRp = INR
+and not use common messages at all. As stated in the previous subsection, this scheme achieves a symmetric
+rate:
+R = log
+�
+1 +
+SNR
+1 + INR
+
+�
+(29)
+
+and the gap between this rate and the upper bound (19) is:
+
+RUBnew −R
+=
+log
+�
+1 + INR +
+SNR
+1 + INR
+
+�
+−log
+�
+1 +
+SNR
+1 + INR
+
+�
+
+=
+log
+�
+1 + INR(1 + INR)
+
+1 + INR + SNR
+
+�
+≈log
+�
+1 + INR2
+
+SNR
+
+�
+.
+(30)
+
+Note that the same gap would be obtained with any scheme that uses INRp such that INRp →∞as
+SNR, INR →∞.
+
+Recall that α = log INR
+
+log SNR. Regime 1 corresponds to 0 < α < 1
+
+2. In this regime, (30) implies that for fixed
+α, Csym −R →0 as SNR, INR →∞. Therefore, we have that for 0 < α < 1/2 the symmetric capacity is
+tightly characterized by:
+
+Csym = log
+�SNR
+
+INR
+
+�
+.
+(31)
+
+In regime 2 where 1
+
+2 < α < 2
+
+3, we can choose INRp = (INR/SNR)1−γ, where
+
+0 < 2α −1
+
+1 −α < γ < 1
+(32)
+
+is fixed but arbitrary. This choice of INRp makes the received interference power corresponding to the private
+message to go to zero as SNR, INR →∞. Note that in regime 3 we have log SNR < log INR < 2
+
+3 log SNR
+and therefore INR/SNR →0 as SNR, INR →∞.
+
+20
+
+
+Fixing the decoding order so that the private messages are decoded last, this scheme achieves a symmetric
+rate:
+
+R
+=
+log
+�
+1 +
+SNR · INRp
+INR(1 + INRp)
+
+�
++ min
+�1
+
+2 log
+�
+1 + (SNR + INR)(INR −INRp)
+
+INR + (SNR + INR)INRp
+
+�
+,
+
+log
+�
+1 +
+INR(INR −INRp)
+INR + (SNR + INR)INRp
+
+��
+
+(a)
+≃
+log
+�
+1 +
+�SNR
+
+INR
+
+�γ�
++ min
+�1
+
+2 log
+�
+1 +
+SNR
+(SNR/INR)γ
+
+�
+, log
+�
+1 +
+INR
+(SNR/INR)γ
+
+��
+
+≃
+γ log
+�SNR
+
+INR
+
+�
++ min
+�1
+
+2 log
+�
+SNR1−γINRγ�
+, log
+�INR1+γ
+
+SNRγ
+
+��
+
+=
+γ(1 −α) log (SNR) + min
+�1 −γ + αγ
+
+2
+, α(1 + γ) −γ
+�
+log(SNR)
+
+(b)
+=
+α log (SNR)
+(33)
+
+where ≃means that the the difference between the left and right hand sides goes to zero as SNR, INR →∞,
+(a) follows from the fact that INRp →0 and INR/SNR →0 as SNR, INR →∞, and (b) follows because
+the second term of the min{·, ·} dominates due to (32).
+
+From the upper bound (19) we obtain:
+
+RUBnew
+=
+log
+�
+1 + INR +
+SNR
+1 + INR
+
+�
+
+≃
+log
+�
+SNRα + SNR1−α�
+
+≃
+max {α, 1 −α} log (SNR)
+
+=
+α log (SNR) .
+(34)
+
+Comparing (33) with (34) we see that the difference RUBnew −R →0 as SNR, INR →∞and therefore
+in regime 2 the symmetric capacity is given by:
+
+Csym = log (INR) .
+(35)
+
+We note that both in regimes 1 and 2 we have some flexibility in setting the private message power to
+asymptotically achieve the symmetric capacity. In regime 1 we can choose any private message power
+as long as INRp →∞when SNR, INR →∞. In a similar way, in regime 2 we can use any private
+message power that satisfies INRp →0 as SNR, INR →∞. In both cases setting INRp = 1 does not
+asymptotically achieve the symmetric capacity, but results in a symmetric rate no smaller than 1 bit/s/Hz
+from it. Unfortunately, in regime 3 the only choice of private message power that achieves a symmetric rate
+with bounded difference from the upper bound (12) is INRp = constant, and this choice of private message
+power does not result in a gap that vanishes as SNR, INR →∞.
+
+In the strong interference regime the symmetric capacity is given by:
+
+Csym = 1
+
+2 log (1 + INR + SNR)
+(36)
+
+which asymptotically approaches log(
+√
+
+INR) for 1 < α ≤2 as SNR, INR →∞.
+
+21
+
+
+Finally in the very strong interference regime the symmetric capacity is given by:
+
+Csym = log (1 + SNR)
+(37)
+
+which asymptotically approaches log(SNR) for SNR →∞.
+
+We summarize the results of this subsection in the following theorem.
+
+Theorem 2. Let α = (log INR/ log SNR). For 0 < α < 1/2, 1/2 < α < 2/3 and α > 1, the approximation
+
+Csym ≈
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+log(SNR
+
+INR )
+log INR < 1
+
+2 log SNR
+log INR
+1
+2 log SNR < log INR < 2
+
+3 log SNR
+log
+√
+
+INR
+log SNR < log INR < 2 log SNR
+log SNR
+log INR ≥2 log SNR
+
+(38)
+
+is asymptotically tight in the sense that the difference between Csym and the approximation goes to zero as
+SNR, INR go to infinity with α fixed.
+
+4
+Within One Bit of the General Capacity Region
+
+In the previous section, we showed that a simple Han-Kobayashi scheme can achieve to within one bit of the
+symmetric rate of the symmetric Gaussian interference channel. We will show that this is also true for the
+whole capacity region of the general two-user Gaussian interference channel (not necessarily symmetric).
+Depending on the parameters of the Gaussian interference channel (SNR1, SNR2, INR1 and INR2), we can
+divide the analysis of the Gaussian interference channel into the following three cases.
+
+1. Weak interference channel
+
+In this case, the parameters of the Gaussian interference channel satisfy INR1 < SNR2 and INR2 <
+SNR1.
+
+2. Mixed interference channel
+
+In this case, the parameters of the Gaussian interference channel satisfy INR1 ≥SNR2 and INR2 <
+SNR1, or INR1 < SNR2 and INR2 ≥SNR1.
+
+3. Strong interference channel
+
+In this case, the parameters of the Gaussian interference channel satisfy INR1 ≥SNR2 and INR2 ≥
+SNR1.
+
+The capacity region of the strong interference channel is already known [7]. In the following, we will
+show that we can get to within one bit of the capacity region of the Gaussian interference channel for both
+the weak interference channel and the mixed interference channel.
+
+22
+
+
+4.1
+Outer bound on the capacity region of the Gaussian interference channel
+
+Since the existing bounds on the capacity region of the Gaussian interference channel can be arbitrarily
+loose, we need a new outer bound. In the following subsections we provide a new outer bound on capacity
+region of the weak and mixed interference channels.
+
+4.1.1
+Outer bound for weak interference channel
+
+For the weak interference channel, i.e., INR1 < SNR2 and INR2 < SNR1, we have the following outer
+bound on the capacity region.
+
+Theorem 3. The capacity region of the weak interference channel is contained within the set of rate pairs
+(R1, R2) satisfying:
+
+R1 ≤log (1 + SNR1)
+
+R2 ≤log (1 + SNR2)
+
+R1 + R2 ≤log (1 + SNR1) + log
+�
+1 +
+SNR2
+1 + INR2
+
+�
+
+R1 + R2 ≤log (1 + SNR2) + log
+�
+1 +
+SNR1
+1 + INR1
+
+�
+
+R1 + R2 ≤log
+�
+1 + INR1 +
+SNR1
+1 + INR2
+
+�
++ log
+�
+1 + INR2 +
+SNR2
+1 + INR1
+
+�
+
+2R1 + R2 ≤log (1 + SNR1 + INR1) + log
+�
+1 + INR2 +
+SNR2
+1 + INR1
+
+�
++ log
+�1 + SNR1
+
+1 + INR2
+
+�
+
+R1 + 2R2 ≤log (1 + SNR2 + INR2) + log
+�
+1 + INR1 +
+SNR1
+1 + INR2
+
+�
++ log
+�1 + SNR2
+
+1 + INR1
+
+�
+.
+
+(39)
+
+Proof. We prove the bounds in (39) one by one.
+
+1. The bounds on R1 and R2 are just the point to point capacity of the AWGN channel obtained by
+removing the interference from the other user.
+
+2. The first bound on R1 + R2 is just the capacity of the one-sided interference channel resulting from
+the genie-aided channel in which a genie gives x2 to receiver 1 (see Figure 6). We already used this
+bound in the symmetric case. This bound is known from previous results [8] but we provide here an
+alternative derivation since the same bounding techniques will be useful for obtaining the bounds for
+
+23
+
+
+2R1 + R2 and R1 + 2R2. Using Fano’s inequality we can write for any codebook of block length n:
+
+n(R1 + R2)
+≤
+I(xn
+1; yn
+1 ) + I(xn
+2; yn
+2 ) + nǫ
+
+≤
+I(xn
+1; yn
+1 , xn
+2) + I(xn
+2; yn
+2 ) + nǫ
+
+=
+I(xn
+1; yn
+1 |xn
+2) + I(xn
+2; yn
+2 ) + nǫ
+
+=
+h(yn
+1 |xn
+2) −h(yn
+1 |xn
+1, xn
+2) + h(yn
+2 ) −h(yn
+2 |xn
+2) + nǫ
+
+=
+h(h11xn
+1 + zn
+1) −h(zn
+1) + h(yn
+2 ) −h(h12xn
+1 + zn
+2) + nǫ
+
+=
+h(yn
+2 ) −h(zn
+1) + h(h11h12xn
+1 + h12zn
+1) −h(h11h12xn
+1 + h11zn
+2)
+
+−n log |h12|2 + n log |h11|2 + nǫ
+
+=
+h(yn
+2 ) −h(zn
+1) + h(˜xn
+1 + ˜zn
+1) −h(˜xn
+1 + ˜zn
+2)
+
+−n log |h12|2 + n log |h11|2 + nǫ,
+(40)
+
+where we defined
+
+˜x1i
+=
+h11h12x2i
+
+˜z1i
+=
+h12z1i
+
+˜z2i
+=
+h11z2i.
+(41)
+
+In the weak interference case we have INR2 < SNR1, which implies
+
+E[˜z2
+1i] < E[˜z2
+2i].
+(42)
+
+Since the capacity region of Gaussian interference channel only depends on the marginal distri-
+bution of z1 and z2, we can assume that there exists an i.i.d Gaussian random vector zn, with
+zi ∼CN(0, E[˜z2
+2i] −E[˜z2
+1i]), such that
+
+˜z2i = ˜z1i + zi.
+(43)
+
+Thus we have
+
+n(R1 + R2)
+≤
+h(yn
+2 ) −h(zn
+1) + h(˜xn
+1 + ˜zn
+1) −h(˜xn
+1 + ˜zn
+1 + zn)
+
+−n log |h12|2 + n log |h11|2 + nǫ
+
+=
+h(yn
+2 ) −h(zn
+1) −I(zn, zn + ˜xn
+1 + ˜zn
+1)
+
+−n log |h12|2 + n log |h11|2 + nǫ.
+(44)
+
+Using the worst case noise result [9], we can see that −I(zn, zn + ˜xn
+1 + ˜zn
+1) is maximized when xn
+1
+is i.i.d Gaussian random vector with x1i ∼CN(0, P1). Note that h(yn
+2 ) is maximized when xn
+1 is a
+Gaussian random vector with i.i.d. components x1i ∼CN(0, P1) and xn
+2 is a Gaussian random vector
+with i.i.d. components x2i ∼CN(0, P2). A simple calculation leads to
+
+R1 + R2 ≤log
+�
+1 + |h11|2P1
+
+N0
+
+�
++ log
+�
+1 +
+|h22|2P2
+N0 + |h12|2P1
+
+�
++ ǫ
+
+= log (1 + SNR1) + log
+�
+1 +
+SNR2
+1 + INR2
+
+�
++ ǫ.
+(45)
+
+24
+
+
+Tx
+
+Tx
+
++
+
++
+
++
+
+x
+
+x
+
+1
+
+z 1
+
+y 1
+
+1
+Rx11
+
+Rx12
+
+2
+
+z 2
+
+y 2
+
+2
+Rx2
+
+h11
+
+h12
+
+h21
+
+h22
+
+Figure 13: Gaussian interference channel with three re-
+ceivers.
+
+Tx
+
+Tx
+
++
+
++
+
++
+
+x
+
+x
+
+1
+
+z 1
+
+y 1
+
+s 2
+
+1
+Rx11
+
+Rx12
+
+2
+
+z 2
+
+y 2
+
+2
+Rx2
+
+h11
+
+h12
+
+h21
+
+h22
+
+x 2
+
+Figure 14: Genie-aided three-receiver Gaussian interfer-
+ence channel. A genie provides x2 to receiver Rx11 and
+s2 to receiver Rx2.
+
+3. The second bound on R1 + R2 can be derived similarly by using the genie-aided channel in which a
+genie gives x1 to receiver 2.
+
+4. The third bound on R1 + R2 has been proved in Section 3.4.
+
+5. Next we bound 2R1+R2. We consider the interference channel drawn in Figure 13, in which there are
+two identical receivers (Rx11 and Rx12) for user 1’s message, and one receiver for user 2’s message.
+We can think of 2R1 + R2 as the sum of the rates at the three receivers. To derive an upper bound, we
+consider the genie-aided channel where a genie provides s1 to receiver Rx11 and s2 to receiver Rx2
+(see Figure 14). For any codebook of block-length n we can write:
+
+n(2R1 + R2)
+≤
+I(xn
+1; yn
+1 ) + I(xn
+2; yn
+2 ) + I(xn
+1; yn
+1 ) + nǫ
+
+≤
+I(xn
+1; yn
+1 ) + I(xn
+2; yn
+2 sn
+2) + I(xn
+1; yn
+1 |xn
+2) + nǫ
+
+=
+h(yn
+1 ) −h(yn
+1 |xn
+1) + h(yn
+2 sn
+2) −h(yn
+2 sn
+2|xn
+2) + h(yn
+1 |xn
+2) −h(yn
+1 |xn
+1xn
+2) + nǫ
+
+=
+h(yn
+1 ) −h(sn
+2) + h(sn
+2) + h(yn
+2 |sn
+2) −h(yn
+2 |xn
+2) −h(sn
+2|yn
+2 xn
+2)
+
++h(yn
+1 |xn
+2) −h(yn
+1 |xn
+1xn
+2) + nǫ
+
+=
+h(yn
+1 ) + h(yn
+2 |sn
+2) −h(yn
+2 |xn
+2) −h(zn
+1 ) + h(yn
+1 |xn
+2) −h(zn
+1) + nǫ
+
+≤
+
+n
+�
+
+i=1
+[h(y1i) + h(y2i|s2i) −2h(z1i))] −h(yn
+2 |xn
+2) + h(yn
+1 |xn
+2) + nǫ
+
+=
+
+n
+�
+
+i=1
+[h(y1i) + h(y2i|s2i) −2h(z1i))] −h(h12xn
+1 + zn
+2) + h(h11xn
+1 + zn
+1) + nǫ.
+
+(46)
+
+25
+
+
+Using similar reasons as those in the proof of the third bound on R1 + R2, we have
+
+1
+n
+
+n
+�
+
+i=1
+h(y1i)
+≤
+1
+n log πe
+�
+|h11|2P1i + |h21|2P2i + N0
+�
+
+≤
+log πe
+
+�
+
+|h11|2 1
+
+n
+
+n
+�
+
+i=1
+P1i + |h21|2 1
+
+n
+
+n
+�
+
+i=1
+P2i + N0
+
+�
+
+≤
+log πe
+�
+|h11|2P1 + |h21|2P2 + N0
+�
+,
+(47)
+
+and
+1
+n
+
+n
+�
+
+i=1
+h(y2i|s2i) ≤log πe
+�
+N0 + |h12|2P1 +
+|h22|2P2N0
+N0 + |h21|2P2
+
+�
+.
+(48)
+
+Since INR2 < SNR1, we can use the worst case noise result to bound −h(h12xn
+1 +zn
+2)+h(h11xn
+1 +zn
+1)
+as
+−h(h12xn
+1 + zn
+2) + h(h11xn
+1 + zn
+1) ≤log
+�1 + SNR1
+
+1 + INR2
+
+�
+.
+(49)
+
+Combining all the above, we have
+
+2R1 + R2
+≤
+log (1 + SNR1 + INR1) + log
+�
+1 + INR2 +
+SNR2
+1 + INR1
+
+�
+
++ log
+�1 + SNR1
+
+1 + INR2
+
+�
++ ǫ.
+(50)
+
+6. Similarly we can derive the bound for R1 + 2R2.
+
+Remark 1. As mentioned, our first bound on R1 + R2 is also an outer bound on the sum rate of the
+one-sided interference channel (also known as Z-channel) [4, 5, 8] generated by removing the link from
+transmitter 2 to receiver 1. In the one-sided channel, this outer bound can actually be achieved by both
+users when they communicate using codebooks generated from i.i.d. samples of a Gaussian distribution at
+full power and receiver 2 treats the signal from transmitter 1 as noise. Hence we have a simple derivation
+of the sum capacity of the one-sided interference channel. Note that the proof of the sum capacity of the
+one-sided interference channel of [4, 5, 8] is quite indirect. In [5], the degraded Gaussian interference
+channel is introduced, and the capacity region of the degraded Gaussian interference channel is shown to
+be included in the capacity region of a degraded Gaussian broadcast channel. Moreover, the boundaries of
+the two regions are shown to touch at one point A. Later it was shown in [4] that the one-sided interference
+channel is equivalent to the degraded Gaussian interference channel. Recently, the author of [8] points out
+that through a slope calculation in [5], the sum capacity of the degraded Gaussian interference channel is
+achieved at point A, thus establishing the sum capacity of the Gaussian one-sided interference channel.
+
+Note that in our derivation of the first and second outer bounds on the sum rate, the outer bound on
+2R1 + R2, and the outer bound on R1 + 2R2, we used the conditions INR2 < SNR1 and INR1 < SNR2. For
+this reason this outer bound only holds for the weak interference channel. Next we present an outer bound
+on the capacity region of the mixed interference channel.
+
+26
+
+
+4.1.2
+Outer bound for mixed interference channel
+
+For the mixed interference channel, i.e., INR1 ≥SNR2 and INR2 < SNR1, we have the following outer
+bound on the capacity region.
+
+Theorem 4. For the Gaussian mixed interference channel, the capacity region is contained within the set
+of rate pairs (R1, R2) satisfying:
+
+R1 ≤log (1 + SNR1)
+
+R2 ≤log (1 + SNR2)
+
+R1 + R2 ≤log (1 + SNR1) + log
+�
+1 +
+SNR2
+1 + INR2
+
+�
+
+R1 + R2 ≤log(1 + SNR1 + INR1)
+
+R1 + 2R2 ≤log (1 + SNR2 + INR2) + log
+�
+1 + INR1 +
+SNR1
+1 + INR2
+
+�
++ log
+�
+1 +
+SNR2
+1 + INR1
+
+�
+.
+
+(51)
+
+Proof. We prove this outer bound by examining the proof of the bounds in (39).
+
+1. The bounds on R1 and R2 still hold.
+
+2. The proof of the first upper bound on the sum rate in (39) needs the condition INR2 < SNR1, which
+still holds in this mixed interference channel. So we have the same bound.
+
+3. The proof of the second upper bound on the sum rate in (39) needs the condition INR1 < SNR2,
+which does not hold. Note that this bound is actually the sum capacity of the one-sided interference
+channel in which the link from transmitter 1 to receiver 2 is removed. When INR1 ≥SNR2, we are
+dealing with a one-sided interference channel with strong interference. It is shown in [4] that a sum
+rate outer bound for this channel is the sum rate of the MAC at receiver 1, i.e.
+
+R1 + R2 ≤log(1 + SNR1 + INR1),
+(52)
+
+and it is obviously an upper bound on sum rate of the mixed interference channel.
+
+4. The third upper bound on the sum rate in (39) still holds; however, it is straightforward to show that
+the third bound on R1 + R2 is larger than the second bound on R1 + R2 in (51), so we do not need to
+include this bound.
+
+5. The upper bound on 2R1 + R2 in (39) still holds since INR2 < SNR1 still holds. However, it is
+straightforward to show that the bound on 2R1 + R2 is larger than the sum of the bound on R1 and
+the second bound on R1 + R2 in (51), so we do not need to include this bound.
+
+6. The proof of the bound on R1 + 2R2 in (39) needs the condition of INR1 < SNR2, which is no
+longer true. To obtain a bound that does not require the condition INR1 < SNR2, we consider the
+interference channel drawn in Figure 15, in which there are two identical receivers (Rx21 and Rx22)
+for user 2’s message, and one receiver for user 1’s message. We can think of R1 + 2R2 as the sum
+
+27
+
+
+Tx
+
+Tx
+
++
+
++
+
++
+
++
+
+x
+
+x
+
+1
+
+z 1
+
+y 1
+
+1
+Rx1
+
+2
+
+z 2
+
+y 2
+
+2
+Rx
+
+Rx
+
+21
+
+22
+
+h11
+
+h12
+
+h21
+
+h22
+
+Figure 15: Gaussian interference channel with three re-
+ceivers.
+
+Tx
+
+Tx
+
++
+
++
+
++
+
++
+
+x
+
+x
+
+1
+
+z 1
+
+y 1
+
+s 2
+
+s 1
+1
+Rx1
+
+2
+
+z 2
+
+y 2
+
+2
+Rx
+
+Rx
+
+21
+
+22
+
+h11
+
+h12
+
+h21
+
+h22
+x 1
+
+Figure 16: Genie-aided three-receiver Gaussian inter-
+ference channel. A genie provides signals s2 and x1 to
+receiver Rx21, and s1 to Rx1.
+
+rate at the three receivers of this new interference channel. To derive an upper bound, we consider the
+genie-aided channel where a genie provides both s2 and x1 to receiver Rx21 and s1 to receiver Rx1
+(see Figure 16).
+
+n(R1 + 2R2)
+≤
+I(xn
+1; yn
+1 ) + I(xn
+2; yn
+2 ) + I(xn
+2; yn
+2 ) + nǫ
+
+≤
+I(xn
+1; yn
+1 , sn
+1) + I(xn
+2; yn
+2 ) + I(xn
+2; yn
+2 sn
+2|xn
+1) + nǫ
+
+=
+I(xn
+1; sn
+1) + I(xn
+1; yn
+1 |sn
+1) + I(xn
+2; yn
+2 ) + I(xn
+2; sn
+2|xn
+1) + I(xn
+2; yn
+2 |sn
+2xn
+1) + nǫ
+
+=
+h(sn
+1) −h(sn
+1|xn
+1) + h(yn
+1 |sn
+1) −h(yn
+1 |xn
+1sn
+1) + h(yn
+2 ) −h(yn
+2 |xn
+2)
+
++h(sn
+2|xn
+1) −h(sn
+2|xn
+1xn
+2) + h(yn
+2 |sn
+2xn
+1) −h(yn
+2 |sn
+2xn
+1xn
+2) + nǫ
+
+=
+h(sn
+1) −h(zn
+2) + h(yn
+1 |sn
+1) −h(sn
+2) + h(yn
+2 ) −h(sn
+1)
+
++h(sn
+2) −h(zn
+1) + h(yn
+2 |sn
+2xn
+1) −h(zn
+2) + nǫ
+
+≤
+h(yn
+1 |sn
+1) + h(yn
+2 ) + h(yn
+2 |sn
+2xn
+1) −h(zn
+1) −2h(zn
+2 ) + nǫ
+
+≤
+
+n
+�
+
+i=1
+[h(y1i|s1i) + h(y2i) + h(y2i|s2ix1i) −h(z1i) −2h(z2i)] + nǫ.
+
+Using similar reasons as those in the proof of Theorem 1 in Section 3.4 we can write:
+
+1
+n
+
+n
+�
+
+i=1
+h(y1i|s1i)
+≤
+1
+n log
+�
+πe
+�
+N0 + |h21|2P2i +
+|h11|2P1iN0
+N0 + |h12|2P1i
+
+��
+
+≤
+log
+
+
+
+πe
+
+
+
+
+
+N0 + |h21|2
+�
+1
+n
+
+n
+�
+
+i=1
+P2i
+
+�
+
++
+|h11|2
+�
+1
+n
+
+n�
+
+i=1
+P1i
+
+�
+N0
+
+N0 + |h12|2
+�
+1
+n
+
+n�
+
+i=1
+P1i
+
+�
+
+
+
+
+
+
+
+
+
+
+
+≤
+log
+�
+πe
+�
+N0 + |h21|2P2 +
+|h11|2P1N0
+N0 + |h12|2P1
+
+��
+,
+(53)
+
+28
+
+
+together with
+
+1
+n
+
+n
+�
+
+i=1
+h(y2i)
+≤
+1
+n log πe
+�
+|h22|2P2i + |h12|2P1i + N0
+�
+
+≤
+log πe
+
+�
+
+|h22|2 1
+
+n
+
+n
+�
+
+i=1
+P2i + |h12|2 1
+
+n
+
+n
+�
+
+i=1
+P1i + N0
+
+�
+
+≤
+log πe
+�
+|h22|2P2 + |h12|2P1 + N0
+�
+,
+(54)
+
+and
+
+1
+n
+
+n
+�
+
+i=1
+h(y2i|s2ix1i)
+=
+1
+n
+
+n
+�
+
+i=1
+h(|h22|2x2i + z2i|s2i)
+
+≤
+1
+n
+
+n
+�
+
+i=1
+log πe
+�
+N0 +
+|h22|2N0P2i
+N0 + |h21|2P2i
+
+�
+
+≤
+log πe
+
+
+
+
+
+N0 +
+|h22|2N0
+
+�
+1
+n
+
+n�
+
+i=1
+P2i
+
+�
+
+N0 + |h21|2
+�
+1
+n
+
+n�
+
+i=1
+P2i
+
+�
+
+
+
+
+
+
+
+≤
+log πe
+�
+N0 +
+|h22|2N0P2
+N0 + |h21|2P2
+
+�
+.
+(55)
+
+Thus we have
+
+R1 + 2R2
+≤
+log πe
+�
+|h22|2P2 + |h12|2P1 + N0
+�
+−log πeN0
+
++ log πe
+�
+N0 + |h21|2P2 +
+|h11|2P1N0
+N0 + |h12|2P1
+
+�
+−log πeN0
+
++ log πe
+�
+N0 +
+|h22|2N0P2
+N0 + |h21|2P2
+
+�
+−log πeN0 + ǫ
+
+=
+log
+�
+1 + |h22|2P2
+
+N0
++ |h12|2P1
+
+N0
+
+�
++ log
+�
+1 + |h21|2P2
+
+N0
++
+|h11|2P1/N0
+1 + |h12|2P1/N0
+
+�
+
++ log
+�
+1 +
+|h22|2P2/N0
+1 + |h21|2P2/N0
+
+�
++ ǫ
+
+=
+log (1 + SNR2 + INR2) + log
+�
+1 + INR1 +
+SNR1
+1 + INR2
+
+�
+
++ log
+�
+1 +
+SNR2
+1 + INR1
+
+�
++ ǫ.
+(56)
+
+4.2
+Achievable scheme
+
+The Han-Kobayashi scheme [1] is the best known achievable scheme for the interference channel. Re-
+cently a simplified yet equivalent Han-Kobayashi achievable region was given in [10], which we state in the
+following lemma.
+
+29
+
+
+Lemma 1. Let P∗be the set of joint probability distributions P ∗(·) that factor as
+
+P ∗(q, w1, w2, x1, x2, y1, y2) = P(q) · P(w1, x1|q) · P(w2, x2|q) · P(y1, y2|x1, x2).
+(57)
+
+For a fixed P ∗∈P∗, let R(P ∗) be the set of (R1, R2) satisfying:
+
+R1 ≤I(x1; y1|w2q)
+
+R2 ≤I(x2; y2|w1q)
+
+R1 + R2 ≤I(x2w1; y2|q) + I(x1; y1|w1w2q)
+
+R1 + R2 ≤I(x1w2; y1|q) + I(x2; y2|w1w2q)
+
+R1 + R2 ≤I(x1w2; y1|w1q) + I(x2w1; y2|w2q)
+
+2R1 + R2 ≤I(x1w2; y1|q) + I(x1; y1|w1w2q) + I(x2w1; y2|w2q)
+
+R1 + 2R2 ≤I(x2w1; y2|q) + I(x2; y2|w1w2q) + I(x1w2; y1|w1q).
+
+(58)
+
+Then the Han-Kobayashi achievable region is given by R =
+�
+
+P ∗∈P∗R(P ∗).
+
+In (58), w1 (w2) is the common information of user 1 (user 2) that can be decoded at both receivers, and
+q is the time sharing parameter. For the Gaussian interference channel, if we use Gaussian codebooks, and
+use u1 and u2 to denote the private information of user 1 and user 2 respectively, we can write
+
+x1 = u1 + w1
+
+x2 = u2 + w2,
+(59)
+
+where u1, u2, w1 and w2 are independent complex Gaussian random variables. Different P ∗∈P∗corre-
+spond to different power splits between common and private messages, and different time-sharing strategies
+between the power splits.
+
+Consider a fixed power splitting (i.e. we don’t do time sharing) between private information and common
+information of the two users. Let Pu1 and Pu2 be the power of user 1 and user 2’s private messages respec-
+tively. We define INRp2 to be the interference to noise ratio of user 1’s private message at receiver 2 and
+INRp1 to be the interference to noise ratio of user 2’s private message at receiver 1, i.e.
+
+INRp2 = |h12|2Pu1
+
+N0
+
+INRp1 = |h21|2Pu2
+
+N0
+.
+(60)
+
+It is clear that 0 ≤INRp2 ≤INR2 and 0 ≤INRp1 ≤INR1. With this definition, the signal to noise
+ratio of user 1’s private message at receiver 1 is SNRp1 = INRp2
+SNR1
+
+INR2 and the signal to noise ratio of
+user 2’s private message at receiver 2 is SNRp2 = INRp1
+SNR2
+
+INR1 . We can parameterize a Han-Kobayashi
+achievable scheme with a fixed power splitting by using INRp2 and INRp1. We denote the Han-Kobayashi
+scheme with parameters INRp2, INRp1 as HK(INRp2, INRp1), and the corresponding achievable region as
+R(INRp2, INRp1).
+
+Note that HK(INRp2, INRp1) and R(INRp2, INRp1) correspond to a Han-Kobayashi scheme where there
+is a fixed private and common message power split and there is no time sharing (i.e. the time sharing
+
+30
+
+
+random variable q is a constant). Therefore, R(INRp2, INRp1) ⊂R, where R is the general Han-Kobayashi
+achievable region given in Lemma 1. In general, the inclusion is strict, that is, varying the power allocations
+and time sharing between multiple private and common message power splits allows to achieve a larger rate
+region. However, we will see that the region achievable with a clever choice of a fixed private and common
+message power split and without time sharing is close to the capacity region of the channel.
+
+To evaluate the Han-Kobayashi region (58) for the Gaussian interference channel, even if we restrict
+ourselves to use only Gaussian codebooks, we need to consider all possible power splits and different time
+sharing strategies among them. This is in general very complicated and a calculation of a subset of the
+Han-Kobayashi achievable region using some special choices of power splitting and time sharing strategies
+can be found in [8]. However, from the intuition we built in Section 3, we know that a good power splitting
+should have the property that INRp2 = 1 and INRp1 = 1, i.e., the interference to noise ratio of each user’s
+private message at the other user’s receiver is one. We also showed that this power splitting can achieve
+to within one bit the symmetric rate capacity of the symmetric Gaussian interference channel. In the next
+section, we will show that this is also a good splitting for the entire capacity region. More specifically, we
+will show that by choosing INRp2, INRp1 as close to 1 as possible, we can achieve rates within one bit of the
+whole capacity region.
+
+4.3
+Within one bit of the capacity region
+
+Equipped with the new outer bound derived in Section 4.1.1 and the intuition of a good power splitting in
+Section 3, we are now ready to prove our main result: a simple Han-Kobayashi scheme can achieve to within
+one bit of the capacity region of the Gaussian interference channel. First we provide a formal definition of
+the within one bit notion.
+
+Definition 1. An achievable region is said to be within one bit of the capacity region if for any rate pair
+(R1, R2) on the boundary of the achievable region, the rate pair (R1 + 1, R2 + 1) is not achievable. Equiv-
+alently, (R1 −1, R2 −1) is in the achievable region for any rate pair (R1, R2) in the capacity region.
+
+Since the outer bound of the weak interference channel and the outer bound of the mixed interference
+channel are different, we treat these two channels separately in the following two subsections.
+
+4.3.1
+Weak interference channel
+
+Our main result is stated in the following theorem.
+
+Theorem 5. The achievable region
+
+R
+�
+min(1, INR2), min(1, INR1)
+�
+(61)
+
+is within one bit of the capacity region of the Gaussian weak interference channel.
+
+Remark 2. The reason to consider the region R
+�
+min(1, INR2), min(1, INR1)
+�
+is because when INR1 < 1
+or INR2 < 1, we can not use HK(1,1). However, say in the case of INR1 < 1, the interference caused by user
+
+31
+
+
+2 at receiver 1 is even weaker than the additive Gaussian noise. Thus we won’t lose much of the optimality
+by simply treating all of user 2’s signal as noise at receiver 1, i.e., letting INRp1 = INR1.
+
+Proof. It can be seen from (39) and (58) that both the outer bound to the capacity region and the achievable
+region R
+�
+min(1, INR2), min(1, INR1)
+�
+are piecewise linear, and only consist of straight lines with slopes
+0, −1/2, −1, −2, and ∞. We define δR1 to be the difference between the outer bound on R1 in (39)
+(first constraint) and achievable R1 in R
+�
+min(1, INR2), min(1, INR1)
+�
+, and similarly define δR2, δR1+R2,
+δ2R1+R2 and δR1+2R2. Note that if the rate pair (R1, R2) is on the boundary of the achievable region
+R
+�
+min(1, INR2), min(1, INR1)
+�
+, it must be on one of the bounding straight lines. Thus if the following
+holds,
+
+δR1 < 1
+
+δR2 < 1
+
+δR1+R2 < 2
+
+δ2R1+R2 < 3
+
+δR1+2R2 < 3,
+
+(62)
+
+then the rate pair (R1+1, R2+1) would be outside the outer bound (39), and hence R
+�
+min(1, INR2), min(1, INR1)
+�
+
+is within one bit of the capacity region of the Gaussian weak interference channel. We now show that (62)
+holds for the different parameter ranges.
+
+1. INR1 ≥1 and INR2 ≥1
+
+In this case, we have
+R
+�
+min(1, INR2), min(1, INR1)
+�
+= R(1, 1).
+(63)
+
+It is straightforward to evaluate R(1, 1) from Lemma 1. The result is provided in the following
+corollary.
+
+Corollary 1. The achievable rate region R(1, 1) contains all the rate pairs (R1, R2) satisfying:
+
+R1 ≤log (2 + SNR1) −1
+
+R2 ≤log (2 + SNR2) −1
+
+R1 + R2 ≤log(2INR2 + SNR1) + log
+�
+1 + 1 + SNR2
+
+INR2
+
+�
+−2
+
+R1 + R2 ≤log(2INR1 + SNR2) + log
+�
+1 + 1 + SNR1
+
+INR1
+
+�
+−2
+
+R1 + R2 ≤log
+�
+1 + INR1 + SNR1
+
+INR2
+
+�
++ log
+�
+1 + INR2 + SNR2
+
+INR1
+
+�
+−2
+
+2R1 + R2 ≤log(1 + SNR1 + INR1) + log
+�
+1 + INR2 + SNR2
+
+INR1
+
+�
++ log
+�
+2 + SNR1
+
+INR2
+
+�
+−3
+
+R1 + 2R2 ≤log(1 + SNR2 + INR2) + log
+�
+1 + INR1 + SNR1
+
+INR2
+
+�
++ log
+�
+2 + SNR2
+
+INR1
+
+�
+−3.
+
+(64)
+
+32
+
+
+0
+1
+2
+3
+4
+5
+6
+7
+0
+
+0.5
+
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+R1 (bps/Hz)
+
+R2 (bps/Hz)
+
+inner bound
+outer bound
+
+SNR1=20 dB
+SNR2=10 dB
+ INR1=6 dB
+ INR2=3 dB
+
+Figure 17: Comparison of Han-Kobayashi achievable
+region R(1, 1) and outer bound (39).
+
+0
+1
+2
+3
+4
+5
+6
+7
+0
+
+0.5
+
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+R1 (bps/Hz)
+
+R2 (bps/Hz)
+
+inner bound
+outer bound
+
+SNR1=20 dB
+SNR2=10 dB
+ INR1=−1 dB
+INR2=3dB
+
+Figure 18: Comparison of Han-Kobayashi achievable
+region R(1, INR1) and outer bound (39).
+
+If we denote the three outer bounds on the sum rate in (39) by a1, a2, a3 respectively, and the three
+inner bounds on the sum rate in (64) by b1, b2, b3 respectively, we have
+
+δR1+R2 = min {a1, a2, a3} −min {b1, b2, b3} ≤max {a1 −b1, a2 −b2, a3 −b3} ,
+(65)
+
+and hence we can simply upper bound δR1+R2 by the maximum of the differences between the i-th
+bound on R1 + R2 in the outer bound (39) and the corresponding i-th bound on R1 + R2 in the inner
+bound (64) for i = 1, 2, 3. We can readily compare (39) and (64) term by term, and see that (62) is
+true. (See Figure 17). For example,
+
+δ2R1+R2 = log (1 + SNR1 + INR1) + log
+�
+1 + INR2 +
+SNR2
+1 + INR1
+
+�
++ log
+�1 + SNR1
+
+1 + INR2
+
+�
+
+−
+�
+log(1 + SNR1 + INR1) + log
+�
+1 + INR2 + SNR2
+
+INR1
+
+�
++ log
+�
+2 + SNR1
+
+INR2
+
+�
+−3
+�
+
+=
+�
+log
+�
+1 + INR2 +
+SNR2
+1 + INR1
+
+�
+−log
+�
+1 + INR2 + SNR2
+
+INR1
+
+��
+
++
+�
+log
+�1 + SNR1
+
+1 + INR2
+
+�
+−log
+�
+2 + SNR1
+
+INR2
+
+��
++ 3
+
+< 3.
+
+(66)
+
+2. INR1 < 1 and INR2 ≥1
+
+In this case, we have
+R
+�
+min(1, INR2), min(1, INR1)
+�
+= R(1, INR1).
+(67)
+
+Evaluating the achievable region (58) with INRp2 = 1 and INRp1 = INR1, we have the following
+
+33
+
+
+achievable region R(1, INR1).
+
+R1 ≤log
+�
+1 +
+SNR1
+1 + INR1
+
+�
+
+R2 ≤log (2 + SNR2) −1
+
+R1 + R2 ≤log
+�
+INR2 +
+SNR1
+1 + INR1
+
+�
++ log
+�
+1 + 1 + SNR2
+
+INR2
+
+�
+−1
+
+R1 + R2 ≤
+�
+1 +
+SNR1
+1 + INR1
+
+�
++ log (2 + SNR2) −1
+
+R1 + R2 ≤log
+�
+INR2 +
+SNR1
+1 + INR1
+
+�
++ log
+�
+1 + 1 + SNR2
+
+INR2
+
+�
+−1
+
+2R1 + R2 ≤log (1 + SNR1 + INR1) + log (1 + INR2 + SNR2)
+
++ log
+�
+1 + INR1 + SNR1
+
+INR2
+
+�
+−log 2(1 + INR1)2
+
+R1 + 2R2 ≤log(2 + SNR2) + log
+�
+INR2 +
+SNR1
+1 + INR1
+
+�
++ log
+�
+1 + 1 + SNR2
+
+INR2
+
+�
+−2.
+
+(68)
+
+Since the second bound on R1 + R2 is the sum of the bound on R1 and the bound on R2, the first and
+the third bounds on R1 + R2 are the same, and the bound on R1 + 2R2 is the sum of of the bound
+on R2 and the first bound on R1 + R2, these three bounds are redundant and we have the following
+simplified achievable region R(1, INR1).
+
+R1 ≤log
+�
+1 +
+SNR1
+1 + INR1
+
+�
+
+R2 ≤log (2 + SNR2) −1
+
+R1 + R2 ≤log
+�
+INR2 +
+SNR1
+1 + INR1
+
+�
++ log
+�
+1 + 1 + SNR2
+
+INR2
+
+�
+−1
+
+2R1 + R2 ≤log (1 + SNR1 + INR1) + log (1 + INR2 + SNR2)
+
++ log
+�
+1 + INR1 + SNR1
+
+INR2
+
+�
+−log 2(1 + INR1)2.
+
+(69)
+
+Comparing R(1, INR1) with the corresponding bounds in (39) (use the first bound on R1 + R2 in
+(39)), and using the fact that INR1 < 1, we can see that (62) is true. (See Figure 18).
+
+3. INR1 ≥1 and INR2 < 1
+
+In this case, we have
+R
+�
+min(1, INR2), min(1, INR1)
+�
+= R(INR2, 1).
+(70)
+
+This case is similar to the previous case and we can show that (62) is true. (See Figure 19).
+
+4. INR1 < 1 and INR2 < 1
+
+In this case, we have
+
+R
+�
+min(1, INR2), min(1, INR1)
+�
+= R(INR2, INR1).
+(71)
+
+34
+
+
+0
+1
+2
+3
+4
+5
+6
+7
+0
+
+0.5
+
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+R1 (bps/Hz)
+
+R2 (bps/Hz)
+
+inner bound
+outer bound
+
+SNR1 = 20 dB
+SNR2 = 10 dB
+ INR1 = 6 dB
+ INR2 = −1dB
+
+Figure 19: Comparison of Han-Kobayashi achievable
+region R(INR2, 1) and outer bound (39).
+
+0
+1
+2
+3
+4
+5
+6
+7
+0
+
+0.5
+
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+R1 (bps/Hz)
+
+R2 (bps/Hz)
+
+inner bound
+outer bound
+
+SNR1 = 20 dB
+SNR2 = 10 dB
+INR1 = −1 dB
+INR2 = −2 dB 
+
+Figure 20: Comparison of Han-Kobayashi achievable
+region R(INR2, INR1) and outer bound (39).
+
+Evaluating the achievable region (58) with INRp2 = INR2 and INRp1 = INR1 and getting rid of
+redundant bounds, we have the following region R(INR2, INR1).
+
+R1 ≤log
+�
+1 +
+SNR1
+1 + INR1
+
+�
+
+R2 ≤log
+�
+1 +
+SNR2
+1 + INR2
+
+�
+.
+(72)
+
+Note that R(INR2, INR1) is the achievable region obtained by each user treating the other user’s signal
+as noise. Comparing this region with the outer bound (39), we can see that (62) is true. (See Figure
+20)
+
+Combining the above four cases, we have shown that (62) is true for all values of SNR1, SNR2, INR1 and
+INR2, given that INR1 < SNR2, INR2 < SNR1. Thus we have proved that the achievable region
+
+R
+�
+min(1, INR2), min(1, INR1)
+�
+
+is within one bit of the capacity region of the Gaussian weak interference channel.
+
+4.3.2
+Mixed interference channel
+
+We assume that INR1 ≥SNR2 and INR2 < SNR1 in the mixed interference channel. A remarkable feature
+of this channel is that user 2’s message can be fully decoded at receiver 1. Using this fact, a natural scheme
+for user 2 is to use all of his power on the common message, i.e. set INRp1 = 0. We also let INRp2 to be as
+close to 1 as possible using the intuition derived from the weak interference channel. We have the following
+result.
+
+Theorem 6. The achievable region
+R
+�
+min(1, INR2), 0
+�
+
+35
+
+
+0
+1
+2
+3
+4
+5
+6
+7
+0
+
+0.5
+
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+R1 (bps/Hz)
+
+R2 (bps/Hz)
+
+inner bound
+outer bound
+
+SNR1 = 20 dB
+SNR2 = 10 dB
+INR1 = 15 dB
+INR2 = 5 dB 
+
+Figure 21: Comparison of Han-Kobayashi achievable
+region R(1, 0) and outer bound (39).
+
+0
+1
+2
+3
+4
+5
+6
+7
+0
+
+0.5
+
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+R1 (bps/Hz)
+
+R2 (bps/Hz)
+
+inner bound
+outer bound
+
+SNR1 = 20 dB
+SNR2 = 10 dB
+ INR1 = 15 dB
+ INR2 = −1 dB
+
+Figure 22: Comparison of Han-Kobayashi achievable
+region R(INR2, 0) and outer bound (39).
+
+is within one bit of the capacity region of the Gaussian interference channel when INR1 ≥SNR2, INR2 <
+SNR1.
+
+Proof. We only need to prove that (62) is true. There are two cases to consider:
+
+1. INR2 > 1
+
+In this case we use the Han-Kobayashi scheme HK(1,0). By evaluating (58), we have the following
+result.
+
+Corollary 2. The achievable rate region R(1, 0) contains all the rate pairs (R1, R2) satisfying:
+
+R1 ≤log (1 + SNR1)
+
+R2 ≤log (2 + SNR2) −1
+
+R1 + R2 ≤log (INR2 + SNR1) + log
+�
+1 + 1 + SNR2
+
+INR2
+
+�
+−1
+
+R1 + R2 ≤log (1 + INR1 + SNR1)
+
+R1 + R2 ≤log
+�
+1 + INR1 + SNR1
+
+INR2
+
+�
++ log(1 + INR2) −1
+
+2R1 + R2 ≤log(1 + INR2) + log(1 + SNR1 + INR1) + log
+�
+1 + SNR1
+
+INR2
+
+�
+−1
+
+R1 + 2R2 ≤log (1 + SNR2 + INR2) + log
+�
+1 + INR1 + SNR1
+
+INR2
+
+�
+−1.
+
+(73)
+
+Comparing R(1, 0) in (73) with the outer bound (51), we can see that (62) is true. (See Figure 21).
+
+2. INR2 < 1
+
+36
+
+
+We use the Han-Kobayashi scheme HK(INR2, 0), and get the following Han-Kobayashi achievable
+region R(INR2, 0):
+
+R1 ≤log (1 + SNR1)
+
+R2 ≤log
+�
+1 +
+SNR2
+1 + INR2
+
+�
+
+R1 + R2 ≤log(1 + SNR1) + log
+�
+1 +
+SNR2
+1 + INR2
+
+�
+
+R1 + R2 ≤log (1 + SNR1 + INR1)
+
+R1 + R2 ≤log (1 + SNR1 + INR1)
+
+2R1 + R2 ≤(1 + SNR1) + log (1 + SNR1 + INR1)
+
+R1 + 2R2 ≤log
+�
+1 +
+SNR2
+1 + INR2
+
+�
++ log (1 + SNR1 + INR1) .
+
+(74)
+
+We can see that the bounds on 2R1 + R2 and R1 + 2R2 are redundant. Comparing this region with
+the outer bound (51), we can see that (62) is true. (See figure 22).
+
+Thus we have shown that (62) is true and we have proved theorem 6.
+
+4.4
+Discussion on one-bit result
+
+The achievable region discussed in the previous section is not the largest possible. In fact, we can easily
+improve the achievable region by using other private-common message power splits. For example, Costa [4]
+pointed out that if we require receiver 2 to fully decode user 1’s message before decoding his own message,
+and we require receiver 1 to treat user 2’s signal as noise, then the rate pair
+
+R1 = log
+�
+1 +
+INR2
+1 + SNR2
+
+�
+
+R2 = log (1 + SNR2)
+(75)
+
+is achievable. This rate pair is not inside R(1, 1). However, we can achieve this rate pair by using the
+scheme HK(INR2, 0), i.e., user 1 has only common message, and user 2 has only private message. We do
+not intend to optimize over all possible Han-Kobayashi strategies to get the largest achievable region, which
+can be a very complicated task. In fact, the most important point that we want to make with our one-bit
+result is that we do not lose much by using a simple Han-Kobayashi strategy.
+
+Our one-bit result shows that R(1, 1) is a good approximation to the capacity region in the high SNR, INR
+regime, since one bit is relatively a small number compared to the rates of the users. The high SNR, INR
+regime corresponds to the interference-limited situation where interference plays a major role in communi-
+cation. The low SNR, INR regime (SNR << 1 and INR << 1) is not very interesting since the effect of
+interference is smaller than that of the additive Gaussian noise. Nevertheless, a loss of one bit in this regime
+may be large compared to the rates of the users. However, in the low SNR, INR regime we can achieve the
+
+37
+
+
+following region by simply treating interference as noise:
+
+R1 ≤log
+�
+1 +
+SNR1
+1 + INR1
+
+�
+
+R2 ≤log
+�
+1 +
+SNR2
+1 + INR2
+
+�
+.
+(76)
+
+Comparing this region with the simple point-to-point outer bound:
+
+R1 ≤log (1 + SNR1)
+
+R2 ≤log (1 + SNR2) ,
+(77)
+
+we can see that if (R1, R2) is on the boundary of the achievable region (76), then (2R1, 2R2) is outside of
+the capacity region. We say that region (76) is within half of the capacity region. This is a complementary
+result to our one-bit result. Note that treating interference as noise is one special case of our Han-Kobayashi
+scheme. In fact, we have similar results for all parameter values for our scheme.
+
+Theorem 7. The achievable region
+
+R
+�
+min(1, INR2), min(1, INR1)
+�
+(78)
+
+is within half of the capacity region of the Gaussian weak interference channel.
+
+Theorem 8. The achievable region
+R
+�
+min(1, INR2), 0
+�
+
+is within half of the capacity region of the Gaussian interference channel when INR1 ≥SNR2, INR2 <
+SNR1.
+
+Proof. By comparing the achievable region with the corresponding outer bound, we can prove these results
+after some algebraic manipulation. The proofs of these two theorems are similar to the proofs of theorems
+5 and 6, and hence are omitted.
+
+We conclude this section two additional remarks:
+
+1. We can achieve fairly good performance by using a simple choice of the Han-Kobayashi scheme
+where INRp is chosen as close to 1 as possible. We will provide additional insights about why this
+choice is a natural one in Section 6.
+
+2. We derived a new outer bound on the capacity region of the Gaussian interference channel. The one-
+bit result shows that this outer bound is quite good in the high SNR, INR regime. The new bound
+is motivated by the results for a certain class of deterministic interference channels of [3]. We will
+investigate the connection between our results and those of [3] in Section 7.
+
+38
+
+
+5
+Generalized Degrees of Freedom Region
+
+At high SNR and INR, we can generalize the notion of degrees of freedom for the symmetric capacity of the
+symmetric Gaussian interference channel to the entire region for all values of parameters by focusing only on
+the first order terms in log SNR1,log SNR2,log INR1 and log INR2. More precisely, we use approximations
+such as:
+
+log(1 + SNR1 + INR1) ≈max(log SNR1, log INR1)
+
+log
+�
+1 +
+SNR1
+1 + INR1
+
+�
+≈
+�
+log SNR1
+
+INR1
+
+�+
+(79)
+
+to provide an expansion of the capacity region of the Gaussian interference channel which is accurate to first
+order. These first order approximations satisfy the property that the higher order terms are O(1). Therefore
+the approximation error relative to log SNR1 etc. vanishes as SNR1 →∞. This property will be useful in
+the derivation of the generalized degrees of freedom region to be considered next.
+
+Let C(SNR1, SNR2, INR1, INR2) denote the capacity region of the interference channel with parameters
+SNR1, SNR2, INR1, INR2. Let ˜D be a scaled version of C(SNR1, SNR2, INR1, INR2) given by:
+
+˜D(SNR1, SNR2, INR1, INR2) =
+��
+R1
+log SNR1
+,
+R2
+log SNR2
+
+�
+: (R1, R2) ∈C(SNR1, SNR2, INR1, INR2)
+�
+
+and let
+
+α1
+=
+log SNR2
+log SNR1
+
+α2
+=
+log INR1
+log SNR1
+
+α3
+=
+log INR2
+log SNR1
+.
+
+We define the generalized degrees of freedom region as:
+
+D(α1, α2, α3) =
+lim
+SNR1,SNR2,INR1,INR2→∞
+α1,α2,α3 fixed
+˜D(SNR1, SNR2, INR1, INR2).
+
+With this definition, the capacity region can be approximately expressed as the set of rate pairs (R1, R2)
+such that:
+
+R1
+=
+d1 log SNR1
+
+R2
+=
+d2 log SNR2
+
+for (d1, d2) ∈D.
+
+The generalized degrees of freedom d1, d2 give a sense of how interference affects communication. In the
+absence of interference, each user can achieve a rate Ri ≈log SNRi. Due to interference, the single user
+capacity is scaled by a factor di.
+
+In the following subsections we first compute the generalized degrees of freedom region D for the inter-
+ference channels, then present the generalized degrees of freedom region for two examples: the symmetric
+channel and the one-sided interference channel.
+
+39
+
+
+5.1
+Generalized degrees of freedom region of interference channel
+
+5.1.1
+Weak interference channel
+
+For the weak interference channel, by applying the approximations like the ones of (79) to the outer bound
+(39) and the achievable region R(1, 1) (equation (64)), we can easily see that the first order expansions of
+the corresponding bounds are equal, and the resulting first order expansion of the capacity region has the
+following form:
+
+R1 ≤log SNR1
+
+R2 ≤log SNR2
+
+R1 + R2 ≤log SNR1 +
+�
+log
+�SNR2
+
+INR2
+
+��+
+
+R1 + R2 ≤log SNR2 +
+�
+log
+�SNR1
+
+INR1
+
+��+
+
+R1 + R2 ≤max
+�
+log INR1, log
+�SNR1
+
+INR2
+
+��
++ max
+�
+log INR2, log
+�SNR2
+
+INR1
+
+��
+
+2R1 + R2 ≤max(log SNR1, log INR1) + max
+�
+log INR2, log SNR2
+
+INR1
+
+�
++ log SNR1
+
+INR2
+
+R1 + 2R2 ≤max(log SNR2, log INR2) + max
+�
+log INR1, log SNR1
+
+INR2
+
+�
++ log SNR2
+
+INR1
+.
+
+(80)
+
+From (80), we have that the generalized degrees of freedom region is given by:
+
+d1 ≤1
+
+d2 ≤1
+
+d1 + α1d2 ≤1 + (α1 −α3)+
+
+d1 + α1d2 ≤α1 + (1 −α2)+
+
+d1 + α1d2 ≤max (α2, 1 −α3) + max (α3, α1 −α2)
+
+2d1 + α1d2 ≤max(1, α2) + max (α3, α1 −α2) + 1 −α3
+
+d1 + 2α1d2 ≤max(α1, α3) + max (α2, 1 −α3) + α1 −α2.
+
+(81)
+
+5.1.2
+Mixed interference channel
+
+For mixed interference channel, by applying the approximations like the ones of (79) on the outer bound
+(51) and the inner bound (73), we can easily see that the first order expansions of the corresponding bounds
+
+40
+
+
+are equal, and the resulting first order expansion of the capacity region has the following form:
+
+R1 ≤log SNR1
+
+R2 ≤log SNR2
+
+R1 + R2 ≤log SNR1 +
+�
+log
+�SNR2
+
+INR2
+
+��+
+
+R1 + R2 ≤max(log SNR1, log INR1)
+
+R1 + R2 ≤max
+�
+log INR1, log
+�SNR1
+
+INR2
+
+��
++ log INR2
+
+2R1 + R2 ≤max(log SNR1 + log INR1, 2 log SNR1)
+
+R1 + 2R2 ≤max(log SNR2, log INR2) + max
+�
+log INR1, log SNR1
+
+INR2
+
+�
+.
+
+(82)
+
+Note that the third bound on R1 + R2 can be written as:
+
+R1 + R2 ≤max
+�
+log INR1, log
+�SNR1
+
+INR2
+
+��
++ log INR2 = max (log INR1 + log INR2, log SNR1) , (83)
+
+which is larger than the second bound on R1 + R2. Hence the third bound on R1 + R2 is redundant. The
+bound on 2R1 + R2 is the same as the sum of the bound on R1 and the second bound on R1 + R2, so it is
+also redundant. So we end up with a first order expansion of the capacity region of the form:
+
+R1 ≤log SNR1
+
+R2 ≤log SNR2
+
+R1 + R2 ≤log SNR1 +
+�
+log
+�SNR2
+
+INR2
+
+��+
+
+R1 + R2 ≤max(log SNR1, log INR1)
+
+R1 + 2R2 ≤max (log SNR2, log INR2) + max
+�
+log INR1, log
+�SNR1
+
+INR2
+
+��
+.
+
+(84)
+
+Using (84) we obtain the generalized degrees of freedom region for the mixed interference channel:
+
+d1 ≤1
+
+d2 ≤1
+
+d1 + α1d2 ≤1 + (α1 −α3)+
+
+d1 + α1d2 ≤max(1, α2)
+
+d1 + 2α1d2 ≤max(α1, α3) + max (α2, 1 −α3) .
+
+(85)
+
+41
+
+
+5.1.3
+Strong interference channel
+
+The capacity region of the strong interference channel is shown to be the intersection of that of two multiple
+access channels, and is given by
+
+R1 ≤log(1 + SNR1)
+
+R2 ≤log(1 + SNR2)
+
+R1 + R2 ≤log(1 + SNR1 + INR1)
+
+R1 + R2 ≤log(1 + SNR2 + INR2).
+
+(86)
+
+By applying the approximations like the ones of (79), we obtain the generalized degrees of freedom region
+for the strong interference channel.
+
+d1 ≤1
+
+d2 ≤1
+
+d1 + α1d2 ≤max(1, α2)
+
+d1 + α1d2 ≤max(α1, α3).
+
+(87)
+
+5.2
+Example 1: the symmetric channel
+
+For the symmetric Gaussian interference channel with SNR1 = SNR2 = SNR, INR1 = INR2 = INR and
+SNR >> INR, we have α1 = 1 and α2 = α3 = α. In this case, for weak interference channel in which
+0 < α < 1, we have the following generalized degrees of freedom region:
+
+d1 ≤1
+
+d2 ≤1
+
+d1 + d2 ≤min
+�
+2 −α, 2 max (α, 1 −α)
+�
+
+2d1 + d2 ≤2 −α + max (α, 1 −α)
+
+d1 + 2d2 ≤2 −α + max (α, 1 −α) .
+
+(88)
+
+For strong interference channel in which α ≥1, we have the following generalized degrees of freedom
+region:
+
+d1 ≤1
+
+d2 ≤1
+
+d1 + d2 ≤α.
+
+(89)
+
+The generalized degrees of freedom region of the symmetric channel is plotted in Figure 23. Note that
+the diagram for α ≥2 corresponds to the very strong interference case, in which interference does not
+reduce the available degrees of freedom of the channel. We see that the degrees of freedom region is not
+monotonically decreasing with INR in the weak interference regime. As in the case of the symmetric rate
+discussed in Section 3, there are three regimes in which the degrees of freedom region shows different
+qualitative behaviors, namely 0 ≤α < 1/2, 1/2 ≤α < 2/3, and 2/3 ≤α < 1.
+
+42
+
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+1
+
+d1 + d2 = α
+
+d1
+
+d2
+
+α = 1
+d1
+
+d2
+
+1 < α < 2
+d1
+
+d2
+
+α ≥2
+
+d1
+
+d2
+
+d1 + d2 = 2α
+
+2d1 + d2 = 2
+
+d1 + 2d2 = 2
+
+1
+2 < α < 2
+
+3
+
+d1
+
+d2
+
+2d1 + d2 = 2
+
+d1 + 2d2 = 2
+
+α = 2
+
+3
+
+d1
+
+d2
+
+d1 + d2 = 2 −α
+
+2d1 + d2 = 2
+
+d1 + 2d2 = 2
+
+2
+3 < α < 1
+
+d1
+
+d2
+
+α = 0
+d1
+
+d2
+
+d1 + d2 = 2 −2α
+
+0 < α < 1
+
+2
+
+d1
+
+d2
+
+α = 1
+
+2
+
+d1 + d2 = 1
+
+d1 + d2 = 1
+
+Figure 23: Generalized degrees of freedom region for the symmetric Gaussian interference channel.
+
+43
+
+
+If we use an orthogonalizing strategy, the generalized degrees of freedom region that we can achieve is
+shown in Figure 24. If we treat interference as noise, the generalized degrees of freedom region that we can
+achieve is shown in Figure 25. So an orthogonalizing strategy is strictly sub-optimal except when α = 1
+
+2
+and α = 1, and treating interference as noise is strictly sub-optimal except for α ≤1
+
+2, as was already shown
+in Section 3.6 for the symmetric rate.
+
+1
+
+1
+
+d1
+
+d2
+
+Figure 24: Generalized degrees of freedom re-
+gion for the symmetric Gaussian weak interfer-
+ence channel using orthogonalizing scheme.
+
+1
+
+1
+
+d1 + d2 = 2 −2α
+
+d1
+
+d2
+
+Figure 25: Generalized degrees of freedom re-
+gion for the symmetric Gaussian weak interfer-
+ence channel when treating interference as noise.
+
+5.3
+Example 2: the one-sided interference channel
+
+For the one-sided interference channel shown in Figure 7, we have INR1 = 0. In weak interference case
+(SNR1 > INR2), by applying the approximations like the ones of (79) to the achievable region R(1, INR1)
+given in (69), we get the following first order expansions of the achievable region
+
+R1 ≤log (SNR1)
+
+R2 ≤log (SNR2)
+
+R1 + R2 ≤log (SNR1) +
+�
+log
+�SNR2
+
+INR2
+
+��+
+.
+
+(90)
+
+By examining the proof of the outer bound (39) we can easily see that the previous first order expansions of
+the achievable region is actually tight. Thus we get the following generalized degrees of freedom region for
+the one-sided interference channel.
+
+d1 ≤1
+
+d2 ≤1
+
+d1 + α1d2 ≤max (1, 1 + α1 −α3) .
+
+(91)
+
+In Figure 26 we plot the generalized degrees of freedom of the weak one-sided interference channel. There
+are two different cases.
+
+1. α1 > α3
+
+44
+
+
+orthogonal
+
+A
+B
+
+capacity
+
+B
+
+A
+
+orthogonal
+
+capacity
+(interference treated as noise)
+
+(b)
+(a)
+
+interference treated as noise
+
+1
+
+d2
+
+d1
+
+1
+
+d2
+
+d1
+
+1
+d1 + α1d2 = 1 + α1 −α3
+
+α1 < α3
+α1 ≥α3
+
+d1 + α1d2 = 1
+
+1
+1 −α3 + α1
+
+Figure 26: Generalized degrees of freedom region of the weak one-sided interference channel for treating interference
+as noise, orthogonalizing, and optimal power splitting.
+
+In this case, the generalized degrees of freedom region is:
+
+d1 ≤1
+
+d2 ≤1
+
+d1 + α1d2 ≤1 + α1 −α3.
+
+(92)
+
+The entire region can be achieved by adjusting the power of the long-range link and treating its inter-
+ference as noise. In particular, to achieve the corner point A =
+�
+1, 1 −α3
+
+α1
+
+�
+, user 1 transmits at full
+power and user two treats user 1’s interference as noise. To achieve the corner point B = (1 −α3, 1),
+user 1’s transmitting power needs to be reduced so that the received signal to noise ratio at receiver 1
+is SNR1
+
+INR2 , and user two treats user 1’s interference as noise.
+
+2. α1 < α3
+
+In this case, the generalized degrees of freedom region is:
+
+d1 ≤1
+
+d2 ≤1
+
+d1 + α1d2 ≤1.
+
+(93)
+
+The corner point A = (1 −α1, 1) has to be achieved by a private common split in user 1’s message.
+Treating interference as noise will only get to the point B = (1 −α3, 1) which is strictly smaller.
+
+We also draw the performance of the orthogonalizing scheme in Figure 26, which is suboptimal in both
+cases.
+
+In the strong interference case (SNR1 ≤INR2), the capacity of the one-sided interference channel is
+known. For completeness, we present the corresponding generalized degrees of freedom region in the
+
+45
+
+
+following.
+
+d1 ≤1
+
+d2 ≤1
+
+d1 + α1d2 ≤max (α1, α3) .
+
+(94)
+
+6
+Private versus common information
+
+In Section 4 we have shown that the simple Han-Kobayashi scheme that sets the private message power so
+that INRp1 = 1 and INRp2 = 1 achieves to within 1 bit/s/Hz of the capacity region. We also argued that
+setting INRp1 = 1 and INRp2 = 1 achieves a good tradeoff between obtaining a good direct link rate and
+not causing excessive interference to the other link. In this section we will provide an alternative analysis
+that justifies the choice INRp1 = 1 and INRp2 = 1. In brief, we will argue that the information received at
+the non-intending receiver that is above the noise level should essentially be decodable, and hence can be
+thought of as common information.
+
+Consider a communication scheme that splits the message to be sent into many sub-messages of small
+rate and power. The transmitted message is the superposition of these sub-messages, and has total power
+P. Receiver 2 is able to decode the message transmitted from its own transmitter, and subtract it from the
+received signal y2, obtaining the signal ˜y2. We further make the optimistic assumption that receiver 1 can
+also decode and subtract the interference received from transmitter 2, obtaining a signal ˜y1. This interference
+cancellation may not always be possible, and therefore we will obtain an upper bound on the rate of user 1.
+The resulting channels are:
+
+˜y1
+=
+�
+
+SNR1 ˜x1 + z1
+
+˜y2
+=
+�
+
+INR2 ˜x1 + z2
+
+(95)
+
+where z1, z2 ∼CN(0, 1) and we normalized ˜x1 so that E[|˜x1|2] ≤1.
+
+We define the differential rates:
+
+r1(z)
+=
+SNR1
+1 + SNR1z
+
+r2(z)
+=
+INR2
+1 + INR2z
+(96)
+
+which can be interpreted in the following way: r1(z) · dz (r2(z) · dz) is the rate that can be achieved in a
+sub-message of power dz facing an interference of power z · SNR1 (z · INR2) in channel 1 (2). (See [11] p.
+2802, where this concept is introduced). These functions can also be interpreted as the marginal increase in
+rate at interference level z · SNR1 (or z · INR2).
+
+Imagine we plot these two functions and let us see what happens as z goes from 0 to 1. For INR2 · z ≪1,
+r1(z) ≫r2(z). The marginal increase in rate in the direct link is much larger than in the indirect link,
+
+46
+
+
+10
+
+20
+
+30
+
+40
+r��(z)
+
+r��(z)
+
+SNR
+
+INR
+
+1+z*SNR
+
+1+z*INR
+
+=
+
+=
+
+1
+
+2
+
+SNR=20�dB
+INR=10�dB
+
+z�[dB]
+
+INR��=�0�dB
+p
+
+private������common
+
+Figure 27: Differential rates r1(z) and r2(z) for a symmetric channel where SNR = 20 dB and INR = 10 dB.
+
+and therefore the other receiver has no hope of decoding this sub-message if information is sent at this rate.
+Thus, at this signal level, information should be private, only decodable by receiver 1. When INR2 · z ≫1,
+r2(z) ≈r1(z) ≈1/z and any information sent in the direct link at this rate can also be decoded by the other
+receiver. At this signal level, we should therefore be sending common information. Figure 27 shows how the
+differential rates r1(z) and r2(z) vary as a function of z for a symmetric channel where SNR1 = SNR2 = 20
+dB and INR1 = INR2 = 10 dB. We see that when z ≈−10 dB, which corresponds to INRp = 0 dB, the
+differential rates are approximately equal.
+
+The above argument shows that the sub-messages that are decoded first and that face an interference level
+z · INR2 > 1 at receiver 2 can be decoded by both receivers, and are therefore common information.
+
+We will now analyze in what situations there is a gain in sending common information. Suppose we start
+with a nominal strategy of sending all private information at full power on both links. Each receiver treats
+the interference as noise.
+
+How can we improve this strategy? From the discussion above, without loss of optimality we can convert
+the part of the signals in both links above the other receiver’s noise level into common information. We
+focus on the part of user 1’s signal above receiver 2’s noise level, which we call c1. Assume that this
+signal is getting a rate R in the nominal strategy of treating interference as noise. This can be viewed
+as common information, decoded in the following ways by the two receivers: receiver 1 decodes c1 first,
+treating the component sent by transmitter 1 received at receiver 2 below noise level plus the interference
+from transmitter 2 as noise. From receiver 2 point of view, c1 acts as interference to its own signal and
+therefore we can view receiver 2 as decoding c1 last, after decoding it’s own information. Note that since
+the decoding order is different at the two receivers, only receiver 1 is limiting the rate of c1. In receiver 2,
+there is still slack: even if we increased the rate of c1 beyond R, receiver 2 would still be able to decode. By
+the same logic, the part of the signal above noise level sent from transmitter 2 (call it c2) also has slack at
+receiver 1.
+
+This suggests that we can improve the performance by changing the decoding order of c1 in receiver 1.
+If we decode an ǫ part of c1 after decoding an ǫ part of c2 (ǫ swap of ordering in receiver 1), then the rate
+
+47
+
+
+v1
+
+y1
+f1(., .)
+
+y2
+f2(., .)
+
+x1
+
+x2
+
+g2(.)
+
+g1(.)
+
+v2
+
+Figure 28: Deterministic interference channel.
+
+assigned to c1 can be improved from R to R + δ. Note that c1 can still be decoded by receiver 2, since
+there was slack in the first place. Also, the mutual information achieved for c2 at receiver 1 has decreased
+because its ordering is a slightly less favorable, but because there was slack for c2 at receiver 1, c2 can still
+be decoded.
+
+Thus, we have improved the rate of user 1 while keeping the rate of user 2 invariant. Therein lies the
+power of viewing the signal above noise level as common information: there is flexibility in changing the
+decoding order. When viewed as private information, the decoding order is fixed and there is slack in one of
+the two receivers that cannot be exploited. That is in essence the “structure” in the interfering signals that is
+not exploited in treating interference as noise. By changing the cancellation ordering, we are reducing the
+slack in one of the receivers of the common information.
+
+7
+Connection to a Deterministic Interference Channel
+
+In Section 6 we argued that the portion of the received interfering signal above the noise level should be
+common information and that hidden below the noise level should be private. In other words, the part of
+the received interfering signal that is most visible to the other link is made common while the rest is made
+private. This argument is only approximate, as the part of the interfering signal below the noise level still
+has some visibility to the other link. Therefore the proposed strategy still has up to one-bit gap to capacity.
+
+There is in fact a channel in which part of the interfering signal is completely invisible to the other link.
+This channel, introduced by El Gamal and Costa in [3], is a special type of a deterministic interference
+channel. Because of the complete invisibility of part of the signal, they can show that a Han-Kobayashi
+strategy of assigning common information to the visible part and private information to the invisible part is
+exactly optimal. Our approach to the Gaussian interference channel is in fact based on drawing analogies to
+this deterministic channel.
+
+The deterministic interference channel of [3] is shown in Figure 28. In this channel, x1 and x2 are the
+inputs, v1 = g1(x1) is the interference caused by x1 at receiver 2 and v2 = g2(x2) is the interference caused
+by x2 at receiver 1. y1 and y2 are the outputs, and they are deterministic functions of (x1, v2) and (x2, v1),
+
+48
+
+
+respectively:
+
+y1 = f1(x1, v2)
+
+y2 = f2(x2, v1).
+(97)
+
+In addition, there is an important assumption about the interference signals v1 and v2 given by the following
+conditions:
+
+H(y1|x1) = H(v2)
+
+H(y2|x2) = H(v1).
+(98)
+
+The previous conditions are equivalent to the existence of functions h1(., .) and h2(., .) such that
+
+v1 = h2(x2, y2)
+
+v2 = h1(x1, y1).
+(99)
+
+These conditions guarantee that each receiver can observe a clean version of the interfering signal after
+decoding the own message. This assumption is key for deriving the capacity region of the channel. One can
+argue that regardless of the communication strategy, the signals v1 and v2 are common information, since
+they can be cleanly observed after decoding the own message. In addition, due to the functions g1(·) and
+g2(·) part of the transmitted message is completely invisible to the non-intending receiver. This part of the
+message becomes private information.
+
+In the deterministic channel, the conditions (98) seem artificial, but in the Gaussian channel analogous
+conditions arise more naturally. For the Gaussian interference channel, receiver 2 can observe s1 = h12x1 +
+z2 after decoding x2. Similarly, we can define s2 = h21x2 + z1, which is the signal that receiver 1 can
+observe after decoding the message x1. As we argued in the case of the deterministic channel, the signals s1
+and s2 can be thought of as the common information that can be observed after decoding the own message.
+The role of z1 (z2) in s2 (s1) can be compared to the role of the function g2(·) (g1(·)) in the deterministic
+channel, that is, hiding the private information to the non-intending receiver.
+
+The outer bounds derived in [3] to establish the capacity region of the deterministic channel can be inter-
+preted in terms of genie aided channels, with various combinations of x1, x2, v1, v2 given to the receivers.
+Analogous genie aided channels, with appropriate modifications of the side information, were used in Sec-
+tion 4 to derive the outer bounds for the Gaussian interference channel with weak and mixed interference.
+
+Appendix A: Analysis of upper bound of [6] Theorem 2
+
+In this appendix we will show that the upper bound of [6] Theorem 2 achieves a worst case gap of 1
+bits/s/Hz in the parameter range B1 with respect to the symmetric rate of our simple Han-Kobayashi scheme
+of Section 3.2. In addition, the gap between this bound and the Han-Kobayashi scheme can be unbounded
+in the parameter range B2. Therefore, the bound of [6] Theorem 2 does not give better performance than the
+bound (12) in terms of characterizing the symmetric capacity of the symmetric channel to within 1 bit/s/Hz.
+
+The results of [6] are derived for the normalized interference channel, i.e. |hd|2 = 1, N0 = 1, so in order
+to use the results, we need to replace: |hc|2 →|hc|2/|hd|2, P →|hd|2P/N0. Specializing [6] Theorem 2 to
+
+49
+
+
+the complex symmetric interference channel with 0 < |hc|2/|hd|2 < 1 (0 < INR < SNR) one obtains the
+symmetric rate upper bound:
+
+RUBK
+=
+log
+
+�
+
+1 + −(|hc|2 + |hd|2) +
+�
+
+(|hc|2 + |hd|2)2 + 4|hc|2|hd|2(P/N0)(|hc|2 + |hd|2)
+
+2|hc|2
+
+�
+
+=
+log
+
+
+
+2 −
+�
+1 + SNR
+
+INR
+
+�
++
+
+��
+1 + SNR
+
+INR
+
+�2
++ 4 · SNR
+�
+1 + SNR
+
+INR
+
+�
+
+−1
+(100)
+
+Consider the case in which the first term of the min{·, ·} of (7) is active, that is, the parameter range B1.
+Then we can write:
+
+RUBK −RHK1
+=
+log
+
+
+
+2 −
+�
+1 + SNR
+
+INR
+
+�
++
+
+��
+1 + SNR
+
+INR
+
+�2
++ 4 · SNR
+�
+1 + SNR
+
+INR
+
+�
+
+−1
+
+−1
+
+2 log (1 + SNR + INR) −1
+
+2 log
+�
+2 + SNR
+
+INR
+
+�
++ 1
+
+=
+1
+2 log
+
+
+
+
+
+
+
+
+1 −SNR
+
+INR +
+
+��
+1 + SNR
+
+INR
+
+�2
++ 4 · SNR
+�
+1 + SNR
+
+INR
+
+�
+
+
+
+2
+
+
+
+
+−1
+
+2 log (1 + SNR + INR) −1
+
+2 log
+�
+2 + SNR
+
+INR
+
+�
+
+≤
+1
+2 log
+
+�
+
+2
+
+�
+
+1 +
+�SNR
+
+INR
+
+�2�
+
++ 4 · SNR
+�
+1 + SNR
+
+INR
+
+�
++ 2
+
+�
+
+1 −
+�SNR
+
+INR
+
+�2��
+
+−1
+
+2 log
+�
+(1 + SNR + INR) ·
+�
+2 + SNR
+
+INR
+
+��
+
+=
+1
+2 log
+�
+4
+2 + (SNR/INR) · 1 + SNR · (1 + SNR/INR)
+
+1 + SNR + INR
+
+�
+
+≤
+1
+2 log
+�
+4
+2 + (SNR/INR) · SNR
+
+INR
+
+�
+
+=
+1
+2 log
+�
+4
+2(INR/SNR) + 1
+
+�
+
+<
+1
+(101)
+
+where we used √1 + x ≥1 for x ≥0 in the first inequality and the assumption INR ≤SNR in the second
+inequality. It is easy to check that for example, if INR = SNR3/4, RUB1 −RHK1 →1 as SNR →∞.
+Therefore the worst case difference of 1 bit/s/Hz in (101) can actually occur.
+
+We see that in the parameter range B1, the achievable strategy and the upper bound differ for at most 1
+bit/s/Hz. Therefore, in this parameter range our simple scheme gives a bounded (and small) gap with respect
+to the upper bound.
+
+We will now show that in the parameter range B2, the gap between our scheme and the upper bound (100)
+
+50
+
+
+can be arbitrarily large. In this parameter range we can write:
+
+RUBK −RHK2
+=
+log
+
+
+
+1 −SNR
+
+INR +
+
+��
+1 + SNR
+
+INR
+
+�2
++ 4 · SNR
+�
+1 + SNR
+
+INR
+
+�
+
+
+
+−log
+�
+1 + INR + SNR
+
+INR
+
+�
+
+≥
+log
+
+�
+
+1 −SNR
+
+INR + 2
+
+�
+
+SNR
+�
+1 + SNR
+
+INR
+
+��
+
+−log
+�
+1 + INR + SNR
+
+INR
+
+�
+
+where the inequality follows from discarding (1+SNR/INR)2 in the square root. To show that this difference
+can be unbounded, take INR =
+√
+
+SNR. With this choice of parameters we get:
+
+RUBK −RHK2 ≥log
+
+
+
+1 −
+√
+
+SNR + 2
+�
+
+SNR(1 +
+√
+
+SNR)
+
+1 + 2
+√
+
+SNR
+
+
+
+
+
+where the right hand side goes to infinity for SNR →∞.
+
+References
+
+[1] T. S. Han and K. Kobayashi, A new achievable rate region for the interference channel, IEEE Trans.
+Info. Theory, vol. IT-27, pp. 49 - 60, January 1981.
+
+[2] A. B. Carleial, A case where interference does not reduce capacity, (Corresp.), IEEE Trans. Info.
+Theory, vol. IT-21, pp. 569 - 570, September 1975. ????
+
+[3] A. A. El Gamal and M. H. M. Costa, The capacity region of a class of deterministic interference
+channels, (Corresp.), IEEE Trans. Info. Theory, vol. IT-28, pp. 343 - 346, March 1982.
+
+[4] M. H. M. Costa, On the Gaussian interference channel, IEEE Trans. Info. Theory, vol. IT-31, pp. 607
+- 615, September 1985.
+
+[5] H. Sato, On degraded Gaussian two-user channels, (Corresp.), IEEE Trans. Info. Theory, vol. IT-24,
+pp. 638 - 640, September 1978.
+
+[6] G. Kramer, Outer Bounds on the Capacity of Gaussian Interference Channels, IEEE Trans. Info. The-
+ory, vol. 50, no. 3, pp. 581 - 586, March 2004.
+
+[7] H. Sato, The capacity of the Gaussian interference channel under strong interference, (Corresp.), IEEE
+Trans. Info. Theory, vol. IT-27, pp. 786 - 688, November 1981.
+
+[8] I. Sason, On achievable rate regions for the Gaussian interference channel, (Corresp.), IEEE Trans.
+Info. Theory, vol. IT-50, pp. 1345 - 1356, June 2004.
+
+51
+
+
+[9] S. Diggavi and T. M. Cover, Worst additive noise under covariance constraints, (Corresp.), IEEE
+Trans. Inform. Theory, vol. IT-47, pp. 3072 - 3081, Nov. 2001.
+
+[10] H. Chong, M. Motani, H. Garg, and H. El Gamal, On the Han-Kobayashi region for the interference
+channel, submitted to IEEE Trans. Info. Theory, Aug. 2006.
+
+[11] D. Tse and S. Hanly, Multi-Access Fading Channels: Part I: Polymatroid Structure, Optimal Resource
+Allocation and Throughput Capacities, IEEE Trans. Info. Theory, vol. 44, no. 7, pp. 2796-2815, Nov.
+1998.
+
+52
+
+

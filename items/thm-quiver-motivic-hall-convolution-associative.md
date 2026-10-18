@@ -2,7 +2,7 @@
 id: thm-quiver-motivic-hall-convolution-associative
 kind: theorem
 title: "Quiver motivic Hall convolution is associative and unital"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -11,8 +11,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "David Bindel, CS 6210 Matrix Computations, Hessenberg QR iteration"

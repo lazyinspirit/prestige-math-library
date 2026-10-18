@@ -2,7 +2,7 @@
 id: lem-it-finite-kl-agrees-with-measurable-kl
 kind: lemma
 title: "Finite KL divergence agrees with measurable-space KL"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-two-distinct-one-dimensional-modules-over-generic-jordan-hall-algebra
 kind: example
 title: "Two distinct one-dimensional modules over the generic Jordan Hall algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

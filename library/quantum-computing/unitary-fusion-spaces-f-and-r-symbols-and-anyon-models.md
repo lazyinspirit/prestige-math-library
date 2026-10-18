@@ -1,7 +1,7 @@
 ---
 page: unitary-fusion-spaces-f-and-r-symbols-and-anyon-models
 title: Unitary Fusion Spaces, F/R Symbols, and Anyon Models
-status: draft
+status: published
 requires:
   - yang-baxter-operators-and-quantum-braid-representations
   - hecke-symmetries-and-generic-quantum-schur-weyl-duality

@@ -1,7 +1,7 @@
 ---
 page: yangians-quantum-affine-and-transfer-matrices
 title: "Yangians, Quantum Affine Algebras, and Transfer Matrices"
-status: draft
+status: published
 items: [def-yangian-gl-n-rtt-presentation, lem-yangian-rtt-component-commutator-form, prop-yangian-gl-n-rtt-hopf-structure, def-yangian-evaluation-module, thm-yangian-evaluation-module-well-defined, lem-yangian-rtt-spectral-rescaling, prop-yangian-rational-r-matrix-yang-baxter-and-invertibility, lem-yangian-fundamental-evaluation-intertwiner, def-yangian-periodic-fundamental-chain, lem-yangian-periodic-monodromy-satisfies-rtt, thm-yangian-periodic-transfer-matrices-commute, lem-yangian-gl2-one-root-bethe-cancellation]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-rank-one-ribbon-structure-from-the-finite-r-series
 kind: lemma
 title: "The corrected finite rank-one R series gives the full tilting ribbon structure"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -2,7 +2,7 @@
 id: thm-a1-arbitrary-framing-geometric-sl2-action
 kind: theorem
 title: "Arbitrary-framing A1 Hecke cycles realize the highest-weight sl2 module"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

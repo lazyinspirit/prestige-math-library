@@ -24,7 +24,7 @@ sources:
   scraped: []
   references:
     - title: "John K. Hunter, Measure Theory (UC Davis lecture notes), Theorem 2.33"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
     - title: "T. Tao, An Introduction to Measure Theory (GSM 126), Exercise 1.2.21"
       url: "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"
     - title: "E. A. Carlen, Notes on Lebesgue Measure on $\\mathbb{R}^n$ and $S^{n-1}$ (Rutgers Math 501), Theorem 3.1"

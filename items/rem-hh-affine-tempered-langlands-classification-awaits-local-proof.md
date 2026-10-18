@@ -2,7 +2,7 @@
 id: rem-hh-affine-tempered-langlands-classification-awaits-local-proof
 kind: remark
 title: The local tempered Langlands proof and the selected-group boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

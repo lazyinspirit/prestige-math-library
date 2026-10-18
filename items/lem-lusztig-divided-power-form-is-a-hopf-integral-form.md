@@ -2,7 +2,7 @@
 id: lem-lusztig-divided-power-form-is-a-hopf-integral-form
 kind: lemma
 title: "The full divided-power integral form is a Hopf form"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

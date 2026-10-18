@@ -2,7 +2,7 @@
 id: def-temperley-lieb-diagram-category
 kind: definition
 title: "Temperley–Lieb planar diagram data and endomorphism modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

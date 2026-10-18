@@ -2,7 +2,7 @@
 id: def-temperley-lieb-spencer-digit-support
 kind: definition
 title: "Spencer quantum-characteristic digits and support set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

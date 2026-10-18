@@ -2,7 +2,7 @@
 id: def-vertex-algebra-state-field
 kind: definition
 title: Vertex algebra in the state–field convention
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-finite-block-information-and-entropy
 kind: definition
 title: "Finite-block information and entropy in bits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

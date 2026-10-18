@@ -2,7 +2,7 @@
 id: def-daha-a1-polynomial-representation
 kind: definition
 title: "The rank-one DAHA polynomial representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

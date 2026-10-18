@@ -2,7 +2,7 @@
 id: thm-weighted-rt-tqft-and-factorization
 kind: theorem
 title: "The weighted Reshetikhin–Turaev TQFT and modular-functor factorization"
-status: draft
+status: published
 dependency_level: 14
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

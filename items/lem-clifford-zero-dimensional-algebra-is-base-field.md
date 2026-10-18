@@ -2,7 +2,7 @@
 id: lem-clifford-zero-dimensional-algebra-is-base-field
 kind: lemma
 title: "The zero-dimensional Clifford algebra is the base field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-complex-clifford-classification-and-graded-products

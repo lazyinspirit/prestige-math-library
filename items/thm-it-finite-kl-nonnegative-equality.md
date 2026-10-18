@@ -2,7 +2,7 @@
 id: thm-it-finite-kl-nonnegative-equality
 kind: theorem
 title: "Finite KL divergence is nonnegative with equality exactly at equal laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

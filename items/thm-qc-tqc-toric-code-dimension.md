@@ -2,7 +2,7 @@
 id: thm-qc-tqc-toric-code-dimension
 kind: theorem
 title: The periodic toric code encodes two qubits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-finite-simplex-entropy-continuity-and-concavity
 kind: lemma
 title: Finite-simplex entropy is continuous and concave
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

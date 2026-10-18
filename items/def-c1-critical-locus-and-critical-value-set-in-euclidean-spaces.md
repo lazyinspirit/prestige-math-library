@@ -2,7 +2,7 @@
 id: def-c1-critical-locus-and-critical-value-set-in-euclidean-spaces
 kind: definition
 title: "$C^1$ critical loci and values for Euclidean maps"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -18,8 +18,6 @@ axiom_use: No choice principle is used in this conditional weak-identity proof.
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

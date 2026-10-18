@@ -17,7 +17,8 @@ provenance:
   statement: ai-generated
   proof: ai-generated
 verification: {}
-proof_strategy: direct
+proof_strategy: directverification: {}
+
 ---
 
 ## Example

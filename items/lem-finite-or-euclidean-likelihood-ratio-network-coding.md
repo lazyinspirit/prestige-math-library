@@ -2,7 +2,7 @@
 id: lem-finite-or-euclidean-likelihood-ratio-network-coding
 kind: lemma
 title: Likelihood-ratio network coding for finite or Euclidean multicast networks
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

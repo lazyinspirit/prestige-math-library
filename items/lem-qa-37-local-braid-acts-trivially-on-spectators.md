@@ -2,7 +2,7 @@
 id: lem-qa-37-local-braid-acts-trivially-on-spectators
 kind: lemma
 title: "A triple braid acts identically on fusion spectators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: ex-real-ko-coefficients-through-degree-seven
 kind: example
 title: The low-degree real KO coefficient table
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations-examples

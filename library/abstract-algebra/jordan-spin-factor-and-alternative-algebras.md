@@ -1,7 +1,7 @@
 ---
 page: jordan-spin-factor-and-alternative-algebras
 title: "Jordan Algebras, Spin Factors, and Alternative Examples"
-status: draft
+status: published
 items: [ def-jordan-algebra, def-alternative-algebra, def-involutive-complex-associative-algebra, def-associative-jordan-product, thm-associative-symmetrization-satisfies-jordan-identity, def-real-spin-factor, thm-real-spin-factor-is-jordan, prop-real-spin-factor-maps-onto-clifford-jordan-subalgebra, def-octonion-algebra-by-cayley-dickson, lem-quaternion-conjugation-is-an-anti-involution, lem-octonion-conjugation-is-an-anti-involution, thm-octonions-are-alternative-but-not-associative, def-hermitian-three-by-three-octonion-matrix-data, thm-real-albert-algebra-is-jordan ]
 examples: []
 requires:

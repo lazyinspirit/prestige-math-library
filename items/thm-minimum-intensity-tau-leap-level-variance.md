@@ -25,8 +25,6 @@ sources:
     - title: "David F. Anderson, Desmond J. Higham, and Yu Sun, Complexity of multilevel Monte Carlo tau-leaping"
       url: "https://strathprints.strath.ac.uk/51740/1/Anderson_etal_SIAM_2014_Complexity_of_multilevel_monte_carlo_tau_leaping.pdf"
       locator: "§2 coupled tau-leap construction and §3.1, Theorem 1 and Corollary 1, PDF pp. 3–9 (journal pp. 3108–3114)."
-verification:
-  precheck: pending
 ---
 
 ## Statement

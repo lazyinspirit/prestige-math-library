@@ -2,7 +2,7 @@
 id: rem-geck-basic-set-theorem-scope-and-proof-status
 kind: remark
 title: "The scope and proof status of the finite-Weyl basic-set theorem"
-status: draft
+status: published
 dependency_level: 12
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

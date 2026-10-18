@@ -23,8 +23,6 @@ axiom_base: No choice axiom is used; the proof uses cell integration, Taylor bou
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

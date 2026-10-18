@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-negligible-morphisms-form-tensor-ideal
 kind: lemma
 title: "Negligible Temperley–Lieb morphisms form a tensor ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

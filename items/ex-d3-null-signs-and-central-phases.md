@@ -2,7 +2,7 @@
 id: ex-d3-null-signs-and-central-phases
 kind: example
 title: D=3 null translations have two signs and independent central phases
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

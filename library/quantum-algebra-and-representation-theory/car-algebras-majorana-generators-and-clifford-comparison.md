@@ -1,7 +1,7 @@
 ---
 page: car-algebras-majorana-generators-and-clifford-comparison
 title: "CAR Algebras, Majorana Generators, and Clifford Comparison"
-status: draft
+status: published
 requires:
   - clifford-universal-algebras-and-pbw
   - fredholm-determinants-and-the-lidskii-trace-formula

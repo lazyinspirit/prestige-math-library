@@ -2,7 +2,7 @@
 id: def-qc-tqc-toric-logical-loops
 kind: definition
 title: Noncontractible toric logical loops
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

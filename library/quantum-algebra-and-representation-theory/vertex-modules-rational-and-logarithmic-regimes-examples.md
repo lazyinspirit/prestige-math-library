@@ -1,7 +1,7 @@
 ---
 page: vertex-modules-rational-and-logarithmic-regimes-examples
 title: "Vertex Modules, Rationality, and Logarithmic Regimes: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - vertex-modules-rational-and-logarithmic-regimes
 items: []

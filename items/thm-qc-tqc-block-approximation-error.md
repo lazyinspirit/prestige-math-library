@@ -2,7 +2,7 @@
 id: thm-qc-tqc-block-approximation-error
 kind: theorem
 title: Block-target approximation bounds logical error and leakage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

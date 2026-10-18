@@ -2,7 +2,7 @@
 id: lem-it-finite-unitary-averaging-decoupling-bound
 kind: lemma
 title: Finite unitary averaging and a decoupling second-moment bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

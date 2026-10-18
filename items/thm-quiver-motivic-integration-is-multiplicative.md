@@ -2,7 +2,7 @@
 id: thm-quiver-motivic-integration-is-multiplicative
 kind: theorem
 title: "Quiver stack integration is multiplicative with the Euler twist"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

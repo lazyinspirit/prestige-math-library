@@ -2,7 +2,7 @@
 id: lem-countable-mode-car-fock-representation-is-irreducible
 kind: lemma
 title: The Countable-Mode CAR Fock Representation Is Irreducible
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

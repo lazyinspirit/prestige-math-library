@@ -2,7 +2,7 @@
 id: lem-it-quantum-entropy-support-and-finiteness
 kind: lemma
 title: Joint state support is contained in the tensor product of its marginal supports
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

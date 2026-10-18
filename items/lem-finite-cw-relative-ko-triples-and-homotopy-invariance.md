@@ -2,7 +2,7 @@
 id: lem-finite-cw-relative-ko-triples-and-homotopy-invariance
 kind: lemma
 title: Finite-CW relative KO triples and homotopy invariance
-status: draft
+status: published
 origin: pipeline
 page: real-clifford-modules-ko-and-abs-orientations
 deps:

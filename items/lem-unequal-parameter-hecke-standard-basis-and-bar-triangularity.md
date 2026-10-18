@@ -2,7 +2,7 @@
 id: lem-unequal-parameter-hecke-standard-basis-and-bar-triangularity
 kind: lemma
 title: The arbitrary-rank weighted Hecke basis and Bruhat-triangular bar
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

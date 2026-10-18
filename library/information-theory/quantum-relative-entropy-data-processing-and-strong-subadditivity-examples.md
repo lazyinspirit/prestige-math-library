@@ -1,7 +1,7 @@
 ---
 page: quantum-relative-entropy-data-processing-and-strong-subadditivity-examples
 title: Quantum Relative Entropy, Data Processing, and Strong Subadditivity — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-it-dephasing-quantum-relative-entropy-dpi

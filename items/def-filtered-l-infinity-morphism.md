@@ -2,7 +2,7 @@
 id: def-filtered-l-infinity-morphism
 kind: definition
 title: "Filtered L∞-morphism"
-status: draft
+status: published
 dependency_level: 6
 origin: session
 deps:

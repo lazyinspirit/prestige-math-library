@@ -1,7 +1,7 @@
 ---
 page: double-affine-hecke-algebras-and-macdonald-theory-examples
 title: "Double-Affine Hecke Algebras and Macdonald Theory: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-daha-a1-first-symmetric-macdonald-eigenfunctions

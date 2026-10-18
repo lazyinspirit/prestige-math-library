@@ -18,7 +18,7 @@ sources:
     - title: "Richard L. Wheeden and Antoni Zygmund, Measure and Integral, Chapter 8"
       url: "https://djvu.online/file/u1gYJemR8hzMe"
     - title: "John K. Hunter, Measure Theory, Section 7.2"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement

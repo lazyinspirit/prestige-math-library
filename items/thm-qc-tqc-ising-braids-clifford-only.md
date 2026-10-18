@@ -2,7 +2,7 @@
 id: thm-qc-tqc-ising-braids-clifford-only
 kind: theorem
 title: Even-Majorana Ising exchanges normalize logical Paulis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

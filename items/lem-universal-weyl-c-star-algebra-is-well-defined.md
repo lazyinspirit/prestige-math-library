@@ -2,7 +2,7 @@
 id: lem-universal-weyl-c-star-algebra-is-well-defined
 kind: lemma
 title: The universal Weyl norm is finite and has the C*-completion property
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

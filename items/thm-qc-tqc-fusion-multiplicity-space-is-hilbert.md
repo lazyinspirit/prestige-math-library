@@ -2,7 +2,7 @@
 id: thm-qc-tqc-fusion-multiplicity-space-is-hilbert
 kind: theorem
 title: Fusion multiplicity spaces are finite-dimensional inner-product spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

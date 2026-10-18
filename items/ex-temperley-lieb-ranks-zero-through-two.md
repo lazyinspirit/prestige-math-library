@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-ranks-zero-through-two
 kind: example
 title: "The first four finite Temperley–Lieb algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

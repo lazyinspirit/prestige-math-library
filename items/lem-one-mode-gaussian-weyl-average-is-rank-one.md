@@ -2,7 +2,7 @@
 id: lem-one-mode-gaussian-weyl-average-is-rank-one
 kind: lemma
 title: The Gaussian Weyl average is a rank-one projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

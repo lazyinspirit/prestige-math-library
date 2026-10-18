@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-rank-one-tilting-character-and-dimension
 kind: lemma
 title: "Outside-alcove rank-one tiltings have zero pivotal dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-jones-wenzl-traces-and-quotients-examples
 title: "Temperley–Lieb Jones–Wenzl Projectors, Traces, and Quotients: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - temperley-lieb-jones-wenzl-traces-and-quotients
 items: []

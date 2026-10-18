@@ -2,7 +2,7 @@
 id: thm-hh-sl2-q3-iwahori-convolution-corner
 kind: theorem
 title: The SL2(Q3) Iwahori convolution corner has affine parameters 3
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

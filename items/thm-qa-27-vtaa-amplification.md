@@ -23,8 +23,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Andris Ambainis, Variable time amplitude amplification and a faster quantum algorithm for solving systems of linear equations"

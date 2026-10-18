@@ -2,7 +2,7 @@
 id: thm-rational-cherednik-kz-factors-through-hecke-algebra
 kind: theorem
 title: "KZ monodromy on category O factors through the reflection Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 13

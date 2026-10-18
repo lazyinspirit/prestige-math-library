@@ -2,7 +2,7 @@
 id: thm-it-finite-quantum-conditional-mutual-information-nonnegative
 kind: theorem
 title: Nonnegativity of finite-dimensional quantum conditional mutual information
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: ex-standard-two-dimensional-sl2-module-and-enveloping-algebra
 kind: example
 title: The standard two-dimensional $\mathfrak{sl}_2$ module extends to the enveloping algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

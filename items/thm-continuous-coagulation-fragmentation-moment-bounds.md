@@ -15,8 +15,6 @@ axiom_use: No choice principle is used; the moment tests are continuous and boun
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

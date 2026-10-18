@@ -14,8 +14,6 @@ axiom_use: No choice principle is used; each event has a finite explicit stoichi
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: Philippe Laurençot and Stéphane Mischler, From the discrete to the continuous coagulation-fragmentation equations, §1

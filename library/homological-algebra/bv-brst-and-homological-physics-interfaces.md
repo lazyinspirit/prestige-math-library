@@ -1,7 +1,7 @@
 ---
 page: bv-brst-and-homological-physics-interfaces
 title: "BV, BRST, and Homological Physics Interfaces"
-status: draft
+status: published
 items:
   - def-bv-algebra-and-degree-plus-one-bracket
   - def-classical-lie-action-brst-complex

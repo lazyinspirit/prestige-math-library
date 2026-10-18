@@ -2,7 +2,7 @@
 id: lem-reduced-relative-ko-suspension-exactness-and-product
 kind: lemma
 title: Suspension, exactness, and products in relative KO
-status: draft
+status: published
 origin: pipeline
 page: real-clifford-modules-ko-and-abs-orientations
 deps:

@@ -2,7 +2,7 @@
 id: lem-same-marginal-conditional-product-law-well-defined
 kind: lemma
 title: "The same-marginal conditional-product law is well-defined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

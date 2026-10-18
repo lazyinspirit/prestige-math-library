@@ -2,7 +2,7 @@
 id: thm-universal-property-of-clifford-algebra
 kind: theorem
 title: Universal property of the Clifford algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: clifford-universal-algebras-and-pbw

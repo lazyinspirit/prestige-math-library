@@ -2,7 +2,7 @@
 id: lem-quiver-exact-sequence-correspondence-is-smooth-and-proper
 kind: lemma
 title: "The quiver exact-sequence correspondence is smooth and proper"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

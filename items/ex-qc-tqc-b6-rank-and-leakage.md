@@ -2,7 +2,7 @@
 id: ex-qc-tqc-b6-rank-and-leakage
 kind: example
 title: B6 exact rank certificates and encoded leakage budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

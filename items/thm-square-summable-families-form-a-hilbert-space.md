@@ -2,7 +2,7 @@
 id: thm-square-summable-families-form-a-hilbert-space
 kind: theorem
 title: Square-Summable Complex Families Form a Hilbert Space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

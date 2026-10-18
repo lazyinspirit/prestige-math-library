@@ -14,8 +14,6 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 axiom_use: "No choice axiom is used; the argument uses explicit alias classes, finite Cauchy–Schwarz, and the stated coefficient completion."
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Jie Shen and Tao Tang, Spectral and High-Order Methods with Applications, §1.8"

@@ -2,7 +2,7 @@
 id: thm-polynomial-weyl-algebra-normal-ordered-basis
 kind: theorem
 title: "Polynomial Weyl algebra presentation and normal-ordered basis"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

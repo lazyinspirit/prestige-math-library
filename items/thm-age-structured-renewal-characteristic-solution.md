@@ -17,8 +17,6 @@ axiom_base: No choice axiom is used; the characteristic paths and finite interva
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: prefix-codes-and-finite-lossless-coding
 title: "Prefix Codes and Finite Lossless Coding"
-status: draft
+status: published
 requires: [finite-alphabet-entropy-and-divergence, kolmogorov-complexity-and-algorithmic-randomness]
 items:
   - def-finite-discrete-source-and-blocks

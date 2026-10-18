@@ -1,0 +1,427 @@
+
+
+===== PDF PAGE 1 =====
+
+IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 37, NO. 2, MARCH 1991                                                      269
+
+     Successive Refinement  of Information
+
+                  William  H. R. Equitz, Member, IEEE   , and Thomas M. Cover, Fellow,  IEEE
+
+
+
+
+  Abslruct-The    successive refinement   of  information   consists  of  first
+approximating   data  using  a few  hits  of  information,   then  iteratively
+improving  the approximation   as more and more information    is supplied.
+The goal  is to achieve an optimal  description   at each stage. In  general
+an ongoing  description   is sought which  is rate-distortion   optimal  when-
+ever   it  is  interrupted.      It   is shown  that  a  rate  distortion   problem   is
+successively refinable    if and  only   if the  individual   solutions  of the  rate
+distortion  problems  can be written  as a Markov  chain.  This  implies  in
+particular   that  tree structured  descriptions  are optimal    if and only   if the
+rate  distortion  problem   is successively  refinable.  Successive refinement
+is shown  to be possible  for   all  finite  alphabet  signals  with  Hamming
+distortion,   for Gaussian  signals  with  squared-error   distortion,  and  for
+Laplacian   signals  with  absolute-error     distortion.   However,  a  simple
+counterexample   with  absolute  error  distortion  and  a symmetric  source
+distribution   shows that  successive refinement   is not always  achievable.
+
+  Index Terms -Rate    distortion,   refinement,   progressive  transmission,
+multiuser  information   theory,  squared-error   distortion,   tree  structure.
+
+
+                                       I. INTRODUCTION
+   ROBLEMS   are characterized  in which  optimal  descrip-
+     tions can be considered as refinements  of previous  opti-P
+mal descriptions.  For example, we may optimally  describe a
+message with  a  particular  amount  of  distortion  and  later
+decide  that  the message needs  to be specified more  accu-
+rately. Then, when an addendum  to the  original  message is                         Fig.  1.  Nonrefinable description.
+sent we hope  that  this  refinement   is as efficient  as  if  the
+more  strict  requirements  had been known  at the  start.  In                                                                         positive  or negative. For instance one should send a “0”  to
+general, we ask whether   it  is possible to interrupt  a transmis-
+                                                                        indicate  that X  is negative and a, “1” otherwise, as indicated
+sion at any time without  loss of optimality.
+                                                                                    in  Fig.  1. The  reconstruction   X,   resulting  from  this  1, bit  ,,
+  An  example  of  successive refinement   might  be  image                                                                      description  will be the centroid  of the  partition.  Thus  X, =
+compression  in which one briefly  describes a gross image and
+                                                                                                       - &%         if X < 0, and  i1  = m            if X 2 0. The  resultingthen  follows  with  successive refinements  of the  description
+                                                            squared  error  distortion   is D = E(X   -  i>2  = (T  -2)/p   =that further  refine  the image. The goal is to achieve the rate
+                                                                 0.3634.distortion  bound  at each  stage. Similar  remarks  apply  to
+                                                                                                                         If there are two  bits available  to describe X,  then there  isvoice compression.
+                                                          an optimal  quantization    [l]  of the interval  ( 1 w, m). Here  the  The   difficulty   with  achieving  this  goal  is  that  optimal
+                                                                             interval  is quantized  into four regions, and X2  is given by thedescriptions  are  not  always  refinements   of  one  another.
+                                                                      centroid  of the bin  in which  X  happens  to  fall. Here   it  is Difficulties   arise even  in  the  simple  case of  describing  a                                                                        clear that the two  bit  description   is a refinement  of the one
+ single random  variable  X  drawn  from  a standard  normal
+                                                                                           bit  description   in  the  sense that  one can merely  append distribution  where  the problem   is to minimize  the average
+                                                                another  bit  to the optimal  one  bit description  to transmit  an
+squared  error  resulting  from  using a few  bits  to  describe
+                                                                    optimal  two  bit description,   i.e., the best four-cell  partition   is
+X N N(0, 1). If one bit of description  is used,  it is obvious that
+                                                               a refinement  of the best two-cell  partition. the  optimal  one  bit  description   will  specify whether  X   is
+                                                             However,  Fig. 1 shows that the optimal  quantization  leveis
+                                                                                  for  the  three   bit  description   is  not  a  refinement   of  the   Manuscript deceived February 25, 1990; revised August 16, 1990. This
+work was supported  in part by NSF contract NCR  89-4538, and by a   optimal  two  bit  description.  Optimal  use  of  three  bits  of
+ National Science Foundation Graduate Fellowship. Partial support was   information  about X  requires advance knowledge that  three
+ also received from JSEP. The material  in  this paper was presented in     full  bits will be available.
+ Dart at the IEEE  International Symposium on Information  Theory, San      This  failure  of successive refinement   for  the quantizaiion&ego, CA, January 14-19, 1990, in;   is based on the first author’s Ph.D.
+ thesis.                                                                       of a single Gaussian random variable suggests that successive   ,
+  W.  H.  R. Equitz  is with  the IBM  Almaden  Research Center, 650   refinement   is rarely achievable. However,   if we consider long
+ Harry Road, Department  K52/802, San Jose, C’A 95120-6099, e-mail:   blocks  of  i.i.d. Gaussian random  variables, we  will  see that
+ equitz@ibm.com.                                                 successive refinement   is always possible. Nonetheless,  suc-
+   T. M. Cover  is with  the Departments  of Electrical Engineering and                                                                 cessive refinement,  even with  large block  sizes, is not possi- Statistics, Durand, Room 121, Stanford University, Stanford, CA 94305,
+ e-mail: cover@isl.stanford.edu.                                          ble  in  general  unless  the  solutions  to  the  individual   rate
+  IEEE Log Number 9040911.                                            distortion  problems obey a Markov  relationship.
+
+                                             0018-9448/91/0300-0269$01.00 0  1991 IEEE
+
+===== PDF PAGE 2 =====
+
+ 270                                           IEEETRANSACTIONSONINFORMATIONTHEORY,VOL.37,NO.2,MARCH1991
+
+
+    In Theorem  2 we prove  that successive refinement  from a
+                                                                                                k{l    ,...,2"R'} coarseAdescription                      J?, with                                  distortion                                        D,  to                                             a                                                            finer                                                          descrip-
+ tion X2 with  distortion                         D,  can                              be achieved                                                                                            if                                          and                                                       only                                                                                                                   if the     X”                                       )   #(i),     DI
+ conditional  distributions  p(a,lx>  and  p(f,lx),   which achieve
+ 1(X;  Xi) = R( Di),   i z  1, 2,Aare Markov compatible  in the sense
+ that we can write  X, + X2 + X  as a Markov  chain.
+   Section IV  then uses these necessary and sufficient  condi-
+ tions to exhibit a counterexample  for which successive refine-
+ ment  cannot be achieved.  In  Section V we prove  that   all
+ finite  alphabet  distributions   with  Hamming   distortion   are
+ successively refinable  and also exhibit  two  specific  continu-
+ ous  valued  problems   in  which  successive  refinement    is                    Fig. 2.  Successiverefinementproblem.
+ achievable.
+
+       II.  BACKGROUND  AND STATEMENTOFTHE~ROBLEM                                               j-491  We recall the definition  of the rate distortion  function.   Definition  1 (Rate distortion  function):  For  a probability         Ri mass function   p(x),   x E x, and  distortion  function   d(x,  .?)           Q
+ on x X 2, the rate distortion function  R(D)   is given by      X                              229D2
+
+                  R(D)  = pyj,;,l(Z-%                         (1)                                               RO         P                         <
+where  the minimum   is over   all  conditional  pmfs   p(Plx)                               Ro,Do satisfying  C,?p(x)p(flx)d(x,       2)  I  D.  The  distortion   rate
+ function  D(R)   is the inverse function  of R(D),  which can be                    Fig. 3.  Multiple descriptionsproblem.
+ characterized  as
+                                                                     there  exists  a sequence  of  encoding  functions     i,:  xn +                                                                      (2)
+                                                                                  (1;  * * , 2nR~} and   j,,:  ,y” -+ (1, * . *, 2n(Rz-Rl)], and reconstruc-
+                                                                                ;‘1”” functions   gl,:  (1;.   .,2nRl}-+    i;   an!  g2n: (1;.  .,2nRI}Xwhere  the mini?um    is over   all  conditional  pmfs   p(x^(x)
+                                                                                                                                   . . . 2n(R2-Rl)} +   f;,   such  that  for  X;  = g&,(X”>)    and satisfying  Z(X; X) 2 R.
+                                                                                      fo;  2;  =  g,,(i,(X”),     j,(X”>),  The  rate  distortion  theorem  states that  a rate ‘R(D)  de-
+ scription  of {X,},  Xi  independent  and identically  distributed                                                                                             lim  supEd(X”,R;)se(R,),                        (5) (i.i.d.1, suffices  to estimate  the process  to within  distortion                n-+m
+D. We now describe what we mean by successive refinement.                                                         and
+  We   consider   a  sequence   of    i.i.d.  random   variables
+Xl,&,.      * *9X,  where each Xi  is drawn from a source alpha-                      lim  supEd(X”,R,“)<D(R,),                       (6)                                                                           n-+c=bet  x. We  are given a reconstruction  alphabet     i  = x,  and
+consider the distortion  measure                             where D(R)   is the distortion  rate function.
+                                                                             Definition  3 (Successive refinement in general): We say that
+                         d:,yxi+W.                                (3)    a problem  defined  by a source distribution   p(x)  and distor-
+The  distortion  measure on n-sequences  in  xn xi”     is de-    tion measure  d(x,  9)  is successively refinable  in general  or
+fined by the average per-letter  distortion                         simply  successively refinable    if  successive refinement  from
+                                                                            distortion   D,   to  distortion   D,    is  achievable   for  every
+                                                                 D, 2 D,.
+
+                                                                     A.  Related Problems
+where x” = (x1, x2;   * ., xJ,  and 9’ = (a,, .92,* * *, 2,).
+  We  say that we  are successively refining  a sequence  of     Our main  tool  is the achievable rate region  for  the multi-
+random  variables  X,,  * . . ,X,,  when we use a two-stage de-   ple  descriptions  problem  investigated  by  Gersho,  Witsen-
+scription  that  is optimal  at each stage. First, as shown in Fig.   hausen, Wolf, Wyner,  Ziv, Ozarow, El Gamal, Cover, Berger,
+2 we describe the X sequence at rate R,  bits per symbol and   Zhang,  and  Ahlswede   [2]-[6].   In  this  problem  a sender
+incur  distortion   D,.  Then we provide  an addendum  to the   wishes  to describe  the same sequence  of random  variables
+first message at  rate  R,  -  R,  bits per  symbol so that  the   X1,&,***,     X,,  to more than one receiver. The  ith  receiver
+two-stage resulting message now has distortion  D,. We shall     will  receive  description   fi(X:)  E {1,2,.  * . ,?nRi], from  which
+say we have successively refined  the sequence X,,  . . . , X,    if       it  will  produce  an estimate  Xi,,  Xi2,.  * *, Xi,   of the  original
+R, = R(D,)  and R2 = R(D,).   In  other  words, we demand   message. The  distortion   associated  with  representing  the
+that we achieve the  rate  distortion   limit  at each of the two   source symbol  x  with  the symbol P  is given by d(x, a> and
+stages. In general, we will demand that we be able to achieve   the  distortion  between  the  sequences x” =(x,,   x2;    . .,x,,)
+all points on the rate  distortion  curve.                       and  P”=(P,,P,;*~,P,,)        is given by(4).
+   Definition  2 (Successive refinement from   distortion  D,   to     An  important  special case is shown  in Fig. 3, where there
+distortion  D,):  We shall say that successive refinement  from    are three  receivers, two  of which  receive individual  descrip-
+distortion   D,   to  distortion   D,   is achievable  (D,.z  D2)    if    tions and the third  of which has access to both  descriptions.
+
+===== PDF PAGE 3 =====
+
+Ecxmz ANDC~VER:~UCCESSIVEREFINEMENTOFINF~RMATI~N                                                                  211
+
+
+   Information  about the source  is transmitted   to receivers 0   applying theorems  from  [5] and  [7]. Let  the source distribu-
+and 1 at rates R, and R,  respedt?ely,  and*the two receivers    tion  p(x)  and the  distortion   d(x, x^>be given. Let  R(D)  be
+individually  generate  estimates X0 and  X,  with  distortion    defined  as in (1).
+D, and D,,  rlspeztively. When they pool their  information,  a
+                                                         Theorem 2  (Markovian   characterization   of  sukessive    re-third  estimate  X,   with   distortion   D,    is generated  (with
+                                                                     finement):  Successive refinement  with  distortions  D, and D,D,   I  D,, D,   I  D,).  The  rate  distortion  region  is the  set of
+                                                                       (DI  2 D,)  can be  achieved    if  and  only    if  there  exists aachievable quintuples  (R,,  R,, D,,  D,,  0,).
+                                                                       conditional   distribution   ~(a,,  &lx)   with  The successive refinement  problem  is a special case of the
+multiple  dessriptions problem  in which  there  is no constraint                       Ed( X, &)     I  D,,                     (11)
+on  Ed(X,  X0> and  in  which  we  require  R, = R(D,)   and
+                                                         andR, + R, = R(D,).
+  We require  the following  achievable region established by                       Ed(X,&)    < D,,                     (12)
+El Gamal and Cover 1.51.                                                            such that
+  Theorem  1: A  rate-distortion   quintuple    is  achievable    if                                                                                 I@;&)    = WD,),                    (13)
+there exists a probability  mass distribution
+                                                                                   Z(X;&)=      R(D,),                    (14)
+                  P(X>P(  %.l, 4,&1x)
+                                                         and
+with
+                                                                  P( 21, &lx)  = P( f*lX)P(  w,).              (15)               Ed(X,gm)sD,,m=0,1,2,
+                                                            Remark:  The  last  condition   is equivalent   to  sayi?g  thzt
+such that                                                                     X,  ii,, &  can be wriiten a%the Markov  chain X +  X, + X1
+                                                                                 or, equivalently,  as X, +  X,  -+ X.              R,>  $C&),                                       (7)
+                                                                           Proof:              R,>   I(X;$),                                      (8)                                                                        (Sufficiency&-Let     p(P,lx)  and  p(&lx)    satisfy  (ll)-(14).
+         R,+  R,>  z(X;~~,~,,~*)+Z(~~;R,).                   (9)    Let  go  be a dtimmy  symbol (some constant).  Fix  the  joint
+                                                          pmf  p(~)p(~,)(~~lx)p(~~l~~).    The  joint  description  achiev-
+  Ahlswede   [7] showed  in  the  “no-excess-rate  case,”  i.e.,                                                                   able region  of Theorem  1 becomes
+R, + R, = R(D,),   that the conditions  given by El Gamal and
+Cover are necessary as well as sufficient.  (Zhang and Berger                  R,>Z(X;&)=O,                                (16)
+[6]  exhibit  a  simple  counterexample   that  shows  that  the
+conditions  of  El Gamal and Cover are sometimes  not  tight                   R,>Z(X;&)=R(D,),                            (17)
+when  R, + R, > R(D,).)  However,  successive refinement   is
+                                                                         R,+R,>Z(X;~~,R,,~~)+Z(~~;R,)                    (18)indeed  the case of no excess rate, which   is the  constraint
+under which  (7)-(9)  yield  the  eritire  rate region.                                = Z(X;&)    = R(D,),                    (19)
+  Also  relevant  to the successive refinement  problem   is the
+                                                         where we have used (13) and (14). But  the  total  rate R,   isclosely  related  conditional   rate  distortion  problem  formu-
+                                                                  given by  R, = R, + RI.  Thus  CR,, R,) = (R(D,),  R(D,))    islated by R. M. Gray  [8]-[lo],  which  deals with  the question
+of  determining   the  minimum   rate  needed  to  describe  a   achievable.
+                                                                  (Necessity&-Successive   refinement   requires  R, = R( Dl>source at distortion  D, when side information  Y  is present.
+                                                         and R, + R, = R(D,).  This  is the “no  excess rate” conditionSee also Gray and Wyner   [ill.  Gray defines the conditional
+                                                                              of Ahlswede  for which  the region  of Theorem  1 is the entirerate distortion  function   R,,,  (D)  as
+                                                                 achievable  rate  region. Thus  there must  exist a co;ditional
+              &y(D)    = p~j;*fy~~(X;~lY).                (10)   pmf  p(R,,  P,, R,lx)  with  Ed(X,   XI)   I  D,, Ed(X,   X,1  I  D,
+                                                            such that
+where   the  minimum     is  over    all   p(Plx,   y)   satisfying
+                                                                                                                                                          ii’, = R( Dl)  2 Z(X;  &),                      (20)c p,x,y~(dx,  Y)P(X, YM  x, .?) I  D.  Conditional    rate-distor-
+tion theory  is relevant  to our question because one might say                R,=R(D,)-R(D,)zZ(X;&),                        (21)
+that  in  successive refinement   R, = R(D,)   and  R,_  R, =
+                                                         andR,,R$D,).   Of course, Rx,2    is defined  only when  X,   is an
+i.i.d. sequence, which  in genkral  is not the case. Also relevant       R,+R,=R(D,)~Z(X;&,~1,~2)+Z(&;Jil).                       (22)
+is the work  of Yamamoto  [12] and Kaspi and Berger  [13].
+                                                        The  definition   of  the  rate-distortion   function  implies  th$
+                                                                    Z(X;   ii,)  2 R(D,),  so (20)  is satisfied   if and only   if  Z(X; X1)         III.  ACHIEVABILITY   OF SUCCESSIVE REFINEMENT
+                                                           = R( Dl).  Expanding  (22) by the chain rule yields
+A.  The Markov  Conditions
+                                                                           R(D,)2Z(X;R,,R,,~~)+Z(~~;R,)                      (23)
+  Here  we  p*rove that  successive refinement  from  coar%e
+description   X,   with  distortion   D,   to  fine  description   X,                      =z(x;x,)+z(x;2&l2?J
+with  distortion  D,   is achievable   if and only   if the individual
+                                                                                        +z(x;~~l~~,~2)+z(~~;x,)                (24)rate  distortion   solutions  p(P,lx)   and  p(P,(x)   for  D, 2 D,                                 h       *
+are such that we can write X +  X,  -+ X,  as a Markov  chain.                      2z(x;&)                                    (25)
+We do this by considering  the successive refinement  problem
+as a special case of the multiple  descriptions problem and by                   2 R(D,),                                   (26)
+
+===== PDF PAGE 4 =====
+
+ 272                                                IEEE TRAl ‘ISACTIONS ON INFORMATION THEORY, VOL. 37, NO. 2, MARCH 1991
+
+
+where  the  last inequality  follows  from  the  definition   of the
+ rate-distortion   function,  and inequality  (25) follows from  the
+nonnegativity  of mutual  information.  Since the start and end
+ of the chain are equal,  all inequalities  must be satisfied with
+ equality, which  implies  that
+                                            I(  2,;   2;,) = 0,                 (27)
+                        z( x;  &IR,,   2*)  = 0,               C-28)
+                             z(x;  R,l&)   = 0,                 (29)                                       I
+                                                                               D2        DIand
+                                           D                     Z(X;g2)   = R(D,).                    (30)
+                                                                                                  Fig.  4.  Choice of D, and D,  in counterexample.
+Equation  (29)  is equivalent  to the Markovity   o,f X,-+ X2 -+
+Xi,  while  (28) forces the Markovity   of X +(X1,   X,)  +  {a.
+Thus  from  the  above we must  have X + X2 -+ Xi +  Xc.    with  0 < p < 1, and  d(x,P)  = Ix  -  PI. We  assume,  for  this
+Finally,  (27)  requires  X0  to  be  independent   of   2,.  We   example, that p < 3 -  2fi.   Let
+conclude  that the achievability  of (R,, R2) = (R(D,),  R(D,))                                                                                                  z = eWD),
+guarantees the existence of a pmf  p(x)p(R,,   &lx)   satisfying                                                                  (32)
+(15). Thus successive refinement   is achievable  only by joint   where  R’(D)   is the derivative  of the rate  distortion  function
+pmf’s  of  the form  p(x>p(R,l~>p(f,l~~)P(Po),        i.e.,  only   if    at D. Then by the Kuhn Tucker  conditions,   it can be shown
+there exists p(a,(.?,)  such that X + X2 -+ 2,.              0    that the solution  to the rate distortion  problem  for distortion
+                                                 D  is
+B. Codes for Successive Refinement
+
+   Let   ~(2,)  and  p(a,121)  be  probability  mass  functions
+achieving  the bound  in Theorem  2. To  generate  the code-
+book for the  first refinement, we draw 2nRl i.i.d. code vectors
+according  to  the  distribution   lI~=‘=,p(R,J  We  index  these   and
+code  vectors  a$),         i E (1;   . .,2nR1]. Then,  for  each    i we
+generate a codebook  for the second refinement  with 2n(Rz-Rl)               l-p-z-p2          p-z+pz+t*          l-p-z-p2
+                                                         Py =codewords drawn  according  to  the  conditional   distribution                                                                                     2(1-z)*      ’      (l-z)*        ’   2(1-z)*       ’                                                                                                                                           [ n~,,p(~,,l~,,(i)).     We  index  these code  vectors   ,?z(i,j),              1
+ i E (1;   . ., 2nR1}, j E (1,.  . . JMRz-RI)}.                                                                                             (34)
+  We  describe  the  first  refinement   of  a source vector  x”                                                                                                                                  if  (z -(1/2X1    -  pII*   I  (1/4Np*    - 6~ + 1); and
+with  the index   i of the codeword  that minimizes  d(x’,  a$)>.
+Next we describe the second refinement  of x” by the index                               I    1-I; ,          (1-Pb2
+jE{l;..,     2n(R2-Rl)] that  minimizes   d(x”,  Z;(i,   j)).  Because
+                                                                             1+z2      p      1+2*
+successive refinement   is a special case of  the  multiple  de-           P                                                  (35)
+scriptions  problem,  the  proof  of Theorem  1 [5] establishes                                                                                                                                                            l-p       1 ’                                                                   x12=   -(1-p)z2that  this method  of encoding  will  achieve the desired  rates                                                                                                                 If22         p       1+z*      1and distortions.                             1
+  We can now see that  the codes which  achieve successive  and
+refinement  have a  “tree  structure,”  where  the  coarse de-                                                                          Pk = [1/2,0,1/21,                      (36)
+scriptions  occur  near  the  root  of  the  tree  and  the  finer
+descriptions  near the leaves. Although  these tree structured        if  1.z-(1/2)(1-p>/*     > (1/4)(p*   -6p  + 1).
+codes will  usually only be optimal  asymptotically  in the  limit       Let  D,  be  in  the  region  for which  p(Z)  =(1/2,0,1/2).
+as the block  length  n grows to  infinity,    it  is possible  to use    Specifically,   let  z2 = e R’(Dd = (1/2X1   -  p).  Let  D, > D2 be
+the  idea  of  tree  structured  codes  in  practical   finite  block   chosen to lie in the 3-symbol active region,  i.e., let  zi = eRYDl)
+length schemes for  describing messages with  successive re-    satisfy
+finements. One such method  is described  in [14], [15].
+                                                                                                       1-P
+                                                                                    f(l-p)+Jpr-6p+l<z,<l+a.                           (37)
+                       IV.  COUNTEREXAMPLE
+   In  this section we show that  not  all problems  are succes-  See Fig. 4.
+ sively refinable. We now provide  a sketch of a counterexam-    We  shall argue  that we cannot  find  a (necessarily) 3 x 2
+ ple that has its roots  in a problem  described by Gerrish  [16],   transition  matrix  P(P,(?~)  such that
+which  forms  the basis for  an, exercise  in  Berger’s  textbook
+ [17, p. 611. A  detailed  analysis of this counterexample  can be                    P( xl-q  =  EP(xll*)P(       -f*l&).            (38)
+ found  in 1181.Let  x = 2 = {1,2,3],
+                                                                   This  is because there  is a bottleneck  in  2, +  2,  -+ X,  since
+                            1-P        1-P
+                Px =   -,P,2                          I               (31)   X2 has only two states, thus preventing  p(xlP,)  from having
+                           2                                      the degrees of freedom necessary to satisfy (33). We consider
+
+===== PDF PAGE 5 =====
+
+EQUITZ AND COVER: SUCCESSIVE REFINEMENT OF INFORMATION                                                                                                273
+
+
+the matrix equation                                                     3) X   Laplacian,   absolute   error   distortion,    d(x,  2) =
+                                                                                 IX-PI.
+                                                              (39)
+                                                       The  details are developed  in [18].which we rewrite  as
+
+                                                                     A.  Gaussian Distribution  with Squared-Error  Distortion
+
+                                                                                                                        If  X   is Gaussian  N(O,a*),   then  R(D)    is achieved  by
+                                                                                   p(f)  = NO, o*  -  D),  p(xJz)  = N(,?, D).   It  follows  from  the
+                                                           work  of Gray and Wyner    [ill   that  this problem   is succes-
+                         1-P               (l-P)4                    sively refinable  in our context.  It  is easy to show, for D, > D,,
+        A   1-A        1+z;       p      1+z;                    that
+     =  B    1-B                                                                                     ~(2~)  = N(O,a*    -  DI)                (43)          c    1-c       Cl- PM            1-P   . (40)    I  1
+                          1+z;       p      1+z;                                 P( 94)   = N(%, D, -  02)               (44)                   IFinally, we observe from  (40) that PQ~,P~~~~  is of the form                                                                                  P( x1%)  = N(.f,,   D,)                    (45)
+                D   E   1-D-E
+                                                                         yields  a  joint   density  p(x,  4,, x^*) = p(~,>p(~21~,)p(xl~2)                   F   E    1-F-E.                       (41)                                                               having  the desired  marginal  p(x)  = N(0, a*> and  satisfying                                     [ G   E   1-E-G         1                    the conditions  of Theorem  2, thus guaranteeing  the achiev-
+Note  the  equal  entries   in  the  second  column.  Thus,  by    ability  of
+inspecting  the left-hand  side of  (40), we see that  Px12, has
+the above form  only   if   z,(l-    z,) = 1-   zl,   i.e.,  z1 = 1. But
+z1 = eR’(Dl) 5 e R’(DmA = (1 -  p)/(l  + p) < 1.                         (R,,R,)=(R(D,),R(D,))          =   ;log$;log$
+  Thus  there  exists no Markov  chain  d,  -+ X2 + X  satisfy-                                                                   1
+ing  the  rate  distortion   conditional  marginals  p(x]P,)   and                                                                  (46)
+p(xlx^,)  given  in  (33) and  (35). So for  0 < p < 3-2@,    the
+                                                         The code achieving  these bounds has an especially  niceproblem  Px =  [(l-   p)/2,p,(l-      p)/2],    d(x,  2) = Ix  - 21  is
+                                                                         tree structure.  Let 2nR(Dl) =(02/D,)n/2      Pi’s be drawn  i.i.d.not successively refinable  in general.
+                                                                                                      -  N,(O, (a * -  D,)Z,J.  Label them  P,(l),  f,(2),  * * *, f,(2”R(D1’).  We can also characterize  exactly when  successive refine-
+                                                                    Let  2n(R(Dz)-R(Dl))=(D1/D2)n/2      u’s  be  drawn   i.i.d.  Nment  is achievable from  distortion  D,  to D,. One interesting
+                                                                 N,(O,  (Dt    -   D,)Z,).     Label    them      u(l),   u(2);.       .,  ecase is described  in the following  theorem, which  is true  for
+                                                                          u(~“(~(~z)-~(~I))).  Then,  given  x N N (O,a*Z,),   let  i(x)  de-any 0 < p < 1. See [18] for a proof.
+                                                                note the index    i minimizing   Il;Ji)   -  XII*, and let  j(x)  denote
+  Theorem 3: Consider  the discrete  rate-distortion  problem    the index    j  minimizing   Ilf,(i(x))+     u(j)-     .r]l*. Then,  the  re-
+with X =  ii  = g2 = {1,2,3},  d(x,  2) = Ix  -  x^], and                construction  2, =  f,(i(x))   and  f,  = fJi(x))   + u( j(x))  asymp-
+                                                                                   totically  achieves distortions  D, and D,  at rates R, and R                                         1-P                       1,   with  probability    2                        respectively. Note  that   it takes only 2nR(D1)+ 2n(R(DZ)-R(D1T )
+                                                                  distance calculations  to encode and decode  x. This number
+                          with  probability    p            .                  of calculations  is exponentially  smaller than the 2nR(Dz) cal-
+                                         1-P                    culations required  to describe x  at distortion  D,  in one step.
+                          with  probability    2
+                                                                     B. Arbitrary  Discrete Distribution  with Hamming  Distortion
+ If  D,  and D,  are such that  fsUpp(Dl) = isUpp(D2) = {1,2,3],
+                                             We  now  consider  ExampleA 2.  Here   X, N p(x),    x Ethen successive refinement  from  distortions  D,  to D2 (DI >
+                                                                              {1,2;   * ., m},  and  D = Ed(X,  X) = Pr{X    f  X}.   This   is  aD2)  is achievable   if and only   if
+                                                                          probability   of  error  distortion  measure  for an arbitrary  dis-
+                       eR’cDl))( 1+ eR’cD2))5 2.                (1+                                                              (42)    crete source.  It has been shown by Erokhin  1191and Pinkston
+                                                                           [20]  that  R(D)    is  achieved  by  upside  down  waterfilling.   Notice  that even  if Rsupr,= (1,2,3}  for  all D  (for example,
+                                                                            Specifically, if  p > 3-2fi),    we can choose  D,  and  D,  so  that  (1+
+eR’(Dl))(l + eR’cD2))> 2  and  successive  refinement    is  not
+                                                                                                 (P(x)-A)+achievable.  This  serves as a counterexample   to  a possible
+                                                                                                   Ai)   =  C(p(x)-A)+       ’              (47)conjecture  that successive refinement  is always possible when
+X = 2 over the entire  rate-distortion  curve.                                                           x
+                                                         and
+         V.  EXAMPLES OF SUCCESSIVE REFINEMENT
+                                                                                          0,   x=4  We now show that  the following  rate  distortion  problems
+are successively refinable.                                                         p(xIP)  =    *,    X#X”,XGtsupp              (48)
+                                                                                                        x = k @ &,p   1) X   Gaussian,  squared   error   distortion,    d(x,  P) = ’                                               Pk,
+        (x  -  a*.
+   2) X   arbitrary   discrete, Hamming   distortion,   d(x,  2) =   where A  is chosen so that Cfp(2)p(x12)=p(x),   and X~supp
+       1-6(x-P).                                              = {x:  p(x)-   A > 0).
+
+===== PDF PAGE 6 =====
+
+ 274                                                IEEE TRANSACTIONS ON INFORMATION THEORY, VOL. 37, NO. 2, MARCH 1991
+
+
+   Let  pi  > D,. The required  t:ansition   p(a,l,?,)   to establish   Thus
+X1+Xz-+X(and       thus X+Xz+X1)is
+
+
+
+
+
+where  2, supp is the support  set of  Xi,  and  A,,A,  are the                                                                  (60)
+ “waterfilling”   levels. Thus
+                                     +                      Taking  the inverse transform, we obtain
+                                   (P(x)-4)
+                     p(4)   =  c(p(x)-Ai)+         ’           (50)
+                                  x
+
+ for       i = 1,2,  and   p(a,la,>,    as  given   in   (49),  achieves
+ (ND,),   ND,)).
+
+C. Laplacian  Density with Absolute Error                                                                   This  is nonnegative and integrates  to one, :o we have found
+  We now show that random variables drawn from a Lapla-    the  conditional  density  establishing  that  Xi + X2 + X  can
+cian distribution  can be successively refined when  distortion    be written  as a Markov  chain. Therefore  successive refine-
+is measured using the absolute  distortion   criterion. We say  ment  is achievable.
+that a random  variable X   is drawn from  a Laplacian  distri-
+bution    if   it has a density   f  (parameterized  by a) such that
+                                                                                                         VI.  CONCLUSIONf(x)  = (a/2>e-  +  We assume the absolute  distortion  mea-
+sure d(x,  a) = Ix 1 21.                                            Successively refinable  source coding problems have simple
+  We  first  recall the rate-distortion   solution. Here R(D)  and   descriptions  that can be stopped  at any point  without  loss of
+f(2lx)   are given by                                                    optimality.  This  is only  possible   if  the  conditional   distribu-
+                                                                          tions ~(4~1~) can be written  as a Markov  chain.
+       R(D)  = -log(aD),         o<D~D,,=l/cu,              (51)
+
+and
+                      fx,R(“Ift)   = g(x   -  2)                    (52)                  ACKNOWLEDGMENT
+                                                         The  authors  wish  to  thank  Amir  Dembo  for  suggesting
+                               1
+                           E-e     -Ix-PI/D                       Gerrish’s  problem   in  Berger’s  textbook  as an  ideal  coun-                                                              (53)                            20                               terexample  to  the  generality  of successive refinement.  Dis-
+                                                                cussions with  J. A. Thomas  and  Mitchell   Trott  were  also
+  We wish to show for D, 2 D,  that  2,  --f X2 + X can form                                                                             helpful.
+a Markov  chain by finding  f~~,&~21P1) such that
+
+
+                                                                       REFERENCES
+or                                                      El1J. Max, “Quantizing for minimum distortion,” IRE Trans.  In-
+                                                                                  form.  Theory, vol. IT-6, no. 1, pp. 7-12, Mar. 1960.
+                                                           Dl H.  S. Witsenhausen and A.  D. Wyner, “Source coding for
+          g,(x  - 4) =  j-,2(     x  -  f2)h*,R,(   421%))       (55)         multinle descriutions II: A binarv source. Bell SW.  Tech.  J.,
+                                                                                                 vol. 6CI, no. 10,~~. 2281-2292, Dec. 1981.          -
+                                                                              [31 J. K. Wolf.  A.  D. Wvner. and J. Ziv. “Source coding forwhere                                                                             multiple descriptions,“-Beli Syst. Tech.  >., vol. 59, no. 8: pp.
+                                                                 1417-1426, Oct. 1980.
+                                                                              [41 L. Ozarow, “On  a source-coding problem with two channels
+                                                             and three receivers,” Bell  Syst. Tech.  J., vol. 59, no. 10, __nn.
+                                                                 1909-1921, Dec. 1980.        -
+The characteristic  function  Qgg,of  gi  is given by            151A. El Gamal and T. M. Cover. “Achievable rates for multinle
+                                                                          descriptions,” IEEE  Trans.  Injorm.  Theory,  vol. IT-28, no: 6,
+                                                                         pp. 851-857, Nov. 1982.
+                                                                       id  Z. Zhang and T.  Berger, “New  results in binary multiple
+                                                              (57)         descriptions,” IEEE  Trans.  Inform.  Theory, vol. IT-33, no. 4,
+                                                                         pp. 502-521, July 1987.     ”
+                                                                 171 R. Ahlswede. “The rate-distortion region for multinle descrio-The  question   is whether  there   is a  distribution   h  with  a                                                                               tions without excess rate,” IEEE  T&s.    Inform.   ?‘heoty, vol.
+characteristic  function  @‘h satisfying  &g$o) = agR,(w)Qh(w).        IT-31, no. 6, pp. 721-726, Nov. 1985.
+
+===== PDF PAGE 7 =====
+
+EQUITZ AND COVER:SUCCESSIVE REFINEMENT  OF INFORMATION
+                                                                                                                          275
+
+  [8] R. M. Gray, “A new class of lower bounds to information rates        ing with applications to tree-structured source coding and mod-
+      of stationary sourcesvia conditional rate-distortion functions,”        cling,” IEEE  Trans. Inform,  Theory, vol. 35, no. 2, pp. 299-315,
+    IEEE   Trans.  Inform.  Theory,  vol. IT-19, no. 4, pp. 480-489,        1989.
+     July 1973.                                                           [15] E. A.  Riskin, T. Lookabaugh, P. A. Chou, and R. M. Gray,
+  [9]  -,     “Conditional  rate-distortion theory,” Technical Report        “Variable rate vector quantization for medical image compres-
+    6502-2, Stanford Electronics Laboratory, Stanford Univ., Stan-       sion,” IEEE  Trans. Med.  Imaging,  vol. 9, no. 3, pp. 290-298,
+     ford, CA, Oct. 1972.                                                  SeDt. 1990.
+[lo]   -,    “Source coding a binary symmetric source over a simple     [ 161 A.-M. Gerrish, “Estimation  of information rates,” Ph.D. thesis,
+    network,” in  Proc.  Hawaii   Int.  Conf:  Syst.  Sci.,  no. 6, Jan.       Yale Univ., New Haven, CT, Dept. of Elect. Eng., 1963.
+    1973, pp. 354-355.                                                  [17] T.  Berger, Rate  Distortion   Theory.  Englewood  Cliffs,  NJ:
+[ll]  R. M. Gray and A. D. Wyner, “Source coding for a simple        Prentice-Hall, 1971.
+    network,” Bell Syst. Tech. J., vol. 53, no. 9, pp. 1681-1721,Nov.      .1181- W. H. Eauitz. “Successive refinement of information,” Ph.D.
+    1974.                                                                     thesis, Stanford Univ., Dept. of Elect. Eng., 1989.
+[12] H. Yamamoto, “Source coding theory for cascade and branch-   [19] V. Erokhin, “Epsilon-entropy of a discrete random variable,”
+     ing communication systems,”IEEE  Trans. Inform.  Theory, vol.        Theory of Probability and Applications,  vol. 3, pp. 97-100, 1958,
+     IT-27, no. 3, pp. 299-308, May 1981.                               English translation.
+1131_   A.  H. Kasui and T. Berger, “Rate-distortion  for correlated   [ZO] J. T. Pinkston, “An  application of rate-distortion theory to a
+    sources with  partially separated encoders,” IEEE   Trans.  In-       converse to the coding theorem,” IEEE  Trans. Inform.  Theory,
+     form.  Theory, vol. IT-28, no. 6, pp. 828-840, Nov. 1982.                 vol. IT-15, no. 1, pp. 66-71, January 1969.
+[14] P1 A. Chou, T. Lookabaugh, and R. M. Gray, “Optimal  prun-

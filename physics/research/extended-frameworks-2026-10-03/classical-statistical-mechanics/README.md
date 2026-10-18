@@ -8,6 +8,10 @@ proposed placements are `paired-inventory.json` and
 design, with complete scoped arguments and local/peer review, not production
 acceptance or publication.
 
+The owner-directed 2026-10-16 scaffold audit and source-drift evidence are in
+[`research/scaffold-audit-2026-10-16/classical-statistical-mechanics/report.md`](../../scaffold-audit-2026-10-16/classical-statistical-mechanics/report.md)
+and its exact [supplier/consumer map](../../scaffold-audit-2026-10-16/classical-statistical-mechanics/supplier-consumer-map.json).
+
 The complete proof developments are:
 
 - `workers/foundations/ensemble-proofs.md`: full phase-space/reference measures,

@@ -2,7 +2,7 @@
 id: cor-weighted-cell-quotients-and-finite-weyl-basic-set-labels
 kind: corollary
 title: "Weighted cell quotients and the leading finite-Weyl basic-set labels"
-status: draft
+status: published
 dependency_level: 11
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

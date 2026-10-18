@@ -2,7 +2,7 @@
 id: thm-spin-ko-thom-orientation-in-all-ranks
 kind: theorem
 title: Real Spin KO Thom orientation in all ranks and degrees
-status: draft
+status: published
 origin: pipeline
 deps:
 - thm-homotopy-invariance-of-vector-bundle-pullback

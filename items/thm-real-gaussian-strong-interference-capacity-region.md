@@ -2,7 +2,7 @@
 id: thm-real-gaussian-strong-interference-capacity-region
 kind: theorem
 title: Exact strong-interference region for the two-user Gaussian interference channel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

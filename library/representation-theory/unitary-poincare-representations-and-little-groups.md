@@ -1,7 +1,7 @@
 ---
 page: unitary-poincare-representations-and-little-groups
 title: Unitary Poincaré Representations and Little Groups
-status: draft
+status: published
 items:
   - def-connected-poincare-cover-and-positive-energy
   - lem-mackey-induction-classification-for-regular-euclidean-duals

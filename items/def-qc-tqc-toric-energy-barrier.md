@@ -2,7 +2,7 @@
 id: def-qc-tqc-toric-energy-barrier
 kind: definition
 title: Pauli-path energy barrier
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

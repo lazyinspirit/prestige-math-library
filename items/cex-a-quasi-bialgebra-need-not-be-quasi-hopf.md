@@ -2,7 +2,7 @@
 id: cex-a-quasi-bialgebra-need-not-be-quasi-hopf
 kind: counterexample
 title: "A quasi-bialgebra need not be quasi-Hopf"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

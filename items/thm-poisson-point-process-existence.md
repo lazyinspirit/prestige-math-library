@@ -35,8 +35,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications, complete lecture notes"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 1, Definitions 1.2-1.3 and the bounded-window construction, PDF pp. 10-13; the locally finite sigma-finite extension is supplied locally."
-verification:
-  precheck: pending
 ---
 
 ## Statement

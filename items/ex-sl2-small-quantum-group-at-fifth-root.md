@@ -2,7 +2,7 @@
 id: ex-sl2-small-quantum-group-at-fifth-root
 kind: example
 title: "The rank-one small quantum group at a primitive fifth root has dimension 125"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

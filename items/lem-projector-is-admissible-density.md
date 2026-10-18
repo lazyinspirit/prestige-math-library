@@ -17,8 +17,6 @@ sources:
       url: https://arxiv.org/pdf/2004.09088
     - title: Eric Cancès and Claude Le Bris, On the convergence of SCF algorithms for the Hartree-Fock equations, §2.1
       url: https://www.numdam.org/item/M2AN_2000__34_4_749_0.pdf
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

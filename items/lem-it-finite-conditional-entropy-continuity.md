@@ -2,7 +2,7 @@
 id: lem-it-finite-conditional-entropy-continuity
 kind: lemma
 title: "Continuity of finite conditional entropy in the joint law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

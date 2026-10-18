@@ -2,7 +2,7 @@
 id: prop-ringel-map-is-well-defined-and-has-composition-image
 kind: proposition
 title: "The Ringel assignment is a bialgebra homomorphism onto the extended composition subalgebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 11

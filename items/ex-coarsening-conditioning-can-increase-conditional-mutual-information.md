@@ -2,7 +2,7 @@
 id: ex-coarsening-conditioning-can-increase-conditional-mutual-information
 kind: example
 title: "Coarsening the conditioning variable can increase conditional mutual information"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

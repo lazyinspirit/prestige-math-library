@@ -2,7 +2,7 @@
 id: thm-filtered-l-infinity-morphisms-preserve-maurer-cartan-elements
 kind: theorem
 title: "Filtered L∞-morphisms preserve Maurer–Cartan elements and compose on solutions"
-status: draft
+status: published
 dependency_level: 8
 origin: session
 deps:

@@ -2,7 +2,7 @@
 id: def-general-process-information-rate
 kind: definition
 title: "Information rate of a general finite-alphabet process"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

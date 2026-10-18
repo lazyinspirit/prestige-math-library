@@ -2,7 +2,7 @@
 id: thm-partition-diagram-orbit-basis-centralizer
 kind: theorem
 title: Partition-diagram orbit basis and symmetric-group centralizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

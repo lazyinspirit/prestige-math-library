@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-closure-trace-is-cyclic-and-markov
 kind: lemma
 title: "The normalized closure trace is cyclic and satisfies the Markov rules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

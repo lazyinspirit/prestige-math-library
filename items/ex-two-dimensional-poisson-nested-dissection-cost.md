@@ -16,8 +16,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Jennifer Scott and Miroslav Tůma, Algorithms for Sparse Linear Systems, Chapter 8, §8.4"

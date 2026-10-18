@@ -2,7 +2,7 @@
 id: def-rational-cherednik-kz-functor-and-finite-hecke-algebra
 kind: definition
 title: "The KZ monodromy functor and the reflection Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

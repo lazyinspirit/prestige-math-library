@@ -2,7 +2,7 @@
 id: ex-hh-rank-one-hecke-specializations-at-q-i
 kind: example
 title: "Rank-one Hecke specializations can be semisimple or nonsemisimple"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

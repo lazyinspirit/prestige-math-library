@@ -1,7 +1,7 @@
 ---
 page: point-to-point-source-channel-separation-examples
 title: "Point-to-Point Source–Channel Separation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-it-point-to-point-source-channel-rate-budget

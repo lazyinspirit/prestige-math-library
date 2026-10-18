@@ -2,7 +2,7 @@
 id: lem-convex-generator-boundary-limits-exist
 kind: lemma
 title: Boundary limits of a normalized finite convex generator exist
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

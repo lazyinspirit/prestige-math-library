@@ -2,7 +2,7 @@
 id: lem-daha-a1-y-sum-restricts-to-macdonald-operator
 kind: lemma
 title: "The symmetric DAHA translation restricts to the A1 Macdonald operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

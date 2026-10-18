@@ -2,7 +2,7 @@
 id: ex-d4-nonzero-null-translations-are-continuous-spin
 kind: example
 title: A D=4 continuous-spin little representation has nonzero translations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

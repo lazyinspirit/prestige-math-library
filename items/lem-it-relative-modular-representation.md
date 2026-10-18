@@ -2,7 +2,7 @@
 id: lem-it-relative-modular-representation
 kind: lemma
 title: Relative modular representation of finite quantum relative entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

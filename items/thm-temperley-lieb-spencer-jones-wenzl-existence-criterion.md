@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-spencer-jones-wenzl-existence-criterion
 kind: theorem
 title: "Spencer's quantum-characteristic criterion for Jones–Wenzl existence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

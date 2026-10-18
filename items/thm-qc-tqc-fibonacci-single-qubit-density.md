@@ -2,7 +2,7 @@
 id: thm-qc-tqc-fibonacci-single-qubit-density
 kind: theorem
 title: Fibonacci single-qubit projective density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

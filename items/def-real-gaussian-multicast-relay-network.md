@@ -2,7 +2,7 @@
 id: def-real-gaussian-multicast-relay-network
 kind: definition
 title: Real scalar Gaussian multicast relay network and power constraints
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

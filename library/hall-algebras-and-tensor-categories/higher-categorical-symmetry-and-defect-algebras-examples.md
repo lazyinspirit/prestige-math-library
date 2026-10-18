@@ -1,7 +1,7 @@
 ---
 page: higher-categorical-symmetry-and-defect-algebras-examples
 title: "Higher Categorical Symmetries and Defect Algebras: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-2vect-matrix-functor-composition

@@ -1,7 +1,7 @@
 ---
 page: brauer-bmw-and-partition-diagram-algebras-examples
 title: "Brauer, BMW, and Partition Diagram Algebras: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-brauer-and-partition-loop-composition

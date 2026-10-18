@@ -2,7 +2,7 @@
 id: cex-dirac-on-euclidean-space-is-not-fredholm
 kind: counterexample
 title: "The Euclidean Dirac operator has nonclosed range at zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory-examples

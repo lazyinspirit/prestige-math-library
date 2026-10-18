@@ -2,7 +2,7 @@
 id: lem-qkd-trace-norm-adds-over-classical-blocks
 kind: lemma
 title: Trace norm of a finite classical block operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

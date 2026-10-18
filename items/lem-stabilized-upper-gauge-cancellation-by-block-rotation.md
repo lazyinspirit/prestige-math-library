@@ -2,7 +2,7 @@
 id: lem-stabilized-upper-gauge-cancellation-by-block-rotation
 kind: lemma
 title: Stabilized upper gauge cancellation by block rotation
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 deps: []

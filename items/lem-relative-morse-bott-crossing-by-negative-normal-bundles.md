@@ -2,7 +2,7 @@
 id: lem-relative-morse-bott-crossing-by-negative-normal-bundles
 kind: lemma
 title: Relative Morse–Bott crossing by negative normal disk bundles
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 deps:

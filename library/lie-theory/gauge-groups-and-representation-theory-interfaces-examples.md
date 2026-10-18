@@ -1,7 +1,7 @@
 ---
 page: gauge-groups-and-representation-theory-interfaces-examples
 title: "Gauge Groups and Representation-Theoretic Interfaces: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-gauge-group-and-curvature-of-a-trivial-real-principal-bundle

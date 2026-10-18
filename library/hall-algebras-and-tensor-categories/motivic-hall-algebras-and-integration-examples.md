@@ -1,7 +1,7 @@
 ---
 page: motivic-hall-algebras-and-integration-examples
 title: "Motivic Hall Algebras and Integration Maps: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - motivic-hall-algebras-and-integration
 items: []

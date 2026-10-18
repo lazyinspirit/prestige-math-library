@@ -2,7 +2,7 @@
 id: cex-strong-interference-formula-fails-outside-regime
 kind: counterexample
 title: Outside the strong regime, the MAC intersection can be too small
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: rem-finite-quiver-hall-counts-and-dt-bps-interpretation
 kind: remark
 title: "Finite-quiver Hall counts and the limits of DT/BPS interpretation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: lem-real-clifford-involutions-and-norm
 kind: lemma
 title: Clifford involutions and the norm of a vector product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations

@@ -2,7 +2,7 @@
 id: def-jordan-quiver-nilpotent-representation-category
 kind: definition
 title: "Nilpotent representations of the Jordan quiver"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

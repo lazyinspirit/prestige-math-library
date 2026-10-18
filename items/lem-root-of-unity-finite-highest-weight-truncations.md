@@ -2,7 +2,7 @@
 id: lem-root-of-unity-finite-highest-weight-truncations
 kind: lemma
 title: Finite highest weight truncations from integral lowest-highest tensors
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

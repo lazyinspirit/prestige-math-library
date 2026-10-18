@@ -2,7 +2,7 @@
 id: lem-ell-four-root-ising-gauge-and-chirality-conversion
 kind: lemma
 title: "The exact ell-four Ising gauge and parity chirality conversion"
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -3,7 +3,7 @@ id: lem-filtered-projectives-prove-canonical-basic-set-reciprocity
 kind: lemma
 title: "Filtered projectives prove canonical basic-set reciprocity"
 deps: [def-axiom-of-choice, def-finite-weyl-lusztig-basic-set-data, lem-lusztig-asymptotic-algebra-and-specialization-map, lem-schur-leading-coefficients-and-good-asymptotic-specializations, lem-complete-local-hecke-modular-systems-and-idempotent-lifting, lem-asymptotic-induction-identifies-leading-modular-simples, def-essential-epimorphism-and-projective-cover, thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

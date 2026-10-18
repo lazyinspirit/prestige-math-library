@@ -2,7 +2,7 @@
 id: lem-it-finite-gentle-measurement
 kind: lemma
 title: Gentle measurement bound in finite dimensions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

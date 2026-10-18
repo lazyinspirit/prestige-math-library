@@ -2,7 +2,7 @@
 id: thm-positive-energy-wigner-mackey-classification-for-connected-covers
 kind: theorem
 title: Positive-energy Wigner–Mackey classification for connected covers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

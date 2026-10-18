@@ -11,8 +11,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: Richard S. Laugesen, Linear Analysis and Partial Differential Equations, Chapter 3, Sobolev spaces

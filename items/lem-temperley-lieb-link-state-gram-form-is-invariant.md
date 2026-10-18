@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-link-state-gram-form-is-invariant
 kind: lemma
 title: "The link-state Gram form is symmetric and invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

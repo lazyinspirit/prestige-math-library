@@ -2,7 +2,7 @@
 id: def-root-of-unity-weyl-and-dual-weyl-module-families
 kind: definition
 title: Integral Weyl and dual Weyl families at a root of unity
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

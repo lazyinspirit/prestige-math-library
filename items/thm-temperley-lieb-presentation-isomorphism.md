@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-presentation-isomorphism
 kind: theorem
 title: "The generator presentation is the planar diagram algebra over every commutative ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

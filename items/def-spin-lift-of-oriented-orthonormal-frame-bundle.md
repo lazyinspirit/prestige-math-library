@@ -2,7 +2,7 @@
 id: def-spin-lift-of-oriented-orthonormal-frame-bundle
 kind: definition
 title: "Spin lifts of oriented orthonormal frame bundles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory

@@ -2,7 +2,7 @@
 id: lem-daha-a1-affine-normal-words-span
 kind: lemma
 title: "Rank-one DAHA affine normal words span"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

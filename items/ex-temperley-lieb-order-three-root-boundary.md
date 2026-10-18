@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-order-three-root-boundary
 kind: example
 title: "At the order-three root the trace degenerates on a semisimple block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

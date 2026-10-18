@@ -21,8 +21,6 @@ axiom_use: Countable Choice is required by the cited measurable change-of-variab
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Ernst Hairer, Geometric Numerical Integration, TU München Lecture 2: Symplectic integrators"

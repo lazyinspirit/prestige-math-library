@@ -2,7 +2,7 @@
 id: def-oriented-open-closed-surface-category
 kind: definition
 title: "The oriented open-closed surface category with colored free boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: prefix-codes-and-finite-lossless-coding-examples
 title: "Prefix Codes and Finite Lossless Coding — Examples"
-status: draft
+status: published
 requires: [prefix-codes-and-finite-lossless-coding]
 items: []
 examples:

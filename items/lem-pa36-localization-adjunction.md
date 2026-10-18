@@ -2,7 +2,7 @@
 id: lem-pa36-localization-adjunction
 kind: lemma
 title: Localization is left adjoint to global sections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-derived-hall-stabilizer-homotopy-sequence
 kind: lemma
 title: "Mapping-space homotopy groups give the derived Hall stabilizer weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

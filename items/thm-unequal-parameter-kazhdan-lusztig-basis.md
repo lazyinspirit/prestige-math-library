@@ -2,7 +2,7 @@
 id: thm-unequal-parameter-kazhdan-lusztig-basis
 kind: theorem
 title: Existence and uniqueness of the ordered-group unequal-parameter Kazhdan–Lusztig basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

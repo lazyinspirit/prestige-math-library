@@ -1,6 +1,6 @@
 # Thermodynamics and General Relativity research scaffold
 
-Draft research2026-10-04; earlier dossiers, originals, imports and engines remain read-only. Start with prose-scaffold.md and quantities-and-postulates.md. complete-local-arguments.md supplies canonical finite entropy-flux, Killing-energy/support and calibration bridges; workers own the full covariant, equilibrium, gravitating-statistical and horizon/semiclassical modules.
+Draft research2026-10-04 with a scoped owner-directed scaffold audit addendum dated 2026-10-16; earlier dossiers, originals, imports and engines remain read-only. Start with prose-scaffold.md and quantities-and-postulates.md. complete-local-arguments.md supplies canonical finite entropy-flux, Killing-energy/support and calibration bridges; workers own the full covariant, equilibrium, gravitating-statistical and horizon/semiclassical modules. The new audit, current supplier map, scoped findings and root-only plan-splice proposal are indexed at `research/scaffold-audit-2026-10-16/thermodynamics-and-general-relativity/`.
 
 Reproduce the canonical union from the repository root:
 

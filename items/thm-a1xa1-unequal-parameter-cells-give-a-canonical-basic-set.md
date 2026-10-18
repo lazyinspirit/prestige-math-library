@@ -2,7 +2,7 @@
 id: thm-a1xa1-unequal-parameter-cells-give-a-canonical-basic-set
 kind: theorem
 title: The four weighted cells of A1×A1 give a canonical basic set at odd residue characteristic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

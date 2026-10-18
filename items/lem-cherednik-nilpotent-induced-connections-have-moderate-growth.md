@@ -2,7 +2,7 @@
 id: lem-cherednik-nilpotent-induced-connections-have-moderate-growth
 kind: lemma
 title: "Nilpotent induced Cherednik connections have uniform moderate growth on generic lines"
-status: draft
+status: published
 dependency_level: 12
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

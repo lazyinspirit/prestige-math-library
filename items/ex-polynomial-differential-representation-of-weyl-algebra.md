@@ -2,7 +2,7 @@
 id: ex-polynomial-differential-representation-of-weyl-algebra
 kind: example
 title: "The polynomial differential representation and positive-characteristic nonfaithfulness"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

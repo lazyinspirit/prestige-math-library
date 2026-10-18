@@ -15,7 +15,6 @@ provenance:
   proof: ai-altered
 axiom_use: "No choice axiom is used; the congruence and sample identities are finite."
 verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

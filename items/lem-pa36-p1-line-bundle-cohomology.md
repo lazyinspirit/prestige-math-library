@@ -2,7 +2,7 @@
 id: lem-pa36-p1-line-bundle-cohomology
 kind: lemma
 title: Cech cohomology of line bundles on the projective line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

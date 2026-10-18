@@ -2,7 +2,7 @@
 id: lem-yangian-fundamental-evaluation-intertwiner
 kind: lemma
 title: "The rational R-matrix intertwines two fundamental evaluation orders"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

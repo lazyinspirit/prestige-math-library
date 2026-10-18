@@ -1,7 +1,7 @@
 ---
 page: f-divergences-renyi-and-hypothesis-testing-examples
 title: F-Divergences, Rényi Information, and Hypothesis Testing — Examples
-status: draft
+status: published
 requires: [f-divergences-renyi-and-hypothesis-testing]
 items: []
 examples:

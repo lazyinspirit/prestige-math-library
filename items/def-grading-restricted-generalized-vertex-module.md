@@ -2,7 +2,7 @@
 id: def-grading-restricted-generalized-vertex-module
 kind: definition
 title: Grading-restricted generalized module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

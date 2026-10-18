@@ -2,7 +2,7 @@
 id: lem-real-gaussian-han-kobayashi-inner-region
 kind: lemma
 title: Gaussian Han-Kobayashi inner region for a fixed private-power split
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

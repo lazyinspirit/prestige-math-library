@@ -2,7 +2,7 @@
 id: def-it-finite-wyner-ziv-code
 kind: definition
 title: "Finite-alphabet lossy source coding with decoder-only side information"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

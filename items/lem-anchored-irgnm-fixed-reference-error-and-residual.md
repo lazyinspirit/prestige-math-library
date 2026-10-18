@@ -19,8 +19,6 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Barbara Kaltenbacher, Methods for Inverse Problems: IV. Newton type methods (full lecture); anchored formulation/source-filter context, local constants proved here"

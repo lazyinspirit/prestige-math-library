@@ -2,7 +2,7 @@
 id: lem-rational-cherednik-standard-module-local-connection-residue
 kind: lemma
 title: "The standard-module KZ connection has the reflection residue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 11

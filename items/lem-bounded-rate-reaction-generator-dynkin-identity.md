@@ -26,8 +26,6 @@ sources:
     - title: "David F. Anderson and Thomas G. Kurtz, Continuous Time Markov Chain Models for Chemical Reaction Networks"
       url: "https://people.math.wisc.edu/~dfanderson/papers/SURVEY_AndKurtz.pdf"
       locator: "§2.2, generator specification for a finite-channel reaction network, PDF pp. 7–8."
-verification:
-  precheck: pending
 ---
 
 ## Statement

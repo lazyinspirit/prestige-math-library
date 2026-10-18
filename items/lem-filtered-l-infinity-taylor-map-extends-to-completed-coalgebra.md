@@ -2,7 +2,7 @@
 id: lem-filtered-l-infinity-taylor-map-extends-to-completed-coalgebra
 kind: lemma
 title: "Filtered Taylor maps extend to the completed coaugmented symmetric coalgebra"
-status: draft
+status: published
 dependency_level: 7
 origin: session
 deps:

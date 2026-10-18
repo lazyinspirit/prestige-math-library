@@ -2,7 +2,7 @@
 id: cex-infinite-mode-regular-weyl-representations-are-inequivalent
 kind: counterexample
 title: Infinitely many modes admit inequivalent irreducible regular Weyl representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

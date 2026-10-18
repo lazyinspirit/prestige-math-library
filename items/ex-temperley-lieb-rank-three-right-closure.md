@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-rank-three-right-closure
 kind: example
 title: "Right closure on the five rank-three diagrams"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

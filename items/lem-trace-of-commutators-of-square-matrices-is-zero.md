@@ -2,7 +2,7 @@
 id: lem-trace-of-commutators-of-square-matrices-is-zero
 kind: lemma
 title: "The trace of a matrix commutator is zero"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

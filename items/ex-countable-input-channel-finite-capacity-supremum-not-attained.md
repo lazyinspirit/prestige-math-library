@@ -2,7 +2,7 @@
 id: ex-countable-input-channel-finite-capacity-supremum-not-attained
 kind: example
 title: A finite information-capacity supremum need not be attained
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -1,8 +1,8 @@
 # Einstein–Maxwell Models — future build design
 
-Spliced on 2026-10-04 at the owner’s request, using the mathematics future-track convention. Canonical item arrays remain empty until engine scaffolding and authoring. Preserve every promised claim and source qualification in the linked full designs and inventories. Resolve the exact source dependencies before accepting consumers.
+Spliced on 2026-10-04 at the owner’s request, using the mathematics future-track convention. The canonical machine-plan item arrays remain empty until engine scaffolding and authoring; the current research proposed inventory contains 209 draft interfaces. Preserve every original claim and source qualification in the linked full designs and inventories. Resolve the exact source dependencies before accepting consumers.
 
-Read these complete required sources before drift review or scaffolding:
+The following are the original 2026-10-04 source-index pins. They are preserved as historical splice evidence; the current 2026-10-16 source hashes and supplier-status map are recorded in the new category report.
 
 - `research/extended-frameworks-2026-10-03/einstein-maxwell-models/inventory-and-pathway.md` (SHA-256 b58690cfbff976d69b8c54e99f19443ba5afa2d30c6c3828da6cac05812932f9).
 - `research/extended-frameworks-2026-10-03/einstein-maxwell-models/prose-scaffold.md` (SHA-256 ca4b23860bc165c9182738efe457b3a2029df70eca55e9cdf400757a21a85184).
@@ -11,6 +11,12 @@ Read these complete required sources before drift review or scaffolding:
 - `research/extended-frameworks-2026-10-03/einstein-maxwell-models/closure-ledger.json` (SHA-256 b2d1ba47e8a45d9500e8c2abac26e3755e263a8f8010823d9569d29f39ce9bf5).
 
 The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims.
+
+## Current category audit addenda — 2026-10-16
+
+The 27 original A/B pair reservations below are preserved. The current category inventory has 209 interfaces: the 191 original reservations plus 18 category-local prerequisites and bridge results. The new local mathematical suppliers state their exact published real-analysis, normed-space, measure/Lp, extended-real, smooth-manifold and set-theory dependencies. The current `supplier-map.json` resolves 105 exact external prerequisites; this includes the canonical published RPM action-equivalence item (the October 14 map pointed to its unpublished source module), and the published flat EM/SR formulation context.
+
+`workers/geometry-actions/proof-modules.md#GA10` proves the flat-chart Maxwell and Lorentz force-density compatibility by direct component calculations. It consumes the earlier EM/SR postulates as conditional context and records the earlier tensor-equivalence/stress theorems as nonlogical motivation; no prescribed-background solution is promoted to a coupled Einstein solution. CP08 now states both AC and DC and lists the partition-of-unity/timelike-cone suppliers required to glue time orientations. The exact current source hashes, review-marker limits and unresolved outside-root maintenance obligations are in `research/scaffold-audit-2026-10-16/einstein-maxwell-models/report.md`.
 
 ## Oriented Lorentzian fields, observers and coordinate conventions
 

@@ -2,7 +2,7 @@
 id: def-temperley-lieb-diagram-tower-and-right-closure
 kind: definition
 title: "Finite diagram tower inclusion and normalized right closure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

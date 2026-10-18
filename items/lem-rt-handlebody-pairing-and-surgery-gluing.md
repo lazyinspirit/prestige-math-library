@@ -2,7 +2,7 @@
 id: lem-rt-handlebody-pairing-and-surgery-gluing
 kind: lemma
 title: "RT handlebody pairings and surgery gluing"
-status: draft
+status: published
 dependency_level: 13
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

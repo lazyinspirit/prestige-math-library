@@ -2,7 +2,7 @@
 id: def-weak-bialgebra-and-weak-hopf-algebra
 kind: definition
 title: "Weak bialgebras, weak Hopf algebras, and counital maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

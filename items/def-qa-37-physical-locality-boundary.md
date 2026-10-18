@@ -2,7 +2,7 @@
 id: def-qa-37-physical-locality-boundary
 kind: definition
 title: "Physical realization boundary for braid compilation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 13

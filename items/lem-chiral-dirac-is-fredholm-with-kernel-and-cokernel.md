@@ -2,7 +2,7 @@
 id: lem-chiral-dirac-is-fredholm-with-kernel-and-cokernel
 kind: lemma
 title: "A chiral geometric Dirac operator is Fredholm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory

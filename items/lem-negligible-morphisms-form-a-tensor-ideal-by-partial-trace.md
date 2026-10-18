@@ -2,7 +2,7 @@
 id: lem-negligible-morphisms-form-a-tensor-ideal-by-partial-trace
 kind: lemma
 title: "Partial-trace closure of negligible morphisms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -18,7 +18,7 @@ verification:
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Section 3.1"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
     - title: "Mathematics@CUHK, Martingale Theory I, Section 2.6"
       url: "https://cuhkmath.wordpress.com/2010/10/12/martingale-theory/"
 ---

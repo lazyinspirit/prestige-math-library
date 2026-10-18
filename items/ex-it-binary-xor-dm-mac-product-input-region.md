@@ -2,7 +2,7 @@
 id: ex-it-binary-xor-dm-mac-product-input-region
 kind: example
 title: The binary XOR MAC exposes the independent private-input law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

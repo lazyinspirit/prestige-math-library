@@ -1,7 +1,7 @@
 ---
 page: real-complex-clifford-classification-and-graded-products
 title: "Clifford Classification, Modules, and Graded Tensor Products"
-status: draft
+status: published
 items:
   - def-clifford-graded-algebra-module-and-tensor-product
   - def-real-quaternion-matrix-algebra-notation

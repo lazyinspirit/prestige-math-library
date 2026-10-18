@@ -2,7 +2,7 @@
 id: prop-positive-scalar-curvature-forces-untwisted-spinor-kernel-zero
 kind: proposition
 title: "Positive scalar curvature annihilates untwisted spinor harmonic sections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory

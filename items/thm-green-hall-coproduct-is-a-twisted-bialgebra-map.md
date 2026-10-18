@@ -2,7 +2,7 @@
 id: thm-green-hall-coproduct-is-a-twisted-bialgebra-map
 kind: theorem
 title: "Green’s coproduct is an algebra map into the twisted tensor completion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

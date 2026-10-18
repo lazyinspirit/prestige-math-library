@@ -2,7 +2,7 @@
 id: lem-real-and-symplectic-clutching-groups-in-low-degrees
 kind: lemma
 title: Real and symplectic clutching groups in low degrees
-status: draft
+status: published
 origin: pipeline
 page: real-clifford-modules-ko-and-abs-orientations
 deps:

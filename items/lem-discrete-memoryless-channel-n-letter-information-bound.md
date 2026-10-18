@@ -2,7 +2,7 @@
 id: lem-discrete-memoryless-channel-n-letter-information-bound
 kind: lemma
 title: "The n-letter mutual information of a DMC is at most nC"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

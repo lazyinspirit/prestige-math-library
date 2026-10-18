@@ -2,7 +2,7 @@
 id: lem-finite-directed-information-feedback-decomposition
 kind: lemma
 title: Mutual information splits into directed information and feedback
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

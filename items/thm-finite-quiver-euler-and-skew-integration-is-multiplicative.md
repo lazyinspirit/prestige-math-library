@@ -2,7 +2,7 @@
 id: thm-finite-quiver-euler-and-skew-integration-is-multiplicative
 kind: theorem
 title: "Euler and skew integration are multiplicative for finite acyclic quivers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

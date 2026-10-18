@@ -2,7 +2,7 @@
 id: lem-yangian-rtt-spectral-rescaling
 kind: lemma
 title: "The rational i-normalization is the standard RTT normalization after rescaling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

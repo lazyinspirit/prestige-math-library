@@ -19,8 +19,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Benoît Perthame, Introduction to Structured Equations in Biology, full lecture notes"

@@ -2,7 +2,7 @@
 id: thm-higher-order-hochschild-obstruction-class
 kind: theorem
 title: The order-n Hochschild obstruction to extending a partial star product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

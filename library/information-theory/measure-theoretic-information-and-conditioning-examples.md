@@ -1,7 +1,7 @@
 ---
 page: measure-theoretic-information-and-conditioning-examples
 title: "Measure-Theoretic Information and Conditioning — Examples"
-status: draft
+status: published
 requires:
   - measure-theoretic-information-and-conditioning
   - fdr-control-under-dependence

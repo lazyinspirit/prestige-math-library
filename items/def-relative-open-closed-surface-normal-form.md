@@ -2,7 +2,7 @@
 id: def-relative-open-closed-surface-normal-form
 kind: definition
 title: "The marked boundary-relative open-closed normal word"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

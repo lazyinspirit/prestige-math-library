@@ -2,7 +2,7 @@
 id: def-toen-locally-finite-dg-category
 kind: definition
 title: "Locally finite dg enhancements for derived Hall theory"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

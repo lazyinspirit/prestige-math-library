@@ -2,7 +2,7 @@
 id: lem-finite-sine-transform-orthogonality
 kind: lemma
 title: "Finite sine-transform orthogonality at level ell"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

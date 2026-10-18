@@ -2,7 +2,7 @@
 id: lem-projective-plane-stabilization-gives-relative-five-bordisms
 kind: lemma
 title: "Projective-plane stabilization gives a five-bordism with the prescribed three-boundary"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

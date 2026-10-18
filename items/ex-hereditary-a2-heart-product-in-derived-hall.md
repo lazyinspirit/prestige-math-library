@@ -2,7 +2,7 @@
 id: ex-hereditary-a2-heart-product-in-derived-hall
 kind: example
 title: "The A2 hereditary-heart Hall product inside the derived Hall algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

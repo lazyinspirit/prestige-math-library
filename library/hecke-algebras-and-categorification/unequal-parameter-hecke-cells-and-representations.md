@@ -1,7 +1,7 @@
 ---
 page: unequal-parameter-hecke-cells-and-representations
 title: Unequal-Parameter Hecke Cells and Representations
-status: draft
+status: published
 items:
 - def-arbitrary-rank-coxeter-system-and-bruhat-order
 - def-canonical-basic-set-for-hecke-specialization

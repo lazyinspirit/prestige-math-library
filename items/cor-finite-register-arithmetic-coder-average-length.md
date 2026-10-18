@@ -2,7 +2,7 @@
 id: cor-finite-register-arithmetic-coder-average-length
 kind: corollary
 title: "The finite-register rational coder is within two bits per block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

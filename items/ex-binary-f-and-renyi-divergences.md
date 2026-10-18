@@ -2,7 +2,7 @@
 id: ex-binary-f-and-renyi-divergences
 kind: example
 title: Binary f-, KL-, and Rényi divergences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-no-nonzero-finite-dimensional-weyl-modules-in-characteristic-zero
 kind: theorem
 title: "No nonzero finite-dimensional Weyl modules at nonzero central character in characteristic zero"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -1,0 +1,480 @@
+
+
+===== PDF PAGE 1 =====
+
+§ 24. Rate distortion: achievability bounds
+
+
+
+24.1  Recap
+
+Compute R(D).
+    Recall from the last lecture:
+
+                           1           R(D) = limsup   log M ∗(n,D),    (rate distortion function)
+                  n→∞ n
+                            1
+            Ri(D) = limsup  ϕSn (D ),   (information rate distortion function)
+                  n→∞ n
+
+and
+
+                     ϕS(D ) ≜       inf      I (S;S)ˆ
+                                   PS∣S∶E[ˆ    d(S,S)]≤Dˆ
+                       ϕS n ( D ) =          inf        I (S n ;Snˆ )
+                                    PSˆn∣ S n ∶[E d(Sn ,Snˆ )]≤ D
+
+Also, we showed the general converse: For any ( M,D)-code X →W →Xˆ we have
+
+                                          log M ≥ϕX ( D )
+                Ô⇒log M∗(n,D ) ≥ ϕSn (D)
+                 Ô⇒ R ( D ) ≥ Ri ( D )
+
+   In this lecture, we will prove the achievability bound and establish the identity R ( D ) = Ri ( D )
+for stationary memoryless sources.
+    First we show that Ri ( D ) can be easily calculated for memoryless source without going through
+the multi-letter optimization problem.
+Theorem 24.1 (Single-letterization). For stationary memoryless source Sn and separable distortion
+d,
+
+                                Ri(D) = ϕS(D )
+
+Proof. By deﬁnition we have that ϕSn ( D ) ≤ nϕS ( D ) by choosing a product channel: P ˆSn ∣ Sn =
+(P ˆS∣S )n. Thus Ri ( D ) ≤ ϕS ( D ) .
+
+
+
+
+
+                                         246
+
+===== PDF PAGE 2 =====
+
+    For the converse, take any P                                   such that the constraint E[ d( Sn,Snˆ )] ≤ D is satisﬁed, we have                                        ˆSn∣Sn
+
+                         n
+            I(Sn;Snˆ ) ≥ ∑ I (Sj,Sjˆ )                       (Sn independent)
+                                     j = 1
+                         n
+                    ≥ ∑ ϕ S (E[d(Sj,Sjˆ )])
+                                     j = 1
+                       ⎛ 1 n                    ≥ nϕS  ∑ E[d(Sj, ˆSj)]⎞              (convexity of ϕS)
+                     ⎝n            ⎠                                       j=1
+                 ≥nϕS(D)                          (ϕS non-increasing)
+
+
+
+24.2  Shannon’s rate-distortion theorem
+
+                                                                                                                       i.i.d.
+Theorem 24.2. Let the source Sn be stationary and memoryless, Sn ∼ PS, and suppose that
+distortion metric d and the target distortion D satisfy:
+
+   1. d(sn,sˆn ) is non-negative and separable
+
+   2. D > D0
+
+   3. Dmax is ﬁnite, i.e.
+                              Dmax ≜inf E[d(S,sˆ)] < ∞.
+                                                                                                     sˆ
+
+Then
+
+                 R (D ) = Ri (D ) =       inf      I(S;S).ˆ                          (24.1)
+                                         PS∣Sˆ ∶[E d( S,Sˆ)]≤ D
+
+   Remarks:
+
+   • Note that Dmax < ∞ does not imply that d(⋅,⋅) only takes values in R, i.e. theorem permits
+     d(a,aˆ) = ∞.
+
+   • It should be remarked that when Dmax = ∞typically R(D) = ∞. Indeed, suppose that d(⋅⋅),
+        is a metric (i.e. ﬁnite valued and satisﬁes triangle inequality). Then, for any x0 ∈An we have
+                               d(X,Xˆ ) ≥(d X,x0 ) − d(x0,Xˆ ) .
+
+     Thus, for any ﬁnite codebook {c1 ,...,cM } we have max j d(x0,cj) < ∞and therefore
+                   E[ d( X,Xˆ )] ≥ E[ d( X,x0 )] − maxd(x 0,cj) = ∞.
+                                                                                  j
+
+     So that R (D) = ∞for any ﬁnite D. This observation, however, should not be interpreted as
+      absolute imp ossibility of compression for such sources. It is just not possible with ﬁxed-rate
+      codes. As an example, for quadratic distortion and Cauchy-distributed S, Dmax = ∞ since S
+      has inﬁnite second-order moments. But it is easy to see that Ri ( D ) < ∞ for any D ∈( 0, ∞) . In
+       fact, in this case Ri (D) is a hyperbola-like curve that never touch es either axis. A non-trivial
+     compression can be attained with compressors Sn → W of bounded entropy H ( W ) (but
+     unbounded alphabet of W). Indeed if we take W to b e a ∆-quantized version of S and notice
+      that diﬀerential entropy of S is ﬁnite, we get from (23.2) that Ri ( ∆ ) ≤ H (W ) < ∞ . Interesting
+      question: Is H (W) = nRi( D) + o(n) attainable?
+
+                                          247
+
+===== PDF PAGE 3 =====
+
+   • Techniques in proving (24.1) for memoryless sources can be applied to prove it for “stationary
+      ergodic” sources with changes similar to those we have discussed in channel coding.
+
+   Before giving a formal proof, we illustrate the intuition non-rigorously.
+24.2.1  Intuition
+Try to throw in M points C = {c1,...,cM } ∈ Aˆn which are drawn i.i.d. according to a product
+distribution Qn              where QSˆ is some distribution on A.ˆ Examine the simple encoder and decoder pair:             Sˆ
+
+                             encoder : f(sn) = argmin d( sn ,cj )                           (24.2)
+                                                                        j ∈[M ]
+                             decoder : g ( j ) = cj                                           (24.3)
+
+   The basic idea is the following: Since the co dewords are generated independently of the source,
+the probability that a given codeword oﬀers good reconstruction is (exponentially) small, say, ϵ.
+However, since we have many codewords, the chance that there exists a good one can be of high
+probability. More precisely, the probability that no good codeword exist is (1 −ϵ)M, which can be
+very close to zero as long as M grows faster than 1.ϵ
+   To explain the intuition further, let us consider the excess distortion of this code: P[ d( Sn ,Snˆ ) >
+D] . Deﬁne
+                                  Psuccess ≜ P[∃∈Cc     , s.t. d(Sn,c ) ≤ D ]
+
+Then
+
+          Pfailure ≜P[∀ci ∈ C,d(Sn , c ) > D]                                                    (24.4)
+              ≈P [∀ci ∈C ,d(Sn,c) > D ∣ Sn ∈ Tn]                                            (24.5)
+                  ( T n is the set of typical strings with empirical distribution PSˆ n ≈ P S )
+              =P[d(S n ,Sˆn ) > D ∣ Sn ∈ T n ]M     ( P Sn ,Snˆ = PSn QnˆS )                          (24.6)
+               =( 1 − P [d(S n , Sn)ˆ  ≤D∣Sn ∈ T n ]  ) M                                        (24.7)
+                                   ´¹ ¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¸¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹ ¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹ ¶
+                               since Sn ⊥⊥ˆSn, this should be small
+               ≈(1 − 2−nE( Q                               Sˆ )) M     ( large deviation!)                                     (24.8)
+
+where it can b e shown (similar to information projection) that
+
+                                   min                   E(QˆS) =                            D (P ˆS∣S∥QˆS ∣PS)                        (24.9)                                                     S,S)]≤ˆ  D                                  PS∣Sˆ    ∶E[d(
+
+                                                                  Sˆ )+ δ ) and the above code will haveThus we conclude that ∀QSˆ ,∀δ > 0 we can pick M = 2 n (E (Q
+arbitrarily small excess distortion:
+
+                 P failure = P[∀c ∈C,d(S n ,c) > D] →0 as n →∞.
+
+We optimize QSˆ to get the smallest possible M:
+
+                 minE                                   min                                     minD(P                      (QˆS) =                                                                ∥ QSˆ ∣ PS )                  (24.10)                                                         Sˆ∣S                   QSˆ                                       QSˆ                                                          (S, Sˆ)]≤ D                                  PS∣S∶E[dˆ
+                              =     min     I (S;Sˆ )
+                                  PSˆ ∣S∶E[d(S, Sˆ)]≤D
+
+                              = ϕ S (D)
+
+
+                                          248
+
+===== PDF PAGE 4 =====
+
+24.2.2  Proof of Theorem 24.2
+
+Theorem 24.3 (Performance bound of average-distortion codes). Fix PX and suppose d(x,xˆ) ≥ 0
+for al l x,xˆ. ∀ PY ∣ X, ∀ γ > 0, ∀y0 ∈Aˆ, there exists a code X → W → X,ˆ  where W ∈[ M + 1 ] and
+           E[d( X,Xˆ )] ≤ E[ d( X,Y )] + E[ d( X,y0 )]e−M/γ + E[d( X,y0 )1{i( X;Y )>log γ}]
+              d(X,Xˆ ) ≤(d X ,y0 )   a.s.
+
+   Notes:
+
+   • This theorem says that from an arbitrary PY ∣ X such that Ed(X,Y ) ≤D, we can extract a good
+     code with average distortion D plus some extra terms which will vanish in the asymptotic
+      regime.
+
+   • The proof uses the random coding argument. The role of the deterministic y0 is a “fail-safe”
+     codeword (think of y0 as the default reconstruction with Dmax = E[ d( X,y0 )] ). We add y0 to
+     the random codebook for damage control, to hedge the (highly unlikely and unlucky) event
+      that we end up with a horrible codebook.
+
+Proof. Similar to the previous intuitive argument, we apply random coding and generate the
+codewords randomly and independently of the source:
+
+                                                                                         i.i.d.
+                              C = {c1,...,cM } ∼ PY ⊥ X
+
+and add the “fail-safe” codeword cM+1 = y0. We adopt the same encoder-decoder pair (24.2) – (24.3)
+and let Xˆ = g (f (X )) . Then by deﬁnition,
+
+                            d( X,X)ˆ =  min         ≤d(X,y0).                                                         j ∈[M+1]d(X,cj)
+
+To simplify notation, let Y be an independent copy of Y (similar to the idea of introducing unsent
+codeword X in channel coding):
+                                        PX,Y,Y = PX,Y PY
+where P Y = PY . Recall the formula for computing the expectation of a random variable U ∈[0,a ]:
+E[ U ] = ∫ 0a P[ U ≥ u]du. Then the average distortion is
+
+                  Ed( X,X)ˆ = E min         )                                       (24.11)                                                   j ∈[ M + 1]d(X,cj
+                          = EX E[             ,cj )∣X]                                (24.12)                                                         j ∈min[M +1 ]d(X
+                                             d (X,y0)
+                          = EX ∫      P[ min  d(X,cj ) > u∣X ]du                (24.13)
+                                             0              j ∈[M + 1]
+                                             d (X,y0 )
+                          ≤ EX        P[ min d(X,cj ) > u∣X]du                  (24.14)                                ∫0              j ∈[ M ]
+                                             d (X,y0 )
+                          = EX       P [d( X , Y ) > u∣X]Mdu                     (24.15)                                ∫0
+                                              d(X,y0)
+                          = EX ∫       (1 −P[d(X, Y ) ≤ u∣X ])Mdu                (24.16)
+                                             0                                       ´¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹ ¸ ¹¹¹¹¹¹¹ ¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¶
+                                                             ≜δ(X,u )
+
+
+                                         249
+
+===== PDF PAGE 5 =====
+
+Next we upper bound ( 1 −(δ X,u)) M as follows:
+
+               (1 −(X,u))Mδ        ≤e−M/γ + ∣ 1 − γδ(X,u)∣+                                   (24.17)
+                                                                           +
+                                        X ]∣            (24.18)                         = e−M/γ + ∣−1  γE[exp{−i( X ;Y )} 1 { d( X ,Y )≤}∣u
+                     M /γ                         ≤ e−   + P [i(X;Y ) > log γ ∣X ] + P[d(X,Y ) > u∣X]         (24.19)
+
+where
+
+   • (24.17) uses the following trick in dealing with ( 1 − δ ) M for δ ≪ 1 and M ≫ 1. First, recall
+     the standard rule of thumb:
+                                            n     ⎪⎪⎧0,  ϵnn ≫1
+                                       (1 − ϵn ) ≈ ⎨
+                                                                         ⎪⎪1,  ϵnn ≪ 1                                    ⎩
+      In order to argue ﬁrm bounds of similar ﬂavor, consider
+
+                        union bound
+            1 − δM    ≤    (1 −δ)M ≤e−δM                           ( log (1 −)δ ≤−δ )
+                                ≤ e−M /γ( γ δ ∧)1 + ∣ 1 −γδ∣+        ( ∀γ > 0 )
+                                                               / γ         +                                ≤ e−M  + ∣ 1 − γδ ∣
+
+
+
+
+
+                                                     PY (y)   • (24.18) is simply change of measure using i(x;y) = log                                                                                            (i.e., conditioning-unconditioning                                                         PY ∣ X (y ∣)x
+      trick for information density, cf. Proposition 15.1.
+
+   • (24.19):
+
+        1 −γE[exp{−i(X;Y )}1{d(X,Y )≤u}∣X] ≤1 −γE[exp{−i(X;Y )}1{d(X,Y )≤u,i(X;Y )≤log γ}∣X ]
+                                     ≤ 1 − E[ 1{d ( X ,Y )≤u,i(X;Y ) ≤ log γ } ∣ X ]
+                                     = P[d(X,Y ) > u or i(X ; Y ) > log γ∣X ]
+                                     ≤ P[ d( X,Y ) > u ∣X ] + P[ i( X;Y ) > log γ ∣X ]
+
+Plugging (24.19) into (24.16), we have
+
+                       d(X,y0)
+E[d( X,X)]ˆ  ≤ EX ∫      (e−M / γ + P[i(X;Y ) > log γ∣X] + P[d(X,Y ) > u∣X])du
+                      0
+                                             ∞
+          ≤E[d(X,y0)]e−M /γ + E[d(X,y0)P[i(X;Y ) > log γ∣X]] + EX ∫   P[d(X,Y ) > u∣X ])du
+                                                                                   0
+                M /γ                                           + E[d(X,Y )]          = E[d(X ,y0)]e−   + E[d(X,y0 )1{i(X;Y )>log γ}]
+
+
+
+                                         250
+
+===== PDF PAGE 6 =====
+
+   As a side product, we have the following achievability for excess distortion.
+
+Theorem 24.4 (Performance bound of excess-distortion codes). ∀ PY ∣ X, ∀ γ > 0, there exists a code
+X → W → X,ˆ  where W ∈[ M ] and
+                P[d( X,X)ˆ > D] ≤e−M/γ + P[{d(X,Y ) > D } ∪{i (X;Y ) > log γ }]
+
+Proof. Proceed exactly as in the proof of Theorem 24.3, replace (24.11 ) by P [d(X ,Xˆ ) > D ] = P[∀∈j
+[M ],d(X,cj ) > D] = EX[(1 −P[d(X , Y ) ≤D∣X])M], and continue similarly.
+
+    Finally, we are able to prove Theorem 24.2 rigorously by applying Theorem 24.3 to iid sources
+X = Sn and n → ∞:
+
+Proof of Theorem 24.2. Our goal is the achievability: R(D) ≤ Ri ( D ) = ϕS ( D ) .
+  WLOG we can assume that Dmax = E[ d( S,sˆ0 )] achieved at some ﬁxed sˆ0 – this is our default
+reconstruction; otherwise just take any other ﬁxed sequence so that the expectation is ﬁnite. The
+default reconstruction for Sn is sˆn0 = ( sˆ0,...,sˆ0 ) and E[ d( Sn , sˆn0 )] = Dmax < ∞ since the distortion
+is separable.
+   Fix some small δ > 0. Take any P Sˆ∣S such that E[ d( S,Sˆ )] ≤ D − δ. Apply Theorem 24.3 to
+( X,Y ) = (Sn,Snˆ ) with
+
+                            PX = PSn
+
+                                                                 ˆ                                            ∣)S n                               PY ∣X = PSˆn ∣ Sn = ( P S
+                                       log M = n( I( S; Sˆ ) + 2δ )
+                                        log γ = n( I ( S;Sˆ ) + δ )
+                                         1 n
+                              d(X,Y ) = ∑ d(Sj , Sjˆ )
+                                  n j = 1
+                                         y0 = sˆn0
+
+we conclude that there exists a compressor f  ∶ A n → [ M + 1 ] and g ∶[ M + 1] → Aˆn, such that
+    E [d (S n ,g (f (Sn )))] ≤ E[ d( Sn,Snˆ )] + E[ d( Sn ,sˆn0 )] e−M /γ + E[ d( Sn, sˆn0 ) 1 {i( Sn ;Sn                                                                                             ˆ )>log γ }]
+                                         − exp(nδ )                     ≤ D −δ + Dmax e     +E[d( Sn ,sˆn0)1 En ],                      (24.20)
+                                                                                                                        ´¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹ ¸ ¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¶      ´¹¹¹¹¹¹¹¹¹¹¹¹¹      ¸¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹¹ ¹¶                                    →0                                                  →¹¹¹¹¹¹¹¹¹¹0 (later)
+
+where
+                         ⎧
+                         ⎪ 1 n                         WLLN      En = {i(Sn ;Sn)ˆ  > log γ} = ⎨⎪ ∑ i(Sj; ˆSj) > I(S; ˆS) + δ      ÔÔ⇒P[En] →0                                              ⎪⎪⎩n j=1                                                                                                             ⎫⎪⎪⎬⎪⎪⎭
+
+If we can show the expectation in (24.20) vanishes, then there exists an (n,M,D)-code with:
+
+             M = 2n(I(S; ˆS)+2δ), D = D − δ + o(1 ) ≤ D.
+
+To summarize, ∀P                    such that E[ d( S, Sˆ )] ≤ D − δ we have that:                        S∣ˆ S
+
+              R ( D ) ≤(I S ;Sˆ )
+                          ↓0         Ôδ⇒ R (D) ≤ϕS(D−) = ϕS(D).  (continuity, since D > D0 )
+
+
+                                         251
+
+===== PDF PAGE 7 =====
+
+    It remains to show the expectation in (24.20) vanishes. This is a simple consequence of the
+                                                                  L1
+uniform integrability of the sequence {d( Sn,sˆn0 )} .  (Indeed, any sequence V n → V  is uniformly
+integrable.) If you do not know what uniform integrability is, here is a self-contained proof.
+
+Lemma 24.1. For any positive random variable U, deﬁne g(δ) = sup                                                               H∶[H]≤P     δ E[U1H ]. Then1
+                     δ →0
+EU < ∞⇒ g (δ ) ÐÐ→ 0.
+
+                                                                                       b                                            →Ð∞→ 0 by dominated convergenceProof. For any b > 0, E[U1H] ≤E[U1{U>b}]+bδ, where E[√U1{U>b}] ÐÐ
+theorem. Then the proof is completed by setting b = 1 /  δ.
+
+  Now d(Sn, ˆsn0) = n1 ∑Uj, where Uj are iid copies of U. Since E[ U ] = Dmax < ∞ by assumption,
+applying Lemma 24.1 yields E[ d( Sn,sˆn0 ) 1 En ] = n1 ∑E[Uj1En] ≤g(P[En]) →0, since P[En] →0.
+We are done proving the theorem.
+
+Note: It seems that in Section 24.2.1 and in Theorem 24.2 we applied diﬀerent relaxations in
+showing the lower bound, how come they turn out to yield the same tight asymptotic result?
+   This is because the key to both proofs is to estimate the exponent (large deviations) of the
+underlined probabilities in (24.7) and (24.16), respectively. To get the right exponent, as we know,
+the key is to apply tilting (change of measure) to the distribution solving the information projection
+problem (24.9). In the case, when P Y = ( QSˆ ) n = ( P Sˆ ) n is chosen as the solution to rate-distortion
+optimization inf I (S;Sˆ ), the resulting tilting is precisely given by 2−i(X;Y ).
+
+24.3*  Covering lemma
+
+Goal:
+
+
+
+
+
+   In other words:
+
+    1In fact, ⇒is ⇔.
+
+
+
+
+
+                                          252
+
+===== PDF PAGE 8 =====
+
+   Approximate P with Q such that for any function f, ∀ x, we have:
+                   P[f(An,Bn) ≤x] ≈Q[ f (An,Bn) ≤x],  ∣W∣≤2nR.
+
+what is the minimum rate R to achieve this?
+   Some remarks:
+
+   1. The minimal rate will depend (although it is not obvious) on whether the encoder An → W
+     knows about the test that the tester is running (or equivalently whether he knows the function
+     f (⋅, ⋅)).
+
+   2.  If the function is known to be of the form f(An,Bn) = ∑n  f1(Aj,Bj), then evidently the job                                                                     j=1
+      of the encoder is the following: For any realization of the sequence An, we need to generate a
+     sequence Bn such that joint composition (empirical distribution) is very close to PA,B.
+
+   3.  If R = H(A), we can compress An and send it to “B side”, who can reconstruct An perfectly
+     and use that information to produce Bn through PBn ∣ An.
+   4.  If R = H ( B ) , “A side” can generate Bn according to P A,Bn  and send that Bn sequence to the
+    “B side”.
+
+   5. If A ⊥B, we know that R = 0, as “B side” can generate Bn independently.
+
+   Our previous argument turns out to give a sharp answer for the case when encoder is aware of
+the tester’s algorithm. Here is a precise result:
+
+Theorem 24.5 (Covering Lemma). ∀PA,B and R > I(A;B), let C = { c1 ,...,cM } where each
+codeword cj is i.i.d. drawn from distribution PBn. ∀>ϵ   0, for M ≥ 2n (I (A;B )+ϵ) we have that:
+                           P[∃c ∈C such that PAn,cˆ   ≈PA,B] →1
+
+    Stronger form: ∀F
+                      P[∃c ∶(An,c) ∈F] ≥P[(An,Bn) ∈F] +   o(1 )
+              ±
+                                                                       uniform in F
+
+Proof. Following similar arguments of the proof for Theorem 24.3, we have
+              P[∀c ∈C ∶(An,c) ∈/ F ] ≤e−γ + P [{( An ,Bn) ∈/ F } ∪{ i(A n;Bn) > log γ }]
+                               = P [( An, B n ) ∈/ F ] + o( 1)
+      ⇒ P [∀∈Cc    ∶( An,c ) ∈ F ] ≥ P [(An, Bn) ∈ F] + o(1)
+
+
+
+                                          253
+
+===== PDF PAGE 9 =====
+
+                              n                             (B )Note: [Intuition] To generate B  , there are around 2nH    high probability sequences; for each An
+                                       (B ∣A )sequence, there are around 2nH    Bn sequences that have the same joint distribution, therefore, it
+                                                                          nH                                                                                                                                  ( B )                                                                                           2is suﬃcient to describe the class of Bn for each An sequence, and there are around                                                                       = 2nI( A;B )                                                                         nH                                                                                                                                 ( B∣A)                                                                                           2
+classes.
+   Although Covering Lemma is a powerful tool, it does not imply that the constructed joint
+distribution QAnBn can fool any permutation invariant tester. In other words, it is not guaranteed
+that
+                             sup        ∣QAn,Bn(F) −PA,B(F)∣→0.n
+                     F ⊂An×Bn,permut.invar.
+Indeed, a suﬃcient statistic for a permutation invariant tester is a joint type PAn,c.ˆ    Our code
+satisﬁes PAnˆ    ,c ≈ PA,B, but it might happen that PAn,cˆ    although close to PA,B still takes highly
+unlikely values (for example, if we                                        restrict all c to have the same composition P0, the tester√can                              n
+easily detect the problem since PB-measure of all strings of composition P0 cannot exceed O(1/ n) ).
+Formally, to fool permutation invariant tester we need to have small total variation between the
+distribution on the joint types under P and Q. (It is natural to conjecture that rate R = I ( A;B )
+should be suﬃcient to achieve this requirement, though).
+  A related question is about the minimal possible rate (i.e. cardinality of W ∈[2nR ]) required to
+have small total variation:
+                       TV ( QAn,Bn,PABn ) ≤ ϵ                               (24.21)
+
+Note that condition (24.21) guarantees that any tester (permutation invariant or not) is fooled to
+believe he sees the truly iid ( An,Bn ) . The minimal required rate turns out to be (Cuﬀ’2012):
+
+                      R =                 )                                A→minU →I(A,B;UB
+
+a quantity known as Wyner’s common information C (A;B). Showing that Wyner’s common
+information is a lower-bound is not hard. Indeed, since QAn,Bn ≈ PABn  (in TV) we have
+
+                  I(QAt−1,Bt−1,QAtBt ∣ At−1,Bt−1 ) ≈ I (PAt−1,Bt −1,PAtBt ∣ At−1,Bt−1 ) = 0
+
+(Here one needs to use ﬁniteness of the alphabet of A and B and the bounds relating H (P ) − H (Q )
+with TV ( P,Q) ). We have (under Q!)
+
+               nR = H(W) ≥I (An,Bn;W )                                        (24.22)
+
+                                      T
+                             ≥ ∑ I(At,Bt ;W ) −(I A t ,Bt ;At−Bt−11     )                (24.23)
+                                                            t= 1
+                                      T
+                 ≈∑ I(At,Bt;W )                                      (24.24)
+                                                            t =1
+                         ≳nC(A;B)                                            (24.25)
+
+where in the last step we used the crucial observation that under Q there is a Markov chain
+
+                                    At →W →Bt
+
+and that Wyner’s common information PA,B ↦C(A;B) should be continuous in the total variation
+distance on PA,B. Showing achievability is a little more involved.
+
+
+
+
+                                          254
+
+===== PDF PAGE 10 =====
+
+MIT OpenCourseWare
+https://ocw.mit.edu
+
+
+
+6.441 Information Theory
+Spring 2016
+
+
+
+For information about citing these materials or our Terms of Use, visit: https://ocw.mit.edu/terms.

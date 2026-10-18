@@ -2,7 +2,7 @@
 id: lem-dirac-heat-trace-and-mckeen-singer-index
 kind: lemma
 title: "The Dirac heat trace is smooth and its supertrace equals the index"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory

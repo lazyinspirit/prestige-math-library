@@ -2,7 +2,7 @@
 id: thm-general-kl-variational-and-partition-formulas
 kind: theorem
 title: "Variational and finite-partition formulas for measurable-space KL"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

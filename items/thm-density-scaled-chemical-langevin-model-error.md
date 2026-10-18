@@ -24,8 +24,6 @@ sources:
     - title: "Tiejun Li, Lecture 21: Application in chemical reaction kinetics, Applied Stochastic Analysis course notes"
       url: "https://www.math.pku.edu.cn/teachers/litj/notes/appl_stoch/lect21.pdf"
       locator: "§3.2, diffusion scaling and Chemical Langevin Equation, PDF pp. 3–4."
-verification:
-  precheck: pending
 ---
 
 ## Statement

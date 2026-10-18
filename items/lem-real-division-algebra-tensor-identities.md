@@ -2,7 +2,7 @@
 id: lem-real-division-algebra-tensor-identities
 kind: lemma
 title: "Tensor identities for the real division algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-complex-clifford-classification-and-graded-products

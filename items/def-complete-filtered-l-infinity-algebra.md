@@ -2,7 +2,7 @@
 id: def-complete-filtered-l-infinity-algebra
 kind: definition
 title: "Complete filtered L∞-algebra"
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

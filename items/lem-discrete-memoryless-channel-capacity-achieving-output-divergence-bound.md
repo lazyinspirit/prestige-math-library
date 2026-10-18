@@ -2,7 +2,7 @@
 id: lem-discrete-memoryless-channel-capacity-achieving-output-divergence-bound
 kind: lemma
 title: "Capacity-achieving output laws bound every row divergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

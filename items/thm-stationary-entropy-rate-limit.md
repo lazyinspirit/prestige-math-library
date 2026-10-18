@@ -2,7 +2,7 @@
 id: thm-stationary-entropy-rate-limit
 kind: theorem
 title: "Entropy-rate limit for a stationary finite-alphabet source"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

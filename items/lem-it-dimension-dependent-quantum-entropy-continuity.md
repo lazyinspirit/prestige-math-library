@@ -2,7 +2,7 @@
 id: lem-it-dimension-dependent-quantum-entropy-continuity
 kind: lemma
 title: Dimension-dependent quantum entropy continuity and Holevo control
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

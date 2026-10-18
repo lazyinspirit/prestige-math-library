@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-integral-spin-representation-is-split-injective
 kind: lemma
 title: "The integral two-letter Temperley–Lieb representation has a linear left inverse"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

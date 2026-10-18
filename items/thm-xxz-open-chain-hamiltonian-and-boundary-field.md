@@ -2,7 +2,7 @@
 id: thm-xxz-open-chain-hamiltonian-and-boundary-field
 kind: theorem
 title: "The XXZ generator Hamiltonian has the declared Pauli expansion and endpoint field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

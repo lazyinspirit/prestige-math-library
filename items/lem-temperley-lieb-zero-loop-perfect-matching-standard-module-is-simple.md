@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-zero-loop-perfect-matching-standard-module-is-simple
 kind: lemma
 title: "The zero-loop perfect-matching standard module is simple"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

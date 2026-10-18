@@ -2,7 +2,7 @@
 id: lem-root-of-unity-integral-weyl-specialization
 kind: lemma
 title: Root specialization of integral Weyl lattices and their characters
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

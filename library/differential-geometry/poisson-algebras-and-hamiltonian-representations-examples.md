@@ -1,7 +1,7 @@
 ---
 page: poisson-algebras-and-hamiltonian-representations-examples
 title: "Poisson Algebras, Symplectic Brackets, and Hamiltonian Actions: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-quadratic-sl2-comoment-action-on-the-symplectic-plane

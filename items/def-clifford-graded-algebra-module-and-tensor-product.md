@@ -2,7 +2,7 @@
 id: def-clifford-graded-algebra-module-and-tensor-product
 kind: definition
 title: "Graded algebras, graded modules, and the graded tensor product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-complex-clifford-classification-and-graded-products

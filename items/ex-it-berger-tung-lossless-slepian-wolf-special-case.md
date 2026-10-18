@@ -2,7 +2,7 @@
 id: ex-it-berger-tung-lossless-slepian-wolf-special-case
 kind: example
 title: "Berger-Tung inner bound contains the Slepian-Wolf region"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

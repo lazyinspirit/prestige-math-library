@@ -2,7 +2,7 @@
 id: ex-a1-nakajima-hecke-correspondence-as-fundamental-sl2-module
 kind: example
 title: "The A1 Nakajima correspondence in the fundamental sl2 representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

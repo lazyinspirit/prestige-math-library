@@ -2,7 +2,7 @@
 id: lem-finite-iid-log-likelihood-concentrates
 kind: lemma
 title: Finite iid log-likelihood averages concentrate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

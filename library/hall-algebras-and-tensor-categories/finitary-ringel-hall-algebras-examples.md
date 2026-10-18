@@ -1,7 +1,7 @@
 ---
 page: finitary-ringel-hall-algebras-examples
 title: "Finitary Ringel–Hall Algebras: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - finitary-ringel-hall-algebras
 items: []

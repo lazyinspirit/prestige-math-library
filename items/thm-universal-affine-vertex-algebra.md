@@ -2,7 +2,7 @@
 id: thm-universal-affine-vertex-algebra
 kind: theorem
 title: Universal affine vertex algebras exist at every complex level
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

@@ -68,3 +68,32 @@ plus four cross-track reflection/state-preparation interfaces, and 24 worked
 B-page examples. All 334 records remain draft planning. Exact page edges, item
 dependencies, source locators, and remaining proof obligations are recorded in
 the machine inventories and source manifest.
+
+## Topological quantum computing branch
+
+QC25 consumes the existing root tensor/fusion, braided-category, and
+Yang–Baxter interfaces, then adds the positive dagger/Hilbert structure needed
+for unitary fusion spaces. It defines fusion trees, multiplicity-aware F/R
+coordinates, matrix pentagon/hexagon identities, and gauge changes. Its Ising
+and Fibonacci pages fix the exact fusion and phase conventions used by later
+gate calculations. The matrix coherence identities are derived in the section
+from the root associator and braiding axioms by taking coordinates in every
+semisimple summand and retaining multiplicity indices. The displayed Ising
+claims are confined to the three-σ sector and the separately proved
+Majorana/parity representation; no all-label Ising table is used as a premise.
+QC26 consumes QC25 plus the finite unitary, Clifford, and approximate-synthesis
+interfaces. It distinguishes honest braid actions from projective gates and
+proves Ising's Clifford restriction and Fibonacci single-qubit density. Exact
+local Lie-rank certificates in dimensions five and eight, plus a
+subdirect-product argument, prove joint `SU(5)×SU(8)` density for both local
+charge blocks. The full fusion-space spectator decomposition extends the
+approximate target uniformly over every spectator path; a braid-dependent
+one-qubit extension handles prior leakage. Together with exact QSD this gives
+arbitrary-size triple-encoded projective universality and summed
+logical-error/leakage bounds, without any exact leakage-free entangler. Efficient joint
+`SU(5)×SU(8)` compilation remains a separate resource obligation. QC27
+branches from QC18–QC20 to construct the periodic toric code,
+its excitations, strings, logical operators, distance, exact local
+indistinguishability, finite Hamiltonian gap, and constant energy-barrier
+upper bound. Its mathematical finite-lattice claims do not imply that a
+material realizes a stable topological phase.

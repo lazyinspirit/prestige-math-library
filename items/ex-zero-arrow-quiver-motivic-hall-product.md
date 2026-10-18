@@ -2,7 +2,7 @@
 id: ex-zero-arrow-quiver-motivic-hall-product
 kind: example
 title: "The motivic Hall product for a one-vertex zero-arrow quiver"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

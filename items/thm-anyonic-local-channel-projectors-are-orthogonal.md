@@ -2,7 +2,7 @@
 id: thm-anyonic-local-channel-projectors-are-orthogonal
 kind: theorem
 title: "Local channel projections are orthogonal idempotents"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: thm-three-cochain-gauge-equivalence-2vect-g
 kind: theorem
 title: A normalized 3-cochain gives the gauge equivalence of 2Vect_G^omega
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

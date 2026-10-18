@@ -2,7 +2,7 @@
 id: lem-framed-circles-in-four-dimensional-two-handle-traces-move-to-the-base
 kind: lemma
 title: "Framed circles in a four-dimensional two-handle trace move to its fixed base"
-status: draft
+status: published
 dependency_level: 6
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

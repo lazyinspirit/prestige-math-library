@@ -2,7 +2,7 @@
 id: thm-tenfold-real-and-complex-clifford-extension-table
 kind: theorem
 title: Tenfold real and complex Clifford-extension table
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations

@@ -2,7 +2,7 @@
 id: lem-it-type-class-probability-bounds
 kind: lemma
 title: "Finite probability bounds for an empirical type"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-circumcision-meridian-pair-preserves-relative-three-manifold
 kind: lemma
 title: "Circumcision by a framed core and zero-framed meridian preserves the boundary parametrization"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

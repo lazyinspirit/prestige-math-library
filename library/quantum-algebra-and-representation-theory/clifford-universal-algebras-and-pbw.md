@@ -1,7 +1,7 @@
 ---
 page: clifford-universal-algebras-and-pbw
 title: "Universal Clifford Algebras and Their PBW Basis"
-status: draft
+status: published
 items:
   - def-clifford-algebra-of-a-quadratic-space
   - lem-clifford-exterior-wedge-contraction-relations

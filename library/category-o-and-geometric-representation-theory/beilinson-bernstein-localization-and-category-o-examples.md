@@ -1,7 +1,7 @@
 ---
 page: beilinson-bernstein-localization-and-category-o-examples
 title: 'Beilinson–Bernstein Localization and Category O: Examples and Counterexamples'
-status: draft
+status: published
 items:
 - cex-pa36-positive-twist-global-sections-fail
 - ex-pa36-sl2-twisted-differential-operators

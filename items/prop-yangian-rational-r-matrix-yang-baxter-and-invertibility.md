@@ -2,7 +2,7 @@
 id: prop-yangian-rational-r-matrix-yang-baxter-and-invertibility
 kind: proposition
 title: "The type-A rational R-matrix satisfies Yang–Baxter and has exact singular parameters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

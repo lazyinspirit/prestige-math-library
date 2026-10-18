@@ -2,7 +2,7 @@
 id: lem-root-unity-quantum-lucas-and-divided-power-generation
 kind: lemma
 title: Quantum Lucas and generation of specialized divided powers
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -2,7 +2,7 @@
 id: lem-potts-q2-q3-q4-matrices-satisfy-temperley-lieb
 kind: lemma
 title: "The Q = 2, 3, 4 open Potts matrices satisfy Temperley–Lieb"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

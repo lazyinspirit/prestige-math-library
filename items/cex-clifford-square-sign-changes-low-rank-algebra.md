@@ -2,7 +2,7 @@
 id: cex-clifford-square-sign-changes-low-rank-algebra
 kind: counterexample
 title: "Changing the Clifford square sign changes the low-rank algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations-examples

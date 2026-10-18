@@ -2,7 +2,7 @@
 id: lem-pa36-nilpotent-normality-and-springer-functions
 kind: lemma
 title: Normality of the nilpotent cone and Springer functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

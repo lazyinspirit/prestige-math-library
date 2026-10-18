@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-root-interstandard-hom-spaces
 kind: theorem
 title: "All Hom spaces between complex Temperley–Lieb standards"
-status: draft
+status: published
 dependency_level: 11
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

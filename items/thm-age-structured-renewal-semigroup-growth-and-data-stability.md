@@ -18,8 +18,6 @@ axiom_base: No choice axiom is used; all estimates are scalar L1 inequalities.
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Benoît Perthame, Introduction to Structured Equations in Biology, full lecture notes"

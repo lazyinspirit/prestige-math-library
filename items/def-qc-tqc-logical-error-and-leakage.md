@@ -2,7 +2,7 @@
 id: def-qc-tqc-logical-error-and-leakage
 kind: definition
 title: Logical block error and leakage amplitude
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

@@ -2,7 +2,7 @@
 id: def-quiver-potential-and-monodromic-vanishing-cycle-data
 kind: definition
 title: "Quiver potentials and realized monodromic coefficient data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

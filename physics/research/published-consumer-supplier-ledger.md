@@ -4,8 +4,20 @@ These records identify defects in read-only published mathematics. A closed Step
 
 ## Deduplicated classification index
 
+
 | Published item | Classification | Status | Record |
 |---|---|---|---|
+| `lem-gr-metric-divergence-and-density-formula` | missing publication audit/verification; nonfatal to reviewed C¹ use | OPEN publication-owner maintenance | [physics-remaining-80-2026-10-17-batch-50-density-marker](#physics-remaining-80-2026-10-17-batch-50-density-marker) |
+| `thm-sine-cosine-signs-monotonicity-and-ranges` | nonfatal: omitted integer quantifier in Statement | OPEN published-owner maintenance; nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-17-trig-quantifier](#physics-remaining-80-2026-10-17-batch-17-trig-quantifier) |
+| `qm-math-orbital-and-spin` | nonfatal: stale universal draft-status sentence | OPEN published-owner maintenance; nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-17-qm-draft-wording](#physics-remaining-80-2026-10-17-batch-17-qm-draft-wording) |
+| `def-em-electromagnetic-tensor` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-def-em-electromagnetic-tensor](#physics-remaining-80-2026-10-17-batch-1-marker-def-em-electromagnetic-tensor) |
+| `def-em-si-conventions` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-def-em-si-conventions](#physics-remaining-80-2026-10-17-batch-1-marker-def-em-si-conventions) |
+| `post-em-minkowski-physical-model` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-post-em-minkowski-physical-model](#physics-remaining-80-2026-10-17-batch-1-marker-post-em-minkowski-physical-model) |
+| `post-em-vacuum-maxwell` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-post-em-vacuum-maxwell](#physics-remaining-80-2026-10-17-batch-1-marker-post-em-vacuum-maxwell) |
+| `post-sr-inertial-covariance` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-post-sr-inertial-covariance](#physics-remaining-80-2026-10-17-batch-1-marker-post-sr-inertial-covariance) |
+| `pthm-em-tensor-maxwell-equivalence` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-pthm-em-tensor-maxwell-equivalence](#physics-remaining-80-2026-10-17-batch-1-marker-pthm-em-tensor-maxwell-equivalence) |
+| `def-em-sources` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-def-em-sources](#physics-remaining-80-2026-10-17-batch-1-marker-def-em-sources) |
+| `post-em-lorentz-coupling` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-post-em-lorentz-coupling](#physics-remaining-80-2026-10-17-batch-1-marker-post-em-lorentz-coupling) |
 | `thm-baire-category-for-complete-metric-spaces` | nonfatal: omitted DC-to-countable-choice justification for center selection | OPEN mathematics-owner maintenance; Step 3a nonfatal-recorded | `physics-td-qft-rpm-62-2026-10-14-b63-baire-centers` |
 | `thm-baire-category-for-complete-metric-spaces` | nonfatal: omitted DC to countable-choice inference for centres | OPEN mathematics-owner maintenance; Step 3a nonfatal-recorded | `physics-td-qft-rpm-62-2026-10-14-b62-baire-centres` |
 | `thm-gr-weak-field-scaled-trajectory-limit` | nonfatal: omitted vector FTC and integral norm justification | OPEN mathematics-owner maintenance; Step 3a nonfatal-recorded | `physics-td-qft-rpm-62-2026-10-14-b31-published-vector-integral` |
@@ -28,6 +40,28 @@ These records identify defects in read-only published mathematics. A closed Step
 | `lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple` | nonfatal: row/column mismatch in equivalent Statement | Open mathematics-owner maintenance; main functional identity adequate | [physics-cm-qm-gr-79-2026-10-11-b4-transpose-functional-typing](#physics-cm-qm-gr-79-2026-10-11-b4-transpose-functional-typing) |
 | `def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis` | nonfatal: display/proof layout | open mathematics-owner maintenance; adjudication nonfatal-recorded | [physics-cm-qm-gr-79-2026-10-11-b57-orthonormal-layout](#physics-cm-qm-gr-79-2026-10-11-b57-orthonormal-layout) |
 | `cor-cauchy-schwarz-inequality-for-l-two` | nonfatal: display/proof layout | open mathematics-owner maintenance; adjudication nonfatal-recorded | [physics-cm-qm-gr-79-2026-10-11-b57-cauchy-schwarz-layout](#physics-cm-qm-gr-79-2026-10-11-b57-cauchy-schwarz-layout) |
+| `lem-gr-einstein-residual-and-subsidiary-identity` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-einstein-residual-and-subsidiary-identity](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-einstein-residual-and-subsidiary-identity) |
+| `lem-gr-globally-hyperbolic-causal-structure` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-globally-hyperbolic-causal-structure](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-globally-hyperbolic-causal-structure) |
+| `lem-gr-local-cauchy-neighborhood` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-local-cauchy-neighborhood](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-local-cauchy-neighborhood) |
+| `lem-gr-periodic-sobolev-algebra` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-periodic-sobolev-algebra](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-periodic-sobolev-algebra) |
+| `lem-gr-periodic-sobolev-embedding` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-periodic-sobolev-embedding](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-periodic-sobolev-embedding) |
+| `lem-gr-reduced-einstein-principal-part` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-reduced-einstein-principal-part](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-reduced-einstein-principal-part) |
+| `lem-gr-smooth-composition-and-commutator-estimates` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-smooth-composition-and-commutator-estimates](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-smooth-composition-and-commutator-estimates) |
+| `lem-gr-time-separation-maximizers` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-time-separation-maximizers](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-time-separation-maximizers) |
+| `thm-gr-auxiliary-complete-riemannian-metric` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-auxiliary-complete-riemannian-metric](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-auxiliary-complete-riemannian-metric) |
+| `thm-gr-cauchy-surface-implies-globally-hyperbolic` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-cauchy-surface-implies-globally-hyperbolic](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-cauchy-surface-implies-globally-hyperbolic) |
+| `thm-gr-convex-normal-neighborhoods` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-convex-normal-neighborhoods](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-convex-normal-neighborhoods) |
+| `thm-gr-limit-curve-two-endpoints` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-limit-curve-two-endpoints](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-limit-curve-two-endpoints) |
+| `thm-gr-local-geodesics-and-exponential-map` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-local-geodesics-and-exponential-map](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-local-geodesics-and-exponential-map) |
+| `thm-gr-local-geometric-development` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-local-geometric-development](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-local-geometric-development) |
+| `thm-gr-normal-neighborhood-causal-cone` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-normal-neighborhood-causal-cone](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-normal-neighborhood-causal-cone) |
+| `thm-gr-periodic-symmetric-hyperbolic-existence` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-existence](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-existence) |
+| `thm-gr-periodic-symmetric-hyperbolic-smooth-persistence` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-smooth-persistence](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-smooth-persistence) |
+| `thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability) |
+| `thm-gr-smooth-cauchy-temporal-splitting` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-smooth-cauchy-temporal-splitting](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-smooth-cauchy-temporal-splitting) |
+| `thm-gr-smooth-maximal-globally-hyperbolic-development` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-smooth-maximal-globally-hyperbolic-development](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-smooth-maximal-globally-hyperbolic-development) |
+| `thm-gr-volume-time-function` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-volume-time-function](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-volume-time-function) |
+| `thm-gr-constraint-equations-in-normal-frame` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-constraint-equations-in-normal-frame](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-constraint-equations-in-normal-frame) |
 
 
 
@@ -48,7 +82,7 @@ These records identify defects in read-only published mathematics. A closed Step
 
 | `def-gr-smooth-lorentzian-objects` | nonfatal to consumed deduction: missing publication audit/verification | OPEN owner publication maintenance; adjudication nonfatal-recorded | [physics-td-qft-rpm-62-2026-10-14-b24-published-marker-1](#physics-td-qft-rpm-62-2026-10-14-b24-published-marker-1) |
 | `lem-em-particle-curve-variation` | nonfatal to consumed deduction: missing publication audit/verification | OPEN owner publication maintenance; adjudication nonfatal-recorded | [physics-td-qft-rpm-62-2026-10-14-b24-published-marker-2](#physics-td-qft-rpm-62-2026-10-14-b24-published-marker-2) |
-| `lem-gr-future-causal-classification-by-a-timelike-field` | nonfatal to consumed deduction: missing publication audit/verification | OPEN owner publication maintenance; adjudication nonfatal-recorded | [physics-td-qft-rpm-62-2026-10-14-b24-published-marker-3](#physics-td-qft-rpm-62-2026-10-14-b24-published-marker-3) |
+| `lem-gr-future-causal-classification-by-a-timelike-field` | nonfatal to consumed deduction: missing publication audit/verification | OPEN owner publication maintenance; adjudication nonfatal-recorded | [physics-td-qft-rpm-62-2026-10-14-b24-published-marker-3](#physics-td-qft-rpm-62-2026-10-14-b24-published-marker-3)  [physics-remaining-80-2026-10-17-batch-8-published-marker-16](#physics-remaining-80-2026-10-17-batch-8-published-marker-16) |
 | `pthm-sr-momentum-and-four-force` | nonfatal to consumed deduction: missing publication audit/verification | OPEN owner publication maintenance; adjudication nonfatal-recorded | [physics-td-qft-rpm-62-2026-10-14-b24-published-marker-4](#physics-td-qft-rpm-62-2026-10-14-b24-published-marker-4) |
 | `thm-gr-compact-metric-and-timelike-curve-variation` | nonfatal to consumed deduction: missing publication audit/verification | OPEN owner publication maintenance; adjudication nonfatal-recorded | [physics-td-qft-rpm-62-2026-10-14-b24-published-marker-5](#physics-td-qft-rpm-62-2026-10-14-b24-published-marker-5) |
 | `thm-gr-nondegenerate-levi-civita-and-tensor-derivative` | nonfatal to consumed deduction: missing publication audit/verification | OPEN owner publication maintenance; adjudication nonfatal-recorded | [physics-td-qft-rpm-62-2026-10-14-b24-published-marker-6](#physics-td-qft-rpm-62-2026-10-14-b24-published-marker-6) |
@@ -57,6 +91,25 @@ These records identify defects in read-only published mathematics. A closed Step
 | `thm-nrqm-oscillator-multidimensional-oscillator-completeness` | nonfatal: citation-inaccurate | OPEN mathematics-owner maintenance; adjudication nonfatal-recorded | `physics-td-qft-rpm-62-2026-10-14-b59-published-1` |
 
 | `thm-c-c-infinity-rn-is-dense-in-l-p-of-rn` | nonfatal: ill-formed | OPEN mathematics-owner maintenance; adjudication nonfatal-recorded | `physics-td-qft-rpm-62-2026-10-14-b59-published-2` |
+
+| `lem-gr-reduced-einstein-principal-part` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-1](#physics-remaining-80-2026-10-17-batch-8-published-marker-1) |
+| `lem-gr-einstein-residual-and-subsidiary-identity` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-2](#physics-remaining-80-2026-10-17-batch-8-published-marker-2) |
+| `thm-gr-local-symmetric-hyperbolic-well-posedness` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-3](#physics-remaining-80-2026-10-17-batch-8-published-marker-3) |
+| `thm-gr-periodic-symmetric-hyperbolic-existence` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-4](#physics-remaining-80-2026-10-17-batch-8-published-marker-4) |
+| `lem-gr-galerkin-projection-properties` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-5](#physics-remaining-80-2026-10-17-batch-8-published-marker-5) |
+| `lem-gr-galerkin-ode-local-solution` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-6](#physics-remaining-80-2026-10-17-batch-8-published-marker-6) |
+| `lem-gr-galerkin-energy-inequality` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-7](#physics-remaining-80-2026-10-17-batch-8-published-marker-7) |
+| `lem-gr-galerkin-time-derivative-bound` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-8](#physics-remaining-80-2026-10-17-batch-8-published-marker-8) |
+| `lem-gr-galerkin-compactness` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-9](#physics-remaining-80-2026-10-17-batch-8-published-marker-9) |
+| `lem-gr-galerkin-limit-is-classical-solution` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-10](#physics-remaining-80-2026-10-17-batch-8-published-marker-10) |
+| `lem-gr-periodic-sobolev-embedding` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-11](#physics-remaining-80-2026-10-17-batch-8-published-marker-11) |
+| `thm-gr-constraint-equations-in-normal-frame` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-12](#physics-remaining-80-2026-10-17-batch-8-published-marker-12) |
+| `thm-gr-local-geometric-development` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-13](#physics-remaining-80-2026-10-17-batch-8-published-marker-13) |
+| `thm-gr-density-divergence-and-finite-chain-flux` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-14](#physics-remaining-80-2026-10-17-batch-8-published-marker-14) |
+| `lem-gr-observer-projection-decomposition` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-15](#physics-remaining-80-2026-10-17-batch-8-published-marker-15) |
+| `lem-timelike-cone-has-two-convex-components` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-17](#physics-remaining-80-2026-10-17-batch-8-published-marker-17) |
+| `lem-lorentz-form-has-orthonormal-basis` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-18](#physics-remaining-80-2026-10-17-batch-8-published-marker-18) |
+| `the-exterior-derivative-and-cartan-calculus` | nonfatal: published page calls itself draft | OPEN mathematics-owner maintenance; Step 3a nonfatal-recorded | `physics-remaining-80-2026-10-17-batch-4-published-cartan-draft-wording` |
 
 ## physics-em-sr-40-2026-10-08-b20-zero-direction
 
@@ -560,115 +613,15 @@ Evidence: Baire Proof 2.1 applies DC to obtain nested nonempty balls, then selec
 
 Status: confirmed_nonfatal; closed adjudication row `physics-td-qft-rpm-62-2026-10-14-3a-batch-63-baire-centers`; OPEN mathematics-owner maintenance. Repair strategy: cite and apply the existing DC=>AC_omega supplier, adding it to the original mathematical dependency list, or include centers and radii in the DC recursion states. Reconcile the immutable import only outside the active physics run. No published repair is claimed. Full evidence: `research/physics-td-qft-rpm-62-2026-10-14-alpha-batch-63-3a.md`.
 
-| `lem-gr-metric-divergence-and-density-formula` | missing publication audit/verification; nonfatal to reviewed C¹ use | OPEN publication-owner maintenance | [physics-remaining-80-2026-10-17-batch-50-density-marker](#physics-remaining-80-2026-10-17-batch-50-density-marker) |
-
-| `thm-sine-cosine-signs-monotonicity-and-ranges` | nonfatal: omitted integer quantifier in Statement | OPEN published-owner maintenance; nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-17-trig-quantifier](#physics-remaining-80-2026-10-17-batch-17-trig-quantifier) |
-
-| `qm-math-orbital-and-spin` | nonfatal: stale universal draft-status sentence | OPEN published-owner maintenance; nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-17-qm-draft-wording](#physics-remaining-80-2026-10-17-batch-17-qm-draft-wording) |
-
-| `def-em-electromagnetic-tensor` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-def-em-electromagnetic-tensor](#physics-remaining-80-2026-10-17-batch-1-marker-def-em-electromagnetic-tensor) |
-
-| `def-em-si-conventions` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-def-em-si-conventions](#physics-remaining-80-2026-10-17-batch-1-marker-def-em-si-conventions) |
-
-| `post-em-minkowski-physical-model` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-post-em-minkowski-physical-model](#physics-remaining-80-2026-10-17-batch-1-marker-post-em-minkowski-physical-model) |
-
-| `post-em-vacuum-maxwell` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-post-em-vacuum-maxwell](#physics-remaining-80-2026-10-17-batch-1-marker-post-em-vacuum-maxwell) |
-
-| `post-sr-inertial-covariance` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-post-sr-inertial-covariance](#physics-remaining-80-2026-10-17-batch-1-marker-post-sr-inertial-covariance) |
-
-| `pthm-em-tensor-maxwell-equivalence` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-pthm-em-tensor-maxwell-equivalence](#physics-remaining-80-2026-10-17-batch-1-marker-pthm-em-tensor-maxwell-equivalence) |
-
-| `def-em-sources` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-def-em-sources](#physics-remaining-80-2026-10-17-batch-1-marker-def-em-sources) |
-
-| `post-em-lorentz-coupling` | missing required publication review evidence; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-1-marker-post-em-lorentz-coupling](#physics-remaining-80-2026-10-17-batch-1-marker-post-em-lorentz-coupling) |
-
-| `lem-gr-einstein-residual-and-subsidiary-identity` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-einstein-residual-and-subsidiary-identity](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-einstein-residual-and-subsidiary-identity) |
-
-| `lem-gr-globally-hyperbolic-causal-structure` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-globally-hyperbolic-causal-structure](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-globally-hyperbolic-causal-structure) |
-
-| `lem-gr-local-cauchy-neighborhood` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-local-cauchy-neighborhood](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-local-cauchy-neighborhood) |
-
-| `lem-gr-periodic-sobolev-algebra` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-periodic-sobolev-algebra](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-periodic-sobolev-algebra) |
-
-| `lem-gr-periodic-sobolev-embedding` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-periodic-sobolev-embedding](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-periodic-sobolev-embedding) |
-
-| `lem-gr-reduced-einstein-principal-part` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-reduced-einstein-principal-part](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-reduced-einstein-principal-part) |
-
-| `lem-gr-smooth-composition-and-commutator-estimates` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-smooth-composition-and-commutator-estimates](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-smooth-composition-and-commutator-estimates) |
-
-| `lem-gr-time-separation-maximizers` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-time-separation-maximizers](#physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-time-separation-maximizers) |
-
-| `thm-gr-auxiliary-complete-riemannian-metric` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-auxiliary-complete-riemannian-metric](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-auxiliary-complete-riemannian-metric) |
-
-| `thm-gr-cauchy-surface-implies-globally-hyperbolic` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-cauchy-surface-implies-globally-hyperbolic](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-cauchy-surface-implies-globally-hyperbolic) |
-
-| `thm-gr-convex-normal-neighborhoods` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-convex-normal-neighborhoods](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-convex-normal-neighborhoods) |
-
-| `thm-gr-limit-curve-two-endpoints` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-limit-curve-two-endpoints](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-limit-curve-two-endpoints) |
-
-| `thm-gr-local-geodesics-and-exponential-map` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-local-geodesics-and-exponential-map](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-local-geodesics-and-exponential-map) |
-
-| `thm-gr-local-geometric-development` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-local-geometric-development](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-local-geometric-development) |
-
-| `thm-gr-normal-neighborhood-causal-cone` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-normal-neighborhood-causal-cone](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-normal-neighborhood-causal-cone) |
-
-| `thm-gr-periodic-symmetric-hyperbolic-existence` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-existence](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-existence) |
-
-| `thm-gr-periodic-symmetric-hyperbolic-smooth-persistence` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-smooth-persistence](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-smooth-persistence) |
-
-| `thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability) |
-
-| `thm-gr-smooth-cauchy-temporal-splitting` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-smooth-cauchy-temporal-splitting](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-smooth-cauchy-temporal-splitting) |
-
-| `thm-gr-smooth-maximal-globally-hyperbolic-development` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-smooth-maximal-globally-hyperbolic-development](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-smooth-maximal-globally-hyperbolic-development) |
-
-| `thm-gr-volume-time-function` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-volume-time-function](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-volume-time-function) |
-
-| `thm-gr-constraint-equations-in-normal-frame` | missing required published audit marker; nonfatal to conditional owned use | OPEN owner publication maintenance | [physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-constraint-equations-in-normal-frame](#physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-constraint-equations-in-normal-frame) |
-
-| `lem-gr-future-causal-classification-by-a-timelike-field` | nonfatal to consumed deduction: missing publication audit/verification | OPEN owner publication maintenance; adjudication nonfatal-recorded | [physics-td-qft-rpm-62-2026-10-14-b24-published-marker-3](#physics-td-qft-rpm-62-2026-10-14-b24-published-marker-3)  [physics-remaining-80-2026-10-17-batch-8-published-marker-16](#physics-remaining-80-2026-10-17-batch-8-published-marker-16) |
-
-| `lem-gr-reduced-einstein-principal-part` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-1](#physics-remaining-80-2026-10-17-batch-8-published-marker-1) |
-
-| `lem-gr-einstein-residual-and-subsidiary-identity` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-2](#physics-remaining-80-2026-10-17-batch-8-published-marker-2) |
-
-| `thm-gr-local-symmetric-hyperbolic-well-posedness` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-3](#physics-remaining-80-2026-10-17-batch-8-published-marker-3) |
-
-| `thm-gr-periodic-symmetric-hyperbolic-existence` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-4](#physics-remaining-80-2026-10-17-batch-8-published-marker-4) |
-
-| `lem-gr-galerkin-projection-properties` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-5](#physics-remaining-80-2026-10-17-batch-8-published-marker-5) |
-
-| `lem-gr-galerkin-ode-local-solution` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-6](#physics-remaining-80-2026-10-17-batch-8-published-marker-6) |
-
-| `lem-gr-galerkin-energy-inequality` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-7](#physics-remaining-80-2026-10-17-batch-8-published-marker-7) |
-
-| `lem-gr-galerkin-time-derivative-bound` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-8](#physics-remaining-80-2026-10-17-batch-8-published-marker-8) |
-
-| `lem-gr-galerkin-compactness` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-9](#physics-remaining-80-2026-10-17-batch-8-published-marker-9) |
-
-| `lem-gr-galerkin-limit-is-classical-solution` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-10](#physics-remaining-80-2026-10-17-batch-8-published-marker-10) |
-
-| `lem-gr-periodic-sobolev-embedding` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-11](#physics-remaining-80-2026-10-17-batch-8-published-marker-11) |
-
-| `thm-gr-constraint-equations-in-normal-frame` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-12](#physics-remaining-80-2026-10-17-batch-8-published-marker-12) |
-
-| `thm-gr-local-geometric-development` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-13](#physics-remaining-80-2026-10-17-batch-8-published-marker-13) |
-
-| `thm-gr-density-divergence-and-finite-chain-flux` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-14](#physics-remaining-80-2026-10-17-batch-8-published-marker-14) |
-
-| `lem-gr-observer-projection-decomposition` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-15](#physics-remaining-80-2026-10-17-batch-8-published-marker-15) |
-
-| `lem-timelike-cone-has-two-convex-components` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-17](#physics-remaining-80-2026-10-17-batch-8-published-marker-17) |
-
-| `lem-lorentz-form-has-orthonormal-basis` | nonfatal to reviewed deduction: missing published review evidence | OPEN owner publication maintenance; Step 3a nonfatal-recorded | [physics-remaining-80-2026-10-17-batch-8-published-marker-18](#physics-remaining-80-2026-10-17-batch-8-published-marker-18) |
-
-| `the-exterior-derivative-and-cartan-calculus` | nonfatal: published page calls itself draft | OPEN mathematics-owner maintenance; Step 3a nonfatal-recorded | `physics-remaining-80-2026-10-17-batch-4-published-cartan-draft-wording` |
-
 ## physics-remaining-80-2026-10-17-batch-8-publication-maintenance
+
+The following 18 records preserve genuine missing-review findings. They close only the local nonfatal dispositions, not publication maintenance. The classification index keeps one entry per published item and links this additional consumer review where an older record exists.
 
 ## physics-remaining-80-2026-10-17-batch-8-published-marker-1
 
 Published ID: `lem-gr-reduced-einstein-principal-part`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-harmonic-gauge-and-reduced-equations, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-curvature-tensor-and-derived-tensors, def-gr-tensor-fields-and-components, def-gr-inverse-metric-and-musical-isomorphisms, lem-gr-contracted-commutator-identity, def-christoffel-symbols-of-an-affine-connection, def-ck-and-multi-index-notation-in-several-variables`.
+
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Principal part (a) correctly retains second-jet coefficients in the linearization remainder; (b), proof 3.2–4.1, permits algebraic coupled stress and gives the explicit positive metric block on g00<0 and positive inverse spatial block. Consumer 1.1 initializes the derivative relations directly. Current raw SHA256 0b7d4a30a289836be2af027e70f2206164e753abf6bff491b09903ec0a937462. Published/imported carrier unchanged.
 
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:1` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
@@ -676,11 +629,15 @@ Status: OPEN owner publication maintenance; local finding disposition `confirmed
 
 Published ID: `lem-gr-einstein-residual-and-subsidiary-identity`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-harmonic-gauge-and-reduced-equations, def-gr-curvature-tensor-and-derived-tensors, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, thm-gr-second-bianchi-and-divergence-free-einstein, lem-gr-contracted-commutator-identity, def-gr-inverse-metric-and-musical-isomorphisms, def-ck-and-multi-index-notation-in-several-variables`.
 
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Trace algebra in 1.1 cancels both cosmological terms and stress trace; 1.2–3.1 use conserved stress and the contracted covector commutator to obtain Box H+Ric(H)=0. Consumer 7.1 explicitly extends only these finite-jet identities to its C3 metric. Its distinct 8.1 energy-state repair is recorded separately. Current raw SHA256 a634b57c35a274f10fccd1f2db3466f5ce7e6e4a02d1ee10b67bc28d6aa754fc. Published/imported carrier unchanged.
+
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:2` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
 ## physics-remaining-80-2026-10-17-batch-8-published-marker-3
 
 Published ID: `thm-gr-local-symmetric-hyperbolic-well-posedness`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-periodic-torus-and-sobolev-spaces, def-gr-periodic-symmetric-hyperbolic-system, thm-gr-periodic-symmetric-hyperbolic-existence, thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability, thm-gr-periodic-symmetric-hyperbolic-smooth-persistence, lem-gr-finite-speed-independence-of-extension, def-ck-and-multi-index-notation-in-several-variables, def-countable-choice, lem-gr-galerkin-limit-is-classical-solution, lem-gr-smooth-composition-and-commutator-estimates, thm-divergence-theorem-for-bounded-piecewise-c-one-domains, thm-gronwall-integral-inequality`.
+
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Local existence (a) is the periodic existence conclusion, not an unrestricted noncompact cylinder theorem. Proof 2.1 subtracts composed coefficients and uses a state cutoff and the flat-dual-norm cone condition; consumer 2.1 uses compact torus existence and common compact bounds. Current raw SHA256 5f19aa1ef93fc12fefc61b531a34ec83d3153ddcf3fd54e2369e094f227f81e8. Published/imported carrier unchanged.
 
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:3` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
@@ -688,11 +645,15 @@ Status: OPEN owner publication maintenance; local finding disposition `confirmed
 
 Published ID: `thm-gr-periodic-symmetric-hyperbolic-existence`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-periodic-torus-and-sobolev-spaces, def-gr-periodic-symmetric-hyperbolic-system, def-gr-galerkin-fourier-projection, lem-gr-galerkin-ode-local-solution, lem-gr-galerkin-energy-inequality, lem-gr-galerkin-time-derivative-bound, lem-gr-galerkin-compactness, lem-gr-galerkin-limit-is-classical-solution, lem-gr-galerkin-projection-properties, lem-gr-periodic-sobolev-embedding, def-countable-choice`.
 
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Proof 1.1 first makes only sufficiently high Fourier projections admissible; 1.2 fixes energy margins before T; 2.1 excludes norm and value first exits in both directions; 3.1 invokes the actual compactness and classical-limit statements. Empty data class and R=0 are explicitly allowed. Current raw SHA256 ff6aea43f1eab579ff1e4af89e1d773e41955c861e1d8e63a367ce247e27190f. Published/imported carrier unchanged.
+
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:4` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
 ## physics-remaining-80-2026-10-17-batch-8-published-marker-5
 
 Published ID: `lem-gr-galerkin-projection-properties`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-periodic-torus-and-sobolev-spaces, lem-gr-periodic-fourier-differentiation-and-norm-equivalence, def-gr-galerkin-fourier-projection, def-ck-and-multi-index-notation-in-several-variables, def-countable-choice`.
+
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Finite Fourier coefficients establish self-adjointness, idempotence and derivative commutation; positive weighted sums give contraction and tail convergence at all nonnegative orders. Proof 2.1 tail bound applies also at s=1 and N=0; its cosine witness justifies rate sharpness. Current raw SHA256 43387a5673de03600ba833b884008f16123edd3859f8f68a7d1133c3b6d0c3e3. Published/imported carrier unchanged.
 
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:5` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
@@ -700,11 +661,15 @@ Status: OPEN owner publication maintenance; local finding disposition `confirmed
 
 Published ID: `lem-gr-galerkin-ode-local-solution`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-periodic-torus-and-sobolev-spaces, def-gr-periodic-symmetric-hyperbolic-system, def-gr-galerkin-fourier-projection, lem-gr-galerkin-projection-properties, lem-gr-positive-definite-symmetric-matrix-bounds, lem-gr-smooth-composition-and-commutator-estimates, thm-picard-lindelof-local-existence-and-uniqueness, thm-smooth-dependence-of-ode-solutions-on-parameters, def-ck-euclidean-maps-and-diffeomorphisms, thm-heine-borel-rn, thm-extreme-value-metric, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, def-countable-choice`.
 
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Only cutoffs with admissible projected datum are asserted. The positive finite-dimensional mass matrix is invertible; its smooth inverse gives Picard–Lindelof. At a finite endpoint interior to the coefficient time interval, compact coordinate bounds give a limit and uniqueness gluing beyond it. Current raw SHA256 0e408ebced7ea833b7c50d325d6b44f7235bb718144e8930c675cb131156893d. Published/imported carrier unchanged.
+
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:6` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
 ## physics-remaining-80-2026-10-17-batch-8-published-marker-7
 
 Published ID: `lem-gr-galerkin-energy-inequality`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-periodic-torus-and-sobolev-spaces, def-gr-periodic-symmetric-hyperbolic-system, def-gr-galerkin-fourier-projection, lem-gr-galerkin-projection-properties, lem-gr-positive-definite-symmetric-matrix-bounds, lem-gr-smooth-composition-and-commutator-estimates, lem-gr-galerkin-ode-local-solution, lem-gr-galerkin-time-derivative-bound, thm-gronwall-integral-inequality, def-ck-and-multi-index-notation-in-several-variables, def-countable-choice`.
+
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Proof 1.2 removes the projection only when paired with a vector in X_N, expands the A0 time commutator, and integrates the highest spatial derivatives by parts. L3 uses the supplied order-s commutator and time derivative bounds; hence the stated estimate has constants depending on the norm ball, not on N. Current raw SHA256 ff5f41a9a2b22250b0bb568532fa010c61d3ed0efcbf6a6673ae59c12f51ad98. Published/imported carrier unchanged.
 
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:7` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
@@ -712,11 +677,15 @@ Status: OPEN owner publication maintenance; local finding disposition `confirmed
 
 Published ID: `lem-gr-galerkin-time-derivative-bound`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-periodic-torus-and-sobolev-spaces, def-gr-periodic-symmetric-hyperbolic-system, def-gr-galerkin-fourier-projection, lem-gr-galerkin-projection-properties, lem-gr-positive-definite-symmetric-matrix-bounds, lem-gr-smooth-composition-and-commutator-estimates, lem-gr-galerkin-ode-local-solution, def-ck-and-multi-index-notation-in-several-variables, def-countable-choice`.
 
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Proof 1.1 handles order zero by coercivity (the zero norm case is immediate); 2.1 inducts only to s-1, so the spatial source has at most s derivatives. Projection commutation and lower-order commutators justify each induction step. Compact time slab dependence is explicit. Current raw SHA256 500d374e039c8d263c350fa4a8bf49c1a9ea222167d1419dd8fd77bc05a83bfa. Published/imported carrier unchanged.
+
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:8` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
 ## physics-remaining-80-2026-10-17-batch-8-published-marker-9
 
 Published ID: `lem-gr-galerkin-compactness`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-periodic-torus-and-sobolev-spaces, lem-gr-periodic-fourier-differentiation-and-norm-equivalence, lem-gr-periodic-sobolev-completeness, def-gr-galerkin-fourier-projection, lem-gr-galerkin-projection-properties, lem-gr-galerkin-time-derivative-bound, lem-gr-rational-diagonal-extraction, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, def-countable-choice`.
+
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Fourier tails and finite-dimensional compactness give a deterministic least-index nested extraction; R=0 is handled explicitly. Banach FTC gives time Lipschitz bounds, and the stated rational-time extraction supplier gives locally uniform H(s-1) convergence along unbounded cutoffs. No inference AComega=>DC is made. Current raw SHA256 45bad31515099fabcc13e10d86f4d7ba5eaf64be82da5a32e155cc710778e2a4. Published/imported carrier unchanged.
 
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:9` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
@@ -724,11 +693,15 @@ Status: OPEN owner publication maintenance; local finding disposition `confirmed
 
 Published ID: `lem-gr-galerkin-limit-is-classical-solution`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-periodic-torus-and-sobolev-spaces, lem-gr-periodic-fourier-differentiation-and-norm-equivalence, lem-gr-periodic-sobolev-completeness, lem-gr-periodic-sobolev-embedding, def-gr-periodic-symmetric-hyperbolic-system, def-gr-galerkin-fourier-projection, lem-gr-galerkin-projection-properties, lem-gr-positive-definite-symmetric-matrix-bounds, lem-gr-smooth-composition-and-commutator-estimates, lem-gr-galerkin-ode-local-solution, lem-gr-galerkin-time-derivative-bound, lem-gr-galerkin-second-time-derivative-bound, lem-gr-galerkin-compactness, lem-gr-rational-diagonal-extraction, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, def-countable-choice, def-ck-and-multi-index-notation-in-several-variables`.
 
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Proof 1.1 uses finite Fourier sums to recover every-time Hs bounds and strong measurability. A further extraction of time derivatives uses the actual H(s-2) Lipschitz supplier, then finite Fourier bounds recover H(s-1). Projection testing and strong coefficient/spatial convergence pass the equation to the limit; FTC gives classical initial-value regularity. Current raw SHA256 cb6e02041d2bcc034fa1a2709da259966b9d84e56ebfde6c6c4a5abda5ca6fa6. Published/imported carrier unchanged.
+
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:10` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
 ## physics-remaining-80-2026-10-17-batch-8-published-marker-11
 
 Published ID: `lem-gr-periodic-sobolev-embedding`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-periodic-torus-and-sobolev-spaces, lem-gr-periodic-fourier-differentiation-and-norm-equivalence, def-square-summable-family-on-an-arbitrary-index-set, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, prop-standard-coordinate-inner-products, thm-uniform-derivative-limit-on-a-closed-interval, thm-uniform-limit-continuous-complex-functions, def-ck-and-multi-index-notation-in-several-variables, def-countable-choice`.
+
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Absolute Fourier convergence follows from finite Cauchy–Schwarz and dyadic lattice counting with q>3/2. Uniform derivative limits give the representative and convergence. The integer q=2 endpoint is treated separately by low/high frequency splitting; no false logarithm-free real critical endpoint is imported. Consumer needs only H4=>C2. Current raw SHA256 7c9697159d8f2c17bb28192b45157f0b230523ff3f653f9fab953f0db4a5cf41. Published/imported carrier unchanged.
 
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:11` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
@@ -736,11 +709,15 @@ Status: OPEN owner publication maintenance; local finding disposition `confirmed
 
 Published ID: `thm-gr-constraint-equations-in-normal-frame`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `thm-gr-curvature-algebraic-symmetries, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form, def-gr-curvature-tensor-and-derived-tensors, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-christoffel-symbols-of-an-affine-connection, def-gr-tensor-fields-and-components, def-gr-inverse-metric-and-musical-isomorphisms, def-embedded-submanifold-and-slice-chart, def-c-r-and-smooth-maps-between-smooth-manifolds`.
 
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Proof 1.1 fixes D by projection and derives its Levi-Civita formula; 2.1 distinguishes operator and lowered-slot Gauss signs. Mixed contraction in 3.2 and scalar contraction in 4.1 give exactly the K=+g(nabla n,.) normal identities used in consumer F7. Current raw SHA256 2f3e030100cf58db0abe8c9ace9782b15e8bd1c8ddc2c2248e7cfee0a0ebff2e. Published/imported carrier unchanged.
+
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:12` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
 ## physics-remaining-80-2026-10-17-batch-8-published-marker-13
 
 Published ID: `thm-gr-local-geometric-development`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-harmonic-gauge-and-reduced-equations, lem-gr-harmonic-initial-data-construction, thm-gr-reduced-einstein-local-existence, thm-gr-harmonic-constraint-propagation, thm-gr-constraint-equations-in-normal-frame, thm-gr-local-geometric-uniqueness, def-gr-spacelike-initial-data-and-constraints, def-gr-spacelike-hypersurfaces-and-cauchy-sets, def-gr-causal-conditions-and-global-hyperbolicity, lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form, lem-gr-local-cauchy-neighborhood, thm-gr-cauchy-surface-implies-globally-hyperbolic, lem-gr-globally-hyperbolic-causal-structure, def-embedded-submanifold-and-slice-chart, def-c-r-and-smooth-maps-between-smooth-manifolds, def-countable-choice, def-dependent-choice, lem-gr-reduced-einstein-principal-part, def-gr-periodic-symmetric-hyperbolic-system, thm-gr-periodic-symmetric-hyperbolic-existence, thm-gr-periodic-symmetric-hyperbolic-smooth-persistence, thm-gr-local-geodesics-and-exponential-map, thm-smooth-inverse-function-theorem-on-manifolds, lem-every-open-cover-of-a-manifold-has-a-countable-cover-by-relatively-compact-coordinate-balls-subordinate-to-it, lem-a-countable-coordinate-ball-cover-has-a-countable-locally-finite-shrinking, thm-smooth-partitions-of-unity-exist-on-manifolds, thm-divergence-theorem-for-bounded-piecewise-c-one-domains, thm-gronwall-integral-inequality`.
+
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pending dependency_level: 24. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: The Statement fixes one covariant model and explicitly requires its coupled positive reduction, complete initialization, auxiliary propagation and pre-Einstein stress conservation. Proof 2.1 extends within a convex admissible ball, 3.1 uses the combined symbol speed, and 4.1–6.1 glue normal collars by actual equality germs and locally finite widths. Consumer 9.1 checks these hypotheses; no prescribed-stress theorem is substituted. Current raw SHA256 3b5a727d15153a7d729dbdd6aa90a6ab768689efae683d89cd410e92f0875466. Published/imported carrier unchanged.
 
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:13` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
@@ -748,11 +725,15 @@ Status: OPEN owner publication maintenance; local finding disposition `confirmed
 
 Published ID: `thm-gr-density-divergence-and-finite-chain-flux`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `thm-emg-local-charged-barotropic-development`. Supplier dependencies: `def-gr-metric-volume-form-and-current-flux, lem-gr-metric-volume-form-patching-and-face-normal, lem-gr-metric-divergence-and-density-formula, def-gr-smooth-lorentzian-objects, def-oriented-smooth-manifold-and-oriented-chart, def-interior-product-of-a-form-by-a-vector-field, def-interior-product-on-alternating-covectors, def-exterior-derivative-by-the-invariant-vector-field-formula, prop-local-coordinate-expression-for-a-differential-form, def-wedge-product-of-differential-forms, def-pullback-of-a-differential-form, def-integral-of-a-form-over-a-smooth-singular-simplex, thm-stokes-theorem-for-smooth-singular-chains, def-lorentz-orthogonality-and-orthogonal-complement, def-smooth-vector-field-as-a-tangent-bundle-section`.
 
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pass. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Proof 1.1 differentiates i_J vol, not the top-degree volume form, and gives d(i_J vol)=div(J) vol. Remaining clauses use finite-chain Stokes and keep the side-flux term. Consumer 3.1 restates the coordinate first-derivative proof for finite regularity instead of assuming smooth J. Current raw SHA256 4e0801b73580406ba7004c904e13b0c9bd56e92f54f8b3cb896fca9d2db995aa. Published/imported carrier unchanged.
+
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:14` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
 ## physics-remaining-80-2026-10-17-batch-8-published-marker-15
 
 Published ID: `lem-gr-observer-projection-decomposition`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `lem-emg-charged-fluid-positive-symmetric-reduction`. Supplier dependencies: `def-gr-observer-and-rest-space, def-gr-smooth-lorentzian-objects, lem-lorentz-form-has-orthonormal-basis, lem-timelike-cone-has-two-convex-components, lem-gr-future-causal-classification-by-a-timelike-field, def-time-orientation-and-future-causal-sets, def-lorentz-orthogonality-and-orthogonal-complement, def-causal-classification-of-lorentz-vectors, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-euclidean-inner-product, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces`.
+
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pass. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Proof 1.1 and 2.1 establish projection and kernel, 2.2 gives the bilinear identity, and 2.3 proves strict rest-space positivity in an arbitrary orthonormal basis. Step 3.2 proves dimension three without assuming a generic time basis vector equals the observer. These are precisely the fluid-reduction and counterexample uses. Current raw SHA256 41fa78ae26fbc29caea4030987f1d0240d0defb6d5cb861380450b120b4444a7. Published/imported carrier unchanged.
 
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:15` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
@@ -760,11 +741,15 @@ Status: OPEN owner publication maintenance; local finding disposition `confirmed
 
 Published ID: `lem-gr-future-causal-classification-by-a-timelike-field`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `cex-emg-uniform-one-sign-torus-charge`. Supplier dependencies: `def-gr-smooth-lorentzian-objects, lem-lorentz-form-has-orthonormal-basis, lem-timelike-cone-has-two-convex-components, def-causal-classification-of-lorentz-vectors, def-time-orientation-and-future-causal-sets, def-lorentz-orthogonality-and-orthogonal-complement, thm-unique-coordinates-with-respect-to-an-ordered-basis, thm-coordinate-derivations-form-a-basis-of-the-tangent-space, def-euclidean-inner-product, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces`.
 
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pass. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: Proof 1.1 orients an orthonormal basis with N0>0; Cauchy–Schwarz gives the strict sign for future timelike vectors and excludes nonzero null/timelike vectors orthogonal to N. Both closure directions and the zero-vector exclusion are explicit. Consumer uses only the future timelike sign. Current raw SHA256 b25b6bc020c088112bc83568a3fe468010f3955a4cb43ed1658b737ec5923247. Published/imported carrier unchanged.
+
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:16` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
 ## physics-remaining-80-2026-10-17-batch-8-published-marker-17
 
 Published ID: `lem-timelike-cone-has-two-convex-components`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `cex-emg-uniform-one-sign-torus-charge`. Supplier dependencies: `def-causal-classification-of-lorentz-vectors, lem-lorentz-form-has-orthonormal-basis, def-time-orientation-and-future-causal-sets, def-convex-subset-of-euclidean-space, cor-triangle-inequality-for-inner-product-norm, ex-convex-subsets-of-rn-are-path-connected, thm-intermediate-value, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-euclidean-inner-product, def-metric-space, def-metric-topology, def-connected-space, def-connected-component-and-quasicomponent, def-subspace-topology-top, thm-path-connected-implies-connected`.
+
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pass. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: The proof derives the coordinate quadratic form, convexity by the triangle inequality, two disjoint open connected components, and closures by adding a positive time vector. Step 5.1 proves equivalence of coordinate topologies under basis change. Consumer uses the future component containing its selected time vector. Current raw SHA256 f040b2aee8fb34b352cc409c3943941ead0d82c76802433b41a65dcce82bd242. Published/imported carrier unchanged.
 
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:17` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
@@ -772,23 +757,41 @@ Status: OPEN owner publication maintenance; local finding disposition `confirmed
 
 Published ID: `lem-lorentz-form-has-orthonormal-basis`. Run: `physics-remaining-80-2026-10-17`; reporting group: `batch-8`; consumer: `cex-emg-uniform-one-sign-torus-charge`. Supplier dependencies: `def-lorentz-form-and-inertia, thm-sylvesters-law-of-inertia`.
 
+Evidence: Confirmed current frontmatter schema omission: status published with a Proof but no audited, verified or repair receipt; verification:   precheck: pass   judge:     model: "gpt-6.1-sol"     verdict: pass     date: 2026-10-10. SCHEMA.md Sources/Verification requires publication evidence. This is nonfatal to the specified mathematical deduction, but publication maintenance remains OPEN: a format or judge pass cannot supply the absent audit. Independently reviewed current use: The Lorentz Definition fixes nondegenerate inertia (3,1,0); Sylvester normal form yields diag(1,1,1,-1), and the explicit reordering gives diag(-1,1,1,1). The last step establishes the invariant timelike/spacelike count. No global tetrad or selection is claimed. Current raw SHA256 998b8f5c37bdc310a10c23480db2827b8200e3d3f4af3342eb7cb85683f0a751. Published/imported carrier unchanged.
+
 Status: OPEN owner publication maintenance; local finding disposition `confirmed_nonfatal` / `nonfatal-recorded`. Strategy: obtain genuine authorized publication review or reconcile authentic prior evidence; do not invent stamps or treat this recorded omission as repaired. Published content remains read-only. Exact decision: `reader:8:18` in `research/physics-remaining-80-2026-10-17-alpha-batch-8-3a-decisions.json`.
 
 ## physics-remaining-80-2026-10-17-batch-1-marker-def-em-electromagnetic-tensor
 
+Published supplier: `def-em-electromagnetic-tensor` (`items/def-em-electromagnetic-tensor.md`). Owned consumer: `def-emg-geometry-units`; also its same-batch Maxwell/example consumers as applicable. Evidence: current frontmatter declares `status: published` but has no verification.audited or verification.verified (or an applicable recorded repair receipt). A judge/precheck alone is insufficient under SCHEMA.md Verification fields and Physics extensions. The exact field/current/SI/flat-model statements were independently checked for the batch-1 uses; no scientific counterexample was found, and the conditional calculations are local. Status: OPEN, read-only publication-evidence maintenance, not an escalated mathematical prerequisite and not a repaired carrier. Strategy: physical owner must recover genuine applicable source/audit evidence or arrange the proper review before publication eligibility is claimed. No stamp has been supplied or invented by Alpha.
+
 ## physics-remaining-80-2026-10-17-batch-1-marker-def-em-si-conventions
+
+Published supplier: `def-em-si-conventions` (`items/def-em-si-conventions.md`). Owned consumer: `def-emg-geometry-units`; also its same-batch Maxwell/example consumers as applicable. Evidence: current frontmatter declares `status: published` but has no verification.audited or verification.verified (or an applicable recorded repair receipt). A judge/precheck alone is insufficient under SCHEMA.md Verification fields and Physics extensions. The exact field/current/SI/flat-model statements were independently checked for the batch-1 uses; no scientific counterexample was found, and the conditional calculations are local. Status: OPEN, read-only publication-evidence maintenance, not an escalated mathematical prerequisite and not a repaired carrier. Strategy: physical owner must recover genuine applicable source/audit evidence or arrange the proper review before publication eligibility is claimed. No stamp has been supplied or invented by Alpha.
 
 ## physics-remaining-80-2026-10-17-batch-1-marker-post-em-minkowski-physical-model
 
+Published supplier: `post-em-minkowski-physical-model` (`items/post-em-minkowski-physical-model.md`). Owned consumer: `def-emg-geometry-units`; also its same-batch Maxwell/example consumers as applicable. Evidence: current frontmatter declares `status: published` but has no verification.sources_checked. A judge/precheck alone is insufficient under SCHEMA.md Verification fields and Physics extensions. The exact field/current/SI/flat-model statements were independently checked for the batch-1 uses; no scientific counterexample was found, and the conditional calculations are local. Status: OPEN, read-only publication-evidence maintenance, not an escalated mathematical prerequisite and not a repaired carrier. Strategy: physical owner must recover genuine applicable source/audit evidence or arrange the proper review before publication eligibility is claimed. No stamp has been supplied or invented by Alpha.
+
 ## physics-remaining-80-2026-10-17-batch-1-marker-post-em-vacuum-maxwell
+
+Published supplier: `post-em-vacuum-maxwell` (`items/post-em-vacuum-maxwell.md`). Owned consumer: `post-emg-covariant-maxwell`; also its same-batch Maxwell/example consumers as applicable. Evidence: current frontmatter declares `status: published` but has no verification.sources_checked. A judge/precheck alone is insufficient under SCHEMA.md Verification fields and Physics extensions. The exact field/current/SI/flat-model statements were independently checked for the batch-1 uses; no scientific counterexample was found, and the conditional calculations are local. Status: OPEN, read-only publication-evidence maintenance, not an escalated mathematical prerequisite and not a repaired carrier. Strategy: physical owner must recover genuine applicable source/audit evidence or arrange the proper review before publication eligibility is claimed. No stamp has been supplied or invented by Alpha.
 
 ## physics-remaining-80-2026-10-17-batch-1-marker-post-sr-inertial-covariance
 
+Published supplier: `post-sr-inertial-covariance` (`items/post-sr-inertial-covariance.md`). Owned consumer: `post-emg-covariant-maxwell`; also its same-batch Maxwell/example consumers as applicable. Evidence: current frontmatter declares `status: published` but has no verification.sources_checked. A judge/precheck alone is insufficient under SCHEMA.md Verification fields and Physics extensions. The exact field/current/SI/flat-model statements were independently checked for the batch-1 uses; no scientific counterexample was found, and the conditional calculations are local. Status: OPEN, read-only publication-evidence maintenance, not an escalated mathematical prerequisite and not a repaired carrier. Strategy: physical owner must recover genuine applicable source/audit evidence or arrange the proper review before publication eligibility is claimed. No stamp has been supplied or invented by Alpha.
+
 ## physics-remaining-80-2026-10-17-batch-1-marker-pthm-em-tensor-maxwell-equivalence
+
+Published supplier: `pthm-em-tensor-maxwell-equivalence` (`items/pthm-em-tensor-maxwell-equivalence.md`). Owned consumer: `post-emg-covariant-maxwell`; also its same-batch Maxwell/example consumers as applicable. Evidence: current frontmatter declares `status: published` but has no verification.audited or verification.verified (or an applicable recorded repair receipt). A judge/precheck alone is insufficient under SCHEMA.md Verification fields and Physics extensions. The exact field/current/SI/flat-model statements were independently checked for the batch-1 uses; no scientific counterexample was found, and the conditional calculations are local. Status: OPEN, read-only publication-evidence maintenance, not an escalated mathematical prerequisite and not a repaired carrier. Strategy: physical owner must recover genuine applicable source/audit evidence or arrange the proper review before publication eligibility is claimed. No stamp has been supplied or invented by Alpha.
 
 ## physics-remaining-80-2026-10-17-batch-1-marker-def-em-sources
 
+Published supplier: `def-em-sources` (`items/def-em-sources.md`). Owned consumer: `pthm-emg-flat-electromagnetic-compatibility`; also its same-batch Maxwell/example consumers as applicable. Evidence: current frontmatter declares `status: published` but has no verification.audited or verification.verified (or an applicable recorded repair receipt). A judge/precheck alone is insufficient under SCHEMA.md Verification fields and Physics extensions. The exact field/current/SI/flat-model statements were independently checked for the batch-1 uses; no scientific counterexample was found, and the conditional calculations are local. Status: OPEN, read-only publication-evidence maintenance, not an escalated mathematical prerequisite and not a repaired carrier. Strategy: physical owner must recover genuine applicable source/audit evidence or arrange the proper review before publication eligibility is claimed. No stamp has been supplied or invented by Alpha.
+
 ## physics-remaining-80-2026-10-17-batch-1-marker-post-em-lorentz-coupling
+
+Published supplier: `post-em-lorentz-coupling` (`items/post-em-lorentz-coupling.md`). Owned consumer: `pthm-emg-flat-electromagnetic-compatibility`; also its same-batch Maxwell/example consumers as applicable. Evidence: current frontmatter declares `status: published` but has no verification.sources_checked. A judge/precheck alone is insufficient under SCHEMA.md Verification fields and Physics extensions. The exact field/current/SI/flat-model statements were independently checked for the batch-1 uses; no scientific counterexample was found, and the conditional calculations are local. Status: OPEN, read-only publication-evidence maintenance, not an escalated mathematical prerequisite and not a repaired carrier. Strategy: physical owner must recover genuine applicable source/audit evidence or arrange the proper review before publication eligibility is claimed. No stamp has been supplied or invented by Alpha.
 
 ## physics-remaining-80-2026-10-17-batch-4-published-cartan-draft-wording
 
@@ -796,9 +799,17 @@ Published canonical page: `../library/differential-geometry/the-exterior-derivat
 
 ## physics-remaining-80-2026-10-17-batch-17-qm-draft-wording
 
+Subject: `qm-math-orbital-and-spin`. Classification: nonfatal, stale universal draft-status sentence.
+
+The canonical published page lists the published sphere-area lemma `lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates` but says all items are drafts. Owned consumer `cor-emg-regular-counterpoised-sphere`, Facts F8 and Proof 3.1, uses only its area statement (b), under countable choice. The sentence has no mathematical role.
+
 Status: OPEN published-owner maintenance; this dispatch closes only the local `nonfatal-recorded` disposition. Strategy: Remove or update the draft-status sentence under published-owner authority; preserve the area statement. No source edit or publication clearance is claimed. Report and exact decision: `research/physics-remaining-80-2026-10-17-alpha-batch-17-3a.md`, `reader:17:1`.
 
 ## physics-remaining-80-2026-10-17-batch-17-trig-quantifier
+
+Subject: `thm-sine-cosine-signs-monotonicity-and-ranges`. Classification: nonfatal, omitted integer quantifier in Statement.
+
+The Statement uses m without binding it. Facts explicitly give an integer m and Proof 2.1 covers every integer m. Owned consumer `cor-emg-regular-counterpoised-sphere`, F12 and Proof 4.1, uses m=0 on [0,pi/2]; its inference is sound under this explicit proof context.
 
 Status: OPEN published-owner maintenance; this dispatch closes only the local `nonfatal-recorded` disposition. Strategy: Add “For every integer m” to the published Statement after owner review; imports and mathematical originals remain read-only. No source edit or publication clearance is claimed. Report and exact decision: `research/physics-remaining-80-2026-10-17-alpha-batch-17-3a.md`, `reader:17:2`.
 
@@ -810,6 +821,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `thm-emg-einstein-gauge-propagation` reaches `lem-gr-einstein-residual-and-subsidiary-identity`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-globally-hyperbolic-causal-structure
 
 - Published item: `lem-gr-globally-hyperbolic-causal-structure`; owned consumer: `lem-emg-smooth-geometric-causal-research-suppliers`; finding: `reader:7:2`.
@@ -817,6 +829,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Status: **OPEN owner publication maintenance**; Step 3a disposition `confirmed_nonfatal` / `nonfatal-recorded` applies only to the qualified owned use. This does not repair or certify the published supplier.
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-smooth-geometric-causal-research-suppliers` reaches `lem-gr-globally-hyperbolic-causal-structure`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
+
 
 ### physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-local-cauchy-neighborhood
 
@@ -826,6 +839,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-smooth-geometric-causal-research-suppliers` reaches `lem-gr-local-cauchy-neighborhood`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-periodic-sobolev-algebra
 
 - Published item: `lem-gr-periodic-sobolev-algebra`; owned consumer: `thm-emg-local-high-sobolev-electrovacuum`; finding: `reader:7:4`.
@@ -833,6 +847,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Status: **OPEN owner publication maintenance**; Step 3a disposition `confirmed_nonfatal` / `nonfatal-recorded` applies only to the qualified owned use. This does not repair or certify the published supplier.
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `thm-emg-local-high-sobolev-electrovacuum` reaches `lem-gr-periodic-sobolev-algebra`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
+
 
 ### physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-periodic-sobolev-embedding
 
@@ -842,6 +857,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `thm-emg-local-high-sobolev-electrovacuum` reaches `lem-gr-periodic-sobolev-embedding`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-reduced-einstein-principal-part
 
 - Published item: `lem-gr-reduced-einstein-principal-part`; owned consumer: `lem-emg-coupled-reduced-einstein-evolution`; finding: `reader:7:6`.
@@ -849,6 +865,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Status: **OPEN owner publication maintenance**; Step 3a disposition `confirmed_nonfatal` / `nonfatal-recorded` applies only to the qualified owned use. This does not repair or certify the published supplier.
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-coupled-reduced-einstein-evolution` reaches `lem-gr-reduced-einstein-principal-part`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
+
 
 ### physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-smooth-composition-and-commutator-estimates
 
@@ -858,6 +875,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `thm-emg-local-high-sobolev-electrovacuum` reaches `lem-gr-smooth-composition-and-commutator-estimates`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-lem-gr-time-separation-maximizers
 
 - Published item: `lem-gr-time-separation-maximizers`; owned consumer: `lem-emg-smooth-geometric-causal-research-suppliers`; finding: `reader:7:8`.
@@ -865,6 +883,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Status: **OPEN owner publication maintenance**; Step 3a disposition `confirmed_nonfatal` / `nonfatal-recorded` applies only to the qualified owned use. This does not repair or certify the published supplier.
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-smooth-geometric-causal-research-suppliers` reaches `lem-gr-time-separation-maximizers`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
+
 
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-auxiliary-complete-riemannian-metric
 
@@ -874,6 +893,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-smooth-geometric-causal-research-suppliers` reaches `thm-gr-auxiliary-complete-riemannian-metric`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-cauchy-surface-implies-globally-hyperbolic
 
 - Published item: `thm-gr-cauchy-surface-implies-globally-hyperbolic`; owned consumer: `lem-emg-smooth-geometric-causal-research-suppliers`; finding: `reader:7:10`.
@@ -881,6 +901,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Status: **OPEN owner publication maintenance**; Step 3a disposition `confirmed_nonfatal` / `nonfatal-recorded` applies only to the qualified owned use. This does not repair or certify the published supplier.
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-smooth-geometric-causal-research-suppliers` reaches `thm-gr-cauchy-surface-implies-globally-hyperbolic`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
+
 
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-convex-normal-neighborhoods
 
@@ -890,6 +911,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-smooth-geometric-causal-research-suppliers` reaches `thm-gr-convex-normal-neighborhoods`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-limit-curve-two-endpoints
 
 - Published item: `thm-gr-limit-curve-two-endpoints`; owned consumer: `lem-emg-smooth-geometric-causal-research-suppliers`; finding: `reader:7:12`.
@@ -897,6 +919,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Status: **OPEN owner publication maintenance**; Step 3a disposition `confirmed_nonfatal` / `nonfatal-recorded` applies only to the qualified owned use. This does not repair or certify the published supplier.
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-smooth-geometric-causal-research-suppliers` reaches `thm-gr-limit-curve-two-endpoints`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
+
 
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-local-geodesics-and-exponential-map
 
@@ -906,6 +929,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `rem-emg-maximal-is-not-complete` reaches `thm-gr-local-geodesics-and-exponential-map`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-local-geometric-development
 
 - Published item: `thm-gr-local-geometric-development`; owned consumer: `thm-emg-smooth-local-geometric-uniqueness`; finding: `reader:7:14`.
@@ -913,6 +937,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Status: **OPEN owner publication maintenance**; Step 3a disposition `confirmed_nonfatal` / `nonfatal-recorded` applies only to the qualified owned use. This does not repair or certify the published supplier.
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `thm-emg-smooth-local-geometric-uniqueness` reaches `thm-gr-local-geometric-development`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
+
 
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-normal-neighborhood-causal-cone
 
@@ -922,6 +947,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-smooth-geometric-causal-research-suppliers` reaches `thm-gr-normal-neighborhood-causal-cone`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-existence
 
 - Published item: `thm-gr-periodic-symmetric-hyperbolic-existence`; owned consumer: `thm-emg-local-high-sobolev-electrovacuum`; finding: `reader:7:16`.
@@ -929,6 +955,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Status: **OPEN owner publication maintenance**; Step 3a disposition `confirmed_nonfatal` / `nonfatal-recorded` applies only to the qualified owned use. This does not repair or certify the published supplier.
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `thm-emg-local-high-sobolev-electrovacuum` reaches `thm-gr-periodic-symmetric-hyperbolic-existence`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
+
 
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-smooth-persistence
 
@@ -938,6 +965,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `thm-emg-local-high-sobolev-electrovacuum` reaches `thm-gr-periodic-symmetric-hyperbolic-smooth-persistence`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability
 
 - Published item: `thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability`; owned consumer: `thm-emg-local-high-sobolev-electrovacuum`; finding: `reader:7:18`.
@@ -945,6 +973,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Status: **OPEN owner publication maintenance**; Step 3a disposition `confirmed_nonfatal` / `nonfatal-recorded` applies only to the qualified owned use. This does not repair or certify the published supplier.
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `thm-emg-local-high-sobolev-electrovacuum` reaches `thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
+
 
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-smooth-cauchy-temporal-splitting
 
@@ -954,6 +983,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-smooth-geometric-causal-research-suppliers` reaches `thm-gr-smooth-cauchy-temporal-splitting`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-smooth-maximal-globally-hyperbolic-development
 
 - Published item: `thm-gr-smooth-maximal-globally-hyperbolic-development`; owned consumer: `thm-emg-sourcefree-smooth-maximal-development`; finding: `reader:7:20`.
@@ -962,6 +992,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `thm-emg-sourcefree-smooth-maximal-development` reaches `thm-gr-smooth-maximal-globally-hyperbolic-development`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
 
+
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-volume-time-function
 
 - Published item: `thm-gr-volume-time-function`; owned consumer: `lem-emg-smooth-geometric-causal-research-suppliers`; finding: `reader:7:21`.
@@ -969,6 +1000,7 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 - Status: **OPEN owner publication maintenance**; Step 3a disposition `confirmed_nonfatal` / `nonfatal-recorded` applies only to the qualified owned use. This does not repair or certify the published supplier.
 - Suppliers and use: retain all current prerequisite IDs and hypotheses in this carrier; the exact declared dependency closure from `lem-emg-smooth-geometric-causal-research-suppliers` reaches `thm-gr-volume-time-function`. The consumer uses the actual mathematical interface conditionally, as mapped in its current contract.
 - Repair strategy: publication owner must recover genuine prior audit evidence or arrange an authorized whole-item review; physics adjudicator leaves published/imported bytes unchanged and invents no marker. Recheck affected consumers if a future Statement/Definition changes.
+
 
 ### physics-remaining-80-2026-10-17-batch-7-marker-thm-gr-constraint-equations-in-normal-frame
 
@@ -982,10 +1014,18 @@ Status: OPEN published-owner maintenance; this dispatch closes only the local `n
 
 Published ID: `lem-gr-metric-divergence-and-density-formula`; run `physics-remaining-80-2026-10-17`; reporting group `batch-50`; owned consumer `lem-tgr-c1-current-density-divergence` (reader:50:1).
 
+Evidence: Published lemma has only precheck: pass, with no audited/verified publication evidence. Independently read clauses (a)-(b) and their determinant and Christoffel proofs: they supply the smooth metric identities used in the owned C1 product-rule extension. The schema defect is nonfatal to that exact deduction; carrier unchanged and OPEN publication maintenance recorded.
+
+Exact supplier dependencies: `[thm-determinant-multiplicative, lem-gr-covariant-two-tensor-transformation-law, def-gr-smooth-lorentzian-objects, def-christoffel-symbols-of-an-affine-connection, lem-gr-connection-conditions-in-chart-components, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-inverse-metric-and-musical-isomorphisms, lem-cm-determinant-derivative-along-a-matrix-curve, lem-lorentz-form-has-orthonormal-basis, def-smooth-vector-field-as-a-tangent-bundle-section]`.
+
 Status: OPEN published-owner maintenance; adjudication disposition nonfatal-recorded. Strategy: recover valid existing audit evidence or perform an authorized genuine audit in the owning workspace, then refresh the physics snapshot under owner control. No source repair or audit certification is supplied by this dispatch. See `research/physics-remaining-80-2026-10-17-alpha-batch-50-3a.md`.
 
 ## physics-remaining-80-2026-10-17-batch-50-connection-marker
 
 Published ID: `thm-gr-nondegenerate-levi-civita-and-tensor-derivative`; run `physics-remaining-80-2026-10-17`; reporting group `batch-50`; owned consumer `lem-tgr-c1-current-density-divergence` (reader:50:2).
+
+Evidence: Published theorem has only precheck: pass, with no audited/verified publication evidence. Independently read the Koszul construction, metric compatibility, Christoffel and tensor derivative argument. Clauses (a),(c) supply smooth coefficients and the vector derivative rule used by the owned C1 extension. Nonfatal for that use; carrier unchanged and OPEN publication maintenance recorded.
+
+Exact supplier dependencies: `[def-gr-metric-selected-connection, def-gr-smooth-lorentzian-objects, def-gr-smooth-covariant-two-tensor-field, def-affine-connection-on-a-smooth-manifold, def-christoffel-symbols-of-an-affine-connection, def-torsion-tensor-of-an-affine-connection, def-lie-bracket-of-smooth-vector-fields, prop-leibniz-rules-for-the-lie-bracket-with-function-multiples, prop-coordinate-formula-for-the-lie-bracket, prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components, prop-a-vector-field-acts-as-a-derivation-of-smooth-functions, def-gr-inverse-metric-and-musical-isomorphisms, lem-matrix-inversion-preserves-ck-regularity, lem-gr-connection-conditions-in-chart-components, def-dual-connection, def-product-connection-on-tensor-and-hom-bundles, lem-finite-tensor-products-of-smooth-vector-bundles, def-type-r-s-tensor-on-a-finite-dimensional-vector-space, def-gr-tensor-fields-and-components, def-contraction-of-a-mixed-tensor, def-smooth-vector-field-as-a-tangent-bundle-section, thm-coordinate-derivations-form-a-basis-of-the-tangent-space, def-countable-choice]`.
 
 Status: OPEN published-owner maintenance; adjudication disposition nonfatal-recorded. Strategy: recover valid existing audit evidence or perform an authorized genuine audit in the owning workspace, then refresh the physics snapshot under owner control. No source repair or audit certification is supplied by this dispatch. See `research/physics-remaining-80-2026-10-17-alpha-batch-50-3a.md`.

@@ -2,7 +2,7 @@
 id: lem-clifford-centrioles-and-geodesic-tangent-condition
 kind: lemma
 title: Clifford centrioles and geodesic tangent conditions
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

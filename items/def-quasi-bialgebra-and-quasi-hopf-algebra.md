@@ -2,7 +2,7 @@
 id: def-quasi-bialgebra-and-quasi-hopf-algebra
 kind: definition
 title: "Quasi-bialgebras, quasi-antipodes, and quasi-Hopf algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

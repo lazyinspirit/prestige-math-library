@@ -2,7 +2,7 @@
 id: cor-fixed-rate-lossless-coding-stationary-ergodic
 kind: corollary
 title: "Fixed-rate source coding theorem for stationary ergodic sources"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

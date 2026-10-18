@@ -1,7 +1,7 @@
 ---
 page: cost-constrained-gaussian-and-feedback-channels-examples
 title: "Cost-Constrained, Gaussian, and Feedback Channels — Examples"
-status: draft
+status: published
 requires: [cost-constrained-gaussian-and-feedback-channels]
 items: []
 examples:

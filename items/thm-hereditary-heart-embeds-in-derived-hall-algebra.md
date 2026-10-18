@@ -2,7 +2,7 @@
 id: thm-hereditary-heart-embeds-in-derived-hall-algebra
 kind: theorem
 title: "The opposite untwisted Hall algebra of a hereditary heart embeds in the derived Hall algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

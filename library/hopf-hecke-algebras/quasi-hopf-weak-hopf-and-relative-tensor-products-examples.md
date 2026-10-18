@@ -1,7 +1,7 @@
 ---
 page: quasi-hopf-weak-hopf-and-relative-tensor-products-examples
 title: "Quasi-Hopf, Weak Hopf, and Relative Tensor Products: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [cex-a-quasi-bialgebra-need-not-be-quasi-hopf, ex-two-object-discrete-groupoid-is-a-weak-hopf-algebra, ex-quasi-hopf-algebra-from-the-nontrivial-3-cocycle-on-c2]
 ---

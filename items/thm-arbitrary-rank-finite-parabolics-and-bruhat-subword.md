@@ -2,7 +2,7 @@
 id: thm-arbitrary-rank-finite-parabolics-and-bruhat-subword
 kind: theorem
 title: Finite-generator standard parabolics and the Bruhat subword property at arbitrary rank
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

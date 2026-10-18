@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-link-state-module-action-is-well-defined
 kind: lemma
 title: "The link-state quotient is a right Temperley–Lieb module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-complexified-four-dimensional-n1-super-poincare-bracket-data
 kind: definition
 title: Complexified four-dimensional N=1 super-Poincare bracket data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

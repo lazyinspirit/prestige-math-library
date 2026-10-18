@@ -2,7 +2,7 @@
 id: lem-real-orthogonal-space-preliminaries
 kind: lemma
 title: Orthogonal-space preliminaries and anisotropic reflections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations

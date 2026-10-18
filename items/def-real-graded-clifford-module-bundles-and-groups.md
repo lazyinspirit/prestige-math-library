@@ -2,7 +2,7 @@
 id: def-real-graded-clifford-module-bundles-and-groups
 kind: definition
 title: "Real graded Clifford-module bundles and their Grothendieck groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations

@@ -2,7 +2,7 @@
 id: def-polynomial-invariants-for-a-rational-linear-action
 kind: definition
 title: Polynomial invariants of a rational algebraic-group action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

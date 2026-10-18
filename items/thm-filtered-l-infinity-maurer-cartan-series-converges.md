@@ -2,7 +2,7 @@
 id: thm-filtered-l-infinity-maurer-cartan-series-converges
 kind: theorem
 title: "The Maurer–Cartan series converges in a complete filtered L∞-algebra"
-status: draft
+status: published
 dependency_level: 6
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

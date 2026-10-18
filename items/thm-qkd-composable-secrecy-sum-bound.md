@@ -2,7 +2,7 @@
 id: thm-qkd-composable-secrecy-sum-bound
 kind: theorem
 title: QKD composable secrecy is bounded by correctness plus secrecy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

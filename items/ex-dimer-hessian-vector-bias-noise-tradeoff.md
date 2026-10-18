@@ -13,8 +13,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-lusztig-asymptotic-algebra-and-specialization-map
 kind: lemma
 title: "The asymptotic algebra, filtered layers and the specialization homomorphism"
-status: draft
+status: published
 dependency_level: 6
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

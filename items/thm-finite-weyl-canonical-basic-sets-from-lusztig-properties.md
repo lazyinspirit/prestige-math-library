@@ -3,7 +3,7 @@ id: thm-finite-weyl-canonical-basic-sets-from-lusztig-properties
 kind: theorem
 title: "Finite-Weyl canonical basic sets from Lusztig properties"
 deps: [def-axiom-of-choice, def-finite-weyl-lusztig-basic-set-data, def-canonical-basic-set-for-hecke-specialization, def-essential-epimorphism-and-projective-cover, lem-lusztig-asymptotic-algebra-and-specialization-map, lem-schur-leading-coefficients-and-good-asymptotic-specializations, lem-complete-local-hecke-modular-systems-and-idempotent-lifting, lem-asymptotic-induction-identifies-leading-modular-simples, lem-filtered-projectives-prove-canonical-basic-set-reciprocity]
-status: draft
+status: published
 dependency_level: 10
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

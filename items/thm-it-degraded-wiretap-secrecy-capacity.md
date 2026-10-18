@@ -2,7 +2,7 @@
 id: thm-it-degraded-wiretap-secrecy-capacity
 kind: theorem
 title: "Secrecy capacity of a finite degraded wiretap channel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

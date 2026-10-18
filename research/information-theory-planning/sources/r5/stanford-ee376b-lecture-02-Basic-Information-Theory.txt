@@ -1,0 +1,1208 @@
+Lecture 
+Basic Information Theory
+
+(Reading: NIT , ., .–., .)
+
+∙Lossless source coding
+∙Channel coding
+∙Channel coding with input cost
+∙Gaussian channel
+
+© Copyright –Abbas El Gamal and Young-Han Kim
+Point-to-point lossless compression system
+
+Xn
+M
+̂Xn
+Encoder
+Decoder
+Source
+
+∙Discrete (stationary) memoryless source (DMS) (X , p(x)) (or X in short)
+
+㶳Generates i.i.d. sequence X, X, . . . with Xi ∼pX(xi)
+
+㶳Example: Bern(p) source X generates i.i.d. Bern(p) sequence
+
+∙A (nR, n) lossless compression code:
+
+㶳Encoder: m(xn) ∈[: nR) = {, , . . . , ⌊nR⌋} (R = rate in bits/source symbol)
+
+㶳Decoder: ̂xn(m) ∈X n
+
+/ 
+
+
+Point-to-point lossless compression system
+
+Xn
+M
+̂Xn
+Encoder
+Decoder
+Source
+
+∙Probability of error: P(n)
+e
+= P{̂Xn ̸= Xn}
+
+∙R achievable if ∃a sequence of (nR, n) codes such that limn→∞P(n)
+e
+= 
+
+∙Optimal lossless compression rate R∗: Infimum of all achievable R
+
+Lossless source coding theorem (Shannon )
+
+R∗= H(X) = −堈
+
+x∈X
+p(x) log p(x) bits/symbol
+(entropy)
+
+∙Examples:
+
+㶳If X ∼Bern(p), then H(X) = −p log p −(−p) log(−p) = H(p) (binary entropy function)
+
+㶳If X ∼Unif(X), then H(X) = log |X|
+
+㶳In general H(X) ≤log |X| (by Jensen’s inequality)
+
+/ 
+Proving the lossless source coding theorem
+
+∙To prove this theorem, we need to establish:
+
+㶳Achievability: If R > H(X), ∃a sequence of (nR, n) codes such that limn→∞P(n)
+e
+= 
+
+㶳Converse: For any sequence of (nR, n) codes with limn→∞P(n)
+e
+= , R ≥H(X)
+
+∙We need to review:
+
+㶳Conditional and joint entropy
+
+㶳The notion of typicality
+
+/ 
+
+
+Conditional and joint entropy
+
+∙Conditional entropy (equivocation): Let (X, Y) ∼p(x, y), (x, y) ∈X × Y
+
+H(Y|X) = 堈
+
+x∈X
+H(Y | X = x)p(x)
+
+㶳H(Y|X) ≤H(Y) (with equality if X and Y are independent)
+
+∙Joint entropy: For (X, Y) ∼p(x, y),
+
+H(X, Y) = H(X) + H(Y|X) = H(Y) + H(X|Y)
+
+∙Chain rule for entropy:
+
+H(Xn) =
+
+n
+堈
+i=
+H(Xi|Xi−)
+
+㶳H(Xn) ≤∑n
+i=H(Xi) (with equality if X, X, . . . , Xn are independent)
+
+∙Fano’s inequality: If (X, Y) ∼p(x, y) and Pe = P{X ̸= Y}, then
+
+H(X|Y) ≤H(Pe) + Pe log |X | ≤+ Pe log |X |
+
+/ 
+Typical sequences
+
+∙Empirical pmf (type) of xn ∈X n:
+
+π(x|xn) =
+儨儨儨儨{i: xi = x}儨儨儨儨
+
+n
+for x ∈X
+
+∙Example: For xn = , π(|xn) = /and π(|xn) = /
+
+∙X, X, . . . , Xn i.i.d. with X∼p(x), then by the WLLN
+
+π(x|Xn) →p(x)
+in probability for every x ∈X
+
+∙Typical set (Orlitsky–Roche ): For X ∼p(x) and є > ,
+
+T (n)
+є
+(X) = T (n)
+є
+= 恁xn: 儨儨儨儨π(x|xn) −p(x)儨儨儨儨≤єp(x) for all x ∈X恑
+
+Typical average lemma
+
+If xn ∈T (n)
+є
+(X) and g(x) ≥, then
+
+(−є) E(g(X)) ≤
+
+n
+
+n
+堈
+i=
+g(xi) ≤(+ є) E(g(X))
+
+/ 
+
+
+Properties of typical sequences
+
+X n
+
+T (n)
+є
+(X)
+
+typical xn
+
+p(xn) ≐−nH(X)
+
+|T (n)
+є
+| ≐nH(X)
+
+P{Xn ∈T (n)
+є
+} →
+
+∙For xn ∈T (n)
+є
+(X), −n(H(X)+δ(є)) ≤∏n
+i=pX(xi) ≤−n(H(X)−δ(є))
+
+∙|T (n)
+є
+(X)| ≤n(H(X)+δ(є))
+
+∙If Xn ∼∏n
+i=pX(xi), then P{Xn ∈T (n)
+є
+(X)} →(by the LLN)
+
+∙|T (n)
+є
+(X)| ≥(−є)n(H(X)−δ(є)) = n(H(X)−δ㰀(є)) for n sufficiently large
+
+/ 
+Achievability proof of lossless source coding theorem
+
+∙If R > H(X), ∃sequence of (nR, n) codes with limn→∞P(n)
+e
+= 
+
+∙Let R > H(X) + δ(є) so that |T (n)
+є
+| ≤n(H(X)+δ(є)) < nR
+
+∙Codebook:
+
+㶳Assign a distinct index m(xn) to each xn ∈T (n)
+є
+㶳Assign m = to all xn ∉T (n)
+є
+㶳Codebook is revealed to both encoder and decoder
+
+∙Encoding:
+
+㶳Upon observing xn, send m(xn)
+
+∙Decoding:
+
+㶳Declare ̂xn = xn(m) for the unique xn(m) ∈T (n)
+є
+
+∙Analysis of the probability of error:
+
+㶳All typical sequences are correctly recovered
+
+㶳Thus, limn→∞P(n)
+e
+= limn→∞P{Xn ∉T (n)
+є
+} = , and every R > H(X) is achievable
+
+/ 
+
+
+Converse proof of lossless source coding theorem
+
+∙Given sequence of (nR, n) codes with limn→∞P(n)
+e
+→, R ≥H(X)
+
+∙For each code, let M = m(Xn) and ̂Xn = ̂xn(M)
+
+∙Consider
+
+nR ≥H(M)
+
+≥H(̂Xn)
+
+= H(Xn, ̂Xn) −H(Xn| ̂Xn)
+
+= H(Xn) + H(̂Xn|Xn) −H(Xn| ̂Xn)
+
+= H(Xn) −H(Xn| ̂Xn)
+
+= nH(X) −H(Xn| ̂Xn)
+∙By Fano’s inequality,
+
+H(Xn| ̂Xn) ≤+ nP(n)
+e
+log |X | = n(/n + P(n)
+e
+log |X |) = nєn,
+
+where єn →as n →∞by assumption
+
+∙Hence as n →∞, R ≥H(X)
+
+/ 
+Point-to-point communication system
+
+M
+̂M
+Xn
+Yn
+Encoder
+p(y|x)
+Decoder
+
+∙Discrete memoryless channel (DMC) (X , p(y|x), Y)
+
+㶳Discrete: X and Y are finite
+
+㶳Memoryless: p(yi|yi−, xi, m) = p(yi|xi), i ∈[: n], i.e., (M, Yi−, Xi−) →Xi →Yi
+
+㶳Without feedback: p(yn|xn, m) = ∏n
+i=pY|X(yi|xi)
+
+∙A (nR, n) code for the DMC:
+
+㶳Message set [: nR] = {, , . . . , ⌈nR⌉}
+
+㶳Encoder: a codeword xn(m) for each m ∈[: nR]
+
+C = 恂xn(), xn(), . . . , xn(⌈nR⌉)恒is the codebook
+
+㶳Decoder: an estimate ̂m(yn) ∈[: nR] ∪{e} for each yn
+
+/ 
+
+
+Point-to-point communication system
+
+M
+̂M
+Xn
+Yn
+Encoder
+p(y|x)
+Decoder
+
+∙Assume that M ∼Unif[: nR]
+
+∙Average probability of error: P(n)
+e
+= P{ ̂M ̸= M}
+
+∙R achievable if ∃a sequence of (nR, n) codes such that limn→∞P(n)
+e
+= 
+
+∙Capacity C: Supremum of all achievable rates (operational capacity)
+
+∙For (X, Y) ∼p(x, y), define the mutual information as
+
+I(X; Y) = H(X) −H(X|Y) = H(Y) −H(Y|X) = H(X) + H(Y) −H(X, Y)
+
+Channel coding theorem (Shannon )
+
+C = max
+p(x) I(X; Y) bits/transmission
+(information capacity)
+
+/ 
+Examples
+
+∙Binary symmetric channel (BSC): C = −H(p)
+
+
+
+
+
+
+
+
+−p
+
+−p
+
+X
+Y
+X
+Y
+
+Z ∼Bern(p)
+
+∙Binary erasure channel (BEC): C = −p
+
+
+
+
+
+
+
+
+
+e
+
+−p
+
+−p
+
+X
+Y
+
+/ 
+
+
+Proving the channel coding theorem
+
+∙Achievability: For every R < C = maxp(x) I(X; Y) ∃a sequence of (nR, n) codes
+with limn→∞P(n)
+e
+= 
+
+㶳We will use random coding and joint typicality decoding
+
+∙Converse: Given a sequence of (nR, n) codes with limn→∞P(n)
+e
+= ,
+R ≤C = maxp(x) I(X; Y)
+
+㶳Need some properties of mutual information
+
+/ 
+Jointly typical sequences
+
+∙Joint type of (xn, yn) ∈X n × Yn:
+
+π(x, y|xn, yn) =
+儨儨儨儨{i: (xi, yi) = (x, y)}儨儨儨儨
+
+n
+for (x, y) ∈X × Y
+
+∙Jointly typical set: For (X, Y) ∼p(x, y) and є > ,
+
+T (n)
+є
+(X, Y) = T (n)
+є
+((X, Y))
+
+= 恁(xn, yn): |π(x, y|xn, yn) −p(x, y)| ≤єp(x, y) for all (x, y)恑
+
+∙If (xn, yn) ∈T (n)
+є
+(X, Y) and p(xn, yn) = ∏n
+i=pX,Y(xi, yi), then
+
+㶳xn ∈T (n)
+є
+(X) and yn ∈T (n)
+є
+(Y)
+
+㶳p(xn) ≐−nH(X), p(yn) ≐−nH(Y), and p(xn, yn) ≐−nH(X,Y)
+
+㶳p(xn|yn) ≐−nH(X|Y) and p(yn|xn) ≐−nH(Y|X)
+
+/ 
+
+
+Conditionally typical sequences
+
+∙Conditionally typical set: T (n)
+є
+(Y|xn) = 恁yn: (xn, yn) ∈T (n)
+є
+(X, Y)恑
+
+∙|T (n)
+є
+(Y|xn)| ≤n(H(Y|X)+δ(є))
+
+Conditional typicality lemma
+
+If xn ∈T (n)
+є㰀(X), Yn ∼∏n
+i=pY|X(yi|xi), and є > є㰀, then
+
+lim
+n→∞P恁(xn, Yn) ∈T (n)
+є
+(X, Y)恑= 
+
+∙If xn ∈T (n)
+є㰀(X), є > є㰀, then for n sufficiently large,
+
+|T (n)
+є
+(Y|xn)| ≥n(H(Y|X)−δ(є))
+
+∙Let X ∼p(x), Y = g(X), and xn ∈T (n)
+є
+(X). Then
+
+yn ∈T (n)
+є
+(Y|xn)
+iff
+yi = g(xi), i ∈[: n]
+
+/ 
+Illustration of joint typicality
+
+xn
+
+yn
+
+T (n)
+є
+(Y)
+
+怤| ⋅| ≐nH(Y)怴
+
+T (n)
+є
+(X) 怤| ⋅| ≐nH(X)怴
+
+T (n)
+є
+(X, Y)
+
+怤| ⋅| ≐nH(X,Y)怴
+
+T (n)
+є
+(Y|xn)
+T (n)
+є
+(X|yn)
+
+/ 
+
+
+Another illustration of joint typicality
+
+T (n)
+є
+(X)
+
+xn
+
+X n
+Yn
+T (n)
+є
+(Y)
+
+T (n)
+є
+(Y|xn)
+
+怤| ⋅| ≐nH(Y|X)怴
+
+/ 
+Joint typicality lemma
+
+Let (X, Y) ∼p(x, y) and є > є㰀. Then for some δ(є) →as є →:
+
+∙If ̃xn is arbitrary and ̃Yn ∼∏n
+i=pY(̃yi), then
+
+P恁(̃xn, ̃Yn) ∈T (n)
+є
+(X, Y)恑≤−n(I(X;Y)−δ(є))
+
+∙If xn ∈T (n)
+є㰀
+and ̃Yn ∼∏n
+i=pY(̃yi), then for n sufficiently large,
+
+P恁(xn, ̃Yn) ∈T (n)
+є
+(X, Y)恑≥−n(I(X;Y)+δ(є))
+
+∙Corollary: If (̃Xn, ̃Yn) ∼∏n
+i=pX(̃xi)pY(̃yi), then
+
+P恁(̃Xn, ̃Yn) ∈T (n)
+є
+恑≐−nI(X;Y)
+
+/ 
+
+
+Achievability proof of channel coding theorem
+
+∙For every R < maxp(x) I(X; Y) ∃sequence of (nR, n) codes with limn→∞P(n)
+e
+= 
+
+∙Key ideas: random coding and joint typicality decoding
+
+∙Codebook generation:
+
+㶳Fix p(x) that attains C = maxp(x) I(X; Y)
+
+㶳Independently generate nR sequences xn(m) ∼∏n
+i=pX(xi), m ∈[: nR]; hence
+
+p(C) =
+
+nR
+堉
+
+m=
+
+n
+堉
+
+i=
+pX(xi(m))
+
+/ 
+
+X n
+
+Achievability proof of channel coding theorem
+
+∙For every R < maxp(x) I(X; Y) ∃sequence of (nR, n) codes with limn→∞P(n)
+e
+= 
+
+∙Key ideas: random coding and joint typicality decoding
+
+∙Encoding: C is revealed to both encoder and decoder
+
+㶳To send message m, transmit xn(m)
+
+/ 
+
+X n
+
+xn(m)
+
+
+Achievability proof of channel coding theorem
+
+∙For every R < maxp(x) I(X; Y) ∃sequence of (nR, n) codes with limn→∞P(n)
+e
+= 
+
+∙Key ideas: random coding and joint typicality decoding
+
+∙Decoding:
+
+㶳Declare that ̂m is sent if it is unique message such that (xn( ̂m), yn) ∈T (n)
+є
+
+㶳Otherwise declare an error e
+
+/ 
+
+X n
+Yn
+
+yn
+xn(m)
+
+Analysis of the probability of error
+
+∙Consider P(E) averaged over codebooks
+
+∙Observe that P(E) = P(E|M = ); hence assume that M = is sent
+
+∙Error events:
+E= 恁(Xn(), Yn) ∉T (n)
+є
+恑,
+
+E= 恁(Xn(m), Yn) ∈T (n)
+є
+for some m ̸= 恑
+
+By the union of events bound, P(E) = P(E∪E) ≤P(E) + P(E)
+
+∙By the LLN, P(E) →(as n →∞)
+
+∙By the union of events bound and the joint typicality lemma,
+
+P(E) ≤
+
+nR
+堈
+m=
+P恁(Xn(m), Yn) ∈T (n)
+є
+恑≤−n(C−R−δ(є)),
+
+which →as n →∞if R < C −δ(є)
+
+∙Hence, ∃sequence of (nR, n) codes with limn→∞P(n)
+e
+= if R < C −δ(є)
+
+/ 
+
+
+Illustration of E
+
+Xn()
+
+Xn(m)
+
+X n
+Yn
+T (n)
+є
+(Y)
+
+Yn
+
+∙Note that we only needed Xn(m), m ∈[: nR], to be pairwise independent of Yn
+
+/ 
+“Little” packing lemma
+
+∙Let (X, Y) ∼p(x, y)
+
+∙Let ̃Yn ∼∏n
+i=pY(̃yi)
+
+∙Let Xn(m) ∼∏n
+i=pX(xi), m ∈A, |A| ≤nR, be pairwise independent of ̃Yn
+
+“Little” packing lemma
+
+There exists δ(є) →as є →such that
+
+lim
+n→∞P恁(Xn(m), ̃Yn) ∈T (n)
+є
+for some m ∈A} = ,
+
+if R < I(X; Y) −δ(є)
+
+∙We will generalize this later (see NIT .)
+
+/ 
+
+
+Application: Achievability using linear codes
+
+∙Consider a BSC(p) and let m = (u, u, . . . , uk) ∈{, }k (i.e., k = nR)
+
+∙Random linear codebook: Generator matrix G with i.i.d. Bern(/) entries
+
+怄怔怔怔怜
+
+x
+x
+...
+xn
+
+怅怕怕怕思
+=
+怄怔怔怔怜
+
+g
+g
+. . .
+gk
+g
+g
+. . .
+gk
+...
+...
+...
+...
+gn
+gn
+. . .
+gnk
+
+怅怕怕怕思
+
+怄怔怔怔怜
+
+u
+u
+...
+uk
+
+怅怕怕怕思
+
+㶳X(uk), . . . , Xn(uk) are i.i.d. Bern(/) for each uk ̸= 
+
+㶳Xn(uk) and Xn(̃uk) are independent for each uk ̸= ̃uk
+
+∙By the “little” packing lemma, P(E) →if R < −H(p) −δ(є)
+
+∙There exists a good sequence of linear codes
+
+∙There are now practical randomly generated linear codes (turbo, LDPC)
+
+/ 
+Properties of mutual information
+
+∙Nonnegativity:
+
+I(X; Y) = H(X) −H(X|Y) = H(Y) −H(Y|X) = H(X) + H(Y) −H(X, Y) ≥
+∙Conditional mutual information:
+
+I(X; Y|Z) = 堈
+
+z∈Z
+I(X; Y|Z = z)p(z) = H(X|Z) −H(X|Y, Z)
+
+∙Mutual information versus conditional mutual information:
+
+㶳Conditional independence: If Z →X →Y form a Markov chain, I(X; Y|Z) ≤I(X; Y)
+
+㶳Independence: If p(x, y, z) = p(z)p(x)p(y|x, z), I(X; Y|Z) ≥I(X; Y)
+
+∙Chain rule:
+
+I(Xn; Y) =
+
+n
+堈
+i=
+I(Xi; Y|Xi−)
+
+∙Data processing inequality: If X →Y →Z,
+
+I(X; Z) ≤I(X; Y),
+I(X; Z) ≤I(Y; Z)
+
+/ 
+
+
+Converse proof of channel coding theorem
+
+∙Need to show: For any sequence of (nR, n) codes with P(n)
+e
+→, R ≤C
+∙Each (nR, n) code induces empirical pmf
+
+p(m, xn, yn, ̂m) = −nRp(xn|m)
+
+n
+堉
+i=
+pY|X(yi|xi) p( ̂m|yn)
+
+∙Note that
+
+nR = H(M)
+
+= I(M; ̂M) + H(M| ̂M)
+
+∙By Fano’s inequality,
+H(M| ̂M) ≤+ P(n)
+e nR = nєn,
+
+where єn →as n →∞
+∙By the data processing inequality,
+
+nR = I(M; ̂M) + nєn
+≤I(M; Yn) + nєn
+
+/ 
+Proof of the converse
+
+∙We have
+nR ≤I(M; Yn) + nєn
+
+∙Now need to show: I(M; Yn) ≤n maxp(x) I(X; Y)
+
+I(M; Yn) =
+
+n
+堈
+i=
+I(M; Yi|Yi−)
+
+≤
+
+n
+堈
+i=
+I(M, Yi−; Yi)
+
+=
+
+n
+堈
+i=
+I(Xi, M, Yi−; Yi)
+(Xi is function of M)
+
+=
+
+n
+堈
+i=
+I(Xi; Yi)
+((M, Yi−) →Xi →Yi)
+
+≤n max
+p(x) I(X; Y)
+
+/ 
+
+
+Channel coding with input cost
+
+M
+̂M
+Xn
+
+B
+
+Yn
+Encoder
+p(y|x)
+Decoder
+
+∙Cost b(x) ≥with b(x) = 
+∙Average cost constraint: ∑n
+i=b(xi(m)) ≤nB,
+m ∈[: nR]
+∙Define capacity–cost function C(B) as C
+
+Capacity–cost function
+
+C(B) =
+max
+p(x):E(b(X))≤B I(X; Y)
+
+B
+
+C(B)
+
+/ 
+Proof of achievability
+
+∙Codebook generation:
+
+㶳Fix p(x) that attains C(B/(+ є))
+
+㶳Independently generate nR sequences xn(m) ∼∏n
+i=pX(xi), m ∈[: nR]
+
+∙Encoding:
+
+㶳To send message m, transmit xn(m) if xn(m) ∈T (n)
+є
+(by the typical average lemma, ∑n
+i=b(xi(m)) ≤nB)
+
+㶳Otherwise transmit (x, . . . , x)
+
+∙Decoding:
+
+㶳Declare that ̂m is sent if it is unique message such that (xn( ̂m), yn) ∈T (n)
+є
+
+㶳Otherwise declare an error
+
+∙Analysis of the probability of error: Read NIT .
+
+/ 
+
+
+Proof of the converse
+
+∙Need to show: For any sequence of codes with P(n)
+e
+→and ∑n
+i=b(xi(m)) ≤nB,
+
+R ≤C(B) =
+max
+p(x):E(b(X))≤B I(X; Y)
+
+∙By Fano’s inequality and the data processing inequality,
+
+nR ≤
+
+n
+堈
+i=
+I(Xi; Yi) + nєn
+
+≤
+
+n
+堈
+i=
+C(E[b(Xi)]) + nєn
+(by definition)
+
+≤nC急
+
+n
+
+n
+堈
+i=
+E[b(Xi)]怵+ nєn
+(concavity of C(B))
+
+≤nC(B) + nєn
+(monotonicity of C(B))
+
+∙Hence, as n →∞, R ≤C(B)
+
+/ 
+Gaussian channel
+
+∙Discrete-time additive white Gaussian noise channel
+
+X
+g
+Y = gX + Z
+
+Z
+
+㶳g: channel gain (path loss)
+
+㶳Z ∼N(, N/) ({Zi}: WGN(N/) process, independent of M)
+
+∙Average power constraint: ∑n
+i=x
+i (m) ≤nP for every m ∈[: nR]
+
+∙Assume N/= and label received power gP as S (SNR)
+
+Theorem .. (Shannon )
+
+C = 
+
+log(+ S) = C(S)
+
+∙To prove this result we need differential entropy
+
+/ 
+
+
+Differential entropy
+
+∙Differential entropy of a continuous random variable X ∼f (x) (pdf):
+
+h(X) = −吐f (x) log f (x) dx = −EX怡log f (X)怱
+
+㶳Concave function of f (x) (but not necessarily nonnegative)
+
+㶳Examples: h(Unif[a, b]) = log(b −a), h(N(μ, σ)) = (/) log(πeσ)
+
+㶳Translation: h(X + a) = h(X)
+
+㶳Scaling: h(aX) = h(X) + log |a|
+
+∙Maximum differential entropy under average power constraint:
+
+max
+f (x):E(X)≤P h(X) = 
+
+log(πeP) = h(N(, P))
+
+Thus, for any X ∼f (x),
+
+h(X) = h(X −E(X)) ≤
+
+log(πe Var(X)) ≤
+
+log(πe E(X))
+
+/ 
+Differential entropy
+
+∙Conditional differential entropy: If X ∼F(x) and Y|{X = x} ∼f (y|x),
+
+h(Y|X) = 吐h(Y | X = x) dF(x) = −EX,Y怡log f (Y|X)怱
+
+㶳h(Y|X) ≤h(Y) (with equality if X and Y are independent)
+
+∙For continuous (X, Y) ∼f (x, y),
+
+I(X; Y) = h(X) −h(X|Y) = h(Y) −h(Y|X) = h(X) + h(Y) −h(X, Y)
+
+∙If X ∼p(x) is discrete and Y|{X = x} ∼f (y|x) is continuous for each x,
+
+I(X; Y) = h(Y) −h(Y|X) = H(X) −H(X|Y)
+
+/ 
+
+
+Proof of the converse
+
+∙Mutual information extends to arbitrary random variables (Pinsker )
+
+∙Hence, by the converse proof for the DMC with cost,
+
+C ≤
+sup
+F(x):E(X)≤P
+I(X; Y)
+
+∙Now consider any X with E(X) ≤P, thus E(Y) ≤gP + = S + 
+
+I(X; Y) = h(Y) −h(Y|X)
+= h(Y) −h(Y −gX|X)
+= h(Y) −h(Z|X)
+
+= h(Y) −h(Z)
+
+≤
+
+log(πe(+ S)) −
+
+log(πe) = C(S)
+
+∙Finally note that setting X ∼N(, P), I(X; Y) = C(S); hence
+
+C ≤
+max
+F(x):E(X)≤P I(X; Y) = C(S)
+
+/ 
+Proof of achievability
+
+∙Extend proof for DMC with cost via discretization procedure (McEliece )
+∙First note that capacity is attained by X ∼N(, P)
+∙Let [X]j be a finite quantization of X with [X]j →X in distribution, E([X]
+j ) ≤P
+
+X
+g
+[X]j
+Yj
+[Yj]k
+
+Z
+
+∙Let [Yj]k be a finite quantization of Yj = g[X]j + Z such that [Yj]k →Tj in
+distribution
+
+∙By achievability proof for DMC with cost, I([X]j; [Yj]k) is achievable for every j, k
+∙By weak convergence and the dominated convergence theorem (see NIT ..),
+
+lim
+j→∞lim
+k→∞I([X]j; [Yj]k) = lim
+j→∞I([X]j; Yj) = I(X; Y) = C(S)
+
+/ 
+
+
+Gaussian vector (MIMO) channel
+
+∙Discrete-time additive white Gaussian noise multiple-antenna channel
+
+X
+G
+Y = GX + Z
+
+Z
+
+㶳X: t-vector, Y: r-vector
+
+㶳G: channel gain matrix with gain Gjk from transmitter antenna k to receiver antenna j
+
+㶳Z ∼N(, Ir)
+
+∙Average power constraint: ∑n
+i=xT(m, i)x(m, i) ≤nP, m ∈[: nR]
+
+Theorem .
+
+C =
+max
+F(x):E(XTX)≤P I(X; Y) =
+max
+KX⪰:tr(KX)≤P
+
+log |GKXGT + Ir|
+
+/ 
+Summary
+
+∙Lossless source coding problem
+
+∙Discrete memoryless source
+
+∙Entropy is the limit on lossless source coding
+
+∙Proof of coding theorem: achievability and the converse
+
+∙Channel coding problem
+
+∙Discrete memoryless channel (DMC), e.g., BSC and BEC
+
+∙Information capacity is the limit on channel coding
+
+㶳Random codebook generation
+
+㶳Joint typicality decoding
+
+㶳“Little” packing lemma
+
+㶳Capacity with input cost
+
+㶳Gaussian channel (discretization procedure)
+
+/ 
+
+
+References
+
+McEliece, R. J. (). The Theory of Information and Coding. Addison-Wesley, Reading, MA.
+
+Orlitsky, A. and Roche, J. R. (). Coding for computing. IEEE Trans. Inf. Theory, (), –.
+
+Pinsker, M. S. (). Information and Information Stability of Random Variables and Processes.
+Holden-Day, San Francisco.
+
+Shannon, C. E. (). A mathematical theory of communication. Bell Syst. Tech. J., (), –, (),
+–.
+
+/ 
+
+

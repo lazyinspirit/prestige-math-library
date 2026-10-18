@@ -2,7 +2,7 @@
 id: cex-maurer-cartan-equation-does-not-determine-gauge-classes
 kind: counterexample
 title: "The Maurer–Cartan equation alone does not specify gauge classes"
-status: draft
+status: published
 dependency_level: 11
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

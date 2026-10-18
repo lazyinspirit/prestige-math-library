@@ -2,7 +2,7 @@
 id: def-bv-algebra-and-degree-plus-one-bracket
 kind: definition
 title: BV algebra with a degree-one generator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

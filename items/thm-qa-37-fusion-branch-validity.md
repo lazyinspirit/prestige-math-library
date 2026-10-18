@@ -2,7 +2,7 @@
 id: thm-qa-37-fusion-branch-validity
 kind: theorem
 title: "Fusion measurement branches are normalized exactly when nonzero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 11

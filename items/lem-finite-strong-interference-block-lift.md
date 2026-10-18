@@ -2,7 +2,7 @@
 id: lem-finite-strong-interference-block-lift
 kind: lemma
 title: Strong-interference information inequalities tensorize over product code inputs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

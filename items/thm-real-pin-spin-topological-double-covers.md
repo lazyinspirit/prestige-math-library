@@ -2,7 +2,7 @@
 id: thm-real-pin-spin-topological-double-covers
 kind: theorem
 title: Pin and full-even Spin are topological double covers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations

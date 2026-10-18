@@ -2,7 +2,7 @@
 id: lem-discrete-memoryless-channel-information-density-concentration
 kind: lemma
 title: "Uniform concentration around the capacity output divergence bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

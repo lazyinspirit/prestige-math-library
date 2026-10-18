@@ -2,7 +2,7 @@
 id: lem-finite-quiver-hall-extension-orbit-count
 kind: lemma
 title: "Finite-quiver Hall multiplication counts extensions by automorphism orbits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

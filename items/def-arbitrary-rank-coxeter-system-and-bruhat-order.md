@@ -2,7 +2,7 @@
 id: def-arbitrary-rank-coxeter-system-and-bruhat-order
 kind: definition
 title: Arbitrary-rank Coxeter presentations, length, reflections, and Bruhat order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

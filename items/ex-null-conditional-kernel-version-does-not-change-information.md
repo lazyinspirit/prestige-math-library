@@ -2,7 +2,7 @@
 id: ex-null-conditional-kernel-version-does-not-change-information
 kind: example
 title: "Changing a conditional kernel on a null fiber leaves information unchanged"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

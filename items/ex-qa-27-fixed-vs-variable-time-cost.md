@@ -16,8 +16,6 @@ axiom_use: "None; this is finite arithmetic on an explicit three-stage distribut
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Andris Ambainis, Variable time amplitude amplification and a faster quantum algorithm for solving systems of linear equations"

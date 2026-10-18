@@ -2,7 +2,7 @@
 id: thm-classical-master-equation-defines-square-zero-differential
 kind: theorem
 title: A classical master solution defines a square-zero differential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-real-clifford-restriction-matrices
 kind: lemma
 title: Restriction matrices for negative-square graded real Clifford modules
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-clifford-module-restriction-cokernel-a-n

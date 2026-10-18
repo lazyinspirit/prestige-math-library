@@ -2,7 +2,7 @@
 id: def-finite-field-stack-groupoid-cardinality
 kind: definition
 title: "Finite-field groupoid cardinality for quiver stack specializations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

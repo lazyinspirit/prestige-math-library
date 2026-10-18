@@ -25,8 +25,6 @@ sources:
     - title: "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)"
       url: "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
       locator: "Chapter 8, §§8.2–8.3, PDF pp.83–85: K-function target and boundary discussion."
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

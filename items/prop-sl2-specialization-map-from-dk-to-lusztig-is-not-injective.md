@@ -2,7 +2,7 @@
 id: prop-sl2-specialization-map-from-dk-to-lusztig-is-not-injective
 kind: proposition
 title: "The rank-one De Concini–Kac to Lusztig specialization map is not injective"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

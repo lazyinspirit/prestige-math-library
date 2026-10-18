@@ -2,7 +2,7 @@
 id: lem-extended-hall-torus-action-is-well-defined
 kind: lemma
 title: "The extended Hall torus action is well-defined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

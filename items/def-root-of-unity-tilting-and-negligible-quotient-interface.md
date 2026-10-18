@@ -2,7 +2,7 @@
 id: def-root-of-unity-tilting-and-negligible-quotient-interface
 kind: definition
 title: "Tilting objects and negligible morphisms in a root-of-unity category"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

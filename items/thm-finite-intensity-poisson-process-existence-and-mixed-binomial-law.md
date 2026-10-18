@@ -29,8 +29,6 @@ sources:
       url: "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications, complete lecture notes"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
-verification:
-  precheck: pending
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: lem-su2-hopf-link-sine-data-from-truncated-fusion
 kind: lemma
 title: "Truncated sl2 fusion data give the sine Hopf-link matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

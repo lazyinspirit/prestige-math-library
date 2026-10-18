@@ -1,0 +1,585 @@
+Lecture 
+Interactive Channel Coding
+
+(Reading: NIT .–.)
+
+∙DMC with feedback
+∙MAC with feedback
+∙BC with feedback
+∙RC with feedback
+
+© Copyright –Abbas El Gamal and Young-Han Kim
+DMC with feedback
+
+M
+̂M
+Xi
+Yi
+
+Yi−
+
+p(y|x)
+Encoder
+Decoder
+
+∙DMC p(y|x) with capacity C
+
+∙Feedback (xi(M, Yi−)) does not increase the capacity (Shannon ), i.e.,
+
+CFB = max
+p(x) I(X; Y) = C
+
+∙Feedback can help communication in several important ways
+
+㶳Simplify coding and improve reliability (Schalkwijk–Kailath )
+
+㶳Increase the capacity of channels with memory (Butman )
+
+㶳Enlarge the capacity region of multiuser channels (Gaarder–Wolf )
+
+∙Insights into interactive multi-way communication
+
+/ 
+
+
+Iterative refinement
+
+∙Basic idea:
+
+㶳First send the message uncoded
+
+㶳Then iteratively refine the receiver’s knowledge about it
+
+∙Simple example (Binary erasure channel with feedback):
+
+
+
+
+
+
+
+
+
+e
+
+−p
+
+−p
+
+X
+Y
+
+∙More sophisticated examples:
+
+㶳Schalkwijk–Kailath coding scheme for the Gaussian channel ()
+
+㶳Horstein’s coding scheme for BSC ()
+
+㶳Posterior matching scheme (Shayevitz–Feder )
+
+㶳Block feedback coding scheme (Weldon , Ahlswede , Ooi–Wornell )
+
+/ 
+Gaussian channel with feedback
+
+X
+Y
+
+Z ∼N(, )
+
+∙Expected average transmitted power constraint
+
+n
+堈
+i=
+E(x
+i (m, Yi−)) ≤nP,
+m ∈[: nR]
+
+∙Schalkwijk–Kailath coding scheme ():
+
+㶳Divide the interval [−倂P, 倂P] into nR equal-length message intervals
+
+㶳Represent each message m ∈[: nR] by the midpoint of its interval
+
+㶳At time , encoder transmits X= θ(m) and learns Z= Y−X
+
+㶳At time , it transmits X= 倂P Z
+
+㶳For i ∈[: n], it transmits Xi ∝Z−E(Z|Yi−) (scaled to meet power constraint)
+
+㶳Upon receiving Yn, the decoder finds the closest message point θ( ̂m) to
+
+̂Θn = Y−E(Z|Yn) = θ(m) + Z−E(Z|Yn)
+
+/ 
+
+
+Gaussian channel with feedback
+
+∙By linearity and the orthogonality principle, Y, Y, . . . , Yn are i.i.d. N(, P + )
+
+∙By expanding I(Z; Yn) in two ways, it can be shown that
+
+Var(Z|Yn) = −n C(P)
+
+∙Thus, ̂Θn = θ(m) + Z−E(Z|Yn) ∼N(θ(m), −nC(P))
+
+∙Since the distance to the nearest message point is Δ = 倂P ⋅−nR,
+
+P(n)
+e
+≤Q 怦倂P ⋅−nR
+
+−nC(P) 怶= Q怡n(C(P)−R)倂P怱
+
+θ
+θ −Δ
+
+
+θ + Δ
+
+
+∙If R < C, then P(n)
+e
+decays double-exponentially fast in n !
+
+/ 
+Block feedback coding scheme
+
+∙Implementation of iterative refinement at the block level (Weldon )
+
+∙Example (BSC with feedback):
+
+
+
+
+
+
+
+
+−p
+
+−p
+
+X
+Y
+X
+Y
+
+Z ∼Bern(p)
+
+㶳Transmit k bits uncoded and learn the error vector via feedback
+
+㶳Compress it using kH(p) bits and transmit the compression index uncoded
+
+㶳Communicate the error about the error (kH(p) bits)
+
+㶳Communicate the error about the error about the error (kH(p) bits)
+
+㶳Communicate the error about the error about the error about ...
+
+∙Achievable rate: k/(k + kH(p) + kH(p) + kH(p) + ⋅⋅⋅) = −H(p)
+
+/ 
+
+
+MAC with feedback
+
+M
+
+M
+
+Xi
+
+Xi
+
+Encoder 
+
+Encoder 
+
+Decoder
+p(y|x, x)
+Yi
+
+Yi−
+
+Yi−
+
+̂M, ̂M
+
+∙Cooperative transmission: xi(M, Yi−), xi(M, Yi−)
+
+∙Capacity region with feedback CFB is not known in general
+
+∙Feedback can enlarge the capacity region
+
+/ 
+Binary erasure MAC
+
+X∈{, }
+
+X∈{, }
+
+Y ∈{, , }
+
+∙Capacity region without feedback:
+
+R≤,
+
+R≤,
+R+ R≤/
+
+∙Block feedback coding scheme (Gaarder–Wolf ):
+
+㶳k uncoded transmissions + k/+ k/one-sided retransmissions ⇒Rsym = /
+
+㶳k uncoded transmissions + k/two-sided retransmissions + k/+ ⋅⋅⋅⇒Rsym = /
+
+㶳k uncoded transmissions + k/(log ) cooperative retransmissions ⇒Rsym = .
+∙R∗
+sym = .(Cover–Leung , Willems )
+
+/ 
+
+
+Cover–Leung inner bound
+
+Theorem .(Cover–Leung )
+
+(R, R) is achievable for the DM-MAC p(y|x, x) with feedback if
+
+R< I(X; Y|X, U),
+
+R< I(X; Y|X, U),
+R+ R< I(X, X; Y)
+
+for some pmf p(u)p(x|u)p(x|u)
+
+∙Capacity region without feedback: The set of (R, R) such that
+
+R≤I(X; Y|X, Q),
+R≤I(X; Y|X, Q),
+
+R+ R≤I(X, X; Y|Q)
+
+for some pmf p(q)p(x|q)p(x|q)
+
+∙Cover–Leung inner bound is tight when Xis a function of (X, Y) (Willems )
+
+/ 
+Proof of achievability (Zeng–Kuhlmann–Buzo )
+
+∙Use block Markov coding scheme and backward decoding
+
+Encoder 
+
+Encoder 
+
+Decoder
+p(y|x, x)
+
+̃M,j−, Mj
+
+M,j−, Mj
+
+Xn
+(j)
+
+Xn
+(j)
+
+Yn(j −)
+
+Yn(j)
+
+Block
+
+
+⋅⋅⋅
+b −
+b
+
+X
+xn
+(m|)
+xn
+(m|m)
+⋅⋅⋅
+xn
+(m,b−|m,b−)
+xn
+(|m,b−)
+
+X
+xn
+(m|)
+xn
+(m| ̃m)
+⋅⋅⋅
+xn
+(m,b−| ̃m,b−)
+xn
+(mb| ̃m,b−)
+
+(X, Y)
+̃m→
+̃m→
+⋅⋅⋅
+̃m,b−
+
+
+Y
+̂m
+←̂m, ̂m
+⋅⋅⋅
+←̂m,b−, ̂m,b−
+←̂mb, ̂m,b−
+
+/ 
+
+
+Cooperative outer bound
+
+∙If (R, R) is achievable, it must satisfy the inequalities:
+
+R≤I(X; Y|X),
+R≤I(X; Y|X),
+
+R+ R≤I(X, X; Y)
+
+for some pmf p(x, x)
+
+∙Cover–Leung inner bound
+
+R< I(X; Y|X, U),
+
+R< I(X; Y|X, U),
+R+ R< I(X, X; Y)
+
+for some pmf p(u)p(x|u)p(x|u)
+
+∙Are they equal?
+
+/ 
+Gaussian MAC
+
+X
+
+X
+
+g
+
+g
+
+Z ∼N(, )
+
+Y = gX+ gX+ Z
+
+∙Cover–Leung inner bound: (R, R) is achievable if
+
+R≤C(̄αS),
+R≤C(̄αS),
+R+ R≤C 怤S+ S+ 倆ααSS怴
+
+for some α, α∈[, ]
+∙CFB is larger than Cover–Leung and coincides with outer bound!
+
+Theorem .(Ozarow )
+
+CFB is the set of (R, R) such that
+
+R≤C怡(−ρ)S怱,
+R≤C怡(−ρ)S怱,
+R+ R≤C怡S+ S+ ρ倆SS怱
+
+for some ρ ∈[, ]
+
+/ 
+
+
+BC with feedback
+
+M, M
+Xi
+p(y, y|x)
+
+Yi
+
+Yi
+
+̂M
+
+̂M
+
+Yi−
+
+
+Yi−
+
+
+Encoder
+
+Decoder 
+
+Decoder 
+
+∙Receivers operate separately (regardless of feedback)
+
+∙Physically degraded BC p(y|x)p(y|y):
+
+㶳Feedback does not enlarge the capacity region (El Gamal )
+
+∙How can feedback help?
+
+/ 
+Dueck’s example ()
+
+X
+怂
+怒
+怒
+怒
+怊
+怒
+怒
+怒
+怚
+X
+
+X
+
+X
+Y= (X, X⊕Z)
+
+Y= (X, X⊕Z)
+
+Z ∼Bern(/)
+
+∙Capacity region without feedback:
+
+恁(R, R): R+ R≤恑
+
+∙Capacity region with feedback:
+
+恁(R, R): R≤, R≤恑
+
+∙Feedback helps by letting the encoder broadcast common channel information
+
+/ 
+
+
+RC with feedback
+
+Xi
+
+Xi
+Yi
+
+Yi
+
+Yi−
+
+
+M
+̂M
+p(y, y|x, x)
+
+xi怣Yi−
+, Yi−
+怳
+
+Encoder
+Decoder
+
+∙Feedback turns RC into physically degraded RC p(y㰀
+, y|x, x), Y㰀
+= (Y, Y)
+
+Theorem .(Cover–El Gamal )
+
+CFB = max
+p(x,x) min恁I(X, X; Y), I(X; Y, Y| X)恑
+
+∙Achieved using decode–forward (cutest bound holds with feedback)
+
+∙A rare example where capacity is not known, but feedback capacity is known
+
+/ 
+Summary
+
+∙Feedback can simplify coding and improve reliability
+
+∙Iterative refinement:
+
+㶳Schalkwijk–Kailath scheme for the Gaussian channel
+
+㶳Block feedback scheme for the DMC
+
+∙Feedback can enlarge the capacity region of multiuser channels:
+
+㶳Can induce cooperation between the senders
+
+㶳Cover–Leung inner bound
+
+㶳Can provide channel information to be broadcast to multiple receivers
+
+㶳The cutset bound is achievable for the relay channel with feedback
+
+/ 
+
+
+References
+
+Ahlswede, R. (). A constructive proof of the coding theorem for discrete memoryless channels in
+case of complete feedback. In Trans. th Prague Conf. Inf. Theory, Statist. Decision Functions, Random
+Processes (Tech Univ., Prague, ), pp. –. Academia, Prague.
+
+Butman, S. (). A general formulation of linear feedback communication systems with solutions. IEEE
+Trans. Inf. Theory, (), –.
+
+Cover, T. M. and El Gamal, A. (). Capacity theorems for the relay channel. IEEE Trans. Inf. Theory, (),
+–.
+
+Cover, T. M. and Leung, C. S. K. (). An achievable rate region for the multiple-access channel with
+feedback. IEEE Trans. Inf. Theory, (), –.
+
+Dueck, G. (). Partial feedback for two-way and broadcast channels. Inf. Control, (), –.
+
+El Gamal, A. (). The feedback capacity of degraded broadcast channels. IEEE Trans. Inf. Theory, (),
+–.
+
+Gaarder, N. T. and Wolf, J. K. (). The capacity region of a multiple-access discrete memoryless channel
+can increase with feedback. IEEE Trans. Inf. Theory, (), –.
+
+Horstein, M. (). Sequential transmission using noiseless feedback. IEEE Trans. Inf. Theory, (), –.
+
+Ooi, J. M. and Wornell, G. W. (). Fast iterative coding techniques for feedback channels. IEEE Trans. Inf.
+Theory, (), –.
+
+Ozarow, L. H. (). The capacity of the white Gaussian multiple access channel with feedback. IEEE
+Trans. Inf. Theory, (), –.
+
+/ 
+References (cont.)
+
+Schalkwijk, J. P. M. and Kailath, T. (). A coding scheme for additive noise channels with feedback—I:
+No bandwidth constraint. IEEE Trans. Inf. Theory, (), –.
+
+Shannon, C. E. (). The zero error capacity of a noisy channel. IRE Trans. Inf. Theory, (), –.
+
+Shayevitz, O. and Feder, M. (). Optimal feedback communication via posterior matching. IEEE Trans.
+Inf. Theory, (), –.
+
+Weldon, E. J., Jr. (). Asymptotic error coding bounds for the binary symmetric channel with feedback.
+Ph.D. thesis, University of Florida, Gainesville, FL.
+
+Willems, F. M. J. (). The feedback capacity region of a class of discrete memoryless multiple access
+channels. IEEE Trans. Inf. Theory, (), –.
+
+Zeng, C.-M., Kuhlmann, F., and Buzo, A. (). Achievability proof of some multiuser channel coding
+theorems using backward decoding. IEEE Trans. Inf. Theory, (), –.
+
+/ 
+
+

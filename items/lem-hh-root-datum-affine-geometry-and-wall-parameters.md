@@ -2,7 +2,7 @@
 id: lem-hh-root-datum-affine-geometry-and-wall-parameters
 kind: lemma
 title: Canonical affine geometry and wall parameters of a root datum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

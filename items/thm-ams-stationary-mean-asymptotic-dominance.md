@@ -2,7 +2,7 @@
 id: thm-ams-stationary-mean-asymptotic-dominance
 kind: theorem
 title: "The stationary mean asymptotically dominates an AMS law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-modc-bounded-rank-structure-varieties-have-finitely-many-orbits
 kind: lemma
 title: Bounded-rank module-structure varieties have finitely many open orbits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

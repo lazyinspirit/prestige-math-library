@@ -2,7 +2,7 @@
 id: cex-finite-simple-module-classes-do-not-imply-semisimplicity-for-a-commutative-vertex-algebra
 kind: counterexample
 title: Finite simple labels alone do not imply a semisimple module category
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

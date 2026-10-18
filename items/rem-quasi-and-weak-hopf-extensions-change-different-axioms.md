@@ -2,7 +2,7 @@
 id: rem-quasi-and-weak-hopf-extensions-change-different-axioms
 kind: remark
 title: "Quasi-Hopf and weak-Hopf extensions change different axioms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

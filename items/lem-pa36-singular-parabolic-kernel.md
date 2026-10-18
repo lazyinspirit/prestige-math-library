@@ -2,7 +2,7 @@
 id: lem-pa36-singular-parabolic-kernel
 kind: lemma
 title: The singular simple-parabolic kernel on the flag variety
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

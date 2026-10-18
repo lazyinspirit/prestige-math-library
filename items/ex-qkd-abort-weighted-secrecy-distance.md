@@ -2,7 +2,7 @@
 id: ex-qkd-abort-weighted-secrecy-distance
 kind: example
 title: Acceptance probability weights an otherwise imperfect one-bit key
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-central-kernel-descent-for-poincare-inductions
 kind: lemma
 title: Central kernel characters control descent of Poincaré inductions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

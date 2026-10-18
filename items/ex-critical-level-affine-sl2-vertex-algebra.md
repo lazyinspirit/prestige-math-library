@@ -2,7 +2,7 @@
 id: ex-critical-level-affine-sl2-vertex-algebra
 kind: example
 title: The critical-level sl2 affine vertex algebra and its current OPE
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

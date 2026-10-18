@@ -14,8 +14,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 axiom_use: "No choice axiom is used; exactness reduces to a finite polynomial-degree check."
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Jie Shen and Tao Tang, Spectral and High-Order Methods with Applications, §§3.1–3.2"

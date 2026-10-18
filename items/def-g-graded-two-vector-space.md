@@ -2,7 +2,7 @@
 id: def-g-graded-two-vector-space
 kind: definition
 title: G-graded finite semisimple 2-vector space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

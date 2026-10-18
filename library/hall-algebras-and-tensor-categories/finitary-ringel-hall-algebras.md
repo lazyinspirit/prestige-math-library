@@ -1,7 +1,7 @@
 ---
 page: finitary-ringel-hall-algebras
 title: "Finitary Ringel–Hall Algebras"
-status: draft
+status: published
 requires:
   - algebraic-representation-and-tensor-symmetry-map
   - cyclotomic-klr-algebras-and-highest-weight-categorification

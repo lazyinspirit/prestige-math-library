@@ -2,7 +2,7 @@
 id: thm-root-of-unity-outside-alcove-tiltings-are-negligible
 kind: theorem
 title: Outside-alcove indecomposable tiltings are negligible
-status: draft
+status: published
 dependency_level: 11
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

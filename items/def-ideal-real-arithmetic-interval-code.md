@@ -2,7 +2,7 @@
 id: def-ideal-real-arithmetic-interval-code
 kind: definition
 title: "Ideal-real arithmetic interval coding for a fixed block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

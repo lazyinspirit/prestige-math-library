@@ -2,7 +2,7 @@
 id: def-lz77-previous-match-phrase-length
 kind: definition
 title: "LZ77 previous-match length and recurrence time"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

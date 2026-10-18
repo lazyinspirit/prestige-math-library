@@ -2,7 +2,7 @@
 id: prop-green-hall-pairing-is-nondegenerate
 kind: proposition
 title: "The Green Hall pairing is nondegenerate and adjoint to product and coproduct"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

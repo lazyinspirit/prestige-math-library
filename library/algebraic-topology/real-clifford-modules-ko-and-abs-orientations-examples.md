@@ -1,7 +1,7 @@
 ---
 page: real-clifford-modules-ko-and-abs-orientations-examples
 title: 'Real Clifford Modules, KO Theory, and ABS Orientations: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples:
 - ex-clifford-low-dimensional-real-signatures

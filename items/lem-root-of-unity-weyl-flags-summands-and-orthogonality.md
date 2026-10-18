@@ -2,7 +2,7 @@
 id: lem-root-of-unity-weyl-flags-summands-and-orthogonality
 kind: lemma
 title: Weyl flag summands, standard-costandard orthogonality and tilting uniqueness
-status: draft
+status: published
 dependency_level: 7
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

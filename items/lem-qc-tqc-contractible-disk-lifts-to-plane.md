@@ -2,7 +2,7 @@
 id: lem-qc-tqc-contractible-disk-lifts-to-plane
 kind: lemma
 title: A contractible toric disk lifts to the square grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

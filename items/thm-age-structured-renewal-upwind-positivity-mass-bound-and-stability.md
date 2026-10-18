@@ -18,8 +18,6 @@ axiom_base: No choice axiom is used; the argument is finite-dimensional summatio
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: quantum-channel-capacities-and-entanglement-assistance
 title: Quantum Channel Capacities and Entanglement Assistance
-status: draft
+status: published
 requires:
   - quantum-source-compression-and-cq-capacity
   - knill-laflamme-recovery-and-subsystem-codes

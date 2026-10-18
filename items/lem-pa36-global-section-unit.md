@@ -2,7 +2,7 @@
 id: lem-pa36-global-section-unit
 kind: lemma
 title: The unit V to Gamma Loc_kappa(V) is an isomorphism for antidominant twists
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: ex-trivial-vertex-algebra-is-rational
 kind: example
 title: The one-dimensional vertex operator algebra is rational assuming Choice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

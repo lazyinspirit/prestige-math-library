@@ -2,7 +2,7 @@
 id: thm-knowledgeable-frobenius-data-classify-open-closed-sewing
 kind: theorem
 title: "Typed colored knowledgeable Frobenius data classify open-closed sewing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

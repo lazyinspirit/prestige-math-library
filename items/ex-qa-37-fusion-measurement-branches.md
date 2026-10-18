@@ -2,7 +2,7 @@
 id: ex-qa-37-fusion-measurement-branches
 kind: example
 title: "Fibonacci fusion measurement branches and zero outcomes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 12

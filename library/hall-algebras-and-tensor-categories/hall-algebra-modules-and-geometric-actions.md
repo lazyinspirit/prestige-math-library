@@ -1,7 +1,7 @@
 ---
 page: hall-algebra-modules-and-geometric-actions
 title: Hall Algebra Modules, Fock Spaces, and Geometric Actions
-status: draft
+status: published
 requires:
   - green-hall-bialgebras-and-quantum-group-realizations
   - symmetric-functions-hall-inner-product-and-schur-bases

@@ -2,7 +2,7 @@
 id: def-temperley-lieb-jones-wenzl-recursion
 kind: definition
 title: "Jones–Wenzl recursion in the nonvanishing-denominator range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

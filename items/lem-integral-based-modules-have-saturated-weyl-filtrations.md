@@ -2,7 +2,7 @@
 id: lem-integral-based-modules-have-saturated-weyl-filtrations
 kind: lemma
 title: Saturated Weyl filtrations of finite dimensional integral based modules
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

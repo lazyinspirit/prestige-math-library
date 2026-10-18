@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-link-state-dimension-formula
 kind: theorem
 title: "Link states are counted by a ballot-number difference"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

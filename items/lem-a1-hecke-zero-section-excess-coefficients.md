@@ -2,7 +2,7 @@
 id: lem-a1-hecke-zero-section-excess-coefficients
 kind: lemma
 title: "Excess intersection computes the A1 Hecke coefficients"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

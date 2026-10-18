@@ -2,7 +2,7 @@
 id: lem-finite-mode-car-occupation-matrix-units
 kind: lemma
 title: Finite CAR Occupation Operators Give All Matrix Units
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

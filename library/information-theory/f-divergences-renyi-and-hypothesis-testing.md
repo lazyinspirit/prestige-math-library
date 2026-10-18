@@ -1,7 +1,7 @@
 ---
 page: f-divergences-renyi-and-hypothesis-testing
 title: F-Divergences, Rényi Information, and Hypothesis Testing
-status: draft
+status: published
 requires: [measure-theoretic-information-and-conditioning, finite-sample-tests-neyman-pearson-and-valid-p-values]
 items:
   - def-finite-probability-vector

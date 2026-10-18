@@ -2,7 +2,7 @@
 id: thm-qc-tqc-toric-gap
 kind: theorem
 title: Exact finite-volume toric-code gap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-daha-a1-first-symmetric-macdonald-eigenfunctions
 kind: example
 title: "The first symmetric A1 Macdonald eigenfunctions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

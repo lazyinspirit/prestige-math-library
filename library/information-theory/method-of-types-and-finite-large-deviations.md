@@ -1,7 +1,7 @@
 ---
 page: method-of-types-and-finite-large-deviations
 title: "Method of Types and Finite Large Deviations"
-status: draft
+status: published
 requires: [finite-alphabet-entropy-and-divergence, measure-theoretic-information-and-conditioning, concentration-inequalities-and-tail-bounds]
 items:
   - def-it-empirical-type-and-type-class

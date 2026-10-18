@@ -2,7 +2,7 @@
 id: cex-countable-car-representations-are-not-all-fock
 kind: counterexample
 title: The Countable-Mode CAR Algebra Has a Non-Fock-Equivalent Irreducible Representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison-examples

@@ -32,7 +32,7 @@ verification:
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Theorem 6.27 and proof, §6.8, printed pp. 75–77"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement

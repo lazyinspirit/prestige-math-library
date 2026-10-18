@@ -2,7 +2,7 @@
 id: def-hall-littlewood-scalar-product-and-functions
 kind: definition
 title: "Hall–Littlewood scalar product and monic functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

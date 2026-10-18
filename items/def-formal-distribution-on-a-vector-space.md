@@ -2,7 +2,7 @@
 id: def-formal-distribution-on-a-vector-space
 kind: definition
 title: Formal distributions and fields on a vector space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

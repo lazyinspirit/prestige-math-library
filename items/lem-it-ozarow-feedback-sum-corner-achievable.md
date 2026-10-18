@@ -2,7 +2,7 @@
 id: lem-it-ozarow-feedback-sum-corner-achievable
 kind: lemma
 title: Ozarow linear feedback scheme achieves the two-user Gaussian sum point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

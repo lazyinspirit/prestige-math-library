@@ -2,7 +2,7 @@
 id: thm-yangian-periodic-transfer-matrices-commute
 kind: theorem
 title: "Finite periodic transfer matrices commute"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

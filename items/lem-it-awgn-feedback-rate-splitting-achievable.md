@@ -2,7 +2,7 @@
 id: lem-it-awgn-feedback-rate-splitting-achievable
 kind: lemma
 title: Rate splitting transfers Ozarow's sum point to lower-correlation corners
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

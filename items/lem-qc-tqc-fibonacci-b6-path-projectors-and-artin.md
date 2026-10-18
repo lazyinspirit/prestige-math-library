@@ -2,7 +2,7 @@
 id: lem-qc-tqc-fibonacci-b6-path-projectors-and-artin
 kind: lemma
 title: Fibonacci B6 path projectors satisfy the braid relations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

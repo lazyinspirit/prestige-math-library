@@ -1,0 +1,1006 @@
+Lecture 
+Relay Channels
+
+(Reading: NIT .–.)
+
+∙Discrete memoryless relay channel
+∙Cutset upper bound
+∙Decode–forward
+∙Compress–forward
+∙Gaussian relay channel
+
+© Copyright –Abbas El Gamal and Young-Han Kim
+Point-to-point communication system with a relay
+
+Xn
+
+
+Xn
+
+Yn
+
+
+Yn
+
+M
+̂M
+p(y, y|x, x)
+
+Relay encoder
+
+Encoder
+Decoder
+
+∙DM relay channel (RC) (X× X, p(y, y|x, x), Y× Y)
+
+∙A (nR, n) code:
+
+㶳Message set: [: nR]
+
+㶳Encoder: xn
+(m)
+
+㶳Relay encoder: xi(yi−
+), i ∈[: n]
+
+㶳Decoder: ̂m(yn
+)
+
+∙P(n)
+e , achievability, C: Defined as for the DMC
+
+∙Capacity is not known in general
+
+/ 
+
+
+Cutset upper bound
+
+∙Given sequence of codes with P(n)
+e
+→, ∃p(x, x) such that:
+
+X
+X
+
+X
+
+Y
+Y
+
+Y: X
+
+R < I(X, X; Y)
+
+Cooperative MAC bound
+
+R < I(X; Y, Y|X)
+
+Cooperative BC bound
+
+Cutset upper bound (Cover–El Gamal )
+
+C ≤max
+p(x,x) min恁I(X, X; Y), I(X; Y, Y|X)恑
+
+∙Tight for almost all classes of relay channels with known capacity
+
+∙But, is not tight in general (Example .)
+
+/ 
+Direct transmission
+
+X
+
+Y: X
+
+Y
+M
+̂M
+
+∙Relay takes no active role in communication
+
+Direct-transmission lower bound
+
+C ≥max
+p(x), x
+I(X; Y|X= x)
+
+∙Tight for reversely degraded DM-RC: X→(Y, X) →Y
+
+/ 
+
+
+Multihop
+
+∙All communication goes through the relay
+
+∙Block Markov coding: Send b −messages over b n-transmission blocks
+
+m
+m
+m
+mb−
+
+
+n
+
+Block 
+
+
+b −
+b
+
+/ 
+Multihop
+
+∙All communication goes through the relay
+
+∙Block Markov coding: Send b −messages over b n-transmission blocks
+
+X
+
+Y: X
+
+Y
+Mj
+
+̃Mj
+̃Mj−
+
+̂Mj−
+
+Multihop lower bound
+
+C ≥
+max
+p(x)p(x) min恁I(X; Y), I(X; Y|X)恑
+
+∙Tight for a cascade of two DMCs: p(y, y|x, x) = p(y|x)p(y|x)
+
+C = min恅max
+p(x) I(X; Y), max
+p(x) I(X; Y)恕
+
+/ 
+
+
+Proof of achievability
+
+∙Codebook generation: Fix p(x)p(x) that attains bound. For each j ∈[: b]
+
+㶳Independently generate nR sequences xn
+(mj) ∼∏n
+i=pX(xi), mj ∈[: nR]
+
+㶳Independently generate nR sequences xn
+(mj−) ∼∏n
+i=pX(xi), mj−∈[: nR]
+
+∙Codebooks: Cj = {(xn
+(mj), xn
+(mj−)) : mj−, mj ∈[: nR]}, j ∈[: b]
+
+∙Encoding:
+
+㶳To send mj in block j, transmit xn
+(mj) from Cj
+
+∙Relay encoding:
+
+㶳At the end of block j, find unique ̃mj such that (xn
+( ̃mj), xn
+( ̃mj−), yn
+(j)) ∈T (n)
+є
+
+㶳In block j + , transmit xn
+( ̃mj) from Cj+
+
+∙Decoding:
+
+㶳At the end of block j + , find unique ̂mj such that (xn
+( ̂mj), yn
+(j + )) ∈T (n)
+є
+
+/ 
+Analysis of the probability of error
+
+∙Consider P(E(j)) for Mj = 
+
+∙Let ̃Mj be the relay’s decoded message at the end of block j
+
+∙Note that
+
+P(E(j)) = P{ ̂Mj ̸= }
+
+≤P{ ̃Mj ̸= } + P{ ̂Mj ̸= ̃Mj}
+∙Error events:
+
+̃E(j) = 恁(Xn
+(), Xn
+( ̃Mj−), Yn
+(j)) ∉T (n)
+є
+恑
+
+̃E(j) = 恁(Xn
+(mj), Xn
+( ̃Mj−), Yn
+(j)) ∈T (n)
+є
+for some mj ̸= 恑
+
+E(j) = 恁(Xn
+( ̃Mj), Yn
+(j + )) ∉T (n)
+є
+恑
+
+E(j) = 恁(Xn
+(mj), Yn
+(j + )) ∈T (n)
+є
+for some mj ̸= ̃Mj恑
+∙Thus, by the union of the events bound
+
+P(E(j)) ≤P( ̃E(j)) + P( ̃E(j)) + P(E(j)) + P(E(j))
+
+/ 
+
+
+Analysis of the probability of error
+
+∙Error events:
+
+̃E(j) = 恁(Xn
+(), Xn
+( ̃Mj−), Yn
+(j)) ∉T (n)
+є
+恑
+
+̃E(j) = 恁(Xn
+(mj), Xn
+( ̃Mj−), Yn
+(j)) ∈T (n)
+є
+for some mj ̸= 恑
+
+E(j) = 恁(Xn
+( ̃Mj), Yn
+(j + )) ∉T (n)
+є
+恑
+
+E(j) = 恁(Xn
+(mj), Yn
+(j + )) ∈T (n)
+є
+for some mj ̸= ̃Mj恑
+
+∙By the independence of the codebooks, ̃Mj−is independent of Cj
+Thus by the LLN, P( ̃E(j)) →
+
+∙By the same independence and the packing lemma, P( ̃E(j)) →if
+
+R < I(X; Y|X) −δ(є)
+
+∙By the independence of the codebooks and the LLN, P(E(j)) →
+
+∙By the same independence and the packing lemma,
+P(E(j)) →if R < I(X; Y) −δ(є)
+
+/ 
+Coherent multihop
+
+∙Since sender knows what relay knows, they can coherently cooperate
+
+X
+
+Y: X
+
+Y
+
+̃Mj
+̃Mj−
+
+̂Mj−
+(Mj−, Mj)
+
+Coherent multihop lower bound
+
+C ≥
+max
+p(x)p(x) min恁I(X; Y), I(X; Y|X)恑
+
+/ 
+
+
+Proof of achievability
+
+∙Again use block Markov coding
+
+m
+m
+m
+mb−
+
+
+n
+
+Block 
+
+
+b −
+b
+
+∙Codebook generation: Fix p(x, x) that attains bound. For j ∈[: b]:
+
+㶳Independently generate nR sequences xn
+(mj−) ∼∏n
+i=pX(xi), mj−∈[: nR]
+
+㶳For each mj−∈[: nR], conditionally independently generate nR sequences
+xn
+(mj|mj−) ∼∏n
+i=pX|X(xi|xi(mj−)), mj ∈[: nR]
+
+∙Codebooks: Cj = {(xn
+(mj|mj−), xn
+(mj−)) : mj−, mj ∈[: nR]}, j ∈[: b]
+
+/ 
+Proof of achievability
+
+Block
+
+
+
+. . .
+b −
+b
+
+X
+xn
+(m|)
+xn
+(m|m)
+xn
+(m|m)
+. . .
+xn
+(mb−|mb−)
+xn
+(|mb−)
+
+Y
+̃m
+̃m
+̃m
+. . .
+̃mb−
+
+
+X
+xn
+()
+xn
+( ̃m)
+xn
+( ̃m)
+. . .
+xn
+( ̃mb−)
+xn
+( ̃mb−)
+
+Y
+
+̂m
+̂m
+. . .
+̂mb−
+̂mb−
+
+∙Encoding:
+
+㶳In block j, transmit xn
+(mj|mj−) from codebook Cj
+∙Relay encoding:
+
+㶳At end of block j, find unique ̃mj such that (xn
+( ̃mj| ̃mj−), xn
+( ̃mj−), yn
+(j)) ∈T (n)
+є
+(successful if R < I(X; Y|X) −δ(є))
+
+㶳In block j + , transmit xn
+( ̃mj) from codebook Cj+
+∙Decoding:
+
+㶳At end of block j + , find unique message ̂mj such that (xn
+( ̂mj), yn
+(j + )) ∈T (n)
+є
+(successful if R < I(X; Y) −δ(є))
+
+/ 
+
+
+Decode–forward
+
+∙Also decode information from Xvia backward decoding
+
+X
+
+Y: X
+
+Y
+(Mj−, Mj)
+
+̃Mj
+̃Mj−
+
+̂Mj−
+
+Decode–forward lower bound (Cover–El Gamal )
+
+C ≥max
+p(x,x) min恁I(X, X; Y), I(X; Y|X)恑
+
+∙Tight for a physically degraded DM-RC: X→(Y, X) →Y
+
+/ 
+Proof of achievability (Zeng–Kuhlmann–Buzo )
+
+∙Codebook generation, encoding, relay encoding:
+
+㶳Same as coherent multihop
+
+㶳Codebooks: Cj = {(xn
+(mj|mj−), xn
+(mj−)): mj−, mj ∈[: nR]}, j ∈[: b]
+
+Block
+
+
+
+. . .
+b −
+b
+
+X
+xn
+(m|)
+xn
+(m|m)
+xn
+(m|m)
+. . .
+xn
+(mb−|mb−)
+xn
+(|mb−)
+
+Y
+̃m→
+̃m→
+̃m→
+. . .
+̃mb−
+
+
+X
+xn
+()
+xn
+( ̃m)
+xn
+( ̃m)
+. . .
+xn
+( ̃mb−)
+xn
+( ̃mb−)
+
+Y
+
+̂m
+←̂m
+. . .
+←̂mb−
+←̂mb−
+
+㶳Successful relay decoding: R < I(X; Y|X) −δ(є)
+
+∙Backward decoding (Willems–van der Meulen ): ̂mb = 
+
+㶳For j = b −, . . . , , find unique ̂mj with (xn
+( ̂mj+| ̂mj), xn
+( ̂mj), yn
+(j + )) ∈T (n)
+є
+㶳Assuming ̂mj+is correct, successful if R < I(X, X; Y) −δ(є)
+
+/ 
+
+
+Decode–forward
+
+X
+
+Y: X
+
+Y
+(Mj−, Mj)
+
+̃Mj
+̃Mj−
+
+̂Mj−
+
+∙Decode–forward: C ≥maxp(x,x) min恁I(X, X; Y), I(X; Y|X)恑
+
+Cutset bound:
+C ≤maxp(x,x) min恁I(X, X; Y), I(X; Y, Y|X)恑
+
+∙Performs well when the relay is stronger than the receiver
+
+∙But worse than even direct transmission if the relay is weaker
+
+∙Solutions:
+
+㶳Partial decode–forward: Decode only part of the message
+
+㶳Compress–forward: Do not decode the message at all
+
+/ 
+Partial decode–forward
+
+X
+
+Y: X
+
+Y
+(M㰀
+j−, M㰀
+j , M㰀㰀
+j )
+
+̃M㰀
+j
+̃M㰀
+j−
+
+( ̂M㰀
+j−, ̂M㰀㰀
+j−)
+
+Partial decode–forward lower bound (Cover–El Gamal )
+
+C ≥
+max
+p(u,x,x) min恁I(X, X; Y), I(U; Y|X) + I(X; Y|X, U)恑
+
+∙Achievability outline:
+
+㶳Codebook: For j ∈[: b],
+
+Cj = 恂(un(m㰀
+j |m㰀
+j−), xn
+(m㰀
+j, m㰀㰀
+j |m㰀
+j−), xn
+(m㰀
+j−)) : m㰀
+j−, m㰀
+j ∈[: nR㰀], m㰀㰀
+j ∈[: nR㰀㰀]恒
+
+㶳Coherent cooperation on M㰀
+j: R㰀< min{I(U; Y|X) −δ(є), I(U, X; Y) −δ(є)}
+
+㶳Superposition coding of M㰀㰀
+j : R㰀㰀< I(X; Y|U, X) −δ(є)
+
+/ 
+
+
+Partial decode–forward
+
+∙Partial decode–forward lower bound:
+
+C ≥
+max
+p(u,x,x) min恁I(X, X; Y), I(U; Y|X) + I(X; Y|X, U)恑
+
+∙Tight for a semideterministic DM-RC (El Gamal–Aref ): Y= y(X, X)
+
+C = max
+p(x,x) min恁I(X, X; Y), H(Y|X) + I(X; Y|X, Y)恑
+
+∙Tight for a DM-RC with orthogonal sender components (El Gamal–Zahedi )
+
+X㰀㰀
+
+
+X㰀
+
+
+Y
+
+X
+Y
+p(y|x㰀㰀
+, x)
+
+p(y|x㰀
+, x)
+
+C =
+max
+p(x)p(x㰀
+|x)p(x㰀㰀
+|x) min恁I(X㰀
+, X; Y), I(X㰀㰀
+; Y|X) + I(X㰀
+; Y|X)恑
+
+/ 
+Compress–forward (Cover–El Gamal )
+
+∙Key idea: Compress (quantize) Yinstead of fully or partially decoding it
+
+X
+
+Y: X
+
+Y
+Mj
+
+̂Yn
+j ̂Yn
+,j−
+
+̂Mj−
+
+Compress–forward lower bound (El Gamal–Mohseni–Zahedi )
+
+C ≥
+max
+p(x)p(x)p(̂y|y,x) min恁I(X, X; Y) −I(Y; ̂Y|X, X, Y), I(X; ̂Y, Y|X)恑
+
+∙Tight for some DM-RCs with orthogonal receiver components (read NIT ..)
+
+Including example showing that cutset bound is not tight in general
+
+/ 
+
+
+Proof of achievability
+
+∙Block Markov coding, compress-bin, simultaneous nonunique decoding
+
+∙Codebook generation: Fix p(x)p(x)p(̂y|y, x) that attains bound. For j ∈[: b]:
+
+㶳Independently generate nR sequences xn
+(mj) ∼∏n
+i=pX(xi), mj ∈[: nR]
+
+㶳Independently generate nRsequences xn
+(lj−) ∼∏n
+i=pX(xi), lj−∈[: nR]
+
+㶳For each lj−∈[: nR], randomly and conditionally independently generate ñR
+
+(̃R≥R) sequences ̂yn
+(kj|lj−) ∼∏n
+i=p̂Y|X(̂yi|xi(lj−)), kj ∈[: ñR]
+
+∙Codebooks: For j ∈[: b],
+
+Cj = 恁(xn
+(mj), xn
+(lj−), ̂yn
+(kj|lj−))): mj ∈[: nR], lj−∈[: nR], kj ∈[: ñR]恑
+
+∙Partition the set [: ñR] into nRequal-size bins B(lj), lj ∈[: nR]
+
+/ 
+Proof of achievability
+
+Block
+
+
+
+. . .
+b −
+b
+
+X
+xn
+(m)
+xn
+(m)
+xn
+(m)
+. . .
+xn
+(mb−)
+xn
+()
+
+Y
+̂yn
+(k|), l
+̂yn
+(k|l), l
+̂yn
+(k|l), l
+. . .
+̂yn
+(kb−|lb−), lb−
+
+
+X
+xn
+()
+xn
+(l)
+xn
+(l)
+. . .
+xn
+(lb−)
+xn
+(lb−)
+
+Y
+
+∙Encoding:
+
+㶳Transmit xn
+(mj) from codebook Cj
+∙Relay encoding:
+
+㶳At the end of block j, find kj such that (yn
+(j), ̂yn
+(kj|lj−), xn
+(lj−)) ∈T (n)
+є㰀
+(by covering lemma successful if ̃R> I(Y; ̂Y|X) + δ(є㰀))
+
+㶳In block j + , transmit xn
+(lj), where lj is the bin index of kj
+
+/ 
+
+
+Proof of achievability
+
+Block
+
+
+
+. . .
+b −
+b
+
+X
+xn
+(m)
+xn
+(m)
+xn
+(m)
+. . .
+xn
+(mb−)
+xn
+()
+
+Y
+̂yn
+(k|), l
+̂yn
+(k|l), l
+̂yn
+(k|l), l
+. . .
+̂yn
+(kb−|lb−), lb−
+
+
+X
+xn
+()
+xn
+(l)
+xn
+(l)
+. . .
+xn
+(lb−)
+xn
+(lb−)
+
+Y
+
+̂l, ̂k, ̂m
+̂l, ̂k, ̂m
+. . .
+̂lb−, ̂kb−, ̂mb−
+̂lb−, ̂kb−, ̂mb−
+
+∙Decoding:
+
+㶳At the end of block j + , find the uniquêlj such that (xn
+(̂lj), yn
+(j + )) ∈T (n)
+є
+(successful if R< I(X; Y) −δ(є))
+
+㶳Find the unique ̂mj such that (xn
+( ̂mj), xn
+(̂lj−), ̂yn
+(̂kj|̂lj−), yn
+(j)) ∈T (n)
+є
+for some ̂kj ∈B(̂lj)
+(successful if R + ̃R−R< I(X; Y|X) + I(̂Y; X, Y|X) −δ(є))
+∙Using F–M to eliminate R, ̃Ryields the two bounds
+
+/ 
+Gaussian relay channel
+
+X
+
+g
+
+Z
+
+Y
+X
+g
+Z
+
+Y
+g
+
+∙Z, Z∼N(, ) independent of each other
+
+∙Power constraints P on Xand on X
+
+∙SNRs: S= g
+P, S= g
+P, S= g
+P
+
+∙Capacity not known for any S, S, S> 
+
+∙Decode–forward and compress–forward achieve within /bits of cutset bound
+
+∙Partial decode–forward = max{decode–forward, direct transmission}
+
+/ 
+
+
+Comparison of coding schemes
+
+ 0
+
+ 0.5
+
+ 1
+
+ 1.5
+
+ 2
+
+ 2.5
+
+ 0
+ 2
+ 4
+ 6
+ 8
+ 10
+S
+
+RCS
+
+RDF
+
+RCF
+
+S= S, S= SS= S, S= S
+
+/ 
+Comparison of coding schemes
+
+ 0
+
+ 0.5
+
+ 1
+
+ 1.5
+
+ 2
+
+ 2.5
+
+ 3
+
+ 0
+ 2
+ 4
+ 6
+ 8
+ 10
+S
+
+RCS
+
+RDF
+
+RCF
+
+S= S, S= SS= S, S= S
+
+/ 
+
+
+Summary
+
+∙Discrete memoryless relay channel (DM-RC)
+∙Cutset bound for the relay channel:
+
+㶳Cooperative MAC and BC bounds
+
+㶳Not tight in general
+
+∙Block Markov coding
+
+∙Use of multiple independent codebooks
+∙Decode–forward:
+
+㶳Backward decoding
+
+㶳Optimal for the degraded relay channel
+
+∙Partial decode–forward
+
+∙Compress–forward
+
+∙Gaussian relay channel
+
+/ 
+References
+
+Cover, T. M. and El Gamal, A. (). Capacity theorems for the relay channel. IEEE Trans. Inf. Theory, (),
+–.
+
+El Gamal, A. and Aref, M. R. (). The capacity of the semideterministic relay channel. IEEE Trans. Inf.
+Theory, (), .
+
+El Gamal, A., Mohseni, M., and Zahedi, S. (). Bounds on capacity and minimum energy-per-bit for
+AWGN relay channels. IEEE Trans. Inf. Theory, (), –.
+
+El Gamal, A. and Zahedi, S. (). Capacity of a class of relay channels with orthogonal components.
+IEEE Trans. Inf. Theory, (), –.
+
+Willems, F. M. J. and van der Meulen, E. C. (). The discrete memoryless multiple-access channel with
+cribbing encoders. IEEE Trans. Inf. Theory, (), –.
+
+Zeng, C.-M., Kuhlmann, F., and Buzo, A. (). Achievability proof of some multiuser channel coding
+theorems using backward decoding. IEEE Trans. Inf. Theory, (), –.
+
+/ 
+
+

@@ -2,7 +2,7 @@
 id: def-it-information-leakage-and-equivocation
 kind: definition
 title: "Information leakage and equivocation for finite observations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

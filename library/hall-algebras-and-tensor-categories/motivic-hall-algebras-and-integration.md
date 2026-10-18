@@ -1,7 +1,7 @@
 ---
 page: motivic-hall-algebras-and-integration
 title: "Motivic Hall Algebras and Integration Maps"
-status: draft
+status: published
 requires:
   - finitary-ringel-hall-algebras
   - derived-hall-algebras

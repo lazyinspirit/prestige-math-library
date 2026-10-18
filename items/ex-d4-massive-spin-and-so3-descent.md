@@ -2,7 +2,7 @@
 id: ex-d4-massive-spin-and-so3-descent
 kind: example
 title: D=4 massive spin one-half and spin one descent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

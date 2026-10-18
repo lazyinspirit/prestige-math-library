@@ -2,7 +2,7 @@
 id: def-finite-discrete-source-and-blocks
 kind: definition
 title: "Finite discrete sources and product blocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

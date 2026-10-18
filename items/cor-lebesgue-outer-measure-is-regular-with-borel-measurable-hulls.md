@@ -25,7 +25,7 @@ sources:
     - title: "T. Tao, An Introduction to Measure Theory (GSM 126), Exercise 1.2.14"
       url: "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"
     - title: "John K. Hunter, Measure Theory (UC Davis lecture notes), Chapter 2"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 pipeline_run: null
 ---
 

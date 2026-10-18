@@ -2,7 +2,7 @@
 id: lem-tracial-standard-form-and-normal-functional-vectors
 kind: lemma
 title: "Tracial standard form, normal functional vectors, and expectation"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

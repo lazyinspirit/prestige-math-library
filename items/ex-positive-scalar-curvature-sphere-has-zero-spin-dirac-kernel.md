@@ -2,7 +2,7 @@
 id: ex-positive-scalar-curvature-sphere-has-zero-spin-dirac-kernel
 kind: example
 title: "The round two-sphere has zero untwisted Spin Dirac kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory-examples

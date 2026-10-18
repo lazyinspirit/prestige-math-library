@@ -1,7 +1,7 @@
 ---
 page: operator-algebraic-states-and-gns-representations-examples
 title: "Operator-Algebraic States and GNS Representations: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - operator-algebraic-states-and-gns-representations
 items: []

@@ -2,7 +2,7 @@
 id: rem-daha-skein-and-physical-knot-interfaces-require-specific-maps
 kind: remark
 title: "Skein and physical knot interfaces require separate DAHA maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

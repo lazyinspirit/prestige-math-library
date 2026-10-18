@@ -2,7 +2,7 @@
 id: lem-braided-tensor-product-of-separable-algebras-is-separable
 kind: lemma
 title: The braided tensor product of separable algebras is separable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

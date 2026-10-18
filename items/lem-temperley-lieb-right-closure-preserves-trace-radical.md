@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-right-closure-preserves-trace-radical
 kind: lemma
 title: Normalized right closure preserves the diagram trace radical
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-octonions-are-alternative-but-not-associative
 kind: theorem
 title: The Cayley–Dickson octonions are alternative but not associative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: jordan-spin-factor-and-alternative-algebras

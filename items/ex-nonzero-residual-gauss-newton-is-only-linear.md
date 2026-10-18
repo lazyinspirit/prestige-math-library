@@ -17,8 +17,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Jorge Nocedal and Stephen J. Wright, Numerical Optimization, second edition"

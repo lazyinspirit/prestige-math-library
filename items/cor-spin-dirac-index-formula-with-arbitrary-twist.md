@@ -2,7 +2,7 @@
 id: cor-spin-dirac-index-formula-with-arbitrary-twist
 kind: corollary
 title: "The twisted Spin Dirac index is the integral of A-hat times ch(E)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory

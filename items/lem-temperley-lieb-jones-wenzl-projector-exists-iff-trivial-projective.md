@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-jones-wenzl-projector-exists-iff-trivial-projective
 kind: lemma
 title: "A Jones–Wenzl annihilator exists exactly when the trivial module is projective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

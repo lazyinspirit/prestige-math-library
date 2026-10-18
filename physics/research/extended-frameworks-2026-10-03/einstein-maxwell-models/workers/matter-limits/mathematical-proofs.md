@@ -1,5 +1,7 @@
 # Smooth charged matter, conformastatic geometry and controlled limits
 
+Current 2026-10-14 contract: [pointwise energy conditions](../../audit-contracts.md#energy-condition-vocabulary) supplies the exact WEC/NEC/SEC/DEC definitions before ML03; [all-item authoring](../../audit-contracts.md#all-item-authoring) records the remaining production obligations without changing the exact smooth families or finite-error claims.
+
 Research commission2026-10-03; written2026-10-04. All sections here have exclusively mathematical hypotheses. None adopts a physical law or asserts an experiment. Physical interpretations require the separate model postulates in physical-models.md. No production item, publication or independent acceptance is claimed. Use the actual inspected GR G0/G1 conventions: smooth oriented time-oriented Hausdorff second-countable four-manifold, signature −+++, Levi–Civita ∇, R^a_bcd∂a=R(∂c,∂d)∂b. Inherited bundle/GR supplier ACω is carried where that supplier is consumed. Tensor calculations themselves use finite coordinate algebra. All finite integrations use GR G4 admitted charts/chains, or explicitly written spherical/one-dimensional integrals.
 
 <a id="ml00"></a>

@@ -1,7 +1,7 @@
 ---
 page: toric-code-anyons-logical-operators-and-protection-examples
 title: Toric Code Anyons, Logical Operators, and Protection — Examples
-status: draft
+status: published
 requires:
   - toric-code-anyons-logical-operators-and-protection
 items: []

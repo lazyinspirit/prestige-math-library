@@ -2,7 +2,7 @@
 id: lem-relative-three-bordism-surgery-presentation
 kind: lemma
 title: "Marked relative surgery presentations and complete moves for three-dimensional ribbon bordisms"
-status: draft
+status: published
 dependency_level: 12
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -2,7 +2,7 @@
 id: lem-clifford-quotient-factorization
 kind: lemma
 title: Factorization through the Clifford quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: clifford-universal-algebras-and-pbw

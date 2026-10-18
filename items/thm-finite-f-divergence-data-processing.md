@@ -2,7 +2,7 @@
 id: thm-finite-f-divergence-data-processing
 kind: theorem
 title: Finite data processing for f-divergences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

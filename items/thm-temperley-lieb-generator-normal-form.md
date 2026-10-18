@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-generator-normal-form
 kind: theorem
 title: "Jones normal forms span and are counted by Catalan paths"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

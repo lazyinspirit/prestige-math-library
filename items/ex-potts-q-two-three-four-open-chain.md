@@ -2,7 +2,7 @@
 id: ex-potts-q-two-three-four-open-chain
 kind: example
 title: "The Q = 2, 3, 4 Potts chains use three distinct q normalizations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

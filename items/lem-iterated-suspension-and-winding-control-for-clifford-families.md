@@ -2,7 +2,7 @@
 id: lem-iterated-suspension-and-winding-control-for-clifford-families
 kind: lemma
 title: Iterated suspension and winding control
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

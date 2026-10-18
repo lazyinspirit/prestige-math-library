@@ -2,7 +2,7 @@
 id: lem-finite-frobenius-functional-determines-coproduct
 kind: lemma
 title: "A Frobenius functional determines a unique Frobenius coproduct"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

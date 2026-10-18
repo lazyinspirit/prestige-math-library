@@ -2,7 +2,7 @@
 id: thm-rank-one-heisenberg-vertex-operator-algebra
 kind: theorem
 title: "The rank-one Heisenberg vacuum space is a conformal VOA of central charge one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

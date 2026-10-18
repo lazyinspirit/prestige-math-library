@@ -25,8 +25,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications, complete lecture notes"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 1, Poisson mass formula and count moments, PDF pp. 9-10."
-verification:
-  precheck: pending
 ---
 
 ## Statement

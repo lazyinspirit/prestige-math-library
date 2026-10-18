@@ -2,7 +2,7 @@
 id: lem-density-channel-threshold-random-coding-bound
 kind: lemma
 title: Threshold decoding bound for memoryless channels with densities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

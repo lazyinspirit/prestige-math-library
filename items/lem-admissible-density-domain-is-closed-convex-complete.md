@@ -15,8 +15,6 @@ sources:
   references:
     - title: Eric Cancès, Gaspard Kemlin, and Antoine Levitt, Convergence analysis of direct minimization and self-consistent iterations, §4.4 and Appendix Lemma 4.1
       url: https://arxiv.org/pdf/2004.09088
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

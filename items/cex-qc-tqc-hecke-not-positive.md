@@ -2,7 +2,7 @@
 id: cex-qc-tqc-hecke-not-positive
 kind: counterexample
 title: A Hecke parameter does not certify a positive unitary structure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

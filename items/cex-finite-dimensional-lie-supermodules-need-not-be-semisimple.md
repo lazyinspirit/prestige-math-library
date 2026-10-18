@@ -2,7 +2,7 @@
 id: cex-finite-dimensional-lie-supermodules-need-not-be-semisimple
 kind: counterexample
 title: Finite-dimensional Lie supermodule categories need not be semisimple
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

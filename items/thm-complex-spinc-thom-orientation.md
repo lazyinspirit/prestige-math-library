@@ -2,7 +2,7 @@
 id: thm-complex-spinc-thom-orientation
 kind: theorem
 title: Complex Spin-c Thom orientation from the equivariant spinor symbol
-status: draft
+status: published
 origin: pipeline
 deps:
 - thm-homotopy-invariance-of-vector-bundle-pullback

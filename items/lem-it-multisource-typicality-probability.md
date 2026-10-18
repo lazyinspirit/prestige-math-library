@@ -2,7 +2,7 @@
 id: lem-it-multisource-typicality-probability
 kind: lemma
 title: "Joint typicality probability tends to one for a finite IID multisource"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

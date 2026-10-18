@@ -2,7 +2,7 @@
 id: def-qa-37-fusion-measurement
 kind: definition
 title: "Fusion-channel measurement access"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

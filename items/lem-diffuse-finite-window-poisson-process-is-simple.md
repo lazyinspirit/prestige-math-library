@@ -25,8 +25,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications, complete lecture notes"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 4, §4.3, Example 4.5, PDF pp. 62–63: the finite Poisson process has a mixed-binomial representation. The simplicity argument is supplied locally."
-verification:
-  precheck: pending
 ---
 
 ## Statement

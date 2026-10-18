@@ -3,7 +3,7 @@ id: lem-rational-cherednik-kz-relation-specializes-in-flat-family
 kind: lemma
 title: "Hecke relations specialize in the generalized-standard family"
 deps: [thm-rational-cherednik-pbw-theorem, thm-rational-cherednik-category-o-projective-generator-from-generalized-standards, lem-rational-cherednik-dunkl-localization-and-flat-connection, def-rational-cherednik-kz-functor-and-finite-hecke-algebra]
-status: draft
+status: published
 dependency_level: 11
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

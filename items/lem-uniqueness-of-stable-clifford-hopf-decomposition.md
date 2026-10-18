@@ -2,7 +2,7 @@
 id: lem-uniqueness-of-stable-clifford-hopf-decomposition
 kind: lemma
 title: Uniqueness of the stable Clifford–Hopf decomposition
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: thm-antiunitary-az-classes-are-clifford-extensions
 kind: theorem
 title: Antiunitary AZ symmetry classes give Clifford extension problems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations

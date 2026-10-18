@@ -2,7 +2,7 @@
 id: lem-it-finite-relative-entropy-continuity-on-simplex
 kind: lemma
 title: "Finite relative entropy is continuous on a simplex with positive reference law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

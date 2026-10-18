@@ -2,7 +2,7 @@
 id: thm-it-error-exponent-zero-above-capacity
 kind: theorem
 title: The error exponent is zero above finite-DMC capacity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

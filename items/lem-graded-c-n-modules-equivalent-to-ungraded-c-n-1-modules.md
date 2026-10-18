@@ -2,7 +2,7 @@
 id: lem-graded-c-n-modules-equivalent-to-ungraded-c-n-1-modules
 kind: lemma
 title: "Graded C_n modules and ungraded C_(n−1) modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations

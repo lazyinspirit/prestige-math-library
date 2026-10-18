@@ -2,7 +2,7 @@
 id: thm-lz78-individual-sequence-finite-state-optimality
 kind: theorem
 title: "LZ78 finite-state optimality for individual sequences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

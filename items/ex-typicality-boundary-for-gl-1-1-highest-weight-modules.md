@@ -2,7 +2,7 @@
 id: ex-typicality-boundary-for-gl-1-1-highest-weight-modules
 kind: example
 title: The typicality boundary in a gl(1|1) highest-weight module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

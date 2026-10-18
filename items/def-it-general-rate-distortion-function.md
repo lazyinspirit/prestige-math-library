@@ -2,7 +2,7 @@
 id: def-it-general-rate-distortion-function
 kind: definition
 title: "General single-letter information rate-distortion function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

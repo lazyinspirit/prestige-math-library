@@ -30,8 +30,6 @@ sources:
     - title: "Günter Last and Mathew Penrose, Lectures on the Poisson Process, author-hosted 2017 version"
       url: "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
       locator: "Chapter 3, Theorem 3.6 and Proposition 3.8, PDF pp. 33–34: finite-intensity Poisson construction and mixed-binomial law."
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

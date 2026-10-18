@@ -2,7 +2,7 @@
 id: lem-it-gaussian-reference-kernel-information-lower-bound
 kind: lemma
 title: "Gaussian reference-kernel mutual-information lower bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

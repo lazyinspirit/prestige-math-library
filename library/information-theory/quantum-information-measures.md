@@ -1,7 +1,7 @@
 ---
 page: quantum-information-measures
 title: "Quantum Information Measures"
-status: draft
+status: published
 requires:
   - finite-alphabet-entropy-and-divergence
   - trace-distance-fidelity-and-information-limits

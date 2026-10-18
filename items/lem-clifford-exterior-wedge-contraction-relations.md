@@ -2,7 +2,7 @@
 id: lem-clifford-exterior-wedge-contraction-relations
 kind: lemma
 title: Wedge and contraction operators satisfy the Clifford relations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: clifford-universal-algebras-and-pbw

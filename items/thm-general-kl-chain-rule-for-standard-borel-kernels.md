@@ -2,7 +2,7 @@
 id: thm-general-kl-chain-rule-for-standard-borel-kernels
 kind: theorem
 title: "KL chain rule for standard-Borel disintegrations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

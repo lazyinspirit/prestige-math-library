@@ -2,7 +2,7 @@
 id: lem-it-finite-log-sum-inequality
 kind: lemma
 title: "Finite log-sum inequality with support and equality cases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-spin-thom-isomorphism-rank-eight-multiples-and-rank-four-ksp
 kind: theorem
 title: Real Spin Thom isomorphisms with real and quaternionic sources
-status: draft
+status: published
 origin: pipeline
 deps:
 - thm-real-clifford-thom-isomorphism

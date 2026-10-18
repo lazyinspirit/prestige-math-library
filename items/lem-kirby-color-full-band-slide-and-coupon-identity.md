@@ -2,7 +2,7 @@
 id: lem-kirby-color-full-band-slide-and-coupon-identity
 kind: lemma
 title: "The complete Kirby-color band-slide identity with open colored graph coupons"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

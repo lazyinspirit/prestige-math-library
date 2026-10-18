@@ -2,7 +2,7 @@
 id: ex-jordan-quiver-extension-correspondence
 kind: example
 title: "The one-loop quiver extension correspondence in dimension two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

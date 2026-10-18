@@ -2,7 +2,7 @@
 id: cex-unfiltered-l-infinity-maurer-cartan-sum-is-undefined
 kind: counterexample
 title: "Without a complete filtration an infinite Maurer–Cartan sum may be undefined"
-status: draft
+status: published
 dependency_level: 6
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

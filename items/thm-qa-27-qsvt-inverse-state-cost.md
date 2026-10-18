@@ -25,8 +25,6 @@ axiom_use: "None; the finite SVD and the supplied query-cost results suffice."
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

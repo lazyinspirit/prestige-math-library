@@ -2,7 +2,7 @@
 id: def-hall-algebra-module
 kind: definition
 title: "Modules over a Hall algebra are unital algebra representations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-hall-euler-form-is-additive
 kind: lemma
 title: "The hereditary Euler form is additive on the Grothendieck group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

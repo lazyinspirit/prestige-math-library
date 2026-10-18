@@ -1,7 +1,7 @@
 ---
 page: algebraic-representation-and-tensor-symmetry-map-examples
 title: "Algebra, Modules, and Tensor Symmetry Interfaces: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-standard-two-dimensional-sl2-module-and-enveloping-algebra

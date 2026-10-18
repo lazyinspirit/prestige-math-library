@@ -17,8 +17,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Christian Clason, Regularization of Inverse Problems, full lecture notes"

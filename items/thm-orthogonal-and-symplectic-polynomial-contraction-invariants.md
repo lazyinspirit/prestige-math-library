@@ -2,7 +2,7 @@
 id: thm-orthogonal-and-symplectic-polynomial-contraction-invariants
 kind: theorem
 title: Polynomial invariants of the full orthogonal and symplectic groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

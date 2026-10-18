@@ -17,8 +17,6 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pending
 proof_strategy: direct
 sources:
   references:

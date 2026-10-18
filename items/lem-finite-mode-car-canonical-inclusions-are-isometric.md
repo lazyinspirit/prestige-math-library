@@ -2,7 +2,7 @@
 id: lem-finite-mode-car-canonical-inclusions-are-isometric
 kind: lemma
 title: Canonical Finite-Mode CAR Inclusions Are Isometric
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

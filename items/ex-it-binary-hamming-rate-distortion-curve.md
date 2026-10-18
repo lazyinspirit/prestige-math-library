@@ -2,7 +2,7 @@
 id: ex-it-binary-hamming-rate-distortion-curve
 kind: example
 title: "Binary Hamming rate-distortion curve at p equals one quarter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

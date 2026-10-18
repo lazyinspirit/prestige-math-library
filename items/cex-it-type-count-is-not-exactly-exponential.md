@@ -2,7 +2,7 @@
 id: cex-it-type-count-is-not-exactly-exponential
 kind: counterexample
 title: "A balanced binary type class is not exactly exponential in entropy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

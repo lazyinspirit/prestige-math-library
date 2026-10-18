@@ -23,8 +23,6 @@ axiom_use: Countable Choice enters through weighted path-space completeness; the
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

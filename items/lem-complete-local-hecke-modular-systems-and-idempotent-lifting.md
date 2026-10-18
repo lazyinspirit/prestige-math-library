@@ -3,7 +3,7 @@ id: lem-complete-local-hecke-modular-systems-and-idempotent-lifting
 kind: lemma
 title: "Complete local modular systems and integral idempotent lifting"
 deps: [def-axiom-of-choice, lem-the-laurent-polynomial-ring-is-noetherian-and-a-unique-factorisation-domain, thm-noetherian-ring-quotients-and-localisations, cor-polynomial-ring-over-a-field-is-a-pid, thm-krull-height-theorem, thm-completion-of-a-noetherian-local-ring, thm-completion-preserves-regular-local-rings, thm-regular-local-rings-are-domains-and-cohen-macaulay, thm-nakayama-lemma, thm-finite-modules-over-complete-noetherian-rings-are-complete]
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

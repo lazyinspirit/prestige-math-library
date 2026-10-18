@@ -2,7 +2,7 @@
 id: ex-d4-helicity-and-continuous-spin-central-parities
 kind: example
 title: D=4 helicity and both continuous-spin central parities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

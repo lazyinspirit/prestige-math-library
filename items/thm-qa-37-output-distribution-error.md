@@ -2,7 +2,7 @@
 id: thm-qa-37-output-distribution-error
 kind: theorem
 title: "Operator error bounds measured output variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

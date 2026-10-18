@@ -1,7 +1,7 @@
 ---
 page: unitary-fusion-spaces-f-and-r-symbols-and-anyon-models-examples
 title: Unitary Fusion Spaces, F/R Symbols, and Anyon Models — Examples
-status: draft
+status: published
 requires:
   - unitary-fusion-spaces-f-and-r-symbols-and-anyon-models
 items: []

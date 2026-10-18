@@ -13,8 +13,6 @@ axiom_use: No choice principle is used; the estimate is bilinearity and the tria
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

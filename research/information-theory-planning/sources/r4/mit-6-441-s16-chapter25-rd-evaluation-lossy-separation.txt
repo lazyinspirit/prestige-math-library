@@ -1,0 +1,653 @@
+
+
+===== PDF PAGE 1 =====
+
+§ 25. Evaluating R(D). Lossy Source-Channel separation.
+
+
+
+
+Last time: For stationary memoryless (iid) sources and separable distortion, under the assumption
+that Dmax < ∞.
+                      R( D) = Ri(D) =      inf     I ( S;Sˆ ) .
+                                                           PS∣S∶ˆ  E d(S,S)≤Dˆ
+
+25.1  Evaluation of R ( D )
+
+So far we’ve proved some properties about the rate distortion function, now we’ll compute its value
+for a few simple statistical sources. We’ll do this in a somewhat unsatisfying way: guess the answer,
+then verify its correctness. At the end, we’ll show that there is a pattern behind this method.
+
+25.1.1  Bernoulli Source
+
+Let S ∼ Ber (p) , p ≤/1 2, with Hamming distortion d(S,S)ˆ = 1{S =/ S}ˆ  and alphabets A = Aˆ = {0,1}.
+Then d(sn,sˆn ) = n∥sn1    −sˆn∥Hamming is the bit-error rate.
+                                +   Claim: R ( D ) = ∣(h p) −(h D )∣
+
+Proof. Since Dmax = p, in the sequel we can assume D < p for otherwise there is nothing to show.
+                                                                    ⊥ Z ∼   (Achievability) We’re free to cho ose any P Sˆ∣S , so choose S = Sˆ + Z, where Sˆ ∼ Ber (p ′)
+                           ′Ber ( D ) , and p                     is such that p ′( 1 − D ) + ( 1 − p ′) D = p so that p ′ < p. In other words, the backward
+channel P S ∣S             ˆ is a BSC ( D ) . This induces some forward channel P Sˆ∣S . Then,
+
+                             I (S;Sˆ) = H (S ) − H (S ∣ˆS ) = h (p ) −(h D )
+
+Since one such P Sˆ∣S exists, we have the upper bound R (D ) ≤h(p) −h( D).
+   (Converse ) First proof: For any P                                     such that P[S ≠ˆS] ≤D ≤p ≤1,2                                                         ˆS∣S
+
+                               I( S;S)ˆ = H(S) −H(S∣ˆS)
+                                  = H (S ) − H (S + Sˆ∣ˆ)S
+                                  ≥ H (S ) − H(S + ˆS)
+                                  = h (p ) −(h P[S ≠ˆS])
+                                  ≥ h (p ) −h(D)
+
+   Second proof: Here is a more general strategy. Denote the random transformation from the
+                        ∗achievability proof by P                                          . Now we need to show that there is no better Q                                                                       with EQ [ d( S,Sˆ )] ≤ D                      Sˆ                                                                                   S∣Sˆ                                                              ∣S
+
+
+
+
+
+                                         255
+
+===== PDF PAGE 2 =====
+
+and a smaller mutual information. Then consider the chain:
+
+                 R(D) ≤I(PS,QSˆ∣)S = D(QS ∣ˆ∥PSS   ∣QˆS)
+                                                                       PS∣ˆS
+                                                  ˆ QSˆ ) + EQ [ log     ]                        = D ( QS ∣∥S                                            ˆ PS ∣∣S                                                PS
+                                                  ˆ QSˆ ) + H ( S ) + EQ [ log D1{ S =/ Sˆ } + log D1¯ {S = Sˆ }]                                            ˆ PS ∣∣S   ( Marginal QSSˆ = PSQˆS∣S ) = D ( QS ∣∥S
+
+And we can minimize this expression by taking QS ∣ˆS = PS ∣ˆ,S  giving
+
+       ≥ 0 + H (S ) + P [S = Sˆ] log (1 − D ) + P [ S =/ Sˆ ] log D ≥ h (p) −h(D)  (D ≤1/2)        (25.1)
+
+Since the upper and lower bound agree, we have R (D ) = ∣(h p ) −h(D)∣+.
+
+   For example, when p = 1/2, D = .11, then R(D) = 1/2 bit. In the Hamming game where we
+compressed 100 bits down to 50, we indeed can do this while achieving 11% average distortion,
+compared to the naive scheme of storing half the string and guessing on the other half, which
+achieves 25% average distortion.
+   Interpretation: By WLLN, the distribution P Sn = Ber (p) n concentrates near the Hamming
+sphere of radius np as n grows large. The above result about Hamming sources tells us that the
+optimal reconstruction points are from P                                      n = Ber ( p′) n where p′ < p, which concentrates on a sphere                                      Sˆ
+                      ′of radius np (note the reconstruction points are some exponentially small subset of this sphere).
+
+
+
+
+                       S(0, np)
+
+
+
+                                                                       S(0, np′)
+
+
+
+                                  Hamming Spheres
+
+    It is interesting to note that none of the reconstruction points are the same as any of the possible
+source values (with high probability).
+
+25.1.2  Gaussian Source
+The Gaussian source is deﬁnes as A = Aˆ = R, S ∼N(0,σ2), d(a,aˆ) = ∣a −aˆ∣2 (MSE distortion).
+                       1      σ2   Claim: R ( D ) = 2 log+ D .
+Proof. Since Dmax = σ2, in the sequel we can assume D < σ2 for otherwise there is nothing to show.
+    (Achievability) Choose S = Sˆ + Z , where Sˆ ∼N(0,σ2 −D) ⊥Z ∼N(0,D ) . In other words, the
+backward channel P S ∣ˆS is AWGN with noise power D. Since everything is jointly Gaussian, the
+                                                          σ2 −D   σ2−D                                      = N (forward channel can be easily found to be P                                                        S,                                                      D). Then                                                           σ2                                                                   σ2                                                                                     ˆS∣ S
+
+                                  1    σ2                  σ2                          I(S; ˆS) =   log  Ô⇒R(D) ≤1 log
+                                  2  D             2  D
+
+
+                                         256
+
+===== PDF PAGE 3 =====
+
+                                                               P ∣ S − Sˆ ∣ 2 ≤ D. Denote the   (Converse) Let P Sˆ∣S be any conditional distribution such that E
+                                          ∗forward channel in the achievability by P   We use the same trick as b efore                                      Sˆ∣.S
+
+                                                                     ∗                                             P
+                                                               S ∣ Sˆ                                                  ∗
+                                                   ˆ                       I( PS,PˆS∣S) = D(PS ∣ S∥                                                     PS∣ˆS∣P ˆS) + EP ⎡⎢⎢⎢⎢log PS                                                      ⎣                                           ⎤⎥⎥⎥⎥⎦
+                                                  ∗                                P
+                                                                       S∣ˆS
+                        ≥EP  log
+                                      PS                                                                                                                                                                                                                               ⎡⎢⎢⎢⎢⎣                                           ⎤⎥⎥⎥⎥⎦
+                                     ⎡                 S)2
+                               √ 1      2D                                              2πDe−(S−ˆ                              = EP  ⎢⎢⎢⎢log           S 2
+                                                                          ⎢⎢   √ 1  e−2σ2                                     ⎣       2πσ2                                                 ⎤⎥⎥⎥⎥⎥⎥⎦
+                                  1    σ2   log e             −ˆS∣2                              =   log   +    EP [S2 −∣S     ]                                  2  D    2      σ2   D
+                      ≥1 log σ2 .
+                                  2  D
+
+Again, the upper and lower bounds agree.
+
+   The interpretation in the Gaussian case is very similar√to the case of the Hamming source. As n
+grows large, our source distribution concentrates on S(0,  nσ2) (n-sphere in Euclidean space rather                           √
+than Hamming), and our reconstruction points on S(0,  n( σ2 − D )) . So again the picture is two
+nested sphere.
+  How sensitive is the rate-distortion formula to the Gaussianity assumption of the source?
+Theorem 25.1. Assume that ES = 0 and VarS = σ2.  Let the distortion metric be quadratic:
+d(s,sˆ) = ( s − sˆ) 2. Then
+
+            1 log+ σ2 −D(PS∥N(0,σ2)) ≤R(D) =       inf     I(S; ˆS) ≤1 log+ σ2 .
+            2   D                          PS∣S∶E(ˆ    ˆS−S)2≤D         2   D
+
+
+Note: This result is in exact parallel to what we proved in Theorem 17.6 for additive-noise channel
+capacity:
+
+           1      P                          P                    2               log (1 +   ) ≤   sup  I(X;X + Z) ≤1 log (1 +                                                      ) + D(PZ∥N(0,σ )) .                                                                        2           2        σ2                         2       σ                          PX∶EX2≤P
+
+where EZ = 0 and VarZ = σ2.
+Note: A simple consequence of Theorem 25.1 is that for source distributions with a density,
+the rate-distortion function grows according to 12 log D1  in the low-distortion regime as long as
+D ( PS∥N(0,σ2)) is ﬁnite.  In fac t, the ﬁrst inequality, known as the Shannon lower bound, is
+                                        1    σ2
+asymptotically tight, i.e., R ( D ) = 2 log D −D(PS∥N(0,σ2)) + o(1) as D →0. Therefore in this
+regime performing uniform scalar quantization with accuracy √1   is in fact asymptotically optimal
+                                            D
+within an o (1) term.
+
+Proof. Again, assume D < Dmax = σ2. Let SG ∼N(0,σ2).
+
+
+
+
+                                         257
+
+===== PDF PAGE 4 =====
+
+    (Achievability) Use the same P                                    ∗  = N( σ2−D S, σ2−D D) in the achievability pro of of Gaussian
+                                                     ˆS∣S        σ2      σ2
+rate-distortion function:
+
+                          ∗      R(D) ≤I (PS,P                                          ˆS∣S)
+                 σ 2 − D                          σ2 −D
+             = I ( S;     S + W)      W ∼N(0,     D)
+                      σ2                              σ2
+                     σ2            ≤I(SG;  −DSG + W)        by Gaussian saddle point (Theorem 4.6)
+                       σ2
+                1    σ2
+             =   log     .
+                2  D
+
+                                                  = N(S,Dˆ   ) denote AWGN with noise   (Converse) For any P Sˆ∣S such that E( ˆS −S)2 ≤D. Let PS∗∣ˆS
+power D. Then
+
+                   I( S;S)ˆ = D(PS∣ˆS∥PS∣P ˆS)
+                                              ⎡  P ∗
+                                         ∗                          S∣ˆS                                                        log                                               −D(PS∥PSG)                                                ˆ P Sˆ ) + EP  ⎢⎢⎢                       = D ( P S ∣∥S                                          ˆ P S ∣∣S                                              ⎢                                              PSG                                              ⎣                                           ⎤⎥⎥⎥⎥⎦
+                                                             S)2
+                         √ 1      2D                                      2πDe−(S−ˆ
+                  ≥EP  log           S 2   −D(PS∥PSG)
+                          √ 1  e−2σ2                                                                                                                                                                                                                                              ⎡⎢⎢⎢⎢⎢⎢⎣       2πσ2                                                 ⎤⎥⎥⎥⎥⎥⎥⎦
+                 ≥1 log σ2 − D (PS∥PSG).
+                           2  D
+
+
+
+   Remark: The theory of quantization and the rate distortion theory at large have played a
+signiﬁcant role in pure mathematics. For instance, Hilbert’s thirteenth problem was partially solved
+by Arnold and Kolmogorov after they realized that they could classify spaces of functions looking
+at the optimal quantizer for such functions.
+
+25.2*  Analog of saddle-point property in rate-distortion
+
+In the computation of R(D) for the Hamming and Gaussian source, we guessed the correct form
+of the rate distortion function. In both of their converse arguments, we used the same trick to
+establish that any other PSˆ∣S gave a larger value for R(D). In this section, we formalize this trick,
+in an analogous manner to the saddle point property of the channel capacity. Note that typically
+we don’t need any tricks to compute R(D), since we can obtain a solution in parametric form to
+the unconstrained convex optimization
+
+                             minI( S;Sˆ ) + λE[ d( S,Sˆ )]
+                                PS∣Sˆ
+
+In fact there are also iterative algorithms (Blahut-Arimoto) that computes R(D). However, for
+peace of mind it is good to know there are some general reasons why tricks like we used in
+Hamming/Gaussian actually are guaranteed to work.
+
+
+
+
+                                         258
+
+===== PDF PAGE 5 =====
+
+                                                    ∗ ≪ PX are found with the property that E[ d( X,Y ∗)] ≤ DTheorem 25.2. 1. Suppose PY ∗and PX∣Y
+and for any PXY with E [ d( X,Y )] ≤ D we have
+
+
+                                                        ∗                            dPX ∣Y                      E[ log        ( X ∣ Y )] ≥(I X;Y ∗.)                            (25.2)
+                             dPX
+
+                     ∗ ) .Then R(D) = I(X;Y
+    2. Suppose that I ( X ;Y ∗=) R (D ). Then for any regular branch of conditional probability       ∗                                                                                   PX∣Y
+and for any PXY satisfying
+
+   • E[d(X,Y )] ≤ D and
+
+   • PY ≪PY ∗ and
+
+   • I(X;Y ) < ∞
+
+the inequality ( 25.2) holds.
+
+   Remarks:
+
+    1. The ﬁrst part is a suﬃcient condition for optimality of a given PXY ∗. The second part gives a
+      necessary condition that is convenient to narrow down the search. Indeed, typically the set of
+    PXY satisfying those conditions is rich enough to infer from (25.2):
+
+
+                                                   ∗                          dPX ∣Y                                 log        ( x∣y ) = R(D) −θ [d(x,y) −D ],
+                           dPX
+
+       for a positive θ > 0.
+
+    2. Note that the second part is not valid without PY ≪ PY ∗ condition. The counter-example to
+       this and various other erroneous (but frequently encountered) generalizations is the following:
+   A = { 0,1 }, PX = Bern(1/2 ), Aˆ = {0 ,1,0′,1′ } and
+
+                           d(0,0) = d(0,0 ′) = 1 −d(0,1) = 1 −d(0,1′) = 0.
+
+                                                                            and    The R(D) = ∣1 −h(D)∣+, but there are a bunch of non-equivalent optimal PY ∣X, PX∣Y
+     PY ’s.
+
+Proof. First part is just a repetition of the proofs above, so we focus on part 2. Suppose there exists
+a counter-example PXY achieving
+
+                              dPX ∣Y                                                         ∗            ∗                               I1 = E[ log        ( X ∣ Y )] < I = R ( D ) .
+                               dPX
+
+Notice that whenever I(X;Y ) < ∞we have
+
+                                  I1 = I(X;Y ) −D(PX∣Y ∥PX∣Y ∗∣PY ),
+
+and thus
+                              D(PX∣Y ∥PX∣Y ∗∣PY ) < ∞.                                (25.3)
+
+Before going to the actual proof, we describe the principal idea. For every λ we can deﬁne a joint
+distribution
+                                PX,Yλ = λPX,Y + (1 −)PX,Yλ      ∗.
+
+                                          259
+
+===== PDF PAGE 6 =====
+
+Then, we can compute
+
+
+                                                                                           ∗                           PX ∣Yλ                PX∣Yλ PX∣Y
+                  I(X;Yλ) = E[ log      (X∣Yλ)] = E[log            ]                 (25.4)
+                                                                                   ∗ PX                            PX                 PX∣Y
+                                                     PX∣Y ∗(X∣Yλ)
+                         = D(PX∣Yλ∥PX∣Y ∗∣PYλ) + E[            ]                   (25.5)                                            PX
+                         = D(PX∣Yλ∥PX∣Y ∗∣PYλ) + λI1 + (1 − λ )I ∗.                     (25.6)
+
+From here we will conclude, similar to Prop. 4.1, that the ﬁrst term is o (λ ) and thus for suﬃciently
+small λ we should have I(X;Yλ) < R(D) , contradicting optimality of coupling PX,Y ∗ .
+  We proceed to details. For every λ ∈[ 0,1 ] deﬁne
+
+                           ρ1(y) ≜dPY                                                     (25.7)                              dPY ∗(y)
+                                   λρ1(y)
+                          λ(y) ≜                                                          (25.8)
+                                 λρ1 ( y ) + λ¯
+                                       )                                (λ                   P                            = λ(y )P X ∣ Y = y + λ¯ (y)P X ∣Y ∗= y                              (25.9)                    X                                                                             ∣ Y                                 = y
+                                                                                      ∗                     (25.10)                        dPYλ = λdPY + λdPY¯   ∗= ( λρ1 ( y ) + λ¯ ) dPY
+               D ( y ) = D(P X ∣ Y = y ∥P X∣Y ∗= y )                                   (25.11)
+                                                     ( λ)
+                   Dλ ( y ) = D (PX∣Y = y ∥ P X∣Y ∗=y ).                                  (25.12)
+
+Notice:
+                   On {ρ1 = 0} ∶  λ(y) = D( y ) = Dλ ( y ) = 0
+
+and otherwise λ( y ) > 0. By convexity of divergence
+
+                                Dλ(y) ≤λ(y)D(y )
+
+and therefore
+                         1
+                      Dλ ( y ) 1 {ρ1 (y ) > 0} ≤ D ( y ) 1{ ρ1 ( y ) > 0} .
+                    λ( y )
+
+Notice that by (25.3) the function ρ1 (y ) D (y ) is non-negative and PY ∗ -integrable. Then, applying
+dominated convergence theorem we get
+
+                        1                                   1
+       λ→0∫lim  {ρ1> 0} dPY ∗λ(y)Dλ(y)ρ1(y) = ∫{ρ1>0} dPY ∗ρ1(y) λ→0lim λ (y ) Dλ ( y ) = 0         (25.13)
+
+where in the last step we applied the result from Lecture 4
+
+                D(P∥Q) < ∞   Ô⇒    D(λP + ¯λQ∥Q) = o(λ)
+
+since for each y on the set { ρ1 > 0} we have λ( y ) → 0 as λ → 0.
+  On the other hand, notice that
+
+               1                         1
+                  ∗                    > 0} =        dPY ∗(λρ1(y) + ¯λ)Dλ(y)           (25.14)  ∫     dPY     {ρ1> 0}     λ(y)Dλ(y)ρ1(y)1{ρ1(y)     λ ∫{ρ1>0}
+                                         1
+                                    =        dPYλDλ(y)                        (25.15)                                   λ ∫{ρ1>0}
+                                         1                1      (λ)                                    =                                                                        X∣Y ∥PX∣Y ∗∣PYλ),   (25.16)                                   λ ∫Y dPYλDλ(y) = λD(P
+
+                                         260
+
+===== PDF PAGE 7 =====
+
+where in the penultimate step we used Dλ(y) = 0 on {ρ1 = 0}. Hence, (25.13) shows
+
+                                       (λ)                    D(P                       X ∣∥PX∣YY      ∗∣PYλ) = o(λ),    λ →0.
+
+Finally, since
+                                              (λ)                            P                                     ○PYλ = PX ,                             X ∣Y
+we have
+
+
+                                                                ∗                                  dPX ∣Y                                                               dPX∣Y                      (λ)                                                                                               ∗      ∗   I(X;Yλ) = D(P X ∣Y ∥PX∣Y ∗∣PYλ) + λ E [ log      (X∣Y )] + ¯λE[log        (X ∣Y  )]    (25.17)                                  dPX               dPX
+           = I∗+ λ(I1 −I∗) + o(λ ) ,                                                      (25.18)
+
+contradicting the assumption
+                              I(X;Yλ) ≥I∗= R(D).
+
+
+
+25.3  Lossy joint source-channel coding
+
+The lossy joint source channel coding problem refers to the fundamental limits of lossy compression
+followed by transmission over a channel.
+   Problem Setup: For an A-valued ({S1,S2,...} and distortion metric d ∶Ak × Akˆ →R, a lossy
+JSCC is a pair ( f,g ) such that
+
+                                         k  f    n      n  g                          S Ð→ X  Ðch.→ Y  Ð→ˆSk
+
+Deﬁnition 25.1. (f,g) is a ( k,n,D)-JSCC if E[d(Sk,Sk)]ˆ  ≤D.
+
+                      Sk            Xn               Y n                         ˆSk             Source           JSCC enc              Channel           JSCC dec
+
+                            R = nk
+
+where ρ is the bandwidth expansion factor:
+
+                            n
+                             ρ =    channel uses/symbol.
+                                k
+
+Our goal is to minimize ρ subject to a ﬁdelity guarantee by designing the encoder/decoder pairs
+smartly. The asymptotic fundamental limit for a lossy JSCC is
+                      ρ∗(D) = limsup    n ∶∃( k,n,D ) − code}                         n→∞min{ k
+
+   For simplicity in this lecture we will focus on JSCC for stationary memoryless sources with
+separable distortion + stationary memoryless channels.
+
+
+
+
+
+                                         261
+
+===== PDF PAGE 8 =====
+
+25.3.1  Converse
+
+The converse for the JSCC is quite simple. Note that since there is no ϵ under consideration, the
+strong converse is the same as the weak converse. The proof architecture is identical to the weak
+converse of lossless JSCC which uses Fano’s inequality.
+
+Theorem 25.3 (Converse). For any source such that
+
+                                    1
+                     Ri(D) = lim            inf        I (Sk ;Skˆ )
+                                                                 k ,Sˆk )]≤D                          k→∞ k PSˆk ∣S k ∶E[d(S
+
+we have
+                                 ρ∗(D) ≥Ri(D)
+                                               Ci
+
+   Remark: The requirement of this theorem on the source isn’t too stringent; the limit expression
+for Ri ( D ) typically exists for stationary sources (like for the entropy rate)
+
+Proof. Take a (k,n,D)-code Sk →Xn →Y n →Sk.ˆ  Then
+
+                          inf  I(Sk;Sk)ˆ  ≤I(Sk ;Skˆ ) ≤I(Xk;Y k) ≤sup I (Xn;Y n )
+                   PSˆk∣ S k                                 PX n
+
+Which follows from data processing and taking inf/sup. Normalizing by 1/k and taking the liminf
+as n →∞
+
+                                    1
+                     (LHS) liminf  sup I(Xn;Y n) = Ci
+                   n→∞n PXn
+                                    1
+                    (RHS) liminf       inf   I (Skn;Sknˆ  ) = Ri ( D )
+                         n→∞ kn PSˆkn ∣S kn
+
+And therefore, any sequence of (kn,n,D)-codes satisﬁes
+                                   n ≥Ri(D)                                  limsup
+                             n→∞  kn    Ci
+
+
+
+Note: Clearly the assumptions in Theorem 25.3 are satisﬁed for memoryless sources. If the source
+S is iid Bern(1/2) with Hamming distortion, then Theorem 25.3 coincides with the weak converse
+for channel coding under bit error rate in Theorem 14.4:
+
+                                 nC
+                                    k ≤
+                                         1 −h (pb )
+
+which we proved using ad ho c techniques. In the case of channel with cost constraints, e.g., the
+AWGN channel with C (SNR ) = 12 log(1 + SNR), we have
+                                       pb ≥h−1 (1 −C(SNR) )
+                               R
+
+This is often referred to as the Shannon limit in plots comparing the bit-error rate of practical codes.
+See, e.g., Fig. 2 from [RSU01] for BIAWGN (binary-input) channel. This is erroneous, since the
+pb above refers to the bit-error of data bits (or systematic bits), not all of the codeword bits. The
+latter quantity is what typically called BER in the coding-theoretic literature.
+
+
+                                          262
+
+===== PDF PAGE 9 =====
+
+25.3.2  Achievability via separation
+
+The proof strategy is similar to the lossless JSCC: We construct a separated lossy compression
+and channel coding scheme using our tools from those areas, i.e., let the JSCC encoder to be
+the concatenation of a loss compressor and a channel encoder, and the JSCC decoder to be the
+concatenation of a channel decoder followed by a loss compressor, then show that this separated
+construction is optimal.
+Theorem 25.4. For any stationary memoryless source ( PS, A , Aˆ,d ) satisfying assumption A1
+(below), and for any stationary memoryless channel PY ∣X,
+
+                                   R(D)                                 ρ∗(D) =
+                                C
+
+Note: The assumption on the source is to control the distortion incurred by the channel decoder
+making an error. Although we know that this is a low-probability event, without any assumption
+on the distortion metric, we cannot say much about its contribution to the end-to-end average
+distortion. This will not be a problem if the distortion metric is bounded (for which Assumption A1
+is satisﬁed of course). Note that we do not have this nuisance in the lossless JSCC because we at
+most suﬀer the channel error probability (union bound).
+   The assumption is rather technical which can be skipped in the ﬁrst reading. Note that it is
+trivially satisﬁed by bounded distortion (e.g., Hamming), and can be shown to hold for Gaussian
+source and MSE distortion.
+
+Proof. The converse direction follows from the previous theorem.  For the other direction, we
+constructed a separated compression / channel coding scheme. Take
+ Sk →W →ˆSk compressor to W ∈[2kR(D)+o(k)] with E[d(Sk ,Skˆ )] ≤ D
+ W →Xn →Y n →ˆW  maximal probability of error channel code (assuming kR(D) ≤nC + o(n ))
+                       with P[ W =/ Wˆ ] ≤ ϵ ∀ PW
+
+So that the overall system is
+
+                        Sk Ð→ W Ð→ Xn Ð→ Y n Ð→ ˆW Ð→ Skˆ
+
+Note that here we need a maximum probability of error code since when we concatenate these
+two schemes, W at the input of the channel is the output of the source compressor, which is not
+guaranteed to be uniform. Now that we have a scheme, we must analyze the average distortion to
+show that it meets the end-to-end distortion constraint. We start by splitting the expression into
+two cases
+
+           E[d(Sk ,Skˆ )] = E[ d( S k ,Skˆ ( W )) 1{ W = Wˆ }] + E[ d( S k ,Skˆ (Wˆ )) 1{ W =/ Wˆ }]
+
+By assumption on our lossy code, we know that the ﬁrst term is ≤ D. In the second term, we know
+that the probability of the event {W  =/ Wˆ } is small by assumption on our channel code, but we
+cannot say anything about E[d(Sk,Skˆ (ˆW ))] unless, for example, d is bounded. But by Lemma 25.1
+(below), ∃ code Sk → W → Skˆ  such that
+
+(1) E[d(Sk ,Sk)]ˆ  ≤D holds
+(2) d(ak0,Skˆ ) ≤ L for all quantization outputs Sk,ˆ  where ak0 = (a0,...,a0) is some ﬁxed string of
+    length k from the Assumption A1 below.
+
+
+                                          263
+
+===== PDF PAGE 10 =====
+
+The second bullet says that all points in the reconstruction space are “close” to some ﬁxed string.
+Now we can deal with the troublesome term
+
+          E[d(Sk ,Sk(ˆ  ˆW))1{W =/ ˆW }] ≤E[1{W =/ ˆW}λ(d(Sk,aˆk0 ) + d( ak0, ˆSk ))]
+               (by point (2) above)   ≤ λE[ 1{ W =/ Wˆ }d(Sk,aˆk0 )] + λ E[1{W =/ W}L]ˆ
+                                 ≤ λo(1 ) + λLϵ → 0 as ϵ → 0
+
+where in the last step we applied the same uniform integrability argument that showed vanishing of
+the expectation in (24.20) before.
+   In all, our scheme meets the average distortion constraint. Hence we conclude that for ∀ρ >
+R ( D )
+  C  ,∃sequence of (k,n,D + o(1))-codes.
+
+   The following assumption is critical to the previous theorem:
+   Assumption A1: For a source ( PS, A ,A,d),ˆ   ∃λ ≥0,a0 ∈A,aˆ0 ∈Aˆ such that
+
+   1. d(a,aˆ) ≤λ(d(a,aˆo) + d(a0,aˆ)) ∀a,aˆ (generalized triangle inequality)
+
+   2. E[ d( S,aˆ0 )] < ∞ (so that Dmax < ∞ too).
+   3. E[d( a0,S)]ˆ  < ∞for any output distribution P Sˆ achieving the rate-distortion function R (D )
+      at some D.
+
+   4. d(a0,aˆ0) < ∞.
+
+   This assumption says that the spaces A and Aˆ have “nice centers”, in the sense that the distance
+between any two points is upper bounded by a constant times the distance from the centers to each
+point (see ﬁgure below).
+
+
+                                                                                                                            aˆ                                     a
+
+
+ b
+                                     a0                                                     aˆ0
+
+
+                      A                                      Aˆ
+But the assumption isn’t easy to verify, or clear which sources satisfy the assumptions. Because of
+this, we now give a few suﬃcient conditions for Assumption A1 to hold.
+   Trivial Condition:  If the distortion function is bounded, then the assumption A1 holds
+automatically. In other words, if we have a discrete source with ﬁnite alphabet ∣A∣ , ∣A∣<ˆ ∞ and a
+ﬁnite distortion function d(a,aˆ) < ∞, then A1 holds. More generally, we have the following criterion.
+Theorem 25.5 (Criterion for satisfying A1). If A = Aˆ and d(a,aˆ) = ρq ( a,aˆ) for some metric ρ
+with q ≥ 1, and Dmax ≜ infaˆ0 E [d(S,aˆ0 )] < ∞, then A1 holds.
+
+Proof. Take a0 = aˆ0 that achieves ﬁnite Dp (in fact, any points can serve as centers in a metric
+space). Then
+                         (1      ˆa))q ≤(1      + 1 ρ (a0,aˆ))q                             2ρ(a,       2ρ(a,a0)  2
+                               (Jensen’s) ≤1       + 1ρq (a0,aˆ)                                        2ρq(a,a0)  2
+
+
+                                          264
+
+===== PDF PAGE 11 =====
+
+And thus d(a,aˆ) ≤2q−1(d(a,a0) + d(a0,aˆ)). Taking λ = 2q−1 veriﬁes (1) and (2) in A1. To verify
+(3), we can use this generalized triangle inequality for our source
+
+                             d( a0,S)ˆ ≤2q−1(d(a0,S) + d(S,Sˆ ))
+
+Then taking the expectation of both sides gives
+
+                       E[ d(a0,S)]ˆ  ≤2q−1(E[d(a0,S)] + E[d( S,S)])ˆ
+                                ≤ 2q−1(Dmax + D ) < ∞
+
+So that condition (3) in A1 holds.
+
+   So we see that metrics raised to powers (e.g. squared Euclidean norm) satisfy the condition A1.
+The lemma used in Theorem 25.4 is now given.
+Lemma 25.1. Fix a source satisfying A1 and an arbitrary P Sˆ∣S . Let R > I ( S;Sˆ ) , L > max {E [d(a0,Sˆ )],d (a0,aˆ0 )}
+and D > E [d(S,Sˆ )] . Then, there exists a (k,2kR,D ) -code such that for every reconstruction point
+xˆ ∈ Akˆ we have d(ak0,xˆ) ≤ L.
+Proof. Let X = Ak, Xˆ = Akˆ and PX = P S,PYk    ∣X = P Sˆ∣.k S  Then apply the achievability bound for
+excess distortion from Theorem 24.4 with
+                                                                                             ⎪⎧⎪        d(ak0, xˆ) ≤ L                                  d1(x,xˆ) = ⎨d(x,xˆ)
+                                   ⎪⎪+∞    o/w                               ⎩
+
+Note that this is NOT a separable distortion metric. Also note that without any change in d1-
+distortion we can remove all (if any) reconstruction points xˆ with d(ak0,xˆ) > L. Furthermore, from
+the WLLN we have for any D > D′ > E[d(S,S′)]ˆ
+              P [d1 (X,Y ) > D ′ ] ≤ P[ d( Sk ,Skˆ ) > D′ ] + P[ d( ak0 ,Skˆ ) > L ] → 0
+as k →∞ (since E[ d( S, Sˆ )] < D ′ and E[ a0 ,Sˆ ] < L). Thus, overall we get M = 2kR reconstruction
+points ( c1,...,cM ) such that
+                                P[ min        > D ′ ] → 0                                                      j ∈[M ]d(Sk,cj)
+and d(ak0,cj ) ≤ L. By adding cM + 1 = ( aˆ0,...,aˆ0 ) we get
+       E[           k,cj)] ≤D ′ + E[d(Sk,cM+1 )1{ min d( Sk,cj ) > D ′ }] = D ′ + o (1 ) ,                   j ∈min[M + 1]d(S                                         j ∈[ M ]
+
+where the last estimate follows from uniform integrability as in the vanishing of expectation in (24.20).
+Thus, for suﬃciently large n the expected distortion is ≤ D, as required.
+
+   To summarize the results in this section, under stationarity and memorylessness assumptions on
+the source and the channel, we have shown that the following separately-designed scheme achieves
+the optimal rate for lossy JSCC: First compress the data, then encode it using your favorite channel
+code, then decompress at the receiver.
+
+                    R(D) bits/sec              ρC bits/sec
+             Source                   JSCC enc                      Channel
+
+
+
+
+                                          265
+
+===== PDF PAGE 12 =====
+
+25.4  What is lacking in classical lossy compression?
+
+Examples of some issues with the classical compression theory:
+
+   • compression: we can apply the standard results in compression of a text ﬁle, but it is extremely
+     diﬃcult for image ﬁles due to the strong spatial correlation. For example, the ﬁrst sentence
+     and the last in Tolstoy’s novel are pretty uncorrelated. But the regions in the upper-left
+     and bottom-right corners of one image can be strongly correlated. Thus for practicing the
+      lossy compression of videos and images the key problem is that of coming up with a good
+     “whitening” basis.
+
+   • JSCC: Asymptotically the separation principle sounds good, but the separated systems can
+     be very unstable - no graceful degradation. Consider the following example of JSCC.
+    Example:  Source = Bern(12) , channel = BSC(δ).
+
+                                                 R (D)         1. separate compressor and channel encoder designed for     = 1                                                                   C(δ )
+         2. a simple JSCC:
+                                         ρ = 1,Xi = Si
+
+
+
+
+
+                                         266
+
+===== PDF PAGE 13 =====
+
+MIT OpenCourseWare
+https://ocw.mit.edu
+
+
+
+6.441 Information Theory
+Spring 2016
+
+
+
+For information about citing these materials or our Terms of Use, visit: https://ocw.mit.edu/terms.

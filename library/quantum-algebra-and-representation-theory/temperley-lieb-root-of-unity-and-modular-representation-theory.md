@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-root-of-unity-and-modular-representation-theory
 title: "Temperley–Lieb Root-of-Unity and Modular Representation Theory"
-status: draft
+status: published
 items:
   - def-temperley-lieb-complex-critical-labels-and-reflection
   - lem-temperley-lieb-critical-standard-modules-are-simple

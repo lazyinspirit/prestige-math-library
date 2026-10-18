@@ -2,7 +2,7 @@
 id: thm-it-expurgated-error-exponent-lower-bound
 kind: theorem
 title: Gallager expurgated exponent lower bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

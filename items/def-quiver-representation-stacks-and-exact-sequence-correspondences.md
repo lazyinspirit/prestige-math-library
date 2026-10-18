@@ -2,7 +2,7 @@
 id: def-quiver-representation-stacks-and-exact-sequence-correspondences
 kind: definition
 title: "Representation stacks and exact-sequence correspondences of a finite quiver"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

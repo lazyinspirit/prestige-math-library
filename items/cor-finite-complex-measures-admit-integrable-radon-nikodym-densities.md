@@ -20,7 +20,7 @@ verification:
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Theorem 6.30"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Exercise 13.3"
       url: "https://www.math.wustl.edu/~victor/classes/ma5051/rags100514.pdf"
 ---

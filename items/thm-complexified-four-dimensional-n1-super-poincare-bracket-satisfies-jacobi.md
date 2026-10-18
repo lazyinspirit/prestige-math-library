@@ -2,7 +2,7 @@
 id: thm-complexified-four-dimensional-n1-super-poincare-bracket-satisfies-jacobi
 kind: theorem
 title: The complexified N=1 super-Poincare bracket data satisfy super-Jacobi
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

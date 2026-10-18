@@ -2,7 +2,7 @@
 id: thm-mutual-information-and-conditional-mutual-information-equality-conditions
 kind: theorem
 title: "Zero information is exactly independence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

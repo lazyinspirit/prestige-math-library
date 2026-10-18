@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-diagram-algebra-and-catalan-basis-examples
 title: "Temperley–Lieb Diagram Algebra and Catalan Basis: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-temperley-lieb-ranks-zero-through-two

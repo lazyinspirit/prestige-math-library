@@ -2,7 +2,7 @@
 id: lem-it-finite-random-bin-packing-bound
 kind: lemma
 title: "Finite joint-typicality packing bound for independent random bins"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-interior-one-handle-trade-and-framed-circle-surgery-pair
 kind: lemma
 title: "Interior one-handle trades and the fully framed circle-surgery pair"
-status: draft
+status: published
 dependency_level: 7
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -2,7 +2,7 @@
 id: lem-yext-zero-splice-factorization
 kind: lemma
 title: "A zero Yoneda splice factors through the middle object"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

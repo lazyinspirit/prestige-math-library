@@ -1,7 +1,7 @@
 ---
 page: a-infinity-l-infinity-and-deformation-complexes
 title: A∞, L∞, and Deformation Complexes
-status: draft
+status: published
 items:
 - def-koszul-sign-rule-for-graded-tensors
 - def-triple-massey-data

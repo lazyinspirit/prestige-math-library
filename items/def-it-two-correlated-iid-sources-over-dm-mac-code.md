@@ -2,7 +2,7 @@
 id: def-it-two-correlated-iid-sources-over-dm-mac-code
 kind: definition
 title: Lossless transmission of two correlated IID sources over a DM-MAC
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

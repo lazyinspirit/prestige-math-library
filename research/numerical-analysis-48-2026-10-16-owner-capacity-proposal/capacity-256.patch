@@ -1,0 +1,157 @@
+--- a/tools/autopilot/src/capacity.mjs
++++ b/tools/autopilot/src/capacity.mjs
+@@ -1,6 +1,6 @@
+ // Shared run limits. A batch may contain one pair, so every lane and group
+ // ceiling must also accommodate a run with one batch per pair.
+-export const MAX_RUN_PAIRS = 80;
++export const MAX_RUN_PAIRS = 256;
+ export const MAX_RUN_BATCHES = MAX_RUN_PAIRS;
+ export const MAX_BATCHES_PER_GROUP = 3;
+ // Small categories may each need their own group. This is inventory capacity;
+--- a/tools/run-tasks.mjs
++++ b/tools/run-tasks.mjs
+@@ -37,6 +37,8 @@
+ import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+ import { join, dirname, resolve } from 'node:path';
+ import { fileURLToPath } from 'node:url';
++import { alphabeticLabel, loadAssignmentBatches, validateAssignment } from './alpha-group-assignment.mjs';
++import { MAX_RUN_BATCHES, MAX_GROUPS, MAX_BATCHES_PER_GROUP } from './autopilot/src/capacity.mjs';
+ 
+ const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
+ const argv = process.argv.slice(2);
+@@ -71,11 +73,23 @@
+   process.exit(2);
+ }
+ 
+-// Group metadata is generated during planning; no assignment workflow stage.
+-// this is the same positional fallback `stages/mathlib.mts` uses, and it is only
+-// used here to enumerate which group-labelled paths COULD be asked for.
+-const groupLabels = [];
+-for (let i = 0; i < batches.length; i += 3) groupLabels.push(String.fromCharCode(97 + groupLabels.length));
++// Enumerate the actual native assignment, including category-cohesive groups
++// beyond ceil(batch count / 3). Use the native positional fallback only before
++// planning has produced an assignment. A present invalid assignment fails closed.
++const assignmentPath = R('research', `${run}-alpha-groups.json`);
++let groupLabels;
++if (existsSync(assignmentPath)) {
++  const raw = readJson(assignmentPath);
++  const groups = Array.isArray(raw) ? raw : raw?.groups;
++  const checked = validateAssignment(groups, loadAssignmentBatches(REPO, run, MAX_RUN_BATCHES),
++    { maxGroups: MAX_GROUPS, maxBatches: MAX_BATCHES_PER_GROUP });
++  if (checked.errors.length) throw new Error(checked.errors.join('\n'));
++  groupLabels = groups.map(group => group.label);
++} else {
++  groupLabels = [];
++  for (let i = 0; i < batches.length; i += MAX_BATCHES_PER_GROUP)
++    groupLabels.push(alphabeticLabel(groupLabels.length));
++}
+ 
+ const spec = readJson(R('research/plan-spec.json'));
+ const pageById = new Map(spec.pages.map((p) => [p.id, p]));
+--- a/tools/autopilot/src/merge-import.mjs
++++ b/tools/autopilot/src/merge-import.mjs
+@@ -2,6 +2,7 @@
+ // Source verdicts remain attributed to their original runs and are never
+ // represented as new model executions.
+ import { MAX_GROUPS, MAX_RUN_PAIRS } from './capacity.mjs';
++import { alphabeticLabel } from '../../alpha-group-assignment.mjs';
+ 
+ export function buildMapping(sources) {
+   const pages = new Set(), items = new Set(), mappings = [], groups = [];
+@@ -22,7 +23,7 @@
+     }
+     const covered = new Set();
+     for (const group of source.groups) {
+-      const label = String.fromCharCode(97 + groupNumber++);
++      const label = alphabeticLabel(groupNumber++);
+       groupMap[group.label] = label;
+       const covers = group.covers.map(String).map(batch => {
+         if (!batchMap[batch] || covered.has(batch)) throw new Error(`Invalid group coverage ${source.run}/${batch}`);
+--- a/tools/dispatch.mjs
++++ b/tools/dispatch.mjs
+@@ -63,14 +63,14 @@
+   // counterexamples, both source work rather than recall — and because the Codex
+   // return path reads it as a real switch.
+   //
+-  // Twenty-seven disjoint groups own at most three batches each. Shared-file stages
++  // Capacity-bounded disjoint groups own at most three batches each. Shared-file stages
+   // remain serial; lane capacity does not authorize overlapping writes.
+   alpha:        { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: MAX_GROUPS, web: true, why: 'Sol 6.1 high group Alpha, <=3 batches each; groups cover the full batch ceiling' },
+   // Assignment is validated mechanically. All roles retain source access.
+   'alpha-assign': { ...lane('partition'), sandbox: 'workspace-write', effort: 'high', cap: 1, why: 'batch partition for the group Alphas; output fully validated by alpha-groups.mjs' },
+   // Step 3b selects DeepSeek-Flash-max for this pair-author lane; later stages
+   // select their own explicit profile when reusing it for pathway prose.
+-  // Pair authoring may fill the 80-pair run ceiling. Stage prerequisites and
++  // Pair authoring may fill the native run ceiling. Stage prerequisites and
+   // same-batch exclusion determine which authors may safely overlap.
+   'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'pair authoring and pathway prose; full run width with stage ownership guards' },
+   // Final reporting is read-only; source uncertainty still requires research.
+@@ -80,7 +80,7 @@
+   // Historical model identities remain in the registry for existing receipts.
+   //
+   // Step 5 is partitioned by the same group assignment, so this cap tracks the
+-  // nine group-Alpha lanes. A lower value would silently serialize disjoint
++  // capacity-derived group-Alpha lanes. A lower value would silently serialize disjoint
+   // adjudication groups behind an otherwise legal partition.
+   //
+   // This cap is a THROUGHPUT limit, not a mutual-exclusion guarantee. The
+--- a/briefs/alpha.md
++++ b/briefs/alpha.md
+@@ -31,7 +31,7 @@
+ 
+ Use the `# This dispatch` identity and task to determine the work you own. For
+ group work, `research/<run>-alpha-groups.json` is the assignment: it permits at
+-most the capacity-derived group count (currently 80), with at most three batches
++most the capacity-derived group count for its engine, with at most three batches
+ per group and lowercase alphabetic labels (`a` through `z`, then `aa`). A group
+ writes only its own artifacts and in-flight content. Read dependencies wherever needed to assess a
+ claim, but route another group's defect through the task's alert or disposition
+--- a/briefs/alpha-assign.md
++++ b/briefs/alpha-assign.md
+@@ -11,7 +11,7 @@
+ The tool reads only current manifest batch IDs and category metadata. It writes
+ `research/<run>-alpha-groups.json`, an array of `{label, covers, rationale}`.
+ Each existing batch occurs exactly once, with at most three batches per group
+-and the group cap derived from native batch capacity (currently 80 for 80 batches).
++and the group cap derived from its engine’s native batch capacity.
+ This is assignment inventory, not concurrent workers; global concurrency stays unchanged.
+ Labels are lowercase alphabetic identifiers: `a` through `z`, then `aa`, etc.
+ 
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -506,6 +506,24 @@
+ 
+ ## Run controls and cutover
+ 
++Mathematics run inventory supports up to 256 A/B pairs, with exactly one pair per
++batch and at most three batches per group. Groups use lowercase spreadsheet
++labels (`a` through `z`, then `aa`, `ab`, and so on). Inventory capacity does not
++increase active workers: the global concurrency limit remains 30, and stage,
++role, prerequisite, exclusive-writer, review and gate checks still apply. Physics
++retains its own independent limits.
++
++Extend an existing unfinished Step-1 frontier with native `plan --append` only
++after original `1-drift` and `1-drift-apply` have passed natively and the run is
++paused at `1-scaffold` (or a native append boundary), with controller and writers
++stopped and drained. Append preserves prior manifests and evidence, archives
++changed generated metadata, and adds fresh native drift review and apply stages.
++It cannot remove or replace prior pairs. When an owner's revised pre-authoring
++scope requires removing original pairs, preserve that run and its evidence and
++plan a fresh superseding run; earlier readings may be cited as context, while
++all native execution, review and gate evidence must be obtained for the new run.
++Never force-replan or rewrite historical native reports to imply new coverage.
++
+ Use `node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts` with the ordinary
+ `plan`, `doctor`, `start`, `status`, `pause`, `resume` and `retry` commands.
+ `doctor` and generated task checks can run before authoring; they do not prepare
+--- a/tools/autopilot/README.md
++++ b/tools/autopilot/README.md
+@@ -3,6 +3,8 @@
+ Use `WORKFLOW.md` for the six-step stage table, run controls, owner holds and evidence procedures.
+ 
+ The rebuild plan is `research/workflow-rebuild-plan.md`. Step 1 performs complete initial authoring; Step 2 is the bounded Luna-max whole-batch scope/prerequisite loop. Planning generates group metadata; accepted plan synchronization is part of the Step-2 mechanical handoff. There are no separate assignment or splice stages.
++
++Mathematics inventory supports 256 pairs, one per batch, and at most three batches per group. Group labels extend through `aa`, `ab`, and beyond; valid native category assignments determine the task scope. Physics limits are independent.
+ 
+ Current revision: `six-step-v1-construction-scope`. Use fresh run state. The engine owns all transitions and enforces the shared 30-agent cap. See `package.json` for typechecking and focused test commands.
+ 

@@ -2,7 +2,7 @@
 id: def-qc-tqc-toric-excitations
 kind: definition
 title: Toric e and m syndromes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

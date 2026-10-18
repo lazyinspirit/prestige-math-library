@@ -2,7 +2,7 @@
 id: lem-good-cover-nerve-computes-singular-cohomology
 kind: lemma
 title: "A geodesically convex cover has the homotopy type of its nerve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory

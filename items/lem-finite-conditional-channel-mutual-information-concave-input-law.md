@@ -2,7 +2,7 @@
 id: lem-finite-conditional-channel-mutual-information-concave-input-law
 kind: lemma
 title: Conditional mutual information is concave in the channel input law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

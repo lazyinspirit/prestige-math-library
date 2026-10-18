@@ -2,7 +2,7 @@
 id: def-a-infinity-algebra
 kind: definition
 title: "Uncurved cohomological A∞-algebra in the unsuspended convention"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

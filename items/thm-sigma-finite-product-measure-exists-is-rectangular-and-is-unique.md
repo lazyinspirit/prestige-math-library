@@ -23,7 +23,7 @@ sources:
     - title: "Terence Tao, An Introduction to Measure Theory, Proposition 1.7.11"
       url: "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"
     - title: "John K. Hunter, Measure Theory, Theorem 5.14"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement

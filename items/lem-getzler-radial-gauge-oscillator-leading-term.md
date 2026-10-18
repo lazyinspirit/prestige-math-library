@@ -2,7 +2,7 @@
 id: lem-getzler-radial-gauge-oscillator-leading-term
 kind: lemma
 title: "Radial gauge yields the Getzler oscillator as the leading operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory

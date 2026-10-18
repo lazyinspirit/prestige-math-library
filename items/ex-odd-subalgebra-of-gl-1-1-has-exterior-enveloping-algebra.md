@@ -2,7 +2,7 @@
 id: ex-odd-subalgebra-of-gl-1-1-has-exterior-enveloping-algebra
 kind: example
 title: An odd abelian subalgebra has an exterior enveloping algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

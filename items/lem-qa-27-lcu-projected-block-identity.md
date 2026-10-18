@@ -16,8 +16,6 @@ axiom_use: "None; this is a finite block-matrix multiplication."
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Andrew M. Childs, Lecture Notes on Quantum Algorithms"

@@ -1,7 +1,7 @@
 ---
 page: spin-geometry-dirac-and-index-theory-examples
 title: "Clifford Bundles, Dirac Operators, and Index Interfaces: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [cex-dirac-on-euclidean-space-is-not-fredholm,
            ex-complex-projective-plane-has-nonspin-tangent-bundle,

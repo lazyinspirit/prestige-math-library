@@ -13,8 +13,6 @@ axiom_use: "None; the proof uses only scalar inequalities on a finite interval."
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

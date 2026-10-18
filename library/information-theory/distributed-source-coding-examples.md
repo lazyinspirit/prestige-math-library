@@ -1,7 +1,7 @@
 ---
 page: distributed-source-coding-examples
 title: "Distributed Source Coding — Examples"
-status: draft
+status: published
 requires:
   - distributed-source-coding
 items: []

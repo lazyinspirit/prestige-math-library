@@ -2,7 +2,7 @@
 id: ex-it-degraded-wiretap-capacity
 kind: example
 title: "A degraded binary erasure wiretap channel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

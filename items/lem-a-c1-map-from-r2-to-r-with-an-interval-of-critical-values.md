@@ -2,7 +2,7 @@
 id: lem-a-c1-map-from-r2-to-r-with-an-interval-of-critical-values
 kind: lemma
 title: 'A $C^1$ map from $\mathbb R^2$ to $\mathbb R$ with an interval of critical values'
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

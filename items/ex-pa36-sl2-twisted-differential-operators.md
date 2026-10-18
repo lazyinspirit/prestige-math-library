@@ -2,7 +2,7 @@
 id: ex-pa36-sl2-twisted-differential-operators
 kind: example
 title: The SL2 flag charts realize the stated rho shift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

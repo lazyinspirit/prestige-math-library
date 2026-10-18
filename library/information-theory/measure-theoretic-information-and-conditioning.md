@@ -1,7 +1,7 @@
 ---
 page: measure-theoretic-information-and-conditioning
 title: "Measure-Theoretic Information and Conditioning"
-status: draft
+status: published
 requires:
   - finite-alphabet-entropy-and-divergence
   - conditional-distributions-and-regular-conditional-probability

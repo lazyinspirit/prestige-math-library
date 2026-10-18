@@ -2,7 +2,7 @@
 id: prop-coordinate-jacobi-and-schouten-criterion-for-poisson-bivectors
 kind: proposition
 title: Coordinate Jacobi and Schouten self-bracket criterion for Poisson bivectors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-real-gaussian-interference-genie-outer-region
 kind: lemma
 title: Genie-aided outer bounds for the two-user Gaussian interference channel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

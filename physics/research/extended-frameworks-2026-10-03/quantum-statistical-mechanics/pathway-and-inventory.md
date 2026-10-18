@@ -23,6 +23,9 @@ Research-only canonical supplier-first placement. B companions are leaves.
 | `pthm-qsm-equilibrium-unitary-entropy` — Unitary entropy and Gibbs equilibrium identities | physics-theorem / physics | `workers/finite-states/state-proofs.md#q6` |
 | `pthm-qsm-gibbs-energy-entropy` — Gibbs energy, entropy and potential identities | physics-theorem / physics | `workers/finite-states/state-proofs.md#q5` |
 | `pthm-qsm-static-quantum-response` — Static finite quantum response and covariance | physics-theorem / physics | `workers/finite-states/state-proofs.md#q2` |
+| `def-qsm-finite-gibbs-purification` — Finite Gibbs density and its canonical purification | definition / mathematics | `gibbs-circuit-bridge.md#QGA0` |
+| `alg-qsm-finite-gibbs-state-preparation` — Sparse-oracle finite Gibbs purification procedure | algorithm / mathematics | `gibbs-circuit-bridge.md#QGA1` |
+| `thm-qsm-finite-gibbs-circuit-marginal-error` — Finite Gibbs circuit marginal and trace-distance error | theorem / mathematics | `gibbs-circuit-bridge.md#QGA2` |
 
 B companion: `qsm-states-ensembles-examples` (3 leaf items).
 
@@ -134,7 +137,9 @@ B companion: `qsm-infinite-spin-physical-models-examples` (1 leaf items).
 
 | Proposed item | Kind / domain | Exact argument |
 |---|---|---|
-| `lem-qsm-models-diagonal-occupation-trace` — Explicit diagonal Fock domains and occupation trace | lemma / mathematics | `workers/models-examples/proofs.md#M0` |
+| `def-qsm-identical-particle-fock-sectors` — Symmetric and antisymmetric identical-particle Fock spaces | definition / mathematics | `workers/models-examples/fock-and-occupation.md#F0` |
+| `lem-qsm-fock-occupation-basis-and-car-relations` — Occupation bases and actual CCR/CAR domains | lemma / mathematics | `workers/models-examples/fock-and-occupation.md#F1` |
+| `lem-qsm-models-diagonal-occupation-trace` — Explicit diagonal Fock domains and occupation trace | lemma / mathematics | `workers/models-examples/fock-and-occupation.md#F2` |
 | `thm-qsm-models-lattice-riemann-bose-bound` — Lattice Gaussian Riemann and singular Bose limit | theorem / mathematics | `workers/models-examples/proofs.md#M1` |
 | `post-qsm-models-statistics-and-preparation` — Quantum statistics and model equilibrium preparation | postulate / physics | `workers/models-examples/proofs.md#P0` |
 | `pthm-qsm-dilute-occupation-limit` — Controlled dilute Bose/Fermi occupation limit | physics-theorem / physics | `workers/models-examples/proofs.md#E7` |
@@ -212,3 +217,5 @@ B companion: `qsm-dt-channels-examples` (4 leaf items).
 
 B companion: `qsm-dt-relaxation-examples` (2 leaf items).
 
+
+2026-10-17 scoped cycle amendment: QGA0 uses the same-page finite matrix calculus rather than the later local tensor-state definition; see `research/physics-remaining-80-2026-10-17-qsm-cycle-resolution.md`. Existing homes and claims are preserved.

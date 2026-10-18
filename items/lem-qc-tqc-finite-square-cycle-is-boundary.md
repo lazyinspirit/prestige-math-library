@@ -2,7 +2,7 @@
 id: lem-qc-tqc-finite-square-cycle-is-boundary
 kind: lemma
 title: Finite square-lattice cycles are boundaries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

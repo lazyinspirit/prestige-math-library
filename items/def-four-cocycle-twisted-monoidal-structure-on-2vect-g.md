@@ -2,7 +2,7 @@
 id: def-four-cocycle-twisted-monoidal-structure-on-2vect-g
 kind: definition
 title: Four-cocycle twisted monoidal structure on 2Vect_G
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

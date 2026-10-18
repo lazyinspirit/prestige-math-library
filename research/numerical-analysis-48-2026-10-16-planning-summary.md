@@ -1,0 +1,13 @@
+# Numerical Analysis intake proposal
+
+48 new pairs / 96 rows: 46 approved NA scope designs and exactly two independent ODE prerequisite pairs. Reuse existing P-NUM-SDE-01/02. Category total after integration: 50 pairs / 100 pages.
+
+IMPORTANT: two original NA page IDs conflict with existing BCS owners. Proposed distinct IDs: NA-42 multilevel-monte-carlo-complexity; NA-43 convex-numerical-optimization-for-statistical-computation (matching -examples). No content promise changes. Root must adopt this routine global-identity repair before integration.
+
+Root applies proposed-rows.json and copies plan-numerical-analysis-prerequisites.md to research/plan-numerical-analysis-prerequisites.md. Rows have empty inventories, orders 2286–2381, durable scaffold paths. Canonical/source/engine state unchanged here. design-evidence.json preserves every approved section and binding appendix verbatim; status/hashes are current navigation, not proof acceptance. All 96 proposed IDs unique and absent from canonical; all requirements are existing/earlier proposed A/P pages; no NA46 logical consumer (its B companion is composition context).
+
+Local bodies authorized by the approved designs: arithmetic NA02; Jordan/power lemma NA04 (explicit earlier edge to NA16/25); shooting C1 parameter augmentation/sensitivity NA21; BV spacetime compactness NA27; cell trace/Green/scaling and Bramble–Hilbert NA28; evolution trace/well-posedness NA36; geometric partial-map/pullback/Verlet/finite-order-energy interfaces NA22; mini-element Korn/divergence/Fortin/stability NA34; Gaussian matrix moments NA08; common-space semigroup/density interface NA19. No extra P-NA pairs. Reuse actual proved local suppliers wherever their contracts fit. Existing BCS HK/scramble supplier pages explicitly added to NA40/41; any boundary-class compatibility belongs locally NA40.
+
+Holds: root adopt two disambiguated IDs and apply canonical/scaffold proposal; supplier-owner current graph/body audit and outstanding repairs remain outside scope (historical14-type audit is not proof of current defects or current cleanliness); all missing established proofs are ordinary initial-authoring obligations, with same-owner intermediates before consumers; existing SDE/HK/scramble bodies must meet exact current contracts; NA46 needs source/status carrier/current publication review and no outgoing logical premise. No claim is narrowed, no unread source is represented as read, no physics carrier supplies root logic.
+
+NA06 B-page counterexample is nonlogical context and excluded from requires. NA11 complex Runge and NA12 first Lebesgue FTC are optional contextual routes, excluded. NA30 includes quadrature variants through NA12/13.

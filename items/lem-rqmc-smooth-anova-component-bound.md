@@ -21,8 +21,6 @@ axiom_use: "Assume Countable Choice through the published Riemann-to-Lebesgue in
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Art B. Owen, Local Antithetic Sampling with Scrambled Nets, §5.1, Lemmas 2–3"

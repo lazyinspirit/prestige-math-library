@@ -2,7 +2,7 @@
 id: lem-poincare-dual-orbits-are-regular-homogeneous-borel-spaces
 kind: lemma
 title: Lorentz momentum orbits are regular homogeneous Borel spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -1,0 +1,572 @@
+
+
+===== PDF PAGE 1 =====
+
+§ 23. Rate-distortion theory
+
+
+
+
+Big picture so far:
+
+   1. Lossless data compression: Given a discrete ergodic source Sk, we know how to encode to
+     pure bits W ∈ [ 2k ] .
+
+   2. Binary HT: Given two distribution P and Q, we know how to distinguish them optimally.
+
+   3. Channel coding: How to send bits over a channel [ 2k ] ∋ W → X → Y .
+
+   4. JSCC: how to send discrete data optimally over a noisy channel.
+
+   Next topic, lossy data compres sion: Given X, ﬁnd a k-bit representation W, X → W → X,ˆ  such
+that Xˆ is a good reconstruction of X.
+   Real-world examples: codecs consist of a compressor and a decompressor
+
+   • Image: JPEG...
+
+   • Audio: MP3, CD...
+
+   • Video: MPEG...
+
+23.1  Scalar quantization
+
+Problem: Data isn’t discrete!  Often, a signal (function) comes from voltage levels or other
+continuous quantities. The question of how to map (naturally occurring) continuous time/analog
+signals into (electronics friendly) discrete/digital signals is known as quantization, or in information
+theory, as rate distortion theory.
+
+                                    Domain                         Range
+                                          Continuous                                                                            Analog
+                                                time                              Sampling                                                      Quantization                                                                     Signal
+                                                Discrete                                                                                               Digital
+                                                time
+
+
+We will look at several ways to do quantization in the next few sections.
+
+
+
+
+
+                                          236
+
+===== PDF PAGE 2 =====
+
+23.1.1  Scalar Uniform Quantization
+
+The idea of qunatizing an inherently continuous-valued signal was most explicitly expounded in the
+patenting of Pulse-Coded Modulation (PCM) by A. Reeves, cf. [Ree65] for some interesting historical
+notes. His argument was that unlike AM and FM modulation, quantized (digital) signals could be
+sent over long routes without the detrimental accumulation of noise. Some initial theoretical analysis
+of the PCM was undertaken in 1947 by Oliver, Pierce, and Shannon (same Shannon), cf. [OPS48].
+   For a random variable X ∈ [ −A /2,A/2] ⊂ R, the scalar uniform quantizer qU ( X ) with N
+quantization points partitions the interval [−/A 2,A/2 ] uniformly
+                       N equally spaced points
+
+
+                          −A2                     A2
+where the points are in {−A2                     + kA,kN   = 0,...,N − 1} .
+   What is the quality (or ﬁdelity) of this quantization? Most of the time, mean squared error is
+used as the quality criterion:
+
+                    D ( N ) = E∣ X − qU ( X )∣ 2
+
+where D denotes the average distortion. Often R = log 2 N is used instead of N, so that we think
+about the number of bits we can use for quantization instead of the number of points. To analyze
+this scalar uniform quantizer, we’ll look at the high-rate regime (R ≫1). The key idea in the high
+rate regime is that (assuming a smooth density PX), each quantization interval ∆j looks nearly ﬂat,
+so conditioned on ∆j, the distribution is accurately approximately by a uniform distribution.
+
+                                                         Nearly ﬂat for
+                                                                 large partition
+
+
+
+                                      ∆j
+
+Let cj be the j-th quantization point, and ∆j be the j-th quantization interval. Here we have
+
+
+                                  N
+                    E∣ X − qU ( X )∣=2 ∑ E[∣X −cj∣2∣X ∈∆j]P[X ∈∆j]
+                                                      j=1
+                                  N   ∣ ∆ j ∣ 2
+                 (high rate approximation) ≈ ∑    P[X ∈∆j]
+                                              12                                                                   j = 1
+                                               (                                     A )2  A2                                   N                                                       −2R                                     =     =   2
+                                           12    12
+
+How much do we gain per bit?
+
+                                      V ar (X)
+                       10log10 SNR = 10log10
+                                     E∣X −qU(X)∣2
+                                        12V ar(X)
+                               = 10log10         + ( 20 log10 2)R
+                                        A2
+                               = constant + (6.02dB)R
+
+
+
+                                         237
+
+===== PDF PAGE 3 =====
+
+For example, when X is uniform on [−A2 , A2 ], the constant is 0. Every engineer knows the rule
+of thumb “6dB per bit”; adding one more quantization bit gets you 6 dB improvement in SNR.
+However, here we can see that this rule of thumb is valid only in the high rate regime. (Consequently,
+widely articulated claims such as “16-bit PCM (CD-quality) provides 96 dB of SNR” should be
+taken with a grain of salt.)
+Note: The above deals with X with a bounded support. When X is unbounded, a wise thing to do
+is to allocate the quantization points to the range of values that are more likely and saturate the
+large values at the dynamic range of the quantizer. Then there are two contributions, known as
+the granular distortion and overload distortion. This leads us to the question: Perhaps instead of
+uniform quantization optimal?
+
+23.1.2  Scalar Non-uniform Quantization
+
+Since our source has density pX, a good idea might be to use more quantization points where pX is
+larger, and less where pX is smaller.
+
+
+
+
+
+Often the way such quantizers are implemented is to take a monotone transformation of the source
+f (X ) , perform uniform quantization, then take the inverse function:
+
+
+                                                        f
+                      X      U
+
+                                                      q            qU                                     (23.1)
+
+                                            ˆX      qU(U)
+                                                   f−1
+
+i.e., q(X) = f−1(qU(f(X))). The function f is usually called the compander (compressor+expander).
+One of the choice of f is the CDF of X, which maps X into uniform on [0,1]. In fact, this compander
+architecture is optimal in the high-rate regime (ﬁne quantization) but the optimal f is not the CDF
+(!). We defer this discussion till Section 23.1.4.
+    In terms of practical considerations, for example, the human ear can detect sounds with volume
+as small as 0 dB, and a painful, ear-damaging sound occurs around 140 dB. Achieveing this is
+possible because the human ear inherently uses logarithmic companding function. Furthermore,
+many natural signals (such as diﬀerences of consecutive samples in speech or music (but not samples
+themselves!)) have an approximately Laplace distribution. Due to these two factors, a very popular
+and sensible choice for f is the µ-companding function
+
+
+
+
+
+                               f(X) = sign(X) l n(1+µln(1+µ)|X|)
+
+
+                                          238
+
+===== PDF PAGE 4 =====
+
+which compresses the dynamic range, uses more bits for smaller  ∣X ∣ ’s, e.g.  ∣ X ∣ ’s in the range of
+human hearing, and less quantization bits outside this region. This results in the so-called µ-law
+which is used in the digital telecommunication systems in the US, while in Europ e they use a slightly
+diﬀerent compander called the A-law.
+
+23.1.3  Optimal Scalar Quantizers
+
+Now we look for the optimal scalar quantizer given R bits for reconstruction. Formally, this is
+
+                              Dscalar(R) =  min  E ∣X −q(X)∣2
+                                                            q∶∣Im q∣≤2R
+
+Intuitively, we would think that the optimal quantization regions should be contiguous; otherwise,
+given a point cj, our reconstruction error will be larger. Therefore quantizers are piecewise constant:
+
+                                    q(x) = cj1Tj≤x≤Tj+1
+
+for some cj ∈[Tj,Tj+1].
+    Simple example: One-bit quantization of X ∼N(0,σ2). Then optimal quantization points are
+        √          √
+c1 = E[X∣X ≥0] =   πσ,2   c2 = E[X∣X ≤0] = −   π2 σ.
+   With ideas like this, in 1982 Stuart Lloyd developed an algorithm (called Lloyd’s algorithm)
+for iteratively ﬁnding optimal quantization regions and points. This works for both the scalar and
+vector cases, and goes as follows:
+
+    1. Pick any N = 2k points
+
+    2. Draw the Voronoi regions around the chosen quantization points (aka minimum distance
+       tessellation, or set of points closest to cj), which forms a partition of the space.
+
+    3. Update the quantization points by the centroids (E[X∣X ∈D]) of each Voronoi region.
+
+    4. Repeat.
+
+
+
+
+
+                                          Steps of Lloyd’s algorithm
+
+Lloyd’s clever observation is that the centroid of each Voronoi region is (in general) diﬀerent than
+the original quantization points. Therefore, iterating through this procedure gives the Centroidal
+Voronoi Tessellation (CVT - which are very beautiful objects in their own right), which can be
+viewed as the ﬁxed point of this iterative mapping. The following theorem gives the results about
+Lloyd’s algorithm
+
+Theorem 23.1 (Lloyd).
+
+   1. Lloyd’s algorithm always converges to a Centroidal Voronoi Tessellation.
+
+
+                                          239
+
+===== PDF PAGE 5 =====
+
+   2. The optimal quantization strategy is always a CVT.
+
+   3. CVT’s are non-unique, and the algorithm may converge to non-global optima.
+
+   Remark: The third point tells us that Lloyd’s algorithm isn’t always guaranteed to give the
+optimal quantization strategy.1 One suﬃcient condition for uniqueness of a CVT is the log-concavity
+of the density of X [Fleischer ’64]. Thus, for Gaussian PX, Lloyd’s algorithm outputs the optimal
+quantizer, but even for Gaussian, if N > 3, optimal quantization points are not known in closed
+form! So it’s hard to say too much about optimal quantizers. Because of this, we next look for an
+approximation in the regime of huge number of points.
+
+23.1.4  Fine quantization
+
+[Panter-Dite ’51] Now we look at the high SNR approximation. For this, introduce the probability
+density function λ(x) , which represents the density of our quantization points and allows us to
+approximate summations by integrals2 . Then the number of quantization points in any interval [ a,b]
+           b
+is ≈ N ∫ a λ (x )dx. For any point x, denote its distance to the closest quantization point by ∆x( ) .
+Then Nλ( x) ∆ (x) ≈ 1 Ô⇒ ∆x( ) ≈ N λ1(x). With this approximation, the quality of reconstruction is
+
+                           N
+                 E∣X −q(X)∣2 = ∑E[∣X −cj ∣∣X2  ∈∆j]P[X ∈∆j]
+                                                     j = 1
+                           N      ∆ j∣2                             ≈ ∑ P [X ∈∆j]∣    ≈∫p(x)∆2(x) dx
+                                              12            12                                                     j =1
+                                   1           − 2                             =     ∫ p( x) λ  ( x) dx                                 12N2
+
+To ﬁnd the optimal density λ that gives the best reconstruction (minimum MSE) when X has
+density p, we use H¨older’s inequality: ∫ p1/ 3 ≤ (∫ pλ −)2 1/ 3 ( ∫ λ ) 2/ 3. Therefore ∫ pλ − 2 ≥(∫ p1/3 ) 3,
+with equality iﬀpλ−2 ∝ λ. Hence the optimizer is λ ∗ (x) = f1/ 3 ( x)  Therefore when N = 2R,3                                                              ∫f1/3dx.
+
+                                                                           3
+                             Dscalar(R) ≈1 2−2R (∫  p1/3 ( x) dx)
+                                      12
+
+So our optimal quantizer density in the high rate regime is prop ortional to the cubic root of the
+density of our source. This approximation is called the Panter-Dite approximation. For example,
+when X ∼N ( 0,σ2 ) , this gives
+                              √
+                                  Dscalar(R) ≈σ22−2R π  3
+                                                   2
+
+Note: In fact, in scalar case the optimal non-uniform quantizer can be realized using the compander
+architecture (23.1) that we discussed in Section 23.1.2: As an exercise, use Taylor expansion to
+
+    1 As a simple example one may consider PX = 13φ(x −1) + 13φ(x) + 13 φ(x + 1) where φ(⋅) is a very narrow pdf,
+symmetric around 0. Here the CVT with centers ± 23 is not optimal among binary quantizers (just compare to any
+quantizer that quantizes two adjacent spikes to same value).
+    2This argument is easy to make rigorous. We only need to deﬁne reconstruction points cj as solutions of
+
+                                                                  cj            j
+                                 ∫−∞λ(x) dx = N .
+
+    3In fact when R →∞, “≈” can be replaced by “= 1 + o(1)” [Zador ’56].
+
+                                         240
+
+===== PDF PAGE 6 =====
+
+analyze the quantization error of (23.1) when N →∞. The optimal compander f ∶R →[0,1 ] turns
+                 ∫−∞t  p1/3 (t )dtout to be f (x ) =  ∞        [Bennett ’48, Smith ’57].
+                     ∫−∞p1/3(t)dt
+
+23.1.5  Fine quantization and variable rate
+
+So far we were considering quantization with restriction on the cardinality of the image of q (⋅) . If
+one, however, intends to further compress the values q (X ) via noiseless compressor, a more nat ural
+constraint is to bound H (q (X )) .
+   Koshelev [Kos63] discovered in 1963 that in the high rate regime uniform quantization is
+asymptotically optimal under the entropy constraint. Indeed, if q∆is a uniform quantizer with cell
+size ∆, then it is easy to see that
+
+                        H(q∆(X)) = h(X) −log ∆+ o(1),                           (23.2)
+
+where h(X) = −∫pX(x)log pX(x) dx is the diﬀerential entropy of X. So a uniform quantizer with
+H (q (X )) = R achieves
+                              ∆2       22h(X)                    D =    ≈2−2R           .
+                                     12         12
+  On the other hand, any quantizer with unnormalized point density function Λ( x) (i.e. smooth
+                             cj
+function such that ∫ −∞ Λ( x) dx = j) can be shown to achieve (assuming Λ → ∞ pointwise)
+
+                                       1           1
+                     D ≈12 ∫pX(x) Λ2(x)dx                            (23.3)
+                                               Λ(x)
+                        H(q(X)) ≈∫pX(x)log      dx                           (23.4)
+                                              pX(x)
+
+Now, from Jensen’s inequality we have
+
+          1           1                                                   22h(X)         ∫pX(x)     ≥1 exp{−2∫pX(x)log Λ(x)dx} ≈2−2H(q(X))           ,          12        Λ2(x)dx  12                                       12
+
+concluding that uniform quantizer is asymptotically optimal.
+   Furthermore, it turns out that for any source, even the optimal vector quantizers (to be considered
+                                            − 2R 22h(X)next) can not achieve distortion better that 2     2πe  – i.e. the maximal improvement they can
+gain (on any iid source!) is 1.53 dB (or 0.255 bit/sample). This is one reason why scalar uniform
+quantizers followed by lossless compression is an overwhelmingly popular solution in practice.
+
+23.2  Information-theoretic vector quantization
+
+By doing vector quantization (namely, compressing (X1,...,Xn ) → 2nR points), rate-distortion
+theory tells us that when n is large, we can achieve the per-coordinate MSE:
+
+                                     Dvec ( R ) = σ22−2R
+
+which saves 4.35 dB (or 0.72 bit/sample). This should be rather surprising, so we repeat it again:
+even when X1,...,Xn are iid, we can get better performance by quantizing Xi jointly. One instance
+of this surprising eﬀect is the following:
+  Hamming Game: Given 100 unbiased bits, we want to look at them and scribble something
+down on a piece of paper that can store 50 bits at most. Later we will be asked to guess the
+
+
+                                         241
+
+===== PDF PAGE 7 =====
+
+original 100 bits, with the goal of maximizing the number of correctly guessed bits. What is the
+best strategy? Intuitvely, the optimal strategy would be to store half of the bits then guess on the
+rest, which gives 25% BER. However, as we will show in the next few lectures, the optimal strategy
+amazingly achieves a BER of 11%. Note does this happen? After all we are guessing independent
+bits and the utility function (BER) treats all bits equally. Some intuitive explanation:
+
+   1. Applying scalar quantization componentwise results in quantization region that are hypercubes,
+     which might not be eﬃcient for covering.
+
+   2. Concentration of measures removes many source realizations that are highly unlikely. For
+     example, if we think about quantizing a single Gaussian X, then we need to cover large portion
+      of R in order to cover the cases of signiﬁcant deviations of X from 0. However, when we are
+      quantizing many (X1,...,Xn) together, the law of large numbers makes sure that many Xj’s
+     cannot conspire together and all produce large values. Thus, we may exclude large portions of
+     the Rn from consideration.
+
+  Math Formalism: A lossy compressor is an encoder/decoder pair (f,g) where
+
+                      X Ðf→W Ðg→ˆX
+
+   • X ∈ X - continuous source
+
+   • W - discrete data
+
+   • ˆX ∈Xˆ - reproduction
+
+A distortion metric is a function d ∶X ×Xˆ →R∪{+∞} (loss function). There are various formulations
+of the lossy compression problem:
+
+   1. Fixed length (ﬁxed rate), average distortion: W ∈[ M ] , minimize E[ d( X,Xˆ )].
+   2. Fixed length, excess distortion: W ∈[ M ] , minimize P[ d( X,Xˆ ) > D ].
+   3. Variable length, max distortion: W ∈{0 ,1}∗, d(X,Xˆ ) ≤D a.s., minimize E[length(W)] or
+   H ( Xˆ ) = H (W ).
+
+Note: In this course we focus on ﬁxed length and average distortion loss compression. The
+diﬀerence between average distortion and excess distortion is analogous to average risk bound and
+high-probability bound in statistics/machine learning.
+Deﬁnition 23.1. Rate-distortion problem is characterized by a pair of alphabets A , Aˆ, a single-
+letter distortion function d(⋅,⋅) ∶A × Aˆ →R ∪{+∞} and a source – a sequence of A -valued r.v.’s
+(S1,S2,...) . A separable distortion metric is deﬁned for n-letter vectors by averaging the single-letter
+distortions:
+
+                                           1
+                               d(an,aˆn) ≜  ∑d(ai , aˆi )
+                                   n
+
+An (n,M,D )-code is
+
+   • Encoder f ∶An →[M ]
+
+   • Decoder g ∶[M] →Aˆn
+
+
+                                         242
+
+===== PDF PAGE 8 =====
+
+   • Average distortion: E[d(Sn,g(f(Sn)))] ≤D
+
+Fundamental limit:
+
+                     M∗(n,D) = min{M ∶∃(n,M,D)-code }
+                                            1                   R (D) = limsup   log M∗n,D(    )
+                               n→∞ n
+
+  Now that we have the deﬁnition, we give the (surprisingly simple) general converse
+Theorem 23.2 (General Converse). For all lossy codes X →W →Xˆ such that E[d(X,X)]ˆ  ≤D,
+we have
+
+                             log M ≥ ϕX ( D ) ≜        inf       I (X;Y )
+                                             PY ∣X ∶[E d( X,Y )]≤ D
+
+where W ∈[M ] .
+
+Proof.
+
+                           log M ≥ H (W ) ≥ I ( X;W ) ≥ I (X;Xˆ ) ≥ ϕX ( D )
+
+where the last inequality follows from the fact that PXˆ ∣X is a feasible solution (by assumption).
+
+Theorem 23.3 (Properties of ϕX).
+
+   1. ϕX is convex, non-increasing.
+
+   2. ϕX continuous on (D0,∞), where D0 = inf{D ∶ϕX(D) < ∞}.
+
+   3. If
+
+                                    ⎧
+                                     D0   x = y
+                                  d(x,y ) =                                                                                                                 ⎪⎪⎨⎪⎪>    x =/ y                         ⎩D0
+
+    Then ϕX(D0 ) = I(X;X).
+
+   4. Let
+                                Dmax = inf Ed(X,xˆ) .
+                                                 xˆ ∈Xˆ
+    Then ϕX ( D) = 0 for all D > Dmax. If D0 > Dmax then also ϕX ( Dmax ) = 0.
+
+Note: If Dmax = Ed(X,xˆ) for some xˆ, then xˆ is the “default” reconstruction of X, i.e., the best
+estimate when we have no information about X. Therefore D ≥Dmax can be achieved for free. This
+is the reason for the notation Dmax despite that it is deﬁned as an inﬁmum.
+Example: (Gaussian with MSE distortion) For X ∼N( 0,σ2 ) and d(x, y) = (x −)2,y   we have
+            1      σ2                              = 0 which is not attained; Dmax = σ2 and if D ≥σ2, we canϕX ( D ) = 2 log+ D . In this case D0
+simply output Xˆ = 0 as the reconstruction which requires zero bits.
+
+Proof.
+
+   1. Convexity follows from the convexity of PY ∣X ↦I(PX,PY ∣X).
+
+   2. Continuity on interior of the domain follows from convexity.
+
+
+                                          243
+
+===== PDF PAGE 9 =====
+
+   3. The only way to satisfy the constraint is to take X = Y .
+
+   4. For any D > Dmax we can set Xˆ = xˆ deterministically. Thus I(X;xˆ) = 0. The second claim
+       follows from continuity.
+
+   In channel coding, we looked at the capacity and the information capacity. We deﬁne the
+Information Rate-Distortion function in an analogous way here, which by itself is not an operational
+quantity.
+
+Deﬁnition 23.2. The Information Rate-Distortion function for a source is
+
+                          1
+          Ri(D) = limsup                         ϕSn (D) where ϕSn ( D) =          inf        I (S n ;Snˆ )
+                n→∞ n                       PSˆn∣ S n∶E[d( Sn ,Snˆ )]≤D
+
+And D0 = inf {D ∶ R i (D ) < ∞}.
+
+   The reason for deﬁning R i(D) is because from Theorem 23.2 we immediately get:
+
+Corollary 23.1. ∀ D, R (D ) ≥ Ri (D ).
+
+   Naturally, the information rate-distortion function inherit the properties of ϕ:
+
+Theorem 23.4 (Properties of Ri).
+
+   1. Ri(D) is convex, non-increasing
+
+   2. Ri(D) is continuous on (D0,∞), where D0 ≜inf{D ∶Ri(D ) < ∞}.
+
+   3. If
+
+                                    ⎧
+                           D0   x = y
+                                    d(x,y ) =                                                                                                                                                                                  ⎪⎪⎨⎪⎪>    x =/ y                         ⎩D0
+
+    Then for stationary ergodic { Sn } , Ri (D ) = H (entropy rate) or +∞ if Sk is not discrete.
+
+   4. Ri(D) = 0 for all D > D max, where
+
+                            Dmax ≜ limsup inf Ed(Xn,xˆn ) .
+                                          n →∞   xˆn ∈Xˆ
+
+       If D0 < Dmax, then Ri (Dmax ) = 0 too.
+
+   5. (Single letterization) If the source {Si} is i.i.d., then
+
+                           Ri ( D ) = φS1(D) =       inf      I ( S;S)ˆ
+                                             PS∣S∶[ˆ  E d( S,S)]≤Dˆ
+
+Proof. Properties 1-4 follow directly from corresponding properties of φSn and property 5 will be
+established in the next section.
+
+
+
+
+
+                                          244
+
+===== PDF PAGE 10 =====
+
+23.3*  Converting excess distortion to average
+
+Finally, we discuss how to build a compressor for average distortion if we have a compressor for
+excess distortion, which we will not discuss in details in class.
+   Assumption Dp. Assume that for (S,d), there exists p > 1 such that Dp < ∞, where
+
+                                                              p 1/p                       Dp ≜supinf ( E∣ d( Sn,xˆ)∣)   < +∞
+                                    n     xˆ
+
+i.e.  that our separable distortion metric d do esn’t grow to o fast. Note that (by Minkowski’s
+inequality) for stationary memoryless sources we have a single-letter bound:
+
+                    Dp ≤inf(E∣d(S,xˆ)∣p)1/p                                 (23.5)
+                                                                                        xˆ
+
+Theorem 23.5 (Excess-to-Average). Suppose there exists X → W → Xˆ such that W ∈[M ] and
+P[ d( X,Xˆ ) > D ] ≤ ϵ. Suppose for some p ≥ 1 and xˆ0 ∈Xˆ , (E[ d( X,xˆ0 )] p ) 1/ p = Dp < ∞ . Then there
+exists X →W                          ′ →X′ˆ  code such that W ′ ∈ [ M + 1 ] and
+
+                            E[d( X, Xˆ ′)] ≤D(1 −ϵ) + Dpϵ1−1/p                           (23.6)
+
+Remark 23.1. Theorem is only useful for p > 1, since for p = 1 the right-hand side of (23.6) does
+not converge to 0 as ϵ →0.
+
+Proof. We transform the ﬁrst code into the second by adding one codeword:
+
+                            ⎧
+                                    f x)   d(x, g ( f (x ))) ≤ D                                 f′ ( x) = ⎪⎪⎨(
+                                                        ⎪⎪⎩M + 1  o/w
+                                                        ⎧⎪g(j)  j ≤ M
+                                g′(j) =  ⎪⎨⎪⎪       j = M + 1                                           ⎩xˆ0
+
+Then
+
+         E[d(X,g ′ ○ f′ ( X)) ≤E[ d(X,X)∣Wˆ  ˆ ≠M + 1](1 −ϵ) + E[d( X,x0 ) 1{ Wˆ = M + 1 }]
+                                   −/1 p         (H¨olders Inequality) ≤ D ( 1 −)ϵ + Dpϵ1
+
+
+
+
+
+                                          245
+
+===== PDF PAGE 11 =====
+
+MIT OpenCourseWare
+https://ocw.mit.edu
+
+
+
+6.441 Information Theory
+Spring 2016
+
+
+
+For information about citing these materials or our Terms of Use, visit: https://ocw.mit.edu/terms.

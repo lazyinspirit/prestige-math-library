@@ -2,7 +2,7 @@
 id: lem-hh-sl2-q3-lattice-tree-and-iwahori-orbits
 kind: lemma
 title: The lattice tree and Iwahori orbits for SL2(Q3)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

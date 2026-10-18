@@ -2,7 +2,7 @@
 id: ex-sl2-level-zero-trivial-sugawara
 kind: example
 title: The level-zero trivial sl2 module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

@@ -41,8 +41,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 3, §3.2, PDF pp.48–49: Campbell–Mecke formula and Poisson add-one-point interpretation; introductory cross-check."
-verification:
-  precheck: pending
 ---
 
 ## Statement

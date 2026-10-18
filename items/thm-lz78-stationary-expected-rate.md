@@ -2,7 +2,7 @@
 id: thm-lz78-stationary-expected-rate
 kind: theorem
 title: "LZ78 expected-rate universality for stationary sources"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

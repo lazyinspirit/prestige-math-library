@@ -2,7 +2,7 @@
 id: lem-modular-hom-state-spaces-have-exact-sewing-inverses
 kind: lemma
 title: "Modular Hom state spaces have exact sewing inverses and the dimension formula"
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

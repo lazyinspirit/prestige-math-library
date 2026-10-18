@@ -2,7 +2,7 @@
 id: def-daha-a1-double-affine-hecke-algebra
 kind: definition
 title: "The equal-parameter double-affine Hecke algebra of type A1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

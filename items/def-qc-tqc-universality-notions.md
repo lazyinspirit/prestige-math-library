@@ -2,7 +2,7 @@
 id: def-qc-tqc-universality-notions
 kind: definition
 title: Exact, projective, and encoded braid universality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

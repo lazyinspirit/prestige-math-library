@@ -2,7 +2,7 @@
 id: thm-clifford-graded-tensor-product-for-orthogonal-sums
 kind: theorem
 title: "The graded tensor product for orthogonal sums of quadratic spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-complex-clifford-classification-and-graded-products

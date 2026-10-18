@@ -1,7 +1,7 @@
 ---
 page: discrete-memoryless-channel-capacity-examples
 title: "Discrete Memoryless Channel Capacity — Examples"
-status: draft
+status: published
 requires: [discrete-memoryless-channel-capacity]
 items: []
 examples:

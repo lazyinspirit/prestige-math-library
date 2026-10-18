@@ -2,7 +2,7 @@
 id: lem-countable-mode-car-particle-hole-automorphism
 kind: lemma
 title: Particle-Hole Exchange Is an Automorphism of Countable-Mode CAR
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

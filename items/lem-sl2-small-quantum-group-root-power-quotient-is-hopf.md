@@ -2,7 +2,7 @@
 id: lem-sl2-small-quantum-group-root-power-quotient-is-hopf
 kind: lemma
 title: "The rank-one root-power quotient is a finite-dimensional Hopf algebra"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

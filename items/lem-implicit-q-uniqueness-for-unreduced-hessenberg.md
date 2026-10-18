@@ -13,8 +13,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pending
 sources:
   references:
     - title: "James Demmel, Math 221 Lecture 16: The implicit Q theorem"

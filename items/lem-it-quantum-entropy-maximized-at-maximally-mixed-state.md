@@ -2,7 +2,7 @@
 id: lem-it-quantum-entropy-maximized-at-maximally-mixed-state
 kind: lemma
 title: The maximally mixed state maximizes finite quantum entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: lem-generic-pfaffian-straightening
 kind: lemma
 title: Straightening basis for generic Pfaffian rank rings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

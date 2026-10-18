@@ -2,7 +2,7 @@
 id: def-reduced-graded-symmetric-coalgebra
 kind: definition
 title: "Reduced graded symmetric coalgebra with its shuffle coproduct"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

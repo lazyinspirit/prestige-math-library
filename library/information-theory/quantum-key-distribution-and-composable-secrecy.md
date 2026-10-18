@@ -1,7 +1,7 @@
 ---
 page: quantum-key-distribution-and-composable-secrecy
 title: Quantum Key Distribution and Composable Secrecy
-status: draft
+status: published
 requires:
   - secrecy-and-information-privacy
   - quantum-relative-entropy-data-processing-and-strong-subadditivity

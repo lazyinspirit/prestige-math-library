@@ -2,7 +2,7 @@
 id: thm-feedback-does-not-increase-cost-constrained-dmc-capacity
 kind: theorem
 title: Causal feedback does not increase finite DMC capacity under average cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

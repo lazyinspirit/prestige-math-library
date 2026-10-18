@@ -2,7 +2,7 @@
 id: ex-correlated-gaussian-noise-orthogonal-reduction
 kind: example
 title: Orthogonal reduction of a correlated two-dimensional Gaussian channel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

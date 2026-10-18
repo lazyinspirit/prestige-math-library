@@ -2,7 +2,7 @@
 id: lem-finite-gibbs-inequality
 kind: lemma
 title: "Nonnegativity of finite relative entropy with a positive reference"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

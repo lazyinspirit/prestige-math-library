@@ -17,8 +17,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Art B. Owen and Daniel Rudolf, A strong law of large numbers for scrambled net integration, Section 2, Lemma 1"

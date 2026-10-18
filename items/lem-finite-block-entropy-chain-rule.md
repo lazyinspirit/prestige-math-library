@@ -2,7 +2,7 @@
 id: lem-finite-block-entropy-chain-rule
 kind: lemma
 title: "Finite entropy chain rule and monotonicity under conditioning"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

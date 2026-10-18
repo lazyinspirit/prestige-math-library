@@ -2,7 +2,7 @@
 id: lem-finite-acyclic-quiver-hall-category-is-hereditary-finitary
 kind: lemma
 title: "Finite-dimensional representations of an acyclic quiver form a hereditary finitary Hall category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-adjoint-casimir-is-positive-scalar
 kind: lemma
 title: The normalized adjoint Casimir is a positive scalar
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

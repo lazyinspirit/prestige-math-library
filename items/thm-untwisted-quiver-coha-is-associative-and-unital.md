@@ -2,7 +2,7 @@
 id: thm-untwisted-quiver-coha-is-associative-and-unital
 kind: theorem
 title: The untwisted quiver CoHA is associative and unital
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

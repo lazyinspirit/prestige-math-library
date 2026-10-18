@@ -2,7 +2,7 @@
 id: lem-pa36-singular-verma-chain-and-generation
 kind: lemma
 title: A fixed singular Verma chain with globally generated final bundle
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

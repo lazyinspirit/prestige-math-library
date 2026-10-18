@@ -2,7 +2,7 @@
 id: lem-scalar-gaussian-channel-mutual-information-power-bound
 kind: lemma
 title: Power bound for real and complex scalar Gaussian channels
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

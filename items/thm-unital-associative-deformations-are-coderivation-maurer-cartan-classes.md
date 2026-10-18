@@ -2,7 +2,7 @@
 id: thm-unital-associative-deformations-are-coderivation-maurer-cartan-classes
 kind: theorem
 title: "Fixed-unit associative deformations are normalized coderivation Maurer–Cartan classes"
-status: draft
+status: published
 dependency_level: 11
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

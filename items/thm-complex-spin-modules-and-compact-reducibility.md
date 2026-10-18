@@ -2,7 +2,7 @@
 id: thm-complex-spin-modules-and-compact-reducibility
 kind: theorem
 title: Complex spinor modules and complete reducibility for Euclidean Spin
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations

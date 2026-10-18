@@ -1,0 +1,914 @@
+
+PAGE 1
+1
+Comments on “Channel Coding Rate in the Finite
+Blocklength Regime”: On the Quadratic Decaying
+Property of the Information Rate Function
+Michael X. Cao, Marco Tomamichel
+Department of Electrical and Computer Engineering & Centre for Quantum Technologies,
+National University of Singapore
+Abstract
+The quadratic decaying property of the information rate function states that given a ﬁxed conditional distribution pY|X, the
+mutual information between the (ﬁnite) discrete random variables X and Y decreases at least quadratically in the Euclidean
+distance as pX moves away from the capacity-achieving input distributions. It is a property of the information rate function that
+is particularly useful in the study of higher order asymptotics and ﬁnite blocklength information theory, where it was already
+implicitly used by Strassen [1] and later, more explicitly, by Polyanskiy–Poor–Verd´u [2]. However, the proofs outlined in both
+works contain gaps that are nontrivial to close. This comment provides an alternative, complete proof of this property.
+I. BACKGROUND
+Let WY|X ∈P(Y|X) be a discrete memoryless channel (DMC) from X to Y where X and Y are some ﬁnite sets. The
+information rate function of WY|X, i.e.,
+IW :
+P(X) →R⩾0
+pX 7→D
+ 
+pX · WY|X
+pX ×
+X
+˜x∈X
+WY|X(·|x) · pX(˜x)
+!
+.
+(1)
+is a common and useful function in the information theory. It is a building block of many information quantities of interest;
+and on its own, IW (pX) equals the asymptotic reliable communication rate across i.i.d. copies of WY|X with i.i.d. input source
+each distributed according to pX. It is well-known that suppX∈P(X) IW (pX) = maxpX∈P(X) IW (pX) = C(WY|X) is the capacity
+of WY|X. We denote the set of all maximizers (a.k.a. the capacity-achieving input distributions) by Π. It is also well-known
+that Π is compact. As a result, for each pX ∈P(X), the following is well-deﬁned
+pΠ
+X ≜argminpΠ
+X ∈Π
+pX −pΠ
+X
+
+2 ,
+(2)
+where ∥·∥2 denotes the Euclidean norm. One of the properties of the information rate function is that IW (pX) decreases at
+least quadratically in the Euclidean distance as pX moves away from the set of capacity-achieving input distributions. This
+property, as formalized as the following theorem, is particularly useful in ﬁnite-blocklength information theory (e.g., see [2,
+Theorem 48] and [3, Lemma 7].
+Theorem 1. Given a DMC WY|X ∈P(Y|X) where X and Y are some ﬁnite sets, there exist α, µ > 0 such that
+IW (pX) ⩽C(WY|X) −α ·
+pX −pΠ
+X
+2
+2
+(3)
+for all pX ∈Πµ ≜
+
+pX ∈P(X)
+pX −pΠ
+X
+
+2 ⩽µ
+	
+.
+To the best of our knowledge, the statement of this theorem ﬁrst appeared as one of the intermediate steps in [1]1, and
+was later stated more explicitly and re-proven in [4, Page 80] and [2, Page 2351]. Both proofs considered the Taylor series
+expansion of the function IW at points on Π, i.e., (see [1, Eq (4.39)] and [2, Eq (498)])
+IW (pX) ⩽IW (pΠ
+X) + ∇I(pΠ
+X)T · (pX −pΠ
+X) + 1
+2(pX −pΠ
+X)T · H(pΠ
+X) · (pX −pΠ
+X) + β ·
+pX −pΠ
+X
+3
+2
+(4)
+for some constant β > 0 that only depends on the channel WY|X2. Both proofs then argued that (see [1, Eq (4.41)] and [2,
+Eq (501)]) the term
+Φ(pX) ≜∇I(pΠ
+X)T · (pX −pΠ
+X) + 1
+2(pX −pΠ
+X)T · H(pΠ
+X) · (pX −pΠ
+X)
+pX −pΠ
+X
+2
+2
+(5)
+1Although quadratic decay is not stated in [1] explicitly, it follows from (4.41) together with a uniform bound on the third-order term in the Taylor series
+expansion.
+2Actually, in [1, Eq (4.39)], the author provided a Taylor series expansion of the sum of IW and the information variance function. In [2, Eq (498)], the
+tail term is given as o(
+pX −pΠ
+X
+2
+2) instead of some explicit uniform bound.
+arXiv:2208.12945v2  [cs.IT]  30 Apr 2023
+
+
+PAGE 2
+2
+Πµ
+P(X)
+Π
+Fig. 1. Exposition of the problem with the proof in [1]: The statement of (5)
+not being bounded from 0 is equivalent to the existence of some sequence
+{pk}∞
+k=1 ∈Πµ \ Π such that lim supk→∞Φ(pk) ⩾0 (see the blue line).
+However, the “shape” of the probability polytope P(X) may prevent such a
+sequence to be normalized (see the dashed line).
+ker(W)+p⋆
+X
+P(X)
+Π
+pX
+pΠ
+X
+v
+v0
+v⊥
+Fig. 2. Exposition of the problem with the proof in [2]: This depicts a situation
+when v0 is pointing outside of the probability polytope (see (9)).
+is negative and bounded away from 0 for all pX ∈Πµ \ Π for some µ > 0. Both proofs correctly pointed out that both terms
+∇I(pΠ
+X)T · (pX −pΠ
+X) and (pX −pΠ
+X)T · H(pΠ
+X) · (pX −pΠ
+X) are non-positive, and cannot be zero simultaneously unless pX = pΠ
+X
+(see [1, Lemma 3.2 and the arguments after (4.43)] and [2, below (498)]): If we assume both terms to be zero, then the second
+term being zero will force pX −pΠ
+X ∈ker(WY|X), in which case the function IW is linear along the direction from pΠ
+X to pX,
+which, combined with the hypothesis that the ﬁrst term being zero, will force IW (pX) = IW (pΠ
+X). This is a key observation,
+and we also use this exact same argument in our proof. In other words, it has been fully established in the previous works
+that Φ is strictly negative for all pX ∈Πµ \Π. However, we are disputing that the previous proofs are sufﬁcient to show that Φ
+is bounded away from zero. We will exhibit the gaps in the arguments in [1] and [2] as follows.
+In [1], it is argued that, if Φ is not bounded away from zero, then there must exist a sequence {pk}∞
+k=1 ∈Πµ \ Π such that
+1) lim supk→∞Φ(pk) ⩾0;
+2)
+pk −pΠ
+k
+
+2 = µ for all k as a result of (4.38), i.e., ∇I(pΠ
+X)T · (pX −pΠ
+X) ⩽0 for all pX ∈Πη.
+We agree with the existence of such a sequence satisfying 1), but we fail to see how 2) can also be met. Indeed, using (4.38),
+one can rewrite lim supk→∞Φ(pk) ⩾0 as
+lim sup
+k→∞
+(pk −pΠ
+k )T · H(pΠ
+k ) · (pk −pΠ
+k )
+pk −pΠ
+k
+2
+2
+= lim sup
+k→∞
+ 
+pk −pΠ
+k
+pk −pΠ
+k
+
+!T
+· H(pΠ
+k ) ·
+ 
+pk −pΠ
+k
+pk −pΠ
+k
+
+!
+⩾0
+(6)
+which enables one to replace the sequence {pk}k by a normalized version ˜pk ←pΠ
+k + µ ·
+pk −pΠ
+k
+−1
+2
+· (pk −pΠ
+k ). However,
+the sequence {˜pk}k constructed this way may protrude outside the probability polytope P(X) (see Fig. 1).
+In [2], the authors decompose pX −pΠ
+X = v0 + v⊥where v0 ∈ker(WY|X) and v⊥∈ker(WY|X)⊥, and claim (see [2,
+(498)–(505)])
+Φ(pX) ·
+pX −pΠ
+X
+2
+2 = ∇I(pΠ
+X)T · (v0 + v⊥) + 1
+2vT
+⊥· H(pΠ
+X) · v⊥
+(7)
+⩽∇I(pΠ
+X)T · v0 + 1
+2vT
+⊥· H(pΠ
+X) · v⊥
+(8)
+⩽−Λ1 · ∥v0∥2 −
+λmin +(WY|XW T
+Y|X)
+2 · qmin
+· ∥v⊥∥2
+2
+(9)
+⩽−min
+(
+Λ1,
+λmin +(WY|XW T
+Y|X)
+2 · qmin
+)
+·
+pX −pΠ
+X
+2
+2
+(10)
+where Λ1 is some positive number (independent from pX) and λmin +(·) stands for the smallest strictly positive eigenvalue of
+a matrix. We particularly disagree with (9), as it may occur that pΠ
+X + t · v0 ̸∈P(X) for all t > 0 (see Fig. 2). In such cases,
+there is no guarantee that ∇I(pΠ
+X)T · v0 ⩽0 as IW may actually increase along the direction of v0 from pΠ
+X.
+One potential way to close the gap in the proof above involves careful observations of the shape of the probability polytope,
+especially its implication of the relationship between the vector (pX −pΠ
+X) and the afﬁne subspace that Π lies in when pΠ
+X is
+at the boundary of Π. Namely, we argue that the angle between the aforementioned vector and the afﬁne subspace is bounded
+away from 0. However, arguments along this line of thinking turned out to be tedious. In the next section, we present an
+alternative concise proof that was partially inspired by this very observation.
+
+
+PAGE 3
+3
+II. AN ALTERNATIVE PROOF
+In this section, we present an alternative proof that bypasses the problem we pointed out in the last section. Same as the
+previous proofs, we start with (4), i.e.,
+IW (pΠ
+X) −IW (pX) = −Φ(pX) ·
+pX −pΠ
+X
+2
+2 + o(
+pX −pΠ
+X
+2
+2).
+(11)
+As already established in the previous proofs, we know Φ(pX) < 0 for any pmf pX ̸∈Π. The technical difﬁculty is to bound
+Φ(pX) away from 0 and the term o(
+pX −pΠ
+X
+2
+2)/
+pX −pΠ
+X
+2
+2 close to 0 for all pX in some vicinity of Π. To achieve that,
+our proof follows the following steps:
+1) Construct some function α(pX) > 0 such that for −Φ(pX) ⩾2α(pX) where α only depends on the direction from pΠ
+X to
+pX, i.e., (pX −pΠ
+X)/
+pX −pΠ
+X
+
+2.
+2) Bound term o(
+pX −pΠ
+X
+2
+2)/
+pX −pΠ
+X
+2
+2 such that it only depends on
+pX −pΠ
+X
+
+2. Combined with 1), this means that
+IW (pΠ
+X) −IW (pΠ
+X + t · dX) ⩾2α(dX) · t2 + f(t) · t2
+(12)
+where dX is a norm-1 vector such that (pΠ
+X + dX)Π = pΠ
+X, and where f is some continuous function with f(0) = 0.
+3) One can show that the set of all possible dX in (12), i.e., all valid directions from a point on Π to another point in
+P(X) with the former point being the closest point on Π w.r.t. the latter, is closed. The idea is that the cone of all valid
+directions from any ﬁxed point pΠ
+X on Π is closed, and there are ﬁnitely many different such cones as pΠ
+X moves across
+Π. (See Lemma 2.)
+4) Using the closedness of the set of dX, one can ﬁnd a smallest α⋆> 0 such that (12) is valid for all dX. Then, using the
+continuity of f and the fact that f(0) = 0, one can ﬁnd µ such that |f(t)| ⩽α⋆for all t ∈[0, µ]. Thus,
+IW (pΠ
+X) −IW (pΠ
+X + t · dX) ⩾α⋆· t2
+(13)
+for all valid direction dX and all t ∈[0, µ].
+Before proceeding to the proof of the theorem, we ﬁrst treat Step 3) above as follows.
+Lemma 2. Let X be a ﬁnite set. Let Π be the set of capacity achieving distributions of some DMC with input alphabet X.
+Recall that pΠ
+X is deﬁned in (2). Then the cone cone
+ 
+pX −pΠ
+X
+ pX ∈P(X)
+	
+is closed.
+Proof. For any point p⋆
+X ∈Π, deﬁne
+J (p⋆
+X) ≜
+n
+dX ∈RX  p⋆
+X + dX ∈P(X) ∧(p⋆
+X + dX)Π = p⋆
+X
+o
+(14)
+so that
+
+pX −pΠ
+X
+ pX ∈P(X)
+	
+= S
+p⋆
+X∈Π J (p⋆
+X). We also introduce the subspace V ≜span(Π−p⋆
+X) of vectors with components
+summing to zero and parallel to Π, which is independent of the choice of p⋆
+X ∈Π. This allows us to write Π = (p⋆
+X +V)∩RX
+⩾0.
+We ﬁrst want to argue that cone(J (p⋆
+X)) is only a function of the support of p⋆
+X, or equivalently the set X0(p⋆
+X) ≜{x ∈
+X | p⋆
+X(x) = 0}. To see this, we ﬁrst write
+J (p⋆
+X) =
+
+
+
+
+
+
+
+
+
+dX ∈RX
+
+X
+x∈X
+dX(x) = 0
+dX(x) + p⋆
+X(x) ⩾0
+∀x ∈X
+⟨dX, v⟩⩽0
+∀v ∈V s.t. v(x) ⩾0 ∀x ∈X0(p⋆
+X)
+
+
+
+
+
+
+
+
+
+.
+(15)
+To arrive at the last condition we ﬁrst use the fact that, for any p⋆
+X+dX ∈P(X), (p⋆
+X + dX)Π = p⋆
+X if and only if ⟨dX, v⟩⩽0 for
+any vector v ∈RX such that p⋆
+X + v ∈Π, or, in other words, v ∈Π −p⋆
+X. Since the condition is invariant under multiplication
+by a scalar, we can extend this to the cone v ∈V with v(x) ⩾0 for all x ∈X0(p⋆
+X).
+Next, let us look at the cone of J (p⋆
+X). We can see that the second condition, dX(x) + p⋆
+X(x) ⩾0 for all x ∈X simpliﬁes
+to dX(x) ⩾0 for all x ∈X0(p⋆
+X). Moreover, the third condition simply requires −dX to be in the dual cone of {v ∈V | v(x) ⩾
+0 ∀x ∈X0(p⋆
+X)}. We can thus write
+cone (J (p⋆
+X)) =
+
+
+dX ∈RX
+
+X
+x∈X
+dX(x) = 0
+dX(x) ⩾0
+∀x ∈X0(p⋆
+X)
+
+
+∩−{v ∈V|v(x) ⩾0 ∀x ∈X0(p⋆
+X)}∗
+(16)
+This cone is closed since it is the intersection of a closed cone with the dual of a cone, which is also closed. It evidently also
+only depends on p⋆
+X via its support, i.e., via X0(p⋆
+X). It then remains to notice that
+cone
+ 
+pX −pΠ
+X
+ pX ∈P(X)
+	
+=
+[
+p⋆
+X∈Π
+cone (J (p⋆
+X))
+(17)
+is a ﬁnite union of closed cones, and is thus also closed.
+
+
+PAGE 4
+4
+Proof of Theorem 1. Without loss of generality, we assume all output symbols of the channel WY|X is reachable by some
+input, i.e., there does not exists y ∈Y such that WY|X(y|x) = 0 for all x ∈X. Otherwise, one could simply exclude such y
+from the output alphabet. This ensures that q⋆
+Y, the unique (see, e.g., [5]) capacity-achieving output distribution of WY|X, has
+full support.
+Firstly, we consider the Taylor series expansion of the function IW in a neighborhood of p⋆
+X ∈Π along a direction dX ∈RX
+with ∥dX∥2 = 1 such that p⋆
+X + t · dX ∈P(X) for all t > 0 sufﬁciently small, i.e.,
+IW (p⋆
+X +t·dX) = C(WY|X)+(∇IT ·dX)·t+(dT
+X ·H ·dX)·t2 +
+
+
+∞
+X
+n=1
+(−1)n+1
+(n + 2)(n + 1) ·
+X
+y∈Y
+d2
+Y(y)
+q⋆
+Y(y) ·
+dY(y)
+q⋆
+Y(y)
+n
+· tn
+
+·t2 (18)
+where, for y ∈Y, x, x1, x2 ∈X,
+dY(y) ≜
+X
+x∈X
+WY|X(y|x) · dX(x),
+(19)
+[∇I]x ≜∂IW
+∂p(x)
+
+p⋆
+X
+= D
+ WY|X(·|x)
+q⋆
+Y
+
+−1,
+(20)
+[H]x1,x2 ≜
+∂2IW
+2 · ∂p(x2)∂p(x1)
+
+p⋆
+X
+= −
+X
+y∈Y
+WY|X(y|x1) · WY|X(y|x2)
+2 · q⋆
+Y(y)
+.
+(21)
+Notice that H is a negative semi-deﬁnite matrix. By writing dT
+X · H · dX = −P
+y
+1
+2·q⋆
+Y(y) ·
+P
+x WY|X(·|x) · dX(x)
+2
+2, we see
+that dT
+X · H · dX = 0 if and only if dX ∈ker(WY|X). Observe that the expansion in (18) is independent of p⋆
+X ∈Π. Moreover,
+the series in the brackets converges absolutely for all t ∈[0, qmin/
+p
+|X|), where qmin ≜miny∈Y q⋆
+Y(y) > 0, since
+∞
+X
+n=1
+
+(−1)n+1
+(n + 2)(n + 1) ·
+X
+y∈Y
+d2
+Y(y)
+q⋆
+Y(y) ·
+dY(y)
+q⋆
+Y(y)
+n
+· tn
+
+⩽|X| · |Y|
+qmin
+·
+∞
+X
+n=1
+ p
+|X|
+qmin
+· t
+!n
+= |X| · |Y|
+qmin
+·
+p
+|X| · t
+qmin −
+p
+|X| · t
+|
+{z
+}
+=: f(t)
+,
+(22)
+where we utilize the fact that ∥W∥2 ≜sup∥v∥2=1 ∥P
+x W(·|x) · v(x)∥2 ⩽
+p
+|X|.
+Secondly, as shown in the proofs in [1] and [4], [2], at least one of the quantities ∇IT ·dX and dT
+X ·H ·dX is strictly negative.
+We repeat the argument here. Notice that ∇IT ·dX ⩽0 (since p⋆
+X is a maximizer) and dT
+X ·H ·dX ⩽0 (since H is negative semi-
+deﬁnite). Assume now further that dX is pointing away from Π, i.e., p⋆
+X + t · dX ∈P(X) \ Π for t > 0 being sufﬁciently small.
+We want to argue that either ∇IT·dX or dT
+X·H ·dX is nonzero. If dT
+X·H ·dX = 0 then dX ∈ker(WY|X) (as discussed before), and
+thus IW changes linearly along the direction of dX (since dY = 0 in this case). Hence, IW (p⋆
+X +t·dX) = C(WY|X)+∇IT ·dX ·t
+for all t > 0, contradicting with the assumption that p⋆
+X + t · dX ̸∈Π unless IT · dX < 0. Therefore, the following function
+α(dX) ≜−1
+2 ·
+ ∇IT · dX + dT
+X · H · dX
+
+(23)
+is strictly positive for all dX pointing away from Π.
+Thirdly, we focus on the set of all valid directions, namely
+J ≜
+(
+pX −pΠ
+X
+pX −pΠ
+X
+
+2
+ pX ∈P(X) \ Π
+)
+= cone
+ 
+pX −pΠ
+X
+ pX ∈P(X)
+	
+∩
+
+dX ∈RX  ∥dX∥2 = 1
+	
+.
+(24)
+We argue that this set is compact since cone
+ 
+pX −pΠ
+X
+ pX ∈P(X)
+	
+is closed (see Lemma 2), and the set
+
+dX ∈RX  ∥dX∥2 = 1
+	
+is bounded and closed. Since α is a continuous function of dX, we may pick
+α ≜min
+dX∈J α(dX)
+(25)
+which is strictly positive. Since t > t2 for t < 1, this enables us to write
+IW (p⋆
+X + t · dX) ⩽C(WY|X) + (∇IT · dX) · t2 + (dT
+X · H · dX) · t2 + f(t) · t2 ⩽C(WY|X) −α · t2 + (f(t) −α) · t2
+(26)
+for 0 ⩽t < qmin/
+p
+|X|. Notice that f(0) = 0 (see (22)), and the function is continuous on [0, qmin/
+p
+|X|). Thus, there must
+exist some µ ∈(0, qmin/
+p
+|X|) such that f(t) < α for all t ∈[0, µ). Hence,
+IW (p⋆
+X + t · dX) ⩽C(WY|X) −α · t2
+(27)
+for all p⋆
+X ∈Π, t ∈[0, µ) and dX ∈RX with ∥dX∥2 = 1 and p⋆
+X + t · dX ∈P(X) \ Π.
+Finally, to show (3), we substitute p⋆
+X ←pΠ
+X, dX ←
+pX−pΠ
+X
+∥pX−pΠ
+X ∥2
+, and t ←
+pX −pΠ
+X
+
+2 for each pX ∈Πµ \ Π and note that
+the inequality is trivial when pX ∈Π.
+
+
+PAGE 5
+5
+III. CHANNEL WITH LINEAR INPUT CONSTRAINTS
+In this section, we consider channels with linear constraints on its input probability space. In the following, we look at input
+distribution that can only be chosen from some subset of the probability polytope as
+PA(X) ≜{p ∈P(X) | ⟨p, a⟩⩾0
+∀a ∈A}
+(28)
+where X is the input alphabet, and A is some ﬁnite set of vectors in RX . Such constraints have practical uses; for example,
+an average power constraint can be formulated as
+X
+x∈X
+p(x) · x2 ⩽P
+(29)
+where x2 is (proportional to) the amount of power needed for sending the symbol x, and P is the available average power
+per channel use. (This corresponds to the choice a(x) = P −x2.) The highest rate of realizable transmission over channel
+WY|X ∈P(Y|X) under such constraints, a.k.a. the constrained channel capacity can be expressed as
+CA(WY|X) =
+sup
+pX∈PA(X)
+I(X : Y)pX·WY|X.
+(30)
+Similar to the quadratic decaying property of IW in the unconstrained case, the next theorem holds.
+Theorem 3. Let WY|X ∈P(Y|X) be a DMC from X to Y where X and Y are some ﬁnite sets. Let A be a ﬁnite subset of
+RX . There exists some α, µ > 0 such that
+IW (pX) ⩽CA(WY|X) −α ·
+pX −pΠA
+X
+
+2
+2
+(31)
+for all pX ∈ΠA
+µ where the set of constrained capacity achieving distributions is ΠA ≜argmaxpX∈PA(X) I(X : Y)pX·WY|X and
+we denote its µ-neighborhood by ΠA
+µ ≜
+
+pX ∈PA(X)
+ pX −pΠA
+X
+
+2 ⩽µ
+	
+.
+We note that in a concurrent work [6] this problem is investigated using different techniques, yielding explicit bounds on
+the constants α and µ.
+The idea of the proof of this theorem is exactly same as that of Theorem 1 (see points 1)–4) at the beginning of Section II) with
+the exception of point 3) where instead of considering all valid directions from points on Π to points in P(X), one considers
+all valid directions to points in PA(X). The intuition is that since PA(X) is the resultant polytope after ﬁnite number of
+“straight cuts” of P(X), the closedness argument surrounding point 3) shall still hold. The proof proceeds analogously to the
+proof of Theorem 1, and thus we simply describe the necessary changes:
+1) We use the notation p⋆
+X ∈ΠA to denote the nearest point in ΠA with regards to pX.
+2) Thanks to the linearity of the constraints, one can show ΠA to be convex. In particular, when ΠA is not a singleton, let
+p⋆
+X and ˜p⋆
+X be two (different) points on ΠA. The function t 7→IW ((1 −t) · p⋆
+X + t · ˜p⋆
+X) is concave. Moreover, since the
+constraints are linear, all points (1 −t) · p⋆
+X + t · ˜p⋆
+X are feasible for t ∈[0, 1]. This way, the fact that p⋆
+X and ˜p⋆
+X are two
+maximal points forces IW ((1 −t) · p⋆
+X + t · ˜p⋆
+X) to be constant for all t ∈[0, 1]. In addition, by writing
+IW ((1 −t) · p⋆
+X + t · ˜p⋆
+X) =
+*
+(1 −t) · p⋆
+X + t · ˜p⋆
+X,
+X
+y
+WY|X(y|·) log WY|X(y|·)
++
++ H
+ 
+(1 −t) ·
+X
+x
+WY|X(·|x) · p⋆
+X + t ·
+X
+x
+WY|X(·|x) · ˜p⋆
+X
+!
+,
+(32)
+where the ﬁrst term is linear, and the second term is strictly concave, we can see that the output distribution must stay
+constant as t changes, i.e., p⋆
+X −˜p⋆
+X ∈ker(WY|X). This further implies (1 −t) · p⋆
+X + t · ˜p⋆
+X ∈ΠA as long as it is in the
+probability polytope and satisﬁes the linear constraints. In other words, there exists some subspace V ⩽ker(WY|X) such
+that ΠA = V ∩PA(X).
+3) We still deﬁne J (p⋆
+X) in the same way as in (14) (with trivial changes). However, (15) need to be rewritten as
+J (p⋆
+X) =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dX ∈RX
+
+X
+x∈X
+dX(x) = 0
+dX(x) + p⋆
+X(x) ⩾0
+∀x ∈X
+X
+x
+a(x) · (dX(x) + p⋆
+X(x)) ⩾0
+∀a ∈A
+⟨dX, v⟩⩽0
+∀v ∈V s.t. v(x) ⩾0 ∀x ∈X0(p⋆
+X)
+⟨v, a⟩⩾0 ∀a ∈A0(p⋆
+X)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+(33)
+
+
+PAGE 6
+6
+where A0(p⋆
+X) ≜{a ∈A | ⟨a, p⋆
+X⟩= 0}. The ﬁrst three constraints for the set ensure that p⋆
+X + dX is a feasible point in
+PA(X). The last constraint ensures that p⋆
+X + dX has p⋆
+X as the closest point in ΠA where v are all valid directions p⋆
+X
+can move along (for some small distance) without leaving ΠA.
+4) As a consequence of the above change, we need to rewrite (16) as
+cone (J (p⋆
+X)) =
+
+
+
+
+
+
+
+
+
+dX ∈RX
+
+X
+x∈X
+dX(x) = 0
+dX(x) ⩾0
+∀x ∈X0(p⋆
+X)
+⟨dX, a⟩⩾0
+∀a ∈A0(p⋆
+X)
+
+
+
+
+
+
+
+
+
+∩−
+(
+v ∈V
+
+v(x) ⩾0 ∀x ∈X0(p⋆
+X)
+⟨v, a⟩⩾0 ∀a ∈A0(p⋆
+X)
+)∗
+.
+(34)
+Again, we can argue that there are ﬁnite number of different cones for all p⋆
+X since above expression only depends
+on X0(p⋆
+X) and A0(p⋆
+X). This ensures the closeness of the cone in (17), which proved Lemma 2 under the constrained
+scenario.
+ACKNOWLEDGEMENTS
+We thank Yury Polyanskiy for helpful discussions about the proof in [2] and possible ways to complete it. In the end, we
+found our approach easier to fully formalize. We also thank him for encouraging us to write this comment and suggesting
+the extensions to the constrained case. We would also like to thank Hao-Chung Cheng for discussions on closing the gap in
+Strassen’s proof. MC and MT are supported by NUS startup grants (R-263-000-E32-133 and R-263-000-E32-731).
+REFERENCES
+[1] V. Strassen, “Asymptotic estimates in Shannon’s information theory [Asymptotische Absch¨atzungen in Shannon’s Informationstheorie],” in Transactions
+of the Third Prague Conference on Information Theory, Statistical Decision Functions, Random Processes.
+Prague: Czechoslovak Academy of Sciences,
+June 1962, pp. 689–723, translated from German by Peter Luthy. [Online]. Available: http://pi.math.cornell.edu/∼pmlut/strassen.pdf
+[2] Y. Polyanskiy, H. V. Poor, and S. Verd´u, “Channel coding rate in the ﬁnite blocklength regime,” IEEE Transactions on Information Theory, vol. 56, no. 5,
+pp. 2307–2359, 2010.
+[3] M. Tomamichel and V. Y. Tan, “A tight upper bound for the third-order asymptotics for most discrete memoryless channels,” IEEE Transactions on
+Information Theory, vol. 59, no. 11, pp. 7041–7051, 2013.
+[4] Y. Polyanskiy, “Channel coding: Non-asymptotic fundamental limits,” Ph.D. dissertation, Princeton University, Princeton NJ, 2010.
+[5] C. E. Shannon, “Some geometrical results in channel capacity, Nachrichtentechnische Zeit, vol. 10, 1957.” in Claude E. Shannon: Collected Papers, 1993,
+pp. 259–264.
+[6] H.-C. Cheng and B. Nakibo˘glu, “The mutual information in the vicinity of capacity-achieving input distributions,” arXiv preprint arXiv:2304.14219, 2023.

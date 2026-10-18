@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-type-a-path-space-tower-branching
 kind: theorem
 title: "The A_(ell-1) path-space tower branches by adjacent vertices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-order-three-trace-boundary
 kind: example
 title: "At q squared of order three, TL2 is semisimple with a degenerate Jones trace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

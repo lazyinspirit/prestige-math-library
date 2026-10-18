@@ -2,7 +2,7 @@
 id: ex-it-ozarow-awgn-mac-feedback-rate-region-at-rho
 kind: example
 title: A finite-power Ozarow feedback-region slice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

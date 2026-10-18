@@ -16,8 +16,6 @@ axiom_use: No choice principle is used.
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: Tobias Embree, Lecture Notes on Numerical Analysis, Sections 5.2.3-5.3

@@ -20,8 +20,6 @@ forward_refs: []
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Daniel Kressner, Advanced Numerical Analysis, §3.5 Rosenbrock methods"

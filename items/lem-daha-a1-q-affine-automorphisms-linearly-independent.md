@@ -2,7 +2,7 @@
 id: lem-daha-a1-q-affine-automorphisms-linearly-independent
 kind: lemma
 title: "Distinct rank-one q-affine substitutions are linearly independent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

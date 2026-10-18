@@ -2,7 +2,7 @@
 id: lem-finite-right-n-module-frame-from-projection-model
 kind: lemma
 title: "Ordinary finite Jones index supplies a bounded finite Parseval frame"
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

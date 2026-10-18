@@ -2,7 +2,7 @@
 id: def-finite-state-compressibility
 kind: definition
 title: "Finite-state compressibility of an individual sequence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-daha-a1-polynomial-operators-satisfy-presentation
 kind: lemma
 title: "The rank-one DAHA difference-reflection operators satisfy the presentation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

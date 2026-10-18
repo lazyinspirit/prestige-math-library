@@ -2,7 +2,7 @@
 id: lem-one-handle-slides-become-relative-kirby-slides-after-trading
 kind: lemma
 title: "One-handle slides become Kirby slides after interior trading"
-status: draft
+status: published
 dependency_level: 10
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

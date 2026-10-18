@@ -2,7 +2,7 @@
 id: def-symplectic-comoment-map-and-hamiltonian-observable-action
 kind: definition
 title: Symplectic comoment maps and Hamiltonian observable actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

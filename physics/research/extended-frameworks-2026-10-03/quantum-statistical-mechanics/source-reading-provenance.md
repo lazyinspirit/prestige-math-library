@@ -13,3 +13,23 @@ The integrating author read the complete specialist finite-state Q0–Q7/B1–B3
 `mathematics-corpus-dispositions.json` records actual full-file metadata/keyword indexing across all 35 root plan files and the canonical item namespace. It does not claim full proof reading of those plans. Published/draft/planned PDE, Fourier, complex, representation, Lie, algebraic-geometry, probability and other families are available, but only adequate exact statements and arguments are consumed. The original mathematical corpus and import snapshots remain read-only.
 
 No claimed empirical result is a logical premise in the current model arguments. Hypothetical setups and mathematically computed probabilities are distinguished from reported observations. No atom counts, error bars, confidence levels or apparatus assumptions are invented. A later reported experiment would require a primary report and explicit statistical/systematic uncertainty rather than inheriting an ideal model as its data.
+
+## 2026-10-16 owner-audit supplement
+
+The complete QSM argument bodies and the exact supplier sections named in
+`research/scaffold-audit-2026-10-16/quantum-statistical-mechanics/report.md`
+and `supplier-consumer-map.json` were read for the owner-directed category
+audit. New current root quantum-computing/algorithm source text was read at
+`items/def-qc-density-operator.md`, `items/def-qc-partial-trace.md`,
+`items/thm-qc-partial-trace-characterization-and-basis-independence.md`,
+`items/thm-qc-partial-trace-positive-and-trace-preserving.md`,
+`items/def-qc-trace-distance.md`,
+`items/thm-qc-trace-norm-spectral-formula.md`,
+`items/alg-qa-30-sdp-gibbs-purification.md`, and
+`items/thm-qa-30-sdp-gibbs-state-error-cost.md`. The root C*-state convention
+was reread from its already pinned item. Root hashes and the physics import
+refresh are explicitly outstanding; no hash or import verification is claimed
+here. The original records above continue to describe the original handoff
+version. In particular, edits to `state-proofs.md`, `ensemble-bridge.md`, the
+active inventories and supplier map make the old integrating/structural pins
+historical until Root performs its owner-bound refresh.

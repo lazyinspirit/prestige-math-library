@@ -2,7 +2,7 @@
 id: def-canonical-basic-set-for-hecke-specialization
 kind: definition
 title: Canonical basic sets for split Hecke specializations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

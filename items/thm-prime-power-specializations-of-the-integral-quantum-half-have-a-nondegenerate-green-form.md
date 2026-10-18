@@ -2,7 +2,7 @@
 id: thm-prime-power-specializations-of-the-integral-quantum-half-have-a-nondegenerate-green-form
 kind: theorem
 title: Prime-power specializations of the integral quantum half have a nondegenerate Green form
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

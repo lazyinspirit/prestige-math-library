@@ -1,7 +1,7 @@
 ---
 page: dg-and-homological-algebra-foundations
 title: "Differential Graded Algebras and Homological Foundations"
-status: draft
+status: published
 items: [def-differential-graded-algebra, def-differential-graded-module]
 examples: []
 ---

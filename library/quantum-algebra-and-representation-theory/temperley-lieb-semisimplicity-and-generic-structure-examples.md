@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-semisimplicity-and-generic-structure-examples
 title: "Temperley–Lieb Semisimplicity and Generic Structure: Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-temperley-lieb-order-three-trace-boundary

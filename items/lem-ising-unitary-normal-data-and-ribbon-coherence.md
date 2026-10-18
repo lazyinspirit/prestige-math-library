@@ -2,7 +2,7 @@
 id: lem-ising-unitary-normal-data-and-ribbon-coherence
 kind: lemma
 title: "All-label unitary Ising normal data and ribbon coherence"
-status: draft
+status: published
 dependency_level: 6
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

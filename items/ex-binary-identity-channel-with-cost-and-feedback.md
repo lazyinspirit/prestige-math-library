@@ -2,7 +2,7 @@
 id: ex-binary-identity-channel-with-cost-and-feedback
 kind: example
 title: Cost-constrained capacity of a binary identity channel with feedback
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 11

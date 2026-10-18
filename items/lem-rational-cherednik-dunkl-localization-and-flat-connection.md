@@ -2,7 +2,7 @@
 id: lem-rational-cherednik-dunkl-localization-and-flat-connection
 kind: lemma
 title: "Dunkl localization gives flat connections on the regular locus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

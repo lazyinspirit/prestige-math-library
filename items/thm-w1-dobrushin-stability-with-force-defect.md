@@ -22,8 +22,6 @@ axiom_use: No choice is used in the coupling estimate; an optimal coupling is no
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1

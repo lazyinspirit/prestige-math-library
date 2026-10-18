@@ -2,7 +2,7 @@
 id: def-unequal-parameter-cells-and-cell-quotients
 kind: definition
 title: Unequal-parameter left, right, and two-sided cells and cell quotients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

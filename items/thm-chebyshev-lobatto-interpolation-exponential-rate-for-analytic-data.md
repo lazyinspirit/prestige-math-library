@@ -14,8 +14,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 axiom_use: "No choice axiom is used; contour integration and the explicit coefficient series give the rate."
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Jie Shen and Tao Tang, Spectral and High-Order Methods with Applications, §1.8"

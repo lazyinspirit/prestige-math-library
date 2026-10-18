@@ -2,7 +2,7 @@
 id: thm-it-finite-quantum-mutual-information-data-processing
 kind: theorem
 title: Data processing for finite quantum mutual information
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

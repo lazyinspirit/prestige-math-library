@@ -2,7 +2,7 @@
 id: cex-xxz-unit-circle-generator-not-self-adjoint
 kind: counterexample
 title: "The XXZ local generator is not always self-adjoint in the standard spin basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

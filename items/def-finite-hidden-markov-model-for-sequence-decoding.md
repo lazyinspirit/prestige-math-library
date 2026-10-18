@@ -2,7 +2,7 @@
 id: def-finite-hidden-markov-model-for-sequence-decoding
 kind: definition
 title: Finite hidden Markov models for sequence decoding
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

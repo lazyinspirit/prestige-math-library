@@ -11,8 +11,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Stephen Boyd and Lieven Vandenberghe, Convex Optimization"

@@ -2,7 +2,7 @@
 id: def-triangular-decomposition-of-a-lie-superalgebra
 kind: definition
 title: Triangular decomposition of a Lie superalgebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

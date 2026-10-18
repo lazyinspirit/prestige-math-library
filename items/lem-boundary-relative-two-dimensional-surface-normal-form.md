@@ -2,7 +2,7 @@
 id: lem-boundary-relative-two-dimensional-surface-normal-form
 kind: lemma
 title: "The complete colored boundary-relative surface normal-form theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

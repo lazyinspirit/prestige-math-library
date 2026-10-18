@@ -364,3 +364,27 @@ Historical record: `research/scaffold-audit-2026-10-16/classical-statistical-mec
 ## Scoped amendment source bindings — 2026-10-17
 
 `research/physics-remaining-80-2026-10-17-csm-amendment-bindings.json` records the exact changed research/plan bytes at this amendment handoff, including this track and the scoped resolution report. It supersedes the old table only for the changed inputs it names. It is a point-in-time binding, not an audit receipt, import certificate, external-source rereading claim or production proof acceptance; subsequent changes require a separate successor record. The complete contract, proof and remaining authoring obligations are in `research/physics-remaining-80-2026-10-17-csm-supplier-resolution.md`.
+
+
+## Owner scientific supplier reconciliation — 2026-10-17
+
+For the existing `csm-exact-models` scope, the complete M0 derivative clause
+is now proved from its independently evaluated Gamma moments and recurrence,
+using the published `thm-real-power-continuity-and-derivatives`. The finite
+Ising E4 consumer uses the exact published `thm-tdmath-ising-chain-limit`;
+the old M17/M18 research handles remain historical reading records, not
+current logical suppliers of these two results. Their actual earlier page
+homes are `the-logarithm-and-general-powers` and
+`td-math-ensembles-and-limits`. They are included in the repaired batch-34
+manifest and page; canonical-plan transcription/reconciliation is Root-owned.
+No item inventory or approved claim is dropped.
+
+The counting postulate locally prescribes a positive primitive action reference
+`a0` in J s; the examples use `h0=a0` for the common continuous convention,
+retaining each model's operational labels and factorials. The mathematical
+shell theorem gives the actual conjugate-chart Jacobian and pulled-back
+symplectic/time factors; its physical application explicitly declares the SI
+coordinate, energy and time conversions. No Planck-constant value is asserted.
+Historical audits, source-reading hashes and original native readiness
+receipts are unchanged; actual current independent review and Root's native
+recertification remain required.

@@ -2,7 +2,7 @@
 id: def-highest-weight-vector-and-module-for-a-lie-superalgebra
 kind: definition
 title: Highest-weight vectors and modules for a Lie superalgebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-it-two-user-discrete-memoryless-mac-code
 kind: definition
 title: No-feedback independent-private-message DM-MAC code
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

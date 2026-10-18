@@ -2,7 +2,7 @@
 id: thm-finite-index-ii1-basic-construction-jones-tower
 kind: theorem
 title: Ordinary finite-index II1 inclusions give the full Jones tower and Temperley–Lieb relations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

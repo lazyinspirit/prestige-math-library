@@ -1,0 +1,6614 @@
+
+
+===== PDF PAGE 1 =====
+
+Representations of Hecke algebras and Markov dualities for
+interacting particle systems
+Alexander Povolotsky1,2, Pavel Pyatov2,1, Roger Tribe3, Bruce Westbury3 and Oleg
+Zaboronski3
+1Bogoliubov Laboratory of Theoretical Physics, Joint Institute for Nuclear Research,
+141980 Dubna, Moscow region, Russia
+2National Research University, Higher School of Economics, 20 Myasnitskaya street,
+Moscow 101000, Russia
+3Department of Mathematics, University of Warwick, Coventry, CV4 7AL, UK
+December 27, 2022
+Abstract
+Many continuous reaction-diﬀusion models on Z (annihilating or coalescing random walks, ex-
+clusion processes, voter models) admit a rich set of Markov duality functions which determine the
+single time distribution. A common feature of these models is that their generators are given by
+sums of two-site idempotent operators. In this paper, we classify all continuous time Markov pro-
+cesses on {0, 1}Z whose generators have this property, although to simplify the calculations we only
+consider models with equal left and right jumping rates. The classiﬁcation leads to six familiar
+models and three exceptional models. The generators of all but the exceptional models turn out to
+belong to an inﬁnite dimensional Hecke algebra, and the duality functions appear as spanning vec-
+tors for small-dimensional irreducible representations of this Hecke algebra. A second classiﬁcation
+explores generators built from two site operators satisfying the Hecke algebra relations. The duality
+functions are intertwiners between conﬁguration and co-ordinate representations of Hecke algebras,
+which results in a novel co-ordinate representations of the Hecke algebra. The standard Baxter-
+isation procedure leads to new solutions of the Young-Baxter equation corresponding to particle
+systems which do not preserve the number of particles.
+Keywords: Interacting particle system, Markov duality, Hecke Algebra, Yang-Baxter equation
+1
+arXiv:2212.12944v1  [math.PR]  25 Dec 2022
+
+
+===== PDF PAGE 2 =====
+
+Contents
+1
+Introduction
+4
+1.1
+Markov duality . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+1.2
+Literature review . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+1.3
+Aims of the present paper and its organisation
+. . . . . . . . . . . . . . . . . . . . . . .
+6
+2
+Two familiar models
+8
+2.1
+Tensor notation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+2.2
+Annihilating simple random walks
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+2.3
+Asymmetric simple exclusion process . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+2.4
+The Hecke relations and duality . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+3
+Classiﬁcations of generators
+15
+3.1
+Generators built out of projectors . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+15
+3.2
+Generators built using the braid relation . . . . . . . . . . . . . . . . . . . . . . . . . . .
+19
+4
+The eleven models
+21
+4.1
+Exclusion processes [SEP] and [ASEP] . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+21
+4.2
+Voter models [BVM], [AVM] and [AAVM] . . . . . . . . . . . . . . . . . . . . . . . . . .
+21
+4.3
+Annihilating and coalescing systems [ACRW], [CSRWB], [ASRWPI]
+. . . . . . . . . . .
+22
+4.4
+Stationary coalescence-annihilation model [SCAM] . . . . . . . . . . . . . . . . . . . . .
+23
+4.5
+The dimer model [DM] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+26
+4.6
+The reshuﬄe model [RM]
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+27
+4.7
+Erosion models: [EM1] and [EM2]
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+30
+5
+Algebra
+31
+5.1
+Duality functions and representations of the generator algebra . . . . . . . . . . . . . . .
+31
+5.2
+On exact solvability and representation theory
+. . . . . . . . . . . . . . . . . . . . . . .
+35
+5.3
+Co-ordinate representation of a Hecke algebra . . . . . . . . . . . . . . . . . . . . . . . .
+36
+2
+
+
+===== PDF PAGE 3 =====
+
+5.4
+Baxterisation and R-matrices with non-conserved particle number
+. . . . . . . . . . . .
+38
+6
+Linear Algebra Proofs
+40
+6.1
+Proof of Lemma 4. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+41
+6.2
+Proof of Lemma 5
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+45
+6.3
+Proof of Theorem 6 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+51
+7
+Acknowledgements.
+58
+A Appendix
+58
+3
+
+
+===== PDF PAGE 4 =====
+
+1
+Introduction
+1.1
+Markov duality
+Let {Xt}t∈R+ and {Yt}t∈R+ be continuous time Markov processes with state spaces X and Y and
+H(·, ·) : X × Y →R be a measurable function. We say that Xt and Yt are dual with respect to H(·, ·)
+if for any x ∈X and y ∈Y the identity
+EX
+x H(Xt, y) = EY
+y H(x, Yt),
+(1)
+holds for any t ∈R+, where the expectation EX
+x (EY
+y ) is with respect to the process Xt (Yt) conditioned
+on the initial state X0 = x (Y0 = y) respectively. Given the generators of the processes LX and LY
+that govern the evolution of expectations of suitable test functions,
+d
+dtEX
+x F(Xt) = LXEX
+x F(Xt),
+d
+dtEY
+y G(Yt) = LY EY
+y G(Yt),
+(2)
+where F(·) : X →R and G(·) : Y →R, eq. (1) implies
+LXH(·, y)(x) = LY H(x, ·)(y),
+(3)
+where the operator LX (LY ) in lhs (rhs) acts on H(x, y) as a function of the ﬁrst (second) argument
+respectively with the other argument ﬁxed.
+Formulas (1,3) allow one to rewrite the Kolmogorov equation for the expectation of H(x, y) considered
+as a function of the ﬁrst argument as a system of ordinary diﬀerential equations indexed by the values
+of the second one.
+d
+dtEX
+x H(Xt, y) = LY EX
+x H(Xt, ·)(y),
+y ∈Y.
+(4)
+Markov duality is particularly useful in situations when the original process X is too complicated to
+analyse directly, whereas the operator LY is tractable (the equation (4) is useful even if a dual process Y
+does not exist). In other words, it is the exact solvability of (4) that we really care about. Furthermore,
+in exceptional cases one can ﬁnd suﬃciently many duality functions so that their expectations determine
+the whole law of the original process or at least its ﬁxed time distribution. In these cases we say that
+the set of Markov dualities is complete.
+In relation to the subject of this article, interacting particle systems, one can draw a parallel between
+the existence of a complete set of Markov dualities and the exact solvability of quantum particle models
+or quantum spin chains coined in the term “quantum integrability” [15]. Loosely speaking, a system is
+integrable if its evolution operator (the Hamiltonian for quantum models or the generator for Markov
+processes) belongs to a suﬃciently ‘large’ number of commuting operators called integrals of motion.
+Algebraically, this corresponds to a large centre of a representation of some operator algebra containing
+the evolution operator. Typically, such representation possesses a high degree of symmetry. For exam-
+ple, in the simplest case of a ﬁnite XXX Heisenberg spin-1/2 chain the Hamiltonian is an element of the
+representation of the group algebra of the symmetric group on the tensor product of two-dimensional
+spaces. The statement known as Schur-Weyl duality implies that this representation commutes with
+the representation of SL(2) Lie group on the same space. This fact allows one to identify the invariant
+subspaces used to construct the eigen-basis of the Hamiltonian. However, there is a long way from the
+eigen-basis to physical observables, which often makes the information about the correlation functions
+of interest diﬃcult to extract.
+The Markov duality is often used as an alternative route which avoids the diagonalization problem and
+goes directly to the observables instead. In addition, it has a natural algebraic interpretation. Namely,
+interpreting the generator LX as an element of the representation of some algebra, it is natural to
+4
+
+
+===== PDF PAGE 5 =====
+
+treat the dual operator LY as another representation of the same algebra with the duality function
+playing the role of the intertwiner between the two, see e.g. [18]. The possibility to intertwine the
+representations is crucial for the mentioned solvability of the problem. A typical scenario realised for
+many models considered in this paper is as follows: the original model has generator LX belonging to a
+representation of some algebra A of dimension O(2N), where N →∞is the system size. Yet, for each
+n ∈N there is a duality function intertwining this ‘large’ representation to a ‘small’ representation of A
+of dimension O(N n) containing the dual generator LY . Then it follows from (4) that the expectation
+of the corresponding duality function solves a closed system of O(N n) ODE’s, a small system in com-
+parison with 2N diﬀerential-diﬀerence equations comprising the Kolmogorov equation for the original
+system. Probabilistically, this scenario corresponds to a Markov duality between the original system
+with O(N) particles and the dual system with n particles, for each n ∈N. The crucial element of the
+described construction is the existence of ‘small’ irreducible representations of the algebra A containing
+the generator. Therefore, the natural starting point for constructing duality functions is the search for
+A-invariants subspaces within the original space of dimension O(2N).
+Of course, exact solvability is an exceptional phenomenon, implying that the corresponding algebra A
+has a special structure. One of the aims of the present paper is to understand the origins of the exact
+solvability for a number of ‘integrable’ interacting particle systems including exclusion processes as well
+as systems of interacting random walks with interactions which do not preserve the particle number
+(coalescence and annihilation in the presence of branching or immigration). For each of these cases
+we will observe that the corresponding algebra A is a quotient of Hecke algebra. In this instance the
+duality functions emerge as spanning vectors of ‘small’ representations of Hecke algebra.
+1.2
+Literature review
+Let us brieﬂy review the previous developments in this direction. Early appearances of Markov duality
+in the literature go back to the middle of the last century, when it was applied to studies of the Brownian
+motion [30], queuing theory [34], birth and death processes [24], etc. Since then the duality was shown
+to be useful in plenty applications and several eﬀorts of developing an approach to systematic search
+for Markov dualities were undertaken (see [22] for review and references therein).
+In the ﬁeld of our interest, interacting particle systems, the ﬁrst application of duality was exploited
+by Spitzer to study the stationary measures of the symmetric simple exclusion process ([SEP]) and
+independent random walks [40]. Later the duality was applied to study ergodic properties of several
+models like [SEP], voter model, contact process etc [31]. It is a common scenario that the dualities,
+mainly constructed in ad hoc manner for every particular case, allowed a reformulation of the problem
+of calculation of n−point correlation functions in terms of k-particle problems in the dual system with
+k ≤n. In particular, it was implemented in [38, 37, 39], where the duality in partially symmetric and
+asymmetric simple exclusion processes on the segment with reﬂecting ends followed from the invariance
+of the Hamiltonians of the quantum chains associated with the generator of the process with respect to
+the action of the representation of SU(2) and quantum group Uq(gl2), respectively.
+An attempt of a systematic search for dualities for the interacting particle systems going beyond a case
+by case consideration was undertaken in [41, 35], where the quantum mechanical algebraic language was
+shown eﬃcient in obtaining duality functions of product form for a large family of models. However,
+the crucial step was the observation in [38, 37, 39] of the connection between generator symmetries and
+dualities. It was used in [18] as a starting point to propose a new systematic scheme for constructing
+the duality functions in interacting particle systems within purely algebraic framework. In a nutshell,
+starting from a trivial duality with the time reversed process, new nontrivial dualities can be generated
+by the action of the operators from the representation of a symmetry group of the generator. This idea
+was then eﬃciently used to obtain new dualities in interacting particle systems with one [11, 10, 9] as
+5
+
+
+===== PDF PAGE 6 =====
+
+well as many species [4, 26, 3, 28, 27] of particles. The development [29] of this idea was based on the
+use of the Schur-Weyl dauality to construct the Markov duality. The former connects the representation
+of an algebra, to which a Markov generator belongs, with a representation of its symmetry group.
+Among numerous formulae for interacting particle systems based on dualities, many of them can be
+expressed in terms of one-point or two-point correlation functions. The reason, as was mentioned above,
+is that the duality often allows one to recast the problem of calculating n-point correlation functions
+in the inﬁnite particle system in terms of a dual system with no more than n particles. Of course to
+go beyond n ≤2 case, the many particle problem in dual system should be solvable in some sense. If
+one wants to describe exactly the ﬁnite time evolution, a kind of integrability should stand behind the
+generator of the dual process, which potentially would make a complete set of dualities analytically
+accessible. There are a few recent advances in this direction. First we mention the results of [20, 7],
+where the duality was used to obtain the integral formulas for the so-called q-moments of distances
+traveled by tagged particles in the two models, ASEP and q-TASEP, with speciﬁc initial conditions,
+using the self-duality of the former, found ﬁrst in [39], and the dulaity of the latter with q-Boson totally
+asymmetric zero range process. These results were later extended to several other models, like q-Hahn
+TASEP [13], q-Hahn ASEP [2], q-Hahn PushTASEP [14], dynamic ASEP [6], and stochastic six vertex
+model [33]. In a parallel development, see [16], [17], [43] for details, duality was used to obtain exact
+solutions for a number of the so called reaction-diﬀusion particle systems including one-dimensional
+annihilating-coalescing, coalescing-branching random walks, and annihilating random walks with pair
+immigration. All of these models were shown to have a dual process that can be taken to be a system
+of annihilating random walks with n < ∞initial particles. This dual process turns out to have the
+structure reminiscent of free fermions, so that the n-particle evolution problem is solved in terms of
+Pfaﬃans and the ﬁxed time distribution of particles for each of the model problems was shown to be
+Pfaﬃan for all deterministic initial conditions (and a class of random initial conditions). Interestingly,
+the Pfaﬃan structures survive the continuous limit and describe the distribution of particles on the real
+line for the corresponding interacting Brownian motions.
+1.3
+Aims of the present paper and its organisation
+Our principal aim is to investigate the common structures responsible for exact solvability of such
+apparently unrelated particle systems as exclusion processes, annihilation random walks with pairwise
+immigration and coalescing-branching random walks. Each of these models has a complete set of Markov
+duality functions, which was discovered by independent analysis of each particle system.
+We notice that Markov generators for each of the interacting particle systems listed above is deﬁned on
+the space of test functions on the conﬁguration space {0, 1}Z and has the following form,
+L =
+X
+i∈Z
+(σi −I),
+(5)
+where I is the identity operator and σi is the 2-site operator acting on functions of particle occupation
+numbers at sites i and i + 1. Moreover, each of the two-site operators is idempotent, that is
+σ2
+i = σi
+for i ∈Z.
+(6)
+So in order to understand the commonality between the models of interest we decided to classify all
+continuous time Markov chains on the conﬁguration space {0, 1}Z with the generator satisfying (5, 6).
+Keeping in mind the importance of duality for the models which motivated our investigation, the ﬁrst
+classiﬁcation theorem is proved by attempting to construct duality functions as basic vectors for ‘small’
+representations of the algebra A generated over R by the two-site generators {σi}i∈Z, which we refer to as
+the generator algebra. The result is a list of nine inequivalent interacting particle systems, six familiar
+6
+
+
+===== PDF PAGE 7 =====
+
+models either of exclusion or reaction-diﬀusion type and three unfamiliar ’exceptional’ models. Also it
+turns out that for all the six familiar models the generator algebras are certain quotients of the inﬁnite-
+dimensional Hecke algebra. For all the familiar cases, the duality functions are built using a similar
+method which, as we show separately, is a consequence of the braid relation satisﬁed by the generators
+of a Hecke algebra. The method itself is one of the secondary results of our investigation which can be
+described as a construction of representations of Hecke algebras starting from the eigenvectors of the
+two-site generators σi. Moreover, the generator algebras for many of the reaction-diﬀusion systems on
+the list turn out to be isomorphic and the corresponding duality functions have an identical structure,
+which we believe should be responsible for the appearance of Pfaﬃans - a question which we hope to
+investigate in the future.
+The proof of the classiﬁcation theorem consists of listing of all stochastic idempotent 4 × 4 matrices.
+Presently, we were only able to carry such a search out under the assumption of reﬂection symmetry.
+In other words, we only looked at particle systems with equal right and left hopping rates, leaving
+a classiﬁcation in the absence of such a symmetry for the future. In the mean time, we notice that
+quotients of the Hecke algebra appear as the generator algebras for most of our models, even for two
+of the three exceptional models for special values of their parameters. Inspired by this observation
+we attempt another classiﬁcation theorem by listing all Markov chains whose two-site generators obey
+the relations of Hecke algebra, but not assuming the left-right symmetry. The classiﬁcation is based
+on solving the braid relation in terms of stochastic idempotent 4 × 4 matrices.
+Unfortunately, we
+were unable to solve the problem in full generality and were forced to use a simplifying Ansatz by
+forbidding certain particle reactions. Still, the resulting list contains eleven models all of which admit
+a full set of duality functions supporting our suspicion about the link between exact solvability and the
+representation theory of Hecke algebra.
+At this point it is important to mention an alternative approach to construction of Markov dualities for
+the one-component and two-component asymmetric exclusion process, which also based on the Hecke
+structure of its generator algebra [12]. The main idea is to use the so called q-Knizhnik-Zamolodchikov
+equation to construct the intertwining relation between two representations of the Hecke algebra, one in
+the tensor product of ﬁnite-dimensional spaces and another in the space of symmetric polynomials. The
+construction of polynomial representations and the extraction of Markov duality functions from these
+representations turns out to be a highly non-trivial problem which uses complicated tools of the theory
+of Macdonald polynomials and quantum integrable systems. In contrast our construction is completely
+explicit and requires only an elementary linear algebra toolbox.
+Organisation of the paper. In Section 2 we motivate the algebraic approach to the investigation of
+interacting particle systems by building duality functions as bases of representations of the generator
+algebra for two classical cases: annihilating random walks ([ARW]) and the asymmetric simple exclusion
+process ([ASEP]) on Z. We notice that for each model, the two-site generators satisfy the relations of
+a Hecke algebra (reduced to Temperley-Lieb relations in the case [ASEP]). Our approach consists of
+building representations of the inﬁnite-dimensional Hecke algebra by extending the representation of
+the algebra generated by a single two-site generator. In Subsection 2.4 we show that such an extension
+is always possible due to the braid relation. In Section 3 we state our two main classiﬁcation theorems.
+In Section 4 we discuss the solvability of all the models appearing in the classiﬁcation theorems. Section
+5 is dedicated to the discussion of the algebraic structures appearing in the paper: in Subsection 5.1
+we show how to use duality functions to construct irreducible representations of the quotient of a
+Hecke algebra corresponding to annihilating random walks on ZN; in Subsection 5.2 we discuss possible
+links between the structure of irreducible representations of generator algebras and exact solvability; in
+Subsection 5.3 we use the interpretation of duality functions as intertwiners to construct co-ordinate
+representations of Hecke algebra in the space of functions of several integer variables (the resulting
+Hecke generators are expressed in terms of discrete Laplacians); in Subsection 5.4 we use the standard
+Baxterisation construction to ﬁnd solutions of Yang-Baxter equation which do not preserve the number
+of particles. The proof of the main classiﬁcation theorems can be found in Section 6.
+7
+
+
+===== PDF PAGE 8 =====
+
+2
+Two familiar models
+We start by re-examining two well understood particle systems, with well known Markov dualities,
+using the algebraic approach adopted throughout this paper. The models studied are continuous time
+Markov processes with state space Ω= {0, 1}Z. Elements of Ωare denoted by η = (η(x))x∈Z, where
+η(x) = 1 or η(x) = 0 indicates the presence of a particle or a hole at site x ∈Z. We write T(Ω) for
+the linear space of cylinder functions f : Ω→R, that is functions that depend on only ﬁnitely many
+co-ordinates.
+The particle systems we study involve interactions only between nearest neighbour sites. Their inﬁnites-
+imal generators can be written as
+Lf(η) =
+X
+n∈Z
+X
+ξ,ξ′∈{0,1}2
+Rξ,ξ′
+
+f(η(n,n+1)
+ξ′
+) −f(η)
+
+1ξ(η(n), η(n + 1))
+(7)
+where η(n,n+1)
+ξ′
+is the conﬁguration η with the pair (η(n), η(n + 1)) replaced by ξ′ and where Rξ,ξ′ is
+the rate that a pair of sites with value ξ jumps to the value ξ′. We wish to re-write the inﬁnitesimal
+generators of our Markov processes in a convenient form, and adopt some tensor notation as explained
+in the next Section, familiar from the study of quantum spin chains, see e.g. [25] for a review.
+2.1
+Tensor notation
+Let V denote a single copy of R2. Let (Vn)n∈Z be a collection of copies Vn ≃R2. Deﬁne
+v =
+ 1
+1
+
+∈R2.
+(8)
+The inﬁnite tensor product T = N
+n∈Z Vn is the linear space spanned by inﬁnite strings ⊗n×Zvn where
+vn ∈Vn and vn = v for all but ﬁnitely many values of index n ∈Z, modulo the usual equivalence
+relations:
+. . . ⊗αam ⊗. . . ⊗bn ⊗. . .
+∼
+. . . ⊗am ⊗. . . ⊗αbn ⊗. . . ,
+∀m, n ∈Z, α ∈R,
+. . . ⊗(an + bn) ⊗. . .
+∼
+. . . ⊗an ⊗. . . + . . . ⊗bn ⊗. . . ,
+∀n ∈Z.
+The inﬁnite-dimensional vector space T is isomorphic to the cylinder functions T(Ω). To construct such
+an isomorphism explicitly, notice ﬁrst that the space of functions on {0, 1} is isomorphic to V :
+f = f(1) 11 + f(0) 10
+↔
+f(1)
+f(0)
+
+∈V.
+In particular 11 ↔e(1) :=
+1
+0
+
+and 10 ↔e(0) :=
+0
+1
+
+. If f ≡1, its image under the above isomorphism
+is the vector v deﬁned in (8), which we now call the vacuum vector.
+The space of test functions T(Ω) is spanned by products of indicator functions Q
+x∈[n,m] 1αx(η(x)). The
+claimed isomorphism between T(Ω) and T is then deﬁned via its action on these spanning elements
+m
+Y
+x=n
+1αx(η(x))
+↔
+. . . ⊗
+ m
+O
+x=n
+e(αx)
+x
+!
+⊗. . .
+for n ≤m and αx ∈{0, 1}
+(9)
+where . . . ⊗
+Nm
+x=n e(αx)
+x
+
+⊗. . . denotes the vector with e(αx)
+x
+in position x, for all n ≤x ≤m, and v
+at all other positions. Such vectors span T. As an illustrative example of the isomorphism, the vector
+. . . ⊗e(1)
+0
+⊗e(0)
+1
+⊗e(1)
+2
+⊗. . . is mapped to the cylinder function f(η) = 1(η(0) = 1, η(1) = 0, η(2) = 1).
+8
+
+
+===== PDF PAGE 9 =====
+
+Using the isomorphism (9) we can rewrite the generator (7) as a linear operator L on the vector space
+T in the form L = P
+n∈Z qn, where qn is the part of the generator corresponding to jumps at sites
+(n, n + 1). Namely we write a 4 × 4 Q-matrix
+q =
+
+
+
+
+•
+q(11),(10)
+q(11),(01)
+q(11),(00)
+q(10),(11)
+•
+q(10),(01)
+q(10),(00)
+q(01),(11)
+q(01),(10)
+•
+q(01),(00)
+q(00),(11)
+q(00),(10)
+q(00),(01)
+•
+
+
+
+
+where we have written q as the matrix of an operator on V ⊗V in the basis (e(1) ⊗e(1), e(1) ⊗e(0), e(0) ⊗
+e(1), e(0) ⊗e(0)). The diagonal elements are chosen in such a way that all row sums are equal to zero.
+Then
+L =
+X
+n∈Z
+qn
+(10)
+where qn is the operator on T = N
+n∈Z Vn which leaves entries (vk : k < n) and (vk : k > n + 1)
+unchanged and acts as q on the pair Vn ⊗Vn+1.
+2.2
+Annihilating simple random walks
+Particles independently perform simple random walks on Z, jumping right with rate r and left with
+rate l, and particles instantaneously annihilate upon collision. We scale time so that r + l = 1. The
+inﬁnitesimal generator L acting on functions in T can be written using the form (10) above, with
+q =
+
+
+
+
+−1
+0
+0
+1
+0
+−r
+r
+0
+0
+l
+−l
+0
+0
+0
+0
+0
+
+
+
+
+For our results it is convenient to write
+σ = q + I =
+
+
+
+
+0
+0
+0
+1
+0
+l
+r
+0
+0
+l
+r
+0
+0
+0
+0
+1
+
+
+
+
+(11)
+where I is the unit element of End(V ⊗V ). Then the generator acting on T becomes
+L =
+X
+n∈Z
+(σn −I).
+(12)
+This trivial change is convenient because the relations satisﬁed by {σn} are in a familiar algebraic form.
+For example the matrix σ satisﬁes σ2 = σ, as is immediate from (11). A little harder to check is
+σnσn+1σn −Qσn = σn+1σnσn+1 −Q σn+1,
+for n ∈Z,
+(13)
+for the value Q = rl. This is an identity in End(V ⊗V ⊗V ), and can be checked slowly by hand using
+8×8 matrices, or quickly by Matlab. This relation is a deformation of the braid relation which, together
+with the commutativity relation
+σnσm = σmσn
+when |n −m| > 1,
+(14)
+and the quadratic relation
+σ2
+n = σn,
+for n ∈Z,
+(15)
+9
+
+
+===== PDF PAGE 10 =====
+
+are the deﬁning relations for a Hecke algebra with parameter Q (the Appendix gives some details of
+Hecke algebras). Thus, for annihilating simple random walks, the algebra A generated by {σn}n∈Z over
+R in ⊗i∈ZVi is a quotient of a Hecke algebra with parameter Q = rl. In Section 5.1 we conjecture the
+exact quotient for the model on N sites {1, 2, . . . , N}.
+We now study some representations of the generator algebra A, which becomes a surprisingly straight-
+forward task due to the structure of eigenvectors of σ. Since σ2 = σ the eigenvalues of σ are either zero
+or one. The row sums of σ are all 1, and the therefore one of the eigenvectors with eigenvalue 1 is
+
+
+
+
+1
+1
+1
+1
+
+
+
+= v ⊗v,
+recalling that v = (1, 1)T . As rank(σ) = 2, we expect that there might be a linearly independent
+eigenvector with eigenvalue 1. It is straightforward to check that such an eigenvector for σ exists and
+can be written in a factorised form w ⊗w, where
+w =
+−1
+1
+
+.
+Another computation shows that
+σv ⊗w = lv ⊗v + rw ⊗w,
+σw ⊗v = rv ⊗v + lw ⊗w.
+(16)
+This allows us to extend a representation of σn on Vn ⊗Vn+1 to a representation of A on ⊗n∈ZVn as
+follows. Concretely, (16) implies that A acts on certain subspaces of ⊗n∈ZVn spanned by the tensor
+product of runs of w’s and v’s. For example, consider
+fx = (⊗i≤xwi) ⊗(⊗j>xvj) ∈
+O
+n∈Z
+Vn.
+(17)
+(We temporarily ignore that fx is not eventually constant and so not an element of T.) Using (16),
+together with σv ⊗v = v ⊗v and σw ⊗w = w ⊗w, we see that
+σxfx = rfx−1 + lfx+1
+and
+σyfx = fx
+for y ̸= x.
+Thus the algebra A is represented on the subspace SpanR(fx, x ∈Z). Moreover
+Lfx = rfx−1 + lfx+1 −fx := ∆r,lfx,
+(18)
+deﬁning ∆r,l a non-symmetric discrete Laplacian (we write ∆in the symmetric case r = l = 1
+2).
+More generally, let x1 ≤x2 ≤x3 ≤. . . ≤x2n for n ≥1 and
+f (2n)
+x1,x2,...,x2n = . . . (⊗x1+1≤j1≤x2wj1) . . . (⊗x3+1≤j2≤x4wj2) . . .
+ ⊗x2n−1+1≤jn≤x2nwjn
+
+. . .
+(19)
+where each . . . represent tensoring with the vacuum vector v at all other positions. We also let f (0) =
+⊗i∈Zvi (corresponding to the constant function with value 1). These vectors do lie in T. The action
+(16) again implies that σxf (2n)
+x1,x2,...,x2n can be expressed either in terms of the same type of function
+f (2n), or it may produce a term where a run of w’s disappears or one where two runs of w’s merge,
+both of which can be expressed as f (2n−2). For example
+σ3f (4)
+1346 = rf (4)
+1246 + lf (4)
+1446 = rf (4)
+1246 + lf (2)
+16 .
+Furthermore
+Lf (2n)
+x1,x2,...,x2n =
+2n
+X
+k=1
+∆r,l
+k f (2n)
+x1,x2,...,x2n, x1 < x2 < . . . < x2n,
+(20)
+f (2n)
+x1,...,xi=xi+1,...,x2n = f (2n−2)
+x1,...,xi−1,xi+2,...,x2n, i = 1, . . . , 2n −1,
+(21)
+10
+
+
+===== PDF PAGE 11 =====
+
+where ∆r,l
+k
+is the discrete Laplacian applied to the k-th argument.
+From the algebraic point of view, we have constructed a lower triangular representation of A in ⊗i∈ZVi:
+T2n := SpanR(f (2n)
+x1,x2...x2n : x1 < x2 < . . . < x2n),
+AT2n ⊂T2n ⊕T2n−2.
+From the probabilistic point of view, (20, 21) mean that f (2n), regarded as a function on Z2n × Ω, is
+a Markov duality function, and establishes a duality with annihilating random walks in reverse time
+started with 2n particles. The duality function f (2n) is mapped under the isomorphism (9) to the well
+known product spin function
+f (2n)
+x1,x2,...,x2n
+↔
+Y
+1≤i≤n
+(−1)η(x2i−1,x2i]
+where
+η(a, b] =
+b
+X
+x=a+1
+η(x).
+See [16] for the use of these duality functions, where the lower-triangular system of diﬀerential equations
+for Φ(n)(x1, . . . , x2n) := E[f (2n)
+x1,x2,...,x2n(ηt)] arising from the generator action in (20, 21) is solved, for
+deterministic initial conditions, using Pfaﬃans, and the resulting formulae are shown to characterise
+the distribution of ηt, for any ﬁxed t > 0, as a Pfaﬃan point process on Z.
+We call a duality function in the form (19) an alternating interval duality function. The key facts that
+allowed it to work were (i) the existence of a second factorised eigenvector w ⊗w and (ii) the fact
+that in the action (16) of σ, the right hand side of σv ⊗w (respectively of σw ⊗v) does not contain a
+term proportional to w ⊗v (respectively v ⊗w). We show in Section 2.4 below that the second fact is
+sometimes a consequence of the braid relation in a Hecke algebra.
+2.3
+Asymmetric simple exclusion process
+In this process, particles jump to the right at rate r, or left at rate l, but the jump is suppressed unless
+the jump is onto an unoccupied site. We suppose r + l = 1, and also that r > l. The generator L on T
+is still in the form (12) with
+σ =
+
+
+
+
+1
+0
+0
+0
+0
+l
+r
+0
+0
+l
+r
+0
+0
+0
+0
+1
+
+
+
+.
+(22)
+Again it is possible to check that the operators {σn} satisfy the three relations (13), (14) and (15) of a
+Hecke algebra. Indeed the relations of the Temperly-Lieb algebra are satisﬁed (which imply the Hecke
+relations) namely
+σnσn+1σn −rl σn = 0 = σn+1σnσn+1 −rl σn+1,
+for n ∈Z.
+(23)
+We can again use the eigenvalues of σ to understand the known Markov duality functions. It is easy
+to check that σw ⊗w = w ⊗w for any w ∈V .
+In other words, any tensor square of a non-zero
+two-dimensional vector is an eigenvector of σ with eigenvalue 1. This is to be contrasted with the case
+of annilating random walks, where the requirement that w ⊗w is an eigenvector with eigenvalue one
+essentially ﬁxes a single w that is independent of v. However we aim to choose w from the requirement
+that σ has a good action on v ⊗w in the sense that
+σv ⊗w = αv ⊗v + βw ⊗w + γv ⊗w.
+(24)
+11
+
+
+===== PDF PAGE 12 =====
+
+There are no non-zero solutions with w2 = 0. Therefore, we can search for the answer in the form
+w = (q, 1)T , q ̸= 1. The only solution to (24) for such an Ansatz is
+q = l
+r, α = l, β = r, γ = 0.
+(25)
+In contrast to the annihilating random walk example, σw⊗v cannot then be expressed in terms of v⊗v,
+w ⊗w and w ⊗v only, so the representations of the algebra A generated by {σn} has to be constructed
+diﬀerently.
+Fortunately, there is an additional algebraic structure, which comes to the rescue.
+For any a =
+(a1, a2)T , b = (b1, b2)T ∈V , we use the linear operation of pointwise multiplication (the Hadamard
+product), which corresponds to the multiplication of functions on Ω:
+a · b :=
+ a1b1
+a2b2
+
+∈V
+(26)
+and where powers are deﬁned by ak = a · a · · · a. Similarly, for ⊗n∈Zan, ⊗n∈Zbn ∈⊗n∈ZV , we deﬁne
+⊗n∈Zan·⊗n∈Zbn := ⊗n∈Z(an·bn). The key facts we need concerning σ, v and w, alongside σv⊗v = v⊗v
+and σw ⊗w = w ⊗w, are
+σwn ⊗wn+1
+=
+lwn ⊗wn + rwn+1 ⊗wn+1,
+n ≥0,
+(27)
+0
+=
+rwn+2 −wn+1 + lwn,
+n ≥0,
+(28)
+the latter arising from the relation rq2 −q + l = (rq −l)(q −1) = 0. Now we deﬁne
+hx
+=
+. . . ⊗vx−2 ⊗vx−1 ⊗wx ⊗wx+1 ⊗. . .
+for x ∈Z
+(29)
+h(n)
+x1,...,xn
+=
+hx1 · . . . · hxn
+for x1 ≤x2 ≤. . . ≤xn.
+(30)
+We check below that the action in (27) implies that these are duality functions, and we call h(n)
+x1,...,xn
+a staircase duality function.
+The corresponding functions on the conﬁguration space are qη[x,∞) =
+q
+P
+y≥x η(y) and products Q
+i qη[xi,∞), which are the duality functions developed in Schutz [39]. Alas,
+these functions do not depend on ﬁnitely many co-ordinates, and the vector hx does not lie in our tensor
+space T = N
+n∈Z Vn. To bypass this diﬃculty, we follow [39] by restricting to conﬁgurations η that have
+a rightmost particle. Just for this Section we adopt a diﬀerent deﬁnition of the inﬁnite tensor product.
+Let Ω′ be a reduced conﬁguration space containing only conﬁgurations with a rightmost particle: η ∈Ω′
+if there is j0 ∈Z : η = ((ηj)j≤j0, 0, 0, . . .). Next, let T(Ω′) be the space of functions on Ω′ depending on
+semi-inﬁnite strings of arguments, that is f ∈T(Ω′) if there is i0 ∈Z such that f depends on (ηi)i≥i0
+only. The action of the generator is well-deﬁned on T(Ω′): for any η ∈Ω′ and f ∈T(Ω′)
+Lf(η) =
+j0
+X
+k=i0−1
+(qkf)(η).
+To model T(Ω′) using vector notation, we adapt the deﬁnition of the inﬁnite tensor product to let T ′
+be the linear space spanned by inﬁnite strings ⊗n×Z vn, where vn ∈Vn, for which there exists i0 so that
+vn = v for all n < i0 (modulo the usual equivalence relations). As before, the linear spaces T(Ω′) and
+T ′ are isomorphic.
+Using (27), we can check that the algebra A generated by {σn} is represented in each of the spaces
+T ′
+n = SpanR
+
+h(n)
+x1,...,xn, x1 ≤x2 ≤. . . ≤xn
+
+⊂T ′,
+for n = 0, 1, . . . .
+(31)
+Indeed it follows from (27) and σwn ⊗wn = wn ⊗wn that for x1 < x2 < . . . < xn,
+σxih(n)
+x1,...,xn
+=
+hx1 · . . . (lhxi+1 + rhxi−1) . . . · hxn
+for 1 ≤i ≤n,
+(32)
+σkh(n)
+x1,...,xn
+=
+h(n)
+x1,...,xn
+for k ̸∈{x1, x2, . . . , xn}.
+(33)
+12
+
+
+===== PDF PAGE 13 =====
+
+It remains to check that A maps hx1,...,xn to an element of T ′
+n if xi’s are allowed to coincide. Such a
+check is elementary using the relation
+σ(wn ⊗wn+m) = q2 −qm
+q2 −1 wn ⊗wn + qm −1
+q2 −1 wn+1 ⊗wn+1, m, n ≥0
+(34)
+which is proved using (27) and the identity wm = q−qm
+q−1 v + qn−1
+q−1 w.
+From the probabilistic point of view, we must examine the action of the entire generator:
+Lh(n)
+x1,...,xn =
+n
+X
+k=1
+∆r,l
+k h(n)
+x1,...,xn,
+x1 < x2 < . . . < x2n,
+(35)
+rh(n) |xi=x,xi+1=x +lh(n) |xi=x+1,xi+1=x+1 −h(n)
+xi=x,xi+1=x+1 = 0,
+1 ≤i < n.
+(36)
+The operator on the right hand side of (35) is the generator of [ASEP] with n particles in the co-ordinate
+representation. Notice that the knowledge of all Φ(n)
+t
+(x1, . . . , xn) := E(h(n)
+x1,...,xn) for n ≥0 determines
+the law of [ASEP] at time t, showing the system of duality functions constructed above is complete.
+The solution of the system for Φ(n)
+t
+(x1, . . . , xn) in Borodin, Corwin and Sasamoto [7] leads eventually
+to Tracy-Widom distribution ﬂuctuations for [ASEP].
+2.4
+The Hecke relations and duality
+Another commonly arising type of duality function is of the form
+. . . ⊗wx1 ⊗. . . ⊗wxn ⊗. . .
+(37)
+where the vector w is in positions x1, x2, . . . , xn and each . . . represent tensoring with the vacuum vector
+v at all other positions. When w = e(1) this corresponds to the product moment duality function:
+g(n)
+x1,x2,...,xn = . . . ⊗e(1)
+x1 ⊗. . . ⊗e(1)
+xn ⊗. . .
+↔
+Y
+1≤i≤n
+η(xi),
+(38)
+and when w = (β, 1)T for some β ̸= 1 this corresponds to the exponential product moment duality
+function:
+g(n)
+β;x1,x2,...,xn = . . . ⊗wx1 ⊗. . . ⊗wxn ⊗. . .
+↔
+β
+Pn
+i=1 η(xi).
+(39)
+We call the number n of non vacuum entries the order of the product moment. These are well known
+duality functions for the symmetric exclusion process and certain voter models (see Section 4). The key
+relation that needs to hold for these to be duality functions is that σv ⊗w and σw ⊗v can be expressed
+in terms of v ⊗v, v ⊗w, w ⊗v, that is without using w ⊗w. This ensures that σy can only reduce the
+number of sites in a product moment. This leads, as in the two example above, to invariant subspaces
+for the generator algebra, which here consist of product moments of at most a given order.
+Our aim in this paper is to examine whether there are underlying algebraic facts that lead to the
+emergence of the duality functions we have seen above. The braid relation (13) emerges as a surprise
+in the two models described above. The following proposition shows that, when present together with
+two factorised form eigenvectors, the Hecke relations imply that the generator will act in a suitable way
+to construct duality functions.
+Proposition 1. Suppose that {σn}n∈Z, where σn is a linear operator σ ∈End(V ⊗V ) acting on entries
+Vn × Vn+1 in the space ⊗n∈ZV , satisfy the deformed braid and quadratic Hecke relations (13) and (15).
+Suppose also that dim ker(σ −I) = 2 and that there are two independent factorised form eigenvectors
+σv ⊗v = v ⊗v and σw ⊗w = w ⊗w.
+13
+
+
+===== PDF PAGE 14 =====
+
+Then the action of σ on v ⊗w and w ⊗v must take one of the following two forms:
+ σv ⊗w = αv ⊗v + βw ⊗w + γv ⊗w,
+σw ⊗v = ˜αw ⊗w + ˜βv ⊗v + ˜γw ⊗v,
+(40)
+or
+ σv ⊗w = γv ⊗w + δw ⊗v,
+σw ⊗v = ˜γw ⊗v + ˜δv ⊗w,
+(41)
+for some α, β, γ, δ, ˜α, ˜β, ˜γ, ˜δ ∈R.
+The form (40) is consistent with alternating interval duality functions, and the form (40) is consistent
+with product moment duality functions.
+Proof. For this proof, the argument is easier using the Q-matrix form, that is q = σ −I. A short
+computation shows that the Hecke relations (13) and (15) become
+qiqi+1qi −(Q + 1)qi
+=
+qi+1qiqi+1 −(Q + 1)qi+1,
+q2
+i
+=
+−qi,
+i ∈Z.
+Expressed in terms of {qi} our assumptions mean that qv ⊗v = qw ⊗w = 0 and dim ker(q) = 2.
+The conclusion will follow after analysing the action of L1 := q ⊗Id and L2 = Id ⊗q on the vectors
+v ⊗w ⊗w, v ⊗v ⊗w ∈V1 ⊗V2 ⊗V3. By deﬁnition L1 := L ⊗Id and L2 = Id ⊗L act non-trivially on
+V1 ⊗V2 and V2 ⊗V3 respectively. Applying the deformed braid relation one ﬁnds
+ L1L2L1v ⊗w ⊗w
+=
+(Q + 1) L1v ⊗w ⊗w
+L2L1L2v ⊗v ⊗w
+=
+(Q + 1) L2v ⊗v ⊗w
+.
+(42)
+As {v ⊗v, w ⊗w, v ⊗w, w ⊗v} is a basis of V ⊗V , there are α, β, γ, δ such that
+Lv ⊗w = αv ⊗v + βw ⊗w + γv ⊗w + δw ⊗v
+(43)
+Substituting (43) into (42) and observing that a ⊗v + b ⊗w = 0 implies a = b = 0, one ﬁnds
+ αδq (v ⊗w + w ⊗v) = 0,
+βδq (v ⊗w + w ⊗v) = 0.
+(44)
+Notice that the vectors v ⊗v, w ⊗w and v ⊗w +w ⊗v are linearly independent. As qv ⊗v = qw ⊗w = 0
+and null(q) = 2, we conclude that δ = 0 or α = β = 0. Repeating the argument for qw ⊗v we arrive at
+the following possibilities
+
+
+
+qv ⊗w = αv ⊗v + βw ⊗w + γv ⊗w
+OR
+qv ⊗w = γv ⊗w + δw ⊗v,
+and
+
+
+
+qw ⊗v = ˜αw ⊗w + ˜βv ⊗v + ˜γw ⊗v
+OR
+qw ⊗v = ˜γw ⊗v + ˜δv ⊗w.
+(45)
+The four possible actions described here can be reduced to just the two stated in the proposition.
+Indeed, assume that
+qv ⊗w = γv ⊗w + δw ⊗v,
+(46)
+but
+qw ⊗v = ˜αw ⊗w + ˜βv ⊗v + ˜γw ⊗v.
+(47)
+Applying q to (46) and using the relation q2 = −q and (47), one ﬁnds
+−γv ⊗w −δw ⊗v = γ(γv ⊗w + δw ⊗v) + δ(˜αw ⊗w + ˜βv ⊗v + ˜γw ⊗v).
+It then follows from linear independence that either δ = 0 or ˜α = ˜β = 0. In the former case (46), (47)
+become a particular case of (40), in the latter of (41).
+14
+
+
+===== PDF PAGE 15 =====
+
+Let us notice that the proposition is applicable to [ARW] as well as all other reaction-diﬀusion systems
+considered below: for all these cases the non-degeneracy condition dim ker(σ −I) = 2 is satisﬁed and
+the corresponding pair of factorised null vectors of σ −I exists. For the reaction-diﬀusion systems
+the alternative (40) is realised, which allows one to construct a full system of the alternating interval
+duality functions, see Section 2.2 for the example of annihilating random walks. The alternative (41)
+corresponds to duality functions of the product moment type. It is well known that products of particle
+indicators constitute a full system of duality functions for the symmetric simple exclusion process
+([SEP]). However notice that the non-degeneracy condition is not satisﬁed for [SEP] as dim ker(σ−I) =
+1.
+The above proposition motivates a systematic search for operators σ for which the family {σn} satisfy
+the Hecke algebra relations (13),(15), and which have the constraints that allow P
+n(σn −I) to act as
+the generator of a particle system on Z: that the oﬀdiagonal entries of σ are non-negative and that row
+sums equal 1. As an example, there is exactly one family of such operators which have rank 1, namely:
+σ =
+
+
+
+
+t2
+t(1 −t)
+t(1 −t)
+(1 −t)2
+t2
+t(1 −t)
+t(1 −t)
+(1 −t)2
+t2
+t(1 −t)
+t(1 −t)
+(1 −t)2
+t2
+t(1 −t)
+t(1 −t)
+(1 −t)2
+
+
+
+
+for t ∈[0, 1].
+(48)
+which satisﬁes the braid relation (13) with Q = 0. To prove this is the only rank 1 solution we may set
+σ = (1, 1, 1, 1)T (a1, a2, a3, a4) since we know that its image must contain the eigenvector (1, 1, 1, 1)T .
+We require a1 + a2 + a3 + a4 = 1 and ai ≥0 for i = 1, .., 4.
+This already ensures that σ2 = σ.
+Substituting this form into the deformed braid relation (13) we ﬁnd, using a symbolic algebra package,
+that it can only hold for the family above. More details are given at the start of Section 6.
+A full search for all examples is still unﬁnished. The results in Section 3 give a partial classiﬁcation,
+based on adding certain extra requirements, of the set of rank 2 and rank 3 examples. We ﬁnd exactly
+11 families, among them many familiar models and just a few new ones, such as (48). The particle
+system corresponding to (48) we call a reshuﬄe model, as pairs of neighbouring sites update their values
+at rate one, becoming 11, 10, 01, 00 with ﬁxed probabilities independent of their previous values. We
+study this model in Section 4.6 where we show that its invariant measure is a determinantal point
+process on Z related to the descent process introduced by Borodin, Diaconis and Fulman in [8].
+3
+Classiﬁcations of generators
+3.1
+Generators built out of projectors
+We will make two reductions in our ﬁrst classiﬁcation.
+Reﬂective symmetry. Let ρ ∈End(V ⊗V ) be deﬁned by ρ(a ⊗b) = b ⊗a, so that in the standard basis
+ρ is given by
+ρ =
+
+
+
+
+1
+0
+0
+0
+0
+0
+1
+0
+0
+1
+0
+0
+0
+0
+0
+1
+
+
+
+.
+(49)
+If a generator of a Markov process is of the form (12) and satisﬁes ρσ = σρ then the reﬂected Markov
+chain (˜ηt), deﬁned by ˜ηt(x) = ηt(−x) for x ∈Z, has the same law as (ηt).
+15
+
+
+===== PDF PAGE 16 =====
+
+Particle-hole interchange. The map ηx →1 −ηx for x ∈Z interchanges occupied and empty sites. For
+a Markov process of the form (12) the induced Markov chain after this map is of the same form but
+with σ replaced by the conjugation ˜σ = τστ where τ ∈End(V ⊗V ) is given in the standard basis by
+τ =
+
+
+
+
+0
+0
+0
+1
+0
+0
+1
+0
+0
+1
+0
+0
+1
+0
+0
+0
+
+
+
+.
+(50)
+We note that ρ2 = I, τ 2 = I and ρτ = τρ.
+Theorem 2. Suppose σ ∈End(V ⊗V ) is idempotent, that is σ2 = σ, and satisﬁes the stochastic
+constraints, that is its matrix in the standard basis satisﬁes
+σij ≥0 for 1 ≤i ̸= j ≤4, and P4
+j=1 σij = 1 for 1 ≤i ≤4.
+(51)
+Assume also the reﬂective symmetry condition ρσ = σρ. Then any such non-trivial σ ̸= I must, after
+possibly a particle-hole conjugation τστ, lie in one of following nine families (written in the standard
+16
+
+
+===== PDF PAGE 17 =====
+
+basis)
+Symmetric exclusion process
+[SEP]
+σ =
+
+
+
+
+1
+0
+0
+0
+0
+1
+2
+1
+2
+0
+0
+1
+2
+1
+2
+0
+0
+0
+0
+1
+
+
+
+
+(52)
+Biased voter model
+[BVM]
+σ =
+
+
+
+
+1
+0
+0
+0
+θ
+0
+0
+1 −θ
+θ
+0
+0
+1 −θ
+0
+0
+0
+1
+
+
+
+
+for θ ∈[0, 1],
+(53)
+Symmetric anti-voter model
+[SAVM]
+σ =
+
+
+
+
+0
+1
+2
+1
+2
+0
+0
+1
+0
+0
+0
+0
+1
+0
+0
+1
+2
+1
+2
+0
+
+
+
+
+(54)
+Annihilating-coalesing
+symmetric random walks
+[ACSRW]
+σ =
+
+
+
+
+0
+1−θ
+2
+1−θ
+2
+θ
+0
+1
+2
+1
+2
+0
+0
+1
+2
+1
+2
+0
+0
+0
+0
+1
+
+
+
+
+for θ ∈[0, 1],
+(55)
+Coalesing symmetric random
+walks with branching
+[CSRWB]
+σ =
+
+
+
+
+1 −2θ
+θ
+θ
+0
+1 −2θ
+θ
+θ
+0
+1 −2θ
+θ
+θ
+0
+0
+0
+0
+1
+
+
+
+
+for θ ∈[0, 1
+2],
+(56)
+Annihilating symmetric random
+walks with pair immigration
+[ASRWPI]
+σ =
+
+
+
+
+1
+2 −θ
+0
+0
+1
+2 + θ
+0
+1
+2
+1
+2
+0
+0
+1
+2
+1
+2
+0
+1
+2 −θ
+0
+0
+1
+2 + θ
+
+
+
+
+for θ ∈[0, 1
+2],
+(57)
+Stationary coalescence
+annihilation model
+[SCAM]
+σ =
+
+
+
+
+0
+θ
+θ
+1 −2θ
+0
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+1
+
+
+
+
+for θ ∈[0, 1
+2],
+(58)
+Dimer model
+[DM]
+σ =
+
+
+
+
+1 −θ
+0
+0
+θ
+0
+1
+0
+0
+0
+0
+1
+0
+1 −θ
+0
+0
+θ
+
+
+
+
+for θ ∈[0, 1],
+(59)
+Reshuﬄe model
+[RM]
+σ =
+
+
+
+
+θ1
+θ2
+θ2
+θ3
+θ1
+θ2
+θ2
+θ3
+θ1
+θ2
+θ2
+θ3
+θ1
+θ2
+θ2
+θ3
+
+
+
+
+for θi ≥0 and with
+θ1 + 2θ2 + θ3 = 1.
+(60)
+There are certain obvious redundancies in this listing: for example under particle-hole conjugation the
+models [BVM], [DM] and [RM] change their parameter values. There are certain less obvious overlaps
+in this listing: for example the model [BVM] at θ = 1 equals [CSRWB] at θ = 0, and the model [SCAM]
+at θ = 0 equals [DM] at θ = 1.
+We use the above operators to form an algebra A generated by {σn}n∈Z over R in ⊗i∈ZVi as in Section
+2.2. We can now check for which of the models in the classiﬁcation the three conditions for a Hecke
+algebra are satisﬁed, which here reduces to checking the deformed braid relation (13).
+Lemma 3. The algebras corresponding to the models [SEP], [SAVM] and [ACSRW], deﬁned in (52),
+(54), and (55), satisfy the deformed braid relation (13) with parameter Q = 1/4.
+17
+
+
+===== PDF PAGE 18 =====
+
+The algebra corresponding to [BVM] (53) satisﬁes the deformed braid relation with parameter Q =
+θ(1 −θ); that corresponding to [CSRWB] (56) with parameter Q = θ(1 −θ); that corresponding to
+[ASRWPI] (57) with parameter Q = θ2.
+The remaining three models [SCAM], [DM], [RM] do not generically satisfy the deformed braid relation,
+but at some exceptional values do so: namely [DM] (59) at θ = 1/2 with parameter Q = 1/4 and [RM]
+(60) when θ1 = t2, θ2 = t(1 −t), θ3 = (1 −t)2 for t ∈[0, 1] with parameter Q = 0.
+The veriﬁcation of Lemma 3 is a computation best carried out using a symbolic linear algebra package.
+The proof of the classiﬁcation Theorem 2 is elementary linear algebra, meshed with the stochasticity
+conditions, but is somewhat lengthy. The approach, motivated by the treatment of annihilating random
+walks and the asymmetric exclusion process in the introduction, is to look for eigenvectors of σ that
+are in the factorised form w ⊗w for some w ∈V . The aim is to ﬁnd two such independent vectors,
+recalling that v ⊗v = (1, 1, 1, 1)T is always one such vector. The ﬁrst lemma below identiﬁes exactly
+when this is possible and the second lemma records an exact form for the second factorised eigenvector,
+when it can be found, and the corresponding action of σ on v ⊗w and w ⊗v (which will be useful in
+describing duality functions). Luckily, the search described in these two lemmas also characterises all
+possibilities for σ, and Theorem 2 follows directly. The lemmas are proved in Section 6.
+Lemma 4. Let σ ∈End(V ⊗V ) be a stochastic matrix such that σ2 = σ and ρσ = σρ. Then either
+(i) there exists w ∈V such that v = (1, 1)T and w are linearly independent and σw ⊗w = w ⊗w, or
+(ii) σ is one of the following three models: the symmetric anti-voter model [SAVM], the symmetric case
+θ = 1
+2 of the biased voter model [BVM], or the reshuﬄe model [RM] described in (54, 53, 60).
+Lemma 5. Let σ ∈End(V ⊗V ) be a stochastic matrix such that σ2 = σ and ρσ = σρ. Assume also
+that there is an element w ∈V , independent of v = (1, 1)T , such that σw ⊗w = w ⊗w. Then, after
+possibly a particle-hole conjugation, there are exactly seven such non-trivial matrices σ ̸= I as listed
+below, where we indicate one possible choice of the vector w, and the action of σ on v ⊗w and w ⊗v.
+[SEP] Symmetric exclusion process:
+w =
+1
+ω
+
+with ω ̸= 1, or w =
+0
+1
+
+,
+σv ⊗w = σw ⊗v = 1
+2(v ⊗w + w ⊗v).
+[BVM] The non-symmetric case θ ̸= 1
+2 of the biased voter model:
+w =
+1 −θ
+θ
+
+,
+σv ⊗w = σw ⊗v = θ(1 −θ)v ⊗v + w ⊗w.
+[ACSRW] Symmetric annihilating-coalescing random walks:
+w =
+−θ
+1
+
+,
+σv ⊗w = σw ⊗v = 1
+2v ⊗v + 1
+2w ⊗w.
+[CSRWB] Symmetric coalescing random walks with branching:
+w =
+0
+1
+
+,
+σv ⊗w = σw ⊗v = θv ⊗v + (1 −θ)w ⊗w.
+[ASRWPI] Symmetric annihilating random walks with pairwise immigration:
+w =
+
+−1
+1
+
+,
+σv ⊗w = σw ⊗v = θv ⊗v + θw ⊗w.
+18
+
+
+===== PDF PAGE 19 =====
+
+[SCAM] Stationary annihilation coalescence model:
+w =
+2θ −1
+1
+
+,
+σv ⊗w = 1
+2 (v ⊗v + w ⊗w) + 1
+2(v ⊗w −w ⊗v),
+σw ⊗v = 1
+2 (v ⊗v + w ⊗w) + 1
+2(w ⊗v −v ⊗w).
+[DM] Dimer model::
+w =
+
+1
+−1
+
+,
+σv ⊗w = 1 −2θ
+2
+(v ⊗v + w ⊗w) + 1
+2(v ⊗w −w ⊗v),
+σw ⊗v = 1 −2θ
+2
+(v ⊗v + w ⊗w) + 1
+2(w ⊗v −v ⊗w).
+3.2
+Generators built using the braid relation
+One drawback of Theorem 2 is that we imposed the symmetry condition ρσ = σρ. More work is needed
+to complete a classiﬁcation without this assumption, and we know we will ﬁnd non-symmetric versions
+of the models in Theorem 2 but do not know if other models will emerge. In this Section we give a
+partial answer by establishing a second classiﬁcation without the symmetry assumption. instead we ask
+that the deformed braid relation (13) holds (and also a further constraint detailed below that makes the
+classiﬁcation tractable). The outcome of the search is that we do indeed get non-symmetric versions
+of all the models, and two further exceptional models, which we call Erosion Models and are easy to
+analyse (see 4.7).
+We were not able to classify all the examples of σ satisfying the deformed braid relation (13) and the
+quadratic relation (15). Instead we have analyzed two Ansatzes for σ which do give rise to physically
+interesting solutions. We choose σ in one of the following forms:
+(a)
+σ =
+
+
+
+
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+0
+0
+∗
+
+
+
+
+(b)
+σ =
+
+
+
+
+∗
+∗
+∗
+∗
+∗
+∗
+∗
+0
+∗
+∗
+∗
+0
+∗
+∗
+∗
+∗
+
+
+
+
+(61)
+were symbol ”∗” denotes components of σ which are not restricted by the Ansatz. Substituting the
+Ansatzes (61) into the Hecke relations we notice that certain components of these matrix polynomial
+equations assume a factorised form. The factorisation allows us to ﬁnd more and more constraints, and
+to eventually classify all models ﬁtting the Ansatzes.
+Theorem 6. Suppose σ ∈End(V ⊗V ) satisﬁes the stochastic constraints (51) and also one of the two
+Anzatses (61). Suppose that the family {σn} satisfy the deformed braid relation (13) and the quadratic
+relation (15). Then, after possibly a conjugation to ρσρ or τστ or ρτστρ, any non-trivial σ ̸= I must
+19
+
+
+===== PDF PAGE 20 =====
+
+lie in one of the following eleven families (written in the standard basis):
+Asymmetric exclusion process
+[ASEP]
+σ =
+
+
+
+
+1
+0
+0
+0
+0
+l
+r
+0
+0
+l
+r
+0
+0
+0
+0
+1
+
+
+
+
+for r, l ∈[0, 1],
+r + l = 1,
+(62)
+Biased voter model
+[BVM]
+σ =
+
+
+
+
+1
+0
+0
+0
+θ
+0
+0
+1 −θ
+θ
+0
+0
+1 −θ
+0
+0
+0
+1
+
+
+
+
+for θ ∈[0, 1],
+(63)
+Asymmetric voter model
+[AVM]
+σ =
+
+
+
+
+1
+0
+0
+0
+r
+0
+0
+l
+l
+0
+0
+r
+0
+0
+0
+1
+
+
+
+
+for r, l ∈[0, 1],
+r + l = 1,
+(64)
+Asymmetric anti-voter model
+[AAVM]
+σ =
+
+
+
+
+0
+l
+r
+0
+0
+1
+0
+0
+0
+0
+1
+0
+0
+r
+l
+0
+
+
+
+
+for r, l ∈[0, 1],
+r + l = 1,
+(65)
+Annihilating-coalesing
+random walks
+[ACRW]
+σ =
+
+
+
+
+0
+l(1 −θ)
+r(1 −θ)
+θ
+0
+l
+r
+0
+0
+l
+r
+0
+0
+0
+0
+1
+
+
+
+
+for r, l, θ ∈[0, 1],
+r + l = 1,
+(66)
+Coalesing symmetric random
+walks with branching
+[CSRWB]
+σ =
+
+
+
+
+1 −2θ
+θ
+θ
+0
+1 −2θ
+θ
+θ
+0
+1 −2θ
+θ
+θ
+0
+0
+0
+0
+1
+
+
+
+
+for θ ∈[0, 1
+2],
+(67)
+Annihilating symmetric random
+walks with pair immigration
+[ASRWPI]
+σ =
+
+
+
+
+1
+2 −θ
+0
+0
+1
+2 + θ
+0
+1
+2
+1
+2
+0
+0
+1
+2
+1
+2
+0
+1
+2 −θ
+0
+0
+1
+2 + θ
+
+
+
+
+for θ ∈[0, 1
+2],
+(68)
+Dimer model
+[DM]
+σ =
+
+
+
+
+1
+2
+0
+0
+1
+2
+0
+1
+0
+0
+0
+0
+1
+0
+1
+2
+0
+0
+1
+2
+
+
+
+
+(69)
+Reshuﬄe model
+[RM]
+σ =
+
+
+
+
+1
+0
+0
+0
+1
+0
+0
+0
+1
+0
+0
+0
+1
+0
+0
+0
+
+
+
+
+(70)
+Erosion model 1
+[EM1]
+σ =
+
+
+
+
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+1
+0
+0
+0
+1
+
+
+
+
+(71)
+Erosion model 2
+[EM2]
+σ =
+
+
+
+
+0
+1
+0
+0
+0
+1
+0
+0
+0
+0
+0
+1
+0
+0
+0
+1
+
+
+
+
+(72)
+20
+
+
+===== PDF PAGE 21 =====
+
+4
+The eleven models
+We examine the models that arise in the classiﬁcation theorems and, where possible, link the algebraic
+information gained in the classiﬁcation to duality functions.
+4.1
+Exclusion processes [SEP] and [ASEP]
+The asymmetric exclusion process [ASEP] is discussed in Section 2.3, where for initial conditions with
+a rightmost particle the staircase duality functions form a complete set.
+For the symmetric exclusion process [SEP] the action of σ on the basis (v ⊗v, w ⊗w, v ⊗w, w ⊗v)
+recorded in Lemma 5 shows that duality functions of product moment type (37) exist. Indeed the
+choice w = (1, 0)T gives exactly the product moment g(n)
+x1,...,xn which corresponds to the test function
+Qn
+k=1 η(xk). These are the standard dualities functions (see Liggett [32] Chapter VIII) where the dual
+process can be taken to be a symmetric exclusion process with ﬁnitely many particles.
+Using the other vectors listed in Lemma 5, namely w = (1, ω)T or w = (0, 1)T , in the product moment
+duality function (37) corresponds to certain special linear combinations of product moments, and the
+algebra just shows that the generator leads to expressions that can be re-expressed in terms of the same
+special linear combinations. For example when w = (0, 1)T this shows that the probability of empty
+regions solves a closed set of equations (for any ﬁxed cardinality of region).
+4.2
+Voter models [BVM], [AVM] and [AAVM]
+In the asymmetric voter model model [AVM], each site independently triggers a disagreeing neighbouring
+site to the right to take its value at rate r, and a disagreeing neighbouring site to the left to take its
+value at rate l. This model has a generator of the form (12) with σ given by (64). This model is usually
+studied using the mapping to domain walls: the bijective mapping that sends η to the set markers in
+the dual lattice 1
+2 + Z that mark the boundaries between runs of 0’s and runs of 1. The positions of
+these markers perform instantaneously annihilating random walks on 1
+2 + Z, where the domain walls
+jump left with rate l and right with rate r, a model that is known to lead to a Pfaﬃan point process at
+ﬁxed times (see Section 5.3 below).
+Analysing the generator of [AVM] in the framework we are using, we ﬁnd there are no second tensor
+form eigenvector w ⊗w of σ. However there are product moment type dualities functions. Indeed
+the product moments g(n)
+x1,...,xn as in (38) are duality functions, and the dual action is that of instanta-
+neously coalescing asymmetric random walks (left jumps at rate r and right jumps at rate l). Product
+exponential moments g(n)
+β;x1,...,xn as in (39) are also duality functions for any β, in that σ has a good
+action on w ⊗w, but the dual action is more complicated.
+In the biased voter model [BVM], each neighbouring pair of disagreeing sites, that is with values 10 or
+01, jump (independently) to 11 at rate θ or 00 at rate 1 −θ. This model has a generator of the form
+(12) with σ given by (53). The mapping to domain walls still yields a Markov model, with a domain
+wall with 1s to the left and 0s to the right jumps to the right at rate θ and to the left at rate 1 −θ,
+while a domain wall with 0s to the left and 1s to the right jumps to the right at rate 1 −θ and to the
+left at rate θ. In the non-symmetric case θ ̸= 1
+2, there is a second eigenvector w ⊗w as found in Lemma
+5. To simplify the dual action we scale this vector and take, when θ ̸= 1, the vector w = (1, θ/(1−θ))T ,
+which leads to an alternating interval duality function f (2n)
+x1,x2,...,x2n deﬁned in (19). The dual action has
+21
+
+
+===== PDF PAGE 22 =====
+
+annihilating particles with sites x2n moving right at rate θ and left at rate 1 −θ, while sites x2n+1
+moving right at rate 1−θ and left at rate θ. The case θ = 1 can be treated by particle-hole conjugation,
+which interchanges θ and 1 −θ.
+The ﬁnal voter model we met, the asymmetric anti-voter model [AAVM], is mapped to the asymmetric
+model [AVM] by the bijection η →˜η where ˜η(x) = η(x) for x ∈2Z and ˜η(x) = 1 −η(x) for x ∈2Z + 1,
+and the domain wall map and the dualities functions still operate after this bijection.
+4.3
+Annihilating and coalescing systems [ACRW], [CSRWB], [ASRWPI]
+Particles perform independent asymmetric simple random walks on Z, jumping right with rate r and
+left with rate l (and r + l = 1), and upon any collision they instantaneously annihilate with probability
+θ or instantaneously coalesce with probability 1 −θ. This produces the process [ACRW] with generator
+of the form (12) with σ given by (66). Using the eigenvector w = (−θ, 1)T , the alternating interval
+vector f (2n)
+x1,x2,...,x2n deﬁned in (19) corresponds to
+f (2n)
+x1,x2,...,x2n
+↔
+Y
+1≤i≤n
+(−θ)η(x2i−1,x2i]
+where
+η(a, b] =
+b
+X
+x=a+1
+η(x).
+The action of σ on the basis (v ⊗v, w⊗w, v ⊗w, w⊗v) recorded in Lemma 5 extends to the asymmetric
+case, with σ(w ⊗v) = rv ⊗v + lw ⊗w and σ(v ⊗w) = lv ⊗v + rw ⊗w. This implies that
+Lf (2n)
+x1,x2,...,x2n =
+2n
+X
+k=1
+∆r,l
+k f (2n)
+x1,x2,...,x2n,
+for x1 < x2 < . . . < x2n,
+where ∆r,l
+k
+is the non-symmetric discrete asymmetric Laplacian acting on the variable xk. Thus f (2n)
+is a duality function where the dual is a system of 2n annihilating simple random walks. This duality
+function was used in [16] to show the one-dimensional marginal ηt, for any t ≥0, is Pfaﬃan point
+processes on Z under any deterministic initial condition. There are no product moment or exponential
+product moment duality functions.
+Next we examine coalescing symmetric random walks with branching [CSRWB]. Particles perform
+independent symmetric simple random walks on Z, with total jump rate 2α, they instantaneously
+coalesce upon collision, and in addition each particle independently branches, producing a particle onto
+each neighbouring empty site at rate β. Scaling time so that 2α+β = 1, then taking θ = α = (1−β)/2,
+we arrive at the generator of the form (12) with σ given by (56). The only other tensor form eigenvector
+w ⊗w with a good action is w = (0, 1)T , for which the alternating interval vector f (2n)
+x1,x2,...,x2n deﬁned
+in (19) corresponds to
+f (2n)
+x1,x2,...,x2n
+↔
+Y
+1≤i≤n
+1(η(x2i−1, x2i] = 0)
+where
+η(a, b] =
+b
+X
+x=a+1
+η(x),
+the well known empty interval duality function. The action of σ on the basis (v ⊗v, w ⊗w, v ⊗w, w ⊗v)
+recorded in Lemma 5 shows that
+Lf (2n)
+x1,x2,...,x2n =
+2n
+X
+k=1
+∆1−θ,θ
+2k−1 f (2n)
+x1,x2,...,x2n +
+2n
+X
+k=1
+∆θ,1−θ
+2k
+f (2n)
+x1,x2,...,x2n,
+x1 < x2 < . . . < x2n
+The vector f (2n) is a duality function where the dual is a system of 2n annihilating random walks,
+where even and odd positioned particles have diﬀerent asymmetric rates. This duality function was
+22
+
+
+===== PDF PAGE 23 =====
+
+used in [17] to show the one-dimensional marginal ηt, for any t ≥0, is Pfaﬃan point processes on Z
+under any deterministic initial condition. Again there are no product moment or exponential product
+moment duality functions.
+Finally we examine annihilating symmetric random walks with pair immigration [ASRWPI]. Particles
+perform independent symmetric simple random walks on Z, with total jump rate 2α, they instanta-
+neously annihilate upon collision, and in addition there is immigration of pairs of particles at each pair
+of sites {x, x + 1} at rate β independently for all x ∈Z. Scaling time so that α + β = 1
+2, then taking
+θ = α = 1
+2 −β, we arrive at the generator of the form (12) with σ given by (57).
+The only other tensor form eigenvector w ⊗w with a good action using w = (−1, 1)T , for which the
+alternating interval vector f (2n)
+x1,x2,...,x2n deﬁned in (19) corresponds to the duality function
+f (2n)
+x1,x2,...,x2n
+↔
+Y
+1≤i≤n
+(−1)η(x2i−1,x2i]
+where
+η(a, b] =
+b
+X
+x=a+1
+η(x).
+The action of σ on the basis (v ⊗v, w ⊗w, v ⊗w, w ⊗v) recorded in Lemma 5 shows that
+Lf (2n)
+x1,x2,...,x2n = θ
+2n
+X
+k=1
+∆kf (2n)
+x1,x2,...,x2n −(1 −2θ)
+2n
+X
+k=1
+f (2n)
+x1,x2,...,x2n,
+x1 < x2 < . . . < x2n.
+This duality function was used in [17] to show the one-dimensional marginal ηt, for any t ≥0, is Pfaﬃan
+point processes on Z under any deterministic initial condition. Only the case θ = 0, corresponding to
+immigration of pairs with no underlying motion, has product moment dualities, where the product
+exponential moment function g(n)
+β;x1,...,xn as in (39) is a duality function for any β.
+4.4
+Stationary coalescence-annihilation model [SCAM]
+Every neighbouring pair of particles, at sites {x, x + 1} and independently for all x, reacts at rate 1;
+the reaction is either a coalescence, producing 10 or 01 each with probability θ, or an annihilation,
+producing 00 with probability 1 −2θ. This process has generator of the form (12) with σ given by (58).
+The rather simple dynamics produce decreasing sample paths. Conﬁgurations without a pair of neigh-
+bouring occupied sites are the ﬁxed point, which form the extreme points for the set of invariant
+measures. No pair of distinct initial conditions can be successfully coupled, and each solution converges
+to a distinct (random) mixture of ﬁxed points. Nevertheless, without a duality function, exact calcula-
+tions for the limiting distribution would be diﬃcult. We use the duality to analyse the limiting state
+for the process started from its maximal initial condition where all sites are occupied, which turns out
+to be a renewal process on Z.
+The action of σ on the basis (v ⊗v, w ⊗w, v ⊗w, w ⊗v) recorded in Lemma 5 does not mesh with either
+an alternating interval duality function, or a staircase duality function. Moreover there are no product
+moment, or exponential product moment, dualities. However there are other choices of w that lead to a
+useful action, and we choose the eigenvector e(1) ⊗e(1), with eigenvalue 0, on which the generator acts
+nicely:
+σv ⊗e(1) = v ⊗e(1) −(1 −θ)e(1) ⊗e(1),
+σe(1) ⊗v = e(1) ⊗v −(1 −θ)e(1) ⊗e(1).
+(73)
+Therefore the action of the generator preserves the order of vectors e(1) and v in the tensor product.
+We may take the alternating interval vector deﬁned in (19) with w = e(1) = (1, 0)T , corresponding to
+f (2n)
+x1,x2,...,x2n
+↔
+Y
+1≤i≤n
+1(η(y) = 1 for x2i−1 < y ≤x2i),
+23
+
+
+===== PDF PAGE 24 =====
+
+that is the indicator that the intervals (x2i−1, x2i] are fully occupied. We take parameters x1 < x2 <
+. . . < x2n and n ≥1.
+Using (73) it is straightforward to derive the following set of equations for the expectations of the duality
+functions Φ(2n)
+t
+(x1, . . . , x2n) := E[Q
+1≤i≤n 1(η(y) = 1 for x2i−1 < y ≤x2i)] under the initial condition
+η0 ≡1: for every n ∈N,
+∂tΦ(2n)
+t
+= −
+n
+X
+k=1
+DkΦ(2n)
+t
+,
+for t ≥0, x1 < . . . < x2n,
+(74)
+where
+DkΦ(. . . , x2k−1, x2k, . . .)
+=
+(1 −θ)Φ(. . . , x2k−1 −1, x2k, . . .) + (1 −θ)Φ(. . . , x2k−1, x2k + 1, . . .)
++(x2k −x2k−1 −1)Φ(. . . , x2k−1, x2k, . . .),
+and where we use the boundary conditions
+Φ(2n)
+t
+(. . . , xi−1, xi, xi+1, xi+2 . . .) = Φ(2n−2)
+t
+(. . . , xi−1, xi+2 . . .)
+when xi = xi+1,
+(75)
+and the convention Φ(0)
+t
+≡1 to deﬁne the right hand side of (74).
+The system of equations (74), with the boundary conditions (75) and initial condition Φ(2n)
+0
+≡1
+corresponding to all sites occupied, can be solved exactly. Uniqueness holds for bounded solutions, as can
+be shown inductively in n ∈2N, by an energy calculation: if Et := P
+x∈V2n(Φ(2n)
+t
+)2(x) exp(−P
+i |xi|),
+summing over the open cell V2n = {x : x1 < . . . < x2n}, then (d/dt)Et ≤CEt. The main building
+block for the solution is Φ(2)
+t (x, y), the probability that the interval (x, y] is fully occupied at time t.
+Exploiting the translation invariance we ﬁnd that the (unique bounded) solution is, setting γ = 2(1−θ),
+Φ(2)
+t (x, y) = e−(y−x−1)te−γ(1−e−t),
+x ≤y, t ≥0.
+(76)
+In particular, the one-particle density is
+ρt := Φ(2)
+t (x −1, x) = e−γ(1−e−t).
+(77)
+We look for the solution to (74) in the form
+Φ(2n)
+t
+(x1, y1, . . . , xn, yn) =
+n
+Y
+k=1
+Φ(2)
+t (xk, yk)
+n−1
+Y
+k=1
+Ft(xk+1 −yk).
+(78)
+The insertions of the function Ft in (78) describe spatial correlations between the runs of occupied
+sites. Substituting the Ansatz (78) into (74), one ﬁnds that it can be satisﬁed provided the function
+(Ft(x) : t ≥0, x ∈N) solves the following problem
+
+
+
+∂tFt(x) = γe−t (Ft(x) −Ft(x −1)) ,
+t > 0, x > 0,
+Ft(0) = e−teγ(1−e−t),
+t > 0,
+F0(x) = 1,
+x ≥0.
+(79)
+The solution is
+Ft(x) = eτ(t)
+
+Ex(−τ(t)) + 1
+γ
+(−τ(t))x+1
+(x + 1)!
+
+for t ≥0 and x ≥0,
+(80)
+where τ(t) = γ(1 −e−t) for t ≥0, and En(z) = Pn
+k=0 zk/k! is the exponential polynomial of degree
+n. Notice that, as x →∞, Ft(x) approaches 1 exponentially fast, which describes the de-correlation of
+runs in the limit of large separations.
+24
+
+
+===== PDF PAGE 25 =====
+
+By setting xk = yk −1 in (78) we get a complete description of the law of SCAM at a ﬁxed time t > 0
+in terms of the correlation functions: for t ≥0, x1 < x2 < . . . < xn and n ≥1
+ρ(n)
+t
+(x1, x2, . . . , xn)
+:=
+P [ηt(xk) = 1, k = 1, 2, . . . , n]
+=
+(ρt)n
+n
+Y
+k=2
+Ft(xk −xk−1 −1).
+(81)
+Examining (81), we conclude that SCAM started from the fully occupied lattice at t = 0 is a stationary
+renewal process at any ﬁxed t > 0. One immediate consequence of (81) and Bayes’ formula is that
+{ηt(k)}k<x and {ηt(k)}k>x are independent conditionally on the event {ηt(x) = 1}.
+A stationary
+renewal processes are characterised by its renewal measure (Janossi density in the terminology of point
+processes),
+Jt(n) = P[ηt(k) = 0, 1 ≤k ≤n −1, ηt(n) = 1|ηt(0) = 1],
+for n ≥1, t > 0.
+(82)
+The above conditional independence property of a renewal processes allows one to derive a linear
+(renewal) equation for the renewal measure
+ρ(2)
+t (0, n)
+=
+P[ηt(1) = 1, ηt(k) = 0, 1 ≤k ≤n −1, ηt(n) = 1]
++
+n−1
+X
+k=1
+P[ηt(0) = 1, ηt(j) = 0, 1 ≤j ≤k, ηt(k + 1) = 1, ηt(n) = 1]
+=
+ρtJt(n) +
+n−1
+X
+k=1
+Jt(k) ρ(2)
+t (k + 1, n)
+for n ≥1.
+(83)
+Translation invariance implies ρ(2)
+t (k + 1, n) = ρ(2)
+t (0, n −k).
+Introducing the generating functions
+ˆJt(z) = P∞
+n=1 Jt(n)zn and ˆρ(2)
+t (z) = P∞
+n=1 ρ(2)
+t (0, n)zn it is easy to solve the equation, namely
+ˆJt(z) =
+ˆρ(2)
+t (z)
+ρt + ˆρ(2)
+t (z)
+.
+(84)
+Moreover, an explicit expression for the transform of the two-point density can be found using (81)
+ˆρ(2)
+t (z) =
+zρt
+1 −z e−τ(t)z + ρt
+γ (e−τ(t)z −1).
+(85)
+The relations (84, 85) fully characterise the renewal measure.
+As an application of the above exact formulae, we examine the large n asymptotic of the renewal
+measure J∞(n) in the stationary state, that is sending t →∞. In this limit, τ(t) →γ and ρt →e−γ.
+We contrast the behaviour under pure coalescence and under pure annihilation.
+When θ =
+1
+2 all
+reactions are coalesences. In this case γ = 1. From (84) one ﬁnds ˆJ∞(z) = (1 −(1 −z)ez) and hence
+J∞(n) = (n −1)
+n!
+,
+for n ≥1.
+(86)
+Notice that J∞(1) = 0, reﬂecting the fact that in the stationary state the probability of a conﬁguration
+with two ones in a row is zero.
+When θ = 0 all reactions are annihilations. In this case γ = 2 and the formula for the generating
+function of Janossi densities takes the form
+ˆJ∞(z) = z −tanh(z)
+1 −z tanh(z), z ∈C.
+(87)
+25
+
+
+===== PDF PAGE 26 =====
+
+Notice that the function ˆJ∞is odd and so has zero Taylor coeﬃcients of even degree, reﬂecting the
+fact that the probability of runs of zeros of odd length is zero as particles can only vanish in pairs.
+The large n asymptotics of J∞(n) is determined by the singularities of ˆJ∞nearest to zero. These are
+the smallest roots of the equation z tanh(z) = 1 which are equal to ±r, where r ≈1.19968. Applying
+Cauchy’s theorem one ﬁnds that
+J∞(n) = (1 −(−1)n) r −r−1
+r2
+r−n(1 + O(∆−n)),
+(88)
+where ∆> 1 is determined by the gap between r and the set of absolute values of complex roots. Notice
+also that the renewal measure decays exponentially with n, whereas for pure coalescence the decay (86)
+is super-exponential. The reason is that for pure coalesence particles disappear only in singletons while
+reactions occur only when there is a neighbouring pair of occupied sites; so to produce a long row of
+empty sites, the coalescences must occur successively from left to right or successively from right to left,
+both unlikely scenarios.
+4.5
+The dimer model [DM]
+At neighbouring sites {x, x + 1}, and independently for all x, an occupied pair 11 annihilates at rate θ,
+and an unoccupied pair 00 is replaced by an occupied pair at rate 1 −θ. This process has generator of
+the form (12) with σ given by (59).
+The action of σ on the basis (v ⊗v, w ⊗w, v ⊗w, w ⊗v) recorded in Lemma 5 does not mesh with
+either an alternating interval duality function, or a staircase duality function. When θ ̸= 1
+2 there are
+no product moment or exponential product moment dualities (we will see that the case θ = 1
+2 is special
+below).
+This model, however, is equivalent to an inhomogeneous exclusion model, as follows. The dimer model
+has the following two obvious trapped states, where no jumps are possible,
+ηa(k) :=
+ 1 −(−1)k
+2
+, k ∈Z,
+and
+ηb(k) :=
+ 1 + (−1)k
+2
+, k ∈Z.
+Let us deﬁne quasi-particles as deviations from one of the above states. We ﬁx ηa as the reference state
+and then the conﬁguration ξ of quasi-particles for a given conﬁguration η of particles is deﬁned by
+ξ(k) =
+ η(k)
+when k is even,
+1 −η(k)
+when k is odd,
+k ∈Z.
+The map η →ξ is a bijection on {0, 1}Z, so that the process of quasi-particles (ξt) remains Markov. Its
+generator is
+L =
+X
+k∈Z
+
+q(0)
+2k + q(1)
+2k+1
+
+,
+(89)
+where
+q(0) =
+
+
+
+
+0
+0
+0
+0
+0
+−θ
+θ
+0
+0
+1 −θ
+−(1 −θ)
+0
+0
+0
+0
+0
+
+
+
+,
+q(1) =
+
+
+
+
+0
+0
+0
+0
+0
+−(1 −θ)
+1 −θ
+0
+0
+θ
+−θ
+0
+0
+0
+0
+0
+
+
+
+.
+(90)
+We conclude that the image of the dimer model is equivalent to an exclusion model. It coincides with
+standard SEP for θ = 1
+2, but is a spatially inhomogeneous, and non-symmetric in the notation from
+26
+
+
+===== PDF PAGE 27 =====
+
+Liggett [32], exclusion model otherwise. Therefore, when θ = 1
+2 the model has a spanning set of duality
+functions while for general asymmetric exclusion processes dualities are not known.
+We can, however, use the map to an exclusion model to ﬁnd invariant measures. Firstly, let us consider
+the degenerate case θ = 0. In this case the only allowed transitions are 00 →11. The process has
+monotone increasing paths and converges to a trap, that is any state without any pair of successive
+zeroes. The particle-hole conjugation maps the dimer model parameter θ to 1 −θ, so we now consider
+the range of the parameter θ to (0, 1
+2]. In [31], Chapter V111.2, Theorem 2.1, Liggett gives a condition
+ensuring a family of product Bernouilli invariant measures, which is satisﬁed for our quasi-particle
+process (ξt). In our algebraic notation, such product Bernouilli measures can be found by looking for a
+vector µ satisfying
+ X
+k∈Z
+q∗
+k
+!
+µ = 0,
+where
+q∗=
+
+
+
+
+−θ
+0
+0
+1 −θ
+0
+0
+0
+0
+0
+0
+0
+0
+θ
+0
+0
+−(1 −θ)
+
+
+
+
+and which is stochastic in each co-ordinate. Let µ0 = (p, 1 −p) for p ∈[0, 1]. Solving for a stochastic
+vector µ1 = (Φ(p), 1 −Φ(p)) so that q∗µ0 ⊗µ1 = 0, one ﬁnds
+Φ(p) =
+(1 −θ)(1 −p)
+θp + (1 −θ)(1 −p).
+Notice that Φ◦Φ = I, and this ensures that q∗µ1⊗µ0 = 0. Hence we may take µ = · · ·⊗µ0⊗µ1⊗µ0⊗· · ·
+for any p as an invariant measure, corresponding to product Bernouilli with parameters alternating
+between p and Φ(p). The ﬁxed point where Φ(p) = p is solved by p =
+√
+1 −θ/(
+√
+θ +
+√
+1 −θ) giving a
+translation invariant measure.
+4.6
+The reshuﬄe model [RM]
+Each pair of neighbouring sites {x, x + 1}, independently for all x, reacts at rate 1 to produce 00 with
+probability α1, 10 with probability α2, 01 with probability α3, and 11 with probability α4, leading to
+a process with generator of the form (12) with the rank one matrix
+σ =
+
+
+
+
+α1
+α2
+α3
+α4
+α1
+α2
+α3
+α4
+α1
+α2
+α3
+α4
+α1
+α2
+α3
+α4
+
+
+
+,
+4
+X
+k=1
+αk = 1,
+αi ≥0, 1 ≤i ≤4.
+The symmetric case (60) that emerged in the ﬁrst classiﬁcation theorem is a special case.
+The classiﬁcation Theorem 2 did not reveal a second tensor form eigenfunction. However the range of
+σ is spanned by v ⊗v and this implies that product moments, or exponential product moments for any
+β, are duality functions. We now make use of these to identify the unique invariant measure, which can
+be described rather completely.
+The evolution of the model can be visualised using the graphical construction shown in Fig. 1. This
+construction gives a successful coupling of any two initial conditions, which implies that all solutions
+are attracted to a single invariant measure (ξ∞(x) : x ∈Z). A further immediate consequence of the
+construction is that for a ﬁxed t > 0 the random vectors (ηt(k))k<x and (ηt(k))k>x are independent
+for any x ∈Z provided the initial random vectors (η0(k))k<x and (η0(k))k>x are independent. This
+property is known as one-dependency. Starting with a deterministic initial condition we deduce that
+the invariant measure is one dependent.
+Moroever, a one-dependent point process on Z is also a
+27
+
+
+===== PDF PAGE 28 =====
+
+Z
+t
+k-2
+k-1
+k
+k+1
+k+2
+1
+0
+1
+0
+1
+1
+1
+1
+1
+1
+0
+0
+0
+0
+0
+0
+Figure 1: Graphical construction of RRM: times of horizontal bars connecting vertical lines through k
+and k + 1 are a Poisson point process with unit intensity. Poisson processes corresponding to diﬀerent
+pairs of lines are independent. Each horizontal bar is labelled with (11), (10), (01), (00) with probabilities
+α1, α2, α3, α4 independently of other lines. The current state at site k at time t is given by the label at
+the last bar adjacent to k dropped before time t, or the initial condition if there is no such bar.
+determinantal point process, which follows from a general result proved in [8]. By the Theorem 7.1 of
+that paper, the corresponding determinantal kernel is expressed in terms of the probability of runs of
+occupied sites, which we now proceed to compute.
+To use the product moment function g(n)
+x1,x2,...,xn as in (38) we need the action of σ in the basis e(1)⊗e(1),
+e(1) ⊗v, v ⊗e(1), v ⊗v. The calculation is simpliﬁed since Image(σ) is spanned by v ⊗v. A direct
+computation of the relevant constants gives:
+σv ⊗v = v ⊗v,
+σe(1) ⊗e(1) = α1v ⊗v,
+(91)
+σv ⊗e(1) = (α1 + α3)v ⊗v,
+σe(1) ⊗v = (α1 + α2)v ⊗v.
+Let
+Pt(n) = E
+" n
+Y
+k=1
+ηt(k)
+#
+be the probability of ﬁnding n ≥1 particles at sites 1, 2, . . . , n at time t, and set Pt(0) = 1 for all t.
+Using (91) one ﬁnds the following evolution equation for Pt
+∂Pt
+∂t (n) = 2ρPt(n −1) + α1
+n−1
+X
+k=1
+E
+
+
+k−1
+Y
+p=1
+ηt(p)
+n
+Y
+q=k+2
+ηt(q)
+
+−(n + 1)Pt(n),
+n ≥1
+where an empty product is deﬁned to be 1, and where we introduce the following parameter
+ρ := 2α1 + α2 + α3
+2
+∈[0, 1].
+(92)
+Note that under particle-hole conjugation, ρ 7→1 −ρ. Therefore, without loss, we now take ρ ∈[0, 1/2].
+28
+
+
+===== PDF PAGE 29 =====
+
+Due to the one-dependence property established above, the random variables Qk−1
+p=1 ηt(p) and Qn
+q=k+2 ηt(q)
+are independent, which leads to the following non-linear equation for the probabilities of runs
+∂Pt
+∂t (n) = 2ρPt(n −1)+α1
+n−1
+X
+k=1
+Pt(k −1)Pt(n −k −1) −(n + 1)Pt(n),
+n ≥1, t > 0.
+(93)
+The diﬀerential-diﬀerence equation (93) can be converted to a partial diﬀerential equation using the
+generating function for the run probabilities deﬁned as
+Gt(z) =
+∞
+X
+n=0
+Pt(n)zn,
+for |z| < 1.
+(94)
+In the invariant measure Gt(z) = G∞(z) and (93) becomes
+(zG∞(z))′ = 1 + 2ρzG∞(z) + α1(zG∞(z))2,
+|z| < 1,
+G∞(0) = 1.
+(95)
+It is useful to consider the cases α1 = 0 and α1 > 0 separately. When α1 = 0 the equation (95) is linear
+and has solution
+G∞(z) =
+1
+2ρz
+ e2ρz −1
+
+=
+∞
+X
+n=0
+(2ρz)n
+(n + 1)!.
+(96)
+Therefore,
+P∞(n) =
+(2ρ)n
+(n + 1)!,
+for n ≥0.
+(97)
+In particular, the particle density in the steady state is P∞(1) = ρ. Together with the one dependence
+property, (97) determines all the correlation functions of the invariant distribution (η∞(x) : x ∈Z).
+Indeed the determinantal structure gives, for x1 < x2 < . . . < xm and m ≥1,
+P [η∞(xk) = 1, k = 1, . . . , m] = det [K(xk −xj) : j, k = 1, . . . , m] ,
+(98)
+where the translation invariant kernel K : Z →R is determined by the following inversion formula
+(Corollary 4.3 of [8])
+X
+n∈Z
+K(n)zn
+=
+−
+1
+zG∞(z)
+(99)
+=
+−
+2ρ
+e2ρz −1 = −2ρ
+∞
+X
+n=−1
+Bn+1
+(n + 1)! (2ρz)n ,
+where (Bn)n≥0 is the set of Bernoulli numbers deﬁned via the generator function
+x
+ex−1 = P∞
+n=0
+Bn
+n! xn.
+We conclude that K(n) = 2ρK(BDF )
+2ρ
+(n), n ∈Z, where K(BDF )
+a
+is the translationally invariant kernel
+for the descent process introduced by Borodin, Diaconis and Fulman in [8]:
+K(BDF )
+a
+(n) =
+(
+0,
+n ≤−2,
+−Bn+1an
+(n+1)!
+n ≥−1.
+(100)
+Note that the parameter a does not aﬀect the law of the descent process since the determinants in (98)
+do not depend on a ̸= 0 (there is a similarity transformation by a diagonal matrix with diagonal entries
+ak). We conclude that, when α1 = 0, the kernel for the reshuﬄe model can be taken to be the multiple,
+by 2ρ ∈[0, 1], of the kernel for the descent process. The point process is therefore a thinning of the
+descent process. We recall a direct construction of the descent process: let (Uk)k∈Z be the sequence of
+i.i.d. uniform random variables; the descent process can be deﬁned by
+η(BDF )
+k
+= 1 (Uk > Uk+1) ,
+k ∈Z.
+(101)
+29
+
+
+===== PDF PAGE 30 =====
+
+Correspondingly, the stationary state of the random reshuﬄe model can be generated using the usual
+thinning formula,
+η∞(k) = Zk1 (Uk > Uk+1) ,
+k ∈Z,
+(102)
+where (Zk)k∈Z is the sequence of i.i.d. Bernoulli(2ρ) random variables independent of (Uk)k∈Z,
+When α1 > 0 the equation (95) is non-linear, but it is still solvable using elementary methods: let
+r± = −ρ ±
+p
+ρ2 −α1 ∈C,
+(103)
+be the roots of the polynomial h2 + 2ρh + α1; the solution is, for small z,
+zG∞(z) =
+er−z −er+z
+r−er−z −r+er+z
+when r−̸= r+,
+(104)
+and zG∞(z) =
+x
+1+rx when r−= r+ = r. As it is easy to see, the generating function of run probabilities
+is real for real values of the argument and G(0) = 1. Notice also that for α1 > 0 the probability of a
+run of 1’s decays exponentially with run length, rather than as e−n log n in the α1 = 0 case, see (97).
+An application of the inversion formula (99) yields the corresponding determinantal kernel. For α1 ∈
+[0, ρ2] the explicit answer is
+K(n) = (ρ −
+p
+ρ2 −α1)1(n = 0) + 2
+p
+ρ2 −α1K(BDF )
+2ρ
+(n), n ∈Z.
+(105)
+To see how to construct the process (105) from the descent process deﬁne
+p := ρ −
+p
+ρ2 −α1,
+γ := 2
+p
+ρ2 −α1
+1 −p
+.
+As it is easy to check, p ∈[0, 1
+2], γ ∈[0, 1]. In terms of these parameters,
+K(n) = p1(n = 0) + (1 −p)γK(BDF )
+2ρ
+(n), n ∈Z,
+(106)
+which implies that the stationary state of the random reshuﬄe model for α1 ∈[0, ρ2] is a determinantal
+point process built as the union of a Bernoulli(p) process on Z with an independent γ-thinning of the
+descent process. More work is needed to characterise the stationary state for α1 > ρ2 when the roots
+(103) become complex.
+4.7
+Erosion models: [EM1] and [EM2]
+In both models, the only changes that occur are ﬂips 1 →0, so the models are monotone decreasing.
+The model [EM2] (72) is easiest to describe, as it is in fact a disguised formulation of a non-interacting
+model.
+Indeed a comparison of the generators shows that in this model each site x ∈Z evolves
+independently, ﬂipping from 1 →0 at rate 1. We say no more.
+The other erosion model [EM1] (71) has no second factorized eigenvector. Although there is a product
+exponential moment duality function (using w = (−1, 1)T yielding Q
+i≤n(−1)η(xi)), solving the closed
+equations for E[Q
+i≤n(−1)ηt(xi)] is not that useful since the system has a very simple probabilistic
+description. We can break the initial condition into runs of successive 1s, separated by runs of successive
+0s. Zeroes never change and the process therefore decouples into the independent evolution of the runs
+of 1s. A ﬁnite run 111 . . . 1 erodes only from the left, that is only the left most 1 changes to a 0 at rate 1,
+reducing the length. Finite runs therefore eventually disappear, whilst a run that is semi-inﬁnite on the
+right will erode from the left forever, and a run that is semi-inﬁnite on the left is a ﬁxed conﬁguration.
+Thus the only possible limit points are the zero conﬁguration, and the traps η(x) = 1(x ≤k) for k ∈Z.
+30
+
+
+===== PDF PAGE 31 =====
+
+5
+Algebra
+This Section contains a discussion of the algebraic structures appearing naturally in the context of the
+Markov processes we have studied. One aim is to examine in detail the models on a ﬁnite set of sites
+ZN = {1, 2, . . . , N}, with the corresponding generators PN−1
+i=1 qi and their corresponding ﬁnite dimen-
+sional generator algebras AN. In particular the irreducible representations of the ﬁnite dimensional
+generator algebras can sometimes be fully analysed.
+In Section 5.1 we consider the generator algebra corresponding to annihilating random walks on ZN.
+We compute exactly the dimensions of the irreducible representations of this algebra. Originally, these
+dimensions were calculated for small N using the computational algebra package ‘Magma’ [42] and
+turned out to be given by binomial coeﬃcients.
+It was this fact that motivated us to build these
+representations concretely as invariant subspaces of V ⊗N spanned by eigenvectors.
+In Section 5.2 we explore whether the size of irreducible representations can provide information on the
+solvability of the model. The existence as in Section 5.1 of ‘small’ (that is of polynomial size in N)
+irreducible representations suggests there may be tractable duality functions.
+In Section 5.3 we recall the well known fact that the duality functions can be regarded as the intertwiners
+between two representations of the generator algebra. We use this observation to construct a co-ordinate
+representation of the inﬁnite dimensional Hecke algebra in terms of the discrete Laplacians, which we
+have not seen in the literature.
+In Section 5.4 we recall the well known fact that a presentation of a Hecke algebra can be used to
+construct a solution to the Young-Baxter equation called an R-matrix. The R-matrix method is a
+cornerstone of another approach to integrable probabilistic models based on the diagonalisation of the
+transfer matrix. We give explicit examples of R-matrices for some of the reaction-diﬀusion models on
+our classiﬁcation list.
+5.1
+Duality functions and representations of the generator algebra
+The considerations below apply to any of the reaction-diﬀusion models on our list: [ACRW], [CSRWB],
+[ARWPI]. This is due to the fact that the two-site generators for each model look identical if expressed
+in the corresponding (v, w) basis.
+For concreteness we will work with annihilating random walks [ARW], perhaps the most classical of the
+models and the one we considered in greatest detail in Section 2.2 for the non-symmetric case r ̸= l. To
+avoid dealing with exceptional cases, we will not consider the totally asymmetric models and assume
+that r > 0, l > 0.
+The generator of [ARW] on ZN with free boundary conditions is mapped, as in Section 3.1, to an
+operator on V ⊗N = ⊗1≤k≤NV given by
+LN =
+N−1
+X
+k=1
+(σk −I)
+(107)
+as in (12) where σk is the two site generator σ from (11) acting on Vk ⊗Vk+1. Let AN be the generator
+algebra of the model. By deﬁnition, AN is the algebra over R generated by {σk}N−1
+k=1 .
+Simulations using Magma for small values of N suggest that the irreducible representations of LN have
+31
+
+
+===== PDF PAGE 32 =====
+
+the following dimensions
+1(2), (N −1)(2), (N −1)(N −2)
+2
+(2)
+, . . . ,
+N −1
+k
+(2)
+, . . . ,
+N −1
+N −1
+(2)
+.
+(108)
+The superscript denotes the multiplicity of the corresponding representation. As a consistency check,
+notice that
+2
+N−1
+X
+k=0
+N −1
+k
+
+= 2N = dim V ⊗N.
+Our aim is to construct these representations explicitly using the duality functions constructed in Section
+3.1. Using v = (1, 1)T and w = (1, −1)T we deﬁne the following elements of TN:
+fx1,x2 = v1 ⊗. . . ⊗vx1 ⊗wx1+1 ⊗. . . ⊗wx2 ⊗vx2+1 ⊗. . . ⊗vN,
+1 ≤x1 ≤x2 ≤N,
+(109)
+gx1,x2 = w1 ⊗. . . ⊗wx1 ⊗vx1+1 ⊗. . . ⊗vx2 ⊗wx2+1 ⊗. . . ⊗wN,
+1 ≤x1 ≤x2 ≤N.
+(110)
+Next deﬁne U (k), W (k) ⊂V ⊗N for 0 ≤k ≤N −1 as follows:
+U (2n)
+=
+SpanR
+( n
+Y
+k=1
+fx2k−1,x2k, 0 ≤x1 ≤x2 ≤. . . ≤x2n ≤N
+)
+,
+(111)
+U (2n−1)= SpanR
+(n−1
+Y
+k=1
+fx2k−1,x2kfx2n−1,N, 0 ≤x1 ≤x2 ≤. . . ≤x2n−1 ≤N
+)
+,
+(112)
+W (2n)
+=
+SpanR
+( n
+Y
+k=1
+gx2k−1,x2k, 0 ≤x1 ≤x2 ≤. . . ≤x2n ≤N
+)
+,
+(113)
+W (2n−1)= SpanR
+(n−1
+Y
+k=1
+gx2k−1,x2kgx2n−1,N, 0 ≤x1 ≤x2 ≤. . . ≤x2n−1 ≤N
+)
+,
+(114)
+where 0 ≤2n ≤N −1 or 1 ≤2n −1 ≤N −1 and the Hadamard products are used. Let us refer to the
+conﬁgurations of the form v ⊗w and w ⊗v as jumps. For example, the vector v ⊗v ⊗w ⊗w ∈V ⊗4
+has one jump, the vector v ⊗w ⊗v ⊗w ∈V ⊗4 has three jumps. Both U (k) and W (k) are spanned by
+duality functions with at most k jumps.
+As a direct consequence of our deﬁnitions,
+W (k−1), U (k−1) ⊂U (k),
+W (k−1), U (k−1) ⊂W (k),
+for 1 ≤k ≤N −1.
+Note that U, W spaces are spanned by the duality functions. Therefore, it follows from (20, 21) that
+these spaces are AN-invariant:
+ANW (k) ⊂W (k),
+ANU (k) ⊂U (k),
+for 1 ≤k ≤N −1.
+So the action of AN is well deﬁned on the quotient spaces
+P (k) = U (k)/
+
+U (k−1) + W (k−1)
+, Q(k) = Q(k)/
+
+U (k−1) + W (k−1)
+,
+namely if a ∈AN, u ∈U (k) and [u] ∈P (k) then a[u] := [au]. Moreover, due to the invariance of the
+U, W spaces, the quotient spaces are also AN-invariant:
+ANP (k) ⊂P (k),
+ANQ(k) ⊂Q(k),
+for 1 ≤k ≤N −1.
+32
+
+
+===== PDF PAGE 33 =====
+
+The quotient spaces P and Q can be explicitly constructed as follows:
+P (2n)
+=
+SpanR
+(
+[
+n
+Y
+k=1
+fx2k−1,x2k], 1 ≤x1 < x2 < . . . < x2n < N
+)
+,
+(115)
+P (2n−1)= SpanR
+(
+[
+n−1
+Y
+k=1
+fx2k−1,x2kfx2n−1,N], 1 ≤x1 <x2 <. . .<x2n−1 <N
+)
+,
+(116)
+Q(2n)
+=
+SpanR
+(
+[
+n
+Y
+k=1
+gx2k−1,x2k], 1 ≤x1 < x2 < . . . < x2n < N
+)
+,
+(117)
+Q(2n−1)= SpanR
+(
+[
+n−1
+Y
+k=1
+gx2k−1,x2kgx2n−1,N], 1 ≤x1 <x2 <. . .<x2n−1 <N
+)
+,
+(118)
+where 0 ≤2n ≤N −1 or 1 ≤2n −1 ≤N −1. In words, the elements of P (k) consist of equivalence
+classes of elements of U (k) of the form v ⊗. . . with exactly k jumps . The elements of Q(k) consist of
+equivalence classes of elements of V (k) of the form w ⊗. . . with exactly k jumps.
+Given such a characterisation, the dimensions of the (P, Q)-spaces are easy to calculate:
+dim P (k) = dim Q(k) =
+N −1
+k
+
+,
+for 0 ≤k ≤N −1.
+which coincide with (107).
+In fact, each of the invariant spaces P (n), Q(n) for 0 ≤n ≤N −1 is irreducible. In particular, V ⊗N =
+⊕N−1
+k=0
+ P (k) ⊕Q(k)
+, which is a representation of V ⊗N as the direct sum of irreducible representations
+of AN. Namely, one has the following statement:
+Proposition 7. The generator algebra AN is semi-simple. The representation of AN in P (k), Q(k) is
+irreducible for 1 ≤k ≤N −1.
+Proof. It has been already established that the generators {σk}N−1
+k=1 obey the relations (13,14,15) of
+(a specialization of) type-A Hecke algebra with the parameter Q = rl. (Various constants used to
+parameterise Hecke algebras are reviewed in the Appendix.) Therefore, AN is a quotient algebra of
+Hecke algebra. As r + l = 1, Q takes values in (0, 1
+4]. This implies that the parameter q2 ∈(0, 1], where
+q is related to Q via (215). The Hecke algebra over R generated by {si}N−1
+i=1
+with q2 ∈(0, 1] (see (211)
+for the relations) is semi-simple, see [1], Theorem 5.1.1
+Therefore, the generator algebra AN is semi-simple as a quotient of a semi-simple algebra.
+Next, let us ﬁx any n : 1 ≤n ≤N −1. It is suﬃcient to prove the irreducibility of P (n), the result
+for Q(n) follows from the symmetry v ↔w, l ↔r. The irreducibility will be established by brute force
+by checking that any representation endomorphism of P (n) is proportional to the identity operator. In
+this case, due to the semi-simplicity of the algebra AN, the converse to Schur’s lemma guarantees that
+P (n) is irreducible.
+Let U ∈End(P (n)) be a representation isomorphism, a linear map from P (n) to P (n) which commutes
+with the representation of AN in P (n). In other words,
+qxU = Uqx, 1 ≤x ≤N −1.
+(119)
+1As far as Hecke algebras are concerned, the paper [1] generalises classical results of [19] to arbitrary ﬁelds. Notice
+that there is a misprint in the cited Theorem: the correct statement is obtained by the replacing q with q2.
+33
+
+
+===== PDF PAGE 34 =====
+
+It follows from (16), that the matrices of the generators of AN in the basis (115) or (116) of P (n) have
+the following form:
+(qx)x,y =
+n
+X
+k=1
+δx,xk
+Y
+p̸=k
+δyp,xp (ℓδyk,x+1 + rδyk,x−1 −δyk,x) ,
+(120)
+1 ≤x ≤N −1, x, y ∈W (N)
+n
+.
+Here W (N)
+n
+= {1 ≤x1 < x2 < . . . xn ≤N −1} and the elements of W (N)
+n
+are denoted by vectors, e.g.
+x = (x1, x2, . . . , xn). Let (Ux,y)x,y∈W (N)
+n
+be the matrix of the linear operator U in the basis (115) or
+(116). Using the fact that [g] = 0 for any g ∈U (n−1) + W (n−1), we can extend the deﬁnition of U by
+assuming that Ux,y = 0 if either x or y is not in W (N)
+n
+. The matrix form of (119) is
+n
+X
+k=1
+δx,xk (ℓUx+Ik,y + rUx−Ik,y −Ux,y) =
+n
+X
+k=1
+Ux,y |yk=x (ℓδyk,x+1 + rδyk,x−1 −δyk,x) ,
+(121)
+where x, y ∈W (N)
+n
+and Ik is an n-dimensional vector with the components (Ik)ℓ= δk,ℓ.
+Let us pick any x ̸= xk. Then the left hand side of (121) vanishes and one ﬁnds the following relation:
+n
+X
+k=1
+Ux,y |yk=x (ℓδyk,x+1 + rδyk,x−1 −δyk,x) = 0.
+Next ﬁx m and set ym = x. The only non-zero term in the above sum corresponds to k = m as for
+k ̸= m, Ux,y |yk=x,ym=x= 0 due to y |yk=ym=x /∈W (N)
+n
+. Therefore, the last displayed equality reduces
+to Ux,y |ym=x= 0. We proved that
+Ux,y = 0,
+provided that there is m :
+1 ≤m ≤n: ym /∈{x1, x2, . . . , xn}. If such m does not exist, then the
+components of y are a permutation of the components of x. But the components of y ∈W (N)
+n
+are
+ordered, therefore the only such permutation is the identity permutation and x = y. We conclude that
+Ux,y = 0 for any x ̸= y, that is the matrix of U is diagonal. Using this diagonal Ansatz in (121), one
+ﬁnds:
+n
+X
+k=1
+δx,xk
+Y
+p̸=k
+δyp,xp (ℓδyk,xk+1 + rδyk,xk−1) Uy,y
+=
+Ux,x
+n
+X
+k=1
+δx,xk
+Y
+p̸=k
+δxp,yp (ℓδyk,xk+1 + rδyk,xk−1) .
+Equating the coeﬃcients in front of similar products of δ-functions in the above identity shows that
+Ux+Ik,x+Ik = Ux,x = Ux−Ik,x−Ik
+for 1 ≤k ≤n.
+Iterating the above identity we conclude that the diagonal matrix U is constant along the diagonal.
+Therefore, U = cI for some constant c and the proposition is proved.
+Remark. At present we do not have a full set of relations obeyed the generators {qk}N−1
+k=1 characterising
+the generator algebra AN. Basing on the dimensions of irreducible representations calculated above we
+conjecture that AN is isomorphic to the centraliser algebra EndUq(gl(1|1))(V ⊗N) analyzed in [5].
+34
+
+
+===== PDF PAGE 35 =====
+
+5.2
+On exact solvability and representation theory
+The model [ARW] on ZN in the previous Section is an example of interacting particle system where
+the generator algebra has ’small’ irreducible representations (”irreps”), growing polynomially with N,
+where these irreps can be constructed using bases of duality functions, and where these duality functions
+are suﬃcient to determine the ﬁxed time law. It is therefore natural to ask whether more generally the
+presence of ’small’ irreps of the generator algebra signals the integrability of the model. We examine
+three more models in this perspective, the ﬁnal example indicating that the presence of such small
+irreps does not seem to be suﬃcient for integrability of the model on Z. We used the symbolic algebra
+package Magma to calculate the dimensions of the irreps for small N.
+Consider the random reshuﬄe model [RM] from (60) on the ﬁnite lattice ZN. Magma experiments for
+small N suggest that all irreps of the corresponding generator algebra A are one-dimensional. This can
+be easily conﬁrmed using duality functions: the products of particle indicators constitute a complete
+set of duality functions. Indeed for b ∈{0, 1}ZN let |b|1 := PN
+k=1 bk be its Hamming weight; let mb
+be the test function on η ∈ZN deﬁned by mb(η) = Q
+k:bk=1 ηk; and let Mt(b) = E[mb(ηt)] be the
+corresponding product moment. A generator calculation shows that
+∂tMt(b) = λ(b)Mt(b) +
+X
+c∈ZN:|c|1<|b|1
+µ(b, c)Mt(c),
+(122)
+where λ and µ are functions on ZN and ZN × ZN whose explicit form we do not need. In other words,
+the product moments satisfy closed linear inhomogeneous ODE’s with the right hand side determined
+by product moments of lower weights. We now check that this structure meshes with the irreps of the
+generator algebra. For any b ∈ZN let
+gb := a1 ⊗a2 ⊗. . . ⊗aN ∈V ⊗N,
+where ai = (1, 1)T if bi = 0 and ai = (1, 0)T if bi = 1. Then gb is the image of the duality function mb
+under the isomorphism between test functions and V ⊗N (as in Section 2.1 but restricted to N sites).
+Deﬁne Bb ⊂ZN to be the set of binary strings which contains contains b as well as all the strings c
+such that ck ≤bk for 1 ≤k ≤N. Let Bb := Bb \ {b}. Deﬁne
+W b := SpanR{mc : c ∈Bb},
+Wb := SpanR{mc : c ∈Bb},
+for b ∈ZN.
+It follows from (122) that the spaces Wb and W b are invariant with respect to the action of the generator
+algebra. By construction, Wb ⊂W b. So the generator algebra acts on the quotient space Pb := W b/Wb
+for b ∈ZN and dim Pb = 1. Thus we have constructed 2N one-dimensional irreps of the random reshuﬄe
+algebra using the duality functions.
+An example coming from the opposite end of the spectrum is served by the contact process deﬁned by
+the two-site generator of the form
+q = σ −I =
+
+
+
+
+−2a
+a
+a
+0
+b
+−a −b
+0
+a
+b
+0
+−a −b
+a
+0
+0
+0
+0
+
+
+
+.
+Here a is the recovery rate and b is the infection rate. The contact process is self dual, and the duality
+functions, indexed by subsets of Z, have been used for studying various properties (such as ergodic
+behaviour). However, the contact process is not expected to be integrable and we are not aware of a
+system of duality functions leading to explicit formulae. This lack of the integrability seems to mesh well
+with the irreps of the contact process: Magma experiments for small N suggest that its generator algebra
+has just two irreps in V ⊗N, the trivial one-dimensional representation and a second representation of
+dimension 2N −1. We expect a similar picture to be the generic situation for a typical stochastic σ.
+35
+
+
+===== PDF PAGE 36 =====
+
+Our ﬁnal example illustrates that the presence of small irreps does always lead to useful duality functions.
+Note that the generator algebra of any interacting particle system on ZN such that the number of
+particle is either conserved of decreases has irreps of dimensions growing polynomially with system size,
+corresponding to the subspaces of any given number of particles. However, we do not expect all such
+systems to be integrable. For example the dimer model [DM] can be mapped to an inhomogeneous
+symmetric exclusion model (see Section 4.5) where particle numbers are conserved. It is not surprising
+then that MAGMA shows irreps of polynomial size. However, the only duality functions we managed
+to ﬁnd for this model are given by the indicators fb(η) = 1(η = b) for b ∈{0, 1}ZN . The expectations
+of fb(ηt)’s are just the transition probabilities. These do obey closed dual equations (the Kolmogorov
+equation), but become trivial in N →∞limit corresponding to the inﬁnite model. Indeed, for a system
+with inﬁnitely many particles the transition density E[fb(ηt)] is identically zero for any realisation b
+with inﬁnitely many particles. We do not know how to characterise the distribution of the inﬁnite
+dimer model. In comparison, for [ASEP], where particle numbers are also preserved, there was an
+alternative useful set of duality functions, the staircase functions, that did extend usefully to (some)
+inﬁnite systems.
+5.3
+Co-ordinate representation of a Hecke algebra
+The duality functions studied above have two important properties: ﬁrstly, they appear as a basis of
+T(Ω), for which the matrices of the two-site generators σn, n ∈Z are block lower-triangular. Sec-
+ondly, the action of the generator on these functions is modelled by certain diﬀerence operators act-
+ing on the spatial arguments. This second property is important from the point of view of Markov
+duality.
+More pragmatically, as a consequence of the second property the expectations of duality
+functions Eη0[f (n)
+x1,x2,...,xn(ηt))] satisfy linear evolution equations with respect to independent variables
+t ∈R+, x1, . . . xn ∈Z. For example, for the reaction-diﬀusion models on Z it is easy to guess the
+solution to these equations in terms of Pfaﬃans built out of Eη0[f (2)
+x,y(ηt)], x, y ∈Z. If however we place
+our particle system on a circle ZN for some N < ∞rather than the integer lattice, the naive Pfaﬃan
+ansatz fails. It is still unknown what the law of our reaction-diﬀusion systems on a circle is, so it is
+reasonable to hope that an algebraic structure of the evolution operator will be useful for determining
+such a law. An algebraic interpretation of the duality functions for models in Hecke class is that of
+intertwiners between two representations of Hecke algebra: in the space T(Ω) of test functions and the
+space of functions of several spatial variables. This implies that the relevant evolution operators belong
+to (a closure of) a representation of Hecke algebra, which in turn could enable a systematic search for a
+basis diagonalizing the evolution operators using the corresponding representation theory. Notice, that
+the role of Markov duality functions as intertwiners has already been emphasized by many authors, see
+for example [18].
+Our aim here is modest: we will just build an explicit co-ordinate representation of Hecke algebras
+intertwined with the representation in T(Ω) we started with. This representation seems to be diﬀerent
+from other known representation of Hecke generators using diﬀerence operators, e. g. the polynomial
+representation used to construct dualities for multi-species asymmetric exclusion models in [12]. The
+study of its properties and applications to interacting particle systems is a matter for future research.
+Let us start with the most basic deﬁnition: let π1, π2 be two linear representations of an associative
+algebra A in linear spaces V1, V2 correspondingly. A linear map U : V1 →V2 is said to intertwine π1
+with π2 if for any a ∈A,
+U ◦π1(a) = π2(a) ◦U.
+(123)
+In other words, the diagram shown in Figure 5.3 is commutative. Assume that V1, V2 are L2 spaces
+of functions on some spaces Ω1, Ω2 parametrised by co-ordinates x and η correspondingly. Then the
+36
+
+
+===== PDF PAGE 37 =====
+
+U
+π1(a)
+π2(a)
+U
+V1
+V1
+V2
+V2
+Figure 2: If the diagram above is commutative, the map U : V1 →V2 is called an intertwiner.
+relation (123) takes the form
+π2(a)U(η, x) = (π1(a))†U(η, x), ∀x ∈Ω1, η ∈Ω2.
+(124)
+where U(η, x) is the kernel of the map U : V1 →V2 in the chosen basis, the operator π1(a) acts on the
+x co-ordinates of U(η, x), the operator π2(a) - on the η co-ordinates. The adjoint operator (π1(a))† is
+deﬁned with respect to the L2 inner product on V1.
+There is a useful application of (123) provided the intertwiner U satisﬁes some non-degeneracy con-
+ditions.
+Let {a1, a2, . . . , an} ⊂End(V2).
+Suppose that operators a satisfy a polynomial relation
+R(a1, a2, . . . , an) = 0. Assume that {ˆa1, ˆa2, . . . , ˆan} ⊂End(V1) are such that
+akU(η, x) = ˆa†
+kU(η, x), k = 1, 2, . . . , n.
+Finally, suppose that the set {U(η, ·)}η∈Ω2 spans V1. Then R(ˆa1, ˆa2, . . . , ˆan) = 0. In other words, the
+set of relations satisﬁed by operators {ak}n
+k=1 is a subset of relations satsﬁed by the operators {ˆak}n
+k=1.
+Using the above elementary algebraic preliminaries it is easy to prove the following statement:
+Lemma 8. Let L2(Z) be the space of square summable functions on Z. Deﬁne the following set of
+linear operators on L2(Z):
+ˆqx = 1x∆, x ∈Z,
+(125)
+where ∆= rD + lD−1 −1 is the discrete Laplacian.
+Then {ˆqx}x∈Z generate a representation of
+Temperley-Lieb algebra,
+
+
+
+ˆqiˆqj = ˆqj ˆqi,
+|i −j| ≥2, i, j ∈Z
+ˆqiˆqi±1ˆqi −Qˆqi = 0,
+i ∈Z
+ˆq2
+i = −ˆqi,
+i ∈Z
+,
+(126)
+where Q = rl.
+A multi-dimensional generalisation is as follows. Let W n = {z1 < z2 < . . . < zn : zk ∈Z, 1 ≤k ≤n}.
+Let L2(W n) be the space of square-summable functions on W n subject to the following boundary
+conditions: if f ∈L2(W n), then
+Dyf(·, . . . , ·, yi = y, yi+1 = y, ·, . . . , ·) = 0.
+(127)
+In other words, the function f |yi=yi+1=y does not depend on y. Then
+37
+
+
+===== PDF PAGE 38 =====
+
+Lemma 9. The following operators acting on L2(W n), n ≥1, generate a representation of Hecke
+algebra H∞deﬁned in the Appendix:
+ˆqx =
+n
+X
+k=1
+1(k)
+x ∆k, x ∈Z,
+(128)
+where ∆k is the discrete Laplacian acting on the k-th co-ordinate of a function on L2(W n); if y =
+(y1, y2, . . . , yn) ∈W n, then 1(k)
+x (y) = 1x(yk). Namely,
+
+
+
+ˆqiˆqj = ˆqj ˆqi,
+|i −j| ≥2, i, j ∈Z
+ˆqiˆqi+1ˆqi −Qˆqi = ˆqi+1ˆqiˆqi+1 −Qˆqi+1,
+i ∈Z
+ˆq2
+i = −ˆqi,
+i ∈Z
+,
+(129)
+where Q = rl.
+The proof of the above lemmas is a straightforward exercise given the following remarks:
+1. Let f : Ω× Z →R: (η, x) 7→fx(η) = (−1)
+P
+i≤x ηi.
+2
+Then it follows from (16), (18) that
+qyfx(η) = ˆq†
+yfx(η), for all y ∈Z, (η, x) ∈Ω× Z where ˆq†
+x = 1x∆.
+2. L2(Z) is in the span of {f·(η)}η∈Ω:
+let ηy = (. . . , ηy−3, ηy−2, ηy−1, ηy, 0, 0 . . .) and η′
+y = (. . . , ηy−3, ηy−2, 1−ηy−1, 1−ηy, 0, 0 . . .). Then
+fx(ηy) −fx(η′
+y) = ±21y−1(x),
+for x ∈Z.
+3. So the algebraic argument given above implies that the operators {ˆq}x∈Z satisfy the relations of
+Hecke algebra. The fact that each side of the ternary relation is zero can be conﬁrmed using an
+exact computation. Finally, the relations of both Hecke and Temperley-Lieb algebras are invariant
+with respect to conjugation and the statement of Lemma 8 follows.
+4. The statement of Lemma 9 can be conﬁrmed using a similar argument. The claim can be veriﬁed
+also by a direct computation based on the fact that the operators ˆq(k)
+x
+:= 1(k)
+x ∆k, x ∈Z, 1 ≤k ≤n
+satisfy Temperley-Lieb relations (126) for coinciding values of the superscript. For diﬀerent values
+of the superscript, the operators commute and moreover ˆq(k1)
+x1
+ˆq(k2)
+x2
+= 0 for k1 > k2, x1 ≤x2. The
+conﬁrmation of the last statement requires an application of the boundary conditions.
+5.4
+Baxterisation and R-matrices with non-conserved particle number
+Given a representation of Hecke algebra, one can generate solutions to the Young-Baxter equation
+(YBE) via the so called ‘Baxterisation’ procedure discovered in [23]. Here we will use Baxterisation
+simply to write down explicit solutions to YBE which are associated with reaction-diﬀusion systems.
+These processes do not preserve the number of particles. As a result, the corresponding solutions to
+YBE, the so-called R-matrices, are quite distinct from the R-matrices associated with models in KPZ
+universality class such as [ASEP]. The purpose of the present Section is to list the R-matrices for
+reaction-diﬀusion systems explicitly.
+First, let us review the procedure following the conventions of [21], [36], see the Appendix for more
+details. Recall that the braid group BM+1 is generated by elements {si}M
+i=1 subject to the relations
+sisi+1si = si+1sisi+1, 1 ≤i ≤M −1
+sisj = sjsi, |i −j| > 1, 1 ≤i, j ≤M .
+(130)
+2For simplicity we assume for this Section that the elements of Ωhave ﬁnite Hamming weight, which makes f well
+deﬁned.
+38
+
+
+===== PDF PAGE 39 =====
+
+The type-A Hecke algebra is the quotient of the group algebra of BM+1 by the Hecke relation:
+s2
+i = 1 + (q −q−1)si, 1 ≤i ≤M, q ∈C \ 0.
+(131)
+(For applications to the interacting particle systems we are dealing with it is enough to assume that q
+is a positive integer between 0 and 1, see the Appendix.) We have the following claim:
+Theorem 10. (V. Jones, 1990) Let
+Rn(x) := sn −xs−1
+n , 1 ≤n ≤M.
+(132)
+where x ∈C is a spectral parameter. Then
+Rn(x)Rn−1(xy)Rn(y) = Rn−1(y)Rn(xy)Rn−1(x), 2 ≤n ≤M, x, y ∈C.
+(133)
+In other words, Rn(x)’s solve the Yang-Baxter equation.
+The proof of this statement is just a computation based on (130), which is assisted by the following
+explicit formula for the inverse of the generators:
+s−1
+n
+= −(q −q−1) + sn, 1 ≤n ≤M.
+(134)
+Remark. Let Rn(u, v) = Rn
+  u
+v
+
+, y ̸= 0. Then
+Rn(u, v)Rn−1(u, z)Rn(v, z) = Rn−1(v, z)Rn(u, z)Rn−1(u, v), 2 ≤n ≤M, u, v, z ∈C \ 0,
+a more familiar form of Yang-Baxter equation.
+Working with particle systems it is more natural to use the stochastic generators {σn}n∈Z satisfy-
+ing (213). The relation between {sn}n∈Z and {σn}n∈Z is given in (212). The relation between the
+parameters q and Q entering the quadratic relations for the generators si’s and qi’s correspondingly is
+given by (215) Combining (132),(134) with (212) we obtian a solution of Yang-Baxter equation in terms
+of idempotent generators:
+Rn(x) = q −q−1x −(1 −x)(q + q−1)σn, n ∈Z, x ∈C.
+(135)
+It is possible to extend the above solution to the totally asymmetric case Q = 0.
+Formally, this
+corresponds to redeﬁning Rn →q−1Rn and taking the limit q →0 in (135), which gives
+Rn(x) = −x −(1 −x)σn, n ∈Z, x ∈C,
+(136)
+A direct check based on (214) with Q = 0 shows that (136) does indeed solve the Yang-Baxter equation.
+5.4.1
+Q = 1
+4: [BVM], [SAVM], [ACSRW] and [SEP]
+For Q = 1
+4, q = q−1 = 1 and
+Rn(x) = (1 −x)(1 −2σn) = (1 −x)sn,
+where the second equality uses (212). This is a trivial case of Baxterisation: if {sn}n∈Z satisfy the braid
+relation, then Rn(x) = f(x)sn, n ∈Z, x ∈C satisﬁes the YBE for any function f : Z →R.
+39
+
+
+===== PDF PAGE 40 =====
+
+5.4.2
+[CSRWB]
+For coalescing-branching random walks, Q = θ(1 −θ), where θ ∈[0, 1
+2]. First, consider θ > 0. Then
+Q > 0 and the formula (135) applies. Expressing the answer in terms of q we ﬁnd:
+R(x) =
+
+
+
+
+q−1 + x(q −2q−1)
+−(1 −x)q−1
+−(1 −x)q−1
+0
+−(1 −x)(q −q−1)
+q −q−1
+−(1 −x)q−1
+0
+−(1 −x)(q −q−1)
+−(1 −x)q−1
+q −q−1
+0
+0
+0
+0
+−q−1 + qx
+
+
+
+,
+(137)
+where x ∈C, q ̸= 0.
+If θ = 0, then Q = 0 is given by and we need to use (136). Thus we get an R-matrix associated with
+pure branching model:
+R(x) =
+
+
+
+
+1 −2x
+−(1 −x)
+−(1 −x)
+0
+(1 −x)
+−1
+−(1 −x)
+0
+(1 −x)
+−(1 −x)
+−1
+0
+0
+0
+0
+−1
+
+
+
+,
+(138)
+where x ∈C.
+5.4.3
+[ASRWPI]
+For annihilating random walks with pairwise immigration, Q = θ2, θ ∈[0, 1
+2]. If θ > 0, we can use (135)
+to ﬁnd that
+R(x) =
+
+
+
+
+
+
+−(1 −x) + (1 + x) q−q−1
+2
+0
+0
+(1 −x)
+
+1 −q+q−1
+2
+
+0
+(1 + x) q−q−1
+2
+−(1 −x) q+q−1
+2
+0
+0
+−(1 −x) q+q−1
+2
+(1 + x) q−q−1
+2
+0
+−(1 −x)
+
+1 + q+q−1
+2
+
+0
+0
+(1 −x) + (1 + x) q−q−1
+2
+
+
+
+
+
+
+,(139)
+x ∈C. The R-matrix for θ = 0 (pure pairwise immigration) can be computed using (136). The answer
+is
+R(x) =
+
+
+
+
+−1+x
+2
+0
+0
+−1−x
+2
+0
+−1+x
+2
+−1−x
+2
+0
+0
+−1−x
+2
+−1+x
+2
+0
+−1−x
+2
+0
+0
+−1+x
+2
+
+
+
+,
+(140)
+x ∈C
+6
+Linear Algebra Proofs
+We start be conﬁrming the claim in (48) that the only rank one σ where σ2 = σ, the deformed braid
+relation (13) holds for {σn}, and satisfying the stochasticity conditions (that the oﬀdiagonal entries of
+σ are non-negative and that row sums equal 1) is the particular case of the reshuﬄe model stated.
+We start with a general rank 1 matrix with the known eigenvector σ = (1, 1, 1, 1)T (a1, a2, a3, a4). We
+require a1 + a2 + a3 + a4 = 1 and ai ≥0 for i = 1, .., 4 for stochasticity, and this already ensures that
+40
+
+
+===== PDF PAGE 41 =====
+
+σ2 = σ. We set a4 = 1 −a1 −a2 −a3 and substitute this form into the 8 × 8 matrix
+M = (σnσn+1σn −Qσn) −(σn+1σnσn+1 −Qσn+1) .
+We require M = 0 for the deformed braid relation to hold.
+We ﬁnd M1,1 = −a1(a2 −a3).
+Thus
+either (i) a1 = 0 or (ii) a2 = a3. In case (i) we ﬁnd M5,2 = −a2
+2, implying that a2 = 0, and then
+M1,8 = a3(a3 −1) showing that a3 ∈{0, 1}; a direct check shows that the choice a3 = 1 does not yield
+M = 0 whereas a3 = 0 yields a solution M = 0 (corresponding to t = 0 in (48)). In the second case
+(ii) we may now assume a1 > 0 as well as a2 = a3. Then M7,1 = −a1Q implying that Q = 0. Then
+M1,2 = a1 −(a1 + a3)2. This vanishes precisely along the described family a1 = t2, a2 = a3 = t(1 −t)
+for t ∈[0, 1], and with this choice we ﬁnd that M = 0.
+This exhaustive search gives a ﬂavour of how we establish the second classiﬁcation Theorem 6. The
+ﬁrst classiﬁcation Theorem 2 follows the more geometric line of reasoning in Lemmas 4 and 5.
+6.1
+Proof of Lemma 4.
+Denote v =
+
+1
+1
+
+and w =
+
+1
+−1
+
+, which form an orthogonal basis of V . From these we construct an
+orthonormal basis of V ⊗V consisting of eigenvectors of the inversion ρ:
+e1 = 1
+2v ⊗v,
+e2 = 1
+2w ⊗w,
+e3 =
+1
+2
+√
+2(v ⊗w + w ⊗v),
+e4 =
+1
+2
+√
+2(v ⊗w −w ⊗v).
+(141)
+The vectors e1, e2, e3 span a subspace of V × V consisting of eigenvectors of ρ with eigenvalue 1; e4
+spans a one-dimensional eigenspace of ρ corresponding to eigenvalue −1.
+Recall that σρ = ρσ. If u ∈V is an eigenvector of ρ with eigenvalue λ, then σu is also an eigenvector
+of ρ with the same eigenvalue, provided σu ̸= 0. Therefore,
+σe4 = γe4, for some γ ∈R and σei ∈Span(e1, e2, e3) for i = 1, 2, 3.
+In the basis {e1, e2, e3, e4}, the matrix of σ becomes, written in block form,
+σ =
+σ3
+03
+0T
+3
+γ
+
+(142)
+where σ3 is some 3 × 3 matrix and 03 is the 3 × 1 zero vector. Since σ2 = σ we must have σ2
+3 = σ3 and
+γ2 = γ, the latter implying that γ ∈{0, 1}.
+The stochastic constraint that row sums equal 1 implies σe1 = e1. Therefore, in the basis {e1, e2, e3},
+σ3 =
+ 1
+cT
+02
+σ2
+
+(143)
+with σ2 is a 2 × 2 matrix and c is a 2 × 1 vector which must satisfy, in order that σ2
+3 = σ3,
+σ2
+2 = σ2,
+and
+cT σ2 = 0T
+2
+(144)
+where 02 denotes the 2 × 1 zero vector.
+To further analyse the entries in σ2, we make use of the Pauli basis {I, s1, s2, s3, s4} for the space of
+2 × 2 real matrices:
+I =
+
+1
+0
+0
+1
+
+,
+s1 =
+
+0
+1
+1
+0
+
+,
+s2 =
+
+0
+1
+−1
+0
+
+,
+s3 =
+
+1
+0
+0
+−1
+
+.
+41
+
+
+===== PDF PAGE 42 =====
+
+Recall the anti-commutation relations obeyed by Pauli matrices:
+{si, sj} := sisj + sjsi = (−1)i+1 2 δij I,
+for 1 ≤i, j ≤3.
+(145)
+Let us expand σ2 in the Pauli basis:
+σ2 = α0I +
+3
+X
+i=1
+αisi,
+where αj ∈R for 0 ≤j ≤3.
+(146)
+In terms of the expansion coeﬃcients, the condition σ2
+2 = σ2 takes the form
+α2
+0 +
+3
+X
+i=1
+(−1)i+1α2
+i = α0,
+(147)
+(2α0 −1)αi = 0
+for i = 1, 2, 3.
+(148)
+The simple derivation of this is based on (145). Equation (148) implies that α0 = 1
+2 or α1 = α2 = α3 = 0.
+For the former choice (147) reduces to P3
+i=1(−1)1+iα2
+i = 1
+4, for the latter choice to α0 ∈{0, 1}. To
+summarise, there are three possible classes of solutions to σ2
+2 = σ2:
+{A} = {α1 = α2 = α3 = 0, α0 = 1},
+{B} = {α1 = α2 = α3 = 0, α0 = 0},
+{C} = {α2
+1 −α2
+2 + α2
+3 = 1/4, α0 = 1/2}.
+We will now analyse the existence of factorised eigenvectors for each of the cases at hand.
+{A} = {α1 = α2 = α3 = 0, α0 = 1}.
+In this case (146) gives σ2 = I and then (144) implies that
+c = (0, 0)T . From (143) and (142) we have that, in the basis {e1, e2, e3, e4},
+σ =
+
+
+
+
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+γ
+
+
+
+,
+for γ ∈{0, 1}.
+Therefore σw ⊗w = w ⊗w and the existence of a suitable factorised eigenvector is proved.
+{B} = {α1 = α2 = α3 = 0, α0 = 0}. In this case (146) gives σ2 = 0 and then (144) gives no constraints
+on c. From (143) and (142) we have that, in the basis {e1, e2, e3, e4},
+σ =
+
+
+
+
+1
+c1
+c2
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+γ
+
+
+
+,
+for c1, c2, ∈R, γ ∈{0, 1}.
+(149)
+We now check for the existence of a second eigenvector in factorised form, which without loss of generality
+must be of the form
+(w + β
+√
+2v) ⊗(w + β
+√
+2v) = β2e1 + 2e2 + 2βe3
+for some β ∈R.
+(150)
+Acting σ from (149) on the vector (β2, 2, 2β, 0)T shows that the second factorised eigenvector does not
+exist.
+It remains to examine which operators of the form (149) in the basis {e1, e2, e3, e4} satisfy the stochas-
+ticity conditions. These conditions are for the matrix in the standard basis, and to ﬁnd expression for
+42
+
+
+===== PDF PAGE 43 =====
+
+σ in the stochastic basis we need to conjugate the above matrix (149) by the orthogonal transformation
+O =
+
+
+
+
+
+1
+2
+1
+2
+1
+√
+2
+0
+1
+2
+−1
+2
+0
+−1
+√
+2
+1
+2
+−1
+2
+0
+1
+√
+2
+1
+2
+1
+2
+−1
+√
+2
+0
+
+
+
+
+.
+(151)
+The form of σ in the standard basis becomes
+σ =
+
+
+
+
+
+1
+4 + c1
+4 +
+c2
+2
+√
+2
+1
+4 −c1
+4
+1
+4 −c1
+4
+1
+4 + c1
+4 −
+c2
+2
+√
+2
+1
+4 + c1
+4 +
+c2
+2
+√
+2
+1
+4 −c1
+4 + γ
+2
+1
+4 −c1
+4 −γ
+2
+1
+4 + c1
+4 −
+c2
+2
+√
+2
+1
+4 + c1
+4 +
+c2
+2
+√
+2
+1
+4 −c1
+4 −γ
+2
+1
+4 −c1
+4 + γ
+2
+1
+4 + c1
+4 −
+c2
+2
+√
+2
+1
+4 + c1
+4 +
+c2
+2
+√
+2
+1
+4 −c1
+4
+1
+4 −c1
+4
+1
+4 + c1
+4 −
+c2
+2
+√
+2
+
+
+
+
+.
+(152)
+The positivity of the non-diagonal elements leads to the following inequalities for the parameters of σ:
+1 −c1 ≥0,
+1 + c1 −
+√
+2c2 ≥0,
+1 + c1 +
+√
+2c2 ≥0,
+1 −c1 −2γ ≥0.
+We consider the solutions for the two allowed values γ ∈{0, 1}.
+When γ = 1, the sum of the second and the third of the above inequalities gives 1+c1 ≥0, whereas the
+fourth inequality is −1 −c1 ≥0. Therefore c1 = −1, and the second and the third inequalities together
+give c2 = 0. These values lead to σ being the symmetric anti-voter model [SAVM] in (54).
+When γ = all rows in (152) are identical. We re-parametrise as θ1 = 1
+4 + c1
+4 +
+c2
+2
+√
+2, θ2 = 1
+4 −c1
+4 and
+θ3 = 1
+4 + c1
+4 −
+c2
+2
+√
+2 = 1 −θ1 −2θ2, whereupon the inequalities become θi ≥0 for i = 1, 2, 3, and we have
+arrived at the random reshuﬄe model [RM] in (60).
+{C} = {α2
+1 −α2
+2 + α2
+3 = 1
+4, α0 = 1
+2}. Note that set of solutions to
+α2
+1 −α2
+2 + α2
+3 = 1
+4
+(153)
+is not empty and can be parameterised as follows:
+α1 = 1
+2 cosh(φ) cos(ψ), α3 = 1
+2 cosh(φ) sin(ψ), α2 = 1
+2 sinh(φ), φ ∈R, ψ ∈[0, 2π).
+From (143) and (142) we have that, in the basis {e1, e2, e3, e4},
+σ =
+
+
+
+
+1
+c1
+c2
+0
+0
+1
+2 + α3
+α1 + α2
+0
+0
+α1 −α2
+1
+2 −α3
+0
+0
+0
+0
+γ
+
+
+
+,
+(154)
+where the parameters α satisfy equation (153), γ ∈{0, 1}, and (c1, c2) ∈R2 satisﬁes
+(c1, c2)
+
+1
+2 + α3
+α1 + α2
+α1 −α2
+1
+2 −α3
+
+= (0, 0).
+(155)
+The determinant of σ2, the matrix for (155), is zero due to (153). On the other hand, the matrix is
+not identically zero for any α1, α2, α3 ∈R. Therefore, the set of solutions to (155) is a one-dimensional
+subspace of R2.
+We again look for a factorised eigenvector in the form (150).
+Acting σ from (154) on the vector
+(β2, 2, 2β, 0)T we ﬁnd that
+
+w +
+β
+√
+2v
+
+⊗
+
+w +
+β
+√
+2v
+
+being an eigenvector is equivalent to the following
+43
+
+
+===== PDF PAGE 44 =====
+
+three conditions:
+0
+=
+c1 + βc2,
+(156)
+0
+=
+−
+1
+2 −α3
+
++ (α1 + α2)β,
+(157)
+0
+=
+(α1 −α2) −
+1
+2 + α3
+
+β.
+(158)
+The existence of β solving the overdetermined system (156)-(158) depends on the choice of α’s. We
+break the logic into three subcases C(i), C(ii), C(iii).
+{C1} = {C} ∩{α3 ̸= −1
+2}. In this case, we start by solving (155) to ﬁnd that
+(c1, c2) = K (−(α1 −α2), 1
+2 + α3)
+for some K ∈R.
+Equation (156) becomes a consequence of (158). The latter is solved by
+β = α1 −α2
+  1
+2 + α3
+
+Substituting the solution into (157) we ﬁnd that it is satisﬁed due to condition (153). The existence of
+a factorised eigenvector is established.
+When α3 = 1
+2 then (153) implies that α1 = ±α2, leading two the last two subcases.
+{C2} = {C} ∩{α3 = −1
+2, α1 = α2 = µ ̸= 0}. Solving (155) we ﬁnd
+(c1, c2) = K (1, −2µ),
+for some K ∈R.
+Equations (156)-(158) become the three equations
+K(1 −2µβ) = 0,
+−1 + 2µβ = 0,
+0 = 0.
+These are solved, for any value of K, by taking β =
+1
+2µ, yielding a factorised eigenvector.
+{C3} = {C} ∩{α3 = −1
+2, α1 = −α2 = µ}. In this case there is no second factorised eigenvector, for
+example since (157) can have no solution. It remains to identify the set of σ that correspond to the
+present choice of parameters. Solving (155) we ﬁnd (c1, c2) = K(1, 0) for K ∈R. Then (143) and (142)
+yield
+σ =
+
+
+
+
+1
+K
+0
+0
+0
+0
+0
+0
+0
+2µ
+1
+0
+0
+0
+0
+γ
+
+
+
+
+for some µ, K ∈R, γ ∈{0, 1}.
+(159)
+We conjugate by (151) to ﬁnd the following expression for σ in the standard basis:
+σ =
+
+
+
+
+3
+4 + K
+4 +
+µ
+√
+2
+1
+4 −K
+4 −
+µ
+√
+2
+1
+4 −K
+4 −
+µ
+√
+2
+−1
+4 + K
+4 +
+µ
+√
+2
+1
+4 + K
+4
+1
+4 −K
+4 + γ
+2
+1
+4 −K
+4 −γ
+2
+1
+4 + K
+4
+1
+4 + K
+4
+1
+4 −K
+4 −γ
+2
+1
+4 −K
+4 + γ
+2
+1
+4 + K
+4
+−1
+4 + K
+4 −
+µ
+√
+2
+1
+4 −K
+4 +
+µ
+√
+2
+1
+4 −K
+4 +
+µ
+√
+2
+3
+4 + K
+4 −
+µ
+√
+2
+
+
+
+
+for µ, K ∈R, γ ∈{0, 1}.
+The stochasticity conditions, that the oﬀdiagonal entries are non-negative, are equivalent to that
+parameters K, µ and γ satisfying six inequalities:
+1
+4 + K
+4 ≥0,
+1
+4 −K
+4 −γ
+2 ≥0,
+−1
+4 + K
+4 −
+µ
+√
+2 ≥0,
+1
+4 −K
+4 −
+µ
+√
+2 ≥0,
+1
+4 −K
+4 +
+µ
+√
+2 ≥0,
+−1
+4 + K
+4 +
+µ
+√
+2 ≥0.
+44
+
+
+===== PDF PAGE 45 =====
+
+Adding the third and the sixth inequalities we ﬁnd −1+K ≥0; adding the fourth and ﬁfth inequalities
+we ﬁnd 1 −K ≥0; therefore K = 1. The second inequality reduces to −γ ≥0, but since γ ∈{0, 1}
+we can conclude that γ = 0. The fourth and ﬁfth inequalities reduce to the pair µ ≥0, µ ≤0 so that
+µ = 0. For the choices K = 1, γ = 0, µ = 0 all inequalities are satisﬁed and the resulting unique σ for
+this subcase is the symmetric version of the biased voter model [BVM] from (53).
+6.2
+Proof of Lemma 5
+Our starting point is the most general 4 × 4 stochastic matrix (in the standard basis):
+σ =
+
+
+
+
+1 −a2 −a3 −a4
+a2
+a3
+a4
+b1
+1 −b1 −b3 −b4
+b3
+b4
+c1
+c2
+1 −c1 −c2 −c4
+c4
+d1
+d2
+d3
+1 −d1 −d2 −d3
+
+
+
+
+(160)
+where all oﬀ-diagonal entries are real non-negative numbers.
+As the vectors v and w are linearly independent, we have V ⊗V = Span(v ⊗v, w ⊗w, v ⊗w, w ⊗v).
+Therefore, there exist α, β, γ, δ ∈R:
+σv ⊗w = αv ⊗v + βw ⊗w + γv ⊗w + δw ⊗v.
+(161)
+Consequently, using σρ = ρσ,
+σw ⊗v = ρσ(v ⊗w) = αv ⊗v + βw ⊗w + γw ⊗v + δv ⊗w.
+(162)
+The condition σ2 = σ expressed in terms of the coeﬃcients α, β, γ, δ reads
+α(γ + δ) = 0,
+(163)
+β(γ + δ) = 0,
+(164)
+γ2 + δ2 = γ,
+(165)
+(2γ −1)δ = 0.
+(166)
+It follows from (166) that γ = 1
+2 or δ = 0. If δ = 0, equation (165) gives γ = 0 or γ = 1. In former case,
+equations (163, 164) are satisﬁed for any α, β ∈R; in the latter case, equations (163, 164) imply that
+α = β = 0. If γ = 1/2, then equation (165) gives δ = 1
+2 or δ = −1
+2. If γ = δ = 1
+2, equations (163, 164)
+yield α = β = 0. If γ = −δ = 1
+2, equations (163, 164) are satisﬁed for any α, β ∈R. Therefore, we have
+four cases to consider which we label as A, B, C, D below.
+{A} = {δ = 0, γ = 1, α = β = 0}. In this case (161) and (162) show that σ acts as the identity and
+does not enter our classiﬁcation which is for non-trivial σ ̸= I.
+{B} = {δ = 0, γ = 0, α, β ∈R}. The action of σ on V ⊗V is fully determined by σv ⊗v = v ⊗v,
+σw ⊗w = w ⊗w, and, from (161) and (162), σv ⊗w = αv ⊗v + βw ⊗w, σw ⊗v = αv ⊗v + βw ⊗w.
+A more symmetric form for the action is
+σv ⊗v
+=
+v ⊗v,
+(167)
+σw ⊗w
+=
+w ⊗w,
+(168)
+σ(v ⊗w −w ⊗v)
+=
+0,
+(169)
+σ (v ⊗w + w ⊗v)
+2
+=
+αv ⊗v + βw ⊗w.
+(170)
+Write w = (w1 w2)T , where w1 ̸= w2 so that w is independent of v. There are two subcases, w1 = 0
+and w1 ̸= 0. Be redeﬁning the coeﬃcients α and β we can set w2 = 1 in the former case and w1 = 1 in
+45
+
+
+===== PDF PAGE 46 =====
+
+the latter.
+{B1} = {B} ∩{w1 = 0, w2 = 1}. In this case,
+v ⊗v =
+
+
+
+
+1
+1
+1
+1
+
+
+
+,
+w ⊗w =
+
+
+
+
+0
+0
+0
+1
+
+
+
+,
+(v ⊗w + w ⊗v)
+2
+=
+
+
+
+
+0
+1
+21
+2
+1
+
+
+
+,
+v ⊗w −w ⊗v =
+
+
+
+
+0
+1
+−1
+0
+
+
+
+.
+For our form (160) the ﬁrst part (167) of the action always holds true as rows sums equal 1. Substituting
+(160) in (168) we ﬁnd a4 = 0, b4 = 0, c4 = 0, d1 +d2 +d3 = 0 Due to positivity the last condition implies
+that d1 = d2 = d3 = 0. Then, equation (169) leads to a2 −a3 = 0, 1 −b1 −2b3 = 0, 1 −c1 −2c2 = 0.
+After these identiﬁcations the stochastic matrix takes the form
+σ =
+
+
+
+
+1 −2a
+a
+a
+0
+1 −2b
+b
+b
+0
+1 −2c
+c
+c
+0
+0
+0
+0
+1
+
+
+
+,
+for a ≥0, b, c ∈[0, 1
+2].
+(171)
+Finally, substituting (171) into (170) we ﬁnd a = b = c = α, α + β = 1, so that the ﬁnal form of the
+stochastic matrix is that of the symmetric coalescing random walks with branching [CSRWB] in (56),
+taking θ = α ∈[0, 1
+2]. We record the the action of σ on the tensor products of v and w in Lemma 5.
+{B2} = {B} ∩{w1 = 1, w2 = ω ̸= 1}. In this case,
+v ⊗v =
+
+
+
+
+1
+1
+1
+1
+
+
+
+,
+w ⊗w =
+
+
+
+
+1
+ω
+ω
+ω2
+
+
+
+,
+(v ⊗w + w ⊗v)
+2
+=
+
+
+
+
+1
+(1+ω)
+2
+(1+ω)
+2
+ω
+
+
+
+,
+v ⊗w −w ⊗v =
+
+
+
+
+0
+ω −1
+1 −ω
+0
+
+
+
+.
+By substituting (160) into conditions (168, 169), we may reduce the numbers of parameters so that
+σ =
+
+
+
+
+1 + ωa
+−1+ω
+2 a
+−1+ω
+2 a
+a
+ωb
+1−(1+ω)b
+2
+1−(1+ω)b
+2
+b
+ωc
+1−(1+ω)c
+2
+1−(1+ω)c
+2
+c
+ωd
+−1+ω
+2 d
+−1+ω
+2 d
+1 + d
+
+
+
+
+(172)
+where the parameters ω, a, b, c, d must then be constrained by the positivity conditions. The last con-
+dition (170) leads to the following system of four equations:
+1 −1
+2(1 −ω)2a
+=
+α + β,
+(173)
+1 + ω
+2
+−1
+2(1 −ω)2b
+=
+α + βω,
+(174)
+1 + ω
+2
+−1
+2(1 −ω)2c
+=
+α + βω,
+(175)
+ω −1
+2(1 −ω)2d
+=
+α + βω2.
+(176)
+We divide the logic into two further subcases, depending on the value of ω ̸= 1: namely the possibilities
+ω ∈(−∞, −1), ω = −1, ω ∈(−1, 0), ω = 0, ω ∈(0, 1), and ω ∈(1, ∞).
+{B21} = {B} ∩{w1 = 1, w2 = ω = −1}. The rate matrix (172) takes the form:
+σ =
+
+
+
+
+1 −a
+0
+0
+a
+−b
+1
+2
+1
+2
+b
+−c
+1
+2
+1
+2
+c
+−d
+0
+0
+1 + d
+
+
+
+.
+(177)
+46
+
+
+===== PDF PAGE 47 =====
+
+The positivity conditions imply that b = c = 0 and the system (173)-(176) reduces to
+1 −2a = α + β,
+0 = α −β,
+−1 −2d = α + β.
+(178)
+Setting α = θ and solving the last set equations with respect to a, d, β and substituting the answer into
+(177), we ﬁnd
+σ =
+
+
+
+
+1
+2 + θ
+0
+0
+1
+2 −θ
+0
+1
+2
+1
+2
+0
+0
+1
+2
+1
+2
+0
+1
+2 + θ
+0
+0
+1
+2 −θ
+
+
+
+
+for 1
+2 ≤θ ≤1
+2.
+(179)
+This matrix acts on tensor products of v and w as follows:
+σv ⊗w = σw ⊗v = −θv ⊗v −θw ⊗w.
+In Lemma 5 we have switched the sign, replacing w by −w = (−1, 1)T in order to mesh with previous
+cases. Under particle-hole conjugation the model value of θ becomes −θ, so we record just the parameter
+range θ ∈[0, 1
+2] in Lemma 5. This case has become annihilating symmetric random walks with pairwise
+immigration [ASRWPI] in (57).
+{B22} = {B} ∩{w1 = 1, w2 = ω = 0}. This case can be obtained from the stochastic matrix in case
+{B1} after a particle-hole conjugation, so leads to no new cases in the classiﬁcation.
+{B23} = {B} ∩{w1 = 1, w2 = ω ∈(0, 1) ∪(1, ∞)}.
+The positivity condition applied to the ﬁrst
+and the fourth rows of (172) implies that a = d = 0. Solving (173) and (176) with respect to α, β we
+ﬁnd α =
+ω
+1+ω and β =
+1
+1+ω. Then (174) and (175) yield the values b = c =
+1
+1+ω, and the positivity
+conditions in the second and third rows of (172) hold true. Setting θ =
+ω
+1+ω ∈(0, 1) we arrive at the
+voter model [BVM] in (53), where the symmetric case θ =
+1
+2 is removed due to the condition that
+ω ̸= 1. The second factorised eigenvector is then w ⊗w where w = (1, θ/(1 −θ)). After scaling, one can
+replace this vector by w = (1−θ, θ) and the action of σ on the tensor products of v and w is recorded in
+Lemma 5. The cases θ ∈{0, 1} coincide with special values of the model [CSRWB] and its particle-hole
+conjugate.
+{B24} = {B} ∩{w1 = 1, w2 = ω ∈(−∞, −1)}. The positivity condition applied to the second, third
+ands fourth rows of (172) implies that b = c = d = 0. Solving (174), (175) and (176) with respect to
+α, β we ﬁnd α = ω/2 and β = 1/(2ω). Then solving (173) we ﬁnd a = −1/ω. The matrix (172) is
+reduced to
+σ =
+
+
+
+
+0
+1+ω−1
+2
+1+ω−1
+2
+−ω−1
+0
+1
+2
+1
+2
+0
+0
+1
+2
+1
+2
+0
+0
+0
+0
+1
+
+
+
+
+for ω ∈(−∞, −1).
+(180)
+Setting θ = −1/ω we reach the annihilating-coalescing symmetric random walks [ACSRW] in (55) for
+θ ∈(0, 1). We rescale the second factorised eigenvector, to simplify the action, sending (1, −θ−1) →
+(−θ, 1). This makes w = (−θ, 1), still ensures that σw ⊗w = w ⊗w, and the action of σ on the tensor
+products of v and w becomes simpler: σv ⊗w = σw ⊗v = 1
+2v ⊗v + 1
+2w ⊗w, as recorded in Lemma 5.
+{B25} = {B} ∩{w1 = 1, w2 = ω ∈(−1, 0)}. The positivity condition applied to the ﬁrst, second and
+third rows of (172) implies that a = b = c = 0. Solving (173), (174) and (175) with respect to α, β we
+ﬁnd α = β = 1
+2. Then solving (176) we ﬁnd d = −1. The matrix (172) is reduced to
+σ =
+
+
+
+
+1
+0
+0
+0
+0
+1
+2
+1
+2
+0
+0
+1
+2
+1
+2
+0
+−ω
+1+ω
+2
+1+ω
+2
+0
+
+
+
+
+for ω ∈(−1, 0).
+(181)
+47
+
+
+===== PDF PAGE 48 =====
+
+Stochastic matrices (181) and (180) are equivalent after particle-hole conjugation and exchanging ω ↔
+ω−1 so this adds no new case to the classiﬁcation.
+{C} = {δ = 1
+2, γ = 1
+2, α = β = 0}. The action of σ on V ⊗V is fully determined by
+σv ⊗v
+=
+v ⊗v,
+(182)
+σw ⊗w
+=
+w ⊗w,
+(183)
+σv ⊗w
+=
+1
+2(v ⊗w + w ⊗v),
+(184)
+σw ⊗v
+=
+1
+2(v ⊗w + w ⊗v).
+(185)
+The above equations are invariant with respect to w →aw, where a ∈R is a constant. Therefore we
+can reduce to two subcases for the independent vector w, either w = (1, ω)T for ω ̸= 1 or w = (0, 1)T .
+{C1} = {C} ∩{w1 = 1, w2 = ω ̸= 1}. In this case
+v ⊗v =
+
+
+
+
+1
+1
+1
+1
+
+
+
+,
+w ⊗w =
+
+
+
+
+1
+ω
+ω
+ω2
+
+
+
+,
+v ⊗w =
+
+
+
+
+1
+ω
+1
+ω
+
+
+
+,
+w ⊗v =
+
+
+
+
+1
+1
+ω
+ω
+
+
+
+.
+The vector v ⊗v is automatically an eigenvector of the stochastic matrix (160). The three conditions
+(183, 184, 185) lead to the following restrictions on the coeﬃcients of (160):
+
+
+
+(ω −1)(a2 + a3) + (ω2 −1)a4 = 0,
+(ω −1)(a2 + a4) = 0,
+(ω −1)(a3 + a4) = 0,
+
+
+
+b1 −ωb4 = 0,
+b3 + ωb4 = 1
+2,
+b3 + b4 = 1
+2,
+
+
+
+c1 −ωc4 = 0,
+c4 + c2 = 1
+2,
+ωc4 + c2 = 1
+2,
+
+
+
+(1 −ω2)d1 + (ω −ω2)(d2 + d3) = 0,
+(ω −1)(d1 + d3) = 0,
+(ω −1)(d1 + d2) = 0.
+As ω ̸= 1 and all ai and di are non-negative, the equations imply that these coeﬃcients are all zero.
+The equations for b1, b3, b4 and for c1, c2, c4 have unique solutions b1 = b4 = 0, b3 = 1
+2 and c1 = c4 =
+0, c2 = 1
+2. Therefore, the rate matrix σ is completely determined, and yields the symmetric exclusion
+model [SEP] from (52).
+{C2} = {C} ∩{w1 = 0, w2 = 1}. In this case,
+v ⊗v =
+
+
+
+
+1
+1
+1
+1
+
+
+
+,
+w ⊗w =
+
+
+
+
+0
+0
+0
+1
+
+
+
+,
+v ⊗w =
+
+
+
+
+0
+1
+0
+1
+
+
+
+,
+w ⊗v =
+
+
+
+
+0
+0
+1
+1
+
+
+
+.
+We proceed similarly to the previous subcase: condition (182) is automatic; condition (183) gives
+a4 = b4 = c4 = d1 + d2 + d3 = 0. As d’s are non-negative, we conclude that d1 = d2 = d3 = 0; condition
+(184) gives a2 = 0, b1 + b3 = 1
+2, c2 = 1
+2; condition (185) gives a3 = 0, b3 = 1
+2, c1 + c2 = 1
+2. Solving
+for b1, b3 and c1, c2 we ﬁnd b1 = c1 = 0, b3 = c2 = 1
+2. Substituting the answers into (160) we again
+arrive at the symmetric exclusion process [SEP] in (52). Therefore, the current subcase simply gives an
+alternative form for the factorised eigenvector w ⊗w as listed in Lemma 5.
+48
+
+
+===== PDF PAGE 49 =====
+
+{D} = {δ = −1
+2, γ = 1
+2, α, β ∈R}. The action of σ on V ⊗V is determined by
+σv ⊗v
+=
+v ⊗v,
+(186)
+σw ⊗w
+=
+w ⊗w,
+(187)
+σ(v ⊗w −w ⊗v)
+=
+v ⊗w −w ⊗v,
+(188)
+σ (v ⊗w + w ⊗v)
+2
+=
+αv ⊗v + βw ⊗w.
+(189)
+We have two subcases to consider: if w1 = 0, then w2 ̸= 0 and we can rescale w so that w2 = 1. If
+w1 ̸= 0, then we can rescale w in such a way that w1 = 1. (The action of σ is not invariant with respect
+to rescalings of w, therefore the ﬁnal values of the coeﬃcients α and β will depend on this choice of
+scale.)
+{D1} = {D} ∩{w1 = 0, w2 = 1}. In this case,
+v ⊗v =
+
+
+
+
+1
+1
+1
+1
+
+
+
+,
+w ⊗w =
+
+
+
+
+0
+0
+0
+1
+
+
+
+,
+v ⊗w −w ⊗v =
+
+
+
+
+0
+1
+−1
+0
+
+
+
+,
+(v ⊗w + w ⊗v)
+2
+=
+
+
+
+
+0
+1
+21
+2
+1
+
+
+
+.
+Condition (186) is automatic. Condition (187), that σw ⊗w = w ⊗w, applied to (160) leads to the
+equalities a4 = b4 = c4 = 0 and d1 + d2 + d3 = 0. The positivity of di now leads us to the the following
+simpliﬁed form for σ:
+σ =
+
+
+
+
+1 −a2 −a3
+a2
+a3
+0
+b1
+1 −b1 −b3
+b3
+0
+c1
+c2
+1 −c1 −c2
+0
+0
+0
+0
+1
+
+
+
+.
+(190)
+Similarly, condition (187), complemented by the positivity of σ, leads to
+σ =
+
+
+
+
+1 −2a
+a
+a
+0
+0
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+1
+
+
+
+.
+(191)
+Finally, the condition (189) leads to α = β = a = 1/2.
+This is the θ =
+1
+2 case of the stationary
+coalescence annihilation model [SCAM] in (58), which will reappear for all θ in the subcase D(ii.b)
+below.
+{D2} = {D} ∩{w1 = 1, w2 = ω ̸= 1}. In this subcase,
+v ⊗v =
+
+
+
+
+1
+1
+1
+1
+
+
+
+, w ⊗w =
+
+
+
+
+1
+ω
+ω
+ω2
+
+
+
+, v ⊗w −w ⊗v =
+
+
+
+
+0
+ω −1
+1 −ω
+0
+
+
+
+, w ⊗v + v ⊗w
+2
+=
+
+
+
+
+1
+(1+ω)
+2
+(1+ω
+2
+)
+ω
+
+
+
+.
+We examine conditions (186) - (189) for the matrix (160). Condition (186) is automatic. Condition
+(188) yields a2 = a3, b1 + 2b3 + b4 = 0, c1 + 2c2 + c4 = 0, and d2 = d3. Therefore, by positivity,
+b1 = b3 = b4 = 0, c1 = c2 = c4 = 0 and σ takes the following form:
+σ =
+
+
+
+
+1 −2a2 −a4
+a2
+a2
+a4
+0
+1
+0
+0
+0
+0
+1
+0
+d1
+d2
+d2
+1 −d1 −2d2
+
+
+
+.
+(192)
+49
+
+
+===== PDF PAGE 50 =====
+
+The condition (187) with this σ leads to the following restrictions on the parameters:
+(1 + ω)a4 + 2a2 = 0
+(1 + ω)d1 + 2ωd2 = 0,
+(193)
+where we used that ω ̸= 1.
+We now examine solutions to (193), together with the remaining condition (189), in various subcases
+according to the value of ω.
+{D21} = {D} ∩{w1 = 1, w2 = ω = −1}. When ω = −1 it follows from (193) that d2 = a2 = 0. The
+matrix (192) reduces to
+σ =
+
+
+
+
+1 −a4
+0
+0
+a4
+0
+1
+0
+0
+0
+0
+1
+0
+d1
+0
+0
+1 −d1
+
+
+
+
+(194)
+Finally, the condition (189) for this σ leads to α = β = 1
+2 −a4, d1 = 1 −a4. Setting θ = a4 ∈[0, 1] this
+is the dimer model [DM] in (59). The action of σ on basic vectors v ⊗w and w ⊗v is determined by
+188, 189) and is recorded in Lemma 5.
+{D22} = {D} ∩{w1 = 1, w2 = ω ̸∈{1, −1}}. The solution to (193) in this case is a4 = −
+2
+1+ωa2 and
+d1 = −2ω
+1+ωd2. Denoting a2 = a, d2 = d, the matrix (192) has become
+σ =
+
+
+
+
+1 −
+2ω
+1+ωa
+a
+a
+−
+2
+1+ωa
+0
+1
+0
+0
+0
+0
+1
+0
+−2ω
+1+ωd
+d
+d
+1 −
+2
+1+ωd
+
+
+
+.
+(195)
+Due to the positivity of σ12, σ42 we must have a ≥0, d ≥0. If ω > −1 then σ14 ≥0 implies that a = 0.
+If ω > 0 or ω < −1 then σ41 ≥0 implies that d = 0. Therefore when ω ∈(0, 1) ∪(1, ∞) the only
+possible matrix σ is the identity.
+When ω ∈(−∞, −1) we have
+σ =
+
+
+
+
+1 −
+2ω
+1+ωa
+a
+a
+−
+2
+1+ωa
+0
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+1
+
+
+
+,
+for a ≥0.
+(196)
+Resolving the ﬁnal condition (189) we ﬁnd α = ω
+2 , β =
+1
+2ω, and a = 1+ω
+2ω . Setting θ = (1 + ω)/2ω
+we have θ ∈(0, 1
+2) and σ becomes the stationary coalescence annihilation model [SCAM] in (58). The
+action of σ becomes simpler if we replace w by ˆw = ω−1w = (2θ −1, 1)T . This leaves (186,187,188)
+unchanged but (189) becomes σ(v ⊗ˆw + ˆw ⊗v) = v ⊗v + ˆw ⊗ˆw, and the full action of σ is recorded
+Lemma 5.
+The ﬁnal case ω ∈(−1, 0] is similar: now (195) becomes
+σ =
+
+
+
+
+1
+0
+0
+0
+0
+1
+0
+0
+0
+0
+1
+0
+−2ω
+1+ωd
+d
+d
+1 −
+2
+1+ωd
+
+
+
+,
+for d ≥0.
+(197)
+Resolving the ﬁnal condition (189) we ﬁnd α = β = 1
+2, and d = 1+ω
+2 . Setting θ = (1 + ω)/2 we have
+θ ∈(0, 1
+2] and σ becomes the particle-hole conjugate of the stationary coalescence annihilation model
+[SCAM] in (58). Note the value θ = 1/2 arises, and at the value θ = 0 this model is the same as the
+dimer model [DM] in (59). This completes the classiﬁcation in Lemma 5.
+50
+
+
+===== PDF PAGE 51 =====
+
+6.3
+Proof of Theorem 6
+It is straightforward to check that the list of models in Theorem 6, and their conjugates under ρ, τ or ρτ,
+are all projectors, satisfy the braid relation (13), and satisfy the stochasticity relation (51). Moreover
+the models (although not all their conjugates) satisfy one of the two Ansatzes (61). The logic of the
+proof therefore is to show that no other solutions are possible.
+The braid relation is also found in the theory of quantum spin systems, and in quantum inverse scat-
+tering, under the guise of R matrices (see Section 5.4 for a discussion on the addition of a spectral
+parameter via Baxterisation and the Yang-Baxter equation). We can recast Theorem 6 as a hunt for
+R matrices with certain properties. We give here a brief reminder of the basic deﬁnitions and notation
+regarding R matrices (further details are in any review of the theory of quantum inverse scattering
+method or of the theory of quantum groups, e.g. [25]). Let V be a linear space. We are interested in
+solutions of the R matrix braid relation
+R12R23R12 = R23R12R23
+(198)
+where R12 = R ⊗IV , R23 = IV ⊗R, IV is the identity operator on V , and R ∈End(V ⊗2). An operator
+R satisfying (198) is called an R-matrix. Usually one demands the R matrix to be an invertible operator,
+R ∈Aut(V ⊗2); however this restriction is inappropriate in our applications to stochastic processes. An
+R matrix which has quadratic minimal polynomial
+(R −q IV ⊗2)(R −p IV ⊗2) = 0,
+where q ̸= 0 and p ̸= q,
+(199)
+is said to be of Hecke type. Condition (199) is called the quadratic relation.
+To link the study of Hecke type R matrices to our stochastic interpretation we set V = R2 and search
+for R matrices that also satisfy stochasticity conditions (using the standard basis)
+
+
+
+(a) the eigenvalues of R are real and distinct: p < q ∈R;
+(b) oﬀ-diagonal components of R are nonnegative;
+(c) the vector (1, 1, 1, 1)T is an eigenvector with eigenvalue q.
+(200)
+The set of such R matrices is mapped, via the map
+σ := R −p IV ⊗2
+q −p
+,
+(201)
+onto projectors (σ2 = σ) that satisfy the required properties for Theorem 6, namely σ satisﬁes the
+stochasticity condition 51, and the family {σn} satisﬁes the deformed braid relation (13) with real
+parameter Q = −pq/(q −p)2. Moreover the map is onto the set of all such σ with parameter values
+Q ≤1/4. Therefore, in the rest of the proof we search for an R matrix R satisfying (198) and (199),
+and the stochasticity conditions (200) and then we record in Theorem 6 the corresponding projector σ
+given by (201).
+Denote the entries
+R =
+
+
+
+
+a1
+a2
+a3
+a4
+b1
+b2
+b3
+b4
+c1
+c2
+c3
+c4
+d1
+d2
+d3
+d4
+
+
+
+.
+(202)
+We reduce the classiﬁcation by allowing conjugation with ρ, or τ, or both, leading to
+ρRρ =
+
+
+
+
+a1
+a3
+a2
+a4
+c1
+c3
+c2
+c4
+b1
+b3
+b2
+b4
+d1
+d3
+d2
+d4
+
+
+
+,
+τRτ =
+
+
+
+
+d4
+d3
+d2
+d1
+c4
+c3
+c2
+c1
+b4
+b3
+b2
+b1
+a4
+a3
+a2
+a1
+
+
+
+,
+ρτRτρ =
+
+
+
+
+d4
+d2
+d3
+d1
+b4
+b2
+b3
+b1
+c4
+c2
+c3
+c1
+a4
+a2
+a3
+a1
+
+
+
+.
+(203)
+51
+
+
+===== PDF PAGE 52 =====
+
+The stochasticity condition (200) (b) demands non-negativity of the oﬀ-diagonal components of R
+and condition (c) ﬁxes the values of the diagonal components in terms of the others (for example
+a1 + a2 + a3 + a4 = q). Denote
+Y := R12R23R12 −R23R12R23,
+H := (R −q IV ⊗2)(R −p IV ⊗2).
+These are, respectively, 8 × 8 and 4 × 4 matrices whose vanishing identiﬁes the Hecke type R matrix
+along with the eigenvalues q and p. A symbolic calculation of the 64 entries of Y suggests we need
+to make some reductions to make the problem easier. The two Ansatzes (61) for the form of σ are
+equivalent to the two cases
+I = {d2 = d3 = 0},
+II = {b4 = c4 = 0}.
+(204)
+In both of these cases the entries in H and Y start to factorise, and we can push through a complete
+classiﬁcation of all solutions to H = Y = 0. We now detail the logic, which is easiest to follow with a
+symbolic calculator for the entries of Y and H at each step.
+We begin with investigation of the Ansatz I from (204). Substituting R with d2 = d3 = 0 into H we
+ﬁnd H4,2 = d1a2, H4,3 = d1a3. These two components vanish in exactly one of the following cases:
+{A} = {d1 = d2 = d3 = 0},
+or
+{B} = {d1 > 0; d2 = d3 = a2 = a3 = 0}.
+(205)
+In the case {A} several components of the matrix Y factorize. In particular,
+Y4,7 = b1(a4b1 + b3(b4 + c4)), Y6,3 = b1c1(a2 −a3), Y7,4 = −c1(a4c1 + c2(b4 + c4)).
+(206)
+Hence consideration of {A} splits into four subcases:
+{A1} = {A} ∩{b1 > 0; c1 > 0; a3 = a2; a4 = 0},
+{A2} = {A} ∩{b1 = c1 = 0},
+{A3} = {A} ∩{b1 > 0; c1 = 0; a4 = 0},
+{A4} = {A} ∩{c1 > 0; b1 = 0; a4 = 0}.
+Here the condition a4 = 0 in cases {A1}, {A3} and {A4} follows from non-negativity of all the
+coeﬃcients in Y4,7 and Y7,4 and positivity of either b1 or c1. The case {A4} after left-right conjugation
+becomes the case {A3}, so that it will produce exactly the left-right conjugates of any R matrices found
+there, and we therefore do not not need to analyse it.
+In the case {A1}, the vanishing conditions for Y4,7 and Y7,4 (see (206)) split further consideration in
+two directions:
+{A11} = {A1} ∩{b3 = c2 = 0},
+{A12} = {A1} ∩{b3 + c2 > 0; b4 = c4 = 0}.
+Here the inequality b3 + c2 > 0 implies that at least one of the coeﬃcients b3, c2 is strictly positive.
+In the case {A11} we have H2,3 = a2b1 implying that a2 = 0, and then
+Y2,1 = −b1(b1 −q)(b4 −q),
+Y5,1 = c1(c1 −q)(c4 −q).
+(207)
+Since b1, c1 > 0 the vanishing of Y2,1 and Y5,1 implies that q ∈{b1, b4} ∩{c1, c4} - four cases. In the
+case b1 = c1 = q we ﬁnd, using H2,1 = −q(b4 + p) and H3,1 = −q(c4 + p), that b4 = c4 = −p. With
+these choices H = Y = 0 and we are left with the R matrix
+R =
+
+
+
+
+q
+0
+0
+0
+q
+p
+0
+−p
+q
+0
+p
+−p
+0
+0
+0
+q
+
+
+
+
+and the ﬁnal requirement, for stochasticity, is that p ≤0 ≤q. These all correspond, under the map
+(201) to the biased voter model [BVM] (63) with θ = q/(q −p) ∈(0, 1]. In the case b1 = c4 = q we ﬁnd,
+52
+
+
+===== PDF PAGE 53 =====
+
+using H2,1 = −q(b4 + p) and H3,1 = −c1(c1 + p), that b4 = c1 = −p. With these choices H = Y = 0
+and we are left with the R matrix
+R =
+
+
+
+
+q
+0
+0
+0
+q
+p
+0
+−p
+−p
+0
+p
+q
+0
+0
+0
+q
+
+
+
+
+and the ﬁnal requirement, for stochasticity, is that p ≤0 ≤q. These all correspond, under the map
+(201) to the asymmetric voter model [AVM] (64) with r = q/(q −p) ∈(0, 1). In a similar way, the case
+b4 = c1 = q leads again to the asymmetric voter model with r ∈(0, 1), and the case b4 = c4 = q to the
+biased voter model with θ ∈(0, 1).
+In the case {A12} we have
+Y1,4 = −2a2
+2(a2 −c2),
+Y1,6 = a2
+2(b1 −c1),
+Y1,7 = 2a2
+2(a2 −b3).
+Hence {A12} splits into subcases
+{A121} = {A12} ∩{a2 = 0},
+{A122} = {A12} ∩{a2 > 0; b3 = c2 = a2; c1 = b1}.
+In the subcase {A121} the components Y4,1 = b1b3(b1 + c1) and Y7,1 = −c1c2(b1 + c1) cannot vanish
+simultaneously due to the restrictions b1, c1 > 0, b3 + c2 > 0, so this subcase gives no solutions. In the
+subcase {A122} we have
+Y1,2 = −a2(a2 −q)(a2 + b1 −q),
+H1,1 = 2a2(2a2 + b1 + p −q).
+Conditions Y1,2 = H1,1 = 0 are fulﬁlled exactly when either a2 = q, b1 = −p −q, or a2 = −p, b1 = q + p.
+With either of these two choices H = Y = 0 and the corresponding two R matrices are
+R =
+
+
+
+
+−q
+q
+q
+0
+−q −p
+q + p
+q
+0
+−q −p
+q
+q + p
+0
+0
+0
+0
+q
+
+
+
+
+R =
+
+
+
+
+q + 2p
+−p
+−p
+0
+q + p
+0
+−p
+0
+q + p
+−p
+0
+0
+0
+0
+0
+q
+
+
+
+.
+These all correspond, under the map (201) to the coalescing symmetric random walks with branching
+[CSRWB] (67) with ﬁrst θ = q/(q −p) > 0 and second θ = −p/(q −p) > 0. The stochasticity conditions
+require that θ ≤1
+2.
+Passing to consideration of the case {A2} we ﬁnd new factorising components in Y :
+Y2,3 = −b3(b3 + b4 −q)(c2 + c4 −q),
+Y3,2 = −c2(b3 + b4 −q)(c2 + c4 −q).
+(208)
+Notice that if c2+b3 > 0 the vanishing of the components Y2,3, Y3,2 in (208) implies either b3+b4−q = 0
+or c2 + c4 −q = 0. We split the investigation therefore into
+{A21} = {A2}∩
+
+c2 + b3 > 0
+c4 = q −c2
+
+,
+{A22} = {A2}∩{c2 = b3 = 0},
+{A23} = {A2}∩
+
+c2 + b3 > 0
+b4 = q −b2
+
+.
+The cases {A21} and {A23} are mapped to each other by left-right conjugation, so we do not need to
+analyse {A23}. In the case {A21} the following components of Y assume factorised form:
+Y3,7 = b3(c2 −q)(a2 + a4 + b3 −q),
+Y5,6 = −c2(c2 −q)(a2 + a4 + b3 −q),
+and we split the case {A21} into
+{A211} = {A21} ∩{c2 = q},
+{A212} = {A21} ∩{c2 ̸= q; a4 = q −a2 −b3}.
+53
+
+
+===== PDF PAGE 54 =====
+
+For the case {A211} we have H3,3 = q(b3 + p) and H3,4 = qb4 so that b3 = −p and b4 = 0. We then
+use H1,1 = (a2 + a3 + a4)(a2 + a3 + a4 + p −q) so that either (i) a2 = a3 = a4 = 0, in which case we
+already have H = Y = 0 and the R matrix
+R =
+
+
+
+
+q
+0
+0
+0
+0
+q + p
+−p
+0
+0
+q
+0
+0
+0
+0
+0
+q
+
+
+
+
+which, with p ≤0 ≤q for stochasticity, corresponds under the map (201) to the asymmetric exclusion
+process [ASEP] (62) with l = q/(q −p) ∈(0, 1]; or (ii) we have a4 = q −p −a3 −a2 and we need to use
+H1,2 = pa2 + qa3 = 0, whereupon setting a3 = −pa2/q we again ﬁnd H = Y = 0 and the R matrix
+R =
+
+
+
+
+p
+a2
+−pa2/q
+(q −a2)(q −p)/q
+0
+q + p
+−p
+0
+0
+q
+0
+0
+0
+0
+0
+q
+
+
+
+
+which, with stochasticity requiring p ≤0 ≤q and 0 ≤a2 ≤q, corresponds under the map (201)
+to the annihilating-coalesing random walks [ACRW] (66) with the choices l = q/(q −p) ∈(0, 1] and
+θ = (q −a2)/q ∈[0, 1]. (The missing values where l = 0 for the above two models appear, as explained
+above, in the conjugate cases ρσρ from {A23}.)
+Investigation of the case {A212} does not give any non-zero stochastic R matrices. Indeed, vanishing
+of H2,3 = −b3(p + b3 + b4) and H3,2 = −c2(p + b3 + b4) together leads to the condition b4 = −p −b3.
+If then c2 = 0, so that b3 > 0, we ﬁnd H(2, 2) = pq forcing p = 0, which makes b4 = −p −b3 = −b3
+contradicting stochasticity. If however c2 ̸= 0 we may use
+H(2, 2) = b3c2 + pq,
+H(1, 2) = a3c2 −a2(a3 −b3),
+H(1, 1) = (a3 −b3 + p)(a3 −b3 + q)
+to express b3, a2 and a3 in terms of c2, p, q. The two solutions (i) b3 = −pq/c2; a2 = c2 + p; a3 =
+−q −(pq)/c2 and (ii) b3 = −pq/c2; a2 = c2 + q; a3 = −p −(pq)/c2 do then yield families of R matrices,
+that is H = Y = 0, but the stochasticity conditions eliminate all but the trivial zero matrix; the ﬁnal
+solution (iii) b3 = a3 = a2 = p = 0 yields a Hecke type R matrix only when c2 = −q, and this also fails
+the stochasticity condition unless it is trivial.
+We now consider the case {A22}. Here we observe following factorisations
+Y4,4 = qb4(b4 −q),
+Y7,7 = −qc4(c4 −q).
+Therefore we split further consideration into the subcases
+{A221} = {A22} ∩{b4 = 0; c4 = q},
+{A222} = {A22} ∩{b4 = c4 = q},
+{A223} = {A22} ∩{b4 = c4 = 0},
+{A224} = {A22} ∩{b4 = q; c4 = 0}.
+In the case {A221} we have H3,3 = pq implying p = 0. Then
+H1,1 = (a2 + a3 + a4)(a2 + a3 + a4 −q)
+and we end up with two possibilities: the ﬁrst possibility is a2 = a3 = a4 = 0 whereupon H = Y = 0
+and yielding the R matrix
+R =
+
+
+
+
+q
+0
+0
+0
+0
+q
+0
+0
+0
+0
+0
+q
+0
+0
+0
+q
+
+
+
+
+54
+
+
+===== PDF PAGE 55 =====
+
+which corresponds under the map (201) to the ﬁrst erosion model [EM1] (71). The other possibility for
+H1,1 = 0 is to put a4 = q −a2 −a3. In this case Y1,4 = −q(a2 −q)2 and Y1,7 = a2
+3q which forces a2 = q
+and a3 = 0, and we ﬁnd H = Y = 0 and obtain the the R matrix
+R =
+
+
+
+
+0
+q
+0
+0
+0
+q
+0
+0
+0
+0
+0
+q
+0
+0
+0
+q
+
+
+
+
+which corresponds under the map (201) to the second erosion model [EM2] (72). The case {A224}
+corresponds to the left right conjugate of case {A221}, and so leads only to the the conjugates ρσρ of
+the two erosion models above.
+In the case {A222} we have H2,2 = pq implying p = 0. Then
+H1,2 = −a2(a2 + a3 + a4),
+H1,3 = −a3(a2 + a3 + a4),
+H1,4 = (q −a4)(a2 + a3 + a4).
+For these three entires to vanish we must have a2 = a3 = 0 and a4 ∈{0, q}. The choice a4 = q leads to
+H = Y = 0 and we ﬁnd the R matrix
+R =
+
+
+
+
+0
+0
+0
+q
+0
+0
+0
+q
+0
+0
+0
+q
+0
+0
+0
+q
+
+
+
+
+which corresponds under the map (201) to the reshuﬄe model [RM] (60) with parameters θ1 = θ2 =
+0, θ3 = 1. The choice a4 = 0 leads to H = Y = 0 and we ﬁnd the R matrix
+R =
+
+
+
+
+q
+0
+0
+0
+0
+0
+0
+q
+0
+0
+0
+q
+0
+0
+0
+q
+
+
+
+
+which corresponds under the map (201) to the particle-hole conjugation of the coalescing symmetric
+random walks with branching [CSRWB] 67 with the parameter θ = 0 (that is a purely branching model).
+The case {A223} produces no non-trivial solutions. Indeed we have
+H1,1 = (a2 + a3 + a3)(p −q + a2 + a3 + a4),
+Y2,2 = q(a2 + a3 + a3)(−q + a2 + a3 + a4)
+which vanishing only if either a2 = a3 = a4 = 0, or if p = 0 and a4 = q −a2 −a3. In the ﬁrst case we
+ﬁnd H = Y = 0 but we get the trivial R matrix R = qI corresponding to σ = I. In the second case
+from the vanishing of Y1,3 = q2(a2 −a3) and Y1,4 = −q(a2
+2 −q(a2 + a3 −q)) imply a2 = a3 = q, and the
+resulting R matrix does not satisfy the stochasticity conditions since a4 = −a3 = −q ̸= 0.
+Consider now the case {A3}. Vanishing of the component H3,1 = b1c2 implies c2 = 0, whereas vanishing
+of Y4,7 = b1b3(b4 + c4) splits further consideration in two directions:
+{A31} = {A3} ∩{c2 = 0; b3 = 0},
+{A32} = {A3} ∩{c2 = 0; b3 > 0; b4 = c4 = 0}.
+In the case {A31} we have H2,3 = b1a3 and Y4,1 = −b2
+1(a2 + a3) which forces a2 = a3 = 0. Then
+H2,1 = −b1(b1 + b4 + p −q) and we set b4 = q −p −b1. With these substitutions we ﬁnd
+Y2,1 = b1(b1 + p)(b1 −q), Y3,1 = −b1(c4(b1 + p −q) −pq), H3,3 = c4(c4 + p −q)
+Then, vanishing of these three components implies (using b1 > 0) yields two solutions: (i) p = 0 and
+c4 = b1 = q which leaves H = Y = 0 and we ﬁnd the R matrix
+R =
+
+
+
+
+q
+0
+0
+0
+q
+0
+0
+0
+0
+0
+0
+q
+0
+0
+0
+q
+
+
+
+
+55
+
+
+===== PDF PAGE 56 =====
+
+which corresponds under the map (201) to the totally asymmetric voter model [AVM] (64), that is with
+values l = 0, r = 1; or (ii) c4 = p = 0 and b1 = q which leaves H = Y = 0 and we ﬁnd the R matrix
+R =
+
+
+
+
+q
+0
+0
+0
+q
+0
+0
+0
+0
+0
+q
+0
+0
+0
+0
+q
+
+
+
+
+which corresponds under the map (201) to the particle-hole conjugate of the erosion model [EM1] (71).
+In the case {A32} we do not ﬁnd any new solutions. Indeed, simultaneous vanishing of
+Y1,1 = b1a2(a2 + a3)
+Y2,5 = b1a3(b1 + b3),
+Y4,1 = b2
+1(b3 −a2 −a3)
+implies a2 = a3 = b3 = 0 which contradicts the assumption b3 > 0.
+Let us pass to the case {B}. We split this into two parts depending on the value of a4:
+{B1} = {d1 > 0; a4 > 0; d2 = d3 = a2 = a3 = 0}
+{B2} = {d1 > 0; a4 = 0; d2 = d3 = a2 = a3 = 0}.
+After particle-hole conjugation part {B2} becomes {d1 = 0; a4 > 0; d2 = d3 = a2 = a3 = 0}, which is a
+subset of {A} and already explored, and we need not analyse it.
+In the case {B1} we ﬁnd the components
+Y1,3 = −a4(b1b3 −c1c2),
+Y6,3 = −d1(b4b3 −c4c2),
+(209)
+which suggests a further decomposition into the following cases
+{B11} = {B1}∩{c2 = b3 = 0}, {B12} = {B1}∩{c2 > 0}, {B13} = {B1}∩{c2 = 0; b3 > 0}. (210)
+The case {B13} is left-right conjugate to the part of {B12} where b3 = 0 and need not be analysed.
+First consider the case {B11}. The vanishing of Y3,2 = a4b2
+1 +d1b4c4 and Y3,5 = −a4c2
+1 −d1b4c4 implies
+that b1 = c1 = 0. The vanishing of Y6,4 = −a4b1c1 −d1b2
+4 and Y6,7 = a4b1c1 + d1c2
+4 implies that
+b4 = c4 = 0. Then the components
+Y1,7 = a4((a4 −q)2 + q(a4 −d1))
+and
+Y2,8 = a4((d1 −q)2 −q(a4 −d1))
+can only vanish if a4 = d1 = q. Finally H1,1 = q2 + pq which vanishes only if p = −q. This leaves
+H = Y = 0 and we ﬁnd the R matrix
+R =
+
+
+
+
+0
+0
+0
+q
+0
+q
+0
+0
+0
+0
+q
+0
+q
+0
+0
+0
+
+
+
+
+which corresponds under the map (201) to the dimer model [DM] (69) with values θ = 1/2.
+Now we investigate the case {B12}. From the vanishing of the two entries (209) and c2, a4, d1 > 0 we
+may introduce x = b3/c2 ≥0 and solve for c1 = xb1 and c4 = xb4. Then we ﬁnd the components
+Y1,6 = −c2a4(x −1)(a4 −c2(1 + x)),
+Y8,3 = c2d1(x −1)(d1 −c2(1 + x)),
+which vanish exactly in one of the following cases:
+{B121} = {B12} ∩{x = 1},
+{B122} = {B12} ∩{x ̸= 1; d1 = a4 = c2(1 + x)}.
+56
+
+
+===== PDF PAGE 57 =====
+
+The case {B122} produces no R matrices: the vanishing of the components
+Y1,1
+=
+c2(x −1)(x + 1)2((b1 −c2)2 + c2(b1 −b4)),
+Y8,8
+=
+−c2(x −1)(x + 1)2((b4 −c2)2 −c2(b1 −b4))
+is only possible if b1 = b4 = c2. Then the condition Y1,2 = c3
+2(1 + x)3 = 0 cannot be satisﬁed.
+In the case {B121} we have x = 1 so that b3 = c2, c1 = b1 and c4 = b4. The vanishing of Y2,5 =
+−a4b2
+1 −2c2b1b4 −d1b2
+4 is only possible if b1 = b4 = 0. The vanishing of the coeﬃcients
+H2,2 = c2(2c2 + p −q),
+H1,1 = a4(a4 + d1 + p −q),
+Y2,3 = c2(a4d1 −(c2 −q)2)
+allow us to solve for the entries c2, a4, d1 in terms of p, q. Indeed we must have
+c2 = (q −p)/2,
+a4 + d1 = q −p,
+a4d1 = (p + q)2/4.
+Since c2 > 0 we must have p < q. Also (a4 −d1)2 = (a4 + d1)2 −4a4d1 = −4pq so that p ≤0 < q. It is
+convenient to set p = −t2q for t ≥0 which leads to
+c2 = q(1 + t2)/2,
+a4 = q
+2(1 + t2 ± 2t),
+d1 = q
+2(1 + t2 ∓2t).
+With these substitutions we ﬁnd H = Y = 0 and the corresponding R matrix under the map (201)
+becomes
+σ =
+
+
+
+
+1
+2 ±
+t
+1+t2
+0
+0
+1
+2 ∓
+t
+1+t2
+0
+1
+2
+1
+2
+0
+0
+1
+2
+1
+2
+0
+1
+2 ±
+t
+1+t2
+0
+0
+1
+2 ∓
+t
+1+t2
+
+
+
+.
+As t varies over [0, ∞) we get the model [ASRWPI] 68 with all parameters θ ∈[−1/2, 1/2].
+Next we investigate the Ansatz (61b). We may assume that the matrix R (202) does not ﬁt form of the
+Ansatz (61a), that is d2 + d3 > 0 (or else we are re-searching cases already explored). Noticing that the
+particle-hole conjugation transposes pairs a2 ↔d3 and a3 ↔d2 we also assume a2 + a3 > 0.
+Substituting R with b4 = c4 = 0 into H we ﬁnd: H2,4 = a4b1, H3,4 = a4c1. These two components
+vanish in either of the following cases:
+{C}
+=
+{d2 + d3 > 0; a2 + a3 > 0; b4 = c4 = a4 = 0},
+{D}
+=
+{d2 + d3 > 0; a2 + a3 > 0; a4 > 0; b4 = c4 = b1 = c1 = 0}.
+In the case {C} analysing the components
+Y4,7 = −a3(a3d1 + b3(d2 + d3)),
+Y7,4 = a2(a2d1 + c2(d2 + d3))
+we ﬁnd that when they vanish then either a2 > 0 and d1 = c2 = 0, or a3 > 0 and d1 = b3 = 0. These
+two cases are related by left-right conjugation and hence, it is enough investigating one of them, say,
+the case
+{C′} = {C} ∩{a2 > 0; d1 = c2 = 0}.
+In this case we have H32 = a2c1 ⇒c1 = 0, and Y3,4 = a2
+2b1 ⇒b1 = 0. Inspecting the components
+H2,2 = b3(b3 + p −q),
+and
+H1,2 = −a2(a2 + a3 + b3 + p −q)
+we conclude that b3 = 0 (setting b3 = q −p is not possible since a2(a2 + a3) ̸= 0). Vanishing of the
+components
+H1,1 = (a2 + a3)(a2 + a3 + p −q),
+H4,4 = (d2 + d3)(d2 + d3 + p −q)
+57
+
+
+===== PDF PAGE 58 =====
+
+implies a3 = q−p−a2, d3 = q−p−d2. Then, the condition Y1,2 = −a2(a2d2+pq) = 0 gives d2 = −pq/a2.
+Finally, the component Y5,6 = (q −p)(a2 + p)(a2 −q) vanishes if either a2 = q, or a2 = −p. In both
+cases H = Y = 0 and we ﬁnd the R matrices
+R =
+
+
+
+
+p
+q
+−p
+0
+0
+q
+0
+0
+0
+0
+q
+0
+0
+−p
+q
+p
+
+
+
+,
+R =
+
+
+
+
+p
+−p
+q
+0
+0
+q
+0
+0
+0
+0
+q
+0
+0
+q
+−p
+−p
+
+
+
+.
+These are related by left-right conjugation. After applying the stochasticity conditions they correspond
+under the map (201) to the asymmetric anti-voter model [AAVM] 65 for all parameters l = 1−r ∈[0, 1].
+The case {D} does not give any solutions.
+Indeed, we have Y3,8 = a4(d1 + d2 + d3)(c2 −b3) = 0
+implying that b3 = c2. Using this we have Y8,8 = a4(d2 + d3)(d2 −d3) = 0 implying, since d2 + d3 > 0,
+that d3 = d2 > 0. Using this we have Y1,6 = a4d2(a3 −a2) = 0 implying a3 = a2. Finally we have
+Y2,5 = a2
+2d1 + 2a2c2d2 + a4d2
+2 ≥a4d2
+2 > 0 showing there are no solutions.
+We have completed the exhaustive search.
+7
+Acknowledgements.
+The work of AP and PP was supported by the Russian Foundation of Basic Research within the grant
+20 −51 −12005. OZ is grateful for the hospitality of the Bogoliubov Laboratory of Theoretical Physics
+of the Joint Institute for Nuclear Research where part of the research has been carried out.
+A
+Appendix
+We review here (i) some diﬀerent presentations of ﬁnite dimensional Hecke algebras; (ii) the construction
+of an inﬁnite dimensional Hecke Algebra H∞as a direct limit.
+For our purposes it is suﬃcient to deﬁne Hn, a (type-A) Hecke algebra, as a unital associative algebra
+over R generated by s1, s2, . . . , sn−1 subject to the following relations:
+
+
+
+sisj = sjsi,
+|i −j| ≥2, 1 ≤i, j ≤n −1
+sisi+1si = si+1sisi+1,
+1 ≤i ≤n −2
+s2
+i = 1 + (q −q−1)si,
+1 ≤i ≤n −1
+(211)
+where q ∈R \ {0} is a real parameter and 1 is the unital element. Due to the isomorphism of the Hecke
+algebras corresponding to q, −q and q−1, we can assume that q ∈(0, 1]. The second relation of (211)
+is called the braid relation, the third is called the quadratic, or Hecke, relation. We see that Hn is a
+quotient of Artin’s braid group algebra by the quadratic relation. The case q = 1 corresponds to the
+group algebra of the symmetric group Sn and therefore the Hecke algebra Hn can also be regarded as
+a deformation of the group algebra of Sn. In a more abstract setting, see [36] for a review, q is treated
+as a formal parameter and Hn is deﬁned as an algebra over the ring R[q, q−1] of Laurent polynomials
+in q. The deﬁnition we are using in this paper corresponds to the specialisation of a Hecke algebra over
+R[q, q−1] obtained by assigning a numerical value to q.
+In the paper we also use two alternative sets of generators: deﬁne
+σi = q −si
+q + q−1
+and
+qi = σi −1 = −q−1 + si
+q + q−1 ,
+for 1 ≤i ≤n −1.
+(212)
+58
+
+
+===== PDF PAGE 59 =====
+
+It is straightforward to check that
+
+
+
+σiσj = σjσi,
+|i −j| ≥2, 1 ≤i, j ≤n −1
+σiσi+1σi −Qσi = σi+1σiσi+1 −Qσi+1,
+1 ≤i ≤n −2
+σ2
+i = σi,
+1 ≤i ≤n −1
+(213)
+and
+
+
+
+qiqj = qjqi,
+|i −j| ≥2, 1 ≤i, j ≤n −1
+qiqi+1qi −Qqi = qi+1qiqi+1 −Qqi+1,
+1 ≤i ≤n −2
+q2
+i = −qi,
+1 ≤i ≤n −1
+(214)
+where
+Q =
+1
+(q + q−1)2 , q = Q−1 −2
+2
+−
+sQ−1 −2
+2
+
+−1,
+(215)
+where we used the restriction q ∈(0, 1] to invert the relation Q = (q + q−1)−2. We will refer to the
+third order relation in (213, 214) as the deformed braid relation.
+Hn can be generated by any of the sets {si}n−1
+i=1 , {σi}n−1
+i=1 or {qi}n−1
+i=1 . We refer to si’s as Hecke generators,
+σi’s as stochastic generators, qi’s as Markov generators. The classiﬁcation lemmas are proved in terms
+of stochastic generators. Markov generators are natural for building generators of Markov chains as
+discussed in the paper.
+The current paper deals with Markov particle systems on Z. We consider their inﬁnitesimal generators
+in an algebraic framework, and we wish here simply to show that the expression P
+i∈Z qi can be thought
+of as lying in a closure of a representation of an inﬁnite dimensional algebra H∞in End(T(Ω)). Though
+we do not make use of the construction, we shall deﬁne H∞and construct the corresponding closure.
+For any m, n ∈N such that m ≤n let en,m : Hm →Hn be the natural embedding of Hm into Hn as
+a sub-algebra generated by {si}m−1
+i=1 ⊂Hn. Then {en,m}1≤m≤n<∞is a set of algebra homomorphisms:
+en,n = Id, enm ◦emk = enk for all 1 ≤k ≤m ≤n. So (Hn, enm)1≤m≤n<∞is a direct system over the
+set of natural numbers. Therefore one can deﬁne H∞as a direct limit:
+H∞:= lim
+−→Hn =
+ G
+i∈N
+Hn
+! 
+∼,
+(216)
+where F
+i∈N Hn is the disjoint union and the equivalence relation ∼is ai ∼aj, for ai ∈Hi, aj ∈Hj, if
+there is k ∈N : ekj(aj) = eki(ai). Choosing a standard basis for each Hn one can describe elements of
+H∞as ﬁnite linear combinations of words {s2i2s3i3 . . . snin : 1 ≤ik ≤k ≤n, n ∈N}, where
+sji =
+
+1
+if
+i = j,
+sj−1sj−2 . . . si
+if
+j > i.
+(217)
+Let π : H∞→End(T(Ω)) be a representation of H∞in the space of test functions. We suppose, as
+in our concrete application in this paper, that for each n ∈Z, π(qn) ’acts’ only on the co-ordinates
+(ηn, ηn+1) and also annihilates constant functions. We equip T(Ω) with the supremum norm,
+f ∈T(Ω) 7→||f||∞= sup
+η∈Ω
+|f(η)|.
+(218)
+We want to consider an inﬁnite sum P
+i qi, and for this we say that a sequence (ρn)n∈N ⊂π(H∞) ⊂
+End(T(Ω)) converges pointwise if for any f ∈T(Ω) the sequence (π(ρn)f)n∈N ⊂T(Ω) converges in
+(T(Ω), ∥· ∥∞). Denote the limit by ρf, where ρ ∈End(T(Ω)) is a linear operator. Finally, let π(H∞)
+be the closure of π(H∞) in End(T(Ω), T(Ω)) obtained by adding all the limiting points.
+59
+
+
+===== PDF PAGE 60 =====
+
+An example of a limiting point is given by
+X
+k∈Z
+ρ(qn) :=
+lim
+M→+∞
+M
+X
+k=0
+ρ(qn) +
+lim
+K→−∞
+−1
+X
+k=K
+ρ(qn).
+Indeed, take any f ∈T(Ω).
+For large |n| we have π(qn)f = 0, which proves the convergence of
+P
+k∈Z ρ(ℓn)f. All Markov chain generators we consider are elements of π(H∞) of this type. For most
+of the paper we are dealing with a ﬁxed representation of Hecke algebra. Accordingly, we replace π(qn)
+with qn everywhere where it cannot lead to a confusion.
+References
+[1] H. H. Andersen, C. Stroppel, and D. Tubbenhauer. Semisimplicity of Hecke and (walled) Brauer
+algebras. Journal of the Australian Mathematical Society, 103(1):1–44, 2017.
+[2] G. Barraquand and I. Corwin. The q-Hahn asymmetric exclusion process. The Annals of Applied
+Probability, 26(4):2304–2356, 2016.
+[3] V. Belitsky and G. Sch¨utz.
+Self-duality and shock dynamics in the n-species priority ASEP.
+Stochastic Processes and their Applications, 128(4):1165–1207, 2018.
+[4] V. Belitsky and G. M. Sch¨utz. Self-duality for the two-component asymmetric simple exclusion
+process. Journal of mathematical physics, 56(8):083302, 2015.
+[5] G. Benkart and D. Moon. Planar rook algebras and tensor representations of gl(1|1). Communi-
+cations in Algebra, 41(7):2405–2416, 2013.
+[6] A. Borodin and I. Corwin. Dynamic ASEP, duality, and continuous q- 1-Hermite polynomials.
+International Mathematics Research Notices, 2020(3):641–668, 2020.
+[7] A. Borodin, I. Corwin, and T. Sasamoto. From duality to determinants for q-TASEP and ASEP.
+The Annals of Probability, 42(6):2314–2382, 2014.
+[8] A. Borodin, P. Diaconis, and J. Fulman. On adding a list of numbers (and other one-dependent
+determinantal processes). Bulletin of the American Mathematical Society, 47(4):639–670, 2010.
+[9] G. Carinci, C. Franceschini, C. Giardin`a, W. Groenevelt, F. Redig, et al. Orthogonal dualities
+of Markov processes and unitary symmetries.
+SIGMA. Symmetry, Integrability and Geometry:
+Methods and Applications, 15:053, 2019.
+[10] G. Carinci, C. Giardin`a, F. Redig, and T. Sasamoto. Asymmetric stochastic transport models with
+Uq(su(1, 1)) symmetry. Journal of Statistical Physics, 163(2):239–279, 2016.
+[11] G. Carinci, C. Giardin`a, F. Redig, and T. Sasamoto. A generalized asymmetric exclusion process
+with Uq(sl2) stochastic duality. Probability Theory and Related Fields, 166(3):887–933, 2016.
+[12] Z. Chen, J. de Gier, and M. Wheeler. Integrable stochastic dualities and the deformed Knizhnik–
+Zamolodchikov equation. International Mathematics Research Notices, 2020(19):5872–5925, 2020.
+[13] I. Corwin. The q-Hahn Boson process and q-Hahn TASEP. International Mathematics Research
+Notices, 2015(14):5577–5603, 2015.
+[14] I. Corwin, K. Matveev, and L. Petrov. The q-Hahn PushTasep. International Mathematics Re-
+search Notices, 2021(3):2210–2249, 2021.
+60
+
+
+===== PDF PAGE 61 =====
+
+[15] L. Faddeev. How algebraic Bethe ansatz works for integrable model. arXiv preprint hep-th/9605187,
+1996.
+[16] B. Garrod, M. Poplavskyi, R. P. Tribe, and O. V. Zaboronski. Examples of interacting particle
+systems on Z as Pfaﬃan point processes: Annihilating and coalescing random walks. In Annales
+Henri Poincar´e, volume 19, pages 3635–3662. Springer, 2018.
+[17] B. Garrod, R. Tribe, and O. Zaboronski. Examples of interacting particle systems on Z as Pfaf-
+ﬁan point processes: Coalescing–branching random walks and annihilating random walks with
+immigration. In Annales Henri Poincar´e, volume 21, pages 885–908. Springer, 2020.
+[18] C. Giardina, J. Kurchan, F. Redig, and K. Vafayi. Duality and hidden symmetries in interacting
+particle systems. Journal of Statistical Physics, 135(1):25–55, 2009.
+[19] A. Gyoja and K. Uno. On the semisimplicity of Hecke algebras. Journal of the Mathematical
+Society of Japan, 41(1):75–79, 1989.
+[20] T. Imamura and T. Sasamoto. Current moments of 1d ASEP by duality. Journal of Statistical
+Physics, 142(5):919–930, 2011.
+[21] A. P. Isaev and O. V. Ogievetsky. On Baxterized solutions of reﬂection equation and integrable
+chain models. Nuclear Physics B, 760(3):167–183, 2007.
+[22] S. Jansen and N. Kurt. On the notion(s) of duality for Markov processes. Probability surveys,
+11:59–120, 2014.
+[23] V. Jones. Baxterization. International Journal of Modern Physics B, 4(05):701–713, 1990.
+[24] S. Karlin and J. McGregor. The classiﬁcation of birth and death processes. Transactions of the
+American Mathematical Society, 86(2):366–400, 1957.
+[25] V. E. Korepin, N. M. Bogoliubov, and A. G. Izergin. Quantum inverse scattering method and
+correlation functions, volume 3. Cambridge university press, 1997.
+[26] J. Kuan. Stochastic duality of ASEP with two particle types via symmetry of quantum groups of
+rank two. Journal of Physics A: Mathematical and Theoretical, 49(11):115002, 2016.
+[27] J. Kuan. An algebraic construction of duality functions for the stochastic Uq(A(1)
+n ) vertex model
+and its degenerations. Communications in Mathematical Physics, 359(1):121–187, 2018.
+[28] J. Kuan. A multi-species ASEP(q, j) and q-TAZRP with stochastic duality. International Mathe-
+matics Research Notices, 2018(17):5378–5416, 2018.
+[29] J. Kuan. Two Dualities: Markov and Schur–Weyl. International Mathematics Research Notices,
+rnaa333, 2020.
+[30] P. L´evy. Processus stochastiques et mouvement Brownien, Gauthier-Villars, Paris, 1948. MR29120,
+25.
+[31] T. M. Liggett. Interacting particle systems, volume 276. Springer Science & Business Media, 2012.
+[32] T. M. Liggett and T. M. Liggett. Interacting particle systems, volume 2. Springer, 1985.
+[33] Y. Lin. Markov duality for stochastic six vertex model. Electronic Communications in Probability,
+24:1–17, 2019.
+[34] D. V. Lindley. The theory of queues with a single server. In Mathematical Proceedings of the
+Cambridge Philosophical Society, volume 48, pages 277–289. Cambridge University Press, 1952.
+[35] P. Lloyd and A. Sudbury. Quantum operators in classical probability theory. IV. Quasi-duality
+and thinnings of interacting particle systems. The Annals of Probability, 25(1):96–114, 1997.
+61
+
+
+===== PDF PAGE 62 =====
+
+[36] O. Ogievetsky and P. Pyatov. Lectures on Hecke algebras. Technical report, SIS-2004-191, 2001.
+[37] S. Sandow and G. Sch¨utz. On uq [su (2)]-symmetric driven diﬀusion. EPL (Europhysics Letters),
+26(1):7, 1994.
+[38] G. Sch¨utz and S. Sandow. Non-Abelian symmetries of stochastic processes: Derivation of corre-
+lation functions for random-vertex models and disordered-interacting-particle systems. Physical
+Review E, 49(4):2726, 1994.
+[39] G. M. Sch¨utz. Duality relations for asymmetric exclusion processes. Journal of statistical physics,
+86(5):1265–1287, 1997.
+[40] F. Spitzer. Interaction of Markov processes. Advances in Mathematics, 5(2):246–290, 1970.
+[41] A. Sudbury and P. Lloyd. Quantum operators in classical probability theory: II. The concept of
+duality in interacting particle systems. The Annals of Probability, 23(4):1816–1830, 1995.
+[42] The Computational Algebra Group, School of Mathematics and Statistics, University of Sydney.
+Magma computational algebra system. Available at http://magma.maths.usyd.edu.au/magma/
+(2022/12/14).
+[43] R. Tribe and O. Zaboronski. Pfaﬃan formulae for one dimensional coalescing and annihilating
+systems. Electronic Journal of Probability, 16:2080–2103, 2011.
+62

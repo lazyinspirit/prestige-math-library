@@ -2,7 +2,7 @@
 id: prop-gauge-transformations-act-on-principal-connections
 kind: proposition
 title: Gauge transformations act on principal connections and carry curvature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

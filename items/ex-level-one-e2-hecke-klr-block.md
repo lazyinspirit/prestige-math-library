@@ -2,7 +2,7 @@
 id: ex-level-one-e2-hecke-klr-block
 kind: example
 title: "The level-one e=2, one-strand Hecke and KLR blocks are both scalar"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

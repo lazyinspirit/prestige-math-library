@@ -2,7 +2,7 @@
 id: lem-it-square-root-cq-packing-bound
 kind: lemma
 title: Finite square-root measurement packing bound for cq states
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

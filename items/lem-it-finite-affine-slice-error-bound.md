@@ -2,7 +2,7 @@
 id: lem-it-finite-affine-slice-error-bound
 kind: lemma
 title: Error bound for a finite simplex and affine slice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

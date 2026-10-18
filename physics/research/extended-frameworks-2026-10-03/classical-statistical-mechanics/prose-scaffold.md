@@ -42,6 +42,28 @@ $1/\prod_sN_s!$, without claiming a smooth quotient at coincidences. Species
 resolution and reference action scales affect entropy offsets and chemical
 potentials and are physical/model choices.
 
+The base phase-space and ideal-interaction branches use the mechanical momentum
+of the declared neutral model. For a static electromagnetic coupling, the
+category now has a separate local model definition: on a bounded region
+$\Omega\subset\mathbb R^3$ with prescribed static potentials extending as
+$C^2$ functions to a neighborhood of its compact closure,
+a particle of mass $m>0$ and charge $e$ has Lagrangian
+$L=\tfrac12m|v|^2+eA\cdot v-e\varphi$, canonical momentum
+$p=mv+eA$, mechanical momentum $\pi=p-eA$, and Hamiltonian
+$H=|p-eA|^2/(2m)+e\varphi$. These are typed physical data, with
+$[eA]=\mathrm{kg\,m\,s^{-1}}$ and $[e\varphi]=\mathrm J$. The source definition
+[[def-em-gauge-transformation]] supplies the electromagnetic potential gauge
+convention; [[def-cm12-hamiltonian]] supplies the Legendre-transform
+convention for its narrower $L=K-U$ branch, while the velocity-dependent
+electromagnetic Legendre map is inverted locally here. The local proof shows
+that a static gauge change $A\mapsto A+\nabla\chi$ induces
+$p\mapsto p+e\nabla\chi$, preserves the cotangent symplectic form and its
+Liouville measure, and leaves the canonical partition function unchanged when
+the same static preparation is used. It does not cover a time-dependent gauge
+change, a field-energy term, a Maxwell source model, or a region lacking the
+declared global potentials. Gauge-dependent canonical momentum is not
+identified with mechanical momentum.
+
 Develop exact finite ensembles on these full spaces: normalized regular energy
 surfaces using coarea, finite-energy bands with a stated width, canonical fixed
 number, grand particle exchange, and isothermal-isobaric volume exchange with
@@ -140,10 +162,24 @@ their regular domains. Derive Liouville evolution, invariant densities, full
 phase-space marginals and the finite BBGKY hierarchy under stated differentiability
 and boundary/decay conditions. Conservation of energy and phase volume does not
 construct complete motion for singular interactions. Recurrence requires an
-invariant finite measure and all relevant iterates. The exact Birkhoff supplier
+invariant finite measure and all relevant iterates. The exact published
+`thm-birkhoff-ergodic-probability-case-for-strong-laws` supplier
 identifies time and space averages only under its explicit measure-preserving,
 integrability and ergodicity conditions, with almost-everywhere qualifications.
 Neither Gibbs stationarity nor recurrence proves the required ergodicity.
+These dynamical notions refer to a chosen probability law. For a measurable
+probability-preserving map $T$ on $(X,\mathcal F,\mu)$, ergodicity means every
+set invariant modulo $\mu$-null sets has probability zero or one. The exact
+`def-strong-and-weak-mixing` uses set-correlation convergence for strong mixing
+and Cesàro convergence of absolute correlation differences for weak mixing,
+with the absolute value inside the average. The published
+`thm-mixing-implies-weak-mixing-implies-ergodicity` gives strong mixing
+$\Rightarrow$ weak mixing $\Rightarrow$ ergodicity, and the published
+`thm-chacon-transformation-is-weakly-mixing-but-not-mixing` shows
+that weak mixing need not imply strong mixing. The map and invariant measure
+must be specified; these discrete-map statements do not assert that a
+Hamiltonian flow is mixing. The harmonic-oscillator countermodel below gives
+an explicit recurrent but nonergodic Hamiltonian shell.
 
 Supply a substantive microscopic limiting branch with smooth Lipschitz mean-field
 interactions on the specified torus and a quantified finite-time coupling/
@@ -172,10 +208,15 @@ Ising-ring correlations; Tonks hard rods with a proved thermodynamic limit and
 convergent exclusion virial remainder; and explicitly nonadditive toy models
 with a proved positive-temperature singularity and ensemble inequivalence.
 Finite Bernoulli sampling gives exact moments and finite-sample concentration/
-large-deviation bounds. A selected random walk has its actually proved scaling
-statement; a characteristic-function calculation is not silently upgraded to
-path-space convergence. Recurrence and coarse-entropy reversal counterexamples
-make the limits of relaxation rhetoric concrete.
+large-deviation bounds. The published `def-moment-generating-function` and
+`thm-hoeffding-independent-bounded-sums` apply under the explicit independent,
+bounded-trial model; the local argument also derives the binomial Chernoff rate
+and exact point-mass bounds. For the selected random walk, the published
+`cor-characteristic-function-criterion-for-weak-convergence` upgrades its
+computed characteristic functions to weak convergence of each fixed-time
+marginal to the stated Gaussian law. It supplies no path-space convergence or
+Hamiltonian diffusion limit. Recurrence and coarse-entropy reversal
+counterexamples make the limits of relaxation rhetoric concrete.
 
 All these are predictions and hypothetical calculations. No source-backed
 reported experiment is manufactured from them. A future empirical comparison

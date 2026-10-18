@@ -2,7 +2,7 @@
 id: thm-affine-clifford-hopf-maps-are-highly-connected
 kind: theorem
 title: Affine Clifford–Hopf maps are highly connected
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

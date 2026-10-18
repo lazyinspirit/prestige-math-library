@@ -2,7 +2,7 @@
 id: lem-noncommutative-filtered-exponential-and-logarithm
 kind: lemma
 title: "Exponential and logarithm in a noncommutative complete filtered algebra"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

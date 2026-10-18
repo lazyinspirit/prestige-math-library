@@ -2,7 +2,7 @@
 id: lem-anyonic-vacuum-f-symbol-frobenius-schur-normalization
 kind: lemma
 title: "The vacuum F-coefficient records the Frobenius–Schur sign"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

@@ -1,7 +1,7 @@
 ---
 page: derived-hall-algebras-examples
 title: "Derived Hall Algebras: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - cex-naive-triangle-orbit-count-omits-derived-homotopy-weight

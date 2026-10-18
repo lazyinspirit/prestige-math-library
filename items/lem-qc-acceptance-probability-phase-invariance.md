@@ -20,8 +20,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "John Watrous, Quantum Computational Complexity, Sections III.2 and IV.1"

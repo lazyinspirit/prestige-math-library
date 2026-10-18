@@ -2,7 +2,7 @@
 id: thm-it-degradable-channel-single-letter-capacities
 kind: theorem
 title: Single-letter quantum and private capacities of degradable channels
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 11

@@ -2,7 +2,7 @@
 id: lem-it-weighted-centroid-squared-error-identity
 kind: lemma
 title: The weighted centroid minimizes finite-cluster squared error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: hall-stability-dt-bps-and-wall-crossing-examples
 title: "Hall Integration, Stability, DT/BPS Invariants, and Wall Crossing: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - hall-stability-dt-bps-and-wall-crossing
 items: []

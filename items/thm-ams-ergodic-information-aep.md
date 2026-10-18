@@ -2,7 +2,7 @@
 id: thm-ams-ergodic-information-aep
 kind: theorem
 title: "Shannon–McMillan limit for finite-alphabet AMS ergodic sources"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

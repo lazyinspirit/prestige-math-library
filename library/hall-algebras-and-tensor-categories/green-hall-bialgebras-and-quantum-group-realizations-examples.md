@@ -2,7 +2,7 @@
 page: green-hall-bialgebras-and-quantum-group-realizations-examples
 title: 'Euler-Twisted Hall Products, Green Coproducts, and Quantum Groups: Examples
   and Counterexamples'
-status: draft
+status: published
 requires:
 - green-hall-bialgebras-and-quantum-group-realizations
 items:

@@ -18,7 +18,7 @@ verification:
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Section 5.1 and Section 5.4"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Definition

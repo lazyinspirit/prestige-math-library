@@ -2,7 +2,7 @@
 id: thm-it-physically-degraded-dm-broadcast-capacity-region
 kind: theorem
 title: Physically degraded two-user DM broadcast capacity region
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: def-motivic-hall-algebra-of-a-finite-quiver
 kind: definition
 title: "The motivic Hall algebra of a finite quiver"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

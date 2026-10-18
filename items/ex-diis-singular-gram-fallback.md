@@ -19,8 +19,6 @@ sources:
       url: https://depositonce.tu-berlin.de/bitstreams/7a3115d5-2ab7-4041-b9ea-5259a6659a2e/download
     - title: Homer F. Walker and Peng Ni, Anderson Acceleration for Fixed-Point Iterations, §1
       url: https://users.wpi.edu/~walker/Papers/Walker-Ni%2CSINUM%2CV49%2C1715-1735.pdf
-verification:
-  precheck: pending
 ---
 
 ## Example

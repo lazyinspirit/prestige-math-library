@@ -2,7 +2,7 @@
 id: def-reduced-relative-ko-and-ko-compact-support
 kind: definition
 title: Reduced and relative real K-theory and compact support
-status: draft
+status: published
 origin: pipeline
 page: real-clifford-modules-ko-and-abs-orientations
 deps:

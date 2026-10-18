@@ -2,7 +2,7 @@
 id: prop-fibonacci-fusion-ring-unit-is-not-tensor-invertible
 kind: proposition
 title: "The Fibonacci ring class is a unit but its simple object is not tensor-invertible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

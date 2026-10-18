@@ -2,7 +2,7 @@
 id: thm-normalized-rational-vanishing-cycles-have-coherent-operations
 kind: theorem
 title: "Normalized rational vanishing cycles have coherent correspondence operations"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

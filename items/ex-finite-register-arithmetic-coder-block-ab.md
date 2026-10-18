@@ -2,7 +2,7 @@
 id: ex-finite-register-arithmetic-coder-block-ab
 kind: example
 title: "Exact rational interval coding of the block AB"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

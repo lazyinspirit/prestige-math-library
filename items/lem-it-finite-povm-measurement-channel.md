@@ -2,7 +2,7 @@
 id: lem-it-finite-povm-measurement-channel
 kind: lemma
 title: A finite POVM defines a classical-output quantum channel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

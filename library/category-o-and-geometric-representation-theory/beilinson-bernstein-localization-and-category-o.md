@@ -1,7 +1,7 @@
 ---
 page: beilinson-bernstein-localization-and-category-o
 title: Beilinson–Bernstein Localization and Category O
-status: draft
+status: published
 items:
 - def-pa36-flag-tdo-and-module
 - lem-pa36-complex-weight-central-character-separation

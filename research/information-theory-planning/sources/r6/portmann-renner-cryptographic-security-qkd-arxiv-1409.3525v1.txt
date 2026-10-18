@@ -1,0 +1,4307 @@
+arXiv:1409.3525v1  [quant-ph]  11 Sep 2014
+
+Cryptographic security of quantum key distribution
+
+Christopher Portmann∗and Renato Renner†
+
+Institute for Theoretical Physics, ETH Zurich, 8093 Zurich, Switzerland.
+
+September 12, 2014
+
+Abstract
+
+This work is intended as an introduction to cryptographic secu-
+rity and a motivation for the widely used Quantum Key Distribution
+(QKD) security definition. We review the notion of security necessary
+for a protocol to be usable in a larger cryptographic context, i.e., for
+it to remain secure when composed with other secure protocols. We
+then derive the corresponding security criterion for QKD. We provide
+several examples of QKD composed in sequence and parallel with dif-
+ferent cryptographic schemes to illustrate how the error of a composed
+protocol is the sum of the errors of the individual protocols. We also
+discuss the operational interpretations of the distance metric used to
+quantify these errors.
+
+∗chportma@phys.ethz.ch
+†renner@phys.ethz.ch
+
+
+Contents
+
+1
+Introduction
+1
+1.1
+Background . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1
+1.2
+Contributions . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2
+1.3
+Abstract cryptography . . . . . . . . . . . . . . . . . . . . . .
+2
+1.4
+Structure of this paper . . . . . . . . . . . . . . . . . . . . . .
+3
+
+2
+Cryptographic security
+4
+2.1
+Real-world ideal-world paradigm
+. . . . . . . . . . . . . . . .
+4
+2.2
+Example: one-time pad
+. . . . . . . . . . . . . . . . . . . . .
+7
+2.3
+General security definition . . . . . . . . . . . . . . . . . . . .
+9
+2.4
+The distinguishing metric . . . . . . . . . . . . . . . . . . . .
+12
+
+3
+Quantum key distribution
+14
+3.1
+Ideal key . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+3.2
+Real protocol . . . . . . . . . . . . . . . . . . . . . . . . . . .
+15
+3.3
+Security . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+16
+
+4
+Security reduction
+18
+4.1
+Trace distance
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+18
+4.2
+Simulator . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+19
+4.3
+Correctness & secrecy
+. . . . . . . . . . . . . . . . . . . . . .
+21
+4.4
+Robustness
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+22
+
+5
+Examples of composition
+23
+5.1
+Partially known key
+. . . . . . . . . . . . . . . . . . . . . . .
+24
+5.2
+Sequential composition of key distribution and one-time pad .
+26
+5.3
+Parallel composition of key distribution with itself
+. . . . . .
+29
+
+Appendices
+31
+
+A Trace distance
+31
+A.1 Metric definitions . . . . . . . . . . . . . . . . . . . . . . . . .
+32
+A.2 Distinguishing advantage
+. . . . . . . . . . . . . . . . . . . .
+34
+A.3 Probability of a failure . . . . . . . . . . . . . . . . . . . . . .
+36
+A.4 Measures of uncertainty . . . . . . . . . . . . . . . . . . . . .
+38
+A.4.1
+Probability of guessing . . . . . . . . . . . . . . . . . .
+38
+A.4.2
+Entropy . . . . . . . . . . . . . . . . . . . . . . . . . .
+39
+
+B Alternative secrecy criterion
+40
+
+ii
+
+
+C More Abstract Cryptography
+41
+C.1 Distinguishing metric . . . . . . . . . . . . . . . . . . . . . . .
+41
+C.2 Generic protocol composition . . . . . . . . . . . . . . . . . .
+42
+C.2.1
+Sequential composition . . . . . . . . . . . . . . . . . .
+42
+C.2.2
+Parallel composition . . . . . . . . . . . . . . . . . . .
+43
+
+D Composition of authentication and QKD
+43
+D.1 Authentication
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+44
+D.2 Parallel composition of authentication . . . . . . . . . . . . .
+47
+D.3 Sequential composition of authentication and key distribution
+47
+D.4 Iterated key expansion . . . . . . . . . . . . . . . . . . . . . .
+49
+
+Acknowledgements
+50
+
+References
+50
+
+iii
+
+
+List of Figures
+
+2.1
+Recursive construction of resources . . . . . . . . . . . . . . .
+5
+2.2
+Distinguishing systems . . . . . . . . . . . . . . . . . . . . . .
+7
+2.3
+Real one-time pad system . . . . . . . . . . . . . . . . . . . .
+8
+2.4
+Secure channel
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+2.5
+Ideal one-time pad system . . . . . . . . . . . . . . . . . . . .
+9
+2.6
+Cryptographic security . . . . . . . . . . . . . . . . . . . . . .
+12
+a
+Availability (no adversary)
+. . . . . . . . . . . . . . .
+12
+b
+Security in the presence of an adversary . . . . . . . .
+12
+3.1
+Secret key resources
+. . . . . . . . . . . . . . . . . . . . . . .
+15
+a
+Simple ideal key
+. . . . . . . . . . . . . . . . . . . . .
+15
+b
+Ideal key with switch . . . . . . . . . . . . . . . . . . .
+15
+c
+Ideal key & filter . . . . . . . . . . . . . . . . . . . . .
+15
+d
+Ideal key & simulator
+. . . . . . . . . . . . . . . . . .
+15
+3.2
+QKD system
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+a
+With adversary . . . . . . . . . . . . . . . . . . . . . .
+17
+b
+Without adversary . . . . . . . . . . . . . . . . . . . .
+17
+4.1
+Simulator for QKD . . . . . . . . . . . . . . . . . . . . . . . .
+20
+5.1
+Example: partially known secret key . . . . . . . . . . . . . .
+25
+a
+QKD protocol
+. . . . . . . . . . . . . . . . . . . . . .
+25
+b
+Ideal key
+. . . . . . . . . . . . . . . . . . . . . . . . .
+25
+5.2
+Example: serial composition of one-time pad and QKD
+. . .
+27
+a
+One-time pad & QKD . . . . . . . . . . . . . . . . . .
+27
+b
+One-time pad & ideal key . . . . . . . . . . . . . . . .
+27
+c
+Secure channel . . . . . . . . . . . . . . . . . . . . . .
+27
+5.3
+Example: parallel composition of QKD . . . . . . . . . . . . .
+30
+a
+QKD protocols . . . . . . . . . . . . . . . . . . . . . .
+30
+b
+Ideal keys . . . . . . . . . . . . . . . . . . . . . . . . .
+30
+D.1 Authentic channel resources . . . . . . . . . . . . . . . . . . .
+45
+a
+Simple authentic channel
+. . . . . . . . . . . . . . . .
+45
+b
+Authentic channel with switch
+. . . . . . . . . . . . .
+45
+D.2 Real authentication system
+. . . . . . . . . . . . . . . . . . .
+45
+D.3 Ideal authentication system . . . . . . . . . . . . . . . . . . .
+46
+D.4 Example: serial composition of authentication and QKD . . .
+48
+a
+Authentication & QKD
+. . . . . . . . . . . . . . . . .
+48
+b
+Ideal authentic channel & QKD . . . . . . . . . . . . .
+48
+c
+Ideal key
+. . . . . . . . . . . . . . . . . . . . . . . . .
+48
+
+iv
+
+
+1
+Introduction
+
+1.1
+Background
+
+The first Quantum Key Distribution (QKD) protocols were proposed inde-
+pendently by Bennett and Brassard [BB84] in 1984— inspired by early work
+on quantum money by Wiesner [Wie83]—and by Ekert [Eke91] in 1991. The
+original papers discussed security in the presence of an eavesdropper that
+could perform only limited operations on the quantum channel. The first se-
+curity proofs that considered an unbounded adversary were given more than
+a decade later [May96,BBB+00,SP00,May01,BBB+06]. Another decade af-
+ter the first such proof, K¨onig et al. [KRBM07] showed that the security
+criterion used was insufficient: even though it guarantees that an eavesdrop-
+per cannot guess the key, this only holds if the key is never used. If part
+of the key is revealed to the eavesdropper— for example, by using it to en-
+crypt a message known to her— the rest becomes insecure. A new security
+criterion for QKD was introduced, along with a new proof of security for
+BB84 [RK05,BHL+05,Ren05]. It was argued that ρKE, the joint state of the
+final key (K) and quantum information gathered by an eavesdropper (E),
+must be close to an ideal key, τK, that is perfectly uniform and independent
+from the adversary’s information ρE:
+
+(1 −pabort)D(ρKE, τK ⊗ρE) ≤ε ,
+(1)
+
+where pabort is the probability that the protocol aborts,1 D(·, ·) is the trace
+distance2 and ε ∈[0, 1] is a (small) real number.3
+
+The type of security flaw suffered by the early QKD security criteria
+is well known in classical cryptography. It was addressed independently by
+Pfitzmann and Waidner [PW00,PW01,BPW04,BPW07] and Canetti [Can01,
+CDPW07, Can13], who introduced general frameworks to define crypto-
+graphic security, which they dubbed reactive simulatability and universal
+composability, respectively.
+These frameworks were adapted to quantum
+cryptography by Ben-Or and Mayers [BM04] and Unruh [Unr04, Unr10],
+and the security of QKD was discussed within these frameworks by Ben-Or
+et al. [BHL+05] and M¨uller-Quade and Renner [MQR09]. Recently, Mau-
+rer and Renner [MR11] introduced a new cryptographic security framework,
+Abstract Cryptography (AC), which both simplifies and generalizes previous
+frameworks, and applies equally to the classical and quantum settings.
+The core idea of all these security frameworks is to prove that the func-
+tionality constructed by the real protocol is indistinguishable from the func-
+
+1In [Ren05], Eq. (1) was introduced with a subnormalized state ρKE, with tr(ρKE) =
+1 −pabort, instead of explicitly writing the factor (1 −pabort). The two formulations are
+however mathematically equivalent.
+2This metric is defined and discussed in detail in Appendix A.
+3Another formulation of this security criterion, (1−pabort) minσE D(ρKE, τK ⊗σE) ≤ε,
+has also been proposed in the literature. We discuss this alternative in Appendix B.
+
+1
+
+
+tionality of an ideal resource that fulfills in a perfect way whatever task
+is expected of the cryptographic protocol — in the case of QKD, this ideal
+resource provides the two players with a perfect key, unknown to the adver-
+sary. If this ideal system is indistinguishable from the real one, then one
+can be substituted for the other in any context. Players who run a QKD
+protocol can thus treat the resulting key as if it were perfect, which triv-
+ially implies that it can be safely used and composed arbitrarily with other
+(secure) protocols.
+
+1.2
+Contributions
+
+Since the security criterion of Eq. (1) provides the aforementioned compo-
+sitional guarantees, it is widely used in the QKD literature and generally
+introduced as the correct security definition (see, e.g., the QKD review pa-
+per [SBPC+09]). A more detailed explanation as to why this is the case
+is however usually omitted due to the highly involved security frameworks.
+Even the technical works [RK05, BHL+05, Ren05, MQR09] that introduced
+and discuss Eq. (1) do not provide a self contained justification of this se-
+curity notion. The current paper aims to fill in this gap by revisiting the
+security of QKD using the AC framework.
+Our goals are twofold.
+Firstly, we provide an introduction to crypto-
+graphic security. We do not discuss the AC framework in detail, but explain
+the main ideas underlying cryptographic security and illustrate protocol
+composition with many examples. Secondly, we use this framework to show
+how Eq. (1) can be derived. We also provide in Appendix A an extensive dis-
+cussion of the interpretation and operational meaning of the trace distance
+used in Eq. (1).
+
+1.3
+Abstract cryptography
+
+The traditional approach to defining security [PW00,PW01,Can01] can be
+seen as bottom-up. One first defines (at a low level) a computational model
+(e.g., a Turing machine). One then defines how the machines communicate
+(e.g., by writing to and reading from shared tapes) and some form of schedul-
+ing. Next, one can define notions of complexity and efficiency. Finally, the
+security of a cryptosystem can be defined.
+Abstract cryptography (AC) on the other hand uses a top-down ap-
+proach. In order to state definitions and develop a theory, one starts from
+the other end, the highest possible level of abstraction— the composition of
+abstract systems— and proceeds downwards, introducing in each new lower
+level only the minimal necessary specializations. The (in)distinguishability
+of the real and ideal systems is defined as a metric on abstract systems,
+which, at a lower level, can be chosen to capture the distinguishing power
+of a computationally bounded or unbounded environment.
+The abstract
+
+2
+
+
+systems are instantiated with, e.g., a synchronous or asynchronous network
+of (abstract) machines.
+These machines can be instantiated with either
+classical or quantum processes.
+One may give the analogous example of group theory, which is used
+to describe matrix multiplication. In the bottom-up approach, one would
+start explaining how matrices are multiplied, and then based on this find
+properties of the matrix multiplication. In contrast to this, the top-down
+approach would correspond to first defining the (abstract) multiplication
+group and prove theorems already on this level. The matrix multiplication
+would then be introduced as a special case of the multiplicative group. This
+simplifies greatly the framework by avoiding unnecessary specificities from
+lower levels, and does not hard code a computation or communication model
+(e.g., classical or quantum, synchronous or asynchronous) in the security
+framework.
+
+1.4
+Structure of this paper
+
+In Section 2 we start by introducing a simplified version of the AC frame-
+work [MR11], which is sufficient for the specific adversarial structure relevant
+to QKD, namely honest Alice and Bob, and dishonest Eve. In Section 3 we
+model the real and ideal systems of a generic QKD protocol, and plug it
+in the AC security framework, obtaining a security definition for QKD. In
+Section 4 we then prove that this can be reduced to Eq. (1).4 In Section 5
+we illustrate the composition of protocols in AC with examples of QKD com-
+posed in various settings. We emphasize that this section does not prove
+that the QKD security criterion is composable — the proof of this follows
+from the generic proof that the AC framework is composable [MR11]— but
+illustrates how the security of composed protocols results from the security
+of individual protocols and the triangle inequality. Further examples can
+be found in Appendix D, where we model the security of authentication
+and compose it with QKD, resulting in a key expansion protocol. We also
+provide a substantial review of the trace distance and its operational inter-
+pretations in Appendix A. In particular, we prove that it corresponds to
+the probability a distinguisher has of correctly guessing whether it is inter-
+acting with the real or ideal QKD system — the measure used in the AC
+framework — and discuss how to interpet this. An overview of the other
+appendices is given on page 31.
+
+4More precisely, the security definition of QKD is reduced to a combination of two
+criteria, secrecy (captured by Eq. (1)) and correctness.
+
+3
+
+
+2
+Cryptographic security
+
+A central element in modeling security is that of resources — resources used
+in protocols and resources constructed by protocols. For example, a QKD
+protocol constructs a functionality which shares a secret key between two
+players. This functionality is a resource, which can be used by other pro-
+tocols, e.g., to encrypt a message. To construct this secret key resource,
+a QKD protocol typically uses two other resources, an authentic classical
+channel5 and an insecure quantum channel. The authentic channel resource
+can in turn be constructed from an insecure channel resource and a pass-
+word6 [RW03]. Composing the authentication protocol with the QKD pro-
+tocol results in a scheme which constructs a secret key from a password and
+insecure channels. Part of the resulting secret key can be used in further
+rounds of authentication and QKD to produce even more secret key. This
+is illustrated in Figure 2.1.
+For any cryptographic task one can define an ideal resource which full-
+fils this task in a perfect way. A protocol is then considered secure if the
+real resource actually constructed is indistinguishable from a system run-
+ning the ideal resource.7
+This notion of security based on distinguishing
+real and ideal systems is explained informally in Section 2.1. It is then il-
+lustrated with the one-time pad8 in Section 2.2. In Section 2.3 we give a
+formal security definition in the Abstract Cryptography (AC) framework
+for the special case of three party protocols with honest Alice and Bob,
+and dishonest Eve. Finally, in Section 2.4 we discuss how the metric used to
+quantify the (in)distinguishability between the real and ideal settings should
+be interpreted.
+
+2.1
+Real-world ideal-world paradigm
+
+Cryptography aims at providing security guarantees in the presence of an
+adversary. And traditionally, security has been defined with respect to the
+information gathered by this adversary — but, as we shall see, this can be
+insufficient to achieve the desired security guarantees. A typical example
+of this is the security criterion used in early papers on QKD, e.g., [May96,
+
+5An authentic channel guarantees that the message received comes from the legitimate
+sender, and has not been tampered with or generated by an adversary.
+6A short key K with min-entropy H∞(K) = Ω(log |K|) is sufficient for authentica-
+tion [RW03], where K is the key alphabet— i.e., having H∞(K) linear in the key length
+log |K| is sufficient. We refer to such a weak key as a password.
+7Note that we use the notions real and ideal in a relative sense: the ideal resource that
+we wish to construct with one protocol might be considered a real resource available to
+another protocol.
+8The one-time pad is an encryption scheme that XORs every bit of a message x with
+a bit of a key k, and transmits the resulting ciphertext y = x ⊕k to the receiver. The
+message, which can be decrypted by performing the reverse operation x = y ⊕k, is hidden
+from any player who intercepts the ciphertext y but has no knowledge of the key k.
+
+4
+
+
+Short password
+Insecure
+classical channel
+
+Authentic
+channel
+
+Insecure quan-
+tum channel
+
+Long secret key
+Insecure
+classical channel
+
+Insecure
+classical channel
+
+Authentic
+channel
+
+Authentic
+channel
+
+Secure channel
+
+Insecure quan-
+tum channel
+
+Long secret key
+
+Authentication
+
+QKD
+
+Authentication
+Authentication
+
+One-time pad
+QKD
+
+Figure 2.1 – A cryptographic protocol uses (weak) resources to construct
+other (stronger) resources.
+These resources are depicted in the boxes, and
+the arrows are protocols. Each box is a one-time-use resource, so the same
+resource appears in multiple boxes if different protocols require it. The long
+secret key resource in the center of the figure is split in three shorter keys, and
+each protocol uses one of these keys.
+
+5
+
+
+BBB+00,SP00,May01]. Let K be the secret key produced by a run of a QKD
+protocol, and Y be a random variable obtained by an adversary attacking
+the scheme and measuring her quantum system E. It can be argued that
+the key is unknown to the adversary if she gains only negligible information
+about it, i.e., if for all attacks and measurements of the resulting quantum
+system,
+I(K; Y ) ≈0 ,
+(2)
+
+where I(K; Y ) is the mutual information9 between K and Y .
+However, even if a key obtained from a protocol satisfying Eq. (2) is
+used in a perfectly secure encryption scheme like the one-time pad, it can
+leak information about the message. K¨onig et al. [KRBM07] give such an
+example: they find a quantum state ρKE which satisfies Eq. (2), but which
+cannot be used to encrypt a message partly known to an adversary. They
+show that if the key is split in two, K = K1K2, and the adversary delays
+measuring her system E until the first part, K1, is revealed to her — e.g.,
+because a known message was encrypted by the one-time pad with K1 — she
+can obtain information about the rest of the key. More precisely, they prove
+that for this state ρK1K2E,
+
+I(K2; Y ′) ≫0 ,
+
+where Y ′ is a random variable obtained by a measurement of the joint state
+ρK1E consisting of the partial key K1 and the quantum information E gath-
+ered during the QKD protocol.10 Even though the key obtained from the
+QKD protocol is approximately uniform and independent from the adver-
+sary’s information Y , it is unusable in a cryptographic context, and another
+approach than the adversarial viewpoint is necessary for defining crypto-
+graphic security.
+This new approach was proposed independently by Canetti [Can01] and
+Pfitzmann and Waidner [PW00,PW01] for classical cryptography. The gist
+of their global security paradigm lies in measuring how well some real proto-
+col can be distinguished from some ideal system that fullfils the task in an
+ideal way, and is often referred to as the “real-world ideal-world” paradigm.11
+
+To do this, the notion of an adversary is dropped in favor of a distin-
+guisher.
+Apart from having the capabilities of the adversary, this distin-
+guisher also encompasses any protocol that is run before, after, and during
+the protocol being analyzed.
+The role of the distinguisher is to capture
+“the rest of the world”, everything that exists outside of the honest play-
+ers and the resources they share. A distinguisher is defined as an entity
+that can choose the inputs of the honest players (that might come from a
+
+9This information measure, the maximum mutual information over all measurements
+of the quantum system, is called accessible information.
+10This phenomenon is called information locking [DHL+04,Win14].
+11As already noted in Footnote 7, we use the notions real and ideal in a relative sense.
+
+6
+
+
+previously run protocol), receives their outputs (that could be used in a
+subsequent protocol), and simultaneously fullfils the role of the adversary,
+possibly eavesdropping on the communication channels and tampering with
+messages. This distinguisher is given a black box access to either the real
+or an ideal system, and must decide with which of the two it is interact-
+ing. A protocol is then considered secure if the real system constructed is
+indistinguishable from the ideal one. This is illustrated in Figure 2.2.
+
+Real system
+
+Distinguisher
+
+0, 1
+
+Ideal system
+
+Distinguisher
+
+0, 1
+
+Figure 2.2 – A distinguisher has a complete description of two systems, and is
+given a black-box access to one of the two. After interacting with the system,
+it must guess which one it is holding.
+
+In the case of QKD, this means that the distinguisher does not only
+obtain the system E of the eavesdropper, but also receives the final key K
+generated by Alice and Bob. In the real world, this key is potentially corre-
+lated to E, and in an ideal system, K is uniformly random and independent
+from E. The distinguisher can then run the attack of K¨onig et al. [KRBM07]
+to distinguish between the real and ideal systems: if Y ′, the result of the
+measurement of K1 and E is correlated to K2, it knows that it was given
+the real system, otherwise it must have the ideal one. This specific attack
+is illustrated in more detail in Section 5.1.
+
+2.2
+Example: one-time pad
+
+In this section, we illustrate with the one-time pad how security is defined
+in the real-world ideal-world paradigm. The one-time pad protocol uses a
+secret key k to encrypt a message x as y := x ⊕k. The ciphertext y is then
+sent on an authentic channel to the receiver, who decrypts it, obtaining
+x = y ⊕k. y is however also leaked to the adversary that is eavesdropping
+on the authentic channel. This is depicted in Figure 2.3.
+The one-time pad protocol thus uses two resources, a secret key and an
+authentic channel. The resource we wish to construct with this encryption
+scheme is a secure channel: a resource which transmits a message x from the
+sender to the receiver, and leaks only information about the message size
+|x| at the adversary’s interface, but not the contents of the message. This
+
+7
+
+
+y =
+x ⊕k
+
+πotp
+A
+
+Alice
+
+x =
+y ⊕k
+
+πotp
+B
+
+Bob
+
+key
+
+Secret key
+
+Authentic channel
+
+Eve
+
+k
+k
+
+x
+x
+
+y
+y
+
+y
+
+Figure 2.3 – The real one-time pad system — Alice has access to the left
+interface, Bob to the right interface and Eve to the lower interface— consists
+of the one-time pad protocol (πotp
+A , πotp
+B ), and the secret key and authentic
+channel resources. The combination of these resources and protocol constructs
+a system that takes a message x at Alice’s interface, outputs a ciphertext y at
+Eve’s interface and the original message x at Bob’s interface.
+
+is illustrated in Figure 2.4.
+
+Alice
+Bob
+
+Eve
+
+x
+x
+
+|x|
+
+Figure 2.4 – A secure channel from Alice to Bob leaks only the message size
+at Eve’s interface.
+
+Since an ideal resource “magically” solves the cryptographic task con-
+sidered, e.g., by producing perfect secret keys or transmitting a message
+directly from Alice to Bob, the adversary’s interface of the ideal resource
+is usually quite different from her interface of the real system, which gives
+her access to the resources used.
+For the one-time pad, the real system
+from Figure 2.3 outputs a string y at Eve’s interface, but the ideal secure
+channel from Figure 2.4 outputs an integer, |x|. To make the comparison
+between real and ideal systems possible, we define the ideal system to con-
+sist of the ideal resource as well as a simulator plugged into the adversary’s
+interface of the ideal resource, that recreates the communication occurring
+in the real system. For the one-time pad, this simulator must generate a
+ciphertext y given the message length |x|. This is simply done by gener-
+ating a random string of the appropriate length, as depicted in Figure 2.5.
+Note that putting such a simulator between the ideal resource and the adver-
+sary can only weaken her, since any operation performed by the simulator
+could equivalently be performed by an adversary connected directly to the
+interface of the ideal resource.
+
+8
+
+
+Secure channel
+
+Alice
+Bob
+
+σotp
+E
+Random string
+
+x
+x
+
+|x|
+
+Eve
+
+y
+
+Figure 2.5 – The ideal one-time pad system — Alice has access to the left
+interface, Bob to the right interface and Eve to the lower interface— consists
+of the ideal secure channel and a simulator σotp
+E
+that generates a random string
+y of length |x|.
+
+To prove that the one-time pad constructs a secure channel from an
+authentic channel and a secret key, we view the real and ideal one-time
+pad systems of Figure 2.3 and Figure 2.5 as black boxes, and need to show
+that no distinguisher can tell with which of the two it has been connected.
+For both black boxes, if the distinguisher inputs x at Alice’s interface, the
+same string x is output at Bob’s interface and a uniformly random string of
+length |x| is output at Eve’s interface. The two systems are thus completely
+indistinguishable — if the distinguisher were to take a guess, it would be
+right with probability exactly 1/2— and we say that the one-time pad has
+perfect security.
+If two systems are indistinguishable, they can be used interchangeably in
+any setting. For example, let some protocol π′ be proven secure if Alice and
+Bob are connected by a secure channel. Since the one-time pad constructs
+such a channel, it can be used in lieu of the secure channel, and composed
+with π′. Or equivalently, the contrapositive: if composing the one-time pad
+and π′ were to leak some vital information, which would not happen with a
+secure channel, a distinguisher that is either given the real or ideal system
+could run π′ internally and check whether this leak occurs to know with
+which of the two it is interacting.
+
+2.3
+General security definition
+
+The previous sections introduced the concepts of resources, protocols and
+simulator in an informal manner. In the AC framework these elements are
+defined in an abstract way. For example, a resource is an abstract system
+that is shared between all players and provides each one with an interface
+that allows in- and outputs. AC does not define the internal workings of a
+resource. It postulates axioms that these abstract systems must fulfill— e.g.
+there must exist a metric and a parallel composition operator on the space of
+resources—and is valid for any instantiation which respects these axioms. In
+
+9
+
+
+the group theory analogy introduced in Section 1.3, these axioms correspond
+to the group axioms (closure, associativity, identity and invertibility). Any
+set and operation that respects these group axioms is an instantiation of a
+group, and any theorem proven for groups applies to this instantiation.
+Thus, AC defines cryptographic security for abstract systems which ful-
+fill certain basic properties. In the following we briefly sketch what these
+are. Note that examples — such as the model of the one-time pad given
+in Figures 2.3 and 2.5 — necessarily assume some instantiation of the ab-
+stract systems. Since we consider only simple examples in this work, we do
+not provide formal generic definitions of these lower levels, and refer to the
+discussions in [MR11,Mau12,DFPR14] on how this can be modeled.
+
+Resource.
+An I-resource is an (abstract) system with interfaces specified
+by a set I (e.g., I = {A, B, E}). Each interface i ∈I is accessible to a
+user i and provides her or him with certain controls (the possibility of read-
+ing outputs and providing inputs). Resources are equipped with a parallel
+composition operator, ∥, that maps two resources to another resource.
+
+Converter.
+To transform one resource into another, we use converters.
+These are (abstract) systems with two interfaces, an inside interface and an
+outside interface. The inside interface connects to an interface of a resource,
+and the outside interface becomes the new interface of the constructed re-
+source. We write either αiR or Rαi to denote the new resource with the
+converter α connected at the interface i of R,12 and αR or Rα for a set of
+converters α = {αi}i, for which it is clear to which interface they connect.
+A protocol is a set of converters (one for every honest player) and a
+simulator is also a converter.
+Another type of converter that we need is
+a filter, which we often denote by ♯or ♦. When placed over a dishonest
+player’s interface, a filter prevents access to the corresponding controls and
+emulates an honest behavior.
+Serial and parallel composition of converters is defined as follows:
+
+(αβ)iR := αi(βiR)
+and
+(α∥β)i(R∥S) := (αiR)∥(βiS) .
+(3)
+
+Filtered resource.
+A pair of a resource R and a filter ♯together specify
+the (reactive) behavior of a system both when no adversary is present —
+with the filter plugged in the adversarial interface, R♯E — and in the case of
+a cheating player that removes the filter and has full access to her interface
+of R. We call such a pair (R, ♯) a filtered resource, and usually denote it by
+R♯.
+
+12There is no mathematical difference between αiR and Rαi. It sometimes simplifies
+the notation to have the converters for some players written on the right of the resource
+and the ones for other players on the left, instead of all on the same side, hence the two
+notations.
+
+10
+
+
+Metric.
+There must exist a pseudo-metric d(·, ·) on the space of resources,
+i.e., for any three resources R, S, T, it satisfies the following conditions:13
+
+(identity)
+d(R, R) = 0 ,
+(4)
+
+(symmetry)
+d(R, S) = d(S, R) ,
+(5)
+
+(triangle inequality)
+d(R, S) ≤d(R, T) + d(T, S) .
+(6)
+
+Furthermore, this pseudo-metric must be non-increasing under composition
+with resources and converters: for any converter α and resources R, S, T, we
+require
+
+d(αR, αS) ≤d(R, S)
+and
+d(R∥T, S∥T) ≤d(R, S) .
+(7)
+
+We are now ready to define the security of a cryptographic protocol. We
+do so in the three player setting, for honest Alice and Bob, and dishonest Eve.
+Thus, in the following, all resources have three interfaces, denoted A, B and
+E, and we only consider honest behaviors (given by a protocol (πA, πB)) at
+the A and B-interfaces, but arbitrary behavior at the E-interface. We refer
+to [MR11] for the general case, when arbitrary players can be dishonest.
+
+Definition 2.1 (Cryptographic security [MR11]). Let πAB = (πA, πB) be a
+protocol and R♯= (R, ♯) and S♦= (S, ♦) denote two filtered resources. We
+say that πAB constructs S♦from R♯within ε, which we write R♯
+π,ε
+−−→S♦, if
+the two following conditions hold:
+i) We have
+d(πABR♯E, S♦E) ≤ε .
+
+ii) There exists a converter σE — which we call simulator— such that
+
+d(πABR, SσE) ≤ε .
+
+If it is clear from the context what filtered resources R♯and S♦are meant,
+we simply say that πAB is ε-secure.
+
+The first of these two conditions measures how close the constructed
+resource is to the ideal resource in the case where no malicious player is
+intervening, which we call availability.14
+The second condition captures
+security in the presence of an adversary. These two equations are illustrated
+in Figure 2.6.
+
+13If additionally d(R, S) = 0 =⇒R = S, then d is a metric.
+14This is sometimes referred to as the correctness of the protocol in the cryptographic
+literature. But in QKD, correctness has another meaning— namely the probability that
+Alice and Bob end up with different keys when Eve is active. Instead, the term robustness
+is traditionally used to denote the performance of a QKD protocol under honest (noisy)
+conditions. We refer to Section 4.4 for a discussion of the relation between availability
+and robustness.
+
+11
+
+
+πA
+πB
+R
+
+♯E
+
+≈ε
+
+S
+
+♦E
+
+(a) Condition (i) from Definition 2.1. If Eve’s interfaces are blocked by fil-
+ters emulating honest behavior, the functionality constructed by the protocol
+should be indistinguishable from the ideal resource.
+
+πA
+πB
+R
+
+≈ε
+
+S
+
+σE
+
+(b) Condition (ii) from Definition 2.1. If Eve accesses her cheating interface of
+R, the resulting system must be simulatable in the ideal world by a converter
+σE that only accesses Eve’s interface of the ideal resource S.
+
+Figure 2.6 – A protocol (πA, πB) constructs S♦from R♯within ε if the two
+conditions illustrated in this figure hold. The sequences of arrows at the inter-
+faces between the objects represent (arbitrary) rounds of communication.
+
+It follows from the AC framework [MR11] that if two protocols π and π′
+
+are ε- and ε′-secure, the composition of the two is (ε + ε′)-secure. We illus-
+trate this with several examples in Section 5 and Appendix D, and sketch a
+generic proof in Appendix C.2.
+
+2.4
+The distinguishing metric
+
+The usual pseudo-metric used to define security in the real-world ideal-world
+paradigm is the distinguishing advantage, defined as follows.
+If a distin-
+guisher D can guess correctly with probability pD
+distinguish(R, S) with which
+of two systems R and S it is interacting, we define its advantage as
+
+dD(R, S) := 2pD
+distinguish(R, S) −1 .
+(8)
+
+Changing the power of the distinguisher D (e.g., computationally bounded
+or unbounded) results in different metrics and different levels of security. In
+this work we are interested only in information-theoretic security, we there-
+fore consider only a computationally unbounded distinguisher, and drop the
+
+12
+
+
+superscript D. We write
+
+d(R, S) ≤ε
+or
+R ≈ε S ,
+
+if two systems R and S can be distinguished with advantage at most ε, and
+in the following, the distance between two resources always refers to the
+distinguishing advantage of an unbounded distinguisher. A more extensive
+discussion of distinguishers is given in Appendix C.1.
+Although any pseudo-metric which satisfies the basic axioms can be used
+in Definition 2.1, the distinguishing advantage is of particular importance,
+because it has an operational definition— the advantage a distinguisher has
+in guessing whether it is interacting with the real or ideal system. If the
+distinguisher notices a difference between the two, then something in the real
+setting did not behave ideally. This can be loosely interpreted as a failure
+occurring. If the distinguisher can guess correctly with probability 1 with
+which system it is interacting, a failure must occur systematically. If it can
+only guess correctly with probability 1/2, no failure occurs at all. If it can
+guess correctly with probability p, this can be seen as a failure occurring
+with probability ε = 2p −1.
+The distinguishing advantage can thus be
+interpreted as the probability that a failure occurs in the real protocol.15
+
+And in any practical implementation, the value ε can be chosen accordingly.
+A bound on the security of a protocol does however not tell us how “bad”
+this failure is. For example, a key distribution protocol which produces a
+perfectly uniform key, but with probability ε Alice and Bob end up with
+different keys, is ε-secure. Likewise, a protocol which gives 1 bit of the key to
+Eve with probability ε, but is perfect otherwise, and another protocol which
+gives the entire key to Eve with probability ε, but is perfect otherwise, are
+both ε-secure as well. One could argue that leaking the entire key is worse
+than leaking one bit, which is worse than not leaking anything but generating
+mismatching keys, and this should be reflected in the level of security of the
+protocol. However, leaking one bit can be as bad as leaking the entire key if
+only one bit of the message is vital, and this happens to be the bit obtained
+by Eve. Having mismatching keys and therefore misinterpreting a message
+could have more dire consequences than leaking the message to Eve. How
+bad a failure is depends on the use of the protocol, and since the purpose of
+cryptographic security is to make a security statement that is valid for all
+contexts, bounding the probability that a failure occurs is the best it can
+do.
+Since such a security bound gives no idea of the gravity of a failure— a
+faulty QKD protocol might not only leak the current key, but all future keys
+as well if the current key is used to authenticate messages in future rounds—
+the probability ε of a failure occurring must be chosen small enough that the
+
+15A formal derivation of this interpretation is given in Appendix A.3 for the trace dis-
+tance— the distinguishing advantage between two quantum states.
+
+13
+
+
+accumulation of all possible failure probabilities over a lifetime is still small
+enough. For example, if an implementation of a QKD protocol produces a
+key at a rate of 1 Mbit/s with a failure per bit of 10−24, then this protocol
+can be run for the age of the universe and still have an accumulated failure
+strictly less than 1.
+
+3
+Quantum key distribution
+
+In order to apply the general AC security definition to QKD, we need to
+specify the ideal key filtered resource, which we do in Section 3.1. Likewise,
+we specify in Section 3.2 the real QKD system consisting of the protocol,
+an authentic classical channel and an insecure quantum channel. Plugging
+these systems in Definition 2.1, we obtain in Section 3.3 the security criteria
+for QKD.
+
+3.1
+Ideal key
+
+The goal of a key distribution protocol is to generate a secret key shared
+between two players. One can represent such a resource by a box, one end
+of which is in Alice’s lab, and another in Bob’s. It provides each of them
+with a secret key of a given length, but does not give Eve any information
+about the key. This is illustrated in Figure 3.1a, and is the key resource we
+used in the one-time pad construction (Figure 2.3).
+However, if we wish to realize such a functionality with QKD, there is
+a caveat: an eavesdropper can always prevent any real QKD protocol from
+generating a key by cutting or jumbling the communication lines between
+Alice and Bob, and this must be reflected in the definition of the ideal re-
+source. This box thus also has an interface accessible to Eve, which provides
+her with a switch that, when pressed, prevents the box from generating this
+key. We depict this in Figure 3.1b.
+If modeled with the secret key resource of Figure 3.1b, the one-time
+pad is trivially secure conditioned on Eve preventing a key from being dis-
+tributed — in this case, Alice and Bob do not have a key and do not run
+the one-time pad. The security of the one-time pad is thus reduced to the
+case where a key is generated, which corresponds to Figure 3.1a and is the
+situation analyzed in Section 2.2.
+If no adversary is present, a filter covers Eve’s interface of the resource,
+making it inaccessible to the distinguisher. This filter emulates the honest
+behavior that one expects in the case of a non-malicious noisy channel. For
+a protocol and noisy channel that together produce a key with probability
+1 −δ, the filter should flip the switch on the E-interface of the ideal key
+with probability δ. This is illustrated in Figure 3.1c, and discussed in more
+detail in Section 4.4.
+
+14
+
+
+Alice
+Bob
+
+Eve
+
+key
+k
+k
+
+(a) A resource that always gives a
+key k to Alice and Bob, and nothing
+to Eve.
+
+Alice
+Bob
+
+Eve
+
+key
+
+k, ⊥
+k, ⊥
+
+0, 1
+
+(b) A resource that allows Eve to de-
+cide if Alice and Bob get a key k or
+an error ⊥.
+
+key
+
+Secret key K
+k, ⊥
+k, ⊥
+
+♦E
+
+0, 1
+
+(c) The resource from Figure 3.1b
+with a filter ♦E, modeling the case
+with no adversary.
+
+key
+
+Secret key K
+k, ⊥
+k, ⊥
+
+σE
+
+0, 1
+
+(d) The resource from Figure 3.1b
+with a simulator σE.
+
+Figure 3.1 – Some depictions of shared secret key resources, with filter and
+simulator converters in the last two.
+
+Remark 3.1 (Adaptive key length). For a protocol to construct the shared
+secret key resource of Figure 3.1b, it must either abort or produce a key of
+a fixed length. A more practical protocol could adapt the secret key length
+to the noise level on the quantum channel.
+This provides the adversary
+with the functionality to control the key length (not only whether it gets
+generated or not), and can be modeled by allowing the key length to be
+input at Eve’s interface of the ideal key resource.
+
+3.2
+Real protocol
+
+To construct the secret key resource of Figure 3.1b, a QKD protocol uses
+some other resources: a two-way authentic classical channel and an insecure
+quantum channel. An authentic channel faithfully transmits messages be-
+tween Alice and Bob, but provides Eve with a copy as well. An insecure
+channel is completely under the control of Eve, she can apply any operation
+allowed by physics to the message on the channel. If Eve does not intervene,
+some noise might still be present on the channel, which is modeled by a fil-
+ter that prevents Eve from reading the message, but introduces honest noise
+
+15
+
+
+instead. Since an authentic channel can be constructed from an insecure
+channel and a short shared secret key,16 QKD is sometimes referred to as a
+key expansion protocol.17
+
+A QKD protocol typically has three phases: quantum state distribu-
+tion, error estimation and classical post-processing (for a detailed review of
+QKD see [SBPC+09]). In the first, Alice sends some quantum states on
+the insecure channel to Bob, who measures them upon reception, obtain-
+ing a classical string. In the error estimation phase, they communicate on
+the (two-way) authentic classical channel to sample some bits at random
+positions in the string and estimate the noise on the quantum channel by
+comparing these values to what Bob should have obtained. If the noise level
+is above a certain threshold, they abort the protocol and output an error
+message. If the noise is low enough, they move on to the third phase, and
+make use of the authentic channel to perform error correction and privacy
+amplification on their respective strings, resulting in keys kA and kB (which,
+ideally, should be equal). We sketch this in Figure 3.2.
+
+Remark 3.2 (Source of entanglement). In this work we use an insecure quan-
+tum channel from Alice to Bob to construct the shared secret key resource.
+An alternative resource that is frequently used in QKD instead of this inse-
+cure channel, is a source of entangled states under the control of Eve. The
+source sends half of an entangled state to Alice and another half to Bob. It
+can be modeled similarly to the insecure channel depicted in Figure 3.2, but
+with the first arrow reversed: the states are sent from Eve to Alice and from
+Eve to Bob.
+
+3.3
+Security
+
+Let (πqkd
+A , πqkd
+B ) be the QKD protocol. Let Q and A be the insecure quantum
+channel and authentic classical channel, respectively, with their filters ♯E and
+♭E. Let K denote the secret key resource of Figure 3.1b and let ♦E be its
+filter. Applying Definition 2.1, we find that (πqkd
+A , πqkd
+B ) constructs K♦from
+Q♯and A♭within ε if
+
+πqkd
+A πqkd
+B (Q∥A)(♯E∥♭E) ≈ε K♦E
+(9)
+
+and
+
+∃σE,
+πqkd
+A πqkd
+B (Q∥A) ≈ε KσE .
+(10)
+
+The left- and right-hand sides of Eq. (9) are illustrated in Figures 3.2b and
+3.1c, and the left- and right-hand sides of Eq. (10) are illustrated in Fig-
+ures 3.2a and 3.1d. These two conditions are decomposed into simpler cri-
+teria in Section 4.
+
+16In fact, a short non-uniform key is sufficient for authentication [RW03], see Footnote 6.
+17We model QKD this way in Appendix D.3.
+
+16
+
+
+πqkd
+A
+πqkd
+B
+Authentic channel A
+
+Insecure channel Q
+
+t
+t
+
+t
+
+kA, ⊥
+kB, ⊥
+
+ρ
+ρ′
+
+(a) When Eve is present, her interface gives her complete controle of the inse-
+cure channel and allows her to read the messages on the authentic channel.
+
+πqkd
+A
+πqkd
+B
+Authentic channel A
+
+Insecure channel Q
+
+♯E
+♭E
+
+t
+t
+
+t
+
+kA, ⊥
+kB, ⊥
+
+ρ
+ρ′
+
+(b) When no eavesdropper is present, filters forward Alice’s quantum messages
+to Bob and block the authentic channel’s output at the E-interface. The filter
+♯E might produce non-malicious noise that modifies ρ and models a (honest)
+noisy channel.
+
+Figure 3.2 – The real QKD system — Alice has access to the left interface,
+Bob to the right interface and Eve to the lower interface — consists of the
+protocol (πqkd
+A , πqkd
+B ), the insecure quantum channel Q and two-way authentic
+classical channel A. Alice and Bob abort if the insecure channel is too noisy,
+i.e., if ρ′ is not similar enough to ρ to obtain a secret key of the desired length.
+They run the classical post-processing over the authentic channel, obtaining
+keys kA and kB. The message t depicted on the two-way authentic channel
+represents the entire classical transcript of the classical post-processing.
+
+17
+
+
+4
+Security reduction
+
+By applying the general AC security definition to QKD, we obtained two
+criteria, Eqs. (9) and (10), capturing availability and security, respectively.
+In this section we derive Eq. (1), the trace distance criterion discussed in
+the introduction, from Eq. (10). We first show in Section 4.1 that the dis-
+tinguishing advantage used in the previous sections reduces to the trace
+distance between the quantum states gathered by the distinguisher interact-
+ing with the real and ideal systems. Then in Section 4.2, we fix the simulator
+σE from the ideal system. In Section 4.3 we decompose the resulting secu-
+rity criterion into a combination of secrecy — Eq. (1) — and correctness —
+the probability that Alice’s and Bob’s keys differ. In the last section, 4.4,
+we consider the security condition of Eq. (9), which captures whether, in
+the absence of a malicious adversary, the protocol behaves as specified by
+the ideal resource and corresponding filter. We show how this condition can
+be used to model the robustness of the protocol— the probability that the
+protocol aborts with non-malicious noise.
+
+4.1
+Trace distance
+
+The security criteria given in Eqs. (9) and (10) are defined in terms of the
+distinguishing advantage between resources.
+To simplify these equations,
+we rewrite them in terms of the trace distance, D(·, ·). A formal definition
+of this metric is given in Appendix A.1, along with a discussion of how to
+interpret it in the rest of Appendix A. We start with the simpler case of
+Eq. (9) in the next paragraph, then deal with Eq. (10) after that.
+The two resources on the left- and right-hand sides of Eq. (9) simply
+output classical strings (a key or error message) at Alice and Bob’s interfaces.
+Let these pairs of strings be given by the joint probability distributions PAB
+and ˜PAB. The distinguishing advantage between these systems is thus simply
+the distinguishing advantage between these probability distributions — a
+distinguisher is given a pair of strings sampled according to either PAB or
+˜PAB and has to guess from which distribution it was sampled— i.e.,
+
+d
+�
+πqkd
+A πqkd
+B (Q∥A)(♯E∥♭E), K♦E
+�
+= d(PAB, ˜PAB) .
+
+The distinguishing advantage between two probability distributions is equal
+to their total variation distance18 — which we prove in in Appendix A.2 —
+i.e., d(PAB, ˜PAB) = D(PAB, ˜PAB). Putting the two together we get
+
+d
+�
+πqkd
+A πqkd
+B (Q∥A)(♯E∥♭E), K♦E
+�
+= D(PAB, ˜PAB) ,
+
+18The total variation distance between two probability distributions is equivalent to the
+trace distance between the corresponding (diagonal) quantum states. We use the same
+notation for both metrics, D(·, ·), since the former is a special case of the latter.
+
+18
+
+
+where PAB and ˜PAB are the distributions of the strings output by the real
+and ideal systems, respectively.
+The resources on the left- and right-hand sides of Eq. (10) are slightly
+more complex. They first output a state ϕC at the E-interface, namely the
+quantum states prepared by Alice, which she sends on the insecure quantum
+channel. Without loss of generality, the distinguisher now applies any map
+E : L(HC) →L(HCE′) allowed by quantum physics to this state, obtaining
+ρCE′ = E(ϕC) and puts the C register back on the insecure channel for
+Bob, keeping the part in E′.
+Finally, the systems output some keys (or
+error messages) at the A and B-interfaces, and a transcript of the post-
+processing at the E-interface. Let ρE
+ABE denote the tripartite state held by
+a distinguisher interacting with the real system, and let ˜ρE
+ABE denote the
+state held after interacting with the ideal system, where the registers A and
+B contain the final keys or error messages, and the register E holds both
+the state ρE′ obtained from tampering with the quantum channel and the
+post-processing transcript. Distinguishing between these two systems thus
+reduces to maximizing over the distinguisher strategies (the choice of E) and
+distinguishing between the resulting states, ρE
+ABE and ˜ρE
+ABE:
+
+d
+�
+πqkd
+A πqkd
+B (Q∥A), KσE
+�
+= max
+E
+d
+�
+ρE
+ABE, ˜ρE
+ABE
+�
+.
+
+The advantage a distinguisher has in guessing whether it holds the state
+ρE
+ABE or ˜ρE
+ABE is given by the trace distance between these states, i.e.,
+
+d
+�
+ρE
+ABE, ˜ρE
+ABE
+�
+= D
+�
+ρE
+ABE, ˜ρE
+ABE
+�
+.
+
+This was first proven by Helstrom [Hel76]. For completeness, we provide a
+proof in Appendix A.2, Theorem A.5.
+The distinguishing advantage between the real and ideal systems of
+Eq. (10) thus reduces to the trace distance between the quantum states
+gathered by the distinguisher. In the following, we usually omit E where it
+is clear that we are maximizing over the distinguisher strategies, and simply
+express the security criterion as
+
+D(ρABE, ˜ρABE) ≤ε ,
+(11)
+
+where ρABE and ˜ρABE are the quantum states gathered by the distinguisher
+interacting with the real and ideal systems, respectively.
+
+4.2
+Simulator
+
+In the real setting (Figure 3.2a), Eve has full control over the quantum
+channel and obtains the entire classical transcript of the protocol. So for
+the real and ideal settings to be indistinguishable, a simulator σqkd
+E
+must
+generate the same communication as in the real setting. This can be done
+
+19
+
+
+by internally running Alice’s and Bob’s protocol (πqkd
+A , πqkd
+B ), producing the
+same messages at Eve’s interface as the real system. However, instead of
+letting this (simulated) protocol decide the value of the key as in the real
+setting, the simulator only checks whether they actually produce a key or an
+error message, and presses the switch on the secret key resource accordingly.
+We illustrate this in Figure 4.1.
+
+key
+
+Secret key K
+k, ⊥
+k, ⊥
+
+σqkd
+E
+
+πqkd
+A
+πqkd
+B
+
+0, 1
+
+t
+ρ
+ρ′
+
+Figure 4.1 – The ideal QKD system — Alice has access to the left interface,
+Bob to the right interface and Eve to the lower interface— consists of the ideal
+secret key resource and a simulator σqkd
+E .
+
+The security criterion from Eq. (11) can now be simplified by noting that
+with this simulator, the states of the ideal and real systems are identical
+when no key is produced. The outputs at Alice’s and Bob’s interfaces are
+classical, elements of the set {⊥} ∪K, where ⊥symbolizes an error and K
+is the set of possible keys. The states of the real and ideal systems can be
+written as
+
+ρABE = p⊥|⊥A, ⊥B⟩⟨⊥A, ⊥B| ⊗ρ⊥
+E
+
++
+�
+
+kA,kB∈K
+pkA,kB|kA, kB⟩⟨kA, kB| ⊗ρkA,kB
+E
+,
+
+˜ρABE = p⊥|⊥A, ⊥B⟩⟨⊥A, ⊥B| ⊗ρ⊥
+E
+
++ 1
+
+|K|
+
+�
+
+k∈K
+|k, k⟩⟨k, k| ⊗
+�
+
+kA,kB∈K
+pkA,kBρkA,kB
+E
+.
+
+Plugging these in Eq. (11) we get
+
+D(ρABE, ˜ρABE) = (1 −p⊥)D
+�
+ρ⊤
+ABE, τAB ⊗ρ⊤
+E
+�
+≤ε ,
+(12)
+
+where
+
+ρ⊤
+ABE :=
+1
+1 −p⊥
+�
+
+kA,kB∈K
+pkA,kB|kA, kB⟩⟨kA, kB| ⊗ρkA,kB
+E
+(13)
+
+is the renormalized state of the system conditioned on not aborting and
+τAB :=
+1
+|K|
+�
+k∈K |k, k⟩⟨k, k| is a perfectly uniform shared key.
+
+20
+
+
+4.3
+Correctness & secrecy
+
+We now break Eq. (12) down into two components, often referred to as cor-
+rectness and secrecy, and recover the security definition for QKD introduced
+in [RK05,BHL+05,Ren05]. The correctness of a QKD protocol refers to the
+probability that Alice and Bob end up holding different keys. We say that
+a protocol is εcor-correct if for all adversarial strategies,
+
+Pr[KA ̸= KB] ≤εcor ,
+(14)
+
+where KA and KB are random variables over the alphabet K∪{⊥} describing
+Alice’s and Bob’s outputs.19 The secrecy of a QKD protocol measures how
+close the final key is to a distribution that is uniform and independent of
+the adversary’s system. Let p⊥be the probability that the protocol aborts,
+and ρ⊤
+AE be the resulting state of the AE subsystems conditioned on not
+aborting. A protocol is εsec-secret if for all adversarial strategies,
+
+(1 −p⊥)D
+�
+ρ⊤
+AE, τA ⊗ρ⊤
+E
+�
+≤εsec ,
+(15)
+
+where the distance D(·, ·) is the trace distance and τA is the fully mixed
+state.20
+
+Theorem 4.1. If a QKD protocol is εcor-correct and εsec-secret, then Eq. (10)
+is satisfied for ε = εcor + εsec.
+
+Proof. Let us define γABE to be a state obtained from ρ⊤
+ABE (Eq. (13)) by
+throwing away the B system and replacing it with a copy of A, i.e.,
+
+γABE =
+1
+1 −p⊥
+�
+
+kA,kB∈K
+pkA,kB|kA, kA⟩⟨kA, kA| ⊗ρkA,kB
+E
+.
+
+From the triangle inequality we get
+
+D(ρ⊤
+ABE, τAB ⊗ρ⊤
+E) ≤D(ρ⊤
+ABE, γABE) + D(γABE, τAB ⊗ρ⊤
+E) .
+
+Since in the states γABE and τAB ⊗ρ⊤
+E the B system is a copy of the
+A system, it does not modify the distance.
+Furthermore, trB(γABE) =
+trB(ρ⊤
+ABE). Hence
+
+D(γABE, τAB ⊗ρ⊤
+E) = D(γAE, τA ⊗ρ⊤
+E) = D(ρ⊤
+AE, τA ⊗ρ⊤
+E) .
+
+19This can equivalently be written as (1 −p⊥) Pr
+�
+K⊤
+A ̸= K⊤
+B
+�
+≤εcor, where p⊥is the
+probability of aborting and K⊤
+A and K⊤
+B are Alice and Bob’s keys conditioned on not
+aborting.
+20Eq. (15) is a reformulation of Eq. (1).
+
+21
+
+
+For the other term note that
+
+D(ρ⊤
+ABE, γABE)
+
+≤
+�
+
+kA,kB
+
+pkA,kB
+1 −p⊥D
+�
+|kA, kB⟩⟨kA, kB| ⊗ρkA,kB
+E
+, |kA, kA⟩⟨kA, kA| ⊗ρkA,kB
+E
+�
+
+=
+�
+
+kA̸=kB
+
+pkA,kB
+1 −p⊥=
+1
+1 −p⊥Pr[KA ̸= KB] .
+
+Putting the above together with Eq. (12), we get
+
+D(ρABE, ˜ρABE) = (1 −p⊥)D(ρ⊤
+ABE, τAB ⊗ρ⊥
+E)
+
+≤Pr[KA ̸= KB] + (1 −p⊥)D(ρ⊤
+AE, τA ⊗ρ⊤
+E) .
+
+Remark 4.2 (Tightness of the security criteria). In Theorem 4.1 we prove a
+bound on the second security condition of Definition 2.1 for QKD in terms
+of the correctness and secrecy of the protocol. The converse can also be
+shown: if Eq. (10) holds for some ε, then the corresponding QKD protocol
+is both ε-correct and 2ε-secret.21
+
+4.4
+Robustness
+
+So far in this section we have discussed the security of a QKD protocol with
+respect to a malicious Eve using the second condition from Definition 2.1
+(Eq. (10)). A QKD protocol which always aborts without producing any
+key trivially satisfies Eq. (10) with ε = 0, but is not a useful protocol at
+all! The real system must not only be indistinguishable from ideal when an
+adversary is present, but also when the adversarial interfaces are covered
+by filters emulating honest behavior. This is modeled by the first condition
+from Definition 2.1, namely Eq. (9) for QKD. If no adversary is tampering
+with the quantum channel — only natural non-malicious noise is present —
+we expect a secret key to be generated with high probability.
+This can
+be captured by designing the filter ♦E to allow a key to be produced with
+high probability: if the real system does not generate a key with the same
+probability, this immediately results in a gap noticeable by the distinguisher.
+The probability of a key being generated depends on the noise introduced
+by the filter ♯E covering the adversarial interface of the insecure quantum
+channel Q in the real system (illustrated in Figure 3.2b). Suppose that this
+
+21The factor 2 is a result of the existence of the simulator σE in the security definition.
+We cannot exclude that for some specific QKD protocol there exists a different simulator
+¯σqkd
+E
+— different from the one used in this proof— generating a state ¯ρE when interacting
+with the distinguisher, such that D
+�
+ρ⊤
+AE, τA ⊗¯ρ⊤
+E
+�
+≤D
+�
+ρ⊤
+AE, τA ⊗ρ⊤
+E
+�
+. However, by the
+triangle inequality we also have that for any ¯ρE, D
+�
+ρ⊤
+AE, τA ⊗¯ρ⊤
+E
+�
+≥1
+
+2D
+�
+ρ⊤
+AE, τA ⊗ρ⊤
+E
+�
+.
+Hence the failure ε of the generic simulator used in this proof is at most twice larger than
+optimal.
+
+22
+
+
+noise is parametrized by a value q, e.g., a depolarizing channel with proba-
+bility q. For every q, the protocol has a probability of aborting, δ, which is
+called the robustness. Let ♯q
+E denote a filter of the channel Q that models
+this noise, and let ♦δ
+E denote the filter of the ideal key resource K, which
+flips the switch to prevent a key from being generated with corresponding
+probability δ. Eq. (9) thus becomes
+
+πqkd
+A πqkd
+B (Q∥A)(♯q
+E∥♭E) ≈ε K♦δ
+E ,
+(16)
+
+where varying q and δ results in a family of real and ideal systems.
+We now prove that in this case the failure ε from Eq. (16) is bounded
+by εcor + εsec. Note that this statement is only useful if the probability of
+aborting, δ, is small for reasonable noise models q.
+
+Lemma 4.3. If the filters from Eq. (16) are parametrized such that ♦δ
+E
+aborts with exactly the same probability as the protocol (πqkd
+A , πqkd
+B ) run on
+the noisy channel Q♯q
+E, then the availability of the protocol is bounded by the
+security, i.e.,
+
+d
+�
+πqkd
+A πqkd
+B (Q∥A)(♯q
+E∥♭E), K♦δ
+E
+�
+≤d
+�
+πqkd
+A πqkd
+B (Q∥A), Kσqkd
+E
+�
+,
+
+where the simulator σqkd
+E
+is the one used in the previous sections, introduced
+in Section 4.2, Figure 4.1.
+
+Proof. Since ♦δ
+E aborts with exactly the same probability as the real system
+and since σqkd
+E
+simulates the real system, we can substitute σqkd
+E (♯q
+E∥♭E) for
+♦δ
+E. The result then follows, because the converter ♯q
+E∥♭E on both the real
+and ideal systems can only decrease their distance (Eq. (7)).
+
+5
+Examples of composition
+
+It is immediate from the AC framework [MR11] that the composition of
+two protocols satisfying Definition 2.1 is still secure.22 In this section we
+attempt to provide a better feeling for protocol composition by illustrating it
+with several examples. We compose QKD in series and in parallel, and show
+that— as a result of the triangle inequality and the security of the individual
+protocols— the corresponding composed real systems are indistinguishable
+from the composed ideal systems.
+In Section 5.1 we first look at a situation in which part of the key is
+known to the adversary. In Section 5.2 we compose QKD with a one-time
+pad. And in Section 5.3 we compose two runs of a QKD protocol in par-
+allel.
+We provide a more extensive example of protocol composition in
+
+22See Appendix C.2 for a proof sketch.
+
+23
+
+
+Appendix D, where we model the security of authentication and compose it
+with QKD, resulting in a key expansion protocol.
+To simplify the examples, we only consider security in the presence of an
+adversary and ignore the first condition from Definition 2.1. For the same
+reason, when writing up the security condition with the trace distance, we
+hard-code the simulator used in Section 4 in the security criterion. Further-
+more, as shown in Section 4.2, conditioned on aborting, the real and ideal
+systems of QKD are identical, so the security criterion can be reduced to
+the case in which the QKD protocol terminates with a shared key between
+Alice and Bob, which happens with probability 1 −pabort. With these sim-
+plifications, a QKD protocol is ε-secure if
+
+(1 −pabort)D(ρABE, τAB ⊗ρE) ≤ε ,
+(17)
+
+where τAB is a perfect shared key and ρABE and τAB ⊗ρE are the final
+states, conditioned on producing a key, that the distinguisher holds after
+interacting with the real and ideal systems, respectively.
+
+5.1
+Partially known key
+
+The accessible information given in Eq. (2) is shown to be insufficient to
+define security for a QKD protocol by considering a setting in which part
+of the key K is available to Eve [KRBM07]. This allows her to guess the
+remaining bits of the key, which would not have been possible had the key
+been distributed using an ideal resource. We analyze exactly this setting
+here, and argue that this does not affect the security of a QKD scheme that
+satisfies Definition 2.1.
+To model this partial knowledge of the key, let Alice run a protocol π′
+A
+that receives part of the secret key— generated either by a QKD protocol or
+by an ideal resource— and sends it on a channel to Eve. Plugging this in the
+real and ideal QKD systems from Figures 3.2a and 4.1, we get Figure 5.1.
+It is immediate from Figure 5.1 that π′
+A cannot increase the distance be-
+tween the real and ideal systems and therefore cannot compromise security:
+the systems in gray can be run internally by a distinguisher attempting to
+guess whether it is interacting with the real or ideal QKD system, so this
+case is already bounded by the security of QKD.
+This reasoning is summed up in the following equation, which can be
+directly derived from Eq. (7):
+
+πqkd
+A πqkd
+B (Q∥A) ≈ε Kσqkd
+E
+=⇒π′
+Aπqkd
+A πqkd
+B (Q∥A) ≈ε π′
+AKσqkd
+E
+.
+
+The same can be obtained from the properties of the trace distance if
+we write out explicitly the states gathered by the distinguisher. If the QKD
+protocol is ε-secure, we have from Eq. (17) that
+
+(1 −pabort)D(ρABE, τAB ⊗ρE) ≤ε,
+
+24
+
+
+πqkd
+A
+πqkd
+B
+
+π′
+A
+
+t
+
+k1
+A
+kB
+
+ρ
+ρ′
+
+k2
+A
+
+k1
+A
+
+(a) The QKD protocol (πqkd
+A , πqkd
+B ) generates a pair of keys (kA, kB). Alice
+then runs π′
+A, which provides the first part of kA = k1
+A∥k2
+A to Eve.
+The
+drawing of the insecure quantum channel and authentic classical channel have
+been removed to simplify the figure.
+
+key
+
+Secret key
+
+π′
+A
+
+k2
+k
+
+σqkd
+E
+
+0, 1
+
+t
+ρ
+ρ′
+
+k1
+
+k1
+
+(b) The ideal secret key resource generates a key k = k1∥k2, part of which
+is provided to Eve by π′
+A. A simulator σqkd
+E
+pads the ideal key resource to
+generate the same communication as in the real setting.
+
+Figure 5.1 – Alice runs a protocol π′
+A which reveals the first half of her key to
+Eve. In each figure, Alice and Bob have access to the left and right interfaces,
+and Eve to the lower interface. If we remove the parts in gray we recover the
+real and ideal systems of QKD.
+
+25
+
+
+where ρABE is the state gathered by a distinguisher interacting with the real
+QKD system (Figure 3.2a) and τAB ⊗ρE is the state gathered by interacting
+with the ideal system (Figure 4.1), conditioned on the protocol not aborting.
+A distinguisher interacting with either of the two systems from Figure 5.1
+gets extra information at Eve’s interface, namely the first part of Alice’s key
+k1, and only the second part of that key k2 at Alice’s interface. The complete
+states gathered by interacting with Figure 5.1a and Figure 5.1b are given
+by ρA′BE′ = ρA2BA1E and ˜ρA′BE′ = τA2BA1 ⊗ρE, respectively, where the
+orignal system A = A1A2 containing Alice’s key is split in two, A′ = A2 and
+E′ = A1E. These can be obtained from ρABE and τAB ⊗ρE by a unitary
+map which simply permutes the registers. Thus, the trace distance does not
+increase. So we have
+
+(1 −pabort)D(ρA′BE′, ˜ρA′BE′) = (1 −pabort)D(ρABE, τAB ⊗ρE) ≤ε .
+
+If we analyze the same situation from the perspective of an adversary
+that can access only the E-interface, composing QKD with a protocol that
+reveals k1 results in a net gain of information for this adversary. But as
+shown above, for a distinguisher that also receives the outputs of the honest
+players— the generated secret keys— there is no gain.
+
+5.2
+Sequential composition of key distribution and one-time
+pad
+
+If we compose a one-time pad (depicted in Figure 2.3) and a QKD pro-
+tocol (depicted in Figure 3.2a), we obtain Figure 5.2a, where the secret
+key resource used by the one-time pad is replaced by the QKD protocol.
+We showed in Section 2.2 that a one-time pad constructs a secure channel
+(Figure 2.4), which provides Eve with only one functionality, learning the
+length of the message. However, this was if the one-time pad protocol had
+access to a secret key resource with a blank E-interface, as in Figure 3.1a.
+In reality, QKD constructs a resource that allows Eve to prevent a key from
+being generated, as in Figure 3.1b. It can easily be shown that with access
+to this resource, a one-time pad constructs a secure channel with two con-
+trols at Eve’s interface: one for preventing any message from being sent and
+a second for learning the length of the message if she did not activate the
+first. This resource is illustrated in Figure 5.2c, along with the appropriate
+simulator for constructing this resource with a one-time pad and a QKD pro-
+tocol: the combination of the two simulators used in the individual proofs
+of the one-time pad (Figure 2.5) and QKD (Figure 4.1).
+We now wish to show that the combination of an ε-secure QKD protocol
+and a (perfect) one-time pad results in a combined scheme that constructs
+within ε a secure channel from authentic classical channels23 and an insecure
+
+23The QKD protocol requires a two-way authentic channel, whereas the one-time pad
+
+26
+
+
+πqkd
+A
+πqkd
+B
+
+y =
+xA⊕kA
+
+πotp
+A
+
+xB =
+y ⊕kA
+
+πotp
+B
+
+t
+
+kA
+kB
+
+ρ
+ρ′
+
+xA
+xB
+
+y
+y
+y
+
+(a) The composition of a one-time pad and a QKD protocol. The authentic
+channels and insecure quantum channels used have not been depicted as boxes
+to simplify the figure.
+
+key
+
+Secret key K
+
+y =
+x ⊕k
+
+πotp
+A
+
+x =
+y ⊕k
+
+πotp
+B
+k
+k
+
+σqkd
+E
+
+0, 1
+
+t
+ρ
+ρ′
+y
+y
+y
+
+xA
+xB
+
+(b) A hybrid system consisting of a real one-time pad and ideal secret key
+resource with simulator.
+
+Secure channel S
+
+σqkd
+E
+σotp
+E
+
+x
+
+0, 1
+
+x
+
+|x|
+
+ρ
+ρ′
+t
+y
+
+(c) The ideal secure channel and corresponding composed simulator σotp
+E σqkd
+E .
+
+Figure 5.2 – Steps in the security proof of the sequential composition of a
+one-time pad and QKD protocol. In each figure, Alice and Bob have access to
+the left and right interfaces, and Eve to the lower interface. If we remove the
+gray parts from Figures 5.2a and 5.2b, we recover the real and ideal systems
+of QKD. If we remove the dashed parts from Figures 5.2b and 5.2c we recover
+the real and ideal systems of the one-time pad.
+
+27
+
+
+quantum channel. To do this, we look at an intermediary step consisting of
+the combination of an ideal secret key resource and a one-time pad, which
+we illustrate in Figure 5.2b. If we remove the gray parts from Figures 5.2a
+and 5.2b, we recover the real and ideal systems of QKD. If the QKD protocol
+is ε-secure, then the distinguishing advantage between these two figures can
+also be at most ε. Likewise, if we remove the dashed parts from Figures 5.2b
+and 5.2c we recover the real and ideal systems of the one-time pad. Since
+the one-time pad is perfectly secure, the distinguishing advantage between
+these two figures must be 0. It follows from the triangle inequality that the
+composition of an ε-secure QKD protocol and a one-time pad is ε-secure.
+This reasoning is summed up in the following equation, which can be
+directly derived from Eqs. (3), (7) and the triangle inequality (Eq. (6)):
+
+πqkd
+A πqkd
+B (Q∥A) ≈ε Kσqkd
+E
+πotp
+A πotp
+B (K∥A) = Sσotp
+E
+
+�
+
+=⇒πotp
+A πotp
+B πqkd
+A πqkd
+B (Q∥A∥A) ≈ε Sσotp
+E σqkd
+E
+.
+
+The same can be obtained from the properties of the trace distance if
+we write out explicitly the states gathered by the distinguisher. After a run
+of an ε-secure QKD scheme, we know that
+
+(1 −pabort)D(ρABE, τAB ⊗ρE) ≤ε .
+
+The encryption and decryption operations of the one-time pad, (πotp
+A , πotp
+B ),
+plugged into Figures 5.2a and 5.2b, modify the states ρAB and τAB. They
+correspond to a unitary map Eotp : X ×K×K →X ×X ×X which takes the
+message xA and Alice’s and Bob’s keys kA, kB, and generates the ciphertext
+and Bob’s message while persevering Alice’s message,
+
+Eotp : (xA, kA, kB) �→(xA, xA ⊕kA ⊕kB, xA ⊕kA) .
+
+A unitary map does not change the trace distance, so for
+
+ρXAXBY = Eotp(ρXA ⊗ρAB)
+and
+τXAXBY = Eotp(ρXA ⊗τAB)
+
+we have
+
+(1−pabort)D(ρXAXBY E, τXAXBY ⊗ρE) = (1−pabort)D(ρABE, τAB⊗ρE) ≤ε ,
+
+where ρXAXBY E and τXAXBY ⊗ρE are the states held be a distinguisher
+interacting with Figures 5.2a and 5.2b, respectively.
+We also know that the one-time pad perfectly constructs a secure chan-
+nel from an authentic channel and a secret key, i.e., if we remove the sim-
+ulator σqkd
+E
+from Figures 5.2b and 5.2c, the corresponding systems are in-
+distinguishable — a distinguisher interacting with them obtains two states
+
+needs only a single use one-way authentic channel. This distinction is however not relevant
+to the current argument, so we refer to both resources as “authentic channels” and use
+the same notation, A, for each.
+
+28
+
+
+τXAXBY and τ ′
+XAXBY with D(τXAXBY , τ ′
+XAXBY ) = 0. Plugging the simula-
+
+tor σqkd
+E
+in Eve’s interface simply results in the state ρE being appended to
+τ and τ ′. The final state held by the distinguisher is thus τXAXBY ⊗ρE and
+τ ′
+XAXBY ⊗ρE, respectively, with D(τXAXBY ⊗ρE, τ ′
+XAXBY ⊗ρE) = 0.
+By the triangle inequality, the distance between Figures 5.2a and 5.2c is
+then
+(1 −pabort)D(ρXAXBY E, τ ′
+XAXBY ⊗ρE) ≤ε .
+
+5.3
+Parallel composition of key distribution with itself
+
+If two QKD protocols are run in parallel, as illustrated in Figure 5.3a the
+adversary can entwine their respective messages as she pleases, e.g, parts of
+the state ρ sent on the insecure channel by the first protocol can be input
+into the insecure channel of the second protocol. We wish to show that even
+in this case, the combined protocol is still 2ε-secure— i.e., indistinguishable
+from the parallel compositions of two ideal key resources and their individual
+simulators — if each QKD protocol is ε-secure. This ideal case is depicted
+in Figure 5.3b.
+Like for serial composition, this follows from the triangle inequality. If
+the real QKD system is ε-close to the ideal QKD system, then two real
+QKD systems in parallel must be ε-close to an ideal and real QKD system
+composed in parallel, since otherwise a distinguisher could run a real QKD
+system internally in parallel to the system it is testing. Likewise, a real and
+ideal QKD system in parallel must be ε-close to two ideal QKD systems
+in parallel. And hence two parallel runs of an ε-secure QKD protocol is
+2ε-secure.
+The trace distance notation does not lend itself to writing up parallel
+composition of protocols. So instead of using this notation as in the previous
+examples, we write up the reasoning from the paragraph above in more
+detail using the resource-converter formalism. If the real and ideal system
+of a QKD protocol are ε-close, then
+
+πqkd
+A πqkd
+B (Q∥A) ≈ε Kσqkd
+E
+.
+
+It follows immediately from this and Eq. (7) that
+�
+πqkd
+A πqkd
+B (Q∥A)
+����
+�
+πqkd
+A′ πqkd
+B′ (Q∥A)
+�
+≈ε
+�
+Kσqkd
+E
+����
+�
+πqkd
+A′ πqkd
+B′ (Q∥A)
+�
+,
+�
+Kσqkd
+E
+����
+�
+πqkd
+A′ πqkd
+B′ (Q∥A)
+�
+≈ε
+�
+Kσqkd
+E
+����
+�
+Kσqkd
+E′
+�
+.
+
+From the triangle equality (Eq. (6)) we then have
+�
+πqkd
+A πqkd
+B (Q∥A)
+����
+�
+πqkd
+A′ πqkd
+B′ (Q∥A)
+�
+≈2ε
+�
+Kσqkd
+E
+����
+�
+Kσqkd
+E′
+�
+.
+
+29
+
+
+πqkd
+A
+πqkd
+B
+Authentic channel A
+
+Insecure channel Q
+
+t
+t
+
+t
+
+kA, ⊥
+kB, ⊥
+
+ρ
+ρ′
+
+πqkd
+A′
+πqkd
+B′
+
+Authentic channel A
+
+Insecure channel Q
+
+u
+u
+
+u
+
+kA′, ⊥
+kB′, ⊥
+
+ϕ
+ϕ′
+
+(a) Two QKD protocols and their respective resources run in parallel.
+
+key
+
+Secret key K
+k, ⊥
+k, ⊥
+
+σqkd
+E
+
+πqkd
+A
+πqkd
+B
+
+0, 1
+
+t
+ρ
+ρ′
+
+key
+
+Secret key K
+k′, ⊥
+k′, ⊥
+
+σqkd
+E′
+
+πqkd
+A′
+πqkd
+B′
+
+0, 1
+
+u
+ϕ
+ϕ′
+
+(b) Two secret key resources and two simulators run in parallel.
+
+Figure 5.3 – Real and ideal systems for two QKD protocols executed in par-
+allel. In each figure, Alice and Bob have access to the left and right interfaces,
+and Eve to both the upper and lower interface.
+
+30
+
+
+Finally, using Eq. (3) to rearrange this expression, we get
+�
+πqkd
+A πqkd
+B
+��πqkd
+A′ πqkd
+B′
+�
+(Q∥A∥Q∥A) ≈2ε (K∥K)
+�
+σqkd
+E
+��σqkd
+E′
+�
+,
+
+i.e., the parallel composition of two runs of a QKD protocol, πqkd
+A πqkd
+B
+��πqkd
+A′ πqkd
+B′ ,
+run with authentic classical and insecure quantum channel resources, Q∥A∥Q∥A,
+is 2ε-close to the parallel composition of two ideal key resources, K∥K, and
+a simulator, σqkd
+E
+��σqkd
+E′ .
+
+Appendices
+
+In Appendix A we formally define the trace distance and show that it cor-
+responds to the distinguishing advantage between two quantum states. We
+also prove several lemmas that help interpret its meaning and how to choose
+a value in a practical implementation. In Appendix B we discuss an alterna-
+tive to the secrecy criterion of Eq. (1), which has appeared in the literature.
+In Appendix C we provide some details on technical aspects of the Abstract
+Cryptography framework. In Appendix C.1 we discuss how to define a dis-
+tinguisher so that the resulting distinguishing advantage is non-increasing
+under compositions. In Appendix C.2 we sketch a proof that the security
+definition from Definition 2.1 is composable. A complete proof of this can be
+found in [MR11,Mau12]. And finally, in Appendix D we model the security
+of authentication with universal hashing [WC81, Sti94], then use this as a
+subprotocol of QKD to authenticate the classical post-processing. Since this
+type of authentication uses a short key (and an insecure classical channel) to
+construct an authentic channel and QKD uses an authentic channel (and an
+insecure quantum channel) to construct a long key, the composition of the
+two is a key expansion protocol, which constructs a long key from a short
+key (and insecure channels).
+
+A
+Trace distance
+
+We have used several times in this work the well-known fact that the dis-
+tinguishing advantage between two systems that output states ρ and σ is
+equivalent to the trace distance between these states. In this appendix, we
+prove this fact, along with several other theorems that help interpret the
+meaning of the trace distance.
+In Appendix A.1 we first define the trace distance— as well as its classi-
+cal counterpart, the total variation distance— and prove some basic lemmas
+that can also be found in textbooks such as [NC00]. In Appendix A.2 we
+then show the connection between trace distance and distinguishing advan-
+tage, which was originally proven by Helstrom [Hel76]. In Appendix A.3 we
+
+31
+
+
+prove that we can alternatively think of the trace distance between a real
+and ideal system as a bound on the probability that a failure occurs in the
+real system. Finally, in Appendix A.4 we bound two typical information
+theory notions of secrecy— the conditional entropy of a key given the eaves-
+dropper’s information and her probability of correctly guessing the key— in
+terms of the trace distance. Although such measures of information are gen-
+erally ill-suited for defining cryptographic security, they can help interpret
+the notion of a key being ε-close to uniform.
+
+A.1
+Metric definitions
+
+In the case of a classical system, statistical security is defined by the to-
+tal variation (or statistical) distance between the probability distributions
+describing the real and ideal settings, which is defined as follows.24
+
+Definition A.1 (total variation distance). The total variation distance be-
+tween two probability distributions PZ and P ˜Z over an alphabet Z is defined
+as
+D(PZ, P ˜Z) := 1
+
+2
+
+�
+
+z∈Z
+
+��PZ(z) −P ˜Z(z)
+��.
+
+Using the fact that |a−b| = a+b−2 min(a, b), the total variation distance
+can also be written as
+
+D(PZ, P ˜Z) = 1 −
+�
+
+z∈Z
+min[PZ(z), P ˜Z(z)] .
+(18)
+
+In the case of quantum states instead of classical random variables, the
+total variation distance generalizes to the trace distance. More precisely,
+the trace distance between two density operators that are diagonal in the
+same orthonormal basis is equal to the total variation distance between the
+probability distributions defined by their respective eigenvalues.
+
+Definition A.2 (trace distance). The trace distance between two quantum
+states ρ and σ is defined as
+
+D(ρ, σ) := 1
+
+2 tr |ρ −σ| .
+
+We now introduce some technical lemmas involving the trace distance,
+which help us derive the theorems in the next sections. Most of these proofs
+are taken from [NC00].
+
+24We employ the same notation D(·, ·) for both the total variation and trace distance,
+since the former is a special case of the latter.
+
+32
+
+
+Lemma A.3. For any two states ρ and σ and any operator 0 ≤M ≤I, the
+two following inequalities hold:
+
+D(ρ, σ) ≥tr(M(ρ −σ)) ,
+(19)
+
+tr(M|ρ −σ|) ≥|tr(M(ρ −σ))| .
+(20)
+
+Furthermore, each of these inequalities is tight for some values of M.
+
+The trace distance can thus alternatively be written as
+
+D(ρ, σ) = max
+M tr(M(ρ −σ)) .
+(21)
+
+Proof. We start with the proof of Eq. (19). Let {λx, |ψx⟩}x be the eigenval-
+ues and vectors of ρ −σ, and define
+
+Q+ :=
+�
+
+x:λx≥0
+λx|ψx⟩⟨ψx|
+and
+Q−:=
+�
+
+x:λx<0
+−λx|ψx⟩⟨ψx| .
+
+We have ρ −σ = Q+ −Q−and |ρ −σ| = Q+ + Q−.
+Note that since
+tr(Q+ −Q−) = tr(ρ −σ) = 0, we have tr Q+ = tr Q−, hence
+
+D(ρ, σ) = 1
+
+2 tr |ρ −σ| = 1
+
+2(tr Q+ + tr Q−) = tr Q+ .
+
+If we set Γ+ := �
+x:λx≥0 |ψx⟩⟨ψx|, the projector on Q+, we get
+
+tr(Γ+(ρ −σ)) = tr Q+ = D(ρ, σ) .
+
+And for any operator 0 ≤M ≤I,
+
+tr(M(ρ −σ)) = tr(M(Q+ −Q−)) ≤tr(MQ+) ≤tr Q+ = D(ρ, σ) .
+
+To prove that Eq. (20) holds, note that for any operator 0 ≤M ≤I,
+
+|tr(M(ρ −σ))| = |tr(M(Q+ −Q−))|
+
+≤tr(M(Q+ + Q−)) = tr(M|ρ −σ|) .
+
+Eq. (20) is tight for any operator M which satisfies
+
+|tr(M(Q+ −Q−))| = tr(M(Q+ + Q−)) ,
+
+i.e., any operator such that either 0 ≤M ≤Γ+ or 0 ≤M ≤Γ−, where Γ+
+is defined as above and Γ−:= �
+x:λx≤0 |ψx⟩⟨ψx|.
+
+Let {Γx}x be a positive operator-valued measure (POVM) — a set of
+operators 0 ≤Γx ≤I such that �
+x Γx = I — and let PX denote the outcome
+of measuring a quantum state ρ with {Γx}x, i.e., PX(x) = tr(Γxρ). Our next
+lemma says that the trace distance between two states ρ and σ is equal to
+the total variation between the outcomes — PX and QX — of an optimal
+measurement on the two states.
+
+33
+
+
+Lemma A.4. For any two states ρ and σ,
+
+D(ρ, σ) = max
+{Γx}x
+D(PX, QX) ,
+(22)
+
+where PX and QX are the probability distributions resulting from measuring
+ρ and σ with a POVM {Γx}x, respectively, and the maximization is over
+all POVMs. Furthermore, if the two states ρZB and σZB have a classical
+subsystem Z, then the measurement satisfying Eq. (22) leaves the classical
+subsystem unchanged, i.e., the maximum is reached for a POVM with ele-
+ments
+Γx =
+�
+
+z
+|z⟩⟨z| ⊗Mz
+x ,
+(23)
+
+where {|z⟩}z is the classical orthonormal basis of Z.
+
+Proof. Using Eq. (20) from Lemma A.3 we get
+
+D(PX, QX) = 1
+
+2
+
+�
+
+x
+|tr(Γx(ρ −σ))|
+
+≤1
+
+2
+
+�
+
+x
+tr(Γx|ρ −σ|)
+
+= 1
+
+2 tr |ρ −σ| = D(ρ, σ) .
+
+The conditions for equality are given at the end of the proof of Lemma A.3,
+e.g., a measurement with Γx = |ψx⟩⟨ψx|, where {|ψx⟩}x are the eigenvectors
+of ρ −σ. If ρZB = �
+z pz|z⟩⟨z| ⊗ρz
+B and σZB = �
+z qz|z⟩⟨z| ⊗σz
+B, then
+
+ρ −σ =
+�
+
+z
+|z⟩⟨z| ⊗(pzρz
+B −qzσz
+B) ,
+
+and the eigenvectors of ρ −σ have the form |ψz,x⟩= |z⟩⊗|ϕz
+x⟩B, where
+|ϕz
+x⟩B is an eigenvector of pzρz
+B −qzσz
+B. So the optimal measurement, Γz,x =
+|z⟩⟨z| ⊗|ϕz
+x⟩⟨ϕz
+x|B, satisfies Eq. (23).
+
+A.2
+Distinguishing advantage
+
+Helstrom [Hel76] proved that the advantage a distinguisher has in guessing
+whether it was provided with one of two states, ρ or σ, is given by the trace
+distance between the two, D(ρ, σ).25 We first sketch the classical case, then
+prove the quantum version.
+Let a distinguisher be given a value sampled according to probability dis-
+tributions PZ or P ˜Z, where PZ and P ˜Z are each chosen with probability 1/2.
+
+25Actually, Helstrom [Hel76] solved a more general problem, in which the states ρ and
+σ are picked with apriori probabilities p and 1 −p, respectively, instead of 1/2 as in the
+definition of the distinguishing advantage.
+
+34
+
+
+Suppose the value received by the distinguisher is z ∈Z. If PZ(z) > P ˜Z(z),
+its best guess is that the value was sampled according to PZ. Otherwise,
+it should guess that it was P ˜Z. Let Z′ := {z ∈Z : PZ(z) > P ˜Z(z)} and
+Z′′ := {z ∈Z : PZ(z) ≤P ˜Z(z)}. There are a total of 2|Z| possible events:
+the sample is chosen according to PZ or P ˜Z and takes the value z ∈Z.
+
+These events have probabilities
+PZ(z)
+
+2
+and P ˜
+Z(z)
+
+2
+.
+Conditioned on PZ be-
+ing chosen and z being the sampled value, the distinguisher has probability
+1 of guessing correctly with the strategy outlined above if z ∈Z′, and 0
+otherwise.
+Likewise, if P ˜Z was selected, it has probability 1 of guessing
+correctly if z ∈Z′′ and 0 otherwise. The probability of correctly guessing
+whether it was given a value sampled according to PZ or P ˜Z, which we
+denote pdistinguish(PZ, P ˜Z), is obtained by summing over all possible events
+weighted by their probabilities. Hence
+
+pdistinguish(PZ, P ˜Z) =
+�
+
+z∈Z′
+
+PZ(z)
+
+2
++
+�
+
+z∈Z′′
+
+P ˜Z(z)
+
+2
+
+= 1
+
+2
+
+�
+
+1 −
+�
+
+z∈Z′′
+PZ(z)
+
+�
+
++ 1
+
+2
+
+�
+
+1 −
+�
+
+z∈Z′
+P ˜Z(z)
+
+�
+
+= 1 −1
+
+2
+
+�
+
+z∈Z
+min[PZ(z), P ˜Z(z)]
+
+= 1
+
+2 + 1
+
+2D(PZ, P ˜Z) ,
+
+where in the last equality we used the alternative formulation of the total
+variation distance from Eq. (18).
+We now generalize the argument above to quantum states.
+
+Theorem A.5. For any states ρ and σ, we have
+
+pdistinguish(ρ, σ) = 1
+
+2 + 1
+
+2D(ρ, σ) .
+
+Proof. If a distinguisher is given one of two states ρ or σ, each with proba-
+bility 1/2, its probability of guessing which one it holds is given by a max-
+imization of all possible measurements it may do: it chooses some POVM
+{Γ0, Γ1}, where Γ0 and Γ1 are positive operators with Γ0 + Γ1 = I, and
+measures the state it holds. If it gets the outcome 0, it guesses that it holds
+ρ and if it gets the outcome 1, it guesses that it holds σ. The probability of
+guessing correctly is given by
+
+pdistinguish(ρ, σ) = max
+Γ0,Γ1
+
+�1
+
+2 tr(Γ0ρ) + 1
+
+2 tr(Γ1σ)
+�
+
+= 1
+
+2 max
+Γ0 [tr(Γ0ρ) + tr((I −Γ0)σ)]
+
+= 1
+
+2 + 1
+
+2 max
+Γ0 tr(Γ0(ρ −σ)) .
+(24)
+
+35
+
+
+The proof concludes by plugging Eq. (21) in Eq. (24).
+
+A.3
+Probability of a failure
+
+The trace distance is used as the security definition of QKD, because the
+relevant measure for cryptographic security is the distinguishing advantage
+(as discussed in Section 2), and as proven in Theorem A.5, the distinguishing
+advantage between two quantum states corresponds to their trace distance.
+This operational interpretation of the trace distance involves two worlds, an
+ideal one and a real one, and the distance measure is the (renormalized)
+difference between the probabilities of the distinguisher correctly guessing
+to which world it is connected.
+In this section we describe a different interpretation of the total variation
+and trace distances. Instead of having two different worlds, we consider one
+world in which the outcomes of interacting with the real and ideal systems
+co-exist. And instead of these distance measures being a difference between
+probability distributions, they become the probability that any (classical)
+value occurring in one of the systems does not simultaneously occur in the
+other. We call such an event a failure — since one system is ideal, if the other
+behaves differently, it must have failed— and the trace distance becomes the
+probability of a failure occurring.
+Given two random variables Z and ˜Z with probability distributions PZ
+and P ˜Z, any distribution PZ ˜Z with marginals given by PZ and P ˜Z is called
+a coupling of PZ and P ˜Z. The interpretation of the trace distance treated
+in this section uses one specific coupling, known as a maximal coupling in
+probability theory [Tho00].
+
+Theorem A.6 (maximal coupling). Let PZ and P ˜Z be two probability distri-
+butions over the same alphabet Z. Then there exists a probability distribution
+PZ ˜Z on Z × Z such that
+
+Pr[Z = ˜Z] :=
+�
+
+z
+PZ ˜Z(z, z) ≥1 −D(PZ, P ˜Z)
+(25)
+
+and such that PZ and P ˜Z are the marginals of PZ ˜Z, i.e.,
+
+PZ(z) =
+�
+
+˜z
+PZ ˜Z(z, ˜z)
+(∀z ∈Z)
+(26)
+
+P ˜Z(˜z) =
+�
+
+z
+PZ ˜Z(z, ˜z)
+(∀˜z ∈Z) .
+(27)
+
+It turns out that the inequality in Eq. (25) is tight, i.e., one can also
+show that for any distribution PZ ˜Z, Pr[Z = ˜Z] ≤1 −D(PZ, P ˜Z). We will
+however not use this fact here.
+Consider now a real system that outputs values given by Z and an ideal
+system that outputs values according to ˜Z. Theorem A.6 tells us that there
+
+36
+
+
+exists a coupling of these distributions such that the probability of the real
+system producing a different value from the ideal system is bounded by the
+total variation distance between PZ and P ˜Z. Thus, the real system behaves
+ideally except with probability D(PZ, P ˜Z).
+We first prove this theorem, then in Corollary A.7 here below we apply
+it to quantum systems.
+
+Proof of Theorem A.6. Let QZ ˜Z be the real function on Z × Z defined by
+
+QZ ˜Z(z, ˜z) =
+
+�
+min[PZ(z), P ˜Z(˜z)]
+if z = ˜z
+0
+otherwise
+
+(for all z, ˜z ∈Z). Furthermore, let RZ and R ˜Z be the real functions on Z
+defined by
+
+RZ(z) = PZ(z) −QZ ˜Z(z, z) ,
+
+R ˜Z(˜z) = P ˜Z(˜z) −QZ ˜Z(˜z, ˜z) .
+
+We then define PZ ˜Z by
+
+PZ ˜Z(z, ˜z) = QZ ˜Z(z, ˜z) +
+1
+D(PZ, P ˜Z)RZ(z)R ˜Z(˜z) .
+
+We now show that PZ ˜Z satisfies the conditions of the theorem. For this,
+we note that for any z ∈Z
+
+RZ(z) = PZ(z) −min[PZ(z), P ˜Z(z)] ≥0 ,
+
+i.e., RZ, and, likewise, R ˜Z, are nonnegative. Since QZ ˜Z is by definition also
+nonnegative, we have that PZ ˜Z is nonnegative, too. From Eq. (26) or (27),
+which we will prove below, it follows that PZ ˜Z is also normalized. Hence,
+PZ ˜Z is a valid probability distribution.
+To show Eq. (25) we use again the non-negativity of RZ and R ˜Z, which
+implies
+�
+
+z
+PZ ˜Z(z, z) ≥
+�
+
+z
+QZ ˜Z(z, z) =
+�
+
+z
+min[PZ(z), P ˜Z(z)] = 1 −D(PZ, P ˜Z) ,
+
+where in the last equality we used the alternative formulation of the total
+variation distance from Eq. (18).
+To prove Eq. (26), we first note that
+�
+
+˜z
+R ˜Z(˜z) =
+�
+
+˜z
+P ˜Z(˜z) −
+�
+
+˜z
+QZ ˜Z(˜z, ˜z)
+
+= 1 −
+�
+
+˜z
+min[PZ(˜z), P ˜Z(˜z)] = D(PZ, P ˜Z) .
+
+37
+
+
+Using this we find that for any z ∈Z
+
+�
+
+˜z
+PZ ˜Z(z, ˜z) =
+�
+
+˜z
+QZ ˜Z(z, ˜z) + RZ(z)
+1
+D(PZ, P ˜Z)
+
+�
+
+˜z
+R ˜Z(˜z)
+
+= QZ ˜Z(z, z) + RZ(z) = PZ(z) .
+
+By symmetry, this also proves Eq. (27).
+
+In the case of quantum states, Theorem A.6 can be used to couple the
+outcomes of any observable applied to the quantum systems.
+
+Corollary A.7. For any states ρ and σ with trace distance D(ρ, σ) ≤ε, and
+any measurement given by its POVM operators {Γw}w with outcome proba-
+bilities PW(w) = tr(Γwρ) and P ˜
+W (w) = tr(Γwσ), there exists a coupling of
+PW and P ˜
+W such that
+
+Pr[W ̸= ˜W] ≤D(ρ, σ) .
+
+Proof. Immediate by combining Lemma A.4 and Theorem A.6.
+
+Corollary A.7 tells us that if two systems produce states ρ and σ, then for
+any observations made on those systems there exists a coupling for which the
+values of each measurement will differ with probability at most D(ρ, σ). It is
+instructive to remember that this operational meaning is not essential to the
+security notion or part of the framework in any way. It is an intuitive way
+of understanding the trace distance, so as to better choose a suitable value.
+It allows this distance to be thought of as a maximum failure probability,
+and the value for ε to be chosen accordingly.
+
+A.4
+Measures of uncertainty
+
+Non-composable security models often use measures of uncertainty to quan-
+tify how much information an adversary might have about a secret, e.g., en-
+tropy as used by Shannon to prove the security of the one-time pad [Sha49].
+These measures are often weaker than what one obtains using a global dis-
+tinguisher, and in general do not provide good security definitions. They
+are however quite intuitive and in order to further illustrate the quantita-
+tive value of the distinguishing advantage, we derive bounds on two of these
+measures of uncertainty in terms of the trace distance, namely on the proba-
+bility of guessing the secret key in Appendix A.4.1 and on the von Neumann
+entropy of the secret key in Appendix A.4.2.
+
+A.4.1
+Probability of guessing
+
+Let ρKE = �
+k∈K pk|k⟩⟨k|K ⊗ρk
+E be the joint state of a secret key in the K
+subsystem and Eve’s information in the E subsystem. To guess the value of
+
+38
+
+
+the key, Eve can pick a POVM {Γk}k∈K, measure her system, and output the
+result of the measurement. Given that the key is k, her probability of having
+guessed correctly is tr(Γkρk
+E). The average probability of guessing correctly
+for this measurement is then given by the sum over all k, weighted by their
+respective probabilities pk. And Eve’s probability of correctly guessing the
+key is defined by taking the maximum over all measurements,
+
+pguess(K|E)ρ := max
+{Γk}
+
+�
+
+k∈K
+pk tr
+�
+Γkρk
+E
+�
+.
+(28)
+
+Lemma A.8. For any bipartite state ρKE with classical K,
+
+pguess(K|E)ρ ≤
+1
+|K| + D(ρKE, τK ⊗ρE) ,
+
+where τK is the fully mixed state.
+
+Proof. Note that for M := �
+k |k⟩⟨k| ⊗Γk, where {Γk} maximizes Eq. (28),
+the guessing probability can equivalently be written
+
+pguess(K|E)ρ = tr(MρKE) .
+
+Furthermore,
+
+tr[M(τK ⊗ρE)] = 1
+
+|K| .
+
+In Lemma A.3 we proved that for any operator 0 ≤M ≤I,
+
+tr(M(ρ −σ)) ≤D(ρ, σ) .
+
+Setting ρ = ρKE and σ = τK ⊗ρE in the above inequality, we finish the
+proof:
+
+tr(MρKE) ≤tr(M(τK ⊗ρE)) + D(ρKE, τK ⊗ρE) ,
+
+=⇒
+pguess(K|E)ρ ≤1
+
+|K| + D(ρKE, τK ⊗ρE) .
+
+A.4.2
+Entropy
+
+Let ρKE = �
+k∈K pk|k⟩⟨k|K ⊗ρk
+E be the joint state of a secret key in the K
+subsystem and Eve’s information in the E subsystem. We wish to bound the
+von Neumann entropy of K given E — S(K|E)ρ = S(ρKE) −S(ρE), where
+S(ρ) := −tr(ρ log ρ)— in terms of the trace distance D(ρKE, τK ⊗ρE). We
+first derive a lower bound on the von Neumann entropy, using the following
+theorem from Alicki and Fannes [AF04].
+
+Theorem A.9 (From [AF04]). For any bipartite states ρAB and σAB with
+trace distance D(ρ, σ) = ε ≤1/4 and dim HA = dA, we have
+
+|S(A|B)ρ −S(A|B)σ| ≤8ε log dA + 2h(2ε) ,
+
+where h(p) = −p log p −(1 −p) log(1 −p) is the binary entropy.
+
+39
+
+
+Corollary A.10. For any state ρKE with D(ρKE, τK ⊗ρE) = ε ≤1/4,
+where τK is the fully mixed state, we have
+
+S(K|E)ρ ≥(1 −8ε) log |K| −2h(2ε).
+
+Proof. Immediate by plugging ρKE and τK ⊗ρE in Theorem A.9.
+
+Given the von Neumann entropy of K conditioned on E, S(K|E)ρ, one
+can also upper bound the trace distance of ρKE from τK ⊗ρE by relating
+S(K|E)ρ to the relative entropy of ρKE to τK ⊗ρE — the relative entropy
+of ρ to σ is defined as S(ρ∥σ) := tr(ρ log ρ) −tr(ρ log σ).
+
+Lemma A.11. For any quantum state ρKE,
+
+D(ρKE, τK ⊗ρE) ≤
+
+�
+
+1
+2(log |K| −S(K|E)ρ) .
+
+Proof. From the definitions of the relative and von Neumann entropies we
+have
+
+S(ρKE∥τK ⊗ρE) = log |K| + S(ρKE∥idK ⊗ρE) = log |K| −S(K|E)ρ,
+
+where idK is the identity matrix. We then use the following bound on the
+relative entropy [OP93, Theorem 1.15] to conclude the proof:
+
+S(ρ∥σ) ≥2(D(ρ, σ))2.
+
+Corollary A.10 and Lemma A.11 can be written together in one equation,
+upper and lower bounding the conditional von Neumann entropy:
+
+(1 −8ε) log |K| −2h(2ε) ≤S(K|E)ρ ≤log |K| −2ε2 ,
+
+where ε = D(ρKE, τK ⊗ρE).
+
+B
+Alternative secrecy criterion
+
+In Section 4 we derived two conditions— secrecy and correctness— that to-
+gether imply that a real QKD system is indistinguishable from the ideal
+one.
+An alternative definition for ε-secrecy was proposed in the litera-
+ture [TSSR10,TLGR12]:
+
+(1 −pabort) min
+σE D(ρKE, τK ⊗σE) ≤ε .
+(29)
+
+This alternative notion is equivalent to the standard definition of secrecy
+(Eq. (1)) up to a factor 2, as can be seen by the following calculation. Let
+ϕE be the state for which the minimum in Eq. (29) is achieved. Then,
+
+D(ρKE, τK ⊗ρE) ≤D(ρKE, τK ⊗ϕE) + D(τK ⊗ϕE, τK ⊗ρE)
+
+≤2D(ρKE, τK ⊗ϕE) .
+
+40
+
+
+We thus have
+
+D(ρKE, τK ⊗ρE) ≤2 min
+σE D(ρKE, τK ⊗σE) ≤2D(ρKE, τK ⊗ρE) .
+
+This means that any QKD scheme proven secure with one definition is still
+secure according to the other, with a minor adjustment of the failure param-
+eter ε.
+However, we do not know how to derive this alternative notion from
+a composable framework. In particular, it is not clear if the failure ε from
+Eq. (29) is additive under parallel composition. For example, the concatena-
+tion of two keys that each, individually, satisfy Eq. (29), could possibly have
+distance from uniform greater than 2ε. For this reason, the arXiv version
+of [TLGR12] was updated to use Eq. (1) instead.
+
+C
+More Abstract Cryptography
+
+C.1
+Distinguishing metric
+
+A distinguisher has been introduced as a single entity that has to guess
+which of two systems it is holding. Mathematically, it is more convenient to
+model a distinguisher as a set D. Each element D ∈D is a system with n+1
+interfaces. n of them connect to the n interfaces of a resource R or S and the
+last interface outputs a bit, as illustrated in Figure 2.2 on page 7. Thus, for
+any D ∈D and any compatible system R, D(R) is a binary random variable.
+The distinguishing advantage can be rewritten as
+
+dD(R, S) = max
+D∈D Pr[D(R) = 1] −Pr[D(S) = 1] .
+
+For a set D to be a valid distinguisher, it has to be closed under compo-
+sition with all resources and converters. For a converter α and a resource T,
+define
+
+D(α·) : R �→D(αR)
+
+D(·∥T) : R �→D(R∥T) .
+
+A distinguisher D is closed under composition with a set of converters Σ
+and a set of resources Γ,26 if for all D ∈D, all α ∈Σ and all T ∈Γ,
+
+D(α·) ∈D
+and
+D(·∥T) ∈D .
+(30)
+
+26For a set of converters Σ and a set of resources Γ to be valid, they also have to be
+closed under composition, i.e., for all α, β ∈Σ and all R, S ∈Γ,
+
+αβ ∈Σ ,
+α∥β ∈Σ ,
+αR ∈Γ ,
+and
+R∥S ∈Γ .
+
+41
+
+
+For example, the set of all possible distinguishers is closed under composi-
+tion with the sets of all possible converters and resources, and is used for
+information-theoretic security. The set of all efficient distinguishers is closed
+under composition with the sets of all efficient converters and resources, and
+is used for computational security. The fact that the distinguishing advan-
+tage is non-increasing under composition (see Eq. (7) on page 11) follows
+directly from the closure of the distinguisher, Eq. (30).
+
+C.2
+Generic protocol composition
+
+In this section we briefly sketch why the security criteria of Definition 2.1
+guarantee that the composition of two secure protocols is also secure. We
+write up the argument in the case where an adversary is present (Eq. (ii)
+from Definition 2.1).
+The case with no adversary follows similarly with
+the simulator σ removed and a filter connected to Eve’s interface of every
+resource. Proofs of this can be found in [MR11,Mau12].
+
+C.2.1
+Sequential composition
+
+Let protocols π and π′ construct S♦from R♯and T□from S♦within ε and
+ε′, respectively, i.e.,
+
+R♯
+π,ε
+−−→S♦
+and
+S♦
+π′,ε′
+−−−→T□.
+
+It then follows from the triangle inequality of the distinguishing metric that
+π′π constructs T□from R♯within ε + ε′,
+
+R♯
+π′π,ε+ε′
+−−−−−→T□.
+
+To see why this holds when an adversary is present, note that since πR
+cannot be distinguished from Sσ with advantage greater than ε, by Eq. (7)
+a distinguisher running π′ in particular cannot distinguish them. Hence
+
+π′πR ≈ε π′Sσ .
+
+Likewise, a distinguisher running σ does not know if it is interacting with
+π′S or Tσ′, i.e.,
+π′Sσ ≈ε′ Tσ′σ .
+
+Combining the two equations above, we get
+
+π′πR ≈ε+ε′ Tσ′σ .
+
+So there exists a simulator, namely σ′σ, such that the real and ideal
+systems cannot be distinguished with advantage greater than ε + ε′.
+
+42
+
+
+C.2.2
+Parallel composition
+
+The argument for parallel composition is similar to that of sequential com-
+position. Let π and π′ construct S♦and S′
+□from R♯and R′
+♭within ε and ε′,
+respectively, i.e.,
+
+R♯
+π,ε
+−−→S♦
+and
+R′
+♭
+π′,ε′
+−−−→S′
+□.
+
+If these resources and protocols are composed in parallel, we find that π∥π′
+
+constructs S♦∥S′
+□from R♯∥R′
+♭within ε + ε′,
+
+R♯∥R′
+♭
+π∥π′,ε+ε′
+−−−−−−→S♦∥S′
+□,
+
+where R♯∥R′
+♭:= (R∥R′, ♯∥♭) is the filtered resource consisting of the parallel
+composition of the resources and filters from R♯and R′
+♭.
+For the case where an adversary is present, this can be proven as follows.
+From the definition of parallel composition of converters in Eq. (3) we have
+�
+π∥π′��
+R∥R′�
+= (πR)∥
+�
+π′R′�
+.
+
+Since for some σ, πR cannot be distinguished from Sσ with advantage greater
+than ε, by Eq. (7) running π′R′ in parallel cannot help the distinguisher,
+hence
+πR∥π′R′ ≈ε Sσ∥π′R′ .
+
+For the same reason we also have
+
+Sσ∥π′R′ ≈ε′ Sσ∥S′σ′ .
+
+Combining the equations above and one more use of Eq. (3), we obtain
+�
+π∥π′��
+R∥R′�
+≈ε+ε′ �
+S∥S′��
+σ∥σ′�
+.
+
+Thus, there exists a simulator, namely σ∥σ′, such that the real and ideal
+systems cannot be distinguished with advantage greater than ε + ε′.
+
+D
+Composition of authentication and QKD
+
+In this section we model recursive composition of an authentication protocol
+and QKD. Starting with a short (uniform) key, we construct an authentic
+channel, which is then used in a QKD protocol to obtain a long key. Part
+of this new key is then consumed in another round of authentication, which
+is used by QKD, resulting in more shared secret key. This can be repeated
+indefinitely. From the composability of the security definitions we immedi-
+ately have that the total failure is bounded by the sum of the individual
+failures of (each run of) each protocol.
+
+43
+
+
+The goal of this section is to write this out explicitly: we show that
+
+D(ρAnBnE, ˜ρAnBnE) ≤n(εauth + εqkd) ,
+(31)
+
+where An and Bn are registers containing all shared, unused secret keys gen-
+erated in n rounds of authentication and QKD, E contains the adversary’s
+information, ρAnBnE and ˜ρAnBnE are the states obtained by a distinguisher
+interacting with the real and ideal systems,27 and εauth and εqkd are the
+(probabilities of) failure of the authentication and QKD protocols in each
+round.28
+
+For this recursive construction it is not necessary to use the (interactive)
+authentication protocol of Renner and Wolf [RW03] which only requires
+a password. Instead we use the simpler universal hashing of Wegman and
+Carter [WC81,Sti94], which appends a tag29 to the message that is sent, but
+requires an (almost) uniform key. A more detailed analysis of this authen-
+tication method, including key recycling and a proof that strong universal
+hashing meets the corresponding security definition can be found in [Por14].
+In Appendix D.1 we sketch how to construct an authentic channel from
+a shared secret key and insecure channel resource, and provide a generic
+simulator. In Appendix D.2 we compose multiple authentication protocols
+in parallel so that we may have multiple use authentic channels in QKD. In
+Appendix D.3 we compose such a construction with QKD, obtaining a key
+expansion protocol. And finally in Appendix D.4 we iteratively compose a
+key expansion protocol with itself, resulting in a continuous stream of secret
+key bits.
+
+D.1
+Authentication
+
+The QKD and one-time pad protocols discussed in this work make use of
+authentic channels as depicted in Figure D.1a, which always deliver the cor-
+rect message to the receiver. This is however impossible to construct from
+an insecure channel, since Eve can always cut the communication between
+Alice and Bob, and prevent any message from being transmitted. What can
+be constructed, is a channel which guarantees that Bob does not receive a
+corrupted message. He either receives the correct message sent by Alice, or
+an error, which symbolizes an attempt by Eve to change the message. This
+can be modeled by giving Eve’s idealized interface two controls: the first
+provides her with Alice’s message, the second allows her to input one bit
+that prevents Alice’s message from being delivered to Bob and produces an
+error instead. We illustrate this in Figure D.1b.
+
+27Unlike the examples from Section 5, we cannot simplify the state ˜ρAnBnE by condi-
+tioning on obtaining a key and writing it as τAnBn ⊗ρE, because the n repetitions of the
+protocol lead to n + 1 events: it never aborted, aborted after one round, two rounds, etc.
+28One can also use different parameters in each round, e.g., so that the failure in round
+i is half of that in round i −1, and the sum �
+
+i(εauth
+i
++ εqkd
+i
+) is bounded for all n.
+29This tag is often called a message authentication code (MAC) in the literature.
+
+44
+
+
+Alice
+Bob
+
+Eve
+
+x
+x
+
+x
+
+(a) A resource that always transmits
+Alice’s message to Bob, and provides
+Eve with a copy.
+
+Alice
+Bob
+
+Eve
+
+x
+
+x
+
+x, ⊥
+
+0, 1
+
+(b) A resource that allows Eve to de-
+cide if Bob gets Alice’s message or
+not, but does not allow the message
+to be manipulated.
+
+Figure D.1 – The authentic channel on the right can be constructed by an
+authentication protocol. The one on the left is a simplification as used in the
+one-time pad (Figure 2.3) or QKD (Figure 3.2) constructions.
+
+A construction of this authentic channel resource from an insecure chan-
+nel and a shared secret key resource is typically accomplished by comput-
+ing the hash hk(x) of the message x, and sending the string x∥hk(x) to
+Bob, where k is the shared secret key and {hk}k∈K a family of hash func-
+tions [Sti94]. Alice’s part of the authentication protocol πauth
+A
+thus gets a
+key k from an ideal key resource, a message x from Alice, and sends x∥hk(x)
+down the insecure channel.
+When Bob receives a string x′∥y′, he needs
+to check whether y′ = hk(x′). His part of the protocol gets a key k from
+an ideal key resource, a message x′∥y′ from the channel, and outputs x′ if
+y′ = hk(x′), otherwise an error ⊥. If the ideal key resource used by both
+players produces an error instead of a key, Alice and Bob abort, and the
+protocol is trivially secure. So for simplicity we omit this possibility in the
+following, and assume that they always get a shared secret key.
+This is
+depicted in Figure D.2.
+
+y :=
+hk(x)
+
+πauth
+A
+
+y′
+?=
+hk(x′)
+
+πauth
+B
+
+key
+
+Secret key K
+
+Insecure channel C
+
+k
+k
+
+x
+x′, ⊥
+
+x∥y
+x′∥y′
+
+Figure D.2 – The real authentication system — Alice has access to the left
+interface, Bob to the right interface and Eve to the lower interface— consists
+of the authentication protocol (πauth
+A
+, πauth
+B
+), and the secret key and insecure
+channel resources, K and C.
+
+45
+
+
+In the case where no adversary is present and filters30 cover Eve’s inter-
+faces of Figures D.1b and D.2, the real and ideal systems are indistinguish-
+able as they are both identity channels which faithfully transmit x from Alice
+to Bob. So in the following we only consider the case where an adversary is
+present, condition (ii) in Definition 2.1.
+In the ideal setting, the authentic channel (Figure D.1b) has the same
+interface on Alice’s and Bob’s sides as the real setting (Figure D.2): Alice
+can input a message, and Bob receives either a message or an error. How-
+ever, Eve’s interface looks quite different: in the real setting she can modify
+the transmission on the insecure channel, whereas in the ideal setting the
+adversarial interface provides only controls to read the message and inter-
+rupt the transmission. From Definition 2.1 we have that an authentication
+protocol constructs the authentic channel if there exists a simulator σauth
+E
+that can recreate the real interface while accessing just the idealized one.
+An obvious choice for the simulator is to first generate its own key k and
+output x∥hk(x). Then upon receiving x′∥y′, it checks if x′∥y′ = x∥hk(x) and
+cuts the transmission on the authentic channel if this does not hold. We
+illustrate this in Figure D.3.
+
+Authentic channel A
+
+σauth
+E
+
+x
+
+x
+
+x, ⊥
+
+0, 1
+
+y = hk(x)
+x∥y
+?=
+x′∥y′
+
+x∥y
+x′∥y′
+
+key
+
+Figure D.3 – The ideal authentication system— Alice has access to the left
+interface, Bob to the right interface and Eve to the lower interface— consists
+of the ideal authentication resource and a simulator σauth
+E
+.
+
+An authentication protocol is then ε-secure if Figures D.2 and D.3 are
+ε-close, i.e.,
+πauth
+A
+πauth
+B
+(K∥C) ≈ε Aσauth
+E
+.
+(32)
+
+Portmann [Por14] showed that Eq. (32) is satisfied if the hash functions used
+are ε-almost strongly universal2.31
+
+30Unlike the case of QKD, here we are not interested in a filter which introduces (honest)
+noise on the channel, as this can be removed by encoding the communication with an
+appropriate error correcting code.
+Therefore, the filter on the (real) insecure channel
+faithfully forwards the message, and the filter on the (ideal) authentic channel allows the
+message to be transmitted.
+31A familly of functions is said to be almost strongly universal2 if any two different
+messages are almost uniformly mapped to all pairs of tags.
+
+46
+
+
+D.2
+Parallel composition of authentication
+
+In Appendix D.1 we modeled one run of an authentication protocol, that
+constructs a one-time use authentic channel.
+In general, QKD protocols
+require multiple rounds of authenticated communication. This is achieved
+by running the same protocol in parallel multiple times with new keys. It
+is straightforward from Eqs. (3), (6), (7) and (32) that ℓparallel repetitions
+of the authentication protocol are ℓε-close to ℓideal authentic channels and
+simulators in parallel,
+�
+πauth
+A
+πauth
+B
+∥· · · ∥πauth
+A
+πauth
+B
+�
+(K∥C∥· · · ∥K∥C)
+
+=
+�
+πauth
+A
+πauth
+B
+(K∥C)
+�
+∥· · · ∥
+�
+πauth
+A
+πauth
+B
+(K∥C)
+�
+
+≈ℓε
+�
+Aσauth
+E
+�
+∥· · · ∥
+�
+Aσauth
+E
+�
+= (A∥· · · ∥A)
+�
+σauth
+E
+∥· · · ∥σauth
+E
+�
+.
+
+In the following, when we speak of the authentication used in QKD we
+always refer to parallel repetitions of the protocol that construct multiple
+use authenticated channels A∥· · · ∥A. For simplicity, we use the same no-
+tation for multiple authentic channels as we have for single channels — we
+denote the resulting multiple use authentic channel by A, as well as C for
+the multiple use insecure channel, K for a key sufficiently long for authen-
+ticating every message and εauth for the accumulated failure of all parallel
+repetitions in one round of QKD.
+
+D.3
+Sequential composition of authentication and key distri-
+bution
+
+Let πauth be an authentication protocol which constructs with failure εauth
+
+a (multiple use) authentic channel A from a short secret key of length ℓ, Kℓ,
+and an insecure classical channel C,
+
+Kℓ∥C
+πauth,εauth
+−−−−−−−→A .
+
+Let πqkd be a QKD protocol which constructs with failure εqkd a long secret
+key of length m, Km, from an authentic channel A and an insecure quantum
+channel Q,
+
+A∥Q
+πqkd,εqkd
+−−−−−−→Km .
+
+By sequentially composing the two protocols, we immediately have that
+πqkdπauth constructs a long secret key Km from a short secret key Kℓand
+insecure channels C and Q, with failure εauth + εqkd,
+
+Kℓ∥C∥Q
+πqkdπauth,εauth+εqkd
+−−−−−−−−−−−−−→Km .
+
+47
+
+
+πauth
+A
+πauth
+B
+Secret key Kℓ
+
+πqkd
+A
+πqkd
+B
+t, ⊥
+t′, ⊥
+
+z
+z′
+ρ
+ρ′
+
+kA, ⊥
+kB, ⊥
+
+(a) The composition of a QKD and authentication protocols. The insecure
+channels have not been depicted as boxes to simplify the figure.
+
+Authentic channel A
+πqkd
+A
+πqkd
+B
+
+σauth
+E
+
+t, ⊥
+t, ⊥
+
+t
+0, 1
+
+z
+z′
+
+kA, ⊥
+kB, ⊥
+
+ρ
+ρ′
+
+(b) A hybrid system consisting of a QKD protocol and two-way authentic
+channels with simulator.
+
+Secret key Km
+
+σqkd
+E
+
+σauth
+E
+
+k, ⊥
+k, ⊥
+
+0, 1
+
+0, 1
+
+ρ
+ρ′
+
+t
+
+z
+z′
+
+(c) The ideal secret key and corresponding composed simulator σqkd
+E σauth
+E
+. This
+ideal key resource has two switches preventing the key from being generated:
+one to capture an abort from the authentication protocol and one from the
+QKD protocol.
+
+Figure D.4 – Steps in the security proof of the composition of QKD and an
+authentication protocol. If we remove the gray parts from Figures D.4a and
+D.4b, we recover the real and ideal systems of authentication. If we remove
+the dashed parts from Figures D.4b and D.4c we recover the real and ideal
+systems of QKD.
+
+48
+
+
+The generic argument for sequential composition is given in Appendix C.2.1.
+Here we illustrate it in the special case of authentication and QKD, and draw
+it in Figure D.4.
+Figure D.4a depicts the real world: the two protocols are composed in
+sequence and run using the short key and insecure channel resources. In
+Figure D.4b we have a system consisting of the real QKD protocol and
+the ideal authentic channel and simulator. We know that the black parts
+of Figures D.4a and D.4b are εauth-close, so adding the QKD protocol in
+gray can only reduce the distance.
+Figure D.4c depicts the ideal secret
+key resource and simulators. By removing the dashed simulator σauth
+E
+from
+Figures D.4b and D.4c, we recover the real and ideal QKD systems from
+Figures 3.2a and 4.1— with an extra switch on the authentic channel in the
+real system and on the secret key resource in the ideal system. Since these
+are εqkd-close, so are Figures D.4b and D.4c. Putting the two statements
+together with the triangle inequality finishes the argument.
+This reasoning is summed up in the following equation, which can be
+directly derived from Eqs. (3), (6) and (7):
+
+πauth
+A
+πauth
+B
+�
+Kℓ∥C
+�
+≈εauth Aσauth
+E
+
+πqkd
+A πqkd
+B (A∥Q) ≈εqkd Kmσqkd
+E
+
+
+
+
+=⇒
+
+πqkd
+A πqkd
+B πauth
+A
+πauth
+B
+�
+Kℓ∥C∥Q
+�
+≈(εauth+εqkd) Kmσqkd
+E σauth
+E
+.
+
+Let ρABE be the state gathered by a distinguisher interacting with the
+real system from Figure D.4a and ˜ρABE be the state gathered by the distin-
+guisher interacting with the ideal system from Figure D.4c. By the argument
+above we have
+D(ρABE, ˜ρABE) ≤εauth + εqkd .
+
+D.4
+Iterated key expansion
+
+In Appendix D.3 we show that the composition of QKD and authentica-
+tion — i.e., key expansion — constructs a long key from a short key and
+insecure channels. To show that this can be done recursively, we need to
+argue that part of the long key can be kept for the next round of key expan-
+sion. So far the secret keys have been treated as blocks, entirely consumed
+by a protocol, which is not convenient for the analysis of a protocol that
+uses only part of a key. Instead, we should think of these key resources —
+e.g., Kℓand Km in Figures D.4a and D.4c — as a parallel composition of
+resources that produce a single bit of key, i.e., Kℓ= K1
+1∥· · · ∥K1
+ℓ, where K1
+i
+is the ith instance of a resource K1 that produces one bit of key (or an error
+message) at Alice and Bob’s interfaces, and has a switch at Eve’s interface
+that decides if it produces the key or error.
+
+49
+
+
+Then, a proof that
+
+Kℓ∥C∥Q
+πqkdπauth,εauth+εqkd
+−−−−−−−−−−−−−→Km ,
+
+is immediately also a proof that
+
+Kℓ′∥C∥Q
+πqkdπauth,εauth+εqkd
+−−−−−−−−−−−−−→Km+ℓ′−ℓ,
+
+for any ℓ′ ≥ℓ. Iterating the protocol n times we get
+
+Kℓ∥Cn∥Qn (πqkdπauth)
+n,n(εauth+εqkd)
+−−−−−−−−−−−−−−−−−→Knm−(n−1)ℓ,
+
+where Cn and Qn are n instances of the resources C and Q in parallel, and
+�
+πqkdπauth�n is n times the sequential composition of πqkdπauth. Eq. (31)
+follows immediately from this.
+
+Acknowledgements
+
+We are greatly indebted to the following people for having proofread an ini-
+tial draft and provided us with invaluable feedback and comments: Rotem
+Arnon Friedman, Normand Beaudry, Vedran Dunjko, Felipe Lacerda, Charles
+Ci Wen Lim, Christoph Pacher, Joseph Renes, Marco Tomamichel, and Nino
+Walenta.
+This work has been funded by the Swiss National Science Foundation
+(via grant No. 200020-135048 and the National Centre of Competence in Re-
+search ‘Quantum Science and Technology’), the European Research Coun-
+cil— ERC (grant No. 258932)— and by the Vienna Science and Technology
+Fund (WWTF) through project ICT10-067 (HiPANQ).
+
+References
+
+[AF04]
+Robert
+Alicki
+and
+Mark
+Fannes.
+Continuity
+of
+quan-
+tum
+conditional
+information.
+Journal
+of
+Physics
+A:
+Mathematical
+and
+General,
+37:L55–L57,
+February
+2004.
+[doi:10.1088/0305-4470/37/5/L01].
+
+[BB84]
+Charles H. Bennett and Gilles Brassard. Quantum cryptogra-
+phy: Public key distribution and coin tossing. In Proceedings
+of IEEE International Conference on Computers, Systems, and
+Signal Processing, pages 175–179, 1984.
+
+[BBB+00]
+Eli Biham, Michel Boyer, P. Oscar Boykin, Tal Mor, and Vwani
+Roychowdhury. A proof of the security of quantum key distribu-
+tion (extended abstract). In Proceedings of the 32nd Symposium
+on Theory of Computing, STOC ’00, pages 715–724. ACM, 2000.
+[doi:10.1145/335305.335406, arXiv:quant-ph/9912053].
+
+50
+
+
+[BBB+06]
+Eli Biham, Michel Boyer, P. Oscar Boykin, Tal Mor, and
+Vwani Roychowdhury.
+A proof of the security of quan-
+tum key distribution.
+Journal of Cryptology, 19(4):381–439,
+2006. Full version of [BBB+00]. [doi:10.1007/s00145-005-0011-3,
+arXiv:quant-ph/9912053].
+
+[BHL+05]
+Michael Ben-Or, Michael Horodecki, Debbie Leung, Dominic
+Mayers, and Jonathan Oppenheim.
+The universal compos-
+able security of quantum key distribution. In Theory of Cryp-
+tography, Proceedings of TCC 2005, volume 3378 of Lecture
+Notes in Computer Science, pages 386–406. Springer, 2005.
+[doi:10.1007/978-3-540-30576-7 21, arXiv:quant-ph/0409078].
+
+[BM04]
+Michael Ben-Or and Dominic Mayers.
+General security def-
+inition and composability for quantum & classical protocols.
+eprint, 2004. [arXiv:quant-ph/0409062].
+
+[BPW04]
+Michael Backes, Birgit Pfitzmann, and Michael Waidner.
+A
+general composition theorem for secure reactive systems.
+In
+Theory of Cryptography, Proceedings of TCC 2004, volume 2951
+of Lecture Notes in Computer Science, pages 336–354. Springer,
+2004. [doi:10.1007/978-3-540-24638-1 19].
+
+[BPW07]
+Michael Backes, Birgit Pfitzmann, and Michael Waidner. The
+reactive simulatability (RSIM) framework for asynchronous
+systems.
+Information and Computation, 205(12):1685–1720,
+2007. Extended version of [PW01]. [doi:10.1016/j.ic.2007.05.002,
+IACR e-print: 2004/082].
+
+[Can01]
+Ran Canetti. Universally composable security: A new paradigm
+for cryptographic protocols. In Proceedings of the 42nd Sympo-
+sium on Foundations of Computer Science, FOCS ’01, pages
+136–145. IEEE, 2001. [doi:0.1109/SFCS.2001.959888].
+
+[Can13]
+Ran Canetti.
+Universally composable security:
+A new
+paradigm for cryptographic protocols.
+Cryptology ePrint
+Archive, Report 2000/067, 2013. Updated version of [Can01].
+[IACR e-print: 2000/067].
+
+[CDPW07] Ran Canetti, Yevgeniy Dodis, Rafael Pass, and Shabsi Walfish.
+Universally composable security with global setup. In Theory
+of Cryptography, Proceedings of TCC 2007, volume 4392 of Lec-
+ture Notes in Computer Science, pages 61–85. Springer, 2007.
+[doi:10.1007/978-3-540-70936-7 4, IACR e-print: 2006/432].
+
+51
+
+
+[DFPR14]
+Vedran Dunjko, Joseph Fitzsimons, Christopher Portmann,
+and Renato Renner. Composable security of delegated quan-
+tum computation.
+To appear at ASIACRYPT 2014, 2014.
+[arXiv:1301.3662].
+
+[DHL+04]
+David DiVincenzo, Michal Horodecki, Debbie Leung, John
+Smolin, and Barbara Terhal.
+Locking classical correlation in
+quantum states.
+Physical Review Letters, 92:067902, 2004.
+[arXiv:quant-ph/0303088].
+
+[Eke91]
+Artur K. Ekert.
+Quantum cryptography based on bell’s the-
+orem.
+Physical Review Letters, 67:661–663, August 1991.
+[doi:10.1103/PhysRevLett.67.661].
+
+[Hel76]
+Carl W. Helstrom. Quantum Detection and Estimation Theory,
+volume 123 of Mathematics in science and engineering. Aca-
+demic Press, 1976.
+
+[KRBM07] Robert
+K¨onig,
+Renato
+Renner,
+Andor
+Bariska,
+and
+Ueli
+Maurer.
+Small
+accessible
+quantum
+information
+does
+not
+imply
+security.
+Physical
+Review
+Letters,
+98:140502, April 2007.
+[doi:10.1103/PhysRevLett.98.140502,
+arXiv:quant-ph/0512021].
+
+[Mau12]
+Ueli Maurer. Constructive cryptography—a new paradigm for
+security definitions and proofs.
+In Proceedings of Theory of
+Security and Applications, TOSCA 2011, volume 6993 of Lec-
+ture Notes in Computer Science, pages 33–56. Springer, 2012.
+[doi:10.1007/978-3-642-27375-9 3].
+
+[May96]
+Dominic Mayers.
+Quantum key distribution and string
+oblivious transfer in noisy channels.
+In Advances in Cryp-
+tology
+–
+CRYPTO
+’96,
+volume
+1109
+of
+Lecture
+Notes
+in
+Computer
+Science,
+pages
+343–357.
+Springer,
+1996.
+[doi:10.1007/3-540-68697-5 26, arXiv:quant-ph/9606003].
+
+[May01]
+Dominic Mayers.
+Unconditional security in quantum cryp-
+tography.
+Journal
+of
+the
+ACM,
+48(3):351–406,
+2001.
+[doi:10.1145/382780.382781, arXiv:quant-ph/9802025].
+
+[MQR09]
+J¨orn M¨uller-Quade and Renato Renner. Composability in quan-
+tum cryptography. New Journal of Physics, 11(8):085006, 2009.
+[doi:10.1088/1367-2630/11/8/085006, arXiv:1006.2215].
+
+[MR11]
+Ueli Maurer and Renato Renner. Abstract cryptography. In Pro-
+ceedings of Innovations in Computer Science, ICS 2010, pages
+1–21. Tsinghua University Press, 2011.
+
+52
+
+
+[NC00]
+Michael A. Nielsen and Isaac L. Chuang. Quantum Computation
+and Quantum Information. Cambridge University Press, 2000.
+
+[OP93]
+Masanori Ohya and D´enes Petz. Quantum Entropy and Its Use.
+Springer, 1993.
+
+[Por14]
+Chirstopher Portmann. Key recycling in authentication. IEEE
+Transactions on Information Theory, 60(7):4383–4396, July
+2014. [doi:10.1109/TIT.2014.2317312, arXiv:1202.1229].
+
+[PW00]
+Birgit Pfitzmann and Michael Waidner. Composition and in-
+tegrity preservation of secure reactive systems.
+In Proceed-
+ings of the 7th ACM Conference on Computer and Com-
+munications Security, CSS ’00, pages 245–254. ACM, 2000.
+[doi:10.1145/352600.352639].
+
+[PW01]
+Birgit
+Pfitzmann
+and
+Michael
+Waidner.
+A
+model
+for
+asynchronous
+reactive
+systems
+and
+its
+application
+to
+secure
+message
+transmission.
+In
+IEEE
+Symposium
+on
+Security
+and
+Privacy,
+pages
+184–200.
+IEEE,
+2001.
+[doi:10.1109/SECPRI.2001.924298].
+
+[Ren05]
+Renato Renner. Security of Quantum Key Distribution. PhD
+thesis, Swiss Federal Institute of Technology Zurich, September
+2005. [arXiv:quant-ph/0512258].
+
+[RK05]
+Renato Renner and Robert K¨onig. Universally composable pri-
+vacy amplification against quantum adversaries.
+In Joe Kil-
+ian, editor, Theory of Cryptography, Proceedings of TCC 2005,
+volume 3378 of Lecture Notes in Computer Science, pages
+407–425. Springer, 2005.
+[doi:10.1007/978-3-540-30576-7 22,
+arXiv:quant-ph/0403133].
+
+[RW03]
+Renato Renner and Stefan Wolf.
+Unconditional authentic-
+ity and privacy from an arbitrarily weak secret.
+In Ad-
+vances in Cryptology – CRYPTO 2003, volume 2729 of Lec-
+ture Notes in Computer Science, pages 78–95. Springer, 2003.
+[doi:10.1007/978-3-540-45146-4 5].
+
+[SBPC+09] Valerio Scarani, Helle Bechmann-Pasquinucci, Nicolas J. Cerf,
+Miloslav Duˇsek, Norbert L¨utkenhaus, and Momtchil Peev.
+The security of practical quantum key distribution.
+Re-
+views of Modern Physics,
+81:1301–1350,
+September 2009.
+[doi:10.1103/RevModPhys.81.1301, arXiv:0802.4155].
+
+[Sha49]
+Claude Shannon.
+Communication theory of secrecy systems.
+Bell System Technical Journal, 28(4):656–715, 1949.
+
+53
+
+
+[SP00]
+Peter W. Shor and John Preskill. Simple proof of security of
+the BB84 quantum key distribution protocol. Physical Review
+Letters, 85:441–444, 2000.
+[doi:10.1103/PhysRevLett.85.441,
+arXiv:quant-ph/0003004].
+
+[Sti94]
+Douglas
+R. Stinson.
+Universal hashing and authentica-
+tion codes.
+Designs, Codes and Cryptography, 4(3):369–380,
+1994.
+A preliminary version appeared at CRYPTO ’91.
+[doi:10.1007/BF01388651].
+
+[Tho00]
+Hermann Thorisson. Coupling, Stationarity, and Regeneration.
+Probability and its Applications (New York). Springer, 2000.
+
+[TLGR12]
+Marco Tomamichel,
+Charles Ci Wen Lim,
+Nicolas Gisin,
+and Renato Renner.
+Tight finite-key analysis for quan-
+tum cryptography.
+Nature Communications,
+3:634,
+2012.
+[doi:10.1038/ncomms1631, arXiv:1103.4130].
+
+[TSSR10]
+Marco Tomamichel, Christian Schaffner, Adam Smith, and
+Renato Renner.
+Leftover hashing against quantum side in-
+formation.
+In Proceedings of 2010 international symposium
+on information theory, ISIT, pages 2703–2707. IEEE, 2010.
+[doi:10.1109/ISIT.2010.5513652, arXiv:1002.2436].
+
+[Unr04]
+Dominique Unruh. Simulatable security for quantum protocols.
+eprint, 2004. [arXiv:quant-ph/0409125].
+
+[Unr10]
+Dominique Unruh.
+Universally composable quantum multi-
+party computation. In Advances in Cryptology – EUROCRYPT
+2010, volume 6110 of Lecture Notes in Computer Science, pages
+486–505. Springer, 2010.
+[doi:10.1007/978-3-642-13190-5 25,
+arXiv:0910.2912].
+
+[WC81]
+Mark N. Wegman and Larry Carter. New hash functions and
+their use in authentication and set equality. Journal of Com-
+puter and System Sciences, 22(3):265–279, 1981.
+
+[Wie83]
+Stephen Wiesner. Conjugate coding. SIGACT news, 15(1):78–
+88, 1983. Original manuscript written circa 1969.
+
+[Win14]
+Andreas Winter.
+Weak locking capacity of quantum chan-
+nels can be much larger than private capacity.
+eprint, 2014.
+[arXiv:1403.6361].
+
+54
+
+

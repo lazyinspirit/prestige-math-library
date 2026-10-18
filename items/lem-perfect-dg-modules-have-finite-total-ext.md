@@ -2,7 +2,7 @@
 id: lem-perfect-dg-modules-have-finite-total-ext
 kind: lemma
 title: "Perfect dg modules have finite total Ext"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

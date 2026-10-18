@@ -2,7 +2,7 @@
 id: cex-componentwise-algebra-action-need-not-define-a-tensor-action
 kind: counterexample
 title: The componentwise formula can fail to define a tensor action
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

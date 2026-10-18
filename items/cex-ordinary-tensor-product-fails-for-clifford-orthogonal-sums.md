@@ -2,7 +2,7 @@
 id: cex-ordinary-tensor-product-fails-for-clifford-orthogonal-sums
 kind: counterexample
 title: "The ordinary tensor product does not model an orthogonal Clifford sum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-complex-clifford-classification-and-graded-products-examples

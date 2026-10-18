@@ -2,7 +2,7 @@
 id: lem-coderivation-extension-from-corestrictions
 kind: lemma
 title: "Coderivations of the reduced graded symmetric coalgebra are determined by corestrictions"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

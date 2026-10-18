@@ -36,7 +36,7 @@ sources:
     - title: "Charles J. Geyer, Stat 5421 Lecture Notes: Exponential Families, §3, PDF pp. 3–5"
       url: "https://www.stat.umn.edu/geyer/5421/notes/expfam.pdf"
     - title: "John K. Hunter, Measure Theory, Theorem 6.27 and proof, §6.8 (notes pp. 75–77)"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement

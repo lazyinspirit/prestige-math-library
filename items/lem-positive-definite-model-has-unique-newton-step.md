@@ -20,8 +20,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

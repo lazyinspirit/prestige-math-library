@@ -2,7 +2,7 @@
 id: ex-d2-future-null-rays-are-inequivalent
 kind: example
 title: The two D=2 future null rays give inequivalent representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

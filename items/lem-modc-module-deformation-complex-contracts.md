@@ -2,7 +2,7 @@
 id: lem-modc-module-deformation-complex-contracts
 kind: lemma
 title: Categorical separability contracts the module deformation complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

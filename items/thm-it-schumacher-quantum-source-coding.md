@@ -2,7 +2,7 @@
 id: thm-it-schumacher-quantum-source-coding
 kind: theorem
 title: Finite-dimensional Schumacher quantum source coding theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

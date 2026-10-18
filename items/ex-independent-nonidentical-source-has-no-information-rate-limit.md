@@ -2,7 +2,7 @@
 id: ex-independent-nonidentical-source-has-no-information-rate-limit
 title: "Independent non-identical finite sources can have no information-rate limit"
 kind: example
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

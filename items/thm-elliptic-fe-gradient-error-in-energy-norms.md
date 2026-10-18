@@ -13,8 +13,6 @@ axiom_use: "Countable Choice is inherited through the Lax-Milgram, Céa, and Str
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Hannes Meinlschmidt, Optimization with Partial Differential Equations, complete lecture notes, §§1.6 and 3.2"

@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-quantum-binomial-digit-criterion
 kind: lemma
 title: "Nonvanishing of an entire quantum-binomial row and the characteristic digits"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

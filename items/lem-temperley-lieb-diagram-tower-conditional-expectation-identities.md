@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-diagram-tower-conditional-expectation-identities
 kind: lemma
 title: "Right closure is a trace-preserving diagram-tower expectation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

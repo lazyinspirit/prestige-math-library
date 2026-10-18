@@ -1,7 +1,7 @@
 ---
 page: category-o-klr-and-hecke-categorification-route
 title: "Category O, KLR, and Hecke Categorification Route"
-status: draft
+status: published
 items:
   - def-category-o-klr-and-hecke-route-conventions
 examples: []

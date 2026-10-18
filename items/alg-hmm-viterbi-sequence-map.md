@@ -2,7 +2,7 @@
 id: alg-hmm-viterbi-sequence-map
 kind: algorithm
 title: Viterbi sequence decoding for a finite hidden Markov model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

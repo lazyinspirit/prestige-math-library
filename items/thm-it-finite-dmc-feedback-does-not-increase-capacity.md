@@ -2,7 +2,7 @@
 id: thm-it-finite-dmc-feedback-does-not-increase-capacity
 kind: theorem
 title: Perfect output feedback does not increase finite DMC capacity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

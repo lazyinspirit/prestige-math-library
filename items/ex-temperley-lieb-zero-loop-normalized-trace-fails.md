@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-zero-loop-normalized-trace-fails
 kind: example
 title: "At loop value zero the normalized closure trace is undefined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

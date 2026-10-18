@@ -29,8 +29,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications, complete lecture notes"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 1, Lemma 1.1 and finite-window simulation construction, PDF pp. 10-12."
-verification:
-  precheck: pending
 ---
 
 ## Statement

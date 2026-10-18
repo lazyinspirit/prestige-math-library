@@ -2,7 +2,7 @@
 id: ex-d2-zero-orbit-has-nontrivial-lorentz-character
 kind: example
 title: A nontrivial D=2 Lorentz character lies over zero momentum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

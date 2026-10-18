@@ -2,7 +2,7 @@
 id: lem-qc-tqc-toric-string-syndrome
 kind: lemma
 title: Open toric strings have endpoint syndromes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

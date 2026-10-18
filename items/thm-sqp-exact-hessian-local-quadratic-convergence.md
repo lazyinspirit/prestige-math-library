@@ -15,8 +15,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Jorge Nocedal and Stephen J. Wright, Numerical Optimization, 2nd ed."

@@ -1,7 +1,7 @@
 ---
 page: stationary-ergodic-sources-and-universal-coding-examples
 title: "Stationary Ergodic Sources and Universal Coding — Examples"
-status: draft
+status: published
 requires:
   - stationary-ergodic-sources-and-universal-coding
 items: []

@@ -2,7 +2,7 @@
 id: thm-it-quantum-channel-capacity-regularized-private-information
 kind: theorem
 title: Regularized private-information formula for quantum channel capacity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

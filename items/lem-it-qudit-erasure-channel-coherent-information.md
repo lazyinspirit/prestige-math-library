@@ -2,7 +2,7 @@
 id: lem-it-qudit-erasure-channel-coherent-information
 kind: lemma
 title: Coherent information of a qudit erasure channel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

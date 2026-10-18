@@ -1,7 +1,7 @@
 ---
 page: point-to-point-source-channel-separation
 title: "Point-to-Point Source–Channel Separation"
-status: draft
+status: published
 requires:
   - discrete-memoryless-channel-capacity
   - rate-distortion-and-lossy-source-coding

@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-towers-and-physics-models
 title: Temperley–Lieb Towers, Spin Chains, and Scaling Interfaces
-status: draft
+status: published
 items:
 - def-temperley-lieb-type-a-path-spaces-and-matrix-unit-tower
 - thm-temperley-lieb-type-a-path-space-tower-branching

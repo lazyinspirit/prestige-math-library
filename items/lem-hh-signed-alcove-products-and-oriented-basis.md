@@ -2,7 +2,7 @@
 id: lem-hh-signed-alcove-products-and-oriented-basis
 kind: lemma
 title: "Signed alcove products and the oriented affine Hecke basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

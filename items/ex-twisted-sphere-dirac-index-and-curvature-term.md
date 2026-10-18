@@ -2,7 +2,7 @@
 id: ex-twisted-sphere-dirac-index-and-curvature-term
 kind: example
 title: "A line twist on the two-sphere has nonzero index and curvature term"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory-examples

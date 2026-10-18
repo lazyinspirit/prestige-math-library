@@ -1,7 +1,7 @@
 ---
 page: pin-spin-and-clifford-module-representations
 title: "Pin and Spin Groups and Their Representations"
-status: draft
+status: published
 items:
   - lem-real-orthogonal-space-preliminaries
   - lem-real-orthogonal-polar-decomposition

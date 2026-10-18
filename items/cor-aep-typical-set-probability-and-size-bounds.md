@@ -2,7 +2,7 @@
 id: cor-aep-typical-set-probability-and-size-bounds
 title: "Typical-set probability and cardinality bounds"
 kind: corollary
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

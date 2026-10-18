@@ -2,7 +2,7 @@
 id: thm-a1-nakajima-hecke-correspondence-gives-sl2-action
 kind: theorem
 title: "The A1 Nakajima Hecke correspondence gives the fundamental sl2 action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

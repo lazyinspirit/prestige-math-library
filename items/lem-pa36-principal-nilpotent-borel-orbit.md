@@ -2,7 +2,7 @@
 id: lem-pa36-principal-nilpotent-borel-orbit
 kind: lemma
 title: The principal nilpotent Borel orbit by height elimination
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

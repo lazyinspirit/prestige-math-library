@@ -2,7 +2,7 @@
 id: cor-ideal-real-arithmetic-code-average-length
 kind: corollary
 title: "Ideal-real arithmetic coding is within two bits per block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

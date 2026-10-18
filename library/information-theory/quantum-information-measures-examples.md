@@ -1,7 +1,7 @@
 ---
 page: quantum-information-measures-examples
 title: "Quantum Information Measures — Examples"
-status: draft
+status: published
 requires:
   - quantum-information-measures
 items: []

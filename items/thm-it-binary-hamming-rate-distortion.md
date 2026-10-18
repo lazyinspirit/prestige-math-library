@@ -2,7 +2,7 @@
 id: thm-it-binary-hamming-rate-distortion
 kind: theorem
 title: "Binary Hamming rate-distortion function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

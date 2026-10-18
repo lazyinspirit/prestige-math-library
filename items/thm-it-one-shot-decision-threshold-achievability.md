@@ -2,7 +2,7 @@
 id: thm-it-one-shot-decision-threshold-achievability
 kind: theorem
 title: Finite-DMC dependence-testing achievability bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

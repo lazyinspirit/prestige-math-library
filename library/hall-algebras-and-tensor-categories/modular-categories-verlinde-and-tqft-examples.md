@@ -1,7 +1,7 @@
 ---
 page: modular-categories-verlinde-and-tqft-examples
 title: "Modular Categories, Verlinde Formula, and TQFT: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - cex-symmetric-rep-z2-hopf-matrix-is-singular

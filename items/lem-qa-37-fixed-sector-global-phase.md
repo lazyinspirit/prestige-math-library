@@ -2,7 +2,7 @@
 id: lem-qa-37-fixed-sector-global-phase
 kind: lemma
 title: "Standalone and controlled phase accounting for a fixed-sector braid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

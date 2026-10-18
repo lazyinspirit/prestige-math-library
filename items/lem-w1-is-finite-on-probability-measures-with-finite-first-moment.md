@@ -17,8 +17,6 @@ axiom_use: No choice principle is used.
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

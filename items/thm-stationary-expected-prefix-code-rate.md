@@ -2,7 +2,7 @@
 id: thm-stationary-expected-prefix-code-rate
 kind: theorem
 title: "Expected lossless prefix-code rate for stationary sources"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

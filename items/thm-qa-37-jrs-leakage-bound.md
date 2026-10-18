@@ -2,7 +2,7 @@
 id: thm-qa-37-jrs-leakage-bound
 kind: theorem
 title: "Finite JRS leakage amplitude and probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 11

@@ -2,7 +2,7 @@
 id: ex-partition-diagram-kernel-below-stable-range
 kind: example
 title: A partition orbit-basis element vanishes below the stable range
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: cost-constrained-gaussian-and-feedback-channels
 title: "Cost-Constrained, Gaussian, and Feedback Channels"
-status: draft
+status: published
 requires:
   - discrete-memoryless-channel-capacity
   - gaussian-orthogonal-decomposition-and-quadratic-forms

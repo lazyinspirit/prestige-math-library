@@ -2,7 +2,7 @@
 id: lem-finite-modules-with-connection-over-a-polynomial-open-are-locally-free
 kind: lemma
 title: "Finite modules with a connection on a complex polynomial open are vector bundles"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

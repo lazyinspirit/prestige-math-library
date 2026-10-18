@@ -2,7 +2,7 @@
 id: lem-finite-alphabet-iid-information-aep
 title: "Finite-alphabet IID information AEP with a variance bound"
 kind: lemma
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

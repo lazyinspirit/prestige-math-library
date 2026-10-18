@@ -2,7 +2,7 @@
 id: lem-rational-cherednik-commutator-jacobi-compatibility
 kind: lemma
 title: "The rational Cherednik commutator satisfies Jacobi compatibility"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

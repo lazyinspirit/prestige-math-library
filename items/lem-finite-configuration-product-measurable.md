@@ -20,8 +20,6 @@ sources:
     - title: "Günter Last and Mathew Penrose, Lectures on the Poisson Process, author-hosted 2017 version"
       url: "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
       locator: "Chapter 3, finite mixed-binomial representation, PDF pp. 33–34; products are made measurable locally for the stated configuration sigma-algebra."
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

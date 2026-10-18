@@ -2,7 +2,7 @@
 id: lem-affine-de-quivers-have-exponentially-many-indecomposables
 kind: lemma
 title: "Explicit affine D and E flag families give exponentially many indecomposables"
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -2,7 +2,7 @@
 id: lem-complex-scalar-gaussian-maximum-differential-entropy
 kind: lemma
 title: Circular complex Gaussian maximizes differential entropy at fixed second moment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

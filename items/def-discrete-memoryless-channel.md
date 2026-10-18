@@ -2,7 +2,7 @@
 id: def-discrete-memoryless-channel
 kind: definition
 title: "Finite discrete memoryless channels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

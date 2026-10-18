@@ -1,7 +1,7 @@
 ---
 page: heisenberg-and-algebraic-weyl-algebras-examples
 title: "Heisenberg Lie Algebras and Algebraic Weyl Algebra: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-truncated-polynomial-weyl-module-in-characteristic-p

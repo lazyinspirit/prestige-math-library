@@ -2,7 +2,7 @@
 id: ex-complexified-four-dimensional-n1-super-poincare-spinor-bracket
 kind: example
 title: The N=1 supercharge bracket is a translation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

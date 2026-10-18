@@ -21,8 +21,6 @@ axiom_base: No choice axiom is used; all cohort and birth sums are finite.
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

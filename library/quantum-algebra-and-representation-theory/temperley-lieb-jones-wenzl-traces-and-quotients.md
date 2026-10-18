@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-jones-wenzl-traces-and-quotients
 title: "Temperley–Lieb Jones–Wenzl Projectors, Traces, and Quotients"
-status: draft
+status: published
 requires:
   - temperley-lieb-root-of-unity-and-modular-representation-theory
 items:

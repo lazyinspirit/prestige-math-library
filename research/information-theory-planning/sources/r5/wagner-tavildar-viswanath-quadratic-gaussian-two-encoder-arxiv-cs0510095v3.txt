@@ -1,0 +1,5316 @@
+arXiv:cs/0510095v3  [cs.IT]  9 Feb 2008
+
+Rate Region of the Quadratic Gaussian
+Two-Encoder Source-Coding Problem
+
+Aaron B. Wagner∗, Saurabha Tavildar†, and Pramod Viswanath‡
+
+February 8, 2008
+
+Abstract
+
+We determine the rate region of the quadratic Gaussian two-encoder
+source-coding problem. This rate region is achieved by a simple archi-
+tecture that separates the analog and digital aspects of the compression.
+Furthermore, this architecture requires higher rates to send a Gaussian
+source than it does to send any other source with the same covariance.
+Our techniques can also be used to determine the sum rate of some gen-
+eralizations of this classical problem. Our approach involves coupling the
+problem to a quadratic Gaussian “CEO problem.”
+
+Keywords:
+multiterminal source coding, vector quantization, Gaussian
+sources, rate region, worst-case source, remote source, CEO problem.
+
+1
+Introduction
+
+This paper addresses the quadratic Gaussian two-encoder source-coding prob-
+lem, the setup for which is depicted in Fig. 1. Two encoders observe different
+components of a memoryless, Gaussian, vector-valued source. The encoders,
+without cooperating, compress their observations and send messages to a single
+decoder over rate-constrained, noiseless channels. The decoder attempts to re-
+produce both observations, subject to separate constraints on the time-averaged
+expected squared error of the two estimates. We seek to determine the set of
+rate pairs (R1, R2) that allow us to meet a given pair of target distortions. We
+call this set the rate region. Of course, this problem can also be formulated for
+general sources and distortion measures. Our focus on the quadratic Gaussian
+case is motivated by its fundamental nature, its importance in applications, and
+its well-known extremal properties.
+
+∗School
+of
+Electrical
+and
+Computer
+Engineering,
+Cornell
+University.
+Email:
+wagner@ece.cornell.edu.
+†QUALCOMM Flarion Technologies. Email: tavildar@gmail.com.
+‡Department of Electrical and Computer Engineering and Coordinated Science Laboratory,
+University of Illinois at Urbana-Champaign. Email: pramodv@uiuc.edu. Much of this work
+was conducted while the first two authors were with the University of Illinois.
+
+1
+
+
+This problem is naturally viewed as a quadratic Gaussian version of Slepian
+and Wolf’s problem [1]. Slepian and Wolf studied the problem in which the
+source is discrete and the decoder must reproduce it with negligible probability
+of error. Their celebrated result characterizes the rate region for this setup. One
+consequence of this characterization is that permitting the encoders to cooperate
+or view each other’s observations does not offer any advantage, at least as far
+as the sum rate is concerned.
+There is a natural way to harness Slepian and Wolf’s result in the Gaussian
+setting. Each encoder first vector quantizes (VQs) its observation using a Gaus-
+sian test channel as in single-encoder rate-distortion theory. This results in two
+correlated digital messages, which are suitable for compression via Slepian-Wolf
+encoding. The decoder decodes the quantized values and estimates the source
+by computing a conditional expectation. This approach separates the analog
+and digital aspects of the compression, as shown in Fig. 2.
+Our main result is an explicit characterization of the rate region for this
+problem. This result has three notable consequences:
+
+(i) The architecture depicted in Fig. 2 is optimal.
+
+(ii) This architecture requires higher rates to send a Gaussian source than it
+does to send any other source with the same covariance. In particular, a
+Gaussian source has the smallest rate region for a given covariance.
+
+(iii) Unlike in the Slepian-Wolf problem, here decentralized encoding requires
+a strictly higher rate compared to centralized encoding.
+
+The problem of determining the rate region for this setup has been open
+for some time [2]. Early work [2, 3] used the architecture described above to
+prove an inner bound.
+Zamir and Berger [4] showed that this inner bound
+is asymptotically tight in the low-distortion regime, even if the source is not
+Gaussian. Oohama [5] determined the rate region for the problem in which only
+one of the two distortion constraints is present. By interpreting this problem
+as a relaxation of the original problem, he obtained an outer bound for the
+latter. He showed that this outer bound, when combined with the inner bound,
+determines a portion of the boundary of the rate region. As a result of his work,
+showing that the inner bound is tight in the sum rate suffices to complete the
+characterization of the rate region. This is shown in the present paper.
+Our approach is to lower bound the sum rate of a given code in two different
+ways. The first way amounts to considering the rate required by a hypothetical
+centralized encoder that achieves the same error covariance matrix as the code.
+The second way is to establish a connection between this problem and the
+quadratic Gaussian “CEO problem,” for which the rate region is already known.
+For some codes, the cooperative bound may be tighter. For others, the CEO
+bound may be tighter. Taking the maximum of the two lower bounds yields a
+composite lower bound that is sufficiently strong to prove the desired result.
+The next section contains a precise formulation of the problem and a state-
+ment of our main result, Theorem 1. In Section 3, we describe the separation-
+based compression architecture. There we also discuss the worst-case property
+
+2
+
+
+of the Gaussian distribution. We provide the necessary background on the CEO
+problem and some other preliminaries to the converse proof in Section 4. The
+converse proof itself is contained in Section 5. In Section 6, we show how the
+converse proof technique can be used to determine the rate region for a more
+general version of the problem in which the decoder aims to reproduce certain
+linear combinations of the source components. In Section 7, we show how the
+proof technique can be extended to handle the case of more than two sources, if a
+certain symmetry condition holds. Section 8 contains some concluding remarks.
+We use the following notation. Boldface, lower case letters (µ) denote vec-
+tors, while boldface, upper case letters (D) denote matrices. Lightface letters
+(ρ, R) denote scalars. Whether a variable is deterministic or random should be
+clear from the context.
+
+2
+Problem Formulation and Main Result
+
+Let {(yn
+1 (i), yn
+2 (i))}n
+i=1 be a sequence of independent and identically distributed
+(i.i.d.) Gaussian zero-mean random vectors. Let
+
+Ky =
+�
+1
+ρ
+ρ
+1
+
+�
+(1)
+
+denote the covariance matrix of (yn
+1 (1), yn
+2 (1)). We use yn
+1 to denote
+
+{yn
+1 (i)}n
+i=1,
+
+yn
+1 (j : k) to denote
+{yn
+1 (i)}k
+i=j,
+
+yn(i) to denote (yn
+1 (i), yn
+2 (i)), yn to denote {(yn
+1 (i), yn
+2 (i))}n
+i=1, etc. Analogous
+notation will be used for other vectors that appear later.
+The first encoder observes yn
+1 , then sends a message to the decoder using a
+mapping
+f (n)
+1
+: Rn �→
+�
+1, . . . , M (n)
+1
+�
+.
+
+The second encoder operates analogously. The decoder uses the received mes-
+sages to estimate both yn
+1 and yn
+2 using mappings
+
+ϕ(n)
+j
+:
+�
+1, . . . , M (n)
+1
+�
+×
+�
+1, . . . , M (n)
+2
+�
+�→Rn
+j = 1, 2.
+
+Definition 1 (Quadratic Gaussian Two-Encoder Source Coding Problem). A
+rate-distortion vector (R1, R2, d1, d2) is strict-sense achievable if there exists a
+block length n, encoders f (n)
+1
+and f (n)
+2
+, and a decoder (ϕ(n)
+1 , ϕ(n)
+2 ) such that1
+
+Rj ≥1
+
+n log M (n)
+j
+for all j in {1,2}, and
+
+dj ≥1
+
+n
+
+n
+�
+
+i=1
+E
+��
+yn
+j (i) −ˆyn
+j (i)
+�2�
+for all j in {1,2},
+(2)
+
+1All logarithms in this paper are base two.
+
+3
+
+
+where
+ˆyn
+j = ϕ(n)
+j
+�
+f (n)
+1
+(yn
+1 ), f (n)
+2
+(yn
+2 )
+�
+j ∈{1, 2}.
+
+Let RD⋆denote the set of strict-sense achievable rate-distortion vectors. We
+define the set of achievable rate-distortion vectors to be the closure, RD⋆, of
+RD⋆. Let
+R⋆(d1, d2) =
+�
+(R1, R2) : (R1, R2, d1, d2) ∈RD⋆�
+.
+
+We call R⋆(·, ·) the rate region for the problem. The (minimum) sum rate for
+a given distortion pair (d1, d2) is defined to be
+
+inf{R1 + R2 : (R1, R2) ∈R⋆(d1, d2)}.
+
+We note that there is no loss of generality in assuming that E[y2
+1] = E[y2
+2] =
+1, since the observations and the estimates can be scaled to reduce the general
+case to this one. By similar reasoning, we may assume that ρ ≥0, i.e., that the
+observations of the two encoders are nonnegatively correlated. Since the two
+extreme cases ρ = 0 and ρ = 1 can be handled using existing techniques, we
+will assume throughout the remainder of the paper that 0 < ρ < 1.
+We now define three sets that will be used to describe the rate region. Let
+
+R⋆
+1(d1) =
+�
+(R1, R2) : R1 ≥1
+
+2 log+
+�1
+
+d1
+
+�
+1 −ρ2 + ρ22−2R2���
+,
+
+where log+ x = max(log x, 0). Likewise, let
+
+R⋆
+2(d2) =
+�
+(R1, R2) : R2 ≥1
+
+2 log+
+�1
+
+d2
+
+�
+1 −ρ2 + ρ22−2R1���
+.
+
+Finally, let
+
+R⋆
+sum(d1, d2) =
+�
+(R1, R2) : R1 + R2 ≥1
+
+2 log+
+�(1 −ρ2) β(d1, d2)
+
+2d1d2
+
+��
+,
+
+where
+
+β(d1, d2) = 1 +
+
+�
+
+1 + 4ρ2d1d2
+
+(1 −ρ2)2 .
+
+Later we will see that we can often interpret the logarithm in the definition
+of R⋆
+sum(·, ·) as a mutual information
+
+1
+2 log |Ky|
+
+|D∗| ,
+
+where D∗is the covariance matrix of the errors (y1 −ˆy1, y2 −ˆy2) in a sum-rate
+optimal code. Throughout the paper we assume that all distortion constraints
+(d1 and d2 in this case) are positive.
+
+Theorem 1. For the Gaussian two-encoder source-coding problem,
+
+R⋆(d1, d2) = R⋆
+1(d1) ∩R⋆
+2(d2) ∩R⋆
+sum(d1, d2).
+(3)
+
+4
+
+
+An example of the rate region is shown in Fig. 3. The direct part of this
+result was previously known and is discussed in the next section. It was also
+previously known that the rate region was contained in the set R⋆
+1(d1)∩R⋆
+2(d2).
+Our contribution is a proof that the rate region in contained in R⋆
+sum(d1, d2).
+This is provided in Sections 4 and 5. Sections 6 and 7 present some extensions
+of this result to problems with more general distortion constraints and more
+than two sources, respectively.
+
+3
+Direct Part and Worst-Case Property
+
+Translating the architecture in Fig. 2 into an inner bound on the rate region is a
+straightforward exercise in network information theory. Since proofs of similar
+bounds are available [2, 6, 7, 8, 9], we provide only a high-level view of the proof
+here.
+Let U(d1, d2) denote the set of real-valued random variables u1 and u2 such
+that
+
+(i) u1 ↔y1 ↔y2 ↔u2, meaning that u1, y1, y2, and u2 form a Markov chain
+in this order2, and
+
+(ii) E[(yj −E[yj|u])2] ≤dj for j ∈{1, 2}.
+
+Then fix u in U(d1, d2) and a large integer n. By the proof of the point-to-point
+rate-distortion theorem, the first vector quantizer can send I(y1; u1) bits per
+sample to the first Slepian-Wolf encoder that conveys a string un
+1 that is jointly
+typical with yn
+1 with high probability. Likewise, the second vector quantizer can
+use I(y2; u2) bits per sample to send to its Slepian-Wolf encoder a string un
+2
+that is jointly typical with yn
+2 with high probability.
+The Slepian-Wolf encoders could view the quantized strings un
+1 and un
+2 as
+individual symbols from a digital source to be compressed [9]. They would then
+accumulate many such symbols to compress. Alternatively, one can apply the
+arguments behind the Slepian and Wolf theorem directly to un
+1 and un
+2 [2, 6, 7, 8].
+Either way, the decoder can recover un
+1 and un
+2 so long as
+
+R1 ≥I(y1; u1|u2)
+
+R2 ≥I(y2; u2|u1)
+R1 + R2 ≥I(y; u).
+(4)
+
+The decoder can then in principle compute the minimum mean-squared error
+(MMSE) estimate of yn given un, and (ii) above guarantees that this estimate
+will comply with the distortion constraints. By a time-sharing argument, one
+can show that the rate region is convex. This outlines the proof of the following
+inner bound.
+
+2This condition is sometimes called the “long Markov chain” [4].
+
+5
+
+
+Proposition 1 (Berger-Tung Inner Bound [2, 3]). The separation-based archi-
+tecture achieves the rates
+
+Ri(d1, d2) = {(R1, R2) : there exists u ∈U(d1, d2) such that
+R1 ≥I(y1; u1|u2)
+
+R2 ≥I(y2; u2|u1)
+R1 + R2 ≥I(y; u)}.
+
+(5)
+
+In particular, the rate region contains the convex hull of this set.
+
+It is unclear a priori how to compute this inner bound. A natural approach
+is to place additional constraints on u to create a potentially smaller inner bound
+that is amenable to explicit calculation. Let UG(d1, d2) denote the set of u in
+U(d1, d2) such that uj has zero mean and unit variance for each j, and there
+exists a random vector z such that
+
+(i) For some constants c1 and c2 in [0, 1),
+
+u1 = c1y1 + z1
+u2 = c2y2 + z2,
+
+(ii) z is Gaussian and its components are independent,
+
+(iii) z is independent of y,
+
+(iv) E[(yj −E[yj|u])2] ≤dj for all j in {1, 2}.
+
+We will refer to a random vector u satisfying conditions (i)-(iii) as a distributed
+Gaussian test channel or, when there is no ambiguity, as simply a test channel.
+Note that the set of distributed Gaussian test channels is parametrized by c1
+and c2.
+Let
+
+RG(d1, d2) = {(R1, R2) : there exists u ∈UG(d1, d2) such that
+R1 ≥I(y1; u1|u2)
+
+R2 ≥I(y2; u2|u1)
+R1 + R2 ≥I(y; u)}.
+
+(6)
+
+Lemma 1. The separation-based architecture achieves RG(d1, d2), which satis-
+fies
+RG(d1, d2) = R⋆
+1(d1) ∩R⋆
+2(d2) ∩R⋆
+sum(d1, d2).
+(7)
+
+Proposition 1 immediately implies that the separation-based architecture
+achieves RG(d1, d2), so we only need to prove the equality in (7). Later, we
+state and prove a more general version of this equality (Lemma 7 in Section 6).
+Since one can verify directly that R⋆
+1(d1), R⋆
+2(d2), and R⋆
+sum(d1, d2) are convex,
+it follows that RG(d1, d2) is also convex. Thus, time sharing does not enlarge
+
+6
+
+
+this region. In the remainder of the paper, whenever we consider the separation-
+based architecture, we will assume that u is a distributed Gaussian test channel.
+Theorem 1 and Lemma 1 together show that RG(d1, d2) equals the rate
+region. In particular, this implies that the separation-based scheme depicted in
+Fig. 2 is an optimal architecture for this problem. We note that the quadratic-
+Gaussian two-encoder source-coding problem is not unique in this respect. Prior
+work has shown this architecture to be optimal for other important problems
+as well [4, 6, 7, 8, 10, 11, 12].
+In fact, the separation-based architecture achieves the rates
+
+R⋆
+1(d1) ∩R⋆
+2(d2) ∩R⋆
+sum(d1, d2)
+
+even if the source is not Gaussian. Let {ˇyn(i)}n
+i=1 be a sequence of zero-mean
+i.i.d. random vectors, not necessarily Gaussian, with covariance matrix Ky.
+We consider the same source-coding problem as before, but with the alternate
+source ˇy in place of y. Let ˇRi(d1, d2) denote the inner bound obtained from
+Proposition 1.
+
+Proposition 2. The separation-based architecture achieves the rates
+
+R⋆
+1(d1) ∩R⋆
+2(d2) ∩R⋆
+sum(d1, d2)
+(8)
+
+for the source ˇy. That is, ˇRi(d1, d2) contains this set.
+
+Proof. See Appendix A.
+
+Theorem 1 and Proposition 2 together imply that the separation-based ar-
+chitecture requires higher rates to send a Gaussian source than it does to send
+any other source with the same covariance. In particular, a Gaussian source
+has the smallest rate region for a given covariance matrix. This result is a two-
+encoder extension of the well-known fact that a Gaussian source has the largest
+rate-distortion function for a given variance [13, Ex. 9.7] (see Lapidoth [14] for
+a stronger version).
+
+4
+Converse Preliminaries
+
+Oohama [5] determined the rate region when only one of the two distortion
+constraints is present
+
+R⋆(d1, 1) = R⋆
+1(d1)
+(9)
+
+R⋆(1, d2) = R⋆
+2(d2).
+(10)
+
+As a consequence of his result, it follows that
+
+R⋆(d1, d2) ⊆R⋆
+1(d1) ∩R⋆
+2(d2).
+(11)
+
+This outer bound is tight in a certain special case. Let DG denote the set of
+matrices D such that
+D−1 = K−1
+y
++ Λ
+(12)
+
+7
+
+
+for some diagonal and positive semidefinite matrix Λ. There is a one-to-one
+correspondence between DG and the set of distributed Gaussian test channels.
+Specifically, D is the covariance matrix of y −E[y|u], where u is a distributed
+Gaussian test channel with
+
+c2
+j =
+λj
+1 + λj
+j ∈{1, 2}
+
+and λ1 and λ2 are defined by
+
+Λ =
+�λ1
+0
+0
+λ2
+
+�
+.
+
+As such, we will sometimes refer to D, or equivalently Λ, as a (distributed
+Gaussian) test channel. Note that the mutual information between y and u can
+be expressed in terms of D
+
+I(y; u) = h(y) −h(y|u)
+
+= 1
+
+2 log
+�
+(2πe)2|Ky|
+�
+−1
+
+2 log
+�
+(2πe)2|D|
+�
+
+= 1
+
+2 log |Ky|
+
+|D| .
+(13)
+
+Let diag(DG) denote the set of distortion pairs (d1, d2) such that there exists
+a D in DG with top-left entry d1 and bottom-right entry d2. It is straightforward
+to verify that (d1, d2) is in diag(DG) if and only if
+
+max(d1, d2) ≤min(1, ρ2 · min(d1, d2) + 1 −ρ2).
+(14)
+
+The set diag(DG) is significant because if (d1, d2) is not in diag(DG), then the
+rate region can be determined using existing results.
+
+Lemma 2. If (d1, d2) is not in diag(DG), then
+
+R⋆
+1(d1) ∩R⋆
+2(d2) ⊆R⋆
+sum(d1, d2).
+(15)
+
+In particular, the rate region equals
+
+R⋆(d1, d2) = R⋆
+1(d1) ∩R⋆
+2(d2) ∩R⋆
+sum(d1, d2).
+(16)
+
+The proof is given in Appendix B. In light of this lemma, Lemma 1, and
+(11), it suffices to show that when (d1, d2) is in diag(DG),
+
+R⋆(d1, d2) ⊆R⋆
+sum(d1, d2).
+
+We show this in the next section.
+Our proof uses a characterization of the sum rate of the quadratic Gaussian
+CEO problem. In the two-encoder version of this problem, encoders 1 and 2
+
+8
+
+
+observe y1 and y2, respectively, and then communicate with a single decoder as
+in the original problem. But now y1 and y2 are of the form
+
+y1 = a1x + n1
+y2 = a2x + n2,
+
+where x, n1, and n2 are independent and Gaussian, and the decoder estimates
+x instead of y1 and y2. The distortion measure is again the average squared
+error. This problem’s rate region was determined independently by Oohama [8]
+and Prabhakaran, Tse, and Ramchandran [10]3. Their result shows that the
+separation-based architecture is optimal for this problem.
+For our purpose, we will find it more convenient to consider the problem
+in which the decoder attempts to estimate µT y for some given vector µ. We
+call this problem the µ-sum problem. For some values of µ, the µ-sum problem
+can be coupled to a CEO problem. For these values of µ, it follows that the
+separation-based architecture is optimal.
+
+Lemma 3. The sum rate for the µ-sum problem with µ1 · µ2 ≥0 and allowable
+distortion d equals
+
+inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µT Dµ ≤d
+�
+.
+(17)
+
+In Appendix C, we prove an extended version of this lemma that includes a
+description of the entire rate region. Here we note some properties of DG and
+the optimization problem (17). Recall that D is in DG if there exists a diagonal
+and positive semidefinite matrix Λ such that
+
+D−1 = K−1
+y
++ Λ.
+(18)
+
+This formula provides a convenient way of evaluating the off-diagonal entry of
+D in terms of its diagonal entries and ρ. Let us write
+
+D =
+�
+d1
+θ√d1d2
+θ√d1d2
+d2
+
+�
+,
+
+where θ ∈(−1, 1). Equating the off-diagonal entries in (18) gives
+
+θ
+(1 −θ2)√d1d2
+=
+ρ
+1 −ρ2 .
+(19)
+
+Since θ2 < 1, it follows that θ must be positive. But this quadratic equation in
+θ has only one positive root
+
+θ =
+
+�
+
+(1 −ρ2)2 + 4ρ2d1d2 −(1 −ρ2)
+
+2ρ√d1d2
+.
+(20)
+
+3In fact, both works solved the problem for an arbitrary number of encoders, but this
+generality is not needed at this point.
+
+9
+
+
+Thus there is no other matrix in DG with top-left entry d1 and bottom-right
+entry d2. Using (20), the determinant of D can be expressed in terms of d1 and
+d2
+|D| =
+2d1d2
+β(d1, d2),
+(21)
+
+where β(·, ·) was defined in Section 2. The effect of the product d1d2 on θ is
+shown in Fig. 4. As d1d2 tends to 1, θ converges to ρ and D converges to Ky.
+On the other hand, as d1d2 tends to zero, θ also converges to zero, i.e., the
+errors become asymptotically uncorrelated.
+Next we show that every matrix in DG solves a µ-sum problem for some µ
+with µ1 · µ2 > 0. This fact will be used in the proof of our main result.
+
+Lemma 4. Let
+
+D∗=
+�
+d1
+θ∗√d1d2
+θ∗√d1d2
+d2
+
+�
+
+be in DG, and let
+
+µ∗=
+�√d2
+√d1
+
+�
+.
+(22)
+
+Then D∗is sum-rate optimal for the µ∗-sum problem, i.e.,
+
+1
+2 log |Ky|
+
+|D∗| = inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µ∗T Dµ∗≤µ∗T D∗µ∗
+�
+.
+(23)
+
+The proof is deferred to Appendix D. It is helpful to note that if the diagonal
+entries of D∗are equal, then the coordinates of µ∗will also be equal. This
+fact makes the proofs that follow somewhat simpler when the two distortion
+constraints, d1 and d2, are equal. As such, the reader is encouraged to keep this
+case in mind as we turn to the proof of the main result.
+
+5
+Proof of the Main Result
+
+Recall that we may restrict attention to the case in which (d1, d2) is in diag(DG).
+Let us now fix one such distortion pair; we will suppress dependence on (d1, d2)
+in what follows. Let D∗denote the element of DG whose top-left and bottom-
+right entries are d1 and d2, respectively.
+
+Definition 2. For θ ∈(−1, 1), let
+
+Dθ =
+�
+d1
+θ√d1d2
+θ√d1d2
+d2
+
+�
+,
+
+and define
+
+Rcoop(θ) = 1
+
+2 log+ |Ky|
+
+|Dθ| = 1
+
+2 log+
+1 −ρ2
+
+(1 −θ2)d1d2
+.
+(24)
+
+Let µ∗be the vector defined in (22). Then let
+
+Rsum(θ) = inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µ∗T Dµ∗≤µ∗T Dθµ∗
+�
+.
+(25)
+
+10
+
+
+The next lemma is central to the proof of our main result.
+
+Lemma 5. If (R1, R2, d1, d2) is strict-sense achievable, then
+
+R1 + R2 ≥
+inf
+θ∈(−1,1) max (Rcoop(θ), Rsum(θ)) .
+(26)
+
+Proof. By hypothesis there exists a code (f (n)
+1
+, f (n)
+2
+, ϕ(n)
+1 , ϕ(n)
+2 ) satisfying (2).
+Then
+
+n(R1 + R2) ≥H
+�
+f (n)
+1
+(yn
+1 ), f (n)
+2
+(yn
+2 )
+�
+
+= I
+�
+yn; f (n)
+1
+(yn
+1 ), f (n)
+2
+(yn
+2 )
+�
+
+= h(yn) −h
+�
+yn���f (n)
+1
+(yn
+1 ), f (n)
+2
+(yn
+2 )
+�
+,
+(27)
+
+where h(·) denotes differential entropy. But the first term on the right-hand
+side satisfies
+h(yn) = n
+
+2 log
+�
+(2πe)2|Ky|
+�
+(28)
+
+while the second term satisfies
+
+h
+�
+yn���f (n)
+1
+(yn
+1 ), f (n)
+2
+(yn
+2 )
+�
+=
+
+n
+�
+
+i=1
+h
+�
+yn(i)
+���f (n)
+1
+(yn
+1 ), f (n)
+2
+(yn
+2 ), yn(1 : i −1)
+�
+
+≤
+
+n
+�
+
+i=1
+h
+�
+yn(i) −ˆyn(i)
+���f (n)
+1
+(yn
+1 ), f (n)
+2
+(yn
+2 )
+�
+
+≤
+
+n
+�
+
+i=1
+h (yn(i) −ˆyn(i)) ,
+(29)
+
+since conditioning reduces entropy.
+Let ˆDi denote the covariance matrix of
+yn(i) −ˆyn(i)
+
+ˆDi = E
+�
+(yn(i) −ˆyn(i)) (yn(i) −ˆyn(i))T �
+,
+(30)
+
+and let
+ˆD = 1
+
+n
+
+n
+�
+
+i=1
+ˆDi
+
+denote the error covariance matrix of the code.
+We may assume that ϕ(n)
+1
+and ϕ(n)
+2
+are MMSE estimators, in which case Theorem 9.6.5 in Cover and
+Thomas [15] implies that
+
+h (yn(i) −ˆyn(i)) ≤1
+
+2 log
+�
+(2πe)2| ˆDi|
+�
+.
+
+11
+
+
+Applying the concavity of log-det [15, Theorem 16.8.1], we have
+
+1
+nh
+�
+yn���f (n)
+1
+(yn
+1 ), f (n)
+2
+(yn
+2 )
+�
+≤1
+
+n
+
+n
+�
+
+i=1
+
+1
+2 log
+�
+(2πe)2| ˆDi|
+�
+(31)
+
+≤1
+
+2 log
+�
+(2πe)2| ˆD|
+�
+.
+(32)
+
+Combining this inequality with (27) and (28) gives
+
+R1 + R2 ≥1
+
+2 log+ |Ky|
+
+| ˆD|
+.
+(33)
+
+Now (27) implies that
+
+h
+�
+yn���f (n)
+1
+(yn
+1 ), f (n)
+2
+(yn
+2 )
+�
+> −∞.
+
+Thus ˆD must be nonsingular and hence positive definite. Let us write it as
+
+ˆD =
+
+�
+ˆd1
+ˆθ
+�ˆd1 ˆd2
+ˆθ
+�ˆd1 ˆd2
+ˆd2
+
+�
+
+,
+
+where ˆd1 ≤d1, ˆd2 ≤d2, and ˆθ is in (−1, 1). Define
+
+φ =
+ˆθ
+�ˆd1 ˆd2
+√d1d2
+,
+
+and note that φ is in (−1, 1). Then Dφ −ˆD is diagonal
+
+Dφ −ˆD =
+�d1 −ˆd1
+0
+0
+d2 −ˆd2
+
+�
+.
+
+Since ˆd1 ≤d1 and ˆd2 ≤d2, it follows that Dφ −ˆD is positive semidefinite, i.e.,
+ˆD ⪯Dφ. In particular, | ˆD| ≤|Dφ| [16, Corollary 7.7.4]. This implies that
+
+R1 + R2 ≥1
+
+2 log+ |Ky|
+
+|Dφ| = Rcoop(φ).
+(34)
+
+Next observe that
+
+E
+��
+µ∗T yn(i) −µ∗T ˆyn(i)
+�2�
+= µ∗T ˆDiµ∗.
+
+In particular, we have
+
+1
+n
+
+n
+�
+
+i=1
+E
+��
+µ∗T yn(i) −µ∗T ˆyn(i)
+�2�
+= µ∗T ˆDµ∗≤µ∗T Dφµ∗,
+(35)
+
+12
+
+
+i.e., this code achieves distortion µ∗T Dφµ∗for the µ∗-sum problem. Lemma 3
+then implies that
+R1 + R2 ≥Rsum(φ).
+
+Combining this with (34) gives
+
+R1 + R2 ≥max(Rcoop(φ), Rsum(φ)).
+
+The conclusion follows by taking the infimum over φ in (−1, 1).
+
+The next step is to evaluate the infimum in (26).
+Examples of Rcoop(·)
+and Rsum(·) are shown in Fig. 5.
+We show that these two functions always
+intersect at the correlation coefficient of D∗, θ∗, and at this point, they equal
+the min-max.
+
+Lemma 6.
+
+inf
+θ∈(−1,1)max (Rcoop(θ), Rsum(θ)) = Rcoop(θ∗)
+
+= Rsum(θ∗)
+
+= 1
+
+2 log |Ky|
+
+|D∗|
+
+= 1
+
+2 log+
+�(1 −ρ2) β(d1, d2)
+
+2d1d2
+
+�
+.
+
+Proof. Let us write D∗, the matrix in DG with diagonal entries (d1, d2), as
+
+D∗=
+�
+d1
+θ∗√d1d2
+θ∗√d1d2
+d2
+
+�
+.
+
+Then observe that since θ∗> 0, if θ ≥θ∗, we have
+
+max(Rcoop(θ), Rsum(θ)) ≥Rcoop(θ) ≥Rcoop(θ∗) = 1
+
+2 log |Ky|
+
+|D∗| .
+(36)
+
+On the other hand, if θ ≤θ∗, then since Rsum(·) is nonincreasing,
+
+max(Rcoop(θ), Rsum(θ)) ≥Rsum(θ) ≥Rsum(θ∗) = 1
+
+2 log |Ky|
+
+|D∗| ,
+(37)
+
+where we have used the fact that D∗solves the µ∗-sum problem. It follows that
+
+inf
+θ∈(−1,1) max(Rcoop(θ), Rsum(θ)) = Rcoop(θ∗) = Rsum(θ∗) = 1
+
+2 log |Ky|
+
+|D∗| .
+
+We conclude the proof by invoking the formula for the determinant of a matrix
+in DG (21).
+
+13
+
+
+Proof of Theorem 1. As discussed in Section 4, it suffices to show that
+
+R⋆(d1, d2) ⊆R⋆
+sum(d1, d2).
+
+Lemmas 5 and 6 together imply that if the rate-distortion vector (R1, R2, d1, d2)
+is strict-sense achievable and (d1, d2) is in diag(DG), then
+
+R1 + R2 ≥1
+
+2 log+
+�(1 −ρ2) β(d1, d2)
+
+2d1d2
+
+�
+.
+(38)
+
+On the other hand, Lemma 2 implies this inequality if (R1, R2, d1, d2) is strict-
+sense achievable and (d1, d2) in not in diag(DG).
+It follows that (38) holds
+whenever (R1, R2, d1, d2) is strict-sense achievable. Since the right-hand side is
+continuous in (d1, d2), this implies that if the point (R1, R2, d1, d2) is in RD⋆,
+then (38) again holds. This implies the desired conclusion.
+
+5.1
+Reprise
+
+The argument used in the converse proof can be summarized as follows. Since
+the distortion constraints only constrain the magnitude of the individual er-
+rors, and not their correlation, we view the determination of the sum-rate as
+an implicit minimization over all possible error covariance matrices, subject to
+upper bounds on the diagonal elements. We then lower bound the sum rate for
+each possible error covariance matrix using two approaches. First, we consider
+the rate needed by a centralized encoder to achieve the given error covariance
+matrix. Second, we use the existing characterization of the rate region for the
+CEO problem to solve the µ-sum problem for some µ vectors. This solution is
+then used to lower bound the sum rate of the problem under study for a given
+error covariance matrix. The first bound is most effective when the correlation
+between the errors is large. The second bound is most effective when the corre-
+lation is small. We therefore form a composite bound by taking the maximum
+of these two lower bounds. The argument is illustrated in Figs. 5 and 6. Note
+that both of the lower bounds are needed.
+
+6
+The M-sums Problem
+
+Consider next a generalization of the classical problem in which the decoder
+attempts to estimate µT
+j y for a given set of vectors µ1, . . . , µJ. We may assume
+without loss of generality that these vectors are distinct and have unit norm.
+Define the matrix
+M = [µ1 µ2 · · · µJ]
+
+consisting of the column vectors µ1, . . . , µJ side-by-side. The problem is then
+to reproduce the vector M T y subject to separate constraints on the average
+squared error of each component.
+We call this the M-sums problem.
+Note
+that the classical quadratic Gaussian two-encoder source coding problem can
+be viewed as an instance of the M-sums problem with M equal to the identity
+
+14
+
+
+matrix. We will show that the techniques used to solve that problem can be used
+to solve the general M-sums problem if the vectors µ1, . . . µJ satisfy a certain
+condition. Specifically, we will require that the product of the two coordinates
+of each vector is nonnegative
+
+µj1 · µj2 ≥0
+∀j ∈{1, . . ., J}.
+(39)
+
+This condition is satisfied if and only for each j either both coordinates of µj are
+nonnegative or both are nonpositive. From a source-coding perspective, these
+two cases are essentially equivalent, so for simplicity we will assume that the
+components of µj are nonnegative for each j.
+The condition in (39) depends on our standing assumption that 0 < ρ < 1.
+If ρ is negative, then the condition in (39) becomes
+
+µj1 · µj2 ≤0
+∀j ∈{1, . . ., J}.
+(40)
+
+Note that either way, the condition includes the case when M is the identity
+matrix, i.e., the classical version of the problem.
+
+6.1
+Main Result
+
+In this section, we use R⋆
+j(dj) to denote the rate region of the µj-sum problem
+with distortion constraint dj. Let R⋆
+sum(d1, . . . , dJ) denote the minimum sum
+rate for the M-sums problem achieved by the separation-based scheme
+
+R⋆
+sum(d1, . . . , dJ)
+
+= inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µT
+j Dµj ≤dj ∀j ∈{1, . . . , J}
+�
+.
+(41)
+
+Then let R⋆
+sum(d1, . . . , dJ) denote the set of rate pairs whose sum is at least
+R⋆
+sum(d1, . . . , dJ)
+
+R⋆
+sum(d1, . . . , dJ) = {(R1, R2) : R1 + R2 ≥R⋆
+sum(d1, . . . , dJ)}.
+(42)
+
+In terms of these sets, the separation-based architecture achieves the following
+inner bound.
+
+Lemma 7. For the M-sums problem, the separation-based architecture achieves
+the rates
+
+R⋆
+sum(d1, . . . , dJ) ∩
+
+J�
+
+j=1
+R⋆
+j(dj).
+
+The proof is elementary but somewhat involved and is given in Appendix E.
+The main result of this section is the following theorem that shows that this
+inner bound equals the rate region.
+
+Theorem 2. The rate region of the M-sums problem equals
+
+R⋆
+sum(d1, . . . , dJ) ∩
+
+J�
+
+j=1
+R⋆
+j(dj).
+(43)
+
+15
+
+
+The proof parallels that of Theorem 1. In particular, we use functions similar
+to Rcoop(·) and Rsum(·). The details are given in Appendix F.
+By mimicking the proof of Proposition 2, one can show that the separation-
+based architecture achieves the rates in (43) even if the source is not Gaussian.
+Theorem 2 then implies that, as with the classical version of the problem, the
+separation-based inner bound and the rate region are both smallest for a Gaus-
+sian source.
+
+6.2
+The Remote-source Problem
+
+As an application of Theorem 2, consider the remote-source version of the orig-
+inal problem.
+Here the encoders’ observations are viewed as an underlying
+source, ˜y, plus additive noise
+
+y1 = ˜y1 + n1
+y2 = ˜y2 + n2
+
+where ˜y, n1, and n2 are independent and Gaussian. We assume these random
+variables have zero mean and the following second moments
+
+E[˜y2
+1] = σ2
+1 ≤1
+
+E[˜y2
+2] = σ2
+2 ≤1
+
+E[˜y1˜y2] = ρ
+
+E[n2
+1] = 1 −σ2
+1
+E[n2
+2] = 1 −σ2
+2
+
+so that y has covariance matrix Ky. The aim is to reproduce ˜y1 and ˜y2 subject
+to distortion constraints d1 and d2, respectively. A partial characterization of
+the rate region for this problem was obtained by Oohama [17]. By coupling this
+problem to an M-sums problem, we can determine the rate region completely.
+
+Corollary 1. The rate region for the remote-source problem with distortion con-
+straints d1 and d2 equals the rate region for the M-sums problem with distortion
+constraints d1 −γ1 and d2 −γ2, where
+
+M =
+1
+1 −ρ2
+
+�
+σ2
+1 −ρ2
+ρ(1 −σ2
+2)
+ρ(1 −σ2
+1)
+σ2
+2 −ρ2
+
+�
+= [µ1 µ2]
+
+and
+
+γ1 = (σ2
+1 −ρ2)(1 −σ2
+1)
+1 −ρ2
+
+γ2 = (σ2
+2 −ρ2)(1 −σ2
+2)
+1 −ρ2
+.
+
+Proof. Standard calculations show that E[˜y1|y] = µT
+1 y, and in particular, ˜y1
+can be written
+˜y1 = µT
+1 y + ˜n1,
+
+16
+
+
+where ˜n1 is Gaussian, independent of y, and has mean zero and variance γ1.
+Then for any random variable y such that ˜y ↔y ↔y, we have
+
+E[(˜y1 −y1)2] = E[(˜y1 −µT
+1 y + µT
+1 y −y1)2]
+
+= E[(˜n1 + µT
+1 y −y1)2]
+
+= γ1 + E[(µT
+1 y −y1)2].
+(44)
+
+Now consider a pair of encoders, f (n)
+1
+and f (n)
+2
+, and a decoder (ϕ(n)
+1 , ϕ(n)
+2 ) with
+
+yn
+i = ϕ(n)
+i
+�
+f (n)
+1
+(yn
+1 ), f (n)
+2
+(yn
+2 )
+�
+i = 1, 2.
+
+Since the source is i.i.d., for any time i, we have
+
+˜yn(i) ↔yn(i) ↔yn(i).
+
+Thus by (44), it follows that
+
+E
+�
+(˜yn
+1 (i) −yn
+1(i))2�
+= γ1 + E[(µT
+1 yn(i) −yn
+1(i))2].
+(45)
+
+By averaging both sides of this equation over time, we see that any code that
+achieves distortion d1 for ˜y1 must achieve distortion d1 −γ1 for µT
+1 y and vice
+versa. Likewise, any code that achieves distortion d2 for ˜y2 must achieve distor-
+tion d2 −γ2 for µT
+2 y and vice versa. The conclusion follows.
+
+Observe that this proof does not require the assumption that 0 < ρ < 1, only
+that ρ2 < 1. If 0 < ρ < 1, then µ1 and µ2 satisfy the condition in (39). On the
+other hand, if −1 < ρ < 0, then µ1 and µ2 satisfy the condition in (40). Since
+the cases ρ = 0, ρ = −1, and ρ = 1 can be solved using existing techniques, the
+rate region for the remote source problem is solved for any value of ρ.
+
+7
+Many Sources
+
+Our technique can be used to determine the sum rate for more than two sources
+if a certain symmetry condition holds. Suppose now that there are L jointly
+Gaussian sources, y1, . . . , yL, with covariance matrix
+
+Ky =
+
+
+
+
+
+1
+ρ
+· · ·
+ρ
+ρ
+1
+. . .
+ρ
+...
+...
+...
+...
+ρ
+ρ
+· · ·
+1
+
+
+
+
+
+for some 0 < ρ < 1. That is, the source components are Gaussian, exchangeable,
+and positively correlated. We assume that the sources are separately encoded, as
+shown in Fig. 9, and that L distortion constraints are imposed on the individual
+reproductions
+
+dℓ≥1
+
+n
+
+n
+�
+
+i=1
+E[(yn
+ℓ(i) −ˆyn
+ℓ(i))2]
+for all ℓin {1, . . . , L}.
+
+17
+
+
+The separation-based scheme yields an inner bound on the rate region, and in
+particular, an upper bound on the sum rate. As in the case of two sources, let
+DG denote the set of matrices D such that
+
+D−1 = K−1
+y
++ Λ
+
+for some diagonal and positive semidefinite matrix Λ. The sum rate achieved
+by the separation-based scheme is then
+
+inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and eT
+ℓDeℓ≤dℓ∀ℓ∈{1, . . . , L}
+�
+,
+(46)
+
+where eℓdenotes the vector with one in position ℓand zero elsewhere.
+By
+following the proof of Theorem 1, one can show that this sum rate is optimal if
+the distortion constraints d1, . . . , dL are equal.
+
+Theorem 3. If d1 = d2 = · · · = dL = d, then the separation-based architecture
+is sum-rate optimal. In particular, the sum rate is given by (46). Furthermore,
+in this case the infimum in (46) is achieved by a D in DG of the form
+
+D−1 = K−1
+y
++ λI,
+
+for some λ ≥0.
+
+The proof is given in Appendix G.
+As with the M-sums problem, it is
+possible to mimic Proposition 2 and show that the separation-based architecture
+achieves the sum rate in (46) even if the source is not Gaussian.
+It follows
+that the Gaussian source has the largest sum rate among all exchangeable and
+positively correlated sources when all of the distortion constraints are equal.
+
+8
+Concluding Remarks
+
+We determined the rate region of the quadratic Gaussian two-encoder source-
+coding problem. This result implies that a simple architecture that separates
+the analog and digital aspects of the compression is optimal, and that this
+architecture requires higher rates to send a Gaussian source than it does to send
+any other source with the same covariance. We also described how our proof
+technique can be extended to determine the sum rate of some generalizations of
+this problem. We now comment on two aspects of our results.
+
+8.1
+An Extremal Result
+
+One consequence of our main result is that there is no loss of optimality in
+using Gaussian auxiliary random variables in the separation-based inner bound.
+More precisely, the regions Ri(d1, d2) and RG(d1, d2) defined in (5) and (6) are
+equal. In particular, these two regions have the same sum rate. Thus to the
+
+18
+
+
+optimization problem
+
+minimize
+I(y; u)
+
+subject to
+u1 ↔y1 ↔y2 ↔u2
+E[(yj −E[yj|u])2] ≤dj
+j ∈{1, 2}
+
+(47)
+
+we can add the constraint
+
+(y, u) is jointly Gaussian
+
+without changing the optimal value. The same is true, of course, of the opti-
+mization problem
+
+maximize
+h(y|u)
+subject to
+u1 ↔y1 ↔y2 ↔u2
+E[(yj −E[yj|u])2] ≤dj
+j ∈{1, 2}.
+
+(48)
+
+This is akin to the well-known fact that the Gaussian distribution maximizes
+entropy for a given covariance. But this result is more subtle in that the con-
+ditional covariance of y given u is not fixed, and by using non-Gaussian u, one
+can potentially realize conditional covariances that are unattainable with Gaus-
+sian distributions. Evidently the entropy-maximizing property of the Gaussian
+distribution more than compensates for its smaller set of achievable conditional
+covariances.
+Using Theorem 2, it is possible to generalize this result to allow distortion
+constraints on linear combinations of the source variables y1 and y2. It is also
+possible to prove a multi-letter version of this result by first proving a multi-
+letter version of the inner bound, in which several source symbols are treated as
+a single “supersymbol.” Whether one can prove any of these extremal results
+without reference to the source-coding setup that is the subject of this paper is
+an interesting open question.
+
+8.2
+Source Augmentation
+
+The most noteworthy aspect of our proof is the random variable x that we
+add to the source y in Appendix C to solve the µ-sum problem. Unlike other
+more typical auxiliary random variables, x does not represent a component
+of the code.
+Rather, it is used to aid the analysis by inducing conditional
+independence among the observations, which allows us to couple our problem
+to a CEO problem. Of course, there are many random variables that will induce
+conditional independence. The role of Lemma 4 is to identify the best one.
+This technique of augmenting the source to induce conditional independence
+has proven useful in other contexts as well. Ozarow [18] used it to prove the
+converse for the Gaussian two-descriptions problem. Wang and Viswanath [19]
+used it to determine the sum rate for the Gaussian vector multiple-descriptions
+problem with individual and central decoders. Wagner and Anantharam [11, 12]
+
+19
+
+
+used it to prove an outer bound for the discrete multiterminal source-coding
+problem.
+Recently, we have generalized the CEO result to sources whose correlation
+satisfies a certain tree condition [20] (see also [21]). This suggests an approach
+for generalizing the results in this paper.
+Specifically, one could potentially
+augment the source to couple a given distributed source coding problem to this
+tree problem instead of the more restrictive CEO problem. Determining whether
+this revised approach yields stronger results is a worthwhile question for future
+research.
+
+Acknowledgment
+
+We wish to thank Venkat Anantharam and Jun Chen for helpful discussions.
+We would also like to thank the anonymous reviewers for carefully checking the
+manuscript and suggesting many improvements.
+
+A
+Proof of Proposition 2
+
+Let (R1, R2) be a rate pair in
+
+R⋆
+1(d1) ∩R⋆
+2(d2) ∩R⋆
+sum(d1, d2).
+
+By Lemma 1, there exists a u in UG(d1, d2) such that
+
+R1 ≥I(y1; u1|u2)
+R2 ≥I(y2; u2|u1)
+
+R1 + R2 ≥I(y; u).
+(49)
+
+Now u can be expressed as
+
+u1 = c1y1 + z1
+u2 = c2y2 + z2
+
+for some coefficients c1 and c2 in [0, 1), where z1, z2, and y are independent and
+z is Gaussian. Now construct auxiliary random variables ˇu1 and ˇu2 for the true
+source via
+
+ˇu1 = c1ˇy1 + z1
+ˇu2 = c2ˇy2 + z2
+
+with z independent of ˇy. Note that the Markov condition
+
+ˇu1 ↔ˇy1 ↔ˇy2 ↔ˇu2
+
+is satisfied and that (ˇy, ˇu) and (y, u) have the same second-order statistics.
+Thus the error in the linear minimum mean-squared error estimate of ˇyj given
+
+20
+
+
+ˇu, LMMSE(ˇyj|ˇu), equals the error in the linear minimum mean-squared error
+estimate of yj given u,
+
+LMMSE(ˇyj|ˇu) = LMMSE(yj|u)
+j ∈{1, 2}.
+(50)
+
+But conditional expectation minimizes mean square error,
+
+E[(ˇyj −E[ˇyj|ˇu])2] ≤LMMSE(ˇyj|ˇu)
+j ∈{1, 2},
+(51)
+
+and for jointly Gaussian random variables, the linear minimum mean-squared
+error estimate is also the conditional expectation [22, Theorems 9.1-1 and 9.1-2].
+Since u is in UG(d1, d2), this implies
+
+E[(ˇyj −E[ˇyj|ˇu])2] ≤dj
+j ∈{1, 2}.
+
+It follows that ˇu is in U(d1, d2). Next, we show that (R1, R2) satisfies
+
+R1 ≥I(ˇy1; ˇu1|ˇu2)
+R2 ≥I(ˇy2; ˇu2|ˇu1)
+
+R1 + R2 ≥I(ˇy; ˇu).
+(52)
+
+To prove this, it suffices to show that
+
+I(y1; u1|u2) ≥I(ˇy1; ˇu1|ˇu2)
+
+I(y2; u2|u1) ≥I(ˇy2; ˇu2|ˇu1)
+I(y; u) ≥I(ˇy; ˇu).
+(53)
+
+By symmetry, it suffices to prove the last two inequalities. Let
+
+α2 = E[u1u2]
+
+E[u2
+1]
+= E[u1u2].
+
+Then we have
+
+I(ˇy2; ˇu2|ˇu1)
+(a)
+= h(ˇu2|ˇu1) −h(ˇu2|ˇy2)
+
+(b)
+= h(ˇu2 −α2ˇu1|ˇu1) −h(z2)
+
+(c)
+≤h(ˇu2 −α2ˇu1) −h(z2)
+
+(d)
+≤h(u2 −α2u1) −h(z2)
+
+(e)
+= I(y2; u2|u1),
+
+where
+
+(a) follows from the Markov condition ˇu2 ↔ˇy2 ↔ˇu1,
+
+(b) follows because differential entropy is invariant to shifts,
+
+21
+
+
+(c) follows because conditioning reduces differential entropy,
+
+(d) follows from the fact that u has the same covariance as ˇu, and the Gaussian
+distribution maximizes differential entropy for a given variance, and
+
+(e) follows because steps (c) and (d) are tight if (ˇy, ˇu) is Gaussian.
+
+We can prove (53) via similar reasoning
+
+I(ˇy; ˇu) = h(ˇu) −h(ˇu|ˇy)
+= h(ˇu) −h(z)
+
+≤h(u) −h(z)
+= I(y; u).
+
+(54)
+
+It follows that the rate pair (R1, R2) belongs to ˇRi(d1, d2).
+
+B
+Converse for a Special Case
+
+Proof of Lemma 2. The conclusion is easily verified if min(d1, d2) ≥1, so as-
+sume instead that min(d1, d2) < 1. Without loss of generality, let us assume
+that d1 = min(d1, d2). Then by (14), we must have
+
+ρ2d1 + 1 −ρ2 < d2.
+
+If this holds, then
+
+R⋆
+sum(d1, ρ2d1 + 1 −ρ2) ⊆R⋆
+sum(d1, d2).
+
+But one can verify directly that
+
+R⋆
+sum(d1, ρ2d1 + 1 −ρ2) =
+�
+(R1, R2) : R1 + R2 ≥1
+
+2 log 1
+
+d1
+
+�
+.
+(55)
+
+Now via calculus one can show that if (R1, R2) is in R⋆
+1(d1) then R1 and R2
+must satisfy
+
+R1 + R2 ≥1
+
+2 log 1
+
+d1
+.
+
+It follows that
+R⋆
+1(d1) ⊆R⋆
+sum(d1, d2).
+
+In particular, we have
+
+R⋆
+1(d1) ∩R⋆
+2(d2) = R⋆
+1(d1) ∩R⋆
+2(d2) ∩R⋆
+sum(d1, d2).
+(56)
+
+The result then follows from (11) and Lemma 1.
+
+22
+
+
+C
+The µ-sum Problem
+
+In this appendix, we determine the rate region for the µ-sum problem if µ
+satisfies µ1 · µ2 ≥0.
+If µ1 · µ2 = 0, then the rate region has already been
+determined by Oohama [5], so we shall assume that µ1 · µ2 > 0.
+We begin by noting that if µ and the allowable distortion are both scaled
+by the same factor, then the rate region remains unchanged. We may therefore
+assume that µ is normalized. In particular, we may assume that
+
+µ1 · µ2 = γ2
+
+ρ · SNR1 · SNR2
+(57)
+
+where
+
+SNR1 =
+ρ
+1 −ρ2
+
+�µ1
+
+µ2
++ ρ
+�
+(58)
+
+SNR2 =
+ρ
+1 −ρ2
+
+�µ2
+
+µ1
++ ρ
+�
+(59)
+
+and
+
+γ−1 = 1 + SNR1 + SNR2.
+(60)
+
+This normalization is convenient because, as we shall see, it admits a particularly
+simple coupling to a CEO problem.
+
+Lemma 8. Suppose the vector µ satisfies µ1·µ2 > 0 and the normalization (57).
+Then the rate region for the µ-sum problem with allowable distortion d equals
+�
+
+(R1, R2) : there exist r1 ≥0, r2 ≥0 such that
+
+R1 ≥1
+
+2 log+
+�
+1
+d + γ (1 + SNR2(1 −2−2r2))−1
+�
++ r1
+
+R2 ≥1
+
+2 log+
+�
+1
+d + γ (1 + SNR1(1 −2−2r1))−1
+�
++ r2
+
+R1 + R2 ≥1
+
+2 log+
+�
+1
+d + γ
+
+�
++ r1 + r2
+
+1
+d + γ ≤1 +
+
+2
+�
+
+j=1
+SNRj(1 −2−2rj)
+
+�
+
+.
+
+(61)
+
+In particular, the sum rate equals
+
+inf
+
+�
+1
+2 log+
+�
+1
+d + γ
+
+�
++ r1 + r2 : r1 ≥0, r2 ≥0, and
+
+1 +
+
+2
+�
+
+j=1
+SNRj
+�
+1 −2−2rj�
+≥
+1
+d + γ
+
+�
+
+,
+
+(62)
+
+23
+
+
+or, equivalently,
+
+inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µT Dµ ≤d
+�
+.
+(63)
+
+Furthermore, the infimum in (63) is achieved by a unique feasible D.
+
+Proof. Let
+
+aj =
+�
+SNRj
+1 + SNRj
+
+�1/2
+j ∈{1, 2}.
+(64)
+
+Clearly a1 < 1 and a2 < 1. Using (58) and (59), one can verify that a1a2 = ρ.
+It follows that a1 and a2 are each contained in (ρ, 1). Let x, n1, and n2 be
+independent zero-mean Gaussian random variables with variances
+
+E[x2] = 1
+
+E[n2
+j] = 1 −a2
+j
+j ∈{1, 2}.
+
+Since (a1x + n1, a2x + n2) has covariance matrix Ky, we can couple these vari-
+ables to y to create a CEO problem
+
+y1 = a1x + n1
+y2 = a2x + n2.
+(65)
+
+The SNR notation is justified by the fact that
+
+SNRj =
+a2
+j
+1 −a2
+j
+= Var(ajx)
+
+Var(nj)
+j ∈{1, 2}.
+
+Now starting with (57), we have
+
+µ1 · µ2 = √µ1µ2 · γ
+√ρ ·
+�
+
+SNR1SNR2.
+
+Substituting for SNR1 and SNR2 and rearranging gives
+
+µ1 = γ ·
+
+�
+
+ρµ1 + ρ2µ2
+
+µ2 + ρµ1
+· µ2 + ρµ1
+
+(1 −ρ2)µ2
+.
+(66)
+
+But observe that
+µ2 + ρµ1
+(1 −ρ2)µ2
+= 1 + SNR1 =
+1
+1 −a2
+1
+and
+�
+
+ρµ1 + ρ2µ2
+
+µ2 + ρµ1
+= a1.
+
+Substituting these equations into (66) gives
+
+µ1 = γ · a1 ·
+1
+1 −a2
+1
+
+= γ · SNR1
+
+a1
+.
+(67)
+
+24
+
+
+Similarly,
+
+µ2 = γ · SNR2
+
+a2
+.
+(68)
+
+Now using the fact that a1a2 = ρ, we have
+
+[a1 a2] · K−1
+y
+=
+1
+1 −ρ2 [a1 −ρa2 a2 −ρa1]
+
+=
+1
+1 −a2
+1a2
+2
+
+�a2
+1 −a2
+1a2
+2
+a1
+
+a2
+2 −a2
+1a2
+2
+a2
+2
+
+�
+.
+(69)
+
+Substituting for a1 and a2 using (64), this gives
+
+[a1 a2] · K−1
+y
+=
+�γSNR1
+
+a1
+
+γSNR2
+
+a2
+
+�
+.
+
+Thus we have
+
+E[x|y] = γ
+�
+SNR1
+y1
+a1
++ SNR2
+y2
+a2
+
+�
+.
+(70)
+
+It follows that
+E[x|y] = µT y,
+
+and in particular, x can be written
+
+x = µT y + ˜n,
+
+where ˜n is Gaussian, independent of y, and has variance
+
+1 −[a1 a2] · K−1
+y
+·
+�a1
+a2
+
+�
+= 1 −
+�γSNR1
+
+a1
+
+γSNR2
+
+a2
+
+��a1
+a2
+
+�
+
+= γ.
+(71)
+
+Then for any random variable u such that x ↔y ↔u, by a calculation similar
+to (44), we have
+
+E[(x −E[x|u])2] = γ + E[(µT y −E[µT y|u])2].
+(72)
+
+As in the proof of Corollary 1, it follows that any code that achieves distortion d
+for the µ-sum problem must achieve distortion d + γ for the CEO problem (65)
+and vice versa. The characterization of the rate region in (61) and the sum rate
+in (62) now follow from existing results on the CEO problem [8, 10]. To show
+that (63) equals (62), we first show that (62) can be rewritten as
+
+inf
+
+�
+1
+2 log
+
+�
+
+1 +
+
+2
+�
+
+j=1
+SNRj(1 −2−2rj)
+
+�
+
++ r1 + r2 : r1 ≥0, r2 ≥0, and
+
+1 +
+
+2
+�
+
+j=1
+SNRj
+�
+1 −2−2rj�
+≥
+1
+d + γ
+
+�
+
+.
+
+(73)
+
+25
+
+
+To see this, note that the two optimization problems differ only in the objective,
+and both objectives are increasing functions of r1 and r2. Now if d > 1−γ, then
+both infima are zero. On the other hand, if d ≤1−γ, then in both problems, we
+may assume without loss of generality that the constraint is met with equality
+
+1 +
+
+2
+�
+
+j=1
+SNRj
+�
+1 −2−2rj�
+=
+1
+d + γ .
+(74)
+
+But if the constraint is met with equality, then the two objectives are equal.
+Thus the two optimization problems are equivalent.
+Let u be a distributed Gaussian test channel such that
+
+x ↔y ↔u.
+
+If we define
+rj = I(yj; uj|x)
+j ∈{1, 2},
+
+then a standard calculation shows that
+
+E[(x −E[x|u])2] =
+
+
+
+1 +
+
+2
+�
+
+j=1
+SNRj
+�
+1 −2−2rj�
+
+
+
+
+−1
+
+.
+(75)
+
+Thus the expression in (73) equals
+
+inf
+�
+I(x; u) + I(y1; u1|x) + I(y2; u2|x) : (x, y, u) are jointly Gaussian,
+
+x ↔y ↔u
+u1 ↔y1 ↔y2 ↔u2
+
+E[(x −E[x|u])2] ≤d + γ
+�
+.
+
+(76)
+
+Now since (y1, u1) ↔x ↔(y2, u2) and x ↔y ↔u, we have
+
+I(x; u) + I(y1; u1|x) + I(y2; u2|x) = I(x; u) + I(y; u|x)
+= I(x, y; u)
+
+= I(y; u).
+(77)
+
+Applying (72) again, we can write the infimum in (76) as
+
+inf
+�
+I(y; u) : (y, u) are jointly Gaussian,
+
+u1 ↔y1 ↔y2 ↔u2
+
+E[(µT y −E[µT y|u])2] ≤d
+�
+,
+
+which equals
+
+inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µT Dµ ≤d
+�
+.
+(78)
+
+26
+
+
+Now since the quantity
+
+1 +
+
+2
+�
+
+j=1
+SNRj
+�
+1 −2−2rj�
+
+is strictly concave, it follows that the infimum in (62) is achieved by a unique
+feasible point. This in turn implies that the infimum in (73) is achieved by a
+unique feasible point. By the equivalence between the feasible points in (73)
+and (78) it follows that the infimum in (78) is also achieved by a unique feasible
+point.
+
+D
+Every D∗Solves a µ-sum Problem
+
+Proof of Lemma 4. Without loss of generality, we may assume that µ∗has been
+scaled so that it satisfies the normalization (57). Then the sum rate for the µ∗-
+sum problem with allowable distortion
+
+d∗:= µ∗T D∗µ∗
+
+is given by
+
+inf
+
+�
+1
+2 log
+�
+1
+d∗+ γ
+
+�
++ r1 + r2 : r1 ≥0, r2 ≥0, and
+
+1 +
+
+2
+�
+
+j=1
+SNRj
+�
+1 −2−2rj�
+≥
+1
+d∗+ γ
+
+�
+
+,
+
+(79)
+
+where SNR1, SNR2, and γ were defined in equations (58) through (60). The
+remainder of the proof consists of three parts:
+
+(I ) We identify candidate optimizers for (79), r∗
+1 and r∗
+2, in terms of D∗.
+
+(II ) We show that r∗
+1 and r∗
+2 achieve the infimum in (79).
+
+(III ) We show that at r∗
+1 and r∗
+2, the objective
+
+1
+2 log
+�
+1
+d∗+ γ
+
+�
++ r∗
+1 + r∗
+2
+
+equals
+1
+2 log |Ky|
+
+|D∗| .
+
+Part I. Since D∗is in DG, there exists λ∗
+1 ≥0 and λ∗
+2 ≥0, such that
+
+D∗−1 = K−1
+y
++
+�λ∗
+1
+0
+0
+λ∗
+2
+
+�
+.
+(80)
+
+27
+
+
+Our candidate optimizers are then
+
+r∗
+j = 1
+
+2 log
+�
+1 +
+λ∗
+j
+1 + SNRj
+
+�
+j ∈{1, 2}.
+(81)
+
+This formula can be understood as follows. Since D∗is in DG, there exists a
+distributed Gaussian test channel u∗such that Cov(y|u∗) = D∗. Now u∗can
+be written
+
+u∗
+j =
+
+�
+
+λ∗
+j
+1 + λ∗
+j
+· yj + zj
+j ∈{1, 2}
+
+where z is an independent Gaussian vector with covariance matrix
+�
+(1 + λ∗
+1)−1
+0
+0
+(1 + λ∗
+2)−1
+
+�
+.
+
+As in the previous appendix, let
+
+aj =
+�
+SNRj
+1 + SNRj
+
+�1/2
+j ∈{1, 2}
+(82)
+
+and let x, n1, and n2 be zero mean Gaussian random variables with
+
+E[x2] = 1
+
+E[n2
+j] = 1 −a2
+j
+j ∈{1, 2}.
+
+Then couple these variables to (y, u∗) such that
+
+y1 = a1x + n1
+y2 = a2x + n2
+
+and x ↔y ↔u∗. It then follows that
+
+r∗
+j = 1
+
+2 log
+�
+1 + λ∗
+j(1 −a2
+j)
+�
+
+= I(yj; u∗
+j|x).
+
+Part II. Next we show that r∗
+1 and r∗
+2 solve the optimization problem (79).
+Since the optimization problem is convex, it suffices to show that r∗
+1 and r∗
+2
+satisfy the Karush-Kuhn-Tucker (KKT) conditions [23, Section 5.5.3]. The La-
+grangian for this optimization problem is
+
+L(r1, r2, ν)
+
+= 1
+
+2 log
+�
+1
+d∗+ γ
+
+�
++ r1 + r2 −ν
+
+
+
+1 +
+
+2
+�
+
+j=1
+SNRj(1 −2−2rj) −
+1
+d∗+ γ
+
+
+
+.
+(83)
+
+28
+
+
+Thus it suffices to show that
+
+22r∗
+j = ν∗SNRj
+∀j ∈{1, 2}
+(84)
+
+1 +
+
+2
+�
+
+j=1
+SNRj(1 −2−2r∗
+j ) =
+1
+d∗+ γ
+(85)
+
+for some ν∗≥0. To show (84), note that (80) implies that
+
+D∗= (1 −ρ2)
+�1 + (1 −ρ2)λ∗
+1
+−ρ
+−ρ
+1 + (1 −ρ2)λ∗
+2
+
+�−1
+.
+(86)
+
+Then define
+s∗
+j = 1 + (1 −ρ2)λ∗
+j
+j ∈{1, 2}.
+(87)
+
+Since, by definition,
+
+D∗=
+�
+d1
+θ∗√d1d2
+θ∗√d1d2
+d2
+
+�
+,
+
+it follows from (86) that
+d1
+d2
+= s∗
+2
+s∗
+1
+.
+
+Referring to the definition of SNR1 and SNR2, this implies
+
+SNR1 =
+ρ
+1 −ρ2
+
+��
+
+s∗
+1
+s∗
+2
++ ρ
+
+�
+
+(88)
+
+SNR2 =
+ρ
+1 −ρ2
+
+��
+
+s∗
+2
+s∗
+1
++ ρ
+
+�
+
+.
+(89)
+
+Combining (81) and (87), we have
+
+s∗
+j = (1 −ρ2)(1 + SNRj)(22r∗
+j −1) + 1.
+
+Thus (84) is equivalent to
+
+s∗
+j −1
+(1 −ρ2)(1 + SNRj) + 1 = ν∗SNRj
+∀j ∈{1, 2}
+(90)
+
+But by using (88) and (89), one can verify that this pair of conditions holds if
+
+ν∗= 1 −ρ2
+
+ρ
+s∗
+1s∗
+2 + ρ
+�
+
+s∗
+1s∗
+2
+ρ(s∗
+1 + s∗
+2) +
+�
+
+s∗
+1s∗
+2(1 + ρ2).
+(91)
+
+29
+
+
+This establishes (90) and hence (84). Now as in the previous appendix we have
+
+E[(x −E[x|u∗])2] =
+
+
+
+1 +
+
+2
+�
+
+j=1
+SNRj(1 −2−2r∗
+j )
+
+
+
+
+
+−1
+
+= γ + E[(µ∗T y −E[µ∗T y|u∗])2]
+
+= γ + µ∗T D∗µ∗
+
+= γ + d∗.
+(92)
+
+This establishes (85) and the optimality of r∗
+1 and r∗
+2.
+Part III. It only remains to show that
+
+1
+2 log
+�
+1
+d∗+ γ
+
+�
++ r∗
+1 + r∗
+2 = 1
+
+2 log |Ky|
+
+|D∗| .
+(93)
+
+Observe that the left-hand side equals
+
+I(x; u∗) +
+
+2
+�
+
+j=1
+I(yj; u∗
+j|x).
+
+Repeating the argument in (77), we have
+
+I(x; u∗) +
+
+2
+�
+
+j=1
+I(yj; u∗
+j|x) = I(y; u∗) = 1
+
+2 log |Ky|
+
+|D∗| .
+
+E
+Achievability for M-sums
+
+Before proving Lemma 7, we examine some of the properties of the constituent
+regions R⋆
+j(dj). Without loss of generality, we focus on R⋆
+1(d1).
+Let h1(·) denote the function whose epigraph is R⋆
+1(d1)
+
+R⋆
+1(d1) = {(R1, R2) : R2 ≥h1(R1)},
+(94)
+
+which may equal infinity for some R1. Note that h1(·) is nonincreasing. Since
+R⋆
+1(d1) is closed and convex, h1(·) must be continuous on its effective domain
+[24, Theorems 7.1 and 10.1]. Thus h1(·) is closed and proper [24].
+For R1 in the effective domain of R1, let ∂h1(R1) denote the subdifferential
+of h1(·) at R1
+
+∂h1(R1) = {s : h1(R) ≥h1(R1) + s(R −R1) ∀R}.
+(95)
+
+Note that ∂h1(R1) can be interpreted geometrically as the set of slopes of all
+supporting lines at R1. From standard results in convex analysis [24, Section 24],
+∂h1(R1) is the interval between the left and right derivatives of h1(·) at R1. The
+graph of ∂h1(·),
+{(R, s) : s ∈∂h1(R)}
+
+30
+
+
+resembles the graph of a nondecreasing function, except that any jump disconti-
+nuities have been “filled in” with vertical segments. As such, ∂h1(·) is monotonic
+in the sense that if R1 ≤˜R1 then s ≤˜s for any s in ∂h1(R1) and ˜s in ∂h1( ˜R1).
+We now partition the effective domain of h1(·) into three parts. Let
+
+W = {R1 : max(∂h1(R1)) < −1}
+X = {R1 : min(∂h1(R1)) ≤−1 ≤max(∂h1(R1))}
+
+Y = {R1 : −1 < min(∂h1(R1)) < 0}
+Z = {R1 : ∂h1(R1) = {0}}.
+(96)
+
+These intervals are depicted in Fig. 7. We call W the steep part of R⋆
+1(d1) and
+Y and Z the shallow part. Some of these intervals might be empty in some
+cases. Note that the sum rate decreases as one moves left-to-right in W and
+increases as one moves left-to-right in Y and Z.
+Next we associate each point R1 in the effective domain of h1(·) with a test
+channel that meets the µ1 distortion constraint with equality. Since (R1, h1(R1))
+is on the boundary of R⋆
+1(d1), it must be on the boundary of the contrapoly-
+matroid of some test channel D satisfying µT
+1 Dµ1 = d1. Suppose first that R1
+is in W. Then R⋆
+1(d1) has a supporting line with slope s < −1 at (R1, h1(R1)).
+Since the contrapolymatroid associated with D is contained in R⋆
+1(d1), this
+contrapolymatroid must also be supported by a line with slope s < −1 at
+(R1, h1(R1)). This implies that (R1, h1(R1)) is on the vertical portion of the
+boundary of this contrapolymatroid.
+In fact, by the definition of h1(·), (R1, h1(R1)) must be the left corner point
+of the contrapolymatroid of this test channel. We then associate R1 with the
+unique test channel whose left corner point is (R1, h1(R1)). Likewise, to ev-
+ery R1 in Y , we associate the unique test channel whose right corner point is
+(R1, h1(R1)).
+If Z is nonempty then X ∪Y is bounded. In this case, as R1 →sup X ∪Y ,
+the associated test channels will converge to a test channel D. We associate
+this test channel with all R1 in Z.
+If R1 is in X, then R⋆
+1(d1) is supported at (R1, h1(R1)) by a line with slope
+−1. This implies that (R1, h1(R1)) is sum-rate optimal. We then associate all
+R1 in X with the unique test channel that is sum-rate optimal (see Lemma 8).
+Note that the end-points of the interval X must correspond to the corner
+points of the sum-rate optimal contrapolymatroid. It follows that the associated
+test-channels vary continuously with R1 over the entire effective domain of h1(·).
+The test channels also vary monotonically in the sense that if R1 ≤˜R1 and Λ
+and ˜Λ are the associated test channels, then
+
+Λ = ˜Λ +
+�
+−λ1
+0
+0
+λ2
+
+�
+
+for some nonnegative numbers λ1 and λ2. Note that for each test channel that
+meets the distortion constraint with equality, at least one of its corner points
+must be on the boundary of R⋆
+1(d1).
+
+31
+
+
+Now consider a second vector, µ2, and suppose that µ2 weights y2 more
+heavily than µ1 does
+µ22
+µ21
+> µ12
+
+µ11
+.
+(97)
+
+Next we show that as one moves left-to-right along the boundary of R⋆
+1(d1), the
+distortion that the associated test channels induce on µT
+2 y is nondecreasing.
+
+Lemma 9. Suppose R1 ≤˜R1, and let D and ˜D be the associated test channels.
+Then
+µT
+2 Dµ2 ≤µT
+2 ˜Dµ2.
+(98)
+
+Proof. Define Λ and ˜Λ by
+
+D−1 = K−1
+y
++ Λ
+(99)
+
+˜D
+−1 = K−1
+y
++ ˜Λ.
+(100)
+
+Since R1 ≤˜R1, we know that
+
+Λ = ˜Λ +
+�−λ1
+0
+0
+λ2
+
+�
+
+for some nonnegative numbers λ1 and λ2. Then it follows that
+
+D−1 = ˜D
+−1 +
+�
+−λ1
+0
+0
+λ2
+
+�
+.
+
+Furthermore, we know that
+
+µT
+1 Dµ1 = µT
+1 ˜Dµ1 = d1.
+
+To establish (98), we will show that
+
+0 ≤µT
+2 ˜Dµ2µT
+1 Dµ1 −µT
+1 ˜Dµ1µT
+2 Dµ2.
+(101)
+
+Now ˜D
+−1 can be written
+
+˜D
+−1 =
+�
+a
+−b
+−b
+c
+
+�
+,
+(102)
+
+where a, b, and c are nonnegative. In terms of these parameters, we have
+
+˜D =
+1
+ac −b2
+
+�
+c
+b
+b
+a
+
+�
+
+D =
+1
+(a −λ1)(c + λ2) −b2
+
+�c + λ2
+b
+b
+a −λ1
+
+�
+
+A tedious but straightforward calculation shows that the expression on the right-
+hand side of (101) equals
+
+(λ1c + aλ2)(µ2
+11µ2
+22 −µ2
+12µ2
+21) + 2b(λ1µ12µ22 + λ2µ11µ21)(µ11µ22 −µ12µ21)
+(ac −b2)((a −λ1)(c + λ2) −b2)
+
+32
+
+
+which is nonnegative because |D| > 0, | ˜D| > 0, and
+
+µ11µ22 −µ12µ21 > 0
+
+by (97).
+
+From the proof, we can see that if the inequality in (97) is reversed, then
+the inequality in (98) is also reversed.
+We now turn to the proof that
+
+R⋆
+sum(d1, . . . , dJ) ∩
+
+J�
+
+j=1
+R⋆
+j(dj)
+(103)
+
+is achievable. Recall that R⋆
+sum(d1, . . . dJ) is defined as
+
+R⋆
+sum(d1, . . . , dJ) = {(R1, R2) : R1 + R2 ≥R⋆
+sum(d1, . . . , dJ)}
+
+where
+
+R⋆
+sum(d1, . . . , dJ)
+
+= inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µT
+j Dµj ≤dj ∀j ∈{1, . . ., J}
+�
+.
+
+We begin by showing that this infimum is achieved.
+
+Lemma 10. There exists a D∗in DG such that
+
+µT
+j D∗µj ≤dj
+∀j ∈{1, . . . , J}
+
+and
+
+1
+2 log |Ky|
+
+|D∗| = inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µT
+j Dµj ≤dj ∀j ∈{1, . . ., J}
+�
+.
+
+Proof. Let ˜D by any matrix in DG that satisfies the distortion constraints. The
+infimum is then upper bounded by
+
+1
+2 log |Ky|
+
+| ˜D|
+.
+
+Now the set of D ∈DG such that
+
+µT
+j Dµj ≤dj
+∀j ∈{1, . . . , J}
+(104)
+
+1
+2 log |Ky|
+
+|D| ≤1
+
+2 log |Ky|
+
+| ˜D|
+,
+(105)
+
+is compact, and the objective is continuous, so the infimum is achieved.
+
+33
+
+
+Proof of Lemma 7. Recall we are assuming that the vectors µ1, . . . , µJ are dis-
+tinct and have norm one. We may also assume without loss of generality that
+they have been ordered so that their first coordinates are decreasing
+
+µ11 > µ21 > · · · > µJ1
+
+which implies that their second coordinates are increasing
+
+µ12 < µ22 < · · · < µJ2.
+
+Let
+hj(R1) = inf{(R2 : (R1, R2) ∈R⋆
+j(dj)}
+j ∈{1, . . ., J}
+(106)
+
+and
+hsum(R1) = inf{(R2 : (R1, R2) ∈R⋆
+sum(d1, d2, . . . , dJ)}
+(107)
+
+denote the functions whose epigraphs are the constituent regions. The corre-
+sponding function for the intersection is given by
+
+h(R1) = max(h1(R1), . . . , hJ(R1), hsum(R1)).
+
+To show that the intersection is achievable, is suffices to show that for each R1
+for which h(R1) < ∞, (R1, hj(R1)) is achievable for some j or (R1, hsum(R1))
+is achievable.
+By Lemma 10, there exists a D∗in DG that is sum-rate optimal within this
+class
+
+µT
+j D∗µj ≤dj ∀j ∈{1, . . ., J}
+(108)
+
+1
+2 log |Ky|
+
+|D∗| = inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µT
+j Dµj ≤dj ∀j ∈{1, . . ., J}
+�
+.
+
+(109)
+
+Let A denote the set of constraints that are active at D∗
+
+A = {j : µT
+j D∗µj = dj},
+
+which must be nonempty. Let i denote the largest element of A. Thus the µi
+sum is the one that weights y2 most heavily of all of the sums whose constraints
+are active at D∗.
+Consider the contrapolymatroid region associated with D∗. We shall show
+that the right corner point of this region is on the boundary of R⋆
+i (di). Since D∗
+
+achieves the µi constraint with equality, either the left corner point or the right
+corner point (or both) of its contrapolymatroid region must lie on the boundary
+of R⋆
+i (di). Suppose it is only the left corner point that lies on the boundary
+of R⋆
+i (di). This corner point would then have to lie on the steep part of the
+boundary (W) of R⋆
+i (di). Consider moving a small amount to the right along
+the boundary of R⋆
+i (di). Since the distortion for µj varies continuously as we
+move along the boundary of R⋆
+i (di) for each j, for a sufficiently small movement,
+
+34
+
+
+none of the distortion constraints in Ac will be violated. At the same time, by
+Lemma 9, none of the distortion constraints in A will be violated either.
+Thus we can strictly reduce the sum rate without violating any of the distor-
+tion constraints. This contradicts the assumption that D∗is sum-rate optimal
+within the class DG. Hence it must be the right corner point, (Rc
+1, Rc
+2), of the
+contrapolymatroid that is on the boundary of R⋆
+i (di), as shown in Fig. 8.
+Next consider starting at this corner point and moving to the right along
+the boundary of R⋆
+i (di). By Lemma 9, the µj constraint will remain satisfied
+for all j ≤i. If, as we move to the right, the µk constraint is never satisfied
+with equality for all k > i, then it follows that the shallow portion of R⋆
+i (di) to
+the right of (Rc
+1, Rc
+2) is achievable.
+If the µk distortion constraint becomes active for some k > i, then there ex-
+ists a point ( ˜R1, ˜R2) on the boundary of R⋆
+i (di) whose associated test channel ˜D
+meets both the µi and µk distortion constraints with equality
+
+µT
+i ˜Dµi = di
+(110)
+
+µT
+k ˜Dµk = dk.
+(111)
+
+Since ( ˜R1, ˜R2) is on the shallow portion of the boundary of R⋆
+i (di), ( ˜R1, ˜R2)
+must be the right corner point of the contrapolymatroid region associated with
+˜D. Now at least one of the corner points of ˜D must be on the boundary of
+R⋆
+k(dk). By Lemma 9, the boundary of R⋆
+k(dk) must be below that of R⋆
+i (di)
+to the left of ˜R1. It follows that it must be the right corner point of ˜D, i.e.,
+( ˜R1, ˜R2), that is on the boundary of R⋆
+k(dk). We then move to the right along the
+boundary of R⋆
+k(dk), repeating the above process as necessary as new constraints
+become active. This shows that for each R1 ≥Rc
+1, (R1, hj(R1)) is achievable
+for some j.
+An analogous procedure can be followed starting with the left corner point
+of the contrapolymatroid associated with D∗. Finally, between these two corner
+points, (R1, hsum(R1)) is achievable.
+
+F
+Converse for M-sums
+
+We show in this appendix that the rate region for the M-sums problem is
+contained in
+
+R⋆
+sum(d1, . . . , dJ) ∩
+
+J�
+
+j=1
+R⋆
+j(dj).
+
+Since the rate region is clearly contained in ∩J
+j=1R⋆
+j(dj), we only need to show
+that it is contained in R⋆
+sum(d1, . . . , dJ). That is, we must show that the sum
+rate is lower bounded by
+
+R⋆
+sum(d1, . . . , dJ)
+
+= inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µT
+j Dµj ≤dj ∀j ∈{1, . . ., J}
+�
+.
+(112)
+
+35
+
+
+By Lemma 10, this infimum is achieved by some D∗in DG. If D∗= Ky, then
+R⋆
+sum(d1, . . . , dJ) = 0 and our task is trivial. Suppose therefore that D∗̸= Ky.
+Then D∗must meet at least one of the distortion constraints with equality.
+If D∗meets exactly one distortion constraint with equality, then the converse
+is relatively simple, because in this case R⋆
+sum(d1, . . . , dJ) contains R⋆
+j(dj) for
+some j.
+
+Lemma 11. Suppose there exists D∗in DG that is sum-rate optimal within
+this class and meets exactly one of the distortion constraints with equality, i.e.,
+µT
+i D∗µi = di and µT
+j D∗µj < dj for all j ̸= i. Then the sum rate for the
+M-sums problem is
+
+1
+2 log |Ky|
+
+|D∗| = R⋆
+sum(d1, . . . , dJ).
+
+Proof. It suffices to show that D∗is sum-rate optimal for the µi-sum problem
+with distortion di. Recall that one of the corner points of D∗lies on the bound-
+ary of the µi-sum rate region. If this point is not sum-rate optimal, then it is
+possible to move a small distance along the boundary of R⋆
+i (di) and strictly de-
+crease the sum rate. Since the distortion associated with µj varies continuously
+as we move along this boundary for each j, it follows that a sufficiently small
+movement will not violate any of the distortion constraints. This contradicts the
+assumption that D∗is sum-rate optimal for the M-sums problem within the
+class DG. It follows that D∗is sum-rate optimal for the µi-sum problem.
+
+It also happens that R⋆
+sum(d1, . . . , dJ) contains R⋆
+j(dj) for some j when there
+is an optimizing D∗on the “boundary” of DG. Let D◦
+G denote the set of D in
+DG such that
+D−1 = K−1
+y
++ Λ
+
+for some diagonal and positive definite Λ. Let ∂D = DG −D◦
+G, which is the set
+of those D ∈DG such that D−1 −K−1
+y
+is singular.
+
+Lemma 12. Suppose there exists a D∗̸= Ky in ∂DG that is sum-rate optimal
+within the class DG. Then the sum rate for the M-sums problem is given by
+
+1
+2 log |Ky|
+
+|D∗| = R⋆
+sum(d1, . . . , dJ).
+
+Proof. As in the previous proof, it suffices to show that for some i, D∗is sum-
+rate optimal for the µi-sum problem with distortion di. Now D∗can be written
+
+D∗= (K−1
+y
++ Λ)−1,
+(113)
+
+where Λ is diagonal, positive semidefinite, singular, and nonzero. Without loss
+of generality, we may assume that Λ is of the form
+
+Λ =
+�λ1
+0
+0
+0
+
+�
+
+36
+
+
+for some λ1 > 0. Let A denote the set of constraints that are active at D∗
+
+A = {j : µT
+j D∗µj = dj}.
+(114)
+
+Let i denote the constraint in A that weights y1 most heavily
+
+i = arg max
+j∈A
+µj1
+µj2
+.
+
+We will show that D∗is sum-rate optimal for the µi-sum problem with dis-
+tortion di. Now D∗is associated with a point (R1, 0) on the boundary of the
+µi-sum rate region. If this point is not sum-rate optimal for this problem, then
+it is possible to move a small distance to the left along the boundary of R⋆
+i (di)
+and strictly decrease the sum rate.
+Since the distortion associated with µj
+varies continuously as one moves along this boundary, for a sufficiently small
+movement, none of the constraints in Ac will be violated. On the other hand, by
+Lemma 9, none of the constraints in A will be violated either. This contradicts
+the assumption that D∗is sum-rate optimal for the M-sums problem within the
+class DG. It follows that D∗is sum-rate optimal for the µi-sum problem.
+
+The previous two lemmas allow us to focus on the case in which there exists
+an optimizing D∗in D◦
+G that meets at least two of the distortion constraints with
+equality. Our proof in this case parallels the proof of Theorem 1. In particular,
+we introduce a nonnegative vector µ∗such that D∗is sum-rate optimal for the
+µ∗-sum problem.
+
+Lemma 13. Suppose D∗∈D◦
+G is sum-rate optimal within the class DG
+
+µT
+j D∗µj ≤dj
+∀j ∈{1, . . . , J}
+
+1
+2 log |Ky|
+
+|D∗| = inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µT
+j Dµj ≤dj ∀j ∈{1, . . ., J}
+�
+.
+
+(115)
+
+Let A denote the set of constraints that are active at D∗
+
+A = {j : µT
+j D∗µj = dj}.
+
+If |A| ≥2, then there exists i, j in A, i ̸= j, and a nonnegative vector µ∗such
+that
+
+1. D∗is sum-rate optimal for the µ∗-sum problem,
+
+1
+2 log |Ky|
+
+|D∗| = inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µ∗T Dµ∗≤µ∗T D∗µ∗
+�
+
+(116)
+
+2. M −1
+2 µ∗is nonnegative, where
+
+M 2 =
+�
+µi µj
+�
+.
+(117)
+
+37
+
+
+Proof. Any D ∈DG can be written
+
+D−1 = K−1
+y
++ Λ
+
+for some diagonal and positive semidefinite matrix Λ. Thus the optimization
+problem in (115) can be written
+
+min
+1
+2 log |K−1
+y
++ Λ|
+
+|K−1
+y |
+(118)
+
+subject to
+µT
+j (K−1
+y
++ Λ)−1µj ≤dj
+j ∈{1, . . . , J},
+(119)
+
+where Λ ranges over all diagonal and positive semidefinite matrices. By hy-
+pothesis, this optimization problem is solved by
+
+Λ∗= D∗−1 −K−1
+y .
+
+Unfortunately, Λ∗may not be regular [25, p. 309] for this optimization problem.
+This is an issue because the KKT conditions may not hold at a local minimum
+that is not regular [25, Example 3.1.1]. We proceed by using a generalization
+of the KKT conditions called the Fritz John conditions [25, Sec. 3.3.5]. The
+difference between the Fritz John conditions and the KKT conditions is that
+the Fritz John conditions include a scalar for the objective in addition to the
+multipliers for the constraints. The Lagrangian for this optimization problem is
+
+1
+2 log |K−1
+y
++ Λ|
+
+|K−1
+y |
+−
+
+J
+�
+
+j=1
+νj(dj −µT
+j (K−1
+y
++ Λ)−1µj) −
+
+2
+�
+
+j=1
+νJ+jeT
+j Λej,
+(120)
+
+where the second summation handles the constraint that Λ must be positive
+semidefinite. Denote the coordinates of D∗by
+
+D∗=
+�
+d∗
+1
+θ∗�
+
+d∗
+1d∗
+2
+θ∗�
+
+d∗
+1d∗
+2
+d∗
+2
+
+�
+.
+(121)
+
+By differentiating the Lagrangian with respect to the two diagonal entries of
+Λ and using the calculations in Appendix H, we can express the Fritz John
+conditions [25, Prop. 3.3.5] as
+
+ν∗
+0d∗
+1 =
+
+J
+�
+
+j=1
+ν∗
+j (µT
+j D∗e1)2 + ν∗
+J+1
+(122)
+
+ν∗
+0d∗
+2 =
+
+J
+�
+
+j=1
+ν∗
+j (µT
+j D∗e2)2 + ν∗
+J+2
+(123)
+
+for some ν∗
+0, . . . , ν∗
+J+2 that are nonnegative but not all zero. Now since D∗∈D◦
+G
+by hypothesis, the constraint that Λ be positive semidefinite is not active at
+
+38
+
+
+Λ∗. By complimentary slackness, this implies that ν∗
+J+1 = ν∗
+J+2 = 0. Also by
+complimentary slackness, ν∗
+j = 0 if j /∈A, so it follows that
+
+ν∗
+0d∗
+1 =
+�
+
+j∈A
+ν∗
+j (µT
+j D∗e1)2
+(124)
+
+ν∗
+0d∗
+2 =
+�
+
+j∈A
+ν∗
+j (µT
+j D∗e2)2.
+(125)
+
+Now if ν∗
+0 were equal to zero, then we would have
+�
+
+j∈A
+ν∗
+j
+�
+(µT
+j D∗e1)2 + (µT
+j D∗e2)2�
+= 0.
+(126)
+
+Since µj is unit-norm for all j by assumption, (µT
+j D∗e1)2 + (µT
+j D∗e2)2 must
+be positive for all j.
+Thus (126) would imply that ν∗
+j = 0 for all j in A.
+But this would contradict the condition that at least one of the dual variables
+ν∗
+0, . . . , ν∗
+J+2 is nonzero. It follows that ν∗
+0 is positive, so we can divide through
+by ν∗
+0 in (124) and (125) to obtain
+
+d∗
+1 =
+�
+
+j∈A
+
+ν∗
+j
+ν∗
+0
+(µT
+j D∗e1)2
+(127)
+
+d∗
+2 =
+�
+
+j∈A
+
+ν∗
+j
+ν∗
+0
+(µT
+j D∗e2)2.
+(128)
+
+Thus (d∗
+1, d∗
+2) lies in the convex cone formed by the points
+
+((µT
+j D∗e1)2, (µT
+j D∗e2)2)
+j ∈A.
+
+By Carath´eodory’s theorem for convex cones [24, Corollary 17.1.2], there exists
+i, j in A, i ̸= j, such that (d∗
+1, d∗
+2) lies in the convex cone of those two points
+alone
+
+d∗
+1 = ˜νi(µT
+i D∗e1)2 + ˜νj(µT
+j D∗e1)2
+
+d∗
+2 = ˜νi(µT
+i D∗e2)2 + ˜νj(µT
+j D∗e2)2.
+(129)
+
+Let M 2 denote the 2 x 2 matrix
+
+M 2 =
+�
+µi µj
+�
+.
+
+By swapping the roles of µi and µj if necessary, we may assume that |M 2| > 0.
+Let
+
+µ∗=
+��
+
+d∗
+2
+�
+
+d∗
+1
+
+�
+.
+(130)
+
+By Lemma 4, D∗is sum-rate optimal for the µ∗-sum problem, so it only remains
+to show that M −1
+2 µ∗is nonnegative.
+
+39
+
+
+Consider the matrix
+
+˜D =
+�(µT
+i D∗e1)2
+(µT
+j D∗e1)2
+
+(µT
+i D∗e2)2
+(µT
+j D∗e2)2
+
+�
+.
+(131)
+
+In terms of the components of D∗and M 2, the determinant of ˜D is
+
+| ˜D| = (µi1d∗
+1 + µi2θ∗�
+
+d∗
+1d∗
+2)2(µj1θ∗�
+
+d∗
+1d∗
+2 + µj2d∗
+2)2
+
+−(µj1d∗
+1 + µj2θ∗�
+
+d∗
+1d∗
+2)2(µi1θ∗�
+
+d∗
+1d∗
+2 + µi2d∗
+2)2.
+(132)
+
+By expanding the products and using the fact that |M 2| > 0, one can show
+that | ˜D| > 0. In particular, the conditions in (129) can be written as
+�˜νi
+˜νj
+
+�
+= ˜D
+−1 �d∗
+1
+d∗
+2
+
+�
+(133)
+
+=
+1
+| ˜D|
+
+�
+(µT
+j D∗e2)2
+−(µT
+j D∗e1)2
+
+−(µT
+i D∗e2)2
+(µT
+i D∗e1)2
+
+��
+d∗
+1
+d∗
+2
+
+�
+.
+(134)
+
+Since ˜νi and ˜νj are nonnegative, this implies that
+
+d∗
+1(µT
+j D∗e2)2 ≥d∗
+2(µT
+j D∗e1)2
+(135)
+
+d∗
+2(µT
+i D∗e1)2 ≥d∗
+1(µT
+i D∗e2)2.
+(136)
+
+Now (135) can be written
+�
+
+d∗
+1(µj1θ∗�
+
+d∗
+1d∗
+2 + µj2d∗
+2) ≥
+�
+
+d∗
+2(µj1d∗
+1 + µj2θ∗�
+
+d∗
+1d∗
+2).
+
+This can be rearranged to show that
+
+µj2
+�
+
+d∗
+2 ≥µj1
+�
+
+d∗
+1.
+(137)
+
+Likewise, (136) implies
+µi1
+�
+
+d∗
+1 ≥µi2
+�
+
+d∗
+2.
+(138)
+
+Now M −1
+2 µ∗can be written
+
+M −1
+2 µ∗=
+1
+µi1µj2 −µi2µj1
+
+�
+µj2
+−µj1
+−µi2
+µi1
+
+���
+
+d∗
+2
+�
+
+d∗
+1
+
+�
+(139)
+
+=
+1
+µi1µj2 −µi2µj1
+
+�
+µj2
+�
+
+d∗
+2 −µj1
+�
+
+d∗
+1
+µi1
+�
+
+d∗
+1 −µi2
+�
+
+d∗
+2
+
+�
+(140)
+
+which is component-wise nonnegative due to (137), (138), and the nonnegativity
+of det(M 2).
+
+Lemma 14. Suppose (R1, R2, d1, . . . , dJ) is strict-sense achievable and there
+exists a D∗in D◦
+G that is sum-rate optimal within the class DG and meets at
+least two of the distortion constraints with equality. Then
+
+R1 + R2 ≥1
+
+2 log |Ky|
+
+|D∗| = R⋆
+sum(d1, . . . , dJ).
+
+40
+
+
+Proof. We give an abbreviated proof due to the similarity to the proofs of Lem-
+mas 5 and 6. From Lemma 13, there exists two constraint vectors µi and µj,
+i ̸= j, and a nonnegative vector µ∗such that
+
+(i) µT
+i D∗µi = di
+
+(ii) µT
+j D∗µj = dj
+
+(iii) D∗is sum-rate optimal for the µ∗-sum problem, and
+
+(iv) M −1
+2 µ∗is nonnegative, where
+
+M 2 = [µi µj].
+
+For θ in (−1, 1), let
+
+˜Dθ =
+�
+di
+θ
+�
+
+didj
+θ
+�
+
+didj
+dj
+
+�
+.
+(141)
+
+Also define
+˜Rcoop(θ) = 1
+
+2 log+ |Ky||M 2|2
+
+| ˜Dθ|
+(142)
+
+and
+
+˜Rsum(θ)
+
+= inf
+
+�
+1
+2 log |Ky|
+
+|D| : D ∈DG and µ∗T Dµ∗≤µ∗T M −T
+2
+˜DθM −1
+2 µ∗
+�
+
+.
+(143)
+
+Now fix some code that achieves (R1, R2, d1, . . . , dJ). Let zn(i) denote the
+decoder’s estimate of M T
+2 yn(i), which we may assume is the conditional expec-
+tation of M T
+2 yn(i) given the received messages. Let
+
+˜D = 1
+
+n
+
+n
+�
+
+i=1
+E
+�
+(M T
+2 yn(i) −zn(i))(M T
+2 yn(i) −zn(i))T �
+(144)
+
+denote the average covariance matrix of M T
+2 yn −zn. Then
+
+ˆD = M −T
+2
+˜DM −1
+2
+
+is the error covariance matrix for the estimate of the source, yn. As in the proof
+of Lemma 5, ˆD must be positive definite, and the sum rate of the code must
+satisfy (c.f. (33))
+
+R1 + R2 ≥1
+
+2 log+ |Ky|
+
+| ˆD|
+(145)
+
+= 1
+
+2 log+ |Ky||M 2|2
+
+|M T
+2 ˆDM 2|
+(146)
+
+= 1
+
+2 log+ |Ky||M 2|2
+
+| ˜D|
+.
+(147)
+
+41
+
+
+In particular, ˜D must also be positive definite. Let us write it as
+
+˜D =
+
+
+
+
+˜di
+˜θ
+�
+
+˜di ˜dj
+˜θ
+�
+
+˜di ˜dj
+˜dj
+
+
+
+
+
+where ˜di ≤di, ˜dj ≤dj, and ˜θ ∈(−1, 1). Now define
+
+φ =
+˜θ
+�
+
+˜di ˜dj
+�
+
+didj
+,
+
+and note that φ is in (−1, 1). Then ˜D ⪯˜Dφ, so it follows that
+
+R1 + R2 ≥1
+
+2 log+ |Ky||M 2|2
+
+| ˜Dφ|
+= ˜Rcoop(φ).
+
+On the other hand,
+
+1
+n
+
+n
+�
+
+i=1
+E[(µ∗T yn(i) −µ∗T M −T
+2
+zn(i))2] = µ∗T M −T
+2
+˜DM −1
+2 µ∗
+(148)
+
+≤µ∗T M −T
+2
+˜DφM −1
+2 µ∗,
+(149)
+
+i.e., this code achieves distortion µ∗T M −T
+2
+˜DφM −1
+2 µ∗for the µ∗-sum problem.
+Lemma 3 then implies that
+
+R1 + R2 ≥˜Rsum(φ).
+
+It follows that
+
+R1 + R2 ≥
+inf
+θ∈(−1,1) max( ˜Rcoop(θ), ˜Rsum(θ)).
+(150)
+
+Now let
+˜D
+∗= M T
+2 D∗M 2,
+(151)
+
+which must have diagonal entries di and dj, respectively. Let us write ˜D
+∗as
+
+˜D
+∗=
+�
+di
+˜θ∗�
+
+didj
+˜θ∗�
+
+didj
+dj
+
+�
+.
+
+Note that we must have ˜θ∗∈(0, 1) since ˜D
+∗is positive definite and both M 2
+and D∗have positive entries. For θ ≥˜θ∗, we have
+
+max( ˜Rcoop(θ), ˜Rsum(θ)) ≥˜Rcoop(θ) ≥˜Rcoop(˜θ∗) = 1
+
+2 log+ |Ky||M 2|2
+
+���˜D
+∗���
+(152)
+
+= 1
+
+2 log+ |Ky|
+
+|D∗| .
+(153)
+
+42
+
+
+Since both components of M −1
+2 µ∗are nonnegative, it follows that
+
+µ∗T M −T
+2
+˜DθM −1
+2 µ∗
+
+is nondecreasing in θ, which implies that ˜Rsum(·) is nonincreasing.
+Thus if
+θ ≤˜θ∗,
+max( ˜Rcoop(θ), ˜Rsum(θ)) ≥˜Rsum(θ) ≥˜Rsum(˜θ∗).
+
+But observe that at ˜θ∗, ˜Rsum(·) satisfies
+
+˜Rsum(˜θ∗) = inf
+
+�
+1
+2 log |Ky|
+
+|D| : D ∈DG and µ∗T Dµ∗≤µ∗T M −1
+2
+˜D
+∗M −1
+2 µ∗
+�
+
+(154)
+and (151) implies that
+M −T
+2
+˜D
+∗M −1
+2
+= D∗.
+
+Since D∗solves the µ∗-sum problem, this implies
+
+˜Rsum(˜θ∗) = 1
+
+2 log |Ky|
+
+|D∗| .
+
+It follows that
+
+inf
+θ∈(−1,1) max( ˜Rcoop(θ), ˜Rsum(θ)) = 1
+
+2 log |Ky|
+
+|D∗| .
+(155)
+
+Combining this with (150) yields the desired conclusion.
+
+We are now in a position to complete the proof of Theorem 2.
+
+Proof of Theorem 2. We only need to show that the rate region is contained in
+R⋆
+sum(d1, . . . , dJ). Lemmas 11, 12, and 14 together imply that if
+
+(R1, R2, d1, . . . , dJ)
+
+is strict-sense achievable, then
+
+R1 + R2 ≥inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and µT
+i Dµi ≤dj ∀j ∈{1, . . ., J}
+�
+.
+
+(156)
+It is readily verified that the right-hand side is lower-semicontinuous in d1, . . . , dJ.
+It follows that (156) also holds if (R1, R2, d1, . . . , dJ) are achievable. This implies
+the desired conclusion.
+
+43
+
+
+G
+Converse for Many Sources
+
+In this appendix we prove Theorem 3. Recall we are assuming that the covari-
+ance matrix Ky has the form
+
+Ky =
+
+
+
+
+
+1
+ρ
+· · ·
+ρ
+ρ
+1
+. . .
+ρ
+...
+...
+...
+...
+ρ
+ρ
+· · ·
+1
+
+
+
+.
+
+for some 0 < ρ < 1 and all of the distortion constraints are equal to d. Our goal
+is to show that the minimum sum rate, R⋆
+sum(d), equals
+
+inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and eT
+ℓDeℓ≤d ∀ℓ∈{1, . . ., L}
+�
+,
+(157)
+
+and that this infimum is achieved by a D ∈DG of the form
+
+D−1 = K−1
+y
++ λI
+(158)
+
+for some λ ≥0. The conclusion is obvious if d ≥1, so we will assume that
+0 < d < 1. Using the matrix inversion lemma [26, p. 50], the matrix inversions
+in (158) can be computed explicitly
+
+D =
+1 −ρ
+1 + λ(1 −ρ)
+
+�
+I +
+ρ11T
+
+1 −ρ + λ(1 −ρ)(1 −ρ + ρL)
+
+�
+.
+(159)
+
+It follows that there is a unique D ∈DG of the form in (158) with all of the
+diagonal entries equal to d. Let us call this matrix D∗. Note that D∗must be
+of the form
+
+D∗= d
+
+
+
+
+
+1
+θ∗
+· · ·
+θ∗
+
+θ∗
+1
+. . .
+θ∗
+...
+...
+...
+...
+θ∗
+θ∗
+· · ·
+1
+
+
+
+
+(160)
+
+for some θ∗> 0. Since D∗must be positive definite, it follows that θ∗< 1.
+Now the inequalities
+
+R⋆
+sum(d) ≤inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and eT
+ℓDeℓ≤d ∀ℓ∈{1, . . . , L}
+�
+(161)
+
+≤1
+
+2 log |Ky|
+
+|D∗|
+(162)
+
+are clear, so it suffices to show that
+
+1
+2 log |Ky|
+
+|D∗| ≤R⋆
+sum(d).
+
+44
+
+
+For θ in (−1/(L −1), 1) let
+
+Dθ = d
+
+
+
+
+
+1
+θ
+· · ·
+θ
+θ
+1
+. . .
+θ
+...
+...
+...
+...
+θ
+θ
+· · ·
+1
+
+
+
+
+
+and note that Dθ is positive definite for each θ. Then define
+
+Rcoop(θ) = 1
+
+2 log+ |Ky|
+
+|Dθ| = 1
+
+2 log+
+|Ky|
+dL(1 −θ)L−1(1 −θ + Lθ).
+(163)
+
+Next consider the problem of reproducing the sum of the sources, 1T y, at
+the decoder. By following the proof of Lemma 8, one can show that this problem
+is equivalent to the CEO problem
+
+yℓ= x + nℓ
+ℓ∈{1, . . ., L}
+
+where x, n1, . . . , nL are zero-mean, Gaussian, and independent, and x has vari-
+ance ρ. It follows from existing results that the separation-based scheme achieves
+the entire rate region, and in particular it is sum-rate optimal [8, 10]. Thus the
+sum rate for the 1-sum problem with distortion constraint 1T Dθ1 is given by
+
+Rsum(θ) := inf
+�1
+
+2 log |Ky|
+
+|D| : D ∈DG and 1T D1 ≤1T Dθ1
+�
+.
+(164)
+
+In fact, the CEO results imply that the infimum in (164) will be achieved by a
+D ∈DG of the form in (158). In particular, we have
+
+Rsum(θ∗) = 1
+
+2 log |Ky|
+
+|D∗| .
+(165)
+
+Lemma 15. If (R1, . . . , RL, d, . . . , d) is strict-sense achievable, then
+
+L
+�
+
+ℓ=1
+Rℓ≥
+inf
+θ∈(−1/(L−1),1)max(Rcoop(θ), Rsum(θ)).
+(166)
+
+Proof. By hypothesis, there exists a code (f (n)
+1
+, . . . , f (n)
+L , ϕ(n)
+1 , . . . , ϕ(n)
+L ) such
+that
+
+Rℓ≥1
+
+n log M (n)
+ℓ
+for all ℓin {1, . . ., L}
+
+d ≥1
+
+n
+
+n
+�
+
+i=1
+E[(yn
+ℓ(i) −ˆyn
+ℓ(i))2]
+for all ℓin {1, . . . , L}.
+
+From this code, we construct a new code with block length N := L! · n by time-
+sharing among all L! permutations of the sources. For this new code, the rates
+are symmetric
+
+1
+L
+
+L
+�
+
+i=1
+Ri ≥1
+
+N log M (N)
+ℓ
+for all ℓin {1, . . . , L}
+
+45
+
+
+and the distortion still satisfies
+
+d ≥1
+
+N
+
+N
+�
+
+i=1
+E[(yN
+ℓ(i) −ˆyN
+ℓ(i))2]
+for all ℓin {1, . . ., L}.
+
+Let
+
+ˆD = 1
+
+N
+
+N
+�
+
+i=1
+E[(yN(i) −ˆyN(i))(yN(i) −ˆyN(i))T ]
+
+denote the error covariance matrix of the code. By the symmetry of the time
+sharing, ˆD must have the form
+
+ˆD = ˆd
+
+
+
+
+
+1
+φ
+· · ·
+φ
+φ
+1
+. . .
+φ
+...
+...
+...
+...
+φ
+φ
+· · ·
+1
+
+
+
+
+
+for some ˆd ≤d.
+Following the calculation at the beginning of the proof of
+Lemma 5, one can show that ˆD is positive definite, which implies that −1/(L −
+1) < φ < 1, and
+L
+�
+
+ℓ=1
+Rℓ≥1
+
+2 log+ |Ky|
+
+| ˆD|
+.
+
+But ˆD ⪯Dφ, so this implies
+
+L
+�
+
+ℓ=1
+Rℓ≥1
+
+2 log |Ky|
+
+|Dφ| = Rcoop(φ).
+(167)
+
+Since the code has error covariance matrix ˆD, the distortion it achieves for the
+1-sum problem is at most 1T ˆD1 ≤1T Dφ1. It follows that
+
+L
+�
+
+ℓ=1
+Rℓ≥Rsum(φ).
+
+Combining this with (167) gives
+
+L
+�
+
+ℓ=1
+Rℓ≥max(Rsum(φ), Rcoop(φ)).
+
+The conclusion follows by taking the infimum over φ in (−1/(L −1), 1)
+
+Next we evaluate the infimum in (166). Recall that θ∗is defined by (160).
+
+Lemma 16.
+
+inf
+θ∈(−1/(L−1),1)max(Rcoop(θ), Rsum(θ)) = 1
+
+2 log |Ky|
+
+|D∗| .
+
+46
+
+
+Proof. By differentiating, one can verify that Rcoop(·) is nondecreasing on (0, 1).
+Then if θ ≥θ∗, we have
+
+max(Rcoop(θ), Rsum(θ)) ≥Rcoop(θ) ≥Rcoop(θ∗) = 1
+
+2 log |Ky|
+
+|D∗| .
+(168)
+
+On the other hand, if θ ≤θ∗, then since Rsum(·) is nonincreasing
+
+max(Rcoop(θ), Rsum(θ)) ≥Rsum(θ) ≥Rsum(θ∗) = 1
+
+2 log |Ky|
+
+|D∗| ,
+(169)
+
+where we have used (165).
+
+Theorem 3 now follows from a continuity argument similar to the one used
+in the proof of Theorem 1.
+
+H
+Derivatives
+
+Let D(λ1, λ2) denote the matrix in DG defined by
+
+D(λ1, λ2) =
+�
+K−1
+y
++
+�λ1
+0
+0
+λ2
+
+��−1
+.
+(170)
+
+In this appendix we compute the derivatives of
+
+log |D(λ1, λ2)|
+
+and
+µT D(λ1, λ2)µ
+
+with respect to λ1 and λ2. Write
+
+Λ =
+�
+λ1
+0
+0
+λ2
+
+�
+.
+
+Then we have
+
+∂log |D(λ1, λ2)|
+
+∂λ1
+= −lim
+δ→0
+log |K−1
+y
++ Λ + δe1eT
+1 | −log |K−1
+y
++ Λ|
+δ
+(171)
+
+= −lim
+δ→0
+log |I + δe1eT
+1 D(λ1, λ2)|
+δ
+(172)
+
+= −lim
+δ→0
+log(1 + δeT
+1 D(λ1, λ2)e1)
+
+δ
+(173)
+
+= −log(e)eT
+1 D(λ1, λ2)e1.
+(174)
+
+Similarly,
+∂log |D(λ1, λ2)|
+
+∂λ2
+= −log(e)eT
+2 D(λ1, λ2)e2.
+(175)
+
+47
+
+
+Likewise, we have
+
+∂µT D(λ1, λ2)µ
+
+∂λ1
+(176)
+
+= lim
+δ→0
+
+µT ��
+K−1
+y
++ Λ + δe1eT
+1
+�−1 −(K−1
+y
++ Λ)−1�
+µ
+
+δ
+(177)
+
+= −lim
+δ→0 µT �
+D(λ1, λ2)e1(1 + δeT
+1 D(λ1, λ2)e1)−1eT
+1 D(λ1, λ2)
+�
+µ
+(178)
+
+= −(µT D(λ1, λ2)e1)2
+(179)
+
+where to obtain the second equation we have used the matrix inversion lemma.
+Similarly,
+∂µT D(λ1, λ2)µ
+
+∂λ2
+= −(µT D(λ1, λ2)e2)2.
+(180)
+
+References
+
+[1] D. Slepian and J. K. Wolf, “Noiseless coding of correlated information
+sources,” IEEE Trans. Inf. Theory, vol. 19, no. 4, pp. 471–480, July 1973.
+
+[2] T. Berger, “Multiterminal source coding,” in The Information Theory Ap-
+proach to Communications, ser. CISM Courses and Lectures, G. Longo,
+Ed.
+Springer-Verlag, 1978, vol. 229, pp. 171–231.
+
+[3] S.-Y. Tung, “Multiterminal source coding,” Ph.D. dissertation, School of
+Electrical Engineering, Cornell University, Ithaca, NY, May 1978.
+
+[4] R. Zamir and T. Berger, “Multiterminal source coding with high resolu-
+tion,” IEEE Trans. Inf. Theory, vol. 45, no. 1, pp. 106–117, Jan. 1999.
+
+[5] Y. Oohama, “Gaussian multiterminal source coding,” IEEE Trans. Inf.
+Theory, vol. 43, no. 6, pp. 1912–1923, Nov. 1997.
+
+[6] T. Berger, Z. Zhang, and H. Viswanathan, “The CEO problem,” IEEE
+Trans. Inf. Theory, vol. 42, no. 3, pp. 887–902, May 1996.
+
+[7] M. Gastpar, “The Wyner-Ziv problem with multiple sources,” IEEE Trans.
+Inf. Theory, vol. 50, no. 11, pp. 2762–2768, Nov. 2004.
+
+[8] Y. Oohama, “Rate-distortion theory for Gaussian multiterminal source cod-
+ing systems with several side informations at the decoder,” IEEE Trans.
+Inf. Theory, vol. 51, no. 7, pp. 2577–2593, July 2005.
+
+[9] H. Viswanathan and T. Berger, “The quadratic Gaussian CEO problem,”
+IEEE Trans. Inf. Theory, vol. 43, no. 5, pp. 1549–1559, Sept. 1997.
+
+[10] V. Prabhakaran, D. Tse, and K. Ramchandran, “Rate region of the
+quadratic Gaussian CEO problem,” in IEEE Int. Symp. Inf. Theor. Proc.,
+2004, p. 117.
+
+48
+
+
+[11] A. B. Wagner and V. Anantharam, “An improved outer bound for the mul-
+titerminal source-coding problem,” in IEEE Int. Symp. Inf. Theor. Proc.,
+2005, pp. 1406–1410.
+
+[12] ——, “An improved outer bound for multiterminal source coding,” IEEE
+Trans. Inf. Theory, to appear.
+
+[13] R. G. Gallager, Information Theory and Reliable Communication.
+New
+York: John Wiley & Sons, 1968.
+
+[14] A. Lapidoth, “On the role of mismatch in rate distortion theory,” IEEE
+Trans. Inf. Theory, vol. 43, no. 1, pp. 38–47, Jan. 1997.
+
+[15] T. M. Cover and J. A. Thomas, Elements of Information Theory.
+New
+York: John Wiley & Sons, 1991.
+
+[16] R. A. Horn and C. R. Johnson, Matrix Analysis.
+Cambridge University
+Press, 1985.
+
+[17] Y. Oohama, “Rate distortion region for separate coding of correlated Gaus-
+sian remote observations,” in Proc. 43rd Annual Allerton Conference, 2005,
+pp. 2237–2246.
+
+[18] L. Ozarow, “On a source-coding problem with two channels and three re-
+ceivers,” Bell Syst. Tech. J., vol. 59, no. 10, pp. 1909–1921, Dec. 1980.
+
+[19] H. Wang and P. Viswanath, “Vector Gaussian multiple description with
+individual and central receivers,” IEEE Trans. Inf. Theory, vol. 53, no. 6,
+pp. 2133–2153, June 2007.
+
+[20] S. Tavildar, P. Viswanath, and A. B. Wagner, “The Gaussian many-help-
+one distributed source coding problem,” in Proc. IEEE Inf. Theory Work-
+shop, 2006, pp. 596–600.
+
+[21] Y. Oohama, “Gaussian multiterminal source coding with several side infor-
+mations at the decoder,” in IEEE Int. Symp. Inf. Theor. Proc., 2006, pp.
+1409–1413.
+
+[22] H. Stark and J. W. Woods, Probability and Random Processes with Appli-
+cations to Signal Processing, 3rd ed.
+Upper Saddle River: Prentice Hall,
+2002.
+
+[23] S. Boyd and L. Vandenberghe, Convex Optimization.
+Cambridge Univer-
+sity Press, 2004.
+
+[24] R. T. Rockafellar, Convex Analysis.
+Princeton University Press, 1970.
+
+[25] D. P. Bertsekas, Nonlinear Programming, 2nd ed. Belmont, Mass.: Athena
+Scientific, 1999.
+
+[26] G. H. Golub and C. F. Van Loan, Matrix Computations, 3rd ed. Baltimore:
+The Johns Hopkins University Press, 1996.
+
+49
+
+
+Encoder 2
+
+Encoder 1
+y1
+
+y2
+
+Decoder
+
+R2
+
+R1
+
+ˆy2
+
+ˆy1
+
+Figure 1: The two-encoder source-coding problem.
+
+y2
+
+y1
+
+Decoder
+
+R2
+
+R1
+
+ˆy2
+
+ˆy1
+
+SW Encoder 2
+
+SW Encoder 1
+
+VQ 2
+
+VQ 1
+
+Figure 2: A natural architecture that separates the analog and digital aspects
+of the compression.
+
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+0
+
+0.5
+
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+4
+
+4.5
+
+5
+
+R⋆
+sum(d1, d2)
+
+R⋆
+1(d1)
+
+R⋆
+2(d2)
+
+R1 (Bits per sample)
+
+R2 (Bits per sample)
+
+Figure 3: The rate region for ρ = 0.9 and d1 = d2 = 0.05.
+
+50
+
+
+ 0.1
+
+ 0.2
+
+ 0.3
+
+ 0.4
+
+ 0.5
+
+ 0.6
+
+ 0.7
+
+ 0.8
+
+ 0.9
+
+ 0
+ 0.1
+ 0.2
+ 0.3
+ 0.4
+ 0.5
+ 0.6
+ 0.7
+ 0.8
+ 0.9
+ 1
+
+θ
+
+d1d2
+
+Figure 4: Dependence of the product d1d2 on the error correlation coefficient θ
+for ρ = 0.9.
+
+51
+
+
+−1
+−0.8
+−0.6
+−0.4
+−0.2
+0
+0.2
+0.4
+0.6
+0.8
+1
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+θ
+
+Bits per sample
+
+Rcoop(θ)
+
+Rsum(θ)
+
+Figure 5: Rcoop(·) and Rsum(·) for the case ρ = 0.9 and d1 = d2 = 0.05. The
+plot for Rsum(·) was generated using the convex optimization formulation of the
+sum rate for the µ-sum problem given in Appendix C. The circled point at
+which the two functions intersect is the min-max and equals the sum rate.
+
+52
+
+
+Encoder 2
+
+Encoder 1
+y1
+
+y2
+
+Decoder
+
+R2
+
+R1
+
+ˆy2
+
+ˆy1
+
+y1
+
+y2
+
+Decoder
+
+R2
+
+R1
+
+ˆy2
+
+ˆy1
+
+centralized problem
+
+Encoder
+
+Encoder 2
+
+Encoder 1
+y1
+
+y2
+
+Encoder 2
+
+Encoder 1
+y1
+
+y2
+
+Decoder
+
+R2
+
+R1
+
+ˆx
+x
+
+Decoder
+
+R2
+
+R1
+
+µT ˆy
+
+CEO problem
+
+µ-sum problem
+
+=
+
+original problem
+
+≤
+
+≥
+
+Figure 6: Graphical depiction of the lower bound argument.
+
+53
+
+
+R⋆
+1(d1)
+
+R2
+
+Z
+Y
+X
+W
+R1
+
+Figure 7: An example illustrating the definitions of W, X, Y , and Z in Ap-
+pendix E.
+
+54
+
+
+R⋆
+i(di)
+(Rc
+1, Rc
+2)
+
+( ˜R1, ˜R2)
+
+R2
+
+R1
+
+contrapolymatroid for D∗
+
+Figure 8: Illustration of M-sums achievability argument.
+
+Encoder 1
+y1
+
+yL
+
+Encoder 2
+y2
+
+R1
+
+Decoder
+
+ˆyL
+
+ˆy2
+
+ˆy1
+
+RL
+
+R2
+
+· · ·
+
+· · ·
+
+Encoder L
+
+Figure 9: Setup for the many sources problem.
+
+55
+
+

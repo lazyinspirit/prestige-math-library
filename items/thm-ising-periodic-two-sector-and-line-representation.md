@@ -2,7 +2,7 @@
 id: thm-ising-periodic-two-sector-and-line-representation
 kind: theorem
 title: "Periodic Ising paths, two sectors, and the full line representation"
-status: draft
+status: published
 dependency_level: 7
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -2,7 +2,7 @@
 id: ex-two-mode-car-occupation-matrix-units
 kind: example
 title: Two-Mode CAR Signs and a Matrix Unit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison-examples

@@ -21,8 +21,6 @@ sources:
     - title: "Günter Last and Mathew Penrose, Lectures on the Poisson Process, author-hosted 2017 version"
       url: "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
       locator: "Chapter 3, Proposition 3.8, PDF p. 34: finite Poisson count and locations."
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

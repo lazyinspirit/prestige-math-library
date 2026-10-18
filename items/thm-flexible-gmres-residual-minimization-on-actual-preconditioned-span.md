@@ -21,8 +21,6 @@ deps:
 justified_by: []
 aliases: []
 proof_strategy: direct
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Yousef Saad, Iterative Methods for Sparse Linear Systems, 2nd ed., §9.4.1, printed pp. 287–289"

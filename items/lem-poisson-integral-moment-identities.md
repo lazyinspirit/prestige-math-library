@@ -22,8 +22,6 @@ sources:
     - title: "Gunter Last and Mathew Penrose, Lectures on the Poisson Process, author-hosted 2017 version"
       url: "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
       locator: "Chapter 2, Proposition 2.7 and proof, printed pp. 13-14 (PDF pp. 25-26), and Chapter 3, Theorem 3.6, printed pp. 21-22 (PDF pp. 33-34): first moment and independent Poisson counts. The second-moment extension is proved locally."
-verification:
-  precheck: pending
 ---
 
 ## Statement

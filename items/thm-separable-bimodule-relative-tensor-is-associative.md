@@ -2,7 +2,7 @@
 id: thm-separable-bimodule-relative-tensor-is-associative
 kind: theorem
 title: Relative tensor product gives associative composition of separable bimodules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

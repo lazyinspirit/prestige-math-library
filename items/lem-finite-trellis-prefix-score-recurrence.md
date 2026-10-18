@@ -2,7 +2,7 @@
 id: lem-finite-trellis-prefix-score-recurrence
 kind: lemma
 title: The optimal-prefix recurrence for a finite trellis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

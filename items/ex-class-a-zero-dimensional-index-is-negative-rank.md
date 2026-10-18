@@ -2,7 +2,7 @@
 id: ex-class-a-zero-dimensional-index-is-negative-rank
 kind: example
 title: "A zero-dimensional class-A flattened Hamiltonian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations-examples

@@ -2,7 +2,7 @@
 id: ex-abelian-maurer-cartan-gauge-classes-are-cohomology
 kind: example
 title: "Abelian Maurer–Cartan gauge classes are cohomology"
-status: draft
+status: published
 dependency_level: 10
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

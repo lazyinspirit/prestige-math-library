@@ -1,6 +1,15 @@
 # Quantum Statistical Mechanics — future build design
 
-Spliced on 2026-10-04 at the owner’s request, using the mathematics future-track convention. Canonical item arrays remain empty until engine scaffolding and authoring. Preserve every promised claim and source qualification in the linked full designs and inventories. Resolve the exact source dependencies before accepting consumers.
+Spliced on 2026-10-04 at the owner’s request, using the mathematics future-track convention. At that splice the canonical machine-plan item arrays were empty; the research proposal is recorded in the linked full designs and inventories and is not a production carrier. Preserve every promised claim and source qualification. Resolve the exact source dependencies before accepting consumers.
+
+The 2026-10-16 owner-directed scaffold audit has appended five research-only
+interfaces to the category inventory and supplied their full local arguments.
+The SHA-256 values immediately below are the original 2026-10-04 splice pins;
+the pins for the now-edited `pathway-and-inventory.md`, `prose-scaffold.md`,
+`paired-inventory.json`, and `supplier-map.json` are historical; current bindings appear in the 2026-10-16 section below. `closure-ledger.json` remains an untouched historical receipt.
+The eight current root quantum-computing/algorithm suppliers used by the audit
+are identified in the category audit map and are not yet pinned in the physics
+import manifest; Production import remains a pre-build obligation; current research bindings appear below.
 
 Read these complete required sources before drift review or scaffolding:
 
@@ -441,3 +450,53 @@ Original reservation (read together with the full required sources above):
   "companion": "qsm-dt-relaxation-examples"
 }
 ```
+
+## 2026-10-16 audit additions
+
+The original page promises remain. These additional A items repair or expand
+their exact interfaces; they are still research proposals and do not create
+production carriers or physical acceptance.
+
+On `qsm-bose-fermi-gases`, supplier order is:
+
+- `def-qsm-identical-particle-fock-sectors` and
+  `lem-qsm-fock-occupation-basis-and-car-relations`, supplied by the complete
+  Hilbert tensor construction in NRQM M1 and proved in
+  `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/workers/models-examples/fock-and-occupation.md#F0`
+  and `#F1`. The existing diagonal occupation trace argument is expanded at
+  `#F2` and now depends on the occupation correspondence.
+
+On `qsm-states-ensembles`, `def-qsm-finite-gibbs-purification`,
+`alg-qsm-finite-gibbs-state-preparation`, and
+`thm-qsm-finite-gibbs-circuit-marginal-error` are proved in
+`research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/gibbs-circuit-bridge.md#QGA0`,
+`#QGA1`, and `#QGA2`. They consume the current published root sparse-oracle
+Gibbs-purification procedure and its error/cost theorem under their exact
+finite access model. An approximate circuit state is a mathematical
+preparation algorithm; it is not a bath-equilibration result or experimental
+evidence.
+
+`research/scaffold-audit-2026-10-16/quantum-statistical-mechanics/report.md`
+records the current definition/proof audit, exact supplier dispositions,
+honest remaining limits, and focused checks. Its supplier map records current
+root source status separately from physics import-pin status.
+
+## Historical scaffold source bindings — 2026-10-16
+
+The source-list hashes above and the following 2026-10-16 draft bindings are historical as of the 2026-10-17 cycle amendment. Historical closure and structural receipts remain unchanged and do not certify these revisions.
+
+| Historical source (2026-10-16) | SHA-256 |
+|---|---|
+| `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/pathway-and-inventory.md` | `791819847ccfac939a084faae427b2ba8ab43ea3cf3c7d8f32000a6d9f306f13` |
+| `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/prose-scaffold.md` | `0f83b192cfabaf939df0385209ad1843cf9b75925d46c49f581d64f13a516947` |
+| `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/paired-inventory.json` | `1968eb53abba6851e76c374428e19ff58a88ec0208dc5342eeb5af4f26c6d9cc` |
+| `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/supplier-map.json` | `d6a881332d39dc5a8b91ac4e5c3a296e3cfc02b0c06d3af5caf0c15cb55b5070` |
+| `research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/closure-ledger.json` | `d5e26774e01e7050ec7e80ffa44970c573b6e7c3e818a1a20418e84657e030d3` |
+
+Binding record: `research/scaffold-audit-2026-10-16/quantum-statistical-mechanics/root-source-bindings.json`. Source currency is not proof acceptance.
+
+The eight new QC/QA suppliers are bound as current root research context. Their production physics import and dependency-closure verification remain a pre-build obligation; the shared import manifest was unchanged during that historical audit. Root has since performed an owner-authorized import refresh; this amendment makes no import-certification claim.
+
+## Source-level cycle amendment — 2026-10-17
+
+For `def-qsm-finite-gibbs-purification`, replace the false dependency on later-page `def-qsm-local-finite-tensor-state` by same-page `lem-qsm-matrix-state-calculus`. QGA0 explicitly transfers its coordinate spectral calculus through the given orthonormal basis of an arbitrary nonzero finite-dimensional Hilbert space. The three existing QC density/partial-trace suppliers remain exact dependencies. No local site-factor assumption, claim, purification identity, preparation condition or error guarantee changes. The current source-level item/page mappings and order implement this replacement; canonical plan and published context admission remain root-owned. `research/physics-remaining-80-2026-10-17-qsm-cycle-resolution.md` records the inspected arguments, consumers and remaining obligations. A new point-in-time source binding is `research/physics-remaining-80-2026-10-17-qsm-cycle-bindings.json`; it does not reseal the historical audit.

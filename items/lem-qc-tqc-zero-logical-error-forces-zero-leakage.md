@@ -2,7 +2,7 @@
 id: lem-qc-tqc-zero-logical-error-forces-zero-leakage
 kind: lemma
 title: Exact logical-block correctness forces zero leakage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

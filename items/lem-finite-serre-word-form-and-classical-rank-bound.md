@@ -2,7 +2,7 @@
 id: lem-finite-serre-word-form-and-classical-rank-bound
 kind: lemma
 title: Finite Serre word forms descend and have classical PBW rank bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

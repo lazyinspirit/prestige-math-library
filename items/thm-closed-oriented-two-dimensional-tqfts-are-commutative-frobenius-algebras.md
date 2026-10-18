@@ -2,7 +2,7 @@
 id: thm-closed-oriented-two-dimensional-tqfts-are-commutative-frobenius-algebras
 kind: theorem
 title: "Closed oriented two-dimensional TQFTs are commutative Frobenius algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

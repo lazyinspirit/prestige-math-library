@@ -1,7 +1,7 @@
 ---
 page: distributed-source-coding
 title: "Distributed Source Coding"
-status: draft
+status: published
 requires:
   - iid-lossless-source-coding-and-the-aep
   - method-of-types-and-finite-large-deviations

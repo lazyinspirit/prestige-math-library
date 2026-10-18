@@ -2,7 +2,7 @@
 id: lem-it-schmidt-rank-compression-fidelity-bound
 kind: lemma
 title: Compression dimension bounds entanglement fidelity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

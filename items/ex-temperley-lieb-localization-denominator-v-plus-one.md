@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-localization-denominator-v-plus-one
 kind: example
 title: "The normalized Hecke generator requires inverting v plus one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

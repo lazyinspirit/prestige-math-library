@@ -13,8 +13,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pending
 sources:
   references:
     - title: "S. Gros and M. Diehl, Numerical Optimal Control, draft course manuscript, Chapter 13 §§13.1–13.2"

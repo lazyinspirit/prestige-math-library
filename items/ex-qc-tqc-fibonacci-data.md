@@ -2,7 +2,7 @@
 id: ex-qc-tqc-fibonacci-data
 kind: example
 title: Fibonacci fusion data and chiral convention
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

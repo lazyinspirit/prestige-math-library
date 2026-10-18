@@ -27,8 +27,6 @@ sources:
     - title: "Günter Last and Mathew Penrose, Lectures on the Poisson Process, author-hosted 2017 version"
       url: "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
       locator: "Chapter 2, counting-measure evaluation sigma-algebra, PDF pp. 21–30; product-measure and generating-class methods are completed locally."
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

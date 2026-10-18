@@ -2,7 +2,7 @@
 id: ex-c2-trivial-and-sign-modules-under-diagonal-tensor-action
 kind: example
 title: The diagonal tensor action of $\mathbb C[C_2]$ on trivial and sign modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

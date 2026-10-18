@@ -24,8 +24,6 @@ sources:
     - title: "Charles Walkden, Ergodic Theory lecture notes"
       url: "https://personalpages.manchester.ac.uk/staff/Charles.Walkden/ergodic-theory/ergodic_theory.pdf"
       locator: "§10.5, printed pp.94–97: Birkhoff's stronger almost-sure/L1 result, used only as a cross-check; this item follows the choice-free mean-limit route."
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

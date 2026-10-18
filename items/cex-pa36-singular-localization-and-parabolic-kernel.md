@@ -2,7 +2,7 @@
 id: cex-pa36-singular-localization-and-parabolic-kernel
 kind: counterexample
 title: At the singular SL2 twist global sections is not conservative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: def-weak-linear-two-category
 kind: definition
 title: Weak linear 2-category
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

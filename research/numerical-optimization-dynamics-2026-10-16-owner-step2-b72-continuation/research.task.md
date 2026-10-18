@@ -1,1 +1,0 @@
-Follow the full research.brief.md and cone.json. Resume original72 identity for source-read-only completion of all30 current/owed inventory consumers including the four exact omissions. Root launches; do not apply source or metadata.

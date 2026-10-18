@@ -2,7 +2,7 @@
 id: lem-lagrangian-relation-sends-lagrangian-to-lagrangian
 kind: lemma
 title: "A linear Lagrangian relation sends a Lagrangian subspace to a Lagrangian subspace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

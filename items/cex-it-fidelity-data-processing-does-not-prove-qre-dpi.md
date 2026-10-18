@@ -2,7 +2,7 @@
 id: cex-it-fidelity-data-processing-does-not-prove-qre-dpi
 kind: counterexample
 title: Fidelity and trace-distance inequalities do not imply QRE data processing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-boundary-tensor-ideal-has-the-embedded-components
 kind: lemma
 title: "Every boundary tensor-ideal component is the fixed embedded two-sided ideal"
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

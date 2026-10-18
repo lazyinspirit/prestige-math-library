@@ -13,6 +13,8 @@ mathematical/model specializations, with pressure then in J/m$^d$.
 | $h_*,v_*,p_*$ | Positive reference action, volume and momentum constants | Counting inputs | J s, m$^d$, kg m/s; optional $h_*^d=v_*p_*^d$ |
 | $N,N_s$ | Nonnegative integer number/species labels | Sector data or sampled variable | Dimensionless; no ordinary integer-number derivative |
 | $m,m_i$ | Positive scalar particle masses | Primitive mechanical data | kg |
+| $Q_e,\varphi,A$ | Particle charge, static scalar potential, and static vector potential in the gauge-coupled branch | Primitive external-field model data | C, V, T m; $Q_e\varphi$ is J and $Q_eA$ is kg m/s |
+| $p_{\rm can},\pi$ | Canonical covector momentum and mechanical momentum $\pi=p_{\rm can}-Q_eA$ | Canonical coordinate / gauge-invariant model momentum | kg m/s |
 | $U,\phi,J,h$ | Interaction function, even pair potential or lattice coupling/field energy | Adopted model input | J; $\phi=+\infty$ means forbidden configurations |
 | $H,K$ | Measurable full energy; smooth Hamiltonian on dynamical branch | Derived from specified interactions/kinetic law | J; quadratic $K=|p|^2/(2m)$ in the neutral model |
 | $k_B,T,\beta$ | Positive entropy conversion, temperature parameter and inverse energy | Adopted constant/control and derived parameter | J/K, K, J⁻¹; $\beta=1/(k_BT)$ |
@@ -40,9 +42,26 @@ Euclidean chart and time coordinate with its mechanical transformation rule,
 not an unexplained Lorentz observer. Probability densities transform by the
 reference-measure Jacobian; scalar probability and observer-dependent momentum
 components are distinct objects. The momentum marks in C0 are mechanical
-quadratic kinetic momenta for the specified neutral model. Canonical momentum
-in an electromagnetic gauge-coupled model requires its separately declared
-mechanical identification; matching names or units does not establish it.
+quadratic kinetic momenta for the specified neutral model. The separate static
+electromagnetic branch defines $p_{\rm can}=mv+Q_eA$ and
+$\pi=p_{\rm can}-Q_eA=mv$; under a static gauge change the canonical coordinate
+changes while $\pi$ and the normalized partition function remain invariant.
+The published `def-em-gauge-transformation` supplies the field-potential
+convention, and the published `def-cm12-hamiltonian` supplies the Legendre
+transform convention only for its narrower velocity-independent potential
+model; the CSM argument derives the velocity-dependent minimal-coupling branch
+explicitly.
+
+The reservoir temperature $T$ used in $\beta=(k_BT)^{-1}$ is an adopted
+preparation control. The published `def-td-temperature-pressure-chemical-potential`
+defines macroscopic temperature from an entropy derivative on a smooth
+single-phase thermodynamic chart; identifying those two temperatures requires
+an explicit physical matching argument. Likewise, the published
+`post-td-equilibrium-ensemble-sampling` adopts positional canonical, grand and
+controlled-shell laws for a finite-region continuum pair-potential model. It
+does not provide the CSM momentum-space preparation or the full phase-space
+equivalence theorem; the separate CSM preparation and conditional proof retain
+those obligations.
 
 The physical postulates are formulated completely in foundations F0/F4, Gibbs
 G0, examples P0, dynamics' own model sections and canonical C7. They specify

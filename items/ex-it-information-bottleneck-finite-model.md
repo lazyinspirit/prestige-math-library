@@ -2,7 +2,7 @@
 id: ex-it-information-bottleneck-finite-model
 kind: example
 title: "A finite information-bottleneck privacy model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

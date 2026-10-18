@@ -2,7 +2,7 @@
 id: thm-graded-module-classification-from-even-subalgebra
 kind: theorem
 title: "Graded modules over an algebra with an invertible odd element"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-complex-clifford-classification-and-graded-products

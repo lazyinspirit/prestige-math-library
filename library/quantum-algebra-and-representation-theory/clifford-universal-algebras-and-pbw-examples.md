@@ -1,7 +1,7 @@
 ---
 page: clifford-universal-algebras-and-pbw-examples
 title: "Universal Clifford Algebras and Their PBW Basis: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-one-dimensional-clifford-algebra

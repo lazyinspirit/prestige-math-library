@@ -1,7 +1,7 @@
 ---
 page: hall-algebra-modules-and-geometric-actions-examples
 title: 'Hall Algebra Modules, Fock Spaces, and Geometric Actions: Examples and Counterexamples'
-status: draft
+status: published
 requires:
 - hall-algebra-modules-and-geometric-actions
 items:

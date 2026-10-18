@@ -16,8 +16,6 @@ axiom_use: "Countable Choice is inherited only from the L2 variance-identity sup
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Art B. Owen, Monte Carlo Variance of Scrambled Net Quadrature, §7"

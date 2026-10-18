@@ -2,7 +2,7 @@
 id: lem-it-optimized-constant-composition-gallager-identity
 kind: lemma
 title: Globally optimized constant-composition and Gallager functions agree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

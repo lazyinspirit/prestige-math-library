@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-root-fusion-paths-have-nonzero-pairings
 kind: lemma
 title: "Root fusion paths have nonzero pairings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

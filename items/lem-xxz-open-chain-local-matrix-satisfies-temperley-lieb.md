@@ -2,7 +2,7 @@
 id: lem-xxz-open-chain-local-matrix-satisfies-temperley-lieb
 kind: lemma
 title: "The open XXZ local 4-by-4 matrix satisfies the Temperley–Lieb relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

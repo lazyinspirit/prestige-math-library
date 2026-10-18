@@ -938,3 +938,74 @@ Original reservation (read together with the full required sources above):
   "B_leaf": true
 }
 ```
+
+## 2026-10-16 category-local scaffold extensions
+
+These additions are recorded in the current category inventory and are proposals for a later shared plan splice. The original reservations and their source claims above remain intact. No shared `research/plan-spec.json` edit or hash refresh is included here.
+
+### Existing page extension — selected stationary thermal equilibrium
+
+Add `def-tgr-juttner-kinetic-preparation` to the A side of the existing `TGR-PET01` page. It consumes the exact published GR geometry/observer definitions and the category-local mass-shell measure/normalization argument on `TGR-ET01`. The distribution is an explicitly defined model preparation; it is not an empirical claim or a collision-equilibration theorem.
+
+### TGR-MHS05 — finite-regulator entropy mathematics
+
+Proposed order 659. A page `tgr-mhs05`; B companion `tgr-mhs05-examples`. Category `thermodynamics-and-general-relativity-mathematics`; library `mathematics`. No in-category page prerequisite; finite matrix entropy consumes the current QSM finite-entropy-composition research interface with that unpublished status retained.
+
+```json
+{
+  "pair": "TGR-MHS05",
+  "library": "mathematics",
+  "A": [
+    "def-tgr-finite-cutoff-outside-entropy",
+    "lem-tgr-finite-cutoff-mode-entropy-growth",
+    "lem-tgr-renormalization-finite-part-ambiguity"
+  ],
+  "B": [
+    "ex-tgr-generalized-entropy-not-monotone-from-definition"
+  ],
+  "requires": [],
+  "status": "draft-research",
+  "B_leaf": true
+}
+```
+
+### TGR-PHS05 — regulated generalized-entropy model
+
+Proposed order 661. A page `tgr-phs05`; B companion `tgr-phs05-examples`. Category `thermodynamics-and-general-relativity`; library `physics`. It follows the existing area-calibration page and the finite-regulator mathematics page.
+
+```json
+{
+  "pair": "TGR-PHS05",
+  "library": "physics",
+  "A": [
+    "def-tgr-regulated-generalized-entropy"
+  ],
+  "B": [
+    "rem-tgr-generalized-entropy-no-automatic-second-law"
+  ],
+  "requires": [
+    "TGR-I01",
+    "TGR-MHS05",
+    "TGR-PHS03",
+    "TGR-PHS01"
+  ],
+  "status": "draft-research",
+  "B_leaf": true
+}
+```
+
+PHS05 defines a finite-regulator sum and its renormalized limit only when a named sequence converges under fixed conditions. It asserts no Hawking radiation, semiclassical backreaction, scheme independence, or generalized-second-law inequality. Root can splice these exact pairs/items into the shared plan after reviewing the current generated category map.
+
+## Current scaffold source bindings — 2026-10-16
+
+The source-list hashes above are historical splice pins. Current draft sources are bound below. Historical closure and structural receipts remain unchanged and do not certify these revisions.
+
+| Current source | SHA-256 |
+|---|---|
+| `research/extended-frameworks-2026-10-03/thermodynamics-and-general-relativity/inventory-and-pathway.md` | `5225af2188d398d79e47a03427bf62446d19c7397a39573f5228c514e51df6cd` |
+| `research/extended-frameworks-2026-10-03/thermodynamics-and-general-relativity/prose-scaffold.md` | `16fd445c07cf3b7d116994aabb377411934621238570a3008f62bd71d16fd909` |
+| `research/extended-frameworks-2026-10-03/thermodynamics-and-general-relativity/proposed-inventory.json` | `21dc9f71f6563c14405cfd90aa81420bb95e6217fcee8a96cee89f307c10adec` |
+| `research/extended-frameworks-2026-10-03/thermodynamics-and-general-relativity/supplier-map.json` | `678826d39da0479edc43553ff33d80913c397d7b07984057bf2aa19e28b9e3b5` |
+| `research/extended-frameworks-2026-10-03/thermodynamics-and-general-relativity/closure-ledger.json` | `d32f605b44f1ab357ee5a4f7ef0a8cc709fef82c0f349dc826428c6b218eaf77` |
+
+Binding record: `research/scaffold-audit-2026-10-16/thermodynamics-and-general-relativity/root-source-bindings.json`. Source currency is not proof acceptance.

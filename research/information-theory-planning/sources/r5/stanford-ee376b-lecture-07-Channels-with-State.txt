@@ -1,0 +1,1279 @@
+Lecture 
+Channels with State
+
+(Reading: NIT ., ., .–., .)
+
+∙DMC with state
+∙DMC with DM state
+∙Causal state information available at the encoder
+∙Noncausal state information available at the encoder
+∙Writing on dirty paper
+
+© Copyright –Abbas El Gamal and Young-Han Kim
+DMC with state
+
+M
+Xn
+Yn
+̂M
+Encoder
+Decoder
+
+sn
+
+p(y|x, s)
+
+∙DMC with state (X × S, p(y|x, s), Y)
+
+∙State: Channel uncertainty, jamming, fading, memory faults, host image
+
+∙Three general classes:
+
+㶳Compound channel: State is fixed throughout transmission
+
+㶳Arbitrarily varying channel: sn is an arbitrary sequence
+
+㶳Random state
+
+/ 
+
+
+DMC with DM state
+
+M
+Xi
+Yi
+̂M
+Encoder
+Decoder
+
+p(s)
+
+p(y|x, s)
+
+Si/Sn
+Si/Sn
+
+Si
+
+∙DMC with DM state (X × S, p(y|x, s)p(s), Y)
+
+∙State information availability:
+
+㶳Encoder, decoder, neither, both
+
+㶳Noiseless, noisy, coded
+
+㶳Causal (Si known before transmission i), noncausal (Sn known before transmission)
+
+∙For each setup, (nR, n) code, achievability, and capacity defined in the usual way
+
+/ 
+Simple special cases
+
+∙No state information available at either the encoder or the decoder:
+
+C = max
+p(x) I(X; Y),
+
+where p(y|x) = ∑s p(s)p(y|x, s)
+
+∙State information available (causally or noncausally) at the decoder ( ̂m(yn, sn)):
+
+CSI-D = max
+p(x) I(X; Y, S) = max
+p(x) I(X; Y|S),
+
+and is achieved by treating (Y, S) as the channel output
+
+∙State information available at both encoder and decoder (xn(m, si), ̂m(yn, sn)):
+
+CSI-ED = max
+p(x|s) I(X; Y|S)
+
+for both causal and noncausal cases
+
+Key achievability idea: Treat Sn as a time-sharing sequence
+
+/ 
+
+
+Proof of achievability (Goldsmith–Varaiya )
+
+∙Split M into independent messages with rates Rs, s ∈S; hence ∑s Rs = R
+
+∙Codebook generation:
+
+㶳For each s, generate nRs sequences xn(ms, s) ∼∏n
+i=pX|S(xi|s), ms ∈[: nRs]
+
+∙Encoding:
+
+㶳To send message m = (ms: s ∈S), store each of xn(ms, s) in a FIFO buffer for s
+
+㶳In time i, transmit the first untransmitted symbol from the FIFO buffer for si
+
+xn(m, )
+xn−(m, )
+x(m, )
+x(m, )
+
+xn(m, ) xn−(m, )
+x(m, )
+x(m, )
+
+xn(ms, s)
+xn−(ms, s)
+x(ms, s)
+x(ms, s)
+
+s
+
+/ 
+Proof of achievability (Goldsmith–Varaiya )
+
+∙Split M into independent messages with rates Rs, s ∈S; hence ∑s Rs = R
+
+∙Codebook generation:
+
+㶳For each s, generate nRs sequences xn(ms, s) ∼∏n
+i=pX|S(xi|s), ms ∈[: nRs]
+
+∙Encoding:
+
+㶳To send message m = (ms: s ∈S), store each of xn(ms, s) in a FIFO buffer for s
+
+㶳In time i, transmit the first untransmitted symbol from the FIFO buffer for si
+
+∙Decoding and the analysis of the probability of error:
+
+㶳Demultiplex the received sequence into subsequences (yns(s), s ∈S), ∑s ns = n
+
+㶳If sn ∈T (n)
+є
+, then ns ≥n(−є)p(s) for every s ∈S
+
+Find a unique ̂ms for each s such that (xn(−є)p(s)( ̂ms, s), yn(−є)p(s)(s)) ∈T (n)
+є
+
+㶳By the LLN and packing lemma, P(n)
+e (s) →if Rs < (−є)p(s)I(X; Y|S = s) −δ(є)
+
+㶳Hence, P(n)
+e
+→if R < (−є)I(X; Y|S) −δ(є)
+
+/ 
+
+
+Causal state information available at the encoder
+
+M
+Xi
+
+Si
+
+Yi
+̂M
+Encoder
+Decoder
+
+p(s)
+
+p(y|x, s)
+
+Si
+
+Theorem .(Shannon )
+
+CCSI-E =
+max
+p(u), x(u,s) I(U; Y),
+
+where U is independent of S with |U| ≤min{(|X| −)|S| + , |Y|}
+
+∙Proof of the converse: Read NIT .
+
+/ 
+Proof of achievability
+
+M
+̂M
+Encoder
+Decoder
+
+p(s)
+
+x(u, s)
+p(y|x, s)
+Ui
+Xi
+Yi
+
+Si
+
+Si
+
+∙Fix p(u) and x(u, s) that achieve CSI-E
+
+∙Shannon strategy: Attach a “physical device” x(u, s) in front of the actual channel
+
+∙This induces a DMC p(y|u) = ∑s p(y|x(s, u), s)p(s) with input U and output Y
+
+∙Now code for the induced DMC p(y|u) to achieve I(U; Y)
+
+Encoding: To send m, transmit xi = x(ui(m), si), i ∈[: n]
+
+∙Can be viewed as coding over all functions {xu(s) : S →X} (u: function index)
+
+/ 
+
+
+Noncausal state information available at the encoder
+
+M
+Xi
+
+Si
+
+Yi
+̂M
+Encoder
+Decoder
+
+p(s)
+
+p(y|x, s)
+
+Sn
+
+∙Motivation for noncausal state information:
+
+㶳Memory with defects
+
+㶳Write-once memory
+
+㶳Digital watermarking
+
+㶳General broadcast channel
+
+/ 
+Memory with stuck-at faults
+
+X
+Y
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+S
+p(s)
+
+p/
+
+p/
+
+−p
+
+stuck at 
+
+stuck at 
+
+∙If the reader knows the fault locations:
+CSI-D = CSI-ED = −p
+∙If neither the writer nor the reader knows:
+C = −H(p/)
+∙If the writer knows the fault locations:
+CSI-E = ?
+∙Kuznetsov–Tsybakov () showed:
+CSI-E = −p
+
+/ 
+
+
+Multicoding
+
+∙Codebook generation: Randomly partition {, }n into nR subcodebooks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+...
+
+...
+...
+...
+...
+...
+...
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C(m)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+...
+
+...
+...
+...
+...
+...
+...
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C(nR)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/ 
+Multicoding
+
+∙Writing: Store m with sn:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+...
+
+...
+...
+...
+...
+...
+...
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C(m)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+←
+xn
+
+
+
+
+
+
+
+
+...
+
+...
+...
+...
+...
+...
+...
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C(nR)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/ 
+
+
+Multicoding
+
+∙Reading:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+...
+
+...
+...
+...
+...
+...
+...
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C(m)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+←
+yn
+
+
+
+
+
+
+
+
+...
+
+...
+...
+...
+...
+...
+...
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C(nR)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/ 
+Analysis of the probability of error
+
+C()
+C()
+C()
+C(nR)
+
+∙Error occurs iff there is no xn ∈C(m) that matches the fault pattern
+
+∙For n large, there are ≈np faults
+
+∙Hence, there are ≐n(−p) that match any given fault pattern
+
+∙If R < −p and n large, C(m) has a matching sequence w.h.p.
+
+∙Hence the capacity CSI-E = −p
+
+/ 
+
+
+Gelfand–Pinsker theorem
+
+∙Gelfand–Pinsker () generalized this result to arbitrary DMC with DM state
+
+Theorem .
+
+CSI-E =
+max
+p(u|s), x(u,s)怡I(U; Y) −I(U; S)怱,
+
+where |U| ≤min{|X| ⋅|S|, |Y| + |S| −}
+
+∙Example: Memory with defects
+
+㶳If S = , set U = X ∼Bern(/)
+
+㶳If S = or , set U = X = S
+
+㶳Then,
+I(U; Y) −I(U; S) = H(U|S) −H(U|Y) = −p
+
+/ 
+Proof of achievability
+
+∙Codebook generation: Fix p(u|s) and x(u, s) that achieves CSI-E, let ̃R > R
+
+㶳For each m ∈[: nR], generate a subcodebook C(m) consisting of
+n(̃R−R) sequences un(l) ∼∏n
+i=pU(ui), l ∈[(m −)n(̃R−R) + : mn(̃R−R)]
+
+un
+
+un()
+
+un(l)
+
+un(ñR)
+
+C()
+
+C(m)
+
+C(nR)
+
+/ 
+
+
+Proof of achievability
+
+∙Encoding: To send m given sn, find un(l) ∈C(m) such that (un(l), sn) ∈T (n)
+є㰀
+
+㶳If no such un(l) exists, set l = 
+
+㶳Then transmit xi = x(ui(l), si) for i ∈[: n]
+
+sn
+
+un
+
+un()
+
+un(l)
+
+un(ñR)
+
+C()
+
+C(nR)
+
+T (n)
+є
+(U, S)
+
+C(m)
+
+/ 
+Proof of achievability
+
+∙Decoding:
+
+㶳Find the unique ̂m such that (un(l), yn) ∈T (n)
+є
+for some un(l) ∈C( ̂m)
+
+un
+
+un()
+
+un(l)
+
+un(ñR)
+
+C()
+
+C(nR)
+
+C(m)
+
+/ 
+
+
+Analysis of the probability of error
+
+∙Consider P(E) conditioned on M = 
+
+∙Let L denote the index of the chosen Un for Sn and M = 
+
+∙Error events:
+
+E= 恁(Un(l), Sn) ∉T (n)
+є㰀
+for all Un(l) ∈C()恑,
+
+E= 恁(Un(L), Yn) ∉T (n)
+є
+恑,
+
+E= 恁(Un(l), Yn) ∈T (n)
+є
+for some l ∉[: n(̃R−R)]恑
+
+Thus, by the union of events bound
+
+P(E) ≤P(E) + P(Ec
+∩E) + P(E)
+
+/ 
+Conditional and joint typicality lemmas
+
+Conditional typicality lemma
+
+Let (X, Y) ∼p(x, y) and є > є㰀. If xn ∈T (n)
+є㰀(X), Yn ∼∏n
+i=pY|X(yi|xi), then
+
+lim
+n→∞P恁(xn, Yn) ∈T (n)
+є
+(X, Y)恑= 
+
+∙If xn ∈T (n)
+є㰀(X), є > є㰀, then for n sufficiently large,
+
+|T (n)
+є
+(Y|xn)| ≥n(H(Y|X)−δ(є))
+
+Joint typicality lemma (part )
+
+Let (X, Y) ∼p(x, y) and є > є㰀. If xn ∈T (n)
+є㰀
+and ̃Yn ∼∏n
+i=pY(̃yi), then for some
+δ(є) →as є →and n sufficiently large,
+
+P恁(xn, ̃Yn) ∈T (n)
+є
+(X, Y)恑≥−n(I(X;Y)+δ(є))
+
+/ 
+
+
+Covering lemma (U = )
+
+∙Let (X, ̂X) ∼p(x, ̂x) and є㰀< є
+
+∙Let Xn ∼p(xn) be arbitrarily distributed such that
+
+lim
+n→∞P恁Xn ∈T (n)
+є㰀(X)恑= 
+
+∙Let ̂Xn(m) ∼∏n
+i=p̂X(̂xi), m ∈A, |A| ≥nR,
+
+be independent of each other and of Xn
+
+̂Xn()
+
+̂Xn(m)
+
+̂X n
+X n
+T (n)
+є㰀(X)
+
+Xn
+
+/ 
+Covering lemma (U = )
+
+∙Let (X, ̂X) ∼p(x, ̂x) and є㰀< є
+
+∙Let Xn ∼p(xn) be arbitrarily distributed such that
+
+lim
+n→∞P恁Xn ∈T (n)
+є㰀(X)恑= 
+
+∙Let ̂Xn(m) ∼∏n
+i=p̂X(̂xi), m ∈A, |A| ≥nR,
+
+be independent of each other and of Xn
+
+Lemma .(Covering lemma)
+
+There exists δ(є) →as є →such that
+
+lim
+n→∞P恁(Xn, ̂Xn(m)) ∉T (n)
+є
+for all m ∈A恑= ,
+
+if R > I(X; ̂X) + δ(є)
+
+/ 
+
+
+Analysis of the probability of error
+
+∙Error events:
+
+E= 恁(Un(l), Sn) ∉T (n)
+є㰀
+for all Un(l) ∈C()恑,
+
+E= 恁(Un(L), Yn) ∉T (n)
+є
+恑,
+
+E= 恁(Un(l), Yn) ∈T (n)
+є
+for some l ∉[: n(̃R−R)]恑
+
+∙By the covering lemma (|A| = n(̃R−R), X ←S, ̂X ←U),
+P(E) →if ̃R −R > I(U; S) + δ(є㰀)
+
+∙Since Ec
+= {(Un(L), Xn, Sn) ∈T (n)
+є㰀} and
+
+Yn|{Un(L) = un, Xn = xn, Sn = sn} ∼
+
+n
+堉
+i=
+pY|U,X,S(yi|ui, xi, si) =
+
+n
+堉
+i=
+pY|X,S(yi|xi, si),
+
+by the conditional typicality lemma, P(Ec
+∩E) →
+
+∙Since Un(l) ∼∏n
+i=pU(ui), l ∉[: n(̃R−R)], and Yn are independent,
+by the packing lemma, P(E) →if ̃R < I(U; Y) −δ(є)
+
+∙Combining the bounds, P(E) →if R < I(U; Y) −I(U; S) −δ(e㰀) −δ(є)
+
+/ 
+Proof of the converse (Heegard–El Gamal )
+
+∙We will need the Csisz´ar sum identity: Let (U, Xn, Yn) ∼F(u, xn, yn), then
+
+n
+堈
+i=
+I(Xn
+i+; Yi|Yi−, U) =
+
+n
+堈
+i=
+I(Yi−; Xi|Xn
+i+, U)
+
+∙By Fano’s inequality,
+
+nR ≤I(M; Yn) + nєn
+
+≤
+
+n
+堈
+i=
+I(M, Yi−; Yi) + nєn
+
+=
+
+n
+堈
+i=
+I(M, Yi−, Sn
+i+; Yi) −
+
+n
+堈
+i=
+I(Sn
+i+; Yi|M, Yi−) + nєn
+
+=
+
+n
+堈
+i=
+I(M, Yi−, Sn
+i+; Yi) −
+
+n
+堈
+i=
+I(Yi−; Si|M, Sn
+i+) + nєn
+
+=
+
+n
+堈
+i=
+I(M, Yi−, Sn
+i+; Yi) −
+
+n
+堈
+i=
+I(M, Sn
+i+, Yi−; Si) + nєn
+
+∙Now, identify Ui = (M, Sn
+i+, Yi−) (Ui →(Xi, Si) →Yi), ...
+
+/ 
+
+
+Gaussian channel with additive Gaussian state
+
+Xn
+
+S
+Z
+
+Yn
+Encoder
+Decoder
+
+Sn
+
+̂M
+M
+
+∙S ∼N(, Q) and Z ∼N(, ) are independent
+
+∙Average power constraint P on X
+
+∙State information not available at the encoder or decoder: C = C 怡P/(+ Q)怱
+
+∙State information available at the decoder: CSI-D = CSI-ED = C(P)
+
+∙State information available noncausally at the encoder (Costa ):
+
+Theorem .(Writing on dirty paper)
+
+CSI-E = C(P)
+
+/ 
+Application: Digital watermarking
+
+Xn
+
+S
+Z
+
+Yn
+Encoder
+Decoder
+
+Sn
+
+̂M
+M
+
+∙The publisher embeds a watermark X in a host image S
+
+∙Given Sn, the authentication message M is encoded into watermark Xn(M, Sn)
+
+∙The watermark is added to image to generate watermarked image Xn + Sn
+
+∙An authenticator wishes to retrieve M from Yn = Xn + Sn + Zn, where Z ∼N(, )
+
+∙What is the optimal tradeoff between
+
+㶳Capacity C (amount of watermark information) and
+
+㶳Power of watermark X (determines fidelity of watermarked image)?
+
+∙By the writing on dirty paper, C(D) = C(D), where D is power of watermark
+
+/ 
+
+
+Proof of achievability
+
+∙Gelfand–Pinsker theorem for the DMC with DM state and input cost:
+
+CSI-E =
+max
+p(u|s), x(u,s):E(b(X))≤B怡I(U; Y) −I(U; S)怱
+
+∙For Gaussian channel with additive Gaussian state, find optimal F(u|s) and x(u, s)
+
+∙Let U = X + αS, where X ∼N(, P) is independent of S !
+
+∙With this choice,
+
+I(U; Y) = 
+
+log 急(P + Q + )(P + αQ)
+
+PQ(−α) + (P + αQ)怵,
+
+I(U; S) = 
+
+log 急P + αQ
+
+P
+怵
+
+Thus
+
+R(α) = I(U; Y) −I(U; S) = 
+
+log 急
+P(P + Q + )
+PQ(−α)+ (P + αQ)怵
+
+∙Maximizing w.r.t. α, we find that α∗= P/(P + ) and R(α∗) = C(P)
+
+/ 
+Extensions
+
+∙Non-Gaussian state (Cohen–Lapidoth ): C = C(P)
+
+∙Vector writing on dirty paper: Read NIT ., .
+
+Xn
+
+S
+Z
+
+Yn
+Encoder
+Decoder
+
+Sn
+
+̂M
+M
+G
+
+㶳Average power constraint: ∑n
+i=E(xT(m, S, i)x(m, S, i)) ≤nP
+
+㶳S ∼F(s) and Z ∼N(, Ir) are independent
+
+㶳As in the scalar case, the capacity is the same as if S were not present:
+
+C =
+max
+F(x):E(xTx)≤P I(X; GX + Z) =
+max
+KX:tr(KX)≤P
+
+log |GKXGT + Ir|
+
+/ 
+
+
+Summary
+
+∙DMC with DM state
+
+∙Channel coding with side information
+
+∙Shannon strategy
+
+∙Gelfand–Pinsker coding:
+
+㶳Multicoding (subcodebook generation)
+
+㶳Joint typicality encoding
+
+∙Covering lemma
+
+∙Writing on dirty paper
+
+∙Vector writing on dirty paper
+
+/ 
+References
+
+Cohen, A. S. and Lapidoth, A. (). The Gaussian watermarking game. IEEE Trans. Inf. Theory, (),
+–.
+
+Costa, M. H. M. (). Writing on dirty paper. IEEE Trans. Inf. Theory, (), –.
+
+Gelfand, S. I. and Pinsker, M. S. (). Coding for channel with random parameters. Probl. Control Inf.
+Theory, (), –.
+
+Goldsmith, A. J. and Varaiya, P. P. (). Capacity of fading channels with channel side information. IEEE
+Trans. Inf. Theory, (), –.
+
+Heegard, C. and El Gamal, A. (). On the capacity of computer memories with defects. IEEE Trans. Inf.
+Theory, (), –.
+
+Kuznetsov, A. V. and Tsybakov, B. S. (). Coding in a memory with defective cells. Probl. Inf. Transm.,
+(), –.
+
+Shannon, C. E. (). Channels with side information at the transmitter. IBM J. Res. Develop., (),
+–.
+
+/ 
+
+

@@ -2,7 +2,7 @@
 id: prop-formal-equivalence-changes-first-order-by-a-hochschild-coboundary
 kind: proposition
 title: Formal equivalence changes the first-order cochain by a Hochschild coboundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

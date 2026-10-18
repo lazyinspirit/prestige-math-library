@@ -1,7 +1,7 @@
 ---
 page: quasi-hopf-weak-hopf-and-relative-tensor-products
 title: "Quasi-Hopf, Weak Hopf, and Relative Tensor Products"
-status: draft
+status: published
 items: [def-quasi-bialgebra-and-quasi-hopf-algebra, def-weak-bialgebra-and-weak-hopf-algebra, thm-quasi-bialgebra-modules-form-a-monoidal-category, lem-weak-bialgebra-source-and-target-bases, rem-quasi-and-weak-hopf-extensions-change-different-axioms, prop-weak-bialgebra-module-tensor-product-is-delta-one-image]
 examples: []
 ---

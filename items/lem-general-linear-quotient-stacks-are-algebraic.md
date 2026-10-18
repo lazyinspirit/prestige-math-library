@@ -2,7 +2,7 @@
 id: lem-general-linear-quotient-stacks-are-algebraic
 kind: lemma
 title: "Affine quotients by products of general linear groups are algebraic stacks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

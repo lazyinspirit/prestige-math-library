@@ -1,7 +1,7 @@
 ---
 page: quantum-source-compression-and-cq-capacity-examples
 title: Quantum Source Compression and Classical Communication over Quantum Channels — Examples
-status: draft
+status: published
 requires:
   - quantum-source-compression-and-cq-capacity
 companion: quantum-source-compression-and-cq-capacity

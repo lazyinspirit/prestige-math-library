@@ -2,7 +2,7 @@
 id: lem-derived-hall-moduli-spaces-and-convolution-are-finite
 kind: lemma
 title: "Derived Hall moduli types are locally finite and the input span is proper"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: method-of-types-and-finite-large-deviations-examples
 title: "Method of Types and Finite Large Deviations — Examples"
-status: draft
+status: published
 requires: [method-of-types-and-finite-large-deviations]
 items: []
 examples:

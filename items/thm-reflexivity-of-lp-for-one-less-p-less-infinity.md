@@ -20,7 +20,7 @@ sources:
       url: "https://djvu.online/file/NPF4BEtSuqdFA"
       locator: "Theorem 6.15; arbitrary-measure Lp duality supplied locally"
     - title: "John K. Hunter, Measure Theory"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
       locator: "Theorems 7.10 and 7.14; completeness and duality"
 proof_strategy: direct
 ---

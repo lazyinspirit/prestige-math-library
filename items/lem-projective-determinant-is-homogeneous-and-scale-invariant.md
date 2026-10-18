@@ -14,8 +14,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Peter Arbenz, Lecture Notes on Solving Large Scale Eigenvalue Problems, §12.9"

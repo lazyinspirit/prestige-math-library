@@ -2,7 +2,7 @@
 id: def-it-finite-alphabet-product-law
 kind: definition
 title: "Finite product mass on words"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

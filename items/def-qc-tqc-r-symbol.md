@@ -2,7 +2,7 @@
 id: def-qc-tqc-r-symbol
 kind: definition
 title: R-symbol as a channel exchange map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

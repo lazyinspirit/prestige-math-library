@@ -2,7 +2,7 @@
 id: lem-derived-hall-associativity-squares
 kind: lemma
 title: "The two derived Hall correspondence squares are homotopy cartesian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: ex-a-differential-graded-algebra-is-its-own-left-dg-module
 kind: example
 title: "A differential graded algebra as its regular left module"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

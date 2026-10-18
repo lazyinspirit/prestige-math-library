@@ -22,8 +22,6 @@ axiom_use: No choice principle is used; no optimal coupling is selected.
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-root-of-unity-weyl-quantum-dimensions-and-affine-signs
 kind: lemma
 title: Weyl quantum dimensions and affine Weyl signs
-status: draft
+status: published
 dependency_level: 6
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

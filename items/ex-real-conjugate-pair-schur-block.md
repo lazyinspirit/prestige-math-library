@@ -15,8 +15,6 @@ provenance:
 generation:
   role: example
 proof_strategy: direct
-verification:
-  precheck: pending
 sources:
   references:
     - title: "James W. Demmel, Applied Numerical Linear Algebra, §4.4.8"

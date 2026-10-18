@@ -2,7 +2,7 @@
 id: lem-yangian-gl2-one-root-bethe-cancellation
 kind: lemma
 title: "The one-root gl2 Bethe equation cancels the unwanted transfer term"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

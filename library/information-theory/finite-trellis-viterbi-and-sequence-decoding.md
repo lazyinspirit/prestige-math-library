@@ -1,7 +1,7 @@
 ---
 page: finite-trellis-viterbi-and-sequence-decoding
 title: Finite Trellises, Viterbi, and Sequence Decoding
-status: draft
+status: published
 requires:
   - prefix-codes-and-finite-lossless-coding
 items:

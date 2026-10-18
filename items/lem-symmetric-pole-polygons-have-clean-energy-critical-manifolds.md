@@ -2,7 +2,7 @@
 id: lem-symmetric-pole-polygons-have-clean-energy-critical-manifolds
 kind: lemma
 title: Clean energy critical manifolds in Clifford-centriole polygon spaces
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 deps:

@@ -2,7 +2,7 @@
 id: def-qa-37-fusion-input-encoding
 kind: definition
 title: "Fusion-tree task input encoding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

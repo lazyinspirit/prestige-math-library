@@ -12,7 +12,7 @@ sources:
   scraped: []
   references:
     - title: "John K. Hunter, Measure Theory, Definition 7.3"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, Section 7A"
       url: "https://measure.axler.net/MIRA.pdf"
 verification:

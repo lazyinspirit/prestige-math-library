@@ -2,7 +2,7 @@
 id: lem-kl-invariant-under-measurable-bijections
 kind: lemma
 title: "KL is invariant under a measurable bijection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-hh-rational-spectral-r-matrix-satisfies-yang-baxter
 kind: lemma
 title: "The rational spin-1/2 spectral R-matrix satisfies Yang-Baxter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

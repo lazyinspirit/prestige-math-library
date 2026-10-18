@@ -20,7 +20,7 @@ sources:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Definition 12.2"
       url: "https://draft-r-bass-scholar.media.uconn.edu/wp-content/uploads/sites/3926/2024/12/real-analysis-for-graduate-students_version-50_accessible.pdf"
     - title: "John K. Hunter, Measure Theory, Definition 6.16"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Definition

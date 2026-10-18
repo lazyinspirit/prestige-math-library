@@ -2,7 +2,7 @@
 id: lem-daha-a1-bernstein-quotients-are-laurent
 kind: lemma
 title: "The rank-one DAHA Bernstein quotients are Laurent polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

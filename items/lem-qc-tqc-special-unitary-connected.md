@@ -2,7 +2,7 @@
 id: lem-qc-tqc-special-unitary-connected
 kind: lemma
 title: Special unitary groups are connected
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

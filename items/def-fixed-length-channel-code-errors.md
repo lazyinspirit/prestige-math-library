@@ -2,7 +2,7 @@
 id: def-fixed-length-channel-code-errors
 kind: definition
 title: "Average and maximal error of a fixed-length code"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

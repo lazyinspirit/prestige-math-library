@@ -2,7 +2,7 @@
 id: lem-parallel-awgn-information-density-convergence
 kind: lemma
 title: Parallel Gaussian information density obeys a finite-variance law of large numbers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

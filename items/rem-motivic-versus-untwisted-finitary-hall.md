@@ -2,7 +2,7 @@
 id: rem-motivic-versus-untwisted-finitary-hall
 kind: remark
 title: "Motivic stack Hall and untwisted finitary Hall have different carriers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

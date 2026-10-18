@@ -17,8 +17,6 @@ sources:
       url: https://www.maths.ed.ac.uk/~v1ranick/papers/kato1.pdf
     - title: Benjamin Texier, Basic matrix perturbation theory, §2
       url: https://ems.press/content/serial-article-files/44369?nt=1
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: noninvertible-symmetries-and-anyonic-chains
 title: "Noninvertible Symmetries and Anyonic Chains"
-status: draft
+status: published
 items:
   - def-anyonic-fusion-path-space
   - def-categorical-object-and-operator-invertibility

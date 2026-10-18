@@ -2,7 +2,7 @@
 id: thm-it-finite-markov-data-processing
 kind: theorem
 title: "Data processing for a finite Markov chain, with equality condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

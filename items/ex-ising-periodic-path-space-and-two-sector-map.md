@@ -2,7 +2,7 @@
 id: ex-ising-periodic-path-space-and-two-sector-map
 kind: example
 title: "Ising periodic paths split into two spin-chain sectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

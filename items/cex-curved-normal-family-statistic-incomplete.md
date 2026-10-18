@@ -33,8 +33,6 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

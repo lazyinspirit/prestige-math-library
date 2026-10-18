@@ -2,7 +2,7 @@
 id: ex-it-bell-pair-negative-conditional-entropy
 kind: example
 title: A Bell pair has negative quantum conditional entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

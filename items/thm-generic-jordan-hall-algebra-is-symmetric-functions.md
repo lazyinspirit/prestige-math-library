@@ -2,7 +2,7 @@
 id: thm-generic-jordan-hall-algebra-is-symmetric-functions
 kind: theorem
 title: "The generic Jordan-quiver Hall algebra is the symmetric-function ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

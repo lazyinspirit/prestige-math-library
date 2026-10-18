@@ -16,8 +16,6 @@ generation:
 provenance:
   statement: ai-generated
   proof: ai-generated
-verification:
-  precheck: pending
 proof_strategy: direct
 sources:
   references:

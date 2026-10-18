@@ -2,7 +2,7 @@
 id: def-qa-37-phase-reference-cost
 kind: definition
 title: "Braid phase reference and correction ledger"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

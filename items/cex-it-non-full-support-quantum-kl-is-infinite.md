@@ -2,7 +2,7 @@
 id: cex-it-non-full-support-quantum-kl-is-infinite
 kind: counterexample
 title: Normalized states can have infinite quantum relative entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

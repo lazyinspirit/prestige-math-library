@@ -2,7 +2,7 @@
 id: lem-real-spin-norm-detects-components
 kind: lemma
 title: The even Clifford norm detects the identity component in mixed signature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations

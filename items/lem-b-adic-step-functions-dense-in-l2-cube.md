@@ -15,8 +15,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Art B. Owen, Monte Carlo Variance of Scrambled Net Quadrature, §6"

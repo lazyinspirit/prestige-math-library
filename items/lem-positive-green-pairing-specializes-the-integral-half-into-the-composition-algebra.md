@@ -2,7 +2,7 @@
 id: lem-positive-green-pairing-specializes-the-integral-half-into-the-composition-algebra
 kind: lemma
 title: Green positivity specializes the integral half into the composition algebra
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

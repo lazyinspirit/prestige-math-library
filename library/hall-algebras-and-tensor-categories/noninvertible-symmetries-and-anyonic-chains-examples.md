@@ -1,7 +1,7 @@
 ---
 page: noninvertible-symmetries-and-anyonic-chains-examples
 title: "Noninvertible Symmetries and Anyonic Chains: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-multiplicity-indexed-anyonic-fusion-path

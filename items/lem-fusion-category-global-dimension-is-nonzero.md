@@ -2,7 +2,7 @@
 id: lem-fusion-category-global-dimension-is-nonzero
 kind: lemma
 title: Nonzero global dimension and the canonical Frobenius scalar
-status: draft
+status: published
 dependency_level: 2
 origin: session
 deps:

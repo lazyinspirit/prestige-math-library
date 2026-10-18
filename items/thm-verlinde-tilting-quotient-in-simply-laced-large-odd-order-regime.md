@@ -2,7 +2,7 @@
 id: thm-verlinde-tilting-quotient-in-simply-laced-large-odd-order-regime
 kind: theorem
 title: The simply-laced large-odd-order tilting fusion quotient
-status: draft
+status: published
 dependency_level: 12
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

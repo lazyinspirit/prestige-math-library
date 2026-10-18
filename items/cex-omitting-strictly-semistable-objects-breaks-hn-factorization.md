@@ -2,7 +2,7 @@
 id: cex-omitting-strictly-semistable-objects-breaks-hn-factorization
 kind: counterexample
 title: "Omitting strictly semistable objects breaks Hall factorization at the A₂ wall"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

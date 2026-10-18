@@ -2,7 +2,7 @@
 id: lem-qc-tqc-determinant-character-phase
 kind: lemma
 title: The braid phase is a common scalar character
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

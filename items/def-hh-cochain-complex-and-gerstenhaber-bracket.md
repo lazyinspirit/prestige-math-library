@@ -2,7 +2,7 @@
 id: def-hh-cochain-complex-and-gerstenhaber-bracket
 kind: definition
 title: Hochschild cochains, differential, and Gerstenhaber insertion bracket
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

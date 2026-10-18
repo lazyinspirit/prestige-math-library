@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-critical-standard-modules-are-simple
 kind: lemma
 title: "Critical complex Temperley–Lieb standard modules are simple"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

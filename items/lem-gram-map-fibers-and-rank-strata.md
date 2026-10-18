@@ -2,7 +2,7 @@
 id: lem-gram-map-fibers-and-rank-strata
 kind: lemma
 title: Gram-map image, full-rank fibers, and rank-stratum dimensions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

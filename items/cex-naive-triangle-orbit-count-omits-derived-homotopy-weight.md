@@ -2,7 +2,7 @@
 id: cex-naive-triangle-orbit-count-omits-derived-homotopy-weight
 kind: counterexample
 title: "Unweighted triangle-orbit counts miss the derived homotopy factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-it-finite-positive-square-root-is-order-preserving
 kind: lemma
 title: The finite positive square root preserves operator order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

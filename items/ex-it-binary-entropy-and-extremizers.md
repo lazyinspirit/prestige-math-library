@@ -2,7 +2,7 @@
 id: ex-it-binary-entropy-and-extremizers
 kind: example
 title: "Binary entropy and its extremizers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: alg-it-finite-alphabet-blahut-arimoto
 kind: algorithm
 title: "Finite-alphabet Blahut–Arimoto rate-distortion algorithm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

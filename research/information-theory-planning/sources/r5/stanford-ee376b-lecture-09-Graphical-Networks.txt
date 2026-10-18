@@ -1,0 +1,610 @@
+Lecture 
+Graphical Networks
+
+(Reading: NIT .–.)
+
+∙Graphical multicast network
+∙Max-flow min-cut theorem
+∙Network coding theorem
+∙Graphical multimessage network
+
+© Copyright –Abbas El Gamal and Young-Han Kim
+Graphical multicast network
+
+
+
+
+
+
+
+
+
+j
+
+k
+
+C
+
+C
+
+C
+N
+M
+̂MN
+
+̂Mj
+
+̂Mk
+∙Weighted directed acyclic graph G = (N , E, C)
+∙A (nR, n) code:
+
+㶳A message set [: nR]
+
+㶳Source encoder mj(m) ∈[: nCj]
+
+㶳Relay encoder k ∈[: N]: mkl(mjk: (j, k) ∈E) ∈[: nCkl]
+
+㶳Decoder k ∈D: ̂mk(mjk: (j, k) ∈E)
+∙P(n)
+e , achievability, and C: Defined as before
+
+/ 
+
+
+Cutset upper bound on C
+
+
+
+
+
+
+
+
+
+j
+
+k
+
+C
+
+C
+
+C
+N
+M
+
+̂Mj
+
+̂Mk
+
+̂M
+
+S
+Sc
+
+Theorem .
+
+C ≤min
+j∈D
+min
+S⊂N
+∈S, j∈Sc
+C(S),
+
+where C(S) = ∑k∈S, l∈Sc Ckl
+
+/ 
+Proof
+
+∙Consider a cut (S, Sc) and a destination node j ∈Sc
+
+∙For any (nR, n) code, ̂Mj is a function of M(S, Sc) = {Mkl: k ∈S, l ∈Sc}
+
+∙By Fano’s inequality,
+
+nR ≤I(M; ̂Mj) + nєn
+
+≤H( ̂Mj) + nєn
+≤H(M(S, Sc)) + nєn
+≤nC(S) + nєn
+
+∙Since the above holds for every cut and every destination, in the limit
+
+R ≤min
+j∈D
+min
+S⊂N
+∈S, j∈Sc
+C(S)
+
+/ 
+
+
+Capacity of graphical unicast network
+
+∙Unicast: D = {N}
+
+Theorem .(Max-flow min-cut theorem (Ford–Fulkerson ))
+
+C =
+min
+S⊂N
+∈S,N∈Sc
+C(S)
+
+∙Capacity is achieved error-free using routing with finite block length (NIT .)
+
+∙Information can be treated as a commodity
+
+∙Ford–Fulkerson algorithm finds capacity and optimal routing
+
+∙Continues to hold for networks with cycles and delays
+
+/ 
+Capacity of graphical unicast network
+
+∙Example:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+S
+Sc
+
+M
+̂M
+
+㶳C = 
+
+㶳Minimum cut: S = {, , , }
+
+㶳Achieved by routing bit along →→→and bits along →→→
+
+∙Cutset bound also achievable for multicast networks:
+
+㶳Not always achieved using only routing
+
+/ 
+
+
+Butterfly multicast network
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+̂M
+
+̂M
+
+M
+
+M
+
+M
+
+M
+
+M
+
+M
+
+M = (M, M)
+M⊕M
+M⊕M
+
+M⊕M
+
+∙Cutset bound: C ≤
+
+∙Routing achieves R = R+ R= 
+
+∙Achieving cutset bound requires network coding!
+
+Treating information as a commodity is not optimal in general
+
+/ 
+Capacity of graphical multicast network
+
+Network coding theorem (Ahlswede–Cai–Li–Yeung )
+
+C = min
+j∈D
+min
+S⊂N
+∈S,j∈Sc
+C(S)
+
+∙Achieved by random binning (Ahlswede–Cai–Li–Yeung )
+
+∙Also achieved error free using linear coding: Li–Yeung–Cai (),
+Koetter–M´edard () (NIT ..)
+
+∙Continues to hold for networks with broadcasting, cycles, and delays
+
+/ 
+
+
+Proof of achievability via binning: Unicast case
+
+∙Random codebook generation:
+
+㶳Source encoder: Generate gj(m) ∼Unif[: nCj] for each m ∈[: nR], e.g.,
+
+g(m) ∼Unif[: n]
+and
+g(m) ∼Unif[: n]
+
+㶳Relay encoder: Generate gkl(m∗k) ∼Unif[: nCkl] for each m∗k = (mjk: (j, k) ∈E), e.g.,
+
+g(m, m) ∼Unif[: n]
+
+㶳The mappings gjk, (j, k) ∈E, induce functions of m at every edge, e.g.,
+m(m) = g(g(m), g(g(m)))
+
+∙Encoding: To send message m, node j transmits mjk(m) over edge (j, k) ∈E
+
+/ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+M
+̂M
+
+
+
+
+
+
+
+
+M
+̂M
+
+g
+
+g
+
+g
+
+g
+
+g
+
+M
+
+Analysis of the probability of error
+
+∙Consider the probability of error averaged over M and (Gjk: (j, k) ∈E):
+
+P(E) = P{M ̸= ̂M}
+
+=
+
+nR 堈
+m
+P 恁M∗N(m) = M∗N( ̃m) for some ̃m ̸= m|M = m恑
+
+= P 恁M∗N() = M∗N( ̃m) for some ̃m ̸= 恑
+
+≤堈
+̃m̸=
+P 恁M∗N() = M∗N( ̃m)恑
+
+= (nR −) P 恁M∗N() = M∗N()恑
+
+∙Thus, it suffices to bound the collision probability P{M∗N() = M∗N()}
+
+/ 
+
+
+Collision probability
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+M
+̂M
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+M
+̂MM
+
+∙We decompose P{M∗N() = M∗N()} by different cuts (N = ):
+
+P 恁M∗() = M∗()恑= P 恁M∗() = M∗(), M∗() = M∗(), M∗() = M∗()恑
+
++ P 恁M∗() = M∗(), M∗() ̸= M∗(), M∗() = M∗()恑
+
++ P 恁M∗() = M∗(), M∗() = M∗(), M∗() ̸= M∗()恑
+
++ P 恁M∗() = M∗(), M∗() ̸= M∗(), M∗() ̸= M∗()恑
+∙No collision at node , collision at nodes , , :
+
+P 恁M∗() = M∗(), M∗() = M∗(), M∗() = M∗()恑
+
+P 恁(
+( )
+( ))
+(
+( )
+( ))恑
+
+/ 
+Proof of achievability: Multicast case
+
+∙We repeat the unicast argument for each destination j ∈D
+
+∙By the union of events bound,
+
+P(E) ≤堈
+
+j∈D
+N−
+
+n(minS:∈S,j∈Sc C(S)−R)
+
+≤|D|N−
+
+n(minj∈D minS:∈S,j∈Sc C(S)−R) ,
+
+which tends to as n →∞, if R < minj∈D minS:∈S,j∈Sc C(S)
+
+/ 
+
+
+Graphical multimessage network
+
+
+
+
+
+
+
+
+
+j
+
+k
+
+C
+
+C
+
+C
+N
+M
+
+M
+
+M
+
+̂MN
+
+( ̂Mj, ̂Mj)
+̂M
+
+̂M
+( ̂Mk, ̂Mk)
+∙Each node j ∈[: N −] wishes to send Mj to a set Dj ⊆[j + : N]
+∙A (nR, . . . , nRN−, n) code:
+
+㶳Message sets [: nR], . . . , [: nRN−]
+
+㶳Encoder k ∈[: N −]: mkl(mk, mjk: (j, k) ∈E)
+
+㶳Decoder l ∈∪jDj: ̂mjl(mkl: (k, l) ∈E) for j such that l ∈Dj
+∙P(n)
+e , achievability, and C : defined as before
+
+/ 
+Cutset bound for graphical multimessage network
+
+Theorem .
+
+If (R, . . . , RN−) is achievable, then
+
+堈
+
+j∈S
+Rj ≤C(S)
+
+for all S ⊂N such that Dj ∩Sc ̸= for some j ∈[: N −]
+
+∙Tight for multimessage multicast (Dj = D, j ∈[: N −])
+
+∙Will be later extended to noisy networks
+
+∙Not tight in general
+
+/ 
+
+
+Multimessage multicast
+
+Theorem .(Ahlswede–Cai–Li–Yeung )
+
+The capacity region is the set of (R, . . . , Rk) such that
+
+堈
+
+j∈S
+Rj ≤C(S)
+
+for all S ⊂N with [: k] ∩S ̸= and D ∩Sc ̸= 
+
+∙Key idea: augmented single-message multicast network (Read NIT ..)
+
+
+
+
+
+
+k
+
+R
+R
+
+Rk
+
+M
+
+G
+
+G㰀
+
+/ 
+Multiple unicast
+
+∙Routing is insufficient: Consider the following example (Cjk = )
+
+
+
+
+
+
+
+
+
+
+
+
+M
+
+M
+
+̂M
+
+̂M
+∙Cutset bound is not tight: Consider the following example (Cjk = )
+
+
+
+
+
+
+
+
+
+
+
+
+M
+
+M
+
+̂M
+
+̂M
+∙Capacity is not known in general
+
+/ 
+
+
+Summary
+
+∙Cutset bounds on the capacity of graphical networks
+
+∙Max-flow min-cut theorem for graphical unicast networks
+
+∙Routing alone does not achieve the capacity of general graphical networks
+
+∙Network coding theorem for graphical multicast networks
+
+∙Linear network coding achieves the capacity of graphical multimessage
+multicast networks (error-free and with finite block length)
+
+/ 
+References
+
+Ahlswede, R., Cai, N., Li, S.-Y. R., and Yeung, R. W. (). Network information flow. IEEE Trans. Inf. Theory,
+(), –.
+
+Ford, L. R., Jr. and Fulkerson, D. R. (). Maximal flow through a network. Canad. J. Math., (), –.
+
+Koetter, R. and M´edard, M. (). An algebraic approach to network coding. IEEE/ACM Trans. Netw., (),
+–.
+
+Li, S.-Y. R., Yeung, R. W., and Cai, N. (). Linear network coding. IEEE Trans. Inf. Theory, (), –.
+
+/ 
+
+

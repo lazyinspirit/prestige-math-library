@@ -16,8 +16,6 @@ axiom_use: No choice principle is used; the update is a finite exact-arithmetic 
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §6.2

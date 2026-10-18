@@ -2,7 +2,7 @@
 id: ex-ell-three-framing-anomaly-and-kirby-blowup
 kind: example
 title: "The ell=3 framing anomaly and Kirby blow-up"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 15

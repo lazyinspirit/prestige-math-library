@@ -2,7 +2,7 @@
 id: ex-codimension-typed-defect-composition
 kind: example
 title: Typed object, 1-morphism, and 2-morphism defect composition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

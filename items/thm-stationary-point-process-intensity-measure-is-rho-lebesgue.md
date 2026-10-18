@@ -25,8 +25,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 2, §2.4, PDF pp.35–37: stationary mean and second-moment measures."
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

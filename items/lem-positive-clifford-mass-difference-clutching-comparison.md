@@ -2,7 +2,7 @@
 id: lem-positive-clifford-mass-difference-clutching-comparison
 kind: lemma
 title: Positive Clifford mass differences give the actual KO classes
-status: draft
+status: published
 dependency_level: 17
 origin: pipeline
 page: real-clifford-modules-ko-and-abs-orientations

@@ -2,7 +2,7 @@
 id: thm-discrete-memoryless-channel-average-error-converse
 kind: theorem
 title: "Reliable average-error DMC rates do not exceed capacity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

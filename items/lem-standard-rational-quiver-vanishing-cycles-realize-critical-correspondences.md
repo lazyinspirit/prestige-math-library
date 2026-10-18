@@ -2,7 +2,7 @@
 id: lem-standard-rational-quiver-vanishing-cycles-realize-critical-correspondences
 kind: lemma
 title: "Standard rational quiver vanishing cycles realize the critical coefficient package"
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

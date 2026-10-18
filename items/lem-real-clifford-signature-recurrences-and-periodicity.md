@@ -2,7 +2,7 @@
 id: lem-real-clifford-signature-recurrences-and-periodicity
 kind: lemma
 title: "Real Clifford signature recurrences and eightfold periodicity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-complex-clifford-classification-and-graded-products

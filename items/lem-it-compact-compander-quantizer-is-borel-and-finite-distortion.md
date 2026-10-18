@@ -2,7 +2,7 @@
 id: lem-it-compact-compander-quantizer-is-borel-and-finite-distortion
 kind: lemma
 title: The compact compander is a measurable finite quantizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

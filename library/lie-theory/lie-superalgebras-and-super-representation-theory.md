@@ -1,7 +1,7 @@
 ---
 page: lie-superalgebras-and-super-representation-theory
 title: "Lie Superalgebras and Super-Representations"
-status: draft
+status: published
 items:
   - def-associative-superalgebra-over-complex-numbers
   - def-lie-superalgebra-over-complex-numbers

@@ -36,8 +36,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 3, §3.2, PDF pp.44–47: Campbell measure and Palm interpretation, used as an independent conceptual treatment."
-verification:
-  precheck: pending
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: quantum-relative-entropy-data-processing-and-strong-subadditivity
 title: Quantum Relative Entropy, Data Processing, and Strong Subadditivity
-status: draft
+status: published
 items:
   - lem-it-finite-weyl-twirl-partial-trace
   - thm-it-finite-strong-subadditivity

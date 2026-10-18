@@ -2,7 +2,7 @@
 id: lem-it-cover-elgamal-salehi-conditional-packing
 kind: lemma
 title: Conditional type packing bounds for source-indexed DM-MAC codebooks
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

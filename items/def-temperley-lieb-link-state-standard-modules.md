@@ -2,7 +2,7 @@
 id: def-temperley-lieb-link-state-standard-modules
 kind: definition
 title: "Temperley–Lieb link-state standard modules by defect number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-modc-of-braided-fusion-category-is-fusion-two-category
 kind: theorem
 title: The algebraic 2-category Mod(C) is a fusion 2-category
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

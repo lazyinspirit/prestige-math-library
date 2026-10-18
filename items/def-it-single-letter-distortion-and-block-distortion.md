@@ -2,7 +2,7 @@
 id: def-it-single-letter-distortion-and-block-distortion
 kind: definition
 title: "Single-letter and block distortion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

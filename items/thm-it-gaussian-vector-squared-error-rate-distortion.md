@@ -2,7 +2,7 @@
 id: thm-it-gaussian-vector-squared-error-rate-distortion
 kind: theorem
 title: "Finite-dimensional Gaussian vector squared-error rate-distortion function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

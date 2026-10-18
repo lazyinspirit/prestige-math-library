@@ -1,7 +1,7 @@
 ---
 page: dg-and-homological-algebra-foundations-examples
 title: "Differential Graded Algebras and Homological Foundations: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-polynomial-forms-on-the-line-form-a-differential-graded-algebra

@@ -2,7 +2,7 @@
 id: def-clifford-module-restriction-cokernel-a-n
 kind: definition
 title: "Clifford-module restriction cokernels A_n"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations

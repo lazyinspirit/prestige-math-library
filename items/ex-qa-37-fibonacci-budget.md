@@ -2,7 +2,7 @@
 id: ex-qa-37-fibonacci-budget
 kind: example
 title: "Fibonacci SK level and symbolic gate budget"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 16

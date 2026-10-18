@@ -2,7 +2,7 @@
 id: def-unital-associative-algebra-representation
 kind: definition
 title: Representations of unital associative algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

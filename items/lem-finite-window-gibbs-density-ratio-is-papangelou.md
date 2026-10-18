@@ -28,8 +28,6 @@ sources:
     - title: "Günter Last and Mathew Penrose, Lectures on the Poisson Process, author-hosted 2017 version"
       url: "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
       locator: "Chapter 4, Theorem 4.1 and finite-intensity proof, PDF pp. 39–43: Mecke identity and mixed-binomial reindexing."
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

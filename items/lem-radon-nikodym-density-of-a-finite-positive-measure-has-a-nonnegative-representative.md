@@ -34,7 +34,7 @@ sources:
     - title: "Richard F. Bass, Real Analysis for Graduate Students, Theorem 13.4 and proof, §13.2 (book pp. 100–103)"
       url: "https://www.math.wustl.edu/~victor/classes/ma5051/rags100514.pdf"
     - title: "John K. Hunter, Measure Theory, Theorem 6.27 and proof, §6.8 (notes pp. 75–77)"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement

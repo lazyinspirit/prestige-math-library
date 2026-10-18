@@ -1,7 +1,7 @@
 ---
 page: relay-and-interference-channel-bounds-examples
 title: "Relay and Interference Channel Bounds — Examples"
-status: draft
+status: published
 requires:
   - relay-and-interference-channel-bounds
 items: []

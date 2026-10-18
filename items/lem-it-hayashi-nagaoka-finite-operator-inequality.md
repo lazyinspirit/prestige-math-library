@@ -2,7 +2,7 @@
 id: lem-it-hayashi-nagaoka-finite-operator-inequality
 kind: lemma
 title: Finite Hayashi–Nagaoka operator inequality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

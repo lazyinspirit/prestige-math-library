@@ -1,7 +1,7 @@
 ---
 page: heisenberg-and-algebraic-weyl-algebras
 title: "Heisenberg Lie Algebras and Polynomial Weyl Algebras"
-status: draft
+status: published
 items:
   - def-heisenberg-lie-algebra
   - def-polynomial-weyl-algebra

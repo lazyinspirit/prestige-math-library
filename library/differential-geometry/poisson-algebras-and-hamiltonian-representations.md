@@ -1,7 +1,7 @@
 ---
 page: poisson-algebras-and-hamiltonian-representations
 title: "Poisson Algebras, Symplectic Brackets, and Hamiltonian Actions"
-status: draft
+status: published
 items:
   - def-symplectic-comoment-map-and-hamiltonian-observable-action
   - prop-comoment-maps-act-on-observables-by-poisson-derivations

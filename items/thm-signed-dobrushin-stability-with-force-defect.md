@@ -28,8 +28,6 @@ axiom_use: AC supplies the Jordan parts. Countable Choice is used for the cited 
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: François Golse, Mean-Field Limits in Statistical Dynamics, Lecture 1

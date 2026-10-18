@@ -2,7 +2,7 @@
 id: lem-finite-loopless-quiver-nilpotent-category-is-hereditary-finitary
 kind: lemma
 title: "Finite loopless quiver nilpotent representation categories are hereditary and finitary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

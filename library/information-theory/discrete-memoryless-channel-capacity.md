@@ -1,7 +1,7 @@
 ---
 page: discrete-memoryless-channel-capacity
 title: "Discrete Memoryless Channel Capacity"
-status: draft
+status: published
 requires: [f-divergences-renyi-and-hypothesis-testing]
 items:
   - def-channel-sequence

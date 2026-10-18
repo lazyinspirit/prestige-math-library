@@ -2,7 +2,7 @@
 id: rem-general-maurer-cartan-deformation-correspondence-needs-gauge-data
 kind: remark
 title: "The general Maurer–Cartan deformation correspondence needs a proved gauge construction"
-status: draft
+status: published
 dependency_level: 12
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

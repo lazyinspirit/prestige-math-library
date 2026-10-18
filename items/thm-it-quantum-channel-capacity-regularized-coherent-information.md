@@ -2,7 +2,7 @@
 id: thm-it-quantum-channel-capacity-regularized-coherent-information
 kind: theorem
 title: Regularized coherent-information formula for quantum capacity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

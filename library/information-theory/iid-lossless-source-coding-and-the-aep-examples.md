@@ -1,7 +1,7 @@
 ---
 page: iid-lossless-source-coding-and-the-aep-examples
 title: "IID Lossless Source Coding and the AEP — Examples"
-status: draft
+status: published
 requires:
   - iid-lossless-source-coding-and-the-aep
 items: []

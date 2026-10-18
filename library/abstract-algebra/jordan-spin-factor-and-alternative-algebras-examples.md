@@ -1,7 +1,7 @@
 ---
 page: jordan-spin-factor-and-alternative-algebras-examples
 title: "Jordan Algebras, Spin Factors, and Alternative Examples: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [cex-special-jordan-product-need-not-be-associative,
            cex-self-adjoint-part-need-not-be-associative-subalgebra,

@@ -2,7 +2,7 @@
 id: thm-pa36-flag-d-affinity
 kind: theorem
 title: Antidominant twists are D-affine and regular ones are conservative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-rank-one-heisenberg-jordan-module-is-logarithmic
 kind: example
 title: "An explicit logarithmic conformal Heisenberg module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

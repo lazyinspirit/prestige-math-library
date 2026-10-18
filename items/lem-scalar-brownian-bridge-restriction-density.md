@@ -20,8 +20,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Dario Gasbarra, Tommi Sottinen, and Esko Valkeila, Gaussian Bridges, §1, equation (1.3), and §2.3, equation (2.6)"

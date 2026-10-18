@@ -2,7 +2,7 @@
 id: thm-root-of-unity-lusztig-module-category-is-braided-rigid
 kind: theorem
 title: "The full toral-weight root category is braided, rigid and spherical"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

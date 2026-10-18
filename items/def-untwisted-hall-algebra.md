@@ -2,7 +2,7 @@
 id: def-untwisted-hall-algebra
 kind: definition
 title: "The untwisted Hall algebra of a finitary abelian category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: hopf-hecke-and-quantum-symmetry-interfaces-examples
 title: "Hopf, Hecke, Quantum-Group, and Braid Interfaces: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-hh-rational-spectral-r-matrix-singular-parameters, ex-hh-rank-one-hecke-specializations-at-q-i]
 ---

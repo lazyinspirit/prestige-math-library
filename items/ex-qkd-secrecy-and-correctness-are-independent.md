@@ -2,7 +2,7 @@
 id: ex-qkd-secrecy-and-correctness-are-independent
 kind: example
 title: Secrecy and correctness are separate requirements
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

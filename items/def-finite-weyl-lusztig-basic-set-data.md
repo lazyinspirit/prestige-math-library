@@ -2,7 +2,7 @@
 id: def-finite-weyl-lusztig-basic-set-data
 kind: definition
 title: "Finite-Weyl Lusztig data and the precise basic-set hypotheses"
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

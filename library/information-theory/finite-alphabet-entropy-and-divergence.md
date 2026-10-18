@@ -1,7 +1,7 @@
 ---
 page: finite-alphabet-entropy-and-divergence
 title: "Finite-Alphabet Entropy and Divergence"
-status: draft
+status: published
 requires:
   - probability-spaces-random-variables-and-expectation
   - quantum-communication-and-fingerprinting

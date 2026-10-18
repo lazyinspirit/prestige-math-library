@@ -2,7 +2,7 @@
 id: lem-qc-tqc-pu2-is-so3
 kind: lemma
 title: The projective one-qubit group is SO(3)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

@@ -1,7 +1,7 @@
 ---
 page: higher-categorical-symmetry-and-defect-algebras
 title: Higher Categorical Symmetries and Defect Algebras
-status: draft
+status: published
 items:
 - def-finite-semisimple-module-category-over-fusion-category
 - def-g-graded-two-vector-space

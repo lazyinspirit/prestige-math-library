@@ -2,7 +2,7 @@
 id: lem-hall-and-dj-borel-conventions-are-isomorphic
 kind: lemma
 title: "The extended Green and repository Drinfeld–Jimbo coproduct conventions agree on simple generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 10

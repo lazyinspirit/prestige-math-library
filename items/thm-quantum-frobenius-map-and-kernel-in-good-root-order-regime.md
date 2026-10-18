@@ -2,7 +2,7 @@
 id: thm-quantum-frobenius-map-and-kernel-in-good-root-order-regime
 kind: theorem
 title: Quantum Frobenius and its kernel in the good odd-order regime
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

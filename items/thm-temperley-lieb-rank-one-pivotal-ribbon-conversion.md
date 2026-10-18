@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-rank-one-pivotal-ribbon-conversion
 kind: theorem
 title: "The rank-one tilting quotient matches the Temperley-Lieb ribbon convention"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

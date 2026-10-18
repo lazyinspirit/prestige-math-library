@@ -2,7 +2,7 @@
 id: lem-prefix-codes-are-uniquely-decodable
 kind: lemma
 title: "Every finite binary prefix code is uniquely decodable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

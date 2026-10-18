@@ -2,7 +2,7 @@
 id: lem-unsuspended-a-infinity-identities-are-tensor-codifferentials
 kind: lemma
 title: "Unsuspended A∞ identities are tensor codifferentials with explicit suspension signs"
-status: draft
+status: published
 dependency_level: 3
 origin: session
 deps:

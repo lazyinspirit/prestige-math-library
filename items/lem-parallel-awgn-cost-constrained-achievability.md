@@ -2,7 +2,7 @@
 id: lem-parallel-awgn-cost-constrained-achievability
 kind: lemma
 title: Strictly feasible Gaussian inputs yield cost-feasible Gaussian codes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-real-pin-spin-image-kernel-and-compactness
 kind: theorem
 title: Real Pin and full-even Spin images, kernels, and definite compactness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations

@@ -2,7 +2,7 @@
 id: ex-it-wyner-ziv-lossless-slepian-wolf-endpoint
 kind: example
 title: "Lossless Wyner-Ziv endpoint is the Slepian-Wolf rate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

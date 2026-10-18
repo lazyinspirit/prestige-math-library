@@ -2,7 +2,7 @@
 id: ex-two-object-discrete-groupoid-is-a-weak-hopf-algebra
 kind: example
 title: "The algebra of a two-object discrete groupoid is weak Hopf"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-qkd-finite-authenticated-protocol
 kind: definition
 title: Finite authenticated key-distribution protocol
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

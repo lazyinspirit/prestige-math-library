@@ -2,7 +2,7 @@
 id: lem-it-dmc-dispersion-attains-minimum
 kind: lemma
 title: DMC minimum and maximum dispersion are attained
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

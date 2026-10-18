@@ -2,7 +2,7 @@
 id: lem-qa-37-product-error
 kind: lemma
 title: "Operator error adds under finite unitary products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

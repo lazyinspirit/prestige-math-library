@@ -2,7 +2,7 @@
 id: rem-derived-and-cohomological-hall-are-distinct
 kind: remark
 title: Derived and cohomological Hall algebras are distinct constructions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

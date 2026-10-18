@@ -2,7 +2,7 @@
 id: lem-quiver-potential-trace-is-additive-on-extensions
 kind: lemma
 title: "A quiver potential trace is additive on exact sequences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

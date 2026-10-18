@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-general-theta-net-evaluation
 kind: lemma
 title: "General Temperley–Lieb theta-net evaluation and its root domain"
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

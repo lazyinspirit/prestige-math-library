@@ -23,7 +23,7 @@ sources:
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, Proposition 7.23"
       url: "https://measure.axler.net/MIRA.pdf"
     - title: "John K. Hunter, Measure Theory, Corollary 7.11"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement

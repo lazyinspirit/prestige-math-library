@@ -2,7 +2,7 @@
 id: ex-pa36-verma-delta-rho-shift
 kind: example
 title: A point-supported SL2 module gives the shifted Verma module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

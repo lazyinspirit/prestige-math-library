@@ -2,7 +2,7 @@
 id: thm-real-gaussian-multicast-noisy-network-coding-inner-bound
 kind: theorem
 title: Noise-level noisy-network-coding inner bound for real Gaussian multicast networks
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

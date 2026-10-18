@@ -2,7 +2,7 @@
 id: def-real-ko-and-ksp-grothendieck-groups
 kind: definition
 title: Real and quaternionic bundle K-groups
-status: draft
+status: published
 origin: pipeline
 page: real-clifford-modules-ko-and-abs-orientations
 deps:

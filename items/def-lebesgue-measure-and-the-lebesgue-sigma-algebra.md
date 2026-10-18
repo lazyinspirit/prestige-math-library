@@ -23,7 +23,7 @@ sources:
   scraped: []
   references:
     - title: "John K. Hunter, Measure Theory (UC Davis lecture notes), Definition 2.10"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
     - title: "E. A. Carlen, Notes on Lebesgue Measure on $\\mathbb{R}^n$ and $S^{n-1}$ (Rutgers Math 501), Section 1"
       url: "https://sites.math.rutgers.edu/~carlen/501F13/LebesgueMeas.pdf"
 pipeline_run: null

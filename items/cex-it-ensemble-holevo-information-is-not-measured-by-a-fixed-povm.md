@@ -2,7 +2,7 @@
 id: cex-it-ensemble-holevo-information-is-not-measured-by-a-fixed-povm
 kind: counterexample
 title: A fixed POVM need not attain ensemble Holevo information
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

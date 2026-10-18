@@ -3,7 +3,7 @@ id: lem-rational-cherednik-costandard-orthogonality-and-character
 kind: lemma
 title: "Cherednik costandards have orthogonality and the standard character"
 deps: [thm-rational-cherednik-pbw-theorem, def-rational-cherednik-standard-module, lem-rational-cherednik-category-o-has-finite-length]
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

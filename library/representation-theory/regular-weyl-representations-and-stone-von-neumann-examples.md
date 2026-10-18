@@ -1,7 +1,7 @@
 ---
 page: regular-weyl-representations-and-stone-von-neumann-examples
 title: "Regular Weyl Representations and Uniqueness: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - regular-weyl-representations-and-stone-von-neumann
 items: []

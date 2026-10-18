@@ -2,7 +2,7 @@
 id: thm-real-clifford-thom-isomorphism
 kind: theorem
 title: Real Clifford–Thom isomorphism
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

@@ -2,7 +2,7 @@
 id: ex-rank-four-spin-thom-coefficient-is-ksp
 kind: example
 title: Rank four mod eight has KSp as the unshifted source
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations-examples

@@ -2,7 +2,7 @@
 id: lem-normalized-pin-spin-product-and-norm-laws
 kind: lemma
 title: Normalized Pin products and Clifford norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations

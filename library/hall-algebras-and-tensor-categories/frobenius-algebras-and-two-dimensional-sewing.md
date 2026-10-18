@@ -1,7 +1,7 @@
 ---
 page: frobenius-algebras-and-two-dimensional-sewing
 title: "Frobenius Algebras and Oriented Two-Dimensional Sewing"
-status: draft
+status: published
 requires:
   - algebraic-representation-and-tensor-symmetry-map
   - finite-hopf-integrals-frobenius-duality-and-maschke

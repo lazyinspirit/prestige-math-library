@@ -1,0 +1,910 @@
+Lecture 
+General Multihop Networks
+
+(Reading: NIT .–., .)
+
+∙DM multicast network
+∙Network decode–forward
+∙Noisy network coding
+∙Gaussian network
+
+© Copyright –Abbas El Gamal and Young-Han Kim
+Discrete memoryless multicast network
+
+p(y, . . . , yN|x, . . . , xN)
+M
+
+̂Mj
+
+̂Mk
+
+̂MN
+
+
+
+
+
+
+j
+
+k
+
+N
+D
+
+∙N-node DM multicast network (DM-MN) (⨉N
+j=Xj, p(yN|xN), ⨉N
+j=Yj)
+
+∙A (nR, n) code:
+
+㶳Message set: [: nR]
+
+㶳Source encoder: xi(m, yi−
+), i ∈[: n]
+
+㶳Relay encoder j ∈[: N]: xji(yi−
+j ), i ∈[: n]
+
+㶳Decoder k ∈D: ̂mk(yn
+k)
+∙P(n)
+e , achievability, and the capacity C defined as before
+
+/ 
+
+
+Discrete memoryless multicast network
+
+p(y, . . . , yN|x, . . . , xN)
+M
+
+̂Mj
+
+̂Mk
+
+̂MN
+
+
+
+
+
+
+j
+
+k
+
+N
+D
+
+∙Special case:
+
+㶳Graphical multicast networks: DMN decomposes into orthogonal DMCs
+
+㶳DM-RC: N = , X= Y= , and D = {}
+
+㶳DMC with feedback: N = , Y= Y, X= , and D = {}
+
+㶳DM unicast network: D = {N}
+
+㶳Common-message DM-BC: X= ⋅⋅⋅= XN = Y= and D = [: N]
+∙Capacity of the DM-MN is not known in general (e.g., DM-RC)
+∙We discuss upper and lower bounds that are tight in some cases
+
+/ 
+Cutset upper bound
+
+∙Cutset bounds for graphical networks and the RC can be generalized to DM-MN
+
+p(y, . . . , yN|x, . . . , xN)
+M
+
+̂Mj
+
+̂Mk
+
+̂MN
+
+
+
+
+
+
+j
+
+k
+
+N
+D
+
+S
+Sc
+
+Theorem .(Cutset upper bound) (El Gamal )
+
+C ≤max
+p(xN) min
+k∈D
+min
+S:∈S, k∈Sc I(X(S); Y(Sc)|X(Sc)),
+
+where X(S) = {Xj : j ∈S}, ...
+
+/ 
+
+
+Network decode–forward
+
+∙Decode–forward for RC can be extended to DM-MN
+
+Mj
+
+Mj−
+
+Mj
+Mj−
+
+̂Mj−
+X
+
+Y:X
+Y:X
+
+Y
+
+Theorem .(Xie–Kumar , Kramer–Gastpar–Gupta )
+
+C ≥max
+p(xN)
+min
+k∈[:N−] I(Xk; Yk+|XN
+k+)
+
+∙Tight for degraded DM-MN, p(yN
+k+|xN, yk+) = p(yN
+k+|xN
+k+, yk+), k ∈[: N −]
+∙Holds for any D ⊆[: N]
+∙Can be improved by removing some relay nodes and relabeling nodes
+
+/ 
+Proof of achievability (for DM-RC)
+
+∙Key idea: sliding window decoding (Carleial )
+∙Codebook generation, encoding, and relay encoding: Same as for DF
+
+Block
+
+
+
+⋅⋅⋅
+b −
+b
+
+X
+xn
+(m|)
+xn
+(m|m)
+xn
+(m|m)
+⋅⋅⋅
+xn
+(mb−|mb−)
+xn
+(|mb−)
+
+Y
+̃m
+̃m
+̃m
+⋅⋅⋅
+̃mb−
+
+
+X
+xn
+()
+xn
+( ̃m)
+xn
+( ̃m)
+⋅⋅⋅
+xn
+( ̃mb−)
+xn
+( ̃mb−)
+
+Y
+
+̂m
+̂m
+⋅⋅⋅
+̂mb−
+̂mb−
+
+∙Successful relay decoding: R < I(X; Y|X) −δ(є)
+∙Decoding:
+
+㶳At the end of block j + , find the unique ̂mj such that:
+
+(xn
+( ̂mj| ̂mj−), xn
+( ̂mj−), yn
+(j)) ∈T (n)
+є
+and (xn
+( ̂mj), yn
+(j + )) ∈T (n)
+є
+simultaneously
+
+㶳Assuming ̂mj−is correct, successful if R < I(X, X; Y) −δ(є)
+
+/ 
+
+
+Noisy network coding
+
+∙Compress–forward for DM-RC can be extended to DM-MN
+
+Theorem .
+
+C ≥max min
+k∈D
+min
+S:∈S,k∈Sc怡I(X(S); ̂Y(Sc), Yk|X(Sc)) −I(Y(S); ̂Y(S)|XN, ̂Y(Sc), Yk)怱,
+
+where the maximum is over all ∏N
+k=p(xk)p(̂yk|yk, xk)
+
+∙Comparison to the cutset bound
+
+C ≤max
+p(xN) min
+k∈D
+min
+S:∈S, k∈Sc I(X(S); Y(Sc)|X(Sc))
+
+㶳Compressed version ̂Y(Sc) instead of Y(Sc)
+
+㶳Rate penalty for conveying the compressed version
+
+㶳Maximum over product pmfs
+
+/ 
+Deterministic multicast network
+
+X
+
+X
+
+X
+X
+
+X
+
+X
+X
+X
+
+XN
+
+XN
+
+XN
+XN
+
+Y
+Y
+
+Yk
+
+YN
+g
+g
+
+gk
+
+gN
+
+∙Cutset bound reduces to:
+
+C ≤max
+p(xN) min
+k∈D
+min
+S:∈S,k∈Sc H(Y(Sc)|X(Sc))
+
+∙Lower bound (Avestimehr–Diggavi–Tse ): Use NNC with ̂Yk = Yk
+
+C ≥
+max
+∏N
+k=p(xk)
+min
+k∈D
+min
+S:∈S,k∈Sc H(Y(Sc)|X(Sc))
+
+∙This bound (hence NNC) is tight for:
+
+㶳Graphical MN (Ahlswede–Cai–Li–Yeung ) with feedback and broadcasting
+
+㶳Deterministic MN with no interference (Ratnakar–Kramer )
+
+㶳Finite-field deterministic MN (Avestimehr–Diggavi–Tse )
+
+/ 
+
+
+Wireless erasure multicast network
+
+
+
+
+
+
+
+
+
+j
+
+k
+
+N
+
+e
+
+e
+e
+
+e
+
+e
+
+M
+
+̂Mj
+
+̂Mk
+
+̂MN
+
+∙Hypergraph with node k broadcasting Xk and receiving Yk = (Ykj), where
+
+Ykj = 恇e
+with probability pkj,
+Xj
+with probability −pkj
+∙Capacity (Dana–Gowaikar–Palanki–Hassibi–Effros ): Cutset = NNC
+
+C = min
+j∈D
+min
+S:∈S,j∈Sc
+堈
+
+k∈S:Nk∩Sc̸=
+急−
+堉
+
+l∈Nk∩Sc
+plk怵Ck
+
+/ 
+Achievability of NNC lower bound (for DM-RC)
+
+∙We use several new ideas beyond compress–forward for DM-RC
+
+㶳Sender: Transmission of same message m ∈[: nbR] over b blocks
+
+㶳Relays: Compression of Yn
+j by ̂Yn
+j without binning
+
+㶳Receivers: Simultaneous nonunique decoding of message and all compression indices
+
+∙Codebook generation:
+
+㶳Fix p(x)p(x)p(̂y|y, x) that attains the lower bound
+
+㶳For each j ∈[: b], generate nbR sequences xn
+(j, m) ∼∏n
+i=pX(xi), m ∈[: nbR]
+
+㶳Generate nRsequences xn
+(lj−) ∼∏n
+i=pX(xi), lj−∈[: nR]
+
+㶳For each lj−∈[: nR], conditionally independently generate nRsequences
+
+̂yn
+(lj|lj−) ∼∏n
+i=p̂Y|X(̂yi|xi(lj−)), lj ∈[: nR]
+
+∙Cj = {(xn
+(j, m), xn
+(lj−), ̂yn
+(lj|lj−)): m ∈[: nbR], lj−, lj ∈[: nR]}, j ∈[: b]
+
+∙Encoding:
+
+㶳To send m ∈[: nbR], transmit xn
+(j, m) in block j
+
+/ 
+
+
+Achievability of NNC lower bound (for DM-RC)
+
+Block
+
+
+
+⋅⋅⋅
+b −
+b
+
+X
+xn
+(, m)
+xn
+(, m)
+xn
+(, m)
+⋅⋅⋅
+xn
+(b −, m)
+xn
+(b, m)
+
+Y
+̂yn
+(l|), l
+̂yn
+(l|l), l
+̂yn
+(l|l), l
+⋅⋅⋅
+̂yn
+(lb−|lb−), lb−
+̂yn
+(lb|lb−), lb
+
+X
+xn
+()
+xn
+(l)
+xn
+(l)
+⋅⋅⋅
+xn
+(lb−)
+xn
+(lb−)
+
+Y
+
+
+
+⋅⋅⋅
+
+̂m
+
+∙Relay encoding:
+
+㶳At the end of block j, find lj such that (yn
+(j), ̂yn
+(lj|lj−), xn
+(lj−)) ∈T (n)
+є㰀
+(by covering lemma successful if R> I(Y; ̂Y|X) + δ(є㰀))
+
+㶳In block j + , transmit xn
+(lj)
+
+∙Decoding:
+
+㶳At the end of block b, find the unique ̂m such that
+
+(xn
+(j, ̂m), xn
+(lj−), ̂yn
+(lj|lj−), yn
+(j)) ∈T (n)
+є
+for all j ∈[: b] for some l, l, . . . , lb
+(successful if R < min{I(X; ̂Y, Y|X), I(X, X; Y) + I(̂Y; X, Y|X) −R})
+
+/ 
+Extension to multiple messages
+
+∙Node j ∈[: N] sends Mj to Dj ⊆[: N]
+
+∙Cutset bound can be extended
+
+Theorem .
+
+If (R, . . . , RN) is achievable, then
+
+堈
+
+j∈S:Dj∩Sc̸=
+Rj ≤I(X(S); Y(Sc)|X(Sc))
+
+for all S ⊂[: N] such that Sc ∩⋃j∈S Dj ̸= for some pmf p(xN)
+
+∙NNC can be extended via interference channel schemes (NIT .)
+
+/ 
+
+
+Gaussian multimessage network
+
+∙N-node Gaussian network: YN = GXN + ZN
+
+㶳ZN: i.i.d. N(, )
+
+㶳G ∈ℝN×N: the channel gain matrix (gain Gjk from k to j)
+
+㶳Average power constraint P on each sender
+
+Theorem .(Cutset bound)
+
+If (R, . . . , RN) is achievable, then
+
+堈
+
+j∈S:Dj∩Sc̸=
+Rj ≤
+
+log |I + G(S)K(S|Sc)GT(S)|
+
+for all S such that Sc ∩⋃j∈S Dj ̸= for some K ⪰with Kjj ≤P, j ∈[: N]
+
+Notation:
+
+恥Y(S)
+Y(Sc)恵= 恥G㰀(S)
+G(Sc)
+G(S)
+G㰀(Sc)恵恥X(S)
+X(Sc)恵+ 恥Z(S)
+Z(Sc)恵
+
+K(S|Sc): conditional covariance matrix of X(S) given X(Sc)
+
+/ 
+Multimessage multicast
+
+∙Suppose Dj = D, j ∈[: N]
+
+∙Cutset bound: If (R, . . . , RN) is achievable, then
+
+堈
+
+j∈S
+Rj ≤
+
+log 儨儨儨儨儨儨I + P
+
+G(S)GT(S)儨儨儨儨儨儨+ N
+
+log 
+
+∙Noisy network coding: (R, . . . , RN) is achievable if
+
+堈
+
+j∈S
+Rj < 
+
+log 儨儨儨儨儨儨I + P
+
+G(S)GT(S)儨儨儨儨儨儨−N
+
+
+
+(set ̂Yk = Yk + ̂Zk, where ̂Zk ∼N(, ))
+
+Theorem .(Constant gap)
+
+If (R, . . . , RN) is in the cutset bound, then (R−Δ, . . . , RN −Δ), where
+Δ = (N/) log , is achievable via NNC
+
+/ 
+
+
+Example: Gaussian two-way relay channel
+
+X
+X
+
+X
+
+Y
+Y
+
+Y
+
+Z
+Z
+
+Z
+
+g
+g
+
+g
+g
+
+∙Z, Z, Z∼N(, ) independent of each other
+∙Power constraints P on each sender
+∙SNRs: Sjk = g
+jkP
+∙Nodes and wish to exchange Mand M
+
+/ 
+Example: Gaussian two-way relay channel
+
+X
+X
+
+X
+
+Y
+Y
+
+Y
+
+Z
+Z
+
+Z
+
+g
+g
+
+g
+g
+
+∙Capacity region is not known in general
+
+∙Cutset bound: If (R, R) is achievable, then
+
+R≤min{C(S), C(S)},
+
+R≤min{C(S), C(S)}
+
+/ 
+
+
+Example: Gaussian two-way relay channel
+
+X
+X
+
+Y
+Y
+
+Y
+
+Z
+Z
+
+Z
+
+g
+g
+
+g
+g
+
+X( ̂M, ̂M)
+
+∙Decode–forward inner bound: (R, R) is achievable if
+
+R< min{C(S), C(S)},
+R< min{C(S), C(S)},
+
+R+ R< C(S+ S)
+
+/ 
+Example: Gaussian two-way relay channel
+
+X
+X
+
+Y
+Y
+
+Y
+
+Z
+Z
+
+Z
+
+g
+g
+
+g
+g
+
+X∝Y
+
+∙Amplify–forward inner bound: X∝Y; (R, R) is achievable if
+
+R< C 急
+SS
++ S+ S+ S
+怵,
+
+R< C 急
+SS
++ S+ S+ S
+怵
+
+/ 
+
+
+Example: Gaussian two-way relay channel
+
+X
+X
+
+Y
+Y
+
+Y
+
+Z
+Z
+
+Z
+
+g
+g
+
+g
+g
+
+X(̂Y)
+
+∙Noisy network coding inner bound: (R, R) is achievable if
+
+R< min{C(S/(+ σ)), C(S) −C(/σ)},
+
+R< min{C(S/(+ σ)), C(S) −C(/σ)}
+
+㶳Achieves the capacity region within /-bit per dimension
+㶳DF and AF have unbounded gap
+
+/ 
+Example
+
+X
+X
+
+X
+
+Y
+Y
+
+Y
+
+Z
+Z
+
+Z
+
+r−/
+(−r)−/
+
+r−/
+(−r)−/
+
+
+
+
+
+r
+
+
+
+/ 
+
+
+Comparison of the bounds on the sum-capacity
+
+ 2.5
+
+ 3
+
+ 3.5
+
+ 4
+
+ 4.5
+
+ 5
+
+ 5.5
+
+ 6
+
+ 6.5
+
+ 0
+ 0.1
+ 0.2
+ 0.3
+ 0.4
+ 0.5
+r
+
+RCS
+
+RAF
+
+RDF
+
+RNNC
+
+/ 
+Summary
+
+∙General network models that include graphical networks, RC, and single-hop
+networks with feedback as special cases
+
+∙Cutset bounds for the DMN and Gaussian networks
+
+∙Sliding window decoding for network decode–forward
+
+∙Noisy network coding:
+
+㶳Same message is sent multiple times using independent codebooks
+
+㶳No binning
+
+㶳Simultaneous nonunique decoding without requiring the recovery of compression bin
+indices
+
+㶳Includes CF for the relay channel and network coding for graphical networks
+
+㶳Achieves within constant gap of cutset bound for Gaussian multimessage multicast
+
+/ 
+
+
+References
+
+Ahlswede, R., Cai, N., Li, S.-Y. R., and Yeung, R. W. (). Network information flow. IEEE Trans. Inf. Theory,
+(), –.
+
+Avestimehr, A. S., Diggavi, S. N., and Tse, D. N. C. (). Wireless network information flow: A
+deterministic approach. IEEE Trans. Inf. Theory, (), –.
+
+Carleial, A. B. (). Multiple-access channels with different generalized feedback signals. IEEE Trans. Inf.
+Theory, (), –.
+
+Dana, A. F., Gowaikar, R., Palanki, R., Hassibi, B., and Effros, M. (). Capacity of wireless erasure
+networks. IEEE Trans. Inf. Theory, (), –.
+
+El Gamal, A. (). On information flow in relay networks. In Proc. IEEE National Telecomm. Conf., vol. ,
+pp. D..–D... New Orleans, LA.
+
+Kramer, G., Gastpar, M., and Gupta, P. (). Cooperative strategies and capacity theorems for relay
+networks. IEEE Trans. Inf. Theory, (), –.
+
+Ratnakar, N. and Kramer, G. (). The multicast capacity of deterministic relay networks with no
+interference. IEEE Trans. Inf. Theory, (), –.
+
+Xie, L.-L. and Kumar, P. R. (). An achievable rate for the multiple-level relay channel. IEEE Trans. Inf.
+Theory, (), –.
+
+/ 
+
+

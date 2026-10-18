@@ -2,7 +2,7 @@
 id: lem-hall-composition-full-exactly-finite-dynkin
 kind: lemma
 title: "The full Hall algebra is simple-generated exactly in componentwise finite Dynkin type"
-status: draft
+status: published
 dependency_level: 10
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

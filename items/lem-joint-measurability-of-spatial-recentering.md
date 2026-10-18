@@ -27,8 +27,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 3, §3.3, PDF p.50: translated point-process and Palm-law convention."
-verification:
-  precheck: pending
 ---
 
 ## Statement

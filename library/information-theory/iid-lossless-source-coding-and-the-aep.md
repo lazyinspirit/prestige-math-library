@@ -1,7 +1,7 @@
 ---
 page: iid-lossless-source-coding-and-the-aep
 title: "IID Lossless Source Coding and the AEP"
-status: draft
+status: published
 requires:
   - weak-laws-and-series-of-independent-random-variables
   - finite-alphabet-entropy-and-divergence

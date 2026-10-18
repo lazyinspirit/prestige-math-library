@@ -18,8 +18,6 @@ axiom_use: No choice principle is used; the grid is finite and the recurrence ha
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Ernst Hairer, course notes, Chapter III: Équations Différentielles Ordinaires, §§III.2–III.3"

@@ -2,7 +2,7 @@
 id: thm-finite-strong-interference-channel-capacity
 kind: theorem
 title: Capacity region of a finite two-user interference channel under strong interference
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

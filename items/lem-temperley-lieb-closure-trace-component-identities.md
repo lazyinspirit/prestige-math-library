@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-closure-trace-component-identities
 kind: lemma
 title: "Diagram closure trace is cyclic and satisfies the tower rules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

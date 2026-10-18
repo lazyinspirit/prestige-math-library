@@ -2,7 +2,7 @@
 id: lem-finite-alphabet-past-information-convergence
 kind: lemma
 title: "Convergence and integrable envelope for finite-past information"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

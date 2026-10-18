@@ -2,7 +2,7 @@
 id: thm-jordan-hall-pairing-and-hall-littlewood-basis
 kind: theorem
 title: "Jordan Hall classes are Hall–Littlewood functions with the transported Green pairing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

@@ -15,7 +15,6 @@ provenance:
   proof: ai-altered
 axiom_use: "No choice axiom is used; only finite Fourier inversion and finite sums are used."
 verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

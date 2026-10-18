@@ -2,7 +2,7 @@
 id: def-maurer-cartan-element-of-complete-filtered-l-infinity-algebra
 kind: definition
 title: "Maurer–Cartan element of a complete filtered L∞-algebra"
-status: draft
+status: published
 dependency_level: 7
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

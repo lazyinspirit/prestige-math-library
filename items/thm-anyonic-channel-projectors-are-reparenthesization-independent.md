@@ -2,7 +2,7 @@
 id: thm-anyonic-channel-projectors-are-reparenthesization-independent
 kind: theorem
 title: "Canonical F-move paths give the same channel operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

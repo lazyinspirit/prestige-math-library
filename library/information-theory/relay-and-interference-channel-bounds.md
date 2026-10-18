@@ -1,7 +1,7 @@
 ---
 page: relay-and-interference-channel-bounds
 title: "Relay and Interference Channel Bounds"
-status: draft
+status: published
 requires:
   - multiuser-channel-networks
 items:

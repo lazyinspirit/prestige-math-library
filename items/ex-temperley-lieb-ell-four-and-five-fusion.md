@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-ell-four-and-five-fusion
 kind: example
 title: "Truncated fusion tables for ell four and ell five"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

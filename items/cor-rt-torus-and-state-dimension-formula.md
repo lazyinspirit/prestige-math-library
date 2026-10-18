@@ -2,7 +2,7 @@
 id: cor-rt-torus-and-state-dimension-formula
 kind: corollary
 title: "RT torus operators and the state-space dimension formula"
-status: draft
+status: published
 dependency_level: 15
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

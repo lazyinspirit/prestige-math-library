@@ -19,8 +19,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 3, Example 3.3 and §§3.2–3.3, PDF pp.45–50: Poisson Palm law and its translation convention."
-verification:
-  precheck: pending
 ---
 
 ## Statement

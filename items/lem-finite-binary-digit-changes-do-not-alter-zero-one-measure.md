@@ -25,7 +25,7 @@ sources:
     - title: "S. Sierpiński, Sur un problème concernant les ensembles mesurables superficiellement, Fund. Math. 1 (1920)"
       url: "https://eudml.org/doc/212823"
     - title: "John K. Hunter, Measure Theory (UC Davis lecture notes), Chapter 2"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 pipeline_run: null
 ---
 

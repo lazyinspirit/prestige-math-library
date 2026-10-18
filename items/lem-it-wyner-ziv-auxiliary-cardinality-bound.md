@@ -2,7 +2,7 @@
 id: lem-it-wyner-ziv-auxiliary-cardinality-bound
 kind: lemma
 title: "Cardinality bound for the finite Wyner-Ziv auxiliary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

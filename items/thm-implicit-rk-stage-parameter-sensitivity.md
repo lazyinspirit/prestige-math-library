@@ -12,8 +12,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "William W. Hager, Runge-Kutta methods in optimal control and the transformed adjoint system, §§2–3"

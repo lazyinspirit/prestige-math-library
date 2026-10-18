@@ -2,7 +2,7 @@
 id: lem-product-of-two-probability-kernels
 kind: lemma
 title: "The product of two probability kernels is a probability kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

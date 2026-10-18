@@ -2,7 +2,7 @@
 id: thm-root-of-unity-indecomposable-tiltings-exist-and-are-classified
 kind: theorem
 title: Existence and highest weight classification of root-of-unity tiltings
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

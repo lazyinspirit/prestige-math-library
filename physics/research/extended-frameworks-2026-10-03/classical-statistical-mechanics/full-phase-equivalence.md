@@ -89,12 +89,37 @@ $0\log0=0$ and value $+\infty$ when absolute continuity fails. M27 proves
 nonnegativity and the integrable negative-part bound. The following exact
 arguments supply the information tools used on random mark counts.
 
+Current published mathematical suppliers were checked against their exact
+statements. `def-kullback-leibler-divergence` defines the directional extended
+KL using an RN density and carries its Axiom-of-Choice premise;
+`thm-jensen-inequality-for-expectation` applies to an integrable real variable
+and an integrable or nonnegative convex transform on a probability space;
+`thm-pinsker` uses the event-supremum total-variation convention with no factor
+$1/2$ and assumes AC; and `thm-product-kl-additivity` concerns finite products
+when **both** probability laws factor. The local proof below retains the
+correlated-law chain rule needed here, which does not follow from product-law
+additivity alone. The two published KL/Pinsker results are absent from the
+current physics import snapshot; this argument proves the needed cases locally,
+and the source-index refresh is recorded in the category audit.
+
 For $A$ of finite relative entropy against a product probability $B_XB_Y$,
-the marginal density is $a_X(x)=\int a(x,y)B_Y(dy)$, and the conditional
-density is $a(x,y)/a_X(x)$ when $a_X>0$. Set it to $1$ otherwise; the latter
-set has $A$ measure zero. Jensen for $t\log t$ (its supporting-line
-inequality follows by differentiating twice, $1/t>0$) bounds marginal entropy
-by joint entropy. Integrating $\log a=\log a_X+\log(a/a_X)$ now proves
+write its joint density as $a\ge0$ with $\int a\,d(B_XB_Y)=1$. Tonelli
+makes $a_X(x)=\int a(x,y)B_Y(dy)$ measurable and gives
+$\int a_X\,dB_X=1$, so $a_X<\infty$ for $B_X$-almost every $x$. For
+$0<a_X(x)<\infty$ define the conditional density
+$r_x(y)=a(x,y)/a_X(x)$; set $r_x=1$ when $a_X=0$ or $a_X=\infty$. The
+exceptional set is $A_X$-null: the zero set has zero $A_X$ density and the
+infinite set is $B_X$-null. For $A_X$-almost every $x$, Tonelli gives
+$\int r_x\,dB_Y=1$, so $r_x B_Y$ is a probability law. Finite joint relative
+entropy makes $a\log a$ integrable (its negative part is bounded on the
+reference probability space); Fubini therefore gives integrable sections for
+$B_X$-almost every $x$. On those sections Jensen's inequality
+`thm-jensen-inequality-for-expectation` applies to the integrable real variable
+$a(x,\cdot)$ on the probability space $B_Y$ and convex $t\log t$ (with
+$0\log0=0$); the transform is integrable on these sections. It yields
+$D(A_X\Vert B_X)\le D(A\Vert B_XB_Y)$ and finiteness of the marginal
+entropy. Integrating $\log a=\log a_X+\log r_x$ on the full-measure support
+of $A$ now proves
 
 $$D(A\Vert B_XB_Y)=D(A_X\Vert B_X)+\mathbb E_{A_X}D(A_{Y|X}\Vert B_Y).$$
 
@@ -131,6 +156,10 @@ Integrating twice proves it is at least $2(t-u)^2$, with endpoint cases
 obtained by limits or absolute continuity. Thus
 
 $$\|A-B\|_{\mathrm{TV}}\le\sqrt{D(A\Vert B)/2}.$$
+
+This is the same coefficient and event-supremum convention as the published
+`thm-pinsker`. The preceding local derivation proves the event reduction,
+binary bound and endpoint cases used by this construction.
 
 For any bounded measurable test $G$, difference of expectations is at most
 $2\|G\|_\infty\|A-B\|_{\mathrm{TV}}$. This supplies full local measurable

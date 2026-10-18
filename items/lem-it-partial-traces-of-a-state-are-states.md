@@ -2,7 +2,7 @@
 id: lem-it-partial-traces-of-a-state-are-states
 kind: lemma
 title: Partial traces of a finite bipartite state are states
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

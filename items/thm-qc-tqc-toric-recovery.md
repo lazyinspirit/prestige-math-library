@@ -2,7 +2,7 @@
 id: thm-qc-tqc-toric-recovery
 kind: theorem
 title: Toric code corrects Pauli errors below half the distance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

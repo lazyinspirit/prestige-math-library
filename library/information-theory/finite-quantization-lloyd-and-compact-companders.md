@@ -1,7 +1,7 @@
 ---
 page: finite-quantization-lloyd-and-compact-companders
 title: Finite Quantization, Lloyd Iteration, and Compact Companders
-status: draft
+status: published
 requires:
   - rate-distortion-and-lossy-source-coding
 items:

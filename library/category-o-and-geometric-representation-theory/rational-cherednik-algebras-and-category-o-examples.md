@@ -1,7 +1,7 @@
 ---
 page: rational-cherednik-algebras-and-category-o-examples
 title: "Rational Cherednik Algebras and Their Category O: Examples and Counterexamples"
-status: draft
+status: published
 requires: [rational-cherednik-algebras-and-category-o]
 items: [ex-rational-cherednik-trivial-group-is-the-weyl-algebra,
   cex-rational-cherednik-category-o-not-semisimple-at-half]

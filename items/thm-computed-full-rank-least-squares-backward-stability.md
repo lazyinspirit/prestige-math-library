@@ -12,8 +12,6 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: literature-derived
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Fundamentals of Numerical Computation, floating-point arithmetic"

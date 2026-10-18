@@ -2,7 +2,7 @@
 id: alg-qa-37-su2-solovay-kitaev-compiler
 kind: algorithm
 title: "SU(2) Fibonacci Solovay–Kitaev compiler"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 13

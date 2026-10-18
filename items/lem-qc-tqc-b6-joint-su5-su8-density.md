@@ -2,7 +2,7 @@
 id: lem-qc-tqc-b6-joint-su5-su8-density
 kind: lemma
 title: Joint SU(5)×SU(8) closure from B6 path blocks
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

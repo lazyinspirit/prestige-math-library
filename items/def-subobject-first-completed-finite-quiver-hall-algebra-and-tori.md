@@ -2,7 +2,7 @@
 id: def-subobject-first-completed-finite-quiver-hall-algebra-and-tori
 kind: definition
 title: "Subobject-first Hall completion and quantum tori for finite quivers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

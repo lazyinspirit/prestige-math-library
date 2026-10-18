@@ -2,7 +2,7 @@
 id: lem-affine-vacuum-module-pbw-basis
 kind: lemma
 title: PBW basis of the universal affine vacuum module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

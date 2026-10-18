@@ -2,7 +2,7 @@
 id: lem-wall-signature-and-rt-cap-reference-correction
 kind: lemma
 title: "Wall nonadditivity, RT cap references, and the Walker weight sign"
-status: draft
+status: published
 dependency_level: 7
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

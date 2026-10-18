@@ -2,7 +2,7 @@
 id: thm-fixed-length-lossless-source-coding
 title: "Fixed-length lossless source coding at the entropy rate"
 kind: theorem
-status: draft
+status: published
 dependency_level: 6
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

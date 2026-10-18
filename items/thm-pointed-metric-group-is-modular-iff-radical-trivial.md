@@ -2,7 +2,7 @@
 id: thm-pointed-metric-group-is-modular-iff-radical-trivial
 kind: theorem
 title: "A pointed metric-group category is modular exactly when its radical is trivial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

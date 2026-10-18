@@ -2,7 +2,7 @@
 id: ex-binary-erasure-channel-capacity
 kind: example
 title: "Capacity of the binary erasure channel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

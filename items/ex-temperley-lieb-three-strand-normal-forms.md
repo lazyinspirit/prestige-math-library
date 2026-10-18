@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-three-strand-normal-forms
 kind: example
 title: "The five normal forms in the three-strand algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

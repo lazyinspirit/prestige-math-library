@@ -15,8 +15,6 @@ axiom_use: No choice principle is used; positivity follows coordinatewise and ma
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: Jitendra Kumar, Numerical approximations of population balance equations in particulate systems, Chapter 2, §2.2

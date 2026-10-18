@@ -2,7 +2,7 @@
 id: thm-daha-a1-polynomial-representation-faithful
 kind: theorem
 title: "The generic rank-one DAHA polynomial representation is faithful"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

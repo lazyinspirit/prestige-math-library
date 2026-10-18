@@ -2,7 +2,7 @@
 id: def-category-o-klr-and-hecke-route-conventions
 kind: definition
 title: "Category O, KLR, and Hecke route conventions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

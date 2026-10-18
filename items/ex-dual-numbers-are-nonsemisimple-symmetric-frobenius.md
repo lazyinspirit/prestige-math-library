@@ -2,7 +2,7 @@
 id: ex-dual-numbers-are-nonsemisimple-symmetric-frobenius
 kind: example
 title: "The dual numbers are symmetric Frobenius and nonsemisimple over every field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

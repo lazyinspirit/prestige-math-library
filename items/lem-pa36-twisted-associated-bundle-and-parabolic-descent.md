@@ -2,7 +2,7 @@
 id: lem-pa36-twisted-associated-bundle-and-parabolic-descent
 kind: lemma
 title: Exact twisted associated bundles and simple-parabolic descent
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

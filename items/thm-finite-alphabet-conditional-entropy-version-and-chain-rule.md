@@ -2,7 +2,7 @@
 id: thm-finite-alphabet-conditional-entropy-version-and-chain-rule
 kind: theorem
 title: "Finite-alphabet conditional entropy is version-invariant and obeys its chain rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

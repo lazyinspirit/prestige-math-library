@@ -2,7 +2,7 @@
 id: lem-sugawara-modes-act-on-currents
 kind: lemma
 title: Sugawara modes act on affine currents with weight one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

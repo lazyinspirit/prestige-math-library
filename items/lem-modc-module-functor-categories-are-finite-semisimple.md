@@ -2,7 +2,7 @@
 id: lem-modc-module-functor-categories-are-finite-semisimple
 kind: lemma
 title: Module-functor categories are finite semisimple
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

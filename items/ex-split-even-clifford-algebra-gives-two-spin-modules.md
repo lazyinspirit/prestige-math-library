@@ -2,7 +2,7 @@
 id: ex-split-even-clifford-algebra-gives-two-spin-modules
 kind: example
 title: The split even Clifford algebra in signature (1,1)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations-examples

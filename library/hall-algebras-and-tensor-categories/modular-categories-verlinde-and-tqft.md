@@ -1,7 +1,7 @@
 ---
 page: modular-categories-verlinde-and-tqft
 title: "Modular Categories, Verlinde Formula, and TQFT"
-status: draft
+status: published
 items:
   - def-modular-ribbon-category-and-hopf-link-data
   - def-pointed-metric-group-ribbon-category

@@ -2,7 +2,7 @@
 id: lem-heisenberg-bracket-defines-lie-algebra
 kind: lemma
 title: "The Heisenberg bracket satisfies the Lie algebra axioms"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

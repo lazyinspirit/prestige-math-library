@@ -2,7 +2,7 @@
 id: thm-finite-dimensional-car-algebra-is-matrix-algebra
 kind: theorem
 title: Finite-Dimensional CAR over an Inner-Product Space Is a Matrix Algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

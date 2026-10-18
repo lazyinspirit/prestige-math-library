@@ -2,7 +2,7 @@
 id: rem-algebraic-weyl-modules-do-not-automatically-exponentiate
 kind: remark
 title: "Algebraic Weyl modules and exponentiated representations are different objects"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

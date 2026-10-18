@@ -1,7 +1,7 @@
 ---
 page: affine-current-algebras-virasoro-and-sugawara
 title: "Affine Current Algebras, Virasoro, and Sugawara"
-status: draft
+status: published
 requires:
   - algebraic-representation-and-tensor-symmetry-map
   - the-weyl-kac-character-formula

@@ -2,7 +2,7 @@
 id: lem-finite-field-quiver-semistable-stack-points-are-hall-groupoids
 kind: lemma
 title: "Finite-field points of the semistable quiver stack give the Hall groupoid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

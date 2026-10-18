@@ -1,7 +1,7 @@
 ---
 page: hopf-hecke-and-quantum-symmetry-interfaces
 title: "Hopf, Hecke, Quantum-Group, and Braid Interfaces"
-status: draft
+status: published
 items: [def-hh-rational-spectral-r-matrix, lem-hh-rational-spectral-r-matrix-satisfies-yang-baxter]
 examples: []
 ---

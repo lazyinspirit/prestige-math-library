@@ -2,7 +2,7 @@
 id: lem-real-clifford-block-rotation-index-lower-bound
 kind: lemma
 title: Real Clifford block-rotation index bounds
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

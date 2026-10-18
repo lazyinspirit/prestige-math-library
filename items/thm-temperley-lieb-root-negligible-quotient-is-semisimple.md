@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-root-negligible-quotient-is-semisimple
 kind: theorem
 title: "The root negligible quotient is semisimple with truncated fusion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

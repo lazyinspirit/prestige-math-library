@@ -2,7 +2,7 @@
 id: ex-qa-37-approximate-b6-target
 kind: example
 title: "Identity target in the two B6 charge blocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 13

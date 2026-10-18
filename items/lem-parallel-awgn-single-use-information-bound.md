@@ -2,7 +2,7 @@
 id: lem-parallel-awgn-single-use-information-bound
 kind: lemma
 title: Finite-input vector Gaussian mutual information is bounded by water-filling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

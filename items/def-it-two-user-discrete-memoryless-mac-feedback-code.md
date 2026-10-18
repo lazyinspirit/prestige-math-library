@@ -2,7 +2,7 @@
 id: def-it-two-user-discrete-memoryless-mac-feedback-code
 kind: definition
 title: Two-user DM-MAC code with perfect causal output feedback
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

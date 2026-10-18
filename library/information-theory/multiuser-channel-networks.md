@@ -1,7 +1,7 @@
 ---
 page: multiuser-channel-networks
 title: "Multiuser Channel Networks"
-status: draft
+status: published
 requires: [lossy-source-coding-with-side-information]
 items:
   - def-it-real-differential-entropy

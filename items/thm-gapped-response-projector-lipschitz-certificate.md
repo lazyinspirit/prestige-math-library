@@ -17,8 +17,6 @@ sources:
       url: https://www.maths.ed.ac.uk/~v1ranick/papers/kato1.pdf
     - title: Eric Cancès, Gaspard Kemlin, and Antoine Levitt, Convergence analysis of direct minimization and self-consistent iterations, §3.2
       url: https://arxiv.org/pdf/2004.09088
-verification:
-  precheck: pending
 ---
 
 ## Statement

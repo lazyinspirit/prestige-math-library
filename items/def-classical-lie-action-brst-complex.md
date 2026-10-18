@@ -2,7 +2,7 @@
 id: def-classical-lie-action-brst-complex
 kind: definition
 title: Classical Lie-action BRST cochain complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-it-universal-hashing-leftover-bound
 kind: theorem
 title: "Classical leftover-hash bound with public side information"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

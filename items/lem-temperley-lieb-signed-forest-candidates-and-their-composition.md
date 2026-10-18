@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-signed-forest-candidates-and-their-composition
 kind: lemma
 title: "Signed forest candidates, wall homomorphisms, and their composition"
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

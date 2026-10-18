@@ -1,7 +1,7 @@
 ---
 page: finite-blocklength-and-reliability
 title: "Finite-Blocklength Bounds and Reliability"
-status: draft
+status: published
 items:
   - lem-it-finite-affine-slice-error-bound
   - thm-it-berry-essen-independent-array

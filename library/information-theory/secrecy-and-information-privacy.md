@@ -1,7 +1,7 @@
 ---
 page: secrecy-and-information-privacy
 title: "Secrecy and Information Privacy"
-status: draft
+status: published
 requires:
   - discrete-memoryless-channel-capacity
   - iid-lossless-source-coding-and-the-aep

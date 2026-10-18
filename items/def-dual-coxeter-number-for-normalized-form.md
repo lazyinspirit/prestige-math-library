@@ -2,7 +2,7 @@
 id: def-dual-coxeter-number-for-normalized-form
 kind: definition
 title: Dual Coxeter number for the normalized invariant form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-real-two-dimensional-spin-factor
 kind: example
 title: The spin factor on the real plane
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: jordan-spin-factor-and-alternative-algebras-examples

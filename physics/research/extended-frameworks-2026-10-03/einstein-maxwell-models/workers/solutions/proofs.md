@@ -1,5 +1,7 @@
 # Exact electrovac solutions and their declared extensions
 
+Current 2026-10-14 contracts: [audit-contracts.md](../../audit-contracts.md#causal-vocabulary) supplies precise null/Killing horizon, normalization, escape and C2 extension vocabulary; its [finite procedure](../../audit-contracts.md#rational-procedure) separates rational tensor instructions, correctness, termination and resources. X3 supplies the particular KN input and analytic chart/signature checks; a SymPy execution is computational evidence, not independent proof acceptance.
+
 2026-10-04. Completed local research arguments; not production items, publication, independent acceptance, or observations. The pure mathematical solution statements take the following equations as mathematical hypotheses. Physical model adoption and SI interpretation are separate consumers. No global uniqueness, maximal-extension classification or censorship theorem is asserted.
 
 <a id="X0"></a>

@@ -2,7 +2,7 @@
 id: def-finite-dimensional-gapped-free-hamiltonian-and-stable-equivalence
 kind: definition
 title: "Finite-dimensional gapped free Hamiltonians and stable equivalence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations

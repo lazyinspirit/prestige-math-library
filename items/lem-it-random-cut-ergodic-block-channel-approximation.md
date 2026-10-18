@@ -2,7 +2,7 @@
 id: lem-it-random-cut-ergodic-block-channel-approximation
 kind: lemma
 title: "Random-cut stationary ergodic block-channel approximation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: cex-commutative-target-erases-the-a2-wall-crossing
 kind: counterexample
 title: "Commutativizing the target erases the A₂ wall-crossing identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

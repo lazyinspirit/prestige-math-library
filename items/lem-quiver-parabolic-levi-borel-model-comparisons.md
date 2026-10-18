@@ -2,7 +2,7 @@
 id: lem-quiver-parabolic-levi-borel-model-comparisons
 kind: lemma
 title: Parabolic and Levi Borel models for quiver extension and flag stacks
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

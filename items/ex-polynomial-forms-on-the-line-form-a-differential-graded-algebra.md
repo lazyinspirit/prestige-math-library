@@ -2,7 +2,7 @@
 id: ex-polynomial-forms-on-the-line-form-a-differential-graded-algebra
 kind: example
 title: "Polynomial differential forms on the line"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

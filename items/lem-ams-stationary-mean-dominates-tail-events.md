@@ -2,7 +2,7 @@
 id: lem-ams-stationary-mean-dominates-tail-events
 kind: lemma
 title: "A null future-tail event under the stationary mean is null under the AMS law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

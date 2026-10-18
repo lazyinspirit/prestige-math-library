@@ -17,7 +17,7 @@ sources:
     - title: "Sheldon Axler, Measure, Integration & Real Analysis, Example 9.2"
       url: "https://measure.axler.net/MIRA.pdf"
     - title: "John K. Hunter, Measure Theory, §6.9"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement

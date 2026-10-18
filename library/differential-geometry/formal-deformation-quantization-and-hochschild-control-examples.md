@@ -1,7 +1,7 @@
 ---
 page: formal-deformation-quantization-and-hochschild-control-examples
 title: "Formal Deformation Quantization and Hochschild Obstructions: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - cex-nonpoisson-bivector-cannot-be-a-first-order-star-commutator

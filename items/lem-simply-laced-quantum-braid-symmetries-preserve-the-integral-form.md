@@ -2,7 +2,7 @@
 id: lem-simply-laced-quantum-braid-symmetries-preserve-the-integral-form
 kind: lemma
 title: Simply-laced braid symmetries preserve the full divided-power form
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

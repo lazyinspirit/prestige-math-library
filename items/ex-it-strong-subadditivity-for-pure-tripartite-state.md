@@ -2,7 +2,7 @@
 id: ex-it-strong-subadditivity-for-pure-tripartite-state
 kind: example
 title: Strong subadditivity for a pure GHZ tripartite state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: prop-temperley-lieb-link-state-form-vanishes-exactly-at-zero-loop-without-defects
 kind: proposition
 title: "The link-state form is identically zero only at zero loop value with no defects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: def-shifted-coalgebra-l-infinity-algebra
 kind: definition
 title: "Shifted coalgebra definition of an L∞-algebra"
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

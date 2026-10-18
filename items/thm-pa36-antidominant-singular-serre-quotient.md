@@ -2,7 +2,7 @@
 id: thm-pa36-antidominant-singular-serre-quotient
 kind: theorem
 title: The singular antidominant Serre quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-closed-oriented-smooth-one-and-two-manifolds-bound
 kind: lemma
 title: "Closed oriented smooth one- and two-manifolds bound"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

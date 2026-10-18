@@ -264,6 +264,14 @@ All missing established intermediates named in the repaired contract, and their 
 
 See **NA-46** in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md` for the precise procedure inputs/outputs/branches, well-definedness argument, local proof chain, and residual holds.
 
+### Current owner source/status direction (2026-10-17)
+
+NA-46 source/status review refreshed on 2026-10-17: the author-hosted Owen Practical QMC PDF was freshly retrieved successfully and its printed pp. 18–19 and Theorem 15.7 (printed p. 27) were read; its document date remains 2013–2023. The exact fixed-d>=3 question remains an open-problem carrier on the evidence inspected. Fresh direct arXiv submission-history inspection found Dick 2607.23571v3 (2026-10-15); its full PDF §§1–3, especially Remark 1.4, concerns uniform growing-dimension tractability and does not settle fixed-d logarithmic order. Smirnov–Vershynin 2607.12263v1 concerns random-sample modification/arbitrary measures. The additional inspected Suzuki introductions (2608.15865v1;2608.00899v3) concern bounded independence and bracketing covers. No inspected source resolves the target; bounded searches and stale search indexing do not prove exhaustive absence. Full access/read limitations and locators: research/numerical-analysis-remaining-71-2026-10-17-ROOT-discrepancy-status-cycle1/report.md and source-notes.md.
+
+Formulate with the canonical normalized half-open-box discrepancy on ordered n-point configurations in [0,1)^d, allowing repetitions counted with multiplicity; fix integer d>=3 before n tends to infinity. Ask for the exact order of the infimum; state n^-1(log n)^(d-1) as conjectural. Label Roth's lower bound a classical baseline, not the strongest known lower bound. A dated status account and comparisons are contextual; established partial-result items need local proofs and never assume the open conclusion.
+
+Future author duty: use kind open-problem, an op- ID, Open problem and Status sections, HTTP(S) source/status references, provenance.proof: not-applicable, and structured verification.sources_checked with actual date, scope and by. Supply open_problem_review formulation/status/sources verdicts and concrete evidence. No claimed Proof/Refutation/Verification/Counterexample, proof_strategy or proof-acceptance judge/audited/verified stamps. Refresh status/latest-source-version evidence at publication. No item may target this open problem through deps or justified_by, aliases, or indirect premise chains; proof/Facts citations as a premise are forbidden. The companion's contextual page-placement edge is permitted, with any nonlogical item link confined to Remarks and ordinary forward-reference rules.
+
 ## APP-RBF — Radial basis and kernel interpolation
 
 A: `radial-basis-and-kernel-interpolation`. B: `radial-basis-and-kernel-interpolation-examples`.
@@ -307,6 +315,12 @@ All missing established intermediates named in the repaired contract, and their 
 ### Repaired contract pointer
 
 See **APP-RBF** in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md` for the precise procedure inputs/outputs/branches, well-definedness argument, local proof chain, and residual holds.
+
+### Current owner local supplier direction (2026-10-17)
+
+Read `research/numerical-analysis-remaining-71-2026-10-17-ROOT-rbf-planning-cycle1/PROOF.md` in full, with its REPORT.md foundational-interface table and same-reviewer companion disposition, before authoring. Preserve arbitrary fixed d≥1, ν>0 and a>0 and the restriction-quotient H^(ν+d/2)(Ω) convention. The complete local proof constructs the spectral/native equivalence, cone-domain zeros lemma, fill-distance rate, separation bounds, and RBF-FD consistency. The actual Hilbert/measure/Gamma/Taylor suppliers already lie in the approved prerequisite closure; list their real item deps and carry their stated Choice assumptions (full AC conservatively if retaining the legacy Riesz–Fischer dependency). No additional specialist Fourier theorem is assumed.
+
+This clarifies the generic “no external canonical item” wording above: no additional specialist supplier page is needed; existing foundational suppliers are consumed explicitly. Author substantial local intermediates on this A page before their logical uses. The report's ordering instruction governs proof readiness and acceptance, while native parallel pair dispatch remains unchanged: continue authoring against declared missing cross-pair interfaces rather than waiting for another author. Only the B companion is a planned consumer; preserve all three examples and use the demonstrated near-duplicate Rayleigh argument for illconditioning.
 
 ## APP-SPLINE — Spline evaluation and interpolation algorithms
 
@@ -1144,6 +1158,15 @@ See **NA-08** in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-a
   }
 ]
 
+### Current owner prerequisite-construction assignment (2026-10-17)
+
+The owner explicitly directs that all71 original pairs and every necessary prerequisite be built together in this single frontier. NA-08 owns substantial typed prerequisite items on this A page, before the expectation theorem's logical acceptance: finite real/normalized-complex Gaussian laws and invariance; almost-sure Gaussian row rank; exact inverse Frobenius moments; spectral inverse moments and integrable tails; scaled Gaussian norm/product estimates; deterministic SVD-partition error; and any concentration supplier actually used. Separate substantial lemmas rather than leaving them implicit in a consumer proof. No additional pair is needed merely to house these estimates.
+
+Read the complete research construction in `research/numerical-analysis-remaining-71-2026-10-17-ROOT-gaussian-planning-cycle1/proof.md` and `assembly-addendum-1.md`. It proves the inverse moments/tails in both fields and the real product/expected-error assembly. The exact real/complex expectation specified by the specialist NA-08 contract remains commissioned. The sharp complex product inequality, or an alternative proving that exact expectation, MUST still be supplied with a complete valid local proof during construction; it is NOT proved by that research packet. Read both cycle2 final-disposition/source packets for precise limitations, including the invalid complex Slepian comparison. A citation, a real-only proof, or a realification with an unaccounted sqrt(2) loss is insufficient. Do not state an accepted complex theorem while its proof is missing.
+
+The native drift escalation was a missing local prerequisite proof/placement obligation in an all-empty preauthoring plan. Its placement is resolved by this explicit same-frontier construction assignment under the owner's latest direction. The earlier root preauthor hold and64/7 split proposal are superseded; this does not certify a missing proof, a current item, or native review coverage. Every unfinished proof remains an actual construction obligation. If the author cannot establish the complex supplier or expected bound, escalate the exact failure immediately and mark the consuming claim unready; no post-construction acceptance gate may pass over that defect. Do not narrow the field/constants or label this established-result authoring obligation as an open problem.
+
+Retain the full seven-pair planned closure, including every companion. The Gaussian supplier reviewer retains affected-consumer responsibility. HIER/SKETCH/CUR/FMM/BEM/PML do not inherit a deterministic draw guarantee from an expectation, and each retains its separate promised proof scope. Authors continue independent work against declared cross-pair interfaces using all native slots; actual supplier checks remain necessary for readiness.
 
 ## PC-EWALD — Ewald periodic potentials and particle mesh error
 
@@ -1182,7 +1205,7 @@ Existing library page context recorded by `requires` (page placement is not itse
 - `matrix-norms-condition-numbers-and-numerical-stability` → `library/linear-algebra/matrix-norms-condition-numbers-and-numerical-stability.md`.
 
 Exact item bodies inspected for this pair are listed in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md`; those interfaces are not widened by the surrounding page title.
-No external canonical item is consumed as a proof premise in this pair. The linked repaired contract defines the needed local interfaces and gives their proof design; any same-frontier supplier is listed explicitly above.
+The Gaussian Poisson-summation supplier consumes the published `thm-poisson-summation-for-a-full-rank-lattice` on `poisson-summation-sampling-and-lattice-duality`, with its explicit Countable Choice hypothesis and `def-countable-choice` in the dependency closure. Its reciprocal dual uses exponent 2πiξ·x; angular physical frequencies are κ=2πξ. The existing theorem is not changed. The linked repaired contract defines and proves the local mesh interfaces; LIN-FFT remains the same-frontier unitary transform supplier.
 
 ### Local mathematical prerequisite ownership
 
@@ -1191,6 +1214,18 @@ All missing established intermediates named in the repaired contract, and their 
 ### Repaired contract pointer
 
 See **PC-EWALD** in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md` for the precise procedure inputs/outputs/branches, well-definedness argument, local proof chain, and residual holds.
+
+### Resolved local PME supplier proof design (preauthoring)
+
+Preserve every scope paragraph and example above. Before the PME force certificate, place two local suppliers on this same A page: (i) periodic 3D assignment/DFT normalization and exact aliases; (ii) computable derivative-window force-alias bounds. Their complete derivations are the **PC-EWALD local mesh supplier proof development** appendix in `research/numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md`. This is an authoring design, not completed item inventory or review credit.
+
+Use x=At, κ_k=2πA^{-T}k, N=∏M_r, the negative-sign unitary tensor LIN-FFT and periodic causal window W_P(Mt-l), P≥2. Accumulate all predecessor-support indices modulo the grid, including duplicate residues when P>M_r. Keep the approved D_k=∏exp(-πiPk_r/M_r)sinc(πk_r/M_r)^P, but recover the charge coefficient as z_k=√N(F_Mg)_k/conj(D_k). The conjugate is forced by this spread/transform sign. A nonpositive certified lower bound for |D_k| returns denominator-inconclusive. Define a finite symmetric retained set of signed frequencies injective modulo M, count every omitted mode in the reciprocal tail, and state Nyquist treatment explicitly.
+
+Prove z_k=Σ_n[conj(D_{k+n⊙M})/conj(D_k)]ρ̂(k+n⊙M). For |k_r|<M_r/2 the absolute factors are |u_r/(u_r+n_r)|^P, u_r=k_r/M_r, with nonzero shifts zero if u_r=0. Tensor-product p-series give source alias controller A_k=∏_r(1+a_r)-1 with finite integral remainder bounds. Physical derivatives introduce 2πA^{-T}(k+n⊙M). For P≥3 the derivative controller is B_k=2π||A^{-T}||(Σ_rJ_{k,r}²)^{1/2}, J_{k,r}=(|k_r|+v_r)∏_{s≠r}(1+a_s)-|k_r|, v_r=Σ_{n≠0}|k_r+nM_r||u_r/(u_r+n)|^P. Both a_r and v_r have explicit finite p-series remainder enclosures in the appendix.
+
+Retain P=2. Its absolute v_r diverges for u_r≠0, so differentiate the finite local window polynomial instead and enclose ∂_{t_r}b_k+2πik_re^{-2πik·t} on each grid box, including both one-sided knot limits. A valid finite initial controller is C_{k,r}=2M_r/|D_k|+2π|k_r|; interval center values plus an explicit polynomial/exponential gradient bound times subbox diameter give arbitrarily refinable finite enclosures. Set B_k=||A^{-T}||(Σ_rC_{k,r}²)^{1/2}. Classical energy-gradient forces at P=2 require off-knot positions; at a knot the procedure returns the declared one-sided or symmetric derivative value with its enclosure. Spectral field differentiation remains defined at knots. Do not silently replace P≥2 by P≥3.
+
+For c_k=4πe^{-|κ_k|²/(4α²)}/(V|κ_k|²), Q=Σ_i|q_i| and a declared differentiation/gather residual H_k, prove the per-particle force error bound |q_i|QΣ_kc_k[|κ_k|A_k+(1+A_k)B_k+(1+A_k)H_k]. The appendix proves the matching energy bound, correctly normalized FFT/gather, optional exact diagonal mesh-self correction and its differentiated force, finite-support implementation, and separate operationwise arithmetic radii. Keep the ordinary Ewald self constant. Real/reciprocal shell tails, all mesh terms and actual arithmetic radii add by triangle inequality. State exact energy/force conventions; a different differentiation choice does not inherit energy-gradient consistency. Essmann §IV/Appendices B–C support the spline and transform background, while its §VI rough rms estimator does not prove this deterministic bound.
 
 ## QUAD-EXTRAP — Clenshaw curtis and extrapolation quadrature
 
@@ -1307,17 +1342,28 @@ Barycentric numerator/denominator algebra; SVD least-squares characterization; a
   "Padé denominator failure and Froissart doublet"
 ]
 
-### Prerequisite interfaces (namespace-normalized)
+### Prerequisite interfaces (current owner reconciliation)
 
-Same-frontier pair edges (pair key → A-page; edges follow the pair DAG):
-- `NA-10` → `polynomial-interpolation-and-remainder` (numerical-analysis; proposed same-frontier supplier, not a current library item).
-- `LIN-SVD` → `computed-singular-values-and-rank-revealing-factorizations` (numerical-analysis; proposed same-frontier supplier, not a current library item).
-- `APP-MINIMAX` → `minimax-approximation-and-remez-algorithms` (numerical-analysis; proposed same-frontier supplier, not a current library item).
+Preserve the current plan-spec, manifest and page `requires`: the published
+`computed-singular-values-and-rank-revealing-factorizations` page and the
+same-frontier `minimax-approximation-and-remez-algorithms` pair (batch 4).
+Minimax is reading context, not a logical premise of this pair's authored claims;
+its draft status is the authorized state of new frontier content, not absence.
+Native author handoff and current-input review remain required before closing
+that internal page edge.
 
-No external library page token is recorded in `requires`.
+Reuse the existing published `def-cardinal-polynomial-interpolation` and
+`thm-cardinal-polynomial-interpolant-exists-uniquely` from
+`polynomial-interpolation-and-remainder` at item level. Their actual bodies are
+present; NA-10 is not an unmet same-frontier pair in this run. The prose's former
+extra page-level edge is superseded by this explicit owner reconciliation;
+no extra `requires` token or duplicate interpolation method is needed.
 
-Exact item bodies inspected for this pair are listed in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md`; those interfaces are not widened by the surrounding page title.
-No external canonical item is consumed as a proof premise in this pair. The linked repaired contract defines the needed local interfaces and gives their proof design; any same-frontier supplier is listed explicitly above.
+The exact published SVD theorem and procedures likewise remain actual logical
+suppliers for AAA. The former assertion that no external canonical item is
+consumed was stale. Preserve their explicit item dependencies and all approved
+local Floater–Hormann, AAA and Pade scope. Full actual source/consumer dispositions
+are in the batch14 evidence and the rational supplier cycle1 completion addendum.
 
 ### Local mathematical prerequisite ownership
 
@@ -1326,6 +1372,16 @@ All missing established intermediates named in the repaired contract, and their 
 ### Repaired contract pointer
 
 See **APP-RATIONAL** in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md` for the precise procedure inputs/outputs/branches, well-definedness argument, local proof chain, and residual holds.
+
+### Current owner correction — Floater–Hormann rate (2026-10-17)
+
+The proposed bound C(d,rho) h^(d+1)||f^(d+1)|| under C^(d+1) alone is false, including on uniform meshes for every fixed d; retain the explicit smooth-node-bump counterexample from this packet. Author the full no-real-pole proof for ordered distinct real nodes and the approved 0<=d<n weights. For a rate of order d+1, preserve C^(d+1) with finite total variation V of f^(d+1), using the locally proved simplex/variation lemma and its explicit bounds. Also supply the sharper Floater–Hormann C^(d+2) parity bounds. For d>=1 the source bound is h^(d+1)[(b-a)||f^(d+2)||/(d+2)+epsilon||f^(d+1)||/(d+1)]; for d=0 it is h(1+beta)[(b-a)||f''||/2+epsilon||f'||]. Here epsilon=1 when n-d is even, 0 otherwise; beta is the explicitly defined local mesh ratio, set to zero when n<=2. A fixed global mesh ratio rho bounds beta. No mesh-ratio restriction is needed for d>=1. State the BV extension as independently proved, not as a claim of the cited paper.
+
+The local BV bounds are h^(d+1)[V+epsilon||f^(d+1)||]/(d+1) for d>=1 and h(1+beta)[V+epsilon||f'||] for d=0. Do not replace V by a constant times ||f^(d+1)|| without an additional quantitative assumption.
+
+Keep AAA finite-sample and Padé scope/caveats unchanged. The source is the fully read author-hosted preprint https://www.mn.uio.no/math/english/people/aca/michaelf/papers/rational.pdf ; its no-pole proof is Theorem 1, its d>=1 source estimate Theorem 2, and d=0 estimate Theorem 3. Citations do not replace the locally reproduced proofs.
+
+Full independently checked argument and counterexample: `research/numerical-analysis-remaining-71-2026-10-17-ROOT-rational-planning-cycle1/proof.md`. The old C^(d+1)-seminorm-only rate and residual hold in the historical specialist audit are superseded only by this scientific correction. Its original report and source record remain historical evidence. Author the local weight, denominator, divided-difference and simplex/variation suppliers before their within-proof uses. The same reviewer owns the only planned consumer, the B companion; every FH example must use an actual BV or C^(d+2) hypothesis. No item-level review or acceptance exists at this preauthor stage.
 
 ## GEO-DEL — Delaunay triangulations and voronoi computation
 
@@ -1396,17 +1452,27 @@ Induct tree representation, bound each omitted block/truncation and sum overlap;
   "Accumulated truncation can spoil definiteness"
 ]
 
-### Prerequisite interfaces (namespace-normalized)
+### Prerequisite interfaces (current owner reconciliation)
 
-Same-frontier pair edges (pair key → A-page; edges follow the pair DAG):
-- `NA-08` → `randomized-low-rank-approximation` (numerical-analysis; proposed same-frontier supplier, not a current library item).
-- `LIN-SPARSE` → `sparse-direct-elimination-and-ordering` (numerical-analysis; proposed same-frontier supplier, not a current library item).
+Preserve the current plan-spec, manifest and page `requires`:
+`randomized-low-rank-approximation` (same-frontier batch11) and the already
+published `sparse-direct-elimination-and-ordering`. The former's missing complex
+expectation proof remains a page-level hold; no current HLR item uses that
+expectation as a premise. Sparse elimination is context for the exact supplied
+LU-factor branch, not a proof of an unauthored H-LU construction.
 
-Existing library page context recorded by `requires` (page placement is not itself a proof premise):
-- `the-spectral-theorem-and-singular-value-decomposition` → `library/linear-algebra/the-spectral-theorem-and-singular-value-decomposition.md`.
+Reuse the exact published SVD theorem and the same-frontier batch10
+`def-finite-tensor-arrays-and-frobenius-inner-product` and
+`thm-best-rank-k-frobenius-matrix-approximation`. They supply the actual Frobenius
+core-recompression interface. The extra spectral-theorem page token in the old
+prose is contextual, not an additional required-page declaration. In particular,
+do not infer a Frobenius optimality theorem from an operator-norm-only conclusion.
+All actual logical item edges stay explicit and are recomputed natively.
 
-Exact item bodies inspected for this pair are listed in `numerical-analysis-four-category-scaffolds-2026-10-16/linear-audit.md`; those interfaces are not widened by the surrounding page title.
-Named items: `thm-eckart-young-best-rank-k-approximation`.
+The reported published Frobenius-index omission is a false alarm: canonical
+matrices are indexed from zero, so i<m,j<n sums all entries. The exact owner
+disposition is recorded in this run's owner-planning-integration evidence. No
+shared definition or consumer rewrite is required.
 
 ### Local mathematical prerequisite ownership
 

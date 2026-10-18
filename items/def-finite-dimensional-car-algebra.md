@@ -2,7 +2,7 @@
 id: def-finite-dimensional-car-algebra
 kind: definition
 title: Finite-Dimensional CAR Algebra over an Inner-Product Space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

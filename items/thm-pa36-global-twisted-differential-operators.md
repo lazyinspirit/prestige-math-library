@@ -2,7 +2,7 @@
 id: thm-pa36-global-twisted-differential-operators
 kind: theorem
 title: Global sections of twisted differential operators on the flag variety
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

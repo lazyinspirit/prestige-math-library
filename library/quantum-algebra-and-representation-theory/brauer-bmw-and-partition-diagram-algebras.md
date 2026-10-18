@@ -1,7 +1,7 @@
 ---
 page: brauer-bmw-and-partition-diagram-algebras
 title: "Brauer, BMW, and Partition Diagram Algebras"
-status: draft
+status: published
 items:
   - def-brauer-and-partition-diagram-categories
   - def-polynomial-invariants-for-a-rational-linear-action

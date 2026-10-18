@@ -13,8 +13,6 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Dimitri P. Bertsekas, Constrained Optimization and Lagrange Multiplier Methods"

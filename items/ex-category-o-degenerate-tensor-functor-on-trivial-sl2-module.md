@@ -2,7 +2,7 @@
 id: ex-category-o-degenerate-tensor-functor-on-trivial-sl2-module
 kind: example
 title: "The one-strand degenerate action on the trivial module has scalar dot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

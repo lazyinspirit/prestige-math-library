@@ -2,7 +2,7 @@
 id: def-it-point-to-point-joint-source-channel-code
 kind: definition
 title: "Finite-alphabet point-to-point joint source-channel codes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-homotopy-cardinality-pushforward-is-functorial
 kind: lemma
 title: "Homotopy-cardinality pushforward is functorial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: formal-deformation-quantization-and-hochschild-control
 title: "Formal Deformation Quantization and Hochschild Obstructions"
-status: draft
+status: published
 items:
   - def-formal-associative-deformation-of-a-commutative-algebra
   - def-general-poisson-bivector-and-bracket

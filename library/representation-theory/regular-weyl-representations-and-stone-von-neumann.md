@@ -1,7 +1,7 @@
 ---
 page: regular-weyl-representations-and-stone-von-neumann
 title: "Exponentiated Weyl Relations and Regular Representations"
-status: draft
+status: published
 requires:
   - heisenberg-and-algebraic-weyl-algebras
   - unitary-representations-positive-type-and-gns

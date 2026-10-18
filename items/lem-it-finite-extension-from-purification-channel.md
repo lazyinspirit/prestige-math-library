@@ -2,7 +2,7 @@
 id: lem-it-finite-extension-from-purification-channel
 kind: lemma
 title: Every finite extension is obtained from a purification by a channel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

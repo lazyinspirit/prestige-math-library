@@ -1,0 +1,6598 @@
+Algebra of free fermions: Classifying spaces, Hamiltonians, and computation
+
+Tian Yuan∗and Yang Qi†
+
+State Key Laboratory of Surface Physics and Department of Physics, Fudan University, Shanghai 200433, China
+(Dated: September 4, 2026)
+
+Research on topological phases of matter is a core field in modern condensed matter physics.
+Free fermion systems, such as topological insulators and superconductors, have been studied using
+the “tenfold way” and K-theory. Building on Kitaev’s idea of Ω-spectrum and classifying space, as
+well as Freed–Moore’s K-theory, this work demonstrates that free fermionic systems form a genuine
+G-Ω-spectrum and clarifies its connection to several distinct classification schemes appearing in
+the physical literature.
+By introducing the Z2-graded algebra AV
+sym, the classification problem
+for systems with general symmetries, including antilinear symmetries, antisymmetries, projective
+representations, and point group symmetries, is turned into an extension problem in representation
+theory. To solve this, a computational method for the Z2-graded Wedderburn–Artin decomposition
+of AV
+sym is developed. This decomposition not only yields a classification but also enables the explicit
+construction of the corresponding Dirac Hamiltonian. Furthermore, a GAP programming package
+has been developed to automate these calculations.
+
+I.
+INTRODUCTION
+
+Topological phases of matter play a central role in
+modern condensed matter physics. Among these, gapped
+free fermionic systems encompassing topological insula-
+tors and superconductors [1–14] constitute a fundamen-
+tal and rigorously understood class. With the theoreti-
+cal development of topological insulators and supercon-
+ductors, a systematic topological classification of free
+fermionic systems has become an urgent necessity. Al-
+tland and Zirnbauer proposed the well-known tenfold
+symmetry classes [15, 16].
+Subsequently, the “tenfold
+way” was connected to free fermionic systems via time-
+reversal (T), particle-hole (C), and chiral (P) symme-
+tries [17], leading to the establishment of the well-known
+topological periodic table. Kitaev [18] synthesized these
+phenomena using Clifford algebras and K-theory, thereby
+introducing homotopy theory—a cornerstone of modern
+mathematics—into the study of topological phases of
+matter.
+Despite the tremendous success of the existing pe-
+riodic table, it becomes inadequate when more com-
+plex symmetries—such as crystalline symmetries [19] and
+magnetic space group symmetries [20]—must be taken
+into account. Building upon Kitaev’s work, Freed and
+Moore generalized the K-theoretic framework to incor-
+porate arbitrary symmetries [21].
+Their approach can
+handle general antilinear symmetries and antisymmetries
+(i.e., symmetries that anticommute with the Hamilto-
+nian). Furthermore, it allows for projective representa-
+tions of symmetries (e.g., in spin- 1
+
+2 systems) and accom-
+modates nontrivial symmetry actions on the spatial lat-
+tice. For other related works, we refer the reader to Refs.
+[22–25].
+For systems with general symmetries, computing the
+classification is highly nontrivial. For strong topological
+
+∗tyuan19@fudan.edu.cn
+† qiyang@fudan.edu.cn
+
+insulators/superconductors, the classification can be de-
+rived from a generalized Clifford algebra extension prob-
+lem [20, 26].
+Furthermore, strong topological phases
+serve as the “root states” for computations in more gen-
+eral settings; determining their classification paves the
+way for calculating the general cases. For a specific class
+of space groups, the complete classification problem can
+be reduced to the classification of strong phases [27]. For
+general crystalline symmetries, physicists typically em-
+ploy symmetry-based indicator theory [28–30] (for frag-
+ile topology beyond symmetry indicators, see [31]). How-
+ever, the classification obtained via this method is incom-
+plete. A complete classification requires the application
+of the Atiyah–Hirzebruch spectral sequence (AHSS) in
+either real space or momentum space [32–34].
+These previous works lack a method to explicitly
+construct a model Hamiltonian, and require case-by-
+case derivation to obtain the topological classification of
+Dirac Hamiltonians.
+To solve this problem, we intro-
+duce an algorithm to explicitly calculate the Z2-graded
+Wedderburn–Artin decomposition of the Z2-graded alge-
+bra AV
+sym, which serves as the algebra of Dirac Hamil-
+tonians. As a byproduct of this decomposition, we can
+obtain both the model Hamiltonians and the topological
+classification of Dirac Hamiltonians for strong topologi-
+cal insulators/superconductors in the most general set-
+tings. This algorithm is implemented as a GAP package
+[35], which is our main computational result and will be
+heavily used in our upcoming work [36] on the boundary
+states of topological insulators/superconductors.
+Classification represents the lowest-order information
+of topological phases of matter; however, many physi-
+cal problems require more sophisticated data. In his pi-
+oneering talks [37–39], Kitaev proposed a more refined
+approach to characterize invertible topological orders,
+which encompasses free fermionic systems as a special
+case. Kitaev’s ideas were developed in the subsequent
+works [40, 41]. His core idea is to utilize an Ω-spectrum
+to study the classifying space of invertible topological
+orders. An Ω-spectrum is a sequence of spaces Xn in-
+
+arXiv:2605.11655v2  [cond-mat.mes-hall]  3 Sep 2026
+
+
+2
+
+dexed by integers, satisfying the homotopy equivalence
+ΩXn+1 ≃Xn.
+From the perspective of modern ho-
+motopy theory [42], an Ω-spectrum is synonymous with
+an “Abelian group”[43]; that is, it is a homotopy type
+endowed with a commutative multiplication structure.
+Physically, Xn represents the space of n-dimensional
+Hamiltonians or quantum states, which we uniformly re-
+fer to as the classifying space in this paper. The Abelian
+group structure on this space physically corresponds to
+invertible stacking.
+This perspective makes the valid-
+ity and generality of Kitaev’s ideas self-evident.
+The
+difficulty in applying this approach lies in identifying a
+concrete Ω-spectrum to characterize a specific type of in-
+vertible topological order. In homotopy theory, there is a
+one-to-one correspondence between Ω-spectra and gener-
+alized cohomology theories. For many physical systems of
+interest, their classifying spaces are not directly specified
+by an Ω-spectrum, but rather by a generalized cohomol-
+ogy theory.
+Examples include interacting bosonic sys-
+tems [44, 45], interacting fermionic systems [46], invert-
+ible stabilizer codes [47], quantum cellular automata [48],
+and invertible topological quantum field theories [49, 50].
+For free fermionic systems, the classifying space corre-
+sponds to the space of gapped Hamiltonians. Mathemat-
+ically, this is precisely the Ω-spectrum associated with
+the K-theory mentioned earlier. In the presence of sym-
+metries, we need to consider the genuine G-Ω-spectrum
+[27, 51]. A genuine G-Ω-spectrum is no longer a sequence
+of spaces indexed by integers; rather, it consists of G-
+spaces XV indexed by virtual real representations V of
+the group G, satisfying the equivalence ΩV XV ⊕W ≃XW .
+When G is the trivial group, its real representations are
+determined solely by their dimensions, and we recover
+the sequence of spaces indexed by integers.
+Here, the
+real representation V (or the virtual real representation
+−V ) of G can be interpreted as the real space (or the mo-
+mentum space). An ordinary Ω-spectrum can be viewed
+as a mathematical structure that packages systems of all
+dimensions together, whereas a genuine G-Ω-spectrum
+further incorporates the different actions of symmetries
+on space.
+This paper is organized into two main parts.
+In
+the first part, Sec. II, we study the classifying spaces
+for gapped free fermionic systems. We first define the
+algebra Asym which describes the symmetries of free
+fermionic systems, as well as the algebra AV
+sym consist-
+ing of Dirac Hamiltonians that possess such symme-
+tries. Next, we construct several classifying spaces for
+free fermionic systems, elucidate the relationships be-
+tween them, and demonstrate how these spaces consti-
+tute a genuine G-Ω-spectrum. There are four different
+but equivalent classifications for free fermionic systems,
+which are summarized in Eq. (3).
+Here, we only con-
+sider the classification of strong phases. Several previ-
+ously ambiguous concepts in the physical literature are
+now rigorously clarified by Eq. (3). At the end of the
+section, we review the tenfold way using the Z2-graded
+Wedderburn–Artin decomposition of AV
+sym, and the ex-
+
+tension problems of AV
+sym that lead to an algebraic clas-
+sification of free fermionic systems.
+The second part, comprising Secs. III and IV, estab-
+lishes the theoretical foundation for computing the classi-
+fications, explicitly constructing Dirac Hamiltonians, and
+deriving the topological invariants of Dirac Hamiltonians.
+It also provides the underlying mathematical framework
+for the GAP software package.
+In Sec. III, we review
+the theory of graded semisimple algebras and present the
+classification of ZN
+2 -graded division algebras. Section IV
+constructs the Z2-graded Wedderburn–Artin decomposi-
+tion of AV
+sym. This decomposition is the main tool to com-
+pute the classifications, as well as to explicitly construct
+Dirac Hamiltonians and their corresponding topological
+invariants. At the end of this section, we introduce the
+GAP software package [35] and provide several compu-
+tational examples demonstrating its application.
+
+A.
+Conventions and notations
+
+We use K to denote a field; in this work, K is always
+R or C. Clp,q is the Clifford algebra over R, and Clp,q or
+Clp is the Clifford algebra over C, as defined in Sec. III D.
+Asym = C[G, ω, s] is a Z2-graded algebra with grading
+h, as defined in Sec. II B.
+A vector space V that has an action of an algebra A is
+called an A module. The corresponding representation of
+A on V is the algebra homomorphism ρV : A →End(V ).
+Module and representation are equivalent concepts in
+principle; however, we distinguish them by referring to
+the vector space V as the A module and to the algebra
+homomorphism ρV as the representation of A.
+When we use the word “space”, we refer to a topolog-
+ical space or a homotopy type, and more generally a G
+space or a G-homotopy type depending on the context.
+∼= of spaces stands for (G-)homeomorphism, ≃of spaces
+stands for (G-)homotopy equivalence. We use ΩX to de-
+note the loop space of a space X with a basepoint. If V is
+a G-representation over R, SV is the one-point compact-
+ification of V with the point at infinity as the basepoint.
+Similarly, we use ΩV X to denote the mapping space from
+SV to X preserving the basepoint.
+
+II.
+ALGEBRAS OF FREE FERMIONIC
+SYSTEMS
+
+In Sec. II A, we introduce a Z2-graded algebra Asym =
+C[G, ω, s], which will be used to describe the symmetries
+of free fermionic systems.
+From the algebra Asym, we
+can construct the classifying space K(Asym) for (0+1)-d
+gapped free fermionic systems, as discussed in Sec. II C,
+and the classifying space ΩV (K(Asym)) for (q + 1)-d
+gapped free fermionic systems, as discussed in Sec. II D.
+In Sec. II E, we construct the algebra AV
+sym of Dirac
+Hamiltonians, and the classifying space K(AV
+sym) for
+Dirac Hamiltonians in terms of their mass terms. The
+
+
+3
+
+classifying spaces K(AV
+sym) and ΩV (K(Asym)) have the
+same G-homotopy type; the G-homotopy equivalence is
+given by the construction of Dirac Hamiltonians from the
+mass terms. That is, we have an equivalence of classify-
+ing spaces
+
+{Dirac Hamiltonians}
+{Hamiltonians} .
+≃
+(1)
+
+or in math symbols,
+
+K(AV
+sym)
+ΩV (K(Asym)).
+≃
+(2)
+
+In Sec. II E 4, we show that K(AV
+sym) forms a genuine
+G-Ω-spectrum, which follows from a well-known physi-
+cal folk-theorem: atomic insulators are systems without
+nontrivial boundary states. Mathematically, the physical
+folk-theorem is equivalent to a generalization of (1, 1)-
+Bott periodicity for KR-theory [52].
+In Sec. II F, we consider the problem of classification.
+The main result is the following diagram:
+
+{Classification of Dirac Hamiltonians}
+{Classification of Hamiltonians}
+
+{Algebraic Classification}
+{bundle-theoretic classification} ,
+
+∼
+=
+
+∼
+= Solving the Hamiltonian
+∼
+= Changing the sign of the mass term
+
+ABS construction
+
+∼
+=
+
+(3)
+
+or in math symbols,
+
+π0
+�
+K(AV
+sym)G�
+
+π0
+��
+ΩV K(Asym)
+�G�
+
+A(AV
+sym)
+˜KAsym(SV ).
+
+∼
+=
+
+∼
+=
+∼
+=
+
+∼
+=
+
+(4)
+
+The two classification groups mentioned above are deter-
+mined by the connected components of the G-fixed point
+of the classifying spaces, as discussed in Sec. II F 1. Since
+K(Asym) also serves as the classifying space for vector
+bundles with symmetry Asym, it yields a bundle-theoretic
+classification ˜KAsym(SV ), as detailed in Sec. II F 4. The
+canonical map from the classifying space to the bundle-
+theoretic classification corresponds to the process of
+“solving the Hamiltonian”, which is the right-hand map
+in the diagram. To determine these classifications, we
+only need to calculate the classification of the mass
+terms of the Dirac Hamiltonians.
+Section II F 2 intro-
+duces an algebraic classification A(AV
+sym) of these mass
+terms, which corresponds to the left map, as established
+in Sec. II F 3. The proof that this map constitutes an
+isomorphism can be found in Sec. II G. Finally, the lower
+map represents the classic Atiyah–Bott–Shapiro (ABS)
+construction, as discussed in Sec. II F 5.
+
+A.
+Symmetries of free fermionic systems
+
+In quantum mechanics, the symmetry of a system is
+often described by group theory and group representa-
+tion. In free fermionic systems, the symmetry behaves in
+a more complicated way: we need to consider antilinear
+symmetries, projective representations, and anticommu-
+tation with the Hamiltonian. Thus, it is inconvenient to
+
+use only the language of group theory; we need to gener-
+alize the group to an algebra.
+
+An algebra is a vector space with an associative and
+unital multiplication. For each group G, there is an al-
+gebra C[G] called the group algebra.
+C[G] is spanned
+by the elements g ∈G as a vector space, and the mul-
+tiplication is given by g · h = gh.
+The representation
+theory of G is equivalent to the representation theory of
+C[G]; therefore, we can replace G by C[G] in the study
+of symmetries in quantum mechanics.
+
+As a symmetry, C[G] only describes the linear (or uni-
+tary) symmetry of the system. In general, the symmetry
+can be antilinear (or antiunitary). Furthermore, the mul-
+tiplication rule g · h = gh is also violated in many cases;
+for example, the rotation symmetry of a spin- 1
+
+2 system
+only satisfies this multiplication rule up to a sign.
+
+To describe these symmetries, we generalize C[G] to
+a new algebra C[G, ω, s]. The group homomorphism s :
+G →Z2 is called a Z2-grading on G. G0 = s−1(0) is
+the subgroup of linear symmetries, and G1 = s−1(1) is
+the subset of antilinear symmetries. ω is a two-cocycle,
+i.e., [ω] ∈H2(G, U(1)). The coefficient group U(1) of the
+cohomology has a G-action that is given by ga = a for
+g ∈G0, and ga = ¯a for g ∈G1, where a ∈U(1), and ¯a is
+the complex conjugate of a. The generators of C[G, ω, s]
+are still g ∈G, but we have g·h = ω(g, h)gh for g, h ∈G,
+and gi = −ig for g ∈G1.
+
+Notice that the algebra C[G, ω, s] is not an algebra
+over C.
+The multiplication of a C algebra should be
+C-bilinear, but we have gi = −ig for g ∈G1.
+Thus,
+C[G, ω, s] is actually an algebra over R: i ∈C is con-
+sidered as an independent generator of this R algebra,
+rather than just a scalar.
+
+
+4
+
+B.
+(0 + 1)-dimensional gapped free fermionic
+systems
+
+A 0+1-d gapped free fermionic system is a vector space
+with a Hamiltonian and a symmetry acting on it. The
+requirement of a gap partitions the vector space into two
+subspaces, of the occupied states and of the unoccupied
+states. Since we only care about the topology, we should
+focus on the partition itself but not the specific value of
+energy. Thus, we assume the energy of all occupied states
+to be −1, and the energy of all unoccupied states to be
+1.
+Under the assumption above, the Hamiltonian of the
+gapped system is a linear map H such that H2 = 1.
+If the system has symmetry, the vector space should be
+a representation of the algebra Asym := C[G, ω, s]. To-
+gether with the Hamiltonian H, we form a new algebra
+Cl0,1 ⊗C[G, ω, s], where Cl0,1 is the Clifford algebra that
+has one generator ˜e1 and satisfies the relation ˜e2
+1 = 1.
+There are symmetries anticommuting with the Hamil-
+tonian H, for example, the chiral symmetry. Therefore,
+we need to introduce a new grading on G that is given
+by h : G →Z2. With this grading, C[G, ω, s] becomes a
+Z2-graded algebra. A Z2-graded algebra is a Z2-graded
+vector space equipped with a unital and associative mul-
+tiplication which preserves the grading. There is a theory
+of Z2-graded algebras similar to that of ordinary algebras,
+as will be discussed in Sec. III. [53]
+Now the algebra of the symmetry and the Hamilto-
+nian becomes Cl0,1 ˆ⊗C[G, ω, s].
+ˆ⊗is the super tensor
+product of Z2-graded algebras; the generator ˜e1 ∈Cl0,1
+
+has grading 1. The ordinary tensor product A ⊗B has
+the property of a ⊗1 commuting with 1 ⊗b for a ∈A
+and b ∈B. The super tensor product ˆ⊗has the property
+of aˆ⊗1 anticommuting with 1ˆ⊗b for a ∈A1 and b ∈B1,
+where A1 and B1 are the grading 1 subspaces of A and
+B, when either a or b has grading 0, aˆ⊗1 commutes with
+1ˆ⊗b.
+A 0+1-d free fermionic system with the symmetry
+given by the Z2-graded algebra C[G, ω, s] is a represen-
+tation of Cl0,1 ˆ⊗C[G, ω, s]. Cl0,1 ˆ⊗C[G, ω, s] is a semisim-
+ple algebra, which means that any representation can
+be decomposed into a direct sum of irreducible represen-
+tations.
+Moreover, as a consequence of semisimplicity,
+Cl0,1 ˆ⊗C[G, ω, s] can be decomposed into a product of
+matrix algebras over division algebras, which is called
+the Wedderburn–Artin decomposition. Then the repre-
+sentation theory of Cl0,1 ˆ⊗C[G, ω, s] reduces to the rep-
+resentation theory of the matrix algebras over division
+algebras, which is easy to study.
+
+C.
+Classifying spaces
+
+To classify quantum systems, let us imagine a space
+K of all quantum states (with some properties, for ex-
+ample, 0+1-d gapped free fermionic systems), which is
+called the classifying space. A point in the classifying
+
+space K is a quantum state.
+Given two points in K,
+a path between them should be considered as an equiv-
+alence between two quantum states.
+Given two paths
+in K, the homotopy between them should be considered
+as an equivalence between two different equivalences be-
+tween quantum states. This keeps going to higher ho-
+motopies; therefore, the classifying space is a homotopy
+type.
+What is the equivalence of two quantum systems? For
+different types of quantum systems, there should be dif-
+ferent kinds of equivalence. For example, for the gapped
+free fermionic systems, the classifying space is the space
+of parameters of the gapped Hamiltonians, which is a
+topological space, and the equivalences are the paths and
+higher homotopies in the topological space. The physical
+meaning of this equivalence is the adiabatic deformation
+of the Hamiltonian. Another example is gapped inter-
+acting bosonic systems, where the equivalences are given
+by invertible gapped domain walls and by domain walls
+between domain walls.
+To get the classifying space for 0+1-d gapped fermionic
+systems, let us denote the Z2-graded algebra of symme-
+try C[G, ω, s] by Asym. Cl0,1 ˆ⊗Asym is the algebra of the
+symmetry together with the Hamiltonian. There is a sub-
+tlety that, to get a meaningful classification, we need to
+consider an infinite-dimensional quantum system for two
+reasons: (1) the quantum systems in the real world have
+infinite-dimensional Hilbert spaces, and (2) it is generally
+allowed to add new degrees of freedom to the system in
+the study of topological phases.
+In the language of representation theory, the infinite-
+dimensional system is given by a representation ρ of
+Cl0,1 ˆ⊗Asym; the Asym module corresponding to ρ is de-
+noted by U(Cl0,1 ˆ⊗Asym).
+ρ is a (countably) infinite-
+dimensional representation of Cl0,1 ˆ⊗Asym; if we de-
+compose it into irreducible representations, we require
+that the direct sum components contain all species
+of irreducible representations, and that for each irre-
+ducible representation there are infinitely many copies.
+U(Cl0,1 ˆ⊗Asym) is called the universe of Cl0,1 ˆ⊗Asym.
+The Hamiltonian of the system is ρ(˜e1 ˆ⊗1) = H0. H0
+is chosen to be the trivial system.
+Other symmetric
+Hamiltonians of the system also form a representation
+of Cl0,1 ˆ⊗Asym. The action of Asym is the same as ρ, but
+the Hamiltonian H is different from H0. We require H
+to be different from H0 only on a finite-dimensional sub-
+space of U(Cl0,1 ˆ⊗Asym). The reason is that we do not
+allow infinitely many high-energy states to be occupied
+and infinitely many low-energy states to be unoccupied.
+Now we define the classifying space. We first define
+the classifying space[54] of (not necessarily symmetric)
+Hamiltonians.
+
+For (0 + 1)-d gapped free fermionic systems with
+symmetry Asym, the classifying space for (not nec-
+essarily symmetric) Hamiltonians is K(Asym), which
+is the space of linear maps on U(Cl0,1 ˆ⊗Asym) such
+
+
+5
+
+that for H ∈K(Asym), H2 = 1 and H differs from
+H0 only on a finite-dimensional subspace.
+
+Since Asym = C[G, ω, s], K(Asym) has a G-action
+given by (−1)h(g)ρ(g)Hρ(g)−1.
+Notice that ρ(g)−1 =
+ω(g−1, g)−1ρ(g−1).
+Here, we take the convention that
+g−1 is the inverse as a group element in G, and (g)−1 is
+the inverse as an algebra element in C[G, ω, s]. Therefore,
+we have (g)−1 = ω(g−1, g)−1g−1 and ρ(g)−1 = ρ((g)−1).
+The G-action makes K(Asym) a G-space.
+
+For (0 + 1)-d gapped free fermionic systems with
+symmetry Asym, the classifying space for symmet-
+ric Hamiltonians is K(Asym)G, which is the G-fixed
+point subspace of K(Asym), i.e., the subspace satis-
+fying (−1)h(g)ρ(g)Hρ(g)−1 = H for H ∈K(Asym).
+
+D.
+(q + 1)-dimensional gapped free fermionic
+systems
+
+In q +1 dimension, free fermionic systems can be stud-
+ied through the Hamiltonians on the Brillouin zone. In
+general, the Brillouin zone is a q-dimensional torus T q.
+Here, we assume the Brillouin zone to be a q-dimensional
+sphere Sq, for the reason that we only consider strong
+topological insulators or superconductors [55].
+Some symmetries have an action on the Brillouin zone,
+for example, the point group symmetries. In general, we
+consider a q-dimensional orthogonal real representation
+ρV of G on V , and form the representation sphere SV
+
+by taking the one-point compactification of V . The G-
+action on V makes SV a G-space. The representation
+sphere SV is a model of spherical Brillouin zone with
+G-action.
+To construct a symmetric Hamiltonian on SV , we
+only need to construct a G-equivariant map H : SV →
+K(Asym) satisfying
+
+(−1)h(g)ρ(g)H(k)ρ(g)−1 = H(g · k),
+(5)
+
+for k ∈SV [56].
+
+For (q + 1)-d gapped free fermionic systems with
+symmetry Asym, the classifying space for (not neces-
+sarily symmetric) Hamiltonians on the Brillouin zone
+SV is ΩV (K(Asym)). The classifying space for sym-
+metric Hamiltonians on the Brillouin zone SV is the
+G-fixed point subspace
+�
+ΩV K(Asym)
+�G.
+
+ΩV (K(Asym)) := Top∗(SV , K(Asym)) is the mapping
+space from SV to K(Asym) preserving the basepoint. The
+basepoint of SV is the point at infinity, and the basepoint
+
+of K(Asym) is H0. There is a G-action on ΩV (K(Asym))
+that is given by g ·f(g−1 ·−) for f in the mapping space.
+We give a remark on why the Hamiltonians should pre-
+serve the basepoint, i.e., H(∞) = H0. We have
+
+Top(SV , K(Asym)) ≃Top∗(SV , K(Asym)) × K(Asym).
+(6)
+The homotopy equivalence is given by a calculation using
+stable homotopy theory,
+
+Top(SV , K(Asym)) ≃Top∗(SV
++, K(Asym))
+
+≃Sp(Σ∞SV
++, K(Asym))
+
+≃Sp(Σ∞SV ∨Σ∞S0, K(Asym))
+
+≃Sp(Σ∞SV , K(Asym))
+
+× Sp(Σ∞S0, K(Asym))
+
+≃Top∗(SV , K(Asym))
+
+× Top∗(S0, K(Asym))
+
+≃Top∗(SV , K(Asym)) × K(Asym).
+(7)
+The homotopy equivalence shows that given a (q + 1)-d
+Hamiltonian with H(∞) = H0 and a (0 + 1)-d Hamilto-
+nian H′, we can construct a new (q + 1)-d Hamiltonian
+with H(∞) = H′. The choice of H(∞) corresponds to
+stacking the Hamiltonian with a trivial band, which is
+considered as an equivalence relation.
+
+E.
+Dirac Hamiltonians
+
+1.
+Definition of Dirac Hamiltonians
+
+There is a special class of (q + 1)-d Hamiltonians that
+are called Dirac Hamiltonians. A Dirac Hamiltonian on
+SV is given by
+
+H(k) =
+
+�
+−k0M + �q
+i=1 ki˜Γi,
+k ∈SV
++
+k0M0 + �q
+i=1 ki˜Γi,
+k ∈SV
+−,
+(8)
+
+where we embed SV into a (q + 1)-dimensional vector
+space V ⊕R as the unit sphere; hence, we have �q
+i=0 k2
+i =
+1, and SV
++ and SV
+−are the hemispheres with k0 ≥0 and
+k0 ≤0, respectively. M, M0, and ˜Γi are operators that
+square to 1. M and ˜Γi anticommute with each other, and
+M0 and ˜Γi anticommute with each other.
+In order to satisfy the symmetry condition Eq. (5), we
+require
+
+(−1)h(g)ρ(g)Mρ(g)−1 = M,
+(9)
+
+(−1)h(g)ρ(g)M0ρ(g)−1 = M0,
+(10)
+
+(−1)h(g)ρ(g)˜Γiρ(g)−1 =
+�
+
+j
+ρV (g)ji˜Γj.
+(11)
+
+
+6
+
+2.
+Classifying spaces for Dirac Hamiltonians
+
+Motivated by Dirac Hamiltonians, we construct a new
+Z2-graded algebra AV
+sym.
+AV
+sym is generated by gener-
+ators of Asym and q additional generators ˜ei, where ˜ei
+satisfy the same relations as ˜Γi in Dirac Hamiltonians,
+hence generating a Clifford algebra, and they also satisfy
+Eq. (11), i.e.,
+
+(−1)h(g)g · ˜ei · (g)−1 =
+�
+
+j
+ρV (g)ji˜ej = ρV (g)(˜ei). (12)
+
+Here, {˜ei} is considered as a basis of V , ρV (g) is a linear
+map on V , and ρV (g)ji is the matrix under this basis.
+Recall that we distinguish g−1 and (g)−1.
+g−1 is the
+inverse of g as a group element, (g)−1 is the inverse of g as
+an algebra element, and we have (g)−1 = g−1ω(g, g−1)−1.
+The generators ˜ei have grading 1, and the group elements
+g ∈G with h(g) = 1 also have grading 1; this defines a
+Z2-grading structure on AV
+sym.
+In parallel with the construction in Sec. II C, but us-
+ing AV
+sym instead of Asym, we obtain the algebra of Dirac
+Hamiltonians Cl0,1 ˆ⊗AV
+sym, the infinite-dimensional mod-
+ule U(Cl0,1 ˆ⊗AV
+sym), and the classifying space for Dirac
+Hamiltonians K(AV
+sym). Let ρ be the representation ho-
+momorphism of U(Cl0,1 ˆ⊗AV
+sym). Then M0 = ρ(˜e1 ˆ⊗1) is
+the basepoint of K(AV
+sym), which represents the trivial
+Dirac Hamiltonian.
+
+For (q + 1)-dimensional Dirac Hamiltonians with
+symmetry Asym, the classifying space for (not nec-
+essarily symmetric) Hamiltonians is K(AV
+sym), which
+is the space of linear maps on U(Cl0,1 ˆ⊗AV
+sym) such
+that for any M ∈K(AV
+sym), M differs from M0 only
+on a finite-dimensional subspace, and upon replacing
+M0 with M, the map M yields a representation of
+Cl0,1 ˆ⊗AV
+sym.
+For (q + 1)-d Dirac Hamiltonians with symmetry
+Asym, the classifying space for symmetric Hamilto-
+nians is K(AV
+sym)G, which is the G-fixed point sub-
+space of K(AV
+sym), i.e., (−1)h(g)ρ(g)Mρ(g)−1 = M
+for M ∈K(AV
+sym).
+
+The classifying space K(AV
+sym) is the space of mass
+terms −M on the north point of the Brillouin zone SV .
+Given M ∈K(AV
+sym), we can construct a Dirac Hamilto-
+nian [Eq. (8)] with −M on the north point and −M0 on
+the south point of SV .
+
+3.
+Comparison of two classifying spaces: A conjecture
+
+Notice that there is a canonical map from K(AV
+sym) to
+ΩV (K(Asym)) induced[57] by the construction of Dirac
+Hamiltonians from the mass term using Eq. (8), and
+
+we set the basepoint H0 of K(Asym) and the base-
+point M0 of K(AV
+sym) to be equal [we assume the uni-
+verse U(Cl0,1 ˆ⊗Asym) is constructed from U(Cl0,1 ˆ⊗AV
+sym)
+by restriction of algebras Cl0,1 ˆ⊗Asym �→Cl0,1 ˆ⊗AV
+sym].
+There is a conjecture:
+
+K(AV
+sym) ≃ΩV (K(Asym)) is a G-equivariant ho-
+motopy equivalence.
+
+This demonstrates that studying the classifying space
+for Dirac Hamiltonians is sufficient. It should be noted
+that this result has been used implicitly in physics-related
+works, for example, Refs. [20, 27].
+The G-homotopy equivalence relies on a generalization
+of the fundamental theorem of equivariant K-theory es-
+tablished by Karoubi [58]. Assuming this generalization
+holds, the proof of the G-homotopy equivalence is pre-
+sented in Appendix E.
+
+4.
+Atomic insulators and Bott periodicity
+
+The aforementioned G-equivariant homotopy equiva-
+lence alone is insufficient to package K(AV
+sym) into a
+genuine G-Ω-spectrum.
+If we denote a genuine G-Ω-
+spectrum as XV , it should satisfy ΩV XV ⊕W ≃XW . De-
+noting K(Asym) as X0, currently we only have ΩV X0 ≃
+K(AV
+sym); therefore, K(AV
+sym) is effectively X−V , and we
+still need to find the definition of XV . Here, −V employs
+the concept of a virtual representation, which is the for-
+mal difference V −W of two representations, making the
+set of all representations an abelian group.
+The task below is to find a real representation V ′
+
+of G such that K(AV ⊕V ′
+sym
+) ≃K(Asym).
+Consequently,
+we have X0 ≃X−V −V ′, which further leads to XV ≃
+XV −V −V ′ ≃X−V ′. Thus, we can define XV as X−V ′,
+namely K(AV ′
+sym).
+We will prove that V ′ is the representation satisfying
+ρV ′(g) = (−1)s(g)ρV (g). There exists the following Z2-
+graded algebra isomorphism:
+
+AV ⊕V ′
+sym
+∼= AQV ⊕QV ′′
+sym
+∼= Cld,0 ˆ⊗Cl0,d ˆ⊗Asym,
+(13)
+
+where the first isomorphism is induced by ˜ei �→iei with
+˜ei ∈V ′. The definition of AQ
+sym can be found in Sec. IV B.
+(V, QV ) is a space equipped with a quadratic form QV
+whose diagonal elements are all 1. (V ′′, QV ′′) is a space
+equipped with a quadratic form QV ′′ whose diagonal ele-
+ments are all −1, satisfying ρV ′′(g) = ρV (g). The second
+isomorphism is given by the “separation of variables”;
+see Definition IV.2. We also need to check whether the
+two-cocycle and the Z2-grading after the separation of
+variables are consistent with Asym. Note that oV = oV ′′
+and oV ⊕V ′′ = oV + oV ′′ = 0. Therefore, the Z2-grading
+after separation of variables remains h. The two-cocycle
+
+
+7
+
+after separation of variables is
+
+ω + 1
+
+2ωQV ⊕QV ′′ + 1
+
+2(h + oV ⊕V ′′) ∪oV ⊕V ′′
+(14)
+
+= ω + 1
+
+2(w+
+2 + w−
+2 + w+
+1 ∪w−
+1 + w−
+1 ∪w−
+1 )
+(15)
+
+= ω
+(16)
+
+The third term in the first line is 0. The second term
+follows from Definition IV.5, noting that w+
+1
+= oV ,
+w−
+1 = oV ′′, and w+
+2 = w−
+2 .
+This completes the proof
+of the algebraic isomorphism. Note that Cld,d is a Z2-
+graded matrix algebra; therefore, the representation the-
+ory of AV ⊕V ′
+sym
+is identical to that of Asym, which implies
+that their classifying spaces are G-homotopy equivalent.
+Thus, we obtain K(AV ⊕V ′
+sym
+) ≃K(Asym).
+
+The G-homotopy equivalence K(AV ⊕V ′
+sym
+) ≃K(Asym)
+is a generalization of the (1, 1)-Bott periodicity in KR-
+theory [52].
+Using this G-homotopy equivalence, we
+can define the classifying space XV −U ≃X−V ′−U ≃
+K(AV ′⊕U
+sym
+) for any virtual representation V −U, where
+V ′ is as defined above. Furthermore, we have
+
+ΩV XV +W ≃ΩV X−V ′−W ′ ≃ΩV ⊕V ′⊕W ′X0
+
+≃ΩW ′X−V −V ′ ≃ΩW ′X0 ≃X−W ′
+
+≃XW .
+
+(17)
+
+Therefore, K(AV
+sym) is a genuine G-Ω-spectrum.
+Physically, the classification of atomic insulators is
+identical to that of zero-dimensional systems, and atomic
+insulators lack nontrivial boundary states.
+Note that
+the physical significance of the equivalence K(AV ⊕V ′
+sym
+) ≃
+K(Asym) is that the classifying space of zero-dimensional
+systems is equivalent to the classifying space of systems
+on V ⊕V ′, where the latter constitutes the classifying
+space of systems with no nontrivial boundary states.
+This G-homotopy equivalence provides a rigorous de-
+scription of the boundary-state problem of atomic insu-
+lators.
+
+F.
+The classification of gapped free fermionic
+Hamiltonians
+
+1.
+The topological classification
+
+The classification of free fermionic systems is given by
+the connected components of the classifying spaces. We
+use
+
+π0
+��
+ΩV K(Asym)
+�G�
+∼= π0
+�
+K(AV
+sym)G�
+(18)
+
+as the classification, where π0 is the zeroth homotopy
+group, which corresponds to the set of path-connected
+components.
+
+2.
+The algebraic classification
+
+The Grothendieck group M(A) of a semisimple alge-
+bra A is the free abelian group generated by the isomor-
+phism classes of irreducible representations of A. Given
+an algebra homomorphism f : A →B, it induces a group
+homomorphism f ∗: M(B) →M(A).
+We define the algebraic classification A(AV
+sym) of free
+fermionic systems with symmetry Asym as the cokernel
+of
+
+i∗: M(Cl0,2 ˆ⊗AV
+sym) →M(Cl0,1 ˆ⊗AV
+sym)
+(19)
+
+induced by the inclusion
+
+i : Cl0,1 ˆ⊗AV
+sym →Cl0,2 ˆ⊗AV
+sym,
+(20)
+
+i.e., A(AV
+sym) := M(Cl0,1 ˆ⊗AV
+sym)/Im(i∗).
+There is an equivalent way to construct the algebraic
+classification using the Z2-graded Grothendieck group.
+For a Z2-graded semisimple algebra A, the Grothendieck
+group N(A) is a free abelian group that is generated by
+the isomorphism classes of irreducible Z2-graded repre-
+sentations of A. The algebraic classification is given by
+the cokernel of i∗: N(Cl0,1 ˆ⊗AV
+sym) →N(AV
+sym); we still
+denote it by A(AV
+sym).
+To show the equivalence of the two Grothendieck
+groups above, notice that a Z2-grading structure is equiv-
+alent to an extra linear map f satisfying f2 = id. The
+grading 0 subspace corresponds to f = 1, and the grad-
+ing 1 subspace corresponds to f = −1. In our case, f is
+precisely the element ˜e1 ˆ⊗1 in Cl0,1 ˆ⊗AV
+sym.
+
+3.
+Comparison of two classifications
+
+There is a canonical map from the algebraic classifi-
+cation to the topological classification, i.e., A(AV
+sym) →
+π0
+�
+K(AV
+sym)G�
+. The map is obtained from “changing the
+sign of the mass term”, which is a very common technique
+in the physics study of boundary states. Here, we explain
+the precise mathematical meaning of this technique.
+Given [W] ∈A(AV
+sym), where W is a module over
+Cl0,1 ˆ⊗AV
+sym, and an arbitrary injective map W
+�→
+U(Cl0,1 ˆ⊗AV
+sym), the image of [W] is given by −M0|W ,
+where M0 is the basepoint of K(AV
+sym)G.
+
+The map “changing the sign of the mass term”
+A(AV
+sym) ∼= π0
+�
+K(AV
+sym)G�
+is a group isomorphism.
+
+The proof can be found in Sec. II G 2.
+
+4.
+Bundle-theoretic classification
+
+Let H(k) be a Hamiltonian on the k-space SV with
+symmetry Asym.
+There is a vector bundle E over SV
+
+
+8
+
+spanned by wave functions {ψi(k)}N
+i=1. {ψi(k)}N
+i=1 can be
+chosen such that it forms a global frame of E; therefore,
+the vector bundle E is trivial. The Hamiltonian H(k)
+is a vector bundle map from E to itself. If we solve the
+Hamiltonian H(k), we will get a vector bundle[59] E0
+on SV spanned by states with H(k) = 1, and a vector
+bundle E1 on SV spanned by states with H(k) = −1.
+We have E ∼= E0 ⊕E1.
+There is an Asym action on the trivial bundle E. The
+action of g ∈Asym maps a vector in the fiber over k ∈SV
+
+to a vector in the fiber over g ·k. If H(k) is G symmetric,
+for h(g) = 0, the action of g preserves E0 and E1; for
+h(g) = 1, the action of g exchanges E0 and E1.
+Motivated by the discussion above, we define a class
+of vector bundles equipped with these structures; we de-
+note the category of such bundles on a G-space X by
+VectAsym(X). An object of VectAsym(X) is a trivial vec-
+tor bundle E that is the product of X and an ungraded
+Asym module. The bundle E carries a Z2-grading com-
+patible with the action of G, i.e., E ∼= E0 ⊕E1, satisfying
+the condition that, for g ∈G, if h(g) = 0 then g acts
+as a linear or antilinear bundle map preserving E0 and
+E1, while if h(g) = 1 then g acts as a linear or antilinear
+bundle map that exchanges E0 and E1.
+A morphism of VectAsym(X) from E to E′ is a bun-
+dle map that is a Asym-module map on each fiber and
+preserves the Z2-grading.
+We define a bundle-theoretic Abelian group ˜KAsym(X)
+[60]. An element of ˜KAsym(X) is an equivalence class of
+isomorphism classes of VectAsym(X). The equivalence is
+given by (E0, E1) ∼(E0 ⊕F0, E1 ⊕F1), where F is an
+element of VectAsym(X) such that F0 and F1 are trivial
+vector bundles; note that F0 and F1 may carry nontrivial
+actions of Asym. The abelian group structure is defined
+by (E0, E1) ⊕(E′
+0, E′
+1) := (E0 ⊕E′
+0, E1 ⊕E′
+1).
+The physical interpretation of F = (F0, F1) is that of
+a trivial state: a system consisting of trivial bands that
+carry some representation of Asym. F0 corresponds to a
+trivial band of unoccupied states, while F1 corresponds
+to a trivial band of occupied states.
+The equivalence
+relation then reflects the idea that adding trivial bands
+to the system does not change its classification.
+
+Example II.1. If Asym has only linear symmetries,
+a trivial two-cocycle, and a trivial Z2-grading h, then
+˜KAsym(X) reduces to the reduced G-equivariant complex
+K-theory. In this case, E0 and E1 are complex G bun-
+dles, and E0 and E1 are inverses of each other in the K
+group. Hence, E0 and E1 determine one another, so only
+one of them is needed to represent the K group.
+
+5.
+Comparison to ABS construction
+
+The ABS construction [61] is an isomorphism from the
+algebraic classification A(AV
+sym) to the bundle-theoretic
+classification ˜KAsym(SV ).
+
+Let W be a Z2-graded AV
+sym module. The ABS con-
+struction is given by the direct sum E0 ⊕E1. The space
+E0 is the clutching of SV
++ × W0 and SV
+−× W1 along the
+boundaries of SV
++ and SV
+−, where the fibers are identified
+via the transition function v �→ρW (v). Here, v lies in the
+boundary of SV
++ and may also be regarded as an element
+of AV
+sym by viewing ˜ei as a basis of V . The space E1 is the
+clutching of SV
++ × W1 and SV
+−× W0 with the transition
+function v �→−ρW (v).
+Next, we show that the ABS construction E of W is
+the vector bundle F obtained by solving the Dirac Hamil-
+tonian [Eq. (8)] with M = −M0. Recall that W can also
+be considered as an ungraded module over Cl0,1 ˆ⊗AV
+sym.
+As a direct consequence, the diagram Eq. (3) commutes.
+We only need to show E and F are isomorphic on
+each hemisphere, and that the transition function of E
+acts trivially on each fiber of F over the boundaries of
+the hemispheres (using the local isomorphism on each
+hemisphere to transfer the transition function of E to F).
+Note that F is a subbundle of a trivial bundle; we use the
+elements of the trivial bundle to represent the elements
+of F; therefore, the transferred transition function must
+act trivially on F.
+We first consider F0 with H(k) = 1. The vector bundle
+on SV
++ is trivial; there is an isomorphism f : F0|SV
++ →
+SV
++ × W0 ∼= E0|SV
++ . f is given by (k, v) �→(k, v + M0v)
+for v ∈W with H(k)v = v, and f−1 is given by (k, w) �→
+(k,
+1
+2(1+k0)(w + H(k)w)) for w ∈W0. The isomorphism
+g : F0|SV
+−→SV
+−× W1 ∼= E0|SV
+−is given by (k, v) �→
+(k, v −M0v) for v ∈W with H(k)v = v, and g−1 is given
+by (k, w) �→(k,
+1
+2(1−k0)(w + H(k)w)) for w ∈W1. The
+transition function on E from SV
++ to SV
+−coincides with
+H(k) on F; therefore, it acts trivially.
+For F1 with H(k) = −1, we have the isomorphism h :
+F1|SV
++ →SV
++ ×W1 ∼= E1|SV
++ . h is given by (k, v) �→(k, v−
+M0v) for v ∈W with H(k)v = −v, and h−1 is given by
+(k, w) �→(k,
+1
+2(1+k0)(w −H(k)w)) for w ∈W1. We also
+have the isomorphism l : F1|SV
+−→SV
+−×W0 ∼= E1|SV
+−. l is
+given by (k, v) �→(k, v + M0v) for v ∈W with H(k)v =
+−v, and l−1 is given by (k, w) �→(k,
+1
+2(1−k0)(w−H(k)w))
+for w ∈W0. The transition function on E from SV
++ to SV
+−
+coincides with −H(k) on F; therefore, it acts trivially.
+
+G.
+Tenfold way
+
+1.
+Calculation of the Algebraic Classification
+
+AV
+sym is a Z2-graded semisimple R algebra; it can be
+decomposed into a product of Z2-graded matrix alge-
+bras over Z2-graded division algebras, i.e., the Z2-graded
+Wedderburn–Artin decomposition.
+We devote the re-
+maining sections to calculating the decomposition. Thus,
+throughout the rest of this section, we assume that the
+
+
+9
+
+decomposition has already been obtained, i.e., we have
+
+AV
+sym ∼=
+�
+
+i
+Mdi(Di)(¯ci),
+(21)
+
+where Di is a Z2-graded division algebra. The definition
+of Z2-graded matrix algebra can be found in Sec. III A 2.
+There are ten different isomorphism classes of Z2-
+graded division R algebras. Three of them are ordinary
+division algebras R, C, and H, and the other seven are
+Cl0,1, Cl1,0, Cl2,0, Cl0,2, Cl1, Cl0,3 and Cl3,0. This is
+where the “tenfold way” comes from.
+To calculate A(AV
+sym), it is easy to show that the Z2-
+graded Grothendieck group has the property N(�
+
+i Ai) ∼=
+�
+
+i N(Ai), thus giving the decomposition
+
+N(AV
+sym) ∼=
+�
+
+i
+N(Di),
+(22)
+
+here we used the fact that tensoring with a Z2-graded
+matrix algebra doesn’t change the equivalence class of
+the Z2-graded module category of a Z2-graded algebra,
+equivalently, they are Z2-graded Morita equivalent. Sim-
+ilarly, we have
+
+N(Cl0,1 ˆ⊗AV
+sym) ∼=
+�
+
+i
+N(Cl0,1 ˆ⊗Di).
+(23)
+
+Thus, we obtain the decomposition,
+
+A(AV
+sym) ∼=
+�
+
+i
+A(Di).
+(24)
+
+Now the calculation of A(AV
+sym) reduces to the calcu-
+lation of A(Di), which is a well-known result; see, for
+example, Ref.
+[61].
+We record the value of A(Di) in
+Table II.
+
+2.
+Decomposition of the classifying spaces
+
+We calculate the structure of K(AV
+sym)G. Notice that
+we have
+
+U(Cl0,1 ˆ⊗AV
+sym) ∼=
+�
+
+i
+U
+�
+Cl0,1 ˆ⊗Mdi(Di)(¯ci)
+�
+.
+(25)
+
+Cl0,1 ˆ⊗AV
+sym acts on the right-hand side through the pro-
+jection to each product factor of the Wedderburn–Artin
+decomposition. K(AV
+sym)G is the space of the linear map
+M representing ˜e1 ˆ⊗1, or equivalently, the space of grad-
+ings. Notice that M is an (AV
+sym)0-module map, and each
+direct sum factor of U(Cl0,1 ˆ⊗AV
+sym) only contains noni-
+somorphic (AV
+sym)0 modules; therefore, M will not mix
+different direct sum factors. Thus, we get the decompo-
+sition
+
+K(AV
+sym)G ∼=
+�
+
+i
+K (Mdi(Di)(¯ci)) ≃
+�
+
+i
+K(Di).
+(26)
+
+Finally, notice that the map “changing the sign of the
+mass term” is also compatible with the decomposition.
+Thus, to prove that the map is an isomorphism, it suffices
+to prove that A(Di) →π0 (K(Di)) is an isomorphism,
+which can be checked case by case for all ten basic cases.
+
+III.
+GRADED ALGEBRAS
+
+Let Gr be a group. A Gr-graded algebra is an alge-
+bra equipped with a Gr-grading structure. Many alge-
+bras naturally have a grading structure. For example,
+the group algebra containing antilinear elements has a
+natural Z2-grading, and Asym has a natural Z2 × Z2-
+grading. In this section, we first review the basic theory
+of graded algebras, referring to [62] as a monograph on
+graded algebras. We then focus on Gr = ZN
+2 . Readers
+familiar with graded algebra fundamentals may proceed
+by reading only Definition III.3 and the classification of
+ZN
+2 -graded division algebras in Sec. III C; they may skip
+this chapter and return when needed.
+In what follows, we assume that Gr is an abelian group,
+and we use + for the multiplication.
+
+A.
+Definitions
+
+1.
+Graded vector spaces
+
+Let VecGr
+K be the category of Gr-graded vector spaces
+over K. The objects are Gr-graded vector spaces V =
+�
+
+c∈Gr Vc, and the morphisms are linear maps f : V →
+W such that f(Vc) ⊂Wc. The tensor product of V and
+W is defined by (V ⊗W)c = �
+c1+c2=c Vc1 ⊗Wc2, which
+makes VecGr
+K a monoidal category.
+An algebra object internal to a monoidal category is
+an object A equipped with a multiplication A ⊗A →A
+and a unit 1 →A satisfying the associativity and unit
+axioms.
+Similarly, an A-module object internal to a
+monoidal category is an object V equipped with an A
+action A ⊗V →V satisfying the associativity and unit
+axioms. By taking the monoidal category to be VecGr
+K ,
+the algebra object becomes a Gr-graded algebra, and the
+A-module object becomes a Gr-graded A module.
+Let HomGr(V, W) be the vector space of Gr-graded
+maps, and HomGr(V, W) be the Gr-graded vector space
+of all linear maps whose c component is the vector
+space of Gr-graded maps V
+→W(c), where W(c) is
+the same vector space as W with grading shifted by c,
+i.e., W(c)c′ = Wc′+c. Similarly, ModGr
+A (V, W) is the vec-
+tor space of A-module maps that preserve the grading,
+and ModGr
+A (V, W) is the Gr-graded vector space of all
+A-module maps.
+
+
+10
+
+2.
+Semisimple graded algebra
+
+We first recall the definition of semisimple algebras.
+An algebra A is semisimple if it is a direct sum of simple
+A modules. The major property of semisimple algebras
+is the Wedderburn–Artin theorem, which states that any
+semisimple algebra is isomorphic to a finite product of
+matrix algebras over division algebras, i.e., Φ = (ρi) :
+A ∼= �
+
+i Mdi(Di), where i takes values in the isomorphism
+classes of simple A-modules, and Di are division algebras.
+For K = C, Di must be C, and for K = R, Di is either
+R, C, or H.
+A simple module is of D type if the endomorphism al-
+gebra of the module is D. The irreducible representations
+can be extracted from the components ρi of Φ. Taking
+the canonical module Dd
+i for Md(Di) and forgetting the
+Di structure, ρi becomes an irreducible representation of
+A with a canonical Dop
+i
+structure acting from the right-
+hand side (see Appendix A 1 for details), i.e., the module
+is of Dop
+i
+type.
+The theory of Gr-graded semisimple algebras is similar.
+A Gr-graded algebra A is semisimple if it is a direct sum
+of simple Gr-graded A modules. A Gr-graded semisim-
+ple algebra can also be decomposed into a finite prod-
+uct of Gr-graded matrix algebras over Gr-graded divi-
+sion algebras, which is called the Gr-graded Wedderburn–
+Artin decomposition. Thus, we first introduce the def-
+inition of Gr-graded matrix algebras.
+Let A be a Gr-
+
+graded algebra.
+Then, Md(A)(¯c) is the Gr-graded al-
+gebra of d × d matrices over A with shifted grading
+¯c = (c1, . . . , cd) ∈Grd.
+The grading λ component is
+given by
+
+Md(A)(¯c)λ =
+
+
+
+
+
+Ac1+λ−c1 Ac1+λ−c2 · · · Ac1+λ−cd
+Ac2+λ−c1 Ac2+λ−c2 · · · Ac2+λ−cd
+...
+...
+...
+...
+Acd+λ−c1 Acd+λ−c2 · · · Acd+λ−cd
+
+
+
+.
+
+(27)
+Then, the Gr-graded Wedderburn–Artin theorem is
+
+Theorem III.1. Let A be a semisimple Gr-graded alge-
+bra. Then, A is isomorphic to �
+
+i Mdi(Di)(¯ci), where i
+takes values in the isomorphism classes of simple A mod-
+ules up to grading shifts, ¯ci = (ci1, . . . , cidi) ∈Grdi, and
+Di is a graded division algebra, i.e., all nonzero homoge-
+neous elements a ∈Dc are invertible.
+
+Proof. A can be decomposed into a direct sum of simple
+right A modules.
+Let V and W be two simple mod-
+ules, which are either isomorphic or nonisomorphic. If
+they are nonisomorphic, then ModGr
+A (V, W) = 0. How-
+ever, ModGr
+A (V, W) may not be 0, and V could be isomor-
+phic to W(c) for some c ∈Gr. Thus, we can decompose
+
+A into �
+
+i
+��di
+j=1 Vi(cij)
+�
+, where each Vi is simple and
+
+ModGr
+A (Vi, Vj) = 0 for i ̸= j.
+We have
+
+A ∼= ModGr
+A (A, A) ∼=
+�
+
+i
+
+
+
+
+
+di
+�
+
+j=1
+
+di
+�
+
+k=1
+ModGr
+A (Vi(cij), Vi(cik))
+
+
+
+,
+(28)
+
+and define ModGr
+A (Vi(cij), Vi(cik)) to be the (k, j) entry
+of the graded matrix algebra Mdi(Di)(¯ci), where Di is
+ModGr
+A (Vi, Vi).
+
+All Gr-graded irreducible representations can be ex-
+tracted from the decomposition, in a way similar to the
+ungraded case.
+
+3.
+Braiding structure
+
+Many concepts in representation theory actually in-
+volve braiding structure. For example, in order to define
+the multiplication of the tensor product algebra A ⊗B,
+we first need to use an exchange map from A⊗B ⊗A⊗B
+to A ⊗A ⊗B ⊗B acting on the middle two terms, and
+then multiply two pairs of A and B. The exchange of
+A and B is exactly the braiding structure. Another ex-
+ample is the multiplication of the opposite algebra Aop.
+We first need to use the exchange map from A ⊗A to
+itself, and then multiply them. Other examples include
+
+the graded vector space structure on the hom space of A
+modules, and the tensor product of A modules.
+
+The braiding structure on VecGr
+K
+is not unique. The
+classification of braiding structures on VecGr
+K
+is given in
+[63]. In this work, we only consider the braiding structure
+twisted by a symmetric bilinear form b : Gr × Gr →Z2,
+where Gr = ZN
+2 .
+
+For example, if we take Gr = Z2, we have two braiding
+structures. The first one is the trivial braiding structure,
+and the second one is the braiding structure of the super
+
+vector space, which is given by Vc ˆ⊗Wc′
+b(c,c′)
+−−−−→Wc′ ˆ⊗Vc,
+where b(c, c′) = −1 if c = c′ = 1, and b(c, c′) = 1 other-
+wise.
+
+We adopt the following convention: the braiding struc-
+ture on V ⊗W is trivial, while the braiding structure on
+V ˆ⊗W is that of super vector spaces.
+
+
+11
+
+B.
+Gr-crossed product algebra
+
+A Gr-crossed product algebra is a Gr-graded algebra
+A such that there exists an invertible element ac ∈Ac
+for each c ∈Gr.
+
+Proposition III.2. Let A be a Gr-crossed product alge-
+bra. There is an equivalence between the category of A0
+modules and the category of graded A modules,
+
+A ⊗A0 −: ModA0
+ModGr
+A
+
+≃
+⊥
+: (−)0,
+(29)
+
+where (−)0 is the restriction of the graded A modules to
+the grading 0 A0 submodule.
+
+Proof. We prove V0 ⊗A0 A ∼= V for any A module V .
+From the left to the right, we have v ⊗A0 a �→v · a for
+v ∈V0 and a ∈A. From the right to the left, we have
+vc �→v0 ⊗A0 ac for vc ∈Vc and v0 = vc · a−1
+c , where ac is
+the invertible element.
+
+Let V be a right A0 module. We define a new A0 mod-
+ule V ac by v ·V c b = v · (acba−1
+c ), where b ∈A, v ∈V and
+ac ∈Ac is invertible. We also denote V ac by V c if a set
+of invertible elements {ac}c∈Gr is given. Notice that the
+isomorphism class of V c does not depend on the choice
+of ac.
+It is easy to show that there is a commutative
+diagram up to natural isomorphisms,
+
+ModA0
+ModGr
+A
+
+ModA0
+ModGr
+A
+
+≃
+
+(−)c ≃
+(−)(c)
+≃
+
+⊥
+
+≃
+⊥
+
+(30)
+
+The functor (−)(c) is the grading shifting functor.
+Now we introduce the Wedderburn–Artin theorem
+for Gr-crossed product algebras.
+According to Defini-
+tion III.1, we already know that the semisimple graded
+
+algebras can be decomposed into graded matrix algebras.
+However, Eq. (30) gives more restrictions on each graded
+matrix component.
+
+Theorem III.3. Let A be a semisimple Gr-crossed prod-
+uct algebra, and V be a simple right A0-module that
+corresponds to a matrix algebra component Md(D0) of
+the Wedderburn–Artin decomposition of A0. Then, the
+graded matrix algebra component that corresponds to
+V ⊗A0 A has the form M|Gr/E|d(D)(¯c).
+Here, E =
+{c ∈Gr|V c ∼= V } is a subgroup of Gr, {ci} is a set of
+representatives of Gr/E, and we have
+
+¯c = (c1, . . . , c1, c2, . . . , c2, · · · , c|Gr/E|, . . . , c|Gr/E|), (31)
+
+where each ci appears d times. D is an E-graded division
+algebra with Dc ̸= 0 for c ∈E, and D0 happens to be the
+grading 0 subalgebra of D.
+Proof. In the proof of Definition III.2, we showed that
+each graded matrix algebra component in the decompo-
+sition is the endomorphism of the direct sum of all sim-
+ple A submodules of A that are isomorphic to W up to
+a grading shift, where W is a simple A module. Using
+Eq. (30), we can find all such simple A submodules at
+the level of A0 modules. Let V = W0, which corresponds
+to the matrix component Md(D0) of A0. We get a set
+of nonisomorphic A0 modules {V ci}, and the induced A
+modules V ci ⊗A0 A are isomorphic up to a grading shift.
+Notice that A0 has direct summands (V ci)⊕d as a right
+A0 module, and we have
+
+�
+
+[ci]∈Gr/E
+ModA0
+�
+(V ci)⊕d , (V ci)⊕d�
+∼=
+�
+
+[ci]∈Gr/E
+Md(D0),
+
+(32)
+where D0 ∼= ModA0(V c, V c) ∼= ModA0(V, V ).
+The A modules V ci ⊗A0 A ∼= V ⊗A0 A(ci) are exactly
+what we are finding. Thus, the graded matrix algebra
+component is
+
+ModGr
+A
+
+
+
+
+�
+
+[cj]∈Gr/E
+(V ⊗A0 A(cj))⊕d ,
+�
+
+[ck]∈Gr/E
+(V ⊗A0 A(ck))⊕d
+
+
+
+
+
+∼=M|Gr/E|d(D)(¯c),
+
+(33)
+
+where D ∼= ModGr
+A (V ⊗A0 A, V ⊗A0 A), and the grading
+c component of D is ModGr
+A (V ⊗A0 A, V ⊗A0 A(c)) ∼=
+ModA0(V, V c). Thus, D is E-graded, since Dc = 0 for
+c ̸∈E.
+
+C.
+The classification of ZN
+2 -graded division algebra
+
+In this section, we classify ZN
+2 -graded division algebras
+over R and C.
+
+
+12
+
+1.
+Z2-graded division algebra
+
+We review the classification of Z2-graded division al-
+gebras [64]. If D is a Z2-graded division algebra, then
+D0 is a division algebra. When D1 = 0, the classification
+reduces to the classification of ordinary division algebras.
+Thus, we assume D1 ̸= 0 in what follows.
+Let θ ∈D1 be an invertible element.
+We denote
+θ2 ∈D0 by a. θ induces an algebra automorphism of D0,
+which is denoted by f with f(d) = θdθ−1. It is straight-
+forward to show that f 2(d) = ada−1 and f(a) = a.
+Conversely, given (D0, f, a) such that f 2(d) = ada−1
+
+and f(a) = a, we can construct a Z2-graded algebra D ∼=
+D0 ⊕D0θ. An element of D has the form d or dθ for
+d ∈D0. The multiplication is induced by the rules θ2 = a
+and θdθ−1 = f(d).
+We have shown that the classification of Z2-graded di-
+vision algebras is equivalent to the classification of the
+data (D0, f, a) satisfying f 2(d) = ada−1 and f(a) = a.
+When D0 is central simple, we have the following lemma:
+
+Lemma III.4. If D0 is a central simple algebra over K,
+the Z2-graded division algebra constructed from (D0, f, a)
+is isomorphic to the Z2-graded division algebra con-
+structed from (D0, f ′, a′) such that a′ ∈K and f ′ = id.
+
+Proof. Since D0 is a central simple algebra, according to
+the Skolem–Noether theorem, any automorphism of D0
+is an inner automorphism. Thus, we have f(d) = bdb−1
+
+for some b ∈D0.
+If we set θ′ = b−1θ, then we have
+f ′(d) = θ′dθ′−1 = d for d ∈D0. Moreover, a′ = θ′2 ∈K,
+since d = (f ′)2(d) = a′d(a′)−1 for d ∈D0.
+
+For Z2-graded division algebras over C, D0 = C is a
+central simple algebra. Therefore, the only choice of D
+is (C, id, 1) up to isomorphism. Notice that if a ̸= 1, we
+can take θ′ to be a−1
+
+2 θ.
+For Z2-graded division algebras over R, when D0 = R
+or H, the only two choices are (D0, id, ±1) up to isomor-
+phism. When D0 = C, it is well known that the Galois
+group of C over R is Z2; hence, the only two choices of
+f are id and complex conjugation. When f = id, θ com-
+mutes with i; therefore, D is an algebra over C. Thus,
+the only choice is (C, id, 1) up to isomorphism. When f
+is the complex conjugation, f(a) = a shows a ∈R; hence,
+the only two choices are (C, (−), ±1) up to isomorphism.
+In summary, there are two isomorphism classes of Z2-
+graded division algebras over the field C, which are C and
+(C, id, 1). There are ten isomorphism classes of Z2-graded
+division algebras over R, which are R, C, H, (R, id, 1),
+(R, id, −1), (C, id, 1), (C, (−), 1), (C, (−), −1), (H, id, 1),
+and (H, id, −1).
+
+2.
+ZN
+2 -graded division algebra
+
+We classify ZN
+2 -graded division algebras over R and
+C.
+Let D be a ZN
+2 -graded division algebra such that
+Dc ̸= 0 for each c ∈ZN
+2 . Notice that Di ∼= D0 ⊕Dzi
+
+is a Z2-graded division algebra, where zi ∈ZN
+2
+is the
+ith generator of ZN
+2 . We denote the canonical grading 1
+element in Dzi by θi; therefore, we have Di ∼= (D0, fi, ai).
+It remains to determine the commutation relation be-
+tween θi and θj for i ̸= j. Here, we take aij = (θiθj)2,
+which encodes the commutation relation θiθj = bijθjθi,
+where bij = aija−1
+j fj(a−1
+i ). The Z2-graded division al-
+gebra D0 ⊕Dzi+zj is isomorphic to (D0, fi ◦fj, aij) if
+we choose θiθj to be the canonical grading 1 element in
+Dzi+zj.
+
+Lemma III.5. If D0 is a central simple algebra over
+K, according to Sec. III C 1, θi can be chosen such that
+fi = id and ai = ±1 for any i. Then, we have aij ∈K
+and (aij)2 = 1 for any i and j.
+
+Proof. We have
+
+θiθjθi = θib−1
+ij θiθj = fi(b−1
+ij )aiθj.
+(34)
+
+On the other hand, we have
+
+θiθjθi = bijθjai = bijfj(ai)θj.
+(35)
+
+Therefore, we have
+
+fi(b−1
+ij )ai = bijfj(ai).
+(36)
+
+Thus, we obtain b2
+ij = 1, since fi = idD0. Using bij =
+aija−1
+j fj(a−1
+i ) and ai = ±1, we get (aij)2 = 1. Notice
+that (fi ◦fj)2(d) = aijda−1
+ij = d for any d ∈D0; hence,
+aij ∈K.
+
+For ZN
+2 -graded division algebras over C, D0 = C is
+a central simple algebra. Therefore, the only choices of
+aij are ±1. For different choices of aij, D0 ⊕Dzi+zj are
+nonisomorphic. Hence, D with different choices of aij are
+nonisomorphic.
+For ZN
+2 -graded division algebras over R, D0 = R or H
+is a central simple algebra. Therefore, the only choices
+of aij are ±1.
+For D0 = C, there are two choices of fi, which are
+id and the complex conjugation. It reduces to the case
+of ZN
+2 -graded division algebras over C when all fi = id.
+For the cases in which only one fi equals (−), notice
+that Eq. (36) is correct in general; therefore, we have
+b2
+ij = a2
+ij = 1 if fi = id. Similar to Eq. (36), we have
+fj(bij)aj = b−1
+ij fi(aj), which is obtained by multiplying
+θjθiθi in two different ways. Thus, we obtain b2
+ij = a2
+ij =
+1 if fj = id. It remains to consider the case fi = (−) and
+fj = (−). In this case, we only have |fij|2 = 1; therefore,
+fij is a phase.
+To further determine fij, we need to change the choice
+of basis {zi} of ZN
+2 . Without loss of generality, we start
+with fi = (−) for the first n generators zi of ZN
+2 , and
+fj = id for the last N −n generators zj of ZN
+2 . We take
+a new basis z′
+n = zn−1 + zn, and z′
+i = zi for i ̸= n. At
+the same time, we use θ′
+n = θn−1θn to replace θn, while
+the other θi remain unchanged. Now fi is (−) for the
+
+
+13
+
+first n −1 generators of ZN
+2 , and fi is id for the last
+N −n + 1 generators of ZN
+2 . If we repeat this several
+times, we find that only f1 can be (−) and fi must be id
+for i > 1. Therefore, we never encounter the case where
+both fi and fj are (−) for i ̸= j.
+In summary, for a ZN
+2 -graded division algebra D over
+C, the classification is given by ({Di}, {aij}), where each
+Di ∼= D0 ⊕Dzi is a Z2-graded division algebra, and aij =
+±1.
+For a ZN
+2 -graded division algebra D over R with D0 =
+R or H, the classification is given by ({Di}, {aij}), where
+each Di ∼= D0⊕Dzi is a Z2-graded division R algebra, and
+aij = ±1. For D0 = C and all fi = id, the classification
+is given by ({Di}, {aij}), where Di ∼= D0 ⊕Dzi is a Z2-
+graded division C-algebra, and aij = ±1. For the cases
+in which at least one fi equals (−), we need to choose a
+basis as explained above such that f1 = (−) and fi = id
+for i ̸= 1. The classification is given by ({Di}, {aij}),
+where Di ∼= D0 ⊕Dzi is a Z2-graded division algebra,
+and aij = ±1.
+
+Example III.6. We enumerate all isomorphism classes
+of Z2×Z2-graded division algebras over R. If two Z2×Z2-
+graded division algebras are isomorphic after a change of
+grading, we count them as the same one. For D0 = R
+or H, D is determined by a1, a2 and a12 equal to ±1. It
+gives 4 for R and 4 for H. For D0 = C and f1 = f2 = id,
+it gives 2.
+For f1 = (−) and f2 = id, a2 must be 1,
+a1 = ±1 and a12 = ±1. Therefore, it gives 3. In total,
+the number is 13, as shown in [65].
+
+D.
+Clifford algebra
+
+In this section, we briefly review the basic concepts of
+Clifford algebras; for more details, see Appendix B 1.
+For each vector space V over R (resp.
+C) with a
+quadratic form Q : V →R (resp. C), there is a Clifford
+algebra ClQ (resp. ClQ). We mainly focus on nondegen-
+erate quadratic forms. In this case, we can choose a basis
+of V such that Q is diagonal with diagonal entries ±1.
+The algebra Clp,q is the Clifford algebra correspond-
+ing to Rp,q, where Rp,q is the vector space Rp+q with
+quadratic form having p positive and q negative diagonal
+entries. To be explicit, Clp,q is an R algebra generated by
+{e1, . . . , ep, ˜e1, . . . , ˜eq} that satisfy the relations e2
+i = −1,
+˜e2
+i = 1, eiej + ejei = ˜ei˜ej + ˜ej˜ei = ei˜ej + ˜ejei = 0.
+Similarly, Clp,q is the Clifford algebra corresponding
+to Cp,q. Clp,q is actually isomorphic to Cl0,p+q by tak-
+ing another set of generators {iei, ˜ei}. We also denote
+Cl0,p+q by Clp+q. Clp,q is a C algebra generated by the
+same sets of generators and relations as Clp,q.
+Clp,q and Clp,q are semisimple algebras and Z2-graded
+semisimple algebras, as proved in Definition B.3 and Def-
+inition B.4. The construction of simple modules and sim-
+ple graded modules can be found in the proof where we
+construct the Wedderburn–Artin decomposition explic-
+itly. The results of the Wedderburn–Artin decomposi-
+
+tion are given in Table I. The relation between Clifford
+algebras and graded division algebras is summarized in
+Table III. Using Definition B.3 and Table I, it is straight-
+forward to calculate A(Clp,q), which is shown in Table II.
+
+IV.
+DIRAC HAMILTONIANS AND
+DECOMPOSITION OF AV
+sym
+
+Section
+IV A
+introduces
+the
+ZN
+2 -graded
+algebra
+C[G, ω, s] and its Wedderburn–Artin decomposition.
+Section IV B explains how to perform the Z2-graded
+Wedderburn–Artin decomposition of AV
+sym.
+Sections
+IV C and IV D respectively describe how to extract Dirac
+Hamiltonians and their topological invariants from the
+decomposition. Finally, Sec. IV E presents a GAP pack-
+age developed by the authors to compute the aforemen-
+tioned decompositions.
+
+A.
+C[G, ω, s] with ZN
+2 -grading
+
+1.
+The Wedderburn–Artin decomposition
+
+Let G be a ZN
+2 -graded group with grading map G →
+ZN
+2 . Since Z2 is a field, ZN
+2 is a vector space over Z2. We
+assume the grading map to be surjective; if it is not, we
+can always restrict ZN
+2 to the image of the grading map.
+We also assume that s : G →ZN
+2 →Z2 is the grading of
+antilinear elements, i.e., the elements in Gc are antilinear
+when s(c) = 1. Since we assumed the grading map to be
+surjective, we can fix a set of group elements gc ∈Gc, for
+each c ∈ZN
+2 .
+We are going to decompose C[G, ω, s] into ZN
+2 -graded
+matrix algebras.
+We assume that the Wedderburn–
+Artin decomposition of the subalgebra C[G0, ω] is already
+known, as constructed in Sec. C 3. That is, we have the
+isomorphism Φ0 = (ρi0),
+
+C[G0, ω] ∼=
+�
+
+i0
+Mdi0(C),
+(37)
+
+where i0 takes values in the isomorphism classes of simple
+C[G0, ω]-modules.
+Let V
+be a simple C[G0, ω]-module and ρ0 be its
+representation.
+We can construct a ZN
+2 -graded simple
+module C[G, ω, s] ⊗C[G0,ω] V .
+As a C[G0, ω]-module,
+C[G, ω, s]⊗C[G0,ω]V is isomorphic to �
+
+c∈ZN
+2 gc⊗C[G0,ω]V ,
+and thus to �
+
+c∈ZN
+2 V gc, where V gc is the C[G0, ω]-
+module given by
+
+g · v = ν(gc, g, gc)ρ0(g−1
+c ggc)(v),
+(38)
+
+and z · v = ρ0(gcz)(v) for z ∈C and v ∈V . The phase
+factor ν(g1, g2, g3) appears in the formula (g1)−1·g2·g3 =
+ν(g1, g2, g3)g−1
+1 g2g3, to be explicit, we have
+
+ν(g1, g2, g3) := g1ω(g1, g−1
+1 )−1 g1ω(g2, g3)ω(g−1
+1 , g2g3).
+(39)
+
+
+14
+
+p
+Clp
+
+0
+C
+C
+1
+C × C
+Cl1
+
+2
+M2(C)
+M2(C)(¯c)
+3
+M2(C) × M2(C)
+M2(Cl1)
+...
+
+...
+...
+
+p or q
+Clp,0
+Cl0,q
+
+0
+R
+R
+R
+R
+1
+C
+Cl1,0
+R × R
+Cl0,1
+
+2
+H
+Cl2,0
+M2(R)
+Cl0,2
+
+3
+H × H
+Cl3,0
+M2(C)
+Cl0,3
+
+4
+M2(H)
+M2(H)(¯c)
+M2(H)
+M2(H)(¯c)
+5
+M4(C)
+M2(Cl0,3)
+M2(H) × M2(H)
+M2(Cl3,0)
+6
+M8(R)
+M4(Cl0,2)
+M4(H)
+M4(Cl2,0)
+7
+M8(R) × M8(R) M8(Cl0,1)
+M8(C)
+M8(Cl1,0)
+8
+M16(R)
+M16(R)(¯c)
+M16(R)
+M16(R)(¯c)
+9
+M16(C)
+M16(Cl1,0) M16(R) × M16(R) M16(Cl0,1)
+...
+
+...
+...
+
+...
+...
+
+TABLE I. The Wedderburn–Artin decomposition of Clifford algebras. The left side shows the decomposition as nongraded
+algebras, while the right side shows the decomposition as Z2-graded algebras. Clp,0 and Cl0,q exhibit eight-periodicity, and
+Clp exhibits two-periodicity. ¯c indicates that half of the dimensions have a grading of 0, and the other half have a grading of
+1. For example, for M2(C)(¯c), we have ¯c = (0, 1).
+
+p
+A(Clp)
+0
+Z
+1
+0
+2
+Z
+...
+
+...
+
+q A(Cl0,q)
+0
+Z
+1
+Z2
+2
+Z2
+3
+0
+4
+Z
+5
+0
+6
+0
+7
+0
+8
+Z
+...
+
+...
+
+TABLE II. The value of A(Clp,q).
+
+A direct calculation shows that the graded representation
+ρ is given by the block entries ρcc′ for c, c′ ∈ZN
+2 . For
+z ∈C, we have
+
+ρ(z)cc′ = δc,c′ρ0(gcz).
+(40)
+
+For g ∈Gd with d ∈ZN
+2 , we have
+
+ρ(g)cc′ = δc,c′+dν(gc, g, gc′)ρ0(g−1
+c ggc′).
+(41)
+
+D over C
+M|Gr/E|d(D)(¯c)
+C
+C
+Md(Cl2)
+(C, id, 1)
+Cl1
+Md(Cl1)
+
+D over R
+M|Gr/E|d(D)(¯c)
+R
+R
+Md(Cl1,1)
+C
+C
+Md(Cl2)
+H
+H
+Md(Cl4,0)
+(R, id, 1)
+Cl0,1
+Md(Cl0,1)
+(R, id, −1)
+Cl1,0
+Md(Cl1,0)
+(C, id, 1)
+Cl1
+Md(Cl1)
+(C, (−), 1)
+Cl0,2
+Md(Cl0,2)
+(C, (−), −1) Cl2,0
+Md(Cl2,0)
+(H, id, 1)
+Cl3,0
+Md(Cl3,0)
+(H, id, −1) Cl0,3
+Md(Cl0,3)
+
+TABLE III. The first two columns are the isomorphisms be-
+tween Z2-graded division algebras and Clifford algebras. The
+third column is the Wedderburn–Artin components of Z2-
+crossed product algebras as nongraded matrix algebras over
+Clifford algebras.
+
+Next, we determine the graded division algebra D cor-
+responding to the graded simple module. D0 is always
+C, and it acts on �
+
+c∈ZN
+2 V diagonally by ρ0(z). As dis-
+cussed in Definition III.3, we first need to determine the
+subspace E = {c ∈ZN
+2 |V gc ∼= V }. Then, we choose a
+basis {zi} of E such that the basis satisfies s(z1) = 1
+and s(zi) = 0 for i ̸= 1 when s is nontrivial. Note that
+
+
+15
+
+D is determined by {Di = D0 ⊕Dzi} and {aij}, as in
+Sec. III C 2.
+To determine Di, we only need to construct an in-
+vertible element θi in Dzi. Let fi be the isomorphism
+V ∼= V gzi. Notice that the map θi : V gc′ →V gc′+zi is a
+C[G0, ω]-map, and it must be induced by (fi)gc′, i.e., the
+result of the action of the functor (−)gc′ on the morphism
+fi. Therefore, the components of θi are given by
+
+(θi)cc′ = δc,c′+ziν(gc, gc′, gzi)ρ0(g−1
+c gc′gzi)fi.
+(42)
+
+Together with D0, we can generate the whole D. θ2
+i is
+the identity up to a scalar, by Schur’s lemma. For i with
+s(zi) = 0, we can multiply fi by a scalar such that θ2
+i = 1.
+For i = 1 with s(z1) = 1, θ1 is antilinear; therefore, we
+can only multiply f1 by a scalar such that θ2
+1 = ±1.
+Finally, we have aij = (θiθj)2 ∈{±1} for i ̸= j according
+to Sec. III C.
+In practice, we can use the canonical antilinear map
+K on V if V has a basis. For s(c) = 1, we take a new
+C[G0, ω]-module ¯V gc defined by
+
+g · v = ¯ν(gc, g, gc) ¯ρ0(g−1
+c ggc)(v),
+(43)
+
+and z · v = ρ0(z)(v) for z ∈C and v ∈V . It has the ad-
+vantage that the complex structure becomes the original
+one on V , and K : V gc →¯V gc is an isomorphism. Re-
+placing V gc with ¯V gc when s(c) = 1, we get, for g ∈Gd
+with d ∈ZN
+2 ,
+
+ρ(g)cc′ = δc,c′+dKs(c)ν(gc, g, gc′)ρ0(g−1
+c ggc′)Ks(c′).
+(44)
+
+And the components of θi becomes
+
+(θi)cc′ = δc,c′+ziKs(c)ν(gc, gc′, gzi)
+
+· ρ0(g−1
+c gc′gzi)Ks(zi)fiKs(c′),
+(45)
+
+where fi : V →¯V gzi is an isomorphism.
+The D-structure on the ZN
+2 -graded module can be used
+to extract a ZN
+2 -graded Wedderburn–Artin component
+with coefficient in Dop, as introduced in Definition III.3.
+We can construct one such component for each equiva-
+lence class of simple C[G0, ω]-modules under the equiva-
+lence relation given by V ∼= W gc for some c ∈ZN
+2 .
+Therefore, we get the Wedderburn–Artin decomposi-
+tion of C[G, ω, s] as a ZN
+2 -graded algebra, which is given
+by the isomorphism Φ = (ρi),
+
+C[G, ω, s] ∼=
+�
+
+i
+Md′
+i(Di)(¯ci),
+(46)
+
+where i takes values in the equivalence classes of simple
+ZN
+2 -graded C[G, ω, s]-modules; the equivalence relation
+is given by isomorphism up to a grading shift. We have
+d′
+i = |Gr/Ei|di0 = di/dim(Di), where di is the dimension
+of the simple ZN
+2 -graded C[G, ω, s]-module.
+
+2.
+The inverse of Φ
+
+For f ∈Md′
+i(Di)(¯ci), we have
+
+Φ−1(f) =
+di
+2|G|
+
+�
+
+g∈G
+ω(g−1, g)−1 �
+Tr
+�
+Re
+�
+ρi(g−1)f
+��
+−Tr
+�
+Re
+�
+ρi(ig−1)f
+��
+i
+�
+g,
+(47)
+
+where Re is the projection from D to the subspace R
+spanned by the unit. This formula is proved in Sec. D 2 c.
+
+3.
+Character theory
+
+We first determine E by characters. We need to cal-
+culate
+1
+|G0|
+
+�
+
+g∈G0
+ω(g, g−1)−1χgc(g−1)χ(g)
+(48)
+
+to determine whether V ∼= V gc for all c ∈ZN
+2 , where χgc
+is the character of V gc.
+To determine D by characters, we only need to deter-
+mine Di and aij. For i with s(zi) = 0, Di ∼= Cl1. When
+s is nontrivial, D1 is determined by w1 as in Sec. D 2 d,
+
+w1 =
+1
+|G0|
+
+�
+
+g∈Gz1
+ω(g, g)χ(g2),
+(49)
+
+where χ is the character of V . If w1 = 1, then D1 =
+Cl0,2. If w1 = −1, then D1 = Cl2,0. Notice that aij
+is determined by the Z2-graded division algebra D0 ⊕
+Dzi+zj; similarly, aij is determined by
+
+wij =
+1
+|G0|
+
+�
+
+g∈Gzi+zj
+ω(g, g)χ(g2).
+(50)
+
+If wij = 1, then aij = 1. If wij = −1, then aij = −1.
+
+B.
+Z2-graded algebra AV
+sym
+
+1.
+The Wedderburn–Artin decomposition
+
+Let us recall the definitions of the Pin and Spin groups
+[66].
+
+
+16
+
+Proposition IV.1. Let (V, Q) be a finite-dimensional
+vector space over R equipped with a nondegenerate
+quadratic form.
+There are short exact sequences of
+groups,
+
+1 →Z2 →PinQ →OQ →1
+
+and
+
+1 →Z2 →SpinQ →SOQ →1.
+
+where PinQ and SpinQ are subgroups of the unit group
+of ClQ. PinQ is generated by elements x = v1v2 . . . vk
+with vi ∈V and Q(vi) ̸= 0, satisfying the normaliza-
+tion |N(x)| = 1, where N is the spinorial norm. SpinQ
+consists of those elements in PinQ generated by an even
+number of vectors.
+The homomorphism from PinQ (resp. SpinQ) to OQ
+(resp. SOQ) is defined by x �→(−1)deg(x)x(−)x−1.
+
+Proof. The action of a vector v ∈V ⊂PinQ on V is
+given by v �→−uvu−1, which is a reflection across the
+hyperplane orthogonal to u. Since OQ is generated by
+reflections (and SOQ by an even number of reflections),
+the maps PinQ →OQ and SpinQ →SOQ are surjective.
+The kernel Z2 of these maps is {±1}.
+
+Let ρ : G →OQ be a group homomorphism; we can
+construct a diagram of exact sequences,
+
+1
+Z2
+GωQ
+G
+1
+
+1
+Z2
+PinQ
+OQ
+1
+
+π
+
+˜ρ
+f
+ρ
+(51)
+
+The right square is a pullback; GωQ is the group exten-
+sion of G and Z2 by the two-cocycle ωQ. The following
+theorem on “separation of variables” plays a central role
+in the construction of the Wedderburn–Artin decompo-
+sition of AV
+sym. Here, we slightly generalize the definition
+of AV
+sym by allowing V to be equipped with a general
+quadratic form Q. The orthogonal real representation V
+is generalized to G →OQ, yielding the Z2-graded algebra
+A(V,Q)
+sym . When no confusion arises, this is also denoted as
+AQ
+sym or AV
+sym.
+
+Theorem
+IV.2
+([20, 27]). Let (V, Q) be a finite-
+dimensional
+vector
+space
+over
+R
+equipped
+with
+a
+quadratic form and a G action given by ρ : G →OQ,
+˜ρ : GωQ →PinQ be a lifting of ρ, and f be the section
+of π as in Eq. (51). Then, we have a Z2-graded isomor-
+phism
+
+A(V,Q)
+sym
+∼= ClQ ˆ⊗RC[G, ω′, s],
+(52)
+
+where ω′ is a two-cocycle over the coefficient R/Z with
+
+ω′(g1, g2) = ω(g1, g2)+ 1
+
+2ωQ(g1, g2)+ 1
+
+2(h+o)∪o(g1, g2),
+
+The Z2 grading of C[G, ω′, s] is given by h + o, where o
+is the one-cocycle given by det(g) = (−1)o(g).
+
+Proof. We construct the isomorphism explicitly by g �→
+˜ρ (f (g)) ˆ⊗g and ei �→ei ˆ⊗1.
+The map is obviously a
+bijection, and it is an algebra homomorphism according
+to the following calculation:
+�
+˜ρ (f (g1)) ˆ⊗g1
+�
+·
+�
+˜ρ (f (g2)) ˆ⊗g2
+�
+
+= (−1)(h(g1)+o(g1))o(g2) ˜ρ (f (g1) f (g2)) ˆ⊗ei2πω′(g1,g2)g1g2
+
+= (−1)(h(g1)+o(g1))o(g2)+ωQ(g1,g2) ei2πω′(g1,g2)
+
+· ˜ρ (f (g1g2)) ˆ⊗g1g2
+
+= ei2πω(g1,g2)˜ρ (f (g1g2)) ˆ⊗g1g2
+
+�
+˜ρ (f (g)) ˆ⊗g
+�
+·
+�
+v ˆ⊗1
+�
+·
+�
+˜ρ (f (g)) ˆ⊗g
+�−1
+
+=
+�
+˜ρ (f (g)) ˆ⊗1
+�
+·
+�
+1ˆ⊗g
+�
+·
+�
+v ˆ⊗1
+�
+·
+�
+1ˆ⊗g
+�−1
+
+·
+�
+˜ρ (f (g))−1 ˆ⊗1
+�
+
+= (−1)(h+o)(g)˜ρ (f (g)) v˜ρ (f (g))−1 ˆ⊗1
+
+= (−1)h(g)ρ (g) (v) ˆ⊗1.
+
+We used the following equations in the above calculation:
+
+f(g1)f(g2) = (−1)ωQ(g1,g2) · f(g1g2),
+(53)
+
+where −1 is considered as an element in Z2 �→GωQ.
+
+C[G, ω′, s] is a Z2×Z2-graded algebra, where the grad-
+ing is given by (s, h+o). We first obtain the Wedderburn–
+Artin decomposition of C[G, ω′, s] as a Z2 × Z2-graded
+algebra using the method described in Sec. IV A. We
+then forget the grading corresponding to s to obtain the
+Wedderburn–Artin decomposition as a Z2-graded alge-
+bra, as treated in Appendix B 2 a.
+Finally, taking the
+graded tensor product with ClQ yields the Wedderburn–
+Artin decomposition of AV
+sym as a Z2-graded algebra (see
+Appendix B 2 b).
+
+2.
+H2(BOQ, Z2)
+
+In this section, we provide supplementary details re-
+garding ωQ. Similar to ordinary group extensions, the
+group extension of OQ by Z2 is classified by ωQ ∈
+H2(BOQ, Z2). The cocycle used in the extension of G
+is the image of ωQ under the action of ρ∗
+V , and this im-
+age is likewise denoted as ωQ.
+It is well known [67] that
+
+H∗(BO(n), Z2) ∼= Z2[w1, . . . , wn],
+(54)
+
+where wi ∈Hi(BO(n), Z2) are called Stiefel–Whitney
+classes. Pin+(n) is the extension by w2. This result can
+be generalized to O(p, q) [68].
+
+Theorem IV.3.
+
+H∗(BO(p, q), Z2) ∼= Z2[w−
+1 , . . . , w−
+p ] ⊗Z2 Z2[w+
+1 , . . . , w+
+q ].
+(55)
+
+
+17
+
+Proof. O(p, q) is a subgroup of GL(p + q).
+GL(p + q)
+has a homotopy retraction to O(p + q). Restricting this
+homotopy retraction to O(p, q), we obtain a homotopy
+retraction from O(p, q) to O(p) × O(q). The result then
+follows from the K¨unneth formula.
+
+Corollary IV.4. H2(BO(p, q), Z2) is generated by w+
+2 ,
+w−
+2 , w+
+1 w+
+1 , w−
+1 w−
+1 , and w+
+1 w−
+1 , where the symbols for
+the cup product and tensor product are omitted. These
+cohomology classes characterize the algebraic relations
+satisfied by the generators of O(p, q), i.e., the algebraic
+relations of reflections along a vector. Let v, v′ ∈Rq ⊂
+Rp,q and u, u′ ∈Rp ⊂Rp,q, where v is orthogonal to v′
+
+and u is orthogonal to u′.
+
+1. w+
+2 (or w−
+2 ) characterizes the (anti)commutativity
+of reflections along v and v′ (or u and u′).
+
+2. w+
+1 w+
+1 (or w−
+1 w−
+1 ) characterizes the fact that the
+square of the reflection along v (or u) equals ±1.
+
+3. w+
+1 w−
+1 characterizes the (anti)commutativity of re-
+flections along v and u.
+
+4. w+
+1 (or w−
+1 ) is the one-cocycle determined by det :
+O(q) →O(p, q) →Z2 (or det : O(p) →O(p, q) →
+Z2).
+
+In particular, the group extension of Pin(p, q) is given
+by w+
+2 + w−
+2 + w+
+1 w−
+1 + w−
+1 w−
+1 .
+
+Corollary
+IV.5. There is an obvious isomorphism
+O(p, q) ∼= O(q, p); hence, there is an isomorphism
+
+H∗(BO(p, q), Z2) ∼= H∗(BO(q, p), Z2).
+(56)
+
+Pin(q, p) is also a group extension of O(p, q), and the
+two-cocycle corresponding to this group extension is the
+element w+
+2 +w−
+2 +w+
+1 w−
+1 +w+
+1 w+
+1 in H∗(BO(p, q), Z2).
+In particular, the difference between the two cocycles used
+to extend Pin(q, p) and Pin(p, q) is w+
+1 w+
+1 + w−
+1 w−
+1 .
+
+C.
+Constructing Dirac Hamiltonians
+
+In this section, we explain how to construct Dirac
+Hamiltonians from the elements in the algebraic classifi-
+cation A(AV
+sym). In fact, we only need to write down the
+Dirac Hamiltonians corresponding to the generators of
+A(AV
+sym), since the Hamiltonians corresponding to other
+elements can be obtained via direct sums. The generators
+of A(AV
+sym) correspond to the Z2-graded simple modules
+of AV
+sym, or the ungraded simple modules of Cl0,1 ˆ⊗AV
+sym.
+Therefore, it suffices to construct the simple modules
+from each component of the Wedderburn–Artin decom-
+position. Finally, we use Eq. (8) to write down the Dirac
+Hamiltonians from these simple modules. Examples of
+Dirac Hamiltonians are given in Sec. IV E.
+
+D.
+Topological invariants of Dirac Hamiltonians
+
+Consider a given Dirac Hamiltonian [see Eq. (8)] whose
+mass term satisfies M = −M0. From this, we can extract
+a Z2-graded module N of AV
+sym. Let ρN denote its rep-
+resentation, where M is regarded as the Z2 grading. To
+determine which element in A(AV
+sym) it belongs to, we
+consider two cases.
+The first case is the Z2 topological invariant, which
+corresponds to a Z2 component in A(AV
+sym). Given the
+decomposition
+
+Φ : C[G, ω, s] ∼=
+�
+
+i
+Md′
+i(Di)(¯ci),
+(57)
+
+suppose the Z2 component corresponds to the index i.
+We map the identity element of the matrix algebra of
+component i back to C[G, ω, s] via Φ−1 given in Eq. (47),
+and then map it to AV
+sym via Definition IV.2, denoting
+the resulting element as ai. The components of C[G, ω, s]
+are in one-to-one correspondence with the components of
+AV
+sym. Note that ρN(ai) acts as the identity only on the
+submodule of V corresponding to component i, and acts
+as zero on all other submodules. Assuming the dimen-
+sion of the graded simple module of AV
+sym corresponding
+to component i is ni, then
+1
+ni TrR(ρN(ai)) (mod 2) is ex-
+actly the Z2 topological invariant. Note that the trace
+here requires treating the representation as a real repre-
+sentation.
+The other case is the Z topological invariant, which
+corresponds to a Z component in A(AV
+sym) and to the
+component i in the decomposition of C[G, ω, s]. If the di-
+mension of the system is q, then the Clifford algebra part
+of AV
+sym is Cl0,q, and we take an element ε1 = ˜e1˜e2 . . . ˜eq
+in it.
+For Md′
+i(Di)(¯ci), when Di is R, C, or H, we
+take a diagonal matrix, map it back to AV
+sym, and de-
+note it as ε2. This diagonal matrix is chosen such that
+for ¯ci = (ci1, ci2, . . . ), if cij = 0, the jth diagonal ele-
+ment is 1; if cij = 1, the jth diagonal element is −1.
+For Di = C, if ε2
+1 = −1, the diagonal elements are
+changed to ±i. When Di is one of the remaining seven
+Z2-graded division algebras, since they are all Clifford
+algebras, we take a diagonal matrix whose diagonal el-
+ements are e1e2 . . . ˜e1˜e2 . . . , map it back to AV
+sym, and
+denote it as ε2. Assuming the dimension of the graded
+simple module of AV
+sym corresponding to component i is
+ni, then
+1
+ni TrR (MρN(ε1ε2)) is exactly the Z topological
+invariant.
+
+E.
+Computing more complicated examples using
+GAP
+
+When computing more complicated examples, manual
+calculation is extremely cumbersome; therefore, a GAP
+package was developed by the authors [35]. GAP [69] is a
+computer algebra system specialized in group theory, ca-
+pable of computing irreducible characters of finite groups
+
+
+18
+
+and the irreducible complex representations correspond-
+ing to these characters. Consequently, the computational
+method introduced in this work assumes that all irre-
+ducible complex representations of the group are known,
+and subsequent calculations are performed on this basis.
+The computational method introduced herein requires
+taking square roots and solving norm equations. Since
+GAP primarily represents numbers via cyclotomic fields
+and lacks real or complex number types, and since cyclo-
+tomic fields are not closed under taking square roots or
+solving norm equations, GAP cannot perform these op-
+erations on cyclotomic fields. Therefore, PARI/GP [70]
+was also utilized. PARI/GP is a computer algebra system
+specialized in number theory calculations. GAP provides
+a prototype for its interface, allowing its functionality to
+be integrated into GAP.
+In the package developed by the authors, the defin-
+ing information of AV
+sym, namely G, ω, s, h, and V , is
+required as input to obtain the Wedderburn–Artin de-
+composition of C[G, ω′, s]. The results of some examples
+are presented below.
+
+1.
+Example: Spin- 1
+
+2 system with S2 × Z
+ˆ
+C
+2 symmetry, where
+ˆC2 = 1
+
+When the symmetry is the spin- 1
+
+2 G = S2 × Z ˆ
+C
+2 , we
+have s( ˆC) = h( ˆC) = 1, and their values are 0 on the
+remaining group elements.
+ˆs2 has a natural action on
+the three-dimensional space V , and ˆC acts as a reflec-
+tion on V . The two-cochain ω on S2 is determined by
+the spin- 1
+
+2 nature, which is given by the group extension
+Pin−(3) of O(3). The ω on Z ˆ
+C
+2 is determined by ˆC2 = 1.
+Furthermore, since the elements in S2 commute with ˆC,
+we have ω(ˆs2, ˆC) = ω( ˆC, ˆs2) = 0. The decomposition of
+C[G, ω′, s] is given by
+
+C[G, ω′, s] ∼= Cl0,3,
+(58)
+
+with the mappings s2 �→˜e1, C �→˜e3˜e1, and i �→˜e2˜e3.
+Furthermore, we can obtain the decomposition of AV
+sym
+as
+
+AV
+sym ∼= Cl0,6 ∼= M4(Cl2,0),
+(59)
+
+Therefore, according to Table II, its classification is 0. Al-
+though its classification is trivial, we can still construct a
+trivial Dirac Hamiltonian from this decomposition, which
+is given by Eq. (8) with
+
+˜Γ1 = σz ⊗σy ⊗1
+˜Γ2 = σx ⊗σy ⊗1
+˜Γ3 = σy ⊗σy ⊗1
+ˆs2 = 1 ⊗σz ⊗σy
+ˆC = (σy ⊗σy ⊗1)K
+M = −M0 = 1 ⊗σz ⊗1
+
+(60)
+
+where K is the complex conjugation operator. Substitut-
+ing these into Eq. (8) yields the Dirac Hamiltonian.
+
+2.
+Example: Spin- 1
+
+2 system with S2 × Z
+ˆ
+C
+2 symmetry and
+nontrivial superconducting pairing, where ˆC2 = 1
+
+When the gap of a topological superconductor fea-
+tures a nontrivial superconducting pairing, meaning the
+gap function carries a one-dimensional representation,
+the two-cocycle ω of G no longer satisfies ω(ˆg, ˆC) =
+ω( ˆC, ˆg) = 0 for ˆg ∈H, where G is H × Z ˆ
+C
+2 , and H
+contains no antilinear symmetries. The rule for the mod-
+ification of ω is given in Ref. [20].
+If the one-cochain
+corresponding to the one-dimensional representation on
+the gap function is denoted by θ, we have
+
+(1, ˆC) · (ˆg, 1) = eiπθ(ˆg)(ˆg, ˆC).
+(61)
+
+When the symmetry is the spin- 1
+
+2 G = S2 × Z ˆ
+C
+2 with
+nontrivial superconducting pairing, the decomposition of
+C[G, ω′, s] is
+
+C[G, ω′, s] ∼= Cl3,0,
+(62)
+
+with s2 �→e1e2e3, C �→e3e1, and i �→e2e3. Furthermore,
+the decomposition of AV
+sym is given by
+
+AV
+sym ∼= Cl3,3 ∼= M8(R)(¯c),
+(63)
+
+where the first four components of ¯c are 0, and the last
+four components are 1. Therefore, according to Table II,
+its classification is Z. The Dirac Hamiltonian correspond-
+ing to the generator of Z is given by Eq. (8), with
+
+˜Γ1 = σx ⊗1
+˜Γ2 = σy ⊗σz
+˜Γ3 = σy ⊗σx
+ˆs2 = σz ⊗1
+ˆC = (σx ⊗1)K
+M = −M0 = σz ⊗1
+
+(64)
+
+Substituting these into Eq. (8) yields the Dirac Hamilto-
+nian.
+
+3.
+Example: Spin- 1
+
+2 system with D3d × Z
+ˆ
+C
+2 × Z
+ˆ
+T
+2 symmetry,
+where ˆC2 = 1 and ˆT 2 = −1
+
+Consider the spin- 1
+
+2 symmetry G = D3d × Z ˆ
+C
+2 × Z ˆT
+2 .
+We have s( ˆT) = s( ˆC) = 1, and the values are 0 on the
+remaining group elements; we have h( ˆC) = 1, and the
+values are 0 on the remaining group elements. D3d has
+a natural action on the three-dimensional space V , while
+ˆT and ˆC act as reflections on V . The two-cochain ω is
+determined by three parts: ω on D3d is determined by
+the spin- 1
+
+2 nature, given by the group extension Pin−(3)
+of O(3); ω on Z ˆ
+C
+2 is determined by ˆC2 = 1; and ω on
+Z ˆT
+2 is determined by ˆT 2 = −1. In addition, since these
+three parts commute with each other, ω(ˆg1, ˆg2) = 0 if ˆg1
+
+
+19
+
+and ˆg2 belong to different components. D3d is generated
+by two generators: the rotoreflection symmetry s6 along
+the z axis and the reflection symmetry my across the y
+axis. Therefore, each decomposition component ρi can
+be given by the images of the four generators s6, my, C,
+and T, as well as the imaginary unit i.
+
+Using our GAP package, we obtain
+
+AV
+sym ∼= M2(Cl2,3) × M2(Cl2,3) × M4(Cl2,3)
+∼= M8(Cl0,1) × M8(Cl0,1) × M16(Cl0,1)
+(65)
+
+Its classification can be read from Table II, which is Z2 ×
+Z2 × Z2. The Dirac Hamiltonian corresponding to the
+generator of the first Z2 is given by Eq. (8), where the
+values of each term can be found in Appendix F.
+
+V.
+CONCLUSIONS
+
+In this work, we introduce the classifying spaces of
+free fermionic systems. Starting from the symmetries of
+free fermionic systems, we generalize these symmetries
+from groups to algebras.
+Subsequently, we introduce
+the classifying spaces for free fermionic systems in ar-
+bitrary dimensions endowed with such algebraic symme-
+tries, and demonstrate that they are G-homotopy equiv-
+alent to the classifying spaces of Dirac Hamiltonians.
+Based on these classifying spaces, we then address the
+classification problem. We consider four distinct classifi-
+cation schemes prevalent in the physics literature, along
+with the canonical isomorphisms among them, noting
+that each scheme possesses its own specific applications
+and physical significance.
+Among these four schemes,
+the algebraic classification is the most amenable to com-
+putation.
+Consequently, we investigate the Z2-graded
+Wedderburn–Artin decomposition of the Z2-graded al-
+gebra AV
+sym obtained from Dirac Hamiltonians, and we
+have developed a GAP package to facilitate these com-
+putations. The GAP package can be used to obtain the
+classification, the graded Wedderburn–Artin decomposi-
+tion of AV
+sym, the Dirac Hamiltonians, and so on.
+
+ACKNOWLEDGMENTS
+
+The authors thank Chen Fang for insightful discus-
+sions.
+Y.Q. acknowledges support from National Key
+R&D Program of China (Grant No. 2022YFA1403402),
+from the National Natural Science Foundation of China
+(Grant No. 12174068), and from the Science and Tech-
+nology Commission of Shanghai Municipality (Grants
+No. 24LZ1400100 and No. 23JC1400600).
+
+Appendix A: Some Linear Algebras
+
+1.
+Conventions for matrix algebras
+
+Let D be an algebra, and let V be a free D module.
+Notice that if D is a division algebra, then a D module
+is always free. V can be equipped with a basis induced
+by V ∼= Dd. Let f : V →W be a D-module map. f can
+be expressed as a matrix over D if both V and W have
+bases. If we insist on using column vectors to represent
+elements in V and W, f can be written as a matrix
+
+
+
+
+f11
+f12 · · ·
+f1d
+f21
+f22 · · ·
+f2d
+...
+...
+...
+...
+fd′1 fd′2 · · · fd′d
+
+
+
+
+,
+(A1)
+
+where d′ is the dimension of W, and fji is the coefficient
+of the jth basis vector in the image of the ith basis vector
+under the action of f. Unfortunately, the matrix does not
+act from the left, since f should be D-linear. If v ∈V ,
+the action of f on v is given by
+
+�
+v⊤f ⊤�⊤=
+
+
+
+
+
+
+
+
+
+�
+v1 v2 · · · vd
+�
+
+
+
+
+
+f11 f21 · · · fd′1
+f12 f22 · · · fd′2
+...
+...
+...
+...
+f1d f2d · · · fd′d
+
+
+
+
+
+
+
+
+
+
+
+
+
+⊤
+
+.
+
+(A2)
+Similarly, the composition f ◦g is given by
+�
+g⊤f ⊤�⊤.
+
+At first glance, you may think
+�
+v⊤f ⊤�⊤= f v and
+�
+g⊤f ⊤�⊤= f g. However, D is not commutative. The
+
+correct formula is
+�
+v⊤f ⊤�⊤= f ·Dop v and
+�
+g⊤f ⊤�⊤=
+f ·Dop g, where ·Dop is the multiplication of matrices over
+Dop.
+In the main text and in Appendixes C and D, we con-
+structed D structures on modules over various group al-
+gebras.
+Each representation map ρ(g) commutes with
+the D structure; therefore, we can represent ρ(g) by a
+matrix in Md(Dop).
+Conversely, given an algebra homomorphism A →
+Md(D), the canonical Md(D) module Dd induces a left
+A module. However, the canonical left D action on Dd
+
+does not commute with the A action; the canonical right
+D action does commute with the A action. Thus, Dd is
+a Dop-type module.
+
+2.
+Module over a division algebra
+
+For a Gr-graded algebra, its Gr-graded modules are
+also free. Notice that for a simple module M, we have
+Dm0 = M for any nonzero m0 ∈M0. Then, we have a
+map D →Dm0 given by d �→dm0, which is an isomor-
+phism since D has no nontrivial left ideals.
+
+
+20
+
+Appendix B: Some Technical Results on Graded
+Algebras
+
+1.
+Clifford algebra
+
+The basic concepts of Clifford algebras can be found in
+[61, 66]. One of the main purposes of this section is to de-
+rive the entries in Tables I and III. Using Table I together
+with Eq. (B7), we will obtain the Wedderburn–Artin de-
+compositions of all Clifford algebras both as algebras and
+as Z2-graded algebras.
+
+a.
+Definition
+
+Definition B.1. Let V be a K-vector space and let Q be
+a quadratic form, i.e., a map V →K satisfying Q(kv) =
+k2Q(v) for all k ∈K and v ∈V .
+There is a category whose objects are pairs (A, j),
+where A is an algebra and j : V →A is a linear map satis-
+fying j(v)2 −Q(v)·1 = 0. The morphism (A, j) →(B, k)
+is an algebra homomorphism ψ : A →B such that
+ψ ◦j = k.
+The initial object of this category is (ClQ, j), where
+ClQ is the Clifford algebra, and j : V →ClQ is the
+canonical inclusion.
+
+The definition seems to be very abstract, but the ex-
+amples that we are interested in are very concrete.
+
+Example B.2. Let Kp,q be a vector space with a bilinear
+form (−, −). Let the basis of Kp,q be {e1, ..., ep, ˜e1, ..., ˜eq}
+such that (ei, ei) = −1, (˜ei, ˜ei) = 1, and all other pairings
+are 0.
+The bilinear form determines a quadratic form
+given by Q(v) = (v, v).
+The algebra Clp,q is the Clifford algebra correspond-
+ing to Rp,q. Similarly, Clp,q is the Clifford algebra corre-
+sponding to Cp,q. Clp,q is actually isomorphic to Cl0,p+q
+
+by taking a new basis {iei, ˜ei}. We also denote Cl0,p+q
+
+by Clp+q.
+To be explicit, Clp,q is an R algebra generated by
+{e1, . . . , ep, ˜e1, . . . , ˜eq} that satisfy the relations e2
+i = −1,
+˜e2
+i = 1, eiej + ejei = ˜ei˜ej + ˜ej˜ei = ei˜ej + ˜ejei = 0. Simi-
+larly, Clp,q is a C algebra generated by the same sets of
+generators and relations.
+Clp,q and Clp,q are naturally Z2-crossed product alge-
+bras, i.e., ei and ˜ei have grading 1.
+
+b.
+The Wedderburn–Artin decomposition
+
+We have the following theorem for Clifford algebras.
+
+Theorem B.3. Clp,q and Clp,q are semisimple algebras.
+
+Proof. We prove the theorem by constructing algebra iso-
+morphisms from Clifford algebras to the direct sum of
+matrix algebras over division algebras.
+
+The following isomorphisms can be easily verified:
+Cl0,0 ∼= R, Cl1,0 ∼= C with e1 �→i, Cl2,0 ∼= H with
+e1 �→I and e2 �→J, Cl0,1 ∼= R × R with ˜e1 �→(1, −1),
+Cl1,1 ∼= M2(R) with e1 �→iσy, ˜e1 �→σz (iσy is a real
+matrix), and Cl0,2 ∼= M2(R) with ˜e1 �→σx, ˜e2 �→σz.
+There are isomorphisms
+
+Clp+2,0 ∼= Cl0,p ⊗Cl2,0
+(B1)
+
+given by ei �→˜ei ⊗e1e2 for i ≤p, and ei �→1 ⊗ei−p for
+i = p + 1 and p + 2. Thus, we have Cl3,0 ∼= H × H.
+There are isomorphisms
+
+Cl0,p+2 ∼= Clp,0 ⊗Cl0,2
+(B2)
+
+given by ˜ei �→ei ⊗˜e1˜e2 for i ≤p, and ˜ei �→1 ⊗˜ei−p for
+i = p + 1 and p + 2. Thus, we have Cl0,3 ∼= M2(C).
+If we repeatedly use the above two isomorphisms, we
+obtain all Clp,0 and Cl0,p. They are isomorphic to ma-
+trix algebras over division algebras, since we have the
+isomorphisms H ⊗C ∼= M2(C) with I ⊗1 �→−iσx and
+J ⊗1 �→−iσy, and H⊗H ∼= M4(R) with I ⊗1 �→iσy ⊗σz,
+J ⊗1 �→iσy ⊗σx, 1 ⊗I �→σz ⊗iσy, 1 ⊗J �→σx ⊗iσy.
+The remaining Clp,q can be obtained by the isomor-
+phisms
+
+Clp+1,q+1 ∼= Clp,q ⊗Cl1,1
+(B3)
+
+with ei �→ei ⊗e1˜e1 and ˜ej �→˜ej ⊗e1˜e1 for i ≤p and
+j ≤q, ep+1 �→1 ⊗e1, ˜eq+1 �→1 ⊗˜e1.
+The result for complex Clifford algebras Clp can be
+obtained by the complexification Clp,q ∼= Clp,q ⊗C.
+
+c.
+Z2-Graded Simple Algebras as Clifford Algebras
+
+In this section, we show how to get Table III. In
+Sec. III C 1, we have classified all Z2-graded division al-
+gebras over R and C. It is straightforward to prove that
+the division algebras in the first column are isomorphic
+to the Clifford algebras in the second column in Table III.
+In Definition III.3, we have shown that the graded
+matrix components of a Gr-crossed product algebra are
+given by M|Gr/E|d(D)(¯c). The group E is a subgroup of
+Gr such that Dc ̸= 0 for c ∈E, and ¯c is determined by a
+set of representatives of Gr/E.
+For a Z2-graded division algebra D with D1 ̸= 0, we
+have E = Z2; therefore, M|Gr/E|d(D)(¯c) is just Md(D).
+For a Z2-graded division algebra D with D1 = 0, we
+have E = {0} and ¯c = (0, · · · , 0, 1, · · · , 1), where both
+0 and 1 appear d times.
+Therefore, M|Gr/E|d(D)(¯c) is
+decomposed into
+
+M2d(D)(¯c) ∼= Md(K) ⊗M2(K)(0, 1) ⊗D.
+(B4)
+
+We have M2(R)(0, 1) ∼= Cl1,1 and M2(C)(0, 1) ∼= Cl1,1,
+which are given by σx �→˜e1 and iσy �→e1. For D = R
+and C, we are done. For D = H, we use Cl1,1 ⊗H, which
+is given by Eq. (B5); this finishes the derivation of the
+entries in Table III.
+
+
+21
+
+In some of the literature, only nongraded matrix alge-
+bras over Clifford algebras appear, for the reason encoded
+in the third column of Table III. However, it should be
+noted that although using Clifford algebras is computa-
+tionally convenient, it lacks conceptual uniformity. This
+leads to the necessity of treating R, C, and H separately
+from Cl1,1, Cl2, and Cl4,0.
+Therefore, graded matrix
+algebras will still be used in this work.
+
+d.
+Clifford algebras as Z2-graded semisimple algebras
+
+We first prove the following three isomorphisms, which
+will be used in a similar way as Eqs. (B1) to (B3). We
+have the following isomorphisms of Z2-graded algebras,
+
+Clp+2,0 ∼= Cl0,p ⊗Cl2,0 ∼= Clp−1,1 ⊗H.
+(B5)
+
+The first isomorphism is just Eq. (B1), and it is easy to
+check that Eq. (B1) preserves the grading. The second
+isomorphism is given by ˜ep ⊗e1 �→1⊗I, ˜ep ⊗e2 �→1⊗J,
+˜ep ⊗1 �→˜e1 ⊗1 and ˜ei ⊗e1e2 �→ei ⊗1 for i ̸= p. We have
+
+Cl0,q+2 ∼= Clq,0 ⊗Cl0,2 ∼= Cl1,q−1 ⊗H.
+(B6)
+
+The first isomorphism is just Eq. (B2), and it is easy to
+check that Eq. (B2) preserves the grading. The second
+isomorphism is given by eq ⊗˜e1 �→1⊗I, eq ⊗˜e2 �→1⊗J,
+eq ⊗1 �→e1 ⊗1 and ei ⊗˜e1˜e2 �→˜ei ⊗1 for i ̸= q.
+If p > 0 or q > 0, we have
+
+Clp+1,q+1 ∼= Clp,q ⊗Cl1,1 ∼= Clp,q ⊗M2(R) ∼= M2(Clp,q).
+(B7)
+The first isomorphism is just Eq. (B3), and it is easy to
+check that Eq. (B3) preserves the grading. For p > 0,
+the second isomorphism is given by ep ⊗˜e1 �→1 ⊗iσy,
+ep ⊗e1 �→1 ⊗σx, ep ⊗1 �→ep ⊗1, ˜ej ⊗e1˜e1 �→˜ej ⊗1
+and ei ⊗e1˜e1 �→ei ⊗1 for i ̸= p. For q > 0, the second
+isomorphism is given by ˜eq⊗e1 �→1⊗iσy, ˜eq⊗˜e1 �→1⊗σx,
+˜eq ⊗1 �→˜eq ⊗1, ei ⊗e1˜e1 �→ei ⊗1 and ˜ej ⊗e1˜e1 �→˜ej ⊗1
+for j ̸= q.
+Using a method similar to Definition III.1, we prove
+Clifford algebras are semisimple Z2-graded algebras,
+which also finishes the derivation of the entries in Ta-
+ble I.
+
+Theorem B.4. Clp,q and Clp,q are semisimple Z2-
+graded algebras.
+
+Proof. We use Eqs. (B5) to (B7) repeatedly to get the
+result.
+We first reduce Clp,q to a matrix algebra over
+Clp−q,0 for p > q, a matrix algebra over Cl0,q−p for p < q
+and a matrix algebra over Cl1,1 for p = q > 0, using
+Eq. (B7).
+For p = 0 . . . 4, Clp,0 already has the form of graded
+matrix algebras over graded division algebras using Ta-
+ble III. For p = 5 . . . 8, we apply Eq. (B5).
+We get
+Cl2,1⊗H for p = 5, Cl0,2⊗H⊗H for p = 6, Cl1,2⊗H⊗H
+for p = 7, and Cl2,2 ⊗H ⊗H for p = 8. Then we ap-
+ply Eq. (B7), up to tensoring with a matrix algebra,
+
+Cl2,1 becomes Cl1,0 for p = 5, Cl1,2 becomes Cl0,1
+
+for p = 7, and Cl2,2 becomes Cl1,1 for p = 8.
+For
+p = 5, we apply Eq. (B6), Cl1,0 ⊗H becomes Cl0,3.
+Finally, we use H ⊗H ∼= M4(R) which is proved in Defi-
+nition B.3. The remaining cases are similar. Notice that
+we have Cl4,0 ∼= Cl0,4, which is also proved by Eqs. (B5)
+and (B6).
+
+e.
+The simple modules over Clifford algebras
+
+It is straightforward to get all simple modules and sim-
+ple graded modules over a Clifford algebra using Defini-
+tion B.3 and Definition B.4, since they are simple mod-
+ules over the direct sums of matrix algebras and graded
+matrix algebras.
+Notice that if D ∼= R, C, or H, we
+have two inequivalent Z2-graded simple D-modules D
+and D(1). We prove two useful results in what follows.
+Let us prove the first one.
+When p −q = 3 mod 4,
+Clp,q has two matrix components. The simple Clp,q mod-
+ules can be constructed from the unique Clp−1,q mod-
+ule (or Clp,q−1 module). We denote by ε the element
+e1 . . . ep−1˜e1 . . . ˜eq (or e1 . . . ep˜e1 . . . ˜eq−1). Then ep = ±ε
+(or ˜eq = ±ε) defines two inequivalent simple Clp,q mod-
+ules. To prove that the two modules are simple, we only
+need to examine their dimensions.
+To prove that the
+two modules are inequivalent, notice that if there is an
+isomorphism f between them, we have f(εx) = −εf(x),
+but ε is a product of elements of Clp−1,q (or Clp,q−1);
+therefore, we should have f(εx) = εf(x), a contradiction.
+There is a similar result for Clp,q when p −q = 1 mod 2.
+The second result is (Clp,q)0 ∼= Clp−1,q ∼= Clq−1,p and
+(Clp)0 ∼= Clp−1. For a generator e ∈Clp−1,q, the isomor-
+phism from Clp−1,q to (Clp,q)0 is given by e �→eep. The
+other two isomorphisms can be proved similarly. Com-
+bining with Definition III.2, we get another way to con-
+struct all Z2-graded simple modules over Clifford alge-
+bras.
+
+2.
+ZN
+2 -graded algebra
+
+a.
+Grading forgetting
+
+For a Gr-graded algebra A, a group homomorphism f :
+Gr →Gr′ induces a Gr′-grading structure on A. When
+Gr = ZN
+2
+and Gr′ = ZN′
+2 , the problem reduces to the
+case when f is a surjective map from ZN
+2 to ZN−1
+2
+. This
+can be seen by diagonalizing the linear map f over the
+field Z2.
+In this section, we give an algorithm to calculate the
+Wedderburn–Artin decomposition of a ZN−1
+2
+-graded al-
+gebra that is induced from a semisimple ZN
+2 -crossed prod-
+uct algebra by f. In what follows, without loss of gener-
+ality, we focus on a single ZN
+2 -graded Wedderburn–Artin
+component M|Gr/E|d(D)(¯c).
+We need to forget the grading ker(f) of the graded
+matrix algebra M|Gr/E|d(D)(¯c). Recall that we have an
+
+
+22
+
+isomorphism of ZN
+2 -graded algebras,
+
+M|Gr/E|d(D)(¯c) ∼= M|Gr/E|d(K)(¯c) ⊗D
+
+∼= Md(K) ⊗
+
+��
+
+ci
+M2(K)(0, ci)
+
+�
+
+⊗D.
+
+(B8)
+If ker(f) is contained in E, the problem reduces to for-
+getting the grading of D, and the pure matrix algebra
+part is easy to deal with. If ker(f) is not contained in E,
+we can find a new decomposition Gr ∼= E ⊕Gr/E such
+that ker(f) is contained in Gr/E. The decomposition is
+determined by taking another set of ci. Then the prob-
+lem reduces to forgetting the grading of the pure matrix
+algebra part.
+It remains to figure out how to forget the grading of
+D. We denote the generators of D by θi, where θi has
+grading zi. We need to consider the following three cases
+according to the structure of D0.
+a.
+1. D0 = R
+If θ2
+1 = 1 and θ1 commutes with all other θi, D ∼=
+D′ ⊕D′, where D′ is D without the generator θ1.
+If θ2
+1 = 1, θ1 anticommutes with θ2 and commutes with
+all the other θi. Notice that the general case in which θ1
+anticommutes with several θi can be reduced to this case
+by changing the basis of ZN
+2 : we exchange θ2 with some θi
+that anticommutes with θ1, and multiply θ2 by the other
+θi that anticommute with θ1. This technique will be used
+again, and we will not mention it again.
+θ1θ2 and θ2
+form an algebra M2(K)(0, z2). If θ2 anticommutes with
+some θi, we use θ1θi to replace θi. Now M2(K)(0, z2) is
+decoupled from the other θi. We get D ∼= M2(K)(0, z2)⊗
+D′′, where D′′ is D without the generators θ1 and θ2.
+If θ2
+1 = −1, D becomes a ZN−1
+2
+-graded division algebra
+with D0 = C. If θi commutes with θ1, then Di ∼= Cl1.
+If θi anticommutes with θ1, then Di ∼= Cl0,2 for θ2
+i = 1,
+and Di ∼= Cl2,0 for θ2
+i = −1.
+b.
+2. D0 = H
+Notice that θi commutes with the elements of D0;
+therefore, we can decompose D into D0 ⊗DR, where DR
+has (DR)0 = R.
+The structure of DR after forgetting
+the grading is already obtained above; therefore, we only
+need to calculate the structure of H ⊗DR.
+The only nontrivial case is θ2
+1 = −1; hence, we need
+to find out the structure of H ⊗D for a ZN−1
+2
+-graded
+division algebra D with D0 ∼= C. We use a new set of
+generators I ⊗i, J ⊗i, K ⊗θi for θi anticommuting with
+i, and 1 ⊗θi for θi commuting with i. I ⊗i and J ⊗i
+form the matrix algebra M2(R), and all generators with
+nontrivial grading commute with them.
+Thus, we get
+H ⊗D ∼= M2(R) ⊗D′, where (D′)i ∼= Cl2,0 if Di ∼= Cl0,2,
+(D′)i ∼= Cl0,2 if Di ∼= Cl2,0, and (D′)i ∼= Cl1 if Di ∼= Cl1.
+The commutation relations of θi are not changed.
+c.
+3. D0 = C (including K = C)
+The case K = C is a special case of K = R, D0 = C,
+and arises when all θi commute with the elements of D0.
+If θ1 commutes with i ∈D0, and θ1 commutes with all
+other θi, then D ∼= D′ ⊕D′, where D′ is D without the
+
+generator θ1.
+If θ1 commutes with i ∈D0, and θ1 anticommutes with
+θ2, then if θ2 commutes with i ∈D0, θ2 and θ1θ2 generate
+M2(R)(0, z2). If there exists a θi that anticommutes with
+θ2, we choose the new generator to be θ1θi. Then D ∼=
+M2(R)(0, z2)⊗D′′, where D′′ is D without the generators
+θ1 and θ2. If θ2 anticommutes with i ∈D0, then θ2 and
+θ1θ2 generate M2(R), but we need to use iθ1 to replace i.
+If there exists a θi that anticommutes with θ2, we choose
+the new generator to be θ1θi. Then D ∼= M2(R)(0, z2) ⊗
+D′′, where D′′ is D without the generators θ1 and θ2.
+If θ1 anticommutes with i ∈D0, and θ2
+1 = 1, then
+θ1 and i generate M2(R). We show by redefinition of θi
+that M2(R) commutes with all the other θi; therefore,
+D ∼= M2(R) ⊗D′, where D′ is a ZN−1
+2
+-graded division
+algebra with D0 ∼= R.
+For Di ∼= Cl1, if θi commutes
+with θ1, then D′
+i ∼= Cl0,1. If θi anticommutes with θ1,
+we choose a new generator to be iθi; then D′
+i ∼= Cl1,0.
+For Di ∼= Cl0,2, if θi commutes with θ1, we choose a new
+generator to be θ1θi; then D′
+i ∼= Cl0,1. If θi anticommutes
+with θ1, we choose a new generator to be iθ1θi; then
+D′
+i ∼= Cl0,1. For Di ∼= Cl2,0, if θi commutes with θ1, we
+choose a new generator to be θ1θi; then D′
+i ∼= Cl1,0. If θi
+anticommutes with θ1, we choose a new generator to be
+iθ1θi; then D′
+i ∼= Cl1,0.
+If θ1 anticommutes with i ∈D0, and θ2
+1 = −1, then
+θ1 and i generate H. We show by redefinition of θi that
+H commutes with all the other θi; therefore, D becomes
+a ZN−1
+2
+-graded division algebra with D0 ∼= H, which we
+denote by D′. For Di ∼= Cl1, if θi commutes with θ1, then
+D′
+i ∼= Cl3,0. If θi anticommutes with θ1, we choose a new
+generator to be iθi; then D′
+i ∼= Cl0,3. For Di ∼= Cl0,2,
+if θi commutes with θ1, we choose a new generator to
+be θ1θi; then D′
+i ∼= Cl3,0. If θi anticommutes with θ1,
+we choose a new generator to be iθ1θi; then D′
+i ∼= Cl3,0.
+For Di ∼= Cl2,0, if θi commutes with θ1, we choose a new
+generator to be θ1θi; then D′
+i ∼= Cl0,3. If θi anticommutes
+with θ1, we choose a new generator to be iθ1θi; then
+D′
+i ∼= Cl0,3.
+
+b.
+Graded tensor product of ZN
+2 -graded algebras
+
+Similar to the previous section, this section only con-
+siders graded matrix algebras over graded division alge-
+bras. First, we define an extended graded tensor product
+˜⊗. Given a ZN
+2 -graded space V and a ZN ′
+2 -graded space
+V ′, V ˜⊗V ′ is a ZN+N ′
+2
+-graded space. Similar to the braid-
+ing structure in Sec. III A 3, a map b : ZN
+2 × ZN′
+2
+→Z2 is
+used to describe the sign acquired by exchanging the two
+spaces. The graded tensor product defined in Sec. III A 1
+requires the further step of forgetting the off-diagonal
+grading, which can be accomplished using the method
+described in Appendix B 2 a.
+Given a ZN
+2 -graded algebra A and a ZN′
+2 -graded al-
+gebra A′, A˜⊗A′ is a ZN+N ′
+2
+-graded algebra.
+Suppose
+the graded matrix algebra A is isomorphic to EndD(V )
+
+
+23
+
+and A′ is isomorphic to EndD′(V ′), where V and V ′ are
+finitely generated D-graded and D′-graded modules, re-
+spectively. We have the following formula:
+
+EndD(V )˜⊗EndD′(V ′) ∼= EndD ˜⊗D′(V ˜⊗V ′).
+(B9)
+
+Therefore, it suffices to study D ˜⊗D′.
+Suppose D is generated by D0 and the θi, and D′ by
+D′
+0 and the θ′
+i; then D ˜⊗D′ is generated by D0 ⊗D′
+0, the
+θi, and the θ′
+i. The algebraic relations between the θi
+and the θ′
+i can be easily obtained from b. D0 ⊗D′
+0 is
+the tensor product of nongraded division algebras, and
+its result is also easy to obtain. When D0 and D′
+0 are
+each R or H, D0 ⊗D′
+0 commutes with the generators
+θi and θ′
+i.
+When exactly one of D0 and D′
+0 is R and
+the other is C, the result is also obvious. When exactly
+one of D0 and D′
+0 is H and the other is C, their tensor
+product is M2(C), and I, J, and K are mapped to −iσx,
+−iσy, and −iσz respectively, where the σ’s are the 2 × 2
+Pauli matrices. For an antilinear θ′
+i, it commutes with
+−iσy and anticommutes with −iσx and −iσz; therefore,
+by choosing −iσyθ′
+i as a new generator, its conjugation
+action on M2(C) is the same as complex conjugation.
+Finally, if both D0 and D′
+0 are C, their tensor prod-
+uct is C × C, where z ⊗1 is mapped to (z, ¯z) and 1 ⊗z
+is mapped to (z, z). If neither D nor D′ has antilinear
+generators, their tensor product is the direct sum of two
+graded division algebras, each generated by C, the θi,
+and the θ′
+i. If there are antilinear generators in both D
+and D′, and we assume the generator θ1 of D is antilinear
+while all other θi are linear, then in D ˜⊗D′, the elements
+θ1 ˜⊗1, iθ1 ˜⊗1, and 1˜⊗i form M2(C)(0, 1). Then, it is suffi-
+cient to replace the θi ˜⊗1 or 1˜⊗θ′
+i that anticommute with
+θ1 ˜⊗1 by iθi ˜⊗1 or i˜⊗θ′
+i.
+For the super tensor product ˆ⊗of real Clifford al-
+gebras and the ten Z2-graded division algebras, one
+can obtain the Clifford algebras by utilizing Clp,q ˆ⊗
+Clp′,q′ ∼= Clp+p′,q+q′, Clp,q ˆ⊗Clp′ ∼= Clp+p′+q, Clp,q ˆ⊗H ∼=
+Clp+3,p−1 and Clp,q ˆ⊗H ∼= Clp−1,p+3, and then perform
+the Wedderburn–Artin decomposition on these Clifford
+algebras.
+
+Appendix C: Group Algebras over C and R
+
+We summarize several results in group algebra theory.
+Starting with the group algebra C[G] over C, we note
+that the theories of the group algebra over R, the twisted
+group algebra, and the Z2-graded group algebra are all
+based on the theory of C[G].
+The basic knowledge of
+group representations and group algebras over R and C
+can be found in [71].
+The main purpose of this appendix is to introduce
+Eqs. (C1), (C8) and (C30), and their inverses Eqs. (C2),
+(C18), (C31) and (C32).
+Most other results follow as
+direct consequences of these isomorphisms.
+
+1.
+Group algebra C[G]
+
+a.
+The Wedderburn–Artin Decomposition
+
+The well-known Maschke’s theorem shows that C[G] is
+a semisimple C algebra, which means there is an isomor-
+phism of algebras Φ = (ρi)i∈Irr(G)
+
+C[G] ∼=
+�
+
+i∈Irr(G)
+Mdi(C),
+(C1)
+
+where Irr(G) is the set of isomorphism classes of simple
+modules, and each component of Φ is given by the irre-
+ducible representation ρi : C[G] →Mdi(C). This is the
+Wedderburn–Artin decomposition of C[G].
+
+b.
+The inverse of Φ
+
+The inverse of Φ can be constructed explicitly; let f
+be an element of �
+
+i Mdi(C) that is nonzero only in the
+component Mdi(C). The inverse Φ−1(f) is given by
+
+di
+|G|
+
+�
+
+g∈G
+Tr
+�
+ρi(g−1)f
+�
+g.
+(C2)
+
+To prove this is the inverse, we assume Φ−1(f) =
+�
+
+g∈G ag g ∈C[G]. Notice that we have
+
+ag =
+1
+|G| Tr
+�
+g−1Φ−1(f) · −
+�
+
+= di
+
+|G| Tr
+�
+ρi(g−1)f
+�
+(C3)
+
+The trace in the first line is calculated as a linear map
+on C[G], and the trace in the second line is calculated as
+a linear map on Mdi(C).
+Several familiar results follow straightforwardly from
+the explicit form of Φ−1.
+For example, if we take
+f = ei
+ba ∈Mdi(C) to be a matrix entry generator, then
+the equation Φ
+�
+Φ−1 �
+ei
+ba
+��
+= ei
+ba becomes the great or-
+thogonality theorem
+
+di
+|G|
+
+�
+
+g∈G
+ρi(g−1)ab ρj(g)cd = δijδadδbc.
+(C4)
+
+If we take f
+=
+id
+∈
+Mdi(C), then the equation
+Tr
+�
+Φ
+�
+Φ−1 (f)
+��
+= Tr(f) becomes (χi, χj) = 1/|G| δij,
+where
+
+(χ, χ′) =
+1
+|G|
+
+�
+
+g∈G
+χ(g−1) χ′(g),
+(C5)
+
+i.e., the characters χi form an orthonormal basis of the
+vector space of class functions.
+
+
+24
+
+c.
+Constructing isomorphisms between two modules
+
+Let V and W be two isomorphic simple C[G] modules.
+We construct a C[G] isomorphism between them[72].
+
+Notice that there is an isomorphism ψ : End(V )
+Φ−1
+−−−→
+C[G]
+Φ
+−→End(W). The first map does not preserve the
+unit, but the composition is an algebra isomorphism. To
+be explicit, let f ∈End(V ). The image ψ(f) is
+
+d
+|G|
+
+�
+
+g∈G
+Tr
+�
+ρV (g−1)f
+�
+ρW (g) ∈End(W),
+(C6)
+
+where d is the dimension of V . According to the Skolem–
+Noether theorem, the isomorphism must have the form
+αfα−1 for some linear isomorphism α, which is unique up
+to a scalar. The isomorphism α is G-equivariant. Notice
+that if we set f = ρV (h), Eq. (C6) becomes ρW (h), i.e.,
+αρV (h)α−1 = ρW (h). α seems to be a suitable choice
+of the C[G] isomorphism; it only remains to construct α
+explicitly.
+Let r ∈End(V ) be a diagonalizable rank-1 linear map,
+and let v be an eigenvector of r. The image ψ(r) also has
+rank 1, and α(v) must be an eigenvector of ψ(r). The
+choice of α(v) is unique up to a scalar, which is the same
+scalar appearing in the Skolem–Noether theorem. α is
+determined by α(v), since α is G equivariant, and any
+f ∈End(V ) can be written as a linear combination of
+ρV (g), i.e., we have
+
+α (f(v)) =
+d
+|G|
+
+�
+
+g∈G
+Tr
+�
+ρV (g−1)f
+�
+ρW (g)α(v).
+(C7)
+
+In practice, if there is a basis on V , we can choose r to
+be the canonical projection on a basis vector, and use
+Eq. (C7) to calculate the action of α on other basis vec-
+tors.
+
+2.
+Group algebra R[G]
+
+a.
+The Wedderburn–Artin decomposition
+
+Maschke’s theorem also shows that R[G] is a semisim-
+ple R algebra, which means there is an isomorphism of
+algebras Φ = (ρi),
+
+R[G] ∼=
+�
+
+i∈IrrR(G)
+Md′
+i(Di).
+(C8)
+
+Here, i takes values in the isomorphism classes of simple
+R[G] modules.
+Di is a division R algebra.
+Moreover,
+d′
+i = di/dim(Di), where di is the dimension of the simple
+module. Moreover, the division algebra Di is the opposite
+algebra of the endomorphism algebra of the simple R[G]
+module.
+A simple module is of D type if the endomorphism
+algebra of the module is D, and the endomorphism alge-
+bra becomes a G-equivariant D structure on the simple
+
+module. It is well known that there are only three iso-
+morphism classes of division R algebras, which are R, C,
+and H.
+In what follows, we show how to construct Φ explicitly
+from the complex representations.
+
+b.
+The relationship between R[G] and C[G] modules
+
+If we apply the complexification functor −⊗RC to both
+sides of Eq. (C8), the left-hand side becomes C[G], and
+each component of the right-hand side becomes one or
+two components in Eq. (C1), i.e., Md(R) ⊗R C ∼= Md(C),
+Md(C) ⊗R C ∼= Md(C) × Md(C) and Md(H) ⊗R C ∼=
+M2d(C). The first isomorphism is obvious; the second
+is given by f ⊗R 1 �→(f, ¯f); and the third is induced by
+mapping I, J, and K to −iσx, −iσy, and −iσz, respec-
+tively, where the σ’s are the 2 × 2 Pauli matrices.
+This gives a correspondence between real and complex
+representations. For D = R and H, there is a one-to-
+one correspondence between simple R[G] modules and
+simple C[G] modules. For D = C, there is a one-to-two
+correspondence between simple R[G] modules and simple
+C[G] modules.
+Let W be a simple R[G] module, and let V and ¯V be
+the corresponding simple C[G] modules. For D = R or
+H, we have V ∼= ¯V . We say that the simple C[G] module
+V has D type if W does.
+Notice that V is not necessarily the complexification of
+W. This is true for R-type modules: we have W ⊗R C ∼=
+V . For C-type modules, we have W ⊗R C ∼= V ⊕¯V . For
+H-type modules, we have W ⊗R C ∼= V ⊕V .
+Using the correspondence between R[G] modules and
+C[G] modules, it is easy to show V ̸∼= ¯V for C-type simple
+C[G] modules, and there exists an isomorphism α : V ∼=
+¯V for R- and H-type simple C[G] modules. To further
+distinguish the R and H types, notice that ¯α◦α = α◦¯α =
+z · −for some nonzero z ∈C, and ¯α ◦α ◦¯α ◦α = z2 id =
+|z|2 id; hence, z ∈R. If V has R type, then z is positive;
+therefore, α is a G-equivariant real structure up to a real
+scalar. If V is H type, z is negative; therefore, α is a
+G-equivariant quaternion structure up to a real scalar.
+There is a simple method to distinguish the three types
+by the Frobenius–Schur indicator. For i ∈Irr(G),
+
+FS(i) =
+1
+|G|
+
+�
+
+g∈G
+χi(g2).
+(C9)
+
+If i is of R, C, or H type, then FS(i) is 1, 0, and −1,
+respectively. The proof is in Appendix C 2 d.
+In summary, assume that all complex irreducible rep-
+resentations are known. To get all components ρi of Φ,
+we first calculate the indicator FS for each complex ir-
+reducible representation ρ.
+
+• If FS = 1, ρ has R type. There exists α : V ∼= ¯V
+such that ¯α ◦α = id. The isomorphism α can be
+constructed by Eq. (C7). α is a G-equivariant real
+
+
+25
+
+structure; by restricting to the eigenspace of α, we
+get ρi.
+
+• If FS = 0, ρ has C type. In this case, ρi is just ρ.
+
+• If FS = −1, ρ has H type. There exists an isomor-
+phism α : V ∼= ¯V such that ¯α ◦α = −id. The iso-
+morphism α can be constructed by Eq. (C7), and
+
+α is a G-equivariant quaternion structure, which
+gives ρi.
+
+c.
+The inverse of Φ
+
+Notice that there is a commutative diagram
+
+R[G]
+�
+
+iR MdiR (R) × �
+
+jC MdjC/2(C) × �
+
+kH MdkH/4(H)
+
+C[G]
+�
+
+iR MdiR (C) × �
+
+jC MdjC/2(C) × MdjC/2(C) × �
+
+kH MdkH/2(C),
+
+Φ
+
+Φ
+
+(C10)
+
+where iD takes values in the isomorphism classes of D-
+type simple modules. The vertical maps are induced by
+the canonical injections to the complexified spaces. In
+order to construct Φ−1 for R[G], we simply use Φ−1 for
+C[G] and restrict it to the subspace. To be specific, we
+have
+
+• If f ∈MdiR (R),
+
+Φ−1(f) = diR
+
+|G|
+
+�
+
+g∈G
+Tr
+�
+ρiR(g−1)f
+�
+g.
+(C11)
+
+• If f ∈MdjC/2(C),
+
+Φ−1(f) = djC
+
+2|G|
+
+�
+
+g∈G
+Tr
+�
+ρjC(g−1)f + ¯ρjC(g−1) ¯f
+�
+g
+
+= djC
+
+|G|
+
+�
+
+g∈G
+Tr
+�
+Re
+�
+ρjC(g−1)f
+��
+g.
+
+(C12)
+
+• If f ∈MdkH/4(H), recall that the isomorphism
+MdkH/4(H) ⊗R C ∼= MdkH/2(C) is given by map-
+ping I, J, and K to −iσx, −iσy, and −iσz, respec-
+tively. We denote its restriction to MdkH/4(H) by
+ϕkH. Then we have
+
+Φ−1(f) = dkH
+
+2|G|
+
+�
+
+g∈G
+Tr
+�
+ϕkH
+�
+ρkH(g−1)f
+��
+g
+
+= dkH
+
+|G|
+
+�
+
+g∈G
+Tr
+�
+Re
+�
+ρkH(g−1)f
+��
+g.
+(C13)
+
+Notice that Tr ◦ϕkH = 2Tr ◦Re, where Re denotes
+the projection that maps a quaternion number to
+its coefficient of the unit element.
+
+There is a more technical way to derive Φ−1 using the
+reduced trace. Notice that there are three different kinds
+of traces for a Dop-linear map f ∈EndDop (V ) ∼= Md(D),
+where D is a division K algebra and V is a Dop module.
+
+1. The trace of f as a K-linear map, i.e., TrK(f).
+
+2. The trace of f as a Z-linear map, where Z is the
+center of D, i.e., TrZ(f).
+
+3. The reduced trace of f as a D-linear map, i.e.,
+Trd(f) = TrZ (ϕ(f ⊗Z 1)), where ϕ is an isomor-
+phism from Md(D)⊗Z Z to Mdm(Z), Z is the alge-
+braic closure of the center Z, m is called the Schur
+index of D. Trd(f) takes values in Z.
+
+These traces are related by the formulas
+
+TrK(f) = TrZ/K ◦TrZ(f),
+(C14)
+
+where TrZ/K is the relative trace of the field extension,
+and
+
+TrZ(f) = m · Trd(f),
+(C15)
+
+where m is the Schur index of D.
+For f an element of the component Md′
+i(Di), we have
+the formula
+
+Φ−1(f) = d′
+imi
+|G|
+
+�
+
+g∈G
+TrZ/K ◦Trd(ρi(g−1)f) g,
+(C16)
+
+where mi is the Schur index of Di. To prove this formula,
+we assume Φ−1(f) = �
+
+g∈G ag g ∈R[G]. Notice that we
+have
+
+ag =
+1
+|G| TrK
+�
+g−1Φ−1(f) · −
+�
+
+=
+1
+|G| TrK
+�
+ρi(g−1)f · −
+�
+
+= d′
+imi
+|G| TrZ/K ◦Trd
+�
+ρi(g−1)f
+�
+.
+
+(C17)
+
+Finally, when K = R, notice that for Di = C, we have
+TrZ/K = 2Re; for Di = H, we have Trd = 2Re.
+In
+summary, for f ∈Md′
+i(Di), we have
+
+Φ−1(f) = di
+
+|G|
+
+�
+
+g∈G
+Tr
+�
+Re
+�
+ρi(g−1)f
+��
+g.
+(C18)
+
+
+26
+
+d.
+Characters and great orthogonality theorem
+
+We first prove that the Frobenius–Schur indicator can
+distinguish the three D types. It is well known that there
+is a G-invariant inner product on any C[G] module, since
+we can start with an arbitrary inner product and then
+average it over G. The inner product induces an isomor-
+phism ¯V ∼= V ∗, where V ∗is the dual module.
+Thus,
+we can replace V ∼= ¯V by V ∼= V ∗. The isomorphism
+V ∼= V ∗is equivalent to the existence of a G-invariant
+nondegenerate bilinear form B. Notice that B is unique
+up to a scalar, because of the Schur lemma. B can be
+decomposed into S + A, where S is symmetric and A is
+skew symmetric; both S and A are G invariant. Thus, B
+must equal either S or A. It can be proved that if ¯α ◦α
+is positive, then B = S. If ¯α ◦α is negative, then B = A.
+Finally, we use the following identities:
+
+2χS(g) = χ(g)2 + χ(g2)
+and
+2χA(g) = χ(g)2 −χ(g2),
+(C19)
+where χS(g) and χA(g) are the characters of the sym-
+metric and skew-symmetric subspaces of V ⊗V , respec-
+tively, which are the duals of the G-invariant symmet-
+ric and skew-symmetric bilinear forms on V , respec-
+tively. Subtracting the two identities above and taking
+the inner product with the trivial representation, we get
+FS(ρ) = s−a, where s is the number of trivial represen-
+tations contained in the symmetric subspace of V ⊗V .
+We have s = 1 if B exists and equals S; otherwise, s = 0.
+Similarly, a is the number of trivial representations con-
+tained in the skew-symmetric subspace of V ⊗V . We
+have a = 1 if B exists and equals A; otherwise, a = 0.
+This completes the proof.
+The character ξ of a real representation is the same as
+the character of its complexification. Recall that there
+is a correspondence between the simple R[G] modules
+and simple C[G] modules. Let i denote the C[G] module
+obtained from iR; a similar rule applies to C and H. We
+have
+
+• ξiR = χi.
+
+• ξjC = χj + ¯χj.
+
+• ξkH = 2χk.
+
+Finally, the great orthogonality theorem is obtained by
+setting f to be matrix entries.
+
+• If eiR
+ab ∈MdiR (R),
+
+Φ−1(eiR
+ab) = diR
+
+|G|
+
+�
+
+g∈G
+ρiR(g−1)ba g.
+(C20)
+
+• If ejC
+ab ∈MdjC/2(C),
+
+Φ−1(ejC
+ab) = djC
+
+|G|
+
+�
+
+g∈G
+Re(ρjC(g−1)ba) g,
+(C21)
+
+Φ−1(i · ejC
+ab) = −djC
+
+|G|
+
+�
+
+g∈G
+Im(ρjC(g−1)ba) g.
+(C22)
+
+• If ekH
+ab ∈MdkH/4(H),
+
+Φ−1(ekH
+ab) = dkH
+
+|G|
+
+�
+
+g∈G
+Re
+�
+ρkH(g−1)ba
+�
+g,
+(C23)
+
+Φ−1(I · ekH
+ab) = dkH
+
+|G|
+
+�
+
+g∈G
+Re
+�
+I · ρkH(g−1)ba
+�
+g.
+(C24)
+
+J and K are similar.
+
+All orthogonality relations can be extracted from the
+identities above; for example, we have
+
+djC
+|G|
+
+�
+
+g∈G
+Re(ρjC(g−1)ba) ρjC(g)cd = δacδbd.
+(C25)
+
+As a direct consequence, we have
+
+djC
+|G|
+
+�
+
+g∈G
+Re(ρjC(g−1)ba) Re(ρjC(g)cd) = δacδbd,
+(C26)
+
+djC
+|G|
+
+�
+
+g∈G
+Re(ρjC(g−1)ba) Im(ρjC(g)cd) = 0.
+(C27)
+
+e.
+Constructing isomorphisms between two modules
+
+Let V and W be isomorphic simple R[G] modules
+with Dop type. We construct a R[G] isomorphism ex-
+plicitly. As in Appendix C 1 c, we have an isomorphism
+
+ψ : EndDop(V )
+Φ−1
+−−−→R[G]
+Φ
+−→EndDop(W). EndDop(V )
+and EndDop(W) are isomorphic to Md(D).
+The construction for R type and H type is analogous
+to that in Appendix C 1 c, except that we use Eq. (C18)
+for Φ−1. Let f ∈EndD(V ). Since Md(D) is a central
+simple algebra for D = R and H, we have ψ = αfα−1
+
+and α : V →W is a D-linear map. For H-type, α is
+only unique up to multiplication by an element of D.
+Other choices of α are given by composing α with an
+automorphism of V .
+For C type, Md(C) is no longer a central simple R al-
+gebra. The automorphism of Md(C) as an R algebra is
+not always an inner automorphism; however, it is an in-
+ner automorphism up to complex conjugation. Since the
+automorphism of Md(C) induces an automorphism of its
+center, which must be either the identity or complex con-
+jugation, we still have ψ = αfα−1; however, α may not
+be a C-linear map, and it could also be a C-antilinear
+map. The construction in Appendix C 1 c is still valid,
+except that we need to use Eq. (C18) for Φ−1. Other
+choices of α are given by composing α with an automor-
+phism of V .
+
+
+27
+
+3.
+Twisted group algebra K[G, ω]
+
+a.
+Definition
+
+Let ω ∈H2(G, K×) be a two-cocycle, where K× is the
+group of invertible elements of K. For K = R or C, with-
+out loss of generality, K× can be replaced by U(1) and
+Z2 = {1, −1}, respectively. Moreover, ω ∈H2(G, K×)
+can be chosen to satisfy ω(1, g) = ω(g, 1) = 1 for all
+g ∈G.
+
+The twisted group algebra K[G, ω] is spanned by its
+basis {g}g∈G, and the multiplication is given by g · h =
+ω(g, h)gh. Notice that ω ∈H2(G, K×) also determines
+a central extension of G by K×. Moreover, for K = C,
+the cocycle ω takes values in ZN for some N, where ZN
+is viewed as a subgroup of U(1) with the injection n �→
+e2πin/N. Thus, we have a group extension
+
+1 →ZN →˜G →G →1.
+(C28)
+
+The group elements of ˜G have the form (a, g), where
+a ∈ZN and g ∈G, and the multiplication is given by
+(a, g) · (b, h) = (ab ω(g, h), gh).
+We have the following
+isomorphism of algebras:
+
+K[ ˜G] ∼= K[G] × K[G, ω] × K[G, ω2] × · · · × K[G, ωN−1].
+(C29)
+The isomorphism is given by the assignment (a, g) �→
+(g, ag, a2g, · · · , aN−1g).
+
+b.
+The Wedderburn–Artin decomposition
+
+Using Eq. (C29), it is easy to get the Wedderburn–
+Artin decomposition of K[G, ω] from the Wedderburn–
+Artin decomposition of K[ ˜G]. Assume that K[ ˜G] has been
+decomposed into a direct sum of matrix algebras; that
+is, all irreducible representations of K[ ˜G] are known. If
+ρ is a component of K[ ˜G] with ρ : (a, 1) �→an, then it
+must be a component of K[G, nω]. Thus, we have the
+decomposition Φ = (ρi)
+
+K[G, ω] ∼=
+�
+
+i
+Md′
+i(Di).
+(C30)
+
+Here, i takes values in the isomorphism classes of simple
+K[ ˜G] modules such that ˜ρi(a, 1) = a with ˜ρi being the
+corresponding component of K[ ˜G].
+The component ρi
+is the restriction of ˜ρi to the subalgebra K[G, ω]. The
+dimension is d′
+i = di/dim(Di), where di is the dimension
+of the simple module i.
+
+c.
+The inverse of Φ
+
+The inverse Φ−1 is obtained by Md′
+i(Di) →K[ ˜G] →
+K[G, ω]. To be explicit, for K = C,
+
+Φ−1(f) = di
+
+| ˜G|
+
+�
+
+(a,g)∈˜
+G
+Tr
+�
+˜ρi
+�
+(a, g)−1�
+f
+�
+ag
+
+= di
+
+|G|
+
+�
+
+g∈G
+ω(g, g−1)−1Tr
+�
+ρi(g−1)f
+�
+g,
+(C31)
+
+for K = R,
+
+Φ−1(f) = di
+
+| ˜G|
+
+�
+
+(a,g)∈˜
+G
+Tr
+�
+Re
+�
+˜ρi
+�
+(a, g)−1�
+f
+��
+ag
+
+= di
+
+|G|
+
+�
+
+g∈G
+ω(g, g−1)−1Tr
+�
+Re
+�
+ρi(g−1)f
+��
+g,
+
+(C32)
+where (a, g)−1 = (a−1ω(g, g−1)−1, g−1). Notice that we
+have ω(g−1, g)ω(g, 1) = ω(1, g)ω(g, g−1), which means
+ω(g, g−1) = ω(g−1, g).
+
+d.
+Characters and great orthogonality theorem
+
+The Frobenius–Schur indicator of a C[G, ω] module is
+given by
+
+1
+| ˜G|
+
+�
+
+(a,g)∈˜
+G
+χ((a, g)2)
+
+= 1
+
+|G|
+
+�
+
+g∈G
+ω(g, g)χ(g2),
+(C33)
+
+where we assume that ω takes values in Z2, and χ is the
+character of the module.
+Using the character theory of C[ ˜G], a direct computa-
+tion shows that the simple character χi(g) = Tr (ρi(g)) of
+C[G, ω] is an orthonormal basis under the inner product
+
+(χi, χj) =
+1
+|G|
+
+�
+
+g∈G
+ω(g, g−1)−1χi(g−1)χj(g) = δij.
+
+(C34)
+Notice that we have ω(g, g−1)−1χi(g−1) = ¯χi(g).
+The great orthogonality theorem is obtained by setting
+f to be matrix entries in Eq. (C31).
+
+e.
+Constructing isomorphisms between two modules
+
+Apart from the use of Eqs. (C31) and (C32), the ap-
+proach remains unchanged.
+
+
+28
+
+Appendix D: Graded Group Algebras
+
+1.
+Z2-graded group algebra over R and C
+
+a.
+The Wedderburn–Artin decomposition
+
+A Z2-graded group G is a group equipped with a group
+homomorphism s : G →Z2. G0 denotes the kernel of
+s, and G1 is the preimage of 1 ∈Z2. The group alge-
+bra K[G] is a Z2-graded algebra. We assume that G1 is
+nonempty, and we fix a grading 1 group element g1 ∈G1.
+Notice that K[G] is a Z2-crossed product algebra. Ac-
+cording to Definition III.2, the representation theory
+of K[G] is determined by the representation theory of
+K[G0]. Assume that the Wedderburn–Artin decomposi-
+tion of K[G0] is known, that is, there is an isomorphism
+Φ0 = (ρi0),
+
+K[G0] ∼=
+�
+
+i0
+Md′
+i0(Di0).
+(D1)
+
+Here, i0 takes values in the isomorphism classes of simple
+K[G0]-modules.
+d′
+i0 = di0/dim(Di0), where di0 is the
+dimension of the simple module.
+As in Definition III.3, the Z2-graded Wedderburn–
+Artin decomposition of K[G] is given by an isomorphism
+of Z2-graded algebras Φ = (ρi),
+
+K[G] ∼=
+�
+
+i
+Md′
+i(Di)(¯ci).
+(D2)
+
+Here, i takes values in the graded equivalence classes
+of simple graded K[G] modules.
+d′
+i = |Gr/Ei|d′
+i0 =
+di/dim(Di), where di is the dimension of the Z2-graded
+module, Ei and ¯ci are determined by Di as in Defini-
+tion III.3.
+To get ρi, we fix a simple K[G0]-module V correspond-
+ing to i0. By Definition III.2, K[G] ⊗G0 V is the simple
+K[G] module corresponding to i. For simplicity, we omit
+i in the following. It remains to determine D and a G-
+equivariant D structure on K[G] ⊗G0 V .
+To be explicit, let ρ0 be the representation of V . Then
+the representation of K[G]⊗G0 V ∼= 1⊗G0 V ⊕g1⊗G0 V ∼=
+V ⊕V is given by
+
+ρ(g) =
+
+�
+ρ0(g)
+0
+0
+ρ0(g−1
+1 gg1)
+
+�
+
+, for g ∈G0,
+(D3)
+
+ρ(g) =
+
+�
+0
+ρ0(gg1)
+ρ0(g−1
+1 g)
+0
+
+�
+
+, for g ∈G1,
+(D4)
+
+recall that g1 ∈G1 is the fixed grading 1 group element.
+The Z2-graded division algebra D is the endomorphism
+algebra of K[G] ⊗G0 V , and the action of the subalgebra
+D0 is already known, which is the diagonal action on
+V ⊕V . To get D1, we only need to construct an invertible
+element in D1 with grading 1. Notice that D1 is nonzero
+
+iff there exists an isomorphism f : V ∼= V g1, where V g is
+a K[G0] module defined by h ·V g v = (g−1hg) · v. Recall
+from Sec. III B that we defined a right module version of
+V g in a previous section. The grading 1 element is given
+by
+
+θ =
+
+�
+0 ρ0(g2
+1)f
+f
+0
+
+�
+
+.
+(D5)
+
+It is easy to show that θ is a K[G]-module map.
+We choose an f that is compatible with the D0-
+structure in the following sense. For K = C, f always
+commutes with D0. Using the construction in Appendix
+C 2 e, for K = R and D0 = R or H, we can get an f that
+commutes with D0. For K = R and D0 = C, we can get
+an f that is either linear or antilinear.
+The Z2-graded division algebras over R and C are listed
+in Table III. For K = C, we have two cases D ∼= C for
+V ̸∼= V g1, and D ∼= Cl1 for f : V ∼= V g1. Notice that
+ρ0(g2
+1)f 2 is a C[G0] map; therefore, it is the identity up
+to a scalar. We can redefine f such that θ2 = id.
+For K = R, D0 = R or H, the only difference is that the
+redefinition of f cannot change the sign of θ2; therefore,
+we have two choices θ2 = ±1. For D0 = C, f is either
+a linear map or an antilinear map. For both cases, we
+have θ2 ∈Z(D) = C. However, if f is linear, then we can
+choose an f such that θ2 = 1. If f is antilinear, then we
+have two choices θ2 = ±1. This finishes the construction
+of D and of the G-equivariant D structure on K[G]⊗G0V ,
+which gives ρi.
+In summary, to construct all ρi, we start with ρi0 of
+a simple K[G0] module V .
+The induced K[G] module
+K[G] ⊗G0 V is constructed by Eqs. (D3) and (D4).
+
+1. If V ̸∼= V g1, then D ∼= D0.
+
+2. If V ∼= V g1, D is constructed by Eq. (D5), where
+f : V ∼= V g1 is constructed using the methods in
+Appendixes C 1 c and C 2 e.
+
+(a) For K = C, D ∼= Cl1.
+
+(b) For K = R and
+
+i. D0 = R, if θ2 = 1, then D ∼= Cl0,1. If
+θ2 = −1, then D ∼= Cl1,0.
+ii. D0 = C, if f is linear, then D ∼= Cl1. If f
+is antilinear, then D ∼= Cl0,2 for θ2 = 1,
+and D ∼= Cl2,0 for θ2 = −1.
+iii. D0 = H, if θ2 = 1, then D ∼= Cl3,0. If
+θ2 = −1, then D ∼= Cl0,3.
+
+The characters suffice to distinguish all these cases, as
+will be shown in Appendix D 1 c.
+
+b.
+The inverse of Φ
+
+Let f be an element in EndDop(V ) ∼= Md(D)(¯c), where
+D is a Gr-graded division algebra, and V is a graded
+
+
+29
+
+Dop module. We can take the trace of f as a K-linear
+map, i.e., TrK(f). Notice that the matrix entries in Dc
+for c ̸= 0 do not contribute to the value of the trace.
+Therefore, we have TrK(f) = dim(D/D0)TrK(f0), where
+f0 ∈Md(D0) is obtained from f by projecting every ma-
+trix entry to D0.
+Following the method in Appendix C 2 c, for f
+∈
+Md′
+i(Di)(¯ci) and K = R, we have
+
+Φ−1(f) = di
+
+|G|
+
+�
+
+g∈G
+Tr
+�
+Re
+�
+ρi(g−1)f
+��
+g,
+(D6)
+
+where Re is the projection from D to D0 composed with
+the Re for D0, i.e., Re is the projection from D to the
+subspace R spanned by the unit. For K = C, Re is just
+the projection from D to D0 = C. This formula actually
+works for any grading group Gr.
+
+c.
+Character theory
+
+For K = C, let V be a simple C[G0] module, and let χ
+be its character. To determine whether V ∼= V g1, we use
+the inner product formula of characters,
+
+1
+|G0|
+
+�
+
+g∈G0
+χ(g−1
+1 g−1g1) χ(g).
+(D7)
+
+If the inner product is 1, then V ∼= V g1, otherwise V ̸∼=
+V g1.
+For K = R, in what follows, we determine D using
+characters. Let W be a simple R[G0] module, and let
+χ be its character. We still use Eq. (D7) to determine
+whether W ∼= W g1, but the value is not always 0 or 1.
+If W ̸∼= W g1, the Frobenius–Schur indicator Eq. (C9)
+of W is enough to determine D. If W ∼= W g1, we also
+need to use the Frobenius–Schur indicator of R[G]⊗G0W.
+According to Tables I and III, D is uniquely determined
+by these data. Using Eqs. (D3) and (D4), we obtain
+
+FS(R[G] ⊗G0 W) =
+1
+|G0|
+
+�
+
+g∈G
+χ(g2).
+(D8)
+
+Notice that FS(R[G] ⊗G0 W) = FS(W) + w, where
+
+w =
+1
+|G0|
+
+�
+
+g∈G1
+χ(g2).
+(D9)
+
+Equivalently, we use FS(W) and w to replace FS(W)
+and FS(R[G] ⊗G0 W). They have the advantage that
+it suffices to know whether FS(W) and w are positive,
+negative, or zero. We record the results in Table V.
+For a simple R[G0] module W, let V be the correspond-
+ing simple C[G0] module, as discussed in Appendix C 2 b.
+A similar argument can be used to derive the entries of
+Table IV.
+
+V ∼= V g1
+D over C
+0
+C
+1
+Cl1
+
+V ∼= V g1 FS w D over R
+
+0
+1
+0
+R
+0
+0
+0
+C
+0
+-1
+0
+H
+1
+1
+1
+Cl0,1
+
+1
+1
+-1
+Cl1,0
+
+1
+0
+0
+Cl1
+
+1
+0
+1
+Cl0,2
+
+1
+0
+-1
+Cl2,0
+
+1
+-1 -1
+Cl3,0
+
+1
+-1
+1
+Cl0,3
+
+TABLE IV. The first column is calculated by Eq. (D7) to
+determine whether V ∼= V g1 or ¯V g1.
+The second column
+is the Frobenius–Schur indicator Eq. (C9) of V . The third
+column is w Eq. (D9) using the characters of V .
+
+W ∼= W g1 FS w D over R
+
+0
+1
+0
+R
+0
+0
+0
+C
+0
+-2
+0
+H
+1
+1
+1
+Cl0,1
+
+1
+1
+-1
+Cl1,0
+
+2
+0
+0
+Cl1
+
+2
+0
+2
+Cl0,2
+
+2
+0
+-2
+Cl2,0
+
+4
+-2 -2
+Cl3,0
+
+4
+-2
+2
+Cl0,3
+
+TABLE V. The first column is calculated by Eq. (D7). The
+second column is the Frobenius–Schur indicator Eq. (C9) of
+W. The third column is w Eq. (D9) using the characters of
+W.
+
+2.
+Twisted group algebra C[G, ω, s] with antilinear
+group elements
+
+a.
+Definition
+
+Let C[G, ω, s] be the twisted group algebra with anti-
+linear elements, following the notation in Sec. II A. The
+cocycle ω ∈H2(G, U(1)) defines a Z2-graded group ex-
+tension of G by U(1). If G is finite, ω takes values in ZN
+for some N, where ZN is viewed as a subgroup of U(1)
+determined by the map n �→e2πin/N, i.e.,
+
+1
+ZN
+˜G0
+G0
+1
+
+1
+ZN
+˜G
+G
+1
+
+(D10)
+
+
+30
+
+The group elements of ˜G are (a, g) for a ∈ZN and
+g ∈G. The multiplication is defined by (a, g) · (b, h) =
+(a gb ω(g, h), gh).
+Notice that
+˜G is also a Z2-graded
+group; we denote the grading map by ˜s. We have the
+following isomorphism of algebras:
+
+C[ ˜G, 1, ˜s] ∼= C[G, 1, s] × C[G, ω, s]
+
+× C[G, ω2, s] × · · · × C[G, ωN−1, s].
+(D11)
+The isomorphism is given by the assignment (a, g) �→
+(g, ag, a2g, · · · , aN−1g).
+
+b.
+The Wedderburn–Artin decomposition
+
+We follow a method similar to that in Appendix D 1.
+The grading 0 subspace of C[G, ω, s] is a twisted group
+algebra C[G0, ω] without antilinear group elements. As-
+sume that we already have the Wedderburn–Artin de-
+composition of C[G0, ω] using the methods in Appendix
+C 3. Since C[G, ω, s] is a Z2-crossed product algebra, the
+Z2-graded simple modules over C[G, ω, s] are determined
+by the simple modules over C[G0, ω], according to Defi-
+nition III.2.
+Let V be a simple C[G0, ω] module. We construct the
+corresponding Z2-graded simple module
+
+C[G, ω, s] ⊗C[G0,ω] V.
+(D12)
+
+To be explicit, let ρ0 be the representation of V , and ρ
+be the representation of C[G, ω, s] ⊗C[G0,ω] V . The rep-
+resentation ρ has
+
+ρ(z) =
+
+�
+ρ0(z)
+0
+0
+ρ0(¯z)
+
+�
+
+, for z ∈C,
+(D13)
+
+ρ(g) =
+
+�
+ρ0(g)
+0
+0
+¯ω(g1, g−1
+1 )−1¯ω(g, g1)ω(g−1
+1 , gg1)ρ0(g−1
+1 gg1)
+
+�
+
+, for g ∈G0,
+(D14)
+
+ρ(g) =
+
+�
+0
+ω(g, g1)ρ0(gg1)
+¯ω(g1, g−1
+1 )−1ω(g−1
+1 , g)ρ0(g−1
+1 g)
+0
+
+�
+
+, for g ∈G1,
+(D15)
+
+where g1 ∈G1 is the fixed grading 1 group element.
+In principle, V is only a real vector space; however, if
+we take ρ0(i) as a complex structure, then V becomes a
+complex vector space. Similarly, if we take ρ(i) as a com-
+plex structure on V ⊕V , then the induced complex vector
+
+space is isomorphic to V ⊕¯V . Notice that Eq. (D14) is
+actually an antilinear map. If we choose a basis of the
+complex vector space V , then there is a canonical anti-
+linear map on V which is denoted by K. ρ(g) can be
+written as matrices over C in this basis,
+
+ρ(g) =
+
+�
+ρ0(g)
+0
+0
+ω(g1, g−1
+1 )−1ω(g, g1)¯ω(g−1
+1 , gg1)¯ρ0(g−1
+1 gg1)
+
+�
+
+, for g ∈G0,
+(D16)
+
+ρ(g) =
+
+�
+0
+ω(g, g1)ρ0(gg1)K
+ω(g1, g−1
+1 )−1¯ω(g−1
+1 , g)¯ρ0(g−1
+1 g)K
+0
+
+�
+
+, for g ∈G1.
+(D17)
+
+Next, we determine the Z2-graded division algebra D.
+D0 is always C, and it acts on V ⊕V by
+�
+ρ0(z)
+0
+0
+ρ0(z)
+
+�
+
+, for z ∈C.
+(D18)
+
+Notice that this map commutes with all ρ(g); however,
+Eq. (D13) does not have this property. If V ̸∼= V g1, then
+we have D = C, where V g1 is a C[G0, ω] module with
+
+g · v = ¯ω(g1, g−1
+1 )−1¯ω(g, g1)ω(g−1
+1 , gg1)g−1
+1 gg1v, (D19)
+
+
+31
+
+and z · v = ρ0(¯z)(v) for z ∈C and v ∈V .
+
+Assume that we have an isomorphism f : V ∼= V g1, and
+f is constructed using the methods in Appendix C 3 e. A
+nonzero element of D1 is enough to generate the whole
+D, and we have one such element,
+
+θ =
+
+�
+0 ω(g1, g1)ρ0(g2
+1)f
+f
+0
+
+�
+
+.
+(D20)
+
+To check whether θ commutes with all ρ(g), we need to
+use ω(g, g−1) = gω(g−1, g). θ is an antilinear element
+with respect to D0 = C; hence, D is determined by the
+sign of θ2. If θ2 is positive, then D = Cl0,2. If θ2 is
+negative, then D = Cl2,0.
+
+c.
+The inverse of Φ
+
+For f ∈Md′
+i(Di)(¯ci), we have
+
+Φ−1(f) =
+di
+2|G|
+
+�
+
+g∈G
+ω(g−1, g)−1 �
+Tr
+�
+Re
+�
+ρi(g−1)f
+��
+−Tr
+�
+Re
+�
+ρi(ig−1)f
+��
+i
+�
+g,
+(D21)
+
+where Re is the projection from D to the subspace R
+spanned by the unit.
+This formula actually works for
+any grading group Gr.
+To prove this is the inverse, we assume Φ−1(f) =
+�
+
+g∈G ag g ∈C[G, ω, s]. Notice that we have
+
+ag =
+1
+2|G|
+�
+TrR
+�
+Φ−1(f)(g)−1 · −
+�
+−TrR
+�
+iΦ−1(f)(g)−1 · −
+�
+i
+�
+
+=
+di
+2|G|
+�
+Tr
+�
+Re
+�
+ρi(g)−1f
+��
+−Tr
+�
+Re
+�
+iρi(g)−1f
+��
+i
+�
+
+=
+di
+2|G|ω(g−1, g)−1 �
+Tr
+�
+Re
+�
+ρi(g−1)f
+��
+−Tr
+�
+Re
+�
+iρi(g−1)f
+��
+i
+�
+.
+
+(D22)
+
+The trace in the first line is calculated as a linear
+map on C[G, ω, s].
+The second line uses the method
+in Appendix D 1 b.
+The third line uses the fact that
+Tr(Re (−) −Tr (Re (i · −) i)) is C linear.
+
+d.
+Character theory
+
+We show how character theory determines the Z2-
+graded division algebra D. Let V be a C[G0, ω]-module,
+and let χ be its character. Since there are only three pos-
+sibilities, D = C, Cl0,2, or Cl2,0, D is determined by the
+type of C[G, ω, s] ⊗C[G0,ω] V . If the type is R, we have
+D = Cl0,2. If the type is C, we have D = C. If the type
+is H, we have D = Cl2,0.
+
+Notice that C[ ˜G, 1, ˜s] is isomorphic to the real twisted
+group algebra R[G′, ω′] without antilinear elements,
+where G′ = Z2 × ˜G. We denote the elements of G′ by g
+and ig for g ∈˜G. We have ω′(ig, ig′) = −1 for g ∈˜G0,
+ω′(g, ig′) = −1 for g ∈˜G1, and 1 otherwise.
+
+We lift C[G, ω, s] ⊗C[G0,ω] V to an R[G′, ω′] module.
+Now we can use the Frobenius–Schur indicator Eq. (C33)
+
+of twisted group algebras,
+
+1
+|G′|
+
+
+
+�
+
+g∈˜
+G
+ω′(g, g)χ′(g2) +
+�
+
+g∈˜
+G
+ω′(ig, ig)χ′ �
+(ig)2�
+
+
+
+
+= 1
+
+|G′|
+
+
+
+�
+
+g∈˜
+G
+χ′(g2) −
+�
+
+g∈˜
+G0
+χ′ �
+g2�
++
+�
+
+g∈˜
+G1
+χ′ �
+g2�
+
+
+
+
+= 1
+
+| ˜G|
+
+�
+
+g∈˜
+G1
+TrR
+�
+˜ρ(g2)
+�
+=
+1
+| ˜G|
+
+�
+
+g∈˜
+G1
+2Tr ◦Re
+�
+˜ρ(g2)
+�
+
+= 1
+
+| ˜G|
+
+�
+
+g∈˜
+G1
+Tr
+�
+˜ρ(g2) + ¯˜ρ(g2)
+�
+=
+2
+| ˜G|
+
+�
+
+g∈˜
+G1
+Tr
+�
+˜ρ(g2)
+�
+
+= 2
+
+| ˜G|
+
+�
+
+a
+
+�
+
+g∈G1
+|a|2ω(g, g)
+�
+χ(g2) + χg1(g2)
+�
+
+= 4
+
+| ˜G|
+
+�
+
+a
+
+�
+
+g∈G1
+|a|2ω(g, g)χ(g2)
+
+= 2
+
+|G0|
+
+�
+
+g∈G1
+ω(g, g)χ(g2),
+
+(D23)
+where χ′ is the character of the R[G′, ω′] module, and ˜ρ
+is the representation of the C[ ˜G, 1, ˜s] module. TrR is the
+
+
+32
+
+trace of real linear maps; if the vector space has a complex
+structure, then we have TrR(f) = 2Tr ◦Re(f) for a com-
+plex linear map f. χg1 is the character of V g1. After the
+third equality, we use the complex structure Eq. (D13);
+therefore, ˜ρ is given by Eqs. (D16) and (D17). To get the
+fifth equality, we use the fact that the Frobenius–Schur
+indicator of a module is invariant under complex conju-
+gation. In the sixth equality, we use the fact that V and
+V g1 have the same type; therefore, the Frobenius–Schur
+indicators are the same.
+When D = C, Eq. (D23) is 0.
+When D = Cl0,2,
+Eq. (D23) is 2 because a simple Z2-graded module with
+type Cl0,2 decomposes into two simple ungraded modules
+with type R. When D = Cl2,0, Eq. (D23) is −2 because
+the complexification of a simple ungraded module over R
+with type H is a direct sum of two isomorphic modules
+over C with type H.
+In summary, to determine D, we need to calculate
+
+w =
+1
+|G0|
+
+�
+
+g∈G1
+ω(g, g)χ(g2),
+(D24)
+
+where χ is the character of V . If w = 1, then D = Cl0,2.
+If w = 0, then D = C. If w = −1, then D = Cl2,0.
+
+Appendix E: Karoubi’s K-Theory
+
+We collect some results from Karoubi’s works [58, 66,
+73, 74]. Notice that Karoubi only proved the results for
+a group G that allows antilinear symmetries. There are
+no results for symmetries involving projective representa-
+tions or anticommutation with the Hamiltonian. In what
+follows, we assume that the fundamental theorem for the
+general case is correct, and leave the proof to the ex-
+perts. It should be noted that the result for the general
+case has been used implicitly in physics-related works,
+for example, Refs. [20, 27].
+
+1.
+The fundamental theorem
+
+Let V be a real G-vector bundle over a G-space X
+equipped with a G-invariant inner product. We can con-
+struct a fiber bundle Cl(V ) over X whose fiber over
+x ∈X is the Clifford algebra Cl(Vx).
+We denote the
+G action on V by ρV ; ρV (g) maps an element of Vx to an
+element of Vg·x. ρV (g) also induces a G action on Cl(V );
+we still denote it by ρV (g).
+An AV
+sym module E is a real vector bundle equipped
+with actions of Asym and Cl(V ) that are compatible with
+each other. In particular, for x ∈X, g ∈Asym, ax ∈
+Cl(V )x, and ex ∈Ex, we have
+
+g·Asym (ax·Cl(V )ex) = (−1)h(g)ρV (g)(ax)·Cl(V )(g·Asym ex)
+(E1)
+Notice that g ·Asym ex is a vector in Eg·x.
+The vector
+bundle E is also a complex vector bundle because C is a
+subalgebra of Asym.
+
+Example E.1. For X a point, V is just a real G module,
+and an AV
+sym module is the module over the algebra AV
+sym
+as defined in Sec. II E 2.
+
+Example E.2. For V a trivial bundle, by abuse of nota-
+tion, we take the trivial bundle to be X × V where V is
+a real G representation. Cl(X × V ) is X × Cl(V ); here,
+Cl(V ) is a Clifford algebra. The action of Cl(X×V ) on a
+vector bundle E reduces to the action of Cl(V ), since the
+action is given by a bundle map Cl(X × V ) ×X E →E,
+and the domain is just Cl(V ) × E.
+In summary, an AV
+sym module is a vector bundle over
+X with the action of AV
+sym.
+
+Karoubi defined a group KV
+Asym(X, Y ) for a real G-
+vector bundle V over a G-space X; Y is a (nice) sub-
+space of X. An element of KV
+Asym(X, Y ) is represented
+by (E, ε1, ε2), where E is a AV
+sym module, and ε1, ε2 are
+two gradations that are equal on Y . A gradation ε of E
+is a AV
+sym-module map such that ε2 = id. Here, we define
+the AV
+sym module maps to anticommute with the action of
+the grading-1 elements of AV
+sym, i.e., g with h(g) = 1 and
+v ∈V ⊂Cl(V ). (E, ε1, ε2) = (E, ε′
+1, ε′
+2) if and only if
+there exist two trivial elements (F, η1, η2) and (F ′, η′
+1, η′
+2)
+with η1 (or η′
+1) homotopic to η2 (or η′
+2) such that
+
+(E⊕F, ε1⊕η1, ε2⊕η2) ∼= (E′⊕F ′, ε′
+1⊕η′
+1, ε′
+2⊕η′
+2). (E2)
+
+We denote KV
+Asym(X) by KV
+Asym(X, ∅), i.e., Y is the empty
+set.
+We construct a map from KV
+Asym(X) to K0
+Asym(S+(V ⊕
+1), S(V )), where S+(V ⊕1) is the upper hemisphere of
+the sphere bundle of V ⊕1, and S(V ) is the sphere bun-
+dle of V . The superscript 0 of K0
+Asym denotes the zero-
+dimensional vector bundle over S+(V ⊕1). The map is
+given by
+
+t : (E, ε1, ε2) �→(π∗E, ε′
+1cos(θ) + vsin(θ),
+ε′
+2cos(θ) + vsin(θ)),
+(E3)
+
+where π∗E is the pullback bundle of E through π :
+S+(V ⊕1) →X, and it also induces the gradation ε′
+1 and
+ε′
+2 on π∗E. (v, θ) is the polar coordinate of S+(V ⊕1),
+and v ∈V ⊂Cl(V ). Then Karoubi proved the funda-
+mental theorem:
+
+Theorem E.3. t : KV
+Asym(X) →K0
+Asym(S+(V ⊕1), S(V ))
+is an isomorphism.
+
+Example
+E.4. For X
+a point and (E, ε1, ε2)
+∈
+KV
+Asym(X), E is a AV
+sym module, and εi lifts E to a
+Cl0,1 ˆ⊗AV
+sym module. An element (F, η1, η2) of the rel-
+ative K-group K0
+Asym(S+(V ⊕1), S(V )) is a real vector
+bundle F on S+(V ⊕1) equipped with the action of Asym
+and gradations η1, η2 that are equal on S(V ).
+The image under t of a gradation is actually the upper-
+hemisphere part of the Dirac Hamiltonian Eq. (8).
+
+
+33
+
+Example E.5. We take the same notation as Defini-
+tion E.2. For a trivial bundle X × V , by abuse of nota-
+tion, we denote KX×V
+Asym (X) by KV
+Asym(X). The codomain
+of t becomes K0
+Asym(X × S+(V ⊕1), X × S(V )).
+
+2.
+The classifying spaces for K-theory
+
+In the following sections, we discuss the cases in Defi-
+nitions E.2 and E.5. We have the following theorem:
+
+Theorem E.6. The following diagram is correct:
+
+KV
+Asym(X)
+π0
+�
+Top
+�
+X, K(AV
+sym)
+�G�
+
+K0
+Asym(X × S+(V ⊕1), X × S(V ))
+π0
+�
+Top
+�
+X, ΩV (K(Asym))
+�G�
+
+∼
+=
+
+∼
+=
+t
+
+∼
+=
+
+(E4)
+
+The right map is induced by the map of “construction of
+Dirac Hamiltonians” as defined in Sec. II E 3.
+
+Proof. For the upper arrow, given (E, ε1, ε2) on the
+left, we can take its direct sum with a trivial element
+(F, η1, η2) such that E ⊕F is a trivial vector bundle
+X × W, and we embed the Cl0,1 ˆ⊗AV
+sym module W with
+ε1 ⊕η1 into U(Cl0,1 ˆ⊗AV
+sym); then ε2 ⊕η2 would be the
+image. Conversely, an element on the right is a grading
+on X × W, where W is a Cl0,1 ˆ⊗AV
+sym module, and the
+image is (X × W, M0, M).
+The lower arrow is similar, but with X ×S(V ) mapped
+to the basepoint. We have X × S+(V ⊕1)/X × S(V )
+G-homotopic to SV ∧X+, and we use the tensor-hom
+adjunction of Top∗.
+The commutativity of the diagram is easy to check.
+
+Remark E.7. In general, we can prove
+
+KV
+Asym(X, Y ) ∼= π0
+�
+Top∗
+�
+X/Y, K(AV
+sym)
+�G�
+.
+(E5)
+
+This result also shows
+
+KV
+Asym(X, Y ) ∼= KV
+Asym(X/Y, {x0}),
+(E6)
+
+where x0 is the basepoint of X/Y , i.e., the point that
+represents the points in Y .
+
+Corollary E.8. K(AV
+sym) ≃ΩV (K(Asym)) is a G-
+equivariant homotopy equivalence.
+
+Along with Sec. II E 4, this shows K−V
+Asym is an RO(G)-
+graded cohomology theory, and K(A−V
+sym) is the genuine
+G-Ω-spectrum, or equivalently the RO(G)-graded spec-
+trum; see [51]. There is also a helpful lecture note [75]
+on this topic.
+3.
+˜KAsym(X)
+
+For a G-space X
+with a basepoint x0,
+we de-
+fine ˜KAsym(X) to be K0
+Asym(X, x0), which is also de-
+fined in Sec. II F 4 in another way.
+The two defi-
+nitions are equivalent, since both are isomorphic to
+π0
+�
+Top∗
+�
+X, K(AV
+sym)
+�G�
+.
+
+Appendix F: An Example Calculated Using the
+GAP Package
+
+The Dirac Hamiltonian for the D3d
+example in
+Sec. IV E, obtained via Hamiltonians(A)[1], is as fol-
+lows:
+
+
+34
+
+˜Γ1 =
+
+
+
+
+
+0 1
+0
+0
+0 0
+0
+0
+1 0
+0
+0
+0 0
+0
+0
+0 0
+0
+−1 0 0
+0
+0
+0 0 −1
+0
+0 0
+0
+0
+0 0
+0
+0
+0 1
+0
+0
+0 0
+0
+0
+1 0
+0
+0
+0 0
+0
+0
+0 0
+0
+−1
+0 0
+0
+0
+0 0 −1
+0
+
+
+
+
+
+(F1)
+
+˜Γ2 =
+
+
+
+
+
+0 0 0 1 0 0 0 0
+0 0 1 0 0 0 0 0
+0 1 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 1
+0 0 0 0 0 0 1 0
+0 0 0 0 0 1 0 0
+0 0 0 0 1 0 0 0
+
+
+
+
+
+(F2)
+
+˜Γ3 =
+
+
+
+
+
+0
+0
+0
+−E(4)
+0
+0
+0
+0
+0
+0
+−E(4)
+0
+0
+0
+0
+0
+0
+E(4)
+0
+0
+0
+0
+0
+0
+E(4)
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+E(4)
+0
+0
+0
+0
+0
+0
+E(4)
+0
+0
+0
+0
+0
+0
+−E(4)
+0
+0
+0
+0
+0
+0
+−E(4)
+0
+0
+0
+
+
+
+
+
+(F3)
+
+In what follows, a = 1
+
+2E(3) −1
+
+2E(3)2, b = 1
+
+2E(4), and K is the complex conjugation operator.
+
+ˆs6 =
+
+
+
+
+
+0 0
+0
+0
+a 0 −b
+0
+0 0
+0
+0
+0 a
+0
+−b
+0 0
+0
+0
+b 0
+a
+0
+0 0
+0
+0
+0 b
+0
+a
+a 0 −b
+0
+0 0
+0
+0
+0 a
+0
+−b 0 0
+0
+0
+b 0
+a
+0
+0 0
+0
+0
+0 b
+0
+a
+0 0
+0
+0
+
+
+
+
+
+(F4)
+
+ˆmy =
+
+
+
+
+
+0 0
+0
+0
+−1
+0
+0 0
+0 0
+0
+0
+0
+−1 0 0
+0 0
+0
+0
+0
+0
+1 0
+0 0
+0
+0
+0
+0
+0 1
+1 0
+0
+0
+0
+0
+0 0
+0 1
+0
+0
+0
+0
+0 0
+0 0 −1
+0
+0
+0
+0 0
+0 0
+0
+−1
+0
+0
+0 0
+
+
+
+
+
+(F5)
+
+
+35
+
+ˆC =
+
+
+
+
+
+0
+0
+0
+0
+0
+E(4)
+0
+0
+0
+0
+0
+0
+E(4)
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+E(4)
+0
+0
+0
+0
+0
+0
+E(4)
+0
+0
+−E(4)
+0
+0
+0
+0
+0
+0
+−E(4)
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+−E(4)
+0
+0
+0
+0
+0
+0
+−E(4)
+0
+0
+0
+0
+0
+
+
+
+
+
+K
+(F6)
+
+ˆT =
+
+
+
+
+
+0 0 −1
+0
+0
+0
+0 0
+0 0
+0
+−1
+0
+0
+0 0
+1 0
+0
+0
+0
+0
+0 0
+0 1
+0
+0
+0
+0
+0 0
+0 0
+0
+0
+0
+0
+1 0
+0 0
+0
+0
+0
+0
+0 1
+0 0
+0
+0
+−1
+0
+0 0
+0 0
+0
+0
+0
+−1 0 0
+
+
+
+
+
+K
+(F7)
+
+M = −M0 =
+
+
+
+
+
+1
+0
+0
+0
+0
+0
+0
+0
+0 −1 0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0 −1 0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0 −1 0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+0
+0
+0 −1
+
+
+
+
+
+(F8)
+
+[1] B. A. Bernevig, T. L. Hughes, and S.-C. Zhang, Quan-
+tum Spin Hall Effect and Topological Phase Transition
+in HgTe Quantum Wells, Science 314, 1757 (2006).
+[2] C. L. Kane and E. J. Mele, Quantum Spin Hall Effect in
+Graphene, Physical Review Letters 95, 226801 (2005).
+[3] M. Z. Hasan and C. L. Kane, Colloquium : Topological
+insulators, Reviews of Modern Physics 82, 3045 (2010).
+[4] X.-L. Qi and S.-C. Zhang, Topological insulators and
+superconductors, Reviews of Modern Physics 83, 1057
+(2011).
+[5] C. L. Kane and E. J. Mele, Z 2 Topological Order and
+the Quantum Spin Hall Effect, Physical Review Letters
+95, 146802 (2005).
+[6] L. Fu and C. L. Kane, Topological insulators with inver-
+sion symmetry, Physical Review B 76, 045302 (2007).
+[7] M. K¨onig, S. Wiedmann, C. Br¨une, A. Roth, H. Buh-
+mann, L. W. Molenkamp, X.-L. Qi, and S.-C. Zhang,
+Quantum Spin Hall Insulator State in HgTe Quantum
+Wells, Science 318, 766 (2007).
+[8] H. Zhang, C.-X. Liu, X.-L. Qi, X. Dai, Z. Fang, and S.-
+C. Zhang, Topological insulators in Bi2Se3, Bi2Te3 and
+Sb2Te3 with a single Dirac cone on the surface, Nature
+physics 5, 438 (2009).
+[9] A. Y. Kitaev, Unpaired Majorana fermions in quantum
+
+wires, Physics-uspekhi 44, 131 (2001).
+[10] L. Fu and C. Kane, Superconducting proximity effect and
+Majorana fermions at the surface, in APS March Meeting
+Abstracts (American Physical Society, College Park, MD,
+2008) pp. V10–001.
+[11] D. A. Ivanov, Non-Abelian Statistics of Half-Quantum
+Vortices in p -Wave Superconductors, Physical Review
+Letters 86, 268 (2001).
+[12] R. M. Lutchyn, J. D. Sau, and S. Das Sarma, Majo-
+rana Fermions and a Topological Phase Transition in
+Semiconductor-Superconductor Heterostructures, Phys-
+ical Review Letters 105, 077001 (2010).
+[13] Y. Oreg, G. Refael, and F. Von Oppen, Helical Liquids
+and Majorana Bound States in Quantum Wires, Physical
+Review Letters 105, 177002 (2010).
+[14] N. Read and D. Green, Paired states of fermions in
+two dimensions with breaking of parity and time-reversal
+symmetries and the fractional quantum Hall effect, Phys-
+ical Review B 61, 10267 (2000).
+[15] A. Altland and M. R. Zirnbauer, Nonstandard symme-
+try classes in mesoscopic normal-superconducting hybrid
+structures, Physical Review B 55, 1142 (1997).
+[16] P. Heinzner, A. Huckleberry, and M. Zirnbauer, Symme-
+try Classes of Disordered Fermions, Communications in
+
+
+36
+
+Mathematical Physics 257, 725 (2005).
+[17] A. P. Schnyder, S. Ryu, A. Furusaki, and A. W. W. Lud-
+wig, Classification of topological insulators and supercon-
+ductors in three spatial dimensions, Physical Review B
+78, 195125 (2008).
+[18] A. Kitaev, Periodic table for topological insulators and
+superconductors, in AIP Conference Proceedings, Vol.
+1134 (American Institute of Physics, 2009) pp. 22–30.
+[19] L. Fu, Topological Crystalline Insulators, Physical Re-
+view Letters 106, 106802 (2011).
+[20] K. Shiozaki, The classification of surface states of topo-
+logical insulators and superconductors with magnetic
+point group symmetry, Progress of Theoretical and Ex-
+perimental Physics 2022, 04A104 (2022).
+[21] D. S. Freed and G. W. Moore, Twisted Equivariant Mat-
+ter, Annales Henri Poincar´e 14, 1927 (2013).
+[22] K. Gomi, Freed-Moore K-theory, Communications in
+Analysis and Geometry 31, 979 (2023).
+[23] G. C. Thiang, On the K-Theoretic Classification of Topo-
+logical Phases of Matter, Annales Henri Poincar´e 17, 757
+(2016).
+[24] Y. Kubota, Notes on twisted equivariant K-theory for
+C*-algebras, International Journal of Mathematics 27,
+1650058 (2016).
+[25] L. Scaglione, Comparison between two approaches to
+classify topological insulators using K-theory, Journal of
+Mathematical Physics 65 (2024).
+[26] E. Cornfeld and A. Chapman, Classification of crystalline
+topological insulators and superconductors with point
+group symmetries, Physical Review B 99, 075105 (2019).
+[27] E. Cornfeld and S. Carmeli, Tenfold topology of crys-
+tals: Unified classification of crystalline topological insu-
+lators and superconductors, Physical Review Research 3,
+013052 (2021).
+[28] J. Kruthoff, J. De Boer, J. Van Wezel, C. L. Kane, and
+R.-J. Slager, Topological Classification of Crystalline In-
+sulators through Band Structure Combinatorics, Physi-
+cal Review X 7, 041069 (2017).
+[29] H. C. Po, A. Vishwanath, and H. Watanabe, Symmetry-
+based indicators of band topology in the 230 space
+groups, Nature communications 8, 50 (2017).
+[30] Z. Song, T. Zhang, Z. Fang, and C. Fang, Quantitative
+mappings between symmetry and topology in solids, Na-
+ture communications 9, 3530 (2018).
+[31] A. Bouhon, T. Bzduˇsek, and R.-J. Slager, Geometric ap-
+proach to fragile topology beyond symmetry indicators,
+Physical Review B 102, 115135 (2020).
+[32] K. Shiozaki, M. Sato, and K. Gomi, Atiyah-Hirzebruch
+spectral sequence in band topology: General formalism
+and topological invariants for 230 space groups, Physical
+Review B 106, 165103 (2022).
+[33] K. Shiozaki and S. Ono, Atiyah-Hirzebruch spectral se-
+quence for topological insulators and superconductors:
+$E 2$ pages for 1651 magnetic space groups, Physical
+Review B 113, 195441 (2026).
+[34] S. Ono and K. Shiozaki, Towards complete characteri-
+zation of topological insulators and superconductors: A
+systematic construction of topological invariants based
+on Atiyah-Hirzebruch spectral sequence, Physical Review
+X 10.1103/2rw7-bzl4 (2026).
+[35] T.
+Yuan,
+FreeFermionicSPT,
+https://github.com/ttiiddee/FreeFermionicSPT (2026).
+[36] T. Yuan, C. Fang, and Y. Qi, Anomaly Pattern (2026).
+[37] A. Kitaev, Toward Topological Classification of Phases
+
+with Short-range Entanglement, Tech. Rep. (Simons Cen-
+ter, 2011).
+[38] A. Kitaev, On the Classification of Short-Range Entan-
+gled States, Tech. Rep. (Simons Center, 2013).
+[39] A. Kitaev, Homotopy-Theoretic Approach to SPT Phases
+in Action: Z 16 Classification of Three-Dimensional Su-
+perconductors, Tech. Rep. (University of California, Los
+Angeles, 2015).
+[40] D. Gaiotto and T. Johnson-Freyd, Symmetry protected
+topological phases and generalized cohomology, Journal
+of High Energy Physics 2019, 7 (2019).
+[41] C. Z. Xiong, Minimalist approach to the classification
+of symmetry protected topological phases, Journal of
+Physics A: Mathematical and Theoretical 51, 445001
+(2018).
+[42] J. P. May, The Geometry of Iterated Loop Spaces
+(Springer, 2006).
+[43] To be precise, a connective Ω-spectrum.
+[44] X. Chen, Z.-C. Gu, Z.-X. Liu, and X.-G. Wen, Symmetry
+protected topological orders and the group cohomology
+of their symmetry group, Physical Review B 87, 155114
+(2013).
+[45] A. Kapustin, Symmetry Protected Topological Phases,
+Anomalies, and Cobordisms: Beyond Group Cohomol-
+ogy (2014), arXiv:1403.1467 [cond-mat].
+[46] A. Kapustin, R. Thorngren, A. Turzillo, and Z. Wang,
+Fermionic symmetry protected topological phases and
+cobordisms, Journal of High Energy Physics 2015, 1
+(2015).
+[47] R. Geiko and G. Shuklin, A Classification of Invertible
+Stabilizer Codes (2025), arXiv:2512.01142.
+[48] A. M. Czajka, R. Geiko, and R. Thorngren, Anoma-
+lies on the Lattice, Homotopy of Quantum Cellular Au-
+tomata, and a Spectrum of Invertible States (2025),
+arXiv:2512.02105 [cond-mat].
+[49] D. S. Freed, Short-range entanglement and invertible field
+theories (2014), arXiv:1406.7278 [cond-mat].
+[50] D. S. Freed and M. J. Hopkins, Reflection positivity and
+invertible topological phases, Geometry & Topology 25,
+1165 (2021).
+[51] J. P. May and M. Cole, Equivariant Homotopy and Co-
+homology Theory: Dedicated to the Memory of Robert J.
+Piacenza, 91 (American Mathematical Soc., 1996).
+[52] M. F. Atiyah, K-theory and reality, The Quarterly Jour-
+nal of Mathematics 17, 367 (1966).
+[53] Notice that G is actually a Z2 × Z2-graded group with
+grading s×h, and C[G, ω, s] is also a Z2×Z2-graded alge-
+bra. In practical calculations, it is convenient to consider
+both gradings, but for current conceptual purposes, we
+only need the grading of h.
+[54] All classifying spaces considered in this work are topolog-
+ical spaces. To define the topology of K(Asym), we first
+take an infinite sequence of finite-dimensional submod-
+ules of U(Cl0,1 ˆ⊗Asym). We then consider the topologi-
+cal spaces of linear maps H with H2 = 1 on a finite-
+dimensional submodule. There is a canonical inclusion
+map between the spaces of linear maps on two different
+submodules, and if V �→W, the inclusion map is given
+by direct sum with H0|V ′, where W ∼= V ⊕V ′. Finally,
+we take the direct limit of these topological spaces, which
+automatically has a topological structure.
+[55] The Brillouin zone comes from the Fourier transforma-
+tion of a translation-invariant Hamiltonian. It is not
+known whether a translation-noninvariant Hamiltonian
+
+
+37
+
+can be studied by a Hamiltonian on the Brillouin zone
+(Kitaev recently proposed a rigorous method to classify
+free fermionic systems [76], which yields the same results
+as the tenfold way), but we can give some remarks on
+this point. The periodic boundary conditions in each di-
+rection on the torus come from translation invariance in
+that direction. If we consider a translation-noninvariant
+system, at least the periodic boundary conditions should
+be broken. The spherical Brillouin zone is a way to break
+the periodic boundary conditions, but it retains part of
+the “translation invariance” in the sense that it does not
+have q translation-invariant directions, but is translation
+invariant in a “uniform” way. We hope that the Hamilto-
+nians on the spherical Brillouin zone are a good approxi-
+mation to translation-noninvariant systems whose Hamil-
+tonians vary slowly in real space. Then we could study
+each small region of the real space by the Hamiltonian
+on the spherical Brillouin zone. Finally, for any Hamil-
+tonian on the spherical Brillouin zone, we can construct
+a Hamiltonian on the torus via the map T q →Sq that
+maps the periodic boundary of the torus to one point.
+[56] The G-action on SV is the G-action on the momentum
+space. Notice that the antilinear symmetry has an extra
+space inversion on the real space. Our convention differs
+from that of [20]: they put the extra space inversion on
+the momentum space.
+[57] The classifying space K(Asym) is the space of H differing
+from H0 only on a finite-dimensional subspace, but the
+Dirac Hamiltonian [Eq. (8)] differs from H0 on almost all
+points of the sphere SV ; therefore, we have to show that
+this map is well defined. The map is constructed from
+a sequence of Dirac Hamiltonians on finite-dimensional
+submodules of U(Cl0,1 ˆ⊗AV
+sym), followed by taking the
+direct limit. However, even this construction is not well
+defined because the construction of Dirac Hamiltonians
+doesn’t commute with the inclusion of classifying spaces.
+Fortunately, it commutes up to homotopy, therefore, we
+can take the homotopy direct limit, and since the in-
+clusion maps of finite-dimensional classifying spaces are
+cofibrations, the direct limit of the classifying spaces is
+homotopy equivalent to the homotopy direct limit. We
+therefore obtain a well-defined map up to homotopy.
+[58] M. Karoubi, Sur la K-theorie equivariante, in S´eminaire
+Heidelberg-Saarbr¨ucken-Strasbourg Sur La K-Th´eorie,
+Vol. 136 (Springer Berlin Heidelberg, Berlin, Heidelberg,
+1970) pp. 187–253.
+[59] It is proved in [66] that for a vector bundle map f satisfy-
+ing f 2 = id, Ker(f ±1) always exists. Thus, Ker(H −1) is
+E0, and Ker(H+1) is E1. This property is called Karoubi
+completeness.
+[60] The definition of ˜KAsym(X) may look unusual at first
+glance; however, it is actually equivalent to Karoubi’s
+
+definition of K-theory (see Sec. E 3 for details). It also
+reduces to several familiar K-theories for specific choices
+of Asym.
+[61] M. F. Atiyah, R. Bott, and A. Shapiro, Clifford modules,
+Topology 3, 3 (1964).
+[62] C. Nastasescu and F. van Oystaeyen, Methods of Graded
+Rings (Springer Berlin Heidelberg, Berlin, Heidelberg,
+2004).
+[63] P. Etingof, S. Gelaki, D. Nikshych, and V. Ostrik, Ten-
+sor Categories, Vol. 205 (American Mathematical Soc.,
+2015).
+[64] L. Brunshidle, A. Fialowski, J. Frinak, M. Penkava, and
+D. Wackwitz, Fundamental Theorem of Finite Dimen-
+sional Z2 -Graded Associative Algebras, Communications
+in Algebra 40, 4068 (2012).
+[65] Z. Kuznetsova and F. Toppan, Beyond the 10-fold Way:
+13 Associative $\mathbb{Z} 2\times \mathbb{Z} 2$-
+Graded Superdivision Algebras, Advances in Applied
+Clifford Algebras 33, 24 (2023).
+[66] M. Karoubi, K-Theory: An Introduction (Springer Berlin
+Heidelberg, Berlin, Heidelberg, 2009).
+[67] E. H. Brown, The Cohomology of $BSO n$ and $BO n$
+with Integer Coefficients, Proceedings of the American
+Mathematical Society 85, 283 (1982), 2044298.
+[68] A.
+Trautman,
+Double
+Covers
+of
+Pseudo-orthogonal
+Groups, in Clifford Analysis and Its Applications, edited
+by F. Brackx, J. S. R. Chisholm, and V. Souˇcek (Springer
+Netherlands, Dordrecht, 2001) pp. 377–388.
+[69] GAP – Groups, Algorithms, and Programming, Version
+4.15.1 (2025).
+[70] PARI/GP Version 2.15.4, Univ. Bordeaux (2023).
+[71] J.-P. Serre, Linear Representations of Finite Groups,
+Graduate Texts in Mathematics, Vol. 42 (Springer, New
+York, NY, 1977).
+[72] The most efficient way to construct a C[G]-isomorphism
+is probably to start with an arbitrary linear isomorphism
+and average it over G. The Schur lemma ensures that the
+result of the averaging is either 0 or a C[G]-isomorphism.
+The result is a C[G]-isomorphism for almost all choices of
+linear isomorphisms. However, we want to use a method
+that doesn’t involve a random choice.
+[73] M. Karoubi, Alg`ebres de Clifford et $K$-th´eorie, Annales
+scientifiques de l’´Ecole normale sup´erieure 1, 161 (1968).
+[74] M. Karoubi, Equivariant K-theory of real vector spaces
+and real projective spaces, Topology and its Applications
+122, 531 (2002).
+[75] A.
+Debray,
+Adebray/equivariant homotopy theory,
+https://github.com/adebray/equivariant homotopy theory
+(2025).
+[76] Alexei Kitaev, Local Definitions of Gapped Hamiltonians
+and Topological and Invertible States, Tech. Rep. (Har-
+vard CMSA, Cambridge, MA, 2025).
+
+

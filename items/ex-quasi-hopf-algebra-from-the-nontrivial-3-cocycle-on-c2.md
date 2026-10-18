@@ -2,7 +2,7 @@
 id: ex-quasi-hopf-algebra-from-the-nontrivial-3-cocycle-on-c2
 kind: example
 title: "A quasi-Hopf structure from a normalized 3-cocycle on C2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

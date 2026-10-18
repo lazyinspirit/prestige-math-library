@@ -2,7 +2,7 @@
 id: lem-discrete-memoryless-channel-capacity-is-attained
 kind: lemma
 title: "Finite DMC information capacity is attained"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

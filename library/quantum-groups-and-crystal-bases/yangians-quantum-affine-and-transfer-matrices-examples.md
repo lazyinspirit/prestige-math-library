@@ -1,7 +1,7 @@
 ---
 page: yangians-quantum-affine-and-transfer-matrices-examples
 title: "Yangians, Quantum Affine Algebras, and Transfer Matrices: Examples and Counterexamples"
-status: draft
+status: published
 items: [ex-yangian-two-site-periodic-transfer-matrix, cex-yangian-one-root-bethe-equation-does-not-guarantee-completeness]
 examples: []
 ---

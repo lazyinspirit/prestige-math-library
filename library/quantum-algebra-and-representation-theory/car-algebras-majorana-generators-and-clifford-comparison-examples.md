@@ -1,7 +1,7 @@
 ---
 page: car-algebras-majorana-generators-and-clifford-comparison-examples
 title: "CAR Algebras, Majorana Generators, and Clifford Comparison: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - car-algebras-majorana-generators-and-clifford-comparison
 items: []

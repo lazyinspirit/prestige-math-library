@@ -16,8 +16,6 @@ provenance:
 generation:
   role: example
 proof_strategy: direct
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

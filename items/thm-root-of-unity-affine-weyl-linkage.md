@@ -2,7 +2,7 @@
 id: thm-root-of-unity-affine-weyl-linkage
 kind: theorem
 title: Affine Weyl linkage from central monodromy traces
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

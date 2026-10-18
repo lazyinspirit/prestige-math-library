@@ -2,7 +2,7 @@
 id: ex-one-vertex-finite-quiver-hall-integration-is-quantum-dilogarithm
 kind: example
 title: "One vertex with no arrows gives the quantum dilogarithm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

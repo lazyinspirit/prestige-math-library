@@ -2,7 +2,7 @@
 id: def-full-toral-weight-root-of-unity-module-category
 kind: definition
 title: "The full toral-weight Lusztig module category"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

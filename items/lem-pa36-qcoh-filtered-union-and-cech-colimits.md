@@ -2,7 +2,7 @@
 id: lem-pa36-qcoh-filtered-union-and-cech-colimits
 kind: lemma
 title: Quasicoherent modules are filtered unions of coherent subsheaves and cohomology commutes with these colimits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

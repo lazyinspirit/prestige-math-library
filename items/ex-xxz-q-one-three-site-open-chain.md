@@ -2,7 +2,7 @@
 id: ex-xxz-q-one-three-site-open-chain
 kind: example
 title: "The q = 1 three-site open XXZ chain has loop value 2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

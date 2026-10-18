@@ -2,7 +2,7 @@
 id: thm-filtered-l-infinity-morphisms-preserve-gauge-equivalence
 kind: theorem
 title: "Filtered L∞-morphisms preserve completed polynomial gauge equivalence"
-status: draft
+status: published
 dependency_level: 10
 origin: session
 deps:

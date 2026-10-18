@@ -2,7 +2,7 @@
 id: ex-b2-unequal-parameter-kl-basis-and-cell-edges
 kind: example
 title: A B2 unequal-parameter KL basis and four left-cell transitions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

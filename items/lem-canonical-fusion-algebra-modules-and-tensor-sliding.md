@@ -2,7 +2,7 @@
 id: lem-canonical-fusion-algebra-modules-and-tensor-sliding
 kind: lemma
 title: Canonical algebra modules and coherent tensor sliding
-status: draft
+status: published
 dependency_level: 1
 origin: session
 deps:

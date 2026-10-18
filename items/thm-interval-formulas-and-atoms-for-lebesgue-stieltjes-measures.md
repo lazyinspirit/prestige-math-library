@@ -17,7 +17,7 @@ sources:
     - title: "Gerald B. Folland, Real Analysis, 2nd ed., Section 1.5"
       url: "https://djvu.online/file/NPF4BEtSuqdFA"
     - title: "John K. Hunter, Measure Theory, Section 2.9"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Statement

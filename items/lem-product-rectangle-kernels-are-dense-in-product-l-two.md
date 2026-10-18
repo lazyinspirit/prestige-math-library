@@ -15,7 +15,7 @@ sources:
     - title: "Sheldon Axler, Measure, Integration & Real Analysis — product measure and Lp approximation ingredients, §§7A, 10C, 10.70"
       url: "https://measure.axler.net/MIRA.pdf"
     - title: "John K. Hunter, Measure Theory — product measure and generating-algebra approximation"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 verification:
   audited: 2026-09-22
 ---

@@ -2,7 +2,7 @@
 id: lem-it-channel-resolvability-soft-covering
 kind: lemma
 title: "Finite DMC resolvability by random codebooks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

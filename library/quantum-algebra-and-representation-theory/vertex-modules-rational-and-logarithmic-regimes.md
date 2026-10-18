@@ -1,7 +1,7 @@
 ---
 page: vertex-modules-rational-and-logarithmic-regimes
 title: "Vertex Modules, Rationality, and Logarithmic Regimes"
-status: draft
+status: published
 requires:
   - vertex-algebra-state-field-foundations
   - category-o-finiteness-duality-and-blocks

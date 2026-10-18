@@ -1,7 +1,7 @@
 ---
 page: affine-hecke-algebras-beyond-type-a
 title: Affine Hecke Algebras Beyond Type A
-status: draft
+status: published
 items:
 - def-hh-affine-hecke-algebra-from-root-datum
 - lem-hh-positive-affine-parameter-has-infinite-quantum-characteristic

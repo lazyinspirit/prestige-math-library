@@ -2,7 +2,7 @@
 id: lem-canonical-fusion-category-algebra-is-separable
 kind: lemma
 title: The canonical algebra of a characteristic-zero fusion category is separable
-status: draft
+status: published
 dependency_level: 3
 origin: session
 deps:

@@ -2,7 +2,7 @@
 id: thm-qa-37-su2-compiler-error-length
 kind: theorem
 title: "Fibonacci SU(2) compiler error, length, and bit cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 14

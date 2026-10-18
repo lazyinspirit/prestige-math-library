@@ -1,7 +1,7 @@
 ---
 page: category-o-klr-and-hecke-categorification-route-examples
 title: "Category O, KLR, and Hecke Categorification Route: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-category-o-degenerate-tensor-functor-on-trivial-sl2-module

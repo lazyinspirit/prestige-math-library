@@ -15,8 +15,6 @@ sources:
   references:
     - title: Thorsten Rohwedder, An analysis for some methods and algorithms of quantum chemistry, Chapter 4 §4.1
       url: https://depositonce.tu-berlin.de/bitstreams/7a3115d5-2ab7-4041-b9ea-5259a6659a2e/download
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

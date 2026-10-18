@@ -2,7 +2,7 @@
 id: def-given-spin-and-spinc-structures-and-associated-spinor-bundles
 kind: definition
 title: "Given Spin and Spin-c structures and their spinor bundles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations

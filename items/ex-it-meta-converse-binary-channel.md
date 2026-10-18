@@ -2,7 +2,7 @@
 id: ex-it-meta-converse-binary-channel
 kind: example
 title: Exact beta value for a one-use BSC meta-converse test
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

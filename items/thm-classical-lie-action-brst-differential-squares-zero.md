@@ -2,7 +2,7 @@
 id: thm-classical-lie-action-brst-differential-squares-zero
 kind: theorem
 title: The classical Lie-action BRST differential squares to zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

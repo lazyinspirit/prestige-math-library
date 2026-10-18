@@ -2,7 +2,7 @@
 id: thm-qc-tqc-b6-su8-density
 kind: theorem
 title: Exact eight-dimensional Fibonacci B6 density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

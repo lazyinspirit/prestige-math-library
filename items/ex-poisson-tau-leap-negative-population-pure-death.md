@@ -17,8 +17,6 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Daniel T. Gillespie, Approximate accelerated stochastic simulation of chemically reacting systems"

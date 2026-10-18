@@ -1,7 +1,7 @@
 ---
 page: stationary-ergodic-sources-and-universal-coding
 title: "Stationary Ergodic Sources and Universal Coding"
-status: draft
+status: published
 requires:
   - iid-lossless-source-coding-and-the-aep
   - stationary-markov-chains-and-ergodic-limits

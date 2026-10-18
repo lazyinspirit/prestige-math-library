@@ -2,7 +2,7 @@
 id: def-a-infinity-morphism
 kind: definition
 title: "A∞-morphism and quasi-isomorphism"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

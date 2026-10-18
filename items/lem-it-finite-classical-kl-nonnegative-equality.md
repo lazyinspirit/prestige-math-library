@@ -2,7 +2,7 @@
 id: lem-it-finite-classical-kl-nonnegative-equality
 kind: lemma
 title: Nonnegativity and equality for finite classical relative entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

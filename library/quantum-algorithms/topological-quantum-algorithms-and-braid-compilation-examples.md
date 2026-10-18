@@ -1,7 +1,7 @@
 ---
 page: topological-quantum-algorithms-and-braid-compilation-examples
 title: "Topological Quantum Algorithms and Braid Compilation — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-qa-37-fusion-measurement-branches", "cex-qa-37-projective-is-not-controlled", "ex-qa-37-approximate-b6-target", "ex-qa-37-fibonacci-budget"]
 ---

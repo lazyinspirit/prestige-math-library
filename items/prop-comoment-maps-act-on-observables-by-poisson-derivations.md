@@ -2,7 +2,7 @@
 id: prop-comoment-maps-act-on-observables-by-poisson-derivations
 kind: proposition
 title: Comoment maps act on observables by Poisson derivations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

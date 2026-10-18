@@ -1,7 +1,7 @@
 ---
 page: cohomological-hall-algebras-and-quiver-correspondences
 title: Cohomological Hall Algebras and Quiver Correspondences
-status: draft
+status: published
 items:
 - lem-general-linear-quotient-stacks-are-algebraic
 - def-quiver-representation-stacks-and-exact-sequence-correspondences

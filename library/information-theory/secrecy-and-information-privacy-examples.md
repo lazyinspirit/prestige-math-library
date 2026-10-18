@@ -1,7 +1,7 @@
 ---
 page: secrecy-and-information-privacy-examples
 title: "Secrecy and Information Privacy — Examples"
-status: draft
+status: published
 requires:
   - secrecy-and-information-privacy
 items: []

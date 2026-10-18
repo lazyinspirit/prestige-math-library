@@ -2,7 +2,7 @@
 id: def-car-algebra-over-hilbert-space
 kind: definition
 title: CAR C*-Algebra over a Complex Hilbert Space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

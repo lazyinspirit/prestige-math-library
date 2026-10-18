@@ -2,7 +2,7 @@
 id: rem-toen-kapranov-and-triangle-counts-are-distinct
 kind: remark
 title: "Toën, Kapranov, and unweighted triangle counts are distinct constructions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: ex-rt-genus-two-factorization-dimension
 kind: example
 title: "A genus-two RT dimension from factorization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 16

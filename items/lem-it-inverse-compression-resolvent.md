@@ -2,7 +2,7 @@
 id: lem-it-inverse-compression-resolvent
 kind: lemma
 title: Inverse compression for positive resolvents
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

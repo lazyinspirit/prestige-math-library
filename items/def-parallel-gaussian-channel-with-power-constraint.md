@@ -2,7 +2,7 @@
 id: def-parallel-gaussian-channel-with-power-constraint
 kind: definition
 title: Finite-dimensional additive Gaussian channel with average power
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

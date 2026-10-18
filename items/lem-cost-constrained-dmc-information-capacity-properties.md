@@ -2,7 +2,7 @@
 id: lem-cost-constrained-dmc-information-capacity-properties
 kind: lemma
 title: Constrained DMC information capacity is attained, nondecreasing, and concave
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

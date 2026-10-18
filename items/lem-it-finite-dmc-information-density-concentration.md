@@ -2,7 +2,7 @@
 id: lem-it-finite-dmc-information-density-concentration
 kind: lemma
 title: "Information-density concentration for a fixed finite DMC input law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

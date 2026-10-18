@@ -2,7 +2,7 @@
 id: cex-place-permutation-is-not-a-nondegenerate-hecke-generator
 kind: counterexample
 title: "A place permutation is not the nondegenerate Hecke generator at xi=-1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

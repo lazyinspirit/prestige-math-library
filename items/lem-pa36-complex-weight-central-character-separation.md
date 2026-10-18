@@ -2,7 +2,7 @@
 id: lem-pa36-complex-weight-central-character-separation
 kind: lemma
 title: Complex-weight separation of Harish-Chandra characters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

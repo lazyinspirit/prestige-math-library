@@ -1,0 +1,12059 @@
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+1
+Channel Coding Rate in the
+
+Finite Blocklength Regime
+
+Yury Polyanskiy, H. Vincent Poor, and Sergio Verd´u
+
+Abstract
+
+This paper investigates the maximal channel coding rate achievable at a given blocklength and error
+
+probability. For general classes of channels new achievability and converse bounds are given, which are
+
+tighter than existing bounds for wide ranges of parameters of interest, and lead to tight approximations
+
+of the maximal achievable rate for blocklengths n as short as 100. It is also shown analytically that the
+
+maximal rate achievable with error probability ϵ is closely approximated by C −
+�
+
+V
+
+n Q−1(ϵ) where
+
+C is the capacity, V is a characteristic of the channel referred to as channel dispersion, and Q is the
+
+complementary Gaussian cumulative distribution function.
+
+Index Terms
+
+Coding for noisy channels, Shannon theory, channel capacity, converse, achievability, finite block-
+
+length regime.
+
+The authors are with the Department of Electrical Engineering, Princeton University, Princeton, NJ, 08544 USA.
+
+e-mail: {ypolyans,poor,verdu}@princeton.edu.
+
+This research was supported in part by the National Science Foundation under Grants ANI-03-38807, CNS-06-25637, CCF-
+
+06-35154, and CCF-07-28445
+
+October 14, 2010
+DRAFT
+
+
+2
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+I. INTRODUCTION
+
+The proof of the channel coding theorem involves three stages:
+
+• Converse: an upper bound on the size of any code with given arbitrary blocklength and
+
+error probability.
+
+• Achievability: a lower bound on the size of a code that can be guaranteed to exist with
+
+given arbitrary blocklength and error probability.
+
+• Asymptotics: the bounds on the log size of the code normalized by blocklength asymptot-
+
+ically coincide as a result of the law of large numbers (memoryless channels) or another
+
+ergodic theorem (for channels with memory).
+
+As propounded in [1], it is pedagogically sound to separate clearly the third stage from the
+
+derivation of the upper and lower bounds:
+
+• The bounds need not impose assumptions on the channel such as memorylessness, station-
+
+arity, and ergodicity.
+
+• The key information theoretic arguments are used mainly in the converse and achievability
+
+bounds.
+
+• The bounds can be extremely useful in assessing the highest rate that can be achieved when
+
+operating with a given blocklength and error probability.
+
+The strong form of the coding theorem establishes that for a general class of channels that
+
+behave ergodically [2], the channel capacity is the largest rate at which information can be
+
+transmitted regardless of the desired error probability, provided that the blocklength is allowed
+
+to grow without bound. In practice, it is of vital interest to assess the backoff from capacity
+
+required to sustain the desired error probability at a given fixed finite blocklength. Unfortunately,
+
+no guidance to answer that question is offered either by the strong version of the coding theorem,
+
+or by the reliability function, which gives the asymptotic exponential decay of error probability
+
+when transmitting at any given fraction of capacity.
+
+In the non-asymptotic regime, there are no exact formulas for the maximal rate sustainable as
+
+a function of blocklength and error probability. In this paper, we show several new achievability
+
+and converse bounds which bound the fundamental limits tightly for blocklengths as short as
+
+100. Together with normal approximations, the bounds also show that in the finite blocklength
+
+regime, the backoff from channel capacity C is accurately and succinctly characterized by a
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+3
+
+parameter that we refer to as the channel dispersion V , which measures the stochastic variability
+
+of the channel relative to a deterministic channel with the same capacity. Specifically, the finite
+
+blocklength coding rate is approximated by1
+
+1
+n log M ∗(n, ϵ) ≈C −
+
+�
+
+V
+
+n Q−1(ϵ) ,
+(1)
+
+where n is the blocklength and ϵ is the error probability.
+
+Since Shannon established the convergence of optimal coding rate to capacity, there has been
+
+some work devoted to the assessment of the penalty incurred by finite blocklength. Foremost,
+
+Shannon [3] provided tight bounds for the additive white Gaussian noise (AWGN) channel
+
+that were numerically studied by Slepian [4] (cf. also [5], [6]). Recently, with the advent of
+
+sparse-graph codes, a number of works [8]–[11] have studied the SNR penalty as a function
+
+of blocklength in order to improve the assessment of the suboptimality of a given code with
+
+respect to the fundamental limit at that particular blocklength rather than the asymptotic limit
+
+embodied in the channel capacity. Approximations of the type in (1) have been studied in [7],
+
+[23], [29]–[31].
+
+The major existing achievability and converse bounds are reviewed in Section II along with
+
+refined asymptotic expansions of achievable rate. Section III gives our new lower and upper
+
+bounds on the maximal rate achievable for a given blocklength and error probability. The
+
+lower bounds are based on three different constructive approaches that lead, respectively, to
+
+the RCU (random-coding union) bound, the DT (dependency testing) bound, and the κβ bound
+
+based on the Neyman-Pearson lemma that uses an auxiliary output distribution. Unlike existing
+
+achievability bounds, the RCU and DT bounds contain no parameters (other than the input
+
+distribution) to be optimized. A general converse upper bound is given as a result of the
+
+solution of a minimax problem on the set of input/output distributions. Section IV studies
+
+the normal approximation to the maximal achievable rate for discrete memoryless channels
+
+and for the additive white Gaussian noise channel, and shows that (1) holds up to a term of
+
+O((log n)/n) except in rare cases. Throughout Sections III and IV, particular attention is given
+
+to the binary erasure channel (BEC), the binary symmetric channel (BSC) and the AWGN
+
+channel. Several coding schemes used in practice are compared against the non-asymptotic
+
+1As usual, Q(x) =
+R ∞
+x
+1
+√
+
+2π e−t2/2 dt .
+
+October 14, 2010
+DRAFT
+
+
+4
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+fundamental limits. The use of the normal approximation as a design tool is illustrated in the
+
+context of the optimization of the maximal throughput of a simple automatic repeat request
+
+(ARQ) retransmission strategy. Section V summarizes our main findings.
+
+II. PREVIOUS WORK
+
+Let us consider measurable spaces of inputs A and outputs B and a conditional probability
+
+measure PY |X : A �→B. We denote a codebook with M codewords by (c1, . . . , cM) ∈AM. A
+
+(possibly randomized) decoder is a random transformation PZ|Y : B �→{0, 1, . . . M} (where ‘0’
+
+indicates that the decoder chooses “error”). A codebook with M codewords and a decoder that
+
+satisfies PZ|X(m|cm) ≥1−ϵ for m ∈{1, . . . M} are called an (M, ϵ)-code (maximal probability
+
+of error). If the messages are equiprobable, the average error probability is
+
+1 −1
+
+M
+
+M
+�
+
+m=1
+PZ|X(m|cm).
+
+A codebook and a decoder whose average probability of error is smaller than ϵ are called an
+
+(M, ϵ)-code (average probability of error). In the application of our results, we will take A and
+
+B to be n-fold Cartesian products of alphabets A and B, and a channel to be a sequence of
+
+conditional probabilities {PY n|Xn : An →Bn} [2]. An (M, ϵ) code for {An, Bn, PY n|Xn} is
+
+called an (n, M, ϵ) code. The maximal code size achievable with a given error probability and
+
+blocklength is denoted by
+
+M ∗(n, ϵ) = max{M : ∃an (n, M, ϵ)-code} .
+(2)
+
+For the statement and proof of the achievability and converse bounds, it is preferable not to
+
+assume that A and B have any structure such as a Cartesian product. This has the advantage
+
+of avoiding the notational clutter that results from explicitly showing the dimension (n) of the
+
+random variables taking values on A and B.
+
+A. Achievability Bounds without Codeword Constraints
+
+For a joint distribution PXY on A × B we denote the information density by
+
+i(x; y)
+=
+log
+dPXY
+d(PX × PY )(x, y)
+(3)
+
+=
+log dPY |X=x
+
+dPY
+(y) ,
+(4)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+5
+
+with the understanding that if PY |X=x is not absolutely continuous with respect to PY we define
+
+i(x; y) = +∞for all y in the singular set, and we define i(x; y) = −∞for any y such that
+
+dPY |X=x
+
+dPY
+= 0.
+
+Feinstein’s [13] achievability bound for maximal probability of error is given as follows.
+
+Theorem 1 (Feinstein): For any distribution PX, and any β > 0, there exists an (M, ϵ) code
+
+(maximal probability of error) such that2
+
+M ≥β (ϵ −P [i(X; Y ) ≤log β ]) .
+(5)
+
+Alternatively, Shannon’s achievability bound [14] is given as follows.
+
+Theorem 2 (Shannon): For any distribution PX, and any β > 0, there exists an (M, ϵ) code
+
+(average probability of error) such that
+
+ϵ ≤M −1
+
+β
++ P [i(X; Y ) ≤log β] .
+(6)
+
+It is easy to verify that Theorem 1 implies a slightly weakened version of Theorem 2 where
+
+M −1 is replaced by M; conversely, Theorem 2 implies the weakened version of Theorem 1
+
+where maximal is replaced by average error probability.
+
+The following upper bound is a reformulation of Gallager’s random coding bound [15], in
+
+terms of information density.
+
+Theorem 3 (Gallager): For any PX and λ ∈[0, 1], there exists an (M, ϵ) code (average
+
+probability of error) such that
+
+ϵ ≤M λ E
+
+��
+E
+�
+exp i( ¯X; Y )
+
+1 + λ
+
+����Y
+��1+λ�
+
+(7)
+
+where PXY ¯
+X(a, b, c) = PX(a)PY |X=a(b)PX(c).
+
+For a memoryless channel (7) turns, after optimization over λ, into
+
+ϵ ≤exp{−nEr(R)} ,
+(8)
+
+where R = log M
+
+n
+and Er(R) is Gallager’s random coding exponent [16].
+
+2PX, Q and PY |X=x denote distributions, whereas P is reserved for probability measure on the underlying probability space.
+
+October 14, 2010
+DRAFT
+
+
+6
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+B. Achievability Bounds with Linear Codes
+
+For a linear code over the BSC, Poltyrev [17] proved the following upper-bound on the
+
+probability of error.
+
+Theorem 4 (Poltyrev): The maximal probability of error Pe under maximum likelihood decod-
+
+ing of a linear code3 with weight distribution4 {Aw, w = 0, . . . n} over the BSC with crossover
+
+probability δ satisfies
+
+Pe
+≤
+
+n
+�
+
+ℓ=0
+δℓ(1 −δ)n−ℓmin
+
+��n
+ℓ
+
+�
+,
+
+n
+�
+
+w=0
+AwB(ℓ, w, n)
+
+�
+
+,
+(9)
+
+where
+
+B(ℓ, w, n)
+=
+�
+
+w/2≤t≤min{ℓ,w}
+
+�w
+t
+
+��n −w
+ℓ−t
+
+�
+.
+(10)
+
+A [k, n] linear code is generated by a k × n binary matrix. We can average (9) over an
+
+equiprobable ensemble of such matrices. Applying Jensen’s inequality to pass expectation inside
+
+the minimum and noticing that E [Aw] = 2k−n�n
+w
+�
+we obtain the following achievability bound.
+
+Theorem 5: For a BSC with crossover probability δ there exists a [k, n] linear code such that
+
+a maximum likelihood decoder has a maximal probability of error Pe satisfying
+
+Pe
+≤
+
+n
+�
+
+ℓ=0
+δℓ(1 −δ)n−ℓmin
+
+��n
+ℓ
+
+�
+,
+
+n
+�
+
+w=0
+2k−n
+�n
+w
+
+�
+B(ℓ, w, n)
+
+�
+
+,
+(11)
+
+where B(ℓ, w, n) is given by (9).
+
+A negligible improvement to (11) is possible if we average (9) over an ensemble of all full-rank
+
+binary matrices instead. Another modification by expurgating low-weight codewords [18] leads
+
+to a tightening of (11) when the rate is much lower than capacity.
+
+For the BEC the results of [19, Theorem 9] can be used to compute the exact value of the
+
+probability of error over an ensemble of all linear codes generated by full-rank k × n binary
+
+matrices [20].
+
+3At the expense of replacing maximal probability of error by average, the same bound can be shown for a non-linear code
+
+by generalizing the notion of weight distribution.
+
+4We define A0 to be the number of 0-weight codewords in the codebook minus 1. In particular, for a codebook with no
+
+repeated codewords A0 = 0.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+7
+
+Theorem 6 (Ashikhmin): Given a BEC with erasure probability δ, the average probability of
+
+error over all binary k × n linear codes with full-rank generating matrices chosen equiprobably
+
+is equal to
+
+Pe =
+
+n
+�
+
+i=0
+
+�n
+i
+
+�
+δn−i(1 −δ)i
+min{k,i}
+�
+
+r=max{0,k−n+i}
+
+
+
+i
+
+r
+
+
+
+
+
+
+
+n −i
+
+k −r
+
+
+
+
+
+
+
+n
+
+k
+
+
+
+
+
+−1
+
+2r(n−i−k+r) �
+1 −2r−k�
+,
+(12)
+
+where
+
+
+a
+
+r
+
+
+
+△=
+
+r−1
+�
+
+j=0
+
+2a −2j
+
+2r −2j
+
+is the number of r-dimensional subspaces of Fa
+2.
+
+C. Achievability Bounds with Codeword Constraints
+
+Suppose that all codewords are required to belong to some set F ⊂A. For example, there
+
+might be a cost c(x) associated with using a particular input vector x, in which case the set F
+
+might be chosen as
+
+F = {x : c(x) ≤P} .
+(13)
+
+A cost-constrained generalization of (5) due to Thomasian [21] (see also [22]) in which all the
+
+codewords are constrained to belong to F is
+
+M ≥β (ϵ −P [i(X; Y ) ≤log β] −PX[Fc]) .
+(14)
+
+A cost-constrained version of (6) is
+
+ϵ ≤M −1
+
+β
++ P [i(X; Y ) ≤log β] + PX[Fc] .
+(15)
+
+It should be noted that in both (14), and (15), the auxiliary distribution PX is not constrained
+
+to take values on F. Theorem 3 admits the following generalization to the setting with cost
+
+constraints.
+
+Theorem 7 (Gallager, with cost): Suppose PX is such that
+
+E [c(X)] ≤P
+(16)
+
+and denote
+
+µ(δ)
+△= P[P −δ ≤c(X) ≤P] .
+(17)
+
+October 14, 2010
+DRAFT
+
+
+8
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Then, for any δ ∈[0, P] such that µ(δ) > 0, λ ∈[0, 1] and r ≥0 there exists an (M, ϵ)-code
+
+(average probability of error) with codewords in F given by (13) and such that
+
+ϵ ≤M λ
+�exp(rδ)
+
+µ(δ)
+
+�1+λ
+E
+
+��
+E
+�
+exp
+�i( ¯X; Y )
+
+1 + λ + (c( ¯X) −P)r
+�����Y
+��1+λ�
+
+(18)
+
+where PXY ¯
+X(a, b, c) = PX(a)PY |X=a(b)PX(c).
+
+D. Converse Results
+
+The simplest upper bound on the size of a code as a function of the average error probability
+
+follows from Fano’s inequality:
+
+Theorem 8: Every (M, ϵ)-code (average probability of error) for a random transformation
+
+PY |X satisfies
+
+log M ≤
+1
+1 −ϵ sup
+X
+I(X; Y ) +
+1
+1 −ϵh(ϵ)
+(19)
+
+where h(x) = −x log x −(1 −x) log(1 −x) is the binary entropy function.
+
+A significant improvement under the maximal error probability formalism is supplied by the
+
+bound due to Wolfowitz [23].
+
+Theorem 9 (Wolfowitz): Every (M, ϵ)-code (maximal probability of error) must satisfy
+
+M ≤inf
+β>0 β
+�
+inf
+x∈A PY |X=x [i(x; Y ) < log β] −ϵ
+�−1
+
+(20)
+
+provided that the right-hand side is not less than 1.
+
+As shown in [24, Theorem 7.8.1], this bound leads to the strong converse theorem for the
+
+discrete memoryless channel (DMC), even assuming noiseless feedback, namely,
+
+log M ∗(n, ϵ) ≤nC + o(n)
+∀ϵ ∈(0, 1) .
+(21)
+
+Theorem 9 can be further tightened by maximizing the probability therein with respect to the
+
+choice of the unconditional output distribution in the definition of information density [25].
+
+The following corollary to Theorem 9 gives another converse bound which also leads to (21),
+
+but is too coarse for the purposes of analyzing the fundamental limits in the finite blocklength
+
+regime.
+
+Theorem 10 ([16, Theorem 5.8.5]): For an arbitrary discrete memoryless channel of capacity
+
+C and any (n, exp{nR}, ϵ) code with rate R > C, we have
+
+ϵ ≥1 −
+4A
+n(R −C)2 −exp
+�
+−n(R −C)
+
+2
+
+�
+,
+(22)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+9
+
+where A > 0 is constant independent of n or R.
+
+The dual of the Shannon-Feinstein bounds in Theorems 1 and 2 (in the unconstrained setting)
+
+is given in [2].
+
+Theorem 11 (Verd´u-Han): Every (M, ϵ)-code (average error probability) satisfies
+
+ϵ ≥sup
+β>0
+
+�
+inf
+PX P [i(X; Y ) ≤log β] −β
+
+M
+
+�
+.
+(23)
+
+The challenge we face in using Theorem 11 or the generally tighter bound given in [26], to
+
+compute finite blocklength converse bounds is the optimization with respect to the distribution
+
+on the set of n-dimensional input vectors.
+
+The Shannon-Gallager-Berlekamp sphere-packing bound [27] is given by the following result.
+
+Theorem 12 (Shannon-Gallager-Berlekamp): Let PY |X : A �→B be a DMC. Then any (n, M, ϵ)
+
+code (average probability of error) satisfies
+
+ϵ ≥exp{−n(Esp(R −o1) + o2)} ,
+(24)
+
+where
+
+R = log M
+
+n
+,
+(25)
+
+Esp(R) = sup
+ρ≥0
+[E0(ρ) −ρR] ,
+(26)
+
+E0(ρ) = max
+PX E0(ρ, PX) ,
+(27)
+
+E0(ρ, PX) = −log
+�
+
+y∈B
+
+��
+
+x∈A
+PX(x)PY |X(y|x)1/(1+ρ)
+�1+ρ
+(28)
+
+= −log
+
+�
+
+E
+�
+E
+�
+exp i( ¯X; Y )
+
+1 + ρ
+
+����Y
+��1+ρ�
+
+,
+(29)
+
+o1 = log 4
+
+n
++ |A| log n
+
+n
+,
+(30)
+
+o2 =
+
+�
+
+8
+n log
+e
+√Pmin
++ log 8
+
+n
+,
+(31)
+
+Pmin = min{PY |X(y|x) : PY |X(y|x) > 0} ,
+(32)
+
+where the maximization in (27) is over all probability distributions on A; and in (29), ¯X and Y
+
+are independent:
+
+P ¯
+XY (a, b) = PX(a)
+
+��
+
+x∈A
+PY |X(b|x)PX(x)
+
+�
+
+.
+(33)
+
+October 14, 2010
+DRAFT
+
+
+10
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+While Theorem 12 is of paramount importance in the analysis of the reliability function for
+
+sufficiently high rates, its usefulness in the finite-length regime is more limited because of its
+
+slackness and slow speed of convergence of its normalized logarithm. For these reasons, [8] and
+
+[11] have provided tightened versions of the sphere-packing converse bound, which also apply
+
+to continuous-output channels.
+
+E. AWGN bounds
+
+For the AWGN channel, Shannon [3] gave the following result based on packing spherical
+
+cones.
+
+Theorem 13 (Shannon): Let
+
+Yi = xi + Zi
+(34)
+
+where Zi are independent and identically distributed (i.i.d.) standard normal random variables.
+
+Assume that each codeword satisfies
+
+n
+�
+
+i=1
+x2
+i = nP .
+(35)
+
+Define for 0 ≤θ ≤π/2
+
+qn(θ) = Q
+�√
+
+nP
+�
++ n −1
+√π e−nP/2
+�π/2
+
+θ
+(sin φ)n−2 fn(
+√
+
+nP cos φ) dφ
+(36)
+
+where
+
+fn(x) =
+1
+Γ((n + 1)/2)
+
+�∞
+
+0
+tn−1e−t2+
+√
+
+2tx dt .
+(37)
+
+Then, any (n, M, ϵ) code satisfies
+
+qn(θ(M)) ≤ϵ
+(38)
+
+with θ(M) defined as
+
+MΩn(θ(M)) = Ωn(π)
+(39)
+
+with
+
+Ωn(θ) =
+2π(n−1)/2
+
+Γ((n −1)/2)
+
+�θ
+
+0
+(sin φ)n−2 dφ ,
+(40)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+11
+
+which is equal to the area of the unit sphere in Rn cut out by a cone with semiangle θ.
+
+Furthermore, there exists an (n, M, ϵ) code with
+
+ϵ
+≤
+qn(θ(M)) −
+M
+Ωn(π)
+
+�θ(M)
+
+0
+Ωn(φ) ˙qn(φ) dφ
+(41)
+
+=
+Γ(n/2)M
+√πΓ((n −1)/2)
+
+�θ(M)
+
+0
+qn(φ)(sin φ)n−2 dφ .
+(42)
+
+Tackled in [4], [5], [6], [8], and [11], the accurate computation of the bounds in Theorem 13 is
+
+challenging.
+
+Applying Theorem 7 to the AWGN channel with PXn = N(0, PIn) and optimizing over r
+
+and λ, we obtain the following result (see [16], Theorem 7.4.4).
+
+Theorem 14 (Gallager, AWGN): Consider the AWGN channel with unit noise power and input
+
+power P, with capacity
+
+C = 1
+
+2 log(1 + P) .
+(43)
+
+For blocklength n, every 0 ≤R ≤C and every 0 < α ≤1, there exists an (exp(nR), n, ϵ) code
+
+(maximal probability of error) with
+
+ϵ ≤
+�2es(R)nαP
+
+¯µ(α)
+
+�2
+e−nEr(R) ,
+(44)
+
+where
+
+Er(R) = P
+
+4ξ
+
+�
+
+(ξ + 1) −(ξ −1)
+
+�
+
+1 +
+4ξ
+P(ξ −1)
+
+�
+
++
+
+1
+2 loge
+
+�
+
+ξ −P(ξ −1)
+
+2
+
+��
+
+1 +
+4ξ
+P(ξ −1) −1
+
+��
+
+for R ∈[Rc, C] ,
+(45)
+
+Er(R) = 1 −ξ + P
+
+2 + 1
+
+2 loge
+
+�
+ξ −P
+
+2
+
+�
++ 1
+
+2 loge ξ −R loge 2 ,
+for R ∈[0, Rc] ,
+(46)
+
+ξ = exp(2 max{R, Rc}) ,
+(47)
+
+Rc = 1
+
+2 log
+
+�
+1
+2 + P
+
+4 + 1
+
+2
+
+�
+
+1 + P 2
+
+4
+
+�
+
+,
+(48)
+
+¯µ(α) = P
+�
+1 −α ≤1
+
+nχ2
+n ≤1
+�
+=
+�n
+
+n(1−α)
+
+(y/2)n/2−1e−y/2
+
+2Γ(n/2)
+dy ,
+(49)
+
+s(R) =
+ρP
+2(1 + ρ)2ξ ,
+(50)
+
+October 14, 2010
+DRAFT
+
+
+12
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+ρ = P
+
+2ξ
+
+�
+
+1 +
+
+�
+
+1 +
+4ξ
+P(ξ −1)
+
+�
+
+−1 .
+(51)
+
+Other bounds on reliability function have appeared recently, e.g. [12]. However, those bounds
+
+provide an improvement only for rates well below capacity.
+
+F. Normal Approximation
+
+The importance of studying the asymptotics of the function M ∗(n, ϵ) for given ϵ was already
+
+made evident by Shannon in Theorem 12 of [28] which states that, regardless of ϵ ∈(0, 1),
+
+log M ∗(n, ϵ) = nC + o(n) ,
+(52)
+
+where C is the channel capacity. Using Theorem 9, Wolfowitz [23] showed (52) for the DMC,
+
+and improved the o(n) term to O(√n) in [24]. Weiss [29] showed that for the BSC with crossover
+
+probability δ < 1
+
+2,
+
+log2 M ∗(n, ϵ) ≤n(1 −h(δ)) −Q−1(ϵ)√n
+√
+
+δ −δ2 log2
+1 −δ
+
+δ
++ o(√n) ,
+(53)
+
+where Q−1 denotes the functional inverse of the Q-function. Crediting M. Pinsker for raising
+
+the question, a generalization of (53) was put forward without proof by Dobrushin [30], for
+
+symmetric DMCs whose transition matrices are such that the rows are permutation of each
+
+other and so are the columns. These results were significantly strengthened and generalized by
+
+Strassen [31] who showed that for the DMC,
+
+log M ∗(n, ϵ) = nC −Q−1(ϵ)
+√
+
+nV + O(log n) ,
+(54)
+
+where V denotes the variance of the information density i(X; Y ) under the capacity achieving
+
+distribution PX; if such distribution is not unique, then, among those distributions that maximize
+
+the average of i(X; Y ) we choose the one that minimizes the variance of i(X; Y ) (if ϵ < 1/2)
+
+or that maximizes it (if ϵ ≥1/2). Strassen’s approach in [31] is not amenable to generalization
+
+to channels with input constraints (most notably, the AWGN channel). In particular, Theorem 1
+
+is not sufficient to prove the counterpart of (54) to the AWGN channel.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+13
+
+III. NEW BOUNDS ON RATE
+
+A. Achievability: Random-Coding
+
+The upper bounds on the average probability of error considered in this paper are based on
+
+random coding. The first result gives a general, exact analysis of the error probability of the
+
+maximum-likelihood decoder averaged over all codes.
+
+Theorem 15: (Random coding average error probability) Denote by ϵ(c1, . . . , cM) the er-
+
+ror probability achieved by the maximum likelihood decoder with codebook (c1, . . . , cM). Let
+
+X1, . . . , XM be independent with marginal distribution PX. Then,
+
+E [ϵ(X1, . . . , XM)]
+=
+1 −
+
+M−1
+�
+
+ℓ=0
+
+�M −1
+ℓ
+
+�
+1
+ℓ+ 1E
+�
+W ℓZM−1−ℓ�
+
+(55)
+
+where
+
+W
+=
+P
+�
+i( ¯X; Y ) = i(X; Y )
+��X, Y
+�
+
+(56)
+
+Z
+=
+P
+�
+i( ¯X; Y ) < i(X; Y )
+��X, Y
+�
+
+(57)
+
+with
+
+PXY ¯
+X(a, b, c) = PX(a)PY |X(b|a)PX(c) .
+(58)
+
+Proof: Since the M messages are equiprobable, upon receipt of the channel output y, the
+
+maximum likelihood decoder chooses with equal probability among the members of the set
+
+arg max
+i=1,...,M i(ci; y) .
+
+Therefore, if the codebook is (c1, . . . , cM), and m = 1 is transmitted, the maximum likelihood
+
+decoder will choose ˆm = 1 with probability
+1
+1+ℓif
+
+M
+�
+
+j=2
+1{i(cj; y) = i(c1; y)}
+=
+ℓ
+(59)
+
+M
+�
+
+j=2
+1{i(cj; y) > i(c1; y)}
+=
+0 ,
+(60)
+
+for ℓ= 0, . . . M −1. If (60) is not satisfied an error will surely occur. Since the codewords are
+
+chosen independently with identical distributions, given that the codeword assigned to message 1
+
+October 14, 2010
+DRAFT
+
+
+14
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+is c1 and given that the channel output is y ∈B, the joint distribution of the remaining codewords
+
+is PX × · · · × PX. Consequently, the conditional probability of correct decision is
+
+M−1
+�
+
+ℓ=0
+
+�M −1
+ℓ
+
+�
+1
+ℓ+ 1
+�
+P
+�
+i( ¯X; y) = i(c1; y)
+��ℓ�
+P
+�
+i( ¯X; y) < i(c1; y)
+��M−1−ℓ
+(61)
+
+where ¯X has the same distribution as X, but is independent of any other random variable arising
+
+in this analysis. Averaging (61) with respect to (c1, y) jointly distributed as PXPY |X we obtain
+
+the summation in (55). Had we conditioned on a message other than m = 1 we would have
+
+obtained the same result. Therefore, the error probability averaged over messages and codebook
+
+is given by (55).
+
+Naturally, Theorem 15 leads to an achievability upper bound since there must exist an
+
+(M, E [ϵ(X1, . . . , XM)]) (average error probability) code.
+
+B. Achievability: Random-Coding Union Bound
+
+One way to loosen (55) in order to obtain a simpler bound is via the following result.
+
+Theorem 16: (RCU bound) For an arbitrary PX there exists an (M, ϵ) code (average proba-
+
+bility of error) such that
+
+ϵ ≤E
+�
+min
+�
+1, (M−1)P
+�
+i( ¯X; Y ) ≥i(X; Y )
+��X, Y
+���
+,
+(62)
+
+where PXY ¯
+X(a, b, c) = PX(a)PY |X(b|a)PX(c).
+
+Proof: 5 The average probability of error attained by an arbitrary codebook (c1, . . . cM)
+
+using a maximum likelihood decoder is upper bounded by
+
+ϵ ≤1
+
+M
+
+M
+�
+
+m=1
+P
+
+�
+M
+�
+
+j=1;j̸=m
+{i(cj; Y ) ≥i(cm; Y )} |X = cm
+
+�
+
+,
+(63)
+
+where we do not necessarily have equality since the maximum likelihood decoder resolves some
+
+ties in favor of the correct codeword. Using Shannon’s random coding argument, the desired
+
+result will follow if we can show that the expectation of the right side of (63) is upper bounded
+
+5A short proof of Theorem 16 can be obtained as a corollary of Theorem 15 by keeping only the first term in the sum (55)
+
+and then further upper-bounding 1 −ZM−1 by min{(M −1)(1 −Z), 1}. The standalone proof we give here is useful in
+
+Appendix A.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+15
+
+by the right side of (62) when the codebook is chosen by independent drawings from PX. The
+
+expectations of all of the M terms in (63) are identical and are equal to
+
+P
+
+�M
+�
+
+j=2
+{i(Xj; Y ) ≥i(X1; Y )}
+
+�
+
+=
+E
+
+�
+
+P
+
+�M
+�
+
+j=2
+{i(Xj; Y ) ≥i(X1; Y )}
+
+�����X1, Y
+
+��
+
+(64)
+
+≤
+E [min{1, (M −1)P [i(X2; Y ) ≥i(X1; Y ) | X1, Y ]}]
+(65)
+
+where (64) holds by conditioning and averaging, (65) holds by choosing the tighter bound
+
+on probability between 1 and the union bound, and all probabilities are with respect to the
+
+distribution
+
+PY X1···XM(b, a1, . . . , aM) = PY |X(b|a1)
+
+M
+�
+
+i=1
+PXi(ai).
+(66)
+
+The proof is now complete since the right side of (65) is equal to the right side of (62).
+
+Gallager’s bound (7) can also be obtained by analyzing the average behavior of random
+
+coding and maximum-likelihood decoding. In fact, it is easy to verify that we can weaken (62)
+
+to recover (7) using max{0, x} ≤x1/(1+λ) and min{x, 1} ≤xλ. Furthermore Shannon’s bound
+
+(6) can also be obtained by weakening (62) by splitting the expectation according to whether
+
+or not i(X; Y ) ≤log β and upper bounding min{x, 1} by 1 when i(X; Y ) ≤log β and by x
+
+otherwise.
+
+In principle, without exploiting any symmetries, the brute-force computation of the bound (62)
+
+has complexity O
+�
+n2(|A|−1)|B|�
+for a DMC with input/output alphabets A and B. Next we give
+
+easier-to-compute upper bounds that do not sacrifice much tightness.
+
+C. Achievability: Dependence Testing Bound
+
+Theorem 17: (DT bound) For any distribution PX on A, there exists a code with M codewords
+
+and average probability of error not exceeding
+
+ϵ ≤E
+�
+exp
+�
+−
+�
+i(X; Y ) −log
+M−1
+
+2
+
+�+��
+.
+(67)
+
+Proof: Consider the following obvious identity for arbitrary z ≥0 and γ > 0:
+
+exp
+
+�
+
+−
+�
+log z
+
+γ
+
+�+�
+
+= 1{z ≤γ} + γ
+
+z 1{z > γ}
+(68)
+
+October 14, 2010
+DRAFT
+
+
+16
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+(for z = 0 we understand both sides to be equal to 1, which is the value attained for all
+
+0 < z ≤γ). If we let z =
+dPXY
+d(PX×PY ) and we average both sides of (68) with respect to PXY we
+
+obtain
+
+E
+�
+exp
+�
+−[i(X; Y ) −log γ]+��
+= P[i(X, Y ) ≤log γ] + γP[i(X; ¯Y ) > log γ]
+(69)
+
+Letting γ = M−1
+
+2 , we see that Theorem 17 is, in fact, equivalent to the following result.
+
+Theorem 18: For any distribution PX on A, there exists a code with M codewords and average
+
+probability of error not exceeding
+
+ϵ ≤P
+�
+i(X; Y ) ≤log
+M−1
+
+2
+
+�
++
+M−1
+
+2 P
+�
+i(X; ¯Y ) > log
+M−1
+
+2
+
+�
+
+(70)
+
+where PXY ¯Y (a, b, c) = PX(a)PY |X(b|a)PY (c).
+
+Proof: The proof combines Shannon’s random coding with Feinstein’s suboptimal decoder.
+
+Fix PX. Let {Zx}x∈A : B �→{0, 1} be a collection of deterministic functions defined as
+
+Zx(y) = 1
+�
+i(x; y) > log
+M−1
+
+2
+
+�
+.
+(71)
+
+For a given codebook (c1, . . . cM), the decoder runs M likelihood ratio binary hypothesis tests
+
+in parallel, the jth of which is between the true distribution PY |X=cj and “average noise” PY .
+
+The decoder computes the values Zcj(y) for the received channel output y and returns the lowest
+
+index j for which Zcj(y) = 1 (or declares an error if there is no such index). The conditional
+
+error probability given that the jth message was sent is
+
+P
+
+�
+
+{Zcj(Y ) = 0}
+�
+
+i<j
+{Zci(Y ) = 1}
+
+�����X = cj
+
+�
+
+≤
+P[i(cj; Y ) ≤log
+M−1
+
+2
+| X = cj]
+
++
+�
+
+i<j
+P[i(ci; Y ) > log
+M−1
+
+2
+| X = cj] , (72)
+
+where we have used the union bound and the definition of Zx(y). Averaging (72) over codebooks
+
+{ci} that are generated as (pairwise) independent random variables with distribution PX we obtain
+
+P
+�
+i(X; Y ) ≤log
+M−1
+
+2
+
+�
++ (j −1)P
+�
+i(X; ¯Y ) > log
+M−1
+
+2
+
+�
+
+where recall that ¯Y has the same distribution as Y , but unlike Y , it is independent of X.
+
+Averaging further over equiprobable messages, and since
+
+1
+M
+
+M
+�
+
+j=1
+(j −1) = M −1
+
+2
+(73)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+17
+
+we obtain that the average error probability is upper bounded by (70), and therefore there must
+
+exist a code whose average error probability is upper bounded by that expression.
+
+We may wonder whether in the above proof a choice of threshold different from log M−1
+
+2
+may
+
+lead to a tighter bound. In fact, it is readily seen that we can generalize Theorem 18 not just to
+
+any other constant value of the threshold but to thresholds that are codeword dependent, leading
+
+to the following result.
+
+Lemma 19: For any distribution PX on A, and any measurable function γ : A �→[0, ∞], there
+
+exists an (M, ϵ) code (average probability of error) satisfying
+
+ϵ ≤P[i(X; Y ) ≤log γ(X)] +
+M−1
+
+2 P[i(X; ¯Y ) > log γ(X)],
+(74)
+
+where PXY ¯Y (a, b, c) = PX(a)PY |X(b|a)PY (c).
+
+In order to optimize the choice of the function γ(·), we can view the right side of (74) as the
+
+average with respect to PX of
+
+PY |X=x[i(x; Y ) ≤log γ(x)] +
+M−1
+
+2 PY [i(x; Y ) > γ(x)] ,
+(75)
+
+which is a weighted sum of two types of errors. Thus, for every x, (75) is equal to M+1
+
+2
+times
+
+the average error probability in a Bayesian hypothesis testing problem between PY |X=x with a
+
+priori probability
+2
+M+1 and PY with a priori probability M−1
+
+M+1. The average error probability is
+
+then minimized by the test that compares the likelihood ratio between these two distributions to
+
+the ratio of the two a priori probabilities. Thus, we obtain that the optimal threshold is, in fact,
+
+codeword independent: γ(x) = M−1
+
+2 ; and Theorem 18 gives the tightest version of Lemma 19.
+
+Remarks:
+
+1) Unlike the existing bounds (5), (6), and (7), the bounds in Theorems 17 and 18 require
+
+no selection of auxiliary constants.
+
+2) Theorem 2 follows by taking γ(x) = β in Lemma 19 and weakening
+M−1
+
+2
+by a factor of
+
+2.
+
+3) The bound in [32] is provably weaker than Theorem 17 (originally published in [33]).
+
+4) It can be easily seen from (67) that Theorem 17 can be used to prove the achievability
+
+part of the most general known channel capacity formula [2].
+
+5) We refer to the bound in Theorems 17 and 18 as the dependence testing bound because
+
+the right side of (70) is equal to
+M+1
+
+2
+times the Bayesian minimal error probability of a
+
+October 14, 2010
+DRAFT
+
+
+18
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+binary hypothesis test of dependence:
+
+H1 :
+PXY
+with probability
+2
+M+1
+
+H0 :
+PXPY
+with probability
+M−1
+M+1
+
+6) An alternative expression for (67) is given by
+
+ϵ ≤
+�1
+
+0
+P
+�
+i(X; Y ) ≤log
+M−1
+
+2u
+
+�
+du .
+(76)
+
+This follows from (67) and:
+
+E [min{X, 1}] =
+�1
+
+0
+P[X ≥u]du ,
+(77)
+
+which is valid for any non-negative X.
+
+7) Yet another way to look at (67) is by defining a particular f-divergence [34] as follows:
+
+DM(P||Q) =
+��dP
+
+dQ −M −1
+
+2
+
+�+
+dQ .
+(78)
+
+Then (67) is equivalent to
+
+1 −ϵ ≥DM (PXY ||PXPY ) .
+(79)
+
+Since processing does not increase f-divergence, the lower bound (79) can be further
+
+simplified by applying a suitable mapping of the space A × B into some other space.
+
+Using Lemma 19 we can easily extend Theorem 18 to the case of input constraints.
+
+Theorem 20: For any distribution PX on A there exists a code with M codewords in F and
+
+average probability of error satisfying
+
+ϵ ≤P
+�
+i(X; Y ) ≤log
+M−1
+
+2
+
+�
++
+M−1
+
+2 P
+�
+i(X; ¯Y ) > log
+M−1
+
+2
+
+�
++ PX[Fc] .
+(80)
+
+Proof: Set γ(x) = M−1
+
+2
+for x ∈F and γ(x) = +∞for x ∈Fc. Then by Lemma 19 we have
+
+ϵ ≤P
+��
+i(X; Y ) ≤log
+M−1
+
+2
+
+�
+∪
+�
+X ∈Fc��
++
+M−1
+
+2 P
+�
+i(X; ¯Y ) > log
+M−1
+
+2
+, X ∈F
+�
+.
+(81)
+
+Trivial upper bounding yields (80). Lemma 19 guarantees the existence of a codebook whose
+
+average probability of error satisfies the required (80). However, we are not guaranteed that that
+
+codebook is feasible since some of the codewords might fall outside the set F. If we modify the
+
+codebook, replacing every infeasible codeword by an arbitrary c0 ∈F, while not modifying the
+
+decoder, the error probability (averaged over messages) does not change. The reason is that the
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+19
+
+decoding set corresponding to a message that has been assigned an infeasible codeword is empty
+
+(because the corresponding threshold is +∞), and therefore, its conditional probability of error
+
+is 1, and remains 1 after it has been replaced by c0 since the decoder has not been modified.
+
+D. Achievability: Maximal Probability of Error
+
+Any achievability bound on average error probability gives a bound on maximal error proba-
+
+bility since the existence of an (M, ϵ) code in the average sense guarantees the existence of an
+
+(M −Mϵ
+
+ϵ′ , ϵ′) code in the maximal sense, for any ϵ < ϵ′ < 1. However, in this subsection we
+
+give maximal error probability counterparts to some of the bounds in Section III-C.
+
+1) Bounds fixing the input distribution: As we saw in the proof of Theorem 18, the random
+
+coding method is such that only pairwise independent codewords are required. If A = An,
+
+M = |A|k, and A is a finite field, then an interesting ensemble that satisfies that property (but
+
+not total statistical independence) together with PX being equiprobable on A is that of a random
+
+linear code: construct a random n × k matrix with independent coefficients equiprobable on A;
+
+then the M codewords are generated as the products of the matrix and every vector in Ak. For
+
+certain channels such as additive-noise discrete channels and erasure channels, the average error
+
+probability and the maximal error probability coincide for linear codes (with an appropriately
+
+defined randomized maximum likelihood (ML) decoder; see Appendix A). Therefore, for those
+
+channels, the bound in Theorem 17 achieved with an equiprobable PX not only can be achieved
+
+by a linear code but it is also an upper bound on maximal error probability.
+
+The following bound on maximal error probability holds in general.
+
+Theorem 21: For any input distribution PX and measurable γ : A →[0, ∞], there exists a
+
+code with M codewords such that the j-th codeword’s probability of error satisfies
+
+ϵj ≤P[i(X; Y ) ≤log γ(X)] + (j −1) sup
+x P[i(x; Y ) > log γ(x)] ,
+(82)
+
+where the first probability is with respect to PXY and the second is with respect to the uncon-
+
+ditional distribution PY . In particular, the maximal probability of error satisfies
+
+ϵ ≤P[i(X; Y ) ≤log γ(X)] + (M −1) sup
+x P[i(x; Y ) > log γ(x)] .
+(83)
+
+Proof: First, we specify the operation of the decoder given the codebook (c1, . . . cM). The
+
+decoder simply computes i(cj; y) for the received channel output y and selects the first codeword
+
+cj for which i(cj; y) > log γ(cj).
+
+October 14, 2010
+DRAFT
+
+
+20
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Now, let us show that we can indeed choose M codewords so that their respective probabilities
+
+of decoding error satisfy (82). For the first codeword, the conditional probability of error under
+
+the specified decoding rule is independent of other codewords and is equal to
+
+ϵ1(x) = P[i(x; Y ) ≤log γ(x)|X = x] ,
+(84)
+
+if the first codeword is x ∈A. There must exist at least one choice of x, which we call c1, such
+
+that
+
+ϵ1(c1)
+≤
+E [ϵ1(X)]
+(85)
+
+=
+P[i(X; Y ) ≤log γ(X)] .
+(86)
+
+Now assume that j −1 codewords {cℓ}j−1
+ℓ=1 have been chosen and we are to show that cj can
+
+also be chosen so that (82) is satisfied. Denote
+
+Dj−1 =
+
+j−1
+�
+
+ℓ=1
+{y : i(cℓ; y) > log γ(cℓ)} ⊆B .
+(87)
+
+If the j-th codeword is x, its conditional probability of error is
+
+ϵj(c1, . . . , cj−1, x) = 1 −P[{i(x; Y ) > log γ(x)} \ Dj−1|X = x] .
+(88)
+
+Thus,
+
+E [ϵj(c1, . . . , cj−1, X)]
+=
+P[{i(X; Y ) ≤log γ(X)} ∪D]
+(89)
+
+≤
+P[i(X; Y ) ≤log γ(X)] + PY (D)
+(90)
+
+≤
+P[i(X; Y ) ≤log γ(X)] + (j −1) sup
+x∈A
+PY [i(x; Y ) > γ(x)] . (91)
+
+Thus, there must exist a codeword cj such that ϵj(c1, . . . , cj−1, cj) satisfies (82).
+
+By upper-bounding the second term in (83) via
+
+P[i(x; Y ) ≥log γ] ≤1
+
+γ
+(92)
+
+we observe that Feinstein’s Theorem 1 is a corollary of Theorem 21.
+
+The proof technique we used to show Theorem 21 might be called sequential random coding
+
+because each codeword is chosen sequentially depending on the previous choices, and its exis-
+
+tence is guaranteed by the fact that the average cannot be exceeded by every realization. Note
+
+that there is no contradiction due to the non-ending nature of sequential random coding: sooner
+
+or later the conditional probability of error of the next message becomes 1.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+21
+
+Some symmetric channels and choices of PX (most notably the BEC and the BSC under
+
+equiprobable PX) satisfy the sufficient condition in the next result.
+
+Theorem 22: Fix an arbitrary input distribution PX. If the cumulative distribution function
+
+P[i(x; Y ) ≤α] does not depend on x for any α when Y is distributed according to PY , then
+
+there exists an (M, ϵ) code with maximal probability of error satisfying
+
+ϵ
+≤
+E
+�
+exp
+�
+−[i(X; Y ) −log(M−1)]+��
+.
+(93)
+
+Proof: Under the stated conditions, (83) states that the maximal error probability is upper
+
+bounded by the average with respect to x ∼PX of
+
+PY |X=x[i(x; Y ) ≤log γ(x)] + (M −1)PY [i(x; Y ) > log γ(x)] .
+(94)
+
+Thus, γ(x) can be optimized similarly to (75).
+
+2) Extension to input constraints: Theorem 21 can be extended to the case of input constraints
+
+in the following way.
+
+Theorem 23: For any input distribution PX and measurable γ : A →[0, ∞], there exists a
+
+code with M codewords in the set F such that the maximal probability of error ϵ satisfies
+
+ϵPX[F] ≤P[i(X; Y ) ≤log γ(X)] + (M −1) sup
+x∈F
+P[i(x; Y ) > log γ(x)] .
+(95)
+
+Proof: The proof is the same as that of Theorem 21 with the modification that the selection
+
+of each codeword belongs to F, and at each step we use the fact that for an arbitrary non-negative
+
+function g : A �→R, there exists x ∈F such that
+
+g(x) ≤E [g(X)]
+
+PX[F]
+(96)
+
+since otherwise we would get the impossible E [g(X)] < E [1{X ∈F}g(X)].
+
+Comparing Theorem 23 with Theorem 20 we note that (95) is stronger than the bound
+
+ϵ ≤P[i(X; Y ) ≤log γ(X)] + (M −1) sup
+x∈F
+P[i(x; Y ) > log γ(x)] + PX[Fc] .
+(97)
+
+Using the fact that
+
+PY [i(x; Y ) ≥log γ] ≤1
+
+γ ,
+(98)
+
+an immediate corollary of Theorem 23 is the following.
+
+October 14, 2010
+DRAFT
+
+
+22
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Theorem 24: For any distribution PX and any γ > 0, there exists an (M, ϵ) code (maximal
+
+probability of error) with codewords in the set F ⊂A such that
+
+M ≥1 + γ (ϵPX[F] −P [i(X; Y ) < log γ]) .
+(99)
+
+Note that (99) is always stronger than the conventional input-constrained version of Feinstein’s
+
+bound (14).
+
+3) Bounds fixing the output distribution: All the previous achievability bounds fixed some
+
+input distribution PX and then proved that a certain codebook exists. However, in some cases
+
+(most notably, the AWGN channel) it is desirable to consider auxiliary distributions on the output
+
+alphabet that are not necessarily induced by an input distribution.
+
+The optimal performance of binary hypothesis testing plays an important role in our devel-
+
+opment. Consider a random variable W defined on W which can take probability measures P
+
+or Q. A randomized test between those two distributions is defined by a random transformation
+
+PZ|W : W �→{0, 1} where 0 indicates that the test chooses Q. The best performance achievable
+
+among those randomized tests is given by6
+
+βα(P, Q) =
+min
+PZ|W :
+�
+
+w∈W P(w)PZ|W(1|w) ≥α
+
+�
+
+w∈W
+Q(w)PZ|W(1|w) ,
+(100)
+
+where the minimum is guaranteed to be achieved by the Neyman-Pearson lemma (Appendix B).
+
+Thus, βα(P, Q) gives the minimum probability of error under hypothesis Q if the probability of
+
+error under hypothesis P is not larger than 1−α. As a function of α, (100) is a piecewise-linear
+
+convex function joining the points
+
+βα = Q
+�dP
+
+dQ ≥γ
+�
+,
+
+α = P
+�dP
+
+dQ ≥γ
+�
+(101)
+
+iterated over all γ > 0. It is easy to show that (e.g. [35]) for any γ > 0
+
+α ≤P
+�dP
+
+dQ ≥γ
+�
++ γβα(P, Q).
+(102)
+
+6We write summations over alphabets for simplicity; however, all of our general results hold for arbitrary probability spaces.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+23
+
+On the other hand,
+
+βα(P, Q) ≤1
+
+γ0
+,
+(103)
+
+where γ0 satisfies
+
+P
+�dP
+
+dQ ≥γ0
+
+�
+≥α .
+(104)
+
+Additional results on the behavior of βα(P, Q) in the case when P and Q are product distributions
+
+are given in Appendix C.
+
+Throughout most of our development, the binary hypothesis testing of interest is W = B,
+
+P = PY |X=x and Q = QY , an auxiliary unconditional distribution. 7 In that case, for brevity and
+
+with a slight abuse of notation we will denote
+
+βα(x, QY ) = βα(PY |X=x, QY ) .
+(105)
+
+As a consequence of (102) we have
+
+βα(x, QY ) ≥sup
+γ>0
+1
+γ
+
+�
+α −PY |X=x
+
+�dPY |X=x
+
+dQY
+≥γ
+��
+.
+(106)
+
+Each per-codeword cost constraint can be defined by specifying a subset F ⊂A of permissible
+
+inputs. For an arbitrary F ⊂A, we define a related measure of performance for the composite
+
+hypothesis test between QY and the collection {PY |X=x}x∈F:
+
+κτ(F, QY ) =
+inf
+PZ|Y :
+
+infx∈F PZ|X(1|x) ≥τ
+
+�
+
+y∈B
+QY (y)PZ|Y (1|y) .
+(107)
+
+Again, typically we will take A and B as n-fold Cartesian products of alphabets A and B.
+
+To emphasize dependence on n we will write βn
+α(x, QY ) and κn
+τ (F, QY ). Since QY and F will
+
+usually be fixed we will simply write κn
+τ . Also, in many cases βn
+α(x, QY ) will be the same for
+
+all x ∈F. In these cases we will write βn
+α.
+
+Theorem 25 (Achievability, input constraints: κβ bound): For any 0 < ϵ < 1, there exists an
+
+(M, ϵ) code with codewords chosen from F ⊂A, satisfying
+
+M ≥sup
+0<τ<ϵ sup
+QY
+
+κτ(F, QY )
+supx∈F β1−ϵ+τ(x, QY ) .
+(108)
+
+7As we show later, it is sometimes advantageous to allow QY that cannot be generated by any input distribution.
+
+October 14, 2010
+DRAFT
+
+
+24
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Note: It is possible8 that (108) will be of the form M ≥α/0 with α > 0. In this case the
+
+statement of the theorem should be understood as “(M, ϵ) codes with arbitrarily high M exist”.
+
+Proof: Fix 0 < ϵ < 1, 0 < τ < ϵ, and QY . We construct the collection of random binary-
+
+valued {Zx}x∈F conditionally independent given Y , and with marginal conditional distributions
+
+given by PZx|Y , which denotes, for brevity, the conditional distribution that achieves the minimum
+
+in (100) for α = 1 −ϵ + τ, QY , and x ∈F.
+
+We construct the codebook sequentially:
+
+Step 1. Choose c1 ∈F arbitrarily. Note that regardless of the choice of c1 we have from (100)
+
+that
+
+P[Zc1 = 1|X = c1] ≥1 −ϵ + τ .
+(109)
+
+Step k. Assume c1, . . . ck−1 have been chosen. Choose ck ∈F so that
+
+P[Zc1 = 0, . . . , Zck−1 = 0, Zck = 1|X = ck]
+
+=
+�
+
+y∈B
+PY |X(y|ck)PZck|Y (1|y)
+
+k−1
+�
+
+i=1
+PZci|Y (0|y)
+
+>
+1 −ϵ .
+(110)
+
+Unless such a choice is impossible, proceed to the next step.
+
+Let M be the number of steps that this procedure takes before stopping. (In case it does not
+
+stop, we let M = ∞.)
+
+The decoder simply applies the M independent random transformations P ∗
+Zc1|Y , . . . , P ∗
+ZcM |Y
+to the data. If all M outputs are 0, the decoder outputs 0; otherwise, it outputs the smallest i
+
+such that Zci = 1.
+
+It follows from the encoder/decoder construction and (110) that the maximal error probability
+
+of the code is indeed upper bounded by ϵ. Let
+
+Z∗= Zc1 OR · · · OR ZcM .
+(111)
+
+8For an example of such a case, take A = B = [0, 1] with the Borel σ-algebra. Define PY |X=x(y) = δx(y), i.e. a point
+
+measure at y = x, and take QY to be Lebesgue measure. Then, βα(x, QY ) = 0 for any x and α, and κτ(QY ) = 1 for any
+
+τ > 0.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+25
+
+For any x ∈F, we have
+
+PZ∗|X(0|x)
+=
+P[Z∗= 0, Zx = 1|X = x]
+
++
+P[Z∗= 0, Zx = 0|X = x]
+(112)
+
+≤
+1 −ϵ + P[Z∗= 0, Zx = 0|X = x]
+(113)
+
+≤
+1 −ϵ + P[Zx = 0|X = x]
+(114)
+
+<
+1 −ϵ + ϵ −τ
+(115)
+
+where (113) follows because if x ∈{c1, . . . , cM}, it is impossible that Z∗= 0 and Zx = 1
+
+simultaneously, while if x ∈F −{c1, . . . , cM} we were not able to add x to the codebook, and
+
+therefore P[Z∗= 0, Zx = 1|X = x] ≤1 −ϵ; and (115) follows by the construction of Zx from
+
+(100).
+
+From (115) we conclude that PZ∗|X is such that
+
+inf
+x∈F PZ∗|X(1|x) ≥τ .
+(116)
+
+Accordingly,
+
+κτ(F, QY )
+≤
+�
+
+y∈B
+QY (y)PZ∗|Y (1|y)
+(117)
+
+≤
+�
+
+y∈B
+QY (y)
+
+M
+�
+
+m=1
+PZcm|Y (1|y)
+(118)
+
+=
+
+M
+�
+
+m=1
+β1−ϵ+τ(cm, QY )
+(119)
+
+≤
+M sup
+x∈F
+β1−ϵ+τ(x, QY )
+(120)
+
+where (117) follows from (116) and (107); (118) follows from (111); and (119) follows from the
+
+fact that by definition of PZcm|Y , it achieves the minimum in (100) for x = cm and α = 1−ϵ+τ.
+
+In (100) and (107) we have defined βα and κτ using randomized tests. Then, in Theorem 25 we
+
+have constructed the coding scheme with a randomized decoder. Correspondingly, if we define
+
+βα and κτ using non-randomized tests, then the analog of Theorem 25 for a non-randomized
+
+decoder can be proved.
+
+October 14, 2010
+DRAFT
+
+
+26
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+As long as QY is the output distribution induced by an input distribution QX, the quantity
+
+(107) satisfies the bounds
+
+τQX[F]
+≤
+κτ(F, QY )
+(121)
+
+≤
+τ .
+(122)
+
+The bound (122) is achieved by choosing the test Z that is equal to 1 with probability τ regardless
+
+of Y ; since κτ is achieved by the optimal test, it can only be better. To verify (121), note that
+
+for any PZ|Y that satisfies the condition in (107), we have
+
+�
+
+y∈B
+QY (y)PZ|Y (1|y)
+
+=
+�
+
+x∈A
+
+�
+
+y∈B
+QX(x)PY |X(y|x)PZ|Y (1|y)
+(123)
+
+≥
+�
+
+x∈F
+QX(x)
+�
+
+y∈B
+PY |X(y|x)PZ|Y (1|y)
+(124)
+
+≥
+�
+
+x∈F
+QX(x)
+
+
+
+
+inf
+x∈F
+
+�
+
+y∈B
+PY |X(y|x)PZ|Y (1|y)
+
+
+
+
+
+(125)
+
+≥
+τQX[F] .
+(126)
+
+Using (121) in Theorem 25 we obtain a weakened but useful bound:
+
+M ≥sup
+0<τ<ϵ sup
+QX
+
+τQX[F]
+supx∈F β1−ϵ+τ(x, QY )
+(127)
+
+where the supremum is over all input distributions, and QY denotes the distribution induced by
+
+QX on the output. By a judicious choice of γ(x) in Lemma 19 we can obtain a strengthened
+
+version of the bound for average error probability with the supremum in the denominator of (127)
+
+replaced by the average.
+
+E. General Converse: Average Probability of Error
+
+We give first a general result, which upon particularization leads to a new converse as well to
+
+the recovery of previously known converses; see Section III-G. The statement of the result uses
+
+the notation introduced in (100) particularized to W = A × B.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+27
+
+Theorem 26: For a given code (possibly randomized encoder and decoder pair), let
+
+ϵ
+=
+average error probability with PY |X ,
+
+ϵ′
+=
+average error probability with QY |X and
+
+PX = QX
+=
+encoder output distribution with equiprobable codewords .
+
+Then,
+
+β1−ϵ(PXY , QXY ) ≤1 −ϵ′ .
+(128)
+
+Proof: The message is denoted by the random variable S, equiprobable on {1, . . . , M}.
+
+The encoder and decoder are the random transformations PX|S and PZ|Y . Consider the following
+
+(suboptimal) test for deciding between PXY and QXY : denote the observed pair by (x, y); y is
+
+fed to the decoder which selects z, and the test declares PXY with probability
+
+PS|X(z|x) = PX|S(x|z)
+
+MPX(x) .
+(129)
+
+The probability that the test is correct if PXY is the actual distribution is
+
+�
+
+a∈A
+
+�
+
+b∈B
+
+M
+�
+
+z=1
+PX(a)PY |X(b|a)PZ|Y (z|b)PX|S(a|z)
+
+MPX(a)
+
+=
+
+M
+�
+
+z=1
+
+�
+
+a∈A
+
+�
+
+b∈B
+
+1
+M PX|S(a|z)PY |X(b|a)PZ|Y (z|b)
+(130)
+
+=
+1 −ϵ
+(131)
+
+where (131) is simply the definition of ϵ. Likewise, the probability that the test is incorrect if
+
+QXY is the actual distribution is
+
+�
+
+a∈A
+
+�
+
+b∈B
+
+M
+�
+
+z=1
+PX(a)QY |X(b|a)PZ|Y (z|b)PX|S(a|z)
+
+MPX(a)
+
+=
+
+M
+�
+
+z=1
+
+�
+
+a∈A
+
+�
+
+b∈B
+
+1
+M PX|S(a|z)QY |X(b|a)PZ|Y (z|b)
+(132)
+
+=
+1 −ϵ′
+(133)
+
+where (133) is simply the definition of ϵ′.
+
+The optimal test that attains the minimum in (100) among all tests such that the probability
+
+of corrected decision under PXY is not less than 1 −ϵ has a probability of incorrect decision
+
+under QXY that cannot be larger than (133).
+
+October 14, 2010
+DRAFT
+
+
+28
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Theorem 26 allows one to use any converse for channel QY |X to prove a converse for channel
+
+PY |X. It has many interesting generalizations (for example, to list-decoding and channels with
+
+feedback) and applications, whose study is outside the scope of this paper.
+
+A simple application of Theorem 26 yields the following result.
+
+Theorem 27 (Converse): Every (M, ϵ) code (average probability of error) with codewords
+
+belonging to F satisfies
+
+M ≤sup
+PX
+inf
+QY
+1
+β1−ϵ(PXY , PX × QY ) ,
+(134)
+
+where PX ranges over all distributions on F, and QY ranges over all distributions on B.
+
+Proof: Denote the distribution of the encoder output by ¯PX and particularize Theorem 26
+
+by choosing QY |X = QY for an arbitrary QY , in which case we obtain ϵ′ = 1 −1
+
+M . Therefore,
+
+from (128) we obtain
+
+1
+M
+≥
+sup
+QY
+β1−ϵ( ¯PXPY |X, ¯PX × QY )
+(135)
+
+≥
+inf
+PX sup
+QY
+β1−ϵ(PXY , PX × QY ).
+(136)
+
+As we will see shortly in important special cases βα(x, QY ) is constant on F. In those cases
+
+the following converse is particularly useful.
+
+Theorem 28: Fix a probability measure QY on B. Suppose that βα(x, QY ) = βα(QY ) for
+
+x ∈F. Then every (M, ϵ)-code (average probability of error) satisfies
+
+M ≤
+1
+β1−ϵ(QY ) .
+(137)
+
+Proof: The result follows from Theorem 27 and the following auxiliary result.
+
+Lemma 29: Suppose that βα(PY |X=x, QY |X=x) = βα is independent of x ∈F. Then, for any
+
+PX supported on F we have
+
+βα(PXPY |X, PXQY |X) = βα(PY |X=x, QY |X=x) .
+(138)
+
+Proof: Take a collection of optimal tests Zx for each pair PY |X=x vs. QY |X=x, i.e.
+
+PY |X=x[Zx = 1]
+≥
+1 −α ,
+(139)
+
+QY |X=x[Zx = 1]
+=
+β1−α .
+(140)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+29
+
+Then take ZX as a test for PXY vs. QXY . In this way we get
+
+βα(PXPY |X, PXQY |X) ≤βα(PY |X=x, QY |X=x) .
+(141)
+
+We now prove the reverse inequality. Consider an arbitrary test Z such that
+
+PXY [Z = 1] =
+�
+
+x∈A
+PX(x)PY |X=x[Z = 1] ≥α .
+(142)
+
+Then observe that
+
+�
+
+x∈A
+PX(x)QY |X=x[Z = 1]
+≥
+�
+
+x∈A
+PX(x)βPY |X=x[Z=1](PY |X=x, QY |X=x)
+(143)
+
+=
+�
+
+x∈A
+PX(x)βPY |X=x[Z=1]
+(144)
+
+≥
+βP[Z=1]
+(145)
+
+≥
+βα ,
+(146)
+
+where (144) follows from the assumption, (146) follows because βα is a non-decreasing function
+
+of α, and (145) is by Jensen’s inequality which is applicable since βα is convex. Therefore,
+
+from (146) we obtain that
+
+βα(PXPY |X, PXQY |X) ≥βα(PY |X=x, QY |X=x)
+(147)
+
+and together with (141) this concludes the proof.
+
+F. General Converse: Maximal Probability of Error
+
+The minimax problem in (134) is generally hard to solve. A weaker bound is given by
+
+Theorem 31 which is a corollary to the next analog of Theorem 26.
+
+Theorem 30: For a given code (possibly with a randomized decoder) with codewords belong-
+
+ing to F, let
+
+ϵ
+=
+maximal error probability with PY |X ,
+
+ϵ′
+=
+maximal error probability with QY |X
+
+Then,
+
+inf
+x∈F β1−ϵ(PY |X=x, QY |X=x) ≤1 −ϵ′ .
+(148)
+
+October 14, 2010
+DRAFT
+
+
+30
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Proof: Consider an (M, ϵ)-code with codewords {cj ∈F}M
+j=1 and a randomized decoding
+
+rule PZ|Y : B �→{0, . . . , M}. We have for some j∗
+
+�
+
+b∈B
+PZ|Y (j∗|b)QY |X(b|j∗) = 1 −ϵ′ ,
+(149)
+
+and at the same time
+�
+
+b∈B
+PZ|Y (j∗|b)PY |X(b|j∗) ≥1 −ϵ .
+(150)
+
+Consider the hypothesis test between PY |X=j∗and QY |X=j∗that decides in favor of PY |X=j∗
+
+only when the decoder output is j∗. By (150) the probability of correct decision under PY |X=j∗
+
+is at least 1 −ϵ, and therefore
+
+1 −ϵ′
+≥
+β1−ϵ(PY |X=j∗, QY |X=j∗)
+(151)
+
+≥
+inf
+x∈F β1−ϵ(PY |X=x, QY |X=x) .
+(152)
+
+Theorem 31 (Converse): Every (M, ϵ) code (maximal probability of error) with codewords
+
+belonging to F satisfies
+
+M ≤inf
+QY sup
+x∈F
+
+1
+β1−ϵ(x, QY ) ,
+(153)
+
+where the infimum is over all distributions QY on B.
+
+Proof: Repeat the argument of the proof of Theorem 27 replacing Theorem 26 by Theo-
+
+rem 30.
+
+G. Relation to Classical Converse Bounds
+
+We illustrate how Theorems 26 and 30 can be used to prove all the converse results cited in
+
+Section II:
+
+• Fano’s inequality (Theorem 8): Particularize (135) to the case QY = PY , where PY is the
+
+output distribution induced by the code and the channel PY |X. Note that any hypothesis
+
+test is a (randomized) binary-output transformation and therefore, by the data-processing
+
+inequality for divergence we have
+
+d
+�
+1 −ϵ
+����β1−ϵ(PXY , PX × PY )
+�
+≤D(PXY ||PX × PY ) ,
+(154)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+31
+
+where the binary divergence function satisfies
+
+d(a||b)
+=
+a log a
+
+b + (1 −a) log 1 −a
+
+1 −b
+(155)
+
+≥
+−h(a) + a log 1
+
+b .
+(156)
+
+Using (155) in (154) we obtain
+
+log
+1
+β1−ϵ(PXY , PX × PY ) ≤I(X; Y ) + h(ϵ)
+
+1 −ϵ
+.
+(157)
+
+Fano’s inequality (19) follows from (157) and (135).
+
+• Information spectrum converse (Theorem 11): Replace (157) with (102), which together
+
+with (135) yields
+
+1
+M
+≥
+β1−ϵ(PXY , PX × PY )
+(158)
+
+≥
+sup
+γ>0
+1
+γ (P[i(X; Y ) < log γ] −ϵ) .
+(159)
+
+The bound (159) is equivalent to the converse bound (23). Similarly, by using a stronger
+
+bound in place of (102) we can derive [26]. Furthermore, by keeping the freedom in choosing
+
+QY in (135) we can prove a stronger version of the result.
+
+• Wolfowitz’s strong converse (Theorem 9): To apply Theorem 31 we must compute a lower
+
+bound on infx∈A βα(x, QY ); but this simply amounts to taking the infimum over x ∈A
+
+in (106). Thus
+
+inf
+x∈A βα(x, PY ) ≥sup
+γ>0
+1
+γ
+
+�
+α −sup
+x∈A
+PY |X=x
+
+�dPY |X=x
+
+dQY
+≥γ
+��
+.
+(160)
+
+Now, suppose that QY = PY ; then using (4) we conclude that Theorem 31 implies Theo-
+
+rem 9.
+
+• Shannon-Gallager-Berlekamp (Theorem 12): Applying Theorem 31, we may first split the
+
+input space A into regions Fi such that βα(x, QY ) is constant within Fi. For example, for
+
+symmetric channels and QY equal to the capacity achieving output distribution, there is
+
+no need to split A since βα(x, QY ) is identical for all x ∈A. For a general DMC, we
+
+apply Theorem 26 with QY |X chosen as follows. The distribution QY |X=xn only depends
+
+on the type of xn and is chosen optimally for each type (and depending on the coding rate).
+
+Over the Q-channel, the decoder can at most distinguish codewords belonging to different
+
+types and therefore, we can estimate 1 −ϵ′ ≤
+n|A|−1
+
+M
+. Using this estimate in (128), the
+
+October 14, 2010
+DRAFT
+
+
+32
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+proof of Theorem 12 follows along the same lines as the proof of [36, Theorem 19] by
+
+weakening (128) using Chernoff-type estimates.
+
+• Refinements to Theorem 12 in [8] and [11]: As we explained above, Theorem 12 is obtained
+
+from Theorem 31 by choosing QY judiciously and by performing a large deviation analysis
+
+of βα. Reference [8] improved Theorem 12 by extending the results to the case of infinite
+
+|B| and by tightening the Chernoff-type estimates of [27]. A further improvement was
+
+found in [11] for the special case of input-symmetric channels by directly lower-bounding
+
+the average probability of error and avoiding the step of splitting a code into constant
+
+composition subcodes. Theorem 28 is tighter than the bound in [11] because for symmetric
+
+channels and relevant distributions QY the value of βα(x, QY ) does not depend on x and
+
+therefore average probability of error is bounded directly.
+
+H. BSC
+
+This section illustrates the application of the finite-length upper and lower bounds to the BSC
+
+with crossover probability δ < 1/2.
+
+Particularizing Theorem 15 to equiprobable input distributions and the BSC we obtain (see
+
+also [37]) the following result.
+
+Theorem 32: For the BSC with crossover probability δ, we have
+
+E [ϵ(X1, . . . XM)] =
+
+= 1 −2n−nM
+n
+�
+
+i=0
+
+�n
+i
+
+�
+δi(1 −δ)n−i
+M−1
+�
+
+ℓ=0
+
+�n
+i
+
+�ℓ
+1
+1 + ℓ
+
+�M −1
+ℓ
+
+��
+n
+�
+
+j=i+1
+
+�n
+j
+
+��M−1−ℓ
+.(161)
+
+Note that the exact evaluation of (161) poses considerable difficulties unless the blocklength is
+
+small. The next result gives a slightly weaker, but much easier to compute, bound.
+
+Theorem 33: For the BSC with crossover probability δ, there exists an (n, M, ϵ) code (average
+
+probability of error) such that
+
+ϵ ≤
+
+n
+�
+
+t=0
+
+�n
+t
+
+�
+δt(1 −δ)n−t min
+
+�
+
+1, (M−1)
+
+t
+�
+
+k=0
+
+�n
+k
+
+�
+2−n
+�
+
+.
+(162)
+
+If M is a power of 2, then the same bound holds for maximal probability of error.
+
+Proof: We apply Theorem 16 (RCU bound), with A = B = {0, 1}n, and the equiprobable
+
+input distribution. The information density is
+
+i(xn; yn) = n log(2 −2δ) + t log
+δ
+1 −δ
+(163)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+33
+
+where t is the Hamming weight of the difference between xn and yn. Accordingly, since ¯Xn is
+
+equiprobable and independent of Xn we obtain
+
+P
+�
+i( ¯Xn; Y n) ≥i(Xn; Y n)
+��Xn = xn, Y n = yn�
+=
+
+t
+�
+
+k=0
+
+�n
+k
+
+�
+2−n .
+(164)
+
+The statement about the maximal probability of error is explained in Appendix A.
+
+It turns out that Poltyrev’s bound (11), derived using linear codes and weight spectra, is in
+
+fact equal to (162) with M −1 replaced by 2k. Indeed, notice that
+
+n
+�
+
+w=0
+
+�n
+w
+
+�
+�
+
+w/2≤t≤min{ℓ,w}
+
+�w
+t
+
+��n −w
+ℓ−t
+
+�
+=
+�n
+ℓ
+
+�
+ℓ
+�
+
+s=0
+
+�n
+s
+
+�
+.
+(165)
+
+This holds since on the left we have counted all the ways of choosing two binary n-vectors X
+
+and Z such that wt(Z) = ℓand Z overlaps at least a half of X. The last condition is equivalent
+
+to requiring wt(X −Z) ≤wt(Z). So we can choose Z in
+�n
+ℓ
+�
+ways and X in �ℓ
+s=0
+�n
+s
+�
+ways,
+
+which is the right-hand side of (165). Now applying (165) to (11) yields (162) with M −1
+
+replaced by 2k.
+
+Theorem 34: For the BSC with crossover probability δ, there exists an (n, M, ϵ) code (average
+
+probability of error) such that
+
+ϵ ≤
+
+n
+�
+
+t=0
+
+�n
+t
+
+�
+min
+�
+δt(1 −δ)n−t, (M−1)2−n−1�
+.
+(166)
+
+If M is a power of 2, then the same bound holds for maximal probability of error.
+
+Proof: Taking PXn to be equiprobable on {0, 1}n, the DT bound of Theorem 17 is equal to
+
+M+1
+
+2
+times the minimal probability of error of an optimal binary hypothesis test between n fair
+
+coin tosses (with prior probability
+M−1
+M+1) and n bias-δ coin tosses (with prior probability
+2
+M+1).
+
+The upper bound (67) on the average error probability becomes
+
+ϵ ≤E
+�
+2−[na−bZ−log M−1
+
+2 ]
++�
+,
+(167)
+
+where
+
+a
+=
+1 + log2(1 −δ),
+(168)
+
+b
+=
+log2
+1 −δ
+
+δ
+,
+(169)
+
+and Z ∼B(n, δ) is a binomial random variable with parameters n and δ. Averaging over Z,
+
+(167) becomes (166). The statement about the maximal probability of error is explained in
+
+Appendix A.
+
+October 14, 2010
+DRAFT
+
+
+34
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+For comparison, Feinstein’s lemma (Theorem 1), with equiprobable input distribution yields
+
+M ∗(n, ϵ) ≥sup
+t>0 2nt (ϵ −P [Z ≥n(a −t)/b]) ,
+(170)
+
+where Z ∼B(n, δ).
+
+Gallager’s random coding bound (7) also with equiprobable input distribution yields9
+
+log2 M ∗(n, ϵ) ≥nE−1
+r
+
+�1
+
+n log2
+1
+
+ϵ
+
+�
+,
+(171)
+
+where [16, Theorem 5.6.2, Corollary 2 and Example 1 in Section 5.6.]
+
+Er(1 −h(s)) =
+
+
+
+
+
+d(s||δ) ,
+s ∈(δ, s∗] ,
+
+h(s) −2 log2 s1 ,
+s > s∗,
+
+(172)
+
+and s∗=
+√
+
+δ
+√
+
+δ+
+√
+
+1−δ, s1 =
+√
+
+δ +
+√
+
+1 −δ.
+
+We now turn our attention to the computation of the converse bound of Theorem 28. Choosing
+
+QY n equiprobable on {0, 1}n we recover the classical sphere packing bound (cf. [16, (5.8.19)]
+
+for an alternative expression).
+
+Theorem 35: For the BSC with crossover probability δ, the size of an (n, M, ϵ) code (average
+
+error probability) must satisfy
+
+M ≤
+1
+βn
+1−ϵ
+.
+(173)
+
+where βn
+α is defined as
+
+βn
+α = (1 −λ)βL + λβL+1
+(174)
+
+with
+
+βℓ=
+
+ℓ
+�
+
+k=0
+
+�n
+k
+
+�
+2−n ,
+(175)
+
+where 0 ≤λ < 1 and the integer L are defined by
+
+α = (1 −λ)αL + λαL+1
+(176)
+
+9The inequality (171) holds for average probability of error. Fig. 1 and Fig. 2 show the corresponding bound on maximal
+
+error probability where we drop the half of the codewords with worse error probability. This results in an additional term of -1
+
+appended to the right-hand side of (171), while 1
+
+ϵ becomes 2
+
+ϵ therein.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+35
+
+with
+
+αℓ=
+
+ℓ−1
+�
+
+k=0
+
+�n
+k
+
+�
+(1 −δ)n−kδk .
+(177)
+
+Proof: To streamline notation, we denote βn
+α = βα(xn, QY n) since it does not depend on
+
+xn, and QY n is fixed. Then, the Hamming weight of the output word is a sufficient statistic for
+
+discriminating between PY n|Xn=0 and QY n. Thus, the optimal randomized test is
+
+PZ0|Y n(1|yn) =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0,
+|yn| > Ln
+α ,
+
+λn
+α,
+|yn| = Ln
+α ,
+
+1,
+|yn| < Ln
+α ,
+
+(178)
+
+where Ln
+α ∈Z+ and λn
+α ∈[0, 1) are uniquely determined by the condition
+
+�
+
+yn∈A
+PY n|Xn(yn|0)PZ0|Y n(1|yn) = α .
+(179)
+
+Then we find that
+
+βn
+α = λn
+α
+
+�n
+Ln
+α
+
+�
+2−n +
+
+Ln
+α−1
+�
+
+k=0
+
+�n
+k
+
+�
+2−n .
+(180)
+
+Thus, by Theorem 28
+
+M ∗(n, ϵ) ≤
+1
+βn
+1−ϵ
+.
+(181)
+
+The numerical evaluation of (162), (166) and (173) is shown in Fig. 1 and Fig. 2, along with
+
+the bounds by Feinstein (170) and Gallager (171). As we anticipated analytically, the DT bound
+
+is always tighter than Feinstein’s bound. For δ = 0.11 and ϵ = 0.001, we can see in Fig. 1 that
+
+for blocklengths greater than about 150, Theorem 17 gives better results than Gallager’s bound.
+
+In fact, for large n the gap to the converse upper bound of the new lower bound is less than half
+
+that of Gallager’s bound. The RCU achievability bound (162) is uniformly better than all other
+
+bounds. In fact for all n ≥20 the difference between (162) and the converse is within 3 −4 bits
+
+in log2 M. This tendency remains for other choices of δ and ϵ, although, for smaller ϵ and/or δ,
+
+Gallager’s bound (originally devised to analyze the regime of exponentially small ϵ) is tighter
+
+for a larger range of blocklengths, see Fig. 2. A similar relationship between the three bounds
+
+holds, qualitatively, in the case of the additive white Gaussian noise channel (Section III-J).
+
+October 14, 2010
+DRAFT
+
+
+36
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+I. BEC
+
+Next we illustrate the application of the achievability bounds in Theorems 15, 16, 17 and 22
+
+to the special case of the binary erasure channel. Using Theorem 15 we obtain the next bound.
+
+Theorem 36: For the BEC with erasure probability δ, we have
+
+E [ϵ(X1, . . . XM)] =
+
+1 −
+
+M−1
+�
+
+ℓ=0
+
+�M −1
+ℓ
+
+�
+1
+ℓ+ 1
+
+n
+�
+
+j=0
+
+�n
+j
+
+�
+δn−j(1 −δ)j2−jℓ�
+1 −2−j�M−1−ℓ.
+(182)
+
+Easier to evaluate is the DT bound (Theorem 17), which particularizes to
+
+Theorem 37: For the BEC with erasure probability δ, there exists an (n, M, ϵ) code (average
+
+probability of error) such that
+
+ϵ ≤
+
+n
+�
+
+t=0
+
+�n
+t
+
+�
+δt(1 −δ)n−t2−[n−t−log2( M−1
+
+2
+)]
++
+.
+(183)
+
+If M is a power of 2, then the same bound holds for maximal probability of error. In any case
+
+there exists an (n, M, ϵ) code (maximal probability of error) such that
+
+ϵ ≤
+
+n
+�
+
+t=0
+
+�n
+t
+
+�
+δt(1 −δ)n−t2−[n−t−log2(M−1)]+ .
+(184)
+
+Proof: Using Theorem 17 with A = {0, 1}n, B = {0, e, 1}n and the equiprobable input
+
+distribution, it follows that if yn contains t erasures and coincides with xn in all the non-erased
+
+bits, then
+
+i(xn; yn) = n −t ,
+(185)
+
+and otherwise, i(xn; yn) = −∞. Then (67) implies (183) since t erasures happen with probability
+�n
+t
+�
+δt(1 −δ)n−t. If M is a power of 2 then the same bound holds for maximal probability of
+
+error by using linear codes (see Appendix A). Bound (184) is obtained by exactly the same
+
+argument, except that Theorem 22 must be used in lieu of Theorem 17.
+
+Application of Theorem 16 yields exactly (184) but only for average probability of error.
+
+Since Theorem 16 is always stronger than Gallager’s bound, we conclude that Theorem 37 is
+
+also stronger than Gallager’s bound for the BEC and therefore achieves the random coding
+
+exponent. Similarly Theorem 21 (and hence Theorem 22) is always stronger than Feinstein’s
+
+bound, see (92). Therefore, Theorem 37 is also stronger than Feinstein’s bound for the BEC.
+
+The average block erasure probability for a random ensemble of linear codes is given in [38]; it
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+37
+
+can be shown that it is sandwiched between (183) and (184), which are also considerably easier
+
+to compute.
+
+Upper bounds on error probability can be converted easily into lower bounds on M ∗(n, ϵ).
+
+For example, Theorem 37 for the maximal probability of error formalism implies10
+
+M ∗(n, ϵ) ≥max
+�
+2k : E
+�
+2−[Z−log2
+2k−1
+
+2
+]+�
+≤ϵ
+�
+,
+(186)
+
+where Z ∼B(n, δ) is a binomial random variable with parameters n and δ.
+
+The upper bound on code size given by Theorem 31 (with capacity achieving output distri-
+
+bution) is improved by the following result,11 which is stronger than related bounds such as in
+
+[39].
+
+Theorem 38: For the BEC with erasure probability δ, the average error probability of an
+
+(n, M, ϵ) code satisfies
+
+ϵ ≥
+
+n
+�
+
+ℓ=⌊n−log2 M⌋+1
+
+�n
+ℓ
+
+�
+δℓ(1 −δ)n−ℓ
+�
+1 −2n−ℓ
+
+M
+
+�
+,
+(187)
+
+even if the encoder knows the location of the erasures noncausally.
+
+Proof: It is easy to show that the probability of correct decoding in an M-ary equiprobable
+
+hypothesis testing problem where the observable takes one out of J values is upper bounded by
+
+J/M, even if stochastic decision rules are allowed. Indeed, suppose that the true hypothesis is
+
+a (random variable) A, the observable output is B and the decision is C; then
+
+P[C = A]
+=
+
+M
+�
+
+a=1
+
+J
+�
+
+b=1
+PA(a)PB|A(b|a)PC|B(a|b)
+(188)
+
+=
+
+J
+�
+
+b=1
+
+1
+M
+
+M
+�
+
+a=1
+PC|B(a|b)PB|A(b|a)
+(189)
+
+≤
+
+J
+�
+
+b=1
+
+1
+M
+
+M
+�
+
+a=1
+PC|B(a|b)
+(190)
+
+≤
+J
+M .
+(191)
+
+10For numerical purposes we can safely weaken (186) by replacing log2
+2k−1
+
+2
+with (k −1).
+
+11For a q-ary erasure channel, Theorem 38 holds replacing 2n−l−k by qn−l−k and log2 by logq. In fact this q-ary analog
+
+of (187) is achievable by q-ary maximum distance separable (MDS) codes.
+
+October 14, 2010
+DRAFT
+
+
+38
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Now suppose that the location of the erasures is known to the encoder, and there are z ∈
+
+{0, . . . n} erasures. Then, regardless of the code (possibly dependent on the erasure pattern)
+
+chosen by the encoder, the decoder faces an M-ary equiprobable hypothesis testing problem
+
+where the observable takes one out of 2n−z values. Therefore the probability of error is lower
+
+bounded by
+�
+1 −2n−z
+
+M
+�+
+. Since each pattern of z erasures occurs with probability (1 −δ)n−zδz
+
+and there are
+�n
+z
+�
+of them, (187) follows.
+
+Figs. 3 and 4 show that, as expected, (183) is quite a bit tighter than the Gallager and Feinstein
+
+bounds. In fact, the gap between (183) and (187) is below 3 bits in log2 M, uniformly across the
+
+blocklengths shown on the plot. Fig. 5 compares the DT bound (183) with the BEC achievability
+
+bound (12); they are within one bit of each other, the winner depending on a particular value
+
+of n. The zigzagging of the plot of (12) is a behavior common to all bounds that are restricted
+
+to integer values of log2 M. The complexity of the computation of (12) is O(n3), compared to
+
+O(n) for the DT bound (183).
+
+J. The AWGN Channel
+
+1) The Channel and Power Constraints: For the real-valued additive-noise white Gaussian
+
+channel we have the following specific definitions:
+
+• A = Rn,
+
+• B = Rn and
+
+• PY n|Xn=xn = N(xn, In).
+
+Additionally, codewords are subject to one of three types of power constraints:
+
+• equal-power constraint: M ∗
+e (n, ϵ, P) denotes the maximal number of codewords, such that
+
+each codeword ci ∈Xn satisfies
+
+||ci||2 = nP .
+(192)
+
+• maximal power constraint: M ∗
+m(n, ϵ, P) denotes the maximal number of codewords, such
+
+that each codeword ci ∈Xn satisfies
+
+||ci||2 ≤nP .
+(193)
+
+• average power constraint: M ∗
+a(n, ϵ, P) denotes the maximal size M of a codebook that
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+39
+
+satisfies
+
+1
+M
+
+M
+�
+
+i=1
+||ci||2 ≤nP .
+(194)
+
+It is easiest to analyze M ∗
+e , but M ∗
+m and M ∗
+a are more interesting from the practical viewpoint.
+
+Following Shannon [3] we will make use of simple inequalities relating all three quantities,
+
+summarized in the following
+
+Lemma 39: For any 0 < P < P ′ the inequalities
+
+M ∗
+e (n, ϵ, P) ≤M ∗
+m(n, ϵ, P) ≤M ∗
+e (n + 1, ϵ, P)
+(195)
+
+and
+
+M ∗
+m(n, ϵ, P) ≤M ∗
+a(n, ϵ, P) ≤
+1
+1 −P/P ′M ∗
+m(n, ϵ, P ′)
+(196)
+
+hold.
+
+Proof: The left-hand bounds are obvious. The right-hand bound in (195) follows from the
+
+fact that we can always take the M ∗
+m-code and add an (n+1)-th coordinate to each codeword to
+
+equalize the total power to nP. The right-hand bound in (196) is a consequence of the Chebyshev
+
+inequality on the probability of finding a codeword with power greater than nP ′ in the M ∗
+a-code.
+
+The particularization of the exact error probability achieved by random coding in Theorem
+
+15 leads to (41) which turns out to be the tightest of all the bounds for the AWGN channel.
+
+However the particularization of the κβ-bound to the AWGN channel is of paramount importance
+
+in Section IV.
+
+2) Evaluation of βn
+α: We will now apply Theorems 25 and 28 to the AWGN channel with
+
+equal-power constraint (192). For each n, the set Fn of permissible inputs is
+
+Fn
+△= {xn : ||xn||2 = nP} ⊂Rn .
+(197)
+
+To use Theorems 25 and 28 we must also choose the auxiliary distribution PY n over Bn. A
+
+particularly convenient choice is
+
+PY n = N(0, σ2
+Y In) .
+(198)
+
+with σ2
+Y to be specified later. Due to the spherical symmetry of both Fn and (198), for all x ∈Fn
+
+βn
+α(x, N(0, σ2
+Y In)) = βn
+α
+(199)
+
+October 14, 2010
+DRAFT
+
+
+40
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+To simplify calculations, we choose x = x0 = (
+√
+
+P,
+√
+
+P, . . . ,
+√
+
+P). The information density is
+
+given by
+
+i(x0; yn) = n
+
+2 log σ2
+Y + log e
+
+2
+
+n
+�
+
+i=1
+
+�y2
+i
+σ2
+Y
+−(yi −
+√
+
+P)2
+�
+.
+(200)
+
+It is convenient to define independent standard Gaussian variables Zi ∼N(0, 1), i = 1, . . . , n.
+
+Then, under PY n and under PY n|Xn=x0, the information density i(x0; Y n) has the same distribu-
+
+tion as
+
+Gn = n log σY −nP
+
+2 log e + 1
+
+2 log e
+
+n
+�
+
+i=1
+
+�
+(1 −σ2
+Y )Z2
+i + 2
+√
+
+PσY Zi
+�
+(201)
+
+and
+
+Hn = n log σY + n P
+
+2σ2
+Y
+log e +
+1
+2σ2
+Y
+log e
+
+n
+�
+
+i=1
+
+�
+(1 −σ2
+Y )Z2
+i + 2
+√
+
+PZi
+�
+,
+(202)
+
+respectively. A judicious choice is
+
+σ2
+Y = 1 + P
+(203)
+
+since it maximizes D(PY n|Xn=x0||PY n) = E [Hn], and PY n coincides with the capacity-achieving
+
+output distribution for the AWGN channel. With this choice of σ2
+Y , (201) and (202) become
+
+Gn = n
+
+2 log(1 + P) −P
+
+2
+
+n
+�
+
+i=1
+
+�
+
+1 + Z2
+i −2
+
+�
+
+1 + 1
+
+P Zi
+
+�
+
+log e
+(204)
+
+and
+
+Hn = n
+
+2 log(1 + P) + 1
+
+2
+P
+(1 + P)
+
+n
+�
+
+i=1
+
+�
+1 −Z2
+i +
+2
+√
+
+P
+Zi
+
+�
+log e .
+(205)
+
+Finally, using the Neyman-Pearson lemma (Appendix B), we obtain the following result.
+
+Theorem 40: For the additive white Gaussian noise channel and all x ∈Fn,
+
+βn
+α = βn
+α(x, N(0, σ2
+Y In)) = P[Gn ≥γ] ,
+(206)
+
+where γ satisfies
+
+P[Hn ≥γ] = α.
+(207)
+
+Applying Theorems 28, 40 and Lemma 39 we obtain the following converse bound.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+41
+
+Theorem 41: For the AWGN channel and for any n and ϵ (average probability of error) we
+
+have
+
+M ∗
+m(n −1, ϵ, P) ≤M ∗
+e (n, ϵ, P) ≤
+1
+P[Gn ≥γn] ,
+(208)
+
+where γn satisfies
+
+P[Hn ≥γn] = 1 −ϵ ,
+(209)
+
+and Gn and Hn are defined in (204) and (205).
+
+The distributions of Gn and Hn are non-central χ2. However, the value of P[Gn ≥γ] decreases
+
+exponentially, and for large n, traditional series expansions of the non-central χ2 distribution do
+
+not work very well; a number of other techniques must be used to evaluate these probabilities,
+
+including Chernoff bounding as well as (106) and (103).
+
+3) Evaluation of κn
+τ : Although we are free to chose any PY n, it is convenient to use (198).
+
+Theorem 42: For the chosen PY n, Fn and for any τ ∈[0, 1] and n ≥1, we have
+
+κn
+τ (Fn, PY n) = P0
+
+�p1(r)
+
+p0(r) ≥γ
+�
+,
+(210)
+
+where γ satisfies
+
+P1
+
+�p1(r)
+
+p0(r) ≥γ
+�
+= τ
+(211)
+
+with p0 and p1 being probability density functions (PDFs) of P0 and P1, defined as
+
+p0(r) =
+rn/2−1e−r/(2+2P)
+
+(2 + 2P)n/2Γ(n/2) ,
+(212)
+
+p1(r) = 1
+
+2e−(r+nP)/2 �r
+
+nP
+
+�n/4−1/2
+In/2−1(
+√
+
+nPr) ,
+(213)
+
+where Ia(y) is a modified Bessel function of a first kind:
+
+Ia(y) = (y/2)a
+∞
+�
+
+j=0
+
+(y2/4)j
+
+j!Γ(a + j + 1) .
+(214)
+
+The proof is given in Appendix D.
+
+A straightforward application of a (local) central limit theorem yields the following result.
+
+Lemma 43: Under the conditions of Theorem 42,
+
+lim
+n→∞κn
+τ = κ∞
+τ = 1 −2Q(r∗
+τ)
+(215)
+
+October 14, 2010
+DRAFT
+
+
+42
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+where
+
+r∗
+τ =
+√
+
+1 + 2P
+1 + P
+Q−1
+�1 −τ
+
+2
+
+�
+.
+(216)
+
+Experimentally we have observed that the convergence in (215) is very fast. For example, for
+
+P = 1, n = 10 and τ ∈[10−6, 10−1], we find that
+
+|κn
+τ −κ∞
+τ | ≤5 · 10−3κn(τ) .
+(217)
+
+Summarizing, we have particularized Theorems 25 and 31 to the AWGN channel to show
+
+κn
+τ
+βn
+1−ϵ+τ
+≤M ∗
+m(n, ϵ, P) ≤
+1
+βn+1
+1−ϵ
+(218)
+
+where βn
+α and κn
+τ determined by Theorems 40 and 42.
+
+4) Numerical Evaluation: In this section our goal is to compare various achievability bounds.
+
+To emphasize the quality of the bounds we also compare them against the converse, Theorem 41.
+
+As usual, we plot the converse bounds for the average probability of error formalism and
+
+achievability bounds for the maximal probability of error formalism. The power constraint is the
+
+maximal one, i.e. we are plotting bounds on M ∗
+m(n, ϵ).
+
+The results are found on Figs. 6 and 7. Let us first explain how each bound was computed:
+
+1) The converse bound is Theorem 41. Note that in [3] Shannon gives another converse
+
+bound (38). However, in this case both bounds numerically coincide almost exactly and
+
+for this reason only the bound in Theorem 41 is plotted.
+
+2) Feinstein’s bound is Theorem 24 with
+
+F =
+�
+xn : ||xn||2 ≤nP
+�
+
+(219)
+
+and PXn = N(0, PIn).
+
+3) Gallager’s bound is Theorem 14, where we optimize the choice of δ for each R, and then
+
+select the largest R that still keeps the bound (44) below the required ϵ.
+
+4) The κβ bound is an application of Theorem 25 with βα and κτ given by Theorems 40
+
+and 42. As discussed earlier, the convergence in (215) is very fast and κn
+τ affects rate only
+
+as log κn
+τ
+n
+; thus we can safely replace the κn
+τ with κ∞
+τ . In this way, for each n we need to
+
+compute only βn
+1−ϵ.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+43
+
+5) Shannon’s bound12: The bound in (41) is on average probability of error. For the BSC and
+
+BEC we transformed from average to maximal probability of error using the random linear
+
+code method. Unfortunately, for the AWGN channel we could not find anything equivalent;
+
+instead we need to recourse to traditional “purging”. Namely, if we have an (M, τϵ)-code
+
+for average probability then there must exist a (τM, ϵ)-subcode for maximal probability.
+
+Consequently, if MS(n, ϵ) is the maximal cardinality of the codebook guaranteed by the
+
+Shannon bound, then instead we plot
+
+M max
+S
+(n, ϵ) = max
+τ∈[0,1)(1 −τ)MS(n, τϵ) .
+(220)
+
+Shannon’s achievability bound is the clear winner on both Figs. 6 and 7. It comes very close
+
+to the converse; for example, on Fig. 6 in terms of log2 M the difference between the Shannon
+
+bound and the converse is less than 6 bits uniformly across the range of blocklengths depicted
+
+on the graph. This illustrates that random codes are not only optimal asymptotically, but also
+
+almost optimal even for rather small blocklengths.
+
+The drawback of the Shannon bound is that it is harder to compute and analyze than the κβ
+
+bound and requires a “purging” procedure to guarantee a small maximal probability of error.
+
+Section IV-B invokes the κβ bound to analyze the asymptotic expansion of log M ∗
+m(n, ϵ). In
+
+Figs. 6 and 7 we can see that the κβ bound is also quite competitive for finite n.
+
+Comparing the κβ bound and the classical bounds of Feinstein and Gallager, we see that, as
+
+expected, the κβ bound is uniformly better than Feinstein’s bound. In the setup of Fig. 6 the κβ
+
+bound is a significant improvement over Gallager’s bound, coming very close to the Shannon
+
+bound as well as the converse. In Fig. 7 both the κβ and Gallager bounds are again very close
+
+to the Shannon bound but this time Gallager’s bound is better for small n. There are two reasons
+
+for this. First, recall that we have analyzed a suboptimal decoder based on hypothesis testing,
+
+whereas Gallager used the maximum likelihood decoder. It seems that for small n it is important
+
+to use optimal decoding. Moreover, Gallager’s analysis is targeted at very small ϵ. Indeed, as
+
+we go from 10−3 to 10−6, the tightness of Gallager’s bound improves significantly. In general
+
+we observe that Gallager’s bound improves as the channel becomes better and as ϵ gets smaller.
+
+On the other hand, the κβ bound is much more uniform over both SNR and ϵ. In Section IV,
+
+12We use expression (42) and the representation of qn(φ) as a noncentral t-distribution given by [3, (17)]. Note that to improve
+
+numerical stability of the integration in (42) it is convenient to multiply the integrand by (sin θ(M))−(n−2).
+
+October 14, 2010
+DRAFT
+
+
+44
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+the κβ bound, in contrast to Gallager’s bound, yields the correct √n term in the asymptotic
+
+expansion of log M ∗
+m(n, ϵ).
+
+Comparing the RCU bound and the DT bound (and its relative, the κβ bound), the DT bound
+
+is very handy theoretically and does not lose much non-asymptotically compared to the RCU
+
+bound. In fact, for the BEC the DT bound is tighter than the RCU bound. Also, the DT bound
+
+(in the form of Theorems 22 and 25) and the κβ bound are directly applicable to the maximal
+
+probability of error, whereas the RCU bound requires further manipulation (e.g. Appendix A).
+
+IV. NORMAL APPROXIMATION
+
+We turn to the asymptotic analysis of the maximum achievable rate for a given blocklength.
+
+In this section, our goal is to show a normal-approximation refinement of the coding theorem.
+
+To that end, we introduce the following definition.
+
+Definition 1: The channel dispersion V (measured in squared information units per channel
+
+use) of a channel with capacity C is equal to
+
+V
+=
+lim
+ϵ→0 lim sup
+n→∞
+1
+n
+
+�nC −log M ∗(n, ϵ)
+
+Q−1(ϵ)
+
+�2
+
+(221)
+
+=
+lim
+ϵ→0 lim sup
+n→∞
+1
+n
+(nC −log M ∗(n, ϵ))2
+
+2 ln 1
+
+ϵ
+.
+(222)
+
+In fact, we show that for both discrete memoryless channels and Gaussian channels,
+
+log M ∗(n, ϵ) = n C −
+√
+
+nV Q−1(ϵ) + O(log n) .
+(223)
+
+The asymptotic behavior in (223) is particularly useful in conjunction with the non-asymptotic
+
+upper and lower bounds developed in Section III, as (223) turns out to be an accurate and succinct
+
+approximation to the fundamental finite blocklength limit for even rather short blocklengths and
+
+rates well below capacity. Thus, an excellent approximation to the rate penalty incurred for
+
+operating at blocklength n and error probability ϵ is
+
+log M ∗(n, ϵ)
+
+n
+≈C −A(n, ϵ)
+(224)
+
+where A(n, ϵ) is the A required for the probability of error of the binary equiprobable hypothesis
+
+test
+
+H0 :
+Zi = A + Ni
+i = 1, . . . n
+(225)
+
+H1 :
+Zi = −A + Ni
+i = 1, . . . n
+(226)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+45
+
+to be ϵ if {Ni} are independent and Gaussian with variances V . This implies that if the target
+
+is to transmit at a given fraction of capacity 0 < η < 1 and at a given error probability ϵ, the
+
+required blocklength scales linearly with the channel dispersion:
+
+n∗(η, ϵ) ≈V
+
+C2
+
+�Q−1(ϵ)
+
+1 −η
+
+�2
+.
+(227)
+
+An important tool in this section is the following non-asymptotic result.
+
+Theorem 44 (Berry-Esseen): (e.g. Theorem 2, Chapter XVI.5 in [40]) Let Xk, k = 1, . . . , n
+
+be independent with
+
+µk
+=
+E [Xk] ,
+(228)
+
+σ2
+k
+=
+Var[Xk] ,
+(229)
+
+tk
+=
+E [|Xk −µk|3] ,
+(230)
+
+σ2
+=
+
+n
+�
+
+k=1
+σ2
+k ,
+(231)
+
+T
+=
+
+n
+�
+
+k=1
+tk .
+(232)
+
+Then for any 13 −∞< λ < ∞
+�����P
+
+�n
+�
+
+k=1
+(Xk −µk) ≥λσ
+
+�
+
+−Q(λ)
+
+�����≤6T
+
+σ3 .
+(233)
+
+A. DMC
+
+The DMC has finite input alphabet A, finite output alphabet B, and conditional probabilities
+
+PY n|Xn(yn|xn) =
+
+n
+�
+
+i=1
+W(yi|xi) ,
+(234)
+
+where W(·|x) is a conditional probability mass function on B for all x ∈A, which is abbreviated
+
+as Wx when notationally convenient. We denote the simplex of probability distributions on A,
+
+by P. It is useful to partition P into n-types:
+
+Pn = {P ∈P : nP(x) ∈Z+ ∀x ∈A} .
+(235)
+
+13Note that for i.i.d. Xk it is known [41] that the factor of 6 in (233) can be replaced by 0.7975. In this paper, the exact
+
+value of the constant does not affect the results and so we take the conservative value of 6 even in the i.i.d. case.
+
+October 14, 2010
+DRAFT
+
+
+46
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+We denote by M ∗(n, ϵ) (resp. M ∗
+avg(n, ϵ)) the cardinality of the largest codebook with maximal
+
+(resp. average) probability of error below ϵ.
+
+We use the following notation and terminology:
+
+• divergence variance
+
+V (P||Q) =
+�
+
+x∈A
+P(x)
+�
+log P(x)
+
+Q(x)
+
+�2
+−D(P||Q)2 .
+(236)
+
+• conditional divergence variance
+
+V (W||Q|P) =
+�
+
+x∈A
+P(x)V (Wx||Q) .
+(237)
+
+• output distribution PW as PW(y) = �
+
+x∈A P(x)W(y|x) .
+
+• mutual information
+
+I(P, W) = E [i(X; Y )] =
+�
+
+x∈A
+
+�
+
+y∈B
+P(x)W(y|x) log W(y|x)
+
+PW(y) .
+(238)
+
+• unconditional information variance
+
+U(P, W)
+=
+Var(i(X; Y ))
+(239)
+
+=
+�
+
+x∈A
+
+�
+
+y∈B
+P(x)W(y|x) log2 W(y|x)
+
+PW(y) −[I(P, W)]2
+(240)
+
+=
+V (P × W||P × PW)
+(241)
+
+• conditional information variance
+
+V (P, W)
+=
+E [Var(i(X; Y ) | X)]
+(242)
+
+=
+�
+
+x∈A
+P(x)
+
+��
+
+y∈B
+W(y|x) log2 W(y|x)
+
+PW(y) −[D(Wx||PW)]2
+�
+
+(243)
+
+=
+V (W||PW|P)
+(244)
+
+• third absolute moment of the information density
+
+T(P, W) =
+�
+
+x∈A
+
+�
+
+y∈B
+P(x)W(y|x)
+����log W(y|x)
+
+PW(y) −D(Wx||PW)
+����
+
+3
+.
+(245)
+
+Note that V (W||Q|P) is defined only provided that Wx ≪Q for P-almost all x, and the
+
+divergence variance is defined only if P ≪Q. Continuity of U(P, W), V (P, W) and T(P, W)
+
+is established by Lemma 62 in Appendix E.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+47
+
+The compact subset of capacity-achieving distributions Π is
+
+Π
+△= {P ∈P : I(P, W) = C} .
+(246)
+
+where
+
+C = max
+P∈P I(P, W).
+(247)
+
+1) Achievability Bound:
+
+Theorem 45: For any P ∈P, we have
+
+log M ∗
+avg(n, ϵ)
+≥
+nI(P, W) −
+�
+
+n U(P, W) Q−1(ϵ) + O(1) ,
+(248)
+
+log M ∗(n, ϵ)
+≥
+nI(P, W) −
+�
+
+n U(P, W) Q−1(ϵ) −1
+
+2 log n + O(1) ,
+(249)
+
+if U(P, W) > 0 and
+
+log M ∗(n, ϵ) ≥nI(P, W) + log ϵ ,
+(250)
+
+if U(P, W) = 0. Finally, if V (Wx||PW) > 0 whenever P(x) > 0 then
+
+log M ∗(n, ϵ) ≥nI(P, W) −
+�
+
+n U(P, W) Q−1(ϵ) + O(1) .
+(251)
+
+Proof: Select P ∈P. Let A = An, and choose the product measure P n as the distribution
+
+of Xn. Passing this distribution through W n induces a joint probability distribution on (Xn, Y n),
+
+and the information density is the sum of independent identically distributed Zk:
+
+i(Xn; Y n) =
+
+n
+�
+
+k=1
+log W(Yk|Xk)
+
+PW(Yk) =
+
+n
+�
+
+k=1
+Zk .
+(252)
+
+The random variable Zk has the distribution of i(X; Y ) when (X, Y ) is distributed according to
+
+P ×W. Accordingly, it has mean I(P, W) and variance U(P, W), and its third absolute moment
+
+is bounded according to the following auxiliary result whose proof is in Appendix F.
+
+Lemma 46:
+
+E
+�
+|i(X; Y ) −I(X; Y )|3�
+≤
+��
+|A|1/3 + |B|1/3�
+3e−1 log e + log min{|A|, |B|}
+�3 .
+(253)
+
+Suppose that U(P, W) = 0, and therefore i(Xn; Y n) = nI(P, W). Taking log β = nI(P, W)−
+
+δ for an arbitrary δ > 0 in Theorem 1 we get (250).
+
+Now, assume that U(P, W) > 0 and denote
+
+B
+△=
+6κ
+U(P, W)3/2 ,
+(254)
+
+October 14, 2010
+DRAFT
+
+
+48
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+where κ is the right side of (253).
+
+To use the DT bound (67) we need to prove that for some γ the following inequality holds:
+
+ϵ
+≥
+E
+�
+exp
+�
+−[i(Xn; Y n) −log γ]+��
+
+(255)
+
+=
+P[i(Xn; Y n) ≤log γ]
+(256)
+
++γE
+�
+exp {−i(Xn; Y n)} 1{i(Xn;Y n)>log γ}
+�
+
+(257)
+
+Denote for arbitrary τ
+
+log γ = nI(P, W) −τ
+�
+
+nU(P, W) .
+(258)
+
+According to Theorem 44, we have
+
+|P [i(Xn; Y n) ≤log γ] −Q(τ)| ≤B
+√n .
+(259)
+
+For sufficiently large n, let
+
+τ = Q−1
+�
+ϵ −
+�2 log 2
+√
+
+2π + 5B
+�1
+√n
+
+�
+.
+(260)
+
+Then, from (259) we obtain
+
+P [i(Xn; Y n) ≤log γ] ≤ϵ −2
+�log 2
+√
+
+2π + 2B
+�1
+√n .
+(261)
+
+We now bound the second term (257) by the following technical result proved in Appendix G.
+
+Lemma 47: Let Z1, Z2, . . . , Zn be independent random variables, σ2 = �n
+j=1 Var Zj be non-
+
+zero and T = �n
+j=1 E [|Zj −E Zj|3] < ∞; then for any A
+
+E
+
+�
+
+exp
+
+�
+
+−
+
+n
+�
+
+j=1
+Zj
+
+�
+
+1{Pn
+j=1 Zj>A}
+
+�
+
+≤2
+�log 2
+√
+
+2π + 12T
+
+σ2
+
+�1
+
+σ exp{−A} .
+(262)
+
+Therefore, we have
+
+γ E
+�
+exp {−i(Xn; Y n)} 1{i(Xn;Y n)>log γ}
+�
+≤2
+�log 2
+√
+
+2π + 2B
+�1
+√n .
+(263)
+
+Summing (261) and (263) we prove inequality (255). Hence, by Theorem 17 we get
+
+log M ∗(n, ϵ)
+≥
+log γ
+(264)
+
+=
+nI −τ
+√
+
+nU
+(265)
+
+=
+nI −
+�
+
+nU(P, W)Q−1(ϵ) + O(1) ,
+(266)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+49
+
+because according to (260) and the differentiability of Q−1 we have
+
+τ = Q−1(ϵ) + O
+�1
+√n
+
+�
+.
+(267)
+
+Note that (248) implies (249) after applying
+
+M ∗(n, ϵ) ≥(1 −τn) M ∗
+avg(n, ϵτn)
+(268)
+
+with τn = 1 −
+1
+√n.
+
+Finally, the proof of (251) repeats the proof of (248) step-by-step with the only change that
+
+Theorem 21 is used instead of Theorem 17 and in (254) we replace U(P, W) by minx V (Wx||PW).
+
+Note that by using the Feinstein bound (5) we could only prove (249), not the stronger (248)
+
+or (251). This suboptimality in the log n term is an analytical expression of the fact that we
+
+have already observed in Section III: namely, that the Feinstein bound is not tight enough for
+
+the refined analysis of log M ∗(n, ϵ).
+
+As another remark, we recall that by using the DT bound, Theorem 17, we proved that with
+
+input distribution P we can select exp{nI(P, W) −
+�
+
+nU(P, W)Q−1(ϵ)} messages which are
+
+distinguishable with probability of error ϵ. It is not hard to see that by using the κβ bound,
+
+Theorem 25, we could select 14 exp{nI(P, W) −
+�
+
+nV (P, W)Q−1(ϵ)}, which is the same for
+
+a capacity achieving P (see Lemma 62) and is larger otherwise. While in the unconstrained
+
+case we used the DT bound, in the cost constrained cases we resort to the κβ bound (as in the
+
+AWGN case treated in Section IV-B).
+
+2) Converse Theorem for DMC: We need to define a few new quantities in order to state the
+
+converse counterpart to Theorem 45.
+
+• Define maximal and minimal conditional variances (they exist since V (P, W) is continuous)
+
+as
+
+Vmax = max
+P∈Π V (P, W) = max
+P∈Π U(P, W) ,
+(269)
+
+and
+
+Vmin = min
+P∈Π V (P, W) = min
+P∈Π U(P, W) .
+(270)
+
+14Theorem 25 is applied with QY = (PW)n and F = T n
+P , a P-type in the input space An. The analysis of β is the same
+
+as in the proof of Theorem 48, Section IV-A2; for κ it is sufficient to use the lower bound (121).
+
+October 14, 2010
+DRAFT
+
+
+50
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+• Define the (unique) capacity achieving output distribution P ∗
+Y by P ∗
+Y = P ∗W, where P ∗is
+
+any capacity achieving input distribution.
+
+• W is an exotic DMC if Vmax = 0 and there exists an input letter x0 such that: a) for any
+
+capacity achieving P: P(x0) = 0, b) D(Wx0||P ∗
+Y ) = C, and c) V (Wx0||P ∗
+Y ) > 0. (See
+
+Appendix H for an example of an exotic DMC.)
+
+• For any P0 ∈Pn denote a type of elements xn ∈An by
+
+T n
+P0
+△= {xn : ∀a ∈A :
+
+n
+�
+
+i=1
+1{xi=a} = P0(a)} .
+(271)
+
+• For any n and P0 ∈Pn denote by M ∗
+P0(n, ϵ) the maximal cardinality of the codebook with
+
+codewords in T n
+P0 and maximal probability of error below ϵ.
+
+Theorem 48: Fix a DMC W.
+
+• If 0 < ϵ ≤1
+
+2, then there exists a constant F > 0 such that for all P0 ∈Pn and all sufficiently
+
+large n
+
+log M ∗
+P0(n, ϵ) ≤n C −
+�
+
+nVminQ−1(ϵ) + 1
+
+2 log n + F .
+(272)
+
+• If 1
+
+2 < ϵ < 1 and the DMC is not exotic, then there exists a constant F > 0 such that for
+
+all P0 ∈Pn and all sufficiently large n
+
+log M ∗
+P0(n, ϵ) ≤n C −
+�
+
+nVmaxQ−1(ϵ) + 1
+
+2 log n + F .
+(273)
+
+• If 1
+
+2 < ϵ < 1 and the DMC is exotic, then there exists a constant G > 0 such that for all
+
+P0 ∈Pn and all sufficiently large n
+
+log M ∗
+P0(n, ϵ) ≤n C + G n1/3 .
+(274)
+
+Proof: See Appendix I
+
+3) DMC dispersion: The following result is a refinement of [31].
+
+Theorem 49: For a DMC and 0 < ϵ ≤1/2 we have
+
+log M ∗(n, ϵ) = nC −
+�
+
+nVminQ−1(ϵ) + O(log n) ,
+(275)
+
+where C is the capacity and Vmin is the minimal variance of the information density over all
+
+capacity achieving distributions (cf. (270)). In addition, if there exists a capacity achieving input
+
+distribution P ∗such that V (Wx||P ∗W) > 0 whenever P ∗(x) > 0 then
+
+log M ∗(n, ϵ)
+≥
+nC −
+�
+
+nVminQ−1(ϵ) + O(1) .
+(276)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+51
+
+Proof: Theorem 45 yields, by taking P ∈P to be a distribution that achieves capacity and
+
+minimizes U(P, W) (or V (P, W) since they coincide on Π by Lemma 62),
+
+log M ∗(n, ϵ) ≥nC −
+�
+
+nVminQ−1(ϵ) + O(log n) .
+(277)
+
+For the lower bound, take n ≥N0 for N0 from Theorem 48. Then any (n, M, ϵ) is composed
+
+of subcodes over types T n
+P0 for P0 ∈Pn. If we remove all codewords except those in T n
+P0 and
+
+leave the decoding regions untouched, then we obtain an (n, M ′
+P0, ϵ) code over T n
+P0. But then
+
+Theorem 48 states that
+
+log M ′
+P0 ≤log M ∗
+P0(n, ϵ) ≤nC −
+�
+
+nVminQ−1(ϵ) + 1
+
+2 log n + F .
+(278)
+
+Since M is a sum of M ′
+P0 over all P0 ∈Pn and the cardinality of Pn is no more than (n+1)|A|−1,
+
+we conclude
+
+log M ∗(n, ϵ) ≤nC −
+�
+
+nVminQ−1(ϵ) +
+�
+|A| −1
+
+2
+
+�
+log n + F ′ .
+(279)
+
+This completes the proof of (275) and (276) follows from (251).
+
+It is useful to introduce the following definition.
+
+Definition 2: For a channel with ϵ-capacity Cϵ, the ϵ-dispersion is defined for ϵ ∈(0, 1)−{ 1
+
+2}
+
+as
+
+Vϵ = lim sup
+n→∞
+1
+n
+
+�nCϵ −log M ∗(n, ϵ)
+
+Q−1(ϵ)
+
+�2
+.
+(280)
+
+Note that for ϵ < 1
+
+2, approximating 1
+
+n log M ∗(n, ϵ) by Cϵ is optimistic and smaller dispersion is
+
+preferable, while for ϵ >
+1
+2, it is pessimistic and larger dispersion is more favorable. Since
+
+Q−1(1
+
+2) = 0, it is immaterial how to define V 1
+
+2 as far the normal approximation (223) is
+
+concerned.
+
+Invoking the strong converse, we can show that the ϵ-dispersion of a DMC is
+
+Vϵ =
+
+
+
+
+
+
+
+
+Vmin ,
+ϵ < 1/2 ,
+
+Vmax ,
+ϵ > 1/2 .
+(281)
+
+Because of the importance of channel dispersion, we note the following upper-bound (see
+
+also [16, Exercise 5.23]).
+
+Theorem 50: For the DMC with min{|A|, |B|} > 2 we have
+
+V ≤2 log2 min{|A|, |B|} −C2 .
+(282)
+
+October 14, 2010
+DRAFT
+
+
+52
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+For the DMC with min{|A|, |B|} = 2 we have
+
+V ≤1.2 log2 e −C2 .
+(283)
+
+Proof: This is a simple consequence of Lemma 62 in Appendix E.
+
+Since the typical blocklength needed to achieve capacity is governed by V/C2, it is natural to
+
+ask whether for very small capacities the upper-bound in (282) can be improved to prevent the
+
+divergence of
+V
+C2. Such a bound is not possible over all W with fixed alphabet sizes, since such
+
+a collection of DMCs always includes all of the BSCs for which we know that
+V
+C2 →∞as
+
+C →0.
+
+We briefly consider the normal approximation in the case of average error probability. Recall
+
+that M ∗
+avg(n, ϵ) stands for the maximal cardinality of a codebook with average probability of
+
+error below ϵ. Then, dropping all codewords whose probabilities of error are above τϵ, τ > 1
+
+(see the comment at the beginning of Section III-D), we obtain
+
+M ∗(n, ϵ) ≤M ∗
+avg(n, ϵ) ≤
+τ
+τ −1M ∗(n, τϵ) .
+(284)
+
+Carefully following the proof of the converse we can conclude that the O(log n) term in the
+
+upper bound on log M ∗does not have any singularities in a neighborhood of any ϵ ∈(0, 1). So
+
+we can claim that, for τ sufficiently close to 1, the expansion
+
+log M ∗(n, τϵ) = nC −
+�
+
+nVminQ−1(τϵ) + O(log n)
+(285)
+
+holds uniformly in τ. Now, setting τn = 1 +
+1
+√n, we obtain
+
+log M ∗
+avg(n, ϵ) ≤nC −
+�
+
+nVminQ−1
+�
+ϵ +
+ϵ
+√n
+
+�
++ O(log n) .
+(286)
+
+Expanding Q−1 by Taylor’s formula and using the lower bound on M ∗
+avg in (284) we obtain the
+
+following result.
+
+Corollary 51: For a DMC, if 0 < ϵ ≤1/2, we have
+
+log M ∗
+avg(n, ϵ)
+=
+nC −
+�
+
+nVminQ−1(ϵ) + O(log n) ,
+(287)
+
+log M ∗
+avg(n, ϵ)
+≥
+nC −
+�
+
+nVminQ−1(ϵ) + O(1) .
+(288)
+
+We note the following differences with Strassen’s treatment of the normal approximation for
+
+DMCs in [31]. First, the DT bound allows us to prove that the log n term cannot be negative15.
+
+15This estimate of the log n term cannot be improved without additional assumptions, because the BEC has zero log n term;
+
+see Theorem 53.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+53
+
+Second, we streamline the proof in the case ϵ < 1/2 by using Lemma 64 to obtain the expansion.
+
+In contrast, an expansion up to the order o(√n) can be obtained with considerably less effort by
+
+using Lemma 63. Third, [31] argues that the case ϵ > 1/2 can be treated similarly, whereas we
+
+demonstrate that this is only true for non-exotic channels as a result of the difference between
+
+using Lemma 63 and Lemma 64. (See the counter-example after the proof of Lemma 63 in
+
+Appendix J and also the discussion of exotic channels in Appendix H.) Fourth, we prove the
+
+expansion for log M ∗
+avg (i.e., for the average probability of error formalism).
+
+4) Application to the BSC and the BEC: For the BSC and BEC we can improve upon the
+
+O(log n) term given by Theorem 49.
+
+Theorem 52: For the BSC with crossover probability δ, such that δ ̸∈{0, 1
+
+2, 1}, we have
+
+log2 M ∗(n, ϵ) = n(1 −h(δ)) −
+�
+
+nδ(1 −δ) log2
+1 −δ
+
+δ
+Q−1(ϵ) + 1
+
+2 log2 n + O(1) ,
+(289)
+
+regardless of whether ϵ is maximal or average probability of error.
+
+Proof: Appendix K.
+
+Interestingly, Gallager’s bound does not yield a correct √n term in (54); the Feinstein, DT
+
+and RCU bounds all yield the correct √n term for the BSC; Feinstein’s bound has worse log n
+
+term than the DT bound. Finally, only the RCU bound (162) achieves the optimal log n term.
+
+Theorem 53: For the BEC with erasure probability δ, we have
+
+log2 M ∗(n, ϵ) = n(1 −δ) −
+�
+
+nδ(1 −δ)Q−1(ϵ) + O(1) ,
+(290)
+
+regardless of whether ϵ is maximal or average probability of error.
+
+Proof: Appendix K.
+
+For the BEC, Gallager’s bound does not achieve the correct lower-order terms in (54); Feinstein’s
+
+bound yields the correct √n term but a suboptimal log n term; both DT bounds (Theorems 17
+
+and 22) and the RCU bound achieve the optimal log n term.
+
+B. The AWGN Channel
+
+Theorem 54: For the AWGN channel with SNR P, 0 < ϵ < 1 and for equal-power, maximal-
+
+power and average-power constraints,
+
+log M ∗(n, ϵ, P) = nC −
+√
+
+nV Q−1(ϵ) + O(log n)
+(291)
+
+October 14, 2010
+DRAFT
+
+
+54
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+where
+
+C
+=
+1
+2 log(1 + P) ,
+(292)
+
+V
+=
+P
+
+2
+P + 2
+(P + 1)2 log2 e .
+(293)
+
+More precisely, for equal-power and maximal-power constraints, the O(log n) term in (291) can
+
+be bounded by
+
+O(1) ≤log M ∗
+e,m(n, ϵ, P) −
+�
+nC −
+√
+
+nV Q−1(ϵ)
+�
+≤1
+
+2 log n + O(1) ,
+(294)
+
+whereas for average-power constraint we have
+
+O(1) ≤log M ∗
+a(n, ϵ, P) −
+�
+nC −
+√
+
+nV Q−1(ϵ)
+�
+≤3
+
+2 log n + O(1) .
+(295)
+
+Proof: Appendix L.
+
+The approximation in Theorem 54 (up to o(√n)) is attributed in [7] to Shannon [3] for the
+
+case of equi-power codewords.16 However, in Theorem 54 the rate is changing with n, while
+
+expressions (9) and (73) in [3] are not directly applicable here because they are asymptotic
+
+equivalence relations for fixed rate. Similarly, an asymptotic expansion up to the o(√n) term is
+
+put forward in [47] based on a heuristic appeal to the central-limit theorem and fine quantization
+
+of the input/output alphabets.
+
+C. Normal Approximation vs. Finite Blocklength Bounds
+
+In Figs. 8, 9, 10 and 11 we compare the normal approximation (289) and (290) against the tight
+
+bounds, computed in Section III-H (BSC) and Section III-I (BEC), correspondingly. Similarly,
+
+Fig. 12 and Fig. 13 depict the normal approximation (291) for log M ∗
+m(n, ϵ) (maximal power
+
+constraint) along with the bounds (208) and (220) for the AWGN channel. In view of (294) and
+
+the empirical evidence, we have chosen the following as a normal approximation for the AWGN
+
+channel:
+
+log M ∗(n, ϵ) ≈nC −
+√
+
+nV Q−1(ϵ) + 1
+
+2 log n .
+(296)
+
+Although generally pessimistic, the normal approximation is excellent for blocklengths higher
+
+than 200 (BSC(0.11) and BEC(0.5) with ϵ = 10−3 and AWGN, SNR=20dB with ϵ = 10−6)
+
+16A different
+1
+√n term is claimed in [7] for the case of codebook-averaged power which is not compatible with Theorem 54.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+55
+
+TABLE I
+
+BOUNDS ON THE MINIMAL BLOCKLENGTH n NEEDED TO ACHIEVE R = 0.9C
+
+Channel
+Converse
+RCU
+DT or κβ
+Error-exponent
+Normal Approx.
+
+BEC(0.5), ϵ = 10−3
+n ≥899
+n ≤1021
+n ≤991
+n ≈1380
+n ≈955
+
+BSC(0.11), ϵ = 10−3
+n ≥2985
+n ≤3106
+n ≤3548
+n ≈4730
+n ≈3150
+
+AWGN, SNR = 0dB, ϵ = 10−3
+n ≥2550
+n ≤2814
+n ≤3400
+n ≈4120
+n ≈2750
+
+AWGN, SNR = 20dB, ϵ = 10−6
+n ≥147
+n ≤188
+n ≤296
+n ≈220
+n ≈190
+
+and 800 (AWGN, SNR=0dB, ϵ = 10−3 and BSC(0.11), ϵ = 10−6). The conclusion from these
+
+figures is that the normal approximation is quite accurate when transmitting at a large fraction
+
+(say > 0.8) of channel capacity. For example, in the Table I we show the numerical results
+
+for the blocklength required by the converse, guaranteed by the achievability and predicted by
+
+error-exponents and normal approximation17 for achieving rate R = 0.9C.
+
+An interesting figure of merit for the AWGN channel is the excess energy per bit, ∆Eb(n),
+
+over that predicted by channel capacity incurred as a function of blocklength for a given required
+
+bit rate and block error rate:
+
+∆Eb(n) = 10 log10
+P(n, R, ϵ)
+exp(2R) −1 ,
+(297)
+
+where, according to the normal approximation, P(n, R, ϵ) is the solution to
+
+C −
+
+�
+
+V
+
+n Q−1(ϵ) + 1
+
+2n log n = R ,
+(298)
+
+and C and V are as in Theorem 54.
+
+Figure 14 gives a representative computation of (297)–(298) along with the corresponding
+
+lower18 and upper bounds obtained from (208) and (220) respectively. We note a good precision
+
+of the simple approximation (297), e.g., for k = 100 bits the gap to the achievability bound is
+
+only 0.04 dB. A similar comparison (without the normal approximation, of course) for rate 2/3
+
+is presented in [48, Fig. 8].
+
+17For the BSC and the AWGN channel we use the approximation formula (289) which has an additional 1
+
+2 log n term. For
+
+the AWGN channel the DT bound is replaced by the κβ bound. The error-exponent approximation is N ≈−
+1
+E(R) log ϵ, where
+
+E(R) is known since the rate is above critical.
+
+18Another lower bound is given in [5, Fig. 3] which shows [3, (15)].
+
+October 14, 2010
+DRAFT
+
+
+56
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+D. Application: performance of practical codes
+
+How does the state-of-the-art compare against the finite blocklength fundamental limits?
+
+One such comparison is given in Fig. 12 where the lower curve depicts the performance of
+
+a certain family of multi-edge low-density parity-check (ME-LDPC) codes decoded via a low-
+
+complexity belief-propagation decoder [49]. We notice that in the absence of the non-asymptotic
+
+finite-blocklength curves, one has to compare the performance against the capacity alone. Such
+
+comparison leads to an incorrect conclusion that a given family of codes becomes closer to
+
+optimal with increasing blocklength. In reality we see that the relative gap to the finite blocklength
+
+fundamental limit is approximately constant. In other words, the fraction log MLDP C(n,ϵ,P)
+
+log M∗(n,ϵ,P)
+seems
+
+to be largely blocklength independent.
+
+This observation leads us to a natural way of comparing two different codes over a given
+
+channel. Over the AWGN channel the codes have traditionally been compared in terms of Eb/N0.
+
+Such comparison, although justified for a low-rate codes, unfairly penalizes higher rate codes.
+
+Instead, we define a normalized rate of a code with M codewords as (this can be extended to
+
+discrete channels parametrized by a scalar in a natural way)
+
+Rnorm(ϵ) =
+log M
+log M ∗(n, ϵ, γmin(ϵ)) ,
+(299)
+
+where γmin(ϵ) is the smallest SNR at which the code still admits decoding with probability
+
+of error below ϵ. The value log M ∗(n, ϵ, γmin(ϵ)) can be safely replaced by an approximate
+
+value (296) with virtually no loss of precision for blocklength as low as 100.
+
+The evolution of the coding schemes from 1980s (Voyager) to 2009 in terms of the normalized
+
+rate Rnorm(10−4) is presented on Fig. 15. ME-LDPC is the same family as in Fig. 12 [49] and
+
+the rest of the data is taken from [5]. A comparison of certain turbo codes to Feinstein’s bound
+
+and Shannon’s converse can be found on Fig. 6 and 7 of [48].
+
+E. Application: maximization of ARQ throughput
+
+A good analytical approximation to the maximal rate achievable with a given blocklength and
+
+error probability opens a variety of practical applications. In this subsection we consider a basic
+
+ARQ transmission scheme in which a packet is retransmitted until the receiver acknowledges
+
+successful decoding (which the receiver determines using a variety of known highly reliable
+
+hashing methods). Typically, the size k of the information packets is determined by the particular
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+57
+
+TABLE II
+
+OPTIMAL BLOCK ERROR RATE FOR PACKET SIZE k = 1000 BITS
+
+Channel
+Optimal ϵ∗(k)
+Optimal R/C
+Optimal throughput
+
+BEC(0.5)
+8.1 · 10−3
+0.95
+0.94
+
+BSC(0.11)
+16.7 · 10−3
+0.91
+0.90
+
+AWGN, SNR = 0dB
+15.5 · 10−3
+0.92
+0.90
+
+AWGN, SNR = 20dB
+6.2 · 10−3
+0.96
+0.95
+
+application, and both the blocklength n and the block error probability ϵ are degrees of freedom.
+
+A natural objective is to maximize the average throughput (or, equivalently, minimize the average
+
+delivery delay) given by
+
+T(k) = max
+n,ϵ
+k
+n(1 −ϵ) ,
+(300)
+
+assuming decoding errors are independent for different retransmissions. The maximization in
+
+(300) is over those (n, ϵ) such that
+
+log2 M ∗(n, ϵ) = k .
+(301)
+
+Note that the number of required retransmissions is geometrically distributed, with mean equal
+
+to
+k
+T(k). In view of the tightness of the approximation in (223), it is sensible to maximize
+
+˜T(k) = max
+n
+k
+n
+
+�
+1 −Q
+�nC −k
+√
+
+nV
+
+��
+,
+(302)
+
+where C and V are the channel capacity and channel dispersion, respectively. For the AWGN
+
+channel with SNR = 0 dB we show the results of the optimization in (302) in Fig. 16, where
+
+the optimal block error rate, ϵ∗(k) is shown, and Fig. 17, where the optimal coding rate
+k
+n∗(k)
+is shown. Table II shows the results of the optimization for the channel examples we have used
+
+throughout the paper. Of particular note is that for 1000 information bits, and a capacity-1/2
+
+BSC, the optimal block error rate is as high as 0.0167.
+
+The tight approximation to the optimal error probability as a function of k in Figure 16 is the
+
+function
+
+˜ϵ(k) =
+�kC
+
+V ln kC
+
+2πV
+
+�−1/2 �
+
+1 −
+1
+ln kC
+
+2πV
+
+�
+
+(303)
+
+obtained by retaining only the dominant terms in the asymptotic solution as k →∞.
+
+October 14, 2010
+DRAFT
+
+
+58
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+V. SUMMARY OF RESULTS
+
+The main new non-asymptotic results shown in this paper are the following.
+
+1) An exact expression (Theorem 15) for the error probability averaged over random codes
+
+which applies in full generality. In particular, it does not put any restrictions on the
+
+dependence of symbols within a codeword.
+
+2) An upper bound (the RCU bound, Theorem 16) on the achievable average error probability
+
+for randomly chosen codes of a given size, which involves no bounding beyond the simple
+
+union bound. Loosening of the bound leads to the Shannon and Gallager bounds. When
+
+applied to a random ensemble, Poltyrev’s BSC linear-code bound reduces to the RCU
+
+bound.
+
+3) A simpler easier-to-compute bound (the DT bound, Theorem 17), which unlike previous
+
+achievability bounds contains no parameters to be optimized beyond the input distribution.
+
+The DT bound is tighter than the Shannon and Feinstein bounds, and, unlike the Gallager
+
+bound, it can be used to obtain the √n term in the normal approximation. For the BEC,
+
+the DT bound is generally tighter than the RCU bound. For channels with memory, in
+
+general the DT bound is easier to work with than any other new bounds in this paper;
+
+see [50].
+
+4) A maximal error probability counterpart (Theorem 22) to the DT bound, obtained using
+
+the technique of sequential random coding.
+
+5) The κβ bound (Theorem 25) which is a maximal error probability achievability bound
+
+based on the Neyman-Pearson lemma that uses an auxiliary output distribution. The κβ
+
+bound is particularly useful in the setting of analog channels with cost constraints, and
+
+plays a key role in the normal approximation for the AWGN channel.
+
+6) An auxiliary result (Theorem 26) which leads to a number of converse results, the most
+
+general of which is Theorem 27 which includes as simple corollaries the Fano inequality,
+
+the Wolfowitz converse and the Verd´u-Han converse. Another corollary is Theorem 31
+
+which can be viewed as a distillation of the essentials of the sphere-packing converse.
+
+7) A tighter easy-to-compute converse bound (Theorem 38) for the BEC that holds even with
+
+noncausal feedback.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+59
+
+The tightness of the achievability bounds obtained by random coding is evidence that random-
+
+like codes (such as those arising in modern coding theory) not only achieve capacity but also
+
+do not sacrifice much performance for all but very short blocklengths. Numerical results with
+
+state-of-the-art codes show that about one half of the gap to capacity is due to the fundamental
+
+backoff due to finite blocklength; the other half of the gap is bridgeable with future advances in
+
+coding theory.
+
+We have further shown the normal approximation to the maximal rate in the blocklength
+
+regime up to a term of O(log n
+
+n ) for both general discrete memoryless channels and additive
+
+white Gaussian noise channels, and up to O( 1
+
+n) for both the BSC and the BEC. While for
+
+DMCs, the approach is a refinement of Strassen’s [31], the Gaussian channel requires a different
+
+approach. The tightness of the approximation has been illustrated by comparison to the fixed-
+
+length bounds in Section III. It motivates the use of the channel dispersion V (variance of
+
+the information density achieved by a capacity-achieving distribution), in conjunction with the
+
+channel capacity C, as a powerful analysis and design tool. In order to achieve a given fraction
+
+of capacity with a given error probability, the required blocklength is proportional to V/C2.
+
+The large deviations approach (reliability function) and the central-limit-theorem approach
+
+(dispersion) give a more refined analysis than that using only channel capacity. We note the
+
+following relationships and contrasts between both approaches:
+
+• For rates near capacity, the reliability function behaves parabolically as
+
+E(R) ≈(C −R)2
+
+2V
+(304)
+
+a fact that was known to Shannon as the unpublished, undated, unfinished manuscript [51]
+
+reproduced in Fig. 18 shows. Therefore, channel dispersion can be obtained by taking the
+
+second derivative of the reliability function at capacity. Since the reliability function is quite
+
+cumbersome to obtain for most channels, channel dispersion is far easier to obtain directly.
+
+• According to the reliability function approximation, the blocklength required to sustain rate
+
+R = ηC is inversely proportional to the reliability function evaluated at R, while according
+
+to the normal approximation it is proportional to
+
+V
+C2
+1
+(1 −η)2 .
+
+Unless η is very close to 1 (in which case the factors are similar because of (304)) the
+
+October 14, 2010
+DRAFT
+
+
+60
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+normal approximation is substantially more accurate. In fact, even for rates substantially
+
+below capacity, the normal approximation remains accurate.
+
+• Inherently, the large deviations approach does not capture the subexponential behavior (i.e.
+
+the “constant” factor in front of the exponential), which, for error probabilities and rates of
+
+practical interest, is more relevant than the inaccuracy of the approximation in (304).
+
+• The reliability function approach predicts that the blocklength required to sustain ϵ and a
+
+given desired rate scales with log 1
+
+ϵ, while the dispersion approach predicts that the scaling
+
+is (Q−1(ϵ))2, which is equivalent for small ϵ and rather more accurate otherwise.
+
+• Often, the regime of very low ϵ (the natural habitat of the reliability function), is not the
+
+desired one. Indeed, in many applications the error correcting code does not carry the whole
+
+burden of providing reliable communication; instead a protocol (such as ARQ) bootstraps
+
+a moderately low block error probability into very reliable communication (see Table II).
+
+• For very low ϵ neither approximation is accurate unless the blocklength is so high that the
+
+backoff from capacity is miniscule.
+
+APPENDIX A
+
+BOUNDS VIA LINEAR CODES
+
+The goal of this appendix is to illustrate how Theorems 16 and 17, which give an upper
+
+bound on average probability of error, can also be used to derive an upper bound on maximal
+
+probability of error. To that end, we first notice that in both proofs we relied only on pairwise
+
+independence between randomly chosen codewords. So, the average probability of error for any
+
+other ensemble of codebooks with this property and whose marginals are identical and equal
+
+to PX will still satisfy bounds of Theorems 16 and 17. In particular, for the BSC and the
+
+BEC we can generate an ensemble with equiprobable PX by using a linear code with entries
+
+in its generating matrix chosen equiprobably on {0, 1}. Then, Theorems 16 and 17 guarantee
+
+the existence of the codebook, whose probability of error under ML decoding is small. Note
+
+that this is only possible if M = 2k for some integer k. A question arises: for these structured
+
+codebooks are there randomized ML decoders whose maximal probability of error coincides
+
+with the average? This question is answered by the following result.
+
+Theorem 55: Suppose that A is a group and suppose that there is a collection of measurable
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+61
+
+mappings Tx : B �→B for each x ∈A such that
+
+PY |X=x′◦x = PY |X=x′ ◦(Tx)−1 ,
+∀x′ ∈A .
+(305)
+
+Then any code C that is a subgroup of A has a maximum likelihood decoder whose maximal
+
+probability of error coincides with the average probability of error.
+
+Note that condition (305) can be reformulated as
+
+E [g(Y ) | X = x′ ◦x] = E [g(Tx(Y )) | X = x′]
+(306)
+
+for all bounded measurable g : B �→B and all x′ ∈A.
+
+Proof: Define PX to be a measure induced by the codebook C:
+
+PX(E) = 1
+
+M |E ∩C| .
+(307)
+
+Note that in this case PY induced by this PX dominates all of PY |X=x for x ∈C:
+
+PY |X=x ≪PY ,
+∀x ∈C .
+(308)
+
+Thus, we can introduce densities
+
+fY |X(y|x)
+△= dPY |X=x
+
+dPY
+.
+(309)
+
+Observe that for any bounded measurable g we have
+
+E [g(Y )] = E [g(Tx(Y ))] ,
+∀x ∈C .
+(310)
+
+Indeed,
+
+E [g(Tx(Y ))]
+=
+�
+
+x′∈C
+
+1
+M E [g(Tx(Y ) | X = x′]
+(311)
+
+=
+�
+
+x′∈C
+
+1
+M E [g(Y ) | X = x′ ◦x]
+(312)
+
+=
+E [g(Y )] ,
+(313)
+
+where (312) follows from (306). Also for any x, x′ ∈C we have
+
+fY |X(y|x′) = fY |X(Tx(y)|x′ ◦x)
+PY -a.s. .
+(314)
+
+Indeed, denote
+
+E1 = {y : fY |X(y|x′) < fY |X(Tx(y)|x′ ◦x)}
+(315)
+
+October 14, 2010
+DRAFT
+
+
+62
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+and assume that PY (E1) = PY (T −1
+x E1) > 0. Then, on one hand
+
+PY |X[T −1
+x E1 | x′]
+=
+�
+
+B
+PY (dy)1{Tx(y)∈E1}fY |X(y|x′)
+(316)
+
+<
+�
+PY (dy)1{Tx(y)∈E1}fY |X(Tx(y)|x′ ◦x)
+(317)
+
+=
+�
+PY (dy)1{y∈E1}fY |X(y|x′ ◦x)
+(318)
+
+=
+PY |X[E1|x′ ◦x] ,
+(319)
+
+where (318) follows from (310). But (319) contradicts (305) and hence PY (E1) = 0 and (314)
+
+is proved.
+
+We proceed to define a decoder by the following rule: upon reception of y compute fY |X(y|x)
+
+for each x ∈C; choose equiprobably among all the codewords that achieve the maximal
+
+fY |X(y|x). Obviously, such decoder is maximum likelihood. We now analyze the conditional
+
+probability of error given that the true codeword is x. Define two collections of functions of y,
+
+parameterized by x ∈C:
+
+Ax(y) = min
+
+�
+
+1,
+�
+
+x′∈C
+1{fY |X(y|x′) > fY |X(y|x)}
+
+�
+
+(320)
+
+Nx(y) =
+�
+
+x′∈C
+1{fY |X(y|x′) = fY |X(y|x)} .
+(321)
+
+It is easy to see that
+
+ϵx
+△=
+P[error | X = x]
+(322)
+
+=
+E
+�
+Ax(Y ) + 1{Ax(Y ) = 0}Nx(Y ) −1
+
+Nx(Y )
+
+����X = x
+�
+.
+(323)
+
+If we denote the unit element of X by x0, then by (314) it is clear that
+
+Ax ◦Tx = Ax0
+(324)
+
+Nx ◦Tx = Nx0 .
+(325)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+63
+
+But then, by (323) we have
+
+ϵx
+=
+E
+�
+Ax(Y ) + 1{Ax(Y ) = 0}Nx(Y ) −1
+
+Nx(Y )
+
+����X = x0 ◦x
+�
+
+(326)
+
+=
+E
+�
+Ax(Tx(Y )) + 1{Ax(Tx(Y )) = 0}Nx(Tx(Y )) −1
+
+Nx(Tx(Y ))
+
+����X = x0
+
+�
+
+(327)
+
+=
+E
+�
+Ax0(Y ) + 1{Ax0(Y ) = 0}Nx0(Y ) −1
+
+Nx0(Y )
+
+����X = x0
+
+�
+
+(328)
+
+=
+ϵx0 ,
+(329)
+
+where (326) follows because x0 is a unit of A, (327) is by (306), and (328) is by (324) and (325).
+
+The construction of Tx required in Theorem 55 is feasible for a large class of channels. For
+
+example, for an L-ary phase-shift-keying (PSK) modulated complex AWGN channel with soft
+
+decisions, we can assume that the input alphabet is {ej 2πk
+
+L , k = 0, L −1}; then
+
+Tx(y) = yx
+(330)
+
+satisfies the requirements because PY |X(y|x′) depends only on |y −x′| and |yx−x′x| = |y −x′|.
+
+We give a general result for constructing Tx.
+
+Theorem 56: Suppose that B is a monoid, A ⊂B is a group (in particular A consists of only
+
+invertible elements of B) and the channel is
+
+Y = N ◦X
+(331)
+
+with N ∈B being independent of X ∈A. If each Tx(y) = y ◦x is measurable, then this family
+
+satisfies the conditions of Theorem 55.
+
+Proof: Indeed, for any E ⊂B we have
+
+T −1
+x E = E ◦x−1 .
+(332)
+
+Then, on the one hand
+
+PY |X=x′◦x[E] = PN[E ◦(x′ ◦x)−1] ,
+(333)
+
+but on the other hand,
+
+PY |X=x′[T −1
+x E]
+=
+PY |X=x′[E ◦x−1]
+(334)
+
+=
+PN[E ◦x−1 ◦x′−1] .
+(335)
+
+October 14, 2010
+DRAFT
+
+
+64
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+It is easy to see that if we take A = Z2 and A = An then the BSC (even if the noise
+
+has memory) satisfies the conditions of Theorem 56. For the BEC we take A = {−1, 1} and
+
+B = {−1, 0, 1}, and the usual multiplication of reals converts B to a monoid; taking the usual
+
+product – A = An and B = Bn – we see that the BEC (even with memory) also satisfies the
+
+conditions of Theorem 56. Similar generalizations are possible for any additive noise channel
+
+with erasures.
+
+APPENDIX B
+
+NEYMAN-PEARSON LEMMA
+
+Lemma 57: (E.g., see [42]). Consider a space W and probability measures P and Q. Then
+
+for any α ∈[0, 1] there exist γ > 0 and τ ∈[0, 1) such that
+
+βα(P, Q) = Q[Z∗
+α = 1] ,
+(336)
+
+and where19 the conditional probability PZ∗|W is defined via
+
+Z∗
+α(W) = 1
+�dP
+
+dQ > γ
+�
++ Zτ1
+�dP
+
+dQ = γ
+�
+,
+(337)
+
+where Zτ ∈{0, 1} equals 1 with probability τ independent of W. The constants γ and τ are
+
+uniquely determined by solving the equation
+
+P[Z∗
+α = 1] = α .
+(338)
+
+Moreover, any other test Z satisfying P[Z = 1] ≥α either differs from Z∗
+α only on the set
+�
+dP
+dQ = γ
+�
+or is strictly larger with respect to Q: Q[Z = 1] > βα(P, Q).
+
+APPENDIX C
+
+BINARY HYPOTHESIS TESTING: NORMAL APPROXIMATIONS
+
+The next pair of results help us determine the asymptotic behavior of the optimal binary
+
+hypothesis tests with independent observations.
+
+19In the case in which P is not absolutely continuous with respect to Q, we can define dP
+
+dQ to be equal to +∞on the singular
+
+set and hence to be automatically included in every optimal test.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+65
+
+Lemma 58: Let A be a measurable space with measures Qi and Pi, with Qi ≪Pi defined
+
+on it for i = 1, . . . , n. Define two measures on An: Q = �n
+i=1 Qi and P = �n
+i=1 Pi. Denote by
+
+βα the performance of the best randomized hypothesis test discriminating between Q and P:
+
+βα =
+inf
+PZ|Y n:Q[Z=1]≥α P[Z = 1] .
+(339)
+
+Define
+
+Dn = 1
+
+n
+
+n
+�
+
+i=1
+D(Qi||Pi) ,
+(340)
+
+Vn = 1
+
+n
+
+n
+�
+
+i=1
+V (Qi||Pi) = 1
+
+n
+
+n
+�
+
+i=1
+
+��
+log dQi
+
+dPi
+
+�2
+dQi −D(Qi||Pi)2 ,
+(341)
+
+Tn = 1
+
+n
+
+n
+�
+
+i=1
+
+�����log dQi
+
+dPi
+−D(Qi||Pi)
+����
+
+3
+dQi ,
+(342)
+
+Bn = 6 Tn
+
+V 3/2
+n
+.
+(343)
+
+Assume that all quantities are finite and Vn > 0. Then, for any ∆> 0
+
+log βα ≥−nDn −
+�
+
+nVnQ−1
+�
+α −Bn + ∆
+√n
+
+�
++ log ∆−1
+
+2 log n ,
+(344)
+
+log βα ≤−nDn −
+�
+
+nVnQ−1
+�
+α + Bn
+√n
+
+�
+.
+(345)
+
+Each bound holds provided that the argument of Q−1 lies in (0, 1).
+
+Proof of Lemma 58: We will simply apply the Berry-Esseen Theorem 44 twice. We start
+
+from the lower bound. Observe that a logarithm of the Radon-Nikodym derivative log dQ
+
+dP is a
+
+sum of independent random variables by construction:
+
+log dQ
+
+dP =
+
+n
+�
+
+i=1
+log dQi
+
+dPi
+.
+(346)
+
+Then applying (102), we have
+
+βα ≥1
+
+γn
+
+�
+α −Q
+�
+log dQ
+
+dP ≥log γn
+
+��
+(347)
+
+for γn > 0. Now set
+
+αn = α −Bn + ∆
+√n
+(348)
+
+which is positive since the argument of Q−1 in (344) is positive. Therefore, we let
+
+log γn = nDn +
+�
+
+nVnQ−1(αn) .
+(349)
+
+October 14, 2010
+DRAFT
+
+
+66
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Then since log dQ
+
+dP is a sum of independent random variables, Theorem 44 applies and
+����Q
+�
+log dQ
+
+dP ≥log γn
+
+�
+−αn
+
+����≤Bn
+√n .
+(350)
+
+Consequently,
+
+Q
+�
+log dQ
+
+dP ≥log γn
+
+�
+≤α −∆
+√n .
+(351)
+
+Substituting this bound into (347) we obtain (344).
+
+For an upper bound, we use (103) which states that
+
+βn
+α ≤1
+
+γn
+(352)
+
+whenever γn is such that
+
+Q
+�
+log dQ
+
+dP ≥log γn
+
+�
+≥α .
+(353)
+
+Again, set
+
+αn = α + Bn
+√n .
+(354)
+
+which is strictly less than 1 since the argument of Q−1 in (345) is below 1. Similarly to (349)
+
+we choose
+
+log γn = nD +
+√
+
+nV Q−1(αn) .
+(355)
+
+From the Berry-Esseen bound, we have
+����Q
+�
+log dQ
+
+dP ≥log γn
+
+�
+−αn
+
+����≤Bn
+√n .
+(356)
+
+Consequently,
+
+Q
+�
+log dQ
+
+dP ≥log γn
+
+�
+≥α .
+(357)
+
+Thus, this choice of γn is valid for (352), and (345) follows.
+
+Note that lower bound (344) holds only for n sufficiently large. A nonasymptotic bound is
+
+provided by the following result.
+
+Lemma 59: In the notation of Lemma 58, we have
+
+log βα ≥−nDn −
+
+�
+
+2nVn
+
+α
++ log α
+
+2 .
+(358)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+67
+
+Proof: Just as in the above argument, we start by writing
+
+βn
+α ≥1
+
+γn
+
+�
+α −Q
+�
+log dQ
+
+dP ≥log γn
+
+��
+.
+(359)
+
+We notice that
+
+nDn
+=
+E Q
+
+�
+log dQ
+
+dP
+
+�
+,
+(360)
+
+nVn
+=
+E Q
+
+��
+log dQ
+
+dP −nDn
+
+�2�
+
+.
+(361)
+
+Thus, if we set
+
+log γn = nDn +
+
+�
+
+2nVn
+
+α
+,
+(362)
+
+then
+
+Q
+�
+log dQ
+
+dP ≥log γn
+
+�
+=
+Q
+
+�
+
+log dQ
+
+dP −nDn ≥
+
+�
+
+2nVn
+
+α
+
+�
+
+(363)
+
+≤
+Q
+
+��
+log dQ
+
+dP −nDn
+
+�2
+≥2nVn
+
+α
+
+�
+
+(364)
+
+≤
+α
+
+2
+(365)
+
+where (365) is by the Chebyshev inequality. Putting this into (359) we obtain the required
+
+result.
+
+APPENDIX D
+
+EVALUATION OF κn FOR THE AWGN CHANNEL
+
+Proof of Theorem 42: According to Definition (107), we need to find the distribution P ∗
+Z|Y n
+
+that, for every x ∈Fn, satisfies
+�
+
+B
+P ∗
+Z|Y n(1|y) PY n|Xn=x(dy) ≥τ
+(366)
+
+and that attains the smallest possible value of
+�
+
+B
+P ∗
+Z|Y n(1|y) PY n(dy) .
+(367)
+
+While, in general, this is a complex problem, the symmetry of the present case greatly
+
+simplifies the solution; we establish rigorously the spherical symmetry of the optimum attaining
+
+κn
+τ , and also suggest how to find symmetries in other (non-AWGN) problems of interest. We
+
+October 14, 2010
+DRAFT
+
+
+68
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+start by noting that any distribution PZ|Y n is completely determined by defining a function
+
+f : B �→[0, 1], namely,
+
+f(y) = PZ|Y n(1|y) .
+(368)
+
+We define the following class of functions on B = Bn:
+
+Fτ =
+
+
+
+
+f :
+f : B �→[0, 1] ,
+
+∀x ∈An :
+�
+
+Bn fdPY n|Xn=x ≥τ
+
+
+
+
+,
+(369)
+
+so that
+
+κn(τ) = inf
+f∈Fτ
+
+�
+
+Bn fdPY n .
+(370)
+
+Now we define another class, the sub-class of spherically symmetric functions:
+
+Fsym
+τ
+=
+�
+φ ∈Fτ : φ(y) = φr
+�
+||y||2�
+for some φr
+�
+.
+(371)
+
+We can then state the following.
+
+Lemma 60: For the chosen PY n and Fn, and for every τ ∈[0, 1] we have
+
+κn
+τ (Fn, PY n) =
+inf
+φ∈Fsym
+τ
+
+�
+φdPY n .
+(372)
+
+Proof of Lemma 60: The proof of Lemma 60 first defines a group G of transformations
+
+of B (an orthogonal group On in this case) that permutes elements of the family of measures
+
+{PY n|Xn=x, x ∈Fn} and that fixes P n
+Y . Then the optimum in the definition of κn
+τ can be sought
+
+as a function B �→[0, 1] that is constant on the orbits of G (this is the class Fsym
+τ
+).
+
+Since Fsym
+τ
+⊆Fτ, the inequality
+
+κn
+τ ≤
+inf
+φ∈Fsym
+τ
+
+�
+φdPY n
+(373)
+
+is obvious. It remains to be shown that
+
+κn
+τ ≥
+inf
+φ∈Fsym
+τ
+
+�
+φdPY n .
+(374)
+
+We will show that for every f ∈Fτ there is a function φ ∈Fsym
+τ
+with
+�
+f dPY n =
+�
+φ dPY n.
+
+The claim (374) then follows trivially.
+
+Define G to be the isometry group of a unit sphere Sn−1. Then G = O(n), the orthogonal
+
+group. Define a function on G × G by
+
+d(g, g′) = sup
+y∈Sn−1 ||g(y) −g′(y)|| .
+(375)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+69
+
+Since Sn−1 is compact, d(g, g′) is finite. Moreover, it defines a distance on G and makes G a
+
+topological group. The group action H : G × Rn �→Rn defined as
+
+H(g, y) = g(y)
+(376)
+
+is continuous in the product topology on G × Rn. Also, G is a separable metric space. Thus,
+
+as a topological space, it has a countable basis. Consequently, the Borel σ-algebra on G × Rn
+
+coincides with the product of Borel σ-algebras on G and Rn:
+
+B(G × Rn) = B(G) × B(Rn) .
+(377)
+
+Finally, H(g, y) is continuous and hence is measurable with respect to B(G × Rn) and thus is
+
+also a measurable mapping with respect to a product σ-algebra.
+
+It is also known that G is compact. On a compact topological group there exists a unique
+
+(right Haar) probability measure µ compatible with the Borel σ-algebra B(G), and such that
+
+µ(Ag) = µ(A) ,
+∀g ∈G, A ∈B(G) .
+(378)
+
+Now take any f ∈Fτ and define an averaged function φ(y) as
+
+φ(y)
+△=
+�
+
+G
+(f ◦H)(g, y) µ(dg) .
+(379)
+
+Note that as shown above f ◦H is a positive measurable mapping G × B �→R+ with respect
+
+to corresponding Borel σ-algebras. Then by Fubini’s theorem, the function φ : B �→R+ is also
+
+positive measurable. Moreover,
+
+0 ≤φ(y) ≤
+�
+
+G
+1 µ(dg) = 1 .
+(380)
+
+Define for convenience
+
+Qx
+Y
+△= PY n|Xn=x .
+(381)
+
+Then
+�
+
+B
+φ(y) Qx
+Y (dy)
+=
+�
+
+B
+Qx
+Y (dy)
+�
+
+G
+(f ◦H)(g, y) µ(dg)
+(382)
+
+=
+�
+
+G
+µ(dg)
+�
+
+B
+(f ◦H)(g, y)Qx
+Y (dy) .
+(383)
+
+October 14, 2010
+DRAFT
+
+
+70
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Change of the order is possible by Fubini’s theorem because f ◦H is a bounded function. By
+
+the change of variable formula,
+�
+
+G
+µ(dg)
+�
+
+B
+(f ◦g)(y)Qx
+Y (dy) =
+�
+
+G
+µ(dg)
+�
+
+B
+f
+�
+Qx
+Y ◦g−1�
+(dy) .
+(384)
+
+By the definition of Qx
+Y we have, for every measurable set E, Qx
+Y [E] = Q0
+Y [E −x] and the
+
+measure Q0
+Y is fixed under all isometries of Rn:
+
+∀g ∈G : Q0
+Y [F] = Q0
+Y [g(F)] .
+(385)
+
+But then
+
+�
+Qx
+Y ◦g−1�
+[E]
+△=
+Qx
+Y
+�
+g−1(E)
+�
+
+(386)
+
+=
+Q0
+Y
+�
+g−1(E) −x
+�
+
+(387)
+
+=
+Q0
+Y
+
+�
+g−1[E −g(x)]
+�
+
+(388)
+
+=
+Qg(x)
+Y
+[E] .
+(389)
+
+This proves that
+
+Qx
+Y ◦g−1 = Qg(x)
+Y
+.
+(390)
+
+It is important that x ∈Fn implies g(x) ∈Fn. In general terms, without AWGN channel specifics,
+
+the above argument shows that in the space of all measures on B the subset {Qx
+Y , x ∈Fn} is
+
+invariant under the action of G.
+
+But f ∈Fτ and thus
+�
+f dQx
+Y ≥τ for every x ∈Fn. So, from (384) and (390) we conclude
+�
+
+B
+φ dQx
+Y ≥
+�
+
+G
+τ µ(dg) = τ .
+(391)
+
+Together with (380) this establishes that φ ∈Fτ. Now, the PY n measure is also fixed under any
+
+g ∈G:
+
+PY n ◦g−1 = PY n .
+(392)
+
+Then replacing Qx
+Y with PY n in (384) we obtain
+�
+
+B
+φ dPY n
+=
+�
+
+G
+µ(dg)
+�
+
+B
+f(y)
+�
+PY n ◦g−1�
+(dy)
+(393)
+
+=
+�
+
+B
+f dPY n .
+(394)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+71
+
+It remains to show that φ ∈Fsym
+τ
+; but, this is a simple consequence of the choice of µ. Indeed
+
+for any g′ ∈G,
+
+(φ ◦g′)(y)
+=
+�
+
+G
+(f ◦H)(g, g′(y)) µ(dg)
+(395)
+
+=
+�
+
+G
+(f ◦H)(gg′, y) µ(dg)
+(396)
+
+=
+�
+
+G
+(f ◦H)(g′′, y) µ(dg′′)
+(397)
+
+=
+φ(y) .
+(398)
+
+In the last equality we used a change of measure and the invariance of µ under right translations.
+
+Thus, φ must be constant on the orbits of G and hence, depends only on the norm of y. To
+
+summarize, we have shown that φ belongs to Fsym
+τ
+and
+�
+φ dPY n =
+�
+f dPY n .
+(399)
+
+Proof of Theorem 42 (continued): By Lemma 60 we obtain a value of κn
+τ by optimizing over
+
+spherically symmetric functions. First, we will simplify the constraints on the functions in Fsym
+τ
+.
+
+Define Qx
+Y and G as in the proof of Lemma 60. As we saw in that proof, each transformation
+
+g ∈G carries one measure Qx
+Y into another Qx′
+Y . Also x′ = g(x) in this particular case, but this
+
+is not important. What is important, however, is that if x ∈Fn then x′ ∈Fn. If we define
+
+Q = {Qx
+Y , x ∈Fn}
+(400)
+
+then, additionally, the action of G on Q is transitive. This opens the possibility that the system
+
+of constraints on φ ∈Fsym
+τ
+might be overdetermined. Indeed, suppose that φ satisfies
+�
+
+B
+φ dQ0 ≥τ
+(401)
+
+for some Q0 ∈Q. Then for any measure Q ∈Q there is a transformation g ∈G such that
+
+Q = Q0 ◦g−1 .
+(402)
+
+But then
+�
+
+B
+φ dQ =
+�
+
+B
+φ ◦g dQ0 =
+�
+
+B
+φ dQ0 .
+(403)
+
+October 14, 2010
+DRAFT
+
+
+72
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Here the last equality follows from the fact that all members of Fsym
+τ
+are spherically symmetric
+
+functions and as such are fixed under G: φ ◦g = φ. That is, once a symmetric φ satisfies
+�
+
+B
+φ dPY n|Xn=x0 ≥τ
+(404)
+
+for one x0 ∈Fn, it automatically satisfies the same inequality for all x ∈Fn. So we are free
+
+to check (404) at one arbitrary x0 and then conclude that φ ∈Fsym
+τ
+. For convenience we will
+
+choose x0 to be
+
+x0 =
+�√
+
+P,
+√
+
+P, . . . ,
+√
+
+P
+�
+.
+(405)
+
+Since all functions in Fsym
+τ
+are spherically symmetric we will work with their radial parts:
+
+φ(y) = φr
+�
+||y||2�
+.
+(406)
+
+Note that PY n induces a certain distribution on R = ||Y n||2, namely,
+
+P0 ∼
+
+n
+�
+
+i=1
+(1 + P)Z2
+i
+(407)
+
+(as previously the Zi’s denote i.i.d. standard Gaussian random variables). Similarly, PY n|Xn=x0
+induces a distribution on R = ||Y n||2, namely,
+
+P1 ∼
+
+n
+�
+
+i=1
+
+�
+Zi +
+√
+
+P
+�2
+.
+(408)
+
+Finally, we see that κn
+τ is
+
+κn
+τ =
+inf
+{φr:
+R
+φrdP1≥τ}
+
+�
+φr dP0
+(409)
+
+–a randomized binary hypothesis testing problem with P1(decide P1) ≥τ.
+
+Finally, we are left to note that the existence of a unique optimal solution φ∗
+r is guaranteed
+
+by the Neyman-Pearson lemma (Appendix B). To conclude the proof we must show that the
+
+solution of (211) exists and thus that φ∗
+r is an indicator function (i.e., there is no “randomization
+
+on the boundary” of a likelihood ratio test). To that end, we need to show that for any γ the set
+
+Aγ =
+�p1(r)
+
+p0(r) = γ
+�
+
+(410)
+
+satisfies P1 [Aγ] = 0. To show this, we will first show that each set {Aγ ∩[0, K]} is finite; then,
+
+its Lebesgue measure is zero, and since P1 is absolutely continuous with respect to Lebesgue
+
+measure we conclude from the monotone convergence theorem that
+
+P1 [Aγ] = lim
+K→∞P1 [Aγ ∪[0, K]] = 0.
+(411)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+73
+
+Note that the distribution P0 is a scaled χ2-distribution with n degrees of freedom; thus
+
+(e.g., [43, (26.4.1)]) the PDF of P0 is indeed given by (212). The distribution P1 is the non-
+
+central χ2-distribution with n degrees of freedom and noncentrality parameter, λ, equal to nP.
+
+Thus (see [43, (26.4.25)]) we can write the PDF of P1 as expressed in (213). Using these
+
+expressions we obtain
+
+f(r)
+△= p1(r)
+
+p0(r) = e−µr
+∞
+�
+
+i=0
+airi .
+(412)
+
+The coefficients ai are such that the series converges for any r < ∞. Thus, we can extend f(r)
+
+to be an analytic function F(z) over the entire complex plane. Now fix a K ∈(0, ∞) and denote
+
+S = Aγ ∩[0, K] = f −1{γ} ∩[0, K] .
+(413)
+
+By the continuity of f the set S is closed. Thus, S is compact. Suppose that S is infinite; then
+
+there is sequence rk ∈S converging to some r∗∈S. But then from the uniqueness theorem of
+
+complex analysis, we conclude that F(z) = γ over the entire disk |z| ≤K. Since f(r) cannot
+
+be constant, we conclude that S is finite.
+
+To enable non-AWGN applications of the κβ bound, let us summarize the general ideas
+
+used to prove Lemma 60 and Theorem 42. The proof of Lemma 60 first defines a group G of
+
+transformations of B (an orthogonal group On in this case) that permutes elements of the family
+
+of measures {PY n|Xn=x, x ∈Fn} and that fixes PY n. Then the optimum in the definition of κn
+τ
+can be sought as a function B �→[0, 1] that is constant on the orbits of G (this is the class
+
+Fsym
+τ
+). Carrying this idea forward, in the proof of Theorem 42 we note that the action of G on
+
+{PY n|Xn=x, x ∈Fn} is transitive and thus a set of conditions on φ ∈Fsym
+τ
+can be replaced by
+
+just one:
+�
+φ dPY n|Xn=x0 ≥τ
+(414)
+
+for any x0. If x0 is conveniently chosen, then computation of κn
+τ is a matter of solving a single
+
+randomized binary hypothesis testing problem between two memoryless distributions.
+
+Lemma 61: For every P > 0 there are constants C1 > 0 and C2 > 0 such that for all
+
+sufficiently large n and all τ ∈[0, 1],
+
+κn
+τ ≥1
+
+C1
+
+�
+τ −e−C2n�
+.
+(415)
+
+October 14, 2010
+DRAFT
+
+
+74
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Proof: Recall that κn
+τ is determined by a binary hypothesis testing problem between P (n)
+0
+and P (n)
+1
+, as defined by (407) and (408). We will omit indices (n) where it does not cause
+
+confusion. Also in this proof all exp exponents are to the base e. The argument consists of two
+
+steps.
+
+Step 1. There is a δ > 0 such that for all n ≥1 the Radon-Nikodym derivative dP (n)
+1
+dP (n)
+0
+(r) is
+
+upper bounded by a constant C1 on the set
+
+r ∈Rn
+△= [n(1 + P −δ), n(1 + P + δ)] .
+(416)
+
+Step 2. Since the measures P (n)
+1
+have mean n(1+P), by the Chernoff bound there is a constant
+
+C2 such that
+
+P (n)
+1
+[ {Rn}c ] ≤e−C2n .
+(417)
+
+Now choose any set A such that P1[A] ≥τ. Then
+
+P1[A ∩Rn]
+≥
+P1[A] −P1 [ {Rn}c ]
+(418)
+
+≥
+τ −e−C2n .
+(419)
+
+But then
+
+P0[A]
+≥
+P0[A ∩Rn]
+(420)
+
+=
+�
+
+R+
+1A∩Rn dP0
+(421)
+
+=
+�
+
+A∩Rn
+
+dP0
+dP1
+dP1
+(422)
+
+≥
+1
+C1
+
+�
+
+A∩Rn
+dP1
+(423)
+
+≥
+1
+C1
+
+�
+τ −e−C2n�
+.
+(424)
+
+This establishes the required inequality. The rest is devoted to proving Step 1, namely,
+
+fn(r)
+△= dP1
+
+dP0
+≤C1
+on Rn ∀n .
+(425)
+
+We have already discussed some properties of fn(r) in (412). Here, however, we will need a
+
+precise expression for it, easily obtainable via (212) and (213):
+
+fn(r) = (1 + P)n/2 exp
+�
+−nP
+
+2 −r
+P
+2P + 2
+
+�
+×
+
+× (nPr)−n/4+1/2 2n/2Γ
+�n
+
+2
+
+�
+In/2−1
+�√
+
+nPr
+�
+,
+(426)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+75
+
+where In/2−1(x) is the modified Bessel function of the first kind.
+
+We will consider only the case in which n is even. This is possible because in [44] it is shown
+
+that
+
+µ > ν ≥0 =⇒Iµ(x) < Iν(x) ,
+(427)
+
+for all x > 0. Thus, if n is odd then an upper bound is obtained by replacing In/2−1 with
+
+In/2−3/2. Now for integer index k = n/2 −1 the following bound is shown in [45]:
+
+Ik(z) ≤
+�π
+
+8 ez 1
+√z
+
+�
+1 + k2
+
+z2
+
+�−1/4
+exp
+
+�
+
+−k sinh−1 k
+
+z + z
+
+��
+
+1 + k2
+
+z2 −1
+
+��
+
+.
+(428)
+
+Note that we need to establish the bound only for r’s that are of the same order as n, r = O(n).
+
+Thus, we will change the variable
+
+r = nt
+(429)
+
+and seek an upper bound on fn(nt) for all t inside some interval containing (1 + P).
+
+Using (428) and the expression
+
+ln Γ
+�n
+
+2
+
+�
+= n −1
+
+2
+ln n
+
+2 −n
+
+2 + O(1),
+(430)
+
+fn(r) in (426) can be upper bounded, after some algebra, as
+
+fn(nt) ≤exp
+�
+−n
+
+2K(t, P) + O(1)
+�
+.
+(431)
+
+Here the O(1) term is uniform in t for all t on any finite interval not containing zero, and
+
+K(t, P) = −ln
+�
+1 +
+√
+
+1 + 4Pt
+�
++
+√
+
+1 + 4Pt + ln(1 + P) −P −
+Pt
+P + 1 −1 + ln 2 .
+(432)
+
+A straightforward excercise shows that a maximum of K(t, P) is attained at t∗= 1 + P and
+
+Kmax = K(t∗, P) = 0 .
+(433)
+
+Thus,
+
+fn(nt) ≤O(1) ,
+t ∈[a, b] , a > 0 .
+(434)
+
+In particular (425) holds if we take, for example, a = (1 + P) −1 and b = (1 + P) + 1.
+
+In fact, the Radon-Nikodym derivative is bounded for all r, not only r ∈Rn and, hence
+
+κn
+τ ≥1
+
+C1
+τ
+(435)
+
+instead of the weaker (415). But showing that this holds for all r complicates the proof unnec-
+
+essarily.
+
+October 14, 2010
+DRAFT
+
+
+76
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+APPENDIX E
+
+CONTINUITY ON THE SIMPLEX
+
+Our first results are concerned with properties of U(P, W) and V (P, W).
+
+Lemma 62: The functions U(P, W), V (P, W) and T(P, W) are continuous on P. Functions
+
+U(P, W) and V (P, W) coincide on Π. The following inequality holds:
+
+V (P, W) ≤U(P, W) ≤2g(min{|A|, |B|}) −[I(P, W)]2 ,
+(436)
+
+where
+
+g(n) =
+
+
+
+
+
+
+
+
+0.6 log2 e ,
+n = 2 ,
+
+log2 n ,
+n ≥3 .
+(437)
+
+Proof: First, note that U(P, W), V (P, W) and T(P, W) are well-defined and finite. Indeed,
+
+each one is a sum of finitely many terms. We must show that every term is well-defined. This
+
+is true since, whenever W(y|x) = 0 or PW(y) = 0 or P(x) = 0, we have P(x)W(y|x) = 0
+
+and thus
+
+P(x)W(y|x)
+�
+log W(y|x)
+
+PW(y)
+
+�2
+
+and
+
+P(x)W(y|x)
+����log W(y|x)
+
+PW(y) −D(Wx||PW)
+����
+
+3
+
+are both equal to zero by convention. On the other hand, if P(x) > 0 then Wx ≪PW and thus
+
+D(Wx||PW) is a well-defined finite quantity. Second, take a sequence Pn →P. Then we want
+
+to prove that each term in U(P, W) is continuous, i. e.,
+
+Pn(x)W(y|x)
+�
+log W(y|x)
+
+PnW(y)
+
+�2
+→P(x)W(y|x)
+�
+log W(y|x)
+
+PW(y)
+
+�2
+.
+(438)
+
+If W(y|x) = 0 then this is obvious. If Pn(x) ̸→0 then this is also true since the argument of
+
+the logarithm is bounded away from 0 and +∞. So, we assume Pn(x) →0 and we must show
+
+that then the complete quantity also tends to 0. For Pn(x) > 0 we notice that
+
+log(Pn(x)W(y|x)) ≤log PnW(y) ≤0 .
+(439)
+
+Thus,
+
+| log W(y|x) −log PnW(y)|2 ≤2(log2 W(y|x) + log2{Pn(x)W(y|x)}) .
+(440)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+77
+
+But then,
+
+0
+≤
+Pn(x)W(y|x)
+�
+log W(y|x)
+
+PnW(y)
+
+�2
+
+(441)
+
+≤
+2Pn(x)W(y|x)(log2 W(y|x) + log2{Pn(x)W(y|x)}) .
+(442)
+
+This is also true for Pn(x) = 0 assuming the convention 0 log2 0 = 0. Now continuity follows
+
+from the fact that x log2{αx} is continuous for x ∈[0, 1] when defined as 0 for x = 0. Thus,
+
+continuity of U(P, W) is established.
+
+To establish continuity of V (P, W) we are left to prove that
+
+�
+
+x
+P(x)D(Wx||PW)2
+
+is continuous in P. Let us expand a single term here:
+
+P(x)
+
+��
+
+y∈B
+W(y|x) log W(y|x)
+
+PW(y)
+
+�2
+.
+
+First notice that if Pn(x) ̸→0 then continuity of this term follows from the fact that the argument
+
+of the logarithm is bounded away from 0 and +∞for all y with W(y|x) > 0. So we are left
+
+with the case Pn(x) →0. To that end let us prove the inequality for P(x) > 0:
+
+D(Wx||PW) ≤2H(Wx) + log
+1
+P(x) .
+(443)
+
+From here continuity follows as we can see that Pn(x)D(Wx||PnW)2 →0 because x log x and
+
+x log2 x are continuous at zero.
+
+We now prove inequality (443). From (439) we see that
+����log W(y|x)
+
+PW(y)
+
+����
+≤
+log
+1
+W(y|x) + log
+1
+P(x)W(y|x)
+(444)
+
+=
+2 log
+1
+W(y|x) + log
+1
+P(x) .
+(445)
+
+Then,
+
+D(Wx||PW)
+≤
+�
+
+x∈A
+W(y|x)
+����log W(y|x)
+
+PW(y)
+
+����
+(446)
+
+≤
+2H(Wx) + log
+1
+P(x) .
+(447)
+
+Thus, V (P, W) is continuous in P.
+
+October 14, 2010
+DRAFT
+
+
+78
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+To establish continuity of T(P, W), we again consider a single term:
+
+P(x)W(y|x)
+����log W(y|x)
+
+PW(y) −D(Wx||PW)
+����
+
+3
+.
+(448)
+
+If W(y|x) = 0 then this term is equal to zero regardless of P, and thus is continuous in P.
+
+Assume W(y|x) > 0. Take Pn →P. If P(x) ̸= 0 then PnW(y) is bounded away from 0 and
+
+thus log W(y|x)
+
+PnW(y) tends to log W(y|x)
+
+PW(y). Similarly, for any y′ such that W(y′|x) > 0 we have that
+
+PnW(y′) is also bounded away from 0. Thus, D(Wx||PnW) tends to D(Wx||PW).
+
+We now assume that Pn(x) →0 and must prove that (448) tends to 0. Using the inequality
+
+|a + b|3 ≤4(|a|3 + |b|3), we obtain
+
+Pn(x)W(y|x)
+����log W(y|x)
+
+PnW(y) −D(Wx||PnW)
+����
+
+3
+≤
+(449)
+
+4Pn(x)W(y|x)
+����log W(y|x)
+
+PnW(y)
+
+����
+
+3
++ 4Pn(x)W(y|x)D3(Wx||PnW) .
+(450)
+
+Application of (443) immediately proves that the second term in the last inequality tends to zero.
+
+Continuity of the first term is established exactly like (438) with (440) replaced by
+
+| log W(y|x) −log PnW(y)|3 ≤−4(log3 W(y|x) + log3(Pn(x)W(y|x))) .
+(451)
+
+This proves continuity of T(P, W).
+
+Finally, V (P, W) and U(P, W) coincide on Π for the reason that, under any capacity-achieving
+
+distribution it is known that
+
+D(Wx||PW) = E [i(X; Y ) | X = x] = C
+P-a.s. .
+(452)
+
+Indeed, then
+
+U(P, W)
+△=
+E
+�
+(i −E i)2�
+
+(453)
+
+=
+E
+�
+(i −C)2�
+
+(454)
+
+=
+E
+�
+(i −E [i | X])2�
+
+(455)
+
+=
+V (P, W) .
+(456)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+79
+
+To prove (436) consider the following chain of inequalities:
+
+U(P, W) + [I(P, W)]2
+△=
+�
+
+x∈A
+
+�
+
+y∈B
+P(x)W(y|x)
+�
+log2 W(y|x) + log2 PW(y)
+(457)
+
+−2 log W(y|x) · log PW(y)
+�
+
+(458)
+
+≤
+�
+
+x∈A
+
+�
+
+y∈B
+P(x)W(y|x)
+�
+log2 W(y|x) + log2 PW(y)
+�
+
+(459)
+
+=
+�
+
+x∈A
+P(x)
+
+��
+
+y∈B
+W(y|x) log2 W(y|x)
+
+�
+
+(460)
+
++
+
+��
+
+y∈B
+PW(y) log2 PW(y)
+
+�
+
+(461)
+
+≤
+�
+
+x∈A
+P(x)g(|B|) + g(|B|)
+(462)
+
+=
+2g(|B|) ,
+(463)
+
+where (459) is because 2 log W(y|x) · log PW(y) is always non-negative, and (462) follows
+
+because each term in square-brackets can be upper-bounded using the following optimization
+
+problem:
+
+g(n)
+△=
+sup
+aj≥0:Pn
+j=1 aj=1
+
+n
+�
+
+j=1
+aj log2 aj .
+(464)
+
+Since the x log2 x has unbounded derivative at the origin, the solution of (464) is always in
+
+the interior of [0, 1]n. Then it is straightforward to show that for n > e the solution is actually
+
+aj = 1
+
+n. For n = 2 it can be found directly that g(2) = 0.5629 < 0.6. Finally, because of the
+
+symmetry, a similar argument can be made with |B| replaced by |A| and hence in (436) we are
+
+free to choose the best bound.
+
+APPENDIX F
+
+PROOF OF LEMMA 46
+
+Proof: Using Minkowski’s inequality and the notation ||Z||p = (E [|Z|p])1/p, we have
+
+||i(X; Y ) −I(X; Y )||3
+≤
+||i(X; Y )||3 + I(X; Y )
+(465)
+
+≤
+|| log W(Y |X) −log PY (Y )||3 + I(X; Y )
+(466)
+
+≤
+|| log
+1
+W(Y |X)||3 + || log
+1
+PY (Y )||3 + I(X; Y )
+(467)
+
+October 14, 2010
+DRAFT
+
+
+80
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+≤
+�
+|B|27e−3 log3 e
+�1/3 +
+�
+|A|27e−3 log3 e
+�1/3 + I(X; Y ) (468)
+
+≤
+�
+|A|1/3 + |B|1/3�
+3e−1 log e + log min{|A|, |B|}
+(469)
+
+where (467) follows from x log3 1
+
+x ≤(3e−1 log e)3.
+
+APPENDIX G
+
+Proof of Lemma 47: By Theorem 44 we have for any x and δ
+
+P
+
+�
+
+x ≤
+
+n
+�
+
+j=1
+(Zj −E Zj) < x + δ
+
+�
+
+(470)
+
+≤
+�(x+δ)/σ
+
+x/σ
+
+1
+√
+
+2πe−t2/2dt + 12T
+
+σ3
+(471)
+
+≤
+�
+δ
+√
+
+2π + 12T
+
+σ2
+
+�1
+
+σ .
+(472)
+
+On the other hand,
+
+E
+
+�
+
+exp
+
+�
+
+−
+
+n
+�
+
+j=1
+Zj
+
+�
+
+1{Pn
+j=1 Zj>A}
+
+�
+
+(473)
+
+≤
+
+∞
+�
+
+l=0
+exp{−A −lδ} P
+
+�
+
+A + lδ ≤
+
+n
+�
+
+j=1
+Zj < A + (l + 1)δ
+
+�
+
+.
+(474)
+
+Using (472) and δ = log 2 we get (262) since
+
+∞
+�
+
+l=0
+2−l = 2 .
+(475)
+
+APPENDIX H
+
+AN EXOTIC DMC
+
+Let
+
+W ′ =
+
+
+
+
+
+
+
+
+
+
+
+
+
+1/3
+0
+0
+1/3
+2/13
+
+0
+1/3
+0
+1/3
+2/13
+
+0
+0
+1/3
+1/3
+2/13
+
+1/3
+1/3
+1/3
+0
+3/13
+
+1/3
+1/3
+1/3
+0
+4/13
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+(476)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+81
+
+Now denote by x∗the unique negative root of the equation
+
+(x −1)
+�
+log 137
+
+2833 −7 log(1 −x)
+�
++ (6 + 7x) log 6 + 7x
+
+39
+= −13 log 3 .
+(477)
+
+Then, replace the last column of W ′ with the column (only two decimals shown)
+
+W ′[0 0 0 x∗1 −x∗]T = [0.04 0.04 0.04 0.38 0.50]T .
+(478)
+
+The resulting channel matrix is
+
+W =
+
+
+
+
+
+
+
+
+
+
+
+
+
+1/3
+0
+0
+1/3
+0.04
+
+0
+1/3
+0
+1/3
+0.04
+
+0
+0
+1/3
+1/3
+0.04
+
+1/3
+1/3
+1/3
+0
+0.38
+
+1/3
+1/3
+1/3
+0
+0.50
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+(479)
+
+This matrix has full rank and so the capacity achieving distribution is unique. A simple obser-
+
+vation shows that equiprobable P ∗
+Y is achievable by taking P ∗
+X = [1, 1, 1, 2, 0]/5. Finally, the
+
+conditional entropies H(Y |X = x) are all equal to log 3 as a consequence of the choice of
+
+x∗. It follows that P ∗
+X is the unique capacity achieving distribution. One can also check that
+
+V (P ∗
+X, W) = 0 and V (W5||P ∗
+Y ) > 0. So W is indeed an exotic channel. In fact, it can be shown
+
+that there is a sequence of distributions P (n)
+X
+such that Feinstein’s lower bound for this channel
+
+exhibits nC + Fn1/3 behavior. Note that for an exotic channel and ϵ > 1/2 it is not optimal to
+
+choose P that achieves I(P, W) = C and U(P, W) = 0 in Theorem 45, rather the optimal P
+
+will depend on n. The intuition behind this is that for small n it might be beneficial to choose
+
+P such that I(P, W) < C but U(P, W) > 0 because for ϵ > 1/2 the √n term is positive and
+
+proportional to
+�
+
+U(P, W).
+
+This example has illustrated that the conditions for exotic channels are quite hard to satisfy
+
+(especially, making D(Wx||P ∗
+Y ) = C but so that x does not participate in capacity achieving
+
+distributions); hence the name exotic.
+
+APPENDIX I
+
+PROOF OF THEOREM 48
+
+We must consider four cases separately:
+
+1) ϵ ≤1/2 and Vmin > 0.
+
+October 14, 2010
+DRAFT
+
+
+82
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+2) ϵ ≤1/2 and Vmin = 0.
+
+3) ϵ > 1/2 and Vmax > 0.
+
+4) ϵ > 1/2 and Vmax = 0.
+
+Compared to Strassen [31] we streamline the treatment of case 1 by using Lemma 64 and add
+
+the proofs for cases 3 and 4. The main idea for solving case 2 is due to Strassen.
+
+The aim is to use Theorem 31 with Fn = T n
+P0. To do so we need to select a distribution PY n
+
+on An and compute infxn∈T n
+P0 βn
+1−ϵ(xn, PY n). Notice that the theorem is concerned only with
+
+codebooks over some fixed type. So, if PY n is a product distribution then βn
+1−ϵ(xn, PY n) does
+
+not depend on xn ∈T n
+P0 and thus
+
+βn
+1−ϵ(xn, PY n) = βn
+1−ϵ(PY n) .
+(480)
+
+For this reason we will simply write βn
+1−ϵ(PY n), and even βn
+1−ϵ, since the distribution PY n will
+
+be apparent.
+
+Case 1. Denote the closed δ-neighborhood of the set of capacity-achieving distributions, Π,
+
+as
+
+Πδ
+△= {P ∈P : d(P, Π) ≤δ} .
+(481)
+
+Here d(·, ·) denotes Euclidean distance between vectors of R|A|.
+
+We fix some δ > 0 to be determined. First, we find δ1 small enough so that everywhere on
+
+Πδ1 we have V (P, W) ≥Vmin/2. This is possible by the continuity of V (P, W); see Lemma 62
+
+in Appendix E. Without loss of generality, we can assume that B does not have inaccessible
+
+outputs, i.e. for every y0 ∈B there is an x0 ∈A such that W(y0|x0) > 0. Then, it is well
+
+known that for any P1, P2 ∈Π the output distributions coincide, i.e. P1W = P2W = P ∗
+Y , and
+
+also that this unique P ∗
+Y dominates all W(·|x). Since all outputs are accessible, this implies that
+
+P ∗
+Y (y) > 0, y ∈B. Now for each y, the function PW(y) is linear in the input distribution P,
+
+and thus there is some δ2 > 0 such that in the closed δ2-neighborhood of Π we have PW(y) > 0
+
+for all y ∈B. Set δ = min{δ1, δ2}. Fix n and P0 ∈Pn. Choose the distribution PY n = (P0W)n,
+
+i.e.
+
+PY n(yn) =
+
+n
+�
+
+k=1
+
+�
+
+a∈A
+P0(a)W(yk|a) .
+(482)
+
+Then by Theorem 31 and the argument above we have
+
+log M ∗
+P0(n, ϵ) ≤−log βn
+1−ϵ(xn, PY n)
+(483)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+83
+
+where xn is any element of T n
+P0. The idea for lower bounding βn
+1−ϵ is to apply Lemma 58
+
+if P0 ∈Πδ and Lemma 59 (both in Appendix C) otherwise. In both cases, Qi = PY |X=xi
+and Pi = P0W. Note that there are nP0(1) occurrences of PY |X=1 among the Qi’s, nP0(2)
+
+occurrences of PY |X=2, etc. Thus, the quantities defined in Lemma 58 become
+
+Dn
+=
+I(P0, W)
+(484)
+
+Vn
+=
+V (P0, W) .
+(485)
+
+Suppose that P0 ∈Pn \ Πδ; then, applying Lemma 59 we obtain
+
+log M ∗
+P0(n, ϵ)
+≤
+−log βn
+1−ϵ
+(486)
+
+≤
+nI(P0, W) +
+
+�
+
+2nV (P0, W)
+
+1 −ϵ
++ log 1 −ϵ
+
+2
+(487)
+
+≤
+nC′ +
+
+�
+
+2MV
+1 −ϵ
+√n + log 1 −ϵ
+
+2
+,
+(488)
+
+where
+
+C′
+=
+sup
+P∈P\Πδ
+I(P, W) < C ,
+(489)
+
+MV
+=
+max
+P∈P V (P, W) < ∞.
+(490)
+
+Since C′ < C we can see that, even with F = 0, there exists N1 such that for all n ≥N1
+
+the right-hand side of (488) is below the right-hand side of (272). So this proves (272) for
+
+P0 ∈Pn \ Πδ. Now, consider P0 ∈Πδ. Recall that Tn in Lemma 58 is in fact
+
+Tn =
+�
+
+x∈A
+
+�
+
+y∈B
+P0(x)W(y|x)
+����log W(y|x)
+
+P0W(y) −D(Wx||P0W)
+����
+
+3
+= T(P0, W)
+(491)
+
+which, as shown in Lemma 62, is continuous on the compact set P and thus has a finite upper
+
+bound:
+
+Tn ≤MT < ∞.
+(492)
+
+On the other hand, over Πδ we have V (P0, W) ≥Vmin/2 > 0. In summary, we can upper bound
+
+Bn in Lemma 58 as
+
+Bn = 6 Tn
+
+V 3/2
+n
+≤MB
+△= 6 · 23/2MT
+
+V 3/2
+min
+.
+(493)
+
+October 14, 2010
+DRAFT
+
+
+84
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Thus, we are ready to apply Lemma 58, namely to use (344) with ∆= MB −Bn + 1 ≥1 and
+
+to conclude that, for n sufficiently large,
+
+log M ∗
+P0(n, ϵ) ≤nI(P0, W) +
+�
+
+nV (P0, W)Q−1
+�
+1 −ϵ −MB + 1
+√n
+
+�
++ 1
+
+2 log n .
+(494)
+
+For n large, depending on MB, we can expand Q−1 using Taylor’s formula. In this way, we can
+
+conclude that there is a constant F1 such that
+
+Q−1
+�
+1 −ϵ −MB + 1
+√n
+
+�
+≤Q−1(1 −ϵ) + F1
+√n .
+(495)
+
+Then for such n and a constant F2 (recall (490)) we have
+
+log M ∗
+P0(n, ϵ) ≤nI(P0, W) +
+�
+
+nV (P0, W)Q−1(1 −ϵ) + 1
+
+2 log n + F2 .
+(496)
+
+To conclude the proof we must maximize the right-hand side over P0 ∈Πδ. Note that this
+
+is the case treated in Lemmas 63 and 64. We want to use the latter one and need to check its
+
+conditions. From the definitions of I(P, W) and V (P, W) we can see that they are infinitely
+
+differentiable functions on Πδ. This is because all terms log W(y|x)
+
+PW(y) have arguments bounded
+
+away from 0 and +∞by the choice of Πδ. Consequently, the conditions of Lemma 64 on g are
+
+automatically satisfied. We must now check the conditions on f. To that end, we can think of
+
+I(P, W) as a function of P, and write ∇I(P) and H(P) for the gradient vector and Hessian
+
+matrix correspondingly. To check the conditions on f in Lemma 64 it is sufficient to prove that
+
+for any P ∗∈Π:
+
+1) ker H(P ∗) = ker W, which is the set of all |A|-vectors v such that �
+
+x∈A v(x)W(y|x) = 0;
+
+2) the largest non-zero eigenvalue of H(P ∗) is negative and bounded away from zero uni-
+
+formly in the choice of P ∗∈Π.
+
+We first show why these two conditions are sufficient. It is known that Π consists of all
+
+distributions P that satisfy two conditions: 1) PW = P ∗
+Y ; and 2) P(x) > 0 only when
+
+D(Wx||P ∗
+Y ) = C. Now take some P ′ ̸∈Π and denote by P ∗the projection of P ′ onto a
+
+compact Π. Then write
+
+P ′ = P ∗+ v = P ∗+ v0 + v⊥,
+(497)
+
+where v0 is projection of v = (P ′ −P ∗) onto ker W and v⊥is orthogonal to ker W. Note that
+
+d(P ′, Π) = ||v|| ≤δ. By Taylor’s expansion we have
+
+I(P ′) = I(P ∗) + (v0 + v⊥)T∇I(P ∗) + 1
+
+2vT
+⊥H(P ∗)v⊥+ o(||v||2) .
+(498)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+85
+
+Here we have used the fact that vT
+0 H(P ∗)v0 = 0. Since v0 ∈ker W but P ∗+ λv0 is not in Π for
+
+any λ > 0, we conclude that shifting along v0 must involve inputs with D(Wx||P ∗
+Y ) < C. But
+
+then I(P, W) decays linearly along this direction, i.e. there is some constant Γ1 > 0 such that
+
+I(P ∗+ v0) −I(P ∗)
+=
+vT
+0 ∇I(P ∗)
+(499)
+
+≤
+−Γ1||v0|| ≤−Γ1||v0||2
+(500)
+
+((500) assumes δ ≤1). Then, substituting (500) into expansion for I(P ′) and upper bounding
+
+vT
+⊥∇I by zero we obtain
+
+I(P ′) −I(P ∗) ≤−Γ1||v0||2 −1
+
+2λ||v⊥||2 + o(||v||2) ,
+(501)
+
+where λ is the absolute value of the maximal non-zero eigenvalue of H(P ∗). We will show that
+
+λ is uniformly bounded away from zero for any P ∗∈Π. So we see that indeed I(P, W) decays
+
+not slower than quadratically in d(P, Π).
+
+Now we need to prove the assumed facts about the Hessian H(P). The differentiation can be
+
+performed without complications since on Πδ we always have PW(y) > 0. After some algebra
+
+we get
+
+Hij
+△=
+∂2I(P)
+∂P(i)∂P(j) = −
+�
+
+y∈B
+
+W(y|i)W(y|j)
+
+PW(y)
+.
+(502)
+
+Thus, for any vector v we have
+
+vTHv
+=
+�
+
+i,j
+viHijvj
+(503)
+
+=
+−
+�
+
+y∈B
+
+(�
+
+i viW(y|i))2
+
+PW(y)
+(504)
+
+≤
+−||vW||2
+
+(PW)max
+,
+(505)
+
+where we have denoted formally vW = �
+
+x∈A v(x)W(y|x), which is a vector of dimension |B|.
+
+From (505) we can see that indeed vTHv = 0 if and only if vW = 0. In addition, the maximal
+
+non-zero eigenvalue of H(P) is always smaller than λmin+(WW T )
+
+(PW)max
+for all P ∈Π. Consequently,
+
+Lemma 64 applies to (496), and thus
+
+log M ∗
+P0(n, ϵ) ≤nC +
+�
+
+nVminQ−1(1 −ϵ) + 1
+
+2 log n + O(1) .
+(506)
+
+This implies (272) if we note that Q−1(1 −ϵ) = −Q−1(ϵ).
+
+October 14, 2010
+DRAFT
+
+
+86
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Case 2. The idea is to apply Theorem 31, but this time we fix the output distribution to be
+
+PY n = (P ∗
+Y )n for all types P0 (before we chose PY n = (P0W)n different for each type P0). It
+
+is well-known that
+
+D(W||P ∗
+Y |P0) ≤D(W||P ∗
+Y |P ∗) = C .
+(507)
+
+This fact is crucial for proving the bound.
+
+Note that V (Wx||P ∗
+Y ) is defined and finite since all Wx ≪P ∗
+Y . Denote a special subset of
+
+nonzero-variance inputs as
+
+A+
+△= {x ∈A : V (Wx||P ∗
+Y ) > 0} .
+(508)
+
+And also for every P0 ∈Pn denote m(P0) = nP0(A+) which is the number of nonzero-variance
+
+letters in any x ∈T n
+P0. Also note that there are minimal and maximal variances VM ≥Vm > 0
+
+such that Vm ≤V (Wx||P ∗
+Y ) ≤VM for all x ∈A+.
+
+Since PY n is a product distribution,
+
+log M ∗
+P0(n, ϵ) ≤−log βn
+1−ϵ(xn, PY n)
+(509)
+
+for all xn ∈T n
+P0. We are going to apply Lemmas 58 and 59, Appendix C, and so need to compute
+
+Dn, Vn and an upper bound on Bn. We have
+
+Dn
+=
+D(W||P ∗
+Y |P0) ,
+(510)
+
+Vn
+=
+V (W||P ∗
+Y |P0) .
+(511)
+
+To upper bound Bn we must lower bound Vn and upper bound Tn. Note that
+
+V (W||P ∗
+Y |P0) ≥m(P0)
+
+n
+Vm .
+(512)
+
+For Tn, we can write
+
+Tn
+△=
+�
+
+x∈A
+
+�
+
+y∈B
+P0(x)W(y|x)
+����log W(y|x)
+
+P ∗
+Y (y) −D(Wx||P ∗
+Y )
+����
+
+3
+=
+�
+
+x∈A
+P0(x)T(x) .
+(513)
+
+Here, the T(x)’s are all finite and T(x) = 0 iff x ̸∈A+. Thus, for x ∈A+ there is one maximal
+
+T ∗= maxx∈A T(x), and we have
+
+Tn ≤m(P0)
+
+n
+T ∗.
+(514)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+87
+
+Then, we see that
+
+Bn
+△=
+Tn
+V 3/2
+n
+≤
+�
+n
+m(P0)
+T ∗
+
+V 3/2
+m
+
+△=
+�
+n
+m(P0)MB .
+(515)
+
+So we apply Lemma 58 with
+
+∆=
+�
+n
+m(P0) (MB + 1) −Bn ≥
+�
+n
+m(P0) ≥1 .
+(516)
+
+Using (344) and lower bounding log ∆via (516) we have
+
+log βn
+1−ϵ ≥−nD(W||P ∗
+Y |P0) −
+�
+
+nV (W||P ∗
+Y |P0)Q−1
+�
+
+1 −ϵ −MB + 1
+�
+
+m(P0)
+
+�
+
+−1
+
+2 log n .
+(517)
+
+Now, it is an elementary analytical fact that it is possible to choose a δ0 < 1 −ϵ and Γ2 > 0
+
+such that
+
+Q−1(1 −ϵ −z) ≤Q−1(1 −ϵ) + Γ2z , ∀z ∈[0, δ0] .
+(518)
+
+We now split types in Pn into two classes, PA and PB:
+
+P0 ∈PA ⇐⇒m(P0) ≥m∗,
+PB = Pn \ PA .
+(519)
+
+Here m∗is chosen so that MB+1
+√m∗≤δ0. Then, for all types in PA we have
+
+Q−1
+�
+
+1 −ϵ −MB + 1
+�
+
+m(P0)
+
+�
+
+≤Q−1(1 −ϵ) +
+Γ3
+�
+
+m(P0)
+.
+(520)
+
+Notice also that with this choice of x0 and m∗, the argument of Q−1 in (517) is positive and
+
+the bound is applicable to all types in PA. Substituting (507) we have, for any P0 ∈PA,
+
+log βn
+1−ϵ ≥−nC −
+�
+
+nV (W||P ∗
+Y |P0)Q−1(1 −ϵ) −Γ3
+
+�
+
+nV (W||P ∗
+Y |P0)
+m(P0)
+−1
+
+2 log n .
+(521)
+
+Now notice that Q−1(1 −ϵ) ≤0 (this is the key difference with Case 4) and also that
+
+V (W||P ∗
+Y |P0) ≤m(P0)
+
+n
+VM .
+(522)
+
+Finally, for P0 ∈PA we have
+
+log M ∗
+P0(n, ϵ) ≤nC + Γ3
+�
+
+VM + 1
+
+2 log n .
+(523)
+
+Now for types in PB we have m(P0) < m∗and thus,
+
+nV (W||P ∗
+Y |P0) ≤m∗VM .
+(524)
+
+October 14, 2010
+DRAFT
+
+
+88
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+So Lemma 59 yields
+
+log M ∗
+P0(n, ϵ) ≤nC +
+
+�
+
+2m∗VM
+
+1 −ϵ
+−log 1 −ϵ
+
+2
+.
+(525)
+
+In summary, we see that in both cases, PA and PB, inequalities (523) and (525) imply (272) for
+
+n ≥1.
+
+Case 3. The proof for this case is analogous to that for Case 1, except that when applying
+
+Lemma 64 we must choose g∗= √Vmax because the sign of Q−1(1 −ϵ) is positive this time.
+
+An additional difficulty is that it might be possible that Vmax > 0 but Vmin = 0. In this case the
+
+bound (493) is no longer applicable. What needs to be done is to eliminate types inside Πδ with
+
+small variance:
+
+ΠV = {P ∈Πδ : V (P, W) < A} ,
+(526)
+
+where
+
+A < 1 −ϵ
+
+2
+Vmax
+�
+Q−1(ϵ)
+�2 .
+(527)
+
+Then, for types in ΠV we can apply the fixed-blocklength bound in Lemma 59. For the remaining
+
+types in Πδ \ ΠV the argument in Case 1 works, after Vmin is replaced by A in (493).
+
+Case 4. Fix a type P0 ∈Pn and use PY n = �n
+1(P0W). Then, a similar argument to that for
+
+Case 2 and Lemma 59 yields
+
+log M ∗
+P0(n, ϵ) ≤nI(P0, W) +
+
+�
+
+2nV (P0, W)
+
+1 −ϵ
++ log 1 −ϵ
+
+2
+(528)
+
+for all n ≥1. We need to maximize the right-hand side of this bound over P0 ∈P. This can be
+
+done similarly to Lemma 64. The problem here, however, is that V (P, W) = 0 for P ∈Π. Thus,
+
+even though V (P, W) is differentiable in some neighborhood of Π,
+�
+
+V (P, W) is not. This is
+
+how a term of order n1/3 can appear. Indeed, suppose that there is some direction v along which
+
+I(P + λv) decays quadratically, while V (P + λv) is linear. I.e.,
+
+I(P + λv)
+=
+C −Γ4λ2 + o(λ2) ,
+(529)
+
+V (P + λv)
+=
+Γ5λ + o(λ) .
+(530)
+
+Then it is not hard to see that
+
+max
+λ
+
+�
+nI(P + λv) +
+�
+
+nV (P + λv)
+�
+= nC + Γ6n1/3 + o(n1/3) .
+(531)
+
+Such a direction can only exist if all the conditions of the exotic DMC are satisfied. This can
+
+be proved by computing gradients of I(P, W) and V (P, W).
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+89
+
+APPENDIX J
+
+AUXILIARY MAXIMIZATION LEMMAS
+
+This appendix is concerned with the behavior of the maximum of nf(x) + √ng(x) for large
+
+n, for arbitrary continuous f and g.
+
+Lemma 63: Let D be a compact metric space. Suppose f : D �→R and g : D �→R are
+
+continuous. Define
+
+f ∗= max
+x∈D f(x) ,
+(532)
+
+and
+
+g∗=
+sup
+{x: f(x)=f∗}
+g(x) .
+(533)
+
+Then,
+
+max
+x∈D
+�
+nf(x) + √ng(x)
+�
+= nf ∗+ √ng∗+ o(√n) .
+(534)
+
+The message of this lemma is that, for continuous f and g,
+
+max
+x
+�
+nf(x) + √ng(x)
+�
+≈nf(x∗∗) + √ng(x∗∗)
+(535)
+
+where x∗∗is found by first maximizing f(x) and then maximizing g(x) over the set of maximizers
+
+of f(x).
+
+If we assume more about f and g, then a stronger result can be stated. The assumptions below
+
+essentially mean that f is twice differentiable near f ∗with negative-definite Hessian and g is
+
+differentiable. Without such assumptions Lemma 63 appears to be the best possible result; see
+
+the example after the proof of Lemma 63 below.
+
+Lemma 64: In the notation of previous lemma, denote
+
+D0
+△=
+{x : f(x) = f ∗} ,
+(536)
+
+Dδ
+△=
+{x : d(x, D0) ≤δ} ,
+(537)
+
+where d(·, ·) is a metric. Suppose that for some δ > 0 and some constants f1 > 0 and f2 we
+
+have
+
+f(x) −f ∗≤−f1 d(x, D0)2
+(538)
+
+|g(x) −g∗| ≤f2 d(x, D0)
+(539)
+
+October 14, 2010
+DRAFT
+
+
+90
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+for all x ∈Dδ. Then,
+
+max
+x∈D
+�
+nf(x) + √ng(x)
+�
+= nf ∗+ √ng∗+ O(1) .
+(540)
+
+Proof of Lemma 63: Denote
+
+F(x, n) = nf(x) + √ng(x)
+(541)
+
+F ∗(n) = max
+x∈D F(x, n) .
+(542)
+
+Then (534) is equivalent to a pair of statements:
+
+lim
+n→∞
+1
+nF ∗(n) = f ∗
+(543)
+
+lim
+n→∞
+F ∗(n) −nf ∗
+
+√n
+= g∗,
+(544)
+
+which we are going to prove. First we note that because of the compactness of D both f and
+
+g are bounded. Now
+
+F(x, n) ≤nf ∗+ √ngmax ,
+(545)
+
+which implies
+1
+nF ∗(n) ≤f ∗+ 1
+√ngmax ,
+(546)
+
+which in turn implies
+
+lim sup 1
+
+nF ∗(n) ≤f ∗.
+(547)
+
+On the other hand, if we take x∗to be any x ∈D maximizing f(x) then
+
+F ∗(n) = max
+x
+F(x, n) ≥F(x∗, n) = nf ∗+ √ng(x∗) .
+(548)
+
+Thus
+
+lim inf 1
+
+nF ∗(n) ≥f ∗,
+(549)
+
+and the first statement is proved. Now define
+
+D1 = {x ∈D : f(x) = f ∗} ,
+(550)
+
+which is also compact. Thus, there exists an (possibly non-unique) x∗∗maximizing g(x) on D0:
+
+x∗∗
+=
+argmax
+x∈D0
+g(x) ,
+(551)
+
+g(x∗∗)
+=
+g∗.
+(552)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+91
+
+By definition
+
+F ∗(n) −nf ∗≥F(x∗∗, n) −nf ∗= √ng∗.
+(553)
+
+Thus
+
+lim inf F ∗(n) −nf ∗
+
+√n
+≥g∗.
+(554)
+
+On the other hand, F(x, n) is continuous on D, so that
+
+F ∗(n) = F(x∗
+n, n) .
+(555)
+
+Then notice that
+
+F ∗(n) −nf ∗
+=
+n(f(x∗
+n) −f ∗) + √ng(x∗
+n)
+(556)
+
+≤
+√ng(x∗
+n) ,
+(557)
+
+where the last inequality follows because f(x∗
+n) ≤f ∗. Now we see that
+
+F ∗(n) −nf ∗
+
+√n
+≤g(x∗
+n) .
+(558)
+
+Denoting
+
+φ(n)
+△= F ∗(n) −nf ∗
+
+√n
+,
+(559)
+
+there exists a sequence {nk} such that
+
+φ(nk) →lim sup φ(n) ,
+as k →∞.
+(560)
+
+For that sequence we have
+
+φ(nk) ≤g(x∗
+nk) .
+(561)
+
+Since the x∗
+nk’s all lie in the compact D, there exists a convergent subsequence20:
+
+yl
+△= x∗
+nkl →x0
+(562)
+
+We will now argue that f(x0) = f ∗. As we have just shown,
+
+1
+nkl
+F ∗(nkl) →f ∗,
+(563)
+
+20This is the only place where we use the metric-space nature of D. Namely we need sequential compactness to follow from
+
+compactness. Thus, in complete generality Lemma 63 holds for an arbitrary compact topological space D that is first-countable
+
+(i.e. every point has a countable neighborhood basis).
+
+October 14, 2010
+DRAFT
+
+
+92
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+where
+
+F ∗(nkl) = F(yl, nkl) = nklf(yl) + √nklg(yl) .
+(564)
+
+Thus, since g(x) is bounded
+
+lim
+l→∞
+1
+nkl
+F ∗(nkl) = lim
+l→∞f(yl) = f(x0) ,
+(565)
+
+where the last step follows from the continuity of f. So indeed
+
+f(x0) = f ∗
+⇐⇒
+x0 ∈D0
+=⇒
+g(x0) ≤g∗.
+(566)
+
+Now we recall that
+
+φ(nkl) ≤g(yl) ,
+(567)
+
+and by taking the limit as l →∞we obtain
+
+lim sup φ(n)
+=
+lim
+l→∞φ(nkl)
+(568)
+
+≤
+lim
+l→∞g(yl) = g(x0)
+(569)
+
+≤
+g∗.
+(570)
+
+So we have shown
+
+lim F ∗(n) −nf ∗
+
+√n
+= g∗.
+(571)
+
+Lemma 63 is tight in the sense that term o(√n) cannot be improved without further assump-
+
+tions. Indeed, take f(x) = −x2 and g(x) = x1/k for some k ∈Z+ on [−1, 1]. Then, a simple
+
+calculation shows that
+
+max
+x∈[−1,1]
+�
+nf(x) + √ng(x)
+�
+= const · n
+k−1
+2k−1
+(572)
+
+and the power of n can be arbitrary close to √n.
+
+Lemma 63 can be generalized to any finite set of “basis terms”, instead of {n, √n}. In this
+
+case, the only requirement would be that uj+1(n) = o(uj(n)).
+
+Proof of Lemma 64: Because of the boundedness of g(x), the points x∗
+n must all lie in Dδ
+
+for n sufficiently large. So, for such n we have
+
+max
+x∈D F(x, n)
+=
+max
+x∈Dδ F(x, n)
+(573)
+
+max
+x∈Dδ F(x, n)
+=
+nf ∗+ √ng∗+
+�
+n(f(x∗
+n) −f ∗) + √n(g(x∗
+n) −g∗))
+�
+.
+(574)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+93
+
+We can now bound the term in brackets by using conditions in the lemma:
+
+0
+≤
+�
+n(f(x∗
+n) −f ∗) + √n(g(x∗
+n) −g∗))
+�
+
+(575)
+
+≤
+−f1
+�√nd(x∗
+n, D0)
+�2 + f2
+�√nd(x∗
+n, D0)
+�
+.
+(576)
+
+Now we see that we have a quadratic polynomial in the variable y
+△= √nd(x∗
+n, D0). Since f1 > 0
+
+it has a maximum equal to
+f2
+2
+4f2
+1 . Then,
+
+0 ≤
+�
+n(f(x∗
+n) −f ∗) + √n(g(x∗
+n) −g∗))
+�
+≤f 2
+2
+4f 2
+1
+
+(577)
+
+and we see that residual term is O(1). This establishes (540).
+
+APPENDIX K
+
+REFINED EXPANSIONS FOR THE BSC AND BEC
+
+Proof of Theorem 52:
+The converse bound was computed in Section III-H in (180)
+
+and (173). To analyze the asymptotics of βn
+α we proceed as in the proof of Theorem 48, Case
+
+1. Similarly to (496) we obtain
+
+log2 M ∗(n, ϵ) ≤n(1 −h(δ)) −
+�
+
+nδ(1 −δ) log2
+1 −δ
+
+δ
+Q−1(ϵ) + 1
+
+2 log2 n + O(1) .
+(578)
+
+Note that because of Theorem 28 this upper bound holds even if ϵ is an average probability of
+
+error.
+
+We now return to the achievability part. In order to obtain the constant in the log n term we
+
+use Theorem 33, as none of the other bounds is tight enough to yield the right log n term. First,
+
+denote
+
+Sk
+n
+△= 2−n
+k
+�
+
+l=0
+
+�n
+l
+
+�
+.
+(579)
+
+Then (162) implies the existence of an (n, M, ϵ) code (maximal probability of error) with
+
+ϵ ≤
+
+n
+�
+
+k=0
+
+�n
+k
+
+�
+δk(1 −δ)n−k min
+�
+1, MSk
+n
+�
+.
+(580)
+
+We will argue that (580) implies a lower bound on M ∗with a matching log n term.
+
+Without loss of generality, assume δ < 1/2; choose any r ∈(δ, 1/2) and set
+
+q =
+r
+1 −r < 1 ,
+(581)
+
+K = nδ +
+�
+
+nδ(1 −δ)Q−1
+�
+ϵ −B + G
+√n
+
+�
+,
+(582)
+
+October 14, 2010
+DRAFT
+
+
+94
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+where B denotes the Berry-Esseen constant for a binomial (n, δ) distribution,
+
+G =
+G1
+(1 −q)2
+(583)
+
+and G1 is a constant (guaranteed to exist according [46]) such that for all k = 0, . . . n
+�n
+k
+
+�
+δk(1 −δ)n−k ≤G1
+√n .
+(584)
+
+Then from Berry-Esseen Theorem 44 we obtain
+�
+
+k>K
+
+�n
+k
+
+�
+δk(1 −δ)n−k ≤ϵ −G
+√n .
+(585)
+
+It is also clear that for all sufficiently large n we have K < rn. Now, observe the following
+
+inequality, valid for k = 1, . . . n −1 and j = −(n −k), . . . k:
+�
+n
+k −j
+
+�
+≤
+�n
+k
+
+��
+k
+n −k
+
+�j
+.
+(586)
+
+Consider any M such that MSK
+n ≤1, then
+
+M
+
+K
+�
+
+k=0
+Sk
+n
+=
+M
+
+K
+�
+
+t=0
+(K −t + 1)
+�n
+t
+
+�
+2−n
+(587)
+
+=
+M
+
+K
+�
+
+l=0
+(l + 1)
+�
+n
+K −l
+
+�
+2−n
+(588)
+
+≤
+MSK
+n
+
+K
+�
+
+l=0
+(l + 1)
+�
+K
+n −K
+
+�l
+
+(589)
+
+≤
+MSK
+n
+
+K
+�
+
+l=0
+(l + 1)ql
+(590)
+
+≤
+MSK
+n
+
+∞
+�
+
+l=0
+(l + 1)ql
+(591)
+
+≤
+1
+(1 −q)2 .
+(592)
+
+If MSK
+n ≤1 then by (592)
+
+K
+�
+
+k=0
+
+�n
+k
+
+�
+δk(1 −δ)n−kMSk
+n ≤G
+√n .
+(593)
+
+We can now see that (580) implies that
+
+M ∗(n, ϵ) ≥
+1
+SK
+n
+.
+(594)
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+95
+
+Indeed, choose M =
+1
+SK
+n . Then from (585) and (593) it follows that
+
+n
+�
+
+k=0
+
+�n
+k
+
+�
+δk(1 −δ)n−k min
+�
+1, MSk
+n
+�
+
+(595)
+
+≤
+
+K
+�
+
+k=0
+
+�n
+k
+
+�
+δk(1 −δ)n−k +
+�
+
+k>K
+
+�n
+k
+
+�
+δk(1 −δ)n−k
+(596)
+
+≤
+G
+√n + ϵ −G
+√n
+(597)
+
+=
+ϵ .
+(598)
+
+Finally, we must upper bound log SK
+n up to O(1) terms. This is simply an application of (586):
+
+SK
+n
+=
+2−n
+K
+�
+
+k=0
+
+�n
+k
+
+�
+
+(599)
+
+≤
+2−n
+�n
+K
+
+�
+∞
+�
+
+l=0
+
+�
+K
+n −K
+
+�l
+
+(600)
+
+≤
+2−n
+�n
+K
+
+�n −K
+
+n −2K .
+(601)
+
+For n sufficiently large n −2K will become larger than n(1 −2r); thus for such n we have
+
+n−K
+n−2K ≤
+1
+1−2r and hence
+
+log2 SK
+n ≤−n + log2
+
+�n
+K
+
+�
++ O(1) .
+(602)
+
+Using Stirling’s approximation we obtain the inequality
+�n
+K
+
+�
+≤e1/12
+
+√
+
+2π
+
+�
+n
+K(n −K) exp(nh(K/n)) .
+(603)
+
+Substituting K from (582) and applying Taylor’s formula to h(p) implies
+
+log2 SK
+n ≤n(h(δ) −1) +
+�
+
+nδ(1 −δ) log2
+1 −δ
+
+δ
+Q−1
+�
+ϵ −B + G
+√n
+
+�
+−1
+
+2 log2 n + O(1) . (604)
+
+Finally, applying Taylor’s formula to Q−1, we conclude
+
+log2 SK
+n ≤n(h(δ) −1) +
+�
+
+nδ(1 −δ) log2
+1 −δ
+
+δ
+Q−1(ϵ) −1
+
+2 log2 n + O(1) .
+(605)
+
+Substituting this into (594) we obtain the sought-after expansion.
+
+Proof of Theorem 53: The achievability part of (290) is established by (276). The converse
+
+in Theorem 48 yields the wrong log n term; instead, we use the stronger converse in Theorem 38
+
+(which holds for average error probability). Since any (n, M, ϵ) code must satisfy this bound
+
+October 14, 2010
+DRAFT
+
+
+96
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+then we must simply find M so large that the left-hand side is larger than a given ϵ. We can
+
+then conclude that M ∗(n, ϵ) is upper bounded by such M. We observe that by (584),
+
+n
+�
+
+ℓ=⌊n−log2 M⌋+1
+
+�n
+ℓ
+
+�
+δℓ(1 −δ)n−ℓ2n−ℓ−log2 M ≤2G1
+√n .
+(606)
+
+Then, denote by B the usual Berry-Esseen constant for a binomial distribution, and set
+
+log2 M = n(1 −δ) −
+�
+
+nδ(1 −δ)Q−1
+�
+ϵ + B + 2G1
+√n
+
+�
+.
+(607)
+
+Then from Berry-Esseen Theorem 44 we obtain
+
+�
+
+l≥n−log2 M
+
+�n
+l
+
+�
+δl(1 −δ)n−l ≥ϵ + 2G1
+√n .
+(608)
+
+Finally from (606) we conclude that
+
+n
+�
+
+ℓ=⌊n−log2 M⌋+1
+
+�n
+ℓ
+
+�
+δℓ(1 −δ)n−ℓ�
+1 −2n−ℓ−log2 M�
+≥ϵ ,
+(609)
+
+and hence
+
+log2 M ∗(n, ϵ)
+≤
+n(1 −δ) −
+�
+
+nδ(1 −δ)Q−1
+�
+ϵ + B + 2G1
+√n
+
+�
+
+(610)
+
+=
+n(1 −δ) −
+�
+
+nδ(1 −δ)Q−1(ϵ) + O(1) ,
+(611)
+
+where (611) follows from Taylor’s formula.
+
+APPENDIX L
+
+PROOF OF THEOREM 54
+
+It is convenient to split the proof of Theorem 54 into three parts. We first address the converse
+
+parts.
+
+Theorem 65: For the AWGN channel with SNR P and ϵ ∈(0, 1) and equal-power constraint
+
+we have
+
+log M ∗
+e (n, ϵ, P) ≤nC −
+√
+
+nV Q−1(ϵ) + 1
+
+2 log n + O(1) ,
+(612)
+
+where the capacity C and dispersion V are defined in (292) and (293).
+
+Proof: Take A, B, PY n and PY n|Xn=xn as in Section III-J. There we have shown that, for
+
+any xn ∈Fn the distribution of i(xn; Y n) is the same as that of Hn in (205). Thus, using (106),
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+97
+
+we have for any ζn,
+
+inf
+xn∈Fn βn
+1−ϵ(xn)
+=
+βn
+1−ϵ(xn)
+(613)
+
+≥
+exp(ζn −nC)
+
+�
+
+1 −ϵ −P
+
+�n
+�
+
+i=1
+Si ≤ζn
+
+��
+
+.
+(614)
+
+with
+
+Si =
+P log e
+2(1 + P)
+
+�
+Z2
+i −2 Zi
+√
+
+P
+−1
+�
+
+(615)
+
+and the Zi’s are i.i.d. standard normal. Note that E [Si] = 0 and
+
+Var(Si)
+=
+�P log e
+
+2(1 + P)
+
+�2
+E
+
+��
+Z2
+i −2 Zi
+√
+
+P
+−1
+�2�
+
+(616)
+
+=
+�P log e
+
+2(1 + P)
+
+�2
+E
+�
+Z4
+i +
+�4
+
+P −2
+�
+Z2
+i + 1
+�
+
+(617)
+
+=
+�P log e
+
+2(1 + P)
+
+�2 �4
+
+P + 2
+�
+
+(618)
+
+=
+V .
+(619)
+
+Furthermore, define
+
+B(P)
+=
+6E [|Si|3]
+
+V 3/2
+(620)
+
+Nc(P, ϵ)
+=
+�2B(P)
+
+1 −ϵ
+
+�2
+.
+(621)
+
+Then for n > Nc(P, ϵ) we have
+
+αn = 1 −ϵ −2B(P)
+√n
+> 0 .
+(622)
+
+For such n choose
+
+ζn = −
+√
+
+nV Q−1(αn) .
+(623)
+
+Then from Theorem 44, we have
+
+P
+
+�n
+�
+
+i=1
+Si ≤ζn
+
+�
+
+≤
+αn + B(P)
+√n
+(624)
+
+≤
+1 −ϵ −B(P)
+√n .
+(625)
+
+On substituting (625) into (613) we obtain
+
+βn
+1−ϵ ≥exp(ζn −nC)B(P)
+√n .
+(626)
+
+October 14, 2010
+DRAFT
+
+
+98
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+Using Theorem 31, this implies
+
+log M ∗
+e (n, ϵ, P) ≤nC −ζn + 1
+
+2 log n −log B(P) .
+(627)
+
+From Taylor’s theorem, for some θ ∈
+�
+1 −ϵ −2B(P)
+√n , 1 −ϵ
+�
+, we have
+
+ζn = −
+√
+
+nV Q−1(1 −ϵ) + 2B(P)
+√
+
+V dQ−1
+
+dx (θ) .
+(628)
+
+Without loss of generality, we assume that 0 < ϵ < 1 −2B(P)
+√n , for all n > Nc(P, ϵ) (otherwise
+
+just increase Nc(P, ϵ) until this is true). Since
+d
+dxQ−1 is a continuous function on (0, 1), we can
+
+lower bound
+d
+dxQ−1(θ) by
+
+g1(P, ϵ) =
+min
+θ∈[α1,1−ϵ]
+d
+dxQ−1(θ) ,
+(629)
+
+where α1 = 1 −ϵ −
+2B(P)
+√
+
+Nc(P,ϵ+1). Note that g1(P, ϵ) is a continuous function of P and ϵ. This
+
+results in
+
+ζn ≥−
+√
+
+nV Q−1(1 −ϵ) + g1(P, ϵ)2B(P)
+√
+
+V .
+(630)
+
+Substituting this bound into (627) and defining
+
+gc(P, ϵ) = −2B(P)
+√
+
+V g1(P, ϵ) −log B(P)
+(631)
+
+we arrive at
+
+log M ∗
+e (n, ϵ, P) ≤nC +
+√
+
+nV Q−1(1 −ϵ) + 1
+
+2 log n + gc(P, ϵ) .
+(632)
+
+Corollary 66: For the AWGN channel with SNR P and for each 0 < ϵ < 1, we have
+
+M ∗
+m(n, ϵ, P) ≤nC −
+√
+
+nV Q−1(ϵ) + 1
+
+2 log n + O(1) ,
+(633)
+
+M ∗
+a(n, ϵ, P) ≤nC −
+√
+
+nV Q−1(ϵ) + 3
+
+2 log n + O(1) .
+(634)
+
+Proof: By Lemma 39 we have
+
+log M ∗
+m(n, ϵ, P) ≤log M ∗
+e (n + 1, ϵ, P) .
+(635)
+
+Therefore from (612) and Taylor’s theorem we get (633).
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+99
+
+To prove (634) we set
+
+N(ϵ, P) =
+max
+P1∈[P,2P] Nc(ϵ, P1) ,
+(636)
+
+g(ϵ, P) =
+max
+P1∈[P,2P] gc(ϵ, P1) ,
+(637)
+
+where Nc and gc are continuous functions defined in (621) and (631). Now set Pn = (1+1/n)P
+
+and use Lemma 39. Then for all n > N(ϵ, P) according to Theorem 65 we have
+
+log M ∗
+a(n, ϵ, P)
+≤
+−log
+�
+1 −P
+
+Pn
+
+�
++ log M ∗
+m(n, ϵ, Pn)
+(638)
+
+≤
+log(n + 1) + log M ∗
+e (n + 1, ϵ, Pn)
+(639)
+
+≤
+(n + 1)C(Pn) −
+�
+
+(n + 1)V (Pn)Q−1(ϵ) + 3
+
+2 log(n + 1) + g(ϵ, P) .(640)
+
+After repeated use of Taylor’s theorem we can collect all O(1), O(1/n) and O(1/√n) terms
+
+into O(1), and (634) follows.
+
+Theorem 67: For the AWGN channel with SNR P and for 0 < ϵ ≤1, we have
+
+log M ∗
+e (n, ϵ, P) ≥nC −
+√
+
+nV Q−1(ϵ) + O(1) .
+(641)
+
+Obtaining an expansion up to o(√n) would only require Lemma 43. However, to refine the term
+
+to O(1) requires a certain lower bound on κn
+τ uniform in τ ∈[0, δ) because we need to set
+
+τn = O(1/√n) instead of τ = O(1).
+
+Proof of Theorem 67: We will use all the notation of the proof of Theorem 65, but redefine
+
+αn = 1 −ϵ + 2B(P)
+√n
+.
+(642)
+
+Note that for n sufficiently large αn < 1 and the definition of ζn in (623) is meaningful.
+
+As in (625) we conclude that
+
+P
+
+�n
+�
+
+i=1
+Si ≤ζn
+
+�
+
+≥αn −B(P)
+√n
+≥1 −ϵ + B(P)
+√n .
+(643)
+
+In other words, we have proven that for
+
+log γn = nC(P) −ζn = nC(P) +
+�
+
+nV (P)Q−1(αn) ,
+(644)
+
+we obtain
+
+PY n|X=xn [i(xn; Y n) ≥log γn] = P
+
+�n
+�
+
+i=1
+Si ≤ζn
+
+�
+
+≥1 −ϵ + B(P)
+√n
+(645)
+
+October 14, 2010
+DRAFT
+
+
+100
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+for sufficiently large n and any xn ∈Fn. Therefore, by setting
+
+τn
+△= B(P)
+√n .
+(646)
+
+we have
+
+log βn
+1−ϵ+τn
+≤
+PY n [i(xn; Y n) ≥log γn]
+(647)
+
+=
+E
+�
+exp{−i(xn; Y n)}1{i(xn;Y n)≥log γn}
+��Xn = xn�
+
+(648)
+
+≤
+−log γn −1
+
+2 log n + O(1)
+(649)
+
+=
+−nC(P) + ζn −1
+
+2 log n + O(1) ,
+(650)
+
+where the (649) is by Lemma 47.
+
+Finally, we use general Theorem 25 with τ = τn to obtain
+
+log M ∗
+e (n, P, ϵ) ≥log
+κn
+τn
+βn
+1−ϵ+τn
+.
+(651)
+
+For the chosen τn Lemma 61 gives
+
+log κn
+τn ≥−1
+
+2 log n + O(1) .
+(652)
+
+This inequality, together with (650), yields
+
+log M ∗
+e (n, P, ϵ) ≥nC(P) −ζn + O(1) .
+(653)
+
+It is easy to see that Q−1(αn) = Q−1(1 −ϵ) + O(1/√n) and thus, for ζn we have
+
+ζn =
+�
+
+nV (P)Q−1(ϵ) + O(1) .
+(654)
+
+Proof of Theorem 54: Expansion (291) is implied by (294) and (295). The lower bounds
+
+in (294) and (295) follow from (641). The upper bound in (294) is given by (612) for equal-
+
+power constraint and by (633) for maximal-power constraint. The upper bound in (295) is proved
+
+by (634).
+
+ACKNOWLEDGEMENT
+
+We are grateful to Dr. Thomas Richardson for generating the multi-edge LDPC performance
+
+included in Figure 12, and to Dr. Alexei Ashikhmin for suggesting the inclusion of the BSC
+
+bound in Theorem 4 and the BEC bound in Theorem 6.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+101
+
+REFERENCES
+
+[1] S. Verd´u, “teaching it,” XXVIII Shannon Lecture, 2007 IEEE International Symposium on Information Theory, Nice, France,
+
+June 28, 2007. Also: IEEE Information Theory Society Newsletter, Dec. 2007.
+
+[2] S. Verd´u and T. S. Han, “A general formula for channel capacity,” IEEE Trans. Inform. Theory, vol. 40, no. 4, pp. 1147-1157,
+
+1994.
+
+[3] C. E. Shannon, “Probability of error for optimal codes in a Gaussian channel,” Bell System Tech. Journal, vol. 38, pp.
+
+611-656, 1959.
+
+[4] D. Slepian, “Bounds on communication,” Bell System Technical Journal, vol. 42, pp. 681-707, 1963
+
+[5] S. Dolinar, D. Divsalar, and F. Pollara, “Code performance as a function of block size,” JPL TDA Progress Report, 42-133,
+
+Jet Propulsion Laboratory, Pasadena, CA, 1998.
+
+[6] C. Salema, Microwave Radio Links: From Theory to Design, Wiley, New York 2002.
+
+[7] D. Baron, M. A. Khojastepour, and R. G. Baraniuk, “How quickly can we approach channel capacity?” Proc. 38th Asilomar
+
+Conf. Signals, Systems, and Computers, Pacific Grove, CA, November 2004
+
+[8] A. Valembois and M. P. C. Fossorier, “Sphere-packing bounds revisited for moderate block lengths,” IEEE Trans. Inform.
+
+Theory, vol. 50, no. 12, pp. 2998-3014, 2004.
+
+[9] D.E. Lazic, Th. Beth and S. Egner, “Constrained capacity of the AWGN channel,” Proc. of 1998 IEEE Int. Symp. Information
+
+Theory (ISIT), Cambridge, MA, 1998.
+
+[10] J. Shi and R. D. Wesel, “A study on universal codes with finite block lengths,” IEEE Trans. Inform. Theory, vol. 53, no. 9,
+
+pp. 3066-3074, 2007.
+
+[11] G. Wiechman and I. Sason, “An improved sphere-packing bound for finite-length codes over symmetric memoryless
+
+channels,” IEEE Trans. Inform. Theory, vol. 54, no. 5, pp. 1962-1990, 2008.
+
+[12] A. E. Ashikhmin, A. Barg, S. N. Litsyn, “A new upper bound on the reliability function of the Gaussian channel,” IEEE
+
+Trans. Inform. Theory, vol. 46, no. 6, pp. 1945-1961, 2000.
+
+[13] A. Feinstein, “A new basic theorem of information theory,” IRE Trans. Inform. Theory, vol. 4, no. 4, pp. 2-22, 1954.
+
+[14] C. E. Shannon, “Certain results in coding theory for noisy channels,” Inform. Control, vol. 1, pp. 6-25, 1957.
+
+[15] R. G. Gallager, “A simple derivation of the coding theorem and some applications,” IEEE Trans. Inform. Theory, vol. 11,
+
+no. 1, pp. 3-18, 1965.
+
+[16] R. G. Gallager, Information Theory and Reliable Communication, John Wiley & Sons, Inc., New York, 1968.
+
+[17] G. Poltyrev, “Bounds on the decoding error probability of binary linear codes via their spectra,” IEEE Trans. Inform.
+
+Theory, vol. 40, no. 4, pp. 1284-1292, 1994.
+
+[18] A. Barg and G. D. Forney, “Random codes: minimum distances and error exponents”, IEEE Trans. Inform. Theory, vol. 48,
+
+no. 9, pp. 2568-2573, 2002.
+
+[19] T. Helleseth, T. Klove and V. Levenshtein, “On the information function of an error correcting code,” IEEE Trans. Inform.
+
+Theory, vol. 43, pp.549-557, 1997.
+
+[20] A. Ashikhmin, personal communication, 2009.
+
+[21] A. J. Thomasian, “Error bounds for continuous channels,” Proc. Fourth London Symposium on Information Theory, C.
+
+Cherry, Ed., pp. 46-60, Butterworths, Washington, DC, 1961.
+
+[22] R. Ash, Information Theory. New York: Interscience Publishers, 1965.
+
+[23] J. Wolfowitz, “The coding of messages subject to chance errors,” Illinois J. Math., vol. 1, pp. 591-606, 1957.
+
+[24] J. Wolfowitz, Coding Theorems of Information Theory, Prentice-Hall, Inc., Englewood Cliffs, NJ, 1962.
+
+October 14, 2010
+DRAFT
+
+
+102
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+[25] J. Wolfowitz, “Notes on a general strong converse,” Inform. Contr., vol. 12, pp. 1-4, 1968.
+
+[26] H. V. Poor and S. Verd´u, “A lower bound on the error probability in multihypothesis testing,” IEEE Trans. Inform. Theory,
+
+vol. 41, no. 6, pp. 1992-1993, 1995.
+
+[27] C. E. Shannon, R. G. Gallager, and E. R. Berlekamp, “Lower bounds to error probability for coding on discrete memoryless
+
+channels I”, Inform. Contr., vol. 10, pp. 65-103, 1967.
+
+[28] C. E. Shannon, “A mathematical theory of communication,” Bell Syst. Tech. J., vol. 27, pp. 379-423 and 623-656, July
+
+and October, 1948.
+
+[29] L. Weiss, “On the strong converse of the coding theorem for symmetric channels without memory,” Quart. Appl. Math.
+
+vol. 18-3, 1960.
+
+[30] R. L. Dobrushin, “Mathematical problems in the Shannon theory of optimal coding of information,” Proc. 4th Berkeley
+
+Symp. Mathematics, Statistics, and Probability, 1961, vol. 1, pp. 211-252.
+
+[31] V. Strassen, “Asymptotische Absch¨atzungen in Shannon’s Informationstheorie,”
+Trans. Third Prague Conf. Information
+
+Theory, 1962, Czechoslovak Academy of Sciences, Prague, pp. 689-723.
+
+[32] L. Wang, R. Colbeck and R. Renner, “Simple channel coding bounds,” Proc. 2009 IEEE Int. Symp. Information Theory
+
+(ISIT), Seoul, Korea, July 2009.
+
+[33] Y. Polyanskiy, H. V. Poor and S. Verd´u, “New channel coding achievability bounds,” Proc. 2008 IEEE Int. Symp. Information
+
+Theory (ISIT), Toronto, Canada, 2008.
+
+[34] I. Csisz´ar, “Information-type measures of difference of probability distributions and indirect observation,” Studia Sci. Math.
+
+Hungar., vol. 2, pp. 229-318, 1967.
+
+[35] S. Verd´u, EE528–Information Theory, Lecture Notes, Princeton University, Princeton, NJ, 2007.
+
+[36] R. E. Blahut, “Hypothesis testing and information theory,” IEEE Trans. Inform. Theory, vol. 20, no. 4, pp. 405-417, 1974.
+
+[37] S. J. MacMullan, O. M. Collins, “A comparison of known codes, random codes and the best codes,” IEEE Trans. Inform.
+
+Theory, vol. 44, no. 7, pp. 3009-3022, 1998.
+
+[38] C. Di, D. Proietti, I. E. Telatar, T. J. Richardson and R. Urbanke, “Finite-length analysis of low-density parity-check codes
+
+on the binary erasure channel,” IEEE Trans. Inform. Theory, vol. 48, no. 6, pp. 1570-1579, 2002.
+
+[39] P. Elias, “Coding for two noisy channels,” Proc. Third London Symposium on Information Theory, pp. 61-76, Buttersworths,
+
+Washington, DC, Sept. 1955.
+
+[40] W. Feller, An Introduction to Probability Theory and Its Applications, Volume II, Second edition, John Wiley & Sons, Inc.,
+
+New York, 1971.
+
+[41] P. Van Beeck, “An application of Fourier methods to the problem of sharpening the Berry-Esseen inequality,” Z.
+
+Wahrscheinlichkeitstheorie und Verw. Geb., vol. 23, 187-196, 1972.
+
+[42] H. V. Poor, An Introduction to Signal Detection and Estimation, 2nd Ed., Springer-Verlag, New York, 1994.
+
+[43] M. Abramowitz and I. Stegun, Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables
+
+(tenth printing), Dover, New York, 1972.
+
+[44] A. L. Jones, “An extension of inequality involving modified Bessel functions,” J. Math. and Phys., vol. 47, pp. 220-221,
+
+1968.
+
+[45] A. V. Prokhorov, “Inequalities for Bessel functions of a purely imaginary argument,” Theor. Probability Appl., vol. 13,
+
+pp. 496-501, 1968.
+
+[46] C.-G. Esseen, “On the concentration function of a sum of independent random variables,” Z. Wahrscheinlichkeitstheorie
+
+und Verw. Geb. vol. 9, no. 4, 290-308, 1968.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+103
+
+[47] M. Hayashi, “Information spectrum approach to second-order coding rate in channel coding,” IEEE Trans. Inform. Theory,
+
+vol. 55, no. 11, pp. 4947-4966, Nov 2009.
+
+[48] D. Buckingham and M.C. Valenti, “The information-outage probability of finite-length codes over AWGN channels,” Proc.
+
+Conf. on Info. Sci. and Sys. (CISS), Princeton, NJ, Mar. 2008
+
+[49] T. Richardson, personal communication, 2009.
+
+[50] Y. Polyanskiy, H. V. Poor and S. Verd´u, “Dispersion of the Gilbert-Elliot channel,” Proc. 2009 IEEE Int. Symp. Information
+
+Theory (ISIT), Seoul, Korea, July 2009.
+
+[51] C. E. Shannon, “Behavior near channel capacity,” undated manuscript; Claude Elwood Shannon’s papers, Manuscript
+
+Division, Library of Congress, Washington, DC
+
+October 14, 2010
+DRAFT
+
+
+104
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+Blocklength, n
+
+Rate, bit/ch.use
+
+ 
+
+ 
+
+Capacity
+Converse
+RCU
+DT
+Gallager
+Feinstein
+
+Fig. 1.
+Rate-blocklength tradeoff for the BSC with crossover probability δ = 0.11 and maximal block error rate ϵ = 10−3.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+105
+
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+Blocklength, n
+
+Rate, bit/ch.use
+
+ 
+
+ 
+
+Capacity
+
+Converse
+
+RCU
+
+DT
+
+Gallager
+
+Feinstein
+
+Fig. 2.
+Rate-blocklength tradeoff for the BSC with crossover probability δ = 0.11 and maximal block error rate ϵ = 10−6.
+
+October 14, 2010
+DRAFT
+
+
+106
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0.3
+
+0.35
+
+0.4
+
+0.45
+
+0.5
+
+Blocklength, n
+
+Rate, bit/ch.use
+
+ 
+
+ 
+
+Capacity
+Converse
+DT
+RCU
+Gallager
+Feinstein
+
+Fig. 3.
+Rate-blocklength tradeoff for the BEC with erasure probability δ = 0.5 and maximal block error rate ϵ = 10−3.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+107
+
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0.3
+
+0.35
+
+0.4
+
+0.45
+
+0.5
+
+Blocklength, n
+
+Rate, bit/ch.use
+
+ 
+
+ 
+
+Capacity
+
+Converse
+
+DT
+
+RCU
+
+Gallager
+
+Feinstein
+
+Fig. 4.
+Rate-blocklength tradeoff for the BEC with erasure probability δ = 0.5 and maximal block error rate ϵ = 10−6.
+
+October 14, 2010
+DRAFT
+
+
+108
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+200
+250
+300
+350
+0.3
+
+0.35
+
+0.4
+
+Blocklength, n
+
+Rate, bit/ch.use
+
+Combinatorial (Ashikhmin)
+DT
+
+Fig. 5.
+Comparison of the DT-bound (183) and the combinatorial bound of Ashikhmin (12) for the BEC with erasure probability δ = 0.5 and probability of block error
+
+ϵ = 10−3.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+109
+
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+Blocklength, n
+
+Rate R,  bits/ch.use
+
+Capacity
+
+Converse
+
+Shannon
+
+κβ Bound
+
+Gallager
+
+Feinstein
+
+Fig. 6.
+Bounds for the AWGN channel, SNR = 0 dB, ϵ = 10−3.
+
+October 14, 2010
+DRAFT
+
+
+110
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+0
+200
+400
+600
+800
+1000
+1200
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+Blocklength, n
+
+Rate R,  bits/ch.use
+
+Capacity
+Converse
+Shannon
+κβ Bound
+Gallager
+Feinstein
+
+Fig. 7.
+Bounds for the AWGN channel, SNR = 20 dB, ϵ = 10−6.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+111
+
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+Blocklength, n
+
+Rate, bit/ch.use
+
+ 
+
+ 
+
+Capacity
+
+Converse
+
+Normal approximation + 1/2 log n
+
+Normal approximation
+
+Achievability
+
+Fig. 8.
+Rate-blocklength tradeoff for the BSC with crossover probability δ = 0.11 and maximal block error rate ϵ = 10−3.
+
+October 14, 2010
+DRAFT
+
+
+112
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+Blocklength, n
+
+Rate, bit/ch.use
+
+ 
+
+ 
+
+Capacity
+Converse
+Normal approximation + 1/2 log n
+Normal approximation
+Achievability
+
+Fig. 9.
+Rate-blocklength tradeoff for the BSC with crossover probability δ = 0.11 and maximal block error rate ϵ = 10−6.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+113
+
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0.3
+
+0.35
+
+0.4
+
+0.45
+
+0.5
+
+Blocklength, n
+
+Rate, bit/ch.use
+
+ 
+
+ 
+
+Capacity
+
+Converse
+
+Normal approximation
+
+Achievability
+
+Fig. 10.
+Rate-blocklength tradeoff for the BEC with erasure probability δ = 0.5 and maximal block error rate ϵ = 10−3.
+
+October 14, 2010
+DRAFT
+
+
+114
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0.3
+
+0.35
+
+0.4
+
+0.45
+
+0.5
+
+Blocklength, n
+
+Rate, bit/ch.use
+
+ 
+
+ 
+
+Capacity
+Converse
+Normal approximation
+Achievability
+
+Fig. 11.
+Rate-blocklength tradeoff for the BEC with erasure probability δ = 0.5 and maximal block error rate ϵ = 10−6.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+115
+
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+0
+
+0.1
+
+0.2
+
+0.3
+
+0.4
+
+0.5
+
+Blocklength, n
+
+Rate R,  bits/ch.use
+
+Capacity
+
+Converse
+
+Achievability
+
+Normal approximation
+
+Multi−Edge LDPC (BP)
+
+Fig. 12.
+Normal approximation for the AWGN channel, SNR = 0 dB, ϵ = 10−3. The LDPC curve demonstrates the performance achieved by a particular family of
+
+multi-edge LDPC codes (designed by T. Richardson).
+
+October 14, 2010
+DRAFT
+
+
+116
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+0
+200
+400
+600
+800
+1000
+1200
+1
+
+1.5
+
+2
+
+2.5
+
+3
+
+3.5
+
+Blocklength, n
+
+Rate R,  bits/ch.use
+
+Capacity
+Converse
+Achievability
+Normal approximation
+
+Fig. 13.
+Normal approximation for the AWGN channel, SNR = 20 dB, ϵ = 10−6.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+117
+
+10
+1
+10
+2
+10
+3
+10
+4
+10
+5
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+Information block size k, bits
+
+Eb/No gap, ∆ Eb, dB
+
+Normal approximation
+
+Achievability
+
+Converse
+
+Fig. 14.
+Normal approximation for the Eb/No gap for the AWGN channel, R = 1/2, ϵ = 10−4
+
+October 14, 2010
+DRAFT
+
+
+118
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+10
+2
+10
+3
+10
+4
+10
+5
+0.6
+
+0.65
+
+0.7
+
+0.75
+
+0.8
+
+0.85
+
+0.9
+
+0.95
+
+1
+
+Blocklength, n
+
+Normalized rate
+
+ME−LDPC R=1/2 (BP)
+Turbo R=1/2
+Turbo R=1/3
+Turbo R=1/4
+Turbo R=1/6
+Galileo LGA
+Galileo HGA
+Cassini/Pathfinder
+Voyager
+
+Fig. 15.
+Normalized rates for various practical codes over AWGN, probability of block error ϵ = 10−4.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+119
+
+10
+1
+10
+2
+10
+3
+10
+4
+10
+5
+10
+6
+10
+−4
+
+10
+−3
+
+10
+−2
+
+10
+−1
+
+Packet size k, bits
+
+ε*(k)
+
+Fig. 16.
+Optimal block error rate ϵ∗(k) maximizing average throughput under ARQ feedback for the AWGN channel with SNR = 0 dB. Solid curve is obtained by using
+
+normal approximation, dashed curve is an asymptotic formula (303).
+
+October 14, 2010
+DRAFT
+
+
+120
+SUBMITTED TO IEEE TRANSACTIONS ON INFORMATION THEORY
+
+10
+1
+10
+2
+10
+3
+10
+4
+10
+5
+10
+6
+0.8
+
+0.82
+
+0.84
+
+0.86
+
+0.88
+
+0.9
+
+0.92
+
+0.94
+
+0.96
+
+0.98
+
+1
+
+Packet size k, bits
+
+R/C
+
+Fig. 17.
+Optimal coding rate maximizing average throughput under ARQ feedback for the AWGN channel with SNR = 0 dB. Solid curve is obtained using normal
+
+approximation.
+
+DRAFT
+October 14, 2010
+
+
+POLYANSKIY et al.: CHANNEL CODING RATE IN THE FINITE BLOCKLENGTH REGIME
+121
+
+Fig. 18.
+Reference [51] reproduced in its entirety.
+
+October 14, 2010
+DRAFT
+
+

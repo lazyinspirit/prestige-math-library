@@ -2,7 +2,7 @@
 id: def-modc-relative-deligne-product
 kind: definition
 title: Relative Deligne product in the braided module 2-category
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-qc-tqc-fusion-tree-dimension
 kind: lemma
 title: Fusion-tree basis and dimension recursion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

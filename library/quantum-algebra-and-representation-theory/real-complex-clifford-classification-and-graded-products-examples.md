@@ -1,7 +1,7 @@
 ---
 page: real-complex-clifford-classification-and-graded-products-examples
 title: "Clifford Classification, Modules, and Graded Tensor Products: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - cex-ordinary-tensor-product-fails-for-clifford-orthogonal-sums

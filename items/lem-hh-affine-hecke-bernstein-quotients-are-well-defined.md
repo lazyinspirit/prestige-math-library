@@ -2,7 +2,7 @@
 id: lem-hh-affine-hecke-bernstein-quotients-are-well-defined
 kind: lemma
 title: "The Bernstein cross-relation quotients are Laurent polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: operator-algebraic-states-and-gns-representations
 title: "Operator-Algebraic States and GNS Representations"
-status: draft
+status: published
 requires:
   - algebraic-representation-and-tensor-symmetry-map
   - group-c-star-algebras-and-the-fell-unitary-dual

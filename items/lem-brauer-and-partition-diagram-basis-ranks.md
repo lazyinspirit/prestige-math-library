@@ -2,7 +2,7 @@
 id: lem-brauer-and-partition-diagram-basis-ranks
 kind: lemma
 title: Ranks of the Brauer and partition diagram bases
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-geometric-dirac-operator-is-well-defined
 kind: lemma
 title: "The geometric Dirac operator is globally well defined and formally symmetric"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory

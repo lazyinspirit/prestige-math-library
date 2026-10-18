@@ -2,7 +2,7 @@
 id: lem-brauer-contraction-functor-and-bending
 kind: lemma
 title: Signed Brauer contraction functor and bending isomorphism
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

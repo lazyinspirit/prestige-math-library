@@ -2,7 +2,7 @@
 id: lem-lichnerowicz-formula-for-geometric-dirac-operators
 kind: lemma
 title: "Lichnerowicz formula for a geometric Dirac operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory

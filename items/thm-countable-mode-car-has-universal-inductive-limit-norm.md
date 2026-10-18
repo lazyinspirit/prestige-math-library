@@ -2,7 +2,7 @@
 id: thm-countable-mode-car-has-universal-inductive-limit-norm
 kind: theorem
 title: The Countable CAR Algebra Has the Universal Inductive-Limit Norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

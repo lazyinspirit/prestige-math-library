@@ -2,7 +2,7 @@
 id: lem-root-unity-toral-quotient-by-group-like-generators
 kind: lemma
 title: The root-specialized toral quotient by group-like generators
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

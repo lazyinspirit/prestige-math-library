@@ -2,7 +2,7 @@
 id: def-conformal-vertex-algebra
 kind: definition
 title: Conformal vertex algebra of CFT type
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

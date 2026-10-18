@@ -2,7 +2,7 @@
 id: cor-finite-cw-real-vector-bundle-has-orthogonal-complement-under-ac
 kind: corollary
 title: Finite-CW real bundles have orthogonal complements under AC
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations

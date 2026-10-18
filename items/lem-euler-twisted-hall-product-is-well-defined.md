@@ -2,7 +2,7 @@
 id: lem-euler-twisted-hall-product-is-well-defined
 kind: lemma
 title: "The Euler-twisted Hall product is well-defined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

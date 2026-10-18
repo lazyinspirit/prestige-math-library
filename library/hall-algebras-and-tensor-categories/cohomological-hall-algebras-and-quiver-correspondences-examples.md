@@ -1,7 +1,7 @@
 ---
 page: cohomological-hall-algebras-and-quiver-correspondences-examples
 title: "Cohomological Hall Algebras and Quiver Correspondences: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-jordan-quiver-extension-correspondence

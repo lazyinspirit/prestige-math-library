@@ -1,7 +1,7 @@
 ---
 page: toric-code-anyons-logical-operators-and-protection
 title: Toric Code Anyons, Logical Operators, and Protection
-status: draft
+status: published
 requires:
   - stabilizer-css-codes-syndromes-and-procedures
 items:

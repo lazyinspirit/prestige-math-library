@@ -2,7 +2,7 @@
 id: def-yangian-gl-n-rtt-presentation
 kind: definition
 title: "The type-A RTT Yangian in the rational i-normalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-lz77-phrase-length-entropy-rate
 kind: theorem
 title: "Stationary-ergodic LZ77 phrase-length theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

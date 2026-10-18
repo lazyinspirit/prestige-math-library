@@ -7,6 +7,12 @@ B=Path(__file__).resolve().parent
 ROOT=B.parents[3]
 errors=[]
 records=[]
+def json_safe(value):
+    """Convert YAML timestamp scalars in supplier metadata to JSON strings."""
+    if isinstance(value,dict):return {k:json_safe(v) for k,v in value.items()}
+    if isinstance(value,list):return [json_safe(v) for v in value]
+    if hasattr(value,'isoformat') and not isinstance(value,str):return value.isoformat()
+    return value
 inputs=[B/'integrator-inventory.json']+sorted((B/'workers').glob('*/inventory.json'))
 for p in inputs:
     obj=json.loads(p.read_text()); rows=obj.get('records',obj.get('items',[]))
@@ -17,12 +23,23 @@ for p in inputs:
         elif r['page'].endswith('B'):r['page']=r['page'][:-1];r['side']='B'
         fp,sep,anchor=r['proof_module'].partition('#')
         if not (B/fp).exists() and (p.parent/fp).exists():r['proof_module']=str((p.parent/fp).relative_to(B))+sep+anchor
-        r.setdefault('status','draft-research')
+        r.setdefault('status','draft-research');r.setdefault('production_ready',False)
         if r['domain']=='physics':
             r.setdefault('physical_scope',r['scope']);r.setdefault('empirical_premises',[])
-        r.setdefault('proof_status','complete-local-argument' if r['kind'] in ['theorem','lemma','proposition','corollary','physics-theorem','thought-experiment','example','counterexample'] else 'definition-or-nonproof-record')
+        r.setdefault('proof_status','local-authoring-obligation' if r['kind'] in ['theorem','lemma','proposition','corollary','physics-theorem','thought-experiment','example','counterexample'] else 'definition-or-nonproof-record')
         roles=r.setdefault('dependency_roles',{})
         records.append(r)
+# Current category-owned audit repairs are reapplied after any worker regeneration.
+audit_path=B/'audit-contracts.json'
+audit=json.loads(audit_path.read_text()) if audit_path.exists() else {}
+for r in records:
+    patch=audit.get('record_repairs',{}).get(r['id'],{})
+    if patch:
+        r.update({k:v for k,v in patch.items() if k!='additional_deps'})
+        r['deps']=list(dict.fromkeys(r['deps']+patch.get('additional_deps',[])))
+        r['dependency_roles']={d:role for d,role in r.get('dependency_roles',{}).items() if d in r['deps']}
+for r in audit.get('additional_records',[]):
+    r=dict(r);r['origin_inventory']='audit-contracts.json';records.append(r)
 by={}
 for r in records:
     if r['id'] in by:errors.append('duplicate '+r['id'])
@@ -36,6 +53,7 @@ def register(key,value,origin):
     v.setdefault('exact_statement',v.get('statement',v.get('scope','Exact hypotheses in source proof module')))
     v.setdefault('source_record',str(origin.relative_to(ROOT)))
     if v.get('path'):research_suppliers[key]=v
+# Actual audited supplier aliases control metadata-name reuse without changing originals.
 # Explicit current-worker source registers are controlling.
 for inv in inputs:
     obj=json.loads(inv.read_text())
@@ -72,7 +90,7 @@ for d in prior:
             elif isinstance(o,list):
                 for v in o:priorwalk(v)
         priorwalk(obj)
-aliases={}
+aliases=dict(audit.get('supplier_aliases',{}))
 for key,v in research_suppliers.items():
     if v.get('path','').startswith('items/') and (ROOT/v['path'].split('#')[0]).exists():aliases.setdefault(key,[Path(v['path'].split('#')[0]).stem])
 for r in records:
@@ -106,11 +124,13 @@ for r in records:
             p=ROOT/'items'/f'{dep}.md'
             if not p.exists():p=ROOT/'physics'/'items'/f'{dep}.md'
             if p.exists():
-                t=p.read_text();parts=t.split('---',2);meta=yaml.safe_load(parts[1]) if len(parts)>2 else {}
+                t=p.read_text();parts=re.split(r'^---\s*$',t,maxsplit=2,flags=re.M);meta=yaml.safe_load(parts[1]) if len(parts)>2 else {}
                 domain=meta.get('domain','mathematics');status=meta.get('status','draft')
                 if r['domain']=='mathematics' and domain!='mathematics':errors.append('external math physical edge '+dep+' '+r['id'])
-                statement=re.search(r'## (?:Statement|Definition)\n(.*?)(?=\n## |\Z)',t,re.S)
-                external.setdefault(dep,{'id':dep,'path':str(p.relative_to(ROOT)),'status':status,'domain':domain,'kind':meta.get('kind'),'exact_statement':statement.group(1).strip() if statement else 'Inspect source definition body','sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'reading_status':'status/statement extracted; actual proof-reading extent belongs to specialist supplier record','consumers':[]})['consumers'].append(r['id'])
+                statement=re.search(r'^## (?:Statement|Definition|Postulate)\n(.*?)(?=\n## |\Z)',t,re.M|re.S)
+                verification=meta.get('verification',{}) or {}
+                verification_summary=json_safe({k:verification[k] for k in ('precheck','audited','verified','sources_checked') if k in verification})
+                external.setdefault(dep,{'id':dep,'path':str(p.relative_to(ROOT)),'status':status,'domain':domain,'kind':meta.get('kind'),'verification':verification_summary,'exact_statement':statement.group(1).strip() if statement else 'Inspect source item body','sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'reading_status':'status/statement extracted; actual proof-reading extent belongs to specialist supplier record','consumers':[]})['consumers'].append(r['id'])
                 role='mathematical-premise' if domain=='mathematics' else 'formulation-prerequisite'
             else:
                 if dep in research_suppliers:
@@ -127,9 +147,10 @@ for r in records:
     if r['domain']=='mathematics' and r['kind'] in ['postulate','physics-theorem','thought-experiment','experiment']:errors.append('kind/domain '+r['id'])
     if r['kind'] in ['theorem','lemma','proposition','corollary'] and r['domain']!='mathematics':errors.append('kind/domain '+r['id'])
 # Exact external original homes; research suppliers remain source-module interfaces.
-for e in external.values():e['home_kind']='research-proof-module' if e.get('path','').startswith('physics/research/') else 'canonical-root-item'
-for pagefile in sorted((ROOT/'library').glob('*/*.md')):
-    t=pagefile.read_text();parts=t.split('---',2)
+for e in external.values():
+    e['home_kind']='research-proof-module' if e.get('path','').startswith('physics/research/') else 'canonical-physics-workspace-item' if e.get('path','').startswith('physics/items/') else 'canonical-root-item'
+for pagefile in sorted(list((ROOT/'library').glob('*/*.md'))+list((ROOT/'physics/library').glob('*/*.md'))):
+    t=pagefile.read_text();parts=re.split(r'^---\s*$',t,maxsplit=2,flags=re.M)
     if len(parts)<3:continue
     try:m=yaml.safe_load(parts[1]) or {}
     except Exception:continue
@@ -173,9 +194,9 @@ for k in pages:pv(k)
 out={'status':'draft-research-not-production-certification','records':ordered,'pairs':porder,'external_suppliers':external}
 (B/'proposed-inventory.json').write_text(json.dumps(out,indent=2,ensure_ascii=False)+'\n')
 (B/'supplier-map.json').write_text(json.dumps({'status':'exact-direct-supplier-statuses-not-audits','external_item_suppliers':list(external.values()),'research_source_modules':[{'path':str(p.relative_to(B)),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'disposition':'actual reading extent/uses in supplier-dispositions.md and worker ledgers'} for p in sorted((B/'workers').glob('*/*.md'))]},indent=2,ensure_ascii=False)+'\n')
-claims=[{'id':r['id'],'kind':r['kind'],'domain':r['domain'],'scope':r['scope'],'home':r['page']+'-'+r['side'],'argument':r['proof_module'],'argument_sha256':r.get('proof_module_sha256'),'prerequisites':r['deps'],'status':r['proof_status']} for r in ordered]
+claims=[{'id':r['id'],'kind':r['kind'],'domain':r['domain'],'scope':r['scope'],'home':r['page']+'-'+r['side'],'argument':r['proof_module'],'argument_sha256':r.get('proof_module_sha256'),'prerequisites':r['deps'],'status':r['proof_status'],'audit_contract':r.get('audit_contract'),'authoring_obligations':r.get('authoring_obligations',[]),'supplier_closure_status':r.get('supplier_closure_status','research-interface-not-production-acceptance'),'inherited_supplier_obligations':r.get('inherited_supplier_obligations',[])} for r in ordered]
 (B/'claim-coverage.json').write_text(json.dumps({'status':'local-argument-mapping-not-independent-review','claims':claims},indent=2,ensure_ascii=False)+'\n')
-summary={'status':'pass' if not errors else 'fail','checks':'IDs, exact argument files/anchors, deps, kind/domain, roles, DAGs, homogeneous pages, unique homes, B leaves, caps','input_inventories':[str(p.relative_to(B)) for p in inputs],'items':len(records),'A_items':sum(r['side']=='A' for r in records),'B_items':sum(r['side']=='B' for r in records),'pairs':len(pages),'max_A':max((len(p['A']) for p in pages.values()),default=0),'max_B':max((len(p['B']) for p in pages.values()),default=0),'external_suppliers':len(external),'errors':errors,'independent_review':False}
+summary={'status':'pass' if not errors else 'fail','checks':'IDs, exact argument files/anchors, deps, kind/domain, roles, DAGs, homogeneous pages, unique homes, B leaves, caps','input_inventories':[str(p.relative_to(B)) for p in inputs],'items':len(records),'A_items':sum(r['side']=='A' for r in records),'B_items':sum(r['side']=='B' for r in records),'pairs':len(pages),'max_A':max((len(p['A']) for p in pages.values()),default=0),'max_B':max((len(p['B']) for p in pages.values()),default=0),'external_suppliers':len(external),'errors':errors,'independent_review':False,'audit_overlay':str(audit_path.relative_to(B)) if audit_path.exists() else None}
 (B/'structural-checks.json').write_text(json.dumps(summary,indent=2)+'\n')
 lines=['# Supplier-first Einstein–Maxwell A/B pathway','','All proposed pages are draft research. The order below is computed from actual dependency homes; every B companion is a leaf. Homogeneous mathematics helper pages are separate from physical model pages. Counts obey the 100-item A and B caps.','', '| Order | Pair | Library | A/B counts | Earlier A prerequisites |','|---|---|---|---|---|']
 for i,p in enumerate(porder,1):lines.append(f"| {i} | {p['pair']} | {p['library']} | {len(p['A'])}/{len(p['B'])} | {', '.join(p['requires']) or 'external or self-contained'} |")

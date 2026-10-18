@@ -2,7 +2,7 @@
 id: lem-colored-fr-surgery-and-coupon-cancellation
 kind: lemma
 title: "Colored signed twist surgery, circumcision, and paired-handle cancellation"
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

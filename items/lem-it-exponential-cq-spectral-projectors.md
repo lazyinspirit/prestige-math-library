@@ -2,7 +2,7 @@
 id: lem-it-exponential-cq-spectral-projectors
 kind: lemma
 title: Exponential averaged spectral projectors for a finite cq ensemble
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

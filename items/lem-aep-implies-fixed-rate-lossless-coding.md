@@ -2,7 +2,7 @@
 id: lem-aep-implies-fixed-rate-lossless-coding
 kind: lemma
 title: "AEP criterion for fixed-rate lossless coding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

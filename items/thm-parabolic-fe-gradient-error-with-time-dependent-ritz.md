@@ -13,8 +13,6 @@ axiom_use: "Countable Choice is inherited from the parabolic Ritz energy estimat
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Christian Clason, Introduction to Finite Element Methods, complete lecture notes, §§11.1–11.2 and §12.2"

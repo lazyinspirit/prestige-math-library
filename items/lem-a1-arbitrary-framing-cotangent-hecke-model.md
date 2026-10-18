@@ -2,7 +2,7 @@
 id: lem-a1-arbitrary-framing-cotangent-hecke-model
 kind: lemma
 title: "Arbitrary-framing A1 varieties and their conormal Hecke correspondence"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -2,7 +2,7 @@
 id: thm-sugawara-modes-satisfy-virasoro
 kind: theorem
 title: Sugawara modes satisfy Virasoro at every noncritical complex level
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

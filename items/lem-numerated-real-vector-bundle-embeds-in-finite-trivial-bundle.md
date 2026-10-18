@@ -2,7 +2,7 @@
 id: lem-numerated-real-vector-bundle-embeds-in-finite-trivial-bundle
 kind: lemma
 title: "A numerated real bundle embeds in a finite trivial bundle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations

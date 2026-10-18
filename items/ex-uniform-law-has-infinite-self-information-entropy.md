@@ -2,7 +2,7 @@
 id: ex-uniform-law-has-infinite-self-information-entropy
 kind: example
 title: "The uniform law has infinite self-information entropy and zero differential entropy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

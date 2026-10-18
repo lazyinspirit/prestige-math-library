@@ -2,7 +2,7 @@
 id: def-classical-and-formal-quantum-master-equations
 kind: definition
 title: Classical and formal quantum master equations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

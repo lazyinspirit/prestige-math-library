@@ -2,7 +2,7 @@
 id: ex-hmm-viterbi-exact-sequence-map
 kind: example
 title: An exact two-state HMM sequence-MAP calculation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

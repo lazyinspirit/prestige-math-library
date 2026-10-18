@@ -1,7 +1,7 @@
 ---
 page: quantum-key-distribution-and-composable-secrecy-examples
 title: Quantum Key Distribution and Composable Secrecy — Examples
-status: draft
+status: published
 requires:
   - quantum-key-distribution-and-composable-secrecy
 items: []

@@ -2,7 +2,7 @@
 id: lem-relative-one-parameter-morse-path-with-finite-events
 kind: lemma
 title: "Relative one-parameter Morse paths with finitely many elementary events"
-status: draft
+status: published
 dependency_level: 6
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

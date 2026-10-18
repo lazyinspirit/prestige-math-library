@@ -2,7 +2,7 @@
 id: lem-relative-descending-path-with-finite-same-index-passages
 kind: lemma
 title: "Relative descending paths with finitely many same-index passages"
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

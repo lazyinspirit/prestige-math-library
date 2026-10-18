@@ -2,7 +2,7 @@
 id: thm-it-stationary-ergodic-rate-distortion-bounded-distortion
 kind: theorem
 title: "Stationary-ergodic bounded-distortion rate-distortion theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

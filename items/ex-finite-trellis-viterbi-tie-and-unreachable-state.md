@@ -2,7 +2,7 @@
 id: ex-finite-trellis-viterbi-tie-and-unreachable-state
 kind: example
 title: A finite trellis with tied maxima and an unreachable high-score state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

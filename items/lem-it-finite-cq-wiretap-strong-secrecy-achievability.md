@@ -2,7 +2,7 @@
 id: lem-it-finite-cq-wiretap-strong-secrecy-achievability
 kind: lemma
 title: Finite cq wiretap achievability with strong Holevo secrecy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

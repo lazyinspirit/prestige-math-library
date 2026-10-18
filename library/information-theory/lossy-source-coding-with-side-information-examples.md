@@ -1,7 +1,7 @@
 ---
 page: lossy-source-coding-with-side-information-examples
 title: "Lossy Source Coding with Side Information — Examples"
-status: draft
+status: published
 requires:
   - lossy-source-coding-with-side-information
 items: []

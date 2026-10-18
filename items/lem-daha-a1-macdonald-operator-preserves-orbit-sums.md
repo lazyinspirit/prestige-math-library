@@ -2,7 +2,7 @@
 id: lem-daha-a1-macdonald-operator-preserves-orbit-sums
 kind: lemma
 title: "The A1 Macdonald operator is triangular on Weyl orbit sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

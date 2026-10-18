@@ -13,8 +13,6 @@ axiom_use: "Countable Choice is used only through Lax-Milgram for the state and 
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

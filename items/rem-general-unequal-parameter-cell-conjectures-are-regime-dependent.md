@@ -2,7 +2,7 @@
 id: rem-general-unequal-parameter-cell-conjectures-are-regime-dependent
 kind: remark
 title: Lusztig P1–P15 are not universally proved cell properties
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

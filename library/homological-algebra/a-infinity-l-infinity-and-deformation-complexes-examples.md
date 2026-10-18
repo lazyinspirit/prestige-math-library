@@ -1,7 +1,7 @@
 ---
 page: a-infinity-l-infinity-and-deformation-complexes-examples
 title: 'A∞, L∞, and Deformation Complexes: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples:
 - ex-associative-algebra-as-a-infinity-algebra

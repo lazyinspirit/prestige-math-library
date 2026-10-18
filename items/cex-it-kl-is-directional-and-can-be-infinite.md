@@ -2,7 +2,7 @@
 id: cex-it-kl-is-directional-and-can-be-infinite
 kind: counterexample
 title: "Finite KL divergence is directional and may be infinite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

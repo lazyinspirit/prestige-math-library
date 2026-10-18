@@ -21,8 +21,6 @@ axiom_base: No choice axiom is used; the bounds follow by splitting the initial 
 provenance:
   statement: literature-derived
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-positive-energy-affine-module
 kind: definition
 title: Restricted affine-current module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

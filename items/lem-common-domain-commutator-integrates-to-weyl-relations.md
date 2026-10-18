@@ -2,7 +2,7 @@
 id: lem-common-domain-commutator-integrates-to-weyl-relations
 kind: lemma
 title: "A common core with graph-differentiable orbits integrates Heisenberg commutators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: unequal-parameter-hecke-cells-and-representations-examples
 title: 'Unequal-Parameter Hecke Cells and Representations: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples:
 - ex-b2-unequal-parameter-kl-basis-and-cell-edges

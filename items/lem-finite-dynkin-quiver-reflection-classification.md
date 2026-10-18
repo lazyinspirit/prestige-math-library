@@ -2,7 +2,7 @@
 id: lem-finite-dynkin-quiver-reflection-classification
 kind: lemma
 title: "Reflection classifies finite-Dynkin quiver indecomposables over a finite field"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

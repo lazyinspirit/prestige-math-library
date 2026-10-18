@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-link-state-module-at-rank-three
 kind: example
 title: "The rank-three one-defect link-state module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

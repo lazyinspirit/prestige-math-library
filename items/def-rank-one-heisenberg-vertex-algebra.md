@@ -2,7 +2,7 @@
 id: def-rank-one-heisenberg-vertex-algebra
 kind: definition
 title: "Rank-one Heisenberg oscillator fields and vacuum space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

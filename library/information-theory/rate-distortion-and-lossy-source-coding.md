@@ -1,7 +1,7 @@
 ---
 page: rate-distortion-and-lossy-source-coding
 title: "Rate Distortion and Lossy Source Coding"
-status: draft
+status: published
 requires:
   - gaussian-orthogonal-decomposition-and-quadratic-forms
   - stationary-ergodic-sources-and-universal-coding

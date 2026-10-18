@@ -2,7 +2,7 @@
 id: thm-lz78-prefix-code-lossless
 kind: theorem
 title: "Losslessness and prefix property of the explicit LZ78 code"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

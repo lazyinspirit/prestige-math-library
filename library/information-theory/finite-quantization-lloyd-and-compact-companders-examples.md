@@ -1,7 +1,7 @@
 ---
 page: finite-quantization-lloyd-and-compact-companders-examples
 title: Finite Quantization, Lloyd Iteration, and Compact Companders — Examples
-status: draft
+status: published
 requires:
   - finite-quantization-lloyd-and-compact-companders
 items: []

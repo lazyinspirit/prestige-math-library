@@ -2,7 +2,7 @@
 id: lem-even-row-tableau-generating-identity
 kind: lemma
 title: Generating identity for tableaux with even row lengths
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

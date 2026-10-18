@@ -2,7 +2,7 @@
 id: cex-rational-cherednik-category-o-not-semisimple-at-half
 kind: counterexample
 title: "Category O is not semisimple at the rank-one parameter c=1/2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

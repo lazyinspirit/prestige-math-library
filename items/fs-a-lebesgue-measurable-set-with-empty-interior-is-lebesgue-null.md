@@ -21,7 +21,7 @@ sources:
   scraped: []
   references:
     - title: "John K. Hunter, Measure Theory (UC Davis lecture notes), Chapter 2"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
     - title: "A. Jin, Cantor sets in topology, analysis, and financial markets"
       url: "https://math.uchicago.edu/~may/REU2021/REUPapers/Jin%2CAlexa.pdf"
 pipeline_run: null

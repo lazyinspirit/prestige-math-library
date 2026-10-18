@@ -18,8 +18,6 @@ axiom_use: No choice principle is used; the proof is coefficient extraction and 
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: Philippe Laurençot, Weak compactness techniques and coagulation equations, §§1 and 3.3

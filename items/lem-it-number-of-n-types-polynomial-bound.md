@@ -2,7 +2,7 @@
 id: lem-it-number-of-n-types-polynomial-bound
 kind: lemma
 title: "The type classes partition the word space and have polynomial count"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

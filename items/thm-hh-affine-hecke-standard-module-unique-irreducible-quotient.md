@@ -2,7 +2,7 @@
 id: thm-hh-affine-hecke-standard-module-unique-irreducible-quotient
 kind: theorem
 title: The unique irreducible quotient of an affine Hecke standard module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

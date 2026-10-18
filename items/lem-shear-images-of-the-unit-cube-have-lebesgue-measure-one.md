@@ -21,7 +21,7 @@ sources:
     - title: "E. A. Carlen, Notes on Lebesgue Measure on $\\mathbb{R}^n$ and $S^{n-1}$ (Rutgers Math 501), Section 3"
       url: "https://sites.math.rutgers.edu/~carlen/501F13/LebesgueMeas.pdf"
     - title: "John K. Hunter, Measure Theory (UC Davis lecture notes), Chapter 2"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 pipeline_run: null
 ---
 

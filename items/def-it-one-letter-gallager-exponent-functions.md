@@ -2,7 +2,7 @@
 id: def-it-one-letter-gallager-exponent-functions
 kind: definition
 title: One-letter Gallager and expurgated exponent functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

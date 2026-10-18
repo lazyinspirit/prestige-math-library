@@ -2,7 +2,7 @@
 id: def-hh-affine-hecke-algebra-from-root-datum
 kind: definition
 title: "The Iwahori–Matsumoto affine Hecke algebra of a based root datum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

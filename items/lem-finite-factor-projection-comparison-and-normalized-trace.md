@@ -2,7 +2,7 @@
 id: lem-finite-factor-projection-comparison-and-normalized-trace
 kind: lemma
 title: "Projection comparison and unique normalized traces in finite factors"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

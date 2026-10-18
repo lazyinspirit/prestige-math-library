@@ -2,7 +2,7 @@
 id: def-locally-finite-homotopy-type
 kind: definition
 title: "Locally finite homotopy types and rational cardinality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

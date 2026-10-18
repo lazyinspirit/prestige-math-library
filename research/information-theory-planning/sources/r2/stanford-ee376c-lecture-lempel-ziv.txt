@@ -1,0 +1,604 @@
+
+=== PAGE 1 ===
+Chapter 1
+Lempel-Ziv Compression
+1.1
+Universal Lossless Compression
+We ﬁrst set the benchmark using the performance of an optimal compressor
+that knows the source statistics, and construct a universal compression scheme
+that doesn’t know the source statistics but is asymptotically optimal.
+Consider the problem of compressing a source sequence xn with some source
+code. For the sake of brevity, we will consider the most common case that the
+source code outputs a binary sequence. Our conclusions carry over to non-binary
+alphabets easily.
+Deﬁnition 1.1.1. A source code for an n-block source sequence, Cn, is deﬁned
+as a mapping from a source sequence xn to a binary sequence of ﬁnite length,
+i.e.
+Cn : X n →{0, 1}∗.
+(1.1)
+More explicitly,
+Cn(xn) = b1, b2, · · · , bln,
+(1.2)
+where ln = ln(xn) is a length of the output sequence which depends on the input
+sequence, and bi ∈{0, 1}, i = 1, · · · , ln.
+Deﬁnition 1.1.2. A source code Cn for an n-block source sequence is said
+to be “lossless”, or “non-singular” [5], if Cn(xn) ̸= Cn(˜xn) for all xn ̸= ˜xn.
+Furthermore, a source code Cn is said to be uniquely decodable (UD) if all its
+extensions, i.e. the concatenations of successive blocks, are still non-singular.
+For any random source sequence Xn and any UD source code, we know the
+following bounds on the minimum achievable average description length
+H(Xn) ≤
+min
+∀Cn:UD Eln(Xn) ≤H(Xn) + 1
+(1.3)
+1
+
+=== PAGE 2 ===
+2
+CHAPTER 1. LEMPEL-ZIV COMPRESSION
+Thus, when we consider a source process X, and look at the average per-symbol
+description length, we have
+lim
+n→∞min
+∀Cn:UD E
+[ 1
+nln(Xn)
+]
+=
+lim
+n→∞
+1
+nH (Xn)
+(1.4)
+≜
+H (X) ,
+(when the limit exists) (1.5)
+where H (X) is the entropy rate of the random process X.
+Exercise 1.1.3. For a stationary random process X, show that
+(a) limn→∞1
+nH (Xn) exists.
+(b) limn→∞1
+nH (Xn) is equal to limk→∞H
+(
+X0|X−1
+−k
+)
+.
+(c) limk→∞H
+(
+X0|X−1
+−k
+)
+is also equal to H(X0|X−1
+−∞) (only for those who
+have taken measure theoretic probability).
+Exercise 1.1.3 implies that the limit exists for any stationary random process
+X. Furthermore, it is well-known that Huﬀman code can achieve the minimum
+in (1.5). However, such a code strongly depends on the distribution of the source
+sequence. What if we do not know the distribution of the source sequence?
+Deﬁnition 1.1.4. A (sequence of) scheme(s) is universal if
+lim
+n→∞E
+[ 1
+nln(Xn)
+]
+= H (X)
+(1.6)
+for every stationary source X.
+Clearly, Shannon code and Huﬀman code do not fall into this category due
+to their dependence on the source distribution. Also, note that it is not a priori
+clear that to show any such a scheme exists. However, we will see one celebrated
+example of such a scheme: the Lempel-Ziv (LZ) compressor. Among various
+LZ compression schemes, we will focus, for concreteness, on the version known
+as “LZ78”.
+1.2
+Lempel-Ziv Compression
+The main idea of LZ compression is:
+• parse the source sequence into phrases such that each phrase is the shortest
+phrase not seen earlier (incremental parsing)
+• describe (encode) each new phrase by describing the index of the phrase
+from the past that forms its preﬁx and the new symbol at the end of the
+phrase.
+
+=== PAGE 3 ===
+1.3. THE UNIVERSALITY OF THE LZ COMPRESSION
+3
+1
+0
+1
+1
+0
+0
+λ
+Figure 1.1: LZ tree associated with xn
+Example 1.2.1. Suppose we want to compress the bit stream
+xn : 0 1 1 0 1 1 0 1 1 1 0 0 1 0 1 1 0 0 0 · · · xn
+Then, we parse xn into phrases as
+xn : 0,1,1 0,1 1,0 1,1 1 0,0 1 0,1 1 0 0,0 · · · xn
+Since this operation is basically adding one new symbol to a previously encoun-
+tered phrase, it naturally induces the tree in Figure 1.1.
+Given the complete parsed phrases, LZ encoding is simply to index the previ-
+ously encountered phrase with the additional symbol comprising the new phrase.
+Let the index of the empty string be zero. Then, the LZ code for xn is given by
+(0,0),(0,1),(2,0),(2,1),(1,1),(4,0),(5,0),(6,0), · · · .
+While there are many tweaks that can be applied to boost performance in
+practice, we will stay with this basic LZ compression scheme for concreteness
+and ease of analysis.
+1.3
+The Universality of the LZ Compression
+Let NLZ = NLZ(xn) be the number of phrases in the LZ parsing of xn. We can
+describe the length of the source sequence n, and the total number of phrases
+NLZ with no more than log n and log NLZ bits, respectively.
+Since the LZ
+compressor encodes each phrase with the index of the phrase from the past that
+forms its preﬁx and the new symbol at the end of the phrase, we can describe
+xn with a number of bits per source symbol no larger than
+1
+n [log(n) + NLZ(log NLZ + 1)]
+= 1
+nNLZ log NLZ + o(1),
+(1.7)
+where we use the fact that NLZ ≤
+n
+(1−ϵn) log n where ϵn →0 as n →∞[5].
+
+=== PAGE 4 ===
+4
+CHAPTER 1. LEMPEL-ZIV COMPRESSION
+Deﬁnition 1.3.1. A “Markov Kernel” of order k is a mapping
+Q :
+X k →M(X),
+where M(X) is the simplex of probabilities on X.
+This Q corresponds to a Markov source of order k. We write
+Q(xn|x0
+−(k−1)) = Πn
+i=1Q(xi|xi−1
+i−k).
+(1.8)
+Let Mk denote the class of all Markov kernels of order k.
+Theorem 1.3.2. For ∀n, k, and any individual sequence xn
+−(k−1)
+1
+nNLZ(xn) log NLZ(xn) ≤min
+Q∈Mk
+1
+n log
+(
+1
+Q(xn|x0
+−(k−1))
+)
++ ϵ(k)
+n ,
+(1.9)
+where ϵ(k)
+n
+is independent of the underlyng sequence xn, and satisﬁes ϵ(k)
+n
+n→∞
+−→0.
+Before proving Theorem 1.3.2, we state and prove the main result about the
+LZ’s universality in the stochastic setting.
+Theorem 1.3.3. The LZ scheme is universal, i.e.,
+lim
+n→∞
+1
+nElLZ(Xn) = H(X)
+for every stationary process X.
+(1.10)
+We ﬁrst prove Theorem 1.3.3 based on Theorem 1.3.2.
+In order to use
+Theorem 1.3.2, we have to deﬁne the conditional empirical entropy.
+Deﬁnition 1.3.4. The conditional empirical entropy of order k associated with
+xn
+−(k−1) is deﬁned as:
+Hk(xn
+−(k−1)) = H(Uk+1|U k),
+(1.11)
+where H(Uk+1|U k) is the conditional entropy of random variable Uk+1 given U k
+with joint distribution PU k+1(uk+1) = 1
+n|{1 ≤i ≤n : xi
+i−k = uk+1}|.
+The following exercise shows two important properties of Hk:
+Exercise 1.3.5. Show That
+(a) minQ∈Mk
+1
+n log
+1
+Q(xn|x0
+−(k−1)) = Hk(xn
+−(k−1))
+Hint: The proof follows closely the way to prove minQ∈M0
+1
+n log
+1
+Q(xn) =
+H0(xn).
+(b) For any stationary process X, EHk(Xn
+−(k−1)) ≤H(X0|X−1
+−k).
+Hint: Jensen’s inequality.
+
+=== PAGE 5 ===
+1.3. THE UNIVERSALITY OF THE LZ COMPRESSION
+5
+Now, let us prove Theorem 1.3.3.
+Proof
+lim sup
+n→∞
+1
+nElLZ(Xn) = lim sup
+n→∞
+1
+nENLZ(Xn) log NLZ(Xn)
+(i)
+≤lim sup
+n→∞E
+[
+min
+Q∈Mk
+1
+n log
+1
+Q(Xn|X0
+−(k−1))
+]
+(ii)
+= lim sup
+n→∞E
+[
+Hk(Xn
+−(k−1))
+]
+(iii)
+≤H(X0|X−1
+−k),
+(1.12)
+where (i) comes from Theorem 1.3.2, (ii) is because of Exercise 1.3.5 Part (a),
+and (iii) is due to Exercise 1.3.5 Part (b).
+Let k →∞on the right hand side. It implies that
+lim sup
+n→∞
+1
+nElLZ(Xn) ≤H(X)
+(1.13)
+Obviously, the LZ code is a lossless so
+lim inf
+n→∞
+1
+nElLZ(Xn) ≥H(X),
+(1.14)
+which completes the proof.
+Let us introduce a few more notations before proving Theorem 1.3.2. Denote
+yi as the ith phrase in the LZ parsing of xn, e.g.
+xn = x1
+|{z}
+y1
+, x2x3
+|{z}
+y2
+, x4...
+|{z}
+y3
+, ..., ...xn−1xn
+|
+{z
+}
+yNLZ
+Let vi denote the index of the start of the ith phrase, and therefore yi = xvi+1−1
+vi
+.
+We append an arbitrary k-tuple x0
+−(k−1) to xn in order to prevent an edge eﬀect.
+Denote cl,uk as the number of phrases with length l and left context uk, i.e.,
+cl,uk = |
+{
+1 ≤i ≤NLZ : |yi| = l, xvi−1
+vi−k = uk}
+|,
+where |yi| denotes the length of phrase yi.
+Theorem 1.3.6 (Ziv’s Inequality). For any xn
+−(k−1), and Q ∈Mk, the follow-
+ing inequality holds:
+∑
+l,uk
+cl,uk log cl,uk ≤log
+1
+Q(xn|x0
+−(k−1)).
+(1.15)
+
+=== PAGE 6 ===
+6
+CHAPTER 1. LEMPEL-ZIV COMPRESSION
+Proof
+log Q(xn|x0
+−(k−1)) = log Q(y1, y2, ..., yNLZ|x0
+−(k−1))
+=
+NLZ
+∑
+i=1
+log Q(yi|yi−1, x0
+−(k−1))
+=
+∑
+l,uk
+cl,uk
+∑
+i:|yi|=l,x
+vi−1
+vi−k=uk
+1
+cl,uk log Q(yi|xvi−1
+vi−k)
+(i)
+≤
+∑
+l,uk
+cl,uk log
+
+
+
+1
+cl,uk
+∑
+i:|yi|=l,x
+vi−1
+vi−k=uk
+Q(yi|xvi−1
+vi−k)
+
+
+
+(ii)
+≤
+∑
+l,uk
+cl,uk log
+(
+1
+cl,uk
+)
+,
+(1.16)
+where (i) comes from Jensen’s inequality and the concavity of log, and (ii) comes
+from the fact that yi are distinct.
+Remark
+• Since ∑
+l,uk cl,uk = NLZ, we have ∑
+l,uk
+cl,uk
+NLZ = 1.
+Thus
+cl,uk
+NLZ can be
+interpreted as a probability mass function on a pair (L, U k).
+• Since ∑
+l,uk lcl,uk = n, we have ∑
+l,uk
+cl,uk
+NLZ l =
+n
+NLZ . Thus EL =
+n
+NLZ .
+Exercise 1.3.7.
+(a) Let L be a nonnegative integer-valued random variable
+with EL ≤µ, then
+H(L) ≤(µ + 1) log µ −µ log µ
+Hint: Prove that equality is attained when L has a geometric distribution.
+(b) Show that
+NLZ ≤K
+n
+log n,
+where K is a constant independent of n and xn.
+Hint: the lengths of the phrases are growing so one cannot pack too many
+of them in a sequence of length n.
+(c) Show that
+NLZ
+n
+∑
+l,uk
+cl,uk
+NLZ
+log NLZ
+cl,uk ≤ϵ(k)
+n ,
+
+=== PAGE 7 ===
+1.4. LZ78 AND INDIVIDUAL SEQUENCES
+7
+where ϵ(k)
+n
+is independent of xn and limn→∞ϵ(k)
+n
+= 0.
+Hint: ∑
+l,uk
+cl,uk
+NLZ log NLZ
+cl,uk = H(L, U k) ≤H(L)+H(U k) ≤H(L)+k log |X|,
+and now use the previous two parts.
+Now we are ready to prove Theorem 1.3.2.
+Proof
+The idea is to show that 1
+nNLZ log NLZ is close to 1
+n
+∑
+l,uk cl,uk log cl,uk
+so that we can use Ziv’s Inequality to ﬁnish the proof.
+∑
+l,uk
+cl,uk log cl,uk =NLZ
+∑
+l,uk
+cl,uk
+NLZ
+log cl,uk
+NLZ
++ NLZ
+∑
+l,uk
+cl,uk
+NLZ
+log NLZ
+≥−nϵ(k)
+n
++ NLZ log NLZ,
+(1.17)
+where the inequality comes from Exercise 1.3.7 Part 3 and the fact ∑
+l,uk
+cl,uk
+NLZ =
+1. Thus
+1
+nNLZ log NLZ ≤1
+n
+∑
+l,uk
+cl,uk log cl,uk + ϵ(k)
+n
+≤log
+1
+Q(xn|x0
+−(k−1)) + ϵ(k)
+n ,
+(1.18)
+where the second inequality comes from Ziv’s Inequality. The proof is complete
+by the arbitrariness of Q ∈Mk.
+1.4
+LZ78 and Individual Sequences
+We have considered the performance of the LZ in expectation sense and we
+proved that it is universal in stochastic setting. In this section, we will show
+that the LZ is as good as any ﬁnite-state encoder for any individual sequence.
+A ﬁnite-state encoder E is characterized by a triplet (S, g, f).
+• S is a ﬁnite set of states.
+• g : S × X →S is a state-update function.
+• f : S × X →{0, 1}∗is an encoding function.
+Let En(s) be the set of all lossless (for n-blocks) ﬁnite-state encoders for
+which |S| ≤s. The compression rate of a sequence xn by an encoder E be
+deﬁned as ρE(xn) = l(xn)
+n .
+Deﬁne ρs(xn) = minE∈En(s) ρE(xn), which is the best compression rate
+for seqeunce xn among all s-state compressors.
+We further deﬁne the per-
+formance for an inﬁnite sequence x∞in a limit supremum sense: ρs(x∞) =
+lim supn→∞ρs(xn). Finally, by allowing the number of states to grow we deﬁne
+the ﬁnite-state compressibility of a sequence: ρ(x∞) = lims→∞ρs(x∞). Observe
+that this limit exists because ρs(x∞) is both nonincreasing in s and bounded.
+
+=== PAGE 8 ===
+8
+CHAPTER 1. LEMPEL-ZIV COMPRESSION
+One can characterize ρ(x∞) as the best asymptotic compression possible
+within the set of ﬁnite-state encoding schemes — even when a scheme is designed
+speciﬁcally for the given sequence xn. The following theorem is then somewhat
+surprising.
+Theorem 1.4.1. Let ℓLZ(xn) be the description length of a sequence xn by the
+LZ78 encoder. Then for any inﬁnite sequence x∞,
+lim sup
+n→∞
+1
+nℓLZ(xn) ≤ρ(x∞).
+Proof
+See the proof of Theorem 2 in [6].
+1.5
+A bit about Sliding Window Compression
+(LZ77)
+This alternative to LZ78 was actually introduced earlier, in [7]. The structure
+of the algorithm is quite similar, but the method of parsing (and referring to
+previous encodings) is slightly diﬀerent.
+Suppose x1 through xn have already been parsed. In LZ78, the next phrase
+xn+ℓ
+n
+would be chosen so as to be the shortest phrase that has not yet been
+selected as a phrase. In LZ77, it is instead the shortest phrase that has not
+occurred as a subsequence anywhere in xn.
+This procedure can be formally
+deﬁned as follows.
+Deﬁne
+L(n, x∞) = min
+{
+ℓ̸= 0 : xn+ℓ
+n+1 ̸= xi+ℓ
+i+1 for any i ∈{0, . . . , n −ℓ−1}
+}
+.
+The kth phrase in the LZ77-parsing of a sequence x∞is then given by
+xNk+L(Nk,x∞)
+Nk
+where N1 = 1 and Nk+1 = Nk +L(Nk, x∞)+1. In the remaining
+discussion, we will refer to the kth phrase length L(Nk, x∞) as Lk.
+The encoder encodes xNk+Lk
+Nk
+by specifying the following:
+(a) “Where” in the past (xNk−1
+1
+) the unoriginal component xNk+Lk−1
+Nk
+of the
+new phrase xNk+Lk
+Nk
+appeared.
+(b) The length of the phrase Lk.
+(c) The “novel” component xNk+Lk of the new phrase xNk+Lk
+Nk
+.
+We ﬁrst quantify the number of bits expended for encoding the kth phrase.
+The ﬁrst component costs no more than log Nk bits (since this is an inte-
+ger between 1 and Nk). The second component costs no more than log Lk +
+O(log log Lk) bits (since, as one can show, any integer i can be losslessly repre-
+sented with length no greater than log i + O(log log i)). The third component
+requires only log(|X| −1) bits.
+
+=== PAGE 9 ===
+1.5. A BIT ABOUT SLIDING WINDOW COMPRESSION (LZ77)
+9
+The number of bits expended per source symbol is then given by (in the
+limit of large Lk and Nk
+bits expended
+source symbol =
+log Nk
+L(Nk, x∞).
+In a perfect world, whenever the source is drawn from a stationary/ergodic
+process X, we would like this quantity to approach the entropy rate H(X) as
+k grows. Lempel and Ziv demonstrated the following fact, which isn’t quite as
+powerful a statement, but close.
+Theorem 1.5.1. For any stationary and ergodic process X,
+log n
+L(n, X)
+n→∞
+→
+H(X).
+Proof
+See Theorem 1 in [8].
+
+=== PAGE 10 ===
+10
+CHAPTER 1. LEMPEL-ZIV COMPRESSION
+
+=== PAGE 11 ===
+Bibliography
+[1] R. Durrett, Probability: Theory and Examples, Duxbury Press, 1996.
+[2] Tsachy Weissman, Erik Ordentlich, Gadiel Seroussi, Sergio Verd´u, and
+Marcelo Weinberger,“Universal Discrete Denoising:
+Known Channel,”
+IEEE Trans. Inf. Theory, vol. IT-51, no. 1, pp. 5–28, 2005.
+[3] Tsachy Weissman, Erik Ordentlich, Gadiel Seroussi, Sergio Verd´u, and
+Marcelo J. Weinberger, ”Inequalities for the L1 Deviation of the Empiri-
+cal Distribution”, Tech. Report, Information Theory Research Group, HP
+Laboratories, 2003.
+[4] K. Viswanathan and E. Ordentlich, ”Lower Limits of Discrete Universal
+Denoising,” in Proc. of IEEE International Symposium on Information
+Theory 2006, July 2006, pp. 2363–2367.
+[5] T. M. Cover and J. A. Thomas, Elements of Information Theory, Wiley,
+1991.
+[6] J. Ziv, A. Lempel, “Compression of individual sequences via variable-rate
+coding,” IEEE Trans. Info. Theory, vol. IT-24, pp. 530 – 536, Sept 1978.
+[7] J. Ziv, A. Lempel, “A universal algorithm for sequential data compression,”
+IEEE Trans. Info. Theory, vol. IT-23, pp. 337 - 343, May 1977.
+[8] Wyner, A.D., Ziv, J. , “Some asymptotic properties of the entropy of a sta-
+tionary ergodic data source with applications to data compression,” IEEE
+Trans. Info. Theory, vol.35, no.6, pp.1250-1258, Nov 1989.
+11

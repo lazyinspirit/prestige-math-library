@@ -2,7 +2,7 @@
 id: cex-untwisted-motivic-integration-fails-for-one-arrow-quiver
 kind: counterexample
 title: "An untwisted monoid map fails for the one-arrow quiver"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-spencer-support-digits-eleven
 kind: example
 title: "The Spencer support set for rank label eleven in characteristic three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

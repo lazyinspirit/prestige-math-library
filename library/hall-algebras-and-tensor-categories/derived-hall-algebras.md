@@ -1,7 +1,7 @@
 ---
 page: derived-hall-algebras
 title: "Derived Hall Algebras from dg-Enhanced Categories"
-status: draft
+status: published
 items:
   - def-locally-finite-homotopy-type
   - lem-homotopy-cardinality-base-change

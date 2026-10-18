@@ -2,7 +2,7 @@
 id: thm-hh-affine-hecke-tempered-langlands-classification
 kind: theorem
 title: The tempered Langlands classification for affine Hecke algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

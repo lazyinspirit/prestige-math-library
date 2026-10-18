@@ -2,7 +2,7 @@
 id: ex-lz78-parse-with-explicit-terminator
 kind: example
 title: "LZ78 parsing of a finite binary word"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

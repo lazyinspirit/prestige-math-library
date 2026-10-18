@@ -2,7 +2,7 @@
 id: def-qa-37-fibonacci-braid-gate-set
 kind: definition
 title: "Fixed SU(2) Fibonacci braid gate alphabet"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 12

@@ -2,7 +2,7 @@
 id: thm-it-optimal-compact-compander-density
 kind: theorem
 title: Optimal point density within the compact compander class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

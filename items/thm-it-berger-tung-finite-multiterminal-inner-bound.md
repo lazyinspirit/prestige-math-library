@@ -2,7 +2,7 @@
 id: thm-it-berger-tung-finite-multiterminal-inner-bound
 kind: theorem
 title: "Finite-alphabet Berger-Tung multiterminal lossy inner bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

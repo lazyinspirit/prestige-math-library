@@ -2,7 +2,7 @@
 id: thm-countable-mode-car-has-inequivalent-irreducible-representations
 kind: theorem
 title: Countable-Mode CAR Has Inequivalent Irreducible Representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

@@ -2,7 +2,7 @@
 id: def-modc-weighted-rt-background-interface
 kind: definition
 title: Weighted RT background interface for Mod(C)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 15

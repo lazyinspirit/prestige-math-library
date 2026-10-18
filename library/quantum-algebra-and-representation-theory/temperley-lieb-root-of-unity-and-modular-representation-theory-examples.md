@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-root-of-unity-and-modular-representation-theory-examples
 title: "Temperley–Lieb Root-of-Unity and Modular Representation Theory: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-temperley-lieb-order-three-noncritical-gram-radical

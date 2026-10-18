@@ -2,7 +2,7 @@
 id: cex-qa-37-projective-is-not-controlled
 kind: counterexample
 title: "A discarded global phase changes a controlled computation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 11

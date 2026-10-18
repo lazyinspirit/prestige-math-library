@@ -3,7 +3,7 @@ id: thm-rational-cherednik-category-o-projective-generator-from-generalized-stan
 kind: theorem
 title: "Cherednik category O has a standard-filtered projective generator"
 deps: [thm-rational-cherednik-pbw-theorem, def-rational-cherednik-standard-module, lem-rational-cherednik-category-o-has-finite-length, thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras]
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

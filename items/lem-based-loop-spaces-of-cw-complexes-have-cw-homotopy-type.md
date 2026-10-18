@@ -2,7 +2,7 @@
 id: lem-based-loop-spaces-of-cw-complexes-have-cw-homotopy-type
 kind: lemma
 title: Based loop spaces of CW complexes have CW homotopy type
-status: draft
+status: published
 origin: session
 deps:
   - def-axiom-of-choice

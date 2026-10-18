@@ -2,7 +2,7 @@
 id: thm-cherednik-localized-monodromy-is-fully-faithful-with-subquotient-closed-image
 kind: theorem
 title: "Localized Cherednik monodromy is fully faithful and its image is closed under subquotients"
-status: draft
+status: published
 dependency_level: 13
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

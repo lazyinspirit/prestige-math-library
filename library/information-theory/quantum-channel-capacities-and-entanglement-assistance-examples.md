@@ -1,7 +1,7 @@
 ---
 page: quantum-channel-capacities-and-entanglement-assistance-examples
 title: Quantum Channel Capacities and Entanglement Assistance — Examples
-status: draft
+status: published
 requires:
   - quantum-channel-capacities-and-entanglement-assistance
 companion: quantum-channel-capacities-and-entanglement-assistance

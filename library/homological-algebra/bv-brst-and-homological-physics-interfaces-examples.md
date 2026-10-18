@@ -1,7 +1,7 @@
 ---
 page: bv-brst-and-homological-physics-interfaces-examples
 title: "BV, BRST, and Homological Physics Interfaces: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - cex-nonrepresentation-action-breaks-brst-nilpotence

@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-annular-central-element-and-reflection-maps
 kind: lemma
 title: "The annular central element constructs Temperley–Lieb reflection maps"
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

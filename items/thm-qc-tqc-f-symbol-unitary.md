@@ -2,7 +2,7 @@
 id: thm-qc-tqc-f-symbol-unitary
 kind: theorem
 title: F-symbol unitarity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

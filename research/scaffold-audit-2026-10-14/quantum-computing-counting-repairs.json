@@ -1,0 +1,352 @@
+{
+  "date": "2026-10-14",
+  "scope": "All original 334 QC proposed contracts plus explicit repair suppliers; no authored proof acceptance",
+  "original_count": 352,
+  "current_count": 358,
+  "changes": [
+    {
+      "id": "def-qc-unbounded-error-time-space-counting-model",
+      "changes": [
+        "new prerequisite contract"
+      ],
+      "before": null,
+      "after": {
+        "id": "def-qc-unbounded-error-time-space-counting-model",
+        "kind": "definition",
+        "title": "Unbounded error time space counting model",
+        "page": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+        "deps": [
+          "def-probabilistic-polynomial-time-machine-interface",
+          "def-effective-binary-encoding-and-decoder"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "Use fixed multitape fair-bit probabilistic machines with read-only uncharged input, charged work cells, worst-case halting bounds on every branch and an explicit random-access versus sequential simulation convention. PrTIME(t) and PrTISP(t,s) mean acceptance greater than one-half on YES and at most one-half on NO with time O(t) and work space O(s). Exact ties can be normalized with an extra bounded coin gadget before complementing. For oracle A, PrTIME^A(t) charges writing query strings and supplies exact classical oracle answers. Define LCH1=PrTIME(n), LCH_(k+1)=PrTIME(n)^(LCH_k). Majority formulas use at-least-half assignments; strict versus nonstrict majority conventions require an explicit threshold adjustment.",
+        "proof_obligations": [
+          "State clocked branch resource and oracle tape rules; finite fair bits give dyadic probabilities. Prove strict/nonstrict majority conversion by a biased acceptance offset smaller than the least nonzero dyadic gap and explicit extra coin bits. Root PTM definition is reused for transition semantics, not for unbounded-error time-space theorems."
+        ],
+        "sources": [
+          {
+            "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf",
+            "locator": "Section2, PDFpp3–4; machine/linear-time counting hierarchy conventions"
+          }
+        ],
+        "existing_supplier_checks": [
+          "Proposed local supplier; not an authored or proof-accepted carrier. Exact prerequisites listed; local mathematical route specified."
+        ],
+        "unresolved_obligations": [
+          "State clocked branch resource and oracle tape rules; finite fair bits give dyadic probabilities. Prove strict/nonstrict majority conversion by a biased acceptance offset smaller than the least nonzero dyadic gap and explicit extra coin bits. Root PTM definition is reused for transition semantics, not for unbounded-error time-space theorems."
+        ],
+        "audit_status": "contract-reviewed-authoring-unresolved",
+        "audit_report": "research/scaffold-audit-2026-10-14/quantum-computing.md",
+        "dependency_level": 0
+      },
+      "old_consumers": [],
+      "current_consumers": [
+        "lem-qc-counting-time-space-to-linear-hierarchy",
+        "lem-qc-tight-majority-formula-completeness",
+        "thm-qc-counting-hierarchy-time-space-lower-bound",
+        "thm-qc-probabilistic-polynomial-time-hierarchy",
+        "thm-qc-unbounded-error-counting-time-space-alternative"
+      ]
+    },
+    {
+      "id": "thm-qc-probabilistic-polynomial-time-hierarchy",
+      "changes": [
+        "new prerequisite contract"
+      ],
+      "before": null,
+      "after": {
+        "id": "thm-qc-probabilistic-polynomial-time-hierarchy",
+        "kind": "theorem",
+        "title": "Probabilistic polynomial time hierarchy",
+        "page": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "For rational 0<a<b with time-constructible polynomial bounds, PrTIME(n^a) is properly contained in PrTIME(n^b) in the declared uniform unbounded-error probabilistic machine model.",
+        "proof_obligations": [
+          "Use the source time-hierarchy diagonalization: enumerate encoded clocked machines, simulate the selected one within n^a polylog n time, normalize its possible tie by a dyadic offset below its minimum nonzero branch probability, and complement its threshold decision by swapping accepting/rejecting outcomes with the offset gadget.",
+          "Padding permits infinitely many encodings of each fixed program and absorbs the simulation constant. The universal overhead is below n^b for large n; finite exceptions are hardcoded. Author exact clock, tie and encoding bounds rather than importing nondeterministic hierarchy as a probabilistic theorem."
+        ],
+        "sources": [
+          {
+            "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf",
+            "locator": "Theorem2, PDFp4; polynomial-exponent slack variant used by Theorem4"
+          }
+        ],
+        "existing_supplier_checks": [
+          "Proposed local supplier; not an authored or proof-accepted carrier. Exact prerequisites listed; local mathematical route specified."
+        ],
+        "unresolved_obligations": [
+          "Use the source time-hierarchy diagonalization: enumerate encoded clocked machines, simulate the selected one within n^a polylog n time, normalize its possible tie by a dyadic offset below its minimum nonzero branch probability, and complement its threshold decision by swapping accepting/rejecting outcomes with the offset gadget.",
+          "Padding permits infinitely many encodings of each fixed program and absorbs the simulation constant. The universal overhead is below n^b for large n; finite exceptions are hardcoded. Author exact clock, tie and encoding bounds rather than importing nondeterministic hierarchy as a probabilistic theorem."
+        ],
+        "audit_status": "contract-reviewed-authoring-unresolved",
+        "audit_report": "research/scaffold-audit-2026-10-14/quantum-computing.md",
+        "dependency_level": 1
+      },
+      "old_consumers": [],
+      "current_consumers": [
+        "thm-qc-counting-hierarchy-time-space-lower-bound",
+        "thm-qc-unbounded-error-counting-time-space-alternative"
+      ]
+    },
+    {
+      "id": "thm-qc-uniform-threshold-iterated-integer-arithmetic",
+      "changes": [
+        "new prerequisite contract"
+      ],
+      "before": null,
+      "after": {
+        "id": "thm-qc-uniform-threshold-iterated-integer-arithmetic",
+        "kind": "theorem",
+        "title": "Uniform threshold iterated integer arithmetic",
+        "page": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+        "deps": [
+          "def-effective-binary-encoding-and-decoder"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "For m≥1 binary nonnegative w-bit integers, iterated sum and product admit constant-depth polynomial-size uniform threshold circuits over AND/OR/NOT/MAJ with explicit binary output lengths O(w+log m) and mw, respectively; use the source logspace-uniform multiplication and DLOGTIME-uniform addition conventions, or a fully proved stronger DLOGTIME multiplication variant.",
+        "proof_obligations": [
+          "Local authoring must construct uniform iterated addition/multiplication circuits and their correctness/size/depth/connection predicate bounds; this is a substantial supplier, not a consequence of ordinary schoolbook multiplication.",
+          "Allender Section3.1 Step2 cites Chiu–Davida–Litow and Hesse/Allender–Barrington–Hesse for multiplication. Those independent secondary papers have not been retrieved/read by this auditor; the exact local supplier remains an authoring/source hold."
+        ],
+        "sources": [
+          {
+            "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf",
+            "locator": "Section3.1 Step2, PDFp8; cited uniform arithmetic supplier, independent full proof not read"
+          }
+        ],
+        "existing_supplier_checks": [
+          "Proposed local supplier; not an authored or proof-accepted carrier. Exact prerequisites listed; local mathematical route specified."
+        ],
+        "unresolved_obligations": [
+          "Local authoring must construct uniform iterated addition/multiplication circuits and their correctness/size/depth/connection predicate bounds; this is a substantial supplier, not a consequence of ordinary schoolbook multiplication.",
+          "Allender Section3.1 Step2 cites Chiu–Davida–Litow and Hesse/Allender–Barrington–Hesse for multiplication. Those independent secondary papers have not been retrieved/read by this auditor; the exact local supplier remains an authoring/source hold."
+        ],
+        "audit_status": "contract-reviewed-authoring-unresolved",
+        "audit_report": "research/scaffold-audit-2026-10-14/quantum-computing.md",
+        "dependency_level": 0
+      },
+      "old_consumers": [],
+      "current_consumers": [
+        "lem-qc-counting-time-space-to-linear-hierarchy",
+        "thm-qc-counting-hierarchy-time-space-lower-bound",
+        "thm-qc-unbounded-error-counting-time-space-alternative"
+      ]
+    },
+    {
+      "id": "lem-qc-counting-time-space-to-linear-hierarchy",
+      "changes": [
+        "new prerequisite contract"
+      ],
+      "before": null,
+      "after": {
+        "id": "lem-qc-counting-time-space-to-linear-hierarchy",
+        "kind": "lemma",
+        "title": "Counting time space to linear hierarchy",
+        "page": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "thm-qc-uniform-threshold-iterated-integer-arithmetic"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "For constants alpha>1 and 0<beta<1 there exists finite integer tau(alpha,beta) with PrTISP(n^alpha,n^(1−beta)) contained in LCH_tau.",
+        "proof_obligations": [
+          "Clock/time-stamp configurations, of count at most2^O(n^(1−beta)); subdivide a length n^alpha path into n^beta segments and sum over checkpoint tuples, multiplying subpath counts. Repeat a ceiling number of subdivisions until segment length is bounded; round powers/segments explicitly and use zero-padding for short end segments.",
+          "This produces constant-depth arithmetic count circuits of2^O(n) gates and polynomial output bit length. Substitute the uniform arithmetic supplier. Gate adjacency has an LCH connection predicate; if only logspace multiplication uniformity is supplied, author the finite alternating/linear-counting evaluation of its polynomial-log-length predicates. Evaluate each threshold layer by random gate guessing with unbiased off-fanin branches and exact majority threshold adjustment, giving finite tau. Every simulation/table/bit bound is local authoring work."
+        ],
+        "sources": [
+          {
+            "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf",
+            "locator": "Lemma5 and Section3.1, PDFpp5–9"
+          }
+        ],
+        "existing_supplier_checks": [
+          "Proposed local supplier; not an authored or proof-accepted carrier. Exact prerequisites listed; local mathematical route specified."
+        ],
+        "unresolved_obligations": [
+          "Clock/time-stamp configurations, of count at most2^O(n^(1−beta)); subdivide a length n^alpha path into n^beta segments and sum over checkpoint tuples, multiplying subpath counts. Repeat a ceiling number of subdivisions until segment length is bounded; round powers/segments explicitly and use zero-padding for short end segments.",
+          "This produces constant-depth arithmetic count circuits of2^O(n) gates and polynomial output bit length. Substitute the uniform arithmetic supplier. Gate adjacency has an LCH connection predicate; if only logspace multiplication uniformity is supplied, author the finite alternating/linear-counting evaluation of its polynomial-log-length predicates. Evaluate each threshold layer by random gate guessing with unbiased off-fanin branches and exact majority threshold adjustment, giving finite tau. Every simulation/table/bit bound is local authoring work."
+        ],
+        "audit_status": "contract-reviewed-authoring-unresolved",
+        "audit_report": "research/scaffold-audit-2026-10-14/quantum-computing.md",
+        "dependency_level": 1
+      },
+      "old_consumers": [],
+      "current_consumers": [
+        "thm-qc-counting-hierarchy-time-space-lower-bound",
+        "thm-qc-unbounded-error-counting-time-space-alternative"
+      ]
+    },
+    {
+      "id": "lem-qc-tight-majority-formula-completeness",
+      "changes": [
+        "new prerequisite contract"
+      ],
+      "before": null,
+      "after": {
+        "id": "lem-qc-tight-majority-formula-completeness",
+        "kind": "lemma",
+        "title": "Tight majority formula completeness",
+        "page": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "thm-pp-is-sign-testing-gap-p",
+          "prop-sharpp-is-closed-under-sum-and-product"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "Every LCH1 language reduces to MajSAT, and every LCH2 language reduces to MajMajSAT, with output length n log^O(1)n and each output bit computable in log^O(1)n time and O(log n) space, in the stated input/machine/formula encodings.",
+        "proof_obligations": [
+          "For LCH2 first collapse adaptive oracle calls into one final query using a unique witness for the accepting-path rank at the one-half threshold, as Section3.2 does. Author the exact C=TIME conjunction and rank sign-testing construction with linear resource bounds; generic PP closure alone does not supply those bounds.",
+          "Obliviously simulate the linear-time computation with n log n time, encode its deterministic trace by a unique-witness formula of n polylog n size, and use the source auxiliary-selector variable to center counts at exactly half. Apply this inside the outer majority for the two-block formula. Provide actual bit-index generation and logarithmic workspace for the reduction; their uniformity, uniqueness, threshold and length proofs cannot be replaced by ordinary polynomial NP completeness."
+        ],
+        "sources": [
+          {
+            "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf",
+            "locator": "Section3.2, PDFpp10–12; source Fischer–Pippenger/Cook/GAP closure adaptations remain local obligations"
+          }
+        ],
+        "existing_supplier_checks": [
+          "Proposed local supplier; not an authored or proof-accepted carrier. Exact prerequisites listed; local mathematical route specified."
+        ],
+        "unresolved_obligations": [
+          "For LCH2 first collapse adaptive oracle calls into one final query using a unique witness for the accepting-path rank at the one-half threshold, as Section3.2 does. Author the exact C=TIME conjunction and rank sign-testing construction with linear resource bounds; generic PP closure alone does not supply those bounds.",
+          "Obliviously simulate the linear-time computation with n log n time, encode its deterministic trace by a unique-witness formula of n polylog n size, and use the source auxiliary-selector variable to center counts at exactly half. Apply this inside the outer majority for the two-block formula. Provide actual bit-index generation and logarithmic workspace for the reduction; their uniformity, uniqueness, threshold and length proofs cannot be replaced by ordinary polynomial NP completeness."
+        ],
+        "audit_status": "contract-reviewed-authoring-unresolved",
+        "audit_report": "research/scaffold-audit-2026-10-14/quantum-computing.md",
+        "dependency_level": 1
+      },
+      "old_consumers": [],
+      "current_consumers": [
+        "thm-qc-counting-hierarchy-time-space-lower-bound",
+        "thm-qc-unbounded-error-counting-time-space-alternative"
+      ]
+    },
+    {
+      "id": "thm-qc-unbounded-error-counting-time-space-alternative",
+      "changes": [
+        "new prerequisite contract"
+      ],
+      "before": null,
+      "after": {
+        "id": "thm-qc-unbounded-error-counting-time-space-alternative",
+        "kind": "theorem",
+        "title": "Unbounded error counting time space alternative",
+        "page": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+        "deps": [
+          "def-qc-unbounded-error-time-space-counting-model",
+          "thm-qc-probabilistic-polynomial-time-hierarchy",
+          "lem-qc-counting-time-space-to-linear-hierarchy",
+          "lem-qc-tight-majority-formula-completeness"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "For every real d and epsilon>0 there exists c>1 such that either MajMajSAT is not in PrTIME(n^c), or MajSAT is not in PrTISP(n^d,n^(1−epsilon)), with exact majority and resource conventions as defined on this page.",
+        "proof_obligations": [
+          "Allender Theorem4: for 0<e<1 and a>1, assuming PrTIME(n) contained in PrTISP(n^a,n^e), choose b>1 with be<1. Padding then puts PrTIME(n^b) in PrTISP(n^(ba),n^(be)), hence LCH_tau by counting speedup. If LCH2 were in PrTIME(n^c), recursive oracle padding collapses LCH_tau into PrTIME(n^(c^(tau−1))). Choose rational1<c<b^(1/(tau−1)), contradicting the polynomial hierarchy supplier; enlarge tau to≥2 if necessary.",
+          "Transfer assumed MajSAT/MajMajSAT algorithms through the tight formula reductions, shrinking epsilon and increasing d by fixed exponent slack to absorb polylog factors. Pick a>max(1,d) and 0<e<1 appropriately; choose the final c>1 below the class-level exponent so polylog reduction factors are absorbed. Larger epsilon/negative d only strengthen the denied space/time claim; handle finite lengths separately. This derives VMW Lemma1 with its exact quantifiers."
+        ],
+        "sources": [
+          {
+            "url": "https://people.cs.rutgers.edu/~allender/papers/tradeoff.pdf",
+            "locator": "Theorem4 and its proof, PDFpp5–6; Lemma6 padding; Section3.2, pp10–12; VMW Lemma1 reformulation"
+          }
+        ],
+        "existing_supplier_checks": [
+          "Proposed local supplier; not an authored or proof-accepted carrier. Exact prerequisites listed; local mathematical route specified."
+        ],
+        "unresolved_obligations": [
+          "Allender Theorem4: for 0<e<1 and a>1, assuming PrTIME(n) contained in PrTISP(n^a,n^e), choose b>1 with be<1. Padding then puts PrTIME(n^b) in PrTISP(n^(ba),n^(be)), hence LCH_tau by counting speedup. If LCH2 were in PrTIME(n^c), recursive oracle padding collapses LCH_tau into PrTIME(n^(c^(tau−1))). Choose rational1<c<b^(1/(tau−1)), contradicting the polynomial hierarchy supplier; enlarge tau to≥2 if necessary.",
+          "Transfer assumed MajSAT/MajMajSAT algorithms through the tight formula reductions, shrinking epsilon and increasing d by fixed exponent slack to absorb polylog factors. Pick a>max(1,d) and 0<e<1 appropriately; choose the final c>1 below the class-level exponent so polylog reduction factors are absorbed. Larger epsilon/negative d only strengthen the denied space/time claim; handle finite lengths separately. This derives VMW Lemma1 with its exact quantifiers."
+        ],
+        "audit_status": "contract-reviewed-authoring-unresolved",
+        "audit_report": "research/scaffold-audit-2026-10-14/quantum-computing.md",
+        "dependency_level": 2
+      },
+      "old_consumers": [],
+      "current_consumers": [
+        "thm-qc-counting-hierarchy-time-space-lower-bound"
+      ]
+    },
+    {
+      "id": "thm-qc-counting-hierarchy-time-space-lower-bound",
+      "changes": [
+        "contract",
+        "supplier thm-qc-unbounded-error-counting-time-space-alternative",
+        "proof route"
+      ],
+      "before": {
+        "id": "thm-qc-counting-hierarchy-time-space-lower-bound",
+        "kind": "theorem",
+        "page": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+        "deps": [
+          "thm-qc-bqtisp-to-ptisp-simulation"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "In the exact VMW random-access quantum-machine model defined on this page, let MajSAT ask whether at least half of assignments satisfy an input Boolean formula, and MajMajSAT ask nested at-least-half quantification over two disjoint variable blocks. For every real d and epsilon>0 there exists c>1 such that either MajMajSAT has no bounded-two-sided-error quantum algorithm of time O(n^c), or MajSAT has no such algorithm simultaneously of time O(n^d) and space O(n^(1−epsilon)). Consequently MajMajSAT has no bounded-error algorithm simultaneously of time n^(1+o(1)) and space O(n^(1−epsilon)). This established target remains on authoring/source hold until its Allender supplier is locally supplied; it is not a current enabled inference or an open problem.",
+        "proof_obligations": [
+          "External Allender et al. paper not retrieved/read. No downstream lower-bound claim is licensed until this is discharged."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/0712.2545",
+            "locator": "Quantum time-space model and simulation, §§2.3–3 and Appendices A–B, PDF pp. 8–25"
+          },
+          {
+            "url": "https://arxiv.org/pdf/0712.2545",
+            "locator": "Theorem1 and Corollary1, PDF pp2–3; Lemma1 source supplier and Lemma2 reduction, Section3; reference[2], PDFp20",
+            "role": "Selected passages personally consulted by auditor; independent Allender full text still unread"
+          }
+        ],
+        "unresolved_obligations": [
+          "Unresolved: Allender et al. source/proof supplier was not retrieved or read; no downstream lower-bound item is licensed.",
+          "Smallest missing typed supplier: the Allender–Koucky–Ronneburger–Roy–Vinay unbounded-error probabilistic time-space alternative (VMW Lemma1, referenced CCC2001 pp295–302), with the same d,epsilon,c quantifiers and PTIME/PTISP resource conventions. Its independent full source is not retrieved/read here; citation alone does not enable it."
+        ],
+        "title": "Counting Hierarchy Time Space Lower Bound",
+        "existing_supplier_checks": [],
+        "audit_status": "contract-reviewed-authoring-unresolved",
+        "audit_report": "research/scaffold-audit-2026-10-14/quantum-computing.md",
+        "dependency_level": 10
+      },
+      "after": {
+        "id": "thm-qc-counting-hierarchy-time-space-lower-bound",
+        "kind": "theorem",
+        "page": "circuit-optimization-resource-tradeoffs-and-lower-bounds",
+        "deps": [
+          "thm-qc-bqtisp-to-ptisp-simulation",
+          "thm-qc-unbounded-error-counting-time-space-alternative"
+        ],
+        "justified_by": [],
+        "statement_or_definition": "In the exact VMW random-access quantum-machine model defined on this page, let MajSAT ask whether at least half of assignments satisfy an input Boolean formula, and MajMajSAT ask nested at-least-half quantification over two disjoint variable blocks. For every real d and epsilon>0 there exists c>1 such that either MajMajSAT has no bounded-two-sided-error quantum algorithm of time O(n^c), or MajSAT has no such algorithm simultaneously of time O(n^d) and space O(n^(1−epsilon)). Consequently MajMajSAT has no bounded-error algorithm simultaneously of time n^(1+o(1)) and space O(n^(1−epsilon)). This established target remains on authoring/source hold until the now-explicit Allender prerequisite decomposition is locally authored and reviewed; it is not a current enabled inference or an open problem.",
+        "proof_obligations": [
+          "Apply the QC23 quantum-to-unbounded-probabilistic time/space simulation to hypothetical algorithms for both majority languages. Preserve each time/space exponent with a smaller fixed epsilon and a slightly enlarged fixed d to absorb polylog overhead, contradicting the explicit Allender alternative.",
+          "For the quasilinear MajMajSAT corollary, such an algorithm also solves MajSAT by a dummy majority block, in polynomial time and the same sublinear-space exponent. Choose the alternative c>1 and absorb n^(1+o(1)) into n^c. All source model, finite-bit simulation and prerequisite proofs are mandatory."
+        ],
+        "sources": [
+          {
+            "url": "https://arxiv.org/pdf/0712.2545",
+            "locator": "Quantum time-space model and simulation, §§2.3–3 and Appendices A–B, PDF pp. 8–25"
+          },
+          {
+            "url": "https://arxiv.org/pdf/0712.2545",
+            "locator": "Theorem1 and Corollary1, PDF pp2–3; Lemma1 source supplier and Lemma2 reduction, Section3; reference[2], PDFp20",
+            "role": "Selected passages personally consulted by auditor; independent Allender full text still unread"
+          }
+        ],
+        "unresolved_obligations": [
+          "Apply the QC23 quantum-to-unbounded-probabilistic time/space simulation to hypothetical algorithms for both majority languages. Preserve each time/space exponent with a smaller fixed epsilon and a slightly enlarged fixed d to absorb polylog overhead, contradicting the explicit Allender alternative.",
+          "For the quasilinear MajMajSAT corollary, such an algorithm also solves MajSAT by a dummy majority block, in polynomial time and the same sublinear-space exponent. Choose the alternative c>1 and absorb n^(1+o(1)) into n^c. All source model, finite-bit simulation and prerequisite proofs are mandatory."
+        ],
+        "title": "Counting Hierarchy Time Space Lower Bound",
+        "existing_supplier_checks": [],
+        "audit_status": "contract-reviewed-authoring-unresolved",
+        "audit_report": "research/scaffold-audit-2026-10-14/quantum-computing.md",
+        "dependency_level": 10
+      },
+      "old_consumers": [],
+      "current_consumers": []
+    }
+  ]
+}

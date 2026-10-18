@@ -1,7 +1,7 @@
 ---
 page: rational-cherednik-algebras-and-category-o
 title: "Rational Cherednik Algebras and Their Category O"
-status: draft
+status: published
 requires: [affine-hecke-algebras-beyond-type-a]
 items:
   - lem-rational-cherednik-log-connection-meridian-eigenvalues

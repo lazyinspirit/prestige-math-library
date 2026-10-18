@@ -2,7 +2,7 @@
 id: cex-symmetric-rep-z2-hopf-matrix-is-singular
 kind: counterexample
 title: "Symmetric Rep(Z/2) has singular Hopf-link matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

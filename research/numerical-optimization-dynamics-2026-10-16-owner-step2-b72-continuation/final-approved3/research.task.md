@@ -1,4 +1,0 @@
-Root-fresh-declaration prerequisite: do not launch until root explicitly confirms the exact3-source allowlist and no conflicting native/owner source writer. Follow full research.brief.md and approved-three.json, resume original72 identity, apply only guarded approved3, refresh full retained30 consumer union and actual97 context, record new evidence only.
-
-## ACTUAL ROOT RELEASE
-Root FULLY read exact3diff and approves all changes. Root now verified native engine paused, all native writers ended, all3 full before guards match. Declaration research/numerical-optimization-dynamics-2026-10-16-owner-step2-b72-continuation/final-approved3/ROOT-actual-writer-declaration.json grants exclusive exact source application authority now. Deterministic proof phase renumbering/tag-line joining preserving complete mathematical arguments is authorized if required by scoped precheck; archive exact changes and final checks, no extra mathematical edits.

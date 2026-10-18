@@ -2,7 +2,7 @@
 id: lem-qa-37-fibonacci-su2-lifts-are-dense
 kind: lemma
 title: "The generated normalized Fibonacci lifts are dense in SU(2)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 11

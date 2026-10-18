@@ -2,7 +2,7 @@
 id: lem-state-field-reconstruction-from-local-generators
 kind: lemma
 title: Mutually local creative generators determine a state–field map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

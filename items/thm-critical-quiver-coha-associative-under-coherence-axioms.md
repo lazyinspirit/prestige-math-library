@@ -2,7 +2,7 @@
 id: thm-critical-quiver-coha-associative-under-coherence-axioms
 kind: theorem
 title: "Critical quiver CoHA is associative and unital, including the standard realization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

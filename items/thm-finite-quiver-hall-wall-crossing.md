@@ -2,7 +2,7 @@
 id: thm-finite-quiver-hall-wall-crossing
 kind: theorem
 title: "Completed Hall wall crossing for finite acyclic quivers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

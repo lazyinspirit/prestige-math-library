@@ -2,7 +2,7 @@
 id: lem-convex-perspective-is-subadditive
 kind: lemma
 title: The closed convex perspective is subadditive
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

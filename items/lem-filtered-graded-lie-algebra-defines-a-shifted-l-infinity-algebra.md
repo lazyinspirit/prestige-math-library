@@ -2,7 +2,7 @@
 id: lem-filtered-graded-lie-algebra-defines-a-shifted-l-infinity-algebra
 kind: lemma
 title: "The precise shifted L-infinity structure of a complete filtered differential graded Lie algebra"
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

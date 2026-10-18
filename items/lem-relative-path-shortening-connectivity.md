@@ -2,7 +2,7 @@
 id: lem-relative-path-shortening-connectivity
 kind: lemma
 title: Relative path-shortening connectivity from index bounds
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

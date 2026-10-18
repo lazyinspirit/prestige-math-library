@@ -18,8 +18,6 @@ axiom_use: No choice principle is used; the positive Picard iterates start at th
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
 sources:
   references:
     - title: Philippe Laurençot, Weak compactness techniques and coagulation equations, §§3.1–3.4

@@ -2,7 +2,7 @@
 id: thm-four-cocycle-2vect-g-is-fusion-two-category
 kind: theorem
 title: A normalized group 4-cocycle gives a fusion 2-category 2Vect_G^omega
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

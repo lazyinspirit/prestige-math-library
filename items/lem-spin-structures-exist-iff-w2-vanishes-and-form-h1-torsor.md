@@ -2,7 +2,7 @@
 id: lem-spin-structures-exist-iff-w2-vanishes-and-form-h1-torsor
 kind: lemma
 title: "Spin structures exist exactly when w2 vanishes and then form an H1 torsor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory

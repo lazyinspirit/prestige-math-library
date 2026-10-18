@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-generators-satisfy-local-relations
 kind: lemma
 title: "The elementary diagram generators satisfy the local Temperley–Lieb relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

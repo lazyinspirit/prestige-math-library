@@ -2,7 +2,7 @@
 id: thm-stable-clifford-hopf-decomposition-over-sphere-bundles
 kind: theorem
 title: Stable Clifford–Hopf decomposition over sphere bundles
-status: draft
+status: published
 origin: pipeline
 deps:
 - def-axiom-of-choice

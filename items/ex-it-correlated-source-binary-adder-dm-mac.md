@@ -2,7 +2,7 @@
 id: ex-it-correlated-source-binary-adder-dm-mac
 kind: example
 title: A correlated binary source is sent uncoded over an adder MAC
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

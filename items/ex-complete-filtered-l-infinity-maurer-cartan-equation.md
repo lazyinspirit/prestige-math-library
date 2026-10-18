@@ -2,7 +2,7 @@
 id: ex-complete-filtered-l-infinity-maurer-cartan-equation
 kind: example
 title: "A finite complete filtered L∞ Maurer–Cartan equation"
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

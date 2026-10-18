@@ -2,7 +2,7 @@
 id: thm-discrete-memoryless-channel-alphabet-scoped-strong-converse
 kind: theorem
 title: "Strong converse for finite-alphabet DMCs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

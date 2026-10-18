@@ -2,7 +2,7 @@
 id: thm-it-point-to-point-lossy-source-channel-separation
 kind: theorem
 title: "Lossy separation for finite IID sources and finite DMCs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

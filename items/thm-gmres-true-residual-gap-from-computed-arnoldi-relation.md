@@ -18,8 +18,6 @@ deps: [thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound,
 justified_by: []
 aliases: []
 proof_strategy: direct
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

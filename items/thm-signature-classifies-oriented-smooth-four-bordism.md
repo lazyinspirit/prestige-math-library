@@ -2,7 +2,7 @@
 id: thm-signature-classifies-oriented-smooth-four-bordism
 kind: theorem
 title: "Signature classifies integral oriented smooth four-bordism"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

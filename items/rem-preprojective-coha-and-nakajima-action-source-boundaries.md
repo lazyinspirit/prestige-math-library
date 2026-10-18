@@ -2,7 +2,7 @@
 id: rem-preprojective-coha-and-nakajima-action-source-boundaries
 kind: remark
 title: "Source-reported preprojective CoHA actions and their type boundaries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

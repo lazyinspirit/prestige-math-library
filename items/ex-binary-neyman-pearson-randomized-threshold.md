@@ -2,7 +2,7 @@
 id: ex-binary-neyman-pearson-randomized-threshold
 kind: example
 title: A binary Neyman–Pearson boundary randomization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

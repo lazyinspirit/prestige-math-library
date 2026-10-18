@@ -2,7 +2,7 @@
 id: lem-affine-vacuum-character-at-level-k
 kind: lemma
 title: The affine vacuum character exists at every complex level
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

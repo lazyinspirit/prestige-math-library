@@ -2,7 +2,7 @@
 id: def-pa36-flag-tdo-and-module
 kind: definition
 title: Flag-variety twisted differential operators and their modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

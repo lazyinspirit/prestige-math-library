@@ -2,7 +2,7 @@
 id: def-countable-mode-car-algebra
 kind: definition
 title: Countably Infinite-Mode CAR C*-Algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: car-algebras-majorana-generators-and-clifford-comparison

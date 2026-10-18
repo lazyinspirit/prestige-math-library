@@ -1,7 +1,7 @@
 ---
 page: finite-alphabet-entropy-and-divergence-examples
 title: "Finite-Alphabet Entropy and Divergence — Examples"
-status: draft
+status: published
 requires: [finite-alphabet-entropy-and-divergence]
 items: []
 examples:

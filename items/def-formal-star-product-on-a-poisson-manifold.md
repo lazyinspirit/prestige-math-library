@@ -2,7 +2,7 @@
 id: def-formal-star-product-on-a-poisson-manifold
 kind: definition
 title: Formal differential star products and first-order normalization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

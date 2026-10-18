@@ -2,7 +2,7 @@
 id: ex-brauer-and-partition-loop-composition
 kind: example
 title: Brauer and partition loops contribute their parameters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

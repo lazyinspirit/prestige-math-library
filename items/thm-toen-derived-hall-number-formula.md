@@ -2,7 +2,7 @@
 id: thm-toen-derived-hall-number-formula
 kind: theorem
 title: "Toën derived Hall numbers have the higher-Ext orbit formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

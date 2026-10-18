@@ -2,7 +2,7 @@
 id: lem-cost-constrained-dmc-mutual-information-under-average-cost
 kind: lemma
 title: An average-cost DMC block input has mutual information at most n C_I(Gamma)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

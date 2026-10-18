@@ -2,7 +2,7 @@
 id: lem-one-handle-surgery-replacement-is-independent-of-the-base-arc
 kind: lemma
 title: "Changing the base arc in a one-handle replacement gives marked Kirby moves"
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

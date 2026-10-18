@@ -2,7 +2,7 @@
 id: lem-it-flat-spectral-type-information-approximation
 kind: lemma
 title: Exact flat spectral-type reduction of channel information
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

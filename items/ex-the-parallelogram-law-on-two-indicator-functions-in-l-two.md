@@ -20,7 +20,7 @@ sources:
   scraped: []
   references:
     - title: "John K. Hunter, Measure Theory, Chapter 15"
-      url: "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+      url: "https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf"
 ---
 
 ## Example

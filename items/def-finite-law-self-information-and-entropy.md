@@ -2,7 +2,7 @@
 id: def-finite-law-self-information-and-entropy
 title: "Self-information and surprisal variance for a finite law"
 kind: definition
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

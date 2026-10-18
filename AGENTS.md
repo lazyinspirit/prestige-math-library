@@ -9,8 +9,9 @@ normative instruction file. Do not duplicate those rules here; update
 **Active run.** The build driver is `tools/autopilot/`; a live run has a
 `.autopilot/` state dir at the repo root (`node tools/tsx-run.mjs
 tools/autopilot/bin/autopilot.mts status --run RUN --state-dir .autopilot/RUN`
-recomputes from disk). The many `research/*RESUME.md` files belong to
-CONCLUDED runs — sixteen of them exist and none is in flight; verify against
-`.autopilot/` and `git log`, never against a RESUME file's own claim.
+recomputes from disk). The sixteen historical `research/*RESUME.md` handoffs
+were retired after their concluded status was verified; the exact inventory is
+in `research/run-telemetry/cleanup.jsonl.gz`. Verify active work against
+`.autopilot/` and `git log`, never against an old handoff's own claim.
 
 The build has no LLM orchestrator: `tools/autopilot/` owns every transition.

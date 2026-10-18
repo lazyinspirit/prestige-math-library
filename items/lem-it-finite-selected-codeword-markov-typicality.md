@@ -2,7 +2,7 @@
 id: lem-it-finite-selected-codeword-markov-typicality
 kind: lemma
 title: "Markov typicality for independently selected finite codewords"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

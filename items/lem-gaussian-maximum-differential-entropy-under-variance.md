@@ -2,7 +2,7 @@
 id: lem-gaussian-maximum-differential-entropy-under-variance
 kind: lemma
 title: A Gaussian maximizes scalar differential entropy at fixed variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-differential-graded-module
 kind: definition
 title: "Cohomological left and right differential graded modules"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -1,7 +1,7 @@
 ---
 page: multiuser-channel-networks-examples
 title: "Multiuser Channel Networks — Examples"
-status: draft
+status: published
 requires: [multiuser-channel-networks]
 items:
   - ex-it-ozarow-awgn-mac-feedback-rate-region-at-rho

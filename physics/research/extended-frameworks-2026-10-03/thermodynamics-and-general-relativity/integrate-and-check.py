@@ -7,6 +7,19 @@ B=Path(__file__).resolve().parent
 ROOT=B.parents[3]
 errors=[]
 records=[]
+def read_frontmatter(text, source):
+    """Parse only a leading YAML block bounded by standalone delimiter lines."""
+    match=re.match(r'\A---[ \t]*\r?\n(.*?)\r?\n---[ \t]*(?:\r?\n|\Z)',text,re.S)
+    if not match:return {}
+    try:
+        value=yaml.safe_load(match.group(1)) or {}
+    except yaml.YAMLError as exc:
+        errors.append('invalid frontmatter '+source+' '+str(exc).splitlines()[0])
+        return {}
+    if not isinstance(value,dict):
+        errors.append('frontmatter is not a mapping '+source)
+        return {}
+    return value
 inputs=[B/'integrator-inventory.json']+sorted((B/'workers').glob('*/inventory.json'))
 for p in inputs:
     obj=json.loads(p.read_text()); rows=obj.get('records',obj.get('items',[]))
@@ -108,7 +121,7 @@ for r in records:
             p=ROOT/'items'/f'{dep}.md'
             if not p.exists():p=ROOT/'physics'/'items'/f'{dep}.md'
             if p.exists():
-                t=p.read_text();parts=t.split('---',2);meta=yaml.safe_load(parts[1]) if len(parts)>2 else {}
+                t=p.read_text();meta=read_frontmatter(t,dep)
                 domain=meta.get('domain','mathematics');status=meta.get('status','draft')
                 if r['domain']=='mathematics' and domain!='mathematics':errors.append('external math physical edge '+dep+' '+r['id'])
                 statement=re.search(r'## (?:Statement|Definition)\n(.*?)(?=\n## |\Z)',t,re.S)
@@ -131,10 +144,8 @@ for r in records:
 # Exact external original homes; research suppliers remain source-module interfaces.
 for e in external.values():e['home_kind']='research-proof-module' if e.get('path','').startswith('physics/research/') else 'canonical-root-item'
 for pagefile in sorted((ROOT/'library').glob('*/*.md')):
-    t=pagefile.read_text();parts=t.split('---',2)
-    if len(parts)<3:continue
-    try:m=yaml.safe_load(parts[1]) or {}
-    except Exception:continue
+    t=pagefile.read_text();m=read_frontmatter(t,str(pagefile.relative_to(ROOT)))
+    if not m:continue
     for id in list(m.get('items',[]) or [])+list(m.get('examples',[]) or []):
         if id in external:
             external[id].setdefault('original_page_homes',[]).append({'path':str(pagefile.relative_to(ROOT)),'page':m.get('page'),'is_B':pagefile.stem.endswith('-examples'),'status':m.get('status','draft')})

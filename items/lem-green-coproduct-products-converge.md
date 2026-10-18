@@ -2,7 +2,7 @@
 id: lem-green-coproduct-products-converge
 kind: lemma
 title: "Products of Green coproducts converge coefficientwise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

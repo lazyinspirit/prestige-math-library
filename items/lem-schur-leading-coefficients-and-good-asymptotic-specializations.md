@@ -2,7 +2,7 @@
 id: lem-schur-leading-coefficients-and-good-asymptotic-specializations
 kind: lemma
 title: "Leading Schur coefficients and split good-characteristic asymptotic specializations"
-status: draft
+status: published
 dependency_level: 7
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

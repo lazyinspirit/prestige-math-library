@@ -1,7 +1,7 @@
 ---
 page: double-affine-hecke-algebras-and-macdonald-theory
 title: "Double-Affine Hecke Algebras and Macdonald Theory"
-status: draft
+status: published
 requires:
   - affine-hecke-algebras-beyond-type-a
 items:

@@ -24,8 +24,6 @@ sources:
     - title: "Tiejun Li, Lecture 21: Application in chemical reaction kinetics, Applied Stochastic Analysis course notes"
       url: "https://www.math.pku.edu.cn/teachers/litj/notes/appl_stoch/lect21.pdf"
       locator: "§3.1, tau-leap update and Poisson count parameters, PDF pp. 2–3."
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

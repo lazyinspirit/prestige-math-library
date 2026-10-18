@@ -2,7 +2,7 @@
 id: ex-pa36-integral-line-bundle-translation
 kind: example
 title: Integral line-bundle translation changes the infinitesimal character
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

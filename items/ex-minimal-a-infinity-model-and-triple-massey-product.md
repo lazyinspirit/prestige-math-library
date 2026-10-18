@@ -2,7 +2,7 @@
 id: ex-minimal-a-infinity-model-and-triple-massey-product
 kind: example
 title: "A minimal A∞-model whose ternary operation realizes a triple Massey product"
-status: draft
+status: published
 dependency_level: 4
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

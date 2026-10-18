@@ -2,7 +2,7 @@
 id: prop-yangian-gl-n-rtt-hopf-structure
 kind: proposition
 title: "The RTT Yangian has its standard Hopf structure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

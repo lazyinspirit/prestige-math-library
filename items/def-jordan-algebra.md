@@ -2,7 +2,7 @@
 id: def-jordan-algebra
 kind: definition
 title: Jordan algebra over a field of characteristic not two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: jordan-spin-factor-and-alternative-algebras

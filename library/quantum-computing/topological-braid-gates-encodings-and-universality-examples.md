@@ -1,7 +1,7 @@
 ---
 page: topological-braid-gates-encodings-and-universality-examples
 title: Topological Braid Gates, Encodings, and Universality — Examples
-status: draft
+status: published
 items: []
 examples:
 - ex-qc-tqc-ising-vs-fibonacci

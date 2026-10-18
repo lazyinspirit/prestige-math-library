@@ -2,7 +2,7 @@
 id: def-formal-associative-deformation-of-a-commutative-algebra
 kind: definition
 title: Coefficientwise formal associative deformations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

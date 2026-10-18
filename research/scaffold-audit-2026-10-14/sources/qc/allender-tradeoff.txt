@@ -1,0 +1,682 @@
+[PDF page 1]
+Time-Space Tradeoffs in the Counting
+Hierarchy∗
+ERIC ALLENDER †
+Dept. of Computer Science
+Rutgers University
+allender@cs.rutgers.edu
+MICHAL KOUCK ´Y ‡
+Dept. of Computer Science
+Rutgers University
+mkoucky@paul.rutgers.edu
+DETLEF RONNEBURGER §
+Dept. of Computer Science
+Rutgers University
+detlef@paul.rutgers.edu
+SAMBUDDHA ROY
+Dept. of Computer Science
+Rutgers University
+samroy@paul.rutgers.edu
+V VINAY
+Dept. of Computer Science and Automation
+Indian Institute of Science
+vinay@csa.iisc.ernet.in
+
+[PDF page 2]
+Abstract
+We extend the lower bound techniques of [14], to the unbounded-error
+probabilistic model. A key step in the argument is a generalization of Nepom-
+njaˇsˇci˘ı’s theorem from the Boolean setting to the arithmetic setting. This gen-
+eralization is made possible, due to the recent discovery of logspace-uniform
+TC0 circuits for iterated multiplication [9].
+Here is an example of the sort of lower bounds that we obtain: we show
+that MAJ·MAJSAT is not contained in PrTiSp(n1+o(1), nϵ) for any ϵ < 1.
+We also extend a lower bound of [14], from showing that SAT does not have
+uniform NC1 circuits of size n1+o(1), to a similar result for SAC1 circuits.
+1
+Introduction
+This work takes as its starting point the lower bounds presented by Fortnow in
+[14], in which it was shown that SAT ̸∈DTiSp(n1+o(1), n1−ϵ), and its complement
+SAT ̸∈NTiSp(n1+o(1), n1−ϵ).
+The time-space tradeoffs of [14] have been extended in several ways. Lipton
+and Viglas [19] and Fortnow and van Melkebeek [15] showed that better lower
+bounds on time could be obtained, if smaller space bounds were considered. For
+instance, it is shown in [15] that the set SAT ̸∈NTiSp(n1.4, no(1)). Tourlakis [26]
+extended results of [14] and [19] further to a nonuniform setting where machines
+can take no(1) advice. A survey of these developments can be found in [20].
+More dramatically, results in the branching program model proved by Ajtai [1]
+and extended by Beame et al. [7] show that deterministic time-space tradeoffs that
+are nearly as strong can be obtained even for problems of much lower complexity
+than SAT (i.e., problems in P), and even in the fully nonuniform setting. For in-
+stance, speciﬁc instances of combinatorial problems in P are presented, that require
+time Ω(n
+p
+log n/ log log n) on machines using space O(n1−ϵ). (Van Melkebeek
+points out in [20] that the results of [7] seem to imply nothing about the complex-
+ity of SAT, since the problems in P considered in that work are not known to be
+reducible to SAT in time n logO(1) n.)
+We extend the time-space tradeoffs in yet another direction. Instead of deter-
+ministic or nondeterministic computation, we consider the seemingly much more
+∗To appear in Proc. IEEE Conference on Computational Complexity, 2001.
+†Supported in part by NSF grant CCR-9734918.
+‡Supported in part by NSF grant CCR-9734918.
+§Supported in part by NSF grant CCR-9734918.
+
+[PDF page 3]
+powerful mode of unbounded-error probabilistic computation. Note that the class
+PrTiSp(n log n, nϵ) is very powerful. It contains problems complete for PP under
+≤p
+m reducibility, and hence, by [24], it contains problems hard for the polynomial
+hierarchy under ≤p
+T reductions.
+Just as the techniques of [14] do not yield lower bounds for SAT in the nonde-
+terministic time- and space-bounded model (instead yielding results only for SAT),
+our extensions do not yield lower bounds for SAT or MAJSAT, but only for prob-
+lems complete for the second level of the counting hierarchy.
+We had hoped to provide lower bounds on the size and depth of uniform arith-
+metic circuits computing functions in the counting hierarchy, but we do not see
+how do do this. However, we are able to extend the circuit lower bounds of [14] to
+a larger class of circuits. Fortnow shows in [14] that SAT (and hence SAT) cannot
+be solved by logspace-uniform NC1 circuits of size n1+o(1). A slight modiﬁcation
+of that proof shows that SAT cannot be solved by uniform SAC1 circuits of size
+n1+o(1). (We sketch a proof in Section 4.)
+Our main result (Theorem 3) can be extended along the lines of Tourlakis ([26])
+to show that PrTime(n)PrTime(n)/no(1) ̸⊆PrTiSp(n1+γ, nϵ)/no(1). We omit the de-
+tails of this extension.
+2
+Preliminaries
+We assume that the reader is familiar with the standard notions of complexity the-
+ory as can be found in the standard textbooks (i.e. [5, 22, 11, 28]). In particular, the
+reader is assumed to be familiar with unbounded-error probabilistic oracle Turing
+machines.
+In this paper PrTimeA(t) denotes the class of languages that are decidable by
+unbounded-error probabilistic Turing machines running in time t, with oracle A.
+If C is a class of languages, then PrTimeC(t) is the union, over all A ∈C, of
+PrTimeA(t). We will use PrTiSp(t(n), s(n)) to denote the class of languages de-
+cidable by an unbounded-error probabilisticTuring machine running in time O(t(n))
+and space O(s(n)).
+We deﬁne the levels of the linear time version of the counting hierarchy as fol-
+lows.
+Deﬁnition 1 Given the ﬁrst level of the linear time counting hierarchy relative
+to oracle A, LCHA
+1 = PrTimeA(n), we recursively deﬁne the higher levels as
+LCHA
+i+1 = PrTime(n)LCHA
+i . The union over all levels gives the entire hierarchy
+
+[PDF page 4]
+LCHA = S
+i LCHA
+i . The unrelativized levels of this hierarchy are deﬁned as usual
+by using the empty set as an oracle: LCHi = LCH∅
+i , LCH = LCH∅.
+It can be veriﬁed that LCH is a relatively robust class that can be deﬁned equiv-
+alently using the linear-time analogs of #P or C=P, etc.
+In order to prove our main result we will need the following theorem, which
+can be proven by standard diagonalization techniques using the fact that a multi-
+tape probabilistic Turing machine running in time t can be simulated on a two-tape
+probabilistic Turing machine in time O(t) [8, 2].
+Theorem 2 (Hierarchy Theorem) Let T and t be time-constructible functions. If
+t ∈o(T) then PrTime(t) ⊊PrTime(T).
+As usual, TC0 denotes the class of languages decidable by constant depth, poly-
+nomial-size threshold circuits, i.e., Boolean circuits that consist of unbounded fan-
+in AND, OR, NOT and MAJORITY gates. We will also use arithmetic circuits over
+the integers consisting of unbounded fan-in + and × gates (usual arithmetic addi-
+tion and multiplication).
+Further recall that SAC1 is the class of languages accepted by polynomial-size
+circuits of depth O(log n) having unbounded fan-in OR gates and bounded fan-in
+AND gates; it is equal to LogCFL: the class of problems logspace-reducible to a
+context-free language [27]. Since LogCFL is closed under complement [4], it can
+also be deﬁned in terms of bounded fan-in OR gates and unbounded fan-in AND
+gates. Recall also that NC1 ⊆L ⊆NL ⊆SAC1.
+3
+Main Result
+Our main result extends the time-space tradeoff of [14], where instead of giving
+lower bounds for solvingSAT with nondeterministicmachines, we give lower bounds
+for solving MAJ·MAJSAT with probabilistic machines. We will give the follow-
+ing relation between the time and space required to solve problems from the second
+level of the linear time counting hierarchy. We show in Section 3.2 that this implies
+a lower bound on MAJ·MAJSAT.
+Theorem 3 (Main Theorem) For every constant ϵ such that 0 < ϵ < 1, there
+exists a constant γ > 0, such that
+PrTime(n)PrTime(n) ̸⊆PrTiSp(n1+γ, nϵ).
+
+[PDF page 5]
+More speciﬁcally, we show the next theorem, which implies our main result by
+setting γ = min{a, d} −1. It would be possible to determine more precisely the
+relationship among γ, a and d, by examining more closely certain factors such as
+the depth of uniform TC0 circuits for iterated product. We do not attempt such an
+analysis here.
+Theorem 4 For every 0 < ϵ < 1, and every a > 1, there exists a constant d > 1
+such that if
+PrTime(n) ⊆PrTiSp(na, nϵ)
+then
+PrTime(n)PrTime(n) ̸⊆PrTime(nd).
+The proof of this theorem is based on the following two lemmas. The ﬁrst one
+is an analog of Nepomnjaˇsˇci˘ı’s Theorem [21]. We will prove it in Section 3.1.
+Lemma 5 For any α > 1, and any 0 < β < 1, there is a constant τ(α, β) > 0
+such that:
+PrTiSp(nα, n1−β) ∈LCHτ(α,β).
+Lemma 6 For any rational d > 1, and any integer constant k ≥1, if
+PrTime(n)PrTime(n) ⊆PrTime(nd)
+then
+LCHk ⊆PrTime(ndk−1).
+Proof of Lemma 6: For k < 3, the lemma is trivial, so assume that k ≥3. The
+assumption PrTime(n)PrTime(n) ⊆PrTime(nd) implies by a padding argument on
+the oracle that PrTime(n)PrTime(ndi) ⊆PrTime(ndi+1), for any i ≥1. Therefore,
+for any 0 ≤i < k −2:
+LCHPrTime(ndi)
+k−i−1
+=
+LCHPrTime(n)PrTime(ndi
+)
+k−(i+1)−1
+⊆
+LCHPrTime(ndi+1)
+k−(i+1)−1
+.
+Hence, LCHk = LCHPrTime(nd0)
+k−1
+⊆· · · ⊆LCHPrTime(ndk−2)
+1
+⊆PrTime(ndk−1).
+2
+
+[PDF page 6]
+We can use these two lemmas to prove Theorem 4.
+Proof of Theorem 4: Let a > 1, and ϵ > 0 be given, and assume that
+PrTime(n) ⊆PrTiSp(na, nϵ).
+Let b > 1 be such that bϵ < 1. Let τ(ba, 1 −bϵ) be the constant from Lemma
+5, and let d < b1/(τ(ba,1−bϵ)−1). We claim that
+PrTime(n)PrTime(n) ̸⊆PrTime(nd).
+Suppose on the contrary that
+PrTime(n)PrTime(n) ⊆PrTime(nd).
+Then
+PrTime(nb)
+⊆
+PrTiSp(nba, nbϵ)
+⊆
+LCHτ(ba,1−bϵ)
+⊆
+PrTime(ndτ(ba,1−bϵ)−1),
+where the ﬁrst inclusion holds by a padding argument, the second follows from
+Lemma 5, and the third from Lemma 6. This contradicts the Hierarchy Theorem.2
+3.1
+Proof of Lemma 5
+We want to show that any computation running in probabilistic time nα and space
+n1−β for some constants α and β, lies in some level of the linear time counting
+hierarchy.
+We will prove this lemma in three steps. First, we will build a family of expo-
+nentially large constant-depth arithmetic circuits computing the number of paths
+from the start conﬁguration to the accepting conﬁguration in the conﬁguration graph
+of a PrTiSp(nα, n1−β)-machine running on an input x. Second, we will convert
+this arithmetic circuit into a Boolean threshold circuit of roughly the same size and
+depth. Third, we will show that the sets recognized by those large (but very uni-
+form) threshold circuits are contained in some level of the linear time counting hi-
+erarchy.
+Step 1 - Construction of the arithmetic circuit
+A probabilistic machine M running in space n1−β and time nα has at most
+2O(n1−β) different conﬁgurations if it is run on input x of length n. W.l.o.g., we
+
+[PDF page 7]
+may assume that each conﬁguration is time-stamped; thus the conﬁguration graph
+of machine M is layered and acyclic. We want to count the number of paths from
+the start conﬁguration cstart to the accepting conﬁguration caccept in the graph. All
+these paths are of length nα
+Let Vn be the set of conﬁgurations of M. We can count the number of paths
+from cstart to caccept in the conﬁguration graph as follows. First we pick nβ −1
+intermediate checkpoints c1, c2, . . . , cnβ−1 ∈Vn, such that conﬁguration ci is at
+level inα−β in the conﬁguration graph; next we count the number of paths from
+cstart to caccept going through all these checkpoints; ﬁnally we take the sum over
+all possible choices of the checkpoints:
+#path(c0, cnβ, nα) =
+X
+c1,...,cnβ−1∈Vn
+nβ−1
+Y
+i=0
+#path(ci, ci+1, nα−β),
+where c0 = cstart, and cnβ = caccept.
+We can easily compute the above expression with a depth 2 arithmetic circuit
+consisting of one + gate and many × gates, provided that we know the number of
+paths of length nα−β between all the pairs of nodes ci and ci+1. Since we take the
+sum over |Vn|nβ = (2O(n1−β))nβ = 2O(n) different combinations of check points,
+the + gate has fan-in 2O(n), whereas the × gates have fan-in nβ + 1.
+The preceding two paragraphs give a reduction: the problem of computing the
+number of paths of length nα from c to c′ is reduced to the problem of counting
+paths of length nα−β. By iterating this reduction α/β times, we obtain an arith-
+metic circuit of depth 2α/β that has as its inputs the number of paths of length
+nα/(nβ)α/β = 1 between any two conﬁgurations. The number of paths of length
+1 between two conﬁgurations can be directly computed from input x by consider-
+ing the transition relation of machine M.1
+Note that the output of the arithmetic circuit is a number with polynomially
+many bits in terms of n, since probabilistic machine M has running time nα.
+It is straightforward to see that the total size of the circuit is 2O(n). We can
+uniquely label a + gate at level k, that corresponds to the start- and endpoints c0 and
+cnβ, by ⟨+, k, c0, cnβ⟩. A × gate at level k, that corresponds to the start- and end-
+points c0 and cnβ, and the checkpoints c1, . . . , cnβ−1, can be labeled by ⟨×, k, c0, . . . , cnβ⟩.
+Since there are at most 2O(n) such labels, the size of the circuit is exponential in n.
+Further, the circuit is highly uniform. It is easy to determine if two gates g and
+h are connected or not. This can even be done in linear time in terms of the length
+1We omit here usual technical details arising from the possible non-integrality of nα, nβ, etc.
+
+[PDF page 8]
+of the description of g and h, i.e., in time linear in n.
+Step 2 - Conversion of the arithmetic circuit into a Boolean threshold circuit
+Now we can use the recent result that iterated multiplication is in logspace uni-
+form TC0 ([9], see also [3, 17]) along with the fact that iterated addition is in Dlog-
+time-uniform TC0 ([6]) to convert the arithmeticcircuit to a constant-depth Boolean
+threshold circuit.
+Let us assume that the output of the arithmetic circuit has ns bits. We replace
+each + gate with the appropriate constant-depth threshold circuit of size 2O(n) with
+ns outputs computing the iterated sum. Similarly we replace each × gate with a
+subcircuit of polynomial size in n computing the iterated product of the nβ inputs
+with ns bits. The resulting Boolean threshold circuit is also of size 2O(n) and it also
+computes the number of s-t paths in the graph.
+This Boolean circuit is not necessarily linear time uniform in terms of n, but
+we show that we can determine whether two gates are connected or not in linear
+time with access to an oracle from the linear time counting hierarchy. We can label
+each gate g in the Boolean circuit with a label ⟨la, ls⟩, where la is the label of the
+substituted + or × gate in the arithmetic circuit and ls is the relative label g has in
+the addition/multiplication subcircuit.
+We can reduce the question of whether two gates are connected in the Boolean
+circuit to the connectivity question for the subcircuits. Two gates g and h are con-
+nected either because they belong to the same subcircuit and are adjacent within
+that subcircuit, or because they are in two adjacent subcircuits (a question we can
+answer in linear time in terms of n), and one is an output gate and the other is a
+matching input gate.
+Since the addition circuits are Dlogtime uniform, they maintain the uniformity
+of the Boolean circuit. The multiplication circuits are only logspace uniform. But
+Nepomnjaˇsˇci˘ı’s theorem ([21]) yields as a corollary that every set A ∈L is con-
+tained in ΣO(n)
+k
+⊆LCHk for some k. Therefore we can decide the connectivity
+language for the multiplication subcircuits (and thus the entire circuit) in linear
+time in terms of n as long as we have access to an oracle from the k-th level of
+the linear time counting hierarchy. (Alternatively, one can use the recently-proved
+theorem of Hesse [17], which improves [9] by showing that iterated product lies
+in Dlogtime-uniform TC0.)
+We have now constructed a family of Boolean threshold circuits {Cn} of size
+2O(n) and depth O( 2α
+β ), for which the set {(x, g, h)
+:
+h is an input gate of g in
+C|x|} is in LCHk, for a suitable constant k. This constant depends on the exact
+logspace uniformity of the TC0 circuits for iterated multiplication of nβ inputs of
+
+[PDF page 9]
+size nα.
+Step 3 - Putting the arithmetic circuit into LCH
+Finally, we will show that the language decided by the circuit, that was obtained
+in the previous step, lies in LCH. More precisely we will show by induction on j
+that for any threshold circuit of depth j with the above mentioned size and unifor-
+mity conditions, the set {(x, g) : gate g evaluates to 1 in the circuit C|x| on input
+x} is in LCHj+k.
+Without loss of generality we may assume that the threshold circuit only con-
+tains majority and negation gates.
+We may inductively assume that we can decide if a gate g in a depth j −1
+threshold circuit evaluates to 1, by a LCH(j−1)+k machine. So let us consider some
+gate g on input x for a circuit C|x| of depth j. We can now randomly guess a gate h
+and query a LCHk oracle to ﬁnd out if h is an input to g. If not, then we make one
+more random choice, depending on which we accept or reject. If h is an input to
+g, then h belongs to a depth j −1 subcircuit and thus by our induction hypothesis
+we can query a LCH(j−1)+k oracle to determine whether h evaluates to 1 or not. If
+g is a majority gate then we accept if and only if h evaluates to 1; if it is a negation
+gate, we accept if and only if h evaluates to 0.
+It is fairly straightforward to see that this probabilistic oracle Turing machine
+runs in linear time and accepts (x, g) if and only if gate g evaluates to 1 on input
+x. Since the running time is linear in n and we require access to a LCH(j−1)+k
+oracle we can evaluate a threshold circuit of depth j and LCHk uniformity in the
+complexity class PrTime(n)LCH(j−1)+k = LCHj+k.
+So we can ﬁnally conclude that for any constants α and β the inclusion
+PrTiSp(nα, n1−β) ⊆LCHτ(α,β) holds, where τ(α, β) = O( α
+β) + k is a positive
+integer.
+2
+3.2
+Lower Bound for MAJ·MAJSAT
+The lower bound that is obtained in the Main Theorem also implies a time–space
+tradeoff for MAJ·MAJSAT.
+Theorem 7 For every constant ϵ such that 0 < ϵ < 1, there exists a constant
+γ′ > 0, such that
+MAJ·MAJSAT ̸⊆PrTiSp(n1+γ′, nϵ).
+Remark: The statement of Theorem 7 gives essentially the same lower bound
+for MAJ·MAJSAT as Theorem 3 gives for LCH2. If one were to compute, for a
+
+[PDF page 10]
+speciﬁc ϵ, the precise value of γ that one obtains in Theorem 3, one would ﬁnd that
+the conclusion of Theorem 7 holds for any γ′ < γ, but it is not clear that it would
+hold for γ′ = γ.
+To show this we will prove that MAJ·MAJSAT is complete for the second level
+of the linear time counting hierarchy under a fairly restrictive reduction. Namely
+we will map instances of any language from LCH2 to instances of MAJ·MAJSAT
+of size O(n logO(1) n) via a reduction such that the i-th bit of the formula can be
+computed in time O(logO(1) n) and logarithmic space (exactly as in the proof of
+Theorem 2.4 of [15]). Such a reduction immediately implies Theorem 7.
+Let us ﬁrst deﬁne MAJ·MAJSAT. Given two disjoint sets x and y of Boolean
+variables, consider the problems
+MAJSAT
+=
+{ϕ(x) : ϕ(x) is true for ≥1
+2 of
+the assignments to x}
+MAJ·MAJSAT
+=
+{ϕ(x, y) : ϕ(x, y) ∈MAJSAT
+for ≥1
+2 of the assignments y to y}.
+We will present the reduction of a set L ∈LCH2 to MAJ·MAJSAT in two steps.
+First we will show that L can be accepted in probabilistic linear time with very
+restricted oracle access. Then we will show how to represent such a computation
+by a MAJ·MAJSAT formula.
+Consider a set L ∈PrTime(n)PrTime(n) that is accepted by a linear time prob-
+abilistic oracle machine MA, where A ∈PrTime(n) via a machine M1. Since
+PrTime(n) is closed under complement, there is a linear time probabilistic ma-
+chine M0 deciding A. By standard techniques (see [13]) we can assume that for
+every a ∈{0, 1} and for every string x, the probability that Ma accepts on input
+x is not equal to 1
+2; that is, the probability of accepting is always greater than one
+half, or less than one half. We show how to accept L on a probabilistic linear time
+machine N with an oracle C ∈PrTime(n), such that N queries C exactly once
+on each computation path, and where N accepts along the path if and only if the
+query is answered YES. Our construction follows a proof by Tor´an [25].
+The oracle C is deﬁned as follows:
+C
+=
+{(q1, a1, w1), (q2, a2, w2), . . . : ∀i Mai accepts
+input qi along computation path wi and
+|{v : v < wi ∧Mai accepts qi along v}| = 2|qi|−1}.
+
+[PDF page 11]
+It will be convenient for us to know a string x1 ∈C and a string x0 ̸∈C, for us to
+refer to later.
+Note that if ai is the correct answer to query qi then Mai accepts qi on more
+than 2|qi|−1 computation paths. Thus for exactly one computation path wi, the ma-
+chine Mai accepts qi along wi and also on 2|qi|−1 other computation paths lexico-
+graphically less than wi. So for every sequence of oracle queries q1, . . . , qm there
+is exactly one correct guess of answers a1, . . . , am and witnesses w1, . . ., wm such
+that (q1, a1, w1), . . . , (qm, am, wm) ∈C.
+The machine N works as follows.
+It guesses a sequence of coin ﬂips p
+and
+a
+sequence
+of
+queries,
+answers
+and
+corresponding
+witnesses
+q = (q1, a1, w1), . . . , (qm, am, wm) of length O(n), and then it simulates machine
+M along path p using q to answer the oracle queries.
+If the coin ﬂips p do not correspond to a computation path of M generating
+queries corresponding to q, or if the coin ﬂips p correspond to a rejecting path of
+M, then N rejects (by asking if x0 ∈C).
+Otherwise, the coin ﬂips p do correspond to an accepting computation path of
+M that generates the queries appearing in q (if the given oracle answers are sup-
+plied). In this case, N accepts if and only if q ∈C.
+It is easy to see that the number of accepting computation paths of NC(x) is
+equal to the number of accepting computation paths of MA(x), since for every ac-
+cepting path p of M there is exactly one corresponding sequence q for which NC
+will accept. Thus x ∈L if and only if the number of accepting paths of N C is
+greater than or equal to 2|p|−1. Now via standard techniques (see e.g. [25]) we can
+modify N so that the accepting probability threshold is one-half.
+Furthermore, note that N runs in linear time and queries the oracle exactly once
+at the end of each computation, accepting if and only if the query answer is YES.
+It remains to be shown that C ∈PrTime(n).
+Actually we show that C ∈C=Time(n) ⊆PrTime(n), where C=Time(n) is
+deﬁned as follows:
+C=Time(n)
+=
+{A : x ∈A iff ∃a prob. linear time
+machine M s.t. Pr[ x ∈L(M) ] = 1
+2}.
+It is straightforward to verify that language {(q, a, w) :
+Ma accepts input q
+along computation path w and |{v : v < w ∧Ma accepts q along v}| = 2|q|−1}
+is in C=Time(n). Results of Fenner et al. [13] show that C=Time(n) is closed
+under conjunctive reductions, and thus C ∈C=Time(n).
+
+[PDF page 12]
+Next we will show how to reduce computation of the machine N C to a formula
+from MAJ·MAJSAT. We know that for any C ∈PrTime(n) there is a determinis-
+tic machine MC taking two inputs x and y such that x ∈C iff MC accepts (x, y) for
+at least half of the possible values for y of length c|x| for some c. By the Fischer-
+Pippenger construction [12] we can assume that MC is an oblivious machine (i.e.,
+the position of the worktape heads depend only on the length of the input), running
+in time n log n.
+In [10] Cook gives a construction that reduces MC to a formula ϕC,n(x, y, z)
+of size n logO(1) n, with the property that MC accepts (x, y) if and only if there is
+an assignment to the variables z such that ϕC,n(x, y, z) is true. Furthermore, for
+any (x, y), there is at most one such z. Let ψC,n(x, y, z, v) = (ϕC,n(x, y, z) ∧v) ∨
+(¬v ∧(y1 ∨W
+i zi)), where v is a new Boolean variable. Then for any string x
+of length n, x ∈C iff ψC,n(x, y, z, v) ∈MAJSAT, (where we are making the
+obvious correspondence between the string x ∈{0, 1}∗and an assignment to the
+x variables in ψC,n).
+Now consider the computation of the LCH2-machine NC. Since C is reducible
+in n logO(1) n time to MAJSAT, we can simulate NC by a probabilistic machine
+N′ running in time n logO(1) n with MAJSAT as an oracle. Furthermore, since
+MAJSAT is easily seen to be paddable, we can assume that all queries made by N ′
+have the same length. By application of the reduction outlined above, all queries
+of the form “Is y in MAJSAT” made by N′ on input x can be expressed by asking
+if the string ψA,m(y, w) is in MAJSAT, where A = MAJSAT, m = |y| depends
+only on the length of x, and w is a sequence of variables (as outlined above, with
+some renaming).
+Note that the set D = {(x, p, y) : N′ on input x with coin ﬂip sequence p
+makes query y to the oracle} is accepted by a deterministic machine running in
+time n logO(1) n. Thus, as above, we can use Cook’s reduction to construct efﬁ-
+ciently a formula ϕD,m′(x, p, y, z) such that (x, p, y) is in D if and only if ϕD,m′(x, p, y, z)
+is in SAT.
+Now observe that x is accepted by NC if and only if, for at least half of the
+paths p, the query y asked by N′ along path p is in MAJSAT. In turn, this hap-
+pens if and only if for at least half of the assignments to the variables in p, for the
+unique (y, z) such that N′ queries y along path p on input x (satisfying the formula
+ϕD,m′(x, p, y, z)), the formula ψA,m(y, w) is in MAJSAT. This happens if and only
+if the formula Φ(x, (p, y, z, v), w) = (v∧(ϕD,m′(x, p, y, z)∧ψA,m(y, w)))∨(¬v∧
+(p1 ∨W
+i yi ∨W
+i zi) ∧(w1 ∨¬w1)) is in MAJ·MAJSAT.
+2
+
+[PDF page 13]
+4
+SAC1 Lower Bounds
+In this section, we extend another result of Fortnow [14]. Fortnow shows that
+SAT cannot be recognized by very small logspace-uniform NC1 circuits. Here,
+we prove similar results about SAC1 circuits – although we have to be somewhat
+particular about how “size” is deﬁned.
+Theorem 8 Neither SAT nor SAT can be solved by logspace-uniform SAC1 cir-
+cuits having n1+o(1) wires.
+Theorem 9 SAT cannot be solved by Dlogtime-uniformSAC1 circuits having n1+o(1)
+gates.
+For both of these theorems, it will be convenient to make use of the following
+technical result:
+Theorem 10 [16] Every language that is accepted by a nondeterministic random-
+access machine using t(n) time is also accepted by a nondeterministic multitape
+Turing machine using time t(n) logO(1) t(n) time. This result also generalizes to
+show that any random-access alternating Turing machine using time t(n) can be
+simulated in time t(n) logO(1) t(n) on a multitape alternating Turing machine us-
+ing the same number of alternations.
+The proof of Theorem 8 follows very closely the proof of Theorem 5.1 in [14]
+(attributed there to Harry Buhrman). Recall that QBFi denotes the set of true quan-
+tiﬁed Boolean formulas with i alternating blocks of quantiﬁers, starting with ex-
+istential quantiﬁers. Throughout this proof we adopt the notation of [14], where
+Σt(n)
+a(n) (Πt(n)
+a(n)) denotes the class of languages accepted by alternating machines mak-
+ing a(n) −1 alternations, running for time t(n), where the start conﬁguration is
+existential (universal).
+Proof of Theorem 8:
+We begin by recalling the following fact from [14][Corollary 5.3]:
+If SAT has circuits of size n1+o(1), then QBF2 ∈Πn1+o(1)
+2
+.
+The proof of this follows directly from [18] – but it is important for the proof that
+the circuits under consideration have bounded fan-in (if the size of the circuit is
+measured by the number of gates). We do not know if this implication holds when
+unbounded fan-in circuits are considered. On the other hand, it is a simple matter
+
+[PDF page 14]
+for a random-access machine to simulate a circuit in time bounded roughly by the
+number of wires in the circuit. Thus we obtain the following.
+Observation: If SAT has (unbounded fan-in) circuits with n1+o(1) wires, then
+QBF2 ∈Πn1+o(1)
+2
+.
+Note that this is true, regardless of whether the circuits are uniform or not.
+Next, we observe that the proof of Theorem 5.1 of [14] (without modiﬁcation)
+shows that, if SAT has (unbounded fan-in) circuits with n1+o(1) wires, then for a
+slowly-growing (but unbounded) function s(n),
+Σn log n
+s(n)
+⊆Σp
+2.
+Now assume that SAT can be solved by logspace-uniform SAC1 circuits hav-
+ing n1+o(1) wires. Under this assumption, we can see that NP = SAC1 = Σp
+2.
+Since SAC1 ⊆NTiSp(nO(1), log2 n) [23], and since this latter class is contained
+in S
+k ΣO(n)
+k
+[21], we now have the sequence of inclusions:
+Σn log n
+s(n)
+⊆Σp
+2 = SAC1 ⊆
+[
+k
+ΣO(n)
+k
+.
+Now, we observe that this contradicts a simplediagonalization argument that shows
+Σn log n
+s(n)
+̸⊆
+[
+k
+ΣO(n)
+k
+.
+A similar argument shows that the same bound holds for SAT.
+2
+Recently van Melkebeek has observed that the uniformity condition in Theo-
+rem 8 can be relaxed signiﬁcantly, from logspace to NTiSp(nO(1), n1−ϵ) [20].
+To prove our other lower bound for SAC1 circuits, we ﬁrst need to observe that
+they are easy to evaluate.
+Lemma 11 If a set A has Dlogtime-uniform SAC1 circuits with n1+o(1) gates then
+A ∈Ntime(n1+o(1)).
+Proof: Assume such a set A has a Dlogtime-uniformSAC1 circuit family {Cn}∞
+n=0.
+Given input x of size n, our nondeterministic machine for A wants to verify that
+Cn(x) = 1. It does that as follows.
+Observe, Cn(x) = 1 iff there is a subcircuit of Cn that evaluates to one and
+which consists of AND gates of bounded fan-in and OR gates of fan-in 1. Given
+the input, we may guess such a subcircuit and verify that it really evaluates to one.
+
+[PDF page 15]
+A description of the subcircuit is list of pairs ⟨g, h⟩, where g and h are gates of
+the subcircuit and g is an input gate to h. The length of the description is O(n1+o(1)),
+hence it may be guessed in time O(n1+o(1)). Using Dlogtime-uniformity of Cn, it
+can be veriﬁed in time O(n1+o(1)) that the description is indeed a subcircuit of Cn.
+The subcircuit can be evaluated in bottom-up fashion on a deterministicrandom-
+access machine in time O(n1+o(1)), given that the description was guessed in topo-
+logically sorted form. Hence by Theorem 10, it can be evaluated in non-deterministic
+time O(n1+o(1)). If the subcircuit evaluates to one, we accept input x, otherwise
+we reject it.
+2
+Remark: Although SAC1 ⊆NTiSp(nO(1), log2 n) [23], it is not known how
+to evaluate a nearly-linear-size SAC1 circuit in nearly-linear nondeterministictime,
+using less than linear space. Similarly, although SAC1 is closed under complement
+[4], known constructions involve squaring the circuit size.
+A simple corollary to the previous lemma is the following statement that is sim-
+ilar in ﬂavor to (but much easier than) the version of the Karp-Lipton collapse that
+we used in the proof of Theorem 8. Note that the uniformity condition is essential
+here.
+Corollary 12 If SAT has Dlogtime-uniformSAC1 circuits of size n1+o(1) then QBF1
+∈Πn1+o(1)
+1
+.
+Proof of Theorem 9:
+Assume that SAT is solved by Dlogtime-uniform SAC1
+circuits having n1+o(1) gates. By Corollary 12, QBF1 ∈Πn1+o(1)
+1
+. As in [14], it
+follows that for a slowly-growing (but unbounded) function s(n),
+Σn log n
+s(n)
+⊆Σp
+1.
+The rest of the proof follows along the lines of the proof of Theorem 8.
+2
+References
+[1] M. Ajtai. A non-linear time lower bound for Boolean branching programs. In
+Proc. IEEE Symposium on Foundations of Computer Science (FOCS), pages
+60–70, 1999.
+[2] E. Allender. The permanent requires large uniform threshold circuits. Chicago
+Journal of Theoretical Computer Science, article 7, 1999.
+
+[PDF page 16]
+[3] E. Allender, D. Mix Barrington, and W. Hesse. Uniform circuits for division:
+Consequences and problems. To appear in Proc. IEEE Conference on Compu-
+tational Complexity, 2001.
+[4] A. Borodin, S. A. Cook, P. W. Dymond, W. L. Ruzzo, and M. Tompa. Two ap-
+plications of inductive counting for complementation problems. SIAM Journal
+on Computing, 18:559–578, 1989.
+[5] J. Balc´azar, J. D´ıaz, and J. Gabarr´o. Structural Complexity Theory I and II.
+Springer-Verlag, 1995,1990.
+[6] D. A. M. Barrington, N. Immerman, and H. Straubing. On uniformity within
+NC1. Journal of Computer and System Sciences, 41:274–306, 1990.
+[7] P. Beame, M. Saks, X. Sun, and E. Vee. Super-linear time-space tradeoff lower
+bounds for randomized computation. In Proc. IEEE Symposium on Foundations
+of Computer Science (FOCS), pages 169–179, 2000.
+[8] R. Book and S. Greibach. Quasi-realtime languages. Mathematical Systems
+Theory, 4:97–111, 1970.
+[9] A. Chiu, G. Davida, and B. Litow. NC1 Division. Preliminary version, 2000.
+Available from the website http://www.cs.jcu.edu.au/∼bruce as
+/papers/crr00 3.ps.gz.
+[10] S. A. Cook. Short propositional formulas represent nondeterministic compu-
+tations. Information Processing Letters, 26:269–270, 1988.
+[11] D.-Z. Du and K.-I. Ko.
+Theory of Computational Complexity.
+Wiley-
+Interscience, New York, 2000.
+[12] M. Fischer and N. J. Pippenger. Relations among complexity measures. Jour-
+nal of the ACM, 26:361–381, 1979.
+[13] S. Fenner, L. Fortnow, and S. Kurtz. Gap-deﬁnable counting classes. In Pro-
+ceedings of the 6th IEEE Structure in Complexity Theory Conference, pages 30–
+42, 1991.
+[14] L. Fortnow. Time-space tradeoffs for satisﬁability. Journal of Computer and
+System Sciences, 60:336–353, 2000.
+
+[PDF page 17]
+[15] L. Fortnow and D. van Melkebeek. Time-space tradeoffs for nondetermin-
+istic computation. In Proc. IEEE Conference on Computational Complexity,
+pages 2–13, 2000.
+[16] Y. Gurevich and S. Shelah. Nearly-linear time. In Proc. Logic at Botik, num-
+ber 363 in Lecture Notes in Computer Science, pages 108–118. Springer, 1989.
+[17] W. Hesse. Division is in uniform TC0. In ICALP 2001: Twenty-Eighth Inter-
+national Colloquium on Automata, Languages and Programming (July 2001),
+to appear.
+[18] R. Karp and R. Lipton. Turing machines that take advice. L’Ensignement
+Math´ematique, 28:191–210, 1982.
+[19] R. Lipton and A. Viglas. On the complexity of SAT. In Proc. IEEE Sympo-
+sium on Foundations of Computer Science (FOCS), pages 459–464, 1999.
+[20] D. van Melkebeek. Time-space lower bounds for satisﬁability. Bulletin of
+the European Association for Theoretical Computer Science, 73:57-77, 2001.
+[21] V. A. Nepomnjaˇsˇci˘ı. Rudimentary predicates and Turing calculations. Soviet
+Math. Dokl, 11:1462–1465, 1970.
+[22] C. Papadimitriou. Computational Complexity. Addison-Wesley, New York,
+1994.
+[23] Walter L. Ruzzo. Tree-size bounded alternation. Journal of Computer and
+System Sciences, 21:218–235, 1980.
+[24] S. Toda. PP is as hard as the polynomial time hierarchy. SIAM Journal on
+Computing, 20:865–877, 1991.
+[25] J. Tor´an. Complexity classes deﬁned by counting quantiﬁers. Journal of the
+ACM, 38:753–774, 1991.
+[26] I. Tourlakis. Time-space lower bounds for SAT on uniform and non-uniform
+machines. In Proc. IEEE Conference on Computational Complexity, pages 22–
+33, 2000.
+[27] H. Venkateswaran. Properties that characterize LOGCFL. Journal of Com-
+puter and System Sciences, 43:380–404, 1991.
+[28] H. Vollmer. Introduction to Circuit Complexity. Springer-Verlag, 1999.

@@ -2,7 +2,7 @@
 id: def-incomplete-tensor-product-with-reference-vector
 kind: definition
 title: Incomplete tensor product of one-mode Hilbert spaces with a reference vector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

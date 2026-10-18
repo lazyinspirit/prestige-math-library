@@ -2,7 +2,7 @@
 id: lem-it-entanglement-assisted-information-is-additive
 kind: lemma
 title: Additivity of optimized entanglement-assisted information
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

@@ -1,7 +1,7 @@
 ---
 page: finite-trellis-viterbi-and-sequence-decoding-examples
 title: Finite Trellises, Viterbi, and Sequence Decoding — Examples
-status: draft
+status: published
 requires:
   - finite-trellis-viterbi-and-sequence-decoding
 items: []

@@ -2,7 +2,7 @@
 id: thm-real-gaussian-multicast-noisy-network-coding-cut-dependent-gap
 kind: theorem
 title: Cut-dependent Gaussian multicast gap to the cut-set bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

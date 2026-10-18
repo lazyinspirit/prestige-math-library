@@ -2,7 +2,7 @@
 id: def-it-physically-degraded-dm-broadcast-code
 kind: definition
 title: Private-message code for a physically degraded DM broadcast channel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

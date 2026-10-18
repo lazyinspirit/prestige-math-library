@@ -2,7 +2,7 @@
 id: thm-temperley-lieb-root-quotient-tower-interface
 kind: theorem
 title: The positive-root Jones quotient is the type-A path tower with positive right closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

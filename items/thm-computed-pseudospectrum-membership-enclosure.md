@@ -14,8 +14,6 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
-verification:
-  precheck: pending
 sources:
   references:
     - title: "Youcef Saad, Numerical Methods for Large Eigenvalue Problems, 2nd ed., §3.5"

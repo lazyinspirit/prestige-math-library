@@ -2,7 +2,7 @@
 id: thm-it-cover-el-gamal-salehi-correlated-source-mac-sufficient-condition
 kind: theorem
 title: Cover-El Gamal-Salehi sufficient condition for correlated sources over a DM-MAC
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

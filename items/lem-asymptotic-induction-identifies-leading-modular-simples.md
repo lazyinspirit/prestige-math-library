@@ -3,7 +3,7 @@ id: lem-asymptotic-induction-identifies-leading-modular-simples
 kind: lemma
 title: "Asymptotic induction identifies leading modular simples"
 deps: [def-finite-weyl-lusztig-basic-set-data, lem-lusztig-asymptotic-algebra-and-specialization-map, lem-schur-leading-coefficients-and-good-asymptotic-specializations]
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

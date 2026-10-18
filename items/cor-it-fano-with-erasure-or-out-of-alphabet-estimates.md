@@ -2,7 +2,7 @@
 id: cor-it-fano-with-erasure-or-out-of-alphabet-estimates
 kind: corollary
 title: "Fano bound for erasure and out-of-alphabet estimates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

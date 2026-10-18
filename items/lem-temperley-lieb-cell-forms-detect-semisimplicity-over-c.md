@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-cell-forms-detect-semisimplicity-over-c
 kind: lemma
 title: "Temperley–Lieb cell forms detect semisimplicity over the complex numbers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

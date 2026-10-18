@@ -1,7 +1,7 @@
 ---
 page: topological-braid-gates-encodings-and-universality
 title: Topological Braid Gates, Encodings, and Universality
-status: draft
+status: published
 items:
 - def-qc-tqc-physical-braid-interface
 - lem-qc-tqc-special-unitary-connected

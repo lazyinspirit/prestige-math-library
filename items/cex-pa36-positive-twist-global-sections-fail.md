@@ -2,7 +2,7 @@
 id: cex-pa36-positive-twist-global-sections-fail
 kind: counterexample
 title: A positive integral SL2 twist is regular but not D-affine
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

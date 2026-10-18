@@ -2,7 +2,7 @@
 id: lem-it-gallager-input-maxima-attained
 kind: lemma
 title: Gallager and expurgated input-law maxima are attained
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

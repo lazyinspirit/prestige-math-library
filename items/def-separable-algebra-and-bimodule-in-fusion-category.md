@@ -2,7 +2,7 @@
 id: def-separable-algebra-and-bimodule-in-fusion-category
 kind: definition
 title: Separable algebra objects and bimodules in a fusion category
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

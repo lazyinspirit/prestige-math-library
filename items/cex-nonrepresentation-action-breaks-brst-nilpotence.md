@@ -2,7 +2,7 @@
 id: cex-nonrepresentation-action-breaks-brst-nilpotence
 kind: counterexample
 title: A nonrepresentation does not give a BRST differential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

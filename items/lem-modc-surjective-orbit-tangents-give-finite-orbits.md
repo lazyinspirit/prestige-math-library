@@ -2,7 +2,7 @@
 id: lem-modc-surjective-orbit-tangents-give-finite-orbits
 kind: lemma
 title: Surjective orbit tangents give finitely many open orbits
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

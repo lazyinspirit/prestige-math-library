@@ -2,7 +2,7 @@
 id: thm-bv-derived-bracket-is-odd-poisson
 kind: theorem
 title: The derived BV bracket is an odd Poisson bracket
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

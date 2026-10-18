@@ -1,7 +1,7 @@
 ---
 page: quantum-groups-at-roots-of-unity-and-tilting-quotients-examples
 title: "Quantum Groups at Roots of Unity and Tilting Quotients: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-sl2-small-quantum-group-at-fifth-root, cex-sl2-specialization-map-not-injective-at-fifth-root]
 ---

@@ -2,7 +2,7 @@
 id: ex-truncated-polynomial-weyl-module-in-characteristic-p
 kind: example
 title: "A finite-dimensional truncated-polynomial Weyl module in characteristic p"
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

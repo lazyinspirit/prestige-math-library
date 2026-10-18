@@ -1,7 +1,7 @@
 ---
 page: lossy-source-coding-with-side-information
 title: "Lossy Source Coding with Side Information"
-status: draft
+status: published
 requires:
   - rate-distortion-and-lossy-source-coding
   - distributed-source-coding

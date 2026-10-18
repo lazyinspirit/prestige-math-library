@@ -1,7 +1,7 @@
 ---
 page: gauge-groups-and-representation-theory-interfaces
 title: "Gauge Groups and Representation-Theoretic Interfaces"
-status: draft
+status: published
 items:
   - def-smooth-principal-g-bundle
   - def-principal-connection-and-vertical-curvature

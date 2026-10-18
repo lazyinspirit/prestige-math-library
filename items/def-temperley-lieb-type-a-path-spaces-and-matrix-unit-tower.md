@@ -2,7 +2,7 @@
 id: def-temperley-lieb-type-a-path-spaces-and-matrix-unit-tower
 kind: definition
 title: "Type-A path spaces and their matrix-unit tower"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

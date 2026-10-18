@@ -2,7 +2,7 @@
 id: lem-canonical-fusion-category-algebra-is-frobenius
 kind: lemma
 title: The canonical algebra of a fusion category is Frobenius
-status: draft
+status: published
 dependency_level: 0
 origin: session
 deps:

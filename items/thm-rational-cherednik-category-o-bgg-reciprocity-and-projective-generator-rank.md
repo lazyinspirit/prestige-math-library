@@ -3,7 +3,7 @@ id: thm-rational-cherednik-category-o-bgg-reciprocity-and-projective-generator-r
 kind: theorem
 title: "Cherednik BGG reciprocity and the KZ projective rank"
 deps: [thm-rational-cherednik-category-o-projective-generator-from-generalized-standards, lem-rational-cherednik-costandard-orthogonality-and-character, lem-rational-cherednik-dunkl-localization-and-flat-connection, def-rational-cherednik-kz-functor-and-finite-hecke-algebra, cor-sum-of-squares-formula-for-irreducible-degrees]
-status: draft
+status: published
 dependency_level: 11
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

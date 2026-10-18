@@ -2,7 +2,7 @@
 id: lem-it-type-class-cardinality-bounds
 kind: lemma
 title: "Polynomially sharp bounds for type-class cardinality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 2

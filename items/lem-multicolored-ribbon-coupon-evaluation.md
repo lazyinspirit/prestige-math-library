@@ -2,7 +2,7 @@
 id: lem-multicolored-ribbon-coupon-evaluation
 kind: lemma
 title: "Multicolored ribbon graphs with arbitrary coupons have a unique evaluation"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

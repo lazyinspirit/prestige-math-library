@@ -2,7 +2,7 @@
 id: ex-it-uniform-compact-compander
 kind: example
 title: Uniform density gives exact midpoint compander distortion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

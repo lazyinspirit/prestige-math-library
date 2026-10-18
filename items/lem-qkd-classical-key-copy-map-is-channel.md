@@ -2,7 +2,7 @@
 id: lem-qkd-classical-key-copy-map-is-channel
 kind: lemma
 title: The finite classical key-copy map is a quantum channel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

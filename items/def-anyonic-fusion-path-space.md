@@ -2,7 +2,7 @@
 id: def-anyonic-fusion-path-space
 kind: definition
 title: "Fixed-boundary anyonic fusion-path space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

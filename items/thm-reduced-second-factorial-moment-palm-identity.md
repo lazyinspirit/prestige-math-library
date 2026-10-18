@@ -29,8 +29,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 2, §2.4, PDF pp.35–37: the stationary reduced second moment measure in point-centered coordinates."
-verification:
-  precheck: pending
 ---
 
 ## Statement

@@ -2,7 +2,7 @@
 id: ex-vector-and-tracial-states-on-matrix-algebras
 kind: example
 title: Vector and normalized-trace states on matrix algebras
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

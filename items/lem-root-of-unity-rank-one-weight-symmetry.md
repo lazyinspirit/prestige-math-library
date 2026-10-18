@@ -2,7 +2,7 @@
 id: lem-root-of-unity-rank-one-weight-symmetry
 kind: lemma
 title: "Full divided powers force root-of-unity weight reflection symmetry"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

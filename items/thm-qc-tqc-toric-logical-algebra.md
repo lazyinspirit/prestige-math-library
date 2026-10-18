@@ -2,7 +2,7 @@
 id: thm-qc-tqc-toric-logical-algebra
 kind: theorem
 title: Two anticommuting toric logical Pauli pairs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

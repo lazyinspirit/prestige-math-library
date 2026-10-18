@@ -2,7 +2,7 @@
 id: lem-separability-contracts-normalized-categorical-hochschild-complex
 kind: lemma
 title: A separability element contracts the normalized categorical Hochschild complex in positive degrees
-status: draft
+status: published
 dependency_level: 1
 origin: session
 deps:

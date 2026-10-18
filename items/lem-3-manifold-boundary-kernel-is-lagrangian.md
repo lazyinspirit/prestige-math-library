@@ -2,7 +2,7 @@
 id: lem-3-manifold-boundary-kernel-is-lagrangian
 kind: lemma
 title: "The boundary kernel of a compact oriented 3-manifold is Lagrangian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

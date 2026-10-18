@@ -2,7 +2,7 @@
 id: def-root-of-unity-quantum-group-forms
 kind: definition
 title: "De Concini–Kac, Lusztig, and small quantum-group forms at roots of unity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

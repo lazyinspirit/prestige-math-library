@@ -2,7 +2,7 @@
 id: thm-prime-power-numerical-serre-half-is-the-integral-specialization
 kind: theorem
 title: The prime-power numerical Serre half is the integral specialization
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

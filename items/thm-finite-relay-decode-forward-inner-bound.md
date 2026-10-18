@@ -2,7 +2,7 @@
 id: thm-finite-relay-decode-forward-inner-bound
 kind: theorem
 title: Decode-forward inner bound for a finite relay channel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

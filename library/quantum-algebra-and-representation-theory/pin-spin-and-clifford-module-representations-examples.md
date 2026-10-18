@@ -1,7 +1,7 @@
 ---
 page: pin-spin-and-clifford-module-representations-examples
 title: "Pin and Spin Groups and Their Representations: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-pin-plus-minus-and-spin-two-double-angle

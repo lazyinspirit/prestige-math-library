@@ -2,7 +2,7 @@
 id: lem-symmetric-gaussian-alternating-sum-vanishes
 kind: lemma
 title: "A symmetric Gaussian alternating sum vanishes in the Serre range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

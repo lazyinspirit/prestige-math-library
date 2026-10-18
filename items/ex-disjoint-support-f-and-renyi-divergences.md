@@ -2,7 +2,7 @@
 id: ex-disjoint-support-f-and-renyi-divergences
 kind: example
 title: Disjoint supports and singular divergence values
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

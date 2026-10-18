@@ -1,7 +1,7 @@
 ---
 page: affine-current-algebras-virasoro-and-sugawara-examples
 title: "Affine Current Algebras, Virasoro, and Sugawara: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - affine-current-algebras-virasoro-and-sugawara
 items: []

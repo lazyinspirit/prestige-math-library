@@ -2,7 +2,7 @@
 id: lem-real-local-spin-lift-by-matrix-logarithm
 kind: lemma
 title: Local Spin lift from the matrix logarithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations

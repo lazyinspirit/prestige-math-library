@@ -2,7 +2,7 @@
 id: lem-a1-nakajima-varieties-and-hecke-correspondence-are-points
 kind: lemma
 title: "The A1 Nakajima varieties and the Hecke correspondence are points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 1

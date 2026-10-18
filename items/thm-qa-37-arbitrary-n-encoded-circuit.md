@@ -2,7 +2,7 @@
 id: thm-qa-37-arbitrary-n-encoded-circuit
 kind: theorem
 title: "Arbitrary-size triple-encoded projective braid approximation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 15

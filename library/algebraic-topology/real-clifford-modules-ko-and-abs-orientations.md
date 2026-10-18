@@ -1,7 +1,7 @@
 ---
 page: real-clifford-modules-ko-and-abs-orientations
 title: Real Clifford Modules, KO Theory, and ABS Orientations
-status: draft
+status: published
 items:
 - def-real-ko-and-ksp-grothendieck-groups
 - def-given-spin-and-spinc-structures-and-associated-spinor-bundles

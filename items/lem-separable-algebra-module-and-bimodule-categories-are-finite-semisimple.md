@@ -2,7 +2,7 @@
 id: lem-separable-algebra-module-and-bimodule-categories-are-finite-semisimple
 kind: lemma
 title: Finite semisimplicity for separable algebra modules and bimodules
-status: draft
+status: published
 dependency_level: 1
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

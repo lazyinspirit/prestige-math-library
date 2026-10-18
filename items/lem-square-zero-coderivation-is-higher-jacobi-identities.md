@@ -2,7 +2,7 @@
 id: lem-square-zero-coderivation-is-higher-jacobi-identities
 kind: lemma
 title: "Square-zero coderivations are equivalent to the shifted higher Jacobi identities"
-status: draft
+status: published
 dependency_level: 5
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

@@ -2,7 +2,7 @@
 id: lem-temperley-lieb-root-gram-rank-and-reflection-dimensions
 kind: lemma
 title: "Root Gram ranks give the reflected simple-head dimensions"
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

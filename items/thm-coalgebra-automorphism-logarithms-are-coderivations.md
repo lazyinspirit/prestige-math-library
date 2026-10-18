@@ -2,7 +2,7 @@
 id: thm-coalgebra-automorphism-logarithms-are-coderivations
 kind: theorem
 title: "Coalgebra automorphisms congruent to the identity are exactly coderivation exponentials"
-status: draft
+status: published
 dependency_level: 3
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

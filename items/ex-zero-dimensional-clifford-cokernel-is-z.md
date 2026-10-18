@@ -2,7 +2,7 @@
 id: ex-zero-dimensional-clifford-cokernel-is-z
 kind: example
 title: "The zero-dimensional Clifford cokernel is Z"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: real-clifford-modules-ko-and-abs-orientations-examples

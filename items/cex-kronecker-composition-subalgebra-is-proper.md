@@ -2,7 +2,7 @@
 id: cex-kronecker-composition-subalgebra-is-proper
 kind: counterexample
 title: "The Kronecker Hall algebra strictly contains its composition subalgebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-cellularity-and-representation-theory-examples
 title: "Temperley–Lieb Link-State Modules and Cellularity: Examples and Counterexamples"
-status: draft
+status: published
 requires:
   - temperley-lieb-cellularity-and-representation-theory
 items: []

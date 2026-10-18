@@ -2,7 +2,7 @@
 id: ex-it-binary-symmetric-slepian-wolf-region
 kind: example
 title: "Binary symmetric source: Slepian–Wolf corners and common part"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 8

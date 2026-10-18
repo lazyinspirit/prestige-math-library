@@ -2,7 +2,7 @@
 id: ex-jordan-quiver-potential-critical-locus
 kind: example
 title: "The trace potential x squared on the one-loop quiver"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 5

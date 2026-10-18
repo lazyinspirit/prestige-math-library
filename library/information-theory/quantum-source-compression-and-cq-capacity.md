@@ -1,7 +1,7 @@
 ---
 page: quantum-source-compression-and-cq-capacity
 title: Quantum Source Compression and Classical Communication over Quantum Channels
-status: draft
+status: published
 requires:
   - quantum-relative-entropy-data-processing-and-strong-subadditivity
   - iid-lossless-source-coding-and-the-aep

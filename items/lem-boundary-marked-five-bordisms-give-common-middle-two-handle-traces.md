@@ -2,7 +2,7 @@
 id: lem-boundary-marked-five-bordisms-give-common-middle-two-handle-traces
 kind: lemma
 title: "A boundary-marked five-bordism gives a common middle two-handle trace"
-status: draft
+status: published
 dependency_level: 8
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

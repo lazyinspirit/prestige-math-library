@@ -13,8 +13,6 @@ axiom_use: "Countable Choice is inherited from the Lax--Milgram and adjoint vari
 provenance:
   statement: ai-altered
   proof: ai-generated
-verification:
-  precheck: pending
   judge:
     model: "gpt-6-luna"
     verdict: pass

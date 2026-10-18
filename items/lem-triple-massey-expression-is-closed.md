@@ -2,7 +2,7 @@
 id: lem-triple-massey-expression-is-closed
 kind: lemma
 title: "The triple Massey expression is a cocycle"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

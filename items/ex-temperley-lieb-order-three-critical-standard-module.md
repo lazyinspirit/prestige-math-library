@@ -2,7 +2,7 @@
 id: ex-temperley-lieb-order-three-critical-standard-module
 kind: example
 title: "A critical five-defect standard module at order three is simple"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 9

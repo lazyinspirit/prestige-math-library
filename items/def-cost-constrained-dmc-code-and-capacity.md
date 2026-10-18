@@ -2,7 +2,7 @@
 id: def-cost-constrained-dmc-code-and-capacity
 kind: definition
 title: Average-cost fixed-length codes and operational DMC capacity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

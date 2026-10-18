@@ -2,7 +2,7 @@
 id: def-koszul-sign-rule-for-graded-tensors
 kind: definition
 title: "Koszul sign rule for graded tensor products and permutations"
-status: draft
+status: published
 dependency_level: 0
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

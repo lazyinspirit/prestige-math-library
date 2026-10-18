@@ -2,7 +2,7 @@
 id: lem-it-stationary-block-rdf-limit-and-endpoint-continuity
 kind: lemma
 title: "Stationary block rate-distortion limit and endpoint continuity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 6

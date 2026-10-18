@@ -35,8 +35,6 @@ sources:
     - title: "Adrian Baddeley, Spatial Point Processes and their Applications"
       url: "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
       locator: "Lecture 2, Example 2.15, PDF p.37: a uniformly translated grid has an atomic reduced second moment measure and no density; Lecture 3, §3.3, PDF pp.49–50: recentered Palm configurations."
-verification:
-  precheck: pending
 ---
 
 ## Example

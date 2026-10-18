@@ -2,7 +2,7 @@
 id: lem-filtered-maurer-cartan-gauge-equation-has-unique-complete-polynomial-flow
 kind: lemma
 title: "Existence and uniqueness of complete filtered Maurer–Cartan gauge flow"
-status: draft
+status: published
 dependency_level: 9
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

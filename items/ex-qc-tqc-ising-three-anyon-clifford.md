@@ -2,7 +2,7 @@
 id: ex-qc-tqc-ising-three-anyon-clifford
 kind: example
 title: Three-Ising-anyon braid matrices are Clifford
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 deps:

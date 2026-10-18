@@ -2,7 +2,7 @@
 id: ex-yangian-two-site-periodic-transfer-matrix
 kind: example
 title: "An explicit two-site periodic transfer matrix and permutation Hamiltonian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 7

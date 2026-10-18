@@ -1,7 +1,7 @@
 ---
 page: lie-superalgebras-and-super-representation-theory-examples
 title: "Lie Superalgebras and Super-Representations: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples:
   - ex-complexified-four-dimensional-n1-super-poincare-spinor-bracket

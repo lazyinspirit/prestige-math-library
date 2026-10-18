@@ -2,7 +2,7 @@
 id: thm-ideal-real-arithmetic-interval-code-is-prefix-and-lossless
 kind: theorem
 title: "Ideal-real interval coding is prefix-free and lossless"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

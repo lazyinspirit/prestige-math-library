@@ -2,7 +2,7 @@
 id: cor-euclidean-spin-is-universal-cover
 kind: corollary
 title: Euclidean Spin is the universal cover of SO(n) for n at least three
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: pin-spin-and-clifford-module-representations

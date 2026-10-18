@@ -1,7 +1,7 @@
 ---
 page: affine-hecke-algebras-beyond-type-a-examples
 title: 'Affine Hecke Algebras Beyond Type A: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples:
 - ex-hh-affine-padic-versus-root-of-unity-parameters

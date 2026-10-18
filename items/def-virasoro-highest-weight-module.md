@@ -2,7 +2,7 @@
 id: def-virasoro-highest-weight-module
 kind: definition
 title: Highest-weight vector and module for Virasoro
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 3

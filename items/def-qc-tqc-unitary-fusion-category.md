@@ -2,7 +2,7 @@
 id: def-qc-tqc-unitary-fusion-category
 kind: definition
 title: Unitary fusion category
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 dependency_level: 0

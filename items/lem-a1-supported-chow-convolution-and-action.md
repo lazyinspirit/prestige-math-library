@@ -2,7 +2,7 @@
 id: lem-a1-supported-chow-convolution-and-action
 kind: lemma
 title: "Supported Chow convolution and its action for the A1 family"
-status: draft
+status: published
 dependency_level: 2
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18

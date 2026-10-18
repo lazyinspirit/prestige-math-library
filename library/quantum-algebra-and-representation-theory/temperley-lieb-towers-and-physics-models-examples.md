@@ -1,7 +1,7 @@
 ---
 page: temperley-lieb-towers-and-physics-models-examples
 title: 'Temperley–Lieb Towers, Spin Chains, and Scaling Interfaces: Examples and Counterexamples'
-status: draft
+status: published
 items:
 - cex-xxz-unit-circle-generator-not-self-adjoint
 - rem-temperley-lieb-scaling-limit-and-boundary-status

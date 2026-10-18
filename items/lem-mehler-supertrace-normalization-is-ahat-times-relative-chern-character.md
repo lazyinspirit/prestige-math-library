@@ -2,7 +2,7 @@
 id: lem-mehler-supertrace-normalization-is-ahat-times-relative-chern-character
 kind: lemma
 title: "The Mehler coefficient has A-hat times the relative Chern character"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: non-ml-math-remaining-81-2026-10-18
 page: spin-geometry-dirac-and-index-theory
