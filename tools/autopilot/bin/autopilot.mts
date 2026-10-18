@@ -40,6 +40,7 @@ import { inspectStep6Cutover, cutoverStep6 } from '../src/step6-cutover.mts';
 import { inspectCloseoutReopen, reopenCloseout } from '../src/closeout-reopen.mts';
 import { appendFrontier, assertNoAppendTransaction, recoverAppendItemOrder } from '../src/frontier-append.mts';
 import type { Config } from '../src/types.mts';
+import { readStatementPolicy, isFreshStatementRun, writeStatementPolicy } from '../../statement-first-policy.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
@@ -102,6 +103,15 @@ function loadConfig(): Config {
       throw new Error(`--run does not match run-local configuration: ${localConfigPath}`);
     base.run = local.run;
     base.stages = resolve(repo, local.stages);
+  }
+  // Only newly planned namespaces opt in. Existing controllers and run-local
+  // stage selections remain on their original table and revision.
+  const editorialRun = opt('run') ?? base.run;
+  if (readStatementPolicy(repo, editorialRun, 'math')) {
+    const selected = join(HERE, '..', 'stages', 'mathlib.statement-first.mts');
+    if (existsSync(localConfigPath) && resolve(base.stages) !== resolve(selected))
+      throw new Error('Statement-first run cannot replace an explicit run-local stage table');
+    base.stages = selected;
   }
   base.repo = repo;
   base.stateDir = stateDir;
@@ -369,6 +379,7 @@ switch (cmd) {
       console.log('Previous manifests, item inventories, receipts and state remain unchanged. Resume the native controller for the fresh append drift review before scaffolding.');
       break;
     }
+    const freshStatementRun = isFreshStatementRun(repo, run, stateDir);
     let pages;
     if (pairsArg === 'next') {
       const maxPairs = Number(opt('max-pairs', String(MAX_RUN_PAIRS)));
@@ -419,6 +430,8 @@ switch (cmd) {
     const cap = Number(opt('cap', '1'));
     if (cap !== 1) die('plan: --cap must be 1 so each batch can be audited and authored in dependency-level order');
     const groups = packBatches(repo, pages, { cap });
+    // Preserve the selected policy even if a later planning writer fails.
+    if (freshStatementRun) writeStatementPolicy(repo, run, 'math');
     const written = writeManifests(repo, run, groups, { force: has('force') });
     writeBatchDependencyLevels(repo, run);
     console.log(`step 0 for ${run}: ${pages.length} A/B pair(s) -> ${groups.length} batch(es), cap ${cap}\n`);

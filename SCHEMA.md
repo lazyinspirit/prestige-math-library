@@ -201,6 +201,20 @@ in `## Definition` triggers the same direct and indirect consumer duties.
 
 ## Item bodies
 
+### Uninterrupted statements in new builds
+
+Fresh math and physics build runs use the `statement-first-v1` editorial policy.
+Every item class, including examples, counterexamples, remarks, open problems,
+postulates and experiment descriptions, presents its complete statement,
+definition or description without hyperlinks. Move links to the immediately
+following `## <heading> references` section (`Statement refuted` uses
+`Statement references`). Each link occupies one source line and its own paragraph,
+with blank lines between references. Preserve hypotheses, attribution, logical
+suppliers and physical/empirical qualifications. Proofs and Facts & Assumptions
+retain necessary supplier links. Existing clean wording needs no gratuitous
+paraphrase. See [the statement policy](tools/STATEMENT-FIRST.md).
+
+
 - Use `## Definition` for a definition or algorithm; `## Statement` and `## Proof` for a
   theorem, lemma, proposition, or corollary; `## Example` and optional
   `## Verification` for an example; `## Statement refuted` and

@@ -27,3 +27,8 @@ hash-bound protocol documented in `../autopilot/REFUTER-COVERAGE-CONTINUATIONS.m
 The new native refuter performs all scoped reads independently; original
 coverage assertions are not accepted as proof of reading. The original report
 and receipt remain archived, and normal collection and closure checks apply.
+
+Freshly planned namespaces now use `physics-six-step-v1-statement-first` through the composed
+`mathlib.statement-first.mts` table. Every item class presents uninterrupted
+statements/descriptions and separate following reference lines. Existing runs
+keep their original revision and table. See [the editorial policy](../STATEMENT-FIRST.md).

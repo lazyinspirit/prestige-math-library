@@ -5,6 +5,12 @@ approved build checklist is [research/workflow-rebuild-plan.md](research/workflo
 this workflow. Mathematics and its sibling engine have separate revisions,
 worker prompts, supporting tools, content and run state.
 
+Freshly planned run namespaces now select the statement-first revision: every item
+class has an uninterrupted statement/description with links afterward, one per
+line and paragraph. The native six steps, models and repair limits remain.
+Existing runs retain their selected stages and original policy, including after
+restart. See [activation and mechanical checks](tools/STATEMENT-FIRST.md).
+
 ## Six-step workflow
 
 | Step | Work | Agents and handoff |

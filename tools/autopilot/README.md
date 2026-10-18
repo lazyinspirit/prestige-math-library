@@ -57,3 +57,8 @@ receipts retain their smaller explicit schema. An old stable result cannot close
 a newer dispatch; an impossible old stamp can recover from its genuine current
 result on a later tick. Retry controls reconcile adopted success before rearming
 failed lanes. Artifact, readiness and gate completion still require their checks.
+
+Freshly planned namespaces now use `six-step-v1-statement-first` through the composed
+`mathlib.statement-first.mts` table. Every item class presents uninterrupted
+statements/descriptions and separate following reference lines. Existing runs
+keep their original revision and table. See [the editorial policy](../STATEMENT-FIRST.md).

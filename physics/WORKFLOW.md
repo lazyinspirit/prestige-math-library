@@ -11,6 +11,12 @@ contracts. Missing, empty or ambiguous manifests leave the probe unavailable;
 they never trigger a whole-library precheck. The ordinary liveness failure for
 missing probe inputs still applies.
 
+Freshly planned run namespaces now select the statement-first revision: every item
+class has an uninterrupted statement/description with links afterward, one per
+line and paragraph. The native six steps, models and repair limits remain.
+Existing runs retain their selected stages and original policy, including after
+restart. See [activation and mechanical checks](../tools/STATEMENT-FIRST.md).
+
 ## Six-step workflow
 
 | Step | Work | Agents and handoff |

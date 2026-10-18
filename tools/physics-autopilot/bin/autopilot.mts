@@ -36,6 +36,7 @@ import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
 import { reopenStep3 } from '../src/step3-reopen.mts';
 import type { Config } from '../src/types.mts';
+import { readStatementPolicy, isFreshStatementRun, writeStatementPolicy } from '../../statement-first-policy.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
@@ -104,6 +105,15 @@ function loadConfig(): Config {
   }
   // Mandatory production boundary; configuration cannot waive owner review.
   base.ownerGateRecertification = true;
+  // Only newly planned namespaces opt in. Existing controllers and run-local
+  // stage selections remain on their original table and revision.
+  const editorialRun = opt('run') ?? base.run;
+  if (readStatementPolicy(repo, editorialRun, 'physics')) {
+    const selected = join(HERE, '..', 'stages', 'mathlib.statement-first.mts');
+    if (existsSync(localConfigPath) && resolve(base.stages) !== resolve(selected))
+      throw new Error('Statement-first run cannot replace an explicit run-local stage table');
+    base.stages = selected;
+  }
   base.repo = repo;
   base.stateDir = stateDir;
   return base;
@@ -303,6 +313,7 @@ switch (cmd) {
     const { spawnSync } = await import('node:child_process');
     const run = opt('run') ?? die('--run is required');
     const pairsArg = opt('pairs');
+    const freshStatementRun = isFreshStatementRun(repo, run, stateDir);
     let pages;
     if (pairsArg === 'next') {
       const maxPairs = Number(opt('max-pairs', String(MAX_RUN_PAIRS)));
@@ -369,6 +380,8 @@ switch (cmd) {
       if (check.status !== 0) preflightFailure = check.stderr || check.stdout || 'physics plan validation failed';
     } finally { rmSync(preflightDir, { recursive: true, force: true }); }
     if (preflightFailure) die(preflightFailure);
+    // Preserve the selected policy even if a later planning writer fails.
+    if (freshStatementRun) writeStatementPolicy(repo, run, 'physics');
     const written = writeManifests(repo, run, groups, { force: has('force') });
     writeBatchDependencyLevels(repo, run);
     console.log(`step 0 for ${run}: ${pages.length} A/B pair(s) -> ${groups.length} batch(es), cap ${cap}\n`);
