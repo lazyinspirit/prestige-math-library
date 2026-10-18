@@ -26,7 +26,8 @@ import { persistRotatedCodexAuth } from './dispatch-auth.mjs';
 import { resolveDispatchProfile } from './model-profile-overrides.mjs';
 
 // tools/models.mjs owns model IDs and semantic lane assignments.
-import { lane, modelProfile } from './models.mjs';
+import { lane, modelProfile, MODEL_PROFILE_NAMES, MODELS } from './models.mjs';
+import { sol61Effort } from './math-workflow-effort.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from './autopilot/src/capacity.mjs';
 
 // OWNER RULE (2026-10-01): every agent in the workflow auto-compacts its context
@@ -272,6 +273,11 @@ if (profileName) {
     profileSpec = modelProfile(profileName);
   }
   catch (error) { usage(error?.message ?? String(error)); }
+}
+// Audit-only policy covers fallback/repair roles without a stage profile too.
+if (sol61Effort(REPO, run) === 'medium' && (profileSpec?.model ?? ROLES[role].model) === MODELS.sol61.id) {
+  profileName = MODEL_PROFILE_NAMES.sol61Medium;
+  profileSpec = modelProfile(profileName);
 }
 const spec = Object.freeze({
   ...ROLES[role],

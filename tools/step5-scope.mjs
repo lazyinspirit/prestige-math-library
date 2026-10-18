@@ -46,6 +46,7 @@
 // answered.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { buildGroupBundle } from './evidence-bundle.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 import { publishedAlertRoute } from './step4-published-alerts.mjs';
@@ -197,7 +198,6 @@ function openRejections() {
     try {
       const rows = readJson(closurePath)?.unadjudicated_rows;
       if (Array.isArray(rows)) return rows
-        .filter((r) => !isPublishedItem(REPO, r.id))
         .filter((r) => r && typeof r.id === 'string' && typeof r.model === 'string'
           && typeof r.context_sha256 === 'string')
         .filter((r) => !answered.has(rejectionKey(r)))
@@ -208,7 +208,7 @@ function openRejections() {
   for (const entry of evidence.rejections.values()) {
     const r = entry.row;
     const key = rejectionKey(r);
-    if (answered.has(key) || isPublishedItem(REPO, r.id)) continue;
+    if (answered.has(key)) continue;
     out.push({ id: r.id, model: r.model, context_sha256: r.context_sha256, reason: r.reason ?? r.why ?? null });
   }
   return out;
@@ -223,7 +223,6 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
     const from = String(digest.group ?? '');
     const fromBatch = String(digest.batches?.[0] ?? '');
     for (const raw of includeConcerns ? (digest.concerns ?? []) : []) {
-      if (isPublishedItem(REPO, raw.id)) continue;
       const ownerRecord = index.itemOwner.get(raw.id) ?? index.pageOwner.get(raw.id);
       const owner = ownerRecord?.group;
       const alert = {
@@ -274,7 +273,6 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
     }
   }
   for (const raw of readJsonl(crossPath)) {
-    if (isPublishedItem(REPO, raw.item)) continue;
     const alert = {
       version: 1,
       source: 'step5-rejection',
@@ -695,13 +693,22 @@ if (mode === 'digests') {
 // This command remains as a compatibility receipt for existing workflows.
 if (mode === 'published') {
   const rows = readJsonl(R('research', `${run}-step5-published-repairs.jsonl`));
-  const receipt = { version: 2, run, policy: 'published-repairs-exempt',
+  // This compatibility entrypoint may not grant publication-based exemptions.
+  // Reuse the real native current-judgment closure for the complete manifests.
+  const manifests = readGroups().flatMap(group => group.covers.map(batch => `research/${run}-batch-${batch}.pages.json`));
+  const check = spawnSync(process.execPath, ['tools/level-coverage.mjs', '--judge-only', '--verify-current-context',
+    '--step5-run', run, '--judge-ledger', `research/${run}-judge.jsonl`,
+    '--judge-adjudications', `research/${run}-judge-adjudications.jsonl`,
+    '--terminal-resolutions', `research/${run}-step5-terminal-resolutions.jsonl`, '--json', ...manifests],
+    { cwd: REPO, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
+  if (check.error || check.status !== 0) fail(`published Step 5 closure failed: ${check.error?.message ?? check.stderr ?? check.stdout}`);
+  const receipt = { version: 3, run, policy: 'published-frontier-full-adjudication',
     repaired: [...new Set(rows.filter(row => row.kind === 'repaired').map(row => row.id).filter(Boolean))],
-    needs_rejudge: [], unadjudicated_rows: [], open_fatal: [] };
+    closure: JSON.parse(check.stdout), publication_changed: false };
   const receiptPath = opt('out');
   if (receiptPath) writeFileSync(receiptPath.startsWith('/') ? receiptPath : R(receiptPath),
     `${JSON.stringify(receipt, null, 2)}\n`);
-  console.log(`step5-scope --published: ${receipt.repaired.length} published repair(s) recorded; no gate obligation`);
+  console.log(`step5-scope --published: ${receipt.repaired.length} published repair(s) recorded; full native closure passed`);
   process.exit(0);
 }
 

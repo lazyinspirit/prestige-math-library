@@ -1,4 +1,5 @@
 // Exact initial metadata history; historical rows never become current reviews.
+import { sol61Effort } from './math-workflow-effort.mjs';
 import {readFileSync,writeFileSync,existsSync,mkdirSync,readdirSync,lstatSync} from 'node:fs';
 import {resolve,join,relative} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -69,7 +70,7 @@ function validate(root,run,row,{current=false,receiptBytes=null}={}){
       &&pack.assignments[unit]?.length===0&&['reviews','decisions','created_items','downstream'].every(k=>Array.isArray(report[k])&&!report[k].length),'invalid actual zero-work completion');
     else{
       need(native.role==='alpha-adjudicate'&&native.runner==='codex'&&native.model==='gpt-6.1-sol'
-        &&native.provider_effort==='high'&&native.exit_code===0&&native.process_exit_code===0&&native.timed_out===false
+        &&native.provider_effort===sol61Effort(root,native.run)&&native.exit_code===0&&native.process_exit_code===0&&native.timed_out===false
         &&native.terminal_summary?.task_completed===true&&native.terminal_summary.task_aborted===false
         &&native.terminal_summary.final_response_present===true&&native.terminal_summary.error_events===0
         &&Number.isSafeInteger(native.attempt)&&native.attempt>0&&observed.attempt===native.attempt

@@ -255,6 +255,15 @@ identities are unchanged; historical run receipts retain their recorded paths.
   `status`, `items: [id, ...]`, and `examples: [id, ...]`; the body is the page
   summary. The two lists control placement, not item kind. Entries must resolve
   and cannot repeat. A published page may list only published items.
+  Published-category audits remove the summary body and set
+  `audit_layout: statement-first-v1`: prerequisites render as a closed native
+  disclosure, no summary is displayed, and the logical flowchart contains every
+  item in both placement lists. Category overviews/pathway briefs remain required.
+  Audited Statement/Definition sections contain continuous mathematical prose
+  without hyperlinks. Move references to an immediately following
+  `## Statement references` or `## Definition references` section, with each
+  link in a separate paragraph. Retain the full claim, logical dependencies,
+  attribution and proof facts. See [the audit contract](tools/autopilot/AUDIT.md).
 - An item on more than one page draws a warning; dependency tools use its first
   home. A published item without a page also draws a warning. An item homed
   only on a B/examples page cannot be another page's dependency; earlier items

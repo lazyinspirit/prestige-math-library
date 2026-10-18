@@ -1,6 +1,7 @@
 // Published mathematics may be repaired directly. Its repair is recorded and
-// statement changes still propagate to direct consumers, but the item itself
-// does not enter a repair gate, rejudgment, or adjudication queue.
+// statement changes still propagate to direct consumers. Outside-context
+// maintenance remains distinct from a frozen frontier: published items selected
+// as native Step-5 subjects owe full adjudication, certification and rejudgment.
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';

@@ -1,5 +1,6 @@
 // A distinct native maintenance basis for an already certified run-created
 // helper. This supplies no frontier review, creation or judgment.
+import { sol61Effort } from './math-workflow-effort.mjs';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {join,resolve} from 'node:path';
@@ -87,7 +88,7 @@ export function createdMaintenanceBasis(root,run,phase,round,{prior,result,progr
       need(result.evidence?.[dispatchPath]&&progress.maintenance_evidence?.[dispatchPath]===result.evidence[dispatchPath],'native dispatch not bound to current closed wave');
       const dispatchBytes=capture(dispatchPath,result.evidence[dispatchPath]),dispatch=JSON.parse(dispatchBytes);
       need(dispatch.run===run&&dispatch.role==='alpha-repair'&&dispatch.label===label&&same(dispatch.covers,[`maintenance:${id}:${lane.lane}`])
-        &&dispatch.model==='gpt-6.1-sol'&&dispatch.provider_effort==='high'&&dispatch.ok===true&&dispatch.exit_code===0&&dispatch.process_exit_code===0
+        &&dispatch.model==='gpt-6.1-sol'&&dispatch.provider_effort===sol61Effort(root,dispatch.run)&&dispatch.ok===true&&dispatch.exit_code===0&&dispatch.process_exit_code===0
         &&dispatch.timed_out===false&&dispatch.terminal_summary?.task_completed===true&&dispatch.terminal_summary.task_aborted===false
         &&dispatch.terminal_summary.final_response_present===true&&dispatch.terminal_summary.error_events===0
         &&Number.isSafeInteger(dispatch.attempt)&&dispatch.attempt>0&&dispatch.evidence_tag===`.attempt-${dispatch.attempt}`

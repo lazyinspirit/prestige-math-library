@@ -9,6 +9,7 @@ import { spawn } from 'node:child_process';
 import { REPO, tsxLoader } from './paths.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { MODELS, resolveLineup } from './models.mjs';
+import { sol61Effort } from './math-workflow-effort.mjs';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 import { createSlotPool } from './slots.mjs';
 import { workflowAgentBudget } from './workflow-agent-budget.mjs';
@@ -155,7 +156,8 @@ const capture = async (task, attempt) => {
     return await new Promise((done) => {
       const child = spawn(process.execPath, [
         '--import', loader, 'tools/judge.mts', `items/${task.id}.md`, '--model', task.model,
-        ...(effortArg ? ['--effort', effortArg] : []),
+        ...(task.model === MODELS.sol61.id && sol61Effort(process.cwd(), run) === 'medium'
+          ? ['--effort', 'medium'] : effortArg ? ['--effort', effortArg] : []),
       ], {
         env: {
           ...process.env,

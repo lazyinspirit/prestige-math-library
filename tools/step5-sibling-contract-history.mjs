@@ -1,4 +1,5 @@
 // Exact native sibling metadata history; no current mathematical acceptance.
+import { sol61Effort } from './math-workflow-effort.mjs';
 import {existsSync,readFileSync,writeFileSync,readdirSync,lstatSync,realpathSync} from 'node:fs';
 import {resolve,join,relative} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -55,7 +56,7 @@ export function validateSiblingContractHistory(root,run,row,{sealed=false}={}){
       &&resolve(root,result.log??'')===resolve(row.origin_repo_root,`${stem}.log`)
       &&resolve(root,result.prompt??'')===resolve(row.origin_repo_root,`${stem}.prompt.md`)
       &&result.run===run&&result.role==='alpha-repair'&&result.label===label&&same(result.covers,[unit])
-      &&result.runner==='codex'&&result.model==='gpt-6.1-sol'&&result.provider_effort==='high'
+      &&result.runner==='codex'&&result.model==='gpt-6.1-sol'&&result.provider_effort===sol61Effort(root,result.run)
       &&result.ok===true&&result.exit_code===0&&result.process_exit_code===0&&result.timed_out===false
       &&result.terminal_summary?.task_completed===true&&result.terminal_summary.task_aborted===false
       &&result.terminal_summary.final_response_present===true&&result.terminal_summary.error_events===0

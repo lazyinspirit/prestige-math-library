@@ -1,4 +1,5 @@
 // Explicit initial published-successor history. No native mathematical coverage.
+import { sol61Effort } from './math-workflow-effort.mjs';
 import {readFileSync,writeFileSync,existsSync,mkdirSync,readdirSync,lstatSync,realpathSync} from 'node:fs';
 import {resolve,join,relative} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -91,7 +92,7 @@ function validate(root,run,row,{current=false,virtual=new Map()}={}){
    need(result.written_by==='autopilot'&&report.mathematical_review===false&&pack.assignments[unit]?.length===0
     &&['reviews','decisions','created_items','downstream','ledger_updates'].every(k=>same(report[k],[])),'invalid mechanical zero-work origin');continue;
   }
-  need(result.runner==='codex'&&result.model===MODELS.sol61.id&&result.provider_effort==='high'
+  need(result.runner==='codex'&&result.model===MODELS.sol61.id&&result.provider_effort===sol61Effort(root,result.run)
    &&Number.isSafeInteger(result.attempt)&&result.attempt>0&&result.attempt===observed.attempt
    &&result.evidence_tag===`.attempt-${result.attempt}`&&date(result.started_at)&&date(result.ended_at)
    &&Date.parse(result.started_at)<=Date.parse(result.ended_at)&&Date.parse(result.ended_at)<=Date.parse(observed.endedAt)

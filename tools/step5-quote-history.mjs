@@ -1,4 +1,5 @@
 // A history bridge for exact native supporting metadata, never a current audit.
+import { sol61Effort } from './math-workflow-effort.mjs';
 import { readFileSync, existsSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -57,7 +58,7 @@ function validate(root,run,receipt) {
       &&report.run===run&&report.phase==='initial'&&report.round===1&&String(report.unit)===String(carrier.unit)
       &&report.input_sha256===sha(pack)&&report.supporting_evidence?.[carrier.path]===carrier.original_sha256
       &&dispatch.run===run&&dispatch.role==='alpha-adjudicate'&&dispatch.label===`step5-v2-initial-r1-u${carrier.unit}`
-      &&dispatch.runner==='codex'&&dispatch.model==='gpt-6.1-sol'&&dispatch.provider_effort==='high'
+      &&dispatch.runner==='codex'&&dispatch.model==='gpt-6.1-sol'&&dispatch.provider_effort===sol61Effort(root,dispatch.run)
       &&dispatch.covers?.map(String).includes(String(carrier.unit))
       &&dispatch.ok===true&&dispatch.exit_code===0&&dispatch.timed_out!==true
       &&dispatch.terminal_summary?.task_completed===true&&dispatch.terminal_summary?.task_aborted!==true,

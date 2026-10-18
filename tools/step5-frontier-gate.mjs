@@ -3,7 +3,6 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { validateFrontier } from './step5-rounds.mjs';
-import { isPublishedItem } from './published-repair-policy.mjs';
 
 const ITEM = '(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[a-z0-9]+(?:-[a-z0-9]+)*';
 const itemId = new RegExp(`^${ITEM}$`);
@@ -98,7 +97,7 @@ export function frontierGateBattery(ctx, gates) {
   const path = join(ctx.repo, 'research', `${ctx.run}-step5-v2`, 'frontier.json');
   const frontier = validateFrontier(JSON.parse(readFileSync(path, 'utf8')));
   if (frontier.run !== ctx.run || frontier.ids.some(id => !itemId.test(id))) throw Error('invalid current Step 5 frontier');
-  const gateScope = { ...frontier, ids: frontier.ids.filter(id => !isPublishedItem(ctx.repo, id)) };
+  const gateScope = frontier;
   const allIds = readdirSync(join(ctx.repo, 'items')).filter(name => name.endsWith('.md')).map(name => name.slice(0, -3));
   const preserveRaw = result => ({ ...result, output: `${result.stdout}${result.stderr}`,
     rawOutput: `${result.stdout}${result.stderr}`, rawCode: result.code });

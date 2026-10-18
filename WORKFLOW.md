@@ -751,6 +751,21 @@ appends and later Step-5 rows retain the strict schema.
 
 ## Run controls and cutover
 
+Published mathematics category audits use the separate TypeScript
+[`mathlib.audit.mts`](tools/autopilot/stages/mathlib.audit.mts) entry point and
+[`audit.mts`](tools/autopilot/bin/audit.mts) planner; see
+[the audit runbook](tools/autopilot/AUDIT.md). They run on main and preserve all
+original published statuses. Preparation deletes page summaries and installs
+collapsed prerequisites/all-item diagrams mechanically, without an LLM. The
+actual native Steps 2–6, owner holds and complete gate batteries are reused.
+Every GPT-6.1 Sol call in the audit, including repairs and nested rejudges, uses
+medium effort through its recorded run policy; ordinary-build effort is unchanged.
+
+In native Step 5, publication no longer exempts a frozen-frontier item from
+adjudication, repair guards, certification, required rejudgment, judge stamps or
+defect closure. This applies to ordinary math builds as well as category audits;
+outside-context maintenance does not silently enlarge the frozen frontier.
+
 Mathematics run inventory supports up to 128 A/B pairs, with exactly one pair per
 batch and at most three batches per group. Groups use lowercase spreadsheet
 labels (`a` through `z`, then `aa`, `ab`, and so on). Inventory capacity does not

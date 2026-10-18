@@ -1,4 +1,5 @@
 // Root-current repairs with exact native history, never new native coverage.
+import { sol61Effort } from './math-workflow-effort.mjs';
 import {existsSync,readFileSync,readdirSync,lstatSync,realpathSync} from 'node:fs';
 import {resolve,join} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -19,7 +20,7 @@ const drained=s=>Object.values(s.dispatches??{}).every(x=>!x.startedAt||Boolean(
 function source(text,id){
   const m=text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);need(m,'missing source frontmatter');
   const fm=m[1],body=text.slice(m[0].length),scalar=k=>fm.match(new RegExp(`^${k}:\\s*["']?([^\\r\\n"']+)["']?\\s*$`,'m'))?.[1]?.trim();
-  need(scalar('id')===id&&scalar('status')==='draft','not the exact draft source');
+  need(scalar('id')===id&&['draft','published'].includes(scalar('status')),'not an exact frontier source');
   const unique=a=>[...new Set(a)].sort(),deps=unique(['deps','justified_by','forward_refs'].flatMap(k=>frontmatterList(fm,k)));
   const links=[...body.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)].map(m=>m[1]);
   return {id,kind:scalar('kind'),deps,aliases:frontmatterList(fm,'aliases'),references:unique([...links,...frontmatterList(fm,'external_refs')]).filter(x=>!deps.includes(x)),statement_sha256:statementHash(text)};
@@ -57,14 +58,14 @@ export function loadOwnerCurrentRepairs(root,pack,reports,current,items,row,{mat
   const beforeTexts=new Map(),findingById=new Map();
   for(const entry of row.entries){
     const id=entry.id,unit=String(entry.unit),native=reports.find(r=>String(r.unit)===unit);
-    need(typeof id==='string'&&frontier.has(id)&&pack.before[id]&&byId.has(id)&&!byId.get(id).published&&!targets.has(id)
+    need(typeof id==='string'&&frontier.has(id)&&pack.before[id]&&byId.has(id)&&!targets.has(id)
       &&['assigned-scope-preservation','native-outside-alert'].includes(entry.origin_kind)&&native,'duplicate, foreign or unsupported repair target');targets.add(id);
     const label=`step5-v2-repeat-r${pack.round}-u${unit}`,reportPath=join(dir,label+'.json');
     const original=JSON.parse(ref(entry.original_report,reportPath));need(same(original,native)&&original.run===run&&original.phase==='repeat'
       &&original.round===pack.round&&String(original.unit)===unit&&original.input_sha256===hash(pack),'wrong actual original native report');
     const dp=join(root,'research',`${run}-dispatch`,`alpha-adjudicate-${label}.result.json`),dispatch=JSON.parse(ref(entry.dispatch,dp));
     need(dispatch.run===run&&dispatch.role==='alpha-adjudicate'&&dispatch.label===label&&dispatch.ok===true&&dispatch.model==='gpt-6.1-sol'
-      &&dispatch.provider_effort==='high'&&same(dispatch.covers,[unit])&&dispatch.exit_code===0&&dispatch.process_exit_code===0&&dispatch.timed_out===false
+      &&dispatch.provider_effort===sol61Effort(root,dispatch.run)&&same(dispatch.covers,[unit])&&dispatch.exit_code===0&&dispatch.process_exit_code===0&&dispatch.timed_out===false
       &&dispatch.terminal_summary?.task_completed===true&&dispatch.terminal_summary.task_aborted===false
       &&dispatch.terminal_summary.final_response_present===true&&dispatch.terminal_summary.error_events===0
       &&Number.isSafeInteger(dispatch.attempt)&&dispatch.attempt>0&&dispatch.evidence_tag===`.attempt-${dispatch.attempt}`&&date(dispatch.ended_at), 'not a genuine completed native adjudication');
@@ -111,7 +112,7 @@ export function loadOwnerCurrentRepairs(root,pack,reports,current,items,row,{mat
   need(Array.isArray(row.scope)&&row.scope.length>0&&Array.isArray(row.reviews)&&Array.isArray(row.decisions),'missing root current scope/reviews');
   const ids=new Set();
   for(const value of row.scope){
-    need(frontier.has(value.id)&&pack.before[value.id]&&byId.has(value.id)&&!byId.get(value.id).published&&!ids.has(value.id)
+    need(frontier.has(value.id)&&pack.before[value.id]&&byId.has(value.id)&&!ids.has(value.id)
       &&typeof value.reason==='string'&&value.reason.trim().length>=40,'invalid current root review scope');ids.add(value.id);
     const before=ref(value.before_source),old=source(before,value.id),nativeRows=reports.flatMap(r=>r.reviews??[]).filter(r=>r.id===value.id);
     const assigned=Object.values(pack.assignments).flat().some(x=>x.id===value.id);

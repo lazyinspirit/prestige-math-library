@@ -1,4 +1,5 @@
 // Work admission only: immutable native reports and ordinary current reviews retain their roles.
+import { sol61Effort } from './math-workflow-effort.mjs';
 import {existsSync,readFileSync,readdirSync,lstatSync,realpathSync,mkdirSync,writeFileSync} from 'node:fs';
 import {join,resolve,relative} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -65,7 +66,7 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
         &&['reviews','decisions','created_items','downstream','ledger_updates'].every(k=>same(report[k],[])), 'invalid mechanical zero-work origin');continue;
     }
     need(result.role==='alpha-adjudicate'&&result.label===label&&result.runner==='codex'&&result.model===MODELS.sol61.id
-      &&result.provider_effort==='high'&&Number.isSafeInteger(result.attempt)&&result.attempt>0
+      &&result.provider_effort===sol61Effort(root,result.run)&&Number.isSafeInteger(result.attempt)&&result.attempt>0
       &&result.evidence_tag===`.attempt-${result.attempt}`&&date(result.started_at)&&date(result.ended_at)
       &&Date.parse(result.started_at)<=Date.parse(result.ended_at)&&result.process_exit_code===0&&result.exit_code===0
       &&result.timed_out===false&&result.terminal_summary?.task_completed===true&&result.terminal_summary.task_aborted===false
@@ -215,7 +216,7 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
     }
     const source=join(root,'items',`${id}.md`);need(lstatSync(source).isFile()&&!lstatSync(source).isSymbolicLink(),'nonregular source');
     const text=readFileSync(source,'utf8');
-    need(/^status:\s*draft\s*$/m.test(text)&&text.match(/^id:\s*(\S+)\s*$/m)?.[1]===id
+    need(/^status:\s*["\']?(?:draft|published)["\']?\s*$/m.test(text)&&text.match(/^id:\s*(\S+)\s*$/m)?.[1]===id
       &&typeof baseline[id]==='string'&&initial.before[id]===baseline[id]&&itemHashGuard(text)===entry.current_guard_sha256, 'not a current draft original frontier carrier');
     if(unclassified&&entry.finding_shape==='classified-definition')need(text.includes(finding.source_excerpt),'classified finding excerpt is absent from current original source');
     if(ownerSource){

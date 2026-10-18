@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Round-based Step 5. Mathematical workers write evidence; only the controller
 // collects it, judges a stable snapshot, and certifies a completed repair wave.
+import { sol61Effort } from './math-workflow-effort.mjs';
 import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, appendFileSync, lstatSync, realpathSync } from 'node:fs';
 import { resolve, join, basename, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -55,7 +56,7 @@ function sol61Step5Run(root,run) {
     requireValue(existsSync(file)&&digest(readFileSync(file,'utf8'))===hash,`Step 5 worker handoff changed: ${file}`);
     const worker=read(file);
     if(worker.ok===true&&worker.run===run&&worker.role==='alpha-adjudicate'
-      &&worker.model===MODELS.sol61.id&&worker.provider_effort==='high')return true;
+      &&worker.model===MODELS.sol61.id&&worker.provider_effort===sol61Effort(root,worker.run))return true;
   }
   return false;
 }
@@ -163,7 +164,7 @@ function repairedRun44LedgerHistory(history,path,expected) {
   requireValue(report.run===run&&report.phase==='gate'&&report.round===3&&report.unit==='1'
     &&report.input_sha256===digest(pack)&&pack.run===run&&pack.phase==='gate'&&pack.round===3
     &&dispatch.ok===true&&dispatch.run===run&&dispatch.role==='alpha-repair'
-    &&dispatch.label===workerLabel('gate',3,'1')&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
+    &&dispatch.label===workerLabel('gate',3,'1')&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort===sol61Effort(root,dispatch.run)
     &&report.ledger_before_sha256===original&&report.ledger_after_sha256===digest(afterBytes)
     &&report.supporting_evidence?.['research/defect-ledger.jsonl']===digest(afterBytes)
     &&Array.isArray(report.ledger_schema_repairs)&&report.ledger_schema_repairs.length===11,
@@ -259,7 +260,7 @@ function supportingMetadataHistory(history,path,expected) {
       &&report.input_sha256===digest(pack)&&pack.run===run&&pack.phase===report.phase&&pack.round===1
       &&pack.assignments?.[report.unit]&&dispatch.ok===true&&dispatch.run===run
       &&dispatch.role==='alpha-repair'&&dispatch.label===workerLabel(report.phase,1,report.unit)
-      &&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high',
+      &&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort===sol61Effort(root,dispatch.run),
       'historical metadata repair lacks its genuine native completion');
     for(const review of report.reviews??[])if(pack.assignments[report.unit].includes(review.id))repairSubjects.add(review.id);
   }
@@ -351,7 +352,7 @@ function gateFrontier(root,run) {
   const frontier=existsSync(path)?read(path):initialize(root,run);
   validateFrontier(frontier);
   requireValue(frontier.run===run,'wrong run frontier');
-  return new Set(frontier.ids.filter(id => !isPublishedItem(root, id)));
+  return new Set(frontier.ids);
 }
 function impactTargets(root,run,phase,items,seeds,discovered=[],createdIds=[]) {
   const frontier=new Set([...gateFrontier(root,run),...createdIds]),roots=[...new Set(seeds)];
@@ -555,7 +556,6 @@ function assertEmptyAdjudicationInput(root,run,phase,round,unit,inputHash) {
   for(const row of verdicts.filter(row=>row.model===pack.judge_model))latest.set(row.id,row);
   for(const row of pack.rejected)requireValue(latest.get(row.id)?.keep===false&&key(latest.get(row.id))===key(row),'rejection differs from frozen judge input');
   for(const id of frontier.batches.find(row=>String(row.id)===unit).items){
-    if(isPublishedItem(root,id))continue;
     const row=latest.get(id);
     requireValue((phase!=='initial'||typeof row?.keep==='boolean')&&(!row||row.keep===true),`frozen judge input still owes adjudication: ${id}`);
   }
@@ -630,7 +630,7 @@ function writeTasks(root,pack,mode) {
         ? `Owner-confirmed findings from original native initial adjudication, assigned for current review and smallest necessary repair:\n${JSON.stringify(pack.initial_scope_findings.filter(row=>assigned.includes(row.id)),null,2)}. Read the original native report/finding and bound individual root instructions. These are explicit work requests, not Step-4 reader concerns, judge rejections, new adjudication decisions, or current acceptance. Return ordinary reviews with no adjudication decision. Only actual Statement/Definition changes propagate consumer examination.` : '',
       `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
-      'SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.',
+      'SCOPE: repair all assigned frontier items, including published items. Publication status never exempts an assigned item from adjudication, repair certification or required rejudgment. Keep originally published items published. Outside consumers are handled by consumer maintenance; report their affected uses and escalate necessary repairs.',
       pack.phase==='gate'||pack.basePhase==='gate'?'Step 5.9 permits no new items.':'You may create, fully author, and register a new item only to meet a genuine unsatisfied prerequisite of an assigned repair; explain its exact consuming proof step. No unrelated additions.',
       'Optional supporting_evidence is reserved for {"research/path/to/file": "64-character SHA-256 of exact file bytes"}. Put narrative evidence, check summaries and repair explanations in repair_notes, not supporting_evidence. Do not use invented paths or hashes.',
       mode==='adjudicate'
@@ -730,7 +730,7 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
         &&value.ledger==='canonical-defect-ledger'&&value.action==='record-open-finding');
       const finding=findings[0],proposal=native.repair_notes?.minimal_supplier_repair;
       requireValue(rejected&&!Object.hasOwn(native,'completion')&&!(native.blockers??[]).length
-        &&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
+        &&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort===sol61Effort(root,dispatch.run)
         &&dispatch.exit_code===0&&dispatch.timed_out===false&&typeof dispatch.session_id==='string'&&dispatch.session_id.length>0
         &&JSON.stringify(dispatch.covers)===JSON.stringify([unit])
         &&native.repair_notes?.status==='blocked_by_assigned_file_scope'&&native.repair_notes.repair_complete===false
@@ -745,7 +745,7 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
         &&!Object.values(pack.assignments[unit]).some(value=>value.id===finding.supplier),
         'owner scope supplement requires an exact native open fatal scope-blocked supplier proposal');
     }
-    requireValue(dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
+    requireValue(dispatch.model===MODELS.sol61.id&&dispatch.provider_effort===sol61Effort(root,dispatch.run)
       &&dispatch.exit_code===0&&dispatch.timed_out===false&&typeof dispatch.session_id==='string'&&dispatch.session_id.length>0
       &&JSON.stringify(dispatch.covers)===JSON.stringify([unit]),
       'owner supplier supplement requires the original successful native Sol completion');
@@ -943,7 +943,7 @@ function operationalBindings(root,pack,reports,certificate) {
     const report=workerReport(root,pack.run,pack.phase,pack.round,unit);bind(report);bind(report.replace(/\.json$/,'.gate-diagnostics.json'));
     const path=join(root,'research',`${pack.run}-dispatch`,`alpha-repair-${workerLabel(pack.phase,pack.round,unit)}.result.json`);
     const result=read(path);requireValue(result.ok===true&&result.run===pack.run&&result.role==='alpha-repair'
-      &&result.label===workerLabel(pack.phase,pack.round,unit)&&result.model===MODELS.sol61.id&&result.provider_effort==='high',
+      &&result.label===workerLabel(pack.phase,pack.round,unit)&&result.model===MODELS.sol61.id&&result.provider_effort===sol61Effort(root,result.run),
       'operational supplement requires genuine completed native owner dispatches');bind(path);
   }
   return bindings;
@@ -1042,7 +1042,7 @@ function loadSupplierRepairs(root,pack,reports,current,items) {
     const dispatch=bound(dispatchPath);
     requireValue(dispatch.ok===true&&dispatch.run===pack.run&&dispatch.role==='alpha-adjudicate'
       &&dispatch.label===workerLabel(pack.phase,pack.round,unit)&&dispatch.model===MODELS.sol61.id
-      &&dispatch.provider_effort==='high'&&typeof dispatch.session_id==='string'&&dispatch.session_id.length>0
+      &&dispatch.provider_effort===sol61Effort(root,dispatch.run)&&typeof dispatch.session_id==='string'&&dispatch.session_id.length>0
       &&Number.isInteger(dispatch.attempt)&&dispatch.attempt>0&&Number.isFinite(Date.parse(dispatch.ended_at))
       &&Date.parse(receipt.recorded_at)>=Date.parse(dispatch.ended_at),'supplier repair lacks successful authorized native completion');
     const attemptPath=dispatchPath.replace(/\.result\.json$/,`.attempt-${dispatch.attempt}.result.json`);
@@ -1398,12 +1398,12 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const receipt=read(dispatch);
     const sol61Run=sol61Step5Run(root,run);
     const expected=sol61Run
-      ? [[MODELS.sol61.id,'high']]
+      ? [[MODELS.sol61.id,sol61Effort(root,run)]]
       : role==='alpha-adjudicate'
         ? pack.judge_model===MODELS.luna.id?[[MODELS.astra.id,'medium']]:[[MODELS.astra.id,'medium'],[MODELS.sol.id,'xhigh']]
         : [[MODELS.sol.id,'xhigh']];
     if(receipt.ok!==true||receipt.run!==run||receipt.role!==role||receipt.label!==workerLabel(phase,round,unit)
-      ||!(receipt.model===MODELS.sol61.id&&receipt.provider_effort==='high')
+      ||!(receipt.model===MODELS.sol61.id&&receipt.provider_effort===sol61Effort(root,receipt.run))
         &&!expected.some(([model,effort])=>receipt.model===model&&receipt.provider_effort===effort))
       throw Error(`worker did not succeed with an authorized identity: ${dispatch}`);
     evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
@@ -1594,7 +1594,7 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
     const path=join(root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel('impact-initial',1,unit)}.result.json`);
     const result=read(path),sha256=digest(readFileSync(path,'utf8'));
     requireValue(result.run===run&&result.role==='alpha-repair'&&result.label===workerLabel('impact-initial',1,unit)
-      &&result.ok===true&&result.model===MODELS.sol61.id&&result.provider_effort==='high'
+      &&result.ok===true&&result.model===MODELS.sol61.id&&result.provider_effort===sol61Effort(root,result.run)
       &&typeof result.session_home==='string'
       &&resolve(root,result.session_home)===resolve(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`)
       &&typeof result.session_id==='string'&&result.session_id.length>0,
@@ -1664,7 +1664,7 @@ function readerReviewOwnership(root,run,packs,receipts,items,current) {
         const dispatch=read(record.dispatchPath);
         const sameReviewer=dispatch.run===run&&dispatch.role==='alpha-repair'
           &&dispatch.label===workerLabel(record.pack.phase,record.pack.round,unit)
-          &&dispatch.ok===true&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'
+          &&dispatch.ok===true&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort===sol61Effort(root,dispatch.run)
           &&typeof dispatch.session_home==='string'
           &&resolve(root,dispatch.session_home)===resolve(root,auth.result.session_home)
           &&dispatch.session_id===auth.result.session_id;
@@ -1714,7 +1714,7 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
     const basePhase=pack.basePhase??pack.phase;
     const nativeCover=pack.phase===basePhase?unit:`${pack.phase}:${unit}`;
     requireValue(native.run===run&&native.role==='alpha-repair'&&native.label===label
-      &&native.ok===true&&native.model===MODELS.sol61.id&&native.provider_effort==='high'
+      &&native.ok===true&&native.model===MODELS.sol61.id&&native.provider_effort===sol61Effort(root,native.run)
       &&JSON.stringify(native.covers)===JSON.stringify([nativeCover])
       &&native.exit_code===0&&native.process_exit_code===0&&native.timed_out===false
       &&native.terminal_summary?.task_completed===true&&native.terminal_summary.task_aborted===false
@@ -1776,7 +1776,7 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
       const first=read(origin),reporting=read(claim.dispatch),home=resolve(root,'.autopilot',run,'step5-reader-owner-sessions',`u${claim.unit}`);
       requireValue(first.run===run&&first.role==='alpha-repair'&&first.ok===true
         &&first.label===workerLabel('impact-initial',1,claim.unit)&&JSON.stringify(first.covers)===JSON.stringify([claim.unit])
-        &&first.model===MODELS.sol61.id&&first.provider_effort==='high'
+        &&first.model===MODELS.sol61.id&&first.provider_effort===sol61Effort(root,first.run)
         &&typeof first.session_home==='string'&&resolve(root,first.session_home)===home
         &&typeof first.session_id==='string'&&first.session_id.length>0
         &&typeof reporting.session_home==='string'&&resolve(root,reporting.session_home)===home
@@ -1820,8 +1820,8 @@ export function advanceImpact(root,run,phase,round) {
       const label=maintenanceLabel(phase,round,pack.id,lane.lane);
       const dispatch=join(root,'research',`${run}-dispatch`,`alpha-repair-${label}.result.json`),result=read(dispatch);
       const sol61Run=sol61Step5Run(root,run);
-      const authorized=(result.model===MODELS.sol61.id&&result.provider_effort==='high')||(sol61Run
-        ? result.model===MODELS.sol61.id&&result.provider_effort==='high'
+      const authorized=(result.model===MODELS.sol61.id&&result.provider_effort===sol61Effort(root,result.run))||(sol61Run
+        ? result.model===MODELS.sol61.id&&result.provider_effort===sol61Effort(root,result.run)
         : result.model===MODELS.sol.id&&result.provider_effort==='xhigh');
       requireValue(result.ok===true&&result.run===run&&result.role==='alpha-repair'&&result.label===label&&authorized,`maintenance worker did not succeed with an authorized identity: ${label}`);
       progress.maintenance_evidence??={};progress.maintenance_evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
@@ -1906,7 +1906,7 @@ export function advanceImpact(root,run,phase,round) {
         const binding=pack.reader_owner_sessions[unit];if(!binding)continue;
         const result=read(binding.result),home=resolve(root,'.autopilot',run,'step5-reader-owner-sessions',`u${unit}`);
         requireValue(result.run===run&&result.role==='alpha-repair'&&result.ok===true&&result.model===MODELS.sol61.id
-          &&result.provider_effort==='high'&&typeof result.session_home==='string'
+          &&result.provider_effort===sol61Effort(root,result.run)&&typeof result.session_home==='string'
           &&resolve(root,result.session_home)===home&&typeof result.session_id==='string'&&result.session_id.length>0,
           `reader concern continuation lacks genuine persistent reviewer: ${unit}`);
       }
@@ -2102,8 +2102,8 @@ export function prepareGateRepairPack(root,run,phase,round,failures) {
   for(const diagnostic of diagnostics) {
     const originalSubjects = diagnostic.subjects;
     diagnostic.subjects = originalSubjects.filter(id=>frontier.has(id));
-    // A missing contract for a selected published/reused proof is a run-owned
-    // metadata obligation, not authority to repair or rejudge published text.
+    // A missing contract outside the selected frontier is an owner metadata
+    // obligation; published subjects inside the frontier retain full repair duties.
     // Preserve it for the existing diagnostic owner instead of excluding it.
     if(diagnostic.id==='proof-contract-coverage' && diagnostic.subjects.length!==originalSubjects.length)
       diagnostic.ownerHeld=true;
@@ -2245,7 +2245,7 @@ export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=n
   const priorVerdicts=round===1?[]:read(join(dir,`judge-${round-1}.json`)).verdicts;
   const judgeModel=MODELS.sol61.id;
   const judgeLineup='sol61';
-  const judgeEffort='high';
+  const judgeEffort=sol61Effort(root,run);
   const prev=Object.fromEntries(priorVerdicts.filter(r=>r.model===judgeModel).map(r=>[r.id,r]));
   const beforeContexts=contextHasher(root,candidates.map(row=>row.id));
   for(const row of candidates){const now=beforeContexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`certified context changed before Sol judgment: ${row.id}`);}

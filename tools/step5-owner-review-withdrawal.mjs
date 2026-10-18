@@ -1,4 +1,5 @@
 // Withdraw an entire native handoff's review credit; never fabricate old support.
+import { sol61Effort } from './math-workflow-effort.mjs';
 import {readFileSync,writeFileSync,existsSync,mkdirSync,lstatSync,realpathSync,readdirSync} from 'node:fs';
 import {resolve,join,relative,dirname} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -13,7 +14,7 @@ const reportPath=(root,run,phase,unit)=>join(dir(root,run),`step5-v2-${phase}-r1
 const dispatchPath=(root,run,phase,unit)=>join(root,'research',`${run}-dispatch`,`alpha-repair-step5-v2-${phase}-r1-u${unit}.result.json`);
 function native(root,run,phase,unit,boundText){
  const rp=reportPath(root,run,phase,unit),dp=dispatchPath(root,run,phase,unit),rb=boundText(rp),stable=boundText(dp),r=JSON.parse(rb),n=JSON.parse(stable),stem=dp.replace(/\.result\.json$/,`.attempt-${n.attempt}`),label=`step5-v2-${phase}-r1-u${unit}`;
- need(n.run===run&&n.role==='alpha-repair'&&n.label===label&&n.runner==='codex'&&n.model==='gpt-6.1-sol'&&n.provider_effort==='high'&&n.ok===true&&n.exit_code===0&&n.process_exit_code===0&&n.timed_out===false
+ need(n.run===run&&n.role==='alpha-repair'&&n.label===label&&n.runner==='codex'&&n.model==='gpt-6.1-sol'&&n.provider_effort===sol61Effort(root,n.run)&&n.ok===true&&n.exit_code===0&&n.process_exit_code===0&&n.timed_out===false
   &&n.terminal_summary?.task_completed===true&&n.terminal_summary.task_aborted===false&&n.terminal_summary.final_response_present===true&&n.terminal_summary.error_events===0&&Number.isSafeInteger(n.attempt)&&n.attempt>0&&n.evidence_tag===`.attempt-${n.attempt}`&&stable===boundText(stem+'.result.json')&&date(n.started_at)&&date(n.ended_at)&&Date.parse(n.started_at)<=Date.parse(n.ended_at)
   &&r.run===run&&r.phase===phase&&r.round===1&&String(r.unit)===unit,'not genuine complete immutable native repair');
  need(same(n.covers,[unit])||phase!=='impact-initial'&&same(n.covers,[`${phase}:${unit}`]),'wrong native coverage');

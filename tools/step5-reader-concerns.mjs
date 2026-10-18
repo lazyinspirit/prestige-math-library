@@ -1,4 +1,5 @@
 // Owner confirmation admits work; only genuine native workers and judges supply coverage.
+import { sol61Effort } from './math-workflow-effort.mjs';
 import {existsSync,readFileSync,readdirSync,lstatSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -60,7 +61,7 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
       &&dispatch.label===(mechanical?`step5-v2-empty-initial-r1-u${unit}`:label)
       &&(mechanical?dispatch.role==='tool'&&dispatch.written_by==='autopilot'&&report.mathematical_review===false
         &&initial.assignments[unit]?.length===0&&['reviews','decisions','created_items','downstream'].every(key=>Array.isArray(report[key])&&report[key].length===0)
-        :dispatch.role==='alpha-adjudicate'&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high'),
+        :dispatch.role==='alpha-adjudicate'&&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort===sol61Effort(root,dispatch.run)),
       'initial native completion is missing or invalid');
   }
   if(requireCollection){
@@ -192,7 +193,7 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
       &&reader.terminal_summary.final_response_present===true&&reader.terminal_summary.error_events===0,
       'incomplete v2 native reader execution');
     const text=readFileSync(join(root,'items',`${id}.md`),'utf8');
-    need(/^status:\s*draft\s*$/m.test(text)&&entry.before_guard_sha256===baseline[id]
+    need(/^status:\s*["\']?(?:draft|published)["\']?\s*$/m.test(text)&&entry.before_guard_sha256===baseline[id]
       &&initial.before[id]===baseline[id]&&itemHashGuard(text)===baseline[id]
       &&!initial.rejected.some(value=>value.id===id)
       &&verdicts.some(value=>value.id===id&&value.model===MODELS.luna.id&&value.keep===true),
@@ -267,7 +268,7 @@ export function readerConcernSession(root,run,phase,round,unit) {
     &&hash(readFileSync(binding.result,'utf8'))===binding.sha256,'missing exact prior owner session result');
   const result=read(binding.result);
   need(result.run===run&&result.role==='alpha-repair'&&result.ok===true&&result.model===MODELS.sol61.id
-    &&result.provider_effort==='high'&&typeof result.session_home==='string'
+    &&result.provider_effort===sol61Effort(root,result.run)&&typeof result.session_home==='string'
     &&resolve(root,result.session_home)===sessionHome
     &&typeof result.session_id==='string'&&result.session_id.length>0&&result.session_id===binding.session_id,
     'cannot resume the genuine prior owner reviewer');

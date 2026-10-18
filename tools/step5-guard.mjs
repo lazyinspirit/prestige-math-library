@@ -15,7 +15,7 @@
 // gate ever demanded the edit.
 //
 // The replacement round protocol uses centralized certification of repaired
-// draft frontier items. Published repairs are exempt. When its frozen
+// frontier items, whether draft or published. When its frozen
 // frontier exists, exact certification and baseline coverage are mandatory;
 // legacy adjudication/terminal licences cannot substitute for missing evidence.
 // Runs without that frontier retain the historical fatal-edit licence checks.
@@ -38,7 +38,6 @@ import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemHashJudge, shortHash } from './item-hash.mjs';
 import { parseTerminalResolutions } from './step5-terminal-resolution.mjs';
 import { loadStep5JudgeEvidence, rejectionKey } from './step5-evidence.mjs';
-import { isPublishedItem } from './published-repair-policy.mjs';
 import { permittedNewLemmas } from './step5-new-lemmas.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
@@ -174,9 +173,9 @@ if (existsSync(workflowDirectory)) {
       `${id}: deleting a frozen-frontier item or its logical supplier is not licensed at Step 5`, id);
     for (const id of protectedIds) if (!Object.hasOwn(now, id) && !deleted.includes(id))
       error('step5-prerequisite-missing', `${id}: current frozen-frontier dependency context is missing`, id);
-    scopedChanged = changed.filter(id => ids.has(id) && !isPublishedItem(workflowRoot, id));
+    scopedChanged = changed.filter(id => ids.has(id));
     scopedCreated = created.filter(id => ids.has(id));
-    excluded.changed = changed.filter(id => !ids.has(id) || isPublishedItem(workflowRoot, id));
+    excluded.changed = changed.filter(id => !ids.has(id));
     excluded.created = created.filter(id => !ids.has(id));
     const certificate = checkWorkflow(workflowRoot, workflowScope.run);
     if (!['impact-repeat', 'gate'].includes(certificate.phase)) throw Error('Step 5 requires a completed repeat-round certification');
@@ -506,8 +505,7 @@ for (const id of changed) {
   const licensed = fatalLicences.get(id)?.has(baseline.hashes[id]);
   if (licensed) continue;
   if (readerFatalLicences.get(id)?.has(baseline.hashes[id])) continue;
-  // Publication status exempts a repair from this licence gate.
-  if (isPublishedItem(workflowRoot, id)) continue;
+  // Published frontier items owe the same repair licence as draft items.
   if (ownerPrerequisiteLicences.get(id)?.has(baseline.hashes[id])) continue;
   // The post-rejudge terminal route is deliberately post-edit and exact: it
   // licenses only the current item bytes named by the manual resolution. Judge

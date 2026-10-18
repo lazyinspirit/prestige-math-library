@@ -2,8 +2,10 @@
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
+import { publishedAuditOwnerMatcher } from './published-audit-ownership.mjs';
 
 export function draftOwnerMatcher(root, run) {
+  const ownsPublishedAudit = publishedAuditOwnerMatcher(root, run);
   const path = join(root, 'research', `${run}-continuation.json`);
   let sourceRun = null;
   const restored = new Set();
@@ -49,7 +51,7 @@ export function draftOwnerMatcher(root, run) {
     if (record.scope?.items !== restored.size || record.scope?.pages !== pages.size)
       throw Error('Continuation inventory count mismatch');
   }
-  return item => item?.status === 'draft' && (item.pipeline_run === undefined
+  return item => ownsPublishedAudit(item) || item?.status === 'draft' && (item.pipeline_run === undefined
     || item.pipeline_run === run
     || item.pipeline_run === sourceRun && restored.has(item.id));
 }

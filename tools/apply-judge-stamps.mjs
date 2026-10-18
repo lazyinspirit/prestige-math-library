@@ -136,7 +136,8 @@ const scopedIds = manifestsArg
     }
     return [...targeted.keys()];
   })();
-const ids = excludePublished ? scopedIds.filter((id) => !isPublishedItem(process.cwd(), id)) : scopedIds;
+// Native Step 5 stamps published subjects too; status is never demoted.
+const ids = excludePublished && !selectiveStep5Run ? scopedIds.filter((id) => !isPublishedItem(process.cwd(), id)) : scopedIds;
 
 const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
 let step5Certificate;

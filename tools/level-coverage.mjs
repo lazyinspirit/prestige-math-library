@@ -62,8 +62,9 @@ const judgeOnly = argv.includes('--judge-only');
 // Native closeout verifies existing evidence without a second audit attestation.
 const mechanical = argv.includes('--mechanical');
 // Later workflow stages may still carry published items in a manifest after a
-// maintenance repair. They remain in the nonjudge audit scope, but their repair
-// has no judge, rejudge, or adjudication obligation.
+// maintenance repair. Native --step5-run always includes the full frozen
+// frontier, irrespective of publication; legacy exclusion applies only outside
+// the native Step-5 protocol.
 const excludePublished = argv.includes('--exclude-published');
 // Step 4 runs before any adjudication exists, so an unadjudicated rejection is
 // the expected state there, not a defect. It is a hard error everywhere else.
@@ -216,7 +217,7 @@ if (judgeTargetsPath) {
     judgeScope = [];
   }
 }
-if (excludePublished) judgeScope = judgeScope.filter((id) => !isPublishedItem(REPO, id));
+if (excludePublished && !selectiveStep5Run) judgeScope = judgeScope.filter((id) => !isPublishedItem(REPO, id));
 for (const id of scope) {
   const item = items.get(resolve(id) ?? id);
   if (!item) error('scope-item-missing', `${id} is declared by a batch but has no item file`, id);

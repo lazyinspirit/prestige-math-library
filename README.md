@@ -19,6 +19,7 @@
 - `briefs/`: agent briefs and task templates.
 - `research/`: plans, source notes, generated tasks, and review evidence.
 - `tools/`: validators and planning tools; `tools/autopilot/` runs the build.
+  [Published-category audits](tools/autopilot/AUDIT.md) reuse math Steps 2–6 on main.
 - `.autopilot/`: ignored runtime state for individual runs.
 - `galaxy/`: [interactive view](galaxy/README.md) of published items.
 - `prestige-intelligence` checkout: the website; [tools/paths.mjs](tools/paths.mjs)
