@@ -3,7 +3,7 @@
 // collects it, judges a stable snapshot, and certifies a completed repair wave.
 import { sol61Effort } from './math-workflow-effort.mjs';
 import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, appendFileSync, lstatSync, realpathSync } from 'node:fs';
-import { resolve, join, basename, dirname } from 'node:path';
+import { resolve, join, basename, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
@@ -1732,6 +1732,41 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
     for(const unit of pack.units){
       const reportPath=workerReport(root,run,pack.phase,pack.round,unit),report=read(reportPath);
       const record={pack,receipt,unit,report,reportPath,index};records.push(record);
+      // Separate derived duty: an actual native interface repair owns its
+      // reported direct consumer. This is not a fabricated downstream_pending
+      // field and supplies no review credit from the original affected-use note.
+      if(['impact-repeat','gate'].includes(pack.basePhase??pack.phase))for(const event of receipt.statement_events??[]){
+        if(!pack.assignments[unit]?.includes(event.id))continue;
+        const review=report.reviews?.find(row=>row.id===event.id);
+        const direct=[...new Map([...discoverDownstream({items,repairedIds:[event.id]}).filter(row=>current[event.id]===review?.post_sha256&&current[row.id]===receipt.post[row.id]),
+          ...packs.filter(p=>p.before?.[event.id]===review?.post_sha256).flatMap(p=>p.impacts??[]).filter(row=>row.suppliers?.includes(event.id)),
+          ...packs.flatMap(p=>p.native_interface_consumer_obligations??[]).filter(row=>row.supplier===event.id&&row.supplier_post_sha256===review?.post_sha256).map(row=>({id:row.id,suppliers:[event.id]}))].map(row=>[row.id,row])).values()];
+        for(const impact of direct){
+          const id=impact.id,use=report.downstream_uses?.[id];
+          if(!frontier.has(id)||!report.downstream?.includes(id)||typeof use!=='string'||use.trim().length<40)continue;
+          requireValue(review?.disposition==='repaired'&&review.post_sha256===receipt.post[event.id]
+            &&receipt.reviews.some(row=>digest(row)===digest(review))
+            &&receipt.restated?.includes(event.id)&&receipt.downstream?.includes(id)
+            &&event.before_statement_sha256===pack.before_statements?.[event.id]
+            &&/^[a-f0-9]{64}$/.test(event.after_statement_sha256??'')
+            &&event.before_statement_sha256!==event.after_statement_sha256,
+            'native interface consumer lacks exact assigned repairing source/event');
+          if(current[event.id]===review.post_sha256)requireValue(event.after_statement_sha256===statementHash(readFileSync(join(root,'items',`${event.id}.md`),'utf8')),
+            'native interface event differs from its exact current source');
+          const auth=success(record);
+          const promptPath=resolve(root,auth.native.prompt??''),expectedPrompt=auth.attemptPath.replace(/\.result\.json$/,'.prompt.md');
+          requireValue(promptPath===expectedPrompt&&existsSync(promptPath),'native interface duty lacks immutable prompt');
+          const prompt=readFileSync(promptPath,'utf8');
+          requireValue(prompt.includes(`run: ${run}\nrole: alpha-repair\nlabel: ${auth.native.label}\n`)
+            &&prompt.includes(report.input_sha256)&&prompt.includes(`output: ${relative(root,reportPath)}\n`),
+            'native interface duty prompt does not bind exact report/pack');
+          for(const path of [packPath(root,run,pack.phase,pack.round),effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pack.phase}-${pack.round}-collected.json`)),promptPath])evidence[path]=digest(readFileSync(path,'utf8'));
+          claims.push({kind:'native-interface-consumer',id,unit,phase:pack.phase,index,supplier:event.id,
+            before_statement_sha256:event.before_statement_sha256,after_statement_sha256:event.after_statement_sha256,
+            supplier_post_sha256:review.post_sha256,supplier_review_context_sha256:review.review_context_sha256,
+            supplier_review_sha256:digest(review),report:reportPath,dispatch:auth.dispatchPath,attempt:auth.attemptPath,affected_use:use});
+        }
+      }
       if(report.downstream_pending===undefined)continue;
       requireValue(Array.isArray(report.downstream_pending)&&Array.isArray(report.downstream)
         &&report.downstream_pending.length<=report.downstream.length
@@ -1749,6 +1784,12 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
   const pending=new Map(),coverage=[],sessions={};
   for(const id of [...new Set(claims.map(row=>row.id))].sort()){
     const latest=Math.max(...claims.filter(row=>row.id===id).map(row=>row.index));
+    requireValue(!claims.some(row=>row.id===id&&row.kind==='native-interface-consumer')||new Set(claims.filter(row=>row.id===id).map(row=>row.unit)).size<=1,
+      'native interface consumer has conflicting genuine repairing owners; resolve without dropping either duty');
+    if(claims.some(row=>row.id===id&&row.kind==='native-interface-consumer')&&!recovery?.targets.has(id)){
+      const identities=claims.filter(row=>row.id===id).map(row=>{const binding=reportingSessionBinding(root,run,packs[0].basePhase??packs[0].phase,packs[0].round,row.unit,row.dispatch);return `${row.unit}:${binding.session_home}:${binding.session_id}`;});
+      requireValue(new Set(identities).size===1,'native interface consumer has conflicting repairing session identities');
+    }
     if(recovery?.targets.has(id)){const row=recoveryDuties.coverage.find(row=>row.id===id);if(row)coverage.push(row);else {pending.set(id,recovery.row.unit);sessions[recovery.row.unit]=recoveryDuties.sessions[recovery.row.unit];}continue;}
     let match=null;
     // A same-wave sibling or later genuine owner review may discharge the
@@ -1784,7 +1825,7 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
       evidence[origin]=digest(readFileSync(origin,'utf8'));
     }
   }
-  return {obligations:claims,pending,coverage,evidence,sessions};
+  return {obligations:claims.filter(row=>row.kind!=='native-interface-consumer'),interface_obligations:claims.filter(row=>row.kind==='native-interface-consumer'),pending,coverage,evidence,sessions};
 }
 
 export function assertImpactProgress(packs,pending,current,{items=null,reviewOwners=null,withdrawal=null}={}) {
@@ -1923,8 +1964,9 @@ export function advanceImpact(root,run,phase,round) {
       pack.reporting_owner_review_obligations=[...reportingDuties.obligations].sort();pack.input_evidence??={};
       for(const [p,h]of Object.entries(reportingDuties.evidence)){requireValue(!pack.input_evidence[p]||pack.input_evidence[p]===h,'reporting recovery evidence collision');pack.input_evidence[p]=h;}
     }
-    if(explicitPending.obligations.length){
-      pack.native_downstream_pending=explicitPending.obligations;
+    if(explicitPending.interface_obligations.length)pack.native_interface_consumer_obligations=explicitPending.interface_obligations;
+    if(explicitPending.obligations.length||explicitPending.interface_obligations.length){
+      if(explicitPending.obligations.length)pack.native_downstream_pending=explicitPending.obligations;
       pack.input_evidence??={};
       for(const [file,hash]of Object.entries(explicitPending.evidence)){
         requireValue(!Object.hasOwn(pack.input_evidence,file)||pack.input_evidence[file]===hash,'conflicting native pending-work origin evidence');
@@ -1952,9 +1994,10 @@ export function advanceImpact(root,run,phase,round) {
   for(const collection of maintenance.collections.filter(row=>maintenanceIds.has(row.pack)))evidence[join(root,collection.path)]=collection.sha256;
   const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,restated:seeds,post:current,evidence,downstream:scope.targets,consumer_maintenance:scope.maintenance,maintenance_packs:[...maintenanceIds],ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
   if(reportingRecovery){receipt.reporting_owner_recovery={path:reportingRecovery.path,targets:[...reportingRecovery.targets]};receipt.reporting_owner_review_obligations=[...reportingDuties.obligations].sort();receipt.reporting_owner_reviews=reportingDuties.coverage;}
-  if(explicitPending.obligations.length){
-    receipt.native_downstream_pending=explicitPending.obligations;
-    receipt.native_downstream_pending_coverage=explicitPending.coverage;
+  if(explicitPending.interface_obligations.length){receipt.native_interface_consumer_obligations=explicitPending.interface_obligations;receipt.native_interface_consumer_coverage=explicitPending.coverage.filter(row=>explicitPending.interface_obligations.some(d=>d.id===row.id));}
+  if(explicitPending.obligations.length||explicitPending.interface_obligations.length){
+    if(explicitPending.obligations.length)receipt.native_downstream_pending=explicitPending.obligations;
+    if(explicitPending.obligations.length)receipt.native_downstream_pending_coverage=explicitPending.coverage.filter(row=>explicitPending.obligations.some(d=>d.id===row.id));
   }
   receipt.operational_carries=operationalIds;
   receipt.operational_resolutions=completed.filter(row=>row.operational_resolution).map(row=>row.operational_resolution);
@@ -2014,8 +2057,10 @@ export function verifyCompletedImpact(root,run,phase,round) {
   if(reportingRecovery){requireValue(digest(result.reporting_owner_review_obligations)===digest([...reportingDuties.obligations].sort())&&digest(result.reporting_owner_reviews)===digest(reportingDuties.coverage),'completed reporting recovery coverage changed');for(const [p,h]of Object.entries(reportingDuties.evidence))requireValue(result.evidence[p]===h,'completed reporting recovery provenance changed');}
   const explicitPending=nativeDownstreamPending(root,run,ownerPacks,passes,items,current,reportingRecovery,reportingDuties);
   requireValue(explicitPending.pending.size===0,`completed owner collection lacks explicit native pending-consumer review: ${[...explicitPending.pending.keys()].join('; ')}`);
+  requireValue(digest(result.native_interface_consumer_obligations??[])===digest(explicitPending.interface_obligations),'completed native interface-consumer ownership changed');
+  if(explicitPending.interface_obligations.length)requireValue(digest(result.native_interface_consumer_coverage)===digest(explicitPending.coverage.filter(row=>explicitPending.interface_obligations.some(d=>d.id===row.id))),'completed native interface-consumer coverage changed');
   if(result.native_downstream_pending!==undefined)requireValue(digest(result.native_downstream_pending)===digest(explicitPending.obligations)
-    &&digest(result.native_downstream_pending_coverage)===digest(explicitPending.coverage),'completed explicit native pending-work coverage changed');
+    &&digest(result.native_downstream_pending_coverage)===digest(explicitPending.coverage.filter(row=>explicitPending.obligations.some(d=>d.id===row.id))),'completed explicit native pending-work coverage changed');
   const ownership=readerReviewOwnership(root,run,ownerPacks,passes,items,current);
   requireValue(ownership.pending.size===0,
     `completed owner collection lacks current same-reviewer obligations: ${[...ownership.pending].map(([id,units])=>`${id}/${units.join(',')}`).join('; ')}`);
