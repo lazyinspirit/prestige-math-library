@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,existsSync,readdirSync,copyFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {createHash} from 'node:crypto';
@@ -328,4 +328,29 @@ for(const mode of ['source','status','receipt','forged-id','missing-record','unl
  if(mode==='unlicensed-published')f.put(`items/${consumer}.md`,f.draft.replace('status: draft','status: published'));
  if(mode==='deletion')rmSync(join(f.root,`items/${id}.md`));
  const r=f.guard();assert.equal(r.status,1,r.stdout+r.stderr);assert.ok(JSON.parse(r.stdout).errors.length>0);
+});
+
+// CLI fixture context hashes are explicitly mocked; no scientific/native review
+// coverage is claimed. Actual ordinary-publication provenance stays real below.
+function ordinaryClosureFixture(t){
+ const f=fixture(t);originalOrdinaryCertificate(f);
+ writeCurrentCompatibilityCertificate(f,[{id:consumer,guard_sha256:itemHashGuard(f.draft),item_sha256:itemHashJudge(f.draft),context_sha256:'c'.repeat(64)}]);
+ f.put(`research/${run}-judge.jsonl`,JSON.parse(readFileSync(join(f.root,dir,'step4-verdicts.json'),'utf8')).map(x=>JSON.stringify(x)).join('\n')+'\n');
+ const tools=join(f.root,'tools');mkdirSync(tools,{recursive:true});
+ for(const name of readdirSync(new URL('.',import.meta.url)))if(name.endsWith('.mjs'))copyFileSync(new URL(name,import.meta.url),join(tools,name));
+ f.put('tools/context-hash-pool.mjs',`import {readFileSync} from 'node:fs';import {join} from 'node:path';import {itemHashJudge} from './item-hash.mjs';export async function buildCurrentContextHashes(ids,{cwd}){return ids.map(id=>({ok:true,id,item:itemHashJudge(readFileSync(join(cwd,'items',id+'.md'),'utf8')),context:'c'.repeat(64)}));}`);
+ const invoke=(selective=true)=>spawnSync(process.execPath,[join(tools,'level-coverage.mjs'),'--judge-only','--verify-current-context','--run',run,...(selective?['--step5-run',run]:[]),'--judge-ledger',`research/${run}-judge.jsonl`,`research/${run}-batch-1.pages.json`,`research/${run}-batch-2.pages.json`,'--json'],{cwd:f.root,encoding:'utf8',maxBuffer:8*1024*1024});
+ return {...f,invoke};
+}
+test('real closure CLI reports authenticated ordinary maintenance separately with zero invented judge rows',t=>{
+ const f=ordinaryClosureFixture(t),r=f.invoke();assert.equal(r.status,0,r.stdout+r.stderr);const out=JSON.parse(r.stdout);
+ assert.equal(out.summary.scope,2);assert.equal(out.summary.judge_scope,1);assert.equal(out.summary.judge_complete,1);assert.equal(out.summary.historical_ordinary_published_exclusions,1);assert.deepEqual(out.historical_ordinary_published_exclusions,[id]);assert.ok(!out.judge_coverage.some(r=>r.id===id));
+});
+for(const mode of ['source','status','receipt','missing-record','no-selective-policy'])test(`real closure CLI rejects ordinary-maintenance ${mode} misuse`,t=>{
+ const f=ordinaryClosureFixture(t);
+ if(mode==='source')f.put(`items/${id}.md`,f.after+'\nLater source change.\n');
+ if(mode==='status')f.put(`items/${id}.md`,f.after.replace('status: published','status: draft'));
+ if(mode==='receipt')f.put(f.currentPath,{...f.successor,changed:'unlicensed receipt'});
+ if(mode==='missing-record'){const p=join(dir,'certification.json'),c=JSON.parse(readFileSync(join(f.root,p),'utf8'));delete c.ordinary_published_baseline_exclusions;delete c.sha256;c.sha256=hash(c);f.put(p,c);}
+ const r=f.invoke(mode!=='no-selective-policy');assert.notEqual(r.status,0);const out=JSON.parse(r.stdout);assert.ok(!out.historical_ordinary_published_exclusions?.includes(id));assert.ok(out.errors.some(e=>['judge-coverage-missing','step5-certification-invalid','step5-judge-policy-invalid'].includes(e.code)));
 });

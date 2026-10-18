@@ -27,6 +27,7 @@ import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { itemHashJudge } from './item-hash.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { loadStep5ClosureCertification, currentStep5Certification } from './step5-certification-consumer.mjs';
+import { verifyInitialPublishedBaselineExclusions } from './step5-initial-published-maintenance.mjs';
 import { step5JudgePolicy } from './step5-judge-policy.mjs';
 import { adjudicationTypeResolver } from './step5-adjudication-compat.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
@@ -517,7 +518,18 @@ const terminalEscalated = [];
 let step5Certificate = null;
 try { step5Certificate = loadStep5ClosureCertification(REPO, option('--run'), judgePath ?? ''); }
 catch (cause) { error('step5-certification-invalid', cause.message); }
+const ordinaryPublishedExclusions = new Set();
+if (selectiveJudgePolicy && step5Certificate) {
+  try {
+    verifyInitialPublishedBaselineExclusions(REPO, selectiveStep5Run, step5Certificate, { current: true });
+    for (const row of step5Certificate.ordinary_published_baseline_exclusions?.entries ?? [])
+      if (judgeScope.includes(row.id)) ordinaryPublishedExclusions.add(row.id);
+  } catch (cause) { error('step5-certification-invalid', cause.message); }
+}
 for (const id of judgePath ? judgeScope : []) {
+  // Only the authenticated original ordinary-maintenance baseline difference
+  // has no new judgment obligation. This creates no verdict or review row.
+  if (ordinaryPublishedExclusions.has(id)) continue;
   const itemText = readFileSync(join(REPO, 'items', `${id}.md`), 'utf8');
   const requiredJudges = selectiveJudgePolicy?.requiredModels(id, itemText) ?? JUDGES;
   if (selectiveStep5Run && !selectiveJudgePolicy) continue;
@@ -649,9 +661,9 @@ for (const id of judgePath ? judgeScope : []) {
   judgeCoverage.push({ id, context_sha256: hash, models });
 }
 
-const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_scope: judgeScope.length, judge_complete: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
+const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_scope: judgeScope.length - ordinaryPublishedExclusions.size, historical_ordinary_published_exclusions: ordinaryPublishedExclusions.size, judge_complete: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
 const result = { summary, manifest_sha256: manifestSha256, manifest, judge_coverage: judgeCoverage,
-  auditor_certified: [...auditorCertified.keys()].sort(), judge_adjudications: judgeAdjudicationsPath ?? null, errors, warnings };
+  historical_ordinary_published_exclusions: [...ordinaryPublishedExclusions].sort(), auditor_certified: [...auditorCertified.keys()].sort(), judge_adjudications: judgeAdjudicationsPath ?? null, errors, warnings };
 
 // The closure receipt. Written whether or not the gate passes — a failing gate
 // is exactly when the ids it names need to become someone's work.
@@ -662,6 +674,8 @@ if (outPath) {
     judge_lineup: lineupName,
     verified_against_current_context: verifyCurrent,
     scope: judgeScope.length,
+    judgment_obligations: judgeScope.length - ordinaryPublishedExclusions.size,
+    historical_ordinary_published_exclusions: [...ordinaryPublishedExclusions].sort(),
     verdicts_complete: judgeCoverage.length,
     // Legacy field retained while historical Step-6 receipts remain readable.
     pairs_complete: judgeCoverage.length,

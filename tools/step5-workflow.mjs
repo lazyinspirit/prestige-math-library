@@ -15,6 +15,7 @@ import { MODELS } from './models.mjs';
 import { loadOwnerReviewWithdrawal, withdrawnOwnerReport, withdrawalAllowsFreshPass, freshWithdrawalEvidence } from './step5-owner-review-withdrawal.mjs';
 import { loadReportingOwnerRecovery, reportingRecoveryDuties, reportingSessionBinding, assertReportingSessionCompatibility } from './step5-reporting-owner-recovery.mjs';
 import { supportingQuoteHistory } from './step5-quote-history.mjs';
+import { stageCertifiedContractAggregation, validateCertifiedContractAggregation, completeCertifiedContractAggregation } from './step5-certified-contract-aggregation.mjs';
 import { loadGateAggregationHistory, gateAggregationEvidenceReference } from './step5-gate-aggregation-history.mjs';
 import { supportingSiblingContractHistory } from './step5-sibling-contract-history.mjs';
 import { loadInitialMetadataHistory, loadRepeatMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
@@ -2212,6 +2213,7 @@ export function verifyCertification(root,run,{allowMissing=true}={}) {
       &&typeof entry.reason==='string'&&entry.reason.trim().length>=40,'malformed created-helper maintenance basis');
     maintenanceSeen.add(entry.id);
   }
+  if(row.contract_aggregation)validateCertifiedContractAggregation(root,run,row,{current:false,installed:true});
   verifyEvidence(row.evidence,{root,run,certificate:row});
   verifyInitialPublishedBaselineExclusions(root,run,row);
   return row;
@@ -2220,7 +2222,9 @@ export function verifyCertification(root,run,{allowMissing=true}={}) {
 export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={}) {
   const savedPath=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`certification-${phase}-${round}.json`));
   if(existsSync(savedPath)) {
-    const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence,{root,run});
+    const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');
+    const staged=saved.contract_aggregation?validateCertifiedContractAggregation(root,run,saved):null;
+    verifyEvidence(staged?.evidence??saved.evidence,{root,run});
     verifyInitialPublishedBaselineExclusions(root,run,saved,{current:true});
     const frontier=gateFrontier(root,run),maintained=new Set((saved.maintenance_certifications??[]).map(row=>row.id));
     const scoped=saved.items.filter(row=>frontier.has(row.id)||maintained.has(row.id));
@@ -2228,6 +2232,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
     const contexts=contextHasher(root,scoped.map(row=>row.id));
     for(const row of scoped){const now=contexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`stale completed certification context ${row.id}`);}
     verifyCompletedImpact(root,run,phase,round);
+    if(staged){completeCertifiedContractAggregation(root,run,saved,{verifyOtherEvidence:evidence=>verifyEvidence(evidence,{root,run})});verifyEvidence(saved.evidence,{root,run});}
     atomic(join(workflowDir(root,run),'certification.json'),saved);return saved;
   }
   const advanced=advanceImpact(root,run,phase,round);
@@ -2279,8 +2284,9 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   }
   if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
   const aggregation=phase==='gate'?loadGateAggregationHistory(root,run):null;
-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence,...aggregation?.evidence};
-  if(aggregation)evidence[resolve(root,aggregation.cache)]=digest(readFileSync(resolve(root,aggregation.cache),'utf8'));
+  const stagedAggregation=aggregation&&round>=2?stageCertifiedContractAggregation(root,run,round,prior):null;
+  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence,...aggregation?.evidence,...stagedAggregation?.evidence};
+  if(aggregation)evidence[resolve(root,aggregation.cache)]=stagedAggregation?.record.after.sha256??digest(readFileSync(resolve(root,aggregation.cache),'utf8'));
   // Retain the original relative pin as historical evidence; the new exact
   // current cache pin and immutable transition are separately bound above.
   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
@@ -2301,10 +2307,15 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
     frozen(join(dir,`threshold-${round}.json`),threshold);
     const p=join(dir,`threshold-${round}.json`);evidence[p]=digest(readFileSync(p,'utf8'));
   }
+  if(stagedAggregation)certificate.contract_aggregation=stagedAggregation.record;
   if(publishedBaseline)certificate.ordinary_published_baseline_exclusions=publishedBaseline.record;
   verifyInitialPublishedBaselineExclusions(root,run,certificate,{current:true});
   certificate.sha256=digest(certificate);
+  // The frozen candidate is a write-ahead intent. A failed derivative write
+  // leaves the live old certificate untouched and has a strict saved retry.
+  if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped aggregation staging');
   frozen(join(dir,`certification-${phase}-${round}.json`),certificate);
+  if(stagedAggregation){completeCertifiedContractAggregation(root,run,certificate,{verifyOtherEvidence:evidence=>verifyEvidence(evidence,{root,run})});verifyEvidence(certificate.evidence,{root,run});}
   atomic(join(dir,'certification.json'),certificate);
   return certificate;
 }

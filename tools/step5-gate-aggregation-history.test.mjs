@@ -5,9 +5,9 @@ import {join,dirname,relative} from 'node:path';
 import {tmpdir} from 'node:os';
 import {createHash} from 'node:crypto';
 import {freezeFrontier} from './step5-rounds.mjs';
-import {prepareGateRepairPack,verifyCompletedImpact,verifyCertification,reviewContextHashes,collect,workerLabel} from './step5-workflow.mjs';
-import {itemHashGuard} from './item-hash.mjs';
-import {validateGateAggregationHistory,recordGateAggregationHistory,gateAggregationEvidenceReference} from './step5-gate-aggregation-history.mjs';
+import {prepareGateRepairPack,verifyCompletedImpact,verifyCertification,reviewContextHashes,collect,workerLabel,advanceImpact,certify} from './step5-workflow.mjs';
+import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
+import {validateGateAggregationHistory,recordGateAggregationHistory,gateAggregationEvidenceReference,loadGateAggregationHistory} from './step5-gate-aggregation-history.mjs';
 const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
 const run='test-gate-aggregation';
 function fixture(){
@@ -110,4 +110,36 @@ test('actual native collection cannot adopt unavailable old cache as worker supp
  recordGateAggregationHistory(f.root,run,f.payload);const pack=prepareGateRepairPack(f.root,run,'gate',1,[{id:'proof-contract',code:1,output:'ERROR citation-use-unmapped [lem-supplier]: current citation metadata finding'}]);const contexts=reviewContextHashes(f.root,f.ids);
  for(const unit of pack.units){const label=workerLabel('gate',1,unit);f.put(`research/${run}-step5-v2/${label}.json`,{run,phase:'gate',round:1,unit,input_sha256:hash(pack),decisions:[],reviews:pack.assignments[unit].map(id=>({id,disposition:'unaffected',...contexts[id],reason:'Actual detailed native source and consumer review of the current proof and interfaces.',uncertain:false,source_urls:[],familiar:true})),created_items:[],downstream:[],ledger_updates:[],gate_resolutions:(pack.gateAssignments[unit]??[]).map(d=>({index:d.index,reason:'The actual assigned current contract diagnostic is resolved in this focused fixture without waiving any gate.',uncertain:false,source_urls:[],familiar:true})),supporting_evidence:unit==='1'?{[f.cache]:f.oldHash}:{}});f.put(`research/${run}-dispatch/alpha-repair-${label}.result.json`,{run,role:'alpha-repair',label,covers:[unit],ok:true,model:'gpt-6.1-sol',provider_effort:'high'});}
  assert.throws(()=>collect(f.root,run,'gate',1),/supporting metadata preimage unavailable/);
+ }finally{process.chdir(cwd);f.cleanup();}});
+
+function nativeGate2Fixture(){
+ const f=fixture(),prefix=`research/${run}-step5-v2/`,text=id=>readFileSync(join(f.root,`items/${id}.md`),'utf8');
+ recordGateAggregationHistory(f.root,run,f.payload);
+ const current=Object.fromEntries(f.ids.map(id=>[id,itemHashGuard(text(id))]));
+ f.put(prefix+'baseline.json',current);f.put(prefix+'step4-verdicts.json',[]);
+ const contextHasher=(_root,ids)=>new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(text(id)),context_sha256:'c'.repeat(64)}]));
+ const evidence={...loadGateAggregationHistory(f.root,run).evidence,[f.cache]:f.oldHash,[join(f.root,f.cache)]:hash(readFileSync(join(f.root,f.cache),'utf8'))};
+ for(const name of ['baseline.json','step4-verdicts.json'])evidence[join(f.root,prefix+name)]=hash(readFileSync(join(f.root,prefix+name),'utf8'));
+ const prior={version:2,run,phase:'gate',round:1,items:f.ids.map(id=>({id,guard_sha256:current[id],...contextHasher(f.root,[id]).get(id)})),changed:[],creations:[],evidence};prior.sha256=hash(prior);f.put(prefix+'certification-gate-1.json',prior);f.put(prefix+'certification.json',prior);
+ const cacheBefore=readFileSync(join(f.root,f.cache),'utf8'),carrier=`research/${run}-batch-1.proof-contracts.json`,contract=JSON.parse(readFileSync(join(f.root,carrier),'utf8'));contract.contracts[f.ids[0]].boundaries[0].reason='An actual native metadata-only successor with current focused source justification.';f.put(carrier,contract);
+ const pack=prepareGateRepairPack(f.root,run,'gate',2,[{id:'proof-contract',code:1,output:'ERROR citation-use-unmapped [lem-supplier]: current citation metadata finding'}]);const contexts=reviewContextHashes(f.root,f.ids);
+ for(const unit of pack.units){const label=workerLabel('gate',2,unit);f.put(prefix+label+'.json',{run,phase:'gate',round:2,unit,input_sha256:hash(pack),decisions:[],reviews:pack.assignments[unit].map(id=>({id,disposition:'unaffected',...contexts[id],reason:'Actual detailed fixture native source and consumer review of the current proof and interfaces.',uncertain:false,source_urls:[],familiar:true})),created_items:[],downstream:[],ledger_updates:[],gate_resolutions:(pack.gateAssignments[unit]??[]).map(d=>({index:d.index,reason:'The actual assigned current metadata diagnostic is resolved without waiving any gate.',uncertain:false,source_urls:[],familiar:true})),supporting_evidence:{}});f.put(`research/${run}-dispatch/alpha-repair-${label}.result.json`,{run,role:'alpha-repair',label,covers:[unit],ok:true,model:'gpt-6.1-sol',provider_effort:'high'});}
+ assert.equal(advanceImpact(f.root,run,'gate',2).complete,true);
+ return {...f,prefix,prior,cacheBefore,contextHasher};
+}
+test('real native certify stages current aggregation; saved retry safely completes a crash before cache/live-pointer writes',()=>{const cwd=process.cwd(),f=nativeGate2Fixture();process.chdir(f.root);try{
+ const c=certify(f.root,run,'gate',2,{contextHasher:f.contextHasher});assert.equal(c.contract_aggregation.inputs.length,81);const after=readFileSync(join(f.root,f.cache),'utf8');assert.notEqual(after,f.cacheBefore);assert.equal(hash(after),c.evidence[join(f.root,f.cache)]);assert.equal(c.evidence[f.cache],f.oldHash);
+ // Simulate process termination after freezing this exact native certificate
+ // intent but before its two final writes. These are fixture files only.
+ f.put(f.cache,f.cacheBefore);f.put(f.prefix+'certification.json',f.prior);
+ const retry=certify(f.root,run,'gate',2,{contextHasher:f.contextHasher});assert.equal(retry.sha256,c.sha256);assert.equal(readFileSync(join(f.root,f.cache),'utf8'),after);assert.equal(verifyCertification(f.root,run).sha256,c.sha256);
+ }finally{process.chdir(cwd);f.cleanup();}});
+for(const mode of ['source','context','closure','cache','metadata'])test(`real saved native certify refuses ${mode} drift before completing staged cache`,()=>{const cwd=process.cwd(),f=nativeGate2Fixture();process.chdir(f.root);try{
+ certify(f.root,run,'gate',2,{contextHasher:f.contextHasher});f.put(f.cache,f.cacheBefore);f.put(f.prefix+'certification.json',f.prior);
+ if(mode==='source')f.put(`items/${f.ids[0]}.md`,readFileSync(join(f.root,`items/${f.ids[0]}.md`),'utf8')+'Later actual source edit.\n');
+ if(mode==='closure'){const p=f.prefix+'gate-2-progress.json',d=JSON.parse(readFileSync(join(f.root,p),'utf8'));d.complete=false;f.put(p,d);}
+ if(mode==='cache')f.put(f.cache,'arbitrary cache edit');
+ if(mode==='metadata')f.put(`research/${run}-batch-1.proof-contracts.json`,'{}');
+ const before=readFileSync(join(f.root,f.cache),'utf8');const contextHasher=mode==='context'?(_r,ids)=>new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(f.root,`items/${id}.md`),'utf8')),context_sha256:'f'.repeat(64)}])):f.contextHasher;
+ assert.throws(()=>certify(f.root,run,'gate',2,{contextHasher}));assert.equal(readFileSync(join(f.root,f.cache),'utf8'),before,'refusal must not write cache');
  }finally{process.chdir(cwd);f.cleanup();}});
