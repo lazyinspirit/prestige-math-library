@@ -65,3 +65,80 @@ Only explicit request IDs are unioned into the ordinary ordered/disjoint repair 
 The first genuine Step5.2 owner lane for each admitted item is also recorded in the existing combined `reader_concern_owners` map. The origin loop sees the separate finding array as well as reader concerns; it preserves authentic first-owner session origins and subsequent same-reviewer consumer obligations. `readerConcernSession` already uses this combined map; it needs no change. No Step4 reader concern or original reader evidence is fabricated.
 
 After the first impact pack freezes, ordinary pack reuse checks the registry's exact raw binding and rejects addition, deletion, mutation or symlink substitution. Current repair collections also verify its frozen input evidence through the existing machinery. No later registry expansion is allowed. Existing source currency, propagation, worker execution, consumer maintenance, certification, rejudgment, fatal threshold and final gate requirements remain in force. Root must install/reload only at a paused/drained5.1 boundary, independently review code and bind the actual inputs, then use the ordinary native workflow.
+
+## Opt-in version 2: structured initial outside-lane alerts
+
+Version 1 and its exact open-finding/default guards are unchanged. Version 2
+may retain those entries and additionally admit an entry with
+`origin_kind: "native-outside-lane-alert"`. This branch supplies work only; it
+never turns a native alert into a canonical open finding, severity, adjudication
+decision, acceptance or native full-reading observation.
+
+Replace the open-finding fields for this typed entry with `outside_alert_index`,
+`alert`, `output_alert_index`, and `output_alert`. They preserve the two exact
+objects at `repair_notes.outside_lane_alerts[INDEX]` in the original saved report
+and authenticated successful immutable execution's final structured message.
+The saved object has exactly `id`, `path`, `route`, `affected_use`, and `reason`.
+The final object has those fields, optionally omitting `path`; a present path
+must match. Both routes must literally be `frontier owner`, both IDs must name
+the requested original draft item, and the full path must be `items/ID.md`.
+Both affected-use and reason texts must contain at least 40 trimmed characters.
+No string-alert conversion, arbitrary routes, guessed output, absent report,
+or canonical-finding fields are allowed.
+
+The item must be absent from every original initial assignment and remain at
+its exact original baseline/initial/current mathematical guard. Original and
+current unique manifest ownership and the exact original Luna `keep:true` verdict
+remain mandatory; it is never rewritten as a reject. Root supplies
+`owner_review.outside_alert_correspondence` with `confirmed_same_alert:true`,
+literal `report_excerpt` and `output_excerpt` (at least 20 characters each in
+the respective affected-use/reason fields), and an individual explanation of
+at least 80 trimmed characters. Short native final summaries are retained
+verbatim rather than inflated to equal the saved report.
+
+This branch deliberately does not claim native full-source reading. Its
+`source_read` has `mode:"owner-current-source-confirmation"`,
+`native_full_read_adopted:false`, a bound `before_file` containing the complete
+exact current raw source, its `before_raw_sha256`, and a literal
+`source_excerpt` of at least 20 characters present in that source. Root's actual
+individual full-source confirmation adds `full_current_source_read:true` and
+`source_raw_sha256` to `owner_review`, alongside the existing dated root
+confirmation, bound evidence and reason. Native-log record/span fields are
+not accepted in this branch. Root supplies nonempty exact `proposed_edits`;
+a candidate patch alone does not suffice. The source is still unchanged at
+registry admission. No repair or mathematical acceptance is preapplied.
+
+All versions retain every original native handoff, frozen frontier, baseline,
+verdict and current manifest binding; exact Sol6.1/high immutable result, prompt
+and final-output authentication; paused/drained 5.1 recorder-created archives;
+first-impact-freeze and dispatch exclusion; actual initial collection binding;
+and frozen-registry currency. Normal native 5.2 current review/repair, owner
+session origins, consumer propagation, certification, Sol judgment and gates
+remain due. The typed entry travels in the same separate
+`initial_scope_findings` work array, never as a fabricated Step4 reader concern
+or a rewritten initial decision.
+
+Version 2 additionally recognizes only the observed unclassified open-finding
+shape with `origin_kind:"native-open-finding"`. Keep `open_finding_index`,
+`finding`, `output_finding_index` and `output_finding`, each preserving the exact
+indexed original report/output object. The saved object has exactly `ledger`,
+`action`, `id`, `route`, `locus`, `finding`, `minimality`, `uncertain`,
+`source_urls` and `familiar`; the output may omit only `locus`. Require
+`canonical-defect-ledger`, `record-open-finding`, `frontier-owner`, matching ID,
+`items/ID.md#Definition` locus, `uncertain:false`, `familiar:true` and empty
+`source_urls`. Finding/minimality texts are at least 40 trimmed characters.
+Native severity and reason are absent and must not be synthesized.
+
+The individual root review instead supplies `open_finding_correspondence`
+with `confirmed_same_finding:true`, exact report/output excerpts and an
+explanation under the same literal/length guards as the alert witness. Its
+separate `classification` has `severity:"fatal"` or `"nonfatal"`,
+`defect_type:"logic"` and an actual root reason of at least 40 trimmed
+characters. This classification is a current root work request, never a
+rewritten native finding or adjudication decision.
+
+Both typed branches are limited to unassigned unchanged original-frontier draft
+definitions with the original Luna keep verdict. Both require exact full
+current-source snapshots, root full-source confirmation and literal edits as
+above. A version-2 entry without `origin_kind` retains only the unchanged
+version-1 native open-finding branch; other type values are rejected.

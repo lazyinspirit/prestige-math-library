@@ -19,7 +19,7 @@ export function checkFrozenInitialScopeFindingInput(root,run,pack) {
 function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
   const dir=join(root,'research',`${run}-step5-v2`),dispatchDir=join(root,'research',`${run}-dispatch`);
   need(!existsSync(join(dir,'impact-initial-1.json'))&&!readdirSync(dispatchDir).some(x=>/^alpha-repair-step5-v2-impact-initial(?:-pass-\d+)?-r1-u/.test(x)), 'first impact pack or execution already exists');
-  need(row.version===1&&row.kind==='owner-confirmed-native-initial-scope-findings'&&row.run===run
+  need([1,2].includes(row.version)&&row.kind==='owner-confirmed-native-initial-scope-findings'&&row.run===run
     &&row.authorized_by==='owner'&&row.owner_identity==='/root'&&row.native_coverage_adopted===false
     &&date(row.recorded_at)&&row.bindings&&typeof row.bindings==='object'&&!Array.isArray(row.bindings), 'invalid explicit owner envelope');
   const evidence={};
@@ -95,10 +95,68 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
   const seen=new Set();
   for(const entry of row.entries){
     const {id,batch,unit,open_finding_index:index,owner_review:review}=entry,origin=origins.get(unit),finding=origin?.report.ledger_updates?.[index];
+    const outside=row.version===2&&entry.origin_kind==='native-outside-lane-alert';
+    const unclassified=row.version===2&&entry.origin_kind==='native-open-finding';
+    const ownerSource=outside||unclassified;
+    if(row.version===2)need(entry.origin_kind===undefined||['native-open-finding','native-outside-lane-alert'].includes(entry.origin_kind),'unknown typed native origin');
     need(/^[a-z0-9-]+$/.test(id)&&!seen.has(id)&&frontier.ids.includes(id)
       &&frontier.batches.filter(b=>b.items.includes(id)).length===1&&frontier.batches.find(b=>b.id===batch)?.items.includes(id), 'outside/duplicate/wrong original owner');seen.add(id);
     const owners=manifests.flatMap(([name,pages])=>{need(Array.isArray(pages),'bad manifest');return pages.flatMap(p=>(p.items??[]).filter(v=>v.id===id).map(()=>name));});
     need(same(owners,[`${run}-batch-${batch}.pages.json`]),'current manifest owner is not unique');
+    if(outside){
+      const ai=entry.outside_alert_index, oi=entry.output_alert_index;
+      const alert=origin?.report.repair_notes?.outside_lane_alerts?.[ai];
+      const summary=origin?.output.repair_notes?.outside_lane_alerts?.[oi];
+      const textField=x=>typeof x==='string'&&x.trim().length>=40;
+      const keys=(value,wanted)=>value&&typeof value==='object'&&!Array.isArray(value)
+        &&same(Object.keys(value).sort(),wanted.sort());
+      need(origin&&Number.isSafeInteger(ai)&&ai>=0&&Number.isSafeInteger(oi)&&oi>=0
+        &&same(alert,entry.alert)&&same(summary,entry.output_alert)
+        &&keys(alert,['id','path','route','affected_use','reason'])
+        &&(keys(summary,['id','route','affected_use','reason'])||keys(summary,['id','path','route','affected_use','reason']))
+        &&alert.id===id&&alert.path===`items/${id}.md`&&alert.route==='frontier owner'
+        &&summary.id===id&&(!Object.hasOwn(summary,'path')||summary.path===alert.path)
+        &&summary.route===alert.route&&entry.route==='frontier-owner'
+        &&[alert.affected_use,alert.reason,summary.affected_use,summary.reason].every(textField)
+        &&!Object.hasOwn(entry,'finding')&&!Object.hasOwn(entry,'output_finding')
+        &&!Object.hasOwn(entry,'open_finding_index')&&!Object.hasOwn(entry,'output_finding_index'),
+        'not the exact structured original frontier-owner outside alert');
+      const witness=review?.outside_alert_correspondence;
+      need(witness?.confirmed_same_alert===true&&typeof witness.reason==='string'&&witness.reason.trim().length>=80
+        &&typeof witness.report_excerpt==='string'&&witness.report_excerpt.length>=20
+        &&[alert.affected_use,alert.reason].some(value=>value.includes(witness.report_excerpt))
+        &&typeof witness.output_excerpt==='string'&&witness.output_excerpt.length>=20
+        &&[summary.affected_use,summary.reason].some(value=>value.includes(witness.output_excerpt)),
+        'missing individual exact outside-alert correspondence');
+    }else if(unclassified){
+      const summary=origin?.output.ledger_updates?.[entry.output_finding_index];
+      const keys=(value,wanted)=>value&&typeof value==='object'&&!Array.isArray(value)
+        &&same(Object.keys(value).sort(),wanted.sort());
+      const fields=['ledger','action','id','route','locus','finding','minimality','uncertain','source_urls','familiar'];
+      need(origin&&Number.isSafeInteger(index)&&index>=0&&Number.isSafeInteger(entry.output_finding_index)&&entry.output_finding_index>=0
+        &&same(finding,entry.finding)&&same(summary,entry.output_finding)&&keys(finding,fields)
+        &&(keys(summary,fields)||keys(summary,fields.filter(key=>key!=='locus')))
+        &&finding.ledger==='canonical-defect-ledger'&&finding.action==='record-open-finding'&&finding.id===id
+        &&finding.route==='frontier-owner'&&finding.locus===`items/${id}.md#Definition`
+        &&summary.ledger===finding.ledger&&summary.action===finding.action&&summary.id===id&&summary.route===finding.route
+        &&(!Object.hasOwn(summary,'locus')||summary.locus===finding.locus)
+        &&finding.uncertain===false&&summary.uncertain===false&&finding.familiar===true&&summary.familiar===true
+        &&same(finding.source_urls,[])&&same(summary.source_urls,[])&&entry.route==='frontier-owner'
+        &&[finding.finding,finding.minimality,summary.finding,summary.minimality]
+          .every(text=>typeof text==='string'&&text.trim().length>=40)
+        &&!Object.hasOwn(entry,'alert')&&!Object.hasOwn(entry,'output_alert')
+        &&!Object.hasOwn(entry,'outside_alert_index')&&!Object.hasOwn(entry,'output_alert_index'),
+        'not the exact unclassified original frontier-owner open finding');
+      const witness=review?.open_finding_correspondence,classification=review?.classification;
+      need(witness?.confirmed_same_finding===true&&typeof witness.reason==='string'&&witness.reason.trim().length>=80
+        &&typeof witness.report_excerpt==='string'&&witness.report_excerpt.length>=20
+        &&[finding.finding,finding.minimality].some(text=>text.includes(witness.report_excerpt))
+        &&typeof witness.output_excerpt==='string'&&witness.output_excerpt.length>=20
+        &&[summary.finding,summary.minimality].some(text=>text.includes(witness.output_excerpt))
+        &&['fatal','nonfatal'].includes(classification?.severity)&&classification.defect_type==='logic'
+        &&typeof classification.reason==='string'&&classification.reason.trim().length>=40,
+        'missing separate root correspondence and classification of unclassified finding');
+    }else{
     need(origin&&Number.isSafeInteger(index)&&index>=0&&same(finding,entry.finding)
       &&finding.ledger==='canonical-defect-ledger'&&finding.action==='record-open-finding'&&finding.id===id
       &&['fatal','nonfatal'].includes(finding.severity)&&finding.uncertain===false
@@ -111,21 +169,42 @@ function validate(root,run,row,{requireCollection=true,virtual=new Map()}={}) {
       &&summary.id===id&&summary.ledger===finding.ledger&&summary.action===finding.action&&summary.uncertain===false
       &&(summary.route===finding.route||(finding.route==='Owner / owning frontier lane; item outside this assignment.'
         &&summary.route==='Owner / owning frontier lane; outside this assignment.')), 'original final output does not identify this separate native finding');
+    }
+    if(ownerSource){
+      need(Object.values(initial.assignments??{}).every(rows=>Array.isArray(rows)
+        &&rows.every(row=>(typeof row==='string'?row:row.id)!==id)), 'outside alert item was assigned in original initial work');
+      const originalVerdicts=verdicts.filter(row=>row.id===id);
+      need(originalVerdicts.length===1&&originalVerdicts[0].model===MODELS.luna.id&&originalVerdicts[0].keep===true,
+        'outside alert requires its unchanged original Luna keep verdict, not a fabricated reject');
+    }
     const source=join(root,'items',`${id}.md`);need(lstatSync(source).isFile()&&!lstatSync(source).isSymbolicLink(),'nonregular source');
     const text=readFileSync(source,'utf8');
     need(/^status:\s*draft\s*$/m.test(text)&&text.match(/^id:\s*(\S+)\s*$/m)?.[1]===id
       &&typeof baseline[id]==='string'&&initial.before[id]===baseline[id]&&itemHashGuard(text)===entry.current_guard_sha256, 'not a current draft original frontier carrier');
+    if(ownerSource){
+      const observation=entry.source_read;
+      need(/^kind:\s*definition\s*$/m.test(text)&&itemHashGuard(text)===baseline[id]&&observation?.mode==='owner-current-source-confirmation'
+        &&observation.native_full_read_adopted===false
+        &&!Object.hasOwn(observation,'native_log_record')&&!Object.hasOwn(observation,'native_log_span')
+        &&typeof observation.before_file==='string'&&boundText(observation.before_file)===text
+        &&observation.before_raw_sha256===hash(text)
+        &&typeof observation.source_excerpt==='string'&&observation.source_excerpt.length>=20
+        &&text.includes(observation.source_excerpt)
+        &&review?.full_current_source_read===true&&review.source_raw_sha256===hash(text),
+        'outside alert requires unchanged original guard and exact owner-read current source snapshot, not native full-reading coverage');
+    }else{
     const observation=entry.source_read,record=observation?.native_log_record,match=typeof record==='string'?/\n succeeded in \d+ms:\n/.exec(record):null;
     need(match&&record.startsWith('exec\n')&&record.slice(0,match.index).includes(`items/${id}.md`)
       &&origin.log.includes(record)&&typeof observation.source_excerpt==='string'&&observation.source_excerpt.length>=20
       &&record.slice(match.index+match[0].length).includes(observation.source_excerpt)&&text.includes(observation.source_excerpt), 'missing actual successful native source-read observation/current continuity');
+    }
     need(review?.reviewed_by==='root'&&review.confirmed_defect===true&&date(review.reviewed_at)
       &&Date.parse(review.reviewed_at)>=Date.parse(origin.result.ended_at)&&Date.parse(review.reviewed_at)<=Date.parse(row.recorded_at)
       &&typeof review.reason==='string'&&review.reason.trim().length>=40&&boundText(review.evidence_file).trim().length>=80, 'missing individual dated root confirmation');
     const edits=review.proposed_edits??[];need(Array.isArray(edits)&&edits.length<=1000,'invalid literal edits');
     for(const edit of edits)need(typeof edit.source_excerpt==='string'&&edit.source_excerpt.length>0&&text.split(edit.source_excerpt).length===2
       &&typeof edit.proposed_replacement==='string'&&edit.proposed_replacement!==edit.source_excerpt,'stale or ambiguous exact proposed edit');
-    need(edits.length>0||(review.candidate_patch_file&&boundText(review.candidate_patch_file).trim().length>=40),'exact literal edit or bound patch required');
+    need(edits.length>0||(!ownerSource&&review.candidate_patch_file&&boundText(review.candidate_patch_file).trim().length>=40),'exact literal edit or bound patch required');
   }
   return {entries:row.entries,evidence};
 }
