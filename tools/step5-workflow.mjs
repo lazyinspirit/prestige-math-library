@@ -15,6 +15,7 @@ import { MODELS } from './models.mjs';
 import { loadOwnerReviewWithdrawal, withdrawnOwnerReport, withdrawalAllowsFreshPass, freshWithdrawalEvidence } from './step5-owner-review-withdrawal.mjs';
 import { loadReportingOwnerRecovery, reportingRecoveryDuties, reportingSessionBinding, assertReportingSessionCompatibility } from './step5-reporting-owner-recovery.mjs';
 import { supportingQuoteHistory } from './step5-quote-history.mjs';
+import { loadGateAggregationHistory, gateAggregationEvidenceReference } from './step5-gate-aggregation-history.mjs';
 import { supportingSiblingContractHistory } from './step5-sibling-contract-history.mjs';
 import { loadInitialMetadataHistory, loadRepeatMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
 import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
@@ -301,7 +302,7 @@ function supportingMetadataHistory(history,path,expected) {
 }
 const verifyEvidence=(evidence,history=null)=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(
   existsSync(p)&&(digest(readFileSync(p,'utf8'))===hash
-    ||history&&(supportingMetadataHistory(history,p,hash)
+    ||history&&(gateAggregationEvidenceReference(history,p,hash)||supportingMetadataHistory(history,p,hash)
       ||repairedRun44LedgerHistory(history,p,hash)
       ||restoredLedgerHistory(history.root,history.run,history.certificate??{},p,hash)
       ||restoredRenderedLedgerHistory(history.root,history.run,history.certificate??{},p,hash))),
@@ -310,6 +311,8 @@ function frozenSupportingEvidence(root,run,supporting) {
   verifyEvidence(supporting,{root,run});
   const evidence={};
   for(const [path,hash]of Object.entries(supporting)){
+    requireValue(digest(readFileSync(path,'utf8'))===hash||!gateAggregationEvidenceReference({root,run},path,hash),
+      `supporting metadata preimage unavailable: ${path}`);
     // Keep ordinary immutable evidence at its original path. Only batch
     // metadata and shared ledgers need durable historical carriers.
     if(!new RegExp(`^${run}-batch-\\d+\\.(?:pages|proof-contracts)\\.json$`).test(basename(path))
@@ -2047,6 +2050,18 @@ export function verifyCompletedImpact(root,run,phase,round) {
   requireValue((result.operational_carries??[]).every(id=>authorizedOperational.has(id)),'unbound operational carry');
   const operationalIds=(result.operational_carries??[]).filter(id=>!scope.targets.includes(id)&&!result.changed.includes(id));
   if(operationalIds.length){verifyOperationalCoverage(root,run,operationalIds,current);for(const id of operationalIds)required.delete(id);}
+  const aggregation=phase==='gate'?loadGateAggregationHistory(root,run):null;
+  for(const id of aggregation?.targets??[]){
+    required.add(id);
+    const native=passes.some(receipt=>readPack(root,run,receipt.phase,receipt.round).units.some(unit=>{
+      const p=workerReport(root,run,receipt.phase,receipt.round,unit);
+      if(!existsSync(p)||receipt.evidence?.[p]!==digest(readFileSync(p,'utf8')))return false;
+      return (read(p).reviews??[]).some(row=>row.id===id&&row.reviewed_by!=='root'&&row.uncertain===false
+        &&row.post_sha256===current[id]&&result.reviews.some(actual=>actual.id===id&&actual.reviewed_by!=='root'
+          &&actual.post_sha256===row.post_sha256&&actual.review_context_sha256===row.review_context_sha256));
+    }));
+    requireValue(native,`missing fresh native gate-source review: ${id}`);
+  }
   const contexts=reviewContexts(items);
   for(const id of required)if(frontier.has(id))requireValue(contexts.matches(reviews.get(id),current,snapshots.get(id)),
     `completed owner collection lacks current review: ${id}`);
@@ -2155,9 +2170,11 @@ export function prepareGateRepairPack(root,run,phase,round,failures) {
   }
   const scoped=diagnostics.filter(row=>row.subjects.length||row.ownerHeld);
   requireValue(scoped.length>0,'Step 5.9: diagnostics contain only excluded out-of-frontier findings; rerun the frontier-scoped gate instead of launching repairs');
-  const targets=[...new Set(diagnostics.flatMap(row=>row.subjects))].sort();
+  const aggregation=loadGateAggregationHistory(root,run);
+  const targets=[...new Set([...diagnostics.flatMap(row=>row.subjects),...(aggregation?.targets??[])])].sort();
   const {order,cycles}=orderImpacts(identity.items,targets),assignments={'1':[],'2':[],'3':[]};
   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+  if(aggregation){for(const unit of Object.keys(assignments))assignments[unit]=assignments[unit].filter(id=>!aggregation.targets.includes(id));assignments['1'].push(...aggregation.targets);for(const unit of Object.keys(assignments)){const own=new Set(assignments[unit]);assignments[unit]=order.filter(id=>own.has(id));}}
   const owner=new Map(Object.entries(assignments).flatMap(([unit,ids])=>ids.map(id=>[id,unit])));
   const gateAssignments={'1':[],'2':[],'3':[]};
   let globals=0;
@@ -2171,6 +2188,7 @@ export function prepareGateRepairPack(root,run,phase,round,failures) {
   const pack={version:2,gateRoutingVersion:1,repair_scope:'frontier',frontier_ids:[...frontier].sort(),run,phase,basePhase:'gate',round,units:['1','2','3'],assignments,
     before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
     impacts:[],seeds:[],failures,excluded_out_of_frontier:excluded,gateAssignments,cycles,ledger_updates:[]};
+  if(aggregation){pack.owner_aggregation_current_review_targets=aggregation.targets;pack.input_evidence=aggregation.evidence;}
   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
 
@@ -2260,7 +2278,11 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
       `stale root owner review context before certification: ${id}`);
   }
   if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence};
+  const aggregation=phase==='gate'?loadGateAggregationHistory(root,run):null;
+  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence,...aggregation?.evidence};
+  if(aggregation)evidence[resolve(root,aggregation.cache)]=digest(readFileSync(resolve(root,aggregation.cache),'utf8'));
+  // Retain the original relative pin as historical evidence; the new exact
+  // current cache pin and immutable transition are separately bound above.
   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
   const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??maintenance.basis.get(id)?.reason??priorItems.get(id)?.reason}));
   const creationRows=[...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])],creationById=new Map();
