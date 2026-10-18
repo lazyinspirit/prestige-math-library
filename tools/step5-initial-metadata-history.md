@@ -111,3 +111,49 @@ Every original native supporting manifest hash must match its preserved full bef
 Collection returns `historicalGuards` only for these drafts, preserves genuine original review rows in `historical_metadata_reviews`, and supplies no new current review. Unassigned baseline items have no invented historical row. The collection post remains actual current source bytes; existing decisions and repair counters retain their original meaning. Every changed draft ID is queued in `metadata_history_current_review_targets` for ordinary fresh native 5.2 review, certification, Sol judgment and gates, even though no public mathematical interface changed.
 
 When published repairs also change mirrors in the same manifest, preserve layering: keep original native manifests for this v2 history, apply draft-only mirrors, archive that intermediate state as the published bridge's metadata preimage, then apply only the authenticated published mirrors. Both receipts capture the same final complete current graph. This v2 carrier may span original-native to final source-backed mirrors; the published carrier remains strictly published-only. Do not overwrite historical pins or rewrite old reports.
+
+
+## V3: repeat-adjudication numeric labels
+
+`recordRepeatMetadataHistory(root, run, round, payload)` is a separate opt-in V3
+lane at the actual paused/drained `5.5-adjudicate` hold for that exact round,
+before its collection or first impact pack/dispatch. Initial V1/V2 APIs and their
+strict original behavior remain unchanged. The V3 marker is
+`research/RUN-step5-v2/repeat-ROUND-owner-metadata-history.json`, with durable
+captures in `repeat-ROUND-metadata-history/`.
+
+The payload has `version:3`, a concrete `reason`, `prior_certificate` path,
+`carriers:[{path,before_file}]`, and `source_levels` with ID, old/computed numeric
+levels, exact `before_file` and typed historical basis. `native-post` requires a
+unique genuinely assigned successful native report/final-output post and context.
+`unassigned-before` requires no assigned/reported review and exact current
+repeat-pack before guard. It does not invent a keep verdict for an item with no
+current judge tuple. Original false-positive decisions/no-edit observations remain
+exact; a numeric change never becomes a mathematical repair or new judgment.
+
+The recorder captures the actual state/request and all successful original unit
+handoffs, immutable native attempts/prompts/terminal outputs, current source and
+manifest graph itself. It validates one numeric dependency_level substitution
+per true draft, exact source-backed numeric-only manifest changes, independent
+complete graph computation and no unexplained source/manifest residual. The
+prior immutable native certificate must be linked by the pack's pinned judge;
+its already-certified creations remain graph context without new scope/creation
+credit. Published/status/body/interface/dependency/title edits are outside this
+lane. Changed native supporting pins require separate authentic treatment; V3
+cannot quietly invent their old bytes or rewrite declarations.
+
+Root first installs the reviewed guarded numeric candidates and records truthful
+application evidence, then calls the recorder against actual current bytes. No
+owner-supplied state/current graph archives or fake historical timestamps are
+accepted. Creation is paused; the subsequent ordinary native first collection can
+run unpaused but drained at the exact same stage/round. Wrong stage, active writers,
+collection/impact already started or altered evidence are rejected.
+
+Collection validates original rows against exact historical guards while `post`
+remains actual current. Original decisions persist, affected old rows move to
+`historical_metadata_reviews` with zero current credit, and every changed numeric
+source becomes a mandatory `metadata_history_current_review_targets` entry. The
+ordinary next impact pack binds the actual source-phase/round collection and
+assigns genuine fresh reviews. Completed closure and certification cannot use old
+source reviews to replace current target rows. Gates, fatal thresholds, published
+maintenance and scientific interface propagation retain their existing rules.

@@ -16,7 +16,7 @@ import { loadOwnerReviewWithdrawal, withdrawnOwnerReport, withdrawalAllowsFreshP
 import { loadReportingOwnerRecovery, reportingRecoveryDuties, reportingSessionBinding, assertReportingSessionCompatibility } from './step5-reporting-owner-recovery.mjs';
 import { supportingQuoteHistory } from './step5-quote-history.mjs';
 import { supportingSiblingContractHistory } from './step5-sibling-contract-history.mjs';
-import { loadInitialMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+import { loadInitialMetadataHistory, loadRepeatMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
 import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
 import { createdMaintenanceBasis } from './step5-created-maintenance-cert.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
@@ -1338,7 +1338,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const pack=readPack(root,run,phase,round);
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
   const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});
-  const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):null;
+  const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):phase==='repeat'?loadRepeatMetadataHistory(root,run,round,{current:true}):null;
   const publishedMaintenance=phase==='initial'&&round===1?loadInitialPublishedMaintenance(root,run,{current:true}):null;
   // Validate original reviews against exact historical source bytes only.
   // The collection's post snapshot below always describes actual current bytes.
@@ -2110,7 +2110,7 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   if(result.metadata_history){
     pack.metadata_history_current_review_targets=[...result.metadata_history_current_review_targets];
     pack.input_evidence??={};
-    const collection=join(workflowDir(root,run),'initial-1-collected.json');
+    const collection=join(workflowDir(root,run),`${source}-${round}-collected.json`);
     pack.input_evidence[collection]=digest(readFileSync(collection,'utf8'));
     for(const [file,hash]of Object.entries(result.evidence)){
       requireValue(!Object.hasOwn(pack.input_evidence,file)||pack.input_evidence[file]===hash,'conflicting initial metadata history evidence');

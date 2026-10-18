@@ -11,18 +11,26 @@ const read=p=>JSON.parse(readFileSync(p,'utf8'));
 const need=(v,m)=>{if(!v)throw Error('Step 5 initial metadata history: '+m);};
 const date=x=>typeof x==='string'&&Number.isFinite(Date.parse(x));
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
-const base=(root,run)=>join(root,'research',`${run}-step5-v2`,'initial-metadata-history');
+const base=(root,run,phase='initial',round=1)=>join(root,'research',`${run}-step5-v2`,phase==='initial'?'initial-metadata-history':`repeat-${round}-metadata-history`);
+export const repeatMetadataHistoryPath=(root,run,round)=>join(root,'research',`${run}-step5-v2`,`repeat-${round}-owner-metadata-history.json`);
 export const initialMetadataHistoryPath=(root,run)=>join(root,'research',`${run}-step5-v2`,'initial-1-owner-metadata-history.json');
 const stateDrained=s=>Object.values(s.dispatches??{}).every(x=>!x.startedAt||Boolean(x.endedAt));
-function beforeImpact(root,run){
+function beforeImpact(root,run,phase='initial',round=1){
+  if(phase==='repeat'){
+    need(!existsSync(join(root,'research',`${run}-step5-v2`,`repeat-${round}-collected.json`))
+      &&!existsSync(join(root,'research',`${run}-step5-v2`,`impact-repeat-${round}.json`))
+      &&!readdirSync(join(root,'research',`${run}-dispatch`)).some(n=>new RegExp(`^alpha-repair-step5-v2-impact-repeat(?:-pass-\\d+)?-r${round}-u`).test(n)),
+      'repeat collection or impact already frozen/dispatched');return;
+  }
   need(!existsSync(join(root,'research',`${run}-step5-v2`,'impact-initial-1.json'))
     &&!readdirSync(join(root,'research',`${run}-dispatch`)).some(n=>/^alpha-repair-step5-v2-impact-initial(?:-pass-\d+)?-r1-u/.test(n)),
     'initial impact already frozen or dispatched');
 }
 function validate(root,run,row,{current=false,receiptBytes=null}={}){
-  const {sha256,...payload}=row,path=initialMetadataHistoryPath(root,run);
-  need(sha256===sha(payload)&&[1,2].includes(row.version)&&row.kind==='owner-initial-metadata-history'
-    &&row.run===run&&row.phase==='initial'&&row.round===1&&row.authorized_by==='owner'
+  const repeat=row.version===3,phase=repeat?'repeat':'initial',round=repeat?row.round:1,stage=repeat?'5.5-adjudicate':'5.1-adjudicate';
+  const {sha256,...payload}=row,path=repeat?repeatMetadataHistoryPath(root,run,round):initialMetadataHistoryPath(root,run);
+  need(sha256===sha(payload)&&[1,2,3].includes(row.version)&&row.kind===(repeat?'owner-repeat-numeric-metadata-history':'owner-initial-metadata-history')
+    &&row.run===run&&row.phase===phase&&row.round===round&&Number.isSafeInteger(round)&&round>0&&row.authorized_by==='owner'
     &&row.owner_identity==='/root'&&row.historical_only===true&&row.current_review_granted===false
     &&row.native_execution_coverage_adopted===false&&date(row.recorded_at)
     &&typeof row.reason==='string'&&row.reason.trim().length>=80
@@ -36,31 +44,31 @@ function validate(root,run,row,{current=false,receiptBytes=null}={}){
   }
   const bytes=file=>{const p=resolve(root,file);need(Object.hasOwn(evidence,p),'missing binding '+file);return readFileSync(p,'utf8');};
   const bound=file=>JSON.parse(bytes(file));
-  const dir=join(root,'research',`${run}-step5-v2`),pack=bound(join(dir,'initial-1.json'));
+  const dir=join(root,'research',`${run}-step5-v2`),pack=bound(join(dir,`${phase}-${round}.json`));
   const frontier=bound(join(dir,'frontier.json')),baseline=bound(join(dir,'baseline.json'));
-  need(pack.run===run&&pack.phase==='initial'&&pack.round===1&&pack.adjudicationSchemaVersion===1
+  need(pack.run===run&&pack.phase===phase&&pack.round===round&&pack.adjudicationSchemaVersion===1
     &&Array.isArray(pack.units)&&pack.units.length>0&&new Set(pack.units).size===pack.units.length
     &&frontier.run===run&&same([...pack.frontier_ids].sort(),[...frontier.ids].sort()),'wrong frozen initial inventory');
   const state=bound(row.creation_state),request=bound(row.owner_gate_request);
-  need(state.run===run&&state.stage==='5.1-adjudicate'&&state.paused===true&&stateDrained(state)
+  need(state.run===run&&state.stage===stage&&state.paused===true&&stateDrained(state)&&(!repeat||state.stageRounds?.[stage]===round)
     &&request.run===run&&request.version===1&&request.id===row.owner_gate_request_id
-    &&typeof request.id==='string'&&request.id.length>0&&request.group==='5.1-adjudicate'
-    &&same(request.stages,['5.1-adjudicate'])&&date(request.at)
+    &&typeof request.id==='string'&&request.id.length>0&&request.group===stage
+    &&same(request.stages,[stage])&&date(request.at)
     &&Date.parse(request.at)<=Date.parse(row.recorded_at),'not the actual paused/drained native creation hold');
-  if(row.version===2)need(Array.isArray(frontier.batches)&&pack.units.length===frontier.batches.length
+  if(row.version>=2)need(Array.isArray(frontier.batches)&&pack.units.length===frontier.batches.length
     &&frontier.batches.every(b=>pack.units.includes(String(b.id)))&&same(pack.frontier_ids,frontier.ids),
     'v2 requires every original frozen unit');
   const verdicts=row.version===2?bound(join(dir,'step4-verdicts.json')):null;
   const reports=[],nativeOutputs=new Map();
   for(const unit of pack.units){
-    const label=`step5-v2-initial-r1-u${unit}`,rp=join(dir,`${label}.json`),report=bound(rp);
-    need(report.run===run&&report.phase==='initial'&&report.round===1&&String(report.unit)===unit
+    const label=`step5-v2-${phase}-r${round}-u${unit}`,rp=join(dir,`${label}.json`),report=bound(rp);
+    need(report.run===run&&report.phase===phase&&report.round===round&&String(report.unit)===unit
       &&report.input_sha256===sha(pack),'native initial report mismatch');reports.push(report);
-    const empty=report.completion==='mechanical-zero-work',dispatchLabel=empty?`step5-v2-empty-initial-r1-u${unit}`:label;
+    const empty=report.completion==='mechanical-zero-work',dispatchLabel=empty?`step5-v2-empty-${phase}-r${round}-u${unit}`:label;
     const dp=join(root,'research',`${run}-dispatch`,`${empty?'tool-':'alpha-adjudicate-'}${dispatchLabel}.result.json`),native=bound(dp);
-    const observed=state.dispatches?.[`5.1-adjudicate:${dispatchLabel}`];
+    const observed=state.dispatches?.[`${stage}:${dispatchLabel}`];
     need(native.run===run&&native.ok===true&&native.label===dispatchLabel&&same(native.covers,[unit])
-      &&observed?.stage==='5.1-adjudicate'&&observed.role===native.role&&observed.label===native.label
+      &&observed?.stage===stage&&observed.role===native.role&&observed.label===native.label
       &&observed.lastExitOk===true&&same(observed.covers,native.covers)&&date(observed.startedAt)
       &&date(observed.endedAt)&&date(native.ended_at)
       &&Date.parse(observed.startedAt)<=Date.parse(native.ended_at)
@@ -78,14 +86,14 @@ function validate(root,run,row,{current=false,receiptBytes=null}={}){
         &&Date.parse(observed.startedAt)<=Date.parse(native.started_at)
         &&Date.parse(native.started_at)<=Date.parse(native.ended_at),'not genuine completed native Sol initial work');
       need(same(native,bound(dp.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`))),'native immutable attempt mismatch');
-      if(row.version===2){
+      if(row.version>=2){
         const stem=dp.replace(/\.result\.json$/,`.attempt-${native.attempt}`),logPath=stem+'.log',promptPath=stem+'.prompt.md';
         need(resolve(root,native.log??'')===logPath&&resolve(root,native.prompt??'')===promptPath,'v2 wrong native log/prompt identity');
         const log=bytes(logPath),prompt=bytes(promptPath),end=log.lastIndexOf('\ntokens used\n'),start=log.lastIndexOf('\ncodex\n',end);
         need(start>=0&&end>start&&prompt.includes(`run: ${run}\nrole: alpha-adjudicate\nlabel: ${label}\ncovers: ${unit}\noutput: ${relative(root,rp)}\n`)
           &&prompt.includes(`input_sha256:"${sha(pack)}"`),'v2 native final output identity missing');
         const output=JSON.parse(log.slice(start+7,end).trim());
-        need(output.run===run&&output.phase==='initial'&&output.round===1&&String(output.unit)===unit&&output.input_sha256===sha(pack),'v2 wrong immutable native final identity');
+        need(output.run===run&&output.phase===phase&&output.round===round&&String(output.unit)===unit&&output.input_sha256===sha(pack),'v2 wrong immutable native final identity');
         nativeOutputs.set(unit,output);
       }
     }
@@ -119,20 +127,36 @@ function validate(root,run,row,{current=false,receiptBytes=null}={}){
       const s=sourceById.get(item.id)?.fm;
       need(s&&same(item.kind,s.kind)&&same(item.title,s.title)&&Array.isArray(item.deps)&&Array.isArray(s.deps)
         &&same([...item.deps].sort(),[...s.deps].sort())&&item.dependency_level===s.dependency_level
-        &&(row.version!==2||optionalJustification(item.justified_by,s.justified_by)),'not a source-to-manifest metadata mirror '+item.id);
+        &&(row.version<2||optionalJustification(item.justified_by,s.justified_by)),'not a source-to-manifest metadata mirror '+item.id);
     }
   }
   const graph=dependencyLevels(graphPages);
   need(!graph.errors.length&&graph.items.size===sourceById.size
     &&same([...graph.items.keys()].sort(),[...sourceById.keys()].sort()),'invalid complete repaired in-run dependency graph');
   if(row.version===2)need(same([...graph.items.keys()].sort(),[...frontier.ids].sort()),'v2 repaired graph differs from full original frontier');
-  const seen=new Set();need(Array.isArray(row.carriers)&&(row.version===2||row.carriers.length>0),'missing manifest corrections');
+  if(repeat){
+    const judgePath=join(dir,`judge-${round}.json`),judge=bound(judgePath),certificate=bound(row.prior_certificate);
+    const {sha256:certificateHash,...certificatePayload}=certificate;
+    need(pack.input_evidence?.[judgePath]===sha(bytes(judgePath))&&judge.run===run&&judge.round===round
+      &&judge.certification_sha256===certificateHash&&certificateHash===sha(certificatePayload)
+      &&certificate.run===run&&certificate.version===2&&Array.isArray(certificate.creations)
+      &&resolve(root,row.prior_certificate)===join(dir,`certification-${certificate.phase}-${certificate.round}.json`),
+      'v3 lacks exact prior native certification/judge lineage');
+    const created=certificate.creations.map(c=>c.id);
+    need(new Set(created).size===created.length&&created.every(id=>!frontier.ids.includes(id)
+      &&certificate.items.some(item=>item.id===id&&item.guard_sha256===pack.before[id]))
+      &&same([...graph.items.keys()].sort(),[...frontier.ids,...created].sort()),
+      'v3 graph changes original frontier or existing native creation scope');
+  }
+  const seen=new Set();need(Array.isArray(row.carriers)&&(row.version>=2||row.carriers.length>0),'missing manifest corrections');
   for(const carrier of row.carriers){
     need(!seen.has(carrier.path)&&manifestByPath.has(carrier.path),'duplicate or foreign corrected manifest');seen.add(carrier.path);
     const before=bound(carrier.before_file),after=manifestByPath.get(carrier.path),copy=structuredClone(before);let count=0;
     need(same(before.map(p=>[p.id,p.items.map(x=>x.id)]),after.map(p=>[p.id,p.items.map(x=>x.id)])),'manifest page/item inventory changed');
-    for(let p=0;p<copy.length;p++)for(let i=0;i<copy[p].items.length;i++)for(const field of (row.version===2?['title','deps','dependency_level','justified_by']:['title','deps','dependency_level'])){
+    for(let p=0;p<copy.length;p++)for(let i=0;i<copy[p].items.length;i++)for(const field of (repeat?['dependency_level']:row.version===2?['title','deps','dependency_level','justified_by']:['title','deps','dependency_level'])){
       if(!same(copy[p].items[i][field],after[p].items[i][field])){
+        if(repeat){const id=copy[p].items[i].id,label=row.source_levels?.find(x=>x.id===id);
+          need(label&&copy[p].items[i][field]===label.before&&after[p].items[i][field]===label.after,'v3 mirror is not an exact declared numeric source correction');}
         if(field==='justified_by'){
           const id=copy[p].items[i].id,source=sourceById.get(id),label=row.source_levels?.find(x=>x.id===id);
           need(source.fm.status==='draft'&&Array.isArray(source.fm.justified_by)&&source.fm.justified_by.length>0
@@ -146,10 +170,10 @@ function validate(root,run,row,{current=false,receiptBytes=null}={}){
     need(count>0&&same(copy,after),'manifest repair changed more than source title/deps/level mirrors');
     for(const report of reports)if(Object.hasOwn(report.supporting_evidence??{},carrier.path))
       need(report.supporting_evidence[carrier.path]===sha(bytes(carrier.before_file)),'manifest preimage is not actual native supporting bytes');
-    if(row.version===2)for(const report of reports)for(const [file,hash]of Object.entries(report.supporting_evidence??{}))
-      if(resolve(root,file)===resolve(root,carrier.path))need(hash===sha(bytes(carrier.before_file)),'v2 manifest preimage differs from exact absolute/relative native supporting bytes');
+    if(row.version>=2)for(const report of reports)for(const [file,hash]of Object.entries(report.supporting_evidence??{}))
+      if(resolve(root,file)===resolve(root,carrier.path)){if(repeat)need(hash===sha(manifestBytes.get(carrier.path)),'v3 changed native supporting pin requires a separate authentic protocol');need(hash===sha(bytes(carrier.before_file)),'v2 manifest preimage differs from exact absolute/relative native supporting bytes');}
   }
-  if(row.version===2)for(const report of reports)for(const [file,expected]of Object.entries(report.supporting_evidence??{})){
+  if(row.version>=2)for(const report of reports)for(const [file,expected]of Object.entries(report.supporting_evidence??{})){
     const canonical=relative(root,resolve(root,file));if(!manifestBytes.has(canonical)||sha(manifestBytes.get(canonical))===expected)continue;
     const carrier=row.carriers.find(c=>c.path===canonical);
     need(carrier&&sha(bytes(carrier.before_file))===expected,'v2 missing exact historical supporting manifest carrier '+canonical);
@@ -193,6 +217,11 @@ function validate(root,run,row,{current=false,receiptBytes=null}={}){
           &&summaries.length===1&&summaries[0].disposition===review.disposition&&summaries[0].post_sha256===guard
           &&summaries[0].review_context_sha256===review.review_context_sha256&&summaries[0].uncertain===false,
           'v2 historical source is not the exact assigned native report/final-output post guard');
+      }else if(repeat){
+        need(label.historical_basis==='unassigned-before'&&originals.length===0
+          &&Object.values(pack.assignments).every(rows=>rows.every(x=>(typeof x==='string'?x:x.id)!==label.id))
+          &&frontier.ids.includes(label.id)&&guard===pack.before[label.id],
+          'v3 unassigned numeric source is not its exact frozen repeat before');
       }else{
         const matches=verdicts.filter(v=>v.id===label.id);
         need(label.historical_basis==='baseline-keep'&&originals.length===0
@@ -201,26 +230,30 @@ function validate(root,run,row,{current=false,receiptBytes=null}={}){
           &&matches.length===1&&matches[0].model==='gpt-6-luna'&&matches[0].keep===true,
           'v2 unassigned label lacks its unchanged original baseline and accepted Luna verdict');
       }
-      need(typeof baseline[label.id]==='string'&&pack.before[label.id]===baseline[label.id],'v2 source is outside original baseline');
+      need(frontier.ids.includes(label.id)&&(repeat?typeof pack.before[label.id]==='string':typeof baseline[label.id]==='string'&&pack.before[label.id]===baseline[label.id]),'numeric source is outside original frozen authority');
       historicalGuards[label.id]=guard;sourceIds.push(label.id);
     }
-    for(const [id,source]of sourceById)if(source.fm.status==='draft'){
+    for(const [id,source]of sourceById)if(source.fm.status==='draft'||repeat){
       const rows=reports.flatMap(report=>(report.reviews??[]).filter(review=>review.id===id));
       need(rows.length<=1,'v2 graph has ambiguous original draft review posts');
       const expected=rows.length?rows[0].post_sha256:pack.before[id];
       need(typeof expected==='string'&&(itemHashGuard(source.text)===expected||changed.has(id)),
         'v2 omits a changed draft source or includes unrelated current source changes '+id);
     }
+    if(repeat)for(const label of row.source_levels)need(row.carriers.filter(carrier=>bound(carrier.before_file).some(page=>(page.items??[]).some(item=>item.id===label.id&&item.dependency_level===label.before))).length===1,'v3 numeric source lacks its exact original manifest mirror');
     historicalReviews=reports.flatMap(report=>(report.reviews??[]).filter(review=>changed.has(review.id)));
   }
   // The archived state is historical-only on later reads. The first collection
   // also requires real live drained 5.1 or pre-dispatch 5.2 currency.
-  if(current){beforeImpact(root,run);const live=read(join(root,'.autopilot',run,'state.json'));
-    need(live.run===run&&stateDrained(live)&&['5.1-adjudicate','5.2-impact'].includes(live.stage),'wrong live initial collection boundary');}
+  if(current){beforeImpact(root,run,phase,round);const live=read(join(root,'.autopilot',run,'state.json'));
+    need(live.run===run&&stateDrained(live)&&(repeat?live.stage===stage&&live.stageRounds?.[stage]===round:['5.1-adjudicate','5.2-impact'].includes(live.stage)),'wrong live adjudication collection boundary');}
   return {path,evidence,historicalGuards,sourceIds,historicalReviews,row};
 }
 export function loadInitialMetadataHistory(root,run,options={}){
   const path=initialMetadataHistoryPath(root,run);return existsSync(path)?validate(root,run,read(path),options):null;
+}
+export function loadRepeatMetadataHistory(root,run,round,options={}){
+  const path=repeatMetadataHistoryPath(root,run,round);return existsSync(path)?validate(root,run,read(path),options):null;
 }
 export function initialMetadataSupportingHistory(history,path,expected){
   if(!history?.root||!history?.run)return null;
@@ -231,16 +264,18 @@ export function initialMetadataSupportingHistory(history,path,expected){
 }
 // Root invokes this recorder only at the real paused boundary. It captures native
 // bytes itself and never writes source, reports, packs, verdicts or live state.
-export function recordInitialMetadataHistory(root,run,payload){
+function recordMetadataHistory(root,run,payload,repeatRound=null){
+  const repeat=repeatRound!==null,phase=repeat?'repeat':'initial',round=repeat?repeatRound:1,stage=repeat?'5.5-adjudicate':'5.1-adjudicate';
+  need(!repeat||payload.version===3&&Number.isSafeInteger(round)&&round>0,'invalid repeat v3 version/round');
   const statePath=join(root,'.autopilot',run,'state.json'),requestPath=join(root,'.autopilot',run,'owner-gate-request.json');
   const stateBytes=readFileSync(statePath,'utf8'),requestBytes=readFileSync(requestPath,'utf8');
-  const state=JSON.parse(stateBytes);need(state.run===run&&state.stage==='5.1-adjudicate'&&state.paused===true&&stateDrained(state),'recording requires actual paused drained 5.1');beforeImpact(root,run);
-  need(!existsSync(join(root,'research',`${run}-step5-v2`,'initial-1-collected.json')),'original initial collection already exists');
-  const version=payload.version===2?2:1;
-  if(version===2)need(!Object.hasOwn(payload,'source_level')&&Array.isArray(payload.source_levels)
+  const state=JSON.parse(stateBytes);need(state.run===run&&state.stage===stage&&state.paused===true&&stateDrained(state)&&(!repeat||state.stageRounds?.[stage]===round),'recording requires actual paused drained adjudication');beforeImpact(root,run,phase,round);
+  need(!existsSync(join(root,'research',`${run}-step5-v2`,`${phase}-${round}-collected.json`)),'original initial collection already exists');
+  const version=repeat?3:payload.version===2?2:1;
+  if(version>=2)need(!Object.hasOwn(payload,'source_level')&&Array.isArray(payload.source_levels)
     &&['creation_state','owner_gate_request','manifests','sources'].every(k=>!Object.hasOwn(payload,k)),'v2 caller cannot supply creation/current graph archives');
   const bindings={...payload.bindings},store=(name,bytes)=>{
-    const path=join(base(root,run),name);mkdirSync(resolve(path,'..'),{recursive:true});
+    const path=join(base(root,run,phase,round),name);mkdirSync(resolve(path,'..'),{recursive:true});
     if(existsSync(path))need(readFileSync(path,'utf8')===bytes,'immutable archive conflict '+path);else writeFileSync(path,bytes,{flag:'wx'});
     bindings[relative(root,path)]=sha(bytes);return relative(root,path);
   },bind=path=>{bindings[relative(root,path)]=sha(readFileSync(path,'utf8'));};
@@ -252,18 +287,22 @@ export function recordInitialMetadataHistory(root,run,payload){
     for(const page of JSON.parse(text))for(const item of page.items??[]){need(!ids.has(item.id),'duplicate owned item');ids.add(item.id);
       const path=`items/${item.id}.md`;sources.push({id:item.id,path,archive:store('sources/'+item.id+'.md',readFileSync(join(root,path),'utf8'))});}
   }
-  const dir=join(root,'research',`${run}-step5-v2`),pack=read(join(dir,'initial-1.json'));
-  for(const name of ['initial-1.json','frontier.json','baseline.json','step4-verdicts.json'])bind(join(dir,name));
-  for(const unit of pack.units){const label=`step5-v2-initial-r1-u${unit}`,rp=join(dir,label+'.json');bind(rp);const report=read(rp);
-    const dp=join(root,'research',`${run}-dispatch`,`${report.completion==='mechanical-zero-work'?'tool-step5-v2-empty-initial-r1-u'+unit:'alpha-adjudicate-'+label}.result.json`);bind(dp);
-    const native=read(dp);if(report.completion!=='mechanical-zero-work'){bind(dp.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`));if(version===2){bind(resolve(root,native.log));bind(resolve(root,native.prompt));}}}
-  for(const file of [...payload.carriers.map(x=>x.before_file),...(version===2?payload.source_levels:[payload.source_level]).map(x=>x.before_file)])bind(resolve(root,file));
-  const row={...payload,version,kind:'owner-initial-metadata-history',run,phase:'initial',round:1,authorized_by:'owner',owner_identity:'/root',historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false,recorded_at:new Date().toISOString(),creation_state,owner_gate_request,owner_gate_request_id:read(requestPath).id,manifests,sources,bindings};
-  const receipt={...row,sha256:sha(row)},target=initialMetadataHistoryPath(root,run);
+  const dir=join(root,'research',`${run}-step5-v2`),pack=read(join(dir,`${phase}-${round}.json`));
+  for(const name of [`${phase}-${round}.json`,'frontier.json','baseline.json',...(repeat?[`judge-${round}.json`]:['step4-verdicts.json'])])bind(join(dir,name));
+  for(const unit of pack.units){const label=`step5-v2-${phase}-r${round}-u${unit}`,rp=join(dir,label+'.json');bind(rp);const report=read(rp);
+    const dp=join(root,'research',`${run}-dispatch`,`${report.completion==='mechanical-zero-work'?`tool-step5-v2-empty-${phase}-r${round}-u${unit}`:'alpha-adjudicate-'+label}.result.json`);bind(dp);
+    const native=read(dp);if(report.completion!=='mechanical-zero-work'){bind(dp.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`));if(version>=2){bind(resolve(root,native.log));bind(resolve(root,native.prompt));}}}
+  for(const file of [...payload.carriers.map(x=>x.before_file),...(version>=2?payload.source_levels:[payload.source_level]).map(x=>x.before_file)])bind(resolve(root,file));
+  if(repeat)bind(resolve(root,payload.prior_certificate));
+  const row={...payload,version,kind:repeat?'owner-repeat-numeric-metadata-history':'owner-initial-metadata-history',run,phase,round,authorized_by:'owner',owner_identity:'/root',historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false,recorded_at:new Date().toISOString(),creation_state,owner_gate_request,owner_gate_request_id:read(requestPath).id,manifests,sources,bindings};
+  const receipt={...row,sha256:sha(row)},target=repeat?repeatMetadataHistoryPath(root,run,round):initialMetadataHistoryPath(root,run);
   const receiptBytes=JSON.stringify(receipt,null,2)+'\n';
   validate(root,run,receipt,{current:true,receiptBytes});
   need(readFileSync(statePath,'utf8')===stateBytes&&readFileSync(requestPath,'utf8')===requestBytes,
     'native state or request changed during owner recording');
   need(!existsSync(target),'metadata history receipt already exists');writeFileSync(target,receiptBytes,{flag:'wx'});
-  return {path:target,historical_only:true,current_review_targets:(version===2?payload.source_levels:[payload.source_level]).map(x=>x.id)};
+  return {path:target,historical_only:true,current_review_targets:(version>=2?payload.source_levels:[payload.source_level]).map(x=>x.id)};
 }
+
+export function recordInitialMetadataHistory(root,run,payload){return recordMetadataHistory(root,run,payload);}
+export function recordRepeatMetadataHistory(root,run,round,payload){return recordMetadataHistory(root,run,payload,round);}
