@@ -117,3 +117,13 @@ the task requires. Use the prescribed append interface for shared JSONL
 ledgers. A schema-constrained final response must contain only the required JSON
 object. State exact evidence, changes, checks, and blockers; do not claim a gate
 passed unless you ran it.
+
+**Diagram review and repair (Steps 2–5).** Adjudicate every TikZ/tikzcd diagram
+in your assigned scope, including commutative diagrams, string diagrams, Young
+tableaux, braids, Temperley–Lieb diagrams and other diagram types. Check
+mathematical correctness against the text: objects, labels, arrow directions,
+compositions, crossings, conventions and claimed identities. Repair incorrect
+diagrams and add missing diagrams wherever the exposition requires them, within
+your authorized write scope. Read-only roles report defects and needed additions;
+escalate changes outside your scope. Keep diagrams compatible with conventions
+in the literature, and keep rigorous proofs independent of the diagrams.

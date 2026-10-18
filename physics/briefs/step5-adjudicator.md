@@ -55,3 +55,13 @@ Read-only assignments report defects without editing.
 - Give authoritative source URLs actually consulted when unfamiliar; `familiar:false` requires those URLs. Unresolved uncertainty is a blocker, never a false-confidence statement. Empty assignments return empty arrays. Do not claim independent review of your own repair.
 - Do not write judgments, stamps, central certificates, or round state; do not launch workers or another cycle. The engine collects evidence, completes frontier repair and separate maintenance, and certifies once all writers drain. A successful dispatch alone does not close unfinished work. Repeated pending work at an earlier assigned content state holds for operator resolution.
 - Rejudgment and renewed frontier adjudication, owner repair, and certification repeat until the latest round has zero items deemed defective by adjudicators (zero unique confirmed-fatal items across all adjudicated subjects), even if those defects were repaired within that round. The threshold permits the final scoped gate; it never permits unresolved defects, uncertainty, or incomplete closure.
+
+**Diagram review and repair (Steps 2–5).** Adjudicate every TikZ/tikzcd diagram
+in your assigned scope, including commutative diagrams, string diagrams, Young
+tableaux, braids, Temperley–Lieb diagrams and other diagram types. Check
+mathematical correctness against the text: objects, labels, arrow directions,
+compositions, crossings, conventions and claimed identities. Repair incorrect
+diagrams and add missing diagrams wherever the exposition requires them, within
+your authorized write scope. Read-only roles report defects and needed additions;
+escalate changes outside your scope. Keep diagrams compatible with conventions
+in the literature, and keep rigorous proofs independent of the diagrams.

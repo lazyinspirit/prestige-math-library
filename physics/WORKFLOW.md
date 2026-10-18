@@ -1106,3 +1106,9 @@ write authority, item repair claim, refuter coverage exemption or
 `context_accepted` receipt. Imported pages remain read-only. Native page prose
 maintenance requires owner authorization, exact preimages and writer checks;
 claims and supplier interfaces retain their ordinary consumer-review duties.
+
+In Steps 2–5, repairers and adjudicators check every assigned TikZ/tikzcd
+diagram for mathematical correctness, repair defects and add missing diagrams
+where needed. This includes commutative and string diagrams, Young tableaux,
+braids, Temperley–Lieb diagrams and other types. Existing write scopes,
+read-only roles and the requirement for proofs independent of diagrams remain.

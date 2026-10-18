@@ -198,3 +198,13 @@ Sol 6.1 high judgment and controls repeats. Central certification follows comple
 maintenance closure, after all writers drain. A successful dispatch does not
 establish completion, and the zero-confirmed-fatal requirement never waives
 unresolved mathematics. Do not claim independent review for your own repair.
+
+**Diagram review and repair (Steps 2–5).** Adjudicate every TikZ/tikzcd diagram
+in your assigned scope, including commutative diagrams, string diagrams, Young
+tableaux, braids, Temperley–Lieb diagrams and other diagram types. Check
+mathematical correctness against the text: objects, labels, arrow directions,
+compositions, crossings, conventions and claimed identities. Repair incorrect
+diagrams and add missing diagrams wherever the exposition requires them, within
+your authorized write scope. Read-only roles report defects and needed additions;
+escalate changes outside your scope. Keep diagrams compatible with conventions
+in the literature, and keep rigorous proofs independent of the diagrams.

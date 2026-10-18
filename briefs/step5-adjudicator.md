@@ -32,3 +32,13 @@ Read-only assignments report defects without editing.
 - Rejudgment and renewed frontier adjudication, owner repair, and certification repeat until the latest round has zero items deemed defective by adjudicators (zero unique confirmed-fatal items across all adjudicated subjects), even if those defects were repaired within that round. The threshold permits the final scoped gate; it never permits unresolved defects, uncertainty, or incomplete closure.
 
 **Algorithms.** Use `kind: algorithm`, an `alg-` ID and `## Definition`; algorithms function identically to definitions. Specify inputs, outputs, admissible conditions and exact instructions, including branches, calls and loops. A larger algorithm may compose or repeatedly invoke earlier smaller algorithms/procedures: put those supplier IDs in the larger algorithm's `deps`. Repetition in an execution does not create a self-edge or permit a prerequisite cycle. State correctness, termination, complexity and other properties in separate proved lemmas, theorems, propositions or corollaries; use `justified_by` for results establishing well-definedness under the ordinary definition rule. Procedure instructions are not a phase proof. Review the defining procedure and its actual prerequisites; changes to its Definition trigger the ordinary direct/indirect consumer checks.
+
+**Diagram review and repair (Steps 2–5).** Adjudicate every TikZ/tikzcd diagram
+in your assigned scope, including commutative diagrams, string diagrams, Young
+tableaux, braids, Temperley–Lieb diagrams and other diagram types. Check
+mathematical correctness against the text: objects, labels, arrow directions,
+compositions, crossings, conventions and claimed identities. Repair incorrect
+diagrams and add missing diagrams wherever the exposition requires them, within
+your authorized write scope. Read-only roles report defects and needed additions;
+escalate changes outside your scope. Keep diagrams compatible with conventions
+in the literature, and keep rigorous proofs independent of the diagrams.

@@ -51,3 +51,13 @@ Read-only assignments report defects without editing.
 - Keep published content read-only. Record each defective published item in `research/published-consumer-supplier-ledger.md` with exact IDs, evidence, suppliers, status, and repair strategy; maintain its deduplicated classification index. Serialize edits by creating `research/.published-consumer-ledger.lock`, rereading and merging after acquiring it, then releasing only your own lock.
 - Maintain `briefs/tasks/frontier-dependency-ledger.md` records for owned consumers. Preserve stable item IDs and keep proposed withdrawals present for owner disposition.
 - Write exactly the task-named report and decisions file, with one decision per owed obligation and an empty `decisions` array when none are owed. Never judge, stamp, self-certify, dispatch agents, or initiate a judge cycle; report local checks honestly. The engine stamps decision hashes and runs the gate battery after the dispatch.
+
+**Diagram review and repair (Steps 2–5).** Adjudicate every TikZ/tikzcd diagram
+in your assigned scope, including commutative diagrams, string diagrams, Young
+tableaux, braids, Temperley–Lieb diagrams and other diagram types. Check
+mathematical correctness against the text: objects, labels, arrow directions,
+compositions, crossings, conventions and claimed identities. Repair incorrect
+diagrams and add missing diagrams wherever the exposition requires them, within
+your authorized write scope. Read-only roles report defects and needed additions;
+escalate changes outside your scope. Keep diagrams compatible with conventions
+in the literature, and keep rigorous proofs independent of the diagrams.

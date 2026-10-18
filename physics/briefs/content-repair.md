@@ -43,3 +43,13 @@ or generic contract rows. Preserve claims, IDs, provenance and source qualifiers
 Report potential published defects with exact evidence to the owner; do not
 edit published content without explicit task authority. Run focused checks and
 checkpoint the actual changes, source locators, results and remaining gaps.
+
+**Diagram review and repair (Steps 2–5).** Adjudicate every TikZ/tikzcd diagram
+in your assigned scope, including commutative diagrams, string diagrams, Young
+tableaux, braids, Temperley–Lieb diagrams and other diagram types. Check
+mathematical correctness against the text: objects, labels, arrow directions,
+compositions, crossings, conventions and claimed identities. Repair incorrect
+diagrams and add missing diagrams wherever the exposition requires them, within
+your authorized write scope. Read-only roles report defects and needed additions;
+escalate changes outside your scope. Keep diagrams compatible with conventions
+in the literature, and keep rigorous proofs independent of the diagrams.

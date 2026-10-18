@@ -1053,3 +1053,9 @@ stream remains append-only. Neither code installation, inspection nor refresh
 creates coverage, changes foreign working/index/HEAD carriers, or authorizes
 publication/push. Tests for this repair were explicitly waived by the owner;
 that does not waive the fresh actual native Step-6 preparation and full battery.
+
+In Steps 2–5, repairers and adjudicators check every assigned TikZ/tikzcd
+diagram for mathematical correctness, repair defects and add missing diagrams
+where needed. This includes commutative and string diagrams, Young tableaux,
+braids, Temperley–Lieb diagrams and other types. Existing write scopes,
+read-only roles and the requirement for proofs independent of diagrams remain.

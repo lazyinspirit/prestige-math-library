@@ -148,3 +148,9 @@ Planning supplies a run-local policy with no extra foreign paths; mixed foreign
 record changes still require native projection authority rather than a whole-file
 commit. Closeout remains preparation → all final gates → report → scoped commit,
 with no post-commit content battery, publication action or push.
+
+In Steps 2–5, repairers and adjudicators check every assigned TikZ/tikzcd
+diagram for mathematical correctness, repair defects and add missing diagrams
+where needed. This includes commutative and string diagrams, Young tableaux,
+braids, Temperley–Lieb diagrams and other types. Existing write scopes,
+read-only roles and the requirement for proofs independent of diagrams remain.

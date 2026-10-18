@@ -15,3 +15,13 @@ Write directly to the assigned source files; there is no private repair workspac
 Do not perform hashing, rehashing, certification, recertification, dependency-level reconciliation, manifest/coverage/proof-contract maintenance, evidence-ledger work or automated formatting/validator commands in Step 2. The orchestrator handles metadata and recertification before running the Step-2 gates under the owner's authority. Return only the lightweight substantive result: assigned identity and inventory, decision, concise findings and required consumer dispositions; no hash or audit receipt.
 
 Report accept only when all flagged defects and required consumer repairs are resolved, including every required consumer disposition; report precise remaining gaps honestly. The owner/orchestrator retains the CLAUDE.md maximum of two outside escalation-resolution cycles. Resolution records direct acceptance without another engine review. The owner/orchestrator alone runs Step-2 gates and recertification after source workers drain and controls advancement to Step 3. The engine's two-review/one-local-repair history is never reset.
+
+**Diagram review and repair (Steps 2–5).** Adjudicate every TikZ/tikzcd diagram
+in your assigned scope, including commutative diagrams, string diagrams, Young
+tableaux, braids, Temperley–Lieb diagrams and other diagram types. Check
+mathematical correctness against the text: objects, labels, arrow directions,
+compositions, crossings, conventions and claimed identities. Repair incorrect
+diagrams and add missing diagrams wherever the exposition requires them, within
+your authorized write scope. Read-only roles report defects and needed additions;
+escalate changes outside your scope. Keep diagrams compatible with conventions
+in the literature, and keep rigorous proofs independent of the diagrams.
