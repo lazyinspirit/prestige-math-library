@@ -111,9 +111,11 @@ function loadConfig(): Config {
   if (editorialPolicy) {
     const selected = join(HERE, '..', 'stages', editorialPolicy.page_layout === 'compact-v1'
       ? 'mathlib.compact.mts' : 'mathlib.statement-first.mts');
-    if (existsSync(localConfigPath) && resolve(base.stages) !== resolve(selected))
+    const supervisedCompact = editorialPolicy.page_layout === 'compact-v1'
+      && resolve(base.stages) === resolve(join(HERE, '..', 'stages', 'owner-supervised-compact.mts'));
+    if (existsSync(localConfigPath) && resolve(base.stages) !== resolve(selected) && !supervisedCompact)
       throw new Error('Statement-first run cannot replace an explicit run-local stage table');
-    base.stages = selected;
+    if (!supervisedCompact) base.stages = selected;
   }
   base.repo = repo;
   base.stateDir = stateDir;

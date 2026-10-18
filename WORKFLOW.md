@@ -870,7 +870,9 @@ duplicate, unpublished or stale context entries fail closed.
 ## Pre-gate recertification
 
 An owner-supervised run may select `tools/autopilot/stages/owner-supervised.mts`
-through its run-local `config.json`. This preserves the native stage table,
+through its run-local `config.json`. Compact runs select
+`tools/autopilot/stages/owner-supervised-compact.mts`, retaining their compact
+revision and worker prompts. This preserves the native stage table,
 dispatches and full gate batteries, and pauses after writers drain before each
 battery. The supervisor resolves all escalations, then runs
 `node tools/owner-gate-supervision.mjs --run RUN --state-dir .autopilot/RUN
