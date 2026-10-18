@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import {validateFrontier} from './step5-rounds.mjs';
 import {itemHashGuard} from './item-hash.mjs';
 import {MODELS} from './models.mjs';
+import {validateProofCompanion} from './step5-proof-companion.mjs';
 const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex');
 const read=path=>JSON.parse(readFileSync(path,'utf8'));
 const need=(yes,message)=>{if(!yes)throw Error(`Step 5 reader concern: ${message}`);};
@@ -27,7 +28,7 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
   need(!existsSync(join(dir,'impact-initial-1.json')),'first impact pack is already frozen');
   need(!readdirSync(dispatchDir).some(name=>/^alpha-repair-step5-v2-impact-initial(?:-pass-\d+)?-r1-u/.test(name)),
     'impact owner execution has already started');
-  need([1,2].includes(row.version)&&row.kind==='owner-confirmed-step4-reader-concerns'&&row.run===run
+  need([1,2,3].includes(row.version)&&row.kind==='owner-confirmed-step4-reader-concerns'&&row.run===run
     &&row.authorized_by==='owner'&&row.owner_identity==='/root'&&row.native_coverage_adopted===false
     &&date(row.recorded_at)&&row.bindings&&typeof row.bindings==='object'&&!Array.isArray(row.bindings),
     'invalid owner authority or admission envelope');
@@ -77,7 +78,7 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
     'requires drained initial workers before first impact dispatch');
   // V2 is an explicit typed-source opt-in. V1 retains its original own-batch
   // concern path and its exact checks below.
-  if(row.version===2){
+  if(row.version>=2){
     // Creation authority belongs to the real paused 5.1 hold. Native planning
     // later runs in drained, unpaused 5.2; it authenticates that creation rather
     // than claiming another pause occurred at the planning boundary.
@@ -131,6 +132,9 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
     need(state.stage==='5.1-adjudicate'||requireCollection===true,
       'v2 read-only admission validation requires the paused native 5.1 hold');
   }
+  if(row.version===3)need(JSON.stringify(initial.frontier_ids)===JSON.stringify(frontier.ids)
+    &&initial.units.length===frontier.batches.length&&frontier.batches.every(b=>initial.units.includes(b.id)),
+    'v3 requires complete original frozen handoff inventory');
   const ids=new Set(),entries=[];
   for(const entry of row.entries){
     const {id,batch,concern_index,owner_review:review}=entry;
@@ -141,12 +145,13 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
     const manifest=bound(join(root,'research',`${run}-batch-${batch}.pages.json`));
     need(Array.isArray(manifest)&&manifest.flatMap(page=>page.items??[]).filter(value=>value.id===id).length===1,
       'current owning manifest mismatch');
-    const v2=row.version===2,alert=v2&&entry.source_kind==='alert';
+    const v2=row.version>=2,alert=v2&&entry.source_kind==='alert',companion=row.version===3&&entry.source_kind==='proof-companion';
     const readerBatch=v2?entry.reader_batch:batch;
     if(v2){
-      need(['concern','alert'].includes(entry.source_kind)&&typeof readerBatch==='string'
+      need((['concern','alert'].includes(entry.source_kind)||companion)&&typeof readerBatch==='string'
         &&frontier.batches.some(value=>value.id===readerBatch)
         &&(alert?readerBatch!==batch:readerBatch===batch), 'invalid v2 reader source identity');
+      need(!companion||(!Object.hasOwn(entry,'concern')&&!Object.hasOwn(entry,'concern_index')),'companion cannot invent an original finding');
       need(alert?!Object.hasOwn(entry,'concern')&&!Object.hasOwn(entry,'concern_index')
         :!Object.hasOwn(entry,'alert')&&!Object.hasOwn(entry,'alert_index'), 'ambiguous v2 finding fields');
       // A frozen owner alone is insufficient if current manifests duplicate it.
@@ -176,7 +181,7 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
         &&hash(document.alerts[entry.alert_index])===hash(entry.alert)
         &&typeof entry.alert.finding==='string'&&entry.alert.finding.trim().length>0,
         'original structured cross-batch alert mismatch');
-    }else need(document.items_read?.includes(id)&&Number.isSafeInteger(concern_index)&&concern_index>=0
+    }else if(!companion) need(document.items_read?.includes(id)&&Number.isSafeInteger(concern_index)&&concern_index>=0
       &&document.concerns?.[concern_index]?.id===id&&hash(document.concerns[concern_index])===hash(entry.concern),
       'original structured reader concern mismatch');
     if(v2)need(date(reader.started_at)&&date(reader.ended_at)
@@ -225,7 +230,8 @@ export function loadReaderConcerns(root,run,{requireCollection=true}={}) {
         &&closure.final_item_hashes?.[id]===baseline[id],
         'cross-batch source lacks exact frozen Step-3-to-current continuity');
     }
-    need(review?.reviewed_by==='root'&&review.confirmed_defect===true&&date(review.reviewed_at)
+    if(companion)validateProofCompanion({root,run,row,entry,text,initial,baseline,evidence,document,reader,need});
+    need(review?.reviewed_by==='root'&&(companion?review.necessary_related_work===true:review.confirmed_defect===true)&&date(review.reviewed_at)
       &&Date.parse(review.reviewed_at)>=Date.parse(reader.ended_at)
       &&typeof review.reason==='string'&&review.reason.trim().length>=40
       &&typeof review.evidence_file==='string','missing actual individual root confirmation');
