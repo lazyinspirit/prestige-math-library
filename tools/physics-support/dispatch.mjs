@@ -70,7 +70,7 @@ const ROLES = Object.freeze({
   'alpha-assign': { ...lane('partition'), sandbox: 'workspace-write', effort: 'high', cap: 1, why: 'batch partition for the group Alphas; output fully validated by alpha-groups.mjs' },
   // Step 1 performs initial authoring; closeout stages
   // select their own explicit profile when reusing it for pathway prose.
-  // Pair authoring may fill the 80-pair run ceiling. Stage prerequisites and
+  // Pair authoring may fill the 130-pair run ceiling. Stage prerequisites and
   // same-batch exclusion determine which authors may safely overlap.
   'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'pathway prose; full run width with stage ownership guards' },
   // Final reporting is read-only; source uncertainty still requires research.

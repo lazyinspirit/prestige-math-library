@@ -40,7 +40,7 @@ The selector takes complete, actually published A/B pairs from the chosen
 category and reads their real item placements. It explicitly lists incomplete,
 draft and absent pairs as skipped. Missing planned identities, malformed YAML,
 empty pages and cycles fail closed; no pair is silently trimmed to fit the
-native 128-pair capacity. Native batches contain one pair each.
+native 130-pair capacity. Native batches contain one pair each.
 
 Repeated display placements are reconciled to unique ownership: prefer the
 canonical plan's home inside the same pair, otherwise retain the first owned
