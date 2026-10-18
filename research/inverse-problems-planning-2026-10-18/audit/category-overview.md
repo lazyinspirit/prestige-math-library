@@ -1,0 +1,7 @@
+# Proposed inverse-problems category overview
+
+Research support only; root may use this prose when creating a future category carrier.
+
+Inverse problems recover hidden quantities from indirect measurements. The category follows the complete chain from a forward map and admissible truth class to identifiability, inverse stability, regularization, statistical risk, posterior uncertainty, and the finite computation used to produce an answer. These questions require separate hypotheses: an injective measurement map can have an unbounded inverse, a proper posterior can mix slowly, and an accurate training loss need not control reconstruction under a shifted operator.
+
+The pathway begins with compact linear maps, source conditions and deterministic error budgets, reusing the numerical library's existing regularization methods. It then develops Gaussian inverse experiments, minimax estimation and testing, Bayesian function-space models, and nonlinear, sparse and variational recovery. Tomography, wave data, conductivity boundary maps and scattering expose how acquisition geometry determines recoverable information. Learned denoisers, diffusion solvers and neural operators are tied to explicit mathematical targets and error sources. Phase retrieval, Bayesian measurement design and dynamical realization connect these foundations to phaseless observations, chosen measurements and time-dependent data. Worked examples remain terminal illustrations; genuine unresolved questions receive separate dated status review and never provide logical premises.

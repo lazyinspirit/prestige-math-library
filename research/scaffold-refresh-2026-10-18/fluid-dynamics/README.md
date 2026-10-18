@@ -1,0 +1,10 @@
+# Fluid scaffold refresh evidence
+
+The [complete successor umbrella](../../../physics/research/scaffold-refresh-2026-10-18/fluid-dynamics/plan-fluid-dynamics-track.md) and its [new arguments](../../../physics/research/scaffold-refresh-2026-10-18/fluid-dynamics/refresh-arguments.md) preserve the original26 pairs/195 item IDs and add21 pairs/77 items. Final design:47 pairs,94 pages,272 items (193 A/79 B).
+
+[registration-proposal.json](registration-proposal.json) supplies21 exact new pair reservations,77 item IDs,31 published root mathematical interfaces,16 external prerequisite-page requirements (11 proposed new P declarations and5 existing P reuses), and proposed orders659–700. It changes no shared plan/category. [seal-preservation.json](seal-preservation.json) binds the original source paths/hashes and actual pinned keys. [report.md](report.md) states what changed, source extents and limits. [artifact-allowlist.json](artifact-allowlist.json) is the exact reviewable output list.
+
+The predecessor umbrella and proposed inventory had whole-file bindings in a now-concluded physics run; foreign-run-status.json verifies its native completion. Its entire original five-file design and umbrella are byte-preserved. Runtime source downloads and working raw preimages are excluded from the deliverable allowlist; the durable seal manifest records original paths, hashes and Git base. Production authoring/review/registration remain separate from this designed closure.
+
+
+Current engine-discoverable entrypoint: `physics/research/plan-fluid-dynamics-refresh-track.md` (physics-relative `research/plan-fluid-dynamics-refresh-track.md`). This complete47-pair top-level owner-refresh design controls over the historical original index; the nested complete version remains retained. The unchanged task generator discovers headings in top-level plan files, so registry pointers alone are insufficient. `design-discovery.json` reproduces its actual heading/mention algorithm and first-three-hit truncation for all47 A pages. The exact splice payload points all94 fluid A/B records to the discoverable index and binds both top-level and nested source hashes.

@@ -1,0 +1,131 @@
+{
+  "reader": 6,
+  "lane": "learned and data-driven inverse problems; plug-and-play and RED; score/diffusion methods; neural operators for PDE inverse maps; robustness and uncertainty limits",
+  "retrieved_at": "2026-10-18",
+  "timezone": "Australia/Sydney",
+  "extraction_method": "PyMuPDF (fitz), page.get_text(), preserving explicit page markers; pdftotext unavailable in the environment",
+  "full_text_read_attestation": "Each downloaded versioned PDF was extracted across every page and read from page 1 to its final page in bounded chunks. This is this reader's work only; no inherited reading is claimed. The InverseBench results are empirical and the diffusion survey is explicitly a work-in-progress, non-exhaustive survey. No general theorem is inferred from their empirical observations.",
+  "sources": [
+    {
+      "title": "A Survey on Diffusion Models for Inverse Problems",
+      "authors": ["Giannis Daras", "Hyungjin Chung", "Chieh-Hsin Lai", "Yuki Mitsufuji", "Jong Chul Ye", "Peyman Milanfar", "Alexandros G. Dimakis", "Mauricio Delbracio"],
+      "version": "arXiv:2410.00083v1",
+      "date": "2024-09-30",
+      "retrieval_date": "2026-10-18",
+      "authoritative_url": "https://arxiv.org/abs/2410.00083v1",
+      "pdf_url": "https://arxiv.org/pdf/2410.00083v1",
+      "local_pdf": ".autopilot/scaffold-refresh-2026-10-18/sources/reader-6/diffusion-survey.pdf",
+      "local_extracted_text": ".autopilot/scaffold-refresh-2026-10-18/sources/reader-6/diffusion-survey.txt",
+      "pages": 38,
+      "page_coverage": "1-38 inclusive",
+      "pdf_sha256": "08139d913a31c2685f5cec8b8f3ff94d4011d54b2ee7cbeac6937d2af5fcaab2",
+      "extracted_text_sha256": "cdc759476b2b1f2239f252e171425b9702115c7b18f0a08a6d2354372fe8f3fe",
+      "read_scope_and_limitations": "Complete arXiv v1 preprint, including taxonomy, equations, representative methods, appendices A.1-A.4, and references. Survey self-identifies as a preprint/work in progress and says its method list is not exhaustive. Its taxonomy is partly subjective. It surveys method-specific asymptotic exactness but does not prove every named sampler exact, convergent, calibrated, or practically mixing. The underlying perception-distortion theorem is cited but was not separately full-text read.",
+      "supported_claims": [
+        "Bayes decomposition separates the time-indexed prior score from the measurement-matching score; the latter involves an intractable integral over the clean conditional distribution.",
+        "The paper groups reviewed methods as explicit measurement-score approximations, variational methods, latent-space optimization, and particle/MCMC methods aiming at asymptotic posterior exactness.",
+        "For additive Gaussian corruption, Tweedie's identity is proved in the appendix; conditional-mean squared-error training and denoising score matching have the stated minimizer relationship under the paper's differentiability/support conditions.",
+        "The survey states that finite-compute scaling and residual approximation errors remain important limitations, and distinguishes posterior sampling from point reconstruction targets."
+      ],
+      "important_references_not_independently_read": ["Blau and Michaeli, The Perception-Distortion Tradeoff (2018); cited theorem on incompatible objectives is treated as a survey-reported limitation, not a reader-verified supplier"]
+    },
+    {
+      "title": "Provable Convergence of Plug-and-Play Priors with MMSE denoisers",
+      "authors": ["Xiaojian Xu", "Yu Sun", "Jiaming Liu", "Brendt Wohlberg", "Ulugbek S. Kamilov"],
+      "version": "arXiv:2005.07685v1",
+      "date": "2020-05-15",
+      "retrieval_date": "2026-10-18",
+      "authoritative_url": "https://arxiv.org/abs/2005.07685v1",
+      "pdf_url": "https://arxiv.org/pdf/2005.07685v1",
+      "local_pdf": ".autopilot/scaffold-refresh-2026-10-18/sources/reader-6/pnp-mmse.pdf",
+      "local_extracted_text": ".autopilot/scaffold-refresh-2026-10-18/sources/reader-6/pnp-mmse.txt",
+      "pages": 10,
+      "page_coverage": "1-10 inclusive",
+      "pdf_sha256": "fd4a756341836b581f6b73a9236d107d93b61b9b7aef92a64c6229a7fa3445f2",
+      "extracted_text_sha256": "712c0b95fc6ad005b1ed98c622f71563bde8b25b7aaade2df1d10db9c4837e85",
+      "read_scope_and_limitations": "Complete 10-page versioned letter, including both appendices and references. No experiments/code were reproduced. Theorem concerns exact MMSE denoising and PnP-ISTA only; it is not a theorem for arbitrary learned denoisers, PnP-ADMM, RED, posterior sampling, or global optimization.",
+      "theorem_hypotheses_and_conclusion": "Prior distribution on R^n is non-degenerate; D_sigma(z)=E[X|X+N(0,sigma^2 I)=z] is the exact MMSE estimator for that prior; g is continuously differentiable with L-Lipschitz gradient; f=g+h_mmse has finite infimum; fixed step size 0<gamma<=1/L. The paper constructs an extended-valued, generally nonconvex h_mmse from the MMSE denoiser and proves monotone decrease of f(x_t) and ||grad f(x_t)|| -> 0. This is stationarity, not a rate, global minimum, uniqueness, or posterior correctness.",
+      "proof_outline_and_caveat": "Tweedie's formula gives a smooth MMSE map with positive definite Jacobian and an inverse on its image. The paper identifies the denoiser with a possibly nonconvex proximal minimizer for h_mmse; the Lipschitz-gradient quadratic surrogate majorizes f when gamma<=1/L. Monotone descent plus a lower bound makes surrogate residuals summable, and Lipschitzness of the residual gradient yields vanishing gradient. Appendix A.2 has a notation slip in its final displayed norm equality: it writes a residual-function norm where the preceding argument requires the residual-gradient norm. The intended conclusion follows from the prior displayed residual-gradient bound.",
+      "empirical_limit": "Sparse Bernoulli-Gaussian compressive sensing experiments compare exact scalar MMSE and a trained DnCNN approximate MMSE model. The paper reports the approximate network matches behavior in those simulations, but explicitly does not prove the theorem for it and demonstrates suboptimality versus GAMP under the misspecified iterative-AWGN error model."
+    },
+    {
+      "title": "InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences",
+      "authors": ["Hongkai Zheng", "Wenda Chu", "Bingliang Zhang", "Zihui Wu", "Austin Wang", "Berthy T. Feng", "Caifeng Zou", "Yu Sun", "Nikola Kovachki", "Zachary E. Ross", "Katherine L. Bouman", "Yisong Yue"],
+      "publication": "ICLR 2025",
+      "version": "arXiv:2503.11043v2",
+      "version_date": "2025-09-30",
+      "initial_submission_date": "2025-03-14",
+      "retrieval_date": "2026-10-18",
+      "authoritative_url": "https://arxiv.org/abs/2503.11043v2",
+      "pdf_url": "https://arxiv.org/pdf/2503.11043v2",
+      "local_pdf": ".autopilot/scaffold-refresh-2026-10-18/sources/reader-6/inversebench.pdf",
+      "local_extracted_text": ".autopilot/scaffold-refresh-2026-10-18/sources/reader-6/inversebench.txt",
+      "pages": 29,
+      "page_coverage": "1-29 inclusive",
+      "pdf_sha256": "8c94b84b90fd7e5c34fcf985fb77db1ca606c6960a638d91355754f1df14ed1a",
+      "extracted_text_sha256": "a24d7efdba3cb77459b1428935a1764f36f8f5a1a4e8878fcdef2f28e46a4c2d",
+      "read_scope_and_limitations": "Complete version 2 conference paper, appendices, full tables and references. This is an empirical benchmark, not a convergence or robustness theorem. Results depend on selected simulated datasets, implementation, tuning, baselines and small PDE test/validation sets (10 test cases and 1 validation case for the Navier-Stokes benchmark; FWI validation also uses one case).",
+      "problems_and_method_scope": ["linear optical inverse scattering", "multi-coil compressed-sensing MRI", "nonlinear black-hole interferometric imaging", "full-waveform inversion through a wave PDE solver", "2D Navier-Stokes initial-vorticity inversion"],
+      "supported_empirical_findings": [
+        "Across selected experiments, diffusion-prior methods can perform well when the learned prior matches the problem distribution, with varied trade-offs in accuracy, hyperparameter tuning and computational cost.",
+        "PDE forward solvers can impose input admissibility and numerical stability conditions (including CFL); some tested methods become highly sensitive to update size and injected Langevin noise.",
+        "On tested out-of-distribution sources, outputs can be biased toward learned prior features; more data-gradient queries improved some examples but are costlier.",
+        "The paper identifies multimodal-posterior assessment, forward-model mismatch and prior mismatch as research needs, not solved guarantees."
+      ]
+    },
+    {
+      "title": "Extension and neural operator approximation of the electrical impedance tomography inverse map",
+      "authors": ["Maarten V. de Hoop", "Nikola B. Kovachki", "Matti Lassas", "Nicholas H. Nelsen"],
+      "version": "arXiv:2511.20361v1",
+      "date": "2025-11-25",
+      "retrieval_date": "2026-10-18",
+      "authoritative_url": "https://arxiv.org/abs/2511.20361v1",
+      "pdf_url": "https://arxiv.org/pdf/2511.20361v1",
+      "local_pdf": ".autopilot/scaffold-refresh-2026-10-18/sources/reader-6/neural-operator-eit.pdf",
+      "local_extracted_text": ".autopilot/scaffold-refresh-2026-10-18/sources/reader-6/neural-operator-eit.txt",
+      "pages": 80,
+      "page_coverage": "1-80 inclusive; text was regenerated page-by-page after removing extractor NUL characters; page markers retained",
+      "pdf_sha256": "ad6037c74f62c2ad609faf60e83647d314eae05b387b2afcb7724b75ea6b92e2",
+      "extracted_text_sha256": "01ce8d3f00552e01a83f124fc9d512e94f665f59db6607bb35b3b2b1d1153e41",
+      "read_scope_and_limitations": "Complete 80-page versioned preprint, main text, all proofs/appendices, numerical experiment details and references. No code or numerical experiment was reproduced. The main FNO result is an existence/uniform approximation theorem for this Calderon/EIT setting; it does not prove a trained finite network attains the bound or provide finite-sample generalization, posterior calibration or computational cost guarantees.",
+      "theorem_hypotheses_and_conclusion": "For a bounded smooth domain with bi-Lipschitz boundary charts and contained in the unit cube; conductivity bounded m<=gamma<=M and equal to background near boundary; admissible set bounded in BV for dimension 2 or C^{1,alpha} for dimension >=3; continuum Calderon forward/inverse map; a compact perturbation/noise set K in the L2 boundary-kernel space; and a generalized FNO architecture with globally Lipschitz, smooth, non-polynomial activation. Theorem 4.8 proves existence, for each epsilon>0, of a generalized FNO Psi such that the worst-case L2 conductivity error over admissible gamma and noise ||eta||<=delta in K is at most epsilon + C omega(delta), where omega is inherited from logarithmic inverse stability. The theorem covers noisy/off-range data through a stable Hilbert-space extension, and compactness of the exact forward image supports uniform approximation.",
+      "proof_outline_and_limits": "The argument combines (1) logarithmic stability for Calderon inversion in conductivity L2; (2) NtD-to-DtN and operator-to-Hilbert-Schmidt estimates; (3) representation as smoothed NtD integral kernels; (4) Hilbert-space extension preserving the modulus; (5) compactness of the BV/C^{1,alpha} admissible class and its forward image; (6) FNO universal approximation, with boundary-manifold charts and lifting/averaging layers. Inverse instability remains and the authors note O(epsilon) worst-case recovery may require exponentially small noise. Their experiments use 2D unit disk, finite element NtD data and three selected data-generating distributions; they explicitly note sampled BV fields need not obey a uniform BV bound and the theorem is nonconstructive. They state the framework does not automatically cover all inverse problems, noting hyperbolic boundary maps may not have required smoothing."
+    }
+  ],
+  "local_supplier_inventory": {
+    "published_page_carriers_checked": [
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/numerical-inverse-problems-and-regularization-error.md",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/spectral-regularization-and-parameter-choice.md",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/iterative-regularization-and-early-stopping.md",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/proximal-gradient-and-accelerated-composite-optimization.md",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/automatic-differentiation-and-computational-graphs.md",
+      "library/numerical-optimization-inverse-problems-and-uncertainty-quantification/discrete-continuous-and-pde-adjoint-sensitivities.md",
+      "library/bayesian-computational-statistics/bayesian-models-priors-and-posterior-laws.md",
+      "library/bayesian-computational-statistics/adaptive-mcmc-convergence-and-limitations.md",
+      "library/bayesian-computational-statistics/general-state-mcmc-kernels-and-reversibility.md",
+      "library/bayesian-computational-statistics/feynman-kac-particle-filters.md",
+      "library/mathematical-statistics/losses-risk-and-decision-rules.md",
+      "library/mathematical-statistics/minimax-lower-bounds-and-information-theoretic-methods.md"
+    ],
+    "status": "All listed page carriers were observed with status: published and exact IDs in their page lists. Individual item proof texts were not all opened by this reader; the authored scaffold must inspect exact item Statements, assumptions and dependency closure before using an item as a formal supplier.",
+    "example_existing_ids": ["lem-truncated-svd-bias-and-data-noise-decomposition", "thm-tikhonov-error-chain-with-discretization-and-residual", "alg-landweber-iteration-with-discrepancy-stopping", "thm-landweber-source-and-noise-error-bounds", "def-compact-spectral-filter-and-qualification", "thm-tikhonov-convergence-under-noise-parameter-coupling", "def-proper-closed-convex-function-on-rn", "thm-implicit-differentiation-forward-and-adjoint-formulas", "def-bayesian-posterior-as-regular-conditional-law", "thm-adaptive-mcmc-converges-under-uniform-ergodicity-or-containment", "thm-feynman-kac-path-radon-nikodym-weight", "thm-two-point-le-cam-risk-bound", "thm-assouad-hypercube", "thm-fano-packing"]
+  },
+  "unread_or_unverified_limits": [
+    "The survey-cited perception-distortion impossibility result was not separately retrieved/read in full; this reader reports it as a survey-described warning only.",
+    "No exact learned reconstruction guarantee, uncertainty calibration claim, broad distribution-shift guarantee, or finite-compute exact posterior sampler result is established by this source set.",
+    "No learned method code, benchmark results, or PDE solver behavior was reproduced.",
+    "No local library item proof was individually audited; page-level status and item-list interfaces only were checked."
+  ],
+  "planning_implications": [
+    "Do not duplicate published spectral regularization, early stopping, proximal optimization, AD, Bayesian posterior law, MCMC/Feynman-Kac, or risk/minimax foundations.",
+    "Keep supervised estimators, unrolled procedures, PnP/RED fixed-point methods, score approximations, posterior sampling, and neural-operator amortization as distinct object/guarantee contracts.",
+    "Candidate local prerequisite obligations may include nonidentifiability by measurement-kernel directions, inverse stability modulus, posterior target distinctions, proximal-map conditions, fixed-point convergence assumptions, and PDE solver admissibility."
+  ],
+  "research_horizons_not_consumed_as_suppliers": [
+    "Finite-computation posterior fidelity and multimodal mode coverage for high-dimensional nonlinear diffusion inverse solvers.",
+    "Calibration and coverage guarantees for uncertainty generated by approximate scores/samplers under model, prior, operator and discretization error.",
+    "Distributionally robust learned inversion under prior shift and unknown/misspecified forward operators, with data-consistency and stability bounds.",
+    "Stable learned inversion for PDE systems under physical/numerical admissibility constraints and black-box or unstable solver gradients.",
+    "Finite-sample generalization/sample complexity for neural operators on noisy infinite-dimensional inverse maps."
+  ]
+}
