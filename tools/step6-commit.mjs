@@ -122,7 +122,7 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
       const indexText = decodePlan(git(gitRoot, ['cat-file', 'blob', indexRow.oid]));
       const head = composePlanProjection(headText, projection.spec, 'head');
       const index = composePlanProjection(indexText, projection.spec, 'index');
-      const residual = text => planForeignResidual(text, planProjectionPageIds(projection.spec));
+      const residual = text => planForeignResidual(text, planProjectionPageIds(projection.spec), projection.spec.insertions ?? []);
       equal(residual(head.text), residual(headText), 'plan HEAD foreign raw residual');
       equal(residual(index.text), residual(indexText), 'plan index foreign raw residual');
       planStates.set(path, { projection, head, index, headRow, indexRow,
@@ -144,6 +144,7 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
           head_result_sha256: sha256(row.head.text), index_result_sha256: sha256(row.index.text) })),
         ...(scope.planProjections.length ? { plan_projections: [...planStates].map(([path, row]) => ({ path, authority: row.projection.authority,
           authority_sha256: row.projection.sha256, page_ids: row.projection.spec.page_ids,
+          ...(row.projection.spec.version === 2 ? { added_page_ids: row.projection.spec.added_page_ids } : {}),
           ...(row.projection.spec.supporting_pages ? { supporting_page_ids: row.projection.spec.supporting_pages.map(page => page.id) } : {}),
           before_head_blob: row.headRow.oid, before_index_blob: row.indexRow.oid,
           head_foreign_raw_sha256: row.headForeign, index_foreign_raw_sha256: row.indexForeign,
@@ -183,7 +184,7 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
           throw Error(`step6 commit: ${label} plan projection blob mismatch: ${path}`);
         const text = decodePlan(git(gitRoot, ['cat-file', 'blob', actual.oid]));
         composePlanProjection(text, row.projection.spec, kind);
-        equal(sha256(planForeignResidual(text, planProjectionPageIds(row.projection.spec))),
+        equal(sha256(planForeignResidual(text, planProjectionPageIds(row.projection.spec), row.projection.spec.insertions ?? [])),
           kind === 'head' ? row.headForeign : row.indexForeign, label + ' plan foreign raw residual');
       }
     };

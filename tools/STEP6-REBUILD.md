@@ -180,7 +180,7 @@ foreign bytes. Opted-in transaction receipts retain selected `page_ids` and add
 `supporting_page_ids`. Authorities and receipts without a supplement keep their
 existing schema and behavior.
 
-This route supports existing page replacements only. Missing, duplicate,
+The version-1 route supports existing page replacements only. Missing, duplicate,
 unknown or reordered owned IDs, duplicate JSON keys, malformed pages, scope
 additions/deletions and unmatched original/target rows are rejected. A strict
 JSON token scanner handles quoted strings/escapes, arrays, objects and
@@ -189,6 +189,61 @@ foreign relative order, array separator and top-level byte in each Git base.
 Each composition must reconstruct its entire original base by reversing its
 recorded replacements; the foreign raw residual and target row inventory are
 also compared after parsing the result.
+
+### Explicit new selected plan rows (version 2)
+
+For selected pages genuinely absent from both original Git plans, use version 2
+and kind `plan-page-replacement-and-insertion-projection`. All version-1 authority,
+manifest, scope, support-page, Git ancestry, working-byte and transaction guards
+remain. Add exactly these fields:
+
+```json
+{
+  "added_page_ids": ["new-selected-page-id"],
+  "insertions": [{
+    "after_page_id": "existing-unowned-page-id",
+    "page_ids": ["new-selected-page-id"],
+    "raw": ",\n  {\"id\":\"new-selected-page-id\",\"items\":[] }"
+  }]
+}
+```
+
+`added_page_ids` is the exact ordered selected-only addition set; it never
+contains supporting or outside pages. Every listed page must be absent from
+**both** immutable original HEAD and original index plans. The two base row
+arrays contain only genuinely existing owned rows, without fabricated empty or
+placeholder originals. Their ordered IDs must equal the target owned IDs with
+the additions removed. The target still contains the complete exact selected
+and explicitly owned support union. Existing supporting pages keep their
+items-only, actual-frontmatter-order guard.
+
+Each insertion names a unique unowned page present in both original plans and
+the current target. In the actual working document its added rows must immediately
+and consecutively follow that anchor, in exact declared order. `raw` is the exact
+substring from the anchor object's token end through the last added object's
+token end: a leading comma, whitespace, every added object, and every internal
+separator. The payload must start with a comma, parse as only those exact target
+page objects, and match the current working substring byte for byte. There is
+no fallback to append when an anchor is absent.
+
+Composition first replaces existing owned objects, then inserts the authenticated
+payload immediately after each surviving anchor token, **before** the base's
+original separator or closing-array whitespace. Thus later foreign rows may
+exist after an original tail anchor without being adopted or moved. Foreign
+anchor bodies are preserved from each current Git base, never copied from the
+working plan. The exact owned payload is removed to compute the foreign residual;
+its whitespace is not normalized. Reversing insertions and replacements must
+reconstruct the entire original base byte for byte.
+
+Both original and current Git bases retain their own foreign content and order.
+Partial additions, partial replacements, reordered blocks, changed separators,
+unknown additions, asymmetric original presence, and anchor conflicts fail
+closed. An exact complete target is idempotent only if its entire inserted span
+also matches. V2 transaction receipts additionally record `added_page_ids`; the
+selected `page_ids` and supporting `supporting_page_ids` remain separate. The
+full working plan and every outside index entry remain untouched. This grants
+plan-row commit ownership only; it creates no item, publication, review or gate
+coverage and does not change legacy or physics behavior.
 
 The current working plan must contain the exact authorized target row bytes.
 Root creates this authority only after real writers and native splice updates

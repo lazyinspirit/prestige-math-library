@@ -1,4 +1,4 @@
-// Replacement-only composition for selected rows and explicit owned support.
+// Exact selected replacements and opt-in selected additions; owned support stays replacement-only.
 // Scientific prerequisite projections remain independent in step6-scoped-tree.
 import { createHash } from 'node:crypto';
 import { lstatSync, readFileSync, readdirSync } from 'node:fs';
@@ -73,12 +73,57 @@ export function planDocument(text) {
 }
 
 const ownedRows = (doc, ids) => doc.rows.filter(row => ids.has(row.id)).map(({ id, raw }) => ({ id, raw }));
-export function planForeignResidual(text, pageIds) {
+export function planForeignResidual(text, pageIds, insertions = []) {
+  text = removePlanInsertions(text, insertions);
   const ids = new Set(pageIds), doc = planDocument(text); let out = '', cursor = 0;
   for (const row of doc.rows) if (ids.has(row.id)) {
     out += text.slice(cursor, row.start) + JSON.stringify({ owned_page: row.id }); cursor = row.end;
   }
   return out + text.slice(cursor);
+}
+
+
+// The payload owns only the exact added row tokens and their leading comma.
+// Every original separator, foreign token and top-level byte remains outside it.
+function insertionAuthority(spec, pageIds) {
+  if (spec.version !== 2) return [];
+  const added = spec.added_page_ids, blocks = spec.insertions;
+  if (!Array.isArray(added) || !added.length || new Set(added).size !== added.length
+    || added.some(id => !spec.page_ids.includes(id)) || !Array.isArray(blocks) || !blocks.length
+    || !same(spec.target_owned_rows.filter(row => added.includes(row.id)).map(row => row.id), added))
+    fail('invalid selected-only added page authority');
+  const owned = new Set(pageIds), anchors = new Set();
+  for (const block of blocks) {
+    if (!keys(block, ['after_page_id', 'page_ids', 'raw']) || typeof block.after_page_id !== 'string'
+      || owned.has(block.after_page_id) || anchors.has(block.after_page_id)
+      || !Array.isArray(block.page_ids) || !block.page_ids.length || typeof block.raw !== 'string'
+      || !block.raw.startsWith(',')) fail('invalid unowned insertion anchor/payload');
+    anchors.add(block.after_page_id);
+    const rows = planDocument('{"pages":[' + block.raw.slice(1) + ']}').rows.map(({id,raw}) => ({id,raw}));
+    if (!same(rows.map(row => row.id), block.page_ids)
+      || !same(rows, spec.target_owned_rows.filter(row => block.page_ids.includes(row.id))))
+      fail('insertion payload differs from exact target row tokens');
+  }
+  if (!same(blocks.flatMap(block => block.page_ids), added)) fail('added page blocks differ from exact ordered additions');
+  return blocks;
+}
+function removePlanInsertions(text, blocks) {
+  if (!blocks.length) return text;
+  const doc = planDocument(text), added = blocks.flatMap(block => block.page_ids);
+  const present = doc.rows.filter(row => added.includes(row.id));
+  if (!present.length) return text;
+  if (present.length !== added.length) fail('partially integrated added pages');
+  const removals = [];
+  for (const block of blocks) {
+    const at = doc.rows.findIndex(row => row.id === block.after_page_id);
+    if (at < 0 || !same(doc.rows.slice(at + 1, at + 1 + block.page_ids.length).map(row => row.id), block.page_ids))
+      fail('insertion anchor missing or added block moved/reordered');
+    const start = doc.rows[at].end, end = doc.rows[at + block.page_ids.length].end;
+    if (text.slice(start, end) !== block.raw) fail('inserted leading-comma span differs from exact authority');
+    removals.push({start,end});
+  }
+  for (const row of removals.sort((a,b) => b.start-a.start)) text = text.slice(0,row.start) + text.slice(row.end);
+  return text;
 }
 
 // page_ids always remains the exact scientific frontier. Only the separately
@@ -162,11 +207,13 @@ function validateSupportingPages(spec, run, root, additionalPaths, documents) {
 // from readiness's broader transitive prerequisite page set.
 export function validatePlanProjection(spec, run, scopePages, working, originalHead, originalIndex, root,
   { additionalPaths } = {}) {
+  const additions = spec?.version === 2;
   const hasSupport = spec !== null && typeof spec === 'object' && Object.hasOwn(spec, 'supporting_pages');
   if (!keys(spec, ['version', 'kind', 'run', 'path', 'authorized_by', 'authorization', 'original_head',
     'original_index_blob', 'page_ids', 'base_head_owned_rows', 'base_index_owned_rows', 'target_owned_rows', 'evidence',
-    ...(hasSupport ? ['supporting_pages'] : [])])
-    || spec.version !== 1 || spec.kind !== 'plan-page-replacement-projection' || spec.run !== run
+    ...(hasSupport ? ['supporting_pages'] : []), ...(additions ? ['added_page_ids', 'insertions'] : [])])
+    || !(spec.version === 1 && spec.kind === 'plan-page-replacement-projection'
+      || additions && spec.kind === 'plan-page-replacement-and-insertion-projection') || spec.run !== run
     || spec.path !== 'research/plan-spec.json' || spec.authorized_by !== 'owner'
     || typeof spec.authorization !== 'string' || spec.authorization.trim().length < 20
     || !/^[a-f0-9]{40,64}$/.test(spec.original_head ?? '')
@@ -194,9 +241,11 @@ export function validatePlanProjection(spec, run, scopePages, working, originalH
     || !same([...evidencePaths].sort(), [ledgerPath, ...manifestPaths].sort()))
     fail('authority must bind exactly the current scope ledger and all current manifests');
   const replacementIds = planProjectionPageIds(spec), replacementSet = new Set(replacementIds);
+  const blocks = insertionAuthority(spec, replacementIds), added = new Set(spec.added_page_ids ?? []);
+  const originalIds = replacementIds.filter(id => !added.has(id));
   for (const name of ['base_head_owned_rows', 'base_index_owned_rows', 'target_owned_rows']) {
     const rows = spec[name];
-    if (!Array.isArray(rows) || !same(rows.map(row => row?.id), replacementIds)
+    if (!Array.isArray(rows) || !same(rows.map(row => row?.id), name === 'target_owned_rows' ? replacementIds : originalIds)
       || rows.some(row => !keys(row, ['id', 'raw']) || typeof row.raw !== 'string')) fail('invalid ordered authority rows');
     for (const row of rows) {
       const doc = planDocument('{"pages":[' + row.raw + ']}');
@@ -206,8 +255,12 @@ export function validatePlanProjection(spec, run, scopePages, working, originalH
   }
   const documents = [originalHead, originalIndex, working].map(planDocument);
   const observed = documents.map(doc => ownedRows(doc, replacementSet));
-  for (const rows of observed) if (!same(rows.map(row => row.id), replacementIds))
-    fail('owned relative order changed or an owned page is missing');
+  for (const [index, rows] of observed.entries()) if (!same(rows.map(row => row.id), index === 2 ? replacementIds : originalIds))
+    fail('owned relative order changed, addition is not absent in both originals, or an owned page is missing');
+  for (const block of blocks) {
+    if (documents.some(doc => !doc.rows.some(row => row.id === block.after_page_id))) fail('insertion anchor missing from an original or target');
+  }
+  if (blocks.length) removePlanInsertions(working, blocks);
   if (!same(observed[0], spec.base_head_owned_rows) || !same(observed[1], spec.base_index_owned_rows)
     || !same(observed[2], spec.target_owned_rows)) fail('original/target raw owned rows differ from authority');
   validateSupportingPages(spec, run, root, additionalPaths, documents);
@@ -217,18 +270,21 @@ export function validatePlanProjection(spec, run, scopePages, working, originalH
       || row.value.kind !== manifest.kind || !same(row.value.items, manifest.items ?? [])
       || !same(row.value.requires ?? [], manifest.requires ?? [])) fail('target differs from current owned manifest/home');
   }
-  return { pageIds: [...spec.page_ids], ...(spec.supporting_pages
+  return { pageIds: [...spec.page_ids], ...(additions ? { addedPageIds: [...spec.added_page_ids] } : {}), ...(spec.supporting_pages
     ? { supportingPageIds: spec.supporting_pages.map(row => row.id) } : {}) };
 }
 
 export function composePlanProjection(base, spec, kind) {
   if (!['head', 'index'].includes(kind)) fail('invalid base kind');
   const pageIds = planProjectionPageIds(spec), ids = new Set(pageIds), doc = planDocument(base), rows = ownedRows(doc, ids);
-  if (!same(rows.map(row => row.id), pageIds)) fail('base owned relative order/scope changed');
-  const target = spec.target_owned_rows;
-  if (same(rows, target)) return { text: base, already_integrated: true, replacements: [] };
-  if (!same(rows, spec[kind === 'head' ? 'base_head_owned_rows' : 'base_index_owned_rows']))
-    fail('base owned rows are neither authorized original nor target');
+  const blocks = insertionAuthority(spec, pageIds), target = spec.target_owned_rows;
+  if (same(rows, target)) {
+    if (blocks.length) removePlanInsertions(base, blocks);
+    return { text: base, already_integrated: true, replacements: [], ...(blocks.length ? { insertions: [] } : {}) };
+  }
+  const original = spec[kind === 'head' ? 'base_head_owned_rows' : 'base_index_owned_rows'];
+  if (!blocks.length && !same(rows.map(row => row.id), pageIds)) fail('base owned relative order/scope changed');
+  if (!same(rows, original)) fail('base owned rows are neither authorized original nor target');
   const desired = new Map(target.map(row => [row.id, row.raw]));
   let text = '', cursor = 0; const replacements = [];
   for (const row of doc.rows) if (ids.has(row.id)) {
@@ -237,11 +293,18 @@ export function composePlanProjection(base, spec, kind) {
     text += raw; cursor = row.end;
   }
   text += base.slice(cursor);
-  let reconstructed = text;
+  const replaced = planDocument(text), insertions = [];
+  for (const block of blocks) {
+    const anchor = replaced.rows.find(row => row.id === block.after_page_id);
+    if (!anchor) fail('insertion anchor missing from actual base');
+    insertions.push({at:anchor.end,raw:block.raw});
+  }
+  for (const row of [...insertions].sort((a,b) => b.at-a.at)) text = text.slice(0,row.at) + row.raw + text.slice(row.at);
+  let reconstructed = removePlanInsertions(text, blocks);
   for (const row of [...replacements].reverse()) reconstructed = reconstructed.slice(0, row.at)
     + row.before + reconstructed.slice(row.at + row.length);
-  if (reconstructed !== base) fail('inverse replacement failed exact base reconstruction');
+  if (reconstructed !== base) fail('inverse replacement/insertion failed exact base reconstruction');
   if (!same(ownedRows(planDocument(text), ids), target)
-    || planForeignResidual(text, ids) !== planForeignResidual(base, ids)) fail('foreign bytes or target rows changed');
-  return { text, already_integrated: false, replacements };
+    || planForeignResidual(text, ids, blocks) !== planForeignResidual(base, ids, blocks)) fail('foreign bytes or target rows changed');
+  return { text, already_integrated: false, replacements, ...(blocks.length ? { insertions } : {}) };
 }

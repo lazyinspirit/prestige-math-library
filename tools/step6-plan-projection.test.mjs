@@ -235,3 +235,68 @@ test('native temporary-Git transaction loads supporting policy and commits 164 r
   assert.equal(projection.head_foreign_raw_sha256, hash(planForeignResidual(f.head, ids)));
   assert.equal(projection.index_foreign_raw_sha256, hash(planForeignResidual(f.index, ids)));
 });
+
+function additionFixture(t) {
+  const f = fixture(t), oldRows = new Map(planDocument(f.head).rows.map(row => [row.id,row.raw]));
+  for (const suffix of ['third','fourth']) {
+    const id='support-'+suffix, row={id,kind:'A',category:'test-category',requires:[],items:['def-'+suffix]};
+    f.support.push(row);const path=`library/test-category/${id}.md`,source=`---\npage: ${id}\nstatus: published\nitems: [def-${suffix}]\nexamples: []\n---\nAccepted fixture page.\n`;f.put(path,source);
+    f.spec.supporting_pages.push({id,path,sha256:hash(source),ownership_evidence:f.ownership});f.owner.owned_paths.push({path,sha256:hash(source)});f.additionalPaths.push({path,sha256:hash(source),ownership_evidence:f.ownership,reason:'Commit this exact accepted outside page repair.'});oldRows.set(id,JSON.stringify(row));
+  }
+  f.resealOwner();
+  const added=f.selectedIds.slice(62), anchor='foreign-anchor', owned=new Set([...f.selectedIds,...f.support.map(r=>r.id)]);
+  const raw=rows=>rows.map(row=>typeof row==='string'?row:JSON.stringify(row));
+  const original=label=>raw([oldRows.get('support-left'),...f.selectedIds.slice(0,62).map(id=>oldRows.get(id)),...f.support.slice(1).map(r=>oldRows.get(r.id)),` { "id" : "${anchor}", "items" : [], "memo" : "${label} anchor body" }`]);
+  const target=raw([f.support[0],...f.selected.slice(0,62),...f.support.slice(1),` { "id" : "${anchor}", "items" : [], "memo" : "WORKING anchor body" }`,...f.selected.slice(62)]);
+  const foreign=label=>[` { "id" : "foreign-later-one", "items" : [], "memo" : "${label} first \u03b1 { raw }" } `,` { "id" : "foreign-later-two", "items" : [], "memo" : "${label} second" } `];
+  const doc=(rows,label)=>'{\n "foreign_top" : '+JSON.stringify(label)+',\n "pages" : [\n  '+rows.join(',\n  ')+'\n ]\n}\n';
+  const head=doc(original('HEAD'),'HEAD original'),index=doc(original('INDEX'),'INDEX original'),working=doc([...target,...foreign('WORKING')],'WORKING current');
+  const currentHead=doc([...original('HEAD'),...foreign('HEAD')],'HEAD original'),currentIndex=doc([...original('INDEX'),...foreign('INDEX')],'INDEX original');
+  const rows=text=>planDocument(text).rows.filter(row=>owned.has(row.id)).map(({id,raw})=>({id,raw}));
+  const parsed=planDocument(working),a=parsed.rows.findIndex(row=>row.id===anchor),last=parsed.rows[a+added.length];
+  Object.assign(f.spec,{version:2,kind:'plan-page-replacement-and-insertion-projection',added_page_ids:added,insertions:[{after_page_id:anchor,page_ids:added,raw:working.slice(parsed.rows[a].end,last.end)}],base_head_owned_rows:rows(head),base_index_owned_rows:rows(index),target_owned_rows:rows(working)});
+  f.put('research/plan-spec.json',working);
+  const validate=(h=head,i=index,w=working)=>validatePlanProjection(f.spec,f.run,f.selected,w,h,i,f.root,{additionalPaths:f.additionalPaths});
+  return {...f,head,index,working,currentHead,currentIndex,validate,added,owned,anchor};
+}
+test('V2 authenticates 100 absent selected rows, 66 existing rows and four support rows without fake originals',t=>{
+ const f=additionFixture(t),v=f.validate();assert.equal(v.pageIds.length,162);assert.equal(v.supportingPageIds.length,4);assert.equal(v.addedPageIds.length,100);assert.equal(f.spec.base_head_owned_rows.length,66);assert.equal(f.spec.target_owned_rows.length,166);
+ for(const [kind,base]of [['head',f.currentHead],['index',f.currentIndex]]){const out=composePlanProjection(base,f.spec,kind),ids=planProjectionPageIds(f.spec);assert.equal(out.replacements.length,66);assert.equal(out.insertions.length,1);assert.equal(planForeignResidual(out.text,ids,f.spec.insertions),planForeignResidual(base,ids,f.spec.insertions));assert.ok(out.text.includes(kind==='head'?'HEAD first':'INDEX first'));assert.ok(!out.text.includes('WORKING first'));assert.deepEqual(composePlanProjection(out.text,f.spec,kind),{text:out.text,already_integrated:true,replacements:[],insertions:[]});}
+});
+for(const mode of ['missing-anchor','owned-anchor','duplicate-added','duplicate-block','unknown-added','one-original-present','reordered-added','payload-space','payload-comma','payload-foreign-row'])test(`V2 rejects ${mode}`,t=>{
+ const f=additionFixture(t);
+ if(mode==='missing-anchor')f.spec.insertions[0].after_page_id='absent-anchor';
+ if(mode==='owned-anchor')f.spec.insertions[0].after_page_id=f.selectedIds[0];
+ if(mode==='duplicate-added')f.spec.added_page_ids.push(f.added[0]);
+ if(mode==='duplicate-block')f.spec.insertions.push(clone(f.spec.insertions[0]));
+ if(mode==='unknown-added')f.spec.added_page_ids[0]='foreign-later-one';
+ if(mode==='one-original-present'){const row=f.spec.target_owned_rows.find(r=>r.id===f.added[0]);const d=planDocument(f.head),a=d.rows.find(r=>r.id===f.anchor),h=f.head.slice(0,a.end)+','+row.raw+f.head.slice(a.end);assert.throws(()=>f.validate(h),/absent in both originals|relative order/);return;}
+ if(mode==='reordered-added')f.spec.insertions[0].page_ids.reverse();
+ if(mode==='payload-space')f.spec.insertions[0].raw=f.spec.insertions[0].raw.replace(',\n  ', ',\n   ');
+ if(mode==='payload-comma')f.spec.insertions[0].raw=f.spec.insertions[0].raw.slice(1);
+ if(mode==='payload-foreign-row')f.spec.insertions[0].raw+=',{"id":"foreign-forgery","items":[]}';
+ assert.throws(f.validate);
+});
+test('V2 composition rejects missing actual anchor, partial additions/replacements and separator-only drift',t=>{
+ const f=additionFixture(t);f.validate();
+ const baseDoc=planDocument(f.currentHead),anchor=baseDoc.rows.find(r=>r.id===f.anchor),moved=f.currentHead.slice(0,anchor.start)+anchor.raw.replace(f.anchor,'changed-anchor')+f.currentHead.slice(anchor.end);assert.throws(()=>composePlanProjection(moved,f.spec,'head'),/anchor missing/);
+ const row=f.spec.target_owned_rows.find(r=>r.id===f.added[0]),partial=f.currentHead.slice(0,anchor.end)+','+row.raw+f.currentHead.slice(anchor.end);assert.throws(()=>composePlanProjection(partial,f.spec,'head'),/neither authorized/);
+ const before=f.spec.base_head_owned_rows[0],after=f.spec.target_owned_rows.find(r=>r.id===before.id);assert.throws(()=>composePlanProjection(f.currentHead.replace(before.raw,after.raw),f.spec,'head'),/neither authorized/);
+ const done=composePlanProjection(f.currentHead,f.spec,'head').text,bad=done.replace(f.spec.insertions[0].raw,f.spec.insertions[0].raw.replace(',\n  ',',\n   '));assert.throws(()=>composePlanProjection(bad,f.spec,'head'),/leading-comma span/);assert.throws(()=>planForeignResidual(bad,planProjectionPageIds(f.spec),f.spec.insertions),/leading-comma span/);
+});
+
+test('native V2 temporary-Git transaction inserts only 100 owned rows and preserves separate foreign HEAD/index/working',t=>{
+ const f=additionFixture(t),git=args=>{const r=spawnSync('git',args,{cwd:f.root,encoding:'utf8'});assert.equal(r.status,0,r.stderr);return r.stdout.trimEnd();};
+ git(['init','-b','main']);git(['config','user.name','Projection fixture']);git(['config','user.email','fixture@example.invalid']);mkdirSync(join(f.root,'empty-hooks'));git(['config','core.hooksPath',join(f.root,'empty-hooks')]);
+ f.put('research/plan-spec.json',f.head);f.put('foreign.md','Original foreign file\n');git(['add','--','research/plan-spec.json','foreign.md']);git(['commit','-m','genuine absent-row original']);f.spec.original_head=git(['rev-parse','HEAD']);
+ f.put('research/plan-spec.json',f.index);git(['add','--','research/plan-spec.json']);f.spec.original_index_blob=git(['rev-parse',':research/plan-spec.json']);
+ // A genuine unrelated commit adds foreign rows after the preserved anchor.
+ f.put('research/plan-spec.json',f.currentHead);git(['add','--','research/plan-spec.json']);git(['commit','-m','unrelated foreign plan additions']);f.put('research/plan-spec.json',f.currentIndex);f.put('foreign.md','Separately staged foreign file\n');git(['add','--','research/plan-spec.json','foreign.md']);const foreignIndex=git(['ls-files','--stage','--','foreign.md']);
+ f.put('research/plan-spec.json',f.working);f.put('foreign.md','Independent working foreign file\n');
+ for(const row of f.selected){const id=row.items[0].id;f.put(`library/test-category/${row.id}.md`,`---\npage: ${row.id}\nitems: [${id}]\nexamples: []\n---\n`);f.put(`items/${id}.md`,`---\nid: ${id}\ndeps: []\n---\n## Statement\nFixture only.\n`);}
+ f.put('research/published-consumer-supplier-ledger.md','');f.put('research/defect-ledger.jsonl','');for(const suffix of ['proof-layout.json','publication-readiness.json','step6-evidence.json','step6-report-integrity.json','step6-report.response.json','step6-report.md','pathway-closure.json','judge-closure.json'])f.put(`research/demo-${suffix}`,'{}');
+ const authority='research/demo-plan-projection.json';f.put(authority,f.spec);f.put('research/demo-closeout-scope.json',{version:1,run:f.run,authorized_by:'owner',authorization:'Authorize exact selected and explicitly owned supporting plan rows only.',additional_paths:f.additionalPaths,plan_projection:{path:'research/plan-spec.json',authority,sha256:hash(readFileSync(join(f.root,authority)))}});
+ assert.equal(preflightStep6(f.root,f.run).planProjections.length,1);const result=commitStep6(f.root,f.run,{assertValidated(){}});assert.equal(git(['rev-parse','HEAD']),result.commit);
+ assert.equal(git(['show','HEAD:research/plan-spec.json'])+'\n',composePlanProjection(f.currentHead,f.spec,'head').text);assert.equal(git(['show',':research/plan-spec.json'])+'\n',composePlanProjection(f.currentIndex,f.spec,'index').text);assert.equal(readFileSync(join(f.root,'research/plan-spec.json'),'utf8'),f.working);assert.equal(git(['ls-files','--stage','--','foreign.md']),foreignIndex);assert.equal(readFileSync(join(f.root,'foreign.md'),'utf8'),'Independent working foreign file\n');
+ const receipt=JSON.parse(readFileSync(join(f.root,'research/demo-dispatch/tool-step6-finalize-v3.result.json')));assert.equal(receipt.closeout_scope.plan_projections[0].added_page_ids.length,100);assert.equal(receipt.closeout_scope.plan_projections[0].supporting_page_ids.length,4);
+});
