@@ -27,7 +27,7 @@ import { syncMaintenance, maintenanceStatus, prepareMaintenance, collectMaintena
 import { orderedItems, runPages } from './item-dependency-levels.mjs';
 import { loadReaderConcerns, checkFrozenReaderConcernInput, readerConcernSession } from './step5-reader-concerns.mjs';
 import { loadInitialScopeFindings, checkFrozenInitialScopeFindingInput, recordInitialScopeFindings } from './step5-initial-scope-findings.mjs';
-import { loadInitialPublishedMaintenance, recordInitialPublishedMaintenance, isInitialPublishedMaintenance, initialPublishedSupportingHistory } from './step5-initial-published-maintenance.mjs';
+import { loadInitialPublishedMaintenance, recordInitialPublishedMaintenance, isInitialPublishedMaintenance, initialPublishedSupportingHistory, initialPublishedBaselineExclusions, verifyInitialPublishedBaselineExclusions } from './step5-initial-published-maintenance.mjs';
 export { readerConcernSession };
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
@@ -2150,6 +2150,7 @@ export function verifyCertification(root,run,{allowMissing=true}={}) {
     maintenanceSeen.add(entry.id);
   }
   verifyEvidence(row.evidence,{root,run,certificate:row});
+  verifyInitialPublishedBaselineExclusions(root,run,row);
   return row;
 }
 
@@ -2157,6 +2158,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const savedPath=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`certification-${phase}-${round}.json`));
   if(existsSync(savedPath)) {
     const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence,{root,run});
+    verifyInitialPublishedBaselineExclusions(root,run,saved,{current:true});
     const frontier=gateFrontier(root,run),maintained=new Set((saved.maintenance_certifications??[]).map(row=>row.id));
     const scoped=saved.items.filter(row=>frontier.has(row.id)||maintained.has(row.id));
     const current=hashes(root,run);for(const row of scoped)requireValue(row.guard_sha256===current[row.id],`stale completed certification ${row.id}`);
@@ -2181,7 +2183,10 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   // native owner review can supply current certification for this target.
   for(const id of sourceResult?.metadata_history_current_review_targets??[])
     requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native metadata-target review: ${id}`);
-  const changed=diff(baseline,current).filter(certifiedScope);
+  const publishedBaseline=initialPublishedBaselineExclusions(root,run);
+  // Only this original baseline difference is historical ordinary maintenance.
+  // Native consumer reviews, contexts, impacts and gates keep the full scope.
+  const changed=diff(baseline,current).filter(id=>certifiedScope(id)&&!publishedBaseline?.ids.has(id));
   const priorItems=new Map((prior?.items??[]).filter(row=>certifiedScope(row.id)).map(row=>[row.id,row]));
   const progress=read(impactProgressPath(root,run,phase,round));
   const impactPack=readPack(root,run,progress.repairBasePhase??phase,round);
@@ -2210,7 +2215,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
       `stale root owner review context before certification: ${id}`);
   }
   if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence};
+  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...maintenance.evidence,...publishedBaseline?.evidence};
   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
   const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??maintenance.basis.get(id)?.reason??priorItems.get(id)?.reason}));
   const creationRows=[...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])],creationById=new Map();
@@ -2229,6 +2234,8 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
     frozen(join(dir,`threshold-${round}.json`),threshold);
     const p=join(dir,`threshold-${round}.json`);evidence[p]=digest(readFileSync(p,'utf8'));
   }
+  if(publishedBaseline)certificate.ordinary_published_baseline_exclusions=publishedBaseline.record;
+  verifyInitialPublishedBaselineExclusions(root,run,certificate,{current:true});
   certificate.sha256=digest(certificate);
   frozen(join(dir,`certification-${phase}-${round}.json`),certificate);
   atomic(join(dir,'certification.json'),certificate);
@@ -2265,11 +2272,13 @@ export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=n
 
 export function verifyWave(root,run,{contextHasher=currentHashesMany,frontierOnly=true}={}) {
   const cert=verifyCertification(root,run,{allowMissing:false}), current=hashes(root,run);
+  verifyInitialPublishedBaselineExclusions(root,run,cert,{current:true});
+  const publishedBaseline=new Set((cert.ordinary_published_baseline_exclusions?.entries??[]).map(row=>row.id));
   const frontier=frontierOnly?gateFrontier(root,run):null,items=cert.items.filter(row=>!frontier||frontier.has(row.id));
   const contexts=contextHasher(root,items.map(row=>row.id));
   for(const row of items)if(row.guard_sha256!==current[row.id])throw Error(`stale Step 5 certification ${row.id}`);
   for(const row of items){const now=contexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`stale Step 5 certification context ${row.id}`);}
-  for(const id of diff(read(join(workflowDir(root,run),'baseline.json')),current))if((!frontier||frontier.has(id))&&!items.some(row=>row.id===id))throw Error(`uncovered Step 5 repair ${id}`);
+  for(const id of diff(read(join(workflowDir(root,run),'baseline.json')),current))if((!frontier||frontier.has(id))&&!publishedBaseline.has(id)&&!items.some(row=>row.id===id))throw Error(`uncovered Step 5 repair ${id}`);
   return cert;
 }
 

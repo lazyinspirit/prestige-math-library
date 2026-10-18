@@ -9,8 +9,8 @@ import {itemHashGuard} from './item-hash.mjs';
 import {statementHash} from './step5-statement.mjs';
 import {MODELS} from './models.mjs';
 import {recordedPublishedRepair} from './published-repair-policy.mjs';
-import {recordInitialPublishedMaintenance,loadInitialPublishedMaintenance,isInitialPublishedMaintenance,initialPublishedSupportingHistory} from './step5-initial-published-maintenance.mjs';
-import {validateReports,collect,prepareImpact,reviewContextHashes,reviewMatchesCurrent} from './step5-workflow.mjs';
+import {recordInitialPublishedMaintenance,loadInitialPublishedMaintenance,isInitialPublishedMaintenance,initialPublishedSupportingHistory,initialPublishedBaselineExclusions,verifyInitialPublishedBaselineExclusions} from './step5-initial-published-maintenance.mjs';
+import {validateReports,collect,prepareImpact,reviewContextHashes,reviewMatchesCurrent,verifyWave} from './step5-workflow.mjs';
 import {readLibraryItems} from './step5-rounds.mjs';
 const hash=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
 const run='test-initial-published',id='thm-published',consumer='lem-consumer',dir=`research/${run}-step5-v2`,dispatch=`research/${run}-dispatch`;
@@ -215,4 +215,96 @@ for(const [label,value]of [['null',null],['nonempty',['def-context']],['string',
 });
 test('optional normalization never authorizes a nonpublished manifest carrier',t=>{
  const f=fixture(t),m=f.request.manifests[1],old=JSON.parse(readFileSync(join(f.root,m.archive),'utf8')),before=`research/${run}-nonpublished-before.json`;old[0].items[0].justified_by=[];f.put(before,old);f.files.push(before);f.request.metadata_carriers.push({path:m.path,before_file:before,current_file:m.archive});f.save();assert.throws(f.record,/not an exact old\/current published-source mirror/);
+});
+
+function originalOrdinaryCertificate(f){
+ f.record();const history=loadInitialPublishedMaintenance(f.root,run),path=join(f.root,dir,'initial-1-collected.json');
+ const collection={version:2,run,phase:'initial',round:1,errors:[],reviews:[],evidence:{...history.evidence},published_maintenance:{path:history.path,ids:[...history.ids],historical_only:true,current_review_granted:false,native_execution_coverage_adopted:false}};
+ writeFileSync(path,JSON.stringify(collection));const certificate={version:2,run,phase:'impact-initial',round:1,at:'2026-10-01T13:00:00Z',items:[],changed:[],evidence:{...collection.evidence,[path]:hash(JSON.stringify(collection))}};
+ const saveCertificate=()=>{const {sha256,...payload}=certificate;certificate.sha256=hash(payload);f.put(join(dir,'certification-impact-initial-1.json'),certificate);};saveCertificate();
+ const dispatchPath=join(dispatch,'tool-step5-v2-certify-impact-initial-r1-all.result.json'),native={run,role:'tool',label:'step5-v2-certify-impact-initial-r1-all',covers:['all'],written_by:'autopilot',ok:true,ended_at:'2026-10-01T13:00:01Z'};f.put(dispatchPath,native);
+ return {history,collection,certificate,path,native,dispatchPath,saveCertificate};
+}
+function laterOrdinaryCertificate(f){const basis=initialPublishedBaselineExclusions(f.root,run);return {basis,certificate:{version:2,run,phase:'impact-repeat',round:1,evidence:{...basis.evidence},ordinary_published_baseline_exclusions:structuredClone(basis.record)}};}
+test('baseline compatibility discharges only original changed guard, not current consumer context or impact scope',t=>{
+ const f=fixture(t);originalOrdinaryCertificate(f);const {basis,certificate}=laterOrdinaryCertificate(f);
+ assert.deepEqual([...basis.ids],[id]);assert.equal(certificate.ordinary_published_baseline_exclusions.native_review_granted,false);
+ verifyInitialPublishedBaselineExclusions(f.root,run,certificate,{current:true});
+ // A real consumer remains discovered even while its supplier's original
+ // baseline change is exempt. No review row is synthesized by the helper.
+ assert.ok(readLibraryItems(f.root,{run}).find(x=>x.id===consumer).deps.includes(id));
+ assert.equal(basis.reviews,undefined);assert.equal(basis.record.mathematical_acceptance,false);
+});
+test('baseline compatibility preserves all-published default without old history',t=>{
+ const f=fixture(t);assert.equal(initialPublishedBaselineExclusions(f.root,run),null);
+ assert.throws(()=>verifyInitialPublishedBaselineExclusions(f.root,run,{phase:'impact-repeat',ordinary_published_baseline_exclusions:{entries:[{id}]}}),/unlicensed/);
+});
+test('baseline compatibility cannot bless new audit before original native certificate',t=>{
+ const f=fixture(t);f.record();assert.equal(initialPublishedBaselineExclusions(f.root,run),null);
+});
+for(const kind of ['body','status','supplier-deps','verification'])test(`baseline compatibility rejects inherited exclusion after ${kind} source edit`,t=>{
+ const f=fixture(t);originalOrdinaryCertificate(f);const {certificate}=laterOrdinaryCertificate(f);
+ const changed=kind==='body'?f.after+'\nA later actual proof repair.\n':kind==='status'?f.after.replace('status: published','status: draft'):kind==='supplier-deps'?f.after.replace('deps: [def-context]','deps: []'):f.after.replace('verification:','verification:\n  unrelated: 2026-10-02');
+ f.put(`items/${id}.md`,changed);assert.equal(initialPublishedBaselineExclusions(f.root,run).ids.size,0);
+ assert.throws(()=>verifyInitialPublishedBaselineExclusions(f.root,run,certificate,{current:true}),/stale ordinary/);
+ // Prior native certification provenance can still be read while a genuine
+ // later repair seeks a new current review; it is not current reuse credit.
+ verifyInitialPublishedBaselineExclusions(f.root,run,certificate);
+});
+test('baseline compatibility rejects deleted source on saved reuse',t=>{
+ const f=fixture(t);originalOrdinaryCertificate(f);const {certificate}=laterOrdinaryCertificate(f);rmSync(join(f.root,`items/${id}.md`));
+ assert.equal(initialPublishedBaselineExclusions(f.root,run).ids.size,0);assert.throws(()=>verifyInitialPublishedBaselineExclusions(f.root,run,certificate,{current:true}),/stale ordinary/);
+});
+for(const key of ['history','frontier','baseline','collection'])test(`baseline compatibility rejects altered original certificate ${key} pin`,t=>{
+ const f=fixture(t),o=originalOrdinaryCertificate(f),path=key==='history'?o.history.path:key==='collection'?o.path:join(f.root,dir,key+'.json');o.certificate.evidence[path]='0'.repeat(64);o.saveCertificate();
+ assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/does not pin/);
+});
+test('baseline compatibility rejects source already assigned/certified by original native lane',t=>{
+ const f=fixture(t),o=originalOrdinaryCertificate(f);o.certificate.items.push({id});o.saveCertificate();assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/native subject/);
+});
+test('baseline compatibility rejects original changed inventory reinterpretation',t=>{
+ const f=fixture(t),o=originalOrdinaryCertificate(f);o.certificate.changed.push(id);o.saveCertificate();assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/native subject/);
+});
+test('baseline compatibility rejects collection marker mutation',t=>{
+ const f=fixture(t),o=originalOrdinaryCertificate(f);o.collection.published_maintenance.current_review_granted=true;writeFileSync(o.path,JSON.stringify(o.collection));o.certificate.evidence[o.path]=hash(JSON.stringify(o.collection));o.saveCertificate();assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/exact published history/);
+});
+test('baseline compatibility rejects unsuccessful controller completion',t=>{
+ const f=fixture(t),o=originalOrdinaryCertificate(f);f.put(o.dispatchPath,{...o.native,ok:false});assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/genuine original/);
+});
+for(const kind of ['unknown-id','guard','receipt','duplicate','grant','missing-evidence','missing-record'])test(`baseline compatibility rejects saved ${kind} forgery`,t=>{
+ const f=fixture(t);originalOrdinaryCertificate(f);const {certificate}=laterOrdinaryCertificate(f),record=certificate.ordinary_published_baseline_exclusions;
+ if(kind==='unknown-id')record.entries[0].id='thm-unlicensed';else if(kind==='guard')record.entries[0].guard_sha256='0'.repeat(64);else if(kind==='receipt')record.entries[0].receipt.path='research/fake.json';else if(kind==='duplicate')record.entries.push(record.entries[0]);else if(kind==='grant')record.native_review_granted=true;else if(kind==='missing-evidence')delete certificate.evidence[record.history.path];else delete certificate.ordinary_published_baseline_exclusions;
+ assert.throws(()=>verifyInitialPublishedBaselineExclusions(f.root,run,certificate),/ordinary published/);
+});
+test('baseline compatibility rejects forged first certificate digest',t=>{
+ const f=fixture(t),o=originalOrdinaryCertificate(f);o.certificate.changed.push('lem-forged');f.put(join(dir,'certification-impact-initial-1.json'),o.certificate);assert.throws(()=>initialPublishedBaselineExclusions(f.root,run),/genuine original/);
+});
+test('baseline compatibility retains outside-frontier successors as ordinary context only',t=>{
+ const f=fixture(t);originalOrdinaryCertificate(f);const basis=initialPublishedBaselineExclusions(f.root,run);assert.ok(!basis.ids.has('def-context'));assert.equal(basis.record.entries.length,1);
+});
+
+function writeCurrentCompatibilityCertificate(f,items=[]){
+ const {basis,certificate}=laterOrdinaryCertificate(f);certificate.items=items;certificate.creations=[];
+ certificate.sha256=hash(certificate);f.put(join(dir,'certification.json'),certificate);return {basis,certificate};
+}
+test('real verifyWave accepts authenticated unchanged ordinary baseline without synthetic native item',t=>{
+ const f=fixture(t);originalOrdinaryCertificate(f);writeCurrentCompatibilityCertificate(f);
+ const cert=verifyWave(f.root,run,{contextHasher:()=>new Map()});assert.deepEqual(cert.items,[]);
+ assert.equal(cert.ordinary_published_baseline_exclusions.entries[0].id,id);
+});
+for(const change of ['body','status','receipt'])test(`real verifyWave rejects excluded successor ${change} change`,t=>{
+ const f=fixture(t);originalOrdinaryCertificate(f);writeCurrentCompatibilityCertificate(f);
+ if(change==='receipt')f.put(f.currentPath,{...f.successor,correction:'Altered unsealed receipt.'});
+ else f.put(`items/${id}.md`,change==='status'?f.after.replace('status: published','status: draft'):f.after+'\nLater proof modification.\n');
+ assert.throws(()=>verifyWave(f.root,run,{contextHasher:()=>new Map()}),change==='receipt'?/stale binding/:/stale ordinary/);
+});
+test('real verifyWave still rejects uncovered draft repair beside ordinary exclusion',t=>{
+ const f=fixture(t);originalOrdinaryCertificate(f);writeCurrentCompatibilityCertificate(f);f.put(`items/${consumer}.md`,f.draft+'\nA later draft proof correction.\n');
+ assert.throws(()=>verifyWave(f.root,run,{contextHasher:()=>new Map()}),new RegExp('uncovered Step 5 repair '+consumer));
+});
+test('real verifyWave keeps actual current native consumer item and supplier context checks',t=>{
+ const f=fixture(t);originalOrdinaryCertificate(f);
+ const item={id:consumer,guard_sha256:itemHashGuard(f.draft),item_sha256:'a'.repeat(64),context_sha256:'b'.repeat(64)};
+ writeCurrentCompatibilityCertificate(f,[item]);
+ assert.throws(()=>verifyWave(f.root,run,{contextHasher:()=>new Map([[consumer,{item_sha256:item.item_sha256,context_sha256:'c'.repeat(64)}]])}),new RegExp('stale Step 5 certification context '+consumer));
 });

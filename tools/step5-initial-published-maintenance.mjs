@@ -290,3 +290,67 @@ export function recordInitialPublishedMaintenance(root,run,requestFile){
  mkdirSync(dir,{recursive:true});for(const [p,text]of virtual){if(existsSync(p))need(readFileSync(p,'utf8')===text,'immutable creation archive conflict');else writeFileSync(p,text,{flag:'wx'});}
  writeFileSync(target,JSON.stringify(row,null,2)+'\n',{flag:'wx'});return {path:target,ids:row.entries.map(e=>e.id),native_execution_coverage_adopted:false,current_review_granted:false};
 }
+
+// The old ordinary bridge can discharge only its original baseline-diff
+// obligation. It never removes a subject from impact discovery or review scope.
+export function initialPublishedBaselineExclusions(root,run,{current=true}={}){
+ root=resolve(root);const history=loadInitialPublishedMaintenance(root,run);
+ if(!history)return null;
+ const dir=join(root,'research',`${run}-step5-v2`),certificatePath=join(dir,'certification-impact-initial-1.json');
+ // A newly assigned audit cannot manufacture compatibility before its first
+ // certificate. New/default published subjects retain all native obligations.
+ if(!existsSync(certificatePath))return null;
+ const collectionPath=join(dir,'initial-1-collected.json'),dispatchPath=join(root,'research',`${run}-dispatch`,'tool-step5-v2-certify-impact-initial-r1-all.result.json');
+ const certificate=read(certificatePath),collection=read(collectionPath),dispatch=read(dispatchPath),{sha256,...payload}=certificate;
+ need(certificate.version===2&&certificate.run===run&&certificate.phase==='impact-initial'&&certificate.round===1
+  &&sha256===hash(payload)&&date(certificate.at)&&Array.isArray(certificate.items)&&Array.isArray(certificate.changed)
+  &&collection.run===run&&collection.phase==='initial'&&collection.round===1&&same(collection.errors,[])
+  &&dispatch.run===run&&dispatch.role==='tool'&&dispatch.label==='step5-v2-certify-impact-initial-r1-all'
+  &&dispatch.written_by==='autopilot'&&dispatch.ok===true&&same(dispatch.covers,['all'])
+  &&date(dispatch.ended_at)&&Date.parse(dispatch.ended_at)>=Date.parse(certificate.at),
+  'missing genuine original ordinary native certification');
+ const marker=collection.published_maintenance;
+ need(marker&&resolve(root,marker.path)===history.path&&same([...marker.ids].sort(),[...history.ids].sort())
+  &&marker.historical_only===true&&marker.current_review_granted===false&&marker.native_execution_coverage_adopted===false,
+  'original collection lacks its exact published history');
+ const evidence={...history.evidence};
+ for(const file of [history.path,collectionPath,join(dir,'frontier.json'),join(dir,'baseline.json')]){
+  const expected=hash(readFileSync(file,'utf8'));
+  need(certificate.evidence?.[file]===expected,'original certificate does not pin ordinary history: '+file);
+  if(file!==collectionPath)need(collection.evidence?.[file]===expected,'original collection does not pin ordinary history: '+file);
+  evidence[file]=expected;
+ }
+ for(const file of [certificatePath,dispatchPath])evidence[file]=hash(readFileSync(file,'utf8'));
+ const frontier=new Set(read(join(dir,'frontier.json')).ids),entries=[];
+ for(const entry of history.entries){
+  need(!certificate.items.some(row=>row.id===entry.id)&&!certificate.changed.includes(entry.id),
+   'original certificate already treats published history as a native subject');
+  if(!frontier.has(entry.id))continue;
+  const after=readFileSync(resolve(root,entry.current_file),'utf8'),guard=itemHashGuard(after);
+  need(recordedPublishedRepair(root,entry.id,after,entry.current_receipt.path).ok,'historical ordinary repair policy no longer valid');
+  if(current){const path=join(root,'items',`${entry.id}.md`);if(!existsSync(path))continue;
+   const live=readFileSync(path,'utf8');if(live!==after||!recordedPublishedRepair(root,entry.id,live,entry.current_receipt.path).ok)continue;}
+  entries.push({id:entry.id,guard_sha256:guard,raw_sha256:hash(after),receipt:entry.current_receipt});
+ }
+ entries.sort((a,b)=>a.id.localeCompare(b.id));
+ const record={version:1,kind:'historical-ordinary-published-baseline-exclusions',run,
+  historical_only:true,native_review_granted:false,mathematical_acceptance:false,
+  history:{path:history.path,sha256:evidence[history.path]},initial_collection:{path:collectionPath,sha256:evidence[collectionPath]},
+  initial_certificate:{path:certificatePath,sha256:evidence[certificatePath]},entries};
+ return {ids:new Set(entries.map(row=>row.id)),record,evidence};
+}
+export function verifyInitialPublishedBaselineExclusions(root,run,certificate,{current=false}={}){
+ const basis=initialPublishedBaselineExclusions(root,run,{current:false}),record=certificate.ordinary_published_baseline_exclusions;
+ if(!basis){need(record===undefined,'unlicensed ordinary published exclusions');return;}
+ // The immutable original initial certificate predates this compatibility
+ // record. It is an origin, never retroactively rewritten or granted rows.
+ if(certificate.phase==='impact-initial'&&certificate.round===1){need(record===undefined,'original certificate cannot acquire compatibility metadata');return;}
+ need(record&&Array.isArray(record.entries),'missing ordinary published exclusion provenance');
+ const {entries,...envelope}=record,{entries:originalEntries,...expected}=basis.record;
+ need(same(envelope,expected)&&new Set(entries.map(e=>e.id)).size===entries.length
+  &&same(entries.map(e=>e.id),entries.map(e=>e.id).sort())
+  &&entries.every(entry=>originalEntries.some(old=>same(entry,old))), 'forged ordinary published exclusion provenance');
+ for(const [file,expectedHash]of Object.entries(basis.evidence))need(certificate.evidence?.[file]===expectedHash,'certificate drops ordinary published evidence: '+file);
+ if(current)for(const entry of entries){const path=join(resolve(root),'items',`${entry.id}.md`);
+  need(existsSync(path)&&hash(readFileSync(path,'utf8'))===entry.raw_sha256,'stale ordinary published baseline exclusion: '+entry.id);}
+}

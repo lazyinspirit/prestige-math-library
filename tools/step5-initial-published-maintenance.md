@@ -178,3 +178,28 @@ The original published items remain outside native certification/Sol judgment.
 For the optional SCHEMA field `justified_by` only, an absent value and an empty array denote the same empty edge set. Current published manifest mirrors may retain their existing `justified_by: []` when the actual source omits it, or omit it when the actual source explicitly has an empty array. No source field needs to be added just for presence equality.
 
 An explicitly recorded manifest empty/absent normalization remains limited to authenticated published IDs and source-backed empty endpoints; its exact old/current raw archives are preserved. Nulls, strings, objects and nonempty arrays receive no empty normalization. Every other mirrored field, native historical byte/hash, source, receipt, original claim and ordinary publication guard remains exact.
+
+
+## Historical ordinary baseline compatibility
+
+An existing ordinary bridge may have been collected and initially certified
+before selected published subjects entered the general native audit scope.
+Later certification can exclude only that bridge's exact unchanged archived
+published successors from the *original baseline-difference* obligation. The
+bridge, initial collection, original native certificate, successful controller
+result, frozen frontier/baseline pins and current ordinary repair policy must
+all authenticate. A new audit with no such original certificate has no exception.
+
+Later certificates bind `ordinary_published_baseline_exclusions` and all original
+evidence. These are historical ordinary-maintenance records, never native item
+reviews, mathematical acceptance or audit coverage. Saved certificate reuse checks
+the excluded full current bytes; changed/deleted/status-modified sources cannot
+inherit the old exception. A legitimate subsequent change follows ordinary native
+review requirements. The original initial certificate stays immutable.
+
+Only the baseline-change list is filtered. Frozen frontier, impact discovery,
+supplier/consumer propagation, persistent reviewer ownership, current contexts,
+new necessary consumer maintenance, deletion protection, gates and fatal thresholds
+retain their full ordinary scope. A native current consumer review remains a real
+review even when the source also has historical baseline maintenance. Unchanged
+source bytes do not establish that its supplier context is unchanged.
