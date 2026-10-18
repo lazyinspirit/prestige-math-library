@@ -24,7 +24,7 @@ The owner authorization schema is:
   "version": 1,
   "policy": "owner-step3-historical-inrun-route-v1",
   "run": "RUN",
-  "step": 5,
+  "step": 3,
   "owner": true,
   "owner_identity": "/root",
   "at": "ACTUAL_OWNER_OBSERVATION_TIME",
@@ -54,6 +54,11 @@ The owner authorization schema is:
   ]
 }
 ```
+
+Use the actual repair stage, `3` or `5`, for `step`; existing Step-5 receipts
+remain valid. A repair during Step 3 must not claim a future Step-5 review.
+Both stages require the same complete historical sources and current owner
+proof review, and neither supplies native review or gate credit.
 
 Supply every intermediate path node in order; the two-node example does not
 permit omitting intermediate suppliers. Use exported `historicalFindingHash`

@@ -43,7 +43,7 @@ function snapshot(root, run, batch, label, link) {
   return doc;
 }
 export function validateOwnerHistoricalRoutes(root, run, doc) {
-  if (doc?.version !== 1 || doc.policy !== 'owner-step3-historical-inrun-route-v1' || doc.run !== run || doc.step !== 5
+  if (doc?.version !== 1 || doc.policy !== 'owner-step3-historical-inrun-route-v1' || doc.run !== run || ![3, 5].includes(doc.step)
     || doc.owner !== true || doc.owner_identity !== '/root' || !Number.isFinite(Date.parse(doc.at))
     || !String(doc.reason ?? '').trim() || !Array.isArray(doc.routes) || !doc.routes.length)
     throw Error('Invalid owner historical in-run route registry');

@@ -7,7 +7,7 @@ import { createHash } from 'node:crypto';
 import { historicalFindingHash, recordOwnerHistoricalRoutes, loadOwnerHistoricalRoutes, validateOwnerHistoricalRoutes } from './step3-owner-historical-routes.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
-function fixture(t) {
+function fixture(t, step = 5) {
   const root = mkdtempSync(join(tmpdir(), 'historical-route-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   mkdirSync(join(root, 'research')); mkdirSync(join(root, 'items'));
@@ -36,7 +36,7 @@ function fixture(t) {
   const row = { batch: '1', obligation: finding.obligation, finding_sha256: historicalFindingHash(finding), sources,
     reader_report: reader, refuter_report: refuter, consumer_pre_snapshot: pre, consumer_post_snapshot: post, producer_pre_snapshot: producerPre,
     current_proof_review: { owner: true, removed_edges_reviewed: true, no_unresolved_scope_dependency: true, consumer_guard_sha256: guard }, review };
-  const doc = { version: 1, policy: 'owner-step3-historical-inrun-route-v1', run: 'r', step: 5, owner: true, owner_identity: '/root', at: new Date().toISOString(), reason: 'Personally reviewed actual proof repair removes redundant historical dependencies', routes: [row] };
+  const doc = { version: 1, policy: 'owner-step3-historical-inrun-route-v1', run: 'r', step, owner: true, owner_identity: '/root', at: new Date().toISOString(), reason: 'Personally reviewed actual proof repair removes redundant historical dependencies', routes: [row] };
   const evidence = 'research/owner-authorization.json'; put(evidence, doc);
   return { root, doc, row, scope, finding, put, evidence };
 }
@@ -51,7 +51,20 @@ test('exact owner-reviewed historical path survives current edge removal without
   f.doc.reason = 'Different authorization'; f.put(f.evidence, f.doc);
   assert.throws(() => recordOwnerHistoricalRoutes(f.root, 'r', f.evidence), /replace immutable/);
 });
-test('historical path rejects ownerless closure, tampering, wrong homes, reports, snapshots and missing original leg', t => {
+test('Step3 historical route records actual repair stage and rejects unsupported stages', t => {
+  const f = fixture(t, 3);
+  const original = readFileSync(join(f.root, 'research/r-step3-scope-1.json'));
+  const recorded = recordOwnerHistoricalRoutes(f.root, 'r', f.evidence);
+  assert.equal(JSON.parse(readFileSync(recorded.path)).step, 3);
+  assert.equal(loadOwnerHistoricalRoutes(f.root, 'r').length, 1);
+  assert.deepEqual(readFileSync(join(f.root, 'research/r-step3-scope-1.json')), original);
+  for (const step of [1, 2, 4, 6, '3', null]) {
+    const other = fixture(t, step);
+    assert.throws(() => validateOwnerHistoricalRoutes(other.root, 'r', other.doc), /Invalid owner historical/);
+  }
+});
+test('both repair stages reject ownerless closure, tampering, wrong homes, reports, snapshots and missing original leg', t => {
+  for (const step of [3, 5]) {
   for (const mutate of [
     f => { f.doc.owner = false; },
     f => { f.doc.run = 'other'; },
@@ -70,8 +83,9 @@ test('historical path rejects ownerless closure, tampering, wrong homes, reports
     f => { f.put('items/lem-consumer.md', 'Changed current mathematics'); },
     f => { const link = f.put('research/original-consumer.md', '---\nid: lem-consumer\ndeps: []\n---\nOriginal missing edge.\n'); f.row.sources[0].sha256 = link.sha256; f.finding.dependency_path[0].item_sha256 = link.sha256; f.row.finding_sha256 = historicalFindingHash(f.finding); f.put('research/r-step3-scope-1.json', f.scope); },
   ]) {
-    const f = fixture(t); mutate(f);
+    const f = fixture(t, step); mutate(f);
     assert.throws(() => validateOwnerHistoricalRoutes(f.root, 'r', f.doc));
+  }
   }
 });
 
