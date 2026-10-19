@@ -2,6 +2,7 @@
 // Freeze dependency-ordered Step 3a after the passed native gate and exact carrier/plan currency checks.
 // Later stages may rewrite items, but cannot rewrite the Step-3 evidence.
 
+import { foreignReaderClosureEvidence } from './step3-owner-foreign-reader-routes.mjs';
 import { homeAlphaClosureEvidence } from './step3-owner-home-alpha-continuations.mjs';
 import { foreignRefuterClosureEvidence } from './step3-owner-foreign-refuter-routes.mjs';
 import { createHash } from 'node:crypto';
@@ -53,6 +54,7 @@ const artifactHashes = (version = 3, observationPolicy = null, manifestPolicy = 
   ])),
   ...(version === 3 ? homeAlphaClosureEvidence(root, run) : {}),
   ...(version === 3 ? foreignRefuterClosureEvidence(root, run) : {}),
+  ...(version === 3 ? foreignReaderClosureEvidence(root, run) : {}),
   ...(version === 3 ? requiredPageClosureEvidence(root, run) : {}),
   ...(version === 3 ? downstreamConsumerClosureEvidence(root, run, manifestPolicy, { frozenArtifacts: frozenManifestArtifacts }) : {}),
   ...(version === 3 && observationPolicy === OBSERVATION_EVIDENCE_POLICY ? closureEvidence(root, run) : {}),
