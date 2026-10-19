@@ -38,6 +38,7 @@ import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post
 import { loadRequiredPageRoutes, requiredPageCarrier, requiredPageVerdictAllowed } from './step3-owner-required-page-routes.mjs';
 import { loadDownstreamConsumerRoutes, downstreamConsumerRoute } from './step3-owner-downstream-consumer-routes.mjs';
 import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';
+import { sourceIdenticalReversionContinuity } from './step3-owner-source-identical-reversion.mjs';
 import { unchangedPageCausalRepair } from './step3-owner-unchanged-page-repairs.mjs';
 import { stabilizedSourceIdenticalAcceptanceContinuity } from './step3-owner-stabilized-source-identical-continuity.mjs';
 
@@ -1915,7 +1916,9 @@ if (command === 'check') {
                   stabilizedSourceIdenticalAcceptanceContinuity(ROOT, run, decision, target, postValue, currentValue, entry))) {
                 error('decision-not-applied', `[${target.id}] accepted_repair no longer matches the reader result`);
               }
-              if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)) {
+              if (decision.verdict === 'reverted_change' && currentSha !== hashValue(preValue)
+                && !(ownerEvidence?.source_identical_reversions ?? []).some(entry =>
+                  sourceIdenticalReversionContinuity(ROOT, run, decision, target, preValue, currentValue, entry))) {
                 error('decision-not-applied', `[${target.id}] reverted_change was not restored to the pre-reader state`);
               }
               if (decision.verdict === 'amended_repair') {
