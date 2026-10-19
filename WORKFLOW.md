@@ -352,6 +352,16 @@ carriers, native results, prompt, report, decisions and causal literals remain
 bound. This grants no staleness, scope, acceptance or source-edit exception;
 marked owner-repair evidence closure freezes the complete supporting record.
 
+A home67 Alpha that genuinely completed with mathematical escalations may receive
+one fresh native prerequisite review through the separate
+[owner-escalation continuation](tools/step3-owner-escalation-home-alpha-continuations.md).
+It requires completed root proof and consumer review, proper new owner-created
+lemma origins, exact current carriers and immutable original native evidence.
+Every old obligation and each new helper is independently owed again; creation
+authorship grants no review credit. The registered complete task must reach the
+native worker, and every ordinary gate remains mandatory. Install and restart
+the paused, drained run controller before activating changed static helpers.
+
 When a reader repairs some defects but cannot resolve another in the same
 draft, the owner may retain its original open finding through
 `RUN-step3-owner-partial-reader-repairs.json`. This routing-only record binds
