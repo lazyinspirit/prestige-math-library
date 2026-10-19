@@ -146,3 +146,33 @@ an LLM. If initial home writer is active, drain it before authorization.
 
 Focused durable test:
 `node tools/tsx-run.mjs --test tools/autopilot/test/home-alpha-continuations.test.mts`.
+
+## Prompt delivery and authentication
+
+`Executor.resolveInput` treats task arrays as fallback candidates: the first
+existing path is delivered, not their concatenation. The original home30
+continuation therefore received the ordinary task only. Its genuine prompt
+has one resolved dispatch header with exact run, role, label, covers and
+canonical report output; the ordinary task retains literal `G` in its order
+and decisions paths and supplies the explicit continuation `G=batch-N` rule.
+The registered extra task and generated order existed as source context; they
+were not embedded by that historical plan. Do not claim additive delivery or
+rewrite that native prompt/result/report.
+
+Fresh completion authentication accepts this exact ordinary grammar, including
+its canonical-G rule, owned scope/order references and ordinary report/decisions
+instructions. Alternatively a prompt may include the entire hash-bound
+registered task with its resolved decisions path. Both require one exact
+resolved dispatch header and canonical report output. All prior native success,
+attempt1, prompt path, registry/source references and closure hashes remain.
+
+For future dispatches the wrapper, after all selected preflight guards and the
+normal planner, reads every original task path plus the registered task as exact
+regular-file bytes and assembles one own-run `alpha-batch-N-3a-home-continuation.task.md`.
+Clear source-path sections retain each input's bytes. The plan uses this one
+scalar path, so existing fallback semantics cannot discard any section. The
+registered task is rechecked against its authority hash while assembling.
+Doctor writes no assembled task; stale/exhausted authorization fails before
+the base planner or assembler writes anything. The full genuine dispatched
+prompt freezes the delivered assembled bytes at closure. No additional native
+attempt is authorized for historical home30.

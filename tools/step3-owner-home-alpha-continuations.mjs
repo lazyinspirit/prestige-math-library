@@ -111,9 +111,23 @@ function freshHomeAlphaEvidence(root,run,e){
   &&Number.isFinite(Date.parse(result.started_at))&&Number.isFinite(Date.parse(result.ended_at))&&Date.parse(result.started_at)<=Date.parse(result.ended_at)
   &&Date.parse(result.started_at)>=Date.parse(e.writers_drained_at)
   &&typeof result.prompt==='string'&&result.prompt.endsWith('/'+prefix+'.attempt-1.prompt.md'),'fresh native completion is missing/failed/wrong or not exact one-shot');
- const text=prompt.toString(),identity=`run: ${run}\nrole: alpha\nlabel: ${e.label}\ncovers: ${e.unit}`;
- need(text.includes(identity)&&text.includes(`research/${run}-alpha-${e.canonical_group}-3a.md`)
-  &&text.includes(`research/${run}-alpha-${e.canonical_group}-3a-decisions.json`),'fresh native prompt lacks authentic canonical assignment');
+ const text=prompt.toString();
+ const reportPath=`research/${run}-alpha-${e.canonical_group}-3a.md`;
+ const decisionsPath=`research/${run}-alpha-${e.canonical_group}-3a-decisions.json`;
+ // dispatch.mjs resolves run/unit/output, but ordinary task G remains a
+ // protocol variable. Authenticate that actual grammar without claiming that
+ // the old fallback-array planner embedded its later candidate tasks.
+ const header=`# This dispatch\n\nrun: ${run}\nrole: alpha\nlabel: ${e.label}\ncovers: ${e.unit}\noutput: ${reportPath}\n\n`;
+ const canonicalRule="- An owner-registered fresh dispatch `3a-batch-N-foreign-refuter-continuation-1` retains canonical `G=batch-N`, covers exactly batch N, and writes the normal `alpha-batch-N-3a.md` and `alpha-batch-N-3a-decisions.json` with `group: batch-N`. Its fresh result filename is separate. Read the authenticated continuation task and original archived report/decisions/scope; independently re-review every old owed obligation, current risk review and every new required foreign gate. Old acceptance supplies history, never your verdict. For all other labels, follow the ordinary rule below.";
+ const ordinary=text.includes(canonicalRule)
+  &&text.includes(`research/${run}-step3-scope-${e.unit}.json`)
+  &&text.includes(`research/${run}-alpha-G-3a-order.task.md`)
+  &&text.includes('- Write `research/'+run+'-alpha-G-3a.md` with evidence, verdicts, repairs, sources, published findings, checks, and blockers.')
+  &&text.includes('- Write `research/'+run+'-alpha-G-3a-decisions.json` as `{version:1,run,group,decisions}`.');
+ const deliveredRegisteredTask=text.includes(ref(root,run,e.task).toString())
+  &&text.includes(decisionsPath);
+ need(text.split('# This dispatch\n').length===2&&(text.startsWith(header)||text.includes('\n'+header))
+  &&(ordinary||deliveredRegisteredTask),'fresh native prompt lacks authentic canonical assignment');
  return {[prefix+'.result.json']:sha(stable),[prefix+'.attempt-1.result.json']:sha(attempt),[prefix+'.attempt-1.prompt.md']:sha(prompt)};
 }
 export function homeAlphaClosureEvidence(root,run){

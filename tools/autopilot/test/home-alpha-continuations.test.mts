@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,cpSync,readdirSync,existsSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,readFileSync,writeFileSync,rmSync,cpSync,readdirSync,existsSync,symlinkSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {resolve,dirname,relative} from 'node:path';
 import {fileURLToPath,pathToFileURL} from 'node:url';
@@ -11,7 +11,7 @@ const runtime=mkdtempSync(resolve(tmpdir(),'home-alpha-code-'));
 for(const p of execFileSync('git',['ls-files','tools'],{cwd:repo,encoding:'utf8'}).trim().split('\n').filter(p=>/\.(mjs|mts|json)$/.test(p))){mkdirSync(dirname(resolve(runtime,p)),{recursive:true});cpSync(resolve(repo,p),resolve(runtime,p));}
 // Overlay only these code candidates, never an untracked tool tree or state.
 for(const p of ['step3-owner-home-alpha-continuations.mjs','step3-scope.mjs','step3-adjudication-order.mjs','step3-close.mjs','auditor-created-items.mjs','step3-owner-source-identical-continuity.mjs','step3-owner-stabilized-source-identical-continuity.mjs','step3-owner-unchanged-page-repairs.mjs','step3-manifest-history.mjs','autopilot-report-reopen.mjs','autopilot/stages/home-alpha-continuations.mts','autopilot/stages/mathlib.step3.mts']) {
- const input=resolve(candidateTools,p);assert.ok(existsSync(input),`missing candidate ${p}`);const output=resolve(runtime,'tools',p);mkdirSync(dirname(output),{recursive:true});cpSync(input,output);
+ const adjacent=resolve(candidateTools,p),input=existsSync(adjacent)?adjacent:resolve(repo,'tools',p);assert.ok(existsSync(input),`missing candidate ${p}`);const output=resolve(runtime,'tools',p);mkdirSync(dirname(output),{recursive:true});cpSync(input,output);
 }
 const api=await import(pathToFileURL(resolve(runtime,'tools/step3-owner-home-alpha-continuations.mjs')).href);
 const foreign=await import(pathToFileURL(resolve(runtime,'tools/step3-owner-foreign-refuter-routes.mjs')).href);
@@ -65,7 +65,8 @@ function fixture(t:any){
  const entry={version:1,run,owner_identity:'/root',unit:'30',label:api.homeAlphaLabel('30'),canonical_group:'batch-30',mathematical_acceptance:false,previous_acceptance_inherited:false,historical_artifact_basis:'owner-captured current completed-native artifacts; no structured-output byte attestation',reason:'A genuine unrelated refuter57 discovered two separately retained findings after the ordinary completed home Alpha30. This one fresh native read adjudicates all old and new obligations independently.',writers_drained_at:'2026-10-19T13:01:00Z',previous_result,previous_attempt,previous_prompt,previous_report,previous_decisions,previous_scope,registration_manifest,current_inputs,foreign_refuter_routes:foreign.loadForeignRefuterRoutes(root,run).filter((x:any)=>x.e.target_batch==='30').map((x:any)=>x.binding),owner_capture,task};
  const registry={version:1,run,policy:api.HOME_ALPHA_POLICY,authorized_by:'owner',authorization:'Owner authorizes exactly one fresh normal native home Alpha30 context for this retained foreign finding pair.',continuations:[entry]};
  const save=()=>put(P+'step3-home-alpha-continuations.json',registry);save();
- const complete=()=>{const prefix=P+'dispatch/alpha-'+entry.label;const prompt=put(prefix+'.attempt-1.prompt.md',`# This dispatch\n\nrun: r\nrole: alpha\nlabel: ${entry.label}\ncovers: 30\n${readFileSync(resolve(root,task.path),'utf8')}`);const fresh={...old,label:entry.label,attempt:1,evidence_tag:'.attempt-1',started_at:'2026-10-19T13:02:00Z',ended_at:'2026-10-19T13:03:00Z',prompt:resolve(root,prompt.path)};put(prefix+'.attempt-1.result.json',fresh);put(prefix+'.result.json',fresh);return prefix;};
+ const complete=()=>{const prefix=P+'dispatch/alpha-'+entry.label;const prompt=put(prefix+'.attempt-1.prompt.md',`# This dispatch\n\nrun: r\nrole: alpha\nlabel: ${entry.label}\ncovers: 30\noutput: ${reportPath}\n\n${readFileSync(resolve(root,task.path),'utf8')}`);const fresh={...old,label:entry.label,attempt:1,evidence_tag:'.attempt-1',started_at:'2026-10-19T13:02:00Z',ended_at:'2026-10-19T13:03:00Z',prompt:resolve(root,prompt.path)};put(prefix+'.attempt-1.result.json',fresh);put(prefix+'.result.json',fresh);return prefix;};
+ put('briefs/tasks/alpha-3a-adjudicate.md','Ordinary native task exact bytes.\n');put('canonical-order.task.md','Original generated order exact bytes.\n');
  const ctx={repo:root,run,doctor:false},dispatchDir=resolve(root,P+'dispatch');let baseCalls=0;
  const original={id:'3a-adjudicate',units:()=>['30','47'],pattern:/^alpha-(?:alpha-)?3a-(?:[a-z]+|batch-[1-9]\d*)\.result\.json$/,modelProfile:()=> 'sol61-medium',gates:['unchanged-battery'],artifacts:(_ctx:any,u:string)=>[P+`alpha-batch-${u}-3a.md`,P+`alpha-batch-${u}-3a-decisions.json`],plan:(_ctx:any,pending:string[])=>{baseCalls++;return pending.map(unit=>({role:'alpha',label:`3a-batch-${unit}`,covers:[unit],brief:'briefs/alpha-step3.md',job:'adjudication',task:['briefs/tasks/alpha-3a-adjudicate.md','canonical-order.task.md'],timeout:14400}));}};
  return {root,put,link,entry,registry,save,ctx,original,dispatchDir,reportPath,decisionsPath,complete,baseCalls:()=>baseCalls};
@@ -73,7 +74,7 @@ function fixture(t:any){
 test.after(()=>rmSync(runtime,{recursive:true,force:true}));
 test('registered fresh native home read preserves normal descriptor and canonical artifacts',t=>{
  const f=fixture(t),stage=withHomeAlphaContinuation(f.original),[fresh,sibling]=stage.plan(f.ctx,['30','47']);
- assert.equal(fresh.label,'3a-batch-30-foreign-refuter-continuation-1');assert.equal(fresh.role,'alpha');assert.deepEqual(fresh.covers,['30']);assert.equal(fresh.brief,'briefs/alpha-step3.md');assert.equal(fresh.timeout,14400);assert.deepEqual(fresh.task.slice(0,2),['briefs/tasks/alpha-3a-adjudicate.md','canonical-order.task.md']);assert.equal(fresh.task[2],f.entry.task.path);assert.equal(sibling.label,'3a-batch-47');assert.equal(stage.modelProfile,f.original.modelProfile);assert.equal(stage.gates,f.original.gates);assert.deepEqual(stage.artifacts(f.ctx,'30'),[f.reportPath,f.decisionsPath]);
+ assert.equal(fresh.label,'3a-batch-30-foreign-refuter-continuation-1');assert.equal(fresh.role,'alpha');assert.deepEqual(fresh.covers,['30']);assert.equal(fresh.brief,'briefs/alpha-step3.md');assert.equal(fresh.timeout,14400);assert.equal(typeof fresh.task,'string');const assembled=readFileSync(resolve(f.root,fresh.task),'utf8');for(const path of ['briefs/tasks/alpha-3a-adjudicate.md','canonical-order.task.md',f.entry.task.path])assert.ok(assembled.includes(readFileSync(resolve(f.root,path),'utf8')),path);assert.equal(sibling.label,'3a-batch-47');assert.equal(stage.modelProfile,f.original.modelProfile);assert.equal(stage.gates,f.original.gates);assert.deepEqual(stage.artifacts(f.ctx,'30'),[f.reportPath,f.decisionsPath]);
  assert.equal(api.homeAlphaReviewIdentity(f.root,run,'30').stable_path,P+'dispatch/alpha-3a-batch-30-foreign-refuter-continuation-1.result.json');
  assert.equal(api.homeAlphaRequiredObligations(f.root,run,'30')[0].obligation,`touched:30:${id}`);
  assert.equal(foreign.foreignRefuterObligations(f.root,run,'30').length,2);
@@ -104,7 +105,7 @@ const negatives={
  'scope group mismatch':(f:any)=>{f.entry.previous_scope=f.put(f.entry.previous_scope.path,{version:2,run,batch:'30',group:'wrong'});f.save();},
  'unrelated task':(f:any)=>{f.entry.task=f.put(f.entry.task.path,'arbitrary context');f.save();},
 };
-for(const [name,mutate]of Object.entries(negatives))test(`reject ${name} BEFORE original Alpha planner writes its task`,t=>{const f=fixture(t);mutate(f);assert.throws(()=>withHomeAlphaContinuation(f.original).plan(f.ctx,['30']));assert.equal(f.baseCalls(),0);});
+for(const [name,mutate]of Object.entries(negatives))test(`reject ${name} BEFORE original Alpha planner writes its task`,t=>{const f=fixture(t);mutate(f);assert.throws(()=>withHomeAlphaContinuation(f.original).plan(f.ctx,['30']));assert.equal(f.baseCalls(),0);assert.equal(existsSync(resolve(f.root,P+'alpha-batch-30-3a-home-continuation.task.md')),false);});
 test('doctor and unselected siblings retain historical validation without consuming completed30 budget',t=>{const f=fixture(t);f.put(P+'dispatch/alpha-'+f.entry.label+'.result.json',{ok:false,covers:['30']});assert.doesNotThrow(()=>withHomeAlphaContinuation(f.original).plan({...f.ctx,doctor:true},['30']));assert.doesNotThrow(()=>withHomeAlphaContinuation(f.original).plan(f.ctx,['47']));});
 test('native-origin label admitted only with exact registered root/run/unit and real fresh completion',t=>{const f=fixture(t);const synthetic={run,role:'alpha',label:f.entry.label,attempt:1,ok:true,started_at:'2026-10-19',ended_at:'2026-10-20',covers:['30']};assert.equal(authorResultAllowed(3,synthetic,{root:f.root,run}),false);const prefix=f.complete(),row=JSON.parse(readFileSync(resolve(f.root,prefix+'.result.json'),'utf8'));assert.equal(authorResultAllowed(3,row),false);assert.equal(authorResultAllowed(3,row,{root:f.root,run}),true);assert.equal(authorResultAllowed(3,{...row,attempt:2},{root:f.root,run}),false);assert.equal(authorResultAllowed(3,{...row,covers:['47']},{root:f.root,run}),false);assert.equal(authorResultAllowed(3,{...row,label:'3a-batch-31-foreign-refuter-continuation-1'},{root:f.root,run}),false);assert.equal(authorResultAllowed(3,{...row,label:'3a-batch-47'}),true);});
 test('original archives survive canonical overwrite and freeze exact history',t=>{const f=fixture(t);const before=readFileSync(resolve(f.root,f.entry.previous_report.path));f.put(f.reportPath,'Genuine fresh native report.');f.put(f.decisionsPath,{version:1,run,group:'batch-30',decisions:[]});assert.doesNotThrow(()=>api.homeAlphaContinuations(f.root,run));assert.deepEqual(readFileSync(resolve(f.root,f.entry.previous_report.path)),before);f.complete();const hashes=api.homeAlphaClosureEvidence(f.root,run);assert.equal(hashes[f.entry.previous_report.path],f.entry.previous_report.sha256);assert.ok(hashes[P+'step3-home-alpha-continuations.json']);});
@@ -121,3 +122,39 @@ test('actual native stage table generates all old and both foreign obligations a
 });
 
 test('closure requires exact successful fresh native receipt, attempt1 and prompt',t=>{const f=fixture(t);assert.throws(()=>api.homeAlphaClosureEvidence(f.root,run));const prefix=f.complete();assert.ok(api.homeAlphaClosureEvidence(f.root,run)[prefix+'.result.json']);f.put(prefix+'.attempt-1.result.json',{});assert.throws(()=>api.homeAlphaClosureEvidence(f.root,run));});
+
+function ordinaryActualGrammar(f:any){
+ return `# Ordinary Alpha brief\n\n---\n\n# This dispatch\n\nrun: r\nrole: alpha\nlabel: ${f.entry.label}\ncovers: 30\noutput: ${f.reportPath}\n\n`+
+ "- An owner-registered fresh dispatch `3a-batch-N-foreign-refuter-continuation-1` retains canonical `G=batch-N`, covers exactly batch N, and writes the normal `alpha-batch-N-3a.md` and `alpha-batch-N-3a-decisions.json` with `group: batch-N`. Its fresh result filename is separate. Read the authenticated continuation task and original archived report/decisions/scope; independently re-review every old owed obligation, current risk review and every new required foreign gate. Old acceptance supplies history, never your verdict. For all other labels, follow the ordinary rule below."+'\n'+
+ '- Work only on your `covers:` batches. Read `research/r-step3-scope-30.json`.\n'+
+ '- Follow `research/r-alpha-G-3a-order.task.md` within your dispatched batches.\n'+
+ '- Write `research/r-alpha-G-3a.md` with evidence, verdicts, repairs, sources, published findings, checks, and blockers.\n'+
+ '- Write `research/r-alpha-G-3a-decisions.json` as `{version:1,run,group,decisions}`. Include one entry per owed obligation.\n';
+}
+test('genuine ordinary placeholder prompt grammar closes without inventing additive delivery',t=>{
+ const f=fixture(t),prefix=f.complete(),text=ordinaryActualGrammar(f);assert.equal(text.includes(f.decisionsPath),false);assert.equal(text.includes(readFileSync(resolve(f.root,f.entry.task.path),'utf8')),false);
+ f.put(prefix+'.attempt-1.prompt.md',text);assert.equal(api.homeAlphaReviewIdentity(f.root,run,'30').label,f.entry.label);const hashes=api.homeAlphaClosureEvidence(f.root,run);assert.equal(hashes[prefix+'.attempt-1.prompt.md'],sha(text));
+});
+for(const [name,mutate]of Object.entries({
+ 'wrong run':(s:string)=>s.replace('run: r\n','run: other\n'),
+ 'wrong role':(s:string)=>s.replace('role: alpha\n','role: refuter\n'),
+ 'wrong label':(s:string)=>s.replace('label: 3a-batch-30-','label: 3a-batch-31-'),
+ 'wrong covers':(s:string)=>s.replace('covers: 30\n','covers: 31\n'),
+ 'wrong canonical output':(s:string)=>s.replace('output: research/r-alpha-batch-30-3a.md','output: research/r-alpha-batch-31-3a.md'),
+ 'wrong canonical G rule':(s:string)=>s.replace('canonical `G=batch-N`','canonical `G=unrelated`'),
+ 'wrong decisions placeholder':(s:string)=>s.replace('alpha-G-3a-decisions.json','alpha-other-3a-decisions.json'),
+ 'duplicate dispatch header':(s:string)=>s+'\n# This dispatch\n',
+ 'spoofed unanchored header':(s:string)=>s.replace('# This dispatch\n','not-a-heading # This dispatch\n'),
+})){test(`actual grammar rejects ${name}`,t=>{const f=fixture(t),prefix=f.complete();f.put(prefix+'.attempt-1.prompt.md',mutate(ordinaryActualGrammar(f)));assert.throws(()=>api.homeAlphaReviewIdentity(f.root,run,'30'));assert.throws(()=>api.homeAlphaClosureEvidence(f.root,run));});}
+test('future assembly survives actual Executor fallback resolver and doctor writes no tasks',async t=>{
+ const f=fixture(t);const {Executor}=await import(pathToFileURL(resolve(runtime,'tools/autopilot/src/executor.mts')).href);
+ const stage=withHomeAlphaContinuation(f.original),[p]=stage.plan(f.ctx,['30']);const resolver=Executor.prototype.resolveInput;
+ assert.equal(resolver.call({},['briefs/tasks/alpha-3a-adjudicate.md','canonical-order.task.md',f.entry.task.path],f.ctx),'briefs/tasks/alpha-3a-adjudicate.md');
+ assert.equal(resolver.call({},p.task,f.ctx),p.task);
+ const body=readFileSync(resolve(f.root,p.task),'utf8');for(const path of ['briefs/tasks/alpha-3a-adjudicate.md','canonical-order.task.md',f.entry.task.path])assert.ok(body.includes(`## Exact task source: ${path}\n\n`+readFileSync(resolve(f.root,path),'utf8')),path);
+ rmSync(resolve(f.root,p.task));assert.doesNotThrow(()=>stage.plan({...f.ctx,doctor:true},['30']));assert.equal(existsSync(resolve(f.root,p.task)),false);
+});
+
+test('future assembly rejects existing and dangling target symlinks',t=>{
+ for(const dangling of [false,true]){const f=fixture(t),target=resolve(f.root,P+'alpha-batch-30-3a-home-continuation.task.md'),outside=resolve(f.root,'outside-target');if(!dangling)writeFileSync(outside,'preserved');symlinkSync(outside,target);assert.throws(()=>withHomeAlphaContinuation(f.original).plan(f.ctx,['30']));if(!dangling)assert.equal(readFileSync(outside,'utf8'),'preserved');else assert.equal(existsSync(outside),false);}
+});
