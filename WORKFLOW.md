@@ -777,7 +777,7 @@ outside-context maintenance does not silently enlarge the frozen frontier.
 Mathematics run inventory supports up to 130 A/B pairs, with exactly one pair per
 batch and at most three batches per group. Groups use lowercase spreadsheet
 labels (`a` through `z`, then `aa`, `ab`, and so on). Inventory capacity does not
-increase active workers: the global concurrency limit remains 30, and stage,
+increase active workers: the default global concurrency limit is 20, and stage,
 role, prerequisite, exclusive-writer, review and gate checks still apply. Physics
 retains its own independent limits.
 

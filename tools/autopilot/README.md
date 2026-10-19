@@ -6,7 +6,7 @@ The rebuild plan is `research/workflow-rebuild-plan.md`. Step 1 performs complet
 
 Mathematics inventory supports 130 pairs, one per batch, and at most three batches per group. Group labels extend through `aa`, `ab`, and beyond; valid native category assignments determine the task scope. Physics limits are independent.
 
-Current revision: `six-step-v1-construction-scope`. Use fresh run state. The engine owns all transitions and enforces the shared 30-agent cap. See `package.json` for typechecking and focused test commands.
+Current revision: `six-step-v1-construction-scope`. Use fresh run state. The engine owns all transitions and defaults to a shared 20-worker cap. See `package.json` for typechecking and focused test commands.
 
 Step 3 ends with `3a-baseline` and mechanical `3a-close`. Dependency-level authoring replaces the legacy Step 3b cross-batch review; no Step 3b stage or continuation is dispatched. Historical evidence remains preserved.
 
