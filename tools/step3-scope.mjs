@@ -11,6 +11,7 @@
 // Each batch owns a separate scope file. Concurrent pipeline lanes must never
 // read-modify-write one shared JSON file and erase a sibling's route.
 
+import { homeAlphaRequiredObligations } from './step3-owner-home-alpha-continuations.mjs';
 import { foreignRefuterObligations, foreignRefuterCarrier } from './step3-owner-foreign-refuter-routes.mjs';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
@@ -1089,6 +1090,8 @@ if (command === 'stamp') {
       for (const finding of scope.reader_findings ?? []) expected.set(finding.obligation, { ...finding, batch, route: 'reader' });
       for (const finding of scope.refuter_findings ?? []) expected.set(finding.obligation, { ...finding, batch, route: 'flagged' });
     }
+    for (const batch of group.covers) for (const target of homeAlphaRequiredObligations(ROOT, run, batch))
+      if (!expected.has(target.obligation)) expected.set(target.obligation, target);
     const path = decisionsPath(group.label);
     const doc = readJson(path, `group ${group.label} decisions`);
     if (!Array.isArray(doc.decisions)) fail(`group ${group.label} decisions must contain an array`, 1);
@@ -1462,6 +1465,8 @@ if (command === 'check') {
           owed.push({ ...finding, route: 'flagged' });
         }
       }
+      for (const batch of group.covers) for (const target of homeAlphaRequiredObligations(ROOT, run, batch))
+        if (!owed.some(row => row.obligation === target.obligation)) owed.push(target);
       const path = decisionsPath(group.label);
       if (!existsSync(path)) { error('decisions-missing', `group ${group.label} has no 3a decisions file`); continue; }
       const doc = readJson(path, `group ${group.label} decisions`);

@@ -1,4 +1,5 @@
 // Exact historical manifest bytes; current routing is checked by each caller.
+import {homeAlphaReviewIdentity} from './step3-owner-home-alpha-continuations.mjs';
 import {createHash} from 'node:crypto';
 import {readFileSync,lstatSync,existsSync} from 'node:fs';
 import {resolve,relative,isAbsolute} from 'node:path';
@@ -155,10 +156,11 @@ function preclosureArchive(root,run,batch,r,route,current,frozenArtifacts=null) 
     return JSON.stringify(value);
   };
   assert(identity(historical)===identity(frozenArtifacts?closureCapture:current),'changed historical/current page or item identity');
-  const prefix=`research/${run}-dispatch/alpha-3a-batch-${batch}`;
+  const reviewIdentity=homeAlphaReviewIdentity(root,run,batch);
+  const prefix=reviewIdentity.prefix;
   assert(new RegExp(`^${prefix}\\.attempt-[1-9]\\d*\\.result\\.json$`).test(e.native_result?.path),'nonimmutable Alpha result');
   const result=JSON.parse(ownRef(e.native_result));
-  assert(result.run===run&&result.role==='alpha'&&result.label===`3a-batch-${batch}`
+  assert(result.run===run&&result.role==='alpha'&&result.label===reviewIdentity.label
     &&result.ok===true&&result.exit_code===0&&result.process_exit_code===0&&result.timed_out!==true
     &&result.terminal_summary?.task_completed===true&&result.terminal_summary.task_aborted===false
     &&result.terminal_summary.final_response_present===true

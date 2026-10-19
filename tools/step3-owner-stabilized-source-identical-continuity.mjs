@@ -1,5 +1,6 @@
 // Continuity of genuine native acceptance across authenticated review metadata.
 // This policy supplies no review, origin certification, ledger or gate waiver.
+import { homeAlphaReviewIdentity } from './step3-owner-home-alpha-continuations.mjs';
 import { readFileSync, existsSync, lstatSync } from 'node:fs';
 import { resolve, join, isAbsolute, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -38,8 +39,8 @@ const textRef = (root, run, ref) => {
   return bytes.toString('utf8');
 };
 const jsonRef = (root, run, ref) => JSON.parse(textRef(root, run, ref));
-const successful = (result, run, batch) => result.run === run && result.role === 'alpha'
-  && result.label === `3a-batch-${batch}` && Number.isInteger(result.attempt) && result.attempt >= 1
+const successful = (result, run, batch, label = `3a-batch-${batch}`) => result.run === run && result.role === 'alpha'
+  && result.label === label && Number.isInteger(result.attempt) && result.attempt >= 1
   && result.evidence_tag === `.attempt-${result.attempt}` && result.ok === true
   && result.exit_code === 0 && result.process_exit_code === 0 && result.timed_out !== true
   && result.covers?.map(String).includes(String(batch)) && result.terminal_summary?.task_completed === true
@@ -72,17 +73,18 @@ function acceptedDocument(root, run, reference, obligation, id, decisionHash) {
   return matches[0];
 }
 function nativeReview(root, run, batch, id, evidence, verdicts, proofRequired = true) {
-  assert(evidence?.result?.path === `research/${run}-dispatch/alpha-3a-batch-${batch}.result.json`
+  const identity = homeAlphaReviewIdentity(root, run, batch);
+  assert(evidence?.result?.path === identity.stable_path
     && evidence.report?.path === `research/${run}-alpha-batch-${batch}-3a.md`, 'Wrong current native review paths');
   const stableText = textRef(root, run, evidence.result), result = JSON.parse(stableText);
-  assert(successful(result, run, batch), 'Native stable result is not genuine complete success');
-  assert(evidence.immutable_result?.path === `research/${run}-dispatch/alpha-3a-batch-${batch}${result.evidence_tag}.result.json`
+  assert(successful(result, run, batch, identity.label), 'Native stable result is not genuine complete success');
+  assert(evidence.immutable_result?.path === `${identity.prefix}${result.evidence_tag}.result.json`
     && textRef(root, run, evidence.immutable_result) === stableText
     && readFileSync(researchPath(root, run, evidence.immutable_result.path)).equals(
       readFileSync(researchPath(root, run, evidence.result.path))), 'Stable alias differs from actual immutable attempt result');
   const originalAssignmentPath = `research/${run}-alpha-batch-${batch}-3a-order.task.md`;
   if (evidence.assignment_kind === 'native-dispatch-prompt') {
-    const promptPath = `research/${run}-dispatch/alpha-3a-batch-${batch}${result.evidence_tag}.prompt.md`;
+    const promptPath = `${identity.prefix}${result.evidence_tag}.prompt.md`;
     assert(evidence.assignment?.path === promptPath && typeof result.prompt === 'string'
       && [promptPath, resolve(root, promptPath)].includes(result.prompt)
       && evidence.original_assignment?.path === originalAssignmentPath,
@@ -92,7 +94,7 @@ function nativeReview(root, run, batch, id, evidence, verdicts, proofRequired = 
     'Unsupported native assignment kind/path');
   const report = textRef(root, run, evidence.report);
   const assignment = textRef(root, run, evidence.assignment);
-  assert(successful(result, run, batch) && assignment.includes(id), 'Native review not genuine complete coverage');
+  assert(successful(result, run, batch, identity.label) && assignment.includes(id), 'Native review not genuine complete coverage');
   const decision = acceptedDocument(root, run, evidence.decisions, evidence.obligation, id, evidence.decision_sha256);
   assert(verdicts.includes(decision.verdict) && decision.repair_confidence === 1, 'Wrong native review verdict/confidence');
   const liveDoc = readJSON(join(root, 'research', `${run}-alpha-batch-${batch}-3a-decisions.json`));

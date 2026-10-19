@@ -1,5 +1,6 @@
 // Guarded pre-report recovery. Historical successes are archived, never reused
 // as fresh suffix coverage. No Git/index or mathematical carrier is mutated.
+import { homeAlphaReviewIdentity } from './step3-owner-home-alpha-continuations.mjs';
 import { existsSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, unlinkSync, renameSync, readdirSync, lstatSync, appendFileSync } from 'node:fs';
 import { join, resolve, relative, dirname } from 'node:path';
 import { spawnSync, execFileSync } from 'node:child_process';
@@ -122,9 +123,10 @@ export function inspectReportReopen(o) {
       prefix_sha256: sha(briefBytes.subarray(0, prefixBytes)), suffix_sha256: sha(briefBytes.subarray(prefixBytes)), owners: [...new Set(owners)].sort(),
       reports: [...new Set(reports)].sort().map(path => {
         const match = /^research\/([a-z0-9-]+)-alpha-batch-(\d+)-3a\.md$/.exec(path);
-        const resultPath = `research/${match[1]}-dispatch/alpha-3a-batch-${match[2]}.result.json`;
+        const identity = homeAlphaReviewIdentity(repo, match[1], match[2]);
+        const resultPath = identity.stable_path;
         const result = json(physical(repo, resultPath));
-        if (result.run !== match[1] || result.role !== 'alpha' || result.label !== `3a-batch-${match[2]}` || result.ok !== true || result.written_by === 'autopilot') fail('foreign Alpha report lacks genuine successful native result');
+        if (result.run !== match[1] || result.role !== 'alpha' || result.label !== identity.label || result.ok !== true || result.written_by === 'autopilot') fail('foreign Alpha report lacks genuine successful native result');
         return { path, sha256: sha(readFileSync(physical(repo, path))), native_result: resultPath, native_result_sha256: sha(readFileSync(join(repo, resultPath))) };
       }) };
     rows.set(briefPath, `${briefPath}\0${briefAppend.before}`);

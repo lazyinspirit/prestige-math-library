@@ -1,4 +1,5 @@
 // Generate one Step-3 batch's exact item order, retaining legacy group support.
+import { homeAlphaRequiredObligations } from './step3-owner-home-alpha-continuations.mjs';
 import { foreignRefuterObligations } from './step3-owner-foreign-refuter-routes.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -24,6 +25,10 @@ export function prepareStep3AdjudicationOrder(root, run, group) {
     };
     for (const target of foreignRefuterObligations(root, run, batch, { beforeDispatch: true })) {
       add(target.id, target.obligation); foreignWork.push(target);
+    }
+    for (const target of homeAlphaRequiredObligations(root, run, batch)) {
+      add(target.id, target.obligation);
+      otherWork.push(`${target.obligation}: original home obligation must be independently re-reviewed; ${JSON.stringify(target)}`);
     }
     for (const id of scope.touched ?? []) add(id, 'touched');
     if (scope.version === 3) for (const id of scope.items ?? []) add(id, 'direct review');

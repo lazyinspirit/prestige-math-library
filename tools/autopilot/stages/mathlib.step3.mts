@@ -6,6 +6,9 @@
 const continuationURL = new URL('./refuter-continuations.mts', import.meta.url);
 continuationURL.search = new URL(import.meta.url).search;
 const { withRefuterContinuation } = await import(continuationURL.href);
+const homeContinuationURL = new URL('./home-alpha-continuations.mts', import.meta.url);
+homeContinuationURL.search = new URL(import.meta.url).search;
+const { withHomeAlphaContinuation } = await import(homeContinuationURL.href);
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
 import { holdStep3 } from './step3-hold.mts';
@@ -213,7 +216,7 @@ export function step3Stages(d: any) {
       }],
       gatesWaived: 'The close tool verifies current final routing and manifest-to-plan correspondence before freezing the exact closure receipt; the native Step 3a adjudication battery has already passed.',
     },
-  ].map(stage => withRefuterContinuation(stage));
+  ].map(stage => withHomeAlphaContinuation(withRefuterContinuation(stage)));
 }
 
 export default { step3Stages };

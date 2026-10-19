@@ -86,8 +86,8 @@ test('a legacy in-flight group is not duplicated and its final receipt still cov
   assert.deepEqual([...ex.unitsComplete(stage as any)], ['1', '2']);
   assert.equal(await ex.dispatchStage(stage as any, ex.ctx()), 'ok');
   assert.equal(ex.inflight.size, 0);
-  assert.equal(stage.pattern.test('alpha-3a-batch-1.result.json'), true);
-  assert.equal(stage.pattern.test('alpha-3b-lead.result.json'), false);
+  assert.equal((typeof stage.pattern === 'function' ? stage.pattern(ex.ctx()) : stage.pattern).test('alpha-3a-batch-1.result.json'), true);
+  assert.equal((typeof stage.pattern === 'function' ? stage.pattern(ex.ctx()) : stage.pattern).test('alpha-3b-lead.result.json'), false);
   writeFileSync(join(dispatchDir, 'alpha-3a-a.result.json'), JSON.stringify({ role: 'alpha', label: '3a-a', covers: ['1', '2'], ok: false }));
   assert.deepEqual(stage.artifacts(ex.ctx(), '1'), ['research/r-alpha-batch-1-3a.md', 'research/r-alpha-batch-1-3a-decisions.json'],
     'a failed legacy group must not redirect a fresh batch worker to the shared report');

@@ -6,6 +6,7 @@ const LEGACY_AUTHOR_STEP = -1; // Historical authoring receipts are not current 
 // id absent from both the immutable stage baseline and the item filesystem at
 // that boundary, and remains current only while its hash-bound carriers match.
 
+import { registeredHomeAlphaResult, homeAlphaReviewIdentity } from './step3-owner-home-alpha-continuations.mjs';
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, realpathSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -1125,7 +1126,8 @@ function step3ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         || approval.current_complete_proof_and_contract_adjudicated !== true
         || approval.native_authorship_of_owner_reconciliation !== false
         || native.result.path !== `research/${run}-dispatch/${native.result_file}`
-        || result.run !== run || !authorResultAllowed(3, result)
+        || result.run !== run || !authorResultAllowed(3, result, { root, run })
+        || (homeAlphaReviewIdentity(root, run, row.batch).registered && native.result.path !== homeAlphaReviewIdentity(root, run, row.batch).stable_path)
         || resolve(root, native.log.path) !== resolve(result.log)
         || !result.covers.map(String).includes(row.batch)
         || snapshot.run !== run || String(snapshot.batch) !== row.batch || snapshot.label !== 'post'
@@ -1196,6 +1198,7 @@ function step3ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
           || evidence.owner_native_mirror_authorization?.owner !== true) return null;
       }
       const native = evidence.native_review;
+      if (homeAlphaReviewIdentity(root, run, row.batch).registered && native?.result?.path !== homeAlphaReviewIdentity(root, run, row.batch).stable_path) return null;
       const linked = link => {
         const bytes = readFileSync(researchFile(root, link?.path), 'utf8');
         if (sha(bytes) !== link?.sha256) throw Error('Stale native review evidence');
@@ -1204,7 +1207,7 @@ function step3ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       const resultBytes = linked(native?.result), result = JSON.parse(resultBytes);
       const resultPath = `research/${run}-dispatch/${native.result_file}`;
       const started = Date.parse(result.started_at), ended = Date.parse(result.ended_at);
-      if (native.result.path !== resultPath || result.run !== run || !authorResultAllowed(3, result)
+      if (native.result.path !== resultPath || result.run !== run || !authorResultAllowed(3, result, { root, run })
         || !Number.isFinite(started) || !Number.isFinite(ended) || started > ended
         || started < Date.parse(stageBaseline(root, run, 3).at)
         || !result.covers.map(String).some(value => value === row.batch || value === 'all')) return null;
@@ -1542,11 +1545,12 @@ export function writeAuditorCreatedBaseline(root, run, step) {
   return { path, reused: false, items: current.items.length };
 }
 
-export function authorResultAllowed(step, row) {
+export function authorResultAllowed(step, row, { root = null, run = null } = {}) {
   if (row?.ok !== true || !row.ended_at || !row.started_at || !Array.isArray(row.covers)) return false;
   const label = String(row.label ?? '');
   if (Number(step) === LEGACY_AUTHOR_STEP) return row.role === 'alpha-high'
     && /^(?:step3b-[a-z]+|step3b-pair-[a-z0-9-]+)-[a-f0-9]{16}$/.test(label);
+  if (Number(step) === 3 && registeredHomeAlphaResult(root, run, row)) return true;
   if (Number(step) === 3) return row.role === 'alpha'
     && /^(?:3a-[a-z]+|3a-batch-[1-9]\d*|3b-lead|gate-batch-[1-9]\d*-(?:[a-z]+|all)|3a-gate-risk-report-[1-9]\d*-(?:[a-z]+|unowned)|3[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
   if (Number(step) === 5) return (row.role === 'final-adjudicator'
@@ -1561,7 +1565,7 @@ export function authorResultAllowed(step, row) {
 // Stable aliases remain readable for existing receipts. Historical write windows
 // may additionally use exact, successfully completed immutable native attempts.
 function immutableAuthorResult(root, run, step, file, row) {
-  if (row.run !== run || !authorResultAllowed(step, row)
+  if (row.run !== run || !authorResultAllowed(step, row, { root, run })
     || !Number.isSafeInteger(row.attempt) || row.attempt < 1
     || !new RegExp(`^\\.attempt-${row.attempt}(?:\\.replay-[1-9]\\d*)?$`).test(row.evidence_tag ?? '')
     || file !== `${row.role}-${row.label}${row.evidence_tag}.result.json`
@@ -1594,7 +1598,7 @@ function successfulAuthorResults(root, run, step) {
   for (const file of readdirSync(dir).filter(name => name.endsWith('.result.json')).sort()) {
     try {
       const text = readFileSync(join(dir, file), 'utf8'), row = JSON.parse(text);
-      if (row.run !== run || !authorResultAllowed(step, row)) continue;
+      if (row.run !== run || !authorResultAllowed(step, row, { root, run })) continue;
       if (file.includes('.attempt-')) {
         if (immutableAuthorResult(root, run, step, file, row))
           rows.push({ ...row, result_file: file, immutable_result_file: file });

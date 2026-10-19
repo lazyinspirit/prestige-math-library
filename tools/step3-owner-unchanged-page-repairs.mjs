@@ -1,5 +1,6 @@
 // A changed defining procedure can repair its unchanged same-batch page summary.
 // This grants only the unchanged-carrier exception, never acceptance or coverage.
+import { homeAlphaReviewIdentity } from './step3-owner-home-alpha-continuations.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync, lstatSync } from 'node:fs';
 import { resolve, relative, isAbsolute, join } from 'node:path';
@@ -243,9 +244,10 @@ export function unchangedPageCausalRepair(root, run, decision, target, currentPa
     requireThat(Array.isArray(archivedRows) && archivedRows.length === 2
       && archivedRows.some(row => equal(row, pageRow)) && archivedRows.some(row => equal(row, causeRow)));
     const alphaResult = parse(refs.alpha_result);
-    nativeResult(alphaResult, run, batch, 'alpha', '3a-batch-' + batch);
+    const identity = homeAlphaReviewIdentity(root, run, batch);
+    nativeResult(alphaResult, run, batch, 'alpha', identity.label);
     requireThat(Number.isSafeInteger(alphaResult.attempt) && alphaResult.attempt >= 1);
-    const prefix = 'research/' + run + '-dispatch/alpha-3a-batch-' + batch;
+    const prefix = identity.prefix;
     requireThat(bytesAt(root, prefix + '.result.json').equals(refs.alpha_result)
       && bytesAt(root, prefix + '.attempt-' + alphaResult.attempt + '.result.json').equals(refs.alpha_result)
       && bytesAt(root, prefix + '.attempt-' + alphaResult.attempt + '.prompt.md').equals(refs.alpha_prompt)

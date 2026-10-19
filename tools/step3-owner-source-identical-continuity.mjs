@@ -1,4 +1,5 @@
 // Explicit continuity of an existing native acceptance; never new audit coverage.
+import { homeAlphaReviewIdentity } from './step3-owner-home-alpha-continuations.mjs';
 import { readFileSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { createHash } from "node:crypto";
@@ -156,7 +157,7 @@ export function sourceIdenticalAcceptanceContinuity(
       entry.post_reader_snapshot?.path !==
         `research/${run}-step3-hash-${target.batch}-post.json` ||
       entry.native_result?.path !==
-        `research/${run}-dispatch/alpha-3a-batch-${target.batch}.result.json` ||
+        homeAlphaReviewIdentity(root, run, target.batch).stable_path ||
       entry.native_report?.path !==
         `research/${run}-alpha-batch-${target.batch}-3a.md` ||
       entry.native_assignment?.path !==
