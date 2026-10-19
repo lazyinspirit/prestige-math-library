@@ -874,7 +874,19 @@ duplicate, unpublished or stale context entries fail closed.
 An owner-supervised run may select `tools/autopilot/stages/owner-supervised.mts`
 through its run-local `config.json`. Compact runs select
 `tools/autopilot/stages/owner-supervised-compact.mts`, retaining their compact
-revision and worker prompts. This preserves the native stage table,
+revision and worker prompts. A run may also opt into temporary per-unit holds
+through `owner-unit-holds.json` in `ctx.stateDir` (or `ctx.config.stateDir`).
+The exact version-1 object is `{version:1,run:"RUN",authorized_by:"owner",
+owner_identity:"/root",holds:[{stages:["3a-refute"],units:["52"]}]}`. Stage and
+unit arrays contain unique exact strings present in every selected native stage’s
+current unit list; unknown stages or units, wildcard selectors,
+extra fields, malformed JSON or mismatched authority/run fail closed. The
+wrapper composes inherited `unitEligible`, leaving held units owed and their
+consumers blocked by native prerequisite checks. Other eligible work continues;
+no coverage, gate or final Step-6 transaction changes. Holds affect future
+dispatch only and do not interrupt an existing writer. Root clears the hold by
+atomically writing the same authority with `holds:[]` (or removing the file)
+after the protected repair is complete. This preserves the native stage table,
 dispatches and full gate batteries, and pauses after writers drain before each
 battery. The supervisor resolves all escalations, then runs
 `node tools/owner-gate-supervision.mjs --run RUN --state-dir .autopilot/RUN
