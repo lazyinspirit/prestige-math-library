@@ -1,4 +1,5 @@
 // Pre-certification native birth evidence. This records origin, never acceptance.
+import { replayNative66, native66EvidenceRefs, NATIVE66_ORIGIN_POLICY, NATIVE66_EVIDENCE_POLICY } from './step3-native66-static-replay.mjs';
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, realpathSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
@@ -35,7 +36,7 @@ function retainedOriginEvidence(root, run, id, receipt) {
   need(sha(JSON.stringify(JSON.parse(baselineBytes))) === receipt.baseline_sha256, 'changed original baseline');
   const out = { [originPath]: sha(readFileSync(resolve(root, originPath))), [baselinePath]: sha(baselineBytes) };
   for (const ref of [receipt.native_item, receipt.native_manifest, receipt.native_contract,
-    receipt.native_metadata_capture, receipt.author_evidence.result, receipt.author_evidence.prompt]) {
+    ...(receipt.policy===NATIVE66_ORIGIN_POLICY?native66EvidenceRefs(receipt):[receipt.native_metadata_capture]), receipt.author_evidence.result, receipt.author_evidence.prompt]) {
     bound(root, ref);
     need(out[ref.path] === undefined || out[ref.path] === ref.sha256, 'conflicting original marker');
     out[ref.path] = ref.sha256;
@@ -179,13 +180,15 @@ function replay(log, run, id, spec) {
   return JSON.parse(result.stdout);
 }
 
+function replayOrigin(root,run,id,receipt){return receipt.policy===NATIVE66_ORIGIN_POLICY?replayNative66(root,run,id,receipt,r=>bound(root,r)):replay(bound(root,receipt.author_evidence.log),run,id,receipt.replay);}
+
 function validate(root, run, id, receipt, context) {
   const { baseline, authors, row } = context;
   need(Object.keys(receipt).every(k => ['version', 'policy', 'run', 'step', 'id', 'owner_identity',
     'native_execution_credit', 'mathematical_acceptance', 'recorded_at', 'reason', 'baseline_sha256',
     'page', 'batch', 'author_result', 'author_evidence', 'native_item', 'native_manifest',
-    'native_contract', 'native_metadata_capture', 'carriers', 'replay', 'native_write_binding'].includes(k)), 'unknown origin field');
-  need(receipt?.version === 1 && receipt.policy === POLICY && receipt.run === run
+    'native_contract', 'native_metadata_capture', 'carriers', 'replay', 'native_write_binding', ...(receipt.policy===NATIVE66_ORIGIN_POLICY?['metadata_replay']:[])].includes(k)), 'unknown origin field');
+  need(((receipt?.version === 1 && receipt.policy === POLICY) || (receipt?.version === 2 && receipt.policy === NATIVE66_ORIGIN_POLICY)) && receipt.run === run
     && receipt.step === 3 && receipt.id === id && receipt.owner_identity === '/root'
     && receipt.native_execution_credit === false && receipt.mathematical_acceptance === false
     && Number.isFinite(Date.parse(receipt.recorded_at)) && String(receipt.reason ?? '').trim().length >= 40,
@@ -208,6 +211,9 @@ function validate(root, run, id, receipt, context) {
   const original = bound(root, receipt.native_item).toString('utf8');
   const manifest = JSON.parse(bound(root, receipt.native_manifest));
   const contracts = JSON.parse(bound(root, receipt.native_contract));
+  if(receipt.policy===NATIVE66_ORIGIN_POLICY) {
+    need(receipt.replay===undefined,'v2 uses explicit case-bound metadata_replay only');
+  } else {
   const capture = JSON.parse(bound(root, receipt.native_metadata_capture));
   need(Date.parse(capture.captured_at) >= Date.parse(author.ended_at)
     && Date.parse(capture.captured_at) <= Date.parse(receipt.recorded_at), 'invalid metadata capture time');
@@ -218,6 +224,7 @@ function validate(root, run, id, receipt, context) {
       && captured[0].owner_modified_source === false
       && Date.parse(captured[0].source_stat_at_capture?.mtime_utc) >= Date.parse(author.started_at) - 1500
       && Date.parse(captured[0].source_stat_at_capture?.mtime_utc) <= Date.parse(author.ended_at), 'original metadata not bound by actual native-window capture');
+  }
   }
   const meta = yaml().parse(split(original).fm) ?? {};
   need(meta.id === id && meta.status === 'draft' && meta.pipeline_run === run, 'invalid original item identity');
@@ -249,8 +256,8 @@ function validate(root, run, id, receipt, context) {
     step3_subject_sha256: hash({ item_sha256: itemHash, manifest_sha256: manifestHash, contract_sha256: contractHash }) };
   need(keys.every(k => receipt.carriers?.[k] === expected[k]), 'original carrier mismatch');
   if (existsSync(resolve(root, receipt.author_evidence.log.path))) {
-    const replayed = replay(bound(root, receipt.author_evidence.log), run, id, receipt.replay);
-    need(replayed.item_sha256 === itemHash && hash(replayed) === hash(receipt.native_write_binding),
+    const replayed = replayOrigin(root,run,id,receipt);
+    need(replayed.item_sha256 === itemHash && (receipt.policy!==NATIVE66_ORIGIN_POLICY || replayed.manifest_sha256===manifestHash&&replayed.contract_sha256===contractHash) && hash(replayed) === hash(receipt.native_write_binding),
       'original source not reproduced by successful native writes');
   } else {
     frozenOrigin(root, run, id, receipt);
@@ -270,7 +277,7 @@ export function nativeOriginClosureEvidence(root, run, contextForId, { requireLi
     if (requireLiveLog) {
       const receipt = JSON.parse(readFileSync(pathFor(root, run, id)));
       need(existsSync(resolve(root, receipt.author_evidence?.log?.path ?? '')), 'first closure requires original operational log');
-      const replayed = replay(bound(root, receipt.author_evidence.log), run, id, receipt.replay);
+      const replayed = replayOrigin(root,run,id,receipt);
       need(hash(replayed) === hash(receipt.native_write_binding), 'closure replay differs from registered native writes');
     }
     const { receipt } = loadNativeCreationOrigin(root, run, id, contextForId(id));
@@ -291,13 +298,18 @@ export function loadNativeCreationOrigin(root, run, id, context, marker = null) 
 export function recordNativeCreationOrigin(root, run, step, id, evidence, context) {
   need(Number(step) === 3, 'only Step 3 is supported');
   const input = JSON.parse(bound(root, evidence));
-  need(input.policy === 'native-created-step3-origin-evidence-v1', 'wrong registration evidence');
+  need(input.policy === 'native-created-step3-origin-evidence-v1' || input.policy===NATIVE66_EVIDENCE_POLICY, 'wrong registration evidence');
   need(input.recorded_at === undefined && input.native_write_binding === undefined,
     'registration time and replay binding are tool-derived');
-  const receipt = { ...input, policy: POLICY, recorded_at: new Date().toISOString() };
-  receipt.native_write_binding = replay(bound(root, receipt.author_evidence.log), run, id, receipt.replay);
+  const receipt = { ...input, policy: input.policy===NATIVE66_EVIDENCE_POLICY?NATIVE66_ORIGIN_POLICY:POLICY, recorded_at: new Date().toISOString() };
+  receipt.native_write_binding = replayOrigin(root,run,id,receipt);
   validate(root, run, id, receipt, context);
   const path = pathFor(root, run, id);
+  if(receipt.policy===NATIVE66_ORIGIN_POLICY&&!existsSync(path)){
+    const liveItem=readFileSync(join(root,'items',id+'.md'));
+    const liveContract=JSON.parse(readFileSync(join(root,'research',`${run}-batch-${receipt.batch}.proof-contracts.json`)));
+    need(sha(liveItem)===receipt.carriers.item_file_sha256&&hash({...context.row.manifest_entry,__step4_page_id:context.row.page})===receipt.carriers.manifest_sha256&&hash(liveContract.contracts?.[id])===receipt.carriers.contract_sha256,'v2 initial current carriers differ; no unreviewed current successor');
+  }
   if (existsSync(path)) {
     const prior = loadNativeCreationOrigin(root, run, id, context);
     const { recorded_at: _old, ...a } = prior.receipt, { recorded_at: _new, ...b } = receipt;

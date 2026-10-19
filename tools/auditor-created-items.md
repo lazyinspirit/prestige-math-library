@@ -464,3 +464,75 @@ current proof acceptance. After an actual new review, root records fresh
 current evidence and recertifies changed carriers normally. This mechanism
 preserves historical context; it creates no native result, mathematical
 judgment, creation origin or gate waiver.
+
+## Explicit native66 replay origin (version2 opt-in)
+
+`native-created-step3-origin-evidence-replay-v2` records only the exact
+`machine-learning-all-101-2026-10-19` native Alpha66 birth of
+`lem-diffusion-objective-estimator-expectation`. It writes origin receipt
+`native-created-step3-origin-replay-v2`, version2. Other runs/items/logs do not
+match this case-bound policy. Version1 and its original actual-mtime capture
+requirements remain unchanged. This route is provenance, never proof review,
+mathematical acceptance, extra native coverage, or owner-created attribution.
+
+Use the ordinary native-origin command with version2 and the usual baseline,
+authentic successful immutable author result/prompt/log, original item and
+complete metadata archives, original page/batch and six-carrier fields. Omit
+`replay` and `native_metadata_capture`; do not construct fictitious old stats.
+Instead supply `metadata_replay`:
+
+```
+{policy:"native66-heredoc-selected-metadata-v1",
+ historical_manifest_mtime:"unavailable; exact native writes and root byte-identical restore used instead",
+ restoration:{path,sha256}, manifest_before_restore:{path,sha256},
+ source_inputs:[{id:SUPPLIER_ID,archive:{path,sha256}}, ...six actual suppliers]}
+```
+
+The complete original native log and four exact native source/metadata command
+hashes are pinned. Restricted static shell/AST parsing reconstructs the literal
+heredoc, both literal replacement chains, authored manifest entry and ENTIRE
+helper contract. No logged Python/shell code is executed. The final derivation,
+citation-use and boundary rebuild is reproduced. Citation strings are extracted
+from the separately bound supplier archives and must also match successful
+native supplier-read output before creation, with actual source/section identity.
+The COMPLETE section is independently extracted between native source/section
+boundaries and must equal the archived section; substring/truncated/cross-source
+quotes cannot establish provenance. Exact immutable native result and original
+batch66/page identities are independently pinned.
+The claimed contract is only the comparison target, never replay input.
+
+The F2 correction's compound command really exited1 because its later read-only
+precheck rejected phase numbering. Its earlier straight-line literal writes and
+exact `unchanged` reflow output are retained separately. The final native job
+and later correction commands succeeded. This is not a false claim that each
+compound command succeeded. A changed/ambiguous/incomplete/later command stream
+fails the complete-log pin.
+
+Native manifest/contract selected projections and full item bytes must equal
+the retained archives and all six declared hashes. Complete metadata files are
+retained, but no historical replay claim is made about their unrelated rows.
+The genuine root restoration receipt must bind the exact whole manifest bytes
+to its preserved pre-preparation archive and explicit byte-identical restore,
+after native completion and before origin registration. Missing original
+manifest mtime stays unavailable. Native source/metadata write provenance,
+baseline exclusion and exact current initial item/manifest/contract linkage
+replace that one unavailable timing basis for this opt-in case only.
+
+Registration requires current selected carriers still equal the authenticated
+birth carriers. Later actual outside changes use ordinary explicit owner
+recertification, preserving native author identity and the complete truthful
+repair chain. Initial/closure replay still requires the operational native log;
+closure freezes origin, baseline, all metadata/source/quote/restore archives and
+result/prompt markers. Frozen-log relocation handling is unchanged. Neither
+origin registration nor recertification replaces native certification/gates.
+
+The case-specific durable replay tests require the original operational log
+and intentionally skip that operational fixture when the log is absent. Once
+a real origin exists, they prefer its immutable native_item/native_manifest/
+native_contract and six source-input archives over live source/carrier files;
+later native Step4/5 edits cannot silently redefine the birth fixture. A
+separate synthetic version1 native-window timing regression always runs.
+
+Before live registration, `NATIVE66_IMMUTABLE_TEST_ORIGIN=PATH` can exercise
+that same immutable-archive fixture branch using a prepared evidence JSON;
+it is a test-only input and never overrides an existing real origin.
