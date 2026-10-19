@@ -20,6 +20,7 @@ import { numericalChecks } from './finite-smoke-numerical.mjs';
 import { frontier81ClassicalChecks } from './finite-smoke-frontier81-classical.mjs';
 import { frontier81QuantumChecks } from './finite-smoke-frontier81-quantum.mjs';
 import { frontier81TLCherednikChecks } from './finite-smoke-frontier81-tl-cherednik.mjs';
+import { ml101CheckGroups, ml101SelfTestFixtures, mergeCheckRegistries } from './finite-smoke-ml101.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -28,7 +29,7 @@ const requested = option('--items')?.split(',').map((value) => value.trim()).fil
 const CHECKS = makeChecks();
 
 if (argv.includes('--self-test')) {
-  const outcomes = Object.keys(CHECKS).map((name) => ({ name, ...CHECKS[name]({}) }));
+  const outcomes = Object.keys(CHECKS).map((name) => ({ name, ...CHECKS[name](Object.hasOwn(ml101SelfTestFixtures, name) ? ml101SelfTestFixtures[name] : {}) }));
   const failures = outcomes.filter((outcome) => !outcome.ok);
   if (asJson) console.log(JSON.stringify({ ok: failures.length === 0, outcomes }, null, 2));
   else {
@@ -94,14 +95,18 @@ function runSmoke(id, smoke) {
   if (!outcome.ok) errors.push({ code: 'finite-countermodel', message: `${smoke.check}: ${outcome.summary}`, id });
 }
 
-function makeChecks() { return {
-  ...quantumQCChecks,
-  ...quantumQueryChecks,
-  ...quantumEstimationChecks,
-  ...numericalChecks,
-  ...frontier81ClassicalChecks,
-  ...frontier81QuantumChecks,
-  ...frontier81TLCherednikChecks,
+function makeChecks() { return mergeCheckRegistries([
+  ['quantumQCChecks', quantumQCChecks],
+  ['quantumQueryChecks', quantumQueryChecks],
+  ['quantumEstimationChecks', quantumEstimationChecks],
+  ['numericalChecks', numericalChecks],
+  ['frontier81ClassicalChecks', frontier81ClassicalChecks],
+  ['frontier81QuantumChecks', frontier81QuantumChecks],
+  ['frontier81TLCherednikChecks', frontier81TLCherednikChecks],
+  ['inline-core', makeInlineCoreChecks()],
+  ...ml101CheckGroups,
+]); }
+function makeInlineCoreChecks() { return {
   // Finite Gaussian fixtures: integrate the original prior/likelihood product
   // independently of the proposed completed-square parameters.
   'normal-normal-finite-n-posterior': () => {

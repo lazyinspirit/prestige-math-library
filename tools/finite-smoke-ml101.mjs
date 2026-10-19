@@ -1,0 +1,1155 @@
+// Root-reviewed fixture groups and fixed valid self-test inputs. No callback runs at import.
+import { gaussianVCMLChecks } from './finite-smoke-ml101-gaussian-vc.mjs';
+import { sparseMLChecks } from './finite-smoke-ml101-sparse.mjs';
+import { privacyFederatedMLChecks } from './finite-smoke-ml101-privacy-federated.mjs';
+import { optimizationMLChecks } from './finite-smoke-ml101-optimization.mjs';
+import { deepWassersteinMLChecks } from './finite-smoke-ml101-deep-wasserstein.mjs';
+import { flowMatchingMLChecks } from './finite-smoke-ml101-flow.mjs';
+import { calibrationMLChecks } from './finite-smoke-ml101-calibration.mjs';
+import { pacMDPMLChecks } from './finite-smoke-ml101-pac-mdp.mjs';
+import { policyCPOMLChecks } from './finite-smoke-ml101-policy-cpo.mjs';
+import { verifierGroupMLChecks } from './finite-smoke-ml101-verifier-group.mjs';
+export { mergeCheckRegistries } from './merge-check-registries.mjs';
+export const ml101CheckGroups = Object.freeze([
+  ['gaussianVCMLChecks', gaussianVCMLChecks],
+  ['sparseMLChecks', sparseMLChecks],
+  ['privacyFederatedMLChecks', privacyFederatedMLChecks],
+  ['optimizationMLChecks', optimizationMLChecks],
+  ['deepWassersteinMLChecks', deepWassersteinMLChecks],
+  ['flowMatchingMLChecks', flowMatchingMLChecks],
+  ['calibrationMLChecks', calibrationMLChecks],
+  ['pacMDPMLChecks', pacMDPMLChecks],
+  ['policyCPOMLChecks', policyCPOMLChecks],
+  ['verifierGroupMLChecks', verifierGroupMLChecks],
+]);
+// One unchanged genuine proposed row per new key; these defaults are not native coverage.
+export const ml101SelfTestFixtures = Object.freeze({
+  "ml101-constant-integrand-increment": {
+    "check": "ml101-constant-integrand-increment",
+    "asserts": "Assume the Axiom of Choice. Fix a finite integer $d\\ge1$, a horizon $T>0$, and a complete filtered probability space $(\\Omega,\\mathcal F,(\\mathcal F_t)_{0\\le t\\le T},P)$. Let $W=(W_t)_{0\\le t\\le T}$ be a standard $d$-dimensional Brownian motion adapted to the filtration, and assume that for every $0\\le s<t\\le T$ the vector increment $W_t-W_s$ is independent of $\\mathcal F_s$ and has law $N_d(0,(t-s)I_d)$. Let $g:[0,T]\\to(0,\\infty)$ be continuously differentiable with constants $0<g_{\\min}\\le g(t)\\le g_{\\max}<\\infty$, set $v(t)=\\int_0^t g(r)^2\\,dr$, and define $M_t=(\\int_0^t g(r)\\,dW_r^1,\\ldots,\\int_0^t g(r)\\,dW_r^d)$ by coordinatewise scalar Itô integration. For every $0\\le s<t\\le T$, the increment $M_t-M_s$ is independent of $\\mathcal F_s$ and has law $N_d(0,(v(t)-v(s))I_d)$. Consequently, the increments of $M$ over every finite increasing time list are mutually independent.",
+    "claim": "The scalar constant-integrand case agrees with the Gaussian variance and independent-increment formulas proved for arbitrary deterministic g.",
+    "checked_in": "Statement and steps 2.1–5.1",
+    "dimension": 1,
+    "intervals": 2,
+    "fixture": "scalar-adjacent-gaussian-integrals"
+  },
+  "ml101-point-mass-and-gaussian-convolution": {
+    "check": "ml101-point-mass-and-gaussian-convolution",
+    "asserts": "$$\\int_{\\mathbb R^d}q(s,x;r,z)q(r,z;t,y)\\,dz=q(s,x;t,y)\\qquad(x,y\\in\\mathbb R^d).$$",
+    "claim": "The point-mass specialization and scalar Gaussian convolution agree with steps 3.1 and 6.1.",
+    "checked_in": "Statement and steps 2.1, 3.1, 6.1",
+    "dimension": 1,
+    "atoms": 1,
+    "fixture": "scalar-point-and-convolution"
+  },
+  "ml101-point-mass-heat-equation": {
+    "check": "ml101-point-mass-heat-equation",
+    "asserts": "$$\\partial_t p_t(x)=\\frac{g(t)^2}{2}\\Delta_xp_t(x),\\qquad \\Delta_x=\\sum_{j=1}^d\\partial_{x_j}^2.$$",
+    "claim": "The explicit Gaussian derivative agrees with the heat equation in step 1.1; the cutoff argument covers the singular initial endpoint.",
+    "checked_in": "Statement and steps 1.1–4.1",
+    "dimension": 1,
+    "fixture": "scalar-heat-finite-differences"
+  },
+  "ml101-symmetric-two-point-posterior": {
+    "check": "ml101-symmetric-two-point-posterior",
+    "asserts": "$$s_t(x)=-\\frac{x-m_{t,x}}{v(t)},\\qquad D_xs_t(x)=-\\frac{I_d}{v(t)}+\\frac{C_{t,x}}{v(t)^2}.$$",
+    "claim": "The posterior mean/covariance formulas have the stated signs and the R^2 covariance bound is attained at this symmetric two-point posterior.",
+    "checked_in": "Statement and steps 2.1–4.1",
+    "dimension": 1,
+    "atoms": 2,
+    "fixture": "scalar-symmetric-mixture"
+  },
+  "ml101-point-mass-endpoint-cost": {
+    "check": "ml101-point-mass-endpoint-cost",
+    "asserts": "$$\\mathbb E|X_\\epsilon-X_0|^2=d\\,v(\\epsilon),\\qquad W_2(\\mu_\\epsilon,\\mu)\\le\\sqrt{d\\,v(\\epsilon)}.$$",
+    "claim": "The endpoint estimate specializes to the exact point-mass Gaussian displacement used by the B example.",
+    "checked_in": "Statement and steps 1.1–2.1",
+    "dimension": 1,
+    "fixture": "scalar-endpoint-second-moment"
+  },
+  "ml101-mixture-weight-boundaries": {
+    "check": "ml101-mixture-weight-boundaries",
+    "asserts": "At time zero its law remains $\\mu$. If $a=b$, or if $\\alpha$ is $0$ or $1$, the displayed density reduces to the single Gaussian centered at the atom carrying all mass.",
+    "claim": "All three stated degenerate mixture cases are evaluated exactly.",
+    "checked_in": "Statement and steps 1.1–2.1",
+    "dimension": 1,
+    "fixture": "scalar-mixture-degeneracies"
+  },
+  "ml101-line-density-integrand": {
+    "check": "ml101-line-density-integrand",
+    "asserts": "$$p_t(x_1,x_2)=\\frac1{2\\pi v(t)}\\int_0^1\\exp\\!\\left(-\\frac{(x_1-u)^2+x_2^2}{2v(t)}\\right)du.$$",
+    "claim": "The displayed line integral is positive and its local derivative bounds match the smoothing theorem.",
+    "checked_in": "Statement and steps 1.1–2.1",
+    "dimension": 2,
+    "support_segments": 1,
+    "fixture": "planar-unit-segment"
+  },
+  "ml101-translated-gaussian-score": {
+    "check": "ml101-translated-gaussian-score",
+    "asserts": "$$s_t(x)=\\nabla\\log p_t(x)=-\\frac{x-a}{v(t)},\\qquad D_xs_t(x)=-\\frac{I_d}{v(t)}.$$",
+    "claim": "The point-mass case has zero posterior covariance and attains the 1/v term.",
+    "checked_in": "Statement and steps 1.1–2.1",
+    "dimension": 1,
+    "atoms": 1,
+    "fixture": "scalar-translated-log-density"
+  },
+  "ml101-constant-noise-point-coupling": {
+    "check": "ml101-constant-noise-point-coupling",
+    "asserts": "$$W_2(\\mu_\\epsilon,\\delta_a)=\\sqrt{d}\\,c\\sqrt{\\epsilon}.$$",
+    "claim": "The coupling lower and upper bounds coincide exactly in the point-mass case.",
+    "checked_in": "Statement and steps 1.1–2.1",
+    "dimension": 1,
+    "fixture": "scalar-dirac-coupling-cost"
+  },
+  "ml101-vc-empty-tuple": {
+    "check": "ml101-vc-empty-tuple",
+    "result": "For every nonempty H, tr_H(())={()}; the empty tuple is shattered.",
+    "asserts": "The tuple $\\mathbf x$ is **shattered by $H$** if $\\operatorname{tr}_H(\\mathbf x)=\\{0,1\\}^m$. Its coordinates are indexed: repeated instance points remain distinct coordinates, although their labels must agree for every $h\\in H$. For $m=0$, $\\mathbf x=()$ and $\\{0,1\\}^0=\\{()\\}$, so the empty tuple is shattered. The **VC dimension** of $H$ is",
+    "fixture": "nonempty-binary-classes-empty"
+  },
+  "ml101-vc-constant-one-point": {
+    "check": "ml101-vc-constant-one-point",
+    "result": "The trace has one of {0} or {1}, not both, so it is not shattered.",
+    "asserts": "The tuple $\\mathbf x$ is **shattered by $H$** if $\\operatorname{tr}_H(\\mathbf x)=\\{0,1\\}^m$. Its coordinates are indexed: repeated instance points remain distinct coordinates, although their labels must agree for every $h\\in H$. For $m=0$, $\\mathbf x=()$ and $\\{0,1\\}^0=\\{()\\}$, so the empty tuple is shattered. The **VC dimension** of $H$ is",
+    "fixture": "constant-classes-one-coordinate"
+  },
+  "ml101-vc-growth-zero": {
+    "check": "ml101-vc-growth-zero",
+    "result": "The unique empty tuple has one trace, so Pi_H(0)=1.",
+    "asserts": "The supremum is a maximum because each trace size is an integer between $1$ and $2^m$ and $\\mathcal X^m$ is nonempty. In particular, $\\Pi_H(0)=1$. A finite indexed tuple is shattered exactly when its trace has size $2^m$, so $\\operatorname{VCdim}(H)=\\sup\\{m\\in\\mathbb N_0:\\Pi_H(m)=2^m\\}$.",
+    "fixture": "all-three-point-classes-m0"
+  },
+  "ml101-vc-growth-one": {
+    "check": "ml101-vc-growth-one",
+    "result": "The trace count is either one or two, matching the definition as the largest attainable trace cardinality.",
+    "asserts": "The supremum is a maximum because each trace size is an integer between $1$ and $2^m$ and $\\mathcal X^m$ is nonempty. In particular, $\\Pi_H(0)=1$. A finite indexed tuple is shattered exactly when its trace has size $2^m$, so $\\operatorname{VCdim}(H)=\\sup\\{m\\in\\mathbb N_0:\\Pi_H(m)=2^m\\}$.",
+    "fixture": "all-three-point-classes-m1"
+  },
+  "ml101-vc-rademacher-one": {
+    "check": "ml101-vc-rademacher-one",
+    "result": "The empirical Rademacher complexity is E max(0,sigma)=1/2, below the stated positive C_VC*sqrt(2) bound.",
+    "asserts": "$$\\widehat{\\mathfrak R}_S(G_H)\\le C_{\\rm VC}\\sqrt{\\frac{d+1}{m}}.$$",
+    "fixture": "one-coordinate-two-traces"
+  },
+  "ml101-vc-sauer-two-one": {
+    "check": "ml101-vc-sauer-two-one",
+    "result": "The family {empty,{1},{2}} has VC dimension one and size three, attaining sum_{j=0}^1 binom(2,j)=3.",
+    "asserts": "$$\\Pi_H(m)\\le\\sum_{j=0}^{d}\\binom{m}{j},$$",
+    "fixture": "two-coordinate-sauer-families"
+  },
+  "ml101-vc-single-class-hoeffding": {
+    "check": "ml101-vc-single-class-hoeffding",
+    "result": "The finite-class branch reduces to the ordinary one-function two-sided Hoeffding deviation threshold sqrt(log(2/delta)/(2m)).",
+    "asserts": "1. If $H$ is finite, then without an Axiom of Choice premise, with probability at least $1-\\delta$,\n$$\\sup_{h\\in H}|R_P(h)-\\widehat R_S(h)|\\le\\sqrt{\\frac{\\log|H|+\\log(2/\\delta)}{2m}}.$$\nIn particular, if $d=0$, then $H$ is a singleton and this gives $\\sup_{h\\in H}|R_P(h)-\\widehat R_S(h)|\\le\\sqrt{\\log(2/\\delta)/(2m)}$.",
+    "fixture": "bernoulli-singleton-exact-tails"
+  },
+  "ml101-vc-realizable-zero": {
+    "check": "ml101-vc-realizable-zero",
+    "result": "The separate branch gives zero risk almost surely for any consistent H-valued rule when H is a singleton.",
+    "asserts": "Let $(\\mathcal X,\\Sigma)$ be a nonempty measurable space, let $H$ be a nonempty class of measurable binary functions with finite VC dimension $d$, put $\\mathcal Z=\\mathcal X\\times\\{0,1\\}$, and let $P$ be a probability law on $\\mathcal Z$. Fix an integer $m\\ge1$ and a map $A:\\mathcal Z^m\\to H$ for which $S\\mapsto R_P(A(S))$ and $S\\mapsto\\widehat R_S(A(S))$ are measurable, where\n$$R_P(h):=P\\{(x,y):h(x)\\ne y\\},\\qquad \\widehat R_S(h):=\\frac1m\\sum_{i=1}^m\\mathbf1\\{h(X_i)\\ne Y_i\\}.$$\nSuppose $P$ is realizable by $H$ and $A$ is consistent $P^m$-almost surely. For $0<\\epsilon<1$, assume the events\n$$E_{m,\\epsilon}:=\\{S\\in\\mathcal Z^m:\\exists h\\in H,\\ R_P(h)>\\epsilon,\\ \\widehat R_S(h)=0\\}$$\nand\n$$B_{m,\\epsilon}:=\\{(S,S')\\in\\mathcal Z^m\\times\\mathcal Z^m:\\exists h\\in H,\\ R_P(h)>\\epsilon,\\ \\widehat R_S(h)=0,\\ \\widehat R_{S'}(h)\\ge\\epsilon/2\\}$$\nare measurable in their respective product sigma-algebras; this holds when $H$ is countable. For $0<\\epsilon,\\delta<1$ and $S\\sim P^m$, if $d=0$ then $R_P(A(S))=0$ almost surely for every such rule. If $d\\ge1$ and\n$$m\\ge\\frac{64}{\\epsilon}\\left[d\\log\\!\\left(\\frac{64e}{\\epsilon}\\right)+\\log\\!\\left(\\frac4\\delta\\right)\\right],$$\nwhere $\\log$ is natural and $e=\\exp(1)$, then $\\mathbb P\\{R_P(A(S))\\le\\epsilon\\}\\ge1-\\delta$. This is a conditional upper bound for consistent risk-measurable learners; it asserts no existence or computational-efficiency result.\n## Statement references",
+    "fixture": "three-point-zero-vc-realizable"
+  },
+  "ml101-vc-agnostic-zero": {
+    "check": "ml101-vc-agnostic-zero",
+    "result": "The excess-risk infimum is attained by the unique function in H, so every H-valued rule has excess risk zero.",
+    "asserts": "then $A$ is agnostic $(\\epsilon,\\delta)$-PAC on $H$. If $d=0$, then $H$ contains one function and every $H$-valued rule has excess risk zero without a sample-size condition. These are conditional guarantees for risk-measurable selectors; no exact or approximate ERM existence is asserted.",
+    "fixture": "three-point-zero-vc-agnostic"
+  },
+  "ml101-vc-threshold-growth": {
+    "check": "ml101-vc-threshold-growth",
+    "result": "The formula m+1 gives 1,2,3; the proof realizes all three counts and excludes a shattered two-point tuple.",
+    "asserts": "3.1 For $m$ distinct points ordered $x_1<\\cdots<x_m$, a threshold realizes exactly the $m+1$ vectors consisting of $k$ initial ones followed by $m-k$ zeros, for $0\\le k\\le m$. A tuple with only $r$ distinct points has at most $r+1\\le m+1$ traces, while a distinct $m$-tuple attains $m+1$; for $m=0$ the unique empty trace is counted once. Thus $\\Pi_{H_{\\rm th}}(m)=m+1$. [F2, step 2.1, algebra] ∎",
+    "fixture": "threshold-parameter-grid"
+  },
+  "ml101-vc-interval-growth": {
+    "check": "ml101-vc-interval-growth",
+    "result": "The formula 1+m(m+1)/2 gives 1,2,4,7; at three points exactly one of the eight labelings is forbidden.",
+    "asserts": "3.1 On $m$ distinct ordered points, a nonempty interval has as its trace one contiguous block, and every such block is realized by the interval with those two sample endpoints. There are $\\sum_{r=1}^m(m-r+1)=m(m+1)/2$ such blocks; an interval outside the finite sample realizes the empty trace. For a tuple with $r\\le m$ distinct points there are at most $1+r(r+1)/2\\le1+m(m+1)/2$ traces, while a distinct tuple attains that number. At $m=0$ the formula gives the single empty trace. Thus $\\Pi_{H_{\\rm int}}(m)=1+m(m+1)/2$. [F2, step 2.1, algebra] ∎",
+    "fixture": "interval-parameter-grid"
+  },
+  "ml101-vc-affine-p1": {
+    "check": "ml101-vc-affine-p1",
+    "result": "The points 0 and 1 are shattered; any three augmented points in R^2 are dependent and the sign argument excludes one labeling.",
+    "asserts": "2.1 Steps 1.1 and 1.2 give matching lower and upper bounds, proving $\\operatorname{VCdim}(H_p)=p+1$. [step 1.1, step 1.2] ∎",
+    "fixture": "scalar-affine-parameter-grid"
+  },
+  "ml101-vc-singleton-growth": {
+    "check": "ml101-vc-singleton-growth",
+    "result": "The formula m+1 gives 1,2,3,4; the proof realizes the empty trace and each one-positive trace and excludes two positives.",
+    "asserts": "3.1 On $m$ distinct natural numbers, the traces are the empty vector and the $m$ vectors with exactly one positive coordinate, so there are $m+1$. If a tuple repeats values, its trace is determined by its $r\\le m$ distinct values and has at most $r+1\\le m+1$ patterns. The empty tuple has one trace. Therefore $\\Pi_H(m)=m+1$ for every $m\\ge0$. [F2, step 2.1, algebra] ∎",
+    "fixture": "singleton-parameter-grid"
+  },
+  "ml101-risk-score-finite": {
+    "case": "zero-mass bin",
+    "result": "If sum_sigma a[t,sigma] X[sigma,b]=0, nonnegativity makes every contributing term zero, so both sides of the calibration identity are 0.",
+    "check": "ml101-risk-score-finite",
+    "asserts": "Let $\\Sigma$ and $\\mathcal B$ be nonempty finite sets of feature types and score bins. For each group $t\\in\\{1,2\\}$, let $N_t>0$ be its total mass and let $a_{t\\sigma}\\ge0$ satisfy $\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}=1$. Let $p_\\sigma\\in[0,1]$ be the probability of the positive binary outcome $Y=1$ for feature type $\\sigma$, with the same $p_\\sigma$ in both groups. A randomized risk assignment consists of scores $v_b\\in[0,1]$ for $b\\in\\mathcal B$ and a single matrix $X_{\\sigma b}\\ge0$ with $\\sum_{b\\in\\mathcal B}X_{\\sigma b}=1$ for each $\\sigma$; conditional on feature type $\\sigma$, the assignment chooses bin $b$ with probability $X_{\\sigma b}$, independently of group and outcome. Thus, for a group-$t$ individual chosen according to its feature distribution, $\\Pr_t(\\Sigma=\\sigma,Y=1,B=b)=a_{t\\sigma}p_\\sigma X_{\\sigma b}$ and $\\Pr_t(\\Sigma=\\sigma,Y=0,B=b)=a_{t\\sigma}(1-p_\\sigma)X_{\\sigma b}$, and the assigned score is $S=v_B$. The expected positive mass is $\\mu_t=N_t\\sum_\\sigma a_{t\\sigma}p_\\sigma$, and the group base rate is $\\rho_t=\\mu_t/N_t$.\n\nThe assignment is **calibrated within group $t$** if for every $b\\in\\mathcal B$,\n$$\n\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}p_\\sigma X_{\\sigma b}=v_b\\sum_{\\sigma\\in\\Sigma}a_{t\\sigma}X_{\\sigma b}.\n$$\nThis cross-multiplied condition also covers bins with zero assigned mass. The instance permits perfect prediction when $p_\\sigma\\in\\{0,1\\}$ for every feature type with $a_{1\\sigma}+a_{2\\sigma}>0$; a score assignment is perfectly predictive when $S=Y$ almost surely in each group.",
+    "fixture": "zero-mass-bin"
+  },
+  "ml101-gaussian-scalar-covariance-tail": {
+    "case": "fixed dimension",
+    "result": "For d=1 and n increasing, the scalar chi-square tail in step 1.1 tends to zero.",
+    "check": "ml101-gaussian-scalar-covariance-tail",
+    "asserts": "1.1 Fix $k$, abbreviate $d=d_k$, $n=n_k$, and take a fixed unit $v\\in\\mathbb R^d$. The row products $Z_i=(G_kv)_i$ are independent $N(0,1)$ by [A1]. From [F1], $\\mathbb E e^{tZ_i^2}=(1-2t)^{-1/2}$ for $t<1/2$; applying [F2] at $t=\\delta/(2(1+\\delta))$ gives $\\mathbb P(n^{-1}\\sum_iZ_i^2\\ge1+\\delta)\\le e^{-n[\\delta-\\log(1+\\delta)]/2}\\le e^{-n\\delta^2/8}$ for $0<\\delta\\le1$, since $\\delta-\\log(1+\\delta)=\\int_0^\\delta t/(1+t)\\,dt\\ge\\delta^2/4$. For $0<\\delta<1$, applying [F2] at $u=\\delta/(2(1-\\delta))$ gives $\\mathbb P(n^{-1}\\sum_iZ_i^2\\le1-\\delta)\\le e^{-n[-\\delta-\\log(1-\\delta)]/2}\\le e^{-n\\delta^2/4}$, since $-\\delta-\\log(1-\\delta)=\\int_0^\\delta t/(1-t)\\,dt\\ge\\delta^2/2$; at $\\delta=1$ this event requires all $Z_i=0$ and has probability zero. Thus $\\mathbb P(|v^{\\mathsf T}(G_k^{\\mathsf T}G_k/n-I_d)v|>\\delta)\\le2e^{-n\\delta^2/8}$. [A1, F1, F2, given, algebra]",
+    "fixture": "fixed-dimension-tail"
+  },
+  "ml101-sparse-regression-finite": {
+    "case": "s=1",
+    "result": "Sigma=[[1,3/4],[3/4,1]], conditional variance 7/16, while 1/Cmax=4/7.",
+    "check": "ml101-sparse-regression-finite",
+    "asserts": "2.1 Substitution in [A1] gives $\\Sigma_{S^c\\mid S}=I_s-(3I_s/4)I_s^{-1}(3I_s/4)=7I_s/16$, so $\\lambda_{\\min}(\\Sigma_{S^c\\mid S})=7/16<4/7=1/C_{\\max}$ since $49<64$. Direct block multiplication gives $\\Sigma^{-1}=(16/7)\\begin{pmatrix}I_s&-3I_s/4\\\\[2pt]-3I_s/4&I_s\\end{pmatrix}$, whose lower-right block is $16I_s/7$, the inverse of the conditional covariance rather than the conditional covariance itself. Thus the proposed bound is false. [A1, step 1.1, algebra] ∎",
+    "fixture": "schur-s1"
+  },
+  "ml101-anm-latent-observational-density": {
+    "case": "observational-density",
+    "inputs": "U, epsilon_X, epsilon_Y independent N(0,1)",
+    "calculation": "Complete the square in the u integral; both models give (2 pi sqrt(3))^-1 exp(-(x^2-xy+y^2)/3).",
+    "result": "The observed (X,Y) laws agree pointwise.",
+    "check": "ml101-anm-latent-observational-density",
+    "fixture": "ml101-anm-latent-observational-density",
+    "asserts": "Assume the Axiom of Choice. Let $U,\\epsilon_X,\\epsilon_Y$ be mutually\nindependent standard normal random variables. In Model A, set\n$U=N_U$, $X=U+\\epsilon_X$, and $Y=U+\\epsilon_Y$, with $U$ latent and $X,Y$\nobserved. In Model B, let $Z_1,Z_2$ be independent standard normal variables,\nset $X=\\sqrt2 Z_1$, $E=\\sqrt{3/2}Z_2$, and $Y=X/2+E$, with both vertices\nobserved. In each model the observed vector $(X,Y)$ has density\n$$p(x,y)=\\frac1{2\\pi\\sqrt3}\\exp\\!\\left(-\\frac{x^2-xy+y^2}{3}\\right).$$\nUnder $do(X=1)$, Model A gives $Y=U+\\epsilon_Y$ with density\n$\\frac1{2\\sqrt\\pi}e^{-y^2/4}$, while Model B gives $Y=1/2+E$ with density\n$\\frac1{\\sqrt{3\\pi}}e^{-(y-1/2)^2/3}$. The two intervention densities\ndiffer at $y=1/2$, so the same observational law is compatible with different\ncausal effects when a latent common cause is allowed."
+  },
+  "ml101-anm-intervention-density-witness": {
+    "case": "intervention-at-y=1/2",
+    "inputs": "do(X=1)",
+    "calculation": "Model A density is (2 sqrt(pi))^-1 exp(-1/16); Model B density is (3 pi)^-1/2.",
+    "result": "Model B is larger by (2/sqrt(3)) exp(1/16)>1.",
+    "check": "ml101-anm-intervention-density-witness",
+    "fixture": "ml101-anm-intervention-density-witness",
+    "asserts": "Assume the Axiom of Choice. Let $U,\\epsilon_X,\\epsilon_Y$ be mutually\nindependent standard normal random variables. In Model A, set\n$U=N_U$, $X=U+\\epsilon_X$, and $Y=U+\\epsilon_Y$, with $U$ latent and $X,Y$\nobserved. In Model B, let $Z_1,Z_2$ be independent standard normal variables,\nset $X=\\sqrt2 Z_1$, $E=\\sqrt{3/2}Z_2$, and $Y=X/2+E$, with both vertices\nobserved. In each model the observed vector $(X,Y)$ has density\n$$p(x,y)=\\frac1{2\\pi\\sqrt3}\\exp\\!\\left(-\\frac{x^2-xy+y^2}{3}\\right).$$\nUnder $do(X=1)$, Model A gives $Y=U+\\epsilon_Y$ with density\n$\\frac1{2\\sqrt\\pi}e^{-y^2/4}$, while Model B gives $Y=1/2+E$ with density\n$\\frac1{\\sqrt{3\\pi}}e^{-(y-1/2)^2/3}$. The two intervention densities\ndiffer at $y=1/2$, so the same observational law is compatible with different\ncausal effects when a latent common cause is allowed."
+  },
+  "ml101-anm-linear-gaussian-reverse": {
+    "case": "linear-gaussian-reverse",
+    "inputs": "X,N independent N(0,1), Y=X+N, M=(X-N)/2",
+    "calculation": "The inverse linear map has determinant -1 and x^2+n^2=y^2/2+2m^2.",
+    "result": "p(Y,M)=(2 pi)^-1 exp(-y^2/4-m^2)=p_Y(y)p_M(m).",
+    "check": "ml101-anm-linear-gaussian-reverse",
+    "fixture": "ml101-anm-linear-gaussian-reverse",
+    "asserts": "Assume AC. Let $X,N$ be independent standard normal random variables and set\n$Y=X+N$. The forward model $Y=X+N$ is an additive-noise model, and the same\njoint law also has the reverse representation\n$$X=\\frac12Y+M,\\qquad M:=\\frac{X-N}{2},$$\nwhere $M$ is independent of $Y$. Indeed, the joint density of $(Y,M)$ is\n$$p_{Y,M}(y,m)=\\frac1{2\\pi}\\exp\\!\\left(-\\frac{y^2}{4}-m^2\\right)=\\left(\\frac1{2\\sqrt\\pi}e^{-y^2/4}\\right)\\left(\\frac1{\\sqrt\\pi}e^{-m^2}\\right).$$\nThe forward structural function $f(x)=x$ and the two Gaussian log densities\nsatisfy the differential equation in Condition 19 at every point of its\nnonzero domain, so Condition 19 fails. Thus this reversible case lies outside\nthe bivariate identifiability theorem's hypothesis."
+  },
+  "ml101-anm-linear-condition19": {
+    "case": "Condition-19",
+    "inputs": "f(x)=x and standard normal input/noise",
+    "calculation": "xi triple derivative and nu triple derivative vanish; f second and third derivatives vanish; nu double derivative is -1.",
+    "result": "Both equation sides are zero on the entire nonzero domain.",
+    "check": "ml101-anm-linear-condition19",
+    "fixture": "ml101-anm-linear-condition19",
+    "asserts": "Assume AC. Let $X,N$ be independent standard normal random variables and set\n$Y=X+N$. The forward model $Y=X+N$ is an additive-noise model, and the same\njoint law also has the reverse representation\n$$X=\\frac12Y+M,\\qquad M:=\\frac{X-N}{2},$$\nwhere $M$ is independent of $Y$. Indeed, the joint density of $(Y,M)$ is\n$$p_{Y,M}(y,m)=\\frac1{2\\pi}\\exp\\!\\left(-\\frac{y^2}{4}-m^2\\right)=\\left(\\frac1{2\\sqrt\\pi}e^{-y^2/4}\\right)\\left(\\frac1{\\sqrt\\pi}e^{-m^2}\\right).$$\nThe forward structural function $f(x)=x$ and the two Gaussian log densities\nsatisfy the differential equation in Condition 19 at every point of its\nnonzero domain, so Condition 19 fails. Thus this reversible case lies outside\nthe bivariate identifiability theorem's hypothesis."
+  },
+  "ml101-anm-cubic-condition19": {
+    "case": "Condition-19-witness",
+    "inputs": "x=1,y=0; f=x^3; standard normal input/noise",
+    "calculation": "z=-1, f prime=3, f second=6, f third=6; RHS=-2+36+6-12=28.",
+    "result": "LHS xi triple derivative is 0, so Condition 19 holds at this point.",
+    "check": "ml101-anm-cubic-condition19",
+    "fixture": "ml101-anm-cubic-condition19",
+    "asserts": "Assume AC. Let $X,N$ be independent standard normal random variables and set\n$Y=X^3+N$. The structural function is nonconstant and $C^3$, and both noise\ndensities are strictly positive and $C^3$. For $f(x)=x^3$ and standard normal\ninput and noise, the triple satisfies Condition 19: at $(x,y)=(1,0)$ its left\nside is $0$ and its right side is $28$.\nThe bivariate direction-identifiability theorem therefore excludes every\nreverse additive-noise representation with an independent residual and a\n$C^3$ structural function."
+  },
+  "ml101-laplace-scalar-density": {
+    "case": "dimension one",
+    "calculation": "d=1 reduces (2b)^(-d) exp(-||z||_1/b) to (2b)^(-1) exp(-|z|/b).",
+    "result": "matches scalar density",
+    "check": "ml101-laplace-scalar-density",
+    "fixture": "ml101-laplace-scalar-density",
+    "asserts": "For $b>0$ and a finite integer $d\\ge1$, the finite product probability law $\\operatorname{Lap}(b)^{\\otimes d}$ on $\\mathbb R^d$ has Lebesgue density\n$$\nz\\longmapsto (2b)^{-d}\\exp\\!\\left(-\\frac{\\|z\\|_1}{b}\\right),\n$$\nwhere $\\|z\\|_1=\\sum_{i=1}^d|z_i|$. Its coordinate projections are independent and each has law $\\operatorname{Lap}(b)$."
+  },
+  "ml101-laplace-unit-sensitivity-privacy": {
+    "case": "one-dimensional unit sensitivity",
+    "calculation": "d=1 and Delta_1 f=1 give b=1/epsilon and a point-density ratio at most exp(1/b)=e^epsilon.",
+    "result": "event bound follows by integration",
+    "check": "ml101-laplace-unit-sensitivity-privacy",
+    "fixture": "ml101-laplace-unit-sensitivity-privacy",
+    "asserts": "For every finite-dimensional query $f:\\mathcal D\\to\\mathbb R^d$ with $d\\ge1$ and finite global $L^1$ sensitivity, and every $\\varepsilon>0$, the Laplace mechanism is $(\\varepsilon,0)$-differentially private under add/remove adjacency."
+  },
+  "ml101-exponential-two-output-privacy-utility": {
+    "case": "two-output utility",
+    "calculation": "For R={a,b}, the two weights sum to the displayed normalizer.",
+    "result": "finite-range ratio and tail calculation apply",
+    "check": "ml101-exponential-two-output-privacy-utility",
+    "fixture": "ml101-exponential-two-output-privacy-utility",
+    "asserts": "Let $\\mathcal D$ be the set of finite-support record-count databases, with neighbors defined by adding or removing one record occurrence. Let $R$ be a nonempty finite set independent of the database, and let $u:\\mathcal D\\times R\\to\\mathbb R$ be a real-valued utility with finite positive attained global utility sensitivity $\\Delta_u$. For $\\varepsilon>0$, use weights $w_D(r)=\\exp(\\varepsilon u(D,r)/(2\\Delta_u))$ and normalize them over $R$ as in the exponential mechanism. Its output law is $(\\varepsilon,0)$-differentially private. For a fixed database $D$, let\n$$ \\operatorname{OPT}_u(D)=\\max_{r\\in R}u(D,r),\\qquad R_{\\operatorname{OPT}}=\\{r\\in R:u(D,r)=\\operatorname{OPT}_u(D)\\}. $$\nFor every $t>0$, if $M(D)$ denotes the random output, then\n$$\n\\Pr\\!\\left[u(D,M(D))\\le\\operatorname{OPT}_u(D)-\\frac{2\\Delta_u}{\\varepsilon}\\left(\\ln\\frac{|R|}{|R_{\\operatorname{OPT}}|}+t\\right)\\right]\\le e^{-t}.\n$$"
+  },
+  "ml101-dp-two-point-kl-bound": {
+    "case": "two-point symmetric likelihood ratio",
+    "calculation": "P=(0.6,0.4), Q=(0.4,0.6), epsilon=ln(1.5); D(P||Q)=0.2 ln(1.5) and the upper bound is 0.5 ln(1.5).",
+    "result": "inequality holds",
+    "check": "ml101-dp-two-point-kl-bound",
+    "fixture": "ml101-dp-two-point-kl-bound",
+    "asserts": "Assume the Axiom of Choice. Let $P$ and $Q$ be probability measures on a measurable space measurably isomorphic to a Polish space, and let $\\varepsilon\\ge0$. If\n$$\nP(A)\\le e^\\varepsilon Q(A)\\quad\\text{and}\\quad Q(A)\\le e^\\varepsilon P(A)\n$$\nfor every measurable set $A$, then their Kullback–Leibler divergence satisfies\n$$\nD(P\\|Q)\\le\\varepsilon(e^\\varepsilon-1).\n$$"
+  },
+  "ml101-dp-two-point-purification": {
+    "case": "two-point epsilon-zero clipping",
+    "calculation": "P=(0.6,0.4), L=(0.4,0.6), epsilon=0, delta=0.2; clipping gives P*=L and TV(P,P*)=0.2.",
+    "result": "pure inequalities hold and TV meets delta",
+    "check": "ml101-dp-two-point-purification",
+    "fixture": "ml101-dp-two-point-purification",
+    "asserts": "Assume AC. Let $H$ and $Y$ be measurable spaces measurably isomorphic to Polish spaces, let $\\lambda$ be a probability measure on $H$, and let $K,L$ be probability kernels from $H$ to $Y$. Let $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$. Suppose that for $\\lambda$-almost every $h$, both inequalities\n$$\nK(h,A)\\le e^\\varepsilon L(h,A)+\\delta,\\qquad L(h,A)\\le e^\\varepsilon K(h,A)+\\delta\n$$\nhold for every measurable $A\\subseteq Y$. Then there is a probability kernel $K^*$ from $H$ to $Y$ such that for $\\lambda$-almost every $h$ and every measurable $A\\subseteq Y$,\n$$\ne^{-\\varepsilon}L(h,A)\\le K^*(h,A)\\le e^\\varepsilon L(h,A),\n$$\nand\n$$\n\\int_H \\operatorname{TV}(K(h,\\cdot),K^*(h,\\cdot))\\,\\lambda(dh)\\le\\delta,\n$$\nwhere $\\operatorname{TV}(P,Q)=\\sup_A|P(A)-Q(A)|$ over measurable events."
+  },
+  "ml101-dp-basic-adaptive-composition": {
+    "case": "one round",
+    "calculation": "k=1 gives parameters (epsilon_1,delta_1), the assumed single-round guarantee.",
+    "result": "composition bound agrees",
+    "check": "ml101-dp-basic-adaptive-composition",
+    "fixture": "ml101-dp-basic-adaptive-composition",
+    "asserts": "Let $\\mathcal D$ be the finite-support count functions on a nonempty record universe, with neighbors formed by adding or removing one record occurrence. Let $k\\ge1$ and let $\\mathcal Y_1,\\ldots,\\mathcal Y_k$ be measurable output spaces. For each round $i$, let $K_i(D,h,\\cdot)$ be a probability kernel on $\\mathcal Y_i$ for every database $D\\in\\mathcal D$ and prior transcript $h\\in\\mathcal Y_1\\times\\cdots\\times\\mathcal Y_{i-1}$. Suppose that for every neighboring pair $D\\sim D'$, every prior transcript $h$, and every measurable event $A\\subseteq\\mathcal Y_i$,\n$$\nK_i(D,h,A)\\le e^{\\varepsilon_i}K_i(D',h,A)+\\delta_i,\n$$\nwhere $\\varepsilon_i\\ge0$ and $\\delta_i\\ge0$. If $\\sum_{i=1}^k\\delta_i\\le1$, then the full transcript is $(\\sum_{i=1}^k\\varepsilon_i,\\sum_{i=1}^k\\delta_i)$-differentially private on the finite product sigma-algebra."
+  },
+  "ml101-dp-advanced-zero-epsilon": {
+    "case": "zero epsilon",
+    "calculation": "epsilon=0 makes each likelihood ratio 1 and epsilon-prime=0.",
+    "result": "separate zero-epsilon case applies",
+    "check": "ml101-dp-advanced-zero-epsilon",
+    "fixture": "ml101-dp-advanced-zero-epsilon",
+    "asserts": "Assume AC. Let $\\mathcal D$ be the finite-support count functions on a nonempty record universe, with neighbors formed by adding or removing one record occurrence. Let $k\\ge1$, let each round output space and each finite transcript-prefix space be a measurable space measurably isomorphic to a Polish space, and let $K_i(D,h,\\cdot)$ be the probability kernel for round $i$ conditional on prior transcript $h$. Suppose that for every $D\\sim D'$, every $i$, every $h$, and every measurable round-$i$ event $A$,\n$$\nK_i(D,h,A)\\le e^\\varepsilon K_i(D',h,A)+\\delta,\n$$\nwhere $\\varepsilon\\ge0$ and $0\\le\\delta\\le1$. If $0<\\delta'<1$ and $k\\delta+\\delta'\\le1$, then the finite-product full transcript is $(\\varepsilon',k\\delta+\\delta')$-differentially private, where\n$$\n\\varepsilon'=\\sqrt{2k\\ln(1/\\delta')}\\,\\varepsilon+k\\varepsilon(e^\\varepsilon-1).\n$$"
+  },
+  "ml101-add-remove-count-sensitivity": {
+    "case": "empty versus one satisfying record",
+    "calculation": "f(empty)=0 and f({u0})=1 for a satisfying record u0.",
+    "result": "sensitivity one is attained",
+    "check": "ml101-add-remove-count-sensitivity",
+    "fixture": "ml101-add-remove-count-sensitivity",
+    "asserts": "Let $U$ be a nonempty record universe and let databases be finite-support count functions $D:U\\to\\mathbb N_0$, with neighbors formed by adding or removing one occurrence. Let $P:U\\to\\{0,1\\}$ be a predicate satisfied by at least one possible record, and let $f(D)$ count the occurrences satisfying $P$. Then the global add/remove $L^1$ sensitivity of $f$ is $1$. For $\\varepsilon>0$, releasing $f(D)+Z$ with $Z\\sim\\operatorname{Lap}(1/\\varepsilon)$ is $(\\varepsilon,0)$-differentially private."
+  },
+  "ml101-finite-range-private-selection": {
+    "case": "s=0 and s=1",
+    "calculation": "s=0 gives P(a)=1/2; s=1 gives P(a)=e^(epsilon/2)/(e^(epsilon/2)+1).",
+    "result": "matches normalized weights",
+    "check": "ml101-finite-range-private-selection",
+    "fixture": "ml101-finite-range-private-selection",
+    "asserts": "Let $U$ be a nonempty record universe, let $\\mathcal D$ be its finite-support count databases with add/remove-one-occurrence adjacency, let $R=\\{a,b\\}$, and let $\\varepsilon>0$. The constant utility $u(D,a)=1$, $u(D,b)=0$ has $\\Delta_u=0$, so it is inadmissible for the positive-sensitivity exponential mechanism. Fix a possible record $u_*\\in U$ and define $s(D)=1$ exactly when $D(u_*)>0$. Instead set $u(D,a)=1$ and $u(D,b)=1-s(D)$. Then $\\Delta_u=1$, the mechanism is $(\\varepsilon,0)$-differentially private, and it selects $a$ with probability\n$$\n\\frac{e^{\\varepsilon/2}}{e^{\\varepsilon/2}+e^{\\varepsilon(1-s(D))/2}}.\n$$"
+  },
+  "ml101-private-count-threshold-postprocessing": {
+    "case": "threshold at c",
+    "calculation": "phi(c)=1 and phi(x)=0 for x<c; preimages are [c,infinity) and (-infinity,c).",
+    "result": "both preimages are Borel",
+    "check": "ml101-private-count-threshold-postprocessing",
+    "fixture": "ml101-private-count-threshold-postprocessing",
+    "asserts": "Let $U$ be a nonempty record universe and let databases be finite-support count functions $D:U\\to\\mathbb N_0$, with neighbors formed by adding or removing one occurrence. Let $P:U\\to\\{0,1\\}$ be a predicate satisfied by at least one record, let $f(D)$ count the occurrences satisfying $P$, let $\\varepsilon>0$, and fix $c\\in\\mathbb R$. Release $X=f(D)+Z$ with $Z\\sim\\operatorname{Lap}(1/\\varepsilon)$, then output $1$ exactly when $X\\ge c$ and output $0$ otherwise. The threshold decision is a data-independent deterministic postprocessing and retains the $(\\varepsilon,0)$ guarantee of the noisy count."
+  },
+  "ml101-record-client-adjacency": {
+    "case": "100 record occurrences",
+    "calculation": "The full contribution has count-function L1 difference 100 and a path of 100 single-occurrence changes.",
+    "result": "not one record neighbor step",
+    "check": "ml101-record-client-adjacency",
+    "fixture": "ml101-record-client-adjacency",
+    "asserts": "Model a database as a finite-support count function $D:U\\to\\mathbb N_0$, where $U$ is the record universe, and call two databases neighbors when one is obtained from the other by adding or removing one record occurrence. Suppose one client contributes 100 identified record occurrences to a database. Removing or adding any one of those occurrences is one neighboring step, while changing the database by the client’s entire 100-record contribution is not one neighboring step. A client-level guarantee therefore requires a client-level adjacency relation that treats that full contribution as one change and a proof using that relation."
+  },
+  "ml101-two-rademacher-martingale-variance": {
+    "name": "Two independent Rademacher increments",
+    "dimension": 1,
+    "filtration": "reveal the first sign, then the second",
+    "values": {
+      "sum_second_moment": 2,
+      "mean_sum_second_moment": 0,
+      "variance_budget_sum": 2
+    },
+    "check": "ml101-two-rademacher-martingale-variance",
+    "original_check": "The left side is 2 and the displayed right side is 4, so the inequality holds.",
+    "fixture": "ml101-two-rademacher-martingale-variance",
+    "asserts": "Assume the Axiom of Choice. Let\n$\\mathcal F_0\\subseteq\\mathcal F_1\\subseteq\\cdots\\subseteq\\mathcal F_m$\nbe a finite filtration and let $Z_j\\in L^2(\\Omega;\\mathbb R^d)$ be\n$\\mathcal F_j$-measurable for $1\\le j\\le m$, where $m\\ge1$. For each\n$1\\le\\ell\\le d$, define\n$M_j^\\ell=\\mathbb E[Z_j^\\ell\\mid\\mathcal F_{j-1}]$ by scalar conditional\nexpectation and put $M_j=(M_j^1,\\ldots,M_j^d)$ and $\\xi_j=Z_j-M_j$. Assume\n$\\xi_j\\in L^2(\\Omega;\\mathbb R^d)$. If\n$$ \\mathbb E[\\|\\xi_j\\|_2^2\\mid\\mathcal F_{j-1}]\\le v_j \\quad\\text{almost surely}, $$\nwhere each $v_j\\ge0$ is integrable and $\\mathcal F_{j-1}$-measurable, then\n$$ \\mathbb E\\left\\|\\sum_{j=1}^m Z_j\\right\\|_2^2 \\le2\\mathbb E\\left\\|\\sum_{j=1}^m M_j\\right\\|_2^2 +2\\sum_{j=1}^m\\mathbb E[v_j]. $$"
+  },
+  "ml101-uniform-client-sampling-moments": {
+    "case": "N=2, S=1, v_1=1, v_2=-1",
+    "result": "The sampled mean is ±1 with equal probability, so its mean is 0 and variance 1; the exact finite-population formula also gives 1.",
+    "check": "ml101-uniform-client-sampling-moments",
+    "fixture": "ml101-uniform-client-sampling-moments",
+    "asserts": "Let $v_1,\\ldots,v_N\\in\\mathbb R^d$, let $1\\le S\\le N$, and choose\n$\\mathcal S$ uniformly from the $S$-element subsets of $\\{1,\\ldots,N\\}$. Put\n$\\bar v=N^{-1}\\sum_i v_i$ and\n$\\bar v_{\\mathcal S}=S^{-1}\\sum_{i\\in\\mathcal S}v_i$. If $N>1$, then\n$$ \\mathbb E[\\bar v_{\\mathcal S}]=\\bar v,\\qquad \\mathbb E\\|\\bar v_{\\mathcal S}-\\bar v\\|_2^2 =\\left(1-\\frac SN\\right)\\frac{1}{S(N-1)} \\sum_{i=1}^N\\|v_i-\\bar v\\|_2^2. $$\nIn particular,\n$$ \\mathbb E\\|\\bar v_{\\mathcal S}-\\bar v\\|_2^2 \\le2\\left(1-\\frac SN\\right)\\frac1S \\frac1N\\sum_{i=1}^N\\|v_i\\|_2^2. $$\nIf $N=1$, necessarily $S=1$ and $\\bar v_{\\mathcal S}=\\bar v$."
+  },
+  "ml101-local-periodic-sync-witness": {
+    "case": "Two workers, two local steps, coupled draws f1,f1 and f2,f2",
+    "result": "The unsynchronized final mean is 1/8; synchronizing after each step gives 1/16.",
+    "check": "ml101-local-periodic-sync-witness",
+    "fixture": "ml101-local-periodic-sync-witness",
+    "asserts": "Let $f_1(x)=x^2/2$ and $f_2(x)=x^2$ on $\\mathbb R$, let the two local-SGD\nworkers start at $x_0^1=x_0^2=1$, and use step size $\\eta=1/2$ with one\nuniform component draw per worker and step from $\\{f_1,f_2\\}$. Couple two\nexecutions by choosing the positive-probability draw sequence in which worker\n1 draws $f_1$ twice and worker 2 draws $f_2$ twice. After two steps without\nintermediate synchronization their mean is $1/8$. If they instead synchronize\nafter the first step and again after the second, their final mean is $1/16$."
+  },
+  "ml101-local-data-does-not-imply-dp": {
+    "case": "D=empty, D-prime={r}, A={1}",
+    "result": "The deterministic count probabilities are 0 and 1, so the ordered DP inequality fails for every finite epsilon and delta<1.",
+    "check": "ml101-local-data-does-not-imply-dp",
+    "fixture": "ml101-local-data-does-not-imply-dp",
+    "asserts": "Let the database be a finite record set, use add/remove adjacency, and let a\ndistributed system release the exact number of records after each client has\nkept its own record locally. This deterministic count release is not\n$(\\varepsilon,\\delta)$-differentially private for any finite\n$\\varepsilon\\ge0$ and any $0\\le\\delta<1$."
+  },
+  "ml101-two-client-shifted-optima": {
+    "case": "(a1,y1)=(1,1), (a2,y2)=(2,-2), eta_l=1/4, K=2",
+    "result": "The equal-client minimizer is -3/5 and the FedAvg output is -9/32.",
+    "check": "ml101-two-client-shifted-optima",
+    "fixture": "ml101-two-client-shifted-optima",
+    "asserts": "Consider two one-observation scalar least-squares clients with data\n$(a_1,y_1)=(1,1)$ and $(a_2,y_2)=(2,-2)$, using loss\n$\\tfrac12(y_i-a_iw)^2$. Their objectives are\n$f_1(w)=\\tfrac12(w-1)^2$ and $f_2(w)=2(w+1)^2$, with local minimizers $1$\nand $-1$. The equal-client objective has minimizer $-3/5$. Starting FedAvg\nfrom $w_0=0$, using both clients, two full-gradient local steps of size\n$1/4$, and server scale $1$, gives the server model $-9/32$ after one round."
+  },
+  "ml101-scaffold-shifted-gradient-correction": {
+    "case": "f1(w)=0.5(w-1)^2, f2(w)=0.5(w+1)^2 at x=0",
+    "result": "Controls c1=-1,c2=1,c=0 make both corrected local gradients equal zero.",
+    "check": "ml101-scaffold-shifted-gradient-correction",
+    "fixture": "ml101-scaffold-shifted-gradient-correction",
+    "asserts": "Let two clients have objectives $f_1(w)=\\tfrac12(w-1)^2$ and\n$f_2(w)=\\tfrac12(w+1)^2$. At server model $x=0$, initialize\n$c_i=\\nabla f_i(0)$ and $c=(c_1+c_2)/2$. Under SCAFFOLD's corrected local\ngradient $\\nabla f_i(y)-c_i+c$, every local step starting from $0$ remains at\n$0$, for every positive local step size and every finite local-step count."
+  },
+  "ml101-gd-one-step-lower-bound": {
+    "case": "horizon T=1",
+    "calculation": "Step 1.2 gives (alpha/2)||grad F(w_0)||_2^2 <= F(w_0)-F(w_1), and the pathwise lower bound gives F(w_1)>=F_lower.",
+    "result": "||grad F(w_0)||_2^2 <= 2(F(w_0)-F_lower)/alpha, the stated finite-horizon minimum bound at T=1.",
+    "checked_in": "Steps 1.2, 2.1, and 4.1",
+    "check": "ml101-gd-one-step-lower-bound",
+    "asserts": "- $\\min_{0\\le t<T}\\|\\nabla F(w_t)\\|_2^2\\le\\frac{2\\bigl(F(w_0)-\\underline F\\bigr)}{\\alpha T}$.",
+    "selectors": {
+      "fixture": "quadratic-t1",
+      "horizon": 1
+    }
+  },
+  "ml101-gd-cosine-fixed-endpoints": {
+    "case": "stationary interval endpoints",
+    "calculation": "sin(0)=sin(2pi)=0 and F(0)=F(2pi)=0; the update x -> x-sin(x) fixes both endpoints.",
+    "result": "The open-interval basin claims exclude these fixed boundary starts, as stated.",
+    "checked_in": "Facts F3 and F8; Verification steps 1.1, 1.2, and 2.1",
+    "check": "ml101-gd-cosine-fixed-endpoints",
+    "asserts": "[F3, F8] give $F(0)=F(2\\pi)=0$.",
+    "selectors": {
+      "fixture": "cosine-boundaries",
+      "horizon": 1
+    }
+  },
+  "ml101-gd-saddle-first-two-iterates": {
+    "case": "first two iterates",
+    "calculation": "From (1,0), grad F=(2,0), so w_1=(1/2,0) and F(w_1)=1/4; then grad F(w_1)=(1,0), so w_2=(1/4,0) and F(w_2)=1/16.",
+    "result": "The first two updates agree with w_t=(2^{-t},0) and F(w_t)=4^{-t}.",
+    "checked_in": "Verification steps 1.1 and 2.1",
+    "check": "ml101-gd-saddle-first-two-iterates",
+    "asserts": "The iterates are $w_t=(2^{-t},0)$, so $F(w_t)=4^{-t}\\ge0$",
+    "selectors": {
+      "fixture": "saddle-trajectory",
+      "horizon": 2
+    }
+  },
+  "ml101-sgd-scalar-two-step-integrability": {
+    "check": "ml101-sgd-scalar-two-step-integrability",
+    "asserts": "Then every $x_k$ and $\\nabla f(x_k)$ for $0\\le k\\le N$ has finite second moment, and every $f(x_k)$ has finite absolute expectation.",
+    "claim": "The explicit finite deterministic trajectory confirms the recurrence indices and the moment conclusion at the initial, interior, and terminal iterates.",
+    "checked_in": "Statement and steps 1.1, 2.1, 3.1, and 4.1",
+    "horizon": 2,
+    "original_check": "scalar-two-step-integrability",
+    "original_asserts": "For d=1, f(x)=x^2/2, x_0=1, G_0=2, G_1=3, α_0=1/2, and α_1=1/3, the iterates are x_1=0 and x_2=-1; each iterate, gradient, and objective has a finite second moment or absolute expectation.",
+    "selectors": {
+      "fixture": "deterministic-trajectory",
+      "horizon": 2
+    }
+  },
+  "ml101-sgd-two-point-weighted-expectation": {
+    "check": "ml101-sgd-two-point-weighted-expectation",
+    "asserts": "the lifted random variable $H_R(\\omega,k)=H_k(\\omega)$ is integrable on the extension and satisfies $\\mathbb E[H_R]=\\sum_{k=1}^N p_k\\mathbb E[H_k]$.",
+    "claim": "The finite extension assigns mass p_kP({ω}) to slice (ω,k), giving the weighted expectation formula directly.",
+    "checked_in": "Statement and steps 1.1, 2.1, 3.1, 4.1, and 5.1",
+    "indices": 2,
+    "original_check": "two-point-weighted-expectation",
+    "original_asserts": "Take Ω={a,b}, P(a)=1/4, P(b)=3/4, p_1=1/3, p_2=2/3, H_1(a,b)=(2,4), and H_2(a,b)=(0,6). Then E[H_1]=7/2, E[H_2]=9/2, and E[H_R]=(1/3)(7/2)+(2/3)(9/2)=25/6.",
+    "selectors": {
+      "fixture": "finite-product-law",
+      "indices": 2
+    }
+  },
+  "ml101-sgd-one-step-smoothness-equality": {
+    "check": "ml101-sgd-one-step-smoothness-equality",
+    "asserts": "$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+(L/2)\\|y-x\\|_2^2$.",
+    "claim": "The deterministic quadratic attains the smoothness descent inequality used in step 1.2 and checks its constants.",
+    "checked_in": "Statement and steps 1.1, 2.1, 3.1, and 4.1",
+    "iterations": 1,
+    "original_check": "one-step-smoothness-descent-equality",
+    "original_asserts": "For f(x)=x^2/2, x_1=1, G_1=1, L=1, α=1/2, and zero conditional variance, f(x_2)=1/8=f(x_1)-α|∇f(x_1)|^2+(Lα^2/2)|G_1|^2.",
+    "selectors": {
+      "fixture": "quadratic-descent",
+      "iterations": 1
+    }
+  },
+  "ml101-sgd-single-iterate-weighted-equality": {
+    "check": "ml101-sgd-single-iterate-weighted-equality",
+    "asserts": "$$\\frac1L\\mathbb E\\|\\nabla f(x_R)\\|_2^2\\le\\frac{D_f^2+\\sigma^2\\sum_{k=1}^N\\gamma_k^2}{\\sum_{k=1}^N(2\\gamma_k-L\\gamma_k^2)}.$$",
+    "claim": "The one-step deterministic quadratic reaches equality in the main weighted bound and confirms the D_f normalization.",
+    "checked_in": "Statement and steps 2.1, 3.1, 4.1, and 5.1",
+    "iterations": 1,
+    "original_check": "single-iterate-weighted-bound-equality",
+    "original_asserts": "For f(x)=x^2/2, x_1=1, L=1, N=1, γ_1=1, G_1=1, σ=0, and f*=0, one has a_1=S_1=1, D_f^2=1, and (1/L)E|∇f(x_R)|^2=1=(D_f^2+σ^2γ_1^2)/S_1.",
+    "selectors": {
+      "fixture": "weighted-one-index",
+      "iterations": 1
+    }
+  },
+  "ml101-sgd-two-step-sign-cube-moment": {
+    "check": "ml101-sgd-two-step-sign-cube-moment",
+    "asserts": "$$\\mathbb E[x_t^2]=\\bigl(q^t x_0-b(1-q^t)\\bigr)^2+\\frac{\\alpha\\sigma^2}{2-\\alpha}(1-q^{2t}),$$",
+    "claim": "Enumerating the two sign coordinates gives the displayed recurrence moments and a positive unbiased noise floor.",
+    "checked_in": "Example and steps 1.1, 1.2, 2.1, and 3.1",
+    "horizon": 2,
+    "original_check": "two-step-sign-cube-moment",
+    "original_asserts": "With α=1/4, b=0, σ=1, x_0=0, and N=2, q=3/4; the formula gives E[x_1^2]=1/16, E[x_2^2]=25/256, and limiting floor 1/7.",
+    "selectors": {
+      "fixture": "noise-sign-cube",
+      "horizon": 2
+    }
+  },
+  "ml101-sgd-two-observation-minibatch": {
+    "check": "ml101-sgd-two-observation-minibatch",
+    "asserts": "this minibatch direction has conditional mean $\\theta_t-\\bar y=\\frac{d}{d\\theta}\\widehat R_S(h_{\\theta_t})$ and conditional variance $v_S/b$.",
+    "claim": "Enumerating the four ordered index pairs gives direction values 2,1,1,0, mean 1, and variance 1/2, confirming the with-replacement variance and substituted bound.",
+    "checked_in": "Example and steps 1.1, 1.2, and 2.1",
+    "sample_size": 2,
+    "batch_size": 2,
+    "original_check": "two-observation-minibatch",
+    "original_asserts": "For S=((*,0),(*,2)), θ_1=2, and batch size b=2, one has y-bar=1, v_S=1, conditional direction mean 1, and variance 1/2. With T=1 and α=1, the objective gap is 1/2, so the theorem bound is 1/2+1=3/2 while the gradient square is 1.",
+    "selectors": {
+      "fixture": "ordered-with-replacement",
+      "sample_size": 2,
+      "batch_size": 2
+    }
+  },
+  "ml101-sgd-one-step-negative-alignment": {
+    "check": "ml101-sgd-one-step-negative-alignment",
+    "asserts": "$x_{t+1}=(1+\\alpha)x_t$, so $f(x_1)=(1+\\alpha)^2f(x_0)>f(x_0)$.",
+    "claim": "The first deterministic step verifies objective increase and failure of every positive alignment constant.",
+    "checked_in": "Example and steps 1.1, 2.1, and 3.1",
+    "iterations": 1,
+    "original_check": "one-step-negative-alignment",
+    "original_asserts": "For x_0=1 and α=1/2, the update gives x_1=3/2, f(x_1)=9/8>1/2=f(x_0), and ∇f(x_0)G_0=1(-1)=-1<0 while |G_0|=|∇f(x_0)|=1.",
+    "selectors": {
+      "fixture": "reversed-gradient",
+      "iterations": 1
+    }
+  },
+  "ml101-rmsprop-outside-root-epsilon": {
+    "case": "rho=0, epsilon=1, eta=1, x1=0, g1=2",
+    "result": "r1=4 and x2=-2/3, since sqrt(r1)+epsilon=3.",
+    "check": "ml101-rmsprop-outside-root-epsilon",
+    "asserts": "$$x_{t+1,i}=x_{t,i}-\\eta_t\\frac{g_{t,i}}{\\sqrt{r_{t,i}}+\\epsilon}\\qquad(1\\le i\\le d).$$",
+    "selectors": {
+      "fixture": "rmsprop-round-one",
+      "horizon": 1
+    }
+  },
+  "ml101-adam-inside-root-epsilon": {
+    "case": "T=1, beta1=0, beta2=1/2, epsilon=1, alpha=1, x1=0, g1=1",
+    "result": "m1=1, v1=1/2, denominator sqrt(3/2), and clipped x2=-sqrt(2/3) lies in [-1,1].",
+    "check": "ml101-adam-inside-root-epsilon",
+    "asserts": "Set $\\alpha_t=\\alpha/\\sqrt t$, compute $y_{t+1}=x_t-\\alpha_t m_t/\\sqrt{v_t+\\epsilon}$, and set $x_{t+1}=\\max(-1,\\min(1,y_{t+1}))$.",
+    "selectors": {
+      "fixture": "uncorrected-adam-round-one",
+      "horizon": 1
+    }
+  },
+  "ml101-amsgrad-raw-moment-maximum": {
+    "case": "one coordinate, beta2=1/2, gradients 2 then 0",
+    "result": "v1=2, v2=1, and the historical maximum is 2 at both rounds.",
+    "check": "ml101-amsgrad-raw-moment-maximum",
+    "asserts": "$$\\widehat v_{t,i}=\\max\\{\\widehat v_{t-1,i},v_{t,i}\\}.$$",
+    "selectors": {
+      "fixture": "amsgrad-raw-max",
+      "horizon": 2
+    }
+  },
+  "ml101-amsgrad-example-historical-maximum": {
+    "case": "the stated two-round sequence",
+    "result": "the recurrence gives v1=2, v2=1, and vhat1=vhat2=2.",
+    "check": "ml101-amsgrad-example-historical-maximum",
+    "asserts": "The raw second moment decreases from $v_1=2$ to $v_2=1$, while the historical maximum remains $\\widehat v_1=\\widehat v_2=2$.",
+    "selectors": {
+      "fixture": "amsgrad-two-linear-losses",
+      "horizon": 2
+    }
+  },
+  "ml101-amsgrad-constant-beta-correction": {
+    "case": "T=2",
+    "result": "v1=1/2 and v2=3/4; the theorem correction term is positive and the proved lower bound 4T^(3/2)/9 applies.",
+    "check": "ml101-amsgrad-constant-beta-correction",
+    "asserts": "the second, first-moment correction term in its displayed bound is at least $4T^{3/2}/9$ for $T\\ge2$.",
+    "selectors": {
+      "fixture": "constant-beta-bound-term",
+      "horizon": 2
+    }
+  },
+  "ml101-du-softplus-normalizer": {
+    "case": "softplus",
+    "calculation": "Softplus is continuous, nonzero and Lipschitz, so the proved bounds apply.",
+    "result": "Its Gaussian squared expectation is positive and finite.",
+    "checked_in": "Steps 1.1–2.1",
+    "check": "ml101-du-softplus-normalizer",
+    "asserts": "Assume AC. Let $Z$ have the standard normal law on $\\mathbb R$. Suppose $\\sigma:\\mathbb R\\to\\mathbb R$ is analytic, nonpolynomial, satisfies $|\\sigma(0)|\\le B$ for some finite $B$, and is $L$-Lipschitz for a finite $L$. Then $0<\\mathbb E[\\sigma(Z)^2]<\\infty$. Consequently the normalization constant\n\n$$c_\\sigma:=\\bigl(\\mathbb E[\\sigma(Z)^2]\\bigr)^{-1}$$\n\nis a well-defined positive finite real number.",
+    "fixture": "softplus"
+  },
+  "ml101-du-gram-loss-contraction": {
+    "case": "zero residual",
+    "calculation": "r=0 forces R=0 by the remainder hypothesis.",
+    "result": "Both losses vanish.",
+    "checked_in": "Steps 1.1–2.1",
+    "check": "ml101-du-gram-loss-contraction",
+    "asserts": "Let $r\\in\\mathbb R^n$, let $G$ be a real symmetric matrix with eigenvalues in $[\\lambda,\\Lambda]$ for some $0<\\lambda\\le\\Lambda$, and suppose $0<\\eta\\Lambda\\le1$. If an update has the form $r^+=(I-\\eta G)r+R$ with $\\|R\\|_2\\le\\eta\\lambda\\|r\\|_2/4$, then for the quadratic loss $L=\\frac12\\|r\\|_2^2$ and $L^+=\\frac12\\|r^+\\|_2^2$,\n\n$$L^+\\le(1-\\eta\\lambda/2)L.$$",
+    "fixture": "zero-residual-and-gram-grid"
+  },
+  "ml101-du-zero-feature-output": {
+    "case": "Phi=0",
+    "calculation": "The image norm, trace and operator norm all vanish.",
+    "result": "The probability event holds surely.",
+    "checked_in": "Steps 1.1–2.1",
+    "check": "ml101-du-zero-feature-output",
+    "asserts": "Assume AC, DC and countable choice. Fix hidden-layer feature vectors $\\phi_1,\\ldots,\\phi_n\\in\\mathbb R^m$, form the matrix $\\Phi\\in\\mathbb R^{n\\times m}$ with rows $\\phi_i^T$, and let the independent output-weight vector $a\\sim N_m(0,I_m)$. Put $u=\\Phi a$ and $G=\\Phi\\Phi^T$. Then for every $0<\\delta<1$,\n\n$$P\\left\\{\\|u\\|_2\\le\\sqrt{\\operatorname{tr}(G)}+\\|\\Phi\\|_{\\rm op}\\sqrt{2\\log(1/\\delta)}\\right\\}\\ge1-\\delta,$$\n\nwhere $\\|\\Phi\\|_{\\rm op}=\\sup_{\\|v\\|_2=1}\\|\\Phi v\\|_2$. The probability is conditional on the fixed hidden-layer features and is over $a$ only.",
+    "fixture": "zero-feature-matrix"
+  },
+  "ml101-du-relu-one-sided-derivatives": {
+    "case": "t=0",
+    "calculation": "The left and right derivatives are 0 and 1.",
+    "result": "The derivative does not exist.",
+    "checked_in": "Steps 1.1–2.1",
+    "check": "ml101-du-relu-one-sided-derivatives",
+    "asserts": "Let $\\sigma(t)=\\max\\{0,t\\}$ be the ReLU activation. It is not differentiable at $0$, so it is not analytic and does not satisfy the smooth-activation assumptions of the two finite-width convergence theorems.",
+    "fixture": "relu-at-zero"
+  },
+  "ml101-du-depth-three-residual-skips": {
+    "case": "H=3",
+    "calculation": "Substitute h=2 and h=3 into the residual recurrence.",
+    "result": "Both post-initial layers have identity skips.",
+    "checked_in": "Steps 1.1–2.1",
+    "check": "ml101-du-depth-three-residual-skips",
+    "asserts": "For depth $H=3$, the analyzed residual recurrence is $x^{(1)}=\\sqrt{c_\\sigma/m}\\,\\sigma(W^{(1)}x)$, $x^{(2)}=x^{(1)}+\\frac{c_{\\rm res}}{3\\sqrt m}\\sigma(W^{(2)}x^{(1)})$, and $x^{(3)}=x^{(2)}+\\frac{c_{\\rm res}}{3\\sqrt m}\\sigma(W^{(3)}x^{(2)})$. Each layer after the first adds its nonlinear branch to the immediately preceding representation.",
+    "fixture": "depth-three-residual"
+  },
+  "ml101-du-interpolation-test-counterexample": {
+    "case": "one training example",
+    "calculation": "Both functions vanish at 0 and differ at 1.",
+    "result": "Training predictions agree while test predictions differ.",
+    "checked_in": "Steps 1.1–2.1",
+    "check": "ml101-du-interpolation-test-counterexample",
+    "asserts": "Take one training input $x=0$ with label $y=0$, and one test input $x_*=1$. Define $g_0(x)=0$ and $g_1(x)=x$, and define the one-point empirical quadratic loss by $L_S(g)=\\frac12(g(0)-y)^2$. Both predictors have empirical loss zero, while their test predictions are $g_0(1)=0$ and $g_1(1)=1$. Therefore agreement with the training labels alone does not determine test predictions.",
+    "fixture": "one-training-point"
+  },
+  "ml101-w2-tight-tail-dirac-witness": {
+    "case": "d=1 witness at n=2",
+    "inputs": "μ2=(3/4)δ0+(1/4)δ2",
+    "calculation": "Every coupling with second marginal δ0 is supported on R×{0}; the cost is ∫x²dμ2=1.",
+    "result": "W2(μ2,δ0)=1 for this member of the stated tight narrowly convergent sequence.",
+    "check": "ml101-w2-tight-tail-dirac-witness",
+    "asserts": "Assume the Axiom of Choice. For $d\\ge1$ and $\\mu_n,\\mu\\in\\mathcal P_2(\\mathbb R^d)$, $W_2(\\mu_n,\\mu)\\to0$ if and only if $\\mu_n$ converges narrowly to $\\mu$ and\n$$\\lim_{R\\to\\infty}\\sup_{n\\ge1}\\int_{\\{|x|>R\\}}|x|^2d\\mu_n(x)=0.$$\nTightness by itself is insufficient: for $e_1=(1,0,\\ldots,0)$ and $\\mu_n=(1-n^{-2})\\delta_0+n^{-2}\\delta_{ne_1}$, the sequence is tight and converges narrowly to $\\delta_0$, but $W_2(\\mu_n,\\delta_0)=1$ for every $n$.",
+    "fixture": "n-two-dirac-cost"
+  },
+  "ml101-bump-one-dimensional-mass": {
+    "case": "d=1",
+    "inputs": "ρ1=Φ/∫Φ with Φ(t)=φ(t+1)φ(1−t)",
+    "calculation": "The denominator is strictly positive and finite by step 2.1; scaling gives unit mass.",
+    "result": "ρ1 is positive on (−1,1) and supported on [−1,1].",
+    "check": "ml101-bump-one-dimensional-mass",
+    "asserts": "For $d=1$, $\\int\\rho_1=1$ by step 2.1. By step 3.1, $\\rho_d$ is a nonnegative Borel function supported in the compact cube. For $d\\ge2$, split $\\mathbb R^d=\\mathbb R^{d-1}\\times\\mathbb R$. By",
+    "fixture": "one-dimensional-bump"
+  },
+  "ml101-bump-two-dimensional-mass": {
+    "case": "d=2",
+    "inputs": "ρ2(x1,x2)=ψ(x1)ψ(x2)",
+    "calculation": "Tonelli gives ∫ρ2=(∫ψ)(∫ψ)=1.",
+    "result": "ρ2 is supported on [−1,1]^2 and positive on its interior.",
+    "check": "ml101-bump-two-dimensional-mass",
+    "asserts": "Define $\\rho_d(x_1,\\ldots,x_d)=\\prod_{j=1}^d\\psi(x_j)$. Repeated coordinatewise chain and product rules give every partial derivative as $\\prod_{j=1}^d\\psi^{(\\alpha_j)}(x_j)$ for its multi-index $\\alpha$, so all partial derivatives are continuous. The function is nonnegative, vanishes outside $[-1,1]^d$, and is positive at every point of $(-1,1)^d$; therefore its support is exactly that closed cube.",
+    "fixture": "two-dimensional-bump"
+  },
+  "ml101-w2-translated-dirac-action": {
+    "case": "d=1, T=2, a=2, b=3",
+    "inputs": "μt=δ(2+3t)",
+    "calculation": "W2(μs,μt)=3|t−s| and the constant-field action is 2·3².",
+    "result": "Metric speed 3 and action 18.",
+    "check": "ml101-w2-translated-dirac-action",
+    "asserts": "Assume AC. Let $T>0$ and $a,b\\in\\mathbb R^d$. The curve $\\mu_t=\\delta_{a+tb}$ belongs to $AC^2([0,T];\\mathcal P_2(\\mathbb R^d))$, has constant metric speed $|b|$, and the Borel field $v_t(x)=b$ solves the continuity equation. Its action is $T|b|^2$, equal to the minimum action among fields solving that equation for this curve.",
+    "fixture": "a-two-b-three-T-two"
+  },
+  "ml101-w2-isotropic-gaussian-geodesic": {
+    "case": "d=1, m0=0, m1=2, σ0=1, σ1=3",
+    "inputs": "μt=Law(2t+(1+2t)ξ)",
+    "calculation": "W2(μ0,μ1)²=4+(3−1)²=8; midpoint mean and scale are 1 and 2.",
+    "result": "Endpoint distance 2√2 and constant-speed subsegments.",
+    "check": "ml101-w2-isotropic-gaussian-geodesic",
+    "asserts": "Assume AC. Let $d\\ge1$, $m_0,m_1\\in\\mathbb R^d$, and $\\sigma_0,\\sigma_1>0$. Let $\\xi$ have density $(2\\pi)^{-d/2}e^{-|z|^2/2}$ on $\\mathbb R^d$, put $m_t=(1-t)m_0+tm_1$ and $\\sigma_t=(1-t)\\sigma_0+t\\sigma_1$, and set $\\mu_t=\\operatorname{Law}(m_t+\\sigma_t\\xi)$ for $0\\le t\\le1$. Then $\\mu_t$ is a constant-speed $W_2$ geodesic, meaning $W_2(\\mu_s,\\mu_t)=|t-s|W_2(\\mu_0,\\mu_1)$ for all $s,t\\in[0,1]$, from the laws of $m_0+\\sigma_0\\xi$ to the law of $m_1+\\sigma_1\\xi$, with\n$$W_2(\\mu_0,\\mu_1)^2=|m_1-m_0|^2+d(\\sigma_1-\\sigma_0)^2.$$\nThe Borel field\n$$v_t(x)=m_1-m_0+\\frac{\\sigma_1-\\sigma_0}{\\sigma_t}(x-m_t)$$\nsolves the continuity equation and has action equal to this squared distance, hence is minimum-action. The strict positivity of $\\sigma_0$ and $\\sigma_1$ ensures $\\sigma_t>0$ throughout; degenerate covariances are excluded.",
+    "fixture": "one-dimensional-gaussian-endpoints"
+  },
+  "ml101-meanfield-radial-separation": {
+    "check": "ml101-meanfield-radial-separation",
+    "asserts": "Assume AC. In $\\Omega=\\mathbb R^2$, let $\\sigma$ be normalized arc-length probability on the unit circle $S^1=\\{x:|x|=1\\}$ and let $\\delta_0$ be the point mass at the origin. For radii $r_a=1/2$ and $r_b=2$, the support of $\\sigma$ is contained in the ball $B(0,r_b)$ and separates the two spheres $r_aS^1$ and $r_bS^1$: every continuous path from one sphere to the other meets $S^1$. In contrast, the support of $\\delta_0$ is contained in $B(0,r_b)$ but does not separate those spheres. These are only checks of the topological initialization condition; neither example asserts that any flow converges or that its limit is globally minimizing.",
+    "claim": "This finite geometric check confirms the crossing and noncrossing examples only.",
+    "checked_in": "Statement and steps 1.2-2.1",
+    "path_segments": 1,
+    "original_check": "radial-intermediate-value-and-origin-avoidance",
+    "original_asserts": "The radial endpoint norms are 1/2 and 2; the exhibited segment from (1/2,0) to (2,0) has norm at least 1/2 throughout.",
+    "fixture": "one-segment-radial"
+  },
+  "ml101-meanfield-sine-dirac-geodesic": {
+    "check": "ml101-meanfield-sine-dirac-geodesic",
+    "asserts": "Assume AC. Let $\\Omega=\\mathbb R$, $\\mathcal H=\\mathbb R$, $R(z)=z^2$, $\\Phi(x)=\\sin x$, and $V(x)=0$, so $F(\\mu)=(\\int\\sin x\\,d\\mu(x))^2$ for every finite nonnegative Borel measure. For each $r>0$, take $Q_r=[-r,r]$ and $C_1=C_2=1$; the cutoff, boundedness, Lipschitz, and linear-growth assumptions hold. This energy is convex under linear mixtures of measures, but it is not displacement convex along $W_2$ geodesics: along the geodesic from $\\delta_0$ to $\\delta_\\pi$, its endpoint values are zero and its midpoint value is one.",
+    "claim": "The exact midpoint value violates displacement convexity with λ=0.",
+    "checked_in": "Statement and step 3.1",
+    "max_support_points": 2,
+    "original_check": "sine-feature-dirac-geodesic",
+    "original_asserts": "F(δ_0)=0, F(δ_π)=0, and F(δ_{π/2})=1.",
+    "fixture": "sine-dirac-endpoints"
+  },
+  "ml101-meanfield-quadratic-particle-flow": {
+    "check": "ml101-meanfield-quadratic-particle-flow",
+    "asserts": "Assume AC. In dimension $d\\ge1$, take $\\mathcal H=\\{0\\}$, $R=0$, $\\Phi=0$, $\\Omega=\\mathbb R^d$, $V(x)=|x|^2/2$, and $Q_r=\\overline B(0,r)$ for every $r>0$. This cutoff family has the required relative-neighborhood property, and $\\sup_{Q_r}\\|\\partial V\\|=r\\le1+r$, so $C_1=C_2=1$ works. Thus $F(\\mu)=\\frac12\\int|x|^2d\\mu(x)$. For any $\\mu_0\\in\\mathcal P_2(\\mathbb R^d)$, the unique Wasserstein gradient flow is $\\mu_t=(e^{-t}\\operatorname{id})_\\#\\mu_0$. The corresponding $m$-particle gradient flow satisfies $x_i(t)=e^{-t}x_i(0)$ under the inner product $m^{-1}\\sum_i x_i\\cdot y_i$. For every empirical probability $\\mu_{m,0}$ and every $t\\ge0$,\n$$W_2(\\mu_{m,t},\\mu_t)=e^{-t}W_2(\\mu_{m,0},\\mu_0),$$\nso any initial convergence in $W_2$ persists uniformly on every compact time interval.",
+    "claim": "This checks particle metric normalization and the exact pushforward formula in the one-particle case.",
+    "checked_in": "Statement and steps 1.1-3.1",
+    "dimension": 1,
+    "particles": 1,
+    "original_check": "one-dimensional-single-particle-normalization",
+    "original_asserts": "For d=1, m=1, and x(0)=1, the coordinate flow is x(t)=e^{-t} and the empirical law is δ_{e^{-t}}.",
+    "fixture": "one-dimensional-one-particle"
+  },
+  "ml101-flow-single-endpoint-mixture": {
+    "check": "ml101-flow-single-endpoint-mixture",
+    "asserts": "Let $\\lambda$, $\\pi$, and $\\rho$ satisfy the conditional probability-density path definition, and for each $t\\in[0,1]$ set $p_t(x)=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)\\,\\pi(dx_1)$. Then $p_t$ is a nonnegative measurable function and $\\int_{\\mathbb R^d}p_t(x)\\,\\lambda(dx)=1$ for every $t$; hence it is a probability density with respect to $\\lambda$.",
+    "claim": "Degenerate endpoint law boundary.",
+    "checked_in": "Verification steps 1.1, 2.1.",
+    "fixture": "singleton-gaussian-mass-v1"
+  },
+  "ml101-flow-single-endpoint-marginal-pde": {
+    "check": "ml101-flow-single-endpoint-marginal-pde",
+    "asserts": "Let $\\lambda$, $\\pi$, and $\\rho$ be as in the conditional probability-path definition. Suppose that for $\\pi$-almost every $x_1$, the conditional continuity equation holds for all $(t,x)\\in(0,1)\\times\\mathbb R^d$. Suppose also that for every compact $K\\subset(0,1)\\times\\mathbb R^d$ there is a nonnegative $G_K\\in L^1(\\pi)$ which, for $\\pi$-almost every $x_1$, bounds on $K$ the absolute values of $\\rho_t(x\\mid x_1)$, $\\partial_t\\rho_t(x\\mid x_1)$, each component of $\\rho_t(x\\mid x_1)u_t(x\\mid x_1)$, and each derivative $\\partial_{x_j}(\\rho_tu_t^j)(x\\mid x_1)$. If $p_t(x)>0$ on $(0,1)\\times\\mathbb R^d$, define\n$$J_t(x):=\\int_{\\mathbb R^d}\\rho_t(x\\mid x_1)u_t(x\\mid x_1)\\,\\pi(dx_1), \\qquad u_t(x):=\\frac{J_t(x)}{p_t(x)}.$$\nThen $\\partial_t p_t$ and each indicated flux derivative $\\partial_{x_j}J_t^j$ exist and are continuous locally in $(t,x)$, and the marginal continuity equation\n$$\\partial_t p_t(x)+\\sum_{j=1}^d\\partial_{x_j}\\!\\left(p_t(x)u_t^j(x)\\right)=0$$\nholds on $(0,1)\\times\\mathbb R^d$. The domination hypothesis is a sufficient Leibniz condition for the time and spatial derivatives to pass through the $x_1$ integral.",
+    "claim": "One-point endpoint law boundary.",
+    "checked_in": "Verification steps 1.1, 2.1.",
+    "fixture": "singleton-moving-gaussian-pde-v1"
+  },
+  "ml101-flow-unit-scale-boundary": {
+    "check": "ml101-flow-unit-scale-boundary",
+    "asserts": "Let $\\mu$ be a Borel probability measure on $\\mathbb R^d$ with finite second moment, mean $\\int x\\,\\mu(dx)=0$, and $m_2:=\\int\\|x\\|_2^2\\,\\mu(dx)<\\infty$. Fix $a\\in\\mathbb R^d$ and $s>0$, define $T(x):=a+sx$, and let $\\nu$ be the law of $T(X)$ when $X$ has law $\\mu$. For every Borel probability measure $\\gamma$ on $\\mathbb R^d\\times\\mathbb R^d$ whose coordinate marginals are $\\mu$ and $\\nu$,\n$$\\int_{\\mathbb R^d\\times\\mathbb R^d}\\|y-x\\|_2^2\\,\\gamma(dx,dy)\\ \\ge\\ \\|a\\|_2^2+(1-s)^2m_2.$$\nThe law of $(X,T(X))$ under $\\mu$ attains equality. Thus $T$ is an optimal transport map for the squared Euclidean cost between $\\mu$ and its translated dilation $\\nu$.",
+    "claim": "Exact boundary value s=1.",
+    "checked_in": "Verification steps 1.1, 2.1, 3.1.",
+    "fixture": "three-atom-all-quarter-couplings-v1"
+  },
+  "ml101-flow-stationary-standard-gaussian": {
+    "check": "ml101-flow-stationary-standard-gaussian",
+    "asserts": "Assume the Axiom of Choice. Let $d\\ge1$, fix $x_1\\in\\mathbb R^d$, and choose $\\sigma_{\\min}>0$. Let $Z$ have the standard multivariate normal law $N_d(0,I_d)$. For $t\\in[0,1]$, define\n$$\\mu_t(x_1):=t x_1,\\qquad \\sigma_t:=1-(1-\\sigma_{\\min})t,\\qquad \\psi_t(z\\mid x_1):=\\sigma_t z+\\mu_t(x_1),$$\nand let $P_t(\\cdot\\mid x_1)$ be the law of $\\psi_t(Z\\mid x_1)$. Then $P_t(\\cdot\\mid x_1)$ is the Gaussian probability path with mean $\\mu_t(x_1)$ and covariance $\\sigma_t^2I_d$, and its Lebesgue density is\n$$\\rho_t(x\\mid x_1)=(2\\pi\\sigma_t^2)^{-d/2} \\exp\\!\\left(-\\frac{\\|x-\\mu_t(x_1)\\|_2^2}{2\\sigma_t^2}\\right).$$\nA conditional velocity field for this path is\n$$u_t(x\\mid x_1)=\\frac{\\sigma_{\\min}-1}{\\sigma_t}(x-tx_1)+x_1.$$\nFor each endpoint $x_1$, these densities and fields form a conditional path in the probability-path definition; hence they can be mixed against any Borel endpoint law. At $t=0$ the law is $N_d(0,I_d)$, and at $t=1$ it is the law of $x_1+\\sigma_{\\min}Z$, a Gaussian with mean $x_1$ and covariance $\\sigma_{\\min}^2I_d$. The affine endpoint map $T(z)=x_1+\\sigma_{\\min}z$ is optimal for squared Euclidean cost between these two laws: every coupling has cost at least\n$$\\|x_1\\|_2^2+d(1-\\sigma_{\\min})^2,$$\nand the law of $(Z,T(Z))$ attains this value.",
+    "claim": "Degenerate stationary Gaussian boundary.",
+    "checked_in": "Verification steps 1.1, 1.2, 2.1, 2.2, 3.1, 4.1, 5.1.",
+    "fixture": "stationary-scalar-standard-normal-v1"
+  },
+  "ml101-flow-scalar-rational-endpoint-cost": {
+    "check": "ml101-flow-scalar-rational-endpoint-cost",
+    "asserts": "Assume the Axiom of Choice. Fix $a\\in\\mathbb R$ and $\\sigma_{\\min}>0$, let $Z\\sim N(0,1)$, and set\n$$\\sigma_t=1-(1-\\sigma_{\\min})t,\\qquad X_t=\\sigma_t Z+ta\\quad(0\\le t\\le1).$$\nThen $X_t\\sim N(ta,\\sigma_t^2)$, with density\n$$\\rho_t(x\\mid a)=\\frac{1}{\\sqrt{2\\pi}\\,\\sigma_t}\\exp\\!\\left(-\\frac{(x-ta)^2}{2\\sigma_t^2}\\right),$$\nand a conditional velocity field is\n$$u_t(x\\mid a)=a+\\frac{\\sigma_{\\min}-1}{\\sigma_t}(x-ta).$$\nFor every fixed $z\\in\\mathbb R$, the particle path $t\\mapsto\\sigma_tz+ta$ is a straight line from $z$ to $a+\\sigma_{\\min}z$. The endpoint map $T(z)=a+\\sigma_{\\min}z$ is quadratic-cost optimal from $N(0,1)$ to $N(a,\\sigma_{\\min}^2)$, and its squared transport cost is $a^2+(1-\\sigma_{\\min})^2$.",
+    "claim": "Exact scalar instance of the example.",
+    "checked_in": "Verification steps 1.1, 2.1.",
+    "fixture": "a1-sigma-quarter-direct-cost-v1"
+  },
+  "ml101-flow-two-point-symmetric-mixture": {
+    "check": "ml101-flow-two-point-symmetric-mixture",
+    "asserts": "Assume the Axiom of Choice and fix $a>0$ and $\\sigma_{\\min}>0$. Let the endpoint law assign probability $1/2$ to each endpoint $x_1=-a$ and $x_1=a$. For each endpoint, use the one-dimensional Gaussian path with\n$$\\sigma_t=1-(1-\\sigma_{\\min})t,\\qquad X_t=\\sigma_t Z+t x_1,\\qquad Z\\sim N(0,1).$$\nFor either endpoint and each fixed $Z=z$, the conditional particle trajectory is a straight line. The marginal density is\n$$p_t(x)=\\frac{1}{2\\sqrt{2\\pi}\\,\\sigma_t}\\left[ \\exp\\!\\left(-\\frac{(x-ta)^2}{2\\sigma_t^2}\\right)+ \\exp\\!\\left(-\\frac{(x+ta)^2}{2\\sigma_t^2}\\right) \\right],$$\nand its marginal velocity field, defined by averaging the conditional velocity against the endpoint density at fixed $(t,x)$, is\n$$u^m_t(x)=\\frac{\\sigma_{\\min}-1}{\\sigma_t}x+ \\frac{a}{\\sigma_t}\\tanh\\!\\left(\\frac{atx}{\\sigma_t^2}\\right), \\qquad \\tanh(y):=\\frac{\\exp(y)-\\exp(-y)}{\\exp(y)+\\exp(-y)}.$$\nThe denominator in the definition of $\\tanh$ is positive for every real input. The density is strictly positive, and $\\partial_tp_t(x)+\\partial_x(p_t(x)u^m_t(x))=0$ on $(0,1)\\times\\mathbb R$. For every $t\\in(0,1)$, $x\\mapsto u^m_t(x)$ is nonlinear.",
+    "claim": "Finite symbolic check of the nonlinear marginal field.",
+    "checked_in": "Verification steps 1.1, 1.2, 2.1, 3.1.",
+    "fixture": "symmetric-a1-sigma1-time-half-v1"
+  },
+  "ml101-finite-proper-scoring": {
+    "case": "binary simplex boundary",
+    "result": "For p=(1,0), q=(0,1), the log loss is +infinity while the truthful log loss is 0; the Brier expected-loss difference is 2.",
+    "check": "ml101-finite-proper-scoring",
+    "parameters": {
+      "fixture": "binary-boundary"
+    },
+    "asserts": "For an integer $K\\ge2$, let the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ and let $\\Delta_K=\\{q\\in[0,1]^K:\\sum_{j=1}^Kq_j=1\\}$. A finite-label score loss is a function $S:\\Delta_K\\times\\mathcal Y\\to[0,+\\infty]$ whose section $q\\mapsto S(q,j)$ is Borel measurable for every label $j$. If the true label distribution is $p\\in\\Delta_K$ and the reported forecast is $q\\in\\Delta_K$, its expected score loss is $\\bar S(p,q)=\\sum_{j=1}^Kp_jS(q,j)$, where a term with $p_j=0$ contributes zero even when $S(q,j)=+\\infty$. The loss is **proper** if $\\bar S(p,p)\\le\\bar S(p,q)$ for every $p,q\\in\\Delta_K$, and **strictly proper** if equality implies $q=p$. The logarithmic loss is $S_{\\log}(q,j)=-\\log q_j$, with $-\\log0=+\\infty$, where $\\log$ is the natural logarithm; the Brier loss is $S_{\\mathrm B}(q,j)=\\sum_{i=1}^K(q_i-\\mathbf1_{\\{i=j\\}})^2$."
+  },
+  "ml101-simplex-pair-jensen": {
+    "case": "constant vector",
+    "result": "For Z=(u,v) almost surely, E Z=(u,v), so Jensen holds with equality.",
+    "check": "ml101-simplex-pair-jensen",
+    "parameters": {
+      "fixture": "constant-vector"
+    },
+    "asserts": "For an integer $K\\ge2$, let $\\Delta_K=\\{p\\in[0,1]^K:\\sum_{j=1}^Kp_j=1\\}$ and $C=\\Delta_K\\times\\Delta_K\\subset\\mathbb R^{2K}$. Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $Z=(U,V):\\Omega\\to C$ be measurable, and let $\\psi:C\\to\\mathbb R$ be continuous and jointly convex, meaning $\\psi(\\lambda z+(1-\\lambda)w)\\le\\lambda\\psi(z)+(1-\\lambda)\\psi(w)$ for all $z,w\\in C$ and $\\lambda\\in[0,1]$. Define $\\mathbb E Z$ coordinatewise. Then $\\mathbb E Z=(\\mathbb E U,\\mathbb E V)\\in C$ and\n$$\\psi(\\mathbb E U,\\mathbb E V)\\le\\mathbb E[\\psi(U,V)].$$"
+  },
+  "ml101-negative-root-power": {
+    "case": "s=1",
+    "result": "phi_1(t)=-t is affine and convex.",
+    "check": "ml101-negative-root-power",
+    "parameters": {
+      "fixture": "s=1"
+    },
+    "asserts": "For every real $s\\ge1$, the function $\\varphi_s:[0,\\infty)\\to\\mathbb R$ defined by $\\varphi_s(t)=-t^{1/s}$, with $0^{1/s}=0$, is convex."
+  },
+  "ml101-forecast-event-calibration": {
+    "case": "reliable forecast",
+    "result": "If Y has law p and G is constantly p, each event identity reduces to p_j 1_{p in B}=p_j 1_{p in B}.",
+    "check": "ml101-forecast-event-calibration",
+    "parameters": {
+      "fixture": "truthful-prior"
+    },
+    "asserts": "Let $K\\ge2$, let $Y$ be a random variable into the finite label set $\\{1,\\ldots,K\\}$ with its full power-set sigma-algebra on a probability space $(\\Omega,\\mathcal F,\\mathbb P)$, and let $G=(G_1,\\ldots,G_K):\\Omega\\to\\Delta_K$ be a measurable forecast, where $\\Delta_K=\\{p\\in[0,1]^K:\\sum_jp_j=1\\}$. The forecast is **fully reliable** if for every label $j$ and every Borel set $B\\subseteq\\Delta_K$,\n$$\\mathbb P(Y=j,\\ G\\in B)=\\mathbb E[\\mathbf1_{\\{G\\in B\\}}G_j].$$\nIt is **classwise calibrated** if for every $j$ and every Borel set $B\\subseteq[0,1]$,\n$$\\mathbb P(Y=j,\\ G_j\\in B)=\\mathbb E[\\mathbf1_{\\{G_j\\in B\\}}G_j].$$\nFor the **top-confidence calibration** condition, define $C=\\max_jG_j$ and $\\widehat Y=\\min\\{j:G_j=C\\}$, so ties go to the smallest label. The forecast is top-confidence calibrated if for every Borel set $B\\subseteq[0,1]$,\n$$\\mathbb P(Y=\\widehat Y,\\ C\\in B)=\\mathbb E[\\mathbf1_{\\{C\\in B\\}}C].$$\nA measurable function $r:\\Delta_K\\to\\Delta_K$ is a **calibration function** for $G$ if for every $j$ and every Borel set $B\\subseteq\\Delta_K$,\n$$\\mathbb P(Y=j,\\ G\\in B)=\\mathbb E[\\mathbf1_{\\{G\\in B\\}}r_j(G)].$$\nWhen such a function is supplied and $d:\\Delta_K\\times\\Delta_K\\to[0,+\\infty)$ is measurable, the **expected calibration error with discrepancy $d$** is $\\eta_d=\\mathbb E[d(r(G),G)]$."
+  },
+  "ml101-finite-label-conditioning": {
+    "case": "two labels on a singleton feature",
+    "result": "If P(Y=y_1)=p, then eta=(p,1-p) satisfies the single feature-event identity for both labels.",
+    "check": "ml101-finite-label-conditioning",
+    "parameters": {
+      "fixture": "singleton-feature"
+    },
+    "asserts": "Assume AC. Let a supervised prediction problem have a measurable instance space $(\\mathsf X,\\Sigma_X)$, finite label set $\\mathcal Y=\\{y_1,\\ldots,y_K\\}$ with distinct labels, the full power-set sigma-algebra on $\\mathcal Y$, and $K\\ge2$, and joint probability law $P$ on $\\mathsf X\\times\\mathcal Y$; let $X$ and $Y$ be its coordinate random variables and let $\\mathcal G=\\{X^{-1}(A):A\\in\\Sigma_X\\}$, the sigma-algebra generated by $X$. There is a measurable function $\\eta=(\\eta_1,\\ldots,\\eta_K):\\mathsf X\\to\\Delta_K$, where $\\Delta_K=\\{p\\in[0,1]^K:\\sum_jp_j=1\\}$, such that for every label index $j$ and $A\\in\\Sigma_X$,\n$$P(X\\in A,\\ Y=y_j)=\\mathbb E[\\eta_j(X)\\mathbf1_{\\{X\\in A\\}}].$$"
+  },
+  "ml101-posterior-brier-vector": {
+    "case": "binary Brier score",
+    "result": "For binary probability vectors P=(p,1-p) and Q=(q,1-q), direct Brier expected-loss excess is ||Q-P||_2^2=2(q-p)^2; equality forces Q=P.",
+    "check": "ml101-posterior-brier-vector",
+    "parameters": {
+      "fixture": "binary-vector"
+    },
+    "asserts": "Assume AC. Let $X$ and a finite label $Y\\in\\{1,\\ldots,K\\}$ with the full power-set sigma-algebra, $K\\ge2$, have a joint probability law on standard-Borel spaces. For a proper finite-label score loss $S$, a measurable posterior forecast $G(x)=P(Y\\in\\cdot\\mid X=x)$ minimizes the expected score loss among all measurable forecasts. If $S$ is strictly proper and the posterior forecast has finite expected score loss, equality of risk for another forecast $q(X)$ implies $q(X)=G(X)$ almost surely.",
+    "historical_result": "For posterior p and forecast q, conditional excess is (q-p)^2, so equality forces q=p."
+  },
+  "ml101-logistic-margin": {
+    "case": "binary logistic margin convention",
+    "result": "For eta=1 and Phi(t)=log(1+exp(t)), conditional risk is Phi(-u), minimized at the extended endpoint +infinity.",
+    "check": "ml101-logistic-margin",
+    "parameters": {
+      "fixture": "positive-label-endpoint"
+    },
+    "asserts": "Let $Y\\in\\{-1,+1\\}$ be the label in a supervised prediction problem with the full power-set sigma-algebra on this binary label set, and choose the finite-label conditional probability function ordered as $(-1,+1)$; write $\\eta(x)=\\eta_{+1}(x)$. Let $\\Phi:\\mathbb R\\to[0,\\infty)$ be finite, convex and nondecreasing. It is continuous on $\\mathbb R$; extend it to $\\overline{\\mathbb R}=\\mathbb R\\cup\\{-\\infty,+\\infty\\}$ by its one-sided monotone limits, which may equal $+\\infty$. The resulting extended function is Borel measurable. For $u\\in\\overline{\\mathbb R}$ define the conditional margin risk\n$$L_\\Phi(x,u)=\\eta(x)\\Phi(-u)+(1-\\eta(x))\\Phi(u),$$\nusing $0\\cdot(+\\infty)=0$ at endpoints. A measurable extended-real conditional minimizer is a measurable $h_\\Phi^*:\\mathsf X\\to\\overline{\\mathbb R}$ satisfying $L_\\Phi(x,h_\\Phi^*(x))\\le L_\\Phi(x,u)$ for every $x$ and every $u\\in\\overline{\\mathbb R}$. For a measurable real-valued score $h$, its margin loss is $\\ell_\\Phi(h(x),y)=\\Phi(-yh(x))$, its surrogate risk is $L_\\Phi(h)=\\mathbb E[\\Phi(-Yh(X))]$, and its conditional-minimum risk is $L_\\Phi^*=\\mathbb E[L_\\Phi(X,h_\\Phi^*(X))]$. Under the zero-score-is-error convention, its classification risk is $R_{01}(h)=P(Yh(X)\\le0)$, and the Bayes classification risk is $R_{01}^*=\\mathbb E[\\min\\{\\eta(X),1-\\eta(X)\\}]$. Write $h^*(x)=\\eta(x)-\\tfrac12$ for the centered conditional class probability."
+  },
+  "ml101-binned-calibration": {
+    "case": "one-bin cancellation",
+    "result": "If mean label vector equals mean forecast, the one-bin discrepancy is zero even if within-bin calibration error is positive.",
+    "check": "ml101-binned-calibration",
+    "parameters": {
+      "fixture": "one-bin-cancellation"
+    },
+    "asserts": "Let $Y$ be a random variable into $\\{1,\\ldots,K\\}$ with its full power-set sigma-algebra, $K\\ge2$, and let $G\\in\\Delta_K$ be a random forecast with measurable calibration function $r:\\Delta_K\\to\\Delta_K$. Let $d:\\Delta_K\\times\\Delta_K\\to[0,\\infty)$ be continuous and satisfy $d(p,p)=0$. For a finite data-independent Borel partition $\\mathcal P$ of $\\Delta_K$, draw an iid sequence $(G_i,Y_i)$ from the joint law of $(G,Y)$, let $V_i=e_{Y_i}$ be the corresponding standard basis vector, and form the empirical estimator\n$$\\widehat E_{n,\\mathcal P}=\\sum_{B\\in\\mathcal P}\\frac{N_B}{n}\\,d(\\bar V_B,\\bar G_B),$$\nwhere $N_B=\\#\\{i\\le n:G_i\\in B\\}$ and, when $N_B>0$, $\\bar V_B$ and $\\bar G_B$ are the sample averages in bin $B$; when $N_B=0$, set both to any fixed $q_0\\in\\Delta_K$. Define\n$$E_{\\mathcal P}=\\sum_{B\\in\\mathcal P:P(G\\in B)>0}P(G\\in B)\\,d\\!\\left(\\mathbb E[r(G)\\mid G\\in B],\\mathbb E[G\\mid G\\in B]\\right).$$\nFor each fixed $\\mathcal P$, $\\widehat E_{n,\\mathcal P}\\to E_{\\mathcal P}$ almost surely. If $d$ is additionally jointly convex, then $E_{\\mathcal P}\\le\\mathbb E[d(r(G),G)]$. Without requiring convexity, if $\\mathcal P_m$ is a sequence of finite data-independent Borel partitions whose mesh $\\max_{B\\in\\mathcal P_m}\\operatorname{diam}_2(B)$ tends to zero, where $\\operatorname{diam}_2(B)=\\sup_{u,v\\in B}\\|u-v\\|_2$, and $r$ is Lipschitz with respect to the Euclidean metric on $\\Delta_K$, then $E_{\\mathcal P_m}\\to\\mathbb E[d(r(G),G)]$. Thus the iterated limit $\\lim_{m\\to\\infty}\\lim_{n\\to\\infty}\\widehat E_{n,\\mathcal P_m}$ equals the expected calibration error almost surely; no diagonal rate is asserted."
+  },
+  "ml101-zero-score-risk": {
+    "case": "eta=1/2 and h=0",
+    "result": "R_01(h)-R_01^*=1/2, exactly the tie correction.",
+    "check": "ml101-zero-score-risk",
+    "parameters": {
+      "fixture": "fair-label"
+    },
+    "asserts": "For a binary supervised problem with the full power-set sigma-algebra on $Y\\in\\{-1,+1\\}$, conditional positive-label probability $\\eta$, and any measurable real-valued score $h$, use $R_{01}(h)=P(Yh(X)\\le0)$ and $R_{01}^*=\\mathbb E\\min\\{\\eta(X),1-\\eta(X)\\}$. Then\n$$R_{01}(h)-R_{01}^*=2\\mathbb E\\!\\left[\\left|\\eta(X)-\\tfrac12\\right|\\mathbf1_{\\{h(X)(\\eta(X)-\\tfrac12)\\le0\\}}\\right]+\\mathbb E\\!\\left[\\min\\{\\eta(X),1-\\eta(X)\\}\\mathbf1_{\\{h(X)=0\\}}\\right].$$"
+  },
+  "ml101-surrogate-regret-witness": {
+    "case": "scale witness",
+    "result": "Step 1.1: premise1/4=(1/4)*1; excess1 and claimed squared upper bound3/8<1.",
+    "check": "ml101-surrogate-regret-witness",
+    "parameters": {
+      "fixture": "hinge-scale"
+    },
+    "asserts": "1.1 Give the one-point feature space its power-set sigma-algebra and take $Y=+1$ surely. Let $\\Phi(t)=\\max(0,1+t)$, a finite nonnegative nondecreasing convex function: each affine term is nondecreasing and their maximum satisfies the convexity inequality by bounding each affine term at a convex combination by the corresponding convex combination of the two maxima. Here $\\eta=1$, $L_\\Phi(x,u)=\\max(0,1-u)$, and the constant minimizer $h_\\Phi^*=1$ has risk zero. With $s=2,c=1/4$, the margin premise is $1/4\\le(1/4)(1-0)$, an equality. For $h=-1/2$, classification excess is $1$ and surrogate excess is $3/2$, whereas the claimed bound is $(1/2)\\sqrt{3/2}<1$ since its square is $3/8<1$. All scores and risks are measurable and finite. Thus the proposed coefficient is false even without zero scores and with a finite conditional minimizer. [F1, construct, algebra]"
+  },
+  "ml101-multiclass-calibration": {
+    "case": "Model A",
+    "result": "Full reliability false; classwise and top-confidence calibration true.",
+    "check": "ml101-multiclass-calibration",
+    "parameters": {
+      "fixture": "A"
+    },
+    "asserts": "For each of three models let $X$ and $Y$ have their full power-set sigma-algebras, let $X$ be uniform on $\\{1,2,3\\}$, set $G(X=i)=g_i$, and specify the conditional law of $Y$ at $X=i$ by the row $p_i=P(Y=\\cdot\\mid X=i)$. In Model A take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.4,0.3,0.3)&(0.4,0.4,0.2)\\\\ 2 &(0.3,0.4,0.3)&(0.2,0.4,0.4)\\\\ 3 &(0.3,0.3,0.4)&(0.4,0.2,0.4) \\end{array}$$\nIn Model B take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.5,0.3,0.2)&(0.7,0.2,0.1)\\\\ 2 &(0.2,0.5,0.3)&(0.1,0.5,0.4)\\\\ 3 &(0.3,0.2,0.5)&(0.4,0.3,0.3) \\end{array}$$\nIn Model C take\n$$\\begin{array}{c|c|c} i & g_i & p_i\\\\\\hline 1 &(0.5,0.5,0)&(0.8,0.2,0)\\\\ 2 &(0.5,0,0.5)&(0.2,0,0.8)\\\\ 3 &(0,0.5,0.5)&(0,0.8,0.2) \\end{array}$$\nUse the smallest-index rule to break top-class ties. Model A is classwise and top-confidence calibrated but not fully reliable; Model B is top-confidence calibrated but neither classwise calibrated nor fully reliable; Model C is classwise calibrated but neither top-confidence calibrated nor fully reliable. Hence the three calibration notions are pairwise distinct."
+  },
+  "ml101-coarsened-forecast": {
+    "case": "merged atoms a,b",
+    "result": "The merged conditional success probability is (0.1+0.9)/2=0.5, while the original laws differ.",
+    "check": "ml101-coarsened-forecast",
+    "parameters": {
+      "fixture": "merge-a-b"
+    },
+    "asserts": "Give $X\\in\\{a,b,c\\}$ and the binary label $Y\\in\\{1,2\\}$ their full power-set sigma-algebras. Let $X$ be uniform on $\\{a,b,c\\}$ and let the conditional probabilities be $P(Y=1\\mid X=a)=0.1$, $P(Y=1\\mid X=b)=0.9$, and $P(Y=1\\mid X=c)=0.75$. Coarsen the feature by $T(a)=T(b)=u$ and $T(c)=v$, and forecast $G=(P(Y=1\\mid T),P(Y=2\\mid T))$. Then $G(a)=G(b)=(0.5,0.5)$ and $G(c)=(0.75,0.25)$. This forecast is fully reliable, although it cannot distinguish $a$ from $b$, whose conditional label laws differ."
+  },
+  "ml101-split-conformal-threshold": {
+    "case": "zero calibration examples",
+    "result": "For m=0 and 0<alpha<1, k=1=m+1, q=+infinity, and every finite-scored class label is returned.",
+    "check": "ml101-split-conformal-threshold",
+    "parameters": {
+      "fixture": "zero-calibration"
+    },
+    "asserts": "Let $K\\ge2$, let the feature space be a measurable space $\\mathcal X$, and\nlet the label set be $\\mathcal Y=\\{1,\\ldots,K\\}$ with all subsets measurable.\nLet $H$ be a training statistic valued in a measurable rule space $\\mathcal H$,\nand let $s:\\mathcal H\\times\\mathcal X\\times\\mathcal Y\\to\\mathbb R$ be a\njointly measurable score rule. The rule is fixed after training and is used\nunchanged on calibration and test examples. Given $m\\ge0$ calibration examples\n$(X_i,Y_i)$ and $0<\\alpha<1$, compute\n$$R_i=s(H,X_i,Y_i),\\qquad k=\\left\\lceil(m+1)(1-\\alpha)\\right\\rceil.$$\nIf $k\\le m$, sort the calibration scores by the ordered keys $(R_i,i)$ and let\n$q$ be the score value at position $k$. If $k=m+1$, set $q=+\\infty$. For a\nfeature value $x$, return the prediction set\n$$\nC(x)=\\{y\\in\\mathcal Y:s(H,x,y)\\le q\\}.\n$$\nFor the optional tie-randomized version, use one random variable $U$ that is\nuniform on $[0,1]$ and independent of the training information and all\ncalibration and test examples, shared across the candidate-label scan. For\n$r_y=s(H,x,y)$, define\n$$p_U(y)=\\frac{\\#\\{i\\le m:R_i>r_y\\}+U\\bigl(1+\\#\\{i\\le m:R_i=r_y\\}\\bigr)}{m+1},\\qquad C_U(x)=\\{y\\in\\mathcal Y:p_U(y)>\\alpha\\}.$$\nThe candidate is included in its own tie group. The algorithm defines these\nsets; any coverage claim requires separate distributional hypotheses."
+  },
+  "ml101-top-label-events": {
+    "case": "constant forecast (9/10, 1/10), label always 1",
+    "result": "On B={9/10}, the correctness event has probability 1 and the confidence integral is 9/10, so top-label calibration fails.",
+    "check": "ml101-top-label-events",
+    "parameters": {
+      "fixture": "overconfident"
+    },
+    "asserts": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $K\\ge2$, let\n$Y:\\Omega\\to\\{1,\\ldots,K\\}$ have the full power-set sigma-algebra, and let\n$G=(G_1,\\ldots,G_K):\\Omega\\to\\Delta_K$ be a measurable random forecast, where\nthe probability simplex is\n$\\Delta_K=\\{p\\in[0,1]^K:\\sum_{j=1}^Kp_j=1\\}$. Define the predicted label and\ntop confidence by\n$$\\widehat Y=\\min\\{j:G_j=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell\\},\\qquad C=\\max_{\\ell\\in\\{1,\\ldots,K\\}}G_\\ell.$$\nThe smallest-index rule resolves ties. The forecast is **top-label calibrated**\nif for every Borel set $B\\subseteq[0,1]$,\n$$\\mathbb P(Y=\\widehat Y,\\ C\\in B)=\\mathbb E[\\mathbf 1_{\\{C\\in B\\}}C].$$\nThus, among predictions whose top confidence lies in any specified set of\nconfidence values, the frequency of a correct top label equals the average\nreported top confidence."
+  },
+  "ml101-temperature-validation": {
+    "case": "four labels 1,1,1,2 and logits (2 log 3,0)",
+    "result": "On candidates {1,2}, T=1 yields (9/10,1/10), T=2 yields (3/4,1/4), and empirical log loss selects T=2.",
+    "check": "ml101-temperature-validation",
+    "parameters": {
+      "fixture": "four-labels"
+    },
+    "asserts": "Fix $K\\ge2$. The input is a trained classifier with a measurable, finite-valued\nlogit map $z:\\mathcal X\\to\\mathbb R^K$, a nonempty finite validation sample\n$(x_i,y_i)_{i=1}^{n_v}$ with $n_v\\ge1$ and $y_i\\in\\{1,\\ldots,K\\}$, and a\nfinite nonempty set of candidate temperatures $\\mathcal T\\subset(0,\\infty)$.\nThe validation labels were not used to fit the logits. For $T\\in\\mathcal T$,\ncompute\n$$p_T(j\\mid x)=\\frac{\\exp(z_j(x)/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell(x)/T)}\\quad (j=1,\\ldots,K),\\qquad L_{\\mathrm{val}}(T)=-\\frac1{n_v}\\sum_{i=1}^{n_v}\\log p_T(y_i\\mid x_i).$$\nChoose the smallest temperature among the minimizers,\n$$T^*=\\min\\arg\\min_{T\\in\\mathcal T}L_{\\mathrm{val}}(T).$$\nand return the forecasts $p_{T^*}(\\cdot\\mid x)$ and predicted label\n$\\min\\arg\\max_j p_{T^*}(j\\mid x)$ for each input $x$. This is a\nfinite-candidate version of validation negative-log-likelihood temperature\nscaling. It selects only by empirical validation loss; it makes no finite-sample\ncalibration guarantee for future data, particularly when the validation and\nfuture data laws differ."
+  },
+  "ml101-binned-top-error": {
+    "case": "one occupied bin with 3/4 correct and confidence 9/10",
+    "result": "ECE=MCE=|3/4-9/10|=3/20.",
+    "check": "ml101-binned-top-error",
+    "parameters": {
+      "fixture": "three-quarter-overconfident"
+    },
+    "asserts": "Let $K\\ge2$ and let $(\\widehat p_i,y_i)_{i=1}^n$ be a nonempty finite\nevaluation sample, where $\\widehat p_i\\in\\Delta_K$ and\n$y_i\\in\\{1,\\ldots,K\\}$. For each $i$, let\n$\\widehat y_i=\\min\\arg\\max_j\\widehat p_{ij}$,\n$c_i=\\max_j\\widehat p_{ij}$, and\n$a_i=\\mathbf 1_{\\{\\widehat y_i=y_i\\}}$. Fix before evaluating the sample a\nfinite Borel partition $(B_1,\\ldots,B_M)$ of $[0,1]$. For\n$I_b=\\{i:c_i\\in B_b\\}$ and $n_b=|I_b|>0$, define\n$$\\operatorname{acc}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}a_i,\\qquad \\operatorname{conf}(B_b)=\\frac1{n_b}\\sum_{i\\in I_b}c_i.$$\nThe **binned expected calibration error** and **binned maximum calibration\nerror** for this sample and partition are\n$$\\operatorname{ECE}_{(B_b)}=\\sum_{b:n_b>0}\\frac{n_b}{n}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|,\\qquad \\operatorname{MCE}_{(B_b)}=\\max_{b:n_b>0}\\left|\\operatorname{acc}(B_b)-\\operatorname{conf}(B_b)\\right|.$$\nThese are finite-sample, bin-dependent summaries, not the population expected\ncalibration error. They compare observed top-label accuracy with average\nconfidence within bins; log loss and Brier loss instead score probability\nforecasts directly and are strictly proper."
+  },
+  "ml101-temperature-argmax": {
+    "case": "z=(2 log 3,0), T=1",
+    "result": "Softmax is (9/10,1/10), with maximizing index set {1}.",
+    "check": "ml101-temperature-argmax",
+    "parameters": {
+      "fixture": "T1"
+    },
+    "asserts": "Let $K\\ge2$, let $z\\in\\mathbb R^K$, and let $T>0$. Define\n$$p_j(T)=\\frac{\\exp(z_j/T)}{\\sum_{\\ell=1}^K\\exp(z_\\ell/T)}\\quad (j=1,\\ldots,K).$$\nThen $p(T)$ lies in the interior of $\\Delta_K$ and\n$\\arg\\max_{j\\in\\{1,\\ldots,K\\}}p_j(T)\n=\\arg\\max_{j\\in\\{1,\\ldots,K\\}}z_j$.\nFor the finite validation inputs and candidate temperatures specified in the\nvalidation temperature-scaling algorithm, every validation loss is finite and\nthe stated smallest-minimizer rule returns a unique candidate."
+  },
+  "ml101-calibration-shift": {
+    "case": "perfectly accurate constant forecast",
+    "result": "Top-label calibration fails on B={9/10}; one-bin ECE and MCE equal 1/10.",
+    "check": "ml101-calibration-shift",
+    "parameters": {
+      "fixture": "accurate-overconfident"
+    },
+    "asserts": "First, on a one-point probability space let $Y=1$ and let the forecast be\n$G=(9/10,1/10)$. Its top prediction is always correct, but its top confidence\nis $9/10$. On any nonempty sample from this law, the one-bin ECE and MCE are\nboth $1/10$."
+  },
+  "ml101-pacmdp-value-functions": {
+    "name": "one-state gamma-zero deterministic MDP",
+    "inputs": "S={s}, A(s)={a}, gamma=0, reward r(s,a)=1/2, self-transition",
+    "calculation": "T*V(s)=1/2 for all V; the unique fixed point and optimal return are V*(s)=Q*(s,a)=1/2.",
+    "expected": "Bellman formula, contraction, and greedy attainment agree.",
+    "check": "ml101-pacmdp-value-functions",
+    "fixture": "one-state-gamma-zero",
+    "asserts": "For each stationary policy $\\pi$, its value $V^\\pi$ satisfies its Bellman equation."
+  },
+  "ml101-pacmdp-concentration": {
+    "name": "deterministic one-state sample",
+    "inputs": "S={s}, reward=1/2, self-transition, m=1",
+    "calculation": "The empirical reward equals r and the empirical transition law is (1), so both errors are 0.",
+    "expected": "The fixed-m concentration inequalities hold for every positive tolerance.",
+    "check": "ml101-pacmdp-concentration",
+    "fixture": "deterministic-one-state-sample",
+    "asserts": "$$\\mathbb P\\!\\left(\\left|\\frac1m\\sum_{i=1}^m R_i-r(s,a)\\right|>x\\right)\\le 2e^{-2mx^2}\\qquad(x>0).$$"
+  },
+  "ml101-pacmdp-value-simulation": {
+    "name": "one-state gamma-zero perturbation",
+    "inputs": "one state/action; gamma=0; r1=1/2; r2=1/2+alpha, 0<=alpha<=1/2",
+    "calculation": "V1=1/2, V2=1/2+alpha, and transition L1 error=0.",
+    "expected": "Value difference alpha equals the stated upper bound.",
+    "check": "ml101-pacmdp-value-simulation",
+    "fixture": "one-state-gamma-zero-perturbation",
+    "asserts": "$$\\|V_1^\\pi-V_2^\\pi\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma},\\qquad \\|V_1^*-V_2^*\\|_\\infty\\le\\frac{\\alpha+\\gamma V\\beta}{1-\\gamma}.$$"
+  },
+  "ml101-pacmdp-escape": {
+    "name": "no-escape one-state optimal controller",
+    "inputs": "gamma=0, one action reward 1, Q=1, K contains the pair, eta=1/8, zeta=0",
+    "calculation": "V=V*=1; model policy value is 1; there are no updates or escapes.",
+    "expected": "N_{1/2}=0 and is below HM.",
+    "check": "ml101-pacmdp-escape",
+    "fixture": "no-escape-optimal-controller",
+    "asserts": "Then, with probability at least $1-2\\rho$, the PAC-MDP count satisfies $N_{4\\eta}\\le HM$."
+  },
+  "ml101-pacmdp-rmax-accuracy": {
+    "name": "deterministic one-state R-MAX",
+    "inputs": "S=A=1, gamma=0, reward r, admissible U>=r, m>=1",
+    "calculation": "Every sample is (s,r); one sweep returns r after the pair is known.",
+    "expected": "Empirical and true trap models agree exactly.",
+    "check": "ml101-pacmdp-rmax-accuracy",
+    "fixture": "deterministic-one-state-rmax",
+    "asserts": "every stationary-policy value in $\\widehat M_{K_t}$ differs from its value in $M_{K_t}$ by at most $\\eta/8$"
+  },
+  "ml101-pacmdp-delayed-update-count": {
+    "name": "zero-slack one-state update",
+    "inputs": "gamma=0; U(a)=U(b)=V*=1; rewards (1,0); epsilon1=1/4",
+    "calculation": "The first b batch has mean 0 and satisfies 1-0>=2epsilon1, then Q(b)=epsilon1.",
+    "expected": "An update occurs with D(b)=0, covered by the +1 allowance.",
+    "check": "ml101-pacmdp-delayed-update-count",
+    "fixture": "zero-slack-one-state-update",
+    "asserts": "The additive $1$ in each pair's update allowance is necessary, including when $U(s,a)=V^*(s)$."
+  },
+  "ml101-pacmdp-rmax-pac": {
+    "name": "one-state deterministic R-MAX PAC branch",
+    "inputs": "gamma=0, S=A=1, U=Vmax=V*=1, epsilon=1/2, delta=1/2",
+    "calculation": "eta=1/8, E_eta contains the single pair, H=1, and m,M are finite.",
+    "expected": "The finite-instance count bound is defined.",
+    "check": "ml101-pacmdp-rmax-pac",
+    "fixture": "one-state-deterministic-pac",
+    "asserts": "Then $\\mathbb P(N_\\epsilon\\le HM)\\ge1-\\delta$."
+  },
+  "ml101-pacmdp-delayed-pac": {
+    "name": "one-state zero-slack PAC branch",
+    "inputs": "gamma=0, S=1, A=2, Vmax=1, epsilon=1/2, delta=1/2, U=(1,1)",
+    "calculation": "eta=1/8, epsilon1=1/24, both gaps are 0, and G=2.",
+    "expected": "The additive SA epsilon(1-gamma) term keeps the bound positive.",
+    "check": "ml101-pacmdp-delayed-pac",
+    "fixture": "one-state-zero-slack-pac",
+    "asserts": "The additive term remains when all heuristic slacks vanish."
+  },
+  "ml101-pacmdp-nonpermanent": {
+    "name": "n=1 schedule",
+    "inputs": "gamma=0; rewards (a,b)=(1,0); choose b at t=1,3 and a at t=2",
+    "calculation": "V*=1 and continuation values are 0,1,0.",
+    "expected": "For epsilon=1/2, exactly times 1 and 3 are bad.",
+    "check": "ml101-pacmdp-nonpermanent",
+    "fixture": "n-one-schedule",
+    "asserts": "For $\\epsilon=1/2$, it has exactly $n+1$ bad steps, including one after a good step."
+  },
+  "ml101-pacmdp-inadmissible": {
+    "name": "m=1 R-MAX failure",
+    "inputs": "gamma=0; rewards (a,b)=(1,0); U=(0,0); tie order b before a; m=1",
+    "calculation": "After b is known Q(b)=0; unvisited Q(a)=0; tie order still selects b.",
+    "expected": "The behavior stays bad and U(a)<Q*(s,a).",
+    "check": "ml101-pacmdp-inadmissible",
+    "fixture": "m-one-rmax-failure",
+    "asserts": "It observes only $b$, chooses $b$ forever, and is $1/2$-bad at every time."
+  },
+  "ml101-pacmdp-delayed-zero-slack": {
+    "name": "m=1 zero-slack Delayed Q update",
+    "inputs": "gamma=0; rewards (a,b)=(1,0); U=(1,1); tie order b first; m=1; epsilon1=1/4",
+    "calculation": "The first b target is 0; 1>=2epsilon1; Q(b) becomes epsilon1.",
+    "expected": "One zero-slack update occurs before the next action a.",
+    "check": "ml101-pacmdp-delayed-zero-slack",
+    "fixture": "m-one-zero-slack-update",
+    "asserts": "Delayed Q-learning selects $b$ for its first $m$ samples and then lowers $Q(s,b)$, even though $\\sum_{s,a}[U(s,a)-V^*(s)]_+=0$."
+  },
+  "ml101-policy-score-finite-support": {
+    "case": "finite normalized action support",
+    "status": "checked_by_exact_calculation",
+    "calculation": "At each fixed state, sum_a pi(a|s) grad log pi(a|s)=sum_a grad pi(a|s)=grad(1)=0.",
+    "check": "ml101-policy-score-finite-support",
+    "asserts": "$$\\mathbb E_\\theta[\\psi_t\\mid\\mathcal H_t]=0\\quad\\text{almost surely for every }t\\ge0.$$",
+    "fixture": "normalized-action-support"
+  },
+  "ml101-policy-gradient-one-step": {
+    "case": "one-decision Bernoulli reward",
+    "status": "checked_by_exact_calculation",
+    "calculation": "For pi_theta(1)=theta, reward 1 on action 1 and 0 on action 0, T=1 so gamma^0=1; E[G_0 grad log pi(A_0)]=theta(1/theta)=1=grad(theta).",
+    "check": "ml101-policy-gradient-one-step",
+    "asserts": "$$\\nabla_\\theta J(\\theta_0)=\\mathbb E_{\\theta_0}\\!\\left[\\sum_{t=0}^{T-1}\\gamma^t\\,\\nabla_\\theta\\log\\pi_{\\theta_0}(A_t\\mid S_t)\\,G_t\\right].$$",
+    "fixture": "one-decision-bernoulli"
+  },
+  "ml101-policy-baseline-zero-mean": {
+    "case": "one-state Bernoulli baseline term",
+    "status": "checked_by_exact_calculation",
+    "calculation": "For b(s)=b, E[b score]=b(theta/theta+(1-theta)(-1/(1-theta)))=0.",
+    "check": "ml101-policy-baseline-zero-mean",
+    "asserts": "$$\\mathbb E_{\\theta_0}\\!\\left[\\sum_{t=0}^{T-1}\\gamma^t\\bigl(G_t-b(S_t)\\bigr)\\nabla_\\theta\\log\\pi_{\\theta_0}(A_t\\mid S_t)\\right]=\\nabla_\\theta J(\\theta_0).$$",
+    "fixture": "bernoulli-state-baseline"
+  },
+  "ml101-actor-critic-bootstrap-bias": {
+    "case": "theta=1/2 and critic Vhat(x0)=0,Vhat(x1)=1",
+    "status": "checked_by_exact_calculation",
+    "calculation": "Action 0 gives increment 0; action 1 gives delta=1/2, score 2, and alpha=1/4, hence increment 1/4. The equiprobable mean is 1/8 while J(theta)=0 has gradient 0; both proposed actor parameters remain in (0,1).",
+    "check": "ml101-actor-critic-bootstrap-bias",
+    "asserts": "the true start-state objective is $J(\\theta)=0$ for every $\\theta$, but the expected first actor increment is $1/8$.",
+    "fixture": "zero-reward-two-step-critic"
+  },
+  "ml101-reinforce-bernoulli": {
+    "case": "theta in (0,1), one-decision Bernoulli reward",
+    "status": "checked_by_exact_calculation",
+    "calculation": "The sample estimator is 1/theta on action 1 (probability theta) and 0 on action 0, so its expectation is 1=grad(theta).",
+    "check": "ml101-reinforce-bernoulli",
+    "asserts": "For every $\\theta\\in(0,1)$, $\\mathbb E_\\theta[Z]=\\nabla_\\theta J(\\theta)=1$.",
+    "fixture": "one-decision-bernoulli"
+  },
+  "ml101-baseline-eliminates-variance": {
+    "case": "theta=1/2 and b(s)=1/2",
+    "status": "checked_by_exact_calculation",
+    "calculation": "Unadjusted Z has values 2 and 0 with equal probability, mean 1 and variance 1. Adjusted Z_b=1 on both actions, hence mean 1 and variance 0.",
+    "check": "ml101-baseline-eliminates-variance",
+    "asserts": "Then $Z$ has variance $1$, while $Z_b=(G_0-b(s))\\nabla_\\theta\\log\\pi_\\theta(A_0\\mid s)$ is identically $1$ and has variance $0$; both have expectation $1$.",
+    "fixture": "half-bernoulli-half-baseline"
+  },
+  "ml101-policy-start-time-discount-witness": {
+    "case": "explicit finite witness",
+    "status": "checked_by_exact_calculation",
+    "calculation": "The full local two-step calculation evaluates both sides exactly; it disproves the stated universal formula.",
+    "check": "ml101-policy-start-time-discount-witness",
+    "asserts": "Hence the claimed right-hand side is $\\theta(1/\\theta)+(1-\\theta)0=1\\ne1/2$. Including the missing factor $\\gamma^1$ changes this expectation to $1/2$, as required.",
+    "fixture": "two-step-half-discount"
+  },
+  "ml101-cpo-discounted-cost-pathwise": {
+    "check": "ml101-cpo-discounted-cost-pathwise",
+    "asserts": "Its expected discounted cost is $1/9<1/8$, so it is feasible, while the probability of at least one cost during those seven decisions is $5{,}217{,}031/10{,}000{,}000>1/2$.",
+    "claim": "The displayed geometric series and exact complement probability verify the finite witness by rational arithmetic.",
+    "checked_in": "Example and steps 1.1–3.1",
+    "states": 1,
+    "actions": 2,
+    "horizon": 7,
+    "fixture": "seven-independent-actions"
+  },
+  "ml101-cpo-safe-sample": {
+    "check": "ml101-cpo-safe-sample",
+    "asserts": "The true expected discounted cost is $1/10>b$. In ten independent one-step rollouts, the empirical mean cost is zero whenever every action is `safe`, an event of probability $(9/10)^{10}=3{,}486{,}784{,}401/10{,}000{,}000{,}000$.",
+    "claim": "The population expectation and exact tenth power verify the finite-sample witness by rational arithmetic.",
+    "checked_in": "Example and steps 1.1–2.1",
+    "states": 1,
+    "actions": 2,
+    "rollouts": 10,
+    "fixture": "ten-independent-rollouts"
+  },
+  "ml101-cpo-exact-versus-sample": {
+    "check": "ml101-cpo-exact-versus-sample",
+    "asserts": "If a one-row rollout sample from the old policy observes `safe` and supplies zero baseline-cost and advantage estimates, the empirical line-search cost is zero and passes the threshold; this sample occurs with probability $99/100$.",
+    "claim": "The two action probabilities give the exact costs and KL expression; the displayed logarithm bound proves the strict radius inequality, and the safe sample gives the empirical zero-cost check.",
+    "checked_in": "Example and steps 1.1–3.1",
+    "states": 1,
+    "actions": 2,
+    "sample_rows": 1,
+    "fixture": "one-row-safe-line-search"
+  },
+  "ml101-cpo-old-residual-witness": {
+    "case": "explicit finite witness",
+    "status": "checked_by_exact_calculation",
+    "calculation": "The full local two-step calculation evaluates both sides exactly; it disproves the stated universal formula.",
+    "check": "ml101-cpo-old-residual-witness",
+    "asserts": "The asserted lower inequality is $1\\le0$, which is false by step 1.1. Subtracting the old-policy residual expectation instead gives the corrected surrogate $1-1=0$.",
+    "fixture": "identical-policy-zero-discount"
+  },
+  "ml101-verifier-one-draw": {
+    "case": "N=1 rejection search",
+    "result": "For a two-response law with π(c)=1/4, π(w)=3/4, A(c)=1, and A(w)=0, the procedure returns c with probability 1/4 and otherwise returns failure after its single draw.",
+    "check": "ml101-verifier-one-draw",
+    "fixture": "ml101-verifier-one-draw",
+    "asserts": "1. **Rejection search.** Draw responses one at a time independently from $\\pi_\\theta(\\cdot\\mid q)$. Return the first response $y$ for which $A_q(y)=1$, together with status `accepted`. If no sampled response is accepted after $N$ draws, return `failure` and no response. Stop at the first acceptance or after the $N$th draw, whichever occurs first."
+  },
+  "ml101-verifier-independent-and-union": {
+    "case": "perfect verifier, p=1/4, N=2",
+    "result": "Independent success is 1-(3/4)^2=7/16; with false-acceptance marginal bound ε=1/4, the finite union bound is Nε=1/2 without independence.",
+    "check": "ml101-verifier-independent-and-union",
+    "fixture": "ml101-verifier-independent-and-union",
+    "asserts": "1. If $A_q=C_q$, rejection search returns an accepted response with probability $1-(1-p)^N$.\n\n2. For any rule that selects one of these $N$ candidates and reports it as accepted only when its verifier value is $1$, if each draw satisfies $\\Pr(A_q(Y_i)=1,\\ C_q(Y_i)=0)\\le\\epsilon$, then the probability of outputting an accepted but incorrect response is at most $N\\epsilon$. This bound does not require independent draws."
+  },
+  "ml101-finite-response-ratio-cancellation": {
+    "case": "Y={a,b}, p=(1/3,2/3), q=(1/2,1/2)",
+    "result": "ρ=(2/3,4/3); for f=(2,-1), both weighted sums equal 0, and Σ_y q(y)ρ(y)=1.",
+    "check": "ml101-finite-response-ratio-cancellation",
+    "fixture": "ml101-finite-response-ratio-cancellation",
+    "asserts": "Let $Y$ be a finite nonempty response set with a fixed enumeration $(y_1,\\ldots,y_m)$, and let $p$ and $q$ be probability mass functions on $Y$ satisfying $p(y)>0\\Rightarrow q(y)>0$. Define $\\rho(y)=p(y)/q(y)$ when $q(y)>0$ and $\\rho(y)=0$ when $q(y)=0$. Then, for every real-valued function $f$ on $Y$,\n\n$$\\sum_{j=1}^{m}q(y_j)\\rho(y_j)f(y_j)=\\sum_{j=1}^{m}p(y_j)f(y_j).$$\n\nIn particular, $\\sum_{j=1}^{m}q(y_j)\\rho(y_j)=1$. This is a finite response identity; it asserts no change-of-measure result on an arbitrary trajectory space."
+  },
+  "ml101-group-equal-rewards": {
+    "case": "G=3 and rewards (7,7,7)",
+    "result": "The population standard deviation is 0, so A=(0,0,0); every clipped reward term is 0 and the separately defined KL penalty remains.",
+    "check": "ml101-group-equal-rewards",
+    "fixture": "ml101-group-equal-rewards",
+    "asserts": "Set $A_{\\ell,i}:=(R_{\\ell,i}-\\overline R_\\ell)/s_\\ell$ when $s_\\ell>0$, and set $A_{\\ell,i}=0$ for every $i$ when $s_\\ell=0$. Hold the responses, rewards, and advantages fixed through the $K$ inner steps. For a candidate parameter $\\theta\\in U$, use the sequence-level ratio"
+  },
+  "ml101-bernoulli-score-identities": {
+    "case": "Bernoulli policy at θ=1/4",
+    "result": "For π(a)=θ, π(b)=1-θ, scores are (4,-4/3); their expectation is 0. With r=(1,0), J(θ)=θ and E[rS]=1=J′(θ).",
+    "check": "ml101-bernoulli-score-identities",
+    "fixture": "ml101-bernoulli-score-identities",
+    "asserts": "Fix a prompt $q$, an open parameter set $U\\subseteq\\mathbb R^d$, and the finite response policy with nonempty fixed support $(b_1,\\ldots,b_m)$ and score vectors $S_\\theta(q,b_j)$ from the generation protocol. For any fixed finite reward function $r$ on that support, define\n\n$$J(\\theta):=\\sum_{j=1}^{m}\\pi_\\theta(b_j\\mid q)r(b_j).$$\n\nThen, for every $\\theta\\in U$,\n\n$$\\mathbb E_\\theta[S_\\theta(q,Y)\\mid q]=0,\\qquad \\mathbb E_\\theta[r(Y)S_\\theta(q,Y)\\mid q]=\\nabla_\\theta J(\\theta).$$"
+  },
+  "ml101-group-centered-factor": {
+    "case": "Bernoulli policy at θ=1/2, r=(1,0), G=2",
+    "result": "The raw score gradient is 1. The same-group centered estimator has expectation 1/2=(1-1/G)·1; the leave-one-out estimator has expectation 1.",
+    "check": "ml101-group-centered-factor",
+    "fixture": "ml101-group-centered-factor",
+    "asserts": "Fix a prompt $q$, a parameter $\\theta$ in the open domain of its finite response policy, a finite real reward function $r$ on the policy support, and an integer $G\\ge2$. Let $Y_1,\\ldots,Y_G$ be independent responses with common law $\\pi_\\theta(\\cdot\\mid q)$, let $R_i:=r(Y_i)$, let $S_i:=\\nabla_\\theta\\log\\pi_\\theta(Y_i\\mid q)$, and set\n$\\overline R:=G^{-1}\\sum_{j=1}^{G}R_j$ and $J(\\theta):=\\mathbb E_\\theta[r(Y)\\mid q]$.\nThen\n$$\\mathbb E_\\theta\\left[\\frac1G\\sum_{i=1}^{G}(R_i-\\overline R)S_i\\mid q\\right]=\\left(1-\\frac1G\\right)\\nabla_\\theta J(\\theta).$$\nIf instead $\\overline R_{-i}:=(G-1)^{-1}\\sum_{j\\ne i}R_j$, then\n$$\\mathbb E_\\theta\\left[\\frac1G\\sum_{i=1}^{G}(R_i-\\overline R_{-i})S_i\\mid q\\right]=\\nabla_\\theta J(\\theta).$$"
+  },
+  "ml101-perfect-and-false-positive-verifiers": {
+    "case": "π(c)=3/4, π(w)=1/4, N=2",
+    "result": "A perfect verifier succeeds with probability 15/16. An accept-all verifier returns an incorrect first draw with probability 1/4, below the union bound 2·(1/4)=1/2.",
+    "check": "ml101-perfect-and-false-positive-verifiers",
+    "fixture": "ml101-perfect-and-false-positive-verifiers",
+    "asserts": "Let a prompt have one correct response $c$ with probability $3/4$ and one incorrect response $w$ with probability $1/4$. With a perfect verifier $A=C$, rejection search with budget $N=2$ returns an accepted response with probability $15/16$. With a false-positive verifier that accepts both $c$ and $w$, rejection search always returns its first draw, so its false-acceptance probability is $1/4$; the per-draw union bound gives $2(1/4)=1/2$."
+  },
+  "ml101-dependent-response-copies": {
+    "case": "two copies of one Bernoulli draw with p=1/2",
+    "result": "Repeated-copy success is 1/2 and the joint success probability is 1/2; independent draws would give 1-(1/2)^2=3/4.",
+    "check": "ml101-dependent-response-copies",
+    "fixture": "ml101-dependent-response-copies",
+    "asserts": "Let a single response $Y$ be correct with probability $1/2$, and define two candidates by $Y_1:=Y_2:=Y$. With a perfect verifier, the probability that at least one candidate is correct is $1/2$. The independent-draw formula at $N=2$ would give $3/4$, but these duplicated candidates are dependent and do not provide a second opportunity for success."
+  },
+  "ml101-pass-and-selected-accuracy": {
+    "case": "π(c)=1/4, π(w1)=π(w2)=3/8, A(c)=A(w1)=1, A(w2)=0, N=2",
+    "result": "Pass@1 is 1/4, oracle pass@2 is 7/16, rejection success is 55/64, and conditional verifier-selected accuracy is (22/64)/(55/64)=2/5.",
+    "check": "ml101-pass-and-selected-accuracy",
+    "fixture": "ml101-pass-and-selected-accuracy",
+    "asserts": "For one prompt let the finite response law assign mass $1/4$ to a correct response $c$ and mass $3/8$ to each of two incorrect responses $w_1,w_2$. Let the verifier accept $c$ and $w_1$ but reject $w_2$. The single-response pass@1 rate is $1/4$; for any integer $M\\ge1$, the empirical pass@1 over $M$ independent replicas from this same law has expectation $1/4$. Oracle pass@2, the event that at least one of two independent candidates is correct, has probability $7/16$; verifier-selected accuracy, the probability the rejection-search output is correct conditional on its being accepted, is $2/5$."
+  }
+});
