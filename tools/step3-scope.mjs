@@ -22,6 +22,7 @@ import { fileURLToPath } from 'node:url';
 import { split, yaml } from './pathway-lib.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { step3Escalations, externalContextReceipt } from './step3-escalations.mjs';
+import { incidentalPublishedNonfatalContexts } from './step3-owner-incidental-published-context.mjs';
 import { step3Adjudicators } from './step3-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { loadOwnerIdMigrations } from './step3-owner-id-migrations.mjs';
@@ -1977,6 +1978,12 @@ if (command === 'check') {
     for (const check of stabilizedChecks) check();
     // Published repairs retain their optional provenance files, but those
     // files are not a Step-3 certification or gate obligation.
+    // Incidental published alerts retain their original ledger row and pending
+    // maintenance; this opt-in supplies context only, never a routed obligation.
+    try {
+      for (const id of incidentalPublishedNonfatalContexts(ROOT, run, ownerEvidence, mine,
+        step3Adjudicators(ROOT, run, assignment.rows))) contextualDefects.add(id);
+    } catch (cause) { error('incidental-context-invalid', cause.message); }
     for (const row of earlyRows) {
       if (ownableSubjects.has(row.subject) && !referenced.has(row.defect_id) && !contextualDefects.has(row.defect_id)) {
         error('ledger-unowned', `[${row.subject}] ${row.defect_id} has no 3a decision reference`);
