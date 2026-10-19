@@ -16,6 +16,11 @@ const safe = x => /^[a-zA-Z0-9_-]+$/.test(String(x ?? ''));
 const id = x => /^[a-z][a-z0-9-]*$/.test(String(x ?? ''));
 const policy = 'owner-step3-required-published-page-route-v1';
 const nativePageRoutingBasis = 'native-page-null-consumer-owner-bound-consumer-v1';
+export const unchangedRequiredPageContextBasis = 'owner-unchanged-required-page-context-v1';
+// An unchanged context carrier cannot attest a repair or acceptance. Escalation
+// remains an ordinary blocker; a false positive still requires Alpha and ledger.
+export const requiredPageVerdictAllowed = (carrier, verdict) => carrier?.unchanged_context !== true
+  || ['false_positive', 'confirmed_nonfatal', 'escalated'].includes(verdict);
 function file(root,p) {
   assert(typeof p === 'string' && !isAbsolute(p) && !p.includes('\\'), 'invalid relative path');
   const full=resolve(root,p),rel=relative(resolve(root),full);
@@ -80,6 +85,9 @@ export function validateRequiredPageRoute(root,run,e,receipt) {
     const r=e[`${label}_snapshot`];assert(r.path===`research/${run}-step3-hash-${e.batch}-${label}.json`,'wrong snapshot path');
     const s=JSON.parse(ref(root,r));assert(s.version===2 && s.run===run && String(s.batch)===e.batch && s.label===label
       && !s.page_manifest?.includes(e.page),'invalid foreign page snapshot');
+    if(e.routing_basis===unchangedRequiredPageContextBasis)
+      assert(Array.isArray(s.page_manifest) && Array.isArray(s.manifest)
+        && s.manifest.includes(e.consumer_id),'unchanged context needs explicit native page inventory and assigned consumer');
   }
   assert(e.manifest.path===`research/${run}-batch-${e.batch}.pages.json`,'wrong manifest');
   currentManifestRoute(root,run,e,JSON.parse(ref(root,e.manifest)));
@@ -88,18 +96,30 @@ export function validateRequiredPageRoute(root,run,e,receipt) {
   const homes=readdirSync(resolve(root,'library'),{withFileTypes:true}).filter(d=>d.isDirectory()
     && existsSync(resolve(root,'library',d.name,e.page+'.md')));
   assert(homes.length===1 && e.current_path===`library/${homes[0].name}/${e.page}.md`,'ambiguous physical page home');
+  const unchanged=e.routing_basis===unchangedRequiredPageContextBasis;
+  assert(!unchanged || (e.scope_policy==='claude9-external-formatting-only-v1'
+    && finding.subject_type==='published-dependency' && finding.defect==='ill-formed'),'invalid unchanged-context scope policy');
   const before=ref(root,e.before),after=ref(root,e.after),beforeFm=front(before),afterFm=front(after);
   assert(beforeFm.page===e.page && beforeFm.status==='published' && requiredPageHash(beforeFm)===requiredPageHash(afterFm),'changed page metadata');
-  assert(Array.isArray(e.edits) && e.edits.length && e.edits.length<=2,'exact small prose edits required');
-  let reconstructed=before.toString(); const bodyStart=reconstructed.indexOf('\n---',4)+4;
-  for(const edit of e.edits) {assert(typeof edit.before==='string' && edit.before && typeof edit.after==='string' && edit.after
-    && edit.before!==edit.after && reconstructed.split(edit.before).length===2
-    && reconstructed.indexOf(edit.before)>bodyStart,'ambiguous or nonprose edit');reconstructed=reconstructed.replace(edit.before,edit.after);}
-  assert(sha(reconstructed)===sha(after) && sha(before)!==sha(after),'unaccounted source change');
+  if(unchanged) {
+    assert(Array.isArray(e.edits) && e.edits.length===0 && before.equals(after),'unchanged context requires byte-identical archives and no edits');
+  } else {
+    assert(Array.isArray(e.edits) && e.edits.length && e.edits.length<=2,'exact small prose edits required');
+    let reconstructed=before.toString(); const bodyStart=reconstructed.indexOf('\n---',4)+4;
+    for(const edit of e.edits) {assert(typeof edit.before==='string' && edit.before && typeof edit.after==='string' && edit.after
+      && edit.before!==edit.after && reconstructed.split(edit.before).length===2
+      && reconstructed.indexOf(edit.before)>bodyStart,'ambiguous or nonprose edit');reconstructed=reconstructed.replace(edit.before,edit.after);}
+    assert(sha(reconstructed)===sha(after) && sha(before)!==sha(after),'unaccounted source change');
+  }
   assert(bytes(root,e.current_path).equals(after),'current page changed');
   const pageItems=[...(afterFm.items ?? []),...(afterFm.examples ?? [])];assert(pageItems.length && new Set(pageItems).size===pageItems.length,'invalid page inventory');
   for(const item of pageItems) {assert(id(item),'invalid page item');const meta=front(bytes(root,`items/${item}.md`));
     assert(meta.id===item && meta.status==='published','page contains unpublished or misidentified item');}
+  if(unchanged) {
+    assert(Array.isArray(e.page_item_guards) && e.page_item_guards.length===pageItems.length
+      && e.page_item_guards.every((node,i)=>node.id===pageItems[i]
+        && itemHashGuard(bytes(root,`items/${node.id}.md`).toString())===node.guard_sha256),'changed published page context');
+  }
   const path=e.dependency_path;assert(Array.isArray(path) && path.length>=2 && path[0]?.id===e.consumer_id
     && pageItems.includes(path.at(-1)?.id) && new Set(path.map(x=>x.id)).size===path.length,'invalid dependency path');
   for(let i=0;i<path.length;i++) {const node=path[i];assert(id(node.id),'invalid path item');const source=bytes(root,`items/${node.id}.md`).toString();
@@ -108,6 +128,8 @@ export function validateRequiredPageRoute(root,run,e,receipt) {
     else assert(front(source).status==='published','terminal page item not published');}
   const review=ref(root,e.review).toString();assert(review.includes(run) && review.includes(e.page) && review.includes(e.consumer_id)
     && review.includes(e.before.sha256) && review.includes(e.after.sha256),'owner review lacks exact guards');
+  if(unchanged) assert(review.includes('CLAUDE.md#9') && review.includes('formatting')
+    && review.includes('unchanged') && review.includes('no mathematical acceptance'),'missing scope-only unchanged context review');
   return {entry:e, binding:receipt, original:finding, obligation:`reader:${e.batch}:${e.index}`};
 }
 export function loadRequiredPageRoutes(root,run,batch) {
@@ -123,7 +145,8 @@ export function requiredPageCarrier(root,run,batch,finding) {
   assert(route && finding.id===route.entry.page && finding.consumer_id===route.original.consumer_id
     && finding.subject_type===route.original.subject_type && requiredPageHash(finding.owner_required_page_route)===requiredPageHash(route.binding)
     && finding.observed_sha256===null && finding.observation_basis==='unbound' && finding.pre_sha256===undefined,'lost exact foreign-page route');
-  return {file_sha256:sha(bytes(root,route.entry.current_path)),owner_required_page_route:route.binding};
+  return {file_sha256:sha(bytes(root,route.entry.current_path)),owner_required_page_route:route.binding,
+    ...(route.entry.routing_basis===unchangedRequiredPageContextBasis ? {unchanged_context:true} : {})};
 }
 
 // Freeze only this route's authenticated historical inputs. Current mathematical

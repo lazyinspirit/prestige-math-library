@@ -31,7 +31,7 @@ import { draftOwnerMatcher } from './run-draft-ownership.mjs';
 import { partialReaderFindings } from './step3-owner-partial-reader-repairs.mjs';
 import { unboundReaderObservations } from './step3-owner-unbound-reader-observations.mjs';
 import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post-reader-page-repairs.mjs';
-import { loadRequiredPageRoutes, requiredPageCarrier } from './step3-owner-required-page-routes.mjs';
+import { loadRequiredPageRoutes, requiredPageCarrier, requiredPageVerdictAllowed } from './step3-owner-required-page-routes.mjs';
 import { loadDownstreamConsumerRoutes, downstreamConsumerRoute } from './step3-owner-downstream-consumer-routes.mjs';
 import { sourceIdenticalAcceptanceContinuity } from './step3-owner-source-identical-continuity.mjs';
 import { unchangedPageCausalRepair } from './step3-owner-unchanged-page-repairs.mjs';
@@ -1490,6 +1490,17 @@ if (command === 'check') {
           if (decision.route !== 'gate') error('decision-route', `${decision.obligation} must use route gate`);
           if (!groupSubjects.has(decision.id)) error('decision-route', `${decision.obligation} names ${decision.id} outside group ${group.label}`);
         }
+        let unchangedRequiredPageContext = false;
+        if (target?.owner_required_page_route) {
+          try {
+            const carrier = currentDecisionCarrier(decision, target, null);
+            unchangedRequiredPageContext = carrier.unchanged_context === true;
+            if (!requiredPageVerdictAllowed(carrier, decision.verdict)) {
+              error('unchanged-required-page-verdict', `${decision.obligation} is unchanged external formatting context; only independent false_positive, confirmed_nonfatal or escalation is permitted`);
+              continue;
+            }
+          } catch (cause) { error('required-page-authority-invalid', cause.message); continue; }
+        }
         if (decision.verdict === 'context_accepted') {
           const context = externalContextReceipt(ROOT, run, decision, target, group.label);
           if (!target || !context.valid) {
@@ -1794,6 +1805,9 @@ if (command === 'check') {
           const row = mine.find((candidate) => candidate.defect_id === defectId);
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }
           decisionRows.push(row);
+          if (unchangedRequiredPageContext && decision.verdict === 'confirmed_nonfatal'
+            && row.disposition !== 'nonfatal-recorded')
+            error('unchanged-required-page-ledger', `${defectId} must record nonfatal maintenance without claiming a repair`);
           const causalAddition = target?.added && decision.causal_subject === row.subject
             && groupSubjects.has(row.subject);
           if ((row.subject !== decision.id && !causalAddition)

@@ -104,3 +104,42 @@ still need their ordinary verdict/ledger evidence, explicit unbound-history
 owner resolution, and current corrected page carrier binding. Closure retains
 the registry and its exact historical references without adopting new review
 coverage. The extension changes none of those guards.
+
+
+## Unchanged external formatting context (explicit opt-in)
+
+An original `published-dependency` / `ill-formed` finding may concern only an
+unrelated formatting retrofit of a published required page. CLAUDE.md rule 9
+retains dependency context without requiring that external formatting repair.
+This case uses a separate explicit authority:
+
+```json
+{
+  "routing_basis": "owner-unchanged-required-page-context-v1",
+  "scope_policy": "claude9-external-formatting-only-v1",
+  "edits": [],
+  "page_item_guards": [{"id": "PUBLISHED-ITEM", "guard_sha256": "CURRENT-ITEM-GUARD"}]
+}
+```
+
+All ordinary native finding/result/prompt/report, snapshot, regular-file,
+manifest exclusion, unique published page home, actual required origin and
+consumer dependency-path guards still apply. Both native snapshots must explicitly carry page-inventory arrays excluding
+the external page and item-inventory arrays including the assigned consumer. Both before and after archives must be byte-identical to
+the current page. Every inventoried published item
+requires its current `itemHashGuard`, in page inventory order. The exact owner
+review must name `CLAUDE.md#9`, `formatting`, `unchanged`, and
+`no mathematical acceptance`, in addition to the ordinary run, consumer, page
+and archive hashes. This authority does not assert what the historical reader
+saw: the original finding and null/unbound observation remain unchanged.
+
+The context-only carrier allows independent Alpha `false_positive`, `confirmed_nonfatal`, or
+`escalated` only. Escalation remains a blocking owner decision. Repair,
+acceptance, `context_accepted`, and `confirmed_fatal` verdicts are prohibited;
+a confirmed-nonfatal disposition still owes its ordinary `nonfatal-recorded`
+ledger record and evidence. False-positive adjudication retains the ordinary
+independent decision, evidence, current carrier, owner resolution, and any
+ledger disposition required by the existing native conditions.
+Routing does not suppress any finding, alter the defect ledger or grant review
+coverage. Existing edited-page routes still require one or two real prose
+edits and retain all previous behavior.
