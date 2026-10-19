@@ -1,3 +1,4 @@
+import { validateForeignRefuterContinuation } from '../../step3-owner-foreign-refuter-routes.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -54,6 +55,7 @@ export function refuterContinuations(ctx: any, original: any, beforeDispatch = f
       if (tail.length < 256 || !/"not_opened"\s*:/.test(tail) || !/"flagged"\s*:/.test(tail)
         || !archive.toString().trimEnd().endsWith(tail)) reject();
     }
+    validateForeignRefuterContinuation(ctx.repo, ctx.run, entry, old);
     bound(entry.task);
     if (beforeDispatch && (dispatchUnits === null || dispatchUnits.map(String).includes(unit))) {
       // Any completed fresh attempt, including failure, holds rather than loops.

@@ -11,6 +11,7 @@
 // Each batch owns a separate scope file. Concurrent pipeline lanes must never
 // read-modify-write one shared JSON file and erase a sibling's route.
 
+import { foreignRefuterObligations, foreignRefuterCarrier } from './step3-owner-foreign-refuter-routes.mjs';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
@@ -267,6 +268,7 @@ function downstreamCarrier(batch, finding) {
 }
 
 function currentDecisionCarrier(decision, target, live) {
+  if (target?.owner_foreign_refuter_route) return foreignRefuterCarrier(ROOT, run, target);
   if (target?.owner_downstream_consumer_route) return downstreamCarrier(
     String(target.obligation).split(':')[1], target);
   if (target?.owner_required_page_route) return requiredPageCarrier(ROOT, run,
@@ -1074,6 +1076,7 @@ if (command === 'stamp') {
     const expected = new Map();
     for (const batch of group.covers) {
       const scope = readJson(scopePath(batch), `batch ${batch} scope`);
+      for (const target of foreignRefuterObligations(ROOT, run, batch)) expected.set(target.obligation, target);
       if (scope.version === 3) for (const target of directObligations(batch, scope)) expected.set(target.obligation, target);
       for (const target of stabilizedObligations(batch, scope)) expected.set(target.obligation, target);
       for (const id of scope.touched ?? []) expected.set(`touched:${batch}:${id}`, {
@@ -1440,6 +1443,7 @@ if (command === 'check') {
       for (const batch of group.covers) {
         const scope = scopes[batch] ?? (existsSync(scopePath(batch)) ? readJson(scopePath(batch), `batch ${batch} scope`) : null);
         if (!scope) continue;
+        owed.push(...foreignRefuterObligations(ROOT, run, batch));
         if (scope.version === 3) owed.push(...directObligations(batch, scope, phase));
         for (const id of scope.touched ?? []) owed.push({
           obligation: `touched:${batch}:${id}`, id, batch, route: 'touched', added: (scope.added ?? []).includes(id),
@@ -1489,6 +1493,14 @@ if (command === 'check') {
         if (supplemental) {
           if (decision.route !== 'gate') error('decision-route', `${decision.obligation} must use route gate`);
           if (!groupSubjects.has(decision.id)) error('decision-route', `${decision.obligation} names ${decision.id} outside group ${group.label}`);
+        }
+        if (target?.owner_foreign_refuter_route) {
+          if (decision.historical_delta_unknown !== true || typeof decision.owner_resolution !== 'string' || decision.owner_resolution.trim().length < 40)
+            error('foreign-refuter-history', `${decision.obligation} must preserve unbound history and explicit owner resolution`);
+          if (decision.defect_ids?.length !== 1 || decision.defect_ids[0] !== target.defect_id)
+            error('foreign-refuter-ledger', `${decision.obligation} must retain its registered defect id`);
+          if (decision.subject_sha256 !== hashValue(currentDecisionCarrier(decision, target, null)))
+            error('foreign-refuter-stale', `${decision.obligation} must bind current carrier and original native flag`);
         }
         let unchangedRequiredPageContext = false;
         if (target?.owner_required_page_route) {

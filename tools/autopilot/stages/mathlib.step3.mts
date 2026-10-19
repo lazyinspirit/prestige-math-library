@@ -9,7 +9,9 @@ const { withRefuterContinuation } = await import(continuationURL.href);
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
 import { holdStep3 } from './step3-hold.mts';
-import { prepareStep3AdjudicationOrder } from '../../step3-adjudication-order.mjs';
+const adjudicationOrderURL = new URL('../../step3-adjudication-order.mjs', import.meta.url);
+adjudicationOrderURL.search = new URL(import.meta.url).search;
+const { prepareStep3AdjudicationOrder } = await import(adjudicationOrderURL.href);
 import { batchAdjudicator, step3Adjudicators } from '../../step3-adjudicators.mjs';
 
 // Step-3 readers and refuters use GPT-6 Luna max;
