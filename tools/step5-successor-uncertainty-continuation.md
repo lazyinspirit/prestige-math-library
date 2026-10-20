@@ -10,7 +10,11 @@ Admission requires the actual paused/drained5.2 owner hold, exact current
 progress `[impact-initial, impact-initial-pass-2]`, all three successful immutable
 native successor executions and exactly one uncertain lane3 review. It binds
 actual attempt/result/prompt/final bytes and the existing persistent reporting
-home/session. Initial recovery provenance and all original duties remain owed.
+home/session. A native owner request may be retained across multiple passes; its
+creation time is not the current pass join time. All actual dispatch completions
+must precede the captured admission time (`recorded_at`), and the request must
+already exist by that time. Exact archived/live pause, drain, dispatch, request
+and progress checks remain required; no request timestamp or permit is rewritten. Initial recovery provenance and all original duties remain owed.
 The sole native uncertainty may be deferred for scheduling; every other field
 is checked independently, including malformed fields in that uncertain row.
 

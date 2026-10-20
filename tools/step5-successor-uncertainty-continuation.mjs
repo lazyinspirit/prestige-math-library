@@ -24,12 +24,14 @@ function scope(items,supplier){
  while(queue.length)for(const row of discoverDownstream({items,repairedIds:[queue.shift()]}))if(!result.has(row.id)){result.add(row.id);queue.push(row.id);}
  return [...result].sort();
 }
-function hold(root,run,state,request,executions){
+function hold(root,run,state,request,executions,capturedAt){
+ // Native owner requests can survive multiple passes; their creation time is
+ // not the join boundary. Bind completed work to the captured current hold.
  need(state.run===run&&state.stage==='5.2-impact'&&state.paused===true&&(state.stageRounds?.['5.2-impact']??1)===1&&drained(state)
-  &&request.run===run&&request.version===1&&request.group==='5.2-impact'&&same(request.stages,['5.2-impact'])&&date(request.at),'not actual paused/drained 5.2 hold');
+  &&request.run===run&&request.version===1&&request.group==='5.2-impact'&&same(request.stages,['5.2-impact'])&&date(request.at)&&date(capturedAt)&&Date.parse(request.at)<=Date.parse(capturedAt),'not actual paused/drained 5.2 hold');
  for(const v of executions){const n=v.native,o=state.dispatches?.[`5.2-impact:${n.label}`];
   need(o?.stage==='5.2-impact'&&o.role==='alpha-repair'&&o.label===n.label&&same(o.covers,[`${phase}:${v.report.unit}`])&&o.attempt===n.attempt&&o.lastExitOk===true&&date(o.startedAt)&&date(o.endedAt)
-   &&Date.parse(o.startedAt)<=Date.parse(n.started_at)&&Date.parse(n.ended_at)<=Date.parse(o.endedAt)&&Date.parse(o.endedAt)<=Date.parse(request.at),'hold does not bind exact successful successor executions');
+   &&Date.parse(o.startedAt)<=Date.parse(n.started_at)&&Date.parse(n.ended_at)<=Date.parse(o.endedAt)&&Date.parse(o.endedAt)<=Date.parse(capturedAt),'hold does not bind exact successful successor executions');
  }
 }
 function validate(root,run,row,{current=false,bytes=null,archives=null}={}){
@@ -47,7 +49,7 @@ function validate(root,run,row,{current=false,bytes=null,archives=null}={}){
  need(pack.run===run&&pack.phase===phase&&pack.basePhase==='impact-initial'&&pack.round===1&&pack.repair_scope==='frontier'&&same(pack.units,['1','2','3'])&&pack.reporting_owner_recovery?.path===initial.path
   &&progress.run===run&&progress.phase==='impact-initial'&&progress.round===1&&progress.complete===false&&progress.activePhase===phase&&same(progress.passes,['impact-initial',phase])&&!progress.activeMaintenance
   &&request.id===row.owner_gate_request_id&&Date.parse(request.at)<=Date.parse(row.recorded_at),'not exact first persistent successor boundary');
- const executions=pack.units.map(unit=>execution(root,run,pack,unit,boundText));hold(root,run,state,request,executions);
+ const executions=pack.units.map(unit=>execution(root,run,pack,unit,boundText));hold(root,run,state,request,executions,row.recorded_at);
  const original=executions.find(v=>v.report.unit==='3'),uncertain=executions.flatMap(v=>v.report.reviews.filter(r=>r.uncertain===true).map(r=>({unit:String(v.report.unit),row:r})));
  need(uncertain.length===1&&uncertain[0].unit==='3'&&same(row.original_uncertain_review,uncertain[0].row)&&row.supplier===uncertain[0].row.id&&row.original_session_id===original.native.session_id
   &&resolve(root,original.native.session_home??'')===reportingOwnerHome(root,run,'impact-initial',1,'3')&&row.original_final_sha256===original.final_sha256,'wrong exact persistent reporting owner or native uncertainty');
@@ -80,7 +82,7 @@ function validate(root,run,row,{current=false,bytes=null,archives=null}={}){
   &&same(observation.historical_reviews,allReviews)&&same(observation.genuine_current_native_reviews,eligible)&&snapshot.sources.every(s=>observation.post?.[s.id]===s.guard_sha256)&&same(observation.errors,[`invalid review 3/${row.supplier}`])&&Object.entries(observation.evidence).every(([p,h])=>evidence[p]===h),'observation cannot grant uncertain/stale review credit or hide errors');
  const next=join(directory(root,run),`${nextPhase}-1.json`);if(existsSync(next)){const p=read(next);need(p.successor_uncertainty_continuation?.path===path&&p.reporting_owner_sessions?.['3']?.mode==='resume'&&p.reporting_owner_sessions['3'].session_id===row.original_session_id
   &&targets.every(id=>p.assignments['3'].includes(id))&&Object.entries(evidence).every(([f,h])=>p.input_evidence?.[f]===h),'genuine first continuation pack no longer binds admission/scope/session');}
- if(current){const live=read(join(root,'.autopilot',run,'state.json')),qr=readFileSync(join(root,'.autopilot',run,'owner-gate-request.json'),'utf8');hold(root,run,live,JSON.parse(qr),executions);
+ if(current){const live=read(join(root,'.autopilot',run,'state.json')),qr=readFileSync(join(root,'.autopilot',run,'owner-gate-request.json'),'utf8');hold(root,run,live,JSON.parse(qr),executions,row.recorded_at);
   need(qr===boundText(row.owner_gate_request)&&row.units?.every(u=>{const k=`5.2-impact:${executions.find(v=>String(v.report.unit)===u).native.label}`;return same(live.dispatches[k],state.dispatches[k]);})&&readFileSync(progressPath(root,run),'utf8')===boundText(row.creation_progress)&&!existsSync(next)
    &&!existsSync(join(directory(root,run),`${phase}-1-collected.json`)),'live hold/progress/request changed or successor already frozen');
   const actual=readLibraryItems(root,{run});need(same(snapshot.inventory,graph(actual.filter(i=>targets.includes(i.id))))&&same(targets,scope(actual,row.supplier))&&same(snapshot.contexts,reviewContextHashes(root,snapshot.sources.map(s=>s.id))),'actual current dependency inventory/context changed');
