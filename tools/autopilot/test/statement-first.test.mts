@@ -100,3 +100,37 @@ test('statement-first retains mixed-case item identities and rejects invalid or 
     JSON.stringify([{ id: 'other-page', items: [{ id: ids[0] }] }]));
   await assert.rejects(checkStatementFrontier(root, run, 'math'), /Duplicate/);
 });
+
+
+test('wiki reference labels may contain math without splitting their link identity', async () => {
+  const prefix = '## Statement\n\nA precise claim.\n\n## Statement references\n\n';
+  for (const label of ['An $L^2$ bound', '$\\pi_1$ and $H_1$ comparison',
+    'The $\\epsilon$ estimate and its $n$ parameters']) {
+    assert.deepEqual(await inspectStatement('fixture', 'lemma',
+      prefix + `[[lem-target|${label}]]\n`), [], label);
+    const claim = await inspectStatement('fixture', 'lemma',
+      `## Statement\n\nUse [[lem-target|${label}]].\n`);
+    assert.ok(claim.some(error => error.includes('contains hyperlinks')), label);
+  }
+  assert.deepEqual(await inspectStatement('fixture', 'lemma', prefix
+    + '[[lem-one|An $L^2$ bound]]\n\n[[lem-two|An $H_1$ bound]]\n'), []);
+  for (const invalid of [
+    '[[lem-target|An $L^2$\nbound]]', // one wiki link, illegally hard-wrapped
+    '[[lem-one|An $L^2$ bound]] [[lem-two|Another $H_1$ bound]]',
+    '[[lem-one|An $L^2$ bound]]\n[[lem-two|Another $H_1$ bound]]',
+    '[[lem-one|An $L^2$ bound]]\n\nPlain text without a reference.',
+    'This is $L^2$ prose, not a link.',
+    '`[[lem-target|A code literal]]`',
+    '$[[lem-target|A math literal]]$',
+  ]) {
+    assert.ok((await inspectStatement('fixture', 'lemma', prefix + invalid + '\n'))
+      .some(error => error.includes('each reference must occupy')), invalid);
+  }
+  // Math and code containing wiki-looking text are still allowed in a claim.
+  assert.deepEqual(await inspectStatement('fixture', 'lemma',
+    '## Statement\n\nLiteral `$[[lem-code]]$` and $[[lem-math]]$ are notation.\n'), []);
+  // A valid mathematical alias does not excuse misplaced reference sections.
+  assert.ok((await inspectStatement('fixture', 'lemma',
+    '## Statement\n\nClaim.\n\n## Proof\n\nArgument.\n\n## Statement references\n\n[[lem-target|An $L^2$ bound]]\n'))
+    .some(error => error.includes('must immediately follow')));
+});

@@ -26,14 +26,36 @@ const required = {
 };
 const refHeading = heading => `${heading === 'Statement refuted' ? 'Statement' : heading} references`;
 function linkCount(node, body) {
-  const source = body.slice(node.position.start.offset, node.position.end.offset);
-  // Inline/fenced code and mathematics are literal content, never hyperlinks.
-  if (['code', 'inlineCode', 'math', 'inlineMath'].includes(node.type)) return 0;
-  if (['link', 'linkReference', 'image', 'imageReference', 'definition'].includes(node.type)) return 1;
-  if (node.type === 'html') return [...source.matchAll(/<\s*(?:a|img)\b/gi)].length;
-  if (node.type === 'text') return [...source.matchAll(/(?<!\\)\[\[[^\]]+\]\]/g)].length;
-  return (node.children ?? []).reduce((sum, child) => sum + linkCount(child, body), 0);
+  let links = 0;
+  const textRanges = [];
+  function walk(child) {
+    // Code/math literals remain literal; a wiki label may span text and math
+    // siblings, so recognize its outer delimiters across the whole container.
+    if (['code', 'inlineCode', 'math', 'inlineMath'].includes(child.type)) return;
+    if (['link', 'linkReference', 'image', 'imageReference', 'definition'].includes(child.type)) {
+      links += 1;
+      return;
+    }
+    const start = child.position.start.offset, end = child.position.end.offset;
+    if (child.type === 'html') {
+      links += [...body.slice(start, end).matchAll(/<\s*(?:a|img)\b/gi)].length;
+      return;
+    }
+    if (child.type === 'text') textRanges.push([start, end]);
+    else (child.children ?? []).forEach(walk);
+  }
+  walk(node);
+  const start = node.position.start.offset;
+  const source = body.slice(start, node.position.end.offset);
+  const inText = offset => textRanges.some(([a, b]) => a <= offset && offset < b);
+  for (const match of source.matchAll(/(?<!\\)\[\[[^\]]+\]\]/g)) {
+    // Both outer delimiters must be ordinary text, not embedded code/math or
+    // a native Markdown link already counted above. Interior math is allowed.
+    if (inText(start + match.index) && inText(start + match.index + match[0].length - 1)) links += 1;
+  }
+  return links;
 }
+
 export async function inspectStatement(id, kind, body) {
   const {parser} = await statementRuntime(), tree = parser.parse(body), errors = [];
   const heads = tree.children.map((node, index) => ({node, index, name: text(node)}))
