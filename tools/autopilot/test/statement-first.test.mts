@@ -78,3 +78,25 @@ test('composition keeps native stages/models/gates/counters and decorates primar
   assert.equal(repaired.brief,decorated.brief);
   assert.throws(()=>statementFirstStages({...ctx,run:'legacy'},[original],'physics'),/fresh planned policy/);
 });
+
+
+test('statement-first retains mixed-case item identities and rejects invalid or repeated scope subjects', async t => {
+  const root = fixture(t), run = 'case-check'; writeStatementPolicy(root, run, 'math');
+  const ids = ['lem-hat-CF-genus-one-lens-space-order-three-rank-three',
+    'lem-amenable-D-R-l2-dimension-estimate'];
+  const manifest = join(root, 'research', `${run}-batch-1.pages.json`);
+  const save = (items: any[]) => writeFileSync(manifest, JSON.stringify([{ id: 'page', items }]));
+  for (const id of ids) writeFileSync(join(root, 'items', `${id}.md`),
+    `---\nid: ${id}\nkind: lemma\nstatus: draft\n---\n## Statement\n\nA precise fixture lemma.\n`);
+  save(ids.map(id => ({ id })));
+  assert.deepEqual(await checkStatementFrontier(root, run, 'math'), { items: 2, errors: [] });
+  for (const items of [[{ id: 'Lem-bad-prefix' }], [{ id: 'lem-invalid/path' }], [],
+    [{ id: ids[0] }, { id: ids[0] }]]) {
+    save(items);
+    await assert.rejects(checkStatementFrontier(root, run, 'math'), /Invalid|Empty|Duplicate/);
+  }
+  save([{ id: ids[0] }]);
+  writeFileSync(join(root, 'research', `${run}-batch-2.pages.json`),
+    JSON.stringify([{ id: 'other-page', items: [{ id: ids[0] }] }]));
+  await assert.rejects(checkStatementFrontier(root, run, 'math'), /Duplicate/);
+});

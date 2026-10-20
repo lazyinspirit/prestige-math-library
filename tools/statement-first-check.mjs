@@ -18,7 +18,8 @@ export async function checkStatementFrontier(root, run, domain) {
       if (!Array.isArray(page.items) || !page.items.length) throw Error(`Empty item inventory ${name}:${page.id}`);
       for (const row of page.items) {
         const id = typeof row === 'string' ? row : row.id;
-        if (!/^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id ?? '')) throw Error(`Invalid frontier item ${name}`);
+        if (!/^[a-z]+-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/.test(id ?? '')) throw Error(`Invalid frontier item ${name}`);
+        if (ids.has(id)) throw Error(`Duplicate frontier item ${id} in ${name}`);
         ids.add(id);
       }
     }
