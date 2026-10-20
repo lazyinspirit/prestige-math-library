@@ -741,8 +741,15 @@ physics reporter continues to seal its own content root. When correcting an
 overbroad report baseline, archive its original exact bytes before taking a
 fresh native snapshot and retrying the gate.
 
-Worker supporting evidence for mutable batch manifests and proof contracts is
-archived as exact content-addressed bytes at collection. The original worker
+Worker supporting evidence for mutable batch manifests, proof contracts and
+shared ledgers is archived as exact content-addressed bytes at collection.
+The exact native `research/RUN-step5-v2/supporting-metadata/SHA256.json`
+namespace may contain raw JSON, JSONL or Markdown. Readiness and report source
+sealing authenticate the SHA256 filename against the complete regular-file bytes
+and retain those bytes without parsing, projecting or following historical links,
+including archives from another run reached by native evidence. Missing,
+symlinked or changed archives fail closed; other JSON evidence remains strict.
+This retains historical evidence without granting ownership or current coverage. The original worker
 report remains unchanged; later native repairs may update the live batch carrier.
 The frontier-44 six-step historical handoff additionally requires exact archived
 preimages, unchanged native origin reports, packs and successful dispatches, and

@@ -271,10 +271,29 @@ export function scopedReadinessTree(run, root, { scope = runScope(run, root), in
   // Follow exact existing local evidence/source references from native carriers
   // and relevant ledger records; newly added unattached diagnostics do not seal.
   const seen = new Set();
+  // Match the exact opaque archive contract used by nativeProtectedPathClosure.
+  // frozenSupportingEvidence stores raw JSON, JSONL or Markdown under SHA.json;
+  // its historical contents are sealed bytes, never further source selectors.
+  const supportingArchive = file => {
+    const match = /^research\/[a-zA-Z0-9][a-zA-Z0-9_-]*-step5-v2\/supporting-metadata\/([a-f0-9]{64})\.json$/.exec(file);
+    if (!match) return false;
+    let current = root;
+    for (const part of file.split('/')) {
+      current = join(current, part);
+      if (lstatSync(current).isSymbolicLink()) throw Error(`readiness: symlink in native supporting metadata archive: ${file}`);
+    }
+    const path = join(root, file);
+    if (!lstatSync(path).isFile()) throw Error(`readiness: native supporting metadata archive is not a regular file: ${file}`);
+    if (sha256(readFileSync(path)) !== match[1])
+      throw Error(`readiness: native supporting metadata archive changed: ${file}`);
+    add(file);
+    return true;
+  };
   const follow = text => {
     for (const match of text.matchAll(/(?:research|briefs)\/[a-zA-Z0-9_./-]+\.(?:jsonl|json|md|pdf|txt|mjs|mts)/g)) {
       const file = match[0];
       if (file.includes('/../') || projections.has(file) || mutableAfterReadiness.has(file) || file.startsWith(dispatchPrefix)) continue;
+      if (supportingArchive(file)) continue;
       const path = join(root, file);
       if (file.startsWith('research/') && !file.startsWith(`research/${run}-`) && existsSync(path) && lstatSync(path).isFile()
         && /\.(?:jsonl|json|md)$/.test(file)) {
@@ -316,6 +335,7 @@ export function scopedReadinessTree(run, root, { scope = runScope(run, root), in
     for (const [file, value] of projected) { followedProjections.add(file); follow(value); }
     for (const file of pending) {
       seen.add(file);
+      if (supportingArchive(file)) continue;
       if (file.startsWith('research/') && /\.(?:jsonl|json|md|txt)$/.test(file) && lstatSync(join(root, file)).isFile()) follow(readFileSync(join(root, file), 'utf8'));
     }
   }
