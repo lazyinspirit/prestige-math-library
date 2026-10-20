@@ -30,9 +30,18 @@ no coverage and changes no Git ref. Interrupted archives fail closed.
 Use the same command with `--refresh` on both inspection and execution to reopen
 an unfinished v3 finalization after source/workflow repair. Its authorization kind
 is `current-input-step6-v3-refresh`; the exact guards include `refresh: true`.
-The run must be paused and drained at `6-finalize-v3`, with a genuine preceding
-validation pass, its authenticated cutover chain, and HEAD unchanged from that
-cutover. A successful, pending or commit-bearing terminal receipt refuses this
+Refresh supports exactly `six-step-v1-construction-scope` and
+`six-step-v1-compact`; compact runs cannot use the historical cutover route. Compact refresh requires the exact
+run-local native compact adapter (`mathlib.compact.mts` or
+`owner-supervised-compact.mts`) and native `compact-v1` policy. Its guards
+separately seal the runtime configuration bytes and adapter/policy identity;
+source guards retain all actual tooling bytes.
+The run must be paused/stopped and drained at `6-finalize-v3`, with a genuine
+completed preceding native battery and authenticated failed pre-ref finalizer.
+The original Git base comes from the authenticated cutover chain or, for a run
+that started on v3, its sealed native plan-projection original HEAD. Every
+intervening commit must preserve the exact owned HEAD projection, and the owned
+index must match its authenticated bases; foreign commits grant no ownership. A successful, pending or commit-bearing terminal receipt refuses this
 route and requires separate commit recovery. The operation archives the actual
 v3 preparation/report products and runtime preparation records, then retires the
 actual Step-6 dispatch results as well as all Step-6 state. Thus restart runs

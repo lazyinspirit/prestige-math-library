@@ -1101,7 +1101,13 @@ only at an actual paused, drained boundary.
 
 A failed current native Step-6 v3 finalization, including a run that entered v3
 without an earlier cutover, may use mathematics `cutover-step6 --refresh` with
-its existing inspected owner-sealed authorization. It requires the stopped,
+its existing inspected owner-sealed authorization. This refresh supports exactly
+`six-step-v1-construction-scope` and `six-step-v1-compact`; historical cutover
+remains exclusive to the construction-scope revision. Compact refresh requires the exact
+run-local native compact adapter (`mathlib.compact.mts` or
+`owner-supervised-compact.mts`) and native `compact-v1` policy. Its guards
+separately seal the runtime configuration bytes and adapter/policy identity;
+source guards retain all actual tooling bytes. It requires the stopped,
 paused/drained unfinished finalizer and genuine completed preceding battery.
 The transition does not reuse that battery: archive its actual history, reset
 only Step-6 dispatch/results/state through the native transition, then execute

@@ -33,7 +33,11 @@ function stopped(o: Options, state: any, locked = false) {
   if (state.run !== o.run || state.version !== 1 || !held || state.finishedAt
     || !old(state.stage ?? '') || (!o.refresh && (current.includes(state.stage) || state.step6Cutover)))
     fail('requires paused unfinished historical Step-6 state');
-  if (state.workflowRevision !== 'six-step-v1-construction-scope') fail('unsupported workflow revision');
+  // Compact runs start on v3; only the guarded current-v3 refresh applies.
+  // Historical cutover remains exclusive to the construction-scope revision.
+  if (state.workflowRevision !== 'six-step-v1-construction-scope'
+    && !(o.refresh === true && state.workflowRevision === 'six-step-v1-compact'))
+    fail('unsupported workflow revision');
   if (!o.refresh && Object.keys(state.stages ?? {}).some(id => current.includes(id))) fail('v3 execution already exists');
   if (o.refresh) {
     if (state.stage !== '6-finalize-v3'
@@ -283,11 +287,34 @@ function failedRefreshBasis(o: Options, state: any, events: Buffer) {
     scope_context_sha256: scope.policy?.contextSha256 ?? null, commit_landed: false, coverage_created: false };
 }
 
+// Compact refresh is confined to the two native compact adapters. Runtime
+// configuration lives outside sourceState, so seal its exact bytes separately.
+function compactRefreshContext(o: Options, state: any) {
+  if (state.workflowRevision !== 'six-step-v1-compact') return null;
+  const configBytes = bytes(join(o.stateDir, 'config.json'));
+  const config = JSON.parse(configBytes.toString());
+  if (!config || Object.keys(config).length !== 2 || config.run !== o.run
+    || typeof config.stages !== 'string' || !Object.hasOwn(config, 'run') || !Object.hasOwn(config, 'stages'))
+    fail('compact refresh requires exact run-local native configuration');
+  const adapter = relative(o.repo, resolve(o.repo, config.stages));
+  if (!['tools/autopilot/stages/mathlib.compact.mts', 'tools/autopilot/stages/owner-supervised-compact.mts'].includes(adapter)
+    || realpathSync(join(o.repo, adapter)) !== resolve(o.repo, adapter))
+    fail('compact refresh requires a known native compact adapter');
+  bytes(join(o.repo, adapter)); // regular source carrier; sourceState seals its bytes
+  const policyPath = `research/${o.run}-statement-first.json`, policyBytes = bytes(join(o.repo, policyPath));
+  const policy = JSON.parse(policyBytes.toString());
+  if (policy.version !== 1 || policy.run !== o.run || policy.domain !== 'math'
+    || policy.standard !== 'statement-first-v1' || policy.page_layout !== 'compact-v1')
+    fail('compact refresh requires native compact-v1 policy');
+  return { config_sha256: hash(configBytes), adapter, policy_path: policyPath, policy_sha256: hash(policyBytes) };
+}
+
 export function inspectStep6Cutover(o: Options, locked = false) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(o.run)) fail('unsafe run');
   if (!resolve(o.stateDir).startsWith(resolve(o.repo) + '/') || !resolve(o.dispatchDir).startsWith(resolve(o.repo) + '/')) fail('state/dispatch must remain in workspace');
   const stateBytes = bytes(join(o.stateDir, 'state.json')), state = JSON.parse(stateBytes.toString());
   stopped(o, state, locked);
+  const compact = compactRefreshContext(o, state);
   const events = bytes(join(o.stateDir, 'events.jsonl'));
   events.toString().split('\n').filter(Boolean).forEach(line => JSON.parse(line));
   const recovery = o.refresh ? failedRefreshBasis(o, state, events) : null;
@@ -300,7 +327,8 @@ export function inspectStep6Cutover(o: Options, locked = false) {
     source_sha256: hash(JSON.stringify(source)),
     prefix_stages_sha256: hash(JSON.stringify(prefix)), historical_files: historical(o, state),
     reset_stages: Object.keys(state.stages).filter(old), target_stages: current,
-    ...(recovery ? { failed_refresh_basis: recovery } : {}) };
+    ...(recovery ? { failed_refresh_basis: recovery } : {}),
+    ...(compact ? { compact_refresh_context: compact } : {}) };
   return { guards, state, stateBytes, events };
 }
 export function cutoverStep6(o: Options) {
