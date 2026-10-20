@@ -187,3 +187,75 @@ test('opaque treatment does not cover malformed archive names or lookalike names
     assert.throws(f.scope,SyntaxError);
   }
 });
+
+function generatedReceipt(f, kind = 'readiness') {
+  const path = `research/fixture-${kind === 'readiness' ? 'publication-readiness' : 'step6-report-integrity'}.json`;
+  const capture = 'research/fixture-history/raw-cli.json';
+  f.put(capture, 'step5-workflow advance-impact: 0 item(s), complete\n\n');
+  const record = kind === 'readiness'
+    ? { schema: 2, run, protected_tree_scope: 'frontier-prerequisite-context-v1',
+      protected_tree_paths: [capture, f.link], protected_tree_projections: [capture], input_sha256: {} }
+    : { version: 2, run, scope: 'frontier-prerequisite-report-v2',
+      selectors: { ledger: 'research/fixture-scope-ledger.json', pages: [{ file: 'library/category/page.md' }],
+        items: [{ file: 'items/def-example.md' }], pathways: [], owned_paths: [capture, f.link], projections: [capture] },
+      protected_tree: { [capture]: sha256('original capture'), [f.link]: 'sealed link text' } };
+  // Reproduce the evidence -> readiness chain; report snapshots are native roots.
+  f.json('research/fixture-step6-evidence.json', { input_sha256: { [path]: 'hash' } });
+  const save = () => f.json(path, record); save();
+  return { path, capture, record, save };
+}
+
+for (const kind of ['readiness', 'report']) {
+  test(kind + ' generated seal inventory retains raw captures and omits operational links without source discovery', t => {
+    const f = fixture(t), g = generatedReceipt(f, kind), scope = f.scope();
+    assert.ok(scope.paths.includes(g.path)); assert.ok(scope.paths.includes(g.capture));
+    assert.ok(!scope.paths.includes(f.link));
+    assert.equal(readFileSync(join(f.root, g.capture), 'utf8'), 'step5-workflow advance-impact: 0 item(s), complete\n\n');
+  });
+  for (const mutation of ['run', 'schema', 'scope']) {
+    test(kind + ' generated inventory rejects invalid ' + mutation, t => {
+      const f = fixture(t), g = generatedReceipt(f, kind);
+      if (mutation === 'run') g.record.run = 'foreign';
+      if (mutation === 'schema') g.record[kind === 'readiness' ? 'schema' : 'version'] = 99;
+      if (mutation === 'scope') g.record[kind === 'readiness' ? 'protected_tree_scope' : 'scope'] = 'foreign';
+      g.save(); assert.throws(f.scope, /invalid generated seal inventory/);
+    });
+  }
+  for (const reference of ['input-map', 'nested', 'second-native-root']) {
+    test(kind + ' inventory cannot suppress a genuine ' + reference + ' source reference', t => {
+      const f = fixture(t), g = generatedReceipt(f, kind);
+      if (reference === 'input-map') g.record.input_sha256 = { [g.capture]: 'hash' };
+      if (reference === 'nested') g.record.actual = { artifact: { path: g.capture } };
+      if (reference === 'second-native-root') f.json('research/fixture-step5-v2/certification-2.json', { evidence: { [g.capture]: 'hash' } });
+      g.save(); assert.throws(f.scope, SyntaxError);
+    });
+  }
+  test(kind + ' genuine link ref remains forbidden even when also in seal inventory', t => {
+    const f = fixture(t), g = generatedReceipt(f, kind);
+    g.record.input_sha256 = { [f.link]: 'hash' }; g.save();
+    assert.throws(f.scope, /symlink in owned path|authoritative input/);
+  });
+  test(kind + ' lookalike filename receives ordinary strict structured traversal', t => {
+    const f = fixture(t), g = generatedReceipt(f, kind);
+    const lookalike = g.path.replace('.json', '-copy.json');
+    f.json(lookalike, g.record);
+    f.json('research/fixture-step6-evidence.json', { input_sha256: { [lookalike]: 'hash' } });
+    assert.throws(f.scope, SyntaxError);
+  });
+}
+
+test('report source selectors stay strict beyond generated ownership/projection inventories', t => {
+  const f = fixture(t), g = generatedReceipt(f, 'report');
+  g.record.selectors.pages.push({ file: f.link + '/page.md' }); g.save();
+  assert.throws(f.scope, /symlink in owned path|authoritative input/);
+});
+
+for (const [kind, field] of [['readiness', 'protected_tree_paths'], ['readiness', 'protected_tree_projections'],
+  ['report', 'protected_tree'], ['report', 'selectors'], ['report', 'owned_paths'], ['report', 'projections']]) {
+  test(kind + ' malformed inventory ' + field + ' cannot hide a structured source', t => {
+    const f = fixture(t), g = generatedReceipt(f, kind);
+    if (['owned_paths', 'projections'].includes(field)) g.record.selectors[field] = [{ path: f.link }];
+    else g.record[field] = field === 'protected_tree' ? { actual: { path: f.link } } : { path: f.link };
+    g.save(); assert.throws(f.scope, /malformed generated seal inventory/);
+  });
+}

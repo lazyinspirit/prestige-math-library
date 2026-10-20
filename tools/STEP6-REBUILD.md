@@ -356,3 +356,15 @@ All other native JSON and transitive references retain strict structured parsing
 there is no parse-error fallback. Ordinary native evidence/certificate checks
 remain responsible for genuine archive provenance and pinned evidence hashes.
 This packaging classification grants no mathematical or historical acceptance.
+
+Generated readiness and report-integrity seal inventories describe raw carrier
+bytes and operational link text; they do not introduce semantic source selectors.
+Only the exact native receipt names with matching run and current schema/scope
+receive this typed traversal: readiness `protected_tree_paths` and
+`protected_tree_projections`, and report-integrity `protected_tree` plus
+`selectors.owned_paths`/`selectors.projections`, remain inventory metadata. The
+receipts and all existing raw evidence remain sealed and owned as before. True
+`input_sha256`, report source selectors and other nested structured references
+still traverse strictly, even when the same path also occurs in an inventory.
+Malformed receipts or genuine JSON sources still fail; no parse-error fallback
+or operational symlink source acceptance is introduced.

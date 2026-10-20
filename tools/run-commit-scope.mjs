@@ -500,7 +500,33 @@ function nativeProtectedPathClosure(root, run, inventory, seeds) {
     }
     const text = bytes.toString('utf8');
     const documents = path.endsWith('.jsonl') ? text.split('\n').filter(line => line.trim()) : [text];
-    for (const document of documents) visit(JSON.parse(document));
+    for (const document of documents) {
+      const record = JSON.parse(document);
+      // These generated receipts inventory raw-byte/link-text seals. Inventory
+      // membership is not authority to parse a carrier or accept it as source.
+      // Keep the receipt itself protected, and follow every genuine input ref.
+      const generated = /^research\/([a-zA-Z0-9][a-zA-Z0-9_-]*)-(publication-readiness|step6-report-integrity)\.json$/.exec(path);
+      if (!generated) { visit(record); continue; }
+      const readiness = generated[2] === 'publication-readiness';
+      if (record?.run !== generated[1]
+        || (readiness ? record.schema !== 2 || record.protected_tree_scope !== 'frontier-prerequisite-context-v1'
+          : record.version !== 2 || record.scope !== 'frontier-prerequisite-report-v2'))
+        throw Error('closeout: invalid generated seal inventory: ' + path);
+      const strings = value => Array.isArray(value) && value.every(entry => typeof entry === 'string');
+      const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+      if (readiness ? !strings(record.protected_tree_paths) || !strings(record.protected_tree_projections)
+        : !object(record.protected_tree) || !Object.values(record.protected_tree).every(hash => typeof hash === 'string')
+          || !object(record.selectors) || !strings(record.selectors.owned_paths) || !strings(record.selectors.projections))
+        throw Error('closeout: malformed generated seal inventory: ' + path);
+      for (const [key, value] of Object.entries(record)) {
+        if (readiness && ['protected_tree_paths', 'protected_tree_projections'].includes(key)) continue;
+        if (!readiness && key === 'protected_tree') continue;
+        if (!readiness && key === 'selectors') {
+          for (const [selector, selected] of Object.entries(value ?? {}))
+            if (!['owned_paths', 'projections'].includes(selector)) { add(selector); visit(selected); }
+        } else { add(key); visit(value); }
+      }
+    }
   }
   return protectedPaths;
 }
