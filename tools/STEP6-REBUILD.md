@@ -310,3 +310,45 @@ body or metadata, nonancestor commit, or item path does not qualify. This narrow
 historical identity check neither publishes nor adds audit/review credit; all
 current scope, readiness, preparation and gate requirements still apply. Existing
 same-path published reuse and draft-default behavior remain unchanged.
+
+
+The existing version-1 `RUN-closeout-operational-contexts.json` authority may
+opt an individual directory into `selection: "symlinks-only"`. Only exact
+physical roots under this run's `research/RUN-*` namespace qualify. Each row
+retains the full opaque tree `entries`/`sha256`, reason and hashed external
+run evidence. Tree sealing records directory modes, regular bytes/modes and
+link text/modes without following targets. Only actual link entries are omitted
+from automatic commit selection; every regular proposal, check and evidence
+carrier remains selected. Omitted links stay outside-preserved. Changing the
+tree or evidence invalidates the authority. The absent selection retains the
+legacy resolver-name restrictions and whole-directory behavior.
+
+Typed selection never exempts required, explicit, recorded, frozen or published
+repair inputs. It also protects exact structured path references transitively
+from native Step1–6 top-level and direct-child JSON/JSONL records and required
+JSON inputs, including current and historical certificate/collection evidence
+map keys. Exact absolute paths prefixed by the current repository root are
+normalized lexically to safe relative paths; foreign absolute paths and prefix
+lookalikes are never followed. A link or referenced descendant fails closed. Context trees are opaque
+discovery boundaries; ordinary report prose and command snippets do not supply
+path authority. No link target becomes accepted source or mathematical evidence.
+The existing shared selector supplies preflight, readiness/report ownership and
+the native commit transaction; no independent exclusion list or gate exemption
+is introduced. Seal the exact owner-authorized roots only after writers drain,
+before fresh preparation and the complete ordinary battery.
+
+
+Native Step-5 `frozenSupportingEvidence` archives mutable batch metadata and
+shared ledger preimages as exact bytes at
+`research/RUN-step5-v2/supporting-metadata/<SHA256>.json`. The suffix does not
+assert JSON format: JSONL defect ledgers and Markdown ledgers use this same
+store. In typed context selection, these exact native archive paths remain protected
+regular carriers and their content must match the hash in the filename. A
+transitively referenced foreign-run archive is context only and acquires no
+current-run commit ownership. Their
+payload is opaque historical evidence, so its old ledger rows and foreign-run
+references do not discover additional current path selectors or ownership.
+All other native JSON and transitive references retain strict structured parsing;
+there is no parse-error fallback. Ordinary native evidence/certificate checks
+remain responsible for genuine archive provenance and pinned evidence hashes.
+This packaging classification grants no mathematical or historical acceptance.

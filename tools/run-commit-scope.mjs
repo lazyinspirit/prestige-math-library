@@ -362,7 +362,7 @@ function readScopePolicy(root, run) {
 
 // Hash operational resolver trees without dereferencing their links. They stay
 // report-protected and outside-preserved even when omitted from the Git commit.
-export function operationalContextState(root, path) {
+function operationalContextRows(root, path) {
   safePath(path);
   let cursor = root;
   for (const part of path.split('/')) {
@@ -382,7 +382,11 @@ export function operationalContextState(root, path) {
     }
   };
   walk(path);
-  return digest(rows);
+  return rows;
+}
+
+export function operationalContextState(root, path) {
+  return digest(operationalContextRows(root, path));
 }
 
 function operationalContextExclusions(root, run, protectedPaths) {
@@ -395,7 +399,7 @@ function operationalContextExclusions(root, run, protectedPaths) {
     || typeof evidence.authorization !== 'string' || evidence.authorization.trim().length < 20
     || !Array.isArray(evidence.directories) || !evidence.directories.length)
     throw Error('closeout: invalid operational context exclusion authority');
-  const seen = new Set();
+  const seen = new Set(), excludedLinks = new Set(), wholeDirectories = [];
   for (const row of evidence.directories) {
     safePath(row.path);
     const historicalHHResolver = run === 'hopf-hecke-unfinished-15-2026-10-15'
@@ -403,30 +407,102 @@ function operationalContextExclusions(root, run, protectedPaths) {
         'research/' + run + '-owner/authoring-readiness-escalation/cross-batch/final/local-read-context'].includes(row.path);
     const ordinaryResolver = row.path.startsWith('research/' + run + '-owner-escalation-repairs/')
       && /\/(?:overlay|shadow)$/.test(row.path);
-    if ((!ordinaryResolver && !historicalHHResolver) || seen.has(row.path)
+    const symlinksOnly = row.selection === 'symlinks-only';
+    if ((row.selection !== undefined && !symlinksOnly)
+      || (symlinksOnly ? !runResearch(run, row.path) : !ordinaryResolver && !historicalHHResolver)
+      || seen.has(row.path)
       || typeof row.reason !== 'string' || row.reason.trim().length < 20
       || !Number.isSafeInteger(row.entries) || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')
       || !Array.isArray(row.evidence) || !row.evidence.length)
       throw Error('closeout: invalid exact operational context directory');
+    if (evidence.directories.some(row => row.selection === 'symlinks-only')
+      && [...seen].some(path => path.startsWith(row.path + '/') || row.path.startsWith(path + '/')))
+      throw Error('closeout: overlapping operational context roots');
     seen.add(row.path);
     for (const supporting of row.evidence) {
-      if (!runResearch(run, supporting.path) || supporting.path.startsWith(row.path + '/'))
+      if (!runResearch(run, supporting.path) || (symlinksOnly ? evidence.directories.some(dir =>
+        supporting.path === dir.path || supporting.path.startsWith(dir.path + '/'))
+        : supporting.path.startsWith(row.path + '/')))
         throw Error('closeout: operational context evidence is not external run evidence');
       regularPath(root, supporting.path);
       if (sha256(readFileSync(join(root, supporting.path))) !== supporting.sha256)
         throw Error('closeout: operational context evidence changed: ' + supporting.path);
     }
+    const rows = operationalContextRows(root, row.path);
+    const links = new Set(rows.filter(entry => entry.kind === 'symlink').map(entry => entry.path));
+    const beneathLink = path => {
+      for (let parent = path; parent.includes('/'); parent = parent.slice(0, parent.lastIndexOf('/'))) {
+        if (links.has(parent)) return true;
+      }
+      return false;
+    };
     for (const protectedPath of protectedPaths) {
-      if (protectedPath === row.path || protectedPath.startsWith(row.path + '/'))
+      if (symlinksOnly ? beneathLink(protectedPath)
+        : protectedPath === row.path || protectedPath.startsWith(row.path + '/'))
         throw Error('closeout: operational context contains authoritative input: ' + protectedPath);
     }
-    if (JSON.stringify(operationalContextState(root, row.path))
+    if (JSON.stringify(digest(rows))
       !== JSON.stringify({ entries: row.entries, sha256: row.sha256 }))
       throw Error('closeout: operational context directory changed: ' + row.path);
+    if (symlinksOnly) for (const link of links) excludedLinks.add(link);
+    else wholeDirectories.push(row.path);
   }
-  const directories = [...seen];
-  return { path, sha256: sha256(text), excludes: candidate => directories.some(dir =>
-    candidate === dir || candidate.startsWith(dir + '/')) };
+  return { path, sha256: sha256(text), excludes: candidate => excludedLinks.has(candidate)
+    || wholeDirectories.some(dir => candidate === dir || candidate.startsWith(dir + '/')) };
+}
+
+// Native structured records may pin other records through either path fields or
+// evidence/artifact-map keys. Follow that exact path closure, including historical
+// certificates and collections. Prose and shell snippets are never path selectors.
+// Opaque context trees are not discovery roots; referenced entries remain strict.
+function nativeProtectedPathClosure(root, run, inventory, seeds) {
+  const protectedPaths = new Set(seeds), queue = [...seeds];
+  const native = 'research/' + run + '-step';
+  for (const path of inventory) {
+    const tail = path.slice(native.length);
+    if (path.startsWith(native) && /^[1-6](?:[-.][^/]+)?(?:\/[^/]+)?\.json(?:l)?$/.test(tail)) {
+      protectedPaths.add(path); queue.push(path);
+    }
+  }
+  const visited = new Set();
+  const add = value => {
+    if (typeof value !== 'string') return;
+    // Native evidence maps also use exact absolute workspace paths. Do not
+    // resolve arbitrary paths or follow filesystem aliases to normalize them.
+    const prefix = resolve(root) + '/';
+    if (value.startsWith(prefix)) value = value.slice(prefix.length);
+    if (!/^(?:research|items|library|tools|briefs)\//.test(value)) return;
+    try { safePath(value); } catch { return; }
+    if (!protectedPaths.has(value)) { protectedPaths.add(value); queue.push(value); }
+  };
+  const visit = value => {
+    if (typeof value === 'string') add(value);
+    else if (Array.isArray(value)) for (const child of value) visit(child);
+    else if (value && typeof value === 'object') for (const [key, child] of Object.entries(value)) {
+      add(key); visit(child);
+    }
+  };
+  for (let i = 0; i < queue.length; i++) {
+    const path = queue[i];
+    if (visited.has(path) || !/\.json(?:l)?$/.test(path)) continue;
+    visited.add(path);
+    // Never read through a link, even when the reference is to a descendant.
+    if (!regularPath(root, path, true)) continue;
+    const bytes = readFileSync(join(root, path));
+    // frozenSupportingEvidence preserves exact mutable metadata/ledger bytes
+    // under a content-addressed .json name, including JSONL and Markdown.
+    // These are opaque historical carriers, never new source selectors.
+    const archive = /^research\/[a-zA-Z0-9][a-zA-Z0-9_-]*-step5-v2\/supporting-metadata\/([a-f0-9]{64})\.json$/.exec(path);
+    if (archive) {
+      if (sha256(bytes) !== archive[1])
+        throw Error('closeout: native supporting metadata archive changed: ' + path);
+      continue;
+    }
+    const text = bytes.toString('utf8');
+    const documents = path.endsWith('.jsonl') ? text.split('\n').filter(line => line.trim()) : [text];
+    for (const document of documents) visit(JSON.parse(document));
+  }
+  return protectedPaths;
 }
 
 function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingReceipt = false, preflight = false, { physics = false } = {}) {
@@ -600,8 +676,17 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   const closurePath = 'research/' + run + '-step3-closure.json';
   const frozen = existsSync(join(root, closurePath))
     ? Object.keys(JSON.parse(readFileSync(join(root, closurePath), 'utf8')).artifacts ?? {}) : [];
-  const exclusions = operationalContextExclusions(root, run,
-    new Set([...required, ...additional, ...historyPaths, ...publishedInputs, ...frozen]));
+  let protectedPaths = new Set([...required, ...additional, ...historyPaths, ...publishedInputs, ...frozen]);
+  const operationalPath = 'research/' + run + '-closeout-operational-contexts.json';
+  if (lstatExists(join(root, operationalPath))) {
+    regularPath(root, operationalPath);
+    const operational = JSON.parse(readFileSync(join(root, operationalPath), 'utf8'));
+    if (operational.directories?.some(row => row?.selection === 'symlinks-only')) {
+      protectedPaths = nativeProtectedPathClosure(root, run, inventory,
+        [...protectedPaths, ...policy.additional_paths.map(row => row.ownership_evidence)]);
+    }
+  }
+  const exclusions = operationalContextExclusions(root, run, protectedPaths);
   if (exclusions.path) required.add(exclusions.path);
   const automatic = new Set(inventory.filter(path => runResearch(run, path) && !exclusions.excludes(path)));
   for (const row of policy.additional_paths) {
