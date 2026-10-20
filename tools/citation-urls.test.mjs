@@ -38,3 +38,36 @@ test('coverage historical snapshots do not reactivate rejected source candidates
   value.pages[0].sources.push({ url: archived });
   assert.deepEqual([...citationUrls(value, { coverage: true })], [active, archived]);
 });
+
+
+test('known retrieval history cannot reactivate retired candidates, but active references remain', () => {
+  const dead = 'https://old.example.org/retired.pdf';
+  const drive = 'https://drive.google.com/uc?export=download';
+  const active = 'https://example.org/current.pdf';
+  const keys = ['source_resolution_history', 'source_search_history', 'retrieval_history',
+    'manual_retrieval_history', 'source_attempts_not_harvested'];
+  for (const key of keys) {
+    const coverage = {
+      pages: [{ sources: [{ url: active, [key]: `Prior attempt ${dead}` }] }],
+      [key]: [{ url: drive }],
+    };
+    assert.deepEqual([...citationUrls(coverage, { coverage: true })], [active], key);
+    assert.deepEqual([...citationUrls(coverage)], [active, dead, drive], key);
+    // A diagnostic occurrence never exempts the same URL when actively cited.
+    coverage.pages[0].sources.push({ url: dead });
+    assert.deepEqual([...citationUrls(coverage, { coverage: true })], [active, dead], key);
+  }
+});
+
+test('active locators, harvested contents, references and ordinary notes remain citation subjects', () => {
+  const urls = ['https://doi.org/10.1093/oso/9780198841319.001.0001',
+    'https://example.org/named-theorem.pdf', 'https://example.org/reference.pdf',
+    'https://example.org/notes.pdf'];
+  const coverage = { pages: [{ sources: [{ url: 'https://example.org/current.pdf',
+    locator: `Official publication record: ${urls[0]}.`,
+    contents: [{ name: `Theorem in ${urls[1]}` }],
+    references: [{ url: urls[2] }],
+    note: `Also consult ${urls[3]}` }] }] };
+  assert.deepEqual([...citationUrls(coverage, { coverage: true })],
+    ['https://example.org/current.pdf', ...urls]);
+});

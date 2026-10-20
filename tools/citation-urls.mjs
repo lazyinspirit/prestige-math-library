@@ -17,7 +17,9 @@ export function citationUrls(value, { coverage = false } = {}) {
       for (const [key, child] of Object.entries(node)) {
         // Diagnostic history is evidence, not a reader-facing citation.
         if (coverage && (key.startsWith('historical_')
-          || ['checks', 'recovery_attempts', 'source_resolution'].includes(key))) continue;
+          || ['checks', 'recovery_attempts', 'source_resolution',
+            'source_resolution_history', 'source_search_history', 'retrieval_history',
+            'manual_retrieval_history', 'source_attempts_not_harvested'].includes(key))) continue;
         visit(child);
       }
     }
