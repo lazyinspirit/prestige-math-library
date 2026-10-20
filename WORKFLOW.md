@@ -1108,3 +1108,16 @@ plus pending consumers, suppliers first. Later passes resume these genuine new
 reporting sessions. Overlapping floors or genuine reader-identity conflicts fail
 closed. Default dispatch, immutable originals, repair budgets and every ordinary
 certification, judgment and gate remain unchanged.
+
+An optional [successful successor uncertainty continuation](tools/step5-successor-uncertainty-continuation.md)
+handles exactly the first persistent initial owner3 pass after reporting recovery.
+It requires the actual paused/drained5.2 boundary, original successful immutable
+native execution and a genuine completed same-owner proof-only mathematical
+repair with all affected consumer dispositions and current guards. Exact original
+uncertainty remains a strict ordinary collection failure and a separate zero-credit
+historical observation. Only still-current nonuncertain original native evidence
+outside the forced affected floor can carry as existing evidence. The permitted
+native advance-impact helper prepares a new ordinary pass resuming the actual
+persistent reporting session; fresh supplier/consumer reviews remain mandatory.
+No gate permission, repair-budget reset, source narrowing, old-report rewrite or
+mathematical acceptance is supplied by this scheduling bridge.

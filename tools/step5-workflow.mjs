@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {loadSuccessorUncertaintyContinuation,successorSchedulingView} from './step5-successor-uncertainty-continuation.mjs';
 // Round-based Step 5. Mathematical workers write evidence; only the controller
 // collects it, judges a stable snapshot, and certifies a completed repair wave.
 import { sol61Effort } from './math-workflow-effort.mjs';
@@ -1799,7 +1800,7 @@ function nativeDownstreamPending(root,run,packs,receipts,items,current,recovery=
     // A same-wave sibling or later genuine owner review may discharge the
     // consumer. Initial adjudicator reviews and earlier passes cannot do so.
     for(const record of records.filter(row=>row.index>=latest&&!withdrawnOwnerReport(withdrawal,row.pack,row.unit,row.receipt)))for(const review of record.report.reviews??[]){
-      if(review.id!==id||!record.pack.assignments[record.unit]?.includes(id)
+      if(review.uncertain!==false||review.id!==id||!record.pack.assignments[record.unit]?.includes(id)
         ||!contexts.matches(review,current,record.receipt.post))continue;
       requireValue(record.receipt.reviews.some(row=>digest(row)===digest(review)),
         'pending consumer review is absent from its original native collection');
@@ -1849,11 +1850,29 @@ export function assertImpactProgress(packs,pending,current,{items=null,reviewOwn
 
 // This derivative is scheduling evidence only; ordinary collect never reads it.
 function impactSchedulingReceiptPath(root,run,basePhase,round,pass){
+ if(basePhase==='impact-initial'&&round===1&&pass==='impact-initial-pass-2'){const continuation=loadSuccessorUncertaintyContinuation(root,run);if(continuation)return continuation.observationPath;}
  if(basePhase==='impact-initial'&&pass==='impact-initial'){
   const recovery=loadReportingOwnerRecovery(root,run,basePhase,round);
   if(recovery?.observationPath)return recovery.observationPath;
  }
  return effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pass}-${round}-collected.json`));
+}
+function readImpactSchedulingReceipt(root,run,basePhase,round,pass){
+ if(basePhase==='impact-initial'&&round===1&&pass==='impact-initial-pass-2'){const value=loadSuccessorUncertaintyContinuation(root,run);if(value)return successorSchedulingView(value);}
+ return read(impactSchedulingReceiptPath(root,run,basePhase,round,pass));
+}
+export function buildSuccessorReportingObservation(root,run,pack,reports,evidence){
+ requireValue(pack.phase==='impact-initial-pass-2'&&pack.round===1,'successor observation is exact first persistent pass only');
+ const current=hashes(root,run),reported={...pack.before};
+ for(const r of reports)for(const row of r.reviews??[])if(pack.assignments[String(r.unit)]?.includes(row.id))reported[row.id]=row.post_sha256;
+ const structural=validateReports(pack,reports.map(r=>({...r,reviews:r.reviews.map(v=>v.uncertain===true?{...v,uncertain:false}:v)})),reported,{root});
+ requireValue(structural.errors.length===0,'successor observation cannot hide another native defect behind uncertainty');
+ const result=validateReports(pack,reports,reported,{root}),uncertain=reports.flatMap(r=>r.reviews.filter(v=>v.uncertain===true).map(v=>({unit:String(r.unit),row:v})));
+ requireValue(uncertain.length===1&&uncertain[0].unit==='3'&&JSON.stringify(result.errors)===JSON.stringify([`invalid review 3/${uncertain[0].row.id}`]),'successor observation requires only the exact native owner3 uncertainty');
+ const contexts=reviewContextHashes(root,reports.flatMap(r=>r.reviews.map(v=>v.id))),after=statementHashes(root,run),restated=restatedIds(pack,result.changed,after);
+ const forced=new Set([uncertain[0].row.id]),queue=[uncertain[0].row.id],inventory=readLibraryItems(root,{run});while(queue.length)for(const item of discoverDownstream({items:inventory,repairedIds:[queue.shift()]}))if(!forced.has(item.id)){forced.add(item.id);queue.push(item.id);}
+ const genuine=reports.flatMap(r=>r.reviews).filter(v=>!forced.has(v.id)&&v.uncertain===false&&v.post_sha256===current[v.id]&&v.review_context_sha256===contexts[v.id]?.review_context_sha256);
+ return {...result,kind:'successor-uncertainty-historical-scheduling-observation',version:1,run,phase:pack.phase,round:1,historical_only:true,native_acceptance:false,reviews:[],historical_reviews:reports.flatMap(r=>r.reviews),genuine_current_native_reviews:genuine,evidence,post:current,downstream:[...new Set(reports.flatMap(r=>r.downstream))],ledger_updates:reports.flatMap(r=>r.ledger_updates??[]),restated,statement_events:restated.filter(id=>pack.before_statements?.[id]).map(id=>({id,before_statement_sha256:pack.before_statements[id],after_statement_sha256:after[id]}))};
 }
 export function buildInitialReportingObservation(root,run,pack,reports,evidence){
  requireValue(pack.phase==='impact-initial'&&pack.round===1,'historical scheduling is initial only');
@@ -1902,8 +1921,9 @@ export function advanceImpact(root,run,phase,round) {
   if(active.units.some(unit=>!existsSync(workerReport(root,run,active.phase,round,unit))))return {complete:false,pack:active,passes:progress.passes};
   const schedulingRecovery=phase==='impact-initial'?loadReportingOwnerRecovery(root,run,phase,round,{current:!existsSync(path)}):null;
   if(active.phase==='impact-initial'&&schedulingRecovery?.observationPath)syncMaintenance(root,run,schedulingRecovery.observation.statement_events);
+  else if(phase==='impact-initial'&&round===1&&active.phase==='impact-initial-pass-2'&&loadSuccessorUncertaintyContinuation(root,run,{current:true})){const continuation=loadSuccessorUncertaintyContinuation(root,run);syncMaintenance(root,run,continuation.observation.statement_events);}
   else collect(root,run,active.phase,round,{deferImpactClosure:true});
-  const completed=progress.passes.map(pass=>read(impactSchedulingReceiptPath(root,run,phase,round,pass)));
+  const completed=progress.passes.map(pass=>readImpactSchedulingReceipt(root,run,phase,round,pass));
   for(const receipt of completed)verifyEvidence(receipt.evidence,{root,run});
   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root,run),items=readLibraryItems(root,{run});
   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
@@ -2007,6 +2027,8 @@ export function advanceImpact(root,run,phase,round) {
       pack.review_withdrawal={path:withdrawal.path,unit:'1',targets:[...withdrawal.row.targets]};
       pack.input_evidence??={};for(const [p,h]of Object.entries(withdrawal.evidence)){requireValue(!pack.input_evidence[p]||pack.input_evidence[p]===h,'withdrawal evidence collision');pack.input_evidence[p]=h;}
     }
+    const continuation=phase==='impact-initial'&&round===1?loadSuccessorUncertaintyContinuation(root,run,{current:active.phase==='impact-initial-pass-2'}):null;
+    if(continuation){pack.successor_uncertainty_continuation={path:continuation.path,targets:[...continuation.targets],resume_original_reporting_session:true};}
     for(const unit of pack.units)assertReportingSessionCompatibility(root,pack,unit);
     if(reportingRecovery?.observationPath&&!existsSync(path))loadReportingOwnerRecovery(root,run,phase,round,{current:true});
     frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
@@ -2054,7 +2076,7 @@ export function verifyCompletedImpact(root,run,phase,round) {
     const path=impactSchedulingReceiptPath(root,run,phase,round,pass);
     requireValue(result.evidence[path]===digest(readFileSync(path,'utf8')),
       `completed owner collection does not bind pass: ${pass}`);
-    const receipt=read(path);verifyEvidence(receipt.evidence,{root,run});return receipt;
+    const receipt=readImpactSchedulingReceipt(root,run,phase,round,pass);verifyEvidence(receipt.evidence,{root,run});return receipt;
   });
   const items=readLibraryItems(root,{run}),current=hashes(root,run);
   const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
