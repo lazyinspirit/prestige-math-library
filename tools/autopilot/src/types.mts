@@ -206,6 +206,9 @@ export interface Stage {
   refreshPlan?: (ctx: Ctx, unit: Unit, request: Pick<NativeRefresh, 'id' | 'reason' | 'requestedAt'>) => Plan;
   /** Dispatch ready item handoffs while the owning stage's workers wait. */
   onProgress?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;
+  /** Opt-in boundary after group work drains, before pending gate descriptors.
+   * May pause for owner authorization; never replaces the onProgress handoff. */
+  beforeGates?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;
   gates?: (ctx: Ctx) => Gate[];
   /** The single complete final validation barrier immediately before reporting. */
   finalValidation?: true;

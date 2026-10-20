@@ -881,6 +881,13 @@ duplicate, unpublished or stale context entries fail closed.
 
 ## Pre-gate recertification
 
+Mathematics owner-supervised wrappers also check authorization through the
+executor's optional `beforeGates` hook at the drained group join, before any
+pending gate descriptor consumes permission. A last worker completing after
+`onProgress` therefore still reaches the owner hold. This hook respects pauses,
+local/adopted writers and pending native refreshes; it does not repeat native
+collection/advance hooks. Stages without it retain their normal gate behavior.
+
 An owner-supervised run may select `tools/autopilot/stages/owner-supervised.mts`
 through its run-local `config.json`. Compact runs select
 `tools/autopilot/stages/owner-supervised-compact.mts`, retaining their compact

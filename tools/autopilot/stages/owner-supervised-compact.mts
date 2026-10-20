@@ -53,6 +53,12 @@ export function ownerSupervisedCompactStages(stages: any[]) {
       await source.onProgress?.(args);
       holdBeforeBattery(args);
     };
+    stage.beforeGates = async (args: any) => {
+      holdBeforeBattery(args);
+      if (args.executor.state.paused) return;
+      await source.beforeGates?.(args);
+      holdBeforeBattery(args);
+    };
     if (source.gates) stage.gates = (context: any) => {
       if (!context.doctor) consumePermission(context);
       return source.gates(context);

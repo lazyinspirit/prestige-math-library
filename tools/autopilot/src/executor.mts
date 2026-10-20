@@ -1911,6 +1911,30 @@ export class Executor {
   async runGroupGates(statuses: Array<{ s: Stage; st: StageStatus }>, ctx: Ctx, group: Stage[]): Promise<'ok' | 'working' | 'blocked'> {
     if (this.inflight.size || this.liveDispatchLabels().length
       || statuses.some(({ s }) => this.pendingRefreshes(s, ctx).length)) return 'working';
+    // The final worker can finish after onProgress and before this join.
+    // Owner authorization belongs at the drained boundary, before descriptors
+    // consume permission; progress/collection hooks must not run twice.
+    if (this.state.paused) return 'working';
+    const boundaryStages = statuses.map(({ s }) => s).filter(s =>
+      !s.gatesWaived && s.gates && !this.state.data.stages[s.id]?.gatesPassedAt && s.beforeGates);
+    if (boundaryStages.length && statuses.some(({ s }) => !this.stageStatus(s, ctx).unitsDone)) return 'working';
+    for (const s of boundaryStages) {
+      try { await s.beforeGates({ ctx, executor: this, stage: s }); }
+      catch (error: any) {
+        const message = `${s.id}: pre-gate handoff failed: ${error.message}`;
+        if (this.state.addBlocker(s.id, message, 'before-gates'))
+          this.reporter.notify('blocked', message, { stage: s.id });
+        return 'blocked';
+      }
+      if (this.state.paused) {
+        this.reporter.report(this.snapshot(), { force: true });
+        return 'working';
+      }
+    }
+    // An async boundary hook may have started work or invalidated coverage.
+    if (boundaryStages.length && (this.inflight.size || this.liveDispatchLabels().length
+      || statuses.some(({ s }) => this.pendingRefreshes(s, ctx).length || !this.stageStatus(s, ctx).unitsDone)))
+      return 'working';
     const list: Gate[] = [];
     const owners: Stage[] = [];
     const seen = new Set<string>();
