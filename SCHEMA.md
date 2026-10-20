@@ -59,6 +59,41 @@
   statement cannot be a `deps` target.
   Omit `generation` for other statement provenance.
 
+### Bounded preservation of four reviewed local PL lemmas
+
+For `inverse-problems-knot-theory-all-109-2026-10-19` only, the root's
+preserve-resolved-dependencies decision permits the following four previously
+independently accepted local constructions to retain truthful
+`provenance: {statement: ai-generated, proof: ai-generated}` and remain logical
+suppliers:
+
+- `lem-finite-polyhedral-slabs-without-vertex-levels-are-pl-products`
+- `lem-regular-polyhedral-surface-cones-have-height-preserving-pl-straightenings`
+- `lem-pl-height-product-caps-replace-by-one-extremum`
+- `lem-pointed-flat-pl-caps-admit-saddle-free-replacements`
+
+Each requires `pipeline_run` equal to that run,
+`generation.role: reviewed-local-lemma`, and this root-owned mapping:
+
+```yaml
+local_proof_acceptance:
+  run: inverse-problems-knot-theory-all-109-2026-10-19
+  authorized_by: /root
+  decision: preserve-resolved-local-lemma
+  independent_review: research/ACTUAL-INDEPENDENT-REVIEW.json
+  accepted_body_sha256: ROOT_SUPPLIED_LOWERCASE_SHA256
+```
+
+The evidence must be an existing repository-relative file. The digest binds
+exact UTF-8 body bytes after the closing frontmatter delimiter and its newline,
+without trimming or newline normalization. Root supplies the actual review path
+and digest; these placeholders grant nothing. The content policy checks this
+binding both for scoped lemmas and when they are used as prerequisite context.
+A changed body, missing evidence, other ID/run/authority/role, or different
+provenance grants no exception. All ordinary rules, audit evidence requirements,
+review history, and workflow gates remain in force. This records local proof
+acceptance, not external source provenance or new mathematical review.
+
 ### Later material
 
 - `forward_refs: [id, ...]` declares linked targets on strictly later planned

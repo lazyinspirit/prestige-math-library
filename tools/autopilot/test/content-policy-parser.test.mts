@@ -142,17 +142,17 @@ test('generation, dependency aliases, and external fallback retain policy meanin
 
   const external = base + provenance + sources + '\nproved_here: false\nexternal_dependency: '
     + '{source_url: "https://example.test/source", exact_statement: "Claim", local_proof_attempt: "Attempt", necessity: "Reason"}';
-  assert.equal(runPolicy(external).status, 0);
-  const invalid = runPolicy(external.replace('necessity: "Reason"', 'necessity: ["Reason"]'));
-  assert.ok(invalid.errors.some((error: any) => error.code === 'external-record-missing'));
-  const mismatched = runPolicy(external.replace('source_url: "https://example.test/source"',
-    'source_url: "https://example.test/other"'));
-  assert.ok(mismatched.errors.some((error: any) => error.code === 'external-source-reference'));
-  const badUrl = runPolicy(external.replaceAll('https://example.test/source', 'ftp://example.test/source'));
-  assert.ok(badUrl.errors.some((error: any) => error.code === 'external-source-url'));
-  assert.ok(!badUrl.errors.some((error: any) => error.code === 'external-source-reference'));
-  const proved = runPolicy(external.replace('proved_here: false', 'proved_here: true'));
-  assert.ok(proved.errors.some((error: any) => error.code === 'external-on-proved'));
+  // The external-record route was retired before this provenance exception.
+  // All shapes retain the existing hard rejection; do not restore the fallback.
+  for (const fm of [external,
+    external.replace('necessity: "Reason"', 'necessity: ["Reason"]'),
+    external.replace('source_url: "https://example.test/source"', 'source_url: "https://example.test/other"'),
+    external.replaceAll('https://example.test/source', 'ftp://example.test/source')]) {
+    const retired = runPolicy(fm);
+    assert.equal(retired.status, 1);
+    assert.ok(retired.errors.some((error: any) => error.code === 'unproved-record-retired'));
+    assert.ok(retired.errors.some((error: any) => error.code === 'external-fallback-retired'));
+  }
 });
 
 test('flow generation roles and provenance enums keep their existing policy checks', () => {

@@ -15,7 +15,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseFrontmatter, nested, referenceUrls, openProblemErrors } from './content-policy-lib.mjs';
+import { parseFrontmatter, nested, referenceUrls, openProblemErrors, reviewedLocalLemmaAcceptance } from './content-policy-lib.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -187,6 +187,17 @@ for (const file of readdirSync(join(REPO, 'items')).sort()) {
   for (const alias of list(metadata, 'aliases')) aliases.set(alias, id);
 }
 const resolve = (id) => items.has(id) ? id : aliases.get(id);
+const localAcceptance = new Map();
+function acceptedLocalLemma(item) {
+  if (!item) return false;
+  if (!localAcceptance.has(item.id)) {
+    const result = reviewedLocalLemmaAcceptance(item.metadata, item.body, REPO);
+    localAcceptance.set(item.id, result.eligible);
+    for (const message of result.errors)
+      error('local-proof-acceptance-invalid', `${item.file}: ${message}`, item.id);
+  }
+  return localAcceptance.get(item.id);
+}
 
 // The audit provenance evidence ledger: one row per retro-tagged item,
 // {id, statement, proof, evidence, urls, rationale, alpha_concurred?, at}.
@@ -374,6 +385,7 @@ if (!manifestOnly) for (const id of scope) {
     error('item-frontmatter-invalid', `${item.file}: ${item.frontmatterError}`, item.id);
     continue;
   }
+  const preservedLocalLemma = acceptedLocalLemma(item);
   rejectRetiredExternalRecord(item.metadata, item.file, item.id);
   // Reader-facing notation (owner, 2026-08-11). `\iota(n)` — the canonical
   // embedding of a natural number into Z or R, written explicitly around its
@@ -470,7 +482,7 @@ if (!manifestOnly) for (const id of scope) {
     if (target && !target.provedHere) {
       error('unproved-dependency-retired', `${item.file}: depends on retired unproved record ${target.id}; supply a proved local replacement`, item.id);
     }
-    if (target?.provenance.statement === 'ai-generated') {
+    if (target?.provenance.statement === 'ai-generated' && !acceptedLocalLemma(target)) {
       // In audit scope this is a discovered legacy fact, not a fresh authoring
       // choice: the seed and its cone belong to genrisk.mjs, whose receipt
       // requires an Alpha disposition (retag/restate/unfold/narrow/
@@ -493,7 +505,7 @@ if (!manifestOnly) for (const id of scope) {
     error('generation-on-non-generated-statement', `${item.file}: generation metadata is reserved for an ai-generated statement or construction`, item.id);
   }
   if (statement === 'ai-generated') {
-    const expectedRole = GENERATED_ROLE.get(item.kind);
+    const expectedRole = preservedLocalLemma ? 'reviewed-local-lemma' : GENERATED_ROLE.get(item.kind);
     if (!expectedRole) {
       // A legacy retro-tagged theorem/lemma/definition can honestly BE
       // ai-generated; the future kind restriction cannot rewrite history. The
